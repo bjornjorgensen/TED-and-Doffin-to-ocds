@@ -1,3 +1,4 @@
+#main.py
 import json
 import uuid
 from datetime import datetime
@@ -60,6 +61,9 @@ from converters.BT_19 import parse_submission_nonelectronic_justification
 from converters.BT_191 import parse_country_origin
 from converters.BT_193 import parse_tender_variant
 from converters.BT_195 import parse_unpublished_identifier
+from converters.BT_21 import parse_lot_lotgroup_part_and_procedure_title
+from converters.BT_22 import parse_internal_identifiers
+from converters.BT_23 import parse_main_nature
 
 def main(xml_path, ocid_prefix):
     # Read the XML content from the file
@@ -1064,6 +1068,84 @@ def main(xml_path, ocid_prefix):
 
     except Exception as e:
         print(f"Error parsing Unpublished Identifier: {str(e)}")
+
+    # Parse the lot, lot group, part, and procedure titles (BT-21)
+    titles = parse_lot_lotgroup_part_and_procedure_title(xml_content)
+    # Merge lot, lot group, part, and procedure titles into the release JSON
+    if titles and "tender" in titles:
+        # Merge lots
+        if "lots" in titles["tender"]:
+            existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
+            for new_lot in titles["tender"]["lots"]:
+                existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
+                if existing_lot:
+                    existing_lot["title"] = new_lot["title"]
+                else:
+                    existing_lots.append(new_lot)
+        
+        # Merge lot groups
+        if "lotGroups" in titles["tender"]:
+            existing_lotgroups = release_json.setdefault("tender", {}).setdefault("lotGroups", [])
+            for new_lotgroup in titles["tender"]["lotGroups"]:
+                existing_lotgroup = next((lotgroup for lotgroup in existing_lotgroups if lotgroup["id"] == new_lotgroup["id"]), None)
+                if existing_lotgroup:
+                    existing_lotgroup["title"] = new_lotgroup["title"]
+                else:
+                    existing_lotgroups.append(new_lotgroup)
+        
+        # Merge tender title (Part or Procedure)
+        if "title" in titles["tender"]:
+            release_json.setdefault("tender", {})["title"] = titles["tender"]["title"]
+
+    # Parse the internal identifiers (BT-22)
+    internal_identifiers = parse_internal_identifiers(xml_content)
+    # Merge internal identifiers into the release JSON
+    if internal_identifiers and "tender" in internal_identifiers:
+        # Merge lots
+        if internal_identifiers["tender"]["lots"]:
+            existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
+            for new_lot in internal_identifiers["tender"]["lots"]:
+                existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
+                if existing_lot:
+                    existing_lot.setdefault("identifiers", []).extend(new_lot["identifiers"])
+                else:
+                    existing_lots.append(new_lot)
+    
+    # Merge lot groups
+    if internal_identifiers["tender"]["lotGroups"]:
+        existing_lotgroups = release_json.setdefault("tender", {}).setdefault("lotGroups", [])
+        for new_lotgroup in internal_identifiers["tender"]["lotGroups"]:
+            existing_lotgroup = next((lotgroup for lotgroup in existing_lotgroups if lotgroup["id"] == new_lotgroup["id"]), None)
+            if existing_lotgroup:
+                existing_lotgroup.setdefault("identifiers", []).extend(new_lotgroup["identifiers"])
+            else:
+                existing_lotgroups.append(new_lotgroup)
+    
+    # Merge tender identifiers (Part and Procedure)
+    if internal_identifiers["tender"]["identifiers"]:
+        existing_identifiers = release_json.setdefault("tender", {}).setdefault("identifiers", [])
+        for new_identifier in internal_identifiers["tender"]["identifiers"]:
+            if new_identifier not in existing_identifiers:
+                existing_identifiers.append(new_identifier)
+
+
+    # Parse the main nature (BT-23)
+    main_nature = parse_main_nature(xml_content)
+    # Merge main nature into the release JSON
+    if main_nature and "tender" in main_nature:
+        # Merge lots
+        if main_nature["tender"]["lots"]:
+            existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
+            for new_lot in main_nature["tender"]["lots"]:
+                existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
+                if existing_lot:
+                    existing_lot["mainProcurementCategory"] = new_lot["mainProcurementCategory"]
+                else:
+                    existing_lots.append(new_lot)
+    
+    # Merge tender mainProcurementCategory (Part and Procedure)
+    if "mainProcurementCategory" in main_nature["tender"]:
+        release_json.setdefault("tender", {})["mainProcurementCategory"] = main_nature["tender"]["mainProcurementCategory"]
 
     # Write the JSON output to a file
     with open('output.json', 'w') as f:

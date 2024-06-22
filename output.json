@@ -1,14 +1,22 @@
 {
     "id": "65667997-031a-4198-bd25-7225449ef479",
     "initiationType": "tender",
-    "ocid": "ocid_prefix_value-8be7ab5c-08a5-493b-a054-fd02d58862f0",
+    "ocid": "ocid_prefix_value-7fc93af8-571d-42f6-8525-add927f122a4",
     "tender": {
         "lots": [
             {
                 "id": "LOT-0000",
                 "coveredBy": [
                     "GPA"
-                ]
+                ],
+                "title": "Agence centre",
+                "identifiers": [
+                    {
+                        "id": "1",
+                        "scheme": "internal"
+                    }
+                ],
+                "mainProcurementCategory": "services"
             }
         ],
         "lotGroups": [
@@ -28,7 +36,9 @@
         },
         "status": "complete",
         "id": "022d0ef9-6338-42d9-afa4-a87709128061",
-        "procurementMethod": "open"
+        "procurementMethod": "open",
+        "title": "Service d'entretien de remise en \u00e9tat et de nettoyage des espaces verts",
+        "mainProcurementCategory": "services"
     },
     "parties": [
         {
