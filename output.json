@@ -1,0 +1,137 @@
+{
+    "id": "65667997-031a-4198-bd25-7225449ef479",
+    "initiationType": "tender",
+    "ocid": "ocid_prefix_value-8be7ab5c-08a5-493b-a054-fd02d58862f0",
+    "tender": {
+        "lots": [
+            {
+                "id": "LOT-0000",
+                "coveredBy": [
+                    "GPA"
+                ]
+            }
+        ],
+        "lotGroups": [
+            {
+                "id": "LOT-0000"
+            }
+        ],
+        "items": [
+            {
+                "id": "1",
+                "relatedLot": "LOT-0000"
+            }
+        ],
+        "legalBasis": {
+            "id": "32014L0024",
+            "scheme": "CELEX"
+        },
+        "status": "complete",
+        "id": "022d0ef9-6338-42d9-afa4-a87709128061",
+        "procurementMethod": "open"
+    },
+    "parties": [
+        {
+            "id": "ORG-0001",
+            "roles": [
+                "buyer"
+            ],
+            "details": {
+                "classifications": [
+                    {
+                        "scheme": "COFOG",
+                        "id": "06",
+                        "description": "Housing and community amenities"
+                    },
+                    {
+                        "scheme": "TED_CA_TYPE",
+                        "id": "pub-undert-la",
+                        "description": "Public undertaking, controlled by a local authority"
+                    }
+                ]
+            },
+            "name": "Rouen Habitat"
+        },
+        {
+            "id": "RES-0001"
+        },
+        {
+            "id": "TEN-0001"
+        },
+        {
+            "id": "CON-0001"
+        },
+        {
+            "id": "LOT-0000"
+        },
+        {
+            "id": "TPA-0001"
+        },
+        {
+            "id": "PROJ DEF/2022-01"
+        },
+        {
+            "id": "SCN DEF:2020-12"
+        },
+        {
+            "id": "ORG-0004",
+            "name": "Espaces Verts Lemire",
+            "details": {
+                "scale": "micro"
+            }
+        },
+        {
+            "id": "ORG-0002",
+            "name": "Tribunal administratif de Rouen"
+        },
+        {
+            "id": "UBO-0001"
+        },
+        {
+            "id": "65667997-031a-4198-bd25-7225449ef479"
+        },
+        {
+            "id": "1"
+        }
+    ],
+    "tag": [
+        "award",
+        "contract"
+    ],
+    "date": "2019-10-23T00:00:00+01:00",
+    "awards": [
+        {
+            "id": "RES-0001",
+            "relatedLots": [
+                "LOT-0000"
+            ],
+            "statusDetails": "At least one winner was chosen.",
+            "status": "active"
+        }
+    ],
+    "bids": {
+        "details": [
+            {
+                "id": "TEN-0001",
+                "relatedLots": [
+                    "LOT-0000"
+                ],
+                "rank": 1,
+                "hasRank": true
+            }
+        ]
+    },
+    "contracts": [
+        {
+            "id": "CON-0001",
+            "dateSigned": "2019-09-03T02:00:00+00:00",
+            "awardID": "RES-0001",
+            "identifiers": [
+                {
+                    "id": "SCN DEF:2020-12",
+                    "scheme": "NL-TENDERNED"
+                }
+            ]
+        }
+    ]
+}

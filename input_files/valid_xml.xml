@@ -1,0 +1,19 @@
+<Notice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+  <cac:IssueDate>
+    <cbc:Date>2023-10-01</cbc:Date>
+  </cac:IssueDate>
+  <cac:ProcurementProjectLot>
+    <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+    <cac:ProcurementProject>
+      <cac:ProcurementAdditionalType>
+        <cbc:ProcurementTypeCode listName="strategic-procurement">inn-pur</cbc:ProcurementTypeCode>
+      </cac:ProcurementAdditionalType>
+    </cac:ProcurementProject>
+    <cac:Sustainability>
+      <cbc:Goal>Environmental</cbc:Goal>
+      <cac:Strategies>
+        <cbc:Strategy>Reduce Carbon Footprint</cbc:Strategy>
+      </cac:Strategies>
+    </cac:Sustainability>
+  </cac:ProcurementProjectLot>
+</Notice>
