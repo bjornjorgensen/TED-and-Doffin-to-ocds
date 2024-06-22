@@ -1,7 +1,7 @@
 {
     "id": "65667997-031a-4198-bd25-7225449ef479",
     "initiationType": "tender",
-    "ocid": "ocid_prefix_value-7fc93af8-571d-42f6-8525-add927f122a4",
+    "ocid": "ocid_prefix_value-194ef0f1-36d9-497c-a4bb-989f8be314a3",
     "tender": {
         "lots": [
             {
@@ -16,7 +16,8 @@
                         "scheme": "internal"
                     }
                 ],
-                "mainProcurementCategory": "services"
+                "mainProcurementCategory": "services",
+                "description": "Service d'entretien de remise en \u00e9tat et de nettoyage des espaces verts."
             }
         ],
         "lotGroups": [
@@ -27,7 +28,18 @@
         "items": [
             {
                 "id": "1",
-                "relatedLot": "LOT-0000"
+                "relatedLot": "LOT-0000",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "77310000"
+                }
+            },
+            {
+                "id": "2",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "77310000"
+                }
             }
         ],
         "legalBasis": {
@@ -38,7 +50,8 @@
         "id": "022d0ef9-6338-42d9-afa4-a87709128061",
         "procurementMethod": "open",
         "title": "Service d'entretien de remise en \u00e9tat et de nettoyage des espaces verts",
-        "mainProcurementCategory": "services"
+        "mainProcurementCategory": "services",
+        "description": "Service d'entretien de remise en \u00e9tat et de nettoyage des espaces verts."
     },
     "parties": [
         {
@@ -60,7 +73,21 @@
                     }
                 ]
             },
-            "name": "Rouen Habitat"
+            "name": "Rouen Habitat",
+            "additionalIdentifiers": [
+                {
+                    "id": "123 456 789",
+                    "scheme": "GB-COH"
+                }
+            ],
+            "contactPoint": {
+                "telephone": "+33 235156161"
+            },
+            "beneficialOwners": [
+                {
+                    "id": "UBO-0001"
+                }
+            ]
         },
         {
             "id": "RES-0001"
@@ -88,11 +115,30 @@
             "name": "Espaces Verts Lemire",
             "details": {
                 "scale": "micro"
+            },
+            "roles": [
+                "supplier",
+                "tenderer"
+            ],
+            "additionalIdentifiers": [
+                {
+                    "id": "326 912 557",
+                    "scheme": "GB-COH"
+                }
+            ],
+            "contactPoint": {
+                "telephone": "+33 2 35 67 82 82"
             }
         },
         {
             "id": "ORG-0002",
-            "name": "Tribunal administratif de Rouen"
+            "name": "Tribunal administratif de Rouen",
+            "additionalIdentifiers": [
+                {
+                    "id": "321 654 789",
+                    "scheme": "GB-COH"
+                }
+            ]
         },
         {
             "id": "UBO-0001"
@@ -116,7 +162,12 @@
                 "LOT-0000"
             ],
             "statusDetails": "At least one winner was chosen.",
-            "status": "active"
+            "status": "active",
+            "suppliers": [
+                {
+                    "id": "ORG-0004"
+                }
+            ]
         }
     ],
     "bids": {
@@ -127,7 +178,13 @@
                     "LOT-0000"
                 ],
                 "rank": 1,
-                "hasRank": true
+                "hasRank": true,
+                "identifiers": [
+                    {
+                        "id": "PROJ DEF/2022-01",
+                        "scheme": "NL-TENDERNL"
+                    }
+                ]
             }
         ]
     },
@@ -141,6 +198,9 @@
                     "id": "SCN DEF:2020-12",
                     "scheme": "NL-TENDERNED"
                 }
+            ],
+            "relatedBids": [
+                "TEN-0001"
             ]
         }
     ]

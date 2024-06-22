@@ -64,6 +64,30 @@ from converters.BT_195 import parse_unpublished_identifier
 from converters.BT_21 import parse_lot_lotgroup_part_and_procedure_title
 from converters.BT_22 import parse_internal_identifiers
 from converters.BT_23 import parse_main_nature
+from converters.BT_24 import parse_description
+from converters.BT_25 import parse_quantity, merge_quantity
+from converters.BT_26 import parse_classifications, merge_classifications
+from converters.BT_27 import parse_estimated_value, merge_estimated_value
+from converters.BT_271 import parse_framework_maximum_value, merge_framework_maximum_value
+from converters.BT_300 import parse_additional_information, merge_additional_information
+from converters.BT_31 import parse_lots_max_allowed, merge_lots_max_allowed
+from converters.BT_3201 import parse_tender_identifier, merge_tender_identifier
+from converters.BT_3202 import parse_contract_tender_id, merge_contract_tender_id
+from converters.BT_33 import parse_lots_max_awarded, merge_lots_max_awarded
+from converters.BT_330 import parse_procedure_group_identifier, merge_procedure_group_identifier
+from converters.BT_36 import parse_duration_period, merge_duration_period
+from converters.BT_40 import parse_selection_criteria_second_stage, merge_selection_criteria_second_stage
+from converters.BT_41 import parse_following_contract, merge_following_contract
+from converters.BT_42 import parse_jury_decision_binding, merge_jury_decision_binding
+from converters.BT_44 import parse_prize_rank, merge_prize_rank
+from converters.BT_45 import parse_rewards_other, merge_rewards_other
+from converters.BT_46 import parse_jury_member_name, merge_jury_member_name
+from converters.BT_47 import parse_participant_name, merge_participant_name
+from converters.BT_50 import parse_minimum_candidates, merge_minimum_candidates
+from converters.BT_500 import parse_organization_info, merge_organization_info
+from converters.BT_5010 import parse_eu_funds_financing_identifier, merge_eu_funds_financing_identifier
+from converters.BT_5011 import parse_contract_eu_funds_financing_identifier, merge_contract_eu_funds_financing_identifier
+from converters.BT_502_503 import parse_organization_contact_info, merge_organization_contact_info
 
 def main(xml_path, ocid_prefix):
     # Read the XML content from the file
@@ -1146,6 +1170,149 @@ def main(xml_path, ocid_prefix):
     # Merge tender mainProcurementCategory (Part and Procedure)
     if "mainProcurementCategory" in main_nature["tender"]:
         release_json.setdefault("tender", {})["mainProcurementCategory"] = main_nature["tender"]["mainProcurementCategory"]
+
+    # Parse the description (BT-24)
+    description = parse_description(xml_content)
+    # Merge description into the release JSON
+    if description and "tender" in description:
+        # Merge lots
+        if description["tender"]["lots"]:
+            existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
+            for new_lot in description["tender"]["lots"]:
+                existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
+                if existing_lot:
+                    existing_lot["description"] = new_lot["description"]
+                else:
+                    existing_lots.append(new_lot)
+    
+    # Merge lot groups
+    if description["tender"]["lotGroups"]:
+        existing_lotgroups = release_json.setdefault("tender", {}).setdefault("lotGroups", [])
+        for new_lotgroup in description["tender"]["lotGroups"]:
+            existing_lotgroup = next((lotgroup for lotgroup in existing_lotgroups if lotgroup["id"] == new_lotgroup["id"]), None)
+            if existing_lotgroup:
+                existing_lotgroup["description"] = new_lotgroup["description"]
+            else:
+                existing_lotgroups.append(new_lotgroup)
+    
+    # Merge tender description (Part and Procedure)
+    if "description" in description["tender"]:
+        release_json.setdefault("tender", {})["description"] = description["tender"]["description"]
+
+    # Parse the quantity (BT-25)
+    quantity_data = parse_quantity(xml_content)
+    # Merge quantity into the release JSON
+    merge_quantity(release_json, quantity_data)
+
+    # Parse the classifications (BT-26)
+    classification_data = parse_classifications(xml_content)
+    # Merge classifications into the release JSON
+    merge_classifications(release_json, classification_data)
+
+    # Parse the estimated value (BT-27)
+    estimated_value_data = parse_estimated_value(xml_content)
+    # Merge estimated value into the release JSON
+    merge_estimated_value(release_json, estimated_value_data)
+
+    # Parse the framework maximum value (BT-271)
+    framework_max_value_data = parse_framework_maximum_value(xml_content)
+    # Merge framework maximum value into the release JSON
+    merge_framework_maximum_value(release_json, framework_max_value_data)
+
+    # Parse the additional information (BT-300)
+    additional_info_data = parse_additional_information(xml_content)
+    # Merge additional information into the release JSON
+    merge_additional_information(release_json, additional_info_data)
+
+    # Parse the lots max allowed (BT-31)
+    lots_max_allowed_data = parse_lots_max_allowed(xml_content)
+    # Merge lots max allowed into the release JSON
+    merge_lots_max_allowed(release_json, lots_max_allowed_data)
+
+    # Parse the tender identifier (BT-3201)
+    tender_identifier_data = parse_tender_identifier(xml_content)
+    # Merge tender identifier into the release JSON
+    merge_tender_identifier(release_json, tender_identifier_data)
+
+    # Parse the contract tender ID (BT-3202)
+    contract_tender_id_data = parse_contract_tender_id(xml_content)
+    # Merge contract tender ID into the release JSON
+    merge_contract_tender_id(release_json, contract_tender_id_data)
+
+    # Parse the lots max awarded (BT-33)
+    lots_max_awarded_data = parse_lots_max_awarded(xml_content)
+    # Merge lots max awarded into the release JSON
+    merge_lots_max_awarded(release_json, lots_max_awarded_data)
+
+    # Parse the procedure group identifier (BT-330)
+    procedure_group_identifier_data = parse_procedure_group_identifier(xml_content)
+    # Merge procedure group identifier into the release JSON
+    merge_procedure_group_identifier(release_json, procedure_group_identifier_data)
+
+    # Parse the duration period (BT-36)
+    duration_period_data = parse_duration_period(xml_content)
+    # Merge duration period into the release JSON
+    merge_duration_period(release_json, duration_period_data)
+
+    # Parse the selection criteria second stage (BT-40)
+    selection_criteria_data = parse_selection_criteria_second_stage(xml_content)
+    # Merge selection criteria second stage into the release JSON
+    merge_selection_criteria_second_stage(release_json, selection_criteria_data)
+
+    # Parse the following contract (BT-41)
+    following_contract_data = parse_following_contract(xml_content)
+    # Merge following contract into the release JSON
+    merge_following_contract(release_json, following_contract_data)
+
+    # Parse the jury decision binding (BT-42)
+    jury_decision_binding_data = parse_jury_decision_binding(xml_content)
+    # Merge jury decision binding into the release JSON
+    merge_jury_decision_binding(release_json, jury_decision_binding_data)
+
+    # Parse the prize rank (BT-44)
+    prize_rank_data = parse_prize_rank(xml_content)
+    # Merge prize rank into the release JSON
+    merge_prize_rank(release_json, prize_rank_data)
+
+    # Parse the rewards other (BT-45)
+    rewards_other_data = parse_rewards_other(xml_content)
+    # Merge rewards other into the release JSON
+    merge_rewards_other(release_json, rewards_other_data)
+
+    # Parse the jury member name (BT-46)
+    jury_member_name_data = parse_jury_member_name(xml_content)
+    # Merge jury member name into the release JSON
+    merge_jury_member_name(release_json, jury_member_name_data)
+
+    # Parse the participant name (BT-47)
+    participant_name_data = parse_participant_name(xml_content)
+    # Merge participant name into the release JSON
+    merge_participant_name(release_json, participant_name_data)
+
+    # Parse the minimum candidates (BT-50)
+    minimum_candidates_data = parse_minimum_candidates(xml_content)
+    # Merge minimum candidates into the release JSON
+    merge_minimum_candidates(release_json, minimum_candidates_data)
+
+   # Parse the organization info (BT-500 and BT-501)
+    organization_info_data = parse_organization_info(xml_content)
+    # Merge organization info into the release JSON
+    merge_organization_info(release_json, organization_info_data)
+
+    # Parse the EU funds financing identifier (BT-5010)
+    eu_funds_data = parse_eu_funds_financing_identifier(xml_content)
+    # Merge EU funds financing identifier into the release JSON
+    merge_eu_funds_financing_identifier(release_json, eu_funds_data)
+
+    # Parse the Contract EU funds financing identifier (BT-5011)
+    contract_eu_funds_data = parse_contract_eu_funds_financing_identifier(xml_content)
+    # Merge Contract EU funds financing identifier into the release JSON
+    merge_contract_eu_funds_financing_identifier(release_json, contract_eu_funds_data)
+
+    # Parse the organization contact info (BT-502 and BT-503)
+    contact_info_data = parse_organization_contact_info(xml_content)
+    # Merge organization contact info into the release JSON
+    merge_organization_contact_info(release_json, contact_info_data)
 
     # Write the JSON output to a file
     with open('output.json', 'w') as f:
