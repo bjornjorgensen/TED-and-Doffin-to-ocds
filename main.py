@@ -101,6 +101,10 @@ from converters.BT_5131 import parse_place_performance_city, merge_place_perform
 from converters.BT_514 import parse_organization_country_code, merge_organization_country_code
 from converters.BT_5141 import parse_place_performance_country_code, merge_place_performance_country_code
 from converters.BT_52 import parse_successive_reduction_indicator, merge_successive_reduction_indicator
+from converters.BT_531 import parse_additional_nature, merge_additional_nature
+from converters.BT_536 import parse_duration_start_date, merge_duration_start_date
+from converters.BT_537 import parse_duration_end_date, merge_duration_end_date
+from converters.BT_538 import parse_duration_other, merge_duration_other
 
 
 def main(xml_path, ocid_prefix):
@@ -1393,6 +1397,36 @@ def main(xml_path, ocid_prefix):
     # Merge successive reduction indicator into the release JSON
     merge_successive_reduction_indicator(release_json, successive_reduction_data)
 
+    # Parse the additional nature (BT-531)
+    additional_nature_data = parse_additional_nature(xml_content)
+    # Merge additional nature into the release JSON
+    merge_additional_nature(release_json, additional_nature_data)
+
+    # Parse and merge the duration start date for Lot (BT-536-Lot)
+    duration_start_date_lot_data = parse_duration_start_date(xml_content, scheme_name="Lot")
+    merge_duration_start_date(release_json, duration_start_date_lot_data, scheme_name="Lot")
+
+    # Parse and merge the duration start date for Part (BT-536-Part)
+    duration_start_date_part_data = parse_duration_start_date(xml_content, scheme_name="Part")
+    merge_duration_start_date(release_json, duration_start_date_part_data, scheme_name="Part")
+
+    # Parse and merge the duration end date for Lot (BT-537-Lot)
+    duration_end_date_lot_data = parse_duration_end_date(xml_content, scheme_name="Lot")
+    merge_duration_end_date(release_json, duration_end_date_lot_data, scheme_name="Lot")
+
+    # Parse and merge the duration end date for Part (BT-537-Part)
+    duration_end_date_part_data = parse_duration_end_date(xml_content, scheme_name="Part")
+    merge_duration_end_date(release_json, duration_end_date_part_data, scheme_name="Part")
+
+    # Parse and merge the duration other for Lot (BT-538-Lot)
+    duration_other_lot_data = parse_duration_other(xml_content, scheme_name="Lot")
+    merge_duration_other(release_json, duration_other_lot_data, scheme_name="Lot")
+
+    # Parse and merge the duration other for Part (BT-538-Part)
+    duration_other_part_data = parse_duration_other(xml_content, scheme_name="Part")
+    merge_duration_other(release_json, duration_other_part_data, scheme_name="Part")
+
+    
 
     # Write the JSON output to a file
     with open('output.json', 'w') as f:
