@@ -87,7 +87,21 @@ from converters.BT_50 import parse_minimum_candidates, merge_minimum_candidates
 from converters.BT_500 import parse_organization_info, merge_organization_info
 from converters.BT_5010 import parse_eu_funds_financing_identifier, merge_eu_funds_financing_identifier
 from converters.BT_5011 import parse_contract_eu_funds_financing_identifier, merge_contract_eu_funds_financing_identifier
-from converters.BT_502_503 import parse_organization_contact_info, merge_organization_contact_info
+from converters.BT_502_503_505_506_507 import parse_organization_contact_info, merge_organization_contact_info
+from converters.BT_5071 import parse_place_performance_country_subdivision, merge_place_performance_country_subdivision
+from converters.BT_508 import parse_buyer_profile_url, merge_buyer_profile_url
+from converters.BT_509 import parse_edelivery_gateway, merge_edelivery_gateway
+from converters.BT_51 import parse_maximum_candidates_number, merge_maximum_candidates_number
+from converters.BT_510 import parse_street_address, merge_street_address
+from converters.BT_5101 import parse_place_performance_street, merge_place_performance_street
+from converters.BT_512 import parse_organization_post_code, merge_organization_post_code
+from converters.BT_5121 import parse_place_performance_post_code, merge_place_performance_post_code
+from converters.BT_513 import parse_organization_city, merge_organization_city
+from converters.BT_5131 import parse_place_performance_city, merge_place_performance_city
+from converters.BT_514 import parse_organization_country_code, merge_organization_country_code
+from converters.BT_5141 import parse_place_performance_country_code, merge_place_performance_country_code
+from converters.BT_52 import parse_successive_reduction_indicator, merge_successive_reduction_indicator
+
 
 def main(xml_path, ocid_prefix):
     # Read the XML content from the file
@@ -1309,10 +1323,76 @@ def main(xml_path, ocid_prefix):
     # Merge Contract EU funds financing identifier into the release JSON
     merge_contract_eu_funds_financing_identifier(release_json, contract_eu_funds_data)
 
-    # Parse the organization contact info (BT-502 and BT-503)
+    # Parse the organization contact info (BT-502, BT-503, BT-505, BT-506, and BT-507)
     contact_info_data = parse_organization_contact_info(xml_content)
     # Merge organization contact info into the release JSON
     merge_organization_contact_info(release_json, contact_info_data)
+    
+    # Parse the place performance country subdivision (BT-5071)
+    place_performance_data = parse_place_performance_country_subdivision(xml_content)
+    # Merge place performance country subdivision into the release JSON
+    merge_place_performance_country_subdivision(release_json, place_performance_data)
+    
+    # Parse the buyer profile URL (BT-508)
+    buyer_profile_data = parse_buyer_profile_url(xml_content)
+    # Merge buyer profile URL into the release JSON
+    merge_buyer_profile_url(release_json, buyer_profile_data)
+
+    # Parse the eDelivery Gateway (BT-509)
+    edelivery_gateway_data = parse_edelivery_gateway(xml_content)
+    # Merge eDelivery Gateway into the release JSON
+    merge_edelivery_gateway(release_json, edelivery_gateway_data)
+
+    # Parse the maximum candidates number (BT-51)
+    maximum_candidates_data = parse_maximum_candidates_number(xml_content)
+    # Merge maximum candidates number into the release JSON
+    merge_maximum_candidates_number(release_json, maximum_candidates_data)
+
+    # Parse the street address (BT-510)
+    street_address_data = parse_street_address(xml_content)
+    # Merge street address into the release JSON
+    merge_street_address(release_json, street_address_data)
+
+    # Parse the place performance street (BT-5101)
+    place_performance_street_data = parse_place_performance_street(xml_content)
+    # Merge place performance street into the release JSON
+    merge_place_performance_street(release_json, place_performance_street_data)
+
+    # Parse the organization post code (BT-512)
+    post_code_data = parse_organization_post_code(xml_content)
+    # Merge organization post code into the release JSON
+    merge_organization_post_code(release_json, post_code_data)
+
+    # Parse the place performance post code (BT-5121)
+    place_performance_post_code_data = parse_place_performance_post_code(xml_content)
+    # Merge place performance post code into the release JSON
+    merge_place_performance_post_code(release_json, place_performance_post_code_data)
+
+    # Parse the organization city (BT-513)
+    city_data = parse_organization_city(xml_content)
+    # Merge organization city into the release JSON
+    merge_organization_city(release_json, city_data)
+
+    # Parse the place performance city (BT-5131)
+    place_performance_city_data = parse_place_performance_city(xml_content)
+    # Merge place performance city into the release JSON
+    merge_place_performance_city(release_json, place_performance_city_data)
+
+    # Parse the organization country code (BT-514)
+    country_code_data = parse_organization_country_code(xml_content)
+    # Merge organization country code into the release JSON
+    merge_organization_country_code(release_json, country_code_data)
+
+    # Parse the place performance country code (BT-5141)
+    place_performance_country_code_data = parse_place_performance_country_code(xml_content)
+    # Merge place performance country code into the release JSON
+    merge_place_performance_country_code(release_json, place_performance_country_code_data)
+
+    # Parse the successive reduction indicator (BT-52)
+    successive_reduction_data = parse_successive_reduction_indicator(xml_content)
+    # Merge successive reduction indicator into the release JSON
+    merge_successive_reduction_indicator(release_json, successive_reduction_data)
+
 
     # Write the JSON output to a file
     with open('output.json', 'w') as f:

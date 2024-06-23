@@ -1,7 +1,7 @@
 {
     "id": "65667997-031a-4198-bd25-7225449ef479",
     "initiationType": "tender",
-    "ocid": "ocid_prefix_value-194ef0f1-36d9-497c-a4bb-989f8be314a3",
+    "ocid": "ocid_prefix_value-c47192b6-a1b8-4d30-96a7-495ec41185a4",
     "tender": {
         "lots": [
             {
@@ -81,7 +81,14 @@
                 }
             ],
             "contactPoint": {
-                "telephone": "+33 235156161"
+                "telephone": "+33 235156161",
+                "email": "contact@rouenhabitat.fr"
+            },
+            "address": {
+                "region": "FRD22",
+                "postalCode": "ABC123",
+                "locality": "Rouen Cedex 1",
+                "country": "FR"
             },
             "beneficialOwners": [
                 {
@@ -117,8 +124,8 @@
                 "scale": "micro"
             },
             "roles": [
-                "supplier",
-                "tenderer"
+                "tenderer",
+                "supplier"
             ],
             "additionalIdentifiers": [
                 {
@@ -127,7 +134,14 @@
                 }
             ],
             "contactPoint": {
-                "telephone": "+33 2 35 67 82 82"
+                "telephone": "+33 2 35 67 82 82",
+                "email": "contact@example.com"
+            },
+            "address": {
+                "region": "FRD22",
+                "postalCode": "ABC123",
+                "locality": "Le Grand-Quevilly",
+                "country": "FR"
             }
         },
         {
@@ -138,7 +152,13 @@
                     "id": "321 654 789",
                     "scheme": "GB-COH"
                 }
-            ]
+            ],
+            "address": {
+                "region": "FRD22",
+                "postalCode": "ABC123",
+                "locality": "Rouen",
+                "country": "FR"
+            }
         },
         {
             "id": "UBO-0001"
