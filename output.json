@@ -1,7 +1,7 @@
 {
     "id": "65667997-031a-4198-bd25-7225449ef479",
     "initiationType": "tender",
-    "ocid": "ocid_prefix_value-819a4067-be52-4b3c-ace4-6b318f0af91d",
+    "ocid": "ocid_prefix_value-c172808d-6cfc-4241-b9af-97b4000aa21e",
     "tender": {
         "lots": [
             {
@@ -17,7 +17,16 @@
                     }
                 ],
                 "mainProcurementCategory": "services",
-                "description": "Service d'entretien de remise en \u00e9tat et de nettoyage des espaces verts."
+                "description": "Service d'entretien de remise en \u00e9tat et de nettoyage des espaces verts.",
+                "awardCriteria": {
+                    "criteria": [
+                        {
+                            "type": "price",
+                            "description": "Le prix contribue for 40 % \u2026"
+                        }
+                    ],
+                    "weightingDescription": "Le calcul du score prix-qualit\u00e9 est bas\u00e9 sur \u2026"
+                }
             }
         ],
         "lotGroups": [
@@ -168,6 +177,13 @@
         },
         {
             "id": "1"
+        },
+        {
+            "id": "2",
+            "name": "European Union",
+            "roles": [
+                "funder"
+            ]
         }
     ],
     "tag": [

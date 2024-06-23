@@ -105,7 +105,39 @@ from converters.BT_531 import parse_additional_nature, merge_additional_nature
 from converters.BT_536 import parse_duration_start_date, merge_duration_start_date
 from converters.BT_537 import parse_duration_end_date, merge_duration_end_date
 from converters.BT_538 import parse_duration_other, merge_duration_other
-
+from converters.BT_539_Lot import parse_award_criterion_type_lot, merge_award_criterion_type_lot
+from converters.BT_539_LotsGroup import parse_award_criterion_type_lots_group, merge_award_criterion_type_lots_group
+from converters.BT_54_Lot import parse_options_description_lot, merge_options_description_lot
+from converters.BT_540_Lot import parse_award_criterion_description_lot, merge_award_criterion_description_lot
+from converters.BT_540_LotsGroup import parse_award_criterion_description_lots_group, merge_award_criterion_description_lots_group
+from converters.BT_541_Lot import parse_award_criterion_numbers_lot, merge_award_criterion_numbers_lot
+from converters.BT_541_LotsGroup import parse_award_criterion_numbers_lots_group, merge_award_criterion_numbers_lots_group
+from converters.BT_5421_Lot import parse_award_criterion_number_weight_lot, merge_award_criterion_number_weight_lot
+from converters.BT_5421_LotsGroup import parse_award_criterion_number_weight_lots_group, merge_award_criterion_number_weight_lots_group
+from converters.BT_5422_Lot import parse_award_criterion_number_fixed_lot, merge_award_criterion_number_fixed_lot
+from converters.BT_5422_LotsGroup import parse_award_criterion_number_fixed_lots_group, merge_award_criterion_number_fixed_lots_group
+from converters.BT_5423_Lot import parse_award_criterion_number_threshold_lot, merge_award_criterion_number_threshold_lot
+from converters.BT_5423_LotsGroup import parse_award_criterion_number_threshold_lots_group, merge_award_criterion_number_threshold_lots_group
+from converters.BT_543_Lot import parse_award_criteria_complicated_lot, merge_award_criteria_complicated_lot
+from converters.BT_543_LotsGroup import parse_award_criteria_complicated_lots_group, merge_award_criteria_complicated_lots_group
+from converters.BT_553_Tender import parse_subcontracting_value, merge_subcontracting_value
+from converters.BT_554_Tender import parse_subcontracting_description, merge_subcontracting_description
+from converters.BT_555_Tender import parse_subcontracting_percentage, merge_subcontracting_percentage
+from converters.BT_57_Lot import parse_renewal_description_lot, merge_renewal_description_lot
+from converters.BT_58_Lot import parse_renewal_maximum_lot, merge_renewal_maximum_lot
+from converters.BT_60_Lot import parse_eu_funds_lot, merge_eu_funds_lot
+from converters.BT_610_Procedure_Buyer import parse_activity_entity, merge_activity_entity
+from converters.BT_6110_Contract import parse_contract_eu_funds_details, merge_contract_eu_funds_details
+from converters.BT_6140_Lot import parse_lot_eu_funds_details, merge_lot_eu_funds_details
+from converters.BT_615_Documents_Restricted_URL import parse_documents_restricted_url, merge_documents_restricted_url
+from converters.BT_625_Lot_Unit import parse_lot_unit, merge_lot_unit
+from converters.BT_63_Lot_Variants import parse_lot_variants, merge_lot_variants
+from converters.BT_630_Lot_Deadline_Receipt_Expressions import parse_lot_deadline_receipt_expressions, merge_lot_deadline_receipt_expressions
+from converters.BT_631_Lot_Dispatch_Invitation_Interest import parse_lot_dispatch_invitation_interest, merge_lot_dispatch_invitation_interest
+from converters.BT_632_Tool_Name import parse_tool_name, merge_tool_name
+from converters.BT_633_Organization_Natural_Person import parse_organization_natural_person, merge_organization_natural_person
+from converters.BT_635_LotResult_Buyer_Review_Requests_Count import parse_buyer_review_requests_count, merge_buyer_review_requests_count
+from converters.BT_636_LotResult_Buyer_Review_Requests_Irregularity_Type import parse_buyer_review_requests_irregularity_type, merge_buyer_review_requests_irregularity_type
 
 def main(xml_path, ocid_prefix):
     # Read the XML content from the file
@@ -1426,7 +1458,137 @@ def main(xml_path, ocid_prefix):
     duration_other_part_data = parse_duration_other(xml_content, scheme_name="Part")
     merge_duration_other(release_json, duration_other_part_data, scheme_name="Part")
 
-    
+    # Parse and merge BT-539-Lot
+    lot_criterion_data = parse_award_criterion_type_lot(xml_content)
+    merge_award_criterion_type_lot(release_json, lot_criterion_data)
+
+    # Parse and merge BT-539-LotsGroup
+    lots_group_criterion_data = parse_award_criterion_type_lots_group(xml_content)
+    merge_award_criterion_type_lots_group(release_json, lots_group_criterion_data)
+
+    # Parse and merge BT-54-Lot
+    options_description_data = parse_options_description_lot(xml_content)
+    merge_options_description_lot(release_json, options_description_data)
+
+    # Parse and merge BT-540-Lot
+    lot_criterion_description_data = parse_award_criterion_description_lot(xml_content)
+    merge_award_criterion_description_lot(release_json, lot_criterion_description_data)
+
+    # Parse and merge BT-540-LotsGroup
+    lots_group_criterion_description_data = parse_award_criterion_description_lots_group(xml_content)
+    merge_award_criterion_description_lots_group(release_json, lots_group_criterion_description_data)
+
+    # Parse and merge BT-541-Lot
+    lot_criterion_numbers_data = parse_award_criterion_numbers_lot(xml_content)
+    merge_award_criterion_numbers_lot(release_json, lot_criterion_numbers_data)
+
+    # Parse and merge BT-541-LotsGroup
+    lots_group_criterion_numbers_data = parse_award_criterion_numbers_lots_group(xml_content)
+    merge_award_criterion_numbers_lots_group(release_json, lots_group_criterion_numbers_data)
+
+    # Parse and merge BT-5421-Lot
+    lot_criterion_weight_data = parse_award_criterion_number_weight_lot(xml_content)
+    merge_award_criterion_number_weight_lot(release_json, lot_criterion_weight_data)
+
+    # Parse and merge BT-5421-LotsGroup
+    lots_group_criterion_weight_data = parse_award_criterion_number_weight_lots_group(xml_content)
+    merge_award_criterion_number_weight_lots_group(release_json, lots_group_criterion_weight_data)
+
+    # Parse and merge BT-5422-Lot
+    lot_criterion_fixed_data = parse_award_criterion_number_fixed_lot(xml_content)
+    merge_award_criterion_number_fixed_lot(release_json, lot_criterion_fixed_data)
+
+    # Parse and merge BT-5422-LotsGroup
+    lots_group_criterion_fixed_data = parse_award_criterion_number_fixed_lots_group(xml_content)
+    merge_award_criterion_number_fixed_lots_group(release_json, lots_group_criterion_fixed_data)
+
+    # Parse and merge BT-5423-Lot
+    lot_criterion_threshold_data = parse_award_criterion_number_threshold_lot(xml_content)
+    merge_award_criterion_number_threshold_lot(release_json, lot_criterion_threshold_data)
+
+    # Parse and merge BT-5423-LotsGroup
+    lots_group_criterion_threshold_data = parse_award_criterion_number_threshold_lots_group(xml_content)
+    merge_award_criterion_number_threshold_lots_group(release_json, lots_group_criterion_threshold_data)
+
+    # Parse and merge BT-543-Lot
+    lot_criteria_complicated_data = parse_award_criteria_complicated_lot(xml_content)
+    merge_award_criteria_complicated_lot(release_json, lot_criteria_complicated_data)
+
+    # Parse and merge BT-543-LotsGroup
+    lots_group_criteria_complicated_data = parse_award_criteria_complicated_lots_group(xml_content)
+    merge_award_criteria_complicated_lots_group(release_json, lots_group_criteria_complicated_data)
+
+    # Parse and merge BT-553-Tender
+    subcontracting_value_data = parse_subcontracting_value(xml_content)
+    merge_subcontracting_value(release_json, subcontracting_value_data)
+
+    # Parse and merge BT-554-Tender
+    subcontracting_description_data = parse_subcontracting_description(xml_content)
+    merge_subcontracting_description(release_json, subcontracting_description_data)
+
+    # Parse and merge BT-555-Tender
+    subcontracting_percentage_data = parse_subcontracting_percentage(xml_content)
+    merge_subcontracting_percentage(release_json, subcontracting_percentage_data)
+
+    # Parse and merge BT-57-Lot
+    renewal_description_data = parse_renewal_description_lot(xml_content)
+    merge_renewal_description_lot(release_json, renewal_description_data)
+
+    # Parse and merge BT-58-Lot
+    renewal_maximum_data = parse_renewal_maximum_lot(xml_content)
+    merge_renewal_maximum_lot(release_json, renewal_maximum_data)
+
+    # Parse and merge BT-60-Lot
+    eu_funded_data = parse_eu_funds_lot(xml_content)
+    merge_eu_funds_lot(release_json, eu_funded_data)
+
+    # Parse and merge BT-610-Procedure-Buyer
+    activity_entity_data = parse_activity_entity(xml_content)
+    merge_activity_entity(release_json, activity_entity_data)
+
+    # Parse and merge BT-6110-Contract
+    contract_eu_funds_data = parse_contract_eu_funds_details(xml_content)
+    merge_contract_eu_funds_details(release_json, contract_eu_funds_data)
+
+    # Parse and merge BT-6140-Lot
+    lot_eu_funds_data = parse_lot_eu_funds_details(xml_content)
+    merge_lot_eu_funds_details(release_json, lot_eu_funds_data)
+
+    # Parse and merge BT-615 Documents Restricted URL
+    documents_restricted_url_data = parse_documents_restricted_url(xml_content)
+    merge_documents_restricted_url(release_json, documents_restricted_url_data)
+
+    # Parse and merge BT-625-Lot Unit
+    lot_unit_data = parse_lot_unit(xml_content)
+    merge_lot_unit(release_json, lot_unit_data)
+
+    # Parse and merge BT-63-Lot Variants
+    lot_variants_data = parse_lot_variants(xml_content)
+    merge_lot_variants(release_json, lot_variants_data)
+
+    # Parse and merge BT-630-Lot Deadline Receipt Expressions
+    lot_deadline_receipt_expressions_data = parse_lot_deadline_receipt_expressions(xml_content)
+    merge_lot_deadline_receipt_expressions(release_json, lot_deadline_receipt_expressions_data)
+
+    # Parse and merge BT-631-Lot Dispatch Invitation Interest
+    lot_dispatch_invitation_interest_data = parse_lot_dispatch_invitation_interest(xml_content)
+    merge_lot_dispatch_invitation_interest(release_json, lot_dispatch_invitation_interest_data)
+
+    # Parse and merge BT-632 Tool Name
+    tool_name_data = parse_tool_name(xml_content)
+    merge_tool_name(release_json, tool_name_data)
+
+    # Parse and merge BT-633-Organization Natural Person
+    organization_natural_person_data = parse_organization_natural_person(xml_content)
+    merge_organization_natural_person(release_json, organization_natural_person_data)
+
+    # Parse and merge BT-635-LotResult Buyer Review Requests Count
+    buyer_review_requests_count_data = parse_buyer_review_requests_count(xml_content)
+    merge_buyer_review_requests_count(release_json, buyer_review_requests_count_data)
+
+    # Parse and merge BT-636-LotResult Buyer Review Requests Irregularity Type
+    buyer_review_requests_irregularity_type_data = parse_buyer_review_requests_irregularity_type(xml_content)
+    merge_buyer_review_requests_irregularity_type(release_json, buyer_review_requests_irregularity_type_data)
 
     # Write the JSON output to a file
     with open('output.json', 'w') as f:
