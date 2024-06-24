@@ -138,6 +138,23 @@ from converters.BT_632_Tool_Name import parse_tool_name, merge_tool_name
 from converters.BT_633_Organization_Natural_Person import parse_organization_natural_person, merge_organization_natural_person
 from converters.BT_635_LotResult_Buyer_Review_Requests_Count import parse_buyer_review_requests_count, merge_buyer_review_requests_count
 from converters.BT_636_LotResult_Buyer_Review_Requests_Irregularity_Type import parse_buyer_review_requests_irregularity_type, merge_buyer_review_requests_irregularity_type
+from converters.BT_64_Lot_Subcontracting_Obligation_Minimum import parse_subcontracting_obligation_minimum, merge_subcontracting_obligation_minimum
+from converters.BT_644_Lot_Prize_Value import parse_lot_prize_value, merge_lot_prize_value
+from converters.BT_65_Lot_Subcontracting_Obligation import parse_subcontracting_obligation, merge_subcontracting_obligation
+from converters.BT_651_Lot_Subcontracting_Tender_Indication import parse_subcontracting_tender_indication, merge_subcontracting_tender_indication
+from converters.BT_660_LotResult_Framework_Reestimated_Value import parse_framework_reestimated_value, merge_framework_reestimated_value
+from converters.BT_67_Procedure_Exclusion_Grounds import parse_exclusion_grounds, merge_exclusion_grounds
+from converters.BT_70_Lot_Terms_Performance import parse_terms_performance, merge_terms_performance
+from converters.BT_702a_Notice_Official_Language import parse_notice_official_language, merge_notice_official_language
+from converters.BT_706_UBO_Winner_Owner_Nationality import parse_winner_owner_nationality, merge_winner_owner_nationality
+from converters.BT_707_Documents_Restricted_Justification import parse_documents_restricted_justification, merge_documents_restricted_justification
+from converters.BT_708_Documents_Official_Language import parse_documents_official_language, merge_documents_official_language
+from converters.BT_709_LotResult_Framework_Maximum_Value import parse_framework_maximum_value, merge_framework_maximum_value
+from converters.BT_71_Reserved_Participation import parse_reserved_participation, merge_reserved_participation
+from converters.BT_710_LotResult_Tender_Value_Lowest import parse_tender_value_lowest, merge_tender_value_lowest
+from converters.BT_711_LotResult_Tender_Value_Highest import parse_tender_value_highest, merge_tender_value_highest
+from converters.BT_712_LotResult_Buyer_Review_Complainants import parse_buyer_review_complainants, merge_buyer_review_complainants
+from converters.BT_717_Lot_Clean_Vehicles_Directive import parse_clean_vehicles_directive, merge_clean_vehicles_directive
 
 def main(xml_path, ocid_prefix):
     # Read the XML content from the file
@@ -1589,6 +1606,74 @@ def main(xml_path, ocid_prefix):
     # Parse and merge BT-636-LotResult Buyer Review Requests Irregularity Type
     buyer_review_requests_irregularity_type_data = parse_buyer_review_requests_irregularity_type(xml_content)
     merge_buyer_review_requests_irregularity_type(release_json, buyer_review_requests_irregularity_type_data)
+
+    # Parse and merge BT-64-Lot Subcontracting Obligation Minimum
+    subcontracting_obligation_minimum_data = parse_subcontracting_obligation_minimum(xml_content)
+    merge_subcontracting_obligation_minimum(release_json, subcontracting_obligation_minimum_data)
+
+    # Parse and merge BT-644-Lot Prize Value
+    lot_prize_value_data = parse_lot_prize_value(xml_content)
+    merge_lot_prize_value(release_json, lot_prize_value_data)
+
+    # Parse and merge BT-65-Lot Subcontracting Obligation
+    subcontracting_obligation_data = parse_subcontracting_obligation(xml_content)
+    merge_subcontracting_obligation(release_json, subcontracting_obligation_data)
+
+    # Parse and merge BT-651-Lot Subcontracting Tender Indication
+    subcontracting_tender_indication_data = parse_subcontracting_tender_indication(xml_content)
+    merge_subcontracting_tender_indication(release_json, subcontracting_tender_indication_data)
+
+    # Parse and merge BT-660-LotResult Framework Re-estimated Value
+    framework_reestimated_value_data = parse_framework_reestimated_value(xml_content)
+    merge_framework_reestimated_value(release_json, framework_reestimated_value_data)
+
+    # Parse and merge BT-67-Procedure Exclusion Grounds
+    exclusion_grounds_data = parse_exclusion_grounds(xml_content)
+    merge_exclusion_grounds(release_json, exclusion_grounds_data)
+
+    # Parse and merge BT-70-Lot Terms Performance
+    terms_performance_data = parse_terms_performance(xml_content)
+    merge_terms_performance(release_json, terms_performance_data)
+
+    # Parse and merge BT-702(a)-notice Notice Official Language
+    notice_official_language = parse_notice_official_language(xml_content)
+    merge_notice_official_language(release_json, notice_official_language)
+
+    # Parse and merge BT-706-UBO Winner Owner Nationality
+    winner_owner_nationality_data = parse_winner_owner_nationality(xml_content)
+    merge_winner_owner_nationality(release_json, winner_owner_nationality_data)
+
+    # Parse and merge BT-707 Documents Restricted Justification
+    documents_restricted_justification_data = parse_documents_restricted_justification(xml_content)
+    merge_documents_restricted_justification(release_json, documents_restricted_justification_data)
+
+    # Parse and merge BT-708 Documents Official Language
+    documents_official_language_data = parse_documents_official_language(xml_content)
+    merge_documents_official_language(release_json, documents_official_language_data)
+
+    # Parse and merge BT-709-LotResult Framework Maximum Value
+    framework_maximum_value_data = parse_framework_maximum_value(xml_content)
+    merge_framework_maximum_value(release_json, framework_maximum_value_data)
+
+    # Parse and merge BT-71 Reserved Participation
+    reserved_participation_data = parse_reserved_participation(xml_content)
+    merge_reserved_participation(release_json, reserved_participation_data)
+
+    # Parse and merge BT-710-LotResult Tender Value Lowest
+    tender_value_lowest_data = parse_tender_value_lowest(xml_content)
+    merge_tender_value_lowest(release_json, tender_value_lowest_data)
+
+    # Parse and merge BT-711-LotResult Tender Value Highest
+    tender_value_highest_data = parse_tender_value_highest(xml_content)
+    merge_tender_value_highest(release_json, tender_value_highest_data)
+
+    # Parse and merge BT-712-LotResult Buyer Review Complainants
+    buyer_review_complainants_data = parse_buyer_review_complainants(xml_content)
+    merge_buyer_review_complainants(release_json, buyer_review_complainants_data)
+
+    # Parse and merge BT-717-Lot Clean Vehicles Directive
+    clean_vehicles_directive_data = parse_clean_vehicles_directive(xml_content)
+    merge_clean_vehicles_directive(release_json, clean_vehicles_directive_data)
 
     # Write the JSON output to a file
     with open('output.json', 'w') as f:

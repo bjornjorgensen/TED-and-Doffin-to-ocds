@@ -1,7 +1,7 @@
 {
     "id": "65667997-031a-4198-bd25-7225449ef479",
     "initiationType": "tender",
-    "ocid": "ocid_prefix_value-c172808d-6cfc-4241-b9af-97b4000aa21e",
+    "ocid": "ocid_prefix_value-dfd32cd4-98ec-49f0-bb04-436115443e65",
     "tender": {
         "lots": [
             {
@@ -101,7 +101,8 @@
             },
             "beneficialOwners": [
                 {
-                    "id": "UBO-0001"
+                    "id": "UBO-0001",
+                    "nationality": "FR"
                 }
             ]
         },
@@ -133,8 +134,8 @@
                 "scale": "micro"
             },
             "roles": [
-                "tenderer",
-                "supplier"
+                "supplier",
+                "tenderer"
             ],
             "additionalIdentifiers": [
                 {
@@ -222,6 +223,22 @@
                     }
                 ]
             }
+        ],
+        "statistics": [
+            {
+                "id": "1",
+                "measure": "lowestValidBidValue",
+                "value": 59299.64,
+                "currency": "EUR",
+                "relatedLot": "LOT-0000"
+            },
+            {
+                "id": "2",
+                "measure": "highestValidBidValue",
+                "value": 95414.0,
+                "currency": "EUR",
+                "relatedLot": "LOT-0000"
+            }
         ]
     },
     "contracts": [
@@ -239,5 +256,6 @@
                 "TEN-0001"
             ]
         }
-    ]
+    ],
+    "language": "fr"
 }
