@@ -156,7 +156,6 @@ from converters.BT_711_LotResult_Tender_Value_Highest import parse_tender_value_
 from converters.BT_712_LotResult_Buyer_Review_Complainants import parse_buyer_review_complainants, merge_buyer_review_complainants
 from converters.BT_717_Lot_Clean_Vehicles_Directive import parse_clean_vehicles_directive, merge_clean_vehicles_directive
 from converters.BT_719_Notice_Change_Procurement_Documents_Date import parse_change_procurement_documents_date, merge_change_procurement_documents_date
-from converters.BT_720_Tender_Value import parse_tender_value, merge_tender_value
 
 def main(xml_path, ocid_prefix):
     # Read the XML content from the file
