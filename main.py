@@ -155,6 +155,8 @@ from converters.BT_710_LotResult_Tender_Value_Lowest import parse_tender_value_l
 from converters.BT_711_LotResult_Tender_Value_Highest import parse_tender_value_highest, merge_tender_value_highest
 from converters.BT_712_LotResult_Buyer_Review_Complainants import parse_buyer_review_complainants, merge_buyer_review_complainants
 from converters.BT_717_Lot_Clean_Vehicles_Directive import parse_clean_vehicles_directive, merge_clean_vehicles_directive
+from converters.BT_719_Notice_Change_Procurement_Documents_Date import parse_change_procurement_documents_date, merge_change_procurement_documents_date
+from converters.BT_720_Tender_Value import parse_tender_value, merge_tender_value
 
 def main(xml_path, ocid_prefix):
     # Read the XML content from the file
@@ -1674,6 +1676,10 @@ def main(xml_path, ocid_prefix):
     # Parse and merge BT-717-Lot Clean Vehicles Directive
     clean_vehicles_directive_data = parse_clean_vehicles_directive(xml_content)
     merge_clean_vehicles_directive(release_json, clean_vehicles_directive_data)
+
+    # Parse and merge BT-719-notice Change Procurement Documents Date
+    change_procurement_documents_date_data = parse_change_procurement_documents_date(xml_content)
+    merge_change_procurement_documents_date(release_json, change_procurement_documents_date_data)
 
     # Write the JSON output to a file
     with open('output.json', 'w') as f:
