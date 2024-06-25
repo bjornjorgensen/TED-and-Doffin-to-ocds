@@ -180,6 +180,28 @@ from converters.BT_745_Submission_Nonelectronic_Description import parse_submiss
 from converters.BT_746_Winner_Listed import parse_winner_listed, merge_winner_listed
 from converters.BT_747_Selection_Criteria_Type import parse_selection_criteria_type, merge_selection_criteria_type
 from converters.BT_749_Selection_Criteria_Name import parse_selection_criteria_name, merge_selection_criteria_name
+from converters.BT_75_Lot import parse_guarantee_required_description, merge_guarantee_required_description
+from converters.BT_750_Lot import parse_selection_criteria_description, merge_selection_criteria_description
+from converters.BT_752_Lot import parse_selection_criteria_numbers, merge_selection_criteria_numbers
+from converters.BT_7531_Lot import parse_selection_criteria_weight, merge_selection_criteria_weight
+from converters.BT_7532_Lot import parse_selection_criteria_threshold, merge_selection_criteria_threshold
+from converters.BT_754_Lot import parse_accessibility, merge_accessibility
+from converters.BT_755_Lot import parse_accessibility_justification, merge_accessibility_justification
+from converters.BT_756_Procedure import parse_pin_competition_termination, merge_pin_competition_termination
+from converters.BT_759_LotResult import parse_received_submissions_count, merge_received_submissions_count
+from converters.BT_76_Lot import parse_tenderer_legal_form, merge_tenderer_legal_form
+from converters.BT_760_LotResult import parse_received_submissions_type, merge_received_submissions_type
+from converters.BT_762_notice import parse_change_reason_description, merge_change_reason_description
+from converters.BT_763_Procedure import parse_lots_all_required, merge_lots_all_required
+from converters.BT_764_Lot import parse_submission_electronic_catalogue, merge_submission_electronic_catalogue
+from converters.BT_765_Framework_Agreement import parse_framework_agreement, merge_framework_agreement
+from converters.BT_766_Dynamic_Purchasing_System import parse_dynamic_purchasing_system, merge_dynamic_purchasing_system
+from converters.BT_767_Lot import parse_electronic_auction, merge_electronic_auction
+from converters.BT_769_Lot import parse_multiple_tenders, merge_multiple_tenders
+from converters.BT_77_Lot import parse_terms_financial, merge_terms_financial
+from converters.BT_771_Lot import parse_late_tenderer_information, merge_late_tenderer_information
+from converters.BT_772_Lot import parse_late_tenderer_info_description, merge_late_tenderer_info_description
+from converters.BT_773_Tender import parse_subcontracting, merge_subcontracting
 
 def main(xml_path, ocid_prefix):
     # Read the XML content from the file
@@ -1799,6 +1821,94 @@ def main(xml_path, ocid_prefix):
     # Parse and merge BT-749 Selection Criteria Name
     selection_criteria_name_data = parse_selection_criteria_name(xml_content)
     merge_selection_criteria_name(release_json, selection_criteria_name_data)
+    
+    # Parse and merge BT-75-Lot Guarantee Required Description
+    guarantee_required_description_data = parse_guarantee_required_description(xml_content)
+    merge_guarantee_required_description(release_json, guarantee_required_description_data)
+
+    # Parse and merge BT-750-Lot Selection Criteria Description
+    selection_criteria_description_data = parse_selection_criteria_description(xml_content)
+    merge_selection_criteria_description(release_json, selection_criteria_description_data)
+    
+    # Parse and merge BT-752-Lot Selection Criteria Second Stage Invite Threshold/Weight Number
+    selection_criteria_numbers_data = parse_selection_criteria_numbers(xml_content)
+    merge_selection_criteria_numbers(release_json, selection_criteria_numbers_data)
+
+    # Parse and merge BT-7531-Lot Selection Criteria Second Stage Invite Number Weight
+    selection_criteria_weight_data = parse_selection_criteria_weight(xml_content)
+    merge_selection_criteria_weight(release_json, selection_criteria_weight_data)
+
+    # Parse and merge BT-7532-Lot Selection Criteria Second Stage Invite Number Threshold
+    selection_criteria_threshold_data = parse_selection_criteria_threshold(xml_content)
+    merge_selection_criteria_threshold(release_json, selection_criteria_threshold_data)
+
+    # Parse and merge BT-754-Lot Accessibility
+    accessibility_data = parse_accessibility(xml_content)
+    merge_accessibility(release_json, accessibility_data)
+
+    # Parse and merge BT-755-Lot Accessibility Justification
+    accessibility_justification_data = parse_accessibility_justification(xml_content)
+    merge_accessibility_justification(release_json, accessibility_justification_data)
+
+    # Parse and merge BT-756-Procedure PIN Competition Termination
+    is_terminated = parse_pin_competition_termination(xml_content)
+    merge_pin_competition_termination(release_json, is_terminated)
+
+    # Parse and merge BT-759-LotResult Received Submissions Count
+    submissions_count_data = parse_received_submissions_count(xml_content)
+    merge_received_submissions_count(release_json, submissions_count_data)
+
+    # Parse and merge BT-76-Lot Tenderer Legal Form Description
+    legal_form_data = parse_tenderer_legal_form(xml_content)
+    merge_tenderer_legal_form(release_json, legal_form_data)
+
+    # Parse and merge BT-760-LotResult Received Submissions Type
+    submissions_type_data = parse_received_submissions_type(xml_content)
+    merge_received_submissions_type(release_json, submissions_type_data)
+
+    # Parse and merge BT-762-notice Change Reason Description
+    change_reasons = parse_change_reason_description(xml_content)
+    merge_change_reason_description(release_json, change_reasons)
+
+    # Parse and merge BT-763-Procedure Lots All Required
+    is_all_required = parse_lots_all_required(xml_content)
+    merge_lots_all_required(release_json, is_all_required)
+
+    # Parse and merge BT-764-Lot Submission Electronic Catalogue
+    ecatalog_data = parse_submission_electronic_catalogue(xml_content)
+    merge_submission_electronic_catalogue(release_json, ecatalog_data)
+
+    # Parse and merge BT-765 Framework Agreement
+    fa_data = parse_framework_agreement(xml_content)
+    merge_framework_agreement(release_json, fa_data)
+
+    # Parse and merge BT-766 Dynamic Purchasing System
+    dps_data = parse_dynamic_purchasing_system(xml_content)
+    merge_dynamic_purchasing_system(release_json, dps_data)
+
+    # Parse and merge BT-767-Lot Electronic Auction
+    auction_data = parse_electronic_auction(xml_content)
+    merge_electronic_auction(release_json, auction_data)
+
+    # Parse and merge BT-769-Lot Multiple Tenders
+    multiple_tenders_data = parse_multiple_tenders(xml_content)
+    merge_multiple_tenders(release_json, multiple_tenders_data)
+
+    # Parse and merge BT-77-Lot Terms Financial
+    financial_terms_data = parse_terms_financial(xml_content)
+    merge_terms_financial(release_json, financial_terms_data)
+
+    # Parse and merge BT-771-Lot Late Tenderer Information
+    late_info_data = parse_late_tenderer_information(xml_content)
+    merge_late_tenderer_information(release_json, late_info_data)
+
+    # Parse and merge BT-772-Lot Late Tenderer Information Description
+    late_info_description_data = parse_late_tenderer_info_description(xml_content)
+    merge_late_tenderer_info_description(release_json, late_info_description_data)
+
+    # Parse and merge BT-773-Tender Subcontracting
+    subcontracting_data = parse_subcontracting(xml_content)
+    merge_subcontracting(release_json, subcontracting_data)
     
     # Write the JSON output to a file
     with open('output.json', 'w') as f:
