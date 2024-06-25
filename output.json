@@ -1,7 +1,7 @@
 {
     "id": "65667997-031a-4198-bd25-7225449ef479",
     "initiationType": "tender",
-    "ocid": "ocid_prefix_value-be9c66b6-2167-49ee-a6f9-40c9a9ffe4f5",
+    "ocid": "ocid_prefix_value-48f2df25-7f17-4212-9c57-8e35efb76b1a",
     "tender": {
         "lots": [
             {
@@ -131,11 +131,12 @@
             "id": "ORG-0004",
             "name": "Espaces Verts Lemire",
             "details": {
-                "scale": "micro"
+                "scale": "micro",
+                "listedOnRegulatedMarket": false
             },
             "roles": [
-                "supplier",
-                "tenderer"
+                "tenderer",
+                "supplier"
             ],
             "additionalIdentifiers": [
                 {

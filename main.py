@@ -168,6 +168,18 @@ from converters.BT_729_Lot_Subcontracting_Obligation_Maximum import parse_subcon
 from converters.BT_732_Lot_Security_Clearance_Description import parse_security_clearance_description, merge_security_clearance_description
 from converters.BT_733_Award_Criteria_Order_Justification import parse_award_criteria_order_justification, merge_award_criteria_order_justification
 from converters.BT_734_Award_Criterion_Name import parse_award_criterion_name, merge_award_criterion_name
+from converters.BT_735_CVD_Contract_Type import parse_cvd_contract_type, merge_cvd_contract_type
+from converters.BT_736_Reserved_Execution import parse_reserved_execution, merge_reserved_execution
+from converters.BT_737_Documents_Unofficial_Language import parse_documents_unofficial_language, merge_documents_unofficial_language
+from converters.BT_738_Notice_Preferred_Publication_Date import parse_notice_preferred_publication_date, merge_notice_preferred_publication_date
+from converters.BT_739_Organization_Contact_Fax import parse_organization_contact_fax, merge_organization_contact_fax
+from converters.BT_740_Buyer_Contracting_Entity import parse_buyer_contracting_entity, merge_buyer_contracting_entity
+from converters.BT_743_Electronic_Invoicing import parse_electronic_invoicing, merge_electronic_invoicing
+from converters.BT_744_Submission_Electronic_Signature import parse_submission_electronic_signature, merge_submission_electronic_signature
+from converters.BT_745_Submission_Nonelectronic_Description import parse_submission_nonelectronic_description, merge_submission_nonelectronic_description
+from converters.BT_746_Winner_Listed import parse_winner_listed, merge_winner_listed
+from converters.BT_747_Selection_Criteria_Type import parse_selection_criteria_type, merge_selection_criteria_type
+from converters.BT_749_Selection_Criteria_Name import parse_selection_criteria_name, merge_selection_criteria_name
 
 def main(xml_path, ocid_prefix):
     # Read the XML content from the file
@@ -1740,6 +1752,54 @@ def main(xml_path, ocid_prefix):
     award_criterion_name_data = parse_award_criterion_name(xml_content)
     merge_award_criterion_name(release_json, award_criterion_name_data)
 
+    # Parse and merge BT-735 CVD Contract Type
+    cvd_contract_type_data = parse_cvd_contract_type(xml_content)
+    merge_cvd_contract_type(release_json, cvd_contract_type_data)
+
+    # Parse and merge BT-736 Reserved Execution
+    reserved_execution_data = parse_reserved_execution(xml_content)
+    merge_reserved_execution(release_json, reserved_execution_data)
+
+    # Parse and merge BT-737 Documents Unofficial Language
+    documents_unofficial_language_data = parse_documents_unofficial_language(xml_content)
+    merge_documents_unofficial_language(release_json, documents_unofficial_language_data)
+
+    # Parse and merge BT-738 Notice Preferred Publication Date
+    preferred_publication_date = parse_notice_preferred_publication_date(xml_content)
+    merge_notice_preferred_publication_date(release_json, preferred_publication_date)
+
+    # Parse and merge BT-739 Organization Contact Fax
+    organization_contact_fax_data = parse_organization_contact_fax(xml_content)
+    merge_organization_contact_fax(release_json, organization_contact_fax_data)
+
+    # Parse and merge BT-740 Buyer Contracting Entity
+    buyer_contracting_entity_data = parse_buyer_contracting_entity(xml_content)
+    merge_buyer_contracting_entity(release_json, buyer_contracting_entity_data)
+
+    # Parse and merge BT-743 Electronic Invoicing
+    electronic_invoicing_data = parse_electronic_invoicing(xml_content)
+    merge_electronic_invoicing(release_json, electronic_invoicing_data)
+
+    # Parse and merge BT-744 Submission Electronic Signature
+    submission_electronic_signature_data = parse_submission_electronic_signature(xml_content)
+    merge_submission_electronic_signature(release_json, submission_electronic_signature_data)
+
+    # Parse and merge BT-745 Submission Nonelectronic Description
+    submission_nonelectronic_description_data = parse_submission_nonelectronic_description(xml_content)
+    merge_submission_nonelectronic_description(release_json, submission_nonelectronic_description_data)
+
+    # Parse and merge BT-746 Winner Listed
+    winner_listed_data = parse_winner_listed(xml_content)
+    merge_winner_listed(release_json, winner_listed_data)
+
+    # Parse and merge BT-747 Selection Criteria Type
+    selection_criteria_type_data = parse_selection_criteria_type(xml_content)
+    merge_selection_criteria_type(release_json, selection_criteria_type_data)
+
+    # Parse and merge BT-749 Selection Criteria Name
+    selection_criteria_name_data = parse_selection_criteria_name(xml_content)
+    merge_selection_criteria_name(release_json, selection_criteria_name_data)
+    
     # Write the JSON output to a file
     with open('output.json', 'w') as f:
         json.dump(release_json, f, indent=4)
