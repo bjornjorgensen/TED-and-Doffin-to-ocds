@@ -156,6 +156,18 @@ from converters.BT_711_LotResult_Tender_Value_Highest import parse_tender_value_
 from converters.BT_712_LotResult_Buyer_Review_Complainants import parse_buyer_review_complainants, merge_buyer_review_complainants
 from converters.BT_717_Lot_Clean_Vehicles_Directive import parse_clean_vehicles_directive, merge_clean_vehicles_directive
 from converters.BT_719_Notice_Change_Procurement_Documents_Date import parse_change_procurement_documents_date, merge_change_procurement_documents_date
+from converters.BT_720_Tender_Value import parse_tender_value, merge_tender_value
+from converters.BT_721_Contract_Title import parse_contract_title, merge_contract_title
+from converters.BT_722_Contract_EU_Funds_Programme import parse_contract_eu_funds_programme, merge_contract_eu_funds_programme
+from converters.BT_7220_Lot_EU_Funds_Programme import parse_lot_eu_funds_programme, merge_lot_eu_funds_programme
+from converters.BT_723_LotResult_Vehicle_Category import parse_vehicle_category, merge_vehicle_category
+from converters.BT_726_Suitable_For_SMEs import parse_suitable_for_smes, merge_suitable_for_smes
+from converters.BT_727_Place_Performance_Services_Other import parse_place_performance_services_other, merge_place_performance_services_other
+from converters.BT_728_Place_Performance_Additional_Info import parse_place_performance_additional_info, merge_place_performance_additional_info
+from converters.BT_729_Lot_Subcontracting_Obligation_Maximum import parse_subcontracting_obligation_maximum, merge_subcontracting_obligation_maximum
+from converters.BT_732_Lot_Security_Clearance_Description import parse_security_clearance_description, merge_security_clearance_description
+from converters.BT_733_Award_Criteria_Order_Justification import parse_award_criteria_order_justification, merge_award_criteria_order_justification
+from converters.BT_734_Award_Criterion_Name import parse_award_criterion_name, merge_award_criterion_name
 
 def main(xml_path, ocid_prefix):
     # Read the XML content from the file
@@ -1679,6 +1691,54 @@ def main(xml_path, ocid_prefix):
     # Parse and merge BT-719-notice Change Procurement Documents Date
     change_procurement_documents_date_data = parse_change_procurement_documents_date(xml_content)
     merge_change_procurement_documents_date(release_json, change_procurement_documents_date_data)
+
+    # Parse and merge BT-720-Tender Value
+    tender_value_data = parse_tender_value(xml_content)
+    merge_tender_value(release_json, tender_value_data)
+
+    # Parse and merge BT-721-Contract Title
+    contract_title_data = parse_contract_title(xml_content)
+    merge_contract_title(release_json, contract_title_data)
+
+    # Parse and merge BT-722-Contract EU Funds Programme
+    contract_eu_funds_data = parse_contract_eu_funds_programme(xml_content)
+    merge_contract_eu_funds_programme(release_json, contract_eu_funds_data)
+
+    # Parse and merge BT-7220-Lot EU Funds Programme
+    lot_eu_funds_programme_data = parse_lot_eu_funds_programme(xml_content)
+    merge_lot_eu_funds_programme(release_json, lot_eu_funds_programme_data)
+
+    # Parse and merge BT-723-LotResult Vehicle Category
+    vehicle_category_data = parse_vehicle_category(xml_content)
+    merge_vehicle_category(release_json, vehicle_category_data)
+
+    # Parse and merge BT-726 Suitable For SMEs
+    suitable_for_smes_data = parse_suitable_for_smes(xml_content)
+    merge_suitable_for_smes(release_json, suitable_for_smes_data)
+
+    # Parse and merge BT-727 Place Performance Services Other
+    place_performance_services_other_data = parse_place_performance_services_other(xml_content)
+    merge_place_performance_services_other(release_json, place_performance_services_other_data)
+
+    # Parse and merge BT-728 Place Performance Additional Information
+    place_performance_additional_info_data = parse_place_performance_additional_info(xml_content)
+    merge_place_performance_additional_info(release_json, place_performance_additional_info_data)
+
+    # Parse and merge BT-729-Lot Subcontracting Obligation Maximum
+    subcontracting_obligation_maximum_data = parse_subcontracting_obligation_maximum(xml_content)
+    merge_subcontracting_obligation_maximum(release_json, subcontracting_obligation_maximum_data)
+
+    # Parse and merge BT-732-Lot Security Clearance Description
+    security_clearance_description_data = parse_security_clearance_description(xml_content)
+    merge_security_clearance_description(release_json, security_clearance_description_data)
+
+    # Parse and merge BT-733 Award Criteria Order Justification
+    award_criteria_order_justification_data = parse_award_criteria_order_justification(xml_content)
+    merge_award_criteria_order_justification(release_json, award_criteria_order_justification_data)
+
+    # Parse and merge BT-734 Award Criterion Name
+    award_criterion_name_data = parse_award_criterion_name(xml_content)
+    merge_award_criterion_name(release_json, award_criterion_name_data)
 
     # Write the JSON output to a file
     with open('output.json', 'w') as f:

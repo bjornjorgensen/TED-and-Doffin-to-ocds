@@ -1,7 +1,7 @@
 {
     "id": "65667997-031a-4198-bd25-7225449ef479",
     "initiationType": "tender",
-    "ocid": "ocid_prefix_value-fe3298b7-b093-40d0-a618-6163c0ca925d",
+    "ocid": "ocid_prefix_value-be9c66b6-2167-49ee-a6f9-40c9a9ffe4f5",
     "tender": {
         "lots": [
             {
@@ -221,7 +221,11 @@
                         "id": "PROJ DEF/2022-01",
                         "scheme": "NL-TENDERNL"
                     }
-                ]
+                ],
+                "value": {
+                    "amount": 95414.0,
+                    "currency": "EUR"
+                }
             }
         ],
         "statistics": [
