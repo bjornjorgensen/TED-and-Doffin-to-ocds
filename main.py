@@ -202,6 +202,12 @@ from converters.BT_77_Lot import parse_terms_financial, merge_terms_financial
 from converters.BT_771_Lot import parse_late_tenderer_information, merge_late_tenderer_information
 from converters.BT_772_Lot import parse_late_tenderer_info_description, merge_late_tenderer_info_description
 from converters.BT_773_Tender import parse_subcontracting, merge_subcontracting
+from converters.BT_774_Lot import parse_green_procurement, merge_green_procurement
+from converters.BT_775_Lot import parse_social_procurement, merge_social_procurement
+from converters.BT_776_Lot import parse_procurement_innovation, merge_procurement_innovation
+from converters.BT_777_Lot import parse_strategic_procurement_description, merge_strategic_procurement_description
+from converters.BT_78_Lot import parse_security_clearance_deadline, merge_security_clearance_deadline
+from converters.BT_79_Lot import parse_performing_staff_qualification, merge_performing_staff_qualification
 
 def main(xml_path, ocid_prefix):
     # Read the XML content from the file
@@ -1909,6 +1915,30 @@ def main(xml_path, ocid_prefix):
     # Parse and merge BT-773-Tender Subcontracting
     subcontracting_data = parse_subcontracting(xml_content)
     merge_subcontracting(release_json, subcontracting_data)
+    
+    # Parse and merge BT-774-Lot Green Procurement
+    green_procurement_data = parse_green_procurement(xml_content)
+    merge_green_procurement(release_json, green_procurement_data)
+
+    # Parse and merge BT-775-Lot Social Procurement
+    social_procurement_data = parse_social_procurement(xml_content)
+    merge_social_procurement(release_json, social_procurement_data)
+
+    # Parse and merge BT-776-Lot Procurement of Innovation
+    procurement_innovation_data = parse_procurement_innovation(xml_content)
+    merge_procurement_innovation(release_json, procurement_innovation_data)
+
+    # Parse and merge BT-777-Lot Strategic Procurement Description
+    strategic_procurement_data = parse_strategic_procurement_description(xml_content)
+    merge_strategic_procurement_description(release_json, strategic_procurement_data)
+
+    # Parse and merge BT-78-Lot Security Clearance Deadline
+    security_clearance_data = parse_security_clearance_deadline(xml_content)
+    merge_security_clearance_deadline(release_json, security_clearance_data)
+
+    # Parse and merge BT-79-Lot Performing Staff Qualification
+    staff_qualification_data = parse_performing_staff_qualification(xml_content)
+    merge_performing_staff_qualification(release_json, staff_qualification_data)
     
     # Write the JSON output to a file
     with open('output.json', 'w') as f:

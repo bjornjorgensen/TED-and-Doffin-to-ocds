@@ -1,7 +1,7 @@
 {
     "id": "65667997-031a-4198-bd25-7225449ef479",
     "initiationType": "tender",
-    "ocid": "ocid_prefix_value-1a8b02b0-c88d-4940-af75-f703fa60ad99",
+    "ocid": "ocid_prefix_value-ad51df16-c043-40cd-a59c-c9e7965e03d6",
     "tender": {
         "lots": [
             {
@@ -216,7 +216,6 @@
             {
                 "id": "TEN-0001",
                 "relatedLots": [
-                    "LOT-0000",
                     "LOT-0000"
                 ],
                 "rank": 1,

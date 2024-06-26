@@ -43,6 +43,8 @@ def merge_subcontracting(release_json, subcontracting_data):
         
         bid["hasSubcontracting"] = data['hasSubcontracting']
         if data['relatedLots']:
-            bid.setdefault("relatedLots", []).append(data['relatedLots'])
+            related_lots = bid.setdefault("relatedLots", [])
+            if data['relatedLots'] not in related_lots:
+                related_lots.append(data['relatedLots'])
 
     return release_json
