@@ -1,69 +1,2538 @@
 {
-    "id": "65667997-031a-4198-bd25-7225449ef479",
+    "id": "2023-610912",
     "initiationType": "tender",
-    "ocid": "ocid_prefix_value-ad51df16-c043-40cd-a59c-c9e7965e03d6",
+    "ocid": "ocid_prefix_value-caf9f1b9-a297-435f-9edf-f6d442d61e00",
     "tender": {
         "lots": [
             {
-                "id": "LOT-0000",
-                "coveredBy": [
-                    "GPA"
-                ],
-                "title": "Agence centre",
-                "identifiers": [
-                    {
-                        "id": "1",
-                        "scheme": "internal"
-                    }
-                ],
-                "mainProcurementCategory": "services",
-                "description": "Service d'entretien de remise en \u00e9tat et de nettoyage des espaces verts.",
-                "awardCriteria": {
-                    "criteria": [
-                        {
-                            "type": "price",
-                            "description": "Le prix contribue for 40 % \u2026"
-                        }
-                    ],
-                    "weightingDescription": "Le calcul du score prix-qualit\u00e9 est bas\u00e9 sur \u2026"
+                "id": "LOT-0001",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
                 },
-                "techniques": {
-                    "hasElectronicAuction": true
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "1 Flatanger - Sørnesset",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 1 område Flatanger - Sørnesset",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0002",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "2 Heim - Likroken/Sinnesvegen",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 2 område Heim - Likroken/Sinnesvegen",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0003",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "3 Hitra - Akset-Sandstad idrettspark",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 3 område Hitra - Akset-Sandstad idrettspark",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0004",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "4 Høylandet - Brembu",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 4 område Høylandet - Brembu",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0005",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "5 Leka - Engan-Vågan- Stein-Kvaløya-Skråen",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 5 område Leka - Engan-Vågan- Stein-Kvaløya-Skråen",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0006",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "6 Levanger - Ronglan sentrum",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 6 område Levanger - Ronglan sentrum Levanger har kommunal egenandel",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0007",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "7 Lierne - Stuggunesset",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 7 område Lierne - Stuggunesset",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0008",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "8 Malvik - Bredbånd for restområder i Malvik",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 8 område Malvik - Bredbånd for restområder i Malvik",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0009",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "9 Midtre Gauldal - Kotsøy med omegn",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 9 område Midtre Gauldal - Kotsøy med omegn",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0010",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "10 Namsos - FO12 - Kvernvika-Lund",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 10 område Namsos - FO12 - Kvernvika-Lund",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0011",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "11 Nærøysund - Gravvik-Tennfjord",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 11 område Nærøysund - Gravvik-Tennfjord",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0012",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "12 Overhalla - Circle K-Veglo",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 12 område Overhalla - Circle K-Veglo",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0013",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "13 Rennebu - Herremsgrenda, Stamnan, Innset",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 13 område Rennebu - Herremsgrenda, Stamnan, Innset",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0014",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "14 Røros - 2023.1 Hådalen",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 14 område Røros - 2023.1 Hådalen",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0015",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "15 Røyrvik - Namvassveien",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 15 område Røyrvik - Namvassveien",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0016",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "16 Selbu - Sjøbygda - Renåa - Amdal",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 16 område Selbu - Sjøbygda - Renåa - Amdal Selbu har kommunal egenandel",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0017",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "17 Skaun - Sjetnvegen, Viggja",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 17 område Skaun - Sjetnvegen, Viggja",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0018",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "18 Trondheim - Jonsvatnet Nord",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 18 område Trondheim - Jonsvatnet Nord",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0019",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "19 Verdal - Årstadbakkan, Tromsdalen, Grundenget-Nyset",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 19 område Verdal - Årstadbakkan, Tromsdalen, Grundenget-Nyset",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0020",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "20 Ørland - Korsgat - Hellem",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 20 område Ørland - Korsgat - Hellem",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0021",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "21 Åfjord - Norddalen",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 21 område Åfjord - Norddalen",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0022",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "22 Åfjord - Sørdalen",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 22 område Åfjord - Sørdalen",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0023",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "23 Nærøysund - Gråmarka-Knutåsen",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 23 område Nærøysund - Gråmarka-Knutåsen",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0024",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "24 Overhalla - Flasnes-Galguften",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 24 område Overhalla - Flasnes-Galguften",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0025",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "25 Overhalla - Skogmo-Bertnem",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 25 område Overhalla - Skogmo-Bertnem",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0026",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "26 Lierne - Berglia",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 26 område Lierne - Berglia",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0027",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "27 Hitra - Vågen",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 27 område Hitra - Vågen",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0028",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "28 Midtre Gauldal - Rognes",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 28 område Midtre Gauldal - Rognes",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0029",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "29 Verdal - Helsetbakkan",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 29 område Verdal - Helsetbakkan",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0030",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "30 Verdal - Jøssås",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 30 område Verdal - Jøssås",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0031",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "31 Namsos - NA12 - Hovika",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 31 område Namsos - NA12 - Hovika",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0032",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "32 Flatanger - Sitter Vollan Lauvøya",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 32 område Flatanger - Sitter Vollan Lauvøya",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0033",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "33 Flatanger - Stamnes",
+                "mainProcurementCategory": "works",
+                "description": "delkontrakt 33 område Flatanger - Stamnes",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0034",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "34 Levanger - Åsen øst",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 34 område Levanger - Åsen øst Levanger har kommunal egenandel",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0035",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "35 Åfjord - Storvika",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 35 område Åfjord - Storvika",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0036",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "36 Ørland - Storfosna - Kråkvåg",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 36 område Ørland - Storfosna - Kråkvåg",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0037",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "37 Røros - 2023.2 Aursunden Nord-Øst",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 37 område Røros - 2023.2 Aursunden Nord-Øst",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0038",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "38 Nærøysund - Lyngsnes",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 38 område Nærøysund - Lyngsnes",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0039",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "39 Trondheim - Hyttsaga og Svebakken",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 39 område Trondheim - Hyttsaga og Svebakken",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0040",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "40 Åfjord - Lauvøya",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 40 område Åfjord - Lauvøya",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0041",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "41 Åfjord - Barøya-Selnes",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 41 område Åfjord - Barøya-Selnes",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0042",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "42 Trondheim - Nordset",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 42 område Trondheim - Nordset",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0043",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "43 Namsos - NA14 - Skorstad",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 43 område Namsos - NA14 - Skorstad",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0044",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "44 Nærøysund - Sandnes-Sandnesenget",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 44 område Nærøysund - Sandnes-Sandnesenget",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2026-08-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0045",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "45 Røros - 2023.3 Tamneset - Feragen - Kojan",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 45 område Røros - 2023.3 Tamneset - Feragen - Kojan",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0046",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "46 Rennebu - Gisnås del 2",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 46 område Rennebu - Gisnås del 2",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0047",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "47 Åfjord - Ratvika - Tårnes",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 47 område Åfjord - Ratvika - Tårnes",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0048",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "48 Selbu - Flønes - Tømra",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 48 område Selbu - Flønes - Tømra Selbu har kommunal egenandel",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0049",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "49 Midtre Gauldal - Sokndal Skole omegn",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 49 område Midtre Gauldal - Sokndal Skole omegn",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0050",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "50 Nærøysund - Austafjord-Valøya",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 50 område Nærøysund - Austafjord-Valøya",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0051",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "51 Namsos - NA1 - Botnan-Vikan",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 51 område Namsos - NA1 - Botnan-Vikan",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0052",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "52 Hitra - Børøysundet",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 52 område Hitra - Børøysundet",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0053",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "53 Holtålen - Aunvegen 148",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 53 område Holtålen - Aunvegen 148",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
+                }
+            },
+            {
+                "id": "LOT-0054",
+                "tenderPeriod": {
+                    "endDate": "2023-10-13T12:00:00+02:00"
+                },
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "allowed"
+                },
+                "submissionMethodDetails": "https://permalink.mercell.com/206868650.aspx",
+                "title": "54 Holtålen - Aunvegen 332",
+                "mainProcurementCategory": "works",
+                "description": "Delkontrakt 54 område Holtålen - Aunvegen 332",
+                "secondStage": {
+                    "minimumCandidates": 0,
+                    "successiveReduction": false
+                },
+                "contractPeriod": {
+                    "startDate": "2023-12-01T01:00:00",
+                    "endDate": "2025-10-01T01:00:00"
+                },
+                "contractTerms": {
+                    "electronicInvoicingPolicy": "not-allowed"
                 }
             }
         ],
         "lotGroups": [
             {
-                "id": "LOT-0000"
+                "id": "LOT-0001"
+            },
+            {
+                "id": "LOT-0002"
+            },
+            {
+                "id": "LOT-0003"
+            },
+            {
+                "id": "LOT-0004"
+            },
+            {
+                "id": "LOT-0005"
+            },
+            {
+                "id": "LOT-0006"
+            },
+            {
+                "id": "LOT-0007"
+            },
+            {
+                "id": "LOT-0008"
+            },
+            {
+                "id": "LOT-0009"
+            },
+            {
+                "id": "LOT-0010"
+            },
+            {
+                "id": "LOT-0011"
+            },
+            {
+                "id": "LOT-0012"
+            },
+            {
+                "id": "LOT-0013"
+            },
+            {
+                "id": "LOT-0014"
+            },
+            {
+                "id": "LOT-0015"
+            },
+            {
+                "id": "LOT-0016"
+            },
+            {
+                "id": "LOT-0017"
+            },
+            {
+                "id": "LOT-0018"
+            },
+            {
+                "id": "LOT-0019"
+            },
+            {
+                "id": "LOT-0020"
+            },
+            {
+                "id": "LOT-0021"
+            },
+            {
+                "id": "LOT-0022"
+            },
+            {
+                "id": "LOT-0023"
+            },
+            {
+                "id": "LOT-0024"
+            },
+            {
+                "id": "LOT-0025"
+            },
+            {
+                "id": "LOT-0026"
+            },
+            {
+                "id": "LOT-0027"
+            },
+            {
+                "id": "LOT-0028"
+            },
+            {
+                "id": "LOT-0029"
+            },
+            {
+                "id": "LOT-0030"
+            },
+            {
+                "id": "LOT-0031"
+            },
+            {
+                "id": "LOT-0032"
+            },
+            {
+                "id": "LOT-0033"
+            },
+            {
+                "id": "LOT-0034"
+            },
+            {
+                "id": "LOT-0035"
+            },
+            {
+                "id": "LOT-0036"
+            },
+            {
+                "id": "LOT-0037"
+            },
+            {
+                "id": "LOT-0038"
+            },
+            {
+                "id": "LOT-0039"
+            },
+            {
+                "id": "LOT-0040"
+            },
+            {
+                "id": "LOT-0041"
+            },
+            {
+                "id": "LOT-0042"
+            },
+            {
+                "id": "LOT-0043"
+            },
+            {
+                "id": "LOT-0044"
+            },
+            {
+                "id": "LOT-0045"
+            },
+            {
+                "id": "LOT-0046"
+            },
+            {
+                "id": "LOT-0047"
+            },
+            {
+                "id": "LOT-0048"
+            },
+            {
+                "id": "LOT-0049"
+            },
+            {
+                "id": "LOT-0050"
+            },
+            {
+                "id": "LOT-0051"
+            },
+            {
+                "id": "LOT-0052"
+            },
+            {
+                "id": "LOT-0053"
+            },
+            {
+                "id": "LOT-0054"
             }
         ],
         "items": [
             {
                 "id": "1",
-                "relatedLot": "LOT-0000",
+                "relatedLot": "LOT-0001",
                 "classification": {
                     "scheme": "CPV",
-                    "id": "77310000"
-                }
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
             },
             {
                 "id": "2",
+                "relatedLot": "LOT-0002",
                 "classification": {
                     "scheme": "CPV",
-                    "id": "77310000"
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "3",
+                "relatedLot": "LOT-0003",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "4",
+                "relatedLot": "LOT-0004",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "5",
+                "relatedLot": "LOT-0005",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "6",
+                "relatedLot": "LOT-0006",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "7",
+                "relatedLot": "LOT-0007",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "8",
+                "relatedLot": "LOT-0008",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "9",
+                "relatedLot": "LOT-0009",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "10",
+                "relatedLot": "LOT-0010",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "11",
+                "relatedLot": "LOT-0011",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "12",
+                "relatedLot": "LOT-0012",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "13",
+                "relatedLot": "LOT-0013",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "14",
+                "relatedLot": "LOT-0014",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "15",
+                "relatedLot": "LOT-0015",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "16",
+                "relatedLot": "LOT-0016",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "17",
+                "relatedLot": "LOT-0017",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "18",
+                "relatedLot": "LOT-0018",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "19",
+                "relatedLot": "LOT-0019",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "20",
+                "relatedLot": "LOT-0020",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "21",
+                "relatedLot": "LOT-0021",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "22",
+                "relatedLot": "LOT-0022",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "23",
+                "relatedLot": "LOT-0023",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "24",
+                "relatedLot": "LOT-0024",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "25",
+                "relatedLot": "LOT-0025",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "26",
+                "relatedLot": "LOT-0026",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "27",
+                "relatedLot": "LOT-0027",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "28",
+                "relatedLot": "LOT-0028",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "29",
+                "relatedLot": "LOT-0029",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "30",
+                "relatedLot": "LOT-0030",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "31",
+                "relatedLot": "LOT-0031",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "32",
+                "relatedLot": "LOT-0032",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "33",
+                "relatedLot": "LOT-0033",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "34",
+                "relatedLot": "LOT-0034",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "35",
+                "relatedLot": "LOT-0035",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "36",
+                "relatedLot": "LOT-0036",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "37",
+                "relatedLot": "LOT-0037",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "38",
+                "relatedLot": "LOT-0038",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "39",
+                "relatedLot": "LOT-0039",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "40",
+                "relatedLot": "LOT-0040",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "41",
+                "relatedLot": "LOT-0041",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "42",
+                "relatedLot": "LOT-0042",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "43",
+                "relatedLot": "LOT-0043",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "44",
+                "relatedLot": "LOT-0044",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "45",
+                "relatedLot": "LOT-0045",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "46",
+                "relatedLot": "LOT-0046",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "47",
+                "relatedLot": "LOT-0047",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "48",
+                "relatedLot": "LOT-0048",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "49",
+                "relatedLot": "LOT-0049",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "50",
+                "relatedLot": "LOT-0050",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "51",
+                "relatedLot": "LOT-0051",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "52",
+                "relatedLot": "LOT-0052",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "53",
+                "relatedLot": "LOT-0053",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "54",
+                "relatedLot": "LOT-0054",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
+                },
+                "additionalClassifications": [
+                    {
+                        "scheme": "CPV",
+                        "id": "45232300"
+                    }
+                ],
+                "deliveryAddresses": [
+                    {
+                        "region": "NO060"
+                    }
+                ]
+            },
+            {
+                "id": "55",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "45232300"
                 }
             }
         ],
         "legalBasis": {
-            "id": "32014L0024",
+            "id": "OTHER",
             "scheme": "CELEX"
         },
-        "status": "complete",
-        "id": "022d0ef9-6338-42d9-afa4-a87709128061",
+        "status": "active",
+        "id": "2023-610912",
         "procurementMethod": "open",
-        "title": "Service d'entretien de remise en \u00e9tat et de nettoyage des espaces verts",
-        "mainProcurementCategory": "services",
-        "description": "Service d'entretien de remise en \u00e9tat et de nettoyage des espaces verts."
+        "documents": [
+            {
+                "id": "DOCUMENT_ID_REQUIRED_HERE",
+                "documentType": "biddingDocuments",
+                "url": "https://permalink.mercell.com/206868650.aspx",
+                "relatedLots": [
+                    "LOT-0054"
+                ]
+            }
+        ],
+        "title": "Bredbåndsutbygging i Trøndelag - NKOM 2023",
+        "identifiers": [
+            {
+                "id": "202321002",
+                "scheme": "internal"
+            }
+        ],
+        "mainProcurementCategory": "works",
+        "description": "Bredbåndsutbygging NKOM 2023 Dette er en utlysing av offentlig støtte til bredbåndsutbygging i Trøndelag. Se mer informasjon om prosjektet i punktene som følger. Prosjektet er delt opp i delkontrakter. Oversikt over områder følger av vedlegg B - Prisskjema, egne kartutsnitt i fylkeskommunens kartløsning samt vedlagte adresselister for hvert område.",
+        "value": {
+            "amount": 120000000.0,
+            "currency": "NOK"
+        },
+        "lotDetails": {
+            "maximumLotsBidPerSupplier": 54
+        }
     },
     "parties": [
         {
@@ -71,211 +2540,208 @@
             "roles": [
                 "buyer"
             ],
-            "details": {
-                "classifications": [
-                    {
-                        "scheme": "COFOG",
-                        "id": "06",
-                        "description": "Housing and community amenities"
-                    },
-                    {
-                        "scheme": "TED_CA_TYPE",
-                        "id": "pub-undert-la",
-                        "description": "Public undertaking, controlled by a local authority"
-                    }
-                ]
-            },
-            "name": "Rouen Habitat",
-            "additionalIdentifiers": [
-                {
-                    "id": "123 456 789",
-                    "scheme": "GB-COH"
-                }
-            ],
+            "name": "Trøndelag fylkeskommune",
             "contactPoint": {
-                "telephone": "+33 235156161",
-                "email": "contact@rouenhabitat.fr"
+                "name": "Alexander Mikael Kuss",
+                "telephone": "+47 93834124",
+                "email": "aleku@trondelagfylke.no"
+            },
+            "details": {
+                "url": "https://permalink.mercell.com/206868650.aspx",
+                "buyerProfile": "http://www.trondelagfylke.no/"
             },
             "address": {
-                "region": "FRD22",
-                "postalCode": "ABC123",
-                "locality": "Rouen Cedex 1",
-                "country": "FR"
-            },
-            "beneficialOwners": [
-                {
-                    "id": "UBO-0001",
-                    "nationality": "FR"
-                }
-            ]
-        },
-        {
-            "id": "RES-0001"
-        },
-        {
-            "id": "TEN-0001"
-        },
-        {
-            "id": "CON-0001"
-        },
-        {
-            "id": "LOT-0000"
-        },
-        {
-            "id": "TPA-0001"
-        },
-        {
-            "id": "PROJ DEF/2022-01"
-        },
-        {
-            "id": "SCN DEF:2020-12"
-        },
-        {
-            "id": "ORG-0004",
-            "name": "Espaces Verts Lemire",
-            "details": {
-                "scale": "micro",
-                "listedOnRegulatedMarket": false
-            },
-            "roles": [
-                "tenderer",
-                "supplier"
-            ],
-            "additionalIdentifiers": [
-                {
-                    "id": "326 912 557",
-                    "scheme": "GB-COH"
-                }
-            ],
-            "contactPoint": {
-                "telephone": "+33 2 35 67 82 82",
-                "email": "contact@example.com"
-            },
-            "address": {
-                "region": "FRD22",
-                "postalCode": "ABC123",
-                "locality": "Le Grand-Quevilly",
-                "country": "FR"
+                "streetAddress": "Seilmakergata 2",
+                "postalCode": "7725",
+                "locality": "STEINKJER",
+                "country": "NO"
             }
         },
         {
-            "id": "ORG-0002",
-            "name": "Tribunal administratif de Rouen",
-            "additionalIdentifiers": [
-                {
-                    "id": "321 654 789",
-                    "scheme": "GB-COH"
-                }
-            ],
-            "address": {
-                "region": "FRD22",
-                "postalCode": "ABC123",
-                "locality": "Rouen",
-                "country": "FR"
-            }
+            "id": "2023-610912"
         },
         {
-            "id": "UBO-0001"
+            "id": "202321002"
         },
         {
-            "id": "65667997-031a-4198-bd25-7225449ef479"
+            "id": "LOT-0001"
         },
         {
-            "id": "1"
+            "id": "DOCUMENT_ID_REQUIRED_HERE"
         },
         {
-            "id": "2",
-            "name": "European Union",
-            "roles": [
-                "funder"
-            ]
+            "id": "NOR"
+        },
+        {},
+        {
+            "id": "LOT-0002"
+        },
+        {
+            "id": "LOT-0003"
+        },
+        {
+            "id": "LOT-0004"
+        },
+        {
+            "id": "LOT-0005"
+        },
+        {
+            "id": "LOT-0006"
+        },
+        {
+            "id": "LOT-0007"
+        },
+        {
+            "id": "LOT-0008"
+        },
+        {
+            "id": "LOT-0009"
+        },
+        {
+            "id": "LOT-0010"
+        },
+        {
+            "id": "LOT-0011"
+        },
+        {
+            "id": "LOT-0012"
+        },
+        {
+            "id": "LOT-0013"
+        },
+        {
+            "id": "LOT-0014"
+        },
+        {
+            "id": "LOT-0015"
+        },
+        {
+            "id": "LOT-0016"
+        },
+        {
+            "id": "LOT-0017"
+        },
+        {
+            "id": "LOT-0018"
+        },
+        {
+            "id": "LOT-0019"
+        },
+        {
+            "id": "LOT-0020"
+        },
+        {
+            "id": "LOT-0021"
+        },
+        {
+            "id": "LOT-0022"
+        },
+        {
+            "id": "LOT-0023"
+        },
+        {
+            "id": "LOT-0024"
+        },
+        {
+            "id": "LOT-0025"
+        },
+        {
+            "id": "LOT-0026"
+        },
+        {
+            "id": "LOT-0027"
+        },
+        {
+            "id": "LOT-0028"
+        },
+        {
+            "id": "LOT-0029"
+        },
+        {
+            "id": "LOT-0030"
+        },
+        {
+            "id": "LOT-0031"
+        },
+        {
+            "id": "LOT-0032"
+        },
+        {
+            "id": "LOT-0033"
+        },
+        {
+            "id": "LOT-0034"
+        },
+        {
+            "id": "LOT-0035"
+        },
+        {
+            "id": "LOT-0036"
+        },
+        {
+            "id": "LOT-0037"
+        },
+        {
+            "id": "LOT-0038"
+        },
+        {
+            "id": "LOT-0039"
+        },
+        {
+            "id": "LOT-0040"
+        },
+        {
+            "id": "LOT-0041"
+        },
+        {
+            "id": "LOT-0042"
+        },
+        {
+            "id": "LOT-0043"
+        },
+        {
+            "id": "LOT-0044"
+        },
+        {
+            "id": "LOT-0045"
+        },
+        {
+            "id": "LOT-0046"
+        },
+        {
+            "id": "LOT-0047"
+        },
+        {
+            "id": "LOT-0048"
+        },
+        {
+            "id": "LOT-0049"
+        },
+        {
+            "id": "LOT-0050"
+        },
+        {
+            "id": "LOT-0051"
+        },
+        {
+            "id": "LOT-0052"
+        },
+        {
+            "id": "LOT-0053"
+        },
+        {
+            "id": "LOT-0054"
         }
     ],
     "tag": [
-        "award",
-        "contract"
+        "tender"
     ],
-    "date": "2019-10-23T00:00:00+01:00",
-    "awards": [
-        {
-            "id": "RES-0001",
-            "relatedLots": [
-                "LOT-0000"
-            ],
-            "statusDetails": "At least one winner was chosen.",
-            "status": "active",
-            "suppliers": [
-                {
-                    "id": "ORG-0004"
-                }
-            ]
-        }
-    ],
+    "date": "2023-07-04T12:00:00+02:00",
+    "awards": [],
+    "contracts": [],
+    "language": "nb",
     "bids": {
-        "details": [
-            {
-                "id": "TEN-0001",
-                "relatedLots": [
-                    "LOT-0000"
-                ],
-                "rank": 1,
-                "hasRank": true,
-                "identifiers": [
-                    {
-                        "id": "PROJ DEF/2022-01",
-                        "scheme": "NL-TENDERNL"
-                    }
-                ],
-                "value": {
-                    "amount": 95414.0,
-                    "currency": "EUR"
-                },
-                "hasSubcontracting": false
-            }
-        ],
-        "statistics": [
-            {
-                "id": "1",
-                "measure": "lowestValidBidValue",
-                "value": 59299.64,
-                "currency": "EUR",
-                "relatedLot": "LOT-0000"
-            },
-            {
-                "id": "2",
-                "measure": "highestValidBidValue",
-                "value": 95414.0,
-                "currency": "EUR",
-                "relatedLot": "LOT-0000"
-            },
-            {
-                "id": "3",
-                "value": 3,
-                "relatedLot": "LOT-0000",
-                "measure": "receivedSubmissions"
-            },
-            {
-                "id": "4",
-                "measure": "bids",
-                "relatedLot": "LOT-0000"
-            }
-        ]
-    },
-    "contracts": [
-        {
-            "id": "CON-0001",
-            "dateSigned": "2019-09-03T02:00:00+00:00",
-            "awardID": "RES-0001",
-            "identifiers": [
-                {
-                    "id": "SCN DEF:2020-12",
-                    "scheme": "NL-TENDERNED"
-                }
-            ],
-            "relatedBids": [
-                "TEN-0001"
-            ]
-        }
-    ],
-    "language": "fr"
+        "details": [],
+        "statistics": []
+    }
 }

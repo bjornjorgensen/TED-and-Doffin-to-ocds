@@ -33,18 +33,23 @@ def parse_buyer_legal_type(xml_content):
     party_id_xpath = ".//cac:PartyIdentification/cbc:ID"
     party_type_code_xpath = ".//cac:ContractingPartyType/cbc:PartyTypeCode[@listName='buyer-legal-type']"
 
-    for contracting_party in root.xpath(contracting_party_xpath, namespaces={
-            'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-            'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
-        }):
-        party_id = contracting_party.xpath(party_id_xpath, namespaces={
-            'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-            'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
-        })[0].text
-        party_type_code = contracting_party.xpath(party_type_code_xpath, namespaces={
-            'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-            'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
-        })[0].text
+    namespaces = {
+        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
+    }
+
+    for contracting_party in root.xpath(contracting_party_xpath, namespaces=namespaces):
+        party_id_elements = contracting_party.xpath(party_id_xpath, namespaces=namespaces)
+        if not party_id_elements:
+            continue  # Skip this contracting party if it doesn't have an ID
+
+        party_id = party_id_elements[0].text
+        
+        party_type_code_elements = contracting_party.xpath(party_type_code_xpath, namespaces=namespaces)
+        if not party_type_code_elements:
+            continue  # Skip this contracting party if it doesn't have a party type code
+
+        party_type_code = party_type_code_elements[0].text
 
         organization = next((org for org in parties if org['id'] == party_id), None)
         if not organization:

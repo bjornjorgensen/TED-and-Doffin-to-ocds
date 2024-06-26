@@ -1,5 +1,5 @@
 #main.py
-import json
+import json, io
 import uuid
 from datetime import datetime
 from lxml import etree
@@ -1939,17 +1939,18 @@ def main(xml_path, ocid_prefix):
     # Parse and merge BT-79-Lot Performing Staff Qualification
     staff_qualification_data = parse_performing_staff_qualification(xml_content)
     merge_performing_staff_qualification(release_json, staff_qualification_data)
-    
-    # Write the JSON output to a file
-    with open('output.json', 'w') as f:
-        json.dump(release_json, f, indent=4)
 
-    json_string = json.dumps(release_json, indent=2)
+    # Write the JSON output to a file
+    with io.open('output.json', 'w', encoding='utf-8') as f:
+        json.dump(release_json, f, ensure_ascii=False, indent=4)
+
+    # Print the JSON string
+    json_string = json.dumps(release_json, ensure_ascii=False, indent=2)
     print(json_string)
-    
+
 if __name__ == "__main__":
     # Path to the XML file
-    xml_path = 'can_24_minimal.xml'
+    xml_path = '2023-610912.xml'
     # Prefix for OCID
     ocid_prefix = 'ocid_prefix_value'
     

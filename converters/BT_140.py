@@ -1,3 +1,4 @@
+# converters/BT_140.py
 from lxml import etree
 
 REASON_CODE_DESCRIPTIONS = {
@@ -24,12 +25,23 @@ def parse_change_reason_code_and_description(xml_content):
     result = {"tender": {"amendments": []}, "awards": []}
     changes = root.xpath("//efac:Changes", namespaces=namespaces)
     
+    if not changes:
+        return None  # Return None if no Changes elements are found
+
     for changes_group in changes:
-        reason_code = changes_group.xpath("efac:ChangeReason/cbc:ReasonCode/text()", namespaces=namespaces)[0]
+        reason_codes = changes_group.xpath("efac:ChangeReason/cbc:ReasonCode/text()", namespaces=namespaces)
+        if not reason_codes:
+            continue  # Skip this changes group if no reason code is found
+
+        reason_code = reason_codes[0]
         change_elements = changes_group.xpath("efac:Change", namespaces=namespaces)
 
         for i, change in enumerate(change_elements, start=1):
-            section = change.xpath("efbc:ChangedSectionIdentifier/text()", namespaces=namespaces)[0]
+            section_identifiers = change.xpath("efbc:ChangedSectionIdentifier/text()", namespaces=namespaces)
+            if not section_identifiers:
+                continue  # Skip this change if no section identifier is found
+
+            section = section_identifiers[0]
             description = change.xpath("efbc:ChangeDescription/text()", namespaces=namespaces)
             
             amendment = {

@@ -15,22 +15,25 @@ def parse_tender_identifier(xml_content):
     lot_tenders = root.xpath("/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender", namespaces=namespaces)
     
     for lot_tender in lot_tenders:
-        tender_id = lot_tender.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        lot_id = lot_tender.xpath("efac:TenderLot/cbc:ID/text()", namespaces=namespaces)[0]
+        tender_id = lot_tender.xpath("cbc:ID/text()", namespaces=namespaces)
+        lot_id = lot_tender.xpath("efac:TenderLot/cbc:ID/text()", namespaces=namespaces)
         tender_reference = lot_tender.xpath("efac:TenderReference/cbc:ID/text()", namespaces=namespaces)
         
+        if not tender_id:
+            continue  # Skip this lot_tender if it doesn't have an ID
+        
         bid = {
-            "id": tender_id,
-            "relatedLots": [lot_id],
+            "id": tender_id[0],
+            "relatedLots": lot_id if lot_id else [],
             "identifiers": []
         }
         
         if tender_reference:
-            # Assuming the scheme is always 'NL-TENDERNL' for this example
-            # In a real-world scenario, you might need to determine the correct scheme based on additional information
+            # TODO: Implement logic to determine if the scope is subnational
+            # For now, we'll assume it's always national
             bid["identifiers"].append({
                 "id": tender_reference[0],
-                "scheme": "NL-TENDERNL"
+                "scheme": "NL-TENDERNL"  # Replace 'NL' with the appropriate country code
             })
         
         result["bids"]["details"].append(bid)
@@ -43,7 +46,9 @@ def merge_tender_identifier(release_json, tender_identifier_data):
         for new_bid in tender_identifier_data["bids"]["details"]:
             existing_bid = next((bid for bid in existing_bids if bid["id"] == new_bid["id"]), None)
             if existing_bid:
-                existing_bid.setdefault("identifiers", []).extend(new_bid["identifiers"])
-                existing_bid.setdefault("relatedLots", []).extend(lot for lot in new_bid["relatedLots"] if lot not in existing_bid["relatedLots"])
+                existing_bid.setdefault("identifiers", []).extend(new_bid.get("identifiers", []))
+                existing_bid.setdefault("relatedLots", []).extend(lot for lot in new_bid.get("relatedLots", []) if lot not in existing_bid["relatedLots"])
             else:
                 existing_bids.append(new_bid)
+    
+    return release_json
