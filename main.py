@@ -1950,7 +1950,7 @@ def main(xml_path, ocid_prefix):
 
 if __name__ == "__main__":
     # Path to the XML file
-    xml_path = '2023-610912.xml'
+    xml_path = '2023-618728.xml'
     # Prefix for OCID
     ocid_prefix = 'ocid_prefix_value'
     

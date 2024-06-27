@@ -16,12 +16,12 @@ def parse_organization_post_code(xml_content):
     # Parse Company Post Code
     company_elements = root.xpath("//efac:Organizations/efac:Organization/efac:Company", namespaces=namespaces)
     for company in company_elements:
-        org_id = company.xpath("cac:PartyIdentification/cbc:ID/text()", namespaces=namespaces)[0]
+        org_id = company.xpath("cac:PartyIdentification/cbc:ID/text()", namespaces=namespaces)
         postal_zone = company.xpath("cac:PostalAddress/cbc:PostalZone/text()", namespaces=namespaces)
         
-        if postal_zone:
+        if org_id and postal_zone:
             party = {
-                "id": org_id,
+                "id": org_id[0],
                 "address": {
                     "postalCode": postal_zone[0]
                 }
@@ -31,13 +31,13 @@ def parse_organization_post_code(xml_content):
     # Parse TouchPoint Post Code
     touchpoint_elements = root.xpath("//efac:Organizations/efac:Organization/efac:TouchPoint", namespaces=namespaces)
     for touchpoint in touchpoint_elements:
-        org_id = touchpoint.xpath("cac:PartyIdentification/cbc:ID/text()", namespaces=namespaces)[0]
+        org_id = touchpoint.xpath("cac:PartyIdentification/cbc:ID/text()", namespaces=namespaces)
         postal_zone = touchpoint.xpath("cac:PostalAddress/cbc:PostalZone/text()", namespaces=namespaces)
         company_id = touchpoint.xpath("../efac:Company/cac:PartyLegalEntity/cbc:CompanyID/text()", namespaces=namespaces)
         
-        if postal_zone:
+        if org_id and postal_zone:
             party = {
-                "id": org_id,
+                "id": org_id[0],
                 "address": {
                     "postalCode": postal_zone[0]
                 }
@@ -52,18 +52,18 @@ def parse_organization_post_code(xml_content):
     # Parse UBO Post Code
     ubo_elements = root.xpath("//efac:Organizations/efac:UltimateBeneficialOwner", namespaces=namespaces)
     for ubo in ubo_elements:
-        org_id = ubo.xpath("../efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID/text()", namespaces=namespaces)[0]
-        ubo_id = ubo.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        org_id = ubo.xpath("../efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID/text()", namespaces=namespaces)
+        ubo_id = ubo.xpath("cbc:ID/text()", namespaces=namespaces)
         postal_zone = ubo.xpath("cac:ResidenceAddress/cbc:PostalZone/text()", namespaces=namespaces)
         
-        if postal_zone:
-            org = next((party for party in result["parties"] if party["id"] == org_id), None)
+        if org_id and ubo_id and postal_zone:
+            org = next((party for party in result["parties"] if party["id"] == org_id[0]), None)
             if not org:
-                org = {"id": org_id, "beneficialOwners": []}
+                org = {"id": org_id[0], "beneficialOwners": []}
                 result["parties"].append(org)
             
             beneficial_owner = {
-                "id": ubo_id,
+                "id": ubo_id[0],
                 "address": {
                     "postalCode": postal_zone[0]
                 }
@@ -77,7 +77,10 @@ def merge_organization_post_code(release_json, post_code_data):
         existing_parties = release_json.setdefault("parties", [])
         
         for new_party in post_code_data["parties"]:
-            existing_party = next((party for party in existing_parties if party["id"] == new_party["id"]), None)
+            if "id" not in new_party:
+                continue  # Skip parties without an ID
+
+            existing_party = next((party for party in existing_parties if party.get("id") == new_party["id"]), None)
             if existing_party:
                 # Update existing party
                 if "address" in new_party:
@@ -87,7 +90,9 @@ def merge_organization_post_code(release_json, post_code_data):
                 if "beneficialOwners" in new_party:
                     existing_beneficial_owners = existing_party.setdefault("beneficialOwners", [])
                     for new_ubo in new_party["beneficialOwners"]:
-                        existing_ubo = next((ubo for ubo in existing_beneficial_owners if ubo["id"] == new_ubo["id"]), None)
+                        if "id" not in new_ubo:
+                            continue  # Skip UBOs without an ID
+                        existing_ubo = next((ubo for ubo in existing_beneficial_owners if ubo.get("id") == new_ubo["id"]), None)
                         if existing_ubo:
                             existing_ubo.setdefault("address", {}).update(new_ubo["address"])
                         else:

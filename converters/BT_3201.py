@@ -1,7 +1,7 @@
 # converters/BT_3201.py
 from lxml import etree
 
-def parse_tender_identifier(xml_content):
+def parse_tender_identifier(xml_content, default_scheme="TENDERNL"):
     root = etree.fromstring(xml_content)
     namespaces = {
         'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
@@ -15,25 +15,28 @@ def parse_tender_identifier(xml_content):
     lot_tenders = root.xpath("/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender", namespaces=namespaces)
     
     for lot_tender in lot_tenders:
-        tender_id = lot_tender.xpath("cbc:ID/text()", namespaces=namespaces)
-        lot_id = lot_tender.xpath("efac:TenderLot/cbc:ID/text()", namespaces=namespaces)
+        tender_id_elements = lot_tender.xpath("cbc:ID/text()", namespaces=namespaces)
+        lot_id_elements = lot_tender.xpath("efac:TenderLot/cbc:ID/text()", namespaces=namespaces)
         tender_reference = lot_tender.xpath("efac:TenderReference/cbc:ID/text()", namespaces=namespaces)
         
-        if not tender_id:
+        if not tender_id_elements:
             continue  # Skip this lot_tender if it doesn't have an ID
         
+        tender_id = tender_id_elements[0]
+        
         bid = {
-            "id": tender_id[0],
-            "relatedLots": lot_id if lot_id else [],
+            "id": tender_id,
+            "relatedLots": lot_id_elements,  # This will be an empty list if no lot IDs are found
             "identifiers": []
         }
         
         if tender_reference:
-            # TODO: Implement logic to determine if the scope is subnational
-            # For now, we'll assume it's always national
+            country_code = root.xpath("/*/cac:ContractingParty/cac:Party/cac:PostalAddress/cac:Country/cbc:IdentificationCode/text()", namespaces=namespaces)
+            scheme = f"{country_code[0]}-{default_scheme}" if country_code else default_scheme
+            
             bid["identifiers"].append({
                 "id": tender_reference[0],
-                "scheme": "NL-TENDERNL"  # Replace 'NL' with the appropriate country code
+                "scheme": scheme
             })
         
         result["bids"]["details"].append(bid)

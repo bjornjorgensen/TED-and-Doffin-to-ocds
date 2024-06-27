@@ -102,7 +102,10 @@ def merge_organization_contact_info(release_json, contact_info_data):
         existing_parties = release_json.setdefault("parties", [])
         
         for new_party in contact_info_data["parties"]:
-            existing_party = next((party for party in existing_parties if party["id"] == new_party["id"]), None)
+            if "id" not in new_party:
+                continue  # Skip parties without an ID
+
+            existing_party = next((party for party in existing_parties if party.get("id") == new_party["id"]), None)
             if existing_party:
                 # Update existing party
                 if "contactPoint" in new_party:
@@ -116,7 +119,9 @@ def merge_organization_contact_info(release_json, contact_info_data):
                 if "beneficialOwners" in new_party:
                     existing_beneficial_owners = existing_party.setdefault("beneficialOwners", [])
                     for new_ubo in new_party["beneficialOwners"]:
-                        existing_ubo = next((ubo for ubo in existing_beneficial_owners if ubo["id"] == new_ubo["id"]), None)
+                        if "id" not in new_ubo:
+                            continue  # Skip UBOs without an ID
+                        existing_ubo = next((ubo for ubo in existing_beneficial_owners if ubo.get("id") == new_ubo["id"]), None)
                         if existing_ubo:
                             existing_ubo.update(new_ubo)
                         else:
