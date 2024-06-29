@@ -20,7 +20,7 @@ from converters.BT_109 import parse_framework_duration_justification
 from converters.BT_111 import parse_framework_buyer_categories
 from converters.BT_113 import parse_framework_max_participants
 from converters.BT_115 import parse_gpa_coverage
-from converters.BT_13713 import parse_result_lot_identifier
+from converters.BT_13713 import parse_result_lot_identifier, merge_result_lot_identifier
 from converters.BT_13714 import parse_tender_lot_identifier
 from converters.BT_1375 import parse_group_lot_identifier
 from converters.BT_119 import parse_dps_termination
@@ -219,6 +219,16 @@ from converters.BT_94_Lot import parse_recurrence, merge_recurrence
 from converters.BT_95_Lot import parse_recurrence_description, merge_recurrence_description
 from converters.BT_97_Lot import parse_submission_language, merge_submission_language
 from converters.BT_98_Lot import parse_tender_validity_deadline, merge_tender_validity_deadline
+from converters.BT_99_Lot import parse_review_deadline_description, merge_review_deadline_description
+from converters.OPP_020_021_022_023_Contract import parse_essential_assets, merge_essential_assets
+from converters.OPP_031_Tender import parse_contract_conditions, merge_contract_conditions
+from converters.OPP_032_Tender import parse_revenues_allocation, merge_revenues_allocation
+from converters.OPP_034_Tender import parse_penalties_and_rewards, merge_penalties_and_rewards
+from converters.OPP_040_Procedure import parse_main_nature_sub_type, merge_main_nature_sub_type
+from converters.OPP_050_Organization import parse_buyers_group_lead_indicator, merge_buyers_group_lead_indicator
+from converters.OPP_051_Organization import parse_awarding_cpb_buyer_indicator, merge_awarding_cpb_buyer_indicator
+from converters.OPP_052_Organization import parse_acquiring_cpb_buyer_indicator, merge_acquiring_cpb_buyer_indicator
+from converters.OPP_080_Tender import parse_kilometers_public_transport, merge_kilometers_public_transport
 
 def configure_logging():
     logging.basicConfig(
@@ -410,17 +420,9 @@ def main(xml_path, ocid_prefix):
     
     # Merge Result Lot Identifier into the release JSON
     if result_lot_identifier:
-        existing_awards = release_json.setdefault("awards", [])
-        new_awards = result_lot_identifier["awards"]
-        
-        for new_award in new_awards:
-            existing_award = next((a for a in existing_awards if a["id"] == new_award["id"]), None)
-            if existing_award:
-                existing_award.setdefault("relatedLots", []).extend(
-                    lot for lot in new_award["relatedLots"] if lot not in existing_award.get("relatedLots", [])
-                )
-            else:
-                existing_awards.append(new_award)
+        merge_result_lot_identifier(release_json, result_lot_identifier)
+    else:
+        logger.warning("No Result Lot Identifier data found")
             
     # Parse the Tender Lot Identifier (BT-13714)
     tender_lot_identifier = parse_tender_lot_identifier(xml_content)
@@ -1577,8 +1579,12 @@ def main(xml_path, ocid_prefix):
     merge_activity_entity(release_json, activity_entity_data)
 
     # Parse and merge BT-6110-Contract
+    logger.info("Processing BT-6110-Contract: Contract EU Funds Details")
     contract_eu_funds_data = parse_contract_eu_funds_details(xml_content)
-    merge_contract_eu_funds_details(release_json, contract_eu_funds_data)
+    if contract_eu_funds_data:
+        merge_contract_eu_funds_details(release_json, contract_eu_funds_data)
+    else:
+        logger.warning("No Contract EU Funds data found")
 
     # Parse and merge BT-6140-Lot
     lot_eu_funds_data = parse_lot_eu_funds_details(xml_content)
@@ -1701,8 +1707,12 @@ def main(xml_path, ocid_prefix):
     merge_contract_title(release_json, contract_title_data)
 
     # Parse and merge BT-722-Contract EU Funds Programme
+    logger.info("Processing BT-722-Contract: EU Funds Programme")
     contract_eu_funds_data = parse_contract_eu_funds_programme(xml_content)
-    merge_contract_eu_funds_programme(release_json, contract_eu_funds_data)
+    if contract_eu_funds_data:
+        merge_contract_eu_funds_programme(release_json, contract_eu_funds_data)
+    else:
+        logger.warning("No Contract EU Funds Programme data found")
 
     # Parse and merge BT-7220-Lot EU Funds Programme
     lot_eu_funds_programme_data = parse_lot_eu_funds_programme(xml_content)
@@ -1741,8 +1751,12 @@ def main(xml_path, ocid_prefix):
     merge_award_criterion_name(release_json, award_criterion_name_data)
 
     # Parse and merge BT-735 CVD Contract Type
+    logger.info("Processing BT-735: CVD Contract Type")
     cvd_contract_type_data = parse_cvd_contract_type(xml_content)
-    merge_cvd_contract_type(release_json, cvd_contract_type_data)
+    if cvd_contract_type_data:
+        merge_cvd_contract_type(release_json, cvd_contract_type_data)
+    else:
+        logger.warning("No CVD Contract Type data found")
 
     # Parse and merge BT-736 Reserved Execution
     reserved_execution_data = parse_reserved_execution(xml_content)
@@ -1949,7 +1963,84 @@ def main(xml_path, ocid_prefix):
     logger.info("Processing BT-98-Lot: Tender Validity Deadline")
     validity_deadline_data = parse_tender_validity_deadline(xml_content)
     merge_tender_validity_deadline(release_json, validity_deadline_data)
-    
+
+    # Parse and merge BT-99-Lot Review Deadline Description
+    logger.info("Processing BT-99-Lot: Review Deadline Description")
+    review_deadline_data = parse_review_deadline_description(xml_content)
+    merge_review_deadline_description(release_json, review_deadline_data)
+
+    # Parse and merge OPP-020-021-022-023-Contract Essential Assets
+    logger.info("Processing OPP-020-021-022-023-Contract: Essential Assets")
+    essential_assets_data = parse_essential_assets(xml_content)
+    if essential_assets_data:
+        merge_essential_assets(release_json, essential_assets_data)
+    else:
+        logger.warning("No Essential Assets data found")
+
+    # Parse and merge OPP-031-Tender Contract Conditions
+    logger.info("Processing OPP-031-Tender: Contract Conditions")
+    contract_conditions_data = parse_contract_conditions(xml_content)
+    if contract_conditions_data:
+        merge_contract_conditions(release_json, contract_conditions_data)
+    else:
+        logger.warning("No Contract Conditions data found")
+
+    # Parse and merge OPP-032-Tender Revenues Allocation
+    logger.info("Processing OPP-032-Tender: Revenues Allocation")
+    revenues_allocation_data = parse_revenues_allocation(xml_content)
+    if revenues_allocation_data:
+        merge_revenues_allocation(release_json, revenues_allocation_data)
+    else:
+        logger.warning("No Revenues Allocation data found")
+
+    # Parse and merge OPP-034-Tender Penalties and Rewards
+    logger.info("Processing OPP-034-Tender: Penalties and Rewards")
+    penalties_and_rewards_data = parse_penalties_and_rewards(xml_content)
+    if penalties_and_rewards_data:
+        merge_penalties_and_rewards(release_json, penalties_and_rewards_data)
+    else:
+        logger.warning("No Penalties and Rewards data found")
+
+    # Parse and merge OPP-040-Procedure Main Nature - Sub Type
+    logger.info("Processing OPP-040-Procedure: Main Nature - Sub Type")
+    main_nature_sub_type_data = parse_main_nature_sub_type(xml_content)
+    if main_nature_sub_type_data:
+        merge_main_nature_sub_type(release_json, main_nature_sub_type_data)
+    else:
+        logger.warning("No Main Nature - Sub Type data found")
+
+    # Parse and merge OPP-050-Organization Buyers Group Lead Indicator
+    logger.info("Processing OPP-050-Organization: Buyers Group Lead Indicator")
+    buyers_group_lead_data = parse_buyers_group_lead_indicator(xml_content)
+    if buyers_group_lead_data:
+        merge_buyers_group_lead_indicator(release_json, buyers_group_lead_data)
+    else:
+        logger.warning("No Buyers Group Lead Indicator data found")
+
+    # Parse and merge OPP-051-Organization Awarding CPB Buyer Indicator
+    logger.info("Processing OPP-051-Organization: Awarding CPB Buyer Indicator")
+    awarding_cpb_buyer_data = parse_awarding_cpb_buyer_indicator(xml_content)
+    if awarding_cpb_buyer_data:
+        merge_awarding_cpb_buyer_indicator(release_json, awarding_cpb_buyer_data)
+    else:
+        logger.warning("No Awarding CPB Buyer Indicator data found")
+
+    # Parse and merge OPP-052-Organization Acquiring CPB Buyer Indicator
+    logger.info("Processing OPP-052-Organization: Acquiring CPB Buyer Indicator")
+    acquiring_cpb_buyer_data = parse_acquiring_cpb_buyer_indicator(xml_content)
+    if acquiring_cpb_buyer_data:
+        merge_acquiring_cpb_buyer_indicator(release_json, acquiring_cpb_buyer_data)
+    else:
+        logger.warning("No Acquiring CPB Buyer Indicator data found")
+
+    # Parse and merge OPP-080-Tender Kilometers Public Transport
+    logger.info("Processing OPP-080-Tender: Kilometers Public Transport")
+    kilometers_data = parse_kilometers_public_transport(xml_content)
+    if kilometers_data:
+        merge_kilometers_public_transport(release_json, kilometers_data)
+    else:
+        logger.warning("No Kilometers Public Transport data found")
+
     # Write the JSON output to a file
     with io.open('output.json', 'w', encoding='utf-8') as f:
         json.dump(release_json, f, ensure_ascii=False, indent=4)
