@@ -218,6 +218,7 @@ from converters.BT_93_Lot import parse_electronic_payment, merge_electronic_paym
 from converters.BT_94_Lot import parse_recurrence, merge_recurrence
 from converters.BT_95_Lot import parse_recurrence_description, merge_recurrence_description
 from converters.BT_97_Lot import parse_submission_language, merge_submission_language
+from converters.BT_98_Lot import parse_tender_validity_deadline, merge_tender_validity_deadline
 
 def configure_logging():
     logging.basicConfig(
@@ -1944,6 +1945,11 @@ def main(xml_path, ocid_prefix):
     submission_language_data = parse_submission_language(xml_content)
     merge_submission_language(release_json, submission_language_data)
 
+    # Parse and merge BT-98-Lot Tender Validity Deadline
+    logger.info("Processing BT-98-Lot: Tender Validity Deadline")
+    validity_deadline_data = parse_tender_validity_deadline(xml_content)
+    merge_tender_validity_deadline(release_json, validity_deadline_data)
+    
     # Write the JSON output to a file
     with io.open('output.json', 'w', encoding='utf-8') as f:
         json.dump(release_json, f, ensure_ascii=False, indent=4)

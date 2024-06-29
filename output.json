@@ -4,9 +4,23 @@
     "tender": {
         "status": "",
         "id": null,
-        "lots": [],
-        "lotGroups": [],
-        "items": []
+        "lots": [
+            {
+                "id": "LOT-0001",
+                "submissionTerms": {
+                    "bidValidityPeriod": {
+                        "durationInDays": 120
+                    }
+                }
+            }
+        ],
+        "items": [
+            {
+                "id": "1",
+                "relatedLot": "LOT-0001"
+            }
+        ],
+        "lotGroups": []
     },
     "parties": [],
     "awards": [],
