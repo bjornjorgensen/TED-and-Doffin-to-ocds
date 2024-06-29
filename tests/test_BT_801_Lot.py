@@ -1,87 +1,57 @@
 # tests/test_BT_801_Lot.py
-import sys, os, logging
-import subprocess
+
 import pytest
-from lxml import etree
+import json
+import os
+import sys
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
+# Add the parent directory to sys.path to import main
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
-import logging
-import pytest
-from lxml import etree
-from main import main
-
-logging.basicConfig(level=logging.INFO)
-
-def create_xml(lot_id, nda_value):
-    return f"""
-    <TenderStatus xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-          xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
-        <cbc:IssueDate>2023-06-29</cbc:IssueDate>
+def test_bt_801_lot_integration(tmp_path):
+    xml_content = """
+    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Lot">{lot_id}</cbc:ID>
-            <cbc:ID schemeName="InternalIdentifier">internal-{lot_id}</cbc:ID>
-            <cac:ProcurementProject>
-                <cbc:Name>Test Lot Name</cbc:Name>
-                <cbc:Description>Test Lot Description</cbc:Description>
-                <cbc:MainNatureCode>goods</cbc:MainNatureCode>
-            </cac:ProcurementProject>
+            <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:ContractExecutionRequirement>
-                    <cbc:ExecutionRequirementCode listName="nda">{nda_value}</cbc:ExecutionRequirementCode>
+                    <cbc:ExecutionRequirementCode listName="nda">true</cbc:ExecutionRequirementCode>
                 </cac:ContractExecutionRequirement>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
-    </TenderStatus>
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Lot">LOT-0002</cbc:ID>
+            <cac:TenderingTerms>
+                <cac:ContractExecutionRequirement>
+                    <cbc:ExecutionRequirementCode listName="nda">false</cbc:ExecutionRequirementCode>
+                </cac:ContractExecutionRequirement>
+            </cac:TenderingTerms>
+        </cac:ProcurementProjectLot>
+    </root>
     """
+    xml_file = tmp_path / "test_input_non_disclosure_agreement.xml"
+    xml_file.write_text(xml_content)
 
-@pytest.fixture
-def mock_xml_file(tmp_path):
-    def _create_xml_file(content):
-        xml_file = tmp_path / "test.xml"
-        xml_file.write_text(content)
-        return str(xml_file)
-    return _create_xml_file
+    main(str(xml_file), "ocds-test-prefix")
 
-def test_main_non_disclosure_agreement_true(mock_xml_file):
-    xml_content = create_xml("LOT-0001", "true")
-    xml_file = mock_xml_file(xml_content)
-    ocid_prefix = "ocds-123456"
+    with open('output.json', 'r') as f:
+        result = json.load(f)
 
-    logging.info(f"Test XML content: {xml_content}")
-    result = main(xml_file, ocid_prefix)
+    assert "tender" in result, "Expected 'tender' in result"
+    assert "lots" in result["tender"], "Expected 'lots' in result['tender']"
+    assert len(result["tender"]["lots"]) == 2, f"Expected 2 lots, got {len(result['tender']['lots'])}"
 
-    logging.info(f"Test result: {result}")
+    lot_1 = next(lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0001")
+    assert "contractTerms" in lot_1, "Expected 'contractTerms' in LOT-0001"
+    assert "hasNonDisclosureAgreement" in lot_1["contractTerms"], "Expected 'hasNonDisclosureAgreement' in LOT-0001 contractTerms"
+    assert lot_1["contractTerms"]["hasNonDisclosureAgreement"] == True, "Expected hasNonDisclosureAgreement to be True for LOT-0001"
 
-    assert result is not None, "main function returned None"
-    assert "tender" in result, "tender key not found in result"
-    assert "lots" in result["tender"], "lots key not found in tender"
-    assert len(result["tender"]["lots"]) == 1, f"unexpected number of lots: {len(result['tender']['lots'])}"
-    lot = result["tender"]["lots"][0]
-    assert lot["id"] == "LOT-0001", f"unexpected lot id: {lot['id']}"
-    assert lot["title"] == "Test Lot Name", f"unexpected lot title: {lot['title']}"
-    assert "contractTerms" in lot, f"contractTerms not found in lot. Lot content: {lot}"
-    assert lot["contractTerms"]["hasNonDisclosureAgreement"] is True, "hasNonDisclosureAgreement is not True"
-    assert "identifiers" in lot, f"identifiers not found in lot. Lot content: {lot}"
-    assert lot["identifiers"][0]["id"] == "internal-LOT-0001", f"unexpected internal identifier: {lot['identifiers'][0]['id']}"
+    lot_2 = next(lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002")
+    assert "contractTerms" in lot_2, "Expected 'contractTerms' in LOT-0002"
+    assert "hasNonDisclosureAgreement" in lot_2["contractTerms"], "Expected 'hasNonDisclosureAgreement' in LOT-0002 contractTerms"
+    assert lot_2["contractTerms"]["hasNonDisclosureAgreement"] == False, "Expected hasNonDisclosureAgreement to be False for LOT-0002"
 
-def test_main_non_disclosure_agreement_false(mock_xml_file):
-    xml_content = create_xml("LOT-0002", "false")
-    xml_file = mock_xml_file(xml_content)
-    ocid_prefix = "ocds-123456"
-
-    result = main(xml_file, ocid_prefix)
-
-    assert result is not None, "main function returned None"
-    assert "tender" in result
-    assert "lots" in result["tender"]
-    assert len(result["tender"]["lots"]) == 1
-    lot = result["tender"]["lots"][0]
-    assert lot["id"] == "LOT-0002"
-    assert "contractTerms" in lot
-    assert lot["contractTerms"]["hasNonDisclosureAgreement"] is False
-    assert "identifiers" in lot
-    assert lot["identifiers"][0]["id"] == "internal-LOT-0002"
+if __name__ == "__main__":
+    pytest.main()

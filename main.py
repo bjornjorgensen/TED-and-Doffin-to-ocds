@@ -8,38 +8,38 @@ from converters.Common_operations import NoticeProcessor
 from converters.BT_01 import parse_legal_basis
 from converters.BT_03 import parse_form_type
 from converters.BT_04 import parse_procedure_identifier
-from converters.BT_05 import parse_notice_dispatch_date_time
-from converters.BT_06 import parse_procurement_project_lot
+from converters.BT_05_notice import parse_notice_dispatch_datetime, merge_notice_dispatch_datetime
+from converters.BT_06_Lot import parse_strategic_procurement, merge_strategic_procurement
 from converters.BT_09 import parse_xml_to_json
 from converters.BT_10 import parse_contract_xml
 from converters.BT_11 import parse_buyer_legal_type
 from converters.BT_88 import parse_procedure_features
 from converters.BT_105 import parse_procurement_procedure_type
 from converters.BT_106 import parse_accelerated_procedure
-from converters.BT_109 import parse_framework_duration_justification
-from converters.BT_111 import parse_framework_buyer_categories
+from converters.BT_109_Lot import parse_framework_duration_justification, merge_framework_duration_justification
+from converters.BT_111_Lot import parse_framework_buyer_categories, merge_framework_buyer_categories
 from converters.BT_113 import parse_framework_max_participants
-from converters.BT_115 import parse_gpa_coverage
+from converters.BT_115_GPA_Coverage import parse_gpa_coverage, merge_gpa_coverage
 from converters.BT_13713 import parse_result_lot_identifier, merge_result_lot_identifier
-from converters.BT_13714 import parse_tender_lot_identifier
-from converters.BT_1375 import parse_group_lot_identifier
+from converters.BT_13714_Tender import parse_tender_lot_identifier, merge_tender_lot_identifier
+from converters.BT_1375_Procedure import parse_group_lot_identifier, merge_group_lot_identifier
 from converters.BT_119 import parse_dps_termination
 from converters.BT_120 import parse_no_negotiation_necessary
 from converters.BT_122 import parse_electronic_auction_description
 from converters.BT_123 import parse_electronic_auction_url
 from converters.BT_124 import parse_tool_atypical_url
 from converters.BT_125 import parse_previous_planning_identifiers
-from converters.BT_1252 import parse_direct_award_justification
+from converters.BT_1252_Procedure import parse_direct_award_justification, merge_direct_award_justification
 from converters.BT_127 import parse_future_notice_date
 from converters.BT_13 import parse_additional_info_deadline
 from converters.BT_130_131_1311 import parse_tender_deadlines_invitations
 from converters.BT_132 import parse_public_opening_date
-from converters.BT_133 import parse_public_opening_place
+from converters.BT_133_Lot import parse_public_opening_place, merge_public_opening_place
 from converters.BT_134 import parse_public_opening_description
 from converters.BT_135 import parse_direct_award_justification_text
 from converters.BT_1351 import parse_procedure_accelerated_justification
 from converters.BT_136 import parse_direct_award_justification_code
-from converters.BT_137 import parse_purpose_lot_identifier
+from converters.BT_137_Purpose_Lot_Identifier import parse_purpose_lot_identifier, merge_purpose_lot_identifier
 from converters.BT_14 import parse_documents_restricted
 from converters.BT_140 import parse_change_reason_code_and_description
 from converters.BT_142 import parse_winner_chosen
@@ -229,6 +229,8 @@ from converters.OPP_050_Organization import parse_buyers_group_lead_indicator, m
 from converters.OPP_051_Organization import parse_awarding_cpb_buyer_indicator, merge_awarding_cpb_buyer_indicator
 from converters.OPP_052_Organization import parse_acquiring_cpb_buyer_indicator, merge_acquiring_cpb_buyer_indicator
 from converters.OPP_080_Tender import parse_kilometers_public_transport, merge_kilometers_public_transport
+from converters.OPP_090_Procedure import parse_previous_notice_identifier, merge_previous_notice_identifier
+from converters.OPT_030_Procedure_SProvider import parse_provided_service_type, merge_provided_service_type
 
 def configure_logging():
     logging.basicConfig(
@@ -278,21 +280,21 @@ def main(xml_path, ocid_prefix):
         if procedure_identifier.get("tender"):
             release_json.setdefault("tender", {}).update(procedure_identifier["tender"])
 
-    # Parse the notice dispatch date and time
-    notice_dispatch_date_time = parse_notice_dispatch_date_time(xml_content)
-    
-    # Merge notice dispatch date and time into the release JSON
-    if notice_dispatch_date_time:
-        release_json.setdefault('date', notice_dispatch_date_time['date'])
+    # Parse and merge BT-05-notice Notice Dispatch Date and Time
+    logger.info("Processing BT-05-notice: Notice Dispatch Date and Time")
+    dispatch_datetime_data = parse_notice_dispatch_datetime(xml_content)
+    if dispatch_datetime_data:
+        merge_notice_dispatch_datetime(release_json, dispatch_datetime_data)
+    else:
+        logger.warning("No Notice Dispatch Date and Time data found")
 
-    # Parse the procurement project lot
-    procurement_project_lot = parse_procurement_project_lot(xml_content)
-    
-    # Merge procurement project lot into the release JSON
-    if procurement_project_lot:
-        valid_lots = [lot for lot in procurement_project_lot.get("lots", []) if lot.get("hasSustainability", False)]
-        if valid_lots:
-            release_json.setdefault("tender", {}).setdefault("lots", []).extend(valid_lots)
+    # Parse and merge BT-06-Lot Strategic Procurement
+    logger.info("Processing BT-06-Lot: Strategic Procurement")
+    strategic_procurement_data = parse_strategic_procurement(xml_content)
+    if strategic_procurement_data:
+        merge_strategic_procurement(release_json, strategic_procurement_data)
+    else:
+        logger.warning("No Strategic Procurement data found")
     
     # Parse the cross-border law information
     cross_border_law_info = parse_xml_to_json(xml_content)
@@ -351,35 +353,21 @@ def main(xml_path, ocid_prefix):
     if accelerated_procedure:
         release_json.setdefault("tender", {}).update(accelerated_procedure["tender"])
 
-    # Parse the framework duration justification (BT-109)
-    framework_duration_justification = parse_framework_duration_justification(xml_content)
-    
-    # Merge framework duration justification into the release JSON
-    if framework_duration_justification:
-        existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-        new_lots = framework_duration_justification["tender"]["lots"]
-        
-        for new_lot in new_lots:
-            existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-            if existing_lot:
-                existing_lot.setdefault("techniques", {}).setdefault("frameworkAgreement", {}).update(new_lot["techniques"]["frameworkAgreement"])
-            else:
-                existing_lots.append(new_lot)    
+    # Parse and merge BT-109-Lot Framework Duration Justification
+    logger.info("Processing BT-109-Lot: Framework Duration Justification")
+    framework_duration_data = parse_framework_duration_justification(xml_content)
+    if framework_duration_data:
+        merge_framework_duration_justification(release_json, framework_duration_data)
+    else:
+        logger.warning("No Framework Duration Justification data found")
 
-    # Parse the framework buyer categories (BT-111)
-    framework_buyer_categories = parse_framework_buyer_categories(xml_content)
-    
-    # Merge framework buyer categories into the release JSON
-    if framework_buyer_categories:
-        existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-        new_lots = framework_buyer_categories["tender"]["lots"]
-        
-        for new_lot in new_lots:
-            existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-            if existing_lot:
-                existing_lot.setdefault("techniques", {}).setdefault("frameworkAgreement", {}).update(new_lot["techniques"]["frameworkAgreement"])
-            else:
-                existing_lots.append(new_lot)     
+    # Parse and merge BT-111-Lot Framework Buyer Categories
+    logger.info("Processing BT-111-Lot: Framework Buyer Categories")
+    framework_buyer_categories_data = parse_framework_buyer_categories(xml_content)
+    if framework_buyer_categories_data:
+        merge_framework_buyer_categories(release_json, framework_buyer_categories_data)
+    else:
+        logger.warning("No Framework Buyer Categories data found")
 
     # Parse the framework maximum participants number (BT-113)
     framework_max_participants = parse_framework_max_participants(xml_content)
@@ -396,24 +384,13 @@ def main(xml_path, ocid_prefix):
             else:
                 existing_lots.append(new_lot)                   
 
-    # Parse the GPA coverage (BT-115)
-    gpa_coverage = parse_gpa_coverage(xml_content)
-    
-    # Merge GPA coverage into the release JSON
-    if gpa_coverage:
-        if "lots" in gpa_coverage["tender"]:
-            existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-            new_lots = gpa_coverage["tender"]["lots"]
-            
-            for new_lot in new_lots:
-                existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-                if existing_lot:
-                    existing_lot.setdefault("coveredBy", []).extend(new_lot["coveredBy"])
-                else:
-                    existing_lots.append(new_lot)
-        
-        if "coveredBy" in gpa_coverage["tender"]:
-            release_json.setdefault("tender", {}).setdefault("coveredBy", []).extend(gpa_coverage["tender"]["coveredBy"])
+    # Parse and merge BT-115 GPA Coverage
+    logger.info("Processing BT-115: GPA Coverage")
+    gpa_coverage_data = parse_gpa_coverage(xml_content)
+    if gpa_coverage_data:
+        merge_gpa_coverage(release_json, gpa_coverage_data)
+    else:
+        logger.warning("No GPA Coverage data found")
 
     # Parse the Result Lot Identifier (BT-13713)
     result_lot_identifier = parse_result_lot_identifier(xml_content)
@@ -424,42 +401,21 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Result Lot Identifier data found")
             
-    # Parse the Tender Lot Identifier (BT-13714)
-    tender_lot_identifier = parse_tender_lot_identifier(xml_content)
-    
-    # Merge Tender Lot Identifier into the release JSON
-    if tender_lot_identifier:
-        existing_bids = release_json.setdefault("bids", {}).setdefault("details", [])
-        new_bids = tender_lot_identifier["bids"]["details"]
-        
-        for new_bid in new_bids:
-            existing_bid = next((b for b in existing_bids if b["id"] == new_bid["id"]), None)
-            if existing_bid:
-                existing_bid.setdefault("relatedLots", []).extend(
-                    lot for lot in new_bid["relatedLots"] if lot not in existing_bid.get("relatedLots", [])
-                )
-            else:
-                existing_bids.append(new_bid)
+    # Parse and merge BT-13714-Tender Tender Lot Identifier
+    logger.info("Processing BT-13714-Tender: Tender Lot Identifier")
+    tender_lot_data = parse_tender_lot_identifier(xml_content)
+    if tender_lot_data:
+        merge_tender_lot_identifier(release_json, tender_lot_data)
+    else:
+        logger.warning("No Tender Lot Identifier data found")
 
-    # Parse the Group Lot Identifier (BT-1375)
-    try:
-        group_lot_identifier = parse_group_lot_identifier(xml_content)
-        
-        # Merge Group Lot Identifier into the release JSON
-        if group_lot_identifier:
-            existing_lot_groups = release_json.setdefault("tender", {}).setdefault("lotGroups", [])
-            new_lot_groups = group_lot_identifier["tender"]["lotGroups"]
-            
-            for new_group in new_lot_groups:
-                existing_group = next((g for g in existing_lot_groups if g["id"] == new_group["id"]), None)
-                if existing_group:
-                    existing_group.setdefault("relatedLots", []).extend(
-                        lot for lot in new_group["relatedLots"] if lot not in existing_group.get("relatedLots", [])
-                    )
-                else:
-                    existing_lot_groups.append(new_group)
-    except Exception as e:
-        print(f"Error parsing Group Lot Identifier: {str(e)}")
+    # Parse and merge BT-1375-Procedure Group Lot Identifier
+    logger.info("Processing BT-1375-Procedure: Group Lot Identifier")
+    group_lot_data = parse_group_lot_identifier(xml_content)
+    if group_lot_data:
+        merge_group_lot_identifier(release_json, group_lot_data)
+    else:
+        logger.warning("No Group Lot Identifier data found")
 
     # Parse the Dynamic Purchasing System Termination (BT-119)
     try:
@@ -578,25 +534,13 @@ def main(xml_path, ocid_prefix):
         print(f"Error parsing Previous Planning Identifiers: {str(e)}")
 
 
-    # Parse the Direct Award Justification Previous Procedure Identifier (BT-1252)
-    try:
-        direct_award_justification = parse_direct_award_justification(xml_content)
-        
-        # Merge Direct Award Justification into the release JSON
-        if direct_award_justification:
-            existing_related_processes = release_json.setdefault("relatedProcesses", [])
-            new_related_processes = direct_award_justification["relatedProcesses"]
-            
-            # Find the highest existing id
-            max_id = max([int(p["id"]) for p in existing_related_processes]) if existing_related_processes else 0
-            
-            for new_process in new_related_processes:
-                max_id += 1
-                new_process["id"] = str(max_id)
-                existing_related_processes.append(new_process)
-
-    except Exception as e:
-        print(f"Error parsing Direct Award Justification: {str(e)}")
+    # Parse and merge BT-1252-Procedure Direct Award Justification
+    logger.info("Processing BT-1252-Procedure: Direct Award Justification")
+    direct_award_data = parse_direct_award_justification(xml_content)
+    if direct_award_data:
+        merge_direct_award_justification(release_json, direct_award_data)
+    else:
+        logger.warning("No Direct Award Justification data found")
 
     # Parse the Future Notice Date (BT-127)
     try:
@@ -676,24 +620,13 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         print(f"Error parsing Public Opening Date: {str(e)}")
 
-    # Parse the Public Opening Place (BT-133)
-    try:
-        public_opening_place = parse_public_opening_place(xml_content)
-        
-        # Merge Public Opening Place into the release JSON
-        if public_opening_place and "lots" in public_opening_place["tender"]:
-            existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-            new_lots = public_opening_place["tender"]["lots"]
-            
-            for new_lot in new_lots:
-                existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-                if existing_lot:
-                    existing_lot.setdefault("bidOpening", {}).setdefault("location", {}).update(new_lot["bidOpening"]["location"])
-                else:
-                    existing_lots.append(new_lot)
-
-    except Exception as e:
-        print(f"Error parsing Public Opening Place: {str(e)}")
+    # Parse and merge BT-133-Lot Public Opening Place
+    logger.info("Processing BT-133-Lot: Public Opening Place")
+    public_opening_place_data = parse_public_opening_place(xml_content)
+    if public_opening_place_data:
+        merge_public_opening_place(release_json, public_opening_place_data)
+    else:
+        logger.warning("No Public Opening Place data found")
 
     # Parse the Public Opening Description (BT-134)
     try:
@@ -752,36 +685,13 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         print(f"Error parsing Direct Award Justification Code: {str(e)}")
 
-    # Parse the Purpose Lot Identifier (BT-137)
-    try:
-        purpose_lot_identifier = parse_purpose_lot_identifier(xml_content)
-        
-        # Merge Purpose Lot Identifier into the release JSON
-        if purpose_lot_identifier:
-            tender = release_json.setdefault("tender", {})
-            
-            # Handle lots
-            if "lots" in purpose_lot_identifier["tender"]:
-                existing_lots = tender.setdefault("lots", [])
-                new_lots = purpose_lot_identifier["tender"]["lots"]
-                for new_lot in new_lots:
-                    if not any(existing_lot["id"] == new_lot["id"] for existing_lot in existing_lots):
-                        existing_lots.append(new_lot)
-            
-            # Handle lot groups
-            if "lotGroups" in purpose_lot_identifier["tender"]:
-                existing_lot_groups = tender.setdefault("lotGroups", [])
-                new_lot_groups = purpose_lot_identifier["tender"]["lotGroups"]
-                for new_lot_group in new_lot_groups:
-                    if not any(existing_group["id"] == new_lot_group["id"] for existing_group in existing_lot_groups):
-                        existing_lot_groups.append(new_lot_group)
-            
-            # Handle parts
-            if "id" in purpose_lot_identifier["tender"]:
-                tender["id"] = purpose_lot_identifier["tender"]["id"]
-
-    except Exception as e:
-        print(f"Error parsing Purpose Lot Identifier: {str(e)}")
+    # Parse and merge BT-137 Purpose Lot Identifier
+    logger.info("Processing BT-137: Purpose Lot Identifier")
+    purpose_lot_data = parse_purpose_lot_identifier(xml_content)
+    if purpose_lot_data:
+        merge_purpose_lot_identifier(release_json, purpose_lot_data)
+    else:
+        logger.warning("No Purpose Lot Identifier data found")
 
     # Parse the Documents Restricted (BT-14)
     try:
@@ -1917,7 +1827,10 @@ def main(xml_path, ocid_prefix):
     # Parse and merge BT-801-Lot Non Disclosure Agreement
     logger.info("Processing BT-801-Lot: Non Disclosure Agreement")
     nda_data = parse_non_disclosure_agreement(xml_content)
-    merge_non_disclosure_agreement(release_json, nda_data)
+    if nda_data:
+        merge_non_disclosure_agreement(release_json, nda_data)
+    else:
+        logger.warning("No Non Disclosure Agreement data found")
 
     # Parse and merge BT-802-Lot Non Disclosure Agreement Description
     logger.info("Processing BT-802-Lot: Non Disclosure Agreement Description")
@@ -2040,6 +1953,22 @@ def main(xml_path, ocid_prefix):
         merge_kilometers_public_transport(release_json, kilometers_data)
     else:
         logger.warning("No Kilometers Public Transport data found")
+
+    # Parse and merge OPP-090-Procedure Previous Notice Identifier
+    logger.info("Processing OPP-090-Procedure: Previous Notice Identifier")
+    previous_notice_data = parse_previous_notice_identifier(xml_content)
+    if previous_notice_data:
+        merge_previous_notice_identifier(release_json, previous_notice_data)
+    else:
+        logger.warning("No Previous Notice Identifier data found")
+
+    # Parse and merge OPT-030-Procedure-SProvider Provided Service Type
+    logger.info("Processing OPT-030-Procedure-SProvider: Provided Service Type")
+    service_type_data = parse_provided_service_type(xml_content)
+    if service_type_data:
+        merge_provided_service_type(release_json, service_type_data)
+    else:
+        logger.warning("No Provided Service Type data found")
 
     # Write the JSON output to a file
     with io.open('output.json', 'w', encoding='utf-8') as f:

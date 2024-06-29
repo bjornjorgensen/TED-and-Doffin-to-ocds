@@ -1,11 +1,11 @@
-# converters/BT_801_Lot.py
+# converters/BT_111_Lot.py
 
 from lxml import etree
 import logging
 
 logger = logging.getLogger(__name__)
 
-def parse_non_disclosure_agreement(xml_content):
+def parse_framework_buyer_categories(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
@@ -17,31 +17,33 @@ def parse_non_disclosure_agreement(xml_content):
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        nda_requirement = lot.xpath(".//cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='nda']/cbc:ExecutionRequirementCode/text()", namespaces=namespaces)
+        buyer_categories = lot.xpath(".//cac:TenderingProcess/cac:FrameworkAgreement/cac:SubsequentProcessTenderRequirement[cbc:Name/text()='buyer-categories']/cbc:Description/text()", namespaces=namespaces)
 
-        if nda_requirement:
+        if buyer_categories:
             lot_data = {
                 "id": lot_id,
-                "contractTerms": {
-                    "hasNonDisclosureAgreement": nda_requirement[0].lower() == 'true'
+                "techniques": {
+                    "frameworkAgreement": {
+                        "buyerCategories": buyer_categories[0]
+                    }
                 }
             }
             result["tender"]["lots"].append(lot_data)
 
     return result if result["tender"]["lots"] else None
 
-def merge_non_disclosure_agreement(release_json, nda_data):
-    if not nda_data:
-        logger.warning("No NDA data to merge")
+def merge_framework_buyer_categories(release_json, framework_buyer_categories_data):
+    if not framework_buyer_categories_data:
+        logger.warning("No Framework Buyer Categories data to merge")
         return
 
     existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
     
-    for new_lot in nda_data["tender"]["lots"]:
+    for new_lot in framework_buyer_categories_data["tender"]["lots"]:
         existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
         if existing_lot:
-            existing_lot.setdefault("contractTerms", {}).update(new_lot["contractTerms"])
+            existing_lot.setdefault("techniques", {}).setdefault("frameworkAgreement", {}).update(new_lot["techniques"]["frameworkAgreement"])
         else:
             existing_lots.append(new_lot)
 
-    logger.info(f"Merged Non Disclosure Agreement data for {len(nda_data['tender']['lots'])} lots")
+    logger.info(f"Merged Framework Buyer Categories data for {len(framework_buyer_categories_data['tender']['lots'])} lots")
