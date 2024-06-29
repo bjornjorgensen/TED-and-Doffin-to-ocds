@@ -20,8 +20,8 @@ class NoticeProcessor:
         release = {}
         release['id'] = notice_id
         release['initiationType'] = 'tender'
-
         # Determine if this is the first publication or a follow-up notice
+        """
         is_first_publication = self.is_first_publication(tree)
         is_can_for_framework = self.is_can_for_framework(tree)
         is_pin_only = self.is_pin_only(tree)
@@ -52,7 +52,7 @@ class NoticeProcessor:
         self.add_awards(tree, release)
         self.add_contracts(tree, release)
         self.cleanup_empty_fields(release)
-
+"""
         return json.dumps(release, indent=4)
 
     def cleanup_empty_fields(self, obj):
@@ -320,13 +320,40 @@ class NoticeProcessor:
         for lot in project_lots:
             lot_id = lot.xpath('string(cbc:ID)', namespaces={
                 'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'})
-            get_or_add_lot(lot_id)
+            lot_obj = get_or_add_lot(lot_id)
+
+            # Parse BT-801 Non-Disclosure Agreement
+            nda_value = lot.xpath('string(cac:TenderingTerms/cac:ContractExecutionRequirement/cbc:ExecutionRequirementCode[@listName="nda"])',
+                                namespaces={
+                                    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+                                    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
+                                })
+            if nda_value:
+                lot_obj.setdefault('contractTerms', {})['hasNonDisclosureAgreement'] = nda_value.lower() == 'true'
 
         # Get the lot group for a ProcurementProjectLot
         for lot in project_lots:
-            lot_group_id = lot.xpath('string(cbc:ID)', namespaces={
+            lot_id = lot.xpath('string(cbc:ID[@schemeName="Lot"])', namespaces={
                 'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'})
-            get_or_add_lot_group(lot_group_id)
+            lot_obj = get_or_add_lot(lot_id)
+
+            # Parse BT-801 Non-Disclosure Agreement
+            nda_value = lot.xpath('string(cac:TenderingTerms/cac:ContractExecutionRequirement/cbc:ExecutionRequirementCode[@listName="nda"])',
+                                namespaces={
+                                    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+                                    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
+                                })
+            if nda_value:
+                lot_obj.setdefault('contractTerms', {})['hasNonDisclosureAgreement'] = nda_value.lower() == 'true'
+
+            # Add identifiers
+            internal_id = lot.xpath('string(cbc:ID[@schemeName="InternalIdentifier"])', namespaces={
+                'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'})
+            if internal_id:
+                lot_obj.setdefault('identifiers', []).append({
+                    'scheme': 'InternalIdentifier',
+                    'id': internal_id
+                })
 
         # Get the item for a ProcurementProjectLot
         for lot in project_lots:

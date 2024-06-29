@@ -3,6 +3,7 @@ import json, io
 import uuid
 from datetime import datetime
 from lxml import etree
+import logging
 from converters.Common_operations import NoticeProcessor
 from converters.BT_01 import parse_legal_basis
 from converters.BT_03 import parse_form_type
@@ -62,9 +63,9 @@ from converters.BT_191 import parse_country_origin
 from converters.BT_193 import parse_tender_variant
 from converters.BT_195 import parse_unpublished_identifier
 from converters.BT_21 import parse_lot_lotgroup_part_and_procedure_title
-from converters.BT_22 import parse_internal_identifiers
-from converters.BT_23 import parse_main_nature
-from converters.BT_24 import parse_description
+from converters.BT_22 import parse_internal_identifiers, merge_internal_identifiers
+from converters.BT_23 import parse_main_nature, merge_main_nature
+from converters.BT_24 import parse_description, merge_description
 from converters.BT_25 import parse_quantity, merge_quantity
 from converters.BT_26 import parse_classifications, merge_classifications
 from converters.BT_27 import parse_estimated_value, merge_estimated_value
@@ -208,11 +209,31 @@ from converters.BT_776_Lot import parse_procurement_innovation, merge_procuremen
 from converters.BT_777_Lot import parse_strategic_procurement_description, merge_strategic_procurement_description
 from converters.BT_78_Lot import parse_security_clearance_deadline, merge_security_clearance_deadline
 from converters.BT_79_Lot import parse_performing_staff_qualification, merge_performing_staff_qualification
+from converters.BT_801_Lot import parse_non_disclosure_agreement, merge_non_disclosure_agreement
+from converters.BT_802_Lot import parse_non_disclosure_agreement_description, merge_non_disclosure_agreement_description
+from converters.BT_805_Lot import parse_green_procurement_criteria, merge_green_procurement_criteria
+from converters.BT_88_Procedure import parse_procedure_features, merge_procedure_features
+from converters.BT_92_Lot import parse_electronic_ordering, merge_electronic_ordering
+from converters.BT_93_Lot import parse_electronic_payment, merge_electronic_payment
+from converters.BT_94_Lot import parse_recurrence, merge_recurrence
+from converters.BT_95_Lot import parse_recurrence_description, merge_recurrence_description
+from converters.BT_97_Lot import parse_submission_language, merge_submission_language
+
+def configure_logging():
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S'
+    )
 
 def main(xml_path, ocid_prefix):
     # Read the XML content from the file
     with open(xml_path, 'rb') as xml_file:
         xml_content = xml_file.read()
+
+    configure_logging()
+    logger = logging.getLogger(__name__)
+    logger.info(f"Starting XML to JSON conversion for file: {xml_path}")
 
     # Initialize NoticeProcessor
     notice_processor = NoticeProcessor(ocid_prefix)
@@ -1241,83 +1262,21 @@ def main(xml_path, ocid_prefix):
         if "title" in titles["tender"]:
             release_json.setdefault("tender", {})["title"] = titles["tender"]["title"]
 
-    # Parse the internal identifiers (BT-22)
-    internal_identifiers = parse_internal_identifiers(xml_content)
-    # Merge internal identifiers into the release JSON
-    if internal_identifiers and "tender" in internal_identifiers:
-        # Merge lots
-        if internal_identifiers["tender"]["lots"]:
-            existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-            for new_lot in internal_identifiers["tender"]["lots"]:
-                existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-                if existing_lot:
-                    existing_lot.setdefault("identifiers", []).extend(new_lot["identifiers"])
-                else:
-                    existing_lots.append(new_lot)
-    
-    # Merge lot groups
-    if internal_identifiers["tender"]["lotGroups"]:
-        existing_lotgroups = release_json.setdefault("tender", {}).setdefault("lotGroups", [])
-        for new_lotgroup in internal_identifiers["tender"]["lotGroups"]:
-            existing_lotgroup = next((lotgroup for lotgroup in existing_lotgroups if lotgroup["id"] == new_lotgroup["id"]), None)
-            if existing_lotgroup:
-                existing_lotgroup.setdefault("identifiers", []).extend(new_lotgroup["identifiers"])
-            else:
-                existing_lotgroups.append(new_lotgroup)
-    
-    # Merge tender identifiers (Part and Procedure)
-    if internal_identifiers["tender"]["identifiers"]:
-        existing_identifiers = release_json.setdefault("tender", {}).setdefault("identifiers", [])
-        for new_identifier in internal_identifiers["tender"]["identifiers"]:
-            if new_identifier not in existing_identifiers:
-                existing_identifiers.append(new_identifier)
+    # Parse and merge BT-22 Internal Identifiers
+    logger.info("Processing BT-22: Internal Identifiers")
+    internal_identifiers_data = parse_internal_identifiers(xml_content)
+    merge_internal_identifiers(release_json, internal_identifiers_data)
 
 
-    # Parse the main nature (BT-23)
-    main_nature = parse_main_nature(xml_content)
-    # Merge main nature into the release JSON
-    if main_nature and "tender" in main_nature:
-        # Merge lots
-        if main_nature["tender"]["lots"]:
-            existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-            for new_lot in main_nature["tender"]["lots"]:
-                existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-                if existing_lot:
-                    existing_lot["mainProcurementCategory"] = new_lot["mainProcurementCategory"]
-                else:
-                    existing_lots.append(new_lot)
-    
-    # Merge tender mainProcurementCategory (Part and Procedure)
-    if "mainProcurementCategory" in main_nature["tender"]:
-        release_json.setdefault("tender", {})["mainProcurementCategory"] = main_nature["tender"]["mainProcurementCategory"]
+    # Parse and merge BT-23 Main Nature
+    logger.info("Processing BT-23: Main Nature")
+    main_nature_data = parse_main_nature(xml_content)
+    merge_main_nature(release_json, main_nature_data)
 
-    # Parse the description (BT-24)
-    description = parse_description(xml_content)
-    # Merge description into the release JSON
-    if description and "tender" in description:
-        # Merge lots
-        if description["tender"]["lots"]:
-            existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-            for new_lot in description["tender"]["lots"]:
-                existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-                if existing_lot:
-                    existing_lot["description"] = new_lot["description"]
-                else:
-                    existing_lots.append(new_lot)
-    
-    # Merge lot groups
-    if description["tender"]["lotGroups"]:
-        existing_lotgroups = release_json.setdefault("tender", {}).setdefault("lotGroups", [])
-        for new_lotgroup in description["tender"]["lotGroups"]:
-            existing_lotgroup = next((lotgroup for lotgroup in existing_lotgroups if lotgroup["id"] == new_lotgroup["id"]), None)
-            if existing_lotgroup:
-                existing_lotgroup["description"] = new_lotgroup["description"]
-            else:
-                existing_lotgroups.append(new_lotgroup)
-    
-    # Merge tender description (Part and Procedure)
-    if "description" in description["tender"]:
-        release_json.setdefault("tender", {})["description"] = description["tender"]["description"]
+    # Parse and merge BT-24 Description
+    logger.info("Processing BT-24: Description")
+    description_data = parse_description(xml_content)
+    merge_description(release_json, description_data)
 
     # Parse the quantity (BT-25)
     quantity_data = parse_quantity(xml_content)
@@ -1939,6 +1898,51 @@ def main(xml_path, ocid_prefix):
     # Parse and merge BT-79-Lot Performing Staff Qualification
     staff_qualification_data = parse_performing_staff_qualification(xml_content)
     merge_performing_staff_qualification(release_json, staff_qualification_data)
+    
+    # Parse and merge BT-801-Lot Non Disclosure Agreement
+    logger.info("Processing BT-801-Lot: Non Disclosure Agreement")
+    nda_data = parse_non_disclosure_agreement(xml_content)
+    merge_non_disclosure_agreement(release_json, nda_data)
+
+    # Parse and merge BT-802-Lot Non Disclosure Agreement Description
+    logger.info("Processing BT-802-Lot: Non Disclosure Agreement Description")
+    nda_description_data = parse_non_disclosure_agreement_description(xml_content)
+    merge_non_disclosure_agreement_description(release_json, nda_description_data)
+
+    # Parse and merge BT-805-Lot Green Procurement Criteria
+    logger.info("Processing BT-805-Lot: Green Procurement Criteria")
+    gpp_data = parse_green_procurement_criteria(xml_content)
+    merge_green_procurement_criteria(release_json, gpp_data)
+
+    # Parse and merge BT-88-Procedure Procedure Features
+    logger.info("Processing BT-88-Procedure: Procedure Features")
+    procedure_features_data = parse_procedure_features(xml_content)
+    merge_procedure_features(release_json, procedure_features_data)
+
+    # Parse and merge BT-92-Lot Electronic Ordering
+    logger.info("Processing BT-92-Lot: Electronic Ordering")
+    electronic_ordering_data = parse_electronic_ordering(xml_content)
+    merge_electronic_ordering(release_json, electronic_ordering_data)
+
+    # Parse and merge BT-93-Lot Electronic Payment
+    logger.info("Processing BT-93-Lot: Electronic Payment")
+    electronic_payment_data = parse_electronic_payment(xml_content)
+    merge_electronic_payment(release_json, electronic_payment_data)
+
+    # Parse and merge BT-94-Lot Recurrence
+    logger.info("Processing BT-94-Lot: Recurrence")
+    recurrence_data = parse_recurrence(xml_content)
+    merge_recurrence(release_json, recurrence_data)
+
+    # Parse and merge BT-95-Lot Recurrence Description
+    logger.info("Processing BT-95-Lot: Recurrence Description")
+    recurrence_description_data = parse_recurrence_description(xml_content)
+    merge_recurrence_description(release_json, recurrence_description_data)
+
+    # Parse and merge BT-97-Lot Submission Language
+    logger.info("Processing BT-97-Lot: Submission Language")
+    submission_language_data = parse_submission_language(xml_content)
+    merge_submission_language(release_json, submission_language_data)
 
     # Write the JSON output to a file
     with io.open('output.json', 'w', encoding='utf-8') as f:
@@ -1946,11 +1950,12 @@ def main(xml_path, ocid_prefix):
 
     # Print the JSON string
     json_string = json.dumps(release_json, ensure_ascii=False, indent=2)
+    logger.info("XML to JSON conversion completed")
     print(json_string)
 
 if __name__ == "__main__":
     # Path to the XML file
-    xml_path = '2023-618728.xml'
+    xml_path = 'can_24_minimal.xml'
     # Prefix for OCID
     ocid_prefix = 'ocid_prefix_value'
     

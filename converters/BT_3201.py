@@ -7,7 +7,8 @@ def parse_tender_identifier(xml_content, default_scheme="TENDERNL"):
         'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
         'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
         'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
+        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2'
     }
     
     result = {"bids": {"details": []}}
