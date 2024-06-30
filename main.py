@@ -231,6 +231,14 @@ from converters.OPP_052_Organization import parse_acquiring_cpb_buyer_indicator,
 from converters.OPP_080_Tender import parse_kilometers_public_transport, merge_kilometers_public_transport
 from converters.OPP_090_Procedure import parse_previous_notice_identifier, merge_previous_notice_identifier
 from converters.OPT_030_Procedure_SProvider import parse_provided_service_type, merge_provided_service_type
+from converters.OPP_071_Lot import parse_quality_target_code, merge_quality_target_code
+from converters.OPP_072_Lot import parse_quality_target_description, merge_quality_target_description
+from converters.OPP_100_Contract import parse_framework_notice_identifier, merge_framework_notice_identifier
+from converters.OPP_110_111_FiscalLegis import parse_fiscal_legislation, merge_fiscal_legislation
+from converters.OPP_112_120_EnvironLegis import parse_environmental_legislation, merge_environmental_legislation
+from converters.OPP_113_130_EmployLegis import parse_employment_legislation, merge_employment_legislation
+from converters.OPP_140_ProcurementDocs import parse_procurement_documents, merge_procurement_documents
+from converters.OPT_155_156_LotResult import parse_vehicle_type_and_numeric, merge_vehicle_type_and_numeric
 
 def configure_logging():
     logging.basicConfig(
@@ -1969,6 +1977,70 @@ def main(xml_path, ocid_prefix):
         merge_provided_service_type(release_json, service_type_data)
     else:
         logger.warning("No Provided Service Type data found")
+
+    # Parse and merge Quality Target Code (OPP-071-Lot)
+    logger.info("Processing OPP-071-Lot: Quality Target Code")
+    quality_target_data = parse_quality_target_code(xml_content)
+    if quality_target_data:
+        merge_quality_target_code(release_json, quality_target_data)
+    else:
+        logger.warning("No Quality Target Code data found")
+
+    # Parse and merge Quality Target Description (OPP-072-Lot)
+    logger.info("Processing OPP-072-Lot: Quality Target Description")
+    quality_target_description_data = parse_quality_target_description(xml_content)
+    if quality_target_description_data:
+        merge_quality_target_description(release_json, quality_target_description_data)
+    else:
+        logger.warning("No Quality Target Description data found")
+
+    # Parse and merge Framework Notice Identifier (OPP-100-Contract)
+    logger.info("Processing OPP-100-Contract: Framework Notice Identifier")
+    framework_notice_data = parse_framework_notice_identifier(xml_content)
+    if framework_notice_data:
+        merge_framework_notice_identifier(release_json, framework_notice_data)
+    else:
+        logger.warning("No Framework Notice Identifier data found")
+
+    # Parse and merge Fiscal Legislation data (OPP-110 and OPP-111)
+    logger.info("Processing OPP-110 and OPP-111: Fiscal Legislation")
+    fiscal_legislation_data = parse_fiscal_legislation(xml_content)
+    if fiscal_legislation_data:
+        merge_fiscal_legislation(release_json, fiscal_legislation_data)
+    else:
+        logger.warning("No Fiscal Legislation data found")
+
+    # Parse and merge Environmental Legislation data (OPP-112 and OPP-120)
+    logger.info("Processing OPP-112 and OPP-120: Environmental Legislation")
+    environmental_legislation_data = parse_environmental_legislation(xml_content)
+    if environmental_legislation_data:
+        merge_environmental_legislation(release_json, environmental_legislation_data)
+    else:
+        logger.warning("No Environmental Legislation data found")
+
+    # Parse and merge Employment Legislation data (OPP-113 and OPP-130)
+    logger.info("Processing OPP-113 and OPP-130: Employment Legislation")
+    employment_legislation_data = parse_employment_legislation(xml_content)
+    if employment_legislation_data:
+        merge_employment_legislation(release_json, employment_legislation_data)
+    else:
+        logger.warning("No Employment Legislation data found")
+
+    # Parse and merge Procurement Documents data (OPP-140)
+    logger.info("Processing OPP-140: Procurement Documents")
+    procurement_docs_data = parse_procurement_documents(xml_content)
+    if procurement_docs_data:
+        merge_procurement_documents(release_json, procurement_docs_data)
+    else:
+        logger.warning("No Procurement Documents data found")
+
+    # Parse and merge OPT-155-LotResult Vehicle Type and OPT-156-LotResult Vehicle Numeric
+    logger.info("Processing OPT-155-LotResult and OPT-156-LotResult: Vehicle Type and Numeric")
+    vehicle_data = parse_vehicle_type_and_numeric(xml_content)
+    if vehicle_data:
+        merge_vehicle_type_and_numeric(release_json, vehicle_data)
+    else:
+        logger.warning("No Vehicle Type and Numeric data found")
 
     # Write the JSON output to a file
     with io.open('output.json', 'w', encoding='utf-8') as f:
