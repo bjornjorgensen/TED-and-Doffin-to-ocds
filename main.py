@@ -245,7 +245,10 @@ from converters.OPT_200_Organization_Company import parse_organization_technical
 from converters.OPT_201_Organization_TouchPoint import parse_touchpoint_technical_identifier, merge_touchpoint_technical_identifier
 from converters.OPT_202_UBO import parse_beneficial_owner_identifier, merge_beneficial_owner_identifier
 from converters.opt_300_parser import parse_opt_300, merge_opt_300
+from converters.OPT_301_Lot_AddInfo import parse_additional_info_provider_identifier, merge_additional_info_provider_identifier
 from converters.OPT_301_Lot_DocProvider import parse_document_provider_identifier, merge_document_provider_identifier
+from converters.OPT_301_Lot_EmployLegis import parse_employment_legislation_document_reference, merge_employment_legislation_document_reference
+from converters.OPT_301_Lot_EnvironLegis import parse_environmental_legislation_document_reference, merge_environmental_legislation_document_reference
 
 def configure_logging():
     logging.basicConfig(
@@ -2122,6 +2125,14 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No OPT-300 data found for Contract Signatory, Procedure Buyer, or Service Provider")
 
+    # Parse and merge OPT-301-Lot-AddInfo Additional Info Provider Technical Identifier Reference
+    logger.info("Processing OPT-301-Lot-AddInfo: Additional Info Provider Technical Identifier Reference")
+    additional_info_provider_data = parse_additional_info_provider_identifier(xml_content)
+    if additional_info_provider_data:
+        merge_additional_info_provider_identifier(release_json, additional_info_provider_data)
+    else:
+        logger.warning("No Additional Info Provider Technical Identifier Reference data found")
+
     # Parse and merge OPT-301-Lot-DocProvider Document Provider Technical Identifier Reference
     logger.info("Processing OPT-301-Lot-DocProvider: Document Provider Technical Identifier Reference")
     document_provider_data = parse_document_provider_identifier(xml_content)
@@ -2130,6 +2141,21 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Document Provider Technical Identifier Reference data found")
 
+    # Parse and merge OPT-301-Lot-EmployLegis Employment Legislation Organization Technical Identifier Reference
+    logger.info("Processing OPT-301-Lot-EmployLegis: Employment Legislation Organization Technical Identifier Reference")
+    employment_legislation_data = parse_employment_legislation_document_reference(xml_content)
+    if employment_legislation_data:
+        merge_employment_legislation_document_reference(release_json, employment_legislation_data)
+    else:
+        logger.warning("No Employment Legislation Organization Technical Identifier Reference data found")
+
+    # Parse and merge OPT-301-Lot-EnvironLegis Environmental Legislation Organization Technical Identifier Reference
+    logger.info("Processing OPT-301-Lot-EnvironLegis: Environmental Legislation Organization Technical Identifier Reference")
+    environmental_legislation_data = parse_environmental_legislation_document_reference(xml_content)
+    if environmental_legislation_data:
+        merge_environmental_legislation_document_reference(release_json, environmental_legislation_data)
+    else:
+        logger.warning("No Environmental Legislation Organization Technical Identifier Reference data found")
 
     # Remove empty elements from release_json
     release_json = remove_empty_elements(release_json)
@@ -2145,7 +2171,7 @@ def main(xml_path, ocid_prefix):
 
 if __name__ == "__main__":
     # Path to the XML file
-    xml_path = 'can_24_minimal.xml'
+    xml_path = '2023-689565.xml'
     # Prefix for OCID
     ocid_prefix = 'ocid_prefix_value'
     
