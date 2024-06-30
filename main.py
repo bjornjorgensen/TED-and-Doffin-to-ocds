@@ -239,6 +239,8 @@ from converters.OPP_112_120_EnvironLegis import parse_environmental_legislation,
 from converters.OPP_113_130_EmployLegis import parse_employment_legislation, merge_employment_legislation
 from converters.OPP_140_ProcurementDocs import parse_procurement_documents, merge_procurement_documents
 from converters.OPT_155_156_LotResult import parse_vehicle_type_and_numeric, merge_vehicle_type_and_numeric
+from converters.OPT_160_UBO import parse_ubo_first_name, merge_ubo_first_name
+from converters.OPT_170_Tenderer import parse_tendering_party_leader, merge_tendering_party_leader
 
 def configure_logging():
     logging.basicConfig(
@@ -2041,6 +2043,22 @@ def main(xml_path, ocid_prefix):
         merge_vehicle_type_and_numeric(release_json, vehicle_data)
     else:
         logger.warning("No Vehicle Type and Numeric data found")
+
+    # Parse and merge OPT-160-UBO First Name
+    logger.info("Processing OPT-160-UBO: First Name")
+    ubo_first_name_data = parse_ubo_first_name(xml_content)
+    if ubo_first_name_data:
+        merge_ubo_first_name(release_json, ubo_first_name_data)
+    else:
+        logger.warning("No UBO First Name data found")
+
+    # Parse and merge OPT-170-Tenderer Tendering Party Leader
+    logger.info("Processing OPT-170-Tenderer: Tendering Party Leader")
+    tenderer_leader_data = parse_tendering_party_leader(xml_content)
+    if tenderer_leader_data:
+        merge_tendering_party_leader(release_json, tenderer_leader_data)
+    else:
+        logger.warning("No Tendering Party Leader data found")
 
     # Write the JSON output to a file
     with io.open('output.json', 'w', encoding='utf-8') as f:
