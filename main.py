@@ -241,6 +241,10 @@ from converters.OPP_140_ProcurementDocs import parse_procurement_documents, merg
 from converters.OPT_155_156_LotResult import parse_vehicle_type_and_numeric, merge_vehicle_type_and_numeric
 from converters.OPT_160_UBO import parse_ubo_first_name, merge_ubo_first_name
 from converters.OPT_170_Tenderer import parse_tendering_party_leader, merge_tendering_party_leader
+from converters.OPT_200_Organization_Company import parse_organization_technical_identifier, merge_organization_technical_identifier
+from converters.OPT_201_Organization_TouchPoint import parse_touchpoint_technical_identifier, merge_touchpoint_technical_identifier
+from converters.OPT_202_UBO import parse_beneficial_owner_identifier, merge_beneficial_owner_identifier
+from converters.opt_300_parser import parse_opt_300, merge_opt_300
 
 def configure_logging():
     logging.basicConfig(
@@ -248,6 +252,25 @@ def configure_logging():
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
         datefmt='%Y-%m-%d %H:%M:%S'
     )
+
+def remove_empty_elements(data):
+    """
+    Recursively remove empty lists, empty dicts, or None elements from a dictionary or list.
+    """
+    if isinstance(data, dict):
+        return {
+            key: remove_empty_elements(value)
+            for key, value in data.items()
+            if value and remove_empty_elements(value)
+        }
+    elif isinstance(data, list):
+        return [
+            remove_empty_elements(item)
+            for item in data
+            if item and remove_empty_elements(item)
+        ]
+    else:
+        return data
 
 def main(xml_path, ocid_prefix):
     # Read the XML content from the file
@@ -2059,6 +2082,47 @@ def main(xml_path, ocid_prefix):
         merge_tendering_party_leader(release_json, tenderer_leader_data)
     else:
         logger.warning("No Tendering Party Leader data found")
+
+    # Parse and merge OPT-200-Organization-Company Organization Technical Identifier
+    logger.info("Processing OPT-200-Organization-Company: Organization Technical Identifier")
+    org_technical_id_data = parse_organization_technical_identifier(xml_content)
+    if org_technical_id_data:
+        merge_organization_technical_identifier(release_json, org_technical_id_data)
+    else:
+        logger.warning("No Organization Technical Identifier data found")
+
+    # Parse and merge OPT-201-Organization-TouchPoint TouchPoint Technical Identifier
+    logger.info("Processing OPT-201-Organization-TouchPoint: TouchPoint Technical Identifier")
+    touchpoint_technical_id_data = parse_touchpoint_technical_identifier(xml_content)
+    if touchpoint_technical_id_data:
+        merge_touchpoint_technical_identifier(release_json, touchpoint_technical_id_data)
+    else:
+        logger.warning("No TouchPoint Technical Identifier data found")
+
+    #logger.info("Initial release_json state:")
+    #logger.info(json.dumps(release_json, indent=2))
+    
+    logger.info("Processing OPT-202-UBO: Beneficial Owner Technical Identifier")
+    beneficial_owner_id_data = parse_beneficial_owner_identifier(xml_content)
+    if beneficial_owner_id_data:
+      #  logger.info(f"Beneficial owner data found: {beneficial_owner_id_data}")
+        merge_beneficial_owner_identifier(release_json, beneficial_owner_id_data)
+     #   logger.info("After merging beneficial owner data:")
+     #   logger.info(json.dumps(release_json, indent=2))
+    else:
+        logger.warning("No Beneficial Owner Technical Identifier data found")
+
+    # Parse and merge OPT-300 Contract Signatory, Procedure Buyer, and Service Provider
+    logger.info("Processing OPT-300: Contract Signatory, Procedure Buyer, and Service Provider")
+    parsed_opt_300_data = parse_opt_300(xml_content)
+    if parsed_opt_300_data:
+        merge_opt_300(release_json, parsed_opt_300_data)
+        logger.info("Merged OPT-300 data into release JSON")
+    else:
+        logger.warning("No OPT-300 data found for Contract Signatory, Procedure Buyer, or Service Provider")
+
+    # Remove empty elements from release_json
+    release_json = remove_empty_elements(release_json)
 
     # Write the JSON output to a file
     with io.open('output.json', 'w', encoding='utf-8') as f:

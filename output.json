@@ -1,9 +1,6 @@
 {
-    "id": "",
     "initiationType": "tender",
     "tender": {
-        "status": "",
-        "id": null,
         "lots": [
             {
                 "id": "LOT-0001",
@@ -11,9 +8,7 @@
                     "operatorRevenueShare": 1.0
                 }
             }
-        ],
-        "lotGroups": [],
-        "items": []
+        ]
     },
     "bids": {
         "details": [
@@ -23,10 +18,6 @@
                     "LOT-0001"
                 ]
             }
-        ],
-        "statistics": []
-    },
-    "parties": [],
-    "awards": [],
-    "contracts": []
+        ]
+    }
 }
