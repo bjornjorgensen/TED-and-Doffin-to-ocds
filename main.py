@@ -245,6 +245,7 @@ from converters.OPT_200_Organization_Company import parse_organization_technical
 from converters.OPT_201_Organization_TouchPoint import parse_touchpoint_technical_identifier, merge_touchpoint_technical_identifier
 from converters.OPT_202_UBO import parse_beneficial_owner_identifier, merge_beneficial_owner_identifier
 from converters.opt_300_parser import parse_opt_300, merge_opt_300
+from converters.OPT_301_Lot_DocProvider import parse_document_provider_identifier, merge_document_provider_identifier
 
 def configure_logging():
     logging.basicConfig(
@@ -2120,6 +2121,15 @@ def main(xml_path, ocid_prefix):
         logger.info("Merged OPT-300 data into release JSON")
     else:
         logger.warning("No OPT-300 data found for Contract Signatory, Procedure Buyer, or Service Provider")
+
+    # Parse and merge OPT-301-Lot-DocProvider Document Provider Technical Identifier Reference
+    logger.info("Processing OPT-301-Lot-DocProvider: Document Provider Technical Identifier Reference")
+    document_provider_data = parse_document_provider_identifier(xml_content)
+    if document_provider_data:
+        merge_document_provider_identifier(release_json, document_provider_data)
+    else:
+        logger.warning("No Document Provider Technical Identifier Reference data found")
+
 
     # Remove empty elements from release_json
     release_json = remove_empty_elements(release_json)
