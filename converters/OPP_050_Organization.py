@@ -1,9 +1,6 @@
 # converters/OPP_050_Organization.py
 
 from lxml import etree
-import logging
-
-logger = logging.getLogger(__name__)
 
 def parse_buyers_group_lead_indicator(xml_content):
     root = etree.fromstring(xml_content)
@@ -16,36 +13,35 @@ def parse_buyers_group_lead_indicator(xml_content):
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
     }
 
-    result = {"parties": []}
+    result = {"leadBuyerIds": []}
 
     organizations = root.xpath("//efac:Organizations/efac:Organization", namespaces=namespaces)
-    
     for org in organizations:
         lead_indicator = org.xpath("efbc:GroupLeadIndicator/text()", namespaces=namespaces)
         if lead_indicator and lead_indicator[0].lower() == 'true':
             org_id = org.xpath("efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()", namespaces=namespaces)
             if org_id:
-                result["parties"].append({
-                    "id": org_id[0],
-                    "roles": ["leadBuyer"]
-                })
+                result["leadBuyerIds"].append(org_id[0])
 
-    return result if result["parties"] else None
+    return result if result["leadBuyerIds"] else None
 
 def merge_buyers_group_lead_indicator(release_json, buyers_group_lead_data):
     if not buyers_group_lead_data:
-        logger.warning("No Buyers Group Lead Indicator data to merge")
         return
 
-    existing_parties = release_json.setdefault("parties", [])
-    
-    for new_party in buyers_group_lead_data["parties"]:
-        existing_party = next((party for party in existing_parties if party["id"] == new_party["id"]), None)
-        if existing_party:
-            existing_roles = existing_party.setdefault("roles", [])
-            if "leadBuyer" not in existing_roles:
-                existing_roles.append("leadBuyer")
-        else:
-            existing_parties.append(new_party)
+    parties = release_json.setdefault("parties", [])
 
-    logger.info(f"Merged Buyers Group Lead Indicator for {len(buyers_group_lead_data['parties'])} organizations")
+    for party in parties:
+        if party["id"] in buyers_group_lead_data["leadBuyerIds"]:
+            if "roles" not in party:
+                party["roles"] = []
+            if "leadBuyer" not in party["roles"]:
+                party["roles"].append("leadBuyer")
+
+    # If a lead buyer is not in parties, add it
+    for lead_buyer_id in buyers_group_lead_data["leadBuyerIds"]:
+        if not any(party["id"] == lead_buyer_id for party in parties):
+            parties.append({
+                "id": lead_buyer_id,
+                "roles": ["leadBuyer"]
+            })

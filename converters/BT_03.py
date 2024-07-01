@@ -1,45 +1,42 @@
 # converters/BT_03.py
+
 from lxml import etree
 
 def parse_form_type(xml_content):
-    # Define the mapping table
+    root = etree.fromstring(xml_content)
+    namespaces = {'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'}
+    
+    form_type_codes = root.xpath('//cbc:NoticeTypeCode[@listName]', namespaces=namespaces)
+    
     form_type_mapping = {
         'planning': {'tag': ['tender'], 'status': 'planned'},
         'competition': {'tag': ['tender'], 'status': 'active'},
-        'change': {'tag': ['tenderUpdate'], 'status': ''},
+        'change': {'tag': ['tenderUpdate'], 'status': None},
         'result': {'tag': ['award', 'contract'], 'status': 'complete'},
         'dir-awa-pre': {'tag': ['award', 'contract'], 'status': 'complete'},
-        'cont-modif': {'tag': ['awardUpdate', 'contractUpdate'], 'status': ''}
-    }
-
-    # Parse the XML content
-    tree = etree.fromstring(xml_content)
-    
-    # Define the namespaces
-    namespaces = {
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
+        'cont-modif': {'tag': ['awardUpdate', 'contractUpdate'], 'status': None}
     }
     
-    # Use XPath to find the cbc:NoticeTypeCode element
-    xpath_expr = '//cbc:NoticeTypeCode'
-    notice_type_code = tree.xpath(xpath_expr, namespaces=namespaces)
+    result = {
+        'tag': set(),
+        'tender': {}
+    }
     
-    if notice_type_code:
-        list_name = notice_type_code[0].get('listName')
+    for form_type_code in form_type_codes:
+        list_name = form_type_code.get('listName')
         if list_name in form_type_mapping:
-            mapping = form_type_mapping[list_name]
-            return {
-                "tag": mapping['tag'],
-                "tender": {
-                    "status": mapping['status']
-                }
-            }
+            result['tag'].update(form_type_mapping[list_name]['tag'])
+            if form_type_mapping[list_name]['status']:
+                result['tender']['status'] = form_type_mapping[list_name]['status']
     
-    # Return default values if no matching listName is found
-    return {
-        "tag": [],
-        "tender": {
-            "status": ""
-        }
-    }
+    if result['tag']:
+        result['tag'] = list(result['tag'])
+        return result
+    
+    return None
+
+def merge_form_type(release_json, form_type_data):
+    if form_type_data.get("tag"):
+        release_json.setdefault("tag", []).extend(tag for tag in form_type_data["tag"] if tag not in release_json.get("tag", []))
+    if form_type_data.get("tender"):
+        release_json.setdefault("tender", {}).update(form_type_data["tender"])

@@ -6,7 +6,7 @@ from lxml import etree
 import logging
 from converters.Common_operations import NoticeProcessor
 from converters.BT_01 import parse_legal_basis
-from converters.BT_03 import parse_form_type
+from converters.BT_03 import parse_form_type, merge_form_type
 from converters.BT_04 import parse_procedure_identifier
 from converters.BT_05_notice import parse_notice_dispatch_datetime, merge_notice_dispatch_datetime
 from converters.BT_06_Lot import parse_strategic_procurement, merge_strategic_procurement
@@ -299,15 +299,13 @@ def main(xml_path, ocid_prefix):
     if legal_basis:
         release_json.setdefault('tender', {}).update(legal_basis)
 
-    # Parse the form type
-    form_type = parse_form_type(xml_content)
-    
-    # Merge form type into the release JSON
-    if form_type:
-        if form_type.get("tag"):
-            release_json.setdefault("tag", []).extend(form_type["tag"])
-        if form_type.get("tender"):
-            release_json.setdefault("tender", {}).update(form_type["tender"])
+    # Parse and merge BT-03 Form Type
+    logger.info("Processing BT-03: Form Type")
+    form_type_data = parse_form_type(xml_content)
+    if form_type_data:
+        merge_form_type(release_json, form_type_data)
+    else:
+        logger.warning("No Form Type data found")
 
     # Parse the procedure identifier
     procedure_identifier = parse_procedure_identifier(xml_content)

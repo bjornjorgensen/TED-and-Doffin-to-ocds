@@ -1,17 +1,8 @@
 # converters/BT_23.py
 
 from lxml import etree
-import logging
-
-logger = logging.getLogger(__name__)
-
-def map_procurement_category(value):
-    if value == "supplies":
-        return "goods"
-    return value
 
 def parse_main_nature(xml_content):
-    logger.info("Parsing BT-23: Main Nature")
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
@@ -20,57 +11,47 @@ def parse_main_nature(xml_content):
 
     result = {"tender": {}}
 
-    # Parse BT-23-Lot
-    lot_elements = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
-    lots = []
-    for lot in lot_elements:
+    # BT-23-Lot
+    lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        main_nature = lot.xpath("cac:ProcurementProject/cbc:ProcurementTypeCode[@listName='contract-nature']/text()", namespaces=namespaces)
-        if main_nature:
-            lots.append({
+        nature = lot.xpath("cac:ProcurementProject/cbc:ProcurementTypeCode[@listName='contract-nature']/text()", namespaces=namespaces)
+        if nature:
+            main_category = 'goods' if nature[0] == 'supplies' else nature[0]
+            result["tender"].setdefault("lots", []).append({
                 "id": lot_id,
-                "mainProcurementCategory": map_procurement_category(main_nature[0])
+                "mainProcurementCategory": main_category
             })
-    if lots:
-        result["tender"]["lots"] = lots
-    logger.debug(f"Parsed main nature for {len(lots)} lots")
 
-    # Parse BT-23-Part
+    # BT-23-Part
     part_nature = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cbc:ProcurementTypeCode[@listName='contract-nature']/text()", namespaces=namespaces)
-    if part_nature:
-        result["tender"]["mainProcurementCategory"] = map_procurement_category(part_nature[0])
-        logger.debug("Parsed main nature for Part")
+    
+    # BT-23-Procedure
+    procedure_nature = root.xpath("//cac:ProcurementProject/cbc:ProcurementTypeCode[@listName='contract-nature']/text()", namespaces=namespaces)
 
-    # Parse BT-23-Procedure
-    procedure_nature = root.xpath("/*/cac:ProcurementProject/cbc:ProcurementTypeCode/text()", namespaces=namespaces)
-    if procedure_nature:
-        result["tender"]["mainProcurementCategory"] = map_procurement_category(procedure_nature[0])
-        logger.debug("Parsed main nature for Procedure")
+    # Combine Part and Procedure nature
+    combined_nature = part_nature + procedure_nature
+    if combined_nature:
+        main_category = 'goods' if combined_nature[0] == 'supplies' else combined_nature[0]
+        result["tender"]["mainProcurementCategory"] = main_category
 
-    return result
+    return result if result["tender"] else None
 
 def merge_main_nature(release_json, main_nature_data):
-    logger.info("Merging BT-23: Main Nature")
-    if "tender" not in main_nature_data:
-        logger.warning("No main nature data to merge")
+    if not main_nature_data:
         return
 
     tender = release_json.setdefault("tender", {})
 
     # Merge lots
     if "lots" in main_nature_data["tender"]:
-        existing_lots = tender.setdefault("lots", [])
         for new_lot in main_nature_data["tender"]["lots"]:
-            existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
+            existing_lot = next((lot for lot in tender.setdefault("lots", []) if lot["id"] == new_lot["id"]), None)
             if existing_lot:
                 existing_lot["mainProcurementCategory"] = new_lot["mainProcurementCategory"]
             else:
-                existing_lots.append(new_lot)
-        logger.debug(f"Merged main nature for {len(main_nature_data['tender']['lots'])} lots")
+                tender["lots"].append(new_lot)
 
-    # Merge tender mainProcurementCategory (Part and Procedure)
+    # Merge tender mainProcurementCategory
     if "mainProcurementCategory" in main_nature_data["tender"]:
         tender["mainProcurementCategory"] = main_nature_data["tender"]["mainProcurementCategory"]
-        logger.debug("Merged main nature for tender")
-
-    logger.info("Finished merging BT-23: Main Nature")

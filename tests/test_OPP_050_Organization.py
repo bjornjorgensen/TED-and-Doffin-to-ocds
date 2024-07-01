@@ -9,14 +9,14 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
-def test_opp_050_organization_integration(tmp_path):
+def test_opp_050_organization_buyers_group_lead_indicator_integration(tmp_path):
     xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-          xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+    <root xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
-          xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
+          xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1"
+          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <ext:UBLExtensions>
             <ext:UBLExtension>
                 <ext:ExtensionContent>
@@ -30,40 +30,6 @@ def test_opp_050_organization_integration(tmp_path):
                                     </cac:PartyIdentification>
                                 </efac:Company>
                             </efac:Organization>
-                        </efac:Organizations>
-                    </efext:EformsExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
-    </root>
-    """
-    xml_file = tmp_path / "test_input_buyers_group_lead.xml"
-    xml_file.write_text(xml_content)
-
-    main(str(xml_file), "ocds-test-prefix")
-
-    with open('output.json', 'r') as f:
-        result = json.load(f)
-
-    assert "parties" in result
-    assert len(result["parties"]) == 1
-    assert result["parties"][0]["id"] == "ORG-0001"
-    assert "roles" in result["parties"][0]
-    assert "leadBuyer" in result["parties"][0]["roles"]
-
-def test_opp_050_organization_integration_false(tmp_path):
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-          xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-          xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
-          xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionContent>
-                    <efext:EformsExtension>
-                        <efac:Organizations>
                             <efac:Organization>
                                 <efbc:GroupLeadIndicator>false</efbc:GroupLeadIndicator>
                                 <efac:Company>
@@ -79,7 +45,7 @@ def test_opp_050_organization_integration_false(tmp_path):
         </ext:UBLExtensions>
     </root>
     """
-    xml_file = tmp_path / "test_input_buyers_group_lead_false.xml"
+    xml_file = tmp_path / "test_input_buyers_group_lead_indicator.xml"
     xml_file.write_text(xml_content)
 
     main(str(xml_file), "ocds-test-prefix")
@@ -87,7 +53,17 @@ def test_opp_050_organization_integration_false(tmp_path):
     with open('output.json', 'r') as f:
         result = json.load(f)
 
-    assert "parties" not in result or len(result["parties"]) == 0
+    assert "parties" in result
+    assert len(result["parties"]) == 2
+
+    lead_buyer = next((party for party in result["parties"] if party["id"] == "ORG-0001"), None)
+    assert lead_buyer is not None
+    assert "roles" in lead_buyer
+    assert "leadBuyer" in lead_buyer["roles"]
+
+    non_lead_buyer = next((party for party in result["parties"] if party["id"] == "ORG-0002"), None)
+    assert non_lead_buyer is not None
+    assert "roles" not in non_lead_buyer or "leadBuyer" not in non_lead_buyer.get("roles", [])
 
 if __name__ == "__main__":
     pytest.main()

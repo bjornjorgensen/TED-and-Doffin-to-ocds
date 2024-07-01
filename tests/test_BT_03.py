@@ -1,57 +1,71 @@
 # tests/test_BT_03.py
-import sys
-import os
-import subprocess
+
+import pytest
 import json
-from lxml import etree
+import os
+import sys
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+# Add the parent directory to sys.path to import main
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from main import main
 
-from converters.BT_03 import parse_form_type
-
-def test_parse_form_type():
-    # Sample XML content for testing
+def test_bt_03_form_type_integration(tmp_path):
     xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cbc:NoticeTypeCode listName="competition">cn-standard</cbc:NoticeTypeCode>
     </root>
     """
-    tree = etree.fromstring(xml_content)
-    xml_content = etree.tostring(tree, encoding='utf-8')
+    xml_file = tmp_path / "test_input_form_type.xml"
+    xml_file.write_text(xml_content)
 
-    result = parse_form_type(xml_content)
+    main(str(xml_file), "ocds-test-prefix")
 
-    assert result == {
-        "tag": ["tender"],
-        "tender": {
-            "status": "active"
-        }
-    }
+    with open('output.json', 'r') as f:
+        result = json.load(f)
 
-# Add more tests as needed
+    assert "tag" in result, "Expected 'tag' in result"
+    assert "tender" in result, "Expected 'tender' in result"
 
-def test_main_execution():
-    # Path to the test XML file
-    xml_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'input_files', 'test_notice.xml'))
-    # Prefix for OCID
-    ocid_prefix = 'ocid_prefix_value'
+    assert "tender" in result["tag"], "Expected 'tender' in result['tag']"
+    assert result["tender"]["status"] == "active", f"Expected tender status to be 'active', got {result['tender'].get('status')}"
 
-    # Call main.py with the specified arguments
-    result = subprocess.run([sys.executable, 'main.py', xml_path, ocid_prefix], capture_output=True, text=True)
+def test_bt_03_form_type_integration_multiple(tmp_path):
+    xml_content = """
+    <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cbc:NoticeTypeCode listName="planning">pin-only</cbc:NoticeTypeCode>
+        <cbc:NoticeTypeCode listName="result">can-standard</cbc:NoticeTypeCode>
+    </root>
+    """
+    xml_file = tmp_path / "test_input_form_type_multiple.xml"
+    xml_file.write_text(xml_content)
 
-    # Decode the output
-    output = result.stdout
+    main(str(xml_file), "ocds-test-prefix")
 
-    # Parse the JSON output
-    try:
-        json_output = json.loads(output)
-    except json.JSONDecodeError:
-        assert False, f"Output is not valid JSON: {output}"
+    with open('output.json', 'r') as f:
+        result = json.load(f)
 
-    # Add assertions to check the expected output
-    assert "tag" in json_output, "Missing 'tag' in output"
-    assert "tender" in json_output, "Missing 'tender' in output"
-    assert json_output["tender"]["status"] == "complete", "Unexpected tender status"
+    assert "tag" in result, "Expected 'tag' in result"
+    assert "tender" in result, "Expected 'tender' in result"
 
-# Add more tests as needed
+    assert set(result["tag"]) == set(["tender", "award", "contract"]), f"Expected tags to be ['tender', 'award', 'contract'], got {result['tag']}"
+    assert result["tender"]["status"] == "complete", f"Expected tender status to be 'complete', got {result['tender'].get('status')}"
+
+def test_bt_03_form_type_integration_invalid(tmp_path):
+    xml_content = """
+    <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cbc:NoticeTypeCode listName="invalid">invalid-type</cbc:NoticeTypeCode>
+    </root>
+    """
+    xml_file = tmp_path / "test_input_form_type_invalid.xml"
+    xml_file.write_text(xml_content)
+
+    main(str(xml_file), "ocds-test-prefix")
+
+    with open('output.json', 'r') as f:
+        result = json.load(f)
+
+    assert "tag" not in result or "tender" not in result.get("tag", []), "Expected no 'tender' tag for invalid form type"
+    assert "status" not in result.get("tender", {}), "Expected no tender status for invalid form type"
+
+if __name__ == "__main__":
+    pytest.main()
