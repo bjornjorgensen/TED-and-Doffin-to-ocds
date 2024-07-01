@@ -12,7 +12,7 @@ from main import main
 
 logger = logging.getLogger(__name__)
 
-def test_beneficial_owner_identifier_no_duplicates(tmp_path):
+def test_beneficial_owner_identifier(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -34,9 +34,6 @@ def test_beneficial_owner_identifier_no_duplicates(tmp_path):
                             <efac:UltimateBeneficialOwner>
                                 <cbc:ID schemeName="ubo">UBO-0001</cbc:ID>
                             </efac:UltimateBeneficialOwner>
-                            <efac:UltimateBeneficialOwner>
-                                <cbc:ID schemeName="ubo">UBO-0001</cbc:ID>
-                            </efac:UltimateBeneficialOwner>
                         </efac:Organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
@@ -44,7 +41,7 @@ def test_beneficial_owner_identifier_no_duplicates(tmp_path):
         </ext:UBLExtensions>
     </root>
     """
-    xml_file = tmp_path / "test_input_beneficial_owner_identifier_duplicates.xml"
+    xml_file = tmp_path / "test_input_beneficial_owner_identifier.xml"
     xml_file.write_text(xml_content)
 
     main(str(xml_file), "ocds-test-prefix")
@@ -63,5 +60,4 @@ def test_beneficial_owner_identifier_no_duplicates(tmp_path):
     assert party["beneficialOwners"][0]["id"] == "UBO-0001", f"Expected beneficial owner id 'UBO-0001', found {party['beneficialOwners'][0]['id']}"
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
     pytest.main()

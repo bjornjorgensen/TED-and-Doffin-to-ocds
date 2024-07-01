@@ -1,9 +1,6 @@
 # converters/OPP_051_Organization.py
 
 from lxml import etree
-import logging
-
-logger = logging.getLogger(__name__)
 
 def parse_awarding_cpb_buyer_indicator(xml_content):
     root = etree.fromstring(xml_content)
@@ -16,36 +13,35 @@ def parse_awarding_cpb_buyer_indicator(xml_content):
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
     }
 
-    result = {"parties": []}
+    result = {"procuringEntityIds": []}
 
     organizations = root.xpath("//efac:Organizations/efac:Organization", namespaces=namespaces)
-    
     for org in organizations:
-        awarding_cpb_indicator = org.xpath("efbc:AwardingCPBIndicator/text()", namespaces=namespaces)
-        if awarding_cpb_indicator and awarding_cpb_indicator[0].lower() == 'true':
+        awarding_indicator = org.xpath("efbc:AwardingCPBIndicator/text()", namespaces=namespaces)
+        if awarding_indicator and awarding_indicator[0].lower() == 'true':
             org_id = org.xpath("efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()", namespaces=namespaces)
             if org_id:
-                result["parties"].append({
-                    "id": org_id[0],
-                    "roles": ["procuringEntity"]
-                })
+                result["procuringEntityIds"].append(org_id[0])
 
-    return result if result["parties"] else None
+    return result if result["procuringEntityIds"] else None
 
 def merge_awarding_cpb_buyer_indicator(release_json, awarding_cpb_buyer_data):
     if not awarding_cpb_buyer_data:
-        logger.warning("No Awarding CPB Buyer Indicator data to merge")
         return
 
-    existing_parties = release_json.setdefault("parties", [])
-    
-    for new_party in awarding_cpb_buyer_data["parties"]:
-        existing_party = next((party for party in existing_parties if party["id"] == new_party["id"]), None)
-        if existing_party:
-            existing_roles = existing_party.setdefault("roles", [])
-            if "procuringEntity" not in existing_roles:
-                existing_roles.append("procuringEntity")
-        else:
-            existing_parties.append(new_party)
+    parties = release_json.setdefault("parties", [])
 
-    logger.info(f"Merged Awarding CPB Buyer Indicator for {len(awarding_cpb_buyer_data['parties'])} organizations")
+    for party in parties:
+        if party["id"] in awarding_cpb_buyer_data["procuringEntityIds"]:
+            if "roles" not in party:
+                party["roles"] = []
+            if "procuringEntity" not in party["roles"]:
+                party["roles"].append("procuringEntity")
+
+    # If a procuring entity is not in parties, add it
+    for procuring_entity_id in awarding_cpb_buyer_data["procuringEntityIds"]:
+        if not any(party["id"] == procuring_entity_id for party in parties):
+            parties.append({
+                "id": procuring_entity_id,
+                "roles": ["procuringEntity"]
+            })
