@@ -249,6 +249,11 @@ from converters.OPT_301_Lot_AddInfo import parse_additional_info_provider_identi
 from converters.OPT_301_Lot_DocProvider import parse_document_provider_identifier, merge_document_provider_identifier
 from converters.OPT_301_Lot_EmployLegis import parse_employment_legislation_document_reference, merge_employment_legislation_document_reference
 from converters.OPT_301_Lot_EnvironLegis import parse_environmental_legislation_document_reference, merge_environmental_legislation_document_reference
+from converters.OPT_301_Lot_ReviewOrg import parse_review_org_identifier, merge_review_org_identifier
+from converters.OPT_301_Lot_Mediator import parse_mediator_identifier, merge_mediator_identifier
+from converters.OPT_301_Lot_ReviewInfo import parse_review_info_identifier, merge_review_info_identifier
+from converters.OPT_301_Lot_TenderEval import parse_tender_evaluator_identifier, merge_tender_evaluator_identifier
+from converters.OPT_301_Lot_TenderReceipt import parse_tender_recipient_identifier, merge_tender_recipient_identifier
 
 def configure_logging():
     logging.basicConfig(
@@ -2155,6 +2160,38 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Environmental Legislation Organization Technical Identifier Reference data found")
 
+    # Parse and merge OPT-301-Lot-ReviewOrg Review Organization Technical Identifier Reference
+    logger.info("Processing OPT-301-Lot-ReviewOrg: Review Organization Technical Identifier Reference")
+    review_org_data = parse_review_org_identifier(xml_content)
+    if review_org_data:
+        merge_review_org_identifier(release_json, review_org_data)
+    else:
+        logger.warning("No Review Organization Technical Identifier Reference data found")
+
+    # Parse and merge OPT-301-Lot-Mediator Mediator Technical Identifier Reference
+    logger.info("Processing OPT-301-Lot-Mediator: Mediator Technical Identifier Reference")
+    mediator_data = parse_mediator_identifier(xml_content)
+    if mediator_data:
+        merge_mediator_identifier(release_json, mediator_data)
+    else:
+        logger.warning("No Mediator Technical Identifier Reference data found")
+
+    # Parse and merge OPT-301-Lot-ReviewInfo Review Info Provider Technical Identifier Reference
+    logger.info("Processing OPT-301-Lot-ReviewInfo: Review Info Provider Technical Identifier Reference")
+    review_info_data = parse_review_info_identifier(xml_content)
+    if review_info_data:
+        merge_review_info_identifier(release_json, review_info_data)
+    else:
+        logger.warning("No Review Info Provider Technical Identifier Reference data found")
+
+    # Parse and merge OPT-301-Lot-TenderReceipt Tender Recipient Technical Identifier Reference
+    logger.info("Processing OPT-301-Lot-TenderReceipt: Tender Recipient Technical Identifier Reference")
+    recipient_data = parse_tender_recipient_identifier(xml_content)
+    if recipient_data:
+        merge_tender_recipient_identifier(release_json, recipient_data)
+    else:
+        logger.warning("No Tender Recipient Technical Identifier Reference data found")
+        
     # Remove empty elements from release_json
     release_json = remove_empty_elements(release_json)
 
@@ -2169,7 +2206,7 @@ def main(xml_path, ocid_prefix):
 
 if __name__ == "__main__":
     # Path to the XML file
-    xml_path = '2023-689565.xml'
+    xml_path = 'can_24_minimal.xml'
     # Prefix for OCID
     ocid_prefix = 'ocid_prefix_value'
     
