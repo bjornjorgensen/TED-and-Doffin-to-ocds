@@ -1,8 +1,6 @@
-# converters/BT_127_notice.py
-
-from lxml import etree
 import logging
-from dateutil import parser
+from datetime import datetime
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -12,36 +10,27 @@ def parse_future_notice_date(xml_content):
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
     }
 
-    result = {}
-    planned_date = root.xpath("//cbc:PlannedDate/text()", namespaces=namespaces)
+    planned_date = root.xpath('//cbc:PlannedDate/text()', namespaces=namespaces)
     
     if planned_date:
+        date_str = planned_date[0]
         try:
-            # Parse the date using dateutil.parser
-            date_obj = parser.parse(planned_date[0])
-            
-            # Convert to ISO format
-            iso_date = date_obj.isoformat()
-            
-            result = {
-                "tender": {
-                    "communication": {
-                        "futureNoticeDate": iso_date
-                    }
-                }
-            }
-        except ValueError as e:
-            logger.error(f"Error parsing PlannedDate: {e}")
+            # Try to parse the date to validate it
+            datetime.fromisoformat(date_str)
+            return date_str
+        except ValueError:
+            logger.warning(f"Invalid date format: {date_str}")
+            return None
+    
+    return None
 
-    return result if result else None
-
-def merge_future_notice_date(release_json, future_notice_data):
-    if not future_notice_data:
-        logger.warning("No Future Notice Date data to merge")
-        return
-
-    tender = release_json.setdefault("tender", {})
-    communication = tender.setdefault("communication", {})
-    communication["futureNoticeDate"] = future_notice_data["tender"]["communication"]["futureNoticeDate"]
-
-    logger.info(f"Merged Future Notice Date: {communication['futureNoticeDate']}")
+def merge_future_notice_date(release_json, future_notice_date):
+    if future_notice_date:
+        if 'tender' not in release_json:
+            release_json['tender'] = {}
+        if 'communication' not in release_json['tender']:
+            release_json['tender']['communication'] = {}
+        release_json['tender']['communication']['futureNoticeDate'] = future_notice_date
+        logger.info(f"Merged future notice date: {future_notice_date}")
+    else:
+        logger.warning("No future notice date to merge")

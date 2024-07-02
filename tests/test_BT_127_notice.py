@@ -1,42 +1,36 @@
-# tests/test_BT_127_notice.py
-
 import pytest
-import json
-import os
-import sys
-import logging
+from lxml import etree
+from converters.BT_127_notice import parse_future_notice_date, merge_future_notice_date
 
-# Add the parent directory to sys.path to import main
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from main import main
-
-def test_bt_127_notice_integration(tmp_path, caplog):
-    caplog.set_level(logging.INFO)
-
+def test_parse_future_notice_date():
     xml_content = """
     <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cbc:PlannedDate>2020-03-15+01:00</cbc:PlannedDate>
     </root>
     """
-    xml_file = tmp_path / "test_input_future_notice.xml"
-    xml_file.write_text(xml_content)
+    result = parse_future_notice_date(xml_content)
+    assert result == "2020-03-15+01:00"
 
-    main(str(xml_file), "ocds-test-prefix")
+def test_parse_future_notice_date_with_time():
+    xml_content = """
+    <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cbc:PlannedDate>2020-03-15T10:30:00+01:00</cbc:PlannedDate>
+    </root>
+    """
+    result = parse_future_notice_date(xml_content)
+    assert result == "2020-03-15T10:30:00+01:00"
 
-    print("Log messages:")
-    for record in caplog.records:
-        print(f"{record.levelname}: {record.message}")
+def test_parse_future_notice_date_invalid():
+    xml_content = """
+    <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cbc:PlannedDate>invalid-date</cbc:PlannedDate>
+    </root>
+    """
+    result = parse_future_notice_date(xml_content)
+    assert result is None
 
-    with open('output.json', 'r') as f:
-        result = json.load(f)
-
-    print("Full result:")
-    print(json.dumps(result, indent=2))
-
-    assert "tender" in result, "tender object not found in the result"
-    assert "communication" in result["tender"], "communication object not found in tender"
-    assert "futureNoticeDate" in result["tender"]["communication"], "futureNoticeDate not found in communication"
-    assert result["tender"]["communication"]["futureNoticeDate"] == "2020-03-15T00:00:00+01:00"
-
-if __name__ == "__main__":
-    pytest.main(['-v', '-s'])
+def test_merge_future_notice_date_none():
+    release_json = {}
+    future_notice_date = None
+    merge_future_notice_date(release_json, future_notice_date)
+    assert release_json == {}

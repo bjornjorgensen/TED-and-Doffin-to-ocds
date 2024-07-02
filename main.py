@@ -525,13 +525,13 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Direct Award Justification data found")
 
-    # Parse and merge BT-127-notice Future Notice
-    logger.info("Processing BT-127-notice: Future Notice")
-    future_notice_data = parse_future_notice_date(xml_content)
-    if future_notice_data:
-        merge_future_notice_date(release_json, future_notice_data)
+    # Parse and merge BT-127 Future Notice Date
+    logger.info("Processing BT-127: Future Notice Date")
+    future_notice_date = parse_future_notice_date(xml_content)
+    if future_notice_date:
+        merge_future_notice_date(release_json, future_notice_date)
     else:
-        logger.warning("No Future Notice Date data found")
+        logger.warning("No Future Notice Date found")
 
     # Parse the Additional Information Deadline (BT-13)
     try:
@@ -2151,7 +2151,7 @@ def main(xml_path, ocid_prefix):
 
 if __name__ == "__main__":
     # Path to the XML file
-    xml_path = 'can_24_minimal.xml'
+    xml_path = 'dates.xml'
     # Prefix for OCID
     ocid_prefix = 'ocid_prefix_value'
     
