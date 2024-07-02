@@ -18,17 +18,24 @@ def parse_previous_planning_identifier_lot(xml_content):
     lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
     
     for lot in lots:
-        notice_refs = lot.xpath("cac:TenderingProcess/cac:NoticeDocumentReference/cbc:ID[@schemeName='notice-id-ref']/text()", namespaces=namespaces)
+        notice_refs = lot.xpath("cac:TenderingProcess/cac:NoticeDocumentReference", namespaces=namespaces)
         
-        for identifier in notice_refs:
-            related_process = {
-                "id": str(related_process_id),
-                "relationship": ["planning"],
-                "scheme": "eu-oj",
-                "identifier": identifier
-            }
-            result["relatedProcesses"].append(related_process)
-            related_process_id += 1
+        for notice_ref in notice_refs:
+            identifier = notice_ref.xpath("cbc:ID/text()", namespaces=namespaces)
+            part_identifier = notice_ref.xpath("cbc:ReferencedDocumentInternalAddress/text()", namespaces=namespaces)
+            
+            if identifier:
+                related_process = {
+                    "id": str(related_process_id),
+                    "relationship": ["planning"],
+                    "scheme": "eu-oj",
+                    "identifier": identifier[0]
+                }
+                if part_identifier:
+                    related_process["relatedLots"] = [part_identifier[0]]
+                
+                result["relatedProcesses"].append(related_process)
+                related_process_id += 1
 
     return result if result["relatedProcesses"] else None
 
@@ -42,7 +49,9 @@ def merge_previous_planning_identifier_lot(release_json, previous_planning_data)
     for new_process in previous_planning_data["relatedProcesses"]:
         existing_process = next((p for p in existing_related_processes if p["identifier"] == new_process["identifier"]), None)
         if existing_process:
-            existing_process.update(new_process)
+            if "relatedLots" in new_process:
+                existing_process.setdefault("relatedLots", []).extend(new_process["relatedLots"])
+                existing_process["relatedLots"] = list(set(existing_process["relatedLots"]))
         else:
             existing_related_processes.append(new_process)
 

@@ -31,7 +31,7 @@ from converters.BT_124_Tool_Atypical_URL import parse_tool_atypical_url, merge_t
 from converters.BT_125_Lot import parse_previous_planning_identifier_lot, merge_previous_planning_identifier_lot
 from converters.BT_125_Part import parse_previous_planning_identifier_part, merge_previous_planning_identifier_part
 from converters.BT_1252_Procedure import parse_direct_award_justification, merge_direct_award_justification
-from converters.BT_127 import parse_future_notice_date
+from converters.BT_127_notice import parse_future_notice_date, merge_future_notice_date
 from converters.BT_13 import parse_additional_info_deadline
 from converters.BT_130_131_1311 import parse_tender_deadlines_invitations
 from converters.BT_132 import parse_public_opening_date
@@ -510,10 +510,10 @@ def main(xml_path, ocid_prefix):
     logger.info("Processing BT-125(i)-Part and BT-1251-Part: Previous Planning Identifier")
     previous_planning_part_data = parse_previous_planning_identifier_part(xml_content)
     if previous_planning_part_data:
-        logger.info(f"Found {len(previous_planning_part_data['relatedProcesses'])} related processes for parts")
-        logger.info(f"Data before merge: {json.dumps(previous_planning_part_data, indent=2)}")
+        #logger.info(f"Found {len(previous_planning_part_data['relatedProcesses'])} related processes for parts")
+        #logger.info(f"Data before merge: {json.dumps(previous_planning_part_data, indent=2)}")
         merge_previous_planning_identifier_part(release_json, previous_planning_part_data)
-        logger.info(f"Data after merge: {json.dumps(release_json.get('relatedProcesses', []), indent=2)}")
+        #logger.info(f"Data after merge: {json.dumps(release_json.get('relatedProcesses', []), indent=2)}")
     else:
         logger.warning("No Previous Planning Identifier (Part) data found")
 
@@ -525,16 +525,13 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Direct Award Justification data found")
 
-    # Parse the Future Notice Date (BT-127)
-    try:
-        future_notice_date = parse_future_notice_date(xml_content)
-        
-        # Merge Future Notice Date into the release JSON
-        if future_notice_date:
-            release_json.setdefault("tender", {}).setdefault("communication", {}).update(future_notice_date["tender"]["communication"])
-
-    except Exception as e:
-        print(f"Error parsing Future Notice Date: {str(e)}")
+    # Parse and merge BT-127-notice Future Notice
+    logger.info("Processing BT-127-notice: Future Notice")
+    future_notice_data = parse_future_notice_date(xml_content)
+    if future_notice_data:
+        merge_future_notice_date(release_json, future_notice_data)
+    else:
+        logger.warning("No Future Notice Date data found")
 
     # Parse the Additional Information Deadline (BT-13)
     try:
@@ -2141,7 +2138,7 @@ def main(xml_path, ocid_prefix):
     # Remove empty elements from release_json
     release_json = remove_empty_elements(release_json)
 
-    logger.info(f"Final release_json: {json.dumps(release_json, indent=2)}")
+    #logger.info(f"Final release_json: {json.dumps(release_json, indent=2)}")
     
     # Write the JSON output to a file
     with io.open('output.json', 'w', encoding='utf-8') as f:
