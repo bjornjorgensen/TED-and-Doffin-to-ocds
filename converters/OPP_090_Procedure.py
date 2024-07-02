@@ -13,15 +13,15 @@ def parse_previous_notice_identifier(xml_content):
     }
 
     result = {"relatedProcesses": []}
-    notice_refs = root.xpath("//cac:TenderingProcess/cac:NoticeDocumentReference/cbc:ID[@schemeName='notice-id-ref']", namespaces=namespaces)
-
-    for index, notice_ref in enumerate(notice_refs, start=1):
-        result["relatedProcesses"].append({
-            "id": str(index),
+    notice_refs = root.xpath("//cac:TenderingProcess/cac:NoticeDocumentReference/cbc:ID[@schemeName='notice-id-ref']/text()", namespaces=namespaces)
+    
+    for identifier in notice_refs:
+        related_process = {
             "relationship": ["planning"],
             "scheme": "eu-oj",
-            "identifier": notice_ref.text
-        })
+            "identifier": identifier
+        }
+        result["relatedProcesses"].append(related_process)
 
     return result if result["relatedProcesses"] else None
 
@@ -33,10 +33,14 @@ def merge_previous_notice_identifier(release_json, previous_notice_data):
     existing_related_processes = release_json.setdefault("relatedProcesses", [])
     
     for new_process in previous_notice_data["relatedProcesses"]:
-        existing_process = next((p for p in existing_related_processes if p["id"] == new_process["id"]), None)
+        existing_process = next((p for p in existing_related_processes if p["identifier"].startswith(new_process["identifier"])), None)
         if existing_process:
-            existing_process.update(new_process)
+            # Update the existing process if needed
+            existing_process["relationship"] = list(set(existing_process["relationship"] + new_process["relationship"]))
         else:
+            # Only add the new process if it doesn't already exist
+            new_process["id"] = str(len(existing_related_processes) + 1)
             existing_related_processes.append(new_process)
 
     logger.info(f"Merged Previous Notice Identifier for {len(previous_notice_data['relatedProcesses'])} related processes")
+    logger.info(f"Updated relatedProcesses: {existing_related_processes}")

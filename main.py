@@ -23,12 +23,13 @@ from converters.BT_115_GPA_Coverage import parse_gpa_coverage, merge_gpa_coverag
 from converters.BT_13713 import parse_result_lot_identifier, merge_result_lot_identifier
 from converters.BT_13714_Tender import parse_tender_lot_identifier, merge_tender_lot_identifier
 from converters.BT_1375_Procedure import parse_group_lot_identifier, merge_group_lot_identifier
-from converters.BT_119 import parse_dps_termination
-from converters.BT_120 import parse_no_negotiation_necessary
-from converters.BT_122 import parse_electronic_auction_description
-from converters.BT_123 import parse_electronic_auction_url
-from converters.BT_124 import parse_tool_atypical_url
-from converters.BT_125 import parse_previous_planning_identifiers
+from converters.BT_119_LotResult import parse_dps_termination, merge_dps_termination
+from converters.BT_120_Lot import parse_no_negotiation_necessary, merge_no_negotiation_necessary
+from converters.BT_122_Lot import parse_electronic_auction_description, merge_electronic_auction_description
+from converters.BT_123_Lot import parse_electronic_auction_url, merge_electronic_auction_url
+from converters.BT_124_Tool_Atypical_URL import parse_tool_atypical_url, merge_tool_atypical_url
+from converters.BT_125_Lot import parse_previous_planning_identifier_lot, merge_previous_planning_identifier_lot
+from converters.BT_125_Part import parse_previous_planning_identifier_part, merge_previous_planning_identifier_part
 from converters.BT_1252_Procedure import parse_direct_award_justification, merge_direct_award_justification
 from converters.BT_127 import parse_future_notice_date
 from converters.BT_13 import parse_additional_info_deadline
@@ -457,122 +458,64 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Group Lot Identifier data found")
 
-    # Parse the Dynamic Purchasing System Termination (BT-119)
-    try:
-        dps_termination = parse_dps_termination(xml_content)
-        
-        # Merge Dynamic Purchasing System Termination into the release JSON
-        if dps_termination:
-            existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-            new_lots = dps_termination["tender"]["lots"]
-            
-            for new_lot in new_lots:
-                existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-                if existing_lot:
-                    existing_lot.setdefault("techniques", {}).setdefault("dynamicPurchasingSystem", {}).update(new_lot["techniques"]["dynamicPurchasingSystem"])
-                else:
-                    existing_lots.append(new_lot)
-    except Exception as e:
-        print(f"Error parsing Dynamic Purchasing System Termination: {str(e)}")   
+    # Parse and merge BT-119-LotResult DPS Termination
+    logger.info("Processing BT-119-LotResult: DPS Termination")
+    dps_termination_data = parse_dps_termination(xml_content)
+    if dps_termination_data:
+        merge_dps_termination(release_json, dps_termination_data)
+    else:
+        logger.warning("No DPS Termination data found")
 
-    # Parse the No Negotiation Necessary (BT-120)
-    try:
-        no_negotiation_necessary = parse_no_negotiation_necessary(xml_content)
-        
-        # Merge No Negotiation Necessary into the release JSON
-        if no_negotiation_necessary:
-            existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-            new_lots = no_negotiation_necessary["tender"]["lots"]
-            
-            for new_lot in new_lots:
-                existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-                if existing_lot:
-                    existing_lot.setdefault("secondStage", {}).update(new_lot["secondStage"])
-                else:
-                    existing_lots.append(new_lot)
-    except Exception as e:
-        print(f"Error parsing No Negotiation Necessary: {str(e)}")    
+    # Parse and merge BT-120-Lot No Negotiation Necessary
+    logger.info("Processing BT-120-Lot: No Negotiation Necessary")
+    no_negotiation_data = parse_no_negotiation_necessary(xml_content)
+    if no_negotiation_data:
+        merge_no_negotiation_necessary(release_json, no_negotiation_data)
+    else:
+        logger.warning("No No Negotiation Necessary data found")   
 
-    # Parse the Electronic Auction Description (BT-122)
-    try:
-        electronic_auction_description = parse_electronic_auction_description(xml_content)
-        
-        # Merge Electronic Auction Description into the release JSON
-        if electronic_auction_description:
-            existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-            new_lots = electronic_auction_description["tender"]["lots"]
-            
-            for new_lot in new_lots:
-                existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-                if existing_lot:
-                    existing_lot.setdefault("techniques", {}).setdefault("electronicAuction", {}).update(new_lot["techniques"]["electronicAuction"])
-                else:
-                    existing_lots.append(new_lot)
-    except Exception as e:
-        print(f"Error parsing Electronic Auction Description: {str(e)}") 
+    # Parse and merge BT-122-Lot Electronic Auction Description
+    logger.info("Processing BT-122-Lot: Electronic Auction Description")
+    auction_description_data = parse_electronic_auction_description(xml_content)
+    if auction_description_data:
+        merge_electronic_auction_description(release_json, auction_description_data)
+    else:
+        logger.warning("No Electronic Auction Description data found")
 
-    # Parse the Electronic Auction URL (BT-123)
-    try:
-        electronic_auction_url = parse_electronic_auction_url(xml_content)
-        
-        # Merge Electronic Auction URL into the release JSON
-        if electronic_auction_url:
-            existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-            new_lots = electronic_auction_url["tender"]["lots"]
-            
-            for new_lot in new_lots:
-                existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-                if existing_lot:
-                    existing_lot.setdefault("techniques", {}).setdefault("electronicAuction", {}).update(new_lot["techniques"]["electronicAuction"])
-                else:
-                    existing_lots.append(new_lot)
-    except Exception as e:
-        print(f"Error parsing Electronic Auction URL: {str(e)}")
+    # Parse and merge BT-123-Lot Electronic Auction URL
+    logger.info("Processing BT-123-Lot: Electronic Auction URL")
+    auction_url_data = parse_electronic_auction_url(xml_content)
+    if auction_url_data:
+        merge_electronic_auction_url(release_json, auction_url_data)
+    else:
+        logger.warning("No Electronic Auction URL data found")
 
-    # Parse the Tool Atypical URL (BT-124)
-    try:
-        tool_atypical_url = parse_tool_atypical_url(xml_content)
-        
-        # Merge Tool Atypical URL into the release JSON
-        if tool_atypical_url:
-            # Handle lot-specific information
-            if "lots" in tool_atypical_url["tender"]:
-                existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-                new_lots = tool_atypical_url["tender"]["lots"]
-                
-                for new_lot in new_lots:
-                    existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-                    if existing_lot:
-                        existing_lot.setdefault("communication", {}).update(new_lot["communication"])
-                    else:
-                        existing_lots.append(new_lot)
-            
-            # Handle part-specific information
-            if "communication" in tool_atypical_url["tender"]:
-                release_json.setdefault("tender", {}).setdefault("communication", {}).update(tool_atypical_url["tender"]["communication"])
+    # Parse and merge BT-124 Tool Atypical URL
+    logger.info("Processing BT-124: Tool Atypical URL")
+    atypical_url_data = parse_tool_atypical_url(xml_content)
+    if atypical_url_data:
+        merge_tool_atypical_url(release_json, atypical_url_data)
+    else:
+        logger.warning("No Tool Atypical URL data found")
 
-    except Exception as e:
-        print(f"Error parsing Tool Atypical URL: {str(e)}")
+    # Parse and merge BT-125(i)-Lot Previous Planning Identifier
+    logger.info("Processing BT-125(i)-Lot: Previous Planning Identifier")
+    previous_planning_lot_data = parse_previous_planning_identifier_lot(xml_content)
+    if previous_planning_lot_data:
+        merge_previous_planning_identifier_lot(release_json, previous_planning_lot_data)
+    else:
+        logger.warning("No Previous Planning Identifier (Lot) data found")
 
-    # Parse the Previous Planning Identifiers (BT-125 and BT-1251)
-    try:
-        previous_planning_identifiers = parse_previous_planning_identifiers(xml_content)
-        
-        # Merge Previous Planning Identifiers into the release JSON
-        if previous_planning_identifiers:
-            existing_related_processes = release_json.setdefault("relatedProcesses", [])
-            new_related_processes = previous_planning_identifiers["relatedProcesses"]
-            
-            for new_process in new_related_processes:
-                existing_process = next((p for p in existing_related_processes if p["id"] == new_process["id"]), None)
-                if existing_process:
-                    existing_process.update(new_process)
-                else:
-                    existing_related_processes.append(new_process)
-
-    except Exception as e:
-        print(f"Error parsing Previous Planning Identifiers: {str(e)}")
-
+    # Parse and merge BT-125(i)-Part and BT-1251-Part Previous Planning Identifier
+    logger.info("Processing BT-125(i)-Part and BT-1251-Part: Previous Planning Identifier")
+    previous_planning_part_data = parse_previous_planning_identifier_part(xml_content)
+    if previous_planning_part_data:
+        logger.info(f"Found {len(previous_planning_part_data['relatedProcesses'])} related processes for parts")
+        logger.info(f"Data before merge: {json.dumps(previous_planning_part_data, indent=2)}")
+        merge_previous_planning_identifier_part(release_json, previous_planning_part_data)
+        logger.info(f"Data after merge: {json.dumps(release_json.get('relatedProcesses', []), indent=2)}")
+    else:
+        logger.warning("No Previous Planning Identifier (Part) data found")
 
     # Parse and merge BT-1252-Procedure Direct Award Justification
     logger.info("Processing BT-1252-Procedure: Direct Award Justification")
@@ -1994,13 +1937,16 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Kilometers Public Transport data found")
 
-    # Parse and merge OPP-090-Procedure Previous Notice Identifier
+    # Processing OPP-090-Procedure: Previous Notice Identifier
     logger.info("Processing OPP-090-Procedure: Previous Notice Identifier")
+    logger.info(f"relatedProcesses before OPP-090: {json.dumps(release_json.get('relatedProcesses', []), indent=2)}")
     previous_notice_data = parse_previous_notice_identifier(xml_content)
     if previous_notice_data:
+        logger.info(f"Parsed previous notice data: {json.dumps(previous_notice_data, indent=2)}")
         merge_previous_notice_identifier(release_json, previous_notice_data)
     else:
         logger.warning("No Previous Notice Identifier data found")
+    logger.info(f"relatedProcesses after OPP-090: {json.dumps(release_json.get('relatedProcesses', []), indent=2)}")
 
     # Parse and merge OPT-030-Procedure-SProvider Provided Service Type
     logger.info("Processing OPT-030-Procedure-SProvider: Provided Service Type")
@@ -2195,6 +2141,8 @@ def main(xml_path, ocid_prefix):
     # Remove empty elements from release_json
     release_json = remove_empty_elements(release_json)
 
+    logger.info(f"Final release_json: {json.dumps(release_json, indent=2)}")
+    
     # Write the JSON output to a file
     with io.open('output.json', 'w', encoding='utf-8') as f:
         json.dump(release_json, f, ensure_ascii=False, indent=4)
