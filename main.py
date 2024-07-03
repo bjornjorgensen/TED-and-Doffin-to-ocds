@@ -12,7 +12,7 @@ from converters.BT_05_notice import parse_notice_dispatch_date_time, merge_notic
 from converters.BT_06_Lot import parse_strategic_procurement, merge_strategic_procurement
 from converters.BT_09 import parse_xml_to_json
 from converters.BT_10 import parse_contract_xml
-from converters.BT_11 import parse_buyer_legal_type
+from converters.BT_11_Procedure_Buyer import parse_buyer_legal_type, merge_buyer_legal_type
 from converters.BT_88 import parse_procedure_features
 from converters.BT_105 import parse_procurement_procedure_type
 from converters.BT_106 import parse_accelerated_procedure
@@ -60,7 +60,7 @@ from converters.BT_17 import parse_submission_electronic
 from converters.BT_171 import parse_tender_rank
 from converters.BT_1711 import parse_tender_ranked
 from converters.BT_18 import parse_submission_url
-from converters.BT_19 import parse_submission_nonelectronic_justification
+from converters.BT_19_Lot import parse_nonelectronic_submission_justification, merge_nonelectronic_submission_justification
 from converters.BT_191 import parse_country_origin
 from converters.BT_193 import parse_tender_variant
 from converters.BT_195 import parse_unpublished_identifier
@@ -159,7 +159,7 @@ from converters.BT_711_LotResult_Tender_Value_Highest import parse_tender_value_
 from converters.BT_712_LotResult_Buyer_Review_Complainants import parse_buyer_review_complainants, merge_buyer_review_complainants
 from converters.BT_717_Lot_Clean_Vehicles_Directive import parse_clean_vehicles_directive, merge_clean_vehicles_directive
 from converters.BT_719_Notice_Change_Procurement_Documents_Date import parse_change_procurement_documents_date, merge_change_procurement_documents_date
-from converters.BT_720_Tender_Value import parse_tender_value, merge_tender_value
+from converters.BT_720_Tender import parse_tender_value, merge_tender_value
 from converters.BT_721_Contract_Title import parse_contract_title, merge_contract_title
 from converters.BT_722_Contract_EU_Funds_Programme import parse_contract_eu_funds_programme, merge_contract_eu_funds_programme
 from converters.BT_7220_Lot_EU_Funds_Programme import parse_lot_eu_funds_programme, merge_lot_eu_funds_programme
@@ -256,6 +256,13 @@ from converters.OPT_301_Lot_Mediator import parse_mediator_identifier, merge_med
 from converters.OPT_301_Lot_ReviewInfo import parse_review_info_identifier, merge_review_info_identifier
 from converters.OPT_301_Lot_TenderEval import parse_tender_evaluator_identifier, merge_tender_evaluator_identifier
 from converters.OPT_301_Lot_TenderReceipt import parse_tender_recipient_identifier, merge_tender_recipient_identifier
+# add more OPT 301 her
+
+from converters.OPT_302_Organization import parse_beneficial_owner_reference, merge_beneficial_owner_reference
+from converters.OPT_310_Tender import parse_tendering_party_id_reference, merge_tendering_party_id_reference
+from converters.OPT_315_LotResult import parse_contract_identifier_reference, merge_contract_identifier_reference
+from converters.OPT_316_Contract import parse_contract_technical_identifier, merge_contract_technical_identifier
+from converters.OPT_320_LotResult import parse_tender_identifier_reference, merge_tender_identifier_reference
 
 from converters.BT_198_BT_105 import parse_unpublished_access_date, merge_unpublished_access_date
 
@@ -363,18 +370,13 @@ def main(xml_path, ocid_prefix):
                 else:
                     release_json.setdefault("parties", []).append(new_party)
 
-    buyer_legal_type_info = parse_buyer_legal_type(xml_content)
-    if buyer_legal_type_info:
-        for new_party in buyer_legal_type_info["parties"]:
-            existing_party = next((party for party in release_json.get("parties", []) if party["id"] == new_party["id"]), None)
-            if existing_party:
-                if "details" not in existing_party:
-                    existing_party["details"] = {"classifications": []}
-                elif "classifications" not in existing_party["details"]:
-                    existing_party["details"]["classifications"] = []
-                existing_party["details"]["classifications"].extend(new_party["details"]["classifications"])
-            else:
-                release_json.setdefault("parties", []).append(new_party)
+    # Parse and merge BT-11-Procedure-Buyer Buyer Legal Type
+    logger.info("Processing BT-11-Procedure-Buyer: Buyer Legal Type")
+    buyer_legal_type_data = parse_buyer_legal_type(xml_content)
+    if buyer_legal_type_data:
+        merge_buyer_legal_type(release_json, buyer_legal_type_data)
+    else:
+        logger.warning("No Buyer Legal Type data found")
 
     # Parse the procedure features (BT-88)
     procedure_features = parse_procedure_features(xml_content)
@@ -1023,22 +1025,13 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         print(f"Error parsing Submission URL: {str(e)}")
 
-    # Parse the Submission Nonelectronic Justification (BT-19)
-    try:
-        submission_nonelectronic_justification = parse_submission_nonelectronic_justification(xml_content)
-        
-        # Merge Submission Nonelectronic Justification into the release JSON
-        if submission_nonelectronic_justification and "tender" in submission_nonelectronic_justification and "lots" in submission_nonelectronic_justification["tender"]:
-            existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-            for new_lot in submission_nonelectronic_justification["tender"]["lots"]:
-                existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-                if existing_lot:
-                    existing_lot.setdefault("submissionTerms", {}).setdefault("nonElectronicSubmission", {}).update(new_lot["submissionTerms"]["nonElectronicSubmission"])
-                else:
-                    existing_lots.append(new_lot)
-
-    except Exception as e:
-        print(f"Error parsing Submission Nonelectronic Justification: {str(e)}")
+    # Parse and merge BT-19-Lot Submission Nonelectronic Justification
+    logger.info("Processing BT-19-Lot: Submission Nonelectronic Justification")
+    justification_data = parse_nonelectronic_submission_justification(xml_content)
+    if justification_data:
+        merge_nonelectronic_submission_justification(release_json, justification_data)
+    else:
+        logger.warning("No Submission Nonelectronic Justification data found")
 
     # Parse the Country Origin (BT-191)
     try:
@@ -1555,9 +1548,13 @@ def main(xml_path, ocid_prefix):
     change_procurement_documents_date_data = parse_change_procurement_documents_date(xml_content)
     merge_change_procurement_documents_date(release_json, change_procurement_documents_date_data)
 
-    # Parse and merge BT-720-Tender Value
+    # Parse and merge BT-720-Tender Tender Value
+    logger.info("Processing BT-720-Tender: Tender Value")
     tender_value_data = parse_tender_value(xml_content)
-    merge_tender_value(release_json, tender_value_data)
+    if tender_value_data:
+        merge_tender_value(release_json, tender_value_data)
+    else:
+        logger.warning("No Tender Value data found")
 
     # Parse and merge BT-721-Contract Title
     contract_title_data = parse_contract_title(xml_content)
@@ -2106,6 +2103,52 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Tender Recipient Technical Identifier Reference data found")
 
+# add more OPT-301 her
+
+
+
+
+
+    # Parse and merge OPT-302-Organization Beneficial Owner Reference
+    logger.info("Processing OPT-302-Organization: Beneficial Owner Reference")
+    bo_reference_data = parse_beneficial_owner_reference(xml_content)
+    if bo_reference_data:
+        merge_beneficial_owner_reference(release_json, bo_reference_data)
+    else:
+        logger.warning("No Beneficial Owner Reference data found")
+
+    # Parse and merge OPT-310-Tender Tendering Party ID Reference
+    logger.info("Processing OPT-310-Tender: Tendering Party ID Reference")
+    tendering_party_data = parse_tendering_party_id_reference(xml_content)
+    if tendering_party_data:
+        merge_tendering_party_id_reference(release_json, tendering_party_data)
+    else:
+        logger.warning("No Tendering Party ID Reference data found")
+
+    # Parse and merge OPT-315-LotResult Contract Identifier Reference
+    logger.info("Processing OPT-315-LotResult: Contract Identifier Reference")
+    contract_id_data = parse_contract_identifier_reference(xml_content)
+    if contract_id_data:
+        merge_contract_identifier_reference(release_json, contract_id_data)
+    else:
+        logger.warning("No Contract Identifier Reference data found")
+
+    # Parse and merge OPT-316-Contract Contract Technical Identifier
+    logger.info("Processing OPT-316-Contract: Contract Technical Identifier")
+    contract_tech_id_data = parse_contract_technical_identifier(xml_content)
+    if contract_tech_id_data:
+        merge_contract_technical_identifier(release_json, contract_tech_id_data)
+    else:
+        logger.warning("No Contract Technical Identifier data found")
+
+    # Parse and merge OPT-320-LotResult Tender Identifier Reference
+    logger.info("Processing OPT-320-LotResult: Tender Identifier Reference")
+    tender_id_data = parse_tender_identifier_reference(xml_content)
+    if tender_id_data:
+        merge_tender_identifier_reference(release_json, tender_id_data)
+    else:
+        logger.warning("No Tender Identifier Reference data found")
+        
     # Parse and merge BT-198(BT-105) Unpublished Access Date
     logger.info("Processing BT-198(BT-105): Unpublished Access Date")
     access_date = parse_unpublished_access_date(xml_content)
