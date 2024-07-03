@@ -1,43 +1,32 @@
-# converters/BT_05_notice.py
+# converters/BT_05_Notice.py
 
-from lxml import etree
 import logging
-from datetime import datetime, timezone
+from datetime import datetime
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
-def parse_notice_dispatch_datetime(xml_content):
+def parse_notice_dispatch_date_time(xml_content):
     root = etree.fromstring(xml_content)
-    namespaces = {
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
-    }
-
+    namespaces = {"cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"}
+    
     issue_date = root.xpath("/*/cbc:IssueDate/text()", namespaces=namespaces)
     issue_time = root.xpath("/*/cbc:IssueTime/text()", namespaces=namespaces)
-
+    
     if issue_date and issue_time:
-        try:
-            # Remove the timezone information from the date string
-            date_str = issue_date[0].split('+')[0]
-            # Combine date and time
-            datetime_str = f"{date_str}T{issue_time[0]}"
-            # Parse the combined string to a datetime object
-            dispatch_datetime = datetime.fromisoformat(datetime_str)
-            # Convert to ISO format
-            iso_datetime = dispatch_datetime.isoformat()
-            
-            return {"date": iso_datetime}
-        except ValueError as e:
-            logger.error(f"Error parsing datetime: {e}")
-            return None
-    else:
-        logger.warning("Missing IssueDate or IssueTime in XML")
-        return None
+        return convert_to_iso_format(issue_date[0], issue_time[0])
+    return None
 
-def merge_notice_dispatch_datetime(release_json, dispatch_datetime_data):
-    if not dispatch_datetime_data:
-        logger.warning("No Notice Dispatch Date and Time data to merge")
-        return
+def convert_to_iso_format(date_string, time_string):
+    # Combine date and time
+    datetime_string = f"{date_string.split('+')[0]}T{time_string}"
+    
+    # Parse the datetime
+    date_time = datetime.fromisoformat(datetime_string)
+    
+    # Format the datetime with the original timezone
+    return date_time.isoformat()
 
-    release_json["date"] = dispatch_datetime_data["date"]
-    logger.info("Merged Notice Dispatch Date and Time")
+def merge_notice_dispatch_date_time(release_json, dispatch_date_time):
+    if dispatch_date_time:
+        release_json["date"] = dispatch_date_time

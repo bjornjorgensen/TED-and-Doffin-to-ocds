@@ -8,7 +8,7 @@ from converters.Common_operations import NoticeProcessor
 from converters.BT_01 import parse_legal_basis
 from converters.BT_03 import parse_form_type, merge_form_type
 from converters.BT_04 import parse_procedure_identifier
-from converters.BT_05_notice import parse_notice_dispatch_datetime, merge_notice_dispatch_datetime
+from converters.BT_05_notice import parse_notice_dispatch_date_time, merge_notice_dispatch_date_time
 from converters.BT_06_Lot import parse_strategic_procurement, merge_strategic_procurement
 from converters.BT_09 import parse_xml_to_json
 from converters.BT_10 import parse_contract_xml
@@ -18,7 +18,7 @@ from converters.BT_105 import parse_procurement_procedure_type
 from converters.BT_106 import parse_accelerated_procedure
 from converters.BT_109_Lot import parse_framework_duration_justification, merge_framework_duration_justification
 from converters.BT_111_Lot import parse_framework_buyer_categories, merge_framework_buyer_categories
-from converters.BT_113 import parse_framework_max_participants
+from converters.BT_113_Lot import parse_framework_max_participants, merge_framework_max_participants
 from converters.BT_115_GPA_Coverage import parse_gpa_coverage, merge_gpa_coverage
 from converters.BT_13713 import parse_result_lot_identifier, merge_result_lot_identifier
 from converters.BT_13714_Tender import parse_tender_lot_identifier, merge_tender_lot_identifier
@@ -32,7 +32,8 @@ from converters.BT_125_Lot import parse_previous_planning_identifier_lot, merge_
 from converters.BT_125_Part import parse_previous_planning_identifier_part, merge_previous_planning_identifier_part
 from converters.BT_1252_Procedure import parse_direct_award_justification, merge_direct_award_justification
 from converters.BT_127_notice import parse_future_notice_date, merge_future_notice_date
-from converters.BT_13 import parse_additional_info_deadline
+from converters.BT_13_Lot import parse_additional_info_deadline, merge_additional_info_deadline
+from converters.BT_13_Part import parse_additional_info_deadline_part, merge_additional_info_deadline_part
 from converters.BT_130_131_1311 import parse_tender_deadlines_invitations
 from converters.BT_132 import parse_public_opening_date
 from converters.BT_133_Lot import parse_public_opening_place, merge_public_opening_place
@@ -45,8 +46,8 @@ from converters.BT_14 import parse_documents_restricted
 from converters.BT_140 import parse_change_reason_code_and_description
 from converters.BT_142 import parse_winner_chosen
 from converters.BT_144 import parse_not_awarded_reason
-from converters.BT_145 import parse_contract_conclusion_date
-from converters.BT_1451 import parse_winner_decision_date
+from converters.BT_145_Contract import parse_contract_conclusion_date, merge_contract_conclusion_date
+from converters.BT_1451_Contract import parse_winner_decision_date, merge_winner_decision_date
 from converters.BT_15 import parse_documents_url
 from converters.BT_150 import parse_contract_identifier
 from converters.BT_151 import parse_contract_url
@@ -256,6 +257,8 @@ from converters.OPT_301_Lot_ReviewInfo import parse_review_info_identifier, merg
 from converters.OPT_301_Lot_TenderEval import parse_tender_evaluator_identifier, merge_tender_evaluator_identifier
 from converters.OPT_301_Lot_TenderReceipt import parse_tender_recipient_identifier, merge_tender_recipient_identifier
 
+from converters.BT_198_BT_105 import parse_unpublished_access_date, merge_unpublished_access_date
+
 def configure_logging():
     logging.basicConfig(
         level=logging.INFO,
@@ -323,9 +326,9 @@ def main(xml_path, ocid_prefix):
 
     # Parse and merge BT-05-notice Notice Dispatch Date and Time
     logger.info("Processing BT-05-notice: Notice Dispatch Date and Time")
-    dispatch_datetime_data = parse_notice_dispatch_datetime(xml_content)
+    dispatch_datetime_data = parse_notice_dispatch_date_time(xml_content)
     if dispatch_datetime_data:
-        merge_notice_dispatch_datetime(release_json, dispatch_datetime_data)
+        merge_notice_dispatch_date_time(release_json, dispatch_datetime_data)
     else:
         logger.warning("No Notice Dispatch Date and Time data found")
 
@@ -410,21 +413,14 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Framework Buyer Categories data found")
 
-    # Parse the framework maximum participants number (BT-113)
-    framework_max_participants = parse_framework_max_participants(xml_content)
-    
-    # Merge framework maximum participants number into the release JSON
-    if framework_max_participants:
-        existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-        new_lots = framework_max_participants["tender"]["lots"]
+    # Parse and merge BT-113-Lot Framework Maximum Participants Number
+    logger.info("Processing BT-113-Lot: Framework Maximum Participants Number")
+    max_participants_data = parse_framework_max_participants(xml_content)
+    if max_participants_data:
+        merge_framework_max_participants(release_json, max_participants_data)
+    else:
+        logger.warning("No Framework Maximum Participants data found")
         
-        for new_lot in new_lots:
-            existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-            if existing_lot:
-                existing_lot.setdefault("techniques", {}).setdefault("frameworkAgreement", {}).update(new_lot["techniques"]["frameworkAgreement"])
-            else:
-                existing_lots.append(new_lot)                   
-
     # Parse and merge BT-115 GPA Coverage
     logger.info("Processing BT-115: GPA Coverage")
     gpa_coverage_data = parse_gpa_coverage(xml_content)
@@ -533,28 +529,21 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Future Notice Date found")
 
-    # Parse the Additional Information Deadline (BT-13)
-    try:
-        additional_info_deadline = parse_additional_info_deadline(xml_content)
-        
-        # Merge Additional Information Deadline into the release JSON
-        if additional_info_deadline:
-            if "lots" in additional_info_deadline["tender"]:
-                existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-                new_lots = additional_info_deadline["tender"]["lots"]
-                
-                for new_lot in new_lots:
-                    existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-                    if existing_lot:
-                        existing_lot.setdefault("enquiryPeriod", {}).update(new_lot["enquiryPeriod"])
-                    else:
-                        existing_lots.append(new_lot)
-            
-            if "enquiryPeriod" in additional_info_deadline["tender"]:
-                release_json.setdefault("tender", {}).setdefault("enquiryPeriod", {}).update(additional_info_deadline["tender"]["enquiryPeriod"])
+    # Parse and merge BT-13 Additional Information Deadline
+    logger.info("Processing BT-13: Additional Information Deadline")
+    lots_data = parse_additional_info_deadline(xml_content)
+    if lots_data:
+        merge_additional_info_deadline(release_json, lots_data)
+    else:
+        logger.warning("No Additional Information Deadline found")
 
-    except Exception as e:
-        print(f"Error parsing Additional Information Deadline: {str(e)}")
+    # Parse and merge BT-13 Additional Information Deadline (Part)
+    logger.info("Processing BT-13: Additional Information Deadline (Part)")
+    deadline_part = parse_additional_info_deadline_part(xml_content)
+    if deadline_part:
+        merge_additional_info_deadline_part(release_json, deadline_part)
+    else:
+        logger.warning("No Additional Information Deadline (Part) found")
 
     # Parse the Tender Deadlines and Invitations (BT-130, BT-131, BT-1311)
     try:
@@ -773,43 +762,21 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         print(f"Error parsing Not Awarded Reason: {str(e)}")
 
-    # Parse the Contract Conclusion Date (BT-145)
-    try:
-        contract_conclusion_date = parse_contract_conclusion_date(xml_content)
-        
-        # Merge Contract Conclusion Date into the release JSON
-        if contract_conclusion_date and "contracts" in contract_conclusion_date:
-            existing_contracts = release_json.setdefault("contracts", [])
-            for new_contract in contract_conclusion_date["contracts"]:
-                existing_contract = next((contract for contract in existing_contracts if contract["id"] == new_contract["id"]), None)
-                if existing_contract:
-                    existing_contract.update(new_contract)
-                else:
-                    existing_contracts.append(new_contract)
+    # Parse and merge BT-145 Contract Conclusion Date
+    logger.info("Processing BT-145: Contract Conclusion Date")
+    contracts_data = parse_contract_conclusion_date(xml_content)
+    if contracts_data:
+        merge_contract_conclusion_date(release_json, contracts_data)
+    else:
+        logger.warning("No Contract Conclusion Date found")
 
-    except Exception as e:
-        print(f"Error parsing Contract Conclusion Date: {str(e)}")
-
-    # Parse the Winner Decision Date (BT-1451)
-    try:
-        winner_decision_date = parse_winner_decision_date(xml_content)
-        
-        # Merge Winner Decision Date into the release JSON
-        if winner_decision_date and "awards" in winner_decision_date:
-            existing_awards = release_json.setdefault("awards", [])
-            for new_award in winner_decision_date["awards"]:
-                existing_award = next((award for award in existing_awards if award["id"] == new_award["id"]), None)
-                if existing_award:
-                    if "date" not in existing_award or new_award["date"] < existing_award["date"]:
-                        existing_award["date"] = new_award["date"]
-                    existing_award.setdefault("relatedLots", []).extend(
-                        lot for lot in new_award["relatedLots"] if lot not in existing_award.get("relatedLots", [])
-                    )
-                else:
-                    existing_awards.append(new_award)
-
-    except Exception as e:
-        print(f"Error parsing Winner Decision Date: {str(e)}")
+    # Parse and merge BT-1451 Winner Decision Date
+    logger.info("Processing BT-1451: Winner Decision Date")
+    awards_data = parse_winner_decision_date(xml_content)
+    if awards_data:
+        merge_winner_decision_date(release_json, awards_data)
+    else:
+        logger.warning("No Winner Decision Date found")
 
     # Parse the Documents URL (BT-15)
     try:
@@ -1724,9 +1691,13 @@ def main(xml_path, ocid_prefix):
     is_terminated = parse_pin_competition_termination(xml_content)
     merge_pin_competition_termination(release_json, is_terminated)
 
-    # Parse and merge BT-759-LotResult Received Submissions Count
-    submissions_count_data = parse_received_submissions_count(xml_content)
-    merge_received_submissions_count(release_json, submissions_count_data)
+    # Parse and merge BT-759 Received Submissions Count
+    logger.info("Processing BT-759: Received Submissions Count")
+    statistics_data = parse_received_submissions_count(xml_content)
+    if statistics_data:
+        merge_received_submissions_count(release_json, statistics_data)
+    else:
+        logger.warning("No Received Submissions Count found")
 
     # Parse and merge BT-76-Lot Tenderer Legal Form Description
     legal_form_data = parse_tenderer_legal_form(xml_content)
@@ -2134,6 +2105,14 @@ def main(xml_path, ocid_prefix):
         merge_tender_recipient_identifier(release_json, recipient_data)
     else:
         logger.warning("No Tender Recipient Technical Identifier Reference data found")
+
+    # Parse and merge BT-198(BT-105) Unpublished Access Date
+    logger.info("Processing BT-198(BT-105): Unpublished Access Date")
+    access_date = parse_unpublished_access_date(xml_content)
+    if access_date:
+        merge_unpublished_access_date(release_json, access_date)
+    else:
+        logger.warning("No Unpublished Access Date found")
         
     # Remove empty elements from release_json
     release_json = remove_empty_elements(release_json)
@@ -2151,7 +2130,7 @@ def main(xml_path, ocid_prefix):
 
 if __name__ == "__main__":
     # Path to the XML file
-    xml_path = 'dates.xml'
+    xml_path = 'can_24_minimal.xml'
     # Prefix for OCID
     ocid_prefix = 'ocid_prefix_value'
     
