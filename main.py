@@ -64,7 +64,7 @@ from converters.BT_19_Lot import parse_nonelectronic_submission_justification, m
 from converters.BT_191 import parse_country_origin
 from converters.BT_193 import parse_tender_variant
 from converters.BT_195 import parse_unpublished_identifier
-from converters.BT_21 import parse_lot_lotgroup_part_and_procedure_title
+from converters.BT_21 import parse_title, merge_title
 from converters.BT_22 import parse_internal_identifiers, merge_internal_identifiers
 from converters.BT_23 import parse_main_nature, merge_main_nature
 from converters.BT_24 import parse_description, merge_description
@@ -222,6 +222,7 @@ from converters.BT_95_Lot import parse_recurrence_description, merge_recurrence_
 from converters.BT_97_Lot import parse_submission_language, merge_submission_language
 from converters.BT_98_Lot import parse_tender_validity_deadline, merge_tender_validity_deadline
 from converters.BT_99_Lot import parse_review_deadline_description, merge_review_deadline_description
+from converters.BT_198_BT_105 import parse_unpublished_access_date, merge_unpublished_access_date
 from converters.OPP_020_021_022_023_Contract import parse_essential_assets, merge_essential_assets
 from converters.OPP_031_Tender import parse_contract_conditions, merge_contract_conditions
 from converters.OPP_032_Tender import parse_revenues_allocation, merge_revenues_allocation
@@ -264,7 +265,7 @@ from converters.OPT_315_LotResult import parse_contract_identifier_reference, me
 from converters.OPT_316_Contract import parse_contract_technical_identifier, merge_contract_technical_identifier
 from converters.OPT_320_LotResult import parse_tender_identifier_reference, merge_tender_identifier_reference
 
-from converters.BT_198_BT_105 import parse_unpublished_access_date, merge_unpublished_access_date
+
 
 def configure_logging():
     logging.basicConfig(
@@ -1088,38 +1089,14 @@ def main(xml_path, ocid_prefix):
         print(f"Error parsing Unpublished Identifier: {str(e)}")
 
     # Parse the lot, lot group, part, and procedure titles (BT-21)
-    titles = parse_lot_lotgroup_part_and_procedure_title(xml_content)
-    # Merge lot, lot group, part, and procedure titles into the release JSON
-    if titles and "tender" in titles:
-        # Merge lots
-        if "lots" in titles["tender"]:
-            existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-            for new_lot in titles["tender"]["lots"]:
-                existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-                if existing_lot:
-                    existing_lot["title"] = new_lot["title"]
-                else:
-                    existing_lots.append(new_lot)
-        
-        # Merge lot groups
-        if "lotGroups" in titles["tender"]:
-            existing_lotgroups = release_json.setdefault("tender", {}).setdefault("lotGroups", [])
-            for new_lotgroup in titles["tender"]["lotGroups"]:
-                existing_lotgroup = next((lotgroup for lotgroup in existing_lotgroups if lotgroup["id"] == new_lotgroup["id"]), None)
-                if existing_lotgroup:
-                    existing_lotgroup["title"] = new_lotgroup["title"]
-                else:
-                    existing_lotgroups.append(new_lotgroup)
-        
-        # Merge tender title (Part or Procedure)
-        if "title" in titles["tender"]:
-            release_json.setdefault("tender", {})["title"] = titles["tender"]["title"]
+    title_data = parse_title(xml_content)
+    if title_data:
+        merge_title(release_json, title_data)
 
     # Parse and merge BT-22 Internal Identifiers
     logger.info("Processing BT-22: Internal Identifiers")
     internal_identifiers_data = parse_internal_identifiers(xml_content)
     merge_internal_identifiers(release_json, internal_identifiers_data)
-
 
     # Parse and merge BT-23 Main Nature
     logger.info("Processing BT-23: Main Nature")
@@ -1830,6 +1807,14 @@ def main(xml_path, ocid_prefix):
     review_deadline_data = parse_review_deadline_description(xml_content)
     merge_review_deadline_description(release_json, review_deadline_data)
 
+     # Parse and merge BT-198(BT-105) Unpublished Access Date
+    logger.info("Processing BT-198(BT-105): Unpublished Access Date")
+    access_date = parse_unpublished_access_date(xml_content)
+    if access_date:
+        merge_unpublished_access_date(release_json, access_date)
+    else:
+        logger.warning("No Unpublished Access Date found")
+
     # Parse and merge OPP-020-021-022-023-Contract Essential Assets
     logger.info("Processing OPP-020-021-022-023-Contract: Essential Assets")
     essential_assets_data = parse_essential_assets(xml_content)
@@ -2149,13 +2134,6 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Tender Identifier Reference data found")
         
-    # Parse and merge BT-198(BT-105) Unpublished Access Date
-    logger.info("Processing BT-198(BT-105): Unpublished Access Date")
-    access_date = parse_unpublished_access_date(xml_content)
-    if access_date:
-        merge_unpublished_access_date(release_json, access_date)
-    else:
-        logger.warning("No Unpublished Access Date found")
         
     # Remove empty elements from release_json
     release_json = remove_empty_elements(release_json)
