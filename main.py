@@ -1996,14 +1996,11 @@ def main(xml_path, ocid_prefix):
 
     # Parse and merge OPT-201-Organization-TouchPoint TouchPoint Technical Identifier
     logger.info("Processing OPT-201-Organization-TouchPoint: TouchPoint Technical Identifier")
-    touchpoint_technical_id_data = parse_touchpoint_technical_identifier(xml_content)
-    if touchpoint_technical_id_data:
-        merge_touchpoint_technical_identifier(release_json, touchpoint_technical_id_data)
+    touchpoint_data = parse_touchpoint_technical_identifier(xml_content)
+    if touchpoint_data:
+        merge_touchpoint_technical_identifier(release_json, touchpoint_data)
     else:
         logger.warning("No TouchPoint Technical Identifier data found")
-
-    #logger.info("Initial release_json state:")
-    #logger.info(json.dumps(release_json, indent=2))
     
     logger.info("Processing OPT-202-UBO: Beneficial Owner Technical Identifier")
     beneficial_owner_id_data = parse_beneficial_owner_identifier(xml_content)
@@ -2089,8 +2086,6 @@ def main(xml_path, ocid_prefix):
         logger.warning("No Tender Recipient Technical Identifier Reference data found")
 
 # add more OPT-301 her
-
-
 
 
 

@@ -15,26 +15,26 @@ def parse_touchpoint_technical_identifier(xml_content):
         'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1'
     }
 
-    result = {"parties": []}
-
-    touchpoints = root.xpath("//efac:Organizations/efac:Organization/efac:TouchPoint/cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']", namespaces=namespaces)
+    touchpoints = root.xpath("//efac:Organization/efac:TouchPoint/cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']", namespaces=namespaces)
     
-    for touchpoint_id in touchpoints:
-        result["parties"].append({
-            "id": touchpoint_id.text
-        })
+    result = {"touchpoints": []}
+    for touchpoint in touchpoints:
+        result["touchpoints"].append(touchpoint.text)
 
-    return result if result["parties"] else None
+    return result if result["touchpoints"] else None
 
 def merge_touchpoint_technical_identifier(release_json, touchpoint_data):
     if not touchpoint_data:
         logger.warning("No TouchPoint Technical Identifier data to merge")
         return
 
-    existing_parties = release_json.setdefault("parties", [])
+    parties = release_json.setdefault("parties", [])
     
-    for new_party in touchpoint_data["parties"]:
-        if not any(party["id"] == new_party["id"] for party in existing_parties):
-            existing_parties.append(new_party)
+    for touchpoint_id in touchpoint_data["touchpoints"]:
+        if not any(party["id"] == touchpoint_id for party in parties):
+            parties.append({"id": touchpoint_id})
+            logger.info(f"Added new party with TouchPoint Technical Identifier: {touchpoint_id}")
+        else:
+            logger.info(f"Party with TouchPoint Technical Identifier {touchpoint_id} already exists")
 
-    logger.info(f"Merged TouchPoint Technical Identifier data for {len(touchpoint_data['parties'])} touchpoints")
+    logger.info(f"Merged {len(touchpoint_data['touchpoints'])} TouchPoint Technical Identifiers")
