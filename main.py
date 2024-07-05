@@ -55,7 +55,7 @@ from converters.BT_16 import parse_organisation_part_name
 from converters.BT_160 import parse_concession_revenue_buyer
 from converters.BT_162 import parse_concession_revenue_user
 from converters.BT_163 import parse_concession_value_description
-from converters.BT_165 import parse_winner_size
+from converters.BT_165_Organization_Company import parse_winner_size, merge_winner_size
 from converters.BT_17_Lot import parse_submission_electronic, merge_submission_electronic
 from converters.BT_171_Tender import parse_tender_rank, merge_tender_rank
 from converters.BT_1711_Tender import parse_tender_ranked, merge_tender_ranked
@@ -935,22 +935,13 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         print(f"Error parsing Concession Value Description: {str(e)}")
 
-    # Parse the Winner Size (BT-165)
-    try:
-        winner_size = parse_winner_size(xml_content)
-        
-        # Merge Winner Size into the release JSON
-        if winner_size and "parties" in winner_size:
-            existing_parties = release_json.setdefault("parties", [])
-            for new_party in winner_size["parties"]:
-                existing_party = next((party for party in existing_parties if party["id"] == new_party["id"]), None)
-                if existing_party:
-                    existing_party.setdefault("details", {}).update(new_party["details"])
-                else:
-                    existing_parties.append(new_party)
-
-    except Exception as e:
-        print(f"Error parsing Winner Size: {str(e)}")
+    # Parse and merge BT-165-Organization-Company Winner Size
+    logger.info("Processing BT-165-Organization-Company: Winner Size")
+    winner_size_data = parse_winner_size(xml_content)
+    if winner_size_data:
+        merge_winner_size(release_json, winner_size_data)
+    else:
+        logger.warning("No Winner Size data found")
 
     # Parse and merge BT-17-Lot SubmissionElectronic
     logger.info("Processing BT-17-Lot: SubmissionElectronic")
