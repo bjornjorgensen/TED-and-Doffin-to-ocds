@@ -1,4 +1,4 @@
-# tests/test_OPT_300.py
+# tests/test_OPT_300_Contract_Signatory.py
 
 import pytest
 import json
@@ -9,7 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
-def test_opt_300_integration(tmp_path):
+def test_opt_300_contract_signatory_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -31,16 +31,6 @@ def test_opt_300_integration(tmp_path):
                                     </cac:PartyName>
                                 </efac:Company>
                             </efac:Organization>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
-                                        <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
-                                    </cac:PartyIdentification>
-                                    <cac:PartyName>
-                                        <cbc:Name languageID="ENG">Service Provider Ltd</cbc:Name>
-                                    </cac:PartyName>
-                                </efac:Company>
-                            </efac:Organization>
                         </efac:Organizations>
                         <efac:NoticeResult>
                             <efac:SettledContract>
@@ -52,7 +42,7 @@ def test_opt_300_integration(tmp_path):
                                 </cac:SignatoryParty>
                             </efac:SettledContract>
                             <efac:LotResult>
-                                <cbc:ID schemeName="result">AWD-0001</cbc:ID>
+                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
                                 <efac:SettledContract>
                                     <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                                 </efac:SettledContract>
@@ -62,52 +52,37 @@ def test_opt_300_integration(tmp_path):
                 </ext:ExtensionContent>
             </ext:UBLExtension>
         </ext:UBLExtensions>
-        <cac:ContractingParty>
-            <cac:Party>
-                <cac:PartyIdentification>
-                    <cbc:ID>ORG-0001</cbc:ID>
-                </cac:PartyIdentification>
-            </cac:Party>
-            <cac:ServiceProviderParty>
-                <cac:Party>
-                    <cac:PartyIdentification>
-                        <cbc:ID>ORG-0002</cbc:ID>
-                    </cac:PartyIdentification>
-                </cac:Party>
-            </cac:ServiceProviderParty>
-        </cac:ContractingParty>
     </root>
     """
-    xml_file = tmp_path / "test_input_opt_300.xml"
+    xml_file = tmp_path / "test_input_contract_signatory.xml"
     xml_file.write_text(xml_content)
 
-    main(str(xml_file), "ocds-test-prefix")
+    result = main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
-        result = json.load(f)
+    assert result is not None
+    assert "initiationType" in result
+    assert result["initiationType"] == "tender"
 
-    # Test OPT-300-Contract-Signatory
     assert "parties" in result
-    assert len(result["parties"]) == 2
-    buyer_party = next(party for party in result["parties"] if party["id"] == "ORG-0001")
-    assert buyer_party["name"] == "Financial Administration for ..."
-    assert "buyer" in buyer_party["roles"]
+    assert len(result["parties"]) == 1
+    party = result["parties"][0]
+    assert party["id"] == "ORG-0001"
+    assert party["name"] == "Financial Administration for ..."
+    assert "buyer" in party["roles"]
 
     assert "awards" in result
     assert len(result["awards"]) == 1
     award = result["awards"][0]
-    assert award["id"] == "AWD-0001"
+    assert award["id"] == "RES-0001"
     assert "buyers" in award
     assert len(award["buyers"]) == 1
     assert award["buyers"][0]["id"] == "ORG-0001"
 
-    # Test OPT-300-Procedure-Buyer
-    assert "buyer" in result
-    assert result["buyer"]["id"] == "ORG-0001"
-
-    # Test OPT-300-Procedure-SProvider
-    service_provider = next(party for party in result["parties"] if party["id"] == "ORG-0002")
-    assert service_provider["name"] == "Service Provider Ltd"
+    assert "contracts" in result
+    assert len(result["contracts"]) == 1
+    contract = result["contracts"][0]
+    assert contract["id"] == "CON-0001"
+    assert contract["awardID"] == "RES-0001"
 
 if __name__ == "__main__":
     pytest.main()

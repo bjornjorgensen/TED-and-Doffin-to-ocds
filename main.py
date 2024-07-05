@@ -246,7 +246,7 @@ from converters.OPT_170_Tenderer import parse_tendering_party_leader, merge_tend
 from converters.OPT_200_Organization_Company import parse_organization_technical_identifier, merge_organization_technical_identifier
 from converters.OPT_201_Organization_TouchPoint import parse_touchpoint_technical_identifier, merge_touchpoint_technical_identifier
 from converters.OPT_202_UBO import parse_beneficial_owner_identifier, merge_beneficial_owner_identifier
-from converters.opt_300 import parse_opt_300, merge_opt_300
+from converters.OPT_300_Contract_Signatory import parse_contract_signatory, merge_contract_signatory
 from converters.OPT_301_Lot_AddInfo import parse_additional_info_provider_identifier, merge_additional_info_provider_identifier
 from converters.OPT_301_Lot_DocProvider import parse_document_provider_identifier, merge_document_provider_identifier
 from converters.OPT_301_Lot_EmployLegis import parse_employment_legislation_document_reference, merge_employment_legislation_document_reference
@@ -1964,14 +1964,12 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Beneficial Owner Technical Identifier data found")
 
-    # Parse and merge OPT-300 Contract Signatory, Procedure Buyer, and Service Provider
-    logger.info("Processing OPT-300: Contract Signatory, Procedure Buyer, and Service Provider")
-    parsed_opt_300_data = parse_opt_300(xml_content)
-    if parsed_opt_300_data:
-        merge_opt_300(release_json, parsed_opt_300_data)
-        logger.info("Merged OPT-300 data into release JSON")
+    # Parse and merge OPT-300 Contract Signatory
+    signatory_data = parse_contract_signatory(xml_content)
+    if signatory_data:
+        merge_contract_signatory(release_json, signatory_data)
     else:
-        logger.warning("No OPT-300 data found for Contract Signatory, Procedure Buyer, or Service Provider")
+        logger.warning("No Contract Signatory data found")
 
     # Parse and merge OPT-301-Lot-AddInfo Additional Info Provider Technical Identifier Reference
     logger.info("Processing OPT-301-Lot-AddInfo: Additional Info Provider Technical Identifier Reference")
@@ -2095,6 +2093,8 @@ def main(xml_path, ocid_prefix):
     json_string = json.dumps(release_json, ensure_ascii=False, indent=2)
     logger.info("XML to JSON conversion completed")
     print(json_string)
+
+    return release_json
 
 if __name__ == "__main__":
     # Path to the XML file
