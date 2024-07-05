@@ -258,6 +258,7 @@ from converters.OPT_301_Lot_ReviewInfo import parse_review_info_identifier, merg
 from converters.OPT_301_Lot_TenderEval import parse_tender_evaluator_identifier, merge_tender_evaluator_identifier
 from converters.OPT_301_Lot_TenderReceipt import parse_tender_recipient_identifier, merge_tender_recipient_identifier
 from converters.OPT_301_LotResult_Financing import parse_lotresult_financing, merge_lotresult_financing
+from converters.OPT_301_LotResult_Paying import parse_lotresult_paying, merge_lotresult_paying
 
 # add more OPT 301 her
 
@@ -2051,6 +2052,13 @@ def main(xml_path, ocid_prefix):
         merge_lotresult_financing(release_json, financing_data)
     else:
         logger.warning("No LotResult Financing data found")
+
+    # Parse and merge OPT-301 LotResult_Paying
+    paying_data = parse_lotresult_paying(xml_content)
+    if paying_data:
+        merge_lotresult_paying(release_json, paying_data)
+    else:
+        logger.warning("No LotResult Paying data found")
 # add more OPT-301 her
 
 
