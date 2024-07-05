@@ -58,7 +58,7 @@ from converters.BT_163 import parse_concession_value_description
 from converters.BT_165 import parse_winner_size
 from converters.BT_17 import parse_submission_electronic
 from converters.BT_171 import parse_tender_rank
-from converters.BT_1711 import parse_tender_ranked
+from converters.BT_1711_Tender import parse_tender_ranked, merge_tender_ranked
 from converters.BT_18 import parse_submission_url
 from converters.BT_19_Lot import parse_nonelectronic_submission_justification, merge_nonelectronic_submission_justification
 from converters.BT_191 import parse_country_origin
@@ -989,25 +989,13 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         print(f"Error parsing Tender Rank: {str(e)}")
 
-    # Parse the Tender Ranked (BT-1711)
-    try:
-        tender_ranked = parse_tender_ranked(xml_content)
-        
-        # Merge Tender Ranked into the release JSON
-        if tender_ranked and "bids" in tender_ranked and "details" in tender_ranked["bids"]:
-            existing_bids = release_json.setdefault("bids", {}).setdefault("details", [])
-            for new_bid in tender_ranked["bids"]["details"]:
-                existing_bid = next((bid for bid in existing_bids if bid["id"] == new_bid["id"]), None)
-                if existing_bid:
-                    existing_bid.update(new_bid)
-                    existing_bid.setdefault("relatedLots", []).extend(
-                        lot for lot in new_bid["relatedLots"] if lot not in existing_bid.get("relatedLots", [])
-                    )
-                else:
-                    existing_bids.append(new_bid)
-
-    except Exception as e:
-        print(f"Error parsing Tender Ranked: {str(e)}")
+    # Parse and merge BT-1711-Tender Tender Ranked
+    logger.info("Processing BT-1711-Tender: Tender Ranked")
+    tender_ranked_data = parse_tender_ranked(xml_content)
+    if tender_ranked_data:
+        merge_tender_ranked(release_json, tender_ranked_data)
+    else:
+        logger.warning("No Tender Ranked data found")
 
     # Parse the Submission URL (BT-18)
     try:
