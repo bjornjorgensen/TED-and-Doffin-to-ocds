@@ -10,7 +10,7 @@ from converters.BT_03 import parse_form_type, merge_form_type
 from converters.BT_04 import parse_procedure_identifier
 from converters.BT_05_notice import parse_notice_dispatch_date_time, merge_notice_dispatch_date_time
 from converters.BT_06_Lot import parse_strategic_procurement, merge_strategic_procurement
-from converters.BT_09 import parse_xml_to_json
+from converters.BT_09_Procedure import parse_cross_border_law, merge_cross_border_law
 from converters.BT_10 import parse_contract_xml
 from converters.BT_11_Procedure_Buyer import parse_buyer_legal_type, merge_buyer_legal_type
 from converters.BT_88_Procedure import parse_procedure_features, merge_procedure_features
@@ -347,14 +347,13 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Strategic Procurement data found")
     
-    # Parse the cross-border law information
-    cross_border_law_info = parse_xml_to_json(xml_content)
-    
-    # Merge cross-border law information into the release JSON
-    if cross_border_law_info:
-        cross_border_law_dict = json.loads(cross_border_law_info)
-        if cross_border_law_dict.get("tender"):
-            release_json.setdefault("tender", {}).update(cross_border_law_dict["tender"])
+    # Parse and merge BT-09-Procedure Cross Border Law
+    logger.info("Processing BT-09-Procedure: Cross Border Law")
+    cross_border_law_data = parse_cross_border_law(xml_content)
+    if cross_border_law_data:
+        merge_cross_border_law(release_json, cross_border_law_data)
+    else:
+        logger.warning("No Cross Border Law data found")
     
     contract_info = parse_contract_xml(xml_content)
     if contract_info:
