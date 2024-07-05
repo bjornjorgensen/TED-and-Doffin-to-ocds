@@ -263,6 +263,7 @@ from converters.OPT_301_Part_AddInfo import parse_part_addinfo, merge_part_addin
 from converters.OPT_301_Part_DocProvider import parse_part_docprovider, merge_part_docprovider
 from converters.OPT_301_Part_EmployLegis import parse_part_employlegis, merge_part_employlegis
 from converters.OPT_301_Part_EnvironLegis import parse_part_environlegis, merge_part_environlegis
+from converters.OPT_301_Part_FiscalLegis import parse_part_fiscallegis, merge_part_fiscallegis
 
 # add more OPT 301 her
 
@@ -2092,6 +2093,12 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Part Environmental Legislation data found")
 
+    # Parse and merge OPT_301_Part_FiscalLegis
+    fiscallegis_data = parse_part_fiscallegis(xml_content)
+    if fiscallegis_data:
+        merge_part_fiscallegis(release_json, fiscallegis_data)
+    else:
+        logger.warning("No Part Fiscal Legislation data found")
 # add more OPT-301 her
 
 
