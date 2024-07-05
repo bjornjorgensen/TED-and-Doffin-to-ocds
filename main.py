@@ -247,6 +247,7 @@ from converters.OPT_200_Organization_Company import parse_organization_technical
 from converters.OPT_201_Organization_TouchPoint import parse_touchpoint_technical_identifier, merge_touchpoint_technical_identifier
 from converters.OPT_202_UBO import parse_beneficial_owner_identifier, merge_beneficial_owner_identifier
 from converters.OPT_300_Contract_Signatory import parse_contract_signatory, merge_contract_signatory
+from converters.OPT_300_Procedure_SProvider import parse_procedure_sprovider, merge_procedure_sprovider
 from converters.OPT_301_Lot_AddInfo import parse_additional_info_provider_identifier, merge_additional_info_provider_identifier
 from converters.OPT_301_Lot_DocProvider import parse_document_provider_identifier, merge_document_provider_identifier
 from converters.OPT_301_Lot_EmployLegis import parse_employment_legislation_document_reference, merge_employment_legislation_document_reference
@@ -1970,6 +1971,13 @@ def main(xml_path, ocid_prefix):
         merge_contract_signatory(release_json, signatory_data)
     else:
         logger.warning("No Contract Signatory data found")
+
+    # Parse and merge OPT-300 sprovider
+    sprovider_data = parse_procedure_sprovider(xml_content)
+    if sprovider_data:
+        merge_procedure_sprovider(release_json, sprovider_data)
+    else:
+        logger.warning("No Procedure Service Provider data found")
 
     # Parse and merge OPT-301-Lot-AddInfo Additional Info Provider Technical Identifier Reference
     logger.info("Processing OPT-301-Lot-AddInfo: Additional Info Provider Technical Identifier Reference")
