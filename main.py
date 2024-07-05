@@ -265,6 +265,7 @@ from converters.OPT_301_Part_EmployLegis import parse_part_employlegis, merge_pa
 from converters.OPT_301_Part_EnvironLegis import parse_part_environlegis, merge_part_environlegis
 from converters.OPT_301_Part_FiscalLegis import parse_part_fiscallegis, merge_part_fiscallegis
 from converters.OPT_301_Part_Mediator import parse_part_mediator, merge_part_mediator
+from converters.OPT_301_Part_ReviewInfo import parse_part_reviewinfo, merge_part_reviewinfo
 
 # add more OPT 301 her
 
@@ -2107,6 +2108,13 @@ def main(xml_path, ocid_prefix):
         merge_part_mediator(release_json, mediator_data)
     else:
         logger.warning("No Part Mediator data found")
+
+    # Parse and merge OPT_301_Part_ReviewInfo
+    reviewinfo_data = parse_part_reviewinfo(xml_content)
+    if reviewinfo_data:
+        merge_part_reviewinfo(release_json, reviewinfo_data)
+    else:
+        logger.warning("No Part Review Info data found")
 # add more OPT-301 her
 
 
