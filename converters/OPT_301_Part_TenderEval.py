@@ -1,0 +1,42 @@
+# converters/OPT_301_Part_TenderEval.py
+
+from lxml import etree
+import logging
+
+logger = logging.getLogger(__name__)
+
+def parse_part_tendereval(xml_content):
+    root = etree.fromstring(xml_content)
+    namespaces = {
+        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
+    }
+
+    result = {"parties": []}
+
+    xpath = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:TenderEvaluationParty/cac:PartyIdentification/cbc:ID"
+    tender_eval_ids = root.xpath(xpath, namespaces=namespaces)
+
+    for tender_eval_id in tender_eval_ids:
+        result["parties"].append({
+            "id": tender_eval_id.text,
+            "roles": ["evaluationBody"]
+        })
+
+    return result if result["parties"] else None
+
+def merge_part_tendereval(release_json, tendereval_data):
+    if not tendereval_data:
+        logger.warning("No Part Tender Evaluator data to merge")
+        return
+
+    existing_parties = {party["id"]: party for party in release_json.get("parties", [])}
+    for party in tendereval_data["parties"]:
+        if party["id"] in existing_parties:
+            existing_roles = set(existing_parties[party["id"]].get("roles", []))
+            existing_roles.update(party["roles"])
+            existing_parties[party["id"]]["roles"] = list(existing_roles)
+        else:
+            release_json.setdefault("parties", []).append(party)
+
+    logger.info(f"Merged Part Tender Evaluator data for {len(tendereval_data['parties'])} parties")
