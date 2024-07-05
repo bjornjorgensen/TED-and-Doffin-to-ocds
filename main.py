@@ -268,6 +268,7 @@ from converters.OPT_301_Part_Mediator import parse_part_mediator, merge_part_med
 from converters.OPT_301_Part_ReviewInfo import parse_part_reviewinfo, merge_part_reviewinfo
 from converters.OPT_301_Part_ReviewOrg import parse_part_revieworg, merge_part_revieworg
 from converters.OPT_301_Part_TenderEval import parse_part_tendereval, merge_part_tendereval
+from converters.OPT_301_Part_TenderReceipt import parse_part_tenderreceipt, merge_part_tenderreceipt
 
 # add more OPT 301 her
 
@@ -2131,6 +2132,13 @@ def main(xml_path, ocid_prefix):
         merge_part_tendereval(release_json, tendereval_data)
     else:
         logger.warning("No Part Tender Evaluator data found")
+
+    # Parse and merge OPT_301_Part_TenderReceipt
+    tenderreceipt_data = parse_part_tenderreceipt(xml_content)
+    if tenderreceipt_data:
+        merge_part_tenderreceipt(release_json, tenderreceipt_data)
+    else:
+        logger.warning("No Part Tender Recipient data found")
 # add more OPT-301 her
 
 
