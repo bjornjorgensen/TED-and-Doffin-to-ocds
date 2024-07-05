@@ -56,8 +56,8 @@ from converters.BT_160 import parse_concession_revenue_buyer
 from converters.BT_162 import parse_concession_revenue_user
 from converters.BT_163 import parse_concession_value_description
 from converters.BT_165 import parse_winner_size
-from converters.BT_17 import parse_submission_electronic
-from converters.BT_171 import parse_tender_rank
+from converters.BT_17_Lot import parse_submission_electronic, merge_submission_electronic
+from converters.BT_171_Tender import parse_tender_rank, merge_tender_rank
 from converters.BT_1711_Tender import parse_tender_ranked, merge_tender_ranked
 from converters.BT_18 import parse_submission_url
 from converters.BT_19_Lot import parse_nonelectronic_submission_justification, merge_nonelectronic_submission_justification
@@ -952,42 +952,21 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         print(f"Error parsing Winner Size: {str(e)}")
 
-    # Parse the SubmissionElectronic (BT-17)
-    try:
-        submission_electronic = parse_submission_electronic(xml_content)
-        
-        # Merge SubmissionElectronic into the release JSON
-        if submission_electronic and "tender" in submission_electronic and "lots" in submission_electronic["tender"]:
-            existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-            for new_lot in submission_electronic["tender"]["lots"]:
-                existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-                if existing_lot:
-                    existing_lot.setdefault("submissionTerms", {}).update(new_lot["submissionTerms"])
-                else:
-                    existing_lots.append(new_lot)
+    # Parse and merge BT-17-Lot SubmissionElectronic
+    logger.info("Processing BT-17-Lot: SubmissionElectronic")
+    submission_electronic_data = parse_submission_electronic(xml_content)
+    if submission_electronic_data:
+        merge_submission_electronic(release_json, submission_electronic_data)
+    else:
+        logger.warning("No Submission Electronic data found")
 
-    except Exception as e:
-        print(f"Error parsing SubmissionElectronic: {str(e)}")
-
-    # Parse the Tender Rank (BT-171)
-    try:
-        tender_rank = parse_tender_rank(xml_content)
-        
-        # Merge Tender Rank into the release JSON
-        if tender_rank and "bids" in tender_rank and "details" in tender_rank["bids"]:
-            existing_bids = release_json.setdefault("bids", {}).setdefault("details", [])
-            for new_bid in tender_rank["bids"]["details"]:
-                existing_bid = next((bid for bid in existing_bids if bid["id"] == new_bid["id"]), None)
-                if existing_bid:
-                    existing_bid.update(new_bid)
-                    existing_bid.setdefault("relatedLots", []).extend(
-                        lot for lot in new_bid["relatedLots"] if lot not in existing_bid.get("relatedLots", [])
-                    )
-                else:
-                    existing_bids.append(new_bid)
-
-    except Exception as e:
-        print(f"Error parsing Tender Rank: {str(e)}")
+    # Parse and merge BT-171-Tender Tender Rank
+    logger.info("Processing BT-171-Tender: Tender Rank")
+    tender_rank_data = parse_tender_rank(xml_content)
+    if tender_rank_data:
+        merge_tender_rank(release_json, tender_rank_data)
+    else:
+        logger.warning("No Tender Rank data found")
 
     # Parse and merge BT-1711-Tender Tender Ranked
     logger.info("Processing BT-1711-Tender: Tender Ranked")
