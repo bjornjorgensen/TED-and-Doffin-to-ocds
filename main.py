@@ -261,6 +261,7 @@ from converters.OPT_301_LotResult_Financing import parse_lotresult_financing, me
 from converters.OPT_301_LotResult_Paying import parse_lotresult_paying, merge_lotresult_paying
 from converters.OPT_301_Part_AddInfo import parse_part_addinfo, merge_part_addinfo
 from converters.OPT_301_Part_DocProvider import parse_part_docprovider, merge_part_docprovider
+from converters.OPT_301_Part_EmployLegis import parse_part_employlegis, merge_part_employlegis
 
 # add more OPT 301 her
 
@@ -2076,6 +2077,12 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Part Document Provider data found")
 
+    # Parse and merge OPT_301_Part_EmployLegis
+    employlegis_data = parse_part_employlegis(xml_content)
+    if employlegis_data:
+        merge_part_employlegis(release_json, employlegis_data)
+    else:
+        logger.warning("No Part Employment Legislation data found")
 
 # add more OPT-301 her
 
