@@ -259,7 +259,7 @@ from converters.OPT_301_Lot_TenderEval import parse_tender_evaluator_identifier,
 from converters.OPT_301_Lot_TenderReceipt import parse_tender_recipient_identifier, merge_tender_recipient_identifier
 from converters.OPT_301_LotResult_Financing import parse_lotresult_financing, merge_lotresult_financing
 from converters.OPT_301_LotResult_Paying import parse_lotresult_paying, merge_lotresult_paying
-
+from converters.OPT_301_Part_AddInfo import parse_part_addinfo, merge_part_addinfo
 # add more OPT 301 her
 
 from converters.OPT_302_Organization import parse_beneficial_owner_reference, merge_beneficial_owner_reference
@@ -2059,6 +2059,15 @@ def main(xml_path, ocid_prefix):
         merge_lotresult_paying(release_json, paying_data)
     else:
         logger.warning("No LotResult Paying data found")
+
+    # Parse and merge OPT-301 Part_AddInfo
+    addinfo_data = parse_part_addinfo(xml_content)
+    if addinfo_data:
+        merge_part_addinfo(release_json, addinfo_data)
+    else:
+        logger.warning("No Part Additional Info data found")
+
+
 # add more OPT-301 her
 
 
