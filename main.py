@@ -257,6 +257,8 @@ from converters.OPT_301_Lot_Mediator import parse_mediator_identifier, merge_med
 from converters.OPT_301_Lot_ReviewInfo import parse_review_info_identifier, merge_review_info_identifier
 from converters.OPT_301_Lot_TenderEval import parse_tender_evaluator_identifier, merge_tender_evaluator_identifier
 from converters.OPT_301_Lot_TenderReceipt import parse_tender_recipient_identifier, merge_tender_recipient_identifier
+from converters.OPT_301_LotResult_Financing import parse_lotresult_financing, merge_lotresult_financing
+
 # add more OPT 301 her
 
 from converters.OPT_302_Organization import parse_beneficial_owner_reference, merge_beneficial_owner_reference
@@ -2043,6 +2045,12 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Tender Recipient Technical Identifier Reference data found")
 
+    # Parse and merge OPT-301 LotResult_Financing
+    financing_data = parse_lotresult_financing(xml_content)
+    if financing_data:
+        merge_lotresult_financing(release_json, financing_data)
+    else:
+        logger.warning("No LotResult Financing data found")
 # add more OPT-301 her
 
 
