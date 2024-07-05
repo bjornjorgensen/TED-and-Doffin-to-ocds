@@ -1889,14 +1889,14 @@ def main(xml_path, ocid_prefix):
 
     # Processing OPP-090-Procedure: Previous Notice Identifier
     logger.info("Processing OPP-090-Procedure: Previous Notice Identifier")
-    logger.info(f"relatedProcesses before OPP-090: {json.dumps(release_json.get('relatedProcesses', []), indent=2)}")
+    #logger.info(f"relatedProcesses before OPP-090: {json.dumps(release_json.get('relatedProcesses', []), indent=2)}")
     previous_notice_data = parse_previous_notice_identifier(xml_content)
     if previous_notice_data:
-        logger.info(f"Parsed previous notice data: {json.dumps(previous_notice_data, indent=2)}")
+     #   logger.info(f"Parsed previous notice data: {json.dumps(previous_notice_data, indent=2)}")
         merge_previous_notice_identifier(release_json, previous_notice_data)
     else:
         logger.warning("No Previous Notice Identifier data found")
-    logger.info(f"relatedProcesses after OPP-090: {json.dumps(release_json.get('relatedProcesses', []), indent=2)}")
+    #logger.info(f"relatedProcesses after OPP-090: {json.dumps(release_json.get('relatedProcesses', []), indent=2)}")
 
     # Parse and merge OPT-030-Procedure-SProvider Provided Service Type
     logger.info("Processing OPT-030-Procedure-SProvider: Provided Service Type")
