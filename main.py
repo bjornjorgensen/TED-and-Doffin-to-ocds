@@ -13,7 +13,7 @@ from converters.BT_06_Lot import parse_strategic_procurement, merge_strategic_pr
 from converters.BT_09 import parse_xml_to_json
 from converters.BT_10 import parse_contract_xml
 from converters.BT_11_Procedure_Buyer import parse_buyer_legal_type, merge_buyer_legal_type
-from converters.BT_88 import parse_procedure_features
+from converters.BT_88_Procedure import parse_procedure_features, merge_procedure_features
 from converters.BT_105 import parse_procurement_procedure_type
 from converters.BT_106 import parse_accelerated_procedure
 from converters.BT_109_Lot import parse_framework_duration_justification, merge_framework_duration_justification
@@ -214,7 +214,6 @@ from converters.BT_79_Lot import parse_performing_staff_qualification, merge_per
 from converters.BT_801_Lot import parse_non_disclosure_agreement, merge_non_disclosure_agreement
 from converters.BT_802_Lot import parse_non_disclosure_agreement_description, merge_non_disclosure_agreement_description
 from converters.BT_805_Lot import parse_green_procurement_criteria, merge_green_procurement_criteria
-from converters.BT_88_Procedure import parse_procedure_features, merge_procedure_features
 from converters.BT_92_Lot import parse_electronic_ordering, merge_electronic_ordering
 from converters.BT_93_Lot import parse_electronic_payment, merge_electronic_payment
 from converters.BT_94_Lot import parse_recurrence, merge_recurrence
@@ -379,13 +378,14 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Buyer Legal Type data found")
 
-    # Parse the procedure features (BT-88)
-    procedure_features = parse_procedure_features(xml_content)
+    # Parse and merge BT-88-Procedure Procedure Features
+    logger.info("Processing BT-88-Procedure: Procedure Features")
+    procedure_features_data = parse_procedure_features(xml_content)
+    if procedure_features_data:
+        merge_procedure_features(release_json, procedure_features_data)
+    else:
+        logger.warning("No Procedure Features data found")
     
-    # Merge procedure features into the release JSON
-    if procedure_features:
-        release_json.setdefault("tender", {}).update(procedure_features["tender"])
-
     # Parse the procurement procedure type (BT-105)
     procurement_procedure_type = parse_procurement_procedure_type(xml_content)
     
@@ -1724,11 +1724,6 @@ def main(xml_path, ocid_prefix):
     logger.info("Processing BT-805-Lot: Green Procurement Criteria")
     gpp_data = parse_green_procurement_criteria(xml_content)
     merge_green_procurement_criteria(release_json, gpp_data)
-
-    # Parse and merge BT-88-Procedure Procedure Features
-    logger.info("Processing BT-88-Procedure: Procedure Features")
-    procedure_features_data = parse_procedure_features(xml_content)
-    merge_procedure_features(release_json, procedure_features_data)
 
     # Parse and merge BT-92-Lot Electronic Ordering
     logger.info("Processing BT-92-Lot: Electronic Ordering")
