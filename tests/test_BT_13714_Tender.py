@@ -1,5 +1,3 @@
-# tests/test_BT_13714_Tender.py
-
 import pytest
 import json
 import os
@@ -11,10 +9,11 @@ from main import main
 
 def test_bt_13714_tender_integration(tmp_path):
     xml_content = """
-    <root xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+          xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
         <ext:UBLExtensions>
             <ext:UBLExtension>
                 <ext:ExtensionContent>

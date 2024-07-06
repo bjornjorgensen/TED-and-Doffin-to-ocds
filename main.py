@@ -465,12 +465,14 @@ def main(xml_path, ocid_prefix):
         logger.warning("No Result Lot Identifier data found")
             
     # Parse and merge BT-13714-Tender Tender Lot Identifier
-    logger.info("Processing BT-13714-Tender: Tender Lot Identifier")
-    tender_lot_data = parse_tender_lot_identifier(xml_content)
-    if tender_lot_data:
-        merge_tender_lot_identifier(release_json, tender_lot_data)
-    else:
-        logger.warning("No Tender Lot Identifier data found")
+    try:
+        tender_lot_identifier_data = parse_tender_lot_identifier(xml_content)
+        if tender_lot_identifier_data:
+            merge_tender_lot_identifier(release_json, tender_lot_identifier_data)
+        else:
+            logger.info("No Tender Lot Identifier data found")
+    except Exception as e:
+        logger.error(f"Error processing Tender Lot Identifier data: {str(e)}")
 
     # Parse and merge BT-1375-Procedure Group Lot Identifier
     logger.info("Processing BT-1375-Procedure: Group Lot Identifier")
