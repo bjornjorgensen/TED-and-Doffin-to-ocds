@@ -2060,6 +2060,16 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Review Info Provider Technical Identifier Reference data found")
 
+    # Parse and merge OPT_301_Lot_TenderEval
+    try:
+        tender_evaluator_data = parse_tender_evaluator_identifier(xml_content)
+        if tender_evaluator_data:
+            merge_tender_evaluator_identifier(release_json, tender_evaluator_data)
+        else:
+            logger.info("No Tender Evaluator Identifier data found")
+    except Exception as e:
+        logger.error(f"Error processing Tender Evaluator Identifier data: {str(e)}")
+
     # Parse and merge OPT-301-Lot-TenderReceipt Tender Recipient Technical Identifier Reference
     logger.info("Processing OPT-301-Lot-TenderReceipt: Tender Recipient Technical Identifier Reference")
     recipient_data = parse_tender_recipient_identifier(xml_content)

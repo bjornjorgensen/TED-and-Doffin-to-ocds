@@ -1,7 +1,7 @@
 # converters/OPT_301_Lot_TenderEval.py
 
-from lxml import etree
 import logging
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -14,30 +14,30 @@ def parse_tender_evaluator_identifier(xml_content):
 
     result = {"parties": []}
 
-    xpath_query = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TenderEvaluationParty/cac:PartyIdentification/cbc:ID"
-    evaluator_ids = root.xpath(xpath_query, namespaces=namespaces)
-
-    for evaluator_id in evaluator_ids:
-        party = {
-            "id": evaluator_id.text,
+    evaluators = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TenderEvaluationParty/cac:PartyIdentification/cbc:ID", namespaces=namespaces)
+    
+    for evaluator in evaluators:
+        evaluator_id = evaluator.text
+        result["parties"].append({
+            "id": evaluator_id,
             "roles": ["evaluationBody"]
-        }
-        result["parties"].append(party)
+        })
 
     return result if result["parties"] else None
 
-def merge_tender_evaluator_identifier(release_json, evaluator_data):
-    if not evaluator_data:
+def merge_tender_evaluator_identifier(release_json, tender_evaluator_data):
+    if not tender_evaluator_data:
+        logger.warning("No Tender Evaluator Identifier data to merge")
         return
 
     existing_parties = release_json.setdefault("parties", [])
     
-    for new_party in evaluator_data["parties"]:
+    for new_party in tender_evaluator_data["parties"]:
         existing_party = next((party for party in existing_parties if party["id"] == new_party["id"]), None)
         if existing_party:
-            if "evaluationBody" not in existing_party.get("roles", []):
-                existing_party.setdefault("roles", []).append("evaluationBody")
+            if "evaluationBody" not in existing_party.setdefault("roles", []):
+                existing_party["roles"].append("evaluationBody")
         else:
             existing_parties.append(new_party)
 
-    logger.info(f"Merged tender evaluator data for {len(evaluator_data['parties'])} parties")
+    logger.info(f"Merged Tender Evaluator Identifier data for {len(tender_evaluator_data['parties'])} parties")
