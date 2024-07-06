@@ -7,7 +7,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
-def test_opt_301_tenderer_maincont_integration(tmp_path):
+def test_opt_301_tenderer_subcont_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -25,9 +25,6 @@ def test_opt_301_tenderer_maincont_integration(tmp_path):
                             <efac:TenderingParty>
                                 <efac:SubContractor>
                                     <cbc:ID schemeName="organization">ORG-0012</cbc:ID>
-                                    <efac:MainContractor>
-                                        <cbc:ID schemeName="organization">ORG-0005</cbc:ID>
-                                    </efac:MainContractor>
                                 </efac:SubContractor>
                             </efac:TenderingParty>
                         </efac:NoticeResult>
@@ -35,11 +32,8 @@ def test_opt_301_tenderer_maincont_integration(tmp_path):
                             <efac:Organization>
                                 <efac:Company>
                                     <cac:PartyIdentification>
-                                        <cbc:ID schemeName="organization">ORG-0005</cbc:ID>
+                                        <cbc:ID schemeName="organization">ORG-0012</cbc:ID>
                                     </cac:PartyIdentification>
-                                    <cac:PartyName>
-                                        <cbc:Name>Tendering Company Ltd</cbc:Name>
-                                    </cac:PartyName>
                                 </efac:Company>
                             </efac:Organization>
                         </efac:Organizations>
@@ -49,7 +43,7 @@ def test_opt_301_tenderer_maincont_integration(tmp_path):
         </ext:UBLExtensions>
     </root>
     """
-    xml_file = tmp_path / "test_input_main_contractor_id_reference.xml"
+    xml_file = tmp_path / "test_input_subcontractor_id_reference.xml"
     xml_file.write_text(xml_content)
 
     main(str(xml_file), "ocds-test-prefix")
@@ -60,8 +54,8 @@ def test_opt_301_tenderer_maincont_integration(tmp_path):
     assert "parties" in result
     assert len(result["parties"]) == 1
     party = result["parties"][0]
-    assert party["id"] == "ORG-0005"
-    assert "tenderer" in party["roles"]
+    assert party["id"] == "ORG-0012"
+    assert "subcontractor" in party["roles"]
 
     assert "bids" in result
     assert "details" in result["bids"]
@@ -77,10 +71,6 @@ def test_opt_301_tenderer_maincont_integration(tmp_path):
     subcontract = bid["subcontracting"]["subcontracts"][0]
     assert subcontract["id"] == "1"
     assert subcontract["subcontractor"]["id"] == "ORG-0012"
-    assert len(subcontract["mainContractors"]) == 1
-    main_contractor = subcontract["mainContractors"][0]
-    assert main_contractor["id"] == "ORG-0005"
-    assert main_contractor["name"] == "Tendering Company Ltd"
 
 if __name__ == "__main__":
     pytest.main()

@@ -1,11 +1,9 @@
-# converters/OPT_301_Tenderer_MainCont.py
-
-from lxml import etree
 import logging
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
-def parse_tenderer_maincont(xml_content):
+def parse_main_contractor_id_reference(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
@@ -17,79 +15,74 @@ def parse_tenderer_maincont(xml_content):
 
     result = {"parties": [], "bids": {"details": []}}
 
-    xpath = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:TenderingParty/efac:SubContractor"
-    subcontractors = root.xpath(xpath, namespaces=namespaces)
-
-    for subcontractor in subcontractors:
-        subcontractor_id = subcontractor.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        main_contractor_id = subcontractor.xpath("efac:MainContractor/cbc:ID/text()", namespaces=namespaces)[0]
-
+    main_contractors = root.xpath("//efac:NoticeResult/efac:TenderingParty/efac:SubContractor/efac:MainContractor", namespaces=namespaces)
+    
+    for main_contractor in main_contractors:
+        main_contractor_id = main_contractor.xpath("cbc:ID[@schemeName='organization']/text()", namespaces=namespaces)[0]
+        subcontractor_id = main_contractor.xpath("ancestor::efac:SubContractor/cbc:ID[@schemeName='organization']/text()", namespaces=namespaces)[0]
+        
         # Add main contractor to parties
         result["parties"].append({
             "id": main_contractor_id,
             "roles": ["tenderer"]
         })
 
-        # Get main contractor name
-        main_contractor_name_xpath = f"//efac:Organizations/efac:Organization/efac:Company[cac:PartyIdentification/cbc:ID/text()='{main_contractor_id}']/cac:PartyName/cbc:Name/text()"
-        main_contractor_name = root.xpath(main_contractor_name_xpath, namespaces=namespaces)
-        main_contractor_name = main_contractor_name[0] if main_contractor_name else None
+        # Get the bid for the LotTender
+        lot_tender = main_contractor.xpath("ancestor::efac:NoticeResult/efac:LotTender", namespaces=namespaces)[0]
+        tender_id = lot_tender.xpath("cbc:ID[@schemeName='tender']/text()", namespaces=namespaces)[0]
 
-        # Add subcontract to bids
-        bid = next((bid for bid in result["bids"]["details"] if "subcontracting" in bid), None)
+        # Find or create the bid
+        bid = next((b for b in result["bids"]["details"] if b.get("id") == tender_id), None)
         if not bid:
-            bid = {"subcontracting": {"subcontracts": []}}
+            bid = {"id": tender_id, "subcontracting": {"subcontracts": []}}
             result["bids"]["details"].append(bid)
 
-        subcontract = {
-            "id": str(len(bid["subcontracting"]["subcontracts"]) + 1),
-            "subcontractor": {"id": subcontractor_id},
-            "mainContractors": [{
-                "id": main_contractor_id
-            }]
-        }
-        if main_contractor_name:
-            subcontract["mainContractors"][0]["name"] = main_contractor_name
+        # Find or create the subcontract
+        subcontract = next((sc for sc in bid["subcontracting"]["subcontracts"] if sc["subcontractor"]["id"] == subcontractor_id), None)
+        if not subcontract:
+            subcontract = {
+                "id": str(len(bid["subcontracting"]["subcontracts"]) + 1),
+                "subcontractor": {"id": subcontractor_id},
+                "mainContractors": []
+            }
+            bid["subcontracting"]["subcontracts"].append(subcontract)
 
-        bid["subcontracting"]["subcontracts"].append(subcontract)
+        # Add main contractor to the subcontract
+        subcontract["mainContractors"].append({
+            "id": main_contractor_id,
+            "name": main_contractor.xpath("ancestor::efac:Organization/efac:Company/cac:PartyName/cbc:Name/text()", namespaces=namespaces)[0] if main_contractor.xpath("ancestor::efac:Organization/efac:Company/cac:PartyName/cbc:Name", namespaces=namespaces) else None
+        })
 
-    return result if (result["parties"] or result["bids"]["details"]) else None
+    return result
 
-def merge_tenderer_maincont(release_json, maincont_data):
-    if not maincont_data:
-        logger.warning("No Tenderer Main Contractor data to merge")
+def merge_main_contractor_id_reference(release_json, main_contractor_data):
+    if not main_contractor_data:
+        logger.warning("No Main Contractor ID Reference data to merge")
         return
 
-    # Merge parties
-    existing_parties = {party["id"]: party for party in release_json.get("parties", [])}
-    for party in maincont_data["parties"]:
-        if party["id"] in existing_parties:
-            existing_roles = set(existing_parties[party["id"]].get("roles", []))
-            existing_roles.update(party["roles"])
-            existing_parties[party["id"]]["roles"] = list(existing_roles)
+    existing_parties = release_json.setdefault("parties", [])
+    for new_party in main_contractor_data["parties"]:
+        existing_party = next((party for party in existing_parties if party["id"] == new_party["id"]), None)
+        if existing_party:
+            existing_party.setdefault("roles", []).extend(role for role in new_party["roles"] if role not in existing_party["roles"])
         else:
-            release_json.setdefault("parties", []).append(party)
+            existing_parties.append(new_party)
 
-    # Merge bids
-    if "bids" not in release_json:
-        release_json["bids"] = {"details": []}
-
-    existing_bids = {bid.get("id"): bid for bid in release_json["bids"]["details"] if "id" in bid}
-    
-    for bid in maincont_data["bids"]["details"]:
-        if "subcontracting" in bid:
-            # This is the subcontracting information
-            for existing_bid in release_json["bids"]["details"]:
-                if "id" in existing_bid:
-                    existing_bid.update(bid)
-                    break
-            else:
-                release_json["bids"]["details"].append(bid)
-        elif bid.get("id") in existing_bids:
-            # This is a bid with an ID that already exists
-            existing_bids[bid["id"]].update(bid)
+    existing_bids = release_json.setdefault("bids", {}).setdefault("details", [])
+    for new_bid in main_contractor_data["bids"]["details"]:
+        existing_bid = next((bid for bid in existing_bids if bid.get("id") == new_bid["id"]), None)
+        if existing_bid:
+            existing_subcontracts = existing_bid.setdefault("subcontracting", {}).setdefault("subcontracts", [])
+            for new_subcontract in new_bid["subcontracting"]["subcontracts"]:
+                existing_subcontract = next((sc for sc in existing_subcontracts if sc["subcontractor"]["id"] == new_subcontract["subcontractor"]["id"]), None)
+                if existing_subcontract:
+                    existing_subcontract.setdefault("mainContractors", []).extend(
+                        mc for mc in new_subcontract["mainContractors"] 
+                        if not any(existing_mc["id"] == mc["id"] for existing_mc in existing_subcontract.get("mainContractors", []))
+                    )
+                else:
+                    existing_subcontracts.append(new_subcontract)
         else:
-            # This is a new bid
-            release_json["bids"]["details"].append(bid)
+            existing_bids.append(new_bid)
 
-    logger.info(f"Merged Tenderer Main Contractor data for {len(maincont_data['parties'])} parties and {len(maincont_data['bids']['details'])} bids")
+    logger.info(f"Merged Main Contractor ID Reference data for {len(main_contractor_data['parties'])} parties and {len(main_contractor_data['bids']['details'])} bids")

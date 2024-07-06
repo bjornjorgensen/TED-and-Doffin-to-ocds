@@ -1,7 +1,5 @@
-# converters/OPP_032_Tender.py
-
-from lxml import etree
 import logging
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -19,18 +17,20 @@ def parse_revenues_allocation(xml_content):
 
     lot_tenders = root.xpath("//efac:NoticeResult/efac:LotTender", namespaces=namespaces)
     for lot_tender in lot_tenders:
-        lot_id = lot_tender.xpath("efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)[0]
+        lot_id_elements = lot_tender.xpath("efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)
+        if not lot_id_elements:
+            raise ValueError("Lot ID is missing for a LotTender")
         
-        revenue_allocation = lot_tender.xpath("efac:ContractTerm[efbc:TermCode/text()='all-rev-tic']/efbc:TermPercent/text()", namespaces=namespaces)
-        
-        if revenue_allocation:
-            operator_revenue_share = float(revenue_allocation[0]) / 100
-            result["tender"]["lots"].append({
+        lot_id = lot_id_elements[0]
+        revenues_allocation = lot_tender.xpath("efac:ContractTerm[efbc:TermCode='all-rev-tic']/efbc:TermPercent/text()", namespaces=namespaces)
+        if revenues_allocation:
+            lot = {
                 "id": lot_id,
                 "contractTerms": {
-                    "operatorRevenueShare": operator_revenue_share
+                    "revenuesAllocation": float(revenues_allocation[0])
                 }
-            })
+            }
+            result["tender"]["lots"].append(lot)
 
     return result if result["tender"]["lots"] else None
 
@@ -39,9 +39,8 @@ def merge_revenues_allocation(release_json, revenues_allocation_data):
         logger.warning("No Revenues Allocation data to merge")
         return
 
-    tender = release_json.setdefault("tender", {})
-    existing_lots = tender.setdefault("lots", [])
-
+    existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
+    
     for new_lot in revenues_allocation_data["tender"]["lots"]:
         existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
         if existing_lot:
@@ -49,4 +48,4 @@ def merge_revenues_allocation(release_json, revenues_allocation_data):
         else:
             existing_lots.append(new_lot)
 
-    logger.info(f"Merged Revenues Allocation for {len(revenues_allocation_data['tender']['lots'])} lots")
+    logger.info(f"Merged Revenues Allocation data for {len(revenues_allocation_data['tender']['lots'])} lots")

@@ -269,7 +269,9 @@ from converters.OPT_301_Part_ReviewInfo import parse_part_reviewinfo, merge_part
 from converters.OPT_301_Part_ReviewOrg import parse_part_revieworg, merge_part_revieworg
 from converters.OPT_301_Part_TenderEval import parse_part_tendereval, merge_part_tendereval
 from converters.OPT_301_Part_TenderReceipt import parse_part_tenderreceipt, merge_part_tenderreceipt
-from converters.OPT_301_Tenderer_MainCont import parse_tenderer_maincont, merge_tenderer_maincont
+from converters.OPT_301_Tenderer_MainCont import parse_main_contractor_id_reference, merge_main_contractor_id_reference
+
+from converters.OPT_301_Tenderer_SubCont import parse_subcontractor_id_reference, merge_subcontractor_id_reference
 
 # add more OPT 301 her
 
@@ -465,12 +467,14 @@ def main(xml_path, ocid_prefix):
         logger.warning("No Result Lot Identifier data found")
             
     # Parse and merge BT-13714-Tender Tender Lot Identifier
-    logger.info("Processing BT-13714-Tender: Tender Lot Identifier")
-    tender_lot_data = parse_tender_lot_identifier(xml_content)
-    if tender_lot_data:
-        merge_tender_lot_identifier(release_json, tender_lot_data)
-    else:
-        logger.warning("No Tender Lot Identifier data found")
+    try:
+        tender_lot_identifier_data = parse_tender_lot_identifier(xml_content)
+        if tender_lot_identifier_data:
+            merge_tender_lot_identifier(release_json, tender_lot_identifier_data)
+        else:
+            logger.info("No Tender Lot Identifier data found")
+    except ValueError as e:
+        logger.error(f"Error parsing Tender Lot Identifier data: {str(e)}")
 
     # Parse and merge BT-1375-Procedure Group Lot Identifier
     logger.info("Processing BT-1375-Procedure: Group Lot Identifier")
@@ -982,7 +986,7 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Tender Rank data found")
 
-    # Parse and merge BT-1711-Tender Tender Ranked
+    # Process BT-1711-Tender: Tender Ranked
     logger.info("Processing BT-1711-Tender: Tender Ranked")
     tender_ranked_data = parse_tender_ranked(xml_content)
     if tender_ranked_data:
@@ -1506,7 +1510,7 @@ def main(xml_path, ocid_prefix):
     change_procurement_documents_date_data = parse_change_procurement_documents_date(xml_content)
     merge_change_procurement_documents_date(release_json, change_procurement_documents_date_data)
 
-    # Parse and merge BT-720-Tender Tender Value
+    # Process BT-720-Tender: Tender Value
     logger.info("Processing BT-720-Tender: Tender Value")
     tender_value_data = parse_tender_value(xml_content)
     if tender_value_data:
@@ -1808,20 +1812,24 @@ def main(xml_path, ocid_prefix):
         logger.warning("No Contract Conditions data found")
 
     # Parse and merge OPP-032-Tender Revenues Allocation
-    logger.info("Processing OPP-032-Tender: Revenues Allocation")
-    revenues_allocation_data = parse_revenues_allocation(xml_content)
-    if revenues_allocation_data:
-        merge_revenues_allocation(release_json, revenues_allocation_data)
-    else:
-        logger.warning("No Revenues Allocation data found")
+    try:
+        revenues_allocation_data = parse_revenues_allocation(xml_content)
+        if revenues_allocation_data:
+            merge_revenues_allocation(release_json, revenues_allocation_data)
+        else:
+            logger.warning("No Revenues Allocation data found")
+    except Exception as e:
+        logger.error(f"Error parsing Revenues Allocation data: {str(e)}")
 
     # Parse and merge OPP-034-Tender Penalties and Rewards
-    logger.info("Processing OPP-034-Tender: Penalties and Rewards")
-    penalties_and_rewards_data = parse_penalties_and_rewards(xml_content)
-    if penalties_and_rewards_data:
-        merge_penalties_and_rewards(release_json, penalties_and_rewards_data)
-    else:
-        logger.warning("No Penalties and Rewards data found")
+    try:
+        penalties_and_rewards_data = parse_penalties_and_rewards(xml_content)
+        if penalties_and_rewards_data:
+            merge_penalties_and_rewards(release_json, penalties_and_rewards_data)
+        else:
+            logger.info("No Penalties and Rewards data found")
+    except ValueError as e:
+        logger.error(f"Error parsing Penalties and Rewards data: {str(e)}")
 
     # Parse and merge OPP-040-Procedure Main Nature - Sub Type
     logger.info("Processing OPP-040-Procedure: Main Nature - Sub Type")
@@ -2150,15 +2158,21 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Part Tender Recipient data found")
 
-    # Parse and merge OPT_301_Tenderer_MainCont
-    maincont_data = parse_tenderer_maincont(xml_content)
-    if maincont_data:
-        merge_tenderer_maincont(release_json, maincont_data)
+    # Parse and merge OPT-301-Tenderer-MainCont Main Contractor ID Reference
+    logger.info("Processing OPT-301-Tenderer-MainCont: Main Contractor ID Reference")
+    main_contractor_data = parse_main_contractor_id_reference(xml_content)
+    if main_contractor_data:
+        merge_main_contractor_id_reference(release_json, main_contractor_data)
     else:
-        logger.warning("No Tenderer Main Contractor data found")
-# add more OPT-301 her
+        logger.warning("No Main Contractor ID Reference data found")
 
-
+    # Parse and merge OPT-301-Tenderer-SubCont Subcontractor ID Reference
+    logger.info("Processing OPT-301-Tenderer-SubCont: Subcontractor ID Reference")
+    subcontractor_data = parse_subcontractor_id_reference(xml_content)
+    if subcontractor_data:
+        merge_subcontractor_id_reference(release_json, subcontractor_data)
+    else:
+        logger.warning("No Subcontractor ID Reference data found")
 
     # Parse and merge OPT-302-Organization Beneficial Owner Reference
     logger.info("Processing OPT-302-Organization: Beneficial Owner Reference")

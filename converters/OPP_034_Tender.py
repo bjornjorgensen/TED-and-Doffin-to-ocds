@@ -1,7 +1,5 @@
-# converters/OPP_034_Tender.py
-
-from lxml import etree
 import logging
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -19,17 +17,20 @@ def parse_penalties_and_rewards(xml_content):
 
     lot_tenders = root.xpath("//efac:NoticeResult/efac:LotTender", namespaces=namespaces)
     for lot_tender in lot_tenders:
-        lot_id = lot_tender.xpath("efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)[0]
+        lot_id_elements = lot_tender.xpath("efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)
+        if not lot_id_elements:
+            raise ValueError("Lot ID is missing for a LotTender")
         
-        rewards_penalties = lot_tender.xpath("efac:ContractTerm[efbc:TermCode/@listName='rewards-penalties']/efbc:TermDescription/text()", namespaces=namespaces)
-        
-        if rewards_penalties:
-            result["tender"]["lots"].append({
+        lot_id = lot_id_elements[0]
+        penalties_and_rewards = lot_tender.xpath("efac:ContractTerm[efbc:TermCode='pena-rewa']/efbc:TermDescription/text()", namespaces=namespaces)
+        if penalties_and_rewards:
+            lot = {
                 "id": lot_id,
                 "contractTerms": {
-                    "rewardsAndPenalties": rewards_penalties[0]
+                    "penaltiesAndRewards": penalties_and_rewards[0]
                 }
-            })
+            }
+            result["tender"]["lots"].append(lot)
 
     return result if result["tender"]["lots"] else None
 
@@ -38,9 +39,8 @@ def merge_penalties_and_rewards(release_json, penalties_and_rewards_data):
         logger.warning("No Penalties and Rewards data to merge")
         return
 
-    tender = release_json.setdefault("tender", {})
-    existing_lots = tender.setdefault("lots", [])
-
+    existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
+    
     for new_lot in penalties_and_rewards_data["tender"]["lots"]:
         existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
         if existing_lot:
@@ -48,4 +48,4 @@ def merge_penalties_and_rewards(release_json, penalties_and_rewards_data):
         else:
             existing_lots.append(new_lot)
 
-    logger.info(f"Merged Penalties and Rewards for {len(penalties_and_rewards_data['tender']['lots'])} lots")
+    logger.info(f"Merged Penalties and Rewards data for {len(penalties_and_rewards_data['tender']['lots'])} lots")

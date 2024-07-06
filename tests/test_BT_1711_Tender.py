@@ -1,5 +1,3 @@
-# tests/test_BT_1711_Tender.py
-
 import pytest
 import json
 import os
