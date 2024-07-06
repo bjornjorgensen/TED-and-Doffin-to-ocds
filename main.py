@@ -59,7 +59,7 @@ from converters.BT_165_Organization_Company import parse_winner_size, merge_winn
 from converters.BT_17_Lot import parse_submission_electronic, merge_submission_electronic
 from converters.BT_171_Tender import parse_tender_rank, merge_tender_rank
 from converters.BT_1711_Tender import parse_tender_ranked, merge_tender_ranked
-from converters.BT_18 import parse_submission_url
+from converters.BT_18_Lot import parse_submission_url, merge_submission_url
 from converters.BT_19_Lot import parse_nonelectronic_submission_justification, merge_nonelectronic_submission_justification
 from converters.BT_191 import parse_country_origin
 from converters.BT_193_Tender import parse_tender_variant, merge_tender_variant
@@ -994,20 +994,13 @@ def main(xml_path, ocid_prefix):
 
     # Parse the Submission URL (BT-18)
     try:
-        submission_url = parse_submission_url(xml_content)
-        
-        # Merge Submission URL into the release JSON
-        if submission_url and "tender" in submission_url and "lots" in submission_url["tender"]:
-            existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-            for new_lot in submission_url["tender"]["lots"]:
-                existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-                if existing_lot:
-                    existing_lot["submissionMethodDetails"] = new_lot["submissionMethodDetails"]
-                else:
-                    existing_lots.append(new_lot)
-
+        submission_url_data = parse_submission_url(xml_content)
+        if submission_url_data:
+            merge_submission_url(release_json, submission_url_data)
+        else:
+            logger.info("No Submission URL data found")
     except Exception as e:
-        print(f"Error parsing Submission URL: {str(e)}")
+        logger.error(f"Error processing Submission URL data: {str(e)}")
 
     # Parse and merge BT-19-Lot Submission Nonelectronic Justification
     logger.info("Processing BT-19-Lot: Submission Nonelectronic Justification")
