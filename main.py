@@ -62,7 +62,7 @@ from converters.BT_1711_Tender import parse_tender_ranked, merge_tender_ranked
 from converters.BT_18 import parse_submission_url
 from converters.BT_19_Lot import parse_nonelectronic_submission_justification, merge_nonelectronic_submission_justification
 from converters.BT_191 import parse_country_origin
-from converters.BT_193 import parse_tender_variant
+from converters.BT_193_Tender import parse_tender_variant, merge_tender_variant
 from converters.BT_195 import parse_unpublished_identifier
 from converters.BT_21 import parse_title, merge_title
 from converters.BT_22 import parse_internal_identifiers, merge_internal_identifiers
@@ -1041,23 +1041,13 @@ def main(xml_path, ocid_prefix):
 
     # Parse the Tender Variant (BT-193)
     try:
-        tender_variant = parse_tender_variant(xml_content)
-        
-        # Merge Tender Variant into the release JSON
-        if tender_variant and "bids" in tender_variant and "details" in tender_variant["bids"]:
-            existing_bids = release_json.setdefault("bids", {}).setdefault("details", [])
-            for new_bid in tender_variant["bids"]["details"]:
-                existing_bid = next((bid for bid in existing_bids if bid["id"] == new_bid["id"]), None)
-                if existing_bid:
-                    existing_bid.update(new_bid)
-                    existing_bid.setdefault("relatedLots", []).extend(
-                        lot for lot in new_bid["relatedLots"] if lot not in existing_bid.get("relatedLots", [])
-                    )
-                else:
-                    existing_bids.append(new_bid)
-
+        tender_variant_data = parse_tender_variant(xml_content)
+        if tender_variant_data:
+            merge_tender_variant(release_json, tender_variant_data)
+        else:
+            logger.info("No Tender Variant data found")
     except Exception as e:
-        print(f"Error parsing Tender Variant: {str(e)}")
+        logger.error(f"Error processing Tender Variant data: {str(e)}")
 
 
     # Parse the Unpublished Identifier (BT-195)
@@ -1867,14 +1857,11 @@ def main(xml_path, ocid_prefix):
 
     # Processing OPP-090-Procedure: Previous Notice Identifier
     logger.info("Processing OPP-090-Procedure: Previous Notice Identifier")
-    #logger.info(f"relatedProcesses before OPP-090: {json.dumps(release_json.get('relatedProcesses', []), indent=2)}")
     previous_notice_data = parse_previous_notice_identifier(xml_content)
     if previous_notice_data:
-     #   logger.info(f"Parsed previous notice data: {json.dumps(previous_notice_data, indent=2)}")
         merge_previous_notice_identifier(release_json, previous_notice_data)
     else:
         logger.warning("No Previous Notice Identifier data found")
-    #logger.info(f"relatedProcesses after OPP-090: {json.dumps(release_json.get('relatedProcesses', []), indent=2)}")
 
     # Parse and merge OPT-030-Procedure-SProvider Provided Service Type
     logger.info("Processing OPT-030-Procedure-SProvider: Provided Service Type")
