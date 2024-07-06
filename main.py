@@ -282,11 +282,20 @@ from converters.OPT_320_LotResult import parse_tender_identifier_reference, merg
 
 
 def configure_logging():
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-        datefmt='%Y-%m-%d %H:%M:%S'
-    )
+    # Create a logger
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+
+    # Create formatter
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+
+    # Create file handler and set level to info
+    file_handler = logging.FileHandler('app.log', mode='w')
+    file_handler.setLevel(logging.INFO)
+    file_handler.setFormatter(formatter)
+
+    # Add handler to logger
+    logger.addHandler(file_handler)
 
 def remove_empty_elements(data):
     """
@@ -2201,9 +2210,10 @@ def main(xml_path, ocid_prefix):
     with io.open('output.json', 'w', encoding='utf-8') as f:
         json.dump(release_json, f, ensure_ascii=False, indent=4)
 
-    # Print the JSON string
-    json_string = json.dumps(release_json, ensure_ascii=False, indent=2)
     logger.info("XML to JSON conversion completed")
+
+    # Print the JSON string to console
+    json_string = json.dumps(release_json, ensure_ascii=False, indent=2)
     print(json_string)
 
     return release_json
