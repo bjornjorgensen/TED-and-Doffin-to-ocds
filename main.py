@@ -87,7 +87,7 @@ from converters.BT_45 import parse_rewards_other, merge_rewards_other
 from converters.BT_46 import parse_jury_member_name, merge_jury_member_name
 from converters.BT_47 import parse_participant_name, merge_participant_name
 from converters.BT_50 import parse_minimum_candidates, merge_minimum_candidates
-from converters.BT_500 import parse_organization_info, merge_organization_info
+from converters.BT_500_Organization_Company import parse_organization_name, merge_organization_name
 from converters.BT_5010 import parse_eu_funds_financing_identifier, merge_eu_funds_financing_identifier
 from converters.BT_5011 import parse_contract_eu_funds_financing_identifier, merge_contract_eu_funds_financing_identifier
 from converters.BT_502_503_505_506_507 import parse_organization_contact_info, merge_organization_contact_info
@@ -1169,10 +1169,15 @@ def main(xml_path, ocid_prefix):
     # Merge minimum candidates into the release JSON
     merge_minimum_candidates(release_json, minimum_candidates_data)
 
-   # Parse the organization info (BT-500 and BT-501)
-    organization_info_data = parse_organization_info(xml_content)
-    # Merge organization info into the release JSON
-    merge_organization_info(release_json, organization_info_data)
+   # Parse the organization info BT-500 
+    try:
+        organization_name_data = parse_organization_name(xml_content)
+        if organization_name_data:
+            merge_organization_name(release_json, organization_name_data)
+        else:
+            logger.info("No Organization Name data found")
+    except Exception as e:
+        logger.error(f"Error processing Organization Name data: {str(e)}")
 
     # Parse the EU funds financing identifier (BT-5010)
     eu_funds_data = parse_eu_funds_financing_identifier(xml_content)
