@@ -1648,8 +1648,14 @@ def main(xml_path, ocid_prefix):
     merge_received_submissions_type(release_json, submissions_type_data)
 
     # Parse and merge BT-762-notice Change Reason Description
-    change_reasons = parse_change_reason_description(xml_content)
-    merge_change_reason_description(release_json, change_reasons)
+    try:
+        change_reason_description_data = parse_change_reason_description(xml_content)
+        if change_reason_description_data:
+            merge_change_reason_description(release_json, change_reason_description_data)
+        else:
+            logger.info("No Change Reason Description data found")
+    except Exception as e:
+        logger.error(f"Error processing Change Reason Description data: {str(e)}")
 
     # Parse and merge BT-763-Procedure Lots All Required
     is_all_required = parse_lots_all_required(xml_content)
