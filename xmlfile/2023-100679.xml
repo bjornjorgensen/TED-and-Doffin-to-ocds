@@ -1,0 +1,429 @@
+<ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1" xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1" xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1" xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2">
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionContent>
+        <efext:EformsExtension>
+          <efbc:TransmissionDate>2023-11-08+00:00</efbc:TransmissionDate>
+          <efbc:TransmissionTime>12:23:47+00:00</efbc:TransmissionTime>
+          <efac:NoticeSubType>
+            <cbc:SubTypeCode listName="notice-subtype">20</cbc:SubTypeCode>
+          </efac:NoticeSubType>
+          <efac:Organizations>
+            <efac:Organization>
+              <efac:Company>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Hole kommune</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">Hole kommune</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Viksveien 30</cbc:StreetName>
+                  <cbc:Department>Innkjøp</cbc:Department>
+                  <cbc:CityName>Røyse</cbc:CityName>
+                  <cbc:PostalZone>3530</cbc:PostalZone>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">960010833</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Name>Leila Kittelsen - Skuland</cbc:Name>
+                  <cbc:Telephone>+4732 16 11 00</cbc:Telephone>
+                  <cbc:ElectronicMail>Leila.Skuland@hole.kommune.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+            <efac:Organization>
+              <efac:Company>
+                <cbc:WebsiteURI>https://www.domstol.no/no/domstoler/tingrett/ringerike-asker-og-barum-tingrett/</cbc:WebsiteURI>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Ringerike, Asker og Bærum tingrett</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">Ringerike, Asker og Bærum tingrett</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Postboks 578</cbc:StreetName>
+                  <cbc:CityName>Sandvika</cbc:CityName>
+                  <cbc:PostalZone>1302</cbc:PostalZone>
+                  <cbc:CountrySubentityCode listName="nuts">NO082</cbc:CountrySubentityCode>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">926 725 963</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Telephone>67 57 65 00</cbc:Telephone>
+                  <cbc:ElectronicMail>trabpost@domstol.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+          </efac:Organizations>
+        </efext:EformsExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:UBLVersionID>2.3</cbc:UBLVersionID>
+  <cbc:CustomizationID>eforms-sdk-1.7#extended#urn:fdc:anskaffelser.no:2023:eforms:eu</cbc:CustomizationID>
+  <cbc:ID schemeName="notice-id">e496e8a2-0f8b-4699-834e-ee860c95ddf8</cbc:ID>
+  <cbc:ContractFolderID>2045e2ae-24c5-4137-bbe8-6ed3f85591ab</cbc:ContractFolderID>
+  <cbc:IssueDate>2023-11-08+00:00</cbc:IssueDate>
+  <cbc:IssueTime>12:20:58+00:00</cbc:IssueTime>
+  <cbc:VersionID>01</cbc:VersionID>
+  <cbc:RegulatoryDomain>32014L0024</cbc:RegulatoryDomain>
+  <cbc:NoticeTypeCode listName="competition">cn-social</cbc:NoticeTypeCode>
+  <cbc:NoticeLanguageCode>NOR</cbc:NoticeLanguageCode>
+  <cac:AdditionalNoticeLanguage>
+    <cbc:ID>ENG</cbc:ID>
+  </cac:AdditionalNoticeLanguage>
+  <cac:ContractingParty>
+    <cac:ContractingPartyType>
+      <cbc:PartyTypeCode listName="buyer-legal-type">ra</cbc:PartyTypeCode>
+    </cac:ContractingPartyType>
+    <cac:ContractingActivity>
+      <cbc:ActivityTypeCode listName="authority-activity">gen-pub</cbc:ActivityTypeCode>
+    </cac:ContractingActivity>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+      </cac:PartyIdentification>
+    </cac:Party>
+  </cac:ContractingParty>
+  <cac:TenderingProcess>
+    <cbc:Description languageID="NOR">Konkurransen gjennomføres som Åpen anbudskonkurranse etter forskriftens Del I og IV. Ved denne prosedyreformen kan alle interesserte leverandører levere tilbud.</cbc:Description>
+    <cbc:Description languageID="ENG">The competition will be held as an open tender contest in accordance with the regulations, Parts I and IV. All interested tenderers can submit tenders for this type of procedure.</cbc:Description>
+    <cbc:ProcedureCode listName="procurement-procedure-type">open</cbc:ProcedureCode>
+    <cbc:PartPresentationCode listName="tenderlot-presentation">all</cbc:PartPresentationCode>
+  </cac:TenderingProcess>
+  <cac:ProcurementProject>
+    <cbc:ID schemeName="InternalID">23/13419</cbc:ID>
+    <cbc:Name languageID="NOR">Heldøgns bo- og omsorgstilbud til bruker under 18 år</cbc:Name>
+    <cbc:Name languageID="ENG">24 hour residential and welfare services for users under the age of 18.</cbc:Name>
+    <cbc:Description languageID="NOR">Konkurransen gjelder heldøgns bo- og omsorgstilbud til bruker under 18 år. Brukeren har sammensatte og alvorlige diagnoser innen utviklingshemming, autismespekterforstyrrelser og atferds utfordringer. Tjenestemottaker har behov for bistand til å ivareta egenomsorg og daglige gjøremål i bolig med heldøgns bo- og omsorgstjenester.
+Anskaffelsens verdi anslås til: NOK 10.000.000,- eks. mva per år. Volumet er et estimat og er ikke bindende for oppdragsgiver.For nærmere informasjon viser vi til anskaffelsesdokumentene.</cbc:Description>
+    <cbc:Description languageID="ENG">The competition is for 24 hour residential and welfare services for users under the age of 18. The user has compound and serious diagnoses within mental disabilities, autism spectrum disturbances and behavioural challenges. The service recipient needs assistance in safeguarding self-care and daily tasks in residences with 24 hour residential and care services.
+The procurement ́s value is estimated to: NOK 10,000,000 excluding VAT per annum. The volume is an estimate and is not binding for the contracting authority. See the procurement documents for further information.</cbc:Description>
+    <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
+    <cac:RequestedTenderTotal>
+      <cbc:EstimatedOverallContractAmount currencyID="NOK">60000000</cbc:EstimatedOverallContractAmount>
+    </cac:RequestedTenderTotal>
+    <cac:MainCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">85000000</cbc:ItemClassificationCode>
+    </cac:MainCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">85141000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">85300000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">85311000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+  </cac:ProcurementProject>
+  <cac:ProcurementProjectLot>
+    <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+    <cac:TenderingTerms>
+      <ext:UBLExtensions>
+        <ext:UBLExtension>
+          <ext:ExtensionContent>
+            <efext:EformsExtension>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Attester for skatt og MVA</cbc:Name>
+                <cbc:Name languageID="ENG">Certificates for tax and VAT.</cbc:Name>
+                <cbc:Description languageID="NOR">Leverandøren skal ha ordnede forhold med hensyn til skatte- og merverdiavgiftsbetaling.
+
+Dokumentasjonskrav:
+Krav til attest for betalt merverdiavgift, skatt og trygdeavgift. Attest utstedt av den kompetente myndighet i medlemslandet, som bekrefter at leverandøren har oppfylt sine forpliktelser med hensyn til betaling av merverdiavgift, skatter og trygdeavgifter i det landet hvor leverandøren/entreprenøren hører hjemme (norsk attest for skatt og MVA er felles og bestilles fra altinn.no, RF-1507, tidligere RF-1244) i samsvar med lovbestemmelsene i landet. Attesten må ikke være eldre enn 6 måneder.</cbc:Description>
+                <cbc:Description languageID="ENG">Tenderers shall have their tax and VAT payments in order.
+
+Documentation requirement:
+A certificate showing paid VAT, taxes and social security contributions is required. Certificate issued by the competent authority in the member country, confirming that the tenderer has fulfilled his VAT, tax and social security obligations in the country where the tenderer/contractor belongs (Norwegian tax and VAT certificate is common and can be ordered from altinn.no, RF-1507, previous RF-1244) in accordance with the legal provisions in the country. The certificate must not be more than six months old.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Økonomisk og finansiell stilling</cbc:Name>
+                <cbc:Name languageID="ENG">Economic and financial position</cbc:Name>
+                <cbc:Description languageID="NOR">Krav knyttet til leverandørens økonomiske og finansielle stilling: Det kreves økonomisk kapasitet til å gjennomføre denne kontrakten.
+
+Dokumentasjonskrav:
+Oppdragsgiver vil gjennomføre en vurdering av økonomien gjennom firma- og regnskapsinformasjonssystemet Proff Forvalt (www.forvalt.no). Oppdragsgiver forbeholder seg retten til å innhente supplerende informasjon om tilbyders økonomi.</cbc:Description>
+                <cbc:Description languageID="ENG">Requirements regarding the tenderer ́s economic and financial position: The financial capacity to fulfil this contract is required.
+
+Documentation requirement:
+The contracting authority will assess finances through the company and accounting information system Proff Forvalt (www.forvalt.no). The contracting authority reserves the right to obtain supplementary information about the tenderer's finances.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">sui-act</cbc:CriterionTypeCode>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+            </efext:EformsExtension>
+          </ext:ExtensionContent>
+        </ext:UBLExtension>
+      </ext:UBLExtensions>
+      <cbc:FundingProgramCode listName="eu-funded">no-eu-funds</cbc:FundingProgramCode>
+      <cbc:RecurringProcurementIndicator>false</cbc:RecurringProcurementIndicator>
+      <cac:CallForTendersDocumentReference>
+        <cbc:ID>Link to the procurement documents</cbc:ID>
+        <cbc:DocumentType>non-restricted-document</cbc:DocumentType>
+        <cac:Attachment>
+          <cac:ExternalReference>
+            <cbc:URI>https://tendsign.com/doc.aspx?MeFormsNoticeId=1308</cbc:URI>
+          </cac:ExternalReference>
+        </cac:Attachment>
+      </cac:CallForTendersDocumentReference>
+      <cac:TendererQualificationRequest>
+        <cac:SpecificTendererRequirement>
+          <cbc:TendererRequirementTypeCode listName="reserved-procurement">none</cbc:TendererRequirementTypeCode>
+        </cac:SpecificTendererRequirement>
+      </cac:TendererQualificationRequest>
+      <cac:ContractExecutionRequirement>
+        <cbc:ExecutionRequirementCode listName="einvoicing">required</cbc:ExecutionRequirementCode>
+      </cac:ContractExecutionRequirement>
+      <cac:ContractExecutionRequirement>
+        <cbc:ExecutionRequirementCode listName="reserved-execution">no</cbc:ExecutionRequirementCode>
+      </cac:ContractExecutionRequirement>
+      <cac:ContractExecutionRequirement>
+        <cbc:ExecutionRequirementCode listName="ecatalog-submission">allowed</cbc:ExecutionRequirementCode>
+      </cac:ContractExecutionRequirement>
+      <cac:ContractExecutionRequirement>
+        <cbc:ExecutionRequirementCode listName="esignature-submission">false</cbc:ExecutionRequirementCode>
+      </cac:ContractExecutionRequirement>
+      <cac:TenderRecipientParty>
+        <cbc:EndpointID>https://tendsign.com/doc.aspx?MeFormsNoticeId=1308&amp;GoTo=Tender</cbc:EndpointID>
+      </cac:TenderRecipientParty>
+      <cac:TenderValidityPeriod>
+        <cbc:DurationMeasure unitCode="DAY">89</cbc:DurationMeasure>
+      </cac:TenderValidityPeriod>
+      <cac:AppealTerms>
+        <cac:AppealReceiverParty>
+          <cac:PartyIdentification>
+            <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+          </cac:PartyIdentification>
+        </cac:AppealReceiverParty>
+      </cac:AppealTerms>
+      <cac:Language>
+        <cbc:ID>NOR</cbc:ID>
+      </cac:Language>
+    </cac:TenderingTerms>
+    <cac:TenderingProcess>
+      <cbc:SubmissionMethodCode listName="esubmission">required</cbc:SubmissionMethodCode>
+      <cac:TenderSubmissionDeadlinePeriod>
+        <cbc:EndDate>2023-12-08+01:00</cbc:EndDate>
+        <cbc:EndTime>12:00:58+01:00</cbc:EndTime>
+      </cac:TenderSubmissionDeadlinePeriod>
+      <cac:AdditionalInformationRequestPeriod>
+        <cbc:EndDate>2023-11-30+01:00</cbc:EndDate>
+        <cbc:EndTime>00:00:00+01:00</cbc:EndTime>
+      </cac:AdditionalInformationRequestPeriod>
+      <cac:OpenTenderEvent>
+        <cbc:OccurrenceDate>2023-12-08+01:00</cbc:OccurrenceDate>
+        <cbc:OccurrenceTime>12:01:00+01:00</cbc:OccurrenceTime>
+        <cac:OccurenceLocation>
+          <cbc:Description languageID="NOR">Hole kommune</cbc:Description>
+          <cbc:Description languageID="ENG">Hole municipality</cbc:Description>
+        </cac:OccurenceLocation>
+      </cac:OpenTenderEvent>
+      <cac:AuctionTerms>
+        <cbc:AuctionConstraintIndicator>false</cbc:AuctionConstraintIndicator>
+      </cac:AuctionTerms>
+      <cac:ContractingSystem>
+        <cbc:ContractingSystemTypeCode listName="dps-usage">none</cbc:ContractingSystemTypeCode>
+      </cac:ContractingSystem>
+      <cac:ContractingSystem>
+        <cbc:ContractingSystemTypeCode listName="framework-agreement">none</cbc:ContractingSystemTypeCode>
+      </cac:ContractingSystem>
+    </cac:TenderingProcess>
+    <cac:ProcurementProject>
+      <cbc:ID schemeName="InternalID">23/13419</cbc:ID>
+      <cbc:Name languageID="NOR">Generell del</cbc:Name>
+      <cbc:Name languageID="ENG">General part</cbc:Name>
+      <cbc:Description languageID="NOR">Konkurransen gjelder heldøgns bo- og omsorgstilbud til bruker under 18 år. Brukeren har sammensatte og alvorlige diagnoser innen utviklingshemming, autismespekterforstyrrelser og atferds utfordringer. Tjenestemottaker har behov for bistand til å ivareta egenomsorg og daglige gjøremål i bolig med heldøgns bo- og omsorgstjenester. 
+Anskaffelsens verdi anslås til: NOK 10.000.000,- eks. mva per år. Volumet er et estimat og er ikke bindende for oppdragsgiver. For nærmere informasjon viser vi til anskaffelsesdokumentene.</cbc:Description>
+      <cbc:Description languageID="ENG">The competition is for 24 hour residential and welfare services for users under the age of 18. The user has compound and serious diagnoses within mental disabilities, autism spectrum disturbances and behavioural challenges. The service recipient needs assistance in safeguarding self-care and daily tasks in residences with 24 hour residential and care services. 
+The procurement ́s value is estimated to: NOK 10,000,000 excluding VAT per annum. The volume is an estimate and is not binding for the contracting authority. See the procurement documents for further information.</cbc:Description>
+      <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
+      <cac:MainCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">85000000</cbc:ItemClassificationCode>
+      </cac:MainCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">85141000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">85300000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">85311000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">85311300</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:PlannedPeriod>
+        <cbc:StartDate>2024-02-02+01:00</cbc:StartDate>
+      </cac:PlannedPeriod>
+    </cac:ProcurementProject>
+  </cac:ProcurementProjectLot>
+  <cac:ProcurementProjectLot>
+    <cbc:ID schemeName="Lot">LOT-0002</cbc:ID>
+    <cac:TenderingTerms>
+      <ext:UBLExtensions>
+        <ext:UBLExtension>
+          <ext:ExtensionContent>
+            <efext:EformsExtension>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Attester for skatt og MVA</cbc:Name>
+                <cbc:Name languageID="ENG">Certificates for tax and VAT.</cbc:Name>
+                <cbc:Description languageID="NOR">Leverandøren skal ha ordnede forhold med hensyn til skatte- og merverdiavgiftsbetaling.
+
+Dokumentasjonskrav:
+Krav til attest for betalt merverdiavgift, skatt og trygdeavgift. Attest utstedt av den kompetente myndighet i medlemslandet, som bekrefter at leverandøren har oppfylt sine forpliktelser med hensyn til betaling av merverdiavgift, skatter og trygdeavgifter i det landet hvor leverandøren/entreprenøren hører hjemme (norsk attest for skatt og MVA er felles og bestilles fra altinn.no, RF-1507, tidligere RF-1244) i samsvar med lovbestemmelsene i landet. Attesten må ikke være eldre enn 6 måneder.</cbc:Description>
+                <cbc:Description languageID="ENG">Tenderers shall have their tax and VAT payments in order.
+
+Documentation requirement:
+A certificate showing paid VAT, taxes and social security contributions is required. Certificate issued by the competent authority in the member country, confirming that the tenderer has fulfilled his VAT, tax and social security obligations in the country where the tenderer/contractor belongs (Norwegian tax and VAT certificate is common and can be ordered from altinn.no, RF-1507, previous RF-1244) in accordance with the legal provisions in the country. The certificate must not be more than six months old.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Økonomisk og finansiell stilling</cbc:Name>
+                <cbc:Name languageID="ENG">Economic and financial position</cbc:Name>
+                <cbc:Description languageID="NOR">Krav knyttet til leverandørens økonomiske og finansielle stilling: Det kreves økonomisk kapasitet til å gjennomføre denne kontrakten.
+
+Dokumentasjonskrav:
+Oppdragsgiver vil gjennomføre en vurdering av økonomien gjennom firma- og regnskapsinformasjonssystemet Proff Forvalt (www.forvalt.no). Oppdragsgiver forbeholder seg retten til å innhente supplerende informasjon om tilbyders økonomi.</cbc:Description>
+                <cbc:Description languageID="ENG">Requirements regarding the tenderer ́s economic and financial position: The financial capacity to fulfil this contract is required.
+
+Documentation requirement:
+The contracting authority will assess finances through the company and accounting information system Proff Forvalt (www.forvalt.no). The contracting authority reserves the right to obtain supplementary information about the tenderer's finances.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">sui-act</cbc:CriterionTypeCode>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+            </efext:EformsExtension>
+          </ext:ExtensionContent>
+        </ext:UBLExtension>
+      </ext:UBLExtensions>
+      <cbc:FundingProgramCode listName="eu-funded">no-eu-funds</cbc:FundingProgramCode>
+      <cbc:RecurringProcurementIndicator>false</cbc:RecurringProcurementIndicator>
+      <cac:CallForTendersDocumentReference>
+        <cbc:ID>Link to the procurement documents</cbc:ID>
+        <cbc:DocumentType>non-restricted-document</cbc:DocumentType>
+        <cac:Attachment>
+          <cac:ExternalReference>
+            <cbc:URI>https://tendsign.com/doc.aspx?MeFormsNoticeId=1308</cbc:URI>
+          </cac:ExternalReference>
+        </cac:Attachment>
+      </cac:CallForTendersDocumentReference>
+      <cac:TendererQualificationRequest>
+        <cac:SpecificTendererRequirement>
+          <cbc:TendererRequirementTypeCode listName="reserved-procurement">none</cbc:TendererRequirementTypeCode>
+        </cac:SpecificTendererRequirement>
+      </cac:TendererQualificationRequest>
+      <cac:ContractExecutionRequirement>
+        <cbc:ExecutionRequirementCode listName="einvoicing">required</cbc:ExecutionRequirementCode>
+      </cac:ContractExecutionRequirement>
+      <cac:ContractExecutionRequirement>
+        <cbc:ExecutionRequirementCode listName="reserved-execution">no</cbc:ExecutionRequirementCode>
+      </cac:ContractExecutionRequirement>
+      <cac:ContractExecutionRequirement>
+        <cbc:ExecutionRequirementCode listName="ecatalog-submission">allowed</cbc:ExecutionRequirementCode>
+      </cac:ContractExecutionRequirement>
+      <cac:ContractExecutionRequirement>
+        <cbc:ExecutionRequirementCode listName="esignature-submission">false</cbc:ExecutionRequirementCode>
+      </cac:ContractExecutionRequirement>
+      <cac:TenderRecipientParty>
+        <cbc:EndpointID>https://tendsign.com/doc.aspx?MeFormsNoticeId=1308&amp;GoTo=Tender</cbc:EndpointID>
+      </cac:TenderRecipientParty>
+      <cac:TenderValidityPeriod>
+        <cbc:DurationMeasure unitCode="DAY">89</cbc:DurationMeasure>
+      </cac:TenderValidityPeriod>
+      <cac:AppealTerms>
+        <cac:AppealReceiverParty>
+          <cac:PartyIdentification>
+            <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+          </cac:PartyIdentification>
+        </cac:AppealReceiverParty>
+      </cac:AppealTerms>
+      <cac:Language>
+        <cbc:ID>NOR</cbc:ID>
+      </cac:Language>
+    </cac:TenderingTerms>
+    <cac:TenderingProcess>
+      <cbc:SubmissionMethodCode listName="esubmission">required</cbc:SubmissionMethodCode>
+      <cac:TenderSubmissionDeadlinePeriod>
+        <cbc:EndDate>2023-12-08+01:00</cbc:EndDate>
+        <cbc:EndTime>12:00:58+01:00</cbc:EndTime>
+      </cac:TenderSubmissionDeadlinePeriod>
+      <cac:AdditionalInformationRequestPeriod>
+        <cbc:EndDate>2023-11-30+01:00</cbc:EndDate>
+        <cbc:EndTime>00:00:00+01:00</cbc:EndTime>
+      </cac:AdditionalInformationRequestPeriod>
+      <cac:OpenTenderEvent>
+        <cbc:OccurrenceDate>2023-12-08+01:00</cbc:OccurrenceDate>
+        <cbc:OccurrenceTime>12:01:00+01:00</cbc:OccurrenceTime>
+        <cac:OccurenceLocation>
+          <cbc:Description languageID="NOR">Hole kommune</cbc:Description>
+          <cbc:Description languageID="ENG">Hole municipality</cbc:Description>
+        </cac:OccurenceLocation>
+      </cac:OpenTenderEvent>
+      <cac:AuctionTerms>
+        <cbc:AuctionConstraintIndicator>false</cbc:AuctionConstraintIndicator>
+      </cac:AuctionTerms>
+      <cac:ContractingSystem>
+        <cbc:ContractingSystemTypeCode listName="dps-usage">none</cbc:ContractingSystemTypeCode>
+      </cac:ContractingSystem>
+      <cac:ContractingSystem>
+        <cbc:ContractingSystemTypeCode listName="framework-agreement">none</cbc:ContractingSystemTypeCode>
+      </cac:ContractingSystem>
+    </cac:TenderingProcess>
+    <cac:ProcurementProject>
+      <cbc:ID schemeName="InternalID">23/13419</cbc:ID>
+      <cbc:Name languageID="NOR">Generell del (1)</cbc:Name>
+      <cbc:Name languageID="ENG">General part (1)</cbc:Name>
+      <cbc:Description languageID="NOR">Konkurransen gjelder heldøgns bo- og omsorgstilbud til bruker under 18 år. Brukeren har sammensatte og alvorlige diagnoser innen utviklingshemming, autismespekterforstyrrelser og atferds utfordringer. Tjenestemottaker har behov for bistand til å ivareta egenomsorg og daglige gjøremål i bolig med heldøgns bo- og omsorgstjenester. 
+Anskaffelsens verdi anslås til: NOK 10.000.000,- eks. mva per år. Volumet er et estimat og er ikke bindende for oppdragsgiver. For nærmere informasjon viser vi til anskaffelsesdokumentene.</cbc:Description>
+      <cbc:Description languageID="ENG">The competition is for 24 hour residential and welfare services for users under the age of 18. The user has compound and serious diagnoses within mental disabilities, autism spectrum disturbances and behavioural challenges. The service recipient needs assistance in safeguarding self-care and daily tasks in residences with 24 hour residential and care services. 
+The procurement ́s value is estimated to: NOK 10,000,000 excluding VAT per annum. The volume is an estimate and is not binding for the contracting authority. See the procurement documents for further information.</cbc:Description>
+      <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
+      <cac:MainCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">85000000</cbc:ItemClassificationCode>
+      </cac:MainCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">85141000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">85300000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">85311000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:PlannedPeriod>
+        <cbc:StartDate>2024-02-02+01:00</cbc:StartDate>
+      </cac:PlannedPeriod>
+    </cac:ProcurementProject>
+  </cac:ProcurementProjectLot>
+</ContractNotice>

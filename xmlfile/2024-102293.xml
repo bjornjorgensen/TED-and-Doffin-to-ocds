@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?><PriorInformationNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:PriorInformationNotice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1" xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1" xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionContent>
+        <efext:EformsExtension>
+          <efbc:TransmissionDate>2024-02-16+00:00</efbc:TransmissionDate>
+          <efbc:TransmissionTime>11:27:23+00:00</efbc:TransmissionTime>
+          <efac:NoticeSubType>
+            <cbc:SubTypeCode listName="notice-subtype">N4</cbc:SubTypeCode>
+          </efac:NoticeSubType>
+          <efac:Organizations>
+            <efac:Organization>
+              <efac:Company>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Sandnes kommune</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Rådhusgata 1</cbc:StreetName>
+                  <cbc:CityName>Sandnes</cbc:CityName>
+                  <cbc:PostalZone>4306</cbc:PostalZone>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">964965137</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Name>Turid Dyngen</cbc:Name>
+                  <cbc:Telephone>+47 95886090</cbc:Telephone>
+                  <cbc:ElectronicMail>turid.dyngen@sandnes.kommune.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+            <efac:Organization>
+              <efac:Company>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Sør-Rogaland tingrett </cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:CityName>Sandnes</cbc:CityName>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">926 723 448</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Telephone>52004600</cbc:Telephone>
+                  <cbc:ElectronicMail>tsropost@domstol.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+            <efac:Organization>
+              <efac:Company>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0003</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Sandnes kommnune</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Rådhusgata 1</cbc:StreetName>
+                  <cbc:Department>Sandnes kommnuen</cbc:Department>
+                  <cbc:CityName>Sandnes</cbc:CityName>
+                  <cbc:PostalZone>4306</cbc:PostalZone>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">Sandnes kommune </cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Name>Sandnes kommnuen</cbc:Name>
+                  <cbc:Telephone>+4795886090</cbc:Telephone>
+                  <cbc:ElectronicMail>turid.dyngen@sandnes.kommune.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+          </efac:Organizations>
+        </efext:EformsExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:UBLVersionID>2.3</cbc:UBLVersionID>
+  <cbc:CustomizationID>eforms-sdk-1.7#extended#urn:fdc:anskaffelser.no:2023:eforms:national</cbc:CustomizationID>
+  <cbc:ID schemeName="notice-id">20cc3b73-3085-489d-9556-5d35b231445e</cbc:ID>
+  <cbc:IssueDate>2024-02-16+00:00</cbc:IssueDate>
+  <cbc:IssueTime>11:26:52+00:00</cbc:IssueTime>
+  <cbc:VersionID>01</cbc:VersionID>
+  <cbc:PlannedDate>2024-02-27+01:00</cbc:PlannedDate>
+  <cbc:RegulatoryDomain>other</cbc:RegulatoryDomain>
+  <cbc:NoticeTypeCode listName="planning">pin-only</cbc:NoticeTypeCode>
+  <cbc:NoticeLanguageCode>NOR</cbc:NoticeLanguageCode>
+  <cac:ContractingParty>
+    <cbc:BuyerProfileURI>https://eu.eu-supply.com/ctm/company/companyinformation/index/306369</cbc:BuyerProfileURI>
+    <cac:ContractingPartyType>
+      <cbc:PartyTypeCode listName="buyer-legal-type">pub-undert</cbc:PartyTypeCode>
+    </cac:ContractingPartyType>
+    <cac:ContractingActivity>
+      <cbc:ActivityTypeCode listName="authority-activity">gen-pub</cbc:ActivityTypeCode>
+    </cac:ContractingActivity>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+      </cac:PartyIdentification>
+    </cac:Party>
+  </cac:ContractingParty>
+  <cac:ContractingParty>
+    <cac:ContractingPartyType>
+      <cbc:PartyTypeCode listName="buyer-legal-type">pub-undert</cbc:PartyTypeCode>
+    </cac:ContractingPartyType>
+    <cac:ContractingActivity>
+      <cbc:ActivityTypeCode listName="authority-activity">gen-pub</cbc:ActivityTypeCode>
+    </cac:ContractingActivity>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID schemeName="organization">ORG-0003</cbc:ID>
+      </cac:PartyIdentification>
+    </cac:Party>
+  </cac:ContractingParty>
+  <cac:TenderingTerms>
+    <cac:ProcurementLegislationDocumentReference>
+      <cbc:ID>Anskaffelseforskriften</cbc:ID>
+    </cac:ProcurementLegislationDocumentReference>
+  </cac:TenderingTerms>
+  <cac:ProcurementProject>
+    <cbc:ID schemeName="InternalID">23/19100</cbc:ID>
+    <cbc:Name languageID="NOR">Intensjonskunngjøring - Aktivitet til Kongesommer 2024</cbc:Name>
+    <cbc:Description languageID="NOR">Oppdragsgiver har behov for et utendørs aktivitetstilbud med utgangspunkt i organisert lek for barn i forbindelse med Kongesommer 2024. 
+Kongesommer er en ferieklubb som tilbyr barn og unge dagaktiviteter hver sommer. Formålet er å tilby deltakerne aktiviteter som er lett tilgjengelig i deres egen by og nærområde. Aktivitetstilbudet må kunne ta imot mellom 30 – 60 deltakere samtidig, og må kunne tilpasses aldersgruppen 8-13 år. Deltakerne transporteres mellom basene og aktivitetene med buss, og aktiviteten må derfor ligge i kort avstand fra Sandnes. Aktivitetene må kunne tilbys tirsdag – fredag mellom klokken 12.00 og 15.00 i fire uker av skolens sommerferie.
+
+Oppdragsgiver har sondert markedet for leverandører som kan tilby utendørsaktiviteter med utgangspunkt i organisert lek for Kongesommers deltakere. Det er viktig at utendøraktivitetene er tilpasset aldersgruppen og at de ulike aktivitetene kan gjennomføres med alle deltagerne samtidig i en stor gruppe, og/eller i mindre grupper. Videre må uteaktivitetene ha variert innhold og kunne gjennomføres av alle deltagerne uavhengig av funksjonsnivå, fysisk og psykisk. Uteaktivitetene må kunne gjennomføres uavhengig av vær i et miljø hvor det kan oppstå innblanding fra mennesker som ikke er en del av Kongesommer. I tillegg må det være nok ansatte på jobb til å håndtere både uteaktiviteten og en trygg og adekvat gjennomføring hvor trivsel hos deltagerne, tilrettelegging og sikkerhet er høyt ivaretatt.
+
+Oppdragsgiver kan ikke se at det finnes andre aktuelle leverandører enn Frisk Luft som kan tilby ønsket aktivitet i henhold til Kongesommers behov med tanke på krav og omfang. Oppdragsgiver har derfor til intensjon å inngå avtale med Frisk Luft uten at det blir gjennomført konkurranse i markedet. 
+</cbc:Description>
+    <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
+    <cac:RequestedTenderTotal>
+      <cbc:EstimatedOverallContractAmount currencyID="NOK">110000</cbc:EstimatedOverallContractAmount>
+    </cac:RequestedTenderTotal>
+    <cac:MainCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">92331200</cbc:ItemClassificationCode>
+    </cac:MainCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">92300000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+  </cac:ProcurementProject>
+  <cac:ProcurementProjectLot>
+    <cbc:ID schemeName="Part">PAR-0000</cbc:ID>
+    <cac:TenderingTerms>
+      <cac:CallForTendersDocumentReference>
+        <cbc:ID>Anskaffelsesdokumenter</cbc:ID>
+        <cbc:DocumentType>non-restricted-document</cbc:DocumentType>
+        <cac:Attachment>
+          <cac:ExternalReference>
+            <cbc:URI>https://eu.eu-supply.com/app/rfq/rwlentrance_s.asp?PID=394227&amp;B=</cbc:URI>
+          </cac:ExternalReference>
+        </cac:Attachment>
+      </cac:CallForTendersDocumentReference>
+      <cac:AppealTerms>
+        <cac:AppealReceiverParty>
+          <cac:PartyIdentification>
+            <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+          </cac:PartyIdentification>
+        </cac:AppealReceiverParty>
+      </cac:AppealTerms>
+    </cac:TenderingTerms>
+    <cac:ProcurementProject>
+      <cbc:ID schemeName="InternalID">1</cbc:ID>
+      <cbc:Name languageID="NOR">Intensjonskunngjøring - Aktivitet til Kongesommer 2024</cbc:Name>
+      <cbc:Description languageID="NOR">Oppdragsgiver har behov for et utendørs aktivitetstilbud med utgangspunkt i organisert lek for barn i forbindelse med Kongesommer 2024. 
+Kongesommer er en ferieklubb som tilbyr barn og unge dagaktiviteter hver sommer. Formålet er å tilby deltakerne aktiviteter som er lett tilgjengelig i deres egen by og nærområde. Aktivitetstilbudet må kunne ta imot mellom 30 – 60 deltakere samtidig, og må kunne tilpasses aldersgruppen 8-13 år. Deltakerne transporteres mellom basene og aktivitetene med buss, og aktiviteten må derfor ligge i kort avstand fra Sandnes. Aktivitetene må kunne tilbys tirsdag – fredag mellom klokken 12.00 og 15.00 i fire uker av skolens sommerferie.
+
+Oppdragsgiver har sondert markedet for leverandører som kan tilby utendørsaktiviteter med utgangspunkt i organisert lek for Kongesommers deltakere. Det er viktig at utendøraktivitetene er tilpasset aldersgruppen og at de ulike aktivitetene kan gjennomføres med alle deltagerne samtidig i en stor gruppe, og/eller i mindre grupper. Videre må uteaktivitetene ha variert innhold og kunne gjennomføres av alle deltagerne uavhengig av funksjonsnivå, fysisk og psykisk. Uteaktivitetene må kunne gjennomføres uavhengig av vær i et miljø hvor det kan oppstå innblanding fra mennesker som ikke er en del av Kongesommer. I tillegg må det være nok ansatte på jobb til å håndtere både uteaktiviteten og en trygg og adekvat gjennomføring hvor trivsel hos deltagerne, tilrettelegging og sikkerhet er høyt ivaretatt.
+
+Oppdragsgiver kan ikke se at det finnes andre aktuelle leverandører enn Frisk Luft som kan tilby ønsket aktivitet i henhold til Kongesommers behov med tanke på krav og omfang. Oppdragsgiver har derfor til intensjon å inngå avtale med Frisk Luft uten at det blir gjennomført konkurranse i markedet. 
+</cbc:Description>
+      <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
+      <cac:RequestedTenderTotal>
+        <cbc:EstimatedOverallContractAmount currencyID="NOK">110000</cbc:EstimatedOverallContractAmount>
+      </cac:RequestedTenderTotal>
+      <cac:MainCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">92331200</cbc:ItemClassificationCode>
+      </cac:MainCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">92300000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+    </cac:ProcurementProject>
+  </cac:ProcurementProjectLot>
+</PriorInformationNotice>

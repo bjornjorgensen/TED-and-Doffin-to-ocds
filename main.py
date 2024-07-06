@@ -2212,7 +2212,7 @@ def main(xml_path, ocid_prefix):
 
 if __name__ == "__main__":
     # Path to the XML file
-    xml_path = 'can_24_minimal.xml'
+    xml_path = 'xmlfile/2023-684186.xml'
     # Prefix for OCID
     ocid_prefix = 'ocid_prefix_value'
     

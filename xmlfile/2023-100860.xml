@@ -1,0 +1,398 @@
+<ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1" xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1" xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1" xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2">
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionContent>
+        <efext:EformsExtension>
+          <efbc:TransmissionDate>2023-11-13+00:00</efbc:TransmissionDate>
+          <efbc:TransmissionTime>07:13:34+00:00</efbc:TransmissionTime>
+          <efac:NoticeSubType>
+            <cbc:SubTypeCode listName="notice-subtype">21</cbc:SubTypeCode>
+          </efac:NoticeSubType>
+          <efac:Organizations>
+            <efac:Organization>
+              <efac:Company>
+                <cbc:WebsiteURI>https://permalink.mercell.com/216310540.aspx</cbc:WebsiteURI>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Flytoget AS</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">Flytoget AS</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Jernbanetorget 1, Banebygget</cbc:StreetName>
+                  <cbc:CityName>OSLO</cbc:CityName>
+                  <cbc:PostalZone>0101</cbc:PostalZone>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">965694404</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Name>Åge Pedersen</cbc:Name>
+                  <cbc:Telephone>+47 23159000</cbc:Telephone>
+                  <cbc:ElectronicMail>age.pedersen@flytoget.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+          </efac:Organizations>
+        </efext:EformsExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:UBLVersionID>2.3</cbc:UBLVersionID>
+  <cbc:CustomizationID>eforms-sdk-1.7#extended#urn:fdc:anskaffelser.no:2023:eforms:eu</cbc:CustomizationID>
+  <cbc:ID schemeName="notice-id">d0b9cb0e-6bb1-4ad6-b369-05af6a80035f</cbc:ID>
+  <cbc:ContractFolderID>28ebf39d-11b6-49aa-a731-40caddad3072</cbc:ContractFolderID>
+  <cbc:IssueDate>2023-11-13+00:00</cbc:IssueDate>
+  <cbc:IssueTime>07:13:34+00:00</cbc:IssueTime>
+  <cbc:VersionID>01</cbc:VersionID>
+  <cbc:RegulatoryDomain>32014L0025</cbc:RegulatoryDomain>
+  <cbc:NoticeTypeCode listName="competition">cn-social</cbc:NoticeTypeCode>
+  <cbc:NoticeLanguageCode>NOR</cbc:NoticeLanguageCode>
+  <cac:AdditionalNoticeLanguage>
+    <cbc:ID>ENG</cbc:ID>
+  </cac:AdditionalNoticeLanguage>
+  <cac:ContractingParty>
+    <cbc:BuyerProfileURI>http://www.flytoget.no/</cbc:BuyerProfileURI>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+      </cac:PartyIdentification>
+    </cac:Party>
+  </cac:ContractingParty>
+  <cac:TenderingProcess>
+    <cbc:Description languageID="NOR">Flytoget skal tilby det beste transporttilbudet til og fra Oslo lufthavn med vekt på sikkerhet, punktlighet og service.Ved hjelp av en unik identitet, den mest effektive løsningen og entusiastiske medarbeidere sørger vi for at reisende kommer trygt frem til avtalt tid. For å kunne løse dette kreves en sikker og effektiv verdihåndtering ved Oslo lufthavn. I tillegg vektlegges sikkerheten til våre reisende spesielt ved det største knutepunktet, Oslo lufthavn. Dette krever tilstedeværelse fra vektere som kan bidra med trygghet, sikkerhet og service for våre reisende og ansatte.Krav til ytelse og utførelse av forespurte tjenester innen vektertjenester er beskrevet i kravspesifikasjonen.Ved Oslo lufthavn er det krav til at det skal være bemanning av vektere i henhold til det behovet Flytoget har. De øvrige stasjoner er ikke planlagt med vektertjenester og er hovedsakelig aktuelt for bemanning ved planlagte avvik (buss for tog) og ved spesielle hendelser eller arrangementer langs strekningen.Vekter skal være en serviceperson overfor reisende og ansatte ved Flytoget. Vekter skal bidra til å være med på å skape et positivt og trygt miljø. Vekter skal kunne gi akutt førstehjelp i de situasjoner der det er nødvendig og kunne assistere ved brannalarmer, heisalarmer, bombetrusler og uplanlagte avvik (driftsstans) med mer i henhold til Flytogets instruks. Vekter skal også kunne opprettholde ro og orden inntil politiet eventuelt kommer til stedet.Vektere ved Oslo lufthavn skal kontrollere passering av reisende ved billettautomater og på plattform, herunder kunne kontrollere om reisende løser billett, bistå med informasjon og veiledning overfor publikum. Vektere skal også overvåke/kontrollere/aksjonere på uønsket aktivitet i og rundt området til Flytogets reisende.Bane NOR er ansvarlig for drift og vedlikehold av jernbanenettet som Flytoget opererer på. Hvert år gjennomføres det planlagt vedlikehold på jernbanenettet som medfører at Flytoget opererer «buss for tog» på hele eller deler av strekningen i kortere perioder. Dette vil medføre behov for justering av ytelsen innen vektertjenester ved alle Flytogets stasjoner i disse avviksperiodene. Dette vil bli avtalt i henhold til avviksplan og bestilles som ekstra bemanning av vektere.</cbc:Description>
+    <cbc:Description languageID="ENG">Flytoget shall offer the best transport offer to and from Oslo Airport, with emphasis on security, punctuality and service. With the help of a unique identity, the most efficient solution and enthusiastic employees, we ensure that travellers arrive safely at the agreed time. Safe and efficient value management at Oslo Airport is required in order to solve this. The security of our travellers is also particularly emphasised at the largest hub, Oslo Airport. This requires presence from security guards who can contribute with safety, safety and service for our travellers and employees. Requirements for the performance and execution of the requested services in the security guard services are described in the requirement specification. Oslo Airport requires that security guards are staffed in accordance with flytoget ́s needs. The other stations are not planned with security guard services and are mainly relevant for staffing in connection with planned deviations (buses for trains) and for special events or events along the stretch. The security guard shall be a service person to travellers and employees at Flytoget. The scales shall contribute to helping to create a positive and safe environment. Security guards shall be able to provide emergency first aid in situations where it is necessary and be able to assist with fire alarms, lift alarms, bomb threats and unplanned deviations (operational stoppages) etc. in accordance with Flytoget ́s instructions. Scales should also be able to maintain order until the police eventually arrive at the scene. Security guards at Oslo Airport shall check the passage of travellers at ticket vending machines and on a platform, including being able to check if travellers solve a ticket, assist with information and guidance to the public. Security guards shall also monitor/check/take action on undesired activity in and around the area of Flytoget ́s travellers. Bane NOR is responsible for the operation and maintenance of the railway network that Flytoget operates on. Each year planned maintenance is carried out on the railway network, which means that Flytoget operates "buses for trains" on all or parts of the stretch for short periods. This will involve a need for adjusting the service within security guard services at all of Flytoget ́s stations in these deviation periods. This will be agreed in accordance with the deviation plan and can be ordered as extra manpower by the security guards.</cbc:Description>
+    <cbc:ProcedureCode listName="procurement-procedure-type">neg-w-call</cbc:ProcedureCode>
+  </cac:TenderingProcess>
+  <cac:ProcurementProject>
+    <cbc:ID schemeName="InternalID">30072</cbc:ID>
+    <cbc:Name languageID="NOR">Vektertjenester for Flytoget - kvalifisering</cbc:Name>
+    <cbc:Name languageID="ENG">Security guard services for flytoget - qualification</cbc:Name>
+    <cbc:Description languageID="NOR">Flytoget skal anskaffe vektertjenester for en periode fra 01.03.24 til og med 31.01.28. Vektertjenestene er primært på Oslo lufthavn, men også ambulerende på andre stasjoner.Formålet med denne anskaffelsen er å ta frem den beste leveransen som finnes i markedet målt i sikkerhet, kvalitet og pålitelighet, til en konkurransedyktig pris.</cbc:Description>
+    <cbc:Description languageID="ENG">Flytoget shall procure security guard services for a period from 01.03.24 until and including 31.01.28. The security guard services are primarily at Oslo Airport, but also ambulatory at other stations. The aim of this procurement is to bring out the best delivery in the market, as regards safety, quality and reliability, at a competitive price.</cbc:Description>
+    <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
+    <cac:MainCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">79713000</cbc:ItemClassificationCode>
+    </cac:MainCommodityClassification>
+    <cac:RealizedLocation>
+      <cbc:Description languageID="NOR">Oslo lufthavn og Oslo S, med muligheter for andre stasjoner på Flytogets strekning.</cbc:Description>
+      <cbc:Description languageID="ENG">Oslo Airport and Oslo S, with possibilities for other stations on the Flytoget stretch.</cbc:Description>
+      <cac:Address>
+        <cbc:CountrySubentityCode listName="nuts">NO082</cbc:CountrySubentityCode>
+        <cac:Country>
+          <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:Address>
+    </cac:RealizedLocation>
+  </cac:ProcurementProject>
+  <cac:ProcurementProjectLot>
+    <cbc:ID schemeName="Lot">LOT-0000</cbc:ID>
+    <cac:TenderingTerms>
+      <ext:UBLExtensions>
+        <ext:UBLExtension>
+          <ext:ExtensionContent>
+            <efext:EformsExtension>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">"Totale" årsomsetning</cbc:Name>
+                <cbc:Name languageID="ENG">'Total' annual turnover</cbc:Name>
+                <cbc:Description languageID="NOR">Leverandørens ("totale") årsomsetning for det antall regnskapsår som det anmodes om i kunngjøringen eller i anskaffelsesdokumentene, er som følger:</cbc:Description>
+                <cbc:Description languageID="ENG">The tenderer ́s ("total") annual turnover for the number of financial years requested in the tender notice or in the procurement documents is as follows:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Gjennomsnittlig årsomsetning</cbc:Name>
+                <cbc:Name languageID="ENG">Average annual turnover</cbc:Name>
+                <cbc:Description languageID="NOR">Leverandørens gjennomsnittlige årsomsetning for det antall år som det anmodes om i kunngjøringen eller i anskaffelsesdokumentene er som følger:</cbc:Description>
+                <cbc:Description languageID="ENG">The tenderer ́s average annual turnover for the number of years requested in the notice or in the procurement documents is as follows:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">"Spesifikk årsomsetning"</cbc:Name>
+                <cbc:Name languageID="ENG">"Specific annual turnover"</cbc:Name>
+                <cbc:Description languageID="NOR">Er leverandørens ("spesifikke") årsomsetning innenfor det området kontrakten gjelder og spesifisert i kunngjøringen eller i anskaffelsesdokumentene for det antall regnskapsår det anmodes om er som følger:</cbc:Description>
+                <cbc:Description languageID="ENG">Are the tenderer's ("specific") annual turnover within the area that the contract applies to and specified in the notice or in the procurement documents for the number of accounting years requested is as follows:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Gjennomsnittlig omsettning</cbc:Name>
+                <cbc:Name languageID="ENG">Average set-up</cbc:Name>
+                <cbc:Description languageID="NOR">Er leverandørens gjennomsnitlige årsomsetning innenfor det området kontrakten gjelder og spesifisert i kunngjøringen eller i anskaffelsesdokumentene for det antall regnskapsår det anmodes om er som følger:</cbc:Description>
+                <cbc:Description languageID="ENG">Is the tenderer's average annual turnover within the area requested by the contract and specified in the notice or in the procurement documents for the number of financial years requested:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Leverandørens etableringsdato</cbc:Name>
+                <cbc:Name languageID="ENG">The tenderer's establishment date</cbc:Name>
+                <cbc:Description languageID="NOR">Hvis opplysningene om omsetning (samlet eller spesifikt) ikke er tilgjengelige for hele perioden som det anmodes om, vennligst angi den dato da virksomheten ble etablert, eller leverandørene startet sin virksomhet:</cbc:Description>
+                <cbc:Description languageID="ENG">If the information about the turnover (combined or specific) is not available for the entire requested period, please state the date the company was established, or the tenderers started their business:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Finansielle nøkkeltall</cbc:Name>
+                <cbc:Name languageID="ENG">Financial key figures</cbc:Name>
+                <cbc:Description languageID="NOR">Når det gjelder finansielle nøkkeltall som er angitt i kunngjøringen eller i anskaffelsesdokumentene erklærer leverandøren at den eller de faktiske verdien(e) for det eller de nøkkeltall(ene) som det anmodes om er som følger:</cbc:Description>
+                <cbc:Description languageID="ENG">For financial key figures stated in the notice or in the procurement documents, the tenderer declares that the actual value(s) of the requested key figures are as follows:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Ansvarsforsikring</cbc:Name>
+                <cbc:Name languageID="ENG">Liability insurance</cbc:Name>
+                <cbc:Description languageID="NOR">Det forsikrede beløp i leverandørens ansvarsforsikring er følgende:</cbc:Description>
+                <cbc:Description languageID="ENG">The insured amount in the tenderer ́s liability insurance is the following:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Øvrige økonomiske og finansielle krav</cbc:Name>
+                <cbc:Name languageID="ENG">Other economic and financial requirements</cbc:Name>
+                <cbc:Description languageID="NOR">Når det gjelder eventuelle øvrige økonomiske og finansielle krav som har blitt angitt i kunngjøringen eller i anskaffelsesdokumentene erklærer leverandøren at:</cbc:Description>
+                <cbc:Description languageID="ENG">Regarding any other economic and financial requirements that have been stated in the notice or in the procurement documents, the tenderer declares that:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">other</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Attester utstedt av uavhengige organer for kvalitetssikringsstandarder</cbc:Name>
+                <cbc:Name languageID="ENG">Certificates issued by independent bodies for quality assurance standards.</cbc:Name>
+                <cbc:Description languageID="NOR">Kan leverandør fremlegge attester utstedt av uavhengige organer som dokumentasjon for at leverandøren oppfyller de angitte kvalitetssikringsstandardene, inkludert krav til universell utforming?</cbc:Description>
+                <cbc:Description languageID="ENG">Can tenderers submit certificates issued by independent bodies that document that the tenderer fulfils the stated quality assurance standards, including universal design requirements?</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">other</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Attester utstedt av uavhengige organer for miljøledelsesstandarder</cbc:Name>
+                <cbc:Name languageID="ENG">Certificates issued by independent bodies for environmental management standards.</cbc:Name>
+                <cbc:Description languageID="NOR">Er leverandøren i stand til å fremlegge attester utstedt av uavhengige organer som dokumentasjon for at leverandøren oppfyller de angitte miljøledelsessystemene eller -standardene?</cbc:Description>
+                <cbc:Description languageID="ENG">Is the tenderer able to submit certificates issued by independent bodies as documentation that the tenderer fulfils the stated environmental management systems or standards?</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">sui-act</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Registrert i faglig register</cbc:Name>
+                <cbc:Name languageID="ENG">Registered in a trade register</cbc:Name>
+                <cbc:Description languageID="NOR">Leverandør er registrert i et faglig register i medlemsstaten som leverandøren er etablert i. Som beskrevet i bilag XI til direktiv 2014/24/EU; leverandører fra visse medlemsstater kan være nødt til å oppfylle andre krav i nevnte bilag.</cbc:Description>
+                <cbc:Description languageID="ENG">Tenderers are registered in a professional register in the member state in which the tenderer is established. As described in annex XI of directive 2014/24/EU; suppliers from certain member states may have to fulfil other requirements in the mentioned annex.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">sui-act</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Registrert i handelsregister eller foretaksregister</cbc:Name>
+                <cbc:Name languageID="ENG">Registered in a trade register or company register.</cbc:Name>
+                <cbc:Description languageID="NOR">Leverandør er registrert i et foretaksregister eller et handelsregister i medlemsstaten som leverandøren er etablert i. Som beskrevet i bilag XI til direktiv 2014/24/EU; leverandører fra visse medlemsstater kan være nødt til å oppfylle andre krav i nevnte bilag.</cbc:Description>
+                <cbc:Description languageID="ENG">Tenderers are registered in a company register or a trade register in the member state in which the tenderer is established. As described in annex XI of directive 2014/24/EU; suppliers from certain member states may have to fulfil other requirements in the mentioned annex.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">sui-act</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Ved tjenestekontrakter: Autorisasjoner fra en bestemt organisasjon nødvendig</cbc:Name>
+                <cbc:Name languageID="ENG">In the case of service contracts: Authorisations from a particular organisation required</cbc:Name>
+                <cbc:Description languageID="NOR">Er det nødvendig med en bestemt autorisasjon fra en bestemt organisasjon for å kunne utføre tjenesten i leverandørens hjemland?</cbc:Description>
+                <cbc:Description languageID="ENG">Is a specific authorisation required from a particular organisation to provide the service in the tenderer's home country?</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">sui-act</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Ved tjenestekontrakter: Medlemskap i en bestemt organisasjon nødvendig</cbc:Name>
+                <cbc:Name languageID="ENG">In the case of service contracts: Membership in a particular organisation is required</cbc:Name>
+                <cbc:Description languageID="NOR">Er det nødvendig med et bestemt medlemsskap i en bestemt organisasjon for å kunne utføre tjenesten i leverandørens hjemland?</cbc:Description>
+                <cbc:Description languageID="ENG">Is it necessary to have a particular membership in a particular organisation in order to provide the service in the tenderer ́s home country?</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Bare for tjenester</cbc:Name>
+                <cbc:Name languageID="ENG">Services only</cbc:Name>
+                <cbc:Description languageID="NOR">Bare for tjenester: I referanseperioden  har leverandøren utført følgende viktige vareleveranser av den etterspurte type, eller følgende viktige tjenester av den etterspurte type. Oppdragsgiver kan kreve opp til tre års erfaring og tillate at det tas hensyn til erfaring fra tiden før de seneste tre år.</cbc:Description>
+                <cbc:Description languageID="ENG">Only for services: In the reference period, the tenderer has carried out the following important goods deliveries of the requested type, or the following important services of the requested type. The contracting authority can require up to three years experience and allow experience from the previous three years to be taken into consideration.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Teknisk personell eller tekniske enheter</cbc:Name>
+                <cbc:Name languageID="ENG">Technical personnel or technical units</cbc:Name>
+                <cbc:Description languageID="NOR">Leverandør kan råde over følgende tekniske personell eller tekniske enheter , særlig dem som er ansvarlige for kvalitetskontrollen: For teknisk personell eller tekniske enheter som ikke direkte hører til leverandørens virksomhet, men hvis kapasitet leverandøren støtter seg på, jf. del II, avsnitt C, skal det utfylles særskilte ESPD-formularer.</cbc:Description>
+                <cbc:Description languageID="ENG">Tenderers can use the following technical personnel or technical units , particularly those who are responsible for quality control: For technical personnel or technical units that do not directly belong to the tenderer ́s business, but if the capacity the tenderer will use, cf. part II, section C, separate ESPD forms shall be supplemented.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Tekniske fasiliteter og kvalitetssikringstiltak</cbc:Name>
+                <cbc:Name languageID="ENG">Technical facilities and quality assurance measures</cbc:Name>
+                <cbc:Description languageID="NOR">Leverandøren anvender følgende tekniske fasiliteter og kvalitetssikringstiltak, og leverandørens undersøkelses- og forskningsfasiliter er som følger:</cbc:Description>
+                <cbc:Description languageID="ENG">The tenderer utilises the following technical facilities and quality assurance measures and the tenderer ́s survey and research facility is as follows:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Undersøkelses- og forskningsfasiliteter</cbc:Name>
+                <cbc:Name languageID="ENG">Investigation and research facilities</cbc:Name>
+                <cbc:Description languageID="NOR">Leverandørens undersøkelses- og forskningsfasiliter er som følger:</cbc:Description>
+                <cbc:Description languageID="ENG">The tenderer ́s survey and research facilitates are as follows:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Styring og sporing av leveransekjeden</cbc:Name>
+                <cbc:Name languageID="ENG">Management and tracing of the supply chain</cbc:Name>
+                <cbc:Description languageID="NOR">Leverandøren vil være i stand til å anvende følgende styring av leveringskjeden og sporingssystemer ved gjennomføring av kontrakten:</cbc:Description>
+                <cbc:Description languageID="ENG">The tenderer will be able to use the following management of the supply chain and tracing systems for the execution of the contract:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Tillatelse til kontroll</cbc:Name>
+                <cbc:Name languageID="ENG">Control Permission</cbc:Name>
+                <cbc:Description languageID="NOR">For varer eller tjenester som er kompliserte,  eller som unntaksvis skal benyttes til et spesielt formål: Vil leverandøren tillate, at det foretas kontroll  av leverandørens produksjonskapasitet eller tekniske kapasitet og, hvor det er nødvendig, av de undersøkelses- og forskningsfasiliteter som leverandøren råder over, og av kvalitetskontrolltiltak? Kontrollen skal foretas av oppdragsgiveren eller oppdragsgiver kan overlate det til et kompetent offentlige organ i den staten leverandøren er etablert.</cbc:Description>
+                <cbc:Description languageID="ENG">For goods or services that are complicated, or that in exceptional cases shall be used for a particular purpose: Will the tenderer allow checks of the tenderer's production capacity or technical capacity and, where necessary, of the survey and research facilities that the tenderer has at its disposal and of quality control measures? The inspections shall be undertaken by the contracting authority or the contracting authority can leave it to a competent public body in the country where the tenderer is established.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Utdanning og faglige kvalifikasjoner</cbc:Name>
+                <cbc:Name languageID="ENG">Education and professional qualifications</cbc:Name>
+                <cbc:Description languageID="NOR">Følgende utdanning og faglige kvalifikasjoner besittes av leverandøren og/eller (avhengig av hvilke krav som er fastsatt i kunngjøringen eller i anskaffelsesdokumenterne) av de ledende medarbeiderne:</cbc:Description>
+                <cbc:Description languageID="ENG">The following education and professional qualifications are possessed by the tenderer and/or (depending on the requirements set in the notice or in the procurement documents) of the leading employees:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Miljøledelsestiltak</cbc:Name>
+                <cbc:Name languageID="ENG">Environmental management measures</cbc:Name>
+                <cbc:Description languageID="NOR">Leverandør kan anvende følgende miljøledelsestiltak i forbindelse med utførelsen av kontrakten:</cbc:Description>
+                <cbc:Description languageID="ENG">Tenderers can employ the following environmental management measures in connection with the execution of the contract:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Antall  medarbeidere i ledelsen</cbc:Name>
+                <cbc:Name languageID="ENG">Number of employees in the management</cbc:Name>
+                <cbc:Description languageID="NOR">Leverandørens antall medarbeidere i ledelsen i løpet av de siste tre årene var som følger:</cbc:Description>
+                <cbc:Description languageID="ENG">The tenderer ́s number of employees in the management during the last three years was as follows:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Gjennomsnittlige årlige arbeidsstyrke</cbc:Name>
+                <cbc:Name languageID="ENG">Average workforce</cbc:Name>
+                <cbc:Description languageID="NOR">Leverandørens gjennomsnittlige årlige arbeidsstyrke i løpet av de siste tre årene har vært som følger:</cbc:Description>
+                <cbc:Description languageID="ENG">The tenderer's average annual workforce in the last three years has been as follows:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Redskaper, materiell og teknisk utstyr</cbc:Name>
+                <cbc:Name languageID="ENG">Tools, materials and technical equipment.</cbc:Name>
+                <cbc:Description languageID="NOR">Leverandøren vil kunne råde over følgende redskaper, materielle og teknisk utstyr til å utføre kontrakten:</cbc:Description>
+                <cbc:Description languageID="ENG">Tenderers can use the following tools, material and technical equipment to carry out the contract:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Andel av kontrakt til underleverandør</cbc:Name>
+                <cbc:Name languageID="ENG">Portion of the contract to sub-suppliers.</cbc:Name>
+                <cbc:Description languageID="NOR">Leverandør vurderer å sette bort følgende del (i prosent) av kontrakten til underleverandører. Legg merke til at hvis leverandøren har besluttet å sette bort en del av kontrakten til underleverandører og støtter seg på underleverandørenes kapasitet til å utføre denne del, utfylles et særskilt ESPD for slike underleverandører, se del II, avsnitt C, ovenfor.</cbc:Description>
+                <cbc:Description languageID="ENG">The tenderer is considering to outsource the following part (as a percentage) of the contract to sub-suppliers. Note that if the tenderer has decided to outsource a part of the contract to sub-suppliers and will use the sub-suppliers ́ capacity to carry out this part, a special ESPD will be supplemented for such sub-suppliers, see part II, section C, above.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+            </efext:EformsExtension>
+          </ext:ExtensionContent>
+        </ext:UBLExtension>
+      </ext:UBLExtensions>
+      <cbc:VariantConstraintCode listName="permission">not-allowed</cbc:VariantConstraintCode>
+      <cbc:RecurringProcurementIndicator>false</cbc:RecurringProcurementIndicator>
+      <cbc:MultipleTendersCode listName="permission">not-allowed</cbc:MultipleTendersCode>
+      <cac:RequiredFinancialGuarantee>
+        <cbc:GuaranteeTypeCode listName="tender-guarantee-required">false</cbc:GuaranteeTypeCode>
+      </cac:RequiredFinancialGuarantee>
+      <cac:CallForTendersDocumentReference>
+        <cbc:ID>216310540</cbc:ID>
+        <cbc:DocumentType>non-restricted-document</cbc:DocumentType>
+        <cbc:LanguageID>NOR</cbc:LanguageID>
+        <cac:Attachment>
+          <cac:ExternalReference>
+            <cbc:URI>https://permalink.mercell.com/216310540.aspx</cbc:URI>
+          </cac:ExternalReference>
+        </cac:Attachment>
+      </cac:CallForTendersDocumentReference>
+      <cac:TendererQualificationRequest>
+        <cac:SpecificTendererRequirement>
+          <cbc:TendererRequirementTypeCode listName="reserved-procurement">none</cbc:TendererRequirementTypeCode>
+        </cac:SpecificTendererRequirement>
+      </cac:TendererQualificationRequest>
+      <cac:ContractExecutionRequirement>
+        <cbc:ExecutionRequirementCode listName="einvoicing">required</cbc:ExecutionRequirementCode>
+      </cac:ContractExecutionRequirement>
+      <cac:ContractExecutionRequirement>
+        <cbc:ExecutionRequirementCode listName="reserved-execution">no</cbc:ExecutionRequirementCode>
+      </cac:ContractExecutionRequirement>
+      <cac:ContractExecutionRequirement>
+        <cbc:ExecutionRequirementCode listName="esignature-submission">false</cbc:ExecutionRequirementCode>
+      </cac:ContractExecutionRequirement>
+      <cac:AdditionalInformationParty>
+        <cac:PartyIdentification>
+          <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+        </cac:PartyIdentification>
+      </cac:AdditionalInformationParty>
+      <cac:TenderRecipientParty>
+        <cbc:EndpointID>https://permalink.mercell.com/216310540.aspx</cbc:EndpointID>
+      </cac:TenderRecipientParty>
+      <cac:Language>
+        <cbc:ID>NOR</cbc:ID>
+      </cac:Language>
+      <cac:PostAwardProcess>
+        <cbc:ElectronicOrderUsageIndicator>false</cbc:ElectronicOrderUsageIndicator>
+      </cac:PostAwardProcess>
+    </cac:TenderingTerms>
+    <cac:TenderingProcess>
+      <cbc:SubmissionMethodCode listName="esubmission">required</cbc:SubmissionMethodCode>
+      <cac:ParticipationRequestReceptionPeriod>
+        <cbc:EndDate>2023-12-20+00:00</cbc:EndDate>
+        <cbc:EndTime>11:00:00+00:00</cbc:EndTime>
+      </cac:ParticipationRequestReceptionPeriod>
+      <cac:EconomicOperatorShortList>
+        <cbc:LimitationDescription>true</cbc:LimitationDescription>
+        <cbc:MinimumQuantity>3</cbc:MinimumQuantity>
+      </cac:EconomicOperatorShortList>
+      <cac:AuctionTerms>
+        <cbc:AuctionConstraintIndicator>false</cbc:AuctionConstraintIndicator>
+      </cac:AuctionTerms>
+    </cac:TenderingProcess>
+    <cac:ProcurementProject>
+      <cbc:ID schemeName="InternalID">30072</cbc:ID>
+      <cbc:Name languageID="NOR">Vektertjenester for Flytoget - kvalifisering</cbc:Name>
+      <cbc:Name languageID="ENG">Security guard services for flytoget - qualification</cbc:Name>
+      <cbc:Description languageID="NOR">Flytoget skal anskaffe vektertjenester for en periode fra 01.03.24 til og med 31.01.28. Vektertjenestene er primært på Oslo lufthavn, men også ambulerende på andre stasjoner.Formålet med denne anskaffelsen er å ta frem den beste leveransen som finnes i markedet målt i sikkerhet, kvalitet og pålitelighet, til en konkurransedyktig pris.</cbc:Description>
+      <cbc:Description languageID="ENG">Flytoget shall procure security guard services for a period from 01.03.24 until and including 31.01.28. The security guard services are primarily at Oslo Airport, but also ambulatory at other stations. The aim of this procurement is to bring out the best delivery in the market, as regards safety, quality and reliability, at a competitive price.</cbc:Description>
+      <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
+      <cac:MainCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">79713000</cbc:ItemClassificationCode>
+      </cac:MainCommodityClassification>
+      <cac:RealizedLocation>
+        <cbc:Description languageID="NOR">Oslo lufthavn og Oslo S, med muligheter for andre stasjoner på Flytogets strekning.</cbc:Description>
+        <cbc:Description languageID="ENG">Oslo Airport and Oslo S, with possibilities for other stations on the Flytoget stretch.</cbc:Description>
+        <cac:Address>
+          <cbc:CountrySubentityCode listName="nuts">NO082</cbc:CountrySubentityCode>
+          <cac:Country>
+            <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+          </cac:Country>
+        </cac:Address>
+      </cac:RealizedLocation>
+      <cac:PlannedPeriod>
+        <cbc:StartDate>2024-03-01+00:00</cbc:StartDate>
+        <cbc:EndDate>2028-01-31+00:00</cbc:EndDate>
+      </cac:PlannedPeriod>
+    </cac:ProcurementProject>
+  </cac:ProcurementProjectLot>
+</ContractNotice>

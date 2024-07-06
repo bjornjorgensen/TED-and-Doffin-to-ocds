@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--WARNING: TED date elements have no time zone associated. For all dates in this notice, the time zone is assumed to be CET, i.e. UTC -->
+<PriorInformationNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:PriorInformationNotice-2"
+                        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+                        xmlns:ccts="urn:un:unece:uncefact:documentation:2"
+                        xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+                        xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1"
+                        xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+                        xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+   <ext:UBLExtensions>
+      <ext:UBLExtension>
+         <ext:ExtensionContent>
+            <efext:EformsExtension><!--Notice SubType (OPP-070)-->
+               <efac:NoticeSubType>
+                  <cbc:SubTypeCode listName="notice-subtype">N4</cbc:SubTypeCode>
+               </efac:NoticeSubType>
+               <!-- efac:Organizations -->
+               <efac:Organizations>
+                  <efac:Organization><!--Organization Subrole (BT-770) : Group leader (Buyer)--><!--Organization Role : Acquiring CPB-->
+                     <efac:Company><!--Organization Internet Address (BT-505)-->
+                        <cbc:WebsiteURI>https://viken.no/</cbc:WebsiteURI>
+                        <!--Winner Size (BT-165)-->
+                        <!--Organization Technical Identifier (OPT-200)-->
+                        <cac:PartyIdentification>
+                           <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                        </cac:PartyIdentification>
+                        <!--Organization Name (BT-500)-->
+                        <cac:PartyName>
+                           <cbc:Name>Viken fylkeskommune</cbc:Name>
+                        </cac:PartyName>
+                        <cac:PostalAddress><!--Organization Street (BT-510)-->
+                           <cbc:StreetName>Oscar Pedersens vei 39</cbc:StreetName>
+                           <!--Organization City (BT-513)-->
+                           <cbc:CityName>Sarpsborg</cbc:CityName>
+                           <!--Organization Post Code (BT-512)-->
+                           <cbc:PostalZone>1702</cbc:PostalZone>
+                           <!--Organization Country Subdivision (BT-507)-->
+                           <!--Organization Country Code (BT-514)-->
+                           <cac:Country>
+                              <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                           </cac:Country>
+                        </cac:PostalAddress>
+                        <!--Organization Identifier (BT-501)-->
+                        <cac:PartyLegalEntity>
+                           <cbc:CompanyID>921 693 230</cbc:CompanyID>
+                        </cac:PartyLegalEntity>
+                        <cac:Contact><!--Organization Contact Point (BT-502)-->
+                           <cbc:Name>Oddveig Marie Åsegg</cbc:Name>
+                           <!--Organization Contact Telephone Number (BT-503)-->
+                           <!--Organization Contact Fax (BT-739)-->
+                           <!--Organization Contact Email Address (BT-506)-->
+                           <cbc:ElectronicMail>oddveiga@viken.no</cbc:ElectronicMail>
+                        </cac:Contact>
+                     </efac:Company>
+                  </efac:Organization>
+                  <efac:Organization><!--Organization Subrole (BT-770) : Group leader (Buyer)--><!--Organization Role : Acquiring CPB-->
+                     <efac:Company><!--Organization Internet Address (BT-505)--><!--Winner Size (BT-165)--><!--Organization Technical Identifier (OPT-200)-->
+                        <cac:PartyIdentification>
+                           <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+                        </cac:PartyIdentification>
+                        <!--Organization Name (BT-500)-->
+                        <cac:PartyName>
+                           <cbc:Name>NMBU - Norges miljø- og biovitenskapelige universitet</cbc:Name>
+                        </cac:PartyName>
+                        <cac:PostalAddress><!--Organization Street (BT-510)--><!--Organization City (BT-513)-->
+                           <cbc:CityName>Ås</cbc:CityName>
+                           <!--Organization Post Code (BT-512)-->
+                           <!--Organization Country Subdivision (BT-507)-->
+                           <!--Organization Country Code (BT-514)-->
+                           <cac:Country>
+                              <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                           </cac:Country>
+                        </cac:PostalAddress>
+                        <!--Organization Identifier (BT-501)-->
+                        <cac:PartyLegalEntity>
+                           <cbc:CompanyID>969 159 570</cbc:CompanyID>
+                        </cac:PartyLegalEntity>
+                        <!--Organization Contact Point (BT-502)-->
+                        <!--Organization Contact Telephone Number (BT-503)-->
+                        <!--Organization Contact Fax (BT-739)-->
+                        <!--Organization Contact Email Address (BT-506)-->
+                     </efac:Company>
+                  </efac:Organization>
+                  <efac:Organization><!--Organization Subrole (BT-770) : Group leader (Buyer)--><!--Organization Role : Acquiring CPB-->
+                     <efac:Company><!--Organization Internet Address (BT-505)--><!--Winner Size (BT-165)--><!--Organization Technical Identifier (OPT-200)-->
+                        <cac:PartyIdentification>
+                           <cbc:ID schemeName="organization">ORG-0003</cbc:ID>
+                        </cac:PartyIdentification>
+                        <!--Organization Name (BT-500)-->
+                        <cac:PartyName>
+                           <cbc:Name>Norsk Institutt for Bærekraftsforskning AS</cbc:Name>
+                        </cac:PartyName>
+                        <cac:PostalAddress><!--Organization Street (BT-510)--><!--Organization City (BT-513)-->
+                           <cbc:CityName>Kråkerøy</cbc:CityName>
+                           <!--Organization Post Code (BT-512)-->
+                           <!--Organization Country Subdivision (BT-507)-->
+                           <!--Organization Country Code (BT-514)-->
+                           <cac:Country>
+                              <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                           </cac:Country>
+                        </cac:PostalAddress>
+                        <!--Organization Identifier (BT-501)-->
+                        <cac:PartyLegalEntity>
+                           <cbc:CompanyID>989 861 751</cbc:CompanyID>
+                        </cac:PartyLegalEntity>
+                        <!--Organization Contact Point (BT-502)-->
+                        <!--Organization Contact Telephone Number (BT-503)-->
+                        <!--Organization Contact Fax (BT-739)-->
+                        <!--Organization Contact Email Address (BT-506)-->
+                     </efac:Company>
+                  </efac:Organization>
+                  <efac:Organization><!--Organization Subrole (BT-770) : Group leader (Buyer)--><!--Organization Role : Acquiring CPB-->
+                     <efac:Company><!--Organization Internet Address (BT-505)--><!--Winner Size (BT-165)--><!--Organization Technical Identifier (OPT-200)-->
+                        <cac:PartyIdentification>
+                           <cbc:ID schemeName="organization">ORG-0004</cbc:ID>
+                        </cac:PartyIdentification>
+                        <!--Organization Name (BT-500)-->
+                        <cac:PartyName>
+                           <cbc:Name>Universitetet i Sørøst-Norge</cbc:Name>
+                        </cac:PartyName>
+                        <cac:PostalAddress><!--Organization Street (BT-510)--><!--Organization City (BT-513)-->
+                           <cbc:CityName>Borre</cbc:CityName>
+                           <!--Organization Post Code (BT-512)-->
+                           <!--Organization Country Subdivision (BT-507)-->
+                           <!--Organization Country Code (BT-514)-->
+                           <cac:Country>
+                              <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                           </cac:Country>
+                        </cac:PostalAddress>
+                        <!--Organization Identifier (BT-501)-->
+                        <cac:PartyLegalEntity>
+                           <cbc:CompanyID>911 770 709</cbc:CompanyID>
+                        </cac:PartyLegalEntity>
+                        <!--Organization Contact Point (BT-502)-->
+                        <!--Organization Contact Telephone Number (BT-503)-->
+                        <!--Organization Contact Fax (BT-739)-->
+                        <!--Organization Contact Email Address (BT-506)-->
+                     </efac:Company>
+                  </efac:Organization>
+               </efac:Organizations>
+               <!-- efac:Publication -->
+               <efac:Publication><!--Notice Publication Identifier (OPP-010)-->
+                  <efbc:NoticePublicationID schemeName="ojs-notice-id">n.a.</efbc:NoticePublicationID>
+                  <!--OJEU Identifier (OPP-011)-->
+                  <!--OJEU Publication Date (OPP-012)-->
+                  <efbc:PublicationDate>2023-06-23+02:00</efbc:PublicationDate>
+               </efac:Publication>
+            </efext:EformsExtension>
+         </ext:ExtensionContent>
+      </ext:UBLExtension>
+   </ext:UBLExtensions>
+   <!--UBL version ID (UBL)-->
+   <cbc:UBLVersionID>2.3</cbc:UBLVersionID>
+   <!--Customization ID (UBL)-->
+   <cbc:CustomizationID>eforms-sdk-1.7#urn:fdc:anskaffelser.no:2023:eforms:national</cbc:CustomizationID>
+   <!--Notice Identifier (BT-701)-->
+   <cbc:ID schemeName="notice-id">2023-673152</cbc:ID>
+   <!--Notice Dispatch Date (BT-05)-->
+   <cbc:IssueDate>2023-06-23+02:00</cbc:IssueDate>
+   <cbc:IssueTime>12:00:00+02:00</cbc:IssueTime>
+   <!--Notice Version (BT-757)-->
+   <cbc:VersionID>01</cbc:VersionID>
+   <!--Future Notice (BT-127)-->
+   <!--WARNING: Future Notice (BT-127) is Mandatory for eForms subtypes 4 and 6, but no DATE_PUBLICATION_NOTICE was found in TED XML.-->
+   <!--Procedure Legal Basis (BT-01)-->
+   <cbc:RegulatoryDomain>OTHER</cbc:RegulatoryDomain>
+   <!--Form Type (BT-03) and Notice Type (BT-02)-->
+   <cbc:NoticeTypeCode listName="planning">pin-only</cbc:NoticeTypeCode>
+   <!--Notice Official Language (BT-702) (first)-->
+   <cbc:NoticeLanguageCode>NOB</cbc:NoticeLanguageCode>
+   <!-- cac:ContractingParty -->
+   <cac:ContractingParty><!--Buyer Profile URL (BT-508)--><!--Buyer Legal Type (BT-11)--><!--WARNING: Buyer Legal Type (BT-11) is Mandatory for eForms subtypes 1, 4, 7, 10, 14, 16, 19, 23, 29, 32, 35, and 36, but no CA_TYPE was found in TED XML.--><!--Buyer Contracting Entity (BT-740)--><!--Activity Authority (BT-10)--><!--Activity Entity (BT-610)-->
+      <cac:Party><!--Buyer Technical Identifier Reference (OPT-300)-->
+         <cac:PartyIdentification>
+            <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+         </cac:PartyIdentification>
+         <!--Reference (Technical ID) to the legal organization acting as a PSP.-->
+         <!--The service provider is an eSender-->
+         <!--Reference (Tech. ID) to the legal organization acting as an eSender.-->
+         <!--Service Provider Technical Identifier Reference (OPT-300)-->
+         <!--Reference (Technical ID) to the legal organization acting as a Buyer.-->
+         <!--Service Provider Technical Identifier Reference (OPT-300)-->
+         <!--Reference (Technical ID) to the legal organization acting as a Buyer.-->
+      </cac:Party>
+   </cac:ContractingParty>
+   <!-- cac:TenderingTerms -->
+   <cac:TenderingTerms><!--Cross Border Law (BT-09)--><!--Legal Basis (BT-01) Local - Text--><!--Exclusion Grounds (BT-67)--><!--Lots Max Awarded (BT-33)--><!--Lots Max Allowed (BT-31)--><!--Group Identifier (BT-330)--><!--Group Lot Identifier (BT-1375)--></cac:TenderingTerms>
+   <!-- cac:TenderingProcess -->
+   <cac:TenderingProcess>
+      <ext:UBLExtensions>
+         <ext:UBLExtension>
+            <ext:ExtensionContent>
+               <efext:EformsExtension><!--Procurement Relaunch (BT-634)--></efext:EformsExtension>
+            </ext:ExtensionContent>
+         </ext:UBLExtension>
+      </ext:UBLExtensions>
+      <!--Procedure Features (BT-88)-->
+      <!--Procedure Type (BT-105)-->
+      <!--Lots All Required (BT-763)-->
+      <!--PIN Competition Termination (BT-756)-->
+      <!--Previous Planning Identifier (BT-125)-->
+      <!--Direct Award Justification (BT-136)-->
+      <!--Direct Award Justification (BT-135)-->
+      <!--Direct Award Justification Previous Procedure Identifier (BT-1252)-->
+   </cac:TenderingProcess>
+   <!-- cac:ProcurementProject -->
+   <cac:ProcurementProject><!--Internal Identifier (BT-22)-->
+      <cbc:ID schemeName="InternalID">2023/38625</cbc:ID>
+      <!--Title (BT-21)-->
+      <cbc:Name languageID="NOB">Prosjektpartnere til Pilotprogrammet for kompetanseheving innen bærekraftig verdiskaping og grønn omstilling ved hjelp av digital omstilling og sirkulære forretningsmodeller</cbc:Name>
+      <!--Description (BT-24)-->
+      <cbc:Description languageID="NOB">Viken fylkeskommune har som intensjon å inngå kontrakt med NMBU, NORSUS og USN som partnerne i Pilotprogrammet for kompetanseheving innen bærekraftig verdiskaping og grønn omstilling ved hjelp av digital omstilling og sirkulære forretningsmodeller. Partnerne skal samarbeide med oppdragsgiver om aktiviteter knyttet til utvikling og testing av et pilotprogram for klynger, inkubatorer, næringshager, og medarbeidere på rådsområdet næring. Det ønskes å knytte de sentrale forskningskompetansemiljøene og innovasjonsaktørene i Viken sammen for å forsterke samarbeid om bærekraftig verdiskaping og grønn omstilling til det beste for regionens bedrifter i et «train the trainer»-program. Leverandører som ønsker å klage på intensjonskunngjøringen må gjøre dette innen ti dager regnet fra dagen etter datoen for denne kunngjøringen.</cbc:Description>
+      <!--Main Nature (BT-23)-->
+      <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
+      <!--Additional Information (BT-300)-->
+      <cbc:Note languageID="NOB">Viken fylkeskommune har som intensjon å inngå kontrakt med NMBU, NORSUS og USN som partnerne i Pilotprogrammet for kompetanseheving innen bærekraftig verdiskaping og grønn omstilling ved hjelp av digital omstilling og sirkulære forretningsmodeller. Partnerne skal samarbeide med oppdragsgiver om aktiviteter knyttet til utvikling og testing av et pilotprogram for klynger, inkubatorer, næringshager, og medarbeidere på rådsområdet næring. Intensjonen er å knytte de sentrale forskningskompetansemiljøene i Viken tettere sammen med innovasjonsaktørene i Viken slik at samarbeidet om bærekraftig verdiskaping og grønn omstilling kan forsterkes til det beste for regionens bedrifter. Målet er å formidle og implementere forskningsresultater og kunnskap om beste praksis til klynger, inkubatorer og næringshager slik at disse aktørene kan bli bedre koordinatorer og prosessledere for deres målbedrifter, og at ledere og rådgivere i fylkeskommunen kan få økt kunnskap innenfor dette tema. Dette er et «train the trainer»-program. Forskningsmiljøene vil også kunne være støttende for klynger, næringshager og inkubatorer som benytter seg av Viken fylkeskommunes støtteordningen til utvikling av sirkulære forretningsmodeller og andre initiativ innen bærekraft. Leverandører som ønsker å klage på intensjonskunngjøringen må gjøre dette innen ti dager regnet fra dagen etter datoen for denne kunngjøringen. Kontrakt er ikke inngått per nå, og vil ikke inngås før tidligst ti dager regnet fra dagen etter datoen for denne kunngjøringen. Mercell kunngjøring: https://opic.com/id/afgvgpfrno</cbc:Note>
+      <!--Estimated Value (BT-27)-->
+      <!--Main Classification Code (BT-262)-->
+      <cac:MainCommodityClassification>
+         <cbc:ItemClassificationCode listName="cpv">73220000</cbc:ItemClassificationCode>
+      </cac:MainCommodityClassification>
+      <!--Additional Classification Code (BT-263)-->
+      <!--Place of Performance Additional Information (BT-728)-->
+      <!--Place Performance City (BT-5131)-->
+      <!--Place Performance Post Code (BT-5121)-->
+      <!--Place Performance Country Subdivision (BT-5071)-->
+      <!--Place Performance Services Other (BT-727)-->
+      <!--Place Performance Street (BT-5101)-->
+      <!--Place Performance Country Code (BT-5141)-->
+   </cac:ProcurementProject>
+   <!-- multiple cac:ProcurementProjectLot -->
+   <cac:ProcurementProjectLot xmlns:dfo="dfo-conversion-hacks"><!--Purpose Lot Identifier (BT-137)-->
+      <cbc:ID schemeName="Part">PAR-0001</cbc:ID>
+      <!-- Lot cac:TenderingTerms -->
+      <cac:TenderingTerms><!--Selection Criteria Type (BT-747)--><!--Selection Criteria Name (BT-749)--><!--Selection Criteria Description (BT-750)--><!--Selection Criteria Used (BT-748)--><!--Selection Criteria Second Stage Invite (BT-40)--><!--Selection Criteria Second Stage Invite Number Weight (BT-7531)--><!--Selection Criteria Second Stage Invite Number Threshold (BT-7532)--><!--Selection Criteria Second Stage Invite Number (BT-752)--><!--Variants (BT-63)--><!--EU Funds (BT-60)--><!--Performing Staff Qualification (BT-79)--><!--Recurrence (BT-94)--><!--Recurrence Description (BT-95)--><!--Security Clearance Deadline (BT-78)--><!--Multiple Tenders (BT-769)--><!--Documents Restricted Justification (BT-707)--><!--Documents Official Language (BT-708)--><!--Documents Unofficial Language (BT-737)--><!--Terms Financial (BT-77)--><!--Reserved Participation (BT-71)--><!--Reserved Participation (BT-71)--><!--Tenderer Legal Form (BT-761)--><!--Tenderer Legal Form Description (BT-76)--><!--Late Tenderer Information (BT-771)--><!--Subcontracting Tender Indication (BT-651)--><!--Subcontracting Obligation (BT-65)--><!--Subcontracting Obligation Maximum (BT-729)--><!--Subcontracting Obligation Minimum (BT-64)--><!--Reserved Execution (BT-736)--><!--Electronic Invoicing (BT-743)--><!--Terms Performance (BT-70)--><!--Submission Electronic Catalog (BT-764)--><!--Submission Electronic Signature (BT-744)-->
+         <cac:AwardingTerms><!--Following Contract (BT-41)--><!--Jury Decision Binding (BT-42)--><!--No Negotiation Necessary (BT-120)--><!--Award Criteria Order Justification (BT-733)--><!--Award Criteria Complicated (BT-543)--><!--Award Criterion Number (BT-541)--><!--Award Criterion Number Weight (BT-5421)--><!--Award Criterion Number Fixed (BT-5422)--><!--Award Criterion Number Threshold (BT-5423)--><!--Award Criterion Type (BT-539)--><!--Award Criterion Name (BT-734)--><!--Award Criterion Description (BT-540)--><!--Jury Member Name (BT-46)--><!--Prize information (Prize Rank (BT-44), Rewards Other (BT-45), Value Prize (BT-644))--><!--Prize Rank (BT-44)--><!--Value Prize (BT-644)--><!--Rewards Other (Prize Description) (BT-45)--></cac:AwardingTerms>
+         <!--Submission URL (BT-18)-->
+         <!--Tender Validity Deadline (BT-98)-->
+         <!--Review Deadline Description (BT-99)-->
+         <!--Review Deadline Description (BT-99)-->
+         <!--Review Information Providing Organization-->
+         <!--Review organization-->
+         <!--Mediation organization-->
+         <!--Submission Language (BT-97)-->
+         <!--Participant Name (BT-47)-->
+         <!--Security Clearance Code (BT-578)-->
+         <!--Security Clearance Description (BT-732)-->
+      </cac:TenderingTerms>
+      <!-- cac:TenderingProcess -->
+      <cac:TenderingProcess>
+         <ext:UBLExtensions>
+            <ext:UBLExtension>
+               <ext:ExtensionContent>
+                  <efext:EformsExtension><!--Procurement Relaunch (BT-634)--><!--Tool Name (BT-632)--><!--Deadline Receipt Expressions (BT-630)--></efext:EformsExtension>
+               </ext:ExtensionContent>
+            </ext:UBLExtension>
+         </ext:UBLExtensions>
+         <!--SubmissionElectronic (BT-17)-->
+         <cbc:SubmissionMethodCode listName="esubmission">not-allowed</cbc:SubmissionMethodCode>
+         <!--Successive Reduction Indicator (Procedure) (BT-52)-->
+         <!--GPA Coverage (BT-115)-->
+         <!--Tool Atypical URL (BT-124)-->
+         <!--Deadline Receipt Tenders (BT-131)-->
+         <!--Dispatch Invitation Tender (BT-130)-->
+         <!--Deadline Receipt Requests (BT-1311)-->
+         <!--Additional Information Deadline (BT-13)-->
+         <!--Previous Planning Identifier (BT-125)-->
+         <!--Submission Nonelectronic Justification (BT-19)-->
+         <!--Submission Nonelectronic Description (BT-745)-->
+         <!--Maximum Candidates Indicator (BT-661)-->
+         <!--Maximum Candidates (BT-51)-->
+         <!--Minimum Candidates (BT-50)-->
+         <!--Public Opening Date (BT-132)-->
+         <!--Public Opening Description (BT-134)-->
+         <!--Public Opening Place (BT-133)-->
+         <!--Electronic Auction (BT-767)-->
+         <!--Electronic Auction Description (BT-122)-->
+         <!--Electronic Auction URL (BT-123)-->
+         <!--Framework Maximum Participants Number (BT-113)-->
+         <!--Framework Duration Justification (BT-109)-->
+         <!--Group Framework Maximum Value (BT-157)-->
+         <!--Framework Buyer Categories (BT-111)-->
+         <!--Framework Agreement (BT-765)-->
+         <!--Dynamic Purchasing System (BT-766)-->
+      </cac:TenderingProcess>
+      <!-- cac:ProcurementProject -->
+      <cac:ProcurementProject><!--Internal Identifier (BT-22)--><!--WARNING: Internal ID (BT-22) is required but there is no equivalent element in TED XML.-->
+         <cbc:ID schemeName="InternalID"/>
+         <!--Title (BT-21)-->
+         <cbc:Name languageID="NOB">Prosjektpartnere til Pilotprogrammet for kompetanseheving innen bærekraftig verdiskaping og grønn omstilling med Norges Miljø- og Biovitenskapelige Universitet (NMBU)</cbc:Name>
+         <!--Description (BT-24)-->
+         <cbc:Description languageID="NOB">NMBU skal samarbeide med oppdragsgiver og de andre to forskningsmiljøene, om aktiviteter knyttet til utvikling og testing av et pilotprogram for kompetanseheving innen bærekraftig verdiskaping og grønn omstilling ved hjelp av digital omstilling og sirkulære forretningsmodeller. Målgruppene for pilotprogrammet er klynger, inkubatorer, næringshager, og medarbeidere på rådsområdet næring. Intensjonen er å knytte de sentrale forskningskompetansemiljøene i Viken tettere sammen med innovasjonsaktørene i Viken slik at samarbeidet om bærekraftig verdiskaping og grønn omstilling kan forsterkes til det beste for regionens bedrifter. I tillegg skal NMBU bidra til at ledere og rådgivere i fylkeskommunen kan få økt kunnskap innenfor dette tema bærekraftig verdiskaping og grønn omstilling ved hjelp av digital omstilling og sirkulære forretningsmodeller. NMBU skal formidle og implementere forskningsresultater og kunnskap om beste praksis til klynger, inkubatorer og næringshager slik at disse aktørene kan bli bedre koordinatorer og prosessledere for deres målbedrifter. Dette er et «train the trainer»-program. NMBU vil også kunne være støttende for klynger, næringshager og inkubatorer som benytter seg av Viken fylkeskommunes støtteordningen til utvikling av sirkulære forretningsmodeller og andre initiativ innen bærekraft. NMBU skal samarbeid med oppdragsgiver og de andre to forskningsmiljøene, bidra til at det etablereres møte arena mellom forskningsmiljøene og målgruppene som kan være en plattform for dialog om tema bærekraftig verdiskaping og grønn omstilling ved hjelp av digital omstilling og sirkulære forretningsmodeller. Pilotprogrammet er avhengig av å samarbeide med ressurser med inngående forskningskompetanse innen tema bærekraftig verdiskaping og grønn omstilling ved hjelp av digital omstilling og sirkulære forretningsmodeller samt er i direkte dialog med innovasjonsaktører og næringsklynger. Prosjektpartnerne må ha en bærekraftstrategi/forankring, dybde forståelse og internasjonalt nettverk innenfor tema. Pilotprogrammet avsluttes i 2023 og det er en målsetning at aktivitetene som gjennomføres i pilotprogrammet kan danne grunnlag for en videreføring etter programperioden. Det er viktig å forankre erfaringene som fås ved gjennomføringen av pilotprogrammet til forskningskompetansemiljøene som forventes å videreføre hele eller deler av arbeidet etter pilotprogrammet er avsluttet.</cbc:Description>
+         <!--Main Nature (BT-23)-->
+         <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
+         <!--Additional Nature (BT-531)-->
+         <!--Strategic Procurement (BT-06)-->
+         <!--Strategic Procurement Description (BT-777)-->
+         <!--Green Procurement (BT-774)-->
+         <!--Social Procurement (BT-775)-->
+         <!--Procurement of Innovation (BT-776)-->
+         <!--Accessibility Justification (BT-755)-->
+         <!--Accessibility (BT-754)-->
+         <!--Quantity (BT-25)-->
+         <!--Unit (BT-625)-->
+         <!--Suitable for SMEs (BT-726)-->
+         <!--Additional Information (BT-300)-->
+         <!--Estimated Value (BT-27)-->
+         <!--Main Classification Code (BT-262)-->
+         <cac:MainCommodityClassification>
+            <cbc:ItemClassificationCode listName="cpv">73220000</cbc:ItemClassificationCode>
+         </cac:MainCommodityClassification>
+         <!--Additional Classification Code (BT-263)-->
+         <cac:AdditionalCommodityClassification>
+            <cbc:ItemClassificationCode listName="cpv">73220000</cbc:ItemClassificationCode>
+         </cac:AdditionalCommodityClassification>
+         <!--Place of Performance Additional Information (BT-728)-->
+         <!--Place Performance City (BT-5131)-->
+         <!--Place Performance Post Code (BT-5121)-->
+         <!--Place Performance Country Subdivision (BT-5071)-->
+         <!--Place Performance Services Other (BT-727)-->
+         <!--Place Performance Street (BT-5101)-->
+         <!--Place Performance Country Code (BT-5141)-->
+         <!--Place of performance (BG-708) : Place Performance: Additional Information (BT-728), City (BT-5131), Post Code (BT-5121), Country Subdivision (BT-5071), Services Other (as a codelist) (BT-727), Street (BT-5101), Code (BT-5141)-->
+         <cac:RealizedLocation>
+            <cac:Address>
+               <cbc:CountrySubentityCode listName="nuts">NO082</cbc:CountrySubentityCode>
+            </cac:Address>
+         </cac:RealizedLocation>
+         <!--Duration Start Date (BT-536)-->
+         <!--Duration End Date (BT-537)-->
+         <!--Duration Period (BT-36)-->
+         <!--Duration Other (BT-538)-->
+         <!--Options Description (BT-54)-->
+         <!--Renewal Maximum (BT-58)-->
+         <!--Renewal Description (BT-57)-->
+      </cac:ProcurementProject>
+   </cac:ProcurementProjectLot>
+   <cac:ProcurementProjectLot xmlns:dfo="dfo-conversion-hacks"><!--Purpose Lot Identifier (BT-137)-->
+      <cbc:ID schemeName="Part">PAR-0002</cbc:ID>
+      <!-- Lot cac:TenderingTerms -->
+      <cac:TenderingTerms><!--Selection Criteria Type (BT-747)--><!--Selection Criteria Name (BT-749)--><!--Selection Criteria Description (BT-750)--><!--Selection Criteria Used (BT-748)--><!--Selection Criteria Second Stage Invite (BT-40)--><!--Selection Criteria Second Stage Invite Number Weight (BT-7531)--><!--Selection Criteria Second Stage Invite Number Threshold (BT-7532)--><!--Selection Criteria Second Stage Invite Number (BT-752)--><!--Variants (BT-63)--><!--EU Funds (BT-60)--><!--Performing Staff Qualification (BT-79)--><!--Recurrence (BT-94)--><!--Recurrence Description (BT-95)--><!--Security Clearance Deadline (BT-78)--><!--Multiple Tenders (BT-769)--><!--Documents Restricted Justification (BT-707)--><!--Documents Official Language (BT-708)--><!--Documents Unofficial Language (BT-737)--><!--Terms Financial (BT-77)--><!--Reserved Participation (BT-71)--><!--Reserved Participation (BT-71)--><!--Tenderer Legal Form (BT-761)--><!--Tenderer Legal Form Description (BT-76)--><!--Late Tenderer Information (BT-771)--><!--Subcontracting Tender Indication (BT-651)--><!--Subcontracting Obligation (BT-65)--><!--Subcontracting Obligation Maximum (BT-729)--><!--Subcontracting Obligation Minimum (BT-64)--><!--Reserved Execution (BT-736)--><!--Electronic Invoicing (BT-743)--><!--Terms Performance (BT-70)--><!--Submission Electronic Catalog (BT-764)--><!--Submission Electronic Signature (BT-744)-->
+         <cac:AwardingTerms><!--Following Contract (BT-41)--><!--Jury Decision Binding (BT-42)--><!--No Negotiation Necessary (BT-120)--><!--Award Criteria Order Justification (BT-733)--><!--Award Criteria Complicated (BT-543)--><!--Award Criterion Number (BT-541)--><!--Award Criterion Number Weight (BT-5421)--><!--Award Criterion Number Fixed (BT-5422)--><!--Award Criterion Number Threshold (BT-5423)--><!--Award Criterion Type (BT-539)--><!--Award Criterion Name (BT-734)--><!--Award Criterion Description (BT-540)--><!--Jury Member Name (BT-46)--><!--Prize information (Prize Rank (BT-44), Rewards Other (BT-45), Value Prize (BT-644))--><!--Prize Rank (BT-44)--><!--Value Prize (BT-644)--><!--Rewards Other (Prize Description) (BT-45)--></cac:AwardingTerms>
+         <!--Submission URL (BT-18)-->
+         <!--Tender Validity Deadline (BT-98)-->
+         <!--Review Deadline Description (BT-99)-->
+         <!--Review Deadline Description (BT-99)-->
+         <!--Review Information Providing Organization-->
+         <!--Review organization-->
+         <!--Mediation organization-->
+         <!--Submission Language (BT-97)-->
+         <!--Participant Name (BT-47)-->
+         <!--Security Clearance Code (BT-578)-->
+         <!--Security Clearance Description (BT-732)-->
+      </cac:TenderingTerms>
+      <!-- cac:TenderingProcess -->
+      <cac:TenderingProcess>
+         <ext:UBLExtensions>
+            <ext:UBLExtension>
+               <ext:ExtensionContent>
+                  <efext:EformsExtension><!--Procurement Relaunch (BT-634)--><!--Tool Name (BT-632)--><!--Deadline Receipt Expressions (BT-630)--></efext:EformsExtension>
+               </ext:ExtensionContent>
+            </ext:UBLExtension>
+         </ext:UBLExtensions>
+         <!--SubmissionElectronic (BT-17)-->
+         <cbc:SubmissionMethodCode listName="esubmission">not-allowed</cbc:SubmissionMethodCode>
+         <!--Successive Reduction Indicator (Procedure) (BT-52)-->
+         <!--GPA Coverage (BT-115)-->
+         <!--Tool Atypical URL (BT-124)-->
+         <!--Deadline Receipt Tenders (BT-131)-->
+         <!--Dispatch Invitation Tender (BT-130)-->
+         <!--Deadline Receipt Requests (BT-1311)-->
+         <!--Additional Information Deadline (BT-13)-->
+         <!--Previous Planning Identifier (BT-125)-->
+         <!--Submission Nonelectronic Justification (BT-19)-->
+         <!--Submission Nonelectronic Description (BT-745)-->
+         <!--Maximum Candidates Indicator (BT-661)-->
+         <!--Maximum Candidates (BT-51)-->
+         <!--Minimum Candidates (BT-50)-->
+         <!--Public Opening Date (BT-132)-->
+         <!--Public Opening Description (BT-134)-->
+         <!--Public Opening Place (BT-133)-->
+         <!--Electronic Auction (BT-767)-->
+         <!--Electronic Auction Description (BT-122)-->
+         <!--Electronic Auction URL (BT-123)-->
+         <!--Framework Maximum Participants Number (BT-113)-->
+         <!--Framework Duration Justification (BT-109)-->
+         <!--Group Framework Maximum Value (BT-157)-->
+         <!--Framework Buyer Categories (BT-111)-->
+         <!--Framework Agreement (BT-765)-->
+         <!--Dynamic Purchasing System (BT-766)-->
+      </cac:TenderingProcess>
+      <!-- cac:ProcurementProject -->
+      <cac:ProcurementProject><!--Internal Identifier (BT-22)--><!--WARNING: Internal ID (BT-22) is required but there is no equivalent element in TED XML.-->
+         <cbc:ID schemeName="InternalID"/>
+         <!--Title (BT-21)-->
+         <cbc:Name languageID="NOB">Prosjektpartnere til Pilotprogrammet for kompetanseheving innen bærekraftig verdiskaping og grønn omstilling med Norsk Institutt for bærekraftsforskning (NORSUS)</cbc:Name>
+         <!--Description (BT-24)-->
+         <cbc:Description languageID="NOB">NORSUS skal samarbeide med oppdragsgiver og de andre to forskningsmiljøene, om aktiviteter knyttet til utvikling og testing av et pilotprogram for kompetanseheving innen bærekraftig verdiskaping og grønn omstilling ved hjelp av digital omstilling og sirkulære forretningsmodeller. Målgruppene for pilotprogrammet er klynger, inkubatorer, næringshager, og medarbeidere på rådsområdet næring. Intensjonen er å knytte de sentrale forskningskompetansemiljøene i Viken tettere sammen med innovasjonsaktørene i Viken slik at samarbeidet om bærekraftig verdiskaping og grønn omstilling kan forsterkes til det beste for regionens bedrifter. I tillegg skal NORSUS bidra til at ledere og rådgivere i fylkeskommunen kan få økt kunnskap innenfor dette tema bærekraftig verdiskaping og grønn omstilling ved hjelp av digital omstilling og sirkulære forretningsmodeller. NORSUS skal formidle og implementere forskningsresultater og kunnskap om beste praksis til klynger, inkubatorer og næringshager slik at disse aktørene kan bli bedre koordinatorer og prosessledere for deres målbedrifter. Dette er et «train the trainer»-program. NORSUS vil også kunne være støttende for klynger, næringshager og inkubatorer som benytter seg av Viken fylkeskommunes støtteordningen til utvikling av sirkulære forretningsmodeller og andre initiativ innen bærekraft. NORSUS skal samarbeid med oppdragsgiver og de andre to forskningsmiljøene, bidra til at det etablereres møte arena mellom forskningsmiljøene og målgruppene som kan være en plattform for dialog om tema bærekraftig verdiskaping og grønn omstilling ved hjelp av digital omstilling og sirkulære forretningsmodeller. Pilotprogrammet er avhengig av å samarbeide med ressurser med inngående forskningskompetanse innen tema bærekraftig verdiskaping og grønn omstilling ved hjelp av digital omstilling og sirkulære forretningsmodeller samt er i direkte dialog med innovasjonsaktører og næringsklynger. Prosjektpartnerne må ha en bærekraftstrategi/forankring, dybde forståelse og internasjonalt nettverk innenfor tema. Pilotprogrammet avsluttes i 2023 og det er en målsetning at aktivitetene som gjennomføres i pilotprogrammet kan danne grunnlag for en videreføring etter programperioden. Det er viktig å forankre erfaringene som fås ved gjennomføringen av pilotprogrammet til forskningskompetansemiljøene som forventes å videreføre hele eller deler av arbeidet etter pilotprogrammet er avsluttet.</cbc:Description>
+         <!--Main Nature (BT-23)-->
+         <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
+         <!--Additional Nature (BT-531)-->
+         <!--Strategic Procurement (BT-06)-->
+         <!--Strategic Procurement Description (BT-777)-->
+         <!--Green Procurement (BT-774)-->
+         <!--Social Procurement (BT-775)-->
+         <!--Procurement of Innovation (BT-776)-->
+         <!--Accessibility Justification (BT-755)-->
+         <!--Accessibility (BT-754)-->
+         <!--Quantity (BT-25)-->
+         <!--Unit (BT-625)-->
+         <!--Suitable for SMEs (BT-726)-->
+         <!--Additional Information (BT-300)-->
+         <!--Estimated Value (BT-27)-->
+         <!--Main Classification Code (BT-262)-->
+         <cac:MainCommodityClassification>
+            <cbc:ItemClassificationCode listName="cpv">73220000</cbc:ItemClassificationCode>
+         </cac:MainCommodityClassification>
+         <!--Additional Classification Code (BT-263)-->
+         <cac:AdditionalCommodityClassification>
+            <cbc:ItemClassificationCode listName="cpv">73220000</cbc:ItemClassificationCode>
+         </cac:AdditionalCommodityClassification>
+         <!--Place of Performance Additional Information (BT-728)-->
+         <!--Place Performance City (BT-5131)-->
+         <!--Place Performance Post Code (BT-5121)-->
+         <!--Place Performance Country Subdivision (BT-5071)-->
+         <!--Place Performance Services Other (BT-727)-->
+         <!--Place Performance Street (BT-5101)-->
+         <!--Place Performance Country Code (BT-5141)-->
+         <!--Place of performance (BG-708) : Place Performance: Additional Information (BT-728), City (BT-5131), Post Code (BT-5121), Country Subdivision (BT-5071), Services Other (as a codelist) (BT-727), Street (BT-5101), Code (BT-5141)-->
+         <cac:RealizedLocation>
+            <cac:Address>
+               <cbc:CountrySubentityCode listName="nuts">NO082</cbc:CountrySubentityCode>
+            </cac:Address>
+         </cac:RealizedLocation>
+         <!--Duration Start Date (BT-536)-->
+         <!--Duration End Date (BT-537)-->
+         <!--Duration Period (BT-36)-->
+         <!--Duration Other (BT-538)-->
+         <!--Options Description (BT-54)-->
+         <!--Renewal Maximum (BT-58)-->
+         <!--Renewal Description (BT-57)-->
+      </cac:ProcurementProject>
+   </cac:ProcurementProjectLot>
+   <cac:ProcurementProjectLot xmlns:dfo="dfo-conversion-hacks"><!--Purpose Lot Identifier (BT-137)-->
+      <cbc:ID schemeName="Part">PAR-0003</cbc:ID>
+      <!-- Lot cac:TenderingTerms -->
+      <cac:TenderingTerms><!--Selection Criteria Type (BT-747)--><!--Selection Criteria Name (BT-749)--><!--Selection Criteria Description (BT-750)--><!--Selection Criteria Used (BT-748)--><!--Selection Criteria Second Stage Invite (BT-40)--><!--Selection Criteria Second Stage Invite Number Weight (BT-7531)--><!--Selection Criteria Second Stage Invite Number Threshold (BT-7532)--><!--Selection Criteria Second Stage Invite Number (BT-752)--><!--Variants (BT-63)--><!--EU Funds (BT-60)--><!--Performing Staff Qualification (BT-79)--><!--Recurrence (BT-94)--><!--Recurrence Description (BT-95)--><!--Security Clearance Deadline (BT-78)--><!--Multiple Tenders (BT-769)--><!--Documents Restricted Justification (BT-707)--><!--Documents Official Language (BT-708)--><!--Documents Unofficial Language (BT-737)--><!--Terms Financial (BT-77)--><!--Reserved Participation (BT-71)--><!--Reserved Participation (BT-71)--><!--Tenderer Legal Form (BT-761)--><!--Tenderer Legal Form Description (BT-76)--><!--Late Tenderer Information (BT-771)--><!--Subcontracting Tender Indication (BT-651)--><!--Subcontracting Obligation (BT-65)--><!--Subcontracting Obligation Maximum (BT-729)--><!--Subcontracting Obligation Minimum (BT-64)--><!--Reserved Execution (BT-736)--><!--Electronic Invoicing (BT-743)--><!--Terms Performance (BT-70)--><!--Submission Electronic Catalog (BT-764)--><!--Submission Electronic Signature (BT-744)-->
+         <cac:AwardingTerms><!--Following Contract (BT-41)--><!--Jury Decision Binding (BT-42)--><!--No Negotiation Necessary (BT-120)--><!--Award Criteria Order Justification (BT-733)--><!--Award Criteria Complicated (BT-543)--><!--Award Criterion Number (BT-541)--><!--Award Criterion Number Weight (BT-5421)--><!--Award Criterion Number Fixed (BT-5422)--><!--Award Criterion Number Threshold (BT-5423)--><!--Award Criterion Type (BT-539)--><!--Award Criterion Name (BT-734)--><!--Award Criterion Description (BT-540)--><!--Jury Member Name (BT-46)--><!--Prize information (Prize Rank (BT-44), Rewards Other (BT-45), Value Prize (BT-644))--><!--Prize Rank (BT-44)--><!--Value Prize (BT-644)--><!--Rewards Other (Prize Description) (BT-45)--></cac:AwardingTerms>
+         <!--Submission URL (BT-18)-->
+         <!--Tender Validity Deadline (BT-98)-->
+         <!--Review Deadline Description (BT-99)-->
+         <!--Review Deadline Description (BT-99)-->
+         <!--Review Information Providing Organization-->
+         <!--Review organization-->
+         <!--Mediation organization-->
+         <!--Submission Language (BT-97)-->
+         <!--Participant Name (BT-47)-->
+         <!--Security Clearance Code (BT-578)-->
+         <!--Security Clearance Description (BT-732)-->
+      </cac:TenderingTerms>
+      <!-- cac:TenderingProcess -->
+      <cac:TenderingProcess>
+         <ext:UBLExtensions>
+            <ext:UBLExtension>
+               <ext:ExtensionContent>
+                  <efext:EformsExtension><!--Procurement Relaunch (BT-634)--><!--Tool Name (BT-632)--><!--Deadline Receipt Expressions (BT-630)--></efext:EformsExtension>
+               </ext:ExtensionContent>
+            </ext:UBLExtension>
+         </ext:UBLExtensions>
+         <!--SubmissionElectronic (BT-17)-->
+         <cbc:SubmissionMethodCode listName="esubmission">not-allowed</cbc:SubmissionMethodCode>
+         <!--Successive Reduction Indicator (Procedure) (BT-52)-->
+         <!--GPA Coverage (BT-115)-->
+         <!--Tool Atypical URL (BT-124)-->
+         <!--Deadline Receipt Tenders (BT-131)-->
+         <!--Dispatch Invitation Tender (BT-130)-->
+         <!--Deadline Receipt Requests (BT-1311)-->
+         <!--Additional Information Deadline (BT-13)-->
+         <!--Previous Planning Identifier (BT-125)-->
+         <!--Submission Nonelectronic Justification (BT-19)-->
+         <!--Submission Nonelectronic Description (BT-745)-->
+         <!--Maximum Candidates Indicator (BT-661)-->
+         <!--Maximum Candidates (BT-51)-->
+         <!--Minimum Candidates (BT-50)-->
+         <!--Public Opening Date (BT-132)-->
+         <!--Public Opening Description (BT-134)-->
+         <!--Public Opening Place (BT-133)-->
+         <!--Electronic Auction (BT-767)-->
+         <!--Electronic Auction Description (BT-122)-->
+         <!--Electronic Auction URL (BT-123)-->
+         <!--Framework Maximum Participants Number (BT-113)-->
+         <!--Framework Duration Justification (BT-109)-->
+         <!--Group Framework Maximum Value (BT-157)-->
+         <!--Framework Buyer Categories (BT-111)-->
+         <!--Framework Agreement (BT-765)-->
+         <!--Dynamic Purchasing System (BT-766)-->
+      </cac:TenderingProcess>
+      <!-- cac:ProcurementProject -->
+      <cac:ProcurementProject><!--Internal Identifier (BT-22)--><!--WARNING: Internal ID (BT-22) is required but there is no equivalent element in TED XML.-->
+         <cbc:ID schemeName="InternalID"/>
+         <!--Title (BT-21)-->
+         <cbc:Name languageID="NOB">Prosjektpartnere til Pilotprogrammet for kompetanseheving innen bærekraftig verdiskaping og grønn omstilling med USN</cbc:Name>
+         <!--Description (BT-24)-->
+         <cbc:Description languageID="NOB">USN skal samarbeide med oppdragsgiver og de andre to forskningsmiljøene, om aktiviteter knyttet til utvikling og testing av et pilotprogram for kompetanseheving innen bærekraftig verdiskaping og grønn omstilling ved hjelp av digital omstilling og sirkulære forretningsmodeller. Målgruppene for pilotprogrammet er klynger, inkubatorer, næringshager, og medarbeidere på rådsområdet næring. Intensjonen er å knytte de sentrale forskningskompetansemiljøene i Viken tettere sammen med innovasjonsaktørene i Viken slik at samarbeidet om bærekraftig verdiskaping og grønn omstilling kan forsterkes til det beste for regionens bedrifter. I tillegg skal USN bidra til at ledere og rådgivere i fylkeskommunen kan få økt kunnskap innenfor dette tema bærekraftig verdiskaping og grønn omstilling ved hjelp av digital omstilling og sirkulære forretningsmodeller. USN skal formidle og implementere forskningsresultater og kunnskap om beste praksis til klynger, inkubatorer og næringshager slik at disse aktørene kan bli bedre koordinatorer og prosessledere for deres målbedrifter. Dette er et «train the trainer»-program. USN vil også kunne være støttende for klynger, næringshager og inkubatorer som benytter seg av Viken fylkeskommunes støtteordningen til utvikling av sirkulære forretningsmodeller og andre initiativ innen bærekraft. USN skal samarbeid med oppdragsgiver og de andre to forskningsmiljøene, bidra til at det etablereres møte arena mellom forskningsmiljøene og målgruppene som kan være en plattform for dialog om tema bærekraftig verdiskaping og grønn omstilling ved hjelp av digital omstilling og sirkulære forretningsmodeller. Pilotprogrammet er avhengig av å samarbeide med ressurser med inngående forskningskompetanse innen tema bærekraftig verdiskaping og grønn omstilling ved hjelp av digital omstilling og sirkulære forretningsmodeller samt er i direkte dialog med innovasjonsaktører og næringsklynger. Prosjektpartnerne må ha en bærekraftstrategi/forankring, dybde forståelse og internasjonalt nettverk innenfor tema. Pilotprogrammet avsluttes i 2023 og det er en målsetning at aktivitetene som gjennomføres i pilotprogrammet kan danne grunnlag for en videreføring etter programperioden. Det er viktig å forankre erfaringene som fås ved gjennomføringen av pilotprogrammet til forskningskompetansemiljøene som forventes å videreføre hele eller deler av arbeidet etter pilotprogrammet er avsluttet.</cbc:Description>
+         <!--Main Nature (BT-23)-->
+         <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
+         <!--Additional Nature (BT-531)-->
+         <!--Strategic Procurement (BT-06)-->
+         <!--Strategic Procurement Description (BT-777)-->
+         <!--Green Procurement (BT-774)-->
+         <!--Social Procurement (BT-775)-->
+         <!--Procurement of Innovation (BT-776)-->
+         <!--Accessibility Justification (BT-755)-->
+         <!--Accessibility (BT-754)-->
+         <!--Quantity (BT-25)-->
+         <!--Unit (BT-625)-->
+         <!--Suitable for SMEs (BT-726)-->
+         <!--Additional Information (BT-300)-->
+         <!--Estimated Value (BT-27)-->
+         <!--Main Classification Code (BT-262)-->
+         <cac:MainCommodityClassification>
+            <cbc:ItemClassificationCode listName="cpv">73220000</cbc:ItemClassificationCode>
+         </cac:MainCommodityClassification>
+         <!--Additional Classification Code (BT-263)-->
+         <cac:AdditionalCommodityClassification>
+            <cbc:ItemClassificationCode listName="cpv">73220000</cbc:ItemClassificationCode>
+         </cac:AdditionalCommodityClassification>
+         <!--Place of Performance Additional Information (BT-728)-->
+         <!--Place Performance City (BT-5131)-->
+         <!--Place Performance Post Code (BT-5121)-->
+         <!--Place Performance Country Subdivision (BT-5071)-->
+         <!--Place Performance Services Other (BT-727)-->
+         <!--Place Performance Street (BT-5101)-->
+         <!--Place Performance Country Code (BT-5141)-->
+         <!--Place of performance (BG-708) : Place Performance: Additional Information (BT-728), City (BT-5131), Post Code (BT-5121), Country Subdivision (BT-5071), Services Other (as a codelist) (BT-727), Street (BT-5101), Code (BT-5141)-->
+         <cac:RealizedLocation>
+            <cac:Address>
+               <cbc:CountrySubentityCode listName="nuts">NO082</cbc:CountrySubentityCode>
+            </cac:Address>
+         </cac:RealizedLocation>
+         <!--Duration Start Date (BT-536)-->
+         <!--Duration End Date (BT-537)-->
+         <!--Duration Period (BT-36)-->
+         <!--Duration Other (BT-538)-->
+         <!--Options Description (BT-54)-->
+         <!--Renewal Maximum (BT-58)-->
+         <!--Renewal Description (BT-57)-->
+      </cac:ProcurementProject>
+   </cac:ProcurementProjectLot>
+</PriorInformationNotice>
