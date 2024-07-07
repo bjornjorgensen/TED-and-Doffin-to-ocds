@@ -205,7 +205,7 @@ from converters.BT_740_Buyer_Contracting_Entity import parse_buyer_contracting_e
 from converters.BT_743_Electronic_Invoicing import parse_electronic_invoicing, merge_electronic_invoicing
 from converters.BT_744_Submission_Electronic_Signature import parse_submission_electronic_signature, merge_submission_electronic_signature
 from converters.BT_745_Submission_Nonelectronic_Description import parse_submission_nonelectronic_description, merge_submission_nonelectronic_description
-from converters.BT_746_Winner_Listed import parse_winner_listed, merge_winner_listed
+from converters.BT_746_Organization import parse_organization_listed, merge_organization_listed
 from converters.BT_747_Selection_Criteria_Type import parse_selection_criteria_type, merge_selection_criteria_type
 from converters.BT_749_Selection_Criteria_Name import parse_selection_criteria_name, merge_selection_criteria_name
 from converters.BT_75_Lot import parse_guarantee_required_description, merge_guarantee_required_description
@@ -247,7 +247,12 @@ from converters.BT_97_Lot import parse_submission_language, merge_submission_lan
 from converters.BT_98_Lot import parse_tender_validity_deadline, merge_tender_validity_deadline
 from converters.BT_99_Lot import parse_review_deadline_description, merge_review_deadline_description
 from converters.BT_198_BT_105 import parse_unpublished_access_date, merge_unpublished_access_date
-from converters.OPP_020_021_022_023_Contract import parse_essential_assets, merge_essential_assets
+#from converters.OPP_020_021_022_023_Contract import parse_essential_assets, merge_essential_assets
+from converters.OPP_020_Contract import map_extended_duration_indicator, merge_extended_duration_indicator
+from converters.OPP_021_Contract import map_essential_assets, merge_essential_assets
+from converters.OPP_022_Contract import map_asset_significance, merge_asset_significance
+from converters.OPP_023_Contract import map_asset_predominance, merge_asset_predominance
+
 from converters.OPP_031_Tender import parse_contract_conditions, merge_contract_conditions
 from converters.OPP_032_Tender import parse_revenues_allocation, merge_revenues_allocation
 from converters.OPP_034_Tender import parse_penalties_and_rewards, merge_penalties_and_rewards
@@ -309,7 +314,7 @@ from converters.OPT_320_LotResult import parse_tender_identifier_reference, merg
 def configure_logging():
     # Create a logger
     logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)
 
     # Create formatter
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
@@ -325,18 +330,19 @@ def configure_logging():
 def remove_empty_elements(data):
     """
     Recursively remove empty lists, empty dicts, or None elements from a dictionary or list.
+    Preserves False boolean values.
     """
     if isinstance(data, dict):
         return {
             key: remove_empty_elements(value)
             for key, value in data.items()
-            if value and remove_empty_elements(value)
+            if value is not None and (value or isinstance(value, bool))
         }
     elif isinstance(data, list):
         return [
             remove_empty_elements(item)
             for item in data
-            if item and remove_empty_elements(item)
+            if item is not None and (item or isinstance(item, bool))
         ]
     else:
         return data
@@ -1883,9 +1889,17 @@ def main(xml_path, ocid_prefix):
     submission_nonelectronic_description_data = parse_submission_nonelectronic_description(xml_content)
     merge_submission_nonelectronic_description(release_json, submission_nonelectronic_description_data)
 
-    # Parse and merge BT-746 Winner Listed
-    winner_listed_data = parse_winner_listed(xml_content)
-    merge_winner_listed(release_json, winner_listed_data)
+   # Parse and merge BT-746-Organization
+    try:
+        organization_listed_data = parse_organization_listed(xml_content)
+        if organization_listed_data:
+            logger.debug(f"Organization listed data before merge: {organization_listed_data}")
+            merge_organization_listed(release_json, organization_listed_data)
+            logger.debug(f"Release JSON after merge: {release_json}")
+        else:
+            logger.info("No Organization Listed data found")
+    except Exception as e:
+        logger.error(f"Error processing Organization Listed data: {str(e)}")
 
     # Parse and merge BT-747 Selection Criteria Type
     selection_criteria_type_data = parse_selection_criteria_type(xml_content)
@@ -2078,13 +2092,57 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Unpublished Access Date found")
 
+    # Parse and merge OPP-020 ExtendedDurationIndicator
+    try:
+        extended_duration_data = map_extended_duration_indicator(xml_content)
+        if extended_duration_data["tender"]["lots"]:
+            merge_extended_duration_indicator(release_json, extended_duration_data)
+            logger.info("Merged ExtendedDurationIndicator data")
+        else:
+            logger.info("No ExtendedDurationIndicator data found")
+    except Exception as e:
+        logger.error(f"Error processing ExtendedDurationIndicator data: {str(e)}")    
+
+    # Parse and merge OPP-021_Contract Essential Assets
+    try:
+        essential_assets_data = map_essential_assets(xml_content)
+        if essential_assets_data["tender"]["lots"]:
+            merge_essential_assets(release_json, essential_assets_data)
+            logger.info("Merged Essential Assets data")
+        else:
+            logger.info("No Essential Assets data found")
+    except Exception as e:
+        logger.error(f"Error processing Essential Assets data: {str(e)}")
+
+    # Parse and merge OPP_022_Contract Asset Significance
+    try:
+        asset_significance_data = map_asset_significance(xml_content)
+        if asset_significance_data["tender"]["lots"]:
+            merge_asset_significance(release_json, asset_significance_data)
+            logger.info("Merged Asset Significance data")
+        else:
+            logger.info("No Asset Significance data found")
+    except Exception as e:
+        logger.error(f"Error processing Asset Significance data: {str(e)}")
+
+    # Parse and merge OPP_023_Contract Asset Predominance
+    try:
+        asset_predominance_data = map_asset_predominance(xml_content)
+        if asset_predominance_data["tender"]["lots"]:
+            merge_asset_predominance(release_json, asset_predominance_data)
+            logger.info("Merged Asset Predominance data")
+        else:
+            logger.info("No Asset Predominance data found")
+    except Exception as e:
+        logger.error(f"Error processing Asset Predominance data: {str(e)}")
+
     # Parse and merge OPP-020-021-022-023-Contract Essential Assets
-    logger.info("Processing OPP-020-021-022-023-Contract: Essential Assets")
-    essential_assets_data = parse_essential_assets(xml_content)
-    if essential_assets_data:
-        merge_essential_assets(release_json, essential_assets_data)
-    else:
-        logger.warning("No Essential Assets data found")
+    #logger.info("Processing OPP-020-021-022-023-Contract: Essential Assets")
+    #essential_assets_data = parse_essential_assets(xml_content)
+    #if essential_assets_data:
+    #    merge_essential_assets(release_json, essential_assets_data)
+    #else:
+    #    logger.warning("No Essential Assets data found")
 
     # Parse and merge OPP-031-Tender Contract Conditions
     logger.info("Processing OPP-031-Tender: Contract Conditions")

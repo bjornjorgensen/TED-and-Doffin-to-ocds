@@ -97,6 +97,7 @@
             "beneficialOwners": [
                 {
                     "id": "UBO-0001",
+                    "address": {},
                     "nationality": "FR"
                 }
             ],
@@ -118,6 +119,7 @@
             "beneficialOwners": [
                 {
                     "id": "UBO-0001",
+                    "address": {},
                     "nationality": "FR"
                 }
             ],
@@ -134,7 +136,8 @@
             "id": "ORG-0004",
             "name": "Espaces Verts Lemire",
             "details": {
-                "scale": "micro"
+                "scale": "micro",
+                "listedOnRegulatedMarket": false
             },
             "roles": [
                 "supplier",
@@ -153,6 +156,7 @@
             "beneficialOwners": [
                 {
                     "id": "UBO-0001",
+                    "address": {},
                     "nationality": "FR"
                 }
             ],
@@ -209,6 +213,7 @@
                     "amount": 95414.0,
                     "currency": "EUR"
                 },
+                "hasSubcontracting": false,
                 "tenderers": [
                     {
                         "id": "ORG-0004"
