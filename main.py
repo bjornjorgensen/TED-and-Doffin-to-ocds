@@ -151,7 +151,7 @@ from converters.BT_554_Tender import parse_subcontracting_description, merge_sub
 from converters.BT_555_Tender import parse_subcontracting_percentage, merge_subcontracting_percentage
 from converters.BT_57_Lot import parse_renewal_description_lot, merge_renewal_description_lot
 from converters.BT_58_Lot import parse_renewal_maximum_lot, merge_renewal_maximum_lot
-from converters.BT_60_Lot import parse_eu_funds_lot, merge_eu_funds_lot
+from converters.BT_60_Lot import parse_eu_funds, merge_eu_funds
 from converters.BT_610_Procedure_Buyer import parse_activity_entity, merge_activity_entity
 from converters.BT_6110_Contract import parse_contract_eu_funds_details, merge_contract_eu_funds_details
 from converters.BT_6140_Lot import parse_lot_eu_funds_details, merge_lot_eu_funds_details
@@ -1601,9 +1601,15 @@ def main(xml_path, ocid_prefix):
     renewal_maximum_data = parse_renewal_maximum_lot(xml_content)
     merge_renewal_maximum_lot(release_json, renewal_maximum_data)
 
-    # Parse and merge BT-60-Lot
-    eu_funded_data = parse_eu_funds_lot(xml_content)
-    merge_eu_funds_lot(release_json, eu_funded_data)
+    # Parse and merge BT-60-Lot EU Funds
+    try:
+        eu_funds_data = parse_eu_funds(xml_content)
+        if eu_funds_data:
+            merge_eu_funds(release_json, eu_funds_data)
+        else:
+            logger.info("No EU Funds data found")
+    except Exception as e:
+        logger.error(f"Error processing EU Funds data: {str(e)}")
 
     # Parse and merge BT-610-Procedure-Buyer
     activity_entity_data = parse_activity_entity(xml_content)
