@@ -247,12 +247,10 @@ from converters.BT_97_Lot import parse_submission_language, merge_submission_lan
 from converters.BT_98_Lot import parse_tender_validity_deadline, merge_tender_validity_deadline
 from converters.BT_99_Lot import parse_review_deadline_description, merge_review_deadline_description
 from converters.BT_198_BT_105 import parse_unpublished_access_date, merge_unpublished_access_date
-#from converters.OPP_020_021_022_023_Contract import parse_essential_assets, merge_essential_assets
 from converters.OPP_020_Contract import map_extended_duration_indicator, merge_extended_duration_indicator
 from converters.OPP_021_Contract import map_essential_assets, merge_essential_assets
 from converters.OPP_022_Contract import map_asset_significance, merge_asset_significance
 from converters.OPP_023_Contract import map_asset_predominance, merge_asset_predominance
-
 from converters.OPP_031_Tender import parse_contract_conditions, merge_contract_conditions
 from converters.OPP_032_Tender import parse_revenues_allocation, merge_revenues_allocation
 from converters.OPP_034_Tender import parse_penalties_and_rewards, merge_penalties_and_rewards
@@ -330,20 +328,33 @@ def configure_logging():
 def remove_empty_elements(data):
     """
     Recursively remove empty lists, empty dicts, or None elements from a dictionary or list.
-    Preserves False boolean values.
+    Preserves False boolean values and zero numeric values.
     """
     if isinstance(data, dict):
         return {
             key: remove_empty_elements(value)
             for key, value in data.items()
-            if value is not None and (value or isinstance(value, bool))
+            if value is not None and (value or isinstance(value, (bool, int, float)))
         }
     elif isinstance(data, list):
         return [
             remove_empty_elements(item)
             for item in data
-            if item is not None and (item or isinstance(item, bool))
+            if item is not None and (item or isinstance(item, (bool, int, float)))
         ]
+    else:
+        return data
+
+# Additional step to remove keys with empty dictionaries
+def remove_empty_dicts(data):
+    if isinstance(data, dict):
+        return {
+            key: remove_empty_dicts(value)
+            for key, value in data.items()
+            if value or isinstance(value, (bool, int, float))
+        }
+    elif isinstance(data, list):
+        return [remove_empty_dicts(item) for item in data if item or isinstance(item, (bool, int, float))]
     else:
         return data
 
@@ -2136,14 +2147,6 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Asset Predominance data: {str(e)}")
 
-    # Parse and merge OPP-020-021-022-023-Contract Essential Assets
-    #logger.info("Processing OPP-020-021-022-023-Contract: Essential Assets")
-    #essential_assets_data = parse_essential_assets(xml_content)
-    #if essential_assets_data:
-    #    merge_essential_assets(release_json, essential_assets_data)
-    #else:
-    #    logger.warning("No Essential Assets data found")
-
     # Parse and merge OPP-031-Tender Contract Conditions
     logger.info("Processing OPP-031-Tender: Contract Conditions")
     contract_conditions_data = parse_contract_conditions(xml_content)
@@ -2555,6 +2558,7 @@ def main(xml_path, ocid_prefix):
         
     # Remove empty elements from release_json
     release_json = remove_empty_elements(release_json)
+    release_json = remove_empty_dicts(release_json)
 
     #logger.info(f"Final release_json: {json.dumps(release_json, indent=2)}")
     
