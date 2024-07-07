@@ -72,7 +72,16 @@ from converters.BT_22_Lot import parse_lot_internal_identifier, merge_lot_intern
 from converters.BT_23 import parse_main_nature, merge_main_nature
 from converters.BT_24 import parse_description, merge_description
 from converters.BT_25 import parse_quantity, merge_quantity
-from converters.BT_26 import parse_classifications, merge_classifications
+from converters.BT_26a_lot import parse_classification_type, merge_classification_type
+from converters.BT_26a_part import parse_classification_type_part, merge_classification_type_part
+from converters.BT_26a_procedure import parse_classification_type_procedure, merge_classification_type_procedure
+from converters.BT_26m_lot import parse_main_classification_type_lot, merge_main_classification_type_lot
+from converters.BT_26m_part import parse_main_classification_type_part, merge_main_classification_type_part
+from converters.BT_26m_procedure import parse_main_classification_type_procedure, merge_main_classification_type_procedure
+from converters.BT_262_lot import parse_main_classification_code_lot, merge_main_classification_code_lot
+from converters.BT_262_part import parse_main_classification_code_part, merge_main_classification_code_part
+from converters.BT_262_procedure import parse_main_classification_code_procedure, merge_main_classification_code_procedure
+
 from converters.BT_27 import parse_estimated_value, merge_estimated_value
 from converters.BT_271 import parse_framework_maximum_value, merge_framework_maximum_value
 from converters.BT_300 import parse_additional_information, merge_additional_information
@@ -1161,10 +1170,104 @@ def main(xml_path, ocid_prefix):
     # Merge quantity into the release JSON
     merge_quantity(release_json, quantity_data)
 
-    # Parse the classifications (BT-26)
-    classification_data = parse_classifications(xml_content)
-    # Merge classifications into the release JSON
-    merge_classifications(release_json, classification_data)
+    # Parse the classifications (BT-26 lot)
+    try:
+        classification_type_data = parse_classification_type(xml_content)
+        if classification_type_data["tender"]["items"]:
+            merge_classification_type(release_json, classification_type_data)
+            logger.info("Merged Classification Type data")
+        else:
+            logger.info("No Classification Type data found")
+    except Exception as e:
+        logger.error(f"Error processing Classification Type data: {str(e)}")
+
+    # Parse and merge Classification Type for BT-26 Part
+    try:
+        classification_type_data = parse_classification_type_part(xml_content)
+        if classification_type_data["tender"]["items"]:
+            merge_classification_type_part(release_json, classification_type_data)
+            logger.info("Merged Classification Type data for Part")
+        else:
+            logger.info("No Classification Type data found for Part")
+    except Exception as e:
+        logger.error(f"Error processing Classification Type data for Part: {str(e)}")
+
+    # Parse and merge Classification Type for BT-26 Procedure
+    try:
+        classification_type_data = parse_classification_type_procedure(xml_content)
+        if classification_type_data["tender"]["items"]:
+            merge_classification_type_procedure(release_json, classification_type_data)
+            logger.info("Merged Classification Type data for Procedure")
+        else:
+            logger.info("No Classification Type data found for Procedure")
+    except Exception as e:
+        logger.error(f"Error processing Classification Type data for Procedure: {str(e)}")
+
+    # Parse and merge Main Classification Type for BT_26m_lot Lot
+    try:
+        main_classification_type_data = parse_main_classification_type_lot(xml_content)
+        if main_classification_type_data["tender"]["items"]:
+            merge_main_classification_type_lot(release_json, main_classification_type_data)
+            logger.info("Merged Main Classification Type data for Lot")
+        else:
+            logger.info("No Main Classification Type data found for Lot")
+    except Exception as e:
+        logger.error(f"Error processing Main Classification Type data for Lot: {str(e)}")
+
+    # Parse and merge Main Classification Type for BT_26m_part
+    try:
+        main_classification_type_data = parse_main_classification_type_part(xml_content)
+        if main_classification_type_data["tender"]["items"]:
+            merge_main_classification_type_part(release_json, main_classification_type_data)
+            logger.info("Merged Main Classification Type data for Part")
+        else:
+            logger.info("No Main Classification Type data found for Part")
+    except Exception as e:
+        logger.error(f"Error processing Main Classification Type data for Part: {str(e)}")
+
+    # Parse and merge Main Classification Type for BT_26m_procedure
+    try:
+        main_classification_type_data = parse_main_classification_type_procedure(xml_content)
+        if main_classification_type_data["tender"]["items"]:
+            merge_main_classification_type_procedure(release_json, main_classification_type_data)
+            logger.info("Merged Main Classification Type data for Procedure")
+        else:
+            logger.info("No Main Classification Type data found for Procedure")
+    except Exception as e:
+        logger.error(f"Error processing Main Classification Type data for Procedure: {str(e)}")
+
+    # Parse and merge Main Classification Code for Lot BT_262_lot
+    try:
+        main_classification_code_data = parse_main_classification_code_lot(xml_content)
+        if main_classification_code_data["tender"]["items"]:
+            merge_main_classification_code_lot(release_json, main_classification_code_data)
+            logger.info("Merged Main Classification Code data for Lot")
+        else:
+            logger.info("No Main Classification Code data found for Lot")
+    except Exception as e:
+        logger.error(f"Error processing Main Classification Code data for Lot: {str(e)}")
+
+    # Parse and merge Main Classification Code for Part BT_262_part
+    try:
+        main_classification_code_data = parse_main_classification_code_part(xml_content)
+        if main_classification_code_data["tender"]["items"]:
+            merge_main_classification_code_part(release_json, main_classification_code_data)
+            logger.info("Merged Main Classification Code data for Part")
+        else:
+            logger.info("No Main Classification Code data found for Part")
+    except Exception as e:
+        logger.error(f"Error processing Main Classification Code data for Part: {str(e)}")
+
+    # Parse and merge Main Classification Code for Procedure BT_262_procedure
+    try:
+        main_classification_code_data = parse_main_classification_code_procedure(xml_content)
+        if main_classification_code_data["tender"]["items"]:
+            merge_main_classification_code_procedure(release_json, main_classification_code_data)
+            logger.info("Merged Main Classification Code data for Procedure")
+        else:
+            logger.info("No Main Classification Code data found for Procedure")
+    except Exception as e:
+        logger.error(f"Error processing Main Classification Code data for Procedure: {str(e)}")
 
     # Parse the estimated value (BT-27)
     estimated_value_data = parse_estimated_value(xml_content)
