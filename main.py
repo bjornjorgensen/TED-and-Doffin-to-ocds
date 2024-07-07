@@ -2459,13 +2459,13 @@ def main(xml_path, ocid_prefix):
     
     # Write the JSON output to a file
     with io.open('output.json', 'w', encoding='utf-8') as f:
-        json.dump(release_json, f, ensure_ascii=False, indent=4)
+        json.dump(release_json, f, ensure_ascii=False)
 
     logger.info("XML to JSON conversion completed")
 
     # Print the JSON string to console
-    json_string = json.dumps(release_json, ensure_ascii=False, indent=2)
-    print(json_string)
+    json_string = json.dumps(release_json, ensure_ascii=False)
+    
 
     return release_json
 
