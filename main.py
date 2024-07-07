@@ -68,7 +68,7 @@ from converters.BT_21_Lot import parse_lot_title, merge_lot_title
 from converters.BT_21_LotsGroup import parse_lots_group_title, merge_lots_group_title
 from converters.BT_21_Part import parse_part_title, merge_part_title
 from converters.BT_21_Procedure import parse_procedure_title, merge_procedure_title
-from converters.BT_22 import parse_internal_identifiers, merge_internal_identifiers
+from converters.BT_22_Lot import parse_lot_internal_identifier, merge_lot_internal_identifier
 from converters.BT_23 import parse_main_nature, merge_main_nature
 from converters.BT_24 import parse_description, merge_description
 from converters.BT_25 import parse_quantity, merge_quantity
@@ -1119,10 +1119,15 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Procedure Title data: {str(e)}")
 
-    # Parse and merge BT-22 Internal Identifiers
-    logger.info("Processing BT-22: Internal Identifiers")
-    internal_identifiers_data = parse_internal_identifiers(xml_content)
-    merge_internal_identifiers(release_json, internal_identifiers_data)
+    # Parse and merge BT-22-Lot
+    try:
+        lot_internal_identifier_data = parse_lot_internal_identifier(xml_content)
+        if lot_internal_identifier_data:
+            merge_lot_internal_identifier(release_json, lot_internal_identifier_data)
+        else:
+            logger.info("No Lot Internal Identifier data found")
+    except Exception as e:
+        logger.error(f"Error processing Lot Internal Identifier data: {str(e)}")
 
     # Parse and merge BT-23 Main Nature
     logger.info("Processing BT-23: Main Nature")

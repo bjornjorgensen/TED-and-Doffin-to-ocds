@@ -16,12 +16,10 @@
                     "GPA"
                 ],
                 "title": "Agence centre",
-                "identifiers": [
-                    {
-                        "id": "1",
-                        "scheme": "internal"
-                    }
-                ],
+                "identifiers": {
+                    "id": "1",
+                    "scheme": "internal"
+                },
                 "mainProcurementCategory": "services",
                 "description": "Service d'entretien de remise en état et de nettoyage des espaces verts.",
                 "awardCriteria": {
@@ -61,8 +59,8 @@
         ]
     },
     "tag": [
-        "contract",
-        "award"
+        "award",
+        "contract"
     ],
     "date": "2019-10-23T00:00:00+01:00",
     "parties": [
@@ -139,8 +137,8 @@
                 "scale": "micro"
             },
             "roles": [
-                "tenderer",
-                "supplier"
+                "supplier",
+                "tenderer"
             ],
             "additionalIdentifiers": [
                 {
