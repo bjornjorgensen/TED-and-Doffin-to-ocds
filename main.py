@@ -116,6 +116,8 @@ from converters.BT_510b_Organization_Company import parse_organization_streetlin
 from converters.BT_510b_Organization_TouchPoint import parse_touchpoint_streetline1, merge_touchpoint_streetline1
 from converters.BT_510b_UBO import parse_ubo_streetline1, merge_ubo_streetline1
 from converters.BT_510c_Organization_Company import parse_organization_streetline2, merge_organization_streetline2
+from converters.BT_510c_Organization_TouchPoint import parse_touchpoint_streetline2, merge_touchpoint_streetline2
+from converters.BT_510c_UBO import parse_ubo_streetline2, merge_ubo_streetline2
 
 from converters.BT_5101 import parse_place_performance_street, merge_place_performance_street
 from converters.BT_512 import parse_organization_post_code, merge_organization_post_code
@@ -1430,6 +1432,26 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Organization Streetline 2 data: {str(e)}")
 
+    # Parse and merge BT-510(c)-Organization-TouchPoint
+    try:
+        touchpoint_streetline2_data = parse_touchpoint_streetline2(xml_content)
+        if touchpoint_streetline2_data:
+            merge_touchpoint_streetline2(release_json, touchpoint_streetline2_data)
+        else:
+            logger.info("No TouchPoint Streetline 2 data found")
+    except Exception as e:
+        logger.error(f"Error processing TouchPoint Streetline 2 data: {str(e)}")
+
+    # Parse and merge BT-510(c)-UBO
+    try:
+        ubo_streetline2_data = parse_ubo_streetline2(xml_content)
+        if ubo_streetline2_data:
+            merge_ubo_streetline2(release_json, ubo_streetline2_data)
+        else:
+            logger.info("No UBO Streetline 2 data found")
+    except Exception as e:
+        logger.error(f"Error processing UBO Streetline 2 data: {str(e)}")
+        
     # Parse the place performance street (BT-5101)
     place_performance_street_data = parse_place_performance_street(xml_content)
     # Merge place performance street into the release JSON
