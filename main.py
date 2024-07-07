@@ -64,7 +64,10 @@ from converters.BT_19_Lot import parse_nonelectronic_submission_justification, m
 from converters.BT_191 import parse_country_origin
 from converters.BT_193_Tender import parse_tender_variant, merge_tender_variant
 from converters.BT_195 import parse_unpublished_identifier
-from converters.BT_21 import parse_title, merge_title
+from converters.BT_21_Lot import parse_lot_title, merge_lot_title
+from converters.BT_21_LotsGroup import parse_lots_group_title, merge_lots_group_title
+from converters.BT_21_Part import parse_part_title, merge_part_title
+from converters.BT_21_Procedure import parse_procedure_title, merge_procedure_title
 from converters.BT_22 import parse_internal_identifiers, merge_internal_identifiers
 from converters.BT_23 import parse_main_nature, merge_main_nature
 from converters.BT_24 import parse_description, merge_description
@@ -1076,10 +1079,45 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         print(f"Error parsing Unpublished Identifier: {str(e)}")
 
-    # Parse the lot, lot group, part, and procedure titles (BT-21)
-    title_data = parse_title(xml_content)
-    if title_data:
-        merge_title(release_json, title_data)
+    # Parse and merge BT-21-Lot
+    try:
+        lot_title_data = parse_lot_title(xml_content)
+        if lot_title_data:
+            merge_lot_title(release_json, lot_title_data)
+        else:
+            logger.info("No Lot Title data found")
+    except Exception as e:
+        logger.error(f"Error processing Lot Title data: {str(e)}")
+
+    # Parse and merge BT-21-LotsGroup
+    try:
+        lots_group_title_data = parse_lots_group_title(xml_content)
+        if lots_group_title_data:
+            merge_lots_group_title(release_json, lots_group_title_data)
+        else:
+            logger.info("No Lots Group Title data found")
+    except Exception as e:
+        logger.error(f"Error processing Lots Group Title data: {str(e)}")
+
+    # Parse and merge BT-21-Part
+    try:
+        part_title_data = parse_part_title(xml_content)
+        if part_title_data:
+            merge_part_title(release_json, part_title_data)
+        else:
+            logger.info("No Part Title data found")
+    except Exception as e:
+        logger.error(f"Error processing Part Title data: {str(e)}")
+
+    # Parse and merge BT-21-Procedure
+    try:
+        procedure_title_data = parse_procedure_title(xml_content)
+        if procedure_title_data:
+            merge_procedure_title(release_json, procedure_title_data)
+        else:
+            logger.info("No Procedure Title data found")
+    except Exception as e:
+        logger.error(f"Error processing Procedure Title data: {str(e)}")
 
     # Parse and merge BT-22 Internal Identifiers
     logger.info("Processing BT-22: Internal Identifiers")

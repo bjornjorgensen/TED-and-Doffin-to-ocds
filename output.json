@@ -15,6 +15,7 @@
                 "coveredBy": [
                     "GPA"
                 ],
+                "title": "Agence centre",
                 "identifiers": [
                     {
                         "id": "1",
@@ -36,10 +37,6 @@
                     "hasElectronicAuction": true
                 },
                 "reviewDetails": "Un appel peut..."
-            },
-            {
-                "id": "LOT-0000",
-                "title": "Agence centre"
             }
         ],
         "title": "Service d'entretien de remise en état et de nettoyage des espaces verts",
@@ -142,8 +139,8 @@
                 "scale": "micro"
             },
             "roles": [
-                "supplier",
-                "tenderer"
+                "tenderer",
+                "supplier"
             ],
             "additionalIdentifiers": [
                 {
