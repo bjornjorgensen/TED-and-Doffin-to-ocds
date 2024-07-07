@@ -91,7 +91,7 @@ from converters.BT_500_Organization_Company import parse_organization_name, merg
 from converters.BT_500_Organization_TouchPoint import parse_touchpoint_name, merge_touchpoint_name
 from converters.BT_500_UBO import parse_ubo_name, merge_ubo_name
 from converters.BT_501_Organization_Company import parse_organization_identifier, merge_organization_identifier
-from converters.BT_5010 import parse_eu_funds_financing_identifier, merge_eu_funds_financing_identifier
+from converters.BT_5010_Lot import parse_eu_funds_financing_identifier, merge_eu_funds_financing_identifier
 from converters.BT_5011 import parse_contract_eu_funds_financing_identifier, merge_contract_eu_funds_financing_identifier
 #from converters.BT_502_503_505_506_507 import parse_organization_contact_info, merge_organization_contact_info
 from converters.BT_502_Organization_Company import parse_organization_contact_point, merge_organization_contact_point
@@ -1232,10 +1232,15 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Organization Identifier data: {str(e)}")
 
-    # Parse the EU funds financing identifier (BT-5010)
-    eu_funds_data = parse_eu_funds_financing_identifier(xml_content)
-    # Merge EU funds financing identifier into the release JSON
-    merge_eu_funds_financing_identifier(release_json, eu_funds_data)
+    # Parse and merge BT-5010-Lot EU Funds Financing Identifier
+    try:
+        eu_funds_financing_identifier_data = parse_eu_funds_financing_identifier(xml_content)
+        if eu_funds_financing_identifier_data:
+            merge_eu_funds_financing_identifier(release_json, eu_funds_financing_identifier_data)
+        else:
+            logger.info("No EU Funds Financing Identifier data found")
+    except Exception as e:
+        logger.error(f"Error processing EU Funds Financing Identifier data: {str(e)}")
 
     # Parse the Contract EU funds financing identifier (BT-5011)
     contract_eu_funds_data = parse_contract_eu_funds_financing_identifier(xml_content)
