@@ -88,14 +88,35 @@ from converters.BT_46 import parse_jury_member_name, merge_jury_member_name
 from converters.BT_47 import parse_participant_name, merge_participant_name
 from converters.BT_50 import parse_minimum_candidates, merge_minimum_candidates
 from converters.BT_500_Organization_Company import parse_organization_name, merge_organization_name
+from converters.BT_500_Organization_TouchPoint import parse_touchpoint_name, merge_touchpoint_name
+from converters.BT_500_UBO import parse_ubo_name, merge_ubo_name
+from converters.BT_501_Organization_Company import parse_organization_identifier, merge_organization_identifier
 from converters.BT_5010 import parse_eu_funds_financing_identifier, merge_eu_funds_financing_identifier
 from converters.BT_5011 import parse_contract_eu_funds_financing_identifier, merge_contract_eu_funds_financing_identifier
-from converters.BT_502_503_505_506_507 import parse_organization_contact_info, merge_organization_contact_info
+#from converters.BT_502_503_505_506_507 import parse_organization_contact_info, merge_organization_contact_info
+from converters.BT_502_Organization_Company import parse_organization_contact_point, merge_organization_contact_point
+from converters.BT_502_Organization_TouchPoint import parse_touchpoint_contact_point, merge_touchpoint_contact_point
+from converters.BT_503_Organization_Company import parse_organization_contact_telephone, merge_organization_contact_telephone
+from converters.BT_503_Organization_TouchPoint import parse_touchpoint_contact_telephone, merge_touchpoint_contact_telephone
+from converters.BT_503_UBO import parse_ubo_telephone, merge_ubo_telephone
+from converters.BT_505_Organization_Company import parse_organization_website, merge_organization_website
+from converters.BT_505_Organization_TouchPoint import parse_touchpoint_website, merge_touchpoint_website
+from converters.BT_506_Organization_Company import parse_organization_contact_email, merge_organization_contact_email
+from converters.BT_506_Organization_TouchPoint import parse_touchpoint_contact_email, merge_touchpoint_contact_email
+from converters.BT_506_UBO import parse_ubo_email, merge_ubo_email
+
 from converters.BT_5071 import parse_place_performance_country_subdivision, merge_place_performance_country_subdivision
 from converters.BT_508 import parse_buyer_profile_url, merge_buyer_profile_url
 from converters.BT_509 import parse_edelivery_gateway, merge_edelivery_gateway
 from converters.BT_51 import parse_maximum_candidates_number, merge_maximum_candidates_number
-from converters.BT_510 import parse_street_address, merge_street_address
+from converters.BT_510a_Organization_Company import parse_organization_street, merge_organization_street
+from converters.BT_510a_Organization_TouchPoint import parse_touchpoint_street, merge_touchpoint_street
+from converters.BT_510a_UBO import parse_ubo_street, merge_ubo_street
+from converters.BT_510b_Organization_Company import parse_organization_streetline1, merge_organization_streetline1
+from converters.BT_510b_Organization_TouchPoint import parse_touchpoint_streetline1, merge_touchpoint_streetline1
+from converters.BT_510b_UBO import parse_ubo_streetline1, merge_ubo_streetline1
+from converters.BT_510c_Organization_Company import parse_organization_streetline2, merge_organization_streetline2
+
 from converters.BT_5101 import parse_place_performance_street, merge_place_performance_street
 from converters.BT_512 import parse_organization_post_code, merge_organization_post_code
 from converters.BT_5121 import parse_place_performance_post_code, merge_place_performance_post_code
@@ -1179,6 +1200,36 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Organization Name data: {str(e)}")
 
+    # Parse the organization info BT_500_Organization_TouchPoint
+    try:
+        touchpoint_name_data = parse_touchpoint_name(xml_content)
+        if touchpoint_name_data:
+            merge_touchpoint_name(release_json, touchpoint_name_data)
+        else:
+            logger.info("No TouchPoint Name data found")
+    except Exception as e:
+        logger.error(f"Error processing TouchPoint Name data: {str(e)}")
+
+    # Parse and merge BT_500 Ultimate Beneficial Owner (UBO) Name data
+    try:
+        ubo_name_data = parse_ubo_name(xml_content)
+        if ubo_name_data:
+            merge_ubo_name(release_json, ubo_name_data)
+        else:
+            logger.info("No UBO Name data found")
+    except Exception as e:
+        logger.error(f"Error processing UBO Name data: {str(e)}")
+
+    # Parse and merge BT-501 Organization Identifier data
+    try:
+        organization_identifier_data = parse_organization_identifier(xml_content)
+        if organization_identifier_data:
+            merge_organization_identifier(release_json, organization_identifier_data)
+        else:
+            logger.info("No Organization Identifier data found")
+    except Exception as e:
+        logger.error(f"Error processing Organization Identifier data: {str(e)}")
+
     # Parse the EU funds financing identifier (BT-5010)
     eu_funds_data = parse_eu_funds_financing_identifier(xml_content)
     # Merge EU funds financing identifier into the release JSON
@@ -1189,11 +1240,106 @@ def main(xml_path, ocid_prefix):
     # Merge Contract EU funds financing identifier into the release JSON
     merge_contract_eu_funds_financing_identifier(release_json, contract_eu_funds_data)
 
-    # Parse the organization contact info (BT-502, BT-503, BT-505, BT-506, and BT-507)
-    contact_info_data = parse_organization_contact_info(xml_content)
-    # Merge organization contact info into the release JSON
-    merge_organization_contact_info(release_json, contact_info_data)
+    # Parse and merge BT-502-Organization-Company
+    try:
+        organization_contact_point_data = parse_organization_contact_point(xml_content)
+        if organization_contact_point_data:
+            merge_organization_contact_point(release_json, organization_contact_point_data)
+        else:
+            logger.info("No Organization Contact Point data found")
+    except Exception as e:
+        logger.error(f"Error processing Organization Contact Point data: {str(e)}")
     
+    # Parse and merge BT-502-Organization-TouchPoint
+    try:
+        touchpoint_contact_point_data = parse_touchpoint_contact_point(xml_content)
+        if touchpoint_contact_point_data:
+            merge_touchpoint_contact_point(release_json, touchpoint_contact_point_data)
+        else:
+            logger.info("No TouchPoint Contact Point data found")
+    except Exception as e:
+        logger.error(f"Error processing TouchPoint Contact Point data: {str(e)}")
+
+    # Parse and merge BT-503-Organization-Company
+    try:
+        organization_contact_telephone_data = parse_organization_contact_telephone(xml_content)
+        if organization_contact_telephone_data:
+            merge_organization_contact_telephone(release_json, organization_contact_telephone_data)
+        else:
+            logger.info("No Organization Contact Telephone data found")
+    except Exception as e:
+        logger.error(f"Error processing Organization Contact Telephone data: {str(e)}")
+
+    # Parse and merge BT-503-Organization-TouchPoint
+    try:
+        touchpoint_contact_telephone_data = parse_touchpoint_contact_telephone(xml_content)
+        if touchpoint_contact_telephone_data:
+            merge_touchpoint_contact_telephone(release_json, touchpoint_contact_telephone_data)
+        else:
+            logger.info("No TouchPoint Contact Telephone data found")
+    except Exception as e:
+        logger.error(f"Error processing TouchPoint Contact Telephone data: {str(e)}")
+
+    # Parse and merge BT-503-UBO
+    try:
+        ubo_telephone_data = parse_ubo_telephone(xml_content)
+        if ubo_telephone_data:
+            merge_ubo_telephone(release_json, ubo_telephone_data)
+        else:
+            logger.info("No UBO Telephone data found")
+    except Exception as e:
+        logger.error(f"Error processing UBO Telephone data: {str(e)}")
+
+    # Parse and merge BT-505-Organization-Company
+    try:
+        organization_website_data = parse_organization_website(xml_content)
+        if organization_website_data:
+            merge_organization_website(release_json, organization_website_data)
+        else:
+            logger.info("No Organization Website data found")
+    except Exception as e:
+        logger.error(f"Error processing Organization Website data: {str(e)}")
+
+    # Parse and merge BT-505-Organization-TouchPoint
+    try:
+        touchpoint_website_data = parse_touchpoint_website(xml_content)
+        if touchpoint_website_data:
+            merge_touchpoint_website(release_json, touchpoint_website_data)
+        else:
+            logger.info("No TouchPoint Website data found")
+    except Exception as e:
+        logger.error(f"Error processing TouchPoint Website data: {str(e)}")
+
+    # Parse and merge BT-506-Organization-Company
+    try:
+        organization_contact_email_data = parse_organization_contact_email(xml_content)
+        if organization_contact_email_data:
+            merge_organization_contact_email(release_json, organization_contact_email_data)
+        else:
+            logger.info("No Organization Contact Email data found")
+    except Exception as e:
+        logger.error(f"Error processing Organization Contact Email data: {str(e)}")
+
+    # Parse and merge BT-506-Organization-TouchPoint
+    try:
+        touchpoint_contact_email_data = parse_touchpoint_contact_email(xml_content)
+        if touchpoint_contact_email_data:
+            merge_touchpoint_contact_email(release_json, touchpoint_contact_email_data)
+        else:
+            logger.info("No TouchPoint Contact Email data found")
+    except Exception as e:
+        logger.error(f"Error processing TouchPoint Contact Email data: {str(e)}")
+
+    # Parse and merge BT-506-UBO
+    try:
+        ubo_email_data = parse_ubo_email(xml_content)
+        if ubo_email_data:
+            merge_ubo_email(release_json, ubo_email_data)
+        else:
+            logger.info("No UBO Email data found")
+    except Exception as e:
+        logger.error(f"Error processing UBO Email data: {str(e)}")
+
     # Parse the place performance country subdivision (BT-5071)
     place_performance_data = parse_place_performance_country_subdivision(xml_content)
     # Merge place performance country subdivision into the release JSON
@@ -1214,10 +1360,75 @@ def main(xml_path, ocid_prefix):
     # Merge maximum candidates number into the release JSON
     merge_maximum_candidates_number(release_json, maximum_candidates_data)
 
-    # Parse the street address (BT-510)
-    street_address_data = parse_street_address(xml_content)
-    # Merge street address into the release JSON
-    merge_street_address(release_json, street_address_data)
+    # Parse and merge BT-510(a)-Organization-Company
+    try:
+        organization_street_data = parse_organization_street(xml_content)
+        if organization_street_data:
+            merge_organization_street(release_json, organization_street_data)
+        else:
+            logger.info("No Organization Street data found")
+    except Exception as e:
+        logger.error(f"Error processing Organization Street data: {str(e)}")
+
+    # Parse and merge BT-510(a)-Organization-TouchPoint
+    try:
+        touchpoint_street_data = parse_touchpoint_street(xml_content)
+        if touchpoint_street_data:
+            merge_touchpoint_street(release_json, touchpoint_street_data)
+        else:
+            logger.info("No TouchPoint Street data found")
+    except Exception as e:
+        logger.error(f"Error processing TouchPoint Street data: {str(e)}")
+
+    # Parse and merge BT-510(a)-UBO
+    try:
+        ubo_street_data = parse_ubo_street(xml_content)
+        if ubo_street_data:
+            merge_ubo_street(release_json, ubo_street_data)
+        else:
+            logger.info("No UBO Street data found")
+    except Exception as e:
+        logger.error(f"Error processing UBO Street data: {str(e)}")
+
+    # Parse and merge BT-510(b)-Organization-Company
+    try:
+        organization_streetline1_data = parse_organization_streetline1(xml_content)
+        if organization_streetline1_data:
+            merge_organization_streetline1(release_json, organization_streetline1_data)
+        else:
+            logger.info("No Organization Streetline 1 data found")
+    except Exception as e:
+        logger.error(f"Error processing Organization Streetline 1 data: {str(e)}")
+
+    # Parse and merge BT-510(b)-Organization-TouchPoint
+    try:
+        touchpoint_streetline1_data = parse_touchpoint_streetline1(xml_content)
+        if touchpoint_streetline1_data:
+            merge_touchpoint_streetline1(release_json, touchpoint_streetline1_data)
+        else:
+            logger.info("No TouchPoint Streetline 1 data found")
+    except Exception as e:
+        logger.error(f"Error processing TouchPoint Streetline 1 data: {str(e)}")
+
+    # Parse and merge BT-510(b)-UBO
+    try:
+        ubo_streetline1_data = parse_ubo_streetline1(xml_content)
+        if ubo_streetline1_data:
+            merge_ubo_streetline1(release_json, ubo_streetline1_data)
+        else:
+            logger.info("No UBO Streetline 1 data found")
+    except Exception as e:
+        logger.error(f"Error processing UBO Streetline 1 data: {str(e)}")
+
+    # Parse and merge BT-510(c)-Organization-Company
+    try:
+        organization_streetline2_data = parse_organization_streetline2(xml_content)
+        if organization_streetline2_data:
+            merge_organization_streetline2(release_json, organization_streetline2_data)
+        else:
+            logger.info("No Organization Streetline 2 data found")
+    except Exception as e:
+        logger.error(f"Error processing Organization Streetline 2 data: {str(e)}")
 
     # Parse the place performance street (BT-5101)
     place_performance_street_data = parse_place_performance_street(xml_content)
@@ -2223,7 +2434,7 @@ def main(xml_path, ocid_prefix):
 
 if __name__ == "__main__":
     # Path to the XML file
-    xml_path = 'xmlfile/2023-684186.xml'
+    xml_path = 'xmlfile/2024-100506.xml'
     # Prefix for OCID
     ocid_prefix = 'ocid_prefix_value'
     
