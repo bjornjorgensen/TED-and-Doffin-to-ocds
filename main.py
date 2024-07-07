@@ -92,8 +92,7 @@ from converters.BT_500_Organization_TouchPoint import parse_touchpoint_name, mer
 from converters.BT_500_UBO import parse_ubo_name, merge_ubo_name
 from converters.BT_501_Organization_Company import parse_organization_identifier, merge_organization_identifier
 from converters.BT_5010_Lot import parse_eu_funds_financing_identifier, merge_eu_funds_financing_identifier
-from converters.BT_5011 import parse_contract_eu_funds_financing_identifier, merge_contract_eu_funds_financing_identifier
-#from converters.BT_502_503_505_506_507 import parse_organization_contact_info, merge_organization_contact_info
+from converters.BT_5011_Contract import parse_contract_eu_funds_financing_identifier, merge_contract_eu_funds_financing_identifier
 from converters.BT_502_Organization_Company import parse_organization_contact_point, merge_organization_contact_point
 from converters.BT_502_Organization_TouchPoint import parse_touchpoint_contact_point, merge_touchpoint_contact_point
 from converters.BT_503_Organization_Company import parse_organization_contact_telephone, merge_organization_contact_telephone
@@ -1242,10 +1241,15 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing EU Funds Financing Identifier data: {str(e)}")
 
-    # Parse the Contract EU funds financing identifier (BT-5011)
-    contract_eu_funds_data = parse_contract_eu_funds_financing_identifier(xml_content)
-    # Merge Contract EU funds financing identifier into the release JSON
-    merge_contract_eu_funds_financing_identifier(release_json, contract_eu_funds_data)
+    # Parse and merge BT-5011-Contract EU Funds Financing Identifier
+    try:
+        contract_eu_funds_financing_identifier_data = parse_contract_eu_funds_financing_identifier(xml_content)
+        if contract_eu_funds_financing_identifier_data:
+            merge_contract_eu_funds_financing_identifier(release_json, contract_eu_funds_financing_identifier_data)
+        else:
+            logger.info("No Contract EU Funds Financing Identifier data found")
+    except Exception as e:
+        logger.error(f"Error processing Contract EU Funds Financing Identifier data: {str(e)}")
 
     # Parse and merge BT-502-Organization-Company
     try:
@@ -2467,7 +2471,7 @@ def main(xml_path, ocid_prefix):
 
 if __name__ == "__main__":
     # Path to the XML file
-    xml_path = 'xmlfile/2024-100506.xml'
+    xml_path = 'xmlfile/can_24_minimal.xml'
     # Prefix for OCID
     ocid_prefix = 'ocid_prefix_value'
     
