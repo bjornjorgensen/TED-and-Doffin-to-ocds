@@ -52,8 +52,8 @@
         ]
     },
     "tag": [
-        "award",
-        "contract"
+        "contract",
+        "award"
     ],
     "date": "2019-10-23T00:00:00+01:00",
     "parties": [
@@ -87,17 +87,18 @@
                 "telephone": "+33 235156161",
                 "email": "contact@rouenhabitat.fr"
             },
+            "address": {
+                "region": "FRD22",
+                "postalCode": "ABC123",
+                "locality": "Rouen Cedex 1",
+                "country": "FR"
+            },
             "beneficialOwners": [
                 {
                     "id": "UBO-0001",
                     "nationality": "FR"
                 }
-            ],
-            "address": {
-                "postalCode": "ABC123",
-                "locality": "Rouen Cedex 1",
-                "country": "FR"
-            }
+            ]
         },
         {
             "id": "ORG-0002",
@@ -108,17 +109,18 @@
                     "scheme": "GB-COH"
                 }
             ],
+            "address": {
+                "region": "FRD22",
+                "postalCode": "ABC123",
+                "locality": "Rouen",
+                "country": "FR"
+            },
             "beneficialOwners": [
                 {
                     "id": "UBO-0001",
                     "nationality": "FR"
                 }
             ],
-            "address": {
-                "postalCode": "ABC123",
-                "locality": "Rouen",
-                "country": "FR"
-            },
             "roles": [
                 "reviewBody"
             ]
@@ -131,8 +133,8 @@
                 "listedOnRegulatedMarket": false
             },
             "roles": [
-                "tenderer",
-                "supplier"
+                "supplier",
+                "tenderer"
             ],
             "additionalIdentifiers": [
                 {
@@ -144,17 +146,18 @@
                 "telephone": "+33 2 35 67 82 82",
                 "email": "contact@example.com"
             },
+            "address": {
+                "region": "FRD22",
+                "postalCode": "ABC123",
+                "locality": "Le Grand-Quevilly",
+                "country": "FR"
+            },
             "beneficialOwners": [
                 {
                     "id": "UBO-0001",
                     "nationality": "FR"
                 }
-            ],
-            "address": {
-                "postalCode": "ABC123",
-                "locality": "Le Grand-Quevilly",
-                "country": "FR"
-            }
+            ]
         }
     ],
     "awards": [

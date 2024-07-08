@@ -124,7 +124,9 @@ from converters.BT_505_Organization_TouchPoint import parse_touchpoint_website, 
 from converters.BT_506_Organization_Company import parse_organization_contact_email, merge_organization_contact_email
 from converters.BT_506_Organization_TouchPoint import parse_touchpoint_contact_email, merge_touchpoint_contact_email
 from converters.BT_506_UBO import parse_ubo_email, merge_ubo_email
-
+from converters.BT_507_Organization_Company import parse_organization_country_subdivision, merge_organization_country_subdivision
+from converters.BT_507_Organization_TouchPoint import parse_touchpoint_country_subdivision, merge_touchpoint_country_subdivision
+from converters.BT_507_UBO import parse_ubo_country_subdivision, merge_ubo_country_subdivision
 from converters.BT_5071 import parse_place_performance_country_subdivision, merge_place_performance_country_subdivision
 from converters.BT_508 import parse_buyer_profile_url, merge_buyer_profile_url
 from converters.BT_509 import parse_edelivery_gateway, merge_edelivery_gateway
@@ -1649,6 +1651,36 @@ def main(xml_path, ocid_prefix):
             logger.info("No UBO Email data found")
     except Exception as e:
         logger.error(f"Error processing UBO Email data: {str(e)}")
+    
+    # Parse and merge BT-507-Organization-Company
+    try:
+        organization_country_subdivision_data = parse_organization_country_subdivision(xml_content)
+        if organization_country_subdivision_data:
+            merge_organization_country_subdivision(release_json, organization_country_subdivision_data)
+        else:
+            logger.info("No organization country subdivision data found")
+    except Exception as e:
+        logger.error(f"Error processing organization country subdivision data: {str(e)}")
+
+    # Parse and merge BT-507-Organization-TouchPoint
+    try:
+        touchpoint_country_subdivision_data = parse_touchpoint_country_subdivision(xml_content)
+        if touchpoint_country_subdivision_data:
+            merge_touchpoint_country_subdivision(release_json, touchpoint_country_subdivision_data)
+        else:
+            logger.info("No touchpoint country subdivision data found")
+    except Exception as e:
+        logger.error(f"Error processing touchpoint country subdivision data: {str(e)}")
+
+    # Parse and merge BT-507-UBO
+    try:
+        ubo_country_subdivision_data = parse_ubo_country_subdivision(xml_content)
+        if ubo_country_subdivision_data:
+            merge_ubo_country_subdivision(release_json, ubo_country_subdivision_data)
+        else:
+            logger.info("No UBO country subdivision data found")
+    except Exception as e:
+        logger.error(f"Error processing UBO country subdivision data: {str(e)}")
 
     # Parse the place performance country subdivision (BT-5071)
     place_performance_data = parse_place_performance_country_subdivision(xml_content)
