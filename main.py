@@ -99,7 +99,7 @@ from converters.BT_33 import parse_lots_max_awarded, merge_lots_max_awarded
 from converters.BT_330 import parse_procedure_group_identifier, merge_procedure_group_identifier
 from converters.BT_36_Lot import parse_lot_duration, merge_lot_duration
 from converters.BT_36_Part import parse_part_duration, merge_part_duration
-from converters.BT_40 import parse_selection_criteria_second_stage, merge_selection_criteria_second_stage
+from converters.BT_40_Lot import parse_lot_selection_criteria_second_stage, merge_lot_selection_criteria_second_stage
 from converters.BT_41 import parse_following_contract, merge_following_contract
 from converters.BT_42 import parse_jury_decision_binding, merge_jury_decision_binding
 from converters.BT_44 import parse_prize_rank, merge_prize_rank
@@ -1437,10 +1437,15 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing part duration data: {str(e)}")
 
-    # Parse the selection criteria second stage (BT-40)
-    selection_criteria_data = parse_selection_criteria_second_stage(xml_content)
-    # Merge selection criteria second stage into the release JSON
-    merge_selection_criteria_second_stage(release_json, selection_criteria_data)
+    # Parse and merge BT-40-Lot
+    try:
+        lot_selection_criteria_data = parse_lot_selection_criteria_second_stage(xml_content)
+        if lot_selection_criteria_data:
+            merge_lot_selection_criteria_second_stage(release_json, lot_selection_criteria_data)
+        else:
+            logger.info("No lot selection criteria second stage data found")
+    except Exception as e:
+        logger.error(f"Error processing lot selection criteria second stage data: {str(e)}")
 
     # Parse the following contract (BT-41)
     following_contract_data = parse_following_contract(xml_content)
