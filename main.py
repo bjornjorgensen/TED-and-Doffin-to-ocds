@@ -44,7 +44,7 @@ from converters.BT_136 import parse_direct_award_justification_code
 from converters.BT_137_Purpose_Lot_Identifier import parse_purpose_lot_identifier, merge_purpose_lot_identifier
 from converters.BT_14_Lot import parse_lot_documents_restricted, merge_lot_documents_restricted
 from converters.BT_14_Part import parse_part_documents_restricted, merge_part_documents_restricted
-from converters.BT_140 import parse_change_reason_code_and_description
+from converters.BT_140_notice import parse_change_reason_code, merge_change_reason_code
 from converters.BT_142 import parse_winner_chosen
 from converters.BT_144 import parse_not_awarded_reason
 from converters.BT_145_Contract import parse_contract_conclusion_date, merge_contract_conclusion_date
@@ -772,37 +772,22 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing part documents restricted data: {str(e)}")
 
-    # Parse the Change Reason Code and Description (BT-140 and BT-141(a))
+    # Parse and merge BT-140-notice
     try:
-        change_data = parse_change_reason_code_and_description(xml_content)
-        
-        # Merge Change Reason Code and Description into the release JSON
-        if change_data:
-            # Merge tender amendments
-            if "amendments" in change_data["tender"]:
-                existing_amendments = release_json.setdefault("tender", {}).setdefault("amendments", [])
-                new_amendments = change_data["tender"]["amendments"]
-                for new_amendment in new_amendments:
-                    new_amendment["id"] = str(len(existing_amendments) + 1)
-                    existing_amendments.append(new_amendment)
-
-            # Merge award amendments
-            if "awards" in change_data:
-                existing_awards = release_json.setdefault("awards", [])
-                for new_award in change_data["awards"]:
-                    existing_award = next((a for a in existing_awards if a["id"] == new_award["id"]), None)
-                    if existing_award:
-                        existing_award.setdefault("amendments", []).extend(new_award["amendments"])
-                        for amendment in existing_award["amendments"]:
-                            amendment["id"] = str(len(existing_award["amendments"]))
-                    else:
-                        for amendment in new_award["amendments"]:
-                            amendment["id"] = str(len(new_award["amendments"]))
-                        existing_awards.append(new_award)
-
+        change_reason_code_data = parse_change_reason_code(xml_content)
+        if change_reason_code_data:
+            merge_change_reason_code(release_json, change_reason_code_data)
+        else:
+            logger.info("No change reason code data found")
     except Exception as e:
-        print(f"Error parsing Change Reason Code and Description: {str(e)}")
+        logger.error(f"Error processing change reason code data: {str(e)}")
 
+
+    #BT-141(a) is missing
+    
+    
+    
+    
     # Parse the Winner Chosen (BT-142)
     try:
         winner_chosen = parse_winner_chosen(xml_content)
