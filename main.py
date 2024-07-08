@@ -46,7 +46,7 @@ from converters.BT_14_Lot import parse_lot_documents_restricted, merge_lot_docum
 from converters.BT_14_Part import parse_part_documents_restricted, merge_part_documents_restricted
 from converters.BT_140_notice import parse_change_reason_code, merge_change_reason_code
 from converters.BT_142_LotResult import parse_winner_chosen, merge_winner_chosen
-from converters.BT_144 import parse_not_awarded_reason
+from converters.BT_144_LotResult import parse_not_awarded_reason, merge_not_awarded_reason
 from converters.BT_145_Contract import parse_contract_conclusion_date, merge_contract_conclusion_date
 from converters.BT_1451_Contract import parse_winner_decision_date, merge_winner_decision_date
 from converters.BT_15 import parse_documents_url
@@ -792,22 +792,15 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing winner chosen data: {str(e)}")
 
-    # Parse the Not Awarded Reason (BT-144)
+    # Parse and merge BT-144-LotResult
     try:
-        not_awarded_reason = parse_not_awarded_reason(xml_content)
-        
-        # Merge Not Awarded Reason into the release JSON
-        if not_awarded_reason and "awards" in not_awarded_reason:
-            existing_awards = release_json.setdefault("awards", [])
-            for new_award in not_awarded_reason["awards"]:
-                existing_award = next((award for award in existing_awards if award["id"] == new_award["id"]), None)
-                if existing_award:
-                    existing_award.update(new_award)
-                else:
-                    existing_awards.append(new_award)
-
+        not_awarded_reason_data = parse_not_awarded_reason(xml_content)
+        if not_awarded_reason_data:
+            merge_not_awarded_reason(release_json, not_awarded_reason_data)
+        else:
+            logger.info("No not awarded reason data found")
     except Exception as e:
-        print(f"Error parsing Not Awarded Reason: {str(e)}")
+        logger.error(f"Error processing not awarded reason data: {str(e)}")
 
     # Parse and merge BT-145 Contract Conclusion Date
     logger.info("Processing BT-145: Contract Conclusion Date")
