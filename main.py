@@ -84,8 +84,13 @@ from converters.BT_262_procedure import parse_main_classification_code_procedure
 from converters.BT_263_lot import parse_additional_classification_code_lot, merge_additional_classification_code_lot
 from converters.BT_263_part import parse_additional_classification_code_part, merge_additional_classification_code_part
 from converters.BT_263_procedure import parse_additional_classification_code_procedure, merge_additional_classification_code_procedure
-from converters.BT_27 import parse_estimated_value, merge_estimated_value
-from converters.BT_271 import parse_framework_maximum_value, merge_framework_maximum_value
+from converters.BT_27_Lot import parse_bt_27_lot, merge_bt_27_lot
+from converters.BT_27_LotsGroup import parse_bt_27_lots_group, merge_bt_27_lots_group
+from converters.BT_27_Part import parse_bt_27_part, merge_bt_27_part
+from converters.BT_27_Procedure import parse_bt_27_procedure, merge_bt_27_procedure
+from converters.BT_271_Lot import parse_bt_271_lot, merge_bt_271_lot
+from converters.BT_271_LotsGroup import parse_bt_271_lots_group, merge_bt_271_lots_group
+from converters.BT_271_Procedure import parse_bt_271_procedure, merge_bt_271_procedure
 from converters.BT_300 import parse_additional_information, merge_additional_information
 from converters.BT_31 import parse_lots_max_allowed, merge_lots_max_allowed
 from converters.BT_3201 import parse_tender_identifier, merge_tender_identifier
@@ -1304,15 +1309,82 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Additional Classification Code data for Procedure: {str(e)}")
 
-    # Parse the estimated value (BT-27)
-    estimated_value_data = parse_estimated_value(xml_content)
-    # Merge estimated value into the release JSON
-    merge_estimated_value(release_json, estimated_value_data)
+    # Parse and merge BT-27-Lot Estimated Value
+    try:
+        bt_27_lot_data = parse_bt_27_lot(xml_content)
+        if bt_27_lot_data["tender"]["lots"]:
+            merge_bt_27_lot(release_json, bt_27_lot_data)
+            logger.info("Merged BT-27-Lot Estimated Value data")
+        else:
+            logger.info("No BT-27-Lot Estimated Value data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-27-Lot Estimated Value data: {str(e)}")
 
-    # Parse the framework maximum value (BT-271)
-    framework_max_value_data = parse_framework_maximum_value(xml_content)
-    # Merge framework maximum value into the release JSON
-    merge_framework_maximum_value(release_json, framework_max_value_data)
+    # Parse and merge BT-27-LotsGroup Estimated Value
+    try:
+        bt_27_lots_group_data = parse_bt_27_lots_group(xml_content)
+        if bt_27_lots_group_data["tender"]["lotGroups"]:
+            merge_bt_27_lots_group(release_json, bt_27_lots_group_data)
+            logger.info("Merged BT-27-LotsGroup Estimated Value data")
+        else:
+            logger.info("No BT-27-LotsGroup Estimated Value data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-27-LotsGroup Estimated Value data: {str(e)}")
+
+    # Parse and merge BT-27-Part Estimated Value
+    try:
+        bt_27_part_data = parse_bt_27_part(xml_content)
+        if bt_27_part_data["tender"].get("value"):
+            merge_bt_27_part(release_json, bt_27_part_data)
+            logger.info("Merged BT-27-Part Estimated Value data")
+        else:
+            logger.info("No BT-27-Part Estimated Value data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-27-Part Estimated Value data: {str(e)}")
+
+    # Parse and merge BT-27-Procedure Estimated Value
+    try:
+        bt_27_procedure_data = parse_bt_27_procedure(xml_content)
+        if bt_27_procedure_data["tender"].get("value"):
+            merge_bt_27_procedure(release_json, bt_27_procedure_data)
+            logger.info("Merged BT-27-Procedure Estimated Value data")
+        else:
+            logger.info("No BT-27-Procedure Estimated Value data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-27-Procedure Estimated Value data: {str(e)}")
+
+    # Parse and merge BT-271-Lot Framework Maximum Value
+    try:
+        bt_271_lot_data = parse_bt_271_lot(xml_content)
+        if bt_271_lot_data["tender"]["lots"]:
+            merge_bt_271_lot(release_json, bt_271_lot_data)
+            logger.info("Merged BT-271-Lot Framework Maximum Value data")
+        else:
+            logger.info("No BT-271-Lot Framework Maximum Value data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-271-Lot Framework Maximum Value data: {str(e)}")
+
+    # Parse and merge BT-271-LotsGroup Framework Maximum Value
+    try:
+        bt_271_lots_group_data = parse_bt_271_lots_group(xml_content)
+        if bt_271_lots_group_data["tender"]["lotGroups"]:
+            merge_bt_271_lots_group(release_json, bt_271_lots_group_data)
+            logger.info("Merged BT-271-LotsGroup Framework Maximum Value data")
+        else:
+            logger.info("No BT-271-LotsGroup Framework Maximum Value data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-271-LotsGroup Framework Maximum Value data: {str(e)}")
+
+    # Parse and merge BT-271-Procedure Framework Maximum Value
+    try:
+        bt_271_procedure_data = parse_bt_271_procedure(xml_content)
+        if bt_271_procedure_data["tender"].get("techniques"):
+            merge_bt_271_procedure(release_json, bt_271_procedure_data)
+            logger.info("Merged BT-271-Procedure Framework Maximum Value data")
+        else:
+            logger.info("No BT-271-Procedure Framework Maximum Value data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-271-Procedure Framework Maximum Value data: {str(e)}")
 
     # Parse the additional information (BT-300)
     additional_info_data = parse_additional_information(xml_content)
