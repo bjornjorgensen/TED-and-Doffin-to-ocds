@@ -1,8 +1,8 @@
-# BT_26a_lot.py
+# BT_263_part.py
 
 from lxml import etree
 
-def parse_classification_type(xml_content):
+def parse_additional_classification_code_part(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
@@ -11,34 +11,31 @@ def parse_classification_type(xml_content):
 
     result = {"tender": {"items": []}}
 
-    lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    parts = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']", namespaces=namespaces)
     
-    for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        classifications = lot.xpath("cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode", namespaces=namespaces)
+    for part in parts:
+        classifications = part.xpath("cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode", namespaces=namespaces)
         
         if classifications:
             item = {
                 "id": str(len(result["tender"]["items"]) + 1),
-                "additionalClassifications": [],
-                "relatedLot": lot_id
+                "additionalClassifications": []
             }
             
             for classification in classifications:
+                code = classification.text
                 scheme = classification.get("listName", "").upper()
-                if scheme:
-                    item["additionalClassifications"].append({"scheme": scheme})
+                item["additionalClassifications"].append({"id": code, "scheme": scheme})
             
-            if item["additionalClassifications"]:
-                result["tender"]["items"].append(item)
+            result["tender"]["items"].append(item)
 
     return result
 
-def merge_classification_type(release_json, classification_type_data):
+def merge_additional_classification_code_part(release_json, classification_code_data):
     existing_items = release_json.setdefault("tender", {}).setdefault("items", [])
     
-    for new_item in classification_type_data["tender"]["items"]:
-        existing_item = next((item for item in existing_items if item.get("relatedLot") == new_item["relatedLot"]), None)
+    for new_item in classification_code_data["tender"]["items"]:
+        existing_item = next((item for item in existing_items if item["id"] == new_item["id"]), None)
         
         if existing_item:
             existing_classifications = existing_item.setdefault("additionalClassifications", [])

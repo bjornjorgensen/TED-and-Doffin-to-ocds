@@ -81,7 +81,9 @@ from converters.BT_26m_procedure import parse_main_classification_type_procedure
 from converters.BT_262_lot import parse_main_classification_code_lot, merge_main_classification_code_lot
 from converters.BT_262_part import parse_main_classification_code_part, merge_main_classification_code_part
 from converters.BT_262_procedure import parse_main_classification_code_procedure, merge_main_classification_code_procedure
-
+from converters.BT_263_lot import parse_additional_classification_code_lot, merge_additional_classification_code_lot
+from converters.BT_263_part import parse_additional_classification_code_part, merge_additional_classification_code_part
+from converters.BT_263_procedure import parse_additional_classification_code_procedure, merge_additional_classification_code_procedure
 from converters.BT_27 import parse_estimated_value, merge_estimated_value
 from converters.BT_271 import parse_framework_maximum_value, merge_framework_maximum_value
 from converters.BT_300 import parse_additional_information, merge_additional_information
@@ -1268,6 +1270,39 @@ def main(xml_path, ocid_prefix):
             logger.info("No Main Classification Code data found for Procedure")
     except Exception as e:
         logger.error(f"Error processing Main Classification Code data for Procedure: {str(e)}")
+
+    # Parse and merge Additional Classification Code for Lot BT_263_lot
+    try:
+        additional_classification_code_data = parse_additional_classification_code_lot(xml_content)
+        if additional_classification_code_data["tender"]["items"]:
+            merge_additional_classification_code_lot(release_json, additional_classification_code_data)
+            logger.info("Merged Additional Classification Code data for Lot")
+        else:
+            logger.info("No Additional Classification Code data found for Lot")
+    except Exception as e:
+        logger.error(f"Error processing Additional Classification Code data for Lot: {str(e)}")
+
+    # Parse and merge Additional Classification Code for Part BT_263_part
+    try:
+        additional_classification_code_part_data = parse_additional_classification_code_part(xml_content)
+        if additional_classification_code_part_data["tender"]["items"]:
+            merge_additional_classification_code_part(release_json, additional_classification_code_part_data)
+            logger.info("Merged Additional Classification Code data for Part")
+        else:
+            logger.info("No Additional Classification Code data found for Part")
+    except Exception as e:
+        logger.error(f"Error processing Additional Classification Code data for Part: {str(e)}")
+
+    # Parse and merge Additional Classification Code for Procedure BT_263_procedure
+    try:
+        additional_classification_code_procedure_data = parse_additional_classification_code_procedure(xml_content)
+        if additional_classification_code_procedure_data["tender"]["items"]:
+            merge_additional_classification_code_procedure(release_json, additional_classification_code_procedure_data)
+            logger.info("Merged Additional Classification Code data for Procedure")
+        else:
+            logger.info("No Additional Classification Code data found for Procedure")
+    except Exception as e:
+        logger.error(f"Error processing Additional Classification Code data for Procedure: {str(e)}")
 
     # Parse the estimated value (BT-27)
     estimated_value_data = parse_estimated_value(xml_content)

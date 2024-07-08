@@ -1,4 +1,4 @@
-# tests/test_BT_26a_lot.py
+# tests/test_BT_263_lot.py
 
 import pytest
 import json
@@ -9,7 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
-def test_bt_26a_lot_integration(tmp_path):
+def test_bt_263_lot_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -23,7 +23,7 @@ def test_bt_26a_lot_integration(tmp_path):
         </cac:ProcurementProjectLot>
     </root>
     """
-    xml_file = tmp_path / "test_input_classification_type.xml"
+    xml_file = tmp_path / "test_input_additional_classification_code_lot.xml"
     xml_file.write_text(xml_content)
 
     result = main(str(xml_file), "ocds-test-prefix")
@@ -36,8 +36,8 @@ def test_bt_26a_lot_integration(tmp_path):
     assert item["relatedLot"] == "LOT-0001"
     assert "additionalClassifications" in item
     assert len(item["additionalClassifications"]) == 1
+    assert item["additionalClassifications"][0]["id"] == "15311200"
     assert item["additionalClassifications"][0]["scheme"] == "CPV"
-    assert "id" in item["additionalClassifications"][0]
 
 if __name__ == "__main__":
     pytest.main()

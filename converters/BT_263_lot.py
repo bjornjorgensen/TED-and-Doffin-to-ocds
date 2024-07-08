@@ -1,8 +1,8 @@
-# BT_26a_lot.py
+# BT_263_lot.py
 
 from lxml import etree
 
-def parse_classification_type(xml_content):
+def parse_additional_classification_code_lot(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
@@ -25,19 +25,18 @@ def parse_classification_type(xml_content):
             }
             
             for classification in classifications:
+                code = classification.text
                 scheme = classification.get("listName", "").upper()
-                if scheme:
-                    item["additionalClassifications"].append({"scheme": scheme})
+                item["additionalClassifications"].append({"id": code, "scheme": scheme})
             
-            if item["additionalClassifications"]:
-                result["tender"]["items"].append(item)
+            result["tender"]["items"].append(item)
 
     return result
 
-def merge_classification_type(release_json, classification_type_data):
+def merge_additional_classification_code_lot(release_json, classification_code_data):
     existing_items = release_json.setdefault("tender", {}).setdefault("items", [])
     
-    for new_item in classification_type_data["tender"]["items"]:
+    for new_item in classification_code_data["tender"]["items"]:
         existing_item = next((item for item in existing_items if item.get("relatedLot") == new_item["relatedLot"]), None)
         
         if existing_item:
