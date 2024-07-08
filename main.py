@@ -40,7 +40,7 @@ from converters.BT_133_Lot import parse_public_opening_place, merge_public_openi
 from converters.BT_134 import parse_public_opening_description
 from converters.BT_135 import parse_direct_award_justification_text
 from converters.BT_1351 import parse_procedure_accelerated_justification
-from converters.BT_136 import parse_direct_award_justification_code
+from converters.BT_136_Procedure import parse_direct_award_justification, merge_direct_award_justification
 from converters.BT_137_Purpose_Lot_Identifier import parse_purpose_lot_identifier, merge_purpose_lot_identifier
 from converters.BT_14_Lot import parse_lot_documents_restricted, merge_lot_documents_restricted
 from converters.BT_14_Part import parse_part_documents_restricted, merge_part_documents_restricted
@@ -730,19 +730,15 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         print(f"Error parsing Procedure Accelerated Justification: {str(e)}")
 
-    # Parse the Direct Award Justification Code (BT-136)
+    # Parse and merge BT-136-Procedure
     try:
-        direct_award_justification_code = parse_direct_award_justification_code(xml_content)
-        
-        # Merge Direct Award Justification Code into the release JSON
-        if direct_award_justification_code:
-            tender = release_json.setdefault("tender", {})
-            tender.setdefault("procurementMethodRationaleClassifications", []).extend(
-                direct_award_justification_code["tender"]["procurementMethodRationaleClassifications"]
-            )
-
+        direct_award_justification_data = parse_direct_award_justification(xml_content)
+        if direct_award_justification_data:
+            merge_direct_award_justification(release_json, direct_award_justification_data)
+        else:
+            logger.info("No direct award justification data found")
     except Exception as e:
-        print(f"Error parsing Direct Award Justification Code: {str(e)}")
+        logger.error(f"Error processing direct award justification data: {str(e)}")
 
     # Parse and merge BT-137 Purpose Lot Identifier
     logger.info("Processing BT-137: Purpose Lot Identifier")
