@@ -49,7 +49,7 @@ from converters.BT_142_LotResult import parse_winner_chosen, merge_winner_chosen
 from converters.BT_144_LotResult import parse_not_awarded_reason, merge_not_awarded_reason
 from converters.BT_145_Contract import parse_contract_conclusion_date, merge_contract_conclusion_date
 from converters.BT_1451_Contract import parse_winner_decision_date, merge_winner_decision_date
-from converters.BT_15 import parse_documents_url
+from converters.BT_15_Lot_Part import parse_documents_url, merge_documents_url
 from converters.BT_150 import parse_contract_identifier
 from converters.BT_151 import parse_contract_url
 from converters.BT_16 import parse_organisation_part_name
@@ -814,26 +814,15 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Winner Decision Date found")
 
-    # Parse the Documents URL (BT-15)
+    # Parse and merge BT-15-Lot-Part
     try:
-        documents_url = parse_documents_url(xml_content)
-        
-        # Merge Documents URL into the release JSON
-        if documents_url and "documents" in documents_url["tender"]:
-            existing_documents = release_json.setdefault("tender", {}).setdefault("documents", [])
-            for new_doc in documents_url["tender"]["documents"]:
-                existing_doc = next((doc for doc in existing_documents if doc["id"] == new_doc["id"]), None)
-                if existing_doc:
-                    existing_doc.update(new_doc)
-                    if "relatedLots" in new_doc:
-                        existing_doc.setdefault("relatedLots", []).extend(
-                            lot for lot in new_doc["relatedLots"] if lot not in existing_doc.get("relatedLots", [])
-                        )
-                else:
-                    existing_documents.append(new_doc)
-
+        documents_url_data = parse_documents_url(xml_content)
+        if documents_url_data:
+            merge_documents_url(release_json, documents_url_data)
+        else:
+            logger.info("No documents URL data found")
     except Exception as e:
-        print(f"Error parsing Documents URL: {str(e)}")
+        logger.error(f"Error processing documents URL data: {str(e)}")
 
     # Parse the Contract Identifier (BT-150)
     try:
