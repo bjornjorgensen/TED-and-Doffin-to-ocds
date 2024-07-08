@@ -40,6 +40,8 @@ def parse_change_reason_code(xml_content):
 
         for i, change in enumerate(change_elements, start=1):
             section_identifier = change.xpath("efbc:ChangedSectionIdentifier/text()", namespaces=namespaces)
+            change_description = change.xpath("efbc:ChangeDescription/text()", namespaces=namespaces)
+            
             if not section_identifier:
                 continue
 
@@ -54,6 +56,9 @@ def parse_change_reason_code(xml_content):
                     }
                 ]
             }
+
+            if change_description:
+                amendment["description"] = change_description[0]
 
             if section_identifier.startswith("RES-"):
                 award = next((a for a in result["awards"] if a["id"] == section_identifier), None)
@@ -86,4 +91,4 @@ def merge_change_reason_code(release_json, change_reason_code_data):
         else:
             existing_awards.append(new_award)
 
-    logger.info(f"Merged change reason code data for {len(change_reason_code_data['tender']['amendments'])} tender amendments and {len(change_reason_code_data['awards'])} awards")
+    logger.info(f"Merged change reason code and description data for {len(change_reason_code_data['tender']['amendments'])} tender amendments and {len(change_reason_code_data['awards'])} awards")

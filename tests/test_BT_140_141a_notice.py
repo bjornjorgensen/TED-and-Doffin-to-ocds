@@ -1,4 +1,4 @@
-# tests/test_BT_140_notice.py
+# tests/test_BT_140_141a_notice.py
 
 import pytest
 import json
@@ -9,7 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
-def test_bt_140_notice_integration(tmp_path):
+def test_bt_140_141a_notice_integration(tmp_path):
     xml_content = """
     <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
@@ -23,9 +23,11 @@ def test_bt_140_notice_integration(tmp_path):
                         <efac:Changes>
                             <efac:Change>
                                 <efbc:ChangedSectionIdentifier>LOT-0001</efbc:ChangedSectionIdentifier>
+                                <efbc:ChangeDescription languageID="ENG">The changes have been applied to Lot 1</efbc:ChangeDescription>
                             </efac:Change>
                             <efac:Change>
                                 <efbc:ChangedSectionIdentifier>LOT-0002</efbc:ChangedSectionIdentifier>
+                                <efbc:ChangeDescription languageID="ENG">The changes have been applied to Lot 2</efbc:ChangeDescription>
                             </efac:Change>
                             <efac:ChangeReason>
                                 <cbc:ReasonCode listName="change-corrig-justification">update-add</cbc:ReasonCode>
@@ -37,7 +39,7 @@ def test_bt_140_notice_integration(tmp_path):
         </ext:UBLExtensions>
     </root>
     """
-    xml_file = tmp_path / "test_input_change_reason_code.xml"
+    xml_file = tmp_path / "test_input_change_reason_code_and_description.xml"
     xml_file.write_text(xml_content)
 
     main(str(xml_file), "ocds-test-prefix")
@@ -59,6 +61,8 @@ def test_bt_140_notice_integration(tmp_path):
         assert classification["id"] == "update-add", f"Expected classification id 'update-add', got {classification['id']}"
         assert classification["description"] == "Information updated", f"Expected description 'Information updated', got {classification['description']}"
         assert classification["scheme"] == "eu-change-corrig-justification", f"Expected scheme 'eu-change-corrig-justification', got {classification['scheme']}"
+        assert "description" in amendment, f"Expected 'description' in amendment {i}"
+        assert amendment["description"] == f"The changes have been applied to Lot {i}", f"Expected description 'The changes have been applied to Lot {i}', got {amendment['description']}"
 
 if __name__ == "__main__":
     pytest.main()
