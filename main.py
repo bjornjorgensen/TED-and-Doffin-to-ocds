@@ -101,7 +101,7 @@ from converters.BT_36_Lot import parse_lot_duration, merge_lot_duration
 from converters.BT_36_Part import parse_part_duration, merge_part_duration
 from converters.BT_40_Lot import parse_lot_selection_criteria_second_stage, merge_lot_selection_criteria_second_stage
 from converters.BT_41_Lot import parse_lot_following_contract, merge_lot_following_contract
-from converters.BT_42 import parse_jury_decision_binding, merge_jury_decision_binding
+from converters.BT_42_Lot import parse_lot_jury_decision_binding, merge_lot_jury_decision_binding
 from converters.BT_44 import parse_prize_rank, merge_prize_rank
 from converters.BT_45 import parse_rewards_other, merge_rewards_other
 from converters.BT_46 import parse_jury_member_name, merge_jury_member_name
@@ -1457,10 +1457,15 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing lot following contract data: {str(e)}")
 
-    # Parse the jury decision binding (BT-42)
-    jury_decision_binding_data = parse_jury_decision_binding(xml_content)
-    # Merge jury decision binding into the release JSON
-    merge_jury_decision_binding(release_json, jury_decision_binding_data)
+    # Parse and merge BT-42-Lot
+    try:
+        lot_jury_decision_binding_data = parse_lot_jury_decision_binding(xml_content)
+        if lot_jury_decision_binding_data:
+            merge_lot_jury_decision_binding(release_json, lot_jury_decision_binding_data)
+        else:
+            logger.info("No lot jury decision binding data found")
+    except Exception as e:
+        logger.error(f"Error processing lot jury decision binding data: {str(e)}")
 
     # Parse the prize rank (BT-44)
     prize_rank_data = parse_prize_rank(xml_content)
