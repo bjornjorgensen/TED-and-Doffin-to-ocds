@@ -97,7 +97,8 @@ from converters.BT_3201 import parse_tender_identifier, merge_tender_identifier
 from converters.BT_3202 import parse_contract_tender_id, merge_contract_tender_id
 from converters.BT_33 import parse_lots_max_awarded, merge_lots_max_awarded
 from converters.BT_330 import parse_procedure_group_identifier, merge_procedure_group_identifier
-from converters.BT_36 import parse_duration_period, merge_duration_period
+from converters.BT_36_Lot import parse_lot_duration, merge_lot_duration
+from converters.BT_36_Part import parse_part_duration, merge_part_duration
 from converters.BT_40 import parse_selection_criteria_second_stage, merge_selection_criteria_second_stage
 from converters.BT_41 import parse_following_contract, merge_following_contract
 from converters.BT_42 import parse_jury_decision_binding, merge_jury_decision_binding
@@ -1416,10 +1417,25 @@ def main(xml_path, ocid_prefix):
     # Merge procedure group identifier into the release JSON
     merge_procedure_group_identifier(release_json, procedure_group_identifier_data)
 
-    # Parse the duration period (BT-36)
-    duration_period_data = parse_duration_period(xml_content)
-    # Merge duration period into the release JSON
-    merge_duration_period(release_json, duration_period_data)
+    # Parse and merge BT-36-Lot
+    try:
+        lot_duration_data = parse_lot_duration(xml_content)
+        if lot_duration_data:
+            merge_lot_duration(release_json, lot_duration_data)
+        else:
+            logger.info("No lot duration data found")
+    except Exception as e:
+        logger.error(f"Error processing lot duration data: {str(e)}")
+
+    # Parse and merge BT-36-Part
+    try:
+        part_duration_data = parse_part_duration(xml_content)
+        if part_duration_data:
+            merge_part_duration(release_json, part_duration_data)
+        else:
+            logger.info("No part duration data found")
+    except Exception as e:
+        logger.error(f"Error processing part duration data: {str(e)}")
 
     # Parse the selection criteria second stage (BT-40)
     selection_criteria_data = parse_selection_criteria_second_stage(xml_content)
