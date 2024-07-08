@@ -42,7 +42,8 @@ from converters.BT_135 import parse_direct_award_justification_text
 from converters.BT_1351 import parse_procedure_accelerated_justification
 from converters.BT_136 import parse_direct_award_justification_code
 from converters.BT_137_Purpose_Lot_Identifier import parse_purpose_lot_identifier, merge_purpose_lot_identifier
-from converters.BT_14 import parse_documents_restricted
+from converters.BT_14_Lot import parse_lot_documents_restricted, merge_lot_documents_restricted
+from converters.BT_14_Part import parse_part_documents_restricted, merge_part_documents_restricted
 from converters.BT_140 import parse_change_reason_code_and_description
 from converters.BT_142 import parse_winner_chosen
 from converters.BT_144 import parse_not_awarded_reason
@@ -749,28 +750,25 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Purpose Lot Identifier data found")
 
-    # Parse the Documents Restricted (BT-14)
+    # Parse and merge BT-14-Lot
     try:
-        documents_restricted = parse_documents_restricted(xml_content)
-        
-        # Merge Documents Restricted into the release JSON
-        if documents_restricted and "documents" in documents_restricted["tender"]:
-            existing_documents = release_json.setdefault("tender", {}).setdefault("documents", [])
-            new_documents = documents_restricted["tender"]["documents"]
-            
-            for new_doc in new_documents:
-                existing_doc = next((doc for doc in existing_documents if doc["id"] == new_doc["id"]), None)
-                if existing_doc:
-                    existing_doc.update(new_doc)
-                    if "relatedLots" in new_doc:
-                        existing_doc.setdefault("relatedLots", []).extend(
-                            lot for lot in new_doc["relatedLots"] if lot not in existing_doc.get("relatedLots", [])
-                        )
-                else:
-                    existing_documents.append(new_doc)
-
+        lot_documents_restricted_data = parse_lot_documents_restricted(xml_content)
+        if lot_documents_restricted_data:
+            merge_lot_documents_restricted(release_json, lot_documents_restricted_data)
+        else:
+            logger.info("No lot documents restricted data found")
     except Exception as e:
-        print(f"Error parsing Documents Restricted: {str(e)}")
+        logger.error(f"Error processing lot documents restricted data: {str(e)}")
+
+    # Parse and merge BT-14-Part
+    try:
+        part_documents_restricted_data = parse_part_documents_restricted(xml_content)
+        if part_documents_restricted_data:
+            merge_part_documents_restricted(release_json, part_documents_restricted_data)
+        else:
+            logger.info("No part documents restricted data found")
+    except Exception as e:
+        logger.error(f"Error processing part documents restricted data: {str(e)}")
 
     # Parse the Change Reason Code and Description (BT-140 and BT-141(a))
     try:
