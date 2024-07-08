@@ -51,7 +51,7 @@ from converters.BT_145_Contract import parse_contract_conclusion_date, merge_con
 from converters.BT_1451_Contract import parse_winner_decision_date, merge_winner_decision_date
 from converters.BT_15_Lot_Part import parse_documents_url, merge_documents_url
 from converters.BT_150 import parse_contract_identifier
-from converters.BT_151 import parse_contract_url
+from converters.BT_151_Contract import parse_contract_url, merge_contract_url
 from converters.BT_16 import parse_organisation_part_name
 from converters.BT_160 import parse_concession_revenue_buyer
 from converters.BT_162 import parse_concession_revenue_user
@@ -845,32 +845,15 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         print(f"Error parsing Contract Identifier: {str(e)}")
 
-    # Parse the Contract URL (BT-151)
+    # Parse and merge BT-151-Contract
     try:
-        contract_url = parse_contract_url(xml_content)
-        
-        # Merge Contract URL into the release JSON
-        if contract_url and "contracts" in contract_url:
-            existing_contracts = release_json.setdefault("contracts", [])
-            for new_contract in contract_url["contracts"]:
-                existing_contract = next((contract for contract in existing_contracts if contract["id"] == new_contract["id"]), None)
-                if existing_contract:
-                    if "documents" in new_contract:
-                        existing_documents = existing_contract.setdefault("documents", [])
-                        for new_document in new_contract["documents"]:
-                            new_document["id"] = str(len(existing_documents) + 1)
-                            existing_documents.append(new_document)
-                    if "awardID" in new_contract:
-                        existing_contract["awardID"] = new_contract["awardID"]
-                    elif "awardIDs" in new_contract:
-                        existing_contract["awardIDs"] = new_contract["awardIDs"]
-                else:
-                    if "documents" in new_contract and new_contract["documents"]:
-                        new_contract["documents"][0]["id"] = "1"
-                    existing_contracts.append(new_contract)
-
+        contract_url_data = parse_contract_url(xml_content)
+        if contract_url_data:
+            merge_contract_url(release_json, contract_url_data)
+        else:
+            logger.info("No contract URL data found")
     except Exception as e:
-        print(f"Error parsing Contract URL: {str(e)}")
+        logger.error(f"Error processing contract URL data: {str(e)}")
 
     # Parse the Organisation Part Name (BT-16)
     try:
