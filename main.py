@@ -14,7 +14,7 @@ from converters.BT_09_Procedure import parse_cross_border_law, merge_cross_borde
 from converters.BT_10 import parse_contract_xml
 from converters.BT_11_Procedure_Buyer import parse_buyer_legal_type, merge_buyer_legal_type
 from converters.BT_88_Procedure import parse_procedure_features, merge_procedure_features
-from converters.BT_105 import parse_procurement_procedure_type
+from converters.BT_105_Procedure import parse_procedure_type, merge_procedure_type
 from converters.BT_106 import parse_accelerated_procedure
 from converters.BT_109_Lot import parse_framework_duration_justification, merge_framework_duration_justification
 from converters.BT_111_Lot import parse_framework_buyer_categories, merge_framework_buyer_categories
@@ -471,12 +471,15 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Procedure Features data found")
     
-    # Parse the procurement procedure type (BT-105)
-    procurement_procedure_type = parse_procurement_procedure_type(xml_content)
-    
-    # Merge procurement procedure type into the release JSON
-    if procurement_procedure_type:
-        release_json.setdefault("tender", {}).update(procurement_procedure_type["tender"])
+    # Parse and merge BT-105-Procedure
+    try:
+        procedure_type_data = parse_procedure_type(xml_content)
+        if procedure_type_data:
+            merge_procedure_type(release_json, procedure_type_data)
+        else:
+            logger.info("No procedure type data found")
+    except Exception as e:
+        logger.error(f"Error processing procedure type data: {str(e)}")
 
     # Parse the accelerated procedure (BT-106)
     accelerated_procedure = parse_accelerated_procedure(xml_content)
