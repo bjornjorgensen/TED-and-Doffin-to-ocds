@@ -55,7 +55,7 @@ from converters.BT_151 import parse_contract_url
 from converters.BT_16 import parse_organisation_part_name
 from converters.BT_160 import parse_concession_revenue_buyer
 from converters.BT_162 import parse_concession_revenue_user
-from converters.BT_163 import parse_concession_value_description
+from converters.BT_163_Tender import parse_concession_value_description, merge_concession_value_description
 from converters.BT_165_Organization_Company import parse_winner_size, merge_winner_size
 from converters.BT_17_Lot import parse_submission_electronic, merge_submission_electronic
 from converters.BT_171_Tender import parse_tender_rank, merge_tender_rank
@@ -999,25 +999,15 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         print(f"Error parsing Concession Revenue User: {str(e)}")
 
-    # Parse the Concession Value Description (BT-163)
+    # Parse and merge BT-163-Tender
     try:
-        concession_value_description = parse_concession_value_description(xml_content)
-        
-        # Merge Concession Value Description into the release JSON
-        if concession_value_description and "awards" in concession_value_description:
-            existing_awards = release_json.setdefault("awards", [])
-            for new_award in concession_value_description["awards"]:
-                existing_award = next((award for award in existing_awards if award["id"] == new_award["id"]), None)
-                if existing_award:
-                    existing_award["valueCalculationMethod"] = new_award["valueCalculationMethod"]
-                    existing_award.setdefault("relatedLots", []).extend(
-                        lot for lot in new_award["relatedLots"] if lot not in existing_award.get("relatedLots", [])
-                    )
-                else:
-                    existing_awards.append(new_award)
-
+        concession_value_description_data = parse_concession_value_description(xml_content)
+        if concession_value_description_data:
+            merge_concession_value_description(release_json, concession_value_description_data)
+        else:
+            logger.info("No concession value description data found")
     except Exception as e:
-        print(f"Error parsing Concession Value Description: {str(e)}")
+        logger.error(f"Error processing concession value description data: {str(e)}")
 
     # Parse and merge BT-165-Organization-Company Winner Size
     logger.info("Processing BT-165-Organization-Company: Winner Size")

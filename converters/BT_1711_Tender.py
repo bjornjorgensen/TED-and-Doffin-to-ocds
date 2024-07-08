@@ -1,7 +1,7 @@
 # converters/BT_1711_Tender.py
 
-from lxml import etree
 import logging
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -19,24 +19,25 @@ def parse_tender_ranked(xml_content):
     result = {"bids": {"details": []}}
 
     lot_tenders = root.xpath("//efac:NoticeResult/efac:LotTender", namespaces=namespaces)
-    
+
     for lot_tender in lot_tenders:
-        tender_id = lot_tender.xpath("cbc:ID[@schemeName='tender']/text()", namespaces=namespaces)[0]
+        tender_id = lot_tender.xpath("cbc:ID[@schemeName='tender']/text()", namespaces=namespaces)
         ranked_indicator = lot_tender.xpath("efbc:TenderRankedIndicator/text()", namespaces=namespaces)
-        lot_id = lot_tender.xpath("efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)[0]
+        lot_id = lot_tender.xpath("efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)
         
-        if ranked_indicator:
-            result["bids"]["details"].append({
-                "id": tender_id,
-                "hasRank": ranked_indicator[0].lower() == 'true',
-                "relatedLots": [lot_id]
-            })
+        if tender_id and ranked_indicator and lot_id:
+            bid_data = {
+                "id": tender_id[0],
+                "status": "valid" if ranked_indicator[0].lower() == 'true' else "invalid",
+                "relatedLots": [lot_id[0]]
+            }
+            result["bids"]["details"].append(bid_data)
 
     return result if result["bids"]["details"] else None
 
 def merge_tender_ranked(release_json, tender_ranked_data):
     if not tender_ranked_data:
-        logger.warning("No Tender Ranked data to merge")
+        logger.warning("No tender ranked data to merge")
         return
 
     existing_bids = release_json.setdefault("bids", {}).setdefault("details", [])
@@ -44,9 +45,10 @@ def merge_tender_ranked(release_json, tender_ranked_data):
     for new_bid in tender_ranked_data["bids"]["details"]:
         existing_bid = next((bid for bid in existing_bids if bid["id"] == new_bid["id"]), None)
         if existing_bid:
-            existing_bid["hasRank"] = new_bid["hasRank"]
-            existing_bid["relatedLots"] = new_bid["relatedLots"]
+            existing_bid["status"] = new_bid["status"]
+            existing_bid.setdefault("relatedLots", []).extend(new_bid["relatedLots"])
+            existing_bid["relatedLots"] = list(set(existing_bid["relatedLots"]))  # Remove duplicates
         else:
             existing_bids.append(new_bid)
 
-    logger.info(f"Merged Tender Ranked data for {len(tender_ranked_data['bids']['details'])} bids")
+    logger.info(f"Merged tender ranked data for {len(tender_ranked_data['bids']['details'])} bids")

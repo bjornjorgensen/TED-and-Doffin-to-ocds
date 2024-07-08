@@ -133,8 +133,8 @@
                 "listedOnRegulatedMarket": false
             },
             "roles": [
-                "supplier",
-                "tenderer"
+                "tenderer",
+                "supplier"
             ],
             "additionalIdentifiers": [
                 {
@@ -195,7 +195,7 @@
                     "LOT-0000"
                 ],
                 "rank": 1,
-                "hasRank": true,
+                "status": "valid",
                 "identifiers": [
                     {
                         "id": "PROJ DEF/2022-01",

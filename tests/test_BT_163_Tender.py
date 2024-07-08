@@ -1,4 +1,4 @@
-# tests/test_OPP_032_Tender.py
+# tests/test_BT_163_Tender.py
 
 import pytest
 import json
@@ -9,7 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
-def test_opp_032_tender_integration(tmp_path):
+def test_bt_163_tender_integration(tmp_path):
     xml_content = """
     <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
@@ -32,9 +32,9 @@ def test_opp_032_tender_integration(tmp_path):
                             </efac:LotResult>
                             <efac:LotTender>
                                 <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
-                                <efac:RevenuesAllocation>
-                                    <efbc:RevenuesProcuringEntity>75.5</efbc:RevenuesProcuringEntity>
-                                </efac:RevenuesAllocation>
+                                <efac:ConcessionRevenue>
+                                    <efbc:ValueDescription>The awarded value takes into account the growing revenue expected from fees.</efbc:ValueDescription>
+                                </efac:ConcessionRevenue>
                             </efac:LotTender>
                         </efac:NoticeResult>
                     </efext:EformsExtension>
@@ -43,7 +43,7 @@ def test_opp_032_tender_integration(tmp_path):
         </ext:UBLExtensions>
     </root>
     """
-    xml_file = tmp_path / "test_input_revenues_allocation.xml"
+    xml_file = tmp_path / "test_input_concession_value_description.xml"
     xml_file.write_text(xml_content)
 
     main(str(xml_file), "ocds-test-prefix")
@@ -51,14 +51,15 @@ def test_opp_032_tender_integration(tmp_path):
     with open('output.json', 'r') as f:
         result = json.load(f)
 
-    assert "tender" in result, "Expected 'tender' in result"
-    assert "lots" in result["tender"], "Expected 'lots' in tender"
-    assert len(result["tender"]["lots"]) == 1, f"Expected 1 lot, got {len(result['tender']['lots'])}"
+    assert "awards" in result, "Expected 'awards' in result"
+    assert len(result["awards"]) == 1, f"Expected 1 award, got {len(result['awards'])}"
 
-    lot = result["tender"]["lots"][0]
-    assert lot["id"] == "LOT-0001", f"Expected lot id 'LOT-0001', got {lot['id']}"
-    assert "revenuesAllocation" in lot, "Expected 'revenuesAllocation' in lot"
-    assert lot["revenuesAllocation"] == 75.5, f"Expected revenuesAllocation 75.5, got {lot['revenuesAllocation']}"
+    award = result["awards"][0]
+    assert award["id"] == "RES-0001", f"Expected award id 'RES-0001', got {award['id']}"
+    assert "relatedLots" in award, "Expected 'relatedLots' in award"
+    assert award["relatedLots"] == ["LOT-0001"], f"Expected relatedLots ['LOT-0001'], got {award['relatedLots']}"
+    assert "valueCalculationMethod" in award, "Expected 'valueCalculationMethod' in award"
+    assert award["valueCalculationMethod"] == "The awarded value takes into account the growing revenue expected from fees.", f"Unexpected valueCalculationMethod"
 
 if __name__ == "__main__":
     pytest.main()
