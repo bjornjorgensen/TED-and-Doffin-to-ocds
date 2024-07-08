@@ -45,7 +45,7 @@ from converters.BT_137_Purpose_Lot_Identifier import parse_purpose_lot_identifie
 from converters.BT_14_Lot import parse_lot_documents_restricted, merge_lot_documents_restricted
 from converters.BT_14_Part import parse_part_documents_restricted, merge_part_documents_restricted
 from converters.BT_140_notice import parse_change_reason_code, merge_change_reason_code
-from converters.BT_142 import parse_winner_chosen
+from converters.BT_142_LotResult import parse_winner_chosen, merge_winner_chosen
 from converters.BT_144 import parse_not_awarded_reason
 from converters.BT_145_Contract import parse_contract_conclusion_date, merge_contract_conclusion_date
 from converters.BT_1451_Contract import parse_winner_decision_date, merge_winner_decision_date
@@ -781,41 +781,16 @@ def main(xml_path, ocid_prefix):
             logger.info("No change reason code data found")
     except Exception as e:
         logger.error(f"Error processing change reason code data: {str(e)}")
-
-
-    #BT-141(a) is missing
     
-    
-    
-    
-    # Parse the Winner Chosen (BT-142)
+    # Parse and merge BT-142-LotResult
     try:
-        winner_chosen = parse_winner_chosen(xml_content)
-        
-        # Merge Winner Chosen into the release JSON
-        if winner_chosen:
-            # Merge lots
-            if "lots" in winner_chosen["tender"]:
-                existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-                for new_lot in winner_chosen["tender"]["lots"]:
-                    existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-                    if existing_lot:
-                        existing_lot.update(new_lot)
-                    else:
-                        existing_lots.append(new_lot)
-
-            # Merge awards
-            if "awards" in winner_chosen:
-                existing_awards = release_json.setdefault("awards", [])
-                for new_award in winner_chosen["awards"]:
-                    existing_award = next((award for award in existing_awards if award["id"] == new_award["id"]), None)
-                    if existing_award:
-                        existing_award.update(new_award)
-                    else:
-                        existing_awards.append(new_award)
-
+        winner_chosen_data = parse_winner_chosen(xml_content)
+        if winner_chosen_data:
+            merge_winner_chosen(release_json, winner_chosen_data)
+        else:
+            logger.info("No winner chosen data found")
     except Exception as e:
-        print(f"Error parsing Winner Chosen: {str(e)}")
+        logger.error(f"Error processing winner chosen data: {str(e)}")
 
     # Parse the Not Awarded Reason (BT-144)
     try:
