@@ -100,7 +100,7 @@ from converters.BT_330 import parse_procedure_group_identifier, merge_procedure_
 from converters.BT_36_Lot import parse_lot_duration, merge_lot_duration
 from converters.BT_36_Part import parse_part_duration, merge_part_duration
 from converters.BT_40_Lot import parse_lot_selection_criteria_second_stage, merge_lot_selection_criteria_second_stage
-from converters.BT_41 import parse_following_contract, merge_following_contract
+from converters.BT_41_Lot import parse_lot_following_contract, merge_lot_following_contract
 from converters.BT_42 import parse_jury_decision_binding, merge_jury_decision_binding
 from converters.BT_44 import parse_prize_rank, merge_prize_rank
 from converters.BT_45 import parse_rewards_other, merge_rewards_other
@@ -1447,10 +1447,15 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing lot selection criteria second stage data: {str(e)}")
 
-    # Parse the following contract (BT-41)
-    following_contract_data = parse_following_contract(xml_content)
-    # Merge following contract into the release JSON
-    merge_following_contract(release_json, following_contract_data)
+    # Parse and merge BT-41-Lot
+    try:
+        lot_following_contract_data = parse_lot_following_contract(xml_content)
+        if lot_following_contract_data:
+            merge_lot_following_contract(release_json, lot_following_contract_data)
+        else:
+            logger.info("No lot following contract data found")
+    except Exception as e:
+        logger.error(f"Error processing lot following contract data: {str(e)}")
 
     # Parse the jury decision binding (BT-42)
     jury_decision_binding_data = parse_jury_decision_binding(xml_content)
