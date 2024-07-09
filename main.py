@@ -81,6 +81,9 @@ from converters.BT_195_BT_163_Tender import parse_unpublished_concession_value_d
 from converters.BT_195_BT_171_Tender import parse_unpublished_tender_rank, merge_unpublished_tender_rank
 from converters.BT_195_BT_191_Tender import parse_unpublished_country_origin, merge_unpublished_country_origin
 from converters.BT_195_BT_193_Tender import parse_unpublished_winning_tender_variant, merge_unpublished_winning_tender_variant
+from converters.BT_195_BT_539_Lot import parse_unpublished_award_criterion_type, merge_unpublished_award_criterion_type
+from converters.BT_195_BT_539_LotsGroup import parse_unpublished_award_criterion_type_lots_group, merge_unpublished_award_criterion_type_lots_group
+from converters.BT_195_BT_540_Lot import parse_unpublished_award_criterion_description, merge_unpublished_award_criterion_description
 from converters.BT_21_Lot import parse_lot_title, merge_lot_title
 from converters.BT_21_LotsGroup import parse_lots_group_title, merge_lots_group_title
 from converters.BT_21_Part import parse_part_title, merge_part_title
@@ -1183,6 +1186,42 @@ def main(xml_path, ocid_prefix):
             logger.info("No Unpublished Winning Tender Variant data found")
     except Exception as e:
         logger.error(f"Error processing Unpublished Winning Tender Variant data: {str(e)}")
+
+    # Parse and merge BT-195(BT-539)-Lot
+    try:
+        unpublished_award_criterion_type_data = parse_unpublished_award_criterion_type(xml_content)
+        if unpublished_award_criterion_type_data:
+            #logger.info(f"BT-195(BT-539) Unpublished Award Criterion Type data before merge: {unpublished_award_criterion_type_data}")
+            merge_unpublished_award_criterion_type(release_json, unpublished_award_criterion_type_data)
+            #logger.info(f"BT-195(BT-539) Unpublished Award Criterion Type data after merge: {release_json.get('withheldInformation', [])}")
+        else:
+            logger.info("No Unpublished Award Criterion Type data found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Award Criterion Type data: {str(e)}")
+
+    # Parse and merge BT-195(BT-539)-LotsGroup
+    try:
+        unpublished_award_criterion_type_lots_group_data = parse_unpublished_award_criterion_type_lots_group(xml_content)
+        if unpublished_award_criterion_type_lots_group_data:
+            #logger.info(f"BT-195(BT-539) Unpublished Award Criterion Type (LotsGroup) data before merge: {unpublished_award_criterion_type_lots_group_data}")
+            merge_unpublished_award_criterion_type_lots_group(release_json, unpublished_award_criterion_type_lots_group_data)
+            #logger.info(f"BT-195(BT-539) Unpublished Award Criterion Type (LotsGroup) data after merge: {release_json.get('withheldInformation', [])}")
+        else:
+            logger.info("No Unpublished Award Criterion Type (LotsGroup) data found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Award Criterion Type (LotsGroup) data: {str(e)}")
+
+    # Parse and merge BT-195(BT-540)-Lot
+    try:
+        unpublished_award_criterion_description_data = parse_unpublished_award_criterion_description(xml_content)
+        if unpublished_award_criterion_description_data:
+            #logger.info(f"BT-195(BT-540) Unpublished Award Criterion Description data before merge: {unpublished_award_criterion_description_data}")
+            merge_unpublished_award_criterion_description(release_json, unpublished_award_criterion_description_data)
+            logger.info(f"BT-195(BT-540) Unpublished Award Criterion Description data after merge: {release_json.get('withheldInformation', [])}")
+        else:
+            logger.info("No Unpublished Award Criterion Description data found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Award Criterion Description data: {str(e)}")
 
     # Parse and merge BT-21-Lot
     try:
