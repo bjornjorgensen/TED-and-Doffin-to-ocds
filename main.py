@@ -55,7 +55,7 @@ from converters.BT_151_Contract import parse_contract_url, merge_contract_url
 from converters.BT_16_Organization_Company import parse_organization_part_name, merge_organization_part_name
 from converters.BT_16_Organization_TouchPoint import parse_touchpoint_part_name, merge_touchpoint_part_name
 from converters.BT_160_Tender import parse_concession_revenue_buyer, merge_concession_revenue_buyer
-from converters.BT_162 import parse_concession_revenue_user
+from converters.BT_162_Tender import parse_concession_revenue_user, merge_concession_revenue_user
 from converters.BT_163_Tender import parse_concession_value_description, merge_concession_value_description
 from converters.BT_165_Organization_Company import parse_winner_size, merge_winner_size
 from converters.BT_17_Lot import parse_submission_electronic, merge_submission_electronic
@@ -853,9 +853,9 @@ def main(xml_path, ocid_prefix):
     try:
         organization_part_name_data = parse_organization_part_name(xml_content)
         if organization_part_name_data:
-            logger.info(f"BT-16 data before merge: {organization_part_name_data}")
+            #logger.info(f"BT-16 data before merge: {organization_part_name_data}")
             merge_organization_part_name(release_json, organization_part_name_data)
-            logger.info(f"BT-16 data after merge: {release_json.get('parties', [])}")
+            #logger.info(f"BT-16 data after merge: {release_json.get('parties', [])}")
         else:
             logger.info("No Organization Part Name data found")
     except Exception as e:
@@ -875,9 +875,9 @@ def main(xml_path, ocid_prefix):
     try:
         touchpoint_part_name_data = parse_touchpoint_part_name(xml_content)
         if touchpoint_part_name_data:
-            logger.info(f"BT-16 TouchPoint data before merge: {touchpoint_part_name_data}")
+            #logger.info(f"BT-16 TouchPoint data before merge: {touchpoint_part_name_data}")
             merge_touchpoint_part_name(release_json, touchpoint_part_name_data)
-            logger.info(f"BT-16 TouchPoint data after merge: {release_json.get('parties', [])}")
+            #logger.info(f"BT-16 TouchPoint data after merge: {release_json.get('parties', [])}")
         else:
             logger.info("No TouchPoint Part Name data found")
     except Exception as e:
@@ -887,36 +887,25 @@ def main(xml_path, ocid_prefix):
     try:
         concession_revenue_buyer_data = parse_concession_revenue_buyer(xml_content)
         if concession_revenue_buyer_data:
-            logger.info(f"BT-160 Concession Revenue Buyer data before merge: {concession_revenue_buyer_data}")
+            #logger.info(f"BT-160 Concession Revenue Buyer data before merge: {concession_revenue_buyer_data}")
             merge_concession_revenue_buyer(release_json, concession_revenue_buyer_data)
-            logger.info(f"BT-160 Concession Revenue Buyer data after merge: {release_json.get('contracts', [])}")
+            #logger.info(f"BT-160 Concession Revenue Buyer data after merge: {release_json.get('contracts', [])}")
         else:
             logger.info("No Concession Revenue Buyer data found")
     except Exception as e:
         logger.error(f"Error processing Concession Revenue Buyer data: {str(e)}")
 
-    # Parse the Concession Revenue User (BT-162)
+    # Parse and merge BT-162-Tender
     try:
-        concession_revenue_user = parse_concession_revenue_user(xml_content)
-        
-        # Merge Concession Revenue User into the release JSON
-        if concession_revenue_user and "contracts" in concession_revenue_user:
-            existing_contracts = release_json.setdefault("contracts", [])
-            for new_contract in concession_revenue_user["contracts"]:
-                existing_contract = next((contract for contract in existing_contracts if contract["id"] == new_contract["id"]), None)
-                if existing_contract:
-                    existing_implementation = existing_contract.setdefault("implementation", {})
-                    existing_charges = existing_implementation.setdefault("charges", [])
-                    existing_charges.extend(new_contract["implementation"]["charges"])
-                    if "awardID" in new_contract:
-                        existing_contract["awardID"] = new_contract["awardID"]
-                    elif "awardIDs" in new_contract:
-                        existing_contract["awardIDs"] = new_contract["awardIDs"]
-                else:
-                    existing_contracts.append(new_contract)
-
+        concession_revenue_user_data = parse_concession_revenue_user(xml_content)
+        if concession_revenue_user_data:
+            #logger.info(f"BT-162 Concession Revenue User data before merge: {concession_revenue_user_data}")
+            merge_concession_revenue_user(release_json, concession_revenue_user_data)
+            #logger.info(f"BT-162 Concession Revenue User data after merge: {release_json.get('contracts', [])}")
+        else:
+            logger.info("No Concession Revenue User data found")
     except Exception as e:
-        print(f"Error parsing Concession Revenue User: {str(e)}")
+        logger.error(f"Error processing Concession Revenue User data: {str(e)}")
 
     # Parse and merge BT-163-Tender
     try:
