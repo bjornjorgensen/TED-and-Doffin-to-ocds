@@ -37,7 +37,7 @@ from converters.BT_13_Part import parse_additional_info_deadline_part, merge_add
 from converters.BT_130_131_1311 import parse_tender_deadlines_invitations
 from converters.BT_132 import parse_public_opening_date
 from converters.BT_133_Lot import parse_public_opening_place, merge_public_opening_place
-from converters.BT_134 import parse_public_opening_description
+from converters.BT_134_Lot import parse_lot_public_opening_description, merge_lot_public_opening_description
 from converters.BT_135 import parse_direct_award_justification_text
 from converters.BT_1351 import parse_procedure_accelerated_justification
 from converters.BT_136_Procedure import parse_direct_award_justification, merge_direct_award_justification
@@ -693,24 +693,15 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Public Opening Place data found")
 
-    # Parse the Public Opening Description (BT-134)
+    # Parse and merge BT-134-Lot
     try:
-        public_opening_description = parse_public_opening_description(xml_content)
-        
-        # Merge Public Opening Description into the release JSON
-        if public_opening_description and "lots" in public_opening_description["tender"]:
-            existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-            new_lots = public_opening_description["tender"]["lots"]
-            
-            for new_lot in new_lots:
-                existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-                if existing_lot:
-                    existing_lot.setdefault("bidOpening", {}).update(new_lot["bidOpening"])
-                else:
-                    existing_lots.append(new_lot)
-
+        lot_public_opening_description_data = parse_lot_public_opening_description(xml_content)
+        if lot_public_opening_description_data:
+            merge_lot_public_opening_description(release_json, lot_public_opening_description_data)
+        else:
+            logger.info("No Lot Public Opening Description data found")
     except Exception as e:
-        print(f"Error parsing Public Opening Description: {str(e)}")
+        logger.error(f"Error processing Lot Public Opening Description data: {str(e)}")
 
     # Parse the Direct Award Justification Text (BT-135)
     try:
