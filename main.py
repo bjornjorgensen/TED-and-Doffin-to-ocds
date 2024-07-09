@@ -15,7 +15,7 @@ from converters.BT_10 import parse_contract_xml
 from converters.BT_11_Procedure_Buyer import parse_buyer_legal_type, merge_buyer_legal_type
 from converters.BT_88_Procedure import parse_procedure_features, merge_procedure_features
 from converters.BT_105_Procedure import parse_procedure_type, merge_procedure_type
-from converters.BT_106 import parse_accelerated_procedure
+from converters.BT_106_Procedure import parse_procedure_accelerated, merge_procedure_accelerated
 from converters.BT_109_Lot import parse_framework_duration_justification, merge_framework_duration_justification
 from converters.BT_111_Lot import parse_framework_buyer_categories, merge_framework_buyer_categories
 from converters.BT_113_Lot import parse_framework_max_participants, merge_framework_max_participants
@@ -481,12 +481,15 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing procedure type data: {str(e)}")
 
-    # Parse the accelerated procedure (BT-106)
-    accelerated_procedure = parse_accelerated_procedure(xml_content)
-    
-    # Merge accelerated procedure into the release JSON
-    if accelerated_procedure:
-        release_json.setdefault("tender", {}).update(accelerated_procedure["tender"])
+    # Parse and merge BT-106-Procedure
+    try:
+        procedure_accelerated_data = parse_procedure_accelerated(xml_content)
+        if procedure_accelerated_data:
+            merge_procedure_accelerated(release_json, procedure_accelerated_data)
+        else:
+            logger.info("No procedure accelerated data found")
+    except Exception as e:
+        logger.error(f"Error processing procedure accelerated data: {str(e)}")
 
     # Parse and merge BT-109-Lot Framework Duration Justification
     logger.info("Processing BT-109-Lot: Framework Duration Justification")
