@@ -52,7 +52,8 @@ from converters.BT_1451_Contract import parse_winner_decision_date, merge_winner
 from converters.BT_15_Lot_Part import parse_documents_url, merge_documents_url
 from converters.BT_150_Contract import parse_contract_identifier, merge_contract_identifier
 from converters.BT_151_Contract import parse_contract_url, merge_contract_url
-from converters.BT_16 import parse_organisation_part_name
+from converters.BT_16_Organization_Company import parse_organization_part_name, merge_organization_part_name
+from converters.BT_16_Organization_TouchPoint import parse_touchpoint_part_name, merge_touchpoint_part_name
 from converters.BT_160 import parse_concession_revenue_buyer
 from converters.BT_162 import parse_concession_revenue_user
 from converters.BT_163_Tender import parse_concession_value_description, merge_concession_value_description
@@ -838,24 +839,49 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing contract URL data: {str(e)}")
 
-    # Parse the Organisation Part Name (BT-16)
+    # Parse the organization info BT-500 
     try:
-        organisation_part_name = parse_organisation_part_name(xml_content)
-        
-        # Merge Organisation Part Name into the release JSON
-        if organisation_part_name and "parties" in organisation_part_name:
-            existing_parties = release_json.setdefault("parties", [])
-            for new_party in organisation_part_name["parties"]:
-                existing_party = next((party for party in existing_parties if party["id"] == new_party["id"]), None)
-                if existing_party:
-                    existing_party["name"] = new_party["name"]
-                    if "identifier" in new_party:
-                        existing_party["identifier"] = new_party["identifier"]
-                else:
-                    existing_parties.append(new_party)
-
+        organization_name_data = parse_organization_name(xml_content)
+        if organization_name_data:
+            merge_organization_name(release_json, organization_name_data)
+        else:
+            logger.info("No Organization Name data found")
     except Exception as e:
-        print(f"Error parsing Organisation Part Name: {str(e)}")
+        logger.error(f"Error processing Organization Name data: {str(e)}")
+
+    # Process BT-16-Organization-Company
+    try:
+        organization_part_name_data = parse_organization_part_name(xml_content)
+        if organization_part_name_data:
+            logger.info(f"BT-16 data before merge: {organization_part_name_data}")
+            merge_organization_part_name(release_json, organization_part_name_data)
+            logger.info(f"BT-16 data after merge: {release_json.get('parties', [])}")
+        else:
+            logger.info("No Organization Part Name data found")
+    except Exception as e:
+        logger.error(f"Error processing Organization Part Name data: {str(e)}")
+
+    # Parse the organization info BT_500_Organization_TouchPoint
+    try:
+        touchpoint_name_data = parse_touchpoint_name(xml_content)
+        if touchpoint_name_data:
+            merge_touchpoint_name(release_json, touchpoint_name_data)
+        else:
+            logger.info("No TouchPoint Name data found")
+    except Exception as e:
+        logger.error(f"Error processing TouchPoint Name data: {str(e)}")
+
+    # Parse and merge BT-16-Organization-TouchPoint
+    try:
+        touchpoint_part_name_data = parse_touchpoint_part_name(xml_content)
+        if touchpoint_part_name_data:
+            logger.info(f"BT-16 TouchPoint data before merge: {touchpoint_part_name_data}")
+            merge_touchpoint_part_name(release_json, touchpoint_part_name_data)
+            logger.info(f"BT-16 TouchPoint data after merge: {release_json.get('parties', [])}")
+        else:
+            logger.info("No TouchPoint Part Name data found")
+    except Exception as e:
+        logger.error(f"Error processing TouchPoint Part Name data: {str(e)}")
 
     # Parse the Concession Revenue Buyer (BT-160)
     try:
@@ -1385,26 +1411,6 @@ def main(xml_path, ocid_prefix):
     minimum_candidates_data = parse_minimum_candidates(xml_content)
     # Merge minimum candidates into the release JSON
     merge_minimum_candidates(release_json, minimum_candidates_data)
-
-   # Parse the organization info BT-500 
-    try:
-        organization_name_data = parse_organization_name(xml_content)
-        if organization_name_data:
-            merge_organization_name(release_json, organization_name_data)
-        else:
-            logger.info("No Organization Name data found")
-    except Exception as e:
-        logger.error(f"Error processing Organization Name data: {str(e)}")
-
-    # Parse the organization info BT_500_Organization_TouchPoint
-    try:
-        touchpoint_name_data = parse_touchpoint_name(xml_content)
-        if touchpoint_name_data:
-            merge_touchpoint_name(release_json, touchpoint_name_data)
-        else:
-            logger.info("No TouchPoint Name data found")
-    except Exception as e:
-        logger.error(f"Error processing TouchPoint Name data: {str(e)}")
 
     # Parse and merge BT_500 Ultimate Beneficial Owner (UBO) Name data
     try:
@@ -2720,13 +2726,18 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Tender Identifier Reference data found")
         
-        
-    # Remove empty elements from release_json
-    release_json = remove_empty_elements(release_json)
-    release_json = remove_empty_dicts(release_json)
-
-    #logger.info(f"Final release_json: {json.dumps(release_json, indent=2)}")
+    # Before applying remove_empty_elements and remove_empty_dicts
+    logger.info(f"Release JSON before removing empty elements: {json.dumps(release_json, indent=2)}")
     
+    release_json = remove_empty_elements(release_json)
+    logger.info(f"Release JSON after removing empty elements: {json.dumps(release_json, indent=2)}")
+
+    release_json = remove_empty_dicts(release_json)
+    logger.info(f"Release JSON after removing empty dicts: {json.dumps(release_json, indent=2)}")
+
+    # Before writing to output.json
+    logger.info(f"Final release JSON: {json.dumps(release_json, indent=2)}")
+
     # Write the JSON output to a file
     with io.open('output.json', 'w', encoding='utf-8') as f:
         json.dump(release_json, f, ensure_ascii=False)

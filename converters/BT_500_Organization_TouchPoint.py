@@ -22,12 +22,17 @@ def parse_touchpoint_name(xml_content):
     for organization in organizations:
         touchpoint_id = organization.xpath("efac:TouchPoint/cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']/text()", namespaces=namespaces)
         touchpoint_name = organization.xpath("efac:TouchPoint/cac:PartyName/cbc:Name/text()", namespaces=namespaces)
+        department = organization.xpath("efac:TouchPoint/cac:PostalAddress/cbc:Department/text()", namespaces=namespaces)
         company_id = organization.xpath("efac:Company/cac:PartyLegalEntity/cbc:CompanyID/text()", namespaces=namespaces)
         
         if touchpoint_id and touchpoint_name:
+            full_name = touchpoint_name[0]
+            if department:
+                full_name += f" - {department[0]}"
+
             party = {
                 "id": touchpoint_id[0],
-                "name": touchpoint_name[0]
+                "name": full_name
             }
             
             if company_id:
@@ -50,7 +55,11 @@ def merge_touchpoint_name(release_json, touchpoint_name_data):
     for new_party in touchpoint_name_data["parties"]:
         existing_party = next((party for party in existing_parties if party["id"] == new_party["id"]), None)
         if existing_party:
-            existing_party.update(new_party)
+            # Preserve existing name if it already contains department information
+            if " - " not in existing_party.get("name", ""):
+                existing_party["name"] = new_party["name"]
+            if "identifier" not in existing_party and "identifier" in new_party:
+                existing_party["identifier"] = new_party["identifier"]
         else:
             existing_parties.append(new_party)
 
