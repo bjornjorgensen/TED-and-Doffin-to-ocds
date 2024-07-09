@@ -65,7 +65,8 @@ from converters.BT_18_Lot import parse_submission_url, merge_submission_url
 from converters.BT_19_Lot import parse_nonelectronic_submission_justification, merge_nonelectronic_submission_justification
 from converters.BT_191_Tender import parse_country_origin, merge_country_origin
 from converters.BT_193_Tender import parse_tender_variant, merge_tender_variant
-from converters.BT_195 import parse_unpublished_identifier
+#from converters.BT_195 import parse_unpublished_identifier
+from converters.BT_195_BT_09_Procedure import parse_unpublished_identifier, merge_unpublished_identifier
 from converters.BT_21_Lot import parse_lot_title, merge_lot_title
 from converters.BT_21_LotsGroup import parse_lots_group_title, merge_lots_group_title
 from converters.BT_21_Part import parse_part_title, merge_part_title
@@ -989,17 +990,17 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Tender Variant data: {str(e)}")
 
-
-    # Parse the Unpublished Identifier (BT-195)
+    # Parse and merge BT-195(BT-09)-Procedure
     try:
-        unpublished_identifier = parse_unpublished_identifier(xml_content)
-        
-        # Merge Unpublished Identifier into the release JSON
-        if unpublished_identifier and "withheldInformation" in unpublished_identifier:
-            release_json.setdefault("withheldInformation", []).extend(unpublished_identifier["withheldInformation"])
-
+        unpublished_identifier_data = parse_unpublished_identifier(xml_content)
+        if unpublished_identifier_data:
+            logger.info(f"BT-195(BT-09) Unpublished Identifier data before merge: {unpublished_identifier_data}")
+            merge_unpublished_identifier(release_json, unpublished_identifier_data)
+            logger.info(f"BT-195(BT-09) Unpublished Identifier data after merge: {release_json.get('withheldInformation', [])}")
+        else:
+            logger.info("No Unpublished Identifier data found")
     except Exception as e:
-        print(f"Error parsing Unpublished Identifier: {str(e)}")
+        logger.error(f"Error processing Unpublished Identifier data: {str(e)}")
 
     # Parse and merge BT-21-Lot
     try:
