@@ -63,7 +63,7 @@ from converters.BT_171_Tender import parse_tender_rank, merge_tender_rank
 from converters.BT_1711_Tender import parse_tender_ranked, merge_tender_ranked
 from converters.BT_18_Lot import parse_submission_url, merge_submission_url
 from converters.BT_19_Lot import parse_nonelectronic_submission_justification, merge_nonelectronic_submission_justification
-from converters.BT_191 import parse_country_origin
+from converters.BT_191_Tender import parse_country_origin, merge_country_origin
 from converters.BT_193_Tender import parse_tender_variant, merge_tender_variant
 from converters.BT_195 import parse_unpublished_identifier
 from converters.BT_21_Lot import parse_lot_title, merge_lot_title
@@ -967,27 +967,17 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No Submission Nonelectronic Justification data found")
 
-    # Parse the Country Origin (BT-191)
+    # Parse and merge BT-191-Tender
     try:
-        country_origin = parse_country_origin(xml_content)
-        
-        # Merge Country Origin into the release JSON
-        if country_origin and "bids" in country_origin and "details" in country_origin["bids"]:
-            existing_bids = release_json.setdefault("bids", {}).setdefault("details", [])
-            for new_bid in country_origin["bids"]["details"]:
-                existing_bid = next((bid for bid in existing_bids if bid["id"] == new_bid["id"]), None)
-                if existing_bid:
-                    existing_bid.setdefault("countriesOfOrigin", []).extend(
-                        country for country in new_bid["countriesOfOrigin"] if country not in existing_bid.get("countriesOfOrigin", [])
-                    )
-                    existing_bid.setdefault("relatedLots", []).extend(
-                        lot for lot in new_bid["relatedLots"] if lot not in existing_bid.get("relatedLots", [])
-                    )
-                else:
-                    existing_bids.append(new_bid)
-
+        country_origin_data = parse_country_origin(xml_content)
+        if country_origin_data:
+            #logger.info(f"BT-191 Country Origin data before merge: {country_origin_data}")
+            merge_country_origin(release_json, country_origin_data)
+            #logger.info(f"BT-191 Country Origin data after merge: {release_json.get('bids', {}).get('details', [])}")
+        else:
+            logger.info("No Country Origin data found")
     except Exception as e:
-        print(f"Error parsing Country Origin: {str(e)}")
+        logger.error(f"Error processing Country Origin data: {str(e)}")
 
     # Parse the Tender Variant (BT-193)
     try:

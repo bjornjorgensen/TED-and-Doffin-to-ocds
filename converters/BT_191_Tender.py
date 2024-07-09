@@ -1,4 +1,9 @@
+# converters/BT_191_Tender.py
+
 from lxml import etree
+import logging
+
+logger = logging.getLogger(__name__)
 
 # ISO 3166-1 alpha-3 to alpha-2 code mapping
 ISO_3166_1_ALPHA_3_TO_ALPHA_2 = {
@@ -54,11 +59,12 @@ ISO_3166_1_ALPHA_3_TO_ALPHA_2 = {
 def parse_country_origin(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
+        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
         'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
         'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
         'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
+        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
     }
 
     result = {"bids": {"details": []}}
@@ -66,23 +72,37 @@ def parse_country_origin(xml_content):
     lot_tenders = root.xpath("//efac:NoticeResult/efac:LotTender", namespaces=namespaces)
     
     for lot_tender in lot_tenders:
-        tender_id = lot_tender.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        lot_id = lot_tender.xpath("efac:TenderLot/cbc:ID/text()", namespaces=namespaces)[0]
-        country_codes = lot_tender.xpath("efac:Origin/efbc:AreaCode/text()", namespaces=namespaces)
+        tender_id = lot_tender.xpath("cbc:ID[@schemeName='tender']/text()", namespaces=namespaces)
+        area_code = lot_tender.xpath("efac:Origin/efbc:AreaCode[@listName='country']/text()", namespaces=namespaces)
+        lot_id = lot_tender.xpath("efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)
         
-        if country_codes:
-            bid = {
-                "id": tender_id,
-                "relatedLots": [lot_id],
-                "countriesOfOrigin": []
-            }
-            
-            for code in country_codes:
-                alpha2_code = ISO_3166_1_ALPHA_3_TO_ALPHA_2.get(code)
-                if alpha2_code:
-                    bid["countriesOfOrigin"].append(alpha2_code)
-            
-            if bid["countriesOfOrigin"]:
+        if tender_id and area_code and lot_id:
+            alpha2_code = ISO_3166_1_ALPHA_3_TO_ALPHA_2.get(area_code[0], "")
+            if alpha2_code:
+                bid = {
+                    "id": tender_id[0],
+                    "countriesOfOrigin": [alpha2_code],
+                    "relatedLots": [lot_id[0]]
+                }
                 result["bids"]["details"].append(bid)
+            else:
+                logger.warning(f"No matching ISO 3166-1 alpha-2 code found for {area_code[0]}")
 
     return result if result["bids"]["details"] else None
+
+def merge_country_origin(release_json, country_origin_data):
+    if not country_origin_data:
+        logger.warning("No Country Origin data to merge")
+        return
+
+    existing_bids = release_json.setdefault("bids", {}).setdefault("details", [])
+    
+    for new_bid in country_origin_data["bids"]["details"]:
+        existing_bid = next((bid for bid in existing_bids if bid["id"] == new_bid["id"]), None)
+        if existing_bid:
+            existing_bid.setdefault("countriesOfOrigin", []).extend(new_bid["countriesOfOrigin"])
+            existing_bid.setdefault("relatedLots", []).extend(new_bid["relatedLots"])
+        else:
+            existing_bids.append(new_bid)
+
+    logger.info(f"Merged Country Origin data for {len(country_origin_data['bids']['details'])} bids")
