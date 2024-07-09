@@ -50,7 +50,7 @@ from converters.BT_144_LotResult import parse_not_awarded_reason, merge_not_awar
 from converters.BT_145_Contract import parse_contract_conclusion_date, merge_contract_conclusion_date
 from converters.BT_1451_Contract import parse_winner_decision_date, merge_winner_decision_date
 from converters.BT_15_Lot_Part import parse_documents_url, merge_documents_url
-from converters.BT_150 import parse_contract_identifier
+from converters.BT_150_Contract import parse_contract_identifier, merge_contract_identifier
 from converters.BT_151_Contract import parse_contract_url, merge_contract_url
 from converters.BT_16 import parse_organisation_part_name
 from converters.BT_160 import parse_concession_revenue_buyer
@@ -818,26 +818,15 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing documents URL data: {str(e)}")
 
-    # Parse the Contract Identifier (BT-150)
+    # Parse and merge BT-150-Contract
     try:
-        contract_identifier = parse_contract_identifier(xml_content)
-        
-        # Merge Contract Identifier into the release JSON
-        if contract_identifier and "contracts" in contract_identifier:
-            existing_contracts = release_json.setdefault("contracts", [])
-            for new_contract in contract_identifier["contracts"]:
-                existing_contract = next((contract for contract in existing_contracts if contract["id"] == new_contract["id"]), None)
-                if existing_contract:
-                    existing_contract.setdefault("identifiers", []).extend(new_contract["identifiers"])
-                    if "awardID" in new_contract:
-                        existing_contract["awardID"] = new_contract["awardID"]
-                    elif "awardIDs" in new_contract:
-                        existing_contract["awardIDs"] = new_contract["awardIDs"]
-                else:
-                    existing_contracts.append(new_contract)
-
+        contract_identifier_data = parse_contract_identifier(xml_content)
+        if contract_identifier_data:
+            merge_contract_identifier(release_json, contract_identifier_data)
+        else:
+            logger.info("No Contract Identifier data found")
     except Exception as e:
-        print(f"Error parsing Contract Identifier: {str(e)}")
+        logger.error(f"Error processing Contract Identifier data: {str(e)}")
 
     # Parse and merge BT-151-Contract
     try:
