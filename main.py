@@ -74,6 +74,8 @@ from converters.BT_195_BT_135_Procedure import parse_unpublished_direct_award_ju
 from converters.BT_195_BT_1351_Procedure import parse_unpublished_procedure_accelerated_justification, merge_unpublished_procedure_accelerated_justification
 from converters.BT_195_BT_136_Procedure import parse_unpublished_direct_award_justification_bt_136, merge_unpublished_direct_award_justification_bt_136
 from converters.BT_195_BT_142_LotResult import parse_unpublished_winner_chosen, merge_unpublished_winner_chosen
+from converters.BT_195_BT_144_LotResult import parse_unpublished_not_awarded_reason, merge_unpublished_not_awarded_reason
+from converters.BT_195_BT_160_Tender import parse_unpublished_concession_revenue_buyer, merge_unpublished_concession_revenue_buyer
 from converters.BT_21_Lot import parse_lot_title, merge_lot_title
 from converters.BT_21_LotsGroup import parse_lots_group_title, merge_lots_group_title
 from converters.BT_21_Part import parse_part_title, merge_part_title
@@ -1092,6 +1094,30 @@ def main(xml_path, ocid_prefix):
             logger.info("No Unpublished Winner Chosen data found")
     except Exception as e:
         logger.error(f"Error processing Unpublished Winner Chosen data: {str(e)}")
+
+    # Parse and merge BT-195(BT-144)-LotResult
+    try:
+        unpublished_not_awarded_reason_data = parse_unpublished_not_awarded_reason(xml_content)
+        if unpublished_not_awarded_reason_data:
+            #logger.info(f"BT-195(BT-144) Unpublished Not Awarded Reason data before merge: {unpublished_not_awarded_reason_data}")
+            merge_unpublished_not_awarded_reason(release_json, unpublished_not_awarded_reason_data)
+            #logger.info(f"BT-195(BT-144) Unpublished Not Awarded Reason data after merge: {release_json.get('withheldInformation', [])}")
+        else:
+            logger.info("No Unpublished Not Awarded Reason data found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Not Awarded Reason data: {str(e)}")
+
+    # Parse and merge BT-195(BT-160)-Tender
+    try:
+        unpublished_concession_revenue_buyer_data = parse_unpublished_concession_revenue_buyer(xml_content)
+        if unpublished_concession_revenue_buyer_data:
+            #logger.info(f"BT-195(BT-160) Unpublished Concession Revenue Buyer data before merge: {unpublished_concession_revenue_buyer_data}")
+            merge_unpublished_concession_revenue_buyer(release_json, unpublished_concession_revenue_buyer_data)
+            #logger.info(f"BT-195(BT-160) Unpublished Concession Revenue Buyer data after merge: {release_json.get('withheldInformation', [])}")
+        else:
+            logger.info("No Unpublished Concession Revenue Buyer data found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Concession Revenue Buyer data: {str(e)}")
 
     # Parse and merge BT-21-Lot
     try:

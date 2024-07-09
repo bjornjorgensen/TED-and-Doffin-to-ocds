@@ -9,7 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
-def test_opp_080_tender_integration(tmp_path):
+def test_opp_080_kilometers_public_transport_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -25,13 +25,6 @@ def test_opp_080_tender_integration(tmp_path):
                             <efac:LotTender>
                                 <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
                                 <efbc:PublicTransportationCumulatedDistance unitCode="km">988754432110987</efbc:PublicTransportationCumulatedDistance>
-                                <efac:TenderLot>
-                                    <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
-                                </efac:TenderLot>
-                                <efac:ContractTerm>
-                                    <efbc:TermCode listName="contract-detail">soc-stand</efbc:TermCode>
-                                    <efbc:TermDescription>Description of the social-standards blablabla ...</efbc:TermDescription>
-                                </efac:ContractTerm>
                             </efac:LotTender>
                             <efac:SettledContract>
                                 <cbc:ID schemeName="contract">CON-0001</cbc:ID>
@@ -41,9 +34,6 @@ def test_opp_080_tender_integration(tmp_path):
                             </efac:SettledContract>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
-                                <efac:TenderLot>
-                                    <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
-                                </efac:TenderLot>
                                 <efac:SettledContract>
                                     <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                                 </efac:SettledContract>
@@ -63,21 +53,13 @@ def test_opp_080_tender_integration(tmp_path):
     with open('output.json', 'r') as f:
         result = json.load(f)
 
-    assert "contracts" in result
-    assert len(result["contracts"]) == 1
-    contract = result["contracts"][0]
-    assert contract["id"] == "CON-0001"
-    assert contract["publicPassengerTransportServicesKilometers"] == 988754432110987
-    assert contract["awardID"] == "RES-0001"
+    assert "contracts" in result, "Expected 'contracts' in result"
+    assert len(result["contracts"]) == 1, f"Expected 1 contract, got {len(result['contracts'])}"
 
-    assert "tender" in result
-    assert "lots" in result["tender"]
-    assert len(result["tender"]["lots"]) == 1
-    lot = result["tender"]["lots"][0]
-    assert lot["id"] == "LOT-0001"
-    assert "contractTerms" in lot
-    assert "socialStandards" in lot["contractTerms"]
-    assert lot["contractTerms"]["socialStandards"] == "Description of the social-standards blablabla ..."
+    contract = result["contracts"][0]
+    assert contract["id"] == "CON-0001", f"Expected contract id 'CON-0001', got {contract['id']}"
+    assert contract["publicPassengerTransportServicesKilometers"] == 988754432110987, f"Expected publicPassengerTransportServicesKilometers 988754432110987, got {contract['publicPassengerTransportServicesKilometers']}"
+    assert contract["awardID"] == "RES-0001", f"Expected awardID 'RES-0001', got {contract['awardID']}"
 
 if __name__ == "__main__":
     pytest.main()

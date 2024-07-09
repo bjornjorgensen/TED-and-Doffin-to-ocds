@@ -18,37 +18,36 @@ def parse_tendering_party_id_reference(xml_content):
     lot_tenders = root.xpath("//efac:NoticeResult/efac:LotTender", namespaces=namespaces)
 
     for lot_tender in lot_tenders:
-        tender_id = lot_tender.xpath("cbc:ID[@schemeName='tender']/text()", namespaces=namespaces)[0]
-        tendering_party_ids = lot_tender.xpath("efac:TenderingParty/cbc:ID/text()", namespaces=namespaces)
+        tender_id = lot_tender.xpath("cbc:ID[@schemeName='tender']/text()", namespaces=namespaces)
+        if not tender_id:
+            logger.warning("Tender ID not found for a LotTender")
+            continue
+
+        tender_id = tender_id[0]
+        tendering_party_id = lot_tender.xpath("efac:TenderingParty/cbc:ID/text()", namespaces=namespaces)
         
-        bid = {"id": tender_id, "tenderers": []}
-        
-        if tendering_party_ids:
-            tendering_party_id = tendering_party_ids[0]
+        if tendering_party_id:
+            tendering_party_id = tendering_party_id[0]
             tendering_party = root.xpath(f"//efac:NoticeResult/efac:TenderingParty[cbc:ID/text()='{tendering_party_id}']", namespaces=namespaces)
             
             if tendering_party:
-                tenderers = tendering_party[0].xpath("efac:Tenderer", namespaces=namespaces)
+                bid = {"id": tender_id, "tenderers": []}
+                tenderers = tendering_party[0].xpath("efac:Tenderer/cbc:ID[@schemeName='organization']/text()", namespaces=namespaces)
                 
-                for tenderer in tenderers:
-                    org_id = tenderer.xpath("cbc:ID[@schemeName='organization']/text()", namespaces=namespaces)
+                for tenderer_id in tenderers:
+                    bid["tenderers"].append({"id": tenderer_id})
                     
-                    if org_id:
-                        org_id = org_id[0]
-                        
-                        # Add or update party
-                        party = next((p for p in result["parties"] if p["id"] == org_id), None)
-                        if not party:
-                            party = {"id": org_id, "roles": ["tenderer"]}
-                            result["parties"].append(party)
-                        elif "tenderer" not in party["roles"]:
+                    # Add or update party
+                    party = next((p for p in result["parties"] if p["id"] == tenderer_id), None)
+                    if party:
+                        if "tenderer" not in party["roles"]:
                             party["roles"].append("tenderer")
+                    else:
+                        result["parties"].append({"id": tenderer_id, "roles": ["tenderer"]})
+                
+                result["bids"]["details"].append(bid)
 
-                        # Add tenderer to bid
-                        bid["tenderers"].append({"id": org_id})
-
-        result["bids"]["details"].append(bid)
-
+    logger.info(f"Parsed Tendering Party ID Reference data: {result}")
     return result if (result["parties"] or result["bids"]["details"]) else None
 
 def merge_tendering_party_id_reference(release_json, tendering_party_data):
@@ -56,24 +55,23 @@ def merge_tendering_party_id_reference(release_json, tendering_party_data):
         logger.warning("No Tendering Party ID Reference data to merge")
         return
 
-    # Merge parties
-    if "parties" not in release_json:
-        release_json["parties"] = []
+    existing_parties = release_json.setdefault("parties", [])
     for new_party in tendering_party_data["parties"]:
-        existing_party = next((p for p in release_json["parties"] if p["id"] == new_party["id"]), None)
+        existing_party = next((p for p in existing_parties if p["id"] == new_party["id"]), None)
         if existing_party:
             existing_party["roles"] = list(set(existing_party.get("roles", []) + new_party["roles"]))
         else:
-            release_json["parties"].append(new_party)
+            existing_parties.append(new_party)
 
-    # Merge bids
-    if "bids" not in release_json:
-        release_json["bids"] = {"details": []}
+    existing_bids = release_json.setdefault("bids", {}).setdefault("details", [])
     for new_bid in tendering_party_data["bids"]["details"]:
-        existing_bid = next((b for b in release_json["bids"]["details"] if b["id"] == new_bid["id"]), None)
+        existing_bid = next((b for b in existing_bids if b["id"] == new_bid["id"]), None)
         if existing_bid:
-            existing_bid["tenderers"] = new_bid["tenderers"]
+            existing_tenderers = existing_bid.setdefault("tenderers", [])
+            for new_tenderer in new_bid["tenderers"]:
+                if new_tenderer not in existing_tenderers:
+                    existing_tenderers.append(new_tenderer)
         else:
-            release_json["bids"]["details"].append(new_bid)
+            existing_bids.append(new_bid)
 
-    logger.info(f"Merged Tendering Party ID Reference data for {len(tendering_party_data['bids']['details'])} bids")
+    logger.info(f"Merged Tendering Party ID Reference data: {release_json}")

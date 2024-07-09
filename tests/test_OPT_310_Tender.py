@@ -5,10 +5,11 @@ import json
 import os
 import sys
 
+# Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
-def test_opt_310_tender_integration(tmp_path):
+def test_opt_310_tendering_party_id_reference_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -32,7 +33,7 @@ def test_opt_310_tender_integration(tmp_path):
                             <efac:TenderingParty>
                                 <cbc:ID schemeName="tendering-party">TPA-0001</cbc:ID>
                                 <efac:Tenderer>
-                                    <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                                    <cbc:ID schemeName="organization">ORG-0011</cbc:ID>
                                 </efac:Tenderer>
                             </efac:TenderingParty>
                         </efac:NoticeResult>
@@ -50,21 +51,21 @@ def test_opt_310_tender_integration(tmp_path):
     with open('output.json', 'r') as f:
         result = json.load(f)
 
-    assert "parties" in result
-    assert len(result["parties"]) == 1
-    party = result["parties"][0]
-    assert party["id"] == "ORG-0001"
-    assert "roles" in party
-    assert "tenderer" in party["roles"]
+    assert "parties" in result, "Expected 'parties' in result"
+    assert len(result["parties"]) == 1, f"Expected 1 party, got {len(result['parties'])}"
+    assert result["parties"][0]["id"] == "ORG-0011", f"Expected party id 'ORG-0011', got {result['parties'][0]['id']}"
+    assert "roles" in result["parties"][0], "Expected 'roles' in party"
+    assert "tenderer" in result["parties"][0]["roles"], "Expected 'tenderer' role in party"
 
-    assert "bids" in result
-    assert "details" in result["bids"]
-    assert len(result["bids"]["details"]) == 1
+    assert "bids" in result, "Expected 'bids' in result"
+    assert "details" in result["bids"], "Expected 'details' in bids"
+    assert len(result["bids"]["details"]) == 1, f"Expected 1 bid, got {len(result['bids']['details'])}"
+
     bid = result["bids"]["details"][0]
-    assert bid["id"] == "TEN-0001"
-    assert "tenderers" in bid
-    assert len(bid["tenderers"]) == 1
-    assert bid["tenderers"][0]["id"] == "ORG-0001"
+    assert bid["id"] == "TEN-0001", f"Expected bid id 'TEN-0001', got {bid['id']}"
+    assert "tenderers" in bid, "Expected 'tenderers' in bid"
+    assert len(bid["tenderers"]) == 1, f"Expected 1 tenderer, got {len(bid['tenderers'])}"
+    assert bid["tenderers"][0]["id"] == "ORG-0011", f"Expected tenderer id 'ORG-0011', got {bid['tenderers'][0]['id']}"
 
 if __name__ == "__main__":
     pytest.main()
