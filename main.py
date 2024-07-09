@@ -79,6 +79,8 @@ from converters.BT_195_BT_160_Tender import parse_unpublished_concession_revenue
 from converters.BT_195_BT_162_Tender import parse_unpublished_concession_revenue_user, merge_unpublished_concession_revenue_user
 from converters.BT_195_BT_163_Tender import parse_unpublished_concession_value_description, merge_unpublished_concession_value_description
 from converters.BT_195_BT_171_Tender import parse_unpublished_tender_rank, merge_unpublished_tender_rank
+from converters.BT_195_BT_191_Tender import parse_unpublished_country_origin, merge_unpublished_country_origin
+from converters.BT_195_BT_193_Tender import parse_unpublished_winning_tender_variant, merge_unpublished_winning_tender_variant
 from converters.BT_21_Lot import parse_lot_title, merge_lot_title
 from converters.BT_21_LotsGroup import parse_lots_group_title, merge_lots_group_title
 from converters.BT_21_Part import parse_part_title, merge_part_title
@@ -1157,6 +1159,30 @@ def main(xml_path, ocid_prefix):
             logger.info("No Unpublished Tender Rank data found")
     except Exception as e:
         logger.error(f"Error processing Unpublished Tender Rank data: {str(e)}")
+
+    # Parse and merge BT-195(BT-191)-Tender
+    try:
+        unpublished_country_origin_data = parse_unpublished_country_origin(xml_content)
+        if unpublished_country_origin_data:
+            #logger.info(f"BT-195(BT-191) Unpublished Country Origin data before merge: {unpublished_country_origin_data}")
+            merge_unpublished_country_origin(release_json, unpublished_country_origin_data)
+            #logger.info(f"BT-195(BT-191) Unpublished Country Origin data after merge: {release_json.get('withheldInformation', [])}")
+        else:
+            logger.info("No Unpublished Country Origin data found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Country Origin data: {str(e)}")
+
+    # Parse and merge BT-195(BT-193)-Tender
+    try:
+        unpublished_winning_tender_variant_data = parse_unpublished_winning_tender_variant(xml_content)
+        if unpublished_winning_tender_variant_data:
+            #logger.info(f"BT-195(BT-193) Unpublished Winning Tender Variant data before merge: {unpublished_winning_tender_variant_data}")
+            merge_unpublished_winning_tender_variant(release_json, unpublished_winning_tender_variant_data)
+            #logger.info(f"BT-195(BT-193) Unpublished Winning Tender Variant data after merge: {release_json.get('withheldInformation', [])}")
+        else:
+            logger.info("No Unpublished Winning Tender Variant data found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Winning Tender Variant data: {str(e)}")
 
     # Parse and merge BT-21-Lot
     try:
