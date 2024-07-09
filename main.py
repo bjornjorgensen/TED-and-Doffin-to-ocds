@@ -39,7 +39,7 @@ from converters.BT_132 import parse_public_opening_date
 from converters.BT_133_Lot import parse_public_opening_place, merge_public_opening_place
 from converters.BT_134_Lot import parse_lot_public_opening_description, merge_lot_public_opening_description
 from converters.BT_135 import parse_direct_award_justification_text
-from converters.BT_1351 import parse_procedure_accelerated_justification
+from converters.BT_1351_Procedure import parse_accelerated_procedure_justification, merge_accelerated_procedure_justification
 from converters.BT_136_Procedure import parse_direct_award_justification, merge_direct_award_justification
 from converters.BT_137_Purpose_Lot_Identifier import parse_purpose_lot_identifier, merge_purpose_lot_identifier
 from converters.BT_14_Lot import parse_lot_documents_restricted, merge_lot_documents_restricted
@@ -714,18 +714,15 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         print(f"Error parsing Direct Award Justification Text: {str(e)}")
 
-    # Parse the Procedure Accelerated Justification (BT-1351)
+    # Parse and merge BT-1351-Procedure
     try:
-        accelerated_justification = parse_procedure_accelerated_justification(xml_content)
-        
-        # Merge Procedure Accelerated Justification into the release JSON
-        if accelerated_justification:
-            tender = release_json.setdefault("tender", {})
-            procedure = tender.setdefault("procedure", {})
-            procedure.update(accelerated_justification["tender"]["procedure"])
-
+        accelerated_procedure_justification_data = parse_accelerated_procedure_justification(xml_content)
+        if accelerated_procedure_justification_data:
+            merge_accelerated_procedure_justification(release_json, accelerated_procedure_justification_data)
+        else:
+            logger.info("No Accelerated Procedure Justification data found")
     except Exception as e:
-        print(f"Error parsing Procedure Accelerated Justification: {str(e)}")
+        logger.error(f"Error processing Accelerated Procedure Justification data: {str(e)}")
 
     # Parse and merge BT-136-Procedure
     try:
