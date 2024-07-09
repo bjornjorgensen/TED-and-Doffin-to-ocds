@@ -67,6 +67,13 @@ from converters.BT_191_Tender import parse_country_origin, merge_country_origin
 from converters.BT_193_Tender import parse_tender_variant, merge_tender_variant
 #from converters.BT_195 import parse_unpublished_identifier
 from converters.BT_195_BT_09_Procedure import parse_unpublished_identifier, merge_unpublished_identifier
+from converters.BT_195_BT_105_Procedure import parse_unpublished_procedure_type, merge_unpublished_procedure_type
+from converters.BT_195_BT_106_Procedure import parse_unpublished_procedure_accelerated, merge_unpublished_procedure_accelerated
+from converters.BT_195_BT_1252_Procedure import parse_unpublished_direct_award_justification, merge_unpublished_direct_award_justification
+from converters.BT_195_BT_135_Procedure import parse_unpublished_direct_award_justification_text, merge_unpublished_direct_award_justification_text
+from converters.BT_195_BT_1351_Procedure import parse_unpublished_procedure_accelerated_justification, merge_unpublished_procedure_accelerated_justification
+from converters.BT_195_BT_136_Procedure import parse_unpublished_direct_award_justification_bt_136, merge_unpublished_direct_award_justification_bt_136
+from converters.BT_195_BT_142_LotResult import parse_unpublished_winner_chosen, merge_unpublished_winner_chosen
 from converters.BT_21_Lot import parse_lot_title, merge_lot_title
 from converters.BT_21_LotsGroup import parse_lots_group_title, merge_lots_group_title
 from converters.BT_21_Part import parse_part_title, merge_part_title
@@ -994,13 +1001,97 @@ def main(xml_path, ocid_prefix):
     try:
         unpublished_identifier_data = parse_unpublished_identifier(xml_content)
         if unpublished_identifier_data:
-            logger.info(f"BT-195(BT-09) Unpublished Identifier data before merge: {unpublished_identifier_data}")
+            #logger.info(f"BT-195(BT-09) Unpublished Identifier data before merge: {unpublished_identifier_data}")
             merge_unpublished_identifier(release_json, unpublished_identifier_data)
-            logger.info(f"BT-195(BT-09) Unpublished Identifier data after merge: {release_json.get('withheldInformation', [])}")
+            #logger.info(f"BT-195(BT-09) Unpublished Identifier data after merge: {release_json.get('withheldInformation', [])}")
         else:
             logger.info("No Unpublished Identifier data found")
     except Exception as e:
         logger.error(f"Error processing Unpublished Identifier data: {str(e)}")
+
+    # Parse and merge BT-195(BT-105)-Procedure
+    try:
+        unpublished_procedure_type_data = parse_unpublished_procedure_type(xml_content)
+        if unpublished_procedure_type_data:
+            #logger.info(f"BT-195(BT-105) Unpublished Procedure Type data before merge: {unpublished_procedure_type_data}")
+            merge_unpublished_procedure_type(release_json, unpublished_procedure_type_data)
+            #logger.info(f"BT-195(BT-105) Unpublished Procedure Type data after merge: {release_json.get('withheldInformation', [])}")
+        else:
+            logger.info("No Unpublished Procedure Type data found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Procedure Type data: {str(e)}")
+
+    # Parse and merge BT-195(BT-106)-Procedure
+    try:
+        unpublished_procedure_accelerated_data = parse_unpublished_procedure_accelerated(xml_content)
+        if unpublished_procedure_accelerated_data:
+            #logger.info(f"BT-195(BT-106) Unpublished Procedure Accelerated data before merge: {unpublished_procedure_accelerated_data}")
+            merge_unpublished_procedure_accelerated(release_json, unpublished_procedure_accelerated_data)
+            #logger.info(f"BT-195(BT-106) Unpublished Procedure Accelerated data after merge: {release_json.get('withheldInformation', [])}")
+        else:
+            logger.info("No Unpublished Procedure Accelerated data found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Procedure Accelerated data: {str(e)}")
+
+    # Parse and merge BT-195(BT-1252)-Procedure
+    try:
+        unpublished_direct_award_justification_data = parse_unpublished_direct_award_justification(xml_content)
+        if unpublished_direct_award_justification_data:
+            #logger.info(f"BT-195(BT-1252) Unpublished Direct Award Justification data before merge: {unpublished_direct_award_justification_data}")
+            merge_unpublished_direct_award_justification(release_json, unpublished_direct_award_justification_data)
+            #logger.info(f"BT-195(BT-1252) Unpublished Direct Award Justification data after merge: {release_json.get('withheldInformation', [])}")
+        else:
+            logger.info("No Unpublished Direct Award Justification data found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Direct Award Justification data: {str(e)}")
+
+    # Parse and merge BT-195(BT-135)-Procedure
+    try:
+        unpublished_direct_award_justification_text_data = parse_unpublished_direct_award_justification_text(xml_content)
+        if unpublished_direct_award_justification_text_data:
+            #logger.info(f"BT-195(BT-135) Unpublished Direct Award Justification Text data before merge: {unpublished_direct_award_justification_text_data}")
+            merge_unpublished_direct_award_justification_text(release_json, unpublished_direct_award_justification_text_data)
+            #logger.info(f"BT-195(BT-135) Unpublished Direct Award Justification Text data after merge: {release_json.get('withheldInformation', [])}")
+        else:
+            logger.info("No Unpublished Direct Award Justification Text data found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Direct Award Justification Text data: {str(e)}")
+
+    # Parse and merge BT-195(BT-1351)-Procedure
+    try:
+        unpublished_procedure_accelerated_justification_data = parse_unpublished_procedure_accelerated_justification(xml_content)
+        if unpublished_procedure_accelerated_justification_data:
+            #logger.info(f"BT-195(BT-1351) Unpublished Procedure Accelerated Justification data before merge: {unpublished_procedure_accelerated_justification_data}")
+            merge_unpublished_procedure_accelerated_justification(release_json, unpublished_procedure_accelerated_justification_data)
+            #logger.info(f"BT-195(BT-1351) Unpublished Procedure Accelerated Justification data after merge: {release_json.get('withheldInformation', [])}")
+        else:
+            logger.info("No Unpublished Procedure Accelerated Justification data found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Procedure Accelerated Justification data: {str(e)}")
+
+    # Parse and merge BT-195(BT-136)-Procedure
+    try:
+        unpublished_direct_award_justification_data_bt_136 = parse_unpublished_direct_award_justification_bt_136(xml_content)
+        if unpublished_direct_award_justification_data_bt_136:
+            #logger.info(f"BT-195(BT-136) Unpublished Direct Award Justification data before merge: {unpublished_direct_award_justification_data_bt_136}")
+            merge_unpublished_direct_award_justification_bt_136(release_json, unpublished_direct_award_justification_data_bt_136)
+            #logger.info(f"BT-195(BT-136) Unpublished Direct Award Justification data after merge: {release_json.get('withheldInformation', [])}")
+        else:
+            logger.info("No Unpublished Direct Award Justification data found for BT-136")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Direct Award Justification data for BT-136: {str(e)}")
+
+    # Parse and merge BT-195(BT-142)-LotResult
+    try:
+        unpublished_winner_chosen_data = parse_unpublished_winner_chosen(xml_content)
+        if unpublished_winner_chosen_data:
+            #logger.info(f"BT-195(BT-142) Unpublished Winner Chosen data before merge: {unpublished_winner_chosen_data}")
+            merge_unpublished_winner_chosen(release_json, unpublished_winner_chosen_data)
+            #logger.info(f"BT-195(BT-142) Unpublished Winner Chosen data after merge: {release_json.get('withheldInformation', [])}")
+        else:
+            logger.info("No Unpublished Winner Chosen data found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Winner Chosen data: {str(e)}")
 
     # Parse and merge BT-21-Lot
     try:
@@ -2696,16 +2787,16 @@ def main(xml_path, ocid_prefix):
         logger.warning("No Tender Identifier Reference data found")
         
     # Before applying remove_empty_elements and remove_empty_dicts
-    logger.info(f"Release JSON before removing empty elements: {json.dumps(release_json, indent=2)}")
+    #logger.info(f"Release JSON before removing empty elements: {json.dumps(release_json, indent=2)}")
     
     release_json = remove_empty_elements(release_json)
-    logger.info(f"Release JSON after removing empty elements: {json.dumps(release_json, indent=2)}")
+    #logger.info(f"Release JSON after removing empty elements: {json.dumps(release_json, indent=2)}")
 
     release_json = remove_empty_dicts(release_json)
-    logger.info(f"Release JSON after removing empty dicts: {json.dumps(release_json, indent=2)}")
+    #logger.info(f"Release JSON after removing empty dicts: {json.dumps(release_json, indent=2)}")
 
     # Before writing to output.json
-    logger.info(f"Final release JSON: {json.dumps(release_json, indent=2)}")
+    #logger.info(f"Final release JSON: {json.dumps(release_json, indent=2)}")
 
     # Write the JSON output to a file
     with io.open('output.json', 'w', encoding='utf-8') as f:
