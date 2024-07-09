@@ -54,7 +54,7 @@ from converters.BT_150_Contract import parse_contract_identifier, merge_contract
 from converters.BT_151_Contract import parse_contract_url, merge_contract_url
 from converters.BT_16_Organization_Company import parse_organization_part_name, merge_organization_part_name
 from converters.BT_16_Organization_TouchPoint import parse_touchpoint_part_name, merge_touchpoint_part_name
-from converters.BT_160 import parse_concession_revenue_buyer
+from converters.BT_160_Tender import parse_concession_revenue_buyer, merge_concession_revenue_buyer
 from converters.BT_162 import parse_concession_revenue_user
 from converters.BT_163_Tender import parse_concession_value_description, merge_concession_value_description
 from converters.BT_165_Organization_Company import parse_winner_size, merge_winner_size
@@ -883,28 +883,17 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing TouchPoint Part Name data: {str(e)}")
 
-    # Parse the Concession Revenue Buyer (BT-160)
+    # Parse and merge BT-160-Tender
     try:
-        concession_revenue_buyer = parse_concession_revenue_buyer(xml_content)
-        
-        # Merge Concession Revenue Buyer into the release JSON
-        if concession_revenue_buyer and "contracts" in concession_revenue_buyer:
-            existing_contracts = release_json.setdefault("contracts", [])
-            for new_contract in concession_revenue_buyer["contracts"]:
-                existing_contract = next((contract for contract in existing_contracts if contract["id"] == new_contract["id"]), None)
-                if existing_contract:
-                    existing_implementation = existing_contract.setdefault("implementation", {})
-                    existing_charges = existing_implementation.setdefault("charges", [])
-                    existing_charges.extend(new_contract["implementation"]["charges"])
-                    if "awardID" in new_contract:
-                        existing_contract["awardID"] = new_contract["awardID"]
-                    elif "awardIDs" in new_contract:
-                        existing_contract["awardIDs"] = new_contract["awardIDs"]
-                else:
-                    existing_contracts.append(new_contract)
-
+        concession_revenue_buyer_data = parse_concession_revenue_buyer(xml_content)
+        if concession_revenue_buyer_data:
+            logger.info(f"BT-160 Concession Revenue Buyer data before merge: {concession_revenue_buyer_data}")
+            merge_concession_revenue_buyer(release_json, concession_revenue_buyer_data)
+            logger.info(f"BT-160 Concession Revenue Buyer data after merge: {release_json.get('contracts', [])}")
+        else:
+            logger.info("No Concession Revenue Buyer data found")
     except Exception as e:
-        print(f"Error parsing Concession Revenue Buyer: {str(e)}")
+        logger.error(f"Error processing Concession Revenue Buyer data: {str(e)}")
 
     # Parse the Concession Revenue User (BT-162)
     try:
