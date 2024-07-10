@@ -93,6 +93,15 @@ from converters.BT_195_BT_541_LotsGroup_Threshold import parse_unpublished_award
 from converters.BT_195_BT_541_LotsGroup_Weight import parse_unpublished_award_criterion_number_weight_lotsgroup_bt541, merge_unpublished_award_criterion_number_weight_lotsgroup_bt541
 from converters.BT_195_BT_5421_Lot import parse_unpublished_award_criterion_number_weight_lot, merge_unpublished_award_criterion_number_weight_lot
 from converters.BT_195_BT_5421_LotsGroup import parse_unpublished_award_criterion_number_weight_lotsgroup, merge_unpublished_award_criterion_number_weight_lotsgroup
+from converters.BT_195_BT_5422_Lot import parse_unpublished_award_criterion_number_fixed_lot, merge_unpublished_award_criterion_number_fixed_lot
+from converters.BT_195_BT_5422_LotsGroup import parse_unpublished_award_criterion_number_fixed_lotsgroup_bt5422, merge_unpublished_award_criterion_number_fixed_lotsgroup_bt5422
+from converters.BT_195_BT_5423_Lot import parse_unpublished_award_criterion_number_threshold_lot, merge_unpublished_award_criterion_number_threshold_lot
+from converters.BT_195_BT_5423_LotsGroup import parse_unpublished_award_criterion_number_threshold_lotsgroup_bt5423, merge_unpublished_award_criterion_number_threshold_lotsgroup_bt5423
+from converters.BT_195_BT_543_Lot import parse_unpublished_award_criteria_complicated_lot, merge_unpublished_award_criteria_complicated_lot
+from converters.BT_195_BT_543_LotsGroup import parse_unpublished_award_criteria_complicated_lotsgroup, merge_unpublished_award_criteria_complicated_lotsgroup
+from converters.BT_195_BT_553_Tender import parse_unpublished_subcontracting_value_tender, merge_unpublished_subcontracting_value_tender
+from converters.BT_195_BT_554_Tender import parse_unpublished_subcontracting_description_tender, merge_unpublished_subcontracting_description_tender
+from converters.BT_195_BT_555_Tender import parse_unpublished_subcontracting_percentage_tender, merge_unpublished_subcontracting_percentage_tender
 from converters.BT_21_Lot import parse_lot_title, merge_lot_title
 from converters.BT_21_LotsGroup import parse_lots_group_title, merge_lots_group_title
 from converters.BT_21_Part import parse_part_title, merge_part_title
@@ -1327,6 +1336,96 @@ def main(xml_path, ocid_prefix):
             logger.info("No unpublished award criterion number weight lotsgroup data found")
     except Exception as e:
         logger.error(f"Error processing unpublished award criterion number weight lotsgroup data: {str(e)}")
+
+    # Parse and merge BT-195(BT-5422)-Lot
+    try:
+        unpublished_award_criterion_number_fixed_lot_data = parse_unpublished_award_criterion_number_fixed_lot(xml_content)
+        if unpublished_award_criterion_number_fixed_lot_data:
+            merge_unpublished_award_criterion_number_fixed_lot(release_json, unpublished_award_criterion_number_fixed_lot_data)
+        else:
+            logger.info("No unpublished award criterion number fixed lot data found")
+    except Exception as e:
+        logger.error(f"Error processing unpublished award criterion number fixed lot data: {str(e)}")
+
+    # Parse and merge BT-195(BT-5422)-LotsGroup
+    try:
+        unpublished_award_criterion_number_fixed_lotsgroup_data = parse_unpublished_award_criterion_number_fixed_lotsgroup_bt5422(xml_content)
+        if unpublished_award_criterion_number_fixed_lotsgroup_data:
+            merge_unpublished_award_criterion_number_fixed_lotsgroup_bt5422(release_json, unpublished_award_criterion_number_fixed_lotsgroup_data)
+        else:
+            logger.info("No unpublished award criterion number fixed lotsgroup data found")
+    except Exception as e:
+        logger.error(f"Error processing unpublished award criterion number fixed lotsgroup data: {str(e)}")
+
+    # Parse and merge BT-195(BT-5423)-Lot
+    try:
+        unpublished_award_criterion_number_threshold_lot_data = parse_unpublished_award_criterion_number_threshold_lot(xml_content)
+        if unpublished_award_criterion_number_threshold_lot_data:
+            merge_unpublished_award_criterion_number_threshold_lot(release_json, unpublished_award_criterion_number_threshold_lot_data)
+        else:
+            logger.info("No unpublished award criterion number threshold lot data found")
+    except Exception as e:
+        logger.error(f"Error processing unpublished award criterion number threshold lot data: {str(e)}")
+
+    # Parse and merge BT-195(BT-5423)-LotsGroup
+    try:
+        unpublished_award_criterion_number_threshold_lotsgroup_data = parse_unpublished_award_criterion_number_threshold_lotsgroup_bt5423(xml_content)
+        if unpublished_award_criterion_number_threshold_lotsgroup_data:
+            merge_unpublished_award_criterion_number_threshold_lotsgroup_bt5423(release_json, unpublished_award_criterion_number_threshold_lotsgroup_data)
+        else:
+            logger.info("No unpublished award criterion number threshold lotsgroup data found")
+    except Exception as e:
+        logger.error(f"Error processing unpublished award criterion number threshold lotsgroup data: {str(e)}")
+
+    # Parse and merge BT-195(BT-543)-Lot
+    try:
+        unpublished_award_criteria_complicated_lot_data = parse_unpublished_award_criteria_complicated_lot(xml_content)
+        if unpublished_award_criteria_complicated_lot_data:
+            merge_unpublished_award_criteria_complicated_lot(release_json, unpublished_award_criteria_complicated_lot_data)
+        else:
+            logger.info("No unpublished award criteria complicated lot data found")
+    except Exception as e:
+        logger.error(f"Error processing unpublished award criteria complicated lot data: {str(e)}")
+
+    # Parse and merge BT-195(BT-543)-LotsGroup
+    try:
+        unpublished_award_criteria_complicated_lotsgroup_data = parse_unpublished_award_criteria_complicated_lotsgroup(xml_content)
+        if unpublished_award_criteria_complicated_lotsgroup_data:
+            merge_unpublished_award_criteria_complicated_lotsgroup(release_json, unpublished_award_criteria_complicated_lotsgroup_data)
+        else:
+            logger.info("No unpublished award criteria complicated lotsgroup data found")
+    except Exception as e:
+        logger.error(f"Error processing unpublished award criteria complicated lotsgroup data: {str(e)}")
+
+    # Parse and merge BT-195(BT-553)-Tender
+    try:
+        unpublished_subcontracting_value_tender_data = parse_unpublished_subcontracting_value_tender(xml_content)
+        if unpublished_subcontracting_value_tender_data:
+            merge_unpublished_subcontracting_value_tender(release_json, unpublished_subcontracting_value_tender_data)
+        else:
+            logger.info("No unpublished subcontracting value tender data found")
+    except Exception as e:
+        logger.error(f"Error processing unpublished subcontracting value tender data: {str(e)}")
+
+    # Parse and merge BT-195(BT-554)-Tender
+    try:
+        unpublished_subcontracting_description_tender_data = parse_unpublished_subcontracting_description_tender(xml_content)
+        if unpublished_subcontracting_description_tender_data:
+            merge_unpublished_subcontracting_description_tender(release_json, unpublished_subcontracting_description_tender_data)
+        else:
+            logger.info("No unpublished subcontracting description tender data found")
+    except Exception as e:
+        logger.error(f"Error processing unpublished subcontracting description tender data: {str(e)}")
+
+    # Parse and merge BT-195(BT-555)-Tender
+    try:
+        unpublished_subcontracting_percentage_tender_data = parse_unpublished_subcontracting_percentage_tender(xml_content)
+        if unpublished_subcontracting_percentage_tender_data:
+            merge_unpublished_subcontracting_percentage_tender(release_json, unpublished_subcontracting_percentage_tender_data)
+        else:
+            logger.info("No unpublished subcontracting percentage tender data found")
+    except Exception as e:
+        logger.error(f"Error processing unpublished subcontracting percentage tender data: {str(e)}")
 
     # Parse and merge BT-21-Lot
     try:
