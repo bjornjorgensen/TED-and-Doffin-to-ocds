@@ -102,6 +102,22 @@ from converters.BT_195_BT_543_LotsGroup import parse_unpublished_award_criteria_
 from converters.BT_195_BT_553_Tender import parse_unpublished_subcontracting_value_tender, merge_unpublished_subcontracting_value_tender
 from converters.BT_195_BT_554_Tender import parse_unpublished_subcontracting_description_tender, merge_unpublished_subcontracting_description_tender
 from converters.BT_195_BT_555_Tender import parse_unpublished_subcontracting_percentage_tender, merge_unpublished_subcontracting_percentage_tender
+from converters.BT_195_BT_635_LotResult import parse_unpublished_buyer_review_request_count_lotresult_bt635, merge_unpublished_buyer_review_request_count_lotresult_bt635
+from converters.BT_195_BT_636_LotResult import parse_unpublished_buyer_review_request_irregularity_type_lotresult_bt636, merge_unpublished_buyer_review_request_irregularity_type_lotresult_bt636
+from converters.BT_195_BT_660_LotResult import parse_unpublished_framework_reestimated_value_lotresult_bt660, merge_unpublished_framework_reestimated_value_lotresult_bt660
+from converters.BT_195_BT_709_LotResult import parse_unpublished_maximum_value_lotresult_bt709, merge_unpublished_maximum_value_lotresult_bt709
+from converters.BT_195_BT_710_LotResult import parse_unpublished_tender_lowest_value_lotresult_bt710, merge_unpublished_tender_lowest_value_lotresult_bt710
+from converters.BT_195_BT_711_LotResult import parse_unpublished_tender_highest_value_lotresult_bt711, merge_unpublished_tender_highest_value_lotresult_bt711
+from converters.BT_195_BT_712_LotResult import parse_unpublished_buyer_review_complainants_lotresult_bt712, merge_unpublished_buyer_review_complainants_lotresult_bt712
+from converters.BT_195_BT_720_Tender import parse_unpublished_winning_tender_value_tender_bt720, merge_unpublished_winning_tender_value_tender_bt720
+from converters.BT_195_BT_733_Lot import parse_unpublished_award_criteria_order_justification_lot_bt733, merge_unpublished_award_criteria_order_justification_lot_bt733
+from converters.BT_195_BT_733_LotsGroup import parse_unpublished_award_criteria_order_justification_lotsgroup_bt733, merge_unpublished_award_criteria_order_justification_lotsgroup_bt733
+from converters.BT_195_BT_734_Lot import parse_unpublished_award_criterion_name_lot_bt734, merge_unpublished_award_criterion_name_lot_bt734
+from converters.BT_195_BT_734_LotsGroup import parse_unpublished_award_criterion_name_lotsgroup_bt734, merge_unpublished_award_criterion_name_lotsgroup_bt734
+from converters.BT_195_BT_759_LotResult import parse_unpublished_received_submissions_count_lotresult_bt759, merge_unpublished_received_submissions_count_lotresult_bt759
+from converters.BT_195_BT_760_LotResult import parse_unpublished_received_submissions_type_lotresult_bt760, merge_unpublished_received_submissions_type_lotresult_bt760
+from converters.BT_195_BT_773_Tender import parse_unpublished_subcontracting_tender_bt773, merge_unpublished_subcontracting_tender_bt773
+from converters.BT_195_BT_88_Procedure import parse_unpublished_procedure_features_procedure_bt88, merge_unpublished_procedure_features_procedure_bt88
 from converters.BT_21_Lot import parse_lot_title, merge_lot_title
 from converters.BT_21_LotsGroup import parse_lots_group_title, merge_lots_group_title
 from converters.BT_21_Part import parse_part_title, merge_part_title
@@ -1426,6 +1442,166 @@ def main(xml_path, ocid_prefix):
             logger.info("No unpublished subcontracting percentage tender data found")
     except Exception as e:
         logger.error(f"Error processing unpublished subcontracting percentage tender data: {str(e)}")
+
+    # Parse and merge BT-195(BT-635)-LotResult
+    try:
+        unpublished_buyer_review_request_count = parse_unpublished_buyer_review_request_count_lotresult_bt635(xml_content)
+        if unpublished_buyer_review_request_count:
+            merge_unpublished_buyer_review_request_count_lotresult_bt635(release_json, unpublished_buyer_review_request_count)
+        else:
+            logger.info("No Unpublished Buyer Review Request Count found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Buyer Review Request Count: {str(e)}")
+
+    # Parse and merge BT-195(BT-636)-LotResult
+    try:
+        unpublished_buyer_review_request_irregularity_type = parse_unpublished_buyer_review_request_irregularity_type_lotresult_bt636(xml_content)
+        if unpublished_buyer_review_request_irregularity_type:
+            merge_unpublished_buyer_review_request_irregularity_type_lotresult_bt636(release_json, unpublished_buyer_review_request_irregularity_type)
+        else:
+            logger.info("No Unpublished Buyer Review Request Irregularity Type found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Buyer Review Request Irregularity Type: {str(e)}")
+
+    # Parse and merge BT-195(BT-660)-LotResult
+    try:
+        unpublished_framework_reestimated_value = parse_unpublished_framework_reestimated_value_lotresult_bt660(xml_content)
+        if unpublished_framework_reestimated_value:
+            merge_unpublished_framework_reestimated_value_lotresult_bt660(release_json, unpublished_framework_reestimated_value)
+        else:
+            logger.info("No Unpublished Framework Re-estimated Value found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Framework Re-estimated Value: {str(e)}")
+
+    # Parse and merge BT-195(BT-709)-LotResult
+    try:
+        unpublished_maximum_value = parse_unpublished_maximum_value_lotresult_bt709(xml_content)
+        if unpublished_maximum_value:
+            merge_unpublished_maximum_value_lotresult_bt709(release_json, unpublished_maximum_value)
+        else:
+            logger.info("No Unpublished Maximum Value found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Maximum Value: {str(e)}")
+
+    # Parse and merge BT-195(BT-710)-LotResult
+    try:
+        unpublished_tender_lowest_value = parse_unpublished_tender_lowest_value_lotresult_bt710(xml_content)
+        if unpublished_tender_lowest_value:
+            merge_unpublished_tender_lowest_value_lotresult_bt710(release_json, unpublished_tender_lowest_value)
+        else:
+            logger.info("No Unpublished Tender Lowest Value found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Tender Lowest Value: {str(e)}")
+
+    # Parse and merge BT-195(BT-711)-LotResult
+    try:
+        unpublished_tender_highest_value = parse_unpublished_tender_highest_value_lotresult_bt711(xml_content)
+        if unpublished_tender_highest_value:
+            merge_unpublished_tender_highest_value_lotresult_bt711(release_json, unpublished_tender_highest_value)
+        else:
+            logger.info("No Unpublished Tender Highest Value found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Tender Highest Value: {str(e)}")
+
+    # Parse and merge BT-195(BT-712)-LotResult
+    try:
+        unpublished_buyer_review_complainants = parse_unpublished_buyer_review_complainants_lotresult_bt712(xml_content)
+        if unpublished_buyer_review_complainants:
+            merge_unpublished_buyer_review_complainants_lotresult_bt712(release_json, unpublished_buyer_review_complainants)
+        else:
+            logger.info("No Unpublished Buyer Review Complainants found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Buyer Review Complainants: {str(e)}")
+
+    # Parse and merge BT-195(BT-720)-Tender
+    try:
+        unpublished_winning_tender_value = parse_unpublished_winning_tender_value_tender_bt720(xml_content)
+        if unpublished_winning_tender_value:
+            merge_unpublished_winning_tender_value_tender_bt720(release_json, unpublished_winning_tender_value)
+        else:
+            logger.info("No Unpublished Winning Tender Value found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Winning Tender Value: {str(e)}")
+
+    # Parse and merge BT-195(BT-733)-Lot
+    try:
+        unpublished_award_criteria_order_justification = parse_unpublished_award_criteria_order_justification_lot_bt733(xml_content)
+        if unpublished_award_criteria_order_justification:
+            merge_unpublished_award_criteria_order_justification_lot_bt733(release_json, unpublished_award_criteria_order_justification)
+        else:
+            logger.info("No Unpublished Award Criteria Order Justification found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Award Criteria Order Justification: {str(e)}")
+
+    # Parse and merge BT-195(BT-733)-LotsGroup
+    try:
+        unpublished_award_criteria_order_justification_lotsgroup = parse_unpublished_award_criteria_order_justification_lotsgroup_bt733(xml_content)
+        if unpublished_award_criteria_order_justification_lotsgroup:
+            merge_unpublished_award_criteria_order_justification_lotsgroup_bt733(release_json, unpublished_award_criteria_order_justification_lotsgroup)
+        else:
+            logger.info("No Unpublished Award Criteria Order Justification for LotsGroup found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Award Criteria Order Justification for LotsGroup: {str(e)}")
+
+    # Parse and merge BT-195(BT-734)-Lot
+    try:
+        unpublished_award_criterion_name_lot = parse_unpublished_award_criterion_name_lot_bt734(xml_content)
+        if unpublished_award_criterion_name_lot:
+            merge_unpublished_award_criterion_name_lot_bt734(release_json, unpublished_award_criterion_name_lot)
+        else:
+            logger.info("No Unpublished Award Criterion Name for Lot found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Award Criterion Name for Lot: {str(e)}")
+
+    # Parse and merge BT-195(BT-734)-LotsGroup
+    try:
+        unpublished_award_criterion_name_lotsgroup = parse_unpublished_award_criterion_name_lotsgroup_bt734(xml_content)
+        if unpublished_award_criterion_name_lotsgroup:
+            merge_unpublished_award_criterion_name_lotsgroup_bt734(release_json, unpublished_award_criterion_name_lotsgroup)
+        else:
+            logger.info("No Unpublished Award Criterion Name for LotsGroup found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Award Criterion Name for LotsGroup: {str(e)}")
+
+    # Parse and merge BT-195(BT-759)-LotResult
+    try:
+        unpublished_received_submissions_count = parse_unpublished_received_submissions_count_lotresult_bt759(xml_content)
+        if unpublished_received_submissions_count:
+            merge_unpublished_received_submissions_count_lotresult_bt759(release_json, unpublished_received_submissions_count)
+        else:
+            logger.info("No Unpublished Received Submissions Count for LotResult found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Received Submissions Count for LotResult: {str(e)}")
+
+    # Parse and merge BT-195(BT-760)-LotResult
+    try:
+        unpublished_received_submissions_type = parse_unpublished_received_submissions_type_lotresult_bt760(xml_content)
+        if unpublished_received_submissions_type:
+            merge_unpublished_received_submissions_type_lotresult_bt760(release_json, unpublished_received_submissions_type)
+        else:
+            logger.info("No Unpublished Received Submissions Type for LotResult found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Received Submissions Type for LotResult: {str(e)}")
+
+    # Parse and merge BT-195(BT-773)-Tender
+    try:
+        unpublished_subcontracting = parse_unpublished_subcontracting_tender_bt773(xml_content)
+        if unpublished_subcontracting:
+            merge_unpublished_subcontracting_tender_bt773(release_json, unpublished_subcontracting)
+        else:
+            logger.info("No Unpublished Subcontracting for Tender found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Subcontracting for Tender: {str(e)}")
+
+    # Parse and merge BT-195(BT-88)-Procedure
+    try:
+        unpublished_procedure_features = parse_unpublished_procedure_features_procedure_bt88(xml_content)
+        if unpublished_procedure_features:
+            merge_unpublished_procedure_features_procedure_bt88(release_json, unpublished_procedure_features)
+        else:
+            logger.info("No Unpublished Procedure Features found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Procedure Features: {str(e)}")
 
     # Parse and merge BT-21-Lot
     try:
