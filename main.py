@@ -86,6 +86,13 @@ from converters.BT_195_BT_539_LotsGroup import parse_unpublished_award_criterion
 from converters.BT_195_BT_540_Lot import parse_unpublished_award_criterion_description, merge_unpublished_award_criterion_description
 from converters.BT_195_BT_540_LotsGroup import parse_unpublished_award_criterion_description_lots_group, merge_unpublished_award_criterion_description_lots_group
 from converters.BT_195_BT_541_Lot_Fixed import parse_unpublished_award_criterion_number_fixed, merge_unpublished_award_criterion_number_fixed
+from converters.BT_195_BT_541_Lot_Threshold import parse_unpublished_award_criterion_number_threshold, merge_unpublished_award_criterion_number_threshold
+from converters.BT_195_BT_541_Lot_Weight import parse_unpublished_award_criterion_number_weight, merge_unpublished_award_criterion_number_weight
+from converters.BT_195_BT_541_LotsGroup_Fixed import parse_unpublished_award_criterion_number_fixed_lotsgroup, merge_unpublished_award_criterion_number_fixed_lotsgroup
+from converters.BT_195_BT_541_LotsGroup_Threshold import parse_unpublished_award_criterion_number_threshold_lotsgroup, merge_unpublished_award_criterion_number_threshold_lotsgroup
+from converters.BT_195_BT_541_LotsGroup_Weight import parse_unpublished_award_criterion_number_weight_lotsgroup_bt541, merge_unpublished_award_criterion_number_weight_lotsgroup_bt541
+from converters.BT_195_BT_5421_Lot import parse_unpublished_award_criterion_number_weight_lot, merge_unpublished_award_criterion_number_weight_lot
+from converters.BT_195_BT_5421_LotsGroup import parse_unpublished_award_criterion_number_weight_lotsgroup, merge_unpublished_award_criterion_number_weight_lotsgroup
 from converters.BT_21_Lot import parse_lot_title, merge_lot_title
 from converters.BT_21_LotsGroup import parse_lots_group_title, merge_lots_group_title
 from converters.BT_21_Part import parse_part_title, merge_part_title
@@ -1249,6 +1256,77 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Unpublished Award Criterion Number Fixed data: {str(e)}")
  
+    # Parse and merge BT-195(BT-541)-Lot-Threshold
+    try:
+        unpublished_award_criterion_number_threshold_data = parse_unpublished_award_criterion_number_threshold(xml_content)
+        if unpublished_award_criterion_number_threshold_data:
+            #logger.info(f"BT-195(BT-541) Unpublished Award Criterion Number Threshold data before merge: {unpublished_award_criterion_number_threshold_data}")
+            merge_unpublished_award_criterion_number_threshold(release_json, unpublished_award_criterion_number_threshold_data)
+            #logger.info(f"BT-195(BT-541) Unpublished Award Criterion Number Threshold data after merge: {release_json.get('withheldInformation', [])}")
+        else:
+            logger.info("No Unpublished Award Criterion Number Threshold data found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Award Criterion Number Threshold data: {str(e)}")
+
+    # Parse and merge BT-195(BT-541)-Lot-Weight
+    try:
+        unpublished_award_criterion_number_weight_data = parse_unpublished_award_criterion_number_weight(xml_content)
+        if unpublished_award_criterion_number_weight_data:
+            merge_unpublished_award_criterion_number_weight(release_json, unpublished_award_criterion_number_weight_data)
+        else:
+            logger.info("No unpublished award criterion number weight data found")
+    except Exception as e:
+        logger.error(f"Error processing unpublished award criterion number weight data: {str(e)}")
+
+    # Parse and merge BT-195(BT-541)-LotsGroup-Fixed
+    try:
+        unpublished_award_criterion_number_fixed_lotsgroup_data = parse_unpublished_award_criterion_number_fixed_lotsgroup(xml_content)
+        if unpublished_award_criterion_number_fixed_lotsgroup_data:
+            merge_unpublished_award_criterion_number_fixed_lotsgroup(release_json, unpublished_award_criterion_number_fixed_lotsgroup_data)
+        else:
+            logger.info("No unpublished award criterion number fixed lotsgroup data found")
+    except Exception as e:
+        logger.error(f"Error processing unpublished award criterion number fixed lotsgroup data: {str(e)}")
+
+    # Parse and merge BT-195(BT-541)-LotsGroup-Threshold
+    try:
+        unpublished_award_criterion_number_threshold_lotsgroup_data = parse_unpublished_award_criterion_number_threshold_lotsgroup(xml_content)
+        if unpublished_award_criterion_number_threshold_lotsgroup_data:
+            merge_unpublished_award_criterion_number_threshold_lotsgroup(release_json, unpublished_award_criterion_number_threshold_lotsgroup_data)
+        else:
+            logger.info("No unpublished award criterion number threshold lotsgroup data found")
+    except Exception as e:
+        logger.error(f"Error processing unpublished award criterion number threshold lotsgroup data: {str(e)}")
+
+    # Parse and merge BT-195(BT-541)-LotsGroup-Weight
+    try:
+        unpublished_award_criterion_number_weight_lotsgroup_bt541_data = parse_unpublished_award_criterion_number_weight_lotsgroup_bt541(xml_content)
+        if unpublished_award_criterion_number_weight_lotsgroup_bt541_data:
+            merge_unpublished_award_criterion_number_weight_lotsgroup_bt541(release_json, unpublished_award_criterion_number_weight_lotsgroup_bt541_data)
+        else:
+            logger.info("No unpublished award criterion number weight lotsgroup BT-541 data found")
+    except Exception as e:
+        logger.error(f"Error processing unpublished award criterion number weight lotsgroup BT-541 data: {str(e)}")
+
+    # Parse and merge BT-195(BT-5421)-Lot
+    try:
+        unpublished_award_criterion_number_weight_lot_data = parse_unpublished_award_criterion_number_weight_lot(xml_content)
+        if unpublished_award_criterion_number_weight_lot_data:
+            merge_unpublished_award_criterion_number_weight_lot(release_json, unpublished_award_criterion_number_weight_lot_data)
+        else:
+            logger.info("No unpublished award criterion number weight lot data found")
+    except Exception as e:
+        logger.error(f"Error processing unpublished award criterion number weight lot data: {str(e)}")
+
+    # Parse and merge BT-195(BT-5421)-LotsGroup
+    try:
+        unpublished_award_criterion_number_weight_lotsgroup_data = parse_unpublished_award_criterion_number_weight_lotsgroup(xml_content)
+        if unpublished_award_criterion_number_weight_lotsgroup_data:
+            merge_unpublished_award_criterion_number_weight_lotsgroup(release_json, unpublished_award_criterion_number_weight_lotsgroup_data)
+        else:
+            logger.info("No unpublished award criterion number weight lotsgroup data found")
+    except Exception as e:
+        logger.error(f"Error processing unpublished award criterion number weight lotsgroup data: {str(e)}")
 
     # Parse and merge BT-21-Lot
     try:

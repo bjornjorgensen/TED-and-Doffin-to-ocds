@@ -53,8 +53,8 @@
         ]
     },
     "tag": [
-        "contract",
-        "award"
+        "award",
+        "contract"
     ],
     "date": "2019-10-23T00:00:00+01:00",
     "parties": [
@@ -134,8 +134,8 @@
                 "listedOnRegulatedMarket": false
             },
             "roles": [
-                "tenderer",
-                "supplier"
+                "supplier",
+                "tenderer"
             ],
             "additionalIdentifiers": [
                 {
