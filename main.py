@@ -118,6 +118,24 @@ from converters.BT_195_BT_759_LotResult import parse_unpublished_received_submis
 from converters.BT_195_BT_760_LotResult import parse_unpublished_received_submissions_type_lotresult_bt760, merge_unpublished_received_submissions_type_lotresult_bt760
 from converters.BT_195_BT_773_Tender import parse_unpublished_subcontracting_tender_bt773, merge_unpublished_subcontracting_tender_bt773
 from converters.BT_195_BT_88_Procedure import parse_unpublished_procedure_features_procedure_bt88, merge_unpublished_procedure_features_procedure_bt88
+
+from converters.BT_196_BT_09_Procedure import parse_unpublished_justification_description_procedure_bt09, merge_unpublished_justification_description_procedure_bt09
+from converters.BT_196_BT_105_Procedure import parse_unpublished_justification_description_procedure_bt105, merge_unpublished_justification_description_procedure_bt105
+from converters.BT_196_BT_106_Procedure import parse_unpublished_justification_description_procedure_bt106, merge_unpublished_justification_description_procedure_bt106
+
+from converters.BT_197_BT_106_Procedure import parse_unpublished_justification_code_procedure_bt106, merge_unpublished_justification_code_procedure_bt106
+from converters.BT_197_BT_105_Procedure import parse_unpublished_justification_code_procedure_bt105, merge_unpublished_justification_code_procedure_bt105
+from converters.BT_197_BT_09_Procedure import parse_unpublished_justification_code_procedure_bt09, merge_unpublished_justification_code_procedure_bt09
+
+
+
+
+
+from converters.BT_198_BT_09_Procedure import parse_unpublished_access_date_procedure_bt09, merge_unpublished_access_date_procedure_bt09
+from converters.BT_198_BT_105_Procedure import parse_unpublished_access_date_procedure_bt105, merge_unpublished_access_date_procedure_bt105
+from converters.BT_198_BT_106_Procedure import parse_unpublished_access_date_procedure_bt106, merge_unpublished_access_date_procedure_bt106
+
+
 from converters.BT_21_Lot import parse_lot_title, merge_lot_title
 from converters.BT_21_LotsGroup import parse_lots_group_title, merge_lots_group_title
 from converters.BT_21_Part import parse_part_title, merge_part_title
@@ -319,7 +337,7 @@ from converters.BT_95_Lot import parse_recurrence_description, merge_recurrence_
 from converters.BT_97_Lot import parse_submission_language, merge_submission_language
 from converters.BT_98_Lot import parse_tender_validity_deadline, merge_tender_validity_deadline
 from converters.BT_99_Lot import parse_review_deadline_description, merge_review_deadline_description
-from converters.BT_198_BT_105 import parse_unpublished_access_date, merge_unpublished_access_date
+#from converters.BT_198_BT_105 import parse_unpublished_access_date, merge_unpublished_access_date
 from converters.OPP_020_Contract import map_extended_duration_indicator, merge_extended_duration_indicator
 from converters.OPP_021_Contract import map_essential_assets, merge_essential_assets
 from converters.OPP_022_Contract import map_asset_significance, merge_asset_significance
@@ -1603,6 +1621,101 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Unpublished Procedure Features: {str(e)}")
 
+    # Process BT-196(BT-09)-Procedure
+    try:
+        rationale = parse_unpublished_justification_description_procedure_bt09(xml_content)
+        if rationale:
+            merge_unpublished_justification_description_procedure_bt09(release_json, rationale)
+        else:
+            logger.info("No Unpublished Justification Description for Cross Border Law found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Cross Border Law: {str(e)}")
+
+    # Parse and merge BT-196(BT-105)-Procedure
+    try:
+        rationale = parse_unpublished_justification_description_procedure_bt105(xml_content)
+        if rationale:
+            merge_unpublished_justification_description_procedure_bt105(release_json, rationale)
+        else:
+            logger.info("No Unpublished Justification Description (BT-105) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description (BT-105): {str(e)}")
+
+    # Parse and merge BT-196(BT-106)-Procedure
+    try:
+        rationale = parse_unpublished_justification_description_procedure_bt106(xml_content)
+        if rationale:
+            merge_unpublished_justification_description_procedure_bt106(release_json, rationale)
+        else:
+            logger.info("No Unpublished Justification Description for Accelerated Procedure found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Accelerated Procedure: {str(e)}")
+    
+    # Parse and merge BT-197(BT-106)-Procedure
+    try:
+        justification_code = parse_unpublished_justification_code_procedure_bt106(xml_content)
+        if justification_code:
+            merge_unpublished_justification_code_procedure_bt106(release_json, justification_code)
+        else:
+            logger.info("No Unpublished Justification Code for Accelerated Procedure found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Code for Accelerated Procedure: {str(e)}")
+
+    # Parse and merge BT-197(BT_09)-Procedure
+    try:
+        justification_code = parse_unpublished_justification_code_procedure_bt09(xml_content)
+        if justification_code:
+            merge_unpublished_justification_code_procedure_bt09(release_json, justification_code)
+        else:
+            logger.info("No Unpublished Justification Code for Cross Border Law found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Code for Cross Border Law: {str(e)}")
+    
+    # Parse and merge BT-197(BT-105)-Procedure
+    try:
+        justification_code = parse_unpublished_justification_code_procedure_bt105(xml_content)
+        if justification_code:
+            merge_unpublished_justification_code_procedure_bt105(release_json, justification_code)
+        else:
+            logger.info("No Unpublished Justification Code for Procedure Type found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Code for Procedure Type: {str(e)}")
+
+
+    # Parse and merge BT-198(BT_105)-Procedure
+    try:
+        availability_date = parse_unpublished_access_date_procedure_bt105(xml_content)
+        if availability_date:
+            merge_unpublished_access_date_procedure_bt105(release_json, availability_date)
+        else:
+            logger.info("No Unpublished Access Date for Procedure Type found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Access Date for Procedure Type: {str(e)}")
+
+    # Parse and merge BT-198(BT-106)-Procedure
+    try:
+        availability_date = parse_unpublished_access_date_procedure_bt106(xml_content)
+        if availability_date:
+            merge_unpublished_access_date_procedure_bt106(release_json, availability_date)
+        else:
+            logger.info("No Unpublished Access Date for Accelerated Procedure found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Access Date for Accelerated Procedure: {str(e)}")
+
+     
+
+    # Parse and merge BT-198(BT_09)-Procedure
+    try:
+        availability_date = parse_unpublished_access_date_procedure_bt09(xml_content)
+        if availability_date:
+            merge_unpublished_access_date_procedure_bt09(release_json, availability_date)
+        else:
+            logger.info("No Unpublished Access Date for Cross Border Law found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Access Date for Cross Border Law: {str(e)}")
+
+   
+
     # Parse and merge BT-21-Lot
     try:
         lot_title_data = parse_lot_title(xml_content)
@@ -2836,13 +2949,7 @@ def main(xml_path, ocid_prefix):
     review_deadline_data = parse_review_deadline_description(xml_content)
     merge_review_deadline_description(release_json, review_deadline_data)
 
-     # Parse and merge BT-198(BT-105) Unpublished Access Date
-    logger.info("Processing BT-198(BT-105): Unpublished Access Date")
-    access_date = parse_unpublished_access_date(xml_content)
-    if access_date:
-        merge_unpublished_access_date(release_json, access_date)
-    else:
-        logger.warning("No Unpublished Access Date found")
+    
 
     # Parse and merge OPP-020 ExtendedDurationIndicator
     try:
@@ -3323,6 +3430,7 @@ def main(xml_path, ocid_prefix):
 if __name__ == "__main__":
     # Path to the XML file
     xml_path = 'xmlfile/can_24_minimal.xml'
+    #xml_path = 'test_bt195_bt196_bt105.xml'
     # Prefix for OCID
     ocid_prefix = 'ocid_prefix_value'
     

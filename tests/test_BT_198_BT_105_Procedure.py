@@ -1,4 +1,4 @@
-# tests/test_BT_198_BT_105.py
+# tests/test_BT_198_BT_105_Procedure.py
 
 import pytest
 import json
@@ -9,7 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
-def test_bt_198_bt_105_integration(tmp_path):
+def test_bt_198_bt_105_procedure_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
@@ -32,19 +32,18 @@ def test_bt_198_bt_105_integration(tmp_path):
         </cac:TenderingProcess>
     </root>
     """
-    xml_file = tmp_path / "test_input_unpublished_access_date.xml"
+    xml_file = tmp_path / "test_input_bt_198_bt_105_procedure.xml"
     xml_file.write_text(xml_content)
 
-    main(str(xml_file), "ocds-test-prefix")
+    result = main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
-        result = json.load(f)
-
-    assert "withheldInformation" in result
-    assert len(result["withheldInformation"]) == 1
-    withheld_item = result["withheldInformation"][0]
-    assert withheld_item["field"] == "procedureType"
-    assert withheld_item["availabilityDate"] == "2025-03-31T00:00:00+01:00"
+    assert "withheldInformation" in result, "withheldInformation not found in result"
+    assert len(result["withheldInformation"]) > 0, "No withheld information items found"
+    
+    pro_typ_item = next((item for item in result["withheldInformation"] if item.get("id", "").startswith("pro-typ-")), None)
+    assert pro_typ_item is not None, "No withheld information item for procedure type found"
+    assert "availabilityDate" in pro_typ_item, "availabilityDate not found in withheld information item"
+    assert pro_typ_item["availabilityDate"] == "2025-03-31T00:00:00+01:00", f"Expected availabilityDate '2025-03-31T00:00:00+01:00', got {pro_typ_item['availabilityDate']}"
 
 if __name__ == "__main__":
     pytest.main()
