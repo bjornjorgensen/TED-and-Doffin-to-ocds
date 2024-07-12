@@ -148,14 +148,37 @@ from converters.BT_196_BT_5421_LotsGroup import parse_unpublished_justification_
 from converters.BT_196_BT_5422_Lot import parse_unpublished_justification_description_lot_bt5422, merge_unpublished_justification_description_lot_bt5422
 from converters.BT_196_BT_5422_LotsGroup import parse_unpublished_justification_description_lotsgroup_bt5422, merge_unpublished_justification_description_lotsgroup_bt5422
 from converters.BT_196_BT_5423_Lot import parse_unpublished_justification_description_lot_bt5423, merge_unpublished_justification_description_lot_bt5423
+from converters.BT_196_BT_5423_LotsGroup import parse_unpublished_justification_description_lotsgroup_bt5423, merge_unpublished_justification_description_lotsgroup_bt5423
+from converters.BT_196_BT_543_Lot import parse_unpublished_justification_description_lot_bt543, merge_unpublished_justification_description_lot_bt543
+from converters.BT_196_BT_543_LotsGroup import parse_unpublished_justification_description_lotsgroup_bt543, merge_unpublished_justification_description_lotsgroup_bt543
+from converters.BT_196_BT_553_Tender import parse_unpublished_justification_description_tender_bt553, merge_unpublished_justification_description_tender_bt553
+from converters.BT_196_BT_554_Tender import parse_unpublished_justification_description_tender_bt554, merge_unpublished_justification_description_tender_bt554
+from converters.BT_196_BT_555_Tender import parse_unpublished_justification_description_tender_bt555, merge_unpublished_justification_description_tender_bt555
+from converters.BT_196_BT_635_LotResult import parse_unpublished_justification_description_lotresult_bt635, merge_unpublished_justification_description_lotresult_bt635
+from converters.BT_196_BT_636_LotResult import parse_bt_196_lot_result, merge_bt_196_lot_result
+from converters.BT_196_BT_660_LotResult import parse_bt_196_bt_660_lot_result, merge_bt_196_bt_660_lot_result
+from converters.BT_196_BT_709_LotResult import parse_bt_196_bt_709_lot_result, merge_bt_196_bt_709_lot_result
+from converters.BT_196_BT_710_LotResult import parse_bt_196_bt_710_lot_result, merge_bt_196_bt_710_lot_result
+from converters.BT_196_BT_711_LotResult import parse_bt_196_bt_711_lot_result, merge_bt_196_bt_711_lot_result
+from converters.BT_196_BT_712_LotResult import parse_bt_196_bt_712_lot_result, merge_bt_196_bt_712_lot_result
+from converters.BT_196_BT_720_Tender import parse_bt_196_bt_720_tender, merge_bt_196_bt_720_tender
+from converters.BT_196_BT_733_Lot import parse_bt_196_bt_733_lot, merge_bt_196_bt_733_lot
+from converters.BT_196_BT_733_LotsGroup import parse_bt_196_bt_733_lots_group, merge_bt_196_bt_733_lots_group
+from converters.BT_196_BT_734_Lot import parse_bt_196_bt_734_lot, merge_bt_196_bt_734_lot
+from converters.BT_196_BT_734_LotsGroup import parse_bt_196_bt_734_lots_group, merge_bt_196_bt_734_lots_group
+from converters.BT_196_BT_759_LotResult import parse_bt_196_bt_759_lot_result, merge_bt_196_bt_759_lot_result
+from converters.BT_196_BT_760_LotResult import parse_bt_196_bt_760_lot_result, merge_bt_196_bt_760_lot_result
+from converters.BT_196_BT_773_Tender import parse_bt_196_bt_773_tender, merge_bt_196_bt_773_tender
+from converters.BT_196_BT_88_Procedure import parse_bt_196_bt_88_procedure, merge_bt_196_bt_88_procedure
 
 from converters.BT_197_BT_106_Procedure import parse_unpublished_justification_code_procedure_bt106, merge_unpublished_justification_code_procedure_bt106
 from converters.BT_197_BT_105_Procedure import parse_unpublished_justification_code_procedure_bt105, merge_unpublished_justification_code_procedure_bt105
 from converters.BT_197_BT_09_Procedure import parse_unpublished_justification_code_procedure_bt09, merge_unpublished_justification_code_procedure_bt09
-
-
-
-
+from converters.BT_197_BT_1252_Procedure import parse_unpublished_justification_code_procedure_bt1252, merge_unpublished_justification_code_procedure_bt1252
+from converters.BT_197_BT_135_Procedure import parse_unpublished_justification_code_procedure_bt135, merge_unpublished_justification_code_procedure_bt135
+from converters.BT_197_BT_1351_Procedure import parse_unpublished_justification_code_procedure_bt1351, merge_unpublished_justification_code_procedure_bt1351
+from converters.BT_197_BT_136_Procedure import parse_bt_197_bt_136_procedure, merge_bt_197_bt_136_procedure
+from converters.BT_197_BT_142_LotResult import parse_bt_197_bt_142_lot_result, merge_bt_197_bt_142_lot_result
 
 from converters.BT_198_BT_09_Procedure import parse_unpublished_access_date_procedure_bt09, merge_unpublished_access_date_procedure_bt09
 from converters.BT_198_BT_105_Procedure import parse_unpublished_access_date_procedure_bt105, merge_unpublished_access_date_procedure_bt105
@@ -1945,8 +1968,228 @@ def main(xml_path, ocid_prefix):
         else:
             logger.info("No Unpublished Justification Description for Awarding Criterion Threshold Number (Lot) found")
     except Exception as e:
-        logger.error(f"Error processing Unpublished Justification Description for Awarding Criterion Threshold Number (Lot): {str(e)}")    
+        logger.error(f"Error processing Unpublished Justification Description for Awarding Criterion Threshold Number (Lot): {str(e)}")
 
+    # Process BT-196(BT-5423)-LotsGroup
+    try:
+        rationale_data = parse_unpublished_justification_description_lotsgroup_bt5423(xml_content)
+        if rationale_data:
+            merge_unpublished_justification_description_lotsgroup_bt5423(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Awarding Criterion Threshold Number (LotsGroup) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Awarding Criterion Threshold Number (LotsGroup): {str(e)}")  
+
+    # Process BT-196(BT-543)-Lot
+    try:
+        rationale_data = parse_unpublished_justification_description_lot_bt543(xml_content)
+        if rationale_data:
+            merge_unpublished_justification_description_lot_bt543(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Awarding Criterion Combination (Lot) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Awarding Criterion Combination (Lot): {str(e)}")
+
+    # Process BT-196(BT-543)-LotsGroup
+    try:
+        rationale_data = parse_unpublished_justification_description_lotsgroup_bt543(xml_content)
+        if rationale_data:
+            merge_unpublished_justification_description_lotsgroup_bt543(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Awarding Criterion Combination (LotsGroup) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Awarding Criterion Combination (LotsGroup): {str(e)}")
+
+    # Process BT-196(BT-553)-Tender
+    try:
+        rationale_data = parse_unpublished_justification_description_tender_bt553(xml_content)
+        if rationale_data:
+            merge_unpublished_justification_description_tender_bt553(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Subcontracting Value (Tender) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Subcontracting Value (Tender): {str(e)}")
+
+    # Process BT-196(BT-554)-Tender
+    try:
+        rationale_data = parse_unpublished_justification_description_tender_bt554(xml_content)
+        if rationale_data:
+            merge_unpublished_justification_description_tender_bt554(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Subcontracting Description (Tender) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Subcontracting Description (Tender): {str(e)}")
+
+    # Process BT-196(BT-555)-Tender
+    try:
+        rationale_data = parse_unpublished_justification_description_tender_bt555(xml_content)
+        if rationale_data:
+            merge_unpublished_justification_description_tender_bt555(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Subcontracting Percentage (Tender) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Subcontracting Percentage (Tender): {str(e)}")
+
+    # Process BT-196(BT-635)-LotResult
+    try:
+        rationale_data = parse_unpublished_justification_description_lotresult_bt635(xml_content)
+        if rationale_data:
+            merge_unpublished_justification_description_lotresult_bt635(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Buyer Review Count (LotResult) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Buyer Review Count (LotResult): {str(e)}")
+
+    # Process BT-196(BT-636)-LotResult
+    try:
+        rationale_data = parse_bt_196_lot_result(xml_content)
+        if rationale_data:
+            merge_bt_196_lot_result(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for LotResult found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for LotResult: {str(e)}")
+
+    # Process BT-196(BT-660)-LotResult
+    try:
+        rationale_data = parse_bt_196_bt_660_lot_result(xml_content)
+        if rationale_data:
+            merge_bt_196_bt_660_lot_result(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Framework Agreement Values (LotResult) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Framework Agreement Values (LotResult): {str(e)}")
+
+    # Process BT-196(BT-709)-LotResult
+    try:
+        rationale_data = parse_bt_196_bt_709_lot_result(xml_content)
+        if rationale_data:
+            merge_bt_196_bt_709_lot_result(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Framework Agreement Maximum Value (LotResult) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Framework Agreement Maximum Value (LotResult): {str(e)}")
+
+    # Process BT-196(BT-710)-LotResult
+    try:
+        rationale_data = parse_bt_196_bt_710_lot_result(xml_content)
+        if rationale_data:
+            merge_bt_196_bt_710_lot_result(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Tender Value Low (LotResult) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Tender Value Low (LotResult): {str(e)}")
+
+    # Process BT-196(BT-711)-LotResult
+    try:
+        rationale_data = parse_bt_196_bt_711_lot_result(xml_content)
+        if rationale_data:
+            merge_bt_196_bt_711_lot_result(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Tender Value High (LotResult) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Tender Value High (LotResult): {str(e)}")
+
+    # Process BT-196(BT-712)-LotResult
+    try:
+        rationale_data = parse_bt_196_bt_712_lot_result(xml_content)
+        if rationale_data:
+            merge_bt_196_bt_712_lot_result(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Review Requests (LotResult) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Review Requests (LotResult): {str(e)}")
+
+    # Process BT-196(BT-720)-Tender
+    try:
+        rationale_data = parse_bt_196_bt_720_tender(xml_content)
+        if rationale_data:
+            merge_bt_196_bt_720_tender(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Winning Tender Value (Tender) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Winning Tender Value (Tender): {str(e)}")
+
+    # Process BT-196(BT-733)-Lot
+    try:
+        rationale_data = parse_bt_196_bt_733_lot(xml_content)
+        if rationale_data:
+            merge_bt_196_bt_733_lot(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Award Criteria Order (Lot) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Award Criteria Order (Lot): {str(e)}")
+
+    # Process BT-196(BT-733)-LotsGroup
+    try:
+        rationale_data = parse_bt_196_bt_733_lots_group(xml_content)
+        if rationale_data:
+            merge_bt_196_bt_733_lots_group(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Award Criteria Order (LotsGroup) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Award Criteria Order (LotsGroup): {str(e)}")
+
+    # Process BT-196(BT-734)-Lot
+    try:
+        rationale_data = parse_bt_196_bt_734_lot(xml_content)
+        if rationale_data:
+            merge_bt_196_bt_734_lot(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Award Criteria Name (Lot) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Award Criteria Name (Lot): {str(e)}")
+
+    # Process BT-196(BT-734)-LotsGroup
+    try:
+        rationale_data = parse_bt_196_bt_734_lots_group(xml_content)
+        if rationale_data:
+            merge_bt_196_bt_734_lots_group(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Award Criteria Name (LotsGroup) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Award Criteria Name (LotsGroup): {str(e)}")
+
+    # Process BT-196(BT-759)-LotResult
+    try:
+        rationale_data = parse_bt_196_bt_759_lot_result(xml_content)
+        if rationale_data:
+            merge_bt_196_bt_759_lot_result(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Received Submissions Count (LotResult) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Received Submissions Count (LotResult): {str(e)}")
+        
+    # Process BT-196(BT-760)-LotResult
+    try:
+        rationale_data = parse_bt_196_bt_760_lot_result(xml_content)
+        if rationale_data:
+            merge_bt_196_bt_760_lot_result(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Received Submissions Type (LotResult) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Received Submissions Type (LotResult): {str(e)}")
+    
+    # Process BT-196(BT-773)-Tender
+    try:
+        rationale_data = parse_bt_196_bt_773_tender(xml_content)
+        if rationale_data:
+            merge_bt_196_bt_773_tender(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Subcontracting (Tender) found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Subcontracting (Tender): {str(e)}")
+        
+    # Process BT-196(BT-88)-Procedure
+    try:
+        rationale_data = parse_bt_196_bt_88_procedure(xml_content)
+        if rationale_data:
+            merge_bt_196_bt_88_procedure(release_json, rationale_data)
+        else:
+            logger.info("No Unpublished Justification Description for Procedure Features found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Description for Procedure Features: {str(e)}")
+        
     # Parse and merge BT-197(BT-106)-Procedure
     try:
         justification_code = parse_unpublished_justification_code_procedure_bt106(xml_content)
@@ -1977,6 +2220,55 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Unpublished Justification Code for Procedure Type: {str(e)}")
 
+    # Process BT-197(BT-1252)-Procedure
+    try:
+        justification_code = parse_unpublished_justification_code_procedure_bt1252(xml_content)
+        if justification_code:
+            merge_unpublished_justification_code_procedure_bt1252(release_json, justification_code)
+        else:
+            logger.info("No Unpublished Justification Code for Direct Award Justification found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Code for Direct Award Justification: {str(e)}")
+
+    # Process BT-197(BT-135)-Procedure
+    try:
+        justification_code = parse_unpublished_justification_code_procedure_bt135(xml_content)
+        if justification_code:
+            merge_unpublished_justification_code_procedure_bt135(release_json, justification_code)
+        else:
+            logger.info("No Unpublished Justification Code for Direct Award Justification Text found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Code for Direct Award Justification Text: {str(e)}")
+
+    # Process BT-197(BT-1351)-Procedure
+    try:
+        justification_code = parse_unpublished_justification_code_procedure_bt1351(xml_content)
+        if justification_code:
+            merge_unpublished_justification_code_procedure_bt1351(release_json, justification_code)
+        else:
+            logger.info("No Unpublished Justification Code for Accelerated Procedure Justification found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Code for Accelerated Procedure Justification: {str(e)}")
+
+    # Process BT-197(BT-136)-Procedure
+    try:
+        justification_code = parse_bt_197_bt_136_procedure(xml_content)
+        if justification_code:
+            merge_bt_197_bt_136_procedure(release_json, justification_code)
+        else:
+            logger.info("No Unpublished Justification Code for Direct Award Justification found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Code for Direct Award Justification: {str(e)}")
+
+    # Process BT-197(BT-142)-LotResult
+    try:
+        justification_codes = parse_bt_197_bt_142_lot_result(xml_content)
+        if justification_codes:
+            merge_bt_197_bt_142_lot_result(release_json, justification_codes)
+        else:
+            logger.info("No Unpublished Justification Code for Winner Choice Justification found")
+    except Exception as e:
+        logger.error(f"Error processing Unpublished Justification Code for Winner Choice Justification: {str(e)}")
 
     # Parse and merge BT-198(BT_105)-Procedure
     try:
