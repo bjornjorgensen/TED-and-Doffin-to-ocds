@@ -134,8 +134,8 @@
                 "listedOnRegulatedMarket": false
             },
             "roles": [
-                "tenderer",
-                "supplier"
+                "supplier",
+                "tenderer"
             ],
             "additionalIdentifiers": [
                 {
