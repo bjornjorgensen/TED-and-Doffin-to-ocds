@@ -170,7 +170,6 @@ from converters.BT_196_BT_759_LotResult import parse_bt_196_bt_759_lot_result, m
 from converters.BT_196_BT_760_LotResult import parse_bt_196_bt_760_lot_result, merge_bt_196_bt_760_lot_result
 from converters.BT_196_BT_773_Tender import parse_bt_196_bt_773_tender, merge_bt_196_bt_773_tender
 from converters.BT_196_BT_88_Procedure import parse_bt_196_bt_88_procedure, merge_bt_196_bt_88_procedure
-
 from converters.BT_197_BT_106_Procedure import parse_unpublished_justification_code_procedure_bt106, merge_unpublished_justification_code_procedure_bt106
 from converters.BT_197_BT_105_Procedure import parse_unpublished_justification_code_procedure_bt105, merge_unpublished_justification_code_procedure_bt105
 from converters.BT_197_BT_09_Procedure import parse_unpublished_justification_code_procedure_bt09, merge_unpublished_justification_code_procedure_bt09
@@ -179,6 +178,33 @@ from converters.BT_197_BT_135_Procedure import parse_unpublished_justification_c
 from converters.BT_197_BT_1351_Procedure import parse_unpublished_justification_code_procedure_bt1351, merge_unpublished_justification_code_procedure_bt1351
 from converters.BT_197_BT_136_Procedure import parse_bt_197_bt_136_procedure, merge_bt_197_bt_136_procedure
 from converters.BT_197_BT_142_LotResult import parse_bt_197_bt_142_lot_result, merge_bt_197_bt_142_lot_result
+from converters.BT_197_BT_144_LotResult import parse_bt_197_bt_144_lot_result, merge_bt_197_bt_144_lot_result
+from converters.BT_197_BT_160_Tender import parse_bt_197_bt_160_tender, merge_bt_197_bt_160_tender
+from converters.BT_197_BT_162_Tender import parse_bt_197_bt_162_tender, merge_bt_197_bt_162_tender
+from converters.BT_197_BT_163_Tender import parse_bt_197_bt_163_tender, merge_bt_197_bt_163_tender
+from converters.BT_197_BT_171_Tender import parse_bt_197_bt_171_tender, merge_bt_197_bt_171_tender
+from converters.BT_197_BT_191_Tender import parse_bt_197_bt_191_tender, merge_bt_197_bt_191_tender
+from converters.BT_197_BT_193_Tender import parse_bt_197_bt_193_tender, merge_bt_197_bt_193_tender
+from converters.BT_197_BT_539_Lot import parse_bt_197_bt_539_lot, merge_bt_197_bt_539_lot
+from converters.BT_197_BT_539_LotsGroup import parse_bt_197_bt_539_lotsgroup, merge_bt_197_bt_539_lotsgroup
+from converters.BT_197_BT_540_Lot import parse_bt_197_bt_540_lot, merge_bt_197_bt_540_lot
+from converters.bt_197_bt_540_lots_group import parse_bt_197_bt_540_lots_group, merge_bt_197_bt_540_lots_group
+from converters.BT_197_BT_541_Lot_Fixed import parse_bt_197_bt_541_lot_fixed, merge_bt_197_bt_541_lot_fixed
+from converters.BT_197_BT_541_Lot_Threshold import parse_bt_197_bt_541_lot_threshold, merge_bt_197_bt_541_lot_threshold
+from converters.BT_197_BT_541_Lot_Weight import parse_bt_197_bt_541_lot_weight, merge_bt_197_bt_541_lot_weight
+from converters.BT_197_BT_541_LotsGroup_Fixed import parse_bt_197_bt_541_lotsgroup_fixed, merge_bt_197_bt_541_lotsgroup_fixed
+from converters.BT_197_BT_541_LotsGroup_Threshold import parse_bt_197_bt_541_lotsgroup_threshold, merge_bt_197_bt_541_lotsgroup_threshold
+from converters.BT_197_BT_541_LotsGroup_Weight import parse_bt_197_bt_541_lotsgroup_weight, merge_bt_197_bt_541_lotsgroup_weight
+from converters.BT_197_BT_5421_Lot import parse_bt_197_bt_5421_lot, merge_bt_197_bt_5421_lot
+from converters.BT_197_BT_5421_LotsGroup import parse_bt_197_bt_5421_lotsgroup, merge_bt_197_bt_5421_lotsgroup
+from converters.BT_197_BT_5422_Lot import parse_bt_197_bt_5422_lot, merge_bt_197_bt_5422_lot
+from converters.BT_197_BT_5422_LotsGroup import parse_bt_197_bt_5422_lotsgroup, merge_bt_197_bt_5422_lotsgroup
+from converters.BT_197_BT_5423_Lot import parse_bt_197_bt_5423_lot, merge_bt_197_bt_5423_lot
+from converters.BT_197_BT_5423_LotsGroup import parse_bt_197_bt_5423_lotsgroup, merge_bt_197_bt_5423_lotsgroup
+from converters.BT_197_BT_543_Lot import parse_bt_197_bt_543_lot, merge_bt_197_bt_543_lot
+from converters.BT_197_BT_543_LotsGroup import parse_bt_197_bt_543_lotsgroup, merge_bt_197_bt_543_lotsgroup
+from converters.BT_197_BT_553_Tender import parse_bt_197_bt_553_tender, merge_bt_197_bt_553_tender
+from converters.BT_197_BT_554_Tender import parse_bt_197_bt_554_tender, merge_bt_197_bt_554_tender
 
 from converters.BT_198_BT_09_Procedure import parse_unpublished_access_date_procedure_bt09, merge_unpublished_access_date_procedure_bt09
 from converters.BT_198_BT_105_Procedure import parse_unpublished_access_date_procedure_bt105, merge_unpublished_access_date_procedure_bt105
@@ -2270,6 +2296,276 @@ def main(xml_path, ocid_prefix):
             logger.info("No BT-197(BT-142)-LotResult data found")
     except Exception as e:
         logger.error(f"Error processing BT-197(BT-142)-LotResult data: {str(e)}")
+
+    # Parse and merge BT-197(BT-144)-LotResult
+    try:
+        bt_197_bt_144_data = parse_bt_197_bt_144_lot_result(xml_content)
+        if bt_197_bt_144_data:
+            merge_bt_197_bt_144_lot_result(release_json, bt_197_bt_144_data)
+        else:
+            logger.info("No BT-197(BT-144)-LotResult data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-144)-LotResult data: {str(e)}")
+
+    # Parse and merge BT-197(BT-160)-Tender
+    try:
+        bt_197_bt_160_data = parse_bt_197_bt_160_tender(xml_content)
+        if bt_197_bt_160_data:
+            merge_bt_197_bt_160_tender(release_json, bt_197_bt_160_data)
+        else:
+            logger.info("No BT-197(BT-160)-Tender data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-160)-Tender data: {str(e)}")
+
+    # Parse and merge BT-197(BT-162)-Tender
+    try:
+        bt_197_bt_162_data = parse_bt_197_bt_162_tender(xml_content)
+        if bt_197_bt_162_data:
+            merge_bt_197_bt_162_tender(release_json, bt_197_bt_162_data)
+        else:
+            logger.info("No BT-197(BT-162)-Tender data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-162)-Tender data: {str(e)}")
+
+    # Parse and merge BT-197(BT-163)-Tender
+    try:
+        bt_197_bt_163_data = parse_bt_197_bt_163_tender(xml_content)
+        if bt_197_bt_163_data:
+            merge_bt_197_bt_163_tender(release_json, bt_197_bt_163_data)
+        else:
+            logger.info("No BT-197(BT-163)-Tender data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-163)-Tender data: {str(e)}")
+
+    # Parse and merge BT-197(BT-171)-Tender
+    try:
+        bt_197_bt_171_data = parse_bt_197_bt_171_tender(xml_content)
+        if bt_197_bt_171_data:
+            merge_bt_197_bt_171_tender(release_json, bt_197_bt_171_data)
+        else:
+            logger.info("No BT-197(BT-171)-Tender data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-171)-Tender data: {str(e)}")
+
+    # Parse and merge BT-197(BT-191)-Tender
+    try:
+        bt_197_bt_191_data = parse_bt_197_bt_191_tender(xml_content)
+        if bt_197_bt_191_data:
+            merge_bt_197_bt_191_tender(release_json, bt_197_bt_191_data)
+        else:
+            logger.info("No BT-197(BT-191)-Tender data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-191)-Tender data: {str(e)}")
+
+    # Parse and merge BT-197(BT-193)-Tender
+    try:
+        bt_197_bt_193_data = parse_bt_197_bt_193_tender(xml_content)
+        if bt_197_bt_193_data:
+            merge_bt_197_bt_193_tender(release_json, bt_197_bt_193_data)
+        else:
+            logger.info("No BT-197(BT-193)-Tender data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-193)-Tender data: {str(e)}")
+
+    # Parse and merge BT-197(BT-539)-Lot
+    try:
+        bt_197_bt_539_data = parse_bt_197_bt_539_lot(xml_content)
+        if bt_197_bt_539_data:
+            merge_bt_197_bt_539_lot(release_json, bt_197_bt_539_data)
+        else:
+            logger.info("No BT-197(BT-539)-Lot data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-539)-Lot data: {str(e)}")
+
+    # Parse and merge BT-197(BT-539)-LotsGroup
+    try:
+        bt_197_bt_539_lotsgroup_data = parse_bt_197_bt_539_lotsgroup(xml_content)
+        if bt_197_bt_539_lotsgroup_data:
+            merge_bt_197_bt_539_lotsgroup(release_json, bt_197_bt_539_lotsgroup_data)
+        else:
+            logger.info("No BT-197(BT-539)-LotsGroup data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-539)-LotsGroup data: {str(e)}")
+
+    # Parse and merge BT-197(BT-540)-Lot
+    try:
+        bt_197_bt_540_data = parse_bt_197_bt_540_lot(xml_content)
+        if bt_197_bt_540_data:
+            merge_bt_197_bt_540_lot(release_json, bt_197_bt_540_data)
+        else:
+            logger.info("No BT-197(BT-540)-Lot data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-540)-Lot data: {str(e)}")
+
+    # Parse and merge BT-197(BT-540)-LotsGroup
+    try:
+        bt_197_bt_540_data = parse_bt_197_bt_540_lots_group(xml_content)
+        if bt_197_bt_540_data:
+            merge_bt_197_bt_540_lots_group(release_json, bt_197_bt_540_data)
+        else:
+            logger.info("No BT-197(BT-540)-LotsGroup data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-540)-LotsGroup data: {str(e)}")
+
+    # Parse and merge BT-197(BT-541)-Lot-Fixed
+    try:
+        bt_197_bt_541_data = parse_bt_197_bt_541_lot_fixed(xml_content)
+        if bt_197_bt_541_data:
+            merge_bt_197_bt_541_lot_fixed(release_json, bt_197_bt_541_data)
+        else:
+            logger.info("No BT-197(BT-541)-Lot-Fixed data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-541)-Lot-Fixed data: {str(e)}")
+
+    # Parse and merge BT 197 BT 541 Lot Threshold
+    try:
+        bt_197_bt_541_data = parse_bt_197_bt_541_lot_threshold(xml_content)
+        if bt_197_bt_541_data:
+            merge_bt_197_bt_541_lot_threshold(release_json, bt_197_bt_541_data)
+        else:
+            logger.info("No BT-197(BT-541)-Lot-Threshold data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-541)-Lot-Threshold data: {str(e)}")
+
+    # Parse and merge bt 197 bt 541 lot weight
+    try:
+        bt_197_bt_541_data = parse_bt_197_bt_541_lot_weight(xml_content)
+        if bt_197_bt_541_data:
+            merge_bt_197_bt_541_lot_weight(release_json, bt_197_bt_541_data)
+        else:
+            logger.info("No BT-197(BT-541)-Lot-Weight data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-541)-Lot-Weight data: {str(e)}")
+
+    # Parse and merge BT-197(BT-541)-LotsGroup-Fixed
+    try:
+        bt_197_bt_541_data = parse_bt_197_bt_541_lotsgroup_fixed(xml_content)
+        if bt_197_bt_541_data:
+            merge_bt_197_bt_541_lotsgroup_fixed(release_json, bt_197_bt_541_data)
+        else:
+            logger.info("No BT-197(BT-541)-LotsGroup-Fixed data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-541)-LotsGroup-Fixed data: {str(e)}")
+
+    # Parse and merge BT-197(BT-541)-LotsGroup-Threshold
+    try:
+        bt_197_bt_541_data = parse_bt_197_bt_541_lotsgroup_threshold(xml_content)
+        if bt_197_bt_541_data:
+            merge_bt_197_bt_541_lotsgroup_threshold(release_json, bt_197_bt_541_data)
+        else:
+            logger.info("No BT-197(BT-541)-LotsGroup-Threshold data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-541)-LotsGroup-Threshold data: {str(e)}")
+
+    # Parse and merge BT-197(BT-541)-LotsGroup-Weight
+    try:
+        bt_197_bt_541_data = parse_bt_197_bt_541_lotsgroup_weight(xml_content)
+        if bt_197_bt_541_data:
+            merge_bt_197_bt_541_lotsgroup_weight(release_json, bt_197_bt_541_data)
+        else:
+            logger.info("No BT-197(BT-541)-LotsGroup-Weight data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-541)-LotsGroup-Weight data: {str(e)}")
+
+    # Parse and merge BT-197(BT-5421)-Lot
+    try:
+        bt_197_bt_5421_data = parse_bt_197_bt_5421_lot(xml_content)
+        if bt_197_bt_5421_data:
+            merge_bt_197_bt_5421_lot(release_json, bt_197_bt_5421_data)
+        else:
+            logger.info("No BT-197(BT-5421)-Lot data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-5421)-Lot data: {str(e)}")
+
+    # Parse and merge BT-197(BT-5421)-LotsGroup
+    try:
+        bt_197_bt_5421_data = parse_bt_197_bt_5421_lotsgroup(xml_content)
+        if bt_197_bt_5421_data:
+            merge_bt_197_bt_5421_lotsgroup(release_json, bt_197_bt_5421_data)
+        else:
+            logger.info("No BT-197(BT-5421)-LotsGroup data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-5421)-LotsGroup data: {str(e)}")
+
+    # Parse and merge BT-197(BT-5422)-Lot
+    try:
+        bt_197_bt_5422_data = parse_bt_197_bt_5422_lot(xml_content)
+        if bt_197_bt_5422_data:
+            merge_bt_197_bt_5422_lot(release_json, bt_197_bt_5422_data)
+        else:
+            logger.info("No BT-197(BT-5422)-Lot data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-5422)-Lot data: {str(e)}")
+
+    # Parse and merge BT-197(BT-5422)-LotsGroup
+    try:
+        bt_197_bt_5422_data = parse_bt_197_bt_5422_lotsgroup(xml_content)
+        if bt_197_bt_5422_data:
+            merge_bt_197_bt_5422_lotsgroup(release_json, bt_197_bt_5422_data)
+        else:
+            logger.info("No BT-197(BT-5422)-LotsGroup data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-5422)-LotsGroup data: {str(e)}")
+
+    # Parse and merge BT-197(BT-5423)-Lot
+    try:
+        bt_197_bt_5423_data = parse_bt_197_bt_5423_lot(xml_content)
+        if bt_197_bt_5423_data:
+            merge_bt_197_bt_5423_lot(release_json, bt_197_bt_5423_data)
+        else:
+            logger.info("No BT-197(BT-5423)-Lot data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-5423)-Lot data: {str(e)}")
+
+    # Parse and merge BT-197(BT-5423)-LotsGroup
+    try:
+        bt_197_bt_5423_data = parse_bt_197_bt_5423_lotsgroup(xml_content)
+        if bt_197_bt_5423_data:
+            merge_bt_197_bt_5423_lotsgroup(release_json, bt_197_bt_5423_data)
+        else:
+            logger.info("No BT-197(BT-5423)-LotsGroup data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-5423)-LotsGroup data: {str(e)}")
+
+    # Parse and merge BT-197(BT-543)-Lot
+    try:
+        bt_197_bt_543_data = parse_bt_197_bt_543_lot(xml_content)
+        if bt_197_bt_543_data:
+            merge_bt_197_bt_543_lot(release_json, bt_197_bt_543_data)
+        else:
+            logger.info("No BT-197(BT-543)-Lot data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-543)-Lot data: {str(e)}")
+
+    # Parse and merge BT-197(BT-543)-LotsGroup
+    try:
+        bt_197_bt_543_data = parse_bt_197_bt_543_lotsgroup(xml_content)
+        if bt_197_bt_543_data:
+            merge_bt_197_bt_543_lotsgroup(release_json, bt_197_bt_543_data)
+        else:
+            logger.info("No BT-197(BT-543)-LotsGroup data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-543)-LotsGroup data: {str(e)}")
+
+    # Parse and merge BT-197(BT-553)-Tender
+    try:
+        bt_197_bt_553_data = parse_bt_197_bt_553_tender(xml_content)
+        if bt_197_bt_553_data:
+            merge_bt_197_bt_553_tender(release_json, bt_197_bt_553_data)
+        else:
+            logger.info("No BT-197(BT-553)-Tender data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-553)-Tender data: {str(e)}")
+
+    # Parse and merge BT-197(BT-554)-Tender
+    try:
+        bt_197_bt_554_data = parse_bt_197_bt_554_tender(xml_content)
+        if bt_197_bt_554_data:
+            merge_bt_197_bt_554_tender(release_json, bt_197_bt_554_data)
+        else:
+            logger.info("No BT-197(BT-554)-Tender data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-197(BT-554)-Tender data: {str(e)}")
 
     # Parse and merge BT-198(BT_105)-Procedure
     try:
