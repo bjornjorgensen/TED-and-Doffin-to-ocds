@@ -2260,15 +2260,16 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Unpublished Justification Code for Direct Award Justification: {str(e)}")
 
-    # Process BT-197(BT-142)-LotResult
+    # Parse and merge BT-197(BT-142)-LotResult
     try:
-        justification_codes = parse_bt_197_bt_142_lot_result(xml_content)
-        if justification_codes:
-            merge_bt_197_bt_142_lot_result(release_json, justification_codes)
+        bt_197_bt_142_data = parse_bt_197_bt_142_lot_result(xml_content)
+        if bt_197_bt_142_data:
+            merge_bt_197_bt_142_lot_result(release_json, bt_197_bt_142_data)
+            logger.info("Merged BT-197(BT-142)-LotResult data")
         else:
-            logger.info("No Unpublished Justification Code for Winner Choice Justification found")
+            logger.info("No BT-197(BT-142)-LotResult data found")
     except Exception as e:
-        logger.error(f"Error processing Unpublished Justification Code for Winner Choice Justification: {str(e)}")
+        logger.error(f"Error processing BT-197(BT-142)-LotResult data: {str(e)}")
 
     # Parse and merge BT-198(BT_105)-Procedure
     try:

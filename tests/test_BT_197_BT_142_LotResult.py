@@ -4,10 +4,12 @@ import pytest
 import json
 import os
 import sys
+from lxml import etree
 
-# Add the parent directory to sys.path to import main
+# Add the parent directory to sys.path to import main and the converter functions
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
+from converters.BT_197_BT_142_LotResult import parse_bt_197_bt_142_lot_result, merge_bt_197_bt_142_lot_result
 
 def test_bt_197_bt_142_lot_result_integration(tmp_path):
     xml_content = """
@@ -23,10 +25,10 @@ def test_bt_197_bt_142_lot_result_integration(tmp_path):
                     <efext:EformsExtension>
                         <efac:NoticeResult>
                             <efac:LotResult>
-                                <cbc:ID>RES-0001</cbc:ID>
+                                <cbc:ID>lot-1</cbc:ID>
                                 <efac:FieldsPrivacy>
                                     <efbc:FieldIdentifierCode>win-cho</efbc:FieldIdentifierCode>
-                                    <cbc:ReasonCode>oth-int</cbc:ReasonCode>
+                                    <cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode>
                                 </efac:FieldsPrivacy>
                             </efac:LotResult>
                         </efac:NoticeResult>
@@ -36,32 +38,22 @@ def test_bt_197_bt_142_lot_result_integration(tmp_path):
         </ext:UBLExtensions>
     </root>
     """
+
     xml_file = tmp_path / "test_input_bt_197_bt_142_lot_result.xml"
     xml_file.write_text(xml_content)
 
-    # Create a mock release_json with a pre-existing withheldInformation item
-    release_json = {
-        "withheldInformation": [
-            {
-                "id": "win-cho-RES-0001",
-                "field": "win-cho",
-                "name": "Winner Chosen"
-            }
-        ]
-    }
-
     result = main(str(xml_file), "ocds-test-prefix")
-
-    print(f"Result: {json.dumps(result, indent=2)}")  # Debug print
+    print(f"Result from main: {json.dumps(result, indent=2)}")
 
     assert "withheldInformation" in result, "withheldInformation not found in result"
     assert len(result["withheldInformation"]) > 0, "No withheld information items found"
+
+    win_cho_item = next((item for item in result["withheldInformation"] if item.get("field") == "BT-142"), None)
+    assert win_cho_item is not None, "No withheld information item for winner chosen found"
     
-    win_cho_item = next((item for item in result["withheldInformation"] if item.get("id") == "win-cho-RES-0001"), None)
-    assert win_cho_item is not None, "No withheld information item for winner choice justification found"
     assert "rationaleClassifications" in win_cho_item, "rationaleClassifications not found in withheld information item"
     assert len(win_cho_item["rationaleClassifications"]) > 0, "No rationale classifications found"
-    
+
     classification = win_cho_item["rationaleClassifications"][0]
     assert classification["scheme"] == "eu-non-publication-justification", f"Expected scheme 'eu-non-publication-justification', got {classification['scheme']}"
     assert classification["id"] == "oth-int", f"Expected id 'oth-int', got {classification['id']}"

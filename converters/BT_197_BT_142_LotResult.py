@@ -5,7 +5,6 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-# Authority table for justification codes
 JUSTIFICATION_CODES = {
     'eo-int': {
         'description': 'Commercial interests of an economic operator',
@@ -40,39 +39,32 @@ def parse_bt_197_bt_142_lot_result(xml_content):
     }
 
     xpath = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='win-cho']/cbc:ReasonCode"
-    
-    results = []
     reason_codes = root.xpath(xpath, namespaces=namespaces)
-    
+
+    results = []
     for reason_code in reason_codes:
-        lot_id = reason_code.xpath("ancestor::efac:LotResult/cbc:ID/text()", namespaces=namespaces)
         code = reason_code.text
         if code in JUSTIFICATION_CODES:
             results.append({
-                'lotId': lot_id[0] if lot_id else None,
-                'classification': {
-                    'scheme': 'eu-non-publication-justification',
-                    'id': code,
-                    'description': JUSTIFICATION_CODES[code]['description'],
-                    'uri': JUSTIFICATION_CODES[code]['uri']
-                }
+                "scheme": "eu-non-publication-justification",
+                "id": code,
+                "description": JUSTIFICATION_CODES[code]['description'],
+                "uri": JUSTIFICATION_CODES[code]['uri']
             })
-    
+
     return results if results else None
 
-def merge_bt_197_bt_142_lot_result(release_json, justification_codes):
-    if not justification_codes:
+def merge_bt_197_bt_142_lot_result(release_json, bt_197_bt_142_data):
+    if not bt_197_bt_142_data:
+        logger.warning("No BT-197(BT-142)-LotResult data to merge")
         return
 
-    withheld_info = release_json.get("withheldInformation", [])
+    if 'withheldInformation' not in release_json:
+        release_json['withheldInformation'] = []
 
-    for justification in justification_codes:
-        lot_id = justification['lotId']
-        classification = justification['classification']
-        
-        existing_item = next((item for item in withheld_info if item.get("id") == f"win-cho-{lot_id}"), None)
-        
-        if existing_item:
-            if "rationaleClassifications" not in existing_item:
-                existing_item["rationaleClassifications"] = []
-            existing_item["rationaleClassifications"].append(classification)
+    release_json['withheldInformation'].append({
+        "field": "BT-142",
+        "rationaleClassifications": bt_197_bt_142_data
+    })
+
+    logger.info("Merged BT-197(BT-142)-LotResult data")
