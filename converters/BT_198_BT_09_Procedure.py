@@ -1,25 +1,12 @@
 # converters/BT_198_BT_09_Procedure.py
 
 from lxml import etree
-from datetime import datetime
 import logging
+from utils.date_utils import convert_to_iso_format
 
 logger = logging.getLogger(__name__)
 
-def convert_to_iso_format(date_string):
-    # Split the date string and timezone
-    date_part, _, tz_part = date_string.partition('+')
-    # Parse the date part
-    date = datetime.strptime(date_part, "%Y-%m-%d")
-    # Add time component
-    date = date.replace(hour=0, minute=0, second=0)
-    # Format the date with the original timezone or UTC if no timezone
-    if tz_part:
-        return f"{date.isoformat()}+{tz_part}"
-    else:
-        return f"{date.isoformat()}Z"
-
-def parse_unpublished_access_date_procedure_bt09(xml_content):
+def parse_bt_198_bt_09_procedure(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
@@ -31,18 +18,32 @@ def parse_unpublished_access_date_procedure_bt09(xml_content):
     }
 
     xpath = "/*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='CrossBorderLaw']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='cro-bor-law']/efbc:PublicationDate"
+    publication_dates = root.xpath(xpath, namespaces=namespaces)
+
+    if publication_dates:
+        date_string = publication_dates[0].text
+        iso_date = convert_to_iso_format(date_string)
+        return iso_date
     
-    publication_date = root.xpath(xpath, namespaces=namespaces)
-    
-    if publication_date:
-        return convert_to_iso_format(publication_date[0].text)
     return None
 
-def merge_unpublished_access_date_procedure_bt09(release_json, availability_date):
-    if not availability_date:
+def merge_bt_198_bt_09_procedure(release_json, bt_198_bt_09_procedure_data):
+    if not bt_198_bt_09_procedure_data:
+        logger.warning("No BT-198(BT-09)-Procedure data to merge")
         return
 
-    for item in release_json.get("withheldInformation", []):
-        if item.get("field") == "cro-bor-law":
-            item["availabilityDate"] = availability_date
-            break
+    if 'withheldInformation' not in release_json:
+        release_json['withheldInformation'] = []
+
+    for withheld_item in release_json['withheldInformation']:
+        if withheld_item.get('id') == "BT-195(BT-09)-Procedure":
+            withheld_item['availabilityDate'] = bt_198_bt_09_procedure_data
+            logger.info("Merged BT-198(BT-09)-Procedure data")
+            return
+
+    # If no existing BT-09-Procedure item found, create a new one
+    release_json['withheldInformation'].append({
+        "id": "BT-195(BT-09)-Procedure",
+        "availabilityDate": bt_198_bt_09_procedure_data
+    })
+    logger.info("Created new BT-198(BT-09)-Procedure withheld information item")

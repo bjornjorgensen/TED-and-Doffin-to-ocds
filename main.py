@@ -68,6 +68,7 @@ from converters.BT_193_Tender import parse_tender_variant, merge_tender_variant
 #from converters.BT_195 import parse_unpublished_identifier
 from converters.BT_195_BT_09_Procedure import parse_unpublished_identifier, merge_unpublished_identifier
 from converters.BT_195_BT_105_Procedure import parse_unpublished_procedure_type, merge_unpublished_procedure_type
+
 from converters.BT_195_BT_106_Procedure import parse_unpublished_procedure_accelerated, merge_unpublished_procedure_accelerated
 from converters.BT_195_BT_1252_Procedure import parse_unpublished_direct_award_justification, merge_unpublished_direct_award_justification
 from converters.BT_195_BT_135_Procedure import parse_unpublished_direct_award_justification_text, merge_unpublished_direct_award_justification_text
@@ -122,8 +123,8 @@ from converters.BT_196_BT_1252_Procedure import parse_unpublished_justification_
 from converters.BT_196_BT_135_Procedure import parse_unpublished_justification_description_procedure_bt135, merge_unpublished_justification_description_procedure_bt135
 from converters.BT_196_BT_1351_Procedure import parse_unpublished_justification_description_procedure_bt1351, merge_unpublished_justification_description_procedure_bt1351
 from converters.BT_196_BT_09_Procedure import parse_unpublished_justification_description_procedure_bt09, merge_unpublished_justification_description_procedure_bt09
-from converters.BT_196_BT_105_Procedure import parse_unpublished_justification_description_procedure_bt105, merge_unpublished_justification_description_procedure_bt105
-from converters.BT_196_BT_106_Procedure import parse_unpublished_justification_description_procedure_bt106, merge_unpublished_justification_description_procedure_bt106
+#from converters.BT_196_BT_105_Procedure import parse_unpublished_justification_description_procedure_bt105, merge_unpublished_justification_description_procedure_bt105
+#from converters.BT_196_BT_106_Procedure import parse_unpublished_justification_description_procedure_bt106, merge_unpublished_justification_description_procedure_bt106
 from converters.BT_196_BT_136_Procedure import parse_unpublished_justification_description_procedure_bt136, merge_unpublished_justification_description_procedure_bt136
 from converters.BT_196_BT_142_LotResult import parse_unpublished_justification_description_lotresult_bt142, merge_unpublished_justification_description_lotresult_bt142
 from converters.BT_196_BT_144_LotResult import parse_unpublished_justification_description_lotresult_bt144, merge_unpublished_justification_description_lotresult_bt144
@@ -170,8 +171,8 @@ from converters.BT_196_BT_759_LotResult import parse_bt_196_bt_759_lot_result, m
 from converters.BT_196_BT_760_LotResult import parse_bt_196_bt_760_lot_result, merge_bt_196_bt_760_lot_result
 from converters.BT_196_BT_773_Tender import parse_bt_196_bt_773_tender, merge_bt_196_bt_773_tender
 from converters.BT_196_BT_88_Procedure import parse_bt_196_bt_88_procedure, merge_bt_196_bt_88_procedure
-from converters.BT_197_BT_106_Procedure import parse_unpublished_justification_code_procedure_bt106, merge_unpublished_justification_code_procedure_bt106
-from converters.BT_197_BT_105_Procedure import parse_unpublished_justification_code_procedure_bt105, merge_unpublished_justification_code_procedure_bt105
+#from converters.BT_197_BT_106_Procedure import parse_unpublished_justification_code_procedure_bt106, merge_unpublished_justification_code_procedure_bt106
+#from converters.BT_197_BT_105_Procedure import parse_bt_197_bt_105_procedure, merge_bt_197_bt_105_procedure
 from converters.BT_197_BT_09_Procedure import parse_unpublished_justification_code_procedure_bt09, merge_unpublished_justification_code_procedure_bt09
 from converters.BT_197_BT_1252_Procedure import parse_unpublished_justification_code_procedure_bt1252, merge_unpublished_justification_code_procedure_bt1252
 from converters.BT_197_BT_135_Procedure import parse_unpublished_justification_code_procedure_bt135, merge_unpublished_justification_code_procedure_bt135
@@ -223,9 +224,9 @@ from converters.BT_197_BT_760_LotResult import parse_bt_197_bt_760_lotresult, me
 from converters.BT_197_BT_773_Tender import parse_bt_197_bt_773_tender, merge_bt_197_bt_773_tender
 from converters.BT_197_BT_88_Procedure import parse_bt_197_bt_88_procedure, merge_bt_197_bt_88_procedure
 
-from converters.BT_198_BT_09_Procedure import parse_unpublished_access_date_procedure_bt09, merge_unpublished_access_date_procedure_bt09
-from converters.BT_198_BT_105_Procedure import parse_unpublished_access_date_procedure_bt105, merge_unpublished_access_date_procedure_bt105
-from converters.BT_198_BT_106_Procedure import parse_unpublished_access_date_procedure_bt106, merge_unpublished_access_date_procedure_bt106
+from converters.BT_198_BT_09_Procedure import parse_bt_198_bt_09_procedure, merge_bt_198_bt_09_procedure
+from converters.BT_198_BT_105_Procedure import parse_bt_198_bt_105_procedure, merge_bt_198_bt_105_procedure
+from converters.BT_198_BT_106_Procedure import parse_bt_198_bt_106_procedure, merge_bt_198_bt_106_procedure
 
 
 from converters.BT_21_Lot import parse_lot_title, merge_lot_title
@@ -1179,9 +1180,7 @@ def main(xml_path, ocid_prefix):
     try:
         unpublished_procedure_accelerated_data = parse_unpublished_procedure_accelerated(xml_content)
         if unpublished_procedure_accelerated_data:
-            #logger.info(f"BT-195(BT-106) Unpublished Procedure Accelerated data before merge: {unpublished_procedure_accelerated_data}")
             merge_unpublished_procedure_accelerated(release_json, unpublished_procedure_accelerated_data)
-            #logger.info(f"BT-195(BT-106) Unpublished Procedure Accelerated data after merge: {release_json.get('withheldInformation', [])}")
         else:
             logger.info("No Unpublished Procedure Accelerated data found")
     except Exception as e:
@@ -2255,13 +2254,13 @@ def main(xml_path, ocid_prefix):
     
     # Parse and merge BT-197(BT-105)-Procedure
     try:
-        justification_code = parse_unpublished_justification_code_procedure_bt105(xml_content)
-        if justification_code:
-            merge_unpublished_justification_code_procedure_bt105(release_json, justification_code)
+        bt_197_bt_105_procedure_data = parse_bt_197_bt_105_procedure(xml_content)
+        if bt_197_bt_105_procedure_data:
+            merge_bt_197_bt_105_procedure(release_json, bt_197_bt_105_procedure_data)
         else:
-            logger.info("No Unpublished Justification Code for Procedure Type found")
+            logger.info("No BT-197(BT-105)-Procedure data found")
     except Exception as e:
-        logger.error(f"Error processing Unpublished Justification Code for Procedure Type: {str(e)}")
+        logger.error(f"Error processing BT-197(BT-105)-Procedure data: {str(e)}")
 
     # Process BT-197(BT-1252)-Procedure
     try:
@@ -2754,39 +2753,36 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing BT-197(BT-88)-Procedure data: {str(e)}")
 
-    # Parse and merge BT-198(BT_105)-Procedure
+    # Parse and merge BT-198(BT-09)-Procedure
     try:
-        availability_date = parse_unpublished_access_date_procedure_bt105(xml_content)
-        if availability_date:
-            merge_unpublished_access_date_procedure_bt105(release_json, availability_date)
+        bt_198_bt_09_procedure_data = parse_bt_198_bt_09_procedure(xml_content)
+        if bt_198_bt_09_procedure_data:
+            merge_bt_198_bt_09_procedure(release_json, bt_198_bt_09_procedure_data)
         else:
-            logger.info("No Unpublished Access Date for Procedure Type found")
+            logger.info("No BT-198(BT-09)-Procedure data found")
     except Exception as e:
-        logger.error(f"Error processing Unpublished Access Date for Procedure Type: {str(e)}")
+        logger.error(f"Error processing BT-198(BT-09)-Procedure data: {str(e)}")
+
+    # Parse and merge BT-198(BT-105)-Procedure
+    try:
+        bt_198_bt_105_procedure_data = parse_bt_198_bt_105_procedure(xml_content)
+        if bt_198_bt_105_procedure_data:
+            merge_bt_198_bt_105_procedure(release_json, bt_198_bt_105_procedure_data)
+        else:
+            logger.info("No BT-198(BT-105)-Procedure data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-198(BT-105)-Procedure data: {str(e)}")
 
     # Parse and merge BT-198(BT-106)-Procedure
-    try:
-        availability_date = parse_unpublished_access_date_procedure_bt106(xml_content)
-        if availability_date:
-            merge_unpublished_access_date_procedure_bt106(release_json, availability_date)
-        else:
-            logger.info("No Unpublished Access Date for Accelerated Procedure found")
-    except Exception as e:
-        logger.error(f"Error processing Unpublished Access Date for Accelerated Procedure: {str(e)}")
+    #try:
+    #    bt_198_bt_106_procedure_data = parse_bt_198_bt_106_procedure(xml_content)
+    #    if bt_198_bt_106_procedure_data:
+    #        merge_bt_198_bt_106_procedure(release_json, bt_198_bt_106_procedure_data)
+    #    else:
+    #        logger.info("No BT-198(BT-106)-Procedure data found")
+    #except Exception as e:
+    #    logger.error(f"Error processing BT-198(BT-106)-Procedure data: {str(e)}")
 
-     
-
-    # Parse and merge BT-198(BT_09)-Procedure
-    try:
-        availability_date = parse_unpublished_access_date_procedure_bt09(xml_content)
-        if availability_date:
-            merge_unpublished_access_date_procedure_bt09(release_json, availability_date)
-        else:
-            logger.info("No Unpublished Access Date for Cross Border Law found")
-    except Exception as e:
-        logger.error(f"Error processing Unpublished Access Date for Cross Border Law: {str(e)}")
-
-   
 
     # Parse and merge BT-21-Lot
     try:
@@ -4501,8 +4497,8 @@ def main(xml_path, ocid_prefix):
 
 if __name__ == "__main__":
     # Path to the XML file
-    xml_path = 'xmlfile/can_24_minimal.xml'
-    #xml_path = 'test_bt195_bt196_bt105.xml'
+    #xml_path = 'xmlfile/can_24_minimal.xml'
+    xml_path = 'bt_198-106.xml'
     # Prefix for OCID
     ocid_prefix = 'ocid_prefix_value'
     
