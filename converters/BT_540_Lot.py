@@ -1,48 +1,56 @@
 # converters/BT_540_Lot.py
+
+import logging
 from lxml import etree
 
-def parse_award_criterion_description_lot(xml_content):
+logger = logging.getLogger(__name__)
+
+def parse_award_criterion_description(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
     }
 
-    result = {}
+    result = {"tender": {"lots": []}}
 
-    lot_elements = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
-    for lot in lot_elements:
+    lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    
+    for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        criteria = lot.xpath(".//cac:SubordinateAwardingCriterion", namespaces=namespaces)
+        
+        criteria = lot.xpath(".//cac:SubordinateAwardingCriterion/cbc:Description/text()", namespaces=namespaces)
         
         if criteria:
-            result[lot_id] = []
-            for criterion in criteria:
-                description = criterion.xpath("cbc:Description/text()", namespaces=namespaces)
-                if description:
-                    result[lot_id].append(description[0])
+            lot_data = {
+                "id": lot_id,
+                "awardCriteria": {
+                    "criteria": [{"description": criterion} for criterion in criteria]
+                }
+            }
+            result["tender"]["lots"].append(lot_data)
 
-    return result if result else None
+    return result if result["tender"]["lots"] else None
 
-def merge_award_criterion_description_lot(release_json, criterion_data):
-    if criterion_data:
-        tender = release_json.setdefault("tender", {})
-        lots = tender.setdefault("lots", [])
+def merge_award_criterion_description(release_json, award_criterion_description_data):
+    if not award_criterion_description_data:
+        logger.warning("No Award Criterion Description data to merge")
+        return
 
-        for lot_id, descriptions in criterion_data.items():
-            lot = next((lot for lot in lots if lot.get("id") == lot_id), None)
-            if not lot:
-                lot = {"id": lot_id}
-                lots.append(lot)
-            
-            award_criteria = lot.setdefault("awardCriteria", {})
-            criteria = award_criteria.setdefault("criteria", [])
+    tender = release_json.setdefault("tender", {})
+    existing_lots = tender.setdefault("lots", [])
 
-            for description in descriptions:
-                criterion = next((c for c in criteria if "description" not in c), None)
-                if criterion:
-                    criterion["description"] = description
+    for new_lot in award_criterion_description_data["tender"]["lots"]:
+        existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
+        if existing_lot:
+            existing_criteria = existing_lot.setdefault("awardCriteria", {}).setdefault("criteria", [])
+            for new_criterion in new_lot["awardCriteria"]["criteria"]:
+                existing_criterion = next((c for c in existing_criteria if c.get("description") == new_criterion["description"]), None)
+                if existing_criterion:
+                    existing_criterion.update(new_criterion)
                 else:
-                    criteria.append({"description": description})
+                    existing_criteria.append(new_criterion)
+        else:
+            existing_lots.append(new_lot)
 
-    return release_json
+    logger.info(f"Merged Award Criterion Description data for {len(award_criterion_description_data['tender']['lots'])} lots")

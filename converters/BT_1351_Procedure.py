@@ -1,7 +1,7 @@
 # converters/BT_1351_Procedure.py
 
-from lxml import etree
 import logging
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -11,29 +11,28 @@ def parse_accelerated_procedure_justification(xml_content):
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
     }
-
-    justification = root.xpath("//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/cbc:ProcessReason/text()", namespaces=namespaces)
     
-    if justification:
+    xpath = "/*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/cbc:ProcessReason"
+    process_reason = root.xpath(xpath, namespaces=namespaces)
+    
+    if process_reason:
         return {
             "tender": {
                 "procedure": {
-                    "acceleratedRationale": justification[0]
+                    "acceleratedRationale": process_reason[0].text
                 }
             }
         }
     else:
-        logger.info("No Accelerated Procedure Justification found")
+        logger.info("No accelerated procedure justification found")
         return None
 
-def merge_accelerated_procedure_justification(release_json, accelerated_procedure_justification_data):
-    if not accelerated_procedure_justification_data:
-        logger.warning("No Accelerated Procedure Justification data to merge")
+def merge_accelerated_procedure_justification(release_json, accelerated_data):
+    if not accelerated_data:
+        logger.warning("No accelerated procedure justification data to merge")
         return
 
     tender = release_json.setdefault("tender", {})
     procedure = tender.setdefault("procedure", {})
-    procedure["acceleratedRationale"] = accelerated_procedure_justification_data["tender"]["procedure"]["acceleratedRationale"]
-
-    logger.info(f"Merged Accelerated Procedure Justification data: {procedure['acceleratedRationale']}")
-    logger.debug(f"Release JSON after merging Accelerated Procedure Justification data: {release_json}")
+    procedure.update(accelerated_data["tender"]["procedure"])
+    logger.info("Merged accelerated procedure justification data")

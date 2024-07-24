@@ -1,37 +1,50 @@
 # converters/BT_54_Lot.py
+
+import logging
 from lxml import etree
 
-def parse_options_description_lot(xml_content):
+logger = logging.getLogger(__name__)
+
+def parse_options_description(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
     }
 
-    result = {}
+    result = {"tender": {"lots": []}}
 
-    lot_elements = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
-    for lot in lot_elements:
+    lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    
+    for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        options_description = lot.xpath("./cac:ProcurementProject/cac:ContractExtension/cbc:OptionsDescription/text()", namespaces=namespaces)
+        
+        options_description = lot.xpath("cac:ProcurementProject/cac:ContractExtension/cbc:OptionsDescription/text()", namespaces=namespaces)
         
         if options_description:
-            result[lot_id] = options_description[0]
+            lot_data = {
+                "id": lot_id,
+                "options": {
+                    "description": options_description[0]
+                }
+            }
+            result["tender"]["lots"].append(lot_data)
 
-    return result if result else None
+    return result if result["tender"]["lots"] else None
 
-def merge_options_description_lot(release_json, options_data):
-    if options_data:
-        tender = release_json.setdefault("tender", {})
-        lots = tender.setdefault("lots", [])
+def merge_options_description(release_json, options_description_data):
+    if not options_description_data:
+        logger.warning("No Options Description data to merge")
+        return
 
-        for lot_id, description in options_data.items():
-            lot = next((lot for lot in lots if lot.get("id") == lot_id), None)
-            if not lot:
-                lot = {"id": lot_id}
-                lots.append(lot)
-            
-            options = lot.setdefault("options", {})
-            options["description"] = description
+    tender = release_json.setdefault("tender", {})
+    existing_lots = tender.setdefault("lots", [])
 
-    return release_json
+    for new_lot in options_description_data["tender"]["lots"]:
+        existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
+        if existing_lot:
+            existing_lot.setdefault("options", {}).update(new_lot["options"])
+        else:
+            existing_lots.append(new_lot)
+
+    logger.info(f"Merged Options Description data for {len(options_description_data['tender']['lots'])} lots")
