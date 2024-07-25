@@ -313,7 +313,7 @@ from converters.BT_506_UBO import parse_ubo_email, merge_ubo_email
 from converters.BT_507_Organization_Company import parse_organization_country_subdivision, merge_organization_country_subdivision
 from converters.BT_507_Organization_TouchPoint import parse_touchpoint_country_subdivision, merge_touchpoint_country_subdivision
 from converters.BT_507_UBO import parse_ubo_country_subdivision, merge_ubo_country_subdivision
-from converters.BT_5071_Lot import parse_lot_place_performance_country_subdivision, merge_lot_place_performance_country_subdivision
+from converters.BT_5071_Lot import parse_place_performance_country_subdivision, merge_place_performance_country_subdivision
 from converters.BT_5071_Part import parse_part_place_performance_country_subdivision, merge_part_place_performance_country_subdivision
 from converters.BT_5071_Procedure import parse_procedure_place_performance_country_subdivision, merge_procedure_place_performance_country_subdivision
 from converters.BT_508_Procedure_Buyer import parse_buyer_profile_url, merge_buyer_profile_url
@@ -3549,13 +3549,13 @@ def main(xml_path, ocid_prefix):
 
     # Parse and merge BT-5071-Lot
     try:
-        lot_place_performance_data = parse_lot_place_performance_country_subdivision(xml_content)
-        if lot_place_performance_data:
-            merge_lot_place_performance_country_subdivision(release_json, lot_place_performance_data)
+        subdivision_data = parse_place_performance_country_subdivision(xml_content)
+        if subdivision_data:
+            merge_place_performance_country_subdivision(release_json, subdivision_data)
         else:
-            logger.info("No Lot Place Performance Country Subdivision data found")
+            logger.info("No Place Performance Country Subdivision data found")
     except Exception as e:
-        logger.error(f"Error processing Lot Place Performance Country Subdivision data: {str(e)}")
+        logger.error(f"Error processing Place Performance Country Subdivision data: {str(e)}")
 
     # Parse and merge BT-5071-Part
     try:
@@ -5206,13 +5206,13 @@ def main(xml_path, ocid_prefix):
         logger.warning("No Tender Identifier Reference data found")
         
     # Before applying remove_empty_elements and remove_empty_dicts
-    #logger.info(f"Release JSON before removing empty elements: {json.dumps(release_json, indent=2)}")
+    logger.info(f"Release JSON before removing empty elements: {json.dumps(release_json, indent=2)}")
     
     release_json = remove_empty_elements(release_json)
     #logger.info(f"Release JSON after removing empty elements: {json.dumps(release_json, indent=2)}")
 
     release_json = remove_empty_dicts(release_json)
-    #logger.info(f"Release JSON after removing empty dicts: {json.dumps(release_json, indent=2)}")
+    logger.info(f"Release JSON after removing empty dicts: {json.dumps(release_json, indent=2)}")
 
     # Before writing to output.json
     #logger.info(f"Final release JSON: {json.dumps(release_json, indent=2)}")

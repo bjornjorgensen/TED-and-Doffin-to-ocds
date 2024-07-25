@@ -1,1 +1,1 @@
-{"initiationType": "tender", "tender": {"lotGroups": [{"id": "GLO-0001", "awardCriteria": {"criteria": [{"numbers": [{"fixed": "total"}]}]}}]}}
+{"initiationType": "tender", "tender": {"lots": [{"id": "LOT-0001"}], "items": [{"id": "1", "deliveryAddresses": [], "relatedLot": "LOT-0001"}], "deliveryAddresses": [{"region": "UKG23"}]}}

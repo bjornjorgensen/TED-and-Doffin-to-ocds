@@ -1,11 +1,11 @@
 # converters/BT_5071_Lot.py
 
-import logging
 from lxml import etree
+import logging
 
 logger = logging.getLogger(__name__)
 
-def parse_lot_place_performance_country_subdivision(xml_content):
+def parse_place_performance_country_subdivision(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
@@ -18,10 +18,10 @@ def parse_lot_place_performance_country_subdivision(xml_content):
     
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        realized_locations = lot.xpath("cac:ProcurementProject/cac:RealizedLocation", namespaces=namespaces)
+        realized_locations = lot.xpath(".//cac:RealizedLocation", namespaces=namespaces)
         
         for index, location in enumerate(realized_locations):
-            country_subdivision = location.xpath("cac:Address/cbc:CountrySubentityCode/text()", namespaces=namespaces)
+            country_subdivision = location.xpath(".//cbc:CountrySubentityCode[@listName='nuts=lvl3']/text()", namespaces=namespaces)
             
             if country_subdivision:
                 item = {
@@ -33,25 +33,23 @@ def parse_lot_place_performance_country_subdivision(xml_content):
 
     return result if result["tender"]["items"] else None
 
-def merge_lot_place_performance_country_subdivision(release_json, lot_data):
-    if not lot_data:
-        logger.warning("No Lot Place Performance Country Subdivision data to merge")
+def merge_place_performance_country_subdivision(release_json, subdivision_data):
+    if not subdivision_data:
+        logger.warning("No Place Performance Country Subdivision data to merge")
         return
 
-    tender_items = release_json.setdefault("tender", {}).setdefault("items", [])
+    existing_items = release_json.setdefault("tender", {}).setdefault("items", [])
     
-    for new_item in lot_data["tender"]["items"]:
-        existing_item = next((item for item in tender_items if item["id"] == new_item["id"] and item["relatedLot"] == new_item["relatedLot"]), None)
+    for new_item in subdivision_data["tender"]["items"]:
+        existing_item = next((item for item in existing_items if item["relatedLot"] == new_item["relatedLot"]), None)
         
         if existing_item:
             existing_addresses = existing_item.setdefault("deliveryAddresses", [])
-            for new_address in new_item["deliveryAddresses"]:
-                existing_address = next((addr for addr in existing_addresses if "region" not in addr), None)
-                if existing_address:
-                    existing_address["region"] = new_address["region"]
-                else:
-                    existing_addresses.append(new_address)
+            if existing_addresses:
+                existing_addresses[0].update(new_item["deliveryAddresses"][0])
+            else:
+                existing_addresses.extend(new_item["deliveryAddresses"])
         else:
-            tender_items.append(new_item)
+            existing_items.append(new_item)
 
-    logger.info(f"Merged Lot Place Performance Country Subdivision data for {len(lot_data['tender']['items'])} items")
+    logger.info(f"Merged Place Performance Country Subdivision data for {len(subdivision_data['tender']['items'])} items")
