@@ -240,6 +240,8 @@ from converters.BT_198_BT_105_Procedure import parse_bt_198_bt_105_procedure, me
 from converters.BT_198_BT_106_Procedure import parse_bt_198_bt_106_procedure, merge_bt_198_bt_106_procedure
 
 from converters.BT_200_Contract import parse_contract_modification_reason, merge_contract_modification_reason
+from converters.BT_201_Contract import parse_contract_modification_description, merge_contract_modification_description
+from converters.BT_202_Contract import parse_contract_modification_summary, merge_contract_modification_summary
 from converters.BT_21_Lot import parse_lot_title, merge_lot_title
 from converters.BT_21_LotsGroup import parse_lots_group_title, merge_lots_group_title
 from converters.BT_21_Part import parse_part_title, merge_part_title
@@ -2775,6 +2777,26 @@ def main(xml_path, ocid_prefix):
             logger.info("No Contract Modification Reason data found")
     except Exception as e:
         logger.error(f"Error processing Contract Modification Reason data: {str(e)}")
+
+    # Parse and merge BT-201-Contract
+    try:
+        contract_modification_description_data = parse_contract_modification_description(xml_content)
+        if contract_modification_description_data:
+            merge_contract_modification_description(release_json, contract_modification_description_data)
+        else:
+            logger.info("No Contract Modification Description data found")
+    except Exception as e:
+        logger.error(f"Error processing Contract Modification Description data: {str(e)}")
+
+    # Parse and merge BT-202-Contract
+    try:
+        contract_modification_summary_data = parse_contract_modification_summary(xml_content)
+        if contract_modification_summary_data:
+            merge_contract_modification_summary(release_json, contract_modification_summary_data)
+        else:
+            logger.info("No Contract Modification Summary data found")
+    except Exception as e:
+        logger.error(f"Error processing Contract Modification Summary data: {str(e)}")
 
     # Parse and merge BT-21-Lot
     try:
