@@ -239,7 +239,7 @@ from converters.BT_197_BT_88_Procedure import parse_bt_197_bt_88_procedure, merg
 from converters.BT_198_BT_105_Procedure import parse_bt_198_bt_105_procedure, merge_bt_198_bt_105_procedure
 from converters.BT_198_BT_106_Procedure import parse_bt_198_bt_106_procedure, merge_bt_198_bt_106_procedure
 
-
+from converters.BT_200_Contract import parse_contract_modification_reason, merge_contract_modification_reason
 from converters.BT_21_Lot import parse_lot_title, merge_lot_title
 from converters.BT_21_LotsGroup import parse_lots_group_title, merge_lots_group_title
 from converters.BT_21_Part import parse_part_title, merge_part_title
@@ -2766,8 +2766,15 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing BT-197(BT-88)-Procedure data: {str(e)}")
 
-#####################################################################MOVE THIS 
-#bt_200 missing
+    # Parse and merge BT-200-Contract
+    try:
+        contract_modification_data = parse_contract_modification_reason(xml_content)
+        if contract_modification_data:
+            merge_contract_modification_reason(release_json, contract_modification_data)
+        else:
+            logger.info("No Contract Modification Reason data found")
+    except Exception as e:
+        logger.error(f"Error processing Contract Modification Reason data: {str(e)}")
 
     # Parse and merge BT-21-Lot
     try:
