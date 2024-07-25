@@ -1,70 +1,110 @@
 # tests/test_BT_13714_Tender.py
 
 import pytest
-import json
-import os
-import sys
+from lxml import etree
+from converters.BT_13714_Tender import parse_tender_lot_identifier, merge_tender_lot_identifier
 
-# Add the parent directory to sys.path to import main
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from main import main
+def create_xml_with_lot_tenders(lot_tenders):
+    root = etree.Element("root", nsmap={
+        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
+        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
+        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1'
+    })
+    for tender_id, lot_id in lot_tenders:
+        lot_tender = etree.SubElement(root, "{http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1}LotTender")
+        tender_id_elem = etree.SubElement(lot_tender, "{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ID")
+        tender_id_elem.text = tender_id
+        tender_id_elem.set("schemeName", "tender")
+        tender_lot = etree.SubElement(lot_tender, "{http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1}TenderLot")
+        lot_id_elem = etree.SubElement(tender_lot, "{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}ID")
+        lot_id_elem.text = lot_id
+        lot_id_elem.set("schemeName", "Lot")
+    return etree.tostring(root)
 
-def test_bt_13714_tender_integration(tmp_path):
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-          xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-          xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionContent>
-                    <efext:EformsExtension>
-                        <efac:NoticeResult>
-                            <efac:LotTender>
-                                <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
-                                <efac:TenderLot>
-                                    <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
-                                </efac:TenderLot>
-                            </efac:LotTender>
-                            <efac:LotTender>
-                                <cbc:ID schemeName="tender">TEN-0002</cbc:ID>
-                                <efac:TenderLot>
-                                    <cbc:ID schemeName="Lot">LOT-0002</cbc:ID>
-                                </efac:TenderLot>
-                            </efac:LotTender>
-                            <efac:LotTender>
-                                <cbc:ID schemeName="tender">TEN-0002</cbc:ID>
-                                <efac:TenderLot>
-                                    <cbc:ID schemeName="Lot">LOT-0003</cbc:ID>
-                                </efac:TenderLot>
-                            </efac:LotTender>
-                        </efac:NoticeResult>
-                    </efext:EformsExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
-    </root>
-    """
-    xml_file = tmp_path / "test_input_tender_lot_identifier.xml"
-    xml_file.write_text(xml_content)
+def test_parse_tender_lot_identifier_single():
+    xml_content = create_xml_with_lot_tenders([("TEN-0001", "LOT-0001")])
+    result = parse_tender_lot_identifier(xml_content)
+    assert result == {
+        "bids": {
+            "details": [
+                {
+                    "id": "TEN-0001",
+                    "relatedLots": ["LOT-0001"]
+                }
+            ]
+        }
+    }
 
-    main(str(xml_file), "ocds-test-prefix")
+def test_parse_tender_lot_identifier_multiple():
+    xml_content = create_xml_with_lot_tenders([
+        ("TEN-0001", "LOT-0001"),
+        ("TEN-0002", "LOT-0002"),
+        ("TEN-0003", "LOT-0003")
+    ])
+    result = parse_tender_lot_identifier(xml_content)
+    assert result == {
+        "bids": {
+            "details": [
+                {"id": "TEN-0001", "relatedLots": ["LOT-0001"]},
+                {"id": "TEN-0002", "relatedLots": ["LOT-0002"]},
+                {"id": "TEN-0003", "relatedLots": ["LOT-0003"]}
+            ]
+        }
+    }
 
-    with open('output.json', 'r') as f:
-        result = json.load(f)
+def test_parse_tender_lot_identifier_empty():
+    xml_content = create_xml_with_lot_tenders([])
+    result = parse_tender_lot_identifier(xml_content)
+    assert result is None
 
-    assert "bids" in result, "Expected 'bids' in result"
-    assert "details" in result["bids"], "Expected 'details' in result['bids']"
-    assert len(result["bids"]["details"]) == 2, f"Expected 2 bids, got {len(result['bids']['details'])}"
+def test_merge_tender_lot_identifier_new_bids():
+    release_json = {}
+    tender_lot_identifier_data = {
+        "bids": {
+            "details": [
+                {"id": "TEN-0001", "relatedLots": ["LOT-0001"]},
+                {"id": "TEN-0002", "relatedLots": ["LOT-0002"]}
+            ]
+        }
+    }
+    merge_tender_lot_identifier(release_json, tender_lot_identifier_data)
+    assert release_json == {
+        "bids": {
+            "details": [
+                {"id": "TEN-0001", "relatedLots": ["LOT-0001"]},
+                {"id": "TEN-0002", "relatedLots": ["LOT-0002"]}
+            ]
+        }
+    }
 
-    bid_1 = next(bid for bid in result["bids"]["details"] if bid["id"] == "TEN-0001")
-    assert "relatedLots" in bid_1, "Expected 'relatedLots' in bid TEN-0001"
-    assert bid_1["relatedLots"] == ["LOT-0001"], f"Expected ['LOT-0001'] in TEN-0001 relatedLots, got {bid_1['relatedLots']}"
+def test_merge_tender_lot_identifier_existing_bids():
+    release_json = {
+        "bids": {
+            "details": [
+                {"id": "TEN-0001", "relatedLots": ["LOT-0001"]}
+            ]
+        }
+    }
+    tender_lot_identifier_data = {
+        "bids": {
+            "details": [
+                {"id": "TEN-0001", "relatedLots": ["LOT-0002"]},
+                {"id": "TEN-0002", "relatedLots": ["LOT-0003"]}
+            ]
+        }
+    }
+    merge_tender_lot_identifier(release_json, tender_lot_identifier_data)
+    assert release_json == {
+        "bids": {
+            "details": [
+                {"id": "TEN-0001", "relatedLots": ["LOT-0001", "LOT-0002"]},
+                {"id": "TEN-0002", "relatedLots": ["LOT-0003"]}
+            ]
+        }
+    }
 
-    bid_2 = next(bid for bid in result["bids"]["details"] if bid["id"] == "TEN-0002")
-    assert "relatedLots" in bid_2, "Expected 'relatedLots' in bid TEN-0002"
-    assert set(bid_2["relatedLots"]) == set(["LOT-0002", "LOT-0003"]), f"Expected ['LOT-0002', 'LOT-0003'] in TEN-0002 relatedLots, got {bid_2['relatedLots']}"
-
-if __name__ == "__main__":
-    pytest.main()
+def test_merge_tender_lot_identifier_empty_data():
+    release_json = {"bids": {"details": []}}
+    merge_tender_lot_identifier(release_json, None)
+    assert release_json == {"bids": {"details": []}}

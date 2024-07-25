@@ -945,7 +945,7 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing lot result identifier data: {str(e)}")
             
-    # Parse and merge BT-13714-Tender Tender Lot Identifier
+    # Parse and merge BT-13714-Tender
     try:
         tender_lot_identifier_data = parse_tender_lot_identifier(xml_content)
         if tender_lot_identifier_data:

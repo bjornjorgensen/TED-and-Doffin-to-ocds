@@ -1,1 +1,1 @@
-{"initiationType": "tender", "tender": {"deliveryAddresses": [{"region": "UKG23"}]}}
+{"initiationType": "tender", "bids": {"details": [{"id": "TEN-0001", "relatedLots": ["LOT-0001"]}, {"id": "TEN-0002", "relatedLots": ["LOT-0003"]}]}}
