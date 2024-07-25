@@ -1,1 +1,1 @@
-{"initiationType": "tender", "tender": {"description": "Procedure for the procurement of office furniture"}}
+{"initiationType": "tender", "tender": {"lots": [{"id": "LOT-0001"}], "items": [{"id": "1", "quantity": 45000.0, "relatedLot": "LOT-0001", "unit": {"id": "TNE", "scheme": "EU Measurement unit", "name": "tonne"}}]}}

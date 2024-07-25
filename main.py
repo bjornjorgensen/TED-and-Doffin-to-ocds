@@ -254,7 +254,7 @@ from converters.BT_24_Lot import parse_lot_description, merge_lot_description
 from converters.BT_24_LotsGroup import parse_lots_group_description, merge_lots_group_description
 from converters.BT_24_Part import parse_part_description, merge_part_description
 from converters.BT_24_Procedure import parse_procedure_description, merge_procedure_description
-from converters.BT_25 import parse_quantity, merge_quantity
+from converters.BT_25_Lot import parse_lot_quantity, merge_lot_quantity
 from converters.BT_26a_lot import parse_classification_type, merge_classification_type
 from converters.BT_26a_part import parse_classification_type_part, merge_classification_type_part
 from converters.BT_26a_procedure import parse_classification_type_procedure, merge_classification_type_procedure
@@ -274,7 +274,10 @@ from converters.BT_27_Procedure import parse_bt_27_procedure, merge_bt_27_proced
 from converters.BT_271_Lot import parse_bt_271_lot, merge_bt_271_lot
 from converters.BT_271_LotsGroup import parse_bt_271_lots_group, merge_bt_271_lots_group
 from converters.BT_271_Procedure import parse_bt_271_procedure, merge_bt_271_procedure
-from converters.BT_300 import parse_additional_information, merge_additional_information
+from converters.BT_300_Lot import parse_lot_additional_info, merge_lot_additional_info
+from converters.BT_300_LotsGroup import parse_lotsgroup_additional_info, merge_lotsgroup_additional_info
+from converters.BT_300_Part import parse_part_additional_info, merge_part_additional_info
+from converters.BT_300_Procedure import parse_procedure_additional_info, merge_procedure_additional_info
 from converters.BT_31 import parse_lots_max_allowed, merge_lots_max_allowed
 from converters.BT_3201 import parse_tender_identifier, merge_tender_identifier
 from converters.BT_3202 import parse_contract_tender_id, merge_contract_tender_id
@@ -2923,10 +2926,15 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Procedure Description data: {str(e)}")
 
-    # Parse the quantity (BT-25)
-    quantity_data = parse_quantity(xml_content)
-    # Merge quantity into the release JSON
-    merge_quantity(release_json, quantity_data)
+    # Parse and merge BT-25-Lot
+    try:
+        lot_quantity_data = parse_lot_quantity(xml_content)
+        if lot_quantity_data:
+            merge_lot_quantity(release_json, lot_quantity_data)
+        else:
+            logger.info("No Lot Quantity data found")
+    except Exception as e:
+        logger.error(f"Error processing Lot Quantity data: {str(e)}")
 
     # Parse the classifications (BT-26 lot)
     try:
@@ -3137,10 +3145,45 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing BT-271-Procedure Framework Maximum Value data: {str(e)}")
 
-    # Parse the additional information (BT-300)
-    additional_info_data = parse_additional_information(xml_content)
-    # Merge additional information into the release JSON
-    merge_additional_information(release_json, additional_info_data)
+    # Parse and merge BT-300-Lot
+    try:
+        lot_additional_info = parse_lot_additional_info(xml_content)
+        if lot_additional_info:
+            merge_lot_additional_info(release_json, lot_additional_info)
+        else:
+            logger.info("No lot additional information found")
+    except Exception as e:
+        logger.error(f"Error processing lot additional information: {str(e)}")
+
+    # Parse and merge BT-300-LotsGroup
+    try:
+        lotsgroup_additional_info = parse_lotsgroup_additional_info(xml_content)
+        if lotsgroup_additional_info:
+            merge_lotsgroup_additional_info(release_json, lotsgroup_additional_info)
+        else:
+            logger.info("No lots group additional information found")
+    except Exception as e:
+        logger.error(f"Error processing lots group additional information: {str(e)}")
+
+    # Parse and merge BT-300-Part
+    try:
+        part_additional_info = parse_part_additional_info(xml_content)
+        if part_additional_info:
+            merge_part_additional_info(release_json, part_additional_info)
+        else:
+            logger.info("No part additional information found")
+    except Exception as e:
+        logger.error(f"Error processing part additional information: {str(e)}")
+
+    # Parse and merge BT-300-Procedure
+    try:
+        procedure_additional_info = parse_procedure_additional_info(xml_content)
+        if procedure_additional_info:
+            merge_procedure_additional_info(release_json, procedure_additional_info)
+        else:
+            logger.info("No procedure additional information found")
+    except Exception as e:
+        logger.error(f"Error processing procedure additional information: {str(e)}")
 
     # Parse the lots max allowed (BT-31)
     lots_max_allowed_data = parse_lots_max_allowed(xml_content)
