@@ -250,7 +250,10 @@ from converters.BT_22_Lot import parse_lot_internal_identifier, merge_lot_intern
 from converters.BT_23_Lot import parse_main_nature, merge_main_nature
 from converters.BT_23_Part import parse_main_nature_part, merge_main_nature_part
 from converters.BT_23_Procedure import parse_main_nature_procedure, merge_main_nature_procedure
-from converters.BT_24 import parse_description, merge_description
+from converters.BT_24_Lot import parse_lot_description, merge_lot_description
+from converters.BT_24_LotsGroup import parse_lots_group_description, merge_lots_group_description
+from converters.BT_24_Part import parse_part_description, merge_part_description
+from converters.BT_24_Procedure import parse_procedure_description, merge_procedure_description
 from converters.BT_25 import parse_quantity, merge_quantity
 from converters.BT_26a_lot import parse_classification_type, merge_classification_type
 from converters.BT_26a_part import parse_classification_type_part, merge_classification_type_part
@@ -2880,10 +2883,45 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Main Nature (Procedure) data: {str(e)}")
 
-    # Parse and merge BT-24 Description
-    logger.info("Processing BT-24: Description")
-    description_data = parse_description(xml_content)
-    merge_description(release_json, description_data)
+    # Parse and merge BT-24-Lot
+    try:
+        lot_description_data = parse_lot_description(xml_content)
+        if lot_description_data:
+            merge_lot_description(release_json, lot_description_data)
+        else:
+            logger.info("No Lot Description data found")
+    except Exception as e:
+        logger.error(f"Error processing Lot Description data: {str(e)}")
+
+    # Parse and merge BT-24-LotsGroup
+    try:
+        lots_group_description_data = parse_lots_group_description(xml_content)
+        if lots_group_description_data:
+            merge_lots_group_description(release_json, lots_group_description_data)
+        else:
+            logger.info("No LotsGroup Description data found")
+    except Exception as e:
+        logger.error(f"Error processing LotsGroup Description data: {str(e)}")
+
+    # Parse and merge BT-24-Part
+    try:
+        part_description_data = parse_part_description(xml_content)
+        if part_description_data:
+            merge_part_description(release_json, part_description_data)
+        else:
+            logger.info("No Part Description data found")
+    except Exception as e:
+        logger.error(f"Error processing Part Description data: {str(e)}")
+
+    # Parse and merge BT-24-Procedure
+    try:
+        procedure_description_data = parse_procedure_description(xml_content)
+        if procedure_description_data:
+            merge_procedure_description(release_json, procedure_description_data)
+        else:
+            logger.info("No Procedure Description data found")
+    except Exception as e:
+        logger.error(f"Error processing Procedure Description data: {str(e)}")
 
     # Parse the quantity (BT-25)
     quantity_data = parse_quantity(xml_content)
