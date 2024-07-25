@@ -278,21 +278,21 @@ from converters.BT_300_Lot import parse_lot_additional_info, merge_lot_additiona
 from converters.BT_300_LotsGroup import parse_lotsgroup_additional_info, merge_lotsgroup_additional_info
 from converters.BT_300_Part import parse_part_additional_info, merge_part_additional_info
 from converters.BT_300_Procedure import parse_procedure_additional_info, merge_procedure_additional_info
-from converters.BT_31 import parse_lots_max_allowed, merge_lots_max_allowed
-from converters.BT_3201 import parse_tender_identifier, merge_tender_identifier
-from converters.BT_3202 import parse_contract_tender_id, merge_contract_tender_id
-from converters.BT_33 import parse_lots_max_awarded, merge_lots_max_awarded
-from converters.BT_330 import parse_procedure_group_identifier, merge_procedure_group_identifier
+from converters.BT_31_Procedure import parse_max_lots_allowed, merge_max_lots_allowed
+from converters.BT_3201_Tender import parse_tender_identifier, merge_tender_identifier
+from converters.BT_3202_Contract import parse_contract_tender_id, merge_contract_tender_id
+from converters.BT_33_Procedure import parse_max_lots_awarded, merge_max_lots_awarded
+from converters.BT_330_Procedure import parse_group_identifier, merge_group_identifier
 from converters.BT_36_Lot import parse_lot_duration, merge_lot_duration
 from converters.BT_36_Part import parse_part_duration, merge_part_duration
 from converters.BT_40_Lot import parse_lot_selection_criteria_second_stage, merge_lot_selection_criteria_second_stage
 from converters.BT_41_Lot import parse_lot_following_contract, merge_lot_following_contract
 from converters.BT_42_Lot import parse_lot_jury_decision_binding, merge_lot_jury_decision_binding
-from converters.BT_44 import parse_prize_rank, merge_prize_rank
-from converters.BT_45 import parse_rewards_other, merge_rewards_other
-from converters.BT_46 import parse_jury_member_name, merge_jury_member_name
-from converters.BT_47 import parse_participant_name, merge_participant_name
-from converters.BT_50 import parse_minimum_candidates, merge_minimum_candidates
+from converters.BT_44_Lot import parse_prize_rank, merge_prize_rank
+from converters.BT_45_Lot import parse_lot_rewards_other, merge_lot_rewards_other
+from converters.BT_46_Lot import parse_jury_member_name, merge_jury_member_name
+from converters.BT_47_Lot import parse_participant_name, merge_participant_name
+from converters.BT_50_Lot import parse_minimum_candidates, merge_minimum_candidates
 from converters.BT_500_Organization_Company import parse_organization_name, merge_organization_name
 from converters.BT_500_Organization_TouchPoint import parse_touchpoint_name, merge_touchpoint_name
 from converters.BT_500_UBO import parse_ubo_name, merge_ubo_name
@@ -312,7 +312,9 @@ from converters.BT_506_UBO import parse_ubo_email, merge_ubo_email
 from converters.BT_507_Organization_Company import parse_organization_country_subdivision, merge_organization_country_subdivision
 from converters.BT_507_Organization_TouchPoint import parse_touchpoint_country_subdivision, merge_touchpoint_country_subdivision
 from converters.BT_507_UBO import parse_ubo_country_subdivision, merge_ubo_country_subdivision
-from converters.BT_5071 import parse_place_performance_country_subdivision, merge_place_performance_country_subdivision
+from converters.BT_5071_Lot import parse_lot_place_performance_country_subdivision, merge_lot_place_performance_country_subdivision
+from converters.BT_5071_Part import parse_part_place_performance_country_subdivision, merge_part_place_performance_country_subdivision
+from converters.BT_5071_Procedure import parse_procedure_place_performance_country_subdivision, merge_procedure_place_performance_country_subdivision
 from converters.BT_508 import parse_buyer_profile_url, merge_buyer_profile_url
 from converters.BT_509 import parse_edelivery_gateway, merge_edelivery_gateway
 from converters.BT_51 import parse_maximum_candidates_number, merge_maximum_candidates_number
@@ -3185,30 +3187,55 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing procedure additional information: {str(e)}")
 
-    # Parse the lots max allowed (BT-31)
-    lots_max_allowed_data = parse_lots_max_allowed(xml_content)
-    # Merge lots max allowed into the release JSON
-    merge_lots_max_allowed(release_json, lots_max_allowed_data)
+    # Parse and merge BT-31-Procedure
+    try:
+        max_lots_data = parse_max_lots_allowed(xml_content)
+        if max_lots_data:
+            merge_max_lots_allowed(release_json, max_lots_data)
+        else:
+            logger.info("No Maximum Lots Allowed data found")
+    except Exception as e:
+        logger.error(f"Error processing Maximum Lots Allowed data: {str(e)}")
 
-    # Parse the tender identifier (BT-3201)
-    tender_identifier_data = parse_tender_identifier(xml_content)
-    # Merge tender identifier into the release JSON
-    merge_tender_identifier(release_json, tender_identifier_data)
+    # Parse and merge BT-3201-Tender
+    try:
+        tender_identifier_data = parse_tender_identifier(xml_content)
+        if tender_identifier_data:
+            merge_tender_identifier(release_json, tender_identifier_data)
+        else:
+            logger.info("No Tender Identifier data found")
+    except Exception as e:
+        logger.error(f"Error processing Tender Identifier data: {str(e)}")
 
-    # Parse the contract tender ID (BT-3202)
-    contract_tender_id_data = parse_contract_tender_id(xml_content)
-    # Merge contract tender ID into the release JSON
-    merge_contract_tender_id(release_json, contract_tender_id_data)
+    # Parse and merge BT-3202-Contract
+    try:
+        contract_tender_id_data = parse_contract_tender_id(xml_content)
+        if contract_tender_id_data:
+            merge_contract_tender_id(release_json, contract_tender_id_data)
+        else:
+            logger.info("No Contract Tender ID data found")
+    except Exception as e:
+        logger.error(f"Error processing Contract Tender ID data: {str(e)}")
 
-    # Parse the lots max awarded (BT-33)
-    lots_max_awarded_data = parse_lots_max_awarded(xml_content)
-    # Merge lots max awarded into the release JSON
-    merge_lots_max_awarded(release_json, lots_max_awarded_data)
+    # Parse and merge BT-33 Maximum Lots Awarded
+    try:
+        max_lots_awarded_data = parse_max_lots_awarded(xml_content)
+        if max_lots_awarded_data:
+            merge_max_lots_awarded(release_json, max_lots_awarded_data)
+        else:
+            logger.info("No Maximum Lots Awarded data found")
+    except Exception as e:
+        logger.error(f"Error processing Maximum Lots Awarded data: {str(e)}")
 
-    # Parse the procedure group identifier (BT-330)
-    procedure_group_identifier_data = parse_procedure_group_identifier(xml_content)
-    # Merge procedure group identifier into the release JSON
-    merge_procedure_group_identifier(release_json, procedure_group_identifier_data)
+    # Parse and merge BT-330 Group Identifier
+    try:
+        group_identifier_data = parse_group_identifier(xml_content)
+        if group_identifier_data:
+            merge_group_identifier(release_json, group_identifier_data)
+        else:
+            logger.info("No Group Identifier data found")
+    except Exception as e:
+        logger.error(f"Error processing Group Identifier data: {str(e)}")
 
     # Parse and merge BT-36-Lot
     try:
@@ -3260,30 +3287,55 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing lot jury decision binding data: {str(e)}")
 
-    # Parse the prize rank (BT-44)
-    prize_rank_data = parse_prize_rank(xml_content)
-    # Merge prize rank into the release JSON
-    merge_prize_rank(release_json, prize_rank_data)
+    # Parse and merge BT-44-Lot
+    try:
+        prize_rank_data = parse_prize_rank(xml_content)
+        if prize_rank_data:
+            merge_prize_rank(release_json, prize_rank_data)
+        else:
+            logger.info("No Prize Rank data found")
+    except Exception as e:
+        logger.error(f"Error processing Prize Rank data: {str(e)}")
 
-    # Parse the rewards other (BT-45)
-    rewards_other_data = parse_rewards_other(xml_content)
-    # Merge rewards other into the release JSON
-    merge_rewards_other(release_json, rewards_other_data)
+    # Parse and merge BT-45-Lot
+    try:
+        lot_rewards_other_data = parse_lot_rewards_other(xml_content)
+        if lot_rewards_other_data:
+            merge_lot_rewards_other(release_json, lot_rewards_other_data)
+        else:
+            logger.info("No Lot Rewards Other data found")
+    except Exception as e:
+        logger.error(f"Error processing Lot Rewards Other data: {str(e)}")
 
-    # Parse the jury member name (BT-46)
-    jury_member_name_data = parse_jury_member_name(xml_content)
-    # Merge jury member name into the release JSON
-    merge_jury_member_name(release_json, jury_member_name_data)
+    # Parse and merge BT-46-Lot (Jury Member Name)
+    try:
+        jury_member_data = parse_jury_member_name(xml_content)
+        if jury_member_data:
+            merge_jury_member_name(release_json, jury_member_data)
+        else:
+            logger.info("No Jury Member Name data found")
+    except Exception as e:
+        logger.error(f"Error processing Jury Member Name data: {str(e)}")
 
-    # Parse the participant name (BT-47)
-    participant_name_data = parse_participant_name(xml_content)
-    # Merge participant name into the release JSON
-    merge_participant_name(release_json, participant_name_data)
+    # Parse and merge BT-47-Lot (Participant Name)
+    try:
+        participant_data = parse_participant_name(xml_content)
+        if participant_data:
+            merge_participant_name(release_json, participant_data)
+        else:
+            logger.info("No Participant Name data found")
+    except Exception as e:
+        logger.error(f"Error processing Participant Name data: {str(e)}")
 
-    # Parse the minimum candidates (BT-50)
-    minimum_candidates_data = parse_minimum_candidates(xml_content)
-    # Merge minimum candidates into the release JSON
-    merge_minimum_candidates(release_json, minimum_candidates_data)
+    # Parse and merge BT-50-Lot (Minimum Candidates)
+    try:
+        minimum_candidates_data = parse_minimum_candidates(xml_content)
+        if minimum_candidates_data:
+            merge_minimum_candidates(release_json, minimum_candidates_data)
+        else:
+            logger.info("No Minimum Candidates data found")
+    except Exception as e:
+        logger.error(f"Error processing Minimum Candidates data: {str(e)}")
 
     # Parse and merge BT_500 Ultimate Beneficial Owner (UBO) Name data
     try:
@@ -3455,10 +3507,35 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing UBO country subdivision data: {str(e)}")
 
-    # Parse the place performance country subdivision (BT-5071)
-    place_performance_data = parse_place_performance_country_subdivision(xml_content)
-    # Merge place performance country subdivision into the release JSON
-    merge_place_performance_country_subdivision(release_json, place_performance_data)
+    # Parse and merge BT-5071-Lot
+    try:
+        lot_place_performance_data = parse_lot_place_performance_country_subdivision(xml_content)
+        if lot_place_performance_data:
+            merge_lot_place_performance_country_subdivision(release_json, lot_place_performance_data)
+        else:
+            logger.info("No Lot Place Performance Country Subdivision data found")
+    except Exception as e:
+        logger.error(f"Error processing Lot Place Performance Country Subdivision data: {str(e)}")
+
+    # Parse and merge BT-5071-Part
+    try:
+        part_place_performance_data = parse_part_place_performance_country_subdivision(xml_content)
+        if part_place_performance_data:
+            merge_part_place_performance_country_subdivision(release_json, part_place_performance_data)
+        else:
+            logger.info("No Part Place Performance Country Subdivision data found")
+    except Exception as e:
+        logger.error(f"Error processing Part Place Performance Country Subdivision data: {str(e)}")
+
+    # Parse and merge BT-5071-Procedure
+    try:
+        procedure_place_performance_data = parse_procedure_place_performance_country_subdivision(xml_content)
+        if procedure_place_performance_data:
+            merge_procedure_place_performance_country_subdivision(release_json, procedure_place_performance_data)
+        else:
+            logger.info("No Procedure Place Performance Country Subdivision data found")
+    except Exception as e:
+        logger.error(f"Error processing Procedure Place Performance Country Subdivision data: {str(e)}")
     
     # Parse the buyer profile URL (BT-508)
     buyer_profile_data = parse_buyer_profile_url(xml_content)

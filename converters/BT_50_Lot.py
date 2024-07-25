@@ -1,5 +1,9 @@
-# converters/BT_50.py
+# converters/BT_50_Lot.py
+
+import logging
 from lxml import etree
+
+logger = logging.getLogger(__name__)
 
 def parse_minimum_candidates(xml_content):
     root = etree.fromstring(xml_content)
@@ -7,17 +11,14 @@ def parse_minimum_candidates(xml_content):
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
     }
-    
+
     result = {"tender": {"lots": []}}
 
     lot_elements = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    
     for lot_element in lot_elements:
         lot_id = lot_element.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        
-        minimum_quantity = lot_element.xpath(
-            "cac:TenderingProcess/cac:EconomicOperatorShortList/cbc:MinimumQuantity/text()",
-            namespaces=namespaces
-        )
+        minimum_quantity = lot_element.xpath(".//cac:EconomicOperatorShortList/cbc:MinimumQuantity/text()", namespaces=namespaces)
         
         if minimum_quantity:
             lot = {
@@ -27,18 +28,21 @@ def parse_minimum_candidates(xml_content):
                 }
             }
             result["tender"]["lots"].append(lot)
-    
+
     return result if result["tender"]["lots"] else None
 
 def merge_minimum_candidates(release_json, minimum_candidates_data):
-    if minimum_candidates_data and "tender" in minimum_candidates_data and "lots" in minimum_candidates_data["tender"]:
-        tender = release_json.setdefault("tender", {})
-        existing_lots = tender.setdefault("lots", [])
-        
-        for new_lot in minimum_candidates_data["tender"]["lots"]:
-            existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
-            if existing_lot:
-                existing_second_stage = existing_lot.setdefault("secondStage", {})
-                existing_second_stage["minimumCandidates"] = new_lot["secondStage"]["minimumCandidates"]
-            else:
-                existing_lots.append(new_lot)
+    if not minimum_candidates_data:
+        logger.warning("No Minimum Candidates data to merge")
+        return
+
+    tender_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
+    
+    for new_lot in minimum_candidates_data["tender"]["lots"]:
+        existing_lot = next((lot for lot in tender_lots if lot["id"] == new_lot["id"]), None)
+        if existing_lot:
+            existing_lot.setdefault("secondStage", {}).update(new_lot["secondStage"])
+        else:
+            tender_lots.append(new_lot)
+
+    logger.info(f"Merged Minimum Candidates data for {len(minimum_candidates_data['tender']['lots'])} lots")
