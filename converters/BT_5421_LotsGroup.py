@@ -1,5 +1,9 @@
 # converters/BT_5421_LotsGroup.py
+
+import logging
 from lxml import etree
+
+logger = logging.getLogger(__name__)
 
 def parse_award_criterion_number_weight_lots_group(xml_content):
     root = etree.fromstring(xml_content)
@@ -12,7 +16,9 @@ def parse_award_criterion_number_weight_lots_group(xml_content):
         'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
     }
 
-    weight_mapping = {
+    result = {"tender": {"lotGroups": []}}
+
+    number_weight_mapping = {
         'dec-exa': 'decimalExact',
         'dec-mid': 'decimalRangeMiddle',
         'ord-imp': 'order',
@@ -22,45 +28,65 @@ def parse_award_criterion_number_weight_lots_group(xml_content):
         'poi-mid': 'pointsRangeMiddle'
     }
 
-    result = {}
-
-    lots_group_elements = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']", namespaces=namespaces)
-    for lots_group in lots_group_elements:
-        group_id = lots_group.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        criteria = lots_group.xpath(".//cac:SubordinateAwardingCriterion", namespaces=namespaces)
+    lots_groups = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']", namespaces=namespaces)
+    
+    for lot_group in lots_groups:
+        lot_group_id = lot_group.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         
-        if criteria:
-            result[group_id] = []
-            for criterion in criteria:
-                weight_codes = criterion.xpath(".//efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efbc:ParameterCode/text()", namespaces=namespaces)
-                for code in weight_codes:
-                    if code in weight_mapping:
-                        result[group_id].append(weight_mapping[code])
+        award_criteria = lot_group.xpath(".//cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion", namespaces=namespaces)
+        
+        lot_group_data = {
+            "id": lot_group_id,
+            "awardCriteria": {
+                "criteria": []
+            }
+        }
 
-    return result if result else None
-
-def merge_award_criterion_number_weight_lots_group(release_json, weight_data):
-    if weight_data:
-        tender = release_json.setdefault("tender", {})
-        lot_groups = tender.setdefault("lotGroups", [])
-
-        for group_id, weights in weight_data.items():
-            lot_group = next((group for group in lot_groups if group.get("id") == group_id), None)
-            if not lot_group:
-                lot_group = {"id": group_id}
-                lot_groups.append(lot_group)
+        for criterion in award_criteria:
+            criterion_data = {"numbers": []}
             
-            award_criteria = lot_group.setdefault("awardCriteria", {})
-            criteria = award_criteria.setdefault("criteria", [])
+            number_weights = criterion.xpath(".//efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efbc:ParameterCode/text()", namespaces=namespaces)
+            
+            for weight in number_weights:
+                if weight in number_weight_mapping:
+                    criterion_data["numbers"].append({"weight": number_weight_mapping[weight]})
+            
+            if criterion_data["numbers"]:
+                lot_group_data["awardCriteria"]["criteria"].append(criterion_data)
 
-            for weight in weights:
-                criterion = next((c for c in criteria if "numbers" not in c or not any(n.get("weight") == weight for n in c["numbers"])), None)
-                if not criterion:
-                    criterion = {}
-                    criteria.append(criterion)
+        if lot_group_data["awardCriteria"]["criteria"]:
+            result["tender"]["lotGroups"].append(lot_group_data)
+
+    return result if result["tender"]["lotGroups"] else None
+
+def merge_award_criterion_number_weight_lots_group(release_json, award_criterion_number_weight_data):
+    if not award_criterion_number_weight_data:
+        logger.warning("No Award Criterion Number Weight data to merge")
+        return
+
+    tender = release_json.setdefault("tender", {})
+    existing_lot_groups = tender.setdefault("lotGroups", [])
+    
+    for new_lot_group in award_criterion_number_weight_data["tender"]["lotGroups"]:
+        existing_lot_group = next((lg for lg in existing_lot_groups if lg["id"] == new_lot_group["id"]), None)
+        
+        if existing_lot_group:
+            existing_criteria = existing_lot_group.setdefault("awardCriteria", {}).setdefault("criteria", [])
+            
+            for new_criterion in new_lot_group["awardCriteria"]["criteria"]:
+                existing_criterion = next((c for c in existing_criteria if c.get("id") == new_criterion.get("id")), None)
                 
-                numbers = criterion.setdefault("numbers", [])
-                if not any(n.get("weight") == weight for n in numbers):
-                    numbers.append({"weight": weight})
+                if existing_criterion:
+                    existing_numbers = existing_criterion.setdefault("numbers", [])
+                    for new_number in new_criterion["numbers"]:
+                        existing_number = next((n for n in existing_numbers if n.get("id") == new_number.get("id")), None)
+                        if existing_number:
+                            existing_number.update(new_number)
+                        else:
+                            existing_numbers.append(new_number)
+                else:
+                    existing_criteria.append(new_criterion)
+        else:
+            existing_lot_groups.append(new_lot_group)
 
-    return release_json
+    logger.info(f"Merged Award Criterion Number Weight data for {len(award_criterion_number_weight_data['tender']['lotGroups'])} lot groups")

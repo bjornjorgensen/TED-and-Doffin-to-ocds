@@ -45,12 +45,14 @@ def test_bt_165_organization_company_integration(tmp_path):
     with open('output.json', 'r') as f:
         result = json.load(f)
 
-    assert "parties" in result
-    assert len(result["parties"]) == 1
+    assert "parties" in result, "Expected 'parties' in result"
+    assert len(result["parties"]) == 1, f"Expected 1 party, got {len(result['parties'])}"
+
     party = result["parties"][0]
-    assert party["id"] == "ORG-0001"
-    assert "details" in party
-    assert party["details"]["scale"] == "large"
+    assert party["id"] == "ORG-0001", f"Expected party id 'ORG-0001', got {party['id']}"
+    assert "details" in party, "Expected 'details' in party"
+    assert "scale" in party["details"], "Expected 'scale' in party details"
+    assert party["details"]["scale"] == "large", f"Expected scale 'large', got {party['details']['scale']}"
 
 if __name__ == "__main__":
     pytest.main()

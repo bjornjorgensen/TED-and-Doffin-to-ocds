@@ -45,7 +45,7 @@ from converters.BT_130_Lot import parse_dispatch_invitation_tender, merge_dispat
 from converters.BT_131_Lot import parse_deadline_receipt_tenders, merge_deadline_receipt_tenders
 from converters.BT_1311_Lot import parse_deadline_receipt_requests, merge_deadline_receipt_requests
 from converters.BT_132_Lot import parse_lot_public_opening_date, merge_lot_public_opening_date
-from converters.BT_133_Lot import parse_public_opening_place, merge_public_opening_place
+from converters.BT_133_Lot import parse_lot_bid_opening_location, merge_lot_bid_opening_location
 from converters.BT_134_Lot import parse_lot_public_opening_description, merge_lot_public_opening_description
 from converters.BT_135_Procedure import parse_direct_award_justification_rationale, merge_direct_award_justification_rationale
 from converters.BT_1351_Procedure import parse_accelerated_procedure_justification, merge_accelerated_procedure_justification
@@ -73,7 +73,7 @@ from converters.BT_17_Lot import parse_submission_electronic, merge_submission_e
 from converters.BT_171_Tender import parse_tender_rank, merge_tender_rank
 from converters.BT_1711_Tender import parse_tender_ranked, merge_tender_ranked
 from converters.BT_18_Lot import parse_submission_url, merge_submission_url
-from converters.BT_19_Lot import parse_nonelectronic_submission_justification, merge_nonelectronic_submission_justification
+from converters.BT_19_Lot import parse_submission_nonelectronic_justification, merge_submission_nonelectronic_justification
 from converters.BT_191_Tender import parse_country_origin, merge_country_origin
 from converters.BT_193_Tender import parse_tender_variant, merge_tender_variant
 #from converters.BT_195 import parse_unpublished_identifier
@@ -103,9 +103,10 @@ from converters.BT_195_BT_541_Lot_Weight import parse_unpublished_award_criterio
 from converters.BT_195_BT_541_LotsGroup_Fixed import parse_unpublished_award_criterion_number_fixed_lotsgroup, merge_unpublished_award_criterion_number_fixed_lotsgroup
 from converters.BT_195_BT_541_LotsGroup_Threshold import parse_unpublished_award_criterion_number_threshold_lotsgroup, merge_unpublished_award_criterion_number_threshold_lotsgroup
 from converters.BT_195_BT_541_LotsGroup_Weight import parse_unpublished_award_criterion_number_weight_lotsgroup_bt541, merge_unpublished_award_criterion_number_weight_lotsgroup_bt541
-from converters.BT_195_BT_5421_Lot import parse_unpublished_award_criterion_number_weight_lot, merge_unpublished_award_criterion_number_weight_lot
-from converters.BT_195_BT_5421_LotsGroup import parse_unpublished_award_criterion_number_weight_lotsgroup, merge_unpublished_award_criterion_number_weight_lotsgroup
-from converters.BT_195_BT_5422_Lot import parse_unpublished_award_criterion_number_fixed_lot, merge_unpublished_award_criterion_number_fixed_lot
+from converters.BT_5421_Lot import parse_award_criterion_number_weight_lot, merge_award_criterion_number_weight_lot
+from converters.BT_5421_LotsGroup import parse_award_criterion_number_weight_lots_group, merge_award_criterion_number_weight_lots_group
+from converters.BT_5422_Lot import parse_award_criterion_number_fixed, merge_award_criterion_number_fixed
+from converters.BT_5422_LotsGroup import parse_award_criterion_number_fixed_lotsgroup, merge_award_criterion_number_fixed_lotsgroup
 from converters.BT_195_BT_5422_LotsGroup import parse_unpublished_award_criterion_number_fixed_lotsgroup_bt5422, merge_unpublished_award_criterion_number_fixed_lotsgroup_bt5422
 from converters.BT_195_BT_5423_Lot import parse_unpublished_award_criterion_number_threshold_lot, merge_unpublished_award_criterion_number_threshold_lot
 from converters.BT_195_BT_5423_LotsGroup import parse_unpublished_award_criterion_number_threshold_lotsgroup_bt5423, merge_unpublished_award_criterion_number_threshold_lotsgroup_bt5423
@@ -315,9 +316,10 @@ from converters.BT_507_UBO import parse_ubo_country_subdivision, merge_ubo_count
 from converters.BT_5071_Lot import parse_lot_place_performance_country_subdivision, merge_lot_place_performance_country_subdivision
 from converters.BT_5071_Part import parse_part_place_performance_country_subdivision, merge_part_place_performance_country_subdivision
 from converters.BT_5071_Procedure import parse_procedure_place_performance_country_subdivision, merge_procedure_place_performance_country_subdivision
-from converters.BT_508 import parse_buyer_profile_url, merge_buyer_profile_url
-from converters.BT_509 import parse_edelivery_gateway, merge_edelivery_gateway
-from converters.BT_51 import parse_maximum_candidates_number, merge_maximum_candidates_number
+from converters.BT_508_Procedure_Buyer import parse_buyer_profile_url, merge_buyer_profile_url
+from converters.BT_509_Organization_Company import parse_organization_edelivery_gateway, merge_organization_edelivery_gateway
+from converters.BT_509_Organization_TouchPoint import parse_touchpoint_edelivery_gateway, merge_touchpoint_edelivery_gateway
+from converters.BT_51_Lot import parse_lot_maximum_candidates, merge_lot_maximum_candidates
 from converters.BT_510a_Organization_Company import parse_organization_street, merge_organization_street
 from converters.BT_510a_Organization_TouchPoint import parse_touchpoint_street, merge_touchpoint_street
 from converters.BT_510a_UBO import parse_ubo_street, merge_ubo_street
@@ -328,15 +330,37 @@ from converters.BT_510c_Organization_Company import parse_organization_streetlin
 from converters.BT_510c_Organization_TouchPoint import parse_touchpoint_streetline2, merge_touchpoint_streetline2
 from converters.BT_510c_UBO import parse_ubo_streetline2, merge_ubo_streetline2
 
-from converters.BT_5101 import parse_place_performance_street, merge_place_performance_street
-from converters.BT_512 import parse_organization_post_code, merge_organization_post_code
-from converters.BT_5121 import parse_place_performance_post_code, merge_place_performance_post_code
-from converters.BT_513 import parse_organization_city, merge_organization_city
-from converters.BT_5131 import parse_place_performance_city, merge_place_performance_city
-from converters.BT_514 import parse_organization_country_code, merge_organization_country_code
-from converters.BT_5141 import parse_place_performance_country_code, merge_place_performance_country_code
-from converters.BT_52 import parse_successive_reduction_indicator, merge_successive_reduction_indicator
-from converters.BT_531 import parse_additional_nature, merge_additional_nature
+from converters.BT_5101a_Lot import parse_lot_place_performance_street, merge_lot_place_performance_street
+from converters.BT_5101a_Part import parse_part_place_performance_street, merge_part_place_performance_street
+from converters.BT_5101a_Procedure import parse_procedure_place_performance_street, merge_procedure_place_performance_street
+from converters.BT_5101b_Lot import parse_lot_place_performance_streetline1, merge_lot_place_performance_streetline1
+from converters.BT_5101b_Part import parse_part_place_performance_streetline1, merge_part_place_performance_streetline1
+from converters.BT_5101b_Procedure import parse_procedure_place_performance_streetline1, merge_procedure_place_performance_streetline1
+from converters.BT_5101c_Lot import parse_lot_place_performance_streetline2, merge_lot_place_performance_streetline2
+from converters.BT_5101c_Part import parse_part_place_performance_streetline2, merge_part_place_performance_streetline2
+from converters.BT_5101c_Procedure import parse_procedure_place_performance_streetline2, merge_procedure_place_performance_streetline2
+from converters.BT_512_Organization_Company import parse_organization_postcode, merge_organization_postcode
+from converters.BT_512_Organization_TouchPoint import parse_touchpoint_postcode, merge_touchpoint_postcode
+from converters.BT_512_UBO import parse_ubo_postcode, merge_ubo_postcode
+from converters.BT_5121_Lot import parse_place_performance_post_code, merge_place_performance_post_code
+from converters.BT_5121_Part import parse_place_performance_post_code_part, merge_place_performance_post_code_part
+from converters.BT_5121_Procedure import parse_place_performance_post_code_procedure, merge_place_performance_post_code_procedure
+from converters.BT_513_Organization_Company import parse_organization_city, merge_organization_city
+from converters.BT_513_Organization_TouchPoint import parse_touchpoint_city, merge_touchpoint_city
+from converters.BT_513_UBO import parse_ubo_city, merge_ubo_city
+from converters.BT_5131_Lot import parse_place_performance_city, merge_place_performance_city
+from converters.BT_5131_Part import parse_place_performance_city_part, merge_place_performance_city_part
+from converters.BT_5131_Procedure import parse_place_performance_city_procedure, merge_place_performance_city_procedure
+from converters.BT_514_Organization_Company import parse_organization_country, merge_organization_country
+from converters.BT_514_Organization_TouchPoint import parse_touchpoint_country, merge_touchpoint_country
+from converters.BT_514_UBO import parse_ubo_country, merge_ubo_country
+from converters.BT_5141_Lot import parse_lot_country, merge_lot_country
+from converters.BT_5141_Part import parse_part_country, merge_part_country
+from converters.BT_5141_Procedure import parse_procedure_country, merge_procedure_country
+from converters.BT_52_Lot import parse_successive_reduction_indicator, merge_successive_reduction_indicator
+from converters.BT_531_Lot import parse_lot_additional_nature, merge_lot_additional_nature
+from converters.BT_531_Part import parse_part_additional_nature, merge_part_additional_nature
+from converters.BT_531_Procedure import parse_procedure_additional_nature, merge_procedure_additional_nature
 from converters.BT_536_Lot import parse_lot_start_date, merge_lot_start_date
 from converters.BT_536_Part import parse_part_contract_start_date, merge_part_contract_start_date
 from converters.BT_537_Lot import parse_lot_duration_end_date, merge_lot_duration_end_date
@@ -351,10 +375,9 @@ from converters.BT_540_LotsGroup import parse_award_criterion_description_lots_g
 from converters.BT_541_Lot_FixedNumber import parse_award_criterion_fixed_number, merge_award_criterion_fixed_number
 from converters.BT_5421_Lot import parse_award_criterion_number_weight_lot, merge_award_criterion_number_weight_lot
 from converters.BT_5421_LotsGroup import parse_award_criterion_number_weight_lots_group, merge_award_criterion_number_weight_lots_group
-from converters.BT_5422_Lot import parse_award_criterion_number_fixed_lot, merge_award_criterion_number_fixed_lot
-from converters.BT_5422_LotsGroup import parse_award_criterion_number_fixed_lots_group, merge_award_criterion_number_fixed_lots_group
-from converters.BT_5423_Lot import parse_award_criterion_number_threshold_lot, merge_award_criterion_number_threshold_lot
-from converters.BT_5423_LotsGroup import parse_award_criterion_number_threshold_lots_group, merge_award_criterion_number_threshold_lots_group
+
+from converters.BT_5423_Lot import parse_award_criterion_number_threshold, merge_award_criterion_number_threshold
+from converters.BT_5423_LotsGroup import parse_award_criterion_number_threshold_lotsgroup, merge_award_criterion_number_threshold_lotsgroup
 from converters.BT_543_Lot import parse_award_criteria_complicated_lot, merge_award_criteria_complicated_lot
 from converters.BT_543_LotsGroup import parse_award_criteria_complicated_lots_group, merge_award_criteria_complicated_lots_group
 from converters.BT_553_Tender import parse_subcontracting_value, merge_subcontracting_value
@@ -857,13 +880,15 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Lot Public Opening Date data: {str(e)}")
 
-    # Parse and merge BT-133-Lot Public Opening Place
-    logger.info("Processing BT-133-Lot: Public Opening Place")
-    public_opening_place_data = parse_public_opening_place(xml_content)
-    if public_opening_place_data:
-        merge_public_opening_place(release_json, public_opening_place_data)
-    else:
-        logger.warning("No Public Opening Place data found")
+    # Parse and merge BT-133-Lot
+    try:
+        lot_bid_opening_data = parse_lot_bid_opening_location(xml_content)
+        if lot_bid_opening_data:
+            merge_lot_bid_opening_location(release_json, lot_bid_opening_data)
+        else:
+            logger.info("No Lot Bid Opening Location data found")
+    except Exception as e:
+        logger.error(f"Error processing Lot Bid Opening Location data: {str(e)}")
 
     # Parse and merge BT-134-Lot
     try:
@@ -955,13 +980,15 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Tender Lot Identifier data: {str(e)}")
 
-    # Parse and merge BT-1375-Procedure Group Lot Identifier
-    logger.info("Processing BT-1375-Procedure: Group Lot Identifier")
-    group_lot_data = parse_group_lot_identifier(xml_content)
-    if group_lot_data:
-        merge_group_lot_identifier(release_json, group_lot_data)
-    else:
-        logger.warning("No Group Lot Identifier data found")
+    # Parse and merge BT-1375-Procedure
+    try:
+        group_lot_data = parse_group_lot_identifier(xml_content)
+        if group_lot_data:
+            merge_group_lot_identifier(release_json, group_lot_data)
+        else:
+            logger.info("No Group Lot Identifier data found")
+    except Exception as e:
+        logger.error(f"Error processing Group Lot Identifier data: {str(e)}")
 
     # Parse and merge BT-14-Lot
     try:
@@ -1013,21 +1040,25 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing not awarded reason data: {str(e)}")
 
-    # Parse and merge BT-145 Contract Conclusion Date
-    logger.info("Processing BT-145: Contract Conclusion Date")
-    contracts_data = parse_contract_conclusion_date(xml_content)
-    if contracts_data:
-        merge_contract_conclusion_date(release_json, contracts_data)
-    else:
-        logger.warning("No Contract Conclusion Date found")
+    # Parse and merge BT-145-Contract
+    try:
+        contract_conclusion_date_data = parse_contract_conclusion_date(xml_content)
+        if contract_conclusion_date_data:
+            merge_contract_conclusion_date(release_json, contract_conclusion_date_data)
+        else:
+            logger.info("No Contract Conclusion Date data found")
+    except Exception as e:
+        logger.error(f"Error processing Contract Conclusion Date data: {str(e)}")
 
-    # Parse and merge BT-1451 Winner Decision Date
-    logger.info("Processing BT-1451: Winner Decision Date")
-    awards_data = parse_winner_decision_date(xml_content)
-    if awards_data:
-        merge_winner_decision_date(release_json, awards_data)
-    else:
-        logger.warning("No Winner Decision Date found")
+    # Parse and merge BT-1451-Contract
+    try:
+        winner_decision_date_data = parse_winner_decision_date(xml_content)
+        if winner_decision_date_data:
+            merge_winner_decision_date(release_json, winner_decision_date_data)
+        else:
+            logger.info("No Winner Decision Date data found")
+    except Exception as e:
+        logger.error(f"Error processing Winner Decision Date data: {str(e)}")
 
     # Parse and merge BT-15-Lot-Part
     try:
@@ -1137,37 +1168,45 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing concession value description data: {str(e)}")
 
-    # Parse and merge BT-165-Organization-Company Winner Size
-    logger.info("Processing BT-165-Organization-Company: Winner Size")
-    winner_size_data = parse_winner_size(xml_content)
-    if winner_size_data:
-        merge_winner_size(release_json, winner_size_data)
-    else:
-        logger.warning("No Winner Size data found")
+    # Parse and merge BT-165-Organization-Company
+    try:
+        winner_size_data = parse_winner_size(xml_content)
+        if winner_size_data:
+            merge_winner_size(release_json, winner_size_data)
+        else:
+            logger.info("No Winner Size data found")
+    except Exception as e:
+        logger.error(f"Error processing Winner Size data: {str(e)}")
 
-    # Parse and merge BT-17-Lot SubmissionElectronic
-    logger.info("Processing BT-17-Lot: SubmissionElectronic")
-    submission_electronic_data = parse_submission_electronic(xml_content)
-    if submission_electronic_data:
-        merge_submission_electronic(release_json, submission_electronic_data)
-    else:
-        logger.warning("No Submission Electronic data found")
+    # Parse and merge BT-17-Lot
+    try:
+        submission_electronic_data = parse_submission_electronic(xml_content)
+        if submission_electronic_data:
+            merge_submission_electronic(release_json, submission_electronic_data)
+        else:
+            logger.info("No Submission Electronic data found")
+    except Exception as e:
+        logger.error(f"Error processing Submission Electronic data: {str(e)}")
 
-    # Parse and merge BT-171-Tender Tender Rank
-    logger.info("Processing BT-171-Tender: Tender Rank")
-    tender_rank_data = parse_tender_rank(xml_content)
-    if tender_rank_data:
-        merge_tender_rank(release_json, tender_rank_data)
-    else:
-        logger.warning("No Tender Rank data found")
+    # Parse and merge BT-171-Tender
+    try:
+        tender_rank_data = parse_tender_rank(xml_content)
+        if tender_rank_data:
+            merge_tender_rank(release_json, tender_rank_data)
+        else:
+            logger.info("No Tender Rank data found")
+    except Exception as e:
+        logger.error(f"Error processing Tender Rank data: {str(e)}")
 
-    # Parse and merge BT-1711-Tender Tender Ranked
-    logger.info("Processing BT-1711-Tender: Tender Ranked")
-    tender_ranked_data = parse_tender_ranked(xml_content)
-    if tender_ranked_data:
-        merge_tender_ranked(release_json, tender_ranked_data)
-    else:
-        logger.warning("No Tender Ranked data found")
+    # Parse and merge BT-1711-Tender
+    try:
+        tender_ranked_data = parse_tender_ranked(xml_content)
+        if tender_ranked_data:
+            merge_tender_ranked(release_json, tender_ranked_data)
+        else:
+            logger.info("No Tender Ranked data found")
+    except Exception as e:
+        logger.error(f"Error processing Tender Ranked data: {str(e)}")
 
     # Parse the Submission URL (BT-18)
     try:
@@ -1179,14 +1218,15 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Submission URL data: {str(e)}")
 
-    # Parse and merge BT-19-Lot Submission Nonelectronic Justification
-    logger.info("Processing BT-19-Lot: Submission Nonelectronic Justification")
-    justification_data = parse_nonelectronic_submission_justification(xml_content)
-    if justification_data:
-        merge_nonelectronic_submission_justification(release_json, justification_data)
-    else:
-        logger.warning("No Submission Nonelectronic Justification data found")
-
+    # Parse and merge BT-19-Lot
+    try:
+        justification_data = parse_submission_nonelectronic_justification(xml_content)
+        if justification_data:
+            merge_submission_nonelectronic_justification(release_json, justification_data)
+        else:
+            logger.info("No Submission Nonelectronic Justification data found")
+    except Exception as e:
+        logger.error(f"Error processing Submission Nonelectronic Justification data: {str(e)}")
     # Parse and merge BT-191-Tender
     try:
         country_origin_data = parse_country_origin(xml_content)
@@ -3537,20 +3577,45 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Procedure Place Performance Country Subdivision data: {str(e)}")
     
-    # Parse the buyer profile URL (BT-508)
-    buyer_profile_data = parse_buyer_profile_url(xml_content)
-    # Merge buyer profile URL into the release JSON
-    merge_buyer_profile_url(release_json, buyer_profile_data)
+    # Parse and merge BT-508-Procedure-Buyer
+    try:
+        buyer_profile_data = parse_buyer_profile_url(xml_content)
+        if buyer_profile_data:
+            merge_buyer_profile_url(release_json, buyer_profile_data)
+        else:
+            logger.info("No Buyer Profile URL data found")
+    except Exception as e:
+        logger.error(f"Error processing Buyer Profile URL data: {str(e)}")
 
-    # Parse the eDelivery Gateway (BT-509)
-    edelivery_gateway_data = parse_edelivery_gateway(xml_content)
-    # Merge eDelivery Gateway into the release JSON
-    merge_edelivery_gateway(release_json, edelivery_gateway_data)
+    # Parse and merge BT-509-Organization-Company
+    try:
+        edelivery_gateway_data = parse_organization_edelivery_gateway(xml_content)
+        if edelivery_gateway_data:
+            merge_organization_edelivery_gateway(release_json, edelivery_gateway_data)
+        else:
+            logger.info("No Organisation eDelivery Gateway data found")
+    except Exception as e:
+        logger.error(f"Error processing Organisation eDelivery Gateway data: {str(e)}")
 
-    # Parse the maximum candidates number (BT-51)
-    maximum_candidates_data = parse_maximum_candidates_number(xml_content)
-    # Merge maximum candidates number into the release JSON
-    merge_maximum_candidates_number(release_json, maximum_candidates_data)
+    # Parse and merge BT-509-Organization-TouchPoint
+    try:
+        touchpoint_edelivery_gateway_data = parse_touchpoint_edelivery_gateway(xml_content)
+        if touchpoint_edelivery_gateway_data:
+            merge_touchpoint_edelivery_gateway(release_json, touchpoint_edelivery_gateway_data)
+        else:
+            logger.info("No TouchPoint eDelivery Gateway data found")
+    except Exception as e:
+        logger.error(f"Error processing TouchPoint eDelivery Gateway data: {str(e)}")
+
+    # Parse and merge BT-51-Lot
+    try:
+        lot_maximum_candidates_data = parse_lot_maximum_candidates(xml_content)
+        if lot_maximum_candidates_data:
+            merge_lot_maximum_candidates(release_json, lot_maximum_candidates_data)
+        else:
+            logger.info("No Lot Maximum Candidates Number data found")
+    except Exception as e:
+        logger.error(f"Error processing Lot Maximum Candidates Number data: {str(e)}")
 
     # Parse and merge BT-510(a)-Organization-Company
     try:
@@ -3642,50 +3707,315 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing UBO Streetline 2 data: {str(e)}")
         
-    # Parse the place performance street (BT-5101)
-    place_performance_street_data = parse_place_performance_street(xml_content)
-    # Merge place performance street into the release JSON
-    merge_place_performance_street(release_json, place_performance_street_data)
+    # Parse and merge BT-5101(a)-Lot
+    try:
+        lot_place_performance_street_data = parse_lot_place_performance_street(xml_content)
+        if lot_place_performance_street_data:
+            merge_lot_place_performance_street(release_json, lot_place_performance_street_data)
+        else:
+            logger.info("No Lot Place Performance Street data found")
+    except Exception as e:
+        logger.error(f"Error processing Lot Place Performance Street data: {str(e)}")
 
-    # Parse the organization post code (BT-512)
-    post_code_data = parse_organization_post_code(xml_content)
-    # Merge organization post code into the release JSON
-    merge_organization_post_code(release_json, post_code_data)
+    # Parse and merge BT-5101(a)-Part
+    try:
+        part_place_performance_street_data = parse_part_place_performance_street(xml_content)
+        if part_place_performance_street_data:
+            merge_part_place_performance_street(release_json, part_place_performance_street_data)
+        else:
+            logger.info("No Part Place Performance Street data found")
+    except Exception as e:
+        logger.error(f"Error processing Part Place Performance Street data: {str(e)}")
 
-    # Parse the place performance post code (BT-5121)
-    place_performance_post_code_data = parse_place_performance_post_code(xml_content)
-    # Merge place performance post code into the release JSON
-    merge_place_performance_post_code(release_json, place_performance_post_code_data)
+    # Parse and merge BT-5101(a)-Procedure
+    try:
+        procedure_place_performance_street_data = parse_procedure_place_performance_street(xml_content)
+        if procedure_place_performance_street_data:
+            merge_procedure_place_performance_street(release_json, procedure_place_performance_street_data)
+        else:
+            logger.info("No Procedure Place Performance Street data found")
+    except Exception as e:
+        logger.error(f"Error processing Procedure Place Performance Street data: {str(e)}")
 
-    # Parse the organization city (BT-513)
-    city_data = parse_organization_city(xml_content)
-    # Merge organization city into the release JSON
-    merge_organization_city(release_json, city_data)
+    # Parse and merge BT-5101(b)-Lot
+    try:
+        lot_place_performance_streetline1_data = parse_lot_place_performance_streetline1(xml_content)
+        if lot_place_performance_streetline1_data:
+            merge_lot_place_performance_streetline1(release_json, lot_place_performance_streetline1_data)
+        else:
+            logger.info("No Lot Place Performance Streetline 1 data found")
+    except Exception as e:
+        logger.error(f"Error processing Lot Place Performance Streetline 1 data: {str(e)}")
+
+    # Parse and merge BT-5101(b)-Part
+    try:
+        part_place_performance_streetline1_data = parse_part_place_performance_streetline1(xml_content)
+        if part_place_performance_streetline1_data:
+            merge_part_place_performance_streetline1(release_json, part_place_performance_streetline1_data)
+        else:
+            logger.info("No Part Place Performance Streetline 1 data found")
+    except Exception as e:
+        logger.error(f"Error processing Part Place Performance Streetline 1 data: {str(e)}")
+
+    # Parse and merge BT-5101(b)-Procedure
+    try:
+        procedure_place_performance_streetline1_data = parse_procedure_place_performance_streetline1(xml_content)
+        if procedure_place_performance_streetline1_data:
+            merge_procedure_place_performance_streetline1(release_json, procedure_place_performance_streetline1_data)
+        else:
+            logger.info("No Procedure Place Performance Streetline 1 data found")
+    except Exception as e:
+        logger.error(f"Error processing Procedure Place Performance Streetline 1 data: {str(e)}")
+
+    # Parse and merge BT-5101(c)-Lot
+    try:
+        lot_place_performance_streetline2_data = parse_lot_place_performance_streetline2(xml_content)
+        if lot_place_performance_streetline2_data:
+            merge_lot_place_performance_streetline2(release_json, lot_place_performance_streetline2_data)
+        else:
+            logger.info("No Lot Place Performance Streetline 2 data found")
+    except Exception as e:
+        logger.error(f"Error processing Lot Place Performance Streetline 2 data: {str(e)}")
+
+    # Parse and merge BT-5101(c)-Part
+    try:
+        part_place_performance_streetline2_data = parse_part_place_performance_streetline2(xml_content)
+        if part_place_performance_streetline2_data:
+            merge_part_place_performance_streetline2(release_json, part_place_performance_streetline2_data)
+        else:
+            logger.info("No Part Place Performance Streetline 2 data found")
+    except Exception as e:
+        logger.error(f"Error processing Part Place Performance Streetline 2 data: {str(e)}")
+
+    # Parse and merge BT-5101(c)-Procedure
+    try:
+        procedure_place_performance_streetline2_data = parse_procedure_place_performance_streetline2(xml_content)
+        if procedure_place_performance_streetline2_data:
+            merge_procedure_place_performance_streetline2(release_json, procedure_place_performance_streetline2_data)
+        else:
+            logger.info("No Procedure Place Performance Streetline 2 data found")
+    except Exception as e:
+        logger.error(f"Error processing Procedure Place Performance Streetline 2 data: {str(e)}")
+
+    # Parse and merge BT-512-Organization-Company
+    try:
+        organization_postcode_data = parse_organization_postcode(xml_content)
+        if organization_postcode_data:
+            merge_organization_postcode(release_json, organization_postcode_data)
+        else:
+            logger.info("No Organization Postcode data found")
+    except Exception as e:
+        logger.error(f"Error processing Organization Postcode data: {str(e)}")
+
+    # Parse and merge BT-512-Organization-TouchPoint
+    try:
+        touchpoint_postcode_data = parse_touchpoint_postcode(xml_content)
+        if touchpoint_postcode_data:
+            merge_touchpoint_postcode(release_json, touchpoint_postcode_data)
+        else:
+            logger.info("No TouchPoint Postcode data found")
+    except Exception as e:
+        logger.error(f"Error processing TouchPoint Postcode data: {str(e)}")
+
+    # Parse and merge BT-512-UBO
+    try:
+        ubo_postcode_data = parse_ubo_postcode(xml_content)
+        if ubo_postcode_data:
+            merge_ubo_postcode(release_json, ubo_postcode_data)
+        else:
+            logger.info("No UBO Postcode data found")
+    except Exception as e:
+        logger.error(f"Error processing UBO Postcode data: {str(e)}")
+
+    # Parse and merge BT-5121-Lot
+    try:
+        post_code_data = parse_place_performance_post_code(xml_content)
+        if post_code_data:
+            merge_place_performance_post_code(release_json, post_code_data)
+        else:
+            logger.info("No Place Performance Post Code data found")
+    except Exception as e:
+        logger.error(f"Error processing Place Performance Post Code data: {str(e)}")
+
+    # Parse and merge BT-5121-Part
+    try:
+        post_code_data_part = parse_place_performance_post_code_part(xml_content)
+        if post_code_data_part:
+            merge_place_performance_post_code_part(release_json, post_code_data_part)
+        else:
+            logger.info("No Place Performance Post Code (Part) data found")
+    except Exception as e:
+        logger.error(f"Error processing Place Performance Post Code (Part) data: {str(e)}")
+
+    # Parse and merge BT-5121-Procedure
+    try:
+        post_code_data_procedure = parse_place_performance_post_code_procedure(xml_content)
+        if post_code_data_procedure:
+            merge_place_performance_post_code_procedure(release_json, post_code_data_procedure)
+        else:
+            logger.info("No Place Performance Post Code (Procedure) data found")
+    except Exception as e:
+        logger.error(f"Error processing Place Performance Post Code (Procedure) data: {str(e)}")
+
+    # Parse and merge BT-513-Organization-Company
+    try:
+        city_data = parse_organization_city(xml_content)
+        if city_data:
+            merge_organization_city(release_json, city_data)
+        else:
+            logger.info("No Organization City data found")
+    except Exception as e:
+        logger.error(f"Error processing Organization City data: {str(e)}")
+
+    # Parse and merge BT-513-Organization-TouchPoint
+    try:
+        touchpoint_city_data = parse_touchpoint_city(xml_content)
+        if touchpoint_city_data:
+            merge_touchpoint_city(release_json, touchpoint_city_data)
+        else:
+            logger.info("No TouchPoint City data found")
+    except Exception as e:
+        logger.error(f"Error processing TouchPoint City data: {str(e)}")
+
+    # Parse and merge BT-513-UBO
+    try:
+        ubo_city_data = parse_ubo_city(xml_content)
+        if ubo_city_data:
+            merge_ubo_city(release_json, ubo_city_data)
+        else:
+            logger.info("No UBO City data found")
+    except Exception as e:
+        logger.error(f"Error processing UBO City data: {str(e)}")
 
     # Parse the place performance city (BT-5131)
-    place_performance_city_data = parse_place_performance_city(xml_content)
-    # Merge place performance city into the release JSON
-    merge_place_performance_city(release_json, place_performance_city_data)
+    try:
+        place_performance_city_data = parse_place_performance_city(xml_content)
+        if place_performance_city_data:
+            merge_place_performance_city(release_json, place_performance_city_data)
+        else:
+            logger.info("No Place Performance City data found")
+    except Exception as e:
+        logger.error(f"Error processing Place Performance City data: {str(e)}")
 
-    # Parse the organization country code (BT-514)
-    country_code_data = parse_organization_country_code(xml_content)
-    # Merge organization country code into the release JSON
-    merge_organization_country_code(release_json, country_code_data)
+    # Parse the place performance city (BT-5131 part)
+    try:
+        place_performance_city_part_data = parse_place_performance_city_part(xml_content)
+        if place_performance_city_part_data:
+            merge_place_performance_city_part(release_json, place_performance_city_part_data)
+        else:
+            logger.info("No Place Performance City Part data found")
+    except Exception as e:
+        logger.error(f"Error processing Place Performance City Part data: {str(e)}")
 
-    # Parse the place performance country code (BT-5141)
-    place_performance_country_code_data = parse_place_performance_country_code(xml_content)
-    # Merge place performance country code into the release JSON
-    merge_place_performance_country_code(release_json, place_performance_country_code_data)
+    # Parse the place performance city (BT-5131 Procedure)
+    try:
+        place_performance_city_procedure_data = parse_place_performance_city_procedure(xml_content)
+        if place_performance_city_procedure_data:
+            merge_place_performance_city_procedure(release_json, place_performance_city_procedure_data)
+        else:
+            logger.info("No Place Performance City Procedure data found")
+    except Exception as e:
+        logger.error(f"Error processing Place Performance City Procedure data: {str(e)}")
 
-    # Parse the successive reduction indicator (BT-52)
-    successive_reduction_data = parse_successive_reduction_indicator(xml_content)
-    # Merge successive reduction indicator into the release JSON
-    merge_successive_reduction_indicator(release_json, successive_reduction_data)
+    # Parse and merge BT-514-Organization-Company
+    try:
+        organization_country_data = parse_organization_country(xml_content)
+        if organization_country_data:
+            merge_organization_country(release_json, organization_country_data)
+        else:
+            logger.info("No Organization Country data found")
+    except Exception as e:
+        logger.error(f"Error processing Organization Country data: {str(e)}")
 
-    # Parse the additional nature (BT-531)
-    additional_nature_data = parse_additional_nature(xml_content)
-    # Merge additional nature into the release JSON
-    merge_additional_nature(release_json, additional_nature_data)
+    # Parse and merge BT-514-Organization-TouchPoint
+    try:
+        touchpoint_country_data = parse_touchpoint_country(xml_content)
+        if touchpoint_country_data:
+            merge_touchpoint_country(release_json, touchpoint_country_data)
+        else:
+            logger.info("No TouchPoint Country data found")
+    except Exception as e:
+        logger.error(f"Error processing TouchPoint Country data: {str(e)}")
+
+    # Parse and merge BT-514-UBO
+    try:
+        ubo_country_data = parse_ubo_country(xml_content)
+        if ubo_country_data:
+            merge_ubo_country(release_json, ubo_country_data)
+        else:
+            logger.info("No UBO Country data found")
+    except Exception as e:
+        logger.error(f"Error processing UBO Country data: {str(e)}")
+
+    # Parse and merge BT-5141-Lot
+    try:
+        lot_country_data = parse_lot_country(xml_content)
+        if lot_country_data:
+            merge_lot_country(release_json, lot_country_data)
+        else:
+            logger.info("No Lot Country data found")
+    except Exception as e:
+        logger.error(f"Error processing Lot Country data: {str(e)}")
+
+    # Parse and merge BT-5141-Part
+    try:
+        part_country_data = parse_part_country(xml_content)
+        if part_country_data:
+            merge_part_country(release_json, part_country_data)
+        else:
+            logger.info("No Part Country data found")
+    except Exception as e:
+        logger.error(f"Error processing Part Country data: {str(e)}")
+
+    # Parse and merge BT-5141-Procedure
+    try:
+        procedure_country_data = parse_procedure_country(xml_content)
+        if procedure_country_data:
+            merge_procedure_country(release_json, procedure_country_data)
+        else:
+            logger.info("No Procedure Country data found")
+    except Exception as e:
+        logger.error(f"Error processing Procedure Country data: {str(e)}")
+
+    # Parse and merge BT-52-Lot
+    try:
+        successive_reduction_data = parse_successive_reduction_indicator(xml_content)
+        if successive_reduction_data:
+            merge_successive_reduction_indicator(release_json, successive_reduction_data)
+        else:
+            logger.info("No Successive Reduction Indicator data found")
+    except Exception as e:
+        logger.error(f"Error processing Successive Reduction Indicator data: {str(e)}")
+
+    # Parse and merge BT-531-Lot
+    try:
+        lot_additional_nature_data = parse_lot_additional_nature(xml_content)
+        if lot_additional_nature_data:
+            merge_lot_additional_nature(release_json, lot_additional_nature_data)
+        else:
+            logger.info("No Lot Additional Nature data found")
+    except Exception as e:
+        logger.error(f"Error processing Lot Additional Nature data: {str(e)}")
+
+    # Parse and merge BT-531-Part
+    try:
+        part_additional_nature_data = parse_part_additional_nature(xml_content)
+        if part_additional_nature_data:
+            merge_part_additional_nature(release_json, part_additional_nature_data)
+        else:
+            logger.info("No Part Additional Nature data found")
+    except Exception as e:
+        logger.error(f"Error processing Part Additional Nature data: {str(e)}")
+
+    # Parse and merge BT-531-Procedure
+    try:
+        procedure_additional_nature_data = parse_procedure_additional_nature(xml_content)
+        if procedure_additional_nature_data:
+            merge_procedure_additional_nature(release_json, procedure_additional_nature_data)
+        else:
+            logger.info("No Procedure Additional Nature data found")
+    except Exception as e:
+        logger.error(f"Error processing Procedure Additional Nature data: {str(e)}")
 
     # Parse and merge BT-536-Lot
     try:
@@ -3802,8 +4132,6 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Options Description data: {str(e)}")
 
-    
-
     # Parse and merge BT-541-Lot-FixedNumber (Award Criterion Fixed Number)
     try:
         award_criterion_fixed_number_data = parse_award_criterion_fixed_number(xml_content)
@@ -3815,28 +4143,64 @@ def main(xml_path, ocid_prefix):
         logger.error(f"Error processing Award Criterion Fixed Number data: {str(e)}")
 
     # Parse and merge BT-5421-Lot
-    lot_criterion_weight_data = parse_award_criterion_number_weight_lot(xml_content)
-    merge_award_criterion_number_weight_lot(release_json, lot_criterion_weight_data)
+    try:
+        lot_award_criterion_number_weight_data = parse_award_criterion_number_weight_lot(xml_content)
+        if lot_award_criterion_number_weight_data:
+            merge_award_criterion_number_weight_lot(release_json, lot_award_criterion_number_weight_data)
+        else:
+            logger.info("No Lot Award Criterion Number Weight data found")
+    except Exception as e:
+        logger.error(f"Error processing Lot Award Criterion Number Weight data: {str(e)}")
 
     # Parse and merge BT-5421-LotsGroup
-    lots_group_criterion_weight_data = parse_award_criterion_number_weight_lots_group(xml_content)
-    merge_award_criterion_number_weight_lots_group(release_json, lots_group_criterion_weight_data)
+    try:
+        lots_group_award_criterion_number_weight_data = parse_award_criterion_number_weight_lots_group(xml_content)
+        if lots_group_award_criterion_number_weight_data:
+            merge_award_criterion_number_weight_lots_group(release_json, lots_group_award_criterion_number_weight_data)
+        else:
+            logger.info("No Lots Group Award Criterion Number Weight data found")
+    except Exception as e:
+        logger.error(f"Error processing Lots Group Award Criterion Number Weight data: {str(e)}")
 
     # Parse and merge BT-5422-Lot
-    lot_criterion_fixed_data = parse_award_criterion_number_fixed_lot(xml_content)
-    merge_award_criterion_number_fixed_lot(release_json, lot_criterion_fixed_data)
+    try:
+        award_criterion_number_fixed_data = parse_award_criterion_number_fixed(xml_content)
+        if award_criterion_number_fixed_data:
+            merge_award_criterion_number_fixed(release_json, award_criterion_number_fixed_data)
+        else:
+            logger.info("No Award Criterion Number Fixed data found")
+    except Exception as e:
+        logger.error(f"Error processing Award Criterion Number Fixed data: {str(e)}")
 
     # Parse and merge BT-5422-LotsGroup
-    lots_group_criterion_fixed_data = parse_award_criterion_number_fixed_lots_group(xml_content)
-    merge_award_criterion_number_fixed_lots_group(release_json, lots_group_criterion_fixed_data)
+    try:
+        award_criterion_number_fixed_lotsgroup_data = parse_award_criterion_number_fixed_lotsgroup(xml_content)
+        if award_criterion_number_fixed_lotsgroup_data:
+            merge_award_criterion_number_fixed_lotsgroup(release_json, award_criterion_number_fixed_lotsgroup_data)
+        else:
+            logger.info("No Award Criterion Number Fixed LotsGroup data found")
+    except Exception as e:
+        logger.error(f"Error processing Award Criterion Number Fixed LotsGroup data: {str(e)}")
 
     # Parse and merge BT-5423-Lot
-    lot_criterion_threshold_data = parse_award_criterion_number_threshold_lot(xml_content)
-    merge_award_criterion_number_threshold_lot(release_json, lot_criterion_threshold_data)
+    try:
+        award_criterion_data = parse_award_criterion_number_threshold(xml_content)
+        if award_criterion_data:
+            merge_award_criterion_number_threshold(release_json, award_criterion_data)
+        else:
+            logger.info("No Award Criterion Number Threshold data found")
+    except Exception as e:
+        logger.error(f"Error processing Award Criterion Number Threshold data: {str(e)}")
 
     # Parse and merge BT-5423-LotsGroup
-    lots_group_criterion_threshold_data = parse_award_criterion_number_threshold_lots_group(xml_content)
-    merge_award_criterion_number_threshold_lots_group(release_json, lots_group_criterion_threshold_data)
+    try:
+        award_criterion_lotsgroup_data = parse_award_criterion_number_threshold_lotsgroup(xml_content)
+        if award_criterion_lotsgroup_data:
+            merge_award_criterion_number_threshold_lotsgroup(release_json, award_criterion_lotsgroup_data)
+        else:
+            logger.info("No Award Criterion Number Threshold LotsGroup data found")
+    except Exception as e:
+        logger.error(f"Error processing Award Criterion Number Threshold LotsGroup data: {str(e)}")
 
     # Parse and merge BT-543-Lot
     lot_criteria_complicated_data = parse_award_criteria_complicated_lot(xml_content)
@@ -4867,8 +5231,8 @@ def main(xml_path, ocid_prefix):
 
 if __name__ == "__main__":
     # Path to the XML file
-    #xml_path = 'xmlfile/can_24_minimal.xml'
-    xml_path = 'bt_198-106.xml'
+    xml_path = 'xmlfile/can_24_minimal.xml'
+    #xml_path = 'bt_198-106.xml'
     # Prefix for OCID
     ocid_prefix = 'ocid_prefix_value'
     

@@ -1,65 +1,63 @@
 # converters/BT_1451_Contract.py
 
 import logging
-from datetime import datetime
 from lxml import etree
+from utils.date_utils import EndDate
 
 logger = logging.getLogger(__name__)
 
 def parse_winner_decision_date(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
+        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
+        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1'
     }
-    
-    awards_data = []
-    
-    settled_contracts = root.xpath("//efac:NoticeResult/efac:SettledContract", namespaces=namespaces)
-    
-    for contract in settled_contracts:
-        contract_id = contract.xpath("cbc:ID[@schemeName='contract']/text()", namespaces=namespaces)[0]
-        award_date = contract.xpath("cbc:AwardDate/text()", namespaces=namespaces)
-        
-        if award_date:
-            iso_date = convert_to_iso_format(award_date[0])
-            
-            # Find the corresponding LotResult(s) to get the award ID(s)
-            lot_results = root.xpath(f"//efac:NoticeResult/efac:LotResult[efac:SettledContract/cbc:ID[@schemeName='contract']/text()='{contract_id}']", namespaces=namespaces)
-            
-            for lot_result in lot_results:
-                award_id = lot_result.xpath("cbc:ID[@schemeName='result']/text()", namespaces=namespaces)[0]
-                awards_data.append({
-                    "id": award_id,
-                    "date": iso_date
-                })
-    
-    return awards_data if awards_data else None
 
-def convert_to_iso_format(date_string):
-    # Split the date string and timezone
-    date_part, _, tz_part = date_string.partition('+')
-    
-    # Parse the date part
-    date = datetime.strptime(date_part, "%Y-%m-%d")
-    
-    # Set the time to 23:59:59
-    date = date.replace(hour=23, minute=59, second=59)
-    
-    # Format the datetime with the original timezone
-    return f"{date.isoformat()}+{tz_part}"
+    result = {"awards": []}
 
-def merge_winner_decision_date(release_json, awards_data):
-    if awards_data:
-        if "awards" not in release_json:
-            release_json["awards"] = []
+    notice_results = root.xpath("//efac:NoticeResult", namespaces=namespaces)
+    
+    for notice_result in notice_results:
+        settled_contracts = notice_result.xpath("efac:SettledContract", namespaces=namespaces)
+        lot_results = notice_result.xpath("efac:LotResult", namespaces=namespaces)
         
-        for award_data in awards_data:
-            existing_award = next((award for award in release_json["awards"] if award["id"] == award_data["id"]), None)
-            if existing_award:
-                if "date" not in existing_award or award_data["date"] < existing_award["date"]:
-                    existing_award["date"] = award_data["date"]
-            else:
-                release_json["awards"].append(award_data)
+        for settled_contract in settled_contracts:
+            contract_id = settled_contract.xpath("cbc:ID[@schemeName='contract']/text()", namespaces=namespaces)
+            award_date = settled_contract.xpath("cbc:AwardDate/text()", namespaces=namespaces)
+            
+            if contract_id and award_date:
+                contract_id = contract_id[0]
+                award_date = EndDate(award_date[0])
+                
+                for lot_result in lot_results:
+                    lot_contract_id = lot_result.xpath("efac:SettledContract/cbc:ID[@schemeName='contract']/text()", namespaces=namespaces)
+                    lot_result_id = lot_result.xpath("cbc:ID[@schemeName='result']/text()", namespaces=namespaces)
+                    
+                    if lot_contract_id and lot_contract_id[0] == contract_id and lot_result_id:
+                        award = {
+                            "id": lot_result_id[0],
+                            "date": award_date
+                        }
+                        result["awards"].append(award)
+
+    return result if result["awards"] else None
+
+def merge_winner_decision_date(release_json, winner_decision_date_data):
+    if not winner_decision_date_data:
+        logger.warning("No Winner Decision Date data to merge")
+        return
+
+    existing_awards = release_json.setdefault("awards", [])
+    
+    for new_award in winner_decision_date_data["awards"]:
+        existing_award = next((award for award in existing_awards if award["id"] == new_award["id"]), None)
+        if existing_award:
+            if "date" not in existing_award or new_award["date"] < existing_award["date"]:
+                existing_award["date"] = new_award["date"]
+        else:
+            existing_awards.append(new_award)
+
+    logger.info(f"Merged Winner Decision Date data for {len(winner_decision_date_data['awards'])} awards")

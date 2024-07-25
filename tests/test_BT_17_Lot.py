@@ -29,13 +29,15 @@ def test_bt_17_lot_integration(tmp_path):
     with open('output.json', 'r') as f:
         result = json.load(f)
 
-    assert "tender" in result
-    assert "lots" in result["tender"]
-    assert len(result["tender"]["lots"]) == 1
+    assert "tender" in result, "Expected 'tender' in result"
+    assert "lots" in result["tender"], "Expected 'lots' in tender"
+    assert len(result["tender"]["lots"]) == 1, f"Expected 1 lot, got {len(result['tender']['lots'])}"
+
     lot = result["tender"]["lots"][0]
-    assert lot["id"] == "LOT-0001"
-    assert "submissionTerms" in lot
-    assert lot["submissionTerms"]["electronicSubmissionPolicy"] == "allowed"
+    assert lot["id"] == "LOT-0001", f"Expected lot id 'LOT-0001', got {lot['id']}"
+    assert "submissionTerms" in lot, "Expected 'submissionTerms' in lot"
+    assert "electronicSubmissionPolicy" in lot["submissionTerms"], "Expected 'electronicSubmissionPolicy' in submissionTerms"
+    assert lot["submissionTerms"]["electronicSubmissionPolicy"] == "allowed", f"Expected electronicSubmissionPolicy 'allowed', got {lot['submissionTerms']['electronicSubmissionPolicy']}"
 
 if __name__ == "__main__":
     pytest.main()

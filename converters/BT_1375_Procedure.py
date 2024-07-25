@@ -1,7 +1,7 @@
 # converters/BT_1375_Procedure.py
 
-from lxml import etree
 import logging
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -13,21 +13,19 @@ def parse_group_lot_identifier(xml_content):
     }
 
     result = {"tender": {"lotGroups": []}}
+
     lots_groups = root.xpath("//cac:TenderingTerms/cac:LotDistribution/cac:LotsGroup", namespaces=namespaces)
-
-    for lots_group in lots_groups:
-        group_id = lots_group.xpath("cbc:LotsGroupID[@schemeName='LotsGroup']/text()", namespaces=namespaces)
-        lot_ids = lots_group.xpath("cac:ProcurementProjectLotReference/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)
-
+    
+    for group in lots_groups:
+        group_id = group.xpath("cbc:LotsGroupID/text()", namespaces=namespaces)[0]
+        lot_ids = group.xpath("cac:ProcurementProjectLotReference/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)
+        
         if group_id and lot_ids:
-            lot_group = next((g for g in result["tender"]["lotGroups"] if g["id"] == group_id[0]), None)
-            if not lot_group:
-                lot_group = {"id": group_id[0], "relatedLots": []}
-                result["tender"]["lotGroups"].append(lot_group)
-            
-            for lot_id in lot_ids:
-                if lot_id not in lot_group["relatedLots"]:
-                    lot_group["relatedLots"].append(lot_id)
+            lot_group = {
+                "id": group_id,
+                "relatedLots": lot_ids
+            }
+            result["tender"]["lotGroups"].append(lot_group)
 
     return result if result["tender"]["lotGroups"] else None
 
@@ -39,11 +37,11 @@ def merge_group_lot_identifier(release_json, group_lot_data):
     existing_lot_groups = release_json.setdefault("tender", {}).setdefault("lotGroups", [])
     
     for new_group in group_lot_data["tender"]["lotGroups"]:
-        existing_group = next((g for g in existing_lot_groups if g["id"] == new_group["id"]), None)
+        existing_group = next((group for group in existing_lot_groups if group["id"] == new_group["id"]), None)
         if existing_group:
-            existing_group.setdefault("relatedLots", []).extend(
-                lot for lot in new_group["relatedLots"] if lot not in existing_group.get("relatedLots", [])
-            )
+            existing_related_lots = set(existing_group.get("relatedLots", []))
+            existing_related_lots.update(new_group["relatedLots"])
+            existing_group["relatedLots"] = list(existing_related_lots)
         else:
             existing_lot_groups.append(new_group)
 

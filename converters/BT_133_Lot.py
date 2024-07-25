@@ -1,11 +1,11 @@
 # converters/BT_133_Lot.py
 
-from lxml import etree
 import logging
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
-def parse_public_opening_place(xml_content):
+def parse_lot_bid_opening_location(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
@@ -13,18 +13,19 @@ def parse_public_opening_place(xml_content):
     }
 
     result = {"tender": {"lots": []}}
-    lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
 
+    lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        opening_place = lot.xpath(".//cac:TenderingProcess/cac:OpenTenderEvent/cac:OccurenceLocation/cbc:Description/text()", namespaces=namespaces)
-
-        if opening_place:
+        description = lot.xpath("cac:TenderingProcess/cac:OpenTenderEvent/cac:OccurenceLocation/cbc:Description/text()", namespaces=namespaces)
+        
+        if description:
             lot_data = {
                 "id": lot_id,
                 "bidOpening": {
                     "location": {
-                        "description": opening_place[0]
+                        "description": description[0]
                     }
                 }
             }
@@ -32,18 +33,18 @@ def parse_public_opening_place(xml_content):
 
     return result if result["tender"]["lots"] else None
 
-def merge_public_opening_place(release_json, public_opening_place_data):
-    if not public_opening_place_data:
-        logger.warning("No Public Opening Place data to merge")
+def merge_lot_bid_opening_location(release_json, lot_bid_opening_data):
+    if not lot_bid_opening_data:
+        logger.warning("No Lot Bid Opening Location data to merge")
         return
 
     existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
     
-    for new_lot in public_opening_place_data["tender"]["lots"]:
+    for new_lot in lot_bid_opening_data["tender"]["lots"]:
         existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
         if existing_lot:
             existing_lot.setdefault("bidOpening", {}).setdefault("location", {}).update(new_lot["bidOpening"]["location"])
         else:
             existing_lots.append(new_lot)
 
-    logger.info(f"Merged Public Opening Place data for {len(public_opening_place_data['tender']['lots'])} lots")
+    logger.info(f"Merged Lot Bid Opening Location data for {len(lot_bid_opening_data['tender']['lots'])} lots")

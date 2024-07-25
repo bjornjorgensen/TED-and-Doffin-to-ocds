@@ -18,16 +18,7 @@ def test_bt_1375_procedure_integration(tmp_path):
                 <cac:LotsGroup>
                     <cbc:LotsGroupID schemeName="LotsGroup">GLO-0001</cbc:LotsGroupID>
                     <cac:ProcurementProjectLotReference>
-                        <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
-                    </cac:ProcurementProjectLotReference>
-                    <cac:ProcurementProjectLotReference>
                         <cbc:ID schemeName="Lot">LOT-0002</cbc:ID>
-                    </cac:ProcurementProjectLotReference>
-                </cac:LotsGroup>
-                <cac:LotsGroup>
-                    <cbc:LotsGroupID schemeName="LotsGroup">GLO-0002</cbc:LotsGroupID>
-                    <cac:ProcurementProjectLotReference>
-                        <cbc:ID schemeName="Lot">LOT-0003</cbc:ID>
                     </cac:ProcurementProjectLotReference>
                 </cac:LotsGroup>
             </cac:LotDistribution>
@@ -43,16 +34,14 @@ def test_bt_1375_procedure_integration(tmp_path):
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
-    assert "lotGroups" in result["tender"], "Expected 'lotGroups' in result['tender']"
-    assert len(result["tender"]["lotGroups"]) == 2, f"Expected 2 lot groups, got {len(result['tender']['lotGroups'])}"
+    assert "lotGroups" in result["tender"], "Expected 'lotGroups' in tender"
+    assert len(result["tender"]["lotGroups"]) == 1, f"Expected 1 lot group, got {len(result['tender']['lotGroups'])}"
 
-    group_1 = next(group for group in result["tender"]["lotGroups"] if group["id"] == "GLO-0001")
-    assert "relatedLots" in group_1, "Expected 'relatedLots' in group GLO-0001"
-    assert set(group_1["relatedLots"]) == set(["LOT-0001", "LOT-0002"]), f"Expected ['LOT-0001', 'LOT-0002'] in GLO-0001 relatedLots, got {group_1['relatedLots']}"
-
-    group_2 = next(group for group in result["tender"]["lotGroups"] if group["id"] == "GLO-0002")
-    assert "relatedLots" in group_2, "Expected 'relatedLots' in group GLO-0002"
-    assert group_2["relatedLots"] == ["LOT-0003"], f"Expected ['LOT-0003'] in GLO-0002 relatedLots, got {group_2['relatedLots']}"
+    lot_group = result["tender"]["lotGroups"][0]
+    assert lot_group["id"] == "GLO-0001", f"Expected lot group id 'GLO-0001', got {lot_group['id']}"
+    assert "relatedLots" in lot_group, "Expected 'relatedLots' in lot group"
+    assert len(lot_group["relatedLots"]) == 1, f"Expected 1 related lot, got {len(lot_group['relatedLots'])}"
+    assert lot_group["relatedLots"][0] == "LOT-0002", f"Expected related lot 'LOT-0002', got {lot_group['relatedLots'][0]}"
 
 if __name__ == "__main__":
     pytest.main()

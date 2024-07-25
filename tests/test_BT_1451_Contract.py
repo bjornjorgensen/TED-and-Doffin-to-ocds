@@ -11,10 +11,11 @@ from main import main
 
 def test_bt_1451_contract_integration(tmp_path):
     xml_content = """
-    <root xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+          xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
         <ext:UBLExtensions>
             <ext:UBLExtension>
                 <ext:ExtensionContent>
@@ -45,11 +46,13 @@ def test_bt_1451_contract_integration(tmp_path):
     with open('output.json', 'r') as f:
         result = json.load(f)
 
-    assert "awards" in result
-    assert len(result["awards"]) == 1
+    assert "awards" in result, "Expected 'awards' in result"
+    assert len(result["awards"]) == 1, f"Expected 1 award, got {len(result['awards'])}"
+
     award = result["awards"][0]
-    assert award["id"] == "RES-0001"
-    assert award["date"] == "2021-02-19T23:59:59+01:00"
+    assert award["id"] == "RES-0001", f"Expected award id 'RES-0001', got {award['id']}"
+    assert "date" in award, "Expected 'date' in award"
+    assert award["date"] == "2021-02-19T23:59:59+01:00", f"Expected date '2021-02-19T23:59:59+01:00', got {award['date']}"
 
 if __name__ == "__main__":
     pytest.main()
