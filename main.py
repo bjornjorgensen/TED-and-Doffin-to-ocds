@@ -247,7 +247,9 @@ from converters.BT_21_LotsGroup import parse_lots_group_title, merge_lots_group_
 from converters.BT_21_Part import parse_part_title, merge_part_title
 from converters.BT_21_Procedure import parse_procedure_title, merge_procedure_title
 from converters.BT_22_Lot import parse_lot_internal_identifier, merge_lot_internal_identifier
-from converters.BT_23 import parse_main_nature, merge_main_nature
+from converters.BT_23_Lot import parse_main_nature, merge_main_nature
+from converters.BT_23_Part import parse_main_nature_part, merge_main_nature_part
+from converters.BT_23_Procedure import parse_main_nature_procedure, merge_main_nature_procedure
 from converters.BT_24 import parse_description, merge_description
 from converters.BT_25 import parse_quantity, merge_quantity
 from converters.BT_26a_lot import parse_classification_type, merge_classification_type
@@ -2848,10 +2850,35 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Lot Internal Identifier data: {str(e)}")
 
-    # Parse and merge BT-23 Main Nature
-    logger.info("Processing BT-23: Main Nature")
-    main_nature_data = parse_main_nature(xml_content)
-    merge_main_nature(release_json, main_nature_data)
+    # Parse and merge BT-23-Lot
+    try:
+        main_nature_data = parse_main_nature(xml_content)
+        if main_nature_data:
+            merge_main_nature(release_json, main_nature_data)
+        else:
+            logger.info("No Main Nature data found")
+    except Exception as e:
+        logger.error(f"Error processing Main Nature data: {str(e)}")
+
+    # Parse and merge BT-23-Part
+    try:
+        main_nature_part_data = parse_main_nature_part(xml_content)
+        if main_nature_part_data:
+            merge_main_nature_part(release_json, main_nature_part_data)
+        else:
+            logger.info("No Main Nature (Part) data found")
+    except Exception as e:
+        logger.error(f"Error processing Main Nature (Part) data: {str(e)}")
+
+    # Parse and merge BT-23-Procedure
+    try:
+        main_nature_procedure_data = parse_main_nature_procedure(xml_content)
+        if main_nature_procedure_data:
+            merge_main_nature_procedure(release_json, main_nature_procedure_data)
+        else:
+            logger.info("No Main Nature (Procedure) data found")
+    except Exception as e:
+        logger.error(f"Error processing Main Nature (Procedure) data: {str(e)}")
 
     # Parse and merge BT-24 Description
     logger.info("Processing BT-24: Description")
