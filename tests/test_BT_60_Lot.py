@@ -28,11 +28,11 @@ def test_bt_60_lot_integration(tmp_path):
         result = json.load(f)
 
     assert "parties" in result, "Expected 'parties' in result"
-    eu_party = next((party for party in result["parties"] if party["name"] == "European Union"), None)
-    assert eu_party is not None, "Expected to find European Union party"
-    assert eu_party["id"] == "1", f"Expected party id '1', got {eu_party['id']}"
-    assert "roles" in eu_party, "Expected 'roles' in European Union party"
-    assert "funder" in eu_party["roles"], "Expected 'funder' role in European Union party roles"
+    assert len(result["parties"]) == 1, f"Expected 1 party, got {len(result['parties'])}"
+
+    eu_party = result["parties"][0]
+    assert eu_party["name"] == "European Union", f"Expected party name 'European Union', got {eu_party['name']}"
+    assert "funder" in eu_party["roles"], "Expected 'funder' in party roles"
 
 if __name__ == "__main__":
     pytest.main()

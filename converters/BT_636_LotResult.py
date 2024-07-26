@@ -1,5 +1,9 @@
-# converters/BT_636_LotResult_Buyer_Review_Requests_Irregularity_Type.py
+# converters/BT_636_LotResult.py
+
+import logging
 from lxml import etree
+
+logger = logging.getLogger(__name__)
 
 IRREGULARITY_TYPE_MAPPING = {
     "ab-low": "Unjustified rejection of abnormally low tenders",
@@ -37,55 +41,83 @@ IRREGULARITY_TYPE_MAPPING = {
     "unj-nrl-other": "Use of technical specifications, selection criteria, award criteria, exclusion criteria, or contract performance conditions that are discriminatory (i.e. restrict access for economic operators) for other reasons than unjustified national, regional or local preferences"
 }
 
-def parse_buyer_review_requests_irregularity_type(xml_content):
+def parse_irregularity_type(xml_content):
+    """
+    Parse the XML content to extract the irregularity type information for each lot result.
+
+    Args:
+        xml_content (str): The XML content to parse.
+
+    Returns:
+        dict: A dictionary containing the parsed irregularity type data in the format:
+              {
+                  "statistics": [
+                      {
+                          "id": "unique_id",
+                          "measure": "irregularity_code",
+                          "scope": "complaints",
+                          "notes": "irregularity_description",
+                          "relatedLot": "lot_id"
+                      }
+                  ]
+              }
+        None: If no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
+    """
     root = etree.fromstring(xml_content)
     namespaces = {
-        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
         'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
         'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1',
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
     }
 
-    result = []
+    result = {"statistics": []}
+    statistic_id = 1
 
     lot_results = root.xpath("//efac:NoticeResult/efac:LotResult", namespaces=namespaces)
+    
     for lot_result in lot_results:
         lot_id = lot_result.xpath("efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)
         irregularity_types = lot_result.xpath("efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efbc:StatisticsCode/text()", namespaces=namespaces)
         
         if lot_id and irregularity_types:
             for irregularity_type in irregularity_types:
-                result.append({
-                    "lotId": lot_id[0],
+                statistic = {
+                    "id": str(statistic_id),
                     "measure": irregularity_type,
-                    "notes": IRREGULARITY_TYPE_MAPPING.get(irregularity_type, "Unknown irregularity type")
-                })
-
-    return result
-
-def merge_buyer_review_requests_irregularity_type(release_json, irregularity_type_data):
-    if irregularity_type_data:
-        statistics = release_json.setdefault("statistics", [])
-        
-        # Find the highest existing id
-        max_id = max([int(stat.get("id", 0)) for stat in statistics], default=0)
-
-        for data in irregularity_type_data:
-            # Check if a statistic for this lot and measure already exists
-            existing_stat = next((stat for stat in statistics if stat.get("relatedLot") == data["lotId"] and stat.get("measure") == data["measure"] and stat.get("scope") == "complaints"), None)
-            
-            if existing_stat:
-                existing_stat["notes"] = data["notes"]
-            else:
-                max_id += 1
-                new_stat = {
-                    "id": str(max_id),
-                    "measure": data["measure"],
                     "scope": "complaints",
-                    "notes": data["notes"],
-                    "relatedLot": data["lotId"]
+                    "notes": IRREGULARITY_TYPE_MAPPING.get(irregularity_type, "Unknown irregularity type"),
+                    "relatedLot": lot_id[0]
                 }
-                statistics.append(new_stat)
+                result["statistics"].append(statistic)
+                statistic_id += 1
 
-    return release_json
+    return result if result["statistics"] else None
+
+def merge_irregularity_type(release_json, irregularity_type_data):
+    """
+    Merge the parsed irregularity type data into the main OCDS release JSON.
+
+    Args:
+        release_json (dict): The main OCDS release JSON to be updated.
+        irregularity_type_data (dict): The parsed irregularity type data to be merged.
+
+    Returns:
+        None: The function updates the release_json in-place.
+    """
+    if not irregularity_type_data:
+        logger.warning("No irregularity type data to merge")
+        return
+
+    existing_statistics = release_json.setdefault("statistics", [])
+    
+    for new_statistic in irregularity_type_data["statistics"]:
+        existing_statistic = next((stat for stat in existing_statistics if stat["id"] == new_statistic["id"]), None)
+        if existing_statistic:
+            existing_statistic.update(new_statistic)
+        else:
+            existing_statistics.append(new_statistic)
+
+    logger.info(f"Merged irregularity type data for {len(irregularity_type_data['statistics'])} statistics")

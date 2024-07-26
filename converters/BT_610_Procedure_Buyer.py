@@ -1,7 +1,10 @@
 # converters/BT_610_Procedure_Buyer.py
+
+import logging
 from lxml import etree
 
-# Mapping tables
+logger = logging.getLogger(__name__)
+
 COFOG_ACTIVITIES = [
     "gen-pub", "defence", "pub-os", "econ-aff", "env-pro", 
     "hc-am", "health", "rcr", "education", "soc-pro"
@@ -44,55 +47,105 @@ EU_MAIN_ACTIVITY_MAPPING = {
 }
 
 def parse_activity_entity(xml_content):
+    """
+    Parse the XML content to extract the main activity of the contracting entity.
+
+    This function processes the BT-610-Procedure-Buyer business term, which represents
+    the main activity of the contracting entity.
+
+    Args:
+        xml_content (str): The XML content to parse.
+
+    Returns:
+        dict: A dictionary containing the parsed activity entity data in the format:
+              {
+                  "parties": [
+                      {
+                          "id": "buyer_id",
+                          "roles": ["buyer"],
+                          "details": {
+                              "classifications": [
+                                  {
+                                      "scheme": "scheme_name",
+                                      "id": "activity_id",
+                                      "description": "activity_description"
+                                  }
+                              ]
+                          }
+                      }
+                  ]
+              }
+        None: If no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
+    """
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
     }
 
-    result = []
+    result = {"parties": []}
+
     contracting_parties = root.xpath("//cac:ContractingParty", namespaces=namespaces)
     
     for party in contracting_parties:
-        org_id = party.xpath("cac:Party/cac:PartyIdentification/cbc:ID/text()", namespaces=namespaces)
+        buyer_id = party.xpath("cac:Party/cac:PartyIdentification/cbc:ID/text()", namespaces=namespaces)
         activity_code = party.xpath("cac:ContractingActivity/cbc:ActivityTypeCode[@listName='entity-activity']/text()", namespaces=namespaces)
-        
-        if org_id and activity_code:
-            result.append({
-                "id": org_id[0],
-                "activity_code": activity_code[0]
-            })
 
-    return result
+        if buyer_id and activity_code:
+            buyer_id = buyer_id[0]
+            activity_code = activity_code[0]
+
+            classification = {}
+            if activity_code in COFOG_ACTIVITIES:
+                classification["scheme"] = "COFOG"
+                classification["id"] = COFOG_MAPPING[activity_code][0]
+                classification["description"] = COFOG_MAPPING[activity_code][1]
+            else:
+                classification["scheme"] = "eu-main-activity"
+                classification["id"] = activity_code
+                classification["description"] = EU_MAIN_ACTIVITY_MAPPING.get(activity_code, "")
+
+            party_data = {
+                "id": buyer_id,
+                "roles": ["buyer"],
+                "details": {
+                    "classifications": [classification]
+                }
+            }
+            result["parties"].append(party_data)
+
+    return result if result["parties"] else None
 
 def merge_activity_entity(release_json, activity_data):
-    if activity_data:
-        parties = release_json.setdefault("parties", [])
+    """
+    Merge the parsed activity entity data into the main OCDS release JSON.
 
-        for data in activity_data:
-            party = next((p for p in parties if p.get("id") == data["id"]), None)
-            if not party:
-                party = {"id": data["id"], "roles": ["buyer"]}
-                parties.append(party)
-            elif "buyer" not in party.get("roles", []):
-                party.setdefault("roles", []).append("buyer")
+    This function updates the existing parties in the release JSON with the
+    activity entity information. If a party doesn't exist, it adds a new party to the release.
 
-            details = party.setdefault("details", {})
-            classifications = details.setdefault("classifications", [])
+    Args:
+        release_json (dict): The main OCDS release JSON to be updated.
+        activity_data (dict): The parsed activity entity data to be merged.
 
-            activity_code = data["activity_code"]
-            if activity_code in COFOG_ACTIVITIES:
-                cofog_id, cofog_description = COFOG_MAPPING[activity_code]
-                classifications.append({
-                    "scheme": "COFOG",
-                    "id": cofog_id,
-                    "description": cofog_description
-                })
-            else:
-                classifications.append({
-                    "scheme": "eu-main-activity",
-                    "id": activity_code,
-                    "description": EU_MAIN_ACTIVITY_MAPPING.get(activity_code, "")
-                })
+    Returns:
+        None: The function updates the release_json in-place.
+    """
+    if not activity_data:
+        logger.warning("BT-610-Procedure-Buyer: No activity entity data to merge")
+        return
 
-    return release_json
+    existing_parties = release_json.setdefault("parties", [])
+    
+    for new_party in activity_data["parties"]:
+        existing_party = next((party for party in existing_parties if party["id"] == new_party["id"]), None)
+        if existing_party:
+            existing_party.setdefault("details", {}).setdefault("classifications", []).extend(new_party["details"]["classifications"])
+            if "buyer" not in existing_party.get("roles", []):
+                existing_party.setdefault("roles", []).append("buyer")
+        else:
+            existing_parties.append(new_party)
+
+    logger.info(f"BT-610-Procedure-Buyer: Merged activity entity data for {len(activity_data['parties'])} parties")

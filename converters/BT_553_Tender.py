@@ -1,51 +1,57 @@
 # converters/BT_553_Tender.py
+
+import logging
 from lxml import etree
+
+logger = logging.getLogger(__name__)
 
 def parse_subcontracting_value(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
         'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
         'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
     }
 
-    result = []
+    result = {"bids": {"details": []}}
 
     lot_tenders = root.xpath("//efac:NoticeResult/efac:LotTender", namespaces=namespaces)
+    
     for lot_tender in lot_tenders:
         tender_id = lot_tender.xpath("cbc:ID[@schemeName='tender']/text()", namespaces=namespaces)
-        lot_id = lot_tender.xpath("efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)
-        subcontracting_value = lot_tender.xpath("efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efbc:TermAmount/text()", namespaces=namespaces)
+        subcontracting_amount = lot_tender.xpath("efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efbc:TermAmount/text()", namespaces=namespaces)
         currency = lot_tender.xpath("efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efbc:TermAmount/@currencyID", namespaces=namespaces)
+        related_lot = lot_tender.xpath("efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)
 
-        if tender_id and lot_id and subcontracting_value and currency:
-            result.append({
+        if tender_id and subcontracting_amount and currency:
+            bid_data = {
                 "id": tender_id[0],
-                "relatedLots": [lot_id[0]],
                 "subcontracting": {
                     "value": {
-                        "amount": float(subcontracting_value[0]),
+                        "amount": float(subcontracting_amount[0]),
                         "currency": currency[0]
                     }
-                }
-            })
+                },
+                "relatedLots": related_lot
+            }
+            result["bids"]["details"].append(bid_data)
 
-    return result if result else None
+    return result if result["bids"]["details"] else None
 
 def merge_subcontracting_value(release_json, subcontracting_data):
-    if subcontracting_data:
-        bids = release_json.setdefault("bids", {})
-        details = bids.setdefault("details", [])
+    if not subcontracting_data:
+        logger.warning("No subcontracting value data to merge")
+        return
 
-        for data in subcontracting_data:
-            bid = next((b for b in details if b.get("id") == data["id"]), None)
-            if not bid:
-                bid = {"id": data["id"]}
-                details.append(bid)
-            
-            bid["relatedLots"] = data["relatedLots"]
-            bid["subcontracting"] = data["subcontracting"]
+    existing_bids = release_json.setdefault("bids", {}).setdefault("details", [])
+    
+    for new_bid in subcontracting_data["bids"]["details"]:
+        existing_bid = next((bid for bid in existing_bids if bid["id"] == new_bid["id"]), None)
+        if existing_bid:
+            existing_bid.setdefault("subcontracting", {}).update(new_bid["subcontracting"])
+            # Replace the relatedLots instead of extending
+            existing_bid["relatedLots"] = new_bid.get("relatedLots", [])
+        else:
+            existing_bids.append(new_bid)
 
-    return release_json
+    logger.info(f"Merged subcontracting value data for {len(subcontracting_data['bids']['details'])} bids")

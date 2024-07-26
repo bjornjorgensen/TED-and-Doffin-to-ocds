@@ -6,6 +6,32 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 def parse_organization_streetline2(xml_content):
+    """
+    Parse the XML content to extract the street address information for each organization.
+
+    This function processes the BT-510(c)-Organization-Company business term, which represents
+    the full street address of the organization's physical location.
+
+    Args:
+        xml_content (str): The XML content to parse.
+
+    Returns:
+        dict: A dictionary containing the parsed street address data in the format:
+              {
+                  "parties": [
+                      {
+                          "id": "organization_id",
+                          "address": {
+                              "streetAddress": "full_street_address"
+                          }
+                      }
+                  ]
+              }
+        None: If no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
+    """
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
@@ -48,6 +74,19 @@ def parse_organization_streetline2(xml_content):
     return result if result["parties"] else None
 
 def merge_organization_streetline2(release_json, organization_streetline2_data):
+    """
+    Merge the parsed street address data into the main OCDS release JSON.
+
+    This function updates the existing parties in the release JSON with the
+    street address information. If a party doesn't exist, it adds a new party to the release.
+
+    Args:
+        release_json (dict): The main OCDS release JSON to be updated.
+        organization_streetline2_data (dict): The parsed street address data to be merged.
+
+    Returns:
+        None: The function updates the release_json in-place.
+    """
     if not organization_streetline2_data:
         logger.warning("No Organization Streetline 2 data to merge")
         return

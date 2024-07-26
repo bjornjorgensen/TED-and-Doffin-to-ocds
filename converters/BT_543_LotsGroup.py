@@ -1,37 +1,48 @@
 # converters/BT_543_LotsGroup.py
+
+import logging
 from lxml import etree
 
-def parse_award_criteria_complicated_lots_group(xml_content):
+logger = logging.getLogger(__name__)
+
+def parse_award_criteria_complicated_lotsgroup(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
     }
 
-    result = {}
+    result = {"tender": {"lotGroups": []}}
 
-    lots_group_elements = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']", namespaces=namespaces)
-    for lots_group in lots_group_elements:
-        group_id = lots_group.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        calculation_expression = lots_group.xpath(".//cac:AwardingTerms/cac:AwardingCriterion/cbc:CalculationExpression/text()", namespaces=namespaces)
+    lot_groups = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']", namespaces=namespaces)
+    
+    for lot_group in lot_groups:
+        lot_group_id = lot_group.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        calculation_expression = lot_group.xpath("cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cbc:CalculationExpression/text()", namespaces=namespaces)
         
         if calculation_expression:
-            result[group_id] = calculation_expression[0]
+            lot_group_data = {
+                "id": lot_group_id,
+                "awardCriteria": {
+                    "weightingDescription": calculation_expression[0]
+                }
+            }
+            result["tender"]["lotGroups"].append(lot_group_data)
 
-    return result if result else None
+    return result if result["tender"]["lotGroups"] else None
 
-def merge_award_criteria_complicated_lots_group(release_json, complicated_data):
-    if complicated_data:
-        tender = release_json.setdefault("tender", {})
-        lot_groups = tender.setdefault("lotGroups", [])
+def merge_award_criteria_complicated_lotsgroup(release_json, award_criteria_data):
+    if not award_criteria_data:
+        logger.warning("No award criteria complicated data for lot groups to merge")
+        return
 
-        for group_id, weighting_description in complicated_data.items():
-            lot_group = next((group for group in lot_groups if group.get("id") == group_id), None)
-            if not lot_group:
-                lot_group = {"id": group_id}
-                lot_groups.append(lot_group)
-            
-            award_criteria = lot_group.setdefault("awardCriteria", {})
-            award_criteria["weightingDescription"] = weighting_description
+    existing_lot_groups = release_json.setdefault("tender", {}).setdefault("lotGroups", [])
+    
+    for new_lot_group in award_criteria_data["tender"]["lotGroups"]:
+        existing_lot_group = next((group for group in existing_lot_groups if group["id"] == new_lot_group["id"]), None)
+        if existing_lot_group:
+            existing_lot_group.setdefault("awardCriteria", {}).update(new_lot_group["awardCriteria"])
+        else:
+            existing_lot_groups.append(new_lot_group)
 
-    return release_json
+    logger.info(f"Merged award criteria complicated data for {len(award_criteria_data['tender']['lotGroups'])} lot groups")

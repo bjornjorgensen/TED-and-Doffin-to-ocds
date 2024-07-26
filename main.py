@@ -378,27 +378,29 @@ from converters.BT_5421_LotsGroup import parse_award_criterion_number_weight_lot
 
 from converters.BT_5423_Lot import parse_award_criterion_number_threshold, merge_award_criterion_number_threshold
 from converters.BT_5423_LotsGroup import parse_award_criterion_number_threshold_lotsgroup, merge_award_criterion_number_threshold_lotsgroup
-from converters.BT_543_Lot import parse_award_criteria_complicated_lot, merge_award_criteria_complicated_lot
-from converters.BT_543_LotsGroup import parse_award_criteria_complicated_lots_group, merge_award_criteria_complicated_lots_group
+from converters.BT_543_Lot import parse_award_criteria_complicated, merge_award_criteria_complicated
+from converters.BT_543_LotsGroup import parse_award_criteria_complicated_lotsgroup, merge_award_criteria_complicated_lotsgroup
 from converters.BT_553_Tender import parse_subcontracting_value, merge_subcontracting_value
 from converters.BT_554_Tender import parse_subcontracting_description, merge_subcontracting_description
 from converters.BT_555_Tender import parse_subcontracting_percentage, merge_subcontracting_percentage
-from converters.BT_57_Lot import parse_renewal_description_lot, merge_renewal_description_lot
-from converters.BT_58_Lot import parse_renewal_maximum_lot, merge_renewal_maximum_lot
+from converters.BT_57_Lot import parse_renewal_description, merge_renewal_description
+from converters.BT_58_Lot import parse_renewal_maximum, merge_renewal_maximum
 from converters.BT_60_Lot import parse_eu_funds, merge_eu_funds
 from converters.BT_610_Procedure_Buyer import parse_activity_entity, merge_activity_entity
 from converters.BT_6110_Contract import parse_contract_eu_funds_details, merge_contract_eu_funds_details
 from converters.BT_6140_Lot import parse_lot_eu_funds_details, merge_lot_eu_funds_details
-from converters.BT_615_Documents_Restricted_URL import parse_documents_restricted_url, merge_documents_restricted_url
-from converters.BT_625_Lot_Unit import parse_lot_unit, merge_lot_unit
-from converters.BT_63_Lot_Variants import parse_lot_variants, merge_lot_variants
-from converters.BT_630_Lot_Deadline_Receipt_Expressions import parse_lot_deadline_receipt_expressions, merge_lot_deadline_receipt_expressions
-from converters.BT_631_Lot_Dispatch_Invitation_Interest import parse_lot_dispatch_invitation_interest, merge_lot_dispatch_invitation_interest
-from converters.BT_632_Tool_Name import parse_tool_name, merge_tool_name
-from converters.BT_633_Organization_Natural_Person import parse_organization_natural_person, merge_organization_natural_person
-from converters.BT_635_LotResult_Buyer_Review_Requests_Count import parse_buyer_review_requests_count, merge_buyer_review_requests_count
-from converters.BT_636_LotResult_Buyer_Review_Requests_Irregularity_Type import parse_buyer_review_requests_irregularity_type, merge_buyer_review_requests_irregularity_type
-from converters.BT_64_Lot_Subcontracting_Obligation_Minimum import parse_subcontracting_obligation_minimum, merge_subcontracting_obligation_minimum
+from converters.BT_615_Lot import parse_documents_restricted_url, merge_documents_restricted_url
+from converters.BT_615_Part import parse_documents_restricted_url_part, merge_documents_restricted_url_part
+from converters.BT_625_Lot import parse_unit, merge_unit
+from converters.BT_63_Lot import parse_variants, merge_variants
+from converters.BT_630_Lot import parse_lot_tender_period, merge_lot_tender_period
+from converters.BT_631_Lot import parse_dispatch_invitation_interest, merge_dispatch_invitation_interest
+from converters.BT_632_Lot import parse_tool_name, merge_tool_name
+from converters.BT_632_Part import parse_tool_name_part, merge_tool_name_part
+from converters.BT_633_Organization import parse_organization_natural_person, merge_organization_natural_person
+from converters.BT_635_LotResult import parse_buyer_review_requests_count, merge_buyer_review_requests_count
+from converters.BT_636_LotResult import parse_irregularity_type, merge_irregularity_type
+from converters.BT_64_Lot import parse_subcontracting_obligation_minimum, merge_subcontracting_obligation_minimum
 from converters.BT_644_Lot_Prize_Value import parse_lot_prize_value, merge_lot_prize_value
 from converters.BT_65_Lot_Subcontracting_Obligation import parse_subcontracting_obligation, merge_subcontracting_obligation
 from converters.BT_651_Lot_Subcontracting_Tender_Indication import parse_subcontracting_tender_indication, merge_subcontracting_tender_indication
@@ -3677,15 +3679,16 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing UBO Streetline 1 data: {str(e)}")
 
-    # Parse and merge BT-510(c)-Organization-Company
+    # Parse and merge BT-510(c)-Organization-Company (Streetline 2)
     try:
         organization_streetline2_data = parse_organization_streetline2(xml_content)
         if organization_streetline2_data:
             merge_organization_streetline2(release_json, organization_streetline2_data)
+            logger.info("BT-510(c)-Organization-Company: Successfully merged Organization Streetline 2 data")
         else:
-            logger.info("No Organization Streetline 2 data found")
+            logger.info("BT-510(c)-Organization-Company: No Organization Streetline 2 data found")
     except Exception as e:
-        logger.error(f"Error processing Organization Streetline 2 data: {str(e)}")
+        logger.error(f"BT-510(c)-Organization-Company: Error processing Organization Streetline 2 data: {str(e)}")
 
     # Parse and merge BT-510(c)-Organization-TouchPoint
     try:
@@ -4203,102 +4206,264 @@ def main(xml_path, ocid_prefix):
         logger.error(f"Error processing Award Criterion Number Threshold LotsGroup data: {str(e)}")
 
     # Parse and merge BT-543-Lot
-    lot_criteria_complicated_data = parse_award_criteria_complicated_lot(xml_content)
-    merge_award_criteria_complicated_lot(release_json, lot_criteria_complicated_data)
+    try:
+        award_criteria_data = parse_award_criteria_complicated(xml_content)
+        if award_criteria_data:
+            merge_award_criteria_complicated(release_json, award_criteria_data)
+        else:
+            logger.info("No award criteria complicated data found")
+    except Exception as e:
+        logger.error(f"Error processing award criteria complicated data: {str(e)}")
 
-    # Parse and merge BT-543-LotsGroup
-    lots_group_criteria_complicated_data = parse_award_criteria_complicated_lots_group(xml_content)
-    merge_award_criteria_complicated_lots_group(release_json, lots_group_criteria_complicated_data)
+    # Parse and merge BT-543-LotsGroup (Award Criteria Complicated for Lot Groups)
+    try:
+        award_criteria_lotsgroup_data = parse_award_criteria_complicated_lotsgroup(xml_content)
+        if award_criteria_lotsgroup_data:
+            merge_award_criteria_complicated_lotsgroup(release_json, award_criteria_lotsgroup_data)
+        else:
+            logger.info("No Award Criteria Complicated data for lot groups found")
+    except Exception as e:
+        logger.error(f"Error processing Award Criteria Complicated data for lot groups: {str(e)}")
 
-    # Parse and merge BT-553-Tender
-    subcontracting_value_data = parse_subcontracting_value(xml_content)
-    merge_subcontracting_value(release_json, subcontracting_value_data)
+    # Parse and merge BT-553-Tender (Subcontracting Value)
+    try:
+        subcontracting_value_data = parse_subcontracting_value(xml_content)
+        if subcontracting_value_data:
+            merge_subcontracting_value(release_json, subcontracting_value_data)
+        else:
+            logger.info("No Subcontracting Value data found")
+    except Exception as e:
+        logger.error(f"Error processing Subcontracting Value data: {str(e)}")
 
-    # Parse and merge BT-554-Tender
-    subcontracting_description_data = parse_subcontracting_description(xml_content)
-    merge_subcontracting_description(release_json, subcontracting_description_data)
+    # Parse and merge BT-554-Tender (Subcontracting Description)
+    try:
+        subcontracting_description_data = parse_subcontracting_description(xml_content)
+        if subcontracting_description_data:
+            merge_subcontracting_description(release_json, subcontracting_description_data)
+        else:
+            logger.info("No Subcontracting Description data found")
+    except Exception as e:
+        logger.error(f"Error processing Subcontracting Description data: {str(e)}")
 
-    # Parse and merge BT-555-Tender
-    subcontracting_percentage_data = parse_subcontracting_percentage(xml_content)
-    merge_subcontracting_percentage(release_json, subcontracting_percentage_data)
+    # Parse and merge BT-555-Tender (Subcontracting Percentage)
+    try:
+        subcontracting_percentage_data = parse_subcontracting_percentage(xml_content)
+        if subcontracting_percentage_data:
+            merge_subcontracting_percentage(release_json, subcontracting_percentage_data)
+            logger.info("BT-555-Tender: Successfully merged Subcontracting Percentage data")
+        else:
+            logger.info("BT-555-Tender: No Subcontracting Percentage data found")
+    except Exception as e:
+        logger.error(f"BT-555-Tender: Error processing Subcontracting Percentage data: {str(e)}")
 
-    # Parse and merge BT-57-Lot
-    renewal_description_data = parse_renewal_description_lot(xml_content)
-    merge_renewal_description_lot(release_json, renewal_description_data)
+    # Parse and merge BT-57-Lot (Renewal Description)
+    try:
+        renewal_description_data = parse_renewal_description(xml_content)
+        if renewal_description_data:
+            merge_renewal_description(release_json, renewal_description_data)
+            logger.info("BT-57-Lot: Successfully merged Renewal Description data")
+        else:
+            logger.info("BT-57-Lot: No Renewal Description data found")
+    except Exception as e:
+        logger.error(f"BT-57-Lot: Error processing Renewal Description data: {str(e)}")
 
-    # Parse and merge BT-58-Lot
-    renewal_maximum_data = parse_renewal_maximum_lot(xml_content)
-    merge_renewal_maximum_lot(release_json, renewal_maximum_data)
+    # Parse and merge BT-58-Lot (Renewal Maximum)
+    try:
+        renewal_maximum_data = parse_renewal_maximum(xml_content)
+        if renewal_maximum_data:
+            merge_renewal_maximum(release_json, renewal_maximum_data)
+            logger.info("BT-58-Lot: Successfully merged Renewal Maximum data")
+        else:
+            logger.info("BT-58-Lot: No Renewal Maximum data found")
+    except Exception as e:
+        logger.error(f"BT-58-Lot: Error processing Renewal Maximum data: {str(e)}")
 
-    # Parse and merge BT-60-Lot EU Funds
+    # Parse and merge BT-60-Lot (EU Funds)
     try:
         eu_funds_data = parse_eu_funds(xml_content)
         if eu_funds_data:
             merge_eu_funds(release_json, eu_funds_data)
+            logger.info("BT-60-Lot: Successfully merged EU Funds data")
         else:
-            logger.info("No EU Funds data found")
+            logger.info("BT-60-Lot: No EU Funds data found")
     except Exception as e:
-        logger.error(f"Error processing EU Funds data: {str(e)}")
+        logger.error(f"BT-60-Lot: Error processing EU Funds data: {str(e)}")
 
-    # Parse and merge BT-610-Procedure-Buyer
-    activity_entity_data = parse_activity_entity(xml_content)
-    merge_activity_entity(release_json, activity_entity_data)
+    # Parse and merge BT-610-Procedure-Buyer (Activity Entity)
+    try:
+        activity_entity_data = parse_activity_entity(xml_content)
+        if activity_entity_data:
+            merge_activity_entity(release_json, activity_entity_data)
+            logger.info("BT-610-Procedure-Buyer: Successfully merged Activity Entity data")
+        else:
+            logger.info("BT-610-Procedure-Buyer: No Activity Entity data found")
+    except Exception as e:
+        logger.error(f"BT-610-Procedure-Buyer: Error processing Activity Entity data: {str(e)}")
 
-    # Parse and merge BT-6110-Contract
-    logger.info("Processing BT-6110-Contract: Contract EU Funds Details")
-    contract_eu_funds_data = parse_contract_eu_funds_details(xml_content)
-    if contract_eu_funds_data:
-        merge_contract_eu_funds_details(release_json, contract_eu_funds_data)
-    else:
-        logger.warning("No Contract EU Funds data found")
+    # Parse and merge BT-6110-Contract (Contract EU Funds Details)
+    try:
+        contract_eu_funds_details = parse_contract_eu_funds_details(xml_content)
+        if contract_eu_funds_details:
+            merge_contract_eu_funds_details(release_json, contract_eu_funds_details)
+            logger.info("BT-6110-Contract: Successfully merged Contract EU Funds Details")
+        else:
+            logger.info("BT-6110-Contract: No Contract EU Funds Details found")
+    except Exception as e:
+        logger.error(f"BT-6110-Contract: Error processing Contract EU Funds Details: {str(e)}")
 
-    # Parse and merge BT-6140-Lot
-    lot_eu_funds_data = parse_lot_eu_funds_details(xml_content)
-    merge_lot_eu_funds_details(release_json, lot_eu_funds_data)
+    # Parse and merge BT-6140-Lot (EU Funds Details)
+    try:
+        lot_eu_funds_details = parse_lot_eu_funds_details(xml_content)
+        if lot_eu_funds_details:
+            merge_lot_eu_funds_details(release_json, lot_eu_funds_details)
+            logger.info("BT-6140-Lot: Successfully merged Lot EU Funds Details")
+        else:
+            logger.info("BT-6140-Lot: No Lot EU Funds Details found")
+    except Exception as e:
+        logger.error(f"BT-6140-Lot: Error processing Lot EU Funds Details: {str(e)}")
 
-    # Parse and merge BT-615 Documents Restricted URL
-    documents_restricted_url_data = parse_documents_restricted_url(xml_content)
-    merge_documents_restricted_url(release_json, documents_restricted_url_data)
+    # Parse and merge BT-615-Lot (Documents Restricted URL)
+    try:
+        documents_restricted_url_data = parse_documents_restricted_url(xml_content)
+        if documents_restricted_url_data:
+            merge_documents_restricted_url(release_json, documents_restricted_url_data)
+            logger.info("BT-615-Lot: Successfully merged Documents Restricted URL data")
+        else:
+            logger.info("BT-615-Lot: No Documents Restricted URL data found")
+    except Exception as e:
+        logger.error(f"BT-615-Lot: Error processing Documents Restricted URL data: {str(e)}")
 
-    # Parse and merge BT-625-Lot Unit
-    lot_unit_data = parse_lot_unit(xml_content)
-    merge_lot_unit(release_json, lot_unit_data)
+    # Parse and merge BT-615-Part (Documents Restricted URL for Parts)
+    try:
+        documents_restricted_url_part_data = parse_documents_restricted_url_part(xml_content)
+        if documents_restricted_url_part_data:
+            merge_documents_restricted_url_part(release_json, documents_restricted_url_part_data)
+            logger.info("BT-615-Part: Successfully merged Documents Restricted URL data for Parts")
+        else:
+            logger.info("BT-615-Part: No Documents Restricted URL data for Parts found")
+    except Exception as e:
+        logger.error(f"BT-615-Part: Error processing Documents Restricted URL data for Parts: {str(e)}")
 
-    # Parse and merge BT-63-Lot Variants
-    lot_variants_data = parse_lot_variants(xml_content)
-    merge_lot_variants(release_json, lot_variants_data)
+    # Parse and merge BT-625-Lot (Unit)
+    try:
+        unit_data = parse_unit(xml_content)
+        if unit_data:
+            merge_unit(release_json, unit_data)
+            logger.info("BT-625-Lot: Successfully merged Unit data")
+        else:
+            logger.info("BT-625-Lot: No Unit data found")
+    except Exception as e:
+        logger.error(f"BT-625-Lot: Error processing Unit data: {str(e)}")
 
-    # Parse and merge BT-630-Lot Deadline Receipt Expressions
-    lot_deadline_receipt_expressions_data = parse_lot_deadline_receipt_expressions(xml_content)
-    merge_lot_deadline_receipt_expressions(release_json, lot_deadline_receipt_expressions_data)
+    # Parse and merge BT-63-Lot (Variants)
+    try:
+        variants_data = parse_variants(xml_content)
+        if variants_data:
+            merge_variants(release_json, variants_data)
+            logger.info("BT-63-Lot: Successfully merged Variants data")
+        else:
+            logger.info("BT-63-Lot: No Variants data found")
+    except Exception as e:
+        logger.error(f"BT-63-Lot: Error processing Variants data: {str(e)}")
 
-    # Parse and merge BT-631-Lot Dispatch Invitation Interest
-    lot_dispatch_invitation_interest_data = parse_lot_dispatch_invitation_interest(xml_content)
-    merge_lot_dispatch_invitation_interest(release_json, lot_dispatch_invitation_interest_data)
+    # Process BT-630-Lot
+    try:
+        lot_tender_period_data = parse_lot_tender_period(xml_content)
+        if lot_tender_period_data:
+            merge_lot_tender_period(release_json, lot_tender_period_data)
+            logger.info("BT-630-Lot: Successfully merged Lot Tender Period data")
+        else:
+            logger.info("BT-630-Lot: No Lot Tender Period data found")
+    except Exception as e:
+        logger.error(f"Error processing BT-630-Lot: {str(e)}")
 
-    # Parse and merge BT-632 Tool Name
-    tool_name_data = parse_tool_name(xml_content)
-    merge_tool_name(release_json, tool_name_data)
+    # Parse and merge BT-631-Lot (Dispatch Invitation Interest)
+    try:
+        dispatch_invitation_data = parse_dispatch_invitation_interest(xml_content)
+        if dispatch_invitation_data:
+            merge_dispatch_invitation_interest(release_json, dispatch_invitation_data)
+            logger.info("BT-631-Lot: Successfully merged dispatch invitation interest data")
+        else:
+            logger.info("BT-631-Lot: No dispatch invitation interest data found")
+    except Exception as e:
+        logger.error(f"BT-631-Lot: Error processing dispatch invitation interest data: {str(e)}")
 
-    # Parse and merge BT-633-Organization Natural Person
-    organization_natural_person_data = parse_organization_natural_person(xml_content)
-    merge_organization_natural_person(release_json, organization_natural_person_data)
+    # Parse and merge BT-632-Lot (Tool Name)
+    try:
+        tool_name_data = parse_tool_name(xml_content)
+        if tool_name_data:
+            merge_tool_name(release_json, tool_name_data)
+            logger.info("BT-632-Lot: Successfully merged tool name data")
+        else:
+            logger.info("BT-632-Lot: No tool name data found")
+    except Exception as e:
+        logger.error(f"BT-632-Lot: Error processing tool name data: {str(e)}")
 
-    # Parse and merge BT-635-LotResult Buyer Review Requests Count
-    buyer_review_requests_count_data = parse_buyer_review_requests_count(xml_content)
-    merge_buyer_review_requests_count(release_json, buyer_review_requests_count_data)
+    # Parse and merge BT-632-Part (Tool Name)
+    try:
+        tool_name_part_data = parse_tool_name_part(xml_content)
+        if tool_name_part_data:
+            merge_tool_name_part(release_json, tool_name_part_data)
+            logger.info("BT-632-Part: Successfully merged tool name data for part")
+        else:
+            logger.info("BT-632-Part: No tool name data found for part")
+    except Exception as e:
+        logger.error(f"BT-632-Part: Error processing tool name data for part: {str(e)}")
 
-    # Parse and merge BT-636-LotResult Buyer Review Requests Irregularity Type
-    buyer_review_requests_irregularity_type_data = parse_buyer_review_requests_irregularity_type(xml_content)
-    merge_buyer_review_requests_irregularity_type(release_json, buyer_review_requests_irregularity_type_data)
+    # Parse and merge BT-633-Organization (Organisation Natural Person)
+    try:
+        organization_natural_person_data = parse_organization_natural_person(xml_content)
+        if organization_natural_person_data:
+            merge_organization_natural_person(release_json, organization_natural_person_data)
+            logger.info("BT-633-Organization: Successfully merged Organization Natural Person data")
+        else:
+            logger.info("BT-633-Organization: No Organization Natural Person data found")
+    except Exception as e:
+        logger.error(f"BT-633-Organization: Error processing Organization Natural Person data: {str(e)}")
 
-    # Parse and merge BT-64-Lot Subcontracting Obligation Minimum
-    subcontracting_obligation_minimum_data = parse_subcontracting_obligation_minimum(xml_content)
-    merge_subcontracting_obligation_minimum(release_json, subcontracting_obligation_minimum_data)
+    # Parse and merge BT-635-LotResult (Buyer Review Requests Count)
+    try:
+        buyer_review_requests_count_data = parse_buyer_review_requests_count(xml_content)
+        if buyer_review_requests_count_data:
+            merge_buyer_review_requests_count(release_json, buyer_review_requests_count_data)
+            logger.info("BT-635-LotResult: Successfully merged Buyer Review Requests Count data")
+        else:
+            logger.info("BT-635-LotResult: No Buyer Review Requests Count data found")
+    except Exception as e:
+        logger.error(f"BT-635-LotResult: Error processing Buyer Review Requests Count data: {str(e)}")
 
-    # Parse and merge BT-644-Lot Prize Value
-    lot_prize_value_data = parse_lot_prize_value(xml_content)
-    merge_lot_prize_value(release_json, lot_prize_value_data)
+    # Parse and merge BT-636-LotResult (Buyer Review Requests Irregularity Type)
+    try:
+        irregularity_type_data = parse_irregularity_type(xml_content)
+        if irregularity_type_data:
+            merge_irregularity_type(release_json, irregularity_type_data)
+            logger.info("BT-636-LotResult: Successfully merged Buyer Review Requests Irregularity Type data")
+        else:
+            logger.info("BT-636-LotResult: No Buyer Review Requests Irregularity Type data found")
+    except Exception as e:
+        logger.error(f"BT-636-LotResult: Error processing Buyer Review Requests Irregularity Type data: {str(e)}")
+
+    # Parse and merge BT-64-Lot (Subcontracting Obligation Minimum)
+    try:
+        subcontracting_obligation_minimum_data = parse_subcontracting_obligation_minimum(xml_content)
+        if subcontracting_obligation_minimum_data:
+            merge_subcontracting_obligation_minimum(release_json, subcontracting_obligation_minimum_data)
+            logger.info("BT-64-Lot: Successfully merged Subcontracting Obligation Minimum data")
+        else:
+            logger.info("BT-64-Lot: No Subcontracting Obligation Minimum data found")
+    except Exception as e:
+        logger.error(f"BT-64-Lot: Error processing Subcontracting Obligation Minimum data: {str(e)}")
+
+    # Parse and merge BT-644-Lot (Prize Value)
+    try:
+        lot_prize_value_data = parse_lot_prize_value(xml_content)
+        if lot_prize_value_data:
+            merge_lot_prize_value(release_json, lot_prize_value_data)
+            logger.info("BT-644-Lot: Successfully merged Prize Value data")
+        else:
+            logger.info("BT-644-Lot: No Prize Value data found")
+    except Exception as e:
+        logger.error(f"BT-644-Lot: Error processing Prize Value data: {str(e)}")
 
     # Parse and merge BT-65-Lot Subcontracting Obligation
     subcontracting_obligation_data = parse_subcontracting_obligation(xml_content)
@@ -5206,16 +5371,16 @@ def main(xml_path, ocid_prefix):
         logger.warning("No Tender Identifier Reference data found")
         
     # Before applying remove_empty_elements and remove_empty_dicts
-    logger.info(f"Release JSON before removing empty elements: {json.dumps(release_json, indent=2)}")
+    #logger.info(f"Release JSON before removing empty elements: {json.dumps(release_json, indent=2)}")
     
     release_json = remove_empty_elements(release_json)
     #logger.info(f"Release JSON after removing empty elements: {json.dumps(release_json, indent=2)}")
 
     release_json = remove_empty_dicts(release_json)
-    logger.info(f"Release JSON after removing empty dicts: {json.dumps(release_json, indent=2)}")
+    #logger.info(f"Release JSON after removing empty dicts: {json.dumps(release_json, indent=2)}")
 
     # Before writing to output.json
-    #logger.info(f"Final release JSON: {json.dumps(release_json, indent=2)}")
+    logger.info(f"Final release JSON: {json.dumps(release_json, indent=2)}")
 
     # Write the JSON output to a file
     with io.open('output.json', 'w', encoding='utf-8') as f:
