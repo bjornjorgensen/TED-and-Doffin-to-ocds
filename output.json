@@ -1,1 +1,1 @@
-{"initiationType": "tender", "tender": {"lotGroups": [{"id": "GLO-0001", "awardCriteria": {"orderRationale": "Each criterion is evaluated separately ..."}}]}}
+{"initiationType": "tender", "tender": {"lots": [{"id": "LOT-0001", "selectionCriteria": {"criteria": [{"numbers": [{"weight": "percentageExact"}]}]}}]}}

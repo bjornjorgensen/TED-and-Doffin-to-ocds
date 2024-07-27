@@ -439,23 +439,30 @@ from converters.BT_729_Lot import parse_lot_subcontracting_obligation_maximum, m
 from converters.BT_732_Lot import parse_lot_security_clearance_description, merge_lot_security_clearance_description
 from converters.BT_733_Lot import parse_lot_award_criteria_order_justification, merge_lot_award_criteria_order_justification
 from converters.BT_733_LotsGroup import parse_lots_group_award_criteria_order_justification, merge_lots_group_award_criteria_order_justification
-from converters.BT_734_Award_Criterion_Name import parse_award_criterion_name, merge_award_criterion_name
-from converters.BT_735_CVD_Contract_Type import parse_cvd_contract_type, merge_cvd_contract_type
-from converters.BT_736_Reserved_Execution import parse_reserved_execution, merge_reserved_execution
-from converters.BT_737_Documents_Unofficial_Language import parse_documents_unofficial_language, merge_documents_unofficial_language
-from converters.BT_738_Notice_Preferred_Publication_Date import parse_notice_preferred_publication_date, merge_notice_preferred_publication_date
-from converters.BT_739_Organization_Contact_Fax import parse_organization_contact_fax, merge_organization_contact_fax
-from converters.BT_740_Buyer_Contracting_Entity import parse_buyer_contracting_entity, merge_buyer_contracting_entity
-from converters.BT_743_Electronic_Invoicing import parse_electronic_invoicing, merge_electronic_invoicing
-from converters.BT_744_Submission_Electronic_Signature import parse_submission_electronic_signature, merge_submission_electronic_signature
-from converters.BT_745_Submission_Nonelectronic_Description import parse_submission_nonelectronic_description, merge_submission_nonelectronic_description
-from converters.BT_746_Organization import parse_organization_listed, merge_organization_listed
-from converters.BT_747_Selection_Criteria_Type import parse_selection_criteria_type, merge_selection_criteria_type
-from converters.BT_749_Selection_Criteria_Name import parse_selection_criteria_name, merge_selection_criteria_name
+from converters.BT_734_Lot import parse_award_criterion_name, merge_award_criterion_name
+from converters.BT_734_LotsGroup import parse_award_criterion_name_lotsgroup, merge_award_criterion_name_lotsgroup
+from converters.BT_735_Lot import parse_cvd_contract_type, merge_cvd_contract_type
+from converters.BT_735_LotResult import parse_cvd_contract_type_lotresult, merge_cvd_contract_type_lotresult
+from converters.BT_736_Lot import parse_reserved_execution, merge_reserved_execution
+from converters.BT_736_Part import parse_reserved_execution_part, merge_reserved_execution_part
+from converters.BT_737_Lot import parse_documents_unofficial_language, merge_documents_unofficial_language
+from converters.BT_737_Part import parse_documents_unofficial_language_part, merge_documents_unofficial_language_part
+from converters.BT_738_notice import parse_notice_preferred_publication_date, merge_notice_preferred_publication_date
+from converters.BT_739_Organization_Company import parse_organization_contact_fax, merge_organization_contact_fax
+from converters.BT_739_Organization_TouchPoint import parse_touchpoint_contact_fax, merge_touchpoint_contact_fax
+from converters.BT_739_UBO import parse_ubo_fax, merge_ubo_fax
+from converters.BT_740_Procedure_Buyer import parse_buyer_contracting_entity, merge_buyer_contracting_entity
+from converters.BT_743_Lot import parse_electronic_invoicing, merge_electronic_invoicing
+from converters.BT_744_Lot import parse_submission_electronic_signature, merge_submission_electronic_signature
+from converters.BT_745_Lot import parse_submission_nonelectronic_description, merge_submission_nonelectronic_description
+from converters.BT_746_Organization import parse_winner_listed, merge_winner_listed
+from converters.BT_747_Lot import parse_selection_criteria_type, merge_selection_criteria_type
+#from converters.BT_749_Lot import parse_selection_criteria_name, merge_selection_criteria_name
 from converters.BT_75_Lot import parse_guarantee_required_description, merge_guarantee_required_description
-from converters.BT_750_Lot import parse_selection_criteria_description, merge_selection_criteria_description
-from converters.BT_752_Lot import parse_selection_criteria_numbers, merge_selection_criteria_numbers
-from converters.BT_7531_Lot import parse_selection_criteria_weight, merge_selection_criteria_weight
+from converters.BT_750_Lot import parse_selection_criteria, merge_selection_criteria
+from converters.BT_752_Lot_ThresholdNumber import parse_selection_criteria_threshold_number, merge_selection_criteria_threshold_number
+from converters.BT_752_Lot_WeightNumber import parse_selection_criteria_weight_number, merge_selection_criteria_weight_number
+from converters.BT_7531_Lot import parse_selection_criteria_number_weight, merge_selection_criteria_number_weight
 from converters.BT_7532_Lot import parse_selection_criteria_threshold, merge_selection_criteria_threshold
 from converters.BT_754_Lot import parse_accessibility, merge_accessibility
 from converters.BT_755_Lot import parse_accessibility_justification, merge_accessibility_justification
@@ -4852,85 +4859,270 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"BT-733-LotsGroup: Error processing lot group award criteria order justification data: {str(e)}")
 
-    # Parse and merge BT-734 Award Criterion Name
-    award_criterion_name_data = parse_award_criterion_name(xml_content)
-    merge_award_criterion_name(release_json, award_criterion_name_data)
-
-    # Parse and merge BT-735 CVD Contract Type
-    logger.info("Processing BT-735: CVD Contract Type")
-    cvd_contract_type_data = parse_cvd_contract_type(xml_content)
-    if cvd_contract_type_data:
-        merge_cvd_contract_type(release_json, cvd_contract_type_data)
-    else:
-        logger.warning("No CVD Contract Type data found")
-
-    # Parse and merge BT-736 Reserved Execution
-    reserved_execution_data = parse_reserved_execution(xml_content)
-    merge_reserved_execution(release_json, reserved_execution_data)
-
-    # Parse and merge BT-737 Documents Unofficial Language
-    documents_unofficial_language_data = parse_documents_unofficial_language(xml_content)
-    merge_documents_unofficial_language(release_json, documents_unofficial_language_data)
-
-    # Parse and merge BT-738 Notice Preferred Publication Date
-    preferred_publication_date = parse_notice_preferred_publication_date(xml_content)
-    merge_notice_preferred_publication_date(release_json, preferred_publication_date)
-
-    # Parse and merge BT-739 Organization Contact Fax
-    organization_contact_fax_data = parse_organization_contact_fax(xml_content)
-    merge_organization_contact_fax(release_json, organization_contact_fax_data)
-
-    # Parse and merge BT-740 Buyer Contracting Entity
-    buyer_contracting_entity_data = parse_buyer_contracting_entity(xml_content)
-    merge_buyer_contracting_entity(release_json, buyer_contracting_entity_data)
-
-    # Parse and merge BT-743 Electronic Invoicing
-    electronic_invoicing_data = parse_electronic_invoicing(xml_content)
-    merge_electronic_invoicing(release_json, electronic_invoicing_data)
-
-    # Parse and merge BT-744 Submission Electronic Signature
-    submission_electronic_signature_data = parse_submission_electronic_signature(xml_content)
-    merge_submission_electronic_signature(release_json, submission_electronic_signature_data)
-
-    # Parse and merge BT-745 Submission Nonelectronic Description
-    submission_nonelectronic_description_data = parse_submission_nonelectronic_description(xml_content)
-    merge_submission_nonelectronic_description(release_json, submission_nonelectronic_description_data)
-
-   # Parse and merge BT-746-Organization
+    # Parse and merge BT-734-Lot Award Criterion Name
     try:
-        organization_listed_data = parse_organization_listed(xml_content)
-        if organization_listed_data:
-            logger.debug(f"Organization listed data before merge: {organization_listed_data}")
-            merge_organization_listed(release_json, organization_listed_data)
-            logger.debug(f"Release JSON after merge: {release_json}")
+        award_criterion_data = parse_award_criterion_name(xml_content)
+        if award_criterion_data:
+            merge_award_criterion_name(release_json, award_criterion_data)
+            logger.info("BT-734-Lot: Successfully merged Award Criterion Name data")
         else:
-            logger.info("No Organization Listed data found")
+            logger.info("BT-734-Lot: No Award Criterion Name data found")
     except Exception as e:
-        logger.error(f"Error processing Organization Listed data: {str(e)}")
+        logger.error(f"BT-734-Lot: Error processing Award Criterion Name data: {str(e)}")
 
-    # Parse and merge BT-747 Selection Criteria Type
-    selection_criteria_type_data = parse_selection_criteria_type(xml_content)
-    merge_selection_criteria_type(release_json, selection_criteria_type_data)
+    # Parse and merge BT-734-LotsGroup Award Criterion Name
+    try:
+        award_criterion_lotsgroup_data = parse_award_criterion_name_lotsgroup(xml_content)
+        if award_criterion_lotsgroup_data:
+            merge_award_criterion_name_lotsgroup(release_json, award_criterion_lotsgroup_data)
+            logger.info("BT-734-LotsGroup: Successfully merged Award Criterion Name data for lots groups")
+        else:
+            logger.info("BT-734-LotsGroup: No Award Criterion Name data found for lots groups")
+    except Exception as e:
+        logger.error(f"BT-734-LotsGroup: Error processing Award Criterion Name data for lots groups: {str(e)}")
 
-    # Parse and merge BT-749 Selection Criteria Name
-    selection_criteria_name_data = parse_selection_criteria_name(xml_content)
-    merge_selection_criteria_name(release_json, selection_criteria_name_data)
+    # Parse and merge BT-735-Lot CVD Contract Type
+    try:
+        cvd_contract_type_data = parse_cvd_contract_type(xml_content)
+        if cvd_contract_type_data:
+            merge_cvd_contract_type(release_json, cvd_contract_type_data)
+            logger.info("BT-735-Lot: Successfully merged CVD Contract Type data for lots")
+        else:
+            logger.info("BT-735-Lot: No CVD Contract Type data found for lots")
+    except Exception as e:
+        logger.error(f"BT-735-Lot: Error processing CVD Contract Type data for lots: {str(e)}")
+
+    # Parse and merge BT-735-LotResult CVD Contract Type
+    try:
+        cvd_contract_type_lotresult_data = parse_cvd_contract_type_lotresult(xml_content)
+        if cvd_contract_type_lotresult_data:
+            merge_cvd_contract_type_lotresult(release_json, cvd_contract_type_lotresult_data)
+            logger.info("BT-735-LotResult: Successfully merged CVD Contract Type data for LotResults")
+        else:
+            logger.info("BT-735-LotResult: No CVD Contract Type data found for LotResults")
+    except Exception as e:
+        logger.error(f"BT-735-LotResult: Error processing CVD Contract Type data for LotResults: {str(e)}")
+
+    # Parse and merge BT-736-Lot Reserved Execution
+    try:
+        reserved_execution_data = parse_reserved_execution(xml_content)
+        if reserved_execution_data:
+            merge_reserved_execution(release_json, reserved_execution_data)
+            logger.info("BT-736-Lot: Successfully merged Reserved Execution data for lots")
+        else:
+            logger.info("BT-736-Lot: No Reserved Execution data found for lots")
+    except Exception as e:
+        logger.error(f"BT-736-Lot: Error processing Reserved Execution data for lots: {str(e)}")
+
+    # Parse and merge BT-736-Part Reserved Execution
+    try:
+        reserved_execution_part_data = parse_reserved_execution_part(xml_content)
+        if reserved_execution_part_data:
+            merge_reserved_execution_part(release_json, reserved_execution_part_data)
+            logger.info("BT-736-Part: Successfully merged Reserved Execution data for part")
+        else:
+            logger.info("BT-736-Part: No Reserved Execution data found for part or value is not 'yes'")
+    except Exception as e:
+        logger.error(f"BT-736-Part: Error processing Reserved Execution data for part: {str(e)}")
+
+    # Parse and merge BT-737-Lot Documents Unofficial Language
+    try:
+        unofficial_language_data = parse_documents_unofficial_language(xml_content)
+        if unofficial_language_data:
+            merge_documents_unofficial_language(release_json, unofficial_language_data)
+            logger.info("BT-737-Lot: Successfully merged Documents Unofficial Language data")
+        else:
+            logger.info("BT-737-Lot: No Documents Unofficial Language data found")
+    except Exception as e:
+        logger.error(f"BT-737-Lot: Error processing Documents Unofficial Language data: {str(e)}")
+
+    # Parse and merge BT-737-Part Documents Unofficial Language
+    try:
+        unofficial_language_data_part = parse_documents_unofficial_language_part(xml_content)
+        if unofficial_language_data_part:
+            merge_documents_unofficial_language_part(release_json, unofficial_language_data_part)
+            logger.info("BT-737-Part: Successfully merged Documents Unofficial Language data")
+        else:
+            logger.info("BT-737-Part: No Documents Unofficial Language data found")
+    except Exception as e:
+        logger.error(f"BT-737-Part: Error processing Documents Unofficial Language data: {str(e)}")
+
+    # Parse and merge BT-738-notice Notice Preferred Publication Date
+    try:
+        preferred_publication_date_data = parse_notice_preferred_publication_date(xml_content)
+        if preferred_publication_date_data:
+            merge_notice_preferred_publication_date(release_json, preferred_publication_date_data)
+            logger.info("BT-738-notice: Successfully merged Notice Preferred Publication Date data")
+        else:
+            logger.info("BT-738-notice: No Notice Preferred Publication Date data found")
+    except Exception as e:
+        logger.error(f"BT-738-notice: Error processing Notice Preferred Publication Date data: {str(e)}")
+
+    # Parse and merge BT-739-Organization-Company Organisation Contact Fax
+    try:
+        organization_fax_data = parse_organization_contact_fax(xml_content)
+        if organization_fax_data:
+            merge_organization_contact_fax(release_json, organization_fax_data)
+            logger.info("BT-739-Organization-Company: Successfully merged Organisation Contact Fax data")
+        else:
+            logger.info("BT-739-Organization-Company: No Organisation Contact Fax data found")
+    except Exception as e:
+        logger.error(f"BT-739-Organization-Company: Error processing Organisation Contact Fax data: {str(e)}")
+
+    # Parse and merge BT-739-Organization-TouchPoint Contact Fax
+    try:
+        touchpoint_fax_data = parse_touchpoint_contact_fax(xml_content)
+        if touchpoint_fax_data:
+            merge_touchpoint_contact_fax(release_json, touchpoint_fax_data)
+            logger.info("BT-739-Organization-TouchPoint: Successfully merged TouchPoint Contact Fax data")
+        else:
+            logger.info("BT-739-Organization-TouchPoint: No TouchPoint Contact Fax data found")
+    except Exception as e:
+        logger.error(f"BT-739-Organization-TouchPoint: Error processing TouchPoint Contact Fax data: {str(e)}")
+
+    # Parse and merge BT-739-UBO UBO Contact Fax
+    try:
+        ubo_fax_data = parse_ubo_fax(xml_content)
+        if ubo_fax_data:
+            merge_ubo_fax(release_json, ubo_fax_data)
+            logger.info("BT-739-UBO: Successfully merged UBO Contact Fax data")
+        else:
+            logger.info("BT-739-UBO: No UBO Contact Fax data found")
+    except Exception as e:
+        logger.error(f"BT-739-UBO: Error processing UBO Contact Fax data: {str(e)}")
+
+    # Parse and merge BT-740-Procedure-Buyer Buyer Contracting Entity
+    try:
+        buyer_contracting_entity_data = parse_buyer_contracting_entity(xml_content)
+        if buyer_contracting_entity_data:
+            merge_buyer_contracting_entity(release_json, buyer_contracting_entity_data)
+            logger.info("BT-740-Procedure-Buyer: Successfully merged Buyer Contracting Entity data")
+        else:
+            logger.info("BT-740-Procedure-Buyer: No Buyer Contracting Entity data found")
+    except Exception as e:
+        logger.error(f"BT-740-Procedure-Buyer: Error processing Buyer Contracting Entity data: {str(e)}")
+
+    # Parse and merge BT-743-Lot Electronic Invoicing
+    try:
+        electronic_invoicing_data = parse_electronic_invoicing(xml_content)
+        if electronic_invoicing_data:
+            merge_electronic_invoicing(release_json, electronic_invoicing_data)
+            logger.info("BT-743-Lot: Successfully merged Electronic Invoicing data")
+        else:
+            logger.info("BT-743-Lot: No Electronic Invoicing data found")
+    except Exception as e:
+        logger.error(f"BT-743-Lot: Error processing Electronic Invoicing data: {str(e)}")
+
+    # Parse and merge BT-744-Lot Submission Electronic Signature
+    try:
+        submission_electronic_signature_data = parse_submission_electronic_signature(xml_content)
+        if submission_electronic_signature_data:
+            merge_submission_electronic_signature(release_json, submission_electronic_signature_data)
+            logger.info("BT-744-Lot: Successfully merged Submission Electronic Signature data")
+        else:
+            logger.info("BT-744-Lot: No Submission Electronic Signature data found")
+    except Exception as e:
+        logger.error(f"BT-744-Lot: Error processing Submission Electronic Signature data: {str(e)}")
+
+    # Parse and merge BT-745-Lot Submission Nonelectronic Description
+    try:
+        submission_nonelectronic_description_data = parse_submission_nonelectronic_description(xml_content)
+        if submission_nonelectronic_description_data:
+            merge_submission_nonelectronic_description(release_json, submission_nonelectronic_description_data)
+            logger.info("BT-745-Lot: Successfully merged Submission Nonelectronic Description data")
+        else:
+            logger.info("BT-745-Lot: No Submission Nonelectronic Description data found")
+    except Exception as e:
+        logger.error(f"BT-745-Lot: Error processing Submission Nonelectronic Description data: {str(e)}")
+
+   # Parse and merge BT-746-Organization Winner Listed
+    try:
+        winner_listed_data = parse_winner_listed(xml_content)
+        if winner_listed_data:
+            merge_winner_listed(release_json, winner_listed_data)
+            logger.info("BT-746-Organization: Successfully merged Winner Listed data")
+        else:
+            logger.info("BT-746-Organization: No Winner Listed data found")
+    except Exception as e:
+        logger.error(f"BT-746-Organization: Error processing Winner Listed data: {str(e)}")
+
+    # Parse and merge BT-747-Lot Selection Criteria Type
+    try:
+        selection_criteria_type_data = parse_selection_criteria_type(xml_content)
+        if selection_criteria_type_data:
+            merge_selection_criteria_type(release_json, selection_criteria_type_data)
+            logger.info("BT-747-Lot: Successfully merged Selection Criteria Type data")
+        else:
+            logger.info("BT-747-Lot: No Selection Criteria Type data found")
+    except Exception as e:
+        logger.error(f"BT-747-Lot: Error processing Selection Criteria Type data: {str(e)}")
+
+    # Parse and merge BT-749-Lot Selection Criteria Name
+    try:
+        selection_criteria_name_data = parse_selection_criteria_name(xml_content)
+        if selection_criteria_name_data:
+            merge_selection_criteria_name(release_json, selection_criteria_name_data)
+            logger.info("BT-749-Lot: Successfully merged Selection Criteria Name data")
+        else:
+            logger.info("BT-749-Lot: No Selection Criteria Name data found")
+    except Exception as e:
+        logger.error(f"BT-749-Lot: Error processing Selection Criteria Name data: {str(e)}")
     
     # Parse and merge BT-75-Lot Guarantee Required Description
-    guarantee_required_description_data = parse_guarantee_required_description(xml_content)
-    merge_guarantee_required_description(release_json, guarantee_required_description_data)
+    try:
+        guarantee_description_data = parse_guarantee_required_description(xml_content)
+        if guarantee_description_data:
+            merge_guarantee_required_description(release_json, guarantee_description_data)
+            logger.info("BT-75-Lot: Successfully merged Guarantee Required Description data")
+        else:
+            logger.info("BT-75-Lot: No Guarantee Required Description data found")
+    except Exception as e:
+        logger.error(f"BT-75-Lot: Error processing Guarantee Required Description data: {str(e)}")
 
-    # Parse and merge BT-750-Lot Selection Criteria Description
-    selection_criteria_description_data = parse_selection_criteria_description(xml_content)
-    merge_selection_criteria_description(release_json, selection_criteria_description_data)
+    # Parse and merge BT-749 and BT-750 Selection Criteria
+    try:
+        selection_criteria_data = parse_selection_criteria(xml_content)
+        if selection_criteria_data:
+            merge_selection_criteria(release_json, selection_criteria_data)
+            logger.info("BT-749 and BT-750: Successfully merged Selection Criteria data")
+        else:
+            logger.info("BT-749 and BT-750: No Selection Criteria data found")
+    except Exception as e:
+        logger.error(f"BT-749 and BT-750: Error processing Selection Criteria data: {str(e)}")
     
-    # Parse and merge BT-752-Lot Selection Criteria Second Stage Invite Threshold/Weight Number
-    selection_criteria_numbers_data = parse_selection_criteria_numbers(xml_content)
-    merge_selection_criteria_numbers(release_json, selection_criteria_numbers_data)
+    # Parse and merge BT-752-Lot-ThresholdNumber Selection Criteria Second Stage Invite Threshold Number
+    try:
+        threshold_number_data = parse_selection_criteria_threshold_number(xml_content)
+        if threshold_number_data:
+            merge_selection_criteria_threshold_number(release_json, threshold_number_data)
+            logger.info("BT-752-Lot-ThresholdNumber: Successfully merged Selection Criteria Threshold Number data")
+        else:
+            logger.info("BT-752-Lot-ThresholdNumber: No Selection Criteria Threshold Number data found")
+    except Exception as e:
+        logger.error(f"BT-752-Lot-ThresholdNumber: Error processing Selection Criteria Threshold Number data: {str(e)}")
+
+    # Parse and merge BT-752-Lot-WeightNumber Selection Criteria Second Stage Invite Weight Number
+    try:
+        weight_number_data = parse_selection_criteria_weight_number(xml_content)
+        if weight_number_data:
+            merge_selection_criteria_weight_number(release_json, weight_number_data)
+            logger.info("BT-752-Lot-WeightNumber: Successfully merged Selection Criteria Weight Number data")
+        else:
+            logger.info("BT-752-Lot-WeightNumber: No Selection Criteria Weight Number data found")
+    except Exception as e:
+        logger.error(f"BT-752-Lot-WeightNumber: Error processing Selection Criteria Weight Number data: {str(e)}")
 
     # Parse and merge BT-7531-Lot Selection Criteria Second Stage Invite Number Weight
-    selection_criteria_weight_data = parse_selection_criteria_weight(xml_content)
-    merge_selection_criteria_weight(release_json, selection_criteria_weight_data)
+    try:
+        number_weight_data = parse_selection_criteria_number_weight(xml_content)
+        if number_weight_data:
+            merge_selection_criteria_number_weight(release_json, number_weight_data)
+            logger.info("BT-7531-Lot: Successfully merged Selection Criteria Number Weight data")
+        else:
+            logger.info("BT-7531-Lot: No Selection Criteria Number Weight data found")
+    except Exception as e:
+        logger.error(f"BT-7531-Lot: Error processing Selection Criteria Number Weight data: {str(e)}")
+
 
     # Parse and merge BT-7532-Lot Selection Criteria Second Stage Invite Number Threshold
     selection_criteria_threshold_data = parse_selection_criteria_threshold(xml_content)

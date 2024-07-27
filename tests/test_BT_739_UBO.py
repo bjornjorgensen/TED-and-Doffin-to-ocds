@@ -1,4 +1,4 @@
-# tests/test_BT_746_Organization.py
+# tests/test_BT_739_UBO.py
 
 import pytest
 import json
@@ -9,27 +9,31 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
-def test_bt_746_organization_integration(tmp_path):
+def test_bt_739_ubo_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
-          xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
+          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
         <ext:UBLExtensions>
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
                         <efac:Organizations>
                             <efac:Organization>
-                                <efbc:ListedOnRegulatedMarketIndicator>false</efbc:ListedOnRegulatedMarketIndicator>
                                 <efac:Company>
                                     <cac:PartyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
                                     </cac:PartyIdentification>
                                 </efac:Company>
                             </efac:Organization>
+                            <efac:UltimateBeneficialOwner>
+                                <cbc:ID schemeName="ubo">UBO-0001</cbc:ID>
+                                <cac:Contact>
+                                    <cbc:Telefax>+123 4567891</cbc:Telefax>
+                                </cac:Contact>
+                            </efac:UltimateBeneficialOwner>
                         </efac:Organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
@@ -37,7 +41,7 @@ def test_bt_746_organization_integration(tmp_path):
         </ext:UBLExtensions>
     </root>
     """
-    xml_file = tmp_path / "test_input_winner_listed.xml"
+    xml_file = tmp_path / "test_input_ubo_fax.xml"
     xml_file.write_text(xml_content)
 
     main(str(xml_file), "ocds-test-prefix")
@@ -50,10 +54,13 @@ def test_bt_746_organization_integration(tmp_path):
 
     party = result["parties"][0]
     assert party["id"] == "ORG-0001", f"Expected party id 'ORG-0001', got {party['id']}"
-    assert "details" in party, "Expected 'details' in party"
-    assert "listedOnRegulatedMarket" in party["details"], "Expected 'listedOnRegulatedMarket' in party details"
-    assert party["details"]["listedOnRegulatedMarket"] is False, \
-        f"Expected listedOnRegulatedMarket False, got {party['details']['listedOnRegulatedMarket']}"
+    assert "beneficialOwners" in party, "Expected 'beneficialOwners' in party"
+    assert len(party["beneficialOwners"]) == 1, f"Expected 1 beneficial owner, got {len(party['beneficialOwners'])}"
+
+    ubo = party["beneficialOwners"][0]
+    assert ubo["id"] == "UBO-0001", f"Expected UBO id 'UBO-0001', got {ubo['id']}"
+    assert "faxNumber" in ubo, "Expected 'faxNumber' in UBO"
+    assert ubo["faxNumber"] == "+123 4567891", f"Expected faxNumber '+123 4567891', got {ubo['faxNumber']}"
 
 if __name__ == "__main__":
     pytest.main()

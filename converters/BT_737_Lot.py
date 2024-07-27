@@ -1,6 +1,9 @@
-# converters/BT_737_Documents_Unofficial_Language.py
+# converters/BT_737_Lot.py
+
+import logging
 from lxml import etree
 
+logger = logging.getLogger(__name__)
 ISO_639_1_MAPPING = {
     'ABK': 'ab', 'AAR': 'aa', 'AFR': 'af', 'AKA': 'ak', 'SQI': 'sq', 'AMH': 'am', 'ARA': 'ar',
     'ARG': 'an', 'HYE': 'hy', 'ASM': 'as', 'AVA': 'av', 'AVE': 'ae', 'AYM': 'ay', 'AZE': 'az',
@@ -32,6 +35,20 @@ ISO_639_1_MAPPING = {
 }
 
 def parse_documents_unofficial_language(xml_content):
+    """
+    Parse the XML content to extract the unofficial languages for documents in each lot.
+
+    Args:
+        xml_content (str or bytes): The XML content to parse.
+
+    Returns:
+        dict: A dictionary containing the parsed unofficial language data for documents.
+        None: If no relevant data is found.
+    """
+    # Ensure xml_content is bytes
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
+
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
@@ -41,49 +58,55 @@ def parse_documents_unofficial_language(xml_content):
         'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1'
     }
 
-    result = {}
+    result = {"tender": {"documents": []}}
 
-    # Process Lots
-    lot_elements = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
-    for lot in lot_elements:
+    lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    
+    for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         documents = lot.xpath(".//cac:CallForTendersDocumentReference", namespaces=namespaces)
-        for doc in documents:
-            doc_id = doc.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-            languages = doc.xpath(".//efac:NonOfficialLanguages/cac:Language/cbc:ID/text()", namespaces=namespaces)
+        
+        for document in documents:
+            doc_id = document.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+            languages = document.xpath(".//efac:NonOfficialLanguages/cac:Language/cbc:ID/text()", namespaces=namespaces)
+            
             if languages:
-                if doc_id not in result:
-                    result[doc_id] = {"unofficialTranslations": [], "relatedLots": []}
-                result[doc_id]["unofficialTranslations"].extend([ISO_639_1_MAPPING.get(lang.upper(), lang.lower()) for lang in languages])
-                result[doc_id]["relatedLots"].append(lot_id)
+                doc_data = {
+                    "id": doc_id,
+                    "unofficialTranslations": [ISO_639_1_MAPPING.get(lang.upper(), lang.lower()) for lang in languages],
+                    "relatedLots": [lot_id]
+                }
+                result["tender"]["documents"].append(doc_data)
 
-    # Process Parts
-    part_elements = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']", namespaces=namespaces)
-    for part in part_elements:
-        documents = part.xpath(".//cac:CallForTendersDocumentReference", namespaces=namespaces)
-        for doc in documents:
-            doc_id = doc.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-            languages = doc.xpath(".//efac:NonOfficialLanguages/cac:Language/cbc:ID/text()", namespaces=namespaces)
-            if languages:
-                if doc_id not in result:
-                    result[doc_id] = {"unofficialTranslations": []}
-                result[doc_id]["unofficialTranslations"].extend([ISO_639_1_MAPPING.get(lang.upper(), lang.lower()) for lang in languages])
-
-    return result
+    return result if result["tender"]["documents"] else None
 
 def merge_documents_unofficial_language(release_json, unofficial_language_data):
-    if unofficial_language_data:
-        tender = release_json.setdefault("tender", {})
-        documents = tender.setdefault("documents", [])
+    """
+    Merge the parsed unofficial language data for documents into the main OCDS release JSON.
 
-        for doc_id, doc_data in unofficial_language_data.items():
-            doc = next((d for d in documents if d.get("id") == doc_id), None)
-            if not doc:
-                doc = {"id": doc_id}
-                documents.append(doc)
-            
-            doc["unofficialTranslations"] = list(set(doc_data["unofficialTranslations"]))
-            if "relatedLots" in doc_data:
-                doc["relatedLots"] = list(set(doc_data["relatedLots"]))
+    Args:
+        release_json (dict): The main OCDS release JSON to be updated.
+        unofficial_language_data (dict): The parsed unofficial language data for documents to be merged.
 
-    return release_json
+    Returns:
+        None: The function updates the release_json in-place.
+    """
+    if not unofficial_language_data:
+        logger.warning("No unofficial language data for documents to merge")
+        return
+
+    tender = release_json.setdefault("tender", {})
+    existing_documents = tender.setdefault("documents", [])
+
+    for new_doc in unofficial_language_data["tender"]["documents"]:
+        existing_doc = next((doc for doc in existing_documents if doc["id"] == new_doc["id"]), None)
+        if existing_doc:
+            existing_doc.setdefault("unofficialTranslations", []).extend(new_doc["unofficialTranslations"])
+            existing_doc.setdefault("relatedLots", []).extend(new_doc["relatedLots"])
+            # Remove duplicates
+            existing_doc["unofficialTranslations"] = list(set(existing_doc["unofficialTranslations"]))
+            existing_doc["relatedLots"] = list(set(existing_doc["relatedLots"]))
+        else:
+            existing_documents.append(new_doc)
+
+    logger.info(f"Merged unofficial language data for {len(unofficial_language_data['tender']['documents'])} documents")
