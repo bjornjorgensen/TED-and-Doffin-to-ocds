@@ -5,6 +5,7 @@ import json
 import os
 import sys
 
+# Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
@@ -37,7 +38,7 @@ def test_bt_712_lot_result_integration(tmp_path):
         </ext:UBLExtensions>
     </root>
     """
-    xml_file = tmp_path / "test_input_complainants.xml"
+    xml_file = tmp_path / "test_input_lot_result_complaints.xml"
     xml_file.write_text(xml_content)
 
     main(str(xml_file), "ocds-test-prefix")
@@ -45,13 +46,15 @@ def test_bt_712_lot_result_integration(tmp_path):
     with open('output.json', 'r') as f:
         result = json.load(f)
 
-    assert "statistics" in result
-    assert len(result["statistics"]) == 1
+    assert "statistics" in result, "Expected 'statistics' in result"
+    assert len(result["statistics"]) == 1, f"Expected 1 statistic, got {len(result['statistics'])}"
+
     statistic = result["statistics"][0]
-    assert statistic["measure"] == "complainants"
-    assert statistic["value"] == 2
-    assert statistic["scope"] == "complaints"
-    assert statistic["relatedLot"] == "LOT-0001"
+    assert statistic["id"] == "1", f"Expected statistic id '1', got {statistic['id']}"
+    assert statistic["measure"] == "complainants", f"Expected measure 'complainants', got {statistic['measure']}"
+    assert statistic["value"] == 2, f"Expected value 2, got {statistic['value']}"
+    assert statistic["relatedLot"] == "LOT-0001", f"Expected relatedLot 'LOT-0001', got {statistic['relatedLot']}"
+    assert statistic["scope"] == "complaints", f"Expected scope 'complaints', got {statistic['scope']}"
 
 if __name__ == "__main__":
     pytest.main()

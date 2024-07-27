@@ -404,18 +404,19 @@ from converters.BT_64_Lot import parse_subcontracting_obligation_minimum, merge_
 from converters.BT_644_Lot_Prize_Value import parse_lot_prize_value, merge_lot_prize_value
 from converters.BT_65_Lot_Subcontracting_Obligation import parse_subcontracting_obligation, merge_subcontracting_obligation
 from converters.BT_651_Lot_Subcontracting_Tender_Indication import parse_subcontracting_tender_indication, merge_subcontracting_tender_indication
-from converters.BT_660_LotResult_Framework_Reestimated_Value import parse_framework_reestimated_value, merge_framework_reestimated_value
-from converters.BT_67_Procedure_Exclusion_Grounds import parse_exclusion_grounds, merge_exclusion_grounds
-from converters.BT_70_Lot_Terms_Performance import parse_terms_performance, merge_terms_performance
-from converters.BT_702a_Notice_Official_Language import parse_notice_official_language, merge_notice_official_language
-from converters.BT_706_UBO_Winner_Owner_Nationality import parse_winner_owner_nationality, merge_winner_owner_nationality
-from converters.BT_707_Documents_Restricted_Justification import parse_documents_restricted_justification, merge_documents_restricted_justification
+from converters.BT_660_LotResult import parse_framework_reestimated_value, merge_framework_reestimated_value
+from converters.BT_67_Exclusion_Grounds import parse_exclusion_grounds, merge_exclusion_grounds
+from converters.BT_70_Lot import parse_lot_performance_terms, merge_lot_performance_terms
+from converters.BT_702a_Notice import parse_notice_language, merge_notice_language
+from converters.BT_706_UBO import parse_ubo_nationalities, merge_ubo_nationalities
+from converters.BT_707_Lot import parse_lot_documents_restricted_justification, merge_lot_documents_restricted_justification
+from converters.BT_707_Part import parse_part_documents_restricted_justification, merge_part_documents_restricted_justification
 from converters.BT_708_Documents_Official_Language import parse_documents_official_language, merge_documents_official_language
 from converters.BT_709_LotResult_Framework_Maximum_Value import parse_framework_maximum_value, merge_framework_maximum_value
 from converters.BT_71_Reserved_Participation import parse_reserved_participation, merge_reserved_participation
 from converters.BT_710_LotResult_Tender_Value_Lowest import parse_tender_value_lowest, merge_tender_value_lowest
 from converters.BT_711_LotResult_Tender_Value_Highest import parse_tender_value_highest, merge_tender_value_highest
-from converters.BT_712_LotResult_Buyer_Review_Complainants import parse_buyer_review_complainants, merge_buyer_review_complainants
+from converters.BT_712_LotResult import parse_lot_result_complaints, merge_lot_result_complaints
 from converters.BT_717_Lot_Clean_Vehicles_Directive import parse_clean_vehicles_directive, merge_clean_vehicles_directive
 from converters.BT_719_Notice_Change_Procurement_Documents_Date import parse_change_procurement_documents_date, merge_change_procurement_documents_date
 from converters.BT_720_Tender import parse_tender_value, merge_tender_value
@@ -4466,36 +4467,96 @@ def main(xml_path, ocid_prefix):
         logger.error(f"BT-644-Lot: Error processing Prize Value data: {str(e)}")
 
     # Parse and merge BT-65-Lot Subcontracting Obligation
-    subcontracting_obligation_data = parse_subcontracting_obligation(xml_content)
-    merge_subcontracting_obligation(release_json, subcontracting_obligation_data)
+    try:
+        subcontracting_obligation_data = parse_subcontracting_obligation(xml_content)
+        if subcontracting_obligation_data:
+            merge_subcontracting_obligation(release_json, subcontracting_obligation_data)
+            logger.info("BT-65-Lot: Successfully merged Subcontracting Obligation data")
+        else:
+            logger.info("BT-65-Lot: No Subcontracting Obligation data found")
+    except Exception as e:
+        logger.error(f"BT-65-Lot: Error processing Subcontracting Obligation data: {str(e)}")
 
     # Parse and merge BT-651-Lot Subcontracting Tender Indication
-    subcontracting_tender_indication_data = parse_subcontracting_tender_indication(xml_content)
-    merge_subcontracting_tender_indication(release_json, subcontracting_tender_indication_data)
+    try:
+        subcontracting_tender_indication_data = parse_subcontracting_tender_indication(xml_content)
+        if subcontracting_tender_indication_data:
+            merge_subcontracting_tender_indication(release_json, subcontracting_tender_indication_data)
+            logger.info("BT-651-Lot: Successfully merged Subcontracting Tender Indication data")
+        else:
+            logger.info("BT-651-Lot: No Subcontracting Tender Indication data found")
+    except Exception as e:
+        logger.error(f"BT-651-Lot: Error processing Subcontracting Tender Indication data: {str(e)}")
 
-    # Parse and merge BT-660-LotResult Framework Re-estimated Value
-    framework_reestimated_value_data = parse_framework_reestimated_value(xml_content)
-    merge_framework_reestimated_value(release_json, framework_reestimated_value_data)
+    # Parse and merge BT-660-LotResult
+    try:
+        framework_reestimated_value_data = parse_framework_reestimated_value(xml_content)
+        if framework_reestimated_value_data:
+            merge_framework_reestimated_value(release_json, framework_reestimated_value_data)
+        else:
+            logger.info("BT-660-LotResult: No Framework Re-estimated Value data found")
+    except Exception as e:
+        logger.error(f"BT-660-LotResult: Error processing Framework Re-estimated Value data: {str(e)}")
 
-    # Parse and merge BT-67-Procedure Exclusion Grounds
-    exclusion_grounds_data = parse_exclusion_grounds(xml_content)
-    merge_exclusion_grounds(release_json, exclusion_grounds_data)
+    # Parse and merge BT-67 Exclusion Grounds
+    try:
+        exclusion_grounds_data = parse_exclusion_grounds(xml_content)
+        if exclusion_grounds_data:
+            merge_exclusion_grounds(release_json, exclusion_grounds_data)
+        else:
+            logger.info("BT-67: No exclusion grounds data found")
+    except Exception as e:
+        logger.error(f"BT-67: Error processing exclusion grounds data: {str(e)}")
 
-    # Parse and merge BT-70-Lot Terms Performance
-    terms_performance_data = parse_terms_performance(xml_content)
-    merge_terms_performance(release_json, terms_performance_data)
+    # Parse and merge BT-70-Lot (Performance Terms)
+    try:
+        lot_performance_terms_data = parse_lot_performance_terms(xml_content)
+        if lot_performance_terms_data:
+            merge_lot_performance_terms(release_json, lot_performance_terms_data)
+        else:
+            logger.info("BT-70: No Lot Performance Terms data found")
+    except Exception as e:
+        logger.error(f"BT-70: Error processing Lot Performance Terms data: {str(e)}")
 
-    # Parse and merge BT-702(a)-notice Notice Official Language
-    notice_official_language = parse_notice_official_language(xml_content)
-    merge_notice_official_language(release_json, notice_official_language)
+    # Parse and merge BT-702(a)-notice (Notice Official Language)
+    try:
+        notice_language_data = parse_notice_language(xml_content)
+        if notice_language_data:
+            merge_notice_language(release_json, notice_language_data)
+        else:
+            logger.info("BT-702(a): No Notice Language data found")
+    except Exception as e:
+        logger.error(f"BT-702(a): Error processing Notice Language data: {str(e)}")
 
-    # Parse and merge BT-706-UBO Winner Owner Nationality
-    winner_owner_nationality_data = parse_winner_owner_nationality(xml_content)
-    merge_winner_owner_nationality(release_json, winner_owner_nationality_data)
+    # Parse and merge BT-706-UBO (Winner Owner Nationality)
+    try:
+        ubo_nationalities_data = parse_ubo_nationalities(xml_content)
+        if ubo_nationalities_data:
+            merge_ubo_nationalities(release_json, ubo_nationalities_data)
+        else:
+            logger.info("BT-706: No UBO Nationality data found")
+    except Exception as e:
+        logger.error(f"BT-706: Error processing UBO Nationality data: {str(e)}")
 
-    # Parse and merge BT-707 Documents Restricted Justification
-    documents_restricted_justification_data = parse_documents_restricted_justification(xml_content)
-    merge_documents_restricted_justification(release_json, documents_restricted_justification_data)
+    # Parse and merge BT-707-Lot (Documents Restricted Justification)
+    try:
+        lot_documents_data = parse_lot_documents_restricted_justification(xml_content)
+        if lot_documents_data:
+            merge_lot_documents_restricted_justification(release_json, lot_documents_data)
+        else:
+            logger.info("BT-707: No lot documents restricted justification data found")
+    except Exception as e:
+        logger.error(f"BT-707: Error processing lot documents restricted justification data: {str(e)}")
+
+    # Parse and merge BT-707-Part (Documents Restricted Justification)
+    try:
+        part_documents_data = parse_part_documents_restricted_justification(xml_content)
+        if part_documents_data:
+            merge_part_documents_restricted_justification(release_json, part_documents_data)
+        else:
+            logger.info("BT-707-Part: No part documents restricted justification data found")
+    except Exception as e:
+        logger.error(f"BT-707-Part: Error processing part documents restricted justification data: {str(e)}")
 
     # Parse and merge BT-708 Documents Official Language
     documents_official_language_data = parse_documents_official_language(xml_content)
@@ -4517,9 +4578,16 @@ def main(xml_path, ocid_prefix):
     tender_value_highest_data = parse_tender_value_highest(xml_content)
     merge_tender_value_highest(release_json, tender_value_highest_data)
 
-    # Parse and merge BT-712-LotResult Buyer Review Complainants
-    buyer_review_complainants_data = parse_buyer_review_complainants(xml_content)
-    merge_buyer_review_complainants(release_json, buyer_review_complainants_data)
+    # Parse and merge BT-712-LotResult
+    try:
+        lot_result_complaints_data = parse_lot_result_complaints(xml_content)
+        if lot_result_complaints_data:
+            merge_lot_result_complaints(release_json, lot_result_complaints_data)
+        else:
+            logger.info("No Lot Result Complaints data found")
+    except Exception as e:
+        logger.error(f"Error processing Lot Result Complaints data: {str(e)}")
+
 
     # Parse and merge BT-717-Lot Clean Vehicles Directive
     clean_vehicles_directive_data = parse_clean_vehicles_directive(xml_content)

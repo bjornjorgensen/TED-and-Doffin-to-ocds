@@ -1,5 +1,9 @@
-# converters/BT_702a_Notice_Official_Language.py
+# converters/BT_702a_Notice.py
+
+import logging
 from lxml import etree
+
+logger = logging.getLogger(__name__)
 
 ISO_639_1_MAPPING = {
     "ABK": "ab", "AAR": "aa", "AFR": "af", "AKA": "ak", "SQI": "sq", "AMH": "am", "ARA": "ar",
@@ -30,7 +34,21 @@ ISO_639_1_MAPPING = {
     "YID": "yi", "YOR": "yo", "ZHA": "za", "ZUL": "zu"
 }
 
-def parse_notice_official_language(xml_content):
+def parse_notice_language(xml_content):
+    """
+    Parse the XML content to extract the notice language.
+
+    Args:
+        xml_content (str): The XML content to parse.
+
+    Returns:
+        dict: A dictionary containing the parsed notice language data.
+        None: If no relevant data is found.
+    """
+    # Ensure xml_content is bytes 
+    if isinstance(xml_content, str): 
+        xml_content = xml_content.encode('utf-8')
+
     root = etree.fromstring(xml_content)
     namespaces = {
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
@@ -39,13 +57,26 @@ def parse_notice_official_language(xml_content):
     notice_language_code = root.xpath("/*/cbc:NoticeLanguageCode/text()", namespaces=namespaces)
     
     if notice_language_code:
-        iso_code = notice_language_code[0].upper()
-        return ISO_639_1_MAPPING.get(iso_code, iso_code.lower())
+        iso_639_1_code = ISO_639_1_MAPPING.get(notice_language_code[0].upper())
+        if iso_639_1_code:
+            return {"language": iso_639_1_code}
     
     return None
 
-def merge_notice_official_language(release_json, language_code):
-    if language_code:
-        release_json["language"] = language_code
+def merge_notice_language(release_json, notice_language_data):
+    """
+    Merge the parsed notice language data into the main OCDS release JSON.
 
-    return release_json
+    Args:
+        release_json (dict): The main OCDS release JSON to be updated.
+        notice_language_data (dict): The parsed notice language data to be merged.
+
+    Returns:
+        None: The function updates the release_json in-place.
+    """
+    if not notice_language_data:
+        logger.warning("No Notice Language data to merge")
+        return
+
+    release_json.update(notice_language_data)
+    logger.info(f"Merged Notice Language data: {notice_language_data['language']}")

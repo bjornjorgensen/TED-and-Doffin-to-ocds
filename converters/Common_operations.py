@@ -9,8 +9,12 @@ class NoticeProcessor:
         self.ocid_prefix = ocid_prefix
         self.item_id_counter = 1
 
-    def create_release(self, xml_string):
-        tree = etree.fromstring(xml_string)
+    def create_release(self, xml_content):
+        # Ensure xml_content is bytes
+        if isinstance(xml_content, str):
+            xml_content = xml_content.encode('utf-8')
+
+        tree = etree.fromstring(xml_content)
 
         # Extract notice identifier
         notice_id = tree.xpath('string(/*/cbc:ID)',
