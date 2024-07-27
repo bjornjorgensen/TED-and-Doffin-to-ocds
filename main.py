@@ -411,25 +411,34 @@ from converters.BT_702a_Notice import parse_notice_language, merge_notice_langua
 from converters.BT_706_UBO import parse_ubo_nationalities, merge_ubo_nationalities
 from converters.BT_707_Lot import parse_lot_documents_restricted_justification, merge_lot_documents_restricted_justification
 from converters.BT_707_Part import parse_part_documents_restricted_justification, merge_part_documents_restricted_justification
-from converters.BT_708_Documents_Official_Language import parse_documents_official_language, merge_documents_official_language
-from converters.BT_709_LotResult_Framework_Maximum_Value import parse_framework_maximum_value, merge_framework_maximum_value
-from converters.BT_71_Reserved_Participation import parse_reserved_participation, merge_reserved_participation
-from converters.BT_710_LotResult_Tender_Value_Lowest import parse_tender_value_lowest, merge_tender_value_lowest
-from converters.BT_711_LotResult_Tender_Value_Highest import parse_tender_value_highest, merge_tender_value_highest
+from converters.BT_708_Lot import parse_lot_documents_official_language, merge_lot_documents_official_language
+from converters.BT_708_Part import parse_part_documents_official_language, merge_part_documents_official_language
+from converters.BT_709_LotResult import parse_framework_maximum_value, merge_framework_maximum_value
+from converters.BT_71_Lot import parse_reserved_participation, merge_reserved_participation
+from converters.BT_71_Part import parse_reserved_participation_part, merge_reserved_participation_part
+from converters.BT_710_LotResult import parse_tender_value_lowest, merge_tender_value_lowest
+from converters.BT_711_LotResult import parse_tender_value_highest, merge_tender_value_highest
 from converters.BT_712_LotResult import parse_lot_result_complaints, merge_lot_result_complaints
-from converters.BT_717_Lot_Clean_Vehicles_Directive import parse_clean_vehicles_directive, merge_clean_vehicles_directive
-from converters.BT_719_Notice_Change_Procurement_Documents_Date import parse_change_procurement_documents_date, merge_change_procurement_documents_date
+from converters.BT_717_Lot import parse_clean_vehicles_directive, merge_clean_vehicles_directive
+from converters.BT_719_notice import parse_procurement_documents_change_date, merge_procurement_documents_change_date
 from converters.BT_720_Tender import parse_tender_value, merge_tender_value
 from converters.BT_721_Contract_Title import parse_contract_title, merge_contract_title
-from converters.BT_722_Contract_EU_Funds_Programme import parse_contract_eu_funds_programme, merge_contract_eu_funds_programme
-from converters.BT_7220_Lot_EU_Funds_Programme import parse_lot_eu_funds_programme, merge_lot_eu_funds_programme
-from converters.BT_723_LotResult_Vehicle_Category import parse_vehicle_category, merge_vehicle_category
-from converters.BT_726_Suitable_For_SMEs import parse_suitable_for_smes, merge_suitable_for_smes
-from converters.BT_727_Place_Performance_Services_Other import parse_place_performance_services_other, merge_place_performance_services_other
-from converters.BT_728_Place_Performance_Additional_Info import parse_place_performance_additional_info, merge_place_performance_additional_info
-from converters.BT_729_Lot_Subcontracting_Obligation_Maximum import parse_subcontracting_obligation_maximum, merge_subcontracting_obligation_maximum
-from converters.BT_732_Lot_Security_Clearance_Description import parse_security_clearance_description, merge_security_clearance_description
-from converters.BT_733_Award_Criteria_Order_Justification import parse_award_criteria_order_justification, merge_award_criteria_order_justification
+from converters.BT_722_Contract import parse_contract_eu_funds, merge_contract_eu_funds
+from converters.BT_7220_Lot import parse_lot_eu_funds, merge_lot_eu_funds
+from converters.BT_723_LotResult import parse_vehicle_category, merge_vehicle_category
+from converters.BT_726_Lot import parse_lot_sme_suitability, merge_lot_sme_suitability
+from converters.BT_726_LotsGroup import parse_lots_group_sme_suitability, merge_lots_group_sme_suitability
+from converters.BT_726_Part import parse_part_sme_suitability, merge_part_sme_suitability
+from converters.BT_727_Lot import parse_lot_place_performance, merge_lot_place_performance
+from converters.BT_727_Part import parse_part_place_performance, merge_part_place_performance
+from converters.BT_727_Procedure import parse_procedure_place_performance, merge_procedure_place_performance
+from converters.BT_728_Lot import parse_lot_place_performance_additional, merge_lot_place_performance_additional
+from converters.BT_728_Part import parse_part_place_performance_additional, merge_part_place_performance_additional
+from converters.BT_728_Procedure import parse_procedure_place_performance_additional, merge_procedure_place_performance_additional
+from converters.BT_729_Lot import parse_lot_subcontracting_obligation_maximum, merge_lot_subcontracting_obligation_maximum
+from converters.BT_732_Lot import parse_lot_security_clearance_description, merge_lot_security_clearance_description
+from converters.BT_733_Lot import parse_lot_award_criteria_order_justification, merge_lot_award_criteria_order_justification
+from converters.BT_733_LotsGroup import parse_lots_group_award_criteria_order_justification, merge_lots_group_award_criteria_order_justification
 from converters.BT_734_Award_Criterion_Name import parse_award_criterion_name, merge_award_criterion_name
 from converters.BT_735_CVD_Contract_Type import parse_cvd_contract_type, merge_cvd_contract_type
 from converters.BT_736_Reserved_Execution import parse_reserved_execution, merge_reserved_execution
@@ -4558,25 +4567,79 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"BT-707-Part: Error processing part documents restricted justification data: {str(e)}")
 
-    # Parse and merge BT-708 Documents Official Language
-    documents_official_language_data = parse_documents_official_language(xml_content)
-    merge_documents_official_language(release_json, documents_official_language_data)
+    # Parse and merge BT-708-Lot (Documents Official Language)
+    try:
+        lot_documents_language_data = parse_lot_documents_official_language(xml_content)
+        if lot_documents_language_data:
+            merge_lot_documents_official_language(release_json, lot_documents_language_data)
+        else:
+            logger.info("No lot documents official language data found")
+    except Exception as e:
+        logger.error(f"Error processing lot documents official language data: {str(e)}")
 
-    # Parse and merge BT-709-LotResult Framework Maximum Value
-    framework_maximum_value_data = parse_framework_maximum_value(xml_content)
-    merge_framework_maximum_value(release_json, framework_maximum_value_data)
+    # Parse and merge BT-708-Part (Documents Official Language)
+    try:
+        part_documents_language_data = parse_part_documents_official_language(xml_content)
+        if part_documents_language_data:
+            merge_part_documents_official_language(release_json, part_documents_language_data)
+        else:
+            logger.info("No part documents official language data found")
+    except Exception as e:
+        logger.error(f"Error processing part documents official language data: {str(e)}")
 
-    # Parse and merge BT-71 Reserved Participation
-    reserved_participation_data = parse_reserved_participation(xml_content)
-    merge_reserved_participation(release_json, reserved_participation_data)
+    # Parse and merge BT-709-LotResult (Framework Maximum Value)
+    try:
+        framework_max_value_data = parse_framework_maximum_value(xml_content)
+        if framework_max_value_data:
+            merge_framework_maximum_value(release_json, framework_max_value_data)
+        else:
+            logger.info("BT-709: No framework maximum value data found")
+    except Exception as e:
+        logger.error(f"BT-709: Error processing framework maximum value data: {str(e)}")
 
-    # Parse and merge BT-710-LotResult Tender Value Lowest
-    tender_value_lowest_data = parse_tender_value_lowest(xml_content)
-    merge_tender_value_lowest(release_json, tender_value_lowest_data)
+    # Parse and merge BT-71-Lot (Reserved Participation)
+    try:
+        reserved_participation_data = parse_reserved_participation(xml_content)
+        if reserved_participation_data:
+            merge_reserved_participation(release_json, reserved_participation_data)
+            logger.info("BT-71-Lot: Successfully merged reserved participation data")
+        else:
+            logger.info("BT-71-Lot: No reserved participation data found")
+    except Exception as e:
+        logger.error(f"BT-71-Lot: Error processing reserved participation data: {str(e)}")
 
-    # Parse and merge BT-711-LotResult Tender Value Highest
-    tender_value_highest_data = parse_tender_value_highest(xml_content)
-    merge_tender_value_highest(release_json, tender_value_highest_data)
+    # Parse and merge BT-71-Part (Reserved Participation)
+    try:
+        reserved_participation_data = parse_reserved_participation_part(xml_content)
+        if reserved_participation_data:
+            merge_reserved_participation_part(release_json, reserved_participation_data)
+            logger.info("BT-71-Part: Successfully merged reserved participation data")
+        else:
+            logger.info("BT-71-Part: No reserved participation data found")
+    except Exception as e:
+        logger.error(f"BT-71-Part: Error processing reserved participation data: {str(e)}")
+
+    # Parse and merge BT-710-LotResult (Tender Value Lowest)
+    try:
+        tender_value_lowest_data = parse_tender_value_lowest(xml_content)
+        if tender_value_lowest_data:
+            merge_tender_value_lowest(release_json, tender_value_lowest_data)
+            logger.info("BT-710-LotResult: Successfully merged Tender Value Lowest data")
+        else:
+            logger.info("BT-710-LotResult: No Tender Value Lowest data found")
+    except Exception as e:
+        logger.error(f"BT-710-LotResult: Error processing Tender Value Lowest data: {str(e)}")
+
+    # Parse and merge BT-711-LotResult (Tender Value Highest)
+    try:
+        tender_value_highest_data = parse_tender_value_highest(xml_content)
+        if tender_value_highest_data:
+            merge_tender_value_highest(release_json, tender_value_highest_data)
+            logger.info("BT-711-LotResult: Successfully merged Tender Value Highest data")
+        else:
+            logger.info("BT-711-LotResult: No Tender Value Highest data found")
+    except Exception as e:
+        logger.error(f"BT-711-LotResult: Error processing Tender Value Highest data: {str(e)}")
 
     # Parse and merge BT-712-LotResult
     try:
@@ -4588,66 +4651,206 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Lot Result Complaints data: {str(e)}")
 
+    # Parse and merge BT-717-Lot (Clean Vehicles Directive)
+    try:
+        clean_vehicles_directive_data = parse_clean_vehicles_directive(xml_content)
+        if clean_vehicles_directive_data:
+            merge_clean_vehicles_directive(release_json, clean_vehicles_directive_data)
+            logger.info("BT-717-Lot: Successfully merged Clean Vehicles Directive data")
+        else:
+            logger.info("BT-717-Lot: No Clean Vehicles Directive data found")
+    except Exception as e:
+        logger.error(f"BT-717-Lot: Error processing Clean Vehicles Directive data: {str(e)}")
 
-    # Parse and merge BT-717-Lot Clean Vehicles Directive
-    clean_vehicles_directive_data = parse_clean_vehicles_directive(xml_content)
-    merge_clean_vehicles_directive(release_json, clean_vehicles_directive_data)
+    # Parse and merge BT-719-notice
+    try:
+        change_date_data = parse_procurement_documents_change_date(xml_content)
+        if change_date_data:
+            merge_procurement_documents_change_date(release_json, change_date_data)
+        else:
+            logger.info("No procurement documents change date data found")
+    except Exception as e:
+        logger.error(f"Error processing procurement documents change date data: {str(e)}")
 
-    # Parse and merge BT-719-notice Change Procurement Documents Date
-    change_procurement_documents_date_data = parse_change_procurement_documents_date(xml_content)
-    merge_change_procurement_documents_date(release_json, change_procurement_documents_date_data)
+    # Parse and merge BT-720-Tender
+    try:
+        tender_value_data = parse_tender_value(xml_content)
+        if tender_value_data:
+            merge_tender_value(release_json, tender_value_data)
+        else:
+            logger.info("No tender value data found")
+    except Exception as e:
+        logger.error(f"Error processing tender value data: {str(e)}")
 
-    # Parse and merge BT-720-Tender Tender Value
-    logger.info("Processing BT-720-Tender: Tender Value")
-    tender_value_data = parse_tender_value(xml_content)
-    if tender_value_data:
-        merge_tender_value(release_json, tender_value_data)
-    else:
-        logger.warning("No Tender Value data found")
+    # Parse and merge BT-721-Contract
+    try:
+        contract_title_data = parse_contract_title(xml_content)
+        if contract_title_data:
+            merge_contract_title(release_json, contract_title_data)
+        else:
+            logger.info("BT-721: No contract title data found")
+    except Exception as e:
+        logger.error(f"BT-721: Error processing contract title data: {str(e)}")
 
-    # Parse and merge BT-721-Contract Title
-    contract_title_data = parse_contract_title(xml_content)
-    merge_contract_title(release_json, contract_title_data)
+    # Parse and merge BT-722-Contract
+    try:
+        contract_eu_funds_data = parse_contract_eu_funds(xml_content)
+        if contract_eu_funds_data:
+            merge_contract_eu_funds(release_json, contract_eu_funds_data)
+        else:
+            logger.info("No contract EU funds data found")
+    except Exception as e:
+        logger.error(f"Error processing contract EU funds data: {str(e)}")
 
-    # Parse and merge BT-722-Contract EU Funds Programme
-    logger.info("Processing BT-722-Contract: EU Funds Programme")
-    contract_eu_funds_data = parse_contract_eu_funds_programme(xml_content)
-    if contract_eu_funds_data:
-        merge_contract_eu_funds_programme(release_json, contract_eu_funds_data)
-    else:
-        logger.warning("No Contract EU Funds Programme data found")
+    # Parse and merge BT-7220-Lot
+    try:
+        lot_eu_funds_data = parse_lot_eu_funds(xml_content)
+        if lot_eu_funds_data:
+            merge_lot_eu_funds(release_json, lot_eu_funds_data)
+        else:
+            logger.info("BT-7220: No lot EU funds data found")
+    except Exception as e:
+        logger.error(f"BT-7220: Error processing lot EU funds data: {str(e)}")
 
-    # Parse and merge BT-7220-Lot EU Funds Programme
-    lot_eu_funds_programme_data = parse_lot_eu_funds_programme(xml_content)
-    merge_lot_eu_funds_programme(release_json, lot_eu_funds_programme_data)
+    # Parse and merge BT-723-LotResult
+    try:
+        vehicle_category_data = parse_vehicle_category(xml_content)
+        if vehicle_category_data:
+            merge_vehicle_category(release_json, vehicle_category_data)
+        else:
+            logger.info("BT-723: No vehicle category data found")
+    except Exception as e:
+        logger.error(f"BT-723: Error processing vehicle category data: {str(e)}")
 
-    # Parse and merge BT-723-LotResult Vehicle Category
-    vehicle_category_data = parse_vehicle_category(xml_content)
-    merge_vehicle_category(release_json, vehicle_category_data)
+    # Parse and merge BT-726-Lot
+    try:
+        lot_sme_suitability_data = parse_lot_sme_suitability(xml_content)
+        if lot_sme_suitability_data:
+            merge_lot_sme_suitability(release_json, lot_sme_suitability_data)
+        else:
+            logger.info("BT-726: No lot SME suitability data found")
+    except Exception as e:
+        logger.error(f"BT-726: Error processing lot SME suitability data: {str(e)}")
+        
+    # Parse and merge BT-726-LotsGroup
+    try:
+        lots_group_sme_suitability_data = parse_lots_group_sme_suitability(xml_content)
+        if lots_group_sme_suitability_data:
+            merge_lots_group_sme_suitability(release_json, lots_group_sme_suitability_data)
+        else:
+            logger.info("T-726-LotsGroup: No lot group SME suitability data found")
+    except Exception as e:
+        logger.error(f"T-726-LotsGroup: Error processing lot group SME suitability data: {str(e)}")
 
-    # Parse and merge BT-726 Suitable For SMEs
-    suitable_for_smes_data = parse_suitable_for_smes(xml_content)
-    merge_suitable_for_smes(release_json, suitable_for_smes_data)
+    # Parse and merge BT-726-Part
+    try:
+        part_sme_suitability_data = parse_part_sme_suitability(xml_content)
+        if part_sme_suitability_data:
+            merge_part_sme_suitability(release_json, part_sme_suitability_data)
+        else:
+            logger.info("BT-726-Part: No procurement part SME suitability data found")
+    except Exception as e:
+        logger.error(f"BT-726-Part: Error processing procurement part SME suitability data: {str(e)}")
 
-    # Parse and merge BT-727 Place Performance Services Other
-    place_performance_services_other_data = parse_place_performance_services_other(xml_content)
-    merge_place_performance_services_other(release_json, place_performance_services_other_data)
+    # Parse and merge BT-727-Lot
+    try:
+        lot_place_performance_data = parse_lot_place_performance(xml_content)
+        if lot_place_performance_data:
+            merge_lot_place_performance(release_json, lot_place_performance_data)
+        else:
+            logger.info("BT-727-Lot: No lot place of performance data found")
+    except Exception as e:
+        logger.error(f"BT-727-Lot: Error processing lot place of performance data: {str(e)}")
 
-    # Parse and merge BT-728 Place Performance Additional Information
-    place_performance_additional_info_data = parse_place_performance_additional_info(xml_content)
-    merge_place_performance_additional_info(release_json, place_performance_additional_info_data)
+    # Parse and merge BT-727-Part
+    try:
+        part_place_performance_data = parse_part_place_performance(xml_content)
+        if part_place_performance_data:
+            merge_part_place_performance(release_json, part_place_performance_data)
+        else:
+            logger.info("BT-727-Part: No procurement part place of performance data found")
+    except Exception as e:
+        logger.error(f"BT-727-Part: Error processing procurement part place of performance data: {str(e)}")
 
-    # Parse and merge BT-729-Lot Subcontracting Obligation Maximum
-    subcontracting_obligation_maximum_data = parse_subcontracting_obligation_maximum(xml_content)
-    merge_subcontracting_obligation_maximum(release_json, subcontracting_obligation_maximum_data)
+    # Parse and merge BT-727-Procedure
+    try:
+        procedure_place_performance_data = parse_procedure_place_performance(xml_content)
+        if procedure_place_performance_data:
+            merge_procedure_place_performance(release_json, procedure_place_performance_data)
+        else:
+            logger.info("BT-727-Procedure: No procurement procedure place of performance data found")
+    except Exception as e:
+        logger.error(f"BT-727-Procedure: Error processing procurement procedure place of performance data: {str(e)}")
 
-    # Parse and merge BT-732-Lot Security Clearance Description
-    security_clearance_description_data = parse_security_clearance_description(xml_content)
-    merge_security_clearance_description(release_json, security_clearance_description_data)
+    # Parse and merge BT-728-Lot
+    try:
+        lot_place_performance_additional_data = parse_lot_place_performance_additional(xml_content)
+        if lot_place_performance_additional_data:
+            merge_lot_place_performance_additional(release_json, lot_place_performance_additional_data)
+        else:
+            logger.info("BT-728-Lot: No additional lot place of performance data found")
+    except Exception as e:
+        logger.error(f"BT-728-Lot: Error processing additional lot place of performance data: {str(e)}")
 
-    # Parse and merge BT-733 Award Criteria Order Justification
-    award_criteria_order_justification_data = parse_award_criteria_order_justification(xml_content)
-    merge_award_criteria_order_justification(release_json, award_criteria_order_justification_data)
+    # Parse and merge BT-728-Part
+    try:
+        part_place_performance_additional_data = parse_part_place_performance_additional(xml_content)
+        if part_place_performance_additional_data:
+            merge_part_place_performance_additional(release_json, part_place_performance_additional_data)
+        else:
+            logger.info("BT-728-Part: No additional procurement part place of performance data found")
+    except Exception as e:
+        logger.error(f"BT-728-Part: Error processing additional procurement part place of performance data: {str(e)}")
+
+    # Parse and merge BT-728-Procedure
+    try:
+        procedure_place_performance_additional_data = parse_procedure_place_performance_additional(xml_content)
+        if procedure_place_performance_additional_data:
+            merge_procedure_place_performance_additional(release_json, procedure_place_performance_additional_data)
+        else:
+            logger.info("BT-728-Procedure: No additional procurement procedure place of performance data found")
+    except Exception as e:
+        logger.error(f"BT-728-Procedure: Error processing additional procurement procedure place of performance data: {str(e)}")
+
+    # Parse and merge BT-729-Lot
+    try:
+        lot_subcontracting_obligation_maximum_data = parse_lot_subcontracting_obligation_maximum(xml_content)
+        if lot_subcontracting_obligation_maximum_data:
+            merge_lot_subcontracting_obligation_maximum(release_json, lot_subcontracting_obligation_maximum_data)
+        else:
+            logger.info("BT-729-Lot: No lot subcontracting obligation maximum percentage data found")
+    except Exception as e:
+        logger.error(f"BT-729-Lot: Error processing lot subcontracting obligation maximum percentage data: {str(e)}")
+
+    # Parse and merge BT-732-Lot
+    try:
+        lot_security_clearance_description_data = parse_lot_security_clearance_description(xml_content)
+        if lot_security_clearance_description_data:
+            merge_lot_security_clearance_description(release_json, lot_security_clearance_description_data)
+        else:
+            logger.info("BT-732-Lot: No lot security clearance description data found")
+    except Exception as e:
+        logger.error(f"BT-732-Lot: Error processing lot security clearance description data: {str(e)}")
+
+    # Parse and merge BT-733-Lot
+    try:
+        lot_award_criteria_order_justification_data = parse_lot_award_criteria_order_justification(xml_content)
+        if lot_award_criteria_order_justification_data:
+            merge_lot_award_criteria_order_justification(release_json, lot_award_criteria_order_justification_data)
+        else:
+            logger.info("BT-733-Lot: No lot award criteria order justification data found")
+    except Exception as e:
+        logger.error(f"BT-733-Lot: Error processing lot award criteria order justification data: {str(e)}")
+
+    # Parse and merge BT-733-LotsGroup
+    try:
+        lots_group_award_criteria_order_justification_data = parse_lots_group_award_criteria_order_justification(xml_content)
+        if lots_group_award_criteria_order_justification_data:
+            merge_lots_group_award_criteria_order_justification(release_json, lots_group_award_criteria_order_justification_data)
+        else:
+            logger.info("BT-733-LotsGroup: No lot group award criteria order justification data found")
+    except Exception as e:
+        logger.error(f"BT-733-LotsGroup: Error processing lot group award criteria order justification data: {str(e)}")
 
     # Parse and merge BT-734 Award Criterion Name
     award_criterion_name_data = parse_award_criterion_name(xml_content)

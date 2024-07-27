@@ -1,4 +1,4 @@
-# tests/test_BT_711_LotResult.py
+# tests/test_BT_721_Contract.py
 
 import pytest
 import json
@@ -9,7 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
-def test_bt_711_lot_result_integration(tmp_path):
+def test_bt_721_contract_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -21,11 +21,15 @@ def test_bt_711_lot_result_integration(tmp_path):
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
                         <efac:NoticeResult>
+                            <efac:SettledContract>
+                                <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+                                <cbc:Title languageID="ENG">My contract title</cbc:Title>
+                            </efac:SettledContract>
                             <efac:LotResult>
-                                <cbc:HigherTenderAmount currencyID="EUR">456</cbc:HigherTenderAmount>
-                                <efac:TenderLot>
-                                    <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
-                                </efac:TenderLot>
+                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
+                                <efac:SettledContract>
+                                    <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+                                </efac:SettledContract>
                             </efac:LotResult>
                         </efac:NoticeResult>
                     </efext:EformsExtension>
@@ -34,7 +38,7 @@ def test_bt_711_lot_result_integration(tmp_path):
         </ext:UBLExtensions>
     </root>
     """
-    xml_file = tmp_path / "test_input_tender_value_highest.xml"
+    xml_file = tmp_path / "test_input_contract_title.xml"
     xml_file.write_text(xml_content)
 
     main(str(xml_file), "ocds-test-prefix")
@@ -42,15 +46,13 @@ def test_bt_711_lot_result_integration(tmp_path):
     with open('output.json', 'r') as f:
         result = json.load(f)
 
-    assert "bids" in result, "Expected 'bids' in result"
-    assert "statistics" in result["bids"], "Expected 'statistics' in bids"
-    assert len(result["bids"]["statistics"]) == 1, f"Expected 1 statistic, got {len(result['bids']['statistics'])}"
+    assert "contracts" in result, "Expected 'contracts' in result"
+    assert len(result["contracts"]) == 1, f"Expected 1 contract, got {len(result['contracts'])}"
 
-    statistic = result["bids"]["statistics"][0]
-    assert statistic["measure"] == "highestValidBidValue", f"Expected measure 'highestValidBidValue', got {statistic['measure']}"
-    assert statistic["value"] == 456, f"Expected value 456, got {statistic['value']}"
-    assert statistic["currency"] == "EUR", f"Expected currency 'EUR', got {statistic['currency']}"
-    assert statistic["relatedLot"] == "LOT-0001", f"Expected relatedLot 'LOT-0001', got {statistic['relatedLot']}"
+    contract = result["contracts"][0]
+    assert contract["id"] == "CON-0001", f"Expected contract id 'CON-0001', got {contract['id']}"
+    assert contract["title"] == "My contract title", f"Expected contract title 'My contract title', got {contract['title']}"
+    assert contract["awardID"] == "RES-0001", f"Expected award id 'RES-0001', got {contract['awardID']}"
 
 if __name__ == "__main__":
     pytest.main()

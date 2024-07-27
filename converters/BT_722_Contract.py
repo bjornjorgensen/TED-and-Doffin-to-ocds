@@ -1,19 +1,19 @@
-# converters/BT_721_Contract.py
+# converters/BT_722_Contract.py
 
 import logging
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
-def parse_contract_title(xml_content):
+def parse_contract_eu_funds(xml_content):
     """
-    Parse the XML content to extract contract title information.
+    Parse the XML content to extract contract EU funds programme information.
 
     Args:
         xml_content (str): The XML content to parse.
 
     Returns:
-        dict: A dictionary containing the parsed contract title data.
+        dict: A dictionary containing the parsed contract EU funds data.
         None: If no relevant data is found.
     """
     # Ensure xml_content is bytes 
@@ -35,12 +35,12 @@ def parse_contract_title(xml_content):
     
     for settled_contract in settled_contracts:
         contract_id = settled_contract.xpath("cbc:ID[@schemeName='contract']/text()", namespaces=namespaces)
-        contract_title = settled_contract.xpath("cbc:Title/text()", namespaces=namespaces)
+        funding_programs = settled_contract.xpath("efac:Funding/cbc:FundingProgramCode[@listName='eu-programme']/text()", namespaces=namespaces)
 
-        if contract_id and contract_title:
+        if contract_id and funding_programs:
             contract = {
                 "id": contract_id[0],
-                "title": contract_title[0]
+                "finance": [{"title": program} for program in funding_programs]
             }
 
             # Find corresponding LotResult
@@ -54,29 +54,33 @@ def parse_contract_title(xml_content):
 
     return result if result["contracts"] else None
 
-def merge_contract_title(release_json, contract_title_data):
+def merge_contract_eu_funds(release_json, contract_eu_funds_data):
     """
-    Merge the parsed contract title data into the main OCDS release JSON.
+    Merge the parsed contract EU funds data into the main OCDS release JSON.
 
     Args:
         release_json (dict): The main OCDS release JSON to be updated.
-        contract_title_data (dict): The parsed contract title data to be merged.
+        contract_eu_funds_data (dict): The parsed contract EU funds data to be merged.
 
     Returns:
         None: The function updates the release_json in-place.
     """
-    if not contract_title_data:
-        logger.warning("No contract title data to merge")
+    if not contract_eu_funds_data:
+        logger.warning("No contract EU funds data to merge")
         return
 
     if "contracts" not in release_json:
         release_json["contracts"] = []
 
-    for new_contract in contract_title_data["contracts"]:
+    for new_contract in contract_eu_funds_data["contracts"]:
         existing_contract = next((contract for contract in release_json["contracts"] if contract["id"] == new_contract["id"]), None)
         if existing_contract:
-            existing_contract.update(new_contract)
+            if "finance" not in existing_contract:
+                existing_contract["finance"] = []
+            existing_contract["finance"].extend(new_contract["finance"])
+            if "awardID" in new_contract:
+                existing_contract["awardID"] = new_contract["awardID"]
         else:
             release_json["contracts"].append(new_contract)
 
-    logger.info(f"Merged contract title data for {len(contract_title_data['contracts'])} contracts")
+    logger.info(f"Merged contract EU funds data for {len(contract_eu_funds_data['contracts'])} contracts")

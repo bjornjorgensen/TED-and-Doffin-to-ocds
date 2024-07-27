@@ -1,1 +1,1 @@
-{"initiationType": "tender", "tender": {"id": "PART-0001", "documents": [{"id": "20210521/CTFD/ENG/7654-02", "accessDetails": "Restricted. Intellectual property rights issues"}]}}
+{"initiationType": "tender", "tender": {"lotGroups": [{"id": "GLO-0001", "awardCriteria": {"orderRationale": "Each criterion is evaluated separately ..."}}]}}
