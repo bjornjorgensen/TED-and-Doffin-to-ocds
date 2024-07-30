@@ -1,12 +1,24 @@
 # converters/BT_98_Lot.py
 
-from lxml import etree
 import logging
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 def parse_tender_validity_deadline(xml_content):
-    logger.info("Parsing BT-98-Lot: Tender Validity Deadline")
+    """
+    Parse the XML content to extract the tender validity deadline for each lot.
+
+    Args:
+        xml_content (str): The XML content to parse.
+
+    Returns:
+        dict: A dictionary containing the parsed tender validity deadline data.
+        None: If no relevant data is found.
+    """
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
+
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
@@ -15,15 +27,14 @@ def parse_tender_validity_deadline(xml_content):
 
     result = {"tender": {"lots": []}}
 
-    lot_elements = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
-    
-    for lot in lot_elements:
+    lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        validity_period = lot.xpath("cac:TenderingTerms/cac:TenderValidityPeriod/cbc:DurationMeasure", namespaces=namespaces)
+        duration_measure = lot.xpath(".//cac:TenderingTerms/cac:TenderValidityPeriod/cbc:DurationMeasure", namespaces=namespaces)
         
-        if validity_period:
-            duration = int(validity_period[0].text)
-            unit_code = validity_period[0].get('unitCode')
+        if duration_measure:
+            value = int(duration_measure[0].text)
+            unit_code = duration_measure[0].get('unitCode')
             
             multiplier = {
                 'DAY': 1,
@@ -31,39 +42,44 @@ def parse_tender_validity_deadline(xml_content):
                 'MONTH': 30,
                 'YEAR': 365
             }.get(unit_code, 1)
-            
-            duration_in_days = duration * multiplier
-            
-            result["tender"]["lots"].append({
+
+            duration_in_days = value * multiplier
+
+            lot_data = {
                 "id": lot_id,
                 "submissionTerms": {
                     "bidValidityPeriod": {
                         "durationInDays": duration_in_days
                     }
                 }
-            })
-            logger.debug(f"Parsed Tender Validity Deadline for lot {lot_id}: {duration_in_days} days")
-        else:
-            logger.debug(f"No Tender Validity Deadline found for lot {lot_id}")
+            }
+            result["tender"]["lots"].append(lot_data)
 
-    return result
+    return result if result["tender"]["lots"] else None
 
-def merge_tender_validity_deadline(release_json, validity_deadline_data):
-    logger.info("Merging BT-98-Lot: Tender Validity Deadline")
-    if not validity_deadline_data["tender"]["lots"]:
-        logger.warning("No Tender Validity Deadline data to merge")
+def merge_tender_validity_deadline(release_json, tender_validity_deadline_data):
+    """
+    Merge the parsed tender validity deadline data into the main OCDS release JSON.
+
+    Args:
+        release_json (dict): The main OCDS release JSON to be updated.
+        tender_validity_deadline_data (dict): The parsed tender validity deadline data to be merged.
+
+    Returns:
+        None: The function updates the release_json in-place.
+    """
+    if not tender_validity_deadline_data:
+        logger.warning("No tender validity deadline data to merge")
         return
 
     tender = release_json.setdefault("tender", {})
-    lots = tender.setdefault("lots", [])
+    existing_lots = tender.setdefault("lots", [])
 
-    for new_lot in validity_deadline_data["tender"]["lots"]:
-        existing_lot = next((lot for lot in lots if lot["id"] == new_lot["id"]), None)
+    for new_lot in tender_validity_deadline_data["tender"]["lots"]:
+        existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
         if existing_lot:
-            existing_lot.setdefault("submissionTerms", {})["bidValidityPeriod"] = new_lot["submissionTerms"]["bidValidityPeriod"]
-            logger.debug(f"Updated Tender Validity Deadline for existing lot {new_lot['id']}")
+            existing_lot.setdefault("submissionTerms", {}).setdefault("bidValidityPeriod", {}).update(new_lot["submissionTerms"]["bidValidityPeriod"])
         else:
-            lots.append(new_lot)
-            logger.debug(f"Added new lot {new_lot['id']} with Tender Validity Deadline")
+            existing_lots.append(new_lot)
 
-    logger.info(f"Merged Tender Validity Deadline for {len(validity_deadline_data['tender']['lots'])} lots")
+    logger.info(f"Merged tender validity deadline data for {len(tender_validity_deadline_data['tender']['lots'])} lots")

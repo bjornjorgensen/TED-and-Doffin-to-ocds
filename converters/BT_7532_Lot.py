@@ -1,8 +1,24 @@
 # converters/BT_7532_Lot.py
 
+import logging
 from lxml import etree
+from typing import Dict, Union, List, Optional
 
-def parse_selection_criteria_threshold(xml_content):
+logger = logging.getLogger(__name__)
+
+def parse_selection_criteria_number_threshold(xml_content: Union[str, bytes]) -> Optional[Dict]:
+    """
+    Parse the XML content to extract the selection criteria number threshold information.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content to parse.
+
+    Returns:
+        Optional[Dict]: A dictionary containing the parsed data, or None if no relevant data is found.
+    """
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
+
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
@@ -13,59 +29,79 @@ def parse_selection_criteria_threshold(xml_content):
         'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
     }
 
-    threshold_mapping = {
+    threshold_mapping: Dict[str, str] = {
         'min-score': 'minimumScore',
         'max-bids': 'maximumBids'
     }
 
-    result = {}
+    result: Dict[str, Dict[str, List[Dict]]] = {"tender": {"lots": []}}
 
-    lot_elements = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
-    for lot in lot_elements:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        criteria = lot.xpath(".//efac:SelectionCriteria", namespaces=namespaces)
+    lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    
+    for lot in lots:
+        lot_id: str = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        criteria = lot.xpath(".//efac:SelectionCriteria[cbc:CalculationExpressionCode[@listName='usage'] = 'used']", namespaces=namespaces)
         
-        lot_criteria = []
+        lot_data: Dict[str, Union[str, Dict[str, List]]] = {
+            "id": lot_id,
+            "selectionCriteria": {
+                "criteria": []
+            }
+        }
+
         for criterion in criteria:
-            usage = criterion.xpath("cbc:CalculationExpressionCode[@listName='usage']/text()", namespaces=namespaces)
-            if usage and usage[0] == 'used':
-                threshold_code = criterion.xpath("efac:CriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efbc:ParameterCode/text()", namespaces=namespaces)
-                if threshold_code:
-                    threshold = threshold_mapping.get(threshold_code[0])
-                    if threshold:
-                        lot_criteria.append(threshold)
-        
-        if lot_criteria:
-            result[lot_id] = lot_criteria
-
-    return result
-
-def merge_selection_criteria_threshold(release_json, criteria_threshold_data):
-    tender = release_json.setdefault("tender", {})
-    lots = tender.setdefault("lots", [])
-
-    for lot_id, thresholds in criteria_threshold_data.items():
-        lot = next((lot for lot in lots if lot.get("id") == lot_id), None)
-        if not lot:
-            lot = {"id": lot_id}
-            lots.append(lot)
-        
-        selection_criteria = lot.setdefault("selectionCriteria", {})
-        existing_criteria = selection_criteria.setdefault("criteria", [])
-
-        for index, threshold in enumerate(thresholds):
-            if index < len(existing_criteria):
-                existing_criterion = existing_criteria[index]
-            else:
-                existing_criterion = {}
-                existing_criteria.append(existing_criterion)
-
-            numbers = existing_criterion.setdefault("numbers", [])
+            criterion_data: Dict[str, List] = {"numbers": []}
+            parameters = criterion.xpath(".//efac:CriterionParameter[efbc:ParameterCode/@listName='number-threshold']", namespaces=namespaces)
             
-            threshold_number = next((n for n in numbers if n.get("type") == "threshold"), None)
-            if threshold_number:
-                threshold_number["threshold"] = threshold
-            else:
-                numbers.append({"type": "threshold", "threshold": threshold})
+            for parameter in parameters:
+                threshold_code: str = parameter.xpath("efbc:ParameterCode/text()", namespaces=namespaces)[0]
+                threshold_value: Optional[str] = threshold_mapping.get(threshold_code)
+                
+                if threshold_value:
+                    criterion_data["numbers"].append({"threshold": threshold_value})
+            
+            if criterion_data["numbers"]:
+                lot_data["selectionCriteria"]["criteria"].append(criterion_data)
 
-    return release_json
+        if lot_data["selectionCriteria"]["criteria"]:
+            result["tender"]["lots"].append(lot_data)
+
+    return result if result["tender"]["lots"] else None
+
+def merge_selection_criteria_number_threshold(release_json: Dict, parsed_data: Optional[Dict]) -> None:
+    """
+    Merge the parsed selection criteria number threshold data into the main OCDS release JSON.
+
+    Args:
+        release_json (Dict): The main OCDS release JSON to be updated.
+        parsed_data (Optional[Dict]): The parsed selection criteria number threshold data to be merged.
+
+    Returns:
+        None: The function updates the release_json in-place.
+    """
+    if not parsed_data:
+        logger.warning("No Selection Criteria Number Threshold data to merge")
+        return
+
+    tender_lots: List[Dict] = release_json.setdefault("tender", {}).setdefault("lots", [])
+
+    for new_lot in parsed_data["tender"]["lots"]:
+        existing_lot = next((lot for lot in tender_lots if lot["id"] == new_lot["id"]), None)
+        if existing_lot:
+            existing_criteria = existing_lot.setdefault("selectionCriteria", {}).setdefault("criteria", [])
+            for new_criterion in new_lot["selectionCriteria"]["criteria"]:
+                existing_criterion = next((c for c in existing_criteria if c.get("id") == new_criterion.get("id")), None)
+                if existing_criterion:
+                    existing_numbers = existing_criterion.setdefault("numbers", [])
+                    for new_number in new_criterion["numbers"]:
+                        existing_number = next((n for n in existing_numbers if n.get("id") == new_number.get("id")), None)
+                        if existing_number:
+                            existing_number.update(new_number)
+                        else:
+                            existing_numbers.append(new_number)
+                else:
+                    existing_criteria.append(new_criterion)
+        else:
+            tender_lots.append(new_lot)
+
+    logger.info(f"Merged Selection Criteria Number Threshold data for {len(parsed_data['tender']['lots'])} lots")

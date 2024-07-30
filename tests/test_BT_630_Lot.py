@@ -1,14 +1,17 @@
 # tests/test_BT_630_Lot.py
 
 import pytest
+from lxml import etree
+from converters.BT_630_Lot import parse_deadline_receipt_expressions, merge_deadline_receipt_expressions
 import json
 import os
 import sys
 
+# Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
-def test_bt_630_lot_integration(tmp_path):
+def test_parse_deadline_receipt_expressions():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -34,7 +37,73 @@ def test_bt_630_lot_integration(tmp_path):
         </cac:ProcurementProjectLot>
     </root>
     """
-    xml_file = tmp_path / "test_input_lot_tender_period.xml"
+    
+    result = parse_deadline_receipt_expressions(xml_content)
+    
+    assert result is not None
+    assert "tender" in result
+    assert "lots" in result["tender"]
+    assert len(result["tender"]["lots"]) == 1
+    assert result["tender"]["lots"][0]["id"] == "LOT-0001"
+    assert result["tender"]["lots"][0]["tenderPeriod"]["endDate"] == "2019-10-28T18:00:00+01:00"
+
+def test_merge_deadline_receipt_expressions():
+    release_json = {
+        "tender": {
+            "lots": [
+                {
+                    "id": "LOT-0001",
+                    "title": "Existing Lot"
+                }
+            ]
+        }
+    }
+    
+    deadline_receipt_expressions_data = {
+        "tender": {
+            "lots": [
+                {
+                    "id": "LOT-0001",
+                    "tenderPeriod": {
+                        "endDate": "2019-10-28T18:00:00+01:00"
+                    }
+                }
+            ]
+        }
+    }
+    
+    merge_deadline_receipt_expressions(release_json, deadline_receipt_expressions_data)
+    
+    assert "tenderPeriod" in release_json["tender"]["lots"][0]
+    assert release_json["tender"]["lots"][0]["tenderPeriod"]["endDate"] == "2019-10-28T18:00:00+01:00"
+
+def test_bt_630_lot_deadline_receipt_expressions_integration(tmp_path):
+    xml_content = """
+    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+          xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+          xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+            <cac:TenderingProcess>
+                <ext:UBLExtensions>
+                    <ext:UBLExtension>
+                        <ext:ExtensionContent>
+                            <efext:EformsExtension>
+                                <efac:InterestExpressionReceptionPeriod>
+                                    <cbc:EndDate>2019-10-28+01:00</cbc:EndDate>
+                                    <cbc:EndTime>18:00:00+01:00</cbc:EndTime>
+                                </efac:InterestExpressionReceptionPeriod>
+                            </efext:EformsExtension>
+                        </ext:ExtensionContent>
+                    </ext:UBLExtension>
+                </ext:UBLExtensions>
+            </cac:TenderingProcess>
+        </cac:ProcurementProjectLot>
+    </root>
+    """
+    xml_file = tmp_path / "test_input_deadline_receipt_expressions.xml"
     xml_file.write_text(xml_content)
 
     main(str(xml_file), "ocds-test-prefix")
@@ -42,16 +111,12 @@ def test_bt_630_lot_integration(tmp_path):
     with open('output.json', 'r') as f:
         result = json.load(f)
 
-    assert "tender" in result, "Expected 'tender' in result"
-    assert "lots" in result["tender"], "Expected 'lots' in tender"
-    assert len(result["tender"]["lots"]) == 1, f"Expected 1 lot, got {len(result['tender']['lots'])}"
-
-    lot = result["tender"]["lots"][0]
-    assert lot["id"] == "LOT-0001", f"Expected lot id 'LOT-0001', got {lot['id']}"
-    assert "tenderPeriod" in lot, "Expected 'tenderPeriod' in lot"
-    assert "endDate" in lot["tenderPeriod"], "Expected 'endDate' in lot tenderPeriod"
-    expected_end_date = "2019-10-28T18:00:00+01:00"
-    assert lot["tenderPeriod"]["endDate"] == expected_end_date, f"Expected end date '{expected_end_date}', got {lot['tenderPeriod']['endDate']}"
+    assert "tender" in result
+    assert "lots" in result["tender"]
+    assert len(result["tender"]["lots"]) == 1
+    assert result["tender"]["lots"][0]["id"] == "LOT-0001"
+    assert "tenderPeriod" in result["tender"]["lots"][0]
+    assert result["tender"]["lots"][0]["tenderPeriod"]["endDate"] == "2019-10-28T18:00:00+01:00"
 
 if __name__ == "__main__":
     pytest.main()

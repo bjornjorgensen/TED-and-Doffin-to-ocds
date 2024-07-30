@@ -1,41 +1,92 @@
 # converters/BT_79_Lot.py
 
+import logging
 from lxml import etree
 
+logger = logging.getLogger(__name__)
+
 def parse_performing_staff_qualification(xml_content):
+    """
+    Parse the XML content to extract the Performing Staff Qualification requirement for each lot.
+
+    Args:
+        xml_content (str): The XML content to parse.
+
+    Returns:
+        dict: A dictionary containing the parsed data in the format:
+              {
+                  "tender": {
+                      "lots": [
+                          {
+                              "id": "lot_id",
+                              "otherRequirements": {
+                                  "requiresStaffNamesAndQualifications": boolean
+                              }
+                          }
+                      ]
+                  }
+              }
+        None: If no relevant data is found.
+    """
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
+    
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
     }
 
-    result = {}
-    lot_elements = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    result = {"tender": {"lots": []}}
 
-    for lot in lot_elements:
+    lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    
+    for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        curricula_code = lot.xpath("cac:TenderingTerms/cbc:RequiredCurriculaCode/text()", namespaces=namespaces)
+        required_curricula_code = lot.xpath("cac:TenderingTerms/cbc:RequiredCurriculaCode/text()", namespaces=namespaces)
         
-        if curricula_code:
-            code = curricula_code[0]
-            if code in ['par-requ', 't-requ']:
-                result[lot_id] = True
-            elif code == 'not-requ':
-                result[lot_id] = False
+        if required_curricula_code:
+            code = required_curricula_code[0]
+            if code in ["par-requ", "t-requ"]:
+                requires_staff = True
+            elif code == "not-requ":
+                requires_staff = False
+            else:
+                continue  # Discard if not one of the specified codes
 
-    return result
+            lot_data = {
+                "id": lot_id,
+                "otherRequirements": {
+                    "requiresStaffNamesAndQualifications": requires_staff
+                }
+            }
+            result["tender"]["lots"].append(lot_data)
+
+    return result if result["tender"]["lots"] else None
 
 def merge_performing_staff_qualification(release_json, staff_qualification_data):
+    """
+    Merge the parsed Performing Staff Qualification data into the main OCDS release JSON.
+
+    Args:
+        release_json (dict): The main OCDS release JSON to be updated.
+        staff_qualification_data (dict): The parsed Performing Staff Qualification data to be merged.
+
+    Returns:
+        None: The function updates the release_json in-place.
+    """
+    if not staff_qualification_data:
+        logger.warning("No Performing Staff Qualification data to merge")
+        return
+
     tender = release_json.setdefault("tender", {})
-    lots = tender.setdefault("lots", [])
+    existing_lots = tender.setdefault("lots", [])
 
-    for lot_id, requires_qualification in staff_qualification_data.items():
-        lot = next((lot for lot in lots if lot.get("id") == lot_id), None)
-        if not lot:
-            lot = {"id": lot_id}
-            lots.append(lot)
-        
-        other_requirements = lot.setdefault("otherRequirements", {})
-        other_requirements["requiresStaffNamesAndQualifications"] = requires_qualification
+    for new_lot in staff_qualification_data["tender"]["lots"]:
+        existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
+        if existing_lot:
+            existing_lot.setdefault("otherRequirements", {}).update(new_lot["otherRequirements"])
+        else:
+            existing_lots.append(new_lot)
 
-    return release_json
+    logger.info(f"Merged Performing Staff Qualification data for {len(staff_qualification_data['tender']['lots'])} lots")

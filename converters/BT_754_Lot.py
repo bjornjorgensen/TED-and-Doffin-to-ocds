@@ -1,44 +1,79 @@
 # converters/BT_754_Lot.py
 
+import logging
 from lxml import etree
+from typing import Dict, Union, Optional
 
-def parse_accessibility(xml_content):
+logger = logging.getLogger(__name__)
+
+def parse_accessibility_criteria(xml_content: Union[str, bytes]) -> Optional[Dict]:
+    """
+    Parse the XML content to extract the accessibility criteria information for each lot.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content to parse.
+
+    Returns:
+        Optional[Dict]: A dictionary containing the parsed data, or None if no relevant data is found.
+    """
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
+
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
     }
 
-    result = {}
+    result: Dict[str, Dict[str, list]] = {"tender": {"lots": []}}
 
-    lot_elements = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
-    for lot in lot_elements:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+    lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    
+    for lot in lots:
+        lot_id: str = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         accessibility_code = lot.xpath("cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='accessibility']/cbc:ProcurementTypeCode/text()", namespaces=namespaces)
         
+        lot_data: Dict[str, Union[str, bool, Optional[str]]] = {
+            "id": lot_id,
+            "hasAccessibilityCriteria": False,
+            "noAccessibilityCriteriaRationale": None
+        }
+
         if accessibility_code:
-            accessibility_data = {}
-            if accessibility_code[0] == 'inc':
-                accessibility_data['hasAccessibilityCriteria'] = True
-            else:
-                accessibility_data['hasAccessibilityCriteria'] = False
-                if accessibility_code[0] == 'n-inc':
-                    accessibility_data['noAccessibilityCriteriaRationale'] = "Procurement is not intended for use by natural persons"
-            
-            result[lot_id] = accessibility_data
+            code = accessibility_code[0]
+            if code == "inc":
+                lot_data["hasAccessibilityCriteria"] = True
+            elif code == "n-inc":
+                lot_data["noAccessibilityCriteriaRationale"] = "Procurement is not intended for use by natural persons"
 
-    return result
+        result["tender"]["lots"].append(lot_data)
 
-def merge_accessibility(release_json, accessibility_data):
-    tender = release_json.setdefault("tender", {})
-    lots = tender.setdefault("lots", [])
+    return result if result["tender"]["lots"] else None
 
-    for lot_id, accessibility_info in accessibility_data.items():
-        lot = next((lot for lot in lots if lot.get("id") == lot_id), None)
-        if not lot:
-            lot = {"id": lot_id}
-            lots.append(lot)
-        
-        lot.update(accessibility_info)
+def merge_accessibility_criteria(release_json: Dict, parsed_data: Optional[Dict]) -> None:
+    """
+    Merge the parsed accessibility criteria data into the main OCDS release JSON.
 
-    return release_json
+    Args:
+        release_json (Dict): The main OCDS release JSON to be updated.
+        parsed_data (Optional[Dict]): The parsed accessibility criteria data to be merged.
+
+    Returns:
+        None: The function updates the release_json in-place.
+    """
+    if not parsed_data:
+        logger.warning("No Accessibility Criteria data to merge")
+        return
+
+    tender_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
+
+    for new_lot in parsed_data["tender"]["lots"]:
+        existing_lot = next((lot for lot in tender_lots if lot["id"] == new_lot["id"]), None)
+        if existing_lot:
+            existing_lot["hasAccessibilityCriteria"] = new_lot["hasAccessibilityCriteria"]
+            if new_lot["noAccessibilityCriteriaRationale"]:
+                existing_lot["noAccessibilityCriteriaRationale"] = new_lot["noAccessibilityCriteriaRationale"]
+        else:
+            tender_lots.append(new_lot)
+
+    logger.info(f"Merged Accessibility Criteria data for {len(parsed_data['tender']['lots'])} lots")

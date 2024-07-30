@@ -1,59 +1,94 @@
 # converters/BT_78_Lot.py
 
+import logging
 from lxml import etree
-from datetime import datetime, timezone
+from utils.date_utils import EndDate
+
+logger = logging.getLogger(__name__)
 
 def parse_security_clearance_deadline(xml_content):
+    """
+    Parse the XML content to extract the Security Clearance Deadline for each lot.
+
+    Args:
+        xml_content (str): The XML content to parse.
+
+    Returns:
+        dict: A dictionary containing the parsed data in the format:
+              {
+                  "tender": {
+                      "lots": [
+                          {
+                              "id": "lot_id",
+                              "milestones": [
+                                  {
+                                      "id": "1",
+                                      "type": "securityClearanceDeadline",
+                                      "dueDate": "iso_formatted_date"
+                                  }
+                              ]
+                          }
+                      ]
+                  }
+              }
+        None: If no relevant data is found.
+    """
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
+    
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
     }
 
-    result = {}
-    lot_elements = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    result = {"tender": {"lots": []}}
 
-    for lot in lot_elements:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        deadline = lot.xpath("cac:TenderingTerms/cbc:LatestSecurityClearanceDate/text()", namespaces=namespaces)
-        
-        if deadline:
-            result[lot_id] = deadline[0]
-
-    return result
-
-def format_date(date_string):
-    try:
-        # Try to parse the date with timezone
-        dt = datetime.fromisoformat(date_string)
-    except ValueError:
-        # If parsing fails, assume it's a date without time
-        dt = datetime.fromisoformat(date_string + 'T23:59:59')
-        dt = dt.replace(tzinfo=timezone.utc)
+    lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
     
-    # Format the datetime to ISO 8601 format
-    return dt.isoformat()
+    for lot in lots:
+        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        security_clearance_date = lot.xpath("cac:TenderingTerms/cbc:LatestSecurityClearanceDate/text()", namespaces=namespaces)
+        
+        if security_clearance_date:
+            lot_data = {
+                "id": lot_id,
+                "milestones": [
+                    {
+                        "id": "1",
+                        "type": "securityClearanceDeadline",
+                        "dueDate": EndDate(security_clearance_date[0])
+                    }
+                ]
+            }
+            result["tender"]["lots"].append(lot_data)
+
+    return result if result["tender"]["lots"] else None
 
 def merge_security_clearance_deadline(release_json, security_clearance_data):
+    """
+    Merge the parsed Security Clearance Deadline data into the main OCDS release JSON.
+
+    Args:
+        release_json (dict): The main OCDS release JSON to be updated.
+        security_clearance_data (dict): The parsed Security Clearance Deadline data to be merged.
+
+    Returns:
+        None: The function updates the release_json in-place.
+    """
     if not security_clearance_data:
-        return release_json
+        logger.warning("No Security Clearance Deadline data to merge")
+        return
 
     tender = release_json.setdefault("tender", {})
-    lots = tender.setdefault("lots", [])
+    existing_lots = tender.setdefault("lots", [])
 
-    for lot_id, deadline in security_clearance_data.items():
-        lot = next((lot for lot in lots if lot.get("id") == lot_id), None)
-        if not lot:
-            lot = {"id": lot_id}
-            lots.append(lot)
-        
-        milestones = lot.setdefault("milestones", [])
-        milestone_id = str(len(milestones) + 1)
-        
-        milestones.append({
-            "id": milestone_id,
-            "type": "securityClearanceDeadline",
-            "dueDate": format_date(deadline)
-        })
+    for new_lot in security_clearance_data["tender"]["lots"]:
+        existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
+        if existing_lot:
+            existing_milestones = existing_lot.setdefault("milestones", [])
+            existing_milestones.extend(new_lot["milestones"])
+        else:
+            existing_lots.append(new_lot)
 
-    return release_json
+    logger.info(f"Merged Security Clearance Deadline data for {len(security_clearance_data['tender']['lots'])} lots")

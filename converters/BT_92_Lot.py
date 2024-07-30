@@ -1,12 +1,36 @@
 # converters/BT_92_Lot.py
 
-from lxml import etree
 import logging
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 def parse_electronic_ordering(xml_content):
-    logger.info("Parsing BT-92-Lot: Electronic Ordering")
+    """
+    Parse the XML content to extract the electronic ordering information for each lot.
+
+    Args:
+        xml_content (str): The XML content to parse.
+
+    Returns:
+        dict: A dictionary containing the parsed electronic ordering data in the format:
+              {
+                  "tender": {
+                      "lots": [
+                          {
+                              "id": "lot_id",
+                              "contractTerms": {
+                                  "hasElectronicOrdering": bool
+                              }
+                          }
+                      ]
+                  }
+              }
+        None: If no relevant data is found.
+    """
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
+        
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
@@ -15,49 +39,46 @@ def parse_electronic_ordering(xml_content):
 
     result = {"tender": {"lots": []}}
 
-    lot_elements = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
-    logger.debug(f"Found {len(lot_elements)} lot elements")
+    lots = root.xpath("//cac:ProcurementProjectLot", namespaces=namespaces)
     
-    for lot in lot_elements:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        electronic_ordering = lot.xpath(
-            "cac:TenderingTerms/cac:PostAwardProcess/cbc:ElectronicOrderUsageIndicator/text()",
-            namespaces=namespaces
-        )
+    for lot in lots:
+        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
+        electronic_ordering = lot.xpath("cac:TenderingTerms/cac:PostAwardProcess/cbc:ElectronicOrderUsageIndicator/text()", namespaces=namespaces)
         
-        if electronic_ordering:
-            has_electronic_ordering = electronic_ordering[0].lower() == 'true'
-            logger.debug(f"Lot {lot_id} has Electronic Ordering: {has_electronic_ordering}")
-            result["tender"]["lots"].append({
-                "id": lot_id,
+        if lot_id and electronic_ordering:
+            lot_data = {
+                "id": lot_id[0],
                 "contractTerms": {
-                    "hasElectronicOrdering": has_electronic_ordering
+                    "hasElectronicOrdering": electronic_ordering[0].lower() == 'true'
                 }
-            })
-        else:
-            logger.debug(f"No Electronic Ordering information found for lot {lot_id}")
+            }
+            result["tender"]["lots"].append(lot_data)
 
-    logger.info(f"Parsed Electronic Ordering for {len(result['tender']['lots'])} lots")
-    return result
+    return result if result["tender"]["lots"] else None
 
 def merge_electronic_ordering(release_json, electronic_ordering_data):
-    logger.info("Merging BT-92-Lot: Electronic Ordering")
-    if not electronic_ordering_data["tender"]["lots"]:
-        logger.warning("No Electronic Ordering data to merge")
+    """
+    Merge the parsed electronic ordering data into the main OCDS release JSON.
+
+    Args:
+        release_json (dict): The main OCDS release JSON to be updated.
+        electronic_ordering_data (dict): The parsed electronic ordering data to be merged.
+
+    Returns:
+        None: The function updates the release_json in-place.
+    """
+    if not electronic_ordering_data:
+        logger.warning("No electronic ordering data to merge")
         return
 
     tender = release_json.setdefault("tender", {})
     lots = tender.setdefault("lots", [])
 
-    for eo_lot in electronic_ordering_data["tender"]["lots"]:
-        lot_id = eo_lot["id"]
-        existing_lot = next((lot for lot in lots if lot["id"] == lot_id), None)
-        
+    for new_lot in electronic_ordering_data["tender"]["lots"]:
+        existing_lot = next((lot for lot in lots if lot["id"] == new_lot["id"]), None)
         if existing_lot:
-            existing_lot.setdefault("contractTerms", {})["hasElectronicOrdering"] = eo_lot["contractTerms"]["hasElectronicOrdering"]
-            logger.debug(f"Updated Electronic Ordering for existing lot {lot_id}")
+            existing_lot.setdefault("contractTerms", {}).update(new_lot["contractTerms"])
         else:
-            lots.append(eo_lot)
-            logger.debug(f"Added new lot {lot_id} with Electronic Ordering information")
+            lots.append(new_lot)
 
-    logger.info(f"Merged Electronic Ordering for {len(electronic_ordering_data['tender']['lots'])} lots")
+    logger.info(f"Merged electronic ordering data for {len(electronic_ordering_data['tender']['lots'])} lots")

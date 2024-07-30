@@ -1,42 +1,58 @@
 # converters/BT_772_Lot.py
 
+import logging
 from lxml import etree
+from typing import Dict, Optional, Union
 
-def parse_late_tenderer_info_description(xml_content):
-    root = etree.fromstring(xml_content)
-    namespaces = {
+logger = logging.getLogger(__name__)
+
+def parse_late_tenderer_info_description(xml_content: Union[str, bytes]) -> Optional[Dict]:
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
+        
+    root: etree._Element = etree.fromstring(xml_content)
+    namespaces: Dict[str, str] = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
     }
 
-    result = {}
-    lot_elements = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    result: Dict[str, Dict] = {"tender": {"lots": []}}
 
-    for lot in lot_elements:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        description = lot.xpath("cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='missing-info-submission']/cbc:Description/text()", namespaces=namespaces)
+    lots: list = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    
+    for lot in lots:
+        lot_id: str = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        description: list = lot.xpath(
+            "cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)]"
+            "/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='missing-info-submission']"
+            "/cbc:Description/text()",
+            namespaces=namespaces
+        )
         
         if description:
-            result[lot_id] = description[0]
+            result["tender"]["lots"].append({
+                "id": lot_id,
+                "submissionMethodDetails": description[0]
+            })
 
-    return result
+    return result if result["tender"]["lots"] else None
 
-def merge_late_tenderer_info_description(release_json, late_info_description_data):
-    if not late_info_description_data:
-        return release_json
+def merge_late_tenderer_info_description(release_json: Dict, late_tenderer_info_description: Optional[Dict]) -> None:
+    if not late_tenderer_info_description:
+        logger.warning("No late tenderer information description to merge")
+        return
 
-    tender = release_json.setdefault("tender", {})
-    lots = tender.setdefault("lots", [])
-
-    for lot_id, description in late_info_description_data.items():
-        lot = next((lot for lot in lots if lot.get("id") == lot_id), None)
-        if not lot:
-            lot = {"id": lot_id}
-            lots.append(lot)
-        
-        if "submissionMethodDetails" in lot:
-            lot["submissionMethodDetails"] += f" {description}"
+    tender: Dict = release_json.setdefault("tender", {})
+    existing_lots: list = tender.setdefault("lots", [])
+    
+    for new_lot in late_tenderer_info_description["tender"]["lots"]:
+        existing_lot: Optional[Dict] = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
+        if existing_lot:
+            if "submissionMethodDetails" in existing_lot:
+                existing_lot["submissionMethodDetails"] += f" {new_lot['submissionMethodDetails']}"
+            else:
+                existing_lot["submissionMethodDetails"] = new_lot["submissionMethodDetails"]
         else:
-            lot["submissionMethodDetails"] = description
+            existing_lots.append(new_lot)
 
-    return release_json
+    logger.info(f"Merged late tenderer information description for {len(late_tenderer_info_description['tender']['lots'])} lots")

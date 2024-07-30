@@ -1,109 +1,115 @@
 # tests/test_BT_97_Lot.py
 
 import pytest
+from lxml import etree
+from converters.BT_97_Lot import parse_submission_language, merge_submission_language
 import json
 import os
-from lxml import etree
 import sys
 
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
-def create_xml_with_languages(lot_id, languages):
-    xml_template = f"""
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Lot">{lot_id}</cbc:ID>
-            <cac:TenderingTerms>
-                {''.join(f'<cac:Language><cbc:ID>{lang}</cbc:ID></cac:Language>' for lang in languages)}
-            </cac:TenderingTerms>
-        </cac:ProcurementProjectLot>
-    </root>
-    """
-    return xml_template
-
-def test_main_with_submission_language(tmp_path):
-    # Create a temporary XML file
-    xml_content = create_xml_with_languages("LOT-0001", ["ENG", "FRA"])
-    xml_file = tmp_path / "test_input.xml"
-    xml_file.write_text(xml_content)
-
-    # Run the main function
-    main(str(xml_file), "ocds-test-prefix")
-
-    # Read the output JSON file
-    with open('output.json', 'r') as f:
-        result = json.load(f)
-
-    # Check the result
-    assert "tender" in result
-    assert "lots" in result["tender"]
-    assert len(result["tender"]["lots"]) == 1
-    assert result["tender"]["lots"][0]["id"] == "LOT-0001"
-    assert "submissionTerms" in result["tender"]["lots"][0]
-    assert "languages" in result["tender"]["lots"][0]["submissionTerms"]
-    assert set(result["tender"]["lots"][0]["submissionTerms"]["languages"]) == {"en", "fr"}
-
-def test_main_with_no_languages(tmp_path):
-    # Create a temporary XML file with no languages
-    xml_content = create_xml_with_languages("LOT-0001", [])
-    xml_file = tmp_path / "test_input_no_languages.xml"
-    xml_file.write_text(xml_content)
-
-    # Run the main function
-    main(str(xml_file), "ocds-test-prefix")
-
-    # Read the output JSON file
-    with open('output.json', 'r') as f:
-        result = json.load(f)
-
-    # Check the result
-    assert "tender" in result
-    assert "lots" in result["tender"]
-    assert len(result["tender"]["lots"]) == 1
-    assert result["tender"]["lots"][0]["id"] == "LOT-0001"
-    assert "submissionTerms" not in result["tender"]["lots"][0] or "languages" not in result["tender"]["lots"][0]["submissionTerms"]
-
-def test_main_with_multiple_lots(tmp_path):
-    # Create a temporary XML file with multiple lots
-    xml_content = f"""
+def test_parse_submission_language():
+    xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
-                <cac:Language><cbc:ID>ENG</cbc:ID></cac:Language>
-                <cac:Language><cbc:ID>FRA</cbc:ID></cac:Language>
+                <cac:Language>
+                    <cbc:ID>FRA</cbc:ID>
+                </cac:Language>
+            </cac:TenderingTerms>
+        </cac:ProcurementProjectLot>
+    </root>
+    """
+    
+    result = parse_submission_language(xml_content)
+    
+    assert result is not None
+    assert "tender" in result
+    assert "lots" in result["tender"]
+    assert len(result["tender"]["lots"]) == 1
+    assert result["tender"]["lots"][0]["id"] == "LOT-0001"
+    assert result["tender"]["lots"][0]["submissionTerms"]["languages"] == ["fr"]
+
+def test_merge_submission_language():
+    release_json = {
+        "tender": {
+            "lots": [
+                {
+                    "id": "LOT-0001",
+                    "title": "Existing Lot"
+                }
+            ]
+        }
+    }
+    
+    submission_language_data = {
+        "tender": {
+            "lots": [
+                {
+                    "id": "LOT-0001",
+                    "submissionTerms": {
+                        "languages": ["fr"]
+                    }
+                }
+            ]
+        }
+    }
+    
+    merge_submission_language(release_json, submission_language_data)
+    
+    assert "submissionTerms" in release_json["tender"]["lots"][0]
+    assert "languages" in release_json["tender"]["lots"][0]["submissionTerms"]
+    assert release_json["tender"]["lots"][0]["submissionTerms"]["languages"] == ["fr"]
+
+def test_bt_97_lot_submission_language_integration(tmp_path):
+    xml_content = """
+    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+            <cac:TenderingTerms>
+                <cac:Language>
+                    <cbc:ID>FRA</cbc:ID>
+                </cac:Language>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0002</cbc:ID>
             <cac:TenderingTerms>
-                <cac:Language><cbc:ID>DEU</cbc:ID></cac:Language>
+                <cac:Language>
+                    <cbc:ID>ENG</cbc:ID>
+                </cac:Language>
+                <cac:Language>
+                    <cbc:ID>DEU</cbc:ID>
+                </cac:Language>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
     </root>
     """
-    xml_file = tmp_path / "test_input_multiple_lots.xml"
+    xml_file = tmp_path / "test_input_submission_language.xml"
     xml_file.write_text(xml_content)
 
-    # Run the main function
     main(str(xml_file), "ocds-test-prefix")
 
-    # Read the output JSON file
     with open('output.json', 'r') as f:
         result = json.load(f)
 
-    # Check the result
     assert "tender" in result
     assert "lots" in result["tender"]
     assert len(result["tender"]["lots"]) == 2
-    assert result["tender"]["lots"][0]["id"] == "LOT-0001"
-    assert set(result["tender"]["lots"][0]["submissionTerms"]["languages"]) == {"en", "fr"}
-    assert result["tender"]["lots"][1]["id"] == "LOT-0002"
-    assert set(result["tender"]["lots"][1]["submissionTerms"]["languages"]) == {"de"}
+
+    lot_1 = next((lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0001"), None)
+    assert lot_1 is not None
+    assert lot_1["submissionTerms"]["languages"] == ["fr"]
+
+    lot_2 = next((lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002"), None)
+    assert lot_2 is not None
+    assert set(lot_2["submissionTerms"]["languages"]) == set(["en", "de"])
 
 if __name__ == "__main__":
     pytest.main()

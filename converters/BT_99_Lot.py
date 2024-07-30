@@ -1,12 +1,24 @@
 # converters/BT_99_Lot.py
 
-from lxml import etree
 import logging
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 def parse_review_deadline_description(xml_content):
-    logger.info("Parsing BT-99-Lot: Review Deadline Description")
+    """
+    Parse the XML content to extract the review deadline description for each lot.
+
+    Args:
+        xml_content (str): The XML content to parse.
+
+    Returns:
+        dict: A dictionary containing the parsed review deadline description data.
+        None: If no relevant data is found.
+    """
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
+
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
@@ -15,39 +27,43 @@ def parse_review_deadline_description(xml_content):
 
     result = {"tender": {"lots": []}}
 
-    lot_elements = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
-    
-    for lot in lot_elements:
+    lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        review_description = lot.xpath("cac:TenderingTerms/cac:AppealTerms/cac:PresentationPeriod/cbc:Description/text()", namespaces=namespaces)
+        description = lot.xpath(".//cac:TenderingTerms/cac:AppealTerms/cac:PresentationPeriod/cbc:Description/text()", namespaces=namespaces)
         
-        if review_description:
-            result["tender"]["lots"].append({
+        if description:
+            lot_data = {
                 "id": lot_id,
-                "reviewDetails": review_description[0]
-            })
-            logger.debug(f"Parsed Review Deadline Description for lot {lot_id}")
-        else:
-            logger.debug(f"No Review Deadline Description found for lot {lot_id}")
+                "reviewDetails": description[0]
+            }
+            result["tender"]["lots"].append(lot_data)
 
-    return result
+    return result if result["tender"]["lots"] else None
 
-def merge_review_deadline_description(release_json, review_deadline_data):
-    logger.info("Merging BT-99-Lot: Review Deadline Description")
-    if not review_deadline_data["tender"]["lots"]:
-        logger.warning("No Review Deadline Description data to merge")
+def merge_review_deadline_description(release_json, review_deadline_description_data):
+    """
+    Merge the parsed review deadline description data into the main OCDS release JSON.
+
+    Args:
+        release_json (dict): The main OCDS release JSON to be updated.
+        review_deadline_description_data (dict): The parsed review deadline description data to be merged.
+
+    Returns:
+        None: The function updates the release_json in-place.
+    """
+    if not review_deadline_description_data:
+        logger.warning("No review deadline description data to merge")
         return
 
     tender = release_json.setdefault("tender", {})
-    lots = tender.setdefault("lots", [])
+    existing_lots = tender.setdefault("lots", [])
 
-    for new_lot in review_deadline_data["tender"]["lots"]:
-        existing_lot = next((lot for lot in lots if lot["id"] == new_lot["id"]), None)
+    for new_lot in review_deadline_description_data["tender"]["lots"]:
+        existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
         if existing_lot:
             existing_lot["reviewDetails"] = new_lot["reviewDetails"]
-            logger.debug(f"Updated Review Deadline Description for existing lot {new_lot['id']}")
         else:
-            lots.append(new_lot)
-            logger.debug(f"Added new lot {new_lot['id']} with Review Deadline Description")
+            existing_lots.append(new_lot)
 
-    logger.info(f"Merged Review Deadline Description for {len(review_deadline_data['tender']['lots'])} lots")
+    logger.info(f"Merged review deadline description data for {len(review_deadline_description_data['tender']['lots'])} lots")

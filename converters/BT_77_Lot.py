@@ -1,40 +1,87 @@
 # converters/BT_77_Lot.py
 
+import logging
 from lxml import etree
+from typing import Dict, Optional, Union
 
-def parse_terms_financial(xml_content):
-    root = etree.fromstring(xml_content)
-    namespaces = {
+logger = logging.getLogger(__name__)
+
+def parse_financial_terms(xml_content: Union[str, bytes]) -> Optional[Dict]:
+    """
+    Parse the XML content to extract the financial terms information for each lot.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content to parse.
+
+    Returns:
+        Optional[Dict]: A dictionary containing the parsed financial terms data in the format:
+              {
+                  "tender": {
+                      "lots": [
+                          {
+                              "id": "lot_id",
+                              "contractTerms": {
+                                  "financialTerms": "financial terms description"
+                              }
+                          }
+                      ]
+                  }
+              }
+        None: If no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
+    """
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
+        
+    root: etree._Element = etree.fromstring(xml_content)
+    namespaces: Dict[str, str] = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
     }
 
-    result = {}
-    lot_elements = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    result: Dict[str, Dict] = {"tender": {"lots": []}}
 
-    for lot in lot_elements:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        financial_terms = lot.xpath("cac:TenderingTerms/cac:PaymentTerms/cbc:Note/text()", namespaces=namespaces)
+    lots: list = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    
+    for lot in lots:
+        lot_id: str = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        financial_terms: list = lot.xpath("cac:TenderingTerms/cac:PaymentTerms/cbc:Note/text()", namespaces=namespaces)
         
         if financial_terms:
-            result[lot_id] = financial_terms[0]
+            result["tender"]["lots"].append({
+                "id": lot_id,
+                "contractTerms": {
+                    "financialTerms": financial_terms[0]
+                }
+            })
 
-    return result
+    return result if result["tender"]["lots"] else None
 
-def merge_terms_financial(release_json, financial_terms_data):
+def merge_financial_terms(release_json: Dict, financial_terms_data: Optional[Dict]) -> None:
+    """
+    Merge the parsed financial terms data into the main OCDS release JSON.
+
+    Args:
+        release_json (Dict): The main OCDS release JSON to be updated.
+        financial_terms_data (Optional[Dict]): The parsed financial terms data to be merged.
+
+    Returns:
+        None: The function updates the release_json in-place.
+    """
     if not financial_terms_data:
-        return release_json
+        logger.warning("No financial terms data to merge")
+        return
 
-    tender = release_json.setdefault("tender", {})
-    lots = tender.setdefault("lots", [])
+    tender: Dict = release_json.setdefault("tender", {})
+    existing_lots: list = tender.setdefault("lots", [])
+    
+    for new_lot in financial_terms_data["tender"]["lots"]:
+        existing_lot: Optional[Dict] = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
+        if existing_lot:
+            existing_lot.setdefault("contractTerms", {}).update(new_lot["contractTerms"])
+        else:
+            existing_lots.append(new_lot)
 
-    for lot_id, terms in financial_terms_data.items():
-        lot = next((lot for lot in lots if lot.get("id") == lot_id), None)
-        if not lot:
-            lot = {"id": lot_id}
-            lots.append(lot)
-        
-        contract_terms = lot.setdefault("contractTerms", {})
-        contract_terms["financialTerms"] = terms
-
-    return release_json
+    logger.info(f"Merged financial terms data for {len(financial_terms_data['tender']['lots'])} lots")

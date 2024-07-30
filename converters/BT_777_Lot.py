@@ -1,47 +1,85 @@
 # converters/BT_777_Lot.py
 
+import logging
 from lxml import etree
 
+logger = logging.getLogger(__name__)
+
 def parse_strategic_procurement_description(xml_content):
+    """
+    Parse the XML content to extract the Strategic Procurement Description for each lot.
+
+    Args:
+        xml_content (str): The XML content to parse.
+
+    Returns:
+        dict: A dictionary containing the parsed data in the format:
+              {
+                  "tender": {
+                      "lots": [
+                          {
+                              "id": "lot_id",
+                              "sustainability": [
+                                  {
+                                      "description": "strategic_procurement_description"
+                                  }
+                              ]
+                          }
+                      ]
+                  }
+              }
+        None: If no relevant data is found.
+    """
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
+    
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
     }
 
-    result = {}
-    lot_elements = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    result = {"tender": {"lots": []}}
 
-    for lot in lot_elements:
+    lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    
+    for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         descriptions = lot.xpath("cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='strategic-procurement']/cbc:ProcurementType/text()", namespaces=namespaces)
         
         if descriptions:
-            result[lot_id] = descriptions
+            lot_data = {
+                "id": lot_id,
+                "sustainability": [{"description": desc} for desc in descriptions]
+            }
+            result["tender"]["lots"].append(lot_data)
 
-    return result
+    return result if result["tender"]["lots"] else None
 
 def merge_strategic_procurement_description(release_json, strategic_procurement_data):
+    """
+    Merge the parsed Strategic Procurement Description data into the main OCDS release JSON.
+
+    Args:
+        release_json (dict): The main OCDS release JSON to be updated.
+        strategic_procurement_data (dict): The parsed Strategic Procurement Description data to be merged.
+
+    Returns:
+        None: The function updates the release_json in-place.
+    """
     if not strategic_procurement_data:
-        return release_json
+        logger.warning("No Strategic Procurement Description data to merge")
+        return
 
     tender = release_json.setdefault("tender", {})
-    lots = tender.setdefault("lots", [])
+    existing_lots = tender.setdefault("lots", [])
 
-    for lot_id, descriptions in strategic_procurement_data.items():
-        lot = next((lot for lot in lots if lot.get("id") == lot_id), None)
-        if not lot:
-            lot = {"id": lot_id}
-            lots.append(lot)
-        
-        sustainability = lot.setdefault("sustainability", [])
-        
-        for description in descriptions:
-            # Check if there's an existing sustainability object without a description
-            existing_sustainability = next((s for s in sustainability if 'description' not in s), None)
-            if existing_sustainability:
-                existing_sustainability['description'] = description
-            else:
-                sustainability.append({"description": description})
+    for new_lot in strategic_procurement_data["tender"]["lots"]:
+        existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
+        if existing_lot:
+            existing_sustainability = existing_lot.setdefault("sustainability", [])
+            existing_sustainability.extend(new_lot["sustainability"])
+        else:
+            existing_lots.append(new_lot)
 
-    return release_json
+    logger.info(f"Merged Strategic Procurement Description data for {len(strategic_procurement_data['tender']['lots'])} lots")

@@ -50,7 +50,7 @@ from converters.BT_134_Lot import parse_lot_public_opening_description, merge_lo
 from converters.BT_135_Procedure import parse_direct_award_justification_rationale, merge_direct_award_justification_rationale
 from converters.BT_1351_Procedure import parse_accelerated_procedure_justification, merge_accelerated_procedure_justification
 from converters.BT_136_Procedure import parse_direct_award_justification_code, merge_direct_award_justification_code
-from converters.BT_137_Lot import parse_lot_identifier, merge_lot_identifier
+from converters.BT_137_Lot import parse_purpose_lot_identifier, merge_purpose_lot_identifier
 from converters.BT_137_LotsGroup import parse_lots_group_identifier, merge_lots_group_identifier
 from converters.BT_137_Part import parse_part_identifier, merge_part_identifier
 from converters.BT_14_Lot import parse_lot_documents_restricted, merge_lot_documents_restricted
@@ -393,7 +393,7 @@ from converters.BT_615_Lot import parse_documents_restricted_url, merge_document
 from converters.BT_615_Part import parse_documents_restricted_url_part, merge_documents_restricted_url_part
 from converters.BT_625_Lot import parse_unit, merge_unit
 from converters.BT_63_Lot import parse_variants, merge_variants
-from converters.BT_630_Lot import parse_lot_tender_period, merge_lot_tender_period
+from converters.BT_630_Lot import parse_deadline_receipt_expressions, merge_deadline_receipt_expressions
 from converters.BT_631_Lot import parse_dispatch_invitation_interest, merge_dispatch_invitation_interest
 from converters.BT_632_Lot import parse_tool_name, merge_tool_name
 from converters.BT_632_Part import parse_tool_name_part, merge_tool_name_part
@@ -463,22 +463,24 @@ from converters.BT_750_Lot import parse_selection_criteria, merge_selection_crit
 from converters.BT_752_Lot_ThresholdNumber import parse_selection_criteria_threshold_number, merge_selection_criteria_threshold_number
 from converters.BT_752_Lot_WeightNumber import parse_selection_criteria_weight_number, merge_selection_criteria_weight_number
 from converters.BT_7531_Lot import parse_selection_criteria_number_weight, merge_selection_criteria_number_weight
-from converters.BT_7532_Lot import parse_selection_criteria_threshold, merge_selection_criteria_threshold
-from converters.BT_754_Lot import parse_accessibility, merge_accessibility
+from converters.BT_7532_Lot import parse_selection_criteria_number_threshold, merge_selection_criteria_number_threshold
+from converters.BT_754_Lot import parse_accessibility_criteria, merge_accessibility_criteria
 from converters.BT_755_Lot import parse_accessibility_justification, merge_accessibility_justification
 from converters.BT_756_Procedure import parse_pin_competition_termination, merge_pin_competition_termination
 from converters.BT_759_LotResult import parse_received_submissions_count, merge_received_submissions_count
 from converters.BT_76_Lot import parse_tenderer_legal_form, merge_tenderer_legal_form
 from converters.BT_760_LotResult import parse_received_submissions_type, merge_received_submissions_type
-from converters.BT_762_notice import parse_change_reason_description, merge_change_reason_description
-from converters.BT_763_Procedure import parse_lots_all_required, merge_lots_all_required
-from converters.BT_764_Lot import parse_submission_electronic_catalogue, merge_submission_electronic_catalogue
-from converters.BT_765_Framework_Agreement import parse_framework_agreement, merge_framework_agreement
-from converters.BT_766_Dynamic_Purchasing_System import parse_dynamic_purchasing_system, merge_dynamic_purchasing_system
+from converters.BT_762_ChangeReasonDescription import parse_change_reason_description, merge_change_reason_description
+from converters.BT_763_LotsAllRequired import parse_lots_all_required, merge_lots_all_required
+from converters.BT_764_SubmissionElectronicCatalogue import parse_submission_electronic_catalogue, merge_submission_electronic_catalogue
+from converters.BT_765_FrameworkAgreement import parse_framework_agreement, merge_framework_agreement
+from converters.BT_765_PartFrameworkAgreement import parse_part_framework_agreement, merge_part_framework_agreement
+from converters.BT_766_DynamicPurchasingSystem import parse_dynamic_purchasing_system, merge_dynamic_purchasing_system
+from converters.BT_766_PartDynamicPurchasingSystem import parse_part_dynamic_purchasing_system, merge_part_dynamic_purchasing_system
 from converters.BT_767_Lot import parse_electronic_auction, merge_electronic_auction
 from converters.BT_769_Lot import parse_multiple_tenders, merge_multiple_tenders
-from converters.BT_77_Lot import parse_terms_financial, merge_terms_financial
-from converters.BT_771_Lot import parse_late_tenderer_information, merge_late_tenderer_information
+from converters.BT_77_Lot import parse_financial_terms, merge_financial_terms
+from converters.BT_771_Lot import parse_late_tenderer_info, merge_late_tenderer_info
 from converters.BT_772_Lot import parse_late_tenderer_info_description, merge_late_tenderer_info_description
 from converters.BT_773_Tender import parse_subcontracting, merge_subcontracting
 from converters.BT_774_Lot import parse_green_procurement, merge_green_procurement
@@ -519,7 +521,8 @@ from converters.OPP_110_111_FiscalLegis import parse_fiscal_legislation, merge_f
 from converters.OPP_112_120_EnvironLegis import parse_environmental_legislation, merge_environmental_legislation
 from converters.OPP_113_130_EmployLegis import parse_employment_legislation, merge_employment_legislation
 from converters.OPP_140_ProcurementDocs import parse_procurement_documents, merge_procurement_documents
-from converters.OPT_155_156_LotResult import parse_vehicle_type_and_numeric, merge_vehicle_type_and_numeric
+from converters.OPT_155_LotResult import parse_vehicle_type, merge_vehicle_type
+from converters.OPT_156_LotResult import parse_vehicle_numeric, merge_vehicle_numeric
 from converters.OPT_160_UBO import parse_ubo_first_name, merge_ubo_first_name
 from converters.OPT_170_Tenderer import parse_tendering_party_leader, merge_tendering_party_leader
 from converters.OPT_200_Organization_Company import parse_organization_technical_identifier, merge_organization_technical_identifier
@@ -949,15 +952,16 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Direct Award Justification Code: {str(e)}")
 
-    # Parse and merge BT-137-Lot
+    # Parse and merge BT-137-Lot Purpose Lot Identifier
     try:
-        lot_data = parse_lot_identifier(xml_content)
-        if lot_data:
-            merge_lot_identifier(release_json, lot_data)
+        purpose_lot_identifier_data = parse_purpose_lot_identifier(xml_content)
+        if purpose_lot_identifier_data:
+            merge_purpose_lot_identifier(release_json, purpose_lot_identifier_data)
+            logger.info("BT-137-Lot: Successfully merged Purpose Lot Identifier data")
         else:
-            logger.info("No lot identifier data found")
+            logger.info("BT-137-Lot: No Purpose Lot Identifier data found")
     except Exception as e:
-        logger.error(f"Error processing lot identifier data: {str(e)}")
+        logger.error(f"BT-137-Lot: Error processing Purpose Lot Identifier data: {str(e)}")
 
     # Parse and merge BT-137-LotsGroup
     try:
@@ -4383,16 +4387,16 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"BT-63-Lot: Error processing Variants data: {str(e)}")
 
-    # Process BT-630-Lot
+    # Parse and merge BT-630-Lot Deadline Receipt Expressions
     try:
-        lot_tender_period_data = parse_lot_tender_period(xml_content)
-        if lot_tender_period_data:
-            merge_lot_tender_period(release_json, lot_tender_period_data)
-            logger.info("BT-630-Lot: Successfully merged Lot Tender Period data")
+        deadline_receipt_expressions_data = parse_deadline_receipt_expressions(xml_content)
+        if deadline_receipt_expressions_data:
+            merge_deadline_receipt_expressions(release_json, deadline_receipt_expressions_data)
+            logger.info("BT-630-Lot: Successfully merged Deadline Receipt Expressions data")
         else:
-            logger.info("BT-630-Lot: No Lot Tender Period data found")
+            logger.info("BT-630-Lot: No Deadline Receipt Expressions data found")
     except Exception as e:
-        logger.error(f"Error processing BT-630-Lot: {str(e)}")
+        logger.error(f"BT-630-Lot: Error processing Deadline Receipt Expressions data: {str(e)}")
 
     # Parse and merge BT-631-Lot (Dispatch Invitation Interest)
     try:
@@ -4908,11 +4912,11 @@ def main(xml_path, ocid_prefix):
         reserved_execution_data = parse_reserved_execution(xml_content)
         if reserved_execution_data:
             merge_reserved_execution(release_json, reserved_execution_data)
-            logger.info("BT-736-Lot: Successfully merged Reserved Execution data for lots")
+            logger.info("BT-736-Lot: Successfully merged Reserved Execution data")
         else:
-            logger.info("BT-736-Lot: No Reserved Execution data found for lots")
+            logger.info("BT-736-Lot: No Reserved Execution data found")
     except Exception as e:
-        logger.error(f"BT-736-Lot: Error processing Reserved Execution data for lots: {str(e)}")
+        logger.error(f"BT-736-Lot: Error processing Reserved Execution data: {str(e)}")
 
     # Parse and merge BT-736-Part Reserved Execution
     try:
@@ -5125,218 +5129,415 @@ def main(xml_path, ocid_prefix):
 
 
     # Parse and merge BT-7532-Lot Selection Criteria Second Stage Invite Number Threshold
-    selection_criteria_threshold_data = parse_selection_criteria_threshold(xml_content)
-    merge_selection_criteria_threshold(release_json, selection_criteria_threshold_data)
+    try:
+        number_threshold_data = parse_selection_criteria_number_threshold(xml_content)
+        if number_threshold_data:
+            merge_selection_criteria_number_threshold(release_json, number_threshold_data)
+            logger.info("BT-7532-Lot: Successfully merged Selection Criteria Number Threshold data")
+        else:
+            logger.info("BT-7532-Lot: No Selection Criteria Number Threshold data found")
+    except Exception as e:
+        logger.error(f"BT-7532-Lot: Error processing Selection Criteria Number Threshold data: {str(e)}")
 
-    # Parse and merge BT-754-Lot Accessibility
-    accessibility_data = parse_accessibility(xml_content)
-    merge_accessibility(release_json, accessibility_data)
+    # Parse and merge BT-754-Lot Accessibility Criteria
+    try:
+        accessibility_criteria_data = parse_accessibility_criteria(xml_content)
+        if accessibility_criteria_data:
+            merge_accessibility_criteria(release_json, accessibility_criteria_data)
+            logger.info("BT-754-Lot: Successfully merged Accessibility Criteria data")
+        else:
+            logger.info("BT-754-Lot: No Accessibility Criteria data found")
+    except Exception as e:
+        logger.error(f"BT-754-Lot: Error processing Accessibility Criteria data: {str(e)}")
 
     # Parse and merge BT-755-Lot Accessibility Justification
-    accessibility_justification_data = parse_accessibility_justification(xml_content)
-    merge_accessibility_justification(release_json, accessibility_justification_data)
+    try:
+        accessibility_justification_data = parse_accessibility_justification(xml_content)
+        if accessibility_justification_data:
+            merge_accessibility_justification(release_json, accessibility_justification_data)
+            logger.info("BT-755-Lot: Successfully merged Accessibility Justification data")
+        else:
+            logger.info("BT-755-Lot: No Accessibility Justification data found")
+    except Exception as e:
+        logger.error(f"BT-755-Lot: Error processing Accessibility Justification data: {str(e)}")
 
     # Parse and merge BT-756-Procedure PIN Competition Termination
-    is_terminated = parse_pin_competition_termination(xml_content)
-    merge_pin_competition_termination(release_json, is_terminated)
+    try:
+        pin_termination_data = parse_pin_competition_termination(xml_content)
+        if pin_termination_data:
+            merge_pin_competition_termination(release_json, pin_termination_data)
+            logger.info("BT-756-Procedure: Successfully merged PIN Competition Termination data")
+        else:
+            logger.info("BT-756-Procedure: No PIN Competition Termination data found or not applicable")
+    except Exception as e:
+        logger.error(f"BT-756-Procedure: Error processing PIN Competition Termination data: {str(e)}")
 
-    # Parse and merge BT-759 Received Submissions Count
-    logger.info("Processing BT-759: Received Submissions Count")
-    statistics_data = parse_received_submissions_count(xml_content)
-    if statistics_data:
-        merge_received_submissions_count(release_json, statistics_data)
-    else:
-        logger.warning("No Received Submissions Count found")
+    # Parse and merge BT-759-LotResult Received Submissions Count
+    try:
+        received_submissions_data = parse_received_submissions_count(xml_content)
+        if received_submissions_data:
+            merge_received_submissions_count(release_json, received_submissions_data)
+            logger.info("BT-759-LotResult: Successfully merged Received Submissions Count data")
+        else:
+            logger.info("BT-759-LotResult: No Received Submissions Count data found")
+    except Exception as e:
+        logger.error(f"BT-759-LotResult: Error processing Received Submissions Count data: {str(e)}")
 
     # Parse and merge BT-76-Lot Tenderer Legal Form Description
-    legal_form_data = parse_tenderer_legal_form(xml_content)
-    merge_tenderer_legal_form(release_json, legal_form_data)
+    try:
+        tenderer_legal_form_data = parse_tenderer_legal_form(xml_content)
+        if tenderer_legal_form_data:
+            merge_tenderer_legal_form(release_json, tenderer_legal_form_data)
+            logger.info("BT-76-Lot: Successfully merged Tenderer Legal Form Description data")
+        else:
+            logger.info("BT-76-Lot: No Tenderer Legal Form Description data found")
+    except Exception as e:
+        logger.error(f"BT-76-Lot: Error processing Tenderer Legal Form Description data: {str(e)}")
 
     # Parse and merge BT-760-LotResult Received Submissions Type
-    submissions_type_data = parse_received_submissions_type(xml_content)
-    merge_received_submissions_type(release_json, submissions_type_data)
+    try:
+        received_submissions_type_data = parse_received_submissions_type(xml_content)
+        if received_submissions_type_data:
+            merge_received_submissions_type(release_json, received_submissions_type_data)
+            logger.info("BT-760-LotResult: Successfully merged Received Submissions Type data")
+        else:
+            logger.info("BT-760-LotResult: No Received Submissions Type data found")
+    except Exception as e:
+        logger.error(f"BT-760-LotResult: Error processing Received Submissions Type data: {str(e)}")
 
     # Parse and merge BT-762-notice Change Reason Description
     try:
-        change_reason_description_data = parse_change_reason_description(xml_content)
-        if change_reason_description_data:
-            merge_change_reason_description(release_json, change_reason_description_data)
+        change_reason_data = parse_change_reason_description(xml_content)
+        if change_reason_data:
+            merge_change_reason_description(release_json, change_reason_data)
+            logger.info("BT-762-notice: Successfully merged Change Reason Description data")
         else:
-            logger.info("No Change Reason Description data found")
+            logger.info("BT-762-notice: No Change Reason Description data found")
     except Exception as e:
-        logger.error(f"Error processing Change Reason Description data: {str(e)}")
+        logger.error(f"BT-762-notice: Error processing Change Reason Description data: {str(e)}")
 
     # Parse and merge BT-763-Procedure Lots All Required
-    is_all_required = parse_lots_all_required(xml_content)
-    merge_lots_all_required(release_json, is_all_required)
+    try:
+        lots_all_required_data = parse_lots_all_required(xml_content)
+        if lots_all_required_data:
+            merge_lots_all_required(release_json, lots_all_required_data)
+            logger.info("BT-763-Procedure: Successfully merged Lots All Required data")
+        else:
+            logger.info("BT-763-Procedure: No Lots All Required data found or not applicable")
+    except Exception as e:
+        logger.error(f"BT-763-Procedure: Error processing Lots All Required data: {str(e)}")
 
     # Parse and merge BT-764-Lot Submission Electronic Catalogue
-    ecatalog_data = parse_submission_electronic_catalogue(xml_content)
-    merge_submission_electronic_catalogue(release_json, ecatalog_data)
+    try:
+        submission_electronic_catalogue_data = parse_submission_electronic_catalogue(xml_content)
+        if submission_electronic_catalogue_data:
+            merge_submission_electronic_catalogue(release_json, submission_electronic_catalogue_data)
+            logger.info("BT-764-Lot: Successfully merged Submission Electronic Catalogue data")
+        else:
+            logger.info("BT-764-Lot: No Submission Electronic Catalogue data found")
+    except Exception as e:
+        logger.error(f"BT-764-Lot: Error processing Submission Electronic Catalogue data: {str(e)}")
 
-    # Parse and merge BT-765 Framework Agreement
-    fa_data = parse_framework_agreement(xml_content)
-    merge_framework_agreement(release_json, fa_data)
+    # Parse and merge BT-765-Lot Framework Agreement
+    try:
+        framework_agreement_data = parse_framework_agreement(xml_content)
+        if framework_agreement_data:
+            merge_framework_agreement(release_json, framework_agreement_data)
+            logger.info("BT-765-Lot: Successfully merged Framework Agreement data")
+        else:
+            logger.info("BT-765-Lot: No Framework Agreement data found")
+    except Exception as e:
+        logger.error(f"BT-765-Lot: Error processing Framework Agreement data: {str(e)}")
 
-    # Parse and merge BT-766 Dynamic Purchasing System
-    dps_data = parse_dynamic_purchasing_system(xml_content)
-    merge_dynamic_purchasing_system(release_json, dps_data)
+    # Parse and merge BT-765-Part Framework Agreement
+    try:
+        part_framework_agreement_data = parse_part_framework_agreement(xml_content)
+        if part_framework_agreement_data:
+            merge_part_framework_agreement(release_json, part_framework_agreement_data)
+            logger.info("BT-765-Part: Successfully merged Part Framework Agreement data")
+        else:
+            logger.info("BT-765-Part: No Part Framework Agreement data found or not applicable")
+    except Exception as e:
+        logger.error(f"BT-765-Part: Error processing Part Framework Agreement data: {str(e)}")
+
+    # Parse and merge BT-766-Lot Dynamic Purchasing System
+    try:
+        dynamic_purchasing_system_data = parse_dynamic_purchasing_system(xml_content)
+        if dynamic_purchasing_system_data:
+            merge_dynamic_purchasing_system(release_json, dynamic_purchasing_system_data)
+            logger.info("BT-766-Lot: Successfully merged Dynamic Purchasing System data")
+        else:
+            logger.info("BT-766-Lot: No Dynamic Purchasing System data found or not applicable")
+    except Exception as e:
+        logger.error(f"BT-766-Lot: Error processing Dynamic Purchasing System data: {str(e)}")
+
+    # Parse and merge BT-766-Part Dynamic Purchasing System
+    try:
+        part_dynamic_purchasing_system_data = parse_part_dynamic_purchasing_system(xml_content)
+        if part_dynamic_purchasing_system_data:
+            merge_part_dynamic_purchasing_system(release_json, part_dynamic_purchasing_system_data)
+            logger.info("BT-766-Part: Successfully merged Part Dynamic Purchasing System data")
+        else:
+            logger.info("BT-766-Part: No Part Dynamic Purchasing System data found or not applicable")
+    except Exception as e:
+        logger.error(f"BT-766-Part: Error processing Part Dynamic Purchasing System data: {str(e)}")
 
     # Parse and merge BT-767-Lot Electronic Auction
-    auction_data = parse_electronic_auction(xml_content)
-    merge_electronic_auction(release_json, auction_data)
+    try:
+        electronic_auction_data = parse_electronic_auction(xml_content)
+        if electronic_auction_data:
+            merge_electronic_auction(release_json, electronic_auction_data)
+            logger.info("BT-767-Lot: Successfully merged Electronic Auction data")
+        else:
+            logger.info("BT-767-Lot: No Electronic Auction data found")
+    except Exception as e:
+        logger.error(f"BT-767-Lot: Error processing Electronic Auction data: {str(e)}")
 
     # Parse and merge BT-769-Lot Multiple Tenders
-    multiple_tenders_data = parse_multiple_tenders(xml_content)
-    merge_multiple_tenders(release_json, multiple_tenders_data)
+    try:
+        multiple_tenders_data = parse_multiple_tenders(xml_content)
+        if multiple_tenders_data:
+            merge_multiple_tenders(release_json, multiple_tenders_data)
+            logger.info("BT-769-Lot: Successfully merged Multiple Tenders data")
+        else:
+            logger.info("BT-769-Lot: No Multiple Tenders data found")
+    except Exception as e:
+        logger.error(f"BT-769-Lot: Error processing Multiple Tenders data: {str(e)}")
 
-    # Parse and merge BT-77-Lot Terms Financial
-    financial_terms_data = parse_terms_financial(xml_content)
-    merge_terms_financial(release_json, financial_terms_data)
+    # Parse and merge BT-77-Lot Financial Terms
+    try:
+        financial_terms_data = parse_financial_terms(xml_content)
+        if financial_terms_data:
+            merge_financial_terms(release_json, financial_terms_data)
+            logger.info("BT-77-Lot: Successfully merged Financial Terms data")
+        else:
+            logger.info("BT-77-Lot: No Financial Terms data found")
+    except Exception as e:
+        logger.error(f"BT-77-Lot: Error processing Financial Terms data: {str(e)}")
 
     # Parse and merge BT-771-Lot Late Tenderer Information
-    late_info_data = parse_late_tenderer_information(xml_content)
-    merge_late_tenderer_information(release_json, late_info_data)
+    try:
+        late_tenderer_info = parse_late_tenderer_info(xml_content)
+        if late_tenderer_info:
+            merge_late_tenderer_info(release_json, late_tenderer_info)
+            logger.info("BT-771-Lot: Successfully merged Late Tenderer Information")
+        else:
+            logger.info("BT-771-Lot: No Late Tenderer Information found")
+    except Exception as e:
+        logger.error(f"BT-771-Lot: Error processing Late Tenderer Information: {str(e)}")
 
     # Parse and merge BT-772-Lot Late Tenderer Information Description
-    late_info_description_data = parse_late_tenderer_info_description(xml_content)
-    merge_late_tenderer_info_description(release_json, late_info_description_data)
+    try:
+        late_tenderer_info_description = parse_late_tenderer_info_description(xml_content)
+        if late_tenderer_info_description:
+            merge_late_tenderer_info_description(release_json, late_tenderer_info_description)
+            logger.info("BT-772-Lot: Successfully merged Late Tenderer Information Description")
+        else:
+            logger.info("BT-772-Lot: No Late Tenderer Information Description found")
+    except Exception as e:
+        logger.error(f"BT-772-Lot: Error processing Late Tenderer Information Description: {str(e)}")
 
     # Parse and merge BT-773-Tender Subcontracting
-    subcontracting_data = parse_subcontracting(xml_content)
-    merge_subcontracting(release_json, subcontracting_data)
+    try:
+        subcontracting_data = parse_subcontracting(xml_content)
+        if subcontracting_data:
+            merge_subcontracting(release_json, subcontracting_data)
+            logger.info("BT-773-Tender: Successfully merged Subcontracting data")
+        else:
+            logger.info("BT-773-Tender: No Subcontracting data found")
+    except Exception as e:
+        logger.error(f"BT-773-Tender: Error processing Subcontracting data: {str(e)}")
     
     # Parse and merge BT-774-Lot Green Procurement
-    green_procurement_data = parse_green_procurement(xml_content)
-    merge_green_procurement(release_json, green_procurement_data)
+    try:
+        green_procurement_data = parse_green_procurement(xml_content)
+        if green_procurement_data:
+            merge_green_procurement(release_json, green_procurement_data)
+            logger.info("BT-774-Lot: Successfully merged Green Procurement data")
+        else:
+            logger.info("BT-774-Lot: No Green Procurement data found")
+    except Exception as e:
+        logger.error(f"BT-774-Lot: Error processing Green Procurement data: {str(e)}")
 
     # Parse and merge BT-775-Lot Social Procurement
-    social_procurement_data = parse_social_procurement(xml_content)
-    merge_social_procurement(release_json, social_procurement_data)
+    try:
+        social_procurement_data = parse_social_procurement(xml_content)
+        if social_procurement_data:
+            merge_social_procurement(release_json, social_procurement_data)
+            logger.info("BT-775-Lot: Successfully merged Social Procurement data")
+        else:
+            logger.info("BT-775-Lot: No Social Procurement data found")
+    except Exception as e:
+        logger.error(f"BT-775-Lot: Error processing Social Procurement data: {str(e)}")
 
     # Parse and merge BT-776-Lot Procurement of Innovation
-    procurement_innovation_data = parse_procurement_innovation(xml_content)
-    merge_procurement_innovation(release_json, procurement_innovation_data)
+    try:
+        procurement_innovation_data = parse_procurement_innovation(xml_content)
+        if procurement_innovation_data:
+            merge_procurement_innovation(release_json, procurement_innovation_data)
+            logger.info("BT-776-Lot: Successfully merged Procurement of Innovation data")
+        else:
+            logger.info("BT-776-Lot: No Procurement of Innovation data found")
+    except Exception as e:
+        logger.error(f"BT-776-Lot: Error processing Procurement of Innovation data: {str(e)}")
 
     # Parse and merge BT-777-Lot Strategic Procurement Description
-    strategic_procurement_data = parse_strategic_procurement_description(xml_content)
-    merge_strategic_procurement_description(release_json, strategic_procurement_data)
+    try:
+        strategic_procurement_data = parse_strategic_procurement_description(xml_content)
+        if strategic_procurement_data:
+            merge_strategic_procurement_description(release_json, strategic_procurement_data)
+            logger.info("BT-777-Lot: Successfully merged Strategic Procurement Description data")
+        else:
+            logger.info("BT-777-Lot: No Strategic Procurement Description data found")
+    except Exception as e:
+        logger.error(f"BT-777-Lot: Error processing Strategic Procurement Description data: {str(e)}")
 
     # Parse and merge BT-78-Lot Security Clearance Deadline
-    security_clearance_data = parse_security_clearance_deadline(xml_content)
-    merge_security_clearance_deadline(release_json, security_clearance_data)
+    try:
+        security_clearance_data = parse_security_clearance_deadline(xml_content)
+        if security_clearance_data:
+            merge_security_clearance_deadline(release_json, security_clearance_data)
+            logger.info("BT-78-Lot: Successfully merged Security Clearance Deadline data")
+        else:
+            logger.info("BT-78-Lot: No Security Clearance Deadline data found")
+    except Exception as e:
+        logger.error(f"BT-78-Lot: Error processing Security Clearance Deadline data: {str(e)}")
 
     # Parse and merge BT-79-Lot Performing Staff Qualification
-    staff_qualification_data = parse_performing_staff_qualification(xml_content)
-    merge_performing_staff_qualification(release_json, staff_qualification_data)
+    try:
+        staff_qualification_data = parse_performing_staff_qualification(xml_content)
+        if staff_qualification_data:
+            merge_performing_staff_qualification(release_json, staff_qualification_data)
+            logger.info("BT-79-Lot: Successfully merged Performing Staff Qualification data")
+        else:
+            logger.info("BT-79-Lot: No Performing Staff Qualification data found")
+    except Exception as e:
+        logger.error(f"BT-79-Lot: Error processing Performing Staff Qualification data: {str(e)}")
     
     # Parse and merge BT-801-Lot Non Disclosure Agreement
-    logger.info("Processing BT-801-Lot: Non Disclosure Agreement")
-    nda_data = parse_non_disclosure_agreement(xml_content)
-    if nda_data:
-        merge_non_disclosure_agreement(release_json, nda_data)
-    else:
-        logger.warning("No Non Disclosure Agreement data found")
+    try:
+        nda_data = parse_non_disclosure_agreement(xml_content)
+        if nda_data:
+            merge_non_disclosure_agreement(release_json, nda_data)
+            logger.info("BT-801-Lot: Successfully merged Non Disclosure Agreement data")
+        else:
+            logger.info("BT-801-Lot: No Non Disclosure Agreement data found")
+    except Exception as e:
+        logger.error(f"BT-801-Lot: Error processing Non Disclosure Agreement data: {str(e)}")
 
     # Parse and merge BT-802-Lot Non Disclosure Agreement Description
-    logger.info("Processing BT-802-Lot: Non Disclosure Agreement Description")
-    nda_description_data = parse_non_disclosure_agreement_description(xml_content)
-    merge_non_disclosure_agreement_description(release_json, nda_description_data)
+    try:
+        nda_description_data = parse_non_disclosure_agreement_description(xml_content)
+        if nda_description_data:
+            merge_non_disclosure_agreement_description(release_json, nda_description_data)
+            logger.info("BT-802-Lot: Successfully merged Non Disclosure Agreement Description data")
+        else:
+            logger.info("BT-802-Lot: No Non Disclosure Agreement Description data found")
+    except Exception as e:
+        logger.error(f"BT-802-Lot: Error processing Non Disclosure Agreement Description data: {str(e)}")
 
     # Parse and merge BT-805-Lot Green Procurement Criteria
-    logger.info("Processing BT-805-Lot: Green Procurement Criteria")
-    gpp_data = parse_green_procurement_criteria(xml_content)
-    merge_green_procurement_criteria(release_json, gpp_data)
+    try:
+        gpp_data = parse_green_procurement_criteria(xml_content)
+        if gpp_data:
+            merge_green_procurement_criteria(release_json, gpp_data)
+            logger.info("BT-805-Lot: Successfully merged Green Procurement Criteria data")
+        else:
+            logger.info("BT-805-Lot: No Green Procurement Criteria data found")
+    except Exception as e:
+        logger.error(f"BT-805-Lot: Error processing Green Procurement Criteria data: {str(e)}")
 
     # Parse and merge BT-88-Procedure Procedure Features
-    logger.info("Processing BT-88-Procedure: Procedure Features")
-    procedure_features_data = parse_procedure_features(xml_content)
-    if procedure_features_data:
-        merge_procedure_features(release_json, procedure_features_data)
-    else:
-        logger.warning("No Procedure Features data found")
+    try:
+        procedure_features_data = parse_procedure_features(xml_content)
+        if procedure_features_data:
+            merge_procedure_features(release_json, procedure_features_data)
+            logger.info("BT-88-Procedure: Successfully merged Procedure Features data")
+        else:
+            logger.info("BT-88-Procedure: No Procedure Features data found")
+    except Exception as e:
+        logger.error(f"BT-88-Procedure: Error processing Procedure Features data: {str(e)}")
 
     # Parse and merge BT-92-Lot Electronic Ordering
-    logger.info("Processing BT-92-Lot: Electronic Ordering")
-    electronic_ordering_data = parse_electronic_ordering(xml_content)
-    merge_electronic_ordering(release_json, electronic_ordering_data)
+    try:
+        electronic_ordering_data = parse_electronic_ordering(xml_content)
+        if electronic_ordering_data:
+            merge_electronic_ordering(release_json, electronic_ordering_data)
+            logger.info("BT-92-Lot: Successfully merged Electronic Ordering data")
+        else:
+            logger.info("BT-92-Lot: No Electronic Ordering data found")
+    except Exception as e:
+        logger.error(f"BT-92-Lot: Error processing Electronic Ordering data: {str(e)}")
 
     # Parse and merge BT-93-Lot Electronic Payment
-    logger.info("Processing BT-93-Lot: Electronic Payment")
-    electronic_payment_data = parse_electronic_payment(xml_content)
-    merge_electronic_payment(release_json, electronic_payment_data)
+    try:
+        electronic_payment_data = parse_electronic_payment(xml_content)
+        if electronic_payment_data:
+            merge_electronic_payment(release_json, electronic_payment_data)
+            logger.info("BT-93-Lot: Successfully merged Electronic Payment data")
+        else:
+            logger.info("BT-93-Lot: No Electronic Payment data found")
+    except Exception as e:
+        logger.error(f"BT-93-Lot: Error processing Electronic Payment data: {str(e)}")
 
     # Parse and merge BT-94-Lot Recurrence
-    logger.info("Processing BT-94-Lot: Recurrence")
-    recurrence_data = parse_recurrence(xml_content)
-    merge_recurrence(release_json, recurrence_data)
+    try:
+        recurrence_data = parse_recurrence(xml_content)
+        if recurrence_data:
+            merge_recurrence(release_json, recurrence_data)
+            logger.info("BT-94-Lot: Successfully merged Recurrence data")
+        else:
+            logger.info("BT-94-Lot: No Recurrence data found")
+    except Exception as e:
+        logger.error(f"BT-94-Lot: Error processing Recurrence data: {str(e)}")
 
     # Parse and merge BT-95-Lot Recurrence Description
-    logger.info("Processing BT-95-Lot: Recurrence Description")
-    recurrence_description_data = parse_recurrence_description(xml_content)
-    merge_recurrence_description(release_json, recurrence_description_data)
+    try:
+        recurrence_description_data = parse_recurrence_description(xml_content)
+        if recurrence_description_data:
+            merge_recurrence_description(release_json, recurrence_description_data)
+            logger.info("BT-95-Lot: Successfully merged Recurrence Description data")
+        else:
+            logger.info("BT-95-Lot: No Recurrence Description data found")
+    except Exception as e:
+        logger.error(f"BT-95-Lot: Error processing Recurrence Description data: {str(e)}")
 
     # Parse and merge BT-97-Lot Submission Language
-    logger.info("Processing BT-97-Lot: Submission Language")
-    submission_language_data = parse_submission_language(xml_content)
-    merge_submission_language(release_json, submission_language_data)
+    try:
+        submission_language_data = parse_submission_language(xml_content)
+        if submission_language_data:
+            merge_submission_language(release_json, submission_language_data)
+            logger.info("BT-97-Lot: Successfully merged Submission Language data")
+        else:
+            logger.info("BT-97-Lot: No Submission Language data found")
+    except Exception as e:
+        logger.error(f"BT-97-Lot: Error processing Submission Language data: {str(e)}")
 
     # Parse and merge BT-98-Lot Tender Validity Deadline
-    logger.info("Processing BT-98-Lot: Tender Validity Deadline")
-    validity_deadline_data = parse_tender_validity_deadline(xml_content)
-    merge_tender_validity_deadline(release_json, validity_deadline_data)
+    try:
+        tender_validity_deadline_data = parse_tender_validity_deadline(xml_content)
+        if tender_validity_deadline_data:
+            merge_tender_validity_deadline(release_json, tender_validity_deadline_data)
+            logger.info("BT-98-Lot: Successfully merged Tender Validity Deadline data")
+        else:
+            logger.info("BT-98-Lot: No Tender Validity Deadline data found")
+    except Exception as e:
+        logger.error(f"BT-98-Lot: Error processing Tender Validity Deadline data: {str(e)}")
 
     # Parse and merge BT-99-Lot Review Deadline Description
-    logger.info("Processing BT-99-Lot: Review Deadline Description")
-    review_deadline_data = parse_review_deadline_description(xml_content)
-    merge_review_deadline_description(release_json, review_deadline_data)
+    try:
+        review_deadline_description_data = parse_review_deadline_description(xml_content)
+        if review_deadline_description_data:
+            merge_review_deadline_description(release_json, review_deadline_description_data)
+            logger.info("BT-99-Lot: Successfully merged Review Deadline Description data")
+        else:
+            logger.info("BT-99-Lot: No Review Deadline Description data found")
+    except Exception as e:
+        logger.error(f"BT-99-Lot: Error processing Review Deadline Description data: {str(e)}")
 
     
 ################################################################OPP
 ##########################################################################
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     # Parse and merge OPP-020 ExtendedDurationIndicator
@@ -5523,51 +5724,27 @@ def main(xml_path, ocid_prefix):
 ##########################################################################
 
 
+    # Parse and merge OPT-155-LotResult Vehicle Type
+    try:
+        vehicle_type_data = parse_vehicle_type(xml_content)
+        if vehicle_type_data:
+            merge_vehicle_type(release_json, vehicle_type_data)
+            logger.info("OPT-155-LotResult: Successfully merged Vehicle Type data")
+        else:
+            logger.info("OPT-155-LotResult: No Vehicle Type data found")
+    except Exception as e:
+        logger.error(f"OPT-155-LotResult: Error processing Vehicle Type data: {str(e)}")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # Parse and merge OPT-155-LotResult Vehicle Type and OPT-156-LotResult Vehicle Numeric
-    logger.info("Processing OPT-155-LotResult and OPT-156-LotResult: Vehicle Type and Numeric")
-    vehicle_data = parse_vehicle_type_and_numeric(xml_content)
-    if vehicle_data:
-        merge_vehicle_type_and_numeric(release_json, vehicle_data)
-    else:
-        logger.warning("No Vehicle Type and Numeric data found")
+    # Parse and merge OPT-156-LotResult Vehicle Numeric
+    try:
+        vehicle_numeric_data = parse_vehicle_numeric(xml_content)
+        if vehicle_numeric_data:
+            merge_vehicle_numeric(release_json, vehicle_numeric_data)
+            logger.info("OPT-156-LotResult: Successfully merged Vehicle Numeric data")
+        else:
+            logger.info("OPT-156-LotResult: No Vehicle Numeric data found")
+    except Exception as e:
+        logger.error(f"OPT-156-LotResult: Error processing Vehicle Numeric data: {str(e)}")
 
     # Parse and merge OPT-160-UBO First Name
     logger.info("Processing OPT-160-UBO: First Name")

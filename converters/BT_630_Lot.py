@@ -2,11 +2,24 @@
 
 import logging
 from lxml import etree
-from utils.date_utils import EndDate
+from datetime import datetime, timezone
 
 logger = logging.getLogger(__name__)
 
-def parse_lot_tender_period(xml_content):
+def parse_deadline_receipt_expressions(xml_content):
+    """
+    Parse the XML content to extract the deadline for receipt of expressions for each lot.
+
+    Args:
+        xml_content (str): The XML content to parse.
+
+    Returns:
+        dict: A dictionary containing the parsed deadline receipt expressions data.
+        None: If no relevant data is found.
+    """
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
+
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
@@ -19,45 +32,58 @@ def parse_lot_tender_period(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
-    
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         end_date = lot.xpath(".//efac:InterestExpressionReceptionPeriod/cbc:EndDate/text()", namespaces=namespaces)
         end_time = lot.xpath(".//efac:InterestExpressionReceptionPeriod/cbc:EndTime/text()", namespaces=namespaces)
         
-        logger.debug(f"Lot ID: {lot_id}")
-        logger.debug(f"End Date: {end_date}")
-        logger.debug(f"End Time: {end_time}")
-        
         if end_date:
-            end_datetime = f"{end_date[0]}T{end_time[0]}" if end_time else end_date[0]
-            logger.debug(f"End DateTime before EndDate function: {end_datetime}")
-            iso_end_datetime = EndDate(end_datetime)
-            logger.debug(f"ISO End DateTime after EndDate function: {iso_end_datetime}")
-            
-            lot_data = {
-                "id": lot_id,
-                "tenderPeriod": {
-                    "endDate": iso_end_datetime
+            try:
+                date_part = end_date[0].split('+')[0]  # Remove timezone info from date
+                if end_time:
+                    time_part = end_time[0].split('+')[0]  # Remove timezone info from time
+                    combined_datetime = f"{date_part}T{time_part}"
+                else:
+                    combined_datetime = f"{date_part}T23:59:59"
+                
+                tz_info = end_date[0].split('+')[1] if '+' in end_date[0] else 'Z'
+                iso_datetime = f"{combined_datetime}+{tz_info}"
+                
+                lot_data = {
+                    "id": lot_id,
+                    "tenderPeriod": {
+                        "endDate": iso_datetime
+                    }
                 }
-            }
-            result["tender"]["lots"].append(lot_data)
+                result["tender"]["lots"].append(lot_data)
+            except Exception as e:
+                logger.error(f"Error parsing datetime for lot {lot_id}: {str(e)}")
 
-    logger.debug(f"Final result: {result}")
     return result if result["tender"]["lots"] else None
 
-def merge_lot_tender_period(release_json, lot_tender_period_data):
-    if not lot_tender_period_data:
-        logger.warning("No lot tender period data to merge")
+def merge_deadline_receipt_expressions(release_json, deadline_receipt_expressions_data):
+    """
+    Merge the parsed deadline receipt expressions data into the main OCDS release JSON.
+
+    Args:
+        release_json (dict): The main OCDS release JSON to be updated.
+        deadline_receipt_expressions_data (dict): The parsed deadline receipt expressions data to be merged.
+
+    Returns:
+        None: The function updates the release_json in-place.
+    """
+    if not deadline_receipt_expressions_data:
+        logger.warning("No deadline receipt expressions data to merge")
         return
 
-    existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
-    
-    for new_lot in lot_tender_period_data["tender"]["lots"]:
+    tender = release_json.setdefault("tender", {})
+    existing_lots = tender.setdefault("lots", [])
+
+    for new_lot in deadline_receipt_expressions_data["tender"]["lots"]:
         existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
         if existing_lot:
-            existing_lot.update(new_lot)
+            existing_lot.setdefault("tenderPeriod", {}).update(new_lot["tenderPeriod"])
         else:
             existing_lots.append(new_lot)
 
-    logger.info(f"Merged lot tender period data for {len(lot_tender_period_data['tender']['lots'])} lots")
+    logger.info(f"Merged deadline receipt expressions data for {len(deadline_receipt_expressions_data['tender']['lots'])} lots")

@@ -1,32 +1,53 @@
 # tests/test_BT_88_Procedure.py
 
 import pytest
-from lxml import etree
-from converters.BT_88_Procedure import parse_procedure_features, merge_procedure_features
+import json
+import os
+import sys
 
-def test_parse_procedure_features():
+# Add the parent directory to sys.path to import main
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from main import main
+
+def test_bt_88_procedure_features_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:TenderingProcess>
-            <cbc:Description>A two stage procedure ...</cbc:Description>
+            <cbc:Description languageID="ENG">A two stage procedure with initial evaluation followed by negotiation.</cbc:Description>
         </cac:TenderingProcess>
     </root>
     """
-    
-    result = parse_procedure_features(xml_content)
-    assert result == {"tender": {"procurementMethodDetails": "A two stage procedure ..."}}
+    xml_file = tmp_path / "test_input_procedure_features.xml"
+    xml_file.write_text(xml_content)
 
-def test_merge_procedure_features():
-    release_json = {}
-    procedure_features_data = {"tender": {"procurementMethodDetails": "A two stage procedure ..."}}
-    
-    merge_procedure_features(release_json, procedure_features_data)
-    assert release_json == {"tender": {"procurementMethodDetails": "A two stage procedure ..."}}
+    main(str(xml_file), "ocds-test-prefix")
 
-def test_merge_procedure_features_empty():
-    release_json = {}
-    procedure_features_data = None
-    
-    merge_procedure_features(release_json, procedure_features_data)
-    assert release_json == {}
+    with open('output.json', 'r') as f:
+        result = json.load(f)
+
+    assert "tender" in result
+    assert "procurementMethodDetails" in result["tender"]
+    assert result["tender"]["procurementMethodDetails"] == "A two stage procedure with initial evaluation followed by negotiation."
+
+def test_bt_88_procedure_features_missing(tmp_path):
+    xml_content = """
+    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:TenderingProcess>
+            <!-- No Description element -->
+        </cac:TenderingProcess>
+    </root>
+    """
+    xml_file = tmp_path / "test_input_procedure_features_missing.xml"
+    xml_file.write_text(xml_content)
+
+    main(str(xml_file), "ocds-test-prefix")
+
+    with open('output.json', 'r') as f:
+        result = json.load(f)
+
+    assert "tender" not in result
+
+if __name__ == "__main__":
+    pytest.main()
