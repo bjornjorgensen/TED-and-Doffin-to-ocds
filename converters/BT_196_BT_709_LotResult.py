@@ -5,9 +5,13 @@ from lxml import etree
 def parse_bt_196_bt_709_lot_result(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
-        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-    }
+    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
+    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
+    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
+    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+}
 
     result = {"withheldInformation": []}
 

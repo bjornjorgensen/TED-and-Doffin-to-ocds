@@ -25,8 +25,8 @@
         ]
     },
     "tag": [
-        "award",
-        "contract"
+        "contract",
+        "award"
     ],
     "date": "2019-10-23T00:00:00+01:00",
     "parties": [
@@ -51,42 +51,28 @@
             },
             "beneficialOwners": [
                 {
-                    "id": "UBO-0001",
-                    "nationalities": [
-                        "FR"
-                    ]
+                    "id": "UBO-0001"
                 }
-            ]
-        },
-        {
-            "id": "ORG-0002",
-            "beneficialOwners": [
-                {
-                    "id": "UBO-0001",
-                    "nationalities": [
-                        "FR"
-                    ]
-                }
-            ],
-            "roles": [
-                "reviewBody"
             ]
         },
         {
             "id": "ORG-0004",
-            "beneficialOwners": [
-                {
-                    "id": "UBO-0001",
-                    "nationalities": [
-                        "FR"
-                    ]
-                }
-            ],
             "details": {
                 "listedOnRegulatedMarket": false
             },
             "roles": [
                 "tenderer"
+            ],
+            "beneficialOwners": [
+                {
+                    "id": "UBO-0001"
+                }
+            ]
+        },
+        {
+            "id": "ORG-0002",
+            "roles": [
+                "reviewBody"
             ]
         }
     ],

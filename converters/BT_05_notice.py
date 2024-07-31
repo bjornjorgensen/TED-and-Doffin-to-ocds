@@ -8,7 +8,14 @@ logger = logging.getLogger(__name__)
 
 def parse_notice_dispatch_date_time(xml_content):
     root = etree.fromstring(xml_content)
-    namespaces = {"cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"}
+    namespaces = {
+    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
+    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
+    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
+    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+}
     
     issue_date = root.xpath("/*/cbc:IssueDate/text()", namespaces=namespaces)
     issue_time = root.xpath("/*/cbc:IssueTime/text()", namespaces=namespaces)

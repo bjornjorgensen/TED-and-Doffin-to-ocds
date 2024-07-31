@@ -8,9 +8,13 @@ logger = logging.getLogger(__name__)
 def parse_procedure_legal_basis_id(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
-    }
+    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
+    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
+    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
+    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+}
 
     legal_basis_elements = root.xpath(
         "//cac:ProcurementLegislationDocumentReference[not(cbc:ID='CrossBorderLaw' or cbc:ID='LocalLegalBasis')]/cbc:ID",
@@ -34,9 +38,13 @@ def parse_procedure_legal_basis_id(xml_content):
 def parse_procedure_legal_basis_description(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
-    }
+    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
+    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
+    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
+    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+}
 
     legal_basis_elements = root.xpath(
         "//cac:ProcurementLegislationDocumentReference[not(cbc:ID='CrossBorderLaw' or cbc:ID='LocalLegalBasis')]/cbc:DocumentDescription",
@@ -59,9 +67,13 @@ def parse_procedure_legal_basis_description(xml_content):
 def parse_procedure_legal_basis_noid(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
-    }
+    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
+    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
+    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
+    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+}
 
     legal_basis_elements = root.xpath(
         "//cac:ProcurementLegislationDocumentReference[cbc:ID='LocalLegalBasis']/cbc:ID",
@@ -84,9 +96,13 @@ def parse_procedure_legal_basis_noid(xml_content):
 def parse_procedure_legal_basis_noid_description(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
-    }
+    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
+    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
+    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
+    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+}
 
     legal_basis_elements = root.xpath(
         "//cac:ProcurementLegislationDocumentReference[cbc:ID='LocalLegalBasis']/cbc:DocumentDescription",

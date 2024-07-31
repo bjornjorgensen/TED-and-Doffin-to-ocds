@@ -21,9 +21,13 @@ def parse_submission_electronic_catalogue(xml_content: str) -> Optional[List[Dic
 
     root = etree.fromstring(xml_content)
     namespaces = {
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
-    }
+    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
+    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
+    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
+    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+}
 
     policy_mapping = {
         'required': 'required',

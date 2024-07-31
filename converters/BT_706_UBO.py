@@ -5,7 +5,67 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
-ISO_3166_CONVERSION = {
+def parse_ubo_nationality(xml_content):
+    """
+    Parse the XML content to extract the nationality of Ultimate Beneficial Owners (UBOs).
+
+    Args:
+        xml_content (str): The XML content to parse.
+
+    Returns:
+        dict: A dictionary containing the parsed UBO nationality data.
+        None: If no relevant data is found.
+    """
+	
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
+
+    root = etree.fromstring(xml_content)
+    namespaces = {
+        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
+        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
+        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
+        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+    }
+
+    result = {"parties": []}
+
+    # Find the winning tenderer
+    winning_tenderer = root.xpath("//efac:TenderingParty[efac:Tenderer and ../efac:LotTender/cbc:RankCode='1']", namespaces=namespaces)
+    
+    if winning_tenderer:
+        org_id = winning_tenderer[0].xpath("efac:Tenderer/cbc:ID/text()", namespaces=namespaces)[0]
+        ubos = root.xpath("//efac:UltimateBeneficialOwner", namespaces=namespaces)
+        
+        beneficial_owners = []
+        for ubo in ubos:
+            ubo_id = ubo.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+            nationalities = ubo.xpath("efac:Nationality/cbc:NationalityID/text()", namespaces=namespaces)
+            
+            beneficial_owner = {
+                "id": ubo_id,
+                "nationalities": [convert_to_iso_3166_1_alpha_2(nat) for nat in nationalities]
+            }
+            beneficial_owners.append(beneficial_owner)
+        
+        if beneficial_owners:
+            result["parties"].append({
+                "id": org_id,
+                "beneficialOwners": beneficial_owners
+            })
+
+    return result if result["parties"] else None
+
+def convert_to_iso_3166_1_alpha_2(nationality_code):
+    """
+    Convert nationality code to ISO 3166-1 alpha-2 format.
+    This is a placeholder function. In a real implementation, you would use a proper
+    conversion table or library to handle all possible codes.
+    """
+    # Example conversion (incomplete)
+    conversion_table = {
     "ALB": "AL", "AND": "AD", "AUT": "AT", "BLR": "BY", "BEL": "BE",
     "BIH": "BA", "BGR": "BG", "HRV": "HR", "CYP": "CY", "CZE": "CZ",
     "DNK": "DK", "EST": "EE", "FIN": "FI", "FRA": "FR", "DEU": "DE",
@@ -16,92 +76,26 @@ ISO_3166_CONVERSION = {
     "ROU": "RO", "RUS": "RU", "SMR": "SM", "SRB": "RS", "SVK": "SK",
     "SVN": "SI", "ESP": "ES", "SWE": "SE", "CHE": "CH", "TUR": "TR",
     "UKR": "UA", "GBR": "GB", "VAT": "VA"
-}
-
-def parse_ubo_nationalities(xml_content):
-    """
-    Parse the XML content to extract the nationalities of ultimate beneficial owners.
-
-    Args:
-        xml_content (str): The XML content to parse.
-
-    Returns:
-        dict: A dictionary containing the parsed UBO nationality data.
-        None: If no relevant data is found.
-    """
-    # Ensure xml_content is bytes 
-    if isinstance(xml_content, str): 
-        xml_content = xml_content.encode('utf-8')
-
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
     }
+    return conversion_table.get(nationality_code, nationality_code)
 
-    result = {"parties": []}
-
-    organizations = root.xpath("//efac:Organizations/efac:Organization", namespaces=namespaces)
-    
-    for organization in organizations:
-        org_id = organization.xpath("efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()", namespaces=namespaces)
-        if org_id:
-            org_id = org_id[0]
-            ubos = root.xpath(f"//efac:Organizations/efac:UltimateBeneficialOwner[preceding-sibling::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization'] = '{org_id}']", namespaces=namespaces)
-            
-            beneficial_owners = []
-            for ubo in ubos:
-                ubo_id = ubo.xpath("cbc:ID[@schemeName='ubo']/text()", namespaces=namespaces)
-                nationalities = ubo.xpath("efac:Nationality/cbc:NationalityID/text()", namespaces=namespaces)
-                
-                if ubo_id and nationalities:
-                    iso_nationalities = [ISO_3166_CONVERSION.get(nat.upper()) for nat in nationalities if ISO_3166_CONVERSION.get(nat.upper())]
-                    if iso_nationalities:
-                        beneficial_owners.append({
-                            "id": ubo_id[0],
-                            "nationalities": iso_nationalities
-                        })
-            
-            if beneficial_owners:
-                result["parties"].append({
-                    "id": org_id,
-                    "beneficialOwners": beneficial_owners
-                })
-
-    return result if result["parties"] else None
-
-def merge_ubo_nationalities(release_json, ubo_nationalities_data):
+def merge_ubo_nationality(release_json, ubo_nationality_data):
     """
     Merge the parsed UBO nationality data into the main OCDS release JSON.
 
     Args:
         release_json (dict): The main OCDS release JSON to be updated.
-        ubo_nationalities_data (dict): The parsed UBO nationality data to be merged.
+        ubo_nationality_data (dict): The parsed UBO nationality data to be merged.
 
     Returns:
         None: The function updates the release_json in-place.
     """
-    if not ubo_nationalities_data:
-        logger.warning("No UBO Nationality data to merge")
+    if not ubo_nationality_data:
         return
 
-    existing_parties = release_json.setdefault("parties", [])
-    
-    for new_party in ubo_nationalities_data["parties"]:
-        existing_party = next((party for party in existing_parties if party["id"] == new_party["id"]), None)
-        if existing_party:
-            existing_beneficial_owners = existing_party.setdefault("beneficialOwners", [])
-            for new_bo in new_party["beneficialOwners"]:
-                existing_bo = next((bo for bo in existing_beneficial_owners if bo["id"] == new_bo["id"]), None)
-                if existing_bo:
-                    existing_bo.setdefault("nationalities", []).extend(new_bo["nationalities"])
-                    existing_bo["nationalities"] = list(set(existing_bo["nationalities"]))  # Remove duplicates
-                else:
-                    existing_beneficial_owners.append(new_bo)
-        else:
-            existing_parties.append(new_party)
-
-    logger.info(f"Merged UBO Nationality data for {len(ubo_nationalities_data['parties'])} parties")
+    for new_party in ubo_nationality_data["parties"]:
+        existing_party = next((party for party in release_json["parties"] if party["id"] == new_party["id"]), None)
+        if existing_party and "roles" in existing_party and "tenderer" in existing_party["roles"]:
+            existing_party["beneficialOwners"] = new_party["beneficialOwners"]
+            
+    logger.info(f"Merged UBO nationality data for {len(ubo_nationality_data['parties'])} parties")

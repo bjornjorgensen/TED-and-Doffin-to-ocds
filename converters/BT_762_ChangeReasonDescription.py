@@ -26,11 +26,13 @@ def parse_change_reason_description(xml_content: str) -> Optional[List[Dict[str,
 
     root = etree.fromstring(xml_content)
     namespaces = {
-        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-    }
+    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
+    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
+    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
+    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+}
 
     change_reasons = root.xpath("//efac:Changes/efac:ChangeReason/efbc:ReasonDescription/text()", namespaces=namespaces)
 

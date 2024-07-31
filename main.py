@@ -408,7 +408,7 @@ from converters.BT_660_LotResult import parse_framework_reestimated_value, merge
 from converters.BT_67_Exclusion_Grounds import parse_exclusion_grounds, merge_exclusion_grounds
 from converters.BT_70_Lot import parse_lot_performance_terms, merge_lot_performance_terms
 from converters.BT_702a_Notice import parse_notice_language, merge_notice_language
-from converters.BT_706_UBO import parse_ubo_nationalities, merge_ubo_nationalities
+from converters.BT_706_UBO import parse_ubo_nationality, merge_ubo_nationality
 from converters.BT_707_Lot import parse_lot_documents_restricted_justification, merge_lot_documents_restricted_justification
 from converters.BT_707_Part import parse_part_documents_restricted_justification, merge_part_documents_restricted_justification
 from converters.BT_708_Lot import parse_lot_documents_official_language, merge_lot_documents_official_language
@@ -4548,15 +4548,16 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"BT-702(a): Error processing Notice Language data: {str(e)}")
 
-    # Parse and merge BT-706-UBO (Winner Owner Nationality)
+    # Parse and merge BT-706-UBO Winner Owner Nationality
     try:
-        ubo_nationalities_data = parse_ubo_nationalities(xml_content)
-        if ubo_nationalities_data:
-            merge_ubo_nationalities(release_json, ubo_nationalities_data)
+        ubo_nationality_data = parse_ubo_nationality(xml_content)
+        if ubo_nationality_data:
+            merge_ubo_nationality(release_json, ubo_nationality_data)
+            logger.info("BT-706-UBO: Successfully merged UBO nationality data")
         else:
-            logger.info("BT-706: No UBO Nationality data found")
+            logger.info("BT-706-UBO: No UBO nationality data found")
     except Exception as e:
-        logger.error(f"BT-706: Error processing UBO Nationality data: {str(e)}")
+        logger.error(f"BT-706-UBO: Error processing UBO nationality data: {str(e)}")
 
     # Parse and merge BT-707-Lot (Documents Restricted Justification)
     try:

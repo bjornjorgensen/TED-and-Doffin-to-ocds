@@ -32,9 +32,13 @@ def parse_contract_xml(xml_content):
     activity_type_code_xpath = ".//cbc:ActivityTypeCode[@listName='authority-activity']"
     
     namespaces = {
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
-    }
+    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
+    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
+    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
+    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+}
 
     for contracting_party in root.xpath(contracting_party_xpath, namespaces=namespaces):
         party_id_elements = contracting_party.xpath(party_id_xpath, namespaces=namespaces)

@@ -9,13 +9,13 @@ logger = logging.getLogger(__name__)
 def parse_bt_198_bt_105_procedure(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-    }
+    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
+    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
+    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
+    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+}
 
     xpath = "/*/cac:TenderingProcess/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-typ']/efbc:PublicationDate"
     publication_dates = root.xpath(xpath, namespaces=namespaces)

@@ -33,13 +33,13 @@ def parse_subcontracting_tender_indication(xml_content: bytes):
     """
     root = etree.fromstring(xml_content, parser=etree.XMLParser(encoding='utf-8'))
     namespaces = {
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-    }
+    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
+    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
+    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
+    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+}
 
     result = {"tender": {"lots": []}}
 
