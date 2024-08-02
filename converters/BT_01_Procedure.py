@@ -6,6 +6,8 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 def parse_procedure_legal_basis_id(xml_content):
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
     root = etree.fromstring(xml_content)
     namespaces = {
     'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
@@ -36,6 +38,8 @@ def parse_procedure_legal_basis_id(xml_content):
         return None
 
 def parse_procedure_legal_basis_description(xml_content):
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
     root = etree.fromstring(xml_content)
     namespaces = {
     'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
@@ -65,6 +69,8 @@ def parse_procedure_legal_basis_description(xml_content):
         return None
 
 def parse_procedure_legal_basis_noid(xml_content):
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
     root = etree.fromstring(xml_content)
     namespaces = {
     'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
@@ -94,6 +100,8 @@ def parse_procedure_legal_basis_noid(xml_content):
         return None
 
 def parse_procedure_legal_basis_noid_description(xml_content):
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
     root = etree.fromstring(xml_content)
     namespaces = {
     'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
@@ -123,6 +131,8 @@ def parse_procedure_legal_basis_noid_description(xml_content):
         return None
 
 def parse_procedure_legal_basis_notice(xml_content):
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
     root = etree.fromstring(xml_content)
     namespaces = {
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'

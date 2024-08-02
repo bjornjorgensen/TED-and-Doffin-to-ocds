@@ -18,7 +18,6 @@ def parse_dynamic_purchasing_system(xml_content: str) -> Optional[Dict[str, Dict
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode('utf-8')
-
     root = etree.fromstring(xml_content)
     namespaces = {
     'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',

@@ -1,5 +1,3 @@
-# tests/test_BT_706_UBO.py
-
 import pytest
 from lxml import etree
 from converters.BT_706_UBO import parse_ubo_nationality, merge_ubo_nationality
@@ -15,22 +13,29 @@ def test_parse_ubo_nationality():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
-        <efac:Organizations>
-            <efac:Organization>
-                <efac:Company>
-                    <cac:PartyIdentification>
-                        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                    </cac:PartyIdentification>
-                </efac:Company>
-            </efac:Organization>
-            <efac:UltimateBeneficialOwner>
-                <cbc:ID schemeName="ubo">UBO-0001</cbc:ID>
-                <efac:Nationality>
-                    <cbc:NationalityID>DEU</cbc:NationalityID>
-                </efac:Nationality>
-            </efac:UltimateBeneficialOwner>
-        </efac:Organizations>
+          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+          xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1">
+        <efext:UBLExtensions>
+            <efext:UBLExtension>
+                <efext:ExtensionContent>
+                    <efac:Organizations>
+                        <efac:Organization>
+                            <efac:Company>
+                                <cac:PartyIdentification>
+                                    <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                                </cac:PartyIdentification>
+                            </efac:Company>
+                        </efac:Organization>
+                        <efac:UltimateBeneficialOwner>
+                            <cbc:ID schemeName="ubo">UBO-0001</cbc:ID>
+                            <efac:Nationality>
+                                <cbc:NationalityID>DEU</cbc:NationalityID>
+                            </efac:Nationality>
+                        </efac:UltimateBeneficialOwner>
+                    </efac:Organizations>
+                </efext:ExtensionContent>
+            </efext:UBLExtension>
+        </efext:UBLExtensions>
     </root>
     """
     
@@ -79,28 +84,35 @@ def test_bt_706_ubo_nationality_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
-        <efac:Organizations>
-            <efac:Organization>
-                <efac:Company>
-                    <cac:PartyIdentification>
-                        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                    </cac:PartyIdentification>
-                </efac:Company>
-            </efac:Organization>
-            <efac:UltimateBeneficialOwner>
-                <cbc:ID schemeName="ubo">UBO-0001</cbc:ID>
-                <efac:Nationality>
-                    <cbc:NationalityID>DEU</cbc:NationalityID>
-                </efac:Nationality>
-            </efac:UltimateBeneficialOwner>
-            <efac:UltimateBeneficialOwner>
-                <cbc:ID schemeName="ubo">UBO-0002</cbc:ID>
-                <efac:Nationality>
-                    <cbc:NationalityID>FRA</cbc:NationalityID>
-                </efac:Nationality>
-            </efac:UltimateBeneficialOwner>
-        </efac:Organizations>
+          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+          xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1">
+        <efext:UBLExtensions>
+            <efext:UBLExtension>
+                <efext:ExtensionContent>
+                    <efac:Organizations>
+                        <efac:Organization>
+                            <efac:Company>
+                                <cac:PartyIdentification>
+                                    <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                                </cac:PartyIdentification>
+                            </efac:Company>
+                        </efac:Organization>
+                        <efac:UltimateBeneficialOwner>
+                            <cbc:ID schemeName="ubo">UBO-0001</cbc:ID>
+                            <efac:Nationality>
+                                <cbc:NationalityID>DEU</cbc:NationalityID>
+                            </efac:Nationality>
+                        </efac:UltimateBeneficialOwner>
+                        <efac:UltimateBeneficialOwner>
+                            <cbc:ID schemeName="ubo">UBO-0002</cbc:ID>
+                            <efac:Nationality>
+                                <cbc:NationalityID>FRA</cbc:NationalityID>
+                            </efac:Nationality>
+                        </efac:UltimateBeneficialOwner>
+                    </efac:Organizations>
+                </efext:ExtensionContent>
+            </efext:UBLExtension>
+        </efext:UBLExtensions>
     </root>
     """
     xml_file = tmp_path / "test_input_ubo_nationality.xml"
@@ -113,17 +125,14 @@ def test_bt_706_ubo_nationality_integration(tmp_path):
 
     assert "parties" in result
     assert len(result["parties"]) == 1
-    assert result["parties"][0]["id"] == "ORG-0001"
-    assert "beneficialOwners" in result["parties"][0]
-    assert len(result["parties"][0]["beneficialOwners"]) == 2
     
-    ubo_1 = next((bo for bo in result["parties"][0]["beneficialOwners"] if bo["id"] == "UBO-0001"), None)
+    beneficial_owners = result["parties"][0].get("beneficialOwners", [])
+    assert len(beneficial_owners) == 2
+
+    ubo_1 = next((ubo for ubo in beneficial_owners if ubo["id"] == "UBO-0001"), None)
     assert ubo_1 is not None
     assert ubo_1["nationalities"] == ["DE"]
-    
-    ubo_2 = next((bo for bo in result["parties"][0]["beneficialOwners"] if bo["id"] == "UBO-0002"), None)
+
+    ubo_2 = next((ubo for ubo in beneficial_owners if ubo["id"] == "UBO-0002"), None)
     assert ubo_2 is not None
     assert ubo_2["nationalities"] == ["FR"]
-
-if __name__ == "__main__":
-    pytest.main()

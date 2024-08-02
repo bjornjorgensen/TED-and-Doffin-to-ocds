@@ -22,10 +22,8 @@ def parse_cvd_contract_type_lotresult(xml_content):
         dict: A dictionary containing the parsed CVD contract type data for LotResults.
         None: If no relevant data is found.
     """
-    # Ensure xml_content is bytes
     if isinstance(xml_content, str):
         xml_content = xml_content.encode('utf-8')
-
     root = etree.fromstring(xml_content)
     namespaces = {
     'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',

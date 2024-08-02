@@ -64,7 +64,7 @@ from converters.BT_15_Lot_Part import parse_documents_url, merge_documents_url
 from converters.BT_150_Contract import parse_contract_identifier, merge_contract_identifier
 from converters.BT_151_Contract import parse_contract_url, merge_contract_url
 from converters.BT_16_Organization_Company import parse_organization_part_name, merge_organization_part_name
-from converters.BT_16_Organization_TouchPoint import parse_touchpoint_part_name, merge_touchpoint_part_name
+from converters.BT_16_Organization_TouchPoint import parse_organization_touchpoint_part_name, merge_organization_touchpoint_part_name
 from converters.BT_160_Tender import parse_concession_revenue_buyer, merge_concession_revenue_buyer
 from converters.BT_162_Tender import parse_concession_revenue_user, merge_concession_revenue_user
 from converters.BT_163_Tender import parse_concession_value_description, merge_concession_value_description
@@ -268,7 +268,7 @@ from converters.BT_262_procedure import parse_main_classification_code_procedure
 from converters.BT_263_lot import parse_additional_classification_code_lot, merge_additional_classification_code_lot
 from converters.BT_263_part import parse_additional_classification_code_part, merge_additional_classification_code_part
 from converters.BT_263_procedure import parse_additional_classification_code_procedure, merge_additional_classification_code_procedure
-from converters.BT_27_Lot import parse_bt_27_lot, merge_bt_27_lot
+from converters.BT_27_Lot import parse_lot_estimated_value, merge_lot_estimated_value
 from converters.BT_27_LotsGroup import parse_bt_27_lots_group, merge_bt_27_lots_group
 from converters.BT_27_Part import parse_bt_27_part, merge_bt_27_part
 from converters.BT_27_Procedure import parse_bt_27_procedure, merge_bt_27_procedure
@@ -418,7 +418,8 @@ from converters.BT_71_Lot import parse_reserved_participation, merge_reserved_pa
 from converters.BT_71_Part import parse_reserved_participation_part, merge_reserved_participation_part
 from converters.BT_710_LotResult import parse_tender_value_lowest, merge_tender_value_lowest
 from converters.BT_711_LotResult import parse_tender_value_highest, merge_tender_value_highest
-from converters.BT_712_LotResult import parse_lot_result_complaints, merge_lot_result_complaints
+from converters.BT_712a_LotResult import parse_buyer_review_complainants, merge_buyer_review_complainants
+from converters.BT_712b_LotResult import parse_buyer_review_complainants_number, merge_buyer_review_complainants_number
 from converters.BT_717_Lot import parse_clean_vehicles_directive, merge_clean_vehicles_directive
 from converters.BT_719_notice import parse_procurement_documents_change_date, merge_procurement_documents_change_date
 from converters.BT_720_Tender import parse_tender_value, merge_tender_value
@@ -527,7 +528,7 @@ from converters.OPT_160_UBO import parse_ubo_first_name, merge_ubo_first_name
 from converters.OPT_170_Tenderer import parse_tendering_party_leader, merge_tendering_party_leader
 from converters.OPT_200_Organization_Company import parse_organization_technical_identifier, merge_organization_technical_identifier
 from converters.OPT_201_Organization_TouchPoint import parse_touchpoint_technical_identifier, merge_touchpoint_technical_identifier
-from converters.OPT_202_UBO import parse_beneficial_owner_identifier, merge_beneficial_owner_identifier
+from converters.OPT_202_UBO import parse_ubo_identifier, merge_ubo_identifier
 from converters.OPT_300_Contract_Signatory import parse_contract_signatory, merge_contract_signatory
 from converters.OPT_300_Procedure_SProvider import parse_procedure_sprovider, merge_procedure_sprovider
 from converters.OPT_301_Lot_AddInfo import parse_additional_info_provider_identifier, merge_additional_info_provider_identifier
@@ -1123,17 +1124,27 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Organization Name data: {str(e)}")
 
-    # Process BT-16-Organization-Company
+    # Parse and merge BT-16-Organization-Company (Organization Part Name)
     try:
         organization_part_name_data = parse_organization_part_name(xml_content)
         if organization_part_name_data:
-            #logger.info(f"BT-16 data before merge: {organization_part_name_data}")
             merge_organization_part_name(release_json, organization_part_name_data)
-            #logger.info(f"BT-16 data after merge: {release_json.get('parties', [])}")
+            logger.info("BT-16-Organization-Company: Successfully merged Organization Part Name data")
         else:
-            logger.info("No Organization Part Name data found")
+            logger.info("BT-16-Organization-Company: No Organization Part Name data found")
     except Exception as e:
-        logger.error(f"Error processing Organization Part Name data: {str(e)}")
+        logger.error(f"BT-16-Organization-Company: Error processing Organization Part Name data: {str(e)}")
+
+    # Parse and merge BT-16-Organization-TouchPoint (Organization TouchPoint Part Name)
+    try:
+        organization_touchpoint_part_name_data = parse_organization_touchpoint_part_name(xml_content)
+        if organization_touchpoint_part_name_data:
+            merge_organization_touchpoint_part_name(release_json, organization_touchpoint_part_name_data)
+            logger.info("BT-16-Organization-TouchPoint: Successfully merged Organization TouchPoint Part Name data")
+        else:
+            logger.info("BT-16-Organization-TouchPoint: No Organization TouchPoint Part Name data found")
+    except Exception as e:
+        logger.error(f"BT-16-Organization-TouchPoint: Error processing Organization TouchPoint Part Name data: {str(e)}")
 
     # Parse the organization info BT_500_Organization_TouchPoint
     try:
@@ -1144,18 +1155,6 @@ def main(xml_path, ocid_prefix):
             logger.info("No TouchPoint Name data found")
     except Exception as e:
         logger.error(f"Error processing TouchPoint Name data: {str(e)}")
-
-    # Parse and merge BT-16-Organization-TouchPoint
-    try:
-        touchpoint_part_name_data = parse_touchpoint_part_name(xml_content)
-        if touchpoint_part_name_data:
-            #logger.info(f"BT-16 TouchPoint data before merge: {touchpoint_part_name_data}")
-            merge_touchpoint_part_name(release_json, touchpoint_part_name_data)
-            #logger.info(f"BT-16 TouchPoint data after merge: {release_json.get('parties', [])}")
-        else:
-            logger.info("No TouchPoint Part Name data found")
-    except Exception as e:
-        logger.error(f"Error processing TouchPoint Part Name data: {str(e)}")
 
     # Parse and merge BT-160-Tender
     try:
@@ -3133,16 +3132,16 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing Additional Classification Code data for Procedure: {str(e)}")
 
-    # Parse and merge BT-27-Lot Estimated Value
+    # Parse and merge BT-27-Lot (Lot Estimated Value)
     try:
-        bt_27_lot_data = parse_bt_27_lot(xml_content)
-        if bt_27_lot_data["tender"]["lots"]:
-            merge_bt_27_lot(release_json, bt_27_lot_data)
-            logger.info("Merged BT-27-Lot Estimated Value data")
+        lot_estimated_value_data = parse_lot_estimated_value(xml_content)
+        if lot_estimated_value_data:
+            merge_lot_estimated_value(release_json, lot_estimated_value_data)
+            logger.info("BT-27-Lot: Successfully merged Lot Estimated Value data")
         else:
-            logger.info("No BT-27-Lot Estimated Value data found")
+            logger.info("BT-27-Lot: No Lot Estimated Value data found")
     except Exception as e:
-        logger.error(f"Error processing BT-27-Lot Estimated Value data: {str(e)}")
+        logger.error(f"BT-27-Lot: Error processing Lot Estimated Value data: {str(e)}")
 
     # Parse and merge BT-27-LotsGroup Estimated Value
     try:
@@ -4641,7 +4640,6 @@ def main(xml_path, ocid_prefix):
             logger.info("BT-710-LotResult: No Tender Value Lowest data found")
     except Exception as e:
         logger.error(f"BT-710-LotResult: Error processing Tender Value Lowest data: {str(e)}")
-
     # Parse and merge BT-711-LotResult (Tender Value Highest)
     try:
         tender_value_highest_data = parse_tender_value_highest(xml_content)
@@ -4653,15 +4651,27 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"BT-711-LotResult: Error processing Tender Value Highest data: {str(e)}")
 
-    # Parse and merge BT-712-LotResult
+    # Parse and merge BT-712(a)-LotResult (Buyer Review Complainants)
     try:
-        lot_result_complaints_data = parse_lot_result_complaints(xml_content)
-        if lot_result_complaints_data:
-            merge_lot_result_complaints(release_json, lot_result_complaints_data)
+        buyer_review_complainants_data = parse_buyer_review_complainants(xml_content)
+        if buyer_review_complainants_data:
+            merge_buyer_review_complainants(release_json, buyer_review_complainants_data)
+            logger.info("BT-712(a)-LotResult: Successfully merged Buyer Review Complainants data")
         else:
-            logger.info("No Lot Result Complaints data found")
+            logger.info("BT-712(a)-LotResult: No Buyer Review Complainants data found")
     except Exception as e:
-        logger.error(f"Error processing Lot Result Complaints data: {str(e)}")
+        logger.error(f"BT-712(a)-LotResult: Error processing Buyer Review Complainants data: {str(e)}")
+
+    # Parse and merge BT-712(b)-LotResult (Buyer Review Complainants Number)
+    try:
+        buyer_review_complainants_number_data = parse_buyer_review_complainants_number(xml_content)
+        if buyer_review_complainants_number_data:
+            merge_buyer_review_complainants_number(release_json, buyer_review_complainants_number_data)
+            logger.info("BT-712(b)-LotResult: Successfully merged Buyer Review Complainants Number data")
+        else:
+            logger.info("BT-712(b)-LotResult: No Buyer Review Complainants Number data found")
+    except Exception as e:
+        logger.error(f"BT-712(b)-LotResult: Error processing Buyer Review Complainants Number data: {str(e)}")
 
     # Parse and merge BT-717-Lot (Clean Vehicles Directive)
     try:
@@ -4684,15 +4694,16 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"Error processing procurement documents change date data: {str(e)}")
 
-    # Parse and merge BT-720-Tender
+    # Parse and merge BT-720-Tender (Tender Value)
     try:
         tender_value_data = parse_tender_value(xml_content)
         if tender_value_data:
             merge_tender_value(release_json, tender_value_data)
+            logger.info("BT-720-Tender: Successfully merged Tender Value data")
         else:
-            logger.info("No tender value data found")
+            logger.info("BT-720-Tender: No Tender Value data found")
     except Exception as e:
-        logger.error(f"Error processing tender value data: {str(e)}")
+        logger.error(f"BT-720-Tender: Error processing Tender Value data: {str(e)}")
 
     # Parse and merge BT-721-Contract
     try:
@@ -5061,17 +5072,6 @@ def main(xml_path, ocid_prefix):
             logger.info("BT-747-Lot: No Selection Criteria Type data found")
     except Exception as e:
         logger.error(f"BT-747-Lot: Error processing Selection Criteria Type data: {str(e)}")
-
-    # Parse and merge BT-749-Lot Selection Criteria Name
-    try:
-        selection_criteria_name_data = parse_selection_criteria_name(xml_content)
-        if selection_criteria_name_data:
-            merge_selection_criteria_name(release_json, selection_criteria_name_data)
-            logger.info("BT-749-Lot: Successfully merged Selection Criteria Name data")
-        else:
-            logger.info("BT-749-Lot: No Selection Criteria Name data found")
-    except Exception as e:
-        logger.error(f"BT-749-Lot: Error processing Selection Criteria Name data: {str(e)}")
     
     # Parse and merge BT-75-Lot Guarantee Required Description
     try:
@@ -5779,15 +5779,16 @@ def main(xml_path, ocid_prefix):
     else:
         logger.warning("No TouchPoint Technical Identifier data found")
     
-    logger.info("Processing OPT-202-UBO: Beneficial Owner Technical Identifier")
-    beneficial_owner_id_data = parse_beneficial_owner_identifier(xml_content)
-    if beneficial_owner_id_data:
-      #  logger.info(f"Beneficial owner data found: {beneficial_owner_id_data}")
-        merge_beneficial_owner_identifier(release_json, beneficial_owner_id_data)
-     #   logger.info("After merging beneficial owner data:")
-     #   logger.info(json.dumps(release_json, indent=2))
-    else:
-        logger.warning("No Beneficial Owner Technical Identifier data found")
+    # Parse and merge OPT-202-UBO
+    try:
+        ubo_data = parse_ubo_identifier(xml_content)
+        if ubo_data:
+            merge_ubo_identifier(release_json, ubo_data)
+            logger.info("OPT-202-UBO: Successfully merged UBO identifier data")
+        else:
+            logger.info("OPT-202-UBO: No UBO identifier data found")
+    except Exception as e:
+        logger.error(f"OPT-202-UBO: Error processing UBO identifier data: {str(e)}")
 
     # Parse and merge OPT-300 Contract Signatory
     signatory_data = parse_contract_signatory(xml_content)
@@ -6021,7 +6022,7 @@ def main(xml_path, ocid_prefix):
     #logger.info(f"Release JSON after removing empty dicts: {json.dumps(release_json, indent=2)}")
 
     # Before writing to output.json
-    logger.info(f"Final release JSON: {json.dumps(release_json, indent=2)}")
+    #logger.info(f"Final release JSON: {json.dumps(release_json, indent=2)}")
 
     # Write the JSON output to a file
     with io.open('output.json', 'w', encoding='utf-8') as f:
@@ -6030,7 +6031,7 @@ def main(xml_path, ocid_prefix):
     logger.info("XML to JSON conversion completed")
 
     # Print the JSON string to console
-    json_string = json.dumps(release_json, ensure_ascii=False)
+    #json_string = json.dumps(release_json, ensure_ascii=False)
     
 
     return release_json

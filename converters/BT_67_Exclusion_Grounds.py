@@ -43,10 +43,8 @@ def parse_exclusion_grounds(xml_content):
         dict: A dictionary containing the parsed exclusion grounds data.
         None: If no relevant data is found.
     """
-    # Ensure xml_content is bytes 
-    if isinstance(xml_content, str): 
+    if isinstance(xml_content, str):
         xml_content = xml_content.encode('utf-8')
-
     root = etree.fromstring(xml_content)
     namespaces = {
     'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',

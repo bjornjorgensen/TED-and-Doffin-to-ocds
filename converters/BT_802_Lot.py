@@ -7,6 +7,8 @@ logger = logging.getLogger(__name__)
 
 def parse_non_disclosure_agreement_description(xml_content):
     logger.info("Parsing BT-802-Lot: Non Disclosure Agreement Description")
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
     root = etree.fromstring(xml_content)
     namespaces = {
     'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',

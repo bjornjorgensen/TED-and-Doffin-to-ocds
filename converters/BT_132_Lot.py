@@ -4,6 +4,8 @@ from lxml import etree
 from utils.date_utils import convert_to_iso_format
 
 def parse_lot_public_opening_date(xml_content):
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
     root = etree.fromstring(xml_content)
     namespaces = {
     'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',

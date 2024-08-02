@@ -18,7 +18,6 @@ def parse_lots_all_required(xml_content: str) -> Optional[Dict]:
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode('utf-8')
-
     root = etree.fromstring(xml_content)
     namespaces = {
     'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',

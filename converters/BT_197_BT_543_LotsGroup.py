@@ -29,6 +29,8 @@ JUSTIFICATION_CODES = {
 }
 
 def parse_bt_197_bt_543_lotsgroup(xml_content):
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
     root = etree.fromstring(xml_content)
     namespaces = {
     'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',

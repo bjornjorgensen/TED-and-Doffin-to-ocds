@@ -1,60 +1,86 @@
 # converters/BT_27_Lot.py
 
-from lxml import etree
 import logging
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
-def parse_bt_27_lot(xml_content):
+def parse_lot_estimated_value(xml_content):
+    """
+    Parse the XML content to extract the estimated value for each lot.
+
+    Args:
+        xml_content (str): The XML content to parse.
+
+    Returns:
+        dict: A dictionary containing the parsed data in the format:
+              {
+                  "tender": {
+                      "lots": [
+                          {
+                              "id": "lot_id",
+                              "value": {
+                                  "amount": float_value,
+                                  "currency": "currency_code"
+                              }
+                          }
+                      ]
+                  }
+              }
+        None: If no relevant data is found.
+    """
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
     root = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
+    }
 
     result = {"tender": {"lots": []}}
 
-    lot_elements = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
     
-    for lot_element in lot_elements:
-        lot_id = lot_element.xpath("cbc:ID/text()", namespaces=namespaces)
-        amount_element = lot_element.xpath("cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount", namespaces=namespaces)
-        
-        if lot_id and amount_element:
-            lot_id = lot_id[0]
-            amount_element = amount_element[0]
-            amount = float(amount_element.text)
-            currency = amount_element.get('currencyID')
+    for lot in lots:
+        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        estimated_value = lot.xpath("cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount/text()", namespaces=namespaces)
+        currency = lot.xpath("cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount/@currencyID", namespaces=namespaces)
 
-            lot = {
+        if estimated_value and currency:
+            lot_data = {
                 "id": lot_id,
                 "value": {
-                    "amount": amount,
-                    "currency": currency
+                    "amount": float(estimated_value[0]),
+                    "currency": currency[0]
                 }
             }
-            
-            result["tender"]["lots"].append(lot)
-        else:
-            logger.warning(f"Missing data for lot {lot_id}")
+            result["tender"]["lots"].append(lot_data)
 
-    return result
+    return result if result["tender"]["lots"] else None
 
-def merge_bt_27_lot(release_json, bt_27_data):
-    if not bt_27_data["tender"]["lots"]:
+def merge_lot_estimated_value(release_json, lot_estimated_value_data):
+    """
+    Merge the parsed lot estimated value data into the main OCDS release JSON.
+
+    Args:
+        release_json (dict): The main OCDS release JSON to be updated.
+        lot_estimated_value_data (dict): The parsed lot estimated value data to be merged.
+
+    Returns:
+        None: The function updates the release_json in-place.
+    """
+    if not lot_estimated_value_data:
+        logger.warning("No Lot Estimated Value data to merge")
         return
 
-    existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
+    tender = release_json.setdefault("tender", {})
+    existing_lots = tender.setdefault("lots", [])
     
-    for new_lot in bt_27_data["tender"]["lots"]:
+    for new_lot in lot_estimated_value_data["tender"]["lots"]:
         existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
         if existing_lot:
             existing_lot["value"] = new_lot["value"]
         else:
             existing_lots.append(new_lot)
-    
-    logger.info(f"Merged BT-27 data for {len(bt_27_data['tender']['lots'])} lots")
+
+    logger.info(f"Merged Lot Estimated Value data for {len(lot_estimated_value_data['tender']['lots'])} lots")

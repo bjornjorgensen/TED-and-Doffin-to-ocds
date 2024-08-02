@@ -2,6 +2,8 @@
 from lxml import etree
 
 def parse_contract_xml(xml_content):
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
     root = etree.fromstring(xml_content)
     parties = []
     authority_table = {

@@ -1,6 +1,8 @@
 # tests/test_BT_710_LotResult.py
 
 import pytest
+from lxml import etree
+from converters.BT_710_LotResult import parse_tender_value_lowest, merge_tender_value_lowest
 import json
 import os
 import sys
@@ -9,29 +11,83 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
-def test_bt_710_lot_result_integration(tmp_path):
+def test_parse_tender_value_lowest():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-          xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-          xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionContent>
-                    <efext:EformsExtension>
-                        <efac:NoticeResult>
-                            <efac:LotResult>
-                                <cbc:LowerTenderAmount currencyID="EUR">1230000</cbc:LowerTenderAmount>
-                                <efac:TenderLot>
-                                    <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
-                                </efac:TenderLot>
-                            </efac:LotResult>
-                        </efac:NoticeResult>
-                    </efext:EformsExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
+        <efac:NoticeResult>
+            <efac:LotResult>
+                <cbc:LowerTenderAmount currencyID="EUR">1230000</cbc:LowerTenderAmount>
+                <efac:TenderLot>
+                    <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+                </efac:TenderLot>
+            </efac:LotResult>
+        </efac:NoticeResult>
+    </root>
+    """
+    
+    result = parse_tender_value_lowest(xml_content)
+    
+    assert result is not None
+    assert "bids" in result
+    assert "statistics" in result["bids"]
+    assert len(result["bids"]["statistics"]) == 1
+    assert result["bids"]["statistics"][0]["id"] == "1"
+    assert result["bids"]["statistics"][0]["measure"] == "lowestValidBidValue"
+    assert result["bids"]["statistics"][0]["value"] == 1230000
+    assert result["bids"]["statistics"][0]["currency"] == "EUR"
+    assert result["bids"]["statistics"][0]["relatedLot"] == "LOT-0001"
+
+def test_merge_tender_value_lowest():
+    release_json = {
+        "bids": {
+            "statistics": [
+                {
+                    "id": "1",
+                    "measure": "someOtherMeasure",
+                    "value": 100000
+                }
+            ]
+        }
+    }
+    
+    tender_value_lowest_data = {
+        "bids": {
+            "statistics": [
+                {
+                    "id": "1",
+                    "measure": "lowestValidBidValue",
+                    "value": 1230000,
+                    "currency": "EUR",
+                    "relatedLot": "LOT-0001"
+                }
+            ]
+        }
+    }
+    
+    merge_tender_value_lowest(release_json, tender_value_lowest_data)
+    
+    assert len(release_json["bids"]["statistics"]) == 1
+    assert release_json["bids"]["statistics"][0]["id"] == "1"
+    assert release_json["bids"]["statistics"][0]["measure"] == "lowestValidBidValue"
+    assert release_json["bids"]["statistics"][0]["value"] == 1230000
+    assert release_json["bids"]["statistics"][0]["currency"] == "EUR"
+    assert release_json["bids"]["statistics"][0]["relatedLot"] == "LOT-0001"
+
+def test_bt_710_lotresult_integration(tmp_path):
+    xml_content = """
+    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
+        <efac:NoticeResult>
+            <efac:LotResult>
+                <cbc:LowerTenderAmount currencyID="EUR">1230000</cbc:LowerTenderAmount>
+                <efac:TenderLot>
+                    <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+                </efac:TenderLot>
+            </efac:LotResult>
+        </efac:NoticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_tender_value_lowest.xml"
@@ -42,15 +98,14 @@ def test_bt_710_lot_result_integration(tmp_path):
     with open('output.json', 'r') as f:
         result = json.load(f)
 
-    assert "bids" in result, "Expected 'bids' in result"
-    assert "statistics" in result["bids"], "Expected 'statistics' in bids"
-    assert len(result["bids"]["statistics"]) == 1, f"Expected 1 statistic, got {len(result['bids']['statistics'])}"
-
-    statistic = result["bids"]["statistics"][0]
-    assert statistic["measure"] == "lowestValidBidValue", f"Expected measure 'lowestValidBidValue', got {statistic['measure']}"
-    assert statistic["value"] == 1230000, f"Expected value 1230000, got {statistic['value']}"
-    assert statistic["currency"] == "EUR", f"Expected currency 'EUR', got {statistic['currency']}"
-    assert statistic["relatedLot"] == "LOT-0001", f"Expected relatedLot 'LOT-0001', got {statistic['relatedLot']}"
+    assert "bids" in result
+    assert "statistics" in result["bids"]
+    assert len(result["bids"]["statistics"]) == 1
+    assert result["bids"]["statistics"][0]["id"] == "1"
+    assert result["bids"]["statistics"][0]["measure"] == "lowestValidBidValue"
+    assert result["bids"]["statistics"][0]["value"] == 1230000
+    assert result["bids"]["statistics"][0]["currency"] == "EUR"
+    assert result["bids"]["statistics"][0]["relatedLot"] == "LOT-0001"
 
 if __name__ == "__main__":
     pytest.main()

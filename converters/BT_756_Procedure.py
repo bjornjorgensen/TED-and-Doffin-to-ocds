@@ -18,7 +18,6 @@ def parse_pin_competition_termination(xml_content: Union[str, bytes]) -> Optiona
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode('utf-8')
-
     root = etree.fromstring(xml_content)
     namespaces = {
     'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',

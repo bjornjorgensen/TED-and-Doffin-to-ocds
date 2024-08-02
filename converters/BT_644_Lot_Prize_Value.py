@@ -42,7 +42,9 @@ def parse_lot_prize_value(xml_content: bytes):
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
     """
-    root = etree.fromstring(xml_content, parser=etree.XMLParser(encoding='utf-8'))
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
+    root = etree.fromstring(xml_content)
     namespaces = {
     'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
     'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',

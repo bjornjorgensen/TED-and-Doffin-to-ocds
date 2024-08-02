@@ -19,10 +19,8 @@ def parse_framework_reestimated_value(xml_content):
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
     """
-    # Ensure xml_content is bytes
     if isinstance(xml_content, str):
         xml_content = xml_content.encode('utf-8')
-
     root = etree.fromstring(xml_content)
     namespaces = {
     'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',

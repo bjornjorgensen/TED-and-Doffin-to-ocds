@@ -6,6 +6,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 def parse_direct_award_justification(xml_content):
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
     root = etree.fromstring(xml_content)
     namespaces = {
     'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',

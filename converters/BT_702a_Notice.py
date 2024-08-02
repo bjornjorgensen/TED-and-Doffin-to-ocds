@@ -45,10 +45,8 @@ def parse_notice_language(xml_content):
         dict: A dictionary containing the parsed notice language data.
         None: If no relevant data is found.
     """
-    # Ensure xml_content is bytes 
-    if isinstance(xml_content, str): 
+    if isinstance(xml_content, str):
         xml_content = xml_content.encode('utf-8')
-
     root = etree.fromstring(xml_content)
     namespaces = {
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'

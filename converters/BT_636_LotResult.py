@@ -66,6 +66,8 @@ def parse_irregularity_type(xml_content):
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
     """
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
     root = etree.fromstring(xml_content)
     namespaces = {
         'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
