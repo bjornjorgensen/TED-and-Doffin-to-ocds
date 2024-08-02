@@ -6,9 +6,9 @@ from typing import Dict, Optional
 
 logger = logging.getLogger(__name__)
 
-def parse_buyer_review_complainants(xml_content: str) -> Optional[Dict]:
+def parse_buyer_review_complainants_code(xml_content: str) -> Optional[Dict]:
     """
-    Parse the XML content to extract the buyer review complainants information.
+    Parse the XML content to extract the buyer review complainants code.
 
     Args:
         xml_content (str): The XML content to parse.
@@ -33,38 +33,40 @@ def parse_buyer_review_complainants(xml_content: str) -> Optional[Dict]:
     lot_results = root.xpath("//efac:NoticeResult/efac:LotResult", namespaces=namespaces)
     
     for lot_result in lot_results:
-        appeal_requests = lot_result.xpath("efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='review-type' and efbc:StatisticsCode='complainants']", namespaces=namespaces)
+        appeal_requests = lot_result.xpath("efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='review-type']", namespaces=namespaces)
         lot_id = lot_result.xpath("efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)
         
         if appeal_requests and lot_id:
-            statistic = {
-                "id": str(statistic_id),
-                "measure": "complainants",
-                "relatedLot": lot_id[0]
-            }
-            result["statistics"].append(statistic)
-            statistic_id += 1
+            stats_code = appeal_requests[0].xpath("efbc:StatisticsCode/text()", namespaces=namespaces)
+            if stats_code and stats_code[0] == 'complainants':
+                statistic = {
+                    "id": str(statistic_id),
+                    "measure": "complainants",
+                    "relatedLot": lot_id[0]
+                }
+                result["statistics"].append(statistic)
+                statistic_id += 1
 
     return result if result["statistics"] else None
 
-def merge_buyer_review_complainants(release_json: Dict, buyer_review_complainants_data: Optional[Dict]) -> None:
+def merge_buyer_review_complainants_code(release_json: Dict, buyer_review_complainants_code_data: Optional[Dict]) -> None:
     """
-    Merge the parsed buyer review complainants data into the main OCDS release JSON.
+    Merge the parsed buyer review complainants code data into the main OCDS release JSON.
 
     Args:
         release_json (Dict): The main OCDS release JSON to be updated.
-        buyer_review_complainants_data (Optional[Dict]): The parsed buyer review complainants data to be merged.
+        buyer_review_complainants_code_data (Optional[Dict]): The parsed buyer review complainants code data to be merged.
 
     Returns:
         None: The function updates the release_json in-place.
     """
-    if not buyer_review_complainants_data:
-        logger.warning("No buyer review complainants data to merge")
+    if not buyer_review_complainants_code_data:
+        logger.warning("No buyer review complainants code data to merge")
         return
 
     release_statistics = release_json.setdefault("statistics", [])
     
-    for new_statistic in buyer_review_complainants_data["statistics"]:
+    for new_statistic in buyer_review_complainants_code_data["statistics"]:
         existing_statistic = next((stat for stat in release_statistics if stat.get("id") == new_statistic["id"]), None)
         
         if existing_statistic:
@@ -72,4 +74,4 @@ def merge_buyer_review_complainants(release_json: Dict, buyer_review_complainant
         else:
             release_statistics.append(new_statistic)
 
-    logger.info(f"Merged buyer review complainants data for {len(buyer_review_complainants_data['statistics'])} statistics")
+    logger.info(f"Merged buyer review complainants code data for {len(buyer_review_complainants_code_data['statistics'])} statistics")

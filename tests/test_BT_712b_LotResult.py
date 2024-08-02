@@ -37,6 +37,7 @@ def test_bt_712b_lotresult_integration(tmp_path):
     print(f"Full result: {json.dumps(result, indent=2)}")
 
     assert "statistics" in result, "No 'statistics' in result"
+    assert "bids" not in result or "statistics" not in result["bids"], "'statistics' should not be under 'bids'"
     assert len(result["statistics"]) == 1, f"Expected 1 statistic, got {len(result['statistics'])}"
     
     statistic = result["statistics"][0]

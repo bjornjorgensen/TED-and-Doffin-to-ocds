@@ -27,7 +27,7 @@ def test_bt_712a_lotresult_integration(tmp_path):
         </efac:NoticeResult>
     </root>
     """
-    xml_file = tmp_path / "test_input_buyer_review_complainants.xml"
+    xml_file = tmp_path / "test_input_buyer_review_complainants_code.xml"
     xml_file.write_text(xml_content)
 
     result = main(str(xml_file), "ocds-test-prefix")
@@ -44,6 +44,7 @@ def test_bt_712a_lotresult_integration(tmp_path):
     assert statistic["id"] == "1", f"Expected statistic id '1', got '{statistic.get('id')}'"
     assert statistic["measure"] == "complainants", f"Expected measure 'complainants', got '{statistic.get('measure')}'"
     assert statistic["relatedLot"] == "LOT-0001", f"Expected relatedLot 'LOT-0001', got '{statistic.get('relatedLot')}'"
+    assert "value" not in statistic, "Unexpected 'value' in statistic"
 
 if __name__ == "__main__":
     pytest.main()

@@ -37,18 +37,17 @@ def parse_buyer_review_complainants_number(xml_content: str) -> Optional[Dict]:
         lot_id = lot_result.xpath("efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)
         
         if appeal_requests and lot_id:
-            for appeal_request in appeal_requests:
-                stats_numeric = appeal_request.xpath("efbc:StatisticsNumeric/text()", namespaces=namespaces)
-                if stats_numeric:
-                    statistic = {
-                        "id": str(statistic_id),
-                        "value": int(stats_numeric[0]),
-                        "measure": "complainants",
-                        "scope": "complaints",
-                        "relatedLot": lot_id[0]
-                    }
-                    result["statistics"].append(statistic)
-                    statistic_id += 1
+            stats_numeric = appeal_requests[0].xpath("efbc:StatisticsNumeric/text()", namespaces=namespaces)
+            if stats_numeric:
+                statistic = {
+                    "id": str(statistic_id),
+                    "value": int(stats_numeric[0]),
+                    "measure": "complainants",
+                    "scope": "complaints",
+                    "relatedLot": lot_id[0]
+                }
+                result["statistics"].append(statistic)
+                statistic_id += 1
 
     return result if result["statistics"] else None
 

@@ -418,7 +418,7 @@ from converters.BT_71_Lot import parse_reserved_participation, merge_reserved_pa
 from converters.BT_71_Part import parse_reserved_participation_part, merge_reserved_participation_part
 from converters.BT_710_LotResult import parse_tender_value_lowest, merge_tender_value_lowest
 from converters.BT_711_LotResult import parse_tender_value_highest, merge_tender_value_highest
-from converters.BT_712a_LotResult import parse_buyer_review_complainants, merge_buyer_review_complainants
+from converters.BT_712a_LotResult import parse_buyer_review_complainants_code, merge_buyer_review_complainants_code
 from converters.BT_712b_LotResult import parse_buyer_review_complainants_number, merge_buyer_review_complainants_number
 from converters.BT_717_Lot import parse_clean_vehicles_directive, merge_clean_vehicles_directive
 from converters.BT_719_notice import parse_procurement_documents_change_date, merge_procurement_documents_change_date
@@ -4651,16 +4651,16 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"BT-711-LotResult: Error processing Tender Value Highest data: {str(e)}")
 
-    # Parse and merge BT-712(a)-LotResult (Buyer Review Complainants)
+    # Parse and merge BT-712(a)-LotResult (Buyer Review Complainants Code)
     try:
-        buyer_review_complainants_data = parse_buyer_review_complainants(xml_content)
-        if buyer_review_complainants_data:
-            merge_buyer_review_complainants(release_json, buyer_review_complainants_data)
-            logger.info("BT-712(a)-LotResult: Successfully merged Buyer Review Complainants data")
+        buyer_review_complainants_code_data = parse_buyer_review_complainants_code(xml_content)
+        if buyer_review_complainants_code_data:
+            merge_buyer_review_complainants_code(release_json, buyer_review_complainants_code_data)
+            logger.info("BT-712(a)-LotResult: Successfully merged Buyer Review Complainants Code data")
         else:
-            logger.info("BT-712(a)-LotResult: No Buyer Review Complainants data found")
+            logger.info("BT-712(a)-LotResult: No Buyer Review Complainants Code data found")
     except Exception as e:
-        logger.error(f"BT-712(a)-LotResult: Error processing Buyer Review Complainants data: {str(e)}")
+        logger.error(f"BT-712(a)-LotResult: Error processing Buyer Review Complainants Code data: {str(e)}")
 
     # Parse and merge BT-712(b)-LotResult (Buyer Review Complainants Number)
     try:
@@ -5195,7 +5195,7 @@ def main(xml_path, ocid_prefix):
     except Exception as e:
         logger.error(f"BT-76-Lot: Error processing Tenderer Legal Form Description data: {str(e)}")
 
-    # Parse and merge BT-760-LotResult Received Submissions Type
+    # Parse and merge BT-760-LotResult (Received Submissions Type)
     try:
         received_submissions_type_data = parse_received_submissions_type(xml_content)
         if received_submissions_type_data:
