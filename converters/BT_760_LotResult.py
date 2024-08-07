@@ -58,9 +58,8 @@ def parse_received_submissions_type(xml_content):
             measure = map_statistic_code(stat)
             if measure:
                 statistic = {
-                    "id": str(len(result["bids"]["statistics"]) + 1),
-                    "measure": measure,
-                    "relatedLot": lot_id[0] if lot_id else None
+                    "id": f"{measure}-{lot_id[0]}" if lot_id else f"{measure}-unknown",
+                    "measure": measure,"relatedLots": [lot_id[0]] if lot_id else None
                 }
                 result["bids"]["statistics"].append(statistic)
 
@@ -89,10 +88,17 @@ def merge_received_submissions_type(release_json, received_submissions_data):
     statistics = bids.setdefault("statistics", [])
 
     for new_stat in received_submissions_data["bids"]["statistics"]:
-        existing_stat = next((stat for stat in statistics if stat["id"] == new_stat["id"]), None)
+        existing_stat = next(
+            (stat for stat in statistics if stat["measure"] == new_stat["measure"] and stat.get("relatedLots") == new_stat.get("relatedLots")), 
+            None
+        )
         if existing_stat:
             existing_stat.update(new_stat)
         else:
             statistics.append(new_stat)
+
+    # Renumber the statistics
+    for i, stat in enumerate(statistics, start=1):
+        stat["id"] = str(i)
 
     logger.info(f"Merged Received Submissions Type data for {len(received_submissions_data['bids']['statistics'])} statistics")

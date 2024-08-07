@@ -2,7 +2,6 @@
 
 import logging
 from lxml import etree
-from constants import global_statistic_id
 
 logger = logging.getLogger(__name__)
 
@@ -19,7 +18,7 @@ def parse_tender_value_lowest(xml_content):
                   "bids": {
                       "statistics": [
                           {
-                              "id": "1",
+                              "id": "lowest-LOT-0001",
                               "measure": "lowestValidBidValue",
                               "value": {
                                   "amount": float_value,
@@ -48,8 +47,6 @@ def parse_tender_value_lowest(xml_content):
 
     result = {"bids": {"statistics": []}}
 
-    global global_statistic_id  # Use the global counter
-
     lot_results = root.xpath("//efac:NoticeResult/efac:LotResult", namespaces=namespaces)
 
     for lot_result in lot_results:
@@ -58,7 +55,7 @@ def parse_tender_value_lowest(xml_content):
 
         if lower_tender_amount and lot_id:
             statistic = {
-                "id": str(global_statistic_id),  # Assign the global ID
+                "id": f"lowest-{lot_id[0]}",
                 "measure": "lowestValidBidValue",
                 "value": {
                     "amount": float(lower_tender_amount[0].text),
@@ -67,7 +64,6 @@ def parse_tender_value_lowest(xml_content):
                 "relatedLots": [lot_id[0]]
             }
             result["bids"]["statistics"].append(statistic)
-            global_statistic_id += 1  # Increment the global counter
 
     return result if result["bids"]["statistics"] else None
 
@@ -89,15 +85,18 @@ def merge_tender_value_lowest(release_json, tender_value_lowest_data):
     bids = release_json.setdefault("bids", {})
     statistics = bids.setdefault("statistics", [])
 
-    for stat in tender_value_lowest_data["bids"]["statistics"]:
-        # Find existing statistic with same measure and relatedLots
+    for new_stat in tender_value_lowest_data["bids"]["statistics"]:
         existing_stat = next(
-            (s for s in statistics if s["measure"] == stat["measure"] and s.get("relatedLots") == stat.get("relatedLots")), 
+            (stat for stat in statistics if stat["measure"] == new_stat["measure"] and stat.get("relatedLots") == new_stat.get("relatedLots")), 
             None
         )
         if existing_stat:
-            existing_stat["value"] = stat["value"]  # Update value only
+            existing_stat.update(new_stat)
         else:
-            statistics.append(stat)  # Append if no match found
+            statistics.append(new_stat)
+
+    # Renumber the statistics
+    for i, stat in enumerate(statistics, start=1):
+        stat["id"] = str(i)
 
     logger.info(f"Merged Tender Value Lowest data for {len(tender_value_lowest_data['bids']['statistics'])} statistics")

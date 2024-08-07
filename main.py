@@ -71,7 +71,7 @@ from converters.BT_191_Tender import parse_country_origin, merge_country_origin
 from converters.BT_193_Tender import parse_tender_variant, merge_tender_variant
 #from converters.BT_195 import parse_unpublished_identifier
 from converters.BT_195_BT_09_Procedure import bt_195_parse_unpublished_cross_border_law_bt_09, bt_195_merge_unpublished_cross_border_law_bt_09
-from converters.BT_195_BT_105_Procedure import parse_unpublished_procedure_type, merge_unpublished_procedure_type
+from converters.BT_195_BT_105_Procedure import bt_195_parse_unpublished_procedure_type_bt_105, bt_195_merge_unpublished_procedure_type_bt_105
 
 from converters.BT_195_BT_106_Procedure import parse_unpublished_procedure_accelerated, merge_unpublished_procedure_accelerated
 from converters.BT_195_BT_1252_Procedure import parse_unpublished_direct_award_justification, merge_unpublished_direct_award_justification
@@ -1279,13 +1279,13 @@ def main(xml_path, ocid_prefix):
         "Unpublished Cross Border Law Identifier (BT-195, BT-09)"
     )
 
-    # Parse and merge BT-195(BT-105)-Procedure
+    # Parse and merge BT-195(BT-105)-Procedure Unpublished Procedure Type Identifier
     process_bt_section(
         release_json,
         xml_content,
-        [parse_unpublished_procedure_type],
-        merge_unpublished_procedure_type,
-        "Unpublished Procedure Type (BT-195(BT-105))"
+        [bt_195_parse_unpublished_procedure_type_bt_105],
+        bt_195_merge_unpublished_procedure_type_bt_105,
+        "Unpublished Procedure Type Identifier (BT-195, BT-105)"
     )
 
     # Parse and merge BT-195(BT-106)-Procedure

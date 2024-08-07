@@ -2,7 +2,6 @@
 
 import logging
 from lxml import etree
-from constants import global_statistic_id
 
 logger = logging.getLogger(__name__)
 
@@ -19,8 +18,9 @@ def parse_received_submissions_count(xml_content):
                   "bids": {
                       "statistics": [
                           {
-                              "id": "unique_id",
+                              "id": "bids-LOT-0001",
                               "value": int_value,
+                              "measure": "bids",
                               "relatedLots": ["lot_id"]
                           }
                       ]
@@ -41,8 +41,6 @@ def parse_received_submissions_count(xml_content):
 
     result = {"bids": {"statistics": []}}
 
-    global global_statistic_id  # Use the global counter
-
     lot_results = root.xpath("//efac:NoticeResult/efac:LotResult", namespaces=namespaces)
     for lot_result in lot_results:
         lot_id = lot_result.xpath("efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)
@@ -50,12 +48,11 @@ def parse_received_submissions_count(xml_content):
 
         if lot_id and submissions_count:
             result["bids"]["statistics"].append({
-                "id": str(global_statistic_id),  # Assign the global ID
+                "id": f"bids-{lot_id[0]}",
                 "value": int(submissions_count[0]),
                 "measure": "bids", 
                 "relatedLots": [lot_id[0]]
             })
-            global_statistic_id += 1  # Increment the global counter
 
     return result if result["bids"]["statistics"] else None
 
@@ -83,12 +80,12 @@ def merge_received_submissions_count(release_json, received_submissions_data):
             None
         )
         if existing_stat:
-            # Update based on the measure
-            if new_stat["measure"] == "bids":
-                existing_stat["value"] = new_stat["value"] 
-            else:
-                existing_stat["value"] = new_stat["value"]  
+            existing_stat.update(new_stat)
         else:
-            statistics.append(new_stat)  # Append if no match found
+            statistics.append(new_stat)
+
+    # Renumber the statistics
+    for i, stat in enumerate(statistics, start=1):
+        stat["id"] = str(i)
 
     logger.info(f"Merged received submissions count data for {len(received_submissions_data['bids']['statistics'])} lots")
