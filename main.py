@@ -70,7 +70,7 @@ from converters.BT_19_Lot import parse_submission_nonelectronic_justification, m
 from converters.BT_191_Tender import parse_country_origin, merge_country_origin
 from converters.BT_193_Tender import parse_tender_variant, merge_tender_variant
 #from converters.BT_195 import parse_unpublished_identifier
-from converters.BT_195_BT_09_Procedure import parse_unpublished_cross_border_law, merge_unpublished_cross_border_law
+from converters.BT_195_BT_09_Procedure import bt_195_parse_unpublished_cross_border_law_bt_09, bt_195_merge_unpublished_cross_border_law_bt_09
 from converters.BT_195_BT_105_Procedure import parse_unpublished_procedure_type, merge_unpublished_procedure_type
 
 from converters.BT_195_BT_106_Procedure import parse_unpublished_procedure_accelerated, merge_unpublished_procedure_accelerated
@@ -1270,13 +1270,13 @@ def main(xml_path, ocid_prefix):
         "Tender Variant (BT-193)"
     )
 
-    # Parse and merge BT-195(BT-09)-Procedure
+    # Parse and merge BT-195(BT-09)-Procedure Unpublished Cross Border Law Identifier
     process_bt_section(
         release_json,
         xml_content,
-        [parse_unpublished_cross_border_law],
-        merge_unpublished_cross_border_law,
-        "Unpublished Cross Border Law (BT-195(BT-09))"
+        [bt_195_parse_unpublished_cross_border_law_bt_09],
+        bt_195_merge_unpublished_cross_border_law_bt_09,
+        "Unpublished Cross Border Law Identifier (BT-195, BT-09)"
     )
 
     # Parse and merge BT-195(BT-105)-Procedure
