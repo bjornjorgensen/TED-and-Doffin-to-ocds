@@ -18,7 +18,7 @@ from converters.BT_04_Procedure import parse_procedure_identifier, merge_procedu
 from converters.BT_05_notice import parse_notice_dispatch_date_time, merge_notice_dispatch_date_time
 from converters.BT_06_Lot import parse_strategic_procurement, merge_strategic_procurement
 from converters.BT_09_Procedure import parse_cross_border_law, merge_cross_border_law
-from converters.BT_10 import parse_contract_xml
+from converters.BT_10 import parse_contract_xml, merge_contract_info
 from converters.BT_11_Procedure_Buyer import parse_buyer_legal_type, merge_buyer_legal_type
 from converters.BT_88_Procedure import parse_procedure_features, merge_procedure_features
 from converters.BT_105_Procedure import parse_procedure_type, merge_procedure_type
@@ -754,20 +754,14 @@ def main(xml_path, ocid_prefix):
         "Cross Border Law (BT-09)"
     )
     
-    # Parse BT-10
-    contract_info = parse_contract_xml(xml_content)
-    if contract_info:
-        if contract_info.get("parties"):
-            for new_party in contract_info["parties"]:
-                existing_party = next((party for party in release_json.get("parties", []) if party["id"] == new_party["id"]), None)
-                if existing_party:
-                    if "details" not in existing_party:
-                        existing_party["details"] = {"classifications": []}
-                    elif "classifications" not in existing_party["details"]:
-                        existing_party["details"]["classifications"] = []
-                    existing_party["details"]["classifications"].extend(new_party["details"]["classifications"])
-                else:
-                    release_json.setdefault("parties", []).append(new_party)
+    # Parse and merge BT-10-Organization-Company
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_contract_xml],
+        merge_contract_info,
+        "Organization Main Activity (BT-10)"
+    )
 
     # Parse and merge BT-105-Procedure
     process_bt_section(

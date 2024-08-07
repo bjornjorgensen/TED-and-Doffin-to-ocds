@@ -1,7 +1,20 @@
 # converters/BT_10.py
+
+import logging
 from lxml import etree
 
+logger = logging.getLogger(__name__)
+
 def parse_contract_xml(xml_content):
+    """
+    Parse the XML content to extract contract information related to BT-10.
+
+    Args:
+        xml_content (str or bytes): The XML content to parse.
+
+    Returns:
+        dict: A dictionary containing the parsed contract information.
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode('utf-8')
     root = etree.fromstring(xml_content)
@@ -29,29 +42,29 @@ def parse_contract_xml(xml_content):
         "water": ("COFOG", "Water-related activities", "06.3")
     }
 
-    contracting_party_xpath = "//cac:ContractingParty"
-    party_id_xpath = ".//cac:PartyIdentification/cbc:ID"
-    activity_type_code_xpath = ".//cbc:ActivityTypeCode[@listName='authority-activity']"
-    
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
+        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
+        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
+        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
+        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+    }
 
-    for contracting_party in root.xpath(contracting_party_xpath, namespaces=namespaces):
-        party_id_elements = contracting_party.xpath(party_id_xpath, namespaces=namespaces)
+    contracting_parties = root.xpath("//cac:ContractingParty", namespaces=namespaces)
+    
+    for contracting_party in contracting_parties:
+        party_id_elements = contracting_party.xpath(".//cac:PartyIdentification/cbc:ID", namespaces=namespaces)
         if not party_id_elements:
-            continue  # Skip this contracting party if it doesn't have an ID
+            logger.warning("Skipping contracting party without ID")
+            continue
 
         party_id = party_id_elements[0].text
         
-        activity_type_code_elements = contracting_party.xpath(activity_type_code_xpath, namespaces=namespaces)
+        activity_type_code_elements = contracting_party.xpath(".//cbc:ActivityTypeCode[@listName='authority-activity']", namespaces=namespaces)
         if not activity_type_code_elements:
-            continue  # Skip this contracting party if it doesn't have an activity type code
+            logger.warning(f"Skipping contracting party {party_id} without activity type code")
+            continue
 
         activity_type_code = activity_type_code_elements[0].text
 
@@ -82,4 +95,33 @@ def parse_contract_xml(xml_content):
         
         organization['details']['classifications'].append(classification)
 
+    logger.info(f"Parsed {len(parties)} parties with BT-10 information")
     return {"parties": parties}
+
+def merge_contract_info(release_json, contract_info):
+    """
+    Merge the parsed contract information into the main OCDS release JSON.
+
+    Args:
+        release_json (dict): The main OCDS release JSON to be updated.
+        contract_info (dict): The parsed contract information to be merged.
+
+    Returns:
+        None: The function updates the release_json in-place.
+    """
+    if not contract_info or not contract_info.get("parties"):
+        logger.warning("No contract information to merge")
+        return
+
+    for new_party in contract_info["parties"]:
+        existing_party = next((party for party in release_json.get("parties", []) if party["id"] == new_party["id"]), None)
+        if existing_party:
+            if "details" not in existing_party:
+                existing_party["details"] = {"classifications": []}
+            elif "classifications" not in existing_party["details"]:
+                existing_party["details"]["classifications"] = []
+            existing_party["details"]["classifications"].extend(new_party["details"]["classifications"])
+        else:
+            release_json.setdefault("parties", []).append(new_party)
+
+    logger.info(f"Merged BT-10 information for {len(contract_info['parties'])} parties")
