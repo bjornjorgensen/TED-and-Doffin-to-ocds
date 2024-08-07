@@ -5,14 +5,7 @@ from datetime import datetime
 from lxml import etree
 import logging
 from converters.Common_operations import NoticeProcessor
-from converters.BT_01_Procedure import (
-    parse_procedure_legal_basis_id,
-    parse_procedure_legal_basis_description,
-    parse_procedure_legal_basis_noid,
-    parse_procedure_legal_basis_noid_description,
-    parse_procedure_legal_basis_notice,
-    merge_procedure_legal_basis
-)
+from converters.BT_01_Procedure import (parse_procedure_legal_basis, merge_procedure_legal_basis)
 from converters.BT_03 import parse_form_type, merge_form_type
 from converters.BT_04_Procedure import parse_procedure_identifier, merge_procedure_identifier
 from converters.BT_05_notice import parse_notice_dispatch_date_time, merge_notice_dispatch_date_time
@@ -692,22 +685,14 @@ def main(xml_path, ocid_prefix):
     release_json_str = notice_processor.create_release(xml_content)
     release_json = json.loads(release_json_str)
 
-    # Parse and merge BT-01 Procedure data
-    for parse_func in [
-        parse_procedure_legal_basis_id,
-        parse_procedure_legal_basis_description,
-        parse_procedure_legal_basis_noid,
-        parse_procedure_legal_basis_noid_description,
-        parse_procedure_legal_basis_notice
-    ]:
-        try:
-            legal_basis_data = parse_func(xml_content)
-            if legal_basis_data:
-                merge_procedure_legal_basis(release_json, legal_basis_data)
-            else:
-                logger.info(f"No data found for {parse_func.__name__}")
-        except Exception as e:
-            logger.error(f"Error processing {parse_func.__name__}: {str(e)}")
+    # Parse and merge BT-01 Procedure Legal Basis
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_procedure_legal_basis],
+        merge_procedure_legal_basis,
+        "Procedure Legal Basis (BT-01)"
+    )
 
     # Parse and merge BT-03 Form Type
     process_bt_section(
