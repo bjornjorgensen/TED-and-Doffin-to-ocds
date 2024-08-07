@@ -1,24 +1,19 @@
 # tests/test_BT_712b_LotResult.py
 
 import pytest
-import json
-import os
-import sys
+from lxml import etree
+from converters.BT_712b_LotResult import parse_buyer_review_complainants_bt_712b, merge_buyer_review_complainants_bt_712b
 
-# Add the parent directory to sys.path to import main
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from main import main
-
-def test_bt_712b_lotresult_integration(tmp_path):
+def test_parse_buyer_review_complainants_bt_712b():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+          xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
         <efac:NoticeResult>
             <efac:LotResult>
                 <efac:AppealRequestsStatistics>
-                    <efbc:StatisticsCode listName="review-type">complainants</efbc:StatisticsCode>
                     <efbc:StatisticsNumeric>2</efbc:StatisticsNumeric>
                 </efac:AppealRequestsStatistics>
                 <efac:TenderLot>
@@ -28,26 +23,51 @@ def test_bt_712b_lotresult_integration(tmp_path):
         </efac:NoticeResult>
     </root>
     """
-    xml_file = tmp_path / "test_input_buyer_review_complainants_number.xml"
-    xml_file.write_text(xml_content)
-
-    result = main(str(xml_file), "ocds-test-prefix")
-
-    assert result is not None, "Result is None"
-    print(f"Full result: {json.dumps(result, indent=2)}")
-
-    assert "statistics" in result, "No 'statistics' in result"
-    assert "bids" not in result or "statistics" not in result["bids"], "'statistics' should not be under 'bids'"
-    assert len(result["statistics"]) == 1, f"Expected 1 statistic, got {len(result['statistics'])}"
     
-    statistic = result["statistics"][0]
-    print(f"Statistic details: {json.dumps(statistic, indent=2)}")
+    result = parse_buyer_review_complainants_bt_712b(xml_content)
     
-    assert statistic["id"] == "1", f"Expected statistic id '1', got '{statistic.get('id')}'"
-    assert statistic["value"] == 2, f"Expected value 2, got {statistic.get('value')}"
-    assert statistic["measure"] == "complainants", f"Expected measure 'complainants', got '{statistic.get('measure')}'"
-    assert statistic["scope"] == "complaints", f"Expected scope 'complaints', got '{statistic.get('scope')}'"
-    assert statistic["relatedLot"] == "LOT-0001", f"Expected relatedLot 'LOT-0001', got '{statistic.get('relatedLot')}'"
+    assert result is not None
+    assert "statistics" in result
+    assert len(result["statistics"]) == 1
+    assert result["statistics"][0]["id"] == "1"
+    assert result["statistics"][0]["value"] == 2
+    assert result["statistics"][0]["measure"] == "complainants"
+    assert result["statistics"][0]["scope"] == "complaints"
+    assert result["statistics"][0]["relatedLot"] == "LOT-0001"
+
+def test_merge_buyer_review_complainants_bt_712b():
+    release_json = {
+        "statistics": [
+            {
+                "id": "1",
+                "value": 1,
+                "measure": "appeals",
+                "scope": "complaints",
+                "relatedLot": "LOT-0001"
+            }
+        ]
+    }
+    
+    buyer_review_complainants_data = {
+        "statistics": [
+            {
+                "id": "2",
+                "value": 2,
+                "measure": "complainants",
+                "scope": "complaints",
+                "relatedLot": "LOT-0001"
+            }
+        ]
+    }
+    
+    merge_buyer_review_complainants_bt_712b(release_json, buyer_review_complainants_data)
+    
+    assert len(release_json["statistics"]) == 2
+    assert release_json["statistics"][1]["id"] == "2"
+    assert release_json["statistics"][1]["value"] == 2
+    assert release_json["statistics"][1]["measure"] == "complainants"
+    assert release_json["statistics"][1]["scope"] == "complaints"
+    assert release_json["statistics"][1]["relatedLot"] == "LOT-0001"
 
 if __name__ == "__main__":
     pytest.main()

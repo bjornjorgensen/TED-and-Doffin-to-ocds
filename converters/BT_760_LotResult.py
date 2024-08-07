@@ -2,7 +2,6 @@
 
 import logging
 from lxml import etree
-from typing import Dict, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -18,18 +17,21 @@ SUBMISSION_TYPE_MAPPING = {
     "t-sme": "smeBids",
     "t-verif-inad": "disqualifiedBids",
     "t-verif-inad-low": "tendersAbnormallyLow",
-    "tenders": "bids"
+    "tenders": "bids",
+    "t-eea": "eeaBids",
+    "t-non-eea": "nonEuBids",
+    "t-total": "totalBids"
 }
 
-def parse_received_submissions_type(xml_content: str) -> Optional[Dict]:
+def parse_received_submissions_type(xml_content):
     """
-    Parse the XML content to extract the received submissions type.
+    Parse the XML content to extract the Received Submissions Type information.
 
     Args:
         xml_content (str): The XML content to parse.
 
     Returns:
-        Optional[Dict]: A dictionary containing the parsed data if found, None otherwise.
+        dict: A dictionary containing the parsed data if found, None otherwise.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode('utf-8')
@@ -37,60 +39,60 @@ def parse_received_submissions_type(xml_content: str) -> Optional[Dict]:
     root = etree.fromstring(xml_content)
     namespaces = {
         'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
         'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
         'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1',
-        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1'
+        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
+        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
     }
 
     result = {"bids": {"statistics": []}}
-    statistic_id = 1
 
     lot_results = root.xpath("//efac:NoticeResult/efac:LotResult", namespaces=namespaces)
     
     for lot_result in lot_results:
-        received_submissions = lot_result.xpath("efac:ReceivedSubmissionsStatistics/efbc:StatisticsCode[@listName='received-submission-type']/text()", namespaces=namespaces)
         lot_id = lot_result.xpath("efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)
+        statistics = lot_result.xpath("efac:ReceivedSubmissionsStatistics/efbc:StatisticsCode[@listName='received-submission-type']/text()", namespaces=namespaces)
         
-        if received_submissions and lot_id:
-            for submission_type in received_submissions:
-                if submission_type in SUBMISSION_TYPE_MAPPING:
-                    statistic = {
-                        "id": str(statistic_id),
-                        "measure": SUBMISSION_TYPE_MAPPING[submission_type],
-                        "relatedLot": lot_id[0]
-                    }
-                    result["bids"]["statistics"].append(statistic)
-                    statistic_id += 1
+        for stat in statistics:
+            measure = map_statistic_code(stat)
+            if measure:
+                statistic = {
+                    "id": str(len(result["bids"]["statistics"]) + 1),
+                    "measure": measure,
+                    "relatedLot": lot_id[0] if lot_id else None
+                }
+                result["bids"]["statistics"].append(statistic)
 
     return result if result["bids"]["statistics"] else None
 
-def merge_received_submissions_type(release_json: Dict, received_submissions_type_data: Optional[Dict]) -> None:
+def map_statistic_code(code):
+    """Map the statistic code to the corresponding OCDS measure."""
+    return SUBMISSION_TYPE_MAPPING.get(code)
+
+def merge_received_submissions_type(release_json, received_submissions_data):
     """
-    Merge the parsed received submissions type data into the main OCDS release JSON.
+    Merge the parsed Received Submissions Type data into the main OCDS release JSON.
 
     Args:
-        release_json (Dict): The main OCDS release JSON to be updated.
-        received_submissions_type_data (Optional[Dict]): The parsed received submissions type data to be merged.
+        release_json (dict): The main OCDS release JSON to be updated.
+        received_submissions_data (dict): The parsed Received Submissions Type data to be merged.
 
     Returns:
         None: The function updates the release_json in-place.
     """
-    if not received_submissions_type_data:
-        logger.warning("No received submissions type data to merge")
+    if not received_submissions_data:
+        logger.warning("No Received Submissions Type data to merge")
         return
 
-    if "bids" not in release_json:
-        release_json["bids"] = {}
-    if "statistics" not in release_json["bids"]:
-        release_json["bids"]["statistics"] = []
+    bids = release_json.setdefault("bids", {})
+    statistics = bids.setdefault("statistics", [])
 
-    for new_statistic in received_submissions_type_data["bids"]["statistics"]:
-        existing_statistic = next((stat for stat in release_json["bids"]["statistics"] if stat.get("id") == new_statistic["id"]), None)
-        
-        if existing_statistic:
-            existing_statistic.update(new_statistic)
+    for new_stat in received_submissions_data["bids"]["statistics"]:
+        existing_stat = next((stat for stat in statistics if stat["id"] == new_stat["id"]), None)
+        if existing_stat:
+            existing_stat.update(new_stat)
         else:
-            release_json["bids"]["statistics"].append(new_statistic)
+            statistics.append(new_stat)
 
-    logger.info(f"Merged received submissions type data for {len(received_submissions_type_data['bids']['statistics'])} statistics")
+    logger.info(f"Merged Received Submissions Type data for {len(received_submissions_data['bids']['statistics'])} statistics")

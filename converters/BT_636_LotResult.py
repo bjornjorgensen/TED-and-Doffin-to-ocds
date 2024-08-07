@@ -43,58 +43,45 @@ IRREGULARITY_TYPE_MAPPING = {
 
 def parse_irregularity_type(xml_content):
     """
-    Parse the XML content to extract the irregularity type information for each lot result.
+    Parse the XML content to extract the irregularity type for buyer review requests.
 
     Args:
         xml_content (str): The XML content to parse.
 
     Returns:
-        dict: A dictionary containing the parsed irregularity type data in the format:
-              {
-                  "statistics": [
-                      {
-                          "id": "unique_id",
-                          "measure": "irregularity_code",
-                          "scope": "complaints",
-                          "notes": "irregularity_description",
-                          "relatedLot": "lot_id"
-                      }
-                  ]
-              }
+        dict: A dictionary containing the parsed irregularity type data.
         None: If no relevant data is found.
-
-    Raises:
-        etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode('utf-8')
     root = etree.fromstring(xml_content)
     namespaces = {
+        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
         'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
+        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
     }
 
     result = {"statistics": []}
-    statistic_id = 1
+    id_counter = 1
 
     lot_results = root.xpath("//efac:NoticeResult/efac:LotResult", namespaces=namespaces)
-    
     for lot_result in lot_results:
         lot_id = lot_result.xpath("efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)
+        if not lot_id:
+            continue
+
         irregularity_types = lot_result.xpath("efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efbc:StatisticsCode/text()", namespaces=namespaces)
-        
-        if lot_id and irregularity_types:
-            for irregularity_type in irregularity_types:
-                statistic = {
-                    "id": str(statistic_id),
-                    "measure": irregularity_type,
-                    "scope": "complaints",
-                    "notes": IRREGULARITY_TYPE_MAPPING.get(irregularity_type, "Unknown irregularity type"),
-                    "relatedLot": lot_id[0]
-                }
-                result["statistics"].append(statistic)
-                statistic_id += 1
+        for irregularity_type in irregularity_types:
+            statistic = {
+                "id": str(id_counter),
+                "measure": irregularity_type,
+                "scope": "complaints",
+                "relatedLot": lot_id[0],
+                "notes": IRREGULARITY_TYPE_MAPPING.get(irregularity_type, "Unknown irregularity type")
+            }
+            result["statistics"].append(statistic)
+            id_counter += 1
 
     return result if result["statistics"] else None
 

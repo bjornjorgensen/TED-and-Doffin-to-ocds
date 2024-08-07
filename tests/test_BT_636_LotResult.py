@@ -1,19 +1,15 @@
 # tests/test_BT_636_LotResult.py
 
 import pytest
-import json
-import os
-import sys
+from lxml import etree
+from converters.BT_636_LotResult import parse_irregularity_type, merge_irregularity_type, IRREGULARITY_TYPE_MAPPING
 
-# Add the parent directory to sys.path to import main
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from main import main
-
-def test_bt_636_lot_result_integration(tmp_path):
+def test_parse_irregularity_type():
     xml_content = """
-    <root xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
-          xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+          xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
         <efac:NoticeResult>
             <efac:LotResult>
                 <efac:AppealRequestsStatistics>
@@ -26,23 +22,58 @@ def test_bt_636_lot_result_integration(tmp_path):
         </efac:NoticeResult>
     </root>
     """
-    xml_file = tmp_path / "test_input_irregularity_type.xml"
-    xml_file.write_text(xml_content)
+    
+    result = parse_irregularity_type(xml_content)
+    
+    assert result is not None
+    assert "statistics" in result
+    assert len(result["statistics"]) == 1
+    assert result["statistics"][0]["id"] == "1"
+    assert result["statistics"][0]["measure"] == "unj-lim-subc"
+    assert result["statistics"][0]["scope"] == "complaints"
+    assert result["statistics"][0]["relatedLot"] == "LOT-0001"
+    assert result["statistics"][0]["notes"] == IRREGULARITY_TYPE_MAPPING["unj-lim-subc"]
 
-    main(str(xml_file), "ocds-test-prefix")
-
-    with open('output.json', 'r') as f:
-        result = json.load(f)
-
-    assert "statistics" in result, "Expected 'statistics' in result"
-    assert len(result["statistics"]) == 1, f"Expected 1 statistic, got {len(result['statistics'])}"
-
-    statistic = result["statistics"][0]
-    assert statistic["id"] == "1", f"Expected statistic id '1', got {statistic['id']}"
-    assert statistic["measure"] == "unj-lim-subc", f"Expected measure 'unj-lim-subc', got {statistic['measure']}"
-    assert statistic["scope"] == "complaints", f"Expected scope 'complaints', got {statistic['scope']}"
-    assert statistic["notes"] == "Unjustified limitation of subcontracting", f"Expected notes 'Unjustified limitation of subcontracting', got {statistic['notes']}"
-    assert statistic["relatedLot"] == "LOT-0001", f"Expected relatedLot 'LOT-0001', got {statistic['relatedLot']}"
+def test_merge_irregularity_type():
+    release_json = {
+        "statistics": [
+            {
+                "id": "1",
+                "measure": "existing-measure",
+                "scope": "existing-scope",
+                "relatedLot": "LOT-0001"
+            }
+        ]
+    }
+    
+    irregularity_type_data = {
+        "statistics": [
+            {
+                "id": "1",
+                "measure": "unj-lim-subc",
+                "scope": "complaints",
+                "relatedLot": "LOT-0001",
+                "notes": IRREGULARITY_TYPE_MAPPING["unj-lim-subc"]
+            },
+            {
+                "id": "2",
+                "measure": "ab-low",
+                "scope": "complaints",
+                "relatedLot": "LOT-0002",
+                "notes": IRREGULARITY_TYPE_MAPPING["ab-low"]
+            }
+        ]
+    }
+    
+    merge_irregularity_type(release_json, irregularity_type_data)
+    
+    assert len(release_json["statistics"]) == 2
+    assert release_json["statistics"][0]["measure"] == "unj-lim-subc"
+    assert release_json["statistics"][0]["scope"] == "complaints"
+    assert release_json["statistics"][0]["notes"] == IRREGULARITY_TYPE_MAPPING["unj-lim-subc"]
+    assert release_json["statistics"][1]["id"] == "2"
+    assert release_json["statistics"][1]["measure"] == "ab-low"
+    assert release_json["statistics"][1]["notes"] == IRREGULARITY_TYPE_MAPPING["ab-low"]
 
 if __name__ == "__main__":
     pytest.main()
