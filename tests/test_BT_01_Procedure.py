@@ -2,152 +2,108 @@
 
 import pytest
 from lxml import etree
-from converters.BT_01_Procedure import (
-    parse_procedure_legal_basis_id,
-    parse_procedure_legal_basis_description,
-    parse_procedure_legal_basis_noid,
-    parse_procedure_legal_basis_noid_description,
-    parse_procedure_legal_basis_notice,
-    merge_procedure_legal_basis
-)
+from converters.BT_01_Procedure import parse_procedure_legal_basis, merge_procedure_legal_basis
 
-def test_parse_procedure_legal_basis_id():
-    xml_content = """
+def create_xml_with_namespace(content):
+    return f"""<?xml version="1.0" encoding="UTF-8"?>
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:TenderingTerms>
-            <cac:ProcurementLegislationDocumentReference>
-                <cbc:ID>http://data.europa.eu/eli/dir/2014/24/oj</cbc:ID>
-            </cac:ProcurementLegislationDocumentReference>
-        </cac:TenderingTerms>
+        {content}
     </root>
     """
-    result = parse_procedure_legal_basis_id(xml_content)
-    assert result == {
-        "tender": {
-            "legalBasis": {
-                "scheme": "ELI",
-                "id": "http://data.europa.eu/eli/dir/2014/24/oj"
-            }
-        }
-    }
 
-def test_parse_procedure_legal_basis_description():
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:TenderingTerms>
-            <cac:ProcurementLegislationDocumentReference>
-                <cbc:DocumentDescription>Directive XYZ applies ...</cbc:DocumentDescription>
-            </cac:ProcurementLegislationDocumentReference>
-        </cac:TenderingTerms>
-    </root>
-    """
-    result = parse_procedure_legal_basis_description(xml_content)
-    assert result == {
-        "tender": {
-            "legalBasis": {
-                "description": "Directive XYZ applies ..."
-            }
-        }
-    }
+def test_parse_procedure_legal_basis_with_eli():
+    xml_content = create_xml_with_namespace("""
+        <cac:ProcurementLegislationDocumentReference>
+            <cbc:ID>dir201424</cbc:ID>
+            <cbc:DocumentDescription>Directive 2014/24/EU</cbc:DocumentDescription>
+        </cac:ProcurementLegislationDocumentReference>
+    """)
+    
+    result = parse_procedure_legal_basis(xml_content)
+    
+    assert result is not None
+    assert result["tender"]["legalBasis"]["scheme"] == "ELI"
+    assert result["tender"]["legalBasis"]["id"] == "dir201424"
+    assert result["tender"]["legalBasis"]["description"] == "Directive 2014/24/EU"
 
-def test_parse_procedure_legal_basis_noid():
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:TenderingTerms>
-            <cac:ProcurementLegislationDocumentReference>
-                <cbc:ID>LocalLegalBasis</cbc:ID>
-            </cac:ProcurementLegislationDocumentReference>
-        </cac:TenderingTerms>
-    </root>
-    """
-    result = parse_procedure_legal_basis_noid(xml_content)
-    assert result == {
-        "tender": {
-            "legalBasis": {
-                "id": "LocalLegalBasis"
-            }
-        }
-    }
+def test_parse_procedure_legal_basis_with_local_basis():
+    xml_content = create_xml_with_namespace("""
+        <cac:ProcurementLegislationDocumentReference>
+            <cbc:ID>LocalLegalBasis</cbc:ID>
+            <cbc:DocumentDescription>Local procurement law</cbc:DocumentDescription>
+        </cac:ProcurementLegislationDocumentReference>
+    """)
+    
+    result = parse_procedure_legal_basis(xml_content)
+    
+    assert result is not None
+    assert "scheme" not in result["tender"]["legalBasis"]
+    assert result["tender"]["legalBasis"]["id"] == "LocalLegalBasis"
+    assert result["tender"]["legalBasis"]["description"] == "Local procurement law"
 
-def test_parse_procedure_legal_basis_noid_description():
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:TenderingTerms>
-            <cac:ProcurementLegislationDocumentReference>
-                <cbc:ID>LocalLegalBasis</cbc:ID>
-                <cbc:DocumentDescription>Local legal basis description</cbc:DocumentDescription>
-            </cac:ProcurementLegislationDocumentReference>
-        </cac:TenderingTerms>
-    </root>
-    """
-    result = parse_procedure_legal_basis_noid_description(xml_content)
-    assert result == {
-        "tender": {
-            "legalBasis": {
-                "description": "Local legal basis description"
-            }
-        }
-    }
-
-def test_parse_procedure_legal_basis_notice():
-    xml_content = """
-    <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+def test_parse_procedure_legal_basis_with_celex():
+    xml_content = create_xml_with_namespace("""
         <cbc:RegulatoryDomain>32014L0024</cbc:RegulatoryDomain>
-    </root>
-    """
-    result = parse_procedure_legal_basis_notice(xml_content)
-    assert result == {
-        "tender": {
-            "legalBasis": {
-                "scheme": "CELEX",
-                "id": "32014L0024"
-            }
-        }
-    }
+    """)
+    
+    result = parse_procedure_legal_basis(xml_content)
+    
+    assert result is not None
+    assert result["tender"]["legalBasis"]["scheme"] == "CELEX"
+    assert result["tender"]["legalBasis"]["id"] == "32014L0024"
+
+def test_parse_procedure_legal_basis_no_data():
+    xml_content = create_xml_with_namespace("""
+        <cac:SomeOtherElement>
+            <cbc:ID>SomeID</cbc:ID>
+        </cac:SomeOtherElement>
+    """)
+    
+    result = parse_procedure_legal_basis(xml_content)
+    
+    assert result is None
 
 def test_merge_procedure_legal_basis():
     release_json = {
         "tender": {
             "legalBasis": {
-                "id": "existing-id"
+                "scheme": "ELI",
+                "id": "old_id"
             }
         }
     }
+    
     legal_basis_data = {
         "tender": {
             "legalBasis": {
                 "scheme": "CELEX",
-                "id": "32014L0024",
+                "id": "new_id",
                 "description": "New description"
             }
         }
     }
+    
     merge_procedure_legal_basis(release_json, legal_basis_data)
-    assert release_json == {
+    
+    assert release_json["tender"]["legalBasis"]["scheme"] == "CELEX"
+    assert release_json["tender"]["legalBasis"]["id"] == "new_id"
+    assert release_json["tender"]["legalBasis"]["description"] == "New description"
+
+def test_merge_procedure_legal_basis_no_data():
+    release_json = {
         "tender": {
             "legalBasis": {
-                "scheme": "CELEX",
-                "id": "32014L0024",
-                "description": "New description"
+                "scheme": "ELI",
+                "id": "old_id"
             }
         }
     }
+    
+    merge_procedure_legal_basis(release_json, None)
+    
+    assert release_json["tender"]["legalBasis"]["scheme"] == "ELI"
+    assert release_json["tender"]["legalBasis"]["id"] == "old_id"
 
-def test_parse_functions_not_found():
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:SomeOtherElement>
-            <cbc:SomeOtherID>SomeValue</cbc:SomeOtherID>
-        </cac:SomeOtherElement>
-    </root>
-    """
-    assert parse_procedure_legal_basis_id(xml_content) is None
-    assert parse_procedure_legal_basis_description(xml_content) is None
-    assert parse_procedure_legal_basis_noid(xml_content) is None
-    assert parse_procedure_legal_basis_noid_description(xml_content) is None
-    assert parse_procedure_legal_basis_notice(xml_content) is None
+if __name__ == "__main__":
+    pytest.main()
