@@ -1,7 +1,9 @@
 # converters/BT_805_Lot.py
 
-from typing import Optional, Dict, Any, List
+import logging
 from lxml import etree
+
+logger = logging.getLogger(__name__)
 
 GPP_CRITERIA_MAPPING = {
     "eu": "euGPPCriteria",
@@ -9,72 +11,79 @@ GPP_CRITERIA_MAPPING = {
     "other": "otherGPPCriteria"
 }
 
-def parse_green_procurement_criteria(xml_content: str) -> Optional[Dict[str, Any]]:
+def parse_green_procurement_criteria(xml_content):
     """
-    Parse the XML content to extract the Green Procurement Criteria for each lot.
+    Parse the XML content to extract the green procurement criteria for each lot.
 
     Args:
         xml_content (str): The XML content to parse.
 
     Returns:
-        Optional[Dict[str, Any]]: A dictionary containing the parsed data if found, None otherwise.
+        dict: A dictionary containing the parsed green procurement criteria data.
+        None: If no relevant data is found.
     """
-    root = etree.fromstring(xml_content.encode('utf-8'))
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
+    root = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
+    }
 
-    result: Dict[str, Any] = {"tender": {"lots": []}}
+    result = {"tender": {"lots": []}}
 
     lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        gpp_criteria = lot.xpath(
-            "cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='gpp-criteria']/cbc:ProcurementTypeCode/text()",
-            namespaces=namespaces
-        )
+        gpp_criteria = lot.xpath("cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='gpp-criteria']/cbc:ProcurementTypeCode/text()", namespaces=namespaces)
+        
+        lot_data = {
+            "id": lot_id,
+            "hasSustainability": False,
+            "sustainability": []
+        }
 
-        if gpp_criteria and "none" not in gpp_criteria:
-            sustainability: List[Dict[str, List[str]]] = []
-            for criterion in gpp_criteria:
-                if criterion in GPP_CRITERIA_MAPPING:
-                    sustainability.append({"strategies": [GPP_CRITERIA_MAPPING[criterion]]})
-
-            if sustainability:
-                result["tender"]["lots"].append({
-                    "id": lot_id,
-                    "hasSustainability": True,
-                    "sustainability": sustainability
+        for criterion in gpp_criteria:
+            if criterion != "none" and criterion in GPP_CRITERIA_MAPPING:
+                lot_data["hasSustainability"] = True
+                lot_data["sustainability"].append({
+                    "strategies": [GPP_CRITERIA_MAPPING[criterion]]
                 })
+        
+        if lot_data["hasSustainability"]:
+            result["tender"]["lots"].append(lot_data)
 
     return result if result["tender"]["lots"] else None
 
-def merge_green_procurement_criteria(release_json: Dict[str, Any], gpp_data: Optional[Dict[str, Any]]) -> None:
+def merge_green_procurement_criteria(release_json, green_procurement_criteria_data):
     """
-    Merge the parsed Green Procurement Criteria data into the main OCDS release JSON.
+    Merge the parsed green procurement criteria data into the main OCDS release JSON.
 
     Args:
-        release_json (Dict[str, Any]): The main OCDS release JSON to be updated.
-        gpp_data (Optional[Dict[str, Any]]): The parsed Green Procurement Criteria data to be merged.
+        release_json (dict): The main OCDS release JSON to be updated.
+        green_procurement_criteria_data (dict): The parsed green procurement criteria data to be merged.
 
     Returns:
         None: The function updates the release_json in-place.
     """
-    if not gpp_data:
+    if not green_procurement_criteria_data:
+        logger.warning("No green procurement criteria data to merge")
         return
 
     tender = release_json.setdefault("tender", {})
-    lots = tender.setdefault("lots", [])
+    existing_lots = tender.setdefault("lots", [])
 
-    for gpp_lot in gpp_data["tender"]["lots"]:
-        existing_lot = next((lot for lot in lots if lot["id"] == gpp_lot["id"]), None)
+    for new_lot in green_procurement_criteria_data["tender"]["lots"]:
+        existing_lot = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
         if existing_lot:
-            existing_lot["hasSustainability"] = gpp_lot["hasSustainability"]
-            existing_lot["sustainability"] = gpp_lot["sustainability"]
+            existing_lot["hasSustainability"] = new_lot["hasSustainability"]
+            existing_sustainability = existing_lot.setdefault("sustainability", [])
+            for new_sustainability in new_lot["sustainability"]:
+                existing_sustainability.append(new_sustainability)
         else:
-            lots.append(gpp_lot)
+            existing_lots.append(new_lot)
+
+    # Remove lots with no sustainability criteria
+    existing_lots[:] = [lot for lot in existing_lots if lot.get("hasSustainability", False)]
+    
+    logger.info(f"Merged green procurement criteria data for {len(green_procurement_criteria_data['tender']['lots'])} lots")

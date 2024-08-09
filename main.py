@@ -72,9 +72,9 @@ from converters.BT_193_Tender import parse_tender_variant, merge_tender_variant
 #from converters.BT_195 import parse_unpublished_identifier
 from converters.BT_195_BT_09_Procedure import bt_195_parse_unpublished_cross_border_law_bt_09, bt_195_merge_unpublished_cross_border_law_bt_09
 from converters.BT_195_BT_105_Procedure import bt_195_parse_unpublished_procedure_type_bt_105, bt_195_merge_unpublished_procedure_type_bt_105
+from converters.BT_195_BT_106_Procedure import BT_195_parse_unpublished_procedure_identifier_BT_106, BT_195_merge_unpublished_procedure_identifier_BT_106
+from converters.BT_195_BT_1252_Procedure import BT_195_parse_unpublished_procedure_identifier_BT_1252, BT_195_merge_unpublished_procedure_identifier_BT_1252
 
-from converters.BT_195_BT_106_Procedure import parse_unpublished_procedure_accelerated, merge_unpublished_procedure_accelerated
-from converters.BT_195_BT_1252_Procedure import parse_unpublished_direct_award_justification, merge_unpublished_direct_award_justification
 from converters.BT_195_BT_135_Procedure import parse_unpublished_direct_award_justification_text, merge_unpublished_direct_award_justification_text
 from converters.BT_195_BT_1351_Procedure import parse_unpublished_procedure_accelerated_justification, merge_unpublished_procedure_accelerated_justification
 from converters.BT_195_BT_136_Procedure import parse_unpublished_direct_award_justification_bt_136, merge_unpublished_direct_award_justification_bt_136
@@ -87,9 +87,10 @@ from converters.BT_195_BT_171_Tender import parse_unpublished_tender_rank, merge
 from converters.BT_195_BT_191_Tender import parse_unpublished_country_origin, merge_unpublished_country_origin
 from converters.BT_195_BT_193_Tender import parse_unpublished_winning_tender_variant, merge_unpublished_winning_tender_variant
 from converters.BT_195_BT_539_Lot import parse_unpublished_award_criterion_type, merge_unpublished_award_criterion_type
+from converters.BT_195_BT_539_LotsGroup import BT_195_parse_unpublished_award_criterion_type_lotsgroup_bt539, BT_195_merge_unpublished_award_criterion_type_lotsgroup_bt539
 from converters.BT_539_LotsGroup import parse_award_criterion_type_lots_group, merge_award_criterion_type_lots_group
-from converters.BT_540_Lot import parse_award_criterion_description, merge_award_criterion_description
-from converters.BT_540_LotsGroup import parse_award_criterion_description_lots_group, merge_award_criterion_description_lots_group
+from converters.BT_195_BT_540_Lot import BT_195_parse_unpublished_award_criterion_description_lot_bt540, BT_195_merge_unpublished_award_criterion_description_lot_bt540
+from converters.BT_195_BT_540_LotsGroup import BT_195_parse_unpublished_award_criterion_description_lotsgroup_bt540, BT_195_merge_unpublished_award_criterion_description_lotsgroup_bt540
 from converters.BT_195_BT_541_Lot_Fixed import parse_unpublished_award_criterion_number_fixed, merge_unpublished_award_criterion_number_fixed
 from converters.BT_195_BT_541_Lot_Threshold import parse_unpublished_award_criterion_number_threshold, merge_unpublished_award_criterion_number_threshold
 from converters.BT_195_BT_541_Lot_Weight import parse_unpublished_award_criterion_number_weight, merge_unpublished_award_criterion_number_weight
@@ -100,6 +101,9 @@ from converters.BT_5421_Lot import parse_award_criterion_number_weight_lot, merg
 from converters.BT_5421_LotsGroup import parse_award_criterion_number_weight_lots_group, merge_award_criterion_number_weight_lots_group
 from converters.BT_5422_Lot import parse_award_criterion_number_fixed, merge_award_criterion_number_fixed
 from converters.BT_5422_LotsGroup import parse_award_criterion_number_fixed_lotsgroup, merge_award_criterion_number_fixed_lotsgroup
+from converters.BT_195_BT_5421_Lot import BT_195_parse_unpublished_award_criterion_number_weight_lot_bt5421, BT_195_merge_unpublished_award_criterion_number_weight_lot_bt5421
+from converters.BT_195_BT_5421_LotsGroup import BT_195_parse_unpublished_award_criterion_number_weight_lotsgroup_bt5421, BT_195_merge_unpublished_award_criterion_number_weight_lotsgroup_bt5421
+from converters.BT_195_BT_5422_Lot import BT_195_parse_unpublished_award_criterion_number_fixed_lot_bt5422, BT_195_merge_unpublished_award_criterion_number_fixed_lot_bt5422
 from converters.BT_195_BT_5422_LotsGroup import parse_unpublished_award_criterion_number_fixed_lotsgroup_bt5422, merge_unpublished_award_criterion_number_fixed_lotsgroup_bt5422
 from converters.BT_195_BT_5423_Lot import parse_unpublished_award_criterion_number_threshold_lot, merge_unpublished_award_criterion_number_threshold_lot
 from converters.BT_195_BT_5423_LotsGroup import parse_unpublished_award_criterion_number_threshold_lotsgroup_bt5423, merge_unpublished_award_criterion_number_threshold_lotsgroup_bt5423
@@ -363,7 +367,7 @@ from converters.BT_538_Part import parse_part_duration_other, merge_part_duratio
 from converters.BT_539_Lot import parse_award_criterion_type, merge_award_criterion_type
 from converters.BT_539_LotsGroup import parse_award_criterion_type_lots_group, merge_award_criterion_type_lots_group
 from converters.BT_54_Lot import parse_options_description, merge_options_description
-#from converters.BT_540_Lot import parse_lot_award_criterion_description, merge_lot_award_criterion_description
+from converters.BT_540_Lot import parse_award_criterion_description, merge_award_criterion_description
 from converters.BT_540_LotsGroup import parse_award_criterion_description_lots_group, merge_award_criterion_description_lots_group
 from converters.BT_541_Lot_FixedNumber import parse_award_criterion_fixed_number, merge_award_criterion_fixed_number
 from converters.BT_5421_Lot import parse_award_criterion_number_weight_lot, merge_award_criterion_number_weight_lot
@@ -1288,22 +1292,22 @@ def main(xml_path, ocid_prefix):
         "Unpublished Procedure Type Identifier (BT-195, BT-105)"
     )
 
-    # Parse and merge BT-195(BT-106)-Procedure
+    # Parse and merge BT-195(BT-106) Procedure Unpublished Identifier
     process_bt_section(
         release_json,
         xml_content,
-        [parse_unpublished_procedure_accelerated],
-        merge_unpublished_procedure_accelerated,
-        "Unpublished Procedure Accelerated (BT-195(BT-106))"
+        [BT_195_parse_unpublished_procedure_identifier_BT_106],
+        BT_195_merge_unpublished_procedure_identifier_BT_106,
+        "Procedure Unpublished Identifier (BT-195, BT-106)"
     )
 
-    # Parse and merge BT-195(BT-1252)-Procedure
+    # Parse and merge BT-195(BT-1252) Procedure Unpublished Identifier
     process_bt_section(
         release_json,
         xml_content,
-        [parse_unpublished_direct_award_justification],
-        merge_unpublished_direct_award_justification,
-        "Unpublished Direct Award Justification (BT-195(BT-1252))"
+        [BT_195_parse_unpublished_procedure_identifier_BT_1252],
+        BT_195_merge_unpublished_procedure_identifier_BT_1252,
+        "Procedure Unpublished Identifier (BT-195, BT-1252)"
     )
 
     # Parse and merge BT-195(BT-135)-Procedure
@@ -1414,32 +1418,32 @@ def main(xml_path, ocid_prefix):
         "Unpublished Award Criterion Type (BT-195(BT-539))"
     )
 
-    # Parse and merge BT-195(BT-539)-LotsGroup
-    #process_bt_section(
-    #    release_json,
-    #    xml_content,
-    #    [parse_unpublished_award_criterion_type_lots_group],
-    #    merge_unpublished_award_criterion_type_lots_group,
-    #    "Unpublished Award Criterion Type (LotsGroup) (BT-195(BT-539))"
-    #)
+    # Parse and merge BT-195(BT-539) LotsGroup Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [BT_195_parse_unpublished_award_criterion_type_lotsgroup_bt539],
+        BT_195_merge_unpublished_award_criterion_type_lotsgroup_bt539,
+        "LotsGroup Unpublished Identifier (BT-195, BT-539)"
+    )
 
-    ## Parse and merge BT-195(BT-540)-Lot
-    #process_bt_section(
-    #    release_json,
-    #    xml_content,
-    #    [parse_unpublished_award_criterion_description],
-    #    merge_unpublished_award_criterion_description,
-    #    "Unpublished Award Criterion Description (BT-195(BT-540))"
-    #)
+    # Parse and merge BT-195(BT-540) Lot Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [BT_195_parse_unpublished_award_criterion_description_lot_bt540],
+        BT_195_merge_unpublished_award_criterion_description_lot_bt540,
+        "Lot Unpublished Identifier (BT-195, BT-540)"
+    )
 
-    ## Parse and merge BT-195(BT-540)-LotsGroup
-    #process_bt_section(
-    #    release_json,
-    #    xml_content,
-    #    [parse_unpublished_award_criterion_description_lots_group],
-    #    merge_unpublished_award_criterion_description_lots_group,
-    #    "Unpublished Award Criterion Description (LotsGroup) (BT-195(BT-540))"
-    #)
+    # Parse and merge BT-195(BT-540) LotsGroup Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [BT_195_parse_unpublished_award_criterion_description_lotsgroup_bt540],
+        BT_195_merge_unpublished_award_criterion_description_lotsgroup_bt540,
+        "LotsGroup Unpublished Identifier (BT-195, BT-540)"
+    )
 
     # Parse and merge BT-195(BT-541)-Lot-Fixed
     process_bt_section(
@@ -1495,32 +1499,32 @@ def main(xml_path, ocid_prefix):
         "Unpublished Award Criterion Number Weight (LotsGroup) (BT-195(BT-541))"
     )
 
-    # Parse and merge BT-195(BT-5421)-Lot
-    #process_bt_section(
-    #    release_json,
-    #    xml_content,
-    #    [parse_unpublished_award_criterion_number_weight_lot],
-    #    merge_unpublished_award_criterion_number_weight_lot,
-    #    "Unpublished Award Criterion Number Weight (Lot) (BT-195(BT-5421))"
-    #)
+    # Parse and merge BT-195(BT-5421) Lot Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [BT_195_parse_unpublished_award_criterion_number_weight_lot_bt5421],
+        BT_195_merge_unpublished_award_criterion_number_weight_lot_bt5421,
+        "Lot Unpublished Identifier (BT-195, BT-5421)"
+    )
 
-    # Parse and merge BT-195(BT-5421)-LotsGroup
-    #process_bt_section(
-    #    release_json,
-    #    xml_content,
-    #    [parse_unpublished_award_criterion_number_weight_lotsgroup],
-    #    merge_unpublished_award_criterion_number_weight_lotsgroup,
-    #    "Unpublished Award Criterion Number Weight (LotsGroup) (BT-195(BT-5421))"
-    #)
+    # Parse and merge BT-195(BT-5421) LotsGroup Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [BT_195_parse_unpublished_award_criterion_number_weight_lotsgroup_bt5421],
+        BT_195_merge_unpublished_award_criterion_number_weight_lotsgroup_bt5421,
+        "LotsGroup Unpublished Identifier (BT-195, BT-5421)"
+    )
 
-    # Parse and merge BT-195(BT-5422)-Lot
-    #process_bt_section(
-    #    release_json,
-    #    xml_content,
-    #    [parse_unpublished_award_criterion_number_fixed_lot],
-    #    merge_unpublished_award_criterion_number_fixed_lot,
-    #    "Unpublished Award Criterion Number Fixed (Lot) (BT-195(BT-5422))"
-    #)
+    # Parse and merge BT-195(BT-5422) Lot Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [BT_195_parse_unpublished_award_criterion_number_fixed_lot_bt5422],
+        BT_195_merge_unpublished_award_criterion_number_fixed_lot_bt5422,
+        "Lot Unpublished Identifier (BT-195, BT-5422)"
+    )
 
     # Parse and merge BT-195(BT-5422)-LotsGroup
     process_bt_section(

@@ -1,4 +1,4 @@
-# tests/test_BT_195_BT_1252_Procedure.py
+# tests/test_BT_195_BT_106_Procedure.py
 
 import pytest
 import json
@@ -9,14 +9,13 @@ import logging
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main, configure_logging
-from converters.BT_195_BT_1252_Procedure import BT_195_parse_unpublished_procedure_identifier_BT_1252, BT_195_merge_unpublished_procedure_identifier_BT_1252
 
 @pytest.fixture(scope="module")
 def setup_logging():
     configure_logging()
     return logging.getLogger(__name__)
 
-def test_bt_195_bt_1252_procedure_integration(tmp_path, setup_logging):
+def test_bt_195_bt_106_procedure_integration(tmp_path, setup_logging):
     logger = setup_logging
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -28,13 +27,13 @@ def test_bt_195_bt_1252_procedure_integration(tmp_path, setup_logging):
         <cbc:ContractFolderID>18d27a53-0109-4f93-9231-6659d931bce0</cbc:ContractFolderID>
         <cac:TenderingProcess>
             <cac:ProcessJustification>
-                <cbc:ProcessReasonCode listName="direct-award-justification"/>
+                <cbc:ProcessReasonCode listName="accelerated-procedure"/>
                 <ext:UBLExtensions>
                     <ext:UBLExtension>
                         <ext:ExtensionContent>
                             <efext:EformsExtension>
                                 <efac:FieldsPrivacy>
-                                    <efbc:FieldIdentifierCode>dir-awa-pre</efbc:FieldIdentifierCode>
+                                    <efbc:FieldIdentifierCode>pro-acc</efbc:FieldIdentifierCode>
                                 </efac:FieldsPrivacy>
                             </efext:EformsExtension>
                         </ext:ExtensionContent>
@@ -44,7 +43,7 @@ def test_bt_195_bt_1252_procedure_integration(tmp_path, setup_logging):
         </cac:TenderingProcess>
     </root>
     """
-    xml_file = tmp_path / "test_input_unpublished_procedure_identifier_bt_1252.xml"
+    xml_file = tmp_path / "test_input_unpublished_procedure_identifier.xml"
     xml_file.write_text(xml_content)
 
     main(str(xml_file), "ocds-test-prefix")
@@ -57,9 +56,9 @@ def test_bt_195_bt_1252_procedure_integration(tmp_path, setup_logging):
     assert "withheldInformation" in result
     assert len(result["withheldInformation"]) == 1
     withheld_info = result["withheldInformation"][0]
-    assert withheld_info["id"] == "dir-awa-pre-18d27a53-0109-4f93-9231-6659d931bce0"
-    assert withheld_info["field"] == "dir-awa-pre"
-    assert withheld_info["name"] == "Direct Award Justification Previous Procedure Identifier"
+    assert withheld_info["id"] == "pro-acc-18d27a53-0109-4f93-9231-6659d931bce0"
+    assert withheld_info["field"] == "pro-acc"
+    assert withheld_info["name"] == "Procedure Accelerated"
 
 if __name__ == "__main__":
     pytest.main(['-v', '-s'])

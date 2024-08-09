@@ -1,52 +1,56 @@
 # converters/BT_88_Procedure.py
 
-from typing import Optional, Dict, Any
+import logging
 from lxml import etree
 
-def parse_procedure_features(xml_content: str) -> Optional[Dict[str, Any]]:
+logger = logging.getLogger(__name__)
+
+def parse_procedure_features(xml_content):
     """
-    Parse the XML content to extract the Procedure Features.
+    Parse the XML content to extract the procedure features.
 
     Args:
         xml_content (str): The XML content to parse.
 
     Returns:
-        Optional[Dict[str, Any]]: A dictionary containing the parsed data if found, None otherwise.
+        dict: A dictionary containing the parsed procedure features.
+        None: If no relevant data is found.
     """
-    root = etree.fromstring(xml_content.encode('utf-8'))
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode('utf-8')
+    root = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
+        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
+    }
 
     procedure_features = root.xpath("//cac:TenderingProcess/cbc:Description/text()", namespaces=namespaces)
-
+    
     if procedure_features:
         return {
             "tender": {
-                "procurementMethodDetails": procedure_features[0].strip()
+                "procurementMethodDetails": procedure_features[0]
             }
         }
-
+    
     return None
 
-def merge_procedure_features(release_json: Dict[str, Any], procedure_features_data: Optional[Dict[str, Any]]) -> None:
+def merge_procedure_features(release_json, procedure_features_data):
     """
-    Merge the parsed Procedure Features data into the main OCDS release JSON.
+    Merge the parsed procedure features data into the main OCDS release JSON.
 
     Args:
-        release_json (Dict[str, Any]): The main OCDS release JSON to be updated.
-        procedure_features_data (Optional[Dict[str, Any]]): The parsed Procedure Features data to be merged.
+        release_json (dict): The main OCDS release JSON to be updated.
+        procedure_features_data (dict): The parsed procedure features data to be merged.
 
     Returns:
         None: The function updates the release_json in-place.
     """
     if not procedure_features_data:
+        logger.warning("No procedure features data to merge")
         return
 
     tender = release_json.setdefault("tender", {})
     tender["procurementMethodDetails"] = procedure_features_data["tender"]["procurementMethodDetails"]
+
+    logger.info("Merged procedure features data")
