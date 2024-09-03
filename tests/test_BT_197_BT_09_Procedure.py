@@ -1,4 +1,4 @@
-# tests/test_BT_195_BT_09_Procedure.py
+# tests/test_BT_197_BT_09_Procedure.py
 
 import pytest
 import json
@@ -9,7 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
-def test_bt_195_bt_09_procedure_integration(tmp_path):
+def test_bt_197_bt_09_procedure_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
@@ -27,6 +27,7 @@ def test_bt_195_bt_09_procedure_integration(tmp_path):
                             <efext:EformsExtension>
                                 <efac:FieldsPrivacy>
                                     <efbc:FieldIdentifierCode>cro-bor-law</efbc:FieldIdentifierCode>
+                                    <cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode>
                                 </efac:FieldsPrivacy>
                             </efext:EformsExtension>
                         </ext:ExtensionContent>
@@ -36,7 +37,7 @@ def test_bt_195_bt_09_procedure_integration(tmp_path):
         </cac:TenderingTerms>
     </root>
     """
-    xml_file = tmp_path / "test_input_unpublished_identifier.xml"
+    xml_file = tmp_path / "test_input_unpublished_justification_code.xml"
     xml_file.write_text(xml_content)
 
     main(str(xml_file), "ocds-test-prefix")
@@ -48,9 +49,14 @@ def test_bt_195_bt_09_procedure_integration(tmp_path):
     assert len(result["withheldInformation"]) == 1, f"Expected 1 withheld information item, got {len(result['withheldInformation'])}"
 
     withheld_item = result["withheldInformation"][0]
-    assert withheld_item["id"] == "cro-bor-law-test-folder-id", f"Expected id 'cro-bor-law-test-folder-id', got {withheld_item['id']}"
-    assert withheld_item["field"] == "cro-bor-law", f"Expected field 'cro-bor-law', got {withheld_item['field']}"
-    assert withheld_item["name"] == "Cross Border Law", f"Expected name 'Cross Border Law', got {withheld_item['name']}"
+    assert "rationaleClassifications" in withheld_item, "Expected 'rationaleClassifications' in withheld information item"
+    assert len(withheld_item["rationaleClassifications"]) == 1, f"Expected 1 rationale classification, got {len(withheld_item['rationaleClassifications'])}"
+
+    classification = withheld_item["rationaleClassifications"][0]
+    assert classification["scheme"] == "non-publication-justification", f"Expected scheme 'non-publication-justification', got {classification['scheme']}"
+    assert classification["id"] == "oth-int", f"Expected id 'oth-int', got {classification['id']}"
+    assert classification["description"] == "Other public interest", f"Expected description 'Other public interest', got {classification['description']}"
+    assert classification["uri"] == "http://publications.europa.eu/resource/authority/non-publication-justification/oth-int", f"Unexpected URI: {classification['uri']}"
 
 if __name__ == "__main__":
     pytest.main()

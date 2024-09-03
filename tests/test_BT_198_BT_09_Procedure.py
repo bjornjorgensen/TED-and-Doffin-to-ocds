@@ -1,4 +1,4 @@
-# tests/test_BT_195_BT_09_Procedure.py
+# tests/test_BT_198_BT_09_Procedure.py
 
 import pytest
 import json
@@ -9,7 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
-def test_bt_195_bt_09_procedure_integration(tmp_path):
+def test_bt_198_bt_09_procedure_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
@@ -27,6 +27,7 @@ def test_bt_195_bt_09_procedure_integration(tmp_path):
                             <efext:EformsExtension>
                                 <efac:FieldsPrivacy>
                                     <efbc:FieldIdentifierCode>cro-bor-law</efbc:FieldIdentifierCode>
+                                    <efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate>
                                 </efac:FieldsPrivacy>
                             </efext:EformsExtension>
                         </ext:ExtensionContent>
@@ -36,7 +37,7 @@ def test_bt_195_bt_09_procedure_integration(tmp_path):
         </cac:TenderingTerms>
     </root>
     """
-    xml_file = tmp_path / "test_input_unpublished_identifier.xml"
+    xml_file = tmp_path / "test_input_unpublished_access_date.xml"
     xml_file.write_text(xml_content)
 
     main(str(xml_file), "ocds-test-prefix")
@@ -48,9 +49,8 @@ def test_bt_195_bt_09_procedure_integration(tmp_path):
     assert len(result["withheldInformation"]) == 1, f"Expected 1 withheld information item, got {len(result['withheldInformation'])}"
 
     withheld_item = result["withheldInformation"][0]
-    assert withheld_item["id"] == "cro-bor-law-test-folder-id", f"Expected id 'cro-bor-law-test-folder-id', got {withheld_item['id']}"
-    assert withheld_item["field"] == "cro-bor-law", f"Expected field 'cro-bor-law', got {withheld_item['field']}"
-    assert withheld_item["name"] == "Cross Border Law", f"Expected name 'Cross Border Law', got {withheld_item['name']}"
+    assert "availabilityDate" in withheld_item, "Expected 'availabilityDate' in withheld information item"
+    assert withheld_item["availabilityDate"] == "2025-03-31T00:00:00+01:00", f"Expected availabilityDate '2025-03-31T00:00:00+01:00', got {withheld_item['availabilityDate']}"
 
 if __name__ == "__main__":
     pytest.main()

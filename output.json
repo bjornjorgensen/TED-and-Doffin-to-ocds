@@ -1,1 +1,13 @@
-{"initiationType": "tender", "tender": {"lots": [{"id": "LOT-0001", "hasAccessibilityCriteria": false}], "items": [{"id": "1", "additionalClassifications": [{"scheme": "CPV", "id": "15311200"}], "relatedLot": "LOT-0001"}]}}
+{
+    "initiationType": "tender",
+    "tender": {
+        "id": "test-folder-id"
+    },
+    "withheldInformation": [
+        {
+            "id": "cro-bor-law-test-folder-id",
+            "field": "cro-bor-law",
+            "name": "Cross Border Law"
+        }
+    ]
+}
