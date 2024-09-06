@@ -81,6 +81,10 @@ from converters.BT_195_BT_09_Procedure import (
     BT_195_parse_unpublished_identifier_BT_09_Procedure,
     BT_195_merge_unpublished_identifier_BT_09_Procedure
 )
+from converters.BT_195_BT_105_Procedure import parse_bt195_bt105_unpublished_identifier, merge_bt195_bt105_unpublished_identifier
+from converters.BT_195_BT_106_Procedure import parse_bt195_bt106_unpublished_identifier, merge_bt195_bt106_unpublished_identifier
+from converters.BT_195_BT_1252_Procedure import parse_bt195_bt1252_unpublished_identifier, merge_bt195_bt1252_unpublished_identifier
+from converters.BT_195_BT_135_Procedure import parse_bt195_bt135_unpublished_identifier, merge_bt195_bt135_unpublished_identifier
 
 #BT_196
 from converters.BT_196_BT_09_Procedure import (
@@ -88,17 +92,32 @@ from converters.BT_196_BT_09_Procedure import (
     BT_196_merge_unpublished_justification_BT_09_Procedure
 )
 
+from converters.BT_196_BT_105_Procedure import parse_bt196_bt105_unpublished_justification, merge_bt196_bt105_unpublished_justification
+from converters.BT_196_BT_106_Procedure import parse_bt196_bt106_unpublished_justification, merge_bt196_bt106_unpublished_justification
+from converters.BT_196_BT_1252_Procedure import parse_bt196_bt1252_unpublished_justification, merge_bt196_bt1252_unpublished_justification
+from converters.BT_196_BT_135_Procedure import parse_bt196_bt135_unpublished_justification, merge_bt196_bt135_unpublished_justification
+
 # #BT_197
 from converters.BT_197_BT_09_Procedure import (
     BT_197_parse_unpublished_justification_code_BT_09_Procedure,
     BT_197_merge_unpublished_justification_code_BT_09_Procedure
 )
+
+from converters.BT_197_BT_105_Procedure import parse_bt197_bt105_unpublished_justification_code, merge_bt197_bt105_unpublished_justification_code
+from converters.BT_197_BT_106_Procedure import parse_bt197_bt106_unpublished_justification_code, merge_bt197_bt106_unpublished_justification_code
+from converters.BT_197_BT_1252_Procedure import parse_bt197_bt1252_unpublished_justification_code, merge_bt197_bt1252_unpublished_justification_code
+from converters.BT_197_BT_135_Procedure import parse_bt197_bt135_unpublished_justification_code, merge_bt197_bt135_unpublished_justification_code
+
 # 
 # #BT_198
 from converters.BT_198_BT_09_Procedure import (
     BT_198_parse_unpublished_access_date_BT_09_Procedure,
     BT_198_merge_unpublished_access_date_BT_09_Procedure
 )
+from converters.BT_198_BT_105_Procedure import parse_bt198_bt105_unpublished_access_date, merge_bt198_bt105_unpublished_access_date
+from converters.BT_198_BT_106_Procedure import parse_bt198_bt106_unpublished_access_date, merge_bt198_bt106_unpublished_access_date
+from converters.BT_198_BT_1252_Procedure import parse_bt198_bt1252_unpublished_access_date, merge_bt198_bt1252_unpublished_access_date
+from converters.BT_198_BT_135_Procedure import parse_bt198_bt135_unpublished_access_date, merge_bt198_bt135_unpublished_access_date
 
 from converters.BT_200_Contract import parse_contract_modification_reason, merge_contract_modification_reason
 from converters.BT_201_Contract import parse_contract_modification_description, merge_contract_modification_description
@@ -1143,6 +1162,42 @@ def main(xml_path, ocid_prefix):
         "Unpublished Identifier (BT-195, BT-09)"
     )
 
+    # Parse and merge BT-195(BT-105)-Procedure Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt105_unpublished_identifier],
+        merge_bt195_bt105_unpublished_identifier,
+        "Unpublished Identifier (BT-195, BT-105)"
+    )
+
+    # Parse and merge BT-195(BT-106)-Procedure Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt106_unpublished_identifier],
+        merge_bt195_bt106_unpublished_identifier,
+        "Unpublished Identifier (BT-195, BT-106)"
+    )
+
+    # Parse and merge BT-195(BT-1252)-Procedure Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt1252_unpublished_identifier],
+        merge_bt195_bt1252_unpublished_identifier,
+        "Unpublished Identifier (BT-195, BT-1252)"
+    )
+
+    # Parse and merge BT-195(BT-135)-Procedure Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt135_unpublished_identifier],
+        merge_bt195_bt135_unpublished_identifier,
+        "Unpublished Identifier (BT-195, BT-135)"
+    )
+
     #BT-196
     # Parse and merge BT-196(BT-09) Unpublished Justification Description
     process_bt_section(
@@ -1151,6 +1206,42 @@ def main(xml_path, ocid_prefix):
         [BT_196_parse_unpublished_justification_BT_09_Procedure],
         BT_196_merge_unpublished_justification_BT_09_Procedure,
         "Unpublished Justification Description (BT-196, BT-09)"
+    )
+
+    # Parse and merge BT-196(BT-105)-Procedure Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt105_unpublished_justification],
+        merge_bt196_bt105_unpublished_justification,
+        "Unpublished Justification Description (BT-196, BT-105)"
+    )
+
+    # Parse and merge BT-196(BT-106)-Procedure Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt106_unpublished_justification],
+        merge_bt196_bt106_unpublished_justification,
+        "Unpublished Justification Description (BT-196, BT-106)"
+    )
+
+    # Parse and merge BT-196(BT-1252)-Procedure Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt1252_unpublished_justification],
+        merge_bt196_bt1252_unpublished_justification,
+        "Unpublished Justification Description (BT-196, BT-1252)"
+    )
+
+    # Parse and merge BT-196(BT-135)-Procedure Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt135_unpublished_justification],
+        merge_bt196_bt135_unpublished_justification,
+        "Unpublished Justification Description (BT-196, BT-135)"
     )
 
     #BT-197
@@ -1164,6 +1255,42 @@ def main(xml_path, ocid_prefix):
         "Unpublished Justification Code (BT-197, BT-09)"
     )
 
+    # Parse and merge BT-197(BT-105)-Procedure Unpublished Justification Code
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt105_unpublished_justification_code],
+        merge_bt197_bt105_unpublished_justification_code,
+        "Unpublished Justification Code (BT-197, BT-105)"
+    )
+
+    # Parse and merge BT-197(BT-106)-Procedure Unpublished Justification Code
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt106_unpublished_justification_code],
+        merge_bt197_bt106_unpublished_justification_code,
+        "Unpublished Justification Code (BT-197, BT-106)"
+    )
+
+    # Parse and merge BT-197(BT-1252)-Procedure Unpublished Justification Code
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt1252_unpublished_justification_code],
+        merge_bt197_bt1252_unpublished_justification_code,
+        "Unpublished Justification Code (BT-197, BT-1252)"
+    )
+
+    # Parse and merge BT-197(BT-135)-Procedure Unpublished Justification Code
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt135_unpublished_justification_code],
+        merge_bt197_bt135_unpublished_justification_code,
+        "Unpublished Justification Code (BT-197, BT-135)"
+    )
+
     #BT-198
     # Parse and merge BT-198(BT-09) Unpublished Access Date
     process_bt_section(
@@ -1172,6 +1299,42 @@ def main(xml_path, ocid_prefix):
         [BT_198_parse_unpublished_access_date_BT_09_Procedure],
         BT_198_merge_unpublished_access_date_BT_09_Procedure,
         "Unpublished Access Date (BT-198, BT-09)"
+    )
+
+    # Parse and merge BT-198(BT-106)-Procedure Unpublished Access Date
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt106_unpublished_access_date],
+        merge_bt198_bt106_unpublished_access_date,
+        "Unpublished Access Date (BT-198, BT-106)"
+    )
+
+    # Parse and merge BT-198(BT-105)-Procedure Unpublished Access Date
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt105_unpublished_access_date],
+        merge_bt198_bt105_unpublished_access_date,
+        "Unpublished Access Date (BT-198, BT-105)"
+    )
+
+    # Parse and merge BT-198(BT-1252)-Procedure Unpublished Access Date
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt1252_unpublished_access_date],
+        merge_bt198_bt1252_unpublished_access_date,
+        "Unpublished Access Date (BT-198, BT-1252)"
+    )
+
+    # Parse and merge BT-198(BT-135)-Procedure Unpublished Access Date
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt135_unpublished_access_date],
+        merge_bt198_bt135_unpublished_access_date,
+        "Unpublished Access Date (BT-198, BT-135)"
     )
 
     # Process BT-200-Contract

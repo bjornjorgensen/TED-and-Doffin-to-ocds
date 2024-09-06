@@ -1,13 +1,1 @@
-{
-    "initiationType": "tender",
-    "tender": {
-        "id": "test-folder-id"
-    },
-    "withheldInformation": [
-        {
-            "id": "cro-bor-law-test-folder-id",
-            "field": "cro-bor-law",
-            "name": "Cross Border Law"
-        }
-    ]
-}
+{"initiationType": "tender", "tender": {"procurementMethodRationaleClassifications": [{"scheme": "eu-direct-award-justification", "id": "some-code", "description": "Unknown"}]}, "withheldInformation": [{"field": "dir-awa-tex", "availabilityDate": "2025-03-31T00:00:00+01:00"}]}
