@@ -5,6 +5,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+
 def parse_recurrence_description(xml_content):
     """
     Parse the XML content to extract the recurrence description for each lot.
@@ -29,38 +30,42 @@ def parse_recurrence_description(xml_content):
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
-        
+        xml_content = xml_content.encode("utf-8")
+
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+    }
 
     result = {"tender": {"lots": []}}
 
-    lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
-    
+    lots = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+    )
+
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
-        recurrence_description = lot.xpath("cac:TenderingTerms/cbc:RecurringProcurementDescription/text()", namespaces=namespaces)
-        
+        recurrence_description = lot.xpath(
+            "cac:TenderingTerms/cbc:RecurringProcurementDescription/text()",
+            namespaces=namespaces,
+        )
+
         if lot_id and recurrence_description:
             lot_data = {
                 "id": lot_id[0],
-                "recurrence": {
-                    "description": recurrence_description[0]
-                }
+                "recurrence": {"description": recurrence_description[0]},
             }
             result["tender"]["lots"].append(lot_data)
 
     return result if result["tender"]["lots"] else None
+
 
 def merge_recurrence_description(release_json, recurrence_description_data):
     """
@@ -87,4 +92,6 @@ def merge_recurrence_description(release_json, recurrence_description_data):
         else:
             lots.append(new_lot)
 
-    logger.info(f"Merged recurrence description data for {len(recurrence_description_data['tender']['lots'])} lots")
+    logger.info(
+        f"Merged recurrence description data for {len(recurrence_description_data['tender']['lots'])} lots"
+    )

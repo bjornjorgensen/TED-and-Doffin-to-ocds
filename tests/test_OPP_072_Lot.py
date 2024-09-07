@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_opp_072_lot_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -33,7 +34,7 @@ def test_opp_072_lot_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result
@@ -45,17 +46,34 @@ def test_opp_072_lot_integration(tmp_path):
     assert "customerServices" in lot["contractTerms"]
     assert len(lot["contractTerms"]["customerServices"]) == 2
 
-    clean_service = next((service for service in lot["contractTerms"]["customerServices"] if service["type"] == "clean"), None)
+    clean_service = next(
+        (
+            service
+            for service in lot["contractTerms"]["customerServices"]
+            if service["type"] == "clean"
+        ),
+        None,
+    )
     assert clean_service is not None
     assert clean_service["type"] == "clean"
-    assert clean_service["description"] == "Cleanliness standards for trains and stations"
+    assert (
+        clean_service["description"] == "Cleanliness standards for trains and stations"
+    )
     assert "name" in clean_service  # Check that name exists, but don't assert its value
 
-    info_service = next((service for service in lot["contractTerms"]["customerServices"] if service["type"] == "info"), None)
+    info_service = next(
+        (
+            service
+            for service in lot["contractTerms"]["customerServices"]
+            if service["type"] == "info"
+        ),
+        None,
+    )
     assert info_service is not None
     assert info_service["type"] == "info"
     assert info_service["description"] == "Information provision requirements"
     assert "name" in info_service  # Check that name exists, but don't assert its value
+
 
 if __name__ == "__main__":
     pytest.main()

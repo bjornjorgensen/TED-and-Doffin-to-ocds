@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_15_lot_part_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -48,23 +49,46 @@ def test_bt_15_lot_part_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "documents" in result["tender"], "Expected 'documents' in tender"
-    assert len(result["tender"]["documents"]) == 2, f"Expected 2 documents, got {len(result['tender']['documents'])}"
+    assert (
+        len(result["tender"]["documents"]) == 2
+    ), f"Expected 2 documents, got {len(result['tender']['documents'])}"
 
-    lot_document = next(doc for doc in result["tender"]["documents"] if doc["id"] == "20210521/CTFD/ENG/7654-02")
-    assert lot_document["documentType"] == "biddingDocuments", f"Expected documentType 'biddingDocuments', got {lot_document['documentType']}"
-    assert lot_document["url"] == "https://mywebsite.com/proc/2019024/accessinfo", f"Unexpected URL for lot document"
+    lot_document = next(
+        doc
+        for doc in result["tender"]["documents"]
+        if doc["id"] == "20210521/CTFD/ENG/7654-02"
+    )
+    assert (
+        lot_document["documentType"] == "biddingDocuments"
+    ), f"Expected documentType 'biddingDocuments', got {lot_document['documentType']}"
+    assert (
+        lot_document["url"] == "https://mywebsite.com/proc/2019024/accessinfo"
+    ), f"Unexpected URL for lot document"
     assert "relatedLots" in lot_document, "Expected 'relatedLots' in lot document"
-    assert lot_document["relatedLots"] == ["LOT-0001"], f"Expected relatedLots ['LOT-0001'], got {lot_document['relatedLots']}"
+    assert lot_document["relatedLots"] == [
+        "LOT-0001"
+    ], f"Expected relatedLots ['LOT-0001'], got {lot_document['relatedLots']}"
 
-    part_document = next(doc for doc in result["tender"]["documents"] if doc["id"] == "20210521/CTFD/ENG/7654-03")
-    assert part_document["documentType"] == "biddingDocuments", f"Expected documentType 'biddingDocuments', got {part_document['documentType']}"
-    assert part_document["url"] == "https://mywebsite.com/proc/2019024/accessinfo-part", f"Unexpected URL for part document"
-    assert "relatedLots" not in part_document, "Unexpected 'relatedLots' in part document"
+    part_document = next(
+        doc
+        for doc in result["tender"]["documents"]
+        if doc["id"] == "20210521/CTFD/ENG/7654-03"
+    )
+    assert (
+        part_document["documentType"] == "biddingDocuments"
+    ), f"Expected documentType 'biddingDocuments', got {part_document['documentType']}"
+    assert (
+        part_document["url"] == "https://mywebsite.com/proc/2019024/accessinfo-part"
+    ), f"Unexpected URL for part document"
+    assert (
+        "relatedLots" not in part_document
+    ), "Unexpected 'relatedLots' in part document"
+
 
 if __name__ == "__main__":
     pytest.main()

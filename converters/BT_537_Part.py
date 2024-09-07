@@ -3,6 +3,7 @@
 from lxml import etree
 from utils.date_utils import EndDate
 
+
 def parse_part_duration_end_date(xml_content):
     """
     Parse the Duration End Date (BT-537) for Parts from the XML content.
@@ -26,33 +27,32 @@ def parse_part_duration_end_date(xml_content):
     }
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+    }
 
     result = {"tender": {}}
 
     xpath_query = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:PlannedPeriod/cbc:EndDate"
     end_date_elements = root.xpath(xpath_query, namespaces=namespaces)
-    
+
     if end_date_elements:
         try:
             end_date = end_date_elements[0].text
             iso_end_date = EndDate(end_date)
-            result["tender"]["contractPeriod"] = {
-                "endDate": iso_end_date
-            }
+            result["tender"]["contractPeriod"] = {"endDate": iso_end_date}
         except ValueError as e:
             print(f"Warning: Invalid date format for part end date: {str(e)}")
 
     return result if "contractPeriod" in result["tender"] else None
+
 
 def merge_part_duration_end_date(release_json, part_duration_end_date_data):
     """

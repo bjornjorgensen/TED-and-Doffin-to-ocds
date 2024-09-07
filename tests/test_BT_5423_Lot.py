@@ -2,7 +2,11 @@
 
 import pytest
 from lxml import etree
-from converters.BT_5423_Lot import parse_award_criterion_number_threshold, merge_award_criterion_number_threshold
+from converters.BT_5423_Lot import (
+    parse_award_criterion_number_threshold,
+    merge_award_criterion_number_threshold,
+)
+
 
 def create_xml_with_award_criterion(lot_id, threshold_code):
     return f"""
@@ -37,33 +41,48 @@ def create_xml_with_award_criterion(lot_id, threshold_code):
     </root>
     """
 
+
 def test_parse_award_criterion_number_threshold_max_pass():
     xml_content = create_xml_with_award_criterion("LOT-001", "max-pass")
     result = parse_award_criterion_number_threshold(xml_content)
-    
+
     assert result is not None
     assert result["tender"]["lots"][0]["id"] == "LOT-001"
-    assert result["tender"]["lots"][0]["awardCriteria"]["criteria"][0]["numbers"][0]["threshold"] == "maximumBids"
+    assert (
+        result["tender"]["lots"][0]["awardCriteria"]["criteria"][0]["numbers"][0][
+            "threshold"
+        ]
+        == "maximumBids"
+    )
+
 
 def test_parse_award_criterion_number_threshold_min_score():
     xml_content = create_xml_with_award_criterion("LOT-002", "min-score")
     result = parse_award_criterion_number_threshold(xml_content)
-    
+
     assert result is not None
     assert result["tender"]["lots"][0]["id"] == "LOT-002"
-    assert result["tender"]["lots"][0]["awardCriteria"]["criteria"][0]["numbers"][0]["threshold"] == "minimumScore"
+    assert (
+        result["tender"]["lots"][0]["awardCriteria"]["criteria"][0]["numbers"][0][
+            "threshold"
+        ]
+        == "minimumScore"
+    )
+
 
 def test_parse_award_criterion_number_threshold_invalid_code():
     xml_content = create_xml_with_award_criterion("LOT-003", "invalid-code")
     result = parse_award_criterion_number_threshold(xml_content)
-    
+
     assert result is None
+
 
 def test_parse_award_criterion_number_threshold_no_data():
     xml_content = "<root></root>"
     result = parse_award_criterion_number_threshold(xml_content)
-    
+
     assert result is None
+
 
 def test_merge_award_criterion_number_threshold():
     existing_release = {
@@ -71,76 +90,72 @@ def test_merge_award_criterion_number_threshold():
             "lots": [
                 {
                     "id": "LOT-001",
-                    "awardCriteria": {
-                        "criteria": [
-                            {
-                                "id": "AC-1",
-                                "numbers": []
-                            }
-                        ]
-                    }
+                    "awardCriteria": {"criteria": [{"id": "AC-1", "numbers": []}]},
                 }
             ]
         }
     }
-    
+
     new_data = {
         "tender": {
             "lots": [
                 {
                     "id": "LOT-001",
                     "awardCriteria": {
-                        "criteria": [
-                            {
-                                "numbers": [
-                                    {"threshold": "maximumBids"}
-                                ]
-                            }
-                        ]
-                    }
+                        "criteria": [{"numbers": [{"threshold": "maximumBids"}]}]
+                    },
                 }
             ]
         }
     }
-    
+
     merge_award_criterion_number_threshold(existing_release, new_data)
-    
+
     assert len(existing_release["tender"]["lots"]) == 1
     assert len(existing_release["tender"]["lots"][0]["awardCriteria"]["criteria"]) == 1
-    assert len(existing_release["tender"]["lots"][0]["awardCriteria"]["criteria"][0]["numbers"]) == 1
-    assert existing_release["tender"]["lots"][0]["awardCriteria"]["criteria"][0]["numbers"][0]["threshold"] == "maximumBids"
+    assert (
+        len(
+            existing_release["tender"]["lots"][0]["awardCriteria"]["criteria"][0][
+                "numbers"
+            ]
+        )
+        == 1
+    )
+    assert (
+        existing_release["tender"]["lots"][0]["awardCriteria"]["criteria"][0][
+            "numbers"
+        ][0]["threshold"]
+        == "maximumBids"
+    )
+
 
 def test_merge_award_criterion_number_threshold_new_lot():
-    existing_release = {
-        "tender": {
-            "lots": []
-        }
-    }
-    
+    existing_release = {"tender": {"lots": []}}
+
     new_data = {
         "tender": {
             "lots": [
                 {
                     "id": "LOT-001",
                     "awardCriteria": {
-                        "criteria": [
-                            {
-                                "numbers": [
-                                    {"threshold": "minimumScore"}
-                                ]
-                            }
-                        ]
-                    }
+                        "criteria": [{"numbers": [{"threshold": "minimumScore"}]}]
+                    },
                 }
             ]
         }
     }
-    
+
     merge_award_criterion_number_threshold(existing_release, new_data)
-    
+
     assert len(existing_release["tender"]["lots"]) == 1
     assert existing_release["tender"]["lots"][0]["id"] == "LOT-001"
-    assert existing_release["tender"]["lots"][0]["awardCriteria"]["criteria"][0]["numbers"][0]["threshold"] == "minimumScore"
+    assert (
+        existing_release["tender"]["lots"][0]["awardCriteria"]["criteria"][0][
+            "numbers"
+        ][0]["threshold"]
+        == "minimumScore"
+    )
+
 
 def test_merge_award_criterion_number_threshold_no_data():
     existing_release = {"tender": {"lots": []}}

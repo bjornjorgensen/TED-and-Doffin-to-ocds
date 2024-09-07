@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_123_lot_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -28,7 +29,7 @@ def test_bt_123_lot_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result
@@ -39,7 +40,11 @@ def test_bt_123_lot_integration(tmp_path):
     assert "techniques" in lot
     assert "electronicAuction" in lot["techniques"]
     assert "url" in lot["techniques"]["electronicAuction"]
-    assert lot["techniques"]["electronicAuction"]["url"] == "https://my-online-eauction.eu/"
+    assert (
+        lot["techniques"]["electronicAuction"]["url"]
+        == "https://my-online-eauction.eu/"
+    )
+
 
 if __name__ == "__main__":
     pytest.main()

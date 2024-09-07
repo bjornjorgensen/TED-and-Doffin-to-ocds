@@ -2,7 +2,11 @@
 
 import pytest
 from lxml import etree
-from converters.BT_719_notice import parse_procurement_documents_change_date, merge_procurement_documents_change_date
+from converters.BT_719_notice import (
+    parse_procurement_documents_change_date,
+    merge_procurement_documents_change_date,
+)
+
 
 @pytest.fixture
 def sample_xml():
@@ -33,27 +37,30 @@ def sample_xml():
     </root>
     """
 
+
 def test_parse_procurement_documents_change_date(sample_xml):
     result = parse_procurement_documents_change_date(sample_xml)
     assert result is not None
     assert "tender" in result
     assert "documents" in result["tender"]
     assert len(result["tender"]["documents"]) == 2
-    
+
     lot_specific_doc = result["tender"]["documents"][0]
     assert lot_specific_doc["dateModified"] == "2023-05-15T00:00:00+01:00"
     assert lot_specific_doc["documentType"] == "biddingDocuments"
     assert lot_specific_doc["relatedLots"] == ["LOT-0001"]
-    
+
     general_doc = result["tender"]["documents"][1]
     assert general_doc["dateModified"] == "2023-05-16T00:00:00+01:00"
     assert general_doc["documentType"] == "biddingDocuments"
     assert "relatedLots" not in general_doc
 
+
 def test_parse_procurement_documents_change_date_no_data():
     xml_without_data = "<root></root>"
     result = parse_procurement_documents_change_date(xml_without_data)
     assert result is None
+
 
 def test_merge_procurement_documents_change_date():
     existing_release = {
@@ -62,72 +69,74 @@ def test_merge_procurement_documents_change_date():
                 {
                     "id": "doc1",
                     "documentType": "biddingDocuments",
-                    "relatedLots": ["LOT-0001"]
+                    "relatedLots": ["LOT-0001"],
                 },
-                {
-                    "id": "doc2",
-                    "documentType": "biddingDocuments"
-                }
+                {"id": "doc2", "documentType": "biddingDocuments"},
             ]
         }
     }
-    
+
     change_date_data = {
         "tender": {
             "documents": [
                 {
                     "dateModified": "2023-05-15T00:00:00+01:00",
                     "documentType": "biddingDocuments",
-                    "relatedLots": ["LOT-0001"]
+                    "relatedLots": ["LOT-0001"],
                 },
                 {
                     "dateModified": "2023-05-16T00:00:00+01:00",
-                    "documentType": "biddingDocuments"
-                }
+                    "documentType": "biddingDocuments",
+                },
             ]
         }
     }
-    
+
     merge_procurement_documents_change_date(existing_release, change_date_data)
-    
+
     assert len(existing_release["tender"]["documents"]) == 2
-    assert existing_release["tender"]["documents"][0]["dateModified"] == "2023-05-15T00:00:00+01:00"
-    assert existing_release["tender"]["documents"][1]["dateModified"] == "2023-05-16T00:00:00+01:00"
+    assert (
+        existing_release["tender"]["documents"][0]["dateModified"]
+        == "2023-05-15T00:00:00+01:00"
+    )
+    assert (
+        existing_release["tender"]["documents"][1]["dateModified"]
+        == "2023-05-16T00:00:00+01:00"
+    )
+
 
 def test_merge_procurement_documents_change_date_new_document():
     existing_release = {
-        "tender": {
-            "documents": [
-                {
-                    "id": "doc1",
-                    "documentType": "biddingDocuments"
-                }
-            ]
-        }
+        "tender": {"documents": [{"id": "doc1", "documentType": "biddingDocuments"}]}
     }
-    
+
     change_date_data = {
         "tender": {
             "documents": [
                 {
                     "dateModified": "2023-05-15T00:00:00+01:00",
                     "documentType": "biddingDocuments",
-                    "relatedLots": ["LOT-0001"]
+                    "relatedLots": ["LOT-0001"],
                 }
             ]
         }
     }
-    
+
     merge_procurement_documents_change_date(existing_release, change_date_data)
-    
+
     assert len(existing_release["tender"]["documents"]) == 2
-    assert existing_release["tender"]["documents"][1]["dateModified"] == "2023-05-15T00:00:00+01:00"
+    assert (
+        existing_release["tender"]["documents"][1]["dateModified"]
+        == "2023-05-15T00:00:00+01:00"
+    )
     assert existing_release["tender"]["documents"][1]["relatedLots"] == ["LOT-0001"]
+
 
 def test_merge_procurement_documents_change_date_no_data():
     existing_release = {"tender": {"documents": []}}
     merge_procurement_documents_change_date(existing_release, None)
     assert existing_release == {"tender": {"documents": []}}
+
 
 if __name__ == "__main__":
     pytest.main()

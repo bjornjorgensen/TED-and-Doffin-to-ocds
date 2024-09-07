@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_137_lots_group_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -29,7 +30,7 @@ def test_bt_137_lots_group_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
@@ -38,6 +39,7 @@ def test_bt_137_lots_group_integration(tmp_path):
     assert len(lot_groups) == 2, f"Expected 2 unique lot groups, got {len(lot_groups)}"
     assert {"id": "GLO-0001"} in lot_groups, "Expected lot group with id 'GLO-0001'"
     assert {"id": "GLO-0002"} in lot_groups, "Expected lot group with id 'GLO-0002'"
+
 
 if __name__ == "__main__":
     pytest.main()

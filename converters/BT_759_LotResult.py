@@ -5,6 +5,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+
 def parse_received_submissions_count(xml_content):
     """
     Parse the XML content to extract the received submissions count for each lot result.
@@ -29,32 +30,42 @@ def parse_received_submissions_count(xml_content):
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
 
     root = etree.fromstring(xml_content)
     namespaces = {
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"bids": {"statistics": []}}
 
-    lot_results = root.xpath("//efac:NoticeResult/efac:LotResult", namespaces=namespaces)
+    lot_results = root.xpath(
+        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
+    )
     for lot_result in lot_results:
-        lot_id = lot_result.xpath("efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)
-        submissions_count = lot_result.xpath("efac:ReceivedSubmissionsStatistics/efbc:StatisticsNumeric/text()", namespaces=namespaces)
+        lot_id = lot_result.xpath(
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces
+        )
+        submissions_count = lot_result.xpath(
+            "efac:ReceivedSubmissionsStatistics/efbc:StatisticsNumeric/text()",
+            namespaces=namespaces,
+        )
 
         if lot_id and submissions_count:
-            result["bids"]["statistics"].append({
-                "id": f"bids-{lot_id[0]}",
-                "value": int(submissions_count[0]),
-                "measure": "bids", 
-                "relatedLots": [lot_id[0]]
-            })
+            result["bids"]["statistics"].append(
+                {
+                    "id": f"bids-{lot_id[0]}",
+                    "value": int(submissions_count[0]),
+                    "measure": "bids",
+                    "relatedLots": [lot_id[0]],
+                }
+            )
 
     return result if result["bids"]["statistics"] else None
+
 
 def merge_received_submissions_count(release_json, received_submissions_data):
     """
@@ -76,8 +87,13 @@ def merge_received_submissions_count(release_json, received_submissions_data):
 
     for new_stat in received_submissions_data["bids"]["statistics"]:
         existing_stat = next(
-            (stat for stat in statistics if stat["measure"] == new_stat["measure"] and stat.get("relatedLots") == new_stat.get("relatedLots")), 
-            None
+            (
+                stat
+                for stat in statistics
+                if stat["measure"] == new_stat["measure"]
+                and stat.get("relatedLots") == new_stat.get("relatedLots")
+            ),
+            None,
         )
         if existing_stat:
             existing_stat.update(new_stat)
@@ -88,4 +104,6 @@ def merge_received_submissions_count(release_json, received_submissions_data):
     for i, stat in enumerate(statistics, start=1):
         stat["id"] = str(i)
 
-    logger.info(f"Merged received submissions count data for {len(received_submissions_data['bids']['statistics'])} lots")
+    logger.info(
+        f"Merged received submissions count data for {len(received_submissions_data['bids']['statistics'])} lots"
+    )

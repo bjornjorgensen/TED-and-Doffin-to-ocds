@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_opt_301_part_employlegis_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -40,6 +41,7 @@ def test_opt_301_part_employlegis_integration(tmp_path):
     document = result["tender"]["documents"][0]
     assert document["id"] == "Empl2"
     assert document["url"] == "http://employment-legislation.gov.stat/part"
+
 
 if __name__ == "__main__":
     pytest.main()

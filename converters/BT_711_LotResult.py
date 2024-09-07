@@ -5,6 +5,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+
 def parse_tender_value_highest(xml_content):
     """
     Parse the XML content to extract the highest tender value for each lot.
@@ -33,25 +34,31 @@ def parse_tender_value_highest(xml_content):
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
 
     root = etree.fromstring(xml_content)
     namespaces = {
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"bids": {"statistics": []}}
 
-    lot_results = root.xpath("//efac:NoticeResult/efac:LotResult", namespaces=namespaces)
+    lot_results = root.xpath(
+        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
+    )
 
     for lot_result in lot_results:
-        higher_tender_amount = lot_result.xpath("cbc:HigherTenderAmount", namespaces=namespaces)
-        lot_id = lot_result.xpath("efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)
+        higher_tender_amount = lot_result.xpath(
+            "cbc:HigherTenderAmount", namespaces=namespaces
+        )
+        lot_id = lot_result.xpath(
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces
+        )
 
         if higher_tender_amount and lot_id:
             statistic = {
@@ -59,13 +66,14 @@ def parse_tender_value_highest(xml_content):
                 "measure": "highestValidBidValue",
                 "value": {
                     "amount": float(higher_tender_amount[0].text),
-                    "currency": higher_tender_amount[0].get("currencyID")
+                    "currency": higher_tender_amount[0].get("currencyID"),
                 },
-                "relatedLots": [lot_id[0]]
+                "relatedLots": [lot_id[0]],
             }
             result["bids"]["statistics"].append(statistic)
 
     return result if result["bids"]["statistics"] else None
+
 
 def merge_tender_value_highest(release_json, tender_value_highest_data):
     """
@@ -87,8 +95,13 @@ def merge_tender_value_highest(release_json, tender_value_highest_data):
 
     for new_stat in tender_value_highest_data["bids"]["statistics"]:
         existing_stat = next(
-            (stat for stat in statistics if stat["measure"] == new_stat["measure"] and stat.get("relatedLots") == new_stat.get("relatedLots")), 
-            None
+            (
+                stat
+                for stat in statistics
+                if stat["measure"] == new_stat["measure"]
+                and stat.get("relatedLots") == new_stat.get("relatedLots")
+            ),
+            None,
         )
         if existing_stat:
             existing_stat.update(new_stat)
@@ -99,4 +112,6 @@ def merge_tender_value_highest(release_json, tender_value_highest_data):
     for i, stat in enumerate(statistics, start=1):
         stat["id"] = str(i)
 
-    logger.info(f"Merged highest tender value data for {len(tender_value_highest_data['bids']['statistics'])} statistics")
+    logger.info(
+        f"Merged highest tender value data for {len(tender_value_highest_data['bids']['statistics'])} statistics"
+    )

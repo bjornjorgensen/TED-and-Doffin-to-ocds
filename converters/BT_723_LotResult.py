@@ -13,8 +13,9 @@ VEHICLE_CATEGORY_MAPPING = {
     "n1": "N1",
     "n2": "N2",
     "n2-n3": "Truck (N2-N3)",
-    "n3": "N3"
+    "n3": "N3",
 }
+
 
 def parse_vehicle_category(xml_content):
     """
@@ -28,42 +29,58 @@ def parse_vehicle_category(xml_content):
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+    }
 
     result = {"awards": []}
 
-    lot_results = root.xpath("//efac:NoticeResult/efac:LotResult", namespaces=namespaces)
-    
+    lot_results = root.xpath(
+        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
+    )
+
     for lot_result in lot_results:
-        result_id = lot_result.xpath("cbc:ID[@schemeName='result']/text()", namespaces=namespaces)
-        lot_id = lot_result.xpath("efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)
-        vehicle_category = lot_result.xpath("efac:StrategicProcurement/efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:AssetCategoryCode[@listName='vehicle-category']/text()", namespaces=namespaces)
+        result_id = lot_result.xpath(
+            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+        )
+        lot_id = lot_result.xpath(
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces
+        )
+        vehicle_category = lot_result.xpath(
+            "efac:StrategicProcurement/efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:AssetCategoryCode[@listName='vehicle-category']/text()",
+            namespaces=namespaces,
+        )
 
         if result_id and lot_id and vehicle_category:
             award = {
                 "id": result_id[0],
                 "relatedLots": [lot_id[0]],
-                "items": [{
-                    "id": "1",
-                    "additionalClassifications": [{
-                        "scheme": "eu-vehicle-category",
-                        "id": vehicle_category[0],
-                        "description": VEHICLE_CATEGORY_MAPPING.get(vehicle_category[0].lower(), "Unknown")
-                    }]
-                }]
+                "items": [
+                    {
+                        "id": "1",
+                        "additionalClassifications": [
+                            {
+                                "scheme": "eu-vehicle-category",
+                                "id": vehicle_category[0],
+                                "description": VEHICLE_CATEGORY_MAPPING.get(
+                                    vehicle_category[0].lower(), "Unknown"
+                                ),
+                            }
+                        ],
+                    }
+                ],
             }
             result["awards"].append(award)
 
     return result if result["awards"] else None
+
 
 def merge_vehicle_category(release_json, vehicle_category_data):
     """
@@ -84,7 +101,14 @@ def merge_vehicle_category(release_json, vehicle_category_data):
         release_json["awards"] = []
 
     for new_award in vehicle_category_data["awards"]:
-        existing_award = next((award for award in release_json["awards"] if award["id"] == new_award["id"]), None)
+        existing_award = next(
+            (
+                award
+                for award in release_json["awards"]
+                if award["id"] == new_award["id"]
+            ),
+            None,
+        )
         if existing_award:
             if "items" not in existing_award:
                 existing_award["items"] = []
@@ -92,11 +116,17 @@ def merge_vehicle_category(release_json, vehicle_category_data):
                 existing_item = existing_award["items"][0]
                 if "additionalClassifications" not in existing_item:
                     existing_item["additionalClassifications"] = []
-                existing_item["additionalClassifications"].extend(new_award["items"][0]["additionalClassifications"])
+                existing_item["additionalClassifications"].extend(
+                    new_award["items"][0]["additionalClassifications"]
+                )
             else:
                 existing_award["items"].extend(new_award["items"])
-            existing_award["relatedLots"] = list(set(existing_award.get("relatedLots", []) + new_award["relatedLots"]))
+            existing_award["relatedLots"] = list(
+                set(existing_award.get("relatedLots", []) + new_award["relatedLots"])
+            )
         else:
             release_json["awards"].append(new_award)
 
-    logger.info(f"Merged vehicle category data for {len(vehicle_category_data['awards'])} awards")
+    logger.info(
+        f"Merged vehicle category data for {len(vehicle_category_data['awards'])} awards"
+    )

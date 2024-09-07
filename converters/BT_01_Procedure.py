@@ -5,17 +5,18 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+
 def parse_procedure_legal_basis(xml_content):
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"tender": {"legalBasis": {}}}
@@ -23,7 +24,7 @@ def parse_procedure_legal_basis(xml_content):
     # Parse legal basis ID
     legal_basis_id = root.xpath(
         "//cac:ProcurementLegislationDocumentReference[not(cbc:ID='CrossBorderLaw' or cbc:ID='LocalLegalBasis')]/cbc:ID",
-        namespaces=namespaces
+        namespaces=namespaces,
     )
     if legal_basis_id:
         result["tender"]["legalBasis"]["scheme"] = "ELI"
@@ -32,7 +33,7 @@ def parse_procedure_legal_basis(xml_content):
     # Parse legal basis description
     legal_basis_description = root.xpath(
         "//cac:ProcurementLegislationDocumentReference[not(cbc:ID='CrossBorderLaw' or cbc:ID='LocalLegalBasis')]/cbc:DocumentDescription",
-        namespaces=namespaces
+        namespaces=namespaces,
     )
     if legal_basis_description:
         result["tender"]["legalBasis"]["description"] = legal_basis_description[0].text
@@ -40,7 +41,7 @@ def parse_procedure_legal_basis(xml_content):
     # Parse legal basis NoID
     legal_basis_noid = root.xpath(
         "//cac:ProcurementLegislationDocumentReference[cbc:ID='LocalLegalBasis']/cbc:ID",
-        namespaces=namespaces
+        namespaces=namespaces,
     )
     if legal_basis_noid:
         result["tender"]["legalBasis"]["id"] = legal_basis_noid[0].text
@@ -48,10 +49,12 @@ def parse_procedure_legal_basis(xml_content):
     # Parse legal basis NoID description
     legal_basis_noid_description = root.xpath(
         "//cac:ProcurementLegislationDocumentReference[cbc:ID='LocalLegalBasis']/cbc:DocumentDescription",
-        namespaces=namespaces
+        namespaces=namespaces,
     )
     if legal_basis_noid_description:
-        result["tender"]["legalBasis"]["description"] = legal_basis_noid_description[0].text
+        result["tender"]["legalBasis"]["description"] = legal_basis_noid_description[
+            0
+        ].text
 
     # Parse legal basis notice
     regulatory_domain = root.xpath("//cbc:RegulatoryDomain", namespaces=namespaces)
@@ -65,6 +68,7 @@ def parse_procedure_legal_basis(xml_content):
     else:
         logger.info("No Procedure Legal Basis data found")
         return None
+
 
 def merge_procedure_legal_basis(release_json, legal_basis_data):
     if not legal_basis_data:

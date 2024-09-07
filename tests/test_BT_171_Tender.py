@@ -3,6 +3,7 @@
 import pytest
 from converters.BT_171_Tender import parse_tender_rank, merge_tender_rank
 
+
 def test_parse_tender_rank():
     xml_content = """
     <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -21,30 +22,20 @@ def test_parse_tender_rank():
     result = parse_tender_rank(xml_content)
     assert result == {
         "bids": {
-            "details": [
-                {
-                    "id": "TEN-0001",
-                    "rank": 1,
-                    "relatedLots": ["LOT-0001"]
-                }
-            ]
+            "details": [{"id": "TEN-0001", "rank": 1, "relatedLots": ["LOT-0001"]}]
         }
     }
+
 
 def test_merge_tender_rank():
     release_json = {}
     tender_rank_data = {
         "bids": {
-            "details": [
-                {
-                    "id": "TEN-0001",
-                    "rank": 1,
-                    "relatedLots": ["LOT-0001"]
-                }
-            ]
+            "details": [{"id": "TEN-0001", "rank": 1, "relatedLots": ["LOT-0001"]}]
         }
     }
     merge_tender_rank(release_json, tender_rank_data)
     assert release_json == tender_rank_data
+
 
 # Add more tests as needed

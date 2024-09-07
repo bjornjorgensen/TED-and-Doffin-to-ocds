@@ -1,6 +1,10 @@
 import pytest
 from lxml import etree
-from converters.BT_711_LotResult import parse_tender_value_highest, merge_tender_value_highest
+from converters.BT_711_LotResult import (
+    parse_tender_value_highest,
+    merge_tender_value_highest,
+)
+
 
 def test_parse_tender_value_highest():
     xml_content = """
@@ -29,6 +33,7 @@ def test_parse_tender_value_highest():
     assert stat["value"]["currency"] == "EUR"
     assert stat["relatedLots"] == ["LOT-0001"]
 
+
 def test_merge_tender_value_highest():
     release_json = {"bids": {"statistics": []}}
     tender_value_highest_data = {
@@ -38,7 +43,7 @@ def test_merge_tender_value_highest():
                     "id": "highest-LOT-0001",
                     "measure": "highestValidBidValue",
                     "value": {"amount": 20000.00, "currency": "EUR"},
-                    "relatedLots": ["LOT-0001"]
+                    "relatedLots": ["LOT-0001"],
                 }
             ]
         }

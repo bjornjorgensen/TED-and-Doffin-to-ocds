@@ -11,6 +11,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_parse_vehicle_numeric():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -47,9 +48,9 @@ def test_parse_vehicle_numeric():
         </efac:NoticeResult>
     </root>
     """
-    
+
     result = parse_vehicle_numeric(xml_content)
-    
+
     assert result is not None
     assert "awards" in result
     assert len(result["awards"]) == 1
@@ -60,21 +61,14 @@ def test_parse_vehicle_numeric():
     assert result["awards"][0]["items"][2]["quantity"] == 5
     assert result["awards"][0]["relatedLots"] == ["LOT-0001"]
 
+
 def test_merge_vehicle_numeric():
     release_json = {
         "awards": [
-            {
-                "id": "RES-0001",
-                "items": [
-                    {
-                        "id": "1",
-                        "description": "Existing item"
-                    }
-                ]
-            }
+            {"id": "RES-0001", "items": [{"id": "1", "description": "Existing item"}]}
         ]
     }
-    
+
     vehicle_numeric_data = {
         "awards": [
             {
@@ -86,8 +80,8 @@ def test_merge_vehicle_numeric():
                         "classification": {
                             "scheme": "vehicles",
                             "id": "vehicles-zero-emission",
-                            "description": "Vehicles Zero Emission"
-                        }
+                            "description": "Vehicles Zero Emission",
+                        },
                     },
                     {
                         "id": "2",
@@ -95,23 +89,24 @@ def test_merge_vehicle_numeric():
                         "classification": {
                             "scheme": "vehicles",
                             "id": "vehicles-clean",
-                            "description": "Vehicles Clean"
-                        }
-                    }
+                            "description": "Vehicles Clean",
+                        },
+                    },
                 ],
-                "relatedLots": ["LOT-0001"]
+                "relatedLots": ["LOT-0001"],
             }
         ]
     }
-    
+
     merge_vehicle_numeric(release_json, vehicle_numeric_data)
-    
+
     assert len(release_json["awards"]) == 1
     assert release_json["awards"][0]["id"] == "RES-0001"
     assert len(release_json["awards"][0]["items"]) == 2
     assert release_json["awards"][0]["items"][0]["quantity"] == 3
     assert release_json["awards"][0]["items"][1]["quantity"] == 2
     assert release_json["awards"][0]["relatedLots"] == ["LOT-0001"]
+
 
 def test_opt_156_lotresult_vehicle_numeric_integration(tmp_path):
     xml_content = """
@@ -154,7 +149,7 @@ def test_opt_156_lotresult_vehicle_numeric_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "awards" in result
@@ -163,17 +158,28 @@ def test_opt_156_lotresult_vehicle_numeric_integration(tmp_path):
     award = result["awards"][0]
     assert award["id"] == "RES-0001"
     assert len(award["items"]) == 3
-    
-    zero_emission = next(item for item in award["items"] if item["classification"]["id"] == "vehicles-zero-emission")
+
+    zero_emission = next(
+        item
+        for item in award["items"]
+        if item["classification"]["id"] == "vehicles-zero-emission"
+    )
     assert zero_emission["quantity"] == 3
-    
-    clean = next(item for item in award["items"] if item["classification"]["id"] == "vehicles-clean")
+
+    clean = next(
+        item
+        for item in award["items"]
+        if item["classification"]["id"] == "vehicles-clean"
+    )
     assert clean["quantity"] == 2
-    
-    regular = next(item for item in award["items"] if item["classification"]["id"] == "vehicles")
+
+    regular = next(
+        item for item in award["items"] if item["classification"]["id"] == "vehicles"
+    )
     assert regular["quantity"] == 5
-    
+
     assert award["relatedLots"] == ["LOT-0001"]
+
 
 if __name__ == "__main__":
     pytest.main()

@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_735_lotresult_integration(tmp_path):
     xml_content = """
     <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -41,7 +42,7 @@ def test_bt_735_lotresult_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "awards" in result, "Expected 'awards' in result"
@@ -54,13 +55,24 @@ def test_bt_735_lotresult_integration(tmp_path):
 
     item = award["items"][0]
     assert item["id"] == "1", f"Expected item id '1', got {item['id']}"
-    assert "additionalClassifications" in item, "Expected 'additionalClassifications' in item"
-    assert len(item["additionalClassifications"]) == 1, f"Expected 1 additional classification, got {len(item['additionalClassifications'])}"
+    assert (
+        "additionalClassifications" in item
+    ), "Expected 'additionalClassifications' in item"
+    assert (
+        len(item["additionalClassifications"]) == 1
+    ), f"Expected 1 additional classification, got {len(item['additionalClassifications'])}"
 
     classification = item["additionalClassifications"][0]
-    assert classification["id"] == "oth-serv-contr", f"Expected classification id 'oth-serv-contr', got {classification['id']}"
-    assert classification["scheme"] == "eu-cvd-contract-type", f"Expected scheme 'eu-cvd-contract-type', got {classification['scheme']}"
-    assert classification["description"] == "Other service contract", f"Expected description 'Other service contract', got {classification['description']}"
+    assert (
+        classification["id"] == "oth-serv-contr"
+    ), f"Expected classification id 'oth-serv-contr', got {classification['id']}"
+    assert (
+        classification["scheme"] == "eu-cvd-contract-type"
+    ), f"Expected scheme 'eu-cvd-contract-type', got {classification['scheme']}"
+    assert (
+        classification["description"] == "Other service contract"
+    ), f"Expected description 'Other service contract', got {classification['description']}"
+
 
 if __name__ == "__main__":
     pytest.main()

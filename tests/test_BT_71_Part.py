@@ -3,7 +3,11 @@
 import pytest
 import json
 from lxml import etree
-from converters.BT_71_Part import parse_reserved_participation_part, merge_reserved_participation_part
+from converters.BT_71_Part import (
+    parse_reserved_participation_part,
+    merge_reserved_participation_part,
+)
+
 
 def test_parse_reserved_participation_part():
     xml_content = """
@@ -21,35 +25,35 @@ def test_parse_reserved_participation_part():
         </cac:ProcurementProjectLot>
     </root>
     """
-    
+
     result = parse_reserved_participation_part(xml_content)
-    
+
     assert result is not None
     assert "tender" in result
     assert "otherRequirements" in result["tender"]
     assert "reservedParticipation" in result["tender"]["otherRequirements"]
-    assert result["tender"]["otherRequirements"]["reservedParticipation"] == ["shelteredWorkshop"]
+    assert result["tender"]["otherRequirements"]["reservedParticipation"] == [
+        "shelteredWorkshop"
+    ]
+
 
 def test_merge_reserved_participation_part():
-    release_json = {
-        "tender": {
-            "title": "Existing Tender"
-        }
-    }
-    
+    release_json = {"tender": {"title": "Existing Tender"}}
+
     reserved_participation_data = {
         "tender": {
-            "otherRequirements": {
-                "reservedParticipation": ["shelteredWorkshop"]
-            }
+            "otherRequirements": {"reservedParticipation": ["shelteredWorkshop"]}
         }
     }
-    
+
     merge_reserved_participation_part(release_json, reserved_participation_data)
-    
+
     assert "otherRequirements" in release_json["tender"]
     assert "reservedParticipation" in release_json["tender"]["otherRequirements"]
-    assert release_json["tender"]["otherRequirements"]["reservedParticipation"] == ["shelteredWorkshop"]
+    assert release_json["tender"]["otherRequirements"]["reservedParticipation"] == [
+        "shelteredWorkshop"
+    ]
+
 
 def test_merge_multiple_reserved_participation_part():
     release_json = {
@@ -59,20 +63,21 @@ def test_merge_multiple_reserved_participation_part():
             }
         }
     }
-    
+
     reserved_participation_data = {
         "tender": {
-            "otherRequirements": {
-                "reservedParticipation": ["shelteredWorkshop"]
-            }
+            "otherRequirements": {"reservedParticipation": ["shelteredWorkshop"]}
         }
     }
-    
+
     merge_reserved_participation_part(release_json, reserved_participation_data)
-    
+
     assert "otherRequirements" in release_json["tender"]
     assert "reservedParticipation" in release_json["tender"]["otherRequirements"]
-    assert set(release_json["tender"]["otherRequirements"]["reservedParticipation"]) == {"publicServiceMissionOrganization", "shelteredWorkshop"}
+    assert set(
+        release_json["tender"]["otherRequirements"]["reservedParticipation"]
+    ) == {"publicServiceMissionOrganization", "shelteredWorkshop"}
+
 
 if __name__ == "__main__":
     pytest.main()

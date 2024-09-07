@@ -5,6 +5,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+
 def parse_part_sme_suitability(xml_content):
     """
     Parse the XML content to extract SME suitability information for the procurement part.
@@ -17,29 +18,27 @@ def parse_part_sme_suitability(xml_content):
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+    }
 
-    sme_suitable = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cbc:SMESuitableIndicator/text()", namespaces=namespaces)
+    sme_suitable = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cbc:SMESuitableIndicator/text()",
+        namespaces=namespaces,
+    )
 
     if sme_suitable:
-        return {
-            "tender": {
-                "suitability": {
-                    "sme": sme_suitable[0].lower() == 'true'
-                }
-            }
-        }
+        return {"tender": {"suitability": {"sme": sme_suitable[0].lower() == "true"}}}
 
     return None
+
 
 def merge_part_sme_suitability(release_json, part_sme_suitability_data):
     """
@@ -61,6 +60,8 @@ def merge_part_sme_suitability(release_json, part_sme_suitability_data):
     if "suitability" not in release_json["tender"]:
         release_json["tender"]["suitability"] = {}
 
-    release_json["tender"]["suitability"]["sme"] = part_sme_suitability_data["tender"]["suitability"]["sme"]
+    release_json["tender"]["suitability"]["sme"] = part_sme_suitability_data["tender"][
+        "suitability"
+    ]["sme"]
 
     logger.info("Merged SME suitability data for procurement part")

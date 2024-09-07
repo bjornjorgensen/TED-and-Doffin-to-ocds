@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_opt_301_tenderer_maincont_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -85,6 +86,7 @@ def test_opt_301_tenderer_maincont_integration(tmp_path):
     main_contractor = subcontract["mainContractors"][0]
     assert main_contractor["id"] == "ORG-0005"
     assert main_contractor["name"] == "Tendering Company Ltd"
+
 
 if __name__ == "__main__":
     pytest.main()

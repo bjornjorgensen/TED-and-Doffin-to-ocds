@@ -1,7 +1,11 @@
 # tests/test_BT_5131_Part.py
 
 import pytest
-from converters.BT_5131_Part import parse_place_performance_city_part, merge_place_performance_city_part
+from converters.BT_5131_Part import (
+    parse_place_performance_city_part,
+    merge_place_performance_city_part,
+)
+
 
 def test_parse_place_performance_city_part():
     xml_content = """
@@ -24,15 +28,16 @@ def test_parse_place_performance_city_part():
         </cac:ProcurementProjectLot>
     </root>
     """
-    
+
     result = parse_place_performance_city_part(xml_content)
-    
+
     assert result is not None
     assert "tender" in result
     assert "deliveryAddresses" in result["tender"]
     assert len(result["tender"]["deliveryAddresses"]) == 2
     assert result["tender"]["deliveryAddresses"][0] == {"locality": "New York"}
     assert result["tender"]["deliveryAddresses"][1] == {"locality": "Los Angeles"}
+
 
 def test_parse_place_performance_city_part_empty():
     xml_content = """
@@ -49,57 +54,51 @@ def test_parse_place_performance_city_part_empty():
         </cac:ProcurementProjectLot>
     </root>
     """
-    
+
     result = parse_place_performance_city_part(xml_content)
-    
+
     assert result is None
 
+
 def test_merge_place_performance_city_part():
-    existing_json = {
-        "tender": {
-            "deliveryAddresses": [
-                {"postalCode": "10001"}
-            ]
-        }
-    }
-    
+    existing_json = {"tender": {"deliveryAddresses": [{"postalCode": "10001"}]}}
+
     new_data = {
         "tender": {
-            "deliveryAddresses": [
-                {"locality": "New York"},
-                {"locality": "Los Angeles"}
-            ]
+            "deliveryAddresses": [{"locality": "New York"}, {"locality": "Los Angeles"}]
         }
     }
-    
+
     merge_place_performance_city_part(existing_json, new_data)
-    
+
     assert len(existing_json["tender"]["deliveryAddresses"]) == 3
     assert existing_json["tender"]["deliveryAddresses"][0] == {"postalCode": "10001"}
     assert existing_json["tender"]["deliveryAddresses"][1] == {"locality": "New York"}
-    assert existing_json["tender"]["deliveryAddresses"][2] == {"locality": "Los Angeles"}
+    assert existing_json["tender"]["deliveryAddresses"][2] == {
+        "locality": "Los Angeles"
+    }
+
 
 def test_merge_place_performance_city_part_update():
     existing_json = {
         "tender": {
-            "deliveryAddresses": [
-                {"locality": "New York", "postalCode": "10001"}
-            ]
+            "deliveryAddresses": [{"locality": "New York", "postalCode": "10001"}]
         }
     }
-    
+
     new_data = {
-        "tender": {
-            "deliveryAddresses": [
-                {"locality": "New York", "region": "NY"}
-            ]
-        }
+        "tender": {"deliveryAddresses": [{"locality": "New York", "region": "NY"}]}
     }
-    
+
     merge_place_performance_city_part(existing_json, new_data)
-    
+
     assert len(existing_json["tender"]["deliveryAddresses"]) == 1
-    assert existing_json["tender"]["deliveryAddresses"][0] == {"locality": "New York", "postalCode": "10001", "region": "NY"}
+    assert existing_json["tender"]["deliveryAddresses"][0] == {
+        "locality": "New York",
+        "postalCode": "10001",
+        "region": "NY",
+    }
+
 
 def test_merge_place_performance_city_part_empty():
     existing_json = {"tender": {}}

@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_03_form_type_integration(tmp_path):
     xml_content = """
     <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -20,14 +21,17 @@ def test_bt_03_form_type_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tag" in result, "Expected 'tag' in result"
     assert "tender" in result, "Expected 'tender' in result"
 
     assert "tender" in result["tag"], "Expected 'tender' in result['tag']"
-    assert result["tender"]["status"] == "active", f"Expected tender status to be 'active', got {result['tender'].get('status')}"
+    assert (
+        result["tender"]["status"] == "active"
+    ), f"Expected tender status to be 'active', got {result['tender'].get('status')}"
+
 
 def test_bt_03_form_type_integration_multiple(tmp_path):
     xml_content = """
@@ -41,14 +45,19 @@ def test_bt_03_form_type_integration_multiple(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tag" in result, "Expected 'tag' in result"
     assert "tender" in result, "Expected 'tender' in result"
 
-    assert set(result["tag"]) == set(["tender", "award", "contract"]), f"Expected tags to be ['tender', 'award', 'contract'], got {result['tag']}"
-    assert result["tender"]["status"] == "complete", f"Expected tender status to be 'complete', got {result['tender'].get('status')}"
+    assert set(result["tag"]) == set(
+        ["tender", "award", "contract"]
+    ), f"Expected tags to be ['tender', 'award', 'contract'], got {result['tag']}"
+    assert (
+        result["tender"]["status"] == "complete"
+    ), f"Expected tender status to be 'complete', got {result['tender'].get('status')}"
+
 
 def test_bt_03_form_type_integration_invalid(tmp_path):
     xml_content = """
@@ -61,11 +70,16 @@ def test_bt_03_form_type_integration_invalid(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
-    assert "tag" not in result or "tender" not in result.get("tag", []), "Expected no 'tender' tag for invalid form type"
-    assert "status" not in result.get("tender", {}), "Expected no tender status for invalid form type"
+    assert "tag" not in result or "tender" not in result.get(
+        "tag", []
+    ), "Expected no 'tender' tag for invalid form type"
+    assert "status" not in result.get(
+        "tender", {}
+    ), "Expected no tender status for invalid form type"
+
 
 if __name__ == "__main__":
     pytest.main()

@@ -7,6 +7,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_opp_031_tender_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -37,7 +38,7 @@ def test_opp_031_tender_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result
@@ -46,5 +47,8 @@ def test_opp_031_tender_integration(tmp_path):
     lot = result["tender"]["lots"][0]
     assert lot["id"] == "LOT-0001"
     assert "contractTerms" in lot
-    assert lot["contractTerms"]["socialStandards"] == "Description of the social-standards blablabla ..."
+    assert (
+        lot["contractTerms"]["socialStandards"]
+        == "Description of the social-standards blablabla ..."
+    )
     assert lot["contractTerms"]["hasExclusiveRights"] == True

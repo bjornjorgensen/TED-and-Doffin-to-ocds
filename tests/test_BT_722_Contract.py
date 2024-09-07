@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_722_contract_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -45,18 +46,29 @@ def test_bt_722_contract_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "contracts" in result, "Expected 'contracts' in result"
-    assert len(result["contracts"]) == 1, f"Expected 1 contract, got {len(result['contracts'])}"
+    assert (
+        len(result["contracts"]) == 1
+    ), f"Expected 1 contract, got {len(result['contracts'])}"
 
     contract = result["contracts"][0]
-    assert contract["id"] == "CON-0001", f"Expected contract id 'CON-0001', got {contract['id']}"
+    assert (
+        contract["id"] == "CON-0001"
+    ), f"Expected contract id 'CON-0001', got {contract['id']}"
     assert "finance" in contract, "Expected 'finance' in contract"
-    assert len(contract["finance"]) == 1, f"Expected 1 finance object, got {len(contract['finance'])}"
-    assert contract["finance"][0]["title"] == "ABC123", f"Expected finance title 'ABC123', got {contract['finance'][0]['title']}"
-    assert contract["awardID"] == "RES-0001", f"Expected award id 'RES-0001', got {contract['awardID']}"
+    assert (
+        len(contract["finance"]) == 1
+    ), f"Expected 1 finance object, got {len(contract['finance'])}"
+    assert (
+        contract["finance"][0]["title"] == "ABC123"
+    ), f"Expected finance title 'ABC123', got {contract['finance'][0]['title']}"
+    assert (
+        contract["awardID"] == "RES-0001"
+    ), f"Expected award id 'RES-0001', got {contract['awardID']}"
+
 
 if __name__ == "__main__":
     pytest.main()

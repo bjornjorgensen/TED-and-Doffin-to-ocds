@@ -10,6 +10,7 @@ import logging
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 @pytest.mark.parametrize("caplog", [True], indirect=True)
 def test_bt_125_part_integration(tmp_path, caplog):
     caplog.set_level(logging.INFO)
@@ -37,7 +38,7 @@ def test_bt_125_part_integration(tmp_path, caplog):
     for record in caplog.records:
         print(f"{record.levelname}: {record.message}")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     print("Full result:")
@@ -49,7 +50,11 @@ def test_bt_125_part_integration(tmp_path, caplog):
     assert related_process["id"] == "1"
     assert related_process["relationship"] == ["planning"]
     assert related_process["scheme"] == "eu-oj"
-    assert related_process["identifier"] == "123e4567-e89b-12d3-a456-426614174000-06-PAR-0001"
+    assert (
+        related_process["identifier"]
+        == "123e4567-e89b-12d3-a456-426614174000-06-PAR-0001"
+    )
+
 
 if __name__ == "__main__":
-    pytest.main(['-v', '-s'])
+    pytest.main(["-v", "-s"])

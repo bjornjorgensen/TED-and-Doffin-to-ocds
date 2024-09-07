@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_opp_140_procurement_docs_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -36,21 +37,36 @@ def test_opp_140_procurement_docs_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result
     assert "documents" in result["tender"]
     assert len(result["tender"]["documents"]) == 2
 
-    lot_doc = next((doc for doc in result["tender"]["documents"] if doc["id"] == "20210521/CTFD/ENG/7654-02"), None)
+    lot_doc = next(
+        (
+            doc
+            for doc in result["tender"]["documents"]
+            if doc["id"] == "20210521/CTFD/ENG/7654-02"
+        ),
+        None,
+    )
     assert lot_doc is not None
     assert "relatedLots" in lot_doc
     assert lot_doc["relatedLots"] == ["LOT-0001"]
 
-    part_doc = next((doc for doc in result["tender"]["documents"] if doc["id"] == "20210521/CTFD/ENG/7654-03"), None)
+    part_doc = next(
+        (
+            doc
+            for doc in result["tender"]["documents"]
+            if doc["id"] == "20210521/CTFD/ENG/7654-03"
+        ),
+        None,
+    )
     assert part_doc is not None
     assert "relatedLots" not in part_doc
+
 
 if __name__ == "__main__":
     pytest.main()

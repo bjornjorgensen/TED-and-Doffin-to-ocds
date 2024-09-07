@@ -5,6 +5,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+
 def parse_organization_touchpoint_part_name(xml_content):
     """
     Parse the XML content to extract the organization touchpoint part name.
@@ -29,48 +30,63 @@ def parse_organization_touchpoint_part_name(xml_content):
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"parties": []}
 
-    organizations = root.xpath("//efac:Organizations/efac:Organization", namespaces=namespaces)
-    
+    organizations = root.xpath(
+        "//efac:Organizations/efac:Organization", namespaces=namespaces
+    )
+
     for organization in organizations:
-        company_id = organization.xpath("efac:Company/cac:PartyLegalEntity/cbc:CompanyID/text()", namespaces=namespaces)
+        company_id = organization.xpath(
+            "efac:Company/cac:PartyLegalEntity/cbc:CompanyID/text()",
+            namespaces=namespaces,
+        )
         touchpoint = organization.xpath("efac:TouchPoint", namespaces=namespaces)
-        
+
         if touchpoint:
-            touchpoint_id = touchpoint[0].xpath("cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']/text()", namespaces=namespaces)
-            org_name = touchpoint[0].xpath("cac:PartyName/cbc:Name/text()", namespaces=namespaces)
-            department = touchpoint[0].xpath("cac:PostalAddress/cbc:Department/text()", namespaces=namespaces)
-            
+            touchpoint_id = touchpoint[0].xpath(
+                "cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']/text()",
+                namespaces=namespaces,
+            )
+            org_name = touchpoint[0].xpath(
+                "cac:PartyName/cbc:Name/text()", namespaces=namespaces
+            )
+            department = touchpoint[0].xpath(
+                "cac:PostalAddress/cbc:Department/text()", namespaces=namespaces
+            )
+
             if touchpoint_id and org_name:
                 full_name = org_name[0]
                 if department:
                     full_name += f" - {department[0]}"
-                
+
                 party = {
                     "id": touchpoint_id[0],
                     "name": full_name,
                     "identifier": {
                         "id": company_id[0] if company_id else None,
-                        "scheme": "internal"
-                    }
+                        "scheme": "internal",
+                    },
                 }
                 result["parties"].append(party)
 
     return result if result["parties"] else None
 
-def merge_organization_touchpoint_part_name(release_json, organization_touchpoint_part_name_data):
+
+def merge_organization_touchpoint_part_name(
+    release_json, organization_touchpoint_part_name_data
+):
     """
     Merge the parsed organization touchpoint part name data into the main OCDS release JSON.
 
@@ -86,12 +102,17 @@ def merge_organization_touchpoint_part_name(release_json, organization_touchpoin
         return
 
     existing_parties = release_json.setdefault("parties", [])
-    
+
     for new_party in organization_touchpoint_part_name_data["parties"]:
-        existing_party = next((party for party in existing_parties if party["id"] == new_party["id"]), None)
+        existing_party = next(
+            (party for party in existing_parties if party["id"] == new_party["id"]),
+            None,
+        )
         if existing_party:
             existing_party.update(new_party)
         else:
             existing_parties.append(new_party)
 
-    logger.info(f"Merged Organization TouchPoint Part Name data for {len(organization_touchpoint_part_name_data['parties'])} parties")
+    logger.info(
+        f"Merged Organization TouchPoint Part Name data for {len(organization_touchpoint_part_name_data['parties'])} parties"
+    )

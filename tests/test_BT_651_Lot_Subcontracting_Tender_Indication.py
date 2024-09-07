@@ -2,7 +2,11 @@
 
 import pytest
 from lxml import etree
-from converters.BT_651_Lot_Subcontracting_Tender_Indication import parse_subcontracting_tender_indication, merge_subcontracting_tender_indication
+from converters.BT_651_Lot_Subcontracting_Tender_Indication import (
+    parse_subcontracting_tender_indication,
+    merge_subcontracting_tender_indication,
+)
+
 
 def test_parse_subcontracting_tender_indication():
     xml_content = """
@@ -29,15 +33,16 @@ def test_parse_subcontracting_tender_indication():
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
     </root>
-    """.encode('utf-8')
+    """.encode("utf-8")
 
     result = parse_subcontracting_tender_indication(xml_content)
 
     assert result is not None
-    assert len(result['tender']['lots']) == 1
-    lot = result['tender']['lots'][0]
-    assert lot['id'] == 'LOT-0001'
-    assert lot['submissionTerms']['subcontractingClauses'] == ['subc-oblig']
+    assert len(result["tender"]["lots"]) == 1
+    lot = result["tender"]["lots"][0]
+    assert lot["id"] == "LOT-0001"
+    assert lot["submissionTerms"]["subcontractingClauses"] == ["subc-oblig"]
+
 
 def test_parse_subcontracting_tender_indication_no_data():
     xml_content = """
@@ -47,11 +52,12 @@ def test_parse_subcontracting_tender_indication_no_data():
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
         </cac:ProcurementProjectLot>
     </root>
-    """.encode('utf-8')
+    """.encode("utf-8")
 
     result = parse_subcontracting_tender_indication(xml_content)
 
     assert result is None
+
 
 def test_merge_subcontracting_tender_indication():
     existing_release = {
@@ -59,9 +65,7 @@ def test_merge_subcontracting_tender_indication():
             "lots": [
                 {
                     "id": "LOT-0001",
-                    "submissionTerms": {
-                        "subcontractingClauses": ["existing-clause"]
-                    }
+                    "submissionTerms": {"subcontractingClauses": ["existing-clause"]},
                 }
             ]
         }
@@ -72,9 +76,7 @@ def test_merge_subcontracting_tender_indication():
             "lots": [
                 {
                     "id": "LOT-0001",
-                    "submissionTerms": {
-                        "subcontractingClauses": ["subc-oblig"]
-                    }
+                    "submissionTerms": {"subcontractingClauses": ["subc-oblig"]},
                 }
             ]
         }
@@ -82,25 +84,23 @@ def test_merge_subcontracting_tender_indication():
 
     merge_subcontracting_tender_indication(existing_release, new_data)
 
-    assert len(existing_release['tender']['lots']) == 1
-    lot = existing_release['tender']['lots'][0]
-    assert lot['submissionTerms']['subcontractingClauses'] == ["existing-clause", "subc-oblig"]
+    assert len(existing_release["tender"]["lots"]) == 1
+    lot = existing_release["tender"]["lots"][0]
+    assert lot["submissionTerms"]["subcontractingClauses"] == [
+        "existing-clause",
+        "subc-oblig",
+    ]
+
 
 def test_merge_subcontracting_tender_indication_new_lot():
-    existing_release = {
-        "tender": {
-            "lots": []
-        }
-    }
+    existing_release = {"tender": {"lots": []}}
 
     new_data = {
         "tender": {
             "lots": [
                 {
                     "id": "LOT-0001",
-                    "submissionTerms": {
-                        "subcontractingClauses": ["subc-oblig"]
-                    }
+                    "submissionTerms": {"subcontractingClauses": ["subc-oblig"]},
                 }
             ]
         }
@@ -108,7 +108,7 @@ def test_merge_subcontracting_tender_indication_new_lot():
 
     merge_subcontracting_tender_indication(existing_release, new_data)
 
-    assert len(existing_release['tender']['lots']) == 1
-    lot = existing_release['tender']['lots'][0]
-    assert lot['id'] == 'LOT-0001'
-    assert lot['submissionTerms']['subcontractingClauses'] == ["subc-oblig"]
+    assert len(existing_release["tender"]["lots"]) == 1
+    lot = existing_release["tender"]["lots"][0]
+    assert lot["id"] == "LOT-0001"
+    assert lot["submissionTerms"]["subcontractingClauses"] == ["subc-oblig"]

@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_tendering_party_leader_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -46,19 +47,24 @@ def test_tendering_party_leader_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "parties" in result
     assert len(result["parties"]) == 2
 
-    leader_party = next((party for party in result["parties"] if party["id"] == "ORG-0001"), None)
+    leader_party = next(
+        (party for party in result["parties"] if party["id"] == "ORG-0001"), None
+    )
     assert leader_party is not None
     assert set(leader_party["roles"]) == {"tenderer", "leadTenderer"}
 
-    non_leader_party = next((party for party in result["parties"] if party["id"] == "ORG-0002"), None)
+    non_leader_party = next(
+        (party for party in result["parties"] if party["id"] == "ORG-0002"), None
+    )
     assert non_leader_party is not None
     assert set(non_leader_party["roles"]) == {"tenderer"}
+
 
 def test_tendering_party_leader_no_data(tmp_path):
     xml_content = """
@@ -85,10 +91,13 @@ def test_tendering_party_leader_no_data(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
-    assert "parties" not in result or not any("tenderer" in party.get("roles", []) for party in result.get("parties", []))
+    assert "parties" not in result or not any(
+        "tenderer" in party.get("roles", []) for party in result.get("parties", [])
+    )
+
 
 if __name__ == "__main__":
     pytest.main()

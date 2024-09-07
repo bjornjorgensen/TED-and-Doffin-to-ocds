@@ -2,7 +2,11 @@
 
 import pytest
 from lxml import etree
-from converters.BT_774_Lot import parse_green_procurement, merge_green_procurement, ENVIRONMENTAL_IMPACT_MAPPING
+from converters.BT_774_Lot import (
+    parse_green_procurement,
+    merge_green_procurement,
+    ENVIRONMENTAL_IMPACT_MAPPING,
+)
 import json
 import os
 import sys
@@ -10,6 +14,8 @@ import sys
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
+
+
 def test_parse_green_procurement():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -24,9 +30,9 @@ def test_parse_green_procurement():
         </cac:ProcurementProjectLot>
     </root>
     """
-    
+
     result = parse_green_procurement(xml_content)
-    
+
     assert result is not None
     assert "tender" in result
     assert "lots" in result["tender"]
@@ -34,43 +40,38 @@ def test_parse_green_procurement():
     assert result["tender"]["lots"][0]["id"] == "LOT-0001"
     assert result["tender"]["lots"][0]["hasSustainability"] is True
     assert len(result["tender"]["lots"][0]["sustainability"]) == 1
-    assert result["tender"]["lots"][0]["sustainability"][0]["goal"] == ENVIRONMENTAL_IMPACT_MAPPING['circ-econ']
+    assert (
+        result["tender"]["lots"][0]["sustainability"][0]["goal"]
+        == ENVIRONMENTAL_IMPACT_MAPPING["circ-econ"]
+    )
+
 
 def test_merge_green_procurement():
-    release_json = {
-        "tender": {
-            "lots": [
-                {
-                    "id": "LOT-0001",
-                    "title": "Existing Lot"
-                }
-            ]
-        }
-    }
-    
+    release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}
+
     green_procurement_data = {
         "tender": {
             "lots": [
                 {
                     "id": "LOT-0001",
                     "hasSustainability": True,
-                    "sustainability": [
-                        {
-                            "goal": "environmental.circularEconomy"
-                        }
-                    ]
+                    "sustainability": [{"goal": "environmental.circularEconomy"}],
                 }
             ]
         }
     }
-    
+
     merge_green_procurement(release_json, green_procurement_data)
-    
+
     assert "hasSustainability" in release_json["tender"]["lots"][0]
     assert release_json["tender"]["lots"][0]["hasSustainability"] is True
     assert "sustainability" in release_json["tender"]["lots"][0]
     assert len(release_json["tender"]["lots"][0]["sustainability"]) == 1
-    assert release_json["tender"]["lots"][0]["sustainability"][0]["goal"] == "environmental.circularEconomy"
+    assert (
+        release_json["tender"]["lots"][0]["sustainability"][0]["goal"]
+        == "environmental.circularEconomy"
+    )
+
 
 def test_bt_774_lot_green_procurement_integration(tmp_path):
     xml_content = """
@@ -107,12 +108,12 @@ def test_bt_774_lot_green_procurement_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result
     assert "lots" in result["tender"]
-    
+
     green_lots = [lot for lot in result["tender"]["lots"] if "sustainability" in lot]
     assert len(green_lots) == 2
 
@@ -120,17 +121,24 @@ def test_bt_774_lot_green_procurement_integration(tmp_path):
     assert lot_1 is not None
     assert lot_1["hasSustainability"] is True
     assert len(lot_1["sustainability"]) == 1
-    assert lot_1["sustainability"][0]["goal"] == ENVIRONMENTAL_IMPACT_MAPPING['circ-econ']
+    assert (
+        lot_1["sustainability"][0]["goal"] == ENVIRONMENTAL_IMPACT_MAPPING["circ-econ"]
+    )
 
     lot_2 = next((lot for lot in green_lots if lot["id"] == "LOT-0002"), None)
     assert lot_2 is not None
     assert lot_2["hasSustainability"] is True
     assert len(lot_2["sustainability"]) == 1
-    assert lot_2["sustainability"][0]["goal"] == ENVIRONMENTAL_IMPACT_MAPPING['biodiv-eco']
+    assert (
+        lot_2["sustainability"][0]["goal"] == ENVIRONMENTAL_IMPACT_MAPPING["biodiv-eco"]
+    )
 
-    lot_3 = next((lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"), None)
+    lot_3 = next(
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"), None
+    )
     assert lot_3 is not None
     assert "sustainability" not in lot_3
+
 
 if __name__ == "__main__":
     pytest.main()

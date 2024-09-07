@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_736_part_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -28,13 +29,18 @@ def test_bt_736_part_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "contractTerms" in result["tender"], "Expected 'contractTerms' in tender"
-    assert "reservedExecution" in result["tender"]["contractTerms"], "Expected 'reservedExecution' in contractTerms"
-    assert result["tender"]["contractTerms"]["reservedExecution"] is True, "Expected reservedExecution to be True"
+    assert (
+        "reservedExecution" in result["tender"]["contractTerms"]
+    ), "Expected 'reservedExecution' in contractTerms"
+    assert (
+        result["tender"]["contractTerms"]["reservedExecution"] is True
+    ), "Expected reservedExecution to be True"
+
 
 def test_bt_736_part_integration_no_value(tmp_path):
     xml_content = """
@@ -55,11 +61,15 @@ def test_bt_736_part_integration_no_value(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
-    assert "contractTerms" not in result["tender"] or "reservedExecution" not in result["tender"]["contractTerms"], "Expected no 'reservedExecution' in contractTerms"
+    assert (
+        "contractTerms" not in result["tender"]
+        or "reservedExecution" not in result["tender"]["contractTerms"]
+    ), "Expected no 'reservedExecution' in contractTerms"
+
 
 if __name__ == "__main__":
     pytest.main()

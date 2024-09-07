@@ -2,7 +2,10 @@
 
 import pytest
 from lxml import etree
-from converters.BT_712a_LotResult import parse_buyer_review_complainants, merge_buyer_review_complainants
+from converters.BT_712a_LotResult import (
+    parse_buyer_review_complainants,
+    merge_buyer_review_complainants,
+)
 import json
 import os
 import sys
@@ -10,6 +13,7 @@ import sys
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
+
 
 def test_parse_buyer_review_complainants():
     xml_content = """
@@ -29,40 +33,33 @@ def test_parse_buyer_review_complainants():
         </efac:NoticeResult>
     </root>
     """
-    
+
     result = parse_buyer_review_complainants(xml_content)
-    
+
     assert result is not None
     assert "statistics" in result
     assert len(result["statistics"]) == 1
     assert result["statistics"][0]["measure"] == "complainants"
     assert result["statistics"][0]["relatedLot"] == "LOT-0001"
 
+
 def test_merge_buyer_review_complainants():
     release_json = {
-        "statistics": [
-            {
-                "id": "1",
-                "measure": "otherMeasure",
-                "relatedLot": "LOT-0001"
-            }
-        ]
+        "statistics": [{"id": "1", "measure": "otherMeasure", "relatedLot": "LOT-0001"}]
     }
-    
+
     buyer_review_complainants_data = {
-        "statistics": [
-            {
-                "id": "2",
-                "measure": "complainants",
-                "relatedLot": "LOT-0001"
-            }
-        ]
+        "statistics": [{"id": "2", "measure": "complainants", "relatedLot": "LOT-0001"}]
     }
-    
+
     merge_buyer_review_complainants(release_json, buyer_review_complainants_data)
-    
+
     assert len(release_json["statistics"]) == 2
-    assert any(stat["measure"] == "complainants" and stat["relatedLot"] == "LOT-0001" for stat in release_json["statistics"])
+    assert any(
+        stat["measure"] == "complainants" and stat["relatedLot"] == "LOT-0001"
+        for stat in release_json["statistics"]
+    )
+
 
 def test_bt_712a_lotresult_integration(tmp_path):
     xml_content = """
@@ -87,11 +84,15 @@ def test_bt_712a_lotresult_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "statistics" in result
-    assert any(stat["measure"] == "complainants" and stat["relatedLot"] == "LOT-0001" for stat in result["statistics"])
+    assert any(
+        stat["measure"] == "complainants" and stat["relatedLot"] == "LOT-0001"
+        for stat in result["statistics"]
+    )
+
 
 if __name__ == "__main__":
     pytest.main()

@@ -10,6 +10,7 @@ import logging
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main, configure_logging
 
+
 def test_bt_766_part_dynamic_purchasing_system_integration(tmp_path):
     configure_logging()
     logger = logging.getLogger(__name__)
@@ -32,18 +33,29 @@ def test_bt_766_part_dynamic_purchasing_system_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "techniques" in result["tender"], "Expected 'techniques' in tender"
-    assert "hasDynamicPurchasingSystem" in result["tender"]["techniques"], "Expected 'hasDynamicPurchasingSystem' in techniques"
-    assert result["tender"]["techniques"]["hasDynamicPurchasingSystem"] is True, "Expected 'hasDynamicPurchasingSystem' to be True"
-    assert "dynamicPurchasingSystem" in result["tender"]["techniques"], "Expected 'dynamicPurchasingSystem' in techniques"
-    assert "type" in result["tender"]["techniques"]["dynamicPurchasingSystem"], "Expected 'type' in dynamicPurchasingSystem"
-    assert result["tender"]["techniques"]["dynamicPurchasingSystem"]["type"] == "open", "Expected type to be 'open'"
+    assert (
+        "hasDynamicPurchasingSystem" in result["tender"]["techniques"]
+    ), "Expected 'hasDynamicPurchasingSystem' in techniques"
+    assert (
+        result["tender"]["techniques"]["hasDynamicPurchasingSystem"] is True
+    ), "Expected 'hasDynamicPurchasingSystem' to be True"
+    assert (
+        "dynamicPurchasingSystem" in result["tender"]["techniques"]
+    ), "Expected 'dynamicPurchasingSystem' in techniques"
+    assert (
+        "type" in result["tender"]["techniques"]["dynamicPurchasingSystem"]
+    ), "Expected 'type' in dynamicPurchasingSystem"
+    assert (
+        result["tender"]["techniques"]["dynamicPurchasingSystem"]["type"] == "open"
+    ), "Expected type to be 'open'"
+
 
 def test_bt_766_part_dynamic_purchasing_system_none(tmp_path):
     configure_logging()
@@ -67,13 +79,16 @@ def test_bt_766_part_dynamic_purchasing_system_none(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")
 
     assert "tender" in result, "Expected 'tender' in result"
-    assert "techniques" not in result["tender"], "Did not expect 'techniques' in tender when DPS usage is 'none'"
+    assert (
+        "techniques" not in result["tender"]
+    ), "Did not expect 'techniques' in tender when DPS usage is 'none'"
+
 
 if __name__ == "__main__":
-    pytest.main(['-v', '-s'])
+    pytest.main(["-v", "-s"])

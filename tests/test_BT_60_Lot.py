@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_60_lot_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -24,15 +25,20 @@ def test_bt_60_lot_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "parties" in result, "Expected 'parties' in result"
-    assert len(result["parties"]) == 1, f"Expected 1 party, got {len(result['parties'])}"
+    assert (
+        len(result["parties"]) == 1
+    ), f"Expected 1 party, got {len(result['parties'])}"
 
     eu_party = result["parties"][0]
-    assert eu_party["name"] == "European Union", f"Expected party name 'European Union', got {eu_party['name']}"
+    assert (
+        eu_party["name"] == "European Union"
+    ), f"Expected party name 'European Union', got {eu_party['name']}"
     assert "funder" in eu_party["roles"], "Expected 'funder' in party roles"
+
 
 if __name__ == "__main__":
     pytest.main()

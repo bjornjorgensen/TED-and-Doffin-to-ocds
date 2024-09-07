@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_opt_310_tendering_party_id_reference_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -48,24 +49,37 @@ def test_opt_310_tendering_party_id_reference_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "parties" in result, "Expected 'parties' in result"
-    assert len(result["parties"]) == 1, f"Expected 1 party, got {len(result['parties'])}"
-    assert result["parties"][0]["id"] == "ORG-0011", f"Expected party id 'ORG-0011', got {result['parties'][0]['id']}"
+    assert (
+        len(result["parties"]) == 1
+    ), f"Expected 1 party, got {len(result['parties'])}"
+    assert (
+        result["parties"][0]["id"] == "ORG-0011"
+    ), f"Expected party id 'ORG-0011', got {result['parties'][0]['id']}"
     assert "roles" in result["parties"][0], "Expected 'roles' in party"
-    assert "tenderer" in result["parties"][0]["roles"], "Expected 'tenderer' role in party"
+    assert (
+        "tenderer" in result["parties"][0]["roles"]
+    ), "Expected 'tenderer' role in party"
 
     assert "bids" in result, "Expected 'bids' in result"
     assert "details" in result["bids"], "Expected 'details' in bids"
-    assert len(result["bids"]["details"]) == 1, f"Expected 1 bid, got {len(result['bids']['details'])}"
+    assert (
+        len(result["bids"]["details"]) == 1
+    ), f"Expected 1 bid, got {len(result['bids']['details'])}"
 
     bid = result["bids"]["details"][0]
     assert bid["id"] == "TEN-0001", f"Expected bid id 'TEN-0001', got {bid['id']}"
     assert "tenderers" in bid, "Expected 'tenderers' in bid"
-    assert len(bid["tenderers"]) == 1, f"Expected 1 tenderer, got {len(bid['tenderers'])}"
-    assert bid["tenderers"][0]["id"] == "ORG-0011", f"Expected tenderer id 'ORG-0011', got {bid['tenderers'][0]['id']}"
+    assert (
+        len(bid["tenderers"]) == 1
+    ), f"Expected 1 tenderer, got {len(bid['tenderers'])}"
+    assert (
+        bid["tenderers"][0]["id"] == "ORG-0011"
+    ), f"Expected tenderer id 'ORG-0011', got {bid['tenderers'][0]['id']}"
+
 
 if __name__ == "__main__":
     pytest.main()

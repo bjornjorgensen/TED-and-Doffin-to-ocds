@@ -6,6 +6,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+
 def parse_framework_agreement(xml_content: str) -> Optional[Dict[str, Dict]]:
     """
     Parse the XML content to extract the Framework Agreement details for each lot.
@@ -17,44 +18,50 @@ def parse_framework_agreement(xml_content: str) -> Optional[Dict[str, Dict]]:
         Optional[Dict[str, Dict]]: A dictionary mapping lot IDs to their framework agreement data if found, None otherwise.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+    }
 
     method_mapping = {
-        'fa-mix': 'withAndWithoutReopeningCompetition',
-        'fa-w-rc': 'withReopeningCompetition',
-        'fa-wo-rc': 'withoutReopeningCompetition'
+        "fa-mix": "withAndWithoutReopeningCompetition",
+        "fa-w-rc": "withReopeningCompetition",
+        "fa-wo-rc": "withoutReopeningCompetition",
     }
 
     lots_data = {}
-    lots = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
+    lots = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+    )
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        framework_agreement = lot.xpath("cac:TenderingProcess/cac:ContractingSystem[cbc:ContractingSystemTypeCode/@listName='framework-agreement']/cbc:ContractingSystemTypeCode/text()", namespaces=namespaces)
-        
+        framework_agreement = lot.xpath(
+            "cac:TenderingProcess/cac:ContractingSystem[cbc:ContractingSystemTypeCode/@listName='framework-agreement']/cbc:ContractingSystemTypeCode/text()",
+            namespaces=namespaces,
+        )
+
         if framework_agreement and framework_agreement[0] in method_mapping:
             mapped_method = method_mapping[framework_agreement[0]]
             lots_data[lot_id] = {
                 "techniques": {
                     "hasFrameworkAgreement": True,
-                    "frameworkAgreement": {
-                        "method": mapped_method
-                    }
+                    "frameworkAgreement": {"method": mapped_method},
                 }
             }
 
     return lots_data if lots_data else None
 
-def merge_framework_agreement(release_json: Dict, framework_agreement_data: Optional[Dict[str, Dict]]) -> None:
+
+def merge_framework_agreement(
+    release_json: Dict, framework_agreement_data: Optional[Dict[str, Dict]]
+) -> None:
     """
     Merge the parsed Framework Agreement data into the main OCDS release JSON.
 

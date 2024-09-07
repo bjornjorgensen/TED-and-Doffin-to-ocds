@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_723_lot_result_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -47,7 +48,7 @@ def test_bt_723_lot_result_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "awards" in result, "Expected 'awards' in result"
@@ -55,19 +56,32 @@ def test_bt_723_lot_result_integration(tmp_path):
 
     award = result["awards"][0]
     assert award["id"] == "RES-0001", f"Expected award id 'RES-0001', got {award['id']}"
-    assert award["relatedLots"] == ["LOT-0001"], f"Expected related lot 'LOT-0001', got {award['relatedLots']}"
+    assert award["relatedLots"] == [
+        "LOT-0001"
+    ], f"Expected related lot 'LOT-0001', got {award['relatedLots']}"
     assert "items" in award, "Expected 'items' in award"
     assert len(award["items"]) == 1, f"Expected 1 item, got {len(award['items'])}"
 
     item = award["items"][0]
     assert item["id"] == "1", f"Expected item id '1', got {item['id']}"
-    assert "additionalClassifications" in item, "Expected 'additionalClassifications' in item"
-    assert len(item["additionalClassifications"]) == 1, f"Expected 1 additional classification, got {len(item['additionalClassifications'])}"
+    assert (
+        "additionalClassifications" in item
+    ), "Expected 'additionalClassifications' in item"
+    assert (
+        len(item["additionalClassifications"]) == 1
+    ), f"Expected 1 additional classification, got {len(item['additionalClassifications'])}"
 
     classification = item["additionalClassifications"][0]
-    assert classification["scheme"] == "eu-vehicle-category", f"Expected scheme 'eu-vehicle-category', got {classification['scheme']}"
-    assert classification["id"] == "n2-n3", f"Expected id 'n2-n3', got {classification['id']}"
-    assert classification["description"] == "Truck (N2-N3)", f"Expected description 'Truck (N2-N3)', got {classification['description']}"
+    assert (
+        classification["scheme"] == "eu-vehicle-category"
+    ), f"Expected scheme 'eu-vehicle-category', got {classification['scheme']}"
+    assert (
+        classification["id"] == "n2-n3"
+    ), f"Expected id 'n2-n3', got {classification['id']}"
+    assert (
+        classification["description"] == "Truck (N2-N3)"
+    ), f"Expected description 'Truck (N2-N3)', got {classification['description']}"
+
 
 if __name__ == "__main__":
     pytest.main()

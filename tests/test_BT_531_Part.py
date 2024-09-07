@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_531_part_additional_nature_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -36,15 +37,20 @@ def test_bt_531_part_additional_nature_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
-    assert "additionalProcurementCategories" in result["tender"], "Expected 'additionalProcurementCategories' in tender"
-    
+    assert (
+        "additionalProcurementCategories" in result["tender"]
+    ), "Expected 'additionalProcurementCategories' in tender"
+
     expected_categories = ["works", "services"]
-    assert set(result["tender"]["additionalProcurementCategories"]) == set(expected_categories), \
-        f"Expected additionalProcurementCategories {expected_categories}, got {result['tender']['additionalProcurementCategories']}"
+    assert (
+        set(result["tender"]["additionalProcurementCategories"])
+        == set(expected_categories)
+    ), f"Expected additionalProcurementCategories {expected_categories}, got {result['tender']['additionalProcurementCategories']}"
+
 
 if __name__ == "__main__":
     pytest.main()

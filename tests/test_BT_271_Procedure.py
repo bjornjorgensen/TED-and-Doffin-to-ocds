@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_271_procedure_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -37,10 +38,21 @@ def test_bt_271_procedure_integration(tmp_path):
 
     assert "tender" in result, "tender not found in result"
     assert "techniques" in result["tender"], "techniques not found in tender"
-    assert "frameworkAgreement" in result["tender"]["techniques"], "frameworkAgreement not found in techniques"
-    assert "value" in result["tender"]["techniques"]["frameworkAgreement"], "value not found in frameworkAgreement"
-    assert result["tender"]["techniques"]["frameworkAgreement"]["value"]["amount"] == 120000, f"Expected amount 120000, got {result['tender']['techniques']['frameworkAgreement']['value']['amount']}"
-    assert result["tender"]["techniques"]["frameworkAgreement"]["value"]["currency"] == "EUR", f"Expected currency 'EUR', got {result['tender']['techniques']['frameworkAgreement']['value']['currency']}"
+    assert (
+        "frameworkAgreement" in result["tender"]["techniques"]
+    ), "frameworkAgreement not found in techniques"
+    assert (
+        "value" in result["tender"]["techniques"]["frameworkAgreement"]
+    ), "value not found in frameworkAgreement"
+    assert (
+        result["tender"]["techniques"]["frameworkAgreement"]["value"]["amount"]
+        == 120000
+    ), f"Expected amount 120000, got {result['tender']['techniques']['frameworkAgreement']['value']['amount']}"
+    assert (
+        result["tender"]["techniques"]["frameworkAgreement"]["value"]["currency"]
+        == "EUR"
+    ), f"Expected currency 'EUR', got {result['tender']['techniques']['frameworkAgreement']['value']['currency']}"
+
 
 if __name__ == "__main__":
     pytest.main()

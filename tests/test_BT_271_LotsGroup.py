@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_271_lots_group_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -41,15 +42,28 @@ def test_bt_271_lots_group_integration(tmp_path):
 
     assert "tender" in result, "tender not found in result"
     assert "lotGroups" in result["tender"], "lotGroups not found in tender"
-    assert len(result["tender"]["lotGroups"]) == 1, f"Expected 1 lot group, got {len(result['tender']['lotGroups'])}"
-    
+    assert (
+        len(result["tender"]["lotGroups"]) == 1
+    ), f"Expected 1 lot group, got {len(result['tender']['lotGroups'])}"
+
     lot_group = result["tender"]["lotGroups"][0]
-    assert lot_group["id"] == "GLO-0001", f"Expected lot group id 'GLO-0001', got {lot_group['id']}"
+    assert (
+        lot_group["id"] == "GLO-0001"
+    ), f"Expected lot group id 'GLO-0001', got {lot_group['id']}"
     assert "techniques" in lot_group, "techniques not found in lot group"
-    assert "frameworkAgreement" in lot_group["techniques"], "frameworkAgreement not found in techniques"
-    assert "value" in lot_group["techniques"]["frameworkAgreement"], "value not found in frameworkAgreement"
-    assert lot_group["techniques"]["frameworkAgreement"]["value"]["amount"] == 120000, f"Expected amount 120000, got {lot_group['techniques']['frameworkAgreement']['value']['amount']}"
-    assert lot_group["techniques"]["frameworkAgreement"]["value"]["currency"] == "EUR", f"Expected currency 'EUR', got {lot_group['techniques']['frameworkAgreement']['value']['currency']}"
+    assert (
+        "frameworkAgreement" in lot_group["techniques"]
+    ), "frameworkAgreement not found in techniques"
+    assert (
+        "value" in lot_group["techniques"]["frameworkAgreement"]
+    ), "value not found in frameworkAgreement"
+    assert (
+        lot_group["techniques"]["frameworkAgreement"]["value"]["amount"] == 120000
+    ), f"Expected amount 120000, got {lot_group['techniques']['frameworkAgreement']['value']['amount']}"
+    assert (
+        lot_group["techniques"]["frameworkAgreement"]["value"]["currency"] == "EUR"
+    ), f"Expected currency 'EUR', got {lot_group['techniques']['frameworkAgreement']['value']['currency']}"
+
 
 if __name__ == "__main__":
     pytest.main()

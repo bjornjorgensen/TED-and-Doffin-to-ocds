@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_24_lots_group_description_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -26,18 +27,25 @@ def test_bt_24_lots_group_description_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "lotGroups" in result["tender"], "Expected 'lotGroups' in tender"
-    assert len(result["tender"]["lotGroups"]) == 1, f"Expected 1 lot group, got {len(result['tender']['lotGroups'])}"
+    assert (
+        len(result["tender"]["lotGroups"]) == 1
+    ), f"Expected 1 lot group, got {len(result['tender']['lotGroups'])}"
 
     lot_group = result["tender"]["lotGroups"][0]
-    assert lot_group["id"] == "GLO-0001", f"Expected lot group id 'GLO-0001', got {lot_group['id']}"
+    assert (
+        lot_group["id"] == "GLO-0001"
+    ), f"Expected lot group id 'GLO-0001', got {lot_group['id']}"
     assert "description" in lot_group, "Expected 'description' in lot group"
     expected_description = "Procedure for the procurement of office equipment"
-    assert lot_group["description"] == expected_description, f"Expected description '{expected_description}', got {lot_group['description']}"
+    assert (
+        lot_group["description"] == expected_description
+    ), f"Expected description '{expected_description}', got {lot_group['description']}"
+
 
 if __name__ == "__main__":
     pytest.main()

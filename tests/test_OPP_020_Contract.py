@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_opp_020_contract_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -40,7 +41,7 @@ def test_opp_020_contract_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result
@@ -50,6 +51,7 @@ def test_opp_020_contract_integration(tmp_path):
     assert lot["id"] == "LOT-0001"
     assert "hasEssentialAssets" in lot
     assert lot["hasEssentialAssets"] == True
+
 
 def test_opp_020_contract_integration_false(tmp_path):
     xml_content = """
@@ -82,7 +84,7 @@ def test_opp_020_contract_integration_false(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result
@@ -92,6 +94,7 @@ def test_opp_020_contract_integration_false(tmp_path):
     assert lot["id"] == "LOT-0002"
     assert "hasEssentialAssets" in lot
     assert lot["hasEssentialAssets"] == False
+
 
 if __name__ == "__main__":
     pytest.main()

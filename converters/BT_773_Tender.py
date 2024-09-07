@@ -6,6 +6,7 @@ from typing import Dict, Optional, Union
 
 logger = logging.getLogger(__name__)
 
+
 def parse_subcontracting(xml_content: Union[str, bytes]) -> Optional[Dict]:
     """
     Parse the XML content to extract the subcontracting information for each tender.
@@ -31,37 +32,44 @@ def parse_subcontracting(xml_content: Union[str, bytes]) -> Optional[Dict]:
         etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
-        
+        xml_content = xml_content.encode("utf-8")
+
     root: etree._Element = etree.fromstring(xml_content)
     namespaces: Dict[str, str] = {
-        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
     }
 
     result: Dict[str, Dict] = {"bids": {"details": []}}
 
     tenders: list = root.xpath("//efac:LotTender", namespaces=namespaces)
-    
+
     for tender in tenders:
-        tender_id: str = tender.xpath("cbc:ID[@schemeName='tender']/text()", namespaces=namespaces)[0]
+        tender_id: str = tender.xpath(
+            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces
+        )[0]
         subcontracting_code: list = tender.xpath(
             "efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efbc:TermCode/text()",
-            namespaces=namespaces
+            namespaces=namespaces,
         )
-        
+
         if subcontracting_code:
-            result["bids"]["details"].append({
-                "id": tender_id,
-                "hasSubcontracting": subcontracting_code[0].lower() == 'yes'
-            })
+            result["bids"]["details"].append(
+                {
+                    "id": tender_id,
+                    "hasSubcontracting": subcontracting_code[0].lower() == "yes",
+                }
+            )
 
     return result if result["bids"]["details"] else None
 
-def merge_subcontracting(release_json: Dict, subcontracting_data: Optional[Dict]) -> None:
+
+def merge_subcontracting(
+    release_json: Dict, subcontracting_data: Optional[Dict]
+) -> None:
     """
     Merge the parsed subcontracting data into the main OCDS release JSON.
 
@@ -78,12 +86,16 @@ def merge_subcontracting(release_json: Dict, subcontracting_data: Optional[Dict]
 
     bids: Dict = release_json.setdefault("bids", {})
     existing_details: list = bids.setdefault("details", [])
-    
+
     for new_bid in subcontracting_data["bids"]["details"]:
-        existing_bid: Optional[Dict] = next((bid for bid in existing_details if bid["id"] == new_bid["id"]), None)
+        existing_bid: Optional[Dict] = next(
+            (bid for bid in existing_details if bid["id"] == new_bid["id"]), None
+        )
         if existing_bid:
             existing_bid["hasSubcontracting"] = new_bid["hasSubcontracting"]
         else:
             existing_details.append(new_bid)
 
-    logger.info(f"Merged subcontracting data for {len(subcontracting_data['bids']['details'])} bids")
+    logger.info(
+        f"Merged subcontracting data for {len(subcontracting_data['bids']['details'])} bids"
+    )

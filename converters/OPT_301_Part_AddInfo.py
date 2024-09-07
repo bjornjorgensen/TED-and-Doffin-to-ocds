@@ -5,18 +5,19 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 def parse_part_addinfo(xml_content):
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+    }
 
     xpath = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:AdditionalInformationParty/cac:PartyIdentification/cbc:ID"
     addinfo_party_ids = root.xpath(xpath, namespaces=namespaces)
@@ -24,12 +25,12 @@ def parse_part_addinfo(xml_content):
     result = {"parties": []}
 
     for party_id in addinfo_party_ids:
-        result["parties"].append({
-            "id": party_id.text,
-            "roles": ["processContactPoint"]
-        })
+        result["parties"].append(
+            {"id": party_id.text, "roles": ["processContactPoint"]}
+        )
 
     return result if result["parties"] else None
+
 
 def merge_part_addinfo(release_json, addinfo_data):
     if not addinfo_data:
@@ -45,4 +46,6 @@ def merge_part_addinfo(release_json, addinfo_data):
         else:
             release_json.setdefault("parties", []).append(party)
 
-    logger.info(f"Merged Part Additional Info data for {len(addinfo_data['parties'])} parties")
+    logger.info(
+        f"Merged Part Additional Info data for {len(addinfo_data['parties'])} parties"
+    )

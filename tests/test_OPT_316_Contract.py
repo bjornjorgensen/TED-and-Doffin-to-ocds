@@ -8,6 +8,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_opt_316_contract_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -35,12 +36,13 @@ def test_opt_316_contract_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "contracts" in result
     assert len(result["contracts"]) == 1
     assert result["contracts"][0]["id"] == "CON-0001"
+
 
 if __name__ == "__main__":
     pytest.main()

@@ -10,6 +10,7 @@ import logging
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main, configure_logging
 
+
 def test_bt_764_submission_electronic_catalogue_integration(tmp_path):
     configure_logging()
     logger = logging.getLogger(__name__)
@@ -48,23 +49,31 @@ def test_bt_764_submission_electronic_catalogue_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "lots" in result["tender"], "Expected 'lots' in tender"
-    assert len(result["tender"]["lots"]) == 3, f"Expected 3 lots, got {len(result['tender']['lots'])}"
+    assert (
+        len(result["tender"]["lots"]) == 3
+    ), f"Expected 3 lots, got {len(result['tender']['lots'])}"
 
-    lot_policies = {lot["id"]: lot["submissionTerms"]["electronicCatalogPolicy"] for lot in result["tender"]["lots"]}
+    lot_policies = {
+        lot["id"]: lot["submissionTerms"]["electronicCatalogPolicy"]
+        for lot in result["tender"]["lots"]
+    }
     expected_policies = {
         "LOT-0001": "allowed",
         "LOT-0002": "required",
-        "LOT-0003": "notAllowed"
+        "LOT-0003": "notAllowed",
     }
 
-    assert lot_policies == expected_policies, f"Expected policies {expected_policies}, got {lot_policies}"
+    assert (
+        lot_policies == expected_policies
+    ), f"Expected policies {expected_policies}, got {lot_policies}"
+
 
 if __name__ == "__main__":
-    pytest.main(['-v', '-s'])
+    pytest.main(["-v", "-s"])

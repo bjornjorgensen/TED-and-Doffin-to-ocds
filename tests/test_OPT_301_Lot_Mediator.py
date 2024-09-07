@@ -2,7 +2,11 @@
 
 import pytest
 from lxml import etree
-from converters.OPT_301_Lot_Mediator import parse_mediator_identifier, merge_mediator_identifier
+from converters.OPT_301_Lot_Mediator import (
+    parse_mediator_identifier,
+    merge_mediator_identifier,
+)
+
 
 def test_parse_mediator_identifier():
     xml_content = """
@@ -31,6 +35,7 @@ def test_parse_mediator_identifier():
     assert result["parties"][0]["id"] == "TPO-0005"
     assert result["parties"][0]["roles"] == ["mediationBody"]
 
+
 def test_parse_mediator_identifier_no_data():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -45,17 +50,12 @@ def test_parse_mediator_identifier_no_data():
 
     assert result is None
 
+
 def test_merge_mediator_identifier():
-    mediator_data = {
-        "parties": [
-            {"id": "TPO-0005", "roles": ["mediationBody"]}
-        ]
-    }
+    mediator_data = {"parties": [{"id": "TPO-0005", "roles": ["mediationBody"]}]}
 
     release_json = {
-        "parties": [
-            {"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}
-        ]
+        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}]
     }
 
     merge_mediator_identifier(release_json, mediator_data)
@@ -66,17 +66,12 @@ def test_merge_mediator_identifier():
     assert release_json["parties"][1]["id"] == "TPO-0005"
     assert release_json["parties"][1]["roles"] == ["mediationBody"]
 
+
 def test_merge_mediator_identifier_existing_party():
-    mediator_data = {
-        "parties": [
-            {"id": "TPO-0001", "roles": ["mediationBody"]}
-        ]
-    }
+    mediator_data = {"parties": [{"id": "TPO-0001", "roles": ["mediationBody"]}]}
 
     release_json = {
-        "parties": [
-            {"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}
-        ]
+        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}]
     }
 
     merge_mediator_identifier(release_json, mediator_data)
@@ -85,6 +80,7 @@ def test_merge_mediator_identifier_existing_party():
     assert release_json["parties"][0]["id"] == "TPO-0001"
     assert set(release_json["parties"][0]["roles"]) == set(["buyer", "mediationBody"])
     assert release_json["parties"][0]["name"] == "Existing Party"
+
 
 def test_merge_mediator_identifier_no_data():
     release_json = {"parties": []}

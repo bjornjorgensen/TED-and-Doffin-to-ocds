@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_163_tender_integration(tmp_path):
     xml_content = """
     <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -48,7 +49,7 @@ def test_bt_163_tender_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "awards" in result, "Expected 'awards' in result"
@@ -57,9 +58,17 @@ def test_bt_163_tender_integration(tmp_path):
     award = result["awards"][0]
     assert award["id"] == "RES-0001", f"Expected award id 'RES-0001', got {award['id']}"
     assert "relatedLots" in award, "Expected 'relatedLots' in award"
-    assert award["relatedLots"] == ["LOT-0001"], f"Expected relatedLots ['LOT-0001'], got {award['relatedLots']}"
-    assert "valueCalculationMethod" in award, "Expected 'valueCalculationMethod' in award"
-    assert award["valueCalculationMethod"] == "The awarded value takes into account the growing revenue expected from fees.", f"Unexpected valueCalculationMethod"
+    assert award["relatedLots"] == [
+        "LOT-0001"
+    ], f"Expected relatedLots ['LOT-0001'], got {award['relatedLots']}"
+    assert (
+        "valueCalculationMethod" in award
+    ), "Expected 'valueCalculationMethod' in award"
+    assert (
+        award["valueCalculationMethod"]
+        == "The awarded value takes into account the growing revenue expected from fees."
+    ), f"Unexpected valueCalculationMethod"
+
 
 if __name__ == "__main__":
     pytest.main()

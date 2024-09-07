@@ -2,7 +2,12 @@
 
 import pytest
 from lxml import etree
-from converters.BT_636_LotResult import parse_irregularity_type, merge_irregularity_type, IRREGULARITY_TYPE_MAPPING
+from converters.BT_636_LotResult import (
+    parse_irregularity_type,
+    merge_irregularity_type,
+    IRREGULARITY_TYPE_MAPPING,
+)
+
 
 def test_parse_irregularity_type():
     xml_content = """
@@ -22,9 +27,9 @@ def test_parse_irregularity_type():
         </efac:NoticeResult>
     </root>
     """
-    
+
     result = parse_irregularity_type(xml_content)
-    
+
     assert result is not None
     assert "statistics" in result
     assert len(result["statistics"]) == 1
@@ -34,6 +39,7 @@ def test_parse_irregularity_type():
     assert result["statistics"][0]["relatedLot"] == "LOT-0001"
     assert result["statistics"][0]["notes"] == IRREGULARITY_TYPE_MAPPING["unj-lim-subc"]
 
+
 def test_merge_irregularity_type():
     release_json = {
         "statistics": [
@@ -41,11 +47,11 @@ def test_merge_irregularity_type():
                 "id": "1",
                 "measure": "existing-measure",
                 "scope": "existing-scope",
-                "relatedLot": "LOT-0001"
+                "relatedLot": "LOT-0001",
             }
         ]
     }
-    
+
     irregularity_type_data = {
         "statistics": [
             {
@@ -53,27 +59,31 @@ def test_merge_irregularity_type():
                 "measure": "unj-lim-subc",
                 "scope": "complaints",
                 "relatedLot": "LOT-0001",
-                "notes": IRREGULARITY_TYPE_MAPPING["unj-lim-subc"]
+                "notes": IRREGULARITY_TYPE_MAPPING["unj-lim-subc"],
             },
             {
                 "id": "2",
                 "measure": "ab-low",
                 "scope": "complaints",
                 "relatedLot": "LOT-0002",
-                "notes": IRREGULARITY_TYPE_MAPPING["ab-low"]
-            }
+                "notes": IRREGULARITY_TYPE_MAPPING["ab-low"],
+            },
         ]
     }
-    
+
     merge_irregularity_type(release_json, irregularity_type_data)
-    
+
     assert len(release_json["statistics"]) == 2
     assert release_json["statistics"][0]["measure"] == "unj-lim-subc"
     assert release_json["statistics"][0]["scope"] == "complaints"
-    assert release_json["statistics"][0]["notes"] == IRREGULARITY_TYPE_MAPPING["unj-lim-subc"]
+    assert (
+        release_json["statistics"][0]["notes"]
+        == IRREGULARITY_TYPE_MAPPING["unj-lim-subc"]
+    )
     assert release_json["statistics"][1]["id"] == "2"
     assert release_json["statistics"][1]["measure"] == "ab-low"
     assert release_json["statistics"][1]["notes"] == IRREGULARITY_TYPE_MAPPING["ab-low"]
+
 
 if __name__ == "__main__":
     pytest.main()

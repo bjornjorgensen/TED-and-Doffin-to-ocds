@@ -2,7 +2,11 @@
 
 import pytest
 from lxml import etree
-from converters.BT_5131_Lot import parse_place_performance_city, merge_place_performance_city
+from converters.BT_5131_Lot import (
+    parse_place_performance_city,
+    merge_place_performance_city,
+)
+
 
 def test_parse_place_performance_city():
     xml_content = """
@@ -35,25 +39,29 @@ def test_parse_place_performance_city():
         </cac:ProcurementProjectLot>
     </root>
     """
-    
+
     result = parse_place_performance_city(xml_content)
-    
+
     assert result is not None
     assert "tender" in result
     assert "items" in result["tender"]
     assert len(result["tender"]["items"]) == 2
-    
+
     assert result["tender"]["items"][0] == {
         "id": "1",
         "relatedLot": "LOT-001",
-        "deliveryAddresses": [{"locality": "New York"}]
+        "deliveryAddresses": [{"locality": "New York"}],
     }
-    
+
     assert result["tender"]["items"][1] == {
         "id": "2",
         "relatedLot": "LOT-002",
-        "deliveryAddresses": [{"locality": "Los Angeles"}, {"locality": "San Francisco"}]
+        "deliveryAddresses": [
+            {"locality": "Los Angeles"},
+            {"locality": "San Francisco"},
+        ],
     }
+
 
 def test_parse_place_performance_city_empty():
     xml_content = """
@@ -70,10 +78,11 @@ def test_parse_place_performance_city_empty():
         </cac:ProcurementProjectLot>
     </root>
     """
-    
+
     result = parse_place_performance_city(xml_content)
-    
+
     assert result is None
+
 
 def test_merge_place_performance_city():
     existing_json = {
@@ -82,42 +91,43 @@ def test_merge_place_performance_city():
                 {
                     "id": "1",
                     "relatedLot": "LOT-001",
-                    "deliveryAddresses": [{"postalCode": "10001"}]
+                    "deliveryAddresses": [{"postalCode": "10001"}],
                 }
             ]
         }
     }
-    
+
     new_data = {
         "tender": {
             "items": [
                 {
                     "id": "1",
                     "relatedLot": "LOT-001",
-                    "deliveryAddresses": [{"locality": "New York"}]
+                    "deliveryAddresses": [{"locality": "New York"}],
                 },
                 {
                     "id": "2",
                     "relatedLot": "LOT-002",
-                    "deliveryAddresses": [{"locality": "Los Angeles"}]
-                }
+                    "deliveryAddresses": [{"locality": "Los Angeles"}],
+                },
             ]
         }
     }
-    
+
     merge_place_performance_city(existing_json, new_data)
-    
+
     assert len(existing_json["tender"]["items"]) == 2
     assert existing_json["tender"]["items"][0] == {
         "id": "1",
         "relatedLot": "LOT-001",
-        "deliveryAddresses": [{"postalCode": "10001", "locality": "New York"}]
+        "deliveryAddresses": [{"postalCode": "10001", "locality": "New York"}],
     }
     assert existing_json["tender"]["items"][1] == {
         "id": "2",
         "relatedLot": "LOT-002",
-        "deliveryAddresses": [{"locality": "Los Angeles"}]
+        "deliveryAddresses": [{"locality": "Los Angeles"}],
     }
+
 
 def test_merge_place_performance_city_empty():
     existing_json = {"tender": {"items": []}}

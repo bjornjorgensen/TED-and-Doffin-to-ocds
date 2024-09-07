@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_5141_lot_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -32,20 +33,31 @@ def test_bt_5141_lot_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "items" in result["tender"], "Expected 'items' in tender"
-    assert len(result["tender"]["items"]) == 1, f"Expected 1 item, got {len(result['tender']['items'])}"
+    assert (
+        len(result["tender"]["items"]) == 1
+    ), f"Expected 1 item, got {len(result['tender']['items'])}"
 
     item = result["tender"]["items"][0]
     assert item["id"] == "1", f"Expected item id '1', got {item['id']}"
-    assert item["relatedLot"] == "LOT-0001", f"Expected relatedLot 'LOT-0001', got {item['relatedLot']}"
+    assert (
+        item["relatedLot"] == "LOT-0001"
+    ), f"Expected relatedLot 'LOT-0001', got {item['relatedLot']}"
     assert "deliveryAddresses" in item, "Expected 'deliveryAddresses' in item"
-    assert len(item["deliveryAddresses"]) == 1, f"Expected 1 delivery address, got {len(item['deliveryAddresses'])}"
-    assert "country" in item["deliveryAddresses"][0], "Expected 'country' in delivery address"
-    assert item["deliveryAddresses"][0]["country"] == "GB", f"Expected country 'GB', got {item['deliveryAddresses'][0]['country']}"
+    assert (
+        len(item["deliveryAddresses"]) == 1
+    ), f"Expected 1 delivery address, got {len(item['deliveryAddresses'])}"
+    assert (
+        "country" in item["deliveryAddresses"][0]
+    ), "Expected 'country' in delivery address"
+    assert (
+        item["deliveryAddresses"][0]["country"] == "GB"
+    ), f"Expected country 'GB', got {item['deliveryAddresses'][0]['country']}"
+
 
 if __name__ == "__main__":
     pytest.main()

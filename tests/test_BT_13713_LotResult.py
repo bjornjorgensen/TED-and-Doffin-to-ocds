@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_13713_lotresult_integration(tmp_path):
     xml_content = """
     <root xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
@@ -50,7 +51,7 @@ def test_bt_13713_lotresult_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "awards" in result, "Expected 'awards' in result"
@@ -58,11 +59,16 @@ def test_bt_13713_lotresult_integration(tmp_path):
 
     award_1 = next(award for award in result["awards"] if award["id"] == "RES-0001")
     assert "relatedLots" in award_1, "Expected 'relatedLots' in award RES-0001"
-    assert award_1["relatedLots"] == ["LOT-0001"], f"Expected ['LOT-0001'] in RES-0001 relatedLots, got {award_1['relatedLots']}"
+    assert award_1["relatedLots"] == [
+        "LOT-0001"
+    ], f"Expected ['LOT-0001'] in RES-0001 relatedLots, got {award_1['relatedLots']}"
 
     award_2 = next(award for award in result["awards"] if award["id"] == "RES-0002")
     assert "relatedLots" in award_2, "Expected 'relatedLots' in award RES-0002"
-    assert set(award_2["relatedLots"]) == set(["LOT-0002", "LOT-0003"]), f"Expected ['LOT-0002', 'LOT-0003'] in RES-0002 relatedLots, got {award_2['relatedLots']}"
+    assert (
+        set(award_2["relatedLots"]) == set(["LOT-0002", "LOT-0003"])
+    ), f"Expected ['LOT-0002', 'LOT-0003'] in RES-0002 relatedLots, got {award_2['relatedLots']}"
+
 
 if __name__ == "__main__":
     pytest.main()

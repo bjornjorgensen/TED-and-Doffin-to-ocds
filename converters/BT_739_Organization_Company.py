@@ -5,6 +5,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+
 def parse_organization_contact_fax(xml_content):
     """
     Parse the XML content to extract the organization contact fax number.
@@ -17,36 +18,37 @@ def parse_organization_contact_fax(xml_content):
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+    }
 
     result = {"parties": []}
 
     xpath_query = "//efac:Organization/efac:Company"
     companies = root.xpath(xpath_query, namespaces=namespaces)
-    
+
     for company in companies:
-        org_id = company.xpath("cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()", namespaces=namespaces)
-        fax_number = company.xpath("cac:Contact/cbc:Telefax/text()", namespaces=namespaces)
-        
+        org_id = company.xpath(
+            "cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
+            namespaces=namespaces,
+        )
+        fax_number = company.xpath(
+            "cac:Contact/cbc:Telefax/text()", namespaces=namespaces
+        )
+
         if org_id and fax_number:
-            party_data = {
-                "id": org_id[0],
-                "contactPoint": {
-                    "faxNumber": fax_number[0]
-                }
-            }
+            party_data = {"id": org_id[0], "contactPoint": {"faxNumber": fax_number[0]}}
             result["parties"].append(party_data)
 
     return result if result["parties"] else None
+
 
 def merge_organization_contact_fax(release_json, organization_fax_data):
     """
@@ -66,10 +68,16 @@ def merge_organization_contact_fax(release_json, organization_fax_data):
     parties = release_json.setdefault("parties", [])
 
     for new_party in organization_fax_data["parties"]:
-        existing_party = next((party for party in parties if party["id"] == new_party["id"]), None)
+        existing_party = next(
+            (party for party in parties if party["id"] == new_party["id"]), None
+        )
         if existing_party:
-            existing_party.setdefault("contactPoint", {}).update(new_party["contactPoint"])
+            existing_party.setdefault("contactPoint", {}).update(
+                new_party["contactPoint"]
+            )
         else:
             parties.append(new_party)
 
-    logger.info(f"Merged organization contact fax data for {len(organization_fax_data['parties'])} organizations")
+    logger.info(
+        f"Merged organization contact fax data for {len(organization_fax_data['parties'])} organizations"
+    )

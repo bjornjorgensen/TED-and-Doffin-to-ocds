@@ -9,25 +9,26 @@ logger = logging.getLogger(__name__)
 NON_PUBLICATION_JUSTIFICATION = {
     "eo-int": {
         "description": "Commercial interests of an economic operator",
-        "uri": "http://publications.europa.eu/resource/authority/non-publication-justification/eo-int"
+        "uri": "http://publications.europa.eu/resource/authority/non-publication-justification/eo-int",
     },
     "fair-comp": {
         "description": "Fair competition",
-        "uri": "http://publications.europa.eu/resource/authority/non-publication-justification/fair-comp"
+        "uri": "http://publications.europa.eu/resource/authority/non-publication-justification/fair-comp",
     },
     "law-enf": {
         "description": "Law enforcement",
-        "uri": "http://publications.europa.eu/resource/authority/non-publication-justification/law-enf"
+        "uri": "http://publications.europa.eu/resource/authority/non-publication-justification/law-enf",
     },
     "oth-int": {
         "description": "Other public interest",
-        "uri": "http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"
+        "uri": "http://publications.europa.eu/resource/authority/non-publication-justification/oth-int",
     },
     "rd-ser": {
         "description": "Research and development (R&D) services",
-        "uri": "http://publications.europa.eu/resource/authority/non-publication-justification/rd-ser"
-    }
+        "uri": "http://publications.europa.eu/resource/authority/non-publication-justification/rd-ser",
+    },
 }
+
 
 def BT_197_parse_unpublished_justification_code_BT_09_Procedure(xml_content):
     """
@@ -41,20 +42,23 @@ def BT_197_parse_unpublished_justification_code_BT_09_Procedure(xml_content):
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"withheldInformation": []}
 
-    reason_code = root.xpath("//cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='CrossBorderLaw']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='cro-bor-law']/cbc:ReasonCode/text()", namespaces=namespaces)
+    reason_code = root.xpath(
+        "//cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='CrossBorderLaw']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='cro-bor-law']/cbc:ReasonCode/text()",
+        namespaces=namespaces,
+    )
 
     if reason_code:
         code = reason_code[0]
@@ -64,8 +68,10 @@ def BT_197_parse_unpublished_justification_code_BT_09_Procedure(xml_content):
                     {
                         "scheme": "non-publication-justification",
                         "id": code,
-                        "description": NON_PUBLICATION_JUSTIFICATION[code]["description"],
-                        "uri": NON_PUBLICATION_JUSTIFICATION[code]["uri"]
+                        "description": NON_PUBLICATION_JUSTIFICATION[code][
+                            "description"
+                        ],
+                        "uri": NON_PUBLICATION_JUSTIFICATION[code]["uri"],
                     }
                 ]
             }
@@ -73,7 +79,10 @@ def BT_197_parse_unpublished_justification_code_BT_09_Procedure(xml_content):
 
     return result if result["withheldInformation"] else None
 
-def BT_197_merge_unpublished_justification_code_BT_09_Procedure(release_json, unpublished_justification_code_data):
+
+def BT_197_merge_unpublished_justification_code_BT_09_Procedure(
+    release_json, unpublished_justification_code_data
+):
     """
     Merge the parsed unpublished justification code data into the main OCDS release JSON.
 
@@ -89,10 +98,12 @@ def BT_197_merge_unpublished_justification_code_BT_09_Procedure(release_json, un
         return
 
     withheld_information = release_json.setdefault("withheldInformation", [])
-    
+
     for item in unpublished_justification_code_data["withheldInformation"]:
         if withheld_information:
-            withheld_information[0].setdefault("rationaleClassifications", []).extend(item["rationaleClassifications"])
+            withheld_information[0].setdefault("rationaleClassifications", []).extend(
+                item["rationaleClassifications"]
+            )
         else:
             withheld_information.append(item)
 

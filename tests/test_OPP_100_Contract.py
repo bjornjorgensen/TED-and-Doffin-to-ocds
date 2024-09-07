@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_opp_100_contract_integration(tmp_path):
     xml_content = """
     <root xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
@@ -45,7 +46,7 @@ def test_opp_100_contract_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "contracts" in result
@@ -60,6 +61,7 @@ def test_opp_100_contract_integration(tmp_path):
     assert related_process["scheme"] == "ojs-notice-id"
     assert related_process["identifier"] == "62783-2020"
     assert related_process["relationship"] == ["framework"]
+
 
 if __name__ == "__main__":
     pytest.main()

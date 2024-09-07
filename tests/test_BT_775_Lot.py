@@ -2,7 +2,12 @@
 
 import pytest
 from lxml import etree
-from converters.BT_775_Lot import parse_social_procurement, merge_social_procurement, SOCIAL_OBJECTIVE_MAPPING, SUSTAINABILITY_STRATEGIES
+from converters.BT_775_Lot import (
+    parse_social_procurement,
+    merge_social_procurement,
+    SOCIAL_OBJECTIVE_MAPPING,
+    SUSTAINABILITY_STRATEGIES,
+)
 import json
 import os
 import sys
@@ -10,6 +15,8 @@ import sys
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
+
+
 def test_parse_social_procurement():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -24,9 +31,9 @@ def test_parse_social_procurement():
         </cac:ProcurementProjectLot>
     </root>
     """
-    
+
     result = parse_social_procurement(xml_content)
-    
+
     assert result is not None
     assert "tender" in result
     assert "lots" in result["tender"]
@@ -34,21 +41,18 @@ def test_parse_social_procurement():
     assert result["tender"]["lots"][0]["id"] == "LOT-0001"
     assert result["tender"]["lots"][0]["hasSustainability"] is True
     assert len(result["tender"]["lots"][0]["sustainability"]) == 1
-    assert result["tender"]["lots"][0]["sustainability"][0]["goal"] == SOCIAL_OBJECTIVE_MAPPING['et-eq']
-    assert set(result["tender"]["lots"][0]["sustainability"][0]["strategies"]) == set(SUSTAINABILITY_STRATEGIES)
+    assert (
+        result["tender"]["lots"][0]["sustainability"][0]["goal"]
+        == SOCIAL_OBJECTIVE_MAPPING["et-eq"]
+    )
+    assert set(result["tender"]["lots"][0]["sustainability"][0]["strategies"]) == set(
+        SUSTAINABILITY_STRATEGIES
+    )
+
 
 def test_merge_social_procurement():
-    release_json = {
-        "tender": {
-            "lots": [
-                {
-                    "id": "LOT-0001",
-                    "title": "Existing Lot"
-                }
-            ]
-        }
-    }
-    
+    release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}
+
     social_procurement_data = {
         "tender": {
             "lots": [
@@ -58,22 +62,28 @@ def test_merge_social_procurement():
                     "sustainability": [
                         {
                             "goal": "social.ethnicEquality",
-                            "strategies": SUSTAINABILITY_STRATEGIES
+                            "strategies": SUSTAINABILITY_STRATEGIES,
                         }
-                    ]
+                    ],
                 }
             ]
         }
     }
-    
+
     merge_social_procurement(release_json, social_procurement_data)
-    
+
     assert "hasSustainability" in release_json["tender"]["lots"][0]
     assert release_json["tender"]["lots"][0]["hasSustainability"] is True
     assert "sustainability" in release_json["tender"]["lots"][0]
     assert len(release_json["tender"]["lots"][0]["sustainability"]) == 1
-    assert release_json["tender"]["lots"][0]["sustainability"][0]["goal"] == "social.ethnicEquality"
-    assert set(release_json["tender"]["lots"][0]["sustainability"][0]["strategies"]) == set(SUSTAINABILITY_STRATEGIES)
+    assert (
+        release_json["tender"]["lots"][0]["sustainability"][0]["goal"]
+        == "social.ethnicEquality"
+    )
+    assert set(
+        release_json["tender"]["lots"][0]["sustainability"][0]["strategies"]
+    ) == set(SUSTAINABILITY_STRATEGIES)
+
 
 def test_bt_775_lot_social_procurement_integration(tmp_path):
     xml_content = """
@@ -110,12 +120,12 @@ def test_bt_775_lot_social_procurement_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result
     assert "lots" in result["tender"]
-    
+
     social_lots = [lot for lot in result["tender"]["lots"] if "sustainability" in lot]
     assert len(social_lots) == 2
 
@@ -123,19 +133,26 @@ def test_bt_775_lot_social_procurement_integration(tmp_path):
     assert lot_1 is not None
     assert lot_1["hasSustainability"] is True
     assert len(lot_1["sustainability"]) == 1
-    assert lot_1["sustainability"][0]["goal"] == SOCIAL_OBJECTIVE_MAPPING['et-eq']
-    assert set(lot_1["sustainability"][0]["strategies"]) == set(SUSTAINABILITY_STRATEGIES)
+    assert lot_1["sustainability"][0]["goal"] == SOCIAL_OBJECTIVE_MAPPING["et-eq"]
+    assert set(lot_1["sustainability"][0]["strategies"]) == set(
+        SUSTAINABILITY_STRATEGIES
+    )
 
     lot_2 = next((lot for lot in social_lots if lot["id"] == "LOT-0002"), None)
     assert lot_2 is not None
     assert lot_2["hasSustainability"] is True
     assert len(lot_2["sustainability"]) == 1
-    assert lot_2["sustainability"][0]["goal"] == SOCIAL_OBJECTIVE_MAPPING['gen-eq']
-    assert set(lot_2["sustainability"][0]["strategies"]) == set(SUSTAINABILITY_STRATEGIES)
+    assert lot_2["sustainability"][0]["goal"] == SOCIAL_OBJECTIVE_MAPPING["gen-eq"]
+    assert set(lot_2["sustainability"][0]["strategies"]) == set(
+        SUSTAINABILITY_STRATEGIES
+    )
 
-    lot_3 = next((lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"), None)
+    lot_3 = next(
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"), None
+    )
     assert lot_3 is not None
     assert "sustainability" not in lot_3
+
 
 if __name__ == "__main__":
     pytest.main()

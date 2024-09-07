@@ -29,8 +29,9 @@ EXCLUSION_GROUND_MAPPING = {
     "socsec-pay": "Payment of social security contributions",
     "susp-act": "Business activities are suspended",
     "tax-pay": "Payment of taxes",
-    "terr-offence": "Terrorist offences or offences linked to terrorist activities"
+    "terr-offence": "Terrorist offences or offences linked to terrorist activities",
 }
+
 
 def parse_exclusion_grounds(xml_content):
     """
@@ -44,37 +45,44 @@ def parse_exclusion_grounds(xml_content):
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+    }
 
     result = {"tender": {"exclusionGrounds": {"criteria": []}}}
-    
-    exclusion_grounds = root.xpath("//cac:TenderingTerms/cac:TendererQualificationRequest/cac:SpecificTendererRequirement", namespaces=namespaces)
-    
+
+    exclusion_grounds = root.xpath(
+        "//cac:TenderingTerms/cac:TendererQualificationRequest/cac:SpecificTendererRequirement",
+        namespaces=namespaces,
+    )
+
     for ground in exclusion_grounds:
-        type_code = ground.xpath("cbc:TendererRequirementTypeCode[@listName='exclusion-ground']/text()", namespaces=namespaces)
+        type_code = ground.xpath(
+            "cbc:TendererRequirementTypeCode[@listName='exclusion-ground']/text()",
+            namespaces=namespaces,
+        )
         description = ground.xpath("cbc:Description/text()", namespaces=namespaces)
-        
+
         if type_code:
             criterion = {
                 "type": type_code[0],
-                "description": EXCLUSION_GROUND_MAPPING.get(type_code[0], "")
+                "description": EXCLUSION_GROUND_MAPPING.get(type_code[0], ""),
             }
-            
+
             if description:
                 criterion["description"] += f": {description[0]}"
-            
+
             result["tender"]["exclusionGrounds"]["criteria"].append(criterion)
 
     return result if result["tender"]["exclusionGrounds"]["criteria"] else None
+
 
 def merge_exclusion_grounds(release_json, exclusion_grounds_data):
     """
@@ -94,7 +102,7 @@ def merge_exclusion_grounds(release_json, exclusion_grounds_data):
     tender = release_json.setdefault("tender", {})
     exclusion_grounds = tender.setdefault("exclusionGrounds", {})
     criteria = exclusion_grounds.setdefault("criteria", [])
-    
+
     criteria.extend(exclusion_grounds_data["tender"]["exclusionGrounds"]["criteria"])
 
     logger.info(f"Merged exclusion grounds data: {len(criteria)} criteria added")

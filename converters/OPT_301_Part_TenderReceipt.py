@@ -5,18 +5,19 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 def parse_part_tenderreceipt(xml_content):
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+    }
 
     result = {"parties": []}
 
@@ -24,12 +25,12 @@ def parse_part_tenderreceipt(xml_content):
     tender_receipt_ids = root.xpath(xpath, namespaces=namespaces)
 
     for tender_receipt_id in tender_receipt_ids:
-        result["parties"].append({
-            "id": tender_receipt_id.text,
-            "roles": ["submissionReceiptBody"]
-        })
+        result["parties"].append(
+            {"id": tender_receipt_id.text, "roles": ["submissionReceiptBody"]}
+        )
 
     return result if result["parties"] else None
+
 
 def merge_part_tenderreceipt(release_json, tenderreceipt_data):
     if not tenderreceipt_data:
@@ -45,4 +46,6 @@ def merge_part_tenderreceipt(release_json, tenderreceipt_data):
         else:
             release_json.setdefault("parties", []).append(party)
 
-    logger.info(f"Merged Part Tender Recipient data for {len(tenderreceipt_data['parties'])} parties")
+    logger.info(
+        f"Merged Part Tender Recipient data for {len(tenderreceipt_data['parties'])} parties"
+    )

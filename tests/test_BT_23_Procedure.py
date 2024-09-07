@@ -7,7 +7,11 @@ import os
 
 # Add the parent directory to sys.path to import the converter
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from converters.BT_23_Procedure import parse_main_nature_procedure, merge_main_nature_procedure
+from converters.BT_23_Procedure import (
+    parse_main_nature_procedure,
+    merge_main_nature_procedure,
+)
+
 
 def test_parse_main_nature_procedure_works():
     xml_content = """
@@ -19,11 +23,8 @@ def test_parse_main_nature_procedure_works():
     </root>
     """
     result = parse_main_nature_procedure(xml_content)
-    assert result == {
-        "tender": {
-            "mainProcurementCategory": "works"
-        }
-    }
+    assert result == {"tender": {"mainProcurementCategory": "works"}}
+
 
 def test_parse_main_nature_procedure_services():
     xml_content = """
@@ -35,11 +36,8 @@ def test_parse_main_nature_procedure_services():
     </root>
     """
     result = parse_main_nature_procedure(xml_content)
-    assert result == {
-        "tender": {
-            "mainProcurementCategory": "services"
-        }
-    }
+    assert result == {"tender": {"mainProcurementCategory": "services"}}
+
 
 def test_parse_main_nature_procedure_supplies():
     xml_content = """
@@ -51,11 +49,8 @@ def test_parse_main_nature_procedure_supplies():
     </root>
     """
     result = parse_main_nature_procedure(xml_content)
-    assert result == {
-        "tender": {
-            "mainProcurementCategory": "goods"
-        }
-    }
+    assert result == {"tender": {"mainProcurementCategory": "goods"}}
+
 
 def test_parse_main_nature_procedure_unexpected():
     xml_content = """
@@ -69,6 +64,7 @@ def test_parse_main_nature_procedure_unexpected():
     result = parse_main_nature_procedure(xml_content)
     assert result is None
 
+
 def test_parse_main_nature_procedure_no_data():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -78,29 +74,21 @@ def test_parse_main_nature_procedure_no_data():
     result = parse_main_nature_procedure(xml_content)
     assert result is None
 
+
 def test_merge_main_nature_procedure():
-    release_json = {
-        "tender": {
-            "id": "tender-001"
-        }
-    }
-    main_nature_data = {
-        "tender": {
-            "mainProcurementCategory": "works"
-        }
-    }
+    release_json = {"tender": {"id": "tender-001"}}
+    main_nature_data = {"tender": {"mainProcurementCategory": "works"}}
     merge_main_nature_procedure(release_json, main_nature_data)
     assert release_json == {
-        "tender": {
-            "id": "tender-001",
-            "mainProcurementCategory": "works"
-        }
+        "tender": {"id": "tender-001", "mainProcurementCategory": "works"}
     }
+
 
 def test_merge_main_nature_procedure_no_data():
     release_json = {"tender": {"id": "tender-001"}}
     merge_main_nature_procedure(release_json, None)
     assert release_json == {"tender": {"id": "tender-001"}}
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     pytest.main()

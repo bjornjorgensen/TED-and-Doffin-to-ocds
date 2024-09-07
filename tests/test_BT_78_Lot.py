@@ -2,7 +2,10 @@
 
 import pytest
 from lxml import etree
-from converters.BT_78_Lot import parse_security_clearance_deadline, merge_security_clearance_deadline
+from converters.BT_78_Lot import (
+    parse_security_clearance_deadline,
+    merge_security_clearance_deadline,
+)
 import json
 import os
 import sys
@@ -10,6 +13,7 @@ import sys
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
+
 
 def test_parse_security_clearance_deadline():
     xml_content = """
@@ -23,9 +27,9 @@ def test_parse_security_clearance_deadline():
         </cac:ProcurementProjectLot>
     </root>
     """
-    
+
     result = parse_security_clearance_deadline(xml_content)
-    
+
     assert result is not None
     assert "tender" in result
     assert "lots" in result["tender"]
@@ -34,21 +38,19 @@ def test_parse_security_clearance_deadline():
     assert "milestones" in result["tender"]["lots"][0]
     assert len(result["tender"]["lots"][0]["milestones"]) == 1
     assert result["tender"]["lots"][0]["milestones"][0]["id"] == "1"
-    assert result["tender"]["lots"][0]["milestones"][0]["type"] == "securityClearanceDeadline"
-    assert result["tender"]["lots"][0]["milestones"][0]["dueDate"] == "2019-11-15T23:59:59+01:00"
+    assert (
+        result["tender"]["lots"][0]["milestones"][0]["type"]
+        == "securityClearanceDeadline"
+    )
+    assert (
+        result["tender"]["lots"][0]["milestones"][0]["dueDate"]
+        == "2019-11-15T23:59:59+01:00"
+    )
+
 
 def test_merge_security_clearance_deadline():
-    release_json = {
-        "tender": {
-            "lots": [
-                {
-                    "id": "LOT-0001",
-                    "title": "Existing Lot"
-                }
-            ]
-        }
-    }
-    
+    release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}
+
     security_clearance_data = {
         "tender": {
             "lots": [
@@ -58,20 +60,27 @@ def test_merge_security_clearance_deadline():
                         {
                             "id": "1",
                             "type": "securityClearanceDeadline",
-                            "dueDate": "2019-11-15T23:59:59+01:00"
+                            "dueDate": "2019-11-15T23:59:59+01:00",
                         }
-                    ]
+                    ],
                 }
             ]
         }
     }
-    
+
     merge_security_clearance_deadline(release_json, security_clearance_data)
-    
+
     assert "milestones" in release_json["tender"]["lots"][0]
     assert len(release_json["tender"]["lots"][0]["milestones"]) == 1
-    assert release_json["tender"]["lots"][0]["milestones"][0]["type"] == "securityClearanceDeadline"
-    assert release_json["tender"]["lots"][0]["milestones"][0]["dueDate"] == "2019-11-15T23:59:59+01:00"
+    assert (
+        release_json["tender"]["lots"][0]["milestones"][0]["type"]
+        == "securityClearanceDeadline"
+    )
+    assert (
+        release_json["tender"]["lots"][0]["milestones"][0]["dueDate"]
+        == "2019-11-15T23:59:59+01:00"
+    )
+
 
 def test_bt_78_lot_security_clearance_deadline_integration(tmp_path):
     xml_content = """
@@ -102,13 +111,15 @@ def test_bt_78_lot_security_clearance_deadline_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result
     assert "lots" in result["tender"]
-    
-    lots_with_milestones = [lot for lot in result["tender"]["lots"] if "milestones" in lot]
+
+    lots_with_milestones = [
+        lot for lot in result["tender"]["lots"] if "milestones" in lot
+    ]
     assert len(lots_with_milestones) == 2
 
     lot_1 = next((lot for lot in lots_with_milestones if lot["id"] == "LOT-0001"), None)
@@ -121,9 +132,12 @@ def test_bt_78_lot_security_clearance_deadline_integration(tmp_path):
     assert lot_2["milestones"][0]["type"] == "securityClearanceDeadline"
     assert lot_2["milestones"][0]["dueDate"] == "2019-12-01T23:59:59Z"
 
-    lot_3 = next((lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"), None)
+    lot_3 = next(
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"), None
+    )
     assert lot_3 is not None
     assert "milestones" not in lot_3
+
 
 if __name__ == "__main__":
     pytest.main()

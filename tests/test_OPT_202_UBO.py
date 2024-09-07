@@ -11,6 +11,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_parse_ubo_identifier():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -43,9 +44,9 @@ def test_parse_ubo_identifier():
         </ext:UBLExtensions>
     </root>
     """
-    
+
     result = parse_ubo_identifier(xml_content)
-    
+
     assert result is not None
     assert "parties" in result
     assert len(result["parties"]) == 1
@@ -55,34 +56,26 @@ def test_parse_ubo_identifier():
     assert result["parties"][0]["beneficialOwners"][0]["id"] == "UBO-0001"
     assert result["parties"][0]["beneficialOwners"][1]["id"] == "UBO-0002"
 
+
 def test_merge_ubo_identifier():
-    release_json = {
-        "parties": [
-            {
-                "id": "ORG-0001",
-                "name": "Existing Organization"
-            }
-        ]
-    }
-    
+    release_json = {"parties": [{"id": "ORG-0001", "name": "Existing Organization"}]}
+
     ubo_data = {
         "parties": [
             {
                 "id": "ORG-0001",
-                "beneficialOwners": [
-                    {"id": "UBO-0001"},
-                    {"id": "UBO-0002"}
-                ]
+                "beneficialOwners": [{"id": "UBO-0001"}, {"id": "UBO-0002"}],
             }
         ]
     }
-    
+
     merge_ubo_identifier(release_json, ubo_data)
-    
+
     assert "beneficialOwners" in release_json["parties"][0]
     assert len(release_json["parties"][0]["beneficialOwners"]) == 2
     assert release_json["parties"][0]["beneficialOwners"][0]["id"] == "UBO-0001"
     assert release_json["parties"][0]["beneficialOwners"][1]["id"] == "UBO-0002"
+
 
 def test_parse_ubo_identifier_no_data():
     xml_content = """
@@ -95,26 +88,21 @@ def test_parse_ubo_identifier_no_data():
         </cac:Party>
     </root>
     """
-    
+
     result = parse_ubo_identifier(xml_content)
-    
+
     assert result is None
 
+
 def test_merge_ubo_identifier_no_data():
-    release_json = {
-        "parties": [
-            {
-                "id": "ORG-0001",
-                "name": "Existing Organization"
-            }
-        ]
-    }
-    
+    release_json = {"parties": [{"id": "ORG-0001", "name": "Existing Organization"}]}
+
     ubo_data = None
-    
+
     merge_ubo_identifier(release_json, ubo_data)
-    
+
     assert "beneficialOwners" not in release_json["parties"][0]
+
 
 def test_opt_202_ubo_integration(tmp_path):
     xml_content = """
@@ -153,7 +141,7 @@ def test_opt_202_ubo_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "parties" in result
@@ -163,6 +151,7 @@ def test_opt_202_ubo_integration(tmp_path):
     assert len(result["parties"][0]["beneficialOwners"]) == 2
     assert result["parties"][0]["beneficialOwners"][0]["id"] == "UBO-0001"
     assert result["parties"][0]["beneficialOwners"][1]["id"] == "UBO-0002"
+
 
 if __name__ == "__main__":
     pytest.main()

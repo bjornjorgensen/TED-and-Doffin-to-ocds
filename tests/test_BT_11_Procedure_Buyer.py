@@ -8,6 +8,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_11_procedure_buyer_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -29,7 +30,7 @@ def test_bt_11_procedure_buyer_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "parties" in result
@@ -43,6 +44,7 @@ def test_bt_11_procedure_buyer_integration(tmp_path):
     assert classification["scheme"] == "TED_CA_TYPE"
     assert classification["id"] == "body-pl"
     assert classification["description"] == "Body governed by public law"
+
 
 if __name__ == "__main__":
     pytest.main()

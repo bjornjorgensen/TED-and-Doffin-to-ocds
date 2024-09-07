@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_5010_lot_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -40,25 +41,39 @@ def test_bt_5010_lot_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "parties" in result, "Expected 'parties' in result"
-    eu_party = next((party for party in result["parties"] if party["name"] == "European Union"), None)
+    eu_party = next(
+        (party for party in result["parties"] if party["name"] == "European Union"),
+        None,
+    )
     assert eu_party is not None, "Expected to find European Union party"
     assert "roles" in eu_party, "Expected 'roles' in European Union party"
-    assert "funder" in eu_party["roles"], "Expected 'funder' role in European Union party roles"
+    assert (
+        "funder" in eu_party["roles"]
+    ), "Expected 'funder' role in European Union party roles"
 
     assert "planning" in result, "Expected 'planning' in result"
     assert "budget" in result["planning"], "Expected 'budget' in planning"
     assert "finance" in result["planning"]["budget"], "Expected 'finance' in budget"
-    
+
     finance = result["planning"]["budget"]["finance"]
     assert len(finance) == 1, f"Expected 1 finance item, got {len(finance)}"
-    assert finance[0]["id"] == "CON_PRO-123/ABC", f"Expected finance id 'CON_PRO-123/ABC', got {finance[0]['id']}"
-    assert finance[0]["financingParty"]["name"] == "European Union", "Expected financingParty name to be 'European Union'"
-    assert finance[0]["financingParty"]["id"] == eu_party["id"], "Expected financingParty id to match European Union party id"
-    assert finance[0]["relatedLots"] == ["LOT-0001"], "Expected relatedLots to contain 'LOT-0001'"
+    assert (
+        finance[0]["id"] == "CON_PRO-123/ABC"
+    ), f"Expected finance id 'CON_PRO-123/ABC', got {finance[0]['id']}"
+    assert (
+        finance[0]["financingParty"]["name"] == "European Union"
+    ), "Expected financingParty name to be 'European Union'"
+    assert (
+        finance[0]["financingParty"]["id"] == eu_party["id"]
+    ), "Expected financingParty id to match European Union party id"
+    assert finance[0]["relatedLots"] == [
+        "LOT-0001"
+    ], "Expected relatedLots to contain 'LOT-0001'"
+
 
 if __name__ == "__main__":
     pytest.main()

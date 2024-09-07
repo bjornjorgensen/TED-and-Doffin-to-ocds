@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_195_bt_09_procedure_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -41,16 +42,25 @@ def test_bt_195_bt_09_procedure_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "withheldInformation" in result, "Expected 'withheldInformation' in result"
-    assert len(result["withheldInformation"]) == 1, f"Expected 1 withheld information item, got {len(result['withheldInformation'])}"
+    assert (
+        len(result["withheldInformation"]) == 1
+    ), f"Expected 1 withheld information item, got {len(result['withheldInformation'])}"
 
     withheld_item = result["withheldInformation"][0]
-    assert withheld_item["id"] == "cro-bor-law-test-folder-id", f"Expected id 'cro-bor-law-test-folder-id', got {withheld_item['id']}"
-    assert withheld_item["field"] == "cro-bor-law", f"Expected field 'cro-bor-law', got {withheld_item['field']}"
-    assert withheld_item["name"] == "Cross Border Law", f"Expected name 'Cross Border Law', got {withheld_item['name']}"
+    assert (
+        withheld_item["id"] == "cro-bor-law-test-folder-id"
+    ), f"Expected id 'cro-bor-law-test-folder-id', got {withheld_item['id']}"
+    assert (
+        withheld_item["field"] == "cro-bor-law"
+    ), f"Expected field 'cro-bor-law', got {withheld_item['field']}"
+    assert (
+        withheld_item["name"] == "Cross Border Law"
+    ), f"Expected name 'Cross Border Law', got {withheld_item['name']}"
+
 
 if __name__ == "__main__":
     pytest.main()

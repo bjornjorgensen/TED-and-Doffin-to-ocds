@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_262_procedure_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -32,6 +33,7 @@ def test_bt_262_procedure_integration(tmp_path):
     assert item["id"] == "1"
     assert "classification" in item
     assert item["classification"]["id"] == "15311100"
+
 
 if __name__ == "__main__":
     pytest.main()

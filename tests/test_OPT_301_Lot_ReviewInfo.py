@@ -2,7 +2,11 @@
 
 import pytest
 from lxml import etree
-from converters.OPT_301_Lot_ReviewInfo import parse_review_info_identifier, merge_review_info_identifier
+from converters.OPT_301_Lot_ReviewInfo import (
+    parse_review_info_identifier,
+    merge_review_info_identifier,
+)
+
 
 def test_parse_review_info_identifier():
     xml_content = """
@@ -31,6 +35,7 @@ def test_parse_review_info_identifier():
     assert result["parties"][0]["id"] == "TPO-0001"
     assert result["parties"][0]["roles"] == ["reviewContactPoint"]
 
+
 def test_parse_review_info_identifier_no_data():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -45,17 +50,14 @@ def test_parse_review_info_identifier_no_data():
 
     assert result is None
 
+
 def test_merge_review_info_identifier():
     review_info_data = {
-        "parties": [
-            {"id": "TPO-0001", "roles": ["reviewContactPoint"]}
-        ]
+        "parties": [{"id": "TPO-0001", "roles": ["reviewContactPoint"]}]
     }
 
     release_json = {
-        "parties": [
-            {"id": "TPO-0002", "name": "Existing Party", "roles": ["buyer"]}
-        ]
+        "parties": [{"id": "TPO-0002", "name": "Existing Party", "roles": ["buyer"]}]
     }
 
     merge_review_info_identifier(release_json, review_info_data)
@@ -66,25 +68,25 @@ def test_merge_review_info_identifier():
     assert release_json["parties"][1]["id"] == "TPO-0001"
     assert release_json["parties"][1]["roles"] == ["reviewContactPoint"]
 
+
 def test_merge_review_info_identifier_existing_party():
     review_info_data = {
-        "parties": [
-            {"id": "TPO-0001", "roles": ["reviewContactPoint"]}
-        ]
+        "parties": [{"id": "TPO-0001", "roles": ["reviewContactPoint"]}]
     }
 
     release_json = {
-        "parties": [
-            {"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}
-        ]
+        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}]
     }
 
     merge_review_info_identifier(release_json, review_info_data)
 
     assert len(release_json["parties"]) == 1
     assert release_json["parties"][0]["id"] == "TPO-0001"
-    assert set(release_json["parties"][0]["roles"]) == set(["buyer", "reviewContactPoint"])
+    assert set(release_json["parties"][0]["roles"]) == set(
+        ["buyer", "reviewContactPoint"]
+    )
     assert release_json["parties"][0]["name"] == "Existing Party"
+
 
 def test_merge_review_info_identifier_no_data():
     release_json = {"parties": []}

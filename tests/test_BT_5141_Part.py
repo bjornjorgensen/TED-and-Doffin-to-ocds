@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_5141_part_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -32,16 +33,23 @@ def test_bt_5141_part_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
-    assert "deliveryAddresses" in result["tender"], "Expected 'deliveryAddresses' in tender"
-    assert len(result["tender"]["deliveryAddresses"]) == 1, f"Expected 1 delivery address, got {len(result['tender']['deliveryAddresses'])}"
+    assert (
+        "deliveryAddresses" in result["tender"]
+    ), "Expected 'deliveryAddresses' in tender"
+    assert (
+        len(result["tender"]["deliveryAddresses"]) == 1
+    ), f"Expected 1 delivery address, got {len(result['tender']['deliveryAddresses'])}"
 
     address = result["tender"]["deliveryAddresses"][0]
     assert "country" in address, "Expected 'country' in delivery address"
-    assert address["country"] == "GB", f"Expected country 'GB', got {address['country']}"
+    assert (
+        address["country"] == "GB"
+    ), f"Expected country 'GB', got {address['country']}"
+
 
 if __name__ == "__main__":
     pytest.main()

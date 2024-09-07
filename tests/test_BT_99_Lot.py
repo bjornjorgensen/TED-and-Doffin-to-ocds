@@ -2,7 +2,10 @@
 
 import pytest
 from lxml import etree
-from converters.BT_99_Lot import parse_review_deadline_description, merge_review_deadline_description
+from converters.BT_99_Lot import (
+    parse_review_deadline_description,
+    merge_review_deadline_description,
+)
 import json
 import os
 import sys
@@ -10,6 +13,7 @@ import sys
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
+
 
 def test_parse_review_deadline_description():
     xml_content = """
@@ -27,43 +31,42 @@ def test_parse_review_deadline_description():
         </cac:ProcurementProjectLot>
     </root>
     """
-    
+
     result = parse_review_deadline_description(xml_content)
-    
+
     assert result is not None
     assert "tender" in result
     assert "lots" in result["tender"]
     assert len(result["tender"]["lots"]) == 1
     assert result["tender"]["lots"][0]["id"] == "LOT-0001"
-    assert result["tender"]["lots"][0]["reviewDetails"] == "Any review request shall be submitted ..."
+    assert (
+        result["tender"]["lots"][0]["reviewDetails"]
+        == "Any review request shall be submitted ..."
+    )
+
 
 def test_merge_review_deadline_description():
-    release_json = {
-        "tender": {
-            "lots": [
-                {
-                    "id": "LOT-0001",
-                    "title": "Existing Lot"
-                }
-            ]
-        }
-    }
-    
+    release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}
+
     review_deadline_description_data = {
         "tender": {
             "lots": [
                 {
                     "id": "LOT-0001",
-                    "reviewDetails": "Any review request shall be submitted ..."
+                    "reviewDetails": "Any review request shall be submitted ...",
                 }
             ]
         }
     }
-    
+
     merge_review_deadline_description(release_json, review_deadline_description_data)
-    
+
     assert "reviewDetails" in release_json["tender"]["lots"][0]
-    assert release_json["tender"]["lots"][0]["reviewDetails"] == "Any review request shall be submitted ..."
+    assert (
+        release_json["tender"]["lots"][0]["reviewDetails"]
+        == "Any review request shall be submitted ..."
+    )
+
 
 def test_bt_99_lot_review_deadline_description_integration(tmp_path):
     xml_content = """
@@ -96,20 +99,25 @@ def test_bt_99_lot_review_deadline_description_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result
     assert "lots" in result["tender"]
     assert len(result["tender"]["lots"]) == 2
 
-    lot_1 = next((lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0001"), None)
+    lot_1 = next(
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0001"), None
+    )
     assert lot_1 is not None
     assert lot_1["reviewDetails"] == "Any review request shall be submitted ..."
 
-    lot_2 = next((lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002"), None)
+    lot_2 = next(
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002"), None
+    )
     assert lot_2 is not None
     assert lot_2["reviewDetails"] == "Review requests must be filed within 10 days..."
+
 
 if __name__ == "__main__":
     pytest.main()

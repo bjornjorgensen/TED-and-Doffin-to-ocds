@@ -1,6 +1,10 @@
 import pytest
 from lxml import etree
-from converters.BT_710_LotResult import parse_tender_value_lowest, merge_tender_value_lowest
+from converters.BT_710_LotResult import (
+    parse_tender_value_lowest,
+    merge_tender_value_lowest,
+)
+
 
 def test_parse_tender_value_lowest():
     xml_content = """
@@ -29,6 +33,7 @@ def test_parse_tender_value_lowest():
     assert stat["value"]["currency"] == "EUR"
     assert stat["relatedLots"] == ["LOT-0001"]
 
+
 def test_merge_tender_value_lowest():
     release_json = {"bids": {"statistics": []}}
     tender_value_lowest_data = {
@@ -38,7 +43,7 @@ def test_merge_tender_value_lowest():
                     "id": "lowest-LOT-0001",
                     "measure": "lowestValidBidValue",
                     "value": {"amount": 10000.00, "currency": "EUR"},
-                    "relatedLots": ["LOT-0001"]
+                    "relatedLots": ["LOT-0001"],
                 }
             ]
         }

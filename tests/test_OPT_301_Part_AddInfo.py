@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_opt_301_part_addinfo_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -37,6 +38,7 @@ def test_opt_301_part_addinfo_integration(tmp_path):
     assert party["id"] == "TPO-0001"
     assert "roles" in party
     assert "processContactPoint" in party["roles"]
+
 
 if __name__ == "__main__":
     pytest.main()

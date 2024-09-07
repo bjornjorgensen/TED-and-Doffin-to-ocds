@@ -10,6 +10,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from converters.BT_23_Part import parse_main_nature_part, merge_main_nature_part
 
+
 def test_parse_main_nature_part_works():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -23,11 +24,8 @@ def test_parse_main_nature_part_works():
     </root>
     """
     result = parse_main_nature_part(xml_content)
-    assert result == {
-        "tender": {
-            "mainProcurementCategory": "works"
-        }
-    }
+    assert result == {"tender": {"mainProcurementCategory": "works"}}
+
 
 def test_parse_main_nature_part_services():
     xml_content = """
@@ -42,11 +40,8 @@ def test_parse_main_nature_part_services():
     </root>
     """
     result = parse_main_nature_part(xml_content)
-    assert result == {
-        "tender": {
-            "mainProcurementCategory": "services"
-        }
-    }
+    assert result == {"tender": {"mainProcurementCategory": "services"}}
+
 
 def test_parse_main_nature_part_supplies():
     xml_content = """
@@ -61,11 +56,8 @@ def test_parse_main_nature_part_supplies():
     </root>
     """
     result = parse_main_nature_part(xml_content)
-    assert result == {
-        "tender": {
-            "mainProcurementCategory": "goods"
-        }
-    }
+    assert result == {"tender": {"mainProcurementCategory": "goods"}}
+
 
 def test_parse_main_nature_part_no_data():
     xml_content = """
@@ -76,29 +68,21 @@ def test_parse_main_nature_part_no_data():
     result = parse_main_nature_part(xml_content)
     assert result is None
 
+
 def test_merge_main_nature_part():
-    release_json = {
-        "tender": {
-            "id": "tender-001"
-        }
-    }
-    main_nature_data = {
-        "tender": {
-            "mainProcurementCategory": "works"
-        }
-    }
+    release_json = {"tender": {"id": "tender-001"}}
+    main_nature_data = {"tender": {"mainProcurementCategory": "works"}}
     merge_main_nature_part(release_json, main_nature_data)
     assert release_json == {
-        "tender": {
-            "id": "tender-001",
-            "mainProcurementCategory": "works"
-        }
+        "tender": {"id": "tender-001", "mainProcurementCategory": "works"}
     }
+
 
 def test_merge_main_nature_part_no_data():
     release_json = {"tender": {"id": "tender-001"}}
     merge_main_nature_part(release_json, None)
     assert release_json == {"tender": {"id": "tender-001"}}
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     pytest.main()

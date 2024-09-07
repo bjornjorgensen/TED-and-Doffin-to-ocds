@@ -2,7 +2,11 @@
 
 import pytest
 from lxml import etree
-from converters.OPT_301_Lot_ReviewOrg import parse_review_org_identifier, merge_review_org_identifier
+from converters.OPT_301_Lot_ReviewOrg import (
+    parse_review_org_identifier,
+    merge_review_org_identifier,
+)
+
 
 def test_parse_review_org_identifier():
     xml_content = """
@@ -45,6 +49,7 @@ def test_parse_review_org_identifier():
     assert result["parties"][1]["id"] == "TPO-0002"
     assert result["parties"][1]["roles"] == ["reviewBody"]
 
+
 def test_parse_review_org_identifier_no_data():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -59,18 +64,17 @@ def test_parse_review_org_identifier_no_data():
 
     assert result is None
 
+
 def test_merge_review_org_identifier():
     review_org_data = {
         "parties": [
             {"id": "TPO-0001", "roles": ["reviewBody"]},
-            {"id": "TPO-0002", "roles": ["reviewBody"]}
+            {"id": "TPO-0002", "roles": ["reviewBody"]},
         ]
     }
 
     release_json = {
-        "parties": [
-            {"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}
-        ]
+        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}]
     }
 
     merge_review_org_identifier(release_json, review_org_data)
@@ -81,43 +85,35 @@ def test_merge_review_org_identifier():
     assert release_json["parties"][1]["id"] == "TPO-0002"
     assert release_json["parties"][1]["roles"] == ["reviewBody"]
 
+
 def test_merge_review_org_identifier_no_data():
     release_json = {"parties": []}
     merge_review_org_identifier(release_json, None)
     assert release_json == {"parties": []}
 
+
 @pytest.fixture
 def sample_release_json():
     return {
-        "parties": [
-            {
-                "id": "TPO-0001",
-                "name": "Existing Party",
-                "roles": ["buyer"]
-            }
-        ]
+        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}]
     }
 
+
 def test_merge_review_org_identifier_existing_party(sample_release_json):
-    review_org_data = {
-        "parties": [
-            {"id": "TPO-0001", "roles": ["reviewBody"]}
-        ]
-    }
+    review_org_data = {"parties": [{"id": "TPO-0001", "roles": ["reviewBody"]}]}
 
     merge_review_org_identifier(sample_release_json, review_org_data)
 
     assert len(sample_release_json["parties"]) == 1
     assert sample_release_json["parties"][0]["id"] == "TPO-0001"
-    assert set(sample_release_json["parties"][0]["roles"]) == set(["buyer", "reviewBody"])
+    assert set(sample_release_json["parties"][0]["roles"]) == set(
+        ["buyer", "reviewBody"]
+    )
     assert sample_release_json["parties"][0]["name"] == "Existing Party"
 
+
 def test_merge_review_org_identifier_new_party(sample_release_json):
-    review_org_data = {
-        "parties": [
-            {"id": "TPO-0002", "roles": ["reviewBody"]}
-        ]
-    }
+    review_org_data = {"parties": [{"id": "TPO-0002", "roles": ["reviewBody"]}]}
 
     merge_review_org_identifier(sample_release_json, review_org_data)
 

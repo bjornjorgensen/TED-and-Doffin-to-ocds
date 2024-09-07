@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_7220_lot_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -39,7 +40,7 @@ def test_bt_7220_lot_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "lots" in result, "Expected 'lots' in result"
@@ -50,10 +51,15 @@ def test_bt_7220_lot_integration(tmp_path):
     assert "planning" in lot, "Expected 'planning' in lot"
     assert "budget" in lot["planning"], "Expected 'budget' in lot planning"
     assert "finance" in lot["planning"]["budget"], "Expected 'finance' in lot budget"
-    assert len(lot["planning"]["budget"]["finance"]) == 1, f"Expected 1 finance object, got {len(lot['planning']['budget']['finance'])}"
+    assert (
+        len(lot["planning"]["budget"]["finance"]) == 1
+    ), f"Expected 1 finance object, got {len(lot['planning']['budget']['finance'])}"
     finance = lot["planning"]["budget"]["finance"][0]
     assert finance["id"] == "1", f"Expected finance id '1', got {finance['id']}"
-    assert finance["title"] == "ERDF_2021", f"Expected finance title 'ERDF_2021', got {finance['title']}"
+    assert (
+        finance["title"] == "ERDF_2021"
+    ), f"Expected finance title 'ERDF_2021', got {finance['title']}"
+
 
 if __name__ == "__main__":
     pytest.main()

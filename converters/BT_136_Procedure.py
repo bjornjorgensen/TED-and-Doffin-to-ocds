@@ -51,25 +51,26 @@ JUSTIFICATION_CODES = {
     "tra-ser": "Concessions for air transport services based on the granting of an operating licence within the meaning of Regulation (EC) No 1008/2008",
     "unsuitable": "No suitable tenders, requests to participate, or applications were received in response to a previous notice",
     "urgency": "Extreme urgency brought about by events unforeseeable for the buyer",
-    "water-purch": "Contracts awarded for the purchase of water"
+    "water-purch": "Contracts awarded for the purchase of water",
 }
+
 
 def parse_direct_award_justification_code(xml_content):
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
-    
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+    }
+
     xpath = "/*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/cbc:ProcessReasonCode"
     codes = root.xpath(xpath, namespaces=namespaces)
-    
+
     if codes:
         classifications = []
         for code in codes:
@@ -77,19 +78,24 @@ def parse_direct_award_justification_code(xml_content):
             classification = {
                 "scheme": "eu-direct-award-justification",
                 "id": code_value,
-                "description": JUSTIFICATION_CODES.get(code_value, "Unknown")
+                "description": JUSTIFICATION_CODES.get(code_value, "Unknown"),
             }
             classifications.append(classification)
-        
-        return {"tender": {"procurementMethodRationaleClassifications": classifications}}
-    
+
+        return {
+            "tender": {"procurementMethodRationaleClassifications": classifications}
+        }
+
     logger.info("No direct award justification code found")
     return None
+
 
 def merge_direct_award_justification_code(release_json, justification_data):
     if not justification_data:
         return
-    
+
     tender = release_json.setdefault("tender", {})
-    tender["procurementMethodRationaleClassifications"] = justification_data["tender"]["procurementMethodRationaleClassifications"]
+    tender["procurementMethodRationaleClassifications"] = justification_data["tender"][
+        "procurementMethodRationaleClassifications"
+    ]
     logger.info("Merged direct award justification code")

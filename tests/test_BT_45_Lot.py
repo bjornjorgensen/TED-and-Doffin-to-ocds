@@ -4,6 +4,7 @@ import pytest
 from lxml import etree
 from converters.BT_45_Lot import parse_lot_rewards_other, merge_lot_rewards_other
 
+
 def create_xml_root(content):
     return etree.fromstring(f"""
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -11,6 +12,7 @@ def create_xml_root(content):
         {content}
     </root>
     """)
+
 
 def test_parse_lot_rewards_other_single_lot():
     xml_content = create_xml_root("""
@@ -27,12 +29,18 @@ def test_parse_lot_rewards_other_single_lot():
     """)
 
     result = parse_lot_rewards_other(etree.tostring(xml_content))
-    
+
     assert result is not None
     assert len(result["tender"]["lots"]) == 1
     assert result["tender"]["lots"][0]["id"] == "LOT-001"
     assert len(result["tender"]["lots"][0]["designContest"]["prizes"]["details"]) == 1
-    assert result["tender"]["lots"][0]["designContest"]["prizes"]["details"][0]["description"] == "First prize: €10,000"
+    assert (
+        result["tender"]["lots"][0]["designContest"]["prizes"]["details"][0][
+            "description"
+        ]
+        == "First prize: €10,000"
+    )
+
 
 def test_parse_lot_rewards_other_multiple_lots():
     xml_content = create_xml_root("""
@@ -59,13 +67,24 @@ def test_parse_lot_rewards_other_multiple_lots():
     """)
 
     result = parse_lot_rewards_other(etree.tostring(xml_content))
-    
+
     assert result is not None
     assert len(result["tender"]["lots"]) == 2
     assert result["tender"]["lots"][0]["id"] == "LOT-001"
     assert result["tender"]["lots"][1]["id"] == "LOT-002"
-    assert result["tender"]["lots"][0]["designContest"]["prizes"]["details"][0]["description"] == "First prize: €10,000"
-    assert result["tender"]["lots"][1]["designContest"]["prizes"]["details"][0]["description"] == "Second prize: €5,000"
+    assert (
+        result["tender"]["lots"][0]["designContest"]["prizes"]["details"][0][
+            "description"
+        ]
+        == "First prize: €10,000"
+    )
+    assert (
+        result["tender"]["lots"][1]["designContest"]["prizes"]["details"][0][
+            "description"
+        ]
+        == "Second prize: €5,000"
+    )
+
 
 def test_parse_lot_rewards_other_no_prizes():
     xml_content = create_xml_root("""
@@ -79,15 +98,12 @@ def test_parse_lot_rewards_other_no_prizes():
     """)
 
     result = parse_lot_rewards_other(etree.tostring(xml_content))
-    
+
     assert result is None
 
+
 def test_merge_lot_rewards_other_new_lot():
-    release_json = {
-        "tender": {
-            "lots": []
-        }
-    }
+    release_json = {"tender": {"lots": []}}
     lot_rewards_other_data = {
         "tender": {
             "lots": [
@@ -96,13 +112,10 @@ def test_merge_lot_rewards_other_new_lot():
                     "designContest": {
                         "prizes": {
                             "details": [
-                                {
-                                    "id": "0",
-                                    "description": "First prize: €10,000"
-                                }
+                                {"id": "0", "description": "First prize: €10,000"}
                             ]
                         }
-                    }
+                    },
                 }
             ]
         }
@@ -112,7 +125,13 @@ def test_merge_lot_rewards_other_new_lot():
 
     assert len(release_json["tender"]["lots"]) == 1
     assert release_json["tender"]["lots"][0]["id"] == "LOT-001"
-    assert release_json["tender"]["lots"][0]["designContest"]["prizes"]["details"][0]["description"] == "First prize: €10,000"
+    assert (
+        release_json["tender"]["lots"][0]["designContest"]["prizes"]["details"][0][
+            "description"
+        ]
+        == "First prize: €10,000"
+    )
+
 
 def test_merge_lot_rewards_other_existing_lot():
     release_json = {
@@ -122,14 +141,9 @@ def test_merge_lot_rewards_other_existing_lot():
                     "id": "LOT-001",
                     "designContest": {
                         "prizes": {
-                            "details": [
-                                {
-                                    "id": "0",
-                                    "description": "Old description"
-                                }
-                            ]
+                            "details": [{"id": "0", "description": "Old description"}]
                         }
-                    }
+                    },
                 }
             ]
         }
@@ -142,13 +156,10 @@ def test_merge_lot_rewards_other_existing_lot():
                     "designContest": {
                         "prizes": {
                             "details": [
-                                {
-                                    "id": "0",
-                                    "description": "Updated description"
-                                }
+                                {"id": "0", "description": "Updated description"}
                             ]
                         }
-                    }
+                    },
                 }
             ]
         }
@@ -158,14 +169,16 @@ def test_merge_lot_rewards_other_existing_lot():
 
     assert len(release_json["tender"]["lots"]) == 1
     assert release_json["tender"]["lots"][0]["id"] == "LOT-001"
-    assert release_json["tender"]["lots"][0]["designContest"]["prizes"]["details"][0]["description"] == "Updated description"
+    assert (
+        release_json["tender"]["lots"][0]["designContest"]["prizes"]["details"][0][
+            "description"
+        ]
+        == "Updated description"
+    )
+
 
 def test_merge_lot_rewards_other_no_data():
-    release_json = {
-        "tender": {
-            "lots": []
-        }
-    }
+    release_json = {"tender": {"lots": []}}
     lot_rewards_other_data = None
 
     merge_lot_rewards_other(release_json, lot_rewards_other_data)

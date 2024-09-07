@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_739_ubo_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -46,21 +47,28 @@ def test_bt_739_ubo_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "parties" in result, "Expected 'parties' in result"
-    assert len(result["parties"]) == 1, f"Expected 1 party, got {len(result['parties'])}"
+    assert (
+        len(result["parties"]) == 1
+    ), f"Expected 1 party, got {len(result['parties'])}"
 
     party = result["parties"][0]
     assert party["id"] == "ORG-0001", f"Expected party id 'ORG-0001', got {party['id']}"
     assert "beneficialOwners" in party, "Expected 'beneficialOwners' in party"
-    assert len(party["beneficialOwners"]) == 1, f"Expected 1 beneficial owner, got {len(party['beneficialOwners'])}"
+    assert (
+        len(party["beneficialOwners"]) == 1
+    ), f"Expected 1 beneficial owner, got {len(party['beneficialOwners'])}"
 
     ubo = party["beneficialOwners"][0]
     assert ubo["id"] == "UBO-0001", f"Expected UBO id 'UBO-0001', got {ubo['id']}"
     assert "faxNumber" in ubo, "Expected 'faxNumber' in UBO"
-    assert ubo["faxNumber"] == "+123 4567891", f"Expected faxNumber '+123 4567891', got {ubo['faxNumber']}"
+    assert (
+        ubo["faxNumber"] == "+123 4567891"
+    ), f"Expected faxNumber '+123 4567891', got {ubo['faxNumber']}"
+
 
 if __name__ == "__main__":
     pytest.main()

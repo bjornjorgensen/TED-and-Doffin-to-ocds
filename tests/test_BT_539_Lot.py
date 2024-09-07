@@ -10,6 +10,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 from converters.BT_539_Lot import parse_award_criterion_type, merge_award_criterion_type
 
+
 def test_parse_award_criterion_type():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -28,14 +29,14 @@ def test_parse_award_criterion_type():
         </cac:ProcurementProjectLot>
     </root>
     """
-    
+
     result = parse_award_criterion_type(xml_content)
-    
+
     assert result is not None
     assert "tender" in result
     assert "lots" in result["tender"]
     assert len(result["tender"]["lots"]) == 1
-    
+
     lot = result["tender"]["lots"][0]
     assert lot["id"] == "LOT-0001"
     assert "awardCriteria" in lot
@@ -43,59 +44,43 @@ def test_parse_award_criterion_type():
     assert len(lot["awardCriteria"]["criteria"]) == 1
     assert lot["awardCriteria"]["criteria"][0]["type"] == "quality"
 
+
 def test_merge_award_criterion_type():
     release_json = {
         "tender": {
             "lots": [
-                {
-                    "id": "LOT-0001",
-                    "awardCriteria": {
-                        "criteria": [
-                            {"type": "price"}
-                        ]
-                    }
-                }
+                {"id": "LOT-0001", "awardCriteria": {"criteria": [{"type": "price"}]}}
             ]
         }
     }
-    
+
     award_criterion_type_data = {
         "tender": {
             "lots": [
                 {
                     "id": "LOT-0001",
-                    "awardCriteria": {
-                        "criteria": [
-                            {"type": "quality"}
-                        ]
-                    }
+                    "awardCriteria": {"criteria": [{"type": "quality"}]},
                 },
-                {
-                    "id": "LOT-0002",
-                    "awardCriteria": {
-                        "criteria": [
-                            {"type": "cost"}
-                        ]
-                    }
-                }
+                {"id": "LOT-0002", "awardCriteria": {"criteria": [{"type": "cost"}]}},
             ]
         }
     }
-    
+
     merge_award_criterion_type(release_json, award_criterion_type_data)
-    
+
     assert len(release_json["tender"]["lots"]) == 2
-    
+
     lot1 = release_json["tender"]["lots"][0]
     assert lot1["id"] == "LOT-0001"
     assert len(lot1["awardCriteria"]["criteria"]) == 2
     assert {"type": "price"} in lot1["awardCriteria"]["criteria"]
     assert {"type": "quality"} in lot1["awardCriteria"]["criteria"]
-    
+
     lot2 = release_json["tender"]["lots"][1]
     assert lot2["id"] == "LOT-0002"
     assert len(lot2["awardCriteria"]["criteria"]) == 1
     assert lot2["awardCriteria"]["criteria"][0]["type"] == "cost"
+
 
 def test_bt_539_lot_integration(tmp_path):
     xml_content = """
@@ -120,19 +105,20 @@ def test_bt_539_lot_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result
     assert "lots" in result["tender"]
     assert len(result["tender"]["lots"]) == 1
-    
+
     lot = result["tender"]["lots"][0]
     assert lot["id"] == "LOT-0001"
     assert "awardCriteria" in lot
     assert "criteria" in lot["awardCriteria"]
     assert len(lot["awardCriteria"]["criteria"]) == 1
     assert lot["awardCriteria"]["criteria"][0]["type"] == "quality"
+
 
 if __name__ == "__main__":
     pytest.main()

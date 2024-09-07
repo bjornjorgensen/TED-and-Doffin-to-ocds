@@ -5,6 +5,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+
 def parse_eu_funds(xml_content):
     """
     Parse the XML content to check if the procurement is financed by EU funds.
@@ -31,30 +32,27 @@ def parse_eu_funds(xml_content):
         etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+    }
 
-    eu_funded = root.xpath("//efac:Funding/cbc:FundingProgramCode[@listName='eu-funded' and text()='eu-funds']", namespaces=namespaces)
+    eu_funded = root.xpath(
+        "//efac:Funding/cbc:FundingProgramCode[@listName='eu-funded' and text()='eu-funds']",
+        namespaces=namespaces,
+    )
 
     if eu_funded:
-        return {
-            "parties": [
-                {
-                    "name": "European Union",
-                    "roles": ["funder"]
-                }
-            ]
-        }
+        return {"parties": [{"name": "European Union", "roles": ["funder"]}]}
 
     return None
+
 
 def merge_eu_funds(release_json, eu_funds_data):
     """
@@ -74,7 +72,9 @@ def merge_eu_funds(release_json, eu_funds_data):
         return
 
     parties = release_json.setdefault("parties", [])
-    eu_party = next((party for party in parties if party.get("name") == "European Union"), None)
+    eu_party = next(
+        (party for party in parties if party.get("name") == "European Union"), None
+    )
 
     if eu_party:
         if "funder" not in eu_party.get("roles", []):

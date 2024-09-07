@@ -10,6 +10,7 @@ import logging
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main, configure_logging
 
+
 def test_bt_762_change_reason_description_integration(tmp_path):
     configure_logging()
     logger = logging.getLogger(__name__)
@@ -44,22 +45,29 @@ def test_bt_762_change_reason_description_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "amendments" in result["tender"], "Expected 'amendments' in tender"
-    assert len(result["tender"]["amendments"]) == 2, f"Expected 2 amendments, got {len(result['tender']['amendments'])}"
+    assert (
+        len(result["tender"]["amendments"]) == 2
+    ), f"Expected 2 amendments, got {len(result['tender']['amendments'])}"
 
     amendment1 = result["tender"]["amendments"][0]
     amendment2 = result["tender"]["amendments"][1]
 
     assert "rationale" in amendment1, "Expected 'rationale' in first amendment"
     assert "rationale" in amendment2, "Expected 'rationale' in second amendment"
-    assert amendment1["rationale"] == "Clerical corrections of ...", f"Expected 'Clerical corrections of ...' for first amendment, got {amendment1['rationale']}"
-    assert amendment2["rationale"] == "Additional information added", f"Expected 'Additional information added' for second amendment, got {amendment2['rationale']}"
+    assert (
+        amendment1["rationale"] == "Clerical corrections of ..."
+    ), f"Expected 'Clerical corrections of ...' for first amendment, got {amendment1['rationale']}"
+    assert (
+        amendment2["rationale"] == "Additional information added"
+    ), f"Expected 'Additional information added' for second amendment, got {amendment2['rationale']}"
+
 
 if __name__ == "__main__":
-    pytest.main(['-v', '-s'])
+    pytest.main(["-v", "-s"])

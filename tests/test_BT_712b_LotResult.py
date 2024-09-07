@@ -2,7 +2,11 @@
 
 import pytest
 from lxml import etree
-from converters.BT_712b_LotResult import parse_buyer_review_complainants_bt_712b, merge_buyer_review_complainants_bt_712b
+from converters.BT_712b_LotResult import (
+    parse_buyer_review_complainants_bt_712b,
+    merge_buyer_review_complainants_bt_712b,
+)
+
 
 def test_parse_buyer_review_complainants_bt_712b():
     xml_content = """
@@ -23,9 +27,9 @@ def test_parse_buyer_review_complainants_bt_712b():
         </efac:NoticeResult>
     </root>
     """
-    
+
     result = parse_buyer_review_complainants_bt_712b(xml_content)
-    
+
     assert result is not None
     assert "statistics" in result
     assert len(result["statistics"]) == 1
@@ -35,6 +39,7 @@ def test_parse_buyer_review_complainants_bt_712b():
     assert result["statistics"][0]["scope"] == "complaints"
     assert result["statistics"][0]["relatedLot"] == "LOT-0001"
 
+
 def test_merge_buyer_review_complainants_bt_712b():
     release_json = {
         "statistics": [
@@ -43,11 +48,11 @@ def test_merge_buyer_review_complainants_bt_712b():
                 "value": 1,
                 "measure": "appeals",
                 "scope": "complaints",
-                "relatedLot": "LOT-0001"
+                "relatedLot": "LOT-0001",
             }
         ]
     }
-    
+
     buyer_review_complainants_data = {
         "statistics": [
             {
@@ -55,19 +60,22 @@ def test_merge_buyer_review_complainants_bt_712b():
                 "value": 2,
                 "measure": "complainants",
                 "scope": "complaints",
-                "relatedLot": "LOT-0001"
+                "relatedLot": "LOT-0001",
             }
         ]
     }
-    
-    merge_buyer_review_complainants_bt_712b(release_json, buyer_review_complainants_data)
-    
+
+    merge_buyer_review_complainants_bt_712b(
+        release_json, buyer_review_complainants_data
+    )
+
     assert len(release_json["statistics"]) == 2
     assert release_json["statistics"][1]["id"] == "2"
     assert release_json["statistics"][1]["value"] == 2
     assert release_json["statistics"][1]["measure"] == "complainants"
     assert release_json["statistics"][1]["scope"] == "complaints"
     assert release_json["statistics"][1]["relatedLot"] == "LOT-0001"
+
 
 if __name__ == "__main__":
     pytest.main()

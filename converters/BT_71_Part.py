@@ -5,6 +5,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+
 def parse_reserved_participation_part(xml_content):
     """
     Parse the XML content to extract reserved participation information for the tender.
@@ -24,39 +25,38 @@ def parse_reserved_participation_part(xml_content):
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+    }
 
     xpath_query = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='missing-info-submission'])]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='reserved-procurement']/cbc:TendererRequirementTypeCode/text()"
-    
+
     reserved_codes = root.xpath(xpath_query, namespaces=namespaces)
 
     if reserved_codes:
         reserved_types = set()
         for code in reserved_codes:
-            if code == 'res-pub-ser':
-                reserved_types.add('publicServiceMissionOrganization')
-            elif code == 'res-ws':
-                reserved_types.add('shelteredWorkshop')
+            if code == "res-pub-ser":
+                reserved_types.add("publicServiceMissionOrganization")
+            elif code == "res-ws":
+                reserved_types.add("shelteredWorkshop")
 
         if reserved_types:
             return {
                 "tender": {
-                    "otherRequirements": {
-                        "reservedParticipation": list(reserved_types)
-                    }
+                    "otherRequirements": {"reservedParticipation": list(reserved_types)}
                 }
             }
 
     return None
+
 
 def merge_reserved_participation_part(release_json, reserved_participation_data):
     """
@@ -75,10 +75,19 @@ def merge_reserved_participation_part(release_json, reserved_participation_data)
 
     tender = release_json.setdefault("tender", {})
     other_requirements = tender.setdefault("otherRequirements", {})
-    
-    if "reservedParticipation" in reserved_participation_data["tender"]["otherRequirements"]:
+
+    if (
+        "reservedParticipation"
+        in reserved_participation_data["tender"]["otherRequirements"]
+    ):
         existing_reserved = set(other_requirements.get("reservedParticipation", []))
-        new_reserved = set(reserved_participation_data["tender"]["otherRequirements"]["reservedParticipation"])
-        other_requirements["reservedParticipation"] = list(existing_reserved.union(new_reserved))
+        new_reserved = set(
+            reserved_participation_data["tender"]["otherRequirements"][
+                "reservedParticipation"
+            ]
+        )
+        other_requirements["reservedParticipation"] = list(
+            existing_reserved.union(new_reserved)
+        )
 
     logger.info("Merged reserved participation data for tender")

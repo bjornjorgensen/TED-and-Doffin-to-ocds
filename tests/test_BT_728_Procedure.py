@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_728_procedure_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -25,14 +26,21 @@ def test_bt_728_procedure_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
-    assert "deliveryAddresses" in result["tender"], "Expected 'deliveryAddresses' in tender"
-    assert len(result["tender"]["deliveryAddresses"]) == 1, f"Expected 1 delivery address, got {len(result['tender']['deliveryAddresses'])}"
-    assert result["tender"]["deliveryAddresses"][0]["description"] == "Further realizations ...", \
-        f"Expected description 'Further realizations ...', got {result['tender']['deliveryAddresses'][0]['description']}"
+    assert (
+        "deliveryAddresses" in result["tender"]
+    ), "Expected 'deliveryAddresses' in tender"
+    assert (
+        len(result["tender"]["deliveryAddresses"]) == 1
+    ), f"Expected 1 delivery address, got {len(result['tender']['deliveryAddresses'])}"
+    assert (
+        result["tender"]["deliveryAddresses"][0]["description"]
+        == "Further realizations ..."
+    ), f"Expected description 'Further realizations ...', got {result['tender']['deliveryAddresses'][0]['description']}"
+
 
 if __name__ == "__main__":
     pytest.main()

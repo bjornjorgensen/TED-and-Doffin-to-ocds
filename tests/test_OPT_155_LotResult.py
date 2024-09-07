@@ -11,6 +11,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_parse_vehicle_type():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -39,32 +40,28 @@ def test_parse_vehicle_type():
         </efac:NoticeResult>
     </root>
     """
-    
+
     result = parse_vehicle_type(xml_content)
-    
+
     assert result is not None
     assert "awards" in result
     assert len(result["awards"]) == 1
     assert result["awards"][0]["id"] == "RES-0001"
     assert len(result["awards"][0]["items"]) == 1
-    assert result["awards"][0]["items"][0]["additionalClassifications"][0]["id"] == "vehicles-zero-emission"
+    assert (
+        result["awards"][0]["items"][0]["additionalClassifications"][0]["id"]
+        == "vehicles-zero-emission"
+    )
     assert result["awards"][0]["relatedLots"] == ["LOT-0001"]
+
 
 def test_merge_vehicle_type():
     release_json = {
         "awards": [
-            {
-                "id": "RES-0001",
-                "items": [
-                    {
-                        "id": "1",
-                        "description": "Existing item"
-                    }
-                ]
-            }
+            {"id": "RES-0001", "items": [{"id": "1", "description": "Existing item"}]}
         ]
     }
-    
+
     vehicle_type_data = {
         "awards": [
             {
@@ -76,24 +73,28 @@ def test_merge_vehicle_type():
                             {
                                 "scheme": "vehicles",
                                 "id": "vehicles-zero-emission",
-                                "description": "Vehicles zero emission"
+                                "description": "Vehicles zero emission",
                             }
-                        ]
+                        ],
                     }
                 ],
-                "relatedLots": ["LOT-0001"]
+                "relatedLots": ["LOT-0001"],
             }
         ]
     }
-    
+
     merge_vehicle_type(release_json, vehicle_type_data)
-    
+
     assert len(release_json["awards"]) == 1
     assert release_json["awards"][0]["id"] == "RES-0001"
     assert len(release_json["awards"][0]["items"]) == 1
     assert "additionalClassifications" in release_json["awards"][0]["items"][0]
-    assert release_json["awards"][0]["items"][0]["additionalClassifications"][0]["id"] == "vehicles-zero-emission"
+    assert (
+        release_json["awards"][0]["items"][0]["additionalClassifications"][0]["id"]
+        == "vehicles-zero-emission"
+    )
     assert release_json["awards"][0]["relatedLots"] == ["LOT-0001"]
+
 
 def test_opt_155_lotresult_vehicle_type_integration(tmp_path):
     xml_content = """
@@ -144,23 +145,31 @@ def test_opt_155_lotresult_vehicle_type_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "awards" in result
     assert len(result["awards"]) == 2
 
-    award_1 = next((award for award in result["awards"] if award["id"] == "RES-0001"), None)
+    award_1 = next(
+        (award for award in result["awards"] if award["id"] == "RES-0001"), None
+    )
     assert award_1 is not None
     assert len(award_1["items"]) == 1
-    assert award_1["items"][0]["additionalClassifications"][0]["id"] == "vehicles-zero-emission"
+    assert (
+        award_1["items"][0]["additionalClassifications"][0]["id"]
+        == "vehicles-zero-emission"
+    )
     assert award_1["relatedLots"] == ["LOT-0001"]
 
-    award_2 = next((award for award in result["awards"] if award["id"] == "RES-0002"), None)
+    award_2 = next(
+        (award for award in result["awards"] if award["id"] == "RES-0002"), None
+    )
     assert award_2 is not None
     assert len(award_2["items"]) == 1
     assert award_2["items"][0]["additionalClassifications"][0]["id"] == "vehicles-clean"
     assert award_2["relatedLots"] == ["LOT-0002"]
+
 
 if __name__ == "__main__":
     pytest.main()

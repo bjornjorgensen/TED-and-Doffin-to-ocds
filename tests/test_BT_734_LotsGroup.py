@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_734_lotsgroup_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -35,22 +36,33 @@ def test_bt_734_lotsgroup_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "lotGroups" in result["tender"], "Expected 'lotGroups' in tender"
-    assert len(result["tender"]["lotGroups"]) == 1, f"Expected 1 lot group, got {len(result['tender']['lotGroups'])}"
+    assert (
+        len(result["tender"]["lotGroups"]) == 1
+    ), f"Expected 1 lot group, got {len(result['tender']['lotGroups'])}"
 
     lot_group = result["tender"]["lotGroups"][0]
-    assert lot_group["id"] == "GLO-0001", f"Expected lot group id 'GLO-0001', got {lot_group['id']}"
+    assert (
+        lot_group["id"] == "GLO-0001"
+    ), f"Expected lot group id 'GLO-0001', got {lot_group['id']}"
     assert "awardCriteria" in lot_group, "Expected 'awardCriteria' in lot group"
-    assert "criteria" in lot_group["awardCriteria"], "Expected 'criteria' in awardCriteria"
-    assert len(lot_group["awardCriteria"]["criteria"]) == 2, f"Expected 2 criteria, got {len(lot_group['awardCriteria']['criteria'])}"
+    assert (
+        "criteria" in lot_group["awardCriteria"]
+    ), "Expected 'criteria' in awardCriteria"
+    assert (
+        len(lot_group["awardCriteria"]["criteria"]) == 2
+    ), f"Expected 2 criteria, got {len(lot_group['awardCriteria']['criteria'])}"
 
     criteria_names = [c["name"] for c in lot_group["awardCriteria"]["criteria"]]
-    assert "Technical merit" in criteria_names, "Expected 'Technical merit' in criteria names"
+    assert (
+        "Technical merit" in criteria_names
+    ), "Expected 'Technical merit' in criteria names"
     assert "Price" in criteria_names, "Expected 'Price' in criteria names"
+
 
 if __name__ == "__main__":
     pytest.main()

@@ -5,6 +5,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+
 def BT_196_parse_unpublished_justification_BT_09_Procedure(xml_content):
     """
     Parse the XML content to extract the unpublished justification description for the procedure.
@@ -17,30 +18,34 @@ def BT_196_parse_unpublished_justification_BT_09_Procedure(xml_content):
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"withheldInformation": []}
 
-    justification = root.xpath("//cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='CrossBorderLaw']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='cro-bor-law']/efbc:ReasonDescription/text()", namespaces=namespaces)
+    justification = root.xpath(
+        "//cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='CrossBorderLaw']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='cro-bor-law']/efbc:ReasonDescription/text()",
+        namespaces=namespaces,
+    )
 
     if justification:
-        withheld_item = {
-            "rationale": justification[0]
-        }
+        withheld_item = {"rationale": justification[0]}
         result["withheldInformation"].append(withheld_item)
 
     return result if result["withheldInformation"] else None
 
-def BT_196_merge_unpublished_justification_BT_09_Procedure(release_json, unpublished_justification_data):
+
+def BT_196_merge_unpublished_justification_BT_09_Procedure(
+    release_json, unpublished_justification_data
+):
     """
     Merge the parsed unpublished justification data into the main OCDS release JSON.
 
@@ -56,7 +61,7 @@ def BT_196_merge_unpublished_justification_BT_09_Procedure(release_json, unpubli
         return
 
     withheld_information = release_json.setdefault("withheldInformation", [])
-    
+
     for item in unpublished_justification_data["withheldInformation"]:
         if withheld_information:
             withheld_information[0]["rationale"] = item["rationale"]

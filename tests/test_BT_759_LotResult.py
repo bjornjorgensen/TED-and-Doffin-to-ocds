@@ -1,6 +1,10 @@
 import pytest
 from lxml import etree
-from converters.BT_759_LotResult import parse_received_submissions_count, merge_received_submissions_count
+from converters.BT_759_LotResult import (
+    parse_received_submissions_count,
+    merge_received_submissions_count,
+)
+
 
 def test_parse_received_submissions_count():
     xml_content = """
@@ -31,6 +35,7 @@ def test_parse_received_submissions_count():
     assert stat["value"] == 5
     assert stat["relatedLots"] == ["LOT-0001"]
 
+
 def test_merge_received_submissions_count():
     release_json = {"bids": {"statistics": []}}
     received_submissions_data = {
@@ -40,7 +45,7 @@ def test_merge_received_submissions_count():
                     "id": "bids-LOT-0001",
                     "measure": "bids",
                     "value": 5,
-                    "relatedLots": ["LOT-0001"]
+                    "relatedLots": ["LOT-0001"],
                 }
             ]
         }

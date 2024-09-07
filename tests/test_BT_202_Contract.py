@@ -2,10 +2,14 @@
 
 import pytest
 from lxml import etree
-from converters.BT_202_Contract import parse_contract_modification_summary, merge_contract_modification_summary
+from converters.BT_202_Contract import (
+    parse_contract_modification_summary,
+    merge_contract_modification_summary,
+)
+
 
 def test_parse_contract_modification_summary():
-    xml_content = '''
+    xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
@@ -29,52 +33,43 @@ def test_parse_contract_modification_summary():
             </efac:LotResult>
         </efac:NoticeResult>
     </root>
-    '''
-    
+    """
+
     result = parse_contract_modification_summary(xml_content)
-    
+
     assert result is not None
     assert "contracts" in result
     assert len(result["contracts"]) == 1
-    
+
     contract = result["contracts"][0]
     assert contract["id"] == "CON-0001"
     assert "amendments" in contract
     assert len(contract["amendments"]) == 1
-    
+
     amendment = contract["amendments"][0]
     assert "id" in amendment
     assert "description" in amendment
     assert amendment["description"] == "Increase in framework value"
-    
+
     assert contract["awardID"] == "RES-0001"
 
+
 def test_merge_contract_modification_summary():
-    existing_json = {
-        "contracts": [
-            {
-                "id": "CON-0001",
-                "awardID": "RES-0001"
-            }
-        ]
-    }
-    
+    existing_json = {"contracts": [{"id": "CON-0001", "awardID": "RES-0001"}]}
+
     modification_data = {
         "contracts": [
             {
                 "id": "CON-0001",
                 "amendments": [
-                    {
-                        "id": "1",
-                        "description": "Increase in framework value"
-                    }
-                ]
+                    {"id": "1", "description": "Increase in framework value"}
+                ],
             }
         ]
     }
-    
+
     merge_contract_modification_summary(existing_json, modification_data)
-    
+
     assert len(existing_json["contracts"]) == 1
     contract = existing_json["contracts"][0]
     assert contract["id"] == "CON-0001"

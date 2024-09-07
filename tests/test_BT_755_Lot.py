@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_755_lot_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -37,25 +38,38 @@ def test_bt_755_lot_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "lots" in result["tender"], "Expected 'lots' in tender"
-    assert len(result["tender"]["lots"]) == 2, f"Expected 2 lots, got {len(result['tender']['lots'])}"
+    assert (
+        len(result["tender"]["lots"]) == 2
+    ), f"Expected 2 lots, got {len(result['tender']['lots'])}"
 
     lot1 = next(lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0001")
     lot2 = next(lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002")
 
-    assert "noAccessibilityCriteriaRationale" in lot1, "Expected noAccessibilityCriteriaRationale for LOT-0001"
-    assert lot1["noAccessibilityCriteriaRationale"] == "Accessibility criteria are not included because of specific technical requirements.", \
-        "Unexpected noAccessibilityCriteriaRationale content for LOT-0001"
+    assert (
+        "noAccessibilityCriteriaRationale" in lot1
+    ), "Expected noAccessibilityCriteriaRationale for LOT-0001"
+    assert (
+        lot1["noAccessibilityCriteriaRationale"]
+        == "Accessibility criteria are not included because of specific technical requirements."
+    ), "Unexpected noAccessibilityCriteriaRationale content for LOT-0001"
 
-    assert "noAccessibilityCriteriaRationale" not in lot2, "Did not expect noAccessibilityCriteriaRationale for LOT-0002"
+    assert (
+        "noAccessibilityCriteriaRationale" not in lot2
+    ), "Did not expect noAccessibilityCriteriaRationale for LOT-0002"
 
     # Additional assertions to check integration with BT-754-Lot
-    assert lot1["hasAccessibilityCriteria"] is False, "Expected hasAccessibilityCriteria to be False for LOT-0001"
-    assert lot2["hasAccessibilityCriteria"] is True, "Expected hasAccessibilityCriteria to be True for LOT-0002"
+    assert (
+        lot1["hasAccessibilityCriteria"] is False
+    ), "Expected hasAccessibilityCriteria to be False for LOT-0001"
+    assert (
+        lot2["hasAccessibilityCriteria"] is True
+    ), "Expected hasAccessibilityCriteria to be True for LOT-0002"
+
 
 if __name__ == "__main__":
     pytest.main()

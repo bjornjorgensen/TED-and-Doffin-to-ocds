@@ -6,6 +6,7 @@ from typing import Dict, Optional, Union
 
 logger = logging.getLogger(__name__)
 
+
 def parse_financial_terms(xml_content: Union[str, bytes]) -> Optional[Dict]:
     """
     Parse the XML content to extract the financial terms information for each lot.
@@ -33,37 +34,41 @@ def parse_financial_terms(xml_content: Union[str, bytes]) -> Optional[Dict]:
         etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
-        
+        xml_content = xml_content.encode("utf-8")
+
     root: etree._Element = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+    }
 
     result: Dict[str, Dict] = {"tender": {"lots": []}}
 
-    lots: list = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces)
-    
+    lots: list = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+    )
+
     for lot in lots:
         lot_id: str = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        financial_terms: list = lot.xpath("cac:TenderingTerms/cac:PaymentTerms/cbc:Note/text()", namespaces=namespaces)
-        
+        financial_terms: list = lot.xpath(
+            "cac:TenderingTerms/cac:PaymentTerms/cbc:Note/text()", namespaces=namespaces
+        )
+
         if financial_terms:
-            result["tender"]["lots"].append({
-                "id": lot_id,
-                "contractTerms": {
-                    "financialTerms": financial_terms[0]
-                }
-            })
+            result["tender"]["lots"].append(
+                {"id": lot_id, "contractTerms": {"financialTerms": financial_terms[0]}}
+            )
 
     return result if result["tender"]["lots"] else None
 
-def merge_financial_terms(release_json: Dict, financial_terms_data: Optional[Dict]) -> None:
+
+def merge_financial_terms(
+    release_json: Dict, financial_terms_data: Optional[Dict]
+) -> None:
     """
     Merge the parsed financial terms data into the main OCDS release JSON.
 
@@ -80,12 +85,18 @@ def merge_financial_terms(release_json: Dict, financial_terms_data: Optional[Dic
 
     tender: Dict = release_json.setdefault("tender", {})
     existing_lots: list = tender.setdefault("lots", [])
-    
+
     for new_lot in financial_terms_data["tender"]["lots"]:
-        existing_lot: Optional[Dict] = next((lot for lot in existing_lots if lot["id"] == new_lot["id"]), None)
+        existing_lot: Optional[Dict] = next(
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+        )
         if existing_lot:
-            existing_lot.setdefault("contractTerms", {}).update(new_lot["contractTerms"])
+            existing_lot.setdefault("contractTerms", {}).update(
+                new_lot["contractTerms"]
+            )
         else:
             existing_lots.append(new_lot)
 
-    logger.info(f"Merged financial terms data for {len(financial_terms_data['tender']['lots'])} lots")
+    logger.info(
+        f"Merged financial terms data for {len(financial_terms_data['tender']['lots'])} lots"
+    )

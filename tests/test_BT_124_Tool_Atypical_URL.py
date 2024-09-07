@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_124_tool_atypical_url_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -32,7 +33,7 @@ def test_bt_124_tool_atypical_url_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result
@@ -42,11 +43,17 @@ def test_bt_124_tool_atypical_url_integration(tmp_path):
     assert lot["id"] == "LOT-0001"
     assert "communication" in lot
     assert "atypicalToolUrl" in lot["communication"]
-    assert lot["communication"]["atypicalToolUrl"] == "https://my-atypical-tool-lot.com/"
+    assert (
+        lot["communication"]["atypicalToolUrl"] == "https://my-atypical-tool-lot.com/"
+    )
 
     assert "communication" in result["tender"]
     assert "atypicalToolUrl" in result["tender"]["communication"]
-    assert result["tender"]["communication"]["atypicalToolUrl"] == "https://my-atypical-tool-part.com/"
+    assert (
+        result["tender"]["communication"]["atypicalToolUrl"]
+        == "https://my-atypical-tool-part.com/"
+    )
+
 
 if __name__ == "__main__":
     pytest.main()

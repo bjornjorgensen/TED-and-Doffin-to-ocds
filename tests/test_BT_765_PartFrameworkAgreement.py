@@ -10,6 +10,7 @@ import logging
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main, configure_logging
 
+
 def test_bt_765_part_framework_agreement_integration(tmp_path):
     configure_logging()
     logger = logging.getLogger(__name__)
@@ -32,18 +33,30 @@ def test_bt_765_part_framework_agreement_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "techniques" in result["tender"], "Expected 'techniques' in tender"
-    assert "hasFrameworkAgreement" in result["tender"]["techniques"], "Expected 'hasFrameworkAgreement' in techniques"
-    assert result["tender"]["techniques"]["hasFrameworkAgreement"] is True, "Expected 'hasFrameworkAgreement' to be True"
-    assert "frameworkAgreement" in result["tender"]["techniques"], "Expected 'frameworkAgreement' in techniques"
-    assert "method" in result["tender"]["techniques"]["frameworkAgreement"], "Expected 'method' in frameworkAgreement"
-    assert result["tender"]["techniques"]["frameworkAgreement"]["method"] == "withoutReopeningCompetition", "Expected method to be 'withoutReopeningCompetition'"
+    assert (
+        "hasFrameworkAgreement" in result["tender"]["techniques"]
+    ), "Expected 'hasFrameworkAgreement' in techniques"
+    assert (
+        result["tender"]["techniques"]["hasFrameworkAgreement"] is True
+    ), "Expected 'hasFrameworkAgreement' to be True"
+    assert (
+        "frameworkAgreement" in result["tender"]["techniques"]
+    ), "Expected 'frameworkAgreement' in techniques"
+    assert (
+        "method" in result["tender"]["techniques"]["frameworkAgreement"]
+    ), "Expected 'method' in frameworkAgreement"
+    assert (
+        result["tender"]["techniques"]["frameworkAgreement"]["method"]
+        == "withoutReopeningCompetition"
+    ), "Expected method to be 'withoutReopeningCompetition'"
+
 
 def test_bt_765_part_framework_agreement_none(tmp_path):
     configure_logging()
@@ -67,13 +80,16 @@ def test_bt_765_part_framework_agreement_none(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")
 
     assert "tender" in result, "Expected 'tender' in result"
-    assert "techniques" not in result["tender"], "Did not expect 'techniques' in tender when framework agreement is 'none'"
+    assert (
+        "techniques" not in result["tender"]
+    ), "Did not expect 'techniques' in tender when framework agreement is 'none'"
+
 
 if __name__ == "__main__":
-    pytest.main(['-v', '-s'])
+    pytest.main(["-v", "-s"])

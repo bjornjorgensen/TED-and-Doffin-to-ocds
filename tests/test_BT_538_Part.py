@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_538_part_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -28,14 +29,19 @@ def test_bt_538_part_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "contractPeriod" in result["tender"], "Expected 'contractPeriod' in tender"
-    assert "description" in result["tender"]["contractPeriod"], "Expected 'description' in tender contractPeriod"
+    assert (
+        "description" in result["tender"]["contractPeriod"]
+    ), "Expected 'description' in tender contractPeriod"
     expected_description = "UNLIMITED"
-    assert result["tender"]["contractPeriod"]["description"] == expected_description, f"Expected description '{expected_description}', got {result['tender']['contractPeriod']['description']}"
+    assert (
+        result["tender"]["contractPeriod"]["description"] == expected_description
+    ), f"Expected description '{expected_description}', got {result['tender']['contractPeriod']['description']}"
+
 
 if __name__ == "__main__":
     pytest.main()

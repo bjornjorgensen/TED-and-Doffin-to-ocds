@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_195_bt_105_procedure_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -40,16 +41,25 @@ def test_bt_195_bt_105_procedure_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "withheldInformation" in result, "Expected 'withheldInformation' in result"
-    assert len(result["withheldInformation"]) == 1, f"Expected 1 withheld information item, got {len(result['withheldInformation'])}"
+    assert (
+        len(result["withheldInformation"]) == 1
+    ), f"Expected 1 withheld information item, got {len(result['withheldInformation'])}"
 
     withheld_info = result["withheldInformation"][0]
-    assert withheld_info["id"] == "pro-typ-18d27a53-0109-4f93-9231-6659d931bce0", f"Expected id 'pro-typ-18d27a53-0109-4f93-9231-6659d931bce0', got {withheld_info['id']}"
-    assert withheld_info["field"] == "pro-typ", f"Expected field 'pro-typ', got {withheld_info['field']}"
-    assert withheld_info["name"] == "Procedure Type", f"Expected name 'Procedure Type', got {withheld_info['name']}"
+    assert (
+        withheld_info["id"] == "pro-typ-18d27a53-0109-4f93-9231-6659d931bce0"
+    ), f"Expected id 'pro-typ-18d27a53-0109-4f93-9231-6659d931bce0', got {withheld_info['id']}"
+    assert (
+        withheld_info["field"] == "pro-typ"
+    ), f"Expected field 'pro-typ', got {withheld_info['field']}"
+    assert (
+        withheld_info["name"] == "Procedure Type"
+    ), f"Expected name 'Procedure Type', got {withheld_info['name']}"
+
 
 if __name__ == "__main__":
     pytest.main()

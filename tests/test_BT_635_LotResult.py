@@ -10,10 +10,12 @@ import logging
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main, configure_logging
 
+
 @pytest.fixture(scope="module")
 def setup_logging():
     configure_logging()
     return logging.getLogger(__name__)
+
 
 def test_bt_635_lot_result_integration(tmp_path, setup_logging):
     logger = setup_logging
@@ -51,18 +53,25 @@ def test_bt_635_lot_result_integration(tmp_path, setup_logging):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")
 
     assert "statistics" in result, "Expected 'statistics' in result"
-    assert len(result["statistics"]) == 1, f"Expected 1 statistic, got {len(result['statistics'])}"
+    assert (
+        len(result["statistics"]) == 1
+    ), f"Expected 1 statistic, got {len(result['statistics'])}"
 
     statistic = result["statistics"][0]
-    assert statistic["scope"] == "complaints", f"Expected scope 'complaints', got {statistic['scope']}"
-    assert statistic["relatedLot"] == "LOT-0001", f"Expected relatedLot 'LOT-0001', got {statistic['relatedLot']}"
+    assert (
+        statistic["scope"] == "complaints"
+    ), f"Expected scope 'complaints', got {statistic['scope']}"
+    assert (
+        statistic["relatedLot"] == "LOT-0001"
+    ), f"Expected relatedLot 'LOT-0001', got {statistic['relatedLot']}"
     assert statistic["value"] == 2, f"Expected value 2, got {statistic['value']}"
 
+
 if __name__ == "__main__":
-    pytest.main(['-v', '-s'])
+    pytest.main(["-v", "-s"])

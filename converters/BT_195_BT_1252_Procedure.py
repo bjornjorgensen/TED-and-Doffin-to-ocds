@@ -5,6 +5,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+
 def parse_bt195_bt1252_unpublished_identifier(xml_content):
     """
     Parse the XML content to extract the unpublished identifier for the direct award justification.
@@ -17,33 +18,41 @@ def parse_bt195_bt1252_unpublished_identifier(xml_content):
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"withheldInformation": []}
 
-    contract_folder_id = root.xpath("/*/cbc:ContractFolderID/text()", namespaces=namespaces)
-    field_identifier = root.xpath("//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='dir-awa-pre']/efbc:FieldIdentifierCode/text()", namespaces=namespaces)
+    contract_folder_id = root.xpath(
+        "/*/cbc:ContractFolderID/text()", namespaces=namespaces
+    )
+    field_identifier = root.xpath(
+        "//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='dir-awa-pre']/efbc:FieldIdentifierCode/text()",
+        namespaces=namespaces,
+    )
 
     if contract_folder_id and field_identifier:
         withheld_info = {
             "id": f"{field_identifier[0]}-{contract_folder_id[0]}",
             "field": "dir-awa-pre",
-            "name": "Direct Award Justification Previous Procedure Identifier"
+            "name": "Direct Award Justification Previous Procedure Identifier",
         }
         result["withheldInformation"].append(withheld_info)
 
     return result if result["withheldInformation"] else None
 
-def merge_bt195_bt1252_unpublished_identifier(release_json, unpublished_identifier_data):
+
+def merge_bt195_bt1252_unpublished_identifier(
+    release_json, unpublished_identifier_data
+):
     """
     Merge the parsed unpublished identifier data into the main OCDS release JSON.
 

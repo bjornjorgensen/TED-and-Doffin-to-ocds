@@ -2,7 +2,11 @@
 
 import pytest
 from lxml import etree
-from converters.BT_132_Lot import parse_lot_public_opening_date, merge_lot_public_opening_date
+from converters.BT_132_Lot import (
+    parse_lot_public_opening_date,
+    merge_lot_public_opening_date,
+)
+
 
 def test_parse_lot_public_opening_date():
     xml_content = """
@@ -19,50 +23,50 @@ def test_parse_lot_public_opening_date():
         </cac:ProcurementProjectLot>
     </root>
     """
-    
+
     result = parse_lot_public_opening_date(xml_content)
-    
+
     assert result is not None
     assert len(result["tender"]["lots"]) == 1
     assert result["tender"]["lots"][0]["id"] == "LOT-0001"
-    assert result["tender"]["lots"][0]["awardPeriod"]["startDate"] == "2019-11-05T14:00:00+01:00"
-    assert result["tender"]["lots"][0]["bidOpening"]["date"] == "2019-11-05T14:00:00+01:00"
+    assert (
+        result["tender"]["lots"][0]["awardPeriod"]["startDate"]
+        == "2019-11-05T14:00:00+01:00"
+    )
+    assert (
+        result["tender"]["lots"][0]["bidOpening"]["date"] == "2019-11-05T14:00:00+01:00"
+    )
+
 
 def test_merge_lot_public_opening_date():
-    release_json = {
-        "tender": {
-            "lots": [
-                {
-                    "id": "LOT-0001",
-                    "title": "Existing Lot"
-                }
-            ]
-        }
-    }
-    
+    release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}
+
     lot_public_opening_date_data = {
         "tender": {
             "lots": [
                 {
                     "id": "LOT-0001",
-                    "awardPeriod": {
-                        "startDate": "2019-11-05T14:00:00+01:00"
-                    },
-                    "bidOpening": {
-                        "date": "2019-11-05T14:00:00+01:00"
-                    }
+                    "awardPeriod": {"startDate": "2019-11-05T14:00:00+01:00"},
+                    "bidOpening": {"date": "2019-11-05T14:00:00+01:00"},
                 }
             ]
         }
     }
-    
+
     merge_lot_public_opening_date(release_json, lot_public_opening_date_data)
-    
+
     assert len(release_json["tender"]["lots"]) == 1
     assert release_json["tender"]["lots"][0]["id"] == "LOT-0001"
     assert release_json["tender"]["lots"][0]["title"] == "Existing Lot"
-    assert release_json["tender"]["lots"][0]["awardPeriod"]["startDate"] == "2019-11-05T14:00:00+01:00"
-    assert release_json["tender"]["lots"][0]["bidOpening"]["date"] == "2019-11-05T14:00:00+01:00"
+    assert (
+        release_json["tender"]["lots"][0]["awardPeriod"]["startDate"]
+        == "2019-11-05T14:00:00+01:00"
+    )
+    assert (
+        release_json["tender"]["lots"][0]["bidOpening"]["date"]
+        == "2019-11-05T14:00:00+01:00"
+    )
+
 
 if __name__ == "__main__":
     pytest.main()

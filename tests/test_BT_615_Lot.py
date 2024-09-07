@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_615_lot_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -34,17 +35,26 @@ def test_bt_615_lot_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "documents" in result["tender"], "Expected 'documents' in tender"
-    assert len(result["tender"]["documents"]) == 1, f"Expected 1 document, got {len(result['tender']['documents'])}"
+    assert (
+        len(result["tender"]["documents"]) == 1
+    ), f"Expected 1 document, got {len(result['tender']['documents'])}"
 
     document = result["tender"]["documents"][0]
-    assert document["id"] == "20210521/CTFD/ENG/7654-02", f"Expected document id '20210521/CTFD/ENG/7654-02', got {document['id']}"
-    assert document["accessDetailsURL"] == "https://mywebsite.com/proc/2019024/accessinfo", f"Expected accessDetailsURL 'https://mywebsite.com/proc/2019024/accessinfo', got {document['accessDetailsURL']}"
-    assert document["relatedLots"] == ["LOT-0001"], f"Expected relatedLots ['LOT-0001'], got {document['relatedLots']}"
+    assert (
+        document["id"] == "20210521/CTFD/ENG/7654-02"
+    ), f"Expected document id '20210521/CTFD/ENG/7654-02', got {document['id']}"
+    assert (
+        document["accessDetailsURL"] == "https://mywebsite.com/proc/2019024/accessinfo"
+    ), f"Expected accessDetailsURL 'https://mywebsite.com/proc/2019024/accessinfo', got {document['accessDetailsURL']}"
+    assert document["relatedLots"] == [
+        "LOT-0001"
+    ], f"Expected relatedLots ['LOT-0001'], got {document['relatedLots']}"
+
 
 if __name__ == "__main__":
     pytest.main()

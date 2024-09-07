@@ -6,6 +6,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+
 def parse_change_reason_description(xml_content: str) -> Optional[List[Dict[str, str]]]:
     """
     Parse the XML content to extract the change reason description.
@@ -22,24 +23,30 @@ def parse_change_reason_description(xml_content: str) -> Optional[List[Dict[str,
         etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+    }
 
-    change_reasons = root.xpath("//efac:Changes/efac:ChangeReason/efbc:ReasonDescription/text()", namespaces=namespaces)
+    change_reasons = root.xpath(
+        "//efac:Changes/efac:ChangeReason/efbc:ReasonDescription/text()",
+        namespaces=namespaces,
+    )
 
     if change_reasons:
-        return [{'rationale': reason.strip()} for reason in change_reasons]
+        return [{"rationale": reason.strip()} for reason in change_reasons]
     return None
 
-def merge_change_reason_description(release_json: Dict, change_reason_data: List[Dict[str, str]]) -> None:
+
+def merge_change_reason_description(
+    release_json: Dict, change_reason_data: List[Dict[str, str]]
+) -> None:
     """
     Merge the parsed change reason description data into the main OCDS release JSON.
 
@@ -66,4 +73,6 @@ def merge_change_reason_description(release_json: Dict, change_reason_data: List
         else:
             amendments.append(reason)
 
-    logger.info(f"Merged Change Reason Description data for {len(change_reason_data)} amendments")
+    logger.info(
+        f"Merged Change Reason Description data for {len(change_reason_data)} amendments"
+    )

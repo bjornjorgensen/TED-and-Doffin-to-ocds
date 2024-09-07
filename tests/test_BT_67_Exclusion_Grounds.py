@@ -2,124 +2,151 @@
 
 import pytest
 from lxml import etree
-from converters.BT_67_Exclusion_Grounds import parse_exclusion_grounds, merge_exclusion_grounds
+from converters.BT_67_Exclusion_Grounds import (
+    parse_exclusion_grounds,
+    merge_exclusion_grounds,
+)
 
 # Define the namespaces
 NAMESPACES = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
 }
+
 
 def create_xml_with_exclusion_grounds(grounds):
     root = etree.Element("root", nsmap=NAMESPACES)
-    terms = etree.SubElement(root, "{%s}TenderingTerms" % NAMESPACES['cac'])
-    qual_request = etree.SubElement(terms, "{%s}TendererQualificationRequest" % NAMESPACES['cac'])
-    
+    terms = etree.SubElement(root, "{%s}TenderingTerms" % NAMESPACES["cac"])
+    qual_request = etree.SubElement(
+        terms, "{%s}TendererQualificationRequest" % NAMESPACES["cac"]
+    )
+
     for ground in grounds:
-        requirement = etree.SubElement(qual_request, "{%s}SpecificTendererRequirement" % NAMESPACES['cac'])
-        if 'type' in ground:
-            type_code = etree.SubElement(requirement, "{%s}TendererRequirementTypeCode" % NAMESPACES['cbc'])
+        requirement = etree.SubElement(
+            qual_request, "{%s}SpecificTendererRequirement" % NAMESPACES["cac"]
+        )
+        if "type" in ground:
+            type_code = etree.SubElement(
+                requirement, "{%s}TendererRequirementTypeCode" % NAMESPACES["cbc"]
+            )
             type_code.set("listName", "exclusion-ground")
-            type_code.text = ground['type']
-        if 'description' in ground:
-            description = etree.SubElement(requirement, "{%s}Description" % NAMESPACES['cbc'])
-            description.text = ground['description']
-    
+            type_code.text = ground["type"]
+        if "description" in ground:
+            description = etree.SubElement(
+                requirement, "{%s}Description" % NAMESPACES["cbc"]
+            )
+            description.text = ground["description"]
+
     return etree.tostring(root)
 
+
 def test_parse_exclusion_grounds_with_type_and_description():
-    xml_content = create_xml_with_exclusion_grounds([
-        {'type': 'crime-org', 'description': 'Additional details about criminal organization'},
-        {'type': 'corruption', 'description': 'Specific corruption criteria'}
-    ])
-    
+    xml_content = create_xml_with_exclusion_grounds(
+        [
+            {
+                "type": "crime-org",
+                "description": "Additional details about criminal organization",
+            },
+            {"type": "corruption", "description": "Specific corruption criteria"},
+        ]
+    )
+
     result = parse_exclusion_grounds(xml_content)
-    
+
     assert result is not None
-    assert len(result['tender']['exclusionGrounds']['criteria']) == 2
-    assert result['tender']['exclusionGrounds']['criteria'][0] == {
-        'type': 'crime-org',
-        'description': 'Participation in a criminal organisation: Additional details about criminal organization'
+    assert len(result["tender"]["exclusionGrounds"]["criteria"]) == 2
+    assert result["tender"]["exclusionGrounds"]["criteria"][0] == {
+        "type": "crime-org",
+        "description": "Participation in a criminal organisation: Additional details about criminal organization",
     }
-    assert result['tender']['exclusionGrounds']['criteria'][1] == {
-        'type': 'corruption',
-        'description': 'Corruption: Specific corruption criteria'
+    assert result["tender"]["exclusionGrounds"]["criteria"][1] == {
+        "type": "corruption",
+        "description": "Corruption: Specific corruption criteria",
     }
+
 
 def test_parse_exclusion_grounds_with_type_only():
-    xml_content = create_xml_with_exclusion_grounds([
-        {'type': 'bankruptcy'},
-        {'type': 'fraud'}
-    ])
-    
+    xml_content = create_xml_with_exclusion_grounds(
+        [{"type": "bankruptcy"}, {"type": "fraud"}]
+    )
+
     result = parse_exclusion_grounds(xml_content)
-    
+
     assert result is not None
-    assert len(result['tender']['exclusionGrounds']['criteria']) == 2
-    assert result['tender']['exclusionGrounds']['criteria'][0] == {
-        'type': 'bankruptcy',
-        'description': 'Bankruptcy'
+    assert len(result["tender"]["exclusionGrounds"]["criteria"]) == 2
+    assert result["tender"]["exclusionGrounds"]["criteria"][0] == {
+        "type": "bankruptcy",
+        "description": "Bankruptcy",
     }
-    assert result['tender']['exclusionGrounds']['criteria'][1] == {
-        'type': 'fraud',
-        'description': 'Fraud'
+    assert result["tender"]["exclusionGrounds"]["criteria"][1] == {
+        "type": "fraud",
+        "description": "Fraud",
     }
 
+
 def test_parse_exclusion_grounds_with_unknown_type():
-    xml_content = create_xml_with_exclusion_grounds([
-        {'type': 'unknown-type', 'description': 'Some description'}
-    ])
-    
+    xml_content = create_xml_with_exclusion_grounds(
+        [{"type": "unknown-type", "description": "Some description"}]
+    )
+
     result = parse_exclusion_grounds(xml_content)
-    
+
     assert result is not None
-    assert len(result['tender']['exclusionGrounds']['criteria']) == 1
-    assert result['tender']['exclusionGrounds']['criteria'][0] == {
-        'type': 'unknown-type',
-        'description': ': Some description'
+    assert len(result["tender"]["exclusionGrounds"]["criteria"]) == 1
+    assert result["tender"]["exclusionGrounds"]["criteria"][0] == {
+        "type": "unknown-type",
+        "description": ": Some description",
     }
+
 
 def test_parse_exclusion_grounds_empty():
     xml_content = create_xml_with_exclusion_grounds([])
-    
+
     result = parse_exclusion_grounds(xml_content)
-    
+
     assert result is None
+
 
 def test_merge_exclusion_grounds():
     release_json = {
-        'tender': {
-            'exclusionGrounds': {
-                'criteria': [
-                    {'type': 'existing-ground', 'description': 'Existing ground'}
+        "tender": {
+            "exclusionGrounds": {
+                "criteria": [
+                    {"type": "existing-ground", "description": "Existing ground"}
                 ]
             }
         }
     }
-    
+
     exclusion_grounds_data = {
-        'tender': {
-            'exclusionGrounds': {
-                'criteria': [
-                    {'type': 'new-ground', 'description': 'New ground'}
-                ]
+        "tender": {
+            "exclusionGrounds": {
+                "criteria": [{"type": "new-ground", "description": "New ground"}]
             }
         }
     }
-    
+
     merge_exclusion_grounds(release_json, exclusion_grounds_data)
-    
-    assert len(release_json['tender']['exclusionGrounds']['criteria']) == 2
-    assert release_json['tender']['exclusionGrounds']['criteria'][0] == {'type': 'existing-ground', 'description': 'Existing ground'}
-    assert release_json['tender']['exclusionGrounds']['criteria'][1] == {'type': 'new-ground', 'description': 'New ground'}
+
+    assert len(release_json["tender"]["exclusionGrounds"]["criteria"]) == 2
+    assert release_json["tender"]["exclusionGrounds"]["criteria"][0] == {
+        "type": "existing-ground",
+        "description": "Existing ground",
+    }
+    assert release_json["tender"]["exclusionGrounds"]["criteria"][1] == {
+        "type": "new-ground",
+        "description": "New ground",
+    }
+
 
 def test_merge_exclusion_grounds_empty():
-    release_json = {'tender': {}}
+    release_json = {"tender": {}}
     exclusion_grounds_data = None
-    
-    merge_exclusion_grounds(release_json, exclusion_grounds_data)
-    
-    assert 'exclusionGrounds' not in release_json['tender']
 
-if __name__ == '__main__':
+    merge_exclusion_grounds(release_json, exclusion_grounds_data)
+
+    assert "exclusionGrounds" not in release_json["tender"]
+
+
+if __name__ == "__main__":
     pytest.main()

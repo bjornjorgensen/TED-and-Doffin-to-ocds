@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_503_organization_touchpoint_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -48,19 +49,28 @@ def test_bt_503_organization_touchpoint_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "parties" in result, "Expected 'parties' in result"
-    assert len(result["parties"]) == 1, f"Expected 1 party, got {len(result['parties'])}"
+    assert (
+        len(result["parties"]) == 1
+    ), f"Expected 1 party, got {len(result['parties'])}"
 
     party = result["parties"][0]
     assert party["id"] == "TPO-0001", f"Expected party id 'TPO-0001', got {party['id']}"
     assert "contactPoint" in party, "Expected 'contactPoint' in party"
-    assert party["contactPoint"]["telephone"] == "+123 45678", f"Expected telephone '+123 45678', got {party['contactPoint']['telephone']}"
+    assert (
+        party["contactPoint"]["telephone"] == "+123 45678"
+    ), f"Expected telephone '+123 45678', got {party['contactPoint']['telephone']}"
     assert "identifier" in party, "Expected 'identifier' in party"
-    assert party["identifier"]["id"] == "998298", f"Expected identifier id '998298', got {party['identifier']['id']}"
-    assert party["identifier"]["scheme"] == "internal", f"Expected identifier scheme 'internal', got {party['identifier']['scheme']}"
+    assert (
+        party["identifier"]["id"] == "998298"
+    ), f"Expected identifier id '998298', got {party['identifier']['id']}"
+    assert (
+        party["identifier"]["scheme"] == "internal"
+    ), f"Expected identifier scheme 'internal', got {party['identifier']['scheme']}"
+
 
 if __name__ == "__main__":
     pytest.main()

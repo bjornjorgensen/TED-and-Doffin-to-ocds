@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_140_141a_notice_integration(tmp_path):
     xml_content = """
     <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -44,25 +45,44 @@ def test_bt_140_141a_notice_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "amendments" in result["tender"], "Expected 'amendments' in tender"
-    assert len(result["tender"]["amendments"]) == 2, f"Expected 2 amendments, got {len(result['tender']['amendments'])}"
+    assert (
+        len(result["tender"]["amendments"]) == 2
+    ), f"Expected 2 amendments, got {len(result['tender']['amendments'])}"
 
     for i, amendment in enumerate(result["tender"]["amendments"], start=1):
-        assert amendment["id"] == str(i), f"Expected amendment id '{i}', got {amendment['id']}"
+        assert amendment["id"] == str(
+            i
+        ), f"Expected amendment id '{i}', got {amendment['id']}"
         assert "relatedLots" in amendment, f"Expected 'relatedLots' in amendment {i}"
-        assert amendment["relatedLots"] == [f"LOT-000{i}"], f"Expected relatedLots ['LOT-000{i}'], got {amendment['relatedLots']}"
-        assert "rationaleClassifications" in amendment, f"Expected 'rationaleClassifications' in amendment {i}"
-        assert len(amendment["rationaleClassifications"]) == 1, f"Expected 1 rationaleClassification, got {len(amendment['rationaleClassifications'])}"
+        assert amendment["relatedLots"] == [
+            f"LOT-000{i}"
+        ], f"Expected relatedLots ['LOT-000{i}'], got {amendment['relatedLots']}"
+        assert (
+            "rationaleClassifications" in amendment
+        ), f"Expected 'rationaleClassifications' in amendment {i}"
+        assert (
+            len(amendment["rationaleClassifications"]) == 1
+        ), f"Expected 1 rationaleClassification, got {len(amendment['rationaleClassifications'])}"
         classification = amendment["rationaleClassifications"][0]
-        assert classification["id"] == "update-add", f"Expected classification id 'update-add', got {classification['id']}"
-        assert classification["description"] == "Information updated", f"Expected description 'Information updated', got {classification['description']}"
-        assert classification["scheme"] == "eu-change-corrig-justification", f"Expected scheme 'eu-change-corrig-justification', got {classification['scheme']}"
+        assert (
+            classification["id"] == "update-add"
+        ), f"Expected classification id 'update-add', got {classification['id']}"
+        assert (
+            classification["description"] == "Information updated"
+        ), f"Expected description 'Information updated', got {classification['description']}"
+        assert (
+            classification["scheme"] == "eu-change-corrig-justification"
+        ), f"Expected scheme 'eu-change-corrig-justification', got {classification['scheme']}"
         assert "description" in amendment, f"Expected 'description' in amendment {i}"
-        assert amendment["description"] == f"The changes have been applied to Lot {i}", f"Expected description 'The changes have been applied to Lot {i}', got {amendment['description']}"
+        assert (
+            amendment["description"] == f"The changes have been applied to Lot {i}"
+        ), f"Expected description 'The changes have been applied to Lot {i}', got {amendment['description']}"
+
 
 if __name__ == "__main__":
     pytest.main()

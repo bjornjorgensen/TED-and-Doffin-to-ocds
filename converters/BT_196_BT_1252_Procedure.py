@@ -5,6 +5,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+
 def parse_bt196_bt1252_unpublished_justification(xml_content):
     """
     Parse the XML content to extract the unpublished justification description for the direct award justification.
@@ -17,31 +18,34 @@ def parse_bt196_bt1252_unpublished_justification(xml_content):
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"withheldInformation": []}
 
-    reason_description = root.xpath("//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='dir-awa-pre']/efbc:ReasonDescription/text()", namespaces=namespaces)
+    reason_description = root.xpath(
+        "//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='dir-awa-pre']/efbc:ReasonDescription/text()",
+        namespaces=namespaces,
+    )
 
     if reason_description:
-        withheld_info = {
-            "field": "dir-awa-pre",
-            "rationale": reason_description[0]
-        }
+        withheld_info = {"field": "dir-awa-pre", "rationale": reason_description[0]}
         result["withheldInformation"].append(withheld_info)
 
     return result if result["withheldInformation"] else None
 
-def merge_bt196_bt1252_unpublished_justification(release_json, unpublished_justification_data):
+
+def merge_bt196_bt1252_unpublished_justification(
+    release_json, unpublished_justification_data
+):
     """
     Merge the parsed unpublished justification data into the main OCDS release JSON.
 
@@ -57,9 +61,12 @@ def merge_bt196_bt1252_unpublished_justification(release_json, unpublished_justi
         return
 
     withheld_info = release_json.setdefault("withheldInformation", [])
-    
+
     for new_item in unpublished_justification_data["withheldInformation"]:
-        existing_item = next((item for item in withheld_info if item.get("field") == new_item["field"]), None)
+        existing_item = next(
+            (item for item in withheld_info if item.get("field") == new_item["field"]),
+            None,
+        )
         if existing_item:
             existing_item["rationale"] = new_item["rationale"]
         else:

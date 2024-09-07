@@ -2,7 +2,11 @@
 
 import pytest
 from lxml import etree
-from converters.BT_644_Lot_Prize_Value import parse_lot_prize_value, merge_lot_prize_value
+from converters.BT_644_Lot_Prize_Value import (
+    parse_lot_prize_value,
+    merge_lot_prize_value,
+)
+
 
 def test_parse_lot_prize_value():
     xml_content = """
@@ -22,19 +26,20 @@ def test_parse_lot_prize_value():
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
     </root>
-    """.encode('utf-8')
+    """.encode("utf-8")
 
     result = parse_lot_prize_value(xml_content)
 
     assert result is not None
-    assert len(result['tender']['lots']) == 1
-    lot = result['tender']['lots'][0]
-    assert lot['id'] == 'LOT-0001'
-    assert len(lot['designContest']['prizes']['details']) == 2
-    assert lot['designContest']['prizes']['details'][0]['value']['amount'] == 5000
-    assert lot['designContest']['prizes']['details'][0]['value']['currency'] == 'EUR'
-    assert lot['designContest']['prizes']['details'][1]['value']['amount'] == 3000
-    assert lot['designContest']['prizes']['details'][1]['value']['currency'] == 'EUR'
+    assert len(result["tender"]["lots"]) == 1
+    lot = result["tender"]["lots"][0]
+    assert lot["id"] == "LOT-0001"
+    assert len(lot["designContest"]["prizes"]["details"]) == 2
+    assert lot["designContest"]["prizes"]["details"][0]["value"]["amount"] == 5000
+    assert lot["designContest"]["prizes"]["details"][0]["value"]["currency"] == "EUR"
+    assert lot["designContest"]["prizes"]["details"][1]["value"]["amount"] == 3000
+    assert lot["designContest"]["prizes"]["details"][1]["value"]["currency"] == "EUR"
+
 
 def test_parse_lot_prize_value_no_data():
     xml_content = """
@@ -44,11 +49,12 @@ def test_parse_lot_prize_value_no_data():
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
         </cac:ProcurementProjectLot>
     </root>
-    """.encode('utf-8')
+    """.encode("utf-8")
 
     result = parse_lot_prize_value(xml_content)
 
     assert result is None
+
 
 def test_merge_lot_prize_value():
     existing_release = {
@@ -61,14 +67,11 @@ def test_merge_lot_prize_value():
                             "details": [
                                 {
                                     "id": "0",
-                                    "value": {
-                                        "amount": 1000,
-                                        "currency": "USD"
-                                    }
+                                    "value": {"amount": 1000, "currency": "USD"},
                                 }
                             ]
                         }
-                    }
+                    },
                 }
             ]
         }
@@ -84,21 +87,15 @@ def test_merge_lot_prize_value():
                             "details": [
                                 {
                                     "id": "0",
-                                    "value": {
-                                        "amount": 5000,
-                                        "currency": "EUR"
-                                    }
+                                    "value": {"amount": 5000, "currency": "EUR"},
                                 },
                                 {
                                     "id": "1",
-                                    "value": {
-                                        "amount": 3000,
-                                        "currency": "EUR"
-                                    }
-                                }
+                                    "value": {"amount": 3000, "currency": "EUR"},
+                                },
                             ]
                         }
-                    }
+                    },
                 }
             ]
         }
@@ -106,20 +103,17 @@ def test_merge_lot_prize_value():
 
     merge_lot_prize_value(existing_release, new_data)
 
-    assert len(existing_release['tender']['lots']) == 1
-    lot = existing_release['tender']['lots'][0]
-    assert len(lot['designContest']['prizes']['details']) == 2
-    assert lot['designContest']['prizes']['details'][0]['value']['amount'] == 5000
-    assert lot['designContest']['prizes']['details'][0]['value']['currency'] == 'EUR'
-    assert lot['designContest']['prizes']['details'][1]['value']['amount'] == 3000
-    assert lot['designContest']['prizes']['details'][1]['value']['currency'] == 'EUR'
+    assert len(existing_release["tender"]["lots"]) == 1
+    lot = existing_release["tender"]["lots"][0]
+    assert len(lot["designContest"]["prizes"]["details"]) == 2
+    assert lot["designContest"]["prizes"]["details"][0]["value"]["amount"] == 5000
+    assert lot["designContest"]["prizes"]["details"][0]["value"]["currency"] == "EUR"
+    assert lot["designContest"]["prizes"]["details"][1]["value"]["amount"] == 3000
+    assert lot["designContest"]["prizes"]["details"][1]["value"]["currency"] == "EUR"
+
 
 def test_merge_lot_prize_value_new_lot():
-    existing_release = {
-        "tender": {
-            "lots": []
-        }
-    }
+    existing_release = {"tender": {"lots": []}}
 
     new_data = {
         "tender": {
@@ -131,14 +125,11 @@ def test_merge_lot_prize_value_new_lot():
                             "details": [
                                 {
                                     "id": "0",
-                                    "value": {
-                                        "amount": 5000,
-                                        "currency": "EUR"
-                                    }
+                                    "value": {"amount": 5000, "currency": "EUR"},
                                 }
                             ]
                         }
-                    }
+                    },
                 }
             ]
         }
@@ -146,9 +137,9 @@ def test_merge_lot_prize_value_new_lot():
 
     merge_lot_prize_value(existing_release, new_data)
 
-    assert len(existing_release['tender']['lots']) == 1
-    lot = existing_release['tender']['lots'][0]
-    assert lot['id'] == 'LOT-0001'
-    assert len(lot['designContest']['prizes']['details']) == 1
-    assert lot['designContest']['prizes']['details'][0]['value']['amount'] == 5000
-    assert lot['designContest']['prizes']['details'][0]['value']['currency'] == 'EUR'
+    assert len(existing_release["tender"]["lots"]) == 1
+    lot = existing_release["tender"]["lots"][0]
+    assert lot["id"] == "LOT-0001"
+    assert len(lot["designContest"]["prizes"]["details"]) == 1
+    assert lot["designContest"]["prizes"]["details"][0]["value"]["amount"] == 5000
+    assert lot["designContest"]["prizes"]["details"][0]["value"]["currency"] == "EUR"

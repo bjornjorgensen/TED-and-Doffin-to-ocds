@@ -6,6 +6,7 @@ from utils.date_utils import StartDate
 
 logger = logging.getLogger(__name__)
 
+
 def parse_notice_preferred_publication_date(xml_content):
     """
     Parse the XML content to extract the notice preferred publication date.
@@ -18,26 +19,24 @@ def parse_notice_preferred_publication_date(xml_content):
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
     }
 
     xpath_query = "/*/cbc:RequestedPublicationDate"
     requested_publication_date = root.xpath(xpath_query, namespaces=namespaces)
-    
+
     if requested_publication_date:
         date_str = requested_publication_date[0].text
         try:
             # Use StartDate function from date_utils to convert the date
             formatted_date = StartDate(date_str)
-            
+
             return {
                 "tender": {
-                    "communication": {
-                        "noticePreferredPublicationDate": formatted_date
-                    }
+                    "communication": {"noticePreferredPublicationDate": formatted_date}
                 }
             }
         except ValueError as e:
@@ -46,7 +45,10 @@ def parse_notice_preferred_publication_date(xml_content):
 
     return None
 
-def merge_notice_preferred_publication_date(release_json, preferred_publication_date_data):
+
+def merge_notice_preferred_publication_date(
+    release_json, preferred_publication_date_data
+):
     """
     Merge the parsed notice preferred publication date into the main OCDS release JSON.
 
@@ -63,6 +65,8 @@ def merge_notice_preferred_publication_date(release_json, preferred_publication_
 
     tender = release_json.setdefault("tender", {})
     communication = tender.setdefault("communication", {})
-    communication["noticePreferredPublicationDate"] = preferred_publication_date_data["tender"]["communication"]["noticePreferredPublicationDate"]
+    communication["noticePreferredPublicationDate"] = preferred_publication_date_data[
+        "tender"
+    ]["communication"]["noticePreferredPublicationDate"]
 
     logger.info("Merged notice preferred publication date data")

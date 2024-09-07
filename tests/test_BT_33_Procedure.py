@@ -4,6 +4,7 @@ import pytest
 from lxml import etree
 from converters.BT_33_Procedure import parse_max_lots_awarded, merge_max_lots_awarded
 
+
 def test_parse_max_lots_awarded():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -16,16 +17,23 @@ def test_parse_max_lots_awarded():
     result = parse_max_lots_awarded(xml_content)
     assert result == {"tender": {"lotDetails": {"maximumLotsAwardedPerSupplier": 4}}}
 
+
 def test_merge_max_lots_awarded():
     release_json = {}
-    max_lots_awarded_data = {"tender": {"lotDetails": {"maximumLotsAwardedPerSupplier": 4}}}
+    max_lots_awarded_data = {
+        "tender": {"lotDetails": {"maximumLotsAwardedPerSupplier": 4}}
+    }
     merge_max_lots_awarded(release_json, max_lots_awarded_data)
-    assert release_json == {"tender": {"lotDetails": {"maximumLotsAwardedPerSupplier": 4}}}
+    assert release_json == {
+        "tender": {"lotDetails": {"maximumLotsAwardedPerSupplier": 4}}
+    }
+
 
 def test_parse_max_lots_awarded_missing():
     xml_content = "<root></root>"
     result = parse_max_lots_awarded(xml_content)
     assert result is None
+
 
 def test_parse_max_lots_awarded_invalid():
     xml_content = """

@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_727_part_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -30,14 +31,21 @@ def test_bt_727_part_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
-    assert "deliveryLocations" in result["tender"], "Expected 'deliveryLocations' in tender"
-    assert len(result["tender"]["deliveryLocations"]) == 1, f"Expected 1 delivery location, got {len(result['tender']['deliveryLocations'])}"
-    assert result["tender"]["deliveryLocations"][0]["description"] == "Anywhere in the European Economic Area", \
-        f"Expected description 'Anywhere in the European Economic Area', got {result['tender']['deliveryLocations'][0]['description']}"
+    assert (
+        "deliveryLocations" in result["tender"]
+    ), "Expected 'deliveryLocations' in tender"
+    assert (
+        len(result["tender"]["deliveryLocations"]) == 1
+    ), f"Expected 1 delivery location, got {len(result['tender']['deliveryLocations'])}"
+    assert (
+        result["tender"]["deliveryLocations"][0]["description"]
+        == "Anywhere in the European Economic Area"
+    ), f"Expected description 'Anywhere in the European Economic Area', got {result['tender']['deliveryLocations'][0]['description']}"
+
 
 if __name__ == "__main__":
     pytest.main()

@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_opp_110_111_fiscal_legis_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -46,25 +47,30 @@ def test_opp_110_111_fiscal_legis_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result
     assert "documents" in result["tender"]
     assert len(result["tender"]["documents"]) == 2
 
-    lot_doc = next((doc for doc in result["tender"]["documents"] if doc["id"] == "Fiscal1"), None)
+    lot_doc = next(
+        (doc for doc in result["tender"]["documents"] if doc["id"] == "Fiscal1"), None
+    )
     assert lot_doc is not None
     assert lot_doc["url"] == "https://fiscal-legislation.gov.stat/lot"
     assert lot_doc["documentType"] == "legislation"
     assert "relatedLots" in lot_doc
     assert lot_doc["relatedLots"] == ["LOT-0001"]
 
-    part_doc = next((doc for doc in result["tender"]["documents"] if doc["id"] == "Fiscal2"), None)
+    part_doc = next(
+        (doc for doc in result["tender"]["documents"] if doc["id"] == "Fiscal2"), None
+    )
     assert part_doc is not None
     assert part_doc["url"] == "https://fiscal-legislation.gov.stat/part"
     assert part_doc["documentType"] == "legislation"
     assert "relatedLots" not in part_doc
+
 
 if __name__ == "__main__":
     pytest.main()

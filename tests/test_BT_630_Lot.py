@@ -2,7 +2,10 @@
 
 import pytest
 from lxml import etree
-from converters.BT_630_Lot import parse_deadline_receipt_expressions, merge_deadline_receipt_expressions
+from converters.BT_630_Lot import (
+    parse_deadline_receipt_expressions,
+    merge_deadline_receipt_expressions,
+)
 import json
 import os
 import sys
@@ -10,6 +13,7 @@ import sys
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
+
 
 def test_parse_deadline_receipt_expressions():
     xml_content = """
@@ -37,45 +41,42 @@ def test_parse_deadline_receipt_expressions():
         </cac:ProcurementProjectLot>
     </root>
     """
-    
+
     result = parse_deadline_receipt_expressions(xml_content)
-    
+
     assert result is not None
     assert "tender" in result
     assert "lots" in result["tender"]
     assert len(result["tender"]["lots"]) == 1
     assert result["tender"]["lots"][0]["id"] == "LOT-0001"
-    assert result["tender"]["lots"][0]["tenderPeriod"]["endDate"] == "2019-10-28T18:00:00+01:00"
+    assert (
+        result["tender"]["lots"][0]["tenderPeriod"]["endDate"]
+        == "2019-10-28T18:00:00+01:00"
+    )
+
 
 def test_merge_deadline_receipt_expressions():
-    release_json = {
-        "tender": {
-            "lots": [
-                {
-                    "id": "LOT-0001",
-                    "title": "Existing Lot"
-                }
-            ]
-        }
-    }
-    
+    release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}
+
     deadline_receipt_expressions_data = {
         "tender": {
             "lots": [
                 {
                     "id": "LOT-0001",
-                    "tenderPeriod": {
-                        "endDate": "2019-10-28T18:00:00+01:00"
-                    }
+                    "tenderPeriod": {"endDate": "2019-10-28T18:00:00+01:00"},
                 }
             ]
         }
     }
-    
+
     merge_deadline_receipt_expressions(release_json, deadline_receipt_expressions_data)
-    
+
     assert "tenderPeriod" in release_json["tender"]["lots"][0]
-    assert release_json["tender"]["lots"][0]["tenderPeriod"]["endDate"] == "2019-10-28T18:00:00+01:00"
+    assert (
+        release_json["tender"]["lots"][0]["tenderPeriod"]["endDate"]
+        == "2019-10-28T18:00:00+01:00"
+    )
+
 
 def test_bt_630_lot_deadline_receipt_expressions_integration(tmp_path):
     xml_content = """
@@ -108,7 +109,7 @@ def test_bt_630_lot_deadline_receipt_expressions_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result
@@ -116,7 +117,11 @@ def test_bt_630_lot_deadline_receipt_expressions_integration(tmp_path):
     assert len(result["tender"]["lots"]) == 1
     assert result["tender"]["lots"][0]["id"] == "LOT-0001"
     assert "tenderPeriod" in result["tender"]["lots"][0]
-    assert result["tender"]["lots"][0]["tenderPeriod"]["endDate"] == "2019-10-28T18:00:00+01:00"
+    assert (
+        result["tender"]["lots"][0]["tenderPeriod"]["endDate"]
+        == "2019-10-28T18:00:00+01:00"
+    )
+
 
 if __name__ == "__main__":
     pytest.main()

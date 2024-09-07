@@ -2,7 +2,10 @@
 
 import pytest
 from lxml import etree
-from converters.BT_16_Organization_TouchPoint import parse_organization_touchpoint_part_name, merge_organization_touchpoint_part_name
+from converters.BT_16_Organization_TouchPoint import (
+    parse_organization_touchpoint_part_name,
+    merge_organization_touchpoint_part_name,
+)
 import json
 import os
 import sys
@@ -10,6 +13,7 @@ import sys
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
+
 
 def test_parse_organization_touchpoint_part_name():
     xml_content = """
@@ -38,9 +42,9 @@ def test_parse_organization_touchpoint_part_name():
         </efac:Organizations>
     </root>
     """
-    
+
     result = parse_organization_touchpoint_part_name(xml_content)
-    
+
     assert result is not None
     assert "parties" in result
     assert len(result["parties"]) == 1
@@ -49,35 +53,31 @@ def test_parse_organization_touchpoint_part_name():
     assert result["parties"][0]["identifier"]["id"] == "998298"
     assert result["parties"][0]["identifier"]["scheme"] == "internal"
 
+
 def test_merge_organization_touchpoint_part_name():
-    release_json = {
-        "parties": [
-            {
-                "id": "TPO-0001",
-                "name": "Ministry of Education"
-            }
-        ]
-    }
-    
+    release_json = {"parties": [{"id": "TPO-0001", "name": "Ministry of Education"}]}
+
     organization_touchpoint_part_name_data = {
         "parties": [
             {
                 "id": "TPO-0001",
                 "name": "Ministry of Education - Legal Department",
-                "identifier": {
-                    "id": "998298",
-                    "scheme": "internal"
-                }
+                "identifier": {"id": "998298", "scheme": "internal"},
             }
         ]
     }
-    
-    merge_organization_touchpoint_part_name(release_json, organization_touchpoint_part_name_data)
-    
+
+    merge_organization_touchpoint_part_name(
+        release_json, organization_touchpoint_part_name_data
+    )
+
     assert len(release_json["parties"]) == 1
-    assert release_json["parties"][0]["name"] == "Ministry of Education - Legal Department"
+    assert (
+        release_json["parties"][0]["name"] == "Ministry of Education - Legal Department"
+    )
     assert release_json["parties"][0]["identifier"]["id"] == "998298"
     assert release_json["parties"][0]["identifier"]["scheme"] == "internal"
+
 
 def test_bt_16_organization_touchpoint_integration(tmp_path):
     xml_content = """
@@ -111,7 +111,7 @@ def test_bt_16_organization_touchpoint_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "parties" in result
@@ -120,6 +120,7 @@ def test_bt_16_organization_touchpoint_integration(tmp_path):
     assert result["parties"][0]["name"] == "Ministry of Education - Legal Department"
     assert result["parties"][0]["identifier"]["id"] == "998298"
     assert result["parties"][0]["identifier"]["scheme"] == "internal"
+
 
 if __name__ == "__main__":
     pytest.main()

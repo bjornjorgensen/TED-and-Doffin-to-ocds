@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_3201_tender_identifier_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -39,21 +40,28 @@ def test_bt_3201_tender_identifier_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "bids" in result, "Expected 'bids' in result"
     assert "details" in result["bids"], "Expected 'details' in bids"
-    assert len(result["bids"]["details"]) == 1, f"Expected 1 bid, got {len(result['bids']['details'])}"
+    assert (
+        len(result["bids"]["details"]) == 1
+    ), f"Expected 1 bid, got {len(result['bids']['details'])}"
 
     bid = result["bids"]["details"][0]
     assert bid["id"] == "TEN-0001", f"Expected bid id 'TEN-0001', got {bid['id']}"
     assert "identifiers" in bid, "Expected 'identifiers' in bid"
-    assert len(bid["identifiers"]) == 1, f"Expected 1 identifier, got {len(bid['identifiers'])}"
-    
+    assert (
+        len(bid["identifiers"]) == 1
+    ), f"Expected 1 identifier, got {len(bid['identifiers'])}"
+
     identifier = bid["identifiers"][0]
-    assert identifier["id"] == "BID ABD/GHI-NL/2020-002", f"Expected identifier id 'BID ABD/GHI-NL/2020-002', got {identifier['id']}"
-    #assert identifier["scheme"] == "NL-TENDERNL", f"Expected scheme 'NL-TENDERNL', got {identifier['scheme']}"
+    assert (
+        identifier["id"] == "BID ABD/GHI-NL/2020-002"
+    ), f"Expected identifier id 'BID ABD/GHI-NL/2020-002', got {identifier['id']}"
+    # assert identifier["scheme"] == "NL-TENDERNL", f"Expected scheme 'NL-TENDERNL', got {identifier['scheme']}"
+
 
 if __name__ == "__main__":
     pytest.main()

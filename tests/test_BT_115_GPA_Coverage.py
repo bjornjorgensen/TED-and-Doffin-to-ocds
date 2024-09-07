@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_115_gpa_coverage_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -38,12 +39,14 @@ def test_bt_115_gpa_coverage_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "lots" in result["tender"], "Expected 'lots' in result['tender']"
-    assert len(result["tender"]["lots"]) == 2, f"Expected 2 lots, got {len(result['tender']['lots'])}"
+    assert (
+        len(result["tender"]["lots"]) == 2
+    ), f"Expected 2 lots, got {len(result['tender']['lots'])}"
 
     lot_1 = next(lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0001")
     assert "coveredBy" in lot_1, "Expected 'coveredBy' in LOT-0001"
@@ -54,6 +57,7 @@ def test_bt_115_gpa_coverage_integration(tmp_path):
 
     assert "coveredBy" in result["tender"], "Expected 'coveredBy' in tender"
     assert "GPA" in result["tender"]["coveredBy"], "Expected 'GPA' in tender coveredBy"
+
 
 if __name__ == "__main__":
     pytest.main()

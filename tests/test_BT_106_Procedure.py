@@ -9,12 +9,16 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
-@pytest.mark.parametrize("accelerated_value, expected_result", [
-    ("true", True),
-    ("false", False),
-    ("True", True),
-    ("False", False),
-])
+
+@pytest.mark.parametrize(
+    "accelerated_value, expected_result",
+    [
+        ("true", True),
+        ("false", False),
+        ("True", True),
+        ("False", False),
+    ],
+)
 def test_bt_106_procedure_integration(tmp_path, accelerated_value, expected_result):
     xml_content = f"""
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -31,13 +35,18 @@ def test_bt_106_procedure_integration(tmp_path, accelerated_value, expected_resu
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "procedure" in result["tender"], "Expected 'procedure' in tender"
-    assert "isAccelerated" in result["tender"]["procedure"], "Expected 'isAccelerated' in tender.procedure"
-    assert result["tender"]["procedure"]["isAccelerated"] == expected_result, f"Expected isAccelerated to be {expected_result}, got {result['tender']['procedure']['isAccelerated']}"
+    assert (
+        "isAccelerated" in result["tender"]["procedure"]
+    ), "Expected 'isAccelerated' in tender.procedure"
+    assert (
+        result["tender"]["procedure"]["isAccelerated"] == expected_result
+    ), f"Expected isAccelerated to be {expected_result}, got {result['tender']['procedure']['isAccelerated']}"
+
 
 def test_bt_106_procedure_integration_missing(tmp_path):
     xml_content = """
@@ -52,10 +61,13 @@ def test_bt_106_procedure_integration_missing(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
-    assert "tender" not in result or "procedure" not in result.get("tender", {}), "Unexpected 'tender' or 'procedure' in result when missing in input"
+    assert "tender" not in result or "procedure" not in result.get(
+        "tender", {}
+    ), "Unexpected 'tender' or 'procedure' in result when missing in input"
+
 
 if __name__ == "__main__":
     pytest.main()

@@ -10,6 +10,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from converters.BT_23_Lot import parse_main_nature, merge_main_nature
 
+
 def test_parse_main_nature_works():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -24,15 +25,9 @@ def test_parse_main_nature_works():
     """
     result = parse_main_nature(xml_content)
     assert result == {
-        "tender": {
-            "lots": [
-                {
-                    "id": "LOT-0001",
-                    "mainProcurementCategory": "works"
-                }
-            ]
-        }
+        "tender": {"lots": [{"id": "LOT-0001", "mainProcurementCategory": "works"}]}
     }
+
 
 def test_parse_main_nature_services():
     xml_content = """
@@ -48,15 +43,9 @@ def test_parse_main_nature_services():
     """
     result = parse_main_nature(xml_content)
     assert result == {
-        "tender": {
-            "lots": [
-                {
-                    "id": "LOT-0002",
-                    "mainProcurementCategory": "services"
-                }
-            ]
-        }
+        "tender": {"lots": [{"id": "LOT-0002", "mainProcurementCategory": "services"}]}
     }
+
 
 def test_parse_main_nature_supplies():
     xml_content = """
@@ -72,15 +61,9 @@ def test_parse_main_nature_supplies():
     """
     result = parse_main_nature(xml_content)
     assert result == {
-        "tender": {
-            "lots": [
-                {
-                    "id": "LOT-0003",
-                    "mainProcurementCategory": "goods"
-                }
-            ]
-        }
+        "tender": {"lots": [{"id": "LOT-0003", "mainProcurementCategory": "goods"}]}
     }
+
 
 def test_parse_main_nature_multiple_lots():
     xml_content = """
@@ -104,17 +87,12 @@ def test_parse_main_nature_multiple_lots():
     assert result == {
         "tender": {
             "lots": [
-                {
-                    "id": "LOT-0001",
-                    "mainProcurementCategory": "works"
-                },
-                {
-                    "id": "LOT-0002",
-                    "mainProcurementCategory": "services"
-                }
+                {"id": "LOT-0001", "mainProcurementCategory": "works"},
+                {"id": "LOT-0002", "mainProcurementCategory": "services"},
             ]
         }
     }
+
 
 def test_parse_main_nature_no_lots():
     xml_content = """
@@ -125,28 +103,14 @@ def test_parse_main_nature_no_lots():
     result = parse_main_nature(xml_content)
     assert result is None
 
+
 def test_merge_main_nature():
-    release_json = {
-        "tender": {
-            "lots": [
-                {
-                    "id": "LOT-0001",
-                    "title": "Existing Lot"
-                }
-            ]
-        }
-    }
+    release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}
     main_nature_data = {
         "tender": {
             "lots": [
-                {
-                    "id": "LOT-0001",
-                    "mainProcurementCategory": "works"
-                },
-                {
-                    "id": "LOT-0002",
-                    "mainProcurementCategory": "services"
-                }
+                {"id": "LOT-0001", "mainProcurementCategory": "works"},
+                {"id": "LOT-0002", "mainProcurementCategory": "services"},
             ]
         }
     }
@@ -157,20 +121,19 @@ def test_merge_main_nature():
                 {
                     "id": "LOT-0001",
                     "title": "Existing Lot",
-                    "mainProcurementCategory": "works"
+                    "mainProcurementCategory": "works",
                 },
-                {
-                    "id": "LOT-0002",
-                    "mainProcurementCategory": "services"
-                }
+                {"id": "LOT-0002", "mainProcurementCategory": "services"},
             ]
         }
     }
+
 
 def test_merge_main_nature_no_data():
     release_json = {"tender": {"lots": []}}
     merge_main_nature(release_json, None)
     assert release_json == {"tender": {"lots": []}}
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     pytest.main()

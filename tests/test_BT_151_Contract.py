@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_151_contract_integration(tmp_path):
     xml_content = """
     <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -42,23 +43,34 @@ def test_bt_151_contract_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "contracts" in result, "Expected 'contracts' in result"
-    assert len(result["contracts"]) == 1, f"Expected 1 contract, got {len(result['contracts'])}"
+    assert (
+        len(result["contracts"]) == 1
+    ), f"Expected 1 contract, got {len(result['contracts'])}"
 
     contract = result["contracts"][0]
-    assert contract["id"] == "CON-0001", f"Expected contract id 'CON-0001', got {contract['id']}"
+    assert (
+        contract["id"] == "CON-0001"
+    ), f"Expected contract id 'CON-0001', got {contract['id']}"
     assert "documents" in contract, "Expected 'documents' in contract"
-    assert len(contract["documents"]) == 1, f"Expected 1 document, got {len(contract['documents'])}"
+    assert (
+        len(contract["documents"]) == 1
+    ), f"Expected 1 document, got {len(contract['documents'])}"
 
     document = contract["documents"][0]
     assert document["id"] == "1", f"Expected document id '1', got {document['id']}"
     assert document["url"] == "http://mycontract.acme.com/1234/", f"Unexpected URL"
-    assert document["documentType"] == "contractSigned", f"Expected documentType 'contractSigned', got {document['documentType']}"
+    assert (
+        document["documentType"] == "contractSigned"
+    ), f"Expected documentType 'contractSigned', got {document['documentType']}"
 
-    assert contract["awardID"] == "RES-0001", f"Expected awardID 'RES-0001', got {contract.get('awardID')}"
+    assert (
+        contract["awardID"] == "RES-0001"
+    ), f"Expected awardID 'RES-0001', got {contract.get('awardID')}"
+
 
 if __name__ == "__main__":
     pytest.main()

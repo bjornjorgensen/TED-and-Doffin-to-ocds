@@ -11,6 +11,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_parse_lot_estimated_value():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -25,9 +26,9 @@ def test_parse_lot_estimated_value():
         </cac:ProcurementProjectLot>
     </root>
     """
-    
+
     result = parse_lot_estimated_value(xml_content)
-    
+
     assert result is not None
     assert "tender" in result
     assert "lots" in result["tender"]
@@ -36,37 +37,22 @@ def test_parse_lot_estimated_value():
     assert result["tender"]["lots"][0]["value"]["amount"] == 250000
     assert result["tender"]["lots"][0]["value"]["currency"] == "EUR"
 
+
 def test_merge_lot_estimated_value():
-    release_json = {
-        "tender": {
-            "lots": [
-                {
-                    "id": "LOT-0001",
-                    "title": "Existing Lot"
-                }
-            ]
-        }
-    }
-    
+    release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}
+
     lot_estimated_value_data = {
         "tender": {
-            "lots": [
-                {
-                    "id": "LOT-0001",
-                    "value": {
-                        "amount": 250000,
-                        "currency": "EUR"
-                    }
-                }
-            ]
+            "lots": [{"id": "LOT-0001", "value": {"amount": 250000, "currency": "EUR"}}]
         }
     }
-    
+
     merge_lot_estimated_value(release_json, lot_estimated_value_data)
-    
+
     assert "value" in release_json["tender"]["lots"][0]
     assert release_json["tender"]["lots"][0]["value"]["amount"] == 250000
     assert release_json["tender"]["lots"][0]["value"]["currency"] == "EUR"
+
 
 def test_bt_27_lot_integration(tmp_path):
     xml_content = """
@@ -87,7 +73,7 @@ def test_bt_27_lot_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result
@@ -96,6 +82,7 @@ def test_bt_27_lot_integration(tmp_path):
     assert result["tender"]["lots"][0]["id"] == "LOT-0001"
     assert result["tender"]["lots"][0]["value"]["amount"] == 250000
     assert result["tender"]["lots"][0]["value"]["currency"] == "EUR"
+
 
 if __name__ == "__main__":
     pytest.main()

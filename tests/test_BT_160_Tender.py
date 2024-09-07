@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_160_concession_revenue_buyer_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -52,25 +53,44 @@ def test_bt_160_concession_revenue_buyer_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "contracts" in result, "Expected 'contracts' in result"
-    assert len(result["contracts"]) == 1, f"Expected 1 contract, got {len(result['contracts'])}"
+    assert (
+        len(result["contracts"]) == 1
+    ), f"Expected 1 contract, got {len(result['contracts'])}"
 
     contract = result["contracts"][0]
-    assert contract["id"] == "CON-0001", f"Expected contract id 'CON-0001', got {contract['id']}"
-    assert contract["awardID"] == "RES-0001", f"Expected award id 'RES-0001', got {contract['awardID']}"
+    assert (
+        contract["id"] == "CON-0001"
+    ), f"Expected contract id 'CON-0001', got {contract['id']}"
+    assert (
+        contract["awardID"] == "RES-0001"
+    ), f"Expected award id 'RES-0001', got {contract['awardID']}"
     assert "implementation" in contract, "Expected 'implementation' in contract"
-    assert "charges" in contract["implementation"], "Expected 'charges' in implementation"
-    assert len(contract["implementation"]["charges"]) == 1, f"Expected 1 charge, got {len(contract['implementation']['charges'])}"
+    assert (
+        "charges" in contract["implementation"]
+    ), "Expected 'charges' in implementation"
+    assert (
+        len(contract["implementation"]["charges"]) == 1
+    ), f"Expected 1 charge, got {len(contract['implementation']['charges'])}"
 
     charge = contract["implementation"]["charges"][0]
-    assert charge["id"] == "government", f"Expected charge id 'government', got {charge['id']}"
-    assert charge["paidBy"] == "government", f"Expected paidBy 'government', got {charge['paidBy']}"
+    assert (
+        charge["id"] == "government"
+    ), f"Expected charge id 'government', got {charge['id']}"
+    assert (
+        charge["paidBy"] == "government"
+    ), f"Expected paidBy 'government', got {charge['paidBy']}"
     assert "estimatedValue" in charge, "Expected 'estimatedValue' in charge"
-    assert charge["estimatedValue"]["amount"] == 350, f"Expected amount 350, got {charge['estimatedValue']['amount']}"
-    assert charge["estimatedValue"]["currency"] == "EUR", f"Expected currency 'EUR', got {charge['estimatedValue']['currency']}"
+    assert (
+        charge["estimatedValue"]["amount"] == 350
+    ), f"Expected amount 350, got {charge['estimatedValue']['amount']}"
+    assert (
+        charge["estimatedValue"]["currency"] == "EUR"
+    ), f"Expected currency 'EUR', got {charge['estimatedValue']['currency']}"
+
 
 if __name__ == "__main__":
     pytest.main()

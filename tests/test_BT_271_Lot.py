@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_271_lot_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -41,15 +42,26 @@ def test_bt_271_lot_integration(tmp_path):
 
     assert "tender" in result, "tender not found in result"
     assert "lots" in result["tender"], "lots not found in tender"
-    assert len(result["tender"]["lots"]) == 1, f"Expected 1 lot, got {len(result['tender']['lots'])}"
-    
+    assert (
+        len(result["tender"]["lots"]) == 1
+    ), f"Expected 1 lot, got {len(result['tender']['lots'])}"
+
     lot = result["tender"]["lots"][0]
     assert lot["id"] == "LOT-0001", f"Expected lot id 'LOT-0001', got {lot['id']}"
     assert "techniques" in lot, "techniques not found in lot"
-    assert "frameworkAgreement" in lot["techniques"], "frameworkAgreement not found in techniques"
-    assert "value" in lot["techniques"]["frameworkAgreement"], "value not found in frameworkAgreement"
-    assert lot["techniques"]["frameworkAgreement"]["value"]["amount"] == 120000, f"Expected amount 120000, got {lot['techniques']['frameworkAgreement']['value']['amount']}"
-    assert lot["techniques"]["frameworkAgreement"]["value"]["currency"] == "EUR", f"Expected currency 'EUR', got {lot['techniques']['frameworkAgreement']['value']['currency']}"
+    assert (
+        "frameworkAgreement" in lot["techniques"]
+    ), "frameworkAgreement not found in techniques"
+    assert (
+        "value" in lot["techniques"]["frameworkAgreement"]
+    ), "value not found in frameworkAgreement"
+    assert (
+        lot["techniques"]["frameworkAgreement"]["value"]["amount"] == 120000
+    ), f"Expected amount 120000, got {lot['techniques']['frameworkAgreement']['value']['amount']}"
+    assert (
+        lot["techniques"]["frameworkAgreement"]["value"]["currency"] == "EUR"
+    ), f"Expected currency 'EUR', got {lot['techniques']['frameworkAgreement']['value']['currency']}"
+
 
 if __name__ == "__main__":
     pytest.main()

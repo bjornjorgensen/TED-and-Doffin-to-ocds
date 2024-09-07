@@ -5,6 +5,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+
 def parse_tool_name_part(xml_content):
     """
     Parse the XML content to extract the tool name for electronic communication for the part.
@@ -24,29 +25,27 @@ def parse_tool_name_part(xml_content):
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+    }
 
-    tool_name = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingProcess/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efbc:AccessToolName/text()", namespaces=namespaces)
-    
+    tool_name = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingProcess/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efbc:AccessToolName/text()",
+        namespaces=namespaces,
+    )
+
     if tool_name:
-        return {
-            "tender": {
-                "communication": {
-                    "atypicalToolName": tool_name[0]
-                }
-            }
-        }
-    
+        return {"tender": {"communication": {"atypicalToolName": tool_name[0]}}}
+
     return None
+
 
 def merge_tool_name_part(release_json, tool_name_data):
     """
@@ -63,6 +62,8 @@ def merge_tool_name_part(release_json, tool_name_data):
         logger.warning("No tool name data to merge for part")
         return
 
-    release_json.setdefault("tender", {}).setdefault("communication", {}).update(tool_name_data["tender"]["communication"])
+    release_json.setdefault("tender", {}).setdefault("communication", {}).update(
+        tool_name_data["tender"]["communication"]
+    )
 
     logger.info("Merged tool name data for part")

@@ -5,6 +5,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+
 def parse_procedure_features(xml_content):
     """
     Parse the XML content to extract the procedure features.
@@ -17,23 +18,22 @@ def parse_procedure_features(xml_content):
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
     }
 
-    procedure_features = root.xpath("//cac:TenderingProcess/cbc:Description/text()", namespaces=namespaces)
-    
+    procedure_features = root.xpath(
+        "//cac:TenderingProcess/cbc:Description/text()", namespaces=namespaces
+    )
+
     if procedure_features:
-        return {
-            "tender": {
-                "procurementMethodDetails": procedure_features[0]
-            }
-        }
-    
+        return {"tender": {"procurementMethodDetails": procedure_features[0]}}
+
     return None
+
 
 def merge_procedure_features(release_json, procedure_features_data):
     """
@@ -51,6 +51,8 @@ def merge_procedure_features(release_json, procedure_features_data):
         return
 
     tender = release_json.setdefault("tender", {})
-    tender["procurementMethodDetails"] = procedure_features_data["tender"]["procurementMethodDetails"]
+    tender["procurementMethodDetails"] = procedure_features_data["tender"][
+        "procurementMethodDetails"
+    ]
 
     logger.info("Merged procedure features data")

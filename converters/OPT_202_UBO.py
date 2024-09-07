@@ -5,6 +5,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+
 def parse_ubo_identifier(xml_content):
     """
     Parse the XML content to extract the Ultimate Beneficial Owner identifier.
@@ -17,42 +18,49 @@ def parse_ubo_identifier(xml_content):
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
-    
+        xml_content = xml_content.encode("utf-8")
+
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2'
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
     }
 
     result = {"parties": []}
 
-    organizations = root.xpath("//efac:Organizations/efac:Organization", namespaces=namespaces)
-    
+    organizations = root.xpath(
+        "//efac:Organizations/efac:Organization", namespaces=namespaces
+    )
+
     for organization in organizations:
-        org_id = organization.xpath("efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()", namespaces=namespaces)
-        ubos = root.xpath("//efac:Organizations/efac:UltimateBeneficialOwner", namespaces=namespaces)
-        
+        org_id = organization.xpath(
+            "efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
+            namespaces=namespaces,
+        )
+        ubos = root.xpath(
+            "//efac:Organizations/efac:UltimateBeneficialOwner", namespaces=namespaces
+        )
+
         if org_id and ubos:
-            party = {
-                "id": org_id[0],
-                "beneficialOwners": []
-            }
-            
+            party = {"id": org_id[0], "beneficialOwners": []}
+
             for ubo in ubos:
-                ubo_id = ubo.xpath("cbc:ID[@schemeName='ubo']/text()", namespaces=namespaces)
+                ubo_id = ubo.xpath(
+                    "cbc:ID[@schemeName='ubo']/text()", namespaces=namespaces
+                )
                 if ubo_id:
                     party["beneficialOwners"].append({"id": ubo_id[0]})
-            
+
             if party["beneficialOwners"]:
                 result["parties"].append(party)
 
     return result if result["parties"] else None
+
 
 def merge_ubo_identifier(release_json, ubo_data):
     """
@@ -70,15 +78,20 @@ def merge_ubo_identifier(release_json, ubo_data):
         return
 
     existing_parties = release_json.setdefault("parties", [])
-    
+
     for new_party in ubo_data["parties"]:
-        existing_party = next((party for party in existing_parties if party["id"] == new_party["id"]), None)
+        existing_party = next(
+            (party for party in existing_parties if party["id"] == new_party["id"]),
+            None,
+        )
         if existing_party:
-            existing_ubos = {ubo['id'] for ubo in existing_party.get("beneficialOwners", [])}
+            existing_ubos = {
+                ubo["id"] for ubo in existing_party.get("beneficialOwners", [])
+            }
             for new_ubo in new_party["beneficialOwners"]:
-                if new_ubo['id'] not in existing_ubos:
+                if new_ubo["id"] not in existing_ubos:
                     existing_party.setdefault("beneficialOwners", []).append(new_ubo)
-                    existing_ubos.add(new_ubo['id'])
+                    existing_ubos.add(new_ubo["id"])
         else:
             existing_parties.append(new_party)
 

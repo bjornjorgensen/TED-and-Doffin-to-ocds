@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_263_lot_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -38,6 +39,7 @@ def test_bt_263_lot_integration(tmp_path):
     assert len(item["additionalClassifications"]) == 1
     assert item["additionalClassifications"][0]["id"] == "15311200"
     assert item["additionalClassifications"][0]["scheme"] == "CPV"
+
 
 if __name__ == "__main__":
     pytest.main()

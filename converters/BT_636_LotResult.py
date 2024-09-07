@@ -38,8 +38,9 @@ IRREGULARITY_TYPE_MAPPING = {
     "unj-lim-subc": "Unjustified limitation of subcontracting",
     "unj-na-ppr": "Unjustified non-application of public procurement rules",
     "unj-nrl": "Use of technical specification, selection criterion, award criterion, exclusion criterion, or contract performance condition that are discriminatory because of unjustified national, regional or local preferences",
-    "unj-nrl-other": "Use of technical specifications, selection criteria, award criteria, exclusion criteria, or contract performance conditions that are discriminatory (i.e. restrict access for economic operators) for other reasons than unjustified national, regional or local preferences"
+    "unj-nrl-other": "Use of technical specifications, selection criteria, award criteria, exclusion criteria, or contract performance conditions that are discriminatory (i.e. restrict access for economic operators) for other reasons than unjustified national, regional or local preferences",
 }
+
 
 def parse_irregularity_type(xml_content):
     """
@@ -53,37 +54,47 @@ def parse_irregularity_type(xml_content):
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-        'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"statistics": []}
     id_counter = 1
 
-    lot_results = root.xpath("//efac:NoticeResult/efac:LotResult", namespaces=namespaces)
+    lot_results = root.xpath(
+        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
+    )
     for lot_result in lot_results:
-        lot_id = lot_result.xpath("efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)
+        lot_id = lot_result.xpath(
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces
+        )
         if not lot_id:
             continue
 
-        irregularity_types = lot_result.xpath("efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efbc:StatisticsCode/text()", namespaces=namespaces)
+        irregularity_types = lot_result.xpath(
+            "efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efbc:StatisticsCode/text()",
+            namespaces=namespaces,
+        )
         for irregularity_type in irregularity_types:
             statistic = {
                 "id": str(id_counter),
                 "measure": irregularity_type,
                 "scope": "complaints",
                 "relatedLot": lot_id[0],
-                "notes": IRREGULARITY_TYPE_MAPPING.get(irregularity_type, "Unknown irregularity type")
+                "notes": IRREGULARITY_TYPE_MAPPING.get(
+                    irregularity_type, "Unknown irregularity type"
+                ),
             }
             result["statistics"].append(statistic)
             id_counter += 1
 
     return result if result["statistics"] else None
+
 
 def merge_irregularity_type(release_json, irregularity_type_data):
     """
@@ -101,12 +112,17 @@ def merge_irregularity_type(release_json, irregularity_type_data):
         return
 
     existing_statistics = release_json.setdefault("statistics", [])
-    
+
     for new_statistic in irregularity_type_data["statistics"]:
-        existing_statistic = next((stat for stat in existing_statistics if stat["id"] == new_statistic["id"]), None)
+        existing_statistic = next(
+            (stat for stat in existing_statistics if stat["id"] == new_statistic["id"]),
+            None,
+        )
         if existing_statistic:
             existing_statistic.update(new_statistic)
         else:
             existing_statistics.append(new_statistic)
 
-    logger.info(f"Merged irregularity type data for {len(irregularity_type_data['statistics'])} statistics")
+    logger.info(
+        f"Merged irregularity type data for {len(irregularity_type_data['statistics'])} statistics"
+    )

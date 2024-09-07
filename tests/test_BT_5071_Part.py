@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_5071_part_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -30,16 +31,30 @@ def test_bt_5071_part_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
-    assert "deliveryAddresses" in result["tender"], "Expected 'deliveryAddresses' in tender"
-    assert len(result["tender"]["deliveryAddresses"]) >= 1, f"Expected at least 1 delivery address, got {len(result['tender']['deliveryAddresses'])}"
+    assert (
+        "deliveryAddresses" in result["tender"]
+    ), "Expected 'deliveryAddresses' in tender"
+    assert (
+        len(result["tender"]["deliveryAddresses"]) >= 1
+    ), f"Expected at least 1 delivery address, got {len(result['tender']['deliveryAddresses'])}"
 
-    address = next((addr for addr in result["tender"]["deliveryAddresses"] if addr.get("region") == "UKG23"), None)
+    address = next(
+        (
+            addr
+            for addr in result["tender"]["deliveryAddresses"]
+            if addr.get("region") == "UKG23"
+        ),
+        None,
+    )
     assert address is not None, "Expected to find an address with region 'UKG23'"
-    assert address["region"] == "UKG23", f"Expected region 'UKG23', got {address['region']}"
+    assert (
+        address["region"] == "UKG23"
+    ), f"Expected region 'UKG23', got {address['region']}"
+
 
 if __name__ == "__main__":
     pytest.main()

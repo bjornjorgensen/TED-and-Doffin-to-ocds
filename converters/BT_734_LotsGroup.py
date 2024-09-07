@@ -5,6 +5,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+
 def parse_award_criterion_name_lotsgroup(xml_content):
     """
     Parse the XML content to extract the award criterion name for each lots group.
@@ -17,35 +18,39 @@ def parse_award_criterion_name_lotsgroup(xml_content):
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+    }
 
     result = {"tender": {"lotGroups": []}}
 
-    lots_groups = root.xpath("//cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']", namespaces=namespaces)
-    
+    lots_groups = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']",
+        namespaces=namespaces,
+    )
+
     for lots_group in lots_groups:
         group_id = lots_group.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        criteria = lots_group.xpath(".//cac:SubordinateAwardingCriterion/cbc:Name/text()", namespaces=namespaces)
-        
+        criteria = lots_group.xpath(
+            ".//cac:SubordinateAwardingCriterion/cbc:Name/text()", namespaces=namespaces
+        )
+
         if criteria:
             group_data = {
                 "id": group_id,
-                "awardCriteria": {
-                    "criteria": [{"name": name} for name in criteria]
-                }
+                "awardCriteria": {"criteria": [{"name": name} for name in criteria]},
             }
             result["tender"]["lotGroups"].append(group_data)
 
     return result if result["tender"]["lotGroups"] else None
+
 
 def merge_award_criterion_name_lotsgroup(release_json, award_criterion_data):
     """
@@ -66,11 +71,23 @@ def merge_award_criterion_name_lotsgroup(release_json, award_criterion_data):
     existing_lot_groups = tender.setdefault("lotGroups", [])
 
     for new_group in award_criterion_data["tender"]["lotGroups"]:
-        existing_group = next((group for group in existing_lot_groups if group["id"] == new_group["id"]), None)
+        existing_group = next(
+            (group for group in existing_lot_groups if group["id"] == new_group["id"]),
+            None,
+        )
         if existing_group:
-            existing_criteria = existing_group.setdefault("awardCriteria", {}).setdefault("criteria", [])
+            existing_criteria = existing_group.setdefault(
+                "awardCriteria", {}
+            ).setdefault("criteria", [])
             for new_criterion in new_group["awardCriteria"]["criteria"]:
-                existing_criterion = next((c for c in existing_criteria if c.get("name") == new_criterion["name"]), None)
+                existing_criterion = next(
+                    (
+                        c
+                        for c in existing_criteria
+                        if c.get("name") == new_criterion["name"]
+                    ),
+                    None,
+                )
                 if existing_criterion:
                     existing_criterion.update(new_criterion)
                 else:
@@ -78,4 +95,6 @@ def merge_award_criterion_name_lotsgroup(release_json, award_criterion_data):
         else:
             existing_lot_groups.append(new_group)
 
-    logger.info(f"Merged Award Criterion Name data for {len(award_criterion_data['tender']['lotGroups'])} lots groups")
+    logger.info(
+        f"Merged Award Criterion Name data for {len(award_criterion_data['tender']['lotGroups'])} lots groups"
+    )

@@ -2,7 +2,10 @@
 
 import pytest
 from lxml import etree
-from converters.BT_772_Lot import parse_late_tenderer_info_description, merge_late_tenderer_info_description
+from converters.BT_772_Lot import (
+    parse_late_tenderer_info_description,
+    merge_late_tenderer_info_description,
+)
 import json
 import os
 import sys
@@ -10,6 +13,8 @@ import sys
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
+
+
 def test_parse_late_tenderer_info_description():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -27,72 +32,72 @@ def test_parse_late_tenderer_info_description():
         </cac:ProcurementProjectLot>
     </root>
     """
-    
+
     result = parse_late_tenderer_info_description(xml_content)
-    
+
     assert result is not None
     assert "tender" in result
     assert "lots" in result["tender"]
     assert len(result["tender"]["lots"]) == 1
     assert result["tender"]["lots"][0]["id"] == "LOT-0001"
     assert "submissionMethodDetails" in result["tender"]["lots"][0]
-    assert result["tender"]["lots"][0]["submissionMethodDetails"] == "Economic operators who ..."
+    assert (
+        result["tender"]["lots"][0]["submissionMethodDetails"]
+        == "Economic operators who ..."
+    )
+
 
 def test_merge_late_tenderer_info_description():
-    release_json = {
-        "tender": {
-            "lots": [
-                {
-                    "id": "LOT-0001",
-                    "title": "Existing Lot"
-                }
-            ]
-        }
-    }
-    
+    release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}
+
     late_tenderer_info_description = {
         "tender": {
             "lots": [
                 {
                     "id": "LOT-0001",
-                    "submissionMethodDetails": "Economic operators who ..."
+                    "submissionMethodDetails": "Economic operators who ...",
                 }
             ]
         }
     }
-    
+
     merge_late_tenderer_info_description(release_json, late_tenderer_info_description)
-    
+
     assert "submissionMethodDetails" in release_json["tender"]["lots"][0]
-    assert release_json["tender"]["lots"][0]["submissionMethodDetails"] == "Economic operators who ..."
+    assert (
+        release_json["tender"]["lots"][0]["submissionMethodDetails"]
+        == "Economic operators who ..."
+    )
+
 
 def test_merge_late_tenderer_info_description_append():
     release_json = {
         "tender": {
             "lots": [
-                {
-                    "id": "LOT-0001",
-                    "submissionMethodDetails": "Existing information."
-                }
+                {"id": "LOT-0001", "submissionMethodDetails": "Existing information."}
             ]
         }
     }
-    
+
     late_tenderer_info_description = {
         "tender": {
             "lots": [
                 {
                     "id": "LOT-0001",
-                    "submissionMethodDetails": "Economic operators who ..."
+                    "submissionMethodDetails": "Economic operators who ...",
                 }
             ]
         }
     }
-    
+
     merge_late_tenderer_info_description(release_json, late_tenderer_info_description)
-    
+
     assert "submissionMethodDetails" in release_json["tender"]["lots"][0]
-    assert release_json["tender"]["lots"][0]["submissionMethodDetails"] == "Existing information. Economic operators who ..."
+    assert (
+        release_json["tender"]["lots"][0]["submissionMethodDetails"]
+        == "Existing information. Economic operators who ..."
+    )
+
 
 def test_bt_772_lot_late_tenderer_info_description_integration(tmp_path):
     xml_content = """
@@ -137,13 +142,15 @@ def test_bt_772_lot_late_tenderer_info_description_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result
     assert "lots" in result["tender"]
 
-    lots_with_info = [lot for lot in result["tender"]["lots"] if "submissionMethodDetails" in lot]
+    lots_with_info = [
+        lot for lot in result["tender"]["lots"] if "submissionMethodDetails" in lot
+    ]
     assert len(lots_with_info) == 2
 
     lot_1 = next((lot for lot in lots_with_info if lot["id"] == "LOT-0001"), None)
@@ -154,9 +161,12 @@ def test_bt_772_lot_late_tenderer_info_description_integration(tmp_path):
     assert lot_2 is not None
     assert "Some documents can be submitted later." in lot_2["submissionMethodDetails"]
 
-    lot_3 = next((lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"), None)
+    lot_3 = next(
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"), None
+    )
     assert lot_3 is not None
     assert "submissionMethodDetails" not in lot_3
+
 
 if __name__ == "__main__":
     pytest.main()

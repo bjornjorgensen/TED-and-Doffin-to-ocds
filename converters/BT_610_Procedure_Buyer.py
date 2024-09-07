@@ -6,8 +6,16 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 COFOG_ACTIVITIES = [
-    "gen-pub", "defence", "pub-os", "econ-aff", "env-pro", 
-    "hc-am", "health", "rcr", "education", "soc-pro"
+    "gen-pub",
+    "defence",
+    "pub-os",
+    "econ-aff",
+    "env-pro",
+    "hc-am",
+    "health",
+    "rcr",
+    "education",
+    "soc-pro",
 ]
 
 COFOG_MAPPING = {
@@ -20,7 +28,7 @@ COFOG_MAPPING = {
     "health": ("07", "Health"),
     "rcr": ("08", "Recreation, culture and religion"),
     "education": ("09", "Education"),
-    "soc-pro": ("10", "Social protection")
+    "soc-pro": ("10", "Social protection"),
 }
 
 EU_MAIN_ACTIVITY_MAPPING = {
@@ -43,8 +51,9 @@ EU_MAIN_ACTIVITY_MAPPING = {
     "soc-pro": "Social protection",
     "solid-fuel": "Exploration or extraction of coal or other solid fuels",
     "urttb": "Urban railway, tramway, trolleybus or bus services",
-    "water": "Water-related activities"
+    "water": "Water-related activities",
 }
+
 
 def parse_activity_entity(xml_content):
     """
@@ -81,24 +90,29 @@ def parse_activity_entity(xml_content):
         etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
-        xml_content = xml_content.encode('utf-8')
+        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-    'cac': 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2',
-    'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
-    'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2',
-    'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
-    'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
-    'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1'
-}
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+    }
 
     result = {"parties": []}
 
     contracting_parties = root.xpath("//cac:ContractingParty", namespaces=namespaces)
-    
+
     for party in contracting_parties:
-        buyer_id = party.xpath("cac:Party/cac:PartyIdentification/cbc:ID/text()", namespaces=namespaces)
-        activity_code = party.xpath("cac:ContractingActivity/cbc:ActivityTypeCode[@listName='entity-activity']/text()", namespaces=namespaces)
+        buyer_id = party.xpath(
+            "cac:Party/cac:PartyIdentification/cbc:ID/text()", namespaces=namespaces
+        )
+        activity_code = party.xpath(
+            "cac:ContractingActivity/cbc:ActivityTypeCode[@listName='entity-activity']/text()",
+            namespaces=namespaces,
+        )
 
         if buyer_id and activity_code:
             buyer_id = buyer_id[0]
@@ -112,18 +126,19 @@ def parse_activity_entity(xml_content):
             else:
                 classification["scheme"] = "eu-main-activity"
                 classification["id"] = activity_code
-                classification["description"] = EU_MAIN_ACTIVITY_MAPPING.get(activity_code, "")
+                classification["description"] = EU_MAIN_ACTIVITY_MAPPING.get(
+                    activity_code, ""
+                )
 
             party_data = {
                 "id": buyer_id,
                 "roles": ["buyer"],
-                "details": {
-                    "classifications": [classification]
-                }
+                "details": {"classifications": [classification]},
             }
             result["parties"].append(party_data)
 
     return result if result["parties"] else None
+
 
 def merge_activity_entity(release_json, activity_data):
     """
@@ -144,14 +159,21 @@ def merge_activity_entity(release_json, activity_data):
         return
 
     existing_parties = release_json.setdefault("parties", [])
-    
+
     for new_party in activity_data["parties"]:
-        existing_party = next((party for party in existing_parties if party["id"] == new_party["id"]), None)
+        existing_party = next(
+            (party for party in existing_parties if party["id"] == new_party["id"]),
+            None,
+        )
         if existing_party:
-            existing_party.setdefault("details", {}).setdefault("classifications", []).extend(new_party["details"]["classifications"])
+            existing_party.setdefault("details", {}).setdefault(
+                "classifications", []
+            ).extend(new_party["details"]["classifications"])
             if "buyer" not in existing_party.get("roles", []):
                 existing_party.setdefault("roles", []).append("buyer")
         else:
             existing_parties.append(new_party)
 
-    logger.info(f"BT-610-Procedure-Buyer: Merged activity entity data for {len(activity_data['parties'])} parties")
+    logger.info(
+        f"BT-610-Procedure-Buyer: Merged activity entity data for {len(activity_data['parties'])} parties"
+    )

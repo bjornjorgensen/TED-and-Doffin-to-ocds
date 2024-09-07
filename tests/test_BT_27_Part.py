@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_27_part_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -30,8 +31,13 @@ def test_bt_27_part_integration(tmp_path):
 
     assert "tender" in result, "tender not found in result"
     assert "value" in result["tender"], "value not found in tender"
-    assert result["tender"]["value"]["amount"] == 250000, f"Expected amount 250000, got {result['tender']['value']['amount']}"
-    assert result["tender"]["value"]["currency"] == "EUR", f"Expected currency 'EUR', got {result['tender']['value']['currency']}"
+    assert (
+        result["tender"]["value"]["amount"] == 250000
+    ), f"Expected amount 250000, got {result['tender']['value']['amount']}"
+    assert (
+        result["tender"]["value"]["currency"] == "EUR"
+    ), f"Expected currency 'EUR', got {result['tender']['value']['currency']}"
+
 
 if __name__ == "__main__":
     pytest.main()

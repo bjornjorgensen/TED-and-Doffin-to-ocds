@@ -2,7 +2,10 @@
 
 import pytest
 from lxml import etree
-from converters.BT_137_Lot import parse_purpose_lot_identifier, merge_purpose_lot_identifier
+from converters.BT_137_Lot import (
+    parse_purpose_lot_identifier,
+    merge_purpose_lot_identifier,
+)
 import json
 import os
 import sys
@@ -10,6 +13,7 @@ import sys
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
+
 
 def test_parse_purpose_lot_identifier():
     xml_content = """
@@ -23,9 +27,9 @@ def test_parse_purpose_lot_identifier():
         </cac:ProcurementProjectLot>
     </root>
     """
-    
+
     result = parse_purpose_lot_identifier(xml_content)
-    
+
     assert result is not None
     assert "tender" in result
     assert "lots" in result["tender"]
@@ -33,37 +37,21 @@ def test_parse_purpose_lot_identifier():
     assert result["tender"]["lots"][0]["id"] == "LOT-0001"
     assert result["tender"]["lots"][1]["id"] == "LOT-0002"
 
+
 def test_merge_purpose_lot_identifier():
-    release_json = {
-        "tender": {
-            "lots": [
-                {
-                    "id": "LOT-0001",
-                    "title": "Existing Lot"
-                }
-            ]
-        }
-    }
-    
+    release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}
+
     purpose_lot_identifier_data = {
-        "tender": {
-            "lots": [
-                {
-                    "id": "LOT-0001"
-                },
-                {
-                    "id": "LOT-0002"
-                }
-            ]
-        }
+        "tender": {"lots": [{"id": "LOT-0001"}, {"id": "LOT-0002"}]}
     }
-    
+
     merge_purpose_lot_identifier(release_json, purpose_lot_identifier_data)
-    
+
     assert len(release_json["tender"]["lots"]) == 2
     assert release_json["tender"]["lots"][0]["id"] == "LOT-0001"
     assert release_json["tender"]["lots"][0]["title"] == "Existing Lot"
     assert release_json["tender"]["lots"][1]["id"] == "LOT-0002"
+
 
 def test_bt_137_lot_purpose_lot_identifier_integration(tmp_path):
     xml_content = """
@@ -85,7 +73,7 @@ def test_bt_137_lot_purpose_lot_identifier_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "tender" in result
@@ -96,6 +84,7 @@ def test_bt_137_lot_purpose_lot_identifier_integration(tmp_path):
     assert "LOT-0001" in lot_ids
     assert "LOT-0002" in lot_ids
     assert "LOT-0003" in lot_ids
+
 
 if __name__ == "__main__":
     pytest.main()

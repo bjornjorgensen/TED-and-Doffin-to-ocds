@@ -3,6 +3,7 @@
 import pytest
 from converters.BT_300_Lot import parse_lot_additional_info, merge_lot_additional_info
 
+
 def test_parse_lot_additional_info():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -16,31 +17,36 @@ def test_parse_lot_additional_info():
     </root>
     """
     result = parse_lot_additional_info(xml_content)
-    assert result == {'LOT-0001': [{'text': 'For the current procedure ...', 'language': 'ENG'}]}
+    assert result == {
+        "LOT-0001": [{"text": "For the current procedure ...", "language": "ENG"}]
+    }
+
 
 def test_merge_lot_additional_info():
-    release_json = {
-        'tender': {
-            'lots': [
-                {'id': 'LOT-0001'}
-            ]
-        }
+    release_json = {"tender": {"lots": [{"id": "LOT-0001"}]}}
+    lot_additional_info = {
+        "LOT-0001": [{"text": "For the current procedure ...", "language": "ENG"}]
     }
-    lot_additional_info = {'LOT-0001': [{'text': 'For the current procedure ...', 'language': 'ENG'}]}
     merge_lot_additional_info(release_json, lot_additional_info)
-    assert release_json['tender']['lots'][0]['description'] == 'For the current procedure ...'
+    assert (
+        release_json["tender"]["lots"][0]["description"]
+        == "For the current procedure ..."
+    )
+
 
 def test_merge_lot_additional_info_existing_description():
     release_json = {
-        'tender': {
-            'lots': [
-                {'id': 'LOT-0001', 'description': 'Existing description.'}
-            ]
-        }
+        "tender": {"lots": [{"id": "LOT-0001", "description": "Existing description."}]}
     }
-    lot_additional_info = {'LOT-0001': [{'text': 'Additional info.', 'language': 'ENG'}]}
+    lot_additional_info = {
+        "LOT-0001": [{"text": "Additional info.", "language": "ENG"}]
+    }
     merge_lot_additional_info(release_json, lot_additional_info)
-    assert release_json['tender']['lots'][0]['description'] == 'Existing description. Additional info.'
+    assert (
+        release_json["tender"]["lots"][0]["description"]
+        == "Existing description. Additional info."
+    )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     pytest.main()

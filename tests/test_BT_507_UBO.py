@@ -9,6 +9,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import main
 
+
 def test_bt_507_ubo_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -46,22 +47,31 @@ def test_bt_507_ubo_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open('output.json', 'r') as f:
+    with open("output.json", "r") as f:
         result = json.load(f)
 
     assert "parties" in result, "Expected 'parties' in result"
-    assert len(result["parties"]) == 1, f"Expected 1 party, got {len(result['parties'])}"
+    assert (
+        len(result["parties"]) == 1
+    ), f"Expected 1 party, got {len(result['parties'])}"
 
     party = result["parties"][0]
     assert party["id"] == "ORG-0001", f"Expected party id 'ORG-0001', got {party['id']}"
     assert "beneficialOwners" in party, "Expected 'beneficialOwners' in party"
-    assert len(party["beneficialOwners"]) == 1, f"Expected 1 beneficial owner, got {len(party['beneficialOwners'])}"
+    assert (
+        len(party["beneficialOwners"]) == 1
+    ), f"Expected 1 beneficial owner, got {len(party['beneficialOwners'])}"
 
     bo = party["beneficialOwners"][0]
-    assert bo["id"] == "UBO-0001", f"Expected beneficial owner id 'UBO-0001', got {bo['id']}"
+    assert (
+        bo["id"] == "UBO-0001"
+    ), f"Expected beneficial owner id 'UBO-0001', got {bo['id']}"
     assert "address" in bo, "Expected 'address' in beneficial owner"
     assert "region" in bo["address"], "Expected 'region' in beneficial owner address"
-    assert bo["address"]["region"] == "GBK62", f"Expected region 'GBK62', got {bo['address']['region']}"
+    assert (
+        bo["address"]["region"] == "GBK62"
+    ), f"Expected region 'GBK62', got {bo['address']['region']}"
+
 
 if __name__ == "__main__":
     pytest.main()
