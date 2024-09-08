@@ -601,10 +601,7 @@ from converters.BT_5071_Lot import (
     parse_place_performance_country_subdivision,
     merge_place_performance_country_subdivision,
 )
-from converters.BT_5071_Part import (
-    parse_part_place_performance_country_subdivision,
-    merge_part_place_performance_country_subdivision,
-)
+from converters.BT_5071_Part import parse_part_place_performance_country_subdivision, merge_part_place_performance_country_subdivision
 from converters.BT_5071_Procedure import (
     parse_procedure_place_performance_country_subdivision,
     merge_procedure_place_performance_country_subdivision,
@@ -653,10 +650,7 @@ from converters.BT_510c_Organization_TouchPoint import (
 )
 from converters.BT_510c_UBO import parse_ubo_streetline2, merge_ubo_streetline2
 
-from converters.BT_5101a_Lot import (
-    parse_lot_place_performance_street,
-    merge_lot_place_performance_street,
-)
+from converters.BT_5101_Lot import parse_place_performance_street_lot, merge_place_performance_street_lot
 from converters.BT_5101a_Part import (
     parse_part_place_performance_street,
     merge_part_place_performance_street,
@@ -665,10 +659,7 @@ from converters.BT_5101a_Procedure import (
     parse_procedure_place_performance_street,
     merge_procedure_place_performance_street,
 )
-from converters.BT_5101b_Lot import (
-    parse_lot_place_performance_streetline1,
-    merge_lot_place_performance_streetline1,
-)
+
 from converters.BT_5101b_Part import (
     parse_part_place_performance_streetline1,
     merge_part_place_performance_streetline1,
@@ -3094,13 +3085,13 @@ def main(xml_path, ocid_prefix):
         "BT-5071-Lot (Place Performance Country Subdivision)",
     )
 
-    # Process BT-5071-Part
+    # Parse and merge BT-5071 Place Performance Country Subdivision for Part
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_place_performance_country_subdivision],
         merge_part_place_performance_country_subdivision,
-        "BT-5071-Part (Part Place Performance Country Subdivision)",
+        "Place Performance Country Subdivision Part (BT-5071)"
     )
 
     # Process BT-5071-Procedure
@@ -3229,13 +3220,13 @@ def main(xml_path, ocid_prefix):
         "BT-510(c)-UBO (UBO Streetline 2)",
     )
 
-    # Process BT-5101(a)-Lot
+    # Parse and merge BT-5101 Place Performance Street for Lot (including both a and b parts)
     process_bt_section(
         release_json,
         xml_content,
-        [parse_lot_place_performance_street],
-        merge_lot_place_performance_street,
-        "BT-5101(a)-Lot (Lot Place Performance Street)",
+        [parse_place_performance_street_lot],
+        merge_place_performance_street_lot,
+        "Place Performance Street Lot (BT-5101)"
     )
 
     # Process BT-5101(a)-Part
@@ -3256,14 +3247,6 @@ def main(xml_path, ocid_prefix):
         "BT-5101(a)-Procedure (Procedure Place Performance Street)",
     )
 
-    # Process BT-5101(b)-Lot
-    process_bt_section(
-        release_json,
-        xml_content,
-        [parse_lot_place_performance_streetline1],
-        merge_lot_place_performance_streetline1,
-        "BT-5101(b)-Lot (Lot Place Performance Streetline 1)",
-    )
 
     # Process BT-5101(b)-Part
     process_bt_section(
@@ -3283,14 +3266,7 @@ def main(xml_path, ocid_prefix):
         "BT-5101(b)-Procedure (Procedure Place Performance Streetline 1)",
     )
 
-    # Process BT-5101(c)-Lot
-    process_bt_section(
-        release_json,
-        xml_content,
-        [parse_lot_place_performance_streetline2],
-        merge_lot_place_performance_streetline2,
-        "BT-5101(c)-Lot (Lot Place Performance Streetline 2)",
-    )
+    
 
     # Process BT-5101(c)-Part
     process_bt_section(
@@ -5309,8 +5285,8 @@ def main(xml_path, ocid_prefix):
 
 if __name__ == "__main__":
     # Path to the XML file
-    # xml_path = 'xmlfile/can_24_minimal.xml'
-    xml_path = "bt_198-106.xml"
+    xml_path = 'xmlfile/2022-319091.xml'
+    #xml_path = "bt_198-106.xml"
     # Prefix for OCID
     ocid_prefix = "ocid_prefix_value"
 
