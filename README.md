@@ -1,6 +1,6 @@
-# XML to OCDS Converter for eForms
+# XML to OCDS Converter for TED and Doffin eForms
 
-This project converts XML data from eForms notices to OCDS (Open Contracting Data Standard) JSON format. It focuses on processing organization and address information, following the eForm profile mapping.
+This project converts XML eForm data from TED (Tenders Electronic Daily) and Doffin (Database for offentlige innkjøp) to OCDS (Open Contracting Data Standard) JSON format. It focuses on processing organization and address information, following the eForm profile mapping.
 
 ## Table of Contents
 
@@ -10,12 +10,13 @@ This project converts XML data from eForms notices to OCDS (Open Contracting Dat
 - [Usage](#usage)
 - [Testing](#testing)
 - [OCDS eForm Profile Mapping](#ocds-eform-profile-mapping)
+- [TED and Doffin Data Processing](#ted-and-doffin-data-processing)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Project Overview
 
-The XML to OCDS Converter processes eForms XML data and converts it into the OCDS JSON format. It handles various business terms (BT) and ensures proper mapping according to the OCDS eForm profile.
+The XML to OCDS Converter processes eForms XML data from TED and Doffin and converts it into the OCDS JSON format. It handles various business terms (BT) and ensures proper mapping according to the OCDS eForm profile, accommodating the specificities of both TED and Doffin data structures.
 
 ## File Structure
 
@@ -62,7 +63,7 @@ To convert an XML file to OCDS JSON format, run the following command:
 python main.py path/to/your/input.xml ocid_prefix_value
 ```
 
-Replace `path/to/your/input.xml` with the path to your input XML file and `ocid_prefix_value` with your desired OCID prefix.
+Replace `path/to/your/input.xml` with the path to your input XML file (from either TED or Doffin) and `ocid_prefix_value` with your desired OCID prefix.
 
 The converted OCDS JSON will be saved in `output.json` in the project root directory.
 
@@ -81,16 +82,28 @@ This project follows the OCDS eForm profile mapping as specified in the [OCDS Do
 Key aspects of the mapping include:
 
 1. **Business Terms (BT)**: Each XML element corresponding to a specific business term is mapped to the appropriate OCDS field.
-
 2. **Organization Information**: Handling of organization details, including addresses and identifiers.
-
 3. **Lot Information**: Processing lot-specific data and ensuring proper representation in the OCDS structure.
-
 4. **Date Formatting**: Ensuring all dates are formatted according to the ISO 8601 standard.
-
 5. **Document References**: Mapping document references from XML to OCDS document objects.
 
 For detailed mapping information, please refer to the [official OCDS eForm profile mapping documentation](https://standard.open-contracting.org/profiles/eforms/latest/en/mapping/).
+
+## TED and Doffin Data Processing
+
+This converter is designed to handle XML eForm data from both TED and Doffin:
+
+### TED (Tenders Electronic Daily)
+- Processes XML data from the EU's official journal dedicated to European public procurement.
+- Handles TED-specific XML structures and element names.
+- Ensures compliance with EU-specific procurement rules and regulations.
+
+### Doffin (Database for offentlige innkjøp)
+- Processes XML data from Norway's national database for public procurement notices.
+- Accommodates Doffin-specific XML schemas and data formats.
+- Ensures adherence to Norwegian procurement standards and requirements.
+
+The converter identifies the source of the XML data (TED or Doffin) and applies the appropriate parsing and mapping rules to ensure accurate conversion to OCDS format.
 
 ## Contributing
 
