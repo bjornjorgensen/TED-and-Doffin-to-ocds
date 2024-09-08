@@ -35,6 +35,8 @@ project_root/
 │   └── ...
 ├── utils/
 │   └── date_utils.py
+├── pyproject.toml
+├── poetry.lock
 └── README.md
 ```
 
@@ -50,17 +52,22 @@ project_root/
    cd TED-and-Doffin-to-ocds
    ```
 
-3. Install the required dependencies:
+3. Install Poetry (if not already installed):
    ```
-   pip install -r requirements.txt
+   pip install poetry
+   ```
+
+4. Install the project dependencies:
+   ```
+   poetry install
    ```
 
 ## Usage
 
-To convert an XML file to OCDS JSON format, run the following command:
+To convert an XML file to OCDS JSON format, activate the Poetry environment and run the following command:
 
 ```
-python main.py path/to/your/input.xml ocid_prefix_value
+poetry run python main.py path/to/your/input.xml ocid_prefix_value
 ```
 
 Replace `path/to/your/input.xml` with the path to your input XML file (from either TED or Doffin) and `ocid_prefix_value` with your desired OCID prefix.
@@ -72,7 +79,7 @@ The converted OCDS JSON will be saved in `output.json` in the project root direc
 To run the tests, execute the following command in the project root directory:
 
 ```
-pytest
+poetry run pytest
 ```
 
 ## OCDS eForm Profile Mapping
