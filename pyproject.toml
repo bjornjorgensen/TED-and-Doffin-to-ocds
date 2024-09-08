@@ -34,11 +34,11 @@ target-version = "py312"
 select = [
     # Pyflakes
     "F",
-    # Pycodestyle
+    # Pycodestyle (excluding E501 for line length)
     "E",
-    # isort
+    # isort (excluding I001 for import sorting)
     "I",
-    # pep8-naming
+    # pep8-naming (excluding N999 for module naming)
     "N",
     # flake8-bugbear
     "B",
@@ -53,7 +53,11 @@ select = [
     # pyupgrade
     "UP",
 ]
-ignore = []
+ignore = [
+    "E501",  # Line too long
+    "I001",  # Import block is un-sorted or un-formatted
+    "N999",  # Invalid module name
+]
 
 [tool.ruff.format]
 quote-style = "double"
