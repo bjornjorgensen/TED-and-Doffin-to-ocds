@@ -1,1 +1,182 @@
-{"initiationType": "tender", "withheldInformation": [{"id": "no-awa-rea-RES-0001", "field": "no-awa-rea", "name": "Not Awarded Reason"}, {"id": "no-awa-rea-RES-0002", "field": "no-awa-rea", "name": "Not Awarded Reason"}]}
+{
+    "id": "2022-319091",
+    "initiationType": "tender",
+    "tender": {
+        "legalBasis": {
+            "scheme": "CELEX",
+            "id": "32014L0024"
+        },
+        "status": "complete",
+        "id": "2022-319091",
+        "lots": [
+            {
+                "id": "LOT-0000",
+                "submissionTerms": {
+                    "electronicSubmissionPolicy": "not-allowed"
+                },
+                "title": "Anskaffelse - Bedriftshelsetjeneste Søre Sunnmøre, 2022",
+                "mainProcurementCategory": "services",
+                "description": "Gjennom denne anskaffelsen ønsker deltagende kommuner å inngå rammeavtale med én Leverandør. Formålet med Avtalen er å dekke Kundenes behov for bedriftshelsetjenester. Leverandør skal være en ressurs, og en rådgivende instans i forhold til helse-, miljø- og sikkerhetsarbeid, og skal bidra til at ledere, på alle nivå kan ivareta sitt HMS- ansvar. Leverandør skal være en støtte for kommunen(e), og Oppdragsgiver ønsker en bedriftshelsetjeneste hvor det legges vekt på utvikling, og støtte av kommunens systematiske HMS -arbeid, forebyggende arbeid og informasjon, samt råd og veiledning både på individ- og virksomhetsnivå. Denne konkurransen gjennomføres etter forskriften del I og IV, og følger prosedyrene etter del II, åpen tilbudskonkurranse. Kunngjøring gjennomføres etter del FOA III.",
+                "hasAccessibilityCriteria": false
+            }
+        ],
+        "title": "Anskaffelse - Bedriftshelsetjeneste Søre Sunnmøre, 2022",
+        "mainProcurementCategory": "services",
+        "description": "Gjennom denne anskaffelsen ønsker deltagende kommuner å inngå rammeavtale med én Leverandør. Formålet med Avtalen er å dekke Kundenes behov for bedriftshelsetjenester. Leverandør skal være en ressurs, og en rådgivende instans i forhold til helse-, miljø- og sikkerhetsarbeid, og skal bidra til at ledere, på alle nivå kan ivareta sitt HMS- ansvar. Denne konkurransen gjennomføres etter forskriften del I og IV, og følger prosedyrene etter del II, åpen tilbudskonkurranse. Kunngjøring gjennomføres etter del FOA III.",
+        "items": [
+            {
+                "id": "1",
+                "classification": {
+                    "scheme": "CPV",
+                    "id": "85147000"
+                },
+                "relatedLot": "LOT-0000"
+            }
+        ],
+        "deliveryAddresses": [
+            {
+                "region": "NO0A3"
+            }
+        ]
+    },
+    "tag": [
+        "contract",
+        "award"
+    ],
+    "date": "2022-08-25T12:00:00+02:00",
+    "parties": [
+        {
+            "id": "ORG-0001",
+            "roles": [
+                "buyer"
+            ],
+            "details": {
+                "classifications": [
+                    {
+                        "scheme": "COFOG",
+                        "id": "01",
+                        "description": "General public services"
+                    },
+                    {
+                        "scheme": "TED_CA_TYPE",
+                        "id": "ra",
+                        "description": "Regional authority"
+                    }
+                ],
+                "url": "https://alesund.kommune.no/"
+            },
+            "name": "Ålesund kommune",
+            "additionalIdentifiers": [
+                {
+                    "id": "920 415 288",
+                    "scheme": "GB-COH"
+                }
+            ],
+            "contactPoint": {
+                "name": "Gina Olsnes",
+                "email": "gina.olsnes@alesund.kommune.no"
+            },
+            "address": {
+                "streetAddress": "Keiser Wilhelms gate 11",
+                "postalCode": "6003",
+                "locality": "Ålesund",
+                "country": "NO"
+            }
+        },
+        {
+            "id": "ORG-0002",
+            "name": "AVONOVA HELSE AS",
+            "roles": [
+                "supplier",
+                "tenderer"
+            ],
+            "additionalIdentifiers": [
+                {
+                    "id": "884 039 312",
+                    "scheme": "GB-COH"
+                }
+            ],
+            "details": {
+                "url": "http://www.staminahelse.no"
+            },
+            "address": {
+                "postalCode": "0663",
+                "locality": "Oslo",
+                "country": "NO"
+            }
+        },
+        {
+            "id": "ORG-0003",
+            "name": "Møre og Romsdal tingrett",
+            "address": {
+                "locality": "Ålesund",
+                "country": "NO"
+            },
+            "roles": [
+                "reviewBody"
+            ]
+        }
+    ],
+    "awards": [
+        {
+            "id": "RES-0001",
+            "relatedLots": [
+                "LOT-0000"
+            ],
+            "status": "active",
+            "statusDetails": "At least one winner was chosen.",
+            "suppliers": [
+                {
+                    "id": "ORG-0002"
+                }
+            ],
+            "value": {
+                "amount": 17000000.0,
+                "currency": "NOK"
+            },
+            "relatedBids": [
+                "TEN-0001"
+            ]
+        }
+    ],
+    "bids": {
+        "details": [
+            {
+                "id": "TEN-0001",
+                "relatedLots": [
+                    "LOT-0000"
+                ],
+                "value": {
+                    "amount": 17000000.0,
+                    "currency": "NOK"
+                },
+                "tenderers": [
+                    {
+                        "id": "ORG-0002"
+                    }
+                ]
+            }
+        ],
+        "statistics": [
+            {
+                "id": "1",
+                "value": 2,
+                "measure": "bids",
+                "relatedLots": [
+                    "LOT-0000"
+                ]
+            }
+        ]
+    },
+    "description": "Mercell kunngjøring: https://opic.com/id/afvrdrflan",
+    "contracts": [
+        {
+            "id": "CON-0001",
+            "relatedBids": [
+                "TEN-0001"
+            ],
+            "awardID": "RES-0001"
+        }
+    ],
+    "language": "nb"
+}
