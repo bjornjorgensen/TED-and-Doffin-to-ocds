@@ -601,7 +601,10 @@ from converters.BT_5071_Lot import (
     parse_place_performance_country_subdivision,
     merge_place_performance_country_subdivision,
 )
-from converters.BT_5071_Part import parse_part_place_performance_country_subdivision, merge_part_place_performance_country_subdivision
+from converters.BT_5071_Part import (
+    parse_part_place_performance_country_subdivision,
+    merge_part_place_performance_country_subdivision,
+)
 from converters.BT_5071_Procedure import (
     parse_procedure_place_performance_country_subdivision,
     merge_procedure_place_performance_country_subdivision,
@@ -650,7 +653,10 @@ from converters.BT_510c_Organization_TouchPoint import (
 )
 from converters.BT_510c_UBO import parse_ubo_streetline2, merge_ubo_streetline2
 
-from converters.BT_5101_Lot import parse_place_performance_street_lot, merge_place_performance_street_lot
+from converters.BT_5101_Lot import (
+    parse_place_performance_street_lot,
+    merge_place_performance_street_lot,
+)
 from converters.BT_5101a_Part import (
     parse_part_place_performance_street,
     merge_part_place_performance_street,
@@ -3091,7 +3097,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_part_place_performance_country_subdivision],
         merge_part_place_performance_country_subdivision,
-        "Place Performance Country Subdivision Part (BT-5071)"
+        "Place Performance Country Subdivision Part (BT-5071)",
     )
 
     # Process BT-5071-Procedure
@@ -3226,7 +3232,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_place_performance_street_lot],
         merge_place_performance_street_lot,
-        "Place Performance Street Lot (BT-5101)"
+        "Place Performance Street Lot (BT-5101)",
     )
 
     # Process BT-5101(a)-Part
@@ -3247,7 +3253,6 @@ def main(xml_path, ocid_prefix):
         "BT-5101(a)-Procedure (Procedure Place Performance Street)",
     )
 
-
     # Process BT-5101(b)-Part
     process_bt_section(
         release_json,
@@ -3265,8 +3270,6 @@ def main(xml_path, ocid_prefix):
         merge_procedure_place_performance_streetline1,
         "BT-5101(b)-Procedure (Procedure Place Performance Streetline 1)",
     )
-
-    
 
     # Process BT-5101(c)-Part
     process_bt_section(
@@ -5285,8 +5288,8 @@ def main(xml_path, ocid_prefix):
 
 if __name__ == "__main__":
     # Path to the XML file
-    xml_path = 'xmlfile/2022-319091.xml'
-    #xml_path = "bt_198-106.xml"
+    xml_path = "xmlfile/2022-319091.xml"
+    # xml_path = "bt_198-106.xml"
     # Prefix for OCID
     ocid_prefix = "ocid_prefix_value"
 
