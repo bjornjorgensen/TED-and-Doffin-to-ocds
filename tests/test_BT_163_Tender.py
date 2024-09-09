@@ -49,7 +49,7 @@ def test_bt_163_tender_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "awards" in result, "Expected 'awards' in result"
@@ -67,7 +67,7 @@ def test_bt_163_tender_integration(tmp_path):
     assert (
         award["valueCalculationMethod"]
         == "The awarded value takes into account the growing revenue expected from fees."
-    ), f"Unexpected valueCalculationMethod"
+    ), "Unexpected valueCalculationMethod"
 
 
 if __name__ == "__main__":

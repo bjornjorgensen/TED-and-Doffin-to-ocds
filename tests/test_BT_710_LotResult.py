@@ -1,5 +1,3 @@
-import pytest
-from lxml import etree
 from converters.BT_710_LotResult import (
     parse_tender_value_lowest,
     merge_tender_value_lowest,

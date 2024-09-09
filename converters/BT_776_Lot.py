@@ -2,7 +2,6 @@
 
 import logging
 from lxml import etree
-from typing import Dict, Optional, Union, List
 
 logger = logging.getLogger(__name__)
 
@@ -14,7 +13,7 @@ INNOVATIVE_ACQUISITION_MAPPING = {
 }
 
 
-def parse_procurement_innovation(xml_content: Union[str, bytes]) -> Optional[Dict]:
+def parse_procurement_innovation(xml_content: str | bytes) -> dict | None:
     """
     Parse the XML content to extract the procurement of innovation information for each lot.
 
@@ -56,15 +55,15 @@ def parse_procurement_innovation(xml_content: Union[str, bytes]) -> Optional[Dic
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    result: Dict[str, Dict] = {"tender": {"lots": []}}
+    result: dict[str, dict] = {"tender": {"lots": []}}
 
-    lots: List[etree._Element] = root.xpath(
+    lots: list[etree._Element] = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
     )
 
     for lot in lots:
         lot_id: str = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        innovative_acquisitions: List[str] = lot.xpath(
+        innovative_acquisitions: list[str] = lot.xpath(
             "cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='innovative-acquisition']/cbc:ProcurementTypeCode/text()",
             namespaces=namespaces,
         )
@@ -84,7 +83,7 @@ def parse_procurement_innovation(xml_content: Union[str, bytes]) -> Optional[Dic
 
 
 def merge_procurement_innovation(
-    release_json: Dict, procurement_innovation_data: Optional[Dict]
+    release_json: dict, procurement_innovation_data: dict | None
 ) -> None:
     """
     Merge the parsed procurement of innovation data into the main OCDS release JSON.
@@ -100,11 +99,11 @@ def merge_procurement_innovation(
         logger.warning("No procurement of innovation data to merge")
         return
 
-    tender: Dict = release_json.setdefault("tender", {})
-    existing_lots: List[Dict] = tender.setdefault("lots", [])
+    tender: dict = release_json.setdefault("tender", {})
+    existing_lots: list[dict] = tender.setdefault("lots", [])
 
     for new_lot in procurement_innovation_data["tender"]["lots"]:
-        existing_lot: Optional[Dict] = next(
+        existing_lot: dict | None = next(
             (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
         )
         if existing_lot:

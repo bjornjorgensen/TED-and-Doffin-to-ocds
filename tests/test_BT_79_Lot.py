@@ -1,7 +1,6 @@
 # tests/test_BT_79_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_79_Lot import (
     parse_performing_staff_qualification,
     merge_performing_staff_qualification,
@@ -98,7 +97,7 @@ def test_bt_79_lot_performing_staff_qualification_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result

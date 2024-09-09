@@ -1,7 +1,6 @@
 # tests/test_BT_777_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_777_Lot import (
     parse_strategic_procurement_description,
     merge_strategic_procurement_description,
@@ -112,7 +111,7 @@ def test_bt_777_lot_strategic_procurement_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result

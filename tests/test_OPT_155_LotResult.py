@@ -1,7 +1,6 @@
 # tests/test_OPT_155_LotResult.py
 
 import pytest
-from lxml import etree
 from converters.OPT_155_LotResult import parse_vehicle_type, merge_vehicle_type
 import json
 import os
@@ -145,7 +144,7 @@ def test_opt_155_lotresult_vehicle_type_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "awards" in result

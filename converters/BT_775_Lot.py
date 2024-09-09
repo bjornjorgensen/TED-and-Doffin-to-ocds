@@ -2,7 +2,6 @@
 
 import logging
 from lxml import etree
-from typing import Dict, Optional, Union, List
 
 logger = logging.getLogger(__name__)
 
@@ -24,7 +23,7 @@ SUSTAINABILITY_STRATEGIES = [
 ]
 
 
-def parse_social_procurement(xml_content: Union[str, bytes]) -> Optional[Dict]:
+def parse_social_procurement(xml_content: str | bytes) -> dict | None:
     """
     Parse the XML content to extract the social procurement information for each lot.
 
@@ -67,15 +66,15 @@ def parse_social_procurement(xml_content: Union[str, bytes]) -> Optional[Dict]:
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    result: Dict[str, Dict] = {"tender": {"lots": []}}
+    result: dict[str, dict] = {"tender": {"lots": []}}
 
-    lots: List[etree._Element] = root.xpath(
+    lots: list[etree._Element] = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
     )
 
     for lot in lots:
         lot_id: str = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        social_objectives: List[str] = lot.xpath(
+        social_objectives: list[str] = lot.xpath(
             "cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='social-objective']/cbc:ProcurementTypeCode/text()",
             namespaces=namespaces,
         )
@@ -95,7 +94,7 @@ def parse_social_procurement(xml_content: Union[str, bytes]) -> Optional[Dict]:
 
 
 def merge_social_procurement(
-    release_json: Dict, social_procurement_data: Optional[Dict]
+    release_json: dict, social_procurement_data: dict | None
 ) -> None:
     """
     Merge the parsed social procurement data into the main OCDS release JSON.
@@ -111,11 +110,11 @@ def merge_social_procurement(
         logger.warning("No social procurement data to merge")
         return
 
-    tender: Dict = release_json.setdefault("tender", {})
-    existing_lots: List[Dict] = tender.setdefault("lots", [])
+    tender: dict = release_json.setdefault("tender", {})
+    existing_lots: list[dict] = tender.setdefault("lots", [])
 
     for new_lot in social_procurement_data["tender"]["lots"]:
-        existing_lot: Optional[Dict] = next(
+        existing_lot: dict | None = next(
             (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
         )
         if existing_lot:

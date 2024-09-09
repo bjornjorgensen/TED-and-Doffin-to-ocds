@@ -27,14 +27,14 @@ def test_bt_09_procedure_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "crossBorderLaw" in result["tender"], "Expected 'crossBorderLaw' in tender"
     assert (
         result["tender"]["crossBorderLaw"] == "Directive XYZ on Cross Border ..."
-    ), f"Unexpected crossBorderLaw value"
+    ), "Unexpected crossBorderLaw value"
 
 
 def test_bt_09_procedure_integration_missing(tmp_path):
@@ -50,7 +50,7 @@ def test_bt_09_procedure_integration_missing(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" not in result or "crossBorderLaw" not in result.get(

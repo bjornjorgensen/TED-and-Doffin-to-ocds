@@ -1,7 +1,6 @@
 # tests/test_BT_98_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_98_Lot import (
     parse_tender_validity_deadline,
     merge_tender_validity_deadline,
@@ -98,7 +97,7 @@ def test_bt_98_lot_tender_validity_deadline_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result

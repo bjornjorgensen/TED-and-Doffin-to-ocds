@@ -1,7 +1,6 @@
 # tests/test_OPT_301_Part_ReviewInfo.py
 
 import pytest
-import json
 import os
 import sys
 

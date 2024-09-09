@@ -43,7 +43,7 @@ def test_bt_151_contract_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "contracts" in result, "Expected 'contracts' in result"
@@ -62,7 +62,7 @@ def test_bt_151_contract_integration(tmp_path):
 
     document = contract["documents"][0]
     assert document["id"] == "1", f"Expected document id '1', got {document['id']}"
-    assert document["url"] == "http://mycontract.acme.com/1234/", f"Unexpected URL"
+    assert document["url"] == "http://mycontract.acme.com/1234/", "Unexpected URL"
     assert (
         document["documentType"] == "contractSigned"
     ), f"Expected documentType 'contractSigned', got {document['documentType']}"

@@ -1,5 +1,3 @@
-import pytest
-from lxml import etree
 from converters.BT_711_LotResult import (
     parse_tender_value_highest,
     merge_tender_value_highest,

@@ -1,7 +1,6 @@
 # tests/test_BT_263_lot.py
 
 import pytest
-import json
 import os
 import sys
 

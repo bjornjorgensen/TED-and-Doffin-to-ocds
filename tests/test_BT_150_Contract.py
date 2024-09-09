@@ -46,7 +46,7 @@ def test_bt_150_contract_identifier_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "contracts" in result, "Expected 'contracts' in result"

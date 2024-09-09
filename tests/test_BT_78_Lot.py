@@ -1,7 +1,6 @@
 # tests/test_BT_78_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_78_Lot import (
     parse_security_clearance_deadline,
     merge_security_clearance_deadline,
@@ -111,7 +110,7 @@ def test_bt_78_lot_security_clearance_deadline_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result

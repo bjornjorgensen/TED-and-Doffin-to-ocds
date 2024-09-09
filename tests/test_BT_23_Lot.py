@@ -1,8 +1,6 @@
 # tests/test_BT_23_Lot.py
 
 import pytest
-from lxml import etree
-import json
 import sys
 import os
 

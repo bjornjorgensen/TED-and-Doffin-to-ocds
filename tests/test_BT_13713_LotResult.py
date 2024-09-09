@@ -51,7 +51,7 @@ def test_bt_13713_lotresult_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "awards" in result, "Expected 'awards' in result"

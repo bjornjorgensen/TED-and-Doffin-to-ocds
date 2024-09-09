@@ -26,9 +26,8 @@ def parse_accelerated_procedure_justification(xml_content):
         return {
             "tender": {"procedure": {"acceleratedRationale": process_reason[0].text}}
         }
-    else:
-        logger.info("No accelerated procedure justification found")
-        return None
+    logger.info("No accelerated procedure justification found")
+    return None
 
 
 def merge_accelerated_procedure_justification(release_json, accelerated_data):

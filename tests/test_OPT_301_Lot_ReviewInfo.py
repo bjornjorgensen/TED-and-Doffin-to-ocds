@@ -1,7 +1,5 @@
 # tests/test_OPT_301_Lot_ReviewInfo.py
 
-import pytest
-from lxml import etree
 from converters.OPT_301_Lot_ReviewInfo import (
     parse_review_info_identifier,
     merge_review_info_identifier,

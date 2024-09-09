@@ -44,7 +44,7 @@ def test_bt_197_bt_144_lotresult_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "withheldInformation" in result, "Expected 'withheldInformation' in result"
@@ -122,7 +122,7 @@ def test_bt_197_bt_144_lotresult_multiple_lots(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "withheldInformation" in result, "Expected 'withheldInformation' in result"
@@ -143,7 +143,7 @@ def test_bt_197_bt_144_lotresult_multiple_lots(tmp_path):
         },
     ]
 
-    for withheld_info, expected in zip(result["withheldInformation"], expected_data):
+    for withheld_info, expected in zip(result["withheldInformation"], expected_data, strict=False):
         assert (
             withheld_info["id"] == expected["id"]
         ), f"Expected id '{expected['id']}', got {withheld_info['id']}"

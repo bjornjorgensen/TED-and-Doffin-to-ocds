@@ -64,8 +64,7 @@ def merge_part_place_performance_country_subdivision(release_json, part_data):
         if existing_address:
             # Address with this region already exists, no need to update
             continue
-        else:
-            tender_delivery_addresses.append(new_address)
+        tender_delivery_addresses.append(new_address)
 
     logger.info(
         f"Merged Part Place Performance Country Subdivision data for {len(part_data['tender']['deliveryAddresses'])} addresses"

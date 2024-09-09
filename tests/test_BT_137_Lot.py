@@ -1,7 +1,6 @@
 # tests/test_BT_137_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_137_Lot import (
     parse_purpose_lot_identifier,
     merge_purpose_lot_identifier,
@@ -73,7 +72,7 @@ def test_bt_137_lot_purpose_lot_identifier_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result

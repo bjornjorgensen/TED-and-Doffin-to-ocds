@@ -1,7 +1,6 @@
 # tests/test_BT_712b_LotResult.py
 
 import pytest
-from lxml import etree
 from converters.BT_712b_LotResult import (
     parse_buyer_review_complainants_bt_712b,
     merge_buyer_review_complainants_bt_712b,

@@ -45,7 +45,7 @@ def test_ubo_first_name_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "parties" in result
@@ -90,7 +90,7 @@ def test_ubo_first_name_no_data(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "parties" not in result or not any(

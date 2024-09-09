@@ -1,7 +1,6 @@
 # tests/test_BT_630_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_630_Lot import (
     parse_deadline_receipt_expressions,
     merge_deadline_receipt_expressions,
@@ -109,7 +108,7 @@ def test_bt_630_lot_deadline_receipt_expressions_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result

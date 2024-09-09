@@ -1,7 +1,6 @@
 # tests/test_BT_16_Organization_TouchPoint.py
 
 import pytest
-from lxml import etree
 from converters.BT_16_Organization_TouchPoint import (
     parse_organization_touchpoint_part_name,
     merge_organization_touchpoint_part_name,
@@ -111,7 +110,7 @@ def test_bt_16_organization_touchpoint_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "parties" in result

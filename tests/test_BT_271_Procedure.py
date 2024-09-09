@@ -1,7 +1,6 @@
 # tests/test_BT_271_Procedure.py
 
 import pytest
-import json
 import os
 import sys
 

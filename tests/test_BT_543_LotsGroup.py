@@ -39,7 +39,7 @@ def test_bt_543_lotsgroup_integration(tmp_path, setup_logging):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")
@@ -96,7 +96,7 @@ def test_bt_543_lotsgroup_multiple_groups(tmp_path, setup_logging):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")
@@ -145,7 +145,7 @@ def test_bt_543_lotsgroup_missing_calculation_expression(tmp_path, setup_logging
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")
@@ -188,7 +188,7 @@ def test_bt_543_lotsgroup_empty_calculation_expression(tmp_path, setup_logging):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")

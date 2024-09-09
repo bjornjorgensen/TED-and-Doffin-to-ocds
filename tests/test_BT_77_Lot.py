@@ -1,7 +1,6 @@
 # tests/test_BT_77_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_77_Lot import parse_financial_terms, merge_financial_terms
 import json
 import os
@@ -98,7 +97,7 @@ def test_bt_77_lot_financial_terms_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result

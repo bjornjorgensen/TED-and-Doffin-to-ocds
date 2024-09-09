@@ -2,12 +2,11 @@
 
 import logging
 from lxml import etree
-from typing import Dict, Union, Optional
 
 logger = logging.getLogger(__name__)
 
 
-def parse_tenderer_legal_form(xml_content: Union[str, bytes]) -> Optional[Dict]:
+def parse_tenderer_legal_form(xml_content: str | bytes) -> dict | None:
     """
     Parse the XML content to extract the tenderer legal form description for each lot.
 
@@ -29,7 +28,7 @@ def parse_tenderer_legal_form(xml_content: Union[str, bytes]) -> Optional[Dict]:
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    result: Dict[str, Dict[str, list]] = {"tender": {"lots": []}}
+    result: dict[str, dict[str, list]] = {"tender": {"lots": []}}
 
     lots = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
@@ -52,7 +51,7 @@ def parse_tenderer_legal_form(xml_content: Union[str, bytes]) -> Optional[Dict]:
     return result if result["tender"]["lots"] else None
 
 
-def merge_tenderer_legal_form(release_json: Dict, parsed_data: Optional[Dict]) -> None:
+def merge_tenderer_legal_form(release_json: dict, parsed_data: dict | None) -> None:
     """
     Merge the parsed tenderer legal form data into the main OCDS release JSON.
 

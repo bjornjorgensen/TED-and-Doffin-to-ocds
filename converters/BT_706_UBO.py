@@ -1,7 +1,6 @@
 # converters/BT_706_UBO.py
 
 import logging
-from typing import Optional, Dict
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -58,7 +57,7 @@ code_mapping = {
 }
 
 
-def parse_ubo_nationality(xml_content: str) -> Optional[Dict]:
+def parse_ubo_nationality(xml_content: str) -> dict | None:
     """
     Parse the XML content to extract the Ultimate Beneficial Owner's nationality details.
 
@@ -112,7 +111,7 @@ def parse_ubo_nationality(xml_content: str) -> Optional[Dict]:
 
 
 def merge_ubo_nationality(
-    release_json: Dict, ubo_nationality_data: Optional[Dict]
+    release_json: dict, ubo_nationality_data: dict | None
 ) -> None:
     """
     Merge the parsed UBO nationality data into the main OCDS release JSON.

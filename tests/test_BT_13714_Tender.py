@@ -1,6 +1,5 @@
 # tests/test_BT_13714_Tender.py
 
-import pytest
 from lxml import etree
 from converters.BT_13714_Tender import (
     parse_tender_lot_identifier,

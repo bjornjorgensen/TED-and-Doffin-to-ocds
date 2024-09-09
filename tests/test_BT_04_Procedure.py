@@ -1,7 +1,5 @@
 # tests/test_BT_04_Procedure.py
 
-import pytest
-from lxml import etree
 from converters.BT_04_Procedure import (
     parse_procedure_identifier,
     merge_procedure_identifier,

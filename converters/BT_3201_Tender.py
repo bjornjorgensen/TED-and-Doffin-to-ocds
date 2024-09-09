@@ -22,9 +22,8 @@ ISO_3166_1_ALPHA_2 = {
 def determine_scheme(country_code, system):
     if country_code in ISO_3166_1_ALPHA_2:
         return f"{country_code}-{system}"
-    else:
-        logger.warning(f"Unknown country code: {country_code}. Using default scheme.")
-        return f"XX-{system}"  # Default scheme if country code is not recognized
+    logger.warning(f"Unknown country code: {country_code}. Using default scheme.")
+    return f"XX-{system}"  # Default scheme if country code is not recognized
 
 
 def parse_tender_identifier(xml_content):

@@ -2,12 +2,11 @@
 
 import logging
 from lxml import etree
-from typing import Dict, Optional, Union
 
 logger = logging.getLogger(__name__)
 
 
-def parse_subcontracting(xml_content: Union[str, bytes]) -> Optional[Dict]:
+def parse_subcontracting(xml_content: str | bytes) -> dict | None:
     """
     Parse the XML content to extract the subcontracting information for each tender.
 
@@ -35,7 +34,7 @@ def parse_subcontracting(xml_content: Union[str, bytes]) -> Optional[Dict]:
         xml_content = xml_content.encode("utf-8")
 
     root: etree._Element = etree.fromstring(xml_content)
-    namespaces: Dict[str, str] = {
+    namespaces: dict[str, str] = {
         "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
         "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
@@ -43,7 +42,7 @@ def parse_subcontracting(xml_content: Union[str, bytes]) -> Optional[Dict]:
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
     }
 
-    result: Dict[str, Dict] = {"bids": {"details": []}}
+    result: dict[str, dict] = {"bids": {"details": []}}
 
     tenders: list = root.xpath("//efac:LotTender", namespaces=namespaces)
 
@@ -68,7 +67,7 @@ def parse_subcontracting(xml_content: Union[str, bytes]) -> Optional[Dict]:
 
 
 def merge_subcontracting(
-    release_json: Dict, subcontracting_data: Optional[Dict]
+    release_json: dict, subcontracting_data: dict | None
 ) -> None:
     """
     Merge the parsed subcontracting data into the main OCDS release JSON.
@@ -84,11 +83,11 @@ def merge_subcontracting(
         logger.warning("No subcontracting data to merge")
         return
 
-    bids: Dict = release_json.setdefault("bids", {})
+    bids: dict = release_json.setdefault("bids", {})
     existing_details: list = bids.setdefault("details", [])
 
     for new_bid in subcontracting_data["bids"]["details"]:
-        existing_bid: Optional[Dict] = next(
+        existing_bid: dict | None = next(
             (bid for bid in existing_details if bid["id"] == new_bid["id"]), None
         )
         if existing_bid:

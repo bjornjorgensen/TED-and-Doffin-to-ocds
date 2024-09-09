@@ -65,9 +65,8 @@ def parse_procedure_legal_basis(xml_content):
     if result["tender"]["legalBasis"]:
         logger.info("Parsed Procedure Legal Basis data")
         return result
-    else:
-        logger.info("No Procedure Legal Basis data found")
-        return None
+    logger.info("No Procedure Legal Basis data found")
+    return None
 
 
 def merge_procedure_legal_basis(release_json, legal_basis_data):

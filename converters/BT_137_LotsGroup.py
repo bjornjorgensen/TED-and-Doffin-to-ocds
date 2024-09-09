@@ -30,9 +30,8 @@ def parse_lots_group_identifier(xml_content):
                 ]
             }
         }
-    else:
-        logger.info("No lots group identifiers found")
-        return None
+    logger.info("No lots group identifiers found")
+    return None
 
 
 def merge_lots_group_identifier(release_json, lots_group_data):

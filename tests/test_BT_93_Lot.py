@@ -1,7 +1,6 @@
 # tests/test_BT_93_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_93_Lot import parse_electronic_payment, merge_electronic_payment
 import json
 import os
@@ -84,7 +83,7 @@ def test_bt_93_lot_electronic_payment_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result

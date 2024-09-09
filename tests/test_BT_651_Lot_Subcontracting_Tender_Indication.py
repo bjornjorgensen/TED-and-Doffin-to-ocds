@@ -1,7 +1,5 @@
 # tests/test_BT_651_Lot_Subcontracting_Tender_Indication.py
 
-import pytest
-from lxml import etree
 from converters.BT_651_Lot_Subcontracting_Tender_Indication import (
     parse_subcontracting_tender_indication,
     merge_subcontracting_tender_indication,
@@ -9,7 +7,7 @@ from converters.BT_651_Lot_Subcontracting_Tender_Indication import (
 
 
 def test_parse_subcontracting_tender_indication():
-    xml_content = """
+    xml_content = b"""
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
@@ -33,7 +31,7 @@ def test_parse_subcontracting_tender_indication():
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
     </root>
-    """.encode("utf-8")
+    """
 
     result = parse_subcontracting_tender_indication(xml_content)
 
@@ -45,14 +43,14 @@ def test_parse_subcontracting_tender_indication():
 
 
 def test_parse_subcontracting_tender_indication_no_data():
-    xml_content = """
+    xml_content = b"""
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
         </cac:ProcurementProjectLot>
     </root>
-    """.encode("utf-8")
+    """
 
     result = parse_subcontracting_tender_indication(xml_content)
 

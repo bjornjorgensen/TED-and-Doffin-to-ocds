@@ -1,7 +1,6 @@
 # tests/test_BT_774_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_774_Lot import (
     parse_green_procurement,
     merge_green_procurement,
@@ -108,7 +107,7 @@ def test_bt_774_lot_green_procurement_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result

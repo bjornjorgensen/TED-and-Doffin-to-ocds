@@ -43,7 +43,7 @@ def test_bt_111_lot_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"

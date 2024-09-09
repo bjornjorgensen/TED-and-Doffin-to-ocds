@@ -2,12 +2,11 @@
 
 import logging
 from lxml import etree
-from typing import Dict, Optional
 
 logger = logging.getLogger(__name__)
 
 
-def parse_tender_value(xml_content: str) -> Optional[Dict]:
+def parse_tender_value(xml_content: str) -> dict | None:
     """
     Parse the XML content to extract the tender value information.
 
@@ -79,7 +78,7 @@ def parse_tender_value(xml_content: str) -> Optional[Dict]:
     return result if result["bids"]["details"] or result["awards"] else None
 
 
-def merge_tender_value(release_json: Dict, tender_value_data: Optional[Dict]) -> None:
+def merge_tender_value(release_json: dict, tender_value_data: dict | None) -> None:
     """
     Merge the parsed tender value data into the main OCDS release JSON.
 

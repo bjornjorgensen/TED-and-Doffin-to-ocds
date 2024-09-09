@@ -2,7 +2,6 @@
 
 import logging
 from lxml import etree
-from datetime import datetime, timezone
 
 logger = logging.getLogger(__name__)
 

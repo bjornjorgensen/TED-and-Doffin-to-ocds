@@ -2,14 +2,13 @@
 
 import logging
 from lxml import etree
-from typing import Dict, Union, List, Optional
 
 logger = logging.getLogger(__name__)
 
 
 def parse_selection_criteria_number_threshold(
-    xml_content: Union[str, bytes],
-) -> Optional[Dict]:
+    xml_content: str | bytes,
+) -> dict | None:
     """
     Parse the XML content to extract the selection criteria number threshold information.
 
@@ -31,12 +30,12 @@ def parse_selection_criteria_number_threshold(
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    threshold_mapping: Dict[str, str] = {
+    threshold_mapping: dict[str, str] = {
         "min-score": "minimumScore",
         "max-bids": "maximumBids",
     }
 
-    result: Dict[str, Dict[str, List[Dict]]] = {"tender": {"lots": []}}
+    result: dict[str, dict[str, list[dict]]] = {"tender": {"lots": []}}
 
     lots = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
@@ -49,13 +48,13 @@ def parse_selection_criteria_number_threshold(
             namespaces=namespaces,
         )
 
-        lot_data: Dict[str, Union[str, Dict[str, List]]] = {
+        lot_data: dict[str, str | dict[str, list]] = {
             "id": lot_id,
             "selectionCriteria": {"criteria": []},
         }
 
         for criterion in criteria:
-            criterion_data: Dict[str, List] = {"numbers": []}
+            criterion_data: dict[str, list] = {"numbers": []}
             parameters = criterion.xpath(
                 ".//efac:CriterionParameter[efbc:ParameterCode/@listName='number-threshold']",
                 namespaces=namespaces,
@@ -65,7 +64,7 @@ def parse_selection_criteria_number_threshold(
                 threshold_code: str = parameter.xpath(
                     "efbc:ParameterCode/text()", namespaces=namespaces
                 )[0]
-                threshold_value: Optional[str] = threshold_mapping.get(threshold_code)
+                threshold_value: str | None = threshold_mapping.get(threshold_code)
 
                 if threshold_value:
                     criterion_data["numbers"].append({"threshold": threshold_value})
@@ -80,7 +79,7 @@ def parse_selection_criteria_number_threshold(
 
 
 def merge_selection_criteria_number_threshold(
-    release_json: Dict, parsed_data: Optional[Dict]
+    release_json: dict, parsed_data: dict | None
 ) -> None:
     """
     Merge the parsed selection criteria number threshold data into the main OCDS release JSON.
@@ -96,7 +95,7 @@ def merge_selection_criteria_number_threshold(
         logger.warning("No Selection Criteria Number Threshold data to merge")
         return
 
-    tender_lots: List[Dict] = release_json.setdefault("tender", {}).setdefault(
+    tender_lots: list[dict] = release_json.setdefault("tender", {}).setdefault(
         "lots", []
     )
 

@@ -2,12 +2,11 @@
 
 import logging
 from lxml import etree
-from typing import Dict, Union, Optional
 
 logger = logging.getLogger(__name__)
 
 
-def parse_pin_competition_termination(xml_content: Union[str, bytes]) -> Optional[Dict]:
+def parse_pin_competition_termination(xml_content: str | bytes) -> dict | None:
     """
     Parse the XML content to extract the PIN competition termination information.
 
@@ -40,7 +39,7 @@ def parse_pin_competition_termination(xml_content: Union[str, bytes]) -> Optiona
 
 
 def merge_pin_competition_termination(
-    release_json: Dict, parsed_data: Optional[Dict]
+    release_json: dict, parsed_data: dict | None
 ) -> None:
     """
     Merge the parsed PIN competition termination data into the main OCDS release JSON.

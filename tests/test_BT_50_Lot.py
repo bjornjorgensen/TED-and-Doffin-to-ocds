@@ -1,7 +1,6 @@
 # tests/test_BT_50_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_50_Lot import parse_minimum_candidates, merge_minimum_candidates
 
 

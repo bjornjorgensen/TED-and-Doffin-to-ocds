@@ -33,7 +33,7 @@ def test_bt_765_part_framework_agreement_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")
@@ -80,7 +80,7 @@ def test_bt_765_part_framework_agreement_none(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")

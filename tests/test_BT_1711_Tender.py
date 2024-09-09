@@ -1,6 +1,5 @@
 # tests/test_BT_1711_Tender.py
 
-import pytest
 from converters.BT_1711_Tender import parse_tender_ranked, merge_tender_ranked
 
 
