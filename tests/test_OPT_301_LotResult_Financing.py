@@ -1,7 +1,6 @@
 # tests/test_OPT_301_LotResult_Financing.py
 
 import pytest
-import json
 import os
 import sys
 

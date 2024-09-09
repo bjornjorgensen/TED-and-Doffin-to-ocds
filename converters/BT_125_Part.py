@@ -1,7 +1,8 @@
 # converters/BT_125_Part.py
 
 from lxml import etree
-import logging, json
+import logging
+import json
 
 logger = logging.getLogger(__name__)
 

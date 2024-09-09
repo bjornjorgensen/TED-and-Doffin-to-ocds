@@ -1,13 +1,12 @@
 # converters/BT_766_PartDynamicPurchasingSystem.py
 
 import logging
-from typing import Optional, Dict
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_part_dynamic_purchasing_system(xml_content: str) -> Optional[Dict]:
+def parse_part_dynamic_purchasing_system(xml_content: str) -> dict | None:
     """
     Parse the XML content to extract the Dynamic Purchasing System details for the Part.
 
@@ -52,7 +51,7 @@ def parse_part_dynamic_purchasing_system(xml_content: str) -> Optional[Dict]:
 
 
 def merge_part_dynamic_purchasing_system(
-    release_json: Dict, part_dynamic_purchasing_system_data: Optional[Dict]
+    release_json: dict, part_dynamic_purchasing_system_data: dict | None
 ) -> None:
     """
     Merge the parsed Part Dynamic Purchasing System data into the main OCDS release JSON.

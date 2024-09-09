@@ -1,7 +1,6 @@
 # tests/test_BT_132_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_132_Lot import (
     parse_lot_public_opening_date,
     merge_lot_public_opening_date,

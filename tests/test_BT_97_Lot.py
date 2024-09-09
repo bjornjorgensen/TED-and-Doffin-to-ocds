@@ -1,7 +1,6 @@
 # tests/test_BT_97_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_97_Lot import parse_submission_language, merge_submission_language
 import json
 import os
@@ -83,7 +82,7 @@ def test_bt_97_lot_submission_language_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result

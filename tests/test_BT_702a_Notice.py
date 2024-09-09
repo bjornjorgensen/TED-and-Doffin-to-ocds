@@ -21,7 +21,7 @@ def test_bt_702a_notice_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "language" in result, "Expected 'language' in result"
@@ -41,7 +41,7 @@ def test_bt_702a_notice_integration_unknown_language(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert (

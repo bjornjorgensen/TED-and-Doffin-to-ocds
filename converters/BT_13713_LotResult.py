@@ -31,9 +31,8 @@ def parse_lot_result_identifier(xml_content):
 
     if awards:
         return {"awards": awards}
-    else:
-        logger.info("No lot result identifiers found")
-        return None
+    logger.info("No lot result identifiers found")
+    return None
 
 
 def merge_lot_result_identifier(release_json, lot_result_data):

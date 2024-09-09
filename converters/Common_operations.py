@@ -1,7 +1,5 @@
 # converters/Common_operations.py
 import json
-import uuid
-from datetime import datetime
 from lxml import etree
 
 

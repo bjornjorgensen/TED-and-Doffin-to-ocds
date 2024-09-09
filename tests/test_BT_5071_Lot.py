@@ -124,7 +124,7 @@ def test_bt_5071_lot_integration(tmp_path, setup_logging):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")
@@ -170,7 +170,7 @@ def test_bt_5071_lot_missing_data(tmp_path, setup_logging):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")

@@ -1,5 +1,3 @@
-import pytest
-from lxml import etree
 from converters.BT_759_LotResult import (
     parse_received_submissions_count,
     merge_received_submissions_count,

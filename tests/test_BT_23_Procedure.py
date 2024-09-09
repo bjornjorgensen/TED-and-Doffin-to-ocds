@@ -1,7 +1,6 @@
 # tests/test_BT_23_Procedure.py
 
 import pytest
-from lxml import etree
 import sys
 import os
 

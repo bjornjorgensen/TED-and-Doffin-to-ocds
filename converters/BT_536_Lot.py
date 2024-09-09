@@ -57,7 +57,7 @@ def parse_lot_start_date(xml_content):
 
 
 def merge_lot_start_date(release_json, lot_start_date_data):
-    logger.info(f"Starting merge_lot_start_date function")
+    logger.info("Starting merge_lot_start_date function")
     logger.info(f"Merging lot start date data: {lot_start_date_data}")
     if not lot_start_date_data:
         logger.warning("No lot start date data to merge")

@@ -1,7 +1,6 @@
 # tests/test_BT_46_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_46_Lot import parse_jury_member_name, merge_jury_member_name
 
 

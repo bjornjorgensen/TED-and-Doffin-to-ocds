@@ -1,7 +1,6 @@
 # tests/test_BT_719_notice.py
 
 import pytest
-from lxml import etree
 from converters.BT_719_notice import (
     parse_procurement_documents_change_date,
     merge_procurement_documents_change_date,

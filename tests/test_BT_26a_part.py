@@ -1,7 +1,6 @@
 # tests/test_BT_26a_part.py
 
 import pytest
-import json
 import os
 import sys
 

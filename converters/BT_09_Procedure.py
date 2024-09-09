@@ -24,9 +24,8 @@ def parse_cross_border_law(xml_content):
 
     if cross_border_law:
         return {"tender": {"crossBorderLaw": cross_border_law[0]}}
-    else:
-        logger.warning("No Cross Border Law (BT-09) found in the XML")
-        return None
+    logger.warning("No Cross Border Law (BT-09) found in the XML")
+    return None
 
 
 def merge_cross_border_law(release_json, cross_border_law_data):

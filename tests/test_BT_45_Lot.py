@@ -1,6 +1,5 @@
 # tests/test_BT_45_Lot.py
 
-import pytest
 from lxml import etree
 from converters.BT_45_Lot import parse_lot_rewards_other, merge_lot_rewards_other
 

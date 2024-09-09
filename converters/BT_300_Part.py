@@ -50,4 +50,4 @@ def merge_part_additional_info(release_json, part_additional_info):
 
     release_json["description"] = description
 
-    logger.info(f"Merged additional information for the release description")
+    logger.info("Merged additional information for the release description")

@@ -1,13 +1,12 @@
 # converters/BT_763_LotsAllRequired.py
 
 import logging
-from typing import Optional, Dict
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_lots_all_required(xml_content: str) -> Optional[Dict]:
+def parse_lots_all_required(xml_content: str) -> dict | None:
     """
     Parse the XML content to extract the PartPresentationCode for Lots All Required.
 
@@ -41,7 +40,7 @@ def parse_lots_all_required(xml_content: str) -> Optional[Dict]:
 
 
 def merge_lots_all_required(
-    release_json: Dict, lots_all_required_data: Optional[Dict]
+    release_json: dict, lots_all_required_data: dict | None
 ) -> None:
     """
     Merge the parsed Lots All Required data into the main OCDS release JSON.

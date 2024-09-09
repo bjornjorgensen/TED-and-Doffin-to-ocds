@@ -1,7 +1,6 @@
 # tests/test_BT_47_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_47_Lot import parse_participant_name, merge_participant_name
 
 

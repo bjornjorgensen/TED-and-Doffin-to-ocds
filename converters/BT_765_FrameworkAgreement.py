@@ -1,13 +1,12 @@
 # converters/BT_765_FrameworkAgreement.py
 
 import logging
-from typing import Optional, Dict, List
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_framework_agreement(xml_content: str) -> Optional[Dict[str, Dict]]:
+def parse_framework_agreement(xml_content: str) -> dict[str, dict] | None:
     """
     Parse the XML content to extract the Framework Agreement details for each lot.
 
@@ -60,7 +59,7 @@ def parse_framework_agreement(xml_content: str) -> Optional[Dict[str, Dict]]:
 
 
 def merge_framework_agreement(
-    release_json: Dict, framework_agreement_data: Optional[Dict[str, Dict]]
+    release_json: dict, framework_agreement_data: dict[str, dict] | None
 ) -> None:
     """
     Merge the parsed Framework Agreement data into the main OCDS release JSON.

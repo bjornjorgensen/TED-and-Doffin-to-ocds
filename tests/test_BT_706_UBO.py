@@ -1,5 +1,3 @@
-import pytest
-from lxml import etree
 from converters.BT_706_UBO import parse_ubo_nationality, merge_ubo_nationality
 import json
 import os
@@ -111,7 +109,7 @@ def test_bt_706_ubo_nationality_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "parties" in result

@@ -1,13 +1,12 @@
 # converters/BT_764_SubmissionElectronicCatalogue.py
 
 import logging
-from typing import Optional, Dict, List
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_submission_electronic_catalogue(xml_content: str) -> Optional[List[Dict]]:
+def parse_submission_electronic_catalogue(xml_content: str) -> list[dict] | None:
     """
     Parse the XML content to extract the Submission Electronic Catalogue policy for each lot.
 
@@ -60,7 +59,7 @@ def parse_submission_electronic_catalogue(xml_content: str) -> Optional[List[Dic
 
 
 def merge_submission_electronic_catalogue(
-    release_json: Dict, submission_electronic_catalogue_data: Optional[List[Dict]]
+    release_json: dict, submission_electronic_catalogue_data: list[dict] | None
 ) -> None:
     """
     Merge the parsed Submission Electronic Catalogue data into the main OCDS release JSON.

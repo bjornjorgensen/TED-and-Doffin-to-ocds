@@ -1,7 +1,5 @@
 # tests/test_OPT_301_Lot_TenderReceipt.py
 
-import pytest
-from lxml import etree
 from converters.OPT_301_Lot_TenderReceipt import (
     parse_tender_recipient_identifier,
     merge_tender_recipient_identifier,

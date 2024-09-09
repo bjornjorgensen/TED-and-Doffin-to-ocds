@@ -1,7 +1,6 @@
 # tests/test_OPT_301_Lot_ReviewOrg.py
 
 import pytest
-from lxml import etree
 from converters.OPT_301_Lot_ReviewOrg import (
     parse_review_org_identifier,
     merge_review_org_identifier,

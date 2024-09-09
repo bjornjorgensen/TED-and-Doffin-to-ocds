@@ -26,9 +26,8 @@ def parse_procedure_identifier(xml_content):
     if contract_folder_id_elements:
         contract_folder_id = contract_folder_id_elements[0].text
         return {"tender": {"id": contract_folder_id}}
-    else:
-        logger.info("No Procedure Identifier found")
-        return None
+    logger.info("No Procedure Identifier found")
+    return None
 
 
 def merge_procedure_identifier(release_json, procedure_identifier_data):

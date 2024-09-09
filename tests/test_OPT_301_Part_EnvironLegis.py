@@ -1,7 +1,6 @@
 # tests/test_OPT_301_Part_EnvironLegis.py
 
 import pytest
-import json
 import os
 import sys
 

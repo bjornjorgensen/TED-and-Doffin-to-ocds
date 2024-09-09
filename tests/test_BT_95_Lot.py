@@ -1,7 +1,6 @@
 # tests/test_BT_95_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_95_Lot import (
     parse_recurrence_description,
     merge_recurrence_description,
@@ -88,7 +87,7 @@ def test_bt_95_lot_recurrence_description_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result

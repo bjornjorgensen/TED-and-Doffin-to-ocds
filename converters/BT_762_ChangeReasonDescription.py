@@ -1,13 +1,12 @@
 # converters/BT_762_ChangeReasonDescription.py
 
 import logging
-from typing import List, Dict, Optional
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_change_reason_description(xml_content: str) -> Optional[List[Dict[str, str]]]:
+def parse_change_reason_description(xml_content: str) -> list[dict[str, str]] | None:
     """
     Parse the XML content to extract the change reason description.
 
@@ -45,7 +44,7 @@ def parse_change_reason_description(xml_content: str) -> Optional[List[Dict[str,
 
 
 def merge_change_reason_description(
-    release_json: Dict, change_reason_data: List[Dict[str, str]]
+    release_json: dict, change_reason_data: list[dict[str, str]]
 ) -> None:
     """
     Merge the parsed change reason description data into the main OCDS release JSON.

@@ -2,12 +2,11 @@
 
 import logging
 from lxml import etree
-from typing import Dict, Union, Optional
 
 logger = logging.getLogger(__name__)
 
 
-def parse_accessibility_criteria(xml_content: Union[str, bytes]) -> Optional[Dict]:
+def parse_accessibility_criteria(xml_content: str | bytes) -> dict | None:
     """
     Parse the XML content to extract the accessibility criteria information for each lot.
 
@@ -29,7 +28,7 @@ def parse_accessibility_criteria(xml_content: Union[str, bytes]) -> Optional[Dic
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    result: Dict[str, Dict[str, list]] = {"tender": {"lots": []}}
+    result: dict[str, dict[str, list]] = {"tender": {"lots": []}}
 
     lots = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
@@ -42,7 +41,7 @@ def parse_accessibility_criteria(xml_content: Union[str, bytes]) -> Optional[Dic
             namespaces=namespaces,
         )
 
-        lot_data: Dict[str, Union[str, bool, Optional[str]]] = {
+        lot_data: dict[str, str | bool | str | None] = {
             "id": lot_id,
             "hasAccessibilityCriteria": False,
             "noAccessibilityCriteriaRationale": None,
@@ -63,7 +62,7 @@ def parse_accessibility_criteria(xml_content: Union[str, bytes]) -> Optional[Dic
 
 
 def merge_accessibility_criteria(
-    release_json: Dict, parsed_data: Optional[Dict]
+    release_json: dict, parsed_data: dict | None
 ) -> None:
     """
     Merge the parsed accessibility criteria data into the main OCDS release JSON.

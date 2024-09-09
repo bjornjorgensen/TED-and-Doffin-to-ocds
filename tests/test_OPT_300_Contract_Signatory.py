@@ -1,7 +1,6 @@
 # tests/test_OPT_300_Contract_Signatory.py
 
 import pytest
-import json
 import os
 import sys
 

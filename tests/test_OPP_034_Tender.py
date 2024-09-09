@@ -58,7 +58,7 @@ def test_opp_034_tender_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
@@ -78,10 +78,10 @@ def test_opp_034_tender_integration(tmp_path):
     ), "Expected 'rewards' in penaltiesAndRewards"
     assert lot["penaltiesAndRewards"]["penalties"] == [
         "Penalty for late delivery"
-    ], f"Unexpected penalties"
+    ], "Unexpected penalties"
     assert lot["penaltiesAndRewards"]["rewards"] == [
         "Bonus for early completion"
-    ], f"Unexpected rewards"
+    ], "Unexpected rewards"
 
 
 if __name__ == "__main__":

@@ -1,7 +1,5 @@
 # tests/test_BT_5131_Lot.py
 
-import pytest
-from lxml import etree
 from converters.BT_5131_Lot import (
     parse_place_performance_city,
     merge_place_performance_city,

@@ -38,7 +38,7 @@ def test_bt_125_part_integration(tmp_path, caplog):
     for record in caplog.records:
         print(f"{record.levelname}: {record.message}")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     print("Full result:")

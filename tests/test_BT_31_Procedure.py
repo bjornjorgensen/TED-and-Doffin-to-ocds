@@ -1,7 +1,5 @@
 # tests/test_BT_31_Procedure.py
 
-import pytest
-from lxml import etree
 from converters.BT_31_Procedure import parse_max_lots_allowed, merge_max_lots_allowed
 
 

@@ -73,4 +73,4 @@ def BT_198_merge_unpublished_access_date_BT_09_Procedure(
         else:
             withheld_information.append(item)
 
-    logger.info(f"Merged unpublished access date data")
+    logger.info("Merged unpublished access date data")

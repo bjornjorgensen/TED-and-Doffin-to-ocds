@@ -21,7 +21,7 @@ def test_bt_03_form_type_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tag" in result, "Expected 'tag' in result"
@@ -45,7 +45,7 @@ def test_bt_03_form_type_integration_multiple(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tag" in result, "Expected 'tag' in result"
@@ -70,7 +70,7 @@ def test_bt_03_form_type_integration_invalid(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tag" not in result or "tender" not in result.get(

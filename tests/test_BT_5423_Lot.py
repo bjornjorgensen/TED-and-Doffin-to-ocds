@@ -1,7 +1,5 @@
 # tests/test_BT_5423_Lot.py
 
-import pytest
-from lxml import etree
 from converters.BT_5423_Lot import (
     parse_award_criterion_number_threshold,
     merge_award_criterion_number_threshold,

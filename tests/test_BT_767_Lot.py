@@ -1,7 +1,6 @@
 # tests/test_BT_767_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_767_Lot import parse_electronic_auction, merge_electronic_auction
 import json
 import os
@@ -89,7 +88,7 @@ def test_bt_767_lot_electronic_auction_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result

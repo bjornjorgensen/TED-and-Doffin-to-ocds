@@ -68,4 +68,4 @@ def BT_196_merge_unpublished_justification_BT_09_Procedure(
         else:
             withheld_information.append(item)
 
-    logger.info(f"Merged unpublished justification data")
+    logger.info("Merged unpublished justification data")

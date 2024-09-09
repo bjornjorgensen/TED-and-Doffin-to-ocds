@@ -1,7 +1,6 @@
 # tests/test_BT_01_Procedure.py
 
 import pytest
-from lxml import etree
 from converters.BT_01_Procedure import (
     parse_procedure_legal_basis,
     merge_procedure_legal_basis,

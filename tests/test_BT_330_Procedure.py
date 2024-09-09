@@ -1,7 +1,5 @@
 # tests/test_BT_330_Procedure.py
 
-import pytest
-from lxml import etree
 from converters.BT_330_Procedure import parse_group_identifier, merge_group_identifier
 
 

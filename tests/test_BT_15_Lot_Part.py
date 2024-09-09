@@ -49,7 +49,7 @@ def test_bt_15_lot_part_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
@@ -68,7 +68,7 @@ def test_bt_15_lot_part_integration(tmp_path):
     ), f"Expected documentType 'biddingDocuments', got {lot_document['documentType']}"
     assert (
         lot_document["url"] == "https://mywebsite.com/proc/2019024/accessinfo"
-    ), f"Unexpected URL for lot document"
+    ), "Unexpected URL for lot document"
     assert "relatedLots" in lot_document, "Expected 'relatedLots' in lot document"
     assert lot_document["relatedLots"] == [
         "LOT-0001"
@@ -84,7 +84,7 @@ def test_bt_15_lot_part_integration(tmp_path):
     ), f"Expected documentType 'biddingDocuments', got {part_document['documentType']}"
     assert (
         part_document["url"] == "https://mywebsite.com/proc/2019024/accessinfo-part"
-    ), f"Unexpected URL for part document"
+    ), "Unexpected URL for part document"
     assert (
         "relatedLots" not in part_document
     ), "Unexpected 'relatedLots' in part document"

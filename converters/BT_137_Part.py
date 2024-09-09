@@ -25,9 +25,8 @@ def parse_part_identifier(xml_content):
     if part_ids:
         # We take the first 'Part' ID found, as tender.id should be a single value
         return {"tender": {"id": part_ids[0].text}}
-    else:
-        logger.info("No part identifier found")
-        return None
+    logger.info("No part identifier found")
+    return None
 
 
 def merge_part_identifier(release_json, part_data):

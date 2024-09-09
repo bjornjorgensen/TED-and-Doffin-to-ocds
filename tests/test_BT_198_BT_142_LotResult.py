@@ -1,6 +1,5 @@
 # tests/test_BT_198_BT_142_LotResult.py
 
-import pytest
 import json
 import os
 import sys
@@ -42,7 +41,7 @@ def test_bt_198_bt_142_lotresult_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "withheldInformation" in result, "Expected 'withheldInformation' in result"
@@ -101,7 +100,7 @@ def test_bt_198_bt_142_lotresult_multiple_lots(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "withheldInformation" in result, "Expected 'withheldInformation' in result"
@@ -114,7 +113,7 @@ def test_bt_198_bt_142_lotresult_multiple_lots(tmp_path):
         {"id": "win-cho-RES-0002", "availabilityDate": "2025-04-30T00:00:00+02:00"},
     ]
 
-    for withheld_info, expected in zip(result["withheldInformation"], expected_data):
+    for withheld_info, expected in zip(result["withheldInformation"], expected_data, strict=False):
         assert (
             withheld_info["id"] == expected["id"]
         ), f"Expected id '{expected['id']}', got {withheld_info['id']}"

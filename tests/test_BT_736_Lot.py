@@ -1,7 +1,6 @@
 # tests/test_BT_736_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_736_Lot import parse_reserved_execution, merge_reserved_execution
 import json
 import os
@@ -81,7 +80,7 @@ def test_bt_736_lot_reserved_execution_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result

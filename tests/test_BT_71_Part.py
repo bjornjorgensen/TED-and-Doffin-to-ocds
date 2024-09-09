@@ -1,8 +1,6 @@
 # tests/test_BT_71_Part.py
 
 import pytest
-import json
-from lxml import etree
 from converters.BT_71_Part import (
     parse_reserved_participation_part,
     merge_reserved_participation_part,

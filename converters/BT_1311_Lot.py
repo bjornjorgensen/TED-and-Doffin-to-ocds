@@ -2,7 +2,7 @@
 
 import logging
 from lxml import etree
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, UTC
 
 logger = logging.getLogger(__name__)
 
@@ -70,7 +70,7 @@ def parse_deadline_receipt_requests(xml_content):
                         )
                     )
                 else:
-                    dt = dt.replace(tzinfo=timezone.utc)
+                    dt = dt.replace(tzinfo=UTC)
 
                 iso_date = dt.isoformat()
 

@@ -1,13 +1,12 @@
 # converters/BT_765_PartFrameworkAgreement.py
 
 import logging
-from typing import Optional, Dict
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_part_framework_agreement(xml_content: str) -> Optional[Dict]:
+def parse_part_framework_agreement(xml_content: str) -> dict | None:
     """
     Parse the XML content to extract the Framework Agreement details for the Part.
 
@@ -56,7 +55,7 @@ def parse_part_framework_agreement(xml_content: str) -> Optional[Dict]:
 
 
 def merge_part_framework_agreement(
-    release_json: Dict, part_framework_agreement_data: Optional[Dict]
+    release_json: dict, part_framework_agreement_data: dict | None
 ) -> None:
     """
     Merge the parsed Part Framework Agreement data into the main OCDS release JSON.

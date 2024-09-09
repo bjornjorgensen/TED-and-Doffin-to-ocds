@@ -1,6 +1,5 @@
 # tests/test_BT_5131_Procedure.py
 
-import pytest
 from converters.BT_5131_Procedure import (
     parse_place_performance_city_procedure,
     merge_place_performance_city_procedure,

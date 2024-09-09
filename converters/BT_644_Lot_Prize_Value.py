@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # converters/BT_644_Lot_Prize_Value.py
 
 import logging

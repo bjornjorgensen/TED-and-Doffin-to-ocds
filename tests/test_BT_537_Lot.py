@@ -1,7 +1,6 @@
 # tests/test_BT_537_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_537_Lot import (
     parse_lot_duration_end_date,
     merge_lot_duration_end_date,

@@ -1,8 +1,5 @@
 # main.py
-import json, io
-import uuid
-from datetime import datetime
-from lxml import etree
+import json
 import logging
 from converters.Common_operations import NoticeProcessor
 from converters.BT_01_Procedure import (
@@ -674,10 +671,6 @@ from converters.BT_5101b_Procedure import (
     parse_procedure_place_performance_streetline1,
     merge_procedure_place_performance_streetline1,
 )
-from converters.BT_5101c_Lot import (
-    parse_lot_place_performance_streetline2,
-    merge_lot_place_performance_streetline2,
-)
 from converters.BT_5101c_Part import (
     parse_part_place_performance_streetline2,
     merge_part_place_performance_streetline2,
@@ -775,10 +768,6 @@ from converters.BT_537_Part import (
 from converters.BT_538_Lot import parse_lot_duration_other, merge_lot_duration_other
 from converters.BT_538_Part import parse_part_duration_other, merge_part_duration_other
 from converters.BT_539_Lot import parse_award_criterion_type, merge_award_criterion_type
-from converters.BT_539_LotsGroup import (
-    parse_award_criterion_type_lots_group,
-    merge_award_criterion_type_lots_group,
-)
 from converters.BT_54_Lot import parse_options_description, merge_options_description
 from converters.BT_540_Lot import (
     parse_award_criterion_description,
@@ -791,14 +780,6 @@ from converters.BT_540_LotsGroup import (
 from converters.BT_541_Lot_FixedNumber import (
     parse_award_criterion_fixed_number,
     merge_award_criterion_fixed_number,
-)
-from converters.BT_5421_Lot import (
-    parse_award_criterion_number_weight_lot,
-    merge_award_criterion_number_weight_lot,
-)
-from converters.BT_5421_LotsGroup import (
-    parse_award_criterion_number_weight_lots_group,
-    merge_award_criterion_number_weight_lots_group,
 )
 
 from converters.BT_5423_Lot import (
@@ -1428,14 +1409,13 @@ def remove_empty_elements(data):
             for key, value in data.items()
             if value is not None and (value or isinstance(value, (bool, int, float)))
         }
-    elif isinstance(data, list):
+    if isinstance(data, list):
         return [
             remove_empty_elements(item)
             for item in data
             if item is not None and (item or isinstance(item, (bool, int, float)))
         ]
-    else:
-        return data
+    return data
 
 
 # Additional step to remove keys with empty dictionaries
@@ -1446,14 +1426,13 @@ def remove_empty_dicts(data):
             for key, value in data.items()
             if value or isinstance(value, (bool, int, float))
         }
-    elif isinstance(data, list):
+    if isinstance(data, list):
         return [
             remove_empty_dicts(item)
             for item in data
             if item or isinstance(item, (bool, int, float))
         ]
-    else:
-        return data
+    return data
 
 
 def process_bt_section2(
@@ -5275,7 +5254,7 @@ def main(xml_path, ocid_prefix):
     # logger.info(f"Final release JSON: {json.dumps(release_json, indent=2)}")
 
     # Write the JSON output to a file
-    with io.open("output.json", "w", encoding="utf-8") as f:
+    with open("output.json", "w", encoding="utf-8") as f:
         json.dump(release_json, f, ensure_ascii=False)
 
     logger.info("XML to JSON conversion completed")

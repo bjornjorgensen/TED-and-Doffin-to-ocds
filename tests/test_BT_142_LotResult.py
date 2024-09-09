@@ -47,7 +47,7 @@ def test_bt_142_lotresult_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "awards" in result, "Expected 'awards' in result"
@@ -60,7 +60,7 @@ def test_bt_142_lotresult_integration(tmp_path):
     ), f"Expected status 'active', got {award['status']}"
     assert (
         award["statusDetails"] == "At least one winner was chosen."
-    ), f"Unexpected statusDetails"
+    ), "Unexpected statusDetails"
     assert award["relatedLots"] == [
         "LOT-0001"
     ], f"Expected relatedLots ['LOT-0001'], got {award['relatedLots']}"

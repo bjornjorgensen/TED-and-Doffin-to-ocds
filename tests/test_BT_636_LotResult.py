@@ -1,7 +1,6 @@
 # tests/test_BT_636_LotResult.py
 
 import pytest
-from lxml import etree
 from converters.BT_636_LotResult import (
     parse_irregularity_type,
     merge_irregularity_type,

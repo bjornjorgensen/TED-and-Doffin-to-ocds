@@ -2,7 +2,6 @@
 
 import logging
 from lxml import etree
-from typing import Dict, Optional, Union
 
 logger = logging.getLogger(__name__)
 
@@ -13,7 +12,7 @@ CODE_TO_LABEL = {
 }
 
 
-def parse_late_tenderer_info(xml_content: Union[str, bytes]) -> Optional[Dict]:
+def parse_late_tenderer_info(xml_content: str | bytes) -> dict | None:
     """
     Parse the XML content to extract the late tenderer information for each lot.
 
@@ -50,7 +49,7 @@ def parse_late_tenderer_info(xml_content: Union[str, bytes]) -> Optional[Dict]:
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    result: Dict[str, Dict] = {"tender": {"lots": []}}
+    result: dict[str, dict] = {"tender": {"lots": []}}
 
     lots: list = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
@@ -76,7 +75,7 @@ def parse_late_tenderer_info(xml_content: Union[str, bytes]) -> Optional[Dict]:
 
 
 def merge_late_tenderer_info(
-    release_json: Dict, late_tenderer_info: Optional[Dict]
+    release_json: dict, late_tenderer_info: dict | None
 ) -> None:
     """
     Merge the parsed late tenderer information into the main OCDS release JSON.
@@ -92,11 +91,11 @@ def merge_late_tenderer_info(
         logger.warning("No late tenderer information to merge")
         return
 
-    tender: Dict = release_json.setdefault("tender", {})
+    tender: dict = release_json.setdefault("tender", {})
     existing_lots: list = tender.setdefault("lots", [])
 
     for new_lot in late_tenderer_info["tender"]["lots"]:
-        existing_lot: Optional[Dict] = next(
+        existing_lot: dict | None = next(
             (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
         )
         if existing_lot:

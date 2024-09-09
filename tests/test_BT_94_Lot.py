@@ -1,7 +1,6 @@
 # tests/test_BT_94_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_94_Lot import parse_recurrence, merge_recurrence
 import json
 import os
@@ -69,7 +68,7 @@ def test_bt_94_lot_recurrence_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result

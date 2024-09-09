@@ -33,7 +33,7 @@ def test_bt_763_lots_all_required_integration(tmp_path, setup_logging):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")
@@ -66,7 +66,7 @@ def test_bt_763_lots_all_required_not_all(tmp_path, setup_logging):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")
@@ -92,7 +92,7 @@ def test_bt_763_lots_all_required_missing_element(tmp_path, setup_logging):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")
@@ -118,7 +118,7 @@ def test_bt_763_lots_all_required_empty_value(tmp_path, setup_logging):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")
@@ -144,7 +144,7 @@ def test_bt_763_lots_all_required_case_insensitive(tmp_path, setup_logging):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     logger.info(f"Result: {json.dumps(result, indent=2)}")

@@ -1,7 +1,5 @@
 # tests/test_BT_644_Lot_Prize_Value.py
 
-import pytest
-from lxml import etree
 from converters.BT_644_Lot_Prize_Value import (
     parse_lot_prize_value,
     merge_lot_prize_value,
@@ -9,7 +7,7 @@ from converters.BT_644_Lot_Prize_Value import (
 
 
 def test_parse_lot_prize_value():
-    xml_content = """
+    xml_content = b"""
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
@@ -26,7 +24,7 @@ def test_parse_lot_prize_value():
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
     </root>
-    """.encode("utf-8")
+    """
 
     result = parse_lot_prize_value(xml_content)
 
@@ -42,14 +40,14 @@ def test_parse_lot_prize_value():
 
 
 def test_parse_lot_prize_value_no_data():
-    xml_content = """
+    xml_content = b"""
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
         </cac:ProcurementProjectLot>
     </root>
-    """.encode("utf-8")
+    """
 
     result = parse_lot_prize_value(xml_content)
 

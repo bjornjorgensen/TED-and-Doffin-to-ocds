@@ -33,7 +33,7 @@ def test_bt_1252_procedure_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "relatedProcesses" in result, "Expected 'relatedProcesses' in result"

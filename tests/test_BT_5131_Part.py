@@ -1,6 +1,5 @@
 # tests/test_BT_5131_Part.py
 
-import pytest
 from converters.BT_5131_Part import (
     parse_place_performance_city_part,
     merge_place_performance_city_part,

@@ -1,7 +1,6 @@
 # tests/test_BT_769_Lot.py
 
 import pytest
-from lxml import etree
 from converters.BT_769_Lot import parse_multiple_tenders, merge_multiple_tenders
 import json
 import os
@@ -84,7 +83,7 @@ def test_bt_769_lot_multiple_tenders_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result

@@ -1,7 +1,5 @@
 # tests/test_BT_201_Contract.py
 
-import pytest
-from lxml import etree
 from converters.BT_201_Contract import (
     parse_contract_modification_description,
     merge_contract_modification_description,

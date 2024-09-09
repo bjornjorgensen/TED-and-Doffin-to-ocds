@@ -1,7 +1,6 @@
 # tests/test_BT_712a_LotResult.py
 
 import pytest
-from lxml import etree
 from converters.BT_712a_LotResult import (
     parse_buyer_review_complainants,
     merge_buyer_review_complainants,
@@ -84,7 +83,7 @@ def test_bt_712a_lotresult_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "statistics" in result
