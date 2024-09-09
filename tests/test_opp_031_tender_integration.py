@@ -50,4 +50,4 @@ def test_opp_031_tender_integration(tmp_path):
         lot["contractTerms"]["socialStandards"]
         == "Description of the social-standards blablabla ..."
     )
-    assert lot["contractTerms"]["hasExclusiveRights"] == True
+    assert lot["contractTerms"]["hasExclusiveRights"] is True

@@ -61,9 +61,7 @@ def parse_accessibility_criteria(xml_content: str | bytes) -> dict | None:
     return result if result["tender"]["lots"] else None
 
 
-def merge_accessibility_criteria(
-    release_json: dict, parsed_data: dict | None
-) -> None:
+def merge_accessibility_criteria(release_json: dict, parsed_data: dict | None) -> None:
     """
     Merge the parsed accessibility criteria data into the main OCDS release JSON.
 

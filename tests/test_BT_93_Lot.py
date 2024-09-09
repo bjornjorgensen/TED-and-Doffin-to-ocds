@@ -33,7 +33,7 @@ def test_parse_electronic_payment():
     assert "lots" in result["tender"]
     assert len(result["tender"]["lots"]) == 1
     assert result["tender"]["lots"][0]["id"] == "LOT-0001"
-    assert result["tender"]["lots"][0]["contractTerms"]["hasElectronicPayment"] == True
+    assert result["tender"]["lots"][0]["contractTerms"]["hasElectronicPayment"] is True
 
 
 def test_merge_electronic_payment():
@@ -52,7 +52,7 @@ def test_merge_electronic_payment():
     assert "contractTerms" in release_json["tender"]["lots"][0]
     assert (
         release_json["tender"]["lots"][0]["contractTerms"]["hasElectronicPayment"]
-        == True
+        is True
     )
 
 

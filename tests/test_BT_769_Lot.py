@@ -31,7 +31,7 @@ def test_parse_multiple_tenders():
     assert "lots" in result["tender"]
     assert len(result["tender"]["lots"]) == 1
     assert result["tender"]["lots"][0]["id"] == "LOT-0001"
-    assert result["tender"]["lots"][0]["submissionTerms"]["multipleBidsAllowed"] == True
+    assert result["tender"]["lots"][0]["submissionTerms"]["multipleBidsAllowed"] is True
 
 
 def test_merge_multiple_tenders():
@@ -50,7 +50,7 @@ def test_merge_multiple_tenders():
     assert "submissionTerms" in release_json["tender"]["lots"][0]
     assert (
         release_json["tender"]["lots"][0]["submissionTerms"]["multipleBidsAllowed"]
-        == True
+        is True
     )
 
 

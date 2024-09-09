@@ -50,7 +50,7 @@ def test_opp_020_contract_integration(tmp_path):
     lot = result["tender"]["lots"][0]
     assert lot["id"] == "LOT-0001"
     assert "hasEssentialAssets" in lot
-    assert lot["hasEssentialAssets"] == True
+    assert lot["hasEssentialAssets"] is True
 
 
 def test_opp_020_contract_integration_false(tmp_path):
@@ -93,7 +93,7 @@ def test_opp_020_contract_integration_false(tmp_path):
     lot = result["tender"]["lots"][0]
     assert lot["id"] == "LOT-0002"
     assert "hasEssentialAssets" in lot
-    assert lot["hasEssentialAssets"] == False
+    assert lot["hasEssentialAssets"] is False
 
 
 if __name__ == "__main__":

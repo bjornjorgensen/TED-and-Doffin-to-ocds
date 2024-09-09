@@ -54,7 +54,7 @@ def test_bt_193_tender_integration(tmp_path):
     bid = result["bids"]["details"][0]
     assert bid["id"] == "TEN-0001", f"Expected bid id 'TEN-0001', got {bid['id']}"
     assert "variant" in bid, "Expected 'variant' in bid"
-    assert bid["variant"] == True, f"Expected variant to be True, got {bid['variant']}"
+    assert bid["variant"] is True, f"Expected variant to be True, got {bid['variant']}"
     assert "relatedLots" in bid, "Expected 'relatedLots' in bid"
     assert bid["relatedLots"] == [
         "LOT-0001"

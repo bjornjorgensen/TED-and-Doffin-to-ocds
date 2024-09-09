@@ -56,7 +56,7 @@ def test_bt_06_lot_integration(tmp_path):
 
     lot_1 = next(lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0001")
     assert (
-        lot_1["hasSustainability"] == True
+        lot_1["hasSustainability"] is True
     ), "Expected LOT-0001 to have sustainability"
     assert (
         len(lot_1["sustainability"]) == 1
@@ -67,7 +67,7 @@ def test_bt_06_lot_integration(tmp_path):
 
     lot_2 = next(lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002")
     assert (
-        lot_2["hasSustainability"] == True
+        lot_2["hasSustainability"] is True
     ), "Expected LOT-0002 to have sustainability"
     assert (
         len(lot_2["sustainability"]) == 1

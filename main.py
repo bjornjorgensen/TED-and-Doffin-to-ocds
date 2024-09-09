@@ -1407,13 +1407,13 @@ def remove_empty_elements(data):
         return {
             key: remove_empty_elements(value)
             for key, value in data.items()
-            if value is not None and (value or isinstance(value, (bool, int, float)))
+            if value is not None and (value or isinstance(value, bool | int | float))
         }
     if isinstance(data, list):
         return [
             remove_empty_elements(item)
             for item in data
-            if item is not None and (item or isinstance(item, (bool, int, float)))
+            if item is not None and (item or isinstance(item, bool | int | float))
         ]
     return data
 
@@ -1424,13 +1424,13 @@ def remove_empty_dicts(data):
         return {
             key: remove_empty_dicts(value)
             for key, value in data.items()
-            if value or isinstance(value, (bool, int, float))
+            if value or isinstance(value, bool | int | float)
         }
     if isinstance(data, list):
         return [
             remove_empty_dicts(item)
             for item in data
-            if item or isinstance(item, (bool, int, float))
+            if item or isinstance(item, bool | int | float)
         ]
     return data
 

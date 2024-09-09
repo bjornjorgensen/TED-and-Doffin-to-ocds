@@ -143,9 +143,10 @@ def test_bt_5071_lot_integration(tmp_path, setup_logging):
         item for item in result["tender"]["items"] if item["relatedLot"] == "LOT-0002"
     )
     assert len(lot_2_item["deliveryAddresses"]) == 2
-    assert set(addr["region"] for addr in lot_2_item["deliveryAddresses"]) == set(
-        ["UKG24", "UKG25"]
-    )
+    assert {addr["region"] for addr in lot_2_item["deliveryAddresses"]} == {
+        "UKG24",
+        "UKG25",
+    }
 
 
 def test_bt_5071_lot_missing_data(tmp_path, setup_logging):

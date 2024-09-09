@@ -99,7 +99,7 @@ def test_bt_97_lot_submission_language_integration(tmp_path):
         (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002"), None
     )
     assert lot_2 is not None
-    assert set(lot_2["submissionTerms"]["languages"]) == set(["en", "de"])
+    assert set(lot_2["submissionTerms"]["languages"]) == {"en", "de"}
 
 
 if __name__ == "__main__":
