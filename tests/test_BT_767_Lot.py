@@ -33,7 +33,7 @@ def test_parse_electronic_auction():
     assert "lots" in result["tender"]
     assert len(result["tender"]["lots"]) == 1
     assert result["tender"]["lots"][0]["id"] == "LOT-0001"
-    assert result["tender"]["lots"][0]["techniques"]["hasElectronicAuction"] == True
+    assert result["tender"]["lots"][0]["techniques"]["hasElectronicAuction"] is True
 
 
 def test_merge_electronic_auction():
@@ -49,7 +49,7 @@ def test_merge_electronic_auction():
 
     assert "techniques" in release_json["tender"]["lots"][0]
     assert (
-        release_json["tender"]["lots"][0]["techniques"]["hasElectronicAuction"] == True
+        release_json["tender"]["lots"][0]["techniques"]["hasElectronicAuction"] is True
     )
 
 

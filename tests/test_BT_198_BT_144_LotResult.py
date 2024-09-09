@@ -120,7 +120,9 @@ def test_bt_198_bt_144_lotresult_multiple_lots(tmp_path):
         {"id": "no-awa-rea-RES-0002", "availabilityDate": "2025-04-30T00:00:00+02:00"},
     ]
 
-    for withheld_info, expected in zip(result["withheldInformation"], expected_data, strict=False):
+    for withheld_info, expected in zip(
+        result["withheldInformation"], expected_data, strict=False
+    ):
         assert (
             withheld_info["id"] == expected["id"]
         ), f"Expected id '{expected['id']}', got {withheld_info['id']}"

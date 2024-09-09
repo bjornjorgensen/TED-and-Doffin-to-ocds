@@ -137,7 +137,9 @@ def test_bt_197_bt_142_lotresult_multiple_lots(tmp_path):
         },
     ]
 
-    for withheld_info, expected in zip(result["withheldInformation"], expected_data, strict=False):
+    for withheld_info, expected in zip(
+        result["withheldInformation"], expected_data, strict=False
+    ):
         assert (
             withheld_info["id"] == expected["id"]
         ), f"Expected id '{expected['id']}', got {withheld_info['id']}"

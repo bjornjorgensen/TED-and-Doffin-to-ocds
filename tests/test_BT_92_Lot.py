@@ -33,7 +33,7 @@ def test_parse_electronic_ordering():
     assert "lots" in result["tender"]
     assert len(result["tender"]["lots"]) == 1
     assert result["tender"]["lots"][0]["id"] == "LOT-0001"
-    assert result["tender"]["lots"][0]["contractTerms"]["hasElectronicOrdering"] == True
+    assert result["tender"]["lots"][0]["contractTerms"]["hasElectronicOrdering"] is True
 
 
 def test_merge_electronic_ordering():
@@ -52,7 +52,7 @@ def test_merge_electronic_ordering():
     assert "contractTerms" in release_json["tender"]["lots"][0]
     assert (
         release_json["tender"]["lots"][0]["contractTerms"]["hasElectronicOrdering"]
-        == True
+        is True
     )
 
 

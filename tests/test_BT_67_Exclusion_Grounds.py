@@ -16,24 +16,25 @@ NAMESPACES = {
 
 def create_xml_with_exclusion_grounds(grounds):
     root = etree.Element("root", nsmap=NAMESPACES)
-    terms = etree.SubElement(root, "{%s}TenderingTerms" % NAMESPACES["cac"])
+    terms = etree.SubElement(root, "{{{}}}TenderingTerms".format(NAMESPACES["cac"]))
     qual_request = etree.SubElement(
-        terms, "{%s}TendererQualificationRequest" % NAMESPACES["cac"]
+        terms, "{{{}}}TendererQualificationRequest".format(NAMESPACES["cac"])
     )
 
     for ground in grounds:
         requirement = etree.SubElement(
-            qual_request, "{%s}SpecificTendererRequirement" % NAMESPACES["cac"]
+            qual_request, "{{{}}}SpecificTendererRequirement".format(NAMESPACES["cac"])
         )
         if "type" in ground:
             type_code = etree.SubElement(
-                requirement, "{%s}TendererRequirementTypeCode" % NAMESPACES["cbc"]
+                requirement,
+                "{{{}}}TendererRequirementTypeCode".format(NAMESPACES["cbc"]),
             )
             type_code.set("listName", "exclusion-ground")
             type_code.text = ground["type"]
         if "description" in ground:
             description = etree.SubElement(
-                requirement, "{%s}Description" % NAMESPACES["cbc"]
+                requirement, "{{{}}}Description".format(NAMESPACES["cbc"])
             )
             description.text = ground["description"]
 

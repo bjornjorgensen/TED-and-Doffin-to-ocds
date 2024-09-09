@@ -45,7 +45,7 @@ def test_bt_41_lot_integration(tmp_path):
         "followUpContracts" in lot["designContest"]
     ), "Expected 'followUpContracts' in designContest"
     assert (
-        lot["designContest"]["followUpContracts"] == True
+        lot["designContest"]["followUpContracts"] is True
     ), "Expected 'followUpContracts' to be True"
 
 

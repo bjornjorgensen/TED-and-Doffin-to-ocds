@@ -78,9 +78,10 @@ def test_merge_tender_recipient_identifier_existing_party():
 
     assert len(release_json["parties"]) == 1
     assert release_json["parties"][0]["id"] == "TPO-0001"
-    assert set(release_json["parties"][0]["roles"]) == set(
-        ["buyer", "submissionReceiptBody"]
-    )
+    assert set(release_json["parties"][0]["roles"]) == {
+        "buyer",
+        "submissionReceiptBody",
+    }
     assert release_json["parties"][0]["name"] == "Existing Party"
 
 

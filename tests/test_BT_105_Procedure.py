@@ -11,7 +11,7 @@ from main import main
 
 
 @pytest.mark.parametrize(
-    "procedure_code, expected_method, expected_details",
+    ("procedure_code", "expected_method", "expected_details"),
     [
         ("open", "open", "Open"),
         ("restricted", "selective", "Restricted"),

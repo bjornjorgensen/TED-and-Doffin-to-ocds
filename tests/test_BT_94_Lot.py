@@ -31,7 +31,7 @@ def test_parse_recurrence():
     assert "lots" in result["tender"]
     assert len(result["tender"]["lots"]) == 1
     assert result["tender"]["lots"][0]["id"] == "LOT-0001"
-    assert result["tender"]["lots"][0]["hasRecurrence"] == True
+    assert result["tender"]["lots"][0]["hasRecurrence"] is True
 
 
 def test_merge_recurrence():
@@ -42,7 +42,7 @@ def test_merge_recurrence():
     merge_recurrence(release_json, recurrence_data)
 
     assert "hasRecurrence" in release_json["tender"]["lots"][0]
-    assert release_json["tender"]["lots"][0]["hasRecurrence"] == True
+    assert release_json["tender"]["lots"][0]["hasRecurrence"] is True
 
 
 def test_bt_94_lot_recurrence_integration(tmp_path):

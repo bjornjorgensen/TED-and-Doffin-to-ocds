@@ -11,7 +11,7 @@ from main import main
 
 
 @pytest.mark.parametrize(
-    "accelerated_value, expected_result",
+    ("accelerated_value", "expected_result"),
     [
         ("true", True),
         ("false", False),

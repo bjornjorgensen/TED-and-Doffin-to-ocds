@@ -33,7 +33,7 @@ def test_parse_reserved_execution():
     assert "lots" in result["tender"]
     assert len(result["tender"]["lots"]) == 1
     assert result["tender"]["lots"][0]["id"] == "LOT-0001"
-    assert result["tender"]["lots"][0]["contractTerms"]["reservedExecution"] == True
+    assert result["tender"]["lots"][0]["contractTerms"]["reservedExecution"] is True
 
 
 def test_merge_reserved_execution():
@@ -49,7 +49,7 @@ def test_merge_reserved_execution():
 
     assert "contractTerms" in release_json["tender"]["lots"][0]
     assert (
-        release_json["tender"]["lots"][0]["contractTerms"]["reservedExecution"] == True
+        release_json["tender"]["lots"][0]["contractTerms"]["reservedExecution"] is True
     )
 
 
@@ -92,7 +92,7 @@ def test_bt_736_lot_reserved_execution_integration(tmp_path):
     )
     assert lot_1 is not None
     assert "contractTerms" in lot_1
-    assert lot_1["contractTerms"].get("reservedExecution") == True
+    assert lot_1["contractTerms"].get("reservedExecution") is True
 
     lot_2 = next(
         (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002"), None

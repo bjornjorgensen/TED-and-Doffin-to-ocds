@@ -60,7 +60,7 @@ def test_bt_40_lot_integration(tmp_path):
         len(lot["selectionCriteria"]["criteria"]) == 1
     ), f"Expected 1 criterion, got {len(lot['selectionCriteria']['criteria'])}"
     assert (
-        lot["selectionCriteria"]["criteria"][0]["forReduction"] == True
+        lot["selectionCriteria"]["criteria"][0]["forReduction"] is True
     ), "Expected 'forReduction' to be True"
 
 

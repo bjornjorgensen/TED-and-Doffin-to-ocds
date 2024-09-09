@@ -80,7 +80,7 @@ def test_merge_review_org_identifier():
 
     assert len(release_json["parties"]) == 2
     assert release_json["parties"][0]["id"] == "TPO-0001"
-    assert set(release_json["parties"][0]["roles"]) == set(["buyer", "reviewBody"])
+    assert set(release_json["parties"][0]["roles"]) == {"buyer", "reviewBody"}
     assert release_json["parties"][1]["id"] == "TPO-0002"
     assert release_json["parties"][1]["roles"] == ["reviewBody"]
 
@@ -105,9 +105,7 @@ def test_merge_review_org_identifier_existing_party(sample_release_json):
 
     assert len(sample_release_json["parties"]) == 1
     assert sample_release_json["parties"][0]["id"] == "TPO-0001"
-    assert set(sample_release_json["parties"][0]["roles"]) == set(
-        ["buyer", "reviewBody"]
-    )
+    assert set(sample_release_json["parties"][0]["roles"]) == {"buyer", "reviewBody"}
     assert sample_release_json["parties"][0]["name"] == "Existing Party"
 
 

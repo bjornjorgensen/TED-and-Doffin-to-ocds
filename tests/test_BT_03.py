@@ -51,9 +51,11 @@ def test_bt_03_form_type_integration_multiple(tmp_path):
     assert "tag" in result, "Expected 'tag' in result"
     assert "tender" in result, "Expected 'tender' in result"
 
-    assert set(result["tag"]) == set(
-        ["tender", "award", "contract"]
-    ), f"Expected tags to be ['tender', 'award', 'contract'], got {result['tag']}"
+    assert set(result["tag"]) == {
+        "tender",
+        "award",
+        "contract",
+    }, f"Expected tags to be ['tender', 'award', 'contract'], got {result['tag']}"
     assert (
         result["tender"]["status"] == "complete"
     ), f"Expected tender status to be 'complete', got {result['tender'].get('status')}"

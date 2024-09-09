@@ -45,7 +45,7 @@ def test_bt_42_lot_integration(tmp_path):
         "bindingJuryDecision" in lot["designContest"]
     ), "Expected 'bindingJuryDecision' in designContest"
     assert (
-        lot["designContest"]["bindingJuryDecision"] == True
+        lot["designContest"]["bindingJuryDecision"] is True
     ), "Expected 'bindingJuryDecision' to be True"
 
 

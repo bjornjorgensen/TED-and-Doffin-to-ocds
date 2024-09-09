@@ -66,9 +66,7 @@ def parse_subcontracting(xml_content: str | bytes) -> dict | None:
     return result if result["bids"]["details"] else None
 
 
-def merge_subcontracting(
-    release_json: dict, subcontracting_data: dict | None
-) -> None:
+def merge_subcontracting(release_json: dict, subcontracting_data: dict | None) -> None:
     """
     Merge the parsed subcontracting data into the main OCDS release JSON.
 

@@ -80,9 +80,7 @@ def test_merge_review_info_identifier_existing_party():
 
     assert len(release_json["parties"]) == 1
     assert release_json["parties"][0]["id"] == "TPO-0001"
-    assert set(release_json["parties"][0]["roles"]) == set(
-        ["buyer", "reviewContactPoint"]
-    )
+    assert set(release_json["parties"][0]["roles"]) == {"buyer", "reviewContactPoint"}
     assert release_json["parties"][0]["name"] == "Existing Party"
 
 
