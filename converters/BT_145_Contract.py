@@ -2,7 +2,7 @@
 
 import logging
 from lxml import etree
-from utils.date_utils import EndDate
+from utils.date_utils import end_date
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +35,7 @@ def parse_contract_conclusion_date(xml_content):
         )
 
         if contract_id and issue_date:
-            contract = {"id": contract_id[0], "dateSigned": EndDate(issue_date[0])}
+            contract = {"id": contract_id[0], "dateSigned": end_date(issue_date[0])}
             result["contracts"].append(contract)
 
     return result if result["contracts"] else None

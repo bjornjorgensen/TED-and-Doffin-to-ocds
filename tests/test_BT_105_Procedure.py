@@ -22,7 +22,7 @@ def create_xml_with_procedure_code(procedure_code):
 
 
 @pytest.mark.parametrize(
-    "procedure_code, expected_method, expected_details",
+    ("procedure_code", "expected_method", "expected_details"),
     [
         ("open", "open", "Open procedure"),
         ("restricted", "selective", "Restricted procedure"),
@@ -57,7 +57,7 @@ def test_bt_105_procedure_integration(
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
@@ -95,7 +95,7 @@ def test_bt_105_procedure_missing_code(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json", "r") as f:
+    with open("output.json") as f:
         result = json.load(f)
 
     assert (

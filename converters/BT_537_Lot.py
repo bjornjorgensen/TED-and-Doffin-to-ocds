@@ -1,7 +1,7 @@
 # converters/BT_537_Lot.py
 
 from lxml import etree
-from utils.date_utils import EndDate
+from utils.date_utils import end_date
 
 
 def parse_lot_duration_end_date(xml_content):
@@ -25,14 +25,14 @@ def parse_lot_duration_end_date(xml_content):
 
     for lot_element in lot_elements:
         lot_id = lot_element.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        end_date = lot_element.xpath(
+        date_to_end = lot_element.xpath(
             "cac:ProcurementProject/cac:PlannedPeriod/cbc:EndDate/text()",
             namespaces=namespaces,
         )
 
-        if end_date:
+        if date_to_end:
             try:
-                iso_end_date = EndDate(end_date[0])
+                iso_end_date = end_date(date_to_end[0])
                 lot = {"id": lot_id, "contractPeriod": {"endDate": iso_end_date}}
                 result["tender"]["lots"].append(lot)
             except ValueError as e:

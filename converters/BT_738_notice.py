@@ -2,7 +2,7 @@
 
 import logging
 from lxml import etree
-from utils.date_utils import StartDate
+from utils.date_utils import start_date
 
 logger = logging.getLogger(__name__)
 
@@ -32,7 +32,7 @@ def parse_notice_preferred_publication_date(xml_content):
         date_str = requested_publication_date[0].text
         try:
             # Use StartDate function from date_utils to convert the date
-            formatted_date = StartDate(date_str)
+            formatted_date = start_date(date_str)
 
             return {
                 "tender": {

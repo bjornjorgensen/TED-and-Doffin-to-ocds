@@ -2,7 +2,7 @@
 
 import logging
 from lxml import etree
-from utils.date_utils import StartDate
+from utils.date_utils import start_date
 
 logger = logging.getLogger(__name__)
 
@@ -30,17 +30,17 @@ def parse_lot_start_date(xml_content):
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        start_date = lot.xpath(
+        date_to_start = lot.xpath(
             "cac:ProcurementProject/cac:PlannedPeriod/cbc:StartDate/text()",
             namespaces=namespaces,
         )
 
         logger.info(f"Processing lot {lot_id}")
-        logger.info(f"Start date found: {start_date}")
+        logger.info(f"Start date found: {date_to_start}")
 
-        if start_date:
+        if date_to_start:
             try:
-                formatted_start_date = StartDate(start_date[0])
+                formatted_start_date = start_date(date_to_start[0])
                 lot_data = {
                     "id": lot_id,
                     "contractPeriod": {"startDate": formatted_start_date},

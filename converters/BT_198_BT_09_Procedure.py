@@ -2,7 +2,7 @@
 
 import logging
 from lxml import etree
-from utils.date_utils import StartDate
+from utils.date_utils import start_date
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +39,7 @@ def bt_198_parse_unpublished_access_date_bt_09_procedure(xml_content):
 
     if publication_date:
         try:
-            iso_date = StartDate(publication_date[0])
+            iso_date = start_date(publication_date[0])
             withheld_item = {"availabilityDate": iso_date}
             result["withheldInformation"].append(withheld_item)
         except ValueError as e:

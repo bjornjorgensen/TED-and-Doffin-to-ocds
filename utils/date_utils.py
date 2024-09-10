@@ -45,7 +45,7 @@ def convert_to_iso_format(date_string: str, is_start_date: bool = False) -> str:
         raise ValueError(f"Invalid date format: {date_string}") from e
 
 
-def StartDate(date_string: str) -> str:
+def start_date(date_string: str) -> str:
     """
     Convert a start date string to ISO 8601 format, following OCDS requirements.
 
@@ -73,7 +73,7 @@ def StartDate(date_string: str) -> str:
         raise ValueError(f"Invalid start date format: {date_string}") from e
 
 
-def EndDate(date_string: str) -> str:
+def end_date(date_string: str) -> str:
     """
     Convert an end date string to ISO 8601 format, following OCDS requirements.
 

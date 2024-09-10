@@ -2,7 +2,7 @@
 
 import logging
 from lxml import etree
-from utils.date_utils import EndDate
+from utils.date_utils import end_date
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +40,7 @@ def parse_winner_decision_date(xml_content):
 
             if contract_id and award_date:
                 contract_id = contract_id[0]
-                award_date = EndDate(award_date[0])
+                award_date = end_date(award_date[0])
 
                 for lot_result in lot_results:
                     lot_contract_id = lot_result.xpath(
