@@ -18,9 +18,7 @@ def parse_procedure_type(xml_content):
         "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
-
     result = {"tender": {}}
-
     procedure_code_mapping = {
         "open": "open",
         "restricted": "selective",
@@ -33,7 +31,6 @@ def parse_procedure_type(xml_content):
         "oth-mult": None,
         "oth-single": None,
     }
-
     procedure_details_mapping = {
         "comp-dial": "Competitive dialogue",
         "comp-tend": "Competitive tendering (article 5(3) of Regulation 1370/2007)",
@@ -46,23 +43,22 @@ def parse_procedure_type(xml_content):
         "oth-single": "Other single stage procedure",
         "restricted": "Restricted",
     }
-
     procedure_code = root.xpath(
         "//cac:TenderingProcess/cbc:ProcedureCode[@listName='procurement-procedure-type']/text()",
         namespaces=namespaces,
     )
 
-    if procedure_code:
-        procedure_code = procedure_code[0]
-        if procedure_code in procedure_code_mapping:
-            if procedure_code_mapping[procedure_code] is not None:
-                result["tender"]["procurementMethod"] = procedure_code_mapping[
-                    procedure_code
-                ]
-
-        if procedure_code in procedure_details_mapping:
+    if (
+        procedure_code
+        and procedure_code[0] in procedure_code_mapping
+        and procedure_code_mapping[procedure_code[0]] is not None
+    ):
+        result["tender"]["procurementMethod"] = procedure_code_mapping[
+            procedure_code[0]
+        ]
+        if procedure_code[0] in procedure_details_mapping:
             result["tender"]["procurementMethodDetails"] = procedure_details_mapping[
-                procedure_code
+                procedure_code[0]
             ]
 
     return result if result["tender"] else None

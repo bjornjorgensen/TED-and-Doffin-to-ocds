@@ -7,7 +7,7 @@ from utils.date_utils import StartDate
 logger = logging.getLogger(__name__)
 
 
-def BT_198_parse_unpublished_access_date_BT_09_Procedure(xml_content):
+def bt_198_parse_unpublished_access_date_bt_09_procedure(xml_content):
     """
     Parse the XML content to extract the unpublished access date for the procedure.
 
@@ -48,7 +48,7 @@ def BT_198_parse_unpublished_access_date_BT_09_Procedure(xml_content):
     return result if result["withheldInformation"] else None
 
 
-def BT_198_merge_unpublished_access_date_BT_09_Procedure(
+def bt_198_merge_unpublished_access_date_bt_09_procedure(
     release_json, unpublished_access_date_data
 ):
     """

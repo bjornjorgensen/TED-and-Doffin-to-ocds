@@ -6,7 +6,7 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def BT_195_parse_unpublished_identifier_BT_09_Procedure(xml_content):
+def bt_195_parse_unpublished_identifier_bt_09_procedure(xml_content):
     """
     Parse the XML content to extract the unpublished identifier for the procedure.
 
@@ -56,7 +56,7 @@ def BT_195_parse_unpublished_identifier_BT_09_Procedure(xml_content):
     return result if result["withheldInformation"] else None
 
 
-def BT_195_merge_unpublished_identifier_BT_09_Procedure(
+def bt_195_merge_unpublished_identifier_bt_09_procedure(
     release_json, unpublished_identifier_data
 ):
     """

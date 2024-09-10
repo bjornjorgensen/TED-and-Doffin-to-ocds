@@ -48,19 +48,21 @@ def merge_lotsgroup_additional_info(release_json, lotsgroup_additional_info):
         logger.info("No lots group additional information to merge")
         return
 
-    lotGroups = release_json.get("tender", {}).get("lotGroups", [])
+    lot_groups = release_json.get("tender", {}).get("lotGroups", [])
+    merged_count = 0
 
-    for lotGroup in lotGroups:
-        lotGroup_id = lotGroup.get("id")
-        if lotGroup_id in lotsgroup_additional_info:
-            notes = lotsgroup_additional_info[lotGroup_id]
-            description = lotGroup.get("description", "")
+    for lot_group in lot_groups:
+        lot_group_id = lot_group.get("id")
+        if lot_group_id in lotsgroup_additional_info:
+            notes = lotsgroup_additional_info[lot_group_id]
+            description = lot_group.get("description", "")
+
             for note in notes:
                 if description:
                     description += " "
                 description += note["text"]
-            lotGroup["description"] = description
 
-    logger.info(
-        f"Merged additional information for {len(lotsgroup_additional_info)} lots groups"
-    )
+            lot_group["description"] = description
+            merged_count += 1
+
+    logger.info(f"Merged additional information for {merged_count} lots groups")

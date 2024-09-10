@@ -6,7 +6,7 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def BT_196_parse_unpublished_justification_BT_09_Procedure(xml_content):
+def bt_196_parse_unpublished_justification_bt_09_procedure(xml_content):
     """
     Parse the XML content to extract the unpublished justification description for the procedure.
 
@@ -43,7 +43,7 @@ def BT_196_parse_unpublished_justification_BT_09_Procedure(xml_content):
     return result if result["withheldInformation"] else None
 
 
-def BT_196_merge_unpublished_justification_BT_09_Procedure(
+def bt_196_merge_unpublished_justification_bt_09_procedure(
     release_json, unpublished_justification_data
 ):
     """

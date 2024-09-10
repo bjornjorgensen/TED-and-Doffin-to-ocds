@@ -169,4 +169,4 @@ def test_bt_197_bt_144_lotresult_multiple_lots(tmp_path):
 
 
 if __name__ == "__main__":
-    pytest.main
+    pytest.main()
