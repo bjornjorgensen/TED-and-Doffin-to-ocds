@@ -92,13 +92,12 @@ def merge_winner_chosen(release_json, winner_chosen_data):
     existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
     for new_lot in winner_chosen_data["tender"]["lots"]:
         existing_lot = next(
-            (l for l in existing_lots if l["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
         )
         if existing_lot:
             existing_lot.update(new_lot)
         else:
             existing_lots.append(new_lot)
-
     logger.info(
         f"Merged winner chosen data for {len(winner_chosen_data['awards'])} awards and {len(winner_chosen_data['tender']['lots'])} lots"
     )

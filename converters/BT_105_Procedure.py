@@ -7,44 +7,22 @@ logger = logging.getLogger(__name__)
 
 
 def parse_procedure_type(xml_content):
+    """
+    Parse the XML content to extract the procedure type.
+
+    Args:
+        xml_content (str): The XML content to parse.
+
+    Returns:
+        dict: A dictionary containing the parsed procedure type data.
+        None: If no relevant data is found.
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
-
-    result = {"tender": {}}
-
-    procedure_code_mapping = {
-        "open": "open",
-        "restricted": "selective",
-        "comp-dial": "selective",
-        "comp-tend": "selective",
-        "innovation": "selective",
-        "neg-w-call": "selective",
-        "neg-wo-call": "limited",
-        "exp-int-rail": "selective",
-        "oth-mult": None,
-        "oth-single": None,
-    }
-
-    procedure_details_mapping = {
-        "comp-dial": "Competitive dialogue",
-        "comp-tend": "Competitive tendering (article 5(3) of Regulation 1370/2007)",
-        "exp-int-rail": "Request for expression of interest – only for rail (article 5(3b) of Regulation 1370/2007)",
-        "innovation": "Innovation partnership",
-        "neg-w-call": "Negotiated with prior publication of a call for competition / competitive with negotiation",
-        "neg-wo-call": "Negotiated without prior call for competition",
-        "open": "Open",
-        "oth-mult": "Other multiple stage procedure",
-        "oth-single": "Other single stage procedure",
-        "restricted": "Restricted",
     }
 
     procedure_code = root.xpath(
@@ -54,33 +32,64 @@ def parse_procedure_type(xml_content):
 
     if procedure_code:
         procedure_code = procedure_code[0]
-        if procedure_code in procedure_code_mapping:
-            if procedure_code_mapping[procedure_code] is not None:
-                result["tender"]["procurementMethod"] = procedure_code_mapping[
+        procedure_code_mapping = {
+            "open": "open",
+            "restricted": "selective",
+            "comp-dial": "selective",
+            "comp-tend": "selective",
+            "innovation": "selective",
+            "neg-w-call": "selective",
+            "neg-wo-call": "limited",
+            "exp-int-rail": "selective",
+            "oth-mult": None,
+            "oth-single": None,
+        }
+        procedure_details_mapping = {
+            "open": "Open procedure",
+            "restricted": "Restricted procedure",
+            "comp-dial": "Competitive dialogue",
+            "comp-tend": "Competitive tendering (article 5(3) of Regulation 1370/2007)",
+            "innovation": "Innovation partnership",
+            "neg-w-call": "Negotiated with prior publication of a call for competition / competitive with negotiation",
+            "neg-wo-call": "Negotiated without prior call for competition",
+            "exp-int-rail": "Request for expression of interest – only for rail (article 5(3b) of Regulation 1370/2007)",
+            "oth-mult": "Other multiple stage procedure",
+            "oth-single": "Other single stage procedure",
+        }
+
+        result = {
+            "tender": {
+                "procurementMethodDetails": procedure_details_mapping.get(
                     procedure_code
-                ]
+                )
+            }
+        }
 
-        if procedure_code in procedure_details_mapping:
-            result["tender"]["procurementMethodDetails"] = procedure_details_mapping[
-                procedure_code
-            ]
+        procurement_method = procedure_code_mapping.get(procedure_code)
+        if procurement_method:
+            result["tender"]["procurementMethod"] = procurement_method
 
-    return result if result["tender"] else None
+        return result
+
+    return None
 
 
 def merge_procedure_type(release_json, procedure_type_data):
+    """
+    Merge the parsed procedure type data into the main OCDS release JSON.
+
+    Args:
+        release_json (dict): The main OCDS release JSON to be updated.
+        procedure_type_data (dict): The parsed procedure type data to be merged.
+
+    Returns:
+        None: The function updates the release_json in-place.
+    """
     if not procedure_type_data:
         logger.warning("No procedure type data to merge")
         return
 
     tender = release_json.setdefault("tender", {})
-
-    if "procurementMethod" in procedure_type_data["tender"]:
-        tender["procurementMethod"] = procedure_type_data["tender"]["procurementMethod"]
-
-    if "procurementMethodDetails" in procedure_type_data["tender"]:
-        tender["procurementMethodDetails"] = procedure_type_data["tender"][
-            "procurementMethodDetails"
-        ]
+    tender.update(procedure_type_data["tender"])
 
     logger.info("Merged procedure type data")

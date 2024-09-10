@@ -30,7 +30,7 @@ NON_PUBLICATION_JUSTIFICATION = {
 }
 
 
-def BT_197_parse_unpublished_justification_code_BT_09_Procedure(xml_content):
+def bt_197_parse_unpublished_justification_code_bt_09_procedure(xml_content):
     """
     Parse the XML content to extract the unpublished justification code for the procedure.
 
@@ -80,7 +80,7 @@ def BT_197_parse_unpublished_justification_code_BT_09_Procedure(xml_content):
     return result if result["withheldInformation"] else None
 
 
-def BT_197_merge_unpublished_justification_code_BT_09_Procedure(
+def bt_197_merge_unpublished_justification_code_bt_09_procedure(
     release_json, unpublished_justification_code_data
 ):
     """
