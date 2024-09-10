@@ -2,7 +2,7 @@
 
 import pytest
 from lxml import etree
-from converters.BT_67_Exclusion_Grounds import (
+from ted_and_doffin_to_ocds.converters.BT_67_Exclusion_Grounds import (
     parse_exclusion_grounds,
     merge_exclusion_grounds,
 )

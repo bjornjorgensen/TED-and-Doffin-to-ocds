@@ -1,15 +1,15 @@
-# converters/BT_198_BT_09_Procedure.py
+# converters/BT_198_BT_135_Procedure.py
 
 import logging
 from lxml import etree
-from utils.date_utils import start_date
+from ted_and_doffin_to_ocds.utils.date_utils import start_date
 
 logger = logging.getLogger(__name__)
 
 
-def bt_198_parse_unpublished_access_date_bt_09_procedure(xml_content):
+def parse_bt198_bt135_unpublished_access_date(xml_content):
     """
-    Parse the XML content to extract the unpublished access date for the procedure.
+    Parse the XML content to extract the unpublished access date for the direct award justification.
 
     Args:
         xml_content (str): The XML content to parse.
@@ -33,22 +33,19 @@ def bt_198_parse_unpublished_access_date_bt_09_procedure(xml_content):
     result = {"withheldInformation": []}
 
     publication_date = root.xpath(
-        "//cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='CrossBorderLaw']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='cro-bor-law']/efbc:PublicationDate/text()",
+        "//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='dir-awa-tex']/efbc:PublicationDate/text()",
         namespaces=namespaces,
     )
 
     if publication_date:
-        try:
-            iso_date = start_date(publication_date[0])
-            withheld_item = {"availabilityDate": iso_date}
-            result["withheldInformation"].append(withheld_item)
-        except ValueError as e:
-            logger.error(f"Error converting date: {str(e)}")
+        iso_date = start_date(publication_date[0])
+        withheld_info = {"field": "dir-awa-tex", "availabilityDate": iso_date}
+        result["withheldInformation"].append(withheld_info)
 
     return result if result["withheldInformation"] else None
 
 
-def bt_198_merge_unpublished_access_date_bt_09_procedure(
+def merge_bt198_bt135_unpublished_access_date(
     release_json, unpublished_access_date_data
 ):
     """
@@ -62,15 +59,19 @@ def bt_198_merge_unpublished_access_date_bt_09_procedure(
         None: The function updates the release_json in-place.
     """
     if not unpublished_access_date_data:
-        logger.warning("No unpublished access date data to merge")
+        logger.warning("No unpublished access date data to merge for BT-198(BT-135)")
         return
 
-    withheld_information = release_json.setdefault("withheldInformation", [])
+    withheld_info = release_json.setdefault("withheldInformation", [])
 
-    for item in unpublished_access_date_data["withheldInformation"]:
-        if withheld_information:
-            withheld_information[0]["availabilityDate"] = item["availabilityDate"]
+    for new_item in unpublished_access_date_data["withheldInformation"]:
+        existing_item = next(
+            (item for item in withheld_info if item.get("field") == new_item["field"]),
+            None,
+        )
+        if existing_item:
+            existing_item["availabilityDate"] = new_item["availabilityDate"]
         else:
-            withheld_information.append(item)
+            withheld_info.append(new_item)
 
-    logger.info("Merged unpublished access date data")
+    logger.info("Merged unpublished access date data for BT-198(BT-135)")

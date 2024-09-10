@@ -1,7 +1,7 @@
 # tests/test_OPT_301_Lot_ReviewOrg.py
 
 import pytest
-from converters.OPT_301_Lot_ReviewOrg import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Lot_ReviewOrg import (
     parse_review_org_identifier,
     merge_review_org_identifier,
 )

@@ -1,7 +1,7 @@
 # tests/test_BT_772_Lot.py
 
 import pytest
-from converters.BT_772_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_772_Lot import (
     parse_late_tenderer_info_description,
     merge_late_tenderer_info_description,
 )
@@ -11,7 +11,7 @@ import sys
 
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from main import main
+from src.ted_and_doffin_to_ocds.main import main
 
 
 def test_parse_late_tenderer_info_description():

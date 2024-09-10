@@ -1,7 +1,10 @@
 # tests/test_BT_45_Lot.py
 
 from lxml import etree
-from converters.BT_45_Lot import parse_lot_rewards_other, merge_lot_rewards_other
+from ted_and_doffin_to_ocds.converters.BT_45_Lot import (
+    parse_lot_rewards_other,
+    merge_lot_rewards_other,
+)
 
 
 def create_xml_root(content):

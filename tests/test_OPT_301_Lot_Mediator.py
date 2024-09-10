@@ -1,6 +1,6 @@
 # tests/test_OPT_301_Lot_Mediator.py
 
-from converters.OPT_301_Lot_Mediator import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Lot_Mediator import (
     parse_mediator_identifier,
     merge_mediator_identifier,
 )

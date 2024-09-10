@@ -8,7 +8,7 @@ import logging
 
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import main, configure_logging
 
 
 def test_bt_765_part_framework_agreement_integration(tmp_path):

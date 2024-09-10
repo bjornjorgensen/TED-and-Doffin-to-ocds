@@ -1,14 +1,17 @@
 # tests/test_OPT_155_LotResult.py
 
 import pytest
-from converters.OPT_155_LotResult import parse_vehicle_type, merge_vehicle_type
+from ted_and_doffin_to_ocds.converters.OPT_155_LotResult import (
+    parse_vehicle_type,
+    merge_vehicle_type,
+)
 import json
 import os
 import sys
 
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from main import main
+from src.ted_and_doffin_to_ocds.main import main
 
 
 def test_parse_vehicle_type():

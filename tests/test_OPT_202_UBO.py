@@ -1,14 +1,17 @@
 # tests/test_OPT_202_UBO.py
 
 import pytest
-from converters.OPT_202_UBO import parse_ubo_identifier, merge_ubo_identifier
+from ted_and_doffin_to_ocds.converters.OPT_202_UBO import (
+    parse_ubo_identifier,
+    merge_ubo_identifier,
+)
 import json
 import os
 import sys
 
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from main import main
+from src.ted_and_doffin_to_ocds.main import main
 
 
 def test_parse_ubo_identifier():

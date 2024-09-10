@@ -8,8 +8,8 @@ import logging
 
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from main import main, configure_logging
-from converters.BT_5071_Lot import (
+from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from ted_and_doffin_to_ocds.converters.BT_5071_Lot import (
     parse_place_performance_country_subdivision,
     merge_place_performance_country_subdivision,
 )

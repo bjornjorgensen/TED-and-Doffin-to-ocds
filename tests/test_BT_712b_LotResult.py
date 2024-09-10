@@ -1,7 +1,7 @@
 # tests/test_BT_712b_LotResult.py
 
 import pytest
-from converters.BT_712b_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_712b_LotResult import (
     parse_buyer_review_complainants_bt_712b,
     merge_buyer_review_complainants_bt_712b,
 )

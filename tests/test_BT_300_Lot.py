@@ -1,7 +1,10 @@
 # tests/test_BT_300_Lot.py
 
 import pytest
-from converters.BT_300_Lot import parse_lot_additional_info, merge_lot_additional_info
+from ted_and_doffin_to_ocds.converters.BT_300_Lot import (
+    parse_lot_additional_info,
+    merge_lot_additional_info,
+)
 
 
 def test_parse_lot_additional_info():

@@ -6,7 +6,10 @@ import os
 
 # Add the parent directory to sys.path to import the converter
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from converters.BT_23_Part import parse_main_nature_part, merge_main_nature_part
+from ted_and_doffin_to_ocds.converters.BT_23_Part import (
+    parse_main_nature_part,
+    merge_main_nature_part,
+)
 
 
 def test_parse_main_nature_part_works():

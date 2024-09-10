@@ -4,7 +4,7 @@ import os
 import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from main import main
+from src.ted_and_doffin_to_ocds.main import main
 
 
 def test_bt_707_lot_integration(tmp_path):

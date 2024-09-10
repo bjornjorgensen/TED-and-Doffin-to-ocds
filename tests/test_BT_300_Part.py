@@ -1,7 +1,7 @@
 # tests/test_BT_300_Part.py
 
 import pytest
-from converters.BT_300_Part import (
+from ted_and_doffin_to_ocds.converters.BT_300_Part import (
     parse_part_additional_info,
     merge_part_additional_info,
 )

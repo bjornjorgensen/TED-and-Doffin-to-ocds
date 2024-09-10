@@ -1,6 +1,6 @@
 # tests/test_OPT_301_Lot_ReviewInfo.py
 
-from converters.OPT_301_Lot_ReviewInfo import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Lot_ReviewInfo import (
     parse_review_info_identifier,
     merge_review_info_identifier,
 )

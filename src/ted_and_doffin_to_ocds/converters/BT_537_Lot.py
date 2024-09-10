@@ -1,13 +1,10 @@
-# converters/BT_130_Lot.py
+# converters/BT_537_Lot.py
 
-import logging
 from lxml import etree
-from utils.date_utils import start_date
-
-logger = logging.getLogger(__name__)
+from ted_and_doffin_to_ocds.utils.date_utils import end_date
 
 
-def parse_dispatch_invitation_tender(xml_content):
+def parse_lot_duration_end_date(xml_content):
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -22,47 +19,41 @@ def parse_dispatch_invitation_tender(xml_content):
 
     result = {"tender": {"lots": []}}
 
-    lots = root.xpath(
+    lot_elements = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
     )
 
-    for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        invitation_date = lot.xpath(
-            "cac:TenderingProcess/cac:InvitationSubmissionPeriod/cbc:StartDate/text()",
+    for lot_element in lot_elements:
+        lot_id = lot_element.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        date_to_end = lot_element.xpath(
+            "cac:ProcurementProject/cac:PlannedPeriod/cbc:EndDate/text()",
             namespaces=namespaces,
         )
 
-        if invitation_date:
+        if date_to_end:
             try:
-                iso_date = start_date(invitation_date[0])
-                result["tender"]["lots"].append(
-                    {"id": lot_id, "secondStage": {"invitationDate": iso_date}}
-                )
+                iso_end_date = end_date(date_to_end[0])
+                lot = {"id": lot_id, "contractPeriod": {"endDate": iso_end_date}}
+                result["tender"]["lots"].append(lot)
             except ValueError as e:
-                logger.error(
-                    f"Error parsing invitation date for lot {lot_id}: {str(e)}"
-                )
+                print(f"Warning: Invalid date format for lot {lot_id}: {str(e)}")
 
     return result if result["tender"]["lots"] else None
 
 
-def merge_dispatch_invitation_tender(release_json, dispatch_invitation_data):
-    if not dispatch_invitation_data:
-        logger.warning("No Dispatch Invitation Tender data to merge")
+def merge_lot_duration_end_date(release_json, lot_duration_end_date_data):
+    if not lot_duration_end_date_data:
         return
 
     existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
 
-    for new_lot in dispatch_invitation_data["tender"]["lots"]:
+    for new_lot in lot_duration_end_date_data["tender"]["lots"]:
         existing_lot = next(
             (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
         )
         if existing_lot:
-            existing_lot.setdefault("secondStage", {}).update(new_lot["secondStage"])
+            existing_lot.setdefault("contractPeriod", {}).update(
+                new_lot["contractPeriod"]
+            )
         else:
             existing_lots.append(new_lot)
-
-    logger.info(
-        f"Merged Dispatch Invitation Tender data for {len(dispatch_invitation_data['tender']['lots'])} lots"
-    )

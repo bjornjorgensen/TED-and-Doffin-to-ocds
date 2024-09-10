@@ -1,7 +1,7 @@
 # tests/test_BT_16_Organization_TouchPoint.py
 
 import pytest
-from converters.BT_16_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.BT_16_Organization_TouchPoint import (
     parse_organization_touchpoint_part_name,
     merge_organization_touchpoint_part_name,
 )
@@ -11,7 +11,7 @@ import sys
 
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from main import main
+from src.ted_and_doffin_to_ocds.main import main
 
 
 def test_parse_organization_touchpoint_part_name():

@@ -1,7 +1,10 @@
 # tests/test_BT_50_Lot.py
 
 import pytest
-from converters.BT_50_Lot import parse_minimum_candidates, merge_minimum_candidates
+from ted_and_doffin_to_ocds.converters.BT_50_Lot import (
+    parse_minimum_candidates,
+    merge_minimum_candidates,
+)
 
 
 def test_parse_minimum_candidates():

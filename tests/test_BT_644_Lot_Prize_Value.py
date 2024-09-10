@@ -1,6 +1,6 @@
 # tests/test_BT_644_Lot_Prize_Value.py
 
-from converters.BT_644_Lot_Prize_Value import (
+from ted_and_doffin_to_ocds.converters.BT_644_Lot_Prize_Value import (
     parse_lot_prize_value,
     merge_lot_prize_value,
 )

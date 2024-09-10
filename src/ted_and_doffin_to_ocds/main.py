@@ -1,1371 +1,1674 @@
 # main.py
 import json
 import logging
-from converters.Common_operations import NoticeProcessor
-from converters.BT_01_Procedure import (
+from ted_and_doffin_to_ocds.converters.Common_operations import NoticeProcessor
+from ted_and_doffin_to_ocds.converters.BT_01_Procedure import (
     parse_procedure_legal_basis,
     merge_procedure_legal_basis,
 )
-from converters.BT_03 import parse_form_type, merge_form_type
-from converters.BT_04_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_03 import parse_form_type, merge_form_type
+from ted_and_doffin_to_ocds.converters.BT_04_Procedure import (
     parse_procedure_identifier,
     merge_procedure_identifier,
 )
-from converters.BT_05_notice import (
+from ted_and_doffin_to_ocds.converters.BT_05_notice import (
     parse_notice_dispatch_date_time,
     merge_notice_dispatch_date_time,
 )
-from converters.BT_06_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_06_Lot import (
     parse_strategic_procurement,
     merge_strategic_procurement,
 )
-from converters.BT_09_Procedure import parse_cross_border_law, merge_cross_border_law
-from converters.BT_10 import parse_contract_xml, merge_contract_info
-from converters.BT_11_Procedure_Buyer import (
+from ted_and_doffin_to_ocds.converters.BT_09_Procedure import (
+    parse_cross_border_law,
+    merge_cross_border_law,
+)
+from ted_and_doffin_to_ocds.converters.BT_10 import (
+    parse_contract_xml,
+    merge_contract_info,
+)
+from ted_and_doffin_to_ocds.converters.BT_11_Procedure_Buyer import (
     parse_buyer_legal_type,
     merge_buyer_legal_type,
 )
-from converters.BT_88_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_88_Procedure import (
     parse_procedure_features,
     merge_procedure_features,
 )
-from converters.BT_105_Procedure import parse_procedure_type, merge_procedure_type
-from converters.BT_106_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_105_Procedure import (
+    parse_procedure_type,
+    merge_procedure_type,
+)
+from ted_and_doffin_to_ocds.converters.BT_106_Procedure import (
     parse_procedure_accelerated,
     merge_procedure_accelerated,
 )
-from converters.BT_109_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_109_Lot import (
     parse_framework_duration_justification,
     merge_framework_duration_justification,
 )
-from converters.BT_111_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_111_Lot import (
     parse_framework_buyer_categories,
     merge_framework_buyer_categories,
 )
-from converters.BT_113_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_113_Lot import (
     parse_framework_max_participants,
     merge_framework_max_participants,
 )
-from converters.BT_115_GPA_Coverage import parse_gpa_coverage, merge_gpa_coverage
-from converters.BT_13713_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_115_GPA_Coverage import (
+    parse_gpa_coverage,
+    merge_gpa_coverage,
+)
+from ted_and_doffin_to_ocds.converters.BT_13713_LotResult import (
     parse_lot_result_identifier,
     merge_lot_result_identifier,
 )
-from converters.BT_13714_Tender import (
+from ted_and_doffin_to_ocds.converters.BT_13714_Tender import (
     parse_tender_lot_identifier,
     merge_tender_lot_identifier,
 )
-from converters.BT_1375_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_1375_Procedure import (
     parse_group_lot_identifier,
     merge_group_lot_identifier,
 )
-from converters.BT_119_LotResult import parse_dps_termination, merge_dps_termination
-from converters.BT_120_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_119_LotResult import (
+    parse_dps_termination,
+    merge_dps_termination,
+)
+from ted_and_doffin_to_ocds.converters.BT_120_Lot import (
     parse_no_negotiation_necessary,
     merge_no_negotiation_necessary,
 )
-from converters.BT_122_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_122_Lot import (
     parse_electronic_auction_description,
     merge_electronic_auction_description,
 )
-from converters.BT_123_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_123_Lot import (
     parse_electronic_auction_url,
     merge_electronic_auction_url,
 )
-from converters.BT_124_Tool_Atypical_URL import (
+from ted_and_doffin_to_ocds.converters.BT_124_Tool_Atypical_URL import (
     parse_tool_atypical_url,
     merge_tool_atypical_url,
 )
-from converters.BT_125_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_125_Lot import (
     parse_previous_planning_identifier_lot,
     merge_previous_planning_identifier_lot,
 )
-from converters.BT_125_Part import (
+from ted_and_doffin_to_ocds.converters.BT_125_Part import (
     parse_previous_planning_identifier_part,
     merge_previous_planning_identifier_part,
 )
-from converters.BT_1252_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_1252_Procedure import (
     parse_direct_award_justification,
     merge_direct_award_justification,
 )
-from converters.BT_127_notice import parse_future_notice_date, merge_future_notice_date
-from converters.BT_13_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_127_notice import (
+    parse_future_notice_date,
+    merge_future_notice_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_13_Lot import (
     parse_additional_info_deadline,
     merge_additional_info_deadline,
 )
-from converters.BT_13_Part import (
+from ted_and_doffin_to_ocds.converters.BT_13_Part import (
     parse_additional_info_deadline_part,
     merge_additional_info_deadline_part,
 )
-from converters.BT_130_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_130_Lot import (
     parse_dispatch_invitation_tender,
     merge_dispatch_invitation_tender,
 )
-from converters.BT_131_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_131_Lot import (
     parse_deadline_receipt_tenders,
     merge_deadline_receipt_tenders,
 )
-from converters.BT_1311_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_1311_Lot import (
     parse_deadline_receipt_requests,
     merge_deadline_receipt_requests,
 )
-from converters.BT_132_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_132_Lot import (
     parse_lot_public_opening_date,
     merge_lot_public_opening_date,
 )
-from converters.BT_133_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_133_Lot import (
     parse_lot_bid_opening_location,
     merge_lot_bid_opening_location,
 )
-from converters.BT_134_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_134_Lot import (
     parse_lot_public_opening_description,
     merge_lot_public_opening_description,
 )
-from converters.BT_135_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_135_Procedure import (
     parse_direct_award_justification_rationale,
     merge_direct_award_justification_rationale,
 )
-from converters.BT_1351_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_1351_Procedure import (
     parse_accelerated_procedure_justification,
     merge_accelerated_procedure_justification,
 )
-from converters.BT_136_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_136_Procedure import (
     parse_direct_award_justification_code,
     merge_direct_award_justification_code,
 )
-from converters.BT_137_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_137_Lot import (
     parse_purpose_lot_identifier,
     merge_purpose_lot_identifier,
 )
-from converters.BT_137_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.BT_137_LotsGroup import (
     parse_lots_group_identifier,
     merge_lots_group_identifier,
 )
-from converters.BT_137_Part import parse_part_identifier, merge_part_identifier
-from converters.BT_14_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_137_Part import (
+    parse_part_identifier,
+    merge_part_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_14_Lot import (
     parse_lot_documents_restricted,
     merge_lot_documents_restricted,
 )
-from converters.BT_14_Part import (
+from ted_and_doffin_to_ocds.converters.BT_14_Part import (
     parse_part_documents_restricted,
     merge_part_documents_restricted,
 )
-from converters.BT_140_notice import parse_change_reason_code, merge_change_reason_code
-from converters.BT_142_LotResult import parse_winner_chosen, merge_winner_chosen
-from converters.BT_144_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_140_notice import (
+    parse_change_reason_code,
+    merge_change_reason_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_142_LotResult import (
+    parse_winner_chosen,
+    merge_winner_chosen,
+)
+from ted_and_doffin_to_ocds.converters.BT_144_LotResult import (
     parse_not_awarded_reason,
     merge_not_awarded_reason,
 )
-from converters.BT_145_Contract import (
+from ted_and_doffin_to_ocds.converters.BT_145_Contract import (
     parse_contract_conclusion_date,
     merge_contract_conclusion_date,
 )
-from converters.BT_1451_Contract import (
+from ted_and_doffin_to_ocds.converters.BT_1451_Contract import (
     parse_winner_decision_date,
     merge_winner_decision_date,
 )
-from converters.BT_15_Lot_Part import parse_documents_url, merge_documents_url
-from converters.BT_150_Contract import (
+from ted_and_doffin_to_ocds.converters.BT_15_Lot_Part import (
+    parse_documents_url,
+    merge_documents_url,
+)
+from ted_and_doffin_to_ocds.converters.BT_150_Contract import (
     parse_contract_identifier,
     merge_contract_identifier,
 )
-from converters.BT_151_Contract import parse_contract_url, merge_contract_url
-from converters.BT_16_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.BT_151_Contract import (
+    parse_contract_url,
+    merge_contract_url,
+)
+from ted_and_doffin_to_ocds.converters.BT_16_Organization_Company import (
     parse_organization_part_name,
     merge_organization_part_name,
 )
-from converters.BT_16_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.BT_16_Organization_TouchPoint import (
     parse_organization_touchpoint_part_name,
     merge_organization_touchpoint_part_name,
 )
-from converters.BT_160_Tender import (
+from ted_and_doffin_to_ocds.converters.BT_160_Tender import (
     parse_concession_revenue_buyer,
     merge_concession_revenue_buyer,
 )
-from converters.BT_162_Tender import (
+from ted_and_doffin_to_ocds.converters.BT_162_Tender import (
     parse_concession_revenue_user,
     merge_concession_revenue_user,
 )
-from converters.BT_163_Tender import (
+from ted_and_doffin_to_ocds.converters.BT_163_Tender import (
     parse_concession_value_description,
     merge_concession_value_description,
 )
-from converters.BT_165_Organization_Company import parse_winner_size, merge_winner_size
-from converters.BT_17_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_165_Organization_Company import (
+    parse_winner_size,
+    merge_winner_size,
+)
+from ted_and_doffin_to_ocds.converters.BT_17_Lot import (
     parse_submission_electronic,
     merge_submission_electronic,
 )
-from converters.BT_171_Tender import parse_tender_rank, merge_tender_rank
-from converters.BT_1711_Tender import parse_tender_ranked, merge_tender_ranked
-from converters.BT_18_Lot import parse_submission_url, merge_submission_url
-from converters.BT_19_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_171_Tender import (
+    parse_tender_rank,
+    merge_tender_rank,
+)
+from ted_and_doffin_to_ocds.converters.BT_1711_Tender import (
+    parse_tender_ranked,
+    merge_tender_ranked,
+)
+from ted_and_doffin_to_ocds.converters.BT_18_Lot import (
+    parse_submission_url,
+    merge_submission_url,
+)
+from ted_and_doffin_to_ocds.converters.BT_19_Lot import (
     parse_submission_nonelectronic_justification,
     merge_submission_nonelectronic_justification,
 )
-from converters.BT_191_Tender import parse_country_origin, merge_country_origin
-from converters.BT_193_Tender import parse_tender_variant, merge_tender_variant
-from converters.BT_539_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.BT_191_Tender import (
+    parse_country_origin,
+    merge_country_origin,
+)
+from ted_and_doffin_to_ocds.converters.BT_193_Tender import (
+    parse_tender_variant,
+    merge_tender_variant,
+)
+from ted_and_doffin_to_ocds.converters.BT_539_LotsGroup import (
     parse_award_criterion_type_lots_group,
     merge_award_criterion_type_lots_group,
 )
-from converters.BT_5421_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_5421_Lot import (
     parse_award_criterion_number_weight_lot,
     merge_award_criterion_number_weight_lot,
 )
-from converters.BT_5421_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.BT_5421_LotsGroup import (
     parse_award_criterion_number_weight_lots_group,
     merge_award_criterion_number_weight_lots_group,
 )
-from converters.BT_5422_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_5422_Lot import (
     parse_award_criterion_number_fixed,
     merge_award_criterion_number_fixed,
 )
-from converters.BT_5422_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.BT_5422_LotsGroup import (
     parse_award_criterion_number_fixed_lotsgroup,
     merge_award_criterion_number_fixed_lotsgroup,
 )
 
 
 # BT_195
-from converters.BT_195_BT_09_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_195_BT_09_Procedure import (
     bt_195_parse_unpublished_identifier_bt_09_procedure,
     bt_195_merge_unpublished_identifier_bt_09_procedure,
 )
-from converters.BT_195_BT_105_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_195_BT_105_Procedure import (
     parse_bt195_bt105_unpublished_identifier,
     merge_bt195_bt105_unpublished_identifier,
 )
-from converters.BT_195_BT_106_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_195_BT_106_Procedure import (
     parse_bt195_bt106_unpublished_identifier,
     merge_bt195_bt106_unpublished_identifier,
 )
-from converters.BT_195_BT_1252_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_195_BT_1252_Procedure import (
     parse_bt195_bt1252_unpublished_identifier,
     merge_bt195_bt1252_unpublished_identifier,
 )
-from converters.BT_195_BT_135_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_195_BT_135_Procedure import (
     parse_bt195_bt135_unpublished_identifier,
     merge_bt195_bt135_unpublished_identifier,
 )
 
-from converters.BT_195_BT_1351_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_195_BT_1351_Procedure import (
     parse_bt195_bt1351_unpublished_identifier,
     merge_bt195_bt1351_unpublished_identifier,
 )
 
-from converters.BT_195_BT_136_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_195_BT_136_Procedure import (
     parse_bt195_bt136_unpublished_identifier,
     merge_bt195_bt136_unpublished_identifier,
 )
 
-from converters.BT_195_BT_142_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_195_BT_142_LotResult import (
     parse_bt195_bt142_unpublished_identifier,
     merge_bt195_bt142_unpublished_identifier,
 )
 
-from converters.BT_195_BT_144_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_195_BT_144_LotResult import (
     parse_bt195_bt144_unpublished_identifier,
     merge_bt195_bt144_unpublished_identifier,
 )
 
 # BT_196
-from converters.BT_196_BT_09_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_196_BT_09_Procedure import (
     bt_196_parse_unpublished_justification_bt_09_procedure,
     bt_196_merge_unpublished_justification_bt_09_procedure,
 )
 
-from converters.BT_196_BT_105_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_196_BT_105_Procedure import (
     parse_bt196_bt105_unpublished_justification,
     merge_bt196_bt105_unpublished_justification,
 )
-from converters.BT_196_BT_106_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_196_BT_106_Procedure import (
     parse_bt196_bt106_unpublished_justification,
     merge_bt196_bt106_unpublished_justification,
 )
-from converters.BT_196_BT_1252_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_196_BT_1252_Procedure import (
     parse_bt196_bt1252_unpublished_justification,
     merge_bt196_bt1252_unpublished_justification,
 )
-from converters.BT_196_BT_135_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_196_BT_135_Procedure import (
     parse_bt196_bt135_unpublished_justification,
     merge_bt196_bt135_unpublished_justification,
 )
 
-from converters.BT_196_BT_1351_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_196_BT_1351_Procedure import (
     parse_bt196_bt1351_unpublished_justification,
     merge_bt196_bt1351_unpublished_justification,
 )
 
-from converters.BT_196_BT_136_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_196_BT_136_Procedure import (
     parse_bt196_bt136_unpublished_justification,
     merge_bt196_bt136_unpublished_justification,
 )
 
-from converters.BT_196_BT_142_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_196_BT_142_LotResult import (
     parse_bt196_bt142_unpublished_justification,
     merge_bt196_bt142_unpublished_justification,
 )
 
-from converters.BT_196_BT_144_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_196_BT_144_LotResult import (
     parse_bt196_bt144_unpublished_justification,
     merge_bt196_bt144_unpublished_justification,
 )
 
 # #BT_197
-from converters.BT_197_BT_09_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_197_BT_09_Procedure import (
     bt_197_parse_unpublished_justification_code_bt_09_procedure,
     bt_197_merge_unpublished_justification_code_bt_09_procedure,
 )
 
-from converters.BT_197_BT_105_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_197_BT_105_Procedure import (
     parse_bt197_bt105_unpublished_justification_code,
     merge_bt197_bt105_unpublished_justification_code,
 )
-from converters.BT_197_BT_106_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_197_BT_106_Procedure import (
     parse_bt197_bt106_unpublished_justification_code,
     merge_bt197_bt106_unpublished_justification_code,
 )
-from converters.BT_197_BT_1252_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_197_BT_1252_Procedure import (
     parse_bt197_bt1252_unpublished_justification_code,
     merge_bt197_bt1252_unpublished_justification_code,
 )
-from converters.BT_197_BT_135_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_197_BT_135_Procedure import (
     parse_bt197_bt135_unpublished_justification_code,
     merge_bt197_bt135_unpublished_justification_code,
 )
 
-from converters.BT_197_BT_1351_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_197_BT_1351_Procedure import (
     parse_bt197_bt1351_unpublished_justification_code,
     merge_bt197_bt1351_unpublished_justification_code,
 )
 
 
-from converters.BT_197_BT_136_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_197_BT_136_Procedure import (
     parse_bt197_bt136_unpublished_justification_code,
     merge_bt197_bt136_unpublished_justification_code,
 )
 
-from converters.BT_197_BT_142_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_197_BT_142_LotResult import (
     parse_bt197_bt142_unpublished_justification_code,
     merge_bt197_bt142_unpublished_justification_code,
 )
 
-from converters.BT_197_BT_144_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_197_BT_144_LotResult import (
     parse_bt197_bt144_unpublished_justification_code,
     merge_bt197_bt144_unpublished_justification_code,
 )
 
 #
 # #BT_198
-from converters.BT_198_BT_09_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_198_BT_09_Procedure import (
     bt_198_parse_unpublished_access_date_bt_09_procedure,
     bt_198_merge_unpublished_access_date_bt_09_procedure,
 )
-from converters.BT_198_BT_105_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_198_BT_105_Procedure import (
     parse_bt198_bt105_unpublished_access_date,
     merge_bt198_bt105_unpublished_access_date,
 )
-from converters.BT_198_BT_106_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_198_BT_106_Procedure import (
     parse_bt198_bt106_unpublished_access_date,
     merge_bt198_bt106_unpublished_access_date,
 )
-from converters.BT_198_BT_1252_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_198_BT_1252_Procedure import (
     parse_bt198_bt1252_unpublished_access_date,
     merge_bt198_bt1252_unpublished_access_date,
 )
-from converters.BT_198_BT_135_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_198_BT_135_Procedure import (
     parse_bt198_bt135_unpublished_access_date,
     merge_bt198_bt135_unpublished_access_date,
 )
 
-from converters.BT_198_BT_1351_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_198_BT_1351_Procedure import (
     parse_bt198_bt1351_unpublished_access_date,
     merge_bt198_bt1351_unpublished_access_date,
 )
 
-from converters.BT_198_BT_136_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_198_BT_136_Procedure import (
     parse_bt198_bt136_unpublished_access_date,
     merge_bt198_bt136_unpublished_access_date,
 )
 
-from converters.BT_198_BT_142_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_198_BT_142_LotResult import (
     parse_bt198_bt142_unpublished_access_date,
     merge_bt198_bt142_unpublished_access_date,
 )
 
-from converters.BT_198_BT_144_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_198_BT_144_LotResult import (
     parse_bt198_bt144_unpublished_access_date,
     merge_bt198_bt144_unpublished_access_date,
 )
 
-from converters.BT_200_Contract import (
+from ted_and_doffin_to_ocds.converters.BT_200_Contract import (
     parse_contract_modification_reason,
     merge_contract_modification_reason,
 )
-from converters.BT_201_Contract import (
+from ted_and_doffin_to_ocds.converters.BT_201_Contract import (
     parse_contract_modification_description,
     merge_contract_modification_description,
 )
-from converters.BT_202_Contract import (
+from ted_and_doffin_to_ocds.converters.BT_202_Contract import (
     parse_contract_modification_summary,
     merge_contract_modification_summary,
 )
-from converters.BT_21_Lot import parse_lot_title, merge_lot_title
-from converters.BT_21_LotsGroup import parse_lots_group_title, merge_lots_group_title
-from converters.BT_21_Part import parse_part_title, merge_part_title
-from converters.BT_21_Procedure import parse_procedure_title, merge_procedure_title
-from converters.BT_22_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_21_Lot import parse_lot_title, merge_lot_title
+from ted_and_doffin_to_ocds.converters.BT_21_LotsGroup import (
+    parse_lots_group_title,
+    merge_lots_group_title,
+)
+from ted_and_doffin_to_ocds.converters.BT_21_Part import (
+    parse_part_title,
+    merge_part_title,
+)
+from ted_and_doffin_to_ocds.converters.BT_21_Procedure import (
+    parse_procedure_title,
+    merge_procedure_title,
+)
+from ted_and_doffin_to_ocds.converters.BT_22_Lot import (
     parse_lot_internal_identifier,
     merge_lot_internal_identifier,
 )
-from converters.BT_23_Lot import parse_main_nature, merge_main_nature
-from converters.BT_23_Part import parse_main_nature_part, merge_main_nature_part
-from converters.BT_23_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_23_Lot import (
+    parse_main_nature,
+    merge_main_nature,
+)
+from ted_and_doffin_to_ocds.converters.BT_23_Part import (
+    parse_main_nature_part,
+    merge_main_nature_part,
+)
+from ted_and_doffin_to_ocds.converters.BT_23_Procedure import (
     parse_main_nature_procedure,
     merge_main_nature_procedure,
 )
-from converters.BT_24_Lot import parse_lot_description, merge_lot_description
-from converters.BT_24_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.BT_24_Lot import (
+    parse_lot_description,
+    merge_lot_description,
+)
+from ted_and_doffin_to_ocds.converters.BT_24_LotsGroup import (
     parse_lots_group_description,
     merge_lots_group_description,
 )
-from converters.BT_24_Part import parse_part_description, merge_part_description
-from converters.BT_24_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_24_Part import (
+    parse_part_description,
+    merge_part_description,
+)
+from ted_and_doffin_to_ocds.converters.BT_24_Procedure import (
     parse_procedure_description,
     merge_procedure_description,
 )
-from converters.BT_25_Lot import parse_lot_quantity, merge_lot_quantity
-from converters.BT_26a_lot import parse_classification_type, merge_classification_type
-from converters.BT_26a_part import (
+from ted_and_doffin_to_ocds.converters.BT_25_Lot import (
+    parse_lot_quantity,
+    merge_lot_quantity,
+)
+from ted_and_doffin_to_ocds.converters.BT_26a_lot import (
+    parse_classification_type,
+    merge_classification_type,
+)
+from ted_and_doffin_to_ocds.converters.BT_26a_part import (
     parse_classification_type_part,
     merge_classification_type_part,
 )
-from converters.BT_26a_procedure import (
+from ted_and_doffin_to_ocds.converters.BT_26a_procedure import (
     parse_classification_type_procedure,
     merge_classification_type_procedure,
 )
-from converters.BT_26m_lot import (
+from ted_and_doffin_to_ocds.converters.BT_26m_lot import (
     parse_main_classification_type_lot,
     merge_main_classification_type_lot,
 )
-from converters.BT_26m_part import (
+from ted_and_doffin_to_ocds.converters.BT_26m_part import (
     parse_main_classification_type_part,
     merge_main_classification_type_part,
 )
-from converters.BT_26m_procedure import (
+from ted_and_doffin_to_ocds.converters.BT_26m_procedure import (
     parse_main_classification_type_procedure,
     merge_main_classification_type_procedure,
 )
-from converters.BT_262_lot import (
+from ted_and_doffin_to_ocds.converters.BT_262_lot import (
     parse_main_classification_code_lot,
     merge_main_classification_code_lot,
 )
-from converters.BT_262_part import (
+from ted_and_doffin_to_ocds.converters.BT_262_part import (
     parse_main_classification_code_part,
     merge_main_classification_code_part,
 )
-from converters.BT_262_procedure import (
+from ted_and_doffin_to_ocds.converters.BT_262_procedure import (
     parse_main_classification_code_procedure,
     merge_main_classification_code_procedure,
 )
-from converters.BT_263_lot import (
+from ted_and_doffin_to_ocds.converters.BT_263_lot import (
     parse_additional_classification_code_lot,
     merge_additional_classification_code_lot,
 )
-from converters.BT_263_part import (
+from ted_and_doffin_to_ocds.converters.BT_263_part import (
     parse_additional_classification_code_part,
     merge_additional_classification_code_part,
 )
-from converters.BT_263_procedure import (
+from ted_and_doffin_to_ocds.converters.BT_263_procedure import (
     parse_additional_classification_code_procedure,
     merge_additional_classification_code_procedure,
 )
-from converters.BT_27_Lot import parse_lot_estimated_value, merge_lot_estimated_value
-from converters.BT_27_LotsGroup import parse_bt_27_lots_group, merge_bt_27_lots_group
-from converters.BT_27_Part import parse_bt_27_part, merge_bt_27_part
-from converters.BT_27_Procedure import parse_bt_27_procedure, merge_bt_27_procedure
-from converters.BT_271_Lot import parse_bt_271_lot, merge_bt_271_lot
-from converters.BT_271_LotsGroup import parse_bt_271_lots_group, merge_bt_271_lots_group
-from converters.BT_271_Procedure import parse_bt_271_procedure, merge_bt_271_procedure
-from converters.BT_300_Lot import parse_lot_additional_info, merge_lot_additional_info
-from converters.BT_300_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.BT_27_Lot import (
+    parse_lot_estimated_value,
+    merge_lot_estimated_value,
+)
+from ted_and_doffin_to_ocds.converters.BT_27_LotsGroup import (
+    parse_bt_27_lots_group,
+    merge_bt_27_lots_group,
+)
+from ted_and_doffin_to_ocds.converters.BT_27_Part import (
+    parse_bt_27_part,
+    merge_bt_27_part,
+)
+from ted_and_doffin_to_ocds.converters.BT_27_Procedure import (
+    parse_bt_27_procedure,
+    merge_bt_27_procedure,
+)
+from ted_and_doffin_to_ocds.converters.BT_271_Lot import (
+    parse_bt_271_lot,
+    merge_bt_271_lot,
+)
+from ted_and_doffin_to_ocds.converters.BT_271_LotsGroup import (
+    parse_bt_271_lots_group,
+    merge_bt_271_lots_group,
+)
+from ted_and_doffin_to_ocds.converters.BT_271_Procedure import (
+    parse_bt_271_procedure,
+    merge_bt_271_procedure,
+)
+from ted_and_doffin_to_ocds.converters.BT_300_Lot import (
+    parse_lot_additional_info,
+    merge_lot_additional_info,
+)
+from ted_and_doffin_to_ocds.converters.BT_300_LotsGroup import (
     parse_lotsgroup_additional_info,
     merge_lotsgroup_additional_info,
 )
-from converters.BT_300_Part import (
+from ted_and_doffin_to_ocds.converters.BT_300_Part import (
     parse_part_additional_info,
     merge_part_additional_info,
 )
-from converters.BT_300_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_300_Procedure import (
     parse_procedure_additional_info,
     merge_procedure_additional_info,
 )
-from converters.BT_31_Procedure import parse_max_lots_allowed, merge_max_lots_allowed
-from converters.BT_3201_Tender import parse_tender_identifier, merge_tender_identifier
-from converters.BT_3202_Contract import (
+from ted_and_doffin_to_ocds.converters.BT_31_Procedure import (
+    parse_max_lots_allowed,
+    merge_max_lots_allowed,
+)
+from ted_and_doffin_to_ocds.converters.BT_3201_Tender import (
+    parse_tender_identifier,
+    merge_tender_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_3202_Contract import (
     parse_contract_tender_id,
     merge_contract_tender_id,
 )
-from converters.BT_33_Procedure import parse_max_lots_awarded, merge_max_lots_awarded
-from converters.BT_330_Procedure import parse_group_identifier, merge_group_identifier
-from converters.BT_36_Lot import parse_lot_duration, merge_lot_duration
-from converters.BT_36_Part import parse_part_duration, merge_part_duration
-from converters.BT_40_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_33_Procedure import (
+    parse_max_lots_awarded,
+    merge_max_lots_awarded,
+)
+from ted_and_doffin_to_ocds.converters.BT_330_Procedure import (
+    parse_group_identifier,
+    merge_group_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_36_Lot import (
+    parse_lot_duration,
+    merge_lot_duration,
+)
+from ted_and_doffin_to_ocds.converters.BT_36_Part import (
+    parse_part_duration,
+    merge_part_duration,
+)
+from ted_and_doffin_to_ocds.converters.BT_40_Lot import (
     parse_lot_selection_criteria_second_stage,
     merge_lot_selection_criteria_second_stage,
 )
-from converters.BT_41_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_41_Lot import (
     parse_lot_following_contract,
     merge_lot_following_contract,
 )
-from converters.BT_42_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_42_Lot import (
     parse_lot_jury_decision_binding,
     merge_lot_jury_decision_binding,
 )
-from converters.BT_44_Lot import parse_prize_rank, merge_prize_rank
-from converters.BT_45_Lot import parse_lot_rewards_other, merge_lot_rewards_other
-from converters.BT_46_Lot import parse_jury_member_name, merge_jury_member_name
-from converters.BT_47_Lot import parse_participant_name, merge_participant_name
-from converters.BT_50_Lot import parse_minimum_candidates, merge_minimum_candidates
-from converters.BT_500_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.BT_44_Lot import (
+    parse_prize_rank,
+    merge_prize_rank,
+)
+from ted_and_doffin_to_ocds.converters.BT_45_Lot import (
+    parse_lot_rewards_other,
+    merge_lot_rewards_other,
+)
+from ted_and_doffin_to_ocds.converters.BT_46_Lot import (
+    parse_jury_member_name,
+    merge_jury_member_name,
+)
+from ted_and_doffin_to_ocds.converters.BT_47_Lot import (
+    parse_participant_name,
+    merge_participant_name,
+)
+from ted_and_doffin_to_ocds.converters.BT_50_Lot import (
+    parse_minimum_candidates,
+    merge_minimum_candidates,
+)
+from ted_and_doffin_to_ocds.converters.BT_500_Organization_Company import (
     parse_organization_name,
     merge_organization_name,
 )
-from converters.BT_500_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.BT_500_Organization_TouchPoint import (
     parse_touchpoint_name,
     merge_touchpoint_name,
 )
-from converters.BT_500_UBO import parse_ubo_name, merge_ubo_name
-from converters.BT_501_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.BT_500_UBO import parse_ubo_name, merge_ubo_name
+from ted_and_doffin_to_ocds.converters.BT_501_Organization_Company import (
     parse_organization_identifier,
     merge_organization_identifier,
 )
-from converters.BT_5010_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_5010_Lot import (
     parse_eu_funds_financing_identifier,
     merge_eu_funds_financing_identifier,
 )
-from converters.BT_5011_Contract import (
+from ted_and_doffin_to_ocds.converters.BT_5011_Contract import (
     parse_contract_eu_funds_financing_identifier,
     merge_contract_eu_funds_financing_identifier,
 )
-from converters.BT_502_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.BT_502_Organization_Company import (
     parse_organization_contact_point,
     merge_organization_contact_point,
 )
-from converters.BT_502_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.BT_502_Organization_TouchPoint import (
     parse_touchpoint_contact_point,
     merge_touchpoint_contact_point,
 )
-from converters.BT_503_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.BT_503_Organization_Company import (
     parse_organization_contact_telephone,
     merge_organization_contact_telephone,
 )
-from converters.BT_503_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.BT_503_Organization_TouchPoint import (
     parse_touchpoint_contact_telephone,
     merge_touchpoint_contact_telephone,
 )
-from converters.BT_503_UBO import parse_ubo_telephone, merge_ubo_telephone
-from converters.BT_505_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.BT_503_UBO import (
+    parse_ubo_telephone,
+    merge_ubo_telephone,
+)
+from ted_and_doffin_to_ocds.converters.BT_505_Organization_Company import (
     parse_organization_website,
     merge_organization_website,
 )
-from converters.BT_505_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.BT_505_Organization_TouchPoint import (
     parse_touchpoint_website,
     merge_touchpoint_website,
 )
-from converters.BT_506_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.BT_506_Organization_Company import (
     parse_organization_contact_email,
     merge_organization_contact_email,
 )
-from converters.BT_506_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.BT_506_Organization_TouchPoint import (
     parse_touchpoint_contact_email,
     merge_touchpoint_contact_email,
 )
-from converters.BT_506_UBO import parse_ubo_email, merge_ubo_email
-from converters.BT_507_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.BT_506_UBO import (
+    parse_ubo_email,
+    merge_ubo_email,
+)
+from ted_and_doffin_to_ocds.converters.BT_507_Organization_Company import (
     parse_organization_country_subdivision,
     merge_organization_country_subdivision,
 )
-from converters.BT_507_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.BT_507_Organization_TouchPoint import (
     parse_touchpoint_country_subdivision,
     merge_touchpoint_country_subdivision,
 )
-from converters.BT_507_UBO import (
+from ted_and_doffin_to_ocds.converters.BT_507_UBO import (
     parse_ubo_country_subdivision,
     merge_ubo_country_subdivision,
 )
-from converters.BT_5071_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_5071_Lot import (
     parse_place_performance_country_subdivision,
     merge_place_performance_country_subdivision,
 )
-from converters.BT_5071_Part import (
+from ted_and_doffin_to_ocds.converters.BT_5071_Part import (
     parse_part_place_performance_country_subdivision,
     merge_part_place_performance_country_subdivision,
 )
-from converters.BT_5071_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_5071_Procedure import (
     parse_procedure_place_performance_country_subdivision,
     merge_procedure_place_performance_country_subdivision,
 )
-from converters.BT_508_Procedure_Buyer import (
+from ted_and_doffin_to_ocds.converters.BT_508_Procedure_Buyer import (
     parse_buyer_profile_url,
     merge_buyer_profile_url,
 )
-from converters.BT_509_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.BT_509_Organization_Company import (
     parse_organization_edelivery_gateway,
     merge_organization_edelivery_gateway,
 )
-from converters.BT_509_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.BT_509_Organization_TouchPoint import (
     parse_touchpoint_edelivery_gateway,
     merge_touchpoint_edelivery_gateway,
 )
-from converters.BT_51_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_51_Lot import (
     parse_lot_maximum_candidates,
     merge_lot_maximum_candidates,
 )
-from converters.BT_510a_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.BT_510a_Organization_Company import (
     parse_organization_street,
     merge_organization_street,
 )
-from converters.BT_510a_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.BT_510a_Organization_TouchPoint import (
     parse_touchpoint_street,
     merge_touchpoint_street,
 )
-from converters.BT_510a_UBO import parse_ubo_street, merge_ubo_street
-from converters.BT_510b_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.BT_510a_UBO import (
+    parse_ubo_street,
+    merge_ubo_street,
+)
+from ted_and_doffin_to_ocds.converters.BT_510b_Organization_Company import (
     parse_organization_streetline1,
     merge_organization_streetline1,
 )
-from converters.BT_510b_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.BT_510b_Organization_TouchPoint import (
     parse_touchpoint_streetline1,
     merge_touchpoint_streetline1,
 )
-from converters.BT_510b_UBO import parse_ubo_streetline1, merge_ubo_streetline1
-from converters.BT_510c_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.BT_510b_UBO import (
+    parse_ubo_streetline1,
+    merge_ubo_streetline1,
+)
+from ted_and_doffin_to_ocds.converters.BT_510c_Organization_Company import (
     parse_organization_streetline2,
     merge_organization_streetline2,
 )
-from converters.BT_510c_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.BT_510c_Organization_TouchPoint import (
     parse_touchpoint_streetline2,
     merge_touchpoint_streetline2,
 )
-from converters.BT_510c_UBO import parse_ubo_streetline2, merge_ubo_streetline2
+from ted_and_doffin_to_ocds.converters.BT_510c_UBO import (
+    parse_ubo_streetline2,
+    merge_ubo_streetline2,
+)
 
-from converters.BT_5101_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_5101_Lot import (
     parse_place_performance_street_lot,
     merge_place_performance_street_lot,
 )
-from converters.BT_5101a_Part import (
+from ted_and_doffin_to_ocds.converters.BT_5101a_Part import (
     parse_part_place_performance_street,
     merge_part_place_performance_street,
 )
-from converters.BT_5101a_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_5101a_Procedure import (
     parse_procedure_place_performance_street,
     merge_procedure_place_performance_street,
 )
 
-from converters.BT_5101b_Part import (
+from ted_and_doffin_to_ocds.converters.BT_5101b_Part import (
     parse_part_place_performance_streetline1,
     merge_part_place_performance_streetline1,
 )
-from converters.BT_5101b_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_5101b_Procedure import (
     parse_procedure_place_performance_streetline1,
     merge_procedure_place_performance_streetline1,
 )
-from converters.BT_5101c_Part import (
+from ted_and_doffin_to_ocds.converters.BT_5101c_Part import (
     parse_part_place_performance_streetline2,
     merge_part_place_performance_streetline2,
 )
-from converters.BT_5101c_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_5101c_Procedure import (
     parse_procedure_place_performance_streetline2,
     merge_procedure_place_performance_streetline2,
 )
-from converters.BT_512_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.BT_512_Organization_Company import (
     parse_organization_postcode,
     merge_organization_postcode,
 )
-from converters.BT_512_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.BT_512_Organization_TouchPoint import (
     parse_touchpoint_postcode,
     merge_touchpoint_postcode,
 )
-from converters.BT_512_UBO import parse_ubo_postcode, merge_ubo_postcode
-from converters.BT_5121_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_512_UBO import (
+    parse_ubo_postcode,
+    merge_ubo_postcode,
+)
+from ted_and_doffin_to_ocds.converters.BT_5121_Lot import (
     parse_place_performance_post_code,
     merge_place_performance_post_code,
 )
-from converters.BT_5121_Part import (
+from ted_and_doffin_to_ocds.converters.BT_5121_Part import (
     parse_place_performance_post_code_part,
     merge_place_performance_post_code_part,
 )
-from converters.BT_5121_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_5121_Procedure import (
     parse_place_performance_post_code_procedure,
     merge_place_performance_post_code_procedure,
 )
-from converters.BT_513_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.BT_513_Organization_Company import (
     parse_organization_city,
     merge_organization_city,
 )
-from converters.BT_513_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.BT_513_Organization_TouchPoint import (
     parse_touchpoint_city,
     merge_touchpoint_city,
 )
-from converters.BT_513_UBO import parse_ubo_city, merge_ubo_city
-from converters.BT_5131_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_513_UBO import parse_ubo_city, merge_ubo_city
+from ted_and_doffin_to_ocds.converters.BT_5131_Lot import (
     parse_place_performance_city,
     merge_place_performance_city,
 )
-from converters.BT_5131_Part import (
+from ted_and_doffin_to_ocds.converters.BT_5131_Part import (
     parse_place_performance_city_part,
     merge_place_performance_city_part,
 )
-from converters.BT_5131_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_5131_Procedure import (
     parse_place_performance_city_procedure,
     merge_place_performance_city_procedure,
 )
-from converters.BT_514_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.BT_514_Organization_Company import (
     parse_organization_country,
     merge_organization_country,
 )
-from converters.BT_514_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.BT_514_Organization_TouchPoint import (
     parse_touchpoint_country,
     merge_touchpoint_country,
 )
-from converters.BT_514_UBO import parse_ubo_country, merge_ubo_country
-from converters.BT_5141_Lot import parse_lot_country, merge_lot_country
-from converters.BT_5141_Part import parse_part_country, merge_part_country
-from converters.BT_5141_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_514_UBO import (
+    parse_ubo_country,
+    merge_ubo_country,
+)
+from ted_and_doffin_to_ocds.converters.BT_5141_Lot import (
+    parse_lot_country,
+    merge_lot_country,
+)
+from ted_and_doffin_to_ocds.converters.BT_5141_Part import (
+    parse_part_country,
+    merge_part_country,
+)
+from ted_and_doffin_to_ocds.converters.BT_5141_Procedure import (
     parse_procedure_country,
     merge_procedure_country,
 )
-from converters.BT_52_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_52_Lot import (
     parse_successive_reduction_indicator,
     merge_successive_reduction_indicator,
 )
-from converters.BT_531_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_531_Lot import (
     parse_lot_additional_nature,
     merge_lot_additional_nature,
 )
-from converters.BT_531_Part import (
+from ted_and_doffin_to_ocds.converters.BT_531_Part import (
     parse_part_additional_nature,
     merge_part_additional_nature,
 )
-from converters.BT_531_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_531_Procedure import (
     parse_procedure_additional_nature,
     merge_procedure_additional_nature,
 )
-from converters.BT_536_Lot import parse_lot_start_date, merge_lot_start_date
-from converters.BT_536_Part import (
+from ted_and_doffin_to_ocds.converters.BT_536_Lot import (
+    parse_lot_start_date,
+    merge_lot_start_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_536_Part import (
     parse_part_contract_start_date,
     merge_part_contract_start_date,
 )
-from converters.BT_537_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_537_Lot import (
     parse_lot_duration_end_date,
     merge_lot_duration_end_date,
 )
-from converters.BT_537_Part import (
+from ted_and_doffin_to_ocds.converters.BT_537_Part import (
     parse_part_duration_end_date,
     merge_part_duration_end_date,
 )
-from converters.BT_538_Lot import parse_lot_duration_other, merge_lot_duration_other
-from converters.BT_538_Part import parse_part_duration_other, merge_part_duration_other
-from converters.BT_539_Lot import parse_award_criterion_type, merge_award_criterion_type
-from converters.BT_54_Lot import parse_options_description, merge_options_description
-from converters.BT_540_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_538_Lot import (
+    parse_lot_duration_other,
+    merge_lot_duration_other,
+)
+from ted_and_doffin_to_ocds.converters.BT_538_Part import (
+    parse_part_duration_other,
+    merge_part_duration_other,
+)
+from ted_and_doffin_to_ocds.converters.BT_539_Lot import (
+    parse_award_criterion_type,
+    merge_award_criterion_type,
+)
+from ted_and_doffin_to_ocds.converters.BT_54_Lot import (
+    parse_options_description,
+    merge_options_description,
+)
+from ted_and_doffin_to_ocds.converters.BT_540_Lot import (
     parse_award_criterion_description,
     merge_award_criterion_description,
 )
-from converters.BT_540_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.BT_540_LotsGroup import (
     parse_award_criterion_description_lots_group,
     merge_award_criterion_description_lots_group,
 )
-from converters.BT_541_Lot_FixedNumber import (
+from ted_and_doffin_to_ocds.converters.BT_541_Lot_FixedNumber import (
     parse_award_criterion_fixed_number,
     merge_award_criterion_fixed_number,
 )
 
-from converters.BT_5423_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_5423_Lot import (
     parse_award_criterion_number_threshold,
     merge_award_criterion_number_threshold,
 )
-from converters.BT_5423_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.BT_5423_LotsGroup import (
     parse_award_criterion_number_threshold_lotsgroup,
     merge_award_criterion_number_threshold_lotsgroup,
 )
-from converters.BT_543_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_543_Lot import (
     parse_award_criteria_complicated,
     merge_award_criteria_complicated,
 )
-from converters.BT_543_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.BT_543_LotsGroup import (
     parse_award_criteria_complicated_lotsgroup,
     merge_award_criteria_complicated_lotsgroup,
 )
-from converters.BT_553_Tender import (
+from ted_and_doffin_to_ocds.converters.BT_553_Tender import (
     parse_subcontracting_value,
     merge_subcontracting_value,
 )
-from converters.BT_554_Tender import (
+from ted_and_doffin_to_ocds.converters.BT_554_Tender import (
     parse_subcontracting_description,
     merge_subcontracting_description,
 )
-from converters.BT_555_Tender import (
+from ted_and_doffin_to_ocds.converters.BT_555_Tender import (
     parse_subcontracting_percentage,
     merge_subcontracting_percentage,
 )
-from converters.BT_57_Lot import parse_renewal_description, merge_renewal_description
-from converters.BT_58_Lot import parse_renewal_maximum, merge_renewal_maximum
-from converters.BT_60_Lot import parse_eu_funds, merge_eu_funds
-from converters.BT_610_Procedure_Buyer import (
+from ted_and_doffin_to_ocds.converters.BT_57_Lot import (
+    parse_renewal_description,
+    merge_renewal_description,
+)
+from ted_and_doffin_to_ocds.converters.BT_58_Lot import (
+    parse_renewal_maximum,
+    merge_renewal_maximum,
+)
+from ted_and_doffin_to_ocds.converters.BT_60_Lot import parse_eu_funds, merge_eu_funds
+from ted_and_doffin_to_ocds.converters.BT_610_Procedure_Buyer import (
     parse_activity_entity,
     merge_activity_entity,
 )
-from converters.BT_6110_Contract import (
+from ted_and_doffin_to_ocds.converters.BT_6110_Contract import (
     parse_contract_eu_funds_details,
     merge_contract_eu_funds_details,
 )
-from converters.BT_6140_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_6140_Lot import (
     parse_lot_eu_funds_details,
     merge_lot_eu_funds_details,
 )
-from converters.BT_615_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_615_Lot import (
     parse_documents_restricted_url,
     merge_documents_restricted_url,
 )
-from converters.BT_615_Part import (
+from ted_and_doffin_to_ocds.converters.BT_615_Part import (
     parse_documents_restricted_url_part,
     merge_documents_restricted_url_part,
 )
-from converters.BT_625_Lot import parse_unit, merge_unit
-from converters.BT_63_Lot import parse_variants, merge_variants
-from converters.BT_630_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_625_Lot import parse_unit, merge_unit
+from ted_and_doffin_to_ocds.converters.BT_63_Lot import parse_variants, merge_variants
+from ted_and_doffin_to_ocds.converters.BT_630_Lot import (
     parse_deadline_receipt_expressions,
     merge_deadline_receipt_expressions,
 )
-from converters.BT_631_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_631_Lot import (
     parse_dispatch_invitation_interest,
     merge_dispatch_invitation_interest,
 )
-from converters.BT_632_Lot import parse_tool_name, merge_tool_name
-from converters.BT_632_Part import parse_tool_name_part, merge_tool_name_part
-from converters.BT_633_Organization import (
+from ted_and_doffin_to_ocds.converters.BT_632_Lot import (
+    parse_tool_name,
+    merge_tool_name,
+)
+from ted_and_doffin_to_ocds.converters.BT_632_Part import (
+    parse_tool_name_part,
+    merge_tool_name_part,
+)
+from ted_and_doffin_to_ocds.converters.BT_633_Organization import (
     parse_organization_natural_person,
     merge_organization_natural_person,
 )
-from converters.BT_635_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_635_LotResult import (
     parse_buyer_review_requests_count,
     merge_buyer_review_requests_count,
 )
-from converters.BT_636_LotResult import parse_irregularity_type, merge_irregularity_type
-from converters.BT_64_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_636_LotResult import (
+    parse_irregularity_type,
+    merge_irregularity_type,
+)
+from ted_and_doffin_to_ocds.converters.BT_64_Lot import (
     parse_subcontracting_obligation_minimum,
     merge_subcontracting_obligation_minimum,
 )
-from converters.BT_644_Lot_Prize_Value import (
+from ted_and_doffin_to_ocds.converters.BT_644_Lot_Prize_Value import (
     parse_lot_prize_value,
     merge_lot_prize_value,
 )
-from converters.BT_65_Lot_Subcontracting_Obligation import (
+from ted_and_doffin_to_ocds.converters.BT_65_Lot_Subcontracting_Obligation import (
     parse_subcontracting_obligation,
     merge_subcontracting_obligation,
 )
-from converters.BT_651_Lot_Subcontracting_Tender_Indication import (
+from ted_and_doffin_to_ocds.converters.BT_651_Lot_Subcontracting_Tender_Indication import (
     parse_subcontracting_tender_indication,
     merge_subcontracting_tender_indication,
 )
-from converters.BT_660_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_660_LotResult import (
     parse_framework_reestimated_value,
     merge_framework_reestimated_value,
 )
-from converters.BT_67_Exclusion_Grounds import (
+from ted_and_doffin_to_ocds.converters.BT_67_Exclusion_Grounds import (
     parse_exclusion_grounds,
     merge_exclusion_grounds,
 )
-from converters.BT_70_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_70_Lot import (
     parse_lot_performance_terms,
     merge_lot_performance_terms,
 )
-from converters.BT_702a_Notice import parse_notice_language, merge_notice_language
-from converters.BT_706_UBO import parse_ubo_nationality, merge_ubo_nationality
-from converters.BT_707_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_702a_Notice import (
+    parse_notice_language,
+    merge_notice_language,
+)
+from ted_and_doffin_to_ocds.converters.BT_706_UBO import (
+    parse_ubo_nationality,
+    merge_ubo_nationality,
+)
+from ted_and_doffin_to_ocds.converters.BT_707_Lot import (
     parse_lot_documents_restricted_justification,
     merge_lot_documents_restricted_justification,
 )
-from converters.BT_707_Part import (
+from ted_and_doffin_to_ocds.converters.BT_707_Part import (
     parse_part_documents_restricted_justification,
     merge_part_documents_restricted_justification,
 )
-from converters.BT_708_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_708_Lot import (
     parse_lot_documents_official_language,
     merge_lot_documents_official_language,
 )
-from converters.BT_708_Part import (
+from ted_and_doffin_to_ocds.converters.BT_708_Part import (
     parse_part_documents_official_language,
     merge_part_documents_official_language,
 )
-from converters.BT_709_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_709_LotResult import (
     parse_framework_maximum_value,
     merge_framework_maximum_value,
 )
-from converters.BT_71_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_71_Lot import (
     parse_reserved_participation,
     merge_reserved_participation,
 )
-from converters.BT_71_Part import (
+from ted_and_doffin_to_ocds.converters.BT_71_Part import (
     parse_reserved_participation_part,
     merge_reserved_participation_part,
 )
-from converters.BT_710_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_710_LotResult import (
     parse_tender_value_lowest,
     merge_tender_value_lowest,
 )
-from converters.BT_711_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_711_LotResult import (
     parse_tender_value_highest,
     merge_tender_value_highest,
 )
-from converters.BT_712a_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_712a_LotResult import (
     parse_buyer_review_complainants,
     merge_buyer_review_complainants,
 )
-from converters.BT_712b_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_712b_LotResult import (
     parse_buyer_review_complainants_bt_712b,
     merge_buyer_review_complainants_bt_712b,
 )
-from converters.BT_717_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_717_Lot import (
     parse_clean_vehicles_directive,
     merge_clean_vehicles_directive,
 )
-from converters.BT_719_notice import (
+from ted_and_doffin_to_ocds.converters.BT_719_notice import (
     parse_procurement_documents_change_date,
     merge_procurement_documents_change_date,
 )
-from converters.BT_720_Tender import parse_tender_value, merge_tender_value
-from converters.BT_721_Contract_Title import parse_contract_title, merge_contract_title
-from converters.BT_722_Contract import parse_contract_eu_funds, merge_contract_eu_funds
-from converters.BT_7220_Lot import parse_lot_eu_funds, merge_lot_eu_funds
-from converters.BT_723_LotResult import parse_vehicle_category, merge_vehicle_category
-from converters.BT_726_Lot import parse_lot_sme_suitability, merge_lot_sme_suitability
-from converters.BT_726_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.BT_720_Tender import (
+    parse_tender_value,
+    merge_tender_value,
+)
+from ted_and_doffin_to_ocds.converters.BT_721_Contract_Title import (
+    parse_contract_title,
+    merge_contract_title,
+)
+from ted_and_doffin_to_ocds.converters.BT_722_Contract import (
+    parse_contract_eu_funds,
+    merge_contract_eu_funds,
+)
+from ted_and_doffin_to_ocds.converters.BT_7220_Lot import (
+    parse_lot_eu_funds,
+    merge_lot_eu_funds,
+)
+from ted_and_doffin_to_ocds.converters.BT_723_LotResult import (
+    parse_vehicle_category,
+    merge_vehicle_category,
+)
+from ted_and_doffin_to_ocds.converters.BT_726_Lot import (
+    parse_lot_sme_suitability,
+    merge_lot_sme_suitability,
+)
+from ted_and_doffin_to_ocds.converters.BT_726_LotsGroup import (
     parse_lots_group_sme_suitability,
     merge_lots_group_sme_suitability,
 )
-from converters.BT_726_Part import (
+from ted_and_doffin_to_ocds.converters.BT_726_Part import (
     parse_part_sme_suitability,
     merge_part_sme_suitability,
 )
-from converters.BT_727_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_727_Lot import (
     parse_lot_place_performance,
     merge_lot_place_performance,
 )
-from converters.BT_727_Part import (
+from ted_and_doffin_to_ocds.converters.BT_727_Part import (
     parse_part_place_performance,
     merge_part_place_performance,
 )
-from converters.BT_727_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_727_Procedure import (
     parse_procedure_place_performance,
     merge_procedure_place_performance,
 )
-from converters.BT_728_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_728_Lot import (
     parse_lot_place_performance_additional,
     merge_lot_place_performance_additional,
 )
-from converters.BT_728_Part import (
+from ted_and_doffin_to_ocds.converters.BT_728_Part import (
     parse_part_place_performance_additional,
     merge_part_place_performance_additional,
 )
-from converters.BT_728_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_728_Procedure import (
     parse_procedure_place_performance_additional,
     merge_procedure_place_performance_additional,
 )
-from converters.BT_729_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_729_Lot import (
     parse_lot_subcontracting_obligation_maximum,
     merge_lot_subcontracting_obligation_maximum,
 )
-from converters.BT_732_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_732_Lot import (
     parse_lot_security_clearance_description,
     merge_lot_security_clearance_description,
 )
-from converters.BT_733_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_733_Lot import (
     parse_lot_award_criteria_order_justification,
     merge_lot_award_criteria_order_justification,
 )
-from converters.BT_733_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.BT_733_LotsGroup import (
     parse_lots_group_award_criteria_order_justification,
     merge_lots_group_award_criteria_order_justification,
 )
-from converters.BT_734_Lot import parse_award_criterion_name, merge_award_criterion_name
-from converters.BT_734_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.BT_734_Lot import (
+    parse_award_criterion_name,
+    merge_award_criterion_name,
+)
+from ted_and_doffin_to_ocds.converters.BT_734_LotsGroup import (
     parse_award_criterion_name_lotsgroup,
     merge_award_criterion_name_lotsgroup,
 )
-from converters.BT_735_Lot import parse_cvd_contract_type, merge_cvd_contract_type
-from converters.BT_735_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_735_Lot import (
+    parse_cvd_contract_type,
+    merge_cvd_contract_type,
+)
+from ted_and_doffin_to_ocds.converters.BT_735_LotResult import (
     parse_cvd_contract_type_lotresult,
     merge_cvd_contract_type_lotresult,
 )
-from converters.BT_736_Lot import parse_reserved_execution, merge_reserved_execution
-from converters.BT_736_Part import (
+from ted_and_doffin_to_ocds.converters.BT_736_Lot import (
+    parse_reserved_execution,
+    merge_reserved_execution,
+)
+from ted_and_doffin_to_ocds.converters.BT_736_Part import (
     parse_reserved_execution_part,
     merge_reserved_execution_part,
 )
-from converters.BT_737_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_737_Lot import (
     parse_documents_unofficial_language,
     merge_documents_unofficial_language,
 )
-from converters.BT_737_Part import (
+from ted_and_doffin_to_ocds.converters.BT_737_Part import (
     parse_documents_unofficial_language_part,
     merge_documents_unofficial_language_part,
 )
-from converters.BT_738_notice import (
+from ted_and_doffin_to_ocds.converters.BT_738_notice import (
     parse_notice_preferred_publication_date,
     merge_notice_preferred_publication_date,
 )
-from converters.BT_739_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.BT_739_Organization_Company import (
     parse_organization_contact_fax,
     merge_organization_contact_fax,
 )
-from converters.BT_739_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.BT_739_Organization_TouchPoint import (
     parse_touchpoint_contact_fax,
     merge_touchpoint_contact_fax,
 )
-from converters.BT_739_UBO import parse_ubo_fax, merge_ubo_fax
-from converters.BT_740_Procedure_Buyer import (
+from ted_and_doffin_to_ocds.converters.BT_739_UBO import parse_ubo_fax, merge_ubo_fax
+from ted_and_doffin_to_ocds.converters.BT_740_Procedure_Buyer import (
     parse_buyer_contracting_entity,
     merge_buyer_contracting_entity,
 )
-from converters.BT_743_Lot import parse_electronic_invoicing, merge_electronic_invoicing
-from converters.BT_744_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_743_Lot import (
+    parse_electronic_invoicing,
+    merge_electronic_invoicing,
+)
+from ted_and_doffin_to_ocds.converters.BT_744_Lot import (
     parse_submission_electronic_signature,
     merge_submission_electronic_signature,
 )
-from converters.BT_745_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_745_Lot import (
     parse_submission_nonelectronic_description,
     merge_submission_nonelectronic_description,
 )
-from converters.BT_746_Organization import parse_winner_listed, merge_winner_listed
-from converters.BT_747_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_746_Organization import (
+    parse_winner_listed,
+    merge_winner_listed,
+)
+from ted_and_doffin_to_ocds.converters.BT_747_Lot import (
     parse_selection_criteria_type,
     merge_selection_criteria_type,
 )
 
-# from converters.BT_749_Lot import parse_selection_criteria_name, merge_selection_criteria_name
-from converters.BT_75_Lot import (
+# from ted_and_doffin_to_ocds.converters.BT_749_Lot import parse_selection_criteria_name, merge_selection_criteria_name
+from ted_and_doffin_to_ocds.converters.BT_75_Lot import (
     parse_guarantee_required_description,
     merge_guarantee_required_description,
 )
-from converters.BT_750_Lot import parse_selection_criteria, merge_selection_criteria
-from converters.BT_752_Lot_ThresholdNumber import (
+from ted_and_doffin_to_ocds.converters.BT_750_Lot import (
+    parse_selection_criteria,
+    merge_selection_criteria,
+)
+from ted_and_doffin_to_ocds.converters.BT_752_Lot_ThresholdNumber import (
     parse_selection_criteria_threshold_number,
     merge_selection_criteria_threshold_number,
 )
-from converters.BT_752_Lot_WeightNumber import (
+from ted_and_doffin_to_ocds.converters.BT_752_Lot_WeightNumber import (
     parse_selection_criteria_weight_number,
     merge_selection_criteria_weight_number,
 )
-from converters.BT_7531_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_7531_Lot import (
     parse_selection_criteria_number_weight,
     merge_selection_criteria_number_weight,
 )
-from converters.BT_7532_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_7532_Lot import (
     parse_selection_criteria_number_threshold,
     merge_selection_criteria_number_threshold,
 )
-from converters.BT_754_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_754_Lot import (
     parse_accessibility_criteria,
     merge_accessibility_criteria,
 )
-from converters.BT_755_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_755_Lot import (
     parse_accessibility_justification,
     merge_accessibility_justification,
 )
-from converters.BT_756_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_756_Procedure import (
     parse_pin_competition_termination,
     merge_pin_competition_termination,
 )
-from converters.BT_759_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_759_LotResult import (
     parse_received_submissions_count,
     merge_received_submissions_count,
 )
-from converters.BT_76_Lot import parse_tenderer_legal_form, merge_tenderer_legal_form
-from converters.BT_760_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_76_Lot import (
+    parse_tenderer_legal_form,
+    merge_tenderer_legal_form,
+)
+from ted_and_doffin_to_ocds.converters.BT_760_LotResult import (
     parse_received_submissions_type,
     merge_received_submissions_type,
 )
-from converters.BT_762_ChangeReasonDescription import (
+from ted_and_doffin_to_ocds.converters.BT_762_ChangeReasonDescription import (
     parse_change_reason_description,
     merge_change_reason_description,
 )
-from converters.BT_763_LotsAllRequired import (
+from ted_and_doffin_to_ocds.converters.BT_763_LotsAllRequired import (
     parse_lots_all_required,
     merge_lots_all_required,
 )
-from converters.BT_764_SubmissionElectronicCatalogue import (
+from ted_and_doffin_to_ocds.converters.BT_764_SubmissionElectronicCatalogue import (
     parse_submission_electronic_catalogue,
     merge_submission_electronic_catalogue,
 )
-from converters.BT_765_FrameworkAgreement import (
+from ted_and_doffin_to_ocds.converters.BT_765_FrameworkAgreement import (
     parse_framework_agreement,
     merge_framework_agreement,
 )
-from converters.BT_765_PartFrameworkAgreement import (
+from ted_and_doffin_to_ocds.converters.BT_765_PartFrameworkAgreement import (
     parse_part_framework_agreement,
     merge_part_framework_agreement,
 )
-from converters.BT_766_DynamicPurchasingSystem import (
+from ted_and_doffin_to_ocds.converters.BT_766_DynamicPurchasingSystem import (
     parse_dynamic_purchasing_system,
     merge_dynamic_purchasing_system,
 )
-from converters.BT_766_PartDynamicPurchasingSystem import (
+from ted_and_doffin_to_ocds.converters.BT_766_PartDynamicPurchasingSystem import (
     parse_part_dynamic_purchasing_system,
     merge_part_dynamic_purchasing_system,
 )
-from converters.BT_767_Lot import parse_electronic_auction, merge_electronic_auction
-from converters.BT_769_Lot import parse_multiple_tenders, merge_multiple_tenders
-from converters.BT_77_Lot import parse_financial_terms, merge_financial_terms
-from converters.BT_771_Lot import parse_late_tenderer_info, merge_late_tenderer_info
-from converters.BT_772_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_767_Lot import (
+    parse_electronic_auction,
+    merge_electronic_auction,
+)
+from ted_and_doffin_to_ocds.converters.BT_769_Lot import (
+    parse_multiple_tenders,
+    merge_multiple_tenders,
+)
+from ted_and_doffin_to_ocds.converters.BT_77_Lot import (
+    parse_financial_terms,
+    merge_financial_terms,
+)
+from ted_and_doffin_to_ocds.converters.BT_771_Lot import (
+    parse_late_tenderer_info,
+    merge_late_tenderer_info,
+)
+from ted_and_doffin_to_ocds.converters.BT_772_Lot import (
     parse_late_tenderer_info_description,
     merge_late_tenderer_info_description,
 )
-from converters.BT_773_Tender import parse_subcontracting, merge_subcontracting
-from converters.BT_774_Lot import parse_green_procurement, merge_green_procurement
-from converters.BT_775_Lot import parse_social_procurement, merge_social_procurement
-from converters.BT_776_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_773_Tender import (
+    parse_subcontracting,
+    merge_subcontracting,
+)
+from ted_and_doffin_to_ocds.converters.BT_774_Lot import (
+    parse_green_procurement,
+    merge_green_procurement,
+)
+from ted_and_doffin_to_ocds.converters.BT_775_Lot import (
+    parse_social_procurement,
+    merge_social_procurement,
+)
+from ted_and_doffin_to_ocds.converters.BT_776_Lot import (
     parse_procurement_innovation,
     merge_procurement_innovation,
 )
-from converters.BT_777_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_777_Lot import (
     parse_strategic_procurement_description,
     merge_strategic_procurement_description,
 )
-from converters.BT_78_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_78_Lot import (
     parse_security_clearance_deadline,
     merge_security_clearance_deadline,
 )
-from converters.BT_79_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_79_Lot import (
     parse_performing_staff_qualification,
     merge_performing_staff_qualification,
 )
-from converters.BT_801_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_801_Lot import (
     parse_non_disclosure_agreement,
     merge_non_disclosure_agreement,
 )
-from converters.BT_802_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_802_Lot import (
     parse_non_disclosure_agreement_description,
     merge_non_disclosure_agreement_description,
 )
-from converters.BT_805_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_805_Lot import (
     parse_green_procurement_criteria,
     merge_green_procurement_criteria,
 )
-from converters.BT_92_Lot import parse_electronic_ordering, merge_electronic_ordering
-from converters.BT_93_Lot import parse_electronic_payment, merge_electronic_payment
-from converters.BT_94_Lot import parse_recurrence, merge_recurrence
-from converters.BT_95_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_92_Lot import (
+    parse_electronic_ordering,
+    merge_electronic_ordering,
+)
+from ted_and_doffin_to_ocds.converters.BT_93_Lot import (
+    parse_electronic_payment,
+    merge_electronic_payment,
+)
+from ted_and_doffin_to_ocds.converters.BT_94_Lot import (
+    parse_recurrence,
+    merge_recurrence,
+)
+from ted_and_doffin_to_ocds.converters.BT_95_Lot import (
     parse_recurrence_description,
     merge_recurrence_description,
 )
-from converters.BT_97_Lot import parse_submission_language, merge_submission_language
-from converters.BT_98_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_97_Lot import (
+    parse_submission_language,
+    merge_submission_language,
+)
+from ted_and_doffin_to_ocds.converters.BT_98_Lot import (
     parse_tender_validity_deadline,
     merge_tender_validity_deadline,
 )
-from converters.BT_99_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_99_Lot import (
     parse_review_deadline_description,
     merge_review_deadline_description,
 )
-from converters.OPP_020_Contract import (
+from ted_and_doffin_to_ocds.converters.OPP_020_Contract import (
     map_extended_duration_indicator,
     merge_extended_duration_indicator,
 )
-from converters.OPP_021_Contract import map_essential_assets, merge_essential_assets
-from converters.OPP_022_Contract import map_asset_significance, merge_asset_significance
-from converters.OPP_023_Contract import map_asset_predominance, merge_asset_predominance
-from converters.OPP_031_Tender import (
+from ted_and_doffin_to_ocds.converters.OPP_021_Contract import (
+    map_essential_assets,
+    merge_essential_assets,
+)
+from ted_and_doffin_to_ocds.converters.OPP_022_Contract import (
+    map_asset_significance,
+    merge_asset_significance,
+)
+from ted_and_doffin_to_ocds.converters.OPP_023_Contract import (
+    map_asset_predominance,
+    merge_asset_predominance,
+)
+from ted_and_doffin_to_ocds.converters.OPP_031_Tender import (
     parse_contract_conditions,
     merge_contract_conditions,
 )
-from converters.OPP_032_Tender import (
+from ted_and_doffin_to_ocds.converters.OPP_032_Tender import (
     parse_revenues_allocation,
     merge_revenues_allocation,
 )
-from converters.OPP_034_Tender import (
+from ted_and_doffin_to_ocds.converters.OPP_034_Tender import (
     parse_penalties_and_rewards,
     merge_penalties_and_rewards,
 )
-from converters.OPP_040_Procedure import (
+from ted_and_doffin_to_ocds.converters.OPP_040_Procedure import (
     parse_main_nature_sub_type,
     merge_main_nature_sub_type,
 )
-from converters.OPP_050_Organization import (
+from ted_and_doffin_to_ocds.converters.OPP_050_Organization import (
     parse_buyers_group_lead_indicator,
     merge_buyers_group_lead_indicator,
 )
-from converters.OPP_051_Organization import (
+from ted_and_doffin_to_ocds.converters.OPP_051_Organization import (
     parse_awarding_cpb_buyer_indicator,
     merge_awarding_cpb_buyer_indicator,
 )
-from converters.OPP_052_Organization import (
+from ted_and_doffin_to_ocds.converters.OPP_052_Organization import (
     parse_acquiring_cpb_buyer_indicator,
     merge_acquiring_cpb_buyer_indicator,
 )
-from converters.OPP_080_Tender import (
+from ted_and_doffin_to_ocds.converters.OPP_080_Tender import (
     parse_kilometers_public_transport,
     merge_kilometers_public_transport,
 )
-from converters.OPP_090_Procedure import (
+from ted_and_doffin_to_ocds.converters.OPP_090_Procedure import (
     parse_previous_notice_identifier,
     merge_previous_notice_identifier,
 )
-from converters.OPT_030_Procedure_SProvider import (
+from ted_and_doffin_to_ocds.converters.OPT_030_Procedure_SProvider import (
     parse_provided_service_type,
     merge_provided_service_type,
 )
-from converters.OPP_071_Lot import parse_quality_target_code, merge_quality_target_code
-from converters.OPP_072_Lot import (
+from ted_and_doffin_to_ocds.converters.OPP_071_Lot import (
+    parse_quality_target_code,
+    merge_quality_target_code,
+)
+from ted_and_doffin_to_ocds.converters.OPP_072_Lot import (
     parse_quality_target_description,
     merge_quality_target_description,
 )
-from converters.OPP_100_Contract import (
+from ted_and_doffin_to_ocds.converters.OPP_100_Contract import (
     parse_framework_notice_identifier,
     merge_framework_notice_identifier,
 )
-from converters.OPP_110_111_FiscalLegis import (
+from ted_and_doffin_to_ocds.converters.OPP_110_111_FiscalLegis import (
     parse_fiscal_legislation,
     merge_fiscal_legislation,
 )
-from converters.OPP_112_120_EnvironLegis import (
+from ted_and_doffin_to_ocds.converters.OPP_112_120_EnvironLegis import (
     parse_environmental_legislation,
     merge_environmental_legislation,
 )
-from converters.OPP_113_130_EmployLegis import (
+from ted_and_doffin_to_ocds.converters.OPP_113_130_EmployLegis import (
     parse_employment_legislation,
     merge_employment_legislation,
 )
-from converters.OPP_140_ProcurementDocs import (
+from ted_and_doffin_to_ocds.converters.OPP_140_ProcurementDocs import (
     parse_procurement_documents,
     merge_procurement_documents,
 )
-from converters.OPT_155_LotResult import parse_vehicle_type, merge_vehicle_type
-from converters.OPT_156_LotResult import parse_vehicle_numeric, merge_vehicle_numeric
-from converters.OPT_160_UBO import parse_ubo_first_name, merge_ubo_first_name
-from converters.OPT_170_Tenderer import (
+from ted_and_doffin_to_ocds.converters.OPT_155_LotResult import (
+    parse_vehicle_type,
+    merge_vehicle_type,
+)
+from ted_and_doffin_to_ocds.converters.OPT_156_LotResult import (
+    parse_vehicle_numeric,
+    merge_vehicle_numeric,
+)
+from ted_and_doffin_to_ocds.converters.OPT_160_UBO import (
+    parse_ubo_first_name,
+    merge_ubo_first_name,
+)
+from ted_and_doffin_to_ocds.converters.OPT_170_Tenderer import (
     parse_tendering_party_leader,
     merge_tendering_party_leader,
 )
-from converters.OPT_200_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.OPT_200_Organization_Company import (
     parse_organization_technical_identifier,
     merge_organization_technical_identifier,
 )
-from converters.OPT_201_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.OPT_201_Organization_TouchPoint import (
     parse_touchpoint_technical_identifier,
     merge_touchpoint_technical_identifier,
 )
-from converters.OPT_202_UBO import parse_ubo_identifier, merge_ubo_identifier
-from converters.OPT_300_Contract_Signatory import (
+from ted_and_doffin_to_ocds.converters.OPT_202_UBO import (
+    parse_ubo_identifier,
+    merge_ubo_identifier,
+)
+from ted_and_doffin_to_ocds.converters.OPT_300_Contract_Signatory import (
     parse_contract_signatory,
     merge_contract_signatory,
 )
-from converters.OPT_300_Procedure_SProvider import (
+from ted_and_doffin_to_ocds.converters.OPT_300_Procedure_SProvider import (
     parse_procedure_sprovider,
     merge_procedure_sprovider,
 )
-from converters.OPT_301_Lot_AddInfo import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Lot_AddInfo import (
     parse_additional_info_provider_identifier,
     merge_additional_info_provider_identifier,
 )
-from converters.OPT_301_Lot_DocProvider import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Lot_DocProvider import (
     parse_document_provider_identifier,
     merge_document_provider_identifier,
 )
-from converters.OPT_301_Lot_EmployLegis import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Lot_EmployLegis import (
     parse_employment_legislation_document_reference,
     merge_employment_legislation_document_reference,
 )
-from converters.OPT_301_Lot_EnvironLegis import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Lot_EnvironLegis import (
     parse_environmental_legislation_document_reference,
     merge_environmental_legislation_document_reference,
 )
-from converters.OPT_301_Lot_ReviewOrg import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Lot_ReviewOrg import (
     parse_review_org_identifier,
     merge_review_org_identifier,
 )
-from converters.OPT_301_Lot_Mediator import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Lot_Mediator import (
     parse_mediator_identifier,
     merge_mediator_identifier,
 )
-from converters.OPT_301_Lot_ReviewInfo import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Lot_ReviewInfo import (
     parse_review_info_identifier,
     merge_review_info_identifier,
 )
-from converters.OPT_301_Lot_TenderEval import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Lot_TenderEval import (
     parse_tender_evaluator_identifier,
     merge_tender_evaluator_identifier,
 )
-from converters.OPT_301_Lot_TenderReceipt import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Lot_TenderReceipt import (
     parse_tender_recipient_identifier,
     merge_tender_recipient_identifier,
 )
-from converters.OPT_301_LotResult_Financing import (
+from ted_and_doffin_to_ocds.converters.OPT_301_LotResult_Financing import (
     parse_lotresult_financing,
     merge_lotresult_financing,
 )
-from converters.OPT_301_LotResult_Paying import (
+from ted_and_doffin_to_ocds.converters.OPT_301_LotResult_Paying import (
     parse_lotresult_paying,
     merge_lotresult_paying,
 )
-from converters.OPT_301_Part_AddInfo import parse_part_addinfo, merge_part_addinfo
-from converters.OPT_301_Part_DocProvider import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Part_AddInfo import (
+    parse_part_addinfo,
+    merge_part_addinfo,
+)
+from ted_and_doffin_to_ocds.converters.OPT_301_Part_DocProvider import (
     parse_part_docprovider,
     merge_part_docprovider,
 )
-from converters.OPT_301_Part_EmployLegis import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Part_EmployLegis import (
     parse_part_employlegis,
     merge_part_employlegis,
 )
-from converters.OPT_301_Part_EnvironLegis import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Part_EnvironLegis import (
     parse_part_environlegis,
     merge_part_environlegis,
 )
-from converters.OPT_301_Part_FiscalLegis import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Part_FiscalLegis import (
     parse_part_fiscallegis,
     merge_part_fiscallegis,
 )
-from converters.OPT_301_Part_Mediator import parse_part_mediator, merge_part_mediator
-from converters.OPT_301_Part_ReviewInfo import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Part_Mediator import (
+    parse_part_mediator,
+    merge_part_mediator,
+)
+from ted_and_doffin_to_ocds.converters.OPT_301_Part_ReviewInfo import (
     parse_part_reviewinfo,
     merge_part_reviewinfo,
 )
-from converters.OPT_301_Part_ReviewOrg import parse_part_revieworg, merge_part_revieworg
-from converters.OPT_301_Part_TenderEval import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Part_ReviewOrg import (
+    parse_part_revieworg,
+    merge_part_revieworg,
+)
+from ted_and_doffin_to_ocds.converters.OPT_301_Part_TenderEval import (
     parse_part_tendereval,
     merge_part_tendereval,
 )
-from converters.OPT_301_Part_TenderReceipt import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Part_TenderReceipt import (
     parse_part_tenderreceipt,
     merge_part_tenderreceipt,
 )
-from converters.OPT_301_Tenderer_MainCont import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Tenderer_MainCont import (
     parse_tenderer_maincont,
     merge_tenderer_maincont,
 )
 
 # add more OPT 301 her
 
-from converters.OPT_302_Organization import (
+from ted_and_doffin_to_ocds.converters.OPT_302_Organization import (
     parse_beneficial_owner_reference,
     merge_beneficial_owner_reference,
 )
-from converters.OPT_310_Tender import (
+from ted_and_doffin_to_ocds.converters.OPT_310_Tender import (
     parse_tendering_party_id_reference,
     merge_tendering_party_id_reference,
 )
-from converters.OPT_315_LotResult import (
+from ted_and_doffin_to_ocds.converters.OPT_315_LotResult import (
     parse_contract_identifier_reference,
     merge_contract_identifier_reference,
 )
-from converters.OPT_316_Contract import (
+from ted_and_doffin_to_ocds.converters.OPT_316_Contract import (
     parse_contract_technical_identifier,
     merge_contract_technical_identifier,
 )
-from converters.OPT_320_LotResult import (
+from ted_and_doffin_to_ocds.converters.OPT_320_LotResult import (
     parse_tender_identifier_reference,
     merge_tender_identifier_reference,
 )

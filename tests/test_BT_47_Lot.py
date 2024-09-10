@@ -1,7 +1,10 @@
 # tests/test_BT_47_Lot.py
 
 import pytest
-from converters.BT_47_Lot import parse_participant_name, merge_participant_name
+from ted_and_doffin_to_ocds.converters.BT_47_Lot import (
+    parse_participant_name,
+    merge_participant_name,
+)
 
 
 def test_parse_participant_name():

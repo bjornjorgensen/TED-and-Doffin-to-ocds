@@ -2,7 +2,7 @@
 
 import logging
 from lxml import etree
-from utils.date_utils import convert_to_iso_format
+from ted_and_doffin_to_ocds.utils.date_utils import convert_to_iso_format
 
 logger = logging.getLogger(__name__)
 

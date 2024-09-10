@@ -2,7 +2,7 @@
 
 import logging
 from lxml import etree
-from utils.date_utils import start_date
+from ted_and_doffin_to_ocds.utils.date_utils import start_date
 
 logger = logging.getLogger(__name__)
 

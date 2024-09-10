@@ -1,14 +1,17 @@
 # tests/test_BT_736_Lot.py
 
 import pytest
-from converters.BT_736_Lot import parse_reserved_execution, merge_reserved_execution
+from ted_and_doffin_to_ocds.converters.BT_736_Lot import (
+    parse_reserved_execution,
+    merge_reserved_execution,
+)
 import json
 import os
 import sys
 
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from main import main
+from src.ted_and_doffin_to_ocds.main import main
 
 
 def test_parse_reserved_execution():
