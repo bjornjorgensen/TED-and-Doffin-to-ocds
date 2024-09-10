@@ -2,7 +2,7 @@
 
 import logging
 from lxml import etree
-from utils.date_utils import StartDate
+from utils.date_utils import start_date
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +35,7 @@ def parse_dispatch_invitation_tender(xml_content):
 
         if invitation_date:
             try:
-                iso_date = StartDate(invitation_date[0])
+                iso_date = start_date(invitation_date[0])
                 result["tender"]["lots"].append(
                     {"id": lot_id, "secondStage": {"invitationDate": iso_date}}
                 )

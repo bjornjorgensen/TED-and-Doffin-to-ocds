@@ -2,7 +2,7 @@
 
 import logging
 from lxml import etree
-from utils.date_utils import EndDate
+from utils.date_utils import end_date
 
 logger = logging.getLogger(__name__)
 
@@ -69,7 +69,7 @@ def parse_security_clearance_deadline(xml_content):
                     {
                         "id": "1",
                         "type": "securityClearanceDeadline",
-                        "dueDate": EndDate(security_clearance_date[0]),
+                        "dueDate": end_date(security_clearance_date[0]),
                     }
                 ],
             }

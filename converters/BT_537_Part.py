@@ -1,7 +1,7 @@
 # converters/BT_537_Part.py
 
 from lxml import etree
-from utils.date_utils import EndDate
+from utils.date_utils import end_date
 
 
 def parse_part_duration_end_date(xml_content):
@@ -45,8 +45,8 @@ def parse_part_duration_end_date(xml_content):
 
     if end_date_elements:
         try:
-            end_date = end_date_elements[0].text
-            iso_end_date = EndDate(end_date)
+            date_to_end = end_date_elements[0].text
+            iso_end_date = end_date(date_to_end)
             result["tender"]["contractPeriod"] = {"endDate": iso_end_date}
         except ValueError as e:
             print(f"Warning: Invalid date format for part end date: {str(e)}")

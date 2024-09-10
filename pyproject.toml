@@ -33,25 +33,25 @@ target-version = "py312"
 [tool.ruff.lint]
 select = [
     # Pyflakes
-    #"F",
+    "F",
     # Pycodestyle (excluding E501 for line length)
-    #"E",
+    "E",
     # isort (excluding I001 for import sorting)
-    #"I",
+    "I",
     # pep8-naming (excluding N999 for module naming)
-    #"N",
+    "N",
     # flake8-bugbear
-    #"B",
+    "B",
     # flake8-comprehensions
-    #"C4",
+    "C4",
     # flake8-pytest-style
-    #"PT",
+    "PT",
     # flake8-return
-    #"RET",
+    "RET",
     # flake8-simplify
-    #"SIM",
+    "SIM",
     # pyupgrade
-    #"UP",
+    "UP",
 ]
 ignore = [
     "E501",  # Line too long
