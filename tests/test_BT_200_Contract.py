@@ -1,6 +1,6 @@
 # tests/test_BT_200_Contract.py
 
-from converters.BT_200_Contract import (
+from ted_and_doffin_to_ocds.converters.BT_200_Contract import (
     parse_contract_modification_reason,
     merge_contract_modification_reason,
 )

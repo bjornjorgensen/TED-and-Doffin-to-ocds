@@ -1,7 +1,7 @@
 # converters/BT_132_Lot.py
 
 from lxml import etree
-from utils.date_utils import convert_to_iso_format
+from ted_and_doffin_to_ocds.utils.date_utils import convert_to_iso_format
 
 
 def parse_lot_public_opening_date(xml_content):

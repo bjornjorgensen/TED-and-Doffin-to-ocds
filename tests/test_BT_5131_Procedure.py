@@ -1,6 +1,6 @@
 # tests/test_BT_5131_Procedure.py
 
-from converters.BT_5131_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_5131_Procedure import (
     parse_place_performance_city_procedure,
     merge_place_performance_city_procedure,
 )

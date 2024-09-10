@@ -1,35 +1,42 @@
-# converters/BT_631_Lot.py
+# converters/BT_78_Lot.py
 
 import logging
 from lxml import etree
-from utils.date_utils import convert_to_iso_format
+from ted_and_doffin_to_ocds.utils.date_utils import end_date
 
 logger = logging.getLogger(__name__)
 
 
-def parse_dispatch_invitation_interest(xml_content):
+def parse_security_clearance_deadline(xml_content):
     """
-    Parse the XML content to extract the dispatch invitation interest date for each lot.
+    Parse the XML content to extract the Security Clearance Deadline for each lot.
 
     Args:
         xml_content (str): The XML content to parse.
 
     Returns:
-        dict: A dictionary containing the parsed dispatch invitation interest dates in the format:
+        dict: A dictionary containing the parsed data in the format:
               {
                   "tender": {
                       "lots": [
                           {
                               "id": "lot_id",
-                              "communication": {
-                                  "invitationToConfirmInterestDispatchDate": "iso_date"
-                              }
+                              "milestones": [
+                                  {
+                                      "id": "1",
+                                      "type": "securityClearanceDeadline",
+                                      "dueDate": "iso_formatted_date"
+                                  }
+                              ]
                           }
                       ]
                   }
               }
         None: If no relevant data is found.
     """
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode("utf-8")
+
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -50,50 +57,55 @@ def parse_dispatch_invitation_interest(xml_content):
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        dispatch_date = lot.xpath(
-            "cac:TenderingProcess/cac:ParticipationInvitationPeriod/cbc:StartDate/text()",
+        security_clearance_date = lot.xpath(
+            "cac:TenderingTerms/cbc:LatestSecurityClearanceDate/text()",
             namespaces=namespaces,
         )
 
-        if dispatch_date:
-            iso_date = convert_to_iso_format(dispatch_date[0], is_start_date=True)
+        if security_clearance_date:
             lot_data = {
                 "id": lot_id,
-                "communication": {"invitationToConfirmInterestDispatchDate": iso_date},
+                "milestones": [
+                    {
+                        "id": "1",
+                        "type": "securityClearanceDeadline",
+                        "dueDate": end_date(security_clearance_date[0]),
+                    }
+                ],
             }
             result["tender"]["lots"].append(lot_data)
 
     return result if result["tender"]["lots"] else None
 
 
-def merge_dispatch_invitation_interest(release_json, dispatch_invitation_data):
+def merge_security_clearance_deadline(release_json, security_clearance_data):
     """
-    Merge the parsed dispatch invitation interest data into the main OCDS release JSON.
+    Merge the parsed Security Clearance Deadline data into the main OCDS release JSON.
 
     Args:
         release_json (dict): The main OCDS release JSON to be updated.
-        dispatch_invitation_data (dict): The parsed dispatch invitation interest data to be merged.
+        security_clearance_data (dict): The parsed Security Clearance Deadline data to be merged.
 
     Returns:
         None: The function updates the release_json in-place.
     """
-    if not dispatch_invitation_data:
-        logger.warning("No dispatch invitation interest data to merge")
+    if not security_clearance_data:
+        logger.warning("No Security Clearance Deadline data to merge")
         return
 
-    existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
+    tender = release_json.setdefault("tender", {})
+    existing_lots = tender.setdefault("lots", [])
 
-    for new_lot in dispatch_invitation_data["tender"]["lots"]:
+    for new_lot in security_clearance_data["tender"]["lots"]:
         existing_lot = next(
             (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
         )
         if existing_lot:
-            existing_lot.setdefault("communication", {}).update(
-                new_lot["communication"]
-            )
+            existing_milestones = existing_lot.setdefault("milestones", [])
+            existing_milestones.extend(new_lot["milestones"])
         else:
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged dispatch invitation interest data for {len(dispatch_invitation_data['tender']['lots'])} lots"
+        f"Merged Security Clearance Deadline data for {len(security_clearance_data['tender']['lots'])} lots"
     )

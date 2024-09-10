@@ -7,8 +7,11 @@ import sys
 
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from main import main
-from converters.BT_54_Lot import parse_options_description, merge_options_description
+from src.ted_and_doffin_to_ocds.main import main
+from ted_and_doffin_to_ocds.converters.BT_54_Lot import (
+    parse_options_description,
+    merge_options_description,
+)
 
 
 def test_parse_options_description():

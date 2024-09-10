@@ -1,4 +1,4 @@
-from converters.BT_760_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_760_LotResult import (
     parse_received_submissions_type,
     merge_received_submissions_type,
 )

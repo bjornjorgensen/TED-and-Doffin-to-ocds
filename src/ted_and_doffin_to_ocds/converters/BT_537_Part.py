@@ -1,7 +1,7 @@
 # converters/BT_537_Part.py
 
 from lxml import etree
-from utils.date_utils import end_date
+from ted_and_doffin_to_ocds.utils.date_utils import end_date
 
 
 def parse_part_duration_end_date(xml_content):

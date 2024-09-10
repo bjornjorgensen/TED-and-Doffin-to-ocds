@@ -1,6 +1,9 @@
 # tests/test_BT_171_Tender.py
 
-from converters.BT_171_Tender import parse_tender_rank, merge_tender_rank
+from ted_and_doffin_to_ocds.converters.BT_171_Tender import (
+    parse_tender_rank,
+    merge_tender_rank,
+)
 
 
 def test_parse_tender_rank():

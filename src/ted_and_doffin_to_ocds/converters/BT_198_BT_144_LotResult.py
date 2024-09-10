@@ -1,15 +1,15 @@
-# converters/BT_198_BT_1351_Procedure.py
+# converters/BT_198_BT_144_LotResult.py
 
 import logging
 from lxml import etree
-from utils.date_utils import start_date
+from ted_and_doffin_to_ocds.utils.date_utils import start_date
 
 logger = logging.getLogger(__name__)
 
 
-def parse_bt198_bt1351_unpublished_access_date(xml_content):
+def parse_bt198_bt144_unpublished_access_date(xml_content):
     """
-    Parse the XML content to extract the unpublished access date for the accelerated procedure justification.
+    Parse the XML content to extract the unpublished access date for the not awarded reason.
 
     Args:
         xml_content (str): The XML content to parse.
@@ -32,20 +32,31 @@ def parse_bt198_bt1351_unpublished_access_date(xml_content):
 
     result = {"withheldInformation": []}
 
-    publication_date = root.xpath(
-        "//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-acc-jus']/efbc:PublicationDate/text()",
-        namespaces=namespaces,
+    lot_results = root.xpath(
+        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
     )
 
-    if publication_date:
-        iso_date = start_date(publication_date[0])
-        withheld_info = {"field": "pro-acc-jus", "availabilityDate": iso_date}
-        result["withheldInformation"].append(withheld_info)
+    for lot_result in lot_results:
+        lot_id = lot_result.xpath(
+            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+        )
+        publication_date = lot_result.xpath(
+            "efac:DecisionReason/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='no-awa-rea']/efbc:PublicationDate/text()",
+            namespaces=namespaces,
+        )
+
+        if lot_id and publication_date:
+            iso_date = start_date(publication_date[0])
+            withheld_info = {
+                "id": f"no-awa-rea-{lot_id[0]}",
+                "availabilityDate": iso_date,
+            }
+            result["withheldInformation"].append(withheld_info)
 
     return result if result["withheldInformation"] else None
 
 
-def merge_bt198_bt1351_unpublished_access_date(
+def merge_bt198_bt144_unpublished_access_date(
     release_json, unpublished_access_date_data
 ):
     """
@@ -59,19 +70,18 @@ def merge_bt198_bt1351_unpublished_access_date(
         None: The function updates the release_json in-place.
     """
     if not unpublished_access_date_data:
-        logger.warning("No unpublished access date data to merge for BT-198(BT-1351)")
+        logger.warning("No unpublished access date data to merge for BT-198(BT-144)")
         return
 
     withheld_info = release_json.setdefault("withheldInformation", [])
 
     for new_item in unpublished_access_date_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item.get("field") == new_item["field"]),
-            None,
+            (item for item in withheld_info if item.get("id") == new_item["id"]), None
         )
         if existing_item:
             existing_item["availabilityDate"] = new_item["availabilityDate"]
         else:
             withheld_info.append(new_item)
 
-    logger.info("Merged unpublished access date data for BT-198(BT-1351)")
+    logger.info("Merged unpublished access date data for BT-198(BT-144)")

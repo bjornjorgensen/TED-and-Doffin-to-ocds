@@ -1,6 +1,6 @@
 # tests/test_OPT_301_Lot_TenderReceipt.py
 
-from converters.OPT_301_Lot_TenderReceipt import (
+from ted_and_doffin_to_ocds.converters.OPT_301_Lot_TenderReceipt import (
     parse_tender_recipient_identifier,
     merge_tender_recipient_identifier,
 )

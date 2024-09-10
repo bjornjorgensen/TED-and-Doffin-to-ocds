@@ -1,4 +1,4 @@
-from converters.BT_710_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_710_LotResult import (
     parse_tender_value_lowest,
     merge_tender_value_lowest,
 )

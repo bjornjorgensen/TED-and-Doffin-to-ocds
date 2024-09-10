@@ -1,7 +1,7 @@
 # tests/test_BT_71_Lot.py
 
 import pytest
-from converters.BT_71_Lot import (
+from ted_and_doffin_to_ocds.converters.BT_71_Lot import (
     parse_reserved_participation,
     merge_reserved_participation,
 )

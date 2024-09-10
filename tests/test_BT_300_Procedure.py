@@ -1,7 +1,7 @@
 # tests/test_BT_300_Procedure.py
 
 import pytest
-from converters.BT_300_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_300_Procedure import (
     parse_procedure_additional_info,
     merge_procedure_additional_info,
 )

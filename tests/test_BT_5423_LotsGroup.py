@@ -1,6 +1,6 @@
 # tests/test_BT_5423_LotsGroup.py
 
-from converters.BT_5423_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.BT_5423_LotsGroup import (
     parse_award_criterion_number_threshold_lotsgroup,
     merge_award_criterion_number_threshold_lotsgroup,
 )

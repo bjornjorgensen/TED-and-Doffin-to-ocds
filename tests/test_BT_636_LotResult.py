@@ -1,7 +1,7 @@
 # tests/test_BT_636_LotResult.py
 
 import pytest
-from converters.BT_636_LotResult import (
+from ted_and_doffin_to_ocds.converters.BT_636_LotResult import (
     parse_irregularity_type,
     merge_irregularity_type,
     IRREGULARITY_TYPE_MAPPING,

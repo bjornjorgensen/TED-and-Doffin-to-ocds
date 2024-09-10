@@ -5,7 +5,7 @@ description = "Converts XML eForm data from TED and Doffin to OCDS JSON format"
 authors = ["Bjørn Jørgensen <bjornjorgensen@gmail.com>"]
 license = "Apache-2.0"
 readme = "README.md"
-package-mode = false
+packages = [{include = "ted_and_doffin_to_ocds", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.12"

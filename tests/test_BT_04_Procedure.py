@@ -1,6 +1,6 @@
 # tests/test_BT_04_Procedure.py
 
-from converters.BT_04_Procedure import (
+from ted_and_doffin_to_ocds.converters.BT_04_Procedure import (
     parse_procedure_identifier,
     merge_procedure_identifier,
 )

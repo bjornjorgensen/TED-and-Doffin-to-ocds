@@ -1,7 +1,7 @@
 # tests/test_BT_719_notice.py
 
 import pytest
-from converters.BT_719_notice import (
+from ted_and_doffin_to_ocds.converters.BT_719_notice import (
     parse_procurement_documents_change_date,
     merge_procurement_documents_change_date,
 )
