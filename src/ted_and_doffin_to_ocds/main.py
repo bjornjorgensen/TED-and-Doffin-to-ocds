@@ -367,7 +367,7 @@ from ted_and_doffin_to_ocds.converters.BT_196_BT_144_LotResult import (
     merge_bt196_bt144_unpublished_justification,
 )
 
-from converters.BT_196_160_Tender import (
+from ted_and_doffin_to_ocds.converters.BT_196_160_Tender import (
     bt_196_bt_160_parse_unpublished_justification,
     bt_196_bt_160_merge_unpublished_justification,
 )
@@ -416,7 +416,7 @@ from ted_and_doffin_to_ocds.converters.BT_197_BT_144_LotResult import (
     merge_bt197_bt144_unpublished_justification_code,
 )
 
-from converters.BT_197_160_Tender import (
+from ted_and_doffin_to_ocds.converters.BT_197_160_Tender import (
     bt_197_bt_160_parse_unpublished_justification_code,
     bt_197_bt_160_merge_unpublished_justification_code,
 )

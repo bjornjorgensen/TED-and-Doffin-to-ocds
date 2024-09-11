@@ -10,8 +10,8 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from ted_and_doffin_to_ocds.main import main
 from ted_and_doffin_to_ocds.converters.BT_195_160_Tender import (
-    BT_195_BT_160_parse_unpublished_identifier,
-    BT_195_BT_160_merge_unpublished_identifier,
+    bt_195_bt_160_parse_unpublished_identifier,
+    bt_195_bt_160_merge_unpublished_identifier,
 )
 
 
@@ -42,7 +42,7 @@ def test_bt_195_bt_160_parse_unpublished_identifier():
     </root>
     """
 
-    result = BT_195_BT_160_parse_unpublished_identifier(xml_content)
+    result = bt_195_bt_160_parse_unpublished_identifier(xml_content)
 
     assert result is not None, "Expected parsed data, got None"
     assert "withheldInformation" in result, "Expected 'withheldInformation' in result"
@@ -74,7 +74,7 @@ def test_bt_195_bt_160_merge_unpublished_identifier():
         ]
     }
 
-    BT_195_BT_160_merge_unpublished_identifier(
+    bt_195_bt_160_merge_unpublished_identifier(
         release_json, unpublished_identifier_data
     )
 
