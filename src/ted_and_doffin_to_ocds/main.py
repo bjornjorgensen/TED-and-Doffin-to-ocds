@@ -1,4 +1,4 @@
-# main.py 
+# main.py
 import json
 import logging
 from ted_and_doffin_to_ocds.converters.Common_operations import NoticeProcessor
@@ -319,6 +319,11 @@ from ted_and_doffin_to_ocds.converters.BT_195_BT_144_LotResult import (
     merge_bt195_bt144_unpublished_identifier,
 )
 
+from ted_and_doffin_to_ocds.converters.BT_195_160_Tender import (
+    bt_195_bt_160_parse_unpublished_identifier,
+    bt_195_bt_160_merge_unpublished_identifier,
+)
+
 # BT_196
 from ted_and_doffin_to_ocds.converters.BT_196_BT_09_Procedure import (
     bt_196_parse_unpublished_justification_bt_09_procedure,
@@ -360,6 +365,11 @@ from ted_and_doffin_to_ocds.converters.BT_196_BT_142_LotResult import (
 from ted_and_doffin_to_ocds.converters.BT_196_BT_144_LotResult import (
     parse_bt196_bt144_unpublished_justification,
     merge_bt196_bt144_unpublished_justification,
+)
+
+from converters.BT_196_160_Tender import (
+    bt_196_bt_160_parse_unpublished_justification,
+    bt_196_bt_160_merge_unpublished_justification,
 )
 
 # #BT_197
@@ -404,6 +414,11 @@ from ted_and_doffin_to_ocds.converters.BT_197_BT_142_LotResult import (
 from ted_and_doffin_to_ocds.converters.BT_197_BT_144_LotResult import (
     parse_bt197_bt144_unpublished_justification_code,
     merge_bt197_bt144_unpublished_justification_code,
+)
+
+from converters.BT_197_160_Tender import (
+    bt_197_bt_160_parse_unpublished_justification_code,
+    bt_197_bt_160_merge_unpublished_justification_code,
 )
 
 #
@@ -2482,6 +2497,15 @@ def main(xml_path, ocid_prefix):
         "Unpublished Identifier (BT-195, BT-144)",
     )
 
+    # Parse and merge BT-195(BT-160)-Tender Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [bt_195_bt_160_parse_unpublished_identifier],
+        bt_195_bt_160_merge_unpublished_identifier,
+        "Unpublished Identifier (BT-195/BT-160)",
+    )
+
     # BT-196
     # Parse and merge BT-196(BT-09) Unpublished Justification Description
     process_bt_section(
@@ -2562,6 +2586,15 @@ def main(xml_path, ocid_prefix):
         [parse_bt196_bt144_unpublished_justification],
         merge_bt196_bt144_unpublished_justification,
         "Unpublished Justification Description (BT-196, BT-144)",
+    )
+
+    # Parse and merge BT-196(BT-160)-Tender Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [bt_196_bt_160_parse_unpublished_justification],
+        bt_196_bt_160_merge_unpublished_justification,
+        "Unpublished Justification Description (BT-196/BT-160)",
     )
 
     # BT-197
@@ -2645,6 +2678,15 @@ def main(xml_path, ocid_prefix):
         [parse_bt197_bt144_unpublished_justification_code],
         merge_bt197_bt144_unpublished_justification_code,
         "Unpublished Justification Code (BT-197, BT-144)",
+    )
+
+    # Parse and merge BT-197(BT-160)-Tender Unpublished Justification Code
+    process_bt_section(
+        release_json,
+        xml_content,
+        [bt_197_bt_160_parse_unpublished_justification_code],
+        bt_197_bt_160_merge_unpublished_justification_code,
+        "Unpublished Justification Code (BT-197/BT-160)",
     )
 
     # BT-198
