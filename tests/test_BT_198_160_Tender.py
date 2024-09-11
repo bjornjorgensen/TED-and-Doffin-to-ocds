@@ -152,6 +152,9 @@ def test_btt_198_bt_160_integration(tmp_path, setup_logging):
         withheld_item["id"] == "con-rev-buy-TEN-0001"
     ), "Unexpected withheld information id"
     assert (
+        "availabilityDate" in withheld_item
+    ), "Expected 'availabilityDate' in withheld_item"
+    assert (
         withheld_item["availabilityDate"] == "2025-03-31T00:00:00+01:00"
     ), "Unexpected availability date"
 
