@@ -1,4 +1,4 @@
-# main.py 
+# main.py
 import json
 import logging
 from ted_and_doffin_to_ocds.converters.Common_operations import NoticeProcessor
@@ -318,6 +318,189 @@ from ted_and_doffin_to_ocds.converters.BT_195_BT_144_LotResult import (
     parse_bt195_bt144_unpublished_identifier,
     merge_bt195_bt144_unpublished_identifier,
 )
+from ted_and_doffin_to_ocds.converters.BT_195_BT_160_Tender import (
+    parse_bt195_bt160_unpublished_identifier,
+    merge_bt195_bt160_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_162_Tender import (
+    parse_bt195_bt162_unpublished_identifier,
+    merge_bt195_bt162_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_163_Tender import (
+    parse_bt195_bt163_unpublished_identifier,
+    merge_bt195_bt163_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_171_Tender import (
+    parse_bt195_bt171_unpublished_identifier,
+    merge_bt195_bt171_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_191_Tender import (
+    parse_bt195_bt191_unpublished_identifier,
+    merge_bt195_bt191_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_193_Tender import (
+    parse_bt195_bt193_unpublished_identifier,
+    merge_bt195_bt193_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_539_Lot import (
+    parse_bt195_bt539_unpublished_identifier,
+    merge_bt195_bt539_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_539_LotsGroup import (
+    parse_bt195_bt539_lotsgroup_unpublished_identifier,
+    merge_bt195_bt539_lotsgroup_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_540_Lot import (
+    parse_bt195_bt540_lot_unpublished_identifier,
+    merge_bt195_bt540_lot_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_540_LotsGroup import (
+    parse_bt195_bt540_lotsgroup_unpublished_identifier,
+    merge_bt195_bt540_lotsgroup_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_541_Lot_Fixed import (
+    parse_bt195_bt541_lot_fixed_unpublished_identifier,
+    merge_bt195_bt541_lot_fixed_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_541_Lot_Threshold import (
+    parse_bt195_bt541_lot_threshold_unpublished_identifier,
+    merge_bt195_bt541_lot_threshold_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_541_Lot_Weight import (
+    parse_bt195_bt541_lot_weight_unpublished_identifier,
+    merge_bt195_bt541_lot_weight_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_541_LotsGroup_Fixed import (
+    parse_bt195_bt541_lotsgroup_fixed_unpublished_identifier,
+    merge_bt195_bt541_lotsgroup_fixed_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_541_LotsGroup_Threshold import (
+    parse_bt195_bt541_lotsgroup_threshold_unpublished_identifier,
+    merge_bt195_bt541_lotsgroup_threshold_unpublished_identifier,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_195_BT_541_LotsGroup_Weight import (
+    parse_bt195_bt541_lotsgroup_weight,
+    merge_bt195_bt541_lotsgroup_weight,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_195_BT_5421_Lot import (
+    parse_bt195_bt5421_lot,
+    merge_bt195_bt5421_lot,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_195_BT_5421_LotsGroup import (
+    parse_bt195_bt5421_lotsgroup,
+    merge_bt195_bt5421_lotsgroup,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_195_BT_5422_Lot import (
+    parse_bt195_bt5422_lot,
+    merge_bt195_bt5422_lot,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_195_BT_5422_LotsGroup import (
+    parse_bt195_bt5422_lotsgroup,
+    merge_bt195_bt5422_lotsgroup,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_195_BT_5423_Lot import (
+    parse_bt195_bt5423_lot,
+    merge_bt195_bt5423_lot,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_195_BT_5423_LotsGroup import (
+    parse_bt195_bt5423_lotsgroup,
+    merge_bt195_bt5423_lotsgroup,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_195_BT_543_Lot import (
+    parse_bt195_bt543_lot,
+    merge_bt195_bt543_lot,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_195_BT_543_LotsGroup import (
+    parse_bt195_bt543_lotsgroup,
+    merge_bt195_bt543_lotsgroup,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_553_Tender import (
+    parse_bt195_bt553_tender,
+    merge_bt195_bt553_tender,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_554_Tender import (
+    parse_bt195_bt554_unpublished_identifier,
+    merge_bt195_bt554_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_555_Tender import (
+    parse_bt195_bt555_unpublished_identifier,
+    merge_bt195_bt555_unpublished_identifier,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_195_BT_635_LotResult import (
+    parse_bt195_bt635_unpublished_identifier,
+    merge_bt195_bt635_unpublished_identifier,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_195_BT_636_LotResult import (
+    parse_bt195_bt636_unpublished_identifier,
+    merge_bt195_bt636_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_660_LotResult import (
+    parse_bt195_bt660_unpublished_identifier,
+    merge_bt195_bt660_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_709_LotResult import (
+    parse_bt195_bt709_unpublished_identifier,
+    merge_bt195_bt709_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_710_LotResult import (
+    parse_bt195_bt710_unpublished_identifier,
+    merge_bt195_bt710_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_711_LotResult import (
+    parse_bt195_bt711_unpublished_identifier,
+    merge_bt195_bt711_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_712_LotResult import (
+    parse_bt195_bt712_unpublished_identifier,
+    merge_bt195_bt712_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_720_Tender import (
+    parse_bt195_bt720_unpublished_identifier,
+    merge_bt195_bt720_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_733_Lot import (
+    parse_bt195_bt733_unpublished_identifier,
+    merge_bt195_bt733_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_733_LotsGroup import (
+    parse_bt195_bt733_lotsgroup_unpublished_identifier,
+    merge_bt195_bt733_lotsgroup_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_734_Lot import (
+    parse_bt195_bt734_lot_unpublished_identifier,
+    merge_bt195_bt734_lot_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_734_LotsGroup import (
+    parse_bt195_bt734_lotsgroup_unpublished_identifier,
+    merge_bt195_bt734_lotsgroup_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_759_LotResult import (
+    parse_bt195_bt759_lotresult_unpublished_identifier,
+    merge_bt195_bt759_lotresult_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_760_LotResult import (
+    parse_bt195_bt760_lotresult_unpublished_identifier,
+    merge_bt195_bt760_lotresult_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_773_Tender import (
+    parse_bt195_bt773_tender_unpublished_identifier,
+    merge_bt195_bt773_tender_unpublished_identifier,
+)
+from ted_and_doffin_to_ocds.converters.BT_195_BT_88_Procedure import (
+    parse_bt195_bt88_procedure_unpublished_identifier,
+    merge_bt195_bt88_procedure_unpublished_identifier,
+)
 
 # BT_196
 from ted_and_doffin_to_ocds.converters.BT_196_BT_09_Procedure import (
@@ -360,6 +543,185 @@ from ted_and_doffin_to_ocds.converters.BT_196_BT_142_LotResult import (
 from ted_and_doffin_to_ocds.converters.BT_196_BT_144_LotResult import (
     parse_bt196_bt144_unpublished_justification,
     merge_bt196_bt144_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_160_Tender import (
+    parse_bt196_bt160_unpublished_justification,
+    merge_bt196_bt160_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_162_Tender import (
+    parse_bt196_bt162_unpublished_justification,
+    merge_bt196_bt162_unpublished_justification,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_196_BT_163_Tender import (
+    parse_bt196_bt163_unpublished_justification,
+    merge_bt196_bt163_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_171_Tender import (
+    parse_bt196_bt171_unpublished_justification,
+    merge_bt196_bt171_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_191_Tender import (
+    parse_bt196_bt191_unpublished_justification,
+    merge_bt196_bt191_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_193_Tender import (
+    parse_bt196_bt193_unpublished_justification,
+    merge_bt196_bt193_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_539_Lot import (
+    parse_bt196_bt539_unpublished_justification,
+    merge_bt196_bt539_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_539_LotsGroup import (
+    parse_bt196_bt539_lotsgroup_unpublished_justification,
+    merge_bt196_bt539_lotsgroup_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_540_Lot import (
+    parse_bt196_bt540_lot_unpublished_justification,
+    merge_bt196_bt540_lot_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_540_LotsGroup import (
+    parse_bt196_bt540_lotsgroup_unpublished_justification,
+    merge_bt196_bt540_lotsgroup_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_541_Lot_Fixed import (
+    parse_bt196_bt541_lot_fixed_unpublished_justification,
+    merge_bt196_bt541_lot_fixed_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_541_Lot_Threshold import (
+    parse_bt196_bt541_lot_threshold_unpublished_justification,
+    merge_bt196_bt541_lot_threshold_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_541_Lot_Weight import (
+    parse_bt196_bt541_lot_weight_unpublished_justification,
+    merge_bt196_bt541_lot_weight_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_541_LotsGroup_Fixed import (
+    parse_bt196_bt541_lotsgroup_fixed_unpublished_justification,
+    merge_bt196_bt541_lotsgroup_fixed_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_541_LotsGroup_Threshold import (
+    parse_bt196_bt541_lotsgroup_threshold_unpublished_justification,
+    merge_bt196_bt541_lotsgroup_threshold_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_541_LotsGroup_Weight import (
+    parse_bt196_bt541_lotsgroup_weight,
+    merge_bt196_bt541_lotsgroup_weight,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_5421_Lot import (
+    parse_bt196_bt5421_lot,
+    merge_bt196_bt5421_lot,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_5421_LotsGroup import (
+    parse_bt196_bt5421_lotsgroup,
+    merge_bt196_bt5421_lotsgroup,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_196_BT_5422_Lot import (
+    parse_bt196_bt5422_lot,
+    merge_bt196_bt5422_lot,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_5422_LotsGroup import (
+    parse_bt196_bt5422_lotsgroup,
+    merge_bt196_bt5422_lotsgroup,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_196_BT_5423_Lot import (
+    parse_bt196_bt5423_lot,
+    merge_bt196_bt5423_lot,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_196_BT_5423_LotsGroup import (
+    parse_bt196_bt5423_lotsgroup,
+    merge_bt196_bt5423_lotsgroup,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_196_BT_543_Lot import (
+    parse_bt196_bt543_lot,
+    merge_bt196_bt543_lot,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_196_BT_543_LotsGroup import (
+    parse_bt196_bt543_lotsgroup,
+    merge_bt196_bt543_lotsgroup,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_553_Tender import (
+    parse_bt196_bt553_tender,
+    merge_bt196_bt553_tender,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_196_BT_554_Tender import (
+    parse_bt196_bt554_unpublished_justification,
+    merge_bt196_bt554_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_555_Tender import (
+    parse_bt196_bt555_unpublished_justification,
+    merge_bt196_bt555_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_635_LotResult import (
+    parse_bt196_bt635_unpublished_justification,
+    merge_bt196_bt635_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_636_LotResult import (
+    parse_bt196_bt636_unpublished_justification,
+    merge_bt196_bt636_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_660_LotResult import (
+    parse_bt196_bt660_unpublished_justification,
+    merge_bt196_bt660_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_709_LotResult import (
+    parse_bt196_bt709_unpublished_justification,
+    merge_bt196_bt709_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_710_LotResult import (
+    parse_bt196_bt710_unpublished_justification,
+    merge_bt196_bt710_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_711_LotResult import (
+    parse_bt196_bt711_unpublished_justification,
+    merge_bt196_bt711_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_712_LotResult import (
+    parse_bt196_bt712_unpublished_justification,
+    merge_bt196_bt712_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_720_Tender import (
+    parse_bt196_bt720_unpublished_justification,
+    merge_bt196_bt720_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_733_Lot import (
+    parse_bt196_bt733_unpublished_justification,
+    merge_bt196_bt733_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_733_LotsGroup import (
+    parse_bt196_bt733_lotsgroup_unpublished_justification,
+    merge_bt196_bt733_lotsgroup_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_734_Lot import (
+    parse_bt196_bt734_lot_unpublished_justification,
+    merge_bt196_bt734_lot_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_734_LotsGroup import (
+    parse_bt196_bt734_lotsgroup_unpublished_justification,
+    merge_bt196_bt734_lotsgroup_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_759_LotResult import (
+    parse_bt196_bt759_lotresult_unpublished_justification,
+    merge_bt196_bt759_lotresult_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_760_LotResult import (
+    parse_bt196_bt760_lotresult_unpublished_justification,
+    merge_bt196_bt760_lotresult_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_773_Tender import (
+    parse_bt196_bt773_tender_unpublished_justification,
+    merge_bt196_bt773_tender_unpublished_justification,
+)
+from ted_and_doffin_to_ocds.converters.BT_196_BT_88_Procedure import (
+    parse_bt196_bt88_procedure_unpublished_justification,
+    merge_bt196_bt88_procedure_unpublished_justification,
 )
 
 # #BT_197
@@ -405,6 +767,183 @@ from ted_and_doffin_to_ocds.converters.BT_197_BT_144_LotResult import (
     parse_bt197_bt144_unpublished_justification_code,
     merge_bt197_bt144_unpublished_justification_code,
 )
+from ted_and_doffin_to_ocds.converters.BT_197_BT_160_Tender import (
+    parse_bt197_bt160_unpublished_justification_code,
+    merge_bt197_bt160_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_162_Tender import (
+    parse_bt197_bt162_unpublished_justification_code,
+    merge_bt197_bt162_unpublished_justification_code,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_197_BT_163_Tender import (
+    parse_bt197_bt163_unpublished_justification_code,
+    merge_bt197_bt163_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_171_Tender import (
+    parse_bt197_bt171_unpublished_justification_code,
+    merge_bt197_bt171_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_191_Tender import (
+    parse_bt197_bt191_unpublished_justification_code,
+    merge_bt197_bt191_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_193_Tender import (
+    parse_bt197_bt193_unpublished_justification_code,
+    merge_bt197_bt193_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_539_Lot import (
+    parse_bt197_bt539_unpublished_justification_code,
+    merge_bt197_bt539_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_539_LotsGroup import (
+    parse_bt197_bt539_lotsgroup_unpublished_justification_code,
+    merge_bt197_bt539_lotsgroup_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_540_Lot import (
+    parse_bt197_bt540_lot_unpublished_justification_code,
+    merge_bt197_bt540_lot_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_540_LotsGroup import (
+    parse_bt197_bt540_lotsgroup_unpublished_justification_code,
+    merge_bt197_bt540_lotsgroup_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_541_Lot_Fixed import (
+    parse_bt197_bt541_lot_fixed_unpublished_justification_code,
+    merge_bt197_bt541_lot_fixed_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_541_Lot_Threshold import (
+    parse_bt197_bt541_lot_threshold_unpublished_justification_code,
+    merge_bt197_bt541_lot_threshold_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_541_Lot_Weight import (
+    parse_bt197_bt541_lot_weight_unpublished_justification_code,
+    merge_bt197_bt541_lot_weight_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_541_LotsGroup_Fixed import (
+    parse_bt197_bt541_lotsgroup_fixed_unpublished_justification_code,
+    merge_bt197_bt541_lotsgroup_fixed_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_541_LotsGroup import (
+    parse_bt197_bt541_lotsgroup_threshold,
+    merge_bt197_bt541_lotsgroup_threshold,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_197_BT_541_LotsGroup_Weight import (
+    parse_bt197_bt541_lotsgroup_weight,
+    merge_bt197_bt541_lotsgroup_weight,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_5421_Lot import (
+    parse_bt197_bt5421_lot,
+    merge_bt197_bt5421_lot,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_197_BT_5421_LotsGroup import (
+    parse_bt197_bt5421_lotsgroup,
+    merge_bt197_bt5421_lotsgroup,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_197_BT_5422_Lot import (
+    parse_bt197_bt5422_lot,
+    merge_bt197_bt5422_lot,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_5422_LotsGroup import (
+    parse_bt197_bt5422_lotsgroup,
+    merge_bt197_bt5422_lotsgroup,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_197_BT_5423_Lot import (
+    parse_bt197_bt5423_lot,
+    merge_bt197_bt5423_lot,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_5423_LotsGroup import (
+    parse_bt197_bt5423_lotsgroup,
+    merge_bt197_bt5423_lotsgroup,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_543_Lot import (
+    parse_bt197_bt543_lot,
+    merge_bt197_bt543_lot,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_543_LotsGroup import (
+    parse_bt197_bt543_lotsgroup,
+    merge_bt197_bt543_lotsgroup,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_553_Tender import (
+    parse_bt197_bt553_tender,
+    merge_bt197_bt553_tender,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_554_Tender import (
+    parse_bt197_bt554_unpublished_justification_code,
+    merge_bt197_bt554_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_555_Tender import (
+    parse_bt197_bt555_unpublished_justification_code,
+    merge_bt197_bt555_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_635_LotResult import (
+    parse_bt197_bt635_unpublished_justification_code,
+    merge_bt197_bt635_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_636_LotResult import (
+    parse_bt197_bt636_unpublished_justification_code,
+    merge_bt197_bt636_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_660_LotResult import (
+    parse_bt197_bt660_unpublished_justification_code,
+    merge_bt197_bt660_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_709_LotResult import (
+    parse_bt197_bt709_unpublished_justification_code,
+    merge_bt197_bt709_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_710_LotResult import (
+    parse_bt197_bt710_unpublished_justification_code,
+    merge_bt197_bt710_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_711_LotResult import (
+    parse_bt197_bt711_unpublished_justification_code,
+    merge_bt197_bt711_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_712_LotResult import (
+    parse_bt197_bt712_unpublished_justification_code,
+    merge_bt197_bt712_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_720_Tender import (
+    parse_bt197_bt720_unpublished_justification_code,
+    merge_bt197_bt720_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_733_Lot import (
+    parse_bt197_bt733_unpublished_justification_code,
+    merge_bt197_bt733_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_733_LotsGroup import (
+    parse_bt197_bt733_lotsgroup_unpublished_justification_code,
+    merge_bt197_bt733_lotsgroup_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_734_Lot import (
+    parse_bt197_bt734_lot_unpublished_justification_code,
+    merge_bt197_bt734_lot_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_734_LotsGroup import (
+    parse_bt197_bt734_lotsgroup_unpublished_justification_code,
+    merge_bt197_bt734_lotsgroup_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_759_LotResult import (
+    parse_bt197_bt759_lotresult_unpublished_justification_code,
+    merge_bt197_bt759_lotresult_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_760_LotResult import (
+    parse_bt197_bt760_lotresult_unpublished_justification_code,
+    merge_bt197_bt760_lotresult_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_773_Tender import (
+    parse_bt197_bt773_tender_unpublished_justification_code,
+    merge_bt197_bt773_tender_unpublished_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.BT_197_BT_88_Procedure import (
+    parse_bt197_bt88_procedure_unpublished_justification_code,
+    merge_bt197_bt88_procedure_unpublished_justification_code,
+)
 
 #
 # #BT_198
@@ -447,6 +986,185 @@ from ted_and_doffin_to_ocds.converters.BT_198_BT_142_LotResult import (
 from ted_and_doffin_to_ocds.converters.BT_198_BT_144_LotResult import (
     parse_bt198_bt144_unpublished_access_date,
     merge_bt198_bt144_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_160_Tender import (
+    parse_bt198_bt160_unpublished_access_date,
+    merge_bt198_bt160_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_162_Tender import (
+    parse_bt198_bt162_unpublished_access_date,
+    merge_bt198_bt162_unpublished_access_date,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_198_BT_163_Tender import (
+    parse_bt198_bt163_unpublished_access_date,
+    merge_bt198_bt163_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_171_Tender import (
+    parse_bt198_bt171_unpublished_access_date,
+    merge_bt198_bt171_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_191_Tender import (
+    parse_bt198_bt191_unpublished_access_date,
+    merge_bt198_bt191_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_193_Tender import (
+    parse_bt198_bt193_unpublished_access_date,
+    merge_bt198_bt193_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_539_Lot import (
+    parse_bt198_bt539_unpublished_access_date,
+    merge_bt198_bt539_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_539_LotsGroup import (
+    parse_bt198_bt539_lotsgroup_unpublished_access_date,
+    merge_bt198_bt539_lotsgroup_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_540_Lot import (
+    parse_bt198_bt540_lot_unpublished_access_date,
+    merge_bt198_bt540_lot_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_540_LotsGroup import (
+    parse_bt198_bt540_lotsgroup_unpublished_access_date,
+    merge_bt198_bt540_lotsgroup_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_541_Lot_Fixed import (
+    parse_bt198_bt541_lot_fixed_unpublished_access_date,
+    merge_bt198_bt541_lot_fixed_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_541_Lot_Threshold import (
+    parse_bt198_bt541_lot_threshold_unpublished_access_date,
+    merge_bt198_bt541_lot_threshold_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_541_Lot_Weight import (
+    parse_bt198_bt541_lot_weight_unpublished_access_date,
+    merge_bt198_bt541_lot_weight_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_541_LotsGroup_Fixed import (
+    parse_bt198_bt541_lotsgroup_fixed_unpublished_access_date,
+    merge_bt198_bt541_lotsgroup_fixed_unpublished_access_date,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_198_BT_541_LotsGroup import (
+    parse_bt198_bt541_lotsgroup_threshold,
+    merge_bt198_bt541_lotsgroup_threshold,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_541_LotsGroup_Weight import (
+    parse_bt198_bt541_lotsgroup_weight,
+    merge_bt198_bt541_lotsgroup_weight,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_198_BT_5421_Lot import (
+    parse_bt198_bt5421_lot,
+    merge_bt198_bt5421_lot,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_198_BT_5421_LotsGroup import (
+    parse_bt198_bt5421_lotsgroup,
+    merge_bt198_bt5421_lotsgroup,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_198_BT_5422_Lot import (
+    parse_bt198_bt5422_lot,
+    merge_bt198_bt5422_lot,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_198_BT_5422_LotsGroup import (
+    parse_bt198_bt5422_lotsgroup,
+    merge_bt198_bt5422_lotsgroup,
+)
+
+from ted_and_doffin_to_ocds.converters.BT_198_BT_5423_Lot import (
+    parse_bt198_bt5423_lot,
+    merge_bt198_bt5423_lot,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_5423_LotsGroup import (
+    parse_bt198_bt5423_lotsgroup,
+    merge_bt198_bt5423_lotsgroup,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_543_Lot import (
+    parse_bt198_bt543_lot,
+    merge_bt198_bt543_lot,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_543_LotsGroup import (
+    parse_bt198_bt543_lotsgroup,
+    merge_bt198_bt543_lotsgroup,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_553_Tender import (
+    parse_bt198_bt553_tender,
+    merge_bt198_bt553_tender,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_554_Tender import (
+    parse_bt198_bt554_unpublished_access_date,
+    merge_bt198_bt554_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_555_Tender import (
+    parse_bt198_bt555_unpublished_access_date,
+    merge_bt198_bt555_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_635_LotResult import (
+    parse_bt198_bt635_unpublished_access_date,
+    merge_bt198_bt635_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_636_LotResult import (
+    parse_bt198_bt636_unpublished_access_date,
+    merge_bt198_bt636_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_660_LotResult import (
+    parse_bt198_bt660_unpublished_access_date,
+    merge_bt198_bt660_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_709_LotResult import (
+    parse_bt198_bt709_unpublished_access_date,
+    merge_bt198_bt709_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_710_LotResult import (
+    parse_bt198_bt710_unpublished_access_date,
+    merge_bt198_bt710_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_711_LotResult import (
+    parse_bt198_bt711_unpublished_access_date,
+    merge_bt198_bt711_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_712_LotResult import (
+    parse_bt198_bt712_unpublished_access_date,
+    merge_bt198_bt712_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_720_Tender import (
+    parse_bt198_bt720_unpublished_access_date,
+    merge_bt198_bt720_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_733_Lot import (
+    parse_bt198_bt733_unpublished_access_date,
+    merge_bt198_bt733_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_733_LotsGroup import (
+    parse_bt198_bt733_lotsgroup_unpublished_access_date,
+    merge_bt198_bt733_lotsgroup_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_734_Lot import (
+    parse_bt198_bt734_lot_unpublished_access_date,
+    merge_bt198_bt734_lot_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_734_LotsGroup import (
+    parse_bt198_bt734_lotsgroup_unpublished_access_date,
+    merge_bt198_bt734_lotsgroup_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_759_LotResult import (
+    parse_bt198_bt759_lotresult_unpublished_access_date,
+    merge_bt198_bt759_lotresult_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_760_LotResult import (
+    parse_bt198_bt760_lotresult_unpublished_access_date,
+    merge_bt198_bt760_lotresult_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_773_Tender import (
+    parse_bt198_bt773_tender_unpublished_access_date,
+    merge_bt198_bt773_tender_unpublished_access_date,
+)
+from ted_and_doffin_to_ocds.converters.BT_198_BT_88_Procedure import (
+    parse_bt198_bt88_procedure_unpublished_access_date,
+    merge_bt198_bt88_procedure_unpublished_access_date,
 )
 
 from ted_and_doffin_to_ocds.converters.BT_200_Contract import (
@@ -2482,6 +3200,365 @@ def main(xml_path, ocid_prefix):
         "Unpublished Identifier (BT-195, BT-144)",
     )
 
+    # Parse and merge BT-195(BT-160)-Tender Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt160_unpublished_identifier],
+        merge_bt195_bt160_unpublished_identifier,
+        "Procedure BT-195(BT-160)-Tender Unpublished Identifier",
+    )
+
+    # Parse and merge BT-195(BT-162)-Tender Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt162_unpublished_identifier],
+        merge_bt195_bt162_unpublished_identifier,
+        "Procedure BT-195(BT-162)-Tender Unpublished Identifier",
+    )
+    # Parse and merge BT-195(BT-163)-Tender Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt163_unpublished_identifier],
+        merge_bt195_bt163_unpublished_identifier,
+        "Procedure BT-195(BT-163)-Tender Unpublished Identifier",
+    )
+
+    # Parse and merge BT-195(BT-171)-Tender Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt171_unpublished_identifier],
+        merge_bt195_bt171_unpublished_identifier,
+        "Procedure BT-195(BT-171)-Tender Unpublished Identifier",
+    )
+
+    # Parse and merge BT-195(BT-191)-Tender Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt191_unpublished_identifier],
+        merge_bt195_bt191_unpublished_identifier,
+        "Procedure BT-195(BT-191)-Tender Unpublished Identifier",
+    )
+
+    # Parse and merge BT-195(BT-193)-Tender Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt193_unpublished_identifier],
+        merge_bt195_bt193_unpublished_identifier,
+        "Procedure BT-195(BT-193)-Tender Unpublished Identifier",
+    )
+
+    # Parse and merge BT-195(BT-539)-Lot Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt539_unpublished_identifier],
+        merge_bt195_bt539_unpublished_identifier,
+        "Procedure BT-195(BT-539)-Lot Unpublished Identifier",
+    )
+
+    # Parse and merge BT-195(BT-539)-LotsGroup Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt539_lotsgroup_unpublished_identifier],
+        merge_bt195_bt539_lotsgroup_unpublished_identifier,
+        "Procedure BT-195(BT-539)-LotsGroup Unpublished Identifier",
+    )
+
+    # Parse and merge BT-195(BT-540)-Lot Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt540_lot_unpublished_identifier],
+        merge_bt195_bt540_lot_unpublished_identifier,
+        "Procedure BT-195(BT-540)-Lot Unpublished Identifier",
+    )
+
+    # Parse and merge BT-195(BT-540)-LotsGroup Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt540_lotsgroup_unpublished_identifier],
+        merge_bt195_bt540_lotsgroup_unpublished_identifier,
+        "Procedure BT-195(BT-540)-LotsGroup Unpublished Identifier",
+    )
+
+    # Parse and merge BT-195(BT-541)-Lot-Fixed Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt541_lot_fixed_unpublished_identifier],
+        merge_bt195_bt541_lot_fixed_unpublished_identifier,
+        "Procedure BT-195(BT-541)-Lot-Fixed Unpublished Identifier",
+    )
+
+    # Parse and merge BT-195(BT-541) Lot Threshold Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt541_lot_threshold_unpublished_identifier],
+        merge_bt195_bt541_lot_threshold_unpublished_identifier,
+        "Lot Threshold Unpublished Identifier (BT-195(BT-541))",
+    )
+
+    # Parse and merge BT-195(BT-541) Lot Weight Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt541_lot_weight_unpublished_identifier],
+        merge_bt195_bt541_lot_weight_unpublished_identifier,
+        "Lot Weight Unpublished Identifier (BT-195(BT-541))",
+    )
+
+    # Parse and merge BT-195(BT-541) LotsGroup Fixed Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt541_lotsgroup_fixed_unpublished_identifier],
+        merge_bt195_bt541_lotsgroup_fixed_unpublished_identifier,
+        "LotsGroup Fixed Unpublished Identifier (BT-195(BT-541))",
+    )
+
+    # Parse and merge BT-195(BT-541) LotsGroup Threshold Unpublished Identifier
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt541_lotsgroup_threshold_unpublished_identifier],
+        merge_bt195_bt541_lotsgroup_threshold_unpublished_identifier,
+        "LotsGroup Threshold Unpublished Identifier (BT-195(BT-541))",
+    )
+    # Parse and merge BT-195(BT-541)-LotsGroup-Weight
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt541_lotsgroup_weight],
+        merge_bt195_bt541_lotsgroup_weight,
+        "Unpublished Identifier for LotsGroup Weight (BT-195(BT-541))",
+    )
+    # Parse and merge BT-195(BT-5421)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt5421_lot],
+        merge_bt195_bt5421_lot,
+        "Unpublished Identifier for Lot (BT-195(BT-5421))",
+    )
+    # Parse and merge BT-195(BT-5421)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt5421_lotsgroup],
+        merge_bt195_bt5421_lotsgroup,
+        "Unpublished Identifier for LotsGroup (BT-195(BT-5421))",
+    )
+    # Parse and merge BT-195(BT-5422)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt5422_lot],
+        merge_bt195_bt5422_lot,
+        "Unpublished Identifier for Lot (BT-195(BT-5422))",
+    )
+    # Parse and merge BT-195(BT-5422)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt5422_lotsgroup],
+        merge_bt195_bt5422_lotsgroup,
+        "Unpublished Identifier for LotsGroup (BT-195(BT-5422))",
+    )
+    # Parse and merge BT-195(BT-5423)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt5423_lot],
+        merge_bt195_bt5423_lot,
+        "Unpublished Identifier for Lot (BT-195(BT-5423))",
+    )
+    # Parse and merge BT-195(BT-5423)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt5423_lotsgroup],
+        merge_bt195_bt5423_lotsgroup,
+        "Unpublished Identifier for LotsGroup (BT-195(BT-5423))",
+    )
+    # Parse and merge BT-195(BT-543)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt543_lot],
+        merge_bt195_bt543_lot,
+        "Unpublished Identifier for Lot (BT-195(BT-543))",
+    )
+    # Parse and merge BT-195(BT-543)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt543_lotsgroup],
+        merge_bt195_bt543_lotsgroup,
+        "Unpublished Identifier for LotsGroup (BT-195(BT-543))",
+    )
+    # Parse and merge BT-195(BT-553)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt553_tender],
+        merge_bt195_bt553_tender,
+        "Unpublished Identifier for Tender (BT-195(BT-553))",
+    )
+    # Parse and merge BT-195(BT-554)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt554_unpublished_identifier],
+        merge_bt195_bt554_unpublished_identifier,
+        "Unpublished Identifier for Tender Subcontracting Description (BT-195(BT-554))",
+    )
+    # Parse and merge BT-195(BT-555)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt555_unpublished_identifier],
+        merge_bt195_bt555_unpublished_identifier,
+        "Unpublished Identifier for Tender Subcontracting Percentage (BT-195(BT-555))",
+    )
+    # Parse and merge BT-195(BT-635)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt635_unpublished_identifier],
+        merge_bt195_bt635_unpublished_identifier,
+        "Unpublished Identifier for Lot Result Buyer Review Request Count (BT-195(BT-635))",
+    )
+    # Parse and merge BT-195(BT-636)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt636_unpublished_identifier],
+        merge_bt195_bt636_unpublished_identifier,
+        "Unpublished Identifier for Lot Result Buyer Review Request Irregularity Type (BT-195(BT-636))",
+    )
+    # Parse and merge BT-195(BT-660)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt660_unpublished_identifier],
+        merge_bt195_bt660_unpublished_identifier,
+        "Unpublished Identifier for Lot Result Framework Re-estimated Value (BT-195(BT-660))",
+    )
+    # Parse and merge BT-195(BT-709)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt709_unpublished_identifier],
+        merge_bt195_bt709_unpublished_identifier,
+        "Unpublished Identifier for Lot Result Maximum Value (BT-195(BT-709))",
+    )
+
+    # Parse and merge BT-195(BT-710)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt710_unpublished_identifier],
+        merge_bt195_bt710_unpublished_identifier,
+        "Unpublished Identifier for Lot Result Tender Lowest Value (BT-195(BT-710))",
+    )
+    # Parse and merge BT-195(BT-711)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt711_unpublished_identifier],
+        merge_bt195_bt711_unpublished_identifier,
+        "Unpublished Identifier for Lot Result Tender Highest Value (BT-195(BT-711))",
+    )
+    # Parse and merge BT-195(BT-712)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt712_unpublished_identifier],
+        merge_bt195_bt712_unpublished_identifier,
+        "Unpublished Identifier for Lot Result Buyer Review Complainants (BT-195(BT-712))",
+    )
+    # Parse and merge BT-195(BT-720)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt720_unpublished_identifier],
+        merge_bt195_bt720_unpublished_identifier,
+        "Unpublished Identifier for Winning Tender Value (BT-195(BT-720))",
+    )
+    # Parse and merge BT-195(BT-733)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt733_unpublished_identifier],
+        merge_bt195_bt733_unpublished_identifier,
+        "Unpublished Identifier for Award Criteria Order Justification (BT-195(BT-733))",
+    )
+    # Parse and merge BT-195(BT-733)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt733_lotsgroup_unpublished_identifier],
+        merge_bt195_bt733_lotsgroup_unpublished_identifier,
+        "Unpublished Identifier for Award Criteria Order Justification in LotsGroup (BT-195(BT-733))",
+    )
+    # Parse and merge BT-195(BT-734)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt734_lot_unpublished_identifier],
+        merge_bt195_bt734_lot_unpublished_identifier,
+        "Unpublished Identifier for Award Criterion Name in Lot (BT-195(BT-734))",
+    )
+    # Parse and merge BT-195(BT-734)-LotGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt734_lotsgroup_unpublished_identifier],
+        merge_bt195_bt734_lotsgroup_unpublished_identifier,
+        "Unpublished Identifier for Award Criterion Name in LotGroup (BT-195(BT-734))",
+    )
+    # Parse and merge BT-195(BT-759)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt759_lotresult_unpublished_identifier],
+        merge_bt195_bt759_lotresult_unpublished_identifier,
+        "Unpublished Identifier for Received Submissions Count in Lot Result (BT-195(BT-759))",
+    )
+    # Parse and merge BT-195(BT-760)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt760_lotresult_unpublished_identifier],
+        merge_bt195_bt760_lotresult_unpublished_identifier,
+        "Unpublished Identifier for Received Submissions Type in Lot Result (BT-195(BT-760))",
+    )
+    # Parse and merge BT-195(BT-773)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt773_tender_unpublished_identifier],
+        merge_bt195_bt773_tender_unpublished_identifier,
+        "Unpublished Identifier for Subcontracting in Tender (BT-195(BT-773))",
+    )
+    # Parse and merge BT-195(BT-88)-Procedure
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt195_bt88_procedure_unpublished_identifier],
+        merge_bt195_bt88_procedure_unpublished_identifier,
+        "Unpublished Identifier for Procedure Features (BT-195(BT-88))",
+    )
+
     # BT-196
     # Parse and merge BT-196(BT-09) Unpublished Justification Description
     process_bt_section(
@@ -2562,6 +3639,366 @@ def main(xml_path, ocid_prefix):
         [parse_bt196_bt144_unpublished_justification],
         merge_bt196_bt144_unpublished_justification,
         "Unpublished Justification Description (BT-196, BT-144)",
+    )
+
+    # Parse and merge BT-196(BT-160)-Tender Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt160_unpublished_justification],
+        merge_bt196_bt160_unpublished_justification,
+        "Procedure BT-196(BT-160)-Tender Unpublished Justification Description",
+    )
+
+    # Parse and merge BT-196(BT-162)-Tender Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt162_unpublished_justification],
+        merge_bt196_bt162_unpublished_justification,
+        "Procedure BT-196(BT-162)-Tender Unpublished Justification Description",
+    )
+
+    # Parse and merge BT-196(BT-163)-Tender Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt163_unpublished_justification],
+        merge_bt196_bt163_unpublished_justification,
+        "Procedure BT-196(BT-163)-Tender Unpublished Justification Description",
+    )
+
+    # Parse and merge BT-196(BT-171)-Tender Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt171_unpublished_justification],
+        merge_bt196_bt171_unpublished_justification,
+        "Procedure BT-196(BT-171)-Tender Unpublished Justification Description",
+    )
+
+    # Parse and merge BT-196(BT-191)-Tender Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt191_unpublished_justification],
+        merge_bt196_bt191_unpublished_justification,
+        "Procedure BT-196(BT-191)-Tender Unpublished Justification Description",
+    )
+
+    # Parse and merge BT-196(BT-193)-Tender Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt193_unpublished_justification],
+        merge_bt196_bt193_unpublished_justification,
+        "Procedure BT-196(BT-193)-Tender Unpublished Justification Description",
+    )
+
+    # Parse and merge BT-196(BT-539)-Lot Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt539_unpublished_justification],
+        merge_bt196_bt539_unpublished_justification,
+        "Procedure BT-196(BT-539)-Lot Unpublished Justification Description",
+    )
+
+    # Parse and merge BT-196(BT-539)-LotsGroup Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt539_lotsgroup_unpublished_justification],
+        merge_bt196_bt539_lotsgroup_unpublished_justification,
+        "Procedure BT-196(BT-539)-LotsGroup Unpublished Justification Description",
+    )
+
+    # Parse and merge BT-196(BT-540)-Lot Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt540_lot_unpublished_justification],
+        merge_bt196_bt540_lot_unpublished_justification,
+        "Procedure BT-196(BT-540)-Lot Unpublished Justification Description",
+    )
+
+    # Parse and merge BT-196(BT-540)-LotsGroup Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt540_lotsgroup_unpublished_justification],
+        merge_bt196_bt540_lotsgroup_unpublished_justification,
+        "Procedure BT-196(BT-540)-LotsGroup Unpublished Justification Description",
+    )
+
+    # Parse and merge BT-196(BT-541)-Lot-Fixed Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt541_lot_fixed_unpublished_justification],
+        merge_bt196_bt541_lot_fixed_unpublished_justification,
+        "Procedure BT-196(BT-541)-Lot-Fixed Unpublished Justification Description",
+    )
+
+    # Parse and merge BT-196(BT-541) Lot Threshold Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt541_lot_threshold_unpublished_justification],
+        merge_bt196_bt541_lot_threshold_unpublished_justification,
+        "Lot Threshold Unpublished Justification Description (BT-196(BT-541))",
+    )
+
+    # Parse and merge BT-196(BT-541) Lot Weight Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt541_lot_weight_unpublished_justification],
+        merge_bt196_bt541_lot_weight_unpublished_justification,
+        "Lot Weight Unpublished Justification Description (BT-196(BT-541))",
+    )
+
+    # Parse and merge BT-196(BT-541) LotsGroup Fixed Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt541_lotsgroup_fixed_unpublished_justification],
+        merge_bt196_bt541_lotsgroup_fixed_unpublished_justification,
+        "LotsGroup Fixed Unpublished Justification Description (BT-196(BT-541))",
+    )
+
+    # Parse and merge BT-196(BT-541) LotsGroup Threshold Unpublished Justification Description
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt541_lotsgroup_threshold_unpublished_justification],
+        merge_bt196_bt541_lotsgroup_threshold_unpublished_justification,
+        "LotsGroup Threshold Unpublished Justification Description (BT-196(BT-541))",
+    )
+    # Parse and merge BT-196(BT-541)-LotsGroup-Weight
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt541_lotsgroup_weight],
+        merge_bt196_bt541_lotsgroup_weight,
+        "Unpublished Justification Description for LotsGroup Weight (BT-196(BT-541))",
+    )
+    # Parse and merge BT-196(BT-5421)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt5421_lot],
+        merge_bt196_bt5421_lot,
+        "Unpublished Justification Description for Lot (BT-196(BT-5421))",
+    )
+    # Parse and merge BT-196(BT-5421)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt5421_lotsgroup],
+        merge_bt196_bt5421_lotsgroup,
+        "Unpublished Justification Description for LotsGroup (BT-196(BT-5421))",
+    )
+    # Parse and merge BT-196(BT-5422)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt5422_lot],
+        merge_bt196_bt5422_lot,
+        "Unpublished Justification Description for Lot (BT-196(BT-5422))",
+    )
+    # Parse and merge BT-196(BT-5422)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt5422_lotsgroup],
+        merge_bt196_bt5422_lotsgroup,
+        "Unpublished Justification Description for LotsGroup (BT-196(BT-5422))",
+    )
+    # Parse and merge BT-196(BT-5423)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt5423_lot],
+        merge_bt196_bt5423_lot,
+        "Unpublished Justification Description for Lot (BT-196(BT-5423))",
+    )
+
+    # Parse and merge BT-196(BT-5423)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt5423_lotsgroup],
+        merge_bt196_bt5423_lotsgroup,
+        "Unpublished Justification Description for LotsGroup (BT-196(BT-5423))",
+    )
+    # Parse and merge BT-196(BT-543)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt543_lot],
+        merge_bt196_bt543_lot,
+        "Unpublished Justification Description for Lot (BT-196(BT-543))",
+    )
+    # Parse and merge BT-196(BT-543)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt543_lotsgroup],
+        merge_bt196_bt543_lotsgroup,
+        "Unpublished Justification Description for LotsGroup (BT-196(BT-543))",
+    )
+    # Parse and merge BT-196(BT-553)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt553_tender],
+        merge_bt196_bt553_tender,
+        "Unpublished Justification Description for Tender (BT-196(BT-553))",
+    )
+    # Parse and merge BT-196(BT-554)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt554_unpublished_justification],
+        merge_bt196_bt554_unpublished_justification,
+        "Unpublished Justification Description for Tender Subcontracting Description (BT-196(BT-554))",
+    )
+    # Parse and merge BT-196(BT-555)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt555_unpublished_justification],
+        merge_bt196_bt555_unpublished_justification,
+        "Unpublished Justification Description for Tender Subcontracting Percentage (BT-196(BT-555))",
+    )
+    # Parse and merge BT-196(BT-635)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt635_unpublished_justification],
+        merge_bt196_bt635_unpublished_justification,
+        "Unpublished Justification Description for Lot Result Buyer Review Request Count (BT-196(BT-635))",
+    )
+    # Parse and merge BT-196(BT-636)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt636_unpublished_justification],
+        merge_bt196_bt636_unpublished_justification,
+        "Unpublished Justification Description for Lot Result Buyer Review Request Irregularity Type (BT-196(BT-636))",
+    )
+    # Parse and merge BT-196(BT-660)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt660_unpublished_justification],
+        merge_bt196_bt660_unpublished_justification,
+        "Unpublished Justification Description for Lot Result Framework Re-estimated Value (BT-196(BT-660))",
+    )
+    # Parse and merge BT-196(BT-709)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt709_unpublished_justification],
+        merge_bt196_bt709_unpublished_justification,
+        "Unpublished Justification Description for Lot Result Maximum Value (BT-196(BT-709))",
+    )
+    # Parse and merge BT-196(BT-710)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt710_unpublished_justification],
+        merge_bt196_bt710_unpublished_justification,
+        "Unpublished Justification for Lot Result Tender Lowest Value (BT-196(BT-710))",
+    )
+    # Parse and merge BT-196(BT-711)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt711_unpublished_justification],
+        merge_bt196_bt711_unpublished_justification,
+        "Unpublished Justification for Lot Result Tender Highest Value (BT-196(BT-711))",
+    )
+    # Parse and merge BT-196(BT-712)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt712_unpublished_justification],
+        merge_bt196_bt712_unpublished_justification,
+        "Unpublished Justification for Lot Result Buyer Review Complainants (BT-196(BT-712))",
+    )
+    # Parse and merge BT-196(BT-720)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt720_unpublished_justification],
+        merge_bt196_bt720_unpublished_justification,
+        "Unpublished Justification for Winning Tender Value (BT-196(BT-720))",
+    )
+    # Parse and merge BT-196(BT-733)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt733_unpublished_justification],
+        merge_bt196_bt733_unpublished_justification,
+        "Unpublished Justification for Award Criteria Order Justification (BT-196(BT-733))",
+    )
+    # Parse and merge BT-196(BT-733)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt733_lotsgroup_unpublished_justification],
+        merge_bt196_bt733_lotsgroup_unpublished_justification,
+        "Unpublished Justification for Award Criteria Order Justification in LotsGroup (BT-196(BT-733))",
+    )
+    # Parse and merge BT-196(BT-734)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt734_lot_unpublished_justification],
+        merge_bt196_bt734_lot_unpublished_justification,
+        "Unpublished Justification for Award Criterion Name in Lot (BT-196(BT-734))",
+    )
+    # Parse and merge BT-196(BT-734)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt734_lotsgroup_unpublished_justification],
+        merge_bt196_bt734_lotsgroup_unpublished_justification,
+        "Unpublished Justification for Award Criterion Name in Lots Group (BT-196(BT-734))",
+    )
+    # Parse and merge BT-196(BT-759)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt759_lotresult_unpublished_justification],
+        merge_bt196_bt759_lotresult_unpublished_justification,
+        "Unpublished Justification for Received Submissions Count in Lot Result (BT-196(BT-759))",
+    )
+    # Parse and merge BT-196(BT-760)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt760_lotresult_unpublished_justification],
+        merge_bt196_bt760_lotresult_unpublished_justification,
+        "Unpublished Justification for Received Submissions Type in Lot Result (BT-196(BT-760))",
+    )
+    # Parse and merge BT-196(BT-773)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt773_tender_unpublished_justification],
+        merge_bt196_bt773_tender_unpublished_justification,
+        "Unpublished Justification for Subcontracting in Tender (BT-196(BT-773))",
+    )
+    # Parse and merge BT-196(BT-88)-Procedure
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt196_bt88_procedure_unpublished_justification],
+        merge_bt196_bt88_procedure_unpublished_justification,
+        "Unpublished Justification for Procedure Features (BT-196(BT-88))",
     )
 
     # BT-197
@@ -2647,6 +4084,368 @@ def main(xml_path, ocid_prefix):
         "Unpublished Justification Code (BT-197, BT-144)",
     )
 
+    # Parse and merge BT-197(BT-160)-Tender Unpublished Justification Code
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt160_unpublished_justification_code],
+        merge_bt197_bt160_unpublished_justification_code,
+        "Procedure BT-197(BT-160)-Tender Unpublished Justification Code",
+    )
+
+    # Parse and merge BT-197(BT-162)-Tender Unpublished Justification Code
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt162_unpublished_justification_code],
+        merge_bt197_bt162_unpublished_justification_code,
+        "Procedure BT-197(BT-162)-Tender Unpublished Justification Code",
+    )
+
+    # Parse and merge BT-197(BT-163)-Tender Unpublished Justification Code
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt163_unpublished_justification_code],
+        merge_bt197_bt163_unpublished_justification_code,
+        "Procedure BT-197(BT-163)-Tender Unpublished Justification Code",
+    )
+
+    # Parse and merge BT-197(BT-171)-Tender Unpublished Justification Code
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt171_unpublished_justification_code],
+        merge_bt197_bt171_unpublished_justification_code,
+        "Procedure BT-197(BT-171)-Tender Unpublished Justification Code",
+    )
+
+    # Parse and merge BT-197(BT-191)-Tender Unpublished Justification Code
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt191_unpublished_justification_code],
+        merge_bt197_bt191_unpublished_justification_code,
+        "Procedure BT-197(BT-191)-Tender Unpublished Justification Code",
+    )
+
+    # Parse and merge BT-197(BT-193)-Tender Unpublished Justification Code
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt193_unpublished_justification_code],
+        merge_bt197_bt193_unpublished_justification_code,
+        "Procedure BT-197(BT-193)-Tender Unpublished Justification Code",
+    )
+
+    # Parse and merge BT-197(BT-539)-Lot Unpublished Justification Code
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt539_unpublished_justification_code],
+        merge_bt197_bt539_unpublished_justification_code,
+        "Procedure BT-197(BT-539)-Lot Unpublished Justification Code",
+    )
+
+    # Parse and merge BT-197(BT-539)-LotsGroup Unpublished Justification Code
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt539_lotsgroup_unpublished_justification_code],
+        merge_bt197_bt539_lotsgroup_unpublished_justification_code,
+        "Procedure BT-197(BT-539)-LotsGroup Unpublished Justification Code",
+    )
+
+    # Parse and merge BT-197(BT-540)-Lot Unpublished Justification Code
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt540_lot_unpublished_justification_code],
+        merge_bt197_bt540_lot_unpublished_justification_code,
+        "Procedure BT-197(BT-540)-Lot Unpublished Justification Code",
+    )
+
+    # Parse and merge BT-197(BT-540)-LotsGroup Unpublished Justification Code
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt540_lotsgroup_unpublished_justification_code],
+        merge_bt197_bt540_lotsgroup_unpublished_justification_code,
+        "Procedure BT-197(BT-540)-LotsGroup Unpublished Justification Code",
+    )
+
+    # Parse and merge BT-197(BT-541)-Lot-Fixed Unpublished Justification Code
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt541_lot_fixed_unpublished_justification_code],
+        merge_bt197_bt541_lot_fixed_unpublished_justification_code,
+        "Procedure BT-197(BT-541)-Lot-Fixed Unpublished Justification Code",
+    )
+
+    # Parse and merge BT-197(BT-541) Lot Threshold Unpublished Justification Code
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt541_lot_threshold_unpublished_justification_code],
+        merge_bt197_bt541_lot_threshold_unpublished_justification_code,
+        "Lot Threshold Unpublished Justification Code (BT-197(BT-541))",
+    )
+
+    # Parse and merge BT-197(BT-541) Lot Weight Unpublished Justification Code
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt541_lot_weight_unpublished_justification_code],
+        merge_bt197_bt541_lot_weight_unpublished_justification_code,
+        "Lot Weight Unpublished Justification Code (BT-197(BT-541))",
+    )
+
+    # Parse and merge BT-197(BT-541) LotsGroup Fixed Unpublished Justification Code
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt541_lotsgroup_fixed_unpublished_justification_code],
+        merge_bt197_bt541_lotsgroup_fixed_unpublished_justification_code,
+        "LotsGroup Fixed Unpublished Justification Code (BT-197(BT-541))",
+    )
+
+    # Parse and merge BT-197(BT-541)-LotsGroup-Threshold
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt541_lotsgroup_threshold],
+        merge_bt197_bt541_lotsgroup_threshold,
+        "Unpublished Justification Code for LotsGroup Threshold (BT-197(BT-541))",
+    )
+
+    # Parse and merge BT-197(BT-541)-LotsGroup-Weight
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt541_lotsgroup_weight],
+        merge_bt197_bt541_lotsgroup_weight,
+        "Unpublished Justification Code for LotsGroup Weight (BT-197(BT-541))",
+    )
+    # Parse and merge BT-197(BT-5421)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt5421_lot],
+        merge_bt197_bt5421_lot,
+        "Unpublished Justification Code for Lot (BT-197(BT-5421))",
+    )
+    # Parse and merge BT-197(BT-5421)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt5421_lotsgroup],
+        merge_bt197_bt5421_lotsgroup,
+        "Unpublished Justification Code for LotsGroup (BT-197(BT-5421))",
+    )
+    # Parse and merge BT-197(BT-5422)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt5422_lot],
+        merge_bt197_bt5422_lot,
+        "Unpublished Justification Code for Lot (BT-197(BT-5422))",
+    )
+
+    # Parse and merge BT-197(BT-5422)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt5422_lotsgroup],
+        merge_bt197_bt5422_lotsgroup,
+        "Unpublished Justification Code for LotsGroup (BT-197(BT-5422))",
+    )
+    # Parse and merge BT-197(BT-5423)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt5423_lot],
+        merge_bt197_bt5423_lot,
+        "Unpublished Justification Code for Lot (BT-197(BT-5423))",
+    )
+    # Parse and merge BT-197(BT-5423)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt5423_lotsgroup],
+        merge_bt197_bt5423_lotsgroup,
+        "Unpublished Justification Code for LotsGroup (BT-197(BT-5423))",
+    )
+    # Parse and merge BT-197(BT-543)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt543_lot],
+        merge_bt197_bt543_lot,
+        "Unpublished Justification Code for Lot (BT-197(BT-543))",
+    )
+    # Parse and merge BT-197(BT-543)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt543_lotsgroup],
+        merge_bt197_bt543_lotsgroup,
+        "Unpublished Justification Code for LotsGroup (BT-197(BT-543))",
+    )
+    # Parse and merge BT-197(BT-553)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt553_tender],
+        merge_bt197_bt553_tender,
+        "Unpublished Justification Code for Tender (BT-197(BT-553))",
+    )
+
+    # Parse and merge BT-197(BT-554)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt554_unpublished_justification_code],
+        merge_bt197_bt554_unpublished_justification_code,
+        "Unpublished Justification Code for Tender Subcontracting Description (BT-197(BT-554))",
+    )
+    # Parse and merge BT-197(BT-555)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt555_unpublished_justification_code],
+        merge_bt197_bt555_unpublished_justification_code,
+        "Unpublished Justification Code for Tender Subcontracting Percentage (BT-197(BT-555))",
+    )
+    # Parse and merge BT-197(BT-635)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt635_unpublished_justification_code],
+        merge_bt197_bt635_unpublished_justification_code,
+        "Unpublished Justification Code for Lot Result Buyer Review Request Count (BT-197(BT-635))",
+    )
+    # Parse and merge BT-197(BT-636)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt636_unpublished_justification_code],
+        merge_bt197_bt636_unpublished_justification_code,
+        "Unpublished Justification Code for Lot Result Buyer Review Request Irregularity Type (BT-197(BT-636))",
+    )
+    # Parse and merge BT-197(BT-660)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt660_unpublished_justification_code],
+        merge_bt197_bt660_unpublished_justification_code,
+        "Unpublished Justification Code for Lot Result Framework Re-estimated Value (BT-197(BT-660))",
+    )
+    # Parse and merge BT-197(BT-709)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt709_unpublished_justification_code],
+        merge_bt197_bt709_unpublished_justification_code,
+        "Unpublished Justification Code for Lot Result Maximum Value (BT-197(BT-709))",
+    )
+    # Parse and merge BT-197(BT-710)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt710_unpublished_justification_code],
+        merge_bt197_bt710_unpublished_justification_code,
+        "Unpublished Justification Code for Lot Result Tender Lowest Value (BT-197(BT-710))",
+    )
+    # Parse and merge BT-197(BT-711)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt711_unpublished_justification_code],
+        merge_bt197_bt711_unpublished_justification_code,
+        "Unpublished Justification Code for Lot Result Tender Highest Value (BT-197(BT-711))",
+    )
+    # Parse and merge BT-197(BT-712)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt712_unpublished_justification_code],
+        merge_bt197_bt712_unpublished_justification_code,
+        "Unpublished Justification Code for Lot Result Buyer Review Complainants (BT-197(BT-712))",
+    )
+    # Parse and merge BT-197(BT-720)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt720_unpublished_justification_code],
+        merge_bt197_bt720_unpublished_justification_code,
+        "Unpublished Justification Code for Winning Tender Value (BT-197(BT-720))",
+    )
+    # Parse and merge BT-197(BT-733)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt733_unpublished_justification_code],
+        merge_bt197_bt733_unpublished_justification_code,
+        "Unpublished Justification Code for Award Criteria Order Justification (BT-197(BT-733))",
+    )
+    # Parse and merge BT-197(BT-733)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt733_lotsgroup_unpublished_justification_code],
+        merge_bt197_bt733_lotsgroup_unpublished_justification_code,
+        "Unpublished Justification Code for Award Criteria Order Justification in LotsGroup (BT-197(BT-733))",
+    )
+    # Parse and merge BT-197(BT-734)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt734_lot_unpublished_justification_code],
+        merge_bt197_bt734_lot_unpublished_justification_code,
+        "Unpublished Justification Code for Award Criterion Name in Lot (BT-197(BT-734))",
+    )
+    # Parse and merge BT-197(BT-734)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt734_lotsgroup_unpublished_justification_code],
+        merge_bt197_bt734_lotsgroup_unpublished_justification_code,
+        "Unpublished Justification Code for Award Criterion Name in Lots Group (BT-197(BT-734))",
+    )
+    # Parse and merge BT-197(BT-759)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt759_lotresult_unpublished_justification_code],
+        merge_bt197_bt759_lotresult_unpublished_justification_code,
+        "Unpublished Justification Code for Received Submissions Count in Lot Result (BT-197(BT-759))",
+    )
+    # Parse and merge BT-197(BT-760)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt760_lotresult_unpublished_justification_code],
+        merge_bt197_bt760_lotresult_unpublished_justification_code,
+        "Unpublished Justification Code for Received Submissions Type in Lot Result (BT-197(BT-760))",
+    )
+    # Parse and merge BT-197(BT-773)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt773_tender_unpublished_justification_code],
+        merge_bt197_bt773_tender_unpublished_justification_code,
+        "Unpublished Justification Code for Subcontracting in Tender (BT-197(BT-773))",
+    )
+    # Parse and merge BT-197(BT-88)-Procedure
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt197_bt88_procedure_unpublished_justification_code],
+        merge_bt197_bt88_procedure_unpublished_justification_code,
+        "Unpublished Justification Code for Procedure Features (BT-197(BT-88))",
+    )
+
     # BT-198
     # Parse and merge BT-198(BT-09) Unpublished Access Date
     process_bt_section(
@@ -2718,6 +4517,364 @@ def main(xml_path, ocid_prefix):
         [parse_bt198_bt144_unpublished_access_date],
         merge_bt198_bt144_unpublished_access_date,
         "Unpublished Access Date (BT-198, BT-144)",
+    )
+
+    # Parse and merge BT-198(BT-160)-Tender Unpublished Access Date
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt160_unpublished_access_date],
+        merge_bt198_bt160_unpublished_access_date,
+        "Procedure BT-198(BT-160)-Tender Unpublished Access Date",
+    )
+
+    # Parse and merge BT-198(BT-162)-Tender Unpublished Access Date
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt162_unpublished_access_date],
+        merge_bt198_bt162_unpublished_access_date,
+        "Procedure BT-198(BT-162)-Tender Unpublished Access Date",
+    )
+
+    # Parse and merge BT-198(BT-163)-Tender Unpublished Access Date
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt163_unpublished_access_date],
+        merge_bt198_bt163_unpublished_access_date,
+        "Procedure BT-198(BT-163)-Tender Unpublished Access Date",
+    )
+
+    # Parse and merge BT-198(BT-171)-Tender Unpublished Access Date
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt171_unpublished_access_date],
+        merge_bt198_bt171_unpublished_access_date,
+        "Procedure BT-198(BT-171)-Tender Unpublished Access Date",
+    )
+
+    # Parse and merge BT-198(BT-191)-Tender Unpublished Access Date
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt191_unpublished_access_date],
+        merge_bt198_bt191_unpublished_access_date,
+        "Procedure BT-198(BT-191)-Tender Unpublished Access Date",
+    )
+
+    # Parse and merge BT-198(BT-193)-Tender Unpublished Access Date
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt193_unpublished_access_date],
+        merge_bt198_bt193_unpublished_access_date,
+        "Procedure BT-198(BT-193)-Tender Unpublished Access Date",
+    )
+
+    # Parse and merge BT-198(BT-539)-Lot Unpublished Access Date
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt539_unpublished_access_date],
+        merge_bt198_bt539_unpublished_access_date,
+        "Procedure BT-198(BT-539)-Lot Unpublished Access Date",
+    )
+
+    # Parse and merge BT-198(BT-539)-LotsGroup Unpublished Access Date
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt539_lotsgroup_unpublished_access_date],
+        merge_bt198_bt539_lotsgroup_unpublished_access_date,
+        "Procedure BT-198(BT-539)-LotsGroup Unpublished Access Date",
+    )
+
+    # Parse and merge BT-198(BT-540)-Lot Unpublished Access Date
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt540_lot_unpublished_access_date],
+        merge_bt198_bt540_lot_unpublished_access_date,
+        "Procedure BT-198(BT-540)-Lot Unpublished Access Date",
+    )
+
+    # Parse and merge BT-198(BT-540)-LotsGroup Unpublished Access Date
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt540_lotsgroup_unpublished_access_date],
+        merge_bt198_bt540_lotsgroup_unpublished_access_date,
+        "Procedure BT-198(BT-540)-LotsGroup Unpublished Access Date",
+    )
+
+    # Parse and merge BT-198(BT-541)-Lot-Fixed Unpublished Access Date
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt541_lot_fixed_unpublished_access_date],
+        merge_bt198_bt541_lot_fixed_unpublished_access_date,
+        "Procedure BT-198(BT-541)-Lot-Fixed Unpublished Access Date",
+    )
+
+    # Parse and merge BT-198(BT-541) Lot Threshold Unpublished Access Date
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt541_lot_threshold_unpublished_access_date],
+        merge_bt198_bt541_lot_threshold_unpublished_access_date,
+        "Lot Threshold Unpublished Access Date (BT-198(BT-541))",
+    )
+
+    # Parse and merge BT-198(BT-541) Lot Weight Unpublished Access Date
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt541_lot_weight_unpublished_access_date],
+        merge_bt198_bt541_lot_weight_unpublished_access_date,
+        "Lot Weight Unpublished Access Date (BT-198(BT-541))",
+    )
+
+    # Parse and merge BT-198(BT-541) LotsGroup Fixed Unpublished Access Date
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt541_lotsgroup_fixed_unpublished_access_date],
+        merge_bt198_bt541_lotsgroup_fixed_unpublished_access_date,
+        "LotsGroup Fixed Unpublished Access Date (BT-198(BT-541))",
+    )
+    # Parse and merge BT-198(BT-541)-LotsGroup-Threshold
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt541_lotsgroup_threshold],
+        merge_bt198_bt541_lotsgroup_threshold,
+        "Unpublished Access Date for LotsGroup Threshold (BT-198(BT-541))",
+    )
+    # Parse and merge BT-198(BT-541)-LotsGroup-Weight
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt541_lotsgroup_weight],
+        merge_bt198_bt541_lotsgroup_weight,
+        "Unpublished Access Date for LotsGroup Weight (BT-198(BT-541))",
+    )
+    # Parse and merge BT-198(BT-5421)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt5421_lot],
+        merge_bt198_bt5421_lot,
+        "Unpublished Access Date for Lot (BT-198(BT-5421))",
+    )
+    # Parse and merge BT-198(BT-5421)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt5421_lotsgroup],
+        merge_bt198_bt5421_lotsgroup,
+        "Unpublished Access Date for LotsGroup (BT-198(BT-5421))",
+    )
+    # Parse and merge BT-198(BT-5422)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt5422_lot],
+        merge_bt198_bt5422_lot,
+        "Unpublished Access Date for Lot (BT-198(BT-5422))",
+    )
+    # Parse and merge BT-198(BT-5422)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt5422_lotsgroup],
+        merge_bt198_bt5422_lotsgroup,
+        "Unpublished Access Date for LotsGroup (BT-198(BT-5422))",
+    )
+    # Parse and merge BT-198(BT-5423)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt5423_lot],
+        merge_bt198_bt5423_lot,
+        "Unpublished Access Date for Lot (BT-198(BT-5423))",
+    )
+    # Parse and merge BT-198(BT-5423)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt5423_lotsgroup],
+        merge_bt198_bt5423_lotsgroup,
+        "Unpublished Access Date for LotsGroup (BT-198(BT-5423))",
+    )
+    # Parse and merge BT-198(BT-543)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt543_lot],
+        merge_bt198_bt543_lot,
+        "Unpublished Access Date for Lot (BT-198(BT-543))",
+    )
+    # Parse and merge BT-198(BT-543)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt543_lotsgroup],
+        merge_bt198_bt543_lotsgroup,
+        "Unpublished Access Date for LotsGroup (BT-198(BT-543))",
+    )
+    # Parse and merge BT-198(BT-553)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt553_tender],
+        merge_bt198_bt553_tender,
+        "Unpublished Access Date for Tender (BT-198(BT-553))",
+    )
+    # Parse and merge BT-198(BT-554)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt554_unpublished_access_date],
+        merge_bt198_bt554_unpublished_access_date,
+        "Unpublished Access Date for Tender Subcontracting Description (BT-198(BT-554))",
+    )
+    # Parse and merge BT-198(BT-555)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt555_unpublished_access_date],
+        merge_bt198_bt555_unpublished_access_date,
+        "Unpublished Access Date for Tender Subcontracting Percentage (BT-198(BT-555))",
+    )
+    # Parse and merge BT-198(BT-635)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt635_unpublished_access_date],
+        merge_bt198_bt635_unpublished_access_date,
+        "Unpublished Access Date for Lot Result Buyer Review Request Count (BT-198(BT-635))",
+    )
+    # Parse and merge BT-198(BT-636)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt636_unpublished_access_date],
+        merge_bt198_bt636_unpublished_access_date,
+        "Unpublished Access Date for Lot Result Buyer Review Request Irregularity Type (BT-198(BT-636))",
+    )
+    # Parse and merge BT-198(BT-660)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt660_unpublished_access_date],
+        merge_bt198_bt660_unpublished_access_date,
+        "Unpublished Access Date for Lot Result Framework Re-estimated Value (BT-198(BT-660))",
+    )
+    # Parse and merge BT-198(BT-709)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt709_unpublished_access_date],
+        merge_bt198_bt709_unpublished_access_date,
+        "Unpublished Access Date for Lot Result Maximum Value (BT-198(BT-709))",
+    )
+    # Parse and merge BT-198(BT-710)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt710_unpublished_access_date],
+        merge_bt198_bt710_unpublished_access_date,
+        "Unpublished Access Date for Lot Result Tender Lowest Value (BT-198(BT-710))",
+    )
+    # Parse and merge BT-198(BT-711)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt711_unpublished_access_date],
+        merge_bt198_bt711_unpublished_access_date,
+        "Unpublished Access Date for Lot Result Tender Highest Value (BT-198(BT-711))",
+    )
+    # Parse and merge BT-198(BT-712)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt712_unpublished_access_date],
+        merge_bt198_bt712_unpublished_access_date,
+        "Unpublished Access Date for Lot Result Buyer Review Complainants (BT-198(BT-712))",
+    )
+    # Parse and merge BT-198(BT-720)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt720_unpublished_access_date],
+        merge_bt198_bt720_unpublished_access_date,
+        "Unpublished Access Date for Winning Tender Value (BT-198(BT-720))",
+    )
+    # Parse and merge BT-198(BT-733)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt733_unpublished_access_date],
+        merge_bt198_bt733_unpublished_access_date,
+        "Unpublished Access Date for Award Criteria Order Justification (BT-198(BT-733))",
+    )
+    # Parse and merge BT-198(BT-733)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt733_lotsgroup_unpublished_access_date],
+        merge_bt198_bt733_lotsgroup_unpublished_access_date,
+        "Unpublished Access Date for Award Criteria Order Justification in LotsGroup (BT-198(BT-733))",
+    )
+    # Parse and merge BT-198(BT-734)-Lot
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt734_lot_unpublished_access_date],
+        merge_bt198_bt734_lot_unpublished_access_date,
+        "Unpublished Access Date for Award Criterion Name in Lot (BT-198(BT-734))",
+    )
+    # Parse and merge BT-198(BT-734)-LotsGroup
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt734_lotsgroup_unpublished_access_date],
+        merge_bt198_bt734_lotsgroup_unpublished_access_date,
+        "Unpublished Access Date for Award Criterion Name in Lots Group (BT-198(BT-734))",
+    )
+    # Parse and merge BT-198(BT-759)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt759_lotresult_unpublished_access_date],
+        merge_bt198_bt759_lotresult_unpublished_access_date,
+        "Unpublished Access Date for Received Submissions Count in Lot Result (BT-198(BT-759))",
+    )
+    # Parse and merge BT-198(BT-760)-LotResult
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt760_lotresult_unpublished_access_date],
+        merge_bt198_bt760_lotresult_unpublished_access_date,
+        "Unpublished Access Date for Received Submissions Type in Lot Result (BT-198(BT-760))",
+    )
+    # Parse and merge BT-198(BT-773)-Tender
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt773_tender_unpublished_access_date],
+        merge_bt198_bt773_tender_unpublished_access_date,
+        "Unpublished Access Date for Subcontracting in Tender (BT-198(BT-773))",
+    )
+    # Parse and merge BT-198(BT-88)-Procedure
+    process_bt_section(
+        release_json,
+        xml_content,
+        [parse_bt198_bt88_procedure_unpublished_access_date],
+        merge_bt198_bt88_procedure_unpublished_access_date,
+        "Unpublished Access Date for Procedure Features (BT-198(BT-88))",
     )
 
     # Process BT-200-Contract
@@ -5570,8 +7727,8 @@ def main(xml_path, ocid_prefix):
 
 if __name__ == "__main__":
     # Path to the XML file
-    xml_path = "xmlfile/2022-319091.xml"
-    # xml_path = "bt_198-106.xml"
+    # xml_path = "xmlfile/2022-319091.xml"
+    xml_path = "bt_198-106.xml"
     # Prefix for OCID
     ocid_prefix = "ocid_prefix_value"
 
