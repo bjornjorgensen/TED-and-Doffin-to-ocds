@@ -1,7 +1,7 @@
 # main.py
 import json
 import logging
-from ted_and_doffin_to_ocds.converters.common_operations import noticeProcessor
+from ted_and_doffin_to_ocds.converters.common_operations import NoticeProcessor
 from ted_and_doffin_to_ocds.converters.bt_01_procedure import (
     parse_procedure_legal_basis,
     merge_procedure_legal_basis,
@@ -2535,8 +2535,8 @@ def main(xml_path, ocid_prefix):
     logger = logging.getLogger(__name__)
     logger.info(f"Starting XML to JSON conversion for file: {xml_path}")
 
-    # Initialize noticeProcessor
-    notice_processor = noticeProcessor(ocid_prefix)
+    # Initialize NoticeProcessor
+    notice_processor = NoticeProcessor(ocid_prefix)
 
     # Create the initial OCDS release JSON structure
     release_json_str = notice_processor.create_release(xml_content)
