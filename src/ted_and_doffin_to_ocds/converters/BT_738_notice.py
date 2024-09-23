@@ -47,7 +47,8 @@ def parse_notice_preferred_publication_date(xml_content):
 
 
 def merge_notice_preferred_publication_date(
-    release_json, preferred_publication_date_data,
+    release_json,
+    preferred_publication_date_data,
 ):
     """
     Merge the parsed notice preferred publication date into the main OCDS release JSON.

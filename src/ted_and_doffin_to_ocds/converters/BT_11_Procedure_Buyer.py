@@ -61,7 +61,8 @@ def parse_buyer_legal_type(xml_content):
             org_id = org_id[0]
             legal_type = legal_type[0]
             description = BUYER_LEGAL_TYPE_CODES.get(
-                legal_type, "Unknown buyer legal type",
+                legal_type,
+                "Unknown buyer legal type",
             )
 
             party_data = {

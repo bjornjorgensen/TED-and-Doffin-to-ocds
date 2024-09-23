@@ -53,7 +53,8 @@ def parse_bt195_bt541_lot_weight_unpublished_identifier(xml_content):
 
 
 def merge_bt195_bt541_lot_weight_unpublished_identifier(
-    release_json, unpublished_identifier_data,
+    release_json,
+    unpublished_identifier_data,
 ):
     """
     Merge the parsed unpublished identifier data into the main OCDS release JSON.

@@ -29,7 +29,8 @@ def parse_part_additional_info(xml_content):
     for note in part_notes:
         note_text = note.text
         language = note.get(
-            "languageID", "en",
+            "languageID",
+            "en",
         )  # Default to 'en' if languageID is not present
         result.append({"text": note_text, "language": language})
 

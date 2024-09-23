@@ -24,15 +24,18 @@ def parse_framework_notice_identifier(xml_content):
     result = {"contracts": []}
 
     settled_contracts = root.xpath(
-        "//efac:NoticeResult/efac:SettledContract", namespaces=namespaces,
+        "//efac:NoticeResult/efac:SettledContract",
+        namespaces=namespaces,
     )
 
     for contract in settled_contracts:
         contract_id = contract.xpath(
-            "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces,
+            "cbc:ID[@schemeName='contract']/text()",
+            namespaces=namespaces,
         )[0]
         notice_references = contract.xpath(
-            "cac:NoticeDocumentReference", namespaces=namespaces,
+            "cac:NoticeDocumentReference",
+            namespaces=namespaces,
         )
 
         if notice_references:
@@ -58,7 +61,8 @@ def parse_framework_notice_identifier(xml_content):
             )
             if lot_result:
                 award_id = lot_result[0].xpath(
-                    "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
+                    "cbc:ID[@schemeName='result']/text()",
+                    namespaces=namespaces,
                 )
                 if award_id:
                     contract_data["awardID"] = award_id[0]
@@ -86,7 +90,8 @@ def merge_framework_notice_identifier(release_json, framework_notice_data):
         )
         if existing_contract:
             existing_related_processes = existing_contract.setdefault(
-                "relatedProcesses", [],
+                "relatedProcesses",
+                [],
             )
             for new_process in new_contract["relatedProcesses"]:
                 if new_process not in existing_related_processes:

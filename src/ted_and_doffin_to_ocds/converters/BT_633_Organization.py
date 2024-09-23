@@ -45,7 +45,8 @@ def parse_organization_natural_person(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces,
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -54,7 +55,8 @@ def parse_organization_natural_person(xml_content):
             namespaces=namespaces,
         )
         natural_person_indicator = organization.xpath(
-            "efbc:NaturalPersonIndicator/text()", namespaces=namespaces,
+            "efbc:NaturalPersonIndicator/text()",
+            namespaces=namespaces,
         )
 
         if (

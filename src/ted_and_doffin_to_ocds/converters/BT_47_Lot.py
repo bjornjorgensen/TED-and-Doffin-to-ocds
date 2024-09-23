@@ -23,7 +23,8 @@ def parse_participant_name(xml_content):
     party_id_counter = 1
 
     lot_elements = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot_element in lot_elements:
@@ -74,12 +75,14 @@ def merge_participant_name(release_json, participant_data):
 
     for new_lot in participant_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_design_contest = existing_lot.setdefault("designContest", {})
             existing_selected_participants = existing_design_contest.setdefault(
-                "selectedParticipants", [],
+                "selectedParticipants",
+                [],
             )
             for new_participant in new_lot["designContest"]["selectedParticipants"]:
                 if new_participant not in existing_selected_participants:

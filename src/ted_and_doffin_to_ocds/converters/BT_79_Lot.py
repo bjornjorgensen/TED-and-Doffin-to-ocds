@@ -47,13 +47,15 @@ def parse_performing_staff_qualification(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         required_curricula_code = lot.xpath(
-            "cac:TenderingTerms/cbc:RequiredCurriculaCode/text()", namespaces=namespaces,
+            "cac:TenderingTerms/cbc:RequiredCurriculaCode/text()",
+            namespaces=namespaces,
         )
 
         if required_curricula_code:
@@ -96,7 +98,8 @@ def merge_performing_staff_qualification(release_json, staff_qualification_data)
 
     for new_lot in staff_qualification_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("otherRequirements", {}).update(

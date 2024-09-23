@@ -154,7 +154,8 @@ def test_opt_155_lotresult_vehicle_type_integration(tmp_path):
     assert len(result["awards"]) == 2
 
     award_1 = next(
-        (award for award in result["awards"] if award["id"] == "RES-0001"), None,
+        (award for award in result["awards"] if award["id"] == "RES-0001"),
+        None,
     )
     assert award_1 is not None
     assert len(award_1["items"]) == 1
@@ -165,7 +166,8 @@ def test_opt_155_lotresult_vehicle_type_integration(tmp_path):
     assert award_1["relatedLots"] == ["LOT-0001"]
 
     award_2 = next(
-        (award for award in result["awards"] if award["id"] == "RES-0002"), None,
+        (award for award in result["awards"] if award["id"] == "RES-0002"),
+        None,
     )
     assert award_2 is not None
     assert len(award_2["items"]) == 1

@@ -22,7 +22,8 @@ def parse_ubo_name(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces,
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -40,7 +41,8 @@ def parse_ubo_name(xml_content):
             )
             for ubo in ubos:
                 ubo_id = ubo.xpath(
-                    "cbc:ID[@schemeName='ubo']/text()", namespaces=namespaces,
+                    "cbc:ID[@schemeName='ubo']/text()",
+                    namespaces=namespaces,
                 )
                 ubo_name = ubo.xpath("cbc:FamilyName/text()", namespaces=namespaces)
 

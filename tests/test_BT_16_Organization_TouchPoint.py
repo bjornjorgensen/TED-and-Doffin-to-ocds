@@ -67,7 +67,8 @@ def test_merge_organization_touchpoint_part_name():
     }
 
     merge_organization_touchpoint_part_name(
-        release_json, organization_touchpoint_part_name_data,
+        release_json,
+        organization_touchpoint_part_name_data,
     )
 
     assert len(release_json["parties"]) == 1

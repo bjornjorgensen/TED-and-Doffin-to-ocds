@@ -49,7 +49,10 @@ def create_xml_with_procedure_code(procedure_code):
     ],
 )
 def test_bt_105_procedure_integration(
-    tmp_path, procedure_code, expected_method, expected_details,
+    tmp_path,
+    procedure_code,
+    expected_method,
+    expected_details,
 ):
     xml_content = create_xml_with_procedure_code(procedure_code)
     xml_file = tmp_path / f"test_input_procedure_{procedure_code}.xml"

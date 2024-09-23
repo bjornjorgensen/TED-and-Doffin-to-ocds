@@ -43,7 +43,8 @@ def parse_bt195_bt759_lotresult_unpublished_identifier(xml_content):
             namespaces=namespaces,
         )
         field_identifier = field_privacy.xpath(
-            "efbc:FieldIdentifierCode/text()", namespaces=namespaces,
+            "efbc:FieldIdentifierCode/text()",
+            namespaces=namespaces,
         )
 
         if lot_result_id and field_identifier:
@@ -58,7 +59,8 @@ def parse_bt195_bt759_lotresult_unpublished_identifier(xml_content):
 
 
 def merge_bt195_bt759_lotresult_unpublished_identifier(
-    release_json, unpublished_identifier_data,
+    release_json,
+    unpublished_identifier_data,
 ):
     """
     Merge the parsed unpublished identifier data into the main OCDS release JSON.
@@ -80,7 +82,8 @@ def merge_bt195_bt759_lotresult_unpublished_identifier(
 
     for new_item in unpublished_identifier_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item.get("id") == new_item["id"]), None,
+            (item for item in withheld_info if item.get("id") == new_item["id"]),
+            None,
         )
         if existing_item:
             existing_item.update(new_item)

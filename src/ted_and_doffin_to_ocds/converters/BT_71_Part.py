@@ -51,7 +51,9 @@ def parse_reserved_participation_part(xml_content):
         if reserved_types:
             return {
                 "tender": {
-                    "otherRequirements": {"reservedParticipation": list(reserved_types)},
+                    "otherRequirements": {
+                        "reservedParticipation": list(reserved_types)
+                    },
                 },
             }
 

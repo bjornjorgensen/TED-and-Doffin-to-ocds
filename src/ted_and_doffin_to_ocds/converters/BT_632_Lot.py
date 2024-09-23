@@ -44,7 +44,8 @@ def parse_tool_name(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -83,7 +84,8 @@ def merge_tool_name(release_json, tool_name_data):
 
     for new_lot in tool_name_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("communication", {}).update(

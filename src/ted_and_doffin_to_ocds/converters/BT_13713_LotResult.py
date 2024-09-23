@@ -44,7 +44,8 @@ def merge_lot_result_identifier(release_json, lot_result_data):
 
     for new_award in lot_result_data["awards"]:
         existing_award = next(
-            (award for award in existing_awards if award["id"] == new_award["id"]), None,
+            (award for award in existing_awards if award["id"] == new_award["id"]),
+            None,
         )
 
         if existing_award:

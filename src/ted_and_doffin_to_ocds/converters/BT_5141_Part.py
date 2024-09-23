@@ -74,7 +74,8 @@ def parse_part_country(xml_content):
     result = {"tender": {"deliveryAddresses": []}}
 
     parts = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
+        namespaces=namespaces,
     )
 
     for part in parts:

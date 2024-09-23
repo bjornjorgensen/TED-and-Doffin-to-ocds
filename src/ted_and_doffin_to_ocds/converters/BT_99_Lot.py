@@ -32,7 +32,8 @@ def parse_review_deadline_description(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
@@ -68,7 +69,8 @@ def merge_review_deadline_description(release_json, review_deadline_description_
 
     for new_lot in review_deadline_description_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot["reviewDetails"] = new_lot["reviewDetails"]

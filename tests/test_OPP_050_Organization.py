@@ -58,18 +58,21 @@ def test_opp_050_organization_buyers_group_lead_indicator_integration(tmp_path):
     assert len(result["parties"]) == 2
 
     lead_buyer = next(
-        (party for party in result["parties"] if party["id"] == "ORG-0001"), None,
+        (party for party in result["parties"] if party["id"] == "ORG-0001"),
+        None,
     )
     assert lead_buyer is not None
     assert "roles" in lead_buyer
     assert "leadBuyer" in lead_buyer["roles"]
 
     non_lead_buyer = next(
-        (party for party in result["parties"] if party["id"] == "ORG-0002"), None,
+        (party for party in result["parties"] if party["id"] == "ORG-0002"),
+        None,
     )
     assert non_lead_buyer is not None
     assert "roles" not in non_lead_buyer or "leadBuyer" not in non_lead_buyer.get(
-        "roles", [],
+        "roles",
+        [],
     )
 
 

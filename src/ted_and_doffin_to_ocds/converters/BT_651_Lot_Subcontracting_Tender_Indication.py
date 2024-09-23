@@ -49,7 +49,8 @@ def parse_subcontracting_tender_indication(xml_content: bytes):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -70,7 +71,8 @@ def parse_subcontracting_tender_indication(xml_content: bytes):
 
 
 def merge_subcontracting_tender_indication(
-    release_json, subcontracting_tender_indication_data,
+    release_json,
+    subcontracting_tender_indication_data,
 ):
     """
     Merge the parsed subcontracting tender indication data into the main OCDS release JSON.
@@ -91,7 +93,8 @@ def merge_subcontracting_tender_indication(
 
     for new_lot in subcontracting_tender_indication_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             submission_terms = existing_lot.setdefault("submissionTerms", {})

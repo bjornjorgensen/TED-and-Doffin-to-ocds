@@ -207,7 +207,8 @@ def parse_notice_language(xml_content):
     }
 
     notice_language_code = root.xpath(
-        "/*/cbc:NoticeLanguageCode/text()", namespaces=namespaces,
+        "/*/cbc:NoticeLanguageCode/text()",
+        namespaces=namespaces,
     )
 
     if notice_language_code:

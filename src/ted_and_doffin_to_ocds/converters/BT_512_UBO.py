@@ -63,7 +63,8 @@ def merge_ubo_postcode(release_json, ubo_postcode_data):
         )
         if existing_party:
             existing_beneficial_owners = existing_party.setdefault(
-                "beneficialOwners", [],
+                "beneficialOwners",
+                [],
             )
             for new_ubo in new_party["beneficialOwners"]:
                 existing_ubo = next(

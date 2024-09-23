@@ -22,12 +22,14 @@ def parse_procedure_place_performance_country_subdivision(xml_content):
     result = {"tender": {"deliveryAddresses": []}}
 
     realized_locations = root.xpath(
-        "//cac:ProcurementProject/cac:RealizedLocation", namespaces=namespaces,
+        "//cac:ProcurementProject/cac:RealizedLocation",
+        namespaces=namespaces,
     )
 
     for location in realized_locations:
         country_subdivision = location.xpath(
-            "cac:Address/cbc:CountrySubentityCode/text()", namespaces=namespaces,
+            "cac:Address/cbc:CountrySubentityCode/text()",
+            namespaces=namespaces,
         )
 
         if country_subdivision:
@@ -45,12 +47,14 @@ def merge_procedure_place_performance_country_subdivision(release_json, procedur
         return
 
     tender_delivery_addresses = release_json.setdefault("tender", {}).setdefault(
-        "deliveryAddresses", [],
+        "deliveryAddresses",
+        [],
     )
 
     for new_address in procedure_data["tender"]["deliveryAddresses"]:
         existing_address = next(
-            (addr for addr in tender_delivery_addresses if "region" not in addr), None,
+            (addr for addr in tender_delivery_addresses if "region" not in addr),
+            None,
         )
         if existing_address:
             existing_address["region"] = new_address["region"]

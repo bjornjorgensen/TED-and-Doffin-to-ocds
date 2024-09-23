@@ -32,12 +32,14 @@ def parse_bt196_bt144_unpublished_justification(xml_content):
     result = {"withheldInformation": []}
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
+        "//efac:NoticeResult/efac:LotResult",
+        namespaces=namespaces,
     )
 
     for lot_result in lot_results:
         lot_id = lot_result.xpath(
-            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
+            "cbc:ID[@schemeName='result']/text()",
+            namespaces=namespaces,
         )
         reason_description = lot_result.xpath(
             "efac:DecisionReason/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='no-awa-rea']/efbc:ReasonDescription/text()",
@@ -55,7 +57,8 @@ def parse_bt196_bt144_unpublished_justification(xml_content):
 
 
 def merge_bt196_bt144_unpublished_justification(
-    release_json, unpublished_justification_data,
+    release_json,
+    unpublished_justification_data,
 ):
     """
     Merge the parsed unpublished justification data into the main OCDS release JSON.
@@ -75,7 +78,8 @@ def merge_bt196_bt144_unpublished_justification(
 
     for new_item in unpublished_justification_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item.get("id") == new_item["id"]), None,
+            (item for item in withheld_info if item.get("id") == new_item["id"]),
+            None,
         )
         if existing_item:
             existing_item["rationale"] = new_item["rationale"]

@@ -60,7 +60,8 @@ def parse_bt197_bt555_unpublished_justification_code(xml_content):
 
     for term in subcontracting_terms:
         lot_tender_id = term.xpath(
-            "ancestor::efac:LotTender/cbc:ID/text()", namespaces=namespaces,
+            "ancestor::efac:LotTender/cbc:ID/text()",
+            namespaces=namespaces,
         )
         reason_code = term.xpath("cbc:ReasonCode/text()", namespaces=namespaces)
 
@@ -84,7 +85,8 @@ def parse_bt197_bt555_unpublished_justification_code(xml_content):
 
 
 def merge_bt197_bt555_unpublished_justification_code(
-    release_json, unpublished_justification_code_data,
+    release_json,
+    unpublished_justification_code_data,
 ):
     """
     Merge the parsed unpublished justification code data into the main OCDS release JSON.
@@ -106,7 +108,8 @@ def merge_bt197_bt555_unpublished_justification_code(
 
     for new_item in unpublished_justification_code_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item.get("id") == new_item["id"]), None,
+            (item for item in withheld_info if item.get("id") == new_item["id"]),
+            None,
         )
         if existing_item:
             existing_item.setdefault("rationaleClassifications", []).extend(

@@ -55,7 +55,10 @@ def test_merge_award_criterion_description_lots_group():
     release_json = {
         "tender": {
             "lotGroups": [
-                {"id": "GLO-0001", "awardCriteria": {"criteria": [{"type": "quality"}]}},
+                {
+                    "id": "GLO-0001",
+                    "awardCriteria": {"criteria": [{"type": "quality"}]},
+                },
             ],
         },
     }
@@ -84,7 +87,8 @@ def test_merge_award_criterion_description_lots_group():
     }
 
     merge_award_criterion_description_lots_group(
-        release_json, award_criterion_description_data,
+        release_json,
+        award_criterion_description_data,
     )
 
     assert len(release_json["tender"]["lotGroups"]) == 2

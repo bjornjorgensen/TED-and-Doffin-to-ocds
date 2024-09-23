@@ -23,12 +23,14 @@ def parse_tool_atypical_url(xml_content):
 
     # Process BT-124-Lot
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         atypical_url = lot.xpath(
-            "cac:TenderingProcess/cbc:AccessToolsURI/text()", namespaces=namespaces,
+            "cac:TenderingProcess/cbc:AccessToolsURI/text()",
+            namespaces=namespaces,
         )
 
         if atypical_url:
@@ -59,7 +61,8 @@ def merge_tool_atypical_url(release_json, atypical_url_data):
         existing_lots = tender.setdefault("lots", [])
         for new_lot in atypical_url_data["lots"]:
             existing_lot = next(
-                (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+                (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+                None,
             )
             if existing_lot:
                 existing_lot.setdefault("communication", {})["atypicalToolUrl"] = (

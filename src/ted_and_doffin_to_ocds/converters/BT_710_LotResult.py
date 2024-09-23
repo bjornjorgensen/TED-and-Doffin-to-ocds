@@ -49,15 +49,18 @@ def parse_tender_value_lowest(xml_content):
     result = {"bids": {"statistics": []}}
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
+        "//efac:NoticeResult/efac:LotResult",
+        namespaces=namespaces,
     )
 
     for lot_result in lot_results:
         lower_tender_amount = lot_result.xpath(
-            "cbc:LowerTenderAmount", namespaces=namespaces,
+            "cbc:LowerTenderAmount",
+            namespaces=namespaces,
         )
         lot_id = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+            namespaces=namespaces,
         )
 
         if lower_tender_amount and lot_id:

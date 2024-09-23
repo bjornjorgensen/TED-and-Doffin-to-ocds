@@ -36,7 +36,8 @@ def parse_framework_agreement(xml_content: str) -> dict[str, dict] | None:
 
     lots_data = {}
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -59,7 +60,8 @@ def parse_framework_agreement(xml_content: str) -> dict[str, dict] | None:
 
 
 def merge_framework_agreement(
-    release_json: dict, framework_agreement_data: dict[str, dict] | None,
+    release_json: dict,
+    framework_agreement_data: dict[str, dict] | None,
 ) -> None:
     """
     Merge the parsed Framework Agreement data into the main OCDS release JSON.

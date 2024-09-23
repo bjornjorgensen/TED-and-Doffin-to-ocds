@@ -47,12 +47,14 @@ def parse_framework_maximum_value(xml_content):
     result = {"awards": []}
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
+        "//efac:NoticeResult/efac:LotResult",
+        namespaces=namespaces,
     )
 
     for lot_result in lot_results:
         award_id = lot_result.xpath(
-            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
+            "cbc:ID[@schemeName='result']/text()",
+            namespaces=namespaces,
         )
         max_value = lot_result.xpath(
             "efac:FrameworkAgreementValues/cbc:MaximumValueAmount/text()",
@@ -63,7 +65,8 @@ def parse_framework_maximum_value(xml_content):
             namespaces=namespaces,
         )
         lot_id = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+            namespaces=namespaces,
         )
 
         if award_id and max_value and currency and lot_id:
@@ -99,7 +102,8 @@ def merge_framework_maximum_value(release_json, framework_max_value_data):
 
     for new_award in framework_max_value_data["awards"]:
         existing_award = next(
-            (award for award in existing_awards if award["id"] == new_award["id"]), None,
+            (award for award in existing_awards if award["id"] == new_award["id"]),
+            None,
         )
         if existing_award:
             existing_award["maximumValue"] = new_award["maximumValue"]

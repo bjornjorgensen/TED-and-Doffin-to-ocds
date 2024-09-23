@@ -54,7 +54,8 @@ def parse_lots_group_award_criteria_order_justification(xml_content):
 
 
 def merge_lots_group_award_criteria_order_justification(
-    release_json, lots_group_award_criteria_order_justification_data,
+    release_json,
+    lots_group_award_criteria_order_justification_data,
 ):
     """
     Merge the parsed award criteria order justification data for lot groups into the main OCDS release JSON.

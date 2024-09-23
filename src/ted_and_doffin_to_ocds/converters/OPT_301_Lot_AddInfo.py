@@ -40,7 +40,8 @@ def parse_additional_info_provider_identifier(xml_content):
 
 
 def merge_additional_info_provider_identifier(
-    release_json, additional_info_provider_data,
+    release_json,
+    additional_info_provider_data,
 ):
     if not additional_info_provider_data:
         logger.warning("No Additional Info Provider data to merge")

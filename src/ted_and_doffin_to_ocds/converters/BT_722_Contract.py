@@ -32,12 +32,14 @@ def parse_contract_eu_funds(xml_content):
     result = {"contracts": []}
 
     settled_contracts = root.xpath(
-        "//efac:NoticeResult/efac:SettledContract", namespaces=namespaces,
+        "//efac:NoticeResult/efac:SettledContract",
+        namespaces=namespaces,
     )
 
     for settled_contract in settled_contracts:
         contract_id = settled_contract.xpath(
-            "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces,
+            "cbc:ID[@schemeName='contract']/text()",
+            namespaces=namespaces,
         )
         funding_programs = settled_contract.xpath(
             "efac:Funding/cbc:FundingProgramCode[@listName='eu-programme']/text()",
@@ -57,7 +59,8 @@ def parse_contract_eu_funds(xml_content):
             )
             if lot_result:
                 result_id = lot_result[0].xpath(
-                    "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
+                    "cbc:ID[@schemeName='result']/text()",
+                    namespaces=namespaces,
                 )
                 if result_id:
                     contract["awardID"] = result_id[0]

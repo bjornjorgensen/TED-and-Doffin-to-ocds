@@ -22,7 +22,8 @@ def parse_submission_url(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -51,7 +52,8 @@ def merge_submission_url(release_json, submission_url_data):
 
     for new_lot in submission_url_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot.get("id") == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot.get("id") == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.update(new_lot)

@@ -81,7 +81,8 @@ def bt_197_parse_unpublished_justification_code_bt_09_procedure(xml_content):
 
 
 def bt_197_merge_unpublished_justification_code_bt_09_procedure(
-    release_json, unpublished_justification_code_data,
+    release_json,
+    unpublished_justification_code_data,
 ):
     """
     Merge the parsed unpublished justification code data into the main OCDS release JSON.

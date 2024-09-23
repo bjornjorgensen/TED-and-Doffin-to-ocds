@@ -25,7 +25,8 @@ def parse_quality_target_description(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -40,10 +41,12 @@ def parse_quality_target_description(xml_content):
 
             for service in customer_services:
                 service_type = service.xpath(
-                    "cbc:ExecutionRequirementCode/text()", namespaces=namespaces,
+                    "cbc:ExecutionRequirementCode/text()",
+                    namespaces=namespaces,
                 )
                 description = service.xpath(
-                    "cbc:Description/text()", namespaces=namespaces,
+                    "cbc:Description/text()",
+                    namespaces=namespaces,
                 )
 
                 service_data = {}
@@ -70,12 +73,14 @@ def merge_quality_target_description(release_json, quality_target_description_da
 
     for new_lot in quality_target_description_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_contract_terms = existing_lot.setdefault("contractTerms", {})
             existing_customer_services = existing_contract_terms.setdefault(
-                "customerServices", [],
+                "customerServices",
+                [],
             )
 
             for new_service in new_lot["contractTerms"]["customerServices"]:

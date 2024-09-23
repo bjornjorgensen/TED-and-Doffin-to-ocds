@@ -28,10 +28,12 @@ def parse_lots_group_description(xml_content):
 
     for lots_group_element in lots_group_elements:
         lots_group_id = lots_group_element.xpath(
-            "cbc:ID/text()", namespaces=namespaces,
+            "cbc:ID/text()",
+            namespaces=namespaces,
         )[0]
         description = lots_group_element.xpath(
-            "cac:ProcurementProject/cbc:Description/text()", namespaces=namespaces,
+            "cac:ProcurementProject/cbc:Description/text()",
+            namespaces=namespaces,
         )
 
         if description:
@@ -47,7 +49,8 @@ def merge_lots_group_description(release_json, lots_group_description_data):
         return
 
     existing_lot_groups = release_json.setdefault("tender", {}).setdefault(
-        "lotGroups", [],
+        "lotGroups",
+        [],
     )
 
     for new_lot_group in lots_group_description_data["tender"]["lotGroups"]:

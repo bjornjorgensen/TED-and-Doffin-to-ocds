@@ -18,7 +18,8 @@ def setup_logging():
 
 
 def test_bt195_bt541_lot_threshold_unpublished_identifier_integration(
-    tmp_path, setup_logging,
+    tmp_path,
+    setup_logging,
 ):
     logger = setup_logging
     xml_content = """
@@ -160,7 +161,9 @@ def test_bt195_bt541_multiple_lots(tmp_path, setup_logging):
 
     lot_ids = ["LOT-0001", "LOT-0002"]
     for withheld_item, lot_id in zip(
-        result["withheldInformation"], lot_ids, strict=False,
+        result["withheldInformation"],
+        lot_ids,
+        strict=False,
     ):
         assert (
             withheld_item["id"] == f"awa-cri-num-threshold-{lot_id}"

@@ -32,7 +32,8 @@ def parse_lot_award_criteria_order_justification(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -53,7 +54,8 @@ def parse_lot_award_criteria_order_justification(xml_content):
 
 
 def merge_lot_award_criteria_order_justification(
-    release_json, lot_award_criteria_order_justification_data,
+    release_json,
+    lot_award_criteria_order_justification_data,
 ):
     """
     Merge the parsed award criteria order justification data for lots into the main OCDS release JSON.

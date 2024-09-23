@@ -55,7 +55,10 @@ def test_merge_award_criterion_description():
     release_json = {
         "tender": {
             "lots": [
-                {"id": "LOT-0001", "awardCriteria": {"criteria": [{"type": "quality"}]}},
+                {
+                    "id": "LOT-0001",
+                    "awardCriteria": {"criteria": [{"type": "quality"}]},
+                },
             ],
         },
     }

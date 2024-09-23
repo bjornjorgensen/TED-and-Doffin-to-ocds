@@ -32,7 +32,8 @@ def parse_lot_performance_terms(xml_content):
     result = {"lots": []}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -73,7 +74,8 @@ def merge_lot_performance_terms(release_json, lot_performance_terms_data):
 
     for new_lot in lot_performance_terms_data["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("contractTerms", {}).update(

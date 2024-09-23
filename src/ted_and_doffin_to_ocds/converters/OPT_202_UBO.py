@@ -34,7 +34,8 @@ def parse_ubo_identifier(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces,
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -43,7 +44,8 @@ def parse_ubo_identifier(xml_content):
             namespaces=namespaces,
         )
         ubos = root.xpath(
-            "//efac:Organizations/efac:UltimateBeneficialOwner", namespaces=namespaces,
+            "//efac:Organizations/efac:UltimateBeneficialOwner",
+            namespaces=namespaces,
         )
 
         if org_id and ubos:
@@ -51,7 +53,8 @@ def parse_ubo_identifier(xml_content):
 
             for ubo in ubos:
                 ubo_id = ubo.xpath(
-                    "cbc:ID[@schemeName='ubo']/text()", namespaces=namespaces,
+                    "cbc:ID[@schemeName='ubo']/text()",
+                    namespaces=namespaces,
                 )
                 if ubo_id:
                     party["beneficialOwners"].append({"id": ubo_id[0]})

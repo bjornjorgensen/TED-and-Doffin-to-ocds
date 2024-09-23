@@ -48,7 +48,8 @@ def parse_subcontracting(xml_content: str | bytes) -> dict | None:
 
     for tender in tenders:
         tender_id: str = tender.xpath(
-            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces,
+            "cbc:ID[@schemeName='tender']/text()",
+            namespaces=namespaces,
         )[0]
         subcontracting_code: list = tender.xpath(
             "efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efbc:TermCode/text()",
@@ -86,7 +87,8 @@ def merge_subcontracting(release_json: dict, subcontracting_data: dict | None) -
 
     for new_bid in subcontracting_data["bids"]["details"]:
         existing_bid: dict | None = next(
-            (bid for bid in existing_details if bid["id"] == new_bid["id"]), None,
+            (bid for bid in existing_details if bid["id"] == new_bid["id"]),
+            None,
         )
         if existing_bid:
             existing_bid["hasSubcontracting"] = new_bid["hasSubcontracting"]

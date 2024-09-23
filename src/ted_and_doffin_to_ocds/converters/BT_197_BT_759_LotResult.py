@@ -67,7 +67,8 @@ def parse_bt197_bt759_lotresult_unpublished_justification_code(xml_content):
             namespaces=namespaces,
         )
         reason_code = field_privacy.xpath(
-            "cbc:ReasonCode/text()", namespaces=namespaces,
+            "cbc:ReasonCode/text()",
+            namespaces=namespaces,
         )
 
         if lot_result_id and reason_code:
@@ -90,7 +91,8 @@ def parse_bt197_bt759_lotresult_unpublished_justification_code(xml_content):
 
 
 def merge_bt197_bt759_lotresult_unpublished_justification_code(
-    release_json, unpublished_justification_code_data,
+    release_json,
+    unpublished_justification_code_data,
 ):
     """
     Merge the parsed unpublished justification code data into the main OCDS release JSON.
@@ -112,7 +114,8 @@ def merge_bt197_bt759_lotresult_unpublished_justification_code(
 
     for new_item in unpublished_justification_code_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item.get("id") == new_item["id"]), None,
+            (item for item in withheld_info if item.get("id") == new_item["id"]),
+            None,
         )
         if existing_item:
             existing_item.setdefault("rationaleClassifications", []).extend(

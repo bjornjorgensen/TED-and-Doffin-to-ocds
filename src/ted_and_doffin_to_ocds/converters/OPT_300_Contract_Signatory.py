@@ -30,7 +30,8 @@ def parse_contract_signatory(xml_content):
 
         if org:
             org_name = org[0].xpath(
-                "cac:PartyName/cbc:Name/text()", namespaces=namespaces,
+                "cac:PartyName/cbc:Name/text()",
+                namespaces=namespaces,
             )[0]
             result["parties"].append(
                 {"id": org_id, "name": org_name, "roles": ["buyer"]},
@@ -42,7 +43,8 @@ def parse_contract_signatory(xml_content):
 
         if contract:
             contract_id = contract[0].xpath(
-                "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces,
+                "cbc:ID[@schemeName='contract']/text()",
+                namespaces=namespaces,
             )[0]
             award_xpath = f"//efac:NoticeResult/efac:LotResult[efac:SettledContract/cbc:ID[@schemeName='contract']/text()='{contract_id}']/cbc:ID[@schemeName='result']/text()"
             award_ids = root.xpath(award_xpath, namespaces=namespaces)

@@ -25,11 +25,13 @@ def parse_revenues_allocation(xml_content):
     result = {"tender": {"lots": []}}
 
     lot_tenders = root.xpath(
-        "//efac:NoticeResult/efac:LotTender", namespaces=namespaces,
+        "//efac:NoticeResult/efac:LotTender",
+        namespaces=namespaces,
     )
     for lot_tender in lot_tenders:
         tender_id = lot_tender.xpath(
-            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces,
+            "cbc:ID[@schemeName='tender']/text()",
+            namespaces=namespaces,
         )
         if tender_id:
             # Find the corresponding LotResult to get the lot_id
@@ -66,7 +68,8 @@ def merge_revenues_allocation(release_json, revenues_allocation_data):
 
     for new_lot in revenues_allocation_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot["revenuesAllocation"] = new_lot["revenuesAllocation"]

@@ -19,17 +19,20 @@ def parse_procedure_place_performance_street(xml_content):
     result = {"tender": {"deliveryAddresses": []}}
 
     realized_locations = root.xpath(
-        "//cac:ProcurementProject/cac:RealizedLocation", namespaces=namespaces,
+        "//cac:ProcurementProject/cac:RealizedLocation",
+        namespaces=namespaces,
     )
 
     for location in realized_locations:
         address = location.xpath("cac:Address", namespaces=namespaces)[0]
         street_name = address.xpath("cbc:StreetName/text()", namespaces=namespaces)
         additional_street_name = address.xpath(
-            "cbc:AdditionalStreetName/text()", namespaces=namespaces,
+            "cbc:AdditionalStreetName/text()",
+            namespaces=namespaces,
         )
         address_lines = address.xpath(
-            "cac:AddressLine/cbc:Line/text()", namespaces=namespaces,
+            "cac:AddressLine/cbc:Line/text()",
+            namespaces=namespaces,
         )
 
         street_address_parts = []
@@ -47,13 +50,15 @@ def parse_procedure_place_performance_street(xml_content):
 
 
 def merge_procedure_place_performance_street(
-    release_json, procedure_place_performance_street_data,
+    release_json,
+    procedure_place_performance_street_data,
 ):
     if not procedure_place_performance_street_data:
         return
 
     existing_addresses = release_json.setdefault("tender", {}).setdefault(
-        "deliveryAddresses", [],
+        "deliveryAddresses",
+        [],
     )
 
     for new_address in procedure_place_performance_street_data["tender"][

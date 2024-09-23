@@ -22,7 +22,8 @@ def parse_main_nature(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -53,7 +54,8 @@ def merge_main_nature(release_json, main_nature_data):
 
     for new_lot in main_nature_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in tender_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in tender_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot["mainProcurementCategory"] = new_lot["mainProcurementCategory"]

@@ -40,7 +40,8 @@ def parse_lots_all_required(xml_content: str) -> dict | None:
 
 
 def merge_lots_all_required(
-    release_json: dict, lots_all_required_data: dict | None,
+    release_json: dict,
+    lots_all_required_data: dict | None,
 ) -> None:
     """
     Merge the parsed Lots All Required data into the main OCDS release JSON.

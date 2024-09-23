@@ -40,7 +40,8 @@ def parse_organization_part_name(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces,
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -49,7 +50,8 @@ def parse_organization_part_name(xml_content):
             namespaces=namespaces,
         )
         org_name = organization.xpath(
-            "efac:Company/cac:PartyName/cbc:Name/text()", namespaces=namespaces,
+            "efac:Company/cac:PartyName/cbc:Name/text()",
+            namespaces=namespaces,
         )
         department = organization.xpath(
             "efac:Company/cac:PostalAddress/cbc:Department/text()",

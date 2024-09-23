@@ -87,7 +87,8 @@ def parse_bt197_bt541_lotsgroup_threshold(xml_content):
 
 
 def merge_bt197_bt541_lotsgroup_threshold(
-    release_json, unpublished_justification_code_data,
+    release_json,
+    unpublished_justification_code_data,
 ):
     """
     Merge the parsed unpublished justification code data into the main OCDS release JSON.

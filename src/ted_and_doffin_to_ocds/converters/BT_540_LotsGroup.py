@@ -47,7 +47,8 @@ def parse_award_criterion_description_lots_group(xml_content):
 
 
 def merge_award_criterion_description_lots_group(
-    release_json, award_criterion_description_data,
+    release_json,
+    award_criterion_description_data,
 ):
     if not award_criterion_description_data:
         logger.warning("No Award Criterion Description data for lot groups to merge")
@@ -58,11 +59,13 @@ def merge_award_criterion_description_lots_group(
 
     for new_lot_group in award_criterion_description_data["tender"]["lotGroups"]:
         existing_lot_group = next(
-            (lg for lg in existing_lot_groups if lg["id"] == new_lot_group["id"]), None,
+            (lg for lg in existing_lot_groups if lg["id"] == new_lot_group["id"]),
+            None,
         )
         if existing_lot_group:
             existing_criteria = existing_lot_group.setdefault(
-                "awardCriteria", {},
+                "awardCriteria",
+                {},
             ).setdefault("criteria", [])
             for new_criterion in new_lot_group["awardCriteria"]["criteria"]:
                 existing_criterion = next(

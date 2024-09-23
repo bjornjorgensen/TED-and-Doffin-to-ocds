@@ -32,7 +32,8 @@ def parse_bt195_bt105_unpublished_identifier(xml_content):
     result = {"withheldInformation": []}
 
     contract_folder_id = root.xpath(
-        "/*/cbc:ContractFolderID/text()", namespaces=namespaces,
+        "/*/cbc:ContractFolderID/text()",
+        namespaces=namespaces,
     )
     field_identifier = root.xpath(
         "//efac:FieldsPrivacy/efbc:FieldIdentifierCode[text()='pro-typ']/text()",

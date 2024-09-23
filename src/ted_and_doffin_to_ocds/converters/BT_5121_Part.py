@@ -22,7 +22,8 @@ def parse_place_performance_post_code_part(xml_content):
     result = {"tender": {"deliveryAddresses": []}}
 
     parts = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
+        namespaces=namespaces,
     )
 
     for part in parts:
@@ -44,7 +45,8 @@ def merge_place_performance_post_code_part(release_json, post_code_data):
         return
 
     existing_addresses = release_json.setdefault("tender", {}).setdefault(
-        "deliveryAddresses", [],
+        "deliveryAddresses",
+        [],
     )
 
     for new_address in post_code_data["tender"]["deliveryAddresses"]:

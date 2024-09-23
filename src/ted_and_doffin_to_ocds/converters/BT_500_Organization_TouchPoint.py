@@ -22,7 +22,8 @@ def parse_touchpoint_name(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces,
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -31,7 +32,8 @@ def parse_touchpoint_name(xml_content):
             namespaces=namespaces,
         )
         touchpoint_name = organization.xpath(
-            "efac:TouchPoint/cac:PartyName/cbc:Name/text()", namespaces=namespaces,
+            "efac:TouchPoint/cac:PartyName/cbc:Name/text()",
+            namespaces=namespaces,
         )
         department = organization.xpath(
             "efac:TouchPoint/cac:PostalAddress/cbc:Department/text()",

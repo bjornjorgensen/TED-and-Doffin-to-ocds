@@ -41,7 +41,8 @@ def parse_buyer_contracting_entity(xml_content):
 
     for cpt in contracting_party_types:
         org_id = cpt.xpath(
-            "cac:Party/cac:PartyIdentification/cbc:ID/text()", namespaces=namespaces,
+            "cac:Party/cac:PartyIdentification/cbc:ID/text()",
+            namespaces=namespaces,
         )
         party_type_code = cpt.xpath(
             "cbc:PartyTypeCode[@listName='buyer-contracting-type']/text()",
@@ -57,7 +58,8 @@ def parse_buyer_contracting_entity(xml_content):
                             "scheme": "eu-buyer-contracting-type",
                             "id": party_type_code[0],
                             "description": buyer_contracting_type_mapping.get(
-                                party_type_code[0], "Unknown",
+                                party_type_code[0],
+                                "Unknown",
                             ),
                         },
                     ],
@@ -88,12 +90,14 @@ def merge_buyer_contracting_entity(release_json, buyer_contracting_entity_data):
 
     for new_party in buyer_contracting_entity_data["parties"]:
         existing_party = next(
-            (party for party in parties if party["id"] == new_party["id"]), None,
+            (party for party in parties if party["id"] == new_party["id"]),
+            None,
         )
         if existing_party:
             existing_details = existing_party.setdefault("details", {})
             existing_classifications = existing_details.setdefault(
-                "classifications", [],
+                "classifications",
+                [],
             )
             new_classification = new_party["details"]["classifications"][0]
             existing_classification = next(

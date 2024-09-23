@@ -132,7 +132,8 @@ def test_bt_771_lot_late_tenderer_info_integration(tmp_path):
     assert "No documents can be submitted later" in lot_2["submissionMethodDetails"]
 
     lot_3 = next(
-        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"), None,
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"),
+        None,
     )
     assert lot_3 is not None
     assert "submissionMethodDetails" not in lot_3

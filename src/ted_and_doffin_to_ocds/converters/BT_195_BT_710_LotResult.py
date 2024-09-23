@@ -32,7 +32,8 @@ def parse_bt195_bt710_unpublished_identifier(xml_content):
     result = {"withheldInformation": []}
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
+        "//efac:NoticeResult/efac:LotResult",
+        namespaces=namespaces,
     )
 
     for lot_result in lot_results:
@@ -41,7 +42,8 @@ def parse_bt195_bt710_unpublished_identifier(xml_content):
             namespaces=namespaces,
         )
         lot_id = lot_result.xpath(
-            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
+            "cbc:ID[@schemeName='result']/text()",
+            namespaces=namespaces,
         )
 
         if field_identifier and lot_id:

@@ -22,7 +22,8 @@ def parse_touchpoint_country_subdivision(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces,
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -52,7 +53,8 @@ def parse_touchpoint_country_subdivision(xml_content):
 
 
 def merge_touchpoint_country_subdivision(
-    release_json, touchpoint_country_subdivision_data,
+    release_json,
+    touchpoint_country_subdivision_data,
 ):
     if not touchpoint_country_subdivision_data:
         logger.warning("No touchpoint country subdivision data to merge")

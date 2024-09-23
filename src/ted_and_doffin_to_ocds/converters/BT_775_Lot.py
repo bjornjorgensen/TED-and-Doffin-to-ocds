@@ -69,7 +69,8 @@ def parse_social_procurement(xml_content: str | bytes) -> dict | None:
     result: dict[str, dict] = {"tender": {"lots": []}}
 
     lots: list[etree._Element] = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -94,7 +95,8 @@ def parse_social_procurement(xml_content: str | bytes) -> dict | None:
 
 
 def merge_social_procurement(
-    release_json: dict, social_procurement_data: dict | None,
+    release_json: dict,
+    social_procurement_data: dict | None,
 ) -> None:
     """
     Merge the parsed social procurement data into the main OCDS release JSON.
@@ -115,7 +117,8 @@ def merge_social_procurement(
 
     for new_lot in social_procurement_data["tender"]["lots"]:
         existing_lot: dict | None = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot["hasSustainability"] = new_lot["hasSustainability"]

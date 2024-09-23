@@ -32,7 +32,8 @@ def parse_lot_subcontracting_obligation_maximum(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -55,7 +56,8 @@ def parse_lot_subcontracting_obligation_maximum(xml_content):
 
 
 def merge_lot_subcontracting_obligation_maximum(
-    release_json, lot_subcontracting_obligation_maximum_data,
+    release_json,
+    lot_subcontracting_obligation_maximum_data,
 ):
     """
     Merge the parsed subcontracting obligation maximum percentage data for lots into the main OCDS release JSON.

@@ -50,7 +50,8 @@ def parse_procurement_documents_change_date(xml_content):
 
     for change in changes:
         date = change.xpath(
-            "efbc:ProcurementDocumentsChangeDate/text()", namespaces=namespaces,
+            "efbc:ProcurementDocumentsChangeDate/text()",
+            namespaces=namespaces,
         )
         if not date:
             continue

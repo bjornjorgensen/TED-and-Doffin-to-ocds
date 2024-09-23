@@ -50,12 +50,14 @@ def parse_received_submissions_type(xml_content):
     result = {"bids": {"statistics": []}}
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
+        "//efac:NoticeResult/efac:LotResult",
+        namespaces=namespaces,
     )
 
     for lot_result in lot_results:
         lot_id = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+            namespaces=namespaces,
         )
         statistics = lot_result.xpath(
             "efac:ReceivedSubmissionsStatistics/efbc:StatisticsCode[@listName='received-submission-type']/text()",

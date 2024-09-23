@@ -45,7 +45,9 @@ def test_merge_lot_estimated_value():
 
     lot_estimated_value_data = {
         "tender": {
-            "lots": [{"id": "LOT-0001", "value": {"amount": 250000, "currency": "EUR"}}],
+            "lots": [
+                {"id": "LOT-0001", "value": {"amount": 250000, "currency": "EUR"}}
+            ],
         },
     }
 

@@ -23,18 +23,21 @@ def parse_previous_planning_identifier_lot(xml_content):
     related_process_id = 1
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
         notice_refs = lot.xpath(
-            "cac:TenderingProcess/cac:NoticeDocumentReference", namespaces=namespaces,
+            "cac:TenderingProcess/cac:NoticeDocumentReference",
+            namespaces=namespaces,
         )
 
         for notice_ref in notice_refs:
             identifier = notice_ref.xpath("cbc:ID/text()", namespaces=namespaces)
             part_identifier = notice_ref.xpath(
-                "cbc:ReferencedDocumentInternalAddress/text()", namespaces=namespaces,
+                "cbc:ReferencedDocumentInternalAddress/text()",
+                namespaces=namespaces,
             )
 
             if identifier:

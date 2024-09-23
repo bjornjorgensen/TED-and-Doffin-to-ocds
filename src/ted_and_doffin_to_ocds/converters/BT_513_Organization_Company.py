@@ -22,7 +22,8 @@ def parse_organization_city(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces,
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -31,7 +32,8 @@ def parse_organization_city(xml_content):
             namespaces=namespaces,
         )
         city_name = organization.xpath(
-            "efac:Company/cac:PostalAddress/cbc:CityName/text()", namespaces=namespaces,
+            "efac:Company/cac:PostalAddress/cbc:CityName/text()",
+            namespaces=namespaces,
         )
 
         if org_id and city_name:

@@ -26,16 +26,19 @@ def parse_winner_decision_date(xml_content):
 
     for notice_result in notice_results:
         settled_contracts = notice_result.xpath(
-            "efac:SettledContract", namespaces=namespaces,
+            "efac:SettledContract",
+            namespaces=namespaces,
         )
         lot_results = notice_result.xpath("efac:LotResult", namespaces=namespaces)
 
         for settled_contract in settled_contracts:
             contract_id = settled_contract.xpath(
-                "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces,
+                "cbc:ID[@schemeName='contract']/text()",
+                namespaces=namespaces,
             )
             award_date = settled_contract.xpath(
-                "cbc:AwardDate/text()", namespaces=namespaces,
+                "cbc:AwardDate/text()",
+                namespaces=namespaces,
             )
 
             if contract_id and award_date:
@@ -48,7 +51,8 @@ def parse_winner_decision_date(xml_content):
                         namespaces=namespaces,
                     )
                     lot_result_id = lot_result.xpath(
-                        "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
+                        "cbc:ID[@schemeName='result']/text()",
+                        namespaces=namespaces,
                     )
 
                     if (
@@ -71,7 +75,8 @@ def merge_winner_decision_date(release_json, winner_decision_date_data):
 
     for new_award in winner_decision_date_data["awards"]:
         existing_award = next(
-            (award for award in existing_awards if award["id"] == new_award["id"]), None,
+            (award for award in existing_awards if award["id"] == new_award["id"]),
+            None,
         )
         if existing_award:
             if (

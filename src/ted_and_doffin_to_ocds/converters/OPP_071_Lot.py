@@ -37,7 +37,8 @@ def parse_quality_target_code(xml_content):
     }
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -75,12 +76,14 @@ def merge_quality_target_code(release_json, quality_target_data):
 
     for new_lot in quality_target_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_contract_terms = existing_lot.setdefault("contractTerms", {})
             existing_customer_services = existing_contract_terms.setdefault(
-                "customerServices", [],
+                "customerServices",
+                [],
             )
             existing_customer_services.extend(
                 new_lot["contractTerms"]["customerServices"],

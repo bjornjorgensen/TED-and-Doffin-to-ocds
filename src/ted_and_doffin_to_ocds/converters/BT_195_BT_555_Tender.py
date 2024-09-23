@@ -36,10 +36,12 @@ def parse_bt195_bt555_unpublished_identifier(xml_content):
 
     for term in subcontracting_terms:
         lot_tender_id = term.xpath(
-            "ancestor::efac:LotTender/cbc:ID/text()", namespaces=namespaces,
+            "ancestor::efac:LotTender/cbc:ID/text()",
+            namespaces=namespaces,
         )
         field_identifier = term.xpath(
-            "efbc:FieldIdentifierCode/text()", namespaces=namespaces,
+            "efbc:FieldIdentifierCode/text()",
+            namespaces=namespaces,
         )
 
         if lot_tender_id and field_identifier:
@@ -72,7 +74,8 @@ def merge_bt195_bt555_unpublished_identifier(release_json, unpublished_identifie
 
     for new_item in unpublished_identifier_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item.get("id") == new_item["id"]), None,
+            (item for item in withheld_info if item.get("id") == new_item["id"]),
+            None,
         )
         if existing_item:
             existing_item.update(new_item)

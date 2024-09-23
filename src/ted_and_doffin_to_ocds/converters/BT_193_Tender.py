@@ -22,18 +22,22 @@ def parse_tender_variant(xml_content):
     result = {"bids": {"details": []}}
 
     lot_tenders = root.xpath(
-        "//efac:NoticeResult/efac:LotTender", namespaces=namespaces,
+        "//efac:NoticeResult/efac:LotTender",
+        namespaces=namespaces,
     )
 
     for lot_tender in lot_tenders:
         tender_id = lot_tender.xpath(
-            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces,
+            "cbc:ID[@schemeName='tender']/text()",
+            namespaces=namespaces,
         )[0]
         variant_indicator = lot_tender.xpath(
-            "efbc:TenderVariantIndicator/text()", namespaces=namespaces,
+            "efbc:TenderVariantIndicator/text()",
+            namespaces=namespaces,
         )
         lot_id = lot_tender.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+            namespaces=namespaces,
         )[0]
 
         bid = {"id": tender_id, "relatedLots": [lot_id]}
@@ -55,7 +59,8 @@ def merge_tender_variant(release_json, tender_variant_data):
 
     for new_bid in tender_variant_data["bids"]["details"]:
         existing_bid = next(
-            (bid for bid in existing_bids if bid["id"] == new_bid["id"]), None,
+            (bid for bid in existing_bids if bid["id"] == new_bid["id"]),
+            None,
         )
         if existing_bid:
             existing_bid.update(new_bid)

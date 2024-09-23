@@ -25,7 +25,8 @@ def parse_organization_edelivery_gateway(xml_content):
             namespaces=namespaces,
         )
         endpoint_id = org.xpath(
-            "efac:Company/cbc:EndpointID/text()", namespaces=namespaces,
+            "efac:Company/cbc:EndpointID/text()",
+            namespaces=namespaces,
         )
 
         if org_id and endpoint_id:

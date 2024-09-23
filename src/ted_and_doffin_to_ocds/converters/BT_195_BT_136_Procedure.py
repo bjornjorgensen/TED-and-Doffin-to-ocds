@@ -32,7 +32,8 @@ def parse_bt195_bt136_unpublished_identifier(xml_content):
     result = {"withheldInformation": []}
 
     contract_folder_id = root.xpath(
-        "/*/cbc:ContractFolderID/text()", namespaces=namespaces,
+        "/*/cbc:ContractFolderID/text()",
+        namespaces=namespaces,
     )
     field_identifier = root.xpath(
         "//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='dir-awa-jus']/efbc:FieldIdentifierCode/text()",

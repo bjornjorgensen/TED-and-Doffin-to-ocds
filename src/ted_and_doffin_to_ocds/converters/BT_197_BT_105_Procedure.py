@@ -80,7 +80,8 @@ def parse_bt197_bt105_unpublished_justification_code(xml_content):
 
 
 def merge_bt197_bt105_unpublished_justification_code(
-    release_json, unpublished_justification_code_data,
+    release_json,
+    unpublished_justification_code_data,
 ):
     """
     Merge the parsed unpublished justification code data into the main OCDS release JSON.
@@ -100,7 +101,8 @@ def merge_bt197_bt105_unpublished_justification_code(
 
     for new_item in unpublished_justification_code_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item["field"] == new_item["field"]), None,
+            (item for item in withheld_info if item["field"] == new_item["field"]),
+            None,
         )
         if existing_item:
             existing_item.setdefault("rationaleClassifications", []).extend(

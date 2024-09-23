@@ -22,7 +22,8 @@ def parse_jury_member_name(xml_content):
     result = {"tender": {"lots": []}}
 
     lot_elements = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot_element in lot_elements:
@@ -53,12 +54,14 @@ def merge_jury_member_name(release_json, jury_member_data):
 
     for new_lot in jury_member_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in tender_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in tender_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_design_contest = existing_lot.setdefault("designContest", {})
             existing_jury_members = existing_design_contest.setdefault(
-                "juryMembers", [],
+                "juryMembers",
+                [],
             )
             existing_jury_members.extend(new_lot["designContest"]["juryMembers"])
         else:

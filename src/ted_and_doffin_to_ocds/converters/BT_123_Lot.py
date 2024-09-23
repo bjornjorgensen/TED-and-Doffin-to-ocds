@@ -22,7 +22,8 @@ def parse_electronic_auction_url(xml_content):
     result = {"lots": []}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -53,11 +54,13 @@ def merge_electronic_auction_url(release_json, auction_url_data):
 
     for new_lot in auction_url_data["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("techniques", {}).setdefault(
-                "electronicAuction", {},
+                "electronicAuction",
+                {},
             )["url"] = new_lot["techniques"]["electronicAuction"]["url"]
         else:
             existing_lots.append(new_lot)

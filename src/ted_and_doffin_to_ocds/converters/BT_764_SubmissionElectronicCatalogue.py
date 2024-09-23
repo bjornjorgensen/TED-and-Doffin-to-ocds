@@ -36,7 +36,8 @@ def parse_submission_electronic_catalogue(xml_content: str) -> list[dict] | None
 
     lots_data = []
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -59,7 +60,8 @@ def parse_submission_electronic_catalogue(xml_content: str) -> list[dict] | None
 
 
 def merge_submission_electronic_catalogue(
-    release_json: dict, submission_electronic_catalogue_data: list[dict] | None,
+    release_json: dict,
+    submission_electronic_catalogue_data: list[dict] | None,
 ) -> None:
     """
     Merge the parsed Submission Electronic Catalogue data into the main OCDS release JSON.
@@ -80,7 +82,8 @@ def merge_submission_electronic_catalogue(
 
     for lot_data in submission_electronic_catalogue_data:
         existing_lot = next(
-            (lot for lot in lots if lot.get("id") == lot_data["id"]), None,
+            (lot for lot in lots if lot.get("id") == lot_data["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("submissionTerms", {}).update(

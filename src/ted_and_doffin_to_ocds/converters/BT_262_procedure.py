@@ -36,7 +36,8 @@ def merge_main_classification_code_procedure(release_json, classification_code_d
 
     for new_item in classification_code_data["tender"]["items"]:
         existing_item = next(
-            (item for item in existing_items if item["id"] == new_item["id"]), None,
+            (item for item in existing_items if item["id"] == new_item["id"]),
+            None,
         )
 
         if existing_item:

@@ -22,7 +22,8 @@ def parse_ubo_email(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces,
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -40,10 +41,12 @@ def parse_ubo_email(xml_content):
             )
             for ubo in ubos:
                 ubo_id = ubo.xpath(
-                    "cbc:ID[@schemeName='ubo']/text()", namespaces=namespaces,
+                    "cbc:ID[@schemeName='ubo']/text()",
+                    namespaces=namespaces,
                 )
                 ubo_email = ubo.xpath(
-                    "cac:Contact/cbc:ElectronicMail/text()", namespaces=namespaces,
+                    "cac:Contact/cbc:ElectronicMail/text()",
+                    namespaces=namespaces,
                 )
 
                 if ubo_id and ubo_email:
@@ -71,7 +74,8 @@ def merge_ubo_email(release_json, ubo_email_data):
         )
         if existing_party:
             existing_beneficial_owners = existing_party.setdefault(
-                "beneficialOwners", [],
+                "beneficialOwners",
+                [],
             )
             for new_ubo in new_party["beneficialOwners"]:
                 existing_ubo = next(

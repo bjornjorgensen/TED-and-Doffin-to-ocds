@@ -22,11 +22,13 @@ def parse_essential_assets(xml_content):
     result = {"tender": {"lots": []}}
 
     settled_contracts = root.xpath(
-        "//efac:NoticeResult/efac:SettledContract", namespaces=namespaces,
+        "//efac:NoticeResult/efac:SettledContract",
+        namespaces=namespaces,
     )
     for contract in settled_contracts:
         contract_id_elements = contract.xpath(
-            "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces,
+            "cbc:ID[@schemeName='contract']/text()",
+            namespaces=namespaces,
         )
         if not contract_id_elements:
             logger.warning("Contract ID not found for a SettledContract")
@@ -51,19 +53,22 @@ def parse_essential_assets(xml_content):
         for asset in assets:
             asset_data = {}
             description = asset.xpath(
-                "efbc:AssetDescription/text()", namespaces=namespaces,
+                "efbc:AssetDescription/text()",
+                namespaces=namespaces,
             )
             if description:
                 asset_data["description"] = description[0]
 
             significance = asset.xpath(
-                "efbc:AssetSignificance/text()", namespaces=namespaces,
+                "efbc:AssetSignificance/text()",
+                namespaces=namespaces,
             )
             if significance:
                 asset_data["significance"] = significance[0]
 
             predominance = asset.xpath(
-                "efbc:AssetPredominance/text()", namespaces=namespaces,
+                "efbc:AssetPredominance/text()",
+                namespaces=namespaces,
             )
             if predominance:
                 asset_data["predominance"] = predominance[0]
@@ -77,7 +82,8 @@ def parse_essential_assets(xml_content):
         )
         for lot_result in lot_results:
             lot_id_elements = lot_result.xpath(
-                "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
+                "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+                namespaces=namespaces,
             )
             if not lot_id_elements:
                 logger.warning(f"Lot ID not found for contract {contract_id}")
@@ -105,7 +111,8 @@ def merge_essential_assets(release_json, essential_assets_data):
 
     for new_lot in essential_assets_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             if "hasEssentialAssets" in new_lot:

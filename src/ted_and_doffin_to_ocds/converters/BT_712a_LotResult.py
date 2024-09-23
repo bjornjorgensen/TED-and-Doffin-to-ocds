@@ -43,12 +43,14 @@ def parse_buyer_review_complainants(xml_content):
     statistic_id = 1
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
+        "//efac:NoticeResult/efac:LotResult",
+        namespaces=namespaces,
     )
 
     for lot_result in lot_results:
         lot_id = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+            namespaces=namespaces,
         )
         complainants = lot_result.xpath(
             "efac:AppealRequestsStatistics[efbc:StatisticsCode[@listName='review-type']/text()='complainants']",

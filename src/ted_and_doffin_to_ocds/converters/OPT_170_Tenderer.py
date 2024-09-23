@@ -22,15 +22,18 @@ def parse_tendering_party_leader(xml_content):
     result = {"parties": []}
 
     tendering_parties = root.xpath(
-        "//efac:TenderingParty/efac:Tenderer", namespaces=namespaces,
+        "//efac:TenderingParty/efac:Tenderer",
+        namespaces=namespaces,
     )
 
     for tenderer in tendering_parties:
         org_id = tenderer.xpath(
-            "cbc:ID[@schemeName='organization']/text()", namespaces=namespaces,
+            "cbc:ID[@schemeName='organization']/text()",
+            namespaces=namespaces,
         )
         is_leader = tenderer.xpath(
-            "efbc:GroupLeadIndicator/text()", namespaces=namespaces,
+            "efbc:GroupLeadIndicator/text()",
+            namespaces=namespaces,
         )
 
         if org_id:

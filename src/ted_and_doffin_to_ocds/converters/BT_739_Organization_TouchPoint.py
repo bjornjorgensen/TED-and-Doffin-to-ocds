@@ -47,7 +47,8 @@ def parse_touchpoint_contact_fax(xml_content):
                 namespaces=namespaces,
             )
             fax_number = touchpoint[0].xpath(
-                "cac:Contact/cbc:Telefax/text()", namespaces=namespaces,
+                "cac:Contact/cbc:Telefax/text()",
+                namespaces=namespaces,
             )
 
             if touchpoint_id and fax_number:
@@ -81,7 +82,8 @@ def merge_touchpoint_contact_fax(release_json, touchpoint_fax_data):
 
     for new_party in touchpoint_fax_data["parties"]:
         existing_party = next(
-            (party for party in parties if party["id"] == new_party["id"]), None,
+            (party for party in parties if party["id"] == new_party["id"]),
+            None,
         )
         if existing_party:
             existing_party.setdefault("contactPoint", {}).update(

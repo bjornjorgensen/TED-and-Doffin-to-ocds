@@ -51,7 +51,8 @@ def parse_part_dynamic_purchasing_system(xml_content: str) -> dict | None:
 
 
 def merge_part_dynamic_purchasing_system(
-    release_json: dict, part_dynamic_purchasing_system_data: dict | None,
+    release_json: dict,
+    part_dynamic_purchasing_system_data: dict | None,
 ) -> None:
     """
     Merge the parsed Part Dynamic Purchasing System data into the main OCDS release JSON.

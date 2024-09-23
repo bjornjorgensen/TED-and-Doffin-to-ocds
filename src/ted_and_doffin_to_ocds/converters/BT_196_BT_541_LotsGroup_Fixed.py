@@ -52,7 +52,8 @@ def parse_bt196_bt541_lotsgroup_fixed_unpublished_justification(xml_content):
 
 
 def merge_bt196_bt541_lotsgroup_fixed_unpublished_justification(
-    release_json, unpublished_justification_data,
+    release_json,
+    unpublished_justification_data,
 ):
     """
     Merge the parsed unpublished justification data into the main OCDS release JSON.

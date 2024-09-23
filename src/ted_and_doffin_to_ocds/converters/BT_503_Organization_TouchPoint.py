@@ -22,7 +22,8 @@ def parse_touchpoint_contact_telephone(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces,
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -31,7 +32,8 @@ def parse_touchpoint_contact_telephone(xml_content):
             namespaces=namespaces,
         )
         contact_telephone = organization.xpath(
-            "efac:TouchPoint/cac:Contact/cbc:Telephone/text()", namespaces=namespaces,
+            "efac:TouchPoint/cac:Contact/cbc:Telephone/text()",
+            namespaces=namespaces,
         )
         company_id = organization.xpath(
             "efac:Company/cac:PartyLegalEntity/cbc:CompanyID/text()",

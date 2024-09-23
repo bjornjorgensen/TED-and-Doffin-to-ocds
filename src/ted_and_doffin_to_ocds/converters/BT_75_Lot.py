@@ -71,7 +71,8 @@ def merge_guarantee_required_description(release_json, guarantee_description_dat
 
     for new_lot in guarantee_description_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("submissionTerms", {}).update(

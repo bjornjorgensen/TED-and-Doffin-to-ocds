@@ -22,18 +22,22 @@ def parse_tender_ranked(xml_content):
     result = {"bids": {"details": []}}
 
     lot_tenders = root.xpath(
-        "//efac:NoticeResult/efac:LotTender", namespaces=namespaces,
+        "//efac:NoticeResult/efac:LotTender",
+        namespaces=namespaces,
     )
 
     for lot_tender in lot_tenders:
         tender_id = lot_tender.xpath(
-            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces,
+            "cbc:ID[@schemeName='tender']/text()",
+            namespaces=namespaces,
         )
         ranked_indicator = lot_tender.xpath(
-            "efbc:TenderRankedIndicator/text()", namespaces=namespaces,
+            "efbc:TenderRankedIndicator/text()",
+            namespaces=namespaces,
         )
         lot_id = lot_tender.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+            namespaces=namespaces,
         )
 
         if tender_id and ranked_indicator and lot_id:
@@ -56,7 +60,8 @@ def merge_tender_ranked(release_json, tender_ranked_data):
 
     for new_bid in tender_ranked_data["bids"]["details"]:
         existing_bid = next(
-            (bid for bid in existing_bids if bid["id"] == new_bid["id"]), None,
+            (bid for bid in existing_bids if bid["id"] == new_bid["id"]),
+            None,
         )
         if existing_bid:
             existing_bid.update(new_bid)

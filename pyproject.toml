@@ -65,6 +65,7 @@ ignore = [
     "S101", 
     "S320",
     "T201",
+    "COM812",
 ]
 
 [tool.ruff.format]

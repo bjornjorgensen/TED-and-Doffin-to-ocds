@@ -58,7 +58,8 @@ def parse_cvd_contract_type_lotresult(xml_content):
                                 "id": cvd_code,
                                 "scheme": "eu-cvd-contract-type",
                                 "description": CVD_CONTRACT_TYPE_LABELS.get(
-                                    cvd_code, "Unknown CVD contract type",
+                                    cvd_code,
+                                    "Unknown CVD contract type",
                                 ),
                             },
                         ],
@@ -89,14 +90,16 @@ def merge_cvd_contract_type_lotresult(release_json, cvd_contract_type_data):
 
     for new_award in cvd_contract_type_data["awards"]:
         existing_award = next(
-            (award for award in existing_awards if award["id"] == new_award["id"]), None,
+            (award for award in existing_awards if award["id"] == new_award["id"]),
+            None,
         )
         if existing_award:
             existing_items = existing_award.setdefault("items", [])
             if existing_items:
                 existing_item = existing_items[0]
                 existing_classifications = existing_item.setdefault(
-                    "additionalClassifications", [],
+                    "additionalClassifications",
+                    [],
                 )
                 new_classification = new_award["items"][0]["additionalClassifications"][
                     0

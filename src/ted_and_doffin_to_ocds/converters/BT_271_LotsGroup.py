@@ -55,7 +55,8 @@ def parse_bt_271_lots_group(xml_content):
 
 def merge_bt_271_lots_group(release_json, bt_271_lots_group_data):
     existing_lot_groups = release_json.setdefault("tender", {}).setdefault(
-        "lotGroups", [],
+        "lotGroups",
+        [],
     )
 
     for new_lot_group in bt_271_lots_group_data["tender"]["lotGroups"]:
@@ -69,7 +70,8 @@ def merge_bt_271_lots_group(release_json, bt_271_lots_group_data):
         )
         if existing_lot_group:
             existing_lot_group.setdefault("techniques", {}).setdefault(
-                "frameworkAgreement", {},
+                "frameworkAgreement",
+                {},
             )["value"] = new_lot_group["techniques"]["frameworkAgreement"]["value"]
         else:
             existing_lot_groups.append(new_lot_group)

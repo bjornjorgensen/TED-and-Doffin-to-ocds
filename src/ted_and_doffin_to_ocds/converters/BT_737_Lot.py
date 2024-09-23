@@ -217,13 +217,15 @@ def parse_documents_unofficial_language(xml_content):
     result = {"tender": {"documents": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         documents = lot.xpath(
-            ".//cac:CallForTendersDocumentReference", namespaces=namespaces,
+            ".//cac:CallForTendersDocumentReference",
+            namespaces=namespaces,
         )
 
         for document in documents:
@@ -267,7 +269,8 @@ def merge_documents_unofficial_language(release_json, unofficial_language_data):
 
     for new_doc in unofficial_language_data["tender"]["documents"]:
         existing_doc = next(
-            (doc for doc in existing_documents if doc["id"] == new_doc["id"]), None,
+            (doc for doc in existing_documents if doc["id"] == new_doc["id"]),
+            None,
         )
         if existing_doc:
             existing_doc.setdefault("unofficialTranslations", []).extend(

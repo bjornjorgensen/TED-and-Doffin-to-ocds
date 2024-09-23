@@ -132,7 +132,8 @@ def test_bt_78_lot_security_clearance_deadline_integration(tmp_path):
     assert lot_2["milestones"][0]["dueDate"] == "2019-12-01T23:59:59Z"
 
     lot_3 = next(
-        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"), None,
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"),
+        None,
     )
     assert lot_3 is not None
     assert "milestones" not in lot_3

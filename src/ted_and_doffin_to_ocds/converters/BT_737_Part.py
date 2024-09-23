@@ -260,7 +260,8 @@ def merge_documents_unofficial_language_part(release_json, unofficial_language_d
 
     for new_doc in unofficial_language_data["tender"]["documents"]:
         existing_doc = next(
-            (doc for doc in existing_documents if doc["id"] == new_doc["id"]), None,
+            (doc for doc in existing_documents if doc["id"] == new_doc["id"]),
+            None,
         )
         if existing_doc:
             existing_doc.setdefault("unofficialTranslations", []).extend(

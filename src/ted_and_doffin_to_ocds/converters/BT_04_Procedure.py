@@ -20,7 +20,8 @@ def parse_procedure_identifier(xml_content):
     }
 
     contract_folder_id_elements = root.xpath(
-        "//cbc:ContractFolderID", namespaces=namespaces,
+        "//cbc:ContractFolderID",
+        namespaces=namespaces,
     )
 
     if contract_folder_id_elements:

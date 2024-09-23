@@ -36,10 +36,12 @@ def parse_bt195_bt635_unpublished_identifier(xml_content):
 
     for statistic in appeal_requests_statistics:
         lot_result_id = statistic.xpath(
-            "ancestor::efac:LotResult/cbc:ID/text()", namespaces=namespaces,
+            "ancestor::efac:LotResult/cbc:ID/text()",
+            namespaces=namespaces,
         )
         field_identifier = statistic.xpath(
-            "efbc:FieldIdentifierCode/text()", namespaces=namespaces,
+            "efbc:FieldIdentifierCode/text()",
+            namespaces=namespaces,
         )
 
         if lot_result_id and field_identifier:
@@ -72,7 +74,8 @@ def merge_bt195_bt635_unpublished_identifier(release_json, unpublished_identifie
 
     for new_item in unpublished_identifier_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item.get("id") == new_item["id"]), None,
+            (item for item in withheld_info if item.get("id") == new_item["id"]),
+            None,
         )
         if existing_item:
             existing_item.update(new_item)

@@ -32,18 +32,22 @@ def parse_vehicle_numeric(xml_content):
     result = {"awards": []}
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
+        "//efac:NoticeResult/efac:LotResult",
+        namespaces=namespaces,
     )
     for lot_result in lot_results:
         award_id = lot_result.xpath(
-            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
+            "cbc:ID[@schemeName='result']/text()",
+            namespaces=namespaces,
         )[0]
         lot_id = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+            namespaces=namespaces,
         )[0]
 
         statistics = lot_result.xpath(
-            ".//efac:StrategicProcurementStatistics", namespaces=namespaces,
+            ".//efac:StrategicProcurementStatistics",
+            namespaces=namespaces,
         )
 
         award_data = {"id": award_id, "items": [], "relatedLots": [lot_id]}
@@ -113,7 +117,8 @@ def merge_vehicle_numeric(release_json, vehicle_numeric_data):
 
     for new_award in vehicle_numeric_data["awards"]:
         existing_award = next(
-            (award for award in existing_awards if award["id"] == new_award["id"]), None,
+            (award for award in existing_awards if award["id"] == new_award["id"]),
+            None,
         )
         if existing_award:
             existing_items = existing_award.setdefault("items", [])

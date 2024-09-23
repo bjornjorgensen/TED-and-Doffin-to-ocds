@@ -32,7 +32,8 @@ def parse_dynamic_purchasing_system(xml_content: str) -> dict[str, dict] | None:
 
     lots_data = {}
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -56,7 +57,8 @@ def parse_dynamic_purchasing_system(xml_content: str) -> dict[str, dict] | None:
 
 
 def merge_dynamic_purchasing_system(
-    release_json: dict, dynamic_purchasing_system_data: dict[str, dict] | None,
+    release_json: dict,
+    dynamic_purchasing_system_data: dict[str, dict] | None,
 ) -> None:
     """
     Merge the parsed Dynamic Purchasing System data into the main OCDS release JSON.

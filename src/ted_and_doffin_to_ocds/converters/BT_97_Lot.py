@@ -241,13 +241,15 @@ def parse_submission_language(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
         languages = lot.xpath(
-            "cac:TenderingTerms/cac:Language/cbc:ID/text()", namespaces=namespaces,
+            "cac:TenderingTerms/cac:Language/cbc:ID/text()",
+            namespaces=namespaces,
         )
 
         if lot_id and languages:

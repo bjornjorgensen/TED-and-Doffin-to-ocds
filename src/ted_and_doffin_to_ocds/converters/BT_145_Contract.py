@@ -23,15 +23,18 @@ def parse_contract_conclusion_date(xml_content):
     result = {"contracts": []}
 
     settled_contracts = root.xpath(
-        "//efac:NoticeResult/efac:SettledContract", namespaces=namespaces,
+        "//efac:NoticeResult/efac:SettledContract",
+        namespaces=namespaces,
     )
 
     for settled_contract in settled_contracts:
         contract_id = settled_contract.xpath(
-            "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces,
+            "cbc:ID[@schemeName='contract']/text()",
+            namespaces=namespaces,
         )
         issue_date = settled_contract.xpath(
-            "cbc:IssueDate/text()", namespaces=namespaces,
+            "cbc:IssueDate/text()",
+            namespaces=namespaces,
         )
 
         if contract_id and issue_date:

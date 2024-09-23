@@ -22,12 +22,14 @@ def parse_subcontracting_value(xml_content):
     result = {"bids": {"details": []}}
 
     lot_tenders = root.xpath(
-        "//efac:NoticeResult/efac:LotTender", namespaces=namespaces,
+        "//efac:NoticeResult/efac:LotTender",
+        namespaces=namespaces,
     )
 
     for lot_tender in lot_tenders:
         tender_id = lot_tender.xpath(
-            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces,
+            "cbc:ID[@schemeName='tender']/text()",
+            namespaces=namespaces,
         )
         subcontracting_amount = lot_tender.xpath(
             "efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efbc:TermAmount/text()",
@@ -38,7 +40,8 @@ def parse_subcontracting_value(xml_content):
             namespaces=namespaces,
         )
         related_lot = lot_tender.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+            namespaces=namespaces,
         )
 
         if tender_id and subcontracting_amount and currency:
@@ -66,7 +69,8 @@ def merge_subcontracting_value(release_json, subcontracting_data):
 
     for new_bid in subcontracting_data["bids"]["details"]:
         existing_bid = next(
-            (bid for bid in existing_bids if bid["id"] == new_bid["id"]), None,
+            (bid for bid in existing_bids if bid["id"] == new_bid["id"]),
+            None,
         )
         if existing_bid:
             existing_bid.setdefault("subcontracting", {}).update(

@@ -38,14 +38,17 @@ def parse_vehicle_type(xml_content):
     result = {"awards": []}
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
+        "//efac:NoticeResult/efac:LotResult",
+        namespaces=namespaces,
     )
     for lot_result in lot_results:
         award_id = lot_result.xpath(
-            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
+            "cbc:ID[@schemeName='result']/text()",
+            namespaces=namespaces,
         )[0]
         lot_id = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+            namespaces=namespaces,
         )[0]
 
         vehicle_types = lot_result.xpath(
@@ -93,7 +96,8 @@ def merge_vehicle_type(release_json, vehicle_type_data):
 
     for new_award in vehicle_type_data["awards"]:
         existing_award = next(
-            (award for award in existing_awards if award["id"] == new_award["id"]), None,
+            (award for award in existing_awards if award["id"] == new_award["id"]),
+            None,
         )
         if existing_award:
             existing_items = existing_award.setdefault("items", [])

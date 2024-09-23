@@ -28,11 +28,13 @@ def parse_lot_additional_info(xml_content):
 
     for note in lot_notes:
         lot_id = note.xpath(
-            "../../cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
+            "../../cbc:ID[@schemeName='Lot']/text()",
+            namespaces=namespaces,
         )[0]
         note_text = note.text
         language = note.get(
-            "languageID", "en",
+            "languageID",
+            "en",
         )  # Default to 'en' if languageID is not present
 
         if lot_id not in result:

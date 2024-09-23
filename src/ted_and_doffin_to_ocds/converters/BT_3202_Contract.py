@@ -25,12 +25,14 @@ def parse_contract_tender_id(xml_content):
 
     for notice_result in notice_results:
         settled_contracts = notice_result.xpath(
-            "efac:SettledContract", namespaces=namespaces,
+            "efac:SettledContract",
+            namespaces=namespaces,
         )
 
         for settled_contract in settled_contracts:
             contract_id = settled_contract.xpath(
-                "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces,
+                "cbc:ID[@schemeName='contract']/text()",
+                namespaces=namespaces,
             )[0]
             lot_tender_id = settled_contract.xpath(
                 "efac:LotTender/cbc:ID[@schemeName='tender']/text()",
@@ -57,7 +59,8 @@ def parse_contract_tender_id(xml_content):
 
             for tenderer in tenderers:
                 organization_id = tenderer.xpath(
-                    "cbc:ID[@schemeName='organization']/text()", namespaces=namespaces,
+                    "cbc:ID[@schemeName='organization']/text()",
+                    namespaces=namespaces,
                 )[0]
 
                 party = {"id": organization_id, "roles": ["supplier"]}
@@ -70,7 +73,8 @@ def parse_contract_tender_id(xml_content):
 
                 for lot_result in lot_results:
                     award_id = lot_result.xpath(
-                        "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
+                        "cbc:ID[@schemeName='result']/text()",
+                        namespaces=namespaces,
                     )[0]
                     lot_id = lot_result.xpath(
                         "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",

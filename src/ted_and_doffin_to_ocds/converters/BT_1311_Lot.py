@@ -23,7 +23,8 @@ def parse_deadline_receipt_requests(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
     logger.info(f"Found {len(lots)} lots in XML for Deadline Receipt Requests")
 
@@ -104,7 +105,8 @@ def merge_deadline_receipt_requests(release_json, deadline_data):
 
     for new_lot in deadline_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("tenderPeriod", {}).update(new_lot["tenderPeriod"])

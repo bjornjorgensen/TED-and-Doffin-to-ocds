@@ -27,7 +27,8 @@ def parse_beneficial_owner_reference(xml_content):
             namespaces=namespaces,
         )
         ubo_id = org.xpath(
-            ".//efac:UltimateBeneficialOwner/cbc:ID/text()", namespaces=namespaces,
+            ".//efac:UltimateBeneficialOwner/cbc:ID/text()",
+            namespaces=namespaces,
         )
 
         if org_id and ubo_id:

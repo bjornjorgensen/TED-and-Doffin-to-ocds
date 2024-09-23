@@ -67,11 +67,13 @@ def parse_irregularity_type(xml_content):
     id_counter = 1
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
+        "//efac:NoticeResult/efac:LotResult",
+        namespaces=namespaces,
     )
     for lot_result in lot_results:
         lot_id = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+            namespaces=namespaces,
         )
         if not lot_id:
             continue
@@ -87,7 +89,8 @@ def parse_irregularity_type(xml_content):
                 "scope": "complaints",
                 "relatedLot": lot_id[0],
                 "notes": IRREGULARITY_TYPE_MAPPING.get(
-                    irregularity_type, "Unknown irregularity type",
+                    irregularity_type,
+                    "Unknown irregularity type",
                 ),
             }
             result["statistics"].append(statistic)

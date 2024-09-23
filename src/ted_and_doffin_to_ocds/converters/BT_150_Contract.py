@@ -22,15 +22,18 @@ def parse_contract_identifier(xml_content):
     contracts = []
 
     settled_contracts = root.xpath(
-        "//efac:NoticeResult/efac:SettledContract", namespaces=namespaces,
+        "//efac:NoticeResult/efac:SettledContract",
+        namespaces=namespaces,
     )
 
     for settled_contract in settled_contracts:
         contract_id = settled_contract.xpath(
-            "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces,
+            "cbc:ID[@schemeName='contract']/text()",
+            namespaces=namespaces,
         )
         contract_reference = settled_contract.xpath(
-            "efac:ContractReference/cbc:ID/text()", namespaces=namespaces,
+            "efac:ContractReference/cbc:ID/text()",
+            namespaces=namespaces,
         )
 
         if contract_id and contract_reference:
@@ -41,7 +44,8 @@ def parse_contract_identifier(xml_content):
             )
             award_id = (
                 lot_result[0].xpath(
-                    "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
+                    "cbc:ID[@schemeName='result']/text()",
+                    namespaces=namespaces,
                 )
                 if lot_result
                 else None

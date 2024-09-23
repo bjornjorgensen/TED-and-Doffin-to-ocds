@@ -23,7 +23,8 @@ def parse_gpa_coverage(xml_content):
 
     # Process lots (BT-115-Lot)
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
@@ -38,7 +39,8 @@ def parse_gpa_coverage(xml_content):
 
     # Process part (BT-115-Part)
     part = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
+        namespaces=namespaces,
     )
     if part:
         gpa_coverage = part[0].xpath(
@@ -63,7 +65,8 @@ def merge_gpa_coverage(release_json, gpa_coverage_data):
         existing_lots = tender.setdefault("lots", [])
         for new_lot in gpa_coverage_data["tender"]["lots"]:
             existing_lot = next(
-                (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+                (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+                None,
             )
             if existing_lot:
                 existing_lot.setdefault("coveredBy", []).extend(new_lot["coveredBy"])

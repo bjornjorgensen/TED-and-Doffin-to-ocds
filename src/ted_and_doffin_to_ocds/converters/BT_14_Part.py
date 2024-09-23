@@ -47,12 +47,14 @@ def merge_part_documents_restricted(release_json, part_documents_restricted_data
         return
 
     existing_documents = release_json.setdefault("tender", {}).setdefault(
-        "documents", [],
+        "documents",
+        [],
     )
 
     for new_document in part_documents_restricted_data["tender"]["documents"]:
         existing_document = next(
-            (doc for doc in existing_documents if doc["id"] == new_document["id"]), None,
+            (doc for doc in existing_documents if doc["id"] == new_document["id"]),
+            None,
         )
         if existing_document:
             existing_document.update(new_document)

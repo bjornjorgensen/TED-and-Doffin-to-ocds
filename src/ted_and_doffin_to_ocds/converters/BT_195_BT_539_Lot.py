@@ -40,7 +40,8 @@ def parse_bt195_bt539_unpublished_identifier(xml_content):
             namespaces=namespaces,
         )
         field_identifier = fields_privacy.xpath(
-            "efbc:FieldIdentifierCode/text()", namespaces=namespaces,
+            "efbc:FieldIdentifierCode/text()",
+            namespaces=namespaces,
         )
 
         if lot_id and field_identifier:

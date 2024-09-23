@@ -33,7 +33,8 @@ def parse_bt198_bt711_unpublished_access_date(xml_content):
     result = {"withheldInformation": []}
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
+        "//efac:NoticeResult/efac:LotResult",
+        namespaces=namespaces,
     )
 
     for lot_result in lot_results:
@@ -44,10 +45,12 @@ def parse_bt198_bt711_unpublished_access_date(xml_content):
 
         if fields_privacy:
             publication_date = fields_privacy[0].xpath(
-                "efbc:PublicationDate/text()", namespaces=namespaces,
+                "efbc:PublicationDate/text()",
+                namespaces=namespaces,
             )
             lot_id = lot_result.xpath(
-                "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
+                "cbc:ID[@schemeName='result']/text()",
+                namespaces=namespaces,
             )
 
             if publication_date and lot_id:
@@ -63,7 +66,8 @@ def parse_bt198_bt711_unpublished_access_date(xml_content):
 
 
 def merge_bt198_bt711_unpublished_access_date(
-    release_json, unpublished_access_date_data,
+    release_json,
+    unpublished_access_date_data,
 ):
     """
     Merge the parsed unpublished access date data into the main OCDS release JSON.
@@ -83,7 +87,8 @@ def merge_bt198_bt711_unpublished_access_date(
 
     for new_item in unpublished_access_date_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item.get("id") == new_item["id"]), None,
+            (item for item in withheld_info if item.get("id") == new_item["id"]),
+            None,
         )
         if existing_item:
             existing_item["availabilityDate"] = new_item["availabilityDate"]

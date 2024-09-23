@@ -22,10 +22,12 @@ def parse_buyer_profile_url(xml_content):
 
     for party in contracting_parties:
         buyer_profile_uri = party.xpath(
-            "cbc:BuyerProfileURI/text()", namespaces=namespaces,
+            "cbc:BuyerProfileURI/text()",
+            namespaces=namespaces,
         )
         org_id = party.xpath(
-            "cac:Party/cac:PartyIdentification/cbc:ID/text()", namespaces=namespaces,
+            "cac:Party/cac:PartyIdentification/cbc:ID/text()",
+            namespaces=namespaces,
         )
 
         if buyer_profile_uri and org_id:

@@ -54,7 +54,8 @@ def parse_subcontracting_obligation(xml_content: bytes):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -96,7 +97,8 @@ def merge_subcontracting_obligation(release_json, subcontracting_obligation_data
 
     for new_lot in subcontracting_obligation_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("subcontractingTerms", {}).update(

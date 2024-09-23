@@ -43,15 +43,18 @@ def parse_vehicle_category(xml_content):
     result = {"awards": []}
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
+        "//efac:NoticeResult/efac:LotResult",
+        namespaces=namespaces,
     )
 
     for lot_result in lot_results:
         result_id = lot_result.xpath(
-            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
+            "cbc:ID[@schemeName='result']/text()",
+            namespaces=namespaces,
         )
         lot_id = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+            namespaces=namespaces,
         )
         vehicle_category = lot_result.xpath(
             "efac:StrategicProcurement/efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:AssetCategoryCode[@listName='vehicle-category']/text()",
@@ -70,7 +73,8 @@ def parse_vehicle_category(xml_content):
                                 "scheme": "eu-vehicle-category",
                                 "id": vehicle_category[0],
                                 "description": VEHICLE_CATEGORY_MAPPING.get(
-                                    vehicle_category[0].lower(), "Unknown",
+                                    vehicle_category[0].lower(),
+                                    "Unknown",
                                 ),
                             },
                         ],

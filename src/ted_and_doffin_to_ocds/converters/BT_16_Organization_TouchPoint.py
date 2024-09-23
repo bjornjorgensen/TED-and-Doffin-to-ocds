@@ -44,7 +44,8 @@ def parse_organization_touchpoint_part_name(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces,
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -60,10 +61,12 @@ def parse_organization_touchpoint_part_name(xml_content):
                 namespaces=namespaces,
             )
             org_name = touchpoint[0].xpath(
-                "cac:PartyName/cbc:Name/text()", namespaces=namespaces,
+                "cac:PartyName/cbc:Name/text()",
+                namespaces=namespaces,
             )
             department = touchpoint[0].xpath(
-                "cac:PostalAddress/cbc:Department/text()", namespaces=namespaces,
+                "cac:PostalAddress/cbc:Department/text()",
+                namespaces=namespaces,
             )
 
             if touchpoint_id and org_name:
@@ -85,7 +88,8 @@ def parse_organization_touchpoint_part_name(xml_content):
 
 
 def merge_organization_touchpoint_part_name(
-    release_json, organization_touchpoint_part_name_data,
+    release_json,
+    organization_touchpoint_part_name_data,
 ):
     """
     Merge the parsed organization touchpoint part name data into the main OCDS release JSON.

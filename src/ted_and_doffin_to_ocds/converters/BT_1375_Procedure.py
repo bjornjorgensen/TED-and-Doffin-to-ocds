@@ -22,7 +22,8 @@ def parse_group_lot_identifier(xml_content):
     result = {"tender": {"lotGroups": []}}
 
     lots_groups = root.xpath(
-        "//cac:TenderingTerms/cac:LotDistribution/cac:LotsGroup", namespaces=namespaces,
+        "//cac:TenderingTerms/cac:LotDistribution/cac:LotsGroup",
+        namespaces=namespaces,
     )
 
     for group in lots_groups:
@@ -45,7 +46,8 @@ def merge_group_lot_identifier(release_json, group_lot_data):
         return
 
     existing_lot_groups = release_json.setdefault("tender", {}).setdefault(
-        "lotGroups", [],
+        "lotGroups",
+        [],
     )
 
     for new_group in group_lot_data["tender"]["lotGroups"]:

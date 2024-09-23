@@ -22,7 +22,8 @@ def parse_main_nature_procedure(xml_content):
     result = {"tender": {}}
 
     procurement_type = root.xpath(
-        "//cac:ProcurementProject/cbc:ProcurementTypeCode/text()", namespaces=namespaces,
+        "//cac:ProcurementProject/cbc:ProcurementTypeCode/text()",
+        namespaces=namespaces,
     )
 
     if procurement_type:

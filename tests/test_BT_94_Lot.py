@@ -79,13 +79,15 @@ def test_bt_94_lot_recurrence_integration(tmp_path):
     assert len(result["tender"]["lots"]) == 2
 
     lot_1 = next(
-        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0001"), None,
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0001"),
+        None,
     )
     assert lot_1 is not None
     assert lot_1["hasRecurrence"] is True
 
     lot_2 = next(
-        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002"), None,
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002"),
+        None,
     )
     assert lot_2 is not None
     assert lot_2["hasRecurrence"] is False

@@ -49,7 +49,8 @@ def parse_documents_restricted_url(xml_content):
     result = {"tender": {"documents": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -96,12 +97,14 @@ def merge_documents_restricted_url(release_json, documents_data):
         return
 
     existing_documents = release_json.setdefault("tender", {}).setdefault(
-        "documents", [],
+        "documents",
+        [],
     )
 
     for new_doc in documents_data["tender"]["documents"]:
         existing_doc = next(
-            (doc for doc in existing_documents if doc["id"] == new_doc["id"]), None,
+            (doc for doc in existing_documents if doc["id"] == new_doc["id"]),
+            None,
         )
         if existing_doc:
             existing_doc["accessDetailsURL"] = new_doc["accessDetailsURL"]

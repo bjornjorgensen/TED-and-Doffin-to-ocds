@@ -76,10 +76,12 @@ def test_bt_03_form_type_integration_invalid(tmp_path):
         result = json.load(f)
 
     assert "tag" not in result or "tender" not in result.get(
-        "tag", [],
+        "tag",
+        [],
     ), "Expected no 'tender' tag for invalid form type"
     assert "status" not in result.get(
-        "tender", {},
+        "tender",
+        {},
     ), "Expected no tender status for invalid form type"
 
 

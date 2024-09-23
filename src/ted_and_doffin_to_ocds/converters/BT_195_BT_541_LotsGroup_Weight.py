@@ -44,10 +44,12 @@ def parse_bt195_bt541_lotsgroup_weight(xml_content):
 
     for element in fields_privacy_elements:
         lot_id = element.xpath(
-            "ancestor::cac:ProcurementProjectLot/cbc:ID/text()", namespaces=namespaces,
+            "ancestor::cac:ProcurementProjectLot/cbc:ID/text()",
+            namespaces=namespaces,
         )[0]
         field_identifier = element.xpath(
-            "efbc:FieldIdentifierCode/text()", namespaces=namespaces,
+            "efbc:FieldIdentifierCode/text()",
+            namespaces=namespaces,
         )[0]
 
         withheld_info = {

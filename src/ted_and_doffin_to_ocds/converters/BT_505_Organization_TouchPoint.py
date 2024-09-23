@@ -22,7 +22,8 @@ def parse_touchpoint_website(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces,
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -31,7 +32,8 @@ def parse_touchpoint_website(xml_content):
             namespaces=namespaces,
         )
         website_uri = organization.xpath(
-            "efac:TouchPoint/cbc:WebsiteURI/text()", namespaces=namespaces,
+            "efac:TouchPoint/cbc:WebsiteURI/text()",
+            namespaces=namespaces,
         )
         company_id = organization.xpath(
             "efac:Company/cac:PartyLegalEntity/cbc:CompanyID/text()",

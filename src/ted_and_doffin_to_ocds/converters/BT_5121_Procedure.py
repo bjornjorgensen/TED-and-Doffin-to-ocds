@@ -39,7 +39,8 @@ def merge_place_performance_post_code_procedure(release_json, post_code_data):
         return
 
     existing_addresses = release_json.setdefault("tender", {}).setdefault(
-        "deliveryAddresses", [],
+        "deliveryAddresses",
+        [],
     )
 
     for new_address in post_code_data["tender"]["deliveryAddresses"]:

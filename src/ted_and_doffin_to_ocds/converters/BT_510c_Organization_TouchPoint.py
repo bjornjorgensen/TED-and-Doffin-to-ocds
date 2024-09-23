@@ -22,7 +22,8 @@ def parse_touchpoint_streetline2(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces,
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -39,7 +40,8 @@ def parse_touchpoint_streetline2(xml_content):
 
             if touchpoint_id:
                 street_name = touchpoint[0].xpath(
-                    "cac:PostalAddress/cbc:StreetName/text()", namespaces=namespaces,
+                    "cac:PostalAddress/cbc:StreetName/text()",
+                    namespaces=namespaces,
                 )
                 additional_street_name = touchpoint[0].xpath(
                     "cac:PostalAddress/cbc:AdditionalStreetName/text()",

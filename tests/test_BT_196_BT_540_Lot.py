@@ -79,7 +79,8 @@ def test_bt196_bt540_lot_unpublished_justification_integration(tmp_path, setup_l
 
 
 def test_bt196_bt540_lot_unpublished_justification_missing_data(
-    tmp_path, setup_logging,
+    tmp_path,
+    setup_logging,
 ):
     logger = setup_logging
     xml_content = """

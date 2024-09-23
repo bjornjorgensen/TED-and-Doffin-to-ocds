@@ -32,7 +32,8 @@ def parse_lot_eu_funds(xml_content):
     result = {"lots": []}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -79,7 +80,8 @@ def merge_lot_eu_funds(release_json, lot_eu_funds_data):
 
     for new_lot in lot_eu_funds_data["lots"]:
         existing_lot = next(
-            (lot for lot in release_json["lots"] if lot["id"] == new_lot["id"]), None,
+            (lot for lot in release_json["lots"] if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             if "planning" not in existing_lot:

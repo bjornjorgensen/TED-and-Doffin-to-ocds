@@ -45,7 +45,8 @@ def parse_bt195_bt5422_lotsgroup(xml_content):
 
     for field_identifier_code in field_identifier_codes:
         lots_group_id = field_identifier_code.xpath(
-            "ancestor::cac:ProcurementProjectLot/cbc:ID/text()", namespaces=namespaces,
+            "ancestor::cac:ProcurementProjectLot/cbc:ID/text()",
+            namespaces=namespaces,
         )[0]
 
         withheld_info = {

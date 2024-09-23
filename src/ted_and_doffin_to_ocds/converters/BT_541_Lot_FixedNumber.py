@@ -22,7 +22,8 @@ def parse_award_criterion_fixed_number(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -61,11 +62,13 @@ def merge_award_criterion_fixed_number(release_json, award_criterion_fixed_numbe
 
     for new_lot in award_criterion_fixed_number_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_criteria = existing_lot.setdefault("awardCriteria", {}).setdefault(
-                "criteria", [],
+                "criteria",
+                [],
             )
             if existing_criteria:
                 existing_criterion = existing_criteria[0]

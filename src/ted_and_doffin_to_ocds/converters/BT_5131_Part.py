@@ -22,7 +22,8 @@ def parse_place_performance_city_part(xml_content):
     result = {"tender": {"deliveryAddresses": []}}
 
     parts = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
+        namespaces=namespaces,
     )
 
     for part in parts:
@@ -43,7 +44,8 @@ def merge_place_performance_city_part(release_json, place_performance_city_part_
         return
 
     tender_delivery_addresses = release_json.setdefault("tender", {}).setdefault(
-        "deliveryAddresses", [],
+        "deliveryAddresses",
+        [],
     )
 
     for new_address in place_performance_city_part_data["tender"]["deliveryAddresses"]:

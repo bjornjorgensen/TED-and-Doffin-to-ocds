@@ -19,7 +19,8 @@ def parse_procedure_title(xml_content):
     result = {"tender": {}}
 
     procedure_title = root.xpath(
-        "/*/cac:ProcurementProject/cbc:Name/text()", namespaces=namespaces,
+        "/*/cac:ProcurementProject/cbc:Name/text()",
+        namespaces=namespaces,
     )
 
     if procedure_title:

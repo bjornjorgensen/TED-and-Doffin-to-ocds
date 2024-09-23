@@ -29,7 +29,8 @@ def parse_submission_nonelectronic_justification(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -63,11 +64,13 @@ def merge_submission_nonelectronic_justification(release_json, justification_dat
 
     for new_lot in justification_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("submissionTerms", {}).setdefault(
-                "nonElectronicSubmission", {},
+                "nonElectronicSubmission",
+                {},
             ).update(new_lot["submissionTerms"]["nonElectronicSubmission"])
         else:
             existing_lots.append(new_lot)

@@ -47,7 +47,8 @@ def parse_subcontracting_obligation_minimum(xml_content: bytes):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -76,7 +77,8 @@ def parse_subcontracting_obligation_minimum(xml_content: bytes):
 
 
 def merge_subcontracting_obligation_minimum(
-    release_json, subcontracting_obligation_minimum_data,
+    release_json,
+    subcontracting_obligation_minimum_data,
 ):
     """
     Merge the parsed subcontracting obligation minimum data into the main OCDS release JSON.
@@ -97,7 +99,8 @@ def merge_subcontracting_obligation_minimum(
 
     for new_lot in subcontracting_obligation_minimum_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("subcontractingTerms", {}).update(

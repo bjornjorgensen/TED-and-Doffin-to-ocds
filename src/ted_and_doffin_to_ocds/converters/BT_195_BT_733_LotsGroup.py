@@ -44,7 +44,8 @@ def parse_bt195_bt733_lotsgroup_unpublished_identifier(xml_content):
 
         if fields_privacy:
             field_identifier = fields_privacy[0].xpath(
-                "efbc:FieldIdentifierCode/text()", namespaces=namespaces,
+                "efbc:FieldIdentifierCode/text()",
+                namespaces=namespaces,
             )
             group_id = lots_group.xpath("cbc:ID/text()", namespaces=namespaces)
 
@@ -60,7 +61,8 @@ def parse_bt195_bt733_lotsgroup_unpublished_identifier(xml_content):
 
 
 def merge_bt195_bt733_lotsgroup_unpublished_identifier(
-    release_json, unpublished_identifier_data,
+    release_json,
+    unpublished_identifier_data,
 ):
     """
     Merge the parsed unpublished identifier data into the main OCDS release JSON.

@@ -57,7 +57,8 @@ def parse_variants(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -69,7 +70,8 @@ def parse_variants(xml_content):
 
         if variant_constraint:
             variant_policy = VARIANT_POLICY_MAPPING.get(
-                variant_constraint[0], "Unknown",
+                variant_constraint[0],
+                "Unknown",
             )
             lot_data = {
                 "id": lot_id,
@@ -102,7 +104,8 @@ def merge_variants(release_json, variants_data):
 
     for new_lot in variants_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("submissionTerms", {}).update(

@@ -22,11 +22,13 @@ def parse_awarding_cpb_buyer_indicator(xml_content):
     result = {"procuringEntityIds": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces,
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
     for org in organizations:
         awarding_indicator = org.xpath(
-            "efbc:AwardingCPBIndicator/text()", namespaces=namespaces,
+            "efbc:AwardingCPBIndicator/text()",
+            namespaces=namespaces,
         )
         if awarding_indicator and awarding_indicator[0].lower() == "true":
             org_id = org.xpath(

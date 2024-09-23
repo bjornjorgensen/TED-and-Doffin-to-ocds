@@ -78,7 +78,8 @@ def parse_employment_legislation_document_reference(xml_content):
 
 
 def merge_employment_legislation_document_reference(
-    release_json, employment_legislation_data,
+    release_json,
+    employment_legislation_data,
 ):
     if not employment_legislation_data:
         logger.warning("No Employment Legislation Document Reference data to merge")
@@ -100,12 +101,14 @@ def merge_employment_legislation_document_reference(
 
     # Merge documents
     existing_documents = release_json.setdefault("tender", {}).setdefault(
-        "documents", [],
+        "documents",
+        [],
     )
 
     for new_document in employment_legislation_data["tender"].get("documents", []):
         existing_document = next(
-            (doc for doc in existing_documents if doc["id"] == new_document["id"]), None,
+            (doc for doc in existing_documents if doc["id"] == new_document["id"]),
+            None,
         )
         if existing_document:
             existing_document["publisher"] = new_document["publisher"]

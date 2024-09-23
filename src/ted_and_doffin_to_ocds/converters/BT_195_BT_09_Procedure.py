@@ -32,7 +32,8 @@ def bt_195_parse_unpublished_identifier_bt_09_procedure(xml_content):
     result = {"withheldInformation": []}
 
     contract_folder_id = root.xpath(
-        "//cbc:ContractFolderID/text()", namespaces=namespaces,
+        "//cbc:ContractFolderID/text()",
+        namespaces=namespaces,
     )
     if not contract_folder_id:
         logger.warning("ContractFolderID not found in the XML")
@@ -57,7 +58,8 @@ def bt_195_parse_unpublished_identifier_bt_09_procedure(xml_content):
 
 
 def bt_195_merge_unpublished_identifier_bt_09_procedure(
-    release_json, unpublished_identifier_data,
+    release_json,
+    unpublished_identifier_data,
 ):
     """
     Merge the parsed unpublished identifier data into the main OCDS release JSON.
@@ -77,7 +79,8 @@ def bt_195_merge_unpublished_identifier_bt_09_procedure(
 
     for item in unpublished_identifier_data["withheldInformation"]:
         existing_item = next(
-            (x for x in withheld_information if x["id"] == item["id"]), None,
+            (x for x in withheld_information if x["id"] == item["id"]),
+            None,
         )
         if existing_item:
             existing_item.update(item)

@@ -32,7 +32,8 @@ def parse_bt195_bt162_unpublished_identifier(xml_content):
     result = {"withheldInformation": []}
 
     lot_tenders = root.xpath(
-        "//efac:NoticeResult/efac:LotTender", namespaces=namespaces,
+        "//efac:NoticeResult/efac:LotTender",
+        namespaces=namespaces,
     )
 
     for lot_tender in lot_tenders:

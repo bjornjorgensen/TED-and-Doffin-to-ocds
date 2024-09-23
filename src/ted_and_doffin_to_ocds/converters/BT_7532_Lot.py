@@ -38,7 +38,8 @@ def parse_selection_criteria_number_threshold(
     result: dict[str, dict[str, list[dict]]] = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -62,7 +63,8 @@ def parse_selection_criteria_number_threshold(
 
             for parameter in parameters:
                 threshold_code: str = parameter.xpath(
-                    "efbc:ParameterCode/text()", namespaces=namespaces,
+                    "efbc:ParameterCode/text()",
+                    namespaces=namespaces,
                 )[0]
                 threshold_value: str | None = threshold_mapping.get(threshold_code)
 
@@ -79,7 +81,8 @@ def parse_selection_criteria_number_threshold(
 
 
 def merge_selection_criteria_number_threshold(
-    release_json: dict, parsed_data: dict | None,
+    release_json: dict,
+    parsed_data: dict | None,
 ) -> None:
     """
     Merge the parsed selection criteria number threshold data into the main OCDS release JSON.
@@ -96,16 +99,19 @@ def merge_selection_criteria_number_threshold(
         return
 
     tender_lots: list[dict] = release_json.setdefault("tender", {}).setdefault(
-        "lots", [],
+        "lots",
+        [],
     )
 
     for new_lot in parsed_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in tender_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in tender_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_criteria = existing_lot.setdefault(
-                "selectionCriteria", {},
+                "selectionCriteria",
+                {},
             ).setdefault("criteria", [])
             for new_criterion in new_lot["selectionCriteria"]["criteria"]:
                 existing_criterion = next(

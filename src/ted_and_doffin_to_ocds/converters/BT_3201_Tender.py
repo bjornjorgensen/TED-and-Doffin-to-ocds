@@ -42,15 +42,18 @@ def parse_tender_identifier(xml_content):
     result = {"bids": {"details": []}}
 
     lot_tenders = root.xpath(
-        "//efac:NoticeResult/efac:LotTender", namespaces=namespaces,
+        "//efac:NoticeResult/efac:LotTender",
+        namespaces=namespaces,
     )
 
     for lot_tender in lot_tenders:
         tender_id = lot_tender.xpath(
-            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces,
+            "cbc:ID[@schemeName='tender']/text()",
+            namespaces=namespaces,
         )
         tender_reference = lot_tender.xpath(
-            "efac:TenderReference/cbc:ID/text()", namespaces=namespaces,
+            "efac:TenderReference/cbc:ID/text()",
+            namespaces=namespaces,
         )
 
         if tender_id and tender_reference:
@@ -78,7 +81,8 @@ def merge_tender_identifier(release_json, tender_identifier_data):
 
     for new_bid in tender_identifier_data["bids"]["details"]:
         existing_bid = next(
-            (bid for bid in existing_bids if bid["id"] == new_bid["id"]), None,
+            (bid for bid in existing_bids if bid["id"] == new_bid["id"]),
+            None,
         )
         if existing_bid:
             existing_bid.setdefault("identifiers", []).extend(new_bid["identifiers"])

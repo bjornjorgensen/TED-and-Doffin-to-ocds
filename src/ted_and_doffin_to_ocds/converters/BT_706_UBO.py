@@ -90,7 +90,8 @@ def parse_ubo_nationality(xml_content: str) -> dict | None:
     for ubo in ubo_nationality:
         ubo_id = ubo.xpath("cbc:ID[@schemeName='ubo']/text()", namespaces=namespaces)
         nationality = ubo.xpath(
-            "efac:Nationality/cbc:NationalityID/text()", namespaces=namespaces,
+            "efac:Nationality/cbc:NationalityID/text()",
+            namespaces=namespaces,
         )
 
         if ubo_id and nationality:
@@ -111,7 +112,8 @@ def parse_ubo_nationality(xml_content: str) -> dict | None:
 
 
 def merge_ubo_nationality(
-    release_json: dict, ubo_nationality_data: dict | None,
+    release_json: dict,
+    ubo_nationality_data: dict | None,
 ) -> None:
     """
     Merge the parsed UBO nationality data into the main OCDS release JSON.

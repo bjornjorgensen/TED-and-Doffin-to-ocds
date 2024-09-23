@@ -22,12 +22,14 @@ def parse_dps_termination(xml_content):
     result = {"lots": []}
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
+        "//efac:NoticeResult/efac:LotResult",
+        namespaces=namespaces,
     )
 
     for lot_result in lot_results:
         dps_termination = lot_result.xpath(
-            "efbc:DPSTerminationIndicator/text()", namespaces=namespaces,
+            "efbc:DPSTerminationIndicator/text()",
+            namespaces=namespaces,
         )
         if dps_termination and dps_termination[0].lower() == "true":
             lot_id = lot_result.xpath(
@@ -57,7 +59,8 @@ def merge_dps_termination(release_json, dps_termination_data):
 
     for new_lot in dps_termination_data["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("techniques", {})["dynamicPurchasingSystem"] = (

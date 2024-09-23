@@ -22,7 +22,8 @@ def parse_no_negotiation_necessary(xml_content):
     result = {"lots": []}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -55,7 +56,8 @@ def merge_no_negotiation_necessary(release_json, no_negotiation_data):
 
     for new_lot in no_negotiation_data["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("secondStage", {})["noNegotiationNecessary"] = (

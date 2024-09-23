@@ -20,7 +20,8 @@ def parse_contract_modification_description(xml_content):
     result = {"contracts": []}
 
     contract_modifications = root.xpath(
-        "//efac:ContractModification", namespaces=namespaces,
+        "//efac:ContractModification",
+        namespaces=namespaces,
     )
 
     for modification in contract_modifications:
@@ -29,7 +30,8 @@ def parse_contract_modification_description(xml_content):
             namespaces=namespaces,
         )
         reason_description = modification.xpath(
-            "efac:ChangeReason/efbc:ReasonDescription/text()", namespaces=namespaces,
+            "efac:ChangeReason/efbc:ReasonDescription/text()",
+            namespaces=namespaces,
         )
 
         if contract_id and reason_description:
@@ -47,18 +49,21 @@ def parse_contract_modification_description(xml_content):
             )
             if len(lot_results) == 1:
                 award_id = lot_results[0].xpath(
-                    "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
+                    "cbc:ID[@schemeName='result']/text()",
+                    namespaces=namespaces,
                 )
                 if award_id:
                     contract["awardID"] = award_id[0]
             elif len(lot_results) > 1:
                 contract["awardIDs"] = [
                     result.xpath(
-                        "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
+                        "cbc:ID[@schemeName='result']/text()",
+                        namespaces=namespaces,
                     )[0]
                     for result in lot_results
                     if result.xpath(
-                        "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
+                        "cbc:ID[@schemeName='result']/text()",
+                        namespaces=namespaces,
                     )
                 ]
 

@@ -64,7 +64,10 @@ def test_merge_place_performance_city_part():
 
     new_data = {
         "tender": {
-            "deliveryAddresses": [{"locality": "New York"}, {"locality": "Los Angeles"}],
+            "deliveryAddresses": [
+                {"locality": "New York"},
+                {"locality": "Los Angeles"},
+            ],
         },
     }
 

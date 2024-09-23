@@ -91,18 +91,21 @@ def test_bt_736_lot_reserved_execution_integration(tmp_path):
     assert len(result["tender"]["lots"]) == 2
 
     lot_1 = next(
-        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0001"), None,
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0001"),
+        None,
     )
     assert lot_1 is not None
     assert "contractTerms" in lot_1
     assert lot_1["contractTerms"].get("reservedExecution") is True
 
     lot_2 = next(
-        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002"), None,
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002"),
+        None,
     )
     assert lot_2 is not None
     assert "contractTerms" not in lot_2 or "reservedExecution" not in lot_2.get(
-        "contractTerms", {},
+        "contractTerms",
+        {},
     )
 
 

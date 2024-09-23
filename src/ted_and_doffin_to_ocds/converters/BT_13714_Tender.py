@@ -25,10 +25,12 @@ def parse_tender_lot_identifier(xml_content):
 
     for lot_tender in lot_tenders:
         tender_id = lot_tender.xpath(
-            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces,
+            "cbc:ID[@schemeName='tender']/text()",
+            namespaces=namespaces,
         )
         lot_id = lot_tender.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+            namespaces=namespaces,
         )
 
         if tender_id and lot_id:
@@ -47,7 +49,8 @@ def merge_tender_lot_identifier(release_json, tender_lot_identifier_data):
 
     for new_bid in tender_lot_identifier_data["bids"]["details"]:
         existing_bid = next(
-            (bid for bid in existing_bids if bid["id"] == new_bid["id"]), None,
+            (bid for bid in existing_bids if bid["id"] == new_bid["id"]),
+            None,
         )
         if existing_bid:
             existing_bid.setdefault("relatedLots", []).extend(

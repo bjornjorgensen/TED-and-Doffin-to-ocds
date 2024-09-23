@@ -61,7 +61,8 @@ def merge_procurement_documents(release_json, procurement_docs_data):
 
     for new_doc in procurement_docs_data["tender"]["documents"]:
         existing_doc = next(
-            (doc for doc in existing_documents if doc["id"] == new_doc["id"]), None,
+            (doc for doc in existing_documents if doc["id"] == new_doc["id"]),
+            None,
         )
         if existing_doc:
             if "relatedLots" in new_doc:

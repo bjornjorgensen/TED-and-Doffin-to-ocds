@@ -68,7 +68,8 @@ def parse_contract_xml(xml_content):
 
     for contracting_party in contracting_parties:
         party_id_elements = contracting_party.xpath(
-            ".//cac:PartyIdentification/cbc:ID", namespaces=namespaces,
+            ".//cac:PartyIdentification/cbc:ID",
+            namespaces=namespaces,
         )
         if not party_id_elements:
             logger.warning("Skipping contracting party without ID")

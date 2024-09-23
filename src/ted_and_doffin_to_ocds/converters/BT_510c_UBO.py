@@ -22,7 +22,8 @@ def parse_ubo_streetline2(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces,
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -40,7 +41,8 @@ def parse_ubo_streetline2(xml_content):
 
             for ubo in ubos:
                 ubo_id = ubo.xpath(
-                    "cbc:ID[@schemeName='ubo']/text()", namespaces=namespaces,
+                    "cbc:ID[@schemeName='ubo']/text()",
+                    namespaces=namespaces,
                 )
 
                 if ubo_id:
@@ -94,7 +96,8 @@ def merge_ubo_streetline2(release_json, ubo_streetline2_data):
         )
         if existing_party:
             existing_beneficial_owners = existing_party.setdefault(
-                "beneficialOwners", [],
+                "beneficialOwners",
+                [],
             )
             for new_bo in new_party["beneficialOwners"]:
                 existing_bo = next(

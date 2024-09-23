@@ -44,7 +44,8 @@ def parse_bt198_bt773_tender_unpublished_access_date(xml_content):
             namespaces=namespaces,
         )
         publication_date = field_privacy.xpath(
-            "efbc:PublicationDate/text()", namespaces=namespaces,
+            "efbc:PublicationDate/text()",
+            namespaces=namespaces,
         )
 
         if lot_tender_id and publication_date:
@@ -59,7 +60,8 @@ def parse_bt198_bt773_tender_unpublished_access_date(xml_content):
 
 
 def merge_bt198_bt773_tender_unpublished_access_date(
-    release_json, unpublished_access_date_data,
+    release_json,
+    unpublished_access_date_data,
 ):
     """
     Merge the parsed unpublished access date data into the main OCDS release JSON.
@@ -81,7 +83,8 @@ def merge_bt198_bt773_tender_unpublished_access_date(
 
     for new_item in unpublished_access_date_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item.get("id") == new_item["id"]), None,
+            (item for item in withheld_info if item.get("id") == new_item["id"]),
+            None,
         )
         if existing_item:
             existing_item["availabilityDate"] = new_item["availabilityDate"]

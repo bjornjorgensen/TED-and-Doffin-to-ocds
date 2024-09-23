@@ -22,7 +22,8 @@ def parse_organization_contact_point(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces,
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -31,7 +32,8 @@ def parse_organization_contact_point(xml_content):
             namespaces=namespaces,
         )
         contact_name = organization.xpath(
-            "efac:Company/cac:Contact/cbc:Name/text()", namespaces=namespaces,
+            "efac:Company/cac:Contact/cbc:Name/text()",
+            namespaces=namespaces,
         )
 
         if org_id and contact_name:

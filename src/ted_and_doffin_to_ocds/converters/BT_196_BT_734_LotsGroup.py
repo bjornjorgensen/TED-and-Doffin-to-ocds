@@ -45,7 +45,8 @@ def parse_bt196_bt734_lotsgroup_unpublished_justification(xml_content):
             namespaces=namespaces,
         )
         reason_description = field_privacy.xpath(
-            "efbc:ReasonDescription/text()", namespaces=namespaces,
+            "efbc:ReasonDescription/text()",
+            namespaces=namespaces,
         )
 
         if lot_group_id and reason_description:
@@ -59,7 +60,8 @@ def parse_bt196_bt734_lotsgroup_unpublished_justification(xml_content):
 
 
 def merge_bt196_bt734_lotsgroup_unpublished_justification(
-    release_json, unpublished_justification_data,
+    release_json,
+    unpublished_justification_data,
 ):
     """
     Merge the parsed unpublished justification data into the main OCDS release JSON.
@@ -81,7 +83,8 @@ def merge_bt196_bt734_lotsgroup_unpublished_justification(
 
     for new_item in unpublished_justification_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item.get("id") == new_item["id"]), None,
+            (item for item in withheld_info if item.get("id") == new_item["id"]),
+            None,
         )
         if existing_item:
             existing_item["rationale"] = new_item["rationale"]

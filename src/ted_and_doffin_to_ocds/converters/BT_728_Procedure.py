@@ -45,7 +45,8 @@ def parse_procedure_place_performance_additional(xml_content):
 
 
 def merge_procedure_place_performance_additional(
-    release_json, procedure_place_performance_additional_data,
+    release_json,
+    procedure_place_performance_additional_data,
 ):
     """
     Merge the parsed additional place of performance data for the procurement procedure into the main OCDS release JSON.

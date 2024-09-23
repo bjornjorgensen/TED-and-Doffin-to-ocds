@@ -22,17 +22,20 @@ def parse_part_place_performance_country_subdivision(xml_content):
     result = {"tender": {"deliveryAddresses": []}}
 
     parts = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']", namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
+        namespaces=namespaces,
     )
 
     for part in parts:
         realized_locations = part.xpath(
-            "cac:ProcurementProject/cac:RealizedLocation", namespaces=namespaces,
+            "cac:ProcurementProject/cac:RealizedLocation",
+            namespaces=namespaces,
         )
 
         for location in realized_locations:
             country_subdivision = location.xpath(
-                "cac:Address/cbc:CountrySubentityCode/text()", namespaces=namespaces,
+                "cac:Address/cbc:CountrySubentityCode/text()",
+                namespaces=namespaces,
             )
 
             if country_subdivision:
@@ -49,7 +52,8 @@ def merge_part_place_performance_country_subdivision(release_json, part_data):
         return
 
     tender_delivery_addresses = release_json.setdefault("tender", {}).setdefault(
-        "deliveryAddresses", [],
+        "deliveryAddresses",
+        [],
     )
 
     for new_address in part_data["tender"]["deliveryAddresses"]:

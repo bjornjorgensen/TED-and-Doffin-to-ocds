@@ -18,7 +18,8 @@ def setup_logging():
 
 
 def test_bt198_bt541_lotsgroup_fixed_unpublished_access_date_integration(
-    tmp_path, setup_logging,
+    tmp_path,
+    setup_logging,
 ):
     logger = setup_logging
     xml_content = """
@@ -170,7 +171,9 @@ def test_bt198_bt541_lotsgroup_fixed_multiple_groups(tmp_path, setup_logging):
     ]
 
     for withheld_item, expected in zip(
-        result["withheldInformation"], expected_data, strict=False,
+        result["withheldInformation"],
+        expected_data,
+        strict=False,
     ):
         assert (
             withheld_item["id"] == expected["id"]
@@ -181,7 +184,8 @@ def test_bt198_bt541_lotsgroup_fixed_multiple_groups(tmp_path, setup_logging):
 
 
 def test_bt198_bt541_lotsgroup_fixed_no_unpublished_access_date(
-    tmp_path, setup_logging,
+    tmp_path,
+    setup_logging,
 ):
     logger = setup_logging
     xml_content = """

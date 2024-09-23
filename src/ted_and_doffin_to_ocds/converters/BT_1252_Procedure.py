@@ -27,10 +27,12 @@ def parse_direct_award_justification(xml_content):
 
     for justification in process_justifications:
         identifier = justification.xpath(
-            "cbc:Description/text()", namespaces=namespaces,
+            "cbc:Description/text()",
+            namespaces=namespaces,
         )
         reason_code = justification.xpath(
-            "cbc:ProcessReasonCode/text()", namespaces=namespaces,
+            "cbc:ProcessReasonCode/text()",
+            namespaces=namespaces,
         )
 
         if identifier:

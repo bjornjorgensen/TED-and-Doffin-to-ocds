@@ -65,7 +65,8 @@ def test_merge_buyer_review_complainants_bt_712b():
     }
 
     merge_buyer_review_complainants_bt_712b(
-        release_json, buyer_review_complainants_data,
+        release_json,
+        buyer_review_complainants_data,
     )
 
     assert len(release_json["statistics"]) == 2

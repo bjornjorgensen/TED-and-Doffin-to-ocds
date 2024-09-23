@@ -49,7 +49,8 @@ def merge_award_criteria_complicated_lotsgroup(release_json, award_criteria_data
         return
 
     existing_lot_groups = release_json.setdefault("tender", {}).setdefault(
-        "lotGroups", [],
+        "lotGroups",
+        [],
     )
 
     for new_lot_group in award_criteria_data["tender"]["lotGroups"]:
