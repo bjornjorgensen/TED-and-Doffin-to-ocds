@@ -85,7 +85,7 @@ def test_bt_720_tender_integration(tmp_path):
         award["value"]["currency"] == "EUR"
     ), f"Expected currency 'EUR', got '{award['value'].get('currency')}'"
     assert award["relatedLots"] == [
-        "LOT-0001"
+        "LOT-0001",
     ], f"Expected relatedLots ['LOT-0001'], got {award.get('relatedLots')}"
 
 

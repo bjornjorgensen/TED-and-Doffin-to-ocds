@@ -22,7 +22,7 @@ def parse_organization_contact_telephone(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization", namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -31,7 +31,7 @@ def parse_organization_contact_telephone(xml_content):
             namespaces=namespaces,
         )
         contact_telephone = organization.xpath(
-            "efac:Company/cac:Contact/cbc:Telephone/text()", namespaces=namespaces
+            "efac:Company/cac:Contact/cbc:Telephone/text()", namespaces=namespaces,
         )
 
         if org_id and contact_telephone:
@@ -45,7 +45,7 @@ def parse_organization_contact_telephone(xml_content):
 
 
 def merge_organization_contact_telephone(
-    release_json, organization_contact_telephone_data
+    release_json, organization_contact_telephone_data,
 ):
     if not organization_contact_telephone_data:
         logger.warning("No Organization Contact Telephone data to merge")
@@ -60,11 +60,11 @@ def merge_organization_contact_telephone(
         )
         if existing_party:
             existing_party.setdefault("contactPoint", {}).update(
-                new_party["contactPoint"]
+                new_party["contactPoint"],
             )
         else:
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Organization Contact Telephone data for {len(organization_contact_telephone_data['parties'])} parties"
+        f"Merged Organization Contact Telephone data for {len(organization_contact_telephone_data['parties'])} parties",
     )

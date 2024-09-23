@@ -52,7 +52,7 @@ def parse_security_clearance_deadline(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
@@ -70,7 +70,7 @@ def parse_security_clearance_deadline(xml_content):
                         "id": "1",
                         "type": "securityClearanceDeadline",
                         "dueDate": end_date(security_clearance_date[0]),
-                    }
+                    },
                 ],
             }
             result["tender"]["lots"].append(lot_data)
@@ -98,7 +98,7 @@ def merge_security_clearance_deadline(release_json, security_clearance_data):
 
     for new_lot in security_clearance_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_milestones = existing_lot.setdefault("milestones", [])
@@ -107,5 +107,5 @@ def merge_security_clearance_deadline(release_json, security_clearance_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Security Clearance Deadline data for {len(security_clearance_data['tender']['lots'])} lots"
+        f"Merged Security Clearance Deadline data for {len(security_clearance_data['tender']['lots'])} lots",
     )

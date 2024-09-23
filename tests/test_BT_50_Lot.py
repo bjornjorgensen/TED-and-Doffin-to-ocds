@@ -39,8 +39,8 @@ def test_parse_minimum_candidates():
 def test_merge_minimum_candidates():
     minimum_candidates_data = {
         "tender": {
-            "lots": [{"id": "LOT-0001", "secondStage": {"minimumCandidates": 3}}]
-        }
+            "lots": [{"id": "LOT-0001", "secondStage": {"minimumCandidates": 3}}],
+        },
     }
 
     release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}

@@ -45,7 +45,7 @@ def test_parse_social_procurement():
         == SOCIAL_OBJECTIVE_MAPPING["et-eq"]
     )
     assert set(result["tender"]["lots"][0]["sustainability"][0]["strategies"]) == set(
-        SUSTAINABILITY_STRATEGIES
+        SUSTAINABILITY_STRATEGIES,
     )
 
 
@@ -62,11 +62,11 @@ def test_merge_social_procurement():
                         {
                             "goal": "social.ethnicEquality",
                             "strategies": SUSTAINABILITY_STRATEGIES,
-                        }
+                        },
                     ],
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_social_procurement(release_json, social_procurement_data)
@@ -80,7 +80,7 @@ def test_merge_social_procurement():
         == "social.ethnicEquality"
     )
     assert set(
-        release_json["tender"]["lots"][0]["sustainability"][0]["strategies"]
+        release_json["tender"]["lots"][0]["sustainability"][0]["strategies"],
     ) == set(SUSTAINABILITY_STRATEGIES)
 
 
@@ -134,7 +134,7 @@ def test_bt_775_lot_social_procurement_integration(tmp_path):
     assert len(lot_1["sustainability"]) == 1
     assert lot_1["sustainability"][0]["goal"] == SOCIAL_OBJECTIVE_MAPPING["et-eq"]
     assert set(lot_1["sustainability"][0]["strategies"]) == set(
-        SUSTAINABILITY_STRATEGIES
+        SUSTAINABILITY_STRATEGIES,
     )
 
     lot_2 = next((lot for lot in social_lots if lot["id"] == "LOT-0002"), None)
@@ -143,11 +143,11 @@ def test_bt_775_lot_social_procurement_integration(tmp_path):
     assert len(lot_2["sustainability"]) == 1
     assert lot_2["sustainability"][0]["goal"] == SOCIAL_OBJECTIVE_MAPPING["gen-eq"]
     assert set(lot_2["sustainability"][0]["strategies"]) == set(
-        SUSTAINABILITY_STRATEGIES
+        SUSTAINABILITY_STRATEGIES,
     )
 
     lot_3 = next(
-        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"), None
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"), None,
     )
     assert lot_3 is not None
     assert "sustainability" not in lot_3

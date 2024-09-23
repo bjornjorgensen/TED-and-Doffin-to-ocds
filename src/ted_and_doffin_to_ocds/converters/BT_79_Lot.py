@@ -47,13 +47,13 @@ def parse_performing_staff_qualification(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         required_curricula_code = lot.xpath(
-            "cac:TenderingTerms/cbc:RequiredCurriculaCode/text()", namespaces=namespaces
+            "cac:TenderingTerms/cbc:RequiredCurriculaCode/text()", namespaces=namespaces,
         )
 
         if required_curricula_code:
@@ -68,7 +68,7 @@ def parse_performing_staff_qualification(xml_content):
             lot_data = {
                 "id": lot_id,
                 "otherRequirements": {
-                    "requiresStaffNamesAndQualifications": requires_staff
+                    "requiresStaffNamesAndQualifications": requires_staff,
                 },
             }
             result["tender"]["lots"].append(lot_data)
@@ -96,15 +96,15 @@ def merge_performing_staff_qualification(release_json, staff_qualification_data)
 
     for new_lot in staff_qualification_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_lot.setdefault("otherRequirements", {}).update(
-                new_lot["otherRequirements"]
+                new_lot["otherRequirements"],
             )
         else:
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Performing Staff Qualification data for {len(staff_qualification_data['tender']['lots'])} lots"
+        f"Merged Performing Staff Qualification data for {len(staff_qualification_data['tender']['lots'])} lots",
     )

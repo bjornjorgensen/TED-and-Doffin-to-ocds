@@ -59,7 +59,7 @@ def test_bt_163_tender_integration(tmp_path):
     assert award["id"] == "RES-0001", f"Expected award id 'RES-0001', got {award['id']}"
     assert "relatedLots" in award, "Expected 'relatedLots' in award"
     assert award["relatedLots"] == [
-        "LOT-0001"
+        "LOT-0001",
     ], f"Expected relatedLots ['LOT-0001'], got {award['relatedLots']}"
     assert (
         "valueCalculationMethod" in award

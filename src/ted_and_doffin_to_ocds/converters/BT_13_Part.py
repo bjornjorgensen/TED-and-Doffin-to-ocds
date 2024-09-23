@@ -21,7 +21,7 @@ def parse_additional_info_deadline_part(xml_content):
     }
 
     part_element = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']", namespaces=namespaces,
     )
 
     if part_element:

@@ -22,12 +22,12 @@ def parse_concession_revenue_user(xml_content):
     result = {"contracts": []}
 
     lot_tenders = root.xpath(
-        "//efac:NoticeResult/efac:LotTender", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotTender", namespaces=namespaces,
     )
 
     for lot_tender in lot_tenders:
         tender_id = lot_tender.xpath(
-            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces,
         )
         revenue_user = lot_tender.xpath(
             "efac:ConcessionRevenue/efbc:RevenueUserAmount/text()",
@@ -46,7 +46,7 @@ def parse_concession_revenue_user(xml_content):
 
             if settled_contract:
                 contract_id = settled_contract[0].xpath(
-                    "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces
+                    "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces,
                 )
                 lot_result = root.xpath(
                     f"//efac:NoticeResult/efac:LotResult[efac:SettledContract/cbc:ID[@schemeName='contract'] = '{contract_id[0]}']",
@@ -55,7 +55,7 @@ def parse_concession_revenue_user(xml_content):
 
                 if lot_result:
                     award_id = lot_result[0].xpath(
-                        "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+                        "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
                     )
 
                     contract = {
@@ -71,8 +71,8 @@ def parse_concession_revenue_user(xml_content):
                                         "currency": currency[0],
                                     },
                                     "paidBy": "user",
-                                }
-                            ]
+                                },
+                            ],
                         },
                     }
                     result["contracts"].append(contract)
@@ -104,5 +104,5 @@ def merge_concession_revenue_user(release_json, concession_revenue_user_data):
             existing_contracts.append(new_contract)
 
     logger.info(
-        f"Merged Concession Revenue User data for {len(concession_revenue_user_data['contracts'])} contracts"
+        f"Merged Concession Revenue User data for {len(concession_revenue_user_data['contracts'])} contracts",
     )

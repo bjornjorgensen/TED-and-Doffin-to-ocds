@@ -22,7 +22,7 @@ def parse_organization_name(xml_content):
     organizations = []
 
     org_elements = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization", namespaces=namespaces,
     )
 
     for org in org_elements:
@@ -31,7 +31,7 @@ def parse_organization_name(xml_content):
             namespaces=namespaces,
         )
         org_name = org.xpath(
-            "efac:Company/cac:PartyName/cbc:Name/text()", namespaces=namespaces
+            "efac:Company/cac:PartyName/cbc:Name/text()", namespaces=namespaces,
         )
 
         if org_id and org_name:
@@ -49,7 +49,7 @@ def merge_organization_name(release_json, organization_name_data):
 
     for new_org in organization_name_data["parties"]:
         existing_org = next(
-            (org for org in existing_parties if org["id"] == new_org["id"]), None
+            (org for org in existing_parties if org["id"] == new_org["id"]), None,
         )
         if existing_org:
             # Preserve existing name if it contains department information
@@ -59,5 +59,5 @@ def merge_organization_name(release_json, organization_name_data):
             existing_parties.append(new_org)
 
     logger.info(
-        f"Merged Organization Name data for {len(organization_name_data['parties'])} parties"
+        f"Merged Organization Name data for {len(organization_name_data['parties'])} parties",
     )

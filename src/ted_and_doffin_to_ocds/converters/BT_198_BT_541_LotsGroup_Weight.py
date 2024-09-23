@@ -65,7 +65,7 @@ def merge_bt198_bt541_lotsgroup_weight(release_json, unpublished_access_date_dat
     """
     if not unpublished_access_date_data:
         logger.warning(
-            "No unpublished access date data to merge for BT-198(BT-541)-LotsGroup-Weight"
+            "No unpublished access date data to merge for BT-198(BT-541)-LotsGroup-Weight",
         )
         return
 
@@ -82,5 +82,5 @@ def merge_bt198_bt541_lotsgroup_weight(release_json, unpublished_access_date_dat
             withheld_info.append(new_item)
 
     logger.info(
-        "Merged unpublished access date data for BT-198(BT-541)-LotsGroup-Weight"
+        "Merged unpublished access date data for BT-198(BT-541)-LotsGroup-Weight",
     )

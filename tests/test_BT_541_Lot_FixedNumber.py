@@ -72,11 +72,11 @@ def test_merge_award_criterion_fixed_number():
                 {
                     "id": "LOT-0001",
                     "awardCriteria": {
-                        "criteria": [{"description": "Quality criterion"}]
+                        "criteria": [{"description": "Quality criterion"}],
                     },
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     award_criterion_fixed_number_data = {
@@ -90,8 +90,8 @@ def test_merge_award_criterion_fixed_number():
                     "id": "LOT-0002",
                     "awardCriteria": {"criteria": [{"numbers": [{"number": 75.0}]}]},
                 },
-            ]
-        }
+            ],
+        },
     }
 
     merge_award_criterion_fixed_number(release_json, award_criterion_fixed_number_data)

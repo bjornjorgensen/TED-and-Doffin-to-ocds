@@ -61,7 +61,7 @@ def parse_buyer_legal_type(xml_content):
             org_id = org_id[0]
             legal_type = legal_type[0]
             description = BUYER_LEGAL_TYPE_CODES.get(
-                legal_type, "Unknown buyer legal type"
+                legal_type, "Unknown buyer legal type",
             )
 
             party_data = {
@@ -72,8 +72,8 @@ def parse_buyer_legal_type(xml_content):
                             "scheme": "TED_CA_TYPE",
                             "id": legal_type,
                             "description": description,
-                        }
-                    ]
+                        },
+                    ],
                 },
             }
             result["parties"].append(party_data)
@@ -104,11 +104,11 @@ def merge_buyer_legal_type(release_json, buyer_legal_type_data):
             if "classifications" not in existing_party["details"]:
                 existing_party["details"]["classifications"] = []
             existing_party["details"]["classifications"].append(
-                new_party["details"]["classifications"][0]
+                new_party["details"]["classifications"][0],
             )
         else:
             release_json["parties"].append(new_party)
 
     logger.info(
-        f"Merged Buyer Legal Type data for {len(buyer_legal_type_data['parties'])} parties"
+        f"Merged Buyer Legal Type data for {len(buyer_legal_type_data['parties'])} parties",
     )

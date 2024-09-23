@@ -22,7 +22,7 @@ def parse_lot_selection_criteria_second_stage(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
@@ -43,7 +43,7 @@ def parse_lot_selection_criteria_second_stage(xml_content):
 
 
 def merge_lot_selection_criteria_second_stage(
-    release_json, lot_selection_criteria_data
+    release_json, lot_selection_criteria_data,
 ):
     if not lot_selection_criteria_data:
         logger.warning("No lot selection criteria second stage data to merge")
@@ -53,15 +53,15 @@ def merge_lot_selection_criteria_second_stage(
 
     for new_lot in lot_selection_criteria_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_criteria = existing_lot.setdefault(
-                "selectionCriteria", {}
+                "selectionCriteria", {},
             ).setdefault("criteria", [])
             for new_criterion in new_lot["selectionCriteria"]["criteria"]:
                 existing_criterion = next(
-                    (c for c in existing_criteria if "forReduction" in c), None
+                    (c for c in existing_criteria if "forReduction" in c), None,
                 )
                 if existing_criterion:
                     existing_criterion.update(new_criterion)
@@ -71,5 +71,5 @@ def merge_lot_selection_criteria_second_stage(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged lot selection criteria second stage data for {len(lot_selection_criteria_data['tender']['lots'])} lots"
+        f"Merged lot selection criteria second stage data for {len(lot_selection_criteria_data['tender']['lots'])} lots",
     )

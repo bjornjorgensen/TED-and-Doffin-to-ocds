@@ -32,11 +32,11 @@ def parse_buyer_review_requests_count(xml_content):
     result = {"statistics": []}
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
     )
     for lot_result in lot_results:
         lot_id = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
         )
         statistics = lot_result.xpath(
             "efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efbc:StatisticsNumeric/text()",
@@ -88,5 +88,5 @@ def merge_buyer_review_requests_count(release_json, buyer_review_requests_count_
             existing_statistics.append(new_statistic)
 
     logger.info(
-        f"Merged buyer review requests count data for {len(buyer_review_requests_count_data['statistics'])} lots"
+        f"Merged buyer review requests count data for {len(buyer_review_requests_count_data['statistics'])} lots",
     )

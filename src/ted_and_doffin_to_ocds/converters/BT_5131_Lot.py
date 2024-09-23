@@ -22,7 +22,7 @@ def parse_place_performance_city(xml_content):
     result = {"tender": {"items": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
@@ -71,5 +71,5 @@ def merge_place_performance_city(release_json, place_performance_city_data):
             tender_items.append(new_item)
 
     logger.info(
-        f"Merged Place Performance City data for {len(place_performance_city_data['tender']['items'])} items"
+        f"Merged Place Performance City data for {len(place_performance_city_data['tender']['items'])} items",
     )

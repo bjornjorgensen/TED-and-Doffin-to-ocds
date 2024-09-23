@@ -55,9 +55,9 @@ def test_merge_award_criterion_description():
     release_json = {
         "tender": {
             "lots": [
-                {"id": "LOT-0001", "awardCriteria": {"criteria": [{"type": "quality"}]}}
-            ]
-        }
+                {"id": "LOT-0001", "awardCriteria": {"criteria": [{"type": "quality"}]}},
+            ],
+        },
     }
 
     award_criterion_description_data = {
@@ -68,19 +68,19 @@ def test_merge_award_criterion_description():
                     "awardCriteria": {
                         "criteria": [
                             {
-                                "description": "Tenders with a quality score less than 65..."
-                            }
-                        ]
+                                "description": "Tenders with a quality score less than 65...",
+                            },
+                        ],
                     },
                 },
                 {
                     "id": "LOT-0002",
                     "awardCriteria": {
-                        "criteria": [{"description": "Another criterion description"}]
+                        "criteria": [{"description": "Another criterion description"}],
                     },
                 },
-            ]
-        }
+            ],
+        },
     }
 
     merge_award_criterion_description(release_json, award_criterion_description_data)

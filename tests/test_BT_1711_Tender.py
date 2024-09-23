@@ -26,9 +26,9 @@ def test_parse_tender_ranked():
     assert result == {
         "bids": {
             "details": [
-                {"id": "TEN-0001", "hasRank": True, "relatedLots": ["LOT-0001"]}
-            ]
-        }
+                {"id": "TEN-0001", "hasRank": True, "relatedLots": ["LOT-0001"]},
+            ],
+        },
     }
 
 
@@ -37,9 +37,9 @@ def test_merge_tender_ranked():
     tender_ranked_data = {
         "bids": {
             "details": [
-                {"id": "TEN-0001", "hasRank": True, "relatedLots": ["LOT-0001"]}
-            ]
-        }
+                {"id": "TEN-0001", "hasRank": True, "relatedLots": ["LOT-0001"]},
+            ],
+        },
     }
     merge_tender_ranked(release_json, tender_ranked_data)
     assert release_json == tender_ranked_data

@@ -52,7 +52,7 @@ def parse_late_tenderer_info(xml_content: str | bytes) -> dict | None:
     result: dict[str, dict] = {"tender": {"lots": []}}
 
     lots: list = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
@@ -68,14 +68,14 @@ def parse_late_tenderer_info(xml_content: str | bytes) -> dict | None:
             late_info_label = CODE_TO_LABEL.get(late_info_code[0], "")
             if late_info_label:
                 result["tender"]["lots"].append(
-                    {"id": lot_id, "submissionMethodDetails": late_info_label}
+                    {"id": lot_id, "submissionMethodDetails": late_info_label},
                 )
 
     return result if result["tender"]["lots"] else None
 
 
 def merge_late_tenderer_info(
-    release_json: dict, late_tenderer_info: dict | None
+    release_json: dict, late_tenderer_info: dict | None,
 ) -> None:
     """
     Merge the parsed late tenderer information into the main OCDS release JSON.
@@ -96,7 +96,7 @@ def merge_late_tenderer_info(
 
     for new_lot in late_tenderer_info["tender"]["lots"]:
         existing_lot: dict | None = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             if "submissionMethodDetails" in existing_lot:
@@ -111,5 +111,5 @@ def merge_late_tenderer_info(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged late tenderer information for {len(late_tenderer_info['tender']['lots'])} lots"
+        f"Merged late tenderer information for {len(late_tenderer_info['tender']['lots'])} lots",
     )

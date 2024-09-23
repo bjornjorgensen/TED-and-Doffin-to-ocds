@@ -22,7 +22,7 @@ def parse_eu_funds_financing_identifier(xml_content):
     result = {"parties": [], "planning": {"budget": {"finance": []}}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
@@ -31,7 +31,7 @@ def parse_eu_funds_financing_identifier(xml_content):
 
         for funding in funding_elements:
             financing_identifier = funding.xpath(
-                "efbc:FinancingIdentifier/text()", namespaces=namespaces
+                "efbc:FinancingIdentifier/text()", namespaces=namespaces,
             )
 
             if financing_identifier:
@@ -49,7 +49,7 @@ def parse_eu_funds_financing_identifier(xml_content):
 
 
 def merge_eu_funds_financing_identifier(
-    release_json, eu_funds_financing_identifier_data
+    release_json, eu_funds_financing_identifier_data,
 ):
     if not eu_funds_financing_identifier_data:
         logger.warning("No EU Funds Financing Identifier data to merge")
@@ -81,7 +81,7 @@ def merge_eu_funds_financing_identifier(
         "finance"
     ]:
         existing_finance_item = next(
-            (item for item in existing_finance if item["id"] == new_finance["id"]), None
+            (item for item in existing_finance if item["id"] == new_finance["id"]), None,
         )
         if existing_finance_item:
             existing_finance_item["financingParty"] = {
@@ -89,15 +89,15 @@ def merge_eu_funds_financing_identifier(
                 "name": "European Union",
             }
             existing_finance_item.setdefault("relatedLots", []).extend(
-                new_finance["relatedLots"]
+                new_finance["relatedLots"],
             )
             existing_finance_item["relatedLots"] = list(
-                set(existing_finance_item["relatedLots"])
+                set(existing_finance_item["relatedLots"]),
             )
         else:
             new_finance["financingParty"]["id"] = eu_party["id"]
             existing_finance.append(new_finance)
 
     logger.info(
-        f"Merged EU Funds Financing Identifier data for {len(eu_funds_financing_identifier_data['planning']['budget']['finance'])} finance items"
+        f"Merged EU Funds Financing Identifier data for {len(eu_funds_financing_identifier_data['planning']['budget']['finance'])} finance items",
     )

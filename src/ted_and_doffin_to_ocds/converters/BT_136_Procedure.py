@@ -83,7 +83,7 @@ def parse_direct_award_justification_code(xml_content):
             classifications.append(classification)
 
         return {
-            "tender": {"procurementMethodRationaleClassifications": classifications}
+            "tender": {"procurementMethodRationaleClassifications": classifications},
         }
 
     logger.info("No direct award justification code found")

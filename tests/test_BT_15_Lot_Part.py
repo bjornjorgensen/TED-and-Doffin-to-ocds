@@ -71,7 +71,7 @@ def test_bt_15_lot_part_integration(tmp_path):
     ), "Unexpected URL for lot document"
     assert "relatedLots" in lot_document, "Expected 'relatedLots' in lot document"
     assert lot_document["relatedLots"] == [
-        "LOT-0001"
+        "LOT-0001",
     ], f"Expected relatedLots ['LOT-0001'], got {lot_document['relatedLots']}"
 
     part_document = next(

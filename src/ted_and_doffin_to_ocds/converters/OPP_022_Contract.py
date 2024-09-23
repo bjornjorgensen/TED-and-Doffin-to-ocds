@@ -19,12 +19,12 @@ def map_asset_significance(xml_content):
     result = {"tender": {"lots": []}}
 
     settled_contracts = root.xpath(
-        "//efac:NoticeResult/efac:SettledContract", namespaces=namespaces
+        "//efac:NoticeResult/efac:SettledContract", namespaces=namespaces,
     )
 
     for contract in settled_contracts:
         contract_id = contract.xpath(
-            "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces,
         )[0]
         assets = contract.xpath(
             "efac:DurationJustification/efac:AssetsList/efac:Asset",
@@ -47,11 +47,11 @@ def map_asset_significance(xml_content):
 
                 for asset in assets:
                     asset_significance = asset.xpath(
-                        "efbc:AssetSignificance/text()", namespaces=namespaces
+                        "efbc:AssetSignificance/text()", namespaces=namespaces,
                     )
                     if asset_significance:
                         lot["essentialAssets"].append(
-                            {"significance": asset_significance[0]}
+                            {"significance": asset_significance[0]},
                         )
 
                 if lot[
@@ -70,7 +70,7 @@ def merge_asset_significance(release_json, asset_significance_data):
 
     for new_lot in asset_significance_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_assets = existing_lot.setdefault("essentialAssets", [])

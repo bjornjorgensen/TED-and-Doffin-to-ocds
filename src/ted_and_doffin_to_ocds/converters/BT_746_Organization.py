@@ -36,7 +36,7 @@ def parse_winner_listed(xml_content):
 
     for org in organizations:
         listed_indicator = org.xpath(
-            "efbc:ListedOnRegulatedMarketIndicator/text()", namespaces=namespaces
+            "efbc:ListedOnRegulatedMarketIndicator/text()", namespaces=namespaces,
         )
         org_id = org.xpath(
             "efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
@@ -47,7 +47,7 @@ def parse_winner_listed(xml_content):
             party_data = {
                 "id": org_id[0],
                 "details": {
-                    "listedOnRegulatedMarket": listed_indicator[0].lower() == "true"
+                    "listedOnRegulatedMarket": listed_indicator[0].lower() == "true",
                 },
             }
             result["parties"].append(party_data)
@@ -74,7 +74,7 @@ def merge_winner_listed(release_json, winner_listed_data):
 
     for new_party in winner_listed_data["parties"]:
         existing_party = next(
-            (party for party in parties if party["id"] == new_party["id"]), None
+            (party for party in parties if party["id"] == new_party["id"]), None,
         )
         if existing_party:
             existing_party.setdefault("details", {}).update(new_party["details"])
@@ -82,5 +82,5 @@ def merge_winner_listed(release_json, winner_listed_data):
             parties.append(new_party)
 
     logger.info(
-        f"Merged winner listed data for {len(winner_listed_data['parties'])} organizations"
+        f"Merged winner listed data for {len(winner_listed_data['parties'])} organizations",
     )

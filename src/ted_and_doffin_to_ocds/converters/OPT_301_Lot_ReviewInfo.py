@@ -49,5 +49,5 @@ def merge_review_info_identifier(release_json, review_info_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged review info provider data for {len(review_info_data['parties'])} parties"
+        f"Merged review info provider data for {len(review_info_data['parties'])} parties",
     )

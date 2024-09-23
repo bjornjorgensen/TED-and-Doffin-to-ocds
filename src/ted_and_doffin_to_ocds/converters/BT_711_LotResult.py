@@ -49,15 +49,15 @@ def parse_tender_value_highest(xml_content):
     result = {"bids": {"statistics": []}}
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
     )
 
     for lot_result in lot_results:
         higher_tender_amount = lot_result.xpath(
-            "cbc:HigherTenderAmount", namespaces=namespaces
+            "cbc:HigherTenderAmount", namespaces=namespaces,
         )
         lot_id = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
         )
 
         if higher_tender_amount and lot_id:
@@ -113,5 +113,5 @@ def merge_tender_value_highest(release_json, tender_value_highest_data):
         stat["id"] = str(i)
 
     logger.info(
-        f"Merged highest tender value data for {len(tender_value_highest_data['bids']['statistics'])} statistics"
+        f"Merged highest tender value data for {len(tender_value_highest_data['bids']['statistics'])} statistics",
     )

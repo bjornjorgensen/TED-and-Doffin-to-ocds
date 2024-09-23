@@ -43,7 +43,7 @@ def merge_part_contract_start_date(release_json, part_contract_start_date_data):
 
     if "contractPeriod" in part_contract_start_date_data["tender"]:
         tender.setdefault("contractPeriod", {}).update(
-            part_contract_start_date_data["tender"]["contractPeriod"]
+            part_contract_start_date_data["tender"]["contractPeriod"],
         )
         logger.info("Merged Part Contract Start Date data")
     else:

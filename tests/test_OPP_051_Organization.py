@@ -58,14 +58,14 @@ def test_opp_051_organization_awarding_cpb_buyer_indicator_integration(tmp_path)
     assert len(result["parties"]) == 2
 
     procuring_entity = next(
-        (party for party in result["parties"] if party["id"] == "ORG-0001"), None
+        (party for party in result["parties"] if party["id"] == "ORG-0001"), None,
     )
     assert procuring_entity is not None
     assert "roles" in procuring_entity
     assert "procuringEntity" in procuring_entity["roles"]
 
     non_procuring_entity = next(
-        (party for party in result["parties"] if party["id"] == "ORG-0002"), None
+        (party for party in result["parties"] if party["id"] == "ORG-0002"), None,
     )
     assert non_procuring_entity is not None
     assert (

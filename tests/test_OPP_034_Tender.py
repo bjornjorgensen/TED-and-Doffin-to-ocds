@@ -77,10 +77,10 @@ def test_opp_034_tender_integration(tmp_path):
         "rewards" in lot["penaltiesAndRewards"]
     ), "Expected 'rewards' in penaltiesAndRewards"
     assert lot["penaltiesAndRewards"]["penalties"] == [
-        "Penalty for late delivery"
+        "Penalty for late delivery",
     ], "Unexpected penalties"
     assert lot["penaltiesAndRewards"]["rewards"] == [
-        "Bonus for early completion"
+        "Bonus for early completion",
     ], "Unexpected rewards"
 
 

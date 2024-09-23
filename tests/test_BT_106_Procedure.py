@@ -65,7 +65,7 @@ def test_bt_106_procedure_integration_missing(tmp_path):
         result = json.load(f)
 
     assert "tender" not in result or "procedure" not in result.get(
-        "tender", {}
+        "tender", {},
     ), "Unexpected 'tender' or 'procedure' in result when missing in input"
 
 

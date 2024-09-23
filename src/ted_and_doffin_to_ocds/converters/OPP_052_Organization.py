@@ -25,12 +25,12 @@ def parse_acquiring_cpb_buyer_indicator(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization", namespaces=namespaces,
     )
 
     for org in organizations:
         acquiring_cpb_indicator = org.xpath(
-            "efbc:AcquiringCPBIndicator/text()", namespaces=namespaces
+            "efbc:AcquiringCPBIndicator/text()", namespaces=namespaces,
         )
         if acquiring_cpb_indicator and acquiring_cpb_indicator[0].lower() == "true":
             org_id = org.xpath(
@@ -63,5 +63,5 @@ def merge_acquiring_cpb_buyer_indicator(release_json, acquiring_cpb_buyer_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Acquiring CPB Buyer Indicator for {len(acquiring_cpb_buyer_data['parties'])} organizations"
+        f"Merged Acquiring CPB Buyer Indicator for {len(acquiring_cpb_buyer_data['parties'])} organizations",
     )

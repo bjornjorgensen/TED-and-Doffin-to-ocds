@@ -107,7 +107,7 @@ def parse_activity_entity(xml_content):
 
     for party in contracting_parties:
         buyer_id = party.xpath(
-            "cac:Party/cac:PartyIdentification/cbc:ID/text()", namespaces=namespaces
+            "cac:Party/cac:PartyIdentification/cbc:ID/text()", namespaces=namespaces,
         )
         activity_code = party.xpath(
             "cac:ContractingActivity/cbc:ActivityTypeCode[@listName='entity-activity']/text()",
@@ -127,7 +127,7 @@ def parse_activity_entity(xml_content):
                 classification["scheme"] = "eu-main-activity"
                 classification["id"] = activity_code
                 classification["description"] = EU_MAIN_ACTIVITY_MAPPING.get(
-                    activity_code, ""
+                    activity_code, "",
                 )
 
             party_data = {
@@ -167,7 +167,7 @@ def merge_activity_entity(release_json, activity_data):
         )
         if existing_party:
             existing_party.setdefault("details", {}).setdefault(
-                "classifications", []
+                "classifications", [],
             ).extend(new_party["details"]["classifications"])
             if "buyer" not in existing_party.get("roles", []):
                 existing_party.setdefault("roles", []).append("buyer")
@@ -175,5 +175,5 @@ def merge_activity_entity(release_json, activity_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"BT-610-Procedure-Buyer: Merged activity entity data for {len(activity_data['parties'])} parties"
+        f"BT-610-Procedure-Buyer: Merged activity entity data for {len(activity_data['parties'])} parties",
     )

@@ -28,19 +28,19 @@ def parse_winner_chosen(xml_content):
     }
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
     )
 
     for lot_result in lot_results:
         result_id = lot_result.xpath(
-            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
         )
         tender_result_code = lot_result.xpath(
             "cbc:TenderResultCode[@listName='winner-selection-status']/text()",
             namespaces=namespaces,
         )
         lot_id = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
         )
 
         if result_id and tender_result_code and lot_id:
@@ -55,7 +55,7 @@ def parse_winner_chosen(xml_content):
                     "id": result_id,
                     "status": "active",
                     "statusDetails": status_code_mapping.get(
-                        tender_result_code, "Unknown"
+                        tender_result_code, "Unknown",
                     ),
                     "relatedLots": [lot_id],
                 }
@@ -73,7 +73,7 @@ def merge_winner_chosen(release_json, winner_chosen_data):
     existing_awards = release_json.setdefault("awards", [])
     for new_award in winner_chosen_data["awards"]:
         existing_award = next(
-            (a for a in existing_awards if a["id"] == new_award["id"]), None
+            (a for a in existing_awards if a["id"] == new_award["id"]), None,
         )
         if existing_award:
             existing_award.update(new_award)
@@ -92,12 +92,12 @@ def merge_winner_chosen(release_json, winner_chosen_data):
     existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
     for new_lot in winner_chosen_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_lot.update(new_lot)
         else:
             existing_lots.append(new_lot)
     logger.info(
-        f"Merged winner chosen data for {len(winner_chosen_data['awards'])} awards and {len(winner_chosen_data['tender']['lots'])} lots"
+        f"Merged winner chosen data for {len(winner_chosen_data['awards'])} awards and {len(winner_chosen_data['tender']['lots'])} lots",
     )

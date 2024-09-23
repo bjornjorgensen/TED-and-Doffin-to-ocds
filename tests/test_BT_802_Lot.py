@@ -59,11 +59,11 @@ def test_bt_802_lot_non_disclosure_agreement_description_integration(tmp_path):
     )
 
     lot_2 = next(
-        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002"), None
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002"), None,
     )
     assert lot_2 is not None
     assert "contractTerms" not in lot_2 or "nonDisclosureAgreement" not in lot_2.get(
-        "contractTerms", {}
+        "contractTerms", {},
     )
 
 

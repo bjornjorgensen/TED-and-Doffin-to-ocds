@@ -22,7 +22,7 @@ def parse_organization_country_subdivision(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization", namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -46,7 +46,7 @@ def parse_organization_country_subdivision(xml_content):
 
 
 def merge_organization_country_subdivision(
-    release_json, organization_country_subdivision_data
+    release_json, organization_country_subdivision_data,
 ):
     if not organization_country_subdivision_data:
         logger.warning("No organization country subdivision data to merge")
@@ -65,5 +65,5 @@ def merge_organization_country_subdivision(
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged organization country subdivision data for {len(organization_country_subdivision_data['parties'])} parties"
+        f"Merged organization country subdivision data for {len(organization_country_subdivision_data['parties'])} parties",
     )

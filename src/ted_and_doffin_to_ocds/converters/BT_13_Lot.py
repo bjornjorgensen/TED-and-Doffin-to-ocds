@@ -23,7 +23,7 @@ def parse_additional_info_deadline(xml_content):
     lots_data = []
 
     lot_elements = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lot_elements:

@@ -46,7 +46,7 @@ def parse_bt198_bt1252_unpublished_access_date(xml_content):
 
 
 def merge_bt198_bt1252_unpublished_access_date(
-    release_json, unpublished_access_date_data
+    release_json, unpublished_access_date_data,
 ):
     """
     Merge the parsed unpublished access date data into the main OCDS release JSON.

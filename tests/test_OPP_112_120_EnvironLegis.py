@@ -55,7 +55,7 @@ def test_opp_112_120_environ_legis_integration(tmp_path):
     assert len(result["tender"]["documents"]) == 2
 
     lot_doc = next(
-        (doc for doc in result["tender"]["documents"] if doc["id"] == "Env1"), None
+        (doc for doc in result["tender"]["documents"] if doc["id"] == "Env1"), None,
     )
     assert lot_doc is not None
     assert lot_doc["documentType"] == "legislation"
@@ -64,7 +64,7 @@ def test_opp_112_120_environ_legis_integration(tmp_path):
     assert lot_doc["relatedLots"] == ["LOT-0001"]
 
     part_doc = next(
-        (doc for doc in result["tender"]["documents"] if doc["id"] == "Env2"), None
+        (doc for doc in result["tender"]["documents"] if doc["id"] == "Env2"), None,
     )
     assert part_doc is not None
     assert part_doc["documentType"] == "legislation"

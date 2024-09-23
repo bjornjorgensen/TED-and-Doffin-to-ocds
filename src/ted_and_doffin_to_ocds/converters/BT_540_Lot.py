@@ -22,7 +22,7 @@ def parse_award_criterion_description(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
@@ -37,7 +37,7 @@ def parse_award_criterion_description(xml_content):
             lot_data = {
                 "id": lot_id,
                 "awardCriteria": {
-                    "criteria": [{"description": criterion} for criterion in criteria]
+                    "criteria": [{"description": criterion} for criterion in criteria],
                 },
             }
             result["tender"]["lots"].append(lot_data)
@@ -55,11 +55,11 @@ def merge_award_criterion_description(release_json, award_criterion_description_
 
     for new_lot in award_criterion_description_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_criteria = existing_lot.setdefault("awardCriteria", {}).setdefault(
-                "criteria", []
+                "criteria", [],
             )
             for new_criterion in new_lot["awardCriteria"]["criteria"]:
                 existing_criterion = next(
@@ -78,5 +78,5 @@ def merge_award_criterion_description(release_json, award_criterion_description_
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Award Criterion Description data for {len(award_criterion_description_data['tender']['lots'])} lots"
+        f"Merged Award Criterion Description data for {len(award_criterion_description_data['tender']['lots'])} lots",
     )

@@ -22,11 +22,11 @@ def test_parse_max_lots_awarded():
 def test_merge_max_lots_awarded():
     release_json = {}
     max_lots_awarded_data = {
-        "tender": {"lotDetails": {"maximumLotsAwardedPerSupplier": 4}}
+        "tender": {"lotDetails": {"maximumLotsAwardedPerSupplier": 4}},
     }
     merge_max_lots_awarded(release_json, max_lots_awarded_data)
     assert release_json == {
-        "tender": {"lotDetails": {"maximumLotsAwardedPerSupplier": 4}}
+        "tender": {"lotDetails": {"maximumLotsAwardedPerSupplier": 4}},
     }
 
 

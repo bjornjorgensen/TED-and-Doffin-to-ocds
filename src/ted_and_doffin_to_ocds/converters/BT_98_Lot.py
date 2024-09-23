@@ -32,7 +32,7 @@ def parse_tender_validity_deadline(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
@@ -46,7 +46,7 @@ def parse_tender_validity_deadline(xml_content):
             unit_code = duration_measure[0].get("unitCode")
 
             multiplier = {"DAY": 1, "WEEK": 7, "MONTH": 30, "YEAR": 365}.get(
-                unit_code, 1
+                unit_code, 1,
             )
 
             duration_in_days = value * multiplier
@@ -54,7 +54,7 @@ def parse_tender_validity_deadline(xml_content):
             lot_data = {
                 "id": lot_id,
                 "submissionTerms": {
-                    "bidValidityPeriod": {"durationInDays": duration_in_days}
+                    "bidValidityPeriod": {"durationInDays": duration_in_days},
                 },
             }
             result["tender"]["lots"].append(lot_data)
@@ -82,15 +82,15 @@ def merge_tender_validity_deadline(release_json, tender_validity_deadline_data):
 
     for new_lot in tender_validity_deadline_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_lot.setdefault("submissionTerms", {}).setdefault(
-                "bidValidityPeriod", {}
+                "bidValidityPeriod", {},
             ).update(new_lot["submissionTerms"]["bidValidityPeriod"])
         else:
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged tender validity deadline data for {len(tender_validity_deadline_data['tender']['lots'])} lots"
+        f"Merged tender validity deadline data for {len(tender_validity_deadline_data['tender']['lots'])} lots",
     )

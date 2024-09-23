@@ -54,7 +54,7 @@ def test_bt_09_procedure_integration_missing(tmp_path):
         result = json.load(f)
 
     assert "tender" not in result or "crossBorderLaw" not in result.get(
-        "tender", {}
+        "tender", {},
     ), "Unexpected 'crossBorderLaw' in result when missing in input"
 
 

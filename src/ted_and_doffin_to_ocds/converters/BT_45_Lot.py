@@ -22,13 +22,13 @@ def parse_lot_rewards_other(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         prizes = lot.xpath(
-            ".//cac:TenderingTerms/cac:AwardingTerms/cac:Prize", namespaces=namespaces
+            ".//cac:TenderingTerms/cac:AwardingTerms/cac:Prize", namespaces=namespaces,
         )
 
         lot_data = {"id": lot_id, "designContest": {"prizes": {"details": []}}}
@@ -54,7 +54,7 @@ def merge_lot_rewards_other(release_json, lot_rewards_other_data):
 
     for new_lot in lot_rewards_other_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_prizes = (
@@ -79,5 +79,5 @@ def merge_lot_rewards_other(release_json, lot_rewards_other_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Lot Rewards Other data for {len(lot_rewards_other_data['tender']['lots'])} lots"
+        f"Merged Lot Rewards Other data for {len(lot_rewards_other_data['tender']['lots'])} lots",
     )

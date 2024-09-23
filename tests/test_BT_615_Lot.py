@@ -52,7 +52,7 @@ def test_bt_615_lot_integration(tmp_path):
         document["accessDetailsURL"] == "https://mywebsite.com/proc/2019024/accessinfo"
     ), f"Expected accessDetailsURL 'https://mywebsite.com/proc/2019024/accessinfo', got {document['accessDetailsURL']}"
     assert document["relatedLots"] == [
-        "LOT-0001"
+        "LOT-0001",
     ], f"Expected relatedLots ['LOT-0001'], got {document['relatedLots']}"
 
 

@@ -33,7 +33,7 @@ def parse_procurement_documents(xml_content):
 
         if doc_id and lot_id:
             result["tender"]["documents"].append(
-                {"id": doc_id[0], "relatedLots": [lot_id[0]]}
+                {"id": doc_id[0], "relatedLots": [lot_id[0]]},
             )
 
     # Process Part-specific procurement documents
@@ -61,7 +61,7 @@ def merge_procurement_documents(release_json, procurement_docs_data):
 
     for new_doc in procurement_docs_data["tender"]["documents"]:
         existing_doc = next(
-            (doc for doc in existing_documents if doc["id"] == new_doc["id"]), None
+            (doc for doc in existing_documents if doc["id"] == new_doc["id"]), None,
         )
         if existing_doc:
             if "relatedLots" in new_doc:
@@ -74,5 +74,5 @@ def merge_procurement_documents(release_json, procurement_docs_data):
             existing_documents.append(new_doc)
 
     logger.info(
-        f"Merged Procurement Documents data for {len(procurement_docs_data['tender']['documents'])} documents"
+        f"Merged Procurement Documents data for {len(procurement_docs_data['tender']['documents'])} documents",
     )

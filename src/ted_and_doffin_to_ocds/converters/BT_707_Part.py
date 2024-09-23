@@ -53,7 +53,7 @@ def parse_part_documents_restricted_justification(xml_content):
     result = {"tender": {"documents": []}}
 
     parts = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']", namespaces=namespaces,
     )
 
     for part in parts:
@@ -71,7 +71,7 @@ def parse_part_documents_restricted_justification(xml_content):
 
             if justification_code:
                 justification = JUSTIFICATION_MAPPING.get(
-                    justification_code[0], "Unknown justification"
+                    justification_code[0], "Unknown justification",
                 )
                 document = {"id": doc_id, "accessDetails": justification}
                 result["tender"]["documents"].append(document)
@@ -99,7 +99,7 @@ def merge_part_documents_restricted_justification(release_json, part_documents_d
 
     for new_doc in part_documents_data["tender"]["documents"]:
         existing_doc = next(
-            (doc for doc in existing_documents if doc["id"] == new_doc["id"]), None
+            (doc for doc in existing_documents if doc["id"] == new_doc["id"]), None,
         )
         if existing_doc:
             existing_doc["accessDetails"] = new_doc["accessDetails"]
@@ -107,5 +107,5 @@ def merge_part_documents_restricted_justification(release_json, part_documents_d
             existing_documents.append(new_doc)
 
     logger.info(
-        f"Merged part documents restricted justification data for {len(part_documents_data['tender']['documents'])} documents"
+        f"Merged part documents restricted justification data for {len(part_documents_data['tender']['documents'])} documents",
     )

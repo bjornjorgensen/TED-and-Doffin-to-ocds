@@ -23,7 +23,7 @@ def parse_deadline_receipt_tenders(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
     logger.info(f"Found {len(lots)} lots in XML")
 
@@ -64,8 +64,8 @@ def parse_deadline_receipt_tenders(xml_content):
                             timedelta(
                                 hours=int(tz_offset.split(":")[0]),
                                 minutes=int(tz_offset.split(":")[1]),
-                            )
-                        )
+                            ),
+                        ),
                     )
                 else:
                     dt = dt.replace(tzinfo=UTC)
@@ -73,10 +73,10 @@ def parse_deadline_receipt_tenders(xml_content):
                 iso_date = dt.isoformat()
 
                 result["tender"]["lots"].append(
-                    {"id": lot_id, "tenderPeriod": {"endDate": iso_date}}
+                    {"id": lot_id, "tenderPeriod": {"endDate": iso_date}},
                 )
                 logger.info(
-                    f"Successfully processed lot {lot_id} with endDate: {iso_date}"
+                    f"Successfully processed lot {lot_id} with endDate: {iso_date}",
                 )
             except ValueError as e:
                 logger.error(f"Error parsing deadline for lot {lot_id}: {str(e)}")
@@ -96,7 +96,7 @@ def merge_deadline_receipt_tenders(release_json, deadline_data):
 
     for new_lot in deadline_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_lot.setdefault("tenderPeriod", {}).update(new_lot["tenderPeriod"])
@@ -106,5 +106,5 @@ def merge_deadline_receipt_tenders(release_json, deadline_data):
             logger.info(f"Added new lot {new_lot['id']} with tenderPeriod data")
 
     logger.info(
-        f"Merged Deadline Receipt Tenders data for {len(deadline_data['tender']['lots'])} lots"
+        f"Merged Deadline Receipt Tenders data for {len(deadline_data['tender']['lots'])} lots",
     )

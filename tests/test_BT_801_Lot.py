@@ -56,11 +56,11 @@ def test_bt_801_lot_non_disclosure_agreement_integration(tmp_path):
     assert lot_1["contractTerms"]["hasNonDisclosureAgreement"] is True
 
     lot_2 = next(
-        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002"), None
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002"), None,
     )
     assert lot_2 is not None
     assert "contractTerms" not in lot_2 or "hasNonDisclosureAgreement" not in lot_2.get(
-        "contractTerms", {}
+        "contractTerms", {},
     )
 
 

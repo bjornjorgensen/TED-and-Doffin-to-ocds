@@ -107,7 +107,7 @@ def parse_unit(xml_content):
     result = {"tender": {"items": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for index, lot in enumerate(lots, start=1):
@@ -155,7 +155,7 @@ def merge_unit(release_json, unit_data):
 
     for new_item in unit_data["tender"]["items"]:
         existing_item = next(
-            (item for item in existing_items if item["id"] == new_item["id"]), None
+            (item for item in existing_items if item["id"] == new_item["id"]), None,
         )
         if existing_item:
             existing_item["unit"] = new_item["unit"]
@@ -164,5 +164,5 @@ def merge_unit(release_json, unit_data):
             existing_items.append(new_item)
 
     logger.info(
-        f"BT-625-Lot: Merged unit data for {len(unit_data['tender']['items'])} items"
+        f"BT-625-Lot: Merged unit data for {len(unit_data['tender']['items'])} items",
     )

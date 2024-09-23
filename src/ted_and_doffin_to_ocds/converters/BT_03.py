@@ -17,7 +17,7 @@ def parse_form_type(xml_content):
     }
 
     form_type_codes = root.xpath(
-        "//cbc:NoticeTypeCode[@listName]", namespaces=namespaces
+        "//cbc:NoticeTypeCode[@listName]", namespaces=namespaces,
     )
 
     form_type_mapping = {

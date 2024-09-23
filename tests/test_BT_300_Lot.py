@@ -21,14 +21,14 @@ def test_parse_lot_additional_info():
     """
     result = parse_lot_additional_info(xml_content)
     assert result == {
-        "LOT-0001": [{"text": "For the current procedure ...", "language": "ENG"}]
+        "LOT-0001": [{"text": "For the current procedure ...", "language": "ENG"}],
     }
 
 
 def test_merge_lot_additional_info():
     release_json = {"tender": {"lots": [{"id": "LOT-0001"}]}}
     lot_additional_info = {
-        "LOT-0001": [{"text": "For the current procedure ...", "language": "ENG"}]
+        "LOT-0001": [{"text": "For the current procedure ...", "language": "ENG"}],
     }
     merge_lot_additional_info(release_json, lot_additional_info)
     assert (
@@ -39,10 +39,10 @@ def test_merge_lot_additional_info():
 
 def test_merge_lot_additional_info_existing_description():
     release_json = {
-        "tender": {"lots": [{"id": "LOT-0001", "description": "Existing description."}]}
+        "tender": {"lots": [{"id": "LOT-0001", "description": "Existing description."}]},
     }
     lot_additional_info = {
-        "LOT-0001": [{"text": "Additional info.", "language": "ENG"}]
+        "LOT-0001": [{"text": "Additional info.", "language": "ENG"}],
     }
     merge_lot_additional_info(release_json, lot_additional_info)
     assert (

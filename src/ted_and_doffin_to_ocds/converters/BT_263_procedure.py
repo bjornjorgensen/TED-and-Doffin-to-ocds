@@ -37,18 +37,18 @@ def parse_additional_classification_code_procedure(xml_content):
 
 
 def merge_additional_classification_code_procedure(
-    release_json, classification_code_data
+    release_json, classification_code_data,
 ):
     existing_items = release_json.setdefault("tender", {}).setdefault("items", [])
 
     for new_item in classification_code_data["tender"]["items"]:
         existing_item = next(
-            (item for item in existing_items if item["id"] == new_item["id"]), None
+            (item for item in existing_items if item["id"] == new_item["id"]), None,
         )
 
         if existing_item:
             existing_classifications = existing_item.setdefault(
-                "additionalClassifications", []
+                "additionalClassifications", [],
             )
             for new_classification in new_item["additionalClassifications"]:
                 existing_classification = next(

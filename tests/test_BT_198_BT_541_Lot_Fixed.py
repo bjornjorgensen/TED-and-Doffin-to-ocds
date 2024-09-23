@@ -18,7 +18,7 @@ def setup_logging():
 
 
 def test_bt198_bt541_lot_fixed_unpublished_access_date_integration(
-    tmp_path, setup_logging
+    tmp_path, setup_logging,
 ):
     logger = setup_logging
     xml_content = """
@@ -84,7 +84,7 @@ def test_bt198_bt541_lot_fixed_unpublished_access_date_integration(
 
 
 def test_bt198_bt541_lot_fixed_unpublished_access_date_missing_data(
-    tmp_path, setup_logging
+    tmp_path, setup_logging,
 ):
     logger = setup_logging
     xml_content = """

@@ -64,7 +64,7 @@ def merge_bt198_bt543_lotsgroup(release_json, unpublished_access_date_data):
     """
     if not unpublished_access_date_data:
         logger.warning(
-            "No unpublished access date data to merge for BT-198(BT-543)-LotsGroup"
+            "No unpublished access date data to merge for BT-198(BT-543)-LotsGroup",
         )
         return
 

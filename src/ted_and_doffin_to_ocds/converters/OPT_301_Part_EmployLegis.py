@@ -29,7 +29,7 @@ def parse_part_employlegis(xml_content):
         doc_id = doc_id[0] if doc_id else None
 
         uri = ref.xpath(
-            "cac:Attachment/cac:ExternalReference/cbc:URI/text()", namespaces=namespaces
+            "cac:Attachment/cac:ExternalReference/cbc:URI/text()", namespaces=namespaces,
         )
         uri = uri[0] if uri else None
 
@@ -56,9 +56,9 @@ def merge_part_employlegis(release_json, employlegis_data):
             existing_docs[doc["id"]].update(doc)
         else:
             release_json.setdefault("tender", {}).setdefault("documents", []).append(
-                doc
+                doc,
             )
 
     logger.info(
-        f"Merged Part Employment Legislation data for {len(employlegis_data['tender']['documents'])} documents"
+        f"Merged Part Employment Legislation data for {len(employlegis_data['tender']['documents'])} documents",
     )

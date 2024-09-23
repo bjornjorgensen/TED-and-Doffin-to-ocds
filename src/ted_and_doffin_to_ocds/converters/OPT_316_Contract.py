@@ -19,12 +19,12 @@ def parse_contract_technical_identifier(xml_content):
 
     result = {"contracts": []}
     settled_contracts = root.xpath(
-        "//efac:NoticeResult/efac:SettledContract", namespaces=namespaces
+        "//efac:NoticeResult/efac:SettledContract", namespaces=namespaces,
     )
 
     for contract in settled_contracts:
         contract_id = contract.xpath(
-            "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces,
         )
         if contract_id:
             result["contracts"].append({"id": contract_id[0]})
@@ -45,5 +45,5 @@ def merge_contract_technical_identifier(release_json, contract_tech_id_data):
             release_json["contracts"].append(new_contract)
 
     logger.info(
-        f"Merged Contract Technical Identifier data for {len(contract_tech_id_data['contracts'])} contracts"
+        f"Merged Contract Technical Identifier data for {len(contract_tech_id_data['contracts'])} contracts",
     )

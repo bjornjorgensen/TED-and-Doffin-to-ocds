@@ -49,7 +49,7 @@ def merge_award_criteria_complicated_lotsgroup(release_json, award_criteria_data
         return
 
     existing_lot_groups = release_json.setdefault("tender", {}).setdefault(
-        "lotGroups", []
+        "lotGroups", [],
     )
 
     for new_lot_group in award_criteria_data["tender"]["lotGroups"]:
@@ -63,11 +63,11 @@ def merge_award_criteria_complicated_lotsgroup(release_json, award_criteria_data
         )
         if existing_lot_group:
             existing_lot_group.setdefault("awardCriteria", {}).update(
-                new_lot_group["awardCriteria"]
+                new_lot_group["awardCriteria"],
             )
         else:
             existing_lot_groups.append(new_lot_group)
 
     logger.info(
-        f"Merged award criteria complicated data for {len(award_criteria_data['tender']['lotGroups'])} lot groups"
+        f"Merged award criteria complicated data for {len(award_criteria_data['tender']['lotGroups'])} lot groups",
     )

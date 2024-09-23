@@ -23,7 +23,7 @@ def parse_electronic_auction(xml_content: str | bytes) -> dict | None:
     result: dict[str, dict] = {"tender": {"lots": []}}
 
     lots: list = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
@@ -38,16 +38,16 @@ def parse_electronic_auction(xml_content: str | bytes) -> dict | None:
                 {
                     "id": lot_id,
                     "techniques": {
-                        "hasElectronicAuction": auction_indicator[0].lower() == "true"
+                        "hasElectronicAuction": auction_indicator[0].lower() == "true",
                     },
-                }
+                },
             )
 
     return result if result["tender"]["lots"] else None
 
 
 def merge_electronic_auction(
-    release_json: dict, electronic_auction_data: dict | None
+    release_json: dict, electronic_auction_data: dict | None,
 ) -> None:
     if not electronic_auction_data:
         logger.warning("No electronic auction data to merge")
@@ -58,7 +58,7 @@ def merge_electronic_auction(
 
     for new_lot in electronic_auction_data["tender"]["lots"]:
         existing_lot: dict | None = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_lot.setdefault("techniques", {}).update(new_lot["techniques"])
@@ -66,5 +66,5 @@ def merge_electronic_auction(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged electronic auction data for {len(electronic_auction_data['tender']['lots'])} lots"
+        f"Merged electronic auction data for {len(electronic_auction_data['tender']['lots'])} lots",
     )

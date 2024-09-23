@@ -44,7 +44,7 @@ def parse_change_reason_description(xml_content: str) -> list[dict[str, str]] | 
 
 
 def merge_change_reason_description(
-    release_json: dict, change_reason_data: list[dict[str, str]]
+    release_json: dict, change_reason_data: list[dict[str, str]],
 ) -> None:
     """
     Merge the parsed change reason description data into the main OCDS release JSON.
@@ -73,5 +73,5 @@ def merge_change_reason_description(
             amendments.append(reason)
 
     logger.info(
-        f"Merged Change Reason Description data for {len(change_reason_data)} amendments"
+        f"Merged Change Reason Description data for {len(change_reason_data)} amendments",
     )

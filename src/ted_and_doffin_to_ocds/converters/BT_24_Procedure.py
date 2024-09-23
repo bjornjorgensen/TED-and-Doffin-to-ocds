@@ -22,7 +22,7 @@ def parse_procedure_description(xml_content):
     result = {"tender": {}}
 
     description = root.xpath(
-        "//cac:ProcurementProject/cbc:Description/text()", namespaces=namespaces
+        "//cac:ProcurementProject/cbc:Description/text()", namespaces=namespaces,
     )
 
     if description:

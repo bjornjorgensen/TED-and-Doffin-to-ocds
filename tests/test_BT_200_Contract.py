@@ -140,12 +140,12 @@ def test_merge_contract_modification_reason():
                                 "id": "MJ001",
                                 "description": "Need for additional works, services or supplies by the original contractor.",
                                 "scheme": "Modification justification",
-                            }
+                            },
                         ],
-                    }
+                    },
                 ],
-            }
-        ]
+            },
+        ],
     }
 
     merge_contract_modification_reason(existing_json, modification_data)
@@ -174,13 +174,13 @@ def test_merge_contract_modification_reason_new_contract():
                                 "id": "MJ002",
                                 "description": "Need for modifications because of circumstances which a diligent buyer could not predict.",
                                 "scheme": "Modification justification",
-                            }
+                            },
                         ],
-                    }
+                    },
                 ],
                 "awardID": "RES-0002",
-            }
-        ]
+            },
+        ],
     }
 
     merge_contract_modification_reason(existing_json, modification_data)

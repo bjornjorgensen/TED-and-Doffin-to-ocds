@@ -26,7 +26,7 @@ def parse_part_tenderreceipt(xml_content):
 
     for tender_receipt_id in tender_receipt_ids:
         result["parties"].append(
-            {"id": tender_receipt_id.text, "roles": ["submissionReceiptBody"]}
+            {"id": tender_receipt_id.text, "roles": ["submissionReceiptBody"]},
         )
 
     return result if result["parties"] else None
@@ -47,5 +47,5 @@ def merge_part_tenderreceipt(release_json, tenderreceipt_data):
             release_json.setdefault("parties", []).append(party)
 
     logger.info(
-        f"Merged Part Tender Recipient data for {len(tenderreceipt_data['parties'])} parties"
+        f"Merged Part Tender Recipient data for {len(tenderreceipt_data['parties'])} parties",
     )

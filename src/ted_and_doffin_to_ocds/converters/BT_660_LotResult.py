@@ -35,12 +35,12 @@ def parse_framework_reestimated_value(xml_content):
     result = {"awards": []}
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
     )
 
     for lot_result in lot_results:
         award_id = lot_result.xpath(
-            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
         )
         reestimated_value = lot_result.xpath(
             "efac:FrameworkAgreementValues/efbc:ReestimatedValueAmount/text()",
@@ -51,7 +51,7 @@ def parse_framework_reestimated_value(xml_content):
             namespaces=namespaces,
         )
         related_lot = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
         )
 
         if award_id and reestimated_value and currency:
@@ -91,20 +91,20 @@ def merge_framework_reestimated_value(release_json, framework_reestimated_value_
 
     for new_award in framework_reestimated_value_data["awards"]:
         existing_award = next(
-            (award for award in existing_awards if award["id"] == new_award["id"]), None
+            (award for award in existing_awards if award["id"] == new_award["id"]), None,
         )
         if existing_award:
             existing_award["estimatedValue"] = new_award["estimatedValue"]
             if "relatedLots" in new_award:
                 existing_award.setdefault("relatedLots", []).extend(
-                    new_award["relatedLots"]
+                    new_award["relatedLots"],
                 )
                 existing_award["relatedLots"] = list(
-                    set(existing_award["relatedLots"])
+                    set(existing_award["relatedLots"]),
                 )  # Remove duplicates
         else:
             existing_awards.append(new_award)
 
     logger.info(
-        f"Merged Framework Re-estimated Value data for {len(framework_reestimated_value_data['awards'])} awards"
+        f"Merged Framework Re-estimated Value data for {len(framework_reestimated_value_data['awards'])} awards",
     )

@@ -43,15 +43,15 @@ def parse_vehicle_category(xml_content):
     result = {"awards": []}
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
     )
 
     for lot_result in lot_results:
         result_id = lot_result.xpath(
-            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
         )
         lot_id = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
         )
         vehicle_category = lot_result.xpath(
             "efac:StrategicProcurement/efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:AssetCategoryCode[@listName='vehicle-category']/text()",
@@ -70,11 +70,11 @@ def parse_vehicle_category(xml_content):
                                 "scheme": "eu-vehicle-category",
                                 "id": vehicle_category[0],
                                 "description": VEHICLE_CATEGORY_MAPPING.get(
-                                    vehicle_category[0].lower(), "Unknown"
+                                    vehicle_category[0].lower(), "Unknown",
                                 ),
-                            }
+                            },
                         ],
-                    }
+                    },
                 ],
             }
             result["awards"].append(award)
@@ -117,16 +117,16 @@ def merge_vehicle_category(release_json, vehicle_category_data):
                 if "additionalClassifications" not in existing_item:
                     existing_item["additionalClassifications"] = []
                 existing_item["additionalClassifications"].extend(
-                    new_award["items"][0]["additionalClassifications"]
+                    new_award["items"][0]["additionalClassifications"],
                 )
             else:
                 existing_award["items"].extend(new_award["items"])
             existing_award["relatedLots"] = list(
-                set(existing_award.get("relatedLots", []) + new_award["relatedLots"])
+                set(existing_award.get("relatedLots", []) + new_award["relatedLots"]),
             )
         else:
             release_json["awards"].append(new_award)
 
     logger.info(
-        f"Merged vehicle category data for {len(vehicle_category_data['awards'])} awards"
+        f"Merged vehicle category data for {len(vehicle_category_data['awards'])} awards",
     )

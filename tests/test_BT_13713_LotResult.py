@@ -60,7 +60,7 @@ def test_bt_13713_lotresult_integration(tmp_path):
     award_1 = next(award for award in result["awards"] if award["id"] == "RES-0001")
     assert "relatedLots" in award_1, "Expected 'relatedLots' in award RES-0001"
     assert award_1["relatedLots"] == [
-        "LOT-0001"
+        "LOT-0001",
     ], f"Expected ['LOT-0001'] in RES-0001 relatedLots, got {award_1['relatedLots']}"
 
     award_2 = next(award for award in result["awards"] if award["id"] == "RES-0002")

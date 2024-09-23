@@ -22,13 +22,13 @@ def parse_lot_documents_restricted(xml_content):
     result = {"tender": {"documents": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         document_references = lot.xpath(
-            ".//cac:CallForTendersDocumentReference", namespaces=namespaces
+            ".//cac:CallForTendersDocumentReference", namespaces=namespaces,
         )
 
         for doc_ref in document_references:
@@ -53,24 +53,24 @@ def merge_lot_documents_restricted(release_json, lot_documents_restricted_data):
         return
 
     existing_documents = release_json.setdefault("tender", {}).setdefault(
-        "documents", []
+        "documents", [],
     )
 
     for new_document in lot_documents_restricted_data["tender"]["documents"]:
         existing_document = next(
-            (doc for doc in existing_documents if doc["id"] == new_document["id"]), None
+            (doc for doc in existing_documents if doc["id"] == new_document["id"]), None,
         )
         if existing_document:
             existing_document.update(new_document)
             existing_document.setdefault("relatedLots", []).extend(
-                new_document["relatedLots"]
+                new_document["relatedLots"],
             )
             existing_document["relatedLots"] = list(
-                set(existing_document["relatedLots"])
+                set(existing_document["relatedLots"]),
             )  # Remove duplicates
         else:
             existing_documents.append(new_document)
 
     logger.info(
-        f"Merged lot documents restricted data for {len(lot_documents_restricted_data['tender']['documents'])} documents"
+        f"Merged lot documents restricted data for {len(lot_documents_restricted_data['tender']['documents'])} documents",
     )

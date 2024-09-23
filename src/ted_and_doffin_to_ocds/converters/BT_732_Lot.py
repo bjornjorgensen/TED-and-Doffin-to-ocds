@@ -32,7 +32,7 @@ def parse_lot_security_clearance_description(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
@@ -46,7 +46,7 @@ def parse_lot_security_clearance_description(xml_content):
             lot_data = {
                 "id": lot_id,
                 "otherRequirements": {
-                    "securityClearance": security_clearance[0].strip()
+                    "securityClearance": security_clearance[0].strip(),
                 },
             }
             result["tender"]["lots"].append(lot_data)
@@ -55,7 +55,7 @@ def parse_lot_security_clearance_description(xml_content):
 
 
 def merge_lot_security_clearance_description(
-    release_json, lot_security_clearance_description_data
+    release_json, lot_security_clearance_description_data,
 ):
     """
     Merge the parsed security clearance description data for lots into the main OCDS release JSON.
@@ -95,5 +95,5 @@ def merge_lot_security_clearance_description(
             release_json["tender"]["lots"].append(new_lot)
 
     logger.info(
-        f"Merged security clearance description data for {len(lot_security_clearance_description_data['tender']['lots'])} lots"
+        f"Merged security clearance description data for {len(lot_security_clearance_description_data['tender']['lots'])} lots",
     )

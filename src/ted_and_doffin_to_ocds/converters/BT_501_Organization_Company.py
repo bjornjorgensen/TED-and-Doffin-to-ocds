@@ -22,7 +22,7 @@ def parse_organization_identifier(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization", namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -42,7 +42,7 @@ def parse_organization_identifier(xml_content):
                     {
                         "id": company_id[0],
                         "scheme": "GB-COH",  # Assuming GB-COH scheme for this example
-                    }
+                    },
                 ],
             }
             result["parties"].append(party)
@@ -64,11 +64,11 @@ def merge_organization_identifier(release_json, organization_identifier_data):
         )
         if existing_party:
             existing_party.setdefault("additionalIdentifiers", []).extend(
-                new_party["additionalIdentifiers"]
+                new_party["additionalIdentifiers"],
             )
         else:
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Organization Identifier data for {len(organization_identifier_data['parties'])} parties"
+        f"Merged Organization Identifier data for {len(organization_identifier_data['parties'])} parties",
     )

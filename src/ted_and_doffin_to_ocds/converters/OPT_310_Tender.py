@@ -19,12 +19,12 @@ def parse_tendering_party_id_reference(xml_content):
 
     result = {"parties": [], "bids": {"details": []}}
     lot_tenders = root.xpath(
-        "//efac:NoticeResult/efac:LotTender", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotTender", namespaces=namespaces,
     )
 
     for lot_tender in lot_tenders:
         tender_id = lot_tender.xpath(
-            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces,
         )
         if not tender_id:
             logger.warning("Tender ID not found for a LotTender")
@@ -32,7 +32,7 @@ def parse_tendering_party_id_reference(xml_content):
 
         tender_id = tender_id[0]
         tendering_party_id = lot_tender.xpath(
-            "efac:TenderingParty/cbc:ID/text()", namespaces=namespaces
+            "efac:TenderingParty/cbc:ID/text()", namespaces=namespaces,
         )
 
         if tendering_party_id:
@@ -54,14 +54,14 @@ def parse_tendering_party_id_reference(xml_content):
 
                     # Add or update party
                     party = next(
-                        (p for p in result["parties"] if p["id"] == tenderer_id), None
+                        (p for p in result["parties"] if p["id"] == tenderer_id), None,
                     )
                     if party:
                         if "tenderer" not in party["roles"]:
                             party["roles"].append("tenderer")
                     else:
                         result["parties"].append(
-                            {"id": tenderer_id, "roles": ["tenderer"]}
+                            {"id": tenderer_id, "roles": ["tenderer"]},
                         )
 
                 result["bids"]["details"].append(bid)
@@ -78,11 +78,11 @@ def merge_tendering_party_id_reference(release_json, tendering_party_data):
     existing_parties = release_json.setdefault("parties", [])
     for new_party in tendering_party_data["parties"]:
         existing_party = next(
-            (p for p in existing_parties if p["id"] == new_party["id"]), None
+            (p for p in existing_parties if p["id"] == new_party["id"]), None,
         )
         if existing_party:
             existing_party["roles"] = list(
-                set(existing_party.get("roles", []) + new_party["roles"])
+                set(existing_party.get("roles", []) + new_party["roles"]),
             )
         else:
             existing_parties.append(new_party)
@@ -90,7 +90,7 @@ def merge_tendering_party_id_reference(release_json, tendering_party_data):
     existing_bids = release_json.setdefault("bids", {}).setdefault("details", [])
     for new_bid in tendering_party_data["bids"]["details"]:
         existing_bid = next(
-            (b for b in existing_bids if b["id"] == new_bid["id"]), None
+            (b for b in existing_bids if b["id"] == new_bid["id"]), None,
         )
         if existing_bid:
             existing_tenderers = existing_bid.setdefault("tenderers", [])

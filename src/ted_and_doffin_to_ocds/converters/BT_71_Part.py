@@ -51,8 +51,8 @@ def parse_reserved_participation_part(xml_content):
         if reserved_types:
             return {
                 "tender": {
-                    "otherRequirements": {"reservedParticipation": list(reserved_types)}
-                }
+                    "otherRequirements": {"reservedParticipation": list(reserved_types)},
+                },
             }
 
     return None
@@ -84,10 +84,10 @@ def merge_reserved_participation_part(release_json, reserved_participation_data)
         new_reserved = set(
             reserved_participation_data["tender"]["otherRequirements"][
                 "reservedParticipation"
-            ]
+            ],
         )
         other_requirements["reservedParticipation"] = list(
-            existing_reserved.union(new_reserved)
+            existing_reserved.union(new_reserved),
         )
 
     logger.info("Merged reserved participation data for tender")

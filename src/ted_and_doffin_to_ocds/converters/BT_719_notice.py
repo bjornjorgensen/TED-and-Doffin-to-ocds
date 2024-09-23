@@ -50,7 +50,7 @@ def parse_procurement_documents_change_date(xml_content):
 
     for change in changes:
         date = change.xpath(
-            "efbc:ProcurementDocumentsChangeDate/text()", namespaces=namespaces
+            "efbc:ProcurementDocumentsChangeDate/text()", namespaces=namespaces,
         )
         if not date:
             continue
@@ -122,5 +122,5 @@ def merge_procurement_documents_change_date(release_json, change_date_data):
                 tender_documents.append(new_doc)
 
     logger.info(
-        f"Merged procurement documents change date data for {len(change_date_data['tender']['documents'])} documents"
+        f"Merged procurement documents change date data for {len(change_date_data['tender']['documents'])} documents",
     )

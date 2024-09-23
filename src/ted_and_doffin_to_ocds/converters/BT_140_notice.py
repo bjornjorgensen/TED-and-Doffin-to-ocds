@@ -47,10 +47,10 @@ def parse_change_reason_code(xml_content):
 
         for i, change in enumerate(change_elements, start=1):
             section_identifier = change.xpath(
-                "efbc:ChangedSectionIdentifier/text()", namespaces=namespaces
+                "efbc:ChangedSectionIdentifier/text()", namespaces=namespaces,
             )
             change_description = change.xpath(
-                "efbc:ChangeDescription/text()", namespaces=namespaces
+                "efbc:ChangeDescription/text()", namespaces=namespaces,
             )
 
             if not section_identifier:
@@ -64,7 +64,7 @@ def parse_change_reason_code(xml_content):
                         "id": reason_code,
                         "description": reason_code_mapping.get(reason_code, "Unknown"),
                         "scheme": "eu-change-corrig-justification",
-                    }
+                    },
                 ],
             }
 
@@ -73,7 +73,7 @@ def parse_change_reason_code(xml_content):
 
             if section_identifier.startswith("RES-"):
                 award = next(
-                    (a for a in result["awards"] if a["id"] == section_identifier), None
+                    (a for a in result["awards"] if a["id"] == section_identifier), None,
                 )
                 if not award:
                     award = {"id": section_identifier, "amendments": []}
@@ -102,14 +102,14 @@ def merge_change_reason_code(release_json, change_reason_code_data):
         return
 
     tender_amendments = release_json.setdefault("tender", {}).setdefault(
-        "amendments", []
+        "amendments", [],
     )
     tender_amendments.extend(change_reason_code_data["tender"]["amendments"])
 
     existing_awards = release_json.setdefault("awards", [])
     for new_award in change_reason_code_data["awards"]:
         existing_award = next(
-            (a for a in existing_awards if a["id"] == new_award["id"]), None
+            (a for a in existing_awards if a["id"] == new_award["id"]), None,
         )
         if existing_award:
             existing_award.setdefault("amendments", []).extend(new_award["amendments"])
@@ -117,5 +117,5 @@ def merge_change_reason_code(release_json, change_reason_code_data):
             existing_awards.append(new_award)
 
     logger.info(
-        f"Merged change reason code and description data for {len(change_reason_code_data['tender']['amendments'])} tender amendments and {len(change_reason_code_data['awards'])} awards"
+        f"Merged change reason code and description data for {len(change_reason_code_data['tender']['amendments'])} tender amendments and {len(change_reason_code_data['awards'])} awards",
     )

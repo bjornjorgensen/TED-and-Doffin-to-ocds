@@ -32,7 +32,7 @@ def parse_bt195_bt733_unpublished_identifier(xml_content):
     result = {"withheldInformation": []}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
@@ -43,7 +43,7 @@ def parse_bt195_bt733_unpublished_identifier(xml_content):
 
         if fields_privacy:
             field_identifier = fields_privacy[0].xpath(
-                "efbc:FieldIdentifierCode/text()", namespaces=namespaces
+                "efbc:FieldIdentifierCode/text()", namespaces=namespaces,
             )
             lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
 
@@ -77,5 +77,5 @@ def merge_bt195_bt733_unpublished_identifier(release_json, unpublished_identifie
     withheld_info.extend(unpublished_identifier_data["withheldInformation"])
 
     logger.info(
-        f"Merged {len(unpublished_identifier_data['withheldInformation'])} unpublished identifier(s) for BT-195(BT-733)"
+        f"Merged {len(unpublished_identifier_data['withheldInformation'])} unpublished identifier(s) for BT-195(BT-733)",
     )

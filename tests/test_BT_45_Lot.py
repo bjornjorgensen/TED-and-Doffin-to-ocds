@@ -114,13 +114,13 @@ def test_merge_lot_rewards_other_new_lot():
                     "designContest": {
                         "prizes": {
                             "details": [
-                                {"id": "0", "description": "First prize: €10,000"}
-                            ]
-                        }
+                                {"id": "0", "description": "First prize: €10,000"},
+                            ],
+                        },
                     },
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_lot_rewards_other(release_json, lot_rewards_other_data)
@@ -143,12 +143,12 @@ def test_merge_lot_rewards_other_existing_lot():
                     "id": "LOT-001",
                     "designContest": {
                         "prizes": {
-                            "details": [{"id": "0", "description": "Old description"}]
-                        }
+                            "details": [{"id": "0", "description": "Old description"}],
+                        },
                     },
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
     lot_rewards_other_data = {
         "tender": {
@@ -158,13 +158,13 @@ def test_merge_lot_rewards_other_existing_lot():
                     "designContest": {
                         "prizes": {
                             "details": [
-                                {"id": "0", "description": "Updated description"}
-                            ]
-                        }
+                                {"id": "0", "description": "Updated description"},
+                            ],
+                        },
                     },
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_lot_rewards_other(release_json, lot_rewards_other_data)

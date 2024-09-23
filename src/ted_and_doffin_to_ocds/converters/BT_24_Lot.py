@@ -22,13 +22,13 @@ def parse_lot_description(xml_content):
     result = {"tender": {"lots": []}}
 
     lot_elements = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot_element in lot_elements:
         lot_id = lot_element.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         description = lot_element.xpath(
-            "cac:ProcurementProject/cbc:Description/text()", namespaces=namespaces
+            "cac:ProcurementProject/cbc:Description/text()", namespaces=namespaces,
         )
 
         if description:
@@ -47,7 +47,7 @@ def merge_lot_description(release_json, lot_description_data):
 
     for new_lot in lot_description_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_lot["description"] = new_lot["description"]
@@ -55,5 +55,5 @@ def merge_lot_description(release_json, lot_description_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Lot Description data for {len(lot_description_data['tender']['lots'])} lots"
+        f"Merged Lot Description data for {len(lot_description_data['tender']['lots'])} lots",
     )

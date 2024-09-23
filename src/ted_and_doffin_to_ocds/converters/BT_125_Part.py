@@ -24,22 +24,22 @@ def parse_previous_planning_identifier_part(xml_content):
     related_process_id = 1
 
     parts = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']", namespaces=namespaces,
     )
     logger.info(f"Found {len(parts)} parts")
 
     for part in parts:
         notice_refs = part.xpath(
-            "cac:TenderingProcess/cac:NoticeDocumentReference", namespaces=namespaces
+            "cac:TenderingProcess/cac:NoticeDocumentReference", namespaces=namespaces,
         )
         logger.info(f"Found {len(notice_refs)} notice references for part")
 
         for notice_ref in notice_refs:
             identifier = notice_ref.xpath(
-                "cbc:ID[@schemeName='notice-id-ref']/text()", namespaces=namespaces
+                "cbc:ID[@schemeName='notice-id-ref']/text()", namespaces=namespaces,
             )
             part_identifier = notice_ref.xpath(
-                "cbc:ReferencedDocumentInternalAddress/text()", namespaces=namespaces
+                "cbc:ReferencedDocumentInternalAddress/text()", namespaces=namespaces,
             )
 
             logger.info(f"Identifier: {identifier}, Part Identifier: {part_identifier}")
@@ -81,6 +81,6 @@ def merge_previous_planning_identifier_part(release_json, previous_planning_data
     release_json["relatedProcesses"] = existing_related_processes
 
     logger.info(
-        f"Merged Previous Planning Identifier (Part) data for {len(previous_planning_data['relatedProcesses'])} related processes"
+        f"Merged Previous Planning Identifier (Part) data for {len(previous_planning_data['relatedProcesses'])} related processes",
     )
     logger.info(f"Updated release_json: {json.dumps(release_json, indent=2)}")

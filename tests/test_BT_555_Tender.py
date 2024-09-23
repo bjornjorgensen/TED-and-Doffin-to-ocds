@@ -59,7 +59,7 @@ def test_bt_555_tender_integration(tmp_path):
         bid["subcontracting"]["maximumPercentage"] == 0.3
     ), f"Expected maximumPercentage 0.3, got {bid['subcontracting']['maximumPercentage']}"
     assert bid["relatedLots"] == [
-        "LOT-0001"
+        "LOT-0001",
     ], f"Expected relatedLots ['LOT-0001'], got {bid['relatedLots']}"
 
 

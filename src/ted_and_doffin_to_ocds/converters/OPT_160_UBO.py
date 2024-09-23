@@ -25,7 +25,7 @@ def parse_ubo_first_name(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization", namespaces=namespaces,
     )
 
     for org in organizations:
@@ -38,13 +38,13 @@ def parse_ubo_first_name(xml_content):
         org_id = org_id[0]
 
         ubos = root.xpath(
-            "//efac:Organizations/efac:UltimateBeneficialOwner", namespaces=namespaces
+            "//efac:Organizations/efac:UltimateBeneficialOwner", namespaces=namespaces,
         )
         beneficial_owners = []
 
         for ubo in ubos:
             ubo_id = ubo.xpath(
-                "cbc:ID[@schemeName='ubo']/text()", namespaces=namespaces
+                "cbc:ID[@schemeName='ubo']/text()", namespaces=namespaces,
             )
             first_name = ubo.xpath("cbc:FirstName/text()", namespaces=namespaces)
 
@@ -53,7 +53,7 @@ def parse_ubo_first_name(xml_content):
 
         if beneficial_owners:
             result["parties"].append(
-                {"id": org_id, "beneficialOwners": beneficial_owners}
+                {"id": org_id, "beneficialOwners": beneficial_owners},
             )
 
     return result if result["parties"] else None
@@ -73,7 +73,7 @@ def merge_ubo_first_name(release_json, ubo_data):
         )
         if existing_party:
             existing_beneficial_owners = existing_party.setdefault(
-                "beneficialOwners", []
+                "beneficialOwners", [],
             )
             for new_bo in new_party["beneficialOwners"]:
                 existing_bo = next(

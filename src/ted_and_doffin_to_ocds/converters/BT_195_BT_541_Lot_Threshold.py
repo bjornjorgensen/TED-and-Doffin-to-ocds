@@ -53,7 +53,7 @@ def parse_bt195_bt541_lot_threshold_unpublished_identifier(xml_content):
 
 
 def merge_bt195_bt541_lot_threshold_unpublished_identifier(
-    release_json, unpublished_identifier_data
+    release_json, unpublished_identifier_data,
 ):
     """
     Merge the parsed unpublished identifier data into the main OCDS release JSON.
@@ -73,5 +73,5 @@ def merge_bt195_bt541_lot_threshold_unpublished_identifier(
     withheld_info.extend(unpublished_identifier_data["withheldInformation"])
 
     logger.info(
-        f"Merged unpublished identifier data for BT-195(BT-541) for {len(unpublished_identifier_data['withheldInformation'])} lots"
+        f"Merged unpublished identifier data for BT-195(BT-541) for {len(unpublished_identifier_data['withheldInformation'])} lots",
     )

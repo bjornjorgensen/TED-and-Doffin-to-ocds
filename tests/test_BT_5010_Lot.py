@@ -71,7 +71,7 @@ def test_bt_5010_lot_integration(tmp_path):
         finance[0]["financingParty"]["id"] == eu_party["id"]
     ), "Expected financingParty id to match European Union party id"
     assert finance[0]["relatedLots"] == [
-        "LOT-0001"
+        "LOT-0001",
     ], "Expected relatedLots to contain 'LOT-0001'"
 
 

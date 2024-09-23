@@ -231,7 +231,7 @@ def parse_lot_documents_official_language(xml_content):
     result = {"tender": {"documents": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
@@ -282,20 +282,20 @@ def merge_lot_documents_official_language(release_json, lot_documents_data):
 
     for new_doc in lot_documents_data["tender"]["documents"]:
         existing_doc = next(
-            (doc for doc in existing_documents if doc["id"] == new_doc["id"]), None
+            (doc for doc in existing_documents if doc["id"] == new_doc["id"]), None,
         )
         if existing_doc:
             existing_doc.setdefault("languages", []).extend(new_doc["languages"])
             existing_doc["languages"] = list(
-                set(existing_doc["languages"])
+                set(existing_doc["languages"]),
             )  # Remove duplicates
             existing_doc.setdefault("relatedLots", []).extend(new_doc["relatedLots"])
             existing_doc["relatedLots"] = list(
-                set(existing_doc["relatedLots"])
+                set(existing_doc["relatedLots"]),
             )  # Remove duplicates
         else:
             existing_documents.append(new_doc)
 
     logger.info(
-        f"Merged lot documents official language data for {len(lot_documents_data['tender']['documents'])} documents"
+        f"Merged lot documents official language data for {len(lot_documents_data['tender']['documents'])} documents",
     )

@@ -361,19 +361,19 @@ def parse_country_origin(xml_content):
     result = {"bids": {"details": []}}
 
     lot_tenders = root.xpath(
-        "//efac:NoticeResult/efac:LotTender", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotTender", namespaces=namespaces,
     )
 
     for lot_tender in lot_tenders:
         tender_id = lot_tender.xpath(
-            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces,
         )
         area_code = lot_tender.xpath(
             "efac:Origin/efbc:AreaCode[@listName='country']/text()",
             namespaces=namespaces,
         )
         lot_id = lot_tender.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
         )
 
         if tender_id and area_code and lot_id:
@@ -387,7 +387,7 @@ def parse_country_origin(xml_content):
                 result["bids"]["details"].append(bid)
             else:
                 logger.warning(
-                    f"No matching ISO 3166-1 alpha-2 code found for {area_code[0]}"
+                    f"No matching ISO 3166-1 alpha-2 code found for {area_code[0]}",
                 )
 
     return result if result["bids"]["details"] else None
@@ -402,16 +402,16 @@ def merge_country_origin(release_json, country_origin_data):
 
     for new_bid in country_origin_data["bids"]["details"]:
         existing_bid = next(
-            (bid for bid in existing_bids if bid["id"] == new_bid["id"]), None
+            (bid for bid in existing_bids if bid["id"] == new_bid["id"]), None,
         )
         if existing_bid:
             existing_bid.setdefault("countriesOfOrigin", []).extend(
-                new_bid["countriesOfOrigin"]
+                new_bid["countriesOfOrigin"],
             )
             existing_bid.setdefault("relatedLots", []).extend(new_bid["relatedLots"])
         else:
             existing_bids.append(new_bid)
 
     logger.info(
-        f"Merged Country Origin data for {len(country_origin_data['bids']['details'])} bids"
+        f"Merged Country Origin data for {len(country_origin_data['bids']['details'])} bids",
     )

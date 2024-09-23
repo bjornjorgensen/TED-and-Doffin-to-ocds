@@ -21,7 +21,7 @@ def parse_strategic_procurement(xml_content):
 
     result = {"tender": {"lots": []}}
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     strategic_procurement_mapping = {
@@ -69,7 +69,7 @@ def merge_strategic_procurement(release_json, strategic_procurement_data):
 
     for new_lot in strategic_procurement_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_lot["hasSustainability"] = new_lot["hasSustainability"]
@@ -78,5 +78,5 @@ def merge_strategic_procurement(release_json, strategic_procurement_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Strategic Procurement data for {len(strategic_procurement_data['tender']['lots'])} lots"
+        f"Merged Strategic Procurement data for {len(strategic_procurement_data['tender']['lots'])} lots",
     )

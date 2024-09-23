@@ -25,12 +25,12 @@ def parse_organization_edelivery_gateway(xml_content):
             namespaces=namespaces,
         )
         endpoint_id = org.xpath(
-            "efac:Company/cbc:EndpointID/text()", namespaces=namespaces
+            "efac:Company/cbc:EndpointID/text()", namespaces=namespaces,
         )
 
         if org_id and endpoint_id:
             result["parties"].append(
-                {"id": org_id[0], "eDeliveryGateway": endpoint_id[0]}
+                {"id": org_id[0], "eDeliveryGateway": endpoint_id[0]},
             )
 
     return result if result["parties"] else None

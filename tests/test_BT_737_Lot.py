@@ -69,7 +69,7 @@ def test_bt_737_lot_integration(tmp_path):
     ), f"Expected unofficial translations ['en', 'fr'], got {document['unofficialTranslations']}"
     assert "relatedLots" in document, "Expected 'relatedLots' in document"
     assert document["relatedLots"] == [
-        "LOT-0001"
+        "LOT-0001",
     ], f"Expected related lots ['LOT-0001'], got {document['relatedLots']}"
 
 

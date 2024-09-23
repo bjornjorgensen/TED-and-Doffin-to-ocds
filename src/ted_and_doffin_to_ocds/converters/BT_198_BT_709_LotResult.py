@@ -37,10 +37,10 @@ def parse_bt198_bt709_unpublished_access_date(xml_content):
 
     for value in framework_agreement_values:
         lot_result_id = value.xpath(
-            "ancestor::efac:LotResult/cbc:ID/text()", namespaces=namespaces
+            "ancestor::efac:LotResult/cbc:ID/text()", namespaces=namespaces,
         )
         publication_date = value.xpath(
-            "efbc:PublicationDate/text()", namespaces=namespaces
+            "efbc:PublicationDate/text()", namespaces=namespaces,
         )
 
         if lot_result_id and publication_date:
@@ -55,7 +55,7 @@ def parse_bt198_bt709_unpublished_access_date(xml_content):
 
 
 def merge_bt198_bt709_unpublished_access_date(
-    release_json, unpublished_access_date_data
+    release_json, unpublished_access_date_data,
 ):
     """
     Merge the parsed unpublished access date data into the main OCDS release JSON.
@@ -75,7 +75,7 @@ def merge_bt198_bt709_unpublished_access_date(
 
     for new_item in unpublished_access_date_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item.get("id") == new_item["id"]), None
+            (item for item in withheld_info if item.get("id") == new_item["id"]), None,
         )
         if existing_item:
             existing_item["availabilityDate"] = new_item["availabilityDate"]
@@ -83,5 +83,5 @@ def merge_bt198_bt709_unpublished_access_date(
             withheld_info.append(new_item)
 
     logger.info(
-        f"Merged {len(unpublished_access_date_data['withheldInformation'])} unpublished access date(s) for BT-198(BT-709)"
+        f"Merged {len(unpublished_access_date_data['withheldInformation'])} unpublished access date(s) for BT-198(BT-709)",
     )

@@ -56,11 +56,11 @@ def test_bt_140_141a_notice_integration(tmp_path):
 
     for i, amendment in enumerate(result["tender"]["amendments"], start=1):
         assert amendment["id"] == str(
-            i
+            i,
         ), f"Expected amendment id '{i}', got {amendment['id']}"
         assert "relatedLots" in amendment, f"Expected 'relatedLots' in amendment {i}"
         assert amendment["relatedLots"] == [
-            f"LOT-000{i}"
+            f"LOT-000{i}",
         ], f"Expected relatedLots ['LOT-000{i}'], got {amendment['relatedLots']}"
         assert (
             "rationaleClassifications" in amendment

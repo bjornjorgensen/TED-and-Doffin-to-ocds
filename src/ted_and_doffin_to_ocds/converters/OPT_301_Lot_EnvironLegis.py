@@ -78,7 +78,7 @@ def parse_environmental_legislation_document_reference(xml_content):
 
 
 def merge_environmental_legislation_document_reference(
-    release_json, environmental_legislation_data
+    release_json, environmental_legislation_data,
 ):
     if not environmental_legislation_data:
         logger.warning("No Environmental Legislation Document Reference data to merge")
@@ -100,12 +100,12 @@ def merge_environmental_legislation_document_reference(
 
     # Merge documents
     existing_documents = release_json.setdefault("tender", {}).setdefault(
-        "documents", []
+        "documents", [],
     )
 
     for new_document in environmental_legislation_data["tender"].get("documents", []):
         existing_document = next(
-            (doc for doc in existing_documents if doc["id"] == new_document["id"]), None
+            (doc for doc in existing_documents if doc["id"] == new_document["id"]), None,
         )
         if existing_document:
             existing_document["publisher"] = new_document["publisher"]
@@ -125,5 +125,5 @@ def merge_environmental_legislation_document_reference(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Environmental Legislation Document Reference for {len(environmental_legislation_data.get('parties', []))} parties"
+        f"Merged Environmental Legislation Document Reference for {len(environmental_legislation_data.get('parties', []))} parties",
     )

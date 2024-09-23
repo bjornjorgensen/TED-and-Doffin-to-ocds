@@ -85,5 +85,5 @@ def merge_part_place_performance(release_json, part_place_performance_data):
             release_json["tender"]["deliveryLocations"].append(new_location)
 
     logger.info(
-        f"Merged place of performance data for {len(part_place_performance_data['tender']['deliveryLocations'])} locations"
+        f"Merged place of performance data for {len(part_place_performance_data['tender']['deliveryLocations'])} locations",
     )

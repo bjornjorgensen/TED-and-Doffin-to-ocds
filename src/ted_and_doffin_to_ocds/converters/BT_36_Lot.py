@@ -22,7 +22,7 @@ def parse_lot_duration(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
@@ -47,7 +47,7 @@ def parse_lot_duration(xml_content):
                 continue
 
             result["tender"]["lots"].append(
-                {"id": lot_id, "contractPeriod": {"durationInDays": duration_in_days}}
+                {"id": lot_id, "contractPeriod": {"durationInDays": duration_in_days}},
             )
 
     return result if result["tender"]["lots"] else None
@@ -62,15 +62,15 @@ def merge_lot_duration(release_json, lot_duration_data):
 
     for new_lot in lot_duration_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_lot.setdefault("contractPeriod", {}).update(
-                new_lot["contractPeriod"]
+                new_lot["contractPeriod"],
             )
         else:
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged lot duration data for {len(lot_duration_data['tender']['lots'])} lots"
+        f"Merged lot duration data for {len(lot_duration_data['tender']['lots'])} lots",
     )

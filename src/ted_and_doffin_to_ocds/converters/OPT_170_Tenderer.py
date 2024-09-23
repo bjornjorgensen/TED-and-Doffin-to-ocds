@@ -22,15 +22,15 @@ def parse_tendering_party_leader(xml_content):
     result = {"parties": []}
 
     tendering_parties = root.xpath(
-        "//efac:TenderingParty/efac:Tenderer", namespaces=namespaces
+        "//efac:TenderingParty/efac:Tenderer", namespaces=namespaces,
     )
 
     for tenderer in tendering_parties:
         org_id = tenderer.xpath(
-            "cbc:ID[@schemeName='organization']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='organization']/text()", namespaces=namespaces,
         )
         is_leader = tenderer.xpath(
-            "efbc:GroupLeadIndicator/text()", namespaces=namespaces
+            "efbc:GroupLeadIndicator/text()", namespaces=namespaces,
         )
 
         if org_id:
@@ -65,5 +65,5 @@ def merge_tendering_party_leader(release_json, tenderer_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Tendering Party Leader data for {len(tenderer_data['parties'])} parties"
+        f"Merged Tendering Party Leader data for {len(tenderer_data['parties'])} parties",
     )

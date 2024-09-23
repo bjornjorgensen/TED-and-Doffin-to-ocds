@@ -32,7 +32,7 @@ def parse_lot_subcontracting_obligation_maximum(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
@@ -46,7 +46,7 @@ def parse_lot_subcontracting_obligation_maximum(xml_content):
             lot_data = {
                 "id": lot_id,
                 "subcontractingTerms": {
-                    "competitiveMaximumPercentage": float(max_percent[0]) / 100
+                    "competitiveMaximumPercentage": float(max_percent[0]) / 100,
                 },
             }
             result["tender"]["lots"].append(lot_data)
@@ -55,7 +55,7 @@ def parse_lot_subcontracting_obligation_maximum(xml_content):
 
 
 def merge_lot_subcontracting_obligation_maximum(
-    release_json, lot_subcontracting_obligation_maximum_data
+    release_json, lot_subcontracting_obligation_maximum_data,
 ):
     """
     Merge the parsed subcontracting obligation maximum percentage data for lots into the main OCDS release JSON.
@@ -69,7 +69,7 @@ def merge_lot_subcontracting_obligation_maximum(
     """
     if not lot_subcontracting_obligation_maximum_data:
         logger.warning(
-            "No lot subcontracting obligation maximum percentage data to merge"
+            "No lot subcontracting obligation maximum percentage data to merge",
         )
         return
 
@@ -97,5 +97,5 @@ def merge_lot_subcontracting_obligation_maximum(
             release_json["tender"]["lots"].append(new_lot)
 
     logger.info(
-        f"Merged subcontracting obligation maximum percentage data for {len(lot_subcontracting_obligation_maximum_data['tender']['lots'])} lots"
+        f"Merged subcontracting obligation maximum percentage data for {len(lot_subcontracting_obligation_maximum_data['tender']['lots'])} lots",
     )

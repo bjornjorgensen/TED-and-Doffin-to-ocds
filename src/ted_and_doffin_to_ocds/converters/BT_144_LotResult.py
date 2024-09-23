@@ -36,19 +36,19 @@ def parse_not_awarded_reason(xml_content):
     }
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
     )
 
     for lot_result in lot_results:
         result_id = lot_result.xpath(
-            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
         )
         decision_reason_code = lot_result.xpath(
             "efac:DecisionReason/efbc:DecisionReasonCode[@listName='non-award-justification']/text()",
             namespaces=namespaces,
         )
         lot_id = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces,
         )
 
         if result_id and decision_reason_code and lot_id:
@@ -60,7 +60,7 @@ def parse_not_awarded_reason(xml_content):
                 "id": result_id,
                 "status": "unsuccessful",
                 "statusDetails": reason_code_mapping.get(
-                    decision_reason_code, "Unknown"
+                    decision_reason_code, "Unknown",
                 ),
                 "relatedLots": [lot_id],
             }
@@ -77,7 +77,7 @@ def merge_not_awarded_reason(release_json, not_awarded_reason_data):
     existing_awards = release_json.setdefault("awards", [])
     for new_award in not_awarded_reason_data["awards"]:
         existing_award = next(
-            (a for a in existing_awards if a["id"] == new_award["id"]), None
+            (a for a in existing_awards if a["id"] == new_award["id"]), None,
         )
         if existing_award:
             existing_award.update(new_award)
@@ -85,5 +85,5 @@ def merge_not_awarded_reason(release_json, not_awarded_reason_data):
             existing_awards.append(new_award)
 
     logger.info(
-        f"Merged not awarded reason data for {len(not_awarded_reason_data['awards'])} awards"
+        f"Merged not awarded reason data for {len(not_awarded_reason_data['awards'])} awards",
     )

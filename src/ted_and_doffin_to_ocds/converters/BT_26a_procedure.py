@@ -42,12 +42,12 @@ def merge_classification_type_procedure(release_json, classification_type_data):
 
     for new_item in classification_type_data["tender"]["items"]:
         existing_item = next(
-            (item for item in existing_items if item["id"] == new_item["id"]), None
+            (item for item in existing_items if item["id"] == new_item["id"]), None,
         )
 
         if existing_item:
             existing_classifications = existing_item.setdefault(
-                "additionalClassifications", []
+                "additionalClassifications", [],
             )
             for new_classification in new_item["additionalClassifications"]:
                 if new_classification not in existing_classifications:

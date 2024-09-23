@@ -22,7 +22,7 @@ def parse_notice_preferred_publication_date(xml_content):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
     }
 
     xpath_query = "/*/cbc:RequestedPublicationDate"
@@ -36,8 +36,8 @@ def parse_notice_preferred_publication_date(xml_content):
 
             return {
                 "tender": {
-                    "communication": {"noticePreferredPublicationDate": formatted_date}
-                }
+                    "communication": {"noticePreferredPublicationDate": formatted_date},
+                },
             }
         except ValueError as e:
             logger.error(f"Error parsing date: {e}")
@@ -47,7 +47,7 @@ def parse_notice_preferred_publication_date(xml_content):
 
 
 def merge_notice_preferred_publication_date(
-    release_json, preferred_publication_date_data
+    release_json, preferred_publication_date_data,
 ):
     """
     Merge the parsed notice preferred publication date into the main OCDS release JSON.

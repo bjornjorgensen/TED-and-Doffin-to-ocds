@@ -64,9 +64,9 @@ def test_merge_subcontracting_tender_indication():
                 {
                     "id": "LOT-0001",
                     "submissionTerms": {"subcontractingClauses": ["existing-clause"]},
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     new_data = {
@@ -75,9 +75,9 @@ def test_merge_subcontracting_tender_indication():
                 {
                     "id": "LOT-0001",
                     "submissionTerms": {"subcontractingClauses": ["subc-oblig"]},
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_subcontracting_tender_indication(existing_release, new_data)
@@ -99,9 +99,9 @@ def test_merge_subcontracting_tender_indication_new_lot():
                 {
                     "id": "LOT-0001",
                     "submissionTerms": {"subcontractingClauses": ["subc-oblig"]},
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_subcontracting_tender_indication(existing_release, new_data)

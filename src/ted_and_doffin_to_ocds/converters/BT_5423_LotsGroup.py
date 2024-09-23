@@ -67,14 +67,14 @@ def parse_award_criterion_number_threshold_lotsgroup(xml_content):
 
 
 def merge_award_criterion_number_threshold_lotsgroup(
-    release_json, award_criterion_data
+    release_json, award_criterion_data,
 ):
     if not award_criterion_data:
         logger.warning("No Award Criterion Number Threshold LotsGroup data to merge")
         return
 
     tender_lot_groups = release_json.setdefault("tender", {}).setdefault(
-        "lotGroups", []
+        "lotGroups", [],
     )
 
     for new_group in award_criterion_data["tender"]["lotGroups"]:
@@ -85,7 +85,7 @@ def merge_award_criterion_number_threshold_lotsgroup(
 
         if existing_group:
             existing_criteria = existing_group.setdefault(
-                "awardCriteria", {}
+                "awardCriteria", {},
             ).setdefault("criteria", [])
 
             for new_criterion in new_group["awardCriteria"]["criteria"]:
@@ -100,5 +100,5 @@ def merge_award_criterion_number_threshold_lotsgroup(
             tender_lot_groups.append(new_group)
 
     logger.info(
-        f"Merged Award Criterion Number Threshold LotsGroup data for {len(award_criterion_data['tender']['lotGroups'])} lot groups"
+        f"Merged Award Criterion Number Threshold LotsGroup data for {len(award_criterion_data['tender']['lotGroups'])} lot groups",
     )

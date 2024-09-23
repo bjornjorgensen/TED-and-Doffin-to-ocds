@@ -57,11 +57,11 @@ def test_bt_191_country_origin_integration(tmp_path):
     assert bid["id"] == "TEN-0001", f"Expected bid id 'TEN-0001', got {bid['id']}"
     assert "countriesOfOrigin" in bid, "Expected 'countriesOfOrigin' in bid"
     assert bid["countriesOfOrigin"] == [
-        "IT"
+        "IT",
     ], f"Expected countriesOfOrigin ['IT'], got {bid['countriesOfOrigin']}"
     assert "relatedLots" in bid, "Expected 'relatedLots' in bid"
     assert bid["relatedLots"] == [
-        "LOT-0001"
+        "LOT-0001",
     ], f"Expected relatedLots ['LOT-0001'], got {bid['relatedLots']}"
 
 

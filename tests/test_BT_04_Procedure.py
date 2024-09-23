@@ -19,14 +19,14 @@ def test_parse_procedure_identifier():
 def test_merge_procedure_identifier():
     release_json = {"tender": {"title": "Some tender title"}}
     procedure_identifier_data = {
-        "tender": {"id": "1e86a664-ae3c-41eb-8529-0242ac130003"}
+        "tender": {"id": "1e86a664-ae3c-41eb-8529-0242ac130003"},
     }
     merge_procedure_identifier(release_json, procedure_identifier_data)
     assert release_json == {
         "tender": {
             "title": "Some tender title",
             "id": "1e86a664-ae3c-41eb-8529-0242ac130003",
-        }
+        },
     }
 
 

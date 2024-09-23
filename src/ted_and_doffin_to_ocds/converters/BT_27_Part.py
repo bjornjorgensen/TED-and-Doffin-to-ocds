@@ -22,7 +22,7 @@ def parse_bt_27_part(xml_content):
     result = {"tender": {}}
 
     part_elements = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']", namespaces=namespaces,
     )
 
     if part_elements:

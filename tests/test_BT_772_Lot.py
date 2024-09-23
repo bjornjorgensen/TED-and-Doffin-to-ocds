@@ -55,9 +55,9 @@ def test_merge_late_tenderer_info_description():
                 {
                     "id": "LOT-0001",
                     "submissionMethodDetails": "Economic operators who ...",
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_late_tenderer_info_description(release_json, late_tenderer_info_description)
@@ -73,9 +73,9 @@ def test_merge_late_tenderer_info_description_append():
     release_json = {
         "tender": {
             "lots": [
-                {"id": "LOT-0001", "submissionMethodDetails": "Existing information."}
-            ]
-        }
+                {"id": "LOT-0001", "submissionMethodDetails": "Existing information."},
+            ],
+        },
     }
 
     late_tenderer_info_description = {
@@ -84,9 +84,9 @@ def test_merge_late_tenderer_info_description_append():
                 {
                     "id": "LOT-0001",
                     "submissionMethodDetails": "Economic operators who ...",
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_late_tenderer_info_description(release_json, late_tenderer_info_description)
@@ -161,7 +161,7 @@ def test_bt_772_lot_late_tenderer_info_description_integration(tmp_path):
     assert "Some documents can be submitted later." in lot_2["submissionMethodDetails"]
 
     lot_3 = next(
-        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"), None
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"), None,
     )
     assert lot_3 is not None
     assert "submissionMethodDetails" not in lot_3

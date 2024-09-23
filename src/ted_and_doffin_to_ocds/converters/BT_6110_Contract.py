@@ -52,15 +52,15 @@ def parse_contract_eu_funds_details(xml_content):
     result = {"contracts": []}
 
     settled_contracts = root.xpath(
-        "//efac:NoticeResult/efac:SettledContract", namespaces=namespaces
+        "//efac:NoticeResult/efac:SettledContract", namespaces=namespaces,
     )
 
     for contract in settled_contracts:
         contract_id = contract.xpath(
-            "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces,
         )
         funding_descriptions = contract.xpath(
-            "efac:Funding/cbc:Description/text()", namespaces=namespaces
+            "efac:Funding/cbc:Description/text()", namespaces=namespaces,
         )
 
         if contract_id and funding_descriptions:
@@ -76,7 +76,7 @@ def parse_contract_eu_funds_details(xml_content):
             )
             if lot_result:
                 award_id = lot_result[0].xpath(
-                    "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+                    "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
                 )
                 if award_id:
                     contract_data["awardID"] = award_id[0]
@@ -123,5 +123,5 @@ def merge_contract_eu_funds_details(release_json, eu_funds_details):
             existing_contracts.append(new_contract)
 
     logger.info(
-        f"BT-6110-Contract: Merged contract EU funds details for {len(eu_funds_details['contracts'])} contracts"
+        f"BT-6110-Contract: Merged contract EU funds details for {len(eu_funds_details['contracts'])} contracts",
     )

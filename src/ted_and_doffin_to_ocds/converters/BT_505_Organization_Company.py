@@ -22,7 +22,7 @@ def parse_organization_website(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization", namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -31,7 +31,7 @@ def parse_organization_website(xml_content):
             namespaces=namespaces,
         )
         website_uri = organization.xpath(
-            "efac:Company/cbc:WebsiteURI/text()", namespaces=namespaces
+            "efac:Company/cbc:WebsiteURI/text()", namespaces=namespaces,
         )
 
         if org_id and website_uri:
@@ -59,5 +59,5 @@ def merge_organization_website(release_json, organization_website_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Organization Website data for {len(organization_website_data['parties'])} parties"
+        f"Merged Organization Website data for {len(organization_website_data['parties'])} parties",
     )

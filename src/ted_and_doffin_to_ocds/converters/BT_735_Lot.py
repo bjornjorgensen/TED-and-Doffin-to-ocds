@@ -38,7 +38,7 @@ def parse_cvd_contract_type(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
@@ -57,9 +57,9 @@ def parse_cvd_contract_type(xml_content):
                         "id": cvd_code,
                         "scheme": "eu-cvd-contract-type",
                         "description": CVD_CONTRACT_TYPE_LABELS.get(
-                            cvd_code, "Unknown CVD contract type"
+                            cvd_code, "Unknown CVD contract type",
                         ),
-                    }
+                    },
                 ],
             }
             result["tender"]["lots"].append(lot_data)
@@ -87,11 +87,11 @@ def merge_cvd_contract_type(release_json, cvd_contract_type_data):
 
     for new_lot in cvd_contract_type_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_classifications = existing_lot.setdefault(
-                "additionalClassifications", []
+                "additionalClassifications", [],
             )
             new_classification = new_lot["additionalClassifications"][0]
             existing_classification = next(
@@ -110,5 +110,5 @@ def merge_cvd_contract_type(release_json, cvd_contract_type_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged CVD contract type data for {len(cvd_contract_type_data['tender']['lots'])} lots"
+        f"Merged CVD contract type data for {len(cvd_contract_type_data['tender']['lots'])} lots",
     )

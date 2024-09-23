@@ -60,9 +60,9 @@ def parse_procedure_type(xml_content):
         result = {
             "tender": {
                 "procurementMethodDetails": procedure_details_mapping.get(
-                    procedure_code
-                )
-            }
+                    procedure_code,
+                ),
+            },
         }
 
         procurement_method = procedure_code_mapping.get(procedure_code)

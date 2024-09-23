@@ -25,11 +25,11 @@ def parse_penalties_and_rewards(xml_content):
     result = {"tender": {"lots": []}}
 
     lot_tenders = root.xpath(
-        "//efac:NoticeResult/efac:LotTender", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotTender", namespaces=namespaces,
     )
     for lot_tender in lot_tenders:
         tender_id = lot_tender.xpath(
-            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces,
         )
         if tender_id:
             # Find the corresponding LotResult to get the lot_id
@@ -74,7 +74,7 @@ def merge_penalties_and_rewards(release_json, penalties_and_rewards_data):
 
     for new_lot in penalties_and_rewards_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_lot["penaltiesAndRewards"] = new_lot["penaltiesAndRewards"]
@@ -82,5 +82,5 @@ def merge_penalties_and_rewards(release_json, penalties_and_rewards_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged penalties and rewards data for {len(penalties_and_rewards_data['tender']['lots'])} lots"
+        f"Merged penalties and rewards data for {len(penalties_and_rewards_data['tender']['lots'])} lots",
     )

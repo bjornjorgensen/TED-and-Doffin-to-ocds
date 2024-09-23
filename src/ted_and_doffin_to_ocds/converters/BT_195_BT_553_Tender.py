@@ -43,7 +43,7 @@ def parse_bt195_bt553_tender(xml_content):
 
     for field_identifier_code in field_identifier_codes:
         tender_id = field_identifier_code.xpath(
-            "ancestor::efac:LotTender/cbc:ID/text()", namespaces=namespaces
+            "ancestor::efac:LotTender/cbc:ID/text()", namespaces=namespaces,
         )[0]
 
         withheld_info = {
@@ -69,7 +69,7 @@ def merge_bt195_bt553_tender(release_json, unpublished_identifier_data):
     """
     if not unpublished_identifier_data:
         logger.warning(
-            "No unpublished identifier data to merge for BT-195(BT-553)-Tender"
+            "No unpublished identifier data to merge for BT-195(BT-553)-Tender",
         )
         return
 

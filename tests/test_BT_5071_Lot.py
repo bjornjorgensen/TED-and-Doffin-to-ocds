@@ -56,9 +56,9 @@ def test_merge_place_performance_country_subdivision():
                     "id": "1",
                     "relatedLot": "LOT-0001",
                     "deliveryAddresses": [{"streetAddress": "123 Main St"}],
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     subdivision_data = {
@@ -68,9 +68,9 @@ def test_merge_place_performance_country_subdivision():
                     "id": "1",
                     "relatedLot": "LOT-0001",
                     "deliveryAddresses": [{"region": "UKG23"}],
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_place_performance_country_subdivision(release_json, subdivision_data)

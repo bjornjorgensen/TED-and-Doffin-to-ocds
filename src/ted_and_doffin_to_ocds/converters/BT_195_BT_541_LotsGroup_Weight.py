@@ -44,10 +44,10 @@ def parse_bt195_bt541_lotsgroup_weight(xml_content):
 
     for element in fields_privacy_elements:
         lot_id = element.xpath(
-            "ancestor::cac:ProcurementProjectLot/cbc:ID/text()", namespaces=namespaces
+            "ancestor::cac:ProcurementProjectLot/cbc:ID/text()", namespaces=namespaces,
         )[0]
         field_identifier = element.xpath(
-            "efbc:FieldIdentifierCode/text()", namespaces=namespaces
+            "efbc:FieldIdentifierCode/text()", namespaces=namespaces,
         )[0]
 
         withheld_info = {
@@ -73,7 +73,7 @@ def merge_bt195_bt541_lotsgroup_weight(release_json, unpublished_identifier_data
     """
     if not unpublished_identifier_data:
         logger.warning(
-            "No unpublished identifier data to merge for BT-195(BT-541)-LotsGroup-Weight"
+            "No unpublished identifier data to merge for BT-195(BT-541)-LotsGroup-Weight",
         )
         return
 
@@ -81,5 +81,5 @@ def merge_bt195_bt541_lotsgroup_weight(release_json, unpublished_identifier_data
     withheld_info.extend(unpublished_identifier_data["withheldInformation"])
 
     logger.info(
-        "Merged unpublished identifier data for BT-195(BT-541)-LotsGroup-Weight"
+        "Merged unpublished identifier data for BT-195(BT-541)-LotsGroup-Weight",
     )

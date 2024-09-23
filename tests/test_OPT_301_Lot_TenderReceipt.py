@@ -49,11 +49,11 @@ def test_parse_tender_recipient_identifier_no_data():
 
 def test_merge_tender_recipient_identifier():
     recipient_data = {
-        "parties": [{"id": "TPO-0001", "roles": ["submissionReceiptBody"]}]
+        "parties": [{"id": "TPO-0001", "roles": ["submissionReceiptBody"]}],
     }
 
     release_json = {
-        "parties": [{"id": "TPO-0002", "name": "Existing Party", "roles": ["buyer"]}]
+        "parties": [{"id": "TPO-0002", "name": "Existing Party", "roles": ["buyer"]}],
     }
 
     merge_tender_recipient_identifier(release_json, recipient_data)
@@ -67,11 +67,11 @@ def test_merge_tender_recipient_identifier():
 
 def test_merge_tender_recipient_identifier_existing_party():
     recipient_data = {
-        "parties": [{"id": "TPO-0001", "roles": ["submissionReceiptBody"]}]
+        "parties": [{"id": "TPO-0001", "roles": ["submissionReceiptBody"]}],
     }
 
     release_json = {
-        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}]
+        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}],
     }
 
     merge_tender_recipient_identifier(release_json, recipient_data)

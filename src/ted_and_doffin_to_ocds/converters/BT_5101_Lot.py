@@ -29,7 +29,7 @@ def parse_place_performance_street_lot(xml_content):
     result = {"tender": {"items": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
@@ -39,19 +39,19 @@ def parse_place_performance_street_lot(xml_content):
         for location in realized_locations:
             address_parts = []
             street_name = location.xpath(
-                "cac:Address/cbc:StreetName/text()", namespaces=namespaces
+                "cac:Address/cbc:StreetName/text()", namespaces=namespaces,
             )
             if street_name:
                 address_parts.append(street_name[0])
 
             additional_street_name = location.xpath(
-                "cac:Address/cbc:AdditionalStreetName/text()", namespaces=namespaces
+                "cac:Address/cbc:AdditionalStreetName/text()", namespaces=namespaces,
             )
             if additional_street_name:
                 address_parts.append(additional_street_name[0])
 
             address_lines = location.xpath(
-                "cac:Address/cac:AddressLine/cbc:Line/text()", namespaces=namespaces
+                "cac:Address/cac:AddressLine/cbc:Line/text()", namespaces=namespaces,
             )
             address_parts.extend(address_lines)
 
@@ -116,5 +116,5 @@ def merge_place_performance_street_lot(release_json, street_data):
             existing_items.append(new_item)
 
     logger.info(
-        f"Merged place performance street data for {len(street_data['tender']['items'])} items"
+        f"Merged place performance street data for {len(street_data['tender']['items'])} items",
     )

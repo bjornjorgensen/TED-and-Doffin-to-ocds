@@ -49,7 +49,7 @@ def parse_submission_nonelectronic_description(xml_content):
 
 
 def merge_submission_nonelectronic_description(
-    release_json, submission_nonelectronic_description_data
+    release_json, submission_nonelectronic_description_data,
 ):
     """
     Merge the parsed submission non-electronic description data into the main OCDS release JSON.
@@ -70,7 +70,7 @@ def merge_submission_nonelectronic_description(
 
     for new_lot in submission_nonelectronic_description_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_lot["submissionMethodDetails"] = new_lot["submissionMethodDetails"]
@@ -78,5 +78,5 @@ def merge_submission_nonelectronic_description(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged submission non-electronic description data for {len(submission_nonelectronic_description_data['tender']['lots'])} lots"
+        f"Merged submission non-electronic description data for {len(submission_nonelectronic_description_data['tender']['lots'])} lots",
     )

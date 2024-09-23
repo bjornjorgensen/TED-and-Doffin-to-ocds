@@ -53,7 +53,7 @@ def parse_bt195_bt541_lotsgroup_fixed_unpublished_identifier(xml_content):
 
 
 def merge_bt195_bt541_lotsgroup_fixed_unpublished_identifier(
-    release_json, unpublished_identifier_data
+    release_json, unpublished_identifier_data,
 ):
     """
     Merge the parsed unpublished identifier data into the main OCDS release JSON.
@@ -67,7 +67,7 @@ def merge_bt195_bt541_lotsgroup_fixed_unpublished_identifier(
     """
     if not unpublished_identifier_data:
         logger.warning(
-            "No unpublished identifier data to merge for BT-195(BT-541) LotsGroup Fixed"
+            "No unpublished identifier data to merge for BT-195(BT-541) LotsGroup Fixed",
         )
         return
 
@@ -75,5 +75,5 @@ def merge_bt195_bt541_lotsgroup_fixed_unpublished_identifier(
     withheld_info.extend(unpublished_identifier_data["withheldInformation"])
 
     logger.info(
-        f"Merged unpublished identifier data for BT-195(BT-541) LotsGroup Fixed for {len(unpublished_identifier_data['withheldInformation'])} lots groups"
+        f"Merged unpublished identifier data for BT-195(BT-541) LotsGroup Fixed for {len(unpublished_identifier_data['withheldInformation'])} lots groups",
     )

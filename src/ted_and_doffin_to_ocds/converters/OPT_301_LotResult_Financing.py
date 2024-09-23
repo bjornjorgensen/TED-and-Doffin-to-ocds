@@ -44,5 +44,5 @@ def merge_lotresult_financing(release_json, financing_data):
             release_json.setdefault("parties", []).append(party)
 
     logger.info(
-        f"Merged LotResult Financing data for {len(financing_data['parties'])} parties"
+        f"Merged LotResult Financing data for {len(financing_data['parties'])} parties",
     )

@@ -25,12 +25,12 @@ def parse_contract_tender_id(xml_content):
 
     for notice_result in notice_results:
         settled_contracts = notice_result.xpath(
-            "efac:SettledContract", namespaces=namespaces
+            "efac:SettledContract", namespaces=namespaces,
         )
 
         for settled_contract in settled_contracts:
             contract_id = settled_contract.xpath(
-                "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces
+                "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces,
             )[0]
             lot_tender_id = settled_contract.xpath(
                 "efac:LotTender/cbc:ID[@schemeName='tender']/text()",
@@ -57,7 +57,7 @@ def parse_contract_tender_id(xml_content):
 
             for tenderer in tenderers:
                 organization_id = tenderer.xpath(
-                    "cbc:ID[@schemeName='organization']/text()", namespaces=namespaces
+                    "cbc:ID[@schemeName='organization']/text()", namespaces=namespaces,
                 )[0]
 
                 party = {"id": organization_id, "roles": ["supplier"]}
@@ -70,7 +70,7 @@ def parse_contract_tender_id(xml_content):
 
                 for lot_result in lot_results:
                     award_id = lot_result.xpath(
-                        "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+                        "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
                     )[0]
                     lot_id = lot_result.xpath(
                         "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
@@ -99,8 +99,8 @@ def merge_contract_tender_id(release_json, contract_tender_id_data):
             existing_parties[new_party["id"]]["roles"] = list(
                 set(
                     existing_parties[new_party["id"]].get("roles", [])
-                    + new_party["roles"]
-                )
+                    + new_party["roles"],
+                ),
             )
         else:
             existing_parties[new_party["id"]] = new_party
@@ -116,10 +116,10 @@ def merge_contract_tender_id(release_json, contract_tender_id_data):
                     supplier["id"]: supplier
                     for supplier in existing_award.get("suppliers", [])
                     + new_award["suppliers"]
-                }.values()
+                }.values(),
             )
             existing_award["relatedLots"] = list(
-                set(existing_award.get("relatedLots", []) + new_award["relatedLots"])
+                set(existing_award.get("relatedLots", []) + new_award["relatedLots"]),
             )
         else:
             existing_awards[new_award["id"]] = new_award
@@ -134,13 +134,13 @@ def merge_contract_tender_id(release_json, contract_tender_id_data):
             existing_contracts[new_contract["id"]]["relatedBids"] = list(
                 set(
                     existing_contracts[new_contract["id"]].get("relatedBids", [])
-                    + new_contract["relatedBids"]
-                )
+                    + new_contract["relatedBids"],
+                ),
             )
         else:
             existing_contracts[new_contract["id"]] = new_contract
     release_json["contracts"] = list(existing_contracts.values())
 
     logger.info(
-        f"Merged Contract Tender ID data for {len(contract_tender_id_data['contracts'])} contracts"
+        f"Merged Contract Tender ID data for {len(contract_tender_id_data['contracts'])} contracts",
     )

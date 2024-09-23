@@ -72,8 +72,8 @@ def bt_197_parse_unpublished_justification_code_bt_09_procedure(xml_content):
                             "description"
                         ],
                         "uri": NON_PUBLICATION_JUSTIFICATION[code]["uri"],
-                    }
-                ]
+                    },
+                ],
             }
             result["withheldInformation"].append(withheld_item)
 
@@ -81,7 +81,7 @@ def bt_197_parse_unpublished_justification_code_bt_09_procedure(xml_content):
 
 
 def bt_197_merge_unpublished_justification_code_bt_09_procedure(
-    release_json, unpublished_justification_code_data
+    release_json, unpublished_justification_code_data,
 ):
     """
     Merge the parsed unpublished justification code data into the main OCDS release JSON.
@@ -102,7 +102,7 @@ def bt_197_merge_unpublished_justification_code_bt_09_procedure(
     for item in unpublished_justification_code_data["withheldInformation"]:
         if withheld_information:
             withheld_information[0].setdefault("rationaleClassifications", []).extend(
-                item["rationaleClassifications"]
+                item["rationaleClassifications"],
             )
         else:
             withheld_information.append(item)

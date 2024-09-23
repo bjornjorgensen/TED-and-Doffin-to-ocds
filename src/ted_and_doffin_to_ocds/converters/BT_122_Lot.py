@@ -22,7 +22,7 @@ def parse_electronic_auction_description(xml_content):
     result = {"lots": []}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
@@ -37,9 +37,9 @@ def parse_electronic_auction_description(xml_content):
                 {
                     "id": lot_id,
                     "techniques": {
-                        "electronicAuction": {"description": auction_description[0]}
+                        "electronicAuction": {"description": auction_description[0]},
                     },
-                }
+                },
             )
 
     return result if result["lots"] else None
@@ -55,15 +55,15 @@ def merge_electronic_auction_description(release_json, auction_description_data)
 
     for new_lot in auction_description_data["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_lot.setdefault("techniques", {}).setdefault(
-                "electronicAuction", {}
+                "electronicAuction", {},
             )["description"] = new_lot["techniques"]["electronicAuction"]["description"]
         else:
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Electronic Auction Description data for {len(auction_description_data['lots'])} lots"
+        f"Merged Electronic Auction Description data for {len(auction_description_data['lots'])} lots",
     )

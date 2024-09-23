@@ -40,7 +40,7 @@ def parse_organization_part_name(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization", namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -49,7 +49,7 @@ def parse_organization_part_name(xml_content):
             namespaces=namespaces,
         )
         org_name = organization.xpath(
-            "efac:Company/cac:PartyName/cbc:Name/text()", namespaces=namespaces
+            "efac:Company/cac:PartyName/cbc:Name/text()", namespaces=namespaces,
         )
         department = organization.xpath(
             "efac:Company/cac:PostalAddress/cbc:Department/text()",
@@ -95,5 +95,5 @@ def merge_organization_part_name(release_json, organization_part_name_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Organization Part Name data for {len(organization_part_name_data['parties'])} parties"
+        f"Merged Organization Part Name data for {len(organization_part_name_data['parties'])} parties",
     )

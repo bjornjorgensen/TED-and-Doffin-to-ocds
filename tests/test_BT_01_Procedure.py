@@ -81,8 +81,8 @@ def test_merge_procedure_legal_basis():
                 "scheme": "CELEX",
                 "id": "new_id",
                 "description": "New description",
-            }
-        }
+            },
+        },
     }
 
     merge_procedure_legal_basis(release_json, legal_basis_data)

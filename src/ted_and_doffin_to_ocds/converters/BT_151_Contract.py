@@ -23,12 +23,12 @@ def parse_contract_url(xml_content):
     document_id_counter = 1
 
     settled_contracts = root.xpath(
-        "//efac:NoticeResult/efac:SettledContract", namespaces=namespaces
+        "//efac:NoticeResult/efac:SettledContract", namespaces=namespaces,
     )
 
     for contract in settled_contracts:
         contract_id = contract.xpath(
-            "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces,
         )
         contract_url = contract.xpath("cbc:URI/text()", namespaces=namespaces)
 
@@ -40,7 +40,7 @@ def parse_contract_url(xml_content):
                         "id": str(document_id_counter),
                         "url": contract_url[0],
                         "documentType": "contractSigned",
-                    }
+                    },
                 ],
             }
             document_id_counter += 1
@@ -52,7 +52,7 @@ def parse_contract_url(xml_content):
             )
             if lot_result:
                 award_id = lot_result[0].xpath(
-                    "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+                    "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
                 )
                 if award_id:
                     contract_data["awardID"] = award_id[0]
@@ -71,7 +71,7 @@ def merge_contract_url(release_json, contract_url_data):
 
     for new_contract in contract_url_data["contracts"]:
         existing_contract = next(
-            (c for c in existing_contracts if c["id"] == new_contract["id"]), None
+            (c for c in existing_contracts if c["id"] == new_contract["id"]), None,
         )
         if existing_contract:
             existing_documents = existing_contract.setdefault("documents", [])
@@ -84,5 +84,5 @@ def merge_contract_url(release_json, contract_url_data):
             existing_contracts.append(new_contract)
 
     logger.info(
-        f"Merged contract URL data for {len(contract_url_data['contracts'])} contracts"
+        f"Merged contract URL data for {len(contract_url_data['contracts'])} contracts",
     )

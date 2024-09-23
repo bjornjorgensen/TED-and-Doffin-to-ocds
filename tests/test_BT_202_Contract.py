@@ -60,10 +60,10 @@ def test_merge_contract_modification_summary():
             {
                 "id": "CON-0001",
                 "amendments": [
-                    {"id": "1", "description": "Increase in framework value"}
+                    {"id": "1", "description": "Increase in framework value"},
                 ],
-            }
-        ]
+            },
+        ],
     }
 
     merge_contract_modification_summary(existing_json, modification_data)

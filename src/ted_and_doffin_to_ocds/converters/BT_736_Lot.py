@@ -32,7 +32,7 @@ def parse_reserved_execution(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
@@ -68,15 +68,15 @@ def merge_reserved_execution(release_json, reserved_execution_data):
 
     for new_lot in reserved_execution_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_lot.setdefault("contractTerms", {}).update(
-                new_lot["contractTerms"]
+                new_lot["contractTerms"],
             )
         else:
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged reserved execution data for {len(reserved_execution_data['tender']['lots'])} lots"
+        f"Merged reserved execution data for {len(reserved_execution_data['tender']['lots'])} lots",
     )

@@ -54,7 +54,7 @@ def parse_lot_documents_restricted_justification(xml_content):
     result = {"tender": {"documents": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
@@ -73,7 +73,7 @@ def parse_lot_documents_restricted_justification(xml_content):
 
             if justification_code:
                 justification = JUSTIFICATION_MAPPING.get(
-                    justification_code[0], "Unknown justification"
+                    justification_code[0], "Unknown justification",
                 )
                 document = {
                     "id": doc_id,
@@ -105,17 +105,17 @@ def merge_lot_documents_restricted_justification(release_json, lot_documents_dat
 
     for new_doc in lot_documents_data["tender"]["documents"]:
         existing_doc = next(
-            (doc for doc in existing_documents if doc["id"] == new_doc["id"]), None
+            (doc for doc in existing_documents if doc["id"] == new_doc["id"]), None,
         )
         if existing_doc:
             existing_doc["accessDetails"] = new_doc["accessDetails"]
             existing_doc.setdefault("relatedLots", []).extend(new_doc["relatedLots"])
             existing_doc["relatedLots"] = list(
-                set(existing_doc["relatedLots"])
+                set(existing_doc["relatedLots"]),
             )  # Remove duplicates
         else:
             existing_documents.append(new_doc)
 
     logger.info(
-        f"Merged lot documents restricted justification data for {len(lot_documents_data['tender']['documents'])} documents"
+        f"Merged lot documents restricted justification data for {len(lot_documents_data['tender']['documents'])} documents",
     )

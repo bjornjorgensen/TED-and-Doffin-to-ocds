@@ -46,7 +46,7 @@ def parse_submission_electronic_signature(xml_content):
                 "id": lot_id,
                 "submissionTerms": {
                     "advancedElectronicSignatureRequired": esignature_code[0].lower()
-                    == "true"
+                    == "true",
                 },
             }
             result["tender"]["lots"].append(lot_data)
@@ -55,7 +55,7 @@ def parse_submission_electronic_signature(xml_content):
 
 
 def merge_submission_electronic_signature(
-    release_json, submission_electronic_signature_data
+    release_json, submission_electronic_signature_data,
 ):
     """
     Merge the parsed submission electronic signature requirement data into the main OCDS release JSON.
@@ -76,15 +76,15 @@ def merge_submission_electronic_signature(
 
     for new_lot in submission_electronic_signature_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_lot.setdefault("submissionTerms", {}).update(
-                new_lot["submissionTerms"]
+                new_lot["submissionTerms"],
             )
         else:
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged submission electronic signature requirement data for {len(submission_electronic_signature_data['tender']['lots'])} lots"
+        f"Merged submission electronic signature requirement data for {len(submission_electronic_signature_data['tender']['lots'])} lots",
     )

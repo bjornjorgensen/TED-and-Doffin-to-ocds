@@ -22,19 +22,19 @@ def parse_contract_eu_funds_financing_identifier(xml_content):
     result = {"parties": [], "contracts": []}
 
     settled_contracts = root.xpath(
-        "//efac:NoticeResult/efac:SettledContract", namespaces=namespaces
+        "//efac:NoticeResult/efac:SettledContract", namespaces=namespaces,
     )
 
     for contract in settled_contracts:
         contract_id = contract.xpath(
-            "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces,
         )[0]
         funding_elements = contract.xpath("efac:Funding", namespaces=namespaces)
 
         contract_finance = []
         for funding in funding_elements:
             financing_identifier = funding.xpath(
-                "efbc:FinancingIdentifier/text()", namespaces=namespaces
+                "efbc:FinancingIdentifier/text()", namespaces=namespaces,
             )
 
             if financing_identifier:
@@ -54,7 +54,7 @@ def parse_contract_eu_funds_financing_identifier(xml_content):
 
 
 def merge_contract_eu_funds_financing_identifier(
-    release_json, contract_eu_funds_financing_identifier_data
+    release_json, contract_eu_funds_financing_identifier_data,
 ):
     if not contract_eu_funds_financing_identifier_data:
         logger.warning("No Contract EU Funds Financing Identifier data to merge")
@@ -114,5 +114,5 @@ def merge_contract_eu_funds_financing_identifier(
             existing_contracts.append(new_contract)
 
     logger.info(
-        f"Merged Contract EU Funds Financing Identifier data for {len(contract_eu_funds_financing_identifier_data['contracts'])} contracts"
+        f"Merged Contract EU Funds Financing Identifier data for {len(contract_eu_funds_financing_identifier_data['contracts'])} contracts",
     )

@@ -22,7 +22,7 @@ def parse_touchpoint_name(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization", namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -31,7 +31,7 @@ def parse_touchpoint_name(xml_content):
             namespaces=namespaces,
         )
         touchpoint_name = organization.xpath(
-            "efac:TouchPoint/cac:PartyName/cbc:Name/text()", namespaces=namespaces
+            "efac:TouchPoint/cac:PartyName/cbc:Name/text()", namespaces=namespaces,
         )
         department = organization.xpath(
             "efac:TouchPoint/cac:PostalAddress/cbc:Department/text()",
@@ -79,5 +79,5 @@ def merge_touchpoint_name(release_json, touchpoint_name_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged TouchPoint Name data for {len(touchpoint_name_data['parties'])} parties"
+        f"Merged TouchPoint Name data for {len(touchpoint_name_data['parties'])} parties",
     )

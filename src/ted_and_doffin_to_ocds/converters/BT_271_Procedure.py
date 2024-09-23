@@ -34,9 +34,9 @@ def parse_bt_271_procedure(xml_content):
         result["tender"] = {
             "techniques": {
                 "frameworkAgreement": {
-                    "value": {"amount": amount, "currency": currency}
-                }
-            }
+                    "value": {"amount": amount, "currency": currency},
+                },
+            },
         }
 
     return result

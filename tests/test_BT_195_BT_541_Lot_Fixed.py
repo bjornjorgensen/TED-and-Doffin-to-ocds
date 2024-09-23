@@ -18,7 +18,7 @@ def setup_logging():
 
 
 def test_bt195_bt541_lot_fixed_unpublished_identifier_integration(
-    tmp_path, setup_logging
+    tmp_path, setup_logging,
 ):
     logger = setup_logging
     xml_content = """
@@ -83,7 +83,7 @@ def test_bt195_bt541_lot_fixed_unpublished_identifier_integration(
 
 
 def test_bt195_bt541_lot_fixed_unpublished_identifier_missing_data(
-    tmp_path, setup_logging
+    tmp_path, setup_logging,
 ):
     logger = setup_logging
     xml_content = """

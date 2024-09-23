@@ -23,7 +23,7 @@ def parse_participant_name(xml_content):
     party_id_counter = 1
 
     lot_elements = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot_element in lot_elements:
@@ -44,7 +44,7 @@ def parse_participant_name(xml_content):
                 result["parties"].append(party)
 
                 lot["designContest"]["selectedParticipants"].append(
-                    {"id": party_id, "name": name}
+                    {"id": party_id, "name": name},
                 )
 
             result["tender"]["lots"].append(lot)
@@ -67,19 +67,19 @@ def merge_participant_name(release_json, participant_data):
         )
         if existing_party:
             existing_party["roles"] = list(
-                set(existing_party.get("roles", []) + new_party["roles"])
+                set(existing_party.get("roles", []) + new_party["roles"]),
             )
         else:
             existing_parties.append(new_party)
 
     for new_lot in participant_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_design_contest = existing_lot.setdefault("designContest", {})
             existing_selected_participants = existing_design_contest.setdefault(
-                "selectedParticipants", []
+                "selectedParticipants", [],
             )
             for new_participant in new_lot["designContest"]["selectedParticipants"]:
                 if new_participant not in existing_selected_participants:
@@ -88,5 +88,5 @@ def merge_participant_name(release_json, participant_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Participant Name data for {len(participant_data['parties'])} parties and {len(participant_data['tender']['lots'])} lots"
+        f"Merged Participant Name data for {len(participant_data['parties'])} parties and {len(participant_data['tender']['lots'])} lots",
     )

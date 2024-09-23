@@ -45,7 +45,7 @@ def parse_dispatch_invitation_interest(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
@@ -85,15 +85,15 @@ def merge_dispatch_invitation_interest(release_json, dispatch_invitation_data):
 
     for new_lot in dispatch_invitation_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_lot.setdefault("communication", {}).update(
-                new_lot["communication"]
+                new_lot["communication"],
             )
         else:
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged dispatch invitation interest data for {len(dispatch_invitation_data['tender']['lots'])} lots"
+        f"Merged dispatch invitation interest data for {len(dispatch_invitation_data['tender']['lots'])} lots",
     )

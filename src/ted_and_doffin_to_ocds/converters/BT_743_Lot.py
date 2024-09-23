@@ -77,15 +77,15 @@ def merge_electronic_invoicing(release_json, electronic_invoicing_data):
 
     for new_lot in electronic_invoicing_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_lot.setdefault("contractTerms", {}).update(
-                new_lot["contractTerms"]
+                new_lot["contractTerms"],
             )
         else:
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged electronic invoicing policy data for {len(electronic_invoicing_data['tender']['lots'])} lots"
+        f"Merged electronic invoicing policy data for {len(electronic_invoicing_data['tender']['lots'])} lots",
     )

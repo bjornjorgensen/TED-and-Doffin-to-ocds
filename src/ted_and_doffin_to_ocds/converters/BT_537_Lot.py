@@ -20,7 +20,7 @@ def parse_lot_duration_end_date(xml_content):
     result = {"tender": {"lots": []}}
 
     lot_elements = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot_element in lot_elements:
@@ -49,11 +49,11 @@ def merge_lot_duration_end_date(release_json, lot_duration_end_date_data):
 
     for new_lot in lot_duration_end_date_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_lot.setdefault("contractPeriod", {}).update(
-                new_lot["contractPeriod"]
+                new_lot["contractPeriod"],
             )
         else:
             existing_lots.append(new_lot)

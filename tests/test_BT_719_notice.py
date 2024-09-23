@@ -71,8 +71,8 @@ def test_merge_procurement_documents_change_date():
                     "relatedLots": ["LOT-0001"],
                 },
                 {"id": "doc2", "documentType": "biddingDocuments"},
-            ]
-        }
+            ],
+        },
     }
 
     change_date_data = {
@@ -87,8 +87,8 @@ def test_merge_procurement_documents_change_date():
                     "dateModified": "2023-05-16T00:00:00+01:00",
                     "documentType": "biddingDocuments",
                 },
-            ]
-        }
+            ],
+        },
     }
 
     merge_procurement_documents_change_date(existing_release, change_date_data)
@@ -106,7 +106,7 @@ def test_merge_procurement_documents_change_date():
 
 def test_merge_procurement_documents_change_date_new_document():
     existing_release = {
-        "tender": {"documents": [{"id": "doc1", "documentType": "biddingDocuments"}]}
+        "tender": {"documents": [{"id": "doc1", "documentType": "biddingDocuments"}]},
     }
 
     change_date_data = {
@@ -116,9 +116,9 @@ def test_merge_procurement_documents_change_date_new_document():
                     "dateModified": "2023-05-15T00:00:00+01:00",
                     "documentType": "biddingDocuments",
                     "relatedLots": ["LOT-0001"],
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_procurement_documents_change_date(existing_release, change_date_data)

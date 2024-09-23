@@ -2457,7 +2457,7 @@ def remove_empty_dicts(data):
 
 
 def process_bt_section2(
-    release_json, xml_content, parse_funcs, merge_func, section_name
+    release_json, xml_content, parse_funcs, merge_func, section_name,
 ):
     """
     Processes a specific business term section by calling the provided parsing and merging functions.
@@ -2487,7 +2487,7 @@ def process_bt_section2(
 
 
 def process_bt_section(
-    release_json, xml_content, parse_functions, merge_function, section_name
+    release_json, xml_content, parse_functions, merge_function, section_name,
 ):
     logger = logging.getLogger(__name__)
     try:
@@ -5374,7 +5374,7 @@ def main(xml_path, ocid_prefix):
 
     # Process BT-500
     process_bt_section(
-        release_json, xml_content, [parse_ubo_name], merge_ubo_name, "BT-500 (UBO Name)"
+        release_json, xml_content, [parse_ubo_name], merge_ubo_name, "BT-500 (UBO Name)",
     )
 
     # Process BT-501
@@ -6206,7 +6206,7 @@ def main(xml_path, ocid_prefix):
 
     # Process BT-625-Lot (Unit)
     process_bt_section(
-        release_json, xml_content, [parse_unit], merge_unit, "BT-625-Lot (Unit)"
+        release_json, xml_content, [parse_unit], merge_unit, "BT-625-Lot (Unit)",
     )
 
     # Process BT-63-Lot (Variants)

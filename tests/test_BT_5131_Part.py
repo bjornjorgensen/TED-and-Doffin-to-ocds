@@ -64,8 +64,8 @@ def test_merge_place_performance_city_part():
 
     new_data = {
         "tender": {
-            "deliveryAddresses": [{"locality": "New York"}, {"locality": "Los Angeles"}]
-        }
+            "deliveryAddresses": [{"locality": "New York"}, {"locality": "Los Angeles"}],
+        },
     }
 
     merge_place_performance_city_part(existing_json, new_data)
@@ -74,19 +74,19 @@ def test_merge_place_performance_city_part():
     assert existing_json["tender"]["deliveryAddresses"][0] == {"postalCode": "10001"}
     assert existing_json["tender"]["deliveryAddresses"][1] == {"locality": "New York"}
     assert existing_json["tender"]["deliveryAddresses"][2] == {
-        "locality": "Los Angeles"
+        "locality": "Los Angeles",
     }
 
 
 def test_merge_place_performance_city_part_update():
     existing_json = {
         "tender": {
-            "deliveryAddresses": [{"locality": "New York", "postalCode": "10001"}]
-        }
+            "deliveryAddresses": [{"locality": "New York", "postalCode": "10001"}],
+        },
     }
 
     new_data = {
-        "tender": {"deliveryAddresses": [{"locality": "New York", "region": "NY"}]}
+        "tender": {"deliveryAddresses": [{"locality": "New York", "region": "NY"}]},
     }
 
     merge_place_performance_city_part(existing_json, new_data)

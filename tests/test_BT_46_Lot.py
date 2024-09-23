@@ -46,9 +46,9 @@ def test_merge_jury_member_name():
                 {
                     "id": "LOT-0001",
                     "designContest": {"juryMembers": [{"name": "Mrs Pamela Smith"}]},
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}

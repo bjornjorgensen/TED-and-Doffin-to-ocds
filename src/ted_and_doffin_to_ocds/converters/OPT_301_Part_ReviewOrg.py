@@ -45,5 +45,5 @@ def merge_part_revieworg(release_json, revieworg_data):
             release_json.setdefault("parties", []).append(party)
 
     logger.info(
-        f"Merged Part Review Organization data for {len(revieworg_data['parties'])} parties"
+        f"Merged Part Review Organization data for {len(revieworg_data['parties'])} parties",
     )

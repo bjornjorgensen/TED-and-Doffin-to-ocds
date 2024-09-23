@@ -55,7 +55,7 @@ def parse_documents_restricted_url_part(xml_content):
     for document in documents:
         doc_id = document.xpath("cbc:ID/text()", namespaces=namespaces)
         url = document.xpath(
-            "cac:Attachment/cac:ExternalReference/cbc:URI/text()", namespaces=namespaces
+            "cac:Attachment/cac:ExternalReference/cbc:URI/text()", namespaces=namespaces,
         )
 
         if doc_id and url:
@@ -84,12 +84,12 @@ def merge_documents_restricted_url_part(release_json, documents_data):
         return
 
     existing_documents = release_json.setdefault("tender", {}).setdefault(
-        "documents", []
+        "documents", [],
     )
 
     for new_doc in documents_data["tender"]["documents"]:
         existing_doc = next(
-            (doc for doc in existing_documents if doc["id"] == new_doc["id"]), None
+            (doc for doc in existing_documents if doc["id"] == new_doc["id"]), None,
         )
         if existing_doc:
             existing_doc["accessDetailsURL"] = new_doc["accessDetailsURL"]
@@ -97,5 +97,5 @@ def merge_documents_restricted_url_part(release_json, documents_data):
             existing_documents.append(new_doc)
 
     logger.info(
-        f"BT-615-Part: Merged documents restricted URL data for {len(documents_data['tender']['documents'])} documents"
+        f"BT-615-Part: Merged documents restricted URL data for {len(documents_data['tender']['documents'])} documents",
     )

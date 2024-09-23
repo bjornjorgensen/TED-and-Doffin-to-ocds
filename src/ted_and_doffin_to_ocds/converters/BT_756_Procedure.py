@@ -29,7 +29,7 @@ def parse_pin_competition_termination(xml_content: str | bytes) -> dict | None:
     }
 
     terminated_indicator = root.xpath(
-        "//cac:TenderingProcess/cbc:TerminatedIndicator/text()", namespaces=namespaces
+        "//cac:TenderingProcess/cbc:TerminatedIndicator/text()", namespaces=namespaces,
     )
 
     if terminated_indicator and terminated_indicator[0].lower() == "true":
@@ -39,7 +39,7 @@ def parse_pin_competition_termination(xml_content: str | bytes) -> dict | None:
 
 
 def merge_pin_competition_termination(
-    release_json: dict, parsed_data: dict | None
+    release_json: dict, parsed_data: dict | None,
 ) -> None:
     """
     Merge the parsed PIN competition termination data into the main OCDS release JSON.

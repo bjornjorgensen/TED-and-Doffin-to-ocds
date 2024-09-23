@@ -22,7 +22,7 @@ def parse_lot_additional_nature(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for lot in lots:
@@ -52,7 +52,7 @@ def merge_lot_additional_nature(release_json, lot_additional_nature_data):
 
     for new_lot in lot_additional_nature_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None,
         )
         if existing_lot:
             existing_lot["additionalProcurementCategories"] = new_lot[
@@ -62,5 +62,5 @@ def merge_lot_additional_nature(release_json, lot_additional_nature_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Lot Additional Nature data for {len(lot_additional_nature_data['tender']['lots'])} lots"
+        f"Merged Lot Additional Nature data for {len(lot_additional_nature_data['tender']['lots'])} lots",
     )

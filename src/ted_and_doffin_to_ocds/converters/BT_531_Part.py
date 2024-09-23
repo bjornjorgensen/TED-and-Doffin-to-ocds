@@ -28,7 +28,7 @@ def parse_part_additional_nature(xml_content):
 
     if additional_natures:
         result["tender"]["additionalProcurementCategories"] = list(
-            set(additional_natures)
+            set(additional_natures),
         )  # Remove duplicates
 
     return result if result["tender"]["additionalProcurementCategories"] else None
@@ -42,12 +42,12 @@ def merge_part_additional_nature(release_json, part_additional_nature_data):
     tender = release_json.setdefault("tender", {})
     existing_categories = set(tender.get("additionalProcurementCategories", []))
     new_categories = set(
-        part_additional_nature_data["tender"]["additionalProcurementCategories"]
+        part_additional_nature_data["tender"]["additionalProcurementCategories"],
     )
 
     combined_categories = list(existing_categories.union(new_categories))
     tender["additionalProcurementCategories"] = combined_categories
 
     logger.info(
-        f"Merged Part Additional Nature data: {len(combined_categories)} categories"
+        f"Merged Part Additional Nature data: {len(combined_categories)} categories",
     )

@@ -47,15 +47,15 @@ def parse_part_framework_agreement(xml_content: str) -> dict | None:
                     "techniques": {
                         "hasFrameworkAgreement": True,
                         "frameworkAgreement": {"method": mapped_method},
-                    }
-                }
+                    },
+                },
             }
 
     return None
 
 
 def merge_part_framework_agreement(
-    release_json: dict, part_framework_agreement_data: dict | None
+    release_json: dict, part_framework_agreement_data: dict | None,
 ) -> None:
     """
     Merge the parsed Part Framework Agreement data into the main OCDS release JSON.

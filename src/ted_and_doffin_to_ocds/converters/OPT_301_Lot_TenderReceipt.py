@@ -49,5 +49,5 @@ def merge_tender_recipient_identifier(release_json, recipient_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged tender recipient data for {len(recipient_data['parties'])} parties"
+        f"Merged tender recipient data for {len(recipient_data['parties'])} parties",
     )

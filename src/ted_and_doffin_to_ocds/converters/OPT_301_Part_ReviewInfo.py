@@ -26,7 +26,7 @@ def parse_part_reviewinfo(xml_content):
 
     for review_info_id in review_info_ids:
         result["parties"].append(
-            {"id": review_info_id.text, "roles": ["reviewContactPoint"]}
+            {"id": review_info_id.text, "roles": ["reviewContactPoint"]},
         )
 
     return result if result["parties"] else None
@@ -47,5 +47,5 @@ def merge_part_reviewinfo(release_json, reviewinfo_data):
             release_json.setdefault("parties", []).append(party)
 
     logger.info(
-        f"Merged Part Review Info data for {len(reviewinfo_data['parties'])} parties"
+        f"Merged Part Review Info data for {len(reviewinfo_data['parties'])} parties",
     )

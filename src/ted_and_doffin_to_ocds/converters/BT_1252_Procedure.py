@@ -27,10 +27,10 @@ def parse_direct_award_justification(xml_content):
 
     for justification in process_justifications:
         identifier = justification.xpath(
-            "cbc:Description/text()", namespaces=namespaces
+            "cbc:Description/text()", namespaces=namespaces,
         )
         reason_code = justification.xpath(
-            "cbc:ProcessReasonCode/text()", namespaces=namespaces
+            "cbc:ProcessReasonCode/text()", namespaces=namespaces,
         )
 
         if identifier:
@@ -71,5 +71,5 @@ def merge_direct_award_justification(release_json, direct_award_data):
         existing_related_processes.append(new_process)
 
     logger.info(
-        f"Merged Direct Award Justification data for {len(direct_award_data['relatedProcesses'])} related processes"
+        f"Merged Direct Award Justification data for {len(direct_award_data['relatedProcesses'])} related processes",
     )

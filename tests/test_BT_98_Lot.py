@@ -53,9 +53,9 @@ def test_merge_tender_validity_deadline():
                 {
                     "id": "LOT-0001",
                     "submissionTerms": {"bidValidityPeriod": {"durationInDays": 120}},
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_tender_validity_deadline(release_json, tender_validity_deadline_data)
@@ -105,13 +105,13 @@ def test_bt_98_lot_tender_validity_deadline_integration(tmp_path):
     assert len(result["tender"]["lots"]) == 2
 
     lot_1 = next(
-        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0001"), None
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0001"), None,
     )
     assert lot_1 is not None
     assert lot_1["submissionTerms"]["bidValidityPeriod"]["durationInDays"] == 120
 
     lot_2 = next(
-        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002"), None
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002"), None,
     )
     assert lot_2 is not None
     assert lot_2["submissionTerms"]["bidValidityPeriod"]["durationInDays"] == 42

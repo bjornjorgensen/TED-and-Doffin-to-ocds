@@ -41,7 +41,7 @@ def merge_part_duration_other(release_json, part_duration_other_data):
 
     if "contractPeriod" in part_duration_other_data["tender"]:
         tender.setdefault("contractPeriod", {}).update(
-            part_duration_other_data["tender"]["contractPeriod"]
+            part_duration_other_data["tender"]["contractPeriod"],
         )
         logger.info("Merged Part Duration Other data")
     else:

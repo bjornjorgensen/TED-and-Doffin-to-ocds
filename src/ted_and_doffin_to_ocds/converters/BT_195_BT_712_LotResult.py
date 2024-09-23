@@ -32,7 +32,7 @@ def parse_bt195_bt712_unpublished_identifier(xml_content):
     result = {"withheldInformation": []}
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
     )
 
     for lot_result in lot_results:
@@ -49,10 +49,10 @@ def parse_bt195_bt712_unpublished_identifier(xml_content):
 
             if fields_privacy:
                 field_identifier = fields_privacy[0].xpath(
-                    "efbc:FieldIdentifierCode/text()", namespaces=namespaces
+                    "efbc:FieldIdentifierCode/text()", namespaces=namespaces,
                 )
                 lot_id = lot_result.xpath(
-                    "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+                    "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
                 )
 
                 if field_identifier and lot_id:
@@ -85,5 +85,5 @@ def merge_bt195_bt712_unpublished_identifier(release_json, unpublished_identifie
     withheld_info.extend(unpublished_identifier_data["withheldInformation"])
 
     logger.info(
-        f"Merged {len(unpublished_identifier_data['withheldInformation'])} unpublished identifier(s) for BT-195(BT-712)"
+        f"Merged {len(unpublished_identifier_data['withheldInformation'])} unpublished identifier(s) for BT-195(BT-712)",
     )

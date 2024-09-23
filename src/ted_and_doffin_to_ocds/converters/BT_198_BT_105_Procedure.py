@@ -46,7 +46,7 @@ def parse_bt198_bt105_unpublished_access_date(xml_content):
 
 
 def merge_bt198_bt105_unpublished_access_date(
-    release_json, unpublished_access_date_data
+    release_json, unpublished_access_date_data,
 ):
     """
     Merge the parsed unpublished access date data into the main OCDS release JSON.
@@ -66,7 +66,7 @@ def merge_bt198_bt105_unpublished_access_date(
 
     for new_item in unpublished_access_date_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item["field"] == new_item["field"]), None
+            (item for item in withheld_info if item["field"] == new_item["field"]), None,
         )
         if existing_item:
             existing_item["availabilityDate"] = new_item["availabilityDate"]

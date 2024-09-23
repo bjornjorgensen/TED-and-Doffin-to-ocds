@@ -56,12 +56,12 @@ def parse_bt197_bt144_unpublished_justification_code(xml_content):
     result = {"withheldInformation": []}
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
     )
 
     for lot_result in lot_results:
         lot_id = lot_result.xpath(
-            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
         )
         reason_code = lot_result.xpath(
             "efac:DecisionReason/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='no-awa-rea']/cbc:ReasonCode/text()",
@@ -78,7 +78,7 @@ def parse_bt197_bt144_unpublished_justification_code(xml_content):
                         "id": code,
                         "description": JUSTIFICATION_CODES[code]["description"],
                         "uri": JUSTIFICATION_CODES[code]["uri"],
-                    }
+                    },
                 ],
             }
             result["withheldInformation"].append(withheld_info)
@@ -87,7 +87,7 @@ def parse_bt197_bt144_unpublished_justification_code(xml_content):
 
 
 def merge_bt197_bt144_unpublished_justification_code(
-    release_json, unpublished_justification_code_data
+    release_json, unpublished_justification_code_data,
 ):
     """
     Merge the parsed unpublished justification code data into the main OCDS release JSON.
@@ -101,7 +101,7 @@ def merge_bt197_bt144_unpublished_justification_code(
     """
     if not unpublished_justification_code_data:
         logger.warning(
-            "No unpublished justification code data to merge for BT-197(BT-144)"
+            "No unpublished justification code data to merge for BT-197(BT-144)",
         )
         return
 
@@ -109,11 +109,11 @@ def merge_bt197_bt144_unpublished_justification_code(
 
     for new_item in unpublished_justification_code_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item.get("id") == new_item["id"]), None
+            (item for item in withheld_info if item.get("id") == new_item["id"]), None,
         )
         if existing_item:
             existing_item.setdefault("rationaleClassifications", []).extend(
-                new_item["rationaleClassifications"]
+                new_item["rationaleClassifications"],
             )
         else:
             withheld_info.append(new_item)

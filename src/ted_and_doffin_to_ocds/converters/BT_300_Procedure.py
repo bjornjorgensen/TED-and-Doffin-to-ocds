@@ -22,13 +22,13 @@ def parse_procedure_additional_info(xml_content):
     result = []
 
     procedure_notes = root.xpath(
-        "//cac:ProcurementProject/cbc:Note", namespaces=namespaces
+        "//cac:ProcurementProject/cbc:Note", namespaces=namespaces,
     )
 
     for note in procedure_notes:
         note_text = note.text
         language = note.get(
-            "languageID", "en"
+            "languageID", "en",
         )  # Default to 'en' if languageID is not present
         result.append({"text": note_text, "language": language})
 

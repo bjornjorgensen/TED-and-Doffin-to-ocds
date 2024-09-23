@@ -60,8 +60,8 @@ def test_merge_ubo_nationality():
             {
                 "id": "ORG-0001",
                 "beneficialOwners": [{"id": "UBO-0001", "nationalities": ["DE"]}],
-            }
-        ]
+            },
+        ],
     }
 
     merge_ubo_nationality(release_json, ubo_nationality_data)

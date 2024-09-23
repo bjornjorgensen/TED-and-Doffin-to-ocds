@@ -76,9 +76,9 @@ def test_merge_subcontracting_obligation():
                 {
                     "id": "LOT-0001",
                     "subcontractingTerms": {"description": "Old description"},
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     new_data = {
@@ -87,9 +87,9 @@ def test_merge_subcontracting_obligation():
                 {
                     "id": "LOT-0001",
                     "subcontractingTerms": {"description": "New description"},
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_subcontracting_obligation(existing_release, new_data)
@@ -108,9 +108,9 @@ def test_merge_subcontracting_obligation_new_lot():
                 {
                     "id": "LOT-0001",
                     "subcontractingTerms": {"description": "New description"},
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_subcontracting_obligation(existing_release, new_data)

@@ -60,7 +60,7 @@ def parse_bt197_bt636_unpublished_justification_code(xml_content):
 
     for statistic in appeal_requests_statistics:
         lot_result_id = statistic.xpath(
-            "ancestor::efac:LotResult/cbc:ID/text()", namespaces=namespaces
+            "ancestor::efac:LotResult/cbc:ID/text()", namespaces=namespaces,
         )
         reason_code = statistic.xpath("cbc:ReasonCode/text()", namespaces=namespaces)
 
@@ -75,7 +75,7 @@ def parse_bt197_bt636_unpublished_justification_code(xml_content):
                             "id": code,
                             "description": JUSTIFICATION_CODES[code]["description"],
                             "uri": JUSTIFICATION_CODES[code]["uri"],
-                        }
+                        },
                     ],
                 }
                 result["withheldInformation"].append(withheld_info)
@@ -84,7 +84,7 @@ def parse_bt197_bt636_unpublished_justification_code(xml_content):
 
 
 def merge_bt197_bt636_unpublished_justification_code(
-    release_json, unpublished_justification_code_data
+    release_json, unpublished_justification_code_data,
 ):
     """
     Merge the parsed unpublished justification code data into the main OCDS release JSON.
@@ -98,7 +98,7 @@ def merge_bt197_bt636_unpublished_justification_code(
     """
     if not unpublished_justification_code_data:
         logger.warning(
-            "No unpublished justification code data to merge for BT-197(BT-636)"
+            "No unpublished justification code data to merge for BT-197(BT-636)",
         )
         return
 
@@ -106,15 +106,15 @@ def merge_bt197_bt636_unpublished_justification_code(
 
     for new_item in unpublished_justification_code_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item.get("id") == new_item["id"]), None
+            (item for item in withheld_info if item.get("id") == new_item["id"]), None,
         )
         if existing_item:
             existing_item.setdefault("rationaleClassifications", []).extend(
-                new_item["rationaleClassifications"]
+                new_item["rationaleClassifications"],
             )
         else:
             withheld_info.append(new_item)
 
     logger.info(
-        f"Merged {len(unpublished_justification_code_data['withheldInformation'])} unpublished justification code(s) for BT-197(BT-636)"
+        f"Merged {len(unpublished_justification_code_data['withheldInformation'])} unpublished justification code(s) for BT-197(BT-636)",
     )

@@ -40,7 +40,7 @@ def parse_bt195_bt539_lotsgroup_unpublished_identifier(xml_content):
             namespaces=namespaces,
         )
         field_identifier = fields_privacy.xpath(
-            "efbc:FieldIdentifierCode/text()", namespaces=namespaces
+            "efbc:FieldIdentifierCode/text()", namespaces=namespaces,
         )
 
         if lots_group_id and field_identifier:
@@ -55,7 +55,7 @@ def parse_bt195_bt539_lotsgroup_unpublished_identifier(xml_content):
 
 
 def merge_bt195_bt539_lotsgroup_unpublished_identifier(
-    release_json, unpublished_identifier_data
+    release_json, unpublished_identifier_data,
 ):
     """
     Merge the parsed unpublished identifier data into the main OCDS release JSON.
@@ -69,7 +69,7 @@ def merge_bt195_bt539_lotsgroup_unpublished_identifier(
     """
     if not unpublished_identifier_data:
         logger.warning(
-            "No unpublished identifier data to merge for BT-195(BT-539)-LotsGroup"
+            "No unpublished identifier data to merge for BT-195(BT-539)-LotsGroup",
         )
         return
 
@@ -77,5 +77,5 @@ def merge_bt195_bt539_lotsgroup_unpublished_identifier(
     withheld_info.extend(unpublished_identifier_data["withheldInformation"])
 
     logger.info(
-        f"Merged unpublished identifier data for BT-195(BT-539)-LotsGroup: {len(unpublished_identifier_data['withheldInformation'])} items"
+        f"Merged unpublished identifier data for BT-195(BT-539)-LotsGroup: {len(unpublished_identifier_data['withheldInformation'])} items",
     )

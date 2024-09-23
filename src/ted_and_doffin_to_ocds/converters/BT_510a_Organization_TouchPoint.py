@@ -22,7 +22,7 @@ def parse_touchpoint_street(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization", namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -90,5 +90,5 @@ def merge_touchpoint_street(release_json, touchpoint_street_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged TouchPoint Street data for {len(touchpoint_street_data['parties'])} parties"
+        f"Merged TouchPoint Street data for {len(touchpoint_street_data['parties'])} parties",
     )

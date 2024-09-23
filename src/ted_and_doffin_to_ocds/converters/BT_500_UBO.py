@@ -22,7 +22,7 @@ def parse_ubo_name(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization", namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -40,13 +40,13 @@ def parse_ubo_name(xml_content):
             )
             for ubo in ubos:
                 ubo_id = ubo.xpath(
-                    "cbc:ID[@schemeName='ubo']/text()", namespaces=namespaces
+                    "cbc:ID[@schemeName='ubo']/text()", namespaces=namespaces,
                 )
                 ubo_name = ubo.xpath("cbc:FamilyName/text()", namespaces=namespaces)
 
                 if ubo_id and ubo_name:
                     party["beneficialOwners"].append(
-                        {"id": ubo_id[0], "name": ubo_name[0]}
+                        {"id": ubo_id[0], "name": ubo_name[0]},
                     )
 
             if party["beneficialOwners"]:
@@ -69,7 +69,7 @@ def merge_ubo_name(release_json, ubo_name_data):
         )
         if existing_party:
             existing_party.setdefault("beneficialOwners", []).extend(
-                new_party["beneficialOwners"]
+                new_party["beneficialOwners"],
             )
         else:
             existing_parties.append(new_party)

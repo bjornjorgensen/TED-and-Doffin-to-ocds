@@ -74,7 +74,7 @@ def parse_organization_country(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization", namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -123,5 +123,5 @@ def merge_organization_country(release_json, organization_country_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Organization Country data for {len(organization_country_data['parties'])} parties"
+        f"Merged Organization Country data for {len(organization_country_data['parties'])} parties",
     )

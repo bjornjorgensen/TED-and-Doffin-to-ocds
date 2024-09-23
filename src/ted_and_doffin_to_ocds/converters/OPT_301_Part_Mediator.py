@@ -45,5 +45,5 @@ def merge_part_mediator(release_json, mediator_data):
             release_json.setdefault("parties", []).append(party)
 
     logger.info(
-        f"Merged Part Mediator data for {len(mediator_data['parties'])} parties"
+        f"Merged Part Mediator data for {len(mediator_data['parties'])} parties",
     )

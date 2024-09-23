@@ -22,7 +22,7 @@ def parse_lot_quantity(xml_content):
     result = {"tender": {"items": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces,
     )
 
     for i, lot in enumerate(lots, start=1):
@@ -67,5 +67,5 @@ def merge_lot_quantity(release_json, lot_quantity_data):
             existing_items.append(new_item)
 
     logger.info(
-        f"Merged Lot Quantity data for {len(lot_quantity_data['tender']['items'])} items"
+        f"Merged Lot Quantity data for {len(lot_quantity_data['tender']['items'])} items",
     )

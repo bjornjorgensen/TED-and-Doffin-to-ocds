@@ -51,7 +51,7 @@ def test_bt_14_lot_integration(tmp_path):
     ), f"Expected accessDetails 'Restricted.', got {document['accessDetails']}"
     assert "relatedLots" in document, "Expected 'relatedLots' in document"
     assert document["relatedLots"] == [
-        "LOT-0001"
+        "LOT-0001",
     ], f"Expected relatedLots ['LOT-0001'], got {document['relatedLots']}"
 
 

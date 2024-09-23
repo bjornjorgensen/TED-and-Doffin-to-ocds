@@ -56,7 +56,7 @@ def parse_bt197_bt712_unpublished_justification_code(xml_content):
     result = {"withheldInformation": []}
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces,
     )
 
     for lot_result in lot_results:
@@ -73,10 +73,10 @@ def parse_bt197_bt712_unpublished_justification_code(xml_content):
 
             if fields_privacy:
                 reason_code = fields_privacy[0].xpath(
-                    "cbc:ReasonCode/text()", namespaces=namespaces
+                    "cbc:ReasonCode/text()", namespaces=namespaces,
                 )
                 lot_id = lot_result.xpath(
-                    "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+                    "cbc:ID[@schemeName='result']/text()", namespaces=namespaces,
                 )
 
                 if reason_code and lot_id:
@@ -93,7 +93,7 @@ def parse_bt197_bt712_unpublished_justification_code(xml_content):
                                         "description"
                                     ],
                                     "uri": JUSTIFICATION_CODES[code]["uri"],
-                                }
+                                },
                             ],
                         }
                         result["withheldInformation"].append(withheld_info)
@@ -102,7 +102,7 @@ def parse_bt197_bt712_unpublished_justification_code(xml_content):
 
 
 def merge_bt197_bt712_unpublished_justification_code(
-    release_json, unpublished_justification_code_data
+    release_json, unpublished_justification_code_data,
 ):
     """
     Merge the parsed unpublished justification code data into the main OCDS release JSON.
@@ -116,7 +116,7 @@ def merge_bt197_bt712_unpublished_justification_code(
     """
     if not unpublished_justification_code_data:
         logger.warning(
-            "No unpublished justification code data to merge for BT-197(BT-712)"
+            "No unpublished justification code data to merge for BT-197(BT-712)",
         )
         return
 
@@ -124,15 +124,15 @@ def merge_bt197_bt712_unpublished_justification_code(
 
     for new_item in unpublished_justification_code_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item.get("id") == new_item["id"]), None
+            (item for item in withheld_info if item.get("id") == new_item["id"]), None,
         )
         if existing_item:
             existing_item.setdefault("rationaleClassifications", []).extend(
-                new_item["rationaleClassifications"]
+                new_item["rationaleClassifications"],
             )
         else:
             withheld_info.append(new_item)
 
     logger.info(
-        f"Merged {len(unpublished_justification_code_data['withheldInformation'])} unpublished justification code(s) for BT-197(BT-712)"
+        f"Merged {len(unpublished_justification_code_data['withheldInformation'])} unpublished justification code(s) for BT-197(BT-712)",
     )
