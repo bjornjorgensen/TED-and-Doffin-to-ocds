@@ -9,10 +9,10 @@ packages = [{include = "ted_and_doffin_to_ocds", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.12"
-lxml = "^5."
+lxml = "^5"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.3"
+pytest = "^8"
 ruff = "^0.6"
 
 [build-system]
