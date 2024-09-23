@@ -78,7 +78,7 @@ def parse_bt197_bt541_lotsgroup_threshold(xml_content):
                         "id": code,
                         "description": JUSTIFICATION_CODES[code]["description"],
                         "uri": JUSTIFICATION_CODES[code]["uri"],
-                    }
+                    },
                 ],
             }
             result["withheldInformation"].append(withheld_info)
@@ -87,7 +87,8 @@ def parse_bt197_bt541_lotsgroup_threshold(xml_content):
 
 
 def merge_bt197_bt541_lotsgroup_threshold(
-    release_json, unpublished_justification_code_data
+    release_json,
+    unpublished_justification_code_data,
 ):
     """
     Merge the parsed unpublished justification code data into the main OCDS release JSON.
@@ -101,7 +102,7 @@ def merge_bt197_bt541_lotsgroup_threshold(
     """
     if not unpublished_justification_code_data:
         logger.warning(
-            "No unpublished justification code data to merge for BT-197(BT-541)-LotsGroup-Threshold"
+            "No unpublished justification code data to merge for BT-197(BT-541)-LotsGroup-Threshold",
         )
         return
 
@@ -114,11 +115,11 @@ def merge_bt197_bt541_lotsgroup_threshold(
         )
         if existing_item:
             existing_item.setdefault("rationaleClassifications", []).extend(
-                new_item["rationaleClassifications"]
+                new_item["rationaleClassifications"],
             )
         else:
             withheld_info.append(new_item)
 
     logger.info(
-        "Merged unpublished justification code data for BT-197(BT-541)-LotsGroup-Threshold"
+        "Merged unpublished justification code data for BT-197(BT-541)-LotsGroup-Threshold",
     )

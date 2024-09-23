@@ -22,7 +22,8 @@ def parse_touchpoint_postcode(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -68,5 +69,5 @@ def merge_touchpoint_postcode(release_json, touchpoint_postcode_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged TouchPoint Postcode data for {len(touchpoint_postcode_data['parties'])} parties"
+        f"Merged TouchPoint Postcode data for {len(touchpoint_postcode_data['parties'])} parties",
     )

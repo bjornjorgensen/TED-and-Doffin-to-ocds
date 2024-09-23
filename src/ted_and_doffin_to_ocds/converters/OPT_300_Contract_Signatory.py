@@ -30,10 +30,11 @@ def parse_contract_signatory(xml_content):
 
         if org:
             org_name = org[0].xpath(
-                "cac:PartyName/cbc:Name/text()", namespaces=namespaces
+                "cac:PartyName/cbc:Name/text()",
+                namespaces=namespaces,
             )[0]
             result["parties"].append(
-                {"id": org_id, "name": org_name, "roles": ["buyer"]}
+                {"id": org_id, "name": org_name, "roles": ["buyer"]},
             )
 
         # Find the corresponding SettledContract
@@ -42,7 +43,8 @@ def parse_contract_signatory(xml_content):
 
         if contract:
             contract_id = contract[0].xpath(
-                "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces
+                "cbc:ID[@schemeName='contract']/text()",
+                namespaces=namespaces,
             )[0]
             award_xpath = f"//efac:NoticeResult/efac:LotResult[efac:SettledContract/cbc:ID[@schemeName='contract']/text()='{contract_id}']/cbc:ID[@schemeName='result']/text()"
             award_ids = root.xpath(award_xpath, namespaces=namespaces)
@@ -62,7 +64,7 @@ def merge_contract_signatory(release_json, signatory_data):
     for party in signatory_data.get("parties", []):
         if party["id"] in existing_parties:
             existing_parties[party["id"]]["roles"] = list(
-                set(existing_parties[party["id"]].get("roles", []) + party["roles"])
+                set(existing_parties[party["id"]].get("roles", []) + party["roles"]),
             )
         else:
             release_json.setdefault("parties", []).append(party)
@@ -83,5 +85,5 @@ def merge_contract_signatory(release_json, signatory_data):
             release_json.setdefault("awards", []).append(award)
 
     logger.info(
-        f"Merged Contract Signatory data for {len(signatory_data.get('parties', []))} parties and {len(signatory_data.get('awards', []))} awards"
+        f"Merged Contract Signatory data for {len(signatory_data.get('parties', []))} parties and {len(signatory_data.get('awards', []))} awards",
     )

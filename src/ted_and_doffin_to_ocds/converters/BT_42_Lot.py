@@ -22,7 +22,8 @@ def parse_lot_jury_decision_binding(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -51,15 +52,16 @@ def merge_lot_jury_decision_binding(release_json, lot_jury_decision_binding_data
 
     for new_lot in lot_jury_decision_binding_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("designContest", {}).update(
-                new_lot["designContest"]
+                new_lot["designContest"],
             )
         else:
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged lot jury decision binding data for {len(lot_jury_decision_binding_data['tender']['lots'])} lots"
+        f"Merged lot jury decision binding data for {len(lot_jury_decision_binding_data['tender']['lots'])} lots",
     )

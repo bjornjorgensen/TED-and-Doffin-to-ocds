@@ -31,7 +31,7 @@ def test_parse_reserved_participation_part():
     assert "otherRequirements" in result["tender"]
     assert "reservedParticipation" in result["tender"]["otherRequirements"]
     assert result["tender"]["otherRequirements"]["reservedParticipation"] == [
-        "shelteredWorkshop"
+        "shelteredWorkshop",
     ]
 
 
@@ -40,8 +40,8 @@ def test_merge_reserved_participation_part():
 
     reserved_participation_data = {
         "tender": {
-            "otherRequirements": {"reservedParticipation": ["shelteredWorkshop"]}
-        }
+            "otherRequirements": {"reservedParticipation": ["shelteredWorkshop"]},
+        },
     }
 
     merge_reserved_participation_part(release_json, reserved_participation_data)
@@ -49,7 +49,7 @@ def test_merge_reserved_participation_part():
     assert "otherRequirements" in release_json["tender"]
     assert "reservedParticipation" in release_json["tender"]["otherRequirements"]
     assert release_json["tender"]["otherRequirements"]["reservedParticipation"] == [
-        "shelteredWorkshop"
+        "shelteredWorkshop",
     ]
 
 
@@ -57,15 +57,15 @@ def test_merge_multiple_reserved_participation_part():
     release_json = {
         "tender": {
             "otherRequirements": {
-                "reservedParticipation": ["publicServiceMissionOrganization"]
-            }
-        }
+                "reservedParticipation": ["publicServiceMissionOrganization"],
+            },
+        },
     }
 
     reserved_participation_data = {
         "tender": {
-            "otherRequirements": {"reservedParticipation": ["shelteredWorkshop"]}
-        }
+            "otherRequirements": {"reservedParticipation": ["shelteredWorkshop"]},
+        },
     }
 
     merge_reserved_participation_part(release_json, reserved_participation_data)
@@ -73,7 +73,7 @@ def test_merge_multiple_reserved_participation_part():
     assert "otherRequirements" in release_json["tender"]
     assert "reservedParticipation" in release_json["tender"]["otherRequirements"]
     assert set(
-        release_json["tender"]["otherRequirements"]["reservedParticipation"]
+        release_json["tender"]["otherRequirements"]["reservedParticipation"],
     ) == {"publicServiceMissionOrganization", "shelteredWorkshop"}
 
 

@@ -23,7 +23,8 @@ def parse_non_disclosure_agreement_description(xml_content):
     result = {"tender": {"lots": []}}
 
     lot_elements = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
     logger.debug(f"Found {len(lot_elements)} lot elements")
 
@@ -40,7 +41,7 @@ def parse_non_disclosure_agreement_description(xml_content):
                 {
                     "id": lot_id,
                     "contractTerms": {"nonDisclosureAgreement": nda_description[0]},
-                }
+                },
             )
         else:
             logger.debug(f"No NDA description found for lot {lot_id}")
@@ -72,5 +73,5 @@ def merge_non_disclosure_agreement_description(release_json, nda_description_dat
             logger.debug(f"Added new lot {lot_id} with NDA description")
 
     logger.info(
-        f"Merged NDA descriptions for {len(nda_description_data['tender']['lots'])} lots"
+        f"Merged NDA descriptions for {len(nda_description_data['tender']['lots'])} lots",
     )

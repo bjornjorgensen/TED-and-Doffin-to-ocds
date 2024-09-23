@@ -44,7 +44,8 @@ def parse_selection_criteria_type(xml_content):
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         selection_criteria = lot.xpath(
-            ".//efac:SelectionCriteria", namespaces=namespaces
+            ".//efac:SelectionCriteria",
+            namespaces=namespaces,
         )
 
         lot_data = {"id": lot_id, "selectionCriteria": {"criteria": []}}
@@ -91,11 +92,13 @@ def merge_selection_criteria_type(release_json, selection_criteria_type_data):
 
     for new_lot in selection_criteria_type_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_criteria = existing_lot.setdefault(
-                "selectionCriteria", {}
+                "selectionCriteria",
+                {},
             ).setdefault("criteria", [])
             for new_criterion in new_lot["selectionCriteria"]["criteria"]:
                 existing_criterion = next(
@@ -114,5 +117,5 @@ def merge_selection_criteria_type(release_json, selection_criteria_type_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged selection criteria type data for {len(selection_criteria_type_data['tender']['lots'])} lots"
+        f"Merged selection criteria type data for {len(selection_criteria_type_data['tender']['lots'])} lots",
     )

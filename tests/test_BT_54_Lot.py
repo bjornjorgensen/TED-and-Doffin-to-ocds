@@ -57,8 +57,8 @@ def test_merge_options_description():
                     "id": "LOT-0002",
                     "options": {"description": "Another option description"},
                 },
-            ]
-        }
+            ],
+        },
     }
 
     merge_options_description(release_json, options_description_data)

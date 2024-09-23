@@ -67,8 +67,8 @@ def test_merge_ubo_identifier():
             {
                 "id": "ORG-0001",
                 "beneficialOwners": [{"id": "UBO-0001"}, {"id": "UBO-0002"}],
-            }
-        ]
+            },
+        ],
     }
 
     merge_ubo_identifier(release_json, ubo_data)

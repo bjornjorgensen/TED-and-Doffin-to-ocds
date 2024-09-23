@@ -52,7 +52,8 @@ def parse_bt196_bt541_lot_weight_unpublished_justification(xml_content):
 
 
 def merge_bt196_bt541_lot_weight_unpublished_justification(
-    release_json, unpublished_justification_data
+    release_json,
+    unpublished_justification_data,
 ):
     """
     Merge the parsed unpublished justification data into the main OCDS release JSON.
@@ -66,7 +67,7 @@ def merge_bt196_bt541_lot_weight_unpublished_justification(
     """
     if not unpublished_justification_data:
         logger.warning(
-            "No unpublished justification data to merge for BT-196(BT-541) Lot Weight"
+            "No unpublished justification data to merge for BT-196(BT-541) Lot Weight",
         )
         return
 
@@ -83,5 +84,5 @@ def merge_bt196_bt541_lot_weight_unpublished_justification(
             withheld_info.append(new_item)
 
     logger.info(
-        f"Merged unpublished justification data for BT-196(BT-541) Lot Weight for {len(unpublished_justification_data['withheldInformation'])} lots"
+        f"Merged unpublished justification data for BT-196(BT-541) Lot Weight for {len(unpublished_justification_data['withheldInformation'])} lots",
     )

@@ -19,7 +19,7 @@ class NoticeProcessor:
         notice_id = tree.xpath(
             "string(/*/cbc:ID)",
             namespaces={
-                "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+                "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
             },
         )
 

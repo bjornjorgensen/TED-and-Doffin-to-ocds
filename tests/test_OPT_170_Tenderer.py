@@ -54,13 +54,15 @@ def test_tendering_party_leader_integration(tmp_path):
     assert len(result["parties"]) == 2
 
     leader_party = next(
-        (party for party in result["parties"] if party["id"] == "ORG-0001"), None
+        (party for party in result["parties"] if party["id"] == "ORG-0001"),
+        None,
     )
     assert leader_party is not None
     assert set(leader_party["roles"]) == {"tenderer", "leadTenderer"}
 
     non_leader_party = next(
-        (party for party in result["parties"] if party["id"] == "ORG-0002"), None
+        (party for party in result["parties"] if party["id"] == "ORG-0002"),
+        None,
     )
     assert non_leader_party is not None
     assert set(non_leader_party["roles"]) == {"tenderer"}

@@ -52,9 +52,9 @@ def test_merge_award_criterion_type():
     release_json = {
         "tender": {
             "lots": [
-                {"id": "LOT-0001", "awardCriteria": {"criteria": [{"type": "price"}]}}
-            ]
-        }
+                {"id": "LOT-0001", "awardCriteria": {"criteria": [{"type": "price"}]}},
+            ],
+        },
     }
 
     award_criterion_type_data = {
@@ -65,8 +65,8 @@ def test_merge_award_criterion_type():
                     "awardCriteria": {"criteria": [{"type": "quality"}]},
                 },
                 {"id": "LOT-0002", "awardCriteria": {"criteria": [{"type": "cost"}]}},
-            ]
-        }
+            ],
+        },
     }
 
     merge_award_criterion_type(release_json, award_criterion_type_data)

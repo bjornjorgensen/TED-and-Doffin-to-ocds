@@ -57,7 +57,7 @@ def test_bt_193_tender_integration(tmp_path):
     assert bid["variant"] is True, f"Expected variant to be True, got {bid['variant']}"
     assert "relatedLots" in bid, "Expected 'relatedLots' in bid"
     assert bid["relatedLots"] == [
-        "LOT-0001"
+        "LOT-0001",
     ], f"Expected relatedLots ['LOT-0001'], got {bid['relatedLots']}"
 
 

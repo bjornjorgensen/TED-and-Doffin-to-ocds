@@ -89,9 +89,9 @@ def test_merge_award_criterion_number_threshold():
                 {
                     "id": "LOT-001",
                     "awardCriteria": {"criteria": [{"id": "AC-1", "numbers": []}]},
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     new_data = {
@@ -100,11 +100,11 @@ def test_merge_award_criterion_number_threshold():
                 {
                     "id": "LOT-001",
                     "awardCriteria": {
-                        "criteria": [{"numbers": [{"threshold": "maximumBids"}]}]
+                        "criteria": [{"numbers": [{"threshold": "maximumBids"}]}],
                     },
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_award_criterion_number_threshold(existing_release, new_data)
@@ -115,7 +115,7 @@ def test_merge_award_criterion_number_threshold():
         len(
             existing_release["tender"]["lots"][0]["awardCriteria"]["criteria"][0][
                 "numbers"
-            ]
+            ],
         )
         == 1
     )
@@ -136,11 +136,11 @@ def test_merge_award_criterion_number_threshold_new_lot():
                 {
                     "id": "LOT-001",
                     "awardCriteria": {
-                        "criteria": [{"numbers": [{"threshold": "minimumScore"}]}]
+                        "criteria": [{"numbers": [{"threshold": "minimumScore"}]}],
                     },
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_award_criterion_number_threshold(existing_release, new_data)

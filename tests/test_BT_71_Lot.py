@@ -47,11 +47,11 @@ def test_merge_reserved_participation():
                 {
                     "id": "LOT-0001",
                     "otherRequirements": {
-                        "reservedParticipation": ["shelteredWorkshop"]
+                        "reservedParticipation": ["shelteredWorkshop"],
                     },
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_reserved_participation(release_json, reserved_participation_data)

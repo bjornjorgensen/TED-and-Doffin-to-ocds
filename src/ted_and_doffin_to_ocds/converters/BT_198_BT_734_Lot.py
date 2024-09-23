@@ -33,7 +33,8 @@ def parse_bt198_bt734_lot_unpublished_access_date(xml_content):
     result = {"withheldInformation": []}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -44,7 +45,8 @@ def parse_bt198_bt734_lot_unpublished_access_date(xml_content):
 
         if fields_privacy:
             publication_date = fields_privacy[0].xpath(
-                "efbc:PublicationDate/text()", namespaces=namespaces
+                "efbc:PublicationDate/text()",
+                namespaces=namespaces,
             )
             lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
 
@@ -61,7 +63,8 @@ def parse_bt198_bt734_lot_unpublished_access_date(xml_content):
 
 
 def merge_bt198_bt734_lot_unpublished_access_date(
-    release_json, unpublished_access_date_data
+    release_json,
+    unpublished_access_date_data,
 ):
     """
     Merge the parsed unpublished access date data into the main OCDS release JSON.
@@ -75,7 +78,7 @@ def merge_bt198_bt734_lot_unpublished_access_date(
     """
     if not unpublished_access_date_data:
         logger.warning(
-            "No unpublished access date data to merge for BT-198(BT-734)-Lot"
+            "No unpublished access date data to merge for BT-198(BT-734)-Lot",
         )
         return
 
@@ -83,7 +86,8 @@ def merge_bt198_bt734_lot_unpublished_access_date(
 
     for new_item in unpublished_access_date_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item.get("id") == new_item["id"]), None
+            (item for item in withheld_info if item.get("id") == new_item["id"]),
+            None,
         )
         if existing_item:
             existing_item["availabilityDate"] = new_item["availabilityDate"]
@@ -91,5 +95,5 @@ def merge_bt198_bt734_lot_unpublished_access_date(
             withheld_info.append(new_item)
 
     logger.info(
-        f"Merged {len(unpublished_access_date_data['withheldInformation'])} unpublished access date(s) for BT-198(BT-734)-Lot"
+        f"Merged {len(unpublished_access_date_data['withheldInformation'])} unpublished access date(s) for BT-198(BT-734)-Lot",
     )

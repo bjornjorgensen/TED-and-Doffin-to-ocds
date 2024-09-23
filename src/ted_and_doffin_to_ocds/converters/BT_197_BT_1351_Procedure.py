@@ -71,7 +71,7 @@ def parse_bt197_bt1351_unpublished_justification_code(xml_content):
                         "id": code,
                         "description": JUSTIFICATION_CODES[code]["description"],
                         "uri": JUSTIFICATION_CODES[code]["uri"],
-                    }
+                    },
                 ],
             }
             result["withheldInformation"].append(withheld_info)
@@ -80,7 +80,8 @@ def parse_bt197_bt1351_unpublished_justification_code(xml_content):
 
 
 def merge_bt197_bt1351_unpublished_justification_code(
-    release_json, unpublished_justification_code_data
+    release_json,
+    unpublished_justification_code_data,
 ):
     """
     Merge the parsed unpublished justification code data into the main OCDS release JSON.
@@ -94,7 +95,7 @@ def merge_bt197_bt1351_unpublished_justification_code(
     """
     if not unpublished_justification_code_data:
         logger.warning(
-            "No unpublished justification code data to merge for BT-197(BT-1351)"
+            "No unpublished justification code data to merge for BT-197(BT-1351)",
         )
         return
 
@@ -107,7 +108,7 @@ def merge_bt197_bt1351_unpublished_justification_code(
         )
         if existing_item:
             existing_item.setdefault("rationaleClassifications", []).extend(
-                new_item["rationaleClassifications"]
+                new_item["rationaleClassifications"],
             )
         else:
             withheld_info.append(new_item)

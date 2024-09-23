@@ -32,7 +32,8 @@ def parse_lot_place_performance_additional(xml_content):
     result = {"tender": {"items": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -58,7 +59,8 @@ def parse_lot_place_performance_additional(xml_content):
 
 
 def merge_lot_place_performance_additional(
-    release_json, lot_place_performance_additional_data
+    release_json,
+    lot_place_performance_additional_data,
 ):
     """
     Merge the parsed additional place of performance data for lots into the main OCDS release JSON.
@@ -109,5 +111,5 @@ def merge_lot_place_performance_additional(
             release_json["tender"]["items"].append(new_item)
 
     logger.info(
-        f"Merged additional place of performance data for {len(lot_place_performance_additional_data['tender']['items'])} lots"
+        f"Merged additional place of performance data for {len(lot_place_performance_additional_data['tender']['items'])} lots",
     )

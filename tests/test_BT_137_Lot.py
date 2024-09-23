@@ -41,7 +41,7 @@ def test_merge_purpose_lot_identifier():
     release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}
 
     purpose_lot_identifier_data = {
-        "tender": {"lots": [{"id": "LOT-0001"}, {"id": "LOT-0002"}]}
+        "tender": {"lots": [{"id": "LOT-0001"}, {"id": "LOT-0002"}]},
     }
 
     merge_purpose_lot_identifier(release_json, purpose_lot_identifier_data)

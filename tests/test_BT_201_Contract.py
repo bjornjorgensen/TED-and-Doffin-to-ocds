@@ -50,7 +50,7 @@ def test_parse_contract_modification_description():
     assert "id" in amendment
     assert "rationale" in amendment
     assert amendment["rationale"].startswith(
-        "The original business case was scoped as a technology replacement programme"
+        "The original business case was scoped as a technology replacement programme",
     )
 
     assert contract["awardID"] == "RES-0001"
@@ -64,8 +64,8 @@ def test_merge_contract_modification_description():
             {
                 "id": "CON-0001",
                 "amendments": [{"id": "1", "rationale": "New rationale description"}],
-            }
-        ]
+            },
+        ],
     }
 
     merge_contract_modification_description(existing_json, modification_data)

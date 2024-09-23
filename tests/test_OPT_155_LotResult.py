@@ -60,8 +60,8 @@ def test_parse_vehicle_type():
 def test_merge_vehicle_type():
     release_json = {
         "awards": [
-            {"id": "RES-0001", "items": [{"id": "1", "description": "Existing item"}]}
-        ]
+            {"id": "RES-0001", "items": [{"id": "1", "description": "Existing item"}]},
+        ],
     }
 
     vehicle_type_data = {
@@ -76,13 +76,13 @@ def test_merge_vehicle_type():
                                 "scheme": "vehicles",
                                 "id": "vehicles-zero-emission",
                                 "description": "Vehicles zero emission",
-                            }
+                            },
                         ],
-                    }
+                    },
                 ],
                 "relatedLots": ["LOT-0001"],
-            }
-        ]
+            },
+        ],
     }
 
     merge_vehicle_type(release_json, vehicle_type_data)
@@ -154,7 +154,8 @@ def test_opt_155_lotresult_vehicle_type_integration(tmp_path):
     assert len(result["awards"]) == 2
 
     award_1 = next(
-        (award for award in result["awards"] if award["id"] == "RES-0001"), None
+        (award for award in result["awards"] if award["id"] == "RES-0001"),
+        None,
     )
     assert award_1 is not None
     assert len(award_1["items"]) == 1
@@ -165,7 +166,8 @@ def test_opt_155_lotresult_vehicle_type_integration(tmp_path):
     assert award_1["relatedLots"] == ["LOT-0001"]
 
     award_2 = next(
-        (award for award in result["awards"] if award["id"] == "RES-0002"), None
+        (award for award in result["awards"] if award["id"] == "RES-0002"),
+        None,
     )
     assert award_2 is not None
     assert len(award_2["items"]) == 1

@@ -32,7 +32,8 @@ def parse_award_criterion_number_weight_lot(xml_content):
     }
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -56,7 +57,7 @@ def parse_award_criterion_number_weight_lot(xml_content):
             for weight in number_weights:
                 if weight in number_weight_mapping:
                     criterion_data["numbers"].append(
-                        {"weight": number_weight_mapping[weight]}
+                        {"weight": number_weight_mapping[weight]},
                     )
 
             if criterion_data["numbers"]:
@@ -69,7 +70,8 @@ def parse_award_criterion_number_weight_lot(xml_content):
 
 
 def merge_award_criterion_number_weight_lot(
-    release_json, lot_award_criterion_number_weight_data
+    release_json,
+    lot_award_criterion_number_weight_data,
 ):
     if not lot_award_criterion_number_weight_data:
         logger.warning("No Lot Award Criterion Number Weight data to merge")
@@ -80,12 +82,14 @@ def merge_award_criterion_number_weight_lot(
 
     for new_lot in lot_award_criterion_number_weight_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
 
         if existing_lot:
             existing_criteria = existing_lot.setdefault("awardCriteria", {}).setdefault(
-                "criteria", []
+                "criteria",
+                [],
             )
 
             for new_criterion in new_lot["awardCriteria"]["criteria"]:
@@ -119,5 +123,5 @@ def merge_award_criterion_number_weight_lot(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Lot Award Criterion Number Weight data for {len(lot_award_criterion_number_weight_data['tender']['lots'])} lots"
+        f"Merged Lot Award Criterion Number Weight data for {len(lot_award_criterion_number_weight_data['tender']['lots'])} lots",
     )

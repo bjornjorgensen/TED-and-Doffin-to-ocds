@@ -19,12 +19,14 @@ def map_extended_duration_indicator(xml_content):
     result = {"tender": {"lots": []}}
 
     settled_contracts = root.xpath(
-        "//efac:NoticeResult/efac:SettledContract", namespaces=namespaces
+        "//efac:NoticeResult/efac:SettledContract",
+        namespaces=namespaces,
     )
 
     for contract in settled_contracts:
         contract_id = contract.xpath(
-            "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='contract']/text()",
+            namespaces=namespaces,
         )[0]
         extended_duration = contract.xpath(
             "efac:DurationJustification/efbc:ExtendedDurationIndicator/text()",
@@ -59,7 +61,8 @@ def merge_extended_duration_indicator(release_json, extended_duration_data):
 
     for new_lot in extended_duration_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot["hasEssentialAssets"] = new_lot["hasEssentialAssets"]

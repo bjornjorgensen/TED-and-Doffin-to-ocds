@@ -33,14 +33,16 @@ def parse_place_performance_city_procedure(xml_content):
 
 
 def merge_place_performance_city_procedure(
-    release_json, place_performance_city_procedure_data
+    release_json,
+    place_performance_city_procedure_data,
 ):
     if not place_performance_city_procedure_data:
         logger.warning("No Place Performance City Procedure data to merge")
         return
 
     tender_delivery_addresses = release_json.setdefault("tender", {}).setdefault(
-        "deliveryAddresses", []
+        "deliveryAddresses",
+        [],
     )
 
     for new_address in place_performance_city_procedure_data["tender"][
@@ -60,5 +62,5 @@ def merge_place_performance_city_procedure(
             tender_delivery_addresses.append(new_address)
 
     logger.info(
-        f"Merged Place Performance City Procedure data for {len(place_performance_city_procedure_data['tender']['deliveryAddresses'])} addresses"
+        f"Merged Place Performance City Procedure data for {len(place_performance_city_procedure_data['tender']['deliveryAddresses'])} addresses",
     )

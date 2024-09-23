@@ -38,7 +38,7 @@ def parse_award_criterion_type_lots_group(xml_content):
             lot_group_data = {
                 "id": lot_group_id,
                 "awardCriteria": {
-                    "criteria": [{"type": criterion} for criterion in criteria]
+                    "criteria": [{"type": criterion} for criterion in criteria],
                 },
             }
             result["tender"]["lotGroups"].append(lot_group_data)
@@ -56,11 +56,13 @@ def merge_award_criterion_type_lots_group(release_json, award_criterion_type_dat
 
     for new_lot_group in award_criterion_type_data["tender"]["lotGroups"]:
         existing_lot_group = next(
-            (lg for lg in existing_lot_groups if lg["id"] == new_lot_group["id"]), None
+            (lg for lg in existing_lot_groups if lg["id"] == new_lot_group["id"]),
+            None,
         )
         if existing_lot_group:
             existing_criteria = existing_lot_group.setdefault(
-                "awardCriteria", {}
+                "awardCriteria",
+                {},
             ).setdefault("criteria", [])
             for new_criterion in new_lot_group["awardCriteria"]["criteria"]:
                 existing_criterion = next(
@@ -79,5 +81,5 @@ def merge_award_criterion_type_lots_group(release_json, award_criterion_type_dat
             existing_lot_groups.append(new_lot_group)
 
     logger.info(
-        f"Merged Award Criterion Type data for {len(award_criterion_type_data['tender']['lotGroups'])} lot groups"
+        f"Merged Award Criterion Type data for {len(award_criterion_type_data['tender']['lotGroups'])} lot groups",
     )

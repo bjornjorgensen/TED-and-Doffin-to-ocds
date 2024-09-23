@@ -19,7 +19,8 @@ def parse_additional_classification_code_lot(xml_content):
     result = {"tender": {"items": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -61,7 +62,8 @@ def merge_additional_classification_code_lot(release_json, classification_code_d
 
         if existing_item:
             existing_classifications = existing_item.setdefault(
-                "additionalClassifications", []
+                "additionalClassifications",
+                [],
             )
             for new_classification in new_item["additionalClassifications"]:
                 existing_classification = next(

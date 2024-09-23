@@ -35,17 +35,20 @@ def parse_tender_value(xml_content: str) -> dict | None:
 
     for lot_tender in lot_tenders:
         tender_id = lot_tender.xpath(
-            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='tender']/text()",
+            namespaces=namespaces,
         )
         payable_amount = lot_tender.xpath(
-            "cac:LegalMonetaryTotal/cbc:PayableAmount/text()", namespaces=namespaces
+            "cac:LegalMonetaryTotal/cbc:PayableAmount/text()",
+            namespaces=namespaces,
         )
         currency = lot_tender.xpath(
             "cac:LegalMonetaryTotal/cbc:PayableAmount/@currencyID",
             namespaces=namespaces,
         )
         lot_id = lot_tender.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+            namespaces=namespaces,
         )
 
         if tender_id and payable_amount and currency and lot_id:
@@ -62,7 +65,8 @@ def parse_tender_value(xml_content: str) -> dict | None:
             )
             if lot_result:
                 result_id = lot_result[0].xpath(
-                    "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+                    "cbc:ID[@schemeName='result']/text()",
+                    namespaces=namespaces,
                 )
                 if result_id:
                     award = {
@@ -99,7 +103,8 @@ def merge_tender_value(release_json: dict, tender_value_data: dict | None) -> No
 
     for bid in tender_value_data["bids"]["details"]:
         existing_bid = next(
-            (b for b in release_json["bids"]["details"] if b["id"] == bid["id"]), None
+            (b for b in release_json["bids"]["details"] if b["id"] == bid["id"]),
+            None,
         )
         if existing_bid:
             existing_bid.update(bid)
@@ -112,7 +117,8 @@ def merge_tender_value(release_json: dict, tender_value_data: dict | None) -> No
 
     for award in tender_value_data["awards"]:
         existing_award = next(
-            (a for a in release_json["awards"] if a["id"] == award["id"]), None
+            (a for a in release_json["awards"] if a["id"] == award["id"]),
+            None,
         )
         if existing_award:
             existing_award.update(award)
@@ -120,5 +126,5 @@ def merge_tender_value(release_json: dict, tender_value_data: dict | None) -> No
             release_json["awards"].append(award)
 
     logger.info(
-        f"Merged tender value data for {len(tender_value_data['bids']['details'])} bids and {len(tender_value_data['awards'])} awards"
+        f"Merged tender value data for {len(tender_value_data['bids']['details'])} bids and {len(tender_value_data['awards'])} awards",
     )

@@ -22,7 +22,8 @@ def parse_minimum_candidates(xml_content):
     result = {"tender": {"lots": []}}
 
     lot_elements = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot_element in lot_elements:
@@ -51,7 +52,8 @@ def merge_minimum_candidates(release_json, minimum_candidates_data):
 
     for new_lot in minimum_candidates_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in tender_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in tender_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("secondStage", {}).update(new_lot["secondStage"])
@@ -59,5 +61,5 @@ def merge_minimum_candidates(release_json, minimum_candidates_data):
             tender_lots.append(new_lot)
 
     logger.info(
-        f"Merged Minimum Candidates data for {len(minimum_candidates_data['tender']['lots'])} lots"
+        f"Merged Minimum Candidates data for {len(minimum_candidates_data['tender']['lots'])} lots",
     )

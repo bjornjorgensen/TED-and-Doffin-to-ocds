@@ -53,8 +53,11 @@ def test_merge_organization_part_name():
 
     organization_part_name_data = {
         "parties": [
-            {"id": "ORG-0001", "name": "Ministry of Education - Procurement Department"}
-        ]
+            {
+                "id": "ORG-0001",
+                "name": "Ministry of Education - Procurement Department",
+            },
+        ],
     }
 
     merge_organization_part_name(release_json, organization_part_name_data)

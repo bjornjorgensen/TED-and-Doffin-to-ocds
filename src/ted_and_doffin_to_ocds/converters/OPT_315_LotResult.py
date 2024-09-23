@@ -19,12 +19,14 @@ def parse_contract_identifier_reference(xml_content):
 
     result = {"contracts": []}
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotResult",
+        namespaces=namespaces,
     )
 
     for lot_result in lot_results:
         award_ids = lot_result.xpath(
-            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='result']/text()",
+            namespaces=namespaces,
         )
         contract_ids = lot_result.xpath(
             "efac:SettledContract/cbc:ID[@schemeName='contract']/text()",
@@ -63,5 +65,5 @@ def merge_contract_identifier_reference(release_json, contract_id_data):
             release_json["contracts"].append(new_contract)
 
     logger.info(
-        f"Merged Contract Identifier Reference data for {len(contract_id_data['contracts'])} contracts"
+        f"Merged Contract Identifier Reference data for {len(contract_id_data['contracts'])} contracts",
     )

@@ -32,7 +32,8 @@ def parse_bt196_bt733_unpublished_justification(xml_content):
     result = {"withheldInformation": []}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -43,7 +44,8 @@ def parse_bt196_bt733_unpublished_justification(xml_content):
 
         if fields_privacy:
             reason_description = fields_privacy[0].xpath(
-                "efbc:ReasonDescription/text()", namespaces=namespaces
+                "efbc:ReasonDescription/text()",
+                namespaces=namespaces,
             )
             lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
 
@@ -59,7 +61,8 @@ def parse_bt196_bt733_unpublished_justification(xml_content):
 
 
 def merge_bt196_bt733_unpublished_justification(
-    release_json, unpublished_justification_data
+    release_json,
+    unpublished_justification_data,
 ):
     """
     Merge the parsed unpublished justification data into the main OCDS release JSON.
@@ -79,7 +82,8 @@ def merge_bt196_bt733_unpublished_justification(
 
     for new_item in unpublished_justification_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item.get("id") == new_item["id"]), None
+            (item for item in withheld_info if item.get("id") == new_item["id"]),
+            None,
         )
         if existing_item:
             existing_item["rationale"] = new_item["rationale"]
@@ -87,5 +91,5 @@ def merge_bt196_bt733_unpublished_justification(
             withheld_info.append(new_item)
 
     logger.info(
-        f"Merged {len(unpublished_justification_data['withheldInformation'])} unpublished justification(s) for BT-196(BT-733)"
+        f"Merged {len(unpublished_justification_data['withheldInformation'])} unpublished justification(s) for BT-196(BT-733)",
     )

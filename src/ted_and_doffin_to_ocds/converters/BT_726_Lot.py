@@ -32,7 +32,8 @@ def parse_lot_sme_suitability(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -89,5 +90,5 @@ def merge_lot_sme_suitability(release_json, lot_sme_suitability_data):
             release_json["tender"]["lots"].append(new_lot)
 
     logger.info(
-        f"Merged SME suitability data for {len(lot_sme_suitability_data['tender']['lots'])} lots"
+        f"Merged SME suitability data for {len(lot_sme_suitability_data['tender']['lots'])} lots",
     )

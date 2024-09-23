@@ -26,7 +26,7 @@ def parse_part_tendereval(xml_content):
 
     for tender_eval_id in tender_eval_ids:
         result["parties"].append(
-            {"id": tender_eval_id.text, "roles": ["evaluationBody"]}
+            {"id": tender_eval_id.text, "roles": ["evaluationBody"]},
         )
 
     return result if result["parties"] else None
@@ -47,5 +47,5 @@ def merge_part_tendereval(release_json, tendereval_data):
             release_json.setdefault("parties", []).append(party)
 
     logger.info(
-        f"Merged Part Tender Evaluator data for {len(tendereval_data['parties'])} parties"
+        f"Merged Part Tender Evaluator data for {len(tendereval_data['parties'])} parties",
     )

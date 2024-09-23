@@ -66,9 +66,9 @@ def test_merge_place_performance_street_lot():
                     "id": "1",
                     "relatedLot": "LOT-0001",
                     "deliveryAddresses": [{"region": "UKG23"}],
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     street_data = {
@@ -79,12 +79,12 @@ def test_merge_place_performance_street_lot():
                     "relatedLot": "LOT-0001",
                     "deliveryAddresses": [
                         {
-                            "streetAddress": "Main Street, Building B1, 3rd floor, Suite 300"
-                        }
+                            "streetAddress": "Main Street, Building B1, 3rd floor, Suite 300",
+                        },
                     ],
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_place_performance_street_lot(release_json, street_data)

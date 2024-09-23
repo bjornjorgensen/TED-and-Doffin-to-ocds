@@ -90,9 +90,9 @@ def test_merge_place_performance_city():
                     "id": "1",
                     "relatedLot": "LOT-001",
                     "deliveryAddresses": [{"postalCode": "10001"}],
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     new_data = {
@@ -108,8 +108,8 @@ def test_merge_place_performance_city():
                     "relatedLot": "LOT-002",
                     "deliveryAddresses": [{"locality": "Los Angeles"}],
                 },
-            ]
-        }
+            ],
+        },
     }
 
     merge_place_performance_city(existing_json, new_data)

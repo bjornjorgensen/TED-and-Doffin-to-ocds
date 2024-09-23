@@ -25,7 +25,8 @@ def parse_late_tenderer_info_description(
     result: dict[str, dict] = {"tender": {"lots": []}}
 
     lots: list = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -39,14 +40,15 @@ def parse_late_tenderer_info_description(
 
         if description:
             result["tender"]["lots"].append(
-                {"id": lot_id, "submissionMethodDetails": description[0]}
+                {"id": lot_id, "submissionMethodDetails": description[0]},
             )
 
     return result if result["tender"]["lots"] else None
 
 
 def merge_late_tenderer_info_description(
-    release_json: dict, late_tenderer_info_description: dict | None
+    release_json: dict,
+    late_tenderer_info_description: dict | None,
 ) -> None:
     if not late_tenderer_info_description:
         logger.warning("No late tenderer information description to merge")
@@ -57,7 +59,8 @@ def merge_late_tenderer_info_description(
 
     for new_lot in late_tenderer_info_description["tender"]["lots"]:
         existing_lot: dict | None = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             if "submissionMethodDetails" in existing_lot:
@@ -72,5 +75,5 @@ def merge_late_tenderer_info_description(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged late tenderer information description for {len(late_tenderer_info_description['tender']['lots'])} lots"
+        f"Merged late tenderer information description for {len(late_tenderer_info_description['tender']['lots'])} lots",
     )

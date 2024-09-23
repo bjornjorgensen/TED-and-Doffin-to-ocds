@@ -62,7 +62,7 @@ def test_bt_142_lotresult_integration(tmp_path):
         award["statusDetails"] == "At least one winner was chosen."
     ), "Unexpected statusDetails"
     assert award["relatedLots"] == [
-        "LOT-0001"
+        "LOT-0001",
     ], f"Expected relatedLots ['LOT-0001'], got {award['relatedLots']}"
 
     assert "tender" in result, "Expected 'tender' in result"

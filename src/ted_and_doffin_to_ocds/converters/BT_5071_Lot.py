@@ -28,7 +28,8 @@ def parse_place_performance_country_subdivision(xml_content):
     result = {"tender": {"items": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
@@ -81,7 +82,8 @@ def merge_place_performance_country_subdivision(release_json, subdivision_data):
             existing_addresses = existing_item.setdefault("deliveryAddresses", [])
             for new_address in new_item["deliveryAddresses"]:
                 existing_address = next(
-                    (addr for addr in existing_addresses if "region" not in addr), None
+                    (addr for addr in existing_addresses if "region" not in addr),
+                    None,
                 )
                 if existing_address:
                     existing_address["region"] = new_address["region"]
@@ -91,5 +93,5 @@ def merge_place_performance_country_subdivision(release_json, subdivision_data):
             existing_items.append(new_item)
 
     logger.info(
-        f"Merged place performance country subdivision data for {len(subdivision_data['tender']['items'])} items"
+        f"Merged place performance country subdivision data for {len(subdivision_data['tender']['items'])} items",
     )

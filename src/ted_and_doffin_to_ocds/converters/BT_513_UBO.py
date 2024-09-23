@@ -33,14 +33,17 @@ def parse_ubo_city(xml_content):
             party = {"id": org_id[0], "beneficialOwners": []}
 
             ubos = organization.xpath(
-                "efac:UltimateBeneficialOwner", namespaces=namespaces
+                "efac:UltimateBeneficialOwner",
+                namespaces=namespaces,
             )
             for ubo in ubos:
                 ubo_id = ubo.xpath(
-                    "cbc:ID[@schemeName='ubo']/text()", namespaces=namespaces
+                    "cbc:ID[@schemeName='ubo']/text()",
+                    namespaces=namespaces,
                 )
                 city_name = ubo.xpath(
-                    "cac:ResidenceAddress/cbc:CityName/text()", namespaces=namespaces
+                    "cac:ResidenceAddress/cbc:CityName/text()",
+                    namespaces=namespaces,
                 )
 
                 if ubo_id and city_name:
@@ -70,7 +73,8 @@ def merge_ubo_city(release_json, ubo_city_data):
         )
         if existing_party:
             existing_beneficial_owners = existing_party.setdefault(
-                "beneficialOwners", []
+                "beneficialOwners",
+                [],
             )
             for new_bo in new_party["beneficialOwners"]:
                 existing_bo = next(

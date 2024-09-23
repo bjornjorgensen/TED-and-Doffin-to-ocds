@@ -61,7 +61,7 @@ def merge_bt196_bt553_tender(release_json, unpublished_justification_data):
     """
     if not unpublished_justification_data:
         logger.warning(
-            "No unpublished justification description data to merge for BT-196(BT-553)-Tender"
+            "No unpublished justification description data to merge for BT-196(BT-553)-Tender",
         )
         return
 
@@ -78,5 +78,5 @@ def merge_bt196_bt553_tender(release_json, unpublished_justification_data):
             withheld_info.append(new_item)
 
     logger.info(
-        "Merged unpublished justification description data for BT-196(BT-553)-Tender"
+        "Merged unpublished justification description data for BT-196(BT-553)-Tender",
     )

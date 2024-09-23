@@ -22,7 +22,8 @@ def parse_organization_postcode(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -60,5 +61,5 @@ def merge_organization_postcode(release_json, organization_postcode_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Organization Postcode data for {len(organization_postcode_data['parties'])} parties"
+        f"Merged Organization Postcode data for {len(organization_postcode_data['parties'])} parties",
     )

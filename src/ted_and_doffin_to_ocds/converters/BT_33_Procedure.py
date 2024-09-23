@@ -29,13 +29,13 @@ def parse_max_lots_awarded(xml_content):
             return {
                 "tender": {
                     "lotDetails": {
-                        "maximumLotsAwardedPerSupplier": int(max_lots_awarded[0])
-                    }
-                }
+                        "maximumLotsAwardedPerSupplier": int(max_lots_awarded[0]),
+                    },
+                },
             }
         except ValueError:
             logger.warning(
-                f"Invalid MaximumLotsAwardedNumeric value: {max_lots_awarded[0]}"
+                f"Invalid MaximumLotsAwardedNumeric value: {max_lots_awarded[0]}",
             )
 
     return None
@@ -46,6 +46,6 @@ def merge_max_lots_awarded(release_json, max_lots_awarded_data):
         return
 
     release_json.setdefault("tender", {}).setdefault("lotDetails", {}).update(
-        max_lots_awarded_data["tender"]["lotDetails"]
+        max_lots_awarded_data["tender"]["lotDetails"],
     )
     logger.info("Merged Maximum Lots Awarded data")

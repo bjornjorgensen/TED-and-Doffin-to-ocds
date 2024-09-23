@@ -35,7 +35,8 @@ def merge_group_identifier(release_json, group_identifier_data):
         return
 
     existing_lot_groups = release_json.setdefault("tender", {}).setdefault(
-        "lotGroups", []
+        "lotGroups",
+        [],
     )
 
     for new_group in group_identifier_data["tender"]["lotGroups"]:
@@ -46,5 +47,5 @@ def merge_group_identifier(release_json, group_identifier_data):
             existing_lot_groups.append(new_group)
 
     logger.info(
-        f"Merged {len(group_identifier_data['tender']['lotGroups'])} Group Identifier(s)"
+        f"Merged {len(group_identifier_data['tender']['lotGroups'])} Group Identifier(s)",
     )

@@ -22,7 +22,8 @@ def parse_organization_contact_email(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -31,7 +32,8 @@ def parse_organization_contact_email(xml_content):
             namespaces=namespaces,
         )
         contact_email = organization.xpath(
-            "efac:Company/cac:Contact/cbc:ElectronicMail/text()", namespaces=namespaces
+            "efac:Company/cac:Contact/cbc:ElectronicMail/text()",
+            namespaces=namespaces,
         )
 
         if org_id and contact_email:
@@ -55,11 +57,11 @@ def merge_organization_contact_email(release_json, organization_contact_email_da
         )
         if existing_party:
             existing_party.setdefault("contactPoint", {}).update(
-                new_party["contactPoint"]
+                new_party["contactPoint"],
             )
         else:
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Organization Contact Email data for {len(organization_contact_email_data['parties'])} parties"
+        f"Merged Organization Contact Email data for {len(organization_contact_email_data['parties'])} parties",
     )

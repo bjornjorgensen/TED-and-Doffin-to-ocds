@@ -44,7 +44,8 @@ def parse_bt195_bt543_lotsgroup(xml_content):
 
     for field_identifier_code in field_identifier_codes:
         lots_group_id = field_identifier_code.xpath(
-            "ancestor::cac:ProcurementProjectLot/cbc:ID/text()", namespaces=namespaces
+            "ancestor::cac:ProcurementProjectLot/cbc:ID/text()",
+            namespaces=namespaces,
         )[0]
 
         withheld_info = {
@@ -70,7 +71,7 @@ def merge_bt195_bt543_lotsgroup(release_json, unpublished_identifier_data):
     """
     if not unpublished_identifier_data:
         logger.warning(
-            "No unpublished identifier data to merge for BT-195(BT-543)-LotsGroup"
+            "No unpublished identifier data to merge for BT-195(BT-543)-LotsGroup",
         )
         return
 

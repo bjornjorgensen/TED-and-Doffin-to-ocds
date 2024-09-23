@@ -48,25 +48,28 @@ def parse_financial_terms(xml_content: str | bytes) -> dict | None:
     result: dict[str, dict] = {"tender": {"lots": []}}
 
     lots: list = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
         lot_id: str = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         financial_terms: list = lot.xpath(
-            "cac:TenderingTerms/cac:PaymentTerms/cbc:Note/text()", namespaces=namespaces
+            "cac:TenderingTerms/cac:PaymentTerms/cbc:Note/text()",
+            namespaces=namespaces,
         )
 
         if financial_terms:
             result["tender"]["lots"].append(
-                {"id": lot_id, "contractTerms": {"financialTerms": financial_terms[0]}}
+                {"id": lot_id, "contractTerms": {"financialTerms": financial_terms[0]}},
             )
 
     return result if result["tender"]["lots"] else None
 
 
 def merge_financial_terms(
-    release_json: dict, financial_terms_data: dict | None
+    release_json: dict,
+    financial_terms_data: dict | None,
 ) -> None:
     """
     Merge the parsed financial terms data into the main OCDS release JSON.
@@ -87,15 +90,16 @@ def merge_financial_terms(
 
     for new_lot in financial_terms_data["tender"]["lots"]:
         existing_lot: dict | None = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("contractTerms", {}).update(
-                new_lot["contractTerms"]
+                new_lot["contractTerms"],
             )
         else:
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged financial terms data for {len(financial_terms_data['tender']['lots'])} lots"
+        f"Merged financial terms data for {len(financial_terms_data['tender']['lots'])} lots",
     )

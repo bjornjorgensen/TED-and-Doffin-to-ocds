@@ -59,7 +59,7 @@ def test_bt_144_lotresult_integration(tmp_path):
         == "No tenders, requests to participate or projects were received"
     ), "Unexpected statusDetails"
     assert award["relatedLots"] == [
-        "LOT-0001"
+        "LOT-0001",
     ], f"Expected relatedLots ['LOT-0001'], got {award['relatedLots']}"
 
 

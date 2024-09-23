@@ -44,8 +44,8 @@ def test_merge_electronic_auction():
 
     electronic_auction_data = {
         "tender": {
-            "lots": [{"id": "LOT-0001", "techniques": {"hasElectronicAuction": True}}]
-        }
+            "lots": [{"id": "LOT-0001", "techniques": {"hasElectronicAuction": True}}],
+        },
     }
 
     merge_electronic_auction(release_json, electronic_auction_data)
@@ -105,23 +105,27 @@ def test_bt_767_lot_electronic_auction_integration(tmp_path):
     assert len(lots_with_electronic_auction) == 2
 
     lot_1 = next(
-        (lot for lot in lots_with_electronic_auction if lot["id"] == "LOT-0001"), None
+        (lot for lot in lots_with_electronic_auction if lot["id"] == "LOT-0001"),
+        None,
     )
     assert lot_1 is not None
     assert lot_1["techniques"]["hasElectronicAuction"] is True
 
     lot_2 = next(
-        (lot for lot in lots_with_electronic_auction if lot["id"] == "LOT-0002"), None
+        (lot for lot in lots_with_electronic_auction if lot["id"] == "LOT-0002"),
+        None,
     )
     assert lot_2 is not None
     assert lot_2["techniques"]["hasElectronicAuction"] is False
 
     lot_3 = next(
-        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"), None
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"),
+        None,
     )
     assert lot_3 is not None
     assert "techniques" not in lot_3 or "hasElectronicAuction" not in lot_3.get(
-        "techniques", {}
+        "techniques",
+        {},
     )
 
 

@@ -53,7 +53,7 @@ def merge_part_duration(release_json, part_duration_data):
         return
 
     release_json.setdefault("tender", {}).setdefault("contractPeriod", {}).update(
-        part_duration_data["tender"]["contractPeriod"]
+        part_duration_data["tender"]["contractPeriod"],
     )
 
     logger.info("Merged part duration data")

@@ -18,7 +18,8 @@ def setup_logging():
 
 
 def test_bt195_bt541_lotsgroup_fixed_unpublished_identifier_integration(
-    tmp_path, setup_logging
+    tmp_path,
+    setup_logging,
 ):
     logger = setup_logging
     xml_content = """
@@ -160,7 +161,9 @@ def test_bt195_bt541_lotsgroup_fixed_multiple_groups(tmp_path, setup_logging):
 
     group_ids = ["GLO-0001", "GLO-0002"]
     for withheld_item, group_id in zip(
-        result["withheldInformation"], group_ids, strict=False
+        result["withheldInformation"],
+        group_ids,
+        strict=False,
     ):
         assert (
             withheld_item["id"] == f"awa-cri-num-fixed-{group_id}"

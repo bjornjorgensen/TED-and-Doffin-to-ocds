@@ -68,7 +68,8 @@ def parse_contract_xml(xml_content):
 
     for contracting_party in contracting_parties:
         party_id_elements = contracting_party.xpath(
-            ".//cac:PartyIdentification/cbc:ID", namespaces=namespaces
+            ".//cac:PartyIdentification/cbc:ID",
+            namespaces=namespaces,
         )
         if not party_id_elements:
             logger.warning("Skipping contracting party without ID")
@@ -82,7 +83,7 @@ def parse_contract_xml(xml_content):
         )
         if not activity_type_code_elements:
             logger.warning(
-                f"Skipping contracting party {party_id} without activity type code"
+                f"Skipping contracting party {party_id} without activity type code",
             )
             continue
 
@@ -147,7 +148,7 @@ def merge_contract_info(release_json, contract_info):
             elif "classifications" not in existing_party["details"]:
                 existing_party["details"]["classifications"] = []
             existing_party["details"]["classifications"].extend(
-                new_party["details"]["classifications"]
+                new_party["details"]["classifications"],
             )
         else:
             release_json.setdefault("parties", []).append(new_party)

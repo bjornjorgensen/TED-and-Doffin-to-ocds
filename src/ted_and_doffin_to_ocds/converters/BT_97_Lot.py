@@ -241,13 +241,15 @@ def parse_submission_language(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
         languages = lot.xpath(
-            "cac:TenderingTerms/cac:Language/cbc:ID/text()", namespaces=namespaces
+            "cac:TenderingTerms/cac:Language/cbc:ID/text()",
+            namespaces=namespaces,
         )
 
         if lot_id and languages:
@@ -285,11 +287,11 @@ def merge_submission_language(release_json, submission_language_data):
         existing_lot = next((lot for lot in lots if lot["id"] == new_lot["id"]), None)
         if existing_lot:
             existing_lot.setdefault("submissionTerms", {}).update(
-                new_lot["submissionTerms"]
+                new_lot["submissionTerms"],
             )
         else:
             lots.append(new_lot)
 
     logger.info(
-        f"Merged submission language data for {len(submission_language_data['tender']['lots'])} lots"
+        f"Merged submission language data for {len(submission_language_data['tender']['lots'])} lots",
     )

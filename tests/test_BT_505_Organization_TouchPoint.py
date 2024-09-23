@@ -72,7 +72,8 @@ def test_bt_505_organization_touchpoint_integration(tmp_path):
 
     # Assert that eDeliveryGateway is not present
     assert "eDeliveryGateway" not in party.get(
-        "details", {}
+        "details",
+        {},
     ), "Unexpected 'eDeliveryGateway' in party details"
 
 

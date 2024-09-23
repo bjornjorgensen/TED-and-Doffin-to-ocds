@@ -38,14 +38,17 @@ def parse_vehicle_type(xml_content):
     result = {"awards": []}
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotResult",
+        namespaces=namespaces,
     )
     for lot_result in lot_results:
         award_id = lot_result.xpath(
-            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='result']/text()",
+            namespaces=namespaces,
         )[0]
         lot_id = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+            namespaces=namespaces,
         )[0]
 
         vehicle_types = lot_result.xpath(
@@ -64,7 +67,7 @@ def parse_vehicle_type(xml_content):
                             "scheme": "vehicles",
                             "id": vehicle_type,
                             "description": VEHICLE_CODES.get(vehicle_type, ""),
-                        }
+                        },
                     ],
                 }
                 award_data["items"].append(item)
@@ -93,7 +96,8 @@ def merge_vehicle_type(release_json, vehicle_type_data):
 
     for new_award in vehicle_type_data["awards"]:
         existing_award = next(
-            (award for award in existing_awards if award["id"] == new_award["id"]), None
+            (award for award in existing_awards if award["id"] == new_award["id"]),
+            None,
         )
         if existing_award:
             existing_items = existing_award.setdefault("items", [])
@@ -104,16 +108,16 @@ def merge_vehicle_type(release_json, vehicle_type_data):
                 )
                 if existing_item:
                     existing_item.setdefault("additionalClassifications", []).extend(
-                        new_item["additionalClassifications"]
+                        new_item["additionalClassifications"],
                     )
                 else:
                     existing_items.append(new_item)
             existing_award["relatedLots"] = list(
-                set(existing_award.get("relatedLots", []) + new_award["relatedLots"])
+                set(existing_award.get("relatedLots", []) + new_award["relatedLots"]),
             )
         else:
             existing_awards.append(new_award)
 
     logger.info(
-        f"Merged vehicle type data for {len(vehicle_type_data['awards'])} awards"
+        f"Merged vehicle type data for {len(vehicle_type_data['awards'])} awards",
     )

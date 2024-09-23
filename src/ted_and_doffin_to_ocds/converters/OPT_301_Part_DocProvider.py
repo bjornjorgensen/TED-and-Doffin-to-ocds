@@ -26,7 +26,7 @@ def parse_part_docprovider(xml_content):
 
     for party_id in docprovider_party_ids:
         result["parties"].append(
-            {"id": party_id.text, "roles": ["processContactPoint"]}
+            {"id": party_id.text, "roles": ["processContactPoint"]},
         )
 
     return result if result["parties"] else None
@@ -47,5 +47,5 @@ def merge_part_docprovider(release_json, docprovider_data):
             release_json.setdefault("parties", []).append(party)
 
     logger.info(
-        f"Merged Part Document Provider data for {len(docprovider_data['parties'])} parties"
+        f"Merged Part Document Provider data for {len(docprovider_data['parties'])} parties",
     )

@@ -18,12 +18,14 @@ def create_xml_with_exclusion_grounds(grounds):
     root = etree.Element("root", nsmap=NAMESPACES)
     terms = etree.SubElement(root, "{{{}}}TenderingTerms".format(NAMESPACES["cac"]))
     qual_request = etree.SubElement(
-        terms, "{{{}}}TendererQualificationRequest".format(NAMESPACES["cac"])
+        terms,
+        "{{{}}}TendererQualificationRequest".format(NAMESPACES["cac"]),
     )
 
     for ground in grounds:
         requirement = etree.SubElement(
-            qual_request, "{{{}}}SpecificTendererRequirement".format(NAMESPACES["cac"])
+            qual_request,
+            "{{{}}}SpecificTendererRequirement".format(NAMESPACES["cac"]),
         )
         if "type" in ground:
             type_code = etree.SubElement(
@@ -34,7 +36,8 @@ def create_xml_with_exclusion_grounds(grounds):
             type_code.text = ground["type"]
         if "description" in ground:
             description = etree.SubElement(
-                requirement, "{{{}}}Description".format(NAMESPACES["cbc"])
+                requirement,
+                "{{{}}}Description".format(NAMESPACES["cbc"]),
             )
             description.text = ground["description"]
 
@@ -49,7 +52,7 @@ def test_parse_exclusion_grounds_with_type_and_description():
                 "description": "Additional details about criminal organization",
             },
             {"type": "corruption", "description": "Specific corruption criteria"},
-        ]
+        ],
     )
 
     result = parse_exclusion_grounds(xml_content)
@@ -68,7 +71,7 @@ def test_parse_exclusion_grounds_with_type_and_description():
 
 def test_parse_exclusion_grounds_with_type_only():
     xml_content = create_xml_with_exclusion_grounds(
-        [{"type": "bankruptcy"}, {"type": "fraud"}]
+        [{"type": "bankruptcy"}, {"type": "fraud"}],
     )
 
     result = parse_exclusion_grounds(xml_content)
@@ -87,7 +90,7 @@ def test_parse_exclusion_grounds_with_type_only():
 
 def test_parse_exclusion_grounds_with_unknown_type():
     xml_content = create_xml_with_exclusion_grounds(
-        [{"type": "unknown-type", "description": "Some description"}]
+        [{"type": "unknown-type", "description": "Some description"}],
     )
 
     result = parse_exclusion_grounds(xml_content)
@@ -113,18 +116,18 @@ def test_merge_exclusion_grounds():
         "tender": {
             "exclusionGrounds": {
                 "criteria": [
-                    {"type": "existing-ground", "description": "Existing ground"}
-                ]
-            }
-        }
+                    {"type": "existing-ground", "description": "Existing ground"},
+                ],
+            },
+        },
     }
 
     exclusion_grounds_data = {
         "tender": {
             "exclusionGrounds": {
-                "criteria": [{"type": "new-ground", "description": "New ground"}]
-            }
-        }
+                "criteria": [{"type": "new-ground", "description": "New ground"}],
+            },
+        },
     }
 
     merge_exclusion_grounds(release_json, exclusion_grounds_data)

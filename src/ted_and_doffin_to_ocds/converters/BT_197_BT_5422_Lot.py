@@ -78,7 +78,7 @@ def parse_bt197_bt5422_lot(xml_content):
                         "id": code,
                         "description": JUSTIFICATION_CODES[code]["description"],
                         "uri": JUSTIFICATION_CODES[code]["uri"],
-                    }
+                    },
                 ],
             }
             result["withheldInformation"].append(withheld_info)
@@ -99,7 +99,7 @@ def merge_bt197_bt5422_lot(release_json, unpublished_justification_code_data):
     """
     if not unpublished_justification_code_data:
         logger.warning(
-            "No unpublished justification code data to merge for BT-197(BT-5422)-Lot"
+            "No unpublished justification code data to merge for BT-197(BT-5422)-Lot",
         )
         return
 
@@ -112,7 +112,7 @@ def merge_bt197_bt5422_lot(release_json, unpublished_justification_code_data):
         )
         if existing_item:
             existing_item.setdefault("rationaleClassifications", []).extend(
-                new_item["rationaleClassifications"]
+                new_item["rationaleClassifications"],
             )
         else:
             withheld_info.append(new_item)

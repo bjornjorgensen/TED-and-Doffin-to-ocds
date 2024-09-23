@@ -40,7 +40,8 @@ def parse_additional_info_provider_identifier(xml_content):
 
 
 def merge_additional_info_provider_identifier(
-    release_json, additional_info_provider_data
+    release_json,
+    additional_info_provider_data,
 ):
     if not additional_info_provider_data:
         logger.warning("No Additional Info Provider data to merge")
@@ -60,5 +61,5 @@ def merge_additional_info_provider_identifier(
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Additional Info Provider Identifier for {len(additional_info_provider_data['parties'])} parties"
+        f"Merged Additional Info Provider Identifier for {len(additional_info_provider_data['parties'])} parties",
     )

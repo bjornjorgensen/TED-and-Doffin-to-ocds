@@ -74,7 +74,8 @@ def parse_lot_country(xml_content):
     result = {"tender": {"items": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -131,5 +132,5 @@ def merge_lot_country(release_json, lot_country_data):
             existing_items.append(new_item)
 
     logger.info(
-        f"Merged Lot Country data for {len(lot_country_data['tender']['items'])} items"
+        f"Merged Lot Country data for {len(lot_country_data['tender']['items'])} items",
     )

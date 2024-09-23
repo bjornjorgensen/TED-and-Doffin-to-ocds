@@ -27,8 +27,8 @@ def parse_lots_group_identifier(xml_content):
             "tender": {
                 "lotGroups": [
                     {"id": lots_group_id.text} for lots_group_id in lots_group_ids
-                ]
-            }
+                ],
+            },
         }
     logger.info("No lots group identifiers found")
     return None
@@ -50,5 +50,5 @@ def merge_lots_group_identifier(release_json, lots_group_data):
             logger.info(f"Added new lot group with id: {new_lot_group['id']}")
         else:
             logger.info(
-                f"Lot group with id: {new_lot_group['id']} already exists, skipping"
+                f"Lot group with id: {new_lot_group['id']} already exists, skipping",
             )

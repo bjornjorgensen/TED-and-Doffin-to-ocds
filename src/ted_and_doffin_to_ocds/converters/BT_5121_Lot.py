@@ -22,7 +22,8 @@ def parse_place_performance_post_code(xml_content):
     result = {"tender": {"items": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -80,5 +81,5 @@ def merge_place_performance_post_code(release_json, post_code_data):
             existing_items.append(new_item)
 
     logger.info(
-        f"Merged Place Performance Post Code data for {len(post_code_data['tender']['items'])} items"
+        f"Merged Place Performance Post Code data for {len(post_code_data['tender']['items'])} items",
     )

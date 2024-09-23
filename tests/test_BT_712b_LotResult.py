@@ -48,8 +48,8 @@ def test_merge_buyer_review_complainants_bt_712b():
                 "measure": "appeals",
                 "scope": "complaints",
                 "relatedLot": "LOT-0001",
-            }
-        ]
+            },
+        ],
     }
 
     buyer_review_complainants_data = {
@@ -60,12 +60,13 @@ def test_merge_buyer_review_complainants_bt_712b():
                 "measure": "complainants",
                 "scope": "complaints",
                 "relatedLot": "LOT-0001",
-            }
-        ]
+            },
+        ],
     }
 
     merge_buyer_review_complainants_bt_712b(
-        release_json, buyer_review_complainants_data
+        release_json,
+        buyer_review_complainants_data,
     )
 
     assert len(release_json["statistics"]) == 2

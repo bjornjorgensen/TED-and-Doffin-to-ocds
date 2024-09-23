@@ -25,15 +25,18 @@ def parse_kilometers_public_transport(xml_content):
     result = {"contracts": []}
 
     lot_tenders = root.xpath(
-        "//efac:NoticeResult/efac:LotTender", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotTender",
+        namespaces=namespaces,
     )
 
     for lot_tender in lot_tenders:
         tender_id = lot_tender.xpath(
-            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='tender']/text()",
+            namespaces=namespaces,
         )
         kilometers = lot_tender.xpath(
-            "efbc:PublicTransportationCumulatedDistance/text()", namespaces=namespaces
+            "efbc:PublicTransportationCumulatedDistance/text()",
+            namespaces=namespaces,
         )
 
         if tender_id and kilometers:
@@ -47,7 +50,8 @@ def parse_kilometers_public_transport(xml_content):
 
             if settled_contract:
                 contract_id = settled_contract[0].xpath(
-                    "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces
+                    "cbc:ID[@schemeName='contract']/text()",
+                    namespaces=namespaces,
                 )
                 lot_result = root.xpath(
                     f"//efac:NoticeResult/efac:LotResult[efac:SettledContract/cbc:ID[@schemeName='contract']/text()='{contract_id[0]}']",
@@ -56,7 +60,8 @@ def parse_kilometers_public_transport(xml_content):
 
                 if contract_id and lot_result:
                     award_id = lot_result[0].xpath(
-                        "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+                        "cbc:ID[@schemeName='result']/text()",
+                        namespaces=namespaces,
                     )
 
                     contract = {
@@ -91,5 +96,5 @@ def merge_kilometers_public_transport(release_json, kilometers_data):
             existing_contracts.append(new_contract)
 
     logger.info(
-        f"Merged Kilometers Public Transport data for {len(kilometers_data['contracts'])} contracts"
+        f"Merged Kilometers Public Transport data for {len(kilometers_data['contracts'])} contracts",
     )

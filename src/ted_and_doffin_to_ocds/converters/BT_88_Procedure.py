@@ -26,7 +26,8 @@ def parse_procedure_features(xml_content):
     }
 
     procedure_features = root.xpath(
-        "//cac:TenderingProcess/cbc:Description/text()", namespaces=namespaces
+        "//cac:TenderingProcess/cbc:Description/text()",
+        namespaces=namespaces,
     )
 
     if procedure_features:

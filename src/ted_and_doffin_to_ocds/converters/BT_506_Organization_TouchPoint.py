@@ -22,7 +22,8 @@ def parse_touchpoint_contact_email(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -65,7 +66,7 @@ def merge_touchpoint_contact_email(release_json, touchpoint_contact_email_data):
         )
         if existing_party:
             existing_party.setdefault("contactPoint", {}).update(
-                new_party["contactPoint"]
+                new_party["contactPoint"],
             )
             if "identifier" in new_party:
                 existing_party["identifier"] = new_party["identifier"]
@@ -73,5 +74,5 @@ def merge_touchpoint_contact_email(release_json, touchpoint_contact_email_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged TouchPoint Contact Email data for {len(touchpoint_contact_email_data['parties'])} parties"
+        f"Merged TouchPoint Contact Email data for {len(touchpoint_contact_email_data['parties'])} parties",
     )

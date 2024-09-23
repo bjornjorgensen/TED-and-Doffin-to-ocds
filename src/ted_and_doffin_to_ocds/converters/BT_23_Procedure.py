@@ -22,7 +22,8 @@ def parse_main_nature_procedure(xml_content):
     result = {"tender": {}}
 
     procurement_type = root.xpath(
-        "//cac:ProcurementProject/cbc:ProcurementTypeCode/text()", namespaces=namespaces
+        "//cac:ProcurementProject/cbc:ProcurementTypeCode/text()",
+        namespaces=namespaces,
     )
 
     if procurement_type:
@@ -48,9 +49,9 @@ def merge_main_nature_procedure(release_json, main_nature_data):
             main_nature_data["tender"]["mainProcurementCategory"]
         )
         logger.info(
-            f"Merged Main Nature (Procedure) data: {main_nature_data['tender']['mainProcurementCategory']}"
+            f"Merged Main Nature (Procedure) data: {main_nature_data['tender']['mainProcurementCategory']}",
         )
     else:
         logger.warning(
-            "No mainProcurementCategory found in Main Nature (Procedure) data"
+            "No mainProcurementCategory found in Main Nature (Procedure) data",
         )

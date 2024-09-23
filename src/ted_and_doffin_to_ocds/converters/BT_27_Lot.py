@@ -41,7 +41,8 @@ def parse_lot_estimated_value(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -85,7 +86,8 @@ def merge_lot_estimated_value(release_json, lot_estimated_value_data):
 
     for new_lot in lot_estimated_value_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot["value"] = new_lot["value"]
@@ -93,5 +95,5 @@ def merge_lot_estimated_value(release_json, lot_estimated_value_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Lot Estimated Value data for {len(lot_estimated_value_data['tender']['lots'])} lots"
+        f"Merged Lot Estimated Value data for {len(lot_estimated_value_data['tender']['lots'])} lots",
     )

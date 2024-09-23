@@ -22,15 +22,18 @@ def parse_concession_value_description(xml_content):
     result = {"awards": []}
 
     lot_tenders = root.xpath(
-        "//efac:NoticeResult/efac:LotTender", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotTender",
+        namespaces=namespaces,
     )
 
     for lot_tender in lot_tenders:
         tender_id = lot_tender.xpath(
-            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='tender']/text()",
+            namespaces=namespaces,
         )
         value_description = lot_tender.xpath(
-            "efac:ConcessionRevenue/efbc:ValueDescription/text()", namespaces=namespaces
+            "efac:ConcessionRevenue/efbc:ValueDescription/text()",
+            namespaces=namespaces,
         )
 
         if tender_id and value_description:
@@ -41,7 +44,8 @@ def parse_concession_value_description(xml_content):
 
             if lot_result:
                 result_id = lot_result[0].xpath(
-                    "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+                    "cbc:ID[@schemeName='result']/text()",
+                    namespaces=namespaces,
                 )
                 lot_id = lot_result[0].xpath(
                     "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
@@ -68,21 +72,22 @@ def merge_concession_value_description(release_json, concession_value_descriptio
 
     for new_award in concession_value_description_data["awards"]:
         existing_award = next(
-            (award for award in existing_awards if award["id"] == new_award["id"]), None
+            (award for award in existing_awards if award["id"] == new_award["id"]),
+            None,
         )
         if existing_award:
             existing_award["valueCalculationMethod"] = new_award[
                 "valueCalculationMethod"
             ]
             existing_award.setdefault("relatedLots", []).extend(
-                new_award["relatedLots"]
+                new_award["relatedLots"],
             )
             existing_award["relatedLots"] = list(
-                set(existing_award["relatedLots"])
+                set(existing_award["relatedLots"]),
             )  # Remove duplicates
         else:
             existing_awards.append(new_award)
 
     logger.info(
-        f"Merged concession value description data for {len(concession_value_description_data['awards'])} awards"
+        f"Merged concession value description data for {len(concession_value_description_data['awards'])} awards",
     )

@@ -19,13 +19,15 @@ def parse_lot_place_performance_streetline2(xml_content):
     result = {"tender": {"items": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         realized_locations = lot.xpath(
-            "cac:ProcurementProject/cac:RealizedLocation", namespaces=namespaces
+            "cac:ProcurementProject/cac:RealizedLocation",
+            namespaces=namespaces,
         )
 
         if realized_locations:
@@ -38,13 +40,16 @@ def parse_lot_place_performance_streetline2(xml_content):
             for location in realized_locations:
                 address = location.xpath("cac:Address", namespaces=namespaces)[0]
                 street_name = address.xpath(
-                    "cbc:StreetName/text()", namespaces=namespaces
+                    "cbc:StreetName/text()",
+                    namespaces=namespaces,
                 )
                 additional_street_name = address.xpath(
-                    "cbc:AdditionalStreetName/text()", namespaces=namespaces
+                    "cbc:AdditionalStreetName/text()",
+                    namespaces=namespaces,
                 )
                 address_lines = address.xpath(
-                    "cac:AddressLine/cbc:Line/text()", namespaces=namespaces
+                    "cac:AddressLine/cbc:Line/text()",
+                    namespaces=namespaces,
                 )
 
                 street_address_parts = []
@@ -64,7 +69,8 @@ def parse_lot_place_performance_streetline2(xml_content):
 
 
 def merge_lot_place_performance_streetline2(
-    release_json, lot_place_performance_streetline2_data
+    release_json,
+    lot_place_performance_streetline2_data,
 ):
     if not lot_place_performance_streetline2_data:
         return

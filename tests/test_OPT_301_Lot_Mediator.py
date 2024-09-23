@@ -53,7 +53,7 @@ def test_merge_mediator_identifier():
     mediator_data = {"parties": [{"id": "TPO-0005", "roles": ["mediationBody"]}]}
 
     release_json = {
-        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}]
+        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}],
     }
 
     merge_mediator_identifier(release_json, mediator_data)
@@ -69,7 +69,7 @@ def test_merge_mediator_identifier_existing_party():
     mediator_data = {"parties": [{"id": "TPO-0001", "roles": ["mediationBody"]}]}
 
     release_json = {
-        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}]
+        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}],
     }
 
     merge_mediator_identifier(release_json, mediator_data)

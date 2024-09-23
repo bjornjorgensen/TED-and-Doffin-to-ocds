@@ -65,7 +65,7 @@ def merge_bt198_bt541_lotsgroup_threshold(release_json, unpublished_access_date_
     """
     if not unpublished_access_date_data:
         logger.warning(
-            "No unpublished access date data to merge for BT-198(BT-541)-LotsGroup-Threshold"
+            "No unpublished access date data to merge for BT-198(BT-541)-LotsGroup-Threshold",
         )
         return
 
@@ -82,5 +82,5 @@ def merge_bt198_bt541_lotsgroup_threshold(release_json, unpublished_access_date_
             withheld_info.append(new_item)
 
     logger.info(
-        "Merged unpublished access date data for BT-198(BT-541)-LotsGroup-Threshold"
+        "Merged unpublished access date data for BT-198(BT-541)-LotsGroup-Threshold",
     )

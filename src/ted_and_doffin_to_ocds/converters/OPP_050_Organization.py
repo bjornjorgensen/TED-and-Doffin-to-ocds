@@ -19,11 +19,13 @@ def parse_buyers_group_lead_indicator(xml_content):
     result = {"leadBuyerIds": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
     for org in organizations:
         lead_indicator = org.xpath(
-            "efbc:GroupLeadIndicator/text()", namespaces=namespaces
+            "efbc:GroupLeadIndicator/text()",
+            namespaces=namespaces,
         )
         if lead_indicator and lead_indicator[0].lower() == "true":
             org_id = org.xpath(

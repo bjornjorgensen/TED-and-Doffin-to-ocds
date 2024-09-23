@@ -260,19 +260,20 @@ def merge_documents_unofficial_language_part(release_json, unofficial_language_d
 
     for new_doc in unofficial_language_data["tender"]["documents"]:
         existing_doc = next(
-            (doc for doc in existing_documents if doc["id"] == new_doc["id"]), None
+            (doc for doc in existing_documents if doc["id"] == new_doc["id"]),
+            None,
         )
         if existing_doc:
             existing_doc.setdefault("unofficialTranslations", []).extend(
-                new_doc["unofficialTranslations"]
+                new_doc["unofficialTranslations"],
             )
             # Remove duplicates
             existing_doc["unofficialTranslations"] = list(
-                set(existing_doc["unofficialTranslations"])
+                set(existing_doc["unofficialTranslations"]),
             )
         else:
             existing_documents.append(new_doc)
 
     logger.info(
-        f"Merged unofficial language data for {len(unofficial_language_data['tender']['documents'])} documents"
+        f"Merged unofficial language data for {len(unofficial_language_data['tender']['documents'])} documents",
     )

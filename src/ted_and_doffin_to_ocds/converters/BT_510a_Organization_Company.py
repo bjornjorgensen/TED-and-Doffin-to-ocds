@@ -22,7 +22,8 @@ def parse_organization_street(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -79,5 +80,5 @@ def merge_organization_street(release_json, organization_street_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Organization Street data for {len(organization_street_data['parties'])} parties"
+        f"Merged Organization Street data for {len(organization_street_data['parties'])} parties",
     )

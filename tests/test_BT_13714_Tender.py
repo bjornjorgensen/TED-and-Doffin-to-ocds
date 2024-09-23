@@ -45,13 +45,13 @@ def test_parse_tender_lot_identifier_single():
     xml_content = create_xml_with_lot_tenders([("TEN-0001", "LOT-0001")])
     result = parse_tender_lot_identifier(xml_content)
     assert result == {
-        "bids": {"details": [{"id": "TEN-0001", "relatedLots": ["LOT-0001"]}]}
+        "bids": {"details": [{"id": "TEN-0001", "relatedLots": ["LOT-0001"]}]},
     }
 
 
 def test_parse_tender_lot_identifier_multiple():
     xml_content = create_xml_with_lot_tenders(
-        [("TEN-0001", "LOT-0001"), ("TEN-0002", "LOT-0002"), ("TEN-0003", "LOT-0003")]
+        [("TEN-0001", "LOT-0001"), ("TEN-0002", "LOT-0002"), ("TEN-0003", "LOT-0003")],
     )
     result = parse_tender_lot_identifier(xml_content)
     assert result == {
@@ -60,8 +60,8 @@ def test_parse_tender_lot_identifier_multiple():
                 {"id": "TEN-0001", "relatedLots": ["LOT-0001"]},
                 {"id": "TEN-0002", "relatedLots": ["LOT-0002"]},
                 {"id": "TEN-0003", "relatedLots": ["LOT-0003"]},
-            ]
-        }
+            ],
+        },
     }
 
 
@@ -78,8 +78,8 @@ def test_merge_tender_lot_identifier_new_bids():
             "details": [
                 {"id": "TEN-0001", "relatedLots": ["LOT-0001"]},
                 {"id": "TEN-0002", "relatedLots": ["LOT-0002"]},
-            ]
-        }
+            ],
+        },
     }
     merge_tender_lot_identifier(release_json, tender_lot_identifier_data)
     assert release_json == {
@@ -87,22 +87,22 @@ def test_merge_tender_lot_identifier_new_bids():
             "details": [
                 {"id": "TEN-0001", "relatedLots": ["LOT-0001"]},
                 {"id": "TEN-0002", "relatedLots": ["LOT-0002"]},
-            ]
-        }
+            ],
+        },
     }
 
 
 def test_merge_tender_lot_identifier_existing_bids():
     release_json = {
-        "bids": {"details": [{"id": "TEN-0001", "relatedLots": ["LOT-0001"]}]}
+        "bids": {"details": [{"id": "TEN-0001", "relatedLots": ["LOT-0001"]}]},
     }
     tender_lot_identifier_data = {
         "bids": {
             "details": [
                 {"id": "TEN-0001", "relatedLots": ["LOT-0002"]},
                 {"id": "TEN-0002", "relatedLots": ["LOT-0003"]},
-            ]
-        }
+            ],
+        },
     }
     merge_tender_lot_identifier(release_json, tender_lot_identifier_data)
     assert release_json == {
@@ -110,8 +110,8 @@ def test_merge_tender_lot_identifier_existing_bids():
             "details": [
                 {"id": "TEN-0001", "relatedLots": ["LOT-0001", "LOT-0002"]},
                 {"id": "TEN-0002", "relatedLots": ["LOT-0003"]},
-            ]
-        }
+            ],
+        },
     }
 
 

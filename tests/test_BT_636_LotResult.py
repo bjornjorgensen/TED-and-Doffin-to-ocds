@@ -47,8 +47,8 @@ def test_merge_irregularity_type():
                 "measure": "existing-measure",
                 "scope": "existing-scope",
                 "relatedLot": "LOT-0001",
-            }
-        ]
+            },
+        ],
     }
 
     irregularity_type_data = {
@@ -67,7 +67,7 @@ def test_merge_irregularity_type():
                 "relatedLot": "LOT-0002",
                 "notes": IRREGULARITY_TYPE_MAPPING["ab-low"],
             },
-        ]
+        ],
     }
 
     merge_irregularity_type(release_json, irregularity_type_data)

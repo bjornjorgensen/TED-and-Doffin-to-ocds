@@ -45,9 +45,9 @@ def test_merge_electronic_payment():
     electronic_payment_data = {
         "tender": {
             "lots": [
-                {"id": "LOT-0001", "contractTerms": {"hasElectronicPayment": True}}
-            ]
-        }
+                {"id": "LOT-0001", "contractTerms": {"hasElectronicPayment": True}},
+            ],
+        },
     }
 
     merge_electronic_payment(release_json, electronic_payment_data)
@@ -94,13 +94,15 @@ def test_bt_93_lot_electronic_payment_integration(tmp_path):
     assert len(result["tender"]["lots"]) == 2
 
     lot_1 = next(
-        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0001"), None
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0001"),
+        None,
     )
     assert lot_1 is not None
     assert lot_1["contractTerms"]["hasElectronicPayment"] is True
 
     lot_2 = next(
-        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002"), None
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002"),
+        None,
     )
     assert lot_2 is not None
     assert lot_2["contractTerms"]["hasElectronicPayment"] is False

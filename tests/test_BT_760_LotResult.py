@@ -42,9 +42,9 @@ def test_merge_received_submissions_type():
                     "id": "electronicBids-LOT-0001",
                     "measure": "electronicBids",
                     "relatedLots": ["LOT-0001"],
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
     merge_received_submissions_type(release_json, received_submissions_type_data)
     assert len(release_json["bids"]["statistics"]) == 1

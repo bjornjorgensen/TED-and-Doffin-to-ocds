@@ -54,7 +54,7 @@ def test_bt_553_tender_integration(tmp_path):
         bid["subcontracting"]["value"]["currency"] == "EUR"
     ), f"Expected currency 'EUR', got {bid['subcontracting']['value']['currency']}"
     assert bid["relatedLots"] == [
-        "LOT-0001"
+        "LOT-0001",
     ], f"Expected relatedLots ['LOT-0001'], got {bid['relatedLots']}"
 
 

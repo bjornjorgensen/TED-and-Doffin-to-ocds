@@ -59,7 +59,7 @@ def parse_electronic_ordering(xml_content):
             lot_data = {
                 "id": lot_id[0],
                 "contractTerms": {
-                    "hasElectronicOrdering": electronic_ordering[0].lower() == "true"
+                    "hasElectronicOrdering": electronic_ordering[0].lower() == "true",
                 },
             }
             result["tender"]["lots"].append(lot_data)
@@ -89,11 +89,11 @@ def merge_electronic_ordering(release_json, electronic_ordering_data):
         existing_lot = next((lot for lot in lots if lot["id"] == new_lot["id"]), None)
         if existing_lot:
             existing_lot.setdefault("contractTerms", {}).update(
-                new_lot["contractTerms"]
+                new_lot["contractTerms"],
             )
         else:
             lots.append(new_lot)
 
     logger.info(
-        f"Merged electronic ordering data for {len(electronic_ordering_data['tender']['lots'])} lots"
+        f"Merged electronic ordering data for {len(electronic_ordering_data['tender']['lots'])} lots",
     )

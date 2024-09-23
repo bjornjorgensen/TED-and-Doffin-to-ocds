@@ -74,7 +74,8 @@ def parse_touchpoint_country(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -131,5 +132,5 @@ def merge_touchpoint_country(release_json, touchpoint_country_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged TouchPoint Country data for {len(touchpoint_country_data['parties'])} parties"
+        f"Merged TouchPoint Country data for {len(touchpoint_country_data['parties'])} parties",
     )

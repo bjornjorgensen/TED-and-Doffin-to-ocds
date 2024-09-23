@@ -22,11 +22,13 @@ def parse_contract_conditions(xml_content):
     result = {"tender": {"lots": []}}
 
     lot_tenders = root.xpath(
-        "//efac:NoticeResult/efac:LotTender", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotTender",
+        namespaces=namespaces,
     )
     for lot_tender in lot_tenders:
         lot_id_elements = lot_tender.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+            namespaces=namespaces,
         )
         if not lot_id_elements:
             logger.warning("Lot ID not found for a LotTender")
@@ -42,7 +44,8 @@ def parse_contract_conditions(xml_content):
         for term in contract_term_elements:
             term_code = term.xpath("efbc:TermCode/text()", namespaces=namespaces)
             term_description = term.xpath(
-                "efbc:TermDescription/text()", namespaces=namespaces
+                "efbc:TermDescription/text()",
+                namespaces=namespaces,
             )
 
             if term_code and term_description and term_code[0] != "all-rev-tic":
@@ -59,7 +62,7 @@ def parse_contract_conditions(xml_content):
 
         if contract_terms:
             result["tender"]["lots"].append(
-                {"id": lot_id, "contractTerms": contract_terms}
+                {"id": lot_id, "contractTerms": contract_terms},
             )
 
     return result if result["tender"]["lots"] else None
@@ -75,15 +78,16 @@ def merge_contract_conditions(release_json, contract_conditions_data):
 
     for new_lot in contract_conditions_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("contractTerms", {}).update(
-                new_lot["contractTerms"]
+                new_lot["contractTerms"],
             )
         else:
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Contract Conditions for {len(contract_conditions_data['tender']['lots'])} lots"
+        f"Merged Contract Conditions for {len(contract_conditions_data['tender']['lots'])} lots",
     )

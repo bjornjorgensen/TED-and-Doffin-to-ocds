@@ -112,7 +112,8 @@ def test_bt_76_lot_missing_company_legal_form(tmp_path, setup_logging):
     lot = result["tender"]["lots"][0]
     assert lot["id"] == "LOT-0001", "Expected lot id 'LOT-0001'"
     assert "contractTerms" not in lot or "tendererLegalForm" not in lot.get(
-        "contractTerms", {}
+        "contractTerms",
+        {},
     ), "Did not expect 'tendererLegalForm' when CompanyLegalForm is missing"
 
 
@@ -150,7 +151,8 @@ def test_bt_76_lot_empty_company_legal_form(tmp_path, setup_logging):
     lot = result["tender"]["lots"][0]
     assert lot["id"] == "LOT-0001", "Expected lot id 'LOT-0001'"
     assert "contractTerms" not in lot or "tendererLegalForm" not in lot.get(
-        "contractTerms", {}
+        "contractTerms",
+        {},
     ), "Did not expect 'tendererLegalForm' when CompanyLegalForm is empty"
 
 

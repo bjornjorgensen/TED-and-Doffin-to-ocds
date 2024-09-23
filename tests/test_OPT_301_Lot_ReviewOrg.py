@@ -69,11 +69,11 @@ def test_merge_review_org_identifier():
         "parties": [
             {"id": "TPO-0001", "roles": ["reviewBody"]},
             {"id": "TPO-0002", "roles": ["reviewBody"]},
-        ]
+        ],
     }
 
     release_json = {
-        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}]
+        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}],
     }
 
     merge_review_org_identifier(release_json, review_org_data)
@@ -94,7 +94,7 @@ def test_merge_review_org_identifier_no_data():
 @pytest.fixture
 def sample_release_json():
     return {
-        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}]
+        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}],
     }
 
 

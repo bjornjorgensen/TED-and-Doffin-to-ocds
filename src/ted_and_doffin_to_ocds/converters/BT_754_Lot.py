@@ -31,7 +31,8 @@ def parse_accessibility_criteria(xml_content: str | bytes) -> dict | None:
     result: dict[str, dict[str, list]] = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -80,7 +81,8 @@ def merge_accessibility_criteria(release_json: dict, parsed_data: dict | None) -
 
     for new_lot in parsed_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in tender_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in tender_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot["hasAccessibilityCriteria"] = new_lot[
@@ -94,5 +96,5 @@ def merge_accessibility_criteria(release_json: dict, parsed_data: dict | None) -
             tender_lots.append(new_lot)
 
     logger.info(
-        f"Merged Accessibility Criteria data for {len(parsed_data['tender']['lots'])} lots"
+        f"Merged Accessibility Criteria data for {len(parsed_data['tender']['lots'])} lots",
     )

@@ -26,7 +26,7 @@ def parse_part_addinfo(xml_content):
 
     for party_id in addinfo_party_ids:
         result["parties"].append(
-            {"id": party_id.text, "roles": ["processContactPoint"]}
+            {"id": party_id.text, "roles": ["processContactPoint"]},
         )
 
     return result if result["parties"] else None
@@ -47,5 +47,5 @@ def merge_part_addinfo(release_json, addinfo_data):
             release_json.setdefault("parties", []).append(party)
 
     logger.info(
-        f"Merged Part Additional Info data for {len(addinfo_data['parties'])} parties"
+        f"Merged Part Additional Info data for {len(addinfo_data['parties'])} parties",
     )

@@ -63,7 +63,7 @@ def merge_bt198_bt553_tender(release_json, unpublished_access_date_data):
     """
     if not unpublished_access_date_data:
         logger.warning(
-            "No unpublished access date data to merge for BT-198(BT-553)-Tender"
+            "No unpublished access date data to merge for BT-198(BT-553)-Tender",
         )
         return
 

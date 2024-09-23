@@ -19,22 +19,26 @@ def parse_part_place_performance_streetline1(xml_content):
     result = {"tender": {"deliveryAddresses": []}}
 
     parts = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
+        namespaces=namespaces,
     )
 
     for part in parts:
         realized_locations = part.xpath(
-            "cac:ProcurementProject/cac:RealizedLocation", namespaces=namespaces
+            "cac:ProcurementProject/cac:RealizedLocation",
+            namespaces=namespaces,
         )
 
         for location in realized_locations:
             address = location.xpath("cac:Address", namespaces=namespaces)[0]
             street_name = address.xpath("cbc:StreetName/text()", namespaces=namespaces)
             additional_street_name = address.xpath(
-                "cbc:AdditionalStreetName/text()", namespaces=namespaces
+                "cbc:AdditionalStreetName/text()",
+                namespaces=namespaces,
             )
             address_lines = address.xpath(
-                "cac:AddressLine/cbc:Line/text()", namespaces=namespaces
+                "cac:AddressLine/cbc:Line/text()",
+                namespaces=namespaces,
             )
 
             street_address_parts = []
@@ -47,20 +51,22 @@ def parse_part_place_performance_streetline1(xml_content):
             street_address = ", ".join(street_address_parts)
 
             result["tender"]["deliveryAddresses"].append(
-                {"streetAddress": street_address}
+                {"streetAddress": street_address},
             )
 
     return result if result["tender"]["deliveryAddresses"] else None
 
 
 def merge_part_place_performance_streetline1(
-    release_json, part_place_performance_streetline1_data
+    release_json,
+    part_place_performance_streetline1_data,
 ):
     if not part_place_performance_streetline1_data:
         return
 
     existing_addresses = release_json.setdefault("tender", {}).setdefault(
-        "deliveryAddresses", []
+        "deliveryAddresses",
+        [],
     )
 
     for new_address in part_place_performance_streetline1_data["tender"][

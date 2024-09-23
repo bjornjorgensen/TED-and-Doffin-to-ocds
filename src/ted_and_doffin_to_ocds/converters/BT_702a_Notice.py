@@ -203,11 +203,12 @@ def parse_notice_language(xml_content):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
     }
 
     notice_language_code = root.xpath(
-        "/*/cbc:NoticeLanguageCode/text()", namespaces=namespaces
+        "/*/cbc:NoticeLanguageCode/text()",
+        namespaces=namespaces,
     )
 
     if notice_language_code:

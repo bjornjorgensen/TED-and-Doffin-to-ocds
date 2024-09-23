@@ -44,9 +44,9 @@ def test_merge_received_submissions_count():
                     "measure": "bids",
                     "value": 5,
                     "relatedLots": ["LOT-0001"],
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
     merge_received_submissions_count(release_json, received_submissions_data)
     assert len(release_json["bids"]["statistics"]) == 1

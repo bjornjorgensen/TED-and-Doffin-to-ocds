@@ -36,7 +36,7 @@ def parse_part_environlegis(xml_content):
             org_id = org_id[0]
 
             result["tender"]["documents"].append(
-                {"id": doc_id, "publisher": {"id": org_id}}
+                {"id": doc_id, "publisher": {"id": org_id}},
             )
 
             result["parties"].append({"id": org_id, "roles": ["informationService"]})
@@ -68,9 +68,9 @@ def merge_part_environlegis(release_json, environlegis_data):
             existing_docs[doc["id"]]["publisher"] = doc["publisher"]
         else:
             release_json.setdefault("tender", {}).setdefault("documents", []).append(
-                doc
+                doc,
             )
 
     logger.info(
-        f"Merged Part Environmental Legislation data for {len(environlegis_data['parties'])} parties and {len(environlegis_data['tender']['documents'])} documents"
+        f"Merged Part Environmental Legislation data for {len(environlegis_data['parties'])} parties and {len(environlegis_data['tender']['documents'])} documents",
     )

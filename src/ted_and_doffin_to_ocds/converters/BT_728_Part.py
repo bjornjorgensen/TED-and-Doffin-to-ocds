@@ -38,14 +38,15 @@ def parse_part_place_performance_additional(xml_content):
 
     for description in descriptions:
         result["tender"]["deliveryAddresses"].append(
-            {"description": description.strip()}
+            {"description": description.strip()},
         )
 
     return result if result["tender"]["deliveryAddresses"] else None
 
 
 def merge_part_place_performance_additional(
-    release_json, part_place_performance_additional_data
+    release_json,
+    part_place_performance_additional_data,
 ):
     """
     Merge the parsed additional place of performance data for the procurement part into the main OCDS release JSON.
@@ -59,7 +60,7 @@ def merge_part_place_performance_additional(
     """
     if not part_place_performance_additional_data:
         logger.warning(
-            "No additional procurement part place of performance data to merge"
+            "No additional procurement part place of performance data to merge",
         )
         return
 
@@ -86,5 +87,5 @@ def merge_part_place_performance_additional(
             release_json["tender"]["deliveryAddresses"].append(new_address)
 
     logger.info(
-        f"Merged additional place of performance data for {len(part_place_performance_additional_data['tender']['deliveryAddresses'])} addresses"
+        f"Merged additional place of performance data for {len(part_place_performance_additional_data['tender']['deliveryAddresses'])} addresses",
     )

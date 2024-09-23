@@ -58,7 +58,7 @@ def merge_previous_notice_identifier(release_json, previous_notice_data):
         if existing_process:
             # Update the existing process if needed
             existing_process["relationship"] = list(
-                set(existing_process["relationship"] + new_process["relationship"])
+                set(existing_process["relationship"] + new_process["relationship"]),
             )
         else:
             # Only add the new process if it doesn't already exist
@@ -66,6 +66,6 @@ def merge_previous_notice_identifier(release_json, previous_notice_data):
             existing_related_processes.append(new_process)
 
     logger.info(
-        f"Merged Previous Notice Identifier for {len(previous_notice_data['relatedProcesses'])} related processes"
+        f"Merged Previous Notice Identifier for {len(previous_notice_data['relatedProcesses'])} related processes",
     )
     logger.info(f"Updated relatedProcesses: {existing_related_processes}")

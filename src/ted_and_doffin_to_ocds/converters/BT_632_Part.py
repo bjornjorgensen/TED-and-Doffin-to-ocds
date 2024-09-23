@@ -63,7 +63,7 @@ def merge_tool_name_part(release_json, tool_name_data):
         return
 
     release_json.setdefault("tender", {}).setdefault("communication", {}).update(
-        tool_name_data["tender"]["communication"]
+        tool_name_data["tender"]["communication"],
     )
 
     logger.info("Merged tool name data for part")

@@ -21,7 +21,8 @@ def parse_framework_max_participants(xml_content):
 
     result = {"tender": {"lots": []}}
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -36,8 +37,8 @@ def parse_framework_max_participants(xml_content):
                 "id": lot_id,
                 "techniques": {
                     "frameworkAgreement": {
-                        "maximumParticipants": int(max_participants[0])
-                    }
+                        "maximumParticipants": int(max_participants[0]),
+                    },
                 },
             }
             result["tender"]["lots"].append(lot_data)
@@ -60,7 +61,8 @@ def merge_framework_max_participants(release_json, max_participants_data):
 
     for new_lot in new_lots:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             if "techniques" not in existing_lot:

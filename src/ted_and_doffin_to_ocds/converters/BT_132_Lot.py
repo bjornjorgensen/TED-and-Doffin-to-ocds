@@ -20,7 +20,8 @@ def parse_lot_public_opening_date(xml_content):
     result = {"tender": {"lots": []}}
 
     lot_elements = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot_element in lot_elements:
@@ -56,7 +57,8 @@ def merge_lot_public_opening_date(release_json, lot_public_opening_date_data):
 
     for new_lot in lot_public_opening_date_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in tender_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in tender_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("awardPeriod", {}).update(new_lot["awardPeriod"])

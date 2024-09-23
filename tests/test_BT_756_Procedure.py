@@ -52,7 +52,8 @@ def test_bt_756_procedure_integration_false(tmp_path):
         result = json.load(f)
 
     assert "status" not in result.get(
-        "tender", {}
+        "tender",
+        {},
     ), "Did not expect 'status' in tender when TerminatedIndicator is false"
 
 

@@ -63,7 +63,7 @@ def merge_bt196_bt541_lotsgroup_weight(release_json, unpublished_justification_d
     """
     if not unpublished_justification_data:
         logger.warning(
-            "No unpublished justification description data to merge for BT-196(BT-541)-LotsGroup-Weight"
+            "No unpublished justification description data to merge for BT-196(BT-541)-LotsGroup-Weight",
         )
         return
 
@@ -80,5 +80,5 @@ def merge_bt196_bt541_lotsgroup_weight(release_json, unpublished_justification_d
             withheld_info.append(new_item)
 
     logger.info(
-        "Merged unpublished justification description data for BT-196(BT-541)-LotsGroup-Weight"
+        "Merged unpublished justification description data for BT-196(BT-541)-LotsGroup-Weight",
     )

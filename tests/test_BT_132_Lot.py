@@ -47,9 +47,9 @@ def test_merge_lot_public_opening_date():
                     "id": "LOT-0001",
                     "awardPeriod": {"startDate": "2019-11-05T14:00:00+01:00"},
                     "bidOpening": {"date": "2019-11-05T14:00:00+01:00"},
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_lot_public_opening_date(release_json, lot_public_opening_date_data)

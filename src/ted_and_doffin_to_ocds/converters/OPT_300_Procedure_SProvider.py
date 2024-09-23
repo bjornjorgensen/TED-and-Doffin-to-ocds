@@ -31,7 +31,8 @@ def parse_procedure_sprovider(xml_content):
 
         if org:
             org_name = org[0].xpath(
-                "cac:PartyName/cbc:Name/text()", namespaces=namespaces
+                "cac:PartyName/cbc:Name/text()",
+                namespaces=namespaces,
             )[0]
             result["parties"].append({"id": org_id, "name": org_name})
 
@@ -51,5 +52,5 @@ def merge_procedure_sprovider(release_json, sprovider_data):
             release_json.setdefault("parties", []).append(party)
 
     logger.info(
-        f"Merged Procedure Service Provider data for {len(sprovider_data['parties'])} parties"
+        f"Merged Procedure Service Provider data for {len(sprovider_data['parties'])} parties",
     )

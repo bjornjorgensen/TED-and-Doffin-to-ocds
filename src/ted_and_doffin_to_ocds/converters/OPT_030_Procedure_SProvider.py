@@ -34,7 +34,8 @@ def parse_provided_service_type(xml_content):
             namespaces=namespaces,
         )
         org_id = provider.xpath(
-            "cac:Party/cac:PartyIdentification/cbc:ID/text()", namespaces=namespaces
+            "cac:Party/cac:PartyIdentification/cbc:ID/text()",
+            namespaces=namespaces,
         )
 
         if service_type and org_id:
@@ -59,7 +60,8 @@ def merge_provided_service_type(release_json, service_type_data):
 
     for new_party in service_type_data["parties"]:
         existing_party = next(
-            (p for p in existing_parties if p["id"] == new_party["id"]), None
+            (p for p in existing_parties if p["id"] == new_party["id"]),
+            None,
         )
         if existing_party:
             existing_roles = set(existing_party.get("roles", []))
@@ -69,5 +71,5 @@ def merge_provided_service_type(release_json, service_type_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Provided Service Type for {len(service_type_data['parties'])} parties"
+        f"Merged Provided Service Type for {len(service_type_data['parties'])} parties",
     )

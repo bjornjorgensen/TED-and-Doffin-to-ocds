@@ -51,11 +51,11 @@ def test_parse_review_info_identifier_no_data():
 
 def test_merge_review_info_identifier():
     review_info_data = {
-        "parties": [{"id": "TPO-0001", "roles": ["reviewContactPoint"]}]
+        "parties": [{"id": "TPO-0001", "roles": ["reviewContactPoint"]}],
     }
 
     release_json = {
-        "parties": [{"id": "TPO-0002", "name": "Existing Party", "roles": ["buyer"]}]
+        "parties": [{"id": "TPO-0002", "name": "Existing Party", "roles": ["buyer"]}],
     }
 
     merge_review_info_identifier(release_json, review_info_data)
@@ -69,11 +69,11 @@ def test_merge_review_info_identifier():
 
 def test_merge_review_info_identifier_existing_party():
     review_info_data = {
-        "parties": [{"id": "TPO-0001", "roles": ["reviewContactPoint"]}]
+        "parties": [{"id": "TPO-0001", "roles": ["reviewContactPoint"]}],
     }
 
     release_json = {
-        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}]
+        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}],
     }
 
     merge_review_info_identifier(release_json, review_info_data)

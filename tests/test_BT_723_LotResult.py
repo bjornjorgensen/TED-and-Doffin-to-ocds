@@ -57,7 +57,7 @@ def test_bt_723_lot_result_integration(tmp_path):
     award = result["awards"][0]
     assert award["id"] == "RES-0001", f"Expected award id 'RES-0001', got {award['id']}"
     assert award["relatedLots"] == [
-        "LOT-0001"
+        "LOT-0001",
     ], f"Expected related lot 'LOT-0001', got {award['relatedLots']}"
     assert "items" in award, "Expected 'items' in award"
     assert len(award["items"]) == 1, f"Expected 1 item, got {len(award['items'])}"

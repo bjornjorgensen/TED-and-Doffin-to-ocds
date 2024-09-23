@@ -55,12 +55,12 @@ def test_merge_strategic_procurement_description():
                     "id": "LOT-0001",
                     "sustainability": [
                         {
-                            "description": "This is a strategic procurement involving innovative use..."
-                        }
+                            "description": "This is a strategic procurement involving innovative use...",
+                        },
                     ],
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_strategic_procurement_description(release_json, strategic_procurement_data)
@@ -123,7 +123,8 @@ def test_bt_777_lot_strategic_procurement_integration(tmp_path):
     assert len(lots_with_sustainability) == 2
 
     lot_1 = next(
-        (lot for lot in lots_with_sustainability if lot["id"] == "LOT-0001"), None
+        (lot for lot in lots_with_sustainability if lot["id"] == "LOT-0001"),
+        None,
     )
     assert lot_1 is not None
     assert "sustainability" in lot_1
@@ -143,7 +144,8 @@ def test_bt_777_lot_strategic_procurement_integration(tmp_path):
         # You might want to add more specific checks based on the actual structure
 
     lot_2 = next(
-        (lot for lot in lots_with_sustainability if lot["id"] == "LOT-0002"), None
+        (lot for lot in lots_with_sustainability if lot["id"] == "LOT-0002"),
+        None,
     )
     assert lot_2 is not None
     assert "sustainability" in lot_2
@@ -160,7 +162,8 @@ def test_bt_777_lot_strategic_procurement_integration(tmp_path):
         print(f"Sustainability structure for LOT-0002: {lot_2['sustainability']}")
 
     lot_3 = next(
-        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"), None
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"),
+        None,
     )
     assert lot_3 is not None
     assert "sustainability" not in lot_3

@@ -27,7 +27,7 @@ def format_timezone(tz_part: str | None, original_date: str) -> str:
 
 def convert_to_iso_format(date_string: str, is_start_date: bool = False) -> str:
     logger.debug(
-        f"convert_to_iso_format input: {date_string}, is_start_date: {is_start_date}"
+        f"convert_to_iso_format input: {date_string}, is_start_date: {is_start_date}",
     )
 
     try:

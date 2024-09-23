@@ -32,7 +32,8 @@ def parse_purpose_lot_identifier(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
@@ -65,5 +66,5 @@ def merge_purpose_lot_identifier(release_json, purpose_lot_identifier_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged purpose lot identifier data for {len(purpose_lot_identifier_data['tender']['lots'])} lots"
+        f"Merged purpose lot identifier data for {len(purpose_lot_identifier_data['tender']['lots'])} lots",
     )

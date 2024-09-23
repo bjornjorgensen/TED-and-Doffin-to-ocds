@@ -19,7 +19,8 @@ def parse_lot_maximum_candidates(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -34,7 +35,7 @@ def parse_lot_maximum_candidates(xml_content):
                 {
                     "id": lot_id[0],
                     "secondStage": {"maximumCandidates": int(max_candidates[0])},
-                }
+                },
             )
 
     return result if result["tender"]["lots"] else None
@@ -48,7 +49,8 @@ def merge_lot_maximum_candidates(release_json, lot_maximum_candidates_data):
 
     for new_lot in lot_maximum_candidates_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("secondStage", {})["maximumCandidates"] = new_lot[

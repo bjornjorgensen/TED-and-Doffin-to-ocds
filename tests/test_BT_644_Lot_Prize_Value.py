@@ -66,13 +66,13 @@ def test_merge_lot_prize_value():
                                 {
                                     "id": "0",
                                     "value": {"amount": 1000, "currency": "USD"},
-                                }
-                            ]
-                        }
+                                },
+                            ],
+                        },
                     },
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     new_data = {
@@ -91,12 +91,12 @@ def test_merge_lot_prize_value():
                                     "id": "1",
                                     "value": {"amount": 3000, "currency": "EUR"},
                                 },
-                            ]
-                        }
+                            ],
+                        },
                     },
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_lot_prize_value(existing_release, new_data)
@@ -124,13 +124,13 @@ def test_merge_lot_prize_value_new_lot():
                                 {
                                     "id": "0",
                                     "value": {"amount": 5000, "currency": "EUR"},
-                                }
-                            ]
-                        }
+                                },
+                            ],
+                        },
                     },
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_lot_prize_value(existing_release, new_data)

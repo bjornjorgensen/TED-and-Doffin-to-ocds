@@ -41,7 +41,7 @@ def parse_ubo_postcode(xml_content):
             party = {
                 "id": company_id[0],
                 "beneficialOwners": [
-                    {"id": ubo_id[0], "address": {"postalCode": postal_zone[0]}}
+                    {"id": ubo_id[0], "address": {"postalCode": postal_zone[0]}},
                 ],
             }
             result["parties"].append(party)
@@ -63,7 +63,8 @@ def merge_ubo_postcode(release_json, ubo_postcode_data):
         )
         if existing_party:
             existing_beneficial_owners = existing_party.setdefault(
-                "beneficialOwners", []
+                "beneficialOwners",
+                [],
             )
             for new_ubo in new_party["beneficialOwners"]:
                 existing_ubo = next(
@@ -82,5 +83,5 @@ def merge_ubo_postcode(release_json, ubo_postcode_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged UBO Postcode data for {len(ubo_postcode_data['parties'])} parties"
+        f"Merged UBO Postcode data for {len(ubo_postcode_data['parties'])} parties",
     )

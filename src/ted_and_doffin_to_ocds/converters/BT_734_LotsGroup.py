@@ -39,7 +39,8 @@ def parse_award_criterion_name_lotsgroup(xml_content):
     for lots_group in lots_groups:
         group_id = lots_group.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         criteria = lots_group.xpath(
-            ".//cac:SubordinateAwardingCriterion/cbc:Name/text()", namespaces=namespaces
+            ".//cac:SubordinateAwardingCriterion/cbc:Name/text()",
+            namespaces=namespaces,
         )
 
         if criteria:
@@ -77,7 +78,8 @@ def merge_award_criterion_name_lotsgroup(release_json, award_criterion_data):
         )
         if existing_group:
             existing_criteria = existing_group.setdefault(
-                "awardCriteria", {}
+                "awardCriteria",
+                {},
             ).setdefault("criteria", [])
             for new_criterion in new_group["awardCriteria"]["criteria"]:
                 existing_criterion = next(
@@ -96,5 +98,5 @@ def merge_award_criterion_name_lotsgroup(release_json, award_criterion_data):
             existing_lot_groups.append(new_group)
 
     logger.info(
-        f"Merged Award Criterion Name data for {len(award_criterion_data['tender']['lotGroups'])} lots groups"
+        f"Merged Award Criterion Name data for {len(award_criterion_data['tender']['lotGroups'])} lots groups",
     )

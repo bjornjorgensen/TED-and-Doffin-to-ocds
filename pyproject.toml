@@ -52,11 +52,20 @@ select = [
     "SIM",
     # pyupgrade
     "UP",
+    "S",    # flake8-bandit (security checks)
+    "A",    # flake8-builtins
+    "COM",  # flake8-commas
+    "T20",  # flake8-print
+    "ARG",  # flake8-unused-arguments
 ]
 ignore = [
     "E501",  # Line too long
     "I001",  # Import block is un-sorted or un-formatted
     "N999",  # Invalid module name
+    "S101", 
+    "S320",
+    "T201",
+    "COM812",
 ]
 
 [tool.ruff.format]

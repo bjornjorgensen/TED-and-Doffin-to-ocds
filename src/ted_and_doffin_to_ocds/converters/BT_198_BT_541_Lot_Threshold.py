@@ -54,7 +54,8 @@ def parse_bt198_bt541_lot_threshold_unpublished_access_date(xml_content):
 
 
 def merge_bt198_bt541_lot_threshold_unpublished_access_date(
-    release_json, unpublished_access_date_data
+    release_json,
+    unpublished_access_date_data,
 ):
     """
     Merge the parsed unpublished access date data into the main OCDS release JSON.
@@ -83,5 +84,5 @@ def merge_bt198_bt541_lot_threshold_unpublished_access_date(
             withheld_info.append(new_item)
 
     logger.info(
-        f"Merged unpublished access date data for BT-198(BT-541) for {len(unpublished_access_date_data['withheldInformation'])} lots"
+        f"Merged unpublished access date data for BT-198(BT-541) for {len(unpublished_access_date_data['withheldInformation'])} lots",
     )

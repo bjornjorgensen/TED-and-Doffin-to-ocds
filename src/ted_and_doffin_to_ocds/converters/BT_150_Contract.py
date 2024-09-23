@@ -22,15 +22,18 @@ def parse_contract_identifier(xml_content):
     contracts = []
 
     settled_contracts = root.xpath(
-        "//efac:NoticeResult/efac:SettledContract", namespaces=namespaces
+        "//efac:NoticeResult/efac:SettledContract",
+        namespaces=namespaces,
     )
 
     for settled_contract in settled_contracts:
         contract_id = settled_contract.xpath(
-            "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='contract']/text()",
+            namespaces=namespaces,
         )
         contract_reference = settled_contract.xpath(
-            "efac:ContractReference/cbc:ID/text()", namespaces=namespaces
+            "efac:ContractReference/cbc:ID/text()",
+            namespaces=namespaces,
         )
 
         if contract_id and contract_reference:
@@ -41,7 +44,8 @@ def parse_contract_identifier(xml_content):
             )
             award_id = (
                 lot_result[0].xpath(
-                    "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+                    "cbc:ID[@schemeName='result']/text()",
+                    namespaces=namespaces,
                 )
                 if lot_result
                 else None
@@ -53,7 +57,7 @@ def parse_contract_identifier(xml_content):
                     {
                         "id": contract_reference[0],
                         "scheme": "NL-TENDERNED",  # Default scheme, you might want to make this configurable
-                    }
+                    },
                 ],
             }
 
@@ -83,7 +87,7 @@ def merge_contract_identifier(release_json, contract_identifier_data):
         )
         if existing_contract:
             existing_contract.setdefault("identifiers", []).extend(
-                new_contract["identifiers"]
+                new_contract["identifiers"],
             )
             if "awardID" in new_contract:
                 existing_contract["awardID"] = new_contract["awardID"]
@@ -91,6 +95,6 @@ def merge_contract_identifier(release_json, contract_identifier_data):
             existing_contracts.append(new_contract)
 
     logger.info(
-        f"Merged Contract Identifier data for {len(contract_identifier_data['contracts'])} contracts"
+        f"Merged Contract Identifier data for {len(contract_identifier_data['contracts'])} contracts",
     )
     logger.debug(f"Release JSON after merging Contract Identifier data: {release_json}")

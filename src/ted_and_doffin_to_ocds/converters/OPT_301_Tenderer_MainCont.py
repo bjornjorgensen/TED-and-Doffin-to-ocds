@@ -29,7 +29,8 @@ def parse_tenderer_maincont(xml_content):
             0
         ]
         main_contractor_id = subcontractor.xpath(
-            "efac:MainContractor/cbc:ID/text()", namespaces=namespaces
+            "efac:MainContractor/cbc:ID/text()",
+            namespaces=namespaces,
         )[0]
 
         # Add main contractor to parties
@@ -38,13 +39,15 @@ def parse_tenderer_maincont(xml_content):
         # Get main contractor name
         main_contractor_name_xpath = f"//efac:Organizations/efac:Organization/efac:Company[cac:PartyIdentification/cbc:ID/text()='{main_contractor_id}']/cac:PartyName/cbc:Name/text()"
         main_contractor_name = root.xpath(
-            main_contractor_name_xpath, namespaces=namespaces
+            main_contractor_name_xpath,
+            namespaces=namespaces,
         )
         main_contractor_name = main_contractor_name[0] if main_contractor_name else None
 
         # Add subcontract to bids
         bid = next(
-            (bid for bid in result["bids"]["details"] if "subcontracting" in bid), None
+            (bid for bid in result["bids"]["details"] if "subcontracting" in bid),
+            None,
         )
         if not bid:
             bid = {"subcontracting": {"subcontracts": []}}
@@ -103,5 +106,5 @@ def merge_tenderer_maincont(release_json, maincont_data):
             release_json["bids"]["details"].append(bid)
 
     logger.info(
-        f"Merged Tenderer Main Contractor data for {len(maincont_data['parties'])} parties and {len(maincont_data['bids']['details'])} bids"
+        f"Merged Tenderer Main Contractor data for {len(maincont_data['parties'])} parties and {len(maincont_data['bids']['details'])} bids",
     )

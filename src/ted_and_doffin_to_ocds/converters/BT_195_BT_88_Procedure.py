@@ -32,7 +32,8 @@ def parse_bt195_bt88_procedure_unpublished_identifier(xml_content):
     result = {"withheldInformation": []}
 
     contract_folder_id = root.xpath(
-        "/*/cbc:ContractFolderID/text()", namespaces=namespaces
+        "/*/cbc:ContractFolderID/text()",
+        namespaces=namespaces,
     )
 
     xpath_query = (
@@ -42,7 +43,8 @@ def parse_bt195_bt88_procedure_unpublished_identifier(xml_content):
 
     for field_privacy in root.xpath(xpath_query, namespaces=namespaces):
         field_identifier = field_privacy.xpath(
-            "efbc:FieldIdentifierCode/text()", namespaces=namespaces
+            "efbc:FieldIdentifierCode/text()",
+            namespaces=namespaces,
         )
 
         if contract_folder_id and field_identifier:
@@ -57,7 +59,8 @@ def parse_bt195_bt88_procedure_unpublished_identifier(xml_content):
 
 
 def merge_bt195_bt88_procedure_unpublished_identifier(
-    release_json, unpublished_identifier_data
+    release_json,
+    unpublished_identifier_data,
 ):
     """
     Merge the parsed unpublished identifier data into the main OCDS release JSON.
@@ -71,7 +74,7 @@ def merge_bt195_bt88_procedure_unpublished_identifier(
     """
     if not unpublished_identifier_data:
         logger.warning(
-            "No unpublished identifier data to merge for BT-195(BT-88)-Procedure"
+            "No unpublished identifier data to merge for BT-195(BT-88)-Procedure",
         )
         return
 
@@ -79,7 +82,8 @@ def merge_bt195_bt88_procedure_unpublished_identifier(
 
     for new_item in unpublished_identifier_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item.get("id") == new_item["id"]), None
+            (item for item in withheld_info if item.get("id") == new_item["id"]),
+            None,
         )
         if existing_item:
             existing_item.update(new_item)
@@ -87,5 +91,5 @@ def merge_bt195_bt88_procedure_unpublished_identifier(
             withheld_info.append(new_item)
 
     logger.info(
-        f"Merged unpublished identifier data for BT-195(BT-88)-Procedure: {len(unpublished_identifier_data['withheldInformation'])} items"
+        f"Merged unpublished identifier data for BT-195(BT-88)-Procedure: {len(unpublished_identifier_data['withheldInformation'])} items",
     )

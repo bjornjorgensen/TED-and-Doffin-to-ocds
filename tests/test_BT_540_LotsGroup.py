@@ -55,9 +55,12 @@ def test_merge_award_criterion_description_lots_group():
     release_json = {
         "tender": {
             "lotGroups": [
-                {"id": "GLO-0001", "awardCriteria": {"criteria": [{"type": "quality"}]}}
-            ]
-        }
+                {
+                    "id": "GLO-0001",
+                    "awardCriteria": {"criteria": [{"type": "quality"}]},
+                },
+            ],
+        },
     }
 
     award_criterion_description_data = {
@@ -68,23 +71,24 @@ def test_merge_award_criterion_description_lots_group():
                     "awardCriteria": {
                         "criteria": [
                             {
-                                "description": "Tenders with a quality score less than 65..."
-                            }
-                        ]
+                                "description": "Tenders with a quality score less than 65...",
+                            },
+                        ],
                     },
                 },
                 {
                     "id": "GLO-0002",
                     "awardCriteria": {
-                        "criteria": [{"description": "Another criterion description"}]
+                        "criteria": [{"description": "Another criterion description"}],
                     },
                 },
-            ]
-        }
+            ],
+        },
     }
 
     merge_award_criterion_description_lots_group(
-        release_json, award_criterion_description_data
+        release_json,
+        award_criterion_description_data,
     )
 
     assert len(release_json["tender"]["lotGroups"]) == 2
@@ -94,7 +98,7 @@ def test_merge_award_criterion_description_lots_group():
     assert len(lot_group1["awardCriteria"]["criteria"]) == 2
     assert {"type": "quality"} in lot_group1["awardCriteria"]["criteria"]
     assert {
-        "description": "Tenders with a quality score less than 65..."
+        "description": "Tenders with a quality score less than 65...",
     } in lot_group1["awardCriteria"]["criteria"]
 
     lot_group2 = release_json["tender"]["lotGroups"][1]

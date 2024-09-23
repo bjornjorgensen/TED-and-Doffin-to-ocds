@@ -23,7 +23,8 @@ def parse_dispatch_invitation_tender(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -37,11 +38,11 @@ def parse_dispatch_invitation_tender(xml_content):
             try:
                 iso_date = start_date(invitation_date[0])
                 result["tender"]["lots"].append(
-                    {"id": lot_id, "secondStage": {"invitationDate": iso_date}}
+                    {"id": lot_id, "secondStage": {"invitationDate": iso_date}},
                 )
             except ValueError as e:
                 logger.error(
-                    f"Error parsing invitation date for lot {lot_id}: {str(e)}"
+                    f"Error parsing invitation date for lot {lot_id}: {str(e)}",
                 )
 
     return result if result["tender"]["lots"] else None
@@ -56,7 +57,8 @@ def merge_dispatch_invitation_tender(release_json, dispatch_invitation_data):
 
     for new_lot in dispatch_invitation_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("secondStage", {}).update(new_lot["secondStage"])
@@ -64,5 +66,5 @@ def merge_dispatch_invitation_tender(release_json, dispatch_invitation_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Dispatch Invitation Tender data for {len(dispatch_invitation_data['tender']['lots'])} lots"
+        f"Merged Dispatch Invitation Tender data for {len(dispatch_invitation_data['tender']['lots'])} lots",
     )

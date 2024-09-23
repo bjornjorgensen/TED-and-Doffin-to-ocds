@@ -52,5 +52,5 @@ def merge_tender_evaluator_identifier(release_json, tender_evaluator_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Tender Evaluator Identifier data for {len(tender_evaluator_data['parties'])} parties"
+        f"Merged Tender Evaluator Identifier data for {len(tender_evaluator_data['parties'])} parties",
     )

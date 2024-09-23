@@ -25,7 +25,8 @@ def parse_touchpoint_edelivery_gateway(xml_content):
             namespaces=namespaces,
         )
         endpoint_id = org.xpath(
-            "efac:TouchPoint/cbc:EndpointID/text()", namespaces=namespaces
+            "efac:TouchPoint/cbc:EndpointID/text()",
+            namespaces=namespaces,
         )
         company_id = org.xpath(
             "efac:Company/cac:PartyLegalEntity/cbc:CompanyID/text()",

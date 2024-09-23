@@ -35,7 +35,8 @@ def parse_clean_vehicles_directive(xml_content):
     result = {}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -78,5 +79,5 @@ def merge_clean_vehicles_directive(release_json, clean_vehicles_directive_data):
             lot.setdefault("coveredBy", []).append("EU-CVD")
 
     logger.info(
-        f"Merged Clean Vehicles Directive data for {len(clean_vehicles_directive_data)} lots"
+        f"Merged Clean Vehicles Directive data for {len(clean_vehicles_directive_data)} lots",
     )

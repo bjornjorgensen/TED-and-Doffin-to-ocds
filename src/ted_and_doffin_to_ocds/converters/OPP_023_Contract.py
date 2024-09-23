@@ -19,12 +19,14 @@ def map_asset_predominance(xml_content):
     result = {"tender": {"lots": []}}
 
     settled_contracts = root.xpath(
-        "//efac:NoticeResult/efac:SettledContract", namespaces=namespaces
+        "//efac:NoticeResult/efac:SettledContract",
+        namespaces=namespaces,
     )
 
     for contract in settled_contracts:
         contract_id = contract.xpath(
-            "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='contract']/text()",
+            namespaces=namespaces,
         )[0]
         assets = contract.xpath(
             "efac:DurationJustification/efac:AssetsList/efac:Asset",
@@ -47,11 +49,12 @@ def map_asset_predominance(xml_content):
 
                 for asset in assets:
                     asset_predominance = asset.xpath(
-                        "efbc:AssetPredominance/text()", namespaces=namespaces
+                        "efbc:AssetPredominance/text()",
+                        namespaces=namespaces,
                     )
                     if asset_predominance:
                         lot["essentialAssets"].append(
-                            {"predominance": asset_predominance[0]}
+                            {"predominance": asset_predominance[0]},
                         )
 
                 if lot[
@@ -70,7 +73,8 @@ def merge_asset_predominance(release_json, asset_predominance_data):
 
     for new_lot in asset_predominance_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_assets = existing_lot.setdefault("essentialAssets", [])

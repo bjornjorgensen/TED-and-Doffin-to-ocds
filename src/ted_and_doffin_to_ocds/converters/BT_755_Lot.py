@@ -31,7 +31,8 @@ def parse_accessibility_justification(xml_content: str | bytes) -> dict | None:
     result: dict[str, dict[str, list]] = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -52,7 +53,8 @@ def parse_accessibility_justification(xml_content: str | bytes) -> dict | None:
 
 
 def merge_accessibility_justification(
-    release_json: dict, parsed_data: dict | None
+    release_json: dict,
+    parsed_data: dict | None,
 ) -> None:
     """
     Merge the parsed accessibility justification data into the main OCDS release JSON.
@@ -72,7 +74,8 @@ def merge_accessibility_justification(
 
     for new_lot in parsed_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in tender_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in tender_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot["noAccessibilityCriteriaRationale"] = new_lot[
@@ -82,5 +85,5 @@ def merge_accessibility_justification(
             tender_lots.append(new_lot)
 
     logger.info(
-        f"Merged Accessibility Justification data for {len(parsed_data['tender']['lots'])} lots"
+        f"Merged Accessibility Justification data for {len(parsed_data['tender']['lots'])} lots",
     )

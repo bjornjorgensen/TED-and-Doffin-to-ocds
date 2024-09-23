@@ -52,7 +52,8 @@ def parse_bt196_bt541_lot_threshold_unpublished_justification(xml_content):
 
 
 def merge_bt196_bt541_lot_threshold_unpublished_justification(
-    release_json, unpublished_justification_data
+    release_json,
+    unpublished_justification_data,
 ):
     """
     Merge the parsed unpublished justification data into the main OCDS release JSON.
@@ -81,5 +82,5 @@ def merge_bt196_bt541_lot_threshold_unpublished_justification(
             withheld_info.append(new_item)
 
     logger.info(
-        f"Merged unpublished justification data for BT-196(BT-541) for {len(unpublished_justification_data['withheldInformation'])} lots"
+        f"Merged unpublished justification data for BT-196(BT-541) for {len(unpublished_justification_data['withheldInformation'])} lots",
     )

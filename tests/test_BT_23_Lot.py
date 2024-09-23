@@ -26,7 +26,7 @@ def test_parse_main_nature_works():
     """
     result = parse_main_nature(xml_content)
     assert result == {
-        "tender": {"lots": [{"id": "LOT-0001", "mainProcurementCategory": "works"}]}
+        "tender": {"lots": [{"id": "LOT-0001", "mainProcurementCategory": "works"}]},
     }
 
 
@@ -44,7 +44,7 @@ def test_parse_main_nature_services():
     """
     result = parse_main_nature(xml_content)
     assert result == {
-        "tender": {"lots": [{"id": "LOT-0002", "mainProcurementCategory": "services"}]}
+        "tender": {"lots": [{"id": "LOT-0002", "mainProcurementCategory": "services"}]},
     }
 
 
@@ -62,7 +62,7 @@ def test_parse_main_nature_supplies():
     """
     result = parse_main_nature(xml_content)
     assert result == {
-        "tender": {"lots": [{"id": "LOT-0003", "mainProcurementCategory": "goods"}]}
+        "tender": {"lots": [{"id": "LOT-0003", "mainProcurementCategory": "goods"}]},
     }
 
 
@@ -90,8 +90,8 @@ def test_parse_main_nature_multiple_lots():
             "lots": [
                 {"id": "LOT-0001", "mainProcurementCategory": "works"},
                 {"id": "LOT-0002", "mainProcurementCategory": "services"},
-            ]
-        }
+            ],
+        },
     }
 
 
@@ -112,8 +112,8 @@ def test_merge_main_nature():
             "lots": [
                 {"id": "LOT-0001", "mainProcurementCategory": "works"},
                 {"id": "LOT-0002", "mainProcurementCategory": "services"},
-            ]
-        }
+            ],
+        },
     }
     merge_main_nature(release_json, main_nature_data)
     assert release_json == {
@@ -125,8 +125,8 @@ def test_merge_main_nature():
                     "mainProcurementCategory": "works",
                 },
                 {"id": "LOT-0002", "mainProcurementCategory": "services"},
-            ]
-        }
+            ],
+        },
     }
 
 

@@ -23,7 +23,7 @@ def test_parse_procedure_additional_info():
 def test_merge_procedure_additional_info():
     release_json = {}
     procedure_additional_info = [
-        {"text": "For the current procedure ...", "language": "ENG"}
+        {"text": "For the current procedure ...", "language": "ENG"},
     ]
     merge_procedure_additional_info(release_json, procedure_additional_info)
     assert release_json["description"] == "For the current procedure ..."

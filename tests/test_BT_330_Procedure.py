@@ -26,11 +26,11 @@ def test_parse_group_identifier():
 def test_merge_group_identifier():
     release_json = {"tender": {"lotGroups": [{"id": "GLO-0002"}]}}
     group_identifier_data = {
-        "tender": {"lotGroups": [{"id": "GLO-0001"}, {"id": "GLO-0002"}]}
+        "tender": {"lotGroups": [{"id": "GLO-0001"}, {"id": "GLO-0002"}]},
     }
     merge_group_identifier(release_json, group_identifier_data)
     assert release_json == {
-        "tender": {"lotGroups": [{"id": "GLO-0002"}, {"id": "GLO-0001"}]}
+        "tender": {"lotGroups": [{"id": "GLO-0002"}, {"id": "GLO-0001"}]},
     }
 
 

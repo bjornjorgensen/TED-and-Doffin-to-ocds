@@ -45,7 +45,8 @@ def parse_organization_natural_person(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -54,7 +55,8 @@ def parse_organization_natural_person(xml_content):
             namespaces=namespaces,
         )
         natural_person_indicator = organization.xpath(
-            "efbc:NaturalPersonIndicator/text()", namespaces=namespaces
+            "efbc:NaturalPersonIndicator/text()",
+            namespaces=namespaces,
         )
 
         if (
@@ -96,5 +98,5 @@ def merge_organization_natural_person(release_json, organization_natural_person_
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Organization Natural Person data for {len(organization_natural_person_data['parties'])} parties"
+        f"Merged Organization Natural Person data for {len(organization_natural_person_data['parties'])} parties",
     )

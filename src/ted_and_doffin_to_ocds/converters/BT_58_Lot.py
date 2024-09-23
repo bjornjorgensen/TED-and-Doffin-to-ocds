@@ -51,7 +51,8 @@ def parse_renewal_maximum(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -93,7 +94,8 @@ def merge_renewal_maximum(release_json, renewal_data):
 
     for new_lot in renewal_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("renewal", {}).update(new_lot["renewal"])
@@ -101,5 +103,5 @@ def merge_renewal_maximum(release_json, renewal_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"BT-58-Lot: Merged renewal maximum data for {len(renewal_data['tender']['lots'])} lots"
+        f"BT-58-Lot: Merged renewal maximum data for {len(renewal_data['tender']['lots'])} lots",
     )

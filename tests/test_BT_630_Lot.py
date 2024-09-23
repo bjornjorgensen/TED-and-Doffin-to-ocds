@@ -63,9 +63,9 @@ def test_merge_deadline_receipt_expressions():
                 {
                     "id": "LOT-0001",
                     "tenderPeriod": {"endDate": "2019-10-28T18:00:00+01:00"},
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_deadline_receipt_expressions(release_json, deadline_receipt_expressions_data)

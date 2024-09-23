@@ -42,9 +42,9 @@ def test_merge_tender_value_highest():
                     "measure": "highestValidBidValue",
                     "value": {"amount": 20000.00, "currency": "EUR"},
                     "relatedLots": ["LOT-0001"],
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
     merge_tender_value_highest(release_json, tender_value_highest_data)
     assert len(release_json["bids"]["statistics"]) == 1

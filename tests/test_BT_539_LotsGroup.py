@@ -52,9 +52,9 @@ def test_merge_award_criterion_type_lots_group():
     release_json = {
         "tender": {
             "lotGroups": [
-                {"id": "GLO-0001", "awardCriteria": {"criteria": [{"type": "price"}]}}
-            ]
-        }
+                {"id": "GLO-0001", "awardCriteria": {"criteria": [{"type": "price"}]}},
+            ],
+        },
     }
 
     award_criterion_type_data = {
@@ -65,8 +65,8 @@ def test_merge_award_criterion_type_lots_group():
                     "awardCriteria": {"criteria": [{"type": "quality"}]},
                 },
                 {"id": "GLO-0002", "awardCriteria": {"criteria": [{"type": "cost"}]}},
-            ]
-        }
+            ],
+        },
     }
 
     merge_award_criterion_type_lots_group(release_json, award_criterion_type_data)

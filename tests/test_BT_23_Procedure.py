@@ -79,7 +79,7 @@ def test_merge_main_nature_procedure():
     main_nature_data = {"tender": {"mainProcurementCategory": "works"}}
     merge_main_nature_procedure(release_json, main_nature_data)
     assert release_json == {
-        "tender": {"id": "tender-001", "mainProcurementCategory": "works"}
+        "tender": {"id": "tender-001", "mainProcurementCategory": "works"},
     }
 
 

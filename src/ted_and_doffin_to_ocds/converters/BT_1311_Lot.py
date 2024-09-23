@@ -23,7 +23,8 @@ def parse_deadline_receipt_requests(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
     logger.info(f"Found {len(lots)} lots in XML for Deadline Receipt Requests")
 
@@ -44,7 +45,7 @@ def parse_deadline_receipt_requests(xml_content):
         )
 
         logger.info(
-            f"Processing lot {lot_id} for Deadline Receipt Requests: EndDate={end_date}, EndTime={end_time}"
+            f"Processing lot {lot_id} for Deadline Receipt Requests: EndDate={end_date}, EndTime={end_time}",
         )
 
         if end_date:
@@ -66,8 +67,8 @@ def parse_deadline_receipt_requests(xml_content):
                             timedelta(
                                 hours=int(tz_offset.split(":")[0]),
                                 minutes=int(tz_offset.split(":")[1]),
-                            )
-                        )
+                            ),
+                        ),
                     )
                 else:
                     dt = dt.replace(tzinfo=UTC)
@@ -75,22 +76,22 @@ def parse_deadline_receipt_requests(xml_content):
                 iso_date = dt.isoformat()
 
                 result["tender"]["lots"].append(
-                    {"id": lot_id, "tenderPeriod": {"endDate": iso_date}}
+                    {"id": lot_id, "tenderPeriod": {"endDate": iso_date}},
                 )
                 logger.info(
-                    f"Successfully processed lot {lot_id} with endDate: {iso_date} for Deadline Receipt Requests"
+                    f"Successfully processed lot {lot_id} with endDate: {iso_date} for Deadline Receipt Requests",
                 )
             except ValueError as e:
                 logger.error(
-                    f"Error parsing deadline for lot {lot_id} in Deadline Receipt Requests: {str(e)}"
+                    f"Error parsing deadline for lot {lot_id} in Deadline Receipt Requests: {str(e)}",
                 )
         else:
             logger.warning(
-                f"No EndDate found for lot {lot_id} in Deadline Receipt Requests, skipping this lot"
+                f"No EndDate found for lot {lot_id} in Deadline Receipt Requests, skipping this lot",
             )
 
     logger.info(
-        f"Processed {len(result['tender']['lots'])} lots in total for Deadline Receipt Requests"
+        f"Processed {len(result['tender']['lots'])} lots in total for Deadline Receipt Requests",
     )
     return result if result["tender"]["lots"] else None
 
@@ -104,19 +105,20 @@ def merge_deadline_receipt_requests(release_json, deadline_data):
 
     for new_lot in deadline_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("tenderPeriod", {}).update(new_lot["tenderPeriod"])
             logger.info(
-                f"Updated existing lot {new_lot['id']} with tenderPeriod data for Deadline Receipt Requests"
+                f"Updated existing lot {new_lot['id']} with tenderPeriod data for Deadline Receipt Requests",
             )
         else:
             existing_lots.append(new_lot)
             logger.info(
-                f"Added new lot {new_lot['id']} with tenderPeriod data for Deadline Receipt Requests"
+                f"Added new lot {new_lot['id']} with tenderPeriod data for Deadline Receipt Requests",
             )
 
     logger.info(
-        f"Merged Deadline Receipt Requests data for {len(deadline_data['tender']['lots'])} lots"
+        f"Merged Deadline Receipt Requests data for {len(deadline_data['tender']['lots'])} lots",
     )

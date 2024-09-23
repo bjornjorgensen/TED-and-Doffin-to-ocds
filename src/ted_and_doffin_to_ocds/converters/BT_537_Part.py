@@ -69,5 +69,5 @@ def merge_part_duration_end_date(release_json, part_duration_end_date_data):
         return
 
     release_json.setdefault("tender", {}).setdefault("contractPeriod", {}).update(
-        part_duration_end_date_data["tender"]["contractPeriod"]
+        part_duration_end_date_data["tender"]["contractPeriod"],
     )

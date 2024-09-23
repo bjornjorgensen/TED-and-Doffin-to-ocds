@@ -53,7 +53,7 @@ def test_bt_554_tender_integration(tmp_path):
         bid["subcontracting"]["description"] == "The subcontracting will be..."
     ), f"Expected description 'The subcontracting will be...', got {bid['subcontracting']['description']}"
     assert bid["relatedLots"] == [
-        "LOT-0001"
+        "LOT-0001",
     ], f"Expected relatedLots ['LOT-0001'], got {bid['relatedLots']}"
 
 

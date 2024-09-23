@@ -19,15 +19,18 @@ def parse_tender_identifier_reference(xml_content):
 
     result = {"awards": []}
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotResult",
+        namespaces=namespaces,
     )
 
     for lot_result in lot_results:
         award_id = lot_result.xpath(
-            "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='result']/text()",
+            namespaces=namespaces,
         )
         tender_ids = lot_result.xpath(
-            "efac:LotTender/cbc:ID[@schemeName='tender']/text()", namespaces=namespaces
+            "efac:LotTender/cbc:ID[@schemeName='tender']/text()",
+            namespaces=namespaces,
         )
 
         if award_id and tender_ids:
@@ -47,7 +50,8 @@ def merge_tender_identifier_reference(release_json, tender_id_data):
 
     for new_award in tender_id_data["awards"]:
         existing_award = next(
-            (a for a in release_json["awards"] if a["id"] == new_award["id"]), None
+            (a for a in release_json["awards"] if a["id"] == new_award["id"]),
+            None,
         )
         if existing_award:
             if "relatedBids" not in existing_award:
@@ -55,11 +59,11 @@ def merge_tender_identifier_reference(release_json, tender_id_data):
             existing_award["relatedBids"].extend(new_award["relatedBids"])
             # Remove duplicates while preserving order
             existing_award["relatedBids"] = list(
-                dict.fromkeys(existing_award["relatedBids"])
+                dict.fromkeys(existing_award["relatedBids"]),
             )
         else:
             release_json["awards"].append(new_award)
 
     logger.info(
-        f"Merged Tender Identifier Reference data for {len(tender_id_data['awards'])} awards"
+        f"Merged Tender Identifier Reference data for {len(tender_id_data['awards'])} awards",
     )

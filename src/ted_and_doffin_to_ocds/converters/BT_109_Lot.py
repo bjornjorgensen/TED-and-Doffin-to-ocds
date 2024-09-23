@@ -21,7 +21,8 @@ def parse_framework_duration_justification(xml_content):
 
     result = {"tender": {"lots": []}}
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -35,7 +36,7 @@ def parse_framework_duration_justification(xml_content):
             lot_data = {
                 "id": lot_id,
                 "techniques": {
-                    "frameworkAgreement": {"periodRationale": justification[0]}
+                    "frameworkAgreement": {"periodRationale": justification[0]},
                 },
             }
             result["tender"]["lots"].append(lot_data)
@@ -52,15 +53,17 @@ def merge_framework_duration_justification(release_json, framework_duration_data
 
     for new_lot in framework_duration_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("techniques", {}).setdefault(
-                "frameworkAgreement", {}
+                "frameworkAgreement",
+                {},
             ).update(new_lot["techniques"]["frameworkAgreement"])
         else:
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Framework Duration Justification data for {len(framework_duration_data['tender']['lots'])} lots"
+        f"Merged Framework Duration Justification data for {len(framework_duration_data['tender']['lots'])} lots",
     )

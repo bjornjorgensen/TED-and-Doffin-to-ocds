@@ -34,7 +34,8 @@ def parse_green_procurement_criteria(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
@@ -49,7 +50,7 @@ def parse_green_procurement_criteria(xml_content):
             if criterion != "none" and criterion in GPP_CRITERIA_MAPPING:
                 lot_data["hasSustainability"] = True
                 lot_data["sustainability"].append(
-                    {"strategies": [GPP_CRITERIA_MAPPING[criterion]]}
+                    {"strategies": [GPP_CRITERIA_MAPPING[criterion]]},
                 )
 
         if lot_data["hasSustainability"]:
@@ -78,7 +79,8 @@ def merge_green_procurement_criteria(release_json, green_procurement_criteria_da
 
     for new_lot in green_procurement_criteria_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot["hasSustainability"] = new_lot["hasSustainability"]
@@ -94,5 +96,5 @@ def merge_green_procurement_criteria(release_json, green_procurement_criteria_da
     ]
 
     logger.info(
-        f"Merged green procurement criteria data for {len(green_procurement_criteria_data['tender']['lots'])} lots"
+        f"Merged green procurement criteria data for {len(green_procurement_criteria_data['tender']['lots'])} lots",
     )

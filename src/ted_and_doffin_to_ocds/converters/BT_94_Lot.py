@@ -45,7 +45,8 @@ def parse_recurrence(xml_content):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -91,5 +92,5 @@ def merge_recurrence(release_json, recurrence_data):
             lots.append(new_lot)
 
     logger.info(
-        f"Merged recurrence data for {len(recurrence_data['tender']['lots'])} lots"
+        f"Merged recurrence data for {len(recurrence_data['tender']['lots'])} lots",
     )

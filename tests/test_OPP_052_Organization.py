@@ -58,14 +58,16 @@ def test_opp_052_organization_acquiring_cpb_buyer_indicator_integration(tmp_path
     assert len(result["parties"]) == 2
 
     wholesale_buyer = next(
-        (party for party in result["parties"] if party["id"] == "ORG-0001"), None
+        (party for party in result["parties"] if party["id"] == "ORG-0001"),
+        None,
     )
     assert wholesale_buyer is not None
     assert "roles" in wholesale_buyer
     assert "wholesaleBuyer" in wholesale_buyer["roles"]
 
     non_wholesale_buyer = next(
-        (party for party in result["parties"] if party["id"] == "ORG-0002"), None
+        (party for party in result["parties"] if party["id"] == "ORG-0002"),
+        None,
     )
     assert non_wholesale_buyer is not None
     assert (

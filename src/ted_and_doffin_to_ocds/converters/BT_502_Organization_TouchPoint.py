@@ -22,7 +22,8 @@ def parse_touchpoint_contact_point(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -31,7 +32,8 @@ def parse_touchpoint_contact_point(xml_content):
             namespaces=namespaces,
         )
         contact_name = organization.xpath(
-            "efac:TouchPoint/cac:Contact/cbc:Name/text()", namespaces=namespaces
+            "efac:TouchPoint/cac:Contact/cbc:Name/text()",
+            namespaces=namespaces,
         )
         company_id = organization.xpath(
             "efac:Company/cac:PartyLegalEntity/cbc:CompanyID/text()",
@@ -61,7 +63,7 @@ def merge_touchpoint_contact_point(release_json, touchpoint_contact_point_data):
         )
         if existing_party:
             existing_party.setdefault("contactPoint", {}).update(
-                new_party["contactPoint"]
+                new_party["contactPoint"],
             )
             if "identifier" in new_party:
                 existing_party["identifier"] = new_party["identifier"]
@@ -69,5 +71,5 @@ def merge_touchpoint_contact_point(release_json, touchpoint_contact_point_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged TouchPoint Contact Point data for {len(touchpoint_contact_point_data['parties'])} parties"
+        f"Merged TouchPoint Contact Point data for {len(touchpoint_contact_point_data['parties'])} parties",
     )

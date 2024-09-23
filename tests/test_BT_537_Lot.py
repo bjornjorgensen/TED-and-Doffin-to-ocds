@@ -44,9 +44,9 @@ def test_merge_lot_duration_end_date():
                 {
                     "id": "LOT-0001",
                     "contractPeriod": {"endDate": "2019-11-19T23:59:59+01:00"},
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
     merge_lot_duration_end_date(release_json, lot_duration_end_date_data)

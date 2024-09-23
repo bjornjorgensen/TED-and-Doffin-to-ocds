@@ -52,17 +52,17 @@ def test_parse_participant_name():
 def test_merge_participant_name():
     participant_data = {
         "parties": [
-            {"id": "1", "name": "Mr P. Sanchez", "roles": ["selectedParticipant"]}
+            {"id": "1", "name": "Mr P. Sanchez", "roles": ["selectedParticipant"]},
         ],
         "tender": {
             "lots": [
                 {
                     "id": "LOT-0001",
                     "designContest": {
-                        "selectedParticipants": [{"id": "1", "name": "Mr P. Sanchez"}]
+                        "selectedParticipants": [{"id": "1", "name": "Mr P. Sanchez"}],
                     },
-                }
-            ]
+                },
+            ],
         },
     }
 

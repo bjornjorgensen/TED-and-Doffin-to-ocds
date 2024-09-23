@@ -22,12 +22,14 @@ def parse_concession_revenue_buyer(xml_content):
     result = {"contracts": []}
 
     lot_tenders = root.xpath(
-        "//efac:NoticeResult/efac:LotTender", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotTender",
+        namespaces=namespaces,
     )
 
     for lot_tender in lot_tenders:
         tender_id = lot_tender.xpath(
-            "cbc:ID[@schemeName='tender']/text()", namespaces=namespaces
+            "cbc:ID[@schemeName='tender']/text()",
+            namespaces=namespaces,
         )
         revenue_buyer = lot_tender.xpath(
             "efac:ConcessionRevenue/efbc:RevenueBuyerAmount/text()",
@@ -46,7 +48,8 @@ def parse_concession_revenue_buyer(xml_content):
 
             if settled_contract:
                 contract_id = settled_contract[0].xpath(
-                    "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces
+                    "cbc:ID[@schemeName='contract']/text()",
+                    namespaces=namespaces,
                 )
                 lot_result = root.xpath(
                     f"//efac:NoticeResult/efac:LotResult[efac:SettledContract/cbc:ID[@schemeName='contract'] = '{contract_id[0]}']",
@@ -55,7 +58,8 @@ def parse_concession_revenue_buyer(xml_content):
 
                 if lot_result:
                     award_id = lot_result[0].xpath(
-                        "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
+                        "cbc:ID[@schemeName='result']/text()",
+                        namespaces=namespaces,
                     )
 
                     contract = {
@@ -71,8 +75,8 @@ def parse_concession_revenue_buyer(xml_content):
                                         "currency": currency[0],
                                     },
                                     "paidBy": "government",
-                                }
-                            ]
+                                },
+                            ],
                         },
                     }
                     result["contracts"].append(contract)
@@ -104,5 +108,5 @@ def merge_concession_revenue_buyer(release_json, concession_revenue_buyer_data):
             existing_contracts.append(new_contract)
 
     logger.info(
-        f"Merged Concession Revenue Buyer data for {len(concession_revenue_buyer_data['contracts'])} contracts"
+        f"Merged Concession Revenue Buyer data for {len(concession_revenue_buyer_data['contracts'])} contracts",
     )

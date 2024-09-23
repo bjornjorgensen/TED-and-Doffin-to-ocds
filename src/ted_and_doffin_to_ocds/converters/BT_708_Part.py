@@ -230,7 +230,8 @@ def parse_part_documents_official_language(xml_content):
     result = {"tender": {"documents": []}}
 
     parts = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
+        namespaces=namespaces,
     )
 
     for part in parts:
@@ -279,16 +280,17 @@ def merge_part_documents_official_language(release_json, part_documents_data):
 
     for new_doc in part_documents_data["tender"]["documents"]:
         existing_doc = next(
-            (doc for doc in existing_documents if doc["id"] == new_doc["id"]), None
+            (doc for doc in existing_documents if doc["id"] == new_doc["id"]),
+            None,
         )
         if existing_doc:
             existing_doc.setdefault("languages", []).extend(new_doc["languages"])
             existing_doc["languages"] = list(
-                set(existing_doc["languages"])
+                set(existing_doc["languages"]),
             )  # Remove duplicates
         else:
             existing_documents.append(new_doc)
 
     logger.info(
-        f"Merged part documents official language data for {len(part_documents_data['tender']['documents'])} documents"
+        f"Merged part documents official language data for {len(part_documents_data['tender']['documents'])} documents",
     )

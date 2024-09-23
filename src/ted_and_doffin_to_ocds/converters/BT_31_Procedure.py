@@ -41,5 +41,5 @@ def merge_max_lots_allowed(release_json, max_lots_data):
     lot_details.update(max_lots_data["tender"]["lotDetails"])
 
     logger.info(
-        f"Merged Maximum Lots Allowed data: {max_lots_data['tender']['lotDetails']['maximumLotsBidPerSupplier']}"
+        f"Merged Maximum Lots Allowed data: {max_lots_data['tender']['lotDetails']['maximumLotsBidPerSupplier']}",
     )

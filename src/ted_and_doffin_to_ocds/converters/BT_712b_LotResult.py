@@ -44,12 +44,14 @@ def parse_buyer_review_complainants_bt_712b(xml_content):
     stat_id = 1
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotResult",
+        namespaces=namespaces,
     )
 
     for lot_result in lot_results:
         lot_id = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+            namespaces=namespaces,
         )
         complainants = lot_result.xpath(
             "efac:AppealRequestsStatistics/efbc:StatisticsNumeric/text()",
@@ -71,7 +73,8 @@ def parse_buyer_review_complainants_bt_712b(xml_content):
 
 
 def merge_buyer_review_complainants_bt_712b(
-    release_json, buyer_review_complainants_data
+    release_json,
+    buyer_review_complainants_data,
 ):
     """
     Merge the parsed buyer review complainants data into the main OCDS release JSON.
@@ -100,5 +103,5 @@ def merge_buyer_review_complainants_bt_712b(
             existing_statistics.append(new_statistic)
 
     logger.info(
-        f"Merged buyer review complainants data for {len(buyer_review_complainants_data['statistics'])} lots"
+        f"Merged buyer review complainants data for {len(buyer_review_complainants_data['statistics'])} lots",
     )

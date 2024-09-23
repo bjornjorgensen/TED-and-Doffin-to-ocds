@@ -22,7 +22,8 @@ def parse_bt_271_lot(xml_content):
     result = {"tender": {"lots": []}}
 
     lot_elements = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot_element in lot_elements:
@@ -42,8 +43,8 @@ def parse_bt_271_lot(xml_content):
                 "id": lot_id,
                 "techniques": {
                     "frameworkAgreement": {
-                        "value": {"amount": amount, "currency": currency}
-                    }
+                        "value": {"amount": amount, "currency": currency},
+                    },
                 },
             }
 
@@ -57,15 +58,17 @@ def merge_bt_271_lot(release_json, bt_271_lot_data):
 
     for new_lot in bt_271_lot_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("techniques", {}).setdefault(
-                "frameworkAgreement", {}
+                "frameworkAgreement",
+                {},
             )["value"] = new_lot["techniques"]["frameworkAgreement"]["value"]
         else:
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged BT-271-Lot Framework Maximum Value data for {len(bt_271_lot_data['tender']['lots'])} lots"
+        f"Merged BT-271-Lot Framework Maximum Value data for {len(bt_271_lot_data['tender']['lots'])} lots",
     )

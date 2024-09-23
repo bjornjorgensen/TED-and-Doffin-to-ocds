@@ -52,5 +52,5 @@ def merge_document_provider_identifier(release_json, document_provider_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Document Provider Identifier data for {len(document_provider_data['parties'])} parties"
+        f"Merged Document Provider Identifier data for {len(document_provider_data['parties'])} parties",
     )

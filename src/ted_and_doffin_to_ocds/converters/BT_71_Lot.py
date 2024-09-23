@@ -64,7 +64,7 @@ def parse_reserved_participation(xml_content):
                     {
                         "id": lot_id,
                         "otherRequirements": {"reservedParticipation": [reserved_type]},
-                    }
+                    },
                 )
 
     return result if result["tender"]["lots"] else None
@@ -90,15 +90,16 @@ def merge_reserved_participation(release_json, reserved_participation_data):
 
     for new_lot in reserved_participation_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("otherRequirements", {}).update(
-                new_lot["otherRequirements"]
+                new_lot["otherRequirements"],
             )
         else:
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged reserved participation data for {len(reserved_participation_data['tender']['lots'])} lots"
+        f"Merged reserved participation data for {len(reserved_participation_data['tender']['lots'])} lots",
     )

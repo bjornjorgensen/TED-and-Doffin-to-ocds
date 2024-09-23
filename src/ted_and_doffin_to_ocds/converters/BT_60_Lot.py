@@ -73,7 +73,8 @@ def merge_eu_funds(release_json, eu_funds_data):
 
     parties = release_json.setdefault("parties", [])
     eu_party = next(
-        (party for party in parties if party.get("name") == "European Union"), None
+        (party for party in parties if party.get("name") == "European Union"),
+        None,
     )
 
     if eu_party:

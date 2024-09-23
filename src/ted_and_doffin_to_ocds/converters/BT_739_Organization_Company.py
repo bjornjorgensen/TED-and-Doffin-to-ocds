@@ -40,7 +40,8 @@ def parse_organization_contact_fax(xml_content):
             namespaces=namespaces,
         )
         fax_number = company.xpath(
-            "cac:Contact/cbc:Telefax/text()", namespaces=namespaces
+            "cac:Contact/cbc:Telefax/text()",
+            namespaces=namespaces,
         )
 
         if org_id and fax_number:
@@ -69,15 +70,16 @@ def merge_organization_contact_fax(release_json, organization_fax_data):
 
     for new_party in organization_fax_data["parties"]:
         existing_party = next(
-            (party for party in parties if party["id"] == new_party["id"]), None
+            (party for party in parties if party["id"] == new_party["id"]),
+            None,
         )
         if existing_party:
             existing_party.setdefault("contactPoint", {}).update(
-                new_party["contactPoint"]
+                new_party["contactPoint"],
             )
         else:
             parties.append(new_party)
 
     logger.info(
-        f"Merged organization contact fax data for {len(organization_fax_data['parties'])} organizations"
+        f"Merged organization contact fax data for {len(organization_fax_data['parties'])} organizations",
     )

@@ -32,7 +32,8 @@ def parse_bt195_bt734_lot_unpublished_identifier(xml_content):
     result = {"withheldInformation": []}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -43,7 +44,8 @@ def parse_bt195_bt734_lot_unpublished_identifier(xml_content):
 
         if fields_privacy:
             field_identifier = fields_privacy[0].xpath(
-                "efbc:FieldIdentifierCode/text()", namespaces=namespaces
+                "efbc:FieldIdentifierCode/text()",
+                namespaces=namespaces,
             )
             lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
 
@@ -59,7 +61,8 @@ def parse_bt195_bt734_lot_unpublished_identifier(xml_content):
 
 
 def merge_bt195_bt734_lot_unpublished_identifier(
-    release_json, unpublished_identifier_data
+    release_json,
+    unpublished_identifier_data,
 ):
     """
     Merge the parsed unpublished identifier data into the main OCDS release JSON.
@@ -79,5 +82,5 @@ def merge_bt195_bt734_lot_unpublished_identifier(
     withheld_info.extend(unpublished_identifier_data["withheldInformation"])
 
     logger.info(
-        f"Merged {len(unpublished_identifier_data['withheldInformation'])} unpublished identifier(s) for BT-195(BT-734)-Lot"
+        f"Merged {len(unpublished_identifier_data['withheldInformation'])} unpublished identifier(s) for BT-195(BT-734)-Lot",
     )

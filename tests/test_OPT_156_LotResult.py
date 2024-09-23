@@ -67,8 +67,8 @@ def test_parse_vehicle_numeric():
 def test_merge_vehicle_numeric():
     release_json = {
         "awards": [
-            {"id": "RES-0001", "items": [{"id": "1", "description": "Existing item"}]}
-        ]
+            {"id": "RES-0001", "items": [{"id": "1", "description": "Existing item"}]},
+        ],
     }
 
     vehicle_numeric_data = {
@@ -96,8 +96,8 @@ def test_merge_vehicle_numeric():
                     },
                 ],
                 "relatedLots": ["LOT-0001"],
-            }
-        ]
+            },
+        ],
     }
 
     merge_vehicle_numeric(release_json, vehicle_numeric_data)

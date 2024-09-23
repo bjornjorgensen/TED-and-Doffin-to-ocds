@@ -47,7 +47,8 @@ def parse_subcontracting_obligation_minimum(xml_content: bytes):
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
     )
 
     for lot in lots:
@@ -63,20 +64,21 @@ def parse_subcontracting_obligation_minimum(xml_content: bytes):
                 lot_data = {
                     "id": lot_id,
                     "subcontractingTerms": {
-                        "competitiveMinimumPercentage": competitive_minimum_percentage
+                        "competitiveMinimumPercentage": competitive_minimum_percentage,
                     },
                 }
                 result["tender"]["lots"].append(lot_data)
             except ValueError:
                 logger.warning(
-                    f"Invalid minimum percentage value for lot {lot_id}: {minimum_percent[0]}"
+                    f"Invalid minimum percentage value for lot {lot_id}: {minimum_percent[0]}",
                 )
 
     return result if result["tender"]["lots"] else None
 
 
 def merge_subcontracting_obligation_minimum(
-    release_json, subcontracting_obligation_minimum_data
+    release_json,
+    subcontracting_obligation_minimum_data,
 ):
     """
     Merge the parsed subcontracting obligation minimum data into the main OCDS release JSON.
@@ -97,15 +99,16 @@ def merge_subcontracting_obligation_minimum(
 
     for new_lot in subcontracting_obligation_minimum_data["tender"]["lots"]:
         existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
         if existing_lot:
             existing_lot.setdefault("subcontractingTerms", {}).update(
-                new_lot["subcontractingTerms"]
+                new_lot["subcontractingTerms"],
             )
         else:
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged subcontracting obligation minimum data for {len(subcontracting_obligation_minimum_data['tender']['lots'])} lots"
+        f"Merged subcontracting obligation minimum data for {len(subcontracting_obligation_minimum_data['tender']['lots'])} lots",
     )

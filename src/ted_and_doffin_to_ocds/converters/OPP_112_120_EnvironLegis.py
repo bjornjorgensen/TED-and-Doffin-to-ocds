@@ -33,7 +33,8 @@ def parse_environmental_legislation(xml_content):
     for doc in lot_environ_docs:
         doc_id = doc.xpath("cbc:ID/text()", namespaces=namespaces)
         url = doc.xpath(
-            "cac:Attachment/cac:ExternalReference/cbc:URI/text()", namespaces=namespaces
+            "cac:Attachment/cac:ExternalReference/cbc:URI/text()",
+            namespaces=namespaces,
         )
         lot_id = doc.xpath("../../cbc:ID/text()", namespaces=namespaces)
 
@@ -56,7 +57,8 @@ def parse_environmental_legislation(xml_content):
     for doc in part_environ_docs:
         doc_id = doc.xpath("cbc:ID/text()", namespaces=namespaces)
         url = doc.xpath(
-            "cac:Attachment/cac:ExternalReference/cbc:URI/text()", namespaces=namespaces
+            "cac:Attachment/cac:ExternalReference/cbc:URI/text()",
+            namespaces=namespaces,
         )
 
         if doc_id:
@@ -78,7 +80,8 @@ def merge_environmental_legislation(release_json, environmental_legislation_data
 
     for new_doc in environmental_legislation_data["tender"]["documents"]:
         existing_doc = next(
-            (doc for doc in existing_documents if doc["id"] == new_doc["id"]), None
+            (doc for doc in existing_documents if doc["id"] == new_doc["id"]),
+            None,
         )
         if existing_doc:
             existing_doc.update(new_doc)
@@ -92,5 +95,5 @@ def merge_environmental_legislation(release_json, environmental_legislation_data
             existing_documents.append(new_doc)
 
     logger.info(
-        f"Merged Environmental Legislation data for {len(environmental_legislation_data['tender']['documents'])} documents"
+        f"Merged Environmental Legislation data for {len(environmental_legislation_data['tender']['documents'])} documents",
     )

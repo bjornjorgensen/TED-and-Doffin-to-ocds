@@ -22,7 +22,8 @@ def parse_winner_size(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+        "//efac:Organizations/efac:Organization",
+        namespaces=namespaces,
     )
 
     for organization in organizations:
@@ -60,5 +61,5 @@ def merge_winner_size(release_json, winner_size_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Winner Size data for {len(winner_size_data['parties'])} parties"
+        f"Merged Winner Size data for {len(winner_size_data['parties'])} parties",
     )
