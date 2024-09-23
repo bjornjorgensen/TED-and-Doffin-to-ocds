@@ -1,4 +1,4 @@
-# tests/test_BT_165_Organization_Company.py
+# tests/test_bt_165_organization_company.py
 
 import pytest
 import json
@@ -22,16 +22,16 @@ def test_bt_165_organization_company_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                        <efac:organizations>
+                            <efac:organization>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                    <efbc:CompanySizeCode listName="economic-operator-size">large</efbc:CompanySizeCode>
-                                </efac:Company>
-                            </efac:Organization>
-                        </efac:Organizations>
+                                    </cac:partyIdentification>
+                                    <efbc:companySizeCode listName="economic-operator-size">large</efbc:companySizeCode>
+                                </efac:company>
+                            </efac:organization>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

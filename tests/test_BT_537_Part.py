@@ -1,4 +1,4 @@
-# tests/test_BT_537_Part.py
+# tests/test_bt_537_part.py
 
 import pytest
 import json
@@ -16,7 +16,7 @@ def test_bt_537_part_integration(tmp_path):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:ProcurementProject>
                 <cac:PlannedPeriod>
                     <cbc:EndDate>2019-11-19+01:00</cbc:EndDate>

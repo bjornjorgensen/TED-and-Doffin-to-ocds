@@ -1,7 +1,7 @@
 # tests/test_OPT_301_Lot_ReviewOrg.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.OPT_301_Lot_ReviewOrg import (
+from ted_and_doffin_to_ocds.converters.opt_301_lot_revieworg import (
     parse_review_org_identifier,
     merge_review_org_identifier,
 )
@@ -15,11 +15,11 @@ def test_parse_review_org_identifier():
             <cbc:ID schemeName="Lot">1</cbc:ID>
             <cac:TenderingTerms>
                 <cac:AppealTerms>
-                    <cac:AppealReceiverParty>
-                        <cac:PartyIdentification>
+                    <cac:AppealReceiverparty>
+                        <cac:partyIdentification>
                             <cbc:ID>TPO-0001</cbc:ID>
-                        </cac:PartyIdentification>
-                    </cac:AppealReceiverParty>
+                        </cac:partyIdentification>
+                    </cac:AppealReceiverparty>
                 </cac:AppealTerms>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
@@ -27,11 +27,11 @@ def test_parse_review_org_identifier():
             <cbc:ID schemeName="Lot">2</cbc:ID>
             <cac:TenderingTerms>
                 <cac:AppealTerms>
-                    <cac:AppealReceiverParty>
-                        <cac:PartyIdentification>
+                    <cac:AppealReceiverparty>
+                        <cac:partyIdentification>
                             <cbc:ID>TPO-0002</cbc:ID>
-                        </cac:PartyIdentification>
-                    </cac:AppealReceiverParty>
+                        </cac:partyIdentification>
+                    </cac:AppealReceiverparty>
                 </cac:AppealTerms>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
@@ -73,7 +73,7 @@ def test_merge_review_org_identifier():
     }
 
     release_json = {
-        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}],
+        "parties": [{"id": "TPO-0001", "name": "Existing party", "roles": ["buyer"]}],
     }
 
     merge_review_org_identifier(release_json, review_org_data)
@@ -94,7 +94,7 @@ def test_merge_review_org_identifier_no_data():
 @pytest.fixture
 def sample_release_json():
     return {
-        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}],
+        "parties": [{"id": "TPO-0001", "name": "Existing party", "roles": ["buyer"]}],
     }
 
 
@@ -106,7 +106,7 @@ def test_merge_review_org_identifier_existing_party(sample_release_json):
     assert len(sample_release_json["parties"]) == 1
     assert sample_release_json["parties"][0]["id"] == "TPO-0001"
     assert set(sample_release_json["parties"][0]["roles"]) == {"buyer", "reviewBody"}
-    assert sample_release_json["parties"][0]["name"] == "Existing Party"
+    assert sample_release_json["parties"][0]["name"] == "Existing party"
 
 
 def test_merge_review_org_identifier_new_party(sample_release_json):

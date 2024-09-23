@@ -22,7 +22,7 @@ def test_opp_080_kilometers_public_transport_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotTender>
                                 <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
                                 <efbc:PublicTransportationCumulatedDistance unitCode="km">988754432110987</efbc:PublicTransportationCumulatedDistance>
@@ -39,7 +39,7 @@ def test_opp_080_kilometers_public_transport_integration(tmp_path):
                                     <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                                 </efac:SettledContract>
                             </efac:LotResult>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

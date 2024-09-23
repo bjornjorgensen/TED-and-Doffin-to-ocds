@@ -1,4 +1,4 @@
-# tests/test_BT_737_Part.py
+# tests/test_bt_737_part.py
 
 import pytest
 import json
@@ -18,7 +18,7 @@ def test_bt_737_part_integration(tmp_path):
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:CallForTendersDocumentReference>
                     <cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID>

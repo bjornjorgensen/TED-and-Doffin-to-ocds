@@ -20,7 +20,7 @@ def test_opt_320_lot_result_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                                 <efac:LotTender>
@@ -33,7 +33,7 @@ def test_opt_320_lot_result_integration(tmp_path):
                                     <cbc:ID schemeName="tender">TEN-0003</cbc:ID>
                                 </efac:LotTender>
                             </efac:LotResult>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

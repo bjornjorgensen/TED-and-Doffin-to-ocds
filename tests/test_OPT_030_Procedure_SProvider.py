@@ -1,4 +1,4 @@
-# tests/test_OPT_030_Procedure_SProvider.py
+# tests/test_OPT_030_procedure_sprovider.py
 
 import pytest
 import json
@@ -14,30 +14,30 @@ def test_opt_030_procedure_sprovider_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:ContractingParty>
-            <cac:Party>
-                <cac:ServiceProviderParty>
+        <cac:Contractingparty>
+            <cac:party>
+                <cac:ServiceProviderparty>
                     <cbc:ServiceTypeCode listName="organisation-role">ted-esen</cbc:ServiceTypeCode>
-                    <cac:Party>
-                        <cac:PartyIdentification>
+                    <cac:party>
+                        <cac:partyIdentification>
                             <cbc:ID>ORG-0001</cbc:ID>
-                        </cac:PartyIdentification>
-                    </cac:Party>
-                </cac:ServiceProviderParty>
-            </cac:Party>
-        </cac:ContractingParty>
-        <cac:ContractingParty>
-            <cac:Party>
-                <cac:ServiceProviderParty>
+                        </cac:partyIdentification>
+                    </cac:party>
+                </cac:ServiceProviderparty>
+            </cac:party>
+        </cac:Contractingparty>
+        <cac:Contractingparty>
+            <cac:party>
+                <cac:ServiceProviderparty>
                     <cbc:ServiceTypeCode listName="organisation-role">serv-prov</cbc:ServiceTypeCode>
-                    <cac:Party>
-                        <cac:PartyIdentification>
+                    <cac:party>
+                        <cac:partyIdentification>
                             <cbc:ID>ORG-0002</cbc:ID>
-                        </cac:PartyIdentification>
-                    </cac:Party>
-                </cac:ServiceProviderParty>
-            </cac:Party>
-        </cac:ContractingParty>
+                        </cac:partyIdentification>
+                    </cac:party>
+                </cac:ServiceProviderparty>
+            </cac:party>
+        </cac:Contractingparty>
     </root>
     """
     xml_file = tmp_path / "test_input_provided_service_type.xml"

@@ -1,4 +1,4 @@
-# tests/test_BT_195_BT_635_LotResult.py
+# tests/test_bt_195_bt_635_LotResult.py
 
 import pytest
 import json
@@ -26,7 +26,7 @@ def test_bt_195_bt635_lotresult_integration(tmp_path, setup_logging):
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotResult>
                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                 <efac:AppealRequestsStatistics>
@@ -36,7 +36,7 @@ def test_bt_195_bt635_lotresult_integration(tmp_path, setup_logging):
                     </efac:FieldsPrivacy>
                 </efac:AppealRequestsStatistics>
             </efac:LotResult>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_bt195_bt635.xml"
@@ -63,8 +63,8 @@ def test_bt_195_bt635_lotresult_integration(tmp_path, setup_logging):
         item["field"] == "buy-rev-cou"
     ), f"Expected field 'buy-rev-cou', got {item['field']}"
     assert (
-        item["name"] == "Buyer Review Request Count"
-    ), f"Expected name 'Buyer Review Request Count', got {item['name']}"
+        item["name"] == "buyer Review Request Count"
+    ), f"Expected name 'buyer Review Request Count', got {item['name']}"
 
 
 def test_bt_195_bt635_lotresult_missing_data(tmp_path, setup_logging):
@@ -76,7 +76,7 @@ def test_bt_195_bt635_lotresult_missing_data(tmp_path, setup_logging):
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotResult>
                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                 <efac:AppealRequestsStatistics>
@@ -84,7 +84,7 @@ def test_bt_195_bt635_lotresult_missing_data(tmp_path, setup_logging):
                     <!-- Missing FieldsPrivacy element -->
                 </efac:AppealRequestsStatistics>
             </efac:LotResult>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_bt195_bt635_missing.xml"

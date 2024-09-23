@@ -1,4 +1,4 @@
-# tests/test_BT_124_Tool_Atypical_URL.py
+# tests/test_bt_124_Tool_Atypical_URL.py
 
 import pytest
 import json
@@ -21,7 +21,7 @@ def test_bt_124_tool_atypical_url_integration(tmp_path):
             </cac:TenderingProcess>
         </cac:ProcurementProjectLot>
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:TenderingProcess>
                 <cbc:AccessToolsURI>https://my-atypical-tool-part.com/</cbc:AccessToolsURI>
             </cac:TenderingProcess>

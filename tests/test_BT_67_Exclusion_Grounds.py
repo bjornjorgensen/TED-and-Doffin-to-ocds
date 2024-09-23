@@ -1,8 +1,8 @@
-# tests/test_BT_67_Exclusion_Grounds.py
+# tests/test_bt_67_Exclusion_Grounds.py
 
 import pytest
 from lxml import etree
-from ted_and_doffin_to_ocds.converters.BT_67_Exclusion_Grounds import (
+from ted_and_doffin_to_ocds.converters.bt_67_exclusion_grounds import (
     parse_exclusion_grounds,
     merge_exclusion_grounds,
 )
@@ -61,7 +61,7 @@ def test_parse_exclusion_grounds_with_type_and_description():
     assert len(result["tender"]["exclusionGrounds"]["criteria"]) == 2
     assert result["tender"]["exclusionGrounds"]["criteria"][0] == {
         "type": "crime-org",
-        "description": "Participation in a criminal organisation: Additional details about criminal organization",
+        "description": "participation in a criminal organisation: Additional details about criminal organization",
     }
     assert result["tender"]["exclusionGrounds"]["criteria"][1] == {
         "type": "corruption",

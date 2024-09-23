@@ -1,4 +1,4 @@
-# tests/test_BT_722_Contract.py
+# tests/test_bt_722_Contract.py
 
 import pytest
 import json
@@ -21,7 +21,7 @@ def test_bt_722_contract_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:SettledContract>
                                 <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                                 <efac:Funding>
@@ -34,7 +34,7 @@ def test_bt_722_contract_integration(tmp_path):
                                     <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                                 </efac:SettledContract>
                             </efac:LotResult>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

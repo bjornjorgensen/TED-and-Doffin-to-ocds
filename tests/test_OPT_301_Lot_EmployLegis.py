@@ -19,11 +19,11 @@ def test_opt_301_lot_employlegis_integration(tmp_path):
             <cac:TenderingTerms>
                 <cac:EmploymentLegislationDocumentReference>
                     <cbc:ID>Empl1</cbc:ID>
-                    <cac:IssuerParty>
-                        <cac:PartyIdentification>
+                    <cac:Issuerparty>
+                        <cac:partyIdentification>
                             <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                        </cac:PartyIdentification>
-                    </cac:IssuerParty>
+                        </cac:partyIdentification>
+                    </cac:Issuerparty>
                 </cac:EmploymentLegislationDocumentReference>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>

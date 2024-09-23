@@ -1,4 +1,4 @@
-# tests/test_BT_735_LotResult.py
+# tests/test_bt_735_LotResult.py
 
 import pytest
 import json
@@ -21,7 +21,7 @@ def test_bt_735_lotresult_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotResult>
                                 <cbc:ID>RES-0001</cbc:ID>
                                 <efac:StrategicProcurement>
@@ -30,7 +30,7 @@ def test_bt_735_lotresult_integration(tmp_path):
                                     </efac:StrategicProcurementInformation>
                                 </efac:StrategicProcurement>
                             </efac:LotResult>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

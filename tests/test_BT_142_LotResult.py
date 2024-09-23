@@ -1,4 +1,4 @@
-# tests/test_BT_142_LotResult.py
+# tests/test_bt_142_LotResult.py
 
 import pytest
 import json
@@ -20,7 +20,7 @@ def test_bt_142_lotresult_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                                 <cbc:TenderResultCode listName="winner-selection-status">selec-w</cbc:TenderResultCode>
@@ -35,7 +35,7 @@ def test_bt_142_lotresult_integration(tmp_path):
                                     <cbc:ID schemeName="Lot">LOT-0002</cbc:ID>
                                 </efac:TenderLot>
                             </efac:LotResult>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

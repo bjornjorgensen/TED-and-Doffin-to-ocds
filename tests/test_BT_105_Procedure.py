@@ -1,4 +1,4 @@
-# tests/test_BT_105_Procedure.py
+# tests/test_bt_105_procedure.py
 
 import pytest
 import json
@@ -15,7 +15,7 @@ def create_xml_with_procedure_code(procedure_code):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:TenderingProcess>
-            <cbc:ProcedureCode listName="procurement-procedure-type">{procedure_code}</cbc:ProcedureCode>
+            <cbc:procedureCode listName="procurement-procedure-type">{procedure_code}</cbc:procedureCode>
         </cac:TenderingProcess>
     </root>
     """
@@ -89,7 +89,7 @@ def test_bt_105_procedure_missing_code(tmp_path):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:TenderingProcess>
-            <!-- ProcedureCode is missing -->
+            <!-- procedureCode is missing -->
         </cac:TenderingProcess>
     </root>
     """
@@ -103,10 +103,10 @@ def test_bt_105_procedure_missing_code(tmp_path):
 
     assert (
         "tender" not in result or "procurementMethod" not in result["tender"]
-    ), "Did not expect 'procurementMethod' when ProcedureCode is missing"
+    ), "Did not expect 'procurementMethod' when procedureCode is missing"
     assert (
         "tender" not in result or "procurementMethodDetails" not in result["tender"]
-    ), "Did not expect 'procurementMethodDetails' when ProcedureCode is missing"
+    ), "Did not expect 'procurementMethodDetails' when procedureCode is missing"
 
 
 if __name__ == "__main__":

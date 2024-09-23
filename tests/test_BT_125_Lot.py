@@ -1,4 +1,4 @@
-# tests/test_BT_125_Lot.py
+# tests/test_bt_125_Lot.py
 
 import pytest
 import json
@@ -17,10 +17,10 @@ def test_bt_125_lot_integration(tmp_path):
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingProcess>
-                <cac:NoticeDocumentReference>
+                <cac:noticeDocumentReference>
                     <cbc:ID>9c0fd704-64d3-4294-a3b6-6df45911ab9f-01</cbc:ID>
                     <cbc:ReferencedDocumentInternalAddress>123</cbc:ReferencedDocumentInternalAddress>
-                </cac:NoticeDocumentReference>
+                </cac:noticeDocumentReference>
             </cac:TenderingProcess>
         </cac:ProcurementProjectLot>
     </root>

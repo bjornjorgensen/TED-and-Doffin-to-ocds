@@ -1,7 +1,7 @@
-# tests/test_BT_712a_LotResult.py
+# tests/test_bt_712a_LotResult.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_712a_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_712a_lotresult import (
     parse_buyer_review_complainants,
     merge_buyer_review_complainants,
 )
@@ -20,7 +20,7 @@ def test_parse_buyer_review_complainants():
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotResult>
                 <efac:AppealRequestsStatistics>
                     <efbc:StatisticsCode listName="review-type">complainants</efbc:StatisticsCode>
@@ -29,7 +29,7 @@ def test_parse_buyer_review_complainants():
                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                 </efac:TenderLot>
             </efac:LotResult>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
 
@@ -70,7 +70,7 @@ def test_bt_712a_lotresult_integration(tmp_path):
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotResult>
                 <efac:AppealRequestsStatistics>
                     <efbc:StatisticsCode listName="review-type">complainants</efbc:StatisticsCode>
@@ -79,7 +79,7 @@ def test_bt_712a_lotresult_integration(tmp_path):
                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                 </efac:TenderLot>
             </efac:LotResult>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_buyer_review_complainants.xml"

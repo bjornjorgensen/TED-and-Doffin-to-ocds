@@ -1,7 +1,7 @@
-# tests/test_BT_774_Lot.py
+# tests/test_bt_774_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_774_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_774_lot import (
     parse_green_procurement,
     merge_green_procurement,
     ENVIRONMENTAL_IMPACT_MAPPING,

@@ -16,11 +16,11 @@ def test_opt_301_lot_addinfo_integration(tmp_path):
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
             <cac:TenderingTerms>
-                <cac:AdditionalInformationParty>
-                    <cac:PartyIdentification>
+                <cac:AdditionalInformationparty>
+                    <cac:partyIdentification>
                         <cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID>
-                    </cac:PartyIdentification>
-                </cac:AdditionalInformationParty>
+                    </cac:partyIdentification>
+                </cac:AdditionalInformationparty>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
     </root>

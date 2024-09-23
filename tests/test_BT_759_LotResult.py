@@ -1,4 +1,4 @@
-from ted_and_doffin_to_ocds.converters.BT_759_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_759_lotresult import (
     parse_received_submissions_count,
     merge_received_submissions_count,
 )
@@ -10,7 +10,7 @@ def test_parse_received_submissions_count():
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotResult>
                 <efac:TenderLot>
                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
@@ -19,7 +19,7 @@ def test_parse_received_submissions_count():
                     <efbc:StatisticsNumeric>5</efbc:StatisticsNumeric>
                 </efac:ReceivedSubmissionsStatistics>
             </efac:LotResult>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     result = parse_received_submissions_count(xml_content)

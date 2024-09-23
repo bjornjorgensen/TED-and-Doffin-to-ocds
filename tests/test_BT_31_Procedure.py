@@ -1,6 +1,6 @@
-# tests/test_BT_31_Procedure.py
+# tests/test_bt_31_procedure.py
 
-from ted_and_doffin_to_ocds.converters.BT_31_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_31_procedure import (
     parse_max_lots_allowed,
     merge_max_lots_allowed,
 )

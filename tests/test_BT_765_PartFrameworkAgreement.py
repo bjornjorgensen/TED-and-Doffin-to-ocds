@@ -1,4 +1,4 @@
-# tests/test_BT_765_PartFrameworkAgreement.py
+# tests/test_bt_765_partFrameworkAgreement.py
 
 import pytest
 import json
@@ -19,7 +19,7 @@ def test_bt_765_part_framework_agreement_integration(tmp_path):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:TenderingProcess>
                 <cac:ContractingSystem>
                     <cbc:ContractingSystemTypeCode listName="framework-agreement">fa-wo-rc</cbc:ContractingSystemTypeCode>
@@ -66,7 +66,7 @@ def test_bt_765_part_framework_agreement_none(tmp_path):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:TenderingProcess>
                 <cac:ContractingSystem>
                     <cbc:ContractingSystemTypeCode listName="framework-agreement">none</cbc:ContractingSystemTypeCode>

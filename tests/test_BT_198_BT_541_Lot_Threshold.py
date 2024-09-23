@@ -1,4 +1,4 @@
-# tests/test_BT_198_BT_541_Lot_Threshold.py
+# tests/test_bt_198_bt_541_Lot_threshold.py
 
 import pytest
 import json

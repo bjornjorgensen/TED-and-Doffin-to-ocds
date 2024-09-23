@@ -1,4 +1,4 @@
-# tests/test_BT_510a_UBO.py
+# tests/test_bt_510a_ubo.py
 
 import pytest
 import json
@@ -21,16 +21,16 @@ def test_bt_510a_ubo_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                        <efac:organizations>
+                            <efac:organization>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
                             <efac:UltimateBeneficialOwner>
-                                <cbc:ID schemeName="ubo">UBO-0001</cbc:ID>
+                                <cbc:ID schemeName="ubo">ubo-0001</cbc:ID>
                                 <cac:ResidenceAddress>
                                     <cbc:StreetName>2 CheeseStreet</cbc:StreetName>
                                     <cbc:AdditionalStreetName>Nelson Building</cbc:AdditionalStreetName>
@@ -39,7 +39,7 @@ def test_bt_510a_ubo_integration(tmp_path):
                                     </cac:AddressLine>
                                 </cac:ResidenceAddress>
                             </efac:UltimateBeneficialOwner>
-                        </efac:Organizations>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -67,9 +67,9 @@ def test_bt_510a_ubo_integration(tmp_path):
     ), f"Expected 1 beneficial owner, got {len(party['beneficialOwners'])}"
 
     ubo = party["beneficialOwners"][0]
-    assert ubo["id"] == "UBO-0001", f"Expected UBO id 'UBO-0001', got {ubo['id']}"
-    assert "address" in ubo, "Expected 'address' in UBO"
-    assert "streetAddress" in ubo["address"], "Expected 'streetAddress' in UBO address"
+    assert ubo["id"] == "ubo-0001", f"Expected ubo id 'ubo-0001', got {ubo['id']}"
+    assert "address" in ubo, "Expected 'address' in ubo"
+    assert "streetAddress" in ubo["address"], "Expected 'streetAddress' in ubo address"
     expected_street_address = "2 CheeseStreet, Nelson Building, 2nd floor"
     assert (
         ubo["address"]["streetAddress"] == expected_street_address

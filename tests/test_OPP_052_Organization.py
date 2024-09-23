@@ -1,4 +1,4 @@
-# tests/test_OPP_052_Organization.py
+# tests/test_OPP_052_organization.py
 
 import pytest
 import json
@@ -22,24 +22,24 @@ def test_opp_052_organization_acquiring_cpb_buyer_indicator_integration(tmp_path
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
+                        <efac:organizations>
+                            <efac:organization>
                                 <efbc:AcquiringCPBIndicator>true</efbc:AcquiringCPBIndicator>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
-                            <efac:Organization>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
+                            <efac:organization>
                                 <efbc:AcquiringCPBIndicator>false</efbc:AcquiringCPBIndicator>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
-                        </efac:Organizations>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -63,7 +63,7 @@ def test_opp_052_organization_acquiring_cpb_buyer_indicator_integration(tmp_path
     )
     assert wholesale_buyer is not None
     assert "roles" in wholesale_buyer
-    assert "wholesaleBuyer" in wholesale_buyer["roles"]
+    assert "wholesalebuyer" in wholesale_buyer["roles"]
 
     non_wholesale_buyer = next(
         (party for party in result["parties"] if party["id"] == "ORG-0002"),
@@ -72,7 +72,7 @@ def test_opp_052_organization_acquiring_cpb_buyer_indicator_integration(tmp_path
     assert non_wholesale_buyer is not None
     assert (
         "roles" not in non_wholesale_buyer
-        or "wholesaleBuyer" not in non_wholesale_buyer.get("roles", [])
+        or "wholesalebuyer" not in non_wholesale_buyer.get("roles", [])
     )
 
 

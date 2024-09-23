@@ -1,4 +1,4 @@
-# tests/test_OPT_200_Organization_Company.py
+# tests/test_OPT_200_organization_company.py
 
 import pytest
 import json
@@ -21,22 +21,22 @@ def test_organization_technical_identifier_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                        <efac:organizations>
+                            <efac:organization>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
+                            <efac:organization>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
-                        </efac:Organizations>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -68,22 +68,22 @@ def test_organization_technical_identifier_no_duplicates(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                        <efac:organizations>
+                            <efac:organization>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
+                            <efac:organization>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
-                        </efac:Organizations>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -114,8 +114,8 @@ def test_organization_technical_identifier_no_data(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                        </efac:Organizations>
+                        <efac:organizations>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

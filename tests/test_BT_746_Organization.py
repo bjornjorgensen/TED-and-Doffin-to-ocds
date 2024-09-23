@@ -1,4 +1,4 @@
-# tests/test_BT_746_Organization.py
+# tests/test_bt_746_organization.py
 
 import pytest
 import json
@@ -22,16 +22,16 @@ def test_bt_746_organization_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
+                        <efac:organizations>
+                            <efac:organization>
                                 <efbc:ListedOnRegulatedMarketIndicator>false</efbc:ListedOnRegulatedMarketIndicator>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
-                        </efac:Organizations>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

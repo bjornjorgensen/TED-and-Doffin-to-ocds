@@ -1,4 +1,4 @@
-# tests/test_OPT_301_Part_EnvironLegis.py
+# tests/test_OPT_301_part_EnvironLegis.py
 
 import pytest
 import os
@@ -20,29 +20,29 @@ def test_opt_301_part_environlegis_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                        <efac:organizations>
+                            <efac:organization>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
-                        </efac:Organizations>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
         </ext:UBLExtensions>
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">1</cbc:ID>
+            <cbc:ID schemeName="part">1</cbc:ID>
             <cac:TenderingTerms>
                 <cac:EnvironmentalLegislationDocumentReference>
                     <cbc:ID>Env1</cbc:ID>
-                    <cac:IssuerParty>
-                        <cac:PartyIdentification>
+                    <cac:Issuerparty>
+                        <cac:partyIdentification>
                             <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                        </cac:PartyIdentification>
-                    </cac:IssuerParty>
+                        </cac:partyIdentification>
+                    </cac:Issuerparty>
                 </cac:EnvironmentalLegislationDocumentReference>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>

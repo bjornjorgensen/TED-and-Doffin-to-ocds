@@ -1,7 +1,7 @@
-# tests/test_BT_46_Lot.py
+# tests/test_bt_46_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_46_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_46_lot import (
     parse_jury_member_name,
     merge_jury_member_name,
 )

@@ -1,7 +1,7 @@
-# tests/test_BT_775_Lot.py
+# tests/test_bt_775_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_775_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_775_lot import (
     parse_social_procurement,
     merge_social_procurement,
     SOCIAL_OBJECTIVE_MAPPING,

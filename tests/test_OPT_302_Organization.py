@@ -1,4 +1,4 @@
-# tests/test_OPT_302_Organization.py
+# tests/test_OPT_302_organization.py
 
 import pytest
 import json
@@ -20,18 +20,18 @@ def test_opt_302_organization_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                        <efac:organizations>
+                            <efac:organization>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
+                                    </cac:partyIdentification>
+                                </efac:company>
                                 <efac:UltimateBeneficialOwner>
-                                    <cbc:ID schemeName="ubo">UBO-0001</cbc:ID>
+                                    <cbc:ID schemeName="ubo">ubo-0001</cbc:ID>
                                 </efac:UltimateBeneficialOwner>
-                            </efac:Organization>
-                        </efac:Organizations>
+                            </efac:organization>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -52,7 +52,7 @@ def test_opt_302_organization_integration(tmp_path):
     assert party["id"] == "ORG-0001"
     assert "beneficialOwners" in party
     assert len(party["beneficialOwners"]) == 1
-    assert party["beneficialOwners"][0]["id"] == "UBO-0001"
+    assert party["beneficialOwners"][0]["id"] == "ubo-0001"
 
 
 if __name__ == "__main__":

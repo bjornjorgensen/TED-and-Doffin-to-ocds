@@ -1,6 +1,6 @@
-# tests/test_BT_5131_Part.py
+# tests/test_bt_5131_part.py
 
-from ted_and_doffin_to_ocds.converters.BT_5131_Part import (
+from ted_and_doffin_to_ocds.converters.bt_5131_part import (
     parse_place_performance_city_part,
     merge_place_performance_city_part,
 )
@@ -11,7 +11,7 @@ def test_parse_place_performance_city_part():
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-001</cbc:ID>
+            <cbc:ID schemeName="part">PART-001</cbc:ID>
             <cac:ProcurementProject>
                 <cac:RealizedLocation>
                     <cac:Address>
@@ -43,7 +43,7 @@ def test_parse_place_performance_city_part_empty():
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-001</cbc:ID>
+            <cbc:ID schemeName="part">PART-001</cbc:ID>
             <cac:ProcurementProject>
                 <cac:RealizedLocation>
                     <cac:Address>

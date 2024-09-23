@@ -1,4 +1,4 @@
-# tests/test_BT_6110_Contract.py
+# tests/test_bt_6110_Contract.py
 
 import pytest
 import json
@@ -14,7 +14,7 @@ def test_bt_6110_contract_integration(tmp_path):
     xml_content = """
     <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:SettledContract>
                 <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                 <efac:Funding>
@@ -27,7 +27,7 @@ def test_bt_6110_contract_integration(tmp_path):
                     <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                 </efac:SettledContract>
             </efac:LotResult>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_contract_eu_funds_details.xml"

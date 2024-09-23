@@ -1,4 +1,4 @@
-# tests/test_BT_76_Lot.py
+# tests/test_bt_76_Lot.py
 
 import pytest
 import json
@@ -26,7 +26,7 @@ def test_bt_76_lot_integration(tmp_path, setup_logging):
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:TendererQualificationRequest>
-                    <cbc:CompanyLegalForm languageID="ENG">The tenderer must be a registered company</cbc:CompanyLegalForm>
+                    <cbc:companyLegalForm languageID="ENG">The tenderer must be a registered company</cbc:companyLegalForm>
                 </cac:TendererQualificationRequest>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
@@ -34,7 +34,7 @@ def test_bt_76_lot_integration(tmp_path, setup_logging):
             <cbc:ID schemeName="Lot">LOT-0002</cbc:ID>
             <cac:TenderingTerms>
                 <cac:TendererQualificationRequest>
-                    <cbc:CompanyLegalForm languageID="ENG">The tenderer must be a partnership</cbc:CompanyLegalForm>
+                    <cbc:companyLegalForm languageID="ENG">The tenderer must be a partnership</cbc:companyLegalForm>
                 </cac:TendererQualificationRequest>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
@@ -87,7 +87,7 @@ def test_bt_76_lot_missing_company_legal_form(tmp_path, setup_logging):
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:TendererQualificationRequest>
-                    <!-- CompanyLegalForm is missing -->
+                    <!-- companyLegalForm is missing -->
                 </cac:TendererQualificationRequest>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
@@ -114,7 +114,7 @@ def test_bt_76_lot_missing_company_legal_form(tmp_path, setup_logging):
     assert "contractTerms" not in lot or "tendererLegalForm" not in lot.get(
         "contractTerms",
         {},
-    ), "Did not expect 'tendererLegalForm' when CompanyLegalForm is missing"
+    ), "Did not expect 'tendererLegalForm' when companyLegalForm is missing"
 
 
 def test_bt_76_lot_empty_company_legal_form(tmp_path, setup_logging):
@@ -126,7 +126,7 @@ def test_bt_76_lot_empty_company_legal_form(tmp_path, setup_logging):
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:TendererQualificationRequest>
-                    <cbc:CompanyLegalForm languageID="ENG"></cbc:CompanyLegalForm>
+                    <cbc:companyLegalForm languageID="ENG"></cbc:companyLegalForm>
                 </cac:TendererQualificationRequest>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
@@ -153,7 +153,7 @@ def test_bt_76_lot_empty_company_legal_form(tmp_path, setup_logging):
     assert "contractTerms" not in lot or "tendererLegalForm" not in lot.get(
         "contractTerms",
         {},
-    ), "Did not expect 'tendererLegalForm' when CompanyLegalForm is empty"
+    ), "Did not expect 'tendererLegalForm' when companyLegalForm is empty"
 
 
 def test_bt_76_lot_multiple_qualification_requests(tmp_path, setup_logging):
@@ -165,10 +165,10 @@ def test_bt_76_lot_multiple_qualification_requests(tmp_path, setup_logging):
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:TendererQualificationRequest>
-                    <cbc:CompanyLegalForm languageID="ENG">First legal form requirement</cbc:CompanyLegalForm>
+                    <cbc:companyLegalForm languageID="ENG">First legal form requirement</cbc:companyLegalForm>
                 </cac:TendererQualificationRequest>
                 <cac:TendererQualificationRequest>
-                    <cbc:CompanyLegalForm languageID="ENG">Second legal form requirement</cbc:CompanyLegalForm>
+                    <cbc:companyLegalForm languageID="ENG">Second legal form requirement</cbc:companyLegalForm>
                 </cac:TendererQualificationRequest>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>

@@ -38,7 +38,7 @@ select = [
     "E",
     # isort (excluding I001 for import sorting)
     "I",
-    # pep8-naming (excluding N999 for module naming)
+    # pep8-naming
     "N",
     # flake8-bugbear
     "B",
@@ -61,7 +61,6 @@ select = [
 ignore = [
     "E501",  # Line too long
     "I001",  # Import block is un-sorted or un-formatted
-    "N999",  # Invalid module name
     "S101", 
     "S320",
     "T201",

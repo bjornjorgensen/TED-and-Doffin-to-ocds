@@ -1,4 +1,4 @@
-# tests/test_BT_23_Part.py
+# tests/test_bt_23_part.py
 
 import pytest
 import sys
@@ -6,7 +6,7 @@ import os
 
 # Add the parent directory to sys.path to import the converter
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from ted_and_doffin_to_ocds.converters.BT_23_Part import (
+from ted_and_doffin_to_ocds.converters.bt_23_part import (
     parse_main_nature_part,
     merge_main_nature_part,
 )
@@ -17,7 +17,7 @@ def test_parse_main_nature_part_works():
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:ProcurementProject>
                 <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
             </cac:ProcurementProject>
@@ -33,7 +33,7 @@ def test_parse_main_nature_part_services():
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:ProcurementProject>
                 <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
             </cac:ProcurementProject>
@@ -49,7 +49,7 @@ def test_parse_main_nature_part_supplies():
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:ProcurementProject>
                 <cbc:ProcurementTypeCode listName="contract-nature">supplies</cbc:ProcurementTypeCode>
             </cac:ProcurementProject>

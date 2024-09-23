@@ -1,7 +1,7 @@
-# tests/test_BT_769_Lot.py
+# tests/test_bt_769_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_769_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_769_lot import (
     parse_multiple_tenders,
     merge_multiple_tenders,
 )

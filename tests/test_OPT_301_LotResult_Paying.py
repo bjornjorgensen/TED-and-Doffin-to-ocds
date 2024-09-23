@@ -20,15 +20,15 @@ def test_opt_301_lotresult_paying_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotResult>
-                                <cac:PayerParty>
-                                    <cac:PartyIdentification>
+                                <cac:Payerparty>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </cac:PayerParty>
+                                    </cac:partyIdentification>
+                                </cac:Payerparty>
                             </efac:LotResult>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

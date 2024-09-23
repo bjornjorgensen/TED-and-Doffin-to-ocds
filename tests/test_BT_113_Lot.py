@@ -1,4 +1,4 @@
-# tests/test_BT_113_Lot.py
+# tests/test_bt_113_Lot.py
 
 import pytest
 import json
@@ -38,7 +38,7 @@ def test_bt_113_lot_integration(tmp_path):
     assert lot["id"] == "LOT-0001"
     assert "techniques" in lot
     assert "frameworkAgreement" in lot["techniques"]
-    assert lot["techniques"]["frameworkAgreement"]["maximumParticipants"] == 50
+    assert lot["techniques"]["frameworkAgreement"]["maximumparticipants"] == 50
 
 
 if __name__ == "__main__":

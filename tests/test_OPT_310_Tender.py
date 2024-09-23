@@ -21,23 +21,23 @@ def test_opt_310_tendering_party_id_reference_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotTender>
                                 <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
-                                <efac:TenderingParty>
+                                <efac:Tenderingparty>
                                     <cbc:ID schemeName="tendering-party">TPA-0001</cbc:ID>
-                                </efac:TenderingParty>
+                                </efac:Tenderingparty>
                                 <efac:TenderLot>
                                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                                 </efac:TenderLot>
                             </efac:LotTender>
-                            <efac:TenderingParty>
+                            <efac:Tenderingparty>
                                 <cbc:ID schemeName="tendering-party">TPA-0001</cbc:ID>
                                 <efac:Tenderer>
                                     <cbc:ID schemeName="organization">ORG-0011</cbc:ID>
                                 </efac:Tenderer>
-                            </efac:TenderingParty>
-                        </efac:NoticeResult>
+                            </efac:Tenderingparty>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

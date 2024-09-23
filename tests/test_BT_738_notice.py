@@ -1,4 +1,4 @@
-# tests/test_BT_738_notice.py
+# tests/test_bt_738_notice.py
 
 import pytest
 import json

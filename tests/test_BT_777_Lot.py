@@ -1,7 +1,7 @@
-# tests/test_BT_777_Lot.py
+# tests/test_bt_777_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_777_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_777_lot import (
     parse_strategic_procurement_description,
     merge_strategic_procurement_description,
 )

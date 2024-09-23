@@ -1,7 +1,7 @@
-# tests/test_BT_01_Procedure.py
+# tests/test_bt_01_procedure.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_01_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_01_procedure import (
     parse_procedure_legal_basis,
     merge_procedure_legal_basis,
 )

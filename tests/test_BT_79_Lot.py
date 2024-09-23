@@ -1,7 +1,7 @@
-# tests/test_BT_79_Lot.py
+# tests/test_bt_79_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_79_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_79_lot import (
     parse_performing_staff_qualification,
     merge_performing_staff_qualification,
 )

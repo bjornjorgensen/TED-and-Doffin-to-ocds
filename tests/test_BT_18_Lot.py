@@ -1,4 +1,4 @@
-# tests/test_BT_18_Lot.py
+# tests/test_bt_18_Lot.py
 
 import pytest
 import json
@@ -17,9 +17,9 @@ def test_bt_18_lot_integration(tmp_path):
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
-                <cac:TenderRecipientParty>
+                <cac:TenderRecipientparty>
                     <cbc:EndpointID>https://www.acme.com/tender-submission/</cbc:EndpointID>
-                </cac:TenderRecipientParty>
+                </cac:TenderRecipientparty>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
     </root>

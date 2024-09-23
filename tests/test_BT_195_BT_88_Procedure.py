@@ -1,4 +1,4 @@
-# tests/test_BT_195_BT_88_Procedure.py
+# tests/test_bt_195_bt_88_procedure.py
 
 import pytest
 import json
@@ -66,8 +66,8 @@ def test_bt_195_bt88_procedure_integration(tmp_path, setup_logging):
         withheld_item["field"] == "pro-fea"
     ), f"Expected field 'pro-fea', got {withheld_item['field']}"
     assert (
-        withheld_item["name"] == "Procedure Features"
-    ), f"Expected name 'Procedure Features', got {withheld_item['name']}"
+        withheld_item["name"] == "procedure Features"
+    ), f"Expected name 'procedure Features', got {withheld_item['name']}"
 
 
 def test_bt_195_bt88_procedure_missing_data(tmp_path, setup_logging):

@@ -20,15 +20,15 @@ def test_opt_301_lotresult_financing_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotResult>
-                                <cac:FinancingParty>
-                                    <cac:PartyIdentification>
+                                <cac:Financingparty>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0003</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </cac:FinancingParty>
+                                    </cac:partyIdentification>
+                                </cac:Financingparty>
                             </efac:LotResult>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

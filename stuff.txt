@@ -1,4 +1,4 @@
-# converters/BT_765_PartFrameworkAgreement.py
+# converters/bt_765_PartFrameworkAgreement.py
 
 import logging
 from typing import Optional, Dict
@@ -73,7 +73,7 @@ def merge_part_framework_agreement(release_json: Dict, part_framework_agreement_
     techniques.update(part_framework_agreement_data["tender"]["techniques"])
 
     logger.info("Merged Part Framework Agreement data")
-    # tests/test_BT_767_Lot.py
+    # tests/test_bt_767_Lot.py
 
 import pytest
 from lxml import etree

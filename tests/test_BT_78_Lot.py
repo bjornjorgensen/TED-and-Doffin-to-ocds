@@ -1,7 +1,7 @@
-# tests/test_BT_78_Lot.py
+# tests/test_bt_78_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_78_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_78_lot import (
     parse_security_clearance_deadline,
     merge_security_clearance_deadline,
 )

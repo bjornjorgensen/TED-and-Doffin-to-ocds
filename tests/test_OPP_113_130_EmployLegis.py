@@ -28,7 +28,7 @@ def test_opp_113_130_employ_legis_integration(tmp_path):
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:EmploymentLegislationDocumentReference>
                     <cbc:ID>Empl2</cbc:ID>

@@ -1,6 +1,6 @@
-# tests/test_BT_201_Contract.py
+# tests/test_bt_201_Contract.py
 
-from ted_and_doffin_to_ocds.converters.BT_201_Contract import (
+from ted_and_doffin_to_ocds.converters.bt_201_contract import (
     parse_contract_modification_description,
     merge_contract_modification_description,
 )
@@ -24,14 +24,14 @@ def test_parse_contract_modification_description():
                 <efbc:ReasonDescription languageID="ENG">The original business case was scoped as a technology replacement programme for a single system. Analysis in the early stages of the programme indicated that two core enterprise systems should be replaced. In order to maximise benefit for these systems replacement activities, it was agreed that the organisation should consider people and process in addition to systems replacement, and work has been re-scoped to accommodate this.</efbc:ReasonDescription>
             </efac:ChangeReason>
         </efac:ContractModification>
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotResult>
                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                 <efac:SettledContract>
                     <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                 </efac:SettledContract>
             </efac:LotResult>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
 

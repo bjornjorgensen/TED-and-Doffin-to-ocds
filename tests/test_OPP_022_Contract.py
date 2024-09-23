@@ -18,7 +18,7 @@ def test_opp_022_contract_significance_integration(tmp_path):
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:SettledContract>
                 <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                 <efac:DurationJustification>
@@ -38,7 +38,7 @@ def test_opp_022_contract_significance_integration(tmp_path):
                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                 </efac:TenderLot>
             </efac:LotResult>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_asset_significance.xml"

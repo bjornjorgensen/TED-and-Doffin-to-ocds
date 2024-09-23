@@ -1,4 +1,4 @@
-# tests/test_BT_744_Lot.py
+# tests/test_bt_744_Lot.py
 
 import pytest
 import json

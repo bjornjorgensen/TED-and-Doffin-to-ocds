@@ -1,4 +1,4 @@
-# tests/test_BT_3202_Contract.py
+# tests/test_bt_3202_Contract.py
 
 import pytest
 import json
@@ -21,7 +21,7 @@ def test_bt_3202_contract_tender_id_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:SettledContract>
                                 <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                                 <efac:LotTender>
@@ -30,9 +30,9 @@ def test_bt_3202_contract_tender_id_integration(tmp_path):
                             </efac:SettledContract>
                             <efac:LotTender>
                                 <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
-                                <efac:TenderingParty>
+                                <efac:Tenderingparty>
                                     <cbc:ID schemeName="tendering-party">TPA-0001</cbc:ID>
-                                </efac:TenderingParty>
+                                </efac:Tenderingparty>
                             </efac:LotTender>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
@@ -43,13 +43,13 @@ def test_bt_3202_contract_tender_id_integration(tmp_path):
                                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                                 </efac:TenderLot>
                             </efac:LotResult>
-                            <efac:TenderingParty>
+                            <efac:Tenderingparty>
                                 <cbc:ID schemeName="tendering-party">TPA-0001</cbc:ID>
                                 <efac:Tenderer>
                                     <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
                                 </efac:Tenderer>
-                            </efac:TenderingParty>
-                        </efac:NoticeResult>
+                            </efac:Tenderingparty>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

@@ -1,4 +1,4 @@
-# tests/test_BT_1311_Lot.py
+# tests/test_bt_1311_Lot.py
 
 import pytest
 import json
@@ -17,10 +17,10 @@ def test_bt_1311_lot_integration(tmp_path):
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingProcess>
-                <cac:ParticipationRequestReceptionPeriod>
+                <cac:participationRequestReceptionPeriod>
                     <cbc:EndDate>2019-11-25+01:00</cbc:EndDate>
                     <cbc:EndTime>12:00:00+01:00</cbc:EndTime>
-                </cac:ParticipationRequestReceptionPeriod>
+                </cac:participationRequestReceptionPeriod>
             </cac:TenderingProcess>
         </cac:ProcurementProjectLot>
     </root>

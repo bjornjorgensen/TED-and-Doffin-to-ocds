@@ -1,4 +1,4 @@
-# tests/test_OPT_300_Procedure_SProvider.py
+# tests/test_OPT_300_procedure_sprovider.py
 
 import pytest
 import os
@@ -16,33 +16,33 @@ def test_opt_300_procedure_sprovider_integration(tmp_path):
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
-        <cac:ContractingParty>
-            <cac:Party>
-                <cac:ServiceProviderParty>
-                    <cac:Party>
-                        <cac:PartyIdentification>
+        <cac:Contractingparty>
+            <cac:party>
+                <cac:ServiceProviderparty>
+                    <cac:party>
+                        <cac:partyIdentification>
                             <cbc:ID>ORG-0001</cbc:ID>
-                        </cac:PartyIdentification>
-                    </cac:Party>
-                </cac:ServiceProviderParty>
-            </cac:Party>
-        </cac:ContractingParty>
+                        </cac:partyIdentification>
+                    </cac:party>
+                </cac:ServiceProviderparty>
+            </cac:party>
+        </cac:Contractingparty>
         <ext:UBLExtensions>
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                        <efac:organizations>
+                            <efac:organization>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                    <cac:PartyName>
+                                    </cac:partyIdentification>
+                                    <cac:partyName>
                                         <cbc:Name languageID="ENG">Service Provider Ltd</cbc:Name>
-                                    </cac:PartyName>
-                                </efac:Company>
-                            </efac:Organization>
-                        </efac:Organizations>
+                                    </cac:partyName>
+                                </efac:company>
+                            </efac:organization>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

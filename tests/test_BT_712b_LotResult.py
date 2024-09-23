@@ -1,7 +1,7 @@
-# tests/test_BT_712b_LotResult.py
+# tests/test_bt_712b_LotResult.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_712b_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_712b_lotresult import (
     parse_buyer_review_complainants_bt_712b,
     merge_buyer_review_complainants_bt_712b,
 )
@@ -14,7 +14,7 @@ def test_parse_buyer_review_complainants_bt_712b():
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotResult>
                 <efac:AppealRequestsStatistics>
                     <efbc:StatisticsNumeric>2</efbc:StatisticsNumeric>
@@ -23,7 +23,7 @@ def test_parse_buyer_review_complainants_bt_712b():
                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                 </efac:TenderLot>
             </efac:LotResult>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
 

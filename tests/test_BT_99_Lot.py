@@ -1,7 +1,7 @@
-# tests/test_BT_99_Lot.py
+# tests/test_bt_99_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_99_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_99_lot import (
     parse_review_deadline_description,
     merge_review_deadline_description,
 )

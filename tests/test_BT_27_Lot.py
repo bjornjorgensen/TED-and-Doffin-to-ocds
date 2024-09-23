@@ -1,7 +1,7 @@
-# tests/test_BT_27_Lot.py
+# tests/test_bt_27_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_27_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_27_lot import (
     parse_lot_estimated_value,
     merge_lot_estimated_value,
 )

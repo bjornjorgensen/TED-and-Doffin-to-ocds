@@ -1,4 +1,4 @@
-# tests/test_BT_3201_Tender.py
+# tests/test_bt_3201_Tender.py
 
 import pytest
 import json
@@ -21,14 +21,14 @@ def test_bt_3201_tender_identifier_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotTender>
                                 <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
                                 <efac:TenderReference>
                                     <cbc:ID>BID ABD/GHI-NL/2020-002</cbc:ID>
                                 </efac:TenderReference>
                             </efac:LotTender>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

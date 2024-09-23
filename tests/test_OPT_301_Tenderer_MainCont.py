@@ -20,7 +20,7 @@ def test_opt_301_tenderer_maincont_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotTender>
                                 <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
                                 <cbc:RankCode>1</cbc:RankCode>
@@ -28,27 +28,27 @@ def test_opt_301_tenderer_maincont_integration(tmp_path):
                                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                                 </efac:TenderLot>
                             </efac:LotTender>
-                            <efac:TenderingParty>
+                            <efac:Tenderingparty>
                                 <efac:SubContractor>
                                     <cbc:ID schemeName="organization">ORG-0012</cbc:ID>
                                     <efac:MainContractor>
                                         <cbc:ID schemeName="organization">ORG-0005</cbc:ID>
                                     </efac:MainContractor>
                                 </efac:SubContractor>
-                            </efac:TenderingParty>
-                        </efac:NoticeResult>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                            </efac:Tenderingparty>
+                        </efac:noticeResult>
+                        <efac:organizations>
+                            <efac:organization>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0005</cbc:ID>
-                                    </cac:PartyIdentification>
-                                    <cac:PartyName>
-                                        <cbc:Name>Tendering Company Ltd</cbc:Name>
-                                    </cac:PartyName>
-                                </efac:Company>
-                            </efac:Organization>
-                        </efac:Organizations>
+                                    </cac:partyIdentification>
+                                    <cac:partyName>
+                                        <cbc:Name>Tendering company Ltd</cbc:Name>
+                                    </cac:partyName>
+                                </efac:company>
+                            </efac:organization>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -84,7 +84,7 @@ def test_opt_301_tenderer_maincont_integration(tmp_path):
     assert len(subcontract["mainContractors"]) == 1
     main_contractor = subcontract["mainContractors"][0]
     assert main_contractor["id"] == "ORG-0005"
-    assert main_contractor["name"] == "Tendering Company Ltd"
+    assert main_contractor["name"] == "Tendering company Ltd"
 
 
 if __name__ == "__main__":

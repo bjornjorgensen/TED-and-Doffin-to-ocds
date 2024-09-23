@@ -1,4 +1,4 @@
-# tests/test_BT_635_LotResult.py
+# tests/test_bt_635_LotResult.py
 
 import pytest
 import json
@@ -31,7 +31,7 @@ def test_bt_635_lot_result_integration(tmp_path, setup_logging):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotResult>
                                 <efac:AppealRequestsStatistics>
                                     <efbc:StatisticsCode listName="irregularity-type">review-requests</efbc:StatisticsCode>
@@ -41,7 +41,7 @@ def test_bt_635_lot_result_integration(tmp_path, setup_logging):
                                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                                 </efac:TenderLot>
                             </efac:LotResult>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

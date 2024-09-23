@@ -1,4 +1,4 @@
-# tests/test_BT_197_BT_191_Tender.py
+# tests/test_bt_197_bt_191_Tender.py
 
 import pytest
 import json
@@ -29,7 +29,7 @@ def test_bt197_bt191_unpublished_justification_code_integration(
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotTender>
                 <cbc:ID schemeName="result">TEN-0001</cbc:ID>
                 <efac:Origin>
@@ -39,7 +39,7 @@ def test_bt197_bt191_unpublished_justification_code_integration(
                     </efac:FieldsPrivacy>
                 </efac:Origin>
             </efac:LotTender>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_bt197_bt191.xml"
@@ -95,12 +95,12 @@ def test_bt197_bt191_unpublished_justification_code_missing_data(
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotTender>
                 <cbc:ID schemeName="result">TEN-0001</cbc:ID>
                 <!-- Missing Origin element -->
             </efac:LotTender>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_bt197_bt191_missing.xml"

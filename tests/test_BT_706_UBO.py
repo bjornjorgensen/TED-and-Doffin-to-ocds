@@ -1,4 +1,4 @@
-from ted_and_doffin_to_ocds.converters.BT_706_UBO import (
+from ted_and_doffin_to_ocds.converters.bt_706_ubo import (
     parse_ubo_nationality,
     merge_ubo_nationality,
 )
@@ -20,21 +20,21 @@ def test_parse_ubo_nationality():
         <efext:UBLExtensions>
             <efext:UBLExtension>
                 <efext:ExtensionContent>
-                    <efac:Organizations>
-                        <efac:Organization>
-                            <efac:Company>
-                                <cac:PartyIdentification>
+                    <efac:organizations>
+                        <efac:organization>
+                            <efac:company>
+                                <cac:partyIdentification>
                                     <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                </cac:PartyIdentification>
-                            </efac:Company>
-                        </efac:Organization>
+                                </cac:partyIdentification>
+                            </efac:company>
+                        </efac:organization>
                         <efac:UltimateBeneficialOwner>
-                            <cbc:ID schemeName="ubo">UBO-0001</cbc:ID>
+                            <cbc:ID schemeName="ubo">ubo-0001</cbc:ID>
                             <efac:Nationality>
                                 <cbc:NationalityID>DEU</cbc:NationalityID>
                             </efac:Nationality>
                         </efac:UltimateBeneficialOwner>
-                    </efac:Organizations>
+                    </efac:organizations>
                 </efext:ExtensionContent>
             </efext:UBLExtension>
         </efext:UBLExtensions>
@@ -48,18 +48,18 @@ def test_parse_ubo_nationality():
     assert len(result["parties"]) == 1
     assert result["parties"][0]["id"] == "ORG-0001"
     assert len(result["parties"][0]["beneficialOwners"]) == 1
-    assert result["parties"][0]["beneficialOwners"][0]["id"] == "UBO-0001"
+    assert result["parties"][0]["beneficialOwners"][0]["id"] == "ubo-0001"
     assert result["parties"][0]["beneficialOwners"][0]["nationalities"] == ["DE"]
 
 
 def test_merge_ubo_nationality():
-    release_json = {"parties": [{"id": "ORG-0001", "name": "Existing Organization"}]}
+    release_json = {"parties": [{"id": "ORG-0001", "name": "Existing organization"}]}
 
     ubo_nationality_data = {
         "parties": [
             {
                 "id": "ORG-0001",
-                "beneficialOwners": [{"id": "UBO-0001", "nationalities": ["DE"]}],
+                "beneficialOwners": [{"id": "ubo-0001", "nationalities": ["DE"]}],
             },
         ],
     }
@@ -68,7 +68,7 @@ def test_merge_ubo_nationality():
 
     assert "beneficialOwners" in release_json["parties"][0]
     assert len(release_json["parties"][0]["beneficialOwners"]) == 1
-    assert release_json["parties"][0]["beneficialOwners"][0]["id"] == "UBO-0001"
+    assert release_json["parties"][0]["beneficialOwners"][0]["id"] == "ubo-0001"
     assert release_json["parties"][0]["beneficialOwners"][0]["nationalities"] == ["DE"]
 
 
@@ -81,27 +81,27 @@ def test_bt_706_ubo_nationality_integration(tmp_path):
         <efext:UBLExtensions>
             <efext:UBLExtension>
                 <efext:ExtensionContent>
-                    <efac:Organizations>
-                        <efac:Organization>
-                            <efac:Company>
-                                <cac:PartyIdentification>
+                    <efac:organizations>
+                        <efac:organization>
+                            <efac:company>
+                                <cac:partyIdentification>
                                     <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                </cac:PartyIdentification>
-                            </efac:Company>
-                        </efac:Organization>
+                                </cac:partyIdentification>
+                            </efac:company>
+                        </efac:organization>
                         <efac:UltimateBeneficialOwner>
-                            <cbc:ID schemeName="ubo">UBO-0001</cbc:ID>
+                            <cbc:ID schemeName="ubo">ubo-0001</cbc:ID>
                             <efac:Nationality>
                                 <cbc:NationalityID>DEU</cbc:NationalityID>
                             </efac:Nationality>
                         </efac:UltimateBeneficialOwner>
                         <efac:UltimateBeneficialOwner>
-                            <cbc:ID schemeName="ubo">UBO-0002</cbc:ID>
+                            <cbc:ID schemeName="ubo">ubo-0002</cbc:ID>
                             <efac:Nationality>
                                 <cbc:NationalityID>FRA</cbc:NationalityID>
                             </efac:Nationality>
                         </efac:UltimateBeneficialOwner>
-                    </efac:Organizations>
+                    </efac:organizations>
                 </efext:ExtensionContent>
             </efext:UBLExtension>
         </efext:UBLExtensions>
@@ -121,10 +121,10 @@ def test_bt_706_ubo_nationality_integration(tmp_path):
     beneficial_owners = result["parties"][0].get("beneficialOwners", [])
     assert len(beneficial_owners) == 2
 
-    ubo_1 = next((ubo for ubo in beneficial_owners if ubo["id"] == "UBO-0001"), None)
+    ubo_1 = next((ubo for ubo in beneficial_owners if ubo["id"] == "ubo-0001"), None)
     assert ubo_1 is not None
     assert ubo_1["nationalities"] == ["DE"]
 
-    ubo_2 = next((ubo for ubo in beneficial_owners if ubo["id"] == "UBO-0002"), None)
+    ubo_2 = next((ubo for ubo in beneficial_owners if ubo["id"] == "ubo-0002"), None)
     assert ubo_2 is not None
     assert ubo_2["nationalities"] == ["FR"]

@@ -1,4 +1,4 @@
-# tests/test_BT_702a_Notice.py
+# tests/test_bt_702a_notice.py
 
 import pytest
 import json
@@ -13,7 +13,7 @@ from src.ted_and_doffin_to_ocds.main import main
 def test_bt_702a_notice_integration(tmp_path):
     xml_content = """
     <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cbc:NoticeLanguageCode>ENG</cbc:NoticeLanguageCode>
+        <cbc:noticeLanguageCode>ENG</cbc:noticeLanguageCode>
     </root>
     """
     xml_file = tmp_path / "test_input_notice_language.xml"
@@ -33,7 +33,7 @@ def test_bt_702a_notice_integration(tmp_path):
 def test_bt_702a_notice_integration_unknown_language(tmp_path):
     xml_content = """
     <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cbc:NoticeLanguageCode>XYZ</cbc:NoticeLanguageCode>
+        <cbc:noticeLanguageCode>XYZ</cbc:noticeLanguageCode>
     </root>
     """
     xml_file = tmp_path / "test_input_notice_language_unknown.xml"

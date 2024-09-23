@@ -1,4 +1,4 @@
-# tests/test_BT_42_Lot.py
+# tests/test_bt_42_Lot.py
 
 import pytest
 import json
@@ -18,7 +18,7 @@ def test_bt_42_lot_integration(tmp_path):
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:AwardingTerms>
-                    <cbc:BindingOnBuyerIndicator>true</cbc:BindingOnBuyerIndicator>
+                    <cbc:BindingOnbuyerIndicator>true</cbc:BindingOnbuyerIndicator>
                 </cac:AwardingTerms>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>

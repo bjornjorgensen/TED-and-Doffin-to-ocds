@@ -1,7 +1,7 @@
-# tests/test_BT_71_Lot.py
+# tests/test_bt_71_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_71_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_71_lot import (
     parse_reserved_participation,
     merge_reserved_participation,
 )
@@ -32,9 +32,9 @@ def test_parse_reserved_participation():
     assert len(result["tender"]["lots"]) == 1
     assert result["tender"]["lots"][0]["id"] == "LOT-0001"
     assert "otherRequirements" in result["tender"]["lots"][0]
-    assert "reservedParticipation" in result["tender"]["lots"][0]["otherRequirements"]
+    assert "reservedparticipation" in result["tender"]["lots"][0]["otherRequirements"]
     assert result["tender"]["lots"][0]["otherRequirements"][
-        "reservedParticipation"
+        "reservedparticipation"
     ] == ["shelteredWorkshop"]
 
 
@@ -47,7 +47,7 @@ def test_merge_reserved_participation():
                 {
                     "id": "LOT-0001",
                     "otherRequirements": {
-                        "reservedParticipation": ["shelteredWorkshop"],
+                        "reservedparticipation": ["shelteredWorkshop"],
                     },
                 },
             ],
@@ -58,11 +58,11 @@ def test_merge_reserved_participation():
 
     assert "otherRequirements" in release_json["tender"]["lots"][0]
     assert (
-        "reservedParticipation"
+        "reservedparticipation"
         in release_json["tender"]["lots"][0]["otherRequirements"]
     )
     assert release_json["tender"]["lots"][0]["otherRequirements"][
-        "reservedParticipation"
+        "reservedparticipation"
     ] == ["shelteredWorkshop"]
 
 

@@ -1,4 +1,4 @@
-# tests/test_BT_539_Lot.py
+# tests/test_bt_539_Lot.py
 
 import pytest
 import json
@@ -8,7 +8,7 @@ import sys
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.ted_and_doffin_to_ocds.main import main
-from ted_and_doffin_to_ocds.converters.BT_539_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_539_lot import (
     parse_award_criterion_type,
     merge_award_criterion_type,
 )

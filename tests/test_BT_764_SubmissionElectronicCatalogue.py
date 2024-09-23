@@ -1,4 +1,4 @@
-# tests/test_BT_764_SubmissionElectronicCatalogue.py
+# tests/test_bt_764_SubmissionElectronicCatalogue.py
 
 import pytest
 import json

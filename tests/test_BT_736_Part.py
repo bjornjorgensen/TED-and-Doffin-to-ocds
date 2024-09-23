@@ -1,4 +1,4 @@
-# tests/test_BT_736_Part.py
+# tests/test_bt_736_part.py
 
 import pytest
 import json
@@ -15,7 +15,7 @@ def test_bt_736_part_integration(tmp_path):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:ContractExecutionRequirement>
                     <cbc:ExecutionRequirementCode listName="reserved-execution">yes</cbc:ExecutionRequirementCode>
@@ -47,7 +47,7 @@ def test_bt_736_part_integration_no_value(tmp_path):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:ContractExecutionRequirement>
                     <cbc:ExecutionRequirementCode listName="reserved-execution">no</cbc:ExecutionRequirementCode>

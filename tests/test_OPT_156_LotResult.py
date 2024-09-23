@@ -1,7 +1,7 @@
 # tests/test_OPT_156_LotResult.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.OPT_156_LotResult import (
+from ted_and_doffin_to_ocds.converters.opt_156_lotresult import (
     parse_vehicle_numeric,
     merge_vehicle_numeric,
 )
@@ -22,7 +22,7 @@ def test_parse_vehicle_numeric():
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotResult>
                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                 <efac:StrategicProcurement>
@@ -47,7 +47,7 @@ def test_parse_vehicle_numeric():
                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                 </efac:TenderLot>
             </efac:LotResult>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
 
@@ -118,7 +118,7 @@ def test_opt_156_lotresult_vehicle_numeric_integration(tmp_path):
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotResult>
                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                 <efac:StrategicProcurement>
@@ -143,7 +143,7 @@ def test_opt_156_lotresult_vehicle_numeric_integration(tmp_path):
                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                 </efac:TenderLot>
             </efac:LotResult>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_vehicle_numeric.xml"

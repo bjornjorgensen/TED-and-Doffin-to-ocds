@@ -1,4 +1,4 @@
-# tests/test_BT_127_Notice.py
+# tests/test_bt_127_notice.py
 
 import pytest
 import json
@@ -26,9 +26,9 @@ def test_bt_127_notice_integration(tmp_path):
 
     assert "tender" in result
     assert "communication" in result["tender"]
-    assert "futureNoticeDate" in result["tender"]["communication"]
+    assert "futurenoticeDate" in result["tender"]["communication"]
     assert (
-        result["tender"]["communication"]["futureNoticeDate"]
+        result["tender"]["communication"]["futurenoticeDate"]
         == "2020-03-15T00:00:00+01:00"
     )
 

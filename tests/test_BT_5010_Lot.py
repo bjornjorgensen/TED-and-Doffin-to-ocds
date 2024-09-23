@@ -1,4 +1,4 @@
-# tests/test_BT_5010_Lot.py
+# tests/test_bt_5010_Lot.py
 
 import pytest
 import json
@@ -65,11 +65,11 @@ def test_bt_5010_lot_integration(tmp_path):
         finance[0]["id"] == "CON_PRO-123/ABC"
     ), f"Expected finance id 'CON_PRO-123/ABC', got {finance[0]['id']}"
     assert (
-        finance[0]["financingParty"]["name"] == "European Union"
-    ), "Expected financingParty name to be 'European Union'"
+        finance[0]["financingparty"]["name"] == "European Union"
+    ), "Expected financingparty name to be 'European Union'"
     assert (
-        finance[0]["financingParty"]["id"] == eu_party["id"]
-    ), "Expected financingParty id to match European Union party id"
+        finance[0]["financingparty"]["id"] == eu_party["id"]
+    ), "Expected financingparty id to match European Union party id"
     assert finance[0]["relatedLots"] == [
         "LOT-0001",
     ], "Expected relatedLots to contain 'LOT-0001'"

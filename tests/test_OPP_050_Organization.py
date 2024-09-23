@@ -1,4 +1,4 @@
-# tests/test_OPP_050_Organization.py
+# tests/test_OPP_050_organization.py
 
 import pytest
 import json
@@ -22,24 +22,24 @@ def test_opp_050_organization_buyers_group_lead_indicator_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
+                        <efac:organizations>
+                            <efac:organization>
                                 <efbc:GroupLeadIndicator>true</efbc:GroupLeadIndicator>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
-                            <efac:Organization>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
+                            <efac:organization>
                                 <efbc:GroupLeadIndicator>false</efbc:GroupLeadIndicator>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
-                        </efac:Organizations>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -63,14 +63,14 @@ def test_opp_050_organization_buyers_group_lead_indicator_integration(tmp_path):
     )
     assert lead_buyer is not None
     assert "roles" in lead_buyer
-    assert "leadBuyer" in lead_buyer["roles"]
+    assert "leadbuyer" in lead_buyer["roles"]
 
     non_lead_buyer = next(
         (party for party in result["parties"] if party["id"] == "ORG-0002"),
         None,
     )
     assert non_lead_buyer is not None
-    assert "roles" not in non_lead_buyer or "leadBuyer" not in non_lead_buyer.get(
+    assert "roles" not in non_lead_buyer or "leadbuyer" not in non_lead_buyer.get(
         "roles",
         [],
     )

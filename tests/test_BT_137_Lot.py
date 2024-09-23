@@ -1,7 +1,7 @@
-# tests/test_BT_137_Lot.py
+# tests/test_bt_137_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_137_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_137_lot import (
     parse_purpose_lot_identifier,
     merge_purpose_lot_identifier,
 )

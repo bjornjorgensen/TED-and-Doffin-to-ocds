@@ -1,4 +1,4 @@
-# tests/test_OPP_051_Organization.py
+# tests/test_OPP_051_organization.py
 
 import pytest
 import json
@@ -22,24 +22,24 @@ def test_opp_051_organization_awarding_cpb_buyer_indicator_integration(tmp_path)
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
+                        <efac:organizations>
+                            <efac:organization>
                                 <efbc:AwardingCPBIndicator>true</efbc:AwardingCPBIndicator>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
-                            <efac:Organization>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
+                            <efac:organization>
                                 <efbc:AwardingCPBIndicator>false</efbc:AwardingCPBIndicator>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
-                        </efac:Organizations>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

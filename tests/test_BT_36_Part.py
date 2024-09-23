@@ -1,4 +1,4 @@
-# tests/test_BT_36_Part.py
+# tests/test_bt_36_part.py
 
 import pytest
 import json
@@ -15,7 +15,7 @@ def test_bt_36_part_integration(tmp_path):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:ProcurementProject>
                 <cac:PlannedPeriod>
                     <cbc:DurationMeasure unitCode="DAY">3</cbc:DurationMeasure>
@@ -47,7 +47,7 @@ def test_bt_36_part_integration_month(tmp_path):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:ProcurementProject>
                 <cac:PlannedPeriod>
                     <cbc:DurationMeasure unitCode="MONTH">2</cbc:DurationMeasure>
@@ -74,7 +74,7 @@ def test_bt_36_part_integration_week(tmp_path):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:ProcurementProject>
                 <cac:PlannedPeriod>
                     <cbc:DurationMeasure unitCode="WEEK">2</cbc:DurationMeasure>

@@ -1,4 +1,4 @@
-# tests/test_BT_162_Tender.py
+# tests/test_bt_162_Tender.py
 
 import pytest
 import json
@@ -22,7 +22,7 @@ def test_bt_162_concession_revenue_user_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotTender>
                                 <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
                                 <efac:ConcessionRevenue>
@@ -41,7 +41,7 @@ def test_bt_162_concession_revenue_user_integration(tmp_path):
                                     <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                                 </efac:SettledContract>
                             </efac:LotResult>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

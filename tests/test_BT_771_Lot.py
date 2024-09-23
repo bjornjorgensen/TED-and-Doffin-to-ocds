@@ -1,7 +1,7 @@
-# tests/test_BT_771_Lot.py
+# tests/test_bt_771_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_771_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_771_lot import (
     parse_late_tenderer_info,
     merge_late_tenderer_info,
 )

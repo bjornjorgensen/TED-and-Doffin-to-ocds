@@ -1,4 +1,4 @@
-# tests/test_BT_610_Procedure_Buyer.py
+# tests/test_bt_610_procedure_buyer.py
 
 import pytest
 import json
@@ -14,16 +14,16 @@ def test_bt_610_procedure_buyer_integration(tmp_path):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:ContractingParty>
+        <cac:Contractingparty>
             <cac:ContractingActivity>
                 <cbc:ActivityTypeCode listName="entity-activity">gas-oil</cbc:ActivityTypeCode>
             </cac:ContractingActivity>
-            <cac:Party>
-                <cac:PartyIdentification>
+            <cac:party>
+                <cac:partyIdentification>
                     <cbc:ID>ORG-0001</cbc:ID>
-                </cac:PartyIdentification>
-            </cac:Party>
-        </cac:ContractingParty>
+                </cac:partyIdentification>
+            </cac:party>
+        </cac:Contractingparty>
     </root>
     """
     xml_file = tmp_path / "test_input_activity_entity.xml"

@@ -28,7 +28,7 @@ def test_opp_110_111_fiscal_legis_integration(tmp_path):
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:FiscalLegislationDocumentReference>
                     <cbc:ID>Fiscal2</cbc:ID>

@@ -1,4 +1,4 @@
-# tests/test_BT_765_FrameworkAgreement.py
+# tests/test_bt_765_FrameworkAgreement.py
 
 import pytest
 import json

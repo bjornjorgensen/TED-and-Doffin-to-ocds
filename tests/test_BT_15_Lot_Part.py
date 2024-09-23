@@ -1,4 +1,4 @@
-# tests/test_BT_15_Lot_Part.py
+# tests/test_bt_15_Lot_part.py
 
 import pytest
 import json
@@ -29,7 +29,7 @@ def test_bt_15_lot_part_integration(tmp_path):
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:CallForTendersDocumentReference>
                     <cbc:ID>20210521/CTFD/ENG/7654-03</cbc:ID>

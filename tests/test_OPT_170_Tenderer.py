@@ -22,20 +22,20 @@ def test_tendering_party_leader_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
-                            <efac:TenderingParty>
+                        <efac:noticeResult>
+                            <efac:Tenderingparty>
                                 <efac:Tenderer>
                                     <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
                                     <efbc:GroupLeadIndicator>true</efbc:GroupLeadIndicator>
                                 </efac:Tenderer>
-                            </efac:TenderingParty>
-                            <efac:TenderingParty>
+                            </efac:Tenderingparty>
+                            <efac:Tenderingparty>
                                 <efac:Tenderer>
                                     <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
                                     <efbc:GroupLeadIndicator>false</efbc:GroupLeadIndicator>
                                 </efac:Tenderer>
-                            </efac:TenderingParty>
-                        </efac:NoticeResult>
+                            </efac:Tenderingparty>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -80,8 +80,8 @@ def test_tendering_party_leader_no_data(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
-                        </efac:NoticeResult>
+                        <efac:noticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

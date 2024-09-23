@@ -1,4 +1,4 @@
-# tests/test_BT_766_DynamicPurchasingSystem.py
+# tests/test_bt_766_DynamicPurchasingSystem.py
 
 import pytest
 import json

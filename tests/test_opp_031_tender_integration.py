@@ -14,7 +14,7 @@ def test_opp_031_tender_integration(tmp_path):
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotTender>
                 <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
                 <efac:ContractTerm>
@@ -29,7 +29,7 @@ def test_opp_031_tender_integration(tmp_path):
                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                 </efac:TenderLot>
             </efac:LotTender>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_contract_conditions.xml"

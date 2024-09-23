@@ -1,6 +1,6 @@
 # tests/test_OPT_301_Lot_TenderReceipt.py
 
-from ted_and_doffin_to_ocds.converters.OPT_301_Lot_TenderReceipt import (
+from ted_and_doffin_to_ocds.converters.opt_301_lot_tenderreceipt import (
     parse_tender_recipient_identifier,
     merge_tender_recipient_identifier,
 )
@@ -13,11 +13,11 @@ def test_parse_tender_recipient_identifier():
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">1</cbc:ID>
             <cac:TenderingTerms>
-                <cac:TenderRecipientParty>
-                    <cac:PartyIdentification>
+                <cac:TenderRecipientparty>
+                    <cac:partyIdentification>
                         <cbc:ID>TPO-0001</cbc:ID>
-                    </cac:PartyIdentification>
-                </cac:TenderRecipientParty>
+                    </cac:partyIdentification>
+                </cac:TenderRecipientparty>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
     </root>
@@ -53,7 +53,7 @@ def test_merge_tender_recipient_identifier():
     }
 
     release_json = {
-        "parties": [{"id": "TPO-0002", "name": "Existing Party", "roles": ["buyer"]}],
+        "parties": [{"id": "TPO-0002", "name": "Existing party", "roles": ["buyer"]}],
     }
 
     merge_tender_recipient_identifier(release_json, recipient_data)
@@ -71,7 +71,7 @@ def test_merge_tender_recipient_identifier_existing_party():
     }
 
     release_json = {
-        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}],
+        "parties": [{"id": "TPO-0001", "name": "Existing party", "roles": ["buyer"]}],
     }
 
     merge_tender_recipient_identifier(release_json, recipient_data)
@@ -82,7 +82,7 @@ def test_merge_tender_recipient_identifier_existing_party():
         "buyer",
         "submissionReceiptBody",
     }
-    assert release_json["parties"][0]["name"] == "Existing Party"
+    assert release_json["parties"][0]["name"] == "Existing party"
 
 
 def test_merge_tender_recipient_identifier_no_data():

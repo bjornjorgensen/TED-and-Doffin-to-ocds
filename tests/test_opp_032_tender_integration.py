@@ -21,7 +21,7 @@ def test_opp_032_tender_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                                 <efac:LotTender>
@@ -37,7 +37,7 @@ def test_opp_032_tender_integration(tmp_path):
                                     <efbc:RevenuesProcuringEntity>75.5</efbc:RevenuesProcuringEntity>
                                 </efac:RevenuesAllocation>
                             </efac:LotTender>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

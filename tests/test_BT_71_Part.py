@@ -1,7 +1,7 @@
-# tests/test_BT_71_Part.py
+# tests/test_bt_71_part.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_71_Part import (
+from ted_and_doffin_to_ocds.converters.bt_71_part import (
     parse_reserved_participation_part,
     merge_reserved_participation_part,
 )
@@ -12,7 +12,7 @@ def test_parse_reserved_participation_part():
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:TendererQualificationRequest>
                     <cac:SpecificTendererRequirement>
@@ -29,8 +29,8 @@ def test_parse_reserved_participation_part():
     assert result is not None
     assert "tender" in result
     assert "otherRequirements" in result["tender"]
-    assert "reservedParticipation" in result["tender"]["otherRequirements"]
-    assert result["tender"]["otherRequirements"]["reservedParticipation"] == [
+    assert "reservedparticipation" in result["tender"]["otherRequirements"]
+    assert result["tender"]["otherRequirements"]["reservedparticipation"] == [
         "shelteredWorkshop",
     ]
 
@@ -40,15 +40,15 @@ def test_merge_reserved_participation_part():
 
     reserved_participation_data = {
         "tender": {
-            "otherRequirements": {"reservedParticipation": ["shelteredWorkshop"]},
+            "otherRequirements": {"reservedparticipation": ["shelteredWorkshop"]},
         },
     }
 
     merge_reserved_participation_part(release_json, reserved_participation_data)
 
     assert "otherRequirements" in release_json["tender"]
-    assert "reservedParticipation" in release_json["tender"]["otherRequirements"]
-    assert release_json["tender"]["otherRequirements"]["reservedParticipation"] == [
+    assert "reservedparticipation" in release_json["tender"]["otherRequirements"]
+    assert release_json["tender"]["otherRequirements"]["reservedparticipation"] == [
         "shelteredWorkshop",
     ]
 
@@ -57,24 +57,24 @@ def test_merge_multiple_reserved_participation_part():
     release_json = {
         "tender": {
             "otherRequirements": {
-                "reservedParticipation": ["publicServiceMissionOrganization"],
+                "reservedparticipation": ["publicServiceMissionorganization"],
             },
         },
     }
 
     reserved_participation_data = {
         "tender": {
-            "otherRequirements": {"reservedParticipation": ["shelteredWorkshop"]},
+            "otherRequirements": {"reservedparticipation": ["shelteredWorkshop"]},
         },
     }
 
     merge_reserved_participation_part(release_json, reserved_participation_data)
 
     assert "otherRequirements" in release_json["tender"]
-    assert "reservedParticipation" in release_json["tender"]["otherRequirements"]
+    assert "reservedparticipation" in release_json["tender"]["otherRequirements"]
     assert set(
-        release_json["tender"]["otherRequirements"]["reservedParticipation"],
-    ) == {"publicServiceMissionOrganization", "shelteredWorkshop"}
+        release_json["tender"]["otherRequirements"]["reservedparticipation"],
+    ) == {"publicServiceMissionorganization", "shelteredWorkshop"}
 
 
 if __name__ == "__main__":

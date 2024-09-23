@@ -1,4 +1,4 @@
-# tests/test_BT_195_BT_720_Tender.py
+# tests/test_bt_195_bt_720_Tender.py
 
 import pytest
 import json
@@ -26,14 +26,14 @@ def test_bt_195_bt720_tender_integration(tmp_path, setup_logging):
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotTender>
                 <cbc:ID schemeName="result">TEN-0001</cbc:ID>
                 <efac:FieldsPrivacy>
                     <efbc:FieldIdentifierCode listName="non-publication-identifier">win-ten-val</efbc:FieldIdentifierCode>
                 </efac:FieldsPrivacy>
             </efac:LotTender>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_bt195_bt720.xml"
@@ -72,11 +72,11 @@ def test_bt_195_bt720_tender_missing_field(tmp_path, setup_logging):
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotTender>
                 <cbc:ID schemeName="result">TEN-0001</cbc:ID>
             </efac:LotTender>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_bt195_bt720_missing.xml"

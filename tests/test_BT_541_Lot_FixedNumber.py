@@ -1,4 +1,4 @@
-# tests/test_BT_541_Lot_FixedNumber.py
+# tests/test_bt_541_Lot_FixedNumber.py
 
 import pytest
 import json
@@ -8,7 +8,7 @@ import sys
 # Add the parent directory to sys.path to import main
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.ted_and_doffin_to_ocds.main import main
-from ted_and_doffin_to_ocds.converters.BT_541_Lot_FixedNumber import (
+from ted_and_doffin_to_ocds.converters.bt_541_lot_fixednumber import (
     parse_award_criterion_fixed_number,
     merge_award_criterion_fixed_number,
 )

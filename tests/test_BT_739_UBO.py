@@ -1,4 +1,4 @@
-# tests/test_BT_739_UBO.py
+# tests/test_bt_739_ubo.py
 
 import pytest
 import json
@@ -21,21 +21,21 @@ def test_bt_739_ubo_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                        <efac:organizations>
+                            <efac:organization>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
                             <efac:UltimateBeneficialOwner>
-                                <cbc:ID schemeName="ubo">UBO-0001</cbc:ID>
+                                <cbc:ID schemeName="ubo">ubo-0001</cbc:ID>
                                 <cac:Contact>
                                     <cbc:Telefax>+123 4567891</cbc:Telefax>
                                 </cac:Contact>
                             </efac:UltimateBeneficialOwner>
-                        </efac:Organizations>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -63,8 +63,8 @@ def test_bt_739_ubo_integration(tmp_path):
     ), f"Expected 1 beneficial owner, got {len(party['beneficialOwners'])}"
 
     ubo = party["beneficialOwners"][0]
-    assert ubo["id"] == "UBO-0001", f"Expected UBO id 'UBO-0001', got {ubo['id']}"
-    assert "faxNumber" in ubo, "Expected 'faxNumber' in UBO"
+    assert ubo["id"] == "ubo-0001", f"Expected ubo id 'ubo-0001', got {ubo['id']}"
+    assert "faxNumber" in ubo, "Expected 'faxNumber' in ubo"
     assert (
         ubo["faxNumber"] == "+123 4567891"
     ), f"Expected faxNumber '+123 4567891', got {ubo['faxNumber']}"

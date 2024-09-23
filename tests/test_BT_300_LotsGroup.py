@@ -1,7 +1,7 @@
-# tests/test_BT_300_LotsGroup.py
+# tests/test_bt_300_LotsGroup.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_300_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_300_lotsgroup import (
     parse_lotsgroup_additional_info,
     merge_lotsgroup_additional_info,
 )

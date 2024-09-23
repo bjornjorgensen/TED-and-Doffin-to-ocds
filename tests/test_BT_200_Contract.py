@@ -1,6 +1,6 @@
-# tests/test_BT_200_Contract.py
+# tests/test_bt_200_Contract.py
 
-from ted_and_doffin_to_ocds.converters.BT_200_Contract import (
+from ted_and_doffin_to_ocds.converters.bt_200_contract import (
     parse_contract_modification_reason,
     merge_contract_modification_reason,
 )
@@ -24,14 +24,14 @@ def test_parse_contract_modification_reason():
                 <cbc:ReasonCode listName="modification-justification">MJ001</cbc:ReasonCode>
             </efac:ChangeReason>
         </efac:ContractModification>
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotResult>
                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                 <efac:SettledContract>
                     <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                 </efac:SettledContract>
             </efac:LotResult>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
 
@@ -80,7 +80,7 @@ def test_parse_contract_modification_reason_multiple_awards():
                 <cbc:ReasonCode listName="modification-justification">MJ002</cbc:ReasonCode>
             </efac:ChangeReason>
         </efac:ContractModification>
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotResult>
                 <cbc:ID schemeName="result">RES-0002</cbc:ID>
                 <efac:SettledContract>
@@ -93,7 +93,7 @@ def test_parse_contract_modification_reason_multiple_awards():
                     <cbc:ID schemeName="contract">CON-0002</cbc:ID>
                 </efac:SettledContract>
             </efac:LotResult>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
 

@@ -1,4 +1,4 @@
-# tests/test_BT_05_Notice.py
+# tests/test_bt_05_notice.py
 
 import pytest
 import json

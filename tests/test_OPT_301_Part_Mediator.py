@@ -1,4 +1,4 @@
-# tests/test_OPT_301_Part_Mediator.py
+# tests/test_OPT_301_part_Mediator.py
 
 import pytest
 import os
@@ -14,14 +14,14 @@ def test_opt_301_part_mediator_integration(tmp_path):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">1</cbc:ID>
+            <cbc:ID schemeName="part">1</cbc:ID>
             <cac:TenderingTerms>
                 <cac:AppealTerms>
-                    <cac:MediationParty>
-                        <cac:PartyIdentification>
+                    <cac:Mediationparty>
+                        <cac:partyIdentification>
                             <cbc:ID schemeName="organization">ORG-0003</cbc:ID>
-                        </cac:PartyIdentification>
-                    </cac:MediationParty>
+                        </cac:partyIdentification>
+                    </cac:Mediationparty>
                 </cac:AppealTerms>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>

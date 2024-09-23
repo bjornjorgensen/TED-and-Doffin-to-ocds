@@ -1,4 +1,4 @@
-# tests/test_BT_195_BT_1351_Procedure.py
+# tests/test_bt_195_bt_1351_procedure.py
 
 import pytest
 import json
@@ -58,8 +58,8 @@ def test_bt_195_bt_1351_procedure_integration(tmp_path):
         withheld_info["field"] == "pro-acc-jus"
     ), f"Expected field 'pro-acc-jus', got {withheld_info['field']}"
     assert (
-        withheld_info["name"] == "Procedure Accelerated Justification"
-    ), f"Expected name 'Procedure Accelerated Justification', got {withheld_info['name']}"
+        withheld_info["name"] == "procedure Accelerated Justification"
+    ), f"Expected name 'procedure Accelerated Justification', got {withheld_info['name']}"
 
 
 if __name__ == "__main__":

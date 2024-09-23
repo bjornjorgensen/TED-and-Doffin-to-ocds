@@ -1,4 +1,4 @@
-# tests/test_OPT_301_Part_TenderReceipt.py
+# tests/test_OPT_301_part_TenderReceipt.py
 
 import pytest
 import os
@@ -14,13 +14,13 @@ def test_opt_301_part_tenderreceipt_integration(tmp_path):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">1</cbc:ID>
+            <cbc:ID schemeName="part">1</cbc:ID>
             <cac:TenderingTerms>
-                <cac:TenderRecipientParty>
-                    <cac:PartyIdentification>
+                <cac:TenderRecipientparty>
+                    <cac:partyIdentification>
                         <cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID>
-                    </cac:PartyIdentification>
-                </cac:TenderRecipientParty>
+                    </cac:partyIdentification>
+                </cac:TenderRecipientparty>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
     </root>

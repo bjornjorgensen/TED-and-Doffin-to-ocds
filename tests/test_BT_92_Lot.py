@@ -1,7 +1,7 @@
-# tests/test_BT_92_Lot.py
+# tests/test_bt_92_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_92_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_92_lot import (
     parse_electronic_ordering,
     merge_electronic_ordering,
 )

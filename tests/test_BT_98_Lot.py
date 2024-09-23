@@ -1,7 +1,7 @@
-# tests/test_BT_98_Lot.py
+# tests/test_bt_98_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_98_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_98_lot import (
     parse_tender_validity_deadline,
     merge_tender_validity_deadline,
 )

@@ -17,11 +17,11 @@ def test_opt_301_lot_tendereval_integration(tmp_path):
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
-                <cac:TenderEvaluationParty>
-                    <cac:PartyIdentification>
+                <cac:TenderEvaluationparty>
+                    <cac:partyIdentification>
                         <cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID>
-                    </cac:PartyIdentification>
-                </cac:TenderEvaluationParty>
+                    </cac:partyIdentification>
+                </cac:TenderEvaluationparty>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
     </root>

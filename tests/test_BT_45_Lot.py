@@ -1,7 +1,7 @@
-# tests/test_BT_45_Lot.py
+# tests/test_bt_45_Lot.py
 
 from lxml import etree
-from ted_and_doffin_to_ocds.converters.BT_45_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_45_lot import (
     parse_lot_rewards_other,
     merge_lot_rewards_other,
 )

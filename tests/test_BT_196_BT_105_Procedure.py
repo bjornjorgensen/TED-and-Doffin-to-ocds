@@ -1,4 +1,4 @@
-# tests/test_BT_196_BT_105_Procedure.py
+# tests/test_bt_196_bt_105_procedure.py
 
 import pytest
 import json

@@ -28,7 +28,7 @@ def test_opp_112_120_environ_legis_integration(tmp_path):
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:EnvironmentalLegislationDocumentReference>
                     <cbc:ID>Env2</cbc:ID>

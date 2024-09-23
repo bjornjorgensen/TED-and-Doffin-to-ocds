@@ -1,4 +1,4 @@
-# tests/test_BT_198_BT_142_LotResult.py
+# tests/test_bt_198_bt_142_LotResult.py
 
 import json
 import os
@@ -21,7 +21,7 @@ def test_bt_198_bt_142_lotresult_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                                 <efac:FieldsPrivacy>
@@ -29,7 +29,7 @@ def test_bt_198_bt_142_lotresult_integration(tmp_path):
                                     <efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate>
                                 </efac:FieldsPrivacy>
                             </efac:LotResult>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -73,7 +73,7 @@ def test_bt_198_bt_142_lotresult_multiple_lots(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                                 <efac:FieldsPrivacy>
@@ -88,7 +88,7 @@ def test_bt_198_bt_142_lotresult_multiple_lots(tmp_path):
                                     <efbc:PublicationDate>2025-04-30+02:00</efbc:PublicationDate>
                                 </efac:FieldsPrivacy>
                             </efac:LotResult>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

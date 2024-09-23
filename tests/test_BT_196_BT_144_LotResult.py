@@ -1,4 +1,4 @@
-# tests/test_BT_196_BT_144_LotResult.py
+# tests/test_bt_196_bt_144_LotResult.py
 
 import pytest
 import json
@@ -22,7 +22,7 @@ def test_bt_196_bt_144_lotresult_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                                 <efac:DecisionReason>
@@ -32,7 +32,7 @@ def test_bt_196_bt_144_lotresult_integration(tmp_path):
                                     </efac:FieldsPrivacy>
                                 </efac:DecisionReason>
                             </efac:LotResult>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -74,7 +74,7 @@ def test_bt_196_bt_144_lotresult_multiple_lots(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                                 <efac:DecisionReason>
@@ -93,7 +93,7 @@ def test_bt_196_bt_144_lotresult_multiple_lots(tmp_path):
                                     </efac:FieldsPrivacy>
                                 </efac:DecisionReason>
                             </efac:LotResult>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

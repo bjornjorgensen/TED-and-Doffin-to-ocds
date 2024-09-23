@@ -1,4 +1,4 @@
-# tests/test_OPT_201_Organization_TouchPoint.py
+# tests/test_OPT_201_organization_touchpoint.py
 
 import pytest
 import json
@@ -21,22 +21,22 @@ def test_opt_201_organization_touchpoint_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efac:TouchPoint>
-                                    <cac:PartyIdentification>
+                        <efac:organizations>
+                            <efac:organization>
+                                <efac:touchpoint>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:TouchPoint>
-                            </efac:Organization>
-                            <efac:Organization>
-                                <efac:TouchPoint>
-                                    <cac:PartyIdentification>
+                                    </cac:partyIdentification>
+                                </efac:touchpoint>
+                            </efac:organization>
+                            <efac:organization>
+                                <efac:touchpoint>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="touchpoint">TPO-0002</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:TouchPoint>
-                            </efac:Organization>
-                        </efac:Organizations>
+                                    </cac:partyIdentification>
+                                </efac:touchpoint>
+                            </efac:organization>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

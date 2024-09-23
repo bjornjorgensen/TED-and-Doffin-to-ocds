@@ -1,7 +1,7 @@
-# tests/test_BT_93_Lot.py
+# tests/test_bt_93_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_93_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_93_lot import (
     parse_electronic_payment,
     merge_electronic_payment,
 )

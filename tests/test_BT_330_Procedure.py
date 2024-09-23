@@ -1,6 +1,6 @@
-# tests/test_BT_330_Procedure.py
+# tests/test_bt_330_procedure.py
 
-from ted_and_doffin_to_ocds.converters.BT_330_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_330_procedure import (
     parse_group_identifier,
     merge_group_identifier,
 )

@@ -1,4 +1,4 @@
-# tests/test_BT_196_BT_193_Tender.py
+# tests/test_bt_196_bt_193_Tender.py
 
 import pytest
 import json
@@ -26,7 +26,7 @@ def test_bt196_bt193_unpublished_justification_integration(tmp_path, setup_loggi
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotTender>
                 <cbc:ID schemeName="result">TEN-0001</cbc:ID>
                 <efac:FieldsPrivacy>
@@ -34,7 +34,7 @@ def test_bt196_bt193_unpublished_justification_integration(tmp_path, setup_loggi
                     <efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription>
                 </efac:FieldsPrivacy>
             </efac:LotTender>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_bt196_bt193.xml"
@@ -73,12 +73,12 @@ def test_bt196_bt193_unpublished_justification_missing_data(tmp_path, setup_logg
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotTender>
                 <cbc:ID schemeName="result">TEN-0001</cbc:ID>
                 <!-- Missing FieldsPrivacy element -->
             </efac:LotTender>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_bt196_bt193_missing.xml"

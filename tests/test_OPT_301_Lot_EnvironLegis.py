@@ -19,11 +19,11 @@ def test_opt_301_lot_environlegis_integration(tmp_path):
             <cac:TenderingTerms>
                 <cac:EnvironmentalLegislationDocumentReference>
                     <cbc:ID>Env1</cbc:ID>
-                    <cac:IssuerParty>
-                        <cac:PartyIdentification>
+                    <cac:Issuerparty>
+                        <cac:partyIdentification>
                             <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                        </cac:PartyIdentification>
-                    </cac:IssuerParty>
+                        </cac:partyIdentification>
+                    </cac:Issuerparty>
                 </cac:EnvironmentalLegislationDocumentReference>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>

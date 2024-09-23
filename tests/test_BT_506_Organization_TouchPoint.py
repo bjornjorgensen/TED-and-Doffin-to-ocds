@@ -1,4 +1,4 @@
-# tests/test_BT_506_Organization_TouchPoint.py
+# tests/test_bt_506_organization_touchpoint.py
 
 import pytest
 import json
@@ -21,23 +21,23 @@ def test_bt_506_organization_touchpoint_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyLegalEntity>
-                                        <cbc:CompanyID>998298</cbc:CompanyID>
-                                    </cac:PartyLegalEntity>
-                                </efac:Company>
-                                <efac:TouchPoint>
-                                    <cac:PartyIdentification>
+                        <efac:organizations>
+                            <efac:organization>
+                                <efac:company>
+                                    <cac:partyLegalEntity>
+                                        <cbc:companyID>998298</cbc:companyID>
+                                    </cac:partyLegalEntity>
+                                </efac:company>
+                                <efac:touchpoint>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID>
-                                    </cac:PartyIdentification>
+                                    </cac:partyIdentification>
                                     <cac:Contact>
                                         <cbc:ElectronicMail>abc@xyz.europa.eu</cbc:ElectronicMail>
                                     </cac:Contact>
-                                </efac:TouchPoint>
-                            </efac:Organization>
-                        </efac:Organizations>
+                                </efac:touchpoint>
+                            </efac:organization>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

@@ -1,4 +1,4 @@
-# tests/test_BT_191_Tender.py
+# tests/test_bt_191_Tender.py
 
 import pytest
 import json
@@ -22,7 +22,7 @@ def test_bt_191_country_origin_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotTender>
                                 <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
                                 <efac:Origin>
@@ -32,7 +32,7 @@ def test_bt_191_country_origin_integration(tmp_path):
                                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                                 </efac:TenderLot>
                             </efac:LotTender>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

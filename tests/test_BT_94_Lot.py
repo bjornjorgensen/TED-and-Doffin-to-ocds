@@ -1,7 +1,7 @@
-# tests/test_BT_94_Lot.py
+# tests/test_bt_94_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_94_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_94_lot import (
     parse_recurrence,
     merge_recurrence,
 )

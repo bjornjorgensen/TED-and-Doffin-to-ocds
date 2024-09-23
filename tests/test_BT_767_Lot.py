@@ -1,7 +1,7 @@
-# tests/test_BT_767_Lot.py
+# tests/test_bt_767_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_767_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_767_lot import (
     parse_electronic_auction,
     merge_electronic_auction,
 )

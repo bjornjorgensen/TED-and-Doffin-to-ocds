@@ -1,4 +1,4 @@
-# tests/test_BT_197_BT_711_LotResult.py
+# tests/test_bt_197_bt_711_LotResult.py
 
 import pytest
 import json
@@ -26,7 +26,7 @@ def test_bt_197_bt711_lot_result_integration(tmp_path, setup_logging):
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotResult>
                 <efac:FieldsPrivacy>
                     <efbc:FieldIdentifierCode>ten-val-hig</efbc:FieldIdentifierCode>
@@ -34,7 +34,7 @@ def test_bt_197_bt711_lot_result_integration(tmp_path, setup_logging):
                 </efac:FieldsPrivacy>
                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
             </efac:LotResult>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_bt197_bt711.xml"
@@ -89,11 +89,11 @@ def test_bt_197_bt711_lot_result_missing_field(tmp_path, setup_logging):
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotResult>
                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
             </efac:LotResult>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_bt197_bt711_missing.xml"

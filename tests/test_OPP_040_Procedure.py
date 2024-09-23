@@ -1,4 +1,4 @@
-# tests/test_OPP_040_Procedure.py
+# tests/test_OPP_040_procedure.py
 
 import pytest
 import json

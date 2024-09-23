@@ -1,4 +1,4 @@
-# tests/test_BT_24_Procedure.py
+# tests/test_bt_24_procedure.py
 
 import pytest
 import json
@@ -15,7 +15,7 @@ def test_bt_24_procedure_description_integration(tmp_path):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProject>
-            <cbc:Description languageID="ENG">Procedure for the procurement of office furniture</cbc:Description>
+            <cbc:Description languageID="ENG">procedure for the procurement of office furniture</cbc:Description>
         </cac:ProcurementProject>
     </root>
     """
@@ -29,7 +29,7 @@ def test_bt_24_procedure_description_integration(tmp_path):
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "description" in result["tender"], "Expected 'description' in tender"
-    expected_description = "Procedure for the procurement of office furniture"
+    expected_description = "procedure for the procurement of office furniture"
     assert (
         result["tender"]["description"] == expected_description
     ), f"Expected description '{expected_description}', got {result['tender']['description']}"

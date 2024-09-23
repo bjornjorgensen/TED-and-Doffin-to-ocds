@@ -1,4 +1,4 @@
-# tests/test_BT_195_BT_105_Procedure.py
+# tests/test_bt_195_bt_105_procedure.py
 
 import pytest
 import json
@@ -57,8 +57,8 @@ def test_bt_195_bt_105_procedure_integration(tmp_path):
         withheld_info["field"] == "pro-typ"
     ), f"Expected field 'pro-typ', got {withheld_info['field']}"
     assert (
-        withheld_info["name"] == "Procedure Type"
-    ), f"Expected name 'Procedure Type', got {withheld_info['name']}"
+        withheld_info["name"] == "procedure Type"
+    ), f"Expected name 'procedure Type', got {withheld_info['name']}"
 
 
 if __name__ == "__main__":

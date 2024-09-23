@@ -1,4 +1,4 @@
-# tests/test_BT_514_UBO.py
+# tests/test_bt_514_ubo.py
 
 import pytest
 import json
@@ -21,23 +21,23 @@ def test_bt_514_ubo_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                        <efac:organizations>
+                            <efac:organization>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
                             <efac:UltimateBeneficialOwner>
-                                <cbc:ID schemeName="ubo">UBO-0001</cbc:ID>
+                                <cbc:ID schemeName="ubo">ubo-0001</cbc:ID>
                                 <cac:ResidenceAddress>
                                     <cac:Country>
                                         <cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode>
                                     </cac:Country>
                                 </cac:ResidenceAddress>
                             </efac:UltimateBeneficialOwner>
-                        </efac:Organizations>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -65,9 +65,9 @@ def test_bt_514_ubo_integration(tmp_path):
     ), f"Expected 1 beneficial owner, got {len(party['beneficialOwners'])}"
 
     ubo = party["beneficialOwners"][0]
-    assert ubo["id"] == "UBO-0001", f"Expected UBO id 'UBO-0001', got {ubo['id']}"
-    assert "address" in ubo, "Expected 'address' in UBO"
-    assert "country" in ubo["address"], "Expected 'country' in UBO address"
+    assert ubo["id"] == "ubo-0001", f"Expected ubo id 'ubo-0001', got {ubo['id']}"
+    assert "address" in ubo, "Expected 'address' in ubo"
+    assert "country" in ubo["address"], "Expected 'country' in ubo address"
     assert (
         ubo["address"]["country"] == "GB"
     ), f"Expected country 'GB', got {ubo['address']['country']}"

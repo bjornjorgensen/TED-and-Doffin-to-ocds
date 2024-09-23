@@ -1,7 +1,7 @@
-# tests/test_BT_300_Part.py
+# tests/test_bt_300_part.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_300_Part import (
+from ted_and_doffin_to_ocds.converters.bt_300_part import (
     parse_part_additional_info,
     merge_part_additional_info,
 )
@@ -12,7 +12,7 @@ def test_parse_part_additional_info():
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:ProcurementProject>
                 <cbc:Note languageID="ENG">For the current procedure ...</cbc:Note>
             </cac:ProcurementProject>

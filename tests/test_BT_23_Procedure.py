@@ -1,4 +1,4 @@
-# tests/test_BT_23_Procedure.py
+# tests/test_bt_23_procedure.py
 
 import pytest
 import sys
@@ -6,7 +6,7 @@ import os
 
 # Add the parent directory to sys.path to import the converter
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from ted_and_doffin_to_ocds.converters.BT_23_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_23_procedure import (
     parse_main_nature_procedure,
     merge_main_nature_procedure,
 )

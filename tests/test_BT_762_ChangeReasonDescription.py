@@ -1,4 +1,4 @@
-# tests/test_BT_762_ChangeReasonDescription.py
+# tests/test_bt_762_ChangeReasonDescription.py
 
 import pytest
 import json

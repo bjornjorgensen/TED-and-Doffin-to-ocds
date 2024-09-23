@@ -1,4 +1,4 @@
-# tests/test_BT_24_LotsGroup.py
+# tests/test_bt_24_LotsGroup.py
 
 import pytest
 import json
@@ -17,7 +17,7 @@ def test_bt_24_lots_group_description_integration(tmp_path):
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID>
             <cac:ProcurementProject>
-                <cbc:Description languageID="ENG">Procedure for the procurement of office equipment</cbc:Description>
+                <cbc:Description languageID="ENG">procedure for the procurement of office equipment</cbc:Description>
             </cac:ProcurementProject>
         </cac:ProcurementProjectLot>
     </root>
@@ -41,7 +41,7 @@ def test_bt_24_lots_group_description_integration(tmp_path):
         lot_group["id"] == "GLO-0001"
     ), f"Expected lot group id 'GLO-0001', got {lot_group['id']}"
     assert "description" in lot_group, "Expected 'description' in lot group"
-    expected_description = "Procedure for the procurement of office equipment"
+    expected_description = "procedure for the procurement of office equipment"
     assert (
         lot_group["description"] == expected_description
     ), f"Expected description '{expected_description}', got {lot_group['description']}"

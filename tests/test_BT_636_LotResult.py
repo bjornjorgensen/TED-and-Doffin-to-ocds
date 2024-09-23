@@ -1,7 +1,7 @@
-# tests/test_BT_636_LotResult.py
+# tests/test_bt_636_LotResult.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_636_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_636_lotresult import (
     parse_irregularity_type,
     merge_irregularity_type,
     IRREGULARITY_TYPE_MAPPING,
@@ -14,7 +14,7 @@ def test_parse_irregularity_type():
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotResult>
                 <efac:AppealRequestsStatistics>
                     <efbc:StatisticsCode listName="irregularity-type">unj-lim-subc</efbc:StatisticsCode>
@@ -23,7 +23,7 @@ def test_parse_irregularity_type():
                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                 </efac:TenderLot>
             </efac:LotResult>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
 

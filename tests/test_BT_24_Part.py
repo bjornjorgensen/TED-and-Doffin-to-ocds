@@ -1,4 +1,4 @@
-# tests/test_BT_24_Part.py
+# tests/test_bt_24_part.py
 
 import pytest
 import json
@@ -15,9 +15,9 @@ def test_bt_24_part_description_integration(tmp_path):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:ProcurementProject>
-                <cbc:Description languageID="ENG">Procedure for the procurement of IT services</cbc:Description>
+                <cbc:Description languageID="ENG">procedure for the procurement of IT services</cbc:Description>
             </cac:ProcurementProject>
         </cac:ProcurementProjectLot>
     </root>
@@ -32,7 +32,7 @@ def test_bt_24_part_description_integration(tmp_path):
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "description" in result["tender"], "Expected 'description' in tender"
-    expected_description = "Procedure for the procurement of IT services"
+    expected_description = "procedure for the procurement of IT services"
     assert (
         result["tender"]["description"] == expected_description
     ), f"Expected description '{expected_description}', got {result['tender']['description']}"

@@ -1,4 +1,4 @@
-# tests/test_BT_660_LotResult.py
+# tests/test_bt_660_LotResult.py
 
 import pytest
 import json
@@ -14,7 +14,7 @@ def test_bt_660_lotresult_integration(tmp_path):
     <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotResult>
                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                 <efac:FrameworkAgreementValues>
@@ -24,7 +24,7 @@ def test_bt_660_lotresult_integration(tmp_path):
                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                 </efac:TenderLot>
             </efac:LotResult>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_framework_reestimated_value.xml"

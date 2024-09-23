@@ -1,4 +1,4 @@
-# tests/test_OPP_090_Procedure.py
+# tests/test_OPP_090_procedure.py
 
 import pytest
 import json
@@ -15,14 +15,14 @@ def test_opp_090_procedure_integration(tmp_path):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:TenderingProcess>
-            <cac:NoticeDocumentReference>
+            <cac:noticeDocumentReference>
                 <cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID>
-            </cac:NoticeDocumentReference>
+            </cac:noticeDocumentReference>
         </cac:TenderingProcess>
         <cac:TenderingProcess>
-            <cac:NoticeDocumentReference>
+            <cac:noticeDocumentReference>
                 <cbc:ID schemeName="notice-id-ref">987e6543-e21b-12d3-a456-426614174000-07</cbc:ID>
-            </cac:NoticeDocumentReference>
+            </cac:noticeDocumentReference>
         </cac:TenderingProcess>
     </root>
     """

@@ -1,4 +1,4 @@
-# tests/test_BT_151_Contract.py
+# tests/test_bt_151_Contract.py
 
 import pytest
 import json
@@ -20,7 +20,7 @@ def test_bt_151_contract_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:SettledContract>
                                 <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                                 <cbc:URI>http://mycontract.acme.com/1234/</cbc:URI>
@@ -31,7 +31,7 @@ def test_bt_151_contract_integration(tmp_path):
                                     <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                                 </efac:SettledContract>
                             </efac:LotResult>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

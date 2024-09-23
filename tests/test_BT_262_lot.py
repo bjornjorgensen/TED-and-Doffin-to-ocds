@@ -1,4 +1,4 @@
-# tests/test_BT_262_lot.py
+# tests/test_bt_262_lot.py
 
 import pytest
 import os

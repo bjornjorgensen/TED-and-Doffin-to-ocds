@@ -1,4 +1,4 @@
-# tests/test_OPT_160_UBO.py
+# tests/test_OPT_160_ubo.py
 
 import pytest
 import json
@@ -21,19 +21,19 @@ def test_ubo_first_name_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                        <efac:organizations>
+                            <efac:organization>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
                             <efac:UltimateBeneficialOwner>
-                                <cbc:ID schemeName="ubo">UBO-0001</cbc:ID>
+                                <cbc:ID schemeName="ubo">ubo-0001</cbc:ID>
                                 <cbc:FirstName>Mickey</cbc:FirstName>
                             </efac:UltimateBeneficialOwner>
-                        </efac:Organizations>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -55,7 +55,7 @@ def test_ubo_first_name_integration(tmp_path):
     assert "beneficialOwners" in party
     assert len(party["beneficialOwners"]) == 1
     bo = party["beneficialOwners"][0]
-    assert bo["id"] == "UBO-0001"
+    assert bo["id"] == "ubo-0001"
     assert bo["name"] == "Mickey"
 
 
@@ -70,15 +70,15 @@ def test_ubo_first_name_no_data(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                        <efac:organizations>
+                            <efac:organization>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
-                        </efac:Organizations>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

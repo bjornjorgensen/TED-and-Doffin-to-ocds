@@ -1,4 +1,4 @@
-# tests/test_BT_196_BT_541_LotsGroup_Weight.py
+# tests/test_bt_196_bt_541_lotsgroup_weight.py
 
 import pytest
 import json

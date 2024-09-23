@@ -1,4 +1,4 @@
-# tests/test_BT_195_BT_773_Tender.py
+# tests/test_bt_195_bt_773_Tender.py
 
 import pytest
 import json
@@ -30,7 +30,7 @@ def test_bt_195_bt773_tender_integration(tmp_path, setup_logging):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotTender>
                                 <cbc:ID schemeName="result">TEN-0001</cbc:ID>
                                 <efac:SubcontractingTerm>
@@ -40,7 +40,7 @@ def test_bt_195_bt773_tender_integration(tmp_path, setup_logging):
                                     </efac:FieldsPrivacy>
                                 </efac:SubcontractingTerm>
                             </efac:LotTender>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

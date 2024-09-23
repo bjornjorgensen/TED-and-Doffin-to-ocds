@@ -1,4 +1,4 @@
-# tests/test_BT_163_Tender.py
+# tests/test_bt_163_Tender.py
 
 import pytest
 import json
@@ -21,7 +21,7 @@ def test_bt_163_tender_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                                 <efac:LotTender>
@@ -37,7 +37,7 @@ def test_bt_163_tender_integration(tmp_path):
                                     <efbc:ValueDescription>The awarded value takes into account the growing revenue expected from fees.</efbc:ValueDescription>
                                 </efac:ConcessionRevenue>
                             </efac:LotTender>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

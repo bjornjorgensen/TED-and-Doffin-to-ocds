@@ -1,6 +1,6 @@
-# tests/test_BT_202_Contract.py
+# tests/test_bt_202_Contract.py
 
-from ted_and_doffin_to_ocds.converters.BT_202_Contract import (
+from ted_and_doffin_to_ocds.converters.bt_202_contract import (
     parse_contract_modification_summary,
     merge_contract_modification_summary,
 )
@@ -22,14 +22,14 @@ def test_parse_contract_modification_summary():
                 </efac:ChangedSection>
             </efac:Change>
         </efac:ContractModification>
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotResult>
                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                 <efac:SettledContract>
                     <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                 </efac:SettledContract>
             </efac:LotResult>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
 

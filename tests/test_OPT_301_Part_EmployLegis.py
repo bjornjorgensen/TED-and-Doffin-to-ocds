@@ -1,4 +1,4 @@
-# tests/test_OPT_301_Part_EmployLegis.py
+# tests/test_OPT_301_part_EmployLegis.py
 
 import pytest
 import os
@@ -14,7 +14,7 @@ def test_opt_301_part_employlegis_integration(tmp_path):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:EmploymentLegislationDocumentReference>
                     <cbc:ID>Empl2</cbc:ID>

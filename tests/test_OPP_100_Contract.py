@@ -21,12 +21,12 @@ def test_opp_100_contract_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:SettledContract>
                                 <cbc:ID schemeName="contract">CON-0001</cbc:ID>
-                                <cac:NoticeDocumentReference>
+                                <cac:noticeDocumentReference>
                                     <cbc:ID schemeName="ojs-notice-id">62783-2020</cbc:ID>
-                                </cac:NoticeDocumentReference>
+                                </cac:noticeDocumentReference>
                             </efac:SettledContract>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
@@ -34,7 +34,7 @@ def test_opp_100_contract_integration(tmp_path):
                                     <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                                 </efac:SettledContract>
                             </efac:LotResult>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

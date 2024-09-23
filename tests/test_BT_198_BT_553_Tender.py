@@ -1,4 +1,4 @@
-# tests/test_BT_198_BT_553_Tender.py
+# tests/test_bt_198_bt_553_Tender.py
 
 import pytest
 import json
@@ -30,7 +30,7 @@ def test_bt198_bt553_tender_integration(tmp_path, setup_logging):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotTender>
                                 <efac:SubcontractingTerm>
                                     <efbc:TermCode listName="applicability"/>
@@ -40,7 +40,7 @@ def test_bt198_bt553_tender_integration(tmp_path, setup_logging):
                                     </efac:FieldsPrivacy>
                                 </efac:SubcontractingTerm>
                             </efac:LotTender>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -85,11 +85,11 @@ def test_bt198_bt553_tender_missing_data(tmp_path, setup_logging):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotTender>
                                 <!-- Missing SubcontractingTerm element -->
                             </efac:LotTender>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

@@ -1,7 +1,7 @@
-# tests/test_OPT_202_UBO.py
+# tests/test_OPT_202_ubo.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.OPT_202_UBO import (
+from ted_and_doffin_to_ocds.converters.opt_202_ubo import (
     parse_ubo_identifier,
     merge_ubo_identifier,
 )
@@ -25,21 +25,21 @@ def test_parse_ubo_identifier():
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                        <efac:organizations>
+                            <efac:organization>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
                             <efac:UltimateBeneficialOwner>
-                                <cbc:ID schemeName="ubo">UBO-0001</cbc:ID>
+                                <cbc:ID schemeName="ubo">ubo-0001</cbc:ID>
                             </efac:UltimateBeneficialOwner>
                             <efac:UltimateBeneficialOwner>
-                                <cbc:ID schemeName="ubo">UBO-0002</cbc:ID>
+                                <cbc:ID schemeName="ubo">ubo-0002</cbc:ID>
                             </efac:UltimateBeneficialOwner>
-                        </efac:Organizations>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -55,18 +55,18 @@ def test_parse_ubo_identifier():
     assert result["parties"][0]["id"] == "ORG-0001"
     assert "beneficialOwners" in result["parties"][0]
     assert len(result["parties"][0]["beneficialOwners"]) == 2
-    assert result["parties"][0]["beneficialOwners"][0]["id"] == "UBO-0001"
-    assert result["parties"][0]["beneficialOwners"][1]["id"] == "UBO-0002"
+    assert result["parties"][0]["beneficialOwners"][0]["id"] == "ubo-0001"
+    assert result["parties"][0]["beneficialOwners"][1]["id"] == "ubo-0002"
 
 
 def test_merge_ubo_identifier():
-    release_json = {"parties": [{"id": "ORG-0001", "name": "Existing Organization"}]}
+    release_json = {"parties": [{"id": "ORG-0001", "name": "Existing organization"}]}
 
     ubo_data = {
         "parties": [
             {
                 "id": "ORG-0001",
-                "beneficialOwners": [{"id": "UBO-0001"}, {"id": "UBO-0002"}],
+                "beneficialOwners": [{"id": "ubo-0001"}, {"id": "ubo-0002"}],
             },
         ],
     }
@@ -75,19 +75,19 @@ def test_merge_ubo_identifier():
 
     assert "beneficialOwners" in release_json["parties"][0]
     assert len(release_json["parties"][0]["beneficialOwners"]) == 2
-    assert release_json["parties"][0]["beneficialOwners"][0]["id"] == "UBO-0001"
-    assert release_json["parties"][0]["beneficialOwners"][1]["id"] == "UBO-0002"
+    assert release_json["parties"][0]["beneficialOwners"][0]["id"] == "ubo-0001"
+    assert release_json["parties"][0]["beneficialOwners"][1]["id"] == "ubo-0002"
 
 
 def test_parse_ubo_identifier_no_data():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:Party>
-            <cac:PartyName>
-                <cbc:Name>Test Organization</cbc:Name>
-            </cac:PartyName>
-        </cac:Party>
+        <cac:party>
+            <cac:partyName>
+                <cbc:Name>Test organization</cbc:Name>
+            </cac:partyName>
+        </cac:party>
     </root>
     """
 
@@ -97,7 +97,7 @@ def test_parse_ubo_identifier_no_data():
 
 
 def test_merge_ubo_identifier_no_data():
-    release_json = {"parties": [{"id": "ORG-0001", "name": "Existing Organization"}]}
+    release_json = {"parties": [{"id": "ORG-0001", "name": "Existing organization"}]}
 
     ubo_data = None
 
@@ -117,21 +117,21 @@ def test_opt_202_ubo_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                        <efac:organizations>
+                            <efac:organization>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
                             <efac:UltimateBeneficialOwner>
-                                <cbc:ID schemeName="ubo">UBO-0001</cbc:ID>
+                                <cbc:ID schemeName="ubo">ubo-0001</cbc:ID>
                             </efac:UltimateBeneficialOwner>
                             <efac:UltimateBeneficialOwner>
-                                <cbc:ID schemeName="ubo">UBO-0002</cbc:ID>
+                                <cbc:ID schemeName="ubo">ubo-0002</cbc:ID>
                             </efac:UltimateBeneficialOwner>
-                        </efac:Organizations>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -151,8 +151,8 @@ def test_opt_202_ubo_integration(tmp_path):
     assert result["parties"][0]["id"] == "ORG-0001"
     assert "beneficialOwners" in result["parties"][0]
     assert len(result["parties"][0]["beneficialOwners"]) == 2
-    assert result["parties"][0]["beneficialOwners"][0]["id"] == "UBO-0001"
-    assert result["parties"][0]["beneficialOwners"][1]["id"] == "UBO-0002"
+    assert result["parties"][0]["beneficialOwners"][0]["id"] == "ubo-0001"
+    assert result["parties"][0]["beneficialOwners"][1]["id"] == "ubo-0002"
 
 
 if __name__ == "__main__":

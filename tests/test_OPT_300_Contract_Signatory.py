@@ -20,26 +20,26 @@ def test_opt_300_contract_signatory_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                        <efac:organizations>
+                            <efac:organization>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                    <cac:PartyName>
+                                    </cac:partyIdentification>
+                                    <cac:partyName>
                                         <cbc:Name languageID="ENG">Financial Administration for ...</cbc:Name>
-                                    </cac:PartyName>
-                                </efac:Company>
-                            </efac:Organization>
-                        </efac:Organizations>
-                        <efac:NoticeResult>
+                                    </cac:partyName>
+                                </efac:company>
+                            </efac:organization>
+                        </efac:organizations>
+                        <efac:noticeResult>
                             <efac:SettledContract>
                                 <cbc:ID schemeName="contract">CON-0001</cbc:ID>
-                                <cac:SignatoryParty>
-                                    <cac:PartyIdentification>
+                                <cac:Signatoryparty>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </cac:SignatoryParty>
+                                    </cac:partyIdentification>
+                                </cac:Signatoryparty>
                             </efac:SettledContract>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
@@ -47,7 +47,7 @@ def test_opt_300_contract_signatory_integration(tmp_path):
                                     <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                                 </efac:SettledContract>
                             </efac:LotResult>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

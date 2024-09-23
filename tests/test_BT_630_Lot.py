@@ -1,7 +1,7 @@
-# tests/test_BT_630_Lot.py
+# tests/test_bt_630_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_630_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_630_lot import (
     parse_deadline_receipt_expressions,
     merge_deadline_receipt_expressions,
 )

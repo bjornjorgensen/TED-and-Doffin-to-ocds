@@ -1,4 +1,4 @@
-# tests/test_BT_198_BT_171_Tender.py
+# tests/test_bt_198_bt_171_Tender.py
 
 import pytest
 import json
@@ -26,7 +26,7 @@ def test_bt198_bt171_unpublished_access_date_integration(tmp_path, setup_logging
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotTender>
                 <cbc:ID schemeName="result">TEN-0001</cbc:ID>
                 <efac:FieldsPrivacy>
@@ -34,7 +34,7 @@ def test_bt198_bt171_unpublished_access_date_integration(tmp_path, setup_logging
                     <efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate>
                 </efac:FieldsPrivacy>
             </efac:LotTender>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_bt198_bt171.xml"
@@ -71,12 +71,12 @@ def test_bt198_bt171_unpublished_access_date_missing_data(tmp_path, setup_loggin
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:LotTender>
                 <cbc:ID schemeName="result">TEN-0001</cbc:ID>
                 <!-- Missing FieldsPrivacy element -->
             </efac:LotTender>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_bt198_bt171_missing.xml"

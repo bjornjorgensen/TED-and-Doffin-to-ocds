@@ -1,4 +1,4 @@
-# tests/test_BT_115_GPA_Coverage.py
+# tests/test_bt_115_GPA_Coverage.py
 
 import pytest
 import json
@@ -27,7 +27,7 @@ def test_bt_115_gpa_coverage_integration(tmp_path):
             </cac:TenderingProcess>
         </cac:ProcurementProjectLot>
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:TenderingProcess>
                 <cbc:GovernmentAgreementConstraintIndicator>true</cbc:GovernmentAgreementConstraintIndicator>
             </cac:TenderingProcess>

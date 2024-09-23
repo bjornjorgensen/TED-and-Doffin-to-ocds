@@ -1,4 +1,4 @@
-# tests/test_BT_03.py
+# tests/test_bt_03.py
 
 import pytest
 import json
@@ -13,7 +13,7 @@ from src.ted_and_doffin_to_ocds.main import main
 def test_bt_03_form_type_integration(tmp_path):
     xml_content = """
     <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cbc:NoticeTypeCode listName="competition">cn-standard</cbc:NoticeTypeCode>
+        <cbc:noticeTypeCode listName="competition">cn-standard</cbc:noticeTypeCode>
     </root>
     """
     xml_file = tmp_path / "test_input_form_type.xml"
@@ -36,8 +36,8 @@ def test_bt_03_form_type_integration(tmp_path):
 def test_bt_03_form_type_integration_multiple(tmp_path):
     xml_content = """
     <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cbc:NoticeTypeCode listName="planning">pin-only</cbc:NoticeTypeCode>
-        <cbc:NoticeTypeCode listName="result">can-standard</cbc:NoticeTypeCode>
+        <cbc:noticeTypeCode listName="planning">pin-only</cbc:noticeTypeCode>
+        <cbc:noticeTypeCode listName="result">can-standard</cbc:noticeTypeCode>
     </root>
     """
     xml_file = tmp_path / "test_input_form_type_multiple.xml"
@@ -64,7 +64,7 @@ def test_bt_03_form_type_integration_multiple(tmp_path):
 def test_bt_03_form_type_integration_invalid(tmp_path):
     xml_content = """
     <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cbc:NoticeTypeCode listName="invalid">invalid-type</cbc:NoticeTypeCode>
+        <cbc:noticeTypeCode listName="invalid">invalid-type</cbc:noticeTypeCode>
     </root>
     """
     xml_file = tmp_path / "test_input_form_type_invalid.xml"

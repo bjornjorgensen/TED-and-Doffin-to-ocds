@@ -1,4 +1,4 @@
-# tests/test_BT_24_Lot.py
+# tests/test_bt_24_Lot.py
 
 import pytest
 import json
@@ -17,7 +17,7 @@ def test_bt_24_lot_description_integration(tmp_path):
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:ProcurementProject>
-                <cbc:Description languageID="ENG">Procedure for the procurement of office supplies</cbc:Description>
+                <cbc:Description languageID="ENG">procedure for the procurement of office supplies</cbc:Description>
             </cac:ProcurementProject>
         </cac:ProcurementProjectLot>
     </root>
@@ -39,7 +39,7 @@ def test_bt_24_lot_description_integration(tmp_path):
     lot = result["tender"]["lots"][0]
     assert lot["id"] == "LOT-0001", f"Expected lot id 'LOT-0001', got {lot['id']}"
     assert "description" in lot, "Expected 'description' in lot"
-    expected_description = "Procedure for the procurement of office supplies"
+    expected_description = "procedure for the procurement of office supplies"
     assert (
         lot["description"] == expected_description
     ), f"Expected description '{expected_description}', got {lot['description']}"

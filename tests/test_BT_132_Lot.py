@@ -1,7 +1,7 @@
-# tests/test_BT_132_Lot.py
+# tests/test_bt_132_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_132_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_132_lot import (
     parse_lot_public_opening_date,
     merge_lot_public_opening_date,
 )

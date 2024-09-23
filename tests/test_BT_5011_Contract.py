@@ -1,4 +1,4 @@
-# tests/test_BT_5011_Contract.py
+# tests/test_bt_5011_Contract.py
 
 import pytest
 import json
@@ -17,7 +17,7 @@ def test_bt_5011_contract_integration(tmp_path):
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
+        <efac:noticeResult>
             <efac:SettledContract>
                 <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                 <efac:Funding>
@@ -30,7 +30,7 @@ def test_bt_5011_contract_integration(tmp_path):
                     <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                 </efac:SettledContract>
             </efac:LotResult>
-        </efac:NoticeResult>
+        </efac:noticeResult>
     </root>
     """
     xml_file = tmp_path / "test_input_contract_eu_funds_financing_identifier.xml"
@@ -66,11 +66,11 @@ def test_bt_5011_contract_integration(tmp_path):
         finance[0]["id"] == "2021/1234"
     ), f"Expected finance id '2021/1234', got {finance[0]['id']}"
     assert (
-        finance[0]["financingParty"]["name"] == "European Union"
-    ), "Expected financingParty name to be 'European Union'"
+        finance[0]["financingparty"]["name"] == "European Union"
+    ), "Expected financingparty name to be 'European Union'"
     assert (
-        finance[0]["financingParty"]["id"] == eu_party["id"]
-    ), "Expected financingParty id to match European Union party id"
+        finance[0]["financingparty"]["id"] == eu_party["id"]
+    ), "Expected financingparty id to match European Union party id"
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-# tests/test_BT_500_UBO.py
+# tests/test_bt_500_ubo.py
 
 import pytest
 import json
@@ -21,19 +21,19 @@ def test_bt_500_ubo_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
+                        <efac:organizations>
+                            <efac:organization>
+                                <efac:company>
+                                    <cac:partyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
+                                    </cac:partyIdentification>
+                                </efac:company>
+                            </efac:organization>
                             <efac:UltimateBeneficialOwner>
-                                <cbc:ID schemeName="ubo">UBO-0001</cbc:ID>
+                                <cbc:ID schemeName="ubo">ubo-0001</cbc:ID>
                                 <cbc:FamilyName>Mouse</cbc:FamilyName>
                             </efac:UltimateBeneficialOwner>
-                        </efac:Organizations>
+                        </efac:organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -61,8 +61,8 @@ def test_bt_500_ubo_integration(tmp_path):
     ), f"Expected 1 beneficial owner, got {len(party['beneficialOwners'])}"
 
     ubo = party["beneficialOwners"][0]
-    assert ubo["id"] == "UBO-0001", f"Expected UBO id 'UBO-0001', got {ubo['id']}"
-    assert ubo["name"] == "Mouse", f"Expected UBO name 'Mouse', got {ubo['name']}"
+    assert ubo["id"] == "ubo-0001", f"Expected ubo id 'ubo-0001', got {ubo['id']}"
+    assert ubo["name"] == "Mouse", f"Expected ubo name 'Mouse', got {ubo['name']}"
 
 
 if __name__ == "__main__":

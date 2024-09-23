@@ -1,4 +1,4 @@
-# tests/test_BT_720_Tender.py
+# tests/test_bt_720_Tender.py
 
 import pytest
 import json

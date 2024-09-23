@@ -1,4 +1,4 @@
-# tests/test_BT_195_BT_1252_Procedure.py
+# tests/test_bt_195_bt_1252_procedure.py
 
 import pytest
 import json
@@ -59,8 +59,8 @@ def test_bt_195_bt_1252_procedure_integration(tmp_path):
     ), f"Expected field 'dir-awa-pre', got {withheld_info['field']}"
     assert (
         withheld_info["name"]
-        == "Direct Award Justification Previous Procedure Identifier"
-    ), f"Expected name 'Direct Award Justification Previous Procedure Identifier', got {withheld_info['name']}"
+        == "Direct Award Justification Previous procedure Identifier"
+    ), f"Expected name 'Direct Award Justification Previous procedure Identifier', got {withheld_info['name']}"
 
 
 if __name__ == "__main__":

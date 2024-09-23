@@ -1,4 +1,4 @@
-# tests/test_BT_125_Part.py
+# tests/test_bt_125_part.py
 
 import pytest
 import json
@@ -19,12 +19,12 @@ def test_bt_125_part_integration(tmp_path, caplog):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
             <cac:TenderingProcess>
-                <cac:NoticeDocumentReference>
+                <cac:noticeDocumentReference>
                     <cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID>
                     <cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress>
-                </cac:NoticeDocumentReference>
+                </cac:noticeDocumentReference>
             </cac:TenderingProcess>
         </cac:ProcurementProjectLot>
     </root>

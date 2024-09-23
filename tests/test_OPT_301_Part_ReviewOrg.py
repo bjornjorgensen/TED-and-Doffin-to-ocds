@@ -1,4 +1,4 @@
-# tests/test_OPT_301_Part_ReviewOrg.py
+# tests/test_OPT_301_part_ReviewOrg.py
 
 import pytest
 import os
@@ -14,14 +14,14 @@ def test_opt_301_part_revieworg_integration(tmp_path):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">1</cbc:ID>
+            <cbc:ID schemeName="part">1</cbc:ID>
             <cac:TenderingTerms>
                 <cac:AppealTerms>
-                    <cac:AppealReceiverParty>
-                        <cac:PartyIdentification>
+                    <cac:AppealReceiverparty>
+                        <cac:partyIdentification>
                             <cbc:ID schemeName="touchpoint">TPO-0003</cbc:ID>
-                        </cac:PartyIdentification>
-                    </cac:AppealReceiverParty>
+                        </cac:partyIdentification>
+                    </cac:AppealReceiverparty>
                 </cac:AppealTerms>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>

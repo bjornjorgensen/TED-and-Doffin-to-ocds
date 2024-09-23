@@ -1,7 +1,7 @@
-# tests/test_BT_77_Lot.py
+# tests/test_bt_77_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_77_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_77_lot import (
     parse_financial_terms,
     merge_financial_terms,
 )

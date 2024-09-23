@@ -1,4 +1,4 @@
-# tests/test_BT_763_LotsAllRequired.py
+# tests/test_bt_763_LotsAllRequired.py
 
 import pytest
 import json
@@ -24,7 +24,7 @@ def test_bt_763_lots_all_required_integration(tmp_path, setup_logging):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:TenderingProcess>
-            <cbc:PartPresentationCode listName="tenderlot-presentation">all</cbc:PartPresentationCode>
+            <cbc:partPresentationCode listName="tenderlot-presentation">all</cbc:partPresentationCode>
         </cac:TenderingProcess>
     </root>
     """
@@ -57,7 +57,7 @@ def test_bt_763_lots_all_required_not_all(tmp_path, setup_logging):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:TenderingProcess>
-            <cbc:PartPresentationCode listName="tenderlot-presentation">some</cbc:PartPresentationCode>
+            <cbc:partPresentationCode listName="tenderlot-presentation">some</cbc:partPresentationCode>
         </cac:TenderingProcess>
     </root>
     """
@@ -73,7 +73,7 @@ def test_bt_763_lots_all_required_not_all(tmp_path, setup_logging):
 
     assert "tender" not in result or (
         "lotDetails" not in result.get("tender", {})
-    ), "Did not expect 'lotDetails' in result when PartPresentationCode is not 'all'"
+    ), "Did not expect 'lotDetails' in result when partPresentationCode is not 'all'"
 
 
 def test_bt_763_lots_all_required_missing_element(tmp_path, setup_logging):
@@ -83,7 +83,7 @@ def test_bt_763_lots_all_required_missing_element(tmp_path, setup_logging):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:TenderingProcess>
-            <!-- PartPresentationCode is missing -->
+            <!-- partPresentationCode is missing -->
         </cac:TenderingProcess>
     </root>
     """
@@ -99,7 +99,7 @@ def test_bt_763_lots_all_required_missing_element(tmp_path, setup_logging):
 
     assert "tender" not in result or (
         "lotDetails" not in result.get("tender", {})
-    ), "Did not expect 'lotDetails' in result when PartPresentationCode is missing"
+    ), "Did not expect 'lotDetails' in result when partPresentationCode is missing"
 
 
 def test_bt_763_lots_all_required_empty_value(tmp_path, setup_logging):
@@ -109,7 +109,7 @@ def test_bt_763_lots_all_required_empty_value(tmp_path, setup_logging):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:TenderingProcess>
-            <cbc:PartPresentationCode listName="tenderlot-presentation"></cbc:PartPresentationCode>
+            <cbc:partPresentationCode listName="tenderlot-presentation"></cbc:partPresentationCode>
         </cac:TenderingProcess>
     </root>
     """
@@ -125,7 +125,7 @@ def test_bt_763_lots_all_required_empty_value(tmp_path, setup_logging):
 
     assert "tender" not in result or (
         "lotDetails" not in result.get("tender", {})
-    ), "Did not expect 'lotDetails' in result when PartPresentationCode is empty"
+    ), "Did not expect 'lotDetails' in result when partPresentationCode is empty"
 
 
 def test_bt_763_lots_all_required_case_insensitive(tmp_path, setup_logging):
@@ -135,7 +135,7 @@ def test_bt_763_lots_all_required_case_insensitive(tmp_path, setup_logging):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:TenderingProcess>
-            <cbc:PartPresentationCode listName="tenderlot-presentation">ALL</cbc:PartPresentationCode>
+            <cbc:partPresentationCode listName="tenderlot-presentation">ALL</cbc:partPresentationCode>
         </cac:TenderingProcess>
     </root>
     """

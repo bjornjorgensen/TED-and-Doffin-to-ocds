@@ -1,7 +1,7 @@
-# tests/test_BT_736_Lot.py
+# tests/test_bt_736_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_736_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_736_lot import (
     parse_reserved_execution,
     merge_reserved_execution,
 )

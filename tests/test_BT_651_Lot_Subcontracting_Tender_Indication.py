@@ -1,6 +1,6 @@
-# tests/test_BT_651_Lot_Subcontracting_Tender_Indication.py
+# tests/test_bt_651_Lot_Subcontracting_Tender_Indication.py
 
-from ted_and_doffin_to_ocds.converters.BT_651_Lot_Subcontracting_Tender_Indication import (
+from ted_and_doffin_to_ocds.converters.bt_651_lot_subcontracting_tender_indication import (
     parse_subcontracting_tender_indication,
     merge_subcontracting_tender_indication,
 )

@@ -1,7 +1,7 @@
-# tests/test_BT_16_Organization_TouchPoint.py
+# tests/test_bt_16_organization_touchpoint.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_16_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.bt_16_organization_touchpoint import (
     parse_organization_touchpoint_part_name,
     merge_organization_touchpoint_part_name,
 )
@@ -19,26 +19,26 @@ def test_parse_organization_touchpoint_part_name():
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
-        <efac:Organizations>
-            <efac:Organization>
-                <efac:Company>
-                    <cac:PartyLegalEntity>
-                        <cbc:CompanyID>998298</cbc:CompanyID>
-                    </cac:PartyLegalEntity>
-                </efac:Company>
-                <efac:TouchPoint>
-                    <cac:PartyIdentification>
+        <efac:organizations>
+            <efac:organization>
+                <efac:company>
+                    <cac:partyLegalEntity>
+                        <cbc:companyID>998298</cbc:companyID>
+                    </cac:partyLegalEntity>
+                </efac:company>
+                <efac:touchpoint>
+                    <cac:partyIdentification>
                         <cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID>
-                    </cac:PartyIdentification>
-                    <cac:PartyName>
+                    </cac:partyIdentification>
+                    <cac:partyName>
                         <cbc:Name>Ministry of Education</cbc:Name>
-                    </cac:PartyName>
+                    </cac:partyName>
                     <cac:PostalAddress>
                         <cbc:Department>Legal Department</cbc:Department>
                     </cac:PostalAddress>
-                </efac:TouchPoint>
-            </efac:Organization>
-        </efac:Organizations>
+                </efac:touchpoint>
+            </efac:organization>
+        </efac:organizations>
     </root>
     """
 
@@ -84,26 +84,26 @@ def test_bt_16_organization_touchpoint_integration(tmp_path):
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
-        <efac:Organizations>
-            <efac:Organization>
-                <efac:Company>
-                    <cac:PartyLegalEntity>
-                        <cbc:CompanyID>998298</cbc:CompanyID>
-                    </cac:PartyLegalEntity>
-                </efac:Company>
-                <efac:TouchPoint>
-                    <cac:PartyIdentification>
+        <efac:organizations>
+            <efac:organization>
+                <efac:company>
+                    <cac:partyLegalEntity>
+                        <cbc:companyID>998298</cbc:companyID>
+                    </cac:partyLegalEntity>
+                </efac:company>
+                <efac:touchpoint>
+                    <cac:partyIdentification>
                         <cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID>
-                    </cac:PartyIdentification>
-                    <cac:PartyName>
+                    </cac:partyIdentification>
+                    <cac:partyName>
                         <cbc:Name>Ministry of Education</cbc:Name>
-                    </cac:PartyName>
+                    </cac:partyName>
                     <cac:PostalAddress>
                         <cbc:Department>Legal Department</cbc:Department>
                     </cac:PostalAddress>
-                </efac:TouchPoint>
-            </efac:Organization>
-        </efac:Organizations>
+                </efac:touchpoint>
+            </efac:organization>
+        </efac:organizations>
     </root>
     """
     xml_file = tmp_path / "test_input_organization_touchpoint_part_name.xml"

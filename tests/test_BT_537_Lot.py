@@ -1,7 +1,7 @@
-# tests/test_BT_537_Lot.py
+# tests/test_bt_537_Lot.py
 
 import pytest
-from ted_and_doffin_to_ocds.converters.BT_537_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_537_lot import (
     parse_lot_duration_end_date,
     merge_lot_duration_end_date,
 )

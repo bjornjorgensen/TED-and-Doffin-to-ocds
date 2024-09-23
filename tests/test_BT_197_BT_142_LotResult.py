@@ -1,4 +1,4 @@
-# tests/test_BT_197_BT_142_LotResult.py
+# tests/test_bt_197_bt_142_LotResult.py
 
 import pytest
 import json
@@ -22,7 +22,7 @@ def test_bt_197_bt_142_lotresult_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                                 <efac:FieldsPrivacy>
@@ -30,7 +30,7 @@ def test_bt_197_bt_142_lotresult_integration(tmp_path):
                                     <cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode>
                                 </efac:FieldsPrivacy>
                             </efac:LotResult>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -89,7 +89,7 @@ def test_bt_197_bt_142_lotresult_multiple_lots(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:NoticeResult>
+                        <efac:noticeResult>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                                 <efac:FieldsPrivacy>
@@ -104,7 +104,7 @@ def test_bt_197_bt_142_lotresult_multiple_lots(tmp_path):
                                     <cbc:ReasonCode listName="non-publication-justification">fair-comp</cbc:ReasonCode>
                                 </efac:FieldsPrivacy>
                             </efac:LotResult>
-                        </efac:NoticeResult>
+                        </efac:noticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

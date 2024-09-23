@@ -1,6 +1,6 @@
 # tests/test_OPT_301_Lot_ReviewInfo.py
 
-from ted_and_doffin_to_ocds.converters.OPT_301_Lot_ReviewInfo import (
+from ted_and_doffin_to_ocds.converters.opt_301_lot_reviewinfo import (
     parse_review_info_identifier,
     merge_review_info_identifier,
 )
@@ -14,11 +14,11 @@ def test_parse_review_info_identifier():
             <cbc:ID schemeName="Lot">1</cbc:ID>
             <cac:TenderingTerms>
                 <cac:AppealTerms>
-                    <cac:AppealInformationParty>
-                        <cac:PartyIdentification>
+                    <cac:AppealInformationparty>
+                        <cac:partyIdentification>
                             <cbc:ID>TPO-0001</cbc:ID>
-                        </cac:PartyIdentification>
-                    </cac:AppealInformationParty>
+                        </cac:partyIdentification>
+                    </cac:AppealInformationparty>
                 </cac:AppealTerms>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
@@ -55,7 +55,7 @@ def test_merge_review_info_identifier():
     }
 
     release_json = {
-        "parties": [{"id": "TPO-0002", "name": "Existing Party", "roles": ["buyer"]}],
+        "parties": [{"id": "TPO-0002", "name": "Existing party", "roles": ["buyer"]}],
     }
 
     merge_review_info_identifier(release_json, review_info_data)
@@ -73,7 +73,7 @@ def test_merge_review_info_identifier_existing_party():
     }
 
     release_json = {
-        "parties": [{"id": "TPO-0001", "name": "Existing Party", "roles": ["buyer"]}],
+        "parties": [{"id": "TPO-0001", "name": "Existing party", "roles": ["buyer"]}],
     }
 
     merge_review_info_identifier(release_json, review_info_data)
@@ -81,7 +81,7 @@ def test_merge_review_info_identifier_existing_party():
     assert len(release_json["parties"]) == 1
     assert release_json["parties"][0]["id"] == "TPO-0001"
     assert set(release_json["parties"][0]["roles"]) == {"buyer", "reviewContactPoint"}
-    assert release_json["parties"][0]["name"] == "Existing Party"
+    assert release_json["parties"][0]["name"] == "Existing party"
 
 
 def test_merge_review_info_identifier_no_data():

@@ -1,4 +1,4 @@
-# tests/test_BT_263_procedure.py
+# tests/test_bt_263_procedure.py
 
 import pytest
 import os
