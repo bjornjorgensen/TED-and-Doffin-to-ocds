@@ -25,13 +25,13 @@ project_root/
 │
 ├── main.py
 ├── converters/
-│   ├── BT_510c_Organization_Company.py
-│   ├── BT_76_Lot.py
-│   ├── BT_98_Lot.py
+│   ├── bt_510c_Organization_Company.py
+│   ├── bt_76_Lot.py
+│   ├── bt_98_Lot.py
 │   └── ...
 ├── tests/
-│   ├── test_BT_767_Lot.py
-│   ├── test_BT_76_Lot.py
+│   ├── test_bt_767_Lot.py
+│   ├── test_bt_76_Lot.py
 │   └── ...
 ├── utils/
 │   └── date_utils.py

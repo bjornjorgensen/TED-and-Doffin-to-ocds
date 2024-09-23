@@ -1,2392 +1,2392 @@
 # main.py
 import json
 import logging
-from ted_and_doffin_to_ocds.converters.Common_operations import NoticeProcessor
-from ted_and_doffin_to_ocds.converters.BT_01_Procedure import (
+from ted_and_doffin_to_ocds.converters.common_operations import NoticeProcessor
+from ted_and_doffin_to_ocds.converters.bt_01_procedure import (
     parse_procedure_legal_basis,
     merge_procedure_legal_basis,
 )
-from ted_and_doffin_to_ocds.converters.BT_03 import parse_form_type, merge_form_type
-from ted_and_doffin_to_ocds.converters.BT_04_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_03 import parse_form_type, merge_form_type
+from ted_and_doffin_to_ocds.converters.bt_04_procedure import (
     parse_procedure_identifier,
     merge_procedure_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_05_notice import (
+from ted_and_doffin_to_ocds.converters.bt_05_notice import (
     parse_notice_dispatch_date_time,
     merge_notice_dispatch_date_time,
 )
-from ted_and_doffin_to_ocds.converters.BT_06_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_06_lot import (
     parse_strategic_procurement,
     merge_strategic_procurement,
 )
-from ted_and_doffin_to_ocds.converters.BT_09_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_09_procedure import (
     parse_cross_border_law,
     merge_cross_border_law,
 )
-from ted_and_doffin_to_ocds.converters.BT_10 import (
+from ted_and_doffin_to_ocds.converters.bt_10 import (
     parse_contract_xml,
     merge_contract_info,
 )
-from ted_and_doffin_to_ocds.converters.BT_11_Procedure_Buyer import (
+from ted_and_doffin_to_ocds.converters.bt_11_procedure_buyer import (
     parse_buyer_legal_type,
     merge_buyer_legal_type,
 )
-from ted_and_doffin_to_ocds.converters.BT_88_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_88_procedure import (
     parse_procedure_features,
     merge_procedure_features,
 )
-from ted_and_doffin_to_ocds.converters.BT_105_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_105_procedure import (
     parse_procedure_type,
     merge_procedure_type,
 )
-from ted_and_doffin_to_ocds.converters.BT_106_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_106_procedure import (
     parse_procedure_accelerated,
     merge_procedure_accelerated,
 )
-from ted_and_doffin_to_ocds.converters.BT_109_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_109_lot import (
     parse_framework_duration_justification,
     merge_framework_duration_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_111_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_111_lot import (
     parse_framework_buyer_categories,
     merge_framework_buyer_categories,
 )
-from ted_and_doffin_to_ocds.converters.BT_113_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_113_lot import (
     parse_framework_max_participants,
     merge_framework_max_participants,
 )
-from ted_and_doffin_to_ocds.converters.BT_115_GPA_Coverage import (
+from ted_and_doffin_to_ocds.converters.bt_115_gpa_coverage import (
     parse_gpa_coverage,
     merge_gpa_coverage,
 )
-from ted_and_doffin_to_ocds.converters.BT_13713_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_13713_lotresult import (
     parse_lot_result_identifier,
     merge_lot_result_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_13714_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_13714_tender import (
     parse_tender_lot_identifier,
     merge_tender_lot_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_1375_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_1375_procedure import (
     parse_group_lot_identifier,
     merge_group_lot_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_119_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_119_lotresult import (
     parse_dps_termination,
     merge_dps_termination,
 )
-from ted_and_doffin_to_ocds.converters.BT_120_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_120_lot import (
     parse_no_negotiation_necessary,
     merge_no_negotiation_necessary,
 )
-from ted_and_doffin_to_ocds.converters.BT_122_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_122_lot import (
     parse_electronic_auction_description,
     merge_electronic_auction_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_123_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_123_lot import (
     parse_electronic_auction_url,
     merge_electronic_auction_url,
 )
-from ted_and_doffin_to_ocds.converters.BT_124_Tool_Atypical_URL import (
+from ted_and_doffin_to_ocds.converters.bt_124_tool_atypical_url import (
     parse_tool_atypical_url,
     merge_tool_atypical_url,
 )
-from ted_and_doffin_to_ocds.converters.BT_125_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_125_lot import (
     parse_previous_planning_identifier_lot,
     merge_previous_planning_identifier_lot,
 )
-from ted_and_doffin_to_ocds.converters.BT_125_Part import (
+from ted_and_doffin_to_ocds.converters.bt_125_part import (
     parse_previous_planning_identifier_part,
     merge_previous_planning_identifier_part,
 )
-from ted_and_doffin_to_ocds.converters.BT_1252_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_1252_procedure import (
     parse_direct_award_justification,
     merge_direct_award_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_127_notice import (
+from ted_and_doffin_to_ocds.converters.bt_127_notice import (
     parse_future_notice_date,
     merge_future_notice_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_13_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_13_lot import (
     parse_additional_info_deadline,
     merge_additional_info_deadline,
 )
-from ted_and_doffin_to_ocds.converters.BT_13_Part import (
+from ted_and_doffin_to_ocds.converters.bt_13_part import (
     parse_additional_info_deadline_part,
     merge_additional_info_deadline_part,
 )
-from ted_and_doffin_to_ocds.converters.BT_130_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_130_lot import (
     parse_dispatch_invitation_tender,
     merge_dispatch_invitation_tender,
 )
-from ted_and_doffin_to_ocds.converters.BT_131_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_131_lot import (
     parse_deadline_receipt_tenders,
     merge_deadline_receipt_tenders,
 )
-from ted_and_doffin_to_ocds.converters.BT_1311_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_1311_lot import (
     parse_deadline_receipt_requests,
     merge_deadline_receipt_requests,
 )
-from ted_and_doffin_to_ocds.converters.BT_132_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_132_lot import (
     parse_lot_public_opening_date,
     merge_lot_public_opening_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_133_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_133_lot import (
     parse_lot_bid_opening_location,
     merge_lot_bid_opening_location,
 )
-from ted_and_doffin_to_ocds.converters.BT_134_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_134_lot import (
     parse_lot_public_opening_description,
     merge_lot_public_opening_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_135_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_135_procedure import (
     parse_direct_award_justification_rationale,
     merge_direct_award_justification_rationale,
 )
-from ted_and_doffin_to_ocds.converters.BT_1351_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_1351_procedure import (
     parse_accelerated_procedure_justification,
     merge_accelerated_procedure_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_136_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_136_procedure import (
     parse_direct_award_justification_code,
     merge_direct_award_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_137_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_137_lot import (
     parse_purpose_lot_identifier,
     merge_purpose_lot_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_137_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_137_lotsgroup import (
     parse_lots_group_identifier,
     merge_lots_group_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_137_Part import (
+from ted_and_doffin_to_ocds.converters.bt_137_part import (
     parse_part_identifier,
     merge_part_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_14_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_14_lot import (
     parse_lot_documents_restricted,
     merge_lot_documents_restricted,
 )
-from ted_and_doffin_to_ocds.converters.BT_14_Part import (
+from ted_and_doffin_to_ocds.converters.bt_14_part import (
     parse_part_documents_restricted,
     merge_part_documents_restricted,
 )
-from ted_and_doffin_to_ocds.converters.BT_140_notice import (
+from ted_and_doffin_to_ocds.converters.bt_140_notice import (
     parse_change_reason_code,
     merge_change_reason_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_142_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_142_lotresult import (
     parse_winner_chosen,
     merge_winner_chosen,
 )
-from ted_and_doffin_to_ocds.converters.BT_144_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_144_lotresult import (
     parse_not_awarded_reason,
     merge_not_awarded_reason,
 )
-from ted_and_doffin_to_ocds.converters.BT_145_Contract import (
+from ted_and_doffin_to_ocds.converters.bt_145_contract import (
     parse_contract_conclusion_date,
     merge_contract_conclusion_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_1451_Contract import (
+from ted_and_doffin_to_ocds.converters.bt_1451_contract import (
     parse_winner_decision_date,
     merge_winner_decision_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_15_Lot_Part import (
+from ted_and_doffin_to_ocds.converters.bt_15_lot_part import (
     parse_documents_url,
     merge_documents_url,
 )
-from ted_and_doffin_to_ocds.converters.BT_150_Contract import (
+from ted_and_doffin_to_ocds.converters.bt_150_contract import (
     parse_contract_identifier,
     merge_contract_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_151_Contract import (
+from ted_and_doffin_to_ocds.converters.bt_151_contract import (
     parse_contract_url,
     merge_contract_url,
 )
-from ted_and_doffin_to_ocds.converters.BT_16_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.bt_16_organization_company import (
     parse_organization_part_name,
     merge_organization_part_name,
 )
-from ted_and_doffin_to_ocds.converters.BT_16_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.bt_16_organization_touchpoint import (
     parse_organization_touchpoint_part_name,
     merge_organization_touchpoint_part_name,
 )
-from ted_and_doffin_to_ocds.converters.BT_160_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_160_tender import (
     parse_concession_revenue_buyer,
     merge_concession_revenue_buyer,
 )
-from ted_and_doffin_to_ocds.converters.BT_162_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_162_tender import (
     parse_concession_revenue_user,
     merge_concession_revenue_user,
 )
-from ted_and_doffin_to_ocds.converters.BT_163_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_163_tender import (
     parse_concession_value_description,
     merge_concession_value_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_165_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.bt_165_organization_company import (
     parse_winner_size,
     merge_winner_size,
 )
-from ted_and_doffin_to_ocds.converters.BT_17_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_17_lot import (
     parse_submission_electronic,
     merge_submission_electronic,
 )
-from ted_and_doffin_to_ocds.converters.BT_171_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_171_tender import (
     parse_tender_rank,
     merge_tender_rank,
 )
-from ted_and_doffin_to_ocds.converters.BT_1711_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_1711_tender import (
     parse_tender_ranked,
     merge_tender_ranked,
 )
-from ted_and_doffin_to_ocds.converters.BT_18_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_18_lot import (
     parse_submission_url,
     merge_submission_url,
 )
-from ted_and_doffin_to_ocds.converters.BT_19_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_19_lot import (
     parse_submission_nonelectronic_justification,
     merge_submission_nonelectronic_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_191_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_191_tender import (
     parse_country_origin,
     merge_country_origin,
 )
-from ted_and_doffin_to_ocds.converters.BT_193_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_193_tender import (
     parse_tender_variant,
     merge_tender_variant,
 )
-from ted_and_doffin_to_ocds.converters.BT_539_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_539_lotsgroup import (
     parse_award_criterion_type_lots_group,
     merge_award_criterion_type_lots_group,
 )
-from ted_and_doffin_to_ocds.converters.BT_5421_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_5421_lot import (
     parse_award_criterion_number_weight_lot,
     merge_award_criterion_number_weight_lot,
 )
-from ted_and_doffin_to_ocds.converters.BT_5421_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_5421_lotsgroup import (
     parse_award_criterion_number_weight_lots_group,
     merge_award_criterion_number_weight_lots_group,
 )
-from ted_and_doffin_to_ocds.converters.BT_5422_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_5422_lot import (
     parse_award_criterion_number_fixed,
     merge_award_criterion_number_fixed,
 )
-from ted_and_doffin_to_ocds.converters.BT_5422_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_5422_lotsgroup import (
     parse_award_criterion_number_fixed_lotsgroup,
     merge_award_criterion_number_fixed_lotsgroup,
 )
 
 
 # BT_195
-from ted_and_doffin_to_ocds.converters.BT_195_BT_09_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_09_procedure import (
     bt_195_parse_unpublished_identifier_bt_09_procedure,
     bt_195_merge_unpublished_identifier_bt_09_procedure,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_105_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_105_procedure import (
     parse_bt195_bt105_unpublished_identifier,
     merge_bt195_bt105_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_106_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_106_procedure import (
     parse_bt195_bt106_unpublished_identifier,
     merge_bt195_bt106_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_1252_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_1252_procedure import (
     parse_bt195_bt1252_unpublished_identifier,
     merge_bt195_bt1252_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_135_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_135_procedure import (
     parse_bt195_bt135_unpublished_identifier,
     merge_bt195_bt135_unpublished_identifier,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_195_BT_1351_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_1351_procedure import (
     parse_bt195_bt1351_unpublished_identifier,
     merge_bt195_bt1351_unpublished_identifier,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_195_BT_136_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_136_procedure import (
     parse_bt195_bt136_unpublished_identifier,
     merge_bt195_bt136_unpublished_identifier,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_195_BT_142_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_142_lotresult import (
     parse_bt195_bt142_unpublished_identifier,
     merge_bt195_bt142_unpublished_identifier,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_195_BT_144_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_144_lotresult import (
     parse_bt195_bt144_unpublished_identifier,
     merge_bt195_bt144_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_160_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_160_tender import (
     parse_bt195_bt160_unpublished_identifier,
     merge_bt195_bt160_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_162_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_162_tender import (
     parse_bt195_bt162_unpublished_identifier,
     merge_bt195_bt162_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_163_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_163_tender import (
     parse_bt195_bt163_unpublished_identifier,
     merge_bt195_bt163_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_171_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_171_tender import (
     parse_bt195_bt171_unpublished_identifier,
     merge_bt195_bt171_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_191_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_191_tender import (
     parse_bt195_bt191_unpublished_identifier,
     merge_bt195_bt191_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_193_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_193_tender import (
     parse_bt195_bt193_unpublished_identifier,
     merge_bt195_bt193_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_539_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_539_lot import (
     parse_bt195_bt539_unpublished_identifier,
     merge_bt195_bt539_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_539_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_539_lotsgroup import (
     parse_bt195_bt539_lotsgroup_unpublished_identifier,
     merge_bt195_bt539_lotsgroup_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_540_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_540_lot import (
     parse_bt195_bt540_lot_unpublished_identifier,
     merge_bt195_bt540_lot_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_540_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_540_lotsgroup import (
     parse_bt195_bt540_lotsgroup_unpublished_identifier,
     merge_bt195_bt540_lotsgroup_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_541_Lot_Fixed import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_541_lot_fixed import (
     parse_bt195_bt541_lot_fixed_unpublished_identifier,
     merge_bt195_bt541_lot_fixed_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_541_Lot_Threshold import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_541_lot_threshold import (
     parse_bt195_bt541_lot_threshold_unpublished_identifier,
     merge_bt195_bt541_lot_threshold_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_541_Lot_Weight import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_541_lot_weight import (
     parse_bt195_bt541_lot_weight_unpublished_identifier,
     merge_bt195_bt541_lot_weight_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_541_LotsGroup_Fixed import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_541_lotsgroup_fixed import (
     parse_bt195_bt541_lotsgroup_fixed_unpublished_identifier,
     merge_bt195_bt541_lotsgroup_fixed_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_541_LotsGroup_Threshold import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_541_lotsgroup_threshold import (
     parse_bt195_bt541_lotsgroup_threshold_unpublished_identifier,
     merge_bt195_bt541_lotsgroup_threshold_unpublished_identifier,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_195_BT_541_LotsGroup_Weight import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_541_lotsgroup_weight import (
     parse_bt195_bt541_lotsgroup_weight,
     merge_bt195_bt541_lotsgroup_weight,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_195_BT_5421_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_5421_lot import (
     parse_bt195_bt5421_lot,
     merge_bt195_bt5421_lot,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_195_BT_5421_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_5421_lotsgroup import (
     parse_bt195_bt5421_lotsgroup,
     merge_bt195_bt5421_lotsgroup,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_195_BT_5422_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_5422_lot import (
     parse_bt195_bt5422_lot,
     merge_bt195_bt5422_lot,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_195_BT_5422_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_5422_lotsgroup import (
     parse_bt195_bt5422_lotsgroup,
     merge_bt195_bt5422_lotsgroup,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_195_BT_5423_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_5423_lot import (
     parse_bt195_bt5423_lot,
     merge_bt195_bt5423_lot,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_195_BT_5423_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_5423_lotsgroup import (
     parse_bt195_bt5423_lotsgroup,
     merge_bt195_bt5423_lotsgroup,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_195_BT_543_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_543_lot import (
     parse_bt195_bt543_lot,
     merge_bt195_bt543_lot,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_195_BT_543_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_543_lotsgroup import (
     parse_bt195_bt543_lotsgroup,
     merge_bt195_bt543_lotsgroup,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_553_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_553_tender import (
     parse_bt195_bt553_tender,
     merge_bt195_bt553_tender,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_554_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_554_tender import (
     parse_bt195_bt554_unpublished_identifier,
     merge_bt195_bt554_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_555_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_555_tender import (
     parse_bt195_bt555_unpublished_identifier,
     merge_bt195_bt555_unpublished_identifier,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_195_BT_635_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_635_lotresult import (
     parse_bt195_bt635_unpublished_identifier,
     merge_bt195_bt635_unpublished_identifier,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_195_BT_636_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_636_lotresult import (
     parse_bt195_bt636_unpublished_identifier,
     merge_bt195_bt636_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_660_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_660_lotresult import (
     parse_bt195_bt660_unpublished_identifier,
     merge_bt195_bt660_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_709_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_709_lotresult import (
     parse_bt195_bt709_unpublished_identifier,
     merge_bt195_bt709_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_710_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_710_lotresult import (
     parse_bt195_bt710_unpublished_identifier,
     merge_bt195_bt710_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_711_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_711_lotresult import (
     parse_bt195_bt711_unpublished_identifier,
     merge_bt195_bt711_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_712_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_712_lotresult import (
     parse_bt195_bt712_unpublished_identifier,
     merge_bt195_bt712_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_720_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_720_tender import (
     parse_bt195_bt720_unpublished_identifier,
     merge_bt195_bt720_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_733_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_733_lot import (
     parse_bt195_bt733_unpublished_identifier,
     merge_bt195_bt733_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_733_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_733_lotsgroup import (
     parse_bt195_bt733_lotsgroup_unpublished_identifier,
     merge_bt195_bt733_lotsgroup_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_734_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_734_lot import (
     parse_bt195_bt734_lot_unpublished_identifier,
     merge_bt195_bt734_lot_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_734_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_734_lotsgroup import (
     parse_bt195_bt734_lotsgroup_unpublished_identifier,
     merge_bt195_bt734_lotsgroup_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_759_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_759_lotresult import (
     parse_bt195_bt759_lotresult_unpublished_identifier,
     merge_bt195_bt759_lotresult_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_760_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_760_lotresult import (
     parse_bt195_bt760_lotresult_unpublished_identifier,
     merge_bt195_bt760_lotresult_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_773_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_773_tender import (
     parse_bt195_bt773_tender_unpublished_identifier,
     merge_bt195_bt773_tender_unpublished_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_195_BT_88_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_195_bt_88_procedure import (
     parse_bt195_bt88_procedure_unpublished_identifier,
     merge_bt195_bt88_procedure_unpublished_identifier,
 )
 
 # BT_196
-from ted_and_doffin_to_ocds.converters.BT_196_BT_09_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_09_procedure import (
     bt_196_parse_unpublished_justification_bt_09_procedure,
     bt_196_merge_unpublished_justification_bt_09_procedure,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_196_BT_105_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_105_procedure import (
     parse_bt196_bt105_unpublished_justification,
     merge_bt196_bt105_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_106_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_106_procedure import (
     parse_bt196_bt106_unpublished_justification,
     merge_bt196_bt106_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_1252_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_1252_procedure import (
     parse_bt196_bt1252_unpublished_justification,
     merge_bt196_bt1252_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_135_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_135_procedure import (
     parse_bt196_bt135_unpublished_justification,
     merge_bt196_bt135_unpublished_justification,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_196_BT_1351_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_1351_procedure import (
     parse_bt196_bt1351_unpublished_justification,
     merge_bt196_bt1351_unpublished_justification,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_196_BT_136_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_136_procedure import (
     parse_bt196_bt136_unpublished_justification,
     merge_bt196_bt136_unpublished_justification,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_196_BT_142_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_142_lotresult import (
     parse_bt196_bt142_unpublished_justification,
     merge_bt196_bt142_unpublished_justification,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_196_BT_144_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_144_lotresult import (
     parse_bt196_bt144_unpublished_justification,
     merge_bt196_bt144_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_160_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_160_tender import (
     parse_bt196_bt160_unpublished_justification,
     merge_bt196_bt160_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_162_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_162_tender import (
     parse_bt196_bt162_unpublished_justification,
     merge_bt196_bt162_unpublished_justification,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_196_BT_163_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_163_tender import (
     parse_bt196_bt163_unpublished_justification,
     merge_bt196_bt163_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_171_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_171_tender import (
     parse_bt196_bt171_unpublished_justification,
     merge_bt196_bt171_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_191_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_191_tender import (
     parse_bt196_bt191_unpublished_justification,
     merge_bt196_bt191_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_193_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_193_tender import (
     parse_bt196_bt193_unpublished_justification,
     merge_bt196_bt193_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_539_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_539_lot import (
     parse_bt196_bt539_unpublished_justification,
     merge_bt196_bt539_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_539_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_539_lotsgroup import (
     parse_bt196_bt539_lotsgroup_unpublished_justification,
     merge_bt196_bt539_lotsgroup_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_540_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_540_lot import (
     parse_bt196_bt540_lot_unpublished_justification,
     merge_bt196_bt540_lot_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_540_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_540_lotsgroup import (
     parse_bt196_bt540_lotsgroup_unpublished_justification,
     merge_bt196_bt540_lotsgroup_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_541_Lot_Fixed import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_541_lot_fixed import (
     parse_bt196_bt541_lot_fixed_unpublished_justification,
     merge_bt196_bt541_lot_fixed_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_541_Lot_Threshold import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_541_lot_threshold import (
     parse_bt196_bt541_lot_threshold_unpublished_justification,
     merge_bt196_bt541_lot_threshold_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_541_Lot_Weight import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_541_lot_weight import (
     parse_bt196_bt541_lot_weight_unpublished_justification,
     merge_bt196_bt541_lot_weight_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_541_LotsGroup_Fixed import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_541_lotsgroup_fixed import (
     parse_bt196_bt541_lotsgroup_fixed_unpublished_justification,
     merge_bt196_bt541_lotsgroup_fixed_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_541_LotsGroup_Threshold import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_541_lotsgroup_threshold import (
     parse_bt196_bt541_lotsgroup_threshold_unpublished_justification,
     merge_bt196_bt541_lotsgroup_threshold_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_541_LotsGroup_Weight import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_541_lotsgroup_weight import (
     parse_bt196_bt541_lotsgroup_weight,
     merge_bt196_bt541_lotsgroup_weight,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_5421_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_5421_lot import (
     parse_bt196_bt5421_lot,
     merge_bt196_bt5421_lot,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_5421_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_5421_lotsgroup import (
     parse_bt196_bt5421_lotsgroup,
     merge_bt196_bt5421_lotsgroup,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_196_BT_5422_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_5422_lot import (
     parse_bt196_bt5422_lot,
     merge_bt196_bt5422_lot,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_5422_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_5422_lotsgroup import (
     parse_bt196_bt5422_lotsgroup,
     merge_bt196_bt5422_lotsgroup,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_196_BT_5423_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_5423_lot import (
     parse_bt196_bt5423_lot,
     merge_bt196_bt5423_lot,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_196_BT_5423_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_5423_lotsgroup import (
     parse_bt196_bt5423_lotsgroup,
     merge_bt196_bt5423_lotsgroup,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_196_BT_543_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_543_lot import (
     parse_bt196_bt543_lot,
     merge_bt196_bt543_lot,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_196_BT_543_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_543_lotsgroup import (
     parse_bt196_bt543_lotsgroup,
     merge_bt196_bt543_lotsgroup,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_553_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_553_tender import (
     parse_bt196_bt553_tender,
     merge_bt196_bt553_tender,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_196_BT_554_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_554_tender import (
     parse_bt196_bt554_unpublished_justification,
     merge_bt196_bt554_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_555_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_555_tender import (
     parse_bt196_bt555_unpublished_justification,
     merge_bt196_bt555_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_635_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_635_lotresult import (
     parse_bt196_bt635_unpublished_justification,
     merge_bt196_bt635_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_636_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_636_lotresult import (
     parse_bt196_bt636_unpublished_justification,
     merge_bt196_bt636_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_660_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_660_lotresult import (
     parse_bt196_bt660_unpublished_justification,
     merge_bt196_bt660_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_709_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_709_lotresult import (
     parse_bt196_bt709_unpublished_justification,
     merge_bt196_bt709_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_710_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_710_lotresult import (
     parse_bt196_bt710_unpublished_justification,
     merge_bt196_bt710_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_711_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_711_lotresult import (
     parse_bt196_bt711_unpublished_justification,
     merge_bt196_bt711_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_712_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_712_lotresult import (
     parse_bt196_bt712_unpublished_justification,
     merge_bt196_bt712_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_720_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_720_tender import (
     parse_bt196_bt720_unpublished_justification,
     merge_bt196_bt720_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_733_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_733_lot import (
     parse_bt196_bt733_unpublished_justification,
     merge_bt196_bt733_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_733_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_733_lotsgroup import (
     parse_bt196_bt733_lotsgroup_unpublished_justification,
     merge_bt196_bt733_lotsgroup_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_734_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_734_lot import (
     parse_bt196_bt734_lot_unpublished_justification,
     merge_bt196_bt734_lot_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_734_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_734_lotsgroup import (
     parse_bt196_bt734_lotsgroup_unpublished_justification,
     merge_bt196_bt734_lotsgroup_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_759_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_759_lotresult import (
     parse_bt196_bt759_lotresult_unpublished_justification,
     merge_bt196_bt759_lotresult_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_760_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_760_lotresult import (
     parse_bt196_bt760_lotresult_unpublished_justification,
     merge_bt196_bt760_lotresult_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_773_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_773_tender import (
     parse_bt196_bt773_tender_unpublished_justification,
     merge_bt196_bt773_tender_unpublished_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_196_BT_88_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_196_bt_88_procedure import (
     parse_bt196_bt88_procedure_unpublished_justification,
     merge_bt196_bt88_procedure_unpublished_justification,
 )
 
 # #BT_197
-from ted_and_doffin_to_ocds.converters.BT_197_BT_09_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_09_procedure import (
     bt_197_parse_unpublished_justification_code_bt_09_procedure,
     bt_197_merge_unpublished_justification_code_bt_09_procedure,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_197_BT_105_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_105_procedure import (
     parse_bt197_bt105_unpublished_justification_code,
     merge_bt197_bt105_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_106_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_106_procedure import (
     parse_bt197_bt106_unpublished_justification_code,
     merge_bt197_bt106_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_1252_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_1252_procedure import (
     parse_bt197_bt1252_unpublished_justification_code,
     merge_bt197_bt1252_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_135_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_135_procedure import (
     parse_bt197_bt135_unpublished_justification_code,
     merge_bt197_bt135_unpublished_justification_code,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_197_BT_1351_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_1351_procedure import (
     parse_bt197_bt1351_unpublished_justification_code,
     merge_bt197_bt1351_unpublished_justification_code,
 )
 
 
-from ted_and_doffin_to_ocds.converters.BT_197_BT_136_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_136_procedure import (
     parse_bt197_bt136_unpublished_justification_code,
     merge_bt197_bt136_unpublished_justification_code,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_197_BT_142_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_142_lotresult import (
     parse_bt197_bt142_unpublished_justification_code,
     merge_bt197_bt142_unpublished_justification_code,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_197_BT_144_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_144_lotresult import (
     parse_bt197_bt144_unpublished_justification_code,
     merge_bt197_bt144_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_160_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_160_tender import (
     parse_bt197_bt160_unpublished_justification_code,
     merge_bt197_bt160_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_162_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_162_tender import (
     parse_bt197_bt162_unpublished_justification_code,
     merge_bt197_bt162_unpublished_justification_code,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_197_BT_163_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_163_tender import (
     parse_bt197_bt163_unpublished_justification_code,
     merge_bt197_bt163_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_171_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_171_tender import (
     parse_bt197_bt171_unpublished_justification_code,
     merge_bt197_bt171_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_191_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_191_tender import (
     parse_bt197_bt191_unpublished_justification_code,
     merge_bt197_bt191_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_193_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_193_tender import (
     parse_bt197_bt193_unpublished_justification_code,
     merge_bt197_bt193_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_539_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_539_lot import (
     parse_bt197_bt539_unpublished_justification_code,
     merge_bt197_bt539_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_539_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_539_lotsgroup import (
     parse_bt197_bt539_lotsgroup_unpublished_justification_code,
     merge_bt197_bt539_lotsgroup_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_540_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_540_lot import (
     parse_bt197_bt540_lot_unpublished_justification_code,
     merge_bt197_bt540_lot_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_540_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_540_lotsgroup import (
     parse_bt197_bt540_lotsgroup_unpublished_justification_code,
     merge_bt197_bt540_lotsgroup_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_541_Lot_Fixed import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_541_lot_fixed import (
     parse_bt197_bt541_lot_fixed_unpublished_justification_code,
     merge_bt197_bt541_lot_fixed_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_541_Lot_Threshold import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_541_lot_threshold import (
     parse_bt197_bt541_lot_threshold_unpublished_justification_code,
     merge_bt197_bt541_lot_threshold_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_541_Lot_Weight import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_541_lot_weight import (
     parse_bt197_bt541_lot_weight_unpublished_justification_code,
     merge_bt197_bt541_lot_weight_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_541_LotsGroup_Fixed import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_541_lotsgroup_fixed import (
     parse_bt197_bt541_lotsgroup_fixed_unpublished_justification_code,
     merge_bt197_bt541_lotsgroup_fixed_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_541_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_541_lotsgroup import (
     parse_bt197_bt541_lotsgroup_threshold,
     merge_bt197_bt541_lotsgroup_threshold,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_197_BT_541_LotsGroup_Weight import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_541_lotsgroup_weight import (
     parse_bt197_bt541_lotsgroup_weight,
     merge_bt197_bt541_lotsgroup_weight,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_5421_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_5421_lot import (
     parse_bt197_bt5421_lot,
     merge_bt197_bt5421_lot,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_197_BT_5421_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_5421_lotsgroup import (
     parse_bt197_bt5421_lotsgroup,
     merge_bt197_bt5421_lotsgroup,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_197_BT_5422_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_5422_lot import (
     parse_bt197_bt5422_lot,
     merge_bt197_bt5422_lot,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_5422_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_5422_lotsgroup import (
     parse_bt197_bt5422_lotsgroup,
     merge_bt197_bt5422_lotsgroup,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_197_BT_5423_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_5423_lot import (
     parse_bt197_bt5423_lot,
     merge_bt197_bt5423_lot,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_5423_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_5423_lotsgroup import (
     parse_bt197_bt5423_lotsgroup,
     merge_bt197_bt5423_lotsgroup,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_543_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_543_lot import (
     parse_bt197_bt543_lot,
     merge_bt197_bt543_lot,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_543_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_543_lotsgroup import (
     parse_bt197_bt543_lotsgroup,
     merge_bt197_bt543_lotsgroup,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_553_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_553_tender import (
     parse_bt197_bt553_tender,
     merge_bt197_bt553_tender,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_554_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_554_tender import (
     parse_bt197_bt554_unpublished_justification_code,
     merge_bt197_bt554_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_555_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_555_tender import (
     parse_bt197_bt555_unpublished_justification_code,
     merge_bt197_bt555_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_635_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_635_lotresult import (
     parse_bt197_bt635_unpublished_justification_code,
     merge_bt197_bt635_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_636_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_636_lotresult import (
     parse_bt197_bt636_unpublished_justification_code,
     merge_bt197_bt636_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_660_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_660_lotresult import (
     parse_bt197_bt660_unpublished_justification_code,
     merge_bt197_bt660_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_709_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_709_lotresult import (
     parse_bt197_bt709_unpublished_justification_code,
     merge_bt197_bt709_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_710_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_710_lotresult import (
     parse_bt197_bt710_unpublished_justification_code,
     merge_bt197_bt710_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_711_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_711_lotresult import (
     parse_bt197_bt711_unpublished_justification_code,
     merge_bt197_bt711_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_712_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_712_lotresult import (
     parse_bt197_bt712_unpublished_justification_code,
     merge_bt197_bt712_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_720_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_720_tender import (
     parse_bt197_bt720_unpublished_justification_code,
     merge_bt197_bt720_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_733_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_733_lot import (
     parse_bt197_bt733_unpublished_justification_code,
     merge_bt197_bt733_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_733_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_733_lotsgroup import (
     parse_bt197_bt733_lotsgroup_unpublished_justification_code,
     merge_bt197_bt733_lotsgroup_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_734_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_734_lot import (
     parse_bt197_bt734_lot_unpublished_justification_code,
     merge_bt197_bt734_lot_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_734_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_734_lotsgroup import (
     parse_bt197_bt734_lotsgroup_unpublished_justification_code,
     merge_bt197_bt734_lotsgroup_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_759_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_759_lotresult import (
     parse_bt197_bt759_lotresult_unpublished_justification_code,
     merge_bt197_bt759_lotresult_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_760_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_760_lotresult import (
     parse_bt197_bt760_lotresult_unpublished_justification_code,
     merge_bt197_bt760_lotresult_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_773_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_773_tender import (
     parse_bt197_bt773_tender_unpublished_justification_code,
     merge_bt197_bt773_tender_unpublished_justification_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_197_BT_88_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_197_bt_88_procedure import (
     parse_bt197_bt88_procedure_unpublished_justification_code,
     merge_bt197_bt88_procedure_unpublished_justification_code,
 )
 
 #
 # #BT_198
-from ted_and_doffin_to_ocds.converters.BT_198_BT_09_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_09_procedure import (
     bt_198_parse_unpublished_access_date_bt_09_procedure,
     bt_198_merge_unpublished_access_date_bt_09_procedure,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_105_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_105_procedure import (
     parse_bt198_bt105_unpublished_access_date,
     merge_bt198_bt105_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_106_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_106_procedure import (
     parse_bt198_bt106_unpublished_access_date,
     merge_bt198_bt106_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_1252_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_1252_procedure import (
     parse_bt198_bt1252_unpublished_access_date,
     merge_bt198_bt1252_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_135_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_135_procedure import (
     parse_bt198_bt135_unpublished_access_date,
     merge_bt198_bt135_unpublished_access_date,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_198_BT_1351_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_1351_procedure import (
     parse_bt198_bt1351_unpublished_access_date,
     merge_bt198_bt1351_unpublished_access_date,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_198_BT_136_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_136_procedure import (
     parse_bt198_bt136_unpublished_access_date,
     merge_bt198_bt136_unpublished_access_date,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_198_BT_142_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_142_lotresult import (
     parse_bt198_bt142_unpublished_access_date,
     merge_bt198_bt142_unpublished_access_date,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_198_BT_144_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_144_lotresult import (
     parse_bt198_bt144_unpublished_access_date,
     merge_bt198_bt144_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_160_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_160_tender import (
     parse_bt198_bt160_unpublished_access_date,
     merge_bt198_bt160_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_162_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_162_tender import (
     parse_bt198_bt162_unpublished_access_date,
     merge_bt198_bt162_unpublished_access_date,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_198_BT_163_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_163_tender import (
     parse_bt198_bt163_unpublished_access_date,
     merge_bt198_bt163_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_171_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_171_tender import (
     parse_bt198_bt171_unpublished_access_date,
     merge_bt198_bt171_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_191_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_191_tender import (
     parse_bt198_bt191_unpublished_access_date,
     merge_bt198_bt191_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_193_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_193_tender import (
     parse_bt198_bt193_unpublished_access_date,
     merge_bt198_bt193_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_539_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_539_lot import (
     parse_bt198_bt539_unpublished_access_date,
     merge_bt198_bt539_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_539_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_539_lotsgroup import (
     parse_bt198_bt539_lotsgroup_unpublished_access_date,
     merge_bt198_bt539_lotsgroup_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_540_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_540_lot import (
     parse_bt198_bt540_lot_unpublished_access_date,
     merge_bt198_bt540_lot_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_540_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_540_lotsgroup import (
     parse_bt198_bt540_lotsgroup_unpublished_access_date,
     merge_bt198_bt540_lotsgroup_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_541_Lot_Fixed import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_541_lot_fixed import (
     parse_bt198_bt541_lot_fixed_unpublished_access_date,
     merge_bt198_bt541_lot_fixed_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_541_Lot_Threshold import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_541_lot_threshold import (
     parse_bt198_bt541_lot_threshold_unpublished_access_date,
     merge_bt198_bt541_lot_threshold_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_541_Lot_Weight import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_541_lot_weight import (
     parse_bt198_bt541_lot_weight_unpublished_access_date,
     merge_bt198_bt541_lot_weight_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_541_LotsGroup_Fixed import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_541_lotsgroup_fixed import (
     parse_bt198_bt541_lotsgroup_fixed_unpublished_access_date,
     merge_bt198_bt541_lotsgroup_fixed_unpublished_access_date,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_198_BT_541_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_541_lotsgroup import (
     parse_bt198_bt541_lotsgroup_threshold,
     merge_bt198_bt541_lotsgroup_threshold,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_541_LotsGroup_Weight import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_541_lotsgroup_weight import (
     parse_bt198_bt541_lotsgroup_weight,
     merge_bt198_bt541_lotsgroup_weight,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_198_BT_5421_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_5421_lot import (
     parse_bt198_bt5421_lot,
     merge_bt198_bt5421_lot,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_198_BT_5421_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_5421_lotsgroup import (
     parse_bt198_bt5421_lotsgroup,
     merge_bt198_bt5421_lotsgroup,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_198_BT_5422_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_5422_lot import (
     parse_bt198_bt5422_lot,
     merge_bt198_bt5422_lot,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_198_BT_5422_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_5422_lotsgroup import (
     parse_bt198_bt5422_lotsgroup,
     merge_bt198_bt5422_lotsgroup,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_198_BT_5423_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_5423_lot import (
     parse_bt198_bt5423_lot,
     merge_bt198_bt5423_lot,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_5423_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_5423_lotsgroup import (
     parse_bt198_bt5423_lotsgroup,
     merge_bt198_bt5423_lotsgroup,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_543_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_543_lot import (
     parse_bt198_bt543_lot,
     merge_bt198_bt543_lot,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_543_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_543_lotsgroup import (
     parse_bt198_bt543_lotsgroup,
     merge_bt198_bt543_lotsgroup,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_553_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_553_tender import (
     parse_bt198_bt553_tender,
     merge_bt198_bt553_tender,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_554_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_554_tender import (
     parse_bt198_bt554_unpublished_access_date,
     merge_bt198_bt554_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_555_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_555_tender import (
     parse_bt198_bt555_unpublished_access_date,
     merge_bt198_bt555_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_635_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_635_lotresult import (
     parse_bt198_bt635_unpublished_access_date,
     merge_bt198_bt635_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_636_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_636_lotresult import (
     parse_bt198_bt636_unpublished_access_date,
     merge_bt198_bt636_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_660_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_660_lotresult import (
     parse_bt198_bt660_unpublished_access_date,
     merge_bt198_bt660_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_709_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_709_lotresult import (
     parse_bt198_bt709_unpublished_access_date,
     merge_bt198_bt709_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_710_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_710_lotresult import (
     parse_bt198_bt710_unpublished_access_date,
     merge_bt198_bt710_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_711_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_711_lotresult import (
     parse_bt198_bt711_unpublished_access_date,
     merge_bt198_bt711_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_712_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_712_lotresult import (
     parse_bt198_bt712_unpublished_access_date,
     merge_bt198_bt712_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_720_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_720_tender import (
     parse_bt198_bt720_unpublished_access_date,
     merge_bt198_bt720_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_733_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_733_lot import (
     parse_bt198_bt733_unpublished_access_date,
     merge_bt198_bt733_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_733_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_733_lotsgroup import (
     parse_bt198_bt733_lotsgroup_unpublished_access_date,
     merge_bt198_bt733_lotsgroup_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_734_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_734_lot import (
     parse_bt198_bt734_lot_unpublished_access_date,
     merge_bt198_bt734_lot_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_734_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_734_lotsgroup import (
     parse_bt198_bt734_lotsgroup_unpublished_access_date,
     merge_bt198_bt734_lotsgroup_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_759_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_759_lotresult import (
     parse_bt198_bt759_lotresult_unpublished_access_date,
     merge_bt198_bt759_lotresult_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_760_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_760_lotresult import (
     parse_bt198_bt760_lotresult_unpublished_access_date,
     merge_bt198_bt760_lotresult_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_773_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_773_tender import (
     parse_bt198_bt773_tender_unpublished_access_date,
     merge_bt198_bt773_tender_unpublished_access_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_198_BT_88_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_198_bt_88_procedure import (
     parse_bt198_bt88_procedure_unpublished_access_date,
     merge_bt198_bt88_procedure_unpublished_access_date,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_200_Contract import (
+from ted_and_doffin_to_ocds.converters.bt_200_contract import (
     parse_contract_modification_reason,
     merge_contract_modification_reason,
 )
-from ted_and_doffin_to_ocds.converters.BT_201_Contract import (
+from ted_and_doffin_to_ocds.converters.bt_201_contract import (
     parse_contract_modification_description,
     merge_contract_modification_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_202_Contract import (
+from ted_and_doffin_to_ocds.converters.bt_202_contract import (
     parse_contract_modification_summary,
     merge_contract_modification_summary,
 )
-from ted_and_doffin_to_ocds.converters.BT_21_Lot import parse_lot_title, merge_lot_title
-from ted_and_doffin_to_ocds.converters.BT_21_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_21_lot import parse_lot_title, merge_lot_title
+from ted_and_doffin_to_ocds.converters.bt_21_lotsgroup import (
     parse_lots_group_title,
     merge_lots_group_title,
 )
-from ted_and_doffin_to_ocds.converters.BT_21_Part import (
+from ted_and_doffin_to_ocds.converters.bt_21_part import (
     parse_part_title,
     merge_part_title,
 )
-from ted_and_doffin_to_ocds.converters.BT_21_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_21_procedure import (
     parse_procedure_title,
     merge_procedure_title,
 )
-from ted_and_doffin_to_ocds.converters.BT_22_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_22_lot import (
     parse_lot_internal_identifier,
     merge_lot_internal_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_23_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_23_lot import (
     parse_main_nature,
     merge_main_nature,
 )
-from ted_and_doffin_to_ocds.converters.BT_23_Part import (
+from ted_and_doffin_to_ocds.converters.bt_23_part import (
     parse_main_nature_part,
     merge_main_nature_part,
 )
-from ted_and_doffin_to_ocds.converters.BT_23_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_23_procedure import (
     parse_main_nature_procedure,
     merge_main_nature_procedure,
 )
-from ted_and_doffin_to_ocds.converters.BT_24_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_24_lot import (
     parse_lot_description,
     merge_lot_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_24_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_24_lotsgroup import (
     parse_lots_group_description,
     merge_lots_group_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_24_Part import (
+from ted_and_doffin_to_ocds.converters.bt_24_part import (
     parse_part_description,
     merge_part_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_24_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_24_procedure import (
     parse_procedure_description,
     merge_procedure_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_25_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_25_lot import (
     parse_lot_quantity,
     merge_lot_quantity,
 )
-from ted_and_doffin_to_ocds.converters.BT_26a_lot import (
+from ted_and_doffin_to_ocds.converters.bt_26a_lot import (
     parse_classification_type,
     merge_classification_type,
 )
-from ted_and_doffin_to_ocds.converters.BT_26a_part import (
+from ted_and_doffin_to_ocds.converters.bt_26a_part import (
     parse_classification_type_part,
     merge_classification_type_part,
 )
-from ted_and_doffin_to_ocds.converters.BT_26a_procedure import (
+from ted_and_doffin_to_ocds.converters.bt_26a_procedure import (
     parse_classification_type_procedure,
     merge_classification_type_procedure,
 )
-from ted_and_doffin_to_ocds.converters.BT_26m_lot import (
+from ted_and_doffin_to_ocds.converters.bt_26m_lot import (
     parse_main_classification_type_lot,
     merge_main_classification_type_lot,
 )
-from ted_and_doffin_to_ocds.converters.BT_26m_part import (
+from ted_and_doffin_to_ocds.converters.bt_26m_part import (
     parse_main_classification_type_part,
     merge_main_classification_type_part,
 )
-from ted_and_doffin_to_ocds.converters.BT_26m_procedure import (
+from ted_and_doffin_to_ocds.converters.bt_26m_procedure import (
     parse_main_classification_type_procedure,
     merge_main_classification_type_procedure,
 )
-from ted_and_doffin_to_ocds.converters.BT_262_lot import (
+from ted_and_doffin_to_ocds.converters.bt_262_lot import (
     parse_main_classification_code_lot,
     merge_main_classification_code_lot,
 )
-from ted_and_doffin_to_ocds.converters.BT_262_part import (
+from ted_and_doffin_to_ocds.converters.bt_262_part import (
     parse_main_classification_code_part,
     merge_main_classification_code_part,
 )
-from ted_and_doffin_to_ocds.converters.BT_262_procedure import (
+from ted_and_doffin_to_ocds.converters.bt_262_procedure import (
     parse_main_classification_code_procedure,
     merge_main_classification_code_procedure,
 )
-from ted_and_doffin_to_ocds.converters.BT_263_lot import (
+from ted_and_doffin_to_ocds.converters.bt_263_lot import (
     parse_additional_classification_code_lot,
     merge_additional_classification_code_lot,
 )
-from ted_and_doffin_to_ocds.converters.BT_263_part import (
+from ted_and_doffin_to_ocds.converters.bt_263_part import (
     parse_additional_classification_code_part,
     merge_additional_classification_code_part,
 )
-from ted_and_doffin_to_ocds.converters.BT_263_procedure import (
+from ted_and_doffin_to_ocds.converters.bt_263_procedure import (
     parse_additional_classification_code_procedure,
     merge_additional_classification_code_procedure,
 )
-from ted_and_doffin_to_ocds.converters.BT_27_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_27_lot import (
     parse_lot_estimated_value,
     merge_lot_estimated_value,
 )
-from ted_and_doffin_to_ocds.converters.BT_27_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_27_lotsgroup import (
     parse_bt_27_lots_group,
     merge_bt_27_lots_group,
 )
-from ted_and_doffin_to_ocds.converters.BT_27_Part import (
+from ted_and_doffin_to_ocds.converters.bt_27_part import (
     parse_bt_27_part,
     merge_bt_27_part,
 )
-from ted_and_doffin_to_ocds.converters.BT_27_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_27_procedure import (
     parse_bt_27_procedure,
     merge_bt_27_procedure,
 )
-from ted_and_doffin_to_ocds.converters.BT_271_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_271_lot import (
     parse_bt_271_lot,
     merge_bt_271_lot,
 )
-from ted_and_doffin_to_ocds.converters.BT_271_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_271_lotsgroup import (
     parse_bt_271_lots_group,
     merge_bt_271_lots_group,
 )
-from ted_and_doffin_to_ocds.converters.BT_271_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_271_procedure import (
     parse_bt_271_procedure,
     merge_bt_271_procedure,
 )
-from ted_and_doffin_to_ocds.converters.BT_300_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_300_lot import (
     parse_lot_additional_info,
     merge_lot_additional_info,
 )
-from ted_and_doffin_to_ocds.converters.BT_300_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_300_lotsgroup import (
     parse_lotsgroup_additional_info,
     merge_lotsgroup_additional_info,
 )
-from ted_and_doffin_to_ocds.converters.BT_300_Part import (
+from ted_and_doffin_to_ocds.converters.bt_300_part import (
     parse_part_additional_info,
     merge_part_additional_info,
 )
-from ted_and_doffin_to_ocds.converters.BT_300_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_300_procedure import (
     parse_procedure_additional_info,
     merge_procedure_additional_info,
 )
-from ted_and_doffin_to_ocds.converters.BT_31_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_31_procedure import (
     parse_max_lots_allowed,
     merge_max_lots_allowed,
 )
-from ted_and_doffin_to_ocds.converters.BT_3201_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_3201_tender import (
     parse_tender_identifier,
     merge_tender_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_3202_Contract import (
+from ted_and_doffin_to_ocds.converters.bt_3202_contract import (
     parse_contract_tender_id,
     merge_contract_tender_id,
 )
-from ted_and_doffin_to_ocds.converters.BT_33_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_33_procedure import (
     parse_max_lots_awarded,
     merge_max_lots_awarded,
 )
-from ted_and_doffin_to_ocds.converters.BT_330_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_330_procedure import (
     parse_group_identifier,
     merge_group_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_36_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_36_lot import (
     parse_lot_duration,
     merge_lot_duration,
 )
-from ted_and_doffin_to_ocds.converters.BT_36_Part import (
+from ted_and_doffin_to_ocds.converters.bt_36_part import (
     parse_part_duration,
     merge_part_duration,
 )
-from ted_and_doffin_to_ocds.converters.BT_40_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_40_lot import (
     parse_lot_selection_criteria_second_stage,
     merge_lot_selection_criteria_second_stage,
 )
-from ted_and_doffin_to_ocds.converters.BT_41_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_41_lot import (
     parse_lot_following_contract,
     merge_lot_following_contract,
 )
-from ted_and_doffin_to_ocds.converters.BT_42_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_42_lot import (
     parse_lot_jury_decision_binding,
     merge_lot_jury_decision_binding,
 )
-from ted_and_doffin_to_ocds.converters.BT_44_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_44_lot import (
     parse_prize_rank,
     merge_prize_rank,
 )
-from ted_and_doffin_to_ocds.converters.BT_45_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_45_lot import (
     parse_lot_rewards_other,
     merge_lot_rewards_other,
 )
-from ted_and_doffin_to_ocds.converters.BT_46_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_46_lot import (
     parse_jury_member_name,
     merge_jury_member_name,
 )
-from ted_and_doffin_to_ocds.converters.BT_47_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_47_lot import (
     parse_participant_name,
     merge_participant_name,
 )
-from ted_and_doffin_to_ocds.converters.BT_50_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_50_lot import (
     parse_minimum_candidates,
     merge_minimum_candidates,
 )
-from ted_and_doffin_to_ocds.converters.BT_500_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.bt_500_organization_company import (
     parse_organization_name,
     merge_organization_name,
 )
-from ted_and_doffin_to_ocds.converters.BT_500_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.bt_500_organization_touchpoint import (
     parse_touchpoint_name,
     merge_touchpoint_name,
 )
-from ted_and_doffin_to_ocds.converters.BT_500_UBO import parse_ubo_name, merge_ubo_name
-from ted_and_doffin_to_ocds.converters.BT_501_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.bt_500_ubo import parse_ubo_name, merge_ubo_name
+from ted_and_doffin_to_ocds.converters.bt_501_organization_company import (
     parse_organization_identifier,
     merge_organization_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_5010_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_5010_lot import (
     parse_eu_funds_financing_identifier,
     merge_eu_funds_financing_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_5011_Contract import (
+from ted_and_doffin_to_ocds.converters.bt_5011_contract import (
     parse_contract_eu_funds_financing_identifier,
     merge_contract_eu_funds_financing_identifier,
 )
-from ted_and_doffin_to_ocds.converters.BT_502_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.bt_502_organization_company import (
     parse_organization_contact_point,
     merge_organization_contact_point,
 )
-from ted_and_doffin_to_ocds.converters.BT_502_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.bt_502_organization_touchpoint import (
     parse_touchpoint_contact_point,
     merge_touchpoint_contact_point,
 )
-from ted_and_doffin_to_ocds.converters.BT_503_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.bt_503_organization_company import (
     parse_organization_contact_telephone,
     merge_organization_contact_telephone,
 )
-from ted_and_doffin_to_ocds.converters.BT_503_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.bt_503_organization_touchpoint import (
     parse_touchpoint_contact_telephone,
     merge_touchpoint_contact_telephone,
 )
-from ted_and_doffin_to_ocds.converters.BT_503_UBO import (
+from ted_and_doffin_to_ocds.converters.bt_503_ubo import (
     parse_ubo_telephone,
     merge_ubo_telephone,
 )
-from ted_and_doffin_to_ocds.converters.BT_505_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.bt_505_organization_company import (
     parse_organization_website,
     merge_organization_website,
 )
-from ted_and_doffin_to_ocds.converters.BT_505_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.bt_505_organization_touchpoint import (
     parse_touchpoint_website,
     merge_touchpoint_website,
 )
-from ted_and_doffin_to_ocds.converters.BT_506_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.bt_506_organization_company import (
     parse_organization_contact_email,
     merge_organization_contact_email,
 )
-from ted_and_doffin_to_ocds.converters.BT_506_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.bt_506_organization_touchpoint import (
     parse_touchpoint_contact_email,
     merge_touchpoint_contact_email,
 )
-from ted_and_doffin_to_ocds.converters.BT_506_UBO import (
+from ted_and_doffin_to_ocds.converters.bt_506_ubo import (
     parse_ubo_email,
     merge_ubo_email,
 )
-from ted_and_doffin_to_ocds.converters.BT_507_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.bt_507_organization_company import (
     parse_organization_country_subdivision,
     merge_organization_country_subdivision,
 )
-from ted_and_doffin_to_ocds.converters.BT_507_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.bt_507_organization_touchpoint import (
     parse_touchpoint_country_subdivision,
     merge_touchpoint_country_subdivision,
 )
-from ted_and_doffin_to_ocds.converters.BT_507_UBO import (
+from ted_and_doffin_to_ocds.converters.bt_507_ubo import (
     parse_ubo_country_subdivision,
     merge_ubo_country_subdivision,
 )
-from ted_and_doffin_to_ocds.converters.BT_5071_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_5071_lot import (
     parse_place_performance_country_subdivision,
     merge_place_performance_country_subdivision,
 )
-from ted_and_doffin_to_ocds.converters.BT_5071_Part import (
+from ted_and_doffin_to_ocds.converters.bt_5071_part import (
     parse_part_place_performance_country_subdivision,
     merge_part_place_performance_country_subdivision,
 )
-from ted_and_doffin_to_ocds.converters.BT_5071_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_5071_procedure import (
     parse_procedure_place_performance_country_subdivision,
     merge_procedure_place_performance_country_subdivision,
 )
-from ted_and_doffin_to_ocds.converters.BT_508_Procedure_Buyer import (
+from ted_and_doffin_to_ocds.converters.bt_508_procedure_buyer import (
     parse_buyer_profile_url,
     merge_buyer_profile_url,
 )
-from ted_and_doffin_to_ocds.converters.BT_509_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.bt_509_organization_company import (
     parse_organization_edelivery_gateway,
     merge_organization_edelivery_gateway,
 )
-from ted_and_doffin_to_ocds.converters.BT_509_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.bt_509_organization_touchpoint import (
     parse_touchpoint_edelivery_gateway,
     merge_touchpoint_edelivery_gateway,
 )
-from ted_and_doffin_to_ocds.converters.BT_51_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_51_lot import (
     parse_lot_maximum_candidates,
     merge_lot_maximum_candidates,
 )
-from ted_and_doffin_to_ocds.converters.BT_510a_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.bt_510a_organization_company import (
     parse_organization_street,
     merge_organization_street,
 )
-from ted_and_doffin_to_ocds.converters.BT_510a_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.bt_510a_organization_touchpoint import (
     parse_touchpoint_street,
     merge_touchpoint_street,
 )
-from ted_and_doffin_to_ocds.converters.BT_510a_UBO import (
+from ted_and_doffin_to_ocds.converters.bt_510a_ubo import (
     parse_ubo_street,
     merge_ubo_street,
 )
-from ted_and_doffin_to_ocds.converters.BT_510b_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.bt_510b_organization_company import (
     parse_organization_streetline1,
     merge_organization_streetline1,
 )
-from ted_and_doffin_to_ocds.converters.BT_510b_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.bt_510b_organization_touchpoint import (
     parse_touchpoint_streetline1,
     merge_touchpoint_streetline1,
 )
-from ted_and_doffin_to_ocds.converters.BT_510b_UBO import (
+from ted_and_doffin_to_ocds.converters.bt_510b_ubo import (
     parse_ubo_streetline1,
     merge_ubo_streetline1,
 )
-from ted_and_doffin_to_ocds.converters.BT_510c_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.bt_510c_organization_company import (
     parse_organization_streetline2,
     merge_organization_streetline2,
 )
-from ted_and_doffin_to_ocds.converters.BT_510c_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.bt_510c_organization_touchpoint import (
     parse_touchpoint_streetline2,
     merge_touchpoint_streetline2,
 )
-from ted_and_doffin_to_ocds.converters.BT_510c_UBO import (
+from ted_and_doffin_to_ocds.converters.bt_510c_ubo import (
     parse_ubo_streetline2,
     merge_ubo_streetline2,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_5101_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_5101_lot import (
     parse_place_performance_street_lot,
     merge_place_performance_street_lot,
 )
-from ted_and_doffin_to_ocds.converters.BT_5101a_Part import (
+from ted_and_doffin_to_ocds.converters.bt_5101a_part import (
     parse_part_place_performance_street,
     merge_part_place_performance_street,
 )
-from ted_and_doffin_to_ocds.converters.BT_5101a_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_5101a_procedure import (
     parse_procedure_place_performance_street,
     merge_procedure_place_performance_street,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_5101b_Part import (
+from ted_and_doffin_to_ocds.converters.bt_5101b_part import (
     parse_part_place_performance_streetline1,
     merge_part_place_performance_streetline1,
 )
-from ted_and_doffin_to_ocds.converters.BT_5101b_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_5101b_procedure import (
     parse_procedure_place_performance_streetline1,
     merge_procedure_place_performance_streetline1,
 )
-from ted_and_doffin_to_ocds.converters.BT_5101c_Part import (
+from ted_and_doffin_to_ocds.converters.bt_5101c_part import (
     parse_part_place_performance_streetline2,
     merge_part_place_performance_streetline2,
 )
-from ted_and_doffin_to_ocds.converters.BT_5101c_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_5101c_procedure import (
     parse_procedure_place_performance_streetline2,
     merge_procedure_place_performance_streetline2,
 )
-from ted_and_doffin_to_ocds.converters.BT_512_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.bt_512_organization_company import (
     parse_organization_postcode,
     merge_organization_postcode,
 )
-from ted_and_doffin_to_ocds.converters.BT_512_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.bt_512_organization_touchpoint import (
     parse_touchpoint_postcode,
     merge_touchpoint_postcode,
 )
-from ted_and_doffin_to_ocds.converters.BT_512_UBO import (
+from ted_and_doffin_to_ocds.converters.bt_512_ubo import (
     parse_ubo_postcode,
     merge_ubo_postcode,
 )
-from ted_and_doffin_to_ocds.converters.BT_5121_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_5121_lot import (
     parse_place_performance_post_code,
     merge_place_performance_post_code,
 )
-from ted_and_doffin_to_ocds.converters.BT_5121_Part import (
+from ted_and_doffin_to_ocds.converters.bt_5121_part import (
     parse_place_performance_post_code_part,
     merge_place_performance_post_code_part,
 )
-from ted_and_doffin_to_ocds.converters.BT_5121_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_5121_procedure import (
     parse_place_performance_post_code_procedure,
     merge_place_performance_post_code_procedure,
 )
-from ted_and_doffin_to_ocds.converters.BT_513_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.bt_513_organization_company import (
     parse_organization_city,
     merge_organization_city,
 )
-from ted_and_doffin_to_ocds.converters.BT_513_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.bt_513_organization_touchpoint import (
     parse_touchpoint_city,
     merge_touchpoint_city,
 )
-from ted_and_doffin_to_ocds.converters.BT_513_UBO import parse_ubo_city, merge_ubo_city
-from ted_and_doffin_to_ocds.converters.BT_5131_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_513_ubo import parse_ubo_city, merge_ubo_city
+from ted_and_doffin_to_ocds.converters.bt_5131_lot import (
     parse_place_performance_city,
     merge_place_performance_city,
 )
-from ted_and_doffin_to_ocds.converters.BT_5131_Part import (
+from ted_and_doffin_to_ocds.converters.bt_5131_part import (
     parse_place_performance_city_part,
     merge_place_performance_city_part,
 )
-from ted_and_doffin_to_ocds.converters.BT_5131_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_5131_procedure import (
     parse_place_performance_city_procedure,
     merge_place_performance_city_procedure,
 )
-from ted_and_doffin_to_ocds.converters.BT_514_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.bt_514_organization_company import (
     parse_organization_country,
     merge_organization_country,
 )
-from ted_and_doffin_to_ocds.converters.BT_514_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.bt_514_organization_touchpoint import (
     parse_touchpoint_country,
     merge_touchpoint_country,
 )
-from ted_and_doffin_to_ocds.converters.BT_514_UBO import (
+from ted_and_doffin_to_ocds.converters.bt_514_ubo import (
     parse_ubo_country,
     merge_ubo_country,
 )
-from ted_and_doffin_to_ocds.converters.BT_5141_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_5141_lot import (
     parse_lot_country,
     merge_lot_country,
 )
-from ted_and_doffin_to_ocds.converters.BT_5141_Part import (
+from ted_and_doffin_to_ocds.converters.bt_5141_part import (
     parse_part_country,
     merge_part_country,
 )
-from ted_and_doffin_to_ocds.converters.BT_5141_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_5141_procedure import (
     parse_procedure_country,
     merge_procedure_country,
 )
-from ted_and_doffin_to_ocds.converters.BT_52_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_52_lot import (
     parse_successive_reduction_indicator,
     merge_successive_reduction_indicator,
 )
-from ted_and_doffin_to_ocds.converters.BT_531_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_531_lot import (
     parse_lot_additional_nature,
     merge_lot_additional_nature,
 )
-from ted_and_doffin_to_ocds.converters.BT_531_Part import (
+from ted_and_doffin_to_ocds.converters.bt_531_part import (
     parse_part_additional_nature,
     merge_part_additional_nature,
 )
-from ted_and_doffin_to_ocds.converters.BT_531_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_531_procedure import (
     parse_procedure_additional_nature,
     merge_procedure_additional_nature,
 )
-from ted_and_doffin_to_ocds.converters.BT_536_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_536_lot import (
     parse_lot_start_date,
     merge_lot_start_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_536_Part import (
+from ted_and_doffin_to_ocds.converters.bt_536_part import (
     parse_part_contract_start_date,
     merge_part_contract_start_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_537_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_537_lot import (
     parse_lot_duration_end_date,
     merge_lot_duration_end_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_537_Part import (
+from ted_and_doffin_to_ocds.converters.bt_537_part import (
     parse_part_duration_end_date,
     merge_part_duration_end_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_538_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_538_lot import (
     parse_lot_duration_other,
     merge_lot_duration_other,
 )
-from ted_and_doffin_to_ocds.converters.BT_538_Part import (
+from ted_and_doffin_to_ocds.converters.bt_538_part import (
     parse_part_duration_other,
     merge_part_duration_other,
 )
-from ted_and_doffin_to_ocds.converters.BT_539_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_539_lot import (
     parse_award_criterion_type,
     merge_award_criterion_type,
 )
-from ted_and_doffin_to_ocds.converters.BT_54_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_54_lot import (
     parse_options_description,
     merge_options_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_540_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_540_lot import (
     parse_award_criterion_description,
     merge_award_criterion_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_540_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_540_lotsgroup import (
     parse_award_criterion_description_lots_group,
     merge_award_criterion_description_lots_group,
 )
-from ted_and_doffin_to_ocds.converters.BT_541_Lot_FixedNumber import (
+from ted_and_doffin_to_ocds.converters.bt_541_lot_fixednumber import (
     parse_award_criterion_fixed_number,
     merge_award_criterion_fixed_number,
 )
 
-from ted_and_doffin_to_ocds.converters.BT_5423_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_5423_lot import (
     parse_award_criterion_number_threshold,
     merge_award_criterion_number_threshold,
 )
-from ted_and_doffin_to_ocds.converters.BT_5423_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_5423_lotsgroup import (
     parse_award_criterion_number_threshold_lotsgroup,
     merge_award_criterion_number_threshold_lotsgroup,
 )
-from ted_and_doffin_to_ocds.converters.BT_543_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_543_lot import (
     parse_award_criteria_complicated,
     merge_award_criteria_complicated,
 )
-from ted_and_doffin_to_ocds.converters.BT_543_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_543_lotsgroup import (
     parse_award_criteria_complicated_lotsgroup,
     merge_award_criteria_complicated_lotsgroup,
 )
-from ted_and_doffin_to_ocds.converters.BT_553_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_553_tender import (
     parse_subcontracting_value,
     merge_subcontracting_value,
 )
-from ted_and_doffin_to_ocds.converters.BT_554_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_554_tender import (
     parse_subcontracting_description,
     merge_subcontracting_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_555_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_555_tender import (
     parse_subcontracting_percentage,
     merge_subcontracting_percentage,
 )
-from ted_and_doffin_to_ocds.converters.BT_57_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_57_lot import (
     parse_renewal_description,
     merge_renewal_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_58_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_58_lot import (
     parse_renewal_maximum,
     merge_renewal_maximum,
 )
-from ted_and_doffin_to_ocds.converters.BT_60_Lot import parse_eu_funds, merge_eu_funds
-from ted_and_doffin_to_ocds.converters.BT_610_Procedure_Buyer import (
+from ted_and_doffin_to_ocds.converters.bt_60_lot import parse_eu_funds, merge_eu_funds
+from ted_and_doffin_to_ocds.converters.bt_610_procedure_buyer import (
     parse_activity_entity,
     merge_activity_entity,
 )
-from ted_and_doffin_to_ocds.converters.BT_6110_Contract import (
+from ted_and_doffin_to_ocds.converters.bt_6110_contract import (
     parse_contract_eu_funds_details,
     merge_contract_eu_funds_details,
 )
-from ted_and_doffin_to_ocds.converters.BT_6140_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_6140_lot import (
     parse_lot_eu_funds_details,
     merge_lot_eu_funds_details,
 )
-from ted_and_doffin_to_ocds.converters.BT_615_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_615_lot import (
     parse_documents_restricted_url,
     merge_documents_restricted_url,
 )
-from ted_and_doffin_to_ocds.converters.BT_615_Part import (
+from ted_and_doffin_to_ocds.converters.bt_615_part import (
     parse_documents_restricted_url_part,
     merge_documents_restricted_url_part,
 )
-from ted_and_doffin_to_ocds.converters.BT_625_Lot import parse_unit, merge_unit
-from ted_and_doffin_to_ocds.converters.BT_63_Lot import parse_variants, merge_variants
-from ted_and_doffin_to_ocds.converters.BT_630_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_625_lot import parse_unit, merge_unit
+from ted_and_doffin_to_ocds.converters.bt_63_lot import parse_variants, merge_variants
+from ted_and_doffin_to_ocds.converters.bt_630_lot import (
     parse_deadline_receipt_expressions,
     merge_deadline_receipt_expressions,
 )
-from ted_and_doffin_to_ocds.converters.BT_631_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_631_lot import (
     parse_dispatch_invitation_interest,
     merge_dispatch_invitation_interest,
 )
-from ted_and_doffin_to_ocds.converters.BT_632_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_632_lot import (
     parse_tool_name,
     merge_tool_name,
 )
-from ted_and_doffin_to_ocds.converters.BT_632_Part import (
+from ted_and_doffin_to_ocds.converters.bt_632_part import (
     parse_tool_name_part,
     merge_tool_name_part,
 )
-from ted_and_doffin_to_ocds.converters.BT_633_Organization import (
+from ted_and_doffin_to_ocds.converters.bt_633_organization import (
     parse_organization_natural_person,
     merge_organization_natural_person,
 )
-from ted_and_doffin_to_ocds.converters.BT_635_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_635_lotresult import (
     parse_buyer_review_requests_count,
     merge_buyer_review_requests_count,
 )
-from ted_and_doffin_to_ocds.converters.BT_636_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_636_lotresult import (
     parse_irregularity_type,
     merge_irregularity_type,
 )
-from ted_and_doffin_to_ocds.converters.BT_64_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_64_lot import (
     parse_subcontracting_obligation_minimum,
     merge_subcontracting_obligation_minimum,
 )
-from ted_and_doffin_to_ocds.converters.BT_644_Lot_Prize_Value import (
+from ted_and_doffin_to_ocds.converters.bt_644_lot_prize_value import (
     parse_lot_prize_value,
     merge_lot_prize_value,
 )
-from ted_and_doffin_to_ocds.converters.BT_65_Lot_Subcontracting_Obligation import (
+from ted_and_doffin_to_ocds.converters.bt_65_lot_subcontracting_obligation import (
     parse_subcontracting_obligation,
     merge_subcontracting_obligation,
 )
-from ted_and_doffin_to_ocds.converters.BT_651_Lot_Subcontracting_Tender_Indication import (
+from ted_and_doffin_to_ocds.converters.bt_651_lot_subcontracting_tender_indication import (
     parse_subcontracting_tender_indication,
     merge_subcontracting_tender_indication,
 )
-from ted_and_doffin_to_ocds.converters.BT_660_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_660_lotresult import (
     parse_framework_reestimated_value,
     merge_framework_reestimated_value,
 )
-from ted_and_doffin_to_ocds.converters.BT_67_Exclusion_Grounds import (
+from ted_and_doffin_to_ocds.converters.bt_67_exclusion_grounds import (
     parse_exclusion_grounds,
     merge_exclusion_grounds,
 )
-from ted_and_doffin_to_ocds.converters.BT_70_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_70_lot import (
     parse_lot_performance_terms,
     merge_lot_performance_terms,
 )
-from ted_and_doffin_to_ocds.converters.BT_702a_Notice import (
+from ted_and_doffin_to_ocds.converters.bt_702a_notice import (
     parse_notice_language,
     merge_notice_language,
 )
-from ted_and_doffin_to_ocds.converters.BT_706_UBO import (
+from ted_and_doffin_to_ocds.converters.bt_706_ubo import (
     parse_ubo_nationality,
     merge_ubo_nationality,
 )
-from ted_and_doffin_to_ocds.converters.BT_707_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_707_lot import (
     parse_lot_documents_restricted_justification,
     merge_lot_documents_restricted_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_707_Part import (
+from ted_and_doffin_to_ocds.converters.bt_707_part import (
     parse_part_documents_restricted_justification,
     merge_part_documents_restricted_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_708_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_708_lot import (
     parse_lot_documents_official_language,
     merge_lot_documents_official_language,
 )
-from ted_and_doffin_to_ocds.converters.BT_708_Part import (
+from ted_and_doffin_to_ocds.converters.bt_708_part import (
     parse_part_documents_official_language,
     merge_part_documents_official_language,
 )
-from ted_and_doffin_to_ocds.converters.BT_709_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_709_lotresult import (
     parse_framework_maximum_value,
     merge_framework_maximum_value,
 )
-from ted_and_doffin_to_ocds.converters.BT_71_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_71_lot import (
     parse_reserved_participation,
     merge_reserved_participation,
 )
-from ted_and_doffin_to_ocds.converters.BT_71_Part import (
+from ted_and_doffin_to_ocds.converters.bt_71_part import (
     parse_reserved_participation_part,
     merge_reserved_participation_part,
 )
-from ted_and_doffin_to_ocds.converters.BT_710_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_710_lotresult import (
     parse_tender_value_lowest,
     merge_tender_value_lowest,
 )
-from ted_and_doffin_to_ocds.converters.BT_711_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_711_lotresult import (
     parse_tender_value_highest,
     merge_tender_value_highest,
 )
-from ted_and_doffin_to_ocds.converters.BT_712a_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_712a_lotresult import (
     parse_buyer_review_complainants,
     merge_buyer_review_complainants,
 )
-from ted_and_doffin_to_ocds.converters.BT_712b_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_712b_lotresult import (
     parse_buyer_review_complainants_bt_712b,
     merge_buyer_review_complainants_bt_712b,
 )
-from ted_and_doffin_to_ocds.converters.BT_717_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_717_lot import (
     parse_clean_vehicles_directive,
     merge_clean_vehicles_directive,
 )
-from ted_and_doffin_to_ocds.converters.BT_719_notice import (
+from ted_and_doffin_to_ocds.converters.bt_719_notice import (
     parse_procurement_documents_change_date,
     merge_procurement_documents_change_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_720_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_720_tender import (
     parse_tender_value,
     merge_tender_value,
 )
-from ted_and_doffin_to_ocds.converters.BT_721_Contract_Title import (
+from ted_and_doffin_to_ocds.converters.bt_721_contract_title import (
     parse_contract_title,
     merge_contract_title,
 )
-from ted_and_doffin_to_ocds.converters.BT_722_Contract import (
+from ted_and_doffin_to_ocds.converters.bt_722_contract import (
     parse_contract_eu_funds,
     merge_contract_eu_funds,
 )
-from ted_and_doffin_to_ocds.converters.BT_7220_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_7220_lot import (
     parse_lot_eu_funds,
     merge_lot_eu_funds,
 )
-from ted_and_doffin_to_ocds.converters.BT_723_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_723_lotresult import (
     parse_vehicle_category,
     merge_vehicle_category,
 )
-from ted_and_doffin_to_ocds.converters.BT_726_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_726_lot import (
     parse_lot_sme_suitability,
     merge_lot_sme_suitability,
 )
-from ted_and_doffin_to_ocds.converters.BT_726_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_726_lotsgroup import (
     parse_lots_group_sme_suitability,
     merge_lots_group_sme_suitability,
 )
-from ted_and_doffin_to_ocds.converters.BT_726_Part import (
+from ted_and_doffin_to_ocds.converters.bt_726_part import (
     parse_part_sme_suitability,
     merge_part_sme_suitability,
 )
-from ted_and_doffin_to_ocds.converters.BT_727_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_727_lot import (
     parse_lot_place_performance,
     merge_lot_place_performance,
 )
-from ted_and_doffin_to_ocds.converters.BT_727_Part import (
+from ted_and_doffin_to_ocds.converters.bt_727_part import (
     parse_part_place_performance,
     merge_part_place_performance,
 )
-from ted_and_doffin_to_ocds.converters.BT_727_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_727_procedure import (
     parse_procedure_place_performance,
     merge_procedure_place_performance,
 )
-from ted_and_doffin_to_ocds.converters.BT_728_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_728_lot import (
     parse_lot_place_performance_additional,
     merge_lot_place_performance_additional,
 )
-from ted_and_doffin_to_ocds.converters.BT_728_Part import (
+from ted_and_doffin_to_ocds.converters.bt_728_part import (
     parse_part_place_performance_additional,
     merge_part_place_performance_additional,
 )
-from ted_and_doffin_to_ocds.converters.BT_728_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_728_procedure import (
     parse_procedure_place_performance_additional,
     merge_procedure_place_performance_additional,
 )
-from ted_and_doffin_to_ocds.converters.BT_729_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_729_lot import (
     parse_lot_subcontracting_obligation_maximum,
     merge_lot_subcontracting_obligation_maximum,
 )
-from ted_and_doffin_to_ocds.converters.BT_732_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_732_lot import (
     parse_lot_security_clearance_description,
     merge_lot_security_clearance_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_733_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_733_lot import (
     parse_lot_award_criteria_order_justification,
     merge_lot_award_criteria_order_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_733_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_733_lotsgroup import (
     parse_lots_group_award_criteria_order_justification,
     merge_lots_group_award_criteria_order_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_734_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_734_lot import (
     parse_award_criterion_name,
     merge_award_criterion_name,
 )
-from ted_and_doffin_to_ocds.converters.BT_734_LotsGroup import (
+from ted_and_doffin_to_ocds.converters.bt_734_lotsgroup import (
     parse_award_criterion_name_lotsgroup,
     merge_award_criterion_name_lotsgroup,
 )
-from ted_and_doffin_to_ocds.converters.BT_735_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_735_lot import (
     parse_cvd_contract_type,
     merge_cvd_contract_type,
 )
-from ted_and_doffin_to_ocds.converters.BT_735_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_735_lotresult import (
     parse_cvd_contract_type_lotresult,
     merge_cvd_contract_type_lotresult,
 )
-from ted_and_doffin_to_ocds.converters.BT_736_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_736_lot import (
     parse_reserved_execution,
     merge_reserved_execution,
 )
-from ted_and_doffin_to_ocds.converters.BT_736_Part import (
+from ted_and_doffin_to_ocds.converters.bt_736_part import (
     parse_reserved_execution_part,
     merge_reserved_execution_part,
 )
-from ted_and_doffin_to_ocds.converters.BT_737_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_737_lot import (
     parse_documents_unofficial_language,
     merge_documents_unofficial_language,
 )
-from ted_and_doffin_to_ocds.converters.BT_737_Part import (
+from ted_and_doffin_to_ocds.converters.bt_737_part import (
     parse_documents_unofficial_language_part,
     merge_documents_unofficial_language_part,
 )
-from ted_and_doffin_to_ocds.converters.BT_738_notice import (
+from ted_and_doffin_to_ocds.converters.bt_738_notice import (
     parse_notice_preferred_publication_date,
     merge_notice_preferred_publication_date,
 )
-from ted_and_doffin_to_ocds.converters.BT_739_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.bt_739_organization_company import (
     parse_organization_contact_fax,
     merge_organization_contact_fax,
 )
-from ted_and_doffin_to_ocds.converters.BT_739_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.bt_739_organization_touchpoint import (
     parse_touchpoint_contact_fax,
     merge_touchpoint_contact_fax,
 )
-from ted_and_doffin_to_ocds.converters.BT_739_UBO import parse_ubo_fax, merge_ubo_fax
-from ted_and_doffin_to_ocds.converters.BT_740_Procedure_Buyer import (
+from ted_and_doffin_to_ocds.converters.bt_739_ubo import parse_ubo_fax, merge_ubo_fax
+from ted_and_doffin_to_ocds.converters.bt_740_procedure_buyer import (
     parse_buyer_contracting_entity,
     merge_buyer_contracting_entity,
 )
-from ted_and_doffin_to_ocds.converters.BT_743_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_743_lot import (
     parse_electronic_invoicing,
     merge_electronic_invoicing,
 )
-from ted_and_doffin_to_ocds.converters.BT_744_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_744_lot import (
     parse_submission_electronic_signature,
     merge_submission_electronic_signature,
 )
-from ted_and_doffin_to_ocds.converters.BT_745_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_745_lot import (
     parse_submission_nonelectronic_description,
     merge_submission_nonelectronic_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_746_Organization import (
+from ted_and_doffin_to_ocds.converters.bt_746_organization import (
     parse_winner_listed,
     merge_winner_listed,
 )
-from ted_and_doffin_to_ocds.converters.BT_747_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_747_lot import (
     parse_selection_criteria_type,
     merge_selection_criteria_type,
 )
 
-# from ted_and_doffin_to_ocds.converters.BT_749_Lot import parse_selection_criteria_name, merge_selection_criteria_name
-from ted_and_doffin_to_ocds.converters.BT_75_Lot import (
+# from ted_and_doffin_to_ocds.converters.bt_749_lot import parse_selection_criteria_name, merge_selection_criteria_name
+from ted_and_doffin_to_ocds.converters.bt_75_lot import (
     parse_guarantee_required_description,
     merge_guarantee_required_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_750_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_750_lot import (
     parse_selection_criteria,
     merge_selection_criteria,
 )
-from ted_and_doffin_to_ocds.converters.BT_752_Lot_ThresholdNumber import (
+from ted_and_doffin_to_ocds.converters.bt_752_lot_thresholdnumber import (
     parse_selection_criteria_threshold_number,
     merge_selection_criteria_threshold_number,
 )
-from ted_and_doffin_to_ocds.converters.BT_752_Lot_WeightNumber import (
+from ted_and_doffin_to_ocds.converters.bt_752_lot_weightnumber import (
     parse_selection_criteria_weight_number,
     merge_selection_criteria_weight_number,
 )
-from ted_and_doffin_to_ocds.converters.BT_7531_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_7531_lot import (
     parse_selection_criteria_number_weight,
     merge_selection_criteria_number_weight,
 )
-from ted_and_doffin_to_ocds.converters.BT_7532_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_7532_lot import (
     parse_selection_criteria_number_threshold,
     merge_selection_criteria_number_threshold,
 )
-from ted_and_doffin_to_ocds.converters.BT_754_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_754_lot import (
     parse_accessibility_criteria,
     merge_accessibility_criteria,
 )
-from ted_and_doffin_to_ocds.converters.BT_755_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_755_lot import (
     parse_accessibility_justification,
     merge_accessibility_justification,
 )
-from ted_and_doffin_to_ocds.converters.BT_756_Procedure import (
+from ted_and_doffin_to_ocds.converters.bt_756_procedure import (
     parse_pin_competition_termination,
     merge_pin_competition_termination,
 )
-from ted_and_doffin_to_ocds.converters.BT_759_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_759_lotresult import (
     parse_received_submissions_count,
     merge_received_submissions_count,
 )
-from ted_and_doffin_to_ocds.converters.BT_76_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_76_lot import (
     parse_tenderer_legal_form,
     merge_tenderer_legal_form,
 )
-from ted_and_doffin_to_ocds.converters.BT_760_LotResult import (
+from ted_and_doffin_to_ocds.converters.bt_760_lotresult import (
     parse_received_submissions_type,
     merge_received_submissions_type,
 )
-from ted_and_doffin_to_ocds.converters.BT_762_ChangeReasonDescription import (
+from ted_and_doffin_to_ocds.converters.bt_762_changereasondescription import (
     parse_change_reason_description,
     merge_change_reason_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_763_LotsAllRequired import (
+from ted_and_doffin_to_ocds.converters.bt_763_lotsallrequired import (
     parse_lots_all_required,
     merge_lots_all_required,
 )
-from ted_and_doffin_to_ocds.converters.BT_764_SubmissionElectronicCatalogue import (
+from ted_and_doffin_to_ocds.converters.bt_764_submissionelectroniccatalogue import (
     parse_submission_electronic_catalogue,
     merge_submission_electronic_catalogue,
 )
-from ted_and_doffin_to_ocds.converters.BT_765_FrameworkAgreement import (
+from ted_and_doffin_to_ocds.converters.bt_765_frameworkagreement import (
     parse_framework_agreement,
     merge_framework_agreement,
 )
-from ted_and_doffin_to_ocds.converters.BT_765_PartFrameworkAgreement import (
+from ted_and_doffin_to_ocds.converters.bt_765_partframeworkagreement import (
     parse_part_framework_agreement,
     merge_part_framework_agreement,
 )
-from ted_and_doffin_to_ocds.converters.BT_766_DynamicPurchasingSystem import (
+from ted_and_doffin_to_ocds.converters.bt_766_dynamicpurchasingsystem import (
     parse_dynamic_purchasing_system,
     merge_dynamic_purchasing_system,
 )
-from ted_and_doffin_to_ocds.converters.BT_766_PartDynamicPurchasingSystem import (
+from ted_and_doffin_to_ocds.converters.bt_766_partdynamicpurchasingsystem import (
     parse_part_dynamic_purchasing_system,
     merge_part_dynamic_purchasing_system,
 )
-from ted_and_doffin_to_ocds.converters.BT_767_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_767_lot import (
     parse_electronic_auction,
     merge_electronic_auction,
 )
-from ted_and_doffin_to_ocds.converters.BT_769_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_769_lot import (
     parse_multiple_tenders,
     merge_multiple_tenders,
 )
-from ted_and_doffin_to_ocds.converters.BT_77_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_77_lot import (
     parse_financial_terms,
     merge_financial_terms,
 )
-from ted_and_doffin_to_ocds.converters.BT_771_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_771_lot import (
     parse_late_tenderer_info,
     merge_late_tenderer_info,
 )
-from ted_and_doffin_to_ocds.converters.BT_772_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_772_lot import (
     parse_late_tenderer_info_description,
     merge_late_tenderer_info_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_773_Tender import (
+from ted_and_doffin_to_ocds.converters.bt_773_tender import (
     parse_subcontracting,
     merge_subcontracting,
 )
-from ted_and_doffin_to_ocds.converters.BT_774_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_774_lot import (
     parse_green_procurement,
     merge_green_procurement,
 )
-from ted_and_doffin_to_ocds.converters.BT_775_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_775_lot import (
     parse_social_procurement,
     merge_social_procurement,
 )
-from ted_and_doffin_to_ocds.converters.BT_776_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_776_lot import (
     parse_procurement_innovation,
     merge_procurement_innovation,
 )
-from ted_and_doffin_to_ocds.converters.BT_777_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_777_lot import (
     parse_strategic_procurement_description,
     merge_strategic_procurement_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_78_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_78_lot import (
     parse_security_clearance_deadline,
     merge_security_clearance_deadline,
 )
-from ted_and_doffin_to_ocds.converters.BT_79_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_79_lot import (
     parse_performing_staff_qualification,
     merge_performing_staff_qualification,
 )
-from ted_and_doffin_to_ocds.converters.BT_801_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_801_lot import (
     parse_non_disclosure_agreement,
     merge_non_disclosure_agreement,
 )
-from ted_and_doffin_to_ocds.converters.BT_802_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_802_lot import (
     parse_non_disclosure_agreement_description,
     merge_non_disclosure_agreement_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_805_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_805_lot import (
     parse_green_procurement_criteria,
     merge_green_procurement_criteria,
 )
-from ted_and_doffin_to_ocds.converters.BT_92_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_92_lot import (
     parse_electronic_ordering,
     merge_electronic_ordering,
 )
-from ted_and_doffin_to_ocds.converters.BT_93_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_93_lot import (
     parse_electronic_payment,
     merge_electronic_payment,
 )
-from ted_and_doffin_to_ocds.converters.BT_94_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_94_lot import (
     parse_recurrence,
     merge_recurrence,
 )
-from ted_and_doffin_to_ocds.converters.BT_95_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_95_lot import (
     parse_recurrence_description,
     merge_recurrence_description,
 )
-from ted_and_doffin_to_ocds.converters.BT_97_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_97_lot import (
     parse_submission_language,
     merge_submission_language,
 )
-from ted_and_doffin_to_ocds.converters.BT_98_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_98_lot import (
     parse_tender_validity_deadline,
     merge_tender_validity_deadline,
 )
-from ted_and_doffin_to_ocds.converters.BT_99_Lot import (
+from ted_and_doffin_to_ocds.converters.bt_99_lot import (
     parse_review_deadline_description,
     merge_review_deadline_description,
 )
-from ted_and_doffin_to_ocds.converters.OPP_020_Contract import (
+from ted_and_doffin_to_ocds.converters.opp_020_contract import (
     map_extended_duration_indicator,
     merge_extended_duration_indicator,
 )
-from ted_and_doffin_to_ocds.converters.OPP_021_Contract import (
+from ted_and_doffin_to_ocds.converters.opp_021_contract import (
     map_essential_assets,
     merge_essential_assets,
 )
-from ted_and_doffin_to_ocds.converters.OPP_022_Contract import (
+from ted_and_doffin_to_ocds.converters.opp_022_contract import (
     map_asset_significance,
     merge_asset_significance,
 )
-from ted_and_doffin_to_ocds.converters.OPP_023_Contract import (
+from ted_and_doffin_to_ocds.converters.opp_023_contract import (
     map_asset_predominance,
     merge_asset_predominance,
 )
-from ted_and_doffin_to_ocds.converters.OPP_031_Tender import (
+from ted_and_doffin_to_ocds.converters.opp_031_tender import (
     parse_contract_conditions,
     merge_contract_conditions,
 )
-from ted_and_doffin_to_ocds.converters.OPP_032_Tender import (
+from ted_and_doffin_to_ocds.converters.opp_032_tender import (
     parse_revenues_allocation,
     merge_revenues_allocation,
 )
-from ted_and_doffin_to_ocds.converters.OPP_034_Tender import (
+from ted_and_doffin_to_ocds.converters.opp_034_tender import (
     parse_penalties_and_rewards,
     merge_penalties_and_rewards,
 )
-from ted_and_doffin_to_ocds.converters.OPP_040_Procedure import (
+from ted_and_doffin_to_ocds.converters.opp_040_procedure import (
     parse_main_nature_sub_type,
     merge_main_nature_sub_type,
 )
-from ted_and_doffin_to_ocds.converters.OPP_050_Organization import (
+from ted_and_doffin_to_ocds.converters.opp_050_organization import (
     parse_buyers_group_lead_indicator,
     merge_buyers_group_lead_indicator,
 )
-from ted_and_doffin_to_ocds.converters.OPP_051_Organization import (
+from ted_and_doffin_to_ocds.converters.opp_051_organization import (
     parse_awarding_cpb_buyer_indicator,
     merge_awarding_cpb_buyer_indicator,
 )
-from ted_and_doffin_to_ocds.converters.OPP_052_Organization import (
+from ted_and_doffin_to_ocds.converters.opp_052_organization import (
     parse_acquiring_cpb_buyer_indicator,
     merge_acquiring_cpb_buyer_indicator,
 )
-from ted_and_doffin_to_ocds.converters.OPP_080_Tender import (
+from ted_and_doffin_to_ocds.converters.opp_080_tender import (
     parse_kilometers_public_transport,
     merge_kilometers_public_transport,
 )
-from ted_and_doffin_to_ocds.converters.OPP_090_Procedure import (
+from ted_and_doffin_to_ocds.converters.opp_090_procedure import (
     parse_previous_notice_identifier,
     merge_previous_notice_identifier,
 )
-from ted_and_doffin_to_ocds.converters.OPT_030_Procedure_SProvider import (
+from ted_and_doffin_to_ocds.converters.opt_030_procedure_sprovider import (
     parse_provided_service_type,
     merge_provided_service_type,
 )
-from ted_and_doffin_to_ocds.converters.OPP_071_Lot import (
+from ted_and_doffin_to_ocds.converters.opp_071_lot import (
     parse_quality_target_code,
     merge_quality_target_code,
 )
-from ted_and_doffin_to_ocds.converters.OPP_072_Lot import (
+from ted_and_doffin_to_ocds.converters.opp_072_lot import (
     parse_quality_target_description,
     merge_quality_target_description,
 )
-from ted_and_doffin_to_ocds.converters.OPP_100_Contract import (
+from ted_and_doffin_to_ocds.converters.opp_100_contract import (
     parse_framework_notice_identifier,
     merge_framework_notice_identifier,
 )
-from ted_and_doffin_to_ocds.converters.OPP_110_111_FiscalLegis import (
+from ted_and_doffin_to_ocds.converters.opp_110_111_fiscallegis import (
     parse_fiscal_legislation,
     merge_fiscal_legislation,
 )
-from ted_and_doffin_to_ocds.converters.OPP_112_120_EnvironLegis import (
+from ted_and_doffin_to_ocds.converters.opp_112_120_environlegis import (
     parse_environmental_legislation,
     merge_environmental_legislation,
 )
-from ted_and_doffin_to_ocds.converters.OPP_113_130_EmployLegis import (
+from ted_and_doffin_to_ocds.converters.opp_113_130_employlegis import (
     parse_employment_legislation,
     merge_employment_legislation,
 )
-from ted_and_doffin_to_ocds.converters.OPP_140_ProcurementDocs import (
+from ted_and_doffin_to_ocds.converters.opp_140_procurementdocs import (
     parse_procurement_documents,
     merge_procurement_documents,
 )
-from ted_and_doffin_to_ocds.converters.OPT_155_LotResult import (
+from ted_and_doffin_to_ocds.converters.opt_155_lotresult import (
     parse_vehicle_type,
     merge_vehicle_type,
 )
-from ted_and_doffin_to_ocds.converters.OPT_156_LotResult import (
+from ted_and_doffin_to_ocds.converters.opt_156_lotresult import (
     parse_vehicle_numeric,
     merge_vehicle_numeric,
 )
-from ted_and_doffin_to_ocds.converters.OPT_160_UBO import (
+from ted_and_doffin_to_ocds.converters.opt_160_ubo import (
     parse_ubo_first_name,
     merge_ubo_first_name,
 )
-from ted_and_doffin_to_ocds.converters.OPT_170_Tenderer import (
+from ted_and_doffin_to_ocds.converters.opt_170_tenderer import (
     parse_tendering_party_leader,
     merge_tendering_party_leader,
 )
-from ted_and_doffin_to_ocds.converters.OPT_200_Organization_Company import (
+from ted_and_doffin_to_ocds.converters.opt_200_organization_company import (
     parse_organization_technical_identifier,
     merge_organization_technical_identifier,
 )
-from ted_and_doffin_to_ocds.converters.OPT_201_Organization_TouchPoint import (
+from ted_and_doffin_to_ocds.converters.opt_201_organization_touchpoint import (
     parse_touchpoint_technical_identifier,
     merge_touchpoint_technical_identifier,
 )
-from ted_and_doffin_to_ocds.converters.OPT_202_UBO import (
+from ted_and_doffin_to_ocds.converters.opt_202_ubo import (
     parse_ubo_identifier,
     merge_ubo_identifier,
 )
-from ted_and_doffin_to_ocds.converters.OPT_300_Contract_Signatory import (
+from ted_and_doffin_to_ocds.converters.opt_300_contract_signatory import (
     parse_contract_signatory,
     merge_contract_signatory,
 )
-from ted_and_doffin_to_ocds.converters.OPT_300_Procedure_SProvider import (
+from ted_and_doffin_to_ocds.converters.opt_300_procedure_sprovider import (
     parse_procedure_sprovider,
     merge_procedure_sprovider,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Lot_AddInfo import (
+from ted_and_doffin_to_ocds.converters.opt_301_lot_addinfo import (
     parse_additional_info_provider_identifier,
     merge_additional_info_provider_identifier,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Lot_DocProvider import (
+from ted_and_doffin_to_ocds.converters.opt_301_lot_docprovider import (
     parse_document_provider_identifier,
     merge_document_provider_identifier,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Lot_EmployLegis import (
+from ted_and_doffin_to_ocds.converters.opt_301_lot_employlegis import (
     parse_employment_legislation_document_reference,
     merge_employment_legislation_document_reference,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Lot_EnvironLegis import (
+from ted_and_doffin_to_ocds.converters.opt_301_lot_environlegis import (
     parse_environmental_legislation_document_reference,
     merge_environmental_legislation_document_reference,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Lot_ReviewOrg import (
+from ted_and_doffin_to_ocds.converters.opt_301_lot_revieworg import (
     parse_review_org_identifier,
     merge_review_org_identifier,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Lot_Mediator import (
+from ted_and_doffin_to_ocds.converters.opt_301_lot_mediator import (
     parse_mediator_identifier,
     merge_mediator_identifier,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Lot_ReviewInfo import (
+from ted_and_doffin_to_ocds.converters.opt_301_lot_reviewinfo import (
     parse_review_info_identifier,
     merge_review_info_identifier,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Lot_TenderEval import (
+from ted_and_doffin_to_ocds.converters.opt_301_lot_tendereval import (
     parse_tender_evaluator_identifier,
     merge_tender_evaluator_identifier,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Lot_TenderReceipt import (
+from ted_and_doffin_to_ocds.converters.opt_301_lot_tenderreceipt import (
     parse_tender_recipient_identifier,
     merge_tender_recipient_identifier,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_LotResult_Financing import (
+from ted_and_doffin_to_ocds.converters.opt_301_lotresult_financing import (
     parse_lotresult_financing,
     merge_lotresult_financing,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_LotResult_Paying import (
+from ted_and_doffin_to_ocds.converters.opt_301_lotresult_paying import (
     parse_lotresult_paying,
     merge_lotresult_paying,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Part_AddInfo import (
+from ted_and_doffin_to_ocds.converters.opt_301_part_addinfo import (
     parse_part_addinfo,
     merge_part_addinfo,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Part_DocProvider import (
+from ted_and_doffin_to_ocds.converters.opt_301_part_docprovider import (
     parse_part_docprovider,
     merge_part_docprovider,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Part_EmployLegis import (
+from ted_and_doffin_to_ocds.converters.opt_301_part_employlegis import (
     parse_part_employlegis,
     merge_part_employlegis,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Part_EnvironLegis import (
+from ted_and_doffin_to_ocds.converters.opt_301_part_environlegis import (
     parse_part_environlegis,
     merge_part_environlegis,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Part_FiscalLegis import (
+from ted_and_doffin_to_ocds.converters.opt_301_part_fiscallegis import (
     parse_part_fiscallegis,
     merge_part_fiscallegis,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Part_Mediator import (
+from ted_and_doffin_to_ocds.converters.opt_301_part_mediator import (
     parse_part_mediator,
     merge_part_mediator,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Part_ReviewInfo import (
+from ted_and_doffin_to_ocds.converters.opt_301_part_reviewinfo import (
     parse_part_reviewinfo,
     merge_part_reviewinfo,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Part_ReviewOrg import (
+from ted_and_doffin_to_ocds.converters.opt_301_part_revieworg import (
     parse_part_revieworg,
     merge_part_revieworg,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Part_TenderEval import (
+from ted_and_doffin_to_ocds.converters.opt_301_part_tendereval import (
     parse_part_tendereval,
     merge_part_tendereval,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Part_TenderReceipt import (
+from ted_and_doffin_to_ocds.converters.opt_301_part_tenderreceipt import (
     parse_part_tenderreceipt,
     merge_part_tenderreceipt,
 )
-from ted_and_doffin_to_ocds.converters.OPT_301_Tenderer_MainCont import (
+from ted_and_doffin_to_ocds.converters.opt_301_tenderer_maincont import (
     parse_tenderer_maincont,
     merge_tenderer_maincont,
 )
 
 # add more OPT 301 her
 
-from ted_and_doffin_to_ocds.converters.OPT_302_Organization import (
+from ted_and_doffin_to_ocds.converters.opt_302_organization import (
     parse_beneficial_owner_reference,
     merge_beneficial_owner_reference,
 )
-from ted_and_doffin_to_ocds.converters.OPT_310_Tender import (
+from ted_and_doffin_to_ocds.converters.opt_310_tender import (
     parse_tendering_party_id_reference,
     merge_tendering_party_id_reference,
 )
-from ted_and_doffin_to_ocds.converters.OPT_315_LotResult import (
+from ted_and_doffin_to_ocds.converters.opt_315_lotresult import (
     parse_contract_identifier_reference,
     merge_contract_identifier_reference,
 )
-from ted_and_doffin_to_ocds.converters.OPT_316_Contract import (
+from ted_and_doffin_to_ocds.converters.opt_316_contract import (
     parse_contract_technical_identifier,
     merge_contract_technical_identifier,
 )
-from ted_and_doffin_to_ocds.converters.OPT_320_LotResult import (
+from ted_and_doffin_to_ocds.converters.opt_320_lotresult import (
     parse_tender_identifier_reference,
     merge_tender_identifier_reference,
 )
@@ -2542,13 +2542,13 @@ def main(xml_path, ocid_prefix):
     release_json_str = notice_processor.create_release(xml_content)
     release_json = json.loads(release_json_str)
 
-    # Parse and merge BT-01 Procedure Legal Basis
+    # Parse and merge BT-01 procedure Legal Basis
     process_bt_section(
         release_json,
         xml_content,
         [parse_procedure_legal_basis],
         merge_procedure_legal_basis,
-        "Procedure Legal Basis (BT-01)",
+        "procedure Legal Basis (BT-01)",
     )
 
     # Parse and merge BT-03 Form Type
@@ -2560,22 +2560,22 @@ def main(xml_path, ocid_prefix):
         "Form Type (BT-03)",
     )
 
-    # Parse and merge BT-04 Procedure Identifier
+    # Parse and merge BT-04 procedure Identifier
     process_bt_section(
         release_json,
         xml_content,
         [parse_procedure_identifier],
         merge_procedure_identifier,
-        "Procedure Identifier (BT-04)",
+        "procedure Identifier (BT-04)",
     )
 
-    # Parse and merge BT-05-notice Notice Dispatch Date and Time
+    # Parse and merge BT-05-notice notice Dispatch Date and Time
     process_bt_section(
         release_json,
         xml_content,
         [parse_notice_dispatch_date_time],
         merge_notice_dispatch_date_time,
-        "Notice Dispatch Date and Time (BT-05)",
+        "notice Dispatch Date and Time (BT-05)",
     )
 
     # Parse and merge BT-06-Lot Strategic Procurement
@@ -2587,7 +2587,7 @@ def main(xml_path, ocid_prefix):
         "Strategic Procurement (BT-06)",
     )
 
-    # Parse and merge BT-09-Procedure Cross Border Law
+    # Parse and merge BT-09-procedure Cross Border Law
     process_bt_section(
         release_json,
         xml_content,
@@ -2596,31 +2596,31 @@ def main(xml_path, ocid_prefix):
         "Cross Border Law (BT-09)",
     )
 
-    # Parse and merge BT-10-Organization-Company
+    # Parse and merge BT-10-organization-company
     process_bt_section(
         release_json,
         xml_content,
         [parse_contract_xml],
         merge_contract_info,
-        "Organization Main Activity (BT-10)",
+        "organization Main Activity (BT-10)",
     )
 
-    # Parse and merge BT-105-Procedure
+    # Parse and merge BT-105-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_procedure_type],
         merge_procedure_type,
-        "Procedure Type (BT-105)",
+        "procedure Type (BT-105)",
     )
 
-    # Parse and merge BT-106-Procedure
+    # Parse and merge BT-106-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_procedure_accelerated],
         merge_procedure_accelerated,
-        "Procedure Accelerated (BT-106)",
+        "procedure Accelerated (BT-106)",
     )
 
     # Parse and merge BT-109-Lot Framework Duration Justification
@@ -2632,31 +2632,31 @@ def main(xml_path, ocid_prefix):
         "Framework Duration Justification (BT-109)",
     )
 
-    # Parse and merge BT-11-Procedure-Buyer Buyer Legal Type
+    # Parse and merge BT-11-procedure-buyer buyer Legal Type
     process_bt_section(
         release_json,
         xml_content,
         [parse_buyer_legal_type],
         merge_buyer_legal_type,
-        "Buyer Legal Type (BT-11)",
+        "buyer Legal Type (BT-11)",
     )
 
-    # Parse and merge BT-111-Lot Framework Buyer Categories
+    # Parse and merge BT-111-Lot Framework buyer Categories
     process_bt_section(
         release_json,
         xml_content,
         [parse_framework_buyer_categories],
         merge_framework_buyer_categories,
-        "Framework Buyer Categories (BT-111)",
+        "Framework buyer Categories (BT-111)",
     )
 
-    # Parse and merge BT-113-Lot Framework Maximum Participants Number
+    # Parse and merge BT-113-Lot Framework Maximum participants Number
     process_bt_section(
         release_json,
         xml_content,
         [parse_framework_max_participants],
         merge_framework_max_participants,
-        "Framework Maximum Participants Number (BT-113)",
+        "Framework Maximum participants Number (BT-113)",
     )
 
     # Parse and merge BT-115 GPA Coverage
@@ -2722,16 +2722,16 @@ def main(xml_path, ocid_prefix):
         "Previous Planning Identifier (Lot) (BT-125(i))",
     )
 
-    # Parse and merge BT-125(i)-Part and BT-1251-Part Previous Planning Identifier
+    # Parse and merge BT-125(i)-part and BT-1251-part Previous Planning Identifier
     process_bt_section(
         release_json,
         xml_content,
         [parse_previous_planning_identifier_part],
         merge_previous_planning_identifier_part,
-        "Previous Planning Identifier (Part) (BT-125(i) and BT-1251)",
+        "Previous Planning Identifier (part) (BT-125(i) and BT-1251)",
     )
 
-    # Parse and merge BT-1252-Procedure Direct Award Justification
+    # Parse and merge BT-1252-procedure Direct Award Justification
     process_bt_section(
         release_json,
         xml_content,
@@ -2740,13 +2740,13 @@ def main(xml_path, ocid_prefix):
         "Direct Award Justification (BT-1252)",
     )
 
-    # Parse and merge BT-127 Future Notice Date
+    # Parse and merge BT-127 Future notice Date
     process_bt_section(
         release_json,
         xml_content,
         [parse_future_notice_date],
         merge_future_notice_date,
-        "Future Notice Date (BT-127)",
+        "Future notice Date (BT-127)",
     )
 
     # Parse and merge BT-13 Additional Information Deadline
@@ -2758,13 +2758,13 @@ def main(xml_path, ocid_prefix):
         "Additional Information Deadline (BT-13)",
     )
 
-    # Parse and merge BT-13 Additional Information Deadline (Part)
+    # Parse and merge BT-13 Additional Information Deadline (part)
     process_bt_section(
         release_json,
         xml_content,
         [parse_additional_info_deadline_part],
         merge_additional_info_deadline_part,
-        "Additional Information Deadline (Part) (BT-13)",
+        "Additional Information Deadline (part) (BT-13)",
     )
 
     # Parse and merge BT-130-Lot
@@ -2821,7 +2821,7 @@ def main(xml_path, ocid_prefix):
         "Lot Public Opening Description (BT-134)",
     )
 
-    # Parse and merge BT-135-Procedure
+    # Parse and merge BT-135-procedure
     process_bt_section(
         release_json,
         xml_content,
@@ -2830,16 +2830,16 @@ def main(xml_path, ocid_prefix):
         "Direct Award Justification Rationale (BT-135)",
     )
 
-    # Parse and merge BT-1351-Procedure
+    # Parse and merge BT-1351-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_accelerated_procedure_justification],
         merge_accelerated_procedure_justification,
-        "Accelerated Procedure Justification (BT-1351)",
+        "Accelerated procedure Justification (BT-1351)",
     )
 
-    # Parse and merge BT-136-Procedure
+    # Parse and merge BT-136-procedure
     process_bt_section(
         release_json,
         xml_content,
@@ -2866,13 +2866,13 @@ def main(xml_path, ocid_prefix):
         "Lots Group Identifier (BT-137-LotsGroup)",
     )
 
-    # Parse and merge BT-137-Part
+    # Parse and merge BT-137-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_identifier],
         merge_part_identifier,
-        "Part Identifier (BT-137-Part)",
+        "part Identifier (BT-137-part)",
     )
 
     # Parse and merge BT-13713-LotResult
@@ -2893,7 +2893,7 @@ def main(xml_path, ocid_prefix):
         "Tender Lot Identifier (BT-13714)",
     )
 
-    # Parse and merge BT-1375-Procedure
+    # Parse and merge BT-1375-procedure
     process_bt_section(
         release_json,
         xml_content,
@@ -2911,13 +2911,13 @@ def main(xml_path, ocid_prefix):
         "Lot Documents Restricted (BT-14-Lot)",
     )
 
-    # Parse and merge BT-14-Part
+    # Parse and merge BT-14-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_documents_restricted],
         merge_part_documents_restricted,
-        "Part Documents Restricted (BT-14-Part)",
+        "part Documents Restricted (BT-14-part)",
     )
 
     # Parse and merge BT-140-notice
@@ -2965,7 +2965,7 @@ def main(xml_path, ocid_prefix):
         "Winner Decision Date (BT-1451)",
     )
 
-    # Parse and merge BT-15-Lot-Part
+    # Parse and merge BT-15-Lot-part
     process_bt_section(
         release_json,
         xml_content,
@@ -2998,34 +2998,34 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_organization_name],
         merge_organization_name,
-        "Organization Name (BT-500)",
+        "organization Name (BT-500)",
     )
 
-    # Parse and merge BT-16-Organization-Company
+    # Parse and merge BT-16-organization-company
     process_bt_section(
         release_json,
         xml_content,
         [parse_organization_part_name],
         merge_organization_part_name,
-        "Organization Part Name (BT-16-Organization-Company)",
+        "organization part Name (BT-16-organization-company)",
     )
 
-    # Parse and merge BT-16-Organization-TouchPoint
+    # Parse and merge BT-16-organization-touchpoint
     process_bt_section(
         release_json,
         xml_content,
         [parse_organization_touchpoint_part_name],
         merge_organization_touchpoint_part_name,
-        "Organization TouchPoint Part Name (BT-16-Organization-TouchPoint)",
+        "organization touchpoint part Name (BT-16-organization-touchpoint)",
     )
 
-    # Parse the organization info BT_500_Organization_TouchPoint
+    # Parse the organization info BT_500_organization_touchpoint
     process_bt_section(
         release_json,
         xml_content,
         [parse_touchpoint_name],
         merge_touchpoint_name,
-        "TouchPoint Name (BT-500-Organization-TouchPoint)",
+        "touchpoint Name (BT-500-organization-touchpoint)",
     )
 
     # Parse and merge BT-160-Tender
@@ -3034,7 +3034,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_concession_revenue_buyer],
         merge_concession_revenue_buyer,
-        "Concession Revenue Buyer (BT-160)",
+        "Concession Revenue buyer (BT-160)",
     )
 
     # Parse and merge BT-162-Tender
@@ -3055,7 +3055,7 @@ def main(xml_path, ocid_prefix):
         "Concession Value Description (BT-163)",
     )
 
-    # Parse and merge BT-165-Organization-Company
+    # Parse and merge BT-165-organization-company
     process_bt_section(
         release_json,
         xml_content,
@@ -3136,7 +3136,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Identifier (BT-195, BT-09)",
     )
 
-    # Parse and merge BT-195(BT-105)-Procedure Unpublished Identifier
+    # Parse and merge BT-195(BT-105)-procedure Unpublished Identifier
     process_bt_section(
         release_json,
         xml_content,
@@ -3145,7 +3145,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Identifier (BT-195, BT-105)",
     )
 
-    # Parse and merge BT-195(BT-106)-Procedure Unpublished Identifier
+    # Parse and merge BT-195(BT-106)-procedure Unpublished Identifier
     process_bt_section(
         release_json,
         xml_content,
@@ -3154,7 +3154,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Identifier (BT-195, BT-106)",
     )
 
-    # Parse and merge BT-195(BT-1252)-Procedure Unpublished Identifier
+    # Parse and merge BT-195(BT-1252)-procedure Unpublished Identifier
     process_bt_section(
         release_json,
         xml_content,
@@ -3163,7 +3163,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Identifier (BT-195, BT-1252)",
     )
 
-    # Parse and merge BT-195(BT-135)-Procedure Unpublished Identifier
+    # Parse and merge BT-195(BT-135)-procedure Unpublished Identifier
     process_bt_section(
         release_json,
         xml_content,
@@ -3172,7 +3172,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Identifier (BT-195, BT-135)",
     )
 
-    # Parse and merge BT-195(BT-1351)-Procedure Unpublished Identifier
+    # Parse and merge BT-195(BT-1351)-procedure Unpublished Identifier
     process_bt_section(
         release_json,
         xml_content,
@@ -3181,7 +3181,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Identifier (BT-195, BT-1351)",
     )
 
-    # Parse and merge BT-195(BT-136)-Procedure Unpublished Identifier
+    # Parse and merge BT-195(BT-136)-procedure Unpublished Identifier
     process_bt_section(
         release_json,
         xml_content,
@@ -3214,7 +3214,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt195_bt160_unpublished_identifier],
         merge_bt195_bt160_unpublished_identifier,
-        "Procedure BT-195(BT-160)-Tender Unpublished Identifier",
+        "procedure BT-195(BT-160)-Tender Unpublished Identifier",
     )
 
     # Parse and merge BT-195(BT-162)-Tender Unpublished Identifier
@@ -3223,7 +3223,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt195_bt162_unpublished_identifier],
         merge_bt195_bt162_unpublished_identifier,
-        "Procedure BT-195(BT-162)-Tender Unpublished Identifier",
+        "procedure BT-195(BT-162)-Tender Unpublished Identifier",
     )
     # Parse and merge BT-195(BT-163)-Tender Unpublished Identifier
     process_bt_section(
@@ -3231,7 +3231,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt195_bt163_unpublished_identifier],
         merge_bt195_bt163_unpublished_identifier,
-        "Procedure BT-195(BT-163)-Tender Unpublished Identifier",
+        "procedure BT-195(BT-163)-Tender Unpublished Identifier",
     )
 
     # Parse and merge BT-195(BT-171)-Tender Unpublished Identifier
@@ -3240,7 +3240,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt195_bt171_unpublished_identifier],
         merge_bt195_bt171_unpublished_identifier,
-        "Procedure BT-195(BT-171)-Tender Unpublished Identifier",
+        "procedure BT-195(BT-171)-Tender Unpublished Identifier",
     )
 
     # Parse and merge BT-195(BT-191)-Tender Unpublished Identifier
@@ -3249,7 +3249,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt195_bt191_unpublished_identifier],
         merge_bt195_bt191_unpublished_identifier,
-        "Procedure BT-195(BT-191)-Tender Unpublished Identifier",
+        "procedure BT-195(BT-191)-Tender Unpublished Identifier",
     )
 
     # Parse and merge BT-195(BT-193)-Tender Unpublished Identifier
@@ -3258,7 +3258,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt195_bt193_unpublished_identifier],
         merge_bt195_bt193_unpublished_identifier,
-        "Procedure BT-195(BT-193)-Tender Unpublished Identifier",
+        "procedure BT-195(BT-193)-Tender Unpublished Identifier",
     )
 
     # Parse and merge BT-195(BT-539)-Lot Unpublished Identifier
@@ -3267,7 +3267,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt195_bt539_unpublished_identifier],
         merge_bt195_bt539_unpublished_identifier,
-        "Procedure BT-195(BT-539)-Lot Unpublished Identifier",
+        "procedure BT-195(BT-539)-Lot Unpublished Identifier",
     )
 
     # Parse and merge BT-195(BT-539)-LotsGroup Unpublished Identifier
@@ -3276,7 +3276,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt195_bt539_lotsgroup_unpublished_identifier],
         merge_bt195_bt539_lotsgroup_unpublished_identifier,
-        "Procedure BT-195(BT-539)-LotsGroup Unpublished Identifier",
+        "procedure BT-195(BT-539)-LotsGroup Unpublished Identifier",
     )
 
     # Parse and merge BT-195(BT-540)-Lot Unpublished Identifier
@@ -3285,7 +3285,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt195_bt540_lot_unpublished_identifier],
         merge_bt195_bt540_lot_unpublished_identifier,
-        "Procedure BT-195(BT-540)-Lot Unpublished Identifier",
+        "procedure BT-195(BT-540)-Lot Unpublished Identifier",
     )
 
     # Parse and merge BT-195(BT-540)-LotsGroup Unpublished Identifier
@@ -3294,7 +3294,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt195_bt540_lotsgroup_unpublished_identifier],
         merge_bt195_bt540_lotsgroup_unpublished_identifier,
-        "Procedure BT-195(BT-540)-LotsGroup Unpublished Identifier",
+        "procedure BT-195(BT-540)-LotsGroup Unpublished Identifier",
     )
 
     # Parse and merge BT-195(BT-541)-Lot-Fixed Unpublished Identifier
@@ -3303,7 +3303,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt195_bt541_lot_fixed_unpublished_identifier],
         merge_bt195_bt541_lot_fixed_unpublished_identifier,
-        "Procedure BT-195(BT-541)-Lot-Fixed Unpublished Identifier",
+        "procedure BT-195(BT-541)-Lot-Fixed Unpublished Identifier",
     )
 
     # Parse and merge BT-195(BT-541) Lot Threshold Unpublished Identifier
@@ -3443,7 +3443,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt195_bt635_unpublished_identifier],
         merge_bt195_bt635_unpublished_identifier,
-        "Unpublished Identifier for Lot Result Buyer Review Request Count (BT-195(BT-635))",
+        "Unpublished Identifier for Lot Result buyer Review Request Count (BT-195(BT-635))",
     )
     # Parse and merge BT-195(BT-636)-LotResult
     process_bt_section(
@@ -3451,7 +3451,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt195_bt636_unpublished_identifier],
         merge_bt195_bt636_unpublished_identifier,
-        "Unpublished Identifier for Lot Result Buyer Review Request Irregularity Type (BT-195(BT-636))",
+        "Unpublished Identifier for Lot Result buyer Review Request Irregularity Type (BT-195(BT-636))",
     )
     # Parse and merge BT-195(BT-660)-LotResult
     process_bt_section(
@@ -3492,7 +3492,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt195_bt712_unpublished_identifier],
         merge_bt195_bt712_unpublished_identifier,
-        "Unpublished Identifier for Lot Result Buyer Review Complainants (BT-195(BT-712))",
+        "Unpublished Identifier for Lot Result buyer Review Complainants (BT-195(BT-712))",
     )
     # Parse and merge BT-195(BT-720)-Tender
     process_bt_section(
@@ -3558,13 +3558,13 @@ def main(xml_path, ocid_prefix):
         merge_bt195_bt773_tender_unpublished_identifier,
         "Unpublished Identifier for Subcontracting in Tender (BT-195(BT-773))",
     )
-    # Parse and merge BT-195(BT-88)-Procedure
+    # Parse and merge BT-195(BT-88)-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_bt195_bt88_procedure_unpublished_identifier],
         merge_bt195_bt88_procedure_unpublished_identifier,
-        "Unpublished Identifier for Procedure Features (BT-195(BT-88))",
+        "Unpublished Identifier for procedure Features (BT-195(BT-88))",
     )
 
     # BT-196
@@ -3577,7 +3577,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Justification Description (BT-196, BT-09)",
     )
 
-    # Parse and merge BT-196(BT-105)-Procedure Unpublished Justification Description
+    # Parse and merge BT-196(BT-105)-procedure Unpublished Justification Description
     process_bt_section(
         release_json,
         xml_content,
@@ -3586,7 +3586,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Justification Description (BT-196, BT-105)",
     )
 
-    # Parse and merge BT-196(BT-106)-Procedure Unpublished Justification Description
+    # Parse and merge BT-196(BT-106)-procedure Unpublished Justification Description
     process_bt_section(
         release_json,
         xml_content,
@@ -3595,7 +3595,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Justification Description (BT-196, BT-106)",
     )
 
-    # Parse and merge BT-196(BT-1252)-Procedure Unpublished Justification Description
+    # Parse and merge BT-196(BT-1252)-procedure Unpublished Justification Description
     process_bt_section(
         release_json,
         xml_content,
@@ -3604,7 +3604,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Justification Description (BT-196, BT-1252)",
     )
 
-    # Parse and merge BT-196(BT-135)-Procedure Unpublished Justification Description
+    # Parse and merge BT-196(BT-135)-procedure Unpublished Justification Description
     process_bt_section(
         release_json,
         xml_content,
@@ -3613,7 +3613,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Justification Description (BT-196, BT-135)",
     )
 
-    # Parse and merge BT-196(BT-1351)-Procedure Unpublished Justification Description
+    # Parse and merge BT-196(BT-1351)-procedure Unpublished Justification Description
     process_bt_section(
         release_json,
         xml_content,
@@ -3622,7 +3622,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Justification Description (BT-196, BT-1351)",
     )
 
-    # Parse and merge BT-196(BT-136)-Procedure Unpublished Justification Description
+    # Parse and merge BT-196(BT-136)-procedure Unpublished Justification Description
     process_bt_section(
         release_json,
         xml_content,
@@ -3655,7 +3655,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt196_bt160_unpublished_justification],
         merge_bt196_bt160_unpublished_justification,
-        "Procedure BT-196(BT-160)-Tender Unpublished Justification Description",
+        "procedure BT-196(BT-160)-Tender Unpublished Justification Description",
     )
 
     # Parse and merge BT-196(BT-162)-Tender Unpublished Justification Description
@@ -3664,7 +3664,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt196_bt162_unpublished_justification],
         merge_bt196_bt162_unpublished_justification,
-        "Procedure BT-196(BT-162)-Tender Unpublished Justification Description",
+        "procedure BT-196(BT-162)-Tender Unpublished Justification Description",
     )
 
     # Parse and merge BT-196(BT-163)-Tender Unpublished Justification Description
@@ -3673,7 +3673,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt196_bt163_unpublished_justification],
         merge_bt196_bt163_unpublished_justification,
-        "Procedure BT-196(BT-163)-Tender Unpublished Justification Description",
+        "procedure BT-196(BT-163)-Tender Unpublished Justification Description",
     )
 
     # Parse and merge BT-196(BT-171)-Tender Unpublished Justification Description
@@ -3682,7 +3682,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt196_bt171_unpublished_justification],
         merge_bt196_bt171_unpublished_justification,
-        "Procedure BT-196(BT-171)-Tender Unpublished Justification Description",
+        "procedure BT-196(BT-171)-Tender Unpublished Justification Description",
     )
 
     # Parse and merge BT-196(BT-191)-Tender Unpublished Justification Description
@@ -3691,7 +3691,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt196_bt191_unpublished_justification],
         merge_bt196_bt191_unpublished_justification,
-        "Procedure BT-196(BT-191)-Tender Unpublished Justification Description",
+        "procedure BT-196(BT-191)-Tender Unpublished Justification Description",
     )
 
     # Parse and merge BT-196(BT-193)-Tender Unpublished Justification Description
@@ -3700,7 +3700,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt196_bt193_unpublished_justification],
         merge_bt196_bt193_unpublished_justification,
-        "Procedure BT-196(BT-193)-Tender Unpublished Justification Description",
+        "procedure BT-196(BT-193)-Tender Unpublished Justification Description",
     )
 
     # Parse and merge BT-196(BT-539)-Lot Unpublished Justification Description
@@ -3709,7 +3709,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt196_bt539_unpublished_justification],
         merge_bt196_bt539_unpublished_justification,
-        "Procedure BT-196(BT-539)-Lot Unpublished Justification Description",
+        "procedure BT-196(BT-539)-Lot Unpublished Justification Description",
     )
 
     # Parse and merge BT-196(BT-539)-LotsGroup Unpublished Justification Description
@@ -3718,7 +3718,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt196_bt539_lotsgroup_unpublished_justification],
         merge_bt196_bt539_lotsgroup_unpublished_justification,
-        "Procedure BT-196(BT-539)-LotsGroup Unpublished Justification Description",
+        "procedure BT-196(BT-539)-LotsGroup Unpublished Justification Description",
     )
 
     # Parse and merge BT-196(BT-540)-Lot Unpublished Justification Description
@@ -3727,7 +3727,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt196_bt540_lot_unpublished_justification],
         merge_bt196_bt540_lot_unpublished_justification,
-        "Procedure BT-196(BT-540)-Lot Unpublished Justification Description",
+        "procedure BT-196(BT-540)-Lot Unpublished Justification Description",
     )
 
     # Parse and merge BT-196(BT-540)-LotsGroup Unpublished Justification Description
@@ -3736,7 +3736,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt196_bt540_lotsgroup_unpublished_justification],
         merge_bt196_bt540_lotsgroup_unpublished_justification,
-        "Procedure BT-196(BT-540)-LotsGroup Unpublished Justification Description",
+        "procedure BT-196(BT-540)-LotsGroup Unpublished Justification Description",
     )
 
     # Parse and merge BT-196(BT-541)-Lot-Fixed Unpublished Justification Description
@@ -3745,7 +3745,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt196_bt541_lot_fixed_unpublished_justification],
         merge_bt196_bt541_lot_fixed_unpublished_justification,
-        "Procedure BT-196(BT-541)-Lot-Fixed Unpublished Justification Description",
+        "procedure BT-196(BT-541)-Lot-Fixed Unpublished Justification Description",
     )
 
     # Parse and merge BT-196(BT-541) Lot Threshold Unpublished Justification Description
@@ -3886,7 +3886,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt196_bt635_unpublished_justification],
         merge_bt196_bt635_unpublished_justification,
-        "Unpublished Justification Description for Lot Result Buyer Review Request Count (BT-196(BT-635))",
+        "Unpublished Justification Description for Lot Result buyer Review Request Count (BT-196(BT-635))",
     )
     # Parse and merge BT-196(BT-636)-LotResult
     process_bt_section(
@@ -3894,7 +3894,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt196_bt636_unpublished_justification],
         merge_bt196_bt636_unpublished_justification,
-        "Unpublished Justification Description for Lot Result Buyer Review Request Irregularity Type (BT-196(BT-636))",
+        "Unpublished Justification Description for Lot Result buyer Review Request Irregularity Type (BT-196(BT-636))",
     )
     # Parse and merge BT-196(BT-660)-LotResult
     process_bt_section(
@@ -3934,7 +3934,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt196_bt712_unpublished_justification],
         merge_bt196_bt712_unpublished_justification,
-        "Unpublished Justification for Lot Result Buyer Review Complainants (BT-196(BT-712))",
+        "Unpublished Justification for Lot Result buyer Review Complainants (BT-196(BT-712))",
     )
     # Parse and merge BT-196(BT-720)-Tender
     process_bt_section(
@@ -4000,13 +4000,13 @@ def main(xml_path, ocid_prefix):
         merge_bt196_bt773_tender_unpublished_justification,
         "Unpublished Justification for Subcontracting in Tender (BT-196(BT-773))",
     )
-    # Parse and merge BT-196(BT-88)-Procedure
+    # Parse and merge BT-196(BT-88)-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_bt196_bt88_procedure_unpublished_justification],
         merge_bt196_bt88_procedure_unpublished_justification,
-        "Unpublished Justification for Procedure Features (BT-196(BT-88))",
+        "Unpublished Justification for procedure Features (BT-196(BT-88))",
     )
 
     # BT-197
@@ -4020,7 +4020,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Justification Code (BT-197, BT-09)",
     )
 
-    # Parse and merge BT-197(BT-105)-Procedure Unpublished Justification Code
+    # Parse and merge BT-197(BT-105)-procedure Unpublished Justification Code
     process_bt_section(
         release_json,
         xml_content,
@@ -4029,7 +4029,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Justification Code (BT-197, BT-105)",
     )
 
-    # Parse and merge BT-197(BT-106)-Procedure Unpublished Justification Code
+    # Parse and merge BT-197(BT-106)-procedure Unpublished Justification Code
     process_bt_section(
         release_json,
         xml_content,
@@ -4038,7 +4038,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Justification Code (BT-197, BT-106)",
     )
 
-    # Parse and merge BT-197(BT-1252)-Procedure Unpublished Justification Code
+    # Parse and merge BT-197(BT-1252)-procedure Unpublished Justification Code
     process_bt_section(
         release_json,
         xml_content,
@@ -4047,7 +4047,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Justification Code (BT-197, BT-1252)",
     )
 
-    # Parse and merge BT-197(BT-135)-Procedure Unpublished Justification Code
+    # Parse and merge BT-197(BT-135)-procedure Unpublished Justification Code
     process_bt_section(
         release_json,
         xml_content,
@@ -4056,7 +4056,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Justification Code (BT-197, BT-135)",
     )
 
-    # Parse and merge BT-197(BT-1351)-Procedure Unpublished Justification Code
+    # Parse and merge BT-197(BT-1351)-procedure Unpublished Justification Code
     process_bt_section(
         release_json,
         xml_content,
@@ -4065,7 +4065,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Justification Code (BT-197, BT-1351)",
     )
 
-    # Parse and merge BT-197(BT-136)-Procedure Unpublished Justification Code
+    # Parse and merge BT-197(BT-136)-procedure Unpublished Justification Code
     process_bt_section(
         release_json,
         xml_content,
@@ -4098,7 +4098,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt197_bt160_unpublished_justification_code],
         merge_bt197_bt160_unpublished_justification_code,
-        "Procedure BT-197(BT-160)-Tender Unpublished Justification Code",
+        "procedure BT-197(BT-160)-Tender Unpublished Justification Code",
     )
 
     # Parse and merge BT-197(BT-162)-Tender Unpublished Justification Code
@@ -4107,7 +4107,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt197_bt162_unpublished_justification_code],
         merge_bt197_bt162_unpublished_justification_code,
-        "Procedure BT-197(BT-162)-Tender Unpublished Justification Code",
+        "procedure BT-197(BT-162)-Tender Unpublished Justification Code",
     )
 
     # Parse and merge BT-197(BT-163)-Tender Unpublished Justification Code
@@ -4116,7 +4116,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt197_bt163_unpublished_justification_code],
         merge_bt197_bt163_unpublished_justification_code,
-        "Procedure BT-197(BT-163)-Tender Unpublished Justification Code",
+        "procedure BT-197(BT-163)-Tender Unpublished Justification Code",
     )
 
     # Parse and merge BT-197(BT-171)-Tender Unpublished Justification Code
@@ -4125,7 +4125,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt197_bt171_unpublished_justification_code],
         merge_bt197_bt171_unpublished_justification_code,
-        "Procedure BT-197(BT-171)-Tender Unpublished Justification Code",
+        "procedure BT-197(BT-171)-Tender Unpublished Justification Code",
     )
 
     # Parse and merge BT-197(BT-191)-Tender Unpublished Justification Code
@@ -4134,7 +4134,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt197_bt191_unpublished_justification_code],
         merge_bt197_bt191_unpublished_justification_code,
-        "Procedure BT-197(BT-191)-Tender Unpublished Justification Code",
+        "procedure BT-197(BT-191)-Tender Unpublished Justification Code",
     )
 
     # Parse and merge BT-197(BT-193)-Tender Unpublished Justification Code
@@ -4143,7 +4143,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt197_bt193_unpublished_justification_code],
         merge_bt197_bt193_unpublished_justification_code,
-        "Procedure BT-197(BT-193)-Tender Unpublished Justification Code",
+        "procedure BT-197(BT-193)-Tender Unpublished Justification Code",
     )
 
     # Parse and merge BT-197(BT-539)-Lot Unpublished Justification Code
@@ -4152,7 +4152,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt197_bt539_unpublished_justification_code],
         merge_bt197_bt539_unpublished_justification_code,
-        "Procedure BT-197(BT-539)-Lot Unpublished Justification Code",
+        "procedure BT-197(BT-539)-Lot Unpublished Justification Code",
     )
 
     # Parse and merge BT-197(BT-539)-LotsGroup Unpublished Justification Code
@@ -4161,7 +4161,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt197_bt539_lotsgroup_unpublished_justification_code],
         merge_bt197_bt539_lotsgroup_unpublished_justification_code,
-        "Procedure BT-197(BT-539)-LotsGroup Unpublished Justification Code",
+        "procedure BT-197(BT-539)-LotsGroup Unpublished Justification Code",
     )
 
     # Parse and merge BT-197(BT-540)-Lot Unpublished Justification Code
@@ -4170,7 +4170,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt197_bt540_lot_unpublished_justification_code],
         merge_bt197_bt540_lot_unpublished_justification_code,
-        "Procedure BT-197(BT-540)-Lot Unpublished Justification Code",
+        "procedure BT-197(BT-540)-Lot Unpublished Justification Code",
     )
 
     # Parse and merge BT-197(BT-540)-LotsGroup Unpublished Justification Code
@@ -4179,7 +4179,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt197_bt540_lotsgroup_unpublished_justification_code],
         merge_bt197_bt540_lotsgroup_unpublished_justification_code,
-        "Procedure BT-197(BT-540)-LotsGroup Unpublished Justification Code",
+        "procedure BT-197(BT-540)-LotsGroup Unpublished Justification Code",
     )
 
     # Parse and merge BT-197(BT-541)-Lot-Fixed Unpublished Justification Code
@@ -4188,7 +4188,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt197_bt541_lot_fixed_unpublished_justification_code],
         merge_bt197_bt541_lot_fixed_unpublished_justification_code,
-        "Procedure BT-197(BT-541)-Lot-Fixed Unpublished Justification Code",
+        "procedure BT-197(BT-541)-Lot-Fixed Unpublished Justification Code",
     )
 
     # Parse and merge BT-197(BT-541) Lot Threshold Unpublished Justification Code
@@ -4331,7 +4331,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt197_bt635_unpublished_justification_code],
         merge_bt197_bt635_unpublished_justification_code,
-        "Unpublished Justification Code for Lot Result Buyer Review Request Count (BT-197(BT-635))",
+        "Unpublished Justification Code for Lot Result buyer Review Request Count (BT-197(BT-635))",
     )
     # Parse and merge BT-197(BT-636)-LotResult
     process_bt_section(
@@ -4339,7 +4339,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt197_bt636_unpublished_justification_code],
         merge_bt197_bt636_unpublished_justification_code,
-        "Unpublished Justification Code for Lot Result Buyer Review Request Irregularity Type (BT-197(BT-636))",
+        "Unpublished Justification Code for Lot Result buyer Review Request Irregularity Type (BT-197(BT-636))",
     )
     # Parse and merge BT-197(BT-660)-LotResult
     process_bt_section(
@@ -4379,7 +4379,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt197_bt712_unpublished_justification_code],
         merge_bt197_bt712_unpublished_justification_code,
-        "Unpublished Justification Code for Lot Result Buyer Review Complainants (BT-197(BT-712))",
+        "Unpublished Justification Code for Lot Result buyer Review Complainants (BT-197(BT-712))",
     )
     # Parse and merge BT-197(BT-720)-Tender
     process_bt_section(
@@ -4445,13 +4445,13 @@ def main(xml_path, ocid_prefix):
         merge_bt197_bt773_tender_unpublished_justification_code,
         "Unpublished Justification Code for Subcontracting in Tender (BT-197(BT-773))",
     )
-    # Parse and merge BT-197(BT-88)-Procedure
+    # Parse and merge BT-197(BT-88)-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_bt197_bt88_procedure_unpublished_justification_code],
         merge_bt197_bt88_procedure_unpublished_justification_code,
-        "Unpublished Justification Code for Procedure Features (BT-197(BT-88))",
+        "Unpublished Justification Code for procedure Features (BT-197(BT-88))",
     )
 
     # BT-198
@@ -4464,7 +4464,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Access Date (BT-198, BT-09)",
     )
 
-    # Parse and merge BT-198(BT-106)-Procedure Unpublished Access Date
+    # Parse and merge BT-198(BT-106)-procedure Unpublished Access Date
     process_bt_section(
         release_json,
         xml_content,
@@ -4473,7 +4473,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Access Date (BT-198, BT-106)",
     )
 
-    # Parse and merge BT-198(BT-105)-Procedure Unpublished Access Date
+    # Parse and merge BT-198(BT-105)-procedure Unpublished Access Date
     process_bt_section(
         release_json,
         xml_content,
@@ -4482,7 +4482,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Access Date (BT-198, BT-105)",
     )
 
-    # Parse and merge BT-198(BT-1252)-Procedure Unpublished Access Date
+    # Parse and merge BT-198(BT-1252)-procedure Unpublished Access Date
     process_bt_section(
         release_json,
         xml_content,
@@ -4491,7 +4491,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Access Date (BT-198, BT-1252)",
     )
 
-    # Parse and merge BT-198(BT-135)-Procedure Unpublished Access Date
+    # Parse and merge BT-198(BT-135)-procedure Unpublished Access Date
     process_bt_section(
         release_json,
         xml_content,
@@ -4500,7 +4500,7 @@ def main(xml_path, ocid_prefix):
         "Unpublished Access Date (BT-198, BT-135)",
     )
 
-    # Parse and merge BT-198(BT-1351)-Procedure Unpublished Access Date
+    # Parse and merge BT-198(BT-1351)-procedure Unpublished Access Date
     process_bt_section(
         release_json,
         xml_content,
@@ -4533,7 +4533,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt198_bt160_unpublished_access_date],
         merge_bt198_bt160_unpublished_access_date,
-        "Procedure BT-198(BT-160)-Tender Unpublished Access Date",
+        "procedure BT-198(BT-160)-Tender Unpublished Access Date",
     )
 
     # Parse and merge BT-198(BT-162)-Tender Unpublished Access Date
@@ -4542,7 +4542,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt198_bt162_unpublished_access_date],
         merge_bt198_bt162_unpublished_access_date,
-        "Procedure BT-198(BT-162)-Tender Unpublished Access Date",
+        "procedure BT-198(BT-162)-Tender Unpublished Access Date",
     )
 
     # Parse and merge BT-198(BT-163)-Tender Unpublished Access Date
@@ -4551,7 +4551,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt198_bt163_unpublished_access_date],
         merge_bt198_bt163_unpublished_access_date,
-        "Procedure BT-198(BT-163)-Tender Unpublished Access Date",
+        "procedure BT-198(BT-163)-Tender Unpublished Access Date",
     )
 
     # Parse and merge BT-198(BT-171)-Tender Unpublished Access Date
@@ -4560,7 +4560,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt198_bt171_unpublished_access_date],
         merge_bt198_bt171_unpublished_access_date,
-        "Procedure BT-198(BT-171)-Tender Unpublished Access Date",
+        "procedure BT-198(BT-171)-Tender Unpublished Access Date",
     )
 
     # Parse and merge BT-198(BT-191)-Tender Unpublished Access Date
@@ -4569,7 +4569,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt198_bt191_unpublished_access_date],
         merge_bt198_bt191_unpublished_access_date,
-        "Procedure BT-198(BT-191)-Tender Unpublished Access Date",
+        "procedure BT-198(BT-191)-Tender Unpublished Access Date",
     )
 
     # Parse and merge BT-198(BT-193)-Tender Unpublished Access Date
@@ -4578,7 +4578,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt198_bt193_unpublished_access_date],
         merge_bt198_bt193_unpublished_access_date,
-        "Procedure BT-198(BT-193)-Tender Unpublished Access Date",
+        "procedure BT-198(BT-193)-Tender Unpublished Access Date",
     )
 
     # Parse and merge BT-198(BT-539)-Lot Unpublished Access Date
@@ -4587,7 +4587,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt198_bt539_unpublished_access_date],
         merge_bt198_bt539_unpublished_access_date,
-        "Procedure BT-198(BT-539)-Lot Unpublished Access Date",
+        "procedure BT-198(BT-539)-Lot Unpublished Access Date",
     )
 
     # Parse and merge BT-198(BT-539)-LotsGroup Unpublished Access Date
@@ -4596,7 +4596,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt198_bt539_lotsgroup_unpublished_access_date],
         merge_bt198_bt539_lotsgroup_unpublished_access_date,
-        "Procedure BT-198(BT-539)-LotsGroup Unpublished Access Date",
+        "procedure BT-198(BT-539)-LotsGroup Unpublished Access Date",
     )
 
     # Parse and merge BT-198(BT-540)-Lot Unpublished Access Date
@@ -4605,7 +4605,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt198_bt540_lot_unpublished_access_date],
         merge_bt198_bt540_lot_unpublished_access_date,
-        "Procedure BT-198(BT-540)-Lot Unpublished Access Date",
+        "procedure BT-198(BT-540)-Lot Unpublished Access Date",
     )
 
     # Parse and merge BT-198(BT-540)-LotsGroup Unpublished Access Date
@@ -4614,7 +4614,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt198_bt540_lotsgroup_unpublished_access_date],
         merge_bt198_bt540_lotsgroup_unpublished_access_date,
-        "Procedure BT-198(BT-540)-LotsGroup Unpublished Access Date",
+        "procedure BT-198(BT-540)-LotsGroup Unpublished Access Date",
     )
 
     # Parse and merge BT-198(BT-541)-Lot-Fixed Unpublished Access Date
@@ -4623,7 +4623,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt198_bt541_lot_fixed_unpublished_access_date],
         merge_bt198_bt541_lot_fixed_unpublished_access_date,
-        "Procedure BT-198(BT-541)-Lot-Fixed Unpublished Access Date",
+        "procedure BT-198(BT-541)-Lot-Fixed Unpublished Access Date",
     )
 
     # Parse and merge BT-198(BT-541) Lot Threshold Unpublished Access Date
@@ -4762,7 +4762,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt198_bt635_unpublished_access_date],
         merge_bt198_bt635_unpublished_access_date,
-        "Unpublished Access Date for Lot Result Buyer Review Request Count (BT-198(BT-635))",
+        "Unpublished Access Date for Lot Result buyer Review Request Count (BT-198(BT-635))",
     )
     # Parse and merge BT-198(BT-636)-LotResult
     process_bt_section(
@@ -4770,7 +4770,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt198_bt636_unpublished_access_date],
         merge_bt198_bt636_unpublished_access_date,
-        "Unpublished Access Date for Lot Result Buyer Review Request Irregularity Type (BT-198(BT-636))",
+        "Unpublished Access Date for Lot Result buyer Review Request Irregularity Type (BT-198(BT-636))",
     )
     # Parse and merge BT-198(BT-660)-LotResult
     process_bt_section(
@@ -4810,7 +4810,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_bt198_bt712_unpublished_access_date],
         merge_bt198_bt712_unpublished_access_date,
-        "Unpublished Access Date for Lot Result Buyer Review Complainants (BT-198(BT-712))",
+        "Unpublished Access Date for Lot Result buyer Review Complainants (BT-198(BT-712))",
     )
     # Parse and merge BT-198(BT-720)-Tender
     process_bt_section(
@@ -4876,13 +4876,13 @@ def main(xml_path, ocid_prefix):
         merge_bt198_bt773_tender_unpublished_access_date,
         "Unpublished Access Date for Subcontracting in Tender (BT-198(BT-773))",
     )
-    # Parse and merge BT-198(BT-88)-Procedure
+    # Parse and merge BT-198(BT-88)-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_bt198_bt88_procedure_unpublished_access_date],
         merge_bt198_bt88_procedure_unpublished_access_date,
-        "Unpublished Access Date for Procedure Features (BT-198(BT-88))",
+        "Unpublished Access Date for procedure Features (BT-198(BT-88))",
     )
 
     # Process BT-200-Contract
@@ -4894,7 +4894,7 @@ def main(xml_path, ocid_prefix):
         "BT-200-Contract (Contract Modification Reason)",
     )
 
-    # Parse and merge BT-198(BT-136)-Procedure Unpublished Access Date
+    # Parse and merge BT-198(BT-136)-procedure Unpublished Access Date
     process_bt_section(
         release_json,
         xml_content,
@@ -4939,22 +4939,22 @@ def main(xml_path, ocid_prefix):
         "BT-21-LotsGroup (Lots Group Title)",
     )
 
-    # Process BT-21-Part
+    # Process BT-21-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_title],
         merge_part_title,
-        "BT-21-Part (Part Title)",
+        "BT-21-part (part Title)",
     )
 
-    # Process BT-21-Procedure
+    # Process BT-21-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_procedure_title],
         merge_procedure_title,
-        "BT-21-Procedure (Procedure Title)",
+        "BT-21-procedure (procedure Title)",
     )
 
     # Process BT-22-Lot
@@ -4975,22 +4975,22 @@ def main(xml_path, ocid_prefix):
         "BT-23-Lot (Main Nature)",
     )
 
-    # Process BT-23-Part
+    # Process BT-23-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_main_nature_part],
         merge_main_nature_part,
-        "BT-23-Part (Main Nature Part)",
+        "BT-23-part (Main Nature part)",
     )
 
-    # Process BT-23-Procedure
+    # Process BT-23-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_main_nature_procedure],
         merge_main_nature_procedure,
-        "BT-23-Procedure (Main Nature Procedure)",
+        "BT-23-procedure (Main Nature procedure)",
     )
 
     # Process BT-24-Lot
@@ -5011,22 +5011,22 @@ def main(xml_path, ocid_prefix):
         "BT-24-LotsGroup (Lots Group Description)",
     )
 
-    # Process BT-24-Part
+    # Process BT-24-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_description],
         merge_part_description,
-        "BT-24-Part (Part Description)",
+        "BT-24-part (part Description)",
     )
 
-    # Process BT-24-Procedure
+    # Process BT-24-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_procedure_description],
         merge_procedure_description,
-        "BT-24-Procedure (Procedure Description)",
+        "BT-24-procedure (procedure Description)",
     )
 
     # Process BT-25-Lot
@@ -5047,22 +5047,22 @@ def main(xml_path, ocid_prefix):
         "BT-26-Lot (Classification Type)",
     )
 
-    # Process BT-26-Part
+    # Process BT-26-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_classification_type_part],
         merge_classification_type_part,
-        "BT-26-Part (Classification Type Part)",
+        "BT-26-part (Classification Type part)",
     )
 
-    # Process BT-26-Procedure
+    # Process BT-26-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_classification_type_procedure],
         merge_classification_type_procedure,
-        "BT-26-Procedure (Classification Type Procedure)",
+        "BT-26-procedure (Classification Type procedure)",
     )
 
     # Process Main Classification Type for BT_26m_lot Lot
@@ -5080,7 +5080,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_main_classification_type_part],
         merge_main_classification_type_part,
-        "Main Classification Type for Part (BT_26m_part)",
+        "Main Classification Type for part (BT_26m_part)",
     )
 
     # Process Main Classification Type for BT_26m_procedure
@@ -5089,7 +5089,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_main_classification_type_procedure],
         merge_main_classification_type_procedure,
-        "Main Classification Type for Procedure (BT_26m_procedure)",
+        "Main Classification Type for procedure (BT_26m_procedure)",
     )
 
     # Process Main Classification Code for Lot BT_262_lot
@@ -5101,22 +5101,22 @@ def main(xml_path, ocid_prefix):
         "Main Classification Code for Lot (BT_262_lot)",
     )
 
-    # Process Main Classification Code for Part BT_262_part
+    # Process Main Classification Code for part BT_262_part
     process_bt_section(
         release_json,
         xml_content,
         [parse_main_classification_code_part],
         merge_main_classification_code_part,
-        "Main Classification Code for Part (BT_262_part)",
+        "Main Classification Code for part (BT_262_part)",
     )
 
-    # Process Main Classification Code for Procedure BT_262_procedure
+    # Process Main Classification Code for procedure BT_262_procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_main_classification_code_procedure],
         merge_main_classification_code_procedure,
-        "Main Classification Code for Procedure (BT_262_procedure)",
+        "Main Classification Code for procedure (BT_262_procedure)",
     )
 
     # Process Additional Classification Code for Lot BT_263_lot
@@ -5128,22 +5128,22 @@ def main(xml_path, ocid_prefix):
         "Additional Classification Code for Lot (BT_263_lot)",
     )
 
-    # Process Additional Classification Code for Part BT_263_part
+    # Process Additional Classification Code for part BT_263_part
     process_bt_section(
         release_json,
         xml_content,
         [parse_additional_classification_code_part],
         merge_additional_classification_code_part,
-        "Additional Classification Code for Part (BT_263_part)",
+        "Additional Classification Code for part (BT_263_part)",
     )
 
-    # Process Additional Classification Code for Procedure BT_263_procedure
+    # Process Additional Classification Code for procedure BT_263_procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_additional_classification_code_procedure],
         merge_additional_classification_code_procedure,
-        "Additional Classification Code for Procedure (BT_263_procedure)",
+        "Additional Classification Code for procedure (BT_263_procedure)",
     )
 
     # Process BT-27-Lot (Lot Estimated Value)
@@ -5164,22 +5164,22 @@ def main(xml_path, ocid_prefix):
         "LotsGroup Estimated Value (BT-27-LotsGroup)",
     )
 
-    # Process BT-27-Part Estimated Value
+    # Process BT-27-part Estimated Value
     process_bt_section(
         release_json,
         xml_content,
         [parse_bt_27_part],
         merge_bt_27_part,
-        "Part Estimated Value (BT-27-Part)",
+        "part Estimated Value (BT-27-part)",
     )
 
-    # Process BT-27-Procedure Estimated Value
+    # Process BT-27-procedure Estimated Value
     process_bt_section(
         release_json,
         xml_content,
         [parse_bt_27_procedure],
         merge_bt_27_procedure,
-        "Procedure Estimated Value (BT-27-Procedure)",
+        "procedure Estimated Value (BT-27-procedure)",
     )
 
     # Process BT-271-Lot Framework Maximum Value
@@ -5200,13 +5200,13 @@ def main(xml_path, ocid_prefix):
         "LotsGroup Framework Maximum Value (BT-271-LotsGroup)",
     )
 
-    # Process BT-271-Procedure Framework Maximum Value
+    # Process BT-271-procedure Framework Maximum Value
     process_bt_section(
         release_json,
         xml_content,
         [parse_bt_271_procedure],
         merge_bt_271_procedure,
-        "Procedure Framework Maximum Value (BT-271-Procedure)",
+        "procedure Framework Maximum Value (BT-271-procedure)",
     )
 
     # Process BT-300-Lot
@@ -5227,31 +5227,31 @@ def main(xml_path, ocid_prefix):
         "BT-300-LotsGroup (Lots Group Additional Information)",
     )
 
-    # Process BT-300-Part
+    # Process BT-300-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_additional_info],
         merge_part_additional_info,
-        "BT-300-Part (Part Additional Information)",
+        "BT-300-part (part Additional Information)",
     )
 
-    # Process BT-300-Procedure
+    # Process BT-300-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_procedure_additional_info],
         merge_procedure_additional_info,
-        "BT-300-Procedure (Procedure Additional Information)",
+        "BT-300-procedure (procedure Additional Information)",
     )
 
-    # Process BT-31-Procedure
+    # Process BT-31-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_max_lots_allowed],
         merge_max_lots_allowed,
-        "BT-31-Procedure (Maximum Lots Allowed)",
+        "BT-31-procedure (Maximum Lots Allowed)",
     )
 
     # Process BT-3201-Tender
@@ -5299,13 +5299,13 @@ def main(xml_path, ocid_prefix):
         "BT-36-Lot (Lot Duration)",
     )
 
-    # Process BT-36-Part
+    # Process BT-36-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_duration],
         merge_part_duration,
-        "BT-36-Part (Part Duration)",
+        "BT-36-part (part Duration)",
     )
 
     # Process BT-40-Lot
@@ -5368,7 +5368,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_participant_name],
         merge_participant_name,
-        "BT-47-Lot (Participant Name)",
+        "BT-47-Lot (participant Name)",
     )
 
     # Process BT-50-Lot
@@ -5386,7 +5386,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_ubo_name],
         merge_ubo_name,
-        "BT-500 (UBO Name)",
+        "BT-500 (ubo Name)",
     )
 
     # Process BT-501
@@ -5395,7 +5395,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_organization_identifier],
         merge_organization_identifier,
-        "BT-501 (Organization Identifier)",
+        "BT-501 (organization Identifier)",
     )
 
     # Process BT-5010-Lot
@@ -5416,121 +5416,121 @@ def main(xml_path, ocid_prefix):
         "BT-5011-Contract (Contract EU Funds Financing Identifier)",
     )
 
-    # Process BT-502-Organization-Company
+    # Process BT-502-organization-company
     process_bt_section(
         release_json,
         xml_content,
         [parse_organization_contact_point],
         merge_organization_contact_point,
-        "BT-502-Organization-Company (Organization Contact Point)",
+        "BT-502-organization-company (organization Contact Point)",
     )
 
-    # Process BT-502-Organization-TouchPoint
+    # Process BT-502-organization-touchpoint
     process_bt_section(
         release_json,
         xml_content,
         [parse_touchpoint_contact_point],
         merge_touchpoint_contact_point,
-        "BT-502-Organization-TouchPoint (TouchPoint Contact Point)",
+        "BT-502-organization-touchpoint (touchpoint Contact Point)",
     )
 
-    # Process BT-503-Organization-Company
+    # Process BT-503-organization-company
     process_bt_section(
         release_json,
         xml_content,
         [parse_organization_contact_telephone],
         merge_organization_contact_telephone,
-        "BT-503-Organization-Company (Organization Contact Telephone)",
+        "BT-503-organization-company (organization Contact Telephone)",
     )
 
-    # Process BT-503-Organization-TouchPoint
+    # Process BT-503-organization-touchpoint
     process_bt_section(
         release_json,
         xml_content,
         [parse_touchpoint_contact_telephone],
         merge_touchpoint_contact_telephone,
-        "BT-503-Organization-TouchPoint (TouchPoint Contact Telephone)",
+        "BT-503-organization-touchpoint (touchpoint Contact Telephone)",
     )
 
-    # Process BT-503-UBO
+    # Process BT-503-ubo
     process_bt_section(
         release_json,
         xml_content,
         [parse_ubo_telephone],
         merge_ubo_telephone,
-        "BT-503-UBO (UBO Telephone)",
+        "BT-503-ubo (ubo Telephone)",
     )
 
-    # Process BT-505-Organization-Company
+    # Process BT-505-organization-company
     process_bt_section(
         release_json,
         xml_content,
         [parse_organization_website],
         merge_organization_website,
-        "BT-505-Organization-Company (Organization Website)",
+        "BT-505-organization-company (organization Website)",
     )
 
-    # Process BT-505-Organization-TouchPoint
+    # Process BT-505-organization-touchpoint
     process_bt_section(
         release_json,
         xml_content,
         [parse_touchpoint_website],
         merge_touchpoint_website,
-        "BT-505-Organization-TouchPoint (TouchPoint Website)",
+        "BT-505-organization-touchpoint (touchpoint Website)",
     )
 
-    # Process BT-506-Organization-Company
+    # Process BT-506-organization-company
     process_bt_section(
         release_json,
         xml_content,
         [parse_organization_contact_email],
         merge_organization_contact_email,
-        "BT-506-Organization-Company (Organization Contact Email)",
+        "BT-506-organization-company (organization Contact Email)",
     )
 
-    # Process BT-506-Organization-TouchPoint
+    # Process BT-506-organization-touchpoint
     process_bt_section(
         release_json,
         xml_content,
         [parse_touchpoint_contact_email],
         merge_touchpoint_contact_email,
-        "BT-506-Organization-TouchPoint (TouchPoint Contact Email)",
+        "BT-506-organization-touchpoint (touchpoint Contact Email)",
     )
 
-    # Process BT-506-UBO
+    # Process BT-506-ubo
     process_bt_section(
         release_json,
         xml_content,
         [parse_ubo_email],
         merge_ubo_email,
-        "BT-506-UBO (UBO Email)",
+        "BT-506-ubo (ubo Email)",
     )
 
-    # Process BT-507-Organization-Company
+    # Process BT-507-organization-company
     process_bt_section(
         release_json,
         xml_content,
         [parse_organization_country_subdivision],
         merge_organization_country_subdivision,
-        "BT-507-Organization-Company (Organization Country Subdivision)",
+        "BT-507-organization-company (organization Country Subdivision)",
     )
 
-    # Process BT-507-Organization-TouchPoint
+    # Process BT-507-organization-touchpoint
     process_bt_section(
         release_json,
         xml_content,
         [parse_touchpoint_country_subdivision],
         merge_touchpoint_country_subdivision,
-        "BT-507-Organization-TouchPoint (TouchPoint Country Subdivision)",
+        "BT-507-organization-touchpoint (touchpoint Country Subdivision)",
     )
 
-    # Process BT-507-UBO
+    # Process BT-507-ubo
     process_bt_section(
         release_json,
         xml_content,
         [parse_ubo_country_subdivision],
         merge_ubo_country_subdivision,
-        "BT-507-UBO (UBO Country Subdivision)",
+        "BT-507-ubo (ubo Country Subdivision)",
     )
 
     # Process BT-5071-Lot
@@ -5542,49 +5542,49 @@ def main(xml_path, ocid_prefix):
         "BT-5071-Lot (Place Performance Country Subdivision)",
     )
 
-    # Parse and merge BT-5071 Place Performance Country Subdivision for Part
+    # Parse and merge BT-5071 Place Performance Country Subdivision for part
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_place_performance_country_subdivision],
         merge_part_place_performance_country_subdivision,
-        "Place Performance Country Subdivision Part (BT-5071)",
+        "Place Performance Country Subdivision part (BT-5071)",
     )
 
-    # Process BT-5071-Procedure
+    # Process BT-5071-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_procedure_place_performance_country_subdivision],
         merge_procedure_place_performance_country_subdivision,
-        "BT-5071-Procedure (Procedure Place Performance Country Subdivision)",
+        "BT-5071-procedure (procedure Place Performance Country Subdivision)",
     )
 
-    # Process BT-508-Procedure-Buyer
+    # Process BT-508-procedure-buyer
     process_bt_section(
         release_json,
         xml_content,
         [parse_buyer_profile_url],
         merge_buyer_profile_url,
-        "BT-508-Procedure-Buyer (Buyer Profile URL)",
+        "BT-508-procedure-buyer (buyer Profile URL)",
     )
 
-    # Process BT-509-Organization-Company
+    # Process BT-509-organization-company
     process_bt_section(
         release_json,
         xml_content,
         [parse_organization_edelivery_gateway],
         merge_organization_edelivery_gateway,
-        "BT-509-Organization-Company (Organization eDelivery Gateway)",
+        "BT-509-organization-company (organization eDelivery Gateway)",
     )
 
-    # Process BT-509-Organization-TouchPoint
+    # Process BT-509-organization-touchpoint
     process_bt_section(
         release_json,
         xml_content,
         [parse_touchpoint_edelivery_gateway],
         merge_touchpoint_edelivery_gateway,
-        "BT-509-Organization-TouchPoint (TouchPoint eDelivery Gateway)",
+        "BT-509-organization-touchpoint (touchpoint eDelivery Gateway)",
     )
 
     # Process BT-51-Lot
@@ -5596,85 +5596,85 @@ def main(xml_path, ocid_prefix):
         "BT-51-Lot (Lot Maximum Candidates Number)",
     )
 
-    # Process BT-510(a)-Organization-Company
+    # Process BT-510(a)-organization-company
     process_bt_section(
         release_json,
         xml_content,
         [parse_organization_street],
         merge_organization_street,
-        "BT-510(a)-Organization-Company (Organization Street)",
+        "BT-510(a)-organization-company (organization Street)",
     )
 
-    # Process BT-510(a)-Organization-TouchPoint
+    # Process BT-510(a)-organization-touchpoint
     process_bt_section(
         release_json,
         xml_content,
         [parse_touchpoint_street],
         merge_touchpoint_street,
-        "BT-510(a)-Organization-TouchPoint (TouchPoint Street)",
+        "BT-510(a)-organization-touchpoint (touchpoint Street)",
     )
 
-    # Process BT-510(a)-UBO
+    # Process BT-510(a)-ubo
     process_bt_section(
         release_json,
         xml_content,
         [parse_ubo_street],
         merge_ubo_street,
-        "BT-510(a)-UBO (UBO Street)",
+        "BT-510(a)-ubo (ubo Street)",
     )
 
-    # Process BT-510(b)-Organization-Company
+    # Process BT-510(b)-organization-company
     process_bt_section(
         release_json,
         xml_content,
         [parse_organization_streetline1],
         merge_organization_streetline1,
-        "BT-510(b)-Organization-Company (Organization Streetline 1)",
+        "BT-510(b)-organization-company (organization Streetline 1)",
     )
 
-    # Process BT-510(b)-Organization-TouchPoint
+    # Process BT-510(b)-organization-touchpoint
     process_bt_section(
         release_json,
         xml_content,
         [parse_touchpoint_streetline1],
         merge_touchpoint_streetline1,
-        "BT-510(b)-Organization-TouchPoint (TouchPoint Streetline 1)",
+        "BT-510(b)-organization-touchpoint (touchpoint Streetline 1)",
     )
 
-    # Process BT-510(b)-UBO
+    # Process BT-510(b)-ubo
     process_bt_section(
         release_json,
         xml_content,
         [parse_ubo_streetline1],
         merge_ubo_streetline1,
-        "BT-510(b)-UBO (UBO Streetline 1)",
+        "BT-510(b)-ubo (ubo Streetline 1)",
     )
 
-    # Process BT-510(c)-Organization-Company
+    # Process BT-510(c)-organization-company
     process_bt_section(
         release_json,
         xml_content,
         [parse_organization_streetline2],
         merge_organization_streetline2,
-        "BT-510(c)-Organization-Company (Organization Streetline 2)",
+        "BT-510(c)-organization-company (organization Streetline 2)",
     )
 
-    # Process BT-510(c)-Organization-TouchPoint
+    # Process BT-510(c)-organization-touchpoint
     process_bt_section(
         release_json,
         xml_content,
         [parse_touchpoint_streetline2],
         merge_touchpoint_streetline2,
-        "BT-510(c)-Organization-TouchPoint (TouchPoint Streetline 2)",
+        "BT-510(c)-organization-touchpoint (touchpoint Streetline 2)",
     )
 
-    # Process BT-510(c)-UBO
+    # Process BT-510(c)-ubo
     process_bt_section(
         release_json,
         xml_content,
         [parse_ubo_streetline2],
         merge_ubo_streetline2,
-        "BT-510(c)-UBO (UBO Streetline 2)",
+        "BT-510(c)-ubo (ubo Streetline 2)",
     )
 
     # Parse and merge BT-5101 Place Performance Street for Lot (including both a and b parts)
@@ -5686,85 +5686,85 @@ def main(xml_path, ocid_prefix):
         "Place Performance Street Lot (BT-5101)",
     )
 
-    # Process BT-5101(a)-Part
+    # Process BT-5101(a)-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_place_performance_street],
         merge_part_place_performance_street,
-        "BT-5101(a)-Part (Part Place Performance Street)",
+        "BT-5101(a)-part (part Place Performance Street)",
     )
 
-    # Process BT-5101(a)-Procedure
+    # Process BT-5101(a)-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_procedure_place_performance_street],
         merge_procedure_place_performance_street,
-        "BT-5101(a)-Procedure (Procedure Place Performance Street)",
+        "BT-5101(a)-procedure (procedure Place Performance Street)",
     )
 
-    # Process BT-5101(b)-Part
+    # Process BT-5101(b)-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_place_performance_streetline1],
         merge_part_place_performance_streetline1,
-        "BT-5101(b)-Part (Part Place Performance Streetline 1)",
+        "BT-5101(b)-part (part Place Performance Streetline 1)",
     )
 
-    # Process BT-5101(b)-Procedure
+    # Process BT-5101(b)-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_procedure_place_performance_streetline1],
         merge_procedure_place_performance_streetline1,
-        "BT-5101(b)-Procedure (Procedure Place Performance Streetline 1)",
+        "BT-5101(b)-procedure (procedure Place Performance Streetline 1)",
     )
 
-    # Process BT-5101(c)-Part
+    # Process BT-5101(c)-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_place_performance_streetline2],
         merge_part_place_performance_streetline2,
-        "BT-5101(c)-Part (Part Place Performance Streetline 2)",
+        "BT-5101(c)-part (part Place Performance Streetline 2)",
     )
 
-    # Process BT-5101(c)-Procedure
+    # Process BT-5101(c)-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_procedure_place_performance_streetline2],
         merge_procedure_place_performance_streetline2,
-        "BT-5101(c)-Procedure (Procedure Place Performance Streetline 2)",
+        "BT-5101(c)-procedure (procedure Place Performance Streetline 2)",
     )
 
-    # Process BT-512-Organization-Company
+    # Process BT-512-organization-company
     process_bt_section(
         release_json,
         xml_content,
         [parse_organization_postcode],
         merge_organization_postcode,
-        "BT-512-Organization-Company (Organization Postcode)",
+        "BT-512-organization-company (organization Postcode)",
     )
 
-    # Process BT-512-Organization-TouchPoint
+    # Process BT-512-organization-touchpoint
     process_bt_section(
         release_json,
         xml_content,
         [parse_touchpoint_postcode],
         merge_touchpoint_postcode,
-        "BT-512-Organization-TouchPoint (TouchPoint Postcode)",
+        "BT-512-organization-touchpoint (touchpoint Postcode)",
     )
 
-    # Process BT-512-UBO
+    # Process BT-512-ubo
     process_bt_section(
         release_json,
         xml_content,
         [parse_ubo_postcode],
         merge_ubo_postcode,
-        "BT-512-UBO (UBO Postcode)",
+        "BT-512-ubo (ubo Postcode)",
     )
 
     # Process BT-5121-Lot
@@ -5776,48 +5776,48 @@ def main(xml_path, ocid_prefix):
         "BT-5121-Lot (Place Performance Post Code)",
     )
 
-    # Process BT-5121-Part
+    # Process BT-5121-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_place_performance_post_code_part],
         merge_place_performance_post_code_part,
-        "BT-5121-Part (Place Performance Post Code Part)",
+        "BT-5121-part (Place Performance Post Code part)",
     )
-    # Process BT-5121-Procedure
+    # Process BT-5121-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_place_performance_post_code_procedure],
         merge_place_performance_post_code_procedure,
-        "BT-5121-Procedure (Place Performance Post Code)",
+        "BT-5121-procedure (Place Performance Post Code)",
     )
 
-    # Process BT-513-Organization-Company
+    # Process BT-513-organization-company
     process_bt_section(
         release_json,
         xml_content,
         [parse_organization_city],
         merge_organization_city,
-        "BT-513-Organization-Company (Organization City)",
+        "BT-513-organization-company (organization City)",
     )
 
-    # Process BT-513-Organization-TouchPoint
+    # Process BT-513-organization-touchpoint
     process_bt_section(
         release_json,
         xml_content,
         [parse_touchpoint_city],
         merge_touchpoint_city,
-        "BT-513-Organization-TouchPoint (TouchPoint City)",
+        "BT-513-organization-touchpoint (touchpoint City)",
     )
 
-    # Process BT-513-UBO
+    # Process BT-513-ubo
     process_bt_section(
         release_json,
         xml_content,
         [parse_ubo_city],
         merge_ubo_city,
-        "BT-513-UBO (UBO City)",
+        "BT-513-ubo (ubo City)",
     )
 
     # Process BT-5131 (Place Performance City)
@@ -5829,49 +5829,49 @@ def main(xml_path, ocid_prefix):
         "BT-5131 (Place Performance City)",
     )
 
-    # Process BT-5131 Part (Place Performance City Part)
+    # Process BT-5131 part (Place Performance City part)
     process_bt_section(
         release_json,
         xml_content,
         [parse_place_performance_city_part],
         merge_place_performance_city_part,
-        "BT-5131 Part (Place Performance City Part)",
+        "BT-5131 part (Place Performance City part)",
     )
 
-    # Process BT-5131 Procedure (Place Performance City Procedure)
+    # Process BT-5131 procedure (Place Performance City procedure)
     process_bt_section(
         release_json,
         xml_content,
         [parse_place_performance_city_procedure],
         merge_place_performance_city_procedure,
-        "BT-5131 Procedure (Place Performance City Procedure)",
+        "BT-5131 procedure (Place Performance City procedure)",
     )
 
-    # Process BT-514-Organization-Company
+    # Process BT-514-organization-company
     process_bt_section(
         release_json,
         xml_content,
         [parse_organization_country],
         merge_organization_country,
-        "BT-514-Organization-Company (Organization Country)",
+        "BT-514-organization-company (organization Country)",
     )
 
-    # Process BT-514-Organization-TouchPoint
+    # Process BT-514-organization-touchpoint
     process_bt_section(
         release_json,
         xml_content,
         [parse_touchpoint_country],
         merge_touchpoint_country,
-        "BT-514-Organization-TouchPoint (TouchPoint Country)",
+        "BT-514-organization-touchpoint (touchpoint Country)",
     )
 
-    # Process BT-514-UBO
+    # Process BT-514-ubo
     process_bt_section(
         release_json,
         xml_content,
         [parse_ubo_country],
         merge_ubo_country,
-        "BT-514-UBO (UBO Country)",
+        "BT-514-ubo (ubo Country)",
     )
 
     # Process BT-5141-Lot
@@ -5883,22 +5883,22 @@ def main(xml_path, ocid_prefix):
         "BT-5141-Lot (Lot Country)",
     )
 
-    # Process BT-5141-Part
+    # Process BT-5141-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_country],
         merge_part_country,
-        "BT-5141-Part (Part Country)",
+        "BT-5141-part (part Country)",
     )
 
-    # Process BT-5141-Procedure
+    # Process BT-5141-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_procedure_country],
         merge_procedure_country,
-        "BT-5141-Procedure (Procedure Country)",
+        "BT-5141-procedure (procedure Country)",
     )
 
     # Process BT-52-Lot
@@ -5919,22 +5919,22 @@ def main(xml_path, ocid_prefix):
         "BT-531-Lot (Lot Additional Nature)",
     )
 
-    # Process BT-531-Part
+    # Process BT-531-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_additional_nature],
         merge_part_additional_nature,
-        "BT-531-Part (Part Additional Nature)",
+        "BT-531-part (part Additional Nature)",
     )
 
-    # Process BT-531-Procedure
+    # Process BT-531-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_procedure_additional_nature],
         merge_procedure_additional_nature,
-        "BT-531-Procedure (Procedure Additional Nature)",
+        "BT-531-procedure (procedure Additional Nature)",
     )
 
     # Process BT-536-Lot
@@ -5946,13 +5946,13 @@ def main(xml_path, ocid_prefix):
         "BT-536-Lot",
     )
 
-    # Process BT-536-Part
+    # Process BT-536-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_contract_start_date],
         merge_part_contract_start_date,
-        "BT-536-Part",
+        "BT-536-part",
     )
 
     # Process BT-537-Lot
@@ -5964,13 +5964,13 @@ def main(xml_path, ocid_prefix):
         "BT-537-Lot",
     )
 
-    # Process BT-537-Part
+    # Process BT-537-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_duration_end_date],
         merge_part_duration_end_date,
-        "BT-537-Part",
+        "BT-537-part",
     )
 
     # Process BT-538-Lot
@@ -5982,13 +5982,13 @@ def main(xml_path, ocid_prefix):
         "BT-538-Lot",
     )
 
-    # Process BT-538-Part
+    # Process BT-538-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_duration_other],
         merge_part_duration_other,
-        "BT-538-Part",
+        "BT-538-part",
     )
 
     # Process BT-539-Lot (Award Criterion Type)
@@ -6171,13 +6171,13 @@ def main(xml_path, ocid_prefix):
         "BT-60-Lot (EU Funds)",
     )
 
-    # Process BT-610-Procedure-Buyer (Activity Entity)
+    # Process BT-610-procedure-buyer (Activity Entity)
     process_bt_section(
         release_json,
         xml_content,
         [parse_activity_entity],
         merge_activity_entity,
-        "BT-610-Procedure-Buyer (Activity Entity)",
+        "BT-610-procedure-buyer (Activity Entity)",
     )
 
     # Process BT-6110-Contract (Contract EU Funds Details)
@@ -6207,13 +6207,13 @@ def main(xml_path, ocid_prefix):
         "BT-615-Lot (Documents Restricted URL)",
     )
 
-    # Process BT-615-Part (Documents Restricted URL for Parts)
+    # Process BT-615-part (Documents Restricted URL for parts)
     process_bt_section(
         release_json,
         xml_content,
         [parse_documents_restricted_url_part],
         merge_documents_restricted_url_part,
-        "BT-615-Part (Documents Restricted URL for Parts)",
+        "BT-615-part (Documents Restricted URL for parts)",
     )
 
     # Process BT-625-Lot (Unit)
@@ -6261,40 +6261,40 @@ def main(xml_path, ocid_prefix):
         "BT-632-Lot (Tool Name)",
     )
 
-    # Process BT-632-Part (Tool Name)
+    # Process BT-632-part (Tool Name)
     process_bt_section(
         release_json,
         xml_content,
         [parse_tool_name_part],
         merge_tool_name_part,
-        "BT-632-Part (Tool Name)",
+        "BT-632-part (Tool Name)",
     )
 
-    # Process BT-633-Organization (Organisation Natural Person)
+    # Process BT-633-organization (Organisation Natural Person)
     process_bt_section(
         release_json,
         xml_content,
         [parse_organization_natural_person],
         merge_organization_natural_person,
-        "BT-633-Organization (Organisation Natural Person)",
+        "BT-633-organization (Organisation Natural Person)",
     )
 
-    # Process BT-635-LotResult Buyer Review Requests Count
+    # Process BT-635-LotResult buyer Review Requests Count
     process_bt_section(
         release_json,
         xml_content,
         [parse_buyer_review_requests_count],
         merge_buyer_review_requests_count,
-        "BT-635-LotResult Buyer Review Requests Count",
+        "BT-635-LotResult buyer Review Requests Count",
     )
 
-    # Process BT-636-LotResult Buyer Review Requests Irregularity Type
+    # Process BT-636-LotResult buyer Review Requests Irregularity Type
     process_bt_section(
         release_json,
         xml_content,
         [parse_irregularity_type],
         merge_irregularity_type,
-        "BT-636-LotResult Buyer Review Requests Irregularity Type",
+        "BT-636-LotResult buyer Review Requests Irregularity Type",
     )
 
     # Process BT-64-Lot (Subcontracting Obligation Minimum)
@@ -6360,22 +6360,22 @@ def main(xml_path, ocid_prefix):
         "BT-70-Lot (Performance Terms)",
     )
 
-    # Process BT-702(a)-notice (Notice Official Language)
+    # Process BT-702(a)-notice (notice Official Language)
     process_bt_section(
         release_json,
         xml_content,
         [parse_notice_language],
         merge_notice_language,
-        "BT-702(a)-notice (Notice Official Language)",
+        "BT-702(a)-notice (notice Official Language)",
     )
 
-    # Process BT-706-UBO Winner Owner Nationality
+    # Process BT-706-ubo Winner Owner Nationality
     process_bt_section(
         release_json,
         xml_content,
         [parse_ubo_nationality],
         merge_ubo_nationality,
-        "BT-706-UBO Winner Owner Nationality",
+        "BT-706-ubo Winner Owner Nationality",
     )
 
     # Process BT-707-Lot (Documents Restricted Justification)
@@ -6387,13 +6387,13 @@ def main(xml_path, ocid_prefix):
         "BT-707-Lot (Documents Restricted Justification)",
     )
 
-    # Process BT-707-Part (Documents Restricted Justification)
+    # Process BT-707-part (Documents Restricted Justification)
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_documents_restricted_justification],
         merge_part_documents_restricted_justification,
-        "BT-707-Part (Documents Restricted Justification)",
+        "BT-707-part (Documents Restricted Justification)",
     )
 
     # Process BT-708-Lot (Documents Official Language)
@@ -6405,13 +6405,13 @@ def main(xml_path, ocid_prefix):
         "BT-708-Lot (Documents Official Language)",
     )
 
-    # Process BT-708-Part (Documents Official Language)
+    # Process BT-708-part (Documents Official Language)
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_documents_official_language],
         merge_part_documents_official_language,
-        "BT-708-Part (Documents Official Language)",
+        "BT-708-part (Documents Official Language)",
     )
 
     # Process BT-709-LotResult (Framework Maximum Value)
@@ -6423,22 +6423,22 @@ def main(xml_path, ocid_prefix):
         "BT-709-LotResult (Framework Maximum Value)",
     )
 
-    # Process BT-71-Lot (Reserved Participation)
+    # Process BT-71-Lot (Reserved participation)
     process_bt_section(
         release_json,
         xml_content,
         [parse_reserved_participation],
         merge_reserved_participation,
-        "BT-71-Lot (Reserved Participation)",
+        "BT-71-Lot (Reserved participation)",
     )
 
-    # Process BT-71-Part (Reserved Participation)
+    # Process BT-71-part (Reserved participation)
     process_bt_section(
         release_json,
         xml_content,
         [parse_reserved_participation_part],
         merge_reserved_participation_part,
-        "BT-71-Part (Reserved Participation)",
+        "BT-71-part (Reserved participation)",
     )
 
     # Process BT-710-LotResult Tender Value Lowest
@@ -6459,22 +6459,22 @@ def main(xml_path, ocid_prefix):
         "BT-711-LotResult Tender Value Highest",
     )
 
-    # Process BT-712(a)-LotResult Buyer Review Complainants
+    # Process BT-712(a)-LotResult buyer Review Complainants
     process_bt_section(
         release_json,
         xml_content,
         [parse_buyer_review_complainants],
         merge_buyer_review_complainants,
-        "BT-712(a)-LotResult Buyer Review Complainants",
+        "BT-712(a)-LotResult buyer Review Complainants",
     )
 
-    # Process BT-712(b)-LotResult Buyer Review Complainants (Number)
+    # Process BT-712(b)-LotResult buyer Review Complainants (Number)
     process_bt_section(
         release_json,
         xml_content,
         [parse_buyer_review_complainants_bt_712b],
         merge_buyer_review_complainants_bt_712b,
-        "BT-712(b)-LotResult Buyer Review Complainants (Number)",
+        "BT-712(b)-LotResult buyer Review Complainants (Number)",
     )
 
     # Process BT-717-Lot (Clean Vehicles Directive)
@@ -6558,13 +6558,13 @@ def main(xml_path, ocid_prefix):
         "Lots Group SME Suitability (BT-726-LotsGroup)",
     )
 
-    # Process BT-726-Part
+    # Process BT-726-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_sme_suitability],
         merge_part_sme_suitability,
-        "Part SME Suitability (BT-726-Part)",
+        "part SME Suitability (BT-726-part)",
     )
 
     # Process BT-727-Lot
@@ -6576,22 +6576,22 @@ def main(xml_path, ocid_prefix):
         "Lot Place of Performance (BT-727-Lot)",
     )
 
-    # Process BT-727-Part
+    # Process BT-727-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_place_performance],
         merge_part_place_performance,
-        "Part Place of Performance (BT-727-Part)",
+        "part Place of Performance (BT-727-part)",
     )
 
-    # Process BT-727-Procedure
+    # Process BT-727-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_procedure_place_performance],
         merge_procedure_place_performance,
-        "Procedure Place of Performance (BT-727-Procedure)",
+        "procedure Place of Performance (BT-727-procedure)",
     )
 
     # Process BT-728-Lot
@@ -6603,22 +6603,22 @@ def main(xml_path, ocid_prefix):
         "Additional Lot Place of Performance (BT-728-Lot)",
     )
 
-    # Process BT-728-Part
+    # Process BT-728-part
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_place_performance_additional],
         merge_part_place_performance_additional,
-        "Additional Part Place of Performance (BT-728-Part)",
+        "Additional part Place of Performance (BT-728-part)",
     )
 
-    # Process BT-728-Procedure
+    # Process BT-728-procedure
     process_bt_section(
         release_json,
         xml_content,
         [parse_procedure_place_performance_additional],
         merge_procedure_place_performance_additional,
-        "Additional Procedure Place of Performance (BT-728-Procedure)",
+        "Additional procedure Place of Performance (BT-728-procedure)",
     )
 
     # Process BT-729-Lot
@@ -6702,13 +6702,13 @@ def main(xml_path, ocid_prefix):
         "Lot Reserved Execution (BT-736-Lot)",
     )
 
-    # Process BT-736-Part Reserved Execution
+    # Process BT-736-part Reserved Execution
     process_bt_section(
         release_json,
         xml_content,
         [parse_reserved_execution_part],
         merge_reserved_execution_part,
-        "Part Reserved Execution (BT-736-Part)",
+        "part Reserved Execution (BT-736-part)",
     )
 
     # Process BT-737-Lot Documents Unofficial Language
@@ -6720,58 +6720,58 @@ def main(xml_path, ocid_prefix):
         "Lot Documents Unofficial Language (BT-737-Lot)",
     )
 
-    # Process BT-737-Part Documents Unofficial Language
+    # Process BT-737-part Documents Unofficial Language
     process_bt_section(
         release_json,
         xml_content,
         [parse_documents_unofficial_language_part],
         merge_documents_unofficial_language_part,
-        "Part Documents Unofficial Language (BT-737-Part)",
+        "part Documents Unofficial Language (BT-737-part)",
     )
 
-    # Process BT-738-notice Notice Preferred Publication Date
+    # Process BT-738-notice notice Preferred Publication Date
     process_bt_section(
         release_json,
         xml_content,
         [parse_notice_preferred_publication_date],
         merge_notice_preferred_publication_date,
-        "Notice Preferred Publication Date (BT-738-notice)",
+        "notice Preferred Publication Date (BT-738-notice)",
     )
 
-    # Process BT-739-Organization-Company Organisation Contact Fax
+    # Process BT-739-organization-company Organisation Contact Fax
     process_bt_section(
         release_json,
         xml_content,
         [parse_organization_contact_fax],
         merge_organization_contact_fax,
-        "Organisation Contact Fax (BT-739-Organization-Company)",
+        "Organisation Contact Fax (BT-739-organization-company)",
     )
 
-    # Process BT-739-Organization-TouchPoint Contact Fax
+    # Process BT-739-organization-touchpoint Contact Fax
     process_bt_section(
         release_json,
         xml_content,
         [parse_touchpoint_contact_fax],
         merge_touchpoint_contact_fax,
-        "TouchPoint Contact Fax (BT-739-Organization-TouchPoint)",
+        "touchpoint Contact Fax (BT-739-organization-touchpoint)",
     )
 
-    # Process BT-739-UBO UBO Contact Fax
+    # Process BT-739-ubo ubo Contact Fax
     process_bt_section(
         release_json,
         xml_content,
         [parse_ubo_fax],
         merge_ubo_fax,
-        "UBO Contact Fax (BT-739-UBO)",
+        "ubo Contact Fax (BT-739-ubo)",
     )
 
-    # Process BT-740-Procedure-Buyer Buyer Contracting Entity
+    # Process BT-740-procedure-buyer buyer Contracting Entity
     process_bt_section(
         release_json,
         xml_content,
         [parse_buyer_contracting_entity],
         merge_buyer_contracting_entity,
-        "Buyer Contracting Entity (BT-740-Procedure-Buyer)",
+        "buyer Contracting Entity (BT-740-procedure-buyer)",
     )
 
     # Process BT-743-Lot Electronic Invoicing
@@ -6801,13 +6801,13 @@ def main(xml_path, ocid_prefix):
         "Lot Submission Nonelectronic Description (BT-745-Lot)",
     )
 
-    # Process BT-746-Organization Winner Listed
+    # Process BT-746-organization Winner Listed
     process_bt_section(
         release_json,
         xml_content,
         [parse_winner_listed],
         merge_winner_listed,
-        "Organization Winner Listed (BT-746-Organization)",
+        "organization Winner Listed (BT-746-organization)",
     )
 
     # Process BT-747-Lot Selection Criteria Type
@@ -6891,13 +6891,13 @@ def main(xml_path, ocid_prefix):
         "Lot Accessibility Justification (BT-755-Lot)",
     )
 
-    # Process BT-756-Procedure PIN Competition Termination
+    # Process BT-756-procedure PIN Competition Termination
     process_bt_section(
         release_json,
         xml_content,
         [parse_pin_competition_termination],
         merge_pin_competition_termination,
-        "PIN Competition Termination (BT-756-Procedure)",
+        "PIN Competition Termination (BT-756-procedure)",
     )
 
     # Process BT-759-LotResult Received Submissions Count
@@ -6936,13 +6936,13 @@ def main(xml_path, ocid_prefix):
         "Change Reason Description (BT-762-notice)",
     )
 
-    # Process BT-763-Procedure Lots All Required
+    # Process BT-763-procedure Lots All Required
     process_bt_section(
         release_json,
         xml_content,
         [parse_lots_all_required],
         merge_lots_all_required,
-        "Lots All Required (BT-763-Procedure)",
+        "Lots All Required (BT-763-procedure)",
     )
 
     # Process BT-764-Lot Submission Electronic Catalogue
@@ -6963,13 +6963,13 @@ def main(xml_path, ocid_prefix):
         "Framework Agreement (BT-765-Lot)",
     )
 
-    # Process BT-765-Part Framework Agreement
+    # Process BT-765-part Framework Agreement
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_framework_agreement],
         merge_part_framework_agreement,
-        "Part Framework Agreement (BT-765-Part)",
+        "part Framework Agreement (BT-765-part)",
     )
 
     # Process BT-766-Lot Dynamic Purchasing System
@@ -6981,13 +6981,13 @@ def main(xml_path, ocid_prefix):
         "Dynamic Purchasing System (BT-766-Lot)",
     )
 
-    # Process BT-766-Part Dynamic Purchasing System
+    # Process BT-766-part Dynamic Purchasing System
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_dynamic_purchasing_system],
         merge_part_dynamic_purchasing_system,
-        "Part Dynamic Purchasing System (BT-766-Part)",
+        "part Dynamic Purchasing System (BT-766-part)",
     )
 
     # Process BT-767-Lot Electronic Auction
@@ -7125,13 +7125,13 @@ def main(xml_path, ocid_prefix):
         "Green Procurement Criteria (BT-805-Lot)",
     )
 
-    # Process BT-88-Procedure Procedure Features
+    # Process BT-88-procedure procedure Features
     process_bt_section(
         release_json,
         xml_content,
         [parse_procedure_features],
         merge_procedure_features,
-        "Procedure Features (BT-88-Procedure)",
+        "procedure Features (BT-88-procedure)",
     )
 
     # Process BT-92-Lot Electronic Ordering
@@ -7263,40 +7263,40 @@ def main(xml_path, ocid_prefix):
         "Penalties and Rewards (OPP-034-Tender)",
     )
 
-    # Process OPP-040-Procedure Main Nature - Sub Type
+    # Process OPP-040-procedure Main Nature - Sub Type
     process_bt_section(
         release_json,
         xml_content,
         [parse_main_nature_sub_type],
         merge_main_nature_sub_type,
-        "Main Nature - Sub Type (OPP-040-Procedure)",
+        "Main Nature - Sub Type (OPP-040-procedure)",
     )
 
-    # Process OPP-050-Organization Buyers Group Lead Indicator
+    # Process OPP-050-organization buyers Group Lead Indicator
     process_bt_section(
         release_json,
         xml_content,
         [parse_buyers_group_lead_indicator],
         merge_buyers_group_lead_indicator,
-        "Buyers Group Lead Indicator (OPP-050-Organization)",
+        "buyers Group Lead Indicator (OPP-050-organization)",
     )
 
-    # Process OPP-051-Organization Awarding CPB Buyer Indicator
+    # Process OPP-051-organization Awarding CPB buyer Indicator
     process_bt_section(
         release_json,
         xml_content,
         [parse_awarding_cpb_buyer_indicator],
         merge_awarding_cpb_buyer_indicator,
-        "Awarding CPB Buyer Indicator (OPP-051-Organization)",
+        "Awarding CPB buyer Indicator (OPP-051-organization)",
     )
 
-    # Process OPP-052-Organization Acquiring CPB Buyer Indicator
+    # Process OPP-052-organization Acquiring CPB buyer Indicator
     process_bt_section(
         release_json,
         xml_content,
         [parse_acquiring_cpb_buyer_indicator],
         merge_acquiring_cpb_buyer_indicator,
-        "Acquiring CPB Buyer Indicator (OPP-052-Organization)",
+        "Acquiring CPB buyer Indicator (OPP-052-organization)",
     )
 
     # Process OPP-080-Tender Kilometers Public Transport
@@ -7308,22 +7308,22 @@ def main(xml_path, ocid_prefix):
         "Kilometers Public Transport (OPP-080-Tender)",
     )
 
-    # Process OPP-090-Procedure Previous Notice Identifier
+    # Process OPP-090-procedure Previous notice Identifier
     process_bt_section(
         release_json,
         xml_content,
         [parse_previous_notice_identifier],
         merge_previous_notice_identifier,
-        "Previous Notice Identifier (OPP-090-Procedure)",
+        "Previous notice Identifier (OPP-090-procedure)",
     )
 
-    # Process OPT-030-Procedure-SProvider Provided Service Type
+    # Process OPT-030-procedure-sprovider Provided Service Type
     process_bt_section(
         release_json,
         xml_content,
         [parse_provided_service_type],
         merge_provided_service_type,
-        "Provided Service Type (OPT-030-Procedure-SProvider)",
+        "Provided Service Type (OPT-030-procedure-sprovider)",
     )
 
     # Process OPP-071-Lot Quality Target Code
@@ -7344,13 +7344,13 @@ def main(xml_path, ocid_prefix):
         "Quality Target Description (OPP-072-Lot)",
     )
 
-    # Process OPP-100-Contract Framework Notice Identifier
+    # Process OPP-100-Contract Framework notice Identifier
     process_bt_section(
         release_json,
         xml_content,
         [parse_framework_notice_identifier],
         merge_framework_notice_identifier,
-        "Framework Notice Identifier (OPP-100-Contract)",
+        "Framework notice Identifier (OPP-100-Contract)",
     )
 
     # Process OPP-110 and OPP-111 Fiscal Legislation
@@ -7410,49 +7410,49 @@ def main(xml_path, ocid_prefix):
         "Vehicle Numeric (OPT-156-LotResult)",
     )
 
-    # Process OPT-160-UBO First Name
+    # Process OPT-160-ubo First Name
     process_bt_section(
         release_json,
         xml_content,
         [parse_ubo_first_name],
         merge_ubo_first_name,
-        "UBO First Name (OPT-160-UBO)",
+        "ubo First Name (OPT-160-ubo)",
     )
 
-    # Process OPT-170-Tenderer Tendering Party Leader
+    # Process OPT-170-Tenderer Tendering party Leader
     process_bt_section(
         release_json,
         xml_content,
         [parse_tendering_party_leader],
         merge_tendering_party_leader,
-        "Tendering Party Leader (OPT-170-Tenderer)",
+        "Tendering party Leader (OPT-170-Tenderer)",
     )
 
-    # Process OPT-200-Organization-Company Organization Technical Identifier
+    # Process OPT-200-organization-company organization Technical Identifier
     process_bt_section(
         release_json,
         xml_content,
         [parse_organization_technical_identifier],
         merge_organization_technical_identifier,
-        "Organization Technical Identifier (OPT-200-Organization-Company)",
+        "organization Technical Identifier (OPT-200-organization-company)",
     )
 
-    # Process OPT-201-Organization-TouchPoint TouchPoint Technical Identifier
+    # Process OPT-201-organization-touchpoint touchpoint Technical Identifier
     process_bt_section(
         release_json,
         xml_content,
         [parse_touchpoint_technical_identifier],
         merge_touchpoint_technical_identifier,
-        "TouchPoint Technical Identifier (OPT-201-Organization-TouchPoint)",
+        "touchpoint Technical Identifier (OPT-201-organization-touchpoint)",
     )
 
-    # Process OPT-202-UBO
+    # Process OPT-202-ubo
     process_bt_section(
         release_json,
         xml_content,
         [parse_ubo_identifier],
         merge_ubo_identifier,
-        "UBO Identifier (OPT-202-UBO)",
+        "ubo Identifier (OPT-202-ubo)",
     )
 
     # Process OPT-300 Contract Signatory
@@ -7470,7 +7470,7 @@ def main(xml_path, ocid_prefix):
         xml_content,
         [parse_procedure_sprovider],
         merge_procedure_sprovider,
-        "Procedure Service Provider (OPT-300)",
+        "procedure Service Provider (OPT-300)",
     )
 
     # Process OPT-301-Lot-AddInfo Additional Info Provider Technical Identifier Reference
@@ -7491,31 +7491,31 @@ def main(xml_path, ocid_prefix):
         "Document Provider Technical Identifier Reference (OPT-301-Lot-DocProvider)",
     )
 
-    # Process OPT-301-Lot-EmployLegis Employment Legislation Organization Technical Identifier Reference
+    # Process OPT-301-Lot-EmployLegis Employment Legislation organization Technical Identifier Reference
     process_bt_section(
         release_json,
         xml_content,
         [parse_employment_legislation_document_reference],
         merge_employment_legislation_document_reference,
-        "Employment Legislation Organization Technical Identifier Reference (OPT-301-Lot-EmployLegis)",
+        "Employment Legislation organization Technical Identifier Reference (OPT-301-Lot-EmployLegis)",
     )
 
-    # Process OPT-301-Lot-EnvironLegis Environmental Legislation Organization Technical Identifier Reference
+    # Process OPT-301-Lot-EnvironLegis Environmental Legislation organization Technical Identifier Reference
     process_bt_section(
         release_json,
         xml_content,
         [parse_environmental_legislation_document_reference],
         merge_environmental_legislation_document_reference,
-        "Environmental Legislation Organization Technical Identifier Reference (OPT-301-Lot-EnvironLegis)",
+        "Environmental Legislation organization Technical Identifier Reference (OPT-301-Lot-EnvironLegis)",
     )
 
-    # Process OPT-301-Lot-ReviewOrg Review Organization Technical Identifier Reference
+    # Process OPT-301-Lot-ReviewOrg Review organization Technical Identifier Reference
     process_bt_section(
         release_json,
         xml_content,
         [parse_review_org_identifier],
         merge_review_org_identifier,
-        "Review Organization Technical Identifier Reference (OPT-301-Lot-ReviewOrg)",
+        "Review organization Technical Identifier Reference (OPT-301-Lot-ReviewOrg)",
     )
 
     # Process OPT-301-Lot-Mediator Mediator Technical Identifier Reference
@@ -7572,94 +7572,94 @@ def main(xml_path, ocid_prefix):
         "LotResult Paying (OPT-301)",
     )
 
-    # Process OPT-301 Part_AddInfo
+    # Process OPT-301 part_AddInfo
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_addinfo],
         merge_part_addinfo,
-        "Part Additional Info (OPT-301)",
+        "part Additional Info (OPT-301)",
     )
 
-    # Process OPT_301_Part_DocProvider
+    # Process OPT_301_part_DocProvider
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_docprovider],
         merge_part_docprovider,
-        "Part Document Provider (OPT_301)",
+        "part Document Provider (OPT_301)",
     )
 
-    # Process OPT_301_Part_EmployLegis
+    # Process OPT_301_part_EmployLegis
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_employlegis],
         merge_part_employlegis,
-        "Part Employment Legislation (OPT_301)",
+        "part Employment Legislation (OPT_301)",
     )
 
-    # Process OPT_301_Part_EnvironLegis
+    # Process OPT_301_part_EnvironLegis
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_environlegis],
         merge_part_environlegis,
-        "Part Environmental Legislation (OPT_301)",
+        "part Environmental Legislation (OPT_301)",
     )
 
-    # Process OPT_301_Part_FiscalLegis
+    # Process OPT_301_part_FiscalLegis
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_fiscallegis],
         merge_part_fiscallegis,
-        "Part Fiscal Legislation (OPT_301)",
+        "part Fiscal Legislation (OPT_301)",
     )
 
-    # Process OPT_301_Part_Mediator
+    # Process OPT_301_part_Mediator
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_mediator],
         merge_part_mediator,
-        "Part Mediator (OPT_301)",
+        "part Mediator (OPT_301)",
     )
 
-    # Process OPT_301_Part_ReviewInfo
+    # Process OPT_301_part_ReviewInfo
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_reviewinfo],
         merge_part_reviewinfo,
-        "Part Review Info (OPT_301)",
+        "part Review Info (OPT_301)",
     )
 
-    # Process OPT_301_Part_ReviewOrg
+    # Process OPT_301_part_ReviewOrg
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_revieworg],
         merge_part_revieworg,
-        "Part Review Organization (OPT_301)",
+        "part Review organization (OPT_301)",
     )
 
-    # Process OPT_301_Part_TenderEval
+    # Process OPT_301_part_TenderEval
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_tendereval],
         merge_part_tendereval,
-        "Part Tender Evaluator (OPT_301)",
+        "part Tender Evaluator (OPT_301)",
     )
 
-    # Process OPT_301_Part_TenderReceipt
+    # Process OPT_301_part_TenderReceipt
     process_bt_section(
         release_json,
         xml_content,
         [parse_part_tenderreceipt],
         merge_part_tenderreceipt,
-        "Part Tender Recipient (OPT_301)",
+        "part Tender Recipient (OPT_301)",
     )
 
     # Process OPT_301_Tenderer_MainCont
@@ -7672,22 +7672,22 @@ def main(xml_path, ocid_prefix):
     )
     # add more OPT-301 her
 
-    # Process OPT-302-Organization Beneficial Owner Reference
+    # Process OPT-302-organization Beneficial Owner Reference
     process_bt_section(
         release_json,
         xml_content,
         [parse_beneficial_owner_reference],
         merge_beneficial_owner_reference,
-        "Beneficial Owner Reference (OPT-302-Organization)",
+        "Beneficial Owner Reference (OPT-302-organization)",
     )
 
-    # Process OPT-310-Tender Tendering Party ID Reference
+    # Process OPT-310-Tender Tendering party ID Reference
     process_bt_section(
         release_json,
         xml_content,
         [parse_tendering_party_id_reference],
         merge_tendering_party_id_reference,
-        "Tendering Party ID Reference (OPT-310-Tender)",
+        "Tendering party ID Reference (OPT-310-Tender)",
     )
 
     # Process OPT-315-LotResult Contract Identifier Reference
