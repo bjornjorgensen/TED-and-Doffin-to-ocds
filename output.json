@@ -1,1 +1,16 @@
-{"initiationType": "tender", "tender": {"lots": [{"id": "LOT-0001", "submissionTerms": {"nonElectronicSubmission": {"rationale": "Inclusion of a physical model"}}, "hasAccessibilityCriteria": false}]}}
+{
+    "initiationType": "tender",
+    "tender": {
+        "lots": [
+            {
+                "id": "LOT-0001",
+                "submissionTerms": {
+                    "nonElectronicSubmission": {
+                        "rationale": "Inclusion of a physical model"
+                    }
+                },
+                "hasAccessibilityCriteria": false
+            }
+        ]
+    }
+}
