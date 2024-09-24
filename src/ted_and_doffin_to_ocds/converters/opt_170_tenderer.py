@@ -68,5 +68,6 @@ def merge_tendering_party_leader(release_json, tenderer_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Tendering party Leader data for {len(tenderer_data['parties'])} parties",
+        "Merged Tendering party Leader data for %d parties",
+        len(tenderer_data["parties"]),
     )

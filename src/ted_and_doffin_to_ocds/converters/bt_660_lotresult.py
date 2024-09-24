@@ -110,5 +110,6 @@ def merge_framework_reestimated_value(release_json, framework_reestimated_value_
             existing_awards.append(new_award)
 
     logger.info(
-        f"Merged Framework Re-estimated Value data for {len(framework_reestimated_value_data['awards'])} awards",
+        "Merged Framework Re-estimated Value data for %d awards",
+        len(framework_reestimated_value_data["awards"]),
     )

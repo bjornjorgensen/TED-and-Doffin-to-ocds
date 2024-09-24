@@ -107,5 +107,6 @@ def merge_contract_eu_funds(release_json, contract_eu_funds_data):
             release_json["contracts"].append(new_contract)
 
     logger.info(
-        f"Merged contract EU funds data for {len(contract_eu_funds_data['contracts'])} contracts",
+        "Merged contract EU funds data for %d contracts",
+        len(contract_eu_funds_data["contracts"]),
     )

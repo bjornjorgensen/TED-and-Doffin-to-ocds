@@ -66,5 +66,6 @@ def merge_tender_rank(release_json, tender_rank_data):
             existing_bids.append(new_bid)
 
     logger.info(
-        f"Merged Tender Rank data for {len(tender_rank_data['bids']['details'])} bids",
+        "Merged Tender Rank data for %d bids",
+        len(tender_rank_data["bids"]["details"]),
     )

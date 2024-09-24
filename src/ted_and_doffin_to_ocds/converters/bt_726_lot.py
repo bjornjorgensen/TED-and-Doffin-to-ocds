@@ -90,5 +90,6 @@ def merge_lot_sme_suitability(release_json, lot_sme_suitability_data):
             release_json["tender"]["lots"].append(new_lot)
 
     logger.info(
-        f"Merged SME suitability data for {len(lot_sme_suitability_data['tender']['lots'])} lots",
+        "Merged SME suitability data for %d lots",
+        len(lot_sme_suitability_data["tender"]["lots"]),
     )

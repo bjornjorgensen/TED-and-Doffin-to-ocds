@@ -106,5 +106,7 @@ def merge_tenderer_maincont(release_json, maincont_data):
             release_json["bids"]["details"].append(bid)
 
     logger.info(
-        f"Merged Tenderer Main Contractor data for {len(maincont_data['parties'])} parties and {len(maincont_data['bids']['details'])} bids",
+        "Merged Tenderer Main Contractor data for %d parties and %d bids",
+        len(maincont_data["parties"]),
+        len(maincont_data["bids"]["details"]),
     )

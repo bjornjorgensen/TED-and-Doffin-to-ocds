@@ -80,5 +80,6 @@ def merge_reserved_execution(release_json, reserved_execution_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged reserved execution data for {len(reserved_execution_data['tender']['lots'])} lots",
+        "Merged reserved execution data for %d lots",
+        len(reserved_execution_data["tender"]["lots"]),
     )

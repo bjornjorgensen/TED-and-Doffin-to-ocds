@@ -40,10 +40,8 @@ def parse_dispatch_invitation_tender(xml_content):
                 result["tender"]["lots"].append(
                     {"id": lot_id, "secondStage": {"invitationDate": iso_date}},
                 )
-            except ValueError as e:
-                logger.error(
-                    f"Error parsing invitation date for lot {lot_id}: {str(e)}",
-                )
+            except ValueError:
+                logger.exception("Error parsing invitation date for lot %s", lot_id)
 
     return result if result["tender"]["lots"] else None
 
@@ -66,5 +64,6 @@ def merge_dispatch_invitation_tender(release_json, dispatch_invitation_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Dispatch Invitation Tender data for {len(dispatch_invitation_data['tender']['lots'])} lots",
+        "Merged Dispatch Invitation Tender data for %d lots",
+        len(dispatch_invitation_data["tender"]["lots"]),
     )

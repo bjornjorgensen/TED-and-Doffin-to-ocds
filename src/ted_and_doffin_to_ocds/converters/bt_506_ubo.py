@@ -93,4 +93,4 @@ def merge_ubo_email(release_json, ubo_email_data):
         else:
             existing_parties.append(new_party)
 
-    logger.info(f"Merged ubo Email data for {len(ubo_email_data['parties'])} parties")
+    logger.info("Merged ubo Email data for %d parties", len(ubo_email_data["parties"]))

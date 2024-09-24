@@ -98,5 +98,6 @@ def merge_electronic_payment(release_json, electronic_payment_data):
             lots.append(new_lot)
 
     logger.info(
-        f"Merged electronic payment data for {len(electronic_payment_data['tender']['lots'])} lots",
+        "Merged electronic payment data for %d lots",
+        len(electronic_payment_data["tender"]["lots"]),
     )

@@ -129,5 +129,6 @@ def merge_social_procurement(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged social procurement data for {len(social_procurement_data['tender']['lots'])} lots",
+        "Merged social procurement data for %d lots",
+        len(social_procurement_data["tender"]["lots"]),
     )

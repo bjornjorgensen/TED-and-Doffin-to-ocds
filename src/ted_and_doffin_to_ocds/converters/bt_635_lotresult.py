@@ -90,5 +90,6 @@ def merge_buyer_review_requests_count(release_json, buyer_review_requests_count_
             existing_statistics.append(new_statistic)
 
     logger.info(
-        f"Merged buyer review requests count data for {len(buyer_review_requests_count_data['statistics'])} lots",
+        "Merged buyer review requests count data for %d lots",
+        len(buyer_review_requests_count_data["statistics"]),
     )

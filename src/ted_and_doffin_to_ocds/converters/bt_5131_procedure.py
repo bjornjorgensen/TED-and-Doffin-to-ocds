@@ -62,5 +62,6 @@ def merge_place_performance_city_procedure(
             tender_delivery_addresses.append(new_address)
 
     logger.info(
-        f"Merged Place Performance City procedure data for {len(place_performance_city_procedure_data['tender']['deliveryAddresses'])} addresses",
+        "Merged Place Performance City procedure data for %d addresses",
+        len(place_performance_city_procedure_data["tender"]["deliveryAddresses"]),
     )

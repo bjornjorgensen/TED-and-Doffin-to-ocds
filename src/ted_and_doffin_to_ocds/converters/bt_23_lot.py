@@ -63,5 +63,6 @@ def merge_main_nature(release_json, main_nature_data):
             tender_lots.append(new_lot)
 
     logger.info(
-        f"Merged Main Nature data for {len(main_nature_data['tender']['lots'])} lots",
+        "Merged Main Nature data for %d lots",
+        len(main_nature_data["tender"]["lots"]),
     )

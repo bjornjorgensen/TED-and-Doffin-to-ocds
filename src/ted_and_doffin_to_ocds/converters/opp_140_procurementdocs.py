@@ -75,5 +75,6 @@ def merge_procurement_documents(release_json, procurement_docs_data):
             existing_documents.append(new_doc)
 
     logger.info(
-        f"Merged Procurement Documents data for {len(procurement_docs_data['tender']['documents'])} documents",
+        "Merged Procurement Documents data for %d documents",
+        len(procurement_docs_data["tender"]["documents"]),
     )

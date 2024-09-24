@@ -286,5 +286,6 @@ def merge_documents_unofficial_language(release_json, unofficial_language_data):
             existing_documents.append(new_doc)
 
     logger.info(
-        f"Merged unofficial language data for {len(unofficial_language_data['tender']['documents'])} documents",
+        "Merged unofficial language data for %d documents",
+        len(unofficial_language_data["tender"]["documents"]),
     )

@@ -75,4 +75,4 @@ def merge_framework_max_participants(release_json, max_participants_data):
         else:
             existing_lots.append(new_lot)
 
-    logger.info(f"Merged Framework Maximum participants data for {len(new_lots)} lots")
+    logger.info("Merged Framework Maximum participants data for %d lots", len(new_lots))

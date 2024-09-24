@@ -79,5 +79,6 @@ def merge_bt195_bt539_lotsgroup_unpublished_identifier(
     withheld_info.extend(unpublished_identifier_data["withheldInformation"])
 
     logger.info(
-        f"Merged unpublished identifier data for BT-195(BT-539)-LotsGroup: {len(unpublished_identifier_data['withheldInformation'])} items",
+        "Merged unpublished identifier data for BT-195(BT-539)-LotsGroup: %d items",
+        len(unpublished_identifier_data["withheldInformation"]),
     )

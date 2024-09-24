@@ -75,5 +75,6 @@ def merge_late_tenderer_info_description(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged late tenderer information description for {len(late_tenderer_info_description['tender']['lots'])} lots",
+        "Merged late tenderer information description for %d lots",
+        len(late_tenderer_info_description["tender"]["lots"]),
     )

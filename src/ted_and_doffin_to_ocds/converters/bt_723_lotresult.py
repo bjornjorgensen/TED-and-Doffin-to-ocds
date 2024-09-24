@@ -132,5 +132,6 @@ def merge_vehicle_category(release_json, vehicle_category_data):
             release_json["awards"].append(new_award)
 
     logger.info(
-        f"Merged vehicle category data for {len(vehicle_category_data['awards'])} awards",
+        "Merged vehicle category data for %d awards",
+        len(vehicle_category_data["awards"]),
     )

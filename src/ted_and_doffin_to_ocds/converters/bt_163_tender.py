@@ -89,5 +89,6 @@ def merge_concession_value_description(release_json, concession_value_descriptio
             existing_awards.append(new_award)
 
     logger.info(
-        f"Merged concession value description data for {len(concession_value_description_data['awards'])} awards",
+        "Merged concession value description data for %d awards",
+        len(concession_value_description_data["awards"]),
     )

@@ -96,5 +96,6 @@ def merge_tender_validity_deadline(release_json, tender_validity_deadline_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged tender validity deadline data for {len(tender_validity_deadline_data['tender']['lots'])} lots",
+        "Merged tender validity deadline data for %d lots",
+        len(tender_validity_deadline_data["tender"]["lots"]),
     )

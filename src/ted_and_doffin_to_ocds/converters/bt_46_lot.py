@@ -68,5 +68,6 @@ def merge_jury_member_name(release_json, jury_member_data):
             tender_lots.append(new_lot)
 
     logger.info(
-        f"Merged Jury Member Name data for {len(jury_member_data['tender']['lots'])} lots",
+        "Merged Jury Member Name data for %d lots",
+        len(jury_member_data["tender"]["lots"]),
     )

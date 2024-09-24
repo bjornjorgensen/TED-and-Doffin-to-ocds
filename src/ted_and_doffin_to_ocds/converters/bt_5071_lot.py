@@ -93,5 +93,6 @@ def merge_place_performance_country_subdivision(release_json, subdivision_data):
             existing_items.append(new_item)
 
     logger.info(
-        f"Merged place performance country subdivision data for {len(subdivision_data['tender']['items'])} items",
+        "Merged place performance country subdivision data for %d items",
+        len(subdivision_data["tender"]["items"]),
     )

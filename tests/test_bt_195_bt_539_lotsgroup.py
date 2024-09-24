@@ -61,7 +61,7 @@ def test_bt195_bt539_lotsgroup_unpublished_identifier_integration(
     with open("output.json") as f:
         result = json.load(f)
 
-    logger.info(f"Result: {json.dumps(result, indent=2)}")
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "withheldInformation" in result, "Expected 'withheldInformation' in result"
     assert (
@@ -106,7 +106,7 @@ def test_bt195_bt539_lotsgroup_unpublished_identifier_missing_data(
     with open("output.json") as f:
         result = json.load(f)
 
-    logger.info(f"Result: {json.dumps(result, indent=2)}")
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert (
         "withheldInformation" not in result

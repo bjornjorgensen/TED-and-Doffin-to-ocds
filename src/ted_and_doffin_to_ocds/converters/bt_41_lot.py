@@ -63,5 +63,6 @@ def merge_lot_following_contract(release_json, lot_following_contract_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged lot following contract data for {len(lot_following_contract_data['tender']['lots'])} lots",
+        "Merged lot following contract data for %d lots",
+        len(lot_following_contract_data["tender"]["lots"]),
     )

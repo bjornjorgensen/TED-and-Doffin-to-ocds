@@ -66,5 +66,6 @@ def merge_purpose_lot_identifier(release_json, purpose_lot_identifier_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged purpose lot identifier data for {len(purpose_lot_identifier_data['tender']['lots'])} lots",
+        "Merged purpose lot identifier data for %d lots",
+        len(purpose_lot_identifier_data["tender"]["lots"]),
     )

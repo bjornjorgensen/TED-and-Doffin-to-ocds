@@ -71,5 +71,6 @@ def merge_part_place_performance_country_subdivision(release_json, part_data):
         tender_delivery_addresses.append(new_address)
 
     logger.info(
-        f"Merged part Place Performance Country Subdivision data for {len(part_data['tender']['deliveryAddresses'])} addresses",
+        "Merged part Place Performance Country Subdivision data for %d addresses",
+        len(part_data["tender"]["deliveryAddresses"]),
     )

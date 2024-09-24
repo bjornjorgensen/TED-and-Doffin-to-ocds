@@ -72,5 +72,7 @@ def merge_part_fiscallegis(release_json, fiscallegis_data):
             )
 
     logger.info(
-        f"Merged part Fiscal Legislation data for {len(fiscallegis_data['parties'])} parties and {len(fiscallegis_data['tender']['documents'])} documents",
+        "Merged part Fiscal Legislation data for %d parties and %d documents",
+        len(fiscallegis_data["parties"]),
+        len(fiscallegis_data["tender"]["documents"]),
     )

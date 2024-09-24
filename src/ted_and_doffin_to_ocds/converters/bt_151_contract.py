@@ -88,5 +88,6 @@ def merge_contract_url(release_json, contract_url_data):
             existing_contracts.append(new_contract)
 
     logger.info(
-        f"Merged contract URL data for {len(contract_url_data['contracts'])} contracts",
+        "Merged contract URL data for %d contracts",
+        len(contract_url_data["contracts"]),
     )

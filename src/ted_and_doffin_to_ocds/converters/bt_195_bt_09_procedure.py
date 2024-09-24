@@ -88,5 +88,6 @@ def bt_195_merge_unpublished_identifier_bt_09_procedure(
             withheld_information.append(item)
 
     logger.info(
-        f"Merged unpublished identifier data: {len(unpublished_identifier_data['withheldInformation'])} items",
+        "Merged unpublished identifier data: %d items",
+        len(unpublished_identifier_data["withheldInformation"]),
     )

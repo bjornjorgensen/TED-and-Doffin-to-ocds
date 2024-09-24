@@ -105,4 +105,4 @@ def merge_exclusion_grounds(release_json, exclusion_grounds_data):
 
     criteria.extend(exclusion_grounds_data["tender"]["exclusionGrounds"]["criteria"])
 
-    logger.info(f"Merged exclusion grounds data: {len(criteria)} criteria added")
+    logger.info("Merged exclusion grounds data: %d criteria added", len(criteria))

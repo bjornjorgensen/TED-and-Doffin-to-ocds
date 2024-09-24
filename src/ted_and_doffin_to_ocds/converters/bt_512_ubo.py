@@ -83,5 +83,6 @@ def merge_ubo_postcode(release_json, ubo_postcode_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged ubo Postcode data for {len(ubo_postcode_data['parties'])} parties",
+        "Merged ubo Postcode data for %s parties",
+        len(ubo_postcode_data["parties"]),
     )

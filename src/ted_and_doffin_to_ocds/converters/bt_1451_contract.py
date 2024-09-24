@@ -88,5 +88,6 @@ def merge_winner_decision_date(release_json, winner_decision_date_data):
             existing_awards.append(new_award)
 
     logger.info(
-        f"Merged Winner Decision Date data for {len(winner_decision_date_data['awards'])} awards",
+        "Merged Winner Decision Date data for %d awards",
+        len(winner_decision_date_data["awards"]),
     )

@@ -49,5 +49,6 @@ def merge_part_additional_nature(release_json, part_additional_nature_data):
     tender["additionalProcurementCategories"] = combined_categories
 
     logger.info(
-        f"Merged part Additional Nature data: {len(combined_categories)} categories",
+        "Merged part Additional Nature data: %s categories",
+        len(combined_categories),
     )

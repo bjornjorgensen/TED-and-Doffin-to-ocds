@@ -178,5 +178,6 @@ def merge_activity_entity(release_json, activity_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"BT-610-procedure-buyer: Merged activity entity data for {len(activity_data['parties'])} parties",
+        "BT-610-procedure-buyer: Merged activity entity data for %d parties",
+        len(activity_data["parties"]),
     )

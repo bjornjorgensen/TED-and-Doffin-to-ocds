@@ -63,5 +63,6 @@ def merge_lot_bid_opening_location(release_json, lot_bid_opening_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Lot Bid Opening Location data for {len(lot_bid_opening_data['tender']['lots'])} lots",
+        "Merged Lot Bid Opening Location data for %d lots",
+        len(lot_bid_opening_data["tender"]["lots"]),
     )

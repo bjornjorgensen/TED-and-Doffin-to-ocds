@@ -120,5 +120,6 @@ def merge_selection_criteria(release_json, selection_criteria_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged selection criteria data for {len(selection_criteria_data['tender']['lots'])} lots",
+        "Merged selection criteria data for %d lots",
+        len(selection_criteria_data["tender"]["lots"]),
     )

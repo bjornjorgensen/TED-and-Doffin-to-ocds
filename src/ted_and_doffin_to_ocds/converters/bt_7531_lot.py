@@ -124,5 +124,6 @@ def merge_selection_criteria_number_weight(release_json, number_weight_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged selection criteria number weight data for {len(number_weight_data['tender']['lots'])} lots",
+        "Merged selection criteria number weight data for %d lots",
+        len(number_weight_data["tender"]["lots"]),
     )

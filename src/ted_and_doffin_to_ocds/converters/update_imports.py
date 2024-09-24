@@ -27,7 +27,9 @@ def update_imports(directory):
 
                 for pattern in function_patterns:
                     updated_content = re.sub(
-                        pattern, lambda m: "_".join(m.groups()).lower(), updated_content
+                        pattern,
+                        lambda m: "_".join(m.groups()).lower(),
+                        updated_content,
                     )
 
                 # Handle special cases
@@ -47,14 +49,16 @@ def update_imports(directory):
                 ]
                 for case in special_cases:
                     updated_content = re.sub(
-                        f"({case})", lambda m: m.group(1).lower(), updated_content
+                        f"({case})",
+                        lambda m: m.group(1).lower(),
+                        updated_content,
                     )
 
                 # Handle specific suffixes
                 suffixes = ["company", "touchpoint", "ubo"]
                 for suffix in suffixes:
                     updated_content = re.sub(
-                        f"_(bt_\d+[a-z]?_organization)_{suffix}",
+                        rf"_(bt_\d+[a-z]?_organization)_{suffix}",
                         lambda m, s=suffix: f"_{m.group(1)}_{s.lower()}",
                         updated_content,
                         flags=re.IGNORECASE,

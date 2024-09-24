@@ -97,5 +97,6 @@ def merge_dispatch_invitation_interest(release_json, dispatch_invitation_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged dispatch invitation interest data for {len(dispatch_invitation_data['tender']['lots'])} lots",
+        "Merged dispatch invitation interest data for %d lots",
+        len(dispatch_invitation_data["tender"]["lots"]),
     )

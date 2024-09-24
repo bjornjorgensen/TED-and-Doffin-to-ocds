@@ -77,5 +77,6 @@ def merge_bt_271_lots_group(release_json, bt_271_lots_group_data):
             existing_lot_groups.append(new_lot_group)
 
     logger.info(
-        f"Merged BT-271-LotsGroup Framework Maximum Value data for {len(bt_271_lots_group_data['tender']['lotGroups'])} lot groups",
+        "Merged BT-271-LotsGroup Framework Maximum Value data for %d lot groups",
+        len(bt_271_lots_group_data["tender"]["lotGroups"]),
     )

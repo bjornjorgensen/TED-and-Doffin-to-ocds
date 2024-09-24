@@ -72,5 +72,7 @@ def merge_part_environlegis(release_json, environlegis_data):
             )
 
     logger.info(
-        f"Merged part Environmental Legislation data for {len(environlegis_data['parties'])} parties and {len(environlegis_data['tender']['documents'])} documents",
+        "Merged part Environmental Legislation data for %d parties and %d documents",
+        len(environlegis_data["parties"]),
+        len(environlegis_data["tender"]["documents"]),
     )

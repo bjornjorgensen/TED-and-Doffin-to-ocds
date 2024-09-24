@@ -82,5 +82,6 @@ def merge_subcontracting_value(release_json, subcontracting_data):
             existing_bids.append(new_bid)
 
     logger.info(
-        f"Merged subcontracting value data for {len(subcontracting_data['bids']['details'])} bids",
+        "Merged subcontracting value data for %d bids",
+        len(subcontracting_data["bids"]["details"]),
     )

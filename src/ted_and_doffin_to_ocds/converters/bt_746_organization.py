@@ -84,5 +84,6 @@ def merge_winner_listed(release_json, winner_listed_data):
             parties.append(new_party)
 
     logger.info(
-        f"Merged winner listed data for {len(winner_listed_data['parties'])} organizations",
+        "Merged winner listed data for %d organizations",
+        len(winner_listed_data["parties"]),
     )

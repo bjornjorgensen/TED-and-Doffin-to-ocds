@@ -31,7 +31,7 @@ def parse_main_nature_procedure(xml_content):
         if main_category == "supplies":
             main_category = "goods"
         elif main_category not in ["works", "services"]:
-            logger.warning(f"Unexpected procurement type: {main_category}")
+            logger.warning("Unexpected procurement type: %s", main_category)
             return None
 
         result["tender"]["mainProcurementCategory"] = main_category
@@ -49,7 +49,8 @@ def merge_main_nature_procedure(release_json, main_nature_data):
             main_nature_data["tender"]["mainProcurementCategory"]
         )
         logger.info(
-            f"Merged Main Nature (procedure) data: {main_nature_data['tender']['mainProcurementCategory']}",
+            "Merged Main Nature (procedure) data: %s",
+            main_nature_data["tender"]["mainProcurementCategory"],
         )
     else:
         logger.warning(

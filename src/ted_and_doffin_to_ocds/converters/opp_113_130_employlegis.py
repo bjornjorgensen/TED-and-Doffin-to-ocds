@@ -95,5 +95,6 @@ def merge_employment_legislation(release_json, employment_legislation_data):
             existing_documents.append(new_doc)
 
     logger.info(
-        f"Merged Employment Legislation data for {len(employment_legislation_data['tender']['documents'])} documents",
+        "Merged Employment Legislation data for %d documents",
+        len(employment_legislation_data["tender"]["documents"]),
     )

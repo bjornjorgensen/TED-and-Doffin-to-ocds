@@ -95,5 +95,6 @@ def merge_lot_eu_funds_details(release_json, eu_funds_details):
             existing_finance.append(new_finance)
 
     logger.info(
-        f"BT-6140-Lot: Merged lot EU funds details for {len(eu_funds_details['planning']['budget']['finance'])} finance entries",
+        "BT-6140-Lot: Merged lot EU funds details for %d finance entries",
+        len(eu_funds_details["planning"]["budget"]["finance"]),
     )

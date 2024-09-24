@@ -75,5 +75,6 @@ def merge_touchpoint_country_subdivision(
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged touchpoint country subdivision data for {len(touchpoint_country_subdivision_data['parties'])} parties",
+        "Merged touchpoint country subdivision data for %s parties",
+        len(touchpoint_country_subdivision_data["parties"]),
     )

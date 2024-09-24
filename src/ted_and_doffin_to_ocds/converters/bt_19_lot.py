@@ -76,5 +76,6 @@ def merge_submission_nonelectronic_justification(release_json, justification_dat
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Submission Nonelectronic Justification data for {len(justification_data['tender']['lots'])} lots",
+        "Merged Submission Nonelectronic Justification data for %d lots",
+        len(justification_data["tender"]["lots"]),
     )

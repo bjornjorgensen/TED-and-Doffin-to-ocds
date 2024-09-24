@@ -76,5 +76,6 @@ def merge_lot_selection_criteria_second_stage(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged lot selection criteria second stage data for {len(lot_selection_criteria_data['tender']['lots'])} lots",
+        "Merged lot selection criteria second stage data for %d lots",
+        len(lot_selection_criteria_data["tender"]["lots"]),
     )

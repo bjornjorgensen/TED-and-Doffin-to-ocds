@@ -22,7 +22,7 @@ ISO_3166_1_ALPHA_2 = {
 def determine_scheme(country_code, system):
     if country_code in ISO_3166_1_ALPHA_2:
         return f"{country_code}-{system}"
-    logger.warning(f"Unknown country code: {country_code}. Using default scheme.")
+    logger.warning("Unknown country code: %s. Using default scheme.", country_code)
     return f"XX-{system}"  # Default scheme if country code is not recognized
 
 
@@ -90,5 +90,6 @@ def merge_tender_identifier(release_json, tender_identifier_data):
             existing_bids.append(new_bid)
 
     logger.info(
-        f"Merged Tender Identifier data for {len(tender_identifier_data['bids']['details'])} bids",
+        "Merged Tender Identifier data for %d bids",
+        len(tender_identifier_data["bids"]["details"]),
     )

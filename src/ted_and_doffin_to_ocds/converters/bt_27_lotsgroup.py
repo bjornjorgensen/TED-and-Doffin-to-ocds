@@ -70,5 +70,6 @@ def merge_bt_27_lots_group(release_json, bt_27_lots_group_data):
             existing_lot_groups.append(new_lot_group)
 
     logger.info(
-        f"Merged BT-27-LotsGroup Estimated Value data for {len(bt_27_lots_group_data['tender']['lotGroups'])} lot groups",
+        "Merged BT-27-LotsGroup Estimated Value data for %(num_lot_groups)d lot groups",
+        {"num_lot_groups": len(bt_27_lots_group_data["tender"]["lotGroups"])},
     )

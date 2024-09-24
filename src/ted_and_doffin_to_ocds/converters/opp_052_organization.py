@@ -65,5 +65,6 @@ def merge_acquiring_cpb_buyer_indicator(release_json, acquiring_cpb_buyer_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Acquiring CPB buyer Indicator for {len(acquiring_cpb_buyer_data['parties'])} organizations",
+        "Merged Acquiring CPB buyer Indicator for %d organizations",
+        len(acquiring_cpb_buyer_data["parties"]),
     )

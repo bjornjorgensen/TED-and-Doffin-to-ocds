@@ -118,5 +118,6 @@ def merge_contract_eu_funds_financing_identifier(
             existing_contracts.append(new_contract)
 
     logger.info(
-        f"Merged Contract EU Funds Financing Identifier data for {len(contract_eu_funds_financing_identifier_data['contracts'])} contracts",
+        "Merged Contract EU Funds Financing Identifier data for %d contracts",
+        len(contract_eu_funds_financing_identifier_data["contracts"]),
     )

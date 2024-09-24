@@ -36,7 +36,7 @@ def parse_lot_public_opening_description(xml_content):
         if description:
             lots.append({"id": lot_id, "bidOpening": {"description": description[0]}})
 
-    logger.debug(f"Parsed lot public opening description data: {lots}")
+    logger.debug("Parsed lot public opening description data: %s", lots)
     return {"tender": {"lots": lots}} if lots else None
 
 
@@ -61,8 +61,10 @@ def merge_lot_public_opening_description(
             existing_lots.append(new_lot)
 
     logger.debug(
-        f"Release JSON after merging lot public opening description data: {release_json}",
+        "Release JSON after merging lot public opening description data: %s",
+        release_json,
     )
     logger.info(
-        f"Merged Lot Public Opening Description data for {len(lot_public_opening_description_data['tender']['lots'])} lots",
+        "Merged Lot Public Opening Description data for %d lots",
+        len(lot_public_opening_description_data["tender"]["lots"]),
     )

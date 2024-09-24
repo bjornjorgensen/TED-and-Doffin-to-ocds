@@ -97,5 +97,6 @@ def merge_award_criterion_number_threshold(release_json, award_criterion_data):
             tender_lots.append(new_lot)
 
     logger.info(
-        f"Merged Award Criterion Number Threshold data for {len(award_criterion_data['tender']['lots'])} lots",
+        "Merged Award Criterion Number Threshold data for %d lots",
+        len(award_criterion_data["tender"]["lots"]),
     )

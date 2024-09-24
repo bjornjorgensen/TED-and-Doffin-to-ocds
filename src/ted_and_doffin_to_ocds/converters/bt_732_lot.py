@@ -97,5 +97,6 @@ def merge_lot_security_clearance_description(
             release_json["tender"]["lots"].append(new_lot)
 
     logger.info(
-        f"Merged security clearance description data for {len(lot_security_clearance_description_data['tender']['lots'])} lots",
+        "Merged security clearance description data for %d lots",
+        len(lot_security_clearance_description_data["tender"]["lots"]),
     )

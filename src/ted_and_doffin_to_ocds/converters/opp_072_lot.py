@@ -100,5 +100,6 @@ def merge_quality_target_description(release_json, quality_target_description_da
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Quality Target Description for {len(quality_target_description_data['tender']['lots'])} lots",
+        "Merged Quality Target Description for %d lots",
+        len(quality_target_description_data["tender"]["lots"]),
     )

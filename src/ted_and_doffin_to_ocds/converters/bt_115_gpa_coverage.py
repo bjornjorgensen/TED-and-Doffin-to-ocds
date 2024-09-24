@@ -80,5 +80,6 @@ def merge_gpa_coverage(release_json, gpa_coverage_data):
         )
 
     logger.info(
-        f"Merged GPA Coverage data for {len(gpa_coverage_data['tender']['lots'])} lots and part",
+        "Merged GPA Coverage data for %d lots and part",
+        len(gpa_coverage_data["tender"]["lots"]),
     )

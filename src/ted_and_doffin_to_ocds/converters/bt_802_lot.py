@@ -26,7 +26,7 @@ def parse_non_disclosure_agreement_description(xml_content):
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
         namespaces=namespaces,
     )
-    logger.debug(f"Found {len(lot_elements)} lot elements")
+    logger.debug("Found %d lot elements", len(lot_elements))
 
     for lot in lot_elements:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
@@ -36,7 +36,7 @@ def parse_non_disclosure_agreement_description(xml_content):
         )
 
         if nda_description:
-            logger.debug(f"Lot {lot_id} has NDA description: {nda_description[0]}")
+            logger.debug("Lot %s has NDA description: %s", lot_id, nda_description[0])
             result["tender"]["lots"].append(
                 {
                     "id": lot_id,
@@ -44,9 +44,9 @@ def parse_non_disclosure_agreement_description(xml_content):
                 },
             )
         else:
-            logger.debug(f"No NDA description found for lot {lot_id}")
+            logger.debug("No NDA description found for lot %s", lot_id)
 
-    logger.info(f"Parsed NDA descriptions for {len(result['tender']['lots'])} lots")
+    logger.info("Parsed NDA descriptions for %d lots", len(result["tender"]["lots"]))
     return result
 
 
@@ -67,11 +67,12 @@ def merge_non_disclosure_agreement_description(release_json, nda_description_dat
             existing_lot.setdefault("contractTerms", {})["nonDisclosureAgreement"] = (
                 nda_lot["contractTerms"]["nonDisclosureAgreement"]
             )
-            logger.debug(f"Updated NDA description for existing lot {lot_id}")
+            logger.debug("Updated NDA description for existing lot %s", lot_id)
         else:
             lots.append(nda_lot)
-            logger.debug(f"Added new lot {lot_id} with NDA description")
+            logger.debug("Added new lot %s with NDA description", lot_id)
 
     logger.info(
-        f"Merged NDA descriptions for {len(nda_description_data['tender']['lots'])} lots",
+        "Merged NDA descriptions for %d lots",
+        len(nda_description_data["tender"]["lots"]),
     )

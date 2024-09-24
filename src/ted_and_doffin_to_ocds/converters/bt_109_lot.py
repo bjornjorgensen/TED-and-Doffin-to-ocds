@@ -65,5 +65,6 @@ def merge_framework_duration_justification(release_json, framework_duration_data
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Framework Duration Justification data for {len(framework_duration_data['tender']['lots'])} lots",
+        "Merged Framework Duration Justification data for %d lots",
+        len(framework_duration_data["tender"]["lots"]),
     )

@@ -107,5 +107,6 @@ def merge_multiple_tenders(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged multiple tenders data for {len(multiple_tenders_data['tender']['lots'])} lots",
+        "Merged multiple tenders data for %d lots",
+        len(multiple_tenders_data["tender"]["lots"]),
     )

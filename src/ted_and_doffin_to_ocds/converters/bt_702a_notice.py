@@ -235,4 +235,4 @@ def merge_notice_language(release_json, notice_language_data):
         return
 
     release_json.update(notice_language_data)
-    logger.info(f"Merged notice Language data: {notice_language_data['language']}")
+    logger.info("Merged notice Language data: %s", notice_language_data["language"])

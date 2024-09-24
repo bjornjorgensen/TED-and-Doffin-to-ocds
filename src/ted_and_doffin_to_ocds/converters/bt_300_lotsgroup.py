@@ -67,4 +67,4 @@ def merge_lotsgroup_additional_info(release_json, lotsgroup_additional_info):
             lot_group["description"] = description
             merged_count += 1
 
-    logger.info(f"Merged additional information for {merged_count} lots groups")
+    logger.info("Merged additional information for %d lots groups", merged_count)

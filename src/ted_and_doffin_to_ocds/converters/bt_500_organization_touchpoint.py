@@ -81,5 +81,6 @@ def merge_touchpoint_name(release_json, touchpoint_name_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged touchpoint Name data for {len(touchpoint_name_data['parties'])} parties",
+        "Merged touchpoint Name data for %s parties",
+        len(touchpoint_name_data["parties"]),
     )

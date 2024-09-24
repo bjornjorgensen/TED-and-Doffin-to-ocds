@@ -107,5 +107,6 @@ def merge_selection_criteria_threshold_number(release_json, threshold_number_dat
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged selection criteria threshold number data for {len(threshold_number_data['tender']['lots'])} lots",
+        "Merged selection criteria threshold number data for %d lots",
+        len(threshold_number_data["tender"]["lots"]),
     )

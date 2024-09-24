@@ -68,5 +68,6 @@ def merge_tender_variant(release_json, tender_variant_data):
             existing_bids.append(new_bid)
 
     logger.info(
-        f"Merged Tender Variant data for {len(tender_variant_data['bids']['details'])} bids",
+        "Merged Tender Variant data for %d bids",
+        len(tender_variant_data["bids"]["details"]),
     )

@@ -97,5 +97,6 @@ def merge_organization_part_name(release_json, organization_part_name_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged organization part Name data for {len(organization_part_name_data['parties'])} parties",
+        "Merged organization part Name data for %d parties",
+        len(organization_part_name_data["parties"]),
     )

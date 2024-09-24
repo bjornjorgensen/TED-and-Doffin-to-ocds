@@ -94,5 +94,6 @@ def merge_recurrence_description(release_json, recurrence_description_data):
             lots.append(new_lot)
 
     logger.info(
-        f"Merged recurrence description data for {len(recurrence_description_data['tender']['lots'])} lots",
+        "Merged recurrence description data for %d lots",
+        len(recurrence_description_data["tender"]["lots"]),
     )

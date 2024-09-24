@@ -76,5 +76,6 @@ def merge_lot_documents_restricted(release_json, lot_documents_restricted_data):
             existing_documents.append(new_document)
 
     logger.info(
-        f"Merged lot documents restricted data for {len(lot_documents_restricted_data['tender']['documents'])} documents",
+        "Merged lot documents restricted data for %d documents",
+        len(lot_documents_restricted_data["tender"]["documents"]),
     )

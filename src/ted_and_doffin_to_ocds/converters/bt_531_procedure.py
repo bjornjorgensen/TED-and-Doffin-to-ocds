@@ -49,5 +49,6 @@ def merge_procedure_additional_nature(release_json, procedure_additional_nature_
     tender["additionalProcurementCategories"] = combined_categories
 
     logger.info(
-        f"Merged procedure Additional Nature data: {len(combined_categories)} categories",
+        "Merged procedure Additional Nature data: %s categories",
+        len(combined_categories),
     )

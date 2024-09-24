@@ -143,5 +143,6 @@ def merge_selection_criteria_number_threshold(
             tender_lots.append(new_lot)
 
     logger.info(
-        f"Merged Selection Criteria Number Threshold data for {len(parsed_data['tender']['lots'])} lots",
+        "Merged Selection Criteria Number Threshold data for %d lots",
+        len(parsed_data["tender"]["lots"]),
     )

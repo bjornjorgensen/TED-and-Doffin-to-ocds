@@ -66,5 +66,6 @@ def merge_contract_conclusion_date(release_json, contract_conclusion_date_data):
             existing_contracts.append(new_contract)
 
     logger.info(
-        f"Merged Contract Conclusion Date data for {len(contract_conclusion_date_data['contracts'])} contracts",
+        "Merged Contract Conclusion Date data for %d contracts",
+        len(contract_conclusion_date_data["contracts"]),
     )

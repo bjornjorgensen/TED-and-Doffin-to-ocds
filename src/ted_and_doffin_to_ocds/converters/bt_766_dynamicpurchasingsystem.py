@@ -86,4 +86,4 @@ def merge_dynamic_purchasing_system(
 
     tender["lots"] = updated_lots
 
-    logger.info(f"Merged Dynamic Purchasing System data for {len(updated_lots)} lots")
+    logger.info("Merged Dynamic Purchasing System data for %d lots", len(updated_lots))

@@ -80,5 +80,6 @@ def merge_submission_nonelectronic_description(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged submission non-electronic description data for {len(submission_nonelectronic_description_data['tender']['lots'])} lots",
+        "Merged submission non-electronic description data for %d lots",
+        len(submission_nonelectronic_description_data["tender"]["lots"]),
     )

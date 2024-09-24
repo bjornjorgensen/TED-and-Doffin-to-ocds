@@ -116,5 +116,6 @@ def merge_tender_value_lowest(release_json, tender_value_lowest_data):
         stat["id"] = str(i)
 
     logger.info(
-        f"Merged Tender Value Lowest data for {len(tender_value_lowest_data['bids']['statistics'])} statistics",
+        "Merged Tender Value Lowest data for %d statistics",
+        len(tender_value_lowest_data["bids"]["statistics"]),
     )

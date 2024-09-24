@@ -97,5 +97,6 @@ def merge_award_criterion_number_fixed_lotsgroup(
             tender_lot_groups.append(new_lot_group)
 
     logger.info(
-        f"Merged Award Criterion Number Fixed LotsGroup data for {len(award_criterion_number_fixed_lotsgroup_data['tender']['lotGroups'])} lot groups",
+        "Merged Award Criterion Number Fixed LotsGroup data for %d lot groups",
+        len(award_criterion_number_fixed_lotsgroup_data["tender"]["lotGroups"]),
     )

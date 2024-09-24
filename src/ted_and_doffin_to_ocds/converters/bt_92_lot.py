@@ -95,5 +95,6 @@ def merge_electronic_ordering(release_json, electronic_ordering_data):
             lots.append(new_lot)
 
     logger.info(
-        f"Merged electronic ordering data for {len(electronic_ordering_data['tender']['lots'])} lots",
+        "Merged electronic ordering data for %d lots",
+        len(electronic_ordering_data["tender"]["lots"]),
     )

@@ -82,5 +82,6 @@ def merge_guarantee_required_description(release_json, guarantee_description_dat
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged guarantee required description data for {len(guarantee_description_data['tender']['lots'])} lots",
+        "Merged guarantee required description data for %d lots",
+        len(guarantee_description_data["tender"]["lots"]),
     )

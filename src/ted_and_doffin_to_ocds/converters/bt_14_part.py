@@ -62,5 +62,6 @@ def merge_part_documents_restricted(release_json, part_documents_restricted_data
             existing_documents.append(new_document)
 
     logger.info(
-        f"Merged part documents restricted data for {len(part_documents_restricted_data['tender']['documents'])} documents",
+        "Merged part documents restricted data for %d documents",
+        len(part_documents_restricted_data["tender"]["documents"]),
     )

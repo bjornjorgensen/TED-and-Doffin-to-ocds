@@ -63,4 +63,4 @@ def merge_lot_additional_info(release_json, lot_additional_info):
                 description += note["text"]
             lot["description"] = description
 
-    logger.info(f"Merged additional information for {len(lot_additional_info)} lots")
+    logger.info("Merged additional information for %d lots", len(lot_additional_info))

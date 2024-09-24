@@ -119,5 +119,6 @@ def merge_organization_streetline2(release_json, organization_streetline2_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged organization Streetline 2 data for {len(organization_streetline2_data['parties'])} parties",
+        "Merged organization Streetline 2 data for %s parties",
+        len(organization_streetline2_data["parties"]),
     )

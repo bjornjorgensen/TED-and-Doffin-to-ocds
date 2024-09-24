@@ -63,5 +63,6 @@ def merge_lot_jury_decision_binding(release_json, lot_jury_decision_binding_data
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged lot jury decision binding data for {len(lot_jury_decision_binding_data['tender']['lots'])} lots",
+        "Merged lot jury decision binding data for %d lots",
+        len(lot_jury_decision_binding_data["tender"]["lots"]),
     )

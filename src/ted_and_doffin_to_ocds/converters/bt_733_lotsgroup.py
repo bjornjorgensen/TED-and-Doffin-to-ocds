@@ -97,5 +97,6 @@ def merge_lots_group_award_criteria_order_justification(
             release_json["tender"]["lotGroups"].append(new_lot_group)
 
     logger.info(
-        f"Merged award criteria order justification data for {len(lots_group_award_criteria_order_justification_data['tender']['lotGroups'])} lot groups",
+        "Merged award criteria order justification data for %d lot groups",
+        len(lots_group_award_criteria_order_justification_data["tender"]["lotGroups"]),
     )

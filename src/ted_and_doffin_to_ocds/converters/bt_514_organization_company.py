@@ -124,5 +124,6 @@ def merge_organization_country(release_json, organization_country_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged organization Country data for {len(organization_country_data['parties'])} parties",
+        "Merged organization Country data for %s parties",
+        len(organization_country_data["parties"]),
     )

@@ -45,13 +45,13 @@ def test_parse_buyer_review_complainants():
 def test_merge_buyer_review_complainants():
     release_json = {
         "statistics": [
-            {"id": "1", "measure": "otherMeasure", "relatedLot": "LOT-0001"}
+            {"id": "1", "measure": "otherMeasure", "relatedLot": "LOT-0001"},
         ],
     }
 
     buyer_review_complainants_data = {
         "statistics": [
-            {"id": "2", "measure": "complainants", "relatedLot": "LOT-0001"}
+            {"id": "2", "measure": "complainants", "relatedLot": "LOT-0001"},
         ],
     }
 

@@ -93,7 +93,9 @@ def parse_lot_prize_value(xml_content: bytes):
                         )
                     except ValueError:
                         logger.warning(
-                            f"Invalid prize value for lot {lot_id}: {value_amount[0]}",
+                            "Invalid prize value for lot %s: %s",
+                            lot_id,
+                            value_amount[0],
                         )
 
             result["tender"]["lots"].append(lot_data)
@@ -142,5 +144,6 @@ def merge_lot_prize_value(release_json, lot_prize_value_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged lot prize value data for {len(lot_prize_value_data['tender']['lots'])} lots",
+        "Merged lot prize value data for %d lots",
+        len(lot_prize_value_data["tender"]["lots"]),
     )

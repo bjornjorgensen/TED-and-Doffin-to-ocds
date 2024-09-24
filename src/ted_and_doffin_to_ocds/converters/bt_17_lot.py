@@ -63,5 +63,6 @@ def merge_submission_electronic(release_json, submission_electronic_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Submission Electronic data for {len(submission_electronic_data['tender']['lots'])} lots",
+        "Merged Submission Electronic data for %d lots",
+        len(submission_electronic_data["tender"]["lots"]),
     )

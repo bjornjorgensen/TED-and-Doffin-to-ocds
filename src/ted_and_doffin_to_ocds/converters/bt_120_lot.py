@@ -67,5 +67,6 @@ def merge_no_negotiation_necessary(release_json, no_negotiation_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged No Negotiation Necessary data for {len(no_negotiation_data['lots'])} lots",
+        "Merged No Negotiation Necessary data for %d lots",
+        len(no_negotiation_data["lots"]),
     )

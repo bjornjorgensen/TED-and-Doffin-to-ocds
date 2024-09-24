@@ -76,4 +76,4 @@ def merge_ubo_name(release_json, ubo_name_data):
         else:
             existing_parties.append(new_party)
 
-    logger.info(f"Merged ubo Name data for {len(ubo_name_data['parties'])} parties")
+    logger.info("Merged ubo Name data for %d parties", len(ubo_name_data["parties"]))

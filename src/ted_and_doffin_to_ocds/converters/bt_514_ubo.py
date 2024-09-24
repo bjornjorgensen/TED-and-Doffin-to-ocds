@@ -156,5 +156,6 @@ def merge_ubo_country(release_json, ubo_country_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged ubo Country data for {len(ubo_country_data['parties'])} parties",
+        "Merged ubo Country data for %s parties",
+        len(ubo_country_data["parties"]),
     )

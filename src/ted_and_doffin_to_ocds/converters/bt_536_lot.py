@@ -27,7 +27,7 @@ def parse_lot_start_date(xml_content):
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
         namespaces=namespaces,
     )
-    logger.info(f"Found {len(lots)} lots")
+    logger.info("Found %d lots", len(lots))
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
@@ -36,8 +36,8 @@ def parse_lot_start_date(xml_content):
             namespaces=namespaces,
         )
 
-        logger.info(f"Processing lot {lot_id}")
-        logger.info(f"Start date found: {date_to_start}")
+        logger.info("Processing lot %s", lot_id)
+        logger.info("Start date found: %s", date_to_start)
 
         if date_to_start:
             try:
@@ -47,19 +47,19 @@ def parse_lot_start_date(xml_content):
                     "contractPeriod": {"startDate": formatted_start_date},
                 }
                 result["tender"]["lots"].append(lot_data)
-                logger.info(f"Added lot data: {lot_data}")
-            except ValueError as e:
-                logger.error(f"Error formatting start date for lot {lot_id}: {str(e)}")
+                logger.info("Added lot data: %s", lot_data)
+            except ValueError:
+                logger.exception("Error formatting start date for lot %s", lot_id)
         else:
-            logger.warning(f"No start date found for lot {lot_id}")
+            logger.warning("No start date found for lot %s", lot_id)
 
-    logger.info(f"Final result: {result}")
+    logger.info("Final result: %s", result)
     return result if result["tender"]["lots"] else None
 
 
 def merge_lot_start_date(release_json, lot_start_date_data):
     logger.info("Starting merge_lot_start_date function")
-    logger.info(f"Merging lot start date data: {lot_start_date_data}")
+    logger.info("Merging lot start date data: %s", lot_start_date_data)
     if not lot_start_date_data:
         logger.warning("No lot start date data to merge")
         return
@@ -76,9 +76,9 @@ def merge_lot_start_date(release_json, lot_start_date_data):
             existing_lot.setdefault("contractPeriod", {}).update(
                 new_lot["contractPeriod"],
             )
-            logger.info(f"Updated existing lot: {existing_lot}")
+            logger.info("Updated existing lot: %s", existing_lot)
         else:
             existing_lots.append(new_lot)
-            logger.info(f"Added new lot: {new_lot}")
+            logger.info("Added new lot: %s", new_lot)
 
-    logger.info(f"Final release_json after merge: {release_json}")
+    logger.info("Final release_json after merge: %s", release_json)

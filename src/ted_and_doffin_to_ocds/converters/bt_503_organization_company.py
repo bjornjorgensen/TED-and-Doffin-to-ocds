@@ -69,5 +69,6 @@ def merge_organization_contact_telephone(
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged organization Contact Telephone data for {len(organization_contact_telephone_data['parties'])} parties",
+        "Merged organization Contact Telephone data for %s parties",
+        len(organization_contact_telephone_data["parties"]),
     )

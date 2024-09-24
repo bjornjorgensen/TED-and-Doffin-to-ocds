@@ -62,8 +62,8 @@ def parse_deadline_receipt_expressions(xml_content):
 
                 lot_data = {"id": lot_id, "tenderPeriod": {"endDate": iso_datetime}}
                 result["tender"]["lots"].append(lot_data)
-            except Exception as e:
-                logger.error(f"Error parsing datetime for lot {lot_id}: {str(e)}")
+            except Exception:
+                logger.exception("Error parsing datetime for lot %s", lot_id)
 
     return result if result["tender"]["lots"] else None
 
@@ -97,5 +97,6 @@ def merge_deadline_receipt_expressions(release_json, deadline_receipt_expression
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged deadline receipt expressions data for {len(deadline_receipt_expressions_data['tender']['lots'])} lots",
+        "Merged deadline receipt expressions data for %d lots",
+        len(deadline_receipt_expressions_data["tender"]["lots"]),
     )

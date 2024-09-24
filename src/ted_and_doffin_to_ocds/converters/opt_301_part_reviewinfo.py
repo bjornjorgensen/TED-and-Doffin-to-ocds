@@ -47,5 +47,5 @@ def merge_part_reviewinfo(release_json, reviewinfo_data):
             release_json.setdefault("parties", []).append(party)
 
     logger.info(
-        f"Merged part Review Info data for {len(reviewinfo_data['parties'])} parties",
+        "Merged part Review Info data for %d parties", len(reviewinfo_data["parties"])
     )

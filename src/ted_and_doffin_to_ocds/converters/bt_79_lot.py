@@ -109,5 +109,6 @@ def merge_performing_staff_qualification(release_json, staff_qualification_data)
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Performing Staff Qualification data for {len(staff_qualification_data['tender']['lots'])} lots",
+        "Merged Performing Staff Qualification data for %d lots",
+        len(staff_qualification_data["tender"]["lots"]),
     )

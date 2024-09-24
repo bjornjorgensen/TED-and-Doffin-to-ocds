@@ -115,5 +115,6 @@ def merge_variants(release_json, variants_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"BT-63-Lot: Merged variant policy data for {len(variants_data['tender']['lots'])} lots",
+        "BT-63-Lot: Merged variant policy data for %d lots",
+        len(variants_data["tender"]["lots"]),
     )

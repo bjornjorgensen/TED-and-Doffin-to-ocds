@@ -122,5 +122,6 @@ def merge_cvd_contract_type_lotresult(release_json, cvd_contract_type_data):
             existing_awards.append(new_award)
 
     logger.info(
-        f"Merged CVD contract type data for {len(cvd_contract_type_data['awards'])} LotResults",
+        "Merged CVD contract type data for %d LotResults",
+        len(cvd_contract_type_data["awards"]),
     )

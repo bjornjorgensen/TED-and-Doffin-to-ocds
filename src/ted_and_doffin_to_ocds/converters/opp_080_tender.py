@@ -96,5 +96,6 @@ def merge_kilometers_public_transport(release_json, kilometers_data):
             existing_contracts.append(new_contract)
 
     logger.info(
-        f"Merged Kilometers Public Transport data for {len(kilometers_data['contracts'])} contracts",
+        "Merged Kilometers Public Transport data for %d contracts",
+        len(kilometers_data["contracts"]),
     )

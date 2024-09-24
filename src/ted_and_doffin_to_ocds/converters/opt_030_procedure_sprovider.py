@@ -71,5 +71,5 @@ def merge_provided_service_type(release_json, service_type_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Provided Service Type for {len(service_type_data['parties'])} parties",
+        "Merged Provided Service Type for %d parties", len(service_type_data["parties"])
     )

@@ -293,5 +293,6 @@ def merge_submission_language(release_json, submission_language_data):
             lots.append(new_lot)
 
     logger.info(
-        f"Merged submission language data for {len(submission_language_data['tender']['lots'])} lots",
+        "Merged submission language data for %d lots",
+        len(submission_language_data["tender"]["lots"]),
     )

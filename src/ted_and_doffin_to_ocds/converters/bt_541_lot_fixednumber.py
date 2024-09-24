@@ -82,5 +82,6 @@ def merge_award_criterion_fixed_number(release_json, award_criterion_fixed_numbe
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Award Criterion Fixed Number data for {len(award_criterion_fixed_number_data['tender']['lots'])} lots",
+        "Merged Award Criterion Fixed Number data for %d lots",
+        len(award_criterion_fixed_number_data["tender"]["lots"]),
     )

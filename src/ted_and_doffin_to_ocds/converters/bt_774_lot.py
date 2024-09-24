@@ -117,5 +117,6 @@ def merge_green_procurement(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged green procurement data for {len(green_procurement_data['tender']['lots'])} lots",
+        "Merged green procurement data for %d lots",
+        len(green_procurement_data["tender"]["lots"]),
     )

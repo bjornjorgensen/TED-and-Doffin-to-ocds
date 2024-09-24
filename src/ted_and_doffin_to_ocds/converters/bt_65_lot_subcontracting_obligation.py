@@ -108,5 +108,6 @@ def merge_subcontracting_obligation(release_json, subcontracting_obligation_data
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged subcontracting obligation data for {len(subcontracting_obligation_data['tender']['lots'])} lots",
+        "Merged subcontracting obligation data for %d lots",
+        len(subcontracting_obligation_data["tender"]["lots"]),
     )

@@ -107,5 +107,6 @@ def merge_received_submissions_count(release_json, received_submissions_data):
         stat["id"] = str(i)
 
     logger.info(
-        f"Merged received submissions count data for {len(received_submissions_data['bids']['statistics'])} lots",
+        "Merged received submissions count data for %d lots",
+        len(received_submissions_data["bids"]["statistics"]),
     )

@@ -58,5 +58,6 @@ def merge_lot_description(release_json, lot_description_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Lot Description data for {len(lot_description_data['tender']['lots'])} lots",
+        "Merged Lot Description data for %(num_lots)d lots",
+        {"num_lots": len(lot_description_data["tender"]["lots"])},
     )

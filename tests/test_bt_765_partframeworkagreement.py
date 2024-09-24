@@ -36,7 +36,7 @@ def test_bt_765_part_framework_agreement_integration(tmp_path):
     with open("output.json") as f:
         result = json.load(f)
 
-    logger.info(f"Result: {json.dumps(result, indent=2)}")
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "techniques" in result["tender"], "Expected 'techniques' in tender"
@@ -83,7 +83,7 @@ def test_bt_765_part_framework_agreement_none(tmp_path):
     with open("output.json") as f:
         result = json.load(f)
 
-    logger.info(f"Result: {json.dumps(result, indent=2)}")
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" in result, "Expected 'tender' in result"
     assert (

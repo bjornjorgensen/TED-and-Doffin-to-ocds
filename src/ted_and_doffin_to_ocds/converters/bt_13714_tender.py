@@ -62,5 +62,6 @@ def merge_tender_lot_identifier(release_json, tender_lot_identifier_data):
             existing_bids.append(new_bid)
 
     logger.info(
-        f"Merged Tender Lot Identifier data for {len(tender_lot_identifier_data['bids']['details'])} bids",
+        "Merged Tender Lot Identifier data for %d bids",
+        len(tender_lot_identifier_data["bids"]["details"]),
     )

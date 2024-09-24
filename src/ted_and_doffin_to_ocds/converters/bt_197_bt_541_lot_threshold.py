@@ -118,5 +118,6 @@ def merge_bt197_bt541_lot_threshold_unpublished_justification_code(
             withheld_info.append(new_item)
 
     logger.info(
-        f"Merged unpublished justification code data for BT-197(BT-541) for {len(unpublished_justification_code_data['withheldInformation'])} lots",
+        "Merged unpublished justification code data for BT-197(BT-541) for %d lots",
+        len(unpublished_justification_code_data["withheldInformation"]),
     )

@@ -74,5 +74,6 @@ def merge_change_reason_description(
             amendments.append(reason)
 
     logger.info(
-        f"Merged Change Reason Description data for {len(change_reason_data)} amendments",
+        "Merged Change Reason Description data for %d amendments",
+        len(change_reason_data),
     )

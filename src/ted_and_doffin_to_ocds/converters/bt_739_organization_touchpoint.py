@@ -95,5 +95,6 @@ def merge_touchpoint_contact_fax(release_json, touchpoint_fax_data):
             parties.append(new_party)
 
     logger.info(
-        f"Merged touchpoint contact fax data for {len(touchpoint_fax_data['parties'])} touchpoints",
+        "Merged touchpoint contact fax data for %d touchpoints",
+        len(touchpoint_fax_data["parties"]),
     )

@@ -1,5 +1,3 @@
-# utils/date_utils.py
-
 import logging
 import re
 
@@ -13,7 +11,8 @@ DATE_FORMAT = (
 def parse_date_parts(date_string: str) -> tuple[str, str | None, str | None]:
     match = re.match(DATE_FORMAT, date_string)
     if not match:
-        raise ValueError(f"Invalid date format: {date_string}")
+        error_message = f"Invalid date format: {date_string}"
+        raise ValueError(error_message)
     return match.groups()
 
 
@@ -27,7 +26,9 @@ def format_timezone(tz_part: str | None, original_date: str) -> str:
 
 def convert_to_iso_format(date_string: str, is_start_date: bool = False) -> str:
     logger.debug(
-        f"convert_to_iso_format input: {date_string}, is_start_date: {is_start_date}",
+        "convert_to_iso_format input: %s, is_start_date: %s",
+        date_string,
+        is_start_date,
     )
 
     try:
@@ -38,11 +39,13 @@ def convert_to_iso_format(date_string: str, is_start_date: bool = False) -> str:
 
         iso_date_string = f"{date_part}T{time_part}{tz_part}"
 
-        logger.debug(f"convert_to_iso_format output: {iso_date_string}")
-        return iso_date_string
+        logger.debug("convert_to_iso_format output: %s", iso_date_string)
     except ValueError as e:
-        logger.error(f"Error parsing date: {date_string}")
-        raise ValueError(f"Invalid date format: {date_string}") from e
+        logger.exception("Error parsing date: %s", date_string)
+        error_message = f"Invalid date format: {date_string}"
+        raise ValueError(error_message) from e
+    else:
+        return iso_date_string
 
 
 def start_date(date_string: str) -> str:
@@ -65,12 +68,13 @@ def start_date(date_string: str) -> str:
         >>> StartDate("2019-11-15+01:00")
         '2019-11-15T00:00:00+01:00'
     """
-    logger.debug(f"StartDate input: {date_string}")
+    logger.debug("StartDate input: %s", date_string)
     try:
         return convert_to_iso_format(date_string, is_start_date=True)
     except ValueError as e:
-        logger.error(f"Error parsing start date: {date_string}")
-        raise ValueError(f"Invalid start date format: {date_string}") from e
+        logger.exception("Error parsing start date: %s", date_string)
+        error_message = f"Invalid start date format: {date_string}"
+        raise ValueError(error_message) from e
 
 
 def end_date(date_string: str) -> str:
@@ -93,11 +97,13 @@ def end_date(date_string: str) -> str:
         >>> EndDate("2019-11-15+01:00")
         '2019-11-15T23:59:59+01:00'
     """
-    logger.debug(f"EndDate input: {date_string}")
+    logger.debug("EndDate input: %s", date_string)
     try:
         result = convert_to_iso_format(date_string, is_start_date=False)
-        logger.debug(f"EndDate result: {result}")
-        return result
+        logger.debug("EndDate result: %s", result)
     except ValueError as e:
-        logger.error(f"Error parsing end date: {date_string}")
-        raise ValueError(f"Invalid end date format: {date_string}") from e
+        logger.exception("Error parsing end date: %s", date_string)
+        error_message = f"Invalid end date format: {date_string}"
+        raise ValueError(error_message) from e
+    else:
+        return result

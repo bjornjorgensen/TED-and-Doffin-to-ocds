@@ -126,5 +126,7 @@ def merge_tender_value(release_json: dict, tender_value_data: dict | None) -> No
             release_json["awards"].append(award)
 
     logger.info(
-        f"Merged tender value data for {len(tender_value_data['bids']['details'])} bids and {len(tender_value_data['awards'])} awards",
+        "Merged tender value data for %d bids and %d awards",
+        len(tender_value_data["bids"]["details"]),
+        len(tender_value_data["awards"]),
     )

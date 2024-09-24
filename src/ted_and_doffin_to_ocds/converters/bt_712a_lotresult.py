@@ -103,5 +103,6 @@ def merge_buyer_review_complainants(release_json, buyer_review_complainants_data
             existing_statistics.append(new_statistic)
 
     logger.info(
-        f"Merged buyer Review Complainants data for {len(buyer_review_complainants_data['statistics'])} statistics",
+        "Merged buyer Review Complainants data for %d statistics",
+        len(buyer_review_complainants_data["statistics"]),
     )

@@ -90,5 +90,6 @@ def merge_bt196_bt759_lotresult_unpublished_justification(
             withheld_info.append(new_item)
 
     logger.info(
-        f"Merged unpublished justification data for BT-196(BT-759)-LotResult: {len(unpublished_justification_data['withheldInformation'])} items",
+        "Merged unpublished justification data for BT-196(BT-759)-LotResult: %d items",
+        len(unpublished_justification_data["withheldInformation"]),
     )

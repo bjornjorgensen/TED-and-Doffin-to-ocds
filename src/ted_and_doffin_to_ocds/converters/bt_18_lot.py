@@ -61,5 +61,6 @@ def merge_submission_url(release_json, submission_url_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Submission URL data for {len(submission_url_data['tender']['lots'])} lots",
+        "Merged Submission URL data for %d lots",
+        len(submission_url_data["tender"]["lots"]),
     )

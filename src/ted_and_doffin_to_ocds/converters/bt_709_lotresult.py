@@ -117,5 +117,6 @@ def merge_framework_maximum_value(release_json, framework_max_value_data):
             existing_awards.append(new_award)
 
     logger.info(
-        f"Merged framework maximum value data for {len(framework_max_value_data['awards'])} awards",
+        "Merged framework maximum value data for %d awards",
+        len(framework_max_value_data["awards"]),
     )

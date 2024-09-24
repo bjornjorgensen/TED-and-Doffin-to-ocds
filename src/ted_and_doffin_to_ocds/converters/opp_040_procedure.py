@@ -51,5 +51,5 @@ def merge_main_nature_sub_type(release_json, main_nature_sub_type_data):
             existing_categories.append(category)
 
     logger.info(
-        f"Merged Main Nature - Sub Type: added {len(new_categories)} categories",
+        "Merged Main Nature - Sub Type: added %d categories", len(new_categories)
     )

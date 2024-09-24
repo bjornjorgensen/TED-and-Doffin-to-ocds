@@ -42,8 +42,8 @@ def bt_198_parse_unpublished_access_date_bt_09_procedure(xml_content):
             iso_date = start_date(publication_date[0])
             withheld_item = {"availabilityDate": iso_date}
             result["withheldInformation"].append(withheld_item)
-        except ValueError as e:
-            logger.error(f"Error converting date: {str(e)}")
+        except ValueError:
+            logger.exception("Error converting date")
 
     return result if result["withheldInformation"] else None
 

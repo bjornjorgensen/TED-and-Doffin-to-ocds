@@ -84,5 +84,6 @@ def merge_bt198_bt541_lot_threshold_unpublished_access_date(
             withheld_info.append(new_item)
 
     logger.info(
-        f"Merged unpublished access date data for BT-198(BT-541) for {len(unpublished_access_date_data['withheldInformation'])} lots",
+        "Merged unpublished access date data for BT-198(BT-541) for %d lots",
+        len(unpublished_access_date_data["withheldInformation"]),
     )

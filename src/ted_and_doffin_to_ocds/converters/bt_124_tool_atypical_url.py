@@ -71,7 +71,7 @@ def merge_tool_atypical_url(release_json, atypical_url_data):
             else:
                 existing_lots.append(new_lot)
         logger.info(
-            f"Merged Tool Atypical URL data for {len(atypical_url_data['lots'])} lots",
+            "Merged Tool Atypical URL data for %d lots", len(atypical_url_data["lots"])
         )
 
     # Merge BT-124-part

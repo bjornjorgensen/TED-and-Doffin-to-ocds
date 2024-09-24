@@ -42,7 +42,7 @@ def parse_accessibility_criteria(xml_content: str | bytes) -> dict | None:
             namespaces=namespaces,
         )
 
-        lot_data: dict[str, str | bool | str | None] = {
+        lot_data: dict[str, str | bool | None] = {
             "id": lot_id,
             "hasAccessibilityCriteria": False,
             "noAccessibilityCriteriaRationale": None,
@@ -96,5 +96,6 @@ def merge_accessibility_criteria(release_json: dict, parsed_data: dict | None) -
             tender_lots.append(new_lot)
 
     logger.info(
-        f"Merged Accessibility Criteria data for {len(parsed_data['tender']['lots'])} lots",
+        "Merged Accessibility Criteria data for %d lots",
+        len(parsed_data["tender"]["lots"]),
     )

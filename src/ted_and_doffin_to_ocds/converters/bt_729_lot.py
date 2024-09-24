@@ -99,5 +99,6 @@ def merge_lot_subcontracting_obligation_maximum(
             release_json["tender"]["lots"].append(new_lot)
 
     logger.info(
-        f"Merged subcontracting obligation maximum percentage data for {len(lot_subcontracting_obligation_maximum_data['tender']['lots'])} lots",
+        "Merged subcontracting obligation maximum percentage data for %d lots",
+        len(lot_subcontracting_obligation_maximum_data["tender"]["lots"]),
     )

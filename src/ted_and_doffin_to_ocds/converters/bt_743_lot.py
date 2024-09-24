@@ -88,5 +88,6 @@ def merge_electronic_invoicing(release_json, electronic_invoicing_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged electronic invoicing policy data for {len(electronic_invoicing_data['tender']['lots'])} lots",
+        "Merged electronic invoicing policy data for %d lots",
+        len(electronic_invoicing_data["tender"]["lots"]),
     )

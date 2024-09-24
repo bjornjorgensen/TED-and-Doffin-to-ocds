@@ -63,5 +63,6 @@ def merge_organization_contact_point(release_json, organization_contact_point_da
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged organization Contact Point data for {len(organization_contact_point_data['parties'])} parties",
+        "Merged organization Contact Point data for %s parties",
+        len(organization_contact_point_data["parties"]),
     )

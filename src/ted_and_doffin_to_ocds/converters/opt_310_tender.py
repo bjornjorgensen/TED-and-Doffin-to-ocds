@@ -70,7 +70,7 @@ def parse_tendering_party_id_reference(xml_content):
 
                 result["bids"]["details"].append(bid)
 
-    logger.info(f"Parsed Tendering party ID Reference data: {result}")
+    logger.info("Parsed Tendering party ID Reference data: %s", result)
     return result if (result["parties"] or result["bids"]["details"]) else None
 
 
@@ -106,4 +106,4 @@ def merge_tendering_party_id_reference(release_json, tendering_party_data):
         else:
             existing_bids.append(new_bid)
 
-    logger.info(f"Merged Tendering party ID Reference data: {release_json}")
+    logger.info("Merged Tendering party ID Reference data: %s", release_json)

@@ -65,5 +65,6 @@ def merge_prize_rank(release_json, prize_rank_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Prize Rank data for {len(prize_rank_data['tender']['lots'])} lots",
+        "Merged Prize Rank data for %d lots",
+        len(prize_rank_data["tender"]["lots"]),
     )

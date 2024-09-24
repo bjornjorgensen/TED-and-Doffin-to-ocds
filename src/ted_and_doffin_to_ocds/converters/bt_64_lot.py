@@ -70,7 +70,9 @@ def parse_subcontracting_obligation_minimum(xml_content: bytes):
                 result["tender"]["lots"].append(lot_data)
             except ValueError:
                 logger.warning(
-                    f"Invalid minimum percentage value for lot {lot_id}: {minimum_percent[0]}",
+                    "Invalid minimum percentage value for lot %s: %s",
+                    lot_id,
+                    minimum_percent[0],
                 )
 
     return result if result["tender"]["lots"] else None
@@ -110,5 +112,6 @@ def merge_subcontracting_obligation_minimum(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged subcontracting obligation minimum data for {len(subcontracting_obligation_minimum_data['tender']['lots'])} lots",
+        "Merged subcontracting obligation minimum data for %d lots",
+        len(subcontracting_obligation_minimum_data["tender"]["lots"]),
     )

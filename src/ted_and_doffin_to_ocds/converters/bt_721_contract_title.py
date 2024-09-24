@@ -100,5 +100,6 @@ def merge_contract_title(release_json, contract_title_data):
             release_json["contracts"].append(new_contract)
 
     logger.info(
-        f"Merged contract title data for {len(contract_title_data['contracts'])} contracts",
+        "Merged contract title data for %d contracts",
+        len(contract_title_data["contracts"]),
     )

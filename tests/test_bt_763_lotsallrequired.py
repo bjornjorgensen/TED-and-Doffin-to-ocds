@@ -36,7 +36,7 @@ def test_bt_763_lots_all_required_integration(tmp_path, setup_logging):
     with open("output.json") as f:
         result = json.load(f)
 
-    logger.info(f"Result: {json.dumps(result, indent=2)}")
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "lotDetails" in result["tender"], "Expected 'lotDetails' in tender"
@@ -69,7 +69,7 @@ def test_bt_763_lots_all_required_not_all(tmp_path, setup_logging):
     with open("output.json") as f:
         result = json.load(f)
 
-    logger.info(f"Result: {json.dumps(result, indent=2)}")
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" not in result or (
         "lotDetails" not in result.get("tender", {})
@@ -95,7 +95,7 @@ def test_bt_763_lots_all_required_missing_element(tmp_path, setup_logging):
     with open("output.json") as f:
         result = json.load(f)
 
-    logger.info(f"Result: {json.dumps(result, indent=2)}")
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" not in result or (
         "lotDetails" not in result.get("tender", {})
@@ -121,7 +121,7 @@ def test_bt_763_lots_all_required_empty_value(tmp_path, setup_logging):
     with open("output.json") as f:
         result = json.load(f)
 
-    logger.info(f"Result: {json.dumps(result, indent=2)}")
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" not in result or (
         "lotDetails" not in result.get("tender", {})
@@ -147,7 +147,7 @@ def test_bt_763_lots_all_required_case_insensitive(tmp_path, setup_logging):
     with open("output.json") as f:
         result = json.load(f)
 
-    logger.info(f"Result: {json.dumps(result, indent=2)}")
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "lotDetails" in result["tender"], "Expected 'lotDetails' in tender"

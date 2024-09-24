@@ -43,7 +43,7 @@ def parse_accessibility_justification(xml_content: str | bytes) -> dict | None:
         )
 
         if justification:
-            lot_data: dict[str, str | str | None] = {
+            lot_data: dict[str, str | None] = {
                 "id": lot_id,
                 "noAccessibilityCriteriaRationale": justification[0],
             }
@@ -85,5 +85,6 @@ def merge_accessibility_justification(
             tender_lots.append(new_lot)
 
     logger.info(
-        f"Merged Accessibility Justification data for {len(parsed_data['tender']['lots'])} lots",
+        "Merged Accessibility Justification data for %d lots",
+        len(parsed_data["tender"]["lots"]),
     )

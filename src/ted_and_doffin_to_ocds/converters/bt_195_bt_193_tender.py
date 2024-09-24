@@ -73,5 +73,6 @@ def merge_bt195_bt193_unpublished_identifier(release_json, unpublished_identifie
     withheld_info.extend(unpublished_identifier_data["withheldInformation"])
 
     logger.info(
-        f"Merged unpublished identifier data for BT-195(BT-193): {len(unpublished_identifier_data['withheldInformation'])} items",
+        "Merged unpublished identifier data for BT-195(BT-193): %d items",
+        len(unpublished_identifier_data["withheldInformation"]),
     )

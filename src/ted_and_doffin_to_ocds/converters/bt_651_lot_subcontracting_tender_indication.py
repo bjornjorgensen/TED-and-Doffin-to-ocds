@@ -108,5 +108,6 @@ def merge_subcontracting_tender_indication(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged subcontracting tender indication data for {len(subcontracting_tender_indication_data['tender']['lots'])} lots",
+        "Merged subcontracting tender indication data for %d lots",
+        len(subcontracting_tender_indication_data["tender"]["lots"]),
     )

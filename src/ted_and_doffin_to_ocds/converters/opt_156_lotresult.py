@@ -138,5 +138,5 @@ def merge_vehicle_numeric(release_json, vehicle_numeric_data):
             existing_awards.append(new_award)
 
     logger.info(
-        f"Merged vehicle numeric data for {len(vehicle_numeric_data['awards'])} awards",
+        "Merged vehicle numeric data for %d awards", len(vehicle_numeric_data["awards"])
     )

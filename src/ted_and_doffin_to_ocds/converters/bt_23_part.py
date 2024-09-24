@@ -46,7 +46,8 @@ def merge_main_nature_part(release_json, main_nature_data):
             main_nature_data["tender"]["mainProcurementCategory"]
         )
         logger.info(
-            f"Merged Main Nature (part) data: {main_nature_data['tender']['mainProcurementCategory']}",
+            "Merged Main Nature (part) data: %s",
+            main_nature_data["tender"]["mainProcurementCategory"],
         )
     else:
         logger.warning("No mainProcurementCategory found in Main Nature (part) data")

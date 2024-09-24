@@ -67,5 +67,6 @@ def merge_organization_country_subdivision(
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged organization country subdivision data for {len(organization_country_subdivision_data['parties'])} parties",
+        "Merged organization country subdivision data for %s parties",
+        len(organization_country_subdivision_data["parties"]),
     )

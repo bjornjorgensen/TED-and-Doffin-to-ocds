@@ -27,14 +27,14 @@ def parse_previous_planning_identifier_part(xml_content):
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']",
         namespaces=namespaces,
     )
-    logger.info(f"Found {len(parts)} parts")
+    logger.info("Found %d parts", len(parts))
 
     for part in parts:
         notice_refs = part.xpath(
             "cac:TenderingProcess/cac:noticeDocumentReference",
             namespaces=namespaces,
         )
-        logger.info(f"Found {len(notice_refs)} notice references for part")
+        logger.info("Found %d notice references for part", len(notice_refs))
 
         for notice_ref in notice_refs:
             identifier = notice_ref.xpath(
@@ -46,7 +46,9 @@ def parse_previous_planning_identifier_part(xml_content):
                 namespaces=namespaces,
             )
 
-            logger.info(f"Identifier: {identifier}, part Identifier: {part_identifier}")
+            logger.info(
+                "Identifier: %s, part Identifier: %s", identifier, part_identifier
+            )
 
             if identifier and part_identifier:
                 full_identifier = f"{identifier[0]}-{part_identifier[0]}"
@@ -58,9 +60,11 @@ def parse_previous_planning_identifier_part(xml_content):
                 }
                 result["relatedProcesses"].append(related_process)
                 related_process_id += 1
-                logger.info(f"Added related process for part: {related_process}")
+                logger.info("Added related process for part: %s", related_process)
 
-    logger.info(f"Total related processes for parts: {len(result['relatedProcesses'])}")
+    logger.info(
+        "Total related processes for parts: %d", len(result["relatedProcesses"])
+    )
     return result if result["relatedProcesses"] else None
 
 
@@ -85,6 +89,7 @@ def merge_previous_planning_identifier_part(release_json, previous_planning_data
     release_json["relatedProcesses"] = existing_related_processes
 
     logger.info(
-        f"Merged Previous Planning Identifier (part) data for {len(previous_planning_data['relatedProcesses'])} related processes",
+        "Merged Previous Planning Identifier (part) data for %d related processes",
+        len(previous_planning_data["relatedProcesses"]),
     )
-    logger.info(f"Updated release_json: {json.dumps(release_json, indent=2)}")
+    logger.info("Updated release_json: %s", json.dumps(release_json, indent=2))

@@ -81,5 +81,6 @@ def merge_organization_contact_fax(release_json, organization_fax_data):
             parties.append(new_party)
 
     logger.info(
-        f"Merged organization contact fax data for {len(organization_fax_data['parties'])} organizations",
+        "Merged organization contact fax data for %d organizations",
+        len(organization_fax_data["parties"]),
     )

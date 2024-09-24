@@ -85,5 +85,6 @@ def merge_lot_performance_terms(release_json, lot_performance_terms_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Lot Performance Terms data for {len(lot_performance_terms_data['lots'])} lots",
+        "Merged Lot Performance Terms data for %d lots",
+        len(lot_performance_terms_data["lots"]),
     )
