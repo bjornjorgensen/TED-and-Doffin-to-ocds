@@ -116,5 +116,6 @@ def merge_tender_value_highest(release_json, tender_value_highest_data):
         stat["id"] = str(i)
 
     logger.info(
-        f"Merged highest tender value data for {len(tender_value_highest_data['bids']['statistics'])} statistics",
+        "Merged highest tender value data for %d statistics",
+        len(tender_value_highest_data["bids"]["statistics"]),
     )

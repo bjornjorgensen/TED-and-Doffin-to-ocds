@@ -79,5 +79,6 @@ def merge_clean_vehicles_directive(release_json, clean_vehicles_directive_data):
             lot.setdefault("coveredBy", []).append("EU-CVD")
 
     logger.info(
-        f"Merged Clean Vehicles Directive data for {len(clean_vehicles_directive_data)} lots",
+        "Merged Clean Vehicles Directive data for %d lots",
+        len(clean_vehicles_directive_data),
     )

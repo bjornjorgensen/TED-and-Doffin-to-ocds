@@ -110,5 +110,6 @@ def merge_part_documents_restricted_justification(release_json, part_documents_d
             existing_documents.append(new_doc)
 
     logger.info(
-        f"Merged part documents restricted justification data for {len(part_documents_data['tender']['documents'])} documents",
+        "Merged part documents restricted justification data for %d documents",
+        len(part_documents_data["tender"]["documents"]),
     )

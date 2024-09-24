@@ -97,5 +97,6 @@ def merge_deadline_receipt_expressions(release_json, deadline_receipt_expression
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged deadline receipt expressions data for {len(deadline_receipt_expressions_data['tender']['lots'])} lots",
+        "Merged deadline receipt expressions data for %d lots",
+        len(deadline_receipt_expressions_data["tender"]["lots"]),
     )

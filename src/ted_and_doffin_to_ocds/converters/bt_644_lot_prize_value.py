@@ -142,5 +142,6 @@ def merge_lot_prize_value(release_json, lot_prize_value_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged lot prize value data for {len(lot_prize_value_data['tender']['lots'])} lots",
+        "Merged lot prize value data for %d lots",
+        len(lot_prize_value_data["tender"]["lots"]),
     )

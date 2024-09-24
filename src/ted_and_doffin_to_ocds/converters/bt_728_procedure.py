@@ -87,5 +87,6 @@ def merge_procedure_place_performance_additional(
             release_json["tender"]["deliveryAddresses"].append(new_address)
 
     logger.info(
-        f"Merged additional place of performance data for {len(procedure_place_performance_additional_data['tender']['deliveryAddresses'])} addresses",
+        "Merged additional place of performance data for %d addresses",
+        len(procedure_place_performance_additional_data["tender"]["deliveryAddresses"]),
     )

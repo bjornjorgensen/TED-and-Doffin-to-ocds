@@ -299,5 +299,6 @@ def merge_lot_documents_official_language(release_json, lot_documents_data):
             existing_documents.append(new_doc)
 
     logger.info(
-        f"Merged lot documents official language data for {len(lot_documents_data['tender']['documents'])} documents",
+        "Merged lot documents official language data for %d documents",
+        len(lot_documents_data["tender"]["documents"]),
     )

@@ -120,5 +120,6 @@ def merge_lot_documents_restricted_justification(release_json, lot_documents_dat
             existing_documents.append(new_doc)
 
     logger.info(
-        f"Merged lot documents restricted justification data for {len(lot_documents_data['tender']['documents'])} documents",
+        "Merged lot documents restricted justification data for %d documents",
+        len(lot_documents_data["tender"]["documents"]),
     )

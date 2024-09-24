@@ -103,5 +103,6 @@ def merge_buyer_review_complainants_bt_712b(
             existing_statistics.append(new_statistic)
 
     logger.info(
-        f"Merged buyer review complainants data for {len(buyer_review_complainants_data['statistics'])} lots",
+        "Merged buyer review complainants data for %d lots",
+        len(buyer_review_complainants_data["statistics"]),
     )

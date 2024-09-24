@@ -116,5 +116,6 @@ def merge_documents_restricted_url(release_json, documents_data):
             existing_documents.append(new_doc)
 
     logger.info(
-        f"BT-615-Lot: Merged documents restricted URL data for {len(documents_data['tender']['documents'])} documents",
+        "BT-615-Lot: Merged documents restricted URL data for %d documents",
+        len(documents_data["tender"]["documents"]),
     )

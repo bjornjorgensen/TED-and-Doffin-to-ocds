@@ -123,5 +123,6 @@ def merge_procurement_documents_change_date(release_json, change_date_data):
                 tender_documents.append(new_doc)
 
     logger.info(
-        f"Merged procurement documents change date data for {len(change_date_data['tender']['documents'])} documents",
+        "Merged procurement documents change date data for %d documents",
+        len(change_date_data["tender"]["documents"]),
     )

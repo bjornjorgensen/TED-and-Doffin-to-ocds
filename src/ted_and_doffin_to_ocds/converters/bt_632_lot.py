@@ -95,5 +95,5 @@ def merge_tool_name(release_json, tool_name_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged tool name data for {len(tool_name_data['tender']['lots'])} lots",
+        "Merged tool name data for %d lots", len(tool_name_data["tender"]["lots"])
     )

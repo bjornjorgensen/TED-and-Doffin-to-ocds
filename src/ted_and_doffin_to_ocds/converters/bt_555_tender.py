@@ -127,5 +127,6 @@ def merge_subcontracting_percentage(release_json, subcontracting_data):
             existing_bids.append(new_bid)
 
     logger.info(
-        f"BT-555-Tender: Merged subcontracting percentage data for {len(subcontracting_data['bids']['details'])} bids",
+        "BT-555-Tender: Merged subcontracting percentage data for %d bids",
+        len(subcontracting_data["bids"]["details"]),
     )

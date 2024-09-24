@@ -127,5 +127,6 @@ def merge_irregularity_type(release_json, irregularity_type_data):
             existing_statistics.append(new_statistic)
 
     logger.info(
-        f"Merged irregularity type data for {len(irregularity_type_data['statistics'])} statistics",
+        "Merged irregularity type data for %d statistics",
+        len(irregularity_type_data["statistics"]),
     )

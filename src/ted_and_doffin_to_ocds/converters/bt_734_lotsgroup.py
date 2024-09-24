@@ -98,5 +98,6 @@ def merge_award_criterion_name_lotsgroup(release_json, award_criterion_data):
             existing_lot_groups.append(new_group)
 
     logger.info(
-        f"Merged Award Criterion Name data for {len(award_criterion_data['tender']['lotGroups'])} lots groups",
+        "Merged Award Criterion Name data for %d lots groups",
+        len(award_criterion_data["tender"]["lotGroups"]),
     )

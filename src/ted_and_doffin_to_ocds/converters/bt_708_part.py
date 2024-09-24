@@ -292,5 +292,6 @@ def merge_part_documents_official_language(release_json, part_documents_data):
             existing_documents.append(new_doc)
 
     logger.info(
-        f"Merged part documents official language data for {len(part_documents_data['tender']['documents'])} documents",
+        "Merged part documents official language data for %d documents",
+        len(part_documents_data["tender"]["documents"]),
     )

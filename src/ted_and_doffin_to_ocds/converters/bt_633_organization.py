@@ -98,5 +98,6 @@ def merge_organization_natural_person(release_json, organization_natural_person_
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged organization Natural Person data for {len(organization_natural_person_data['parties'])} parties",
+        "Merged organization Natural Person data for %d parties",
+        len(organization_natural_person_data["parties"]),
     )

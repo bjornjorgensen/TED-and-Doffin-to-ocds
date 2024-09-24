@@ -114,5 +114,6 @@ def merge_cvd_contract_type(release_json, cvd_contract_type_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged CVD contract type data for {len(cvd_contract_type_data['tender']['lots'])} lots",
+        "Merged CVD contract type data for %d lots",
+        len(cvd_contract_type_data["tender"]["lots"]),
     )

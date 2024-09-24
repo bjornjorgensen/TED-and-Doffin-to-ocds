@@ -166,5 +166,5 @@ def merge_unit(release_json, unit_data):
             existing_items.append(new_item)
 
     logger.info(
-        f"BT-625-Lot: Merged unit data for {len(unit_data['tender']['items'])} items",
+        "BT-625-Lot: Merged unit data for %d items", len(unit_data["tender"]["items"])
     )

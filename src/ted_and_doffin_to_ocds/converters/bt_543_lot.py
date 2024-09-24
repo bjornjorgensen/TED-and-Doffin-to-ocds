@@ -63,5 +63,6 @@ def merge_award_criteria_complicated(release_json, award_criteria_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged award criteria complicated data for {len(award_criteria_data['tender']['lots'])} lots",
+        "Merged award criteria complicated data for %d lots",
+        len(award_criteria_data["tender"]["lots"]),
     )
