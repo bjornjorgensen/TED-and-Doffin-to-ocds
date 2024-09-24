@@ -77,5 +77,6 @@ def merge_beneficial_owner_reference(release_json, bo_reference_data):
             release_json["parties"].append(new_party)
 
     logger.info(
-        f"Merged Beneficial Owner Reference data for {len(bo_reference_data['parties'])} parties",
+        "Merged Beneficial Owner Reference data for %d parties",
+        len(bo_reference_data["parties"]),
     )

@@ -93,7 +93,9 @@ def parse_lot_prize_value(xml_content: bytes):
                         )
                     except ValueError:
                         logger.warning(
-                            f"Invalid prize value for lot {lot_id}: {value_amount[0]}",
+                            "Invalid prize value for lot %s: %s",
+                            lot_id,
+                            value_amount[0],
                         )
 
             result["tender"]["lots"].append(lot_data)

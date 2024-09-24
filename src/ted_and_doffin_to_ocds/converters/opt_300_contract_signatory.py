@@ -85,5 +85,7 @@ def merge_contract_signatory(release_json, signatory_data):
             release_json.setdefault("awards", []).append(award)
 
     logger.info(
-        f"Merged Contract Signatory data for {len(signatory_data.get('parties', []))} parties and {len(signatory_data.get('awards', []))} awards",
+        "Merged Contract Signatory data for %d parties and %d awards",
+        len(signatory_data.get("parties", [])),
+        len(signatory_data.get("awards", [])),
     )

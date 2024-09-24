@@ -93,5 +93,6 @@ def merge_submission_electronic_catalogue(
             lots.append(lot_data)
 
     logger.info(
-        f"Merged Submission Electronic Catalogue data for {len(submission_electronic_catalogue_data)} lots",
+        "Merged Submission Electronic Catalogue data for %d lots",
+        len(submission_electronic_catalogue_data),
     )

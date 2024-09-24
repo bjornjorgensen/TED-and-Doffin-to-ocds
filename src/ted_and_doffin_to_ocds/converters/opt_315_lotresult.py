@@ -65,5 +65,6 @@ def merge_contract_identifier_reference(release_json, contract_id_data):
             release_json["contracts"].append(new_contract)
 
     logger.info(
-        f"Merged Contract Identifier Reference data for {len(contract_id_data['contracts'])} contracts",
+        "Merged Contract Identifier Reference data for %d contracts",
+        len(contract_id_data["contracts"]),
     )

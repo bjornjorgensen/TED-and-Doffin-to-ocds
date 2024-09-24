@@ -123,5 +123,6 @@ def merge_award_criterion_number_weight_lot(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Lot Award Criterion Number Weight data for {len(lot_award_criterion_number_weight_data['tender']['lots'])} lots",
+        "Merged Lot Award Criterion Number Weight data for %d lots",
+        len(lot_award_criterion_number_weight_data["tender"]["lots"]),
     )

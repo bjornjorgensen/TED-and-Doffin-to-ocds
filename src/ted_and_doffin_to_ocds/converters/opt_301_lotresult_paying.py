@@ -44,5 +44,5 @@ def merge_lotresult_paying(release_json, paying_data):
             release_json.setdefault("parties", []).append(party)
 
     logger.info(
-        f"Merged LotResult Paying data for {len(paying_data['parties'])} parties",
+        "Merged LotResult Paying data for %d parties", len(paying_data["parties"])
     )

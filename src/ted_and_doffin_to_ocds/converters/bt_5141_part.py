@@ -113,5 +113,6 @@ def merge_part_country(release_json, part_country_data):
             existing_addresses.append(new_address)
 
     logger.info(
-        f"Merged part Country data for {len(part_country_data['tender']['deliveryAddresses'])} delivery addresses",
+        "Merged part Country data for %d delivery addresses",
+        len(part_country_data["tender"]["deliveryAddresses"]),
     )

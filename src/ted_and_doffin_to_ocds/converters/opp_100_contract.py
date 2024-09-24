@@ -102,5 +102,6 @@ def merge_framework_notice_identifier(release_json, framework_notice_data):
             existing_contracts.append(new_contract)
 
     logger.info(
-        f"Merged Framework notice Identifier for {len(framework_notice_data['contracts'])} contracts",
+        "Merged Framework notice Identifier for %d contracts",
+        len(framework_notice_data["contracts"]),
     )

@@ -44,5 +44,6 @@ def merge_organization_technical_identifier(release_json, org_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged organization Technical Identifier data for {len(org_data['parties'])} organizations",
+        "Merged organization Technical Identifier data for %d organizations",
+        len(org_data["parties"]),
     )

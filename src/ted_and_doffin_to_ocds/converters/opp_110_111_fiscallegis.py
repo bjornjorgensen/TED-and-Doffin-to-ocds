@@ -95,5 +95,6 @@ def merge_fiscal_legislation(release_json, fiscal_legislation_data):
             existing_documents.append(new_doc)
 
     logger.info(
-        f"Merged Fiscal Legislation data for {len(fiscal_legislation_data['tender']['documents'])} documents",
+        "Merged Fiscal Legislation data for %d documents",
+        len(fiscal_legislation_data["tender"]["documents"]),
     )

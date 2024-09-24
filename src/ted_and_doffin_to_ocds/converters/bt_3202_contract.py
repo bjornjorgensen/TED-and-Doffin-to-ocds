@@ -146,5 +146,6 @@ def merge_contract_tender_id(release_json, contract_tender_id_data):
     release_json["contracts"] = list(existing_contracts.values())
 
     logger.info(
-        f"Merged Contract Tender ID data for {len(contract_tender_id_data['contracts'])} contracts",
+        "Merged Contract Tender ID data for %d contracts",
+        len(contract_tender_id_data["contracts"]),
     )

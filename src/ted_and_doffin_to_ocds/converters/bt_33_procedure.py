@@ -35,7 +35,7 @@ def parse_max_lots_awarded(xml_content):
             }
         except ValueError:
             logger.warning(
-                f"Invalid MaximumLotsAwardedNumeric value: {max_lots_awarded[0]}",
+                "Invalid MaximumLotsAwardedNumeric value: %s", max_lots_awarded[0]
             )
 
     return None

@@ -44,7 +44,7 @@ def parse_lot_duration(xml_content):
             elif unit_code == "YEAR":
                 duration_in_days = duration_value * 365
             else:
-                logger.warning(f"Unknown unitCode '{unit_code}' for lot {lot_id}")
+                logger.warning("Unknown unitCode '%s' for lot %s", unit_code, lot_id)
                 continue
 
             result["tender"]["lots"].append(

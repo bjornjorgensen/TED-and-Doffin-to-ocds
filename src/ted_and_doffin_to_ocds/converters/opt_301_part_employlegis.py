@@ -61,5 +61,6 @@ def merge_part_employlegis(release_json, employlegis_data):
             )
 
     logger.info(
-        f"Merged part Employment Legislation data for {len(employlegis_data['tender']['documents'])} documents",
+        "Merged part Employment Legislation data for %d documents",
+        len(employlegis_data["tender"]["documents"]),
     )

@@ -100,5 +100,6 @@ def merge_strategic_procurement_description(release_json, strategic_procurement_
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Strategic Procurement Description data for {len(strategic_procurement_data['tender']['lots'])} lots",
+        "Merged Strategic Procurement Description data for %d lots",
+        len(strategic_procurement_data["tender"]["lots"]),
     )

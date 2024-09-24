@@ -85,5 +85,6 @@ def merge_penalties_and_rewards(release_json, penalties_and_rewards_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged penalties and rewards data for {len(penalties_and_rewards_data['tender']['lots'])} lots",
+        "Merged penalties and rewards data for %d lots",
+        len(penalties_and_rewards_data["tender"]["lots"]),
     )

@@ -120,5 +120,6 @@ def merge_received_submissions_type(release_json, received_submissions_data):
         stat["id"] = str(i)
 
     logger.info(
-        f"Merged Received Submissions Type data for {len(received_submissions_data['bids']['statistics'])} statistics",
+        "Merged Received Submissions Type data for %d statistics",
+        len(received_submissions_data["bids"]["statistics"]),
     )

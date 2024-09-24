@@ -127,5 +127,6 @@ def merge_contract_eu_funds_details(release_json, eu_funds_details):
             existing_contracts.append(new_contract)
 
     logger.info(
-        f"BT-6110-Contract: Merged contract EU funds details for {len(eu_funds_details['contracts'])} contracts",
+        "BT-6110-Contract: Merged contract EU funds details for %d contracts",
+        len(eu_funds_details["contracts"]),
     )

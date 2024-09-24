@@ -85,5 +85,6 @@ def merge_accessibility_justification(
             tender_lots.append(new_lot)
 
     logger.info(
-        f"Merged Accessibility Justification data for {len(parsed_data['tender']['lots'])} lots",
+        "Merged Accessibility Justification data for %d lots",
+        len(parsed_data["tender"]["lots"]),
     )

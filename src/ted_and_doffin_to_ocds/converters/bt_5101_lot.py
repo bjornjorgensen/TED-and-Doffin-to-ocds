@@ -120,5 +120,6 @@ def merge_place_performance_street_lot(release_json, street_data):
             existing_items.append(new_item)
 
     logger.info(
-        f"Merged place performance street data for {len(street_data['tender']['items'])} items",
+        "Merged place performance street data for %d items",
+        len(street_data["tender"]["items"]),
     )

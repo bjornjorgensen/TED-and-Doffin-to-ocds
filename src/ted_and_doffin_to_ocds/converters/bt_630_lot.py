@@ -63,7 +63,7 @@ def parse_deadline_receipt_expressions(xml_content):
                 lot_data = {"id": lot_id, "tenderPeriod": {"endDate": iso_datetime}}
                 result["tender"]["lots"].append(lot_data)
             except Exception:
-                logger.exception(f"Error parsing datetime for lot {lot_id}")
+                logger.exception("Error parsing datetime for lot %s", lot_id)
 
     return result if result["tender"]["lots"] else None
 

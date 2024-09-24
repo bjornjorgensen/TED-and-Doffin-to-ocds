@@ -47,5 +47,6 @@ def merge_contract_technical_identifier(release_json, contract_tech_id_data):
             release_json["contracts"].append(new_contract)
 
     logger.info(
-        f"Merged Contract Technical Identifier data for {len(contract_tech_id_data['contracts'])} contracts",
+        "Merged Contract Technical Identifier data for %d contracts",
+        len(contract_tech_id_data["contracts"]),
     )

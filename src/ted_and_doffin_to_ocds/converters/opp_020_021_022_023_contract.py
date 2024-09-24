@@ -86,7 +86,7 @@ def parse_essential_assets(xml_content):
                 namespaces=namespaces,
             )
             if not lot_id_elements:
-                logger.warning(f"Lot ID not found for contract {contract_id}")
+                logger.warning("Lot ID not found for contract %s", contract_id)
                 continue
             lot_id = lot_id_elements[0]
 
@@ -123,5 +123,6 @@ def merge_essential_assets(release_json, essential_assets_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Essential Assets for {len(essential_assets_data['tender']['lots'])} lots",
+        "Merged Essential Assets for %d lots",
+        len(essential_assets_data["tender"]["lots"]),
     )

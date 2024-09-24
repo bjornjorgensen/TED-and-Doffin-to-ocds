@@ -128,5 +128,6 @@ def merge_environmental_legislation_document_reference(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Environmental Legislation Document Reference for {len(environmental_legislation_data.get('parties', []))} parties",
+        "Merged Environmental Legislation Document Reference for %d parties",
+        len(environmental_legislation_data.get("parties", [])),
     )

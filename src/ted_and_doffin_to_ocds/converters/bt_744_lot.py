@@ -88,5 +88,6 @@ def merge_submission_electronic_signature(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged submission electronic signature requirement data for {len(submission_electronic_signature_data['tender']['lots'])} lots",
+        "Merged submission electronic signature requirement data for %d lots",
+        len(submission_electronic_signature_data["tender"]["lots"]),
     )

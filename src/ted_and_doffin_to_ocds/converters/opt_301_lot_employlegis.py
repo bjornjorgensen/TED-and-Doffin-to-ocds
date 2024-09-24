@@ -128,5 +128,6 @@ def merge_employment_legislation_document_reference(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Employment Legislation Document Reference for {len(employment_legislation_data.get('parties', []))} parties",
+        "Merged Employment Legislation Document Reference for %d parties",
+        len(employment_legislation_data.get("parties", [])),
     )

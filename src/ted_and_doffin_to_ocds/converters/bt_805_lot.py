@@ -96,5 +96,6 @@ def merge_green_procurement_criteria(release_json, green_procurement_criteria_da
     ]
 
     logger.info(
-        f"Merged green procurement criteria data for {len(green_procurement_criteria_data['tender']['lots'])} lots",
+        "Merged green procurement criteria data for %d lots",
+        len(green_procurement_criteria_data["tender"]["lots"]),
     )

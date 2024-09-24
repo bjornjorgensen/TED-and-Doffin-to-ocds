@@ -118,5 +118,6 @@ def merge_procurement_innovation(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged procurement of innovation data for {len(procurement_innovation_data['tender']['lots'])} lots",
+        "Merged procurement of innovation data for %d lots",
+        len(procurement_innovation_data["tender"]["lots"]),
     )

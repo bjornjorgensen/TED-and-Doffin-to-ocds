@@ -95,5 +95,6 @@ def merge_environmental_legislation(release_json, environmental_legislation_data
             existing_documents.append(new_doc)
 
     logger.info(
-        f"Merged Environmental Legislation data for {len(environmental_legislation_data['tender']['documents'])} documents",
+        "Merged Environmental Legislation data for %d documents",
+        len(environmental_legislation_data["tender"]["documents"]),
     )

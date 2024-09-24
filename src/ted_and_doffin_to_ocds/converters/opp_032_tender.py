@@ -77,5 +77,6 @@ def merge_revenues_allocation(release_json, revenues_allocation_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged revenues allocation data for {len(revenues_allocation_data['tender']['lots'])} lots",
+        "Merged revenues allocation data for %d lots",
+        len(revenues_allocation_data["tender"]["lots"]),
     )

@@ -42,13 +42,16 @@ def merge_touchpoint_technical_identifier(release_json, touchpoint_data):
         if not any(party["id"] == touchpoint_id for party in parties):
             parties.append({"id": touchpoint_id})
             logger.info(
-                f"Added new party with touchpoint Technical Identifier: {touchpoint_id}",
+                "Added new party with touchpoint Technical Identifier: %s",
+                touchpoint_id,
             )
         else:
             logger.info(
-                f"party with touchpoint Technical Identifier {touchpoint_id} already exists",
+                "party with touchpoint Technical Identifier %s already exists",
+                touchpoint_id,
             )
 
     logger.info(
-        f"Merged {len(touchpoint_data['touchpoints'])} touchpoint Technical Identifiers",
+        "Merged %d touchpoint Technical Identifiers",
+        len(touchpoint_data["touchpoints"]),
     )

@@ -47,5 +47,6 @@ def merge_part_tenderreceipt(release_json, tenderreceipt_data):
             release_json.setdefault("parties", []).append(party)
 
     logger.info(
-        f"Merged part Tender Recipient data for {len(tenderreceipt_data['parties'])} parties",
+        "Merged part Tender Recipient data for %d parties",
+        len(tenderreceipt_data["parties"]),
     )

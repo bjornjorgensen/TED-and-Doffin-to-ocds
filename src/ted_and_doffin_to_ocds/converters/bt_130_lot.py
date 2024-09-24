@@ -41,9 +41,7 @@ def parse_dispatch_invitation_tender(xml_content):
                     {"id": lot_id, "secondStage": {"invitationDate": iso_date}},
                 )
             except ValueError:
-                logger.exception(
-                    f"Error parsing invitation date for lot {lot_id}",
-                )
+                logger.exception("Error parsing invitation date for lot %s", lot_id)
 
     return result if result["tender"]["lots"] else None
 

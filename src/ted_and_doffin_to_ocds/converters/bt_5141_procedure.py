@@ -107,5 +107,6 @@ def merge_procedure_country(release_json, procedure_country_data):
             existing_addresses.append(new_address)
 
     logger.info(
-        f"Merged procedure Country data for {len(procedure_country_data['tender']['deliveryAddresses'])} delivery addresses",
+        "Merged procedure Country data for %d delivery addresses",
+        len(procedure_country_data["tender"]["deliveryAddresses"]),
     )

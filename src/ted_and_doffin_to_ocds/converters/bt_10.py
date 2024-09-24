@@ -83,7 +83,7 @@ def parse_contract_xml(xml_content):
         )
         if not activity_type_code_elements:
             logger.warning(
-                f"Skipping contracting party {party_id} without activity type code",
+                "Skipping contracting party %s without activity type code", party_id
             )
             continue
 

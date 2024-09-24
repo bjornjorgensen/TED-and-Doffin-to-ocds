@@ -52,5 +52,6 @@ def merge_procedure_sprovider(release_json, sprovider_data):
             release_json.setdefault("parties", []).append(party)
 
     logger.info(
-        f"Merged procedure Service Provider data for {len(sprovider_data['parties'])} parties",
+        "Merged procedure Service Provider data for %d parties",
+        len(sprovider_data["parties"]),
     )

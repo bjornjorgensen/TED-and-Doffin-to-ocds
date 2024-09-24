@@ -390,7 +390,7 @@ def parse_country_origin(xml_content):
                 result["bids"]["details"].append(bid)
             else:
                 logger.warning(
-                    f"No matching ISO 3166-1 alpha-2 code found for {area_code[0]}",
+                    "No matching ISO 3166-1 alpha-2 code found for %s", area_code[0]
                 )
 
     return result if result["bids"]["details"] else None

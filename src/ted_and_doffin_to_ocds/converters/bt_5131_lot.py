@@ -72,5 +72,6 @@ def merge_place_performance_city(release_json, place_performance_city_data):
             tender_items.append(new_item)
 
     logger.info(
-        f"Merged Place Performance City data for {len(place_performance_city_data['tender']['items'])} items",
+        "Merged Place Performance City data for %d items",
+        len(place_performance_city_data["tender"]["items"]),
     )

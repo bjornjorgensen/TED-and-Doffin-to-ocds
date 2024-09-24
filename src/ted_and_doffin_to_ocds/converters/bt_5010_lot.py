@@ -103,5 +103,6 @@ def merge_eu_funds_financing_identifier(
             existing_finance.append(new_finance)
 
     logger.info(
-        f"Merged EU Funds Financing Identifier data for {len(eu_funds_financing_identifier_data['planning']['budget']['finance'])} finance items",
+        "Merged EU Funds Financing Identifier data for %d finance items",
+        len(eu_funds_financing_identifier_data["planning"]["budget"]["finance"]),
     )

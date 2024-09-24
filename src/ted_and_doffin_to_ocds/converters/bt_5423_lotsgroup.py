@@ -103,5 +103,6 @@ def merge_award_criterion_number_threshold_lotsgroup(
             tender_lot_groups.append(new_group)
 
     logger.info(
-        f"Merged Award Criterion Number Threshold LotsGroup data for {len(award_criterion_data['tender']['lotGroups'])} lot groups",
+        "Merged Award Criterion Number Threshold LotsGroup data for %d lot groups",
+        len(award_criterion_data["tender"]["lotGroups"]),
     )

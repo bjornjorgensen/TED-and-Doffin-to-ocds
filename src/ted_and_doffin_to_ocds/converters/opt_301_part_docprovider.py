@@ -47,5 +47,6 @@ def merge_part_docprovider(release_json, docprovider_data):
             release_json.setdefault("parties", []).append(party)
 
     logger.info(
-        f"Merged part Document Provider data for {len(docprovider_data['parties'])} parties",
+        "Merged part Document Provider data for %d parties",
+        len(docprovider_data["parties"]),
     )

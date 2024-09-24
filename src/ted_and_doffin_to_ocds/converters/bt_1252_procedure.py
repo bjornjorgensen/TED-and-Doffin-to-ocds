@@ -73,5 +73,6 @@ def merge_direct_award_justification(release_json, direct_award_data):
         existing_related_processes.append(new_process)
 
     logger.info(
-        f"Merged Direct Award Justification data for {len(direct_award_data['relatedProcesses'])} related processes",
+        "Merged Direct Award Justification data for %d related processes",
+        len(direct_award_data["relatedProcesses"]),
     )

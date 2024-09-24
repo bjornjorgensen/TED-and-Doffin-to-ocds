@@ -47,5 +47,5 @@ def merge_part_addinfo(release_json, addinfo_data):
             release_json.setdefault("parties", []).append(party)
 
     logger.info(
-        f"Merged part Additional Info data for {len(addinfo_data['parties'])} parties",
+        "Merged part Additional Info data for %d parties", len(addinfo_data["parties"])
     )

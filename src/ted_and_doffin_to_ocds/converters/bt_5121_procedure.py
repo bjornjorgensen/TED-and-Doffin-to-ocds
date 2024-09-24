@@ -58,5 +58,6 @@ def merge_place_performance_post_code_procedure(release_json, post_code_data):
             existing_addresses.append(new_address)
 
     logger.info(
-        f"Merged Place Performance Post Code (procedure) data for {len(post_code_data['tender']['deliveryAddresses'])} addresses",
+        "Merged Place Performance Post Code (procedure) data for %d addresses",
+        len(post_code_data["tender"]["deliveryAddresses"]),
     )

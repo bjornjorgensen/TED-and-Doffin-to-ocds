@@ -62,5 +62,6 @@ def merge_procedure_place_performance_country_subdivision(release_json, procedur
             tender_delivery_addresses.append(new_address)
 
     logger.info(
-        f"Merged procedure Place Performance Country Subdivision data for {len(procedure_data['tender']['deliveryAddresses'])} addresses",
+        "Merged procedure Place Performance Country Subdivision data for %d addresses",
+        len(procedure_data["tender"]["deliveryAddresses"]),
     )

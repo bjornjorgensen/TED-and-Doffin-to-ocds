@@ -96,5 +96,6 @@ def merge_accessibility_criteria(release_json: dict, parsed_data: dict | None) -
             tender_lots.append(new_lot)
 
     logger.info(
-        f"Merged Accessibility Criteria data for {len(parsed_data['tender']['lots'])} lots",
+        "Merged Accessibility Criteria data for %d lots",
+        len(parsed_data["tender"]["lots"]),
     )

@@ -61,5 +61,6 @@ def merge_additional_info_provider_identifier(
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Additional Info Provider Identifier for {len(additional_info_provider_data['parties'])} parties",
+        "Merged Additional Info Provider Identifier for %d parties",
+        len(additional_info_provider_data["parties"]),
     )

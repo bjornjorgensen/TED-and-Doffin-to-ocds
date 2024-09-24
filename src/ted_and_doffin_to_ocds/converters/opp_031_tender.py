@@ -89,5 +89,6 @@ def merge_contract_conditions(release_json, contract_conditions_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Contract Conditions for {len(contract_conditions_data['tender']['lots'])} lots",
+        "Merged Contract Conditions for %d lots",
+        len(contract_conditions_data["tender"]["lots"]),
     )

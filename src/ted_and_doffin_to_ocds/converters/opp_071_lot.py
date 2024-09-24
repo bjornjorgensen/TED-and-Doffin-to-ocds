@@ -92,5 +92,6 @@ def merge_quality_target_code(release_json, quality_target_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Quality Target Code for {len(quality_target_data['tender']['lots'])} lots",
+        "Merged Quality Target Code for %d lots",
+        len(quality_target_data["tender"]["lots"]),
     )

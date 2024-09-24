@@ -119,5 +119,6 @@ def merge_buyer_contracting_entity(release_json, buyer_contracting_entity_data):
             parties.append(new_party)
 
     logger.info(
-        f"Merged buyer contracting entity data for {len(buyer_contracting_entity_data['parties'])} parties",
+        "Merged buyer contracting entity data for %d parties",
+        len(buyer_contracting_entity_data["parties"]),
     )

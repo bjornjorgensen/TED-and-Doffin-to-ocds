@@ -47,5 +47,6 @@ def merge_part_tendereval(release_json, tendereval_data):
             release_json.setdefault("parties", []).append(party)
 
     logger.info(
-        f"Merged part Tender Evaluator data for {len(tendereval_data['parties'])} parties",
+        "Merged part Tender Evaluator data for %d parties",
+        len(tendereval_data["parties"]),
     )

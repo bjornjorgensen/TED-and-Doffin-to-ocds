@@ -132,5 +132,5 @@ def merge_lot_country(release_json, lot_country_data):
             existing_items.append(new_item)
 
     logger.info(
-        f"Merged Lot Country data for {len(lot_country_data['tender']['items'])} items",
+        "Merged Lot Country data for %d items", len(lot_country_data["tender"]["items"])
     )

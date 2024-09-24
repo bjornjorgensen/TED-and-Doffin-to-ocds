@@ -39,7 +39,7 @@ def parse_part_duration(xml_content):
         elif unit_code in ["WEEK", "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]:
             duration_in_days = duration_value * 7
         else:
-            logger.warning(f"Unknown unitCode '{unit_code}' for part duration")
+            logger.warning("Unknown unitCode '%s' for part duration", unit_code)
             return None
 
         result["tender"]["contractPeriod"] = {"durationInDays": duration_in_days}

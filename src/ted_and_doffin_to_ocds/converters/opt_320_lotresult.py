@@ -65,5 +65,6 @@ def merge_tender_identifier_reference(release_json, tender_id_data):
             release_json["awards"].append(new_award)
 
     logger.info(
-        f"Merged Tender Identifier Reference data for {len(tender_id_data['awards'])} awards",
+        "Merged Tender Identifier Reference data for %d awards",
+        len(tender_id_data["awards"]),
     )
