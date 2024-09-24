@@ -108,5 +108,6 @@ def merge_concession_revenue_user(release_json, concession_revenue_user_data):
             existing_contracts.append(new_contract)
 
     logger.info(
-        f"Merged Concession Revenue User data for {len(concession_revenue_user_data['contracts'])} contracts",
+        "Merged Concession Revenue User data for %d contracts",
+        len(concession_revenue_user_data["contracts"]),
     )

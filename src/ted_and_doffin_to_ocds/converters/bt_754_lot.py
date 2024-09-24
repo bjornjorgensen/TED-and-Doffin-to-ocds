@@ -42,7 +42,7 @@ def parse_accessibility_criteria(xml_content: str | bytes) -> dict | None:
             namespaces=namespaces,
         )
 
-        lot_data: dict[str, str | bool | str | None] = {
+        lot_data: dict[str, str | bool | None] = {
             "id": lot_id,
             "hasAccessibilityCriteria": False,
             "noAccessibilityCriteriaRationale": None,

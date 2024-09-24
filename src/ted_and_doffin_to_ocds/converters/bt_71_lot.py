@@ -101,5 +101,6 @@ def merge_reserved_participation(release_json, reserved_participation_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged reserved participation data for {len(reserved_participation_data['tender']['lots'])} lots",
+        "Merged reserved participation data for %d lots",
+        len(reserved_participation_data["tender"]["lots"]),
     )

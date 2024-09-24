@@ -40,7 +40,7 @@ def test_merge_lot_additional_info():
 def test_merge_lot_additional_info_existing_description():
     release_json = {
         "tender": {
-            "lots": [{"id": "LOT-0001", "description": "Existing description."}]
+            "lots": [{"id": "LOT-0001", "description": "Existing description."}],
         },
     }
     lot_additional_info = {

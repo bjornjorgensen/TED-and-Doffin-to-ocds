@@ -74,5 +74,6 @@ def merge_lot_duration(release_json, lot_duration_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged lot duration data for {len(lot_duration_data['tender']['lots'])} lots",
+        "Merged lot duration data for %(num_lots)d lots",
+        {"num_lots": len(lot_duration_data["tender"]["lots"])},
     )

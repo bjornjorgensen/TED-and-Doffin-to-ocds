@@ -92,4 +92,4 @@ def merge_ubo_city(release_json, ubo_city_data):
         else:
             existing_parties.append(new_party)
 
-    logger.info(f"Merged ubo City data for {len(ubo_city_data['parties'])} parties")
+    logger.info("Merged ubo City data for %d parties", len(ubo_city_data["parties"]))

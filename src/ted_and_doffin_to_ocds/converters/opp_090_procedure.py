@@ -66,6 +66,7 @@ def merge_previous_notice_identifier(release_json, previous_notice_data):
             existing_related_processes.append(new_process)
 
     logger.info(
-        f"Merged Previous notice Identifier for {len(previous_notice_data['relatedProcesses'])} related processes",
+        "Merged Previous notice Identifier for %d related processes",
+        len(previous_notice_data["relatedProcesses"]),
     )
-    logger.info(f"Updated relatedProcesses: {existing_related_processes}")
+    logger.info("Updated relatedProcesses: %s", existing_related_processes)

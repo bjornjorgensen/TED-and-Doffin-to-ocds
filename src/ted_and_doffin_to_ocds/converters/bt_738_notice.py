@@ -34,16 +34,16 @@ def parse_notice_preferred_publication_date(xml_content):
             # Use StartDate function from date_utils to convert the date
             formatted_date = start_date(date_str)
 
-            return {
+            return {  # noqa: TRY300
                 "tender": {
                     "communication": {"noticePreferredPublicationDate": formatted_date},
                 },
             }
-        except ValueError as e:
-            logger.error(f"Error parsing date: {e}")
+        except ValueError:
+            logger.exception("Error parsing date")
             return None
-
-    return None
+    else:
+        return None
 
 
 def merge_notice_preferred_publication_date(

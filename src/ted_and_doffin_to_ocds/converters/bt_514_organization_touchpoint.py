@@ -132,5 +132,6 @@ def merge_touchpoint_country(release_json, touchpoint_country_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged touchpoint Country data for {len(touchpoint_country_data['parties'])} parties",
+        "Merged touchpoint Country data for %s parties",
+        len(touchpoint_country_data["parties"]),
     )

@@ -51,7 +51,7 @@ def test_bt_198_bt88_procedure_integration(tmp_path, setup_logging):
     with open("output.json") as f:
         result = json.load(f)
 
-    logger.info(f"Result: {json.dumps(result, indent=2)}")
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "withheldInformation" in result, "Expected 'withheldInformation' in result"
     withheld_info = result["withheldInformation"]
@@ -89,7 +89,7 @@ def test_bt_198_bt88_procedure_missing_data(tmp_path, setup_logging):
     with open("output.json") as f:
         result = json.load(f)
 
-    logger.info(f"Result: {json.dumps(result, indent=2)}")
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert (
         "withheldInformation" not in result

@@ -57,7 +57,7 @@ def test_bt_196_bt733_lot_integration(tmp_path, setup_logging):
     with open("output.json") as f:
         result = json.load(f)
 
-    logger.info(f"Result: {json.dumps(result, indent=2)}")
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "withheldInformation" in result, "Expected 'withheldInformation' in result"
     assert (
@@ -98,7 +98,7 @@ def test_bt_196_bt733_lot_missing_field(tmp_path, setup_logging):
     with open("output.json") as f:
         result = json.load(f)
 
-    logger.info(f"Result: {json.dumps(result, indent=2)}")
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert (
         "withheldInformation" not in result

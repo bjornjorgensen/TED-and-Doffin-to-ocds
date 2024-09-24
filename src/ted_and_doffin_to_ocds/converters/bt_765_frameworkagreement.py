@@ -89,4 +89,4 @@ def merge_framework_agreement(
 
     tender["lots"] = updated_lots
 
-    logger.info(f"Merged Framework Agreement data for {len(updated_lots)} lots")
+    logger.info("Merged Framework Agreement data for %d lots", len(updated_lots))

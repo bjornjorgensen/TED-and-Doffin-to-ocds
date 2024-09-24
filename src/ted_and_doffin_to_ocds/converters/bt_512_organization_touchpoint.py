@@ -69,5 +69,6 @@ def merge_touchpoint_postcode(release_json, touchpoint_postcode_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged touchpoint Postcode data for {len(touchpoint_postcode_data['parties'])} parties",
+        "Merged touchpoint Postcode data for %s parties",
+        len(touchpoint_postcode_data["parties"]),
     )

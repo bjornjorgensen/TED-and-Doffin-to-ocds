@@ -48,4 +48,4 @@ def merge_mediator_identifier(release_json, mediator_data):
         else:
             existing_parties.append(new_party)
 
-    logger.info(f"Merged mediator data for {len(mediator_data['parties'])} parties")
+    logger.info("Merged mediator data for %d parties", len(mediator_data["parties"]))

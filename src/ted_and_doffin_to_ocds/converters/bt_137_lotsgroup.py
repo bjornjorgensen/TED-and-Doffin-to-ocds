@@ -47,8 +47,8 @@ def merge_lots_group_identifier(release_json, lots_group_data):
             lot_group["id"] == new_lot_group["id"] for lot_group in existing_lot_groups
         ):
             existing_lot_groups.append(new_lot_group)
-            logger.info(f"Added new lot group with id: {new_lot_group['id']}")
+            logger.info("Added new lot group with id: %s", new_lot_group["id"])
         else:
             logger.info(
-                f"Lot group with id: {new_lot_group['id']} already exists, skipping",
+                "Lot group with id: %s already exists, skipping", new_lot_group["id"]
             )

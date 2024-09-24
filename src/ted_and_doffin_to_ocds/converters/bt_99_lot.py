@@ -78,5 +78,6 @@ def merge_review_deadline_description(release_json, review_deadline_description_
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged review deadline description data for {len(review_deadline_description_data['tender']['lots'])} lots",
+        "Merged review deadline description data for %d lots",
+        len(review_deadline_description_data["tender"]["lots"]),
     )

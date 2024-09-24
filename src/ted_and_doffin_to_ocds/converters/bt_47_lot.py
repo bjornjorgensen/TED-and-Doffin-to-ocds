@@ -91,5 +91,7 @@ def merge_participant_name(release_json, participant_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged participant Name data for {len(participant_data['parties'])} parties and {len(participant_data['tender']['lots'])} lots",
+        "Merged participant Name data for %d parties and %d lots",
+        len(participant_data["parties"]),
+        len(participant_data["tender"]["lots"]),
     )

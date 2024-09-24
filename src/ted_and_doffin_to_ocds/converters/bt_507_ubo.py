@@ -97,5 +97,6 @@ def merge_ubo_country_subdivision(release_json, ubo_country_subdivision_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged ubo country subdivision data for {len(ubo_country_subdivision_data['parties'])} parties",
+        "Merged ubo country subdivision data for %s parties",
+        len(ubo_country_subdivision_data["parties"]),
     )

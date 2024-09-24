@@ -114,7 +114,7 @@ def parse_contract_xml(xml_content):
 
         organization["details"]["classifications"].append(classification)
 
-    logger.info(f"Parsed {len(parties)} parties with BT-10 information")
+    logger.info("Parsed %d parties with BT-10 information", len(parties))
     return {"parties": parties}
 
 
@@ -153,4 +153,6 @@ def merge_contract_info(release_json, contract_info):
         else:
             release_json.setdefault("parties", []).append(new_party)
 
-    logger.info(f"Merged BT-10 information for {len(contract_info['parties'])} parties")
+    logger.info(
+        "Merged BT-10 information for %d parties", len(contract_info["parties"])
+    )

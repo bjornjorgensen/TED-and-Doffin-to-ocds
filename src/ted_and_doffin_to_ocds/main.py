@@ -2478,16 +2478,16 @@ def process_bt_section2(
     """
     logger = logging.getLogger(__name__)
 
-    logger.info(f"Processing {section_name}")
+    logger.info("Processing %s", section_name)
     try:
         for parse_func in parse_funcs:
             data = parse_func(xml_content)
             if data:
                 merge_func(release_json, data)
             else:
-                logger.info(f"No data found for {parse_func.__name__}")
-    except Exception as e:
-        logger.error(f"Error processing {section_name}: {str(e)}")
+                logger.info("No data found for %s", parse_func.__name__)
+    except Exception:
+        logger.exception("Error processing %s", section_name)
 
 
 def process_bt_section(
@@ -2499,21 +2499,21 @@ def process_bt_section(
 ):
     logger = logging.getLogger(__name__)
     try:
-        logger.info(f"Starting {section_name} processing")
+        logger.info("Starting %s processing", section_name)
         for parse_function in parse_functions:
             parsed_data = parse_function(xml_content)
-            logger.info(f"Parsed data for {section_name}: {parsed_data}")
+            logger.info("Parsed data for %s: %s", section_name, parsed_data)
             if parsed_data:
-                # logger.info(f"Calling merge function for {section_name}")
+                # logger.info("Calling merge function for %s", section_name)
                 merge_function(release_json, parsed_data)
-                logger.info(f"Successfully merged data for {section_name}")
+                logger.info("Successfully merged data for %s", section_name)
                 return
-        logger.warning(f"No data found for {section_name}")
-    except Exception as e:
-        logger.error(f"Error processing {section_name} data: {str(e)}")
-        logger.exception("Exception details:")
+        logger.warning("No data found for %s", section_name)
+    except Exception:
+        logger.exception("Error processing %s data", section_name)
+        logger.exception("Exception details")
     # finally:
-    #    logger.info(f"Release JSON after {section_name} processing: {release_json}")
+    #    logger.info("Release JSON after %s processing: %s", section_name, release_json)
 
 
 def main(xml_path, ocid_prefix):
@@ -2533,7 +2533,7 @@ def main(xml_path, ocid_prefix):
 
     configure_logging()
     logger = logging.getLogger(__name__)
-    logger.info(f"Starting XML to JSON conversion for file: {xml_path}")
+    logger.info("Starting XML to JSON conversion for file: %s", xml_path)
 
     # Initialize NoticeProcessor
     notice_processor = NoticeProcessor(ocid_prefix)

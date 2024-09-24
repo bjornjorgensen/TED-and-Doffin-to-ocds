@@ -106,4 +106,6 @@ def merge_ubo_fax(release_json, ubo_fax_data):
         else:
             parties.append(new_party)
 
-    logger.info(f"Merged ubo fax data for {len(ubo_fax_data['parties'])} organizations")
+    logger.info(
+        "Merged ubo fax data for %d organizations", len(ubo_fax_data["parties"])
+    )

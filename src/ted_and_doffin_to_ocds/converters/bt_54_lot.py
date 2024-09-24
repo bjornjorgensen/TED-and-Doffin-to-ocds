@@ -63,5 +63,6 @@ def merge_options_description(release_json, options_description_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Options Description data for {len(options_description_data['tender']['lots'])} lots",
+        "Merged Options Description data for %d lots",
+        len(options_description_data["tender"]["lots"]),
     )

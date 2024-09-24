@@ -82,5 +82,6 @@ def merge_tenderer_legal_form(release_json: dict, parsed_data: dict | None) -> N
             tender_lots.append(new_lot)
 
     logger.info(
-        f"Merged Tenderer Legal Form data for {len(parsed_data['tender']['lots'])} lots",
+        "Merged Tenderer Legal Form data for %d lots",
+        len(parsed_data["tender"]["lots"]),
     )

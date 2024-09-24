@@ -65,5 +65,6 @@ def merge_framework_buyer_categories(release_json, framework_buyer_categories_da
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Framework buyer Categories data for {len(framework_buyer_categories_data['tender']['lots'])} lots",
+        "Merged Framework buyer Categories data for %d lots",
+        len(framework_buyer_categories_data["tender"]["lots"]),
     )

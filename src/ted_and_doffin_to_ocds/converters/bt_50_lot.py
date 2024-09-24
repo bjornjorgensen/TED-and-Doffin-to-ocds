@@ -61,5 +61,6 @@ def merge_minimum_candidates(release_json, minimum_candidates_data):
             tender_lots.append(new_lot)
 
     logger.info(
-        f"Merged Minimum Candidates data for {len(minimum_candidates_data['tender']['lots'])} lots",
+        "Merged Minimum Candidates data for %d lots",
+        len(minimum_candidates_data["tender"]["lots"]),
     )

@@ -43,7 +43,7 @@ def parse_accessibility_justification(xml_content: str | bytes) -> dict | None:
         )
 
         if justification:
-            lot_data: dict[str, str | str | None] = {
+            lot_data: dict[str, str | None] = {
                 "id": lot_id,
                 "noAccessibilityCriteriaRationale": justification[0],
             }

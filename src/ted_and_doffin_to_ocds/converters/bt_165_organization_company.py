@@ -61,5 +61,6 @@ def merge_winner_size(release_json, winner_size_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged Winner Size data for {len(winner_size_data['parties'])} parties",
+        "Merged Winner Size data for %d parties",
+        len(winner_size_data["parties"]),
     )

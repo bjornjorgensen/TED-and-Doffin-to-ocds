@@ -63,5 +63,6 @@ def merge_successive_reduction_indicator(release_json, successive_reduction_data
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Successive Reduction Indicator data for {len(successive_reduction_data['tender']['lots'])} lots",
+        "Merged Successive Reduction Indicator data for %d lots",
+        len(successive_reduction_data["tender"]["lots"]),
     )

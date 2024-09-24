@@ -91,5 +91,6 @@ def merge_touchpoint_street(release_json, touchpoint_street_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged touchpoint Street data for {len(touchpoint_street_data['parties'])} parties",
+        "Merged touchpoint Street data for %s parties",
+        len(touchpoint_street_data["parties"]),
     )

@@ -68,5 +68,6 @@ def merge_electronic_auction_description(release_json, auction_description_data)
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Electronic Auction Description data for {len(auction_description_data['lots'])} lots",
+        "Merged Electronic Auction Description data for %d lots",
+        len(auction_description_data["lots"]),
     )

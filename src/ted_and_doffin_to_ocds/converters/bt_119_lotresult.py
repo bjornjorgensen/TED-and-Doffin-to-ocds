@@ -70,5 +70,6 @@ def merge_dps_termination(release_json, dps_termination_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged DPS Termination data for {len(dps_termination_data['lots'])} lots",
+        "Merged DPS Termination data for %d lots",
+        len(dps_termination_data["lots"]),
     )

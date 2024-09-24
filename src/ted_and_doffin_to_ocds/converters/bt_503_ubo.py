@@ -94,5 +94,6 @@ def merge_ubo_telephone(release_json, ubo_telephone_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged ubo Telephone data for {len(ubo_telephone_data['parties'])} parties",
+        "Merged ubo Telephone data for %s parties",
+        len(ubo_telephone_data["parties"]),
     )

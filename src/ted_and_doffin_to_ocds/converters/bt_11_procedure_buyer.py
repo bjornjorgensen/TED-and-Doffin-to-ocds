@@ -111,5 +111,6 @@ def merge_buyer_legal_type(release_json, buyer_legal_type_data):
             release_json["parties"].append(new_party)
 
     logger.info(
-        f"Merged buyer Legal Type data for {len(buyer_legal_type_data['parties'])} parties",
+        "Merged buyer Legal Type data for %d parties",
+        len(buyer_legal_type_data["parties"]),
     )

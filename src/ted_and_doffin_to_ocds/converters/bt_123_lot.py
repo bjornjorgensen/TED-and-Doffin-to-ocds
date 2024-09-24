@@ -66,5 +66,6 @@ def merge_electronic_auction_url(release_json, auction_url_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Electronic Auction URL data for {len(auction_url_data['lots'])} lots",
+        "Merged Electronic Auction URL data for %d lots",
+        len(auction_url_data["lots"]),
     )

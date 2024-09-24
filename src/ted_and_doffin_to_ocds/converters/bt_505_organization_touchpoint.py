@@ -69,5 +69,6 @@ def merge_touchpoint_website(release_json, touchpoint_website_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged touchpoint Website data for {len(touchpoint_website_data['parties'])} parties",
+        "Merged touchpoint Website data for %s parties",
+        len(touchpoint_website_data["parties"]),
     )

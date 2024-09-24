@@ -37,8 +37,9 @@ def merge_part_identifier(release_json, part_data):
     tender = release_json.setdefault("tender", {})
     if "id" in tender:
         logger.warning(
-            f"Tender ID already exists. Overwriting with new value: {part_data['tender']['id']}",
+            "Tender ID already exists. Overwriting with new value: %s",
+            part_data["tender"]["id"],
         )
 
     tender["id"] = part_data["tender"]["id"]
-    logger.info(f"Set tender.id to: {tender['id']}")
+    logger.info("Set tender.id to: %s", tender["id"])

@@ -122,5 +122,7 @@ def merge_change_reason_code(release_json, change_reason_code_data):
             existing_awards.append(new_award)
 
     logger.info(
-        f"Merged change reason code and description data for {len(change_reason_code_data['tender']['amendments'])} tender amendments and {len(change_reason_code_data['awards'])} awards",
+        "Merged change reason code and description data for %d tender amendments and %d awards",
+        len(change_reason_code_data["tender"]["amendments"]),
+        len(change_reason_code_data["awards"]),
     )

@@ -52,7 +52,7 @@ def parse_reserved_participation_part(xml_content):
             return {
                 "tender": {
                     "otherRequirements": {
-                        "reservedparticipation": list(reserved_types)
+                        "reservedparticipation": list(reserved_types),
                     },
                 },
             }

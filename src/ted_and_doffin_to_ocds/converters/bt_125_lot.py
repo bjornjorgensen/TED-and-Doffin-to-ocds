@@ -84,5 +84,6 @@ def merge_previous_planning_identifier_lot(release_json, previous_planning_data)
             existing_related_processes.append(new_process)
 
     logger.info(
-        f"Merged Previous Planning Identifier (Lot) data for {len(previous_planning_data['relatedProcesses'])} related processes",
+        "Merged Previous Planning Identifier (Lot) data for %d related processes",
+        len(previous_planning_data["relatedProcesses"]),
     )

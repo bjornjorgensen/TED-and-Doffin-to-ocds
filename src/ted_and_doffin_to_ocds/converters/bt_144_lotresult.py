@@ -90,5 +90,6 @@ def merge_not_awarded_reason(release_json, not_awarded_reason_data):
             existing_awards.append(new_award)
 
     logger.info(
-        f"Merged not awarded reason data for {len(not_awarded_reason_data['awards'])} awards",
+        "Merged not awarded reason data for %d awards",
+        len(not_awarded_reason_data["awards"]),
     )

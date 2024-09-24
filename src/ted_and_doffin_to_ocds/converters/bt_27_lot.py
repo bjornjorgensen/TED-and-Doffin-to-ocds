@@ -95,5 +95,6 @@ def merge_lot_estimated_value(release_json, lot_estimated_value_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Lot Estimated Value data for {len(lot_estimated_value_data['tender']['lots'])} lots",
+        "Merged Lot Estimated Value data for %(num_lots)d lots",
+        {"num_lots": len(lot_estimated_value_data["tender"]["lots"])},
     )

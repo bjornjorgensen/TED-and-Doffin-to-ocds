@@ -65,7 +65,7 @@ def test_bt196_bt541_lot_weight_unpublished_justification_integration(
     with open("output.json") as f:
         result = json.load(f)
 
-    logger.info(f"Result: {json.dumps(result, indent=2)}")
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "withheldInformation" in result, "Expected 'withheldInformation' in result"
     assert (
@@ -152,7 +152,7 @@ def test_bt196_bt541_lot_weight_multiple_lots(tmp_path, setup_logging):
     with open("output.json") as f:
         result = json.load(f)
 
-    logger.info(f"Result: {json.dumps(result, indent=2)}")
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "withheldInformation" in result, "Expected 'withheldInformation' in result"
     assert (
@@ -200,7 +200,7 @@ def test_bt196_bt541_lot_weight_no_unpublished_justification(tmp_path, setup_log
     with open("output.json") as f:
         result = json.load(f)
 
-    logger.info(f"Result: {json.dumps(result, indent=2)}")
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert (
         "withheldInformation" not in result

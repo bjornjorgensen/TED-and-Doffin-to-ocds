@@ -118,5 +118,6 @@ def merge_organization_touchpoint_part_name(
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged organization touchpoint part Name data for {len(organization_touchpoint_part_name_data['parties'])} parties",
+        "Merged organization touchpoint part Name data for %d parties",
+        len(organization_touchpoint_part_name_data["parties"]),
     )

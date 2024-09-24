@@ -68,4 +68,4 @@ def merge_touchpoint_city(release_json, city_data):
         else:
             existing_parties.append(new_party)
 
-    logger.info(f"Merged touchpoint City data for {len(city_data['parties'])} parties")
+    logger.info("Merged touchpoint City data for %d parties", len(city_data["parties"]))

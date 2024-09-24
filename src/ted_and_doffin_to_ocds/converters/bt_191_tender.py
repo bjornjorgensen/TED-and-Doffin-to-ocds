@@ -417,5 +417,6 @@ def merge_country_origin(release_json, country_origin_data):
             existing_bids.append(new_bid)
 
     logger.info(
-        f"Merged Country Origin data for {len(country_origin_data['bids']['details'])} bids",
+        "Merged Country Origin data for %d bids",
+        len(country_origin_data["bids"]["details"]),
     )

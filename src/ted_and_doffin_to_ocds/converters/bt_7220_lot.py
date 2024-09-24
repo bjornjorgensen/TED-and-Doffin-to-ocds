@@ -108,4 +108,4 @@ def merge_lot_eu_funds(release_json, lot_eu_funds_data):
         else:
             release_json["lots"].append(new_lot)
 
-    logger.info(f"Merged lot EU funds data for {len(lot_eu_funds_data['lots'])} lots")
+    logger.info("Merged lot EU funds data for %d lots", len(lot_eu_funds_data["lots"]))

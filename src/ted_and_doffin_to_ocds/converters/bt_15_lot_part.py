@@ -93,5 +93,6 @@ def merge_documents_url(release_json, documents_url_data):
             existing_documents.append(new_document)
 
     logger.info(
-        f"Merged documents URL data for {len(documents_url_data['tender']['documents'])} documents",
+        "Merged documents URL data for %d documents",
+        len(documents_url_data["tender"]["documents"]),
     )

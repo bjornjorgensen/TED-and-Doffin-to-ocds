@@ -109,5 +109,6 @@ def merge_security_clearance_deadline(release_json, security_clearance_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Security Clearance Deadline data for {len(security_clearance_data['tender']['lots'])} lots",
+        "Merged Security Clearance Deadline data for %d lots",
+        len(security_clearance_data["tender"]["lots"]),
     )

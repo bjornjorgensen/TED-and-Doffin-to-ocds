@@ -82,5 +82,6 @@ def merge_lot_rewards_other(release_json, lot_rewards_other_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Lot Rewards Other data for {len(lot_rewards_other_data['tender']['lots'])} lots",
+        "Merged Lot Rewards Other data for %d lots",
+        len(lot_rewards_other_data["tender"]["lots"]),
     )

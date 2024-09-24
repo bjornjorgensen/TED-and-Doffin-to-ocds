@@ -68,5 +68,6 @@ def merge_lot_quantity(release_json, lot_quantity_data):
             existing_items.append(new_item)
 
     logger.info(
-        f"Merged Lot Quantity data for {len(lot_quantity_data['tender']['items'])} items",
+        "Merged Lot Quantity data for %(num_items)d items",
+        {"num_items": len(lot_quantity_data["tender"]["items"])},
     )

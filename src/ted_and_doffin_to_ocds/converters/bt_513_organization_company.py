@@ -61,5 +61,6 @@ def merge_organization_city(release_json, city_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged organization City data for {len(city_data['parties'])} parties",
+        "Merged organization City data for %s parties",
+        len(city_data["parties"]),
     )

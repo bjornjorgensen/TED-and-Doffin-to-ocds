@@ -74,5 +74,6 @@ def merge_touchpoint_contact_email(release_json, touchpoint_contact_email_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged touchpoint Contact Email data for {len(touchpoint_contact_email_data['parties'])} parties",
+        "Merged touchpoint Contact Email data for %s parties",
+        len(touchpoint_contact_email_data["parties"]),
     )

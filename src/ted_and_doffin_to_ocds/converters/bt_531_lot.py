@@ -64,5 +64,6 @@ def merge_lot_additional_nature(release_json, lot_additional_nature_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged Lot Additional Nature data for {len(lot_additional_nature_data['tender']['lots'])} lots",
+        "Merged Lot Additional Nature data for %s lots",
+        len(lot_additional_nature_data["tender"]["lots"]),
     )

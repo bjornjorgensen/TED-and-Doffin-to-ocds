@@ -101,5 +101,6 @@ def merge_financial_terms(
             existing_lots.append(new_lot)
 
     logger.info(
-        f"Merged financial terms data for {len(financial_terms_data['tender']['lots'])} lots",
+        "Merged financial terms data for %d lots",
+        len(financial_terms_data["tender"]["lots"]),
     )

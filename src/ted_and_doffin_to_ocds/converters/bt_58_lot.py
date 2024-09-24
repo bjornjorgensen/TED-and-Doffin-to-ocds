@@ -103,5 +103,6 @@ def merge_renewal_maximum(release_json, renewal_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"BT-58-Lot: Merged renewal maximum data for {len(renewal_data['tender']['lots'])} lots",
+        "BT-58-Lot: Merged renewal maximum data for %d lots",
+        len(renewal_data["tender"]["lots"]),
     )

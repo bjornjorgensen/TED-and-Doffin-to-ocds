@@ -61,5 +61,6 @@ def merge_organization_website(release_json, organization_website_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged organization Website data for {len(organization_website_data['parties'])} parties",
+        "Merged organization Website data for %s parties",
+        len(organization_website_data["parties"]),
     )

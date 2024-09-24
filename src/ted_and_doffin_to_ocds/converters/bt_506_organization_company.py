@@ -63,5 +63,6 @@ def merge_organization_contact_email(release_json, organization_contact_email_da
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged organization Contact Email data for {len(organization_contact_email_data['parties'])} parties",
+        "Merged organization Contact Email data for %s parties",
+        len(organization_contact_email_data["parties"]),
     )

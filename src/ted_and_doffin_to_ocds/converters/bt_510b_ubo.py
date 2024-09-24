@@ -113,5 +113,6 @@ def merge_ubo_streetline1(release_json, ubo_streetline1_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged ubo Streetline 1 data for {len(ubo_streetline1_data['parties'])} parties",
+        "Merged ubo Streetline 1 data for %s parties",
+        len(ubo_streetline1_data["parties"]),
     )

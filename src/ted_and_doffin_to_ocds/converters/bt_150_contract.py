@@ -95,6 +95,9 @@ def merge_contract_identifier(release_json, contract_identifier_data):
             existing_contracts.append(new_contract)
 
     logger.info(
-        f"Merged Contract Identifier data for {len(contract_identifier_data['contracts'])} contracts",
+        "Merged Contract Identifier data for %d contracts",
+        len(contract_identifier_data["contracts"]),
     )
-    logger.debug(f"Release JSON after merging Contract Identifier data: {release_json}")
+    logger.debug(
+        "Release JSON after merging Contract Identifier data: %s", release_json
+    )

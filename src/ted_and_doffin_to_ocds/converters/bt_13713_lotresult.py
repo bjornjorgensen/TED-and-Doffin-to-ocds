@@ -52,7 +52,7 @@ def merge_lot_result_identifier(release_json, lot_result_data):
             existing_lots = set(existing_award.get("relatedLots", []))
             existing_lots.update(new_award["relatedLots"])
             existing_award["relatedLots"] = list(existing_lots)
-            logger.info(f"Updated relatedLots for award {new_award['id']}")
+            logger.info("Updated relatedLots for award %s", new_award["id"])
         else:
             existing_awards.append(new_award)
-            logger.info(f"Added new award with id: {new_award['id']}")
+            logger.info("Added new award with id: %s", new_award["id"])

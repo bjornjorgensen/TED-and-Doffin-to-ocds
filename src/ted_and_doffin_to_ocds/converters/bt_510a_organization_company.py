@@ -80,5 +80,6 @@ def merge_organization_street(release_json, organization_street_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged organization Street data for {len(organization_street_data['parties'])} parties",
+        "Merged organization Street data for %s parties",
+        len(organization_street_data["parties"]),
     )

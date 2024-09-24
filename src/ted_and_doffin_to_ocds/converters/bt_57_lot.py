@@ -103,5 +103,6 @@ def merge_renewal_description(release_json, renewal_data):
             existing_lots.append(new_lot)
 
     logger.info(
-        f"BT-57-Lot: Merged renewal description data for {len(renewal_data['tender']['lots'])} lots",
+        "BT-57-Lot: Merged renewal description data for %d lots",
+        len(renewal_data["tender"]["lots"]),
     )

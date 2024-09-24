@@ -105,5 +105,7 @@ def merge_winner_chosen(release_json, winner_chosen_data):
         else:
             existing_lots.append(new_lot)
     logger.info(
-        f"Merged winner chosen data for {len(winner_chosen_data['awards'])} awards and {len(winner_chosen_data['tender']['lots'])} lots",
+        "Merged winner chosen data for %d awards and %d lots",
+        len(winner_chosen_data["awards"]),
+        len(winner_chosen_data["tender"]["lots"]),
     )

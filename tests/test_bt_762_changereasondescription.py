@@ -48,7 +48,7 @@ def test_bt_762_change_reason_description_integration(tmp_path):
     with open("output.json") as f:
         result = json.load(f)
 
-    logger.info(f"Result: {json.dumps(result, indent=2)}")
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "amendments" in result["tender"], "Expected 'amendments' in tender"

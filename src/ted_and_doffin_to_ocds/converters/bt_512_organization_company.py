@@ -61,5 +61,6 @@ def merge_organization_postcode(release_json, organization_postcode_data):
             existing_parties.append(new_party)
 
     logger.info(
-        f"Merged organization Postcode data for {len(organization_postcode_data['parties'])} parties",
+        "Merged organization Postcode data for %s parties",
+        len(organization_postcode_data["parties"]),
     )
