@@ -33,15 +33,11 @@ def test_bt_125_part_integration(tmp_path, caplog):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    print("Log messages:")
-    for record in caplog.records:
-        print(f"{record.levelname}: {record.message}")
+    for _record in caplog.records:
+        pass
 
     with Path("output.json").open() as f:
         result = json.load(f)
-
-    print("Full result:")
-    print(json.dumps(result, indent=2))
 
     assert "relatedProcesses" in result
     assert len(result["relatedProcesses"]) == 1

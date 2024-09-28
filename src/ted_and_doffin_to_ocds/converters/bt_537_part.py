@@ -2,6 +2,7 @@
 
 from lxml import etree
 from ted_and_doffin_to_ocds.utils.date_utils import end_date
+import logging
 
 
 def parse_part_duration_end_date(xml_content):
@@ -49,7 +50,7 @@ def parse_part_duration_end_date(xml_content):
             iso_end_date = end_date(date_to_end)
             result["tender"]["contractPeriod"] = {"endDate": iso_end_date}
         except ValueError as e:
-            print(f"Warning: Invalid date format for part end date: {str(e)}")
+            logging.warning("Warning: Invalid date format for part end date: %s", e)
 
     return result if "contractPeriod" in result["tender"] else None
 

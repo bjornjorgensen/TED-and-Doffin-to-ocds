@@ -67,9 +67,8 @@ def parse_employment_legislation_document_reference(xml_content):
     # Clean up empty fields
     if not result["tender"]["documents"]:
         result.pop("tender")
-    else:
-        if not result["tender"]["lots"]:
-            result["tender"].pop("lots")
+    elif not result["tender"]["lots"]:
+        result["tender"].pop("lots")
 
     if not result["parties"]:
         result.pop("parties")

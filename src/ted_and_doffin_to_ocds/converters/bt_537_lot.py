@@ -2,6 +2,7 @@
 
 from lxml import etree
 from ted_and_doffin_to_ocds.utils.date_utils import end_date
+import logging
 
 
 def parse_lot_duration_end_date(xml_content):
@@ -37,7 +38,9 @@ def parse_lot_duration_end_date(xml_content):
                 lot = {"id": lot_id, "contractPeriod": {"endDate": iso_end_date}}
                 result["tender"]["lots"].append(lot)
             except ValueError as e:
-                print(f"Warning: Invalid date format for lot {lot_id}: {str(e)}")
+                logging.warning(
+                    "Warning: Invalid date format for lot %s: %s", lot_id, e
+                )
 
     return result if result["tender"]["lots"] else None
 

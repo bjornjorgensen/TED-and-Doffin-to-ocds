@@ -1,7 +1,6 @@
 # tests/test_bt_720_Tender.py
 from pathlib import Path
 import pytest
-import json
 import sys
 
 # Add the parent directory to sys.path to import main
@@ -40,7 +39,6 @@ def test_bt_720_tender_integration(tmp_path):
     result = main(str(xml_file), "ocds-test-prefix")
 
     assert result is not None, "Result is None"
-    print(f"Full result: {json.dumps(result, indent=2)}")
 
     assert "bids" in result, "No 'bids' in result"
     assert "details" in result["bids"], "No 'details' in result['bids']"
@@ -49,7 +47,6 @@ def test_bt_720_tender_integration(tmp_path):
     ), f"Expected 1 bid, got {len(result['bids']['details'])}"
 
     bid = result["bids"]["details"][0]
-    print(f"Bid details: {json.dumps(bid, indent=2)}")
 
     assert bid["id"] == "TEN-0001", f"Expected bid id 'TEN-0001', got '{bid.get('id')}'"
 
@@ -68,7 +65,6 @@ def test_bt_720_tender_integration(tmp_path):
     assert len(result["awards"]) == 1, f"Expected 1 award, got {len(result['awards'])}"
 
     award = result["awards"][0]
-    print(f"Award details: {json.dumps(award, indent=2)}")
 
     assert (
         award["id"] == "RES-0001"

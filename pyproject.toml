@@ -83,7 +83,7 @@ select = [
     #"ERA",
     "PD",
     "PGH",
-    #"PL",
+    "PL",
     "R",
     "W",
     "TRY",
@@ -92,17 +92,20 @@ select = [
     "PERF",
     "FURB",
     #"DOC",
-    #"RUF",
+    "RUF",
 ]
 ignore = [
     "E501",  # Line too long
     "I001",  # Import block is un-sorted or un-formatted
     "S101",  # Use of assert detected
     "S320",  # Using `xml.etree.ElementTree.parse` to parse untrusted XML data is known to be vulnerable to XML attacks
-    "T201",  # `print` found
     "COM812",  # Trailing comma missing
     "ISC001",
     "DTZ007",
+    "PLR2004",
+    "PLR0915",
+    "PLE1205",
+    "RUF001",
 ]
 
 [tool.ruff.format]

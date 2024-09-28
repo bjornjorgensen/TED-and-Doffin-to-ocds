@@ -72,10 +72,7 @@ def merge_clean_vehicles_directive(release_json, clean_vehicles_directive_data):
 
     for lot in lots:
         lot_id = lot["id"]
-        if (
-            lot_id in clean_vehicles_directive_data
-            and clean_vehicles_directive_data[lot_id]
-        ):
+        if clean_vehicles_directive_data.get(lot_id):
             lot.setdefault("coveredBy", []).append("EU-CVD")
 
     logger.info(
