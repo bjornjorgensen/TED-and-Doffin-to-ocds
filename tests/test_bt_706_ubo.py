@@ -2,12 +2,12 @@ from ted_and_doffin_to_ocds.converters.bt_706_ubo import (
     parse_ubo_nationality,
     merge_ubo_nationality,
 )
+from pathlib import Path
 import json
-import os
 import sys
 
 # Add the parent directory to sys.path to import main
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(str(Path(__file__).parent.parent))
 from src.ted_and_doffin_to_ocds.main import main
 
 
@@ -112,7 +112,7 @@ def test_bt_706_ubo_nationality_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json") as f:
+    with Path("output.json").open() as f:
         result = json.load(f)
 
     assert "parties" in result
