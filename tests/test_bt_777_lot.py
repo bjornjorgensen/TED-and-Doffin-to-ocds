@@ -139,7 +139,7 @@ def test_bt_777_lot_strategic_procurement_integration(tmp_path):
     # If not, it might be nested under another key, or the structure might be different
     else:
         # Print the structure for debugging
-        print(f"Sustainability structure for LOT-0001: {lot_1['sustainability']}")
+        pass
         # You might want to add more specific checks based on the actual structure
 
     lot_2 = next(
@@ -158,7 +158,7 @@ def test_bt_777_lot_strategic_procurement_integration(tmp_path):
             == "This procurement aims to reduce environmental impact..."
         )
     else:
-        print(f"Sustainability structure for LOT-0002: {lot_2['sustainability']}")
+        pass
 
     lot_3 = next(
         (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"),
