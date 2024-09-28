@@ -1,13 +1,12 @@
 # tests/test_bt_196_bt_541_lotsgroup_threshold.py
-
+from pathlib import Path
 import pytest
 import json
-import os
 import sys
 import logging
 
 # Add the parent directory to sys.path to import main
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(str(Path(__file__).parent.parent))
 from src.ted_and_doffin_to_ocds.main import main, configure_logging
 
 
@@ -62,7 +61,7 @@ def test_bt196_bt541_lotsgroup_threshold_unpublished_justification_integration(
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json") as f:
+    with Path("output.json").open() as f:
         result = json.load(f)
 
     logger.info("Result: %s", json.dumps(result, indent=2))
@@ -151,7 +150,7 @@ def test_bt196_bt541_lotsgroup_threshold_multiple_groups(tmp_path, setup_logging
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json") as f:
+    with Path("output.json").open() as f:
         result = json.load(f)
 
     logger.info("Result: %s", json.dumps(result, indent=2))
@@ -204,7 +203,7 @@ def test_bt196_bt541_lotsgroup_threshold_no_unpublished_justification(
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json") as f:
+    with Path("output.json").open() as f:
         result = json.load(f)
 
     logger.info("Result: %s", json.dumps(result, indent=2))

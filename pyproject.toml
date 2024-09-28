@@ -77,7 +77,7 @@ select = [
     "TCH",
     "INT",
     "ARG",
-    #"PTH",
+    "PTH",
     "TD",
     "FIX",
     #"ERA",

@@ -1,13 +1,12 @@
 # tests/test_bt_125_part.py
-
+from pathlib import Path
 import pytest
 import json
-import os
 import sys
 import logging
 
 # Add the parent directory to sys.path to import main
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(str(Path(__file__).parent.parent))
 from src.ted_and_doffin_to_ocds.main import main
 
 
@@ -38,7 +37,7 @@ def test_bt_125_part_integration(tmp_path, caplog):
     for record in caplog.records:
         print(f"{record.levelname}: {record.message}")
 
-    with open("output.json") as f:
+    with Path("output.json").open() as f:
         result = json.load(f)
 
     print("Full result:")

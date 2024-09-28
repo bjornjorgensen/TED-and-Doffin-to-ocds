@@ -1,11 +1,10 @@
 # tests/test_bt_23_Lot.py
-
+from pathlib import Path
 import pytest
 import sys
-import os
 
 # Add the parent directory to sys.path to import the converter
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(str(Path(__file__).parent.parent))
 from ted_and_doffin_to_ocds.converters.bt_23_lot import (
     parse_main_nature,
     merge_main_nature,

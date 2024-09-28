@@ -1,6 +1,7 @@
 # main.py
 import json
 import logging
+from pathlib import Path
 from ted_and_doffin_to_ocds.converters.common_operations import NoticeProcessor
 from ted_and_doffin_to_ocds.converters.bt_01_procedure import (
     parse_procedure_legal_basis,
@@ -2528,7 +2529,7 @@ def main(xml_path, ocid_prefix):
         dict: The final OCDS release JSON.
     """
     # Read the XML content from the file
-    with open(xml_path, "rb") as xml_file:
+    with Path(xml_path).open("rb") as xml_file:
         xml_content = xml_file.read()
 
     configure_logging()
@@ -7730,7 +7731,8 @@ def main(xml_path, ocid_prefix):
     # logger.info(f"Final release JSON: {json.dumps(release_json, indent=2)}")
 
     # Write the JSON output to a file
-    with open("output.json", "w", encoding="utf-8") as f:
+    output_file = Path("output.json")
+    with output_file.open("w", encoding="utf-8") as f:
         json.dump(release_json, f, ensure_ascii=False)
 
     logger.info("XML to JSON conversion completed")

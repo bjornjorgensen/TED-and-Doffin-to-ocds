@@ -1,5 +1,4 @@
 # tests/test_bt_13714_Tender.py
-
 from lxml import etree
 from ted_and_doffin_to_ocds.converters.bt_13714_tender import (
     parse_tender_lot_identifier,

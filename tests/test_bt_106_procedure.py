@@ -1,12 +1,11 @@
 # tests/test_bt_106_procedure.py
-
+from pathlib import Path
 import pytest
 import json
-import os
 import sys
 
 # Add the parent directory to sys.path to import main
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(str(Path(__file__).parent.parent))
 from src.ted_and_doffin_to_ocds.main import main
 
 
@@ -35,7 +34,7 @@ def test_bt_106_procedure_integration(tmp_path, accelerated_value, expected_resu
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json") as f:
+    with Path("output.json").open() as f:
         result = json.load(f)
 
     assert "tender" in result, "Expected 'tender' in result"
@@ -61,7 +60,7 @@ def test_bt_106_procedure_integration_missing(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json") as f:
+    with Path("output.json").open() as f:
         result = json.load(f)
 
     assert "tender" not in result or "procedure" not in result.get(

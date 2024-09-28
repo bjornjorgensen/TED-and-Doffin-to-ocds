@@ -1,16 +1,15 @@
 # tests/test_bt_77_Lot.py
-
+from pathlib import Path
 import pytest
 from ted_and_doffin_to_ocds.converters.bt_77_lot import (
     parse_financial_terms,
     merge_financial_terms,
 )
 import json
-import os
 import sys
 
 # Add the parent directory to sys.path to import main
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(str(Path(__file__).parent.parent))
 from src.ted_and_doffin_to_ocds.main import main
 
 
@@ -100,7 +99,7 @@ def test_bt_77_lot_financial_terms_integration(tmp_path):
 
     main(str(xml_file), "ocds-test-prefix")
 
-    with open("output.json") as f:
+    with Path("output.json").open() as f:
         result = json.load(f)
 
     assert "tender" in result
