@@ -19,6 +19,14 @@ def parse_successive_reduction_indicator(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    # Check if the relevant XPath exists
+    relevant_xpath = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cbc:CandidateReductionConstraintIndicator"
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info(
+            "No successive reduction indicator data found. Skipping parse_successive_reduction_indicator."
+        )
+        return None
+
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
@@ -47,7 +55,7 @@ def parse_successive_reduction_indicator(xml_content):
 
 def merge_successive_reduction_indicator(release_json, successive_reduction_data):
     if not successive_reduction_data:
-        logger.warning("No Successive Reduction Indicator data to merge")
+        logger.info("No Successive Reduction Indicator data to merge")
         return
 
     existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])

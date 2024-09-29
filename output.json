@@ -1,16 +1,1 @@
-{
-    "initiationType": "tender",
-    "tender": {
-        "lots": [
-            {
-                "id": "LOT-0001",
-                "submissionTerms": {
-                    "nonElectronicSubmission": {
-                        "rationale": "Inclusion of a physical model"
-                    }
-                },
-                "hasAccessibilityCriteria": false
-            }
-        ]
-    }
-}
+{"initiationType": "tender", "awards": [{"id": "RES-0001", "relatedBids": ["TEN-0001", "TEN-0002", "TEN-0003"]}]}

@@ -19,6 +19,14 @@ def parse_minimum_candidates(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    # Check if the relevant XPath exists
+    relevant_xpath = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']//cac:EconomicOperatorShortList/cbc:MinimumQuantity"
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info(
+            "No minimum candidates data found. Skipping parse_minimum_candidates."
+        )
+        return None
+
     result = {"tender": {"lots": []}}
 
     lot_elements = root.xpath(
@@ -45,7 +53,7 @@ def parse_minimum_candidates(xml_content):
 
 def merge_minimum_candidates(release_json, minimum_candidates_data):
     if not minimum_candidates_data:
-        logger.warning("No Minimum Candidates data to merge")
+        logger.info("No Minimum Candidates data to merge")
         return
 
     tender_lots = release_json.setdefault("tender", {}).setdefault("lots", [])

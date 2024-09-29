@@ -45,6 +45,16 @@ def parse_organization_streetline2(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    # Check if the relevant XPath exists
+    relevant_xpath = (
+        "//efac:organizations/efac:organization/efac:company/cac:PostalAddress"
+    )
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info(
+            "No organization street address data found. Skipping parse_organization_streetline2."
+        )
+        return None
+
     result = {"parties": []}
 
     organizations = root.xpath(
@@ -103,7 +113,7 @@ def merge_organization_streetline2(release_json, organization_streetline2_data):
         None: The function updates the release_json in-place.
     """
     if not organization_streetline2_data:
-        logger.warning("No organization Streetline 2 data to merge")
+        logger.info("No organization Streetline 2 data to merge")
         return
 
     existing_parties = release_json.setdefault("parties", [])

@@ -19,6 +19,12 @@ def parse_jury_member_name(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    # Check if the relevant XPath exists
+    relevant_xpath = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']//cac:AwardingTerms/cac:TechnicalCommitteePerson/cbc:FamilyName"
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info("No jury member data found. Skipping parse_jury_member_name.")
+        return None
+
     result = {"tender": {"lots": []}}
 
     lot_elements = root.xpath(

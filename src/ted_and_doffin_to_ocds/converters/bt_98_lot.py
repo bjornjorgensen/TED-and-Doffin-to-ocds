@@ -29,6 +29,14 @@ def parse_tender_validity_deadline(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    # Check if the relevant XPath exists
+    relevant_xpath = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']//cac:TenderingTerms/cac:TenderValidityPeriod/cbc:DurationMeasure"
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info(
+            "No tender validity deadline data found. Skipping parse_tender_validity_deadline."
+        )
+        return None
+
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
@@ -76,7 +84,7 @@ def merge_tender_validity_deadline(release_json, tender_validity_deadline_data):
         None: The function updates the release_json in-place.
     """
     if not tender_validity_deadline_data:
-        logger.warning("No tender validity deadline data to merge")
+        logger.info("No tender validity deadline data to merge")
         return
 
     tender = release_json.setdefault("tender", {})

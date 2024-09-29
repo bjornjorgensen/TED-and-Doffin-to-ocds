@@ -1,6 +1,9 @@
 # converters/bt_51_Lot.py
 
+import logging
 from lxml import etree
+
+logger = logging.getLogger(__name__)
 
 
 def parse_lot_maximum_candidates(xml_content):
@@ -15,6 +18,14 @@ def parse_lot_maximum_candidates(xml_content):
         "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
+
+    # Check if the relevant XPath exists
+    relevant_xpath = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:EconomicOperatorShortList/cbc:MaximumQuantity"
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info(
+            "No maximum candidates data found. Skipping parse_lot_maximum_candidates."
+        )
+        return None
 
     result = {"tender": {"lots": []}}
 
@@ -43,6 +54,7 @@ def parse_lot_maximum_candidates(xml_content):
 
 def merge_lot_maximum_candidates(release_json, lot_maximum_candidates_data):
     if not lot_maximum_candidates_data:
+        logger.info("No lot maximum candidates data to merge.")
         return
 
     existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
@@ -58,3 +70,8 @@ def merge_lot_maximum_candidates(release_json, lot_maximum_candidates_data):
             ]["maximumCandidates"]
         else:
             existing_lots.append(new_lot)
+
+    logger.info(
+        "Merged maximum candidates data for %d lots.",
+        len(lot_maximum_candidates_data["tender"]["lots"]),
+    )

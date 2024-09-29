@@ -53,10 +53,18 @@ def parse_bt197_bt106_unpublished_justification_code(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    # Check if the relevant XPath exists
+    relevant_xpath = "//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-acc']/cbc:ReasonCode"
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info(
+            "No unpublished justification code data found for BT-197(BT-106). Skipping parse_bt197_bt106_unpublished_justification_code."
+        )
+        return None
+
     result = {"withheldInformation": []}
 
     reason_code = root.xpath(
-        "//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-acc']/cbc:ReasonCode/text()",
+        f"{relevant_xpath}/text()",
         namespaces=namespaces,
     )
 
@@ -94,8 +102,8 @@ def merge_bt197_bt106_unpublished_justification_code(
         None: The function updates the release_json in-place.
     """
     if not unpublished_justification_code_data:
-        logger.warning(
-            "No unpublished justification code data to merge for BT-197(BT-106)",
+        logger.info(
+            "No unpublished justification code data to merge for BT-197(BT-106)"
         )
         return
 

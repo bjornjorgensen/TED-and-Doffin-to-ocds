@@ -30,10 +30,18 @@ def parse_bt198_bt106_unpublished_access_date(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    # Check if the relevant XPath exists
+    relevant_xpath = "//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-acc']/efbc:PublicationDate"
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info(
+            "No unpublished access date data found for BT-198(BT-106). Skipping parse_bt198_bt106_unpublished_access_date."
+        )
+        return None
+
     result = {"withheldInformation": []}
 
     publication_date = root.xpath(
-        "//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-acc']/efbc:PublicationDate/text()",
+        f"{relevant_xpath}/text()",
         namespaces=namespaces,
     )
 
@@ -60,7 +68,7 @@ def merge_bt198_bt106_unpublished_access_date(
         None: The function updates the release_json in-place.
     """
     if not unpublished_access_date_data:
-        logger.warning("No unpublished access date data to merge for BT-198(BT-106)")
+        logger.info("No unpublished access date data to merge for BT-198(BT-106)")
         return
 
     withheld_info = release_json.setdefault("withheldInformation", [])
