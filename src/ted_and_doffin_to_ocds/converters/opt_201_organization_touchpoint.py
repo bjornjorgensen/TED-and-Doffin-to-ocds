@@ -19,10 +19,15 @@ def parse_touchpoint_technical_identifier(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    touchpoints = root.xpath(
-        "//efac:organization/efac:touchpoint/cac:partyIdentification/cbc:ID[@schemeName='touchpoint']",
-        namespaces=namespaces,
-    )
+    # Check if the relevant XPath exists
+    relevant_xpath = "//efac:organization/efac:touchpoint/cac:partyIdentification/cbc:ID[@schemeName='touchpoint']"
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info(
+            "No touchpoint technical identifier data found. Skipping parse_touchpoint_technical_identifier."
+        )
+        return None
+
+    touchpoints = root.xpath(relevant_xpath, namespaces=namespaces)
 
     result = {"touchpoints": []}
     for touchpoint in touchpoints:
@@ -33,7 +38,7 @@ def parse_touchpoint_technical_identifier(xml_content):
 
 def merge_touchpoint_technical_identifier(release_json, touchpoint_data):
     if not touchpoint_data:
-        logger.warning("No touchpoint Technical Identifier data to merge")
+        logger.info("No touchpoint Technical Identifier data to merge")
         return
 
     parties = release_json.setdefault("parties", [])
@@ -46,8 +51,8 @@ def merge_touchpoint_technical_identifier(release_json, touchpoint_data):
                 touchpoint_id,
             )
         else:
-            logger.info(
-                "party with touchpoint Technical Identifier %s already exists",
+            logger.debug(
+                "Party with touchpoint Technical Identifier %s already exists",
                 touchpoint_id,
             )
 

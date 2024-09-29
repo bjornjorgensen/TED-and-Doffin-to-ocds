@@ -29,6 +29,14 @@ def parse_selection_criteria_threshold_number(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    # Check if the relevant XPath exists
+    relevant_xpath = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']//efac:SelectionCriteria//efac:CriterionParameter[efbc:ParameterCode/@listName='number-threshold']"
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info(
+            "No selection criteria threshold number data found. Skipping parse_selection_criteria_threshold_number."
+        )
+        return None
+
     result = {"tender": {"lots": []}}
 
     xpath_query = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']"
@@ -78,7 +86,7 @@ def merge_selection_criteria_threshold_number(release_json, threshold_number_dat
         None: The function updates the release_json in-place.
     """
     if not threshold_number_data:
-        logger.warning("No selection criteria threshold number data to merge")
+        logger.info("No selection criteria threshold number data to merge")
         return
 
     tender = release_json.setdefault("tender", {})

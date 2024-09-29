@@ -29,6 +29,14 @@ def parse_bt195_bt106_unpublished_identifier(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    # Check if the relevant XPath exists
+    relevant_xpath = "//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-acc']"
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info(
+            "No unpublished identifier data found for BT-195(BT-106). Skipping parse_bt195_bt106_unpublished_identifier."
+        )
+        return None
+
     result = {"withheldInformation": []}
 
     contract_folder_id = root.xpath(
@@ -36,7 +44,7 @@ def parse_bt195_bt106_unpublished_identifier(xml_content):
         namespaces=namespaces,
     )
     field_identifier = root.xpath(
-        "//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-acc']/efbc:FieldIdentifierCode/text()",
+        f"{relevant_xpath}/efbc:FieldIdentifierCode/text()",
         namespaces=namespaces,
     )
 
@@ -63,7 +71,7 @@ def merge_bt195_bt106_unpublished_identifier(release_json, unpublished_identifie
         None: The function updates the release_json in-place.
     """
     if not unpublished_identifier_data:
-        logger.warning("No unpublished identifier data to merge")
+        logger.info("No unpublished identifier data to merge for BT-195(BT-106)")
         return
 
     withheld_info = release_json.setdefault("withheldInformation", [])

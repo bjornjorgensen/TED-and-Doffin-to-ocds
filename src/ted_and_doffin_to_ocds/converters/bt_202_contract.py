@@ -1,7 +1,10 @@
 # converters/bt_202_Contract.py
 
 import uuid
+import logging
 from lxml import etree
+
+logger = logging.getLogger(__name__)
 
 
 def parse_contract_modification_summary(xml_content):
@@ -17,12 +20,17 @@ def parse_contract_modification_summary(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    # Check if the relevant XPath exists
+    relevant_xpath = "//efac:ContractModification"
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info(
+            "No contract modification data found. Skipping parse_contract_modification_summary."
+        )
+        return None
+
     result = {"contracts": []}
 
-    contract_modifications = root.xpath(
-        "//efac:ContractModification",
-        namespaces=namespaces,
-    )
+    contract_modifications = root.xpath(relevant_xpath, namespaces=namespaces)
 
     for modification in contract_modifications:
         contract_id = modification.xpath(
@@ -74,6 +82,7 @@ def parse_contract_modification_summary(xml_content):
 
 def merge_contract_modification_summary(release_json, modification_data):
     if not modification_data:
+        logger.info("No contract modification data to merge")
         return
 
     existing_contracts = release_json.setdefault("contracts", [])
@@ -108,3 +117,8 @@ def merge_contract_modification_summary(release_json, modification_data):
                 existing_contract["awardIDs"] = new_contract["awardIDs"]
         else:
             existing_contracts.append(new_contract)
+
+    logger.info(
+        "Merged contract modification data for %d contracts",
+        len(modification_data["contracts"]),
+    )
