@@ -1,0 +1,25 @@
+{
+  "id": "2023-618728",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "2023-648589",
+    "title": "Rammeavtale IKT utstyr",
+    "mainProcurementCategory": "goods",
+    "description": "Hammerfest kommune gjennomfører anbudskonkurranse for IKT matriell. Anskaffelsen gjennomføres i fellesskap blant 23 kommuner. Hver enkelt kommune som deltar i konkurransen er egne juridiske enheter og vil inngå egne kontrakter med valgt leverandør for leveransen. Kommunene hadde til sammen&nbsp;86628&nbsp;innbyggere pr. 4 kvartal 2022. Det er estimert at anskaffelsen vil ha en verdi på 150-250 million kroner ved en avtaleperiode på 4 år.",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "30200000"
+        }
+      }
+    ]
+  },
+  "date": "2023-06-29T12:00:00+02:00"
+}

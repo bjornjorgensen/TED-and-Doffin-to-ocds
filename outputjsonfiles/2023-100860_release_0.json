@@ -1,0 +1,104 @@
+{
+  "id": "d0b9cb0e-6bb1-4ad6-b369-05af6a80035f",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0025"
+    },
+    "id": "28ebf39d-11b6-49aa-a731-40caddad3072",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "variantPolicy": "Unknown",
+          "advancedElectronicSignatureRequired": false,
+          "multipleBidsAllowed": false,
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Vektertjenester for Flytoget - kvalifisering",
+        "identifiers": {
+          "id": "30072",
+          "scheme": "internal"
+        },
+        "mainProcurementCategory": "services",
+        "description": "Flytoget skal anskaffe vektertjenester for en periode fra 01.03.24 til og med 31.01.28. Vektertjenestene er primært på Oslo lufthavn, men også ambulerende på andre stasjoner.Formålet med denne anskaffelsen er å ta frem den beste leveransen som finnes i markedet målt i sikkerhet, kvalitet og pålitelighet, til en konkurransedyktig pris.",
+        "secondStage": {
+          "minimumCandidates": 3
+        },
+        "contractPeriod": {
+          "startDate": "2024-03-01T00:00:00+00:00",
+          "endDate": "2028-01-31T23:59:59+00:00"
+        },
+        "contractTerms": {
+          "electronicInvoicingPolicy": "required",
+          "hasElectronicOrdering": false
+        },
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "hasElectronicAuction": false
+        },
+        "hasRecurrence": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "216310540",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/216310540.aspx",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "Vektertjenester for Flytoget - kvalifisering",
+    "mainProcurementCategory": "services",
+    "description": "Flytoget skal anskaffe vektertjenester for en periode fra 01.03.24 til og med 31.01.28. Vektertjenestene er primært på Oslo lufthavn, men også ambulerende på andre stasjoner.Formålet med denne anskaffelsen er å ta frem den beste leveransen som finnes i markedet målt i sikkerhet, kvalitet og pålitelighet, til en konkurransedyktig pris.",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "79713000"
+        },
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "country": "NO"
+          }
+        ],
+        "deliveryLocations": [
+          {
+            "description": "Oslo lufthavn og Oslo S, med muligheter for andre stasjoner på Flytogets strekning."
+          },
+          {
+            "description": "Oslo Airport and Oslo S, with possibilities for other stations on the Flytoget stretch."
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "region": "NO082"
+      },
+      {
+        "region": "NO082"
+      },
+      {
+        "country": "NO"
+      },
+      {
+        "description": "Oslo lufthavn og Oslo S, med muligheter for andre stasjoner på Flytogets strekning."
+      },
+      {
+        "description": "Oslo Airport and Oslo S, with possibilities for other stations on the Flytoget stretch."
+      }
+    ],
+    "procurementMethodDetails": "Flytoget skal tilby det beste transporttilbudet til og fra Oslo lufthavn med vekt på sikkerhet, punktlighet og service.Ved hjelp av en unik identitet, den mest effektive løsningen og entusiastiske medarbeidere sørger vi for at reisende kommer trygt frem til avtalt tid. For å kunne løse dette kreves en sikker og effektiv verdihåndtering ved Oslo lufthavn. I tillegg vektlegges sikkerheten til våre reisende spesielt ved det største knutepunktet, Oslo lufthavn. Dette krever tilstedeværelse fra vektere som kan bidra med trygghet, sikkerhet og service for våre reisende og ansatte.Krav til ytelse og utførelse av forespurte tjenester innen vektertjenester er beskrevet i kravspesifikasjonen.Ved Oslo lufthavn er det krav til at det skal være bemanning av vektere i henhold til det behovet Flytoget har. De øvrige stasjoner er ikke planlagt med vektertjenester og er hovedsakelig aktuelt for bemanning ved planlagte avvik (buss for tog) og ved spesielle hendelser eller arrangementer langs strekningen.Vekter skal være en serviceperson overfor reisende og ansatte ved Flytoget. Vekter skal bidra til å være med på å skape et positivt og trygt miljø. Vekter skal kunne gi akutt førstehjelp i de situasjoner der det er nødvendig og kunne assistere ved brannalarmer, heisalarmer, bombetrusler og uplanlagte avvik (driftsstans) med mer i henhold til Flytogets instruks. Vekter skal også kunne opprettholde ro og orden inntil politiet eventuelt kommer til stedet.Vektere ved Oslo lufthavn skal kontrollere passering av reisende ved billettautomater og på plattform, herunder kunne kontrollere om reisende løser billett, bistå med informasjon og veiledning overfor publikum. Vektere skal også overvåke/kontrollere/aksjonere på uønsket aktivitet i og rundt området til Flytogets reisende.Bane NOR er ansvarlig for drift og vedlikehold av jernbanenettet som Flytoget opererer på. Hvert år gjennomføres det planlagt vedlikehold på jernbanenettet som medfører at Flytoget opererer «buss for tog» på hele eller deler av strekningen i kortere perioder. Dette vil medføre behov for justering av ytelsen innen vektertjenester ved alle Flytogets stasjoner i disse avviksperiodene. Dette vil bli avtalt i henhold til avviksplan og bestilles som ekstra bemanning av vektere."
+  },
+  "date": "2023-11-13T07:13:34+00:00"
+}
