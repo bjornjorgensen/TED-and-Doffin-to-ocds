@@ -5195,7 +5195,7 @@ def process_single_file(input_path, output_folder, processor):
         logger.exception("Error processing file %s", input_path)
 
 
-def main(input_path=None, output_folder=None, ocid_prefix=None, scheme=None):
+def main(input_path=None, output_folder=None, ocid_prefix=None, scheme=None):  # noqa: ARG001
     if input_path is None or output_folder is None or ocid_prefix is None:
         parser = argparse.ArgumentParser(description="Convert XML eForms to OCDS JSON")
         parser.add_argument("input", help="Input XML file or folder containing XML files")
