@@ -2,6 +2,7 @@
 import json
 import logging
 from pathlib import Path
+import os
 import argparse
 from ted_and_doffin_to_ocds.converters.common_operations import (
     NoticeProcessor,
@@ -5182,7 +5183,7 @@ def process_single_file(input_path, output_folder, processor):
             # Write output
             output_file = output_folder / f"{input_path.stem}_release_{i}.json"
             with output_file.open("w", encoding="utf-8") as f:
-                json.dump(release_json, f, ensure_ascii=False, indent=2)
+                json.dump(release_json, f, ensure_ascii=False)
 
             logger.info(
                 "Conversion completed for %s, release %d. Output written to %s",
@@ -5195,23 +5196,37 @@ def process_single_file(input_path, output_folder, processor):
         logger.exception("Error processing file %s", input_path)
 
 
-def main(input_path=None, output_folder=None, ocid_prefix=None, scheme=None):  # noqa: ARG001
+def main(input_path=None, output_folder=None, ocid_prefix=None, scheme=None):
     if input_path is None or output_folder is None or ocid_prefix is None:
         parser = argparse.ArgumentParser(description="Convert XML eForms to OCDS JSON")
-        parser.add_argument("input", help="Input XML file or folder containing XML files")
+        parser.add_argument(
+            "input", help="Input XML file or folder containing XML files"
+        )
         parser.add_argument("output", help="Output folder for JSON files")
         parser.add_argument("ocid_prefix", help="Prefix for OCID")
-        parser.add_argument("--scheme", default="eu-oj", help="Scheme for related processes (default: eu-oj)")
+        parser.add_argument(
+            "--scheme",
+            default="eu-oj",
+            help="Scheme for related processes (default: eu-oj)",
+        )
         args = parser.parse_args()
 
-    input_path = Path(args.input)
-    output_folder = Path(args.output)
+        input_path = args.input
+        output_folder = args.output
+        ocid_prefix = args.ocid_prefix
+        scheme = args.scheme or "eu-oj"
+
+    input_path = Path(input_path)
+    output_folder = Path(output_folder)
     output_folder.mkdir(parents=True, exist_ok=True)
 
     configure_logging()
-    logger = logging.getLogger(__name__)
 
-    processor = NoticeProcessor(args.ocid_prefix, args.scheme)
+    if os.environ.get("GITHUB_ACTIONS") != "true":
+        logger = logging.getLogger(__name__)
+        logger.info("Running outside of GitHub Actions environment")
+
+    processor = NoticeProcessor(ocid_prefix, scheme)
 
     if input_path.is_file():
         logger.info("Processing single file: %s", input_path)
@@ -5219,9 +5234,16 @@ def main(input_path=None, output_folder=None, ocid_prefix=None, scheme=None):  #
     elif input_path.is_dir():
         logger.info("Processing directory: %s", input_path)
         for xml_file in input_path.glob("*.xml"):
+            logger.info("Processing file: %s", xml_file)
             process_single_file(xml_file, output_folder, processor)
     else:
-        logger.error("Input path %s is neither a file nor a directory", input_path)
+        logger.error(
+            "Error: Input path %s is neither a file nor a directory", input_path
+        )
+
+    logger.info("Processing complete.")
+    if os.environ.get("GITHUB_ACTIONS") != "true":
+        logger.info("Check app.log for details.")
 
 
 if __name__ == "__main__":

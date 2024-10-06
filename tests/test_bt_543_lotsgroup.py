@@ -4,6 +4,7 @@ import pytest
 import json
 import sys
 import logging
+import tempfile
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
@@ -16,7 +17,21 @@ def setup_logging():
     return logging.getLogger(__name__)
 
 
-def test_bt_543_lotsgroup_integration(tmp_path, setup_logging):
+@pytest.fixture
+def temp_output_dir():
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        yield Path(tmpdirname)
+
+
+def run_main_and_get_result(xml_file, output_dir):
+    main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
+    output_files = list(output_dir.glob("*.json"))
+    assert len(output_files) == 1, f"Expected 1 output file, got {len(output_files)}"
+    with output_files[0].open() as f:
+        return json.load(f)
+
+
+def test_bt_543_lotsgroup_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -36,10 +51,7 @@ def test_bt_543_lotsgroup_integration(tmp_path, setup_logging):
     xml_file = tmp_path / "test_input_award_criteria_complicated_lotsgroup.xml"
     xml_file.write_text(xml_content)
 
-    main(str(xml_file), "ocds-test-prefix")
-
-    with Path("output.json").open() as f:
-        result = json.load(f)
+    result = run_main_and_get_result(xml_file, temp_output_dir)
 
     logger.info("Result: %s", json.dumps(result, indent=2))
 
@@ -63,7 +75,7 @@ def test_bt_543_lotsgroup_integration(tmp_path, setup_logging):
     ), f"Expected weightingDescription '{expected_description}', got {lot_group['awardCriteria']['weightingDescription']}"
 
 
-def test_bt_543_lotsgroup_multiple_groups(tmp_path, setup_logging):
+def test_bt_543_lotsgroup_multiple_groups(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -93,10 +105,7 @@ def test_bt_543_lotsgroup_multiple_groups(tmp_path, setup_logging):
     xml_file = tmp_path / "test_input_multiple_lotsgroups.xml"
     xml_file.write_text(xml_content)
 
-    main(str(xml_file), "ocds-test-prefix")
-
-    with Path("output.json").open() as f:
-        result = json.load(f)
+    result = run_main_and_get_result(xml_file, temp_output_dir)
 
     logger.info("Result: %s", json.dumps(result, indent=2))
 
@@ -122,7 +131,9 @@ def test_bt_543_lotsgroup_multiple_groups(tmp_path, setup_logging):
         ), f"Expected weightingDescription '{expected_description}', got {lot_group['awardCriteria']['weightingDescription']}"
 
 
-def test_bt_543_lotsgroup_missing_calculation_expression(tmp_path, setup_logging):
+def test_bt_543_lotsgroup_missing_calculation_expression(
+    tmp_path, setup_logging, temp_output_dir
+):
     logger = setup_logging
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -142,10 +153,7 @@ def test_bt_543_lotsgroup_missing_calculation_expression(tmp_path, setup_logging
     xml_file = tmp_path / "test_input_missing_calculation_expression.xml"
     xml_file.write_text(xml_content)
 
-    main(str(xml_file), "ocds-test-prefix")
-
-    with Path("output.json").open() as f:
-        result = json.load(f)
+    result = run_main_and_get_result(xml_file, temp_output_dir)
 
     logger.info("Result: %s", json.dumps(result, indent=2))
 
@@ -165,7 +173,9 @@ def test_bt_543_lotsgroup_missing_calculation_expression(tmp_path, setup_logging
     ), "Did not expect 'weightingDescription' when CalculationExpression is missing"
 
 
-def test_bt_543_lotsgroup_empty_calculation_expression(tmp_path, setup_logging):
+def test_bt_543_lotsgroup_empty_calculation_expression(
+    tmp_path, setup_logging, temp_output_dir
+):
     logger = setup_logging
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -185,10 +195,7 @@ def test_bt_543_lotsgroup_empty_calculation_expression(tmp_path, setup_logging):
     xml_file = tmp_path / "test_input_empty_calculation_expression.xml"
     xml_file.write_text(xml_content)
 
-    main(str(xml_file), "ocds-test-prefix")
-
-    with Path("output.json").open() as f:
-        result = json.load(f)
+    result = run_main_and_get_result(xml_file, temp_output_dir)
 
     logger.info("Result: %s", json.dumps(result, indent=2))
 
