@@ -67,12 +67,30 @@ project_root/
 To convert an XML file to OCDS JSON format, activate the Poetry environment and run the following command:
 
 ```
-poetry run python main.py path/to/your/input.xml ocid_prefix_value
+poetry run python src/ted_and_doffin_to_ocds/main.py input_path output_folder ocid_prefix [--scheme scheme_value]
 ```
 
-Replace `path/to/your/input.xml` with the path to your input XML file (from either TED or Doffin) and `ocid_prefix_value` with your desired OCID prefix.
+Arguments:
+- `input_path`: Path to your input XML file or folder containing XML files
+- `output_folder`: Folder where the output JSON files will be saved
+- `ocid_prefix`: Your desired OCID prefix
+- `--scheme`: (Optional) Scheme for related processes (default: eu-oj)
 
-The converted OCDS JSON will be saved in `output.json` in the project root directory.
+Example:
+```
+poetry run python src/ted_and_doffin_to_ocds/main.py xmlfile/ outputjsonfiles/ ocds-abcd1234 --scheme test-bj
+```
+This command will:
+- Process all XML files in the `xmlfile/` directory
+- Save the resulting JSON files in the `outputjsonfiles/` directory
+- Use `ocds-abcd1234` as the OCID prefix
+- Use `test-bj` as the scheme for related processes
+
+If processing a single file, simply replace the input folder with the path to your XML file:
+```
+poetry run python src/ted_and_doffin_to_ocds/main.py path/to/your/input.xml outputjsonfiles/ ocds-abcd1234
+```
+The converter will process the input XML file(s) from either TED or Doffin and generate the corresponding OCDS JSON file(s) in the specified output folder.
 
 ## Testing
 
