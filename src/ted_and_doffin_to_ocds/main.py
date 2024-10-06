@@ -5195,17 +5195,14 @@ def process_single_file(input_path, output_folder, processor):
         logger.exception("Error processing file %s", input_path)
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Convert XML eForms to OCDS JSON")
-    parser.add_argument("input", help="Input XML file or folder containing XML files")
-    parser.add_argument("output", help="Output folder for JSON files")
-    parser.add_argument("ocid_prefix", help="Prefix for OCID")
-    parser.add_argument(
-        "--scheme",
-        default="eu-oj",
-        help="Scheme for related processes (default: eu-oj)",
-    )
-    args = parser.parse_args()
+def main(input_path=None, output_folder=None, ocid_prefix=None, scheme=None):
+    if input_path is None or output_folder is None or ocid_prefix is None:
+        parser = argparse.ArgumentParser(description="Convert XML eForms to OCDS JSON")
+        parser.add_argument("input", help="Input XML file or folder containing XML files")
+        parser.add_argument("output", help="Output folder for JSON files")
+        parser.add_argument("ocid_prefix", help="Prefix for OCID")
+        parser.add_argument("--scheme", default="eu-oj", help="Scheme for related processes (default: eu-oj)")
+        args = parser.parse_args()
 
     input_path = Path(args.input)
     output_folder = Path(args.output)
