@@ -8,12 +8,12 @@ readme = "README.md"
 packages = [{include = "ted_and_doffin_to_ocds", from = "src"}]
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.13"
 lxml = "^5"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8"
-ruff = "^0.6"
+ruff = "^0.8"
 
 [build-system]
 requires = ["poetry-core"]
@@ -28,7 +28,7 @@ testpaths = [
 
 [tool.ruff]
 # Ruff configuration
-target-version = "py312"
+target-version = "py313"
 
 [tool.ruff.lint]
 select = [

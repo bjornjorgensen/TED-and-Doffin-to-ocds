@@ -5,6 +5,7 @@ This project converts XML eForm data from TED (Tenders Electronic Daily) and Dof
 ## Table of Contents
 
 - [Project Overview](#project-overview)
+- [Importance of OCDS](#importance-of-ocds)
 - [File Structure](#file-structure)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -17,6 +18,28 @@ This project converts XML eForm data from TED (Tenders Electronic Daily) and Dof
 ## Project Overview
 
 The XML to OCDS Converter processes eForms XML data from TED and Doffin and converts it into the OCDS JSON format. It handles various business terms (BT) and ensures proper mapping according to the OCDS eForm profile, accommodating the specificities of both TED and Doffin data structures.
+
+## Importance of OCDS
+
+The Open Contracting Data Standard (OCDS) is crucial for several reasons:
+
+1. **Transparency**: OCDS promotes transparency in public contracting by providing a standardized format for publishing procurement information, making it easier for citizens, journalists, and civil society organizations to access and analyze procurement data.
+
+2. **Interoperability**: By using a common data standard, OCDS enables different systems and databases to exchange information seamlessly, facilitating data sharing between government agencies, across borders, and with third-party applications.
+
+3. **Data Quality**: The structured format of OCDS encourages better data quality and completeness, as it provides a clear schema for what information should be included and how it should be formatted.
+
+4. **Efficiency**: Standardized data allows for more efficient analysis of procurement trends, performance, and value for money, helping governments and other stakeholders to make better-informed decisions.
+
+5. **Competition**: By making procurement information more accessible and comparable, OCDS can help increase competition among suppliers, potentially leading to better value for money in public contracting.
+
+6. **Innovation**: The availability of standardized, machine-readable procurement data enables the development of innovative tools and applications for data analysis, visualization, and monitoring.
+
+7. **Anti-corruption**: Standardized, open contracting data makes it easier to detect and prevent fraud and corruption in public procurement by enabling better oversight and analysis of contracting patterns.
+
+8. **Economic Development**: OCDS can contribute to economic development by providing businesses, especially small and medium enterprises, with better access to procurement opportunities and market intelligence.
+
+By converting TED and Doffin eForm data to OCDS format, this project contributes to these benefits, making European and Norwegian procurement data more accessible, usable, and valuable for a wide range of stakeholders.
 
 ## File Structure
 
