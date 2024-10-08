@@ -1,44 +1,60 @@
-# tests/test_OPP_050_organization.py
+# tests/test_opp_050_organization.py
+
 from pathlib import Path
 import pytest
 import json
 import sys
+import tempfile
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
 from src.ted_and_doffin_to_ocds.main import main
 
 
-def test_opp_050_organization_buyers_group_lead_indicator_integration(tmp_path):
+@pytest.fixture
+def temp_output_dir():
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        yield Path(tmpdirname)
+
+
+def run_main_and_get_result(xml_file, output_dir):
+    main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
+    output_files = list(output_dir.glob("*.json"))
+    assert len(output_files) == 1, f"Expected 1 output file, got {len(output_files)}"
+    with output_files[0].open() as f:
+        return json.load(f)
+
+
+def test_opp_050_organization_integration(tmp_path, temp_output_dir):
     xml_content = """
-    <root xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-          xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+          xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
-          xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1"
-          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+          xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+          xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
         <ext:UBLExtensions>
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:organizations>
-                            <efac:organization>
+                        <efac:Organizations>
+                            <efac:Organization>
                                 <efbc:GroupLeadIndicator>true</efbc:GroupLeadIndicator>
-                                <efac:company>
-                                    <cac:partyIdentification>
+                                <efac:Company>
+                                    <cac:PartyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:partyIdentification>
-                                </efac:company>
-                            </efac:organization>
-                            <efac:organization>
+                                    </cac:PartyIdentification>
+                                </efac:Company>
+                            </efac:Organization>
+                            <efac:Organization>
                                 <efbc:GroupLeadIndicator>false</efbc:GroupLeadIndicator>
-                                <efac:company>
-                                    <cac:partyIdentification>
+                                <efac:Company>
+                                    <cac:PartyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
-                                    </cac:partyIdentification>
-                                </efac:company>
-                            </efac:organization>
-                        </efac:organizations>
+                                    </cac:PartyIdentification>
+                                </efac:Company>
+                            </efac:Organization>
+                        </efac:Organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -48,31 +64,12 @@ def test_opp_050_organization_buyers_group_lead_indicator_integration(tmp_path):
     xml_file = tmp_path / "test_input_buyers_group_lead_indicator.xml"
     xml_file.write_text(xml_content)
 
-    main(str(xml_file), "ocds-test-prefix")
-
-    with Path("output.json").open() as f:
-        result = json.load(f)
+    result = run_main_and_get_result(xml_file, temp_output_dir)
 
     assert "parties" in result
-    assert len(result["parties"]) == 2
-
-    lead_buyer = next(
-        (party for party in result["parties"] if party["id"] == "ORG-0001"),
-        None,
-    )
-    assert lead_buyer is not None
-    assert "roles" in lead_buyer
-    assert "leadbuyer" in lead_buyer["roles"]
-
-    non_lead_buyer = next(
-        (party for party in result["parties"] if party["id"] == "ORG-0002"),
-        None,
-    )
-    assert non_lead_buyer is not None
-    assert "roles" not in non_lead_buyer or "leadbuyer" not in non_lead_buyer.get(
-        "roles",
-        [],
-    )
+    assert len(result["parties"]) == 1
+    assert result["parties"][0] == {"id": "ORG-0001", "roles": ["leadBuyer"]}
+    assert not any(party["id"] == "ORG-0002" for party in result["parties"])
 
 
 if __name__ == "__main__":

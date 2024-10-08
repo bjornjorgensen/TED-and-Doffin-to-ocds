@@ -1,6 +1,9 @@
-# converters/OPP_050_organization.py
+# converters/opp_050_organization.py
 
 from lxml import etree
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def parse_buyers_group_lead_indicator(xml_content):
@@ -8,50 +11,54 @@ def parse_buyers_group_lead_indicator(xml_content):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    result = {"leadbuyerIds": []}
+    result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:organizations/efac:organization",
-        namespaces=namespaces,
+        "//efac:Organizations/efac:Organization", namespaces=namespaces
     )
     for org in organizations:
         lead_indicator = org.xpath(
-            "efbc:GroupLeadIndicator/text()",
-            namespaces=namespaces,
+            "efbc:GroupLeadIndicator/text()", namespaces=namespaces
         )
         if lead_indicator and lead_indicator[0].lower() == "true":
             org_id = org.xpath(
-                "efac:company/cac:partyIdentification/cbc:ID[@schemeName='organization']/text()",
+                "efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
                 namespaces=namespaces,
             )
             if org_id:
-                result["leadbuyerIds"].append(org_id[0])
+                result["parties"].append({"id": org_id[0], "roles": ["leadBuyer"]})
 
-    return result if result["leadbuyerIds"] else None
+    return result if result["parties"] else None
 
 
-def merge_buyers_group_lead_indicator(release_json, buyers_group_lead_data):
-    if not buyers_group_lead_data:
+def merge_buyers_group_lead_indicator(release_json, lead_buyer_data):
+    if not lead_buyer_data:
+        logger.info("No Buyers Group Lead Indicator data to merge")
         return
 
     parties = release_json.setdefault("parties", [])
+    for new_party in lead_buyer_data["parties"]:
+        existing_party = next(
+            (party for party in parties if party["id"] == new_party["id"]), None
+        )
+        if existing_party:
+            existing_party.setdefault("roles", []).extend(
+                role
+                for role in new_party["roles"]
+                if role not in existing_party["roles"]
+            )
+        else:
+            parties.append(new_party)
 
-    for party in parties:
-        if party["id"] in buyers_group_lead_data["leadbuyerIds"]:
-            if "roles" not in party:
-                party["roles"] = []
-            if "leadbuyer" not in party["roles"]:
-                party["roles"].append("leadbuyer")
-
-    # If a lead buyer is not in parties, add it
-    for lead_buyer_id in buyers_group_lead_data["leadbuyerIds"]:
-        if not any(party["id"] == lead_buyer_id for party in parties):
-            parties.append({"id": lead_buyer_id, "roles": ["leadbuyer"]})
+    logger.info(
+        "Merged Buyers Group Lead Indicator data for %(num_parties)s parties",
+        {"num_parties": len(lead_buyer_data["parties"])},
+    )
