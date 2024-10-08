@@ -1,70 +1,94 @@
-# bt_263_procedure.py
+# converters/bt_263_procedure.py
 
+import logging
 from lxml import etree
+
+logger = logging.getLogger(__name__)
 
 
 def parse_additional_classification_code_procedure(xml_content):
+    """
+    Parse the XML content to extract the additional classification code for the procedure.
+
+    Args:
+        xml_content (str): The XML content to parse.
+
+    Returns:
+        dict: A dictionary containing the parsed additional classification code data for the procedure.
+        None: If no relevant data is found.
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
+
+    # Check if the relevant XPath exists
+    relevant_xpath = "/*/cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode"
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info(
+            "No additional classification code data found for procedure. Skipping parse_additional_classification_code_procedure."
+        )
+        return None
 
     result = {"tender": {"items": []}}
 
-    classifications = root.xpath(
-        "//cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode",
-        namespaces=namespaces,
-    )
+    classification_codes = root.xpath(relevant_xpath, namespaces=namespaces)
 
-    if classifications:
-        item = {"id": "1", "additionalClassifications": []}
-
-        for classification in classifications:
-            code = classification.text
-            scheme = classification.get("listName", "").upper()
-            item["additionalClassifications"].append({"id": code, "scheme": scheme})
-
+    if classification_codes:
+        item = {
+            "id": "1",
+            "additionalClassifications": [
+                {"id": code.text} for code in classification_codes
+            ],
+        }
         result["tender"]["items"].append(item)
 
-    return result
+    return result if result["tender"]["items"] else None
 
 
 def merge_additional_classification_code_procedure(
-    release_json,
-    classification_code_data,
+    release_json, additional_classification_data
 ):
-    existing_items = release_json.setdefault("tender", {}).setdefault("items", [])
+    """
+    Merge the parsed additional classification code data for procedure into the main OCDS release JSON.
 
-    for new_item in classification_code_data["tender"]["items"]:
+    Args:
+        release_json (dict): The main OCDS release JSON to be updated.
+        additional_classification_data (dict): The parsed additional classification code data for procedure to be merged.
+
+    Returns:
+        None: The function updates the release_json in-place.
+    """
+    if not additional_classification_data:
+        logger.info("No additional classification code data for procedure to merge")
+        return
+
+    tender = release_json.setdefault("tender", {})
+    existing_items = tender.setdefault("items", [])
+
+    for new_item in additional_classification_data["tender"]["items"]:
         existing_item = next(
             (item for item in existing_items if item["id"] == new_item["id"]),
             None,
         )
-
         if existing_item:
             existing_classifications = existing_item.setdefault(
-                "additionalClassifications",
-                [],
+                "additionalClassifications", []
             )
             for new_classification in new_item["additionalClassifications"]:
-                existing_classification = next(
-                    (
-                        ec
-                        for ec in existing_classifications
-                        if ec.get("scheme") == new_classification["scheme"]
-                    ),
-                    None,
-                )
-                if existing_classification:
-                    existing_classification.update(new_classification)
-                else:
+                if new_classification not in existing_classifications:
                     existing_classifications.append(new_classification)
         else:
             existing_items.append(new_item)
+
+    logger.info(
+        "Merged additional classification code data for procedure with %d classifications",
+        len(
+            additional_classification_data["tender"]["items"][0][
+                "additionalClassifications"
+            ]
+        ),
+    )

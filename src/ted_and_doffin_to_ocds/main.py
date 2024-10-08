@@ -1274,8 +1274,8 @@ from ted_and_doffin_to_ocds.converters.bt_262_procedure import (
     merge_main_classification_code_procedure,
 )
 from ted_and_doffin_to_ocds.converters.bt_263_lot import (
-    parse_additional_classification_code_lot,
-    merge_additional_classification_code_lot,
+    parse_additional_classification_code,
+    merge_additional_classification_code,
 )
 from ted_and_doffin_to_ocds.converters.bt_263_part import (
     parse_additional_classification_code_part,
@@ -3831,9 +3831,9 @@ def process_bt_sections(release_json, xml_content):
             "Main Classification Code for procedure (BT_262_procedure)",
         ),
         (
-            parse_additional_classification_code_lot,
-            merge_additional_classification_code_lot,
-            "Additional Classification Code for Lot (BT_263_lot)",
+            parse_additional_classification_code,
+            merge_additional_classification_code,
+            "Additional Classification Code (BT-263-Lot)",
         ),
         (
             parse_additional_classification_code_part,
