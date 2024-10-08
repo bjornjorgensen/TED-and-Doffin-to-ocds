@@ -12,46 +12,40 @@ def parse_ubo_city(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
         "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"parties": []}
 
-    organizations = root.xpath("//efac:organizations", namespaces=namespaces)
-
-    for organization in organizations:
-        org_id = organization.xpath(
-            "efac:organization/efac:company/cac:partyIdentification/cbc:ID[@schemeName='organization']/text()",
+    organizations = root.xpath(
+        "//efac:Organizations/efac:Organization", namespaces=namespaces
+    )
+    for org in organizations:
+        org_id = org.xpath(
+            "efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
             namespaces=namespaces,
         )
-
         if org_id:
             party = {"id": org_id[0], "beneficialOwners": []}
 
-            ubos = organization.xpath(
-                "efac:UltimateBeneficialOwner",
+            ubos = root.xpath(
+                "//efac:Organizations/efac:UltimateBeneficialOwner",
                 namespaces=namespaces,
             )
             for ubo in ubos:
                 ubo_id = ubo.xpath(
-                    "cbc:ID[@schemeName='ubo']/text()",
-                    namespaces=namespaces,
+                    "cbc:ID[@schemeName='ubo']/text()", namespaces=namespaces
                 )
-                city_name = ubo.xpath(
-                    "cac:ResidenceAddress/cbc:CityName/text()",
-                    namespaces=namespaces,
+                city = ubo.xpath(
+                    "cac:ResidenceAddress/cbc:CityName/text()", namespaces=namespaces
                 )
-
-                if ubo_id and city_name:
-                    beneficial_owner = {
-                        "id": ubo_id[0],
-                        "address": {"locality": city_name[0]},
-                    }
-                    party["beneficialOwners"].append(beneficial_owner)
+                if ubo_id and city:
+                    party["beneficialOwners"].append(
+                        {"id": ubo_id[0], "address": {"locality": city[0]}}
+                    )
 
             if party["beneficialOwners"]:
                 result["parties"].append(party)
@@ -61,7 +55,7 @@ def parse_ubo_city(xml_content):
 
 def merge_ubo_city(release_json, ubo_city_data):
     if not ubo_city_data:
-        logger.warning("No ubo City data to merge")
+        logger.info("No UBO city data to merge")
         return
 
     existing_parties = release_json.setdefault("parties", [])
@@ -73,23 +67,22 @@ def merge_ubo_city(release_json, ubo_city_data):
         )
         if existing_party:
             existing_beneficial_owners = existing_party.setdefault(
-                "beneficialOwners",
-                [],
+                "beneficialOwners", []
             )
-            for new_bo in new_party["beneficialOwners"]:
-                existing_bo = next(
+            for new_ubo in new_party["beneficialOwners"]:
+                existing_ubo = next(
                     (
-                        bo
-                        for bo in existing_beneficial_owners
-                        if bo["id"] == new_bo["id"]
+                        ubo
+                        for ubo in existing_beneficial_owners
+                        if ubo["id"] == new_ubo["id"]
                     ),
                     None,
                 )
-                if existing_bo:
-                    existing_bo.setdefault("address", {}).update(new_bo["address"])
+                if existing_ubo:
+                    existing_ubo.setdefault("address", {}).update(new_ubo["address"])
                 else:
-                    existing_beneficial_owners.append(new_bo)
+                    existing_beneficial_owners.append(new_ubo)
         else:
             existing_parties.append(new_party)
 
-    logger.info("Merged ubo City data for %d parties", len(ubo_city_data["parties"]))
+    logger.info("Merged UBO city data for %d parties", len(ubo_city_data["parties"]))

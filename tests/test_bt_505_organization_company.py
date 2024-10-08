@@ -1,62 +1,71 @@
 # tests/test_bt_505_organization_company.py
-from pathlib import Path
-import pytest
-import json
-import sys
 
-# Add the parent directory to sys.path to import main
-sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main
+from ted_and_doffin_to_ocds.converters.bt_505_organization_company import (
+    parse_organization_website,
+    merge_organization_website,
+)
 
 
-def test_bt_505_organization_company_integration(tmp_path):
+def test_parse_organization_website():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-          xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionContent>
-                    <efext:EformsExtension>
-                        <efac:organizations>
-                            <efac:organization>
-                                <efac:company>
-                                    <cac:partyIdentification>
-                                        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:partyIdentification>
-                                    <cbc:WebsiteURI>http://xyz.europa.eu/</cbc:WebsiteURI>
-                                </efac:company>
-                            </efac:organization>
-                        </efac:organizations>
-                    </efext:EformsExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
+          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+          xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1">
+        <efext:EformsExtension>
+            <efac:Organizations>
+                <efac:Organization>
+                    <efac:Company>
+                        <cac:PartyIdentification>
+                            <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                        </cac:PartyIdentification>
+                        <cbc:WebsiteURI>http://xyz.europa.eu/</cbc:WebsiteURI>
+                    </efac:Company>
+                </efac:Organization>
+            </efac:Organizations>
+        </efext:EformsExtension>
     </root>
     """
-    xml_file = tmp_path / "test_input_organization_website.xml"
-    xml_file.write_text(xml_content)
 
-    main(str(xml_file), "ocds-test-prefix")
-
-    with Path("output.json").open() as f:
-        result = json.load(f)
-
-    assert "parties" in result, "Expected 'parties' in result"
-    assert (
-        len(result["parties"]) == 1
-    ), f"Expected 1 party, got {len(result['parties'])}"
-
-    party = result["parties"][0]
-    assert party["id"] == "ORG-0001", f"Expected party id 'ORG-0001', got {party['id']}"
-    assert "details" in party, "Expected 'details' in party"
-    assert "url" in party["details"], "Expected 'url' in party details"
-    assert (
-        party["details"]["url"] == "http://xyz.europa.eu/"
-    ), f"Expected url 'http://xyz.europa.eu/', got {party['details']['url']}"
+    result = parse_organization_website(xml_content)
+    assert result == {
+        "parties": [{"id": "ORG-0001", "details": {"url": "http://xyz.europa.eu/"}}]
+    }
 
 
-if __name__ == "__main__":
-    pytest.main()
+def test_merge_organization_website():
+    release_json = {"parties": [{"id": "ORG-0001", "name": "Test Organization"}]}
+
+    organization_website_data = {
+        "parties": [{"id": "ORG-0001", "details": {"url": "http://xyz.europa.eu/"}}]
+    }
+
+    merge_organization_website(release_json, organization_website_data)
+
+    assert release_json == {
+        "parties": [
+            {
+                "id": "ORG-0001",
+                "name": "Test Organization",
+                "details": {"url": "http://xyz.europa.eu/"},
+            }
+        ]
+    }
+
+
+def test_merge_organization_website_new_party():
+    release_json = {"parties": [{"id": "ORG-0001", "name": "Test Organization"}]}
+
+    organization_website_data = {
+        "parties": [{"id": "ORG-0002", "details": {"url": "http://abc.europa.eu/"}}]
+    }
+
+    merge_organization_website(release_json, organization_website_data)
+
+    assert release_json == {
+        "parties": [
+            {"id": "ORG-0001", "name": "Test Organization"},
+            {"id": "ORG-0002", "details": {"url": "http://abc.europa.eu/"}},
+        ]
+    }

@@ -6,57 +6,56 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_touchpoint_city(xml_content):
+def parse_organization_touchpoint_city(xml_content):
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
         "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:organizations/efac:organization",
-        namespaces=namespaces,
+        "//efac:Organizations/efac:Organization", namespaces=namespaces
     )
+    for org in organizations:
+        touchpoint = org.xpath("efac:TouchPoint", namespaces=namespaces)
+        if touchpoint:
+            touchpoint = touchpoint[0]
+            touchpoint_id = touchpoint.xpath(
+                "cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']/text()",
+                namespaces=namespaces,
+            )
+            city = touchpoint.xpath(
+                "cac:PostalAddress/cbc:CityName/text()", namespaces=namespaces
+            )
+            company_id = org.xpath(
+                "efac:Company/cac:PartyLegalEntity/cbc:CompanyID/text()",
+                namespaces=namespaces,
+            )
 
-    for organization in organizations:
-        touchpoint_id = organization.xpath(
-            "efac:touchpoint/cac:partyIdentification/cbc:ID[@schemeName='touchpoint']/text()",
-            namespaces=namespaces,
-        )
-        city_name = organization.xpath(
-            "efac:touchpoint/cac:PostalAddress/cbc:CityName/text()",
-            namespaces=namespaces,
-        )
-        company_id = organization.xpath(
-            "efac:company/cac:partyLegalEntity/cbc:companyID/text()",
-            namespaces=namespaces,
-        )
-
-        if touchpoint_id and city_name:
-            party = {"id": touchpoint_id[0], "address": {"locality": city_name[0]}}
-            if company_id:
-                party["identifier"] = {"id": company_id[0], "scheme": "internal"}
-            result["parties"].append(party)
+            if touchpoint_id and city:
+                party = {"id": touchpoint_id[0], "address": {"locality": city[0]}}
+                if company_id:
+                    party["identifier"] = {"id": company_id[0], "scheme": "internal"}
+                result["parties"].append(party)
 
     return result if result["parties"] else None
 
 
-def merge_touchpoint_city(release_json, city_data):
-    if not city_data:
-        logger.warning("No touchpoint City data to merge")
+def merge_organization_touchpoint_city(release_json, organization_touchpoint_city_data):
+    if not organization_touchpoint_city_data:
+        logger.info("No organization touchpoint city data to merge")
         return
 
     existing_parties = release_json.setdefault("parties", [])
 
-    for new_party in city_data["parties"]:
+    for new_party in organization_touchpoint_city_data["parties"]:
         existing_party = next(
             (party for party in existing_parties if party["id"] == new_party["id"]),
             None,
@@ -68,4 +67,7 @@ def merge_touchpoint_city(release_json, city_data):
         else:
             existing_parties.append(new_party)
 
-    logger.info("Merged touchpoint City data for %d parties", len(city_data["parties"]))
+    logger.info(
+        "Merged organization touchpoint city data for %d parties",
+        len(organization_touchpoint_city_data["parties"]),
+    )

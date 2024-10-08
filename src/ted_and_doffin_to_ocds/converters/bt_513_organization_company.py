@@ -12,45 +12,41 @@ def parse_organization_city(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
         "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:organizations/efac:organization",
-        namespaces=namespaces,
+        "//efac:Organizations/efac:Organization", namespaces=namespaces
     )
-
-    for organization in organizations:
-        org_id = organization.xpath(
-            "efac:company/cac:partyIdentification/cbc:ID[@schemeName='organization']/text()",
+    for org in organizations:
+        org_id = org.xpath(
+            "efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
             namespaces=namespaces,
         )
-        city_name = organization.xpath(
-            "efac:company/cac:PostalAddress/cbc:CityName/text()",
-            namespaces=namespaces,
+        city = org.xpath(
+            "efac:Company/cac:PostalAddress/cbc:CityName/text()", namespaces=namespaces
         )
 
-        if org_id and city_name:
-            party = {"id": org_id[0], "address": {"locality": city_name[0]}}
+        if org_id and city:
+            party = {"id": org_id[0], "address": {"locality": city[0]}}
             result["parties"].append(party)
 
     return result if result["parties"] else None
 
 
-def merge_organization_city(release_json, city_data):
-    if not city_data:
-        logger.warning("No organization City data to merge")
+def merge_organization_city(release_json, organization_city_data):
+    if not organization_city_data:
+        logger.info("No organization city data to merge")
         return
 
     existing_parties = release_json.setdefault("parties", [])
 
-    for new_party in city_data["parties"]:
+    for new_party in organization_city_data["parties"]:
         existing_party = next(
             (party for party in existing_parties if party["id"] == new_party["id"]),
             None,
@@ -61,6 +57,6 @@ def merge_organization_city(release_json, city_data):
             existing_parties.append(new_party)
 
     logger.info(
-        "Merged organization City data for %s parties",
-        len(city_data["parties"]),
+        "Merged organization city data for %d parties",
+        len(organization_city_data["parties"]),
     )

@@ -1,79 +1,113 @@
 # tests/test_bt_513_ubo.py
-from pathlib import Path
-import pytest
-import json
-import sys
 
-# Add the parent directory to sys.path to import main
-sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main
+from ted_and_doffin_to_ocds.converters.bt_513_ubo import parse_ubo_city, merge_ubo_city
 
 
-def test_bt_513_ubo_integration(tmp_path):
+def test_parse_ubo_city():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-          xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionContent>
-                    <efext:EformsExtension>
-                        <efac:organizations>
-                            <efac:organization>
-                                <efac:company>
-                                    <cac:partyIdentification>
-                                        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:partyIdentification>
-                                </efac:company>
-                            </efac:organization>
-                            <efac:UltimateBeneficialOwner>
-                                <cbc:ID schemeName="ubo">ubo-0001</cbc:ID>
-                                <cac:ResidenceAddress>
-                                    <cbc:CityName>MouseTown</cbc:CityName>
-                                </cac:ResidenceAddress>
-                            </efac:UltimateBeneficialOwner>
-                        </efac:organizations>
-                    </efext:EformsExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
+          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+          xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1">
+        <efext:EformsExtension>
+            <efac:Organizations>
+                <efac:Organization>
+                    <efac:Company>
+                        <cac:PartyIdentification>
+                            <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                        </cac:PartyIdentification>
+                    </efac:Company>
+                </efac:Organization>
+                <efac:UltimateBeneficialOwner>
+                    <cbc:ID schemeName="ubo">UBO-0001</cbc:ID>
+                    <cac:ResidenceAddress>
+                        <cbc:CityName>MouseTown</cbc:CityName>
+                    </cac:ResidenceAddress>
+                </efac:UltimateBeneficialOwner>
+            </efac:Organizations>
+        </efext:EformsExtension>
     </root>
     """
-    xml_file = tmp_path / "test_input_bt_513_ubo.xml"
-    xml_file.write_text(xml_content)
 
-    main(str(xml_file), "ocds-test-prefix")
-
-    with Path("output.json").open() as f:
-        result = json.load(f)
-
-    assert "parties" in result, "Expected 'parties' in result"
-    assert (
-        len(result["parties"]) == 1
-    ), f"Expected 1 party, got {len(result['parties'])}"
-
-    party = result["parties"][0]
-    assert party["id"] == "ORG-0001", f"Expected party id 'ORG-0001', got {party['id']}"
-    assert "beneficialOwners" in party, "Expected 'beneficialOwners' in party"
-    assert (
-        len(party["beneficialOwners"]) == 1
-    ), f"Expected 1 beneficial owner, got {len(party['beneficialOwners'])}"
-
-    bo = party["beneficialOwners"][0]
-    assert (
-        bo["id"] == "ubo-0001"
-    ), f"Expected beneficial owner id 'ubo-0001', got {bo['id']}"
-    assert "address" in bo, "Expected 'address' in beneficial owner"
-    assert (
-        "locality" in bo["address"]
-    ), "Expected 'locality' in beneficial owner address"
-    expected_locality = "MouseTown"
-    assert (
-        bo["address"]["locality"] == expected_locality
-    ), f"Expected locality '{expected_locality}', got {bo['address']['locality']}"
+    result = parse_ubo_city(xml_content)
+    assert result == {
+        "parties": [
+            {
+                "id": "ORG-0001",
+                "beneficialOwners": [
+                    {"id": "UBO-0001", "address": {"locality": "MouseTown"}}
+                ],
+            }
+        ]
+    }
 
 
-if __name__ == "__main__":
-    pytest.main()
+def test_merge_ubo_city():
+    release_json = {
+        "parties": [
+            {
+                "id": "ORG-0001",
+                "name": "Test Organization",
+                "beneficialOwners": [{"id": "UBO-0001", "name": "John Doe"}],
+            }
+        ]
+    }
+
+    ubo_city_data = {
+        "parties": [
+            {
+                "id": "ORG-0001",
+                "beneficialOwners": [
+                    {"id": "UBO-0001", "address": {"locality": "MouseTown"}}
+                ],
+            }
+        ]
+    }
+
+    merge_ubo_city(release_json, ubo_city_data)
+
+    assert release_json == {
+        "parties": [
+            {
+                "id": "ORG-0001",
+                "name": "Test Organization",
+                "beneficialOwners": [
+                    {
+                        "id": "UBO-0001",
+                        "name": "John Doe",
+                        "address": {"locality": "MouseTown"},
+                    }
+                ],
+            }
+        ]
+    }
+
+
+def test_merge_ubo_city_new_party():
+    release_json = {"parties": [{"id": "ORG-0001", "name": "Test Organization"}]}
+
+    ubo_city_data = {
+        "parties": [
+            {
+                "id": "ORG-0002",
+                "beneficialOwners": [
+                    {"id": "UBO-0002", "address": {"locality": "CheeseTown"}}
+                ],
+            }
+        ]
+    }
+
+    merge_ubo_city(release_json, ubo_city_data)
+
+    assert release_json == {
+        "parties": [
+            {"id": "ORG-0001", "name": "Test Organization"},
+            {
+                "id": "ORG-0002",
+                "beneficialOwners": [
+                    {"id": "UBO-0002", "address": {"locality": "CheeseTown"}}
+                ],
+            },
+        ]
+    }
