@@ -12,46 +12,37 @@ def parse_ubo_telephone(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
         "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:organizations/efac:organization",
-        namespaces=namespaces,
+        "//efac:Organizations/efac:Organization", namespaces=namespaces
     )
-
-    for organization in organizations:
-        org_id = organization.xpath(
-            "efac:company/cac:partyIdentification/cbc:ID[@schemeName='organization']/text()",
+    for org in organizations:
+        org_id = org.xpath(
+            "efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
             namespaces=namespaces,
         )
-
         if org_id:
             party = {"id": org_id[0], "beneficialOwners": []}
 
             ubos = root.xpath(
-                "//efac:organizations/efac:UltimateBeneficialOwner",
+                "//efac:Organizations/efac:UltimateBeneficialOwner",
                 namespaces=namespaces,
             )
             for ubo in ubos:
                 ubo_id = ubo.xpath(
-                    "cbc:ID[@schemeName='ubo']/text()",
-                    namespaces=namespaces,
+                    "cbc:ID[@schemeName='ubo']/text()", namespaces=namespaces
                 )
-                ubo_telephone = ubo.xpath(
-                    "cac:Contact/cbc:Telephone/text()",
-                    namespaces=namespaces,
-                )
-
+                ubo_telephone = ubo.xpath("cbc:Telephone/text()", namespaces=namespaces)
                 if ubo_id and ubo_telephone:
                     party["beneficialOwners"].append(
-                        {"id": ubo_id[0], "telephone": ubo_telephone[0]},
+                        {"id": ubo_id[0], "telephone": ubo_telephone[0]}
                     )
 
             if party["beneficialOwners"]:
@@ -62,7 +53,7 @@ def parse_ubo_telephone(xml_content):
 
 def merge_ubo_telephone(release_json, ubo_telephone_data):
     if not ubo_telephone_data:
-        logger.warning("No ubo Telephone data to merge")
+        logger.info("No UBO telephone data to merge")
         return
 
     existing_parties = release_json.setdefault("parties", [])
@@ -74,8 +65,7 @@ def merge_ubo_telephone(release_json, ubo_telephone_data):
         )
         if existing_party:
             existing_beneficial_owners = existing_party.setdefault(
-                "beneficialOwners",
-                [],
+                "beneficialOwners", []
             )
             for new_ubo in new_party["beneficialOwners"]:
                 existing_ubo = next(
@@ -94,6 +84,5 @@ def merge_ubo_telephone(release_json, ubo_telephone_data):
             existing_parties.append(new_party)
 
     logger.info(
-        "Merged ubo Telephone data for %s parties",
-        len(ubo_telephone_data["parties"]),
+        "Merged UBO telephone data for %d parties", len(ubo_telephone_data["parties"])
     )

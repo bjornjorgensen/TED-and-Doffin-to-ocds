@@ -1,24 +1,12 @@
-# tests/test_bt_635_LotResult.py
-from pathlib import Path
-import pytest
-import json
-import sys
-import logging
+# tests/test_bt_635_lotresult.py
 
-# Add the parent directory to sys.path to import main
-sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from ted_and_doffin_to_ocds.converters.bt_635_lotresult import (
+    parse_buyer_review_requests_count,
+    merge_buyer_review_requests_count,
+)
 
 
-@pytest.fixture(scope="module")
-def setup_logging():
-    configure_logging()
-    return logging.getLogger(__name__)
-
-
-def test_bt_635_lot_result_integration(tmp_path, setup_logging):
-    logger = setup_logging
-
+def test_parse_buyer_review_requests_count():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -26,51 +14,95 @@ def test_bt_635_lot_result_integration(tmp_path, setup_logging):
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionContent>
-                    <efext:EformsExtension>
-                        <efac:noticeResult>
-                            <efac:LotResult>
-                                <efac:AppealRequestsStatistics>
-                                    <efbc:StatisticsCode listName="irregularity-type">review-requests</efbc:StatisticsCode>
-                                    <efbc:StatisticsNumeric>2</efbc:StatisticsNumeric>
-                                </efac:AppealRequestsStatistics>
-                                <efac:TenderLot>
-                                    <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
-                                </efac:TenderLot>
-                            </efac:LotResult>
-                        </efac:noticeResult>
-                    </efext:EformsExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
+        <efext:EformsExtension>
+            <efac:NoticeResult>
+                <efac:LotResult>
+                    <efac:AppealRequestsStatistics>
+                        <efbc:StatisticsNumeric>2</efbc:StatisticsNumeric>
+                    </efac:AppealRequestsStatistics>
+                    <efac:TenderLot>
+                        <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+                    </efac:TenderLot>
+                </efac:LotResult>
+            </efac:NoticeResult>
+        </efext:EformsExtension>
     </root>
     """
-    xml_file = tmp_path / "test_input_buyer_review_requests_count.xml"
-    xml_file.write_text(xml_content)
 
-    main(str(xml_file), "ocds-test-prefix")
-
-    with Path("output.json").open() as f:
-        result = json.load(f)
-
-    logger.info("Result: %s", json.dumps(result, indent=2))
-
-    assert "statistics" in result, "Expected 'statistics' in result"
-    assert (
-        len(result["statistics"]) == 1
-    ), f"Expected 1 statistic, got {len(result['statistics'])}"
-
-    statistic = result["statistics"][0]
-    assert (
-        statistic["scope"] == "complaints"
-    ), f"Expected scope 'complaints', got {statistic['scope']}"
-    assert (
-        statistic["relatedLot"] == "LOT-0001"
-    ), f"Expected relatedLot 'LOT-0001', got {statistic['relatedLot']}"
-    assert statistic["value"] == 2, f"Expected value 2, got {statistic['value']}"
+    result = parse_buyer_review_requests_count(xml_content)
+    assert result == {
+        "statistics": [{"value": 2.0, "scope": "complaints", "relatedLot": "LOT-0001"}]
+    }
 
 
-if __name__ == "__main__":
-    pytest.main(["-v", "-s"])
+def test_merge_buyer_review_requests_count():
+    release_json = {
+        "statistics": [
+            {"id": "1", "scope": "complaints", "relatedLot": "LOT-0001", "value": 1.0}
+        ]
+    }
+
+    buyer_review_requests_count_data = {
+        "statistics": [{"value": 2.0, "scope": "complaints", "relatedLot": "LOT-0001"}]
+    }
+
+    merge_buyer_review_requests_count(release_json, buyer_review_requests_count_data)
+
+    assert release_json == {
+        "statistics": [
+            {"id": "1", "scope": "complaints", "relatedLot": "LOT-0001", "value": 2.0}
+        ]
+    }
+
+
+def test_merge_buyer_review_requests_count_new_statistic():
+    release_json = {
+        "statistics": [
+            {"id": "1", "scope": "complaints", "relatedLot": "LOT-0001", "value": 1.0}
+        ]
+    }
+
+    buyer_review_requests_count_data = {
+        "statistics": [{"value": 3.0, "scope": "complaints", "relatedLot": "LOT-0002"}]
+    }
+
+    merge_buyer_review_requests_count(release_json, buyer_review_requests_count_data)
+
+    assert release_json == {
+        "statistics": [
+            {"id": "1", "scope": "complaints", "relatedLot": "LOT-0001", "value": 1.0},
+            {"id": "2", "value": 3.0, "scope": "complaints", "relatedLot": "LOT-0002"},
+        ]
+    }
+
+
+def test_merge_buyer_review_requests_count_multiple_notices():
+    # Simulating multiple notices
+    release_json = {
+        "statistics": [
+            {"id": "1", "scope": "complaints", "relatedLot": "LOT-0001", "value": 1.0},
+            {"id": "2", "scope": "complaints", "relatedLot": "LOT-0002", "value": 2.0},
+            {"id": "3", "scope": "other", "relatedLot": "LOT-0003", "value": 3.0},
+            {"id": "9", "scope": "complaints", "relatedLot": "LOT-0004", "value": 4.0},
+        ]
+    }
+
+    buyer_review_requests_count_data = {
+        "statistics": [
+            {"value": 5.0, "scope": "complaints", "relatedLot": "LOT-0005"},
+            {"value": 6.0, "scope": "complaints", "relatedLot": "LOT-0006"},
+        ]
+    }
+
+    merge_buyer_review_requests_count(release_json, buyer_review_requests_count_data)
+
+    assert release_json == {
+        "statistics": [
+            {"id": "1", "scope": "complaints", "relatedLot": "LOT-0001", "value": 1.0},
+            {"id": "2", "scope": "complaints", "relatedLot": "LOT-0002", "value": 2.0},
+            {"id": "3", "scope": "other", "relatedLot": "LOT-0003", "value": 3.0},
+            {"id": "9", "scope": "complaints", "relatedLot": "LOT-0004", "value": 4.0},
+            {"id": "10", "value": 5.0, "scope": "complaints", "relatedLot": "LOT-0005"},
+            {"id": "11", "value": 6.0, "scope": "complaints", "relatedLot": "LOT-0006"},
+        ]
+    }

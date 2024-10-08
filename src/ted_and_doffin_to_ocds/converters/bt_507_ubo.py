@@ -12,60 +12,51 @@ def parse_ubo_country_subdivision(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
         "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:organizations/efac:organization",
-        namespaces=namespaces,
+        "//efac:Organizations/efac:Organization", namespaces=namespaces
     )
-
-    for organization in organizations:
-        org_id = organization.xpath(
-            "efac:company/cac:partyIdentification/cbc:ID[@schemeName='organization']/text()",
+    for org in organizations:
+        org_id = org.xpath(
+            "efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
             namespaces=namespaces,
         )
-
         if org_id:
+            party = {"id": org_id[0], "beneficialOwners": []}
+
             ubos = root.xpath(
-                "//efac:organizations/efac:UltimateBeneficialOwner",
+                "//efac:Organizations/efac:UltimateBeneficialOwner",
                 namespaces=namespaces,
             )
-            beneficial_owners = []
-
             for ubo in ubos:
                 ubo_id = ubo.xpath(
-                    "cbc:ID[@schemeName='ubo']/text()",
+                    "cbc:ID[@schemeName='ubo']/text()", namespaces=namespaces
+                )
+                country_subdivision = ubo.xpath(
+                    "cac:ResidenceAddress/cbc:CountrySubentityCode[@listName='nuts-lvl3']/text()",
                     namespaces=namespaces,
                 )
-                country_subentity_code = ubo.xpath(
-                    "cac:ResidenceAddress/cbc:CountrySubentityCode[@listName='nuts']/text()",
-                    namespaces=namespaces,
-                )
+                if ubo_id and country_subdivision:
+                    party["beneficialOwners"].append(
+                        {"id": ubo_id[0], "address": {"region": country_subdivision[0]}}
+                    )
 
-                if ubo_id and country_subentity_code:
-                    beneficial_owner = {
-                        "id": ubo_id[0],
-                        "address": {"region": country_subentity_code[0]},
-                    }
-                    beneficial_owners.append(beneficial_owner)
-
-            if beneficial_owners:
-                party_data = {"id": org_id[0], "beneficialOwners": beneficial_owners}
-                result["parties"].append(party_data)
+            if party["beneficialOwners"]:
+                result["parties"].append(party)
 
     return result if result["parties"] else None
 
 
 def merge_ubo_country_subdivision(release_json, ubo_country_subdivision_data):
     if not ubo_country_subdivision_data:
-        logger.warning("No ubo country subdivision data to merge")
+        logger.info("No UBO country subdivision data to merge")
         return
 
     existing_parties = release_json.setdefault("parties", [])
@@ -77,26 +68,25 @@ def merge_ubo_country_subdivision(release_json, ubo_country_subdivision_data):
         )
         if existing_party:
             existing_beneficial_owners = existing_party.setdefault(
-                "beneficialOwners",
-                [],
+                "beneficialOwners", []
             )
-            for new_bo in new_party["beneficialOwners"]:
-                existing_bo = next(
+            for new_ubo in new_party["beneficialOwners"]:
+                existing_ubo = next(
                     (
-                        bo
-                        for bo in existing_beneficial_owners
-                        if bo["id"] == new_bo["id"]
+                        ubo
+                        for ubo in existing_beneficial_owners
+                        if ubo["id"] == new_ubo["id"]
                     ),
                     None,
                 )
-                if existing_bo:
-                    existing_bo.setdefault("address", {}).update(new_bo["address"])
+                if existing_ubo:
+                    existing_ubo.setdefault("address", {}).update(new_ubo["address"])
                 else:
-                    existing_beneficial_owners.append(new_bo)
+                    existing_beneficial_owners.append(new_ubo)
         else:
             existing_parties.append(new_party)
 
     logger.info(
-        "Merged ubo country subdivision data for %s parties",
+        "Merged UBO country subdivision data for %d parties",
         len(ubo_country_subdivision_data["parties"]),
     )

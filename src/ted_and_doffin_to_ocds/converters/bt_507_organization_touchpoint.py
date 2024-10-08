@@ -6,63 +6,62 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_touchpoint_country_subdivision(xml_content):
+def parse_organization_touchpoint_country_subdivision(xml_content):
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
         "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:organizations/efac:organization",
-        namespaces=namespaces,
+        "//efac:Organizations/efac:Organization", namespaces=namespaces
     )
+    for org in organizations:
+        touchpoint = org.xpath("efac:TouchPoint", namespaces=namespaces)
+        if touchpoint:
+            touchpoint = touchpoint[0]
+            touchpoint_id = touchpoint.xpath(
+                "cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']/text()",
+                namespaces=namespaces,
+            )
+            country_subdivision = touchpoint.xpath(
+                "cac:PostalAddress/cbc:CountrySubentityCode[@listName='nuts-lvl3']/text()",
+                namespaces=namespaces,
+            )
+            company_id = org.xpath(
+                "efac:Company/cac:PartyLegalEntity/cbc:CompanyID/text()",
+                namespaces=namespaces,
+            )
 
-    for organization in organizations:
-        company_id = organization.xpath(
-            "efac:company/cac:partyLegalEntity/cbc:companyID/text()",
-            namespaces=namespaces,
-        )
-        touchpoint_id = organization.xpath(
-            "efac:touchpoint/cac:partyIdentification/cbc:ID[@schemeName='touchpoint']/text()",
-            namespaces=namespaces,
-        )
-        country_subentity_code = organization.xpath(
-            "efac:touchpoint/cac:PostalAddress/cbc:CountrySubentityCode[@listName='nuts']/text()",
-            namespaces=namespaces,
-        )
-
-        if touchpoint_id and country_subentity_code:
-            party_data = {
-                "id": touchpoint_id[0],
-                "address": {"region": country_subentity_code[0]},
-            }
-            if company_id:
-                party_data["identifier"] = {"id": company_id[0], "scheme": "internal"}
-            result["parties"].append(party_data)
+            if touchpoint_id and country_subdivision:
+                party = {
+                    "id": touchpoint_id[0],
+                    "address": {"region": country_subdivision[0]},
+                }
+                if company_id:
+                    party["identifier"] = {"id": company_id[0], "scheme": "internal"}
+                result["parties"].append(party)
 
     return result if result["parties"] else None
 
 
-def merge_touchpoint_country_subdivision(
-    release_json,
-    touchpoint_country_subdivision_data,
+def merge_organization_touchpoint_country_subdivision(
+    release_json, organization_touchpoint_country_subdivision_data
 ):
-    if not touchpoint_country_subdivision_data:
-        logger.warning("No touchpoint country subdivision data to merge")
+    if not organization_touchpoint_country_subdivision_data:
+        logger.info("No organization touchpoint country subdivision data to merge")
         return
 
     existing_parties = release_json.setdefault("parties", [])
 
-    for new_party in touchpoint_country_subdivision_data["parties"]:
+    for new_party in organization_touchpoint_country_subdivision_data["parties"]:
         existing_party = next(
             (party for party in existing_parties if party["id"] == new_party["id"]),
             None,
@@ -75,6 +74,6 @@ def merge_touchpoint_country_subdivision(
             existing_parties.append(new_party)
 
     logger.info(
-        "Merged touchpoint country subdivision data for %s parties",
-        len(touchpoint_country_subdivision_data["parties"]),
+        "Merged organization touchpoint country subdivision data for %d parties",
+        len(organization_touchpoint_country_subdivision_data["parties"]),
     )
