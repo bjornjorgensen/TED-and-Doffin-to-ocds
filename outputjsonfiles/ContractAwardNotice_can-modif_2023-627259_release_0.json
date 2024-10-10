@@ -1,0 +1,133 @@
+{
+  "id": "2023-627259",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "2023-627259",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "not-allowed"
+        },
+        "title": "Anskaffelse av rapport – Integreringsloven – implementeringen av nye områder og grep",
+        "mainProcurementCategory": "services",
+        "description": "Integreringsloven trådte i kraft fra 1.1.2021. Loven følger opp hovedgrep tre om rask oppstart av kvalifisering og hovedgrep fire om at flere skal få formelle kvalifikasjoner gjennom introduksjonsprogrammet i regjeringens integreringsstrategi Integrering gjennom kunnskap. Integreringsloven erstatter lov om introduksjonsordning og norskopplæring for nyankomne innvandrere (introduksjonsloven). Integreringsloven er en del av en større integreringsreform, med vekt på å reformere og styrke virkemidlene for å kvalifisere nyankomne flyktninger og innvandrere til det norske arbeidsmarkedet. I loven reguleres noen nye områder og grep. Dette gjelder blant annet fylkeskommunens oppgaver på integreringsfeltet, innføring av kort programtid for deltakere i introduksjonsprogrammet med minimum utdanning på videregående nivå fra før og at 16- og 17-åringene ikke lenger er omfattet av loven. Departementet ønsker å følge disse områdene og grepene særskilt de første årene etter at loven trer i kraft, for å få kunnskap om implementeringen skjer i tråd med reguleringen og intensjonene for integreringsreformen, eller om det er behov for eventuelle justeringer. Det skal utarbeides en delrapport innen utgangen av uke 50, 2021. Videre skal det utarbeides en sluttrapport innen utgangen av uke 50, 2022. Oppdraget er omfattende og består av flere forskjellige områder. Oppdragsgiver kan selv vurdere om det er hensiktsmessig å dele de to leveransene opp i en eller flere rapporter.",
+        "contractPeriod": {
+          "durationInDays": 630
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "title": "Anskaffelse av rapport – Integreringsloven – implementeringen av nye områder og grep",
+    "mainProcurementCategory": "services",
+    "description": "Integreringsloven trådte i kraft fra 1.1.2021. Loven følger opp hovedgrep tre om rask oppstart av kvalifisering og hovedgrep fire om at flere skal få formelle kvalifikasjoner gjennom introduksjonsprogrammet i regjeringens integreringsstrategi Integrering gjennom kunnskap. Integreringsloven erstatter lov om introduksjonsordning og norskopplæring for nyankomne innvandrere (introduksjonsloven). Integreringsloven er en del av en større integreringsreform, med vekt på å reformere og styrke virkemidlene for å kvalifisere nyankomne flyktninger og innvandrere til det norske arbeidsmarkedet. I loven reguleres noen nye områder og grep. Dette gjelder blant annet fylkeskommunens oppgaver på integreringsfeltet, innføring av kort programtid for deltakere i introduksjonsprogrammet med minimum utdanning på videregående nivå fra før og at 16- og 17-åringene ikke lenger er omfattet av loven. Departementet ønsker å følge disse områdene og grepene særskilt de første årene etter at loven trer i kraft, for å få kunnskap om implementeringen skjer i tråd med reguleringen og intensjonene for integreringsreformen, eller om det er behov for eventuelle justeringer. Det skal utarbeides en delrapport innen utgangen av uke 50, 2021. Videre skal det utarbeides en sluttrapport innen utgangen av uke 50, 2022. Oppdraget er omfattende og består av flere forskjellige områder. Oppdragsgiver kan selv vurdere om det er hensiktsmessig å dele de to leveransene opp i en eller flere rapporter.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "73000000"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "73200000"
+        }
+      }
+    ]
+  },
+  "date": "2023-01-30T12:00:00+02:00",
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 3200000.0,
+          "currency": "NOK"
+        },
+        "tenderers": [
+          {
+            "id": "ORG-0002"
+          }
+        ]
+      }
+    ]
+  },
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Arbeids- og inkluderingsdepartementet",
+      "additionalIdentifiers": [
+        {
+          "id": "983 887 457",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Cecilie Uteng",
+        "telephone": "+47 22249090",
+        "email": "cecilie.uteng@aid.dep.no"
+      },
+      "details": {
+        "url": "https://www.regjeringen.no/no/dep/aid/id165/"
+      },
+      "address": {
+        "locality": "Oslo"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "FAFO Institutt for arbeidslivs- og velferdsforskning AS",
+      "additionalIdentifiers": [
+        {
+          "id": "986 343 113",
+          "scheme": "GB-COH"
+        }
+      ],
+      "address": {
+        "locality": "Oslo"
+      },
+      "roles": [
+        "tenderer"
+      ]
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Oslo Tingrett",
+      "contactPoint": {
+        "telephone": "+47 22035200",
+        "email": "oslo.tingrett@domstol.no"
+      },
+      "details": {
+        "url": "https://www.regjeringen.no/no/dep/asd/id165/"
+      },
+      "address": {
+        "locality": "OSLO"
+      }
+    }
+  ],
+  "awards": [
+    {
+      "id": "RES-0001",
+      "value": {
+        "amount": 3200000.0,
+        "currency": "NOK"
+      },
+      "relatedLots": [
+        "LOT-0000"
+      ]
+    }
+  ]
+}

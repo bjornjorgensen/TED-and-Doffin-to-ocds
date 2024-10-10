@@ -1,0 +1,74 @@
+{
+  "id": "2023-659744",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0025"
+    },
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "coveredBy": [
+          "GPA"
+        ],
+        "tenderPeriod": {
+          "endDate": "2099-01-01T11:59:59+00:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "not-allowed",
+          "languages": [
+            "en"
+          ]
+        },
+        "title": "HE 02 - Kransen nord",
+        "mainProcurementCategory": "works",
+        "description": "Entreprisen omfatter 225 meter byggegrop i Moss sentrum. Byggegropen skal etableres med kraftige støttekonstruksjoner, utgravning og avstivning, samt etablering av betongkulvert. Entreprisen skal også utføre gjennomslag og grensesnittsarbeider mot Mossetunnelen.",
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "title": "HE 02 - Kransen nord",
+    "mainProcurementCategory": "works",
+    "description": "Entreprisen omfatter 225 meter byggegrop i Moss sentrum. Byggegropen skal etableres med kraftige støttekonstruksjoner, utgravning og avstivning, samt etablering av betongkulvert. Entreprisen skal også utføre gjennomslag og grensesnittsarbeider mot Mossetunnelen.",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "45000000"
+        },
+        "relatedLot": "LOT-0000"
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "region": "NO082"
+      }
+    ]
+  },
+  "date": "2023-07-07T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Bane NOR SF ",
+      "additionalIdentifiers": [
+        {
+          "id": "917 082 308",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Ola Skeid",
+        "telephone": "+47 91516234",
+        "email": "ola.skeid@banenor.no"
+      },
+      "details": {
+        "url": "www.banenor.no"
+      },
+      "address": {
+        "locality": "Hamar"
+      }
+    }
+  ]
+}

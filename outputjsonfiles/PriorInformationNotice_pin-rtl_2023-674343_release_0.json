@@ -1,0 +1,342 @@
+{
+  "id": "2023-674343",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "coveredBy": [
+          "GPA"
+        ],
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "allowed",
+          "languages": [
+            "en"
+          ]
+        },
+        "title": "Veiledende kunngjøring: Reisebyråtjenester til kommuner i Innlandet 2023 - 2027",
+        "mainProcurementCategory": "services",
+        "description": "Leverandørmarkedet inviteres til å kommentere og gi innspill til utkastet til konkurransegrunnlaget som er vedlagt denne kunngjøringen. I planleggingsfasen av en anskaffelse er det anledning til å ha dialog med markedet, mens når konkurransen er kunngjort er det lite rom for å gjøre endringer. Leverandørene oppfordres derfor til å bruke denne muligheten til å komme med innspill og kommentarer. Spesielt ønsker vi kommentarer til kvalifikasjonskrav, evalueringskriterier og kontraktsvilkår. Vi vil også sette pris på forslag og kommentarer til andre deler av konkurransegrunnlaget. Tilbakemeldinger og innspill bes sendes via kommunikasjonsmodulen i Mercell innen 25.08.2023.",
+        "value": {
+          "amount": 9700000.0,
+          "currency": "NOK"
+        },
+        "contractPeriod": {
+          "durationInDays": 720
+        },
+        "awardCriteria": {
+          "criteria": [
+            {
+              "description": "Price is not the only award criterion and all criteria are stated only in the procurement documents."
+            }
+          ]
+        },
+        "options": {
+          "description": "Følgende organisasjoner har opsjon på å tiltre avtalen: Etnedal kommune Nord-Aurdal kommune Sør-Aurdal kommune Vang kommune Vestre Slidre kommune Øystre Slidre kommune Eidskog kommune Nord-Odal kommune Våler kommune Åsnes kommune"
+        },
+        "renewal": {
+          "description": "1+1 år",
+          "maximumRenewals": 0
+        },
+        "contractTerms": {
+          "electronicInvoicingPolicy": "allowed",
+          "hasElectronicOrdering": true,
+          "hasElectronicPayment": true
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "type": "suitability",
+              "description": "Det vises til vedlagte konkurransegrunnlag."
+            },
+            {
+              "type": "economic"
+            },
+            {
+              "type": "technical"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/208265464.aspx",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "Veiledende kunngjøring: Reisebyråtjenester til kommuner i Innlandet 2023 - 2027",
+    "mainProcurementCategory": "services",
+    "description": "Regionalt Innkjøp i Kongsvingerregionen planlegger å gjennomføre en konkurranse om levering av reisebyråtjenester. ",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "63510000"
+        },
+        "relatedLot": "LOT-0000"
+      }
+    ],
+    "value": {
+      "amount": 9700000.0,
+      "currency": "NOK"
+    },
+    "deliveryAddresses": [
+      {
+        "region": "NO020"
+      }
+    ]
+  },
+  "date": "2023-07-10T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Kongsvinger Kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "944117784",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "+47 62874000",
+        "email": "riik@kongsvinger.kommune.no"
+      },
+      "details": {
+        "url": "https://permalink.mercell.com/208265464.aspx"
+      },
+      "address": {
+        "locality": "KONGSVINGER"
+      },
+      "roles": [
+        "leadBuyer"
+      ]
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Elverum kommune",
+      "details": {
+        "url": "https://www.elverum.kommune.no/"
+      },
+      "contactPoint": {
+        "email": "postmottak@elverum.kommune.no"
+      },
+      "address": {
+        "locality": "Elverum"
+      }
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Hamar kommune",
+      "details": {
+        "url": "https://www.hamar.kommune.no/"
+      },
+      "contactPoint": {
+        "email": "postmottak@hamar.kommune.no"
+      },
+      "address": {
+        "locality": "Hamar"
+      }
+    },
+    {
+      "id": "ORG-0004",
+      "name": "Indigo IKS",
+      "details": {
+        "url": "https://www.indigo-ikt.no/author/indigo-ikt-iks/"
+      },
+      "contactPoint": {
+        "email": "post@indigo-ikt.no"
+      },
+      "address": {
+        "locality": "Hamar"
+      }
+    },
+    {
+      "id": "ORG-0005",
+      "name": "Kongsvinger kommune",
+      "details": {
+        "url": "https://www.kongsvinger.kommune.no"
+      },
+      "contactPoint": {
+        "email": "postmottak@kongsvinger.kommune.no"
+      },
+      "address": {
+        "locality": "Kongsvinger "
+      }
+    },
+    {
+      "id": "ORG-0006",
+      "name": "Ringsaker kommune",
+      "details": {
+        "url": "https://www.ringsaker.kommune.no"
+      },
+      "contactPoint": {
+        "email": "postmottak@ringsaker.kommune.no"
+      },
+      "address": {
+        "locality": "Brumunddal"
+      }
+    },
+    {
+      "id": "ORG-0007",
+      "name": "Stange kommune",
+      "details": {
+        "url": "https://www.stange.kommune.no/"
+      },
+      "contactPoint": {
+        "email": "post@stange.kommune.no"
+      },
+      "address": {
+        "locality": "Stange"
+      }
+    },
+    {
+      "id": "ORG-0008",
+      "name": "Etnedal kommune",
+      "details": {
+        "url": "https://www.etnedal.kommune.no/"
+      },
+      "contactPoint": {
+        "email": "postmottak@etnedal.kommune.no"
+      },
+      "address": {
+        "locality": "Etnedal"
+      }
+    },
+    {
+      "id": "ORG-0009",
+      "name": "Nord-Aurdal kommune",
+      "details": {
+        "url": "https://www.nord-aurdal.kommune.no/"
+      },
+      "contactPoint": {
+        "email": "nak@nord-aurdal.kommune.no"
+      },
+      "address": {
+        "locality": "Fagernes"
+      }
+    },
+    {
+      "id": "ORG-0010",
+      "name": "Sør-Aurdal kommune",
+      "details": {
+        "url": "https://www.sor-aurdal.kommune.no/"
+      },
+      "contactPoint": {
+        "email": "postmottak@sor-aurdal.kommune.no"
+      },
+      "address": {
+        "locality": "Bagn"
+      }
+    },
+    {
+      "id": "ORG-0011",
+      "name": "Vang kommune",
+      "details": {
+        "url": "https://www.vang.kommune.no/"
+      },
+      "contactPoint": {
+        "email": "post@vang.kommune.no"
+      },
+      "address": {
+        "locality": "Vang i Valdres"
+      }
+    },
+    {
+      "id": "ORG-0012",
+      "name": "Vestre Slidre kommune",
+      "details": {
+        "url": "https://www.vestre-slidre.kommune.no/"
+      },
+      "contactPoint": {
+        "email": "post@vestre-slidre.kommune.no"
+      },
+      "address": {
+        "locality": "Slidre"
+      }
+    },
+    {
+      "id": "ORG-0013",
+      "name": "Øystre Slidre kommune",
+      "details": {
+        "url": "https://www.oystre-slidre.kommune.no/"
+      },
+      "contactPoint": {
+        "email": "post@oystre-slidre.kommune.no"
+      },
+      "address": {
+        "locality": "Heggenes"
+      }
+    },
+    {
+      "id": "ORG-0014",
+      "name": "Eidskog kommune",
+      "details": {
+        "url": "https://www.eidskog.kommune.no/"
+      },
+      "contactPoint": {
+        "email": "postmottak@eidskog.kommune.no"
+      },
+      "address": {
+        "locality": "Skotterud"
+      }
+    },
+    {
+      "id": "ORG-0015",
+      "name": "Nord-Odal kommune",
+      "details": {
+        "url": "https://www.nord-odal.kommune.no/"
+      },
+      "contactPoint": {
+        "email": "postmottak@nord-odal.kommune.no"
+      },
+      "address": {
+        "locality": "Sagstua"
+      }
+    },
+    {
+      "id": "ORG-0016",
+      "name": "Våler kommune",
+      "details": {
+        "url": "https://www.vaaler-he.kommune.no/"
+      },
+      "contactPoint": {
+        "email": "postmottak@vaaler-he.kommune.no"
+      },
+      "address": {
+        "locality": "Våler i Solør"
+      }
+    },
+    {
+      "id": "ORG-0017",
+      "name": "Åsnes kommune",
+      "details": {
+        "url": "https://www.asnes.kommune.no/"
+      },
+      "contactPoint": {
+        "email": "post@asnes.kommune.no"
+      },
+      "address": {
+        "locality": "Flisa"
+      }
+    },
+    {
+      "id": "ORG-0018",
+      "name": "Romerike og Glåmdal tingrett",
+      "address": {
+        "locality": "Kongsvinger"
+      }
+    }
+  ]
+}

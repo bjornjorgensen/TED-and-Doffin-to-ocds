@@ -1,0 +1,48 @@
+{
+  "id": "2022-963627",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "2022-919032",
+    "title": "Konsulentoppdrag - evaluering av Tolletatens organisering",
+    "mainProcurementCategory": "services",
+    "description": "Tolletaten gjennomførte en større organisasjonsutvikling (OU) med virkning fra oktober 2020. Formålet med denne anskaffelsen er å gjennomføre en evaluering av Tolletatens organisasjon to år etter OU. Evalueringen skal kartlegge grad av måloppnåelse, sammenlignet med tidligere organisering. Målsetningene med OU var: • Mindre dublering av funksjoner • Robuste fagmiljøer • Økt styrbarhet og utviklingskraft - digitalisering • Nasjonale enheter og fellesfunksjoner • Klar fordeling av ansvar • Lik praksis og god kvalitet i oppgavegjennomføringen • Mer fleksibel ressursdisponering og bedre samhandling Evalueringen skal ta utgangspunkt i noen sentrale områder som vil kunne bidra til å danne et bilde av hvor langt organisasjonen er kommet i forhold til de ambisjonen som ble satt og de forventede effektene av omorganiseringen. For mer informasjon vises det til bilag 1A Spesifikasjon av oppdraget.",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "73220000"
+        }
+      }
+    ]
+  },
+  "date": "2022-11-18T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Tolletaten",
+      "additionalIdentifiers": [
+        {
+          "id": "880 455 702",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Trude Evensen Alvestad",
+        "telephone": "+47 22860312",
+        "email": "trude.evensen.alvestad@toll.no"
+      },
+      "details": {
+        "url": "http://www.toll.no"
+      },
+      "address": {
+        "locality": "OSLO"
+      }
+    }
+  ]
+}

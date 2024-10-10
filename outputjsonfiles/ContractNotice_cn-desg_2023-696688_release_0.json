@@ -1,0 +1,192 @@
+{
+  "id": "2023-696688",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "2023-696688",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "tenderPeriod": {
+          "endDate": "2023-07-30T23:59:00+02:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "allowed",
+          "languages": [
+            "en"
+          ]
+        },
+        "title": "Europan 17 - Østmarka",
+        "description": "Europeisk arkitektur- og byutviklingskonkurranse for arkitekter, landskapsarkitekter og planleggere under 40 år. Trondheim kommune er en av 5 norske aktører som lyser ut konkurranse under Europan 17 paraplyen. Trondheim kommune søker innspill til utforming av sykehjem, boliger og nærmiljø på en sensitiv tomt på Lade.",
+        "designContest": {
+          "followUpContracts": true,
+          "prizes": {
+            "details": [
+              {
+                "id": "0",
+                "rank": 1,
+                "description": "Vinnerutkast: 12 000 EUR Andreplass: 6 000 EUR"
+              }
+            ]
+          },
+          "juryMembers": [
+            {
+              "name": "Jacob Kamp"
+            },
+            {
+              "name": "Ida Winge Andersen"
+            },
+            {
+              "name": "Eli Grønn"
+            },
+            {
+              "name": "Luis Basabe Montalvo"
+            },
+            {
+              "name": "Katariina Haigh"
+            },
+            {
+              "name": "Ilkka Törmä"
+            },
+            {
+              "name": "Eili Vigestad Berge"
+            },
+            {
+              "name": "Cristian Ştefănescu - Vara"
+            },
+            {
+              "name": "Mette Gunnes - Vara"
+            }
+          ]
+        },
+        "awardCriteria": {
+          "criteria": [
+            {
+              "type": "cost"
+            },
+            {
+              "type": "price"
+            },
+            {
+              "type": "quality"
+            },
+            {
+              "description": "Fremgår av konkurranseprogrammet og regelverket for Europan 17 tilgjengelig på europan-europe.eu"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "accessDetails": "Unknown justification",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "accessDetailsURL": "https://www.europan-europe.eu"
+      }
+    ],
+    "title": "Europan 17 - Østmarka",
+    "description": "Europeisk arkitektur- og byutviklingskonkurranse for arkitekter, landskapsarkitekter og planleggere under 40 år. Trondheim kommune er en av 5 norske aktører som lyser ut konkurranse under Europan 17 paraplyen. Trondheim kommune søker innspill til utforming av sykehjem, boliger og nærmiljø på en sensitiv tomt på Lade.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "71220000"
+          },
+          {
+            "id": "71240000"
+          },
+          {
+            "id": "71400000"
+          },
+          {
+            "id": "71221000"
+          },
+          {
+            "id": "71222000"
+          },
+          {
+            "id": "71420000"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "71240000"
+        },
+        "deliveryLocations": [
+          {
+            "description": "Anywhere"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [],
+    "deliveryLocations": [
+      {
+        "description": "Anywhere"
+      }
+    ]
+  },
+  "date": "2023-03-28T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Trondheim kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "942 110 464",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Katrine  Sørstrøm",
+        "telephone": "+47 97743400",
+        "email": "eierskap.postmottak@trondheim.kommune.no"
+      },
+      "details": {
+        "url": "http://www.trondheim.kommune.no/"
+      },
+      "address": {
+        "locality": "Trondheim"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Trondheim kommune",
+      "contactPoint": {
+        "email": "eierskap.postmottak@trondheim.kommune.no"
+      },
+      "address": {
+        "locality": "Trondheim"
+      }
+    }
+  ]
+}

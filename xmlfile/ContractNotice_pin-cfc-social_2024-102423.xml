@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?><ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1" xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1" xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionContent>
+        <efext:EformsExtension>
+          <efbc:TransmissionDate>2024-02-19+00:00</efbc:TransmissionDate>
+          <efbc:TransmissionTime>07:34:00+00:00</efbc:TransmissionTime>
+          <efac:NoticeSubType>
+            <cbc:SubTypeCode listName="notice-subtype">14</cbc:SubTypeCode>
+          </efac:NoticeSubType>
+          <efac:Organizations>
+            <efac:Organization>
+              <efac:Company>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Ålesund kommune</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">Ålesund kommune</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Keiser Wilhelms gate 11</cbc:StreetName>
+                  <cbc:Department>Innkjøp</cbc:Department>
+                  <cbc:CityName>Ålesund</cbc:CityName>
+                  <cbc:PostalZone>6003</cbc:PostalZone>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">929911709</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Name>Even Arvik Langseth</cbc:Name>
+                  <cbc:Telephone>+4770162000</cbc:Telephone>
+                  <cbc:ElectronicMail>even.arvik.langseth@alesund.kommune.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+            <efac:Organization>
+              <efac:Company>
+                <cbc:WebsiteURI>https://www.domstol.no/no/domstoler/tingrett/more-og-romsdal-tingrett/</cbc:WebsiteURI>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Møre og Romsdal tingrett</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">Møre og Romsdal tingrett</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Postboks 1354</cbc:StreetName>
+                  <cbc:CityName>Ålesund</cbc:CityName>
+                  <cbc:PostalZone>6001</cbc:PostalZone>
+                  <cbc:CountrySubentityCode listName="nuts">NO0A3</cbc:CountrySubentityCode>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">929911709</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Telephone>70 33 47 00</cbc:Telephone>
+                  <cbc:ElectronicMail>more.og.romsdal.tingrett@domstol.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+          </efac:Organizations>
+        </efext:EformsExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:UBLVersionID>2.3</cbc:UBLVersionID>
+  <cbc:CustomizationID>eforms-sdk-1.7#extended#urn:fdc:anskaffelser.no:2023:eforms:eu</cbc:CustomizationID>
+  <cbc:ID schemeName="notice-id">2c234234-aaec-4210-8cbe-1803ecaee901</cbc:ID>
+  <cbc:ContractFolderID>d91f618f-7bf0-41bd-b227-7574301d2977</cbc:ContractFolderID>
+  <cbc:IssueDate>2024-02-19+00:00</cbc:IssueDate>
+  <cbc:IssueTime>07:33:58+00:00</cbc:IssueTime>
+  <cbc:VersionID>01</cbc:VersionID>
+  <cbc:RegulatoryDomain>32014L0023</cbc:RegulatoryDomain>
+  <cbc:NoticeTypeCode listName="competition">pin-cfc-social</cbc:NoticeTypeCode>
+  <cbc:NoticeLanguageCode>NOR</cbc:NoticeLanguageCode>
+  <cac:AdditionalNoticeLanguage>
+    <cbc:ID>ENG</cbc:ID>
+  </cac:AdditionalNoticeLanguage>
+  <cac:ContractingParty>
+    <cac:ContractingPartyType>
+      <cbc:PartyTypeCode listName="buyer-legal-type">la</cbc:PartyTypeCode>
+    </cac:ContractingPartyType>
+    <cac:ContractingPartyType>
+      <cbc:PartyTypeCode listName="buyer-contracting-type">cont-ent</cbc:PartyTypeCode>
+    </cac:ContractingPartyType>
+    <cac:ContractingActivity>
+      <cbc:ActivityTypeCode listName="authority-activity">gen-pub</cbc:ActivityTypeCode>
+    </cac:ContractingActivity>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+      </cac:PartyIdentification>
+    </cac:Party>
+  </cac:ContractingParty>
+  <cac:ProcurementProject>
+    <cbc:ID schemeName="InternalID">23/7053</cbc:ID>
+    <cbc:Name languageID="NOR">Tillatelsesordning for el-sparkesykler i Ålesund Kommune</cbc:Name>
+    <cbc:Name languageID="ENG">Permission scheme for electric scooters in Ålesund municipality.</cbc:Name>
+    <cbc:Description languageID="NOR">Ålesund kommune lyser ut løyve til å drive utleige av elsparkesyklar som gjeld for sesongen 2024. 
+Ålesund kommune kunngjer søknadsinformasjon for løyveperioden 15. april til 31. desember 2024 for utleige av elsparkesyklar på offentleg grunn. Det blir gitt løyve til 300 elsparkesyklar i sone 1 (Steinvågbrua - Fagerlia). Mengd elsparkesyklar i sone 1 fordelast likt på alle søkarar som fyller vilkåra for løyve, men likevel slik at kvar søkar maksimalt får det tal elsparkesyklar det er søkt om, sjå forskrifta § 5 bokstav c.   
+I resten av kommunen er det ikkje sett grense for mengd elsparkesyklar.   
+
+Søknaden skal sendast inn gjennom Ålesund kommune sin digitale søknadsportal innan 15.03.2023.
+https://skjema.alesund.kommune.no/skjema/ALE0320/Sknad_om_elsparkesykkelutleige</cbc:Description>
+    <cbc:Description languageID="ENG">Ålesund municipality is lighting out the licence to run the electrical park ready as debts for the 2024 season. 
+Ålesund municipality is announcing application information for the licence period from 15 April to 31 December 2024 for the elsparkesy ready on public ground. Permits are to be given to 300 electric parks ready in zone 1 (Steinvågbrua - Fagerlia). Mengd elsparkesyklar in zone 1 is distributed equally on all search routes that fulfil the terms for the permit, but still so that kvar searches maximum get the total electrical parking ready it is applied for, see regulations § 5 letter c.   
+In the rest of the municipality there is no limit for mengd elsparkesyklar.   
+
+The application shall be submitted through Ålesund municipality ́s digital application portal on 15.03.2023.
+https://skjema.alesund.kommune.no/skjema/ALE0320/Sknad_om_elsparkesykkelutleige</cbc:Description>
+    <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
+    <cac:MainCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">60000000</cbc:ItemClassificationCode>
+    </cac:MainCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">34000000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">34144900</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">34400000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">34420000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">34422000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">50111100</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">50111110</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:RealizedLocation>
+      <cac:Address>
+        <cbc:CityName>Ålesund</cbc:CityName>
+        <cbc:CountrySubentityCode listName="nuts">NO0A3</cbc:CountrySubentityCode>
+        <cac:Country>
+          <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:Address>
+    </cac:RealizedLocation>
+  </cac:ProcurementProject>
+  <cac:ProcurementProjectLot>
+    <cbc:ID schemeName="Lot">LOT-0000</cbc:ID>
+    <cac:TenderingTerms>
+      <ext:UBLExtensions>
+        <ext:UBLExtension>
+          <ext:ExtensionContent>
+            <efext:EformsExtension>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">sui-act</cbc:CriterionTypeCode>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+            </efext:EformsExtension>
+          </ext:ExtensionContent>
+        </ext:UBLExtension>
+      </ext:UBLExtensions>
+      <cac:TendererQualificationRequest>
+        <cac:SpecificTendererRequirement>
+          <cbc:TendererRequirementTypeCode listName="reserved-procurement">none</cbc:TendererRequirementTypeCode>
+        </cac:SpecificTendererRequirement>
+      </cac:TendererQualificationRequest>
+      <cac:ContractExecutionRequirement>
+        <cbc:ExecutionRequirementCode listName="reserved-execution">no</cbc:ExecutionRequirementCode>
+      </cac:ContractExecutionRequirement>
+      <cac:AdditionalInformationParty>
+        <cac:PartyIdentification>
+          <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+        </cac:PartyIdentification>
+      </cac:AdditionalInformationParty>
+      <cac:AppealTerms>
+        <cac:AppealReceiverParty>
+          <cac:PartyIdentification>
+            <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+          </cac:PartyIdentification>
+        </cac:AppealReceiverParty>
+      </cac:AppealTerms>
+      <cac:Language>
+        <cbc:ID>NOR</cbc:ID>
+      </cac:Language>
+      <cac:Language>
+        <cbc:ID>SWE</cbc:ID>
+      </cac:Language>
+      <cac:Language>
+        <cbc:ID>DAN</cbc:ID>
+      </cac:Language>
+    </cac:TenderingTerms>
+    <cac:TenderingProcess>
+      <ext:UBLExtensions>
+        <ext:UBLExtension>
+          <ext:ExtensionContent>
+            <efext:EformsExtension>
+              <efac:InterestExpressionReceptionPeriod>
+                <cbc:EndDate>2024-03-15+01:00</cbc:EndDate>
+                <cbc:EndTime>00:00:00+01:00</cbc:EndTime>
+              </efac:InterestExpressionReceptionPeriod>
+            </efext:EformsExtension>
+          </ext:ExtensionContent>
+        </ext:UBLExtension>
+      </ext:UBLExtensions>
+    </cac:TenderingProcess>
+    <cac:ProcurementProject>
+      <cbc:ID schemeName="InternalID">23/7053</cbc:ID>
+      <cbc:Name languageID="NOR">Tillatelsesordning for el-sparkesykler i Ålesund Kommune</cbc:Name>
+      <cbc:Name languageID="ENG">Permission scheme for electric scooters in Ålesund municipality.</cbc:Name>
+      <cbc:Description languageID="NOR">Ålesund kommune lyser ut løyve til å drive utleige av elsparkesyklar som gjeld for sesongen 2024. 
+Ålesund kommune kunngjer søknadsinformasjon for løyveperioden 15. april til 31. desember 2024 for utleige av elsparkesyklar på offentleg grunn. Det blir gitt løyve til 300 elsparkesyklar i sone 1 (Steinvågbrua - Fagerlia). Mengd elsparkesyklar i sone 1 fordelast likt på alle søkarar som fyller vilkåra for løyve, men likevel slik at kvar søkar maksimalt får det tal elsparkesyklar det er søkt om, sjå forskrifta § 5 bokstav c.   
+I resten av kommunen er det ikkje sett grense for mengd elsparkesyklar.   
+
+Søknaden skal sendast inn gjennom Ålesund kommune sin digitale søknadsportal innan 15.03.2023.
+https://skjema.alesund.kommune.no/skjema/ALE0320/Sknad_om_elsparkesykkelutleige</cbc:Description>
+      <cbc:Description languageID="ENG">Ålesund municipality is lighting out the licence to run the electrical park ready as debts for the 2024 season. 
+Ålesund municipality is announcing application information for the licence period from 15 April to 31 December 2024 for the elsparkesy ready on public ground. Permits are to be given to 300 electric parks ready in zone 1 (Steinvågbrua - Fagerlia). Mengd elsparkesyklar in zone 1 is distributed equally on all search routes that fulfil the terms for the permit, but still so that kvar searches maximum get the total electrical parking ready it is applied for, see regulations § 5 letter c.   
+In the rest of the municipality there is no limit for mengd elsparkesyklar.   
+
+The application shall be submitted through Ålesund municipality ́s digital application portal on 15.03.2023.
+https://skjema.alesund.kommune.no/skjema/ALE0320/Sknad_om_elsparkesykkelutleige</cbc:Description>
+      <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
+      <cac:MainCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">60000000</cbc:ItemClassificationCode>
+      </cac:MainCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">34000000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">34144900</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">34400000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">34420000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">34422000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">50111100</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">50111110</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:RealizedLocation>
+        <cac:Address>
+          <cbc:CityName>Ålesund</cbc:CityName>
+          <cbc:CountrySubentityCode listName="nuts">NO0A3</cbc:CountrySubentityCode>
+          <cac:Country>
+            <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+          </cac:Country>
+        </cac:Address>
+      </cac:RealizedLocation>
+    </cac:ProcurementProject>
+  </cac:ProcurementProjectLot>
+</ContractNotice>

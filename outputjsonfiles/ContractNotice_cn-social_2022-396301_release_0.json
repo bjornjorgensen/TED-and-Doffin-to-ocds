@@ -1,0 +1,123 @@
+{
+  "id": "2022-396301",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "2022-396301",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "tenderPeriod": {
+          "endDate": "2022-08-25T12:00:00+02:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "allowed",
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Omsorgstjenester",
+        "mainProcurementCategory": "services",
+        "description": "Målselv kommune inviterer til å delta i konkurranse om kjøp av omsorgstjenester for en mannlig bruker i 50 årene. For ytterligere informasjon se konkurransegrunnlag med vedlegg. For å få tilgang til beskrivelsen av bruker (vedlegg 4 til konkurransegrunnlaget), må konkurransegrunnlagets vedlegg 3 (taushetserklæringen) undertegnes og legges inn i KGV. Når taushetserklæringen er mottatt vil vedlegg 4 oversendes gjennom KGV.",
+        "value": {
+          "amount": 17000000.0,
+          "currency": "NOK"
+        },
+        "contractPeriod": {
+          "startDate": "2022-10-01T00:00:00+02:00",
+          "endDate": "2026-09-30T23:59:59+01:00"
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "type": "other",
+              "description": "Se konkurransegrunnlagets pkt. 5. KRAV TIL TILBYDERS KVALIFIKASJONER"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "url": "https://tendsign.no/doc.aspx?UniqueId=afwjuxxltt&GoTo=Docs",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "Omsorgstjenester",
+    "mainProcurementCategory": "services",
+    "description": "Målselv kommune inviterer til å delta i konkurranse om kjøp av omsorgstjenester for en mannlig bruker i 50 årene. For ytterligere informasjon se konkurransegrunnlag med vedlegg.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "85310000"
+          },
+          {
+            "id": "85312000"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "85300000"
+        }
+      }
+    ],
+    "value": {
+      "amount": 17000000.0,
+      "currency": "NOK"
+    },
+    "deliveryAddresses": [
+      {
+        "region": "NO074"
+      }
+    ]
+  },
+  "date": "2022-07-21T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Målselv kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "972 418 005",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Rolf Willy Berg",
+        "email": "rolf.berg@innkjopsservice.no"
+      },
+      "details": {
+        "url": "http://www.malselv.kommune.no"
+      },
+      "address": {
+        "locality": "MOEN"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Nord-Troms og Senja tingrett",
+      "address": {
+        "locality": "Storgata 6, Finnsnes"
+      }
+    }
+  ],
+  "description": "Mercell kunngjøring: https://opic.com/id/afwjuxxltt For å få tilgang til beskrivelsen av bruker (vedlegg 4 til konkurransegrunnlaget), må konkurransegrunnlagets vedlegg 3 (taushetserklæringen) undertegnes og legges inn i KGV. Når taushetserklæringen er mottatt vil vedlegg 4 oversendes gjennom KGV."
+}

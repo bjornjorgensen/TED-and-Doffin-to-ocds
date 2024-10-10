@@ -1,0 +1,217 @@
+{
+  "id": "2022-927623",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "2022-927623",
+    "lots": [
+      {
+        "id": "LOT-0001",
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "not-allowed"
+        },
+        "title": "Rammeavtale vakt- og sikkerhetstjenester Delkontrakt 1",
+        "mainProcurementCategory": "services",
+        "description": "Rammeavtalen for delkontrakt 1 (Oslo politidistrikt og omegn) skal dekke Kundens behov for vakt- og sikkerhetstjenester. Dette omfatter også tilfeller ved økt beredskap. Rammeavtalen avgrenses mot: • Verditransport, leie av droppsafe og kontanthåndtering • installasjon og service på alarmsystemer For nærmere beskrivelse vises det til konkurransedokumentene. Oppdragsgiver har opsjon på å forlenge avtalen med de samme betingelser med 1 + 1 år slik at total mulig avtalelengde fra planlagt oppstartsdato 9. mars 2023 er 4 år.",
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "hasFrameworkAgreement": true,
+          "frameworkAgreement": {
+            "method": "withoutReopeningCompetition"
+          }
+        }
+      },
+      {
+        "id": "LOT-0002",
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "not-allowed"
+        },
+        "title": "Rammeavtale vakt- og sikkerhetstjenester Delkontrakt 2",
+        "mainProcurementCategory": "services",
+        "description": "Rammeavtalen for delkontrakt 2 (Politihøgskolen i Bodø, Troms politidistrikt (opsjon), Nordland politistrikt (opsjon)) skal dekke Kundens behov for vakt- og sikkerhetstjenester. Dette omfatter også tilfeller ved økt beredskap. Rammeavtalen avgrenses mot: • Verditransport, leie av droppsafe og kontanthåndtering • installasjon og service på alarmsystemer For nærmere beskrivelse vises det til konkurransedokumentene. Oppdragsgiver har opsjon på å forlenge avtalen med de samme betingelser med 1 + 1 år slik at total mulig avtalelengde fra planlagt oppstartsdato 9. mars 2023 er 4 år.",
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "hasFrameworkAgreement": true,
+          "frameworkAgreement": {
+            "method": "withoutReopeningCompetition"
+          }
+        }
+      }
+    ],
+    "title": "Rammeavtale vakt- og sikkerhetstjenester",
+    "mainProcurementCategory": "services",
+    "description": "Rammeavtalen skal dekke Kundens behov for vakt- og sikkerhetstjenester. Dette omfatter også tilfeller ved økt beredskap. Rammeavtalen avgrenses mot: • Verditransport, leie av droppsafe og kontanthåndtering • installasjon og service på alarmsystemer Anskaffelsen er inndelt i to delkontrakter: • Delkontrakt 1 for Oslo politidistrikt og omegn • Delkontrakt 2 for Politihøgskolen i Bodø, Troms politidistrikt (opsjon), Nordland politistrikt (opsjon) For nærmere beskrivelse vises det til konkurransedokumentene.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "79710000"
+          }
+        ],
+        "relatedLot": "LOT-0001",
+        "classification": {
+          "scheme": "CPV",
+          "id": "79713000"
+        },
+        "deliveryAddresses": [
+          {
+            "streetAddress": "OSLO"
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "79710000"
+          }
+        ],
+        "relatedLot": "LOT-0002",
+        "classification": {
+          "scheme": "CPV",
+          "id": "79713000"
+        },
+        "deliveryAddresses": [
+          {
+            "streetAddress": "Bodø"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "streetAddress": "OSLO"
+      },
+      {
+        "streetAddress": "Bodø"
+      }
+    ]
+  },
+  "date": "2022-10-25T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Politiets fellestjenester",
+      "additionalIdentifiers": [
+        {
+          "id": "974 761 157",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Nicholas Starr Soltvedt",
+        "telephone": "+47 61318000",
+        "email": "nicholas.starr.soltvedt@politiet.no"
+      },
+      "details": {
+        "url": "http://www.politiet.no"
+      },
+      "address": {
+        "locality": "OSLO"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Avarn Security AS",
+      "additionalIdentifiers": [
+        {
+          "id": "NO943184097MVA",
+          "scheme": "GB-COH"
+        }
+      ],
+      "details": {
+        "url": "http://www.avarnsecurity.no"
+      },
+      "contactPoint": {
+        "email": "tor.erik.andersson@avarnsecurity.com"
+      },
+      "address": {
+        "locality": "Oslo"
+      },
+      "roles": [
+        "tenderer"
+      ]
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Securitas AS",
+      "additionalIdentifiers": [
+        {
+          "id": "920 144 950",
+          "scheme": "GB-COH"
+        }
+      ],
+      "details": {
+        "url": "http://www.securitas.no"
+      },
+      "contactPoint": {
+        "email": "kjetil.dahler@securitas.no"
+      },
+      "address": {
+        "locality": "Oslo"
+      },
+      "roles": [
+        "tenderer"
+      ]
+    },
+    {
+      "id": "ORG-0004",
+      "name": "Oslo tingrett",
+      "contactPoint": {
+        "telephone": "+47 22035200",
+        "email": "oslo.tingrett@domstol.no"
+      },
+      "details": {
+        "url": "https://www.domstol.no/no/Enkelt-domstol/oslo--tingrett/om-domstolen/"
+      },
+      "address": {
+        "locality": "Oslo"
+      }
+    },
+    {
+      "id": "ORG-0005",
+      "name": "Politiets fellestjenester (PFT)",
+      "details": {
+        "url": "https://www.politiet.no/om/organisasjonen/andre/pft/"
+      },
+      "contactPoint": {
+        "email": "post.fellestjenester@politiet.no"
+      },
+      "address": {
+        "locality": "Oslo"
+      }
+    }
+  ],
+  "description": "Oppdragsgiver har opsjon på å forlenge avtalen med de samme betingelser med 1 + 1 år slik at total mulig avtalelengde fra planlagt oppstartsdato 9. mars 2023 er 4 år. Oppdragsgiver har opsjon på å forlenge avtalen med de samme betingelser med 1 + 1 år slik at total mulig avtalelengde fra planlagt oppstartsdato 9. mars 2023 er 4 år.",
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "tenderers": [
+          {
+            "id": "ORG-0002"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0002",
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      }
+    ]
+  }
+}

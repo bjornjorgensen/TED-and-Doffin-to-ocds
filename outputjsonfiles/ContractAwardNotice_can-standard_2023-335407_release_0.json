@@ -1,0 +1,153 @@
+{
+  "id": "2023-335407",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "2023-335407",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "coveredBy": [
+          "GPA"
+        ],
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "not-allowed"
+        },
+        "title": "Utarbeidelse av felles kommunale sikkerhetskrav",
+        "mainProcurementCategory": "services",
+        "description": "Rapporten «Styrking av digital robusthet i kommunal sektor» beskriver flere tiltak for å øke den digitale robustheten i kommunal sektor. Rapporten anbefaler 16 tiltak for å øke robustheten i kommunal sektor. Tiltak 7 i rapporten omhandler behovet for å utarbeide felles kommunale krav innen informasjonssikkerhet, digital beredskap og personvern, både til eksterne leverandører og til egen organisasjon. KS ønsker å inngå avtale med én leverandør om bistand til å utarbeide spesifikke og operative sikkerhetskrav innen anskaffelse, forvaltning og sikker drift i hele livsløpet til IT-tjenesten. Det skal gis tilbud på to spesialistressurser innen informasjonssikkerhet, hvorav den ene også skal fungere som prosjektleder, på full tid i en periode på 4 måneder, med opsjon på forlengelse i inntil ytterligere 2 måneder.Ønsket oppstart 2.10.23, ønsket arbeidssted hos KS i Oslo. Se forøvrig tilbudsinvitasjonen med vedlagt rapport.",
+        "awardCriteria": {
+          "criteria": [
+            {
+              "type": "quality",
+              "numbers": [
+                {
+                  "weight": "percentageExact"
+                }
+              ]
+            },
+            {
+              "type": "price"
+            },
+            {
+              "description": "Kvalitet"
+            }
+          ]
+        },
+        "options": {
+          "description": "Forlengelse 2 måneder."
+        },
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "hasDynamicPurchasingSystem": true,
+          "dynamicPurchasingSystem": {
+            "type": "closed"
+          },
+          "hasElectronicAuction": false
+        }
+      }
+    ],
+    "title": "Utarbeidelse av felles kommunale sikkerhetskrav",
+    "mainProcurementCategory": "services",
+    "description": "Rapporten «Styrking av digital robusthet i kommunal sektor» beskriver flere tiltak for å øke den digitale robustheten i kommunal sektor. Rapporten anbefaler 16 tiltak for å øke robustheten i kommunal sektor. Tiltak 7 i rapporten omhandler behovet for å utarbeide felles kommunale krav innen informasjonssikkerhet, digital beredskap og personvern, både til eksterne leverandører og til egen organisasjon. KS ønsker å inngå avtale med én leverandør om bistand til å utarbeide spesifikke og operative sikkerhetskrav innen anskaffelse, forvaltning og sikker drift i hele livsløpet til IT-tjenesten. Det skal gis tilbud på to spesialistressurser innen informasjonssikkerhet, hvorav den ene også skal fungere som prosjektleder, på full tid i en periode på 4 måneder, med opsjon på forlengelse i inntil ytterligere 2 måneder.Ønsket oppstart 2.10.23, ønsket arbeidssted hos KS i Oslo. Se forøvrig tilbudsinvitasjonen med vedlagt rapport.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "79417000"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "79410000"
+        }
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "region": "NO081"
+      }
+    ]
+  },
+  "date": "2023-09-28T12:00:00+02:00",
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 2700000.0,
+          "currency": "NOK"
+        },
+        "hasSubcontracting": false,
+        "tenderers": [
+          {
+            "id": "ORG-0002"
+          }
+        ]
+      }
+    ]
+  },
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "KS  (Kommunesektorens organisasjon)",
+      "additionalIdentifiers": [
+        {
+          "id": "971 032 146",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "+47 90191450",
+        "email": "gtg@tigerconsulting.as"
+      },
+      "details": {
+        "url": "www.ks.no"
+      },
+      "address": {
+        "locality": "Oslo"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Kons  AS",
+      "address": {
+        "locality": "OSLO"
+      },
+      "roles": [
+        "tenderer"
+      ]
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Oslo tingrett",
+      "address": {
+        "locality": "Oslo"
+      }
+    }
+  ],
+  "awards": [
+    {
+      "id": "RES-0001",
+      "value": {
+        "amount": 2700000.0,
+        "currency": "NOK"
+      },
+      "relatedLots": [
+        "LOT-0000"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,250 @@
+<ContractAwardNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1" xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1" xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1" xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2">
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionContent>
+        <efext:EformsExtension>
+          <efbc:TransmissionDate>2023-11-15+00:00</efbc:TransmissionDate>
+          <efbc:TransmissionTime>12:43:31+00:00</efbc:TransmissionTime>
+          <efac:ContractModification>
+            <efbc:ChangedNoticeIdentifier>403922-2019</efbc:ChangedNoticeIdentifier>
+            <efac:Change>
+              <efbc:ChangeDescription languageID="NOR">I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d. Ålesund kommunes eksisterende avtale med Visma Enterprise AS vedrørende Visma FlyVo videreføres i Ålesund 2024 og Haram 2024. Det er inngått et endringsbilag til eksisterende kontrakt som beskriver de nødvendige endringene i kontrakten som følge av kommunedelingen. Av opprinnelig kontraktsverdi, etter avtalefestet KPI-justering, utgjør nødvendige engangskostnader direkte knyttet til kommunedelingen 10 %. Årlig pris for bruksrett (fast pris pr. flyktning og pr. elev) endres ikke (kun avhengig av antall flyktninger og antall elever). </efbc:ChangeDescription>
+              <efbc:ChangeDescription languageID="ENG">The contracting authority has made changes in the existing contract for municipal division, cf. the Public Procurement Regulations § 28-1 d. Ålesund municipality ́s existing contract with Visma Enterprise AS regarding Visma FlyVo continues in Ålesund 2024 and Haram 2024. An amendment annex to the existing contract has been signed that describes the necessary changes in the contract as a result of the division of municipalities. Of the original contract value, after the contractual KPI adjustment, the necessary one-time costs directly connected to the municipal division amounts to 10%. The annual price for the right to use (fixed price per refugee and per pupil) is not changed (only depending on the number of refugees and the number of pupils). </efbc:ChangeDescription>
+              <efac:ChangedSection>
+                <efbc:ChangedSectionIdentifier>CON-0001</efbc:ChangedSectionIdentifier>
+              </efac:ChangedSection>
+            </efac:Change>
+            <efac:ChangeReason>
+              <cbc:ReasonCode listName="modification-justification">mod-cir</cbc:ReasonCode>
+              <efbc:ReasonDescription languageID="NOR">Oppdragsgiver kunne ikke forutse at dagens Ålesund kommune ville bli vedtatt delt i to nye kommuner, heretter kalt Ålesund 2024 og Haram 2024. Anskaffelsens overordnede karakter blir ikke endret (1.), og den enkelte prisøkningen overstiger ikke 50 prosent av den opprinnelige kontraktsverdien (2.). Oppdragsgiver kunngjør endringene (3.).</efbc:ReasonDescription>
+              <efbc:ReasonDescription languageID="ENG">The contracting authority could not predict that the current Ålesund municipality would be approved divided into two new municipalities, hereafter called Ålesund 2024 and Haram 2024. The general character of the procurement is not changed (1) and the individual price increase does not exceed 50 percent of the original contract value (2nd). The contracting authority is announcing the changes (3rd).</efbc:ReasonDescription>
+            </efac:ChangeReason>
+          </efac:ContractModification>
+          <efac:NoticeResult>
+            <efac:LotResult>
+              <cbc:ID schemeName="result">RES-0001</cbc:ID>
+              <efac:LotTender>
+                <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
+              </efac:LotTender>
+              <efac:SettledContract>
+                <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+              </efac:SettledContract>
+              <efac:TenderLot>
+                <cbc:ID schemeName="Lot">LOT-0000</cbc:ID>
+              </efac:TenderLot>
+            </efac:LotResult>
+            <efac:LotTender>
+              <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
+              <cac:LegalMonetaryTotal>
+                <cbc:PayableAmount currencyID="NOK">305250</cbc:PayableAmount>
+              </cac:LegalMonetaryTotal>
+              <efac:TenderingParty>
+                <cbc:ID schemeName="tendering-party">TPA-0001</cbc:ID>
+              </efac:TenderingParty>
+              <efac:TenderLot>
+                <cbc:ID schemeName="Lot">LOT-0000</cbc:ID>
+              </efac:TenderLot>
+              <efac:TenderReference>
+                <cbc:ID>2019-366488</cbc:ID>
+              </efac:TenderReference>
+            </efac:LotTender>
+            <efac:SettledContract>
+              <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+              <cbc:AwardDate>2019-08-25+02:00</cbc:AwardDate>
+              <cbc:IssueDate>2019-08-26+02:00</cbc:IssueDate>
+              <cbc:Title languageID="NOR">Anskaffelse Nye Ålesund – Intensjonskunngjøring Visma FLYVO</cbc:Title>
+              <cbc:Title languageID="ENG">Procurement of Nye Ålesund – Intention notice Visma FLYVO</cbc:Title>
+              <efac:ContractReference>
+                <cbc:ID>2019-366488</cbc:ID>
+              </efac:ContractReference>
+              <efac:LotTender>
+                <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
+              </efac:LotTender>
+            </efac:SettledContract>
+            <efac:TenderingParty>
+              <cbc:ID schemeName="tendering-party">TPA-0001</cbc:ID>
+              <efac:Tenderer>
+                <cbc:ID schemeName="organization">ORG-0003</cbc:ID>
+              </efac:Tenderer>
+            </efac:TenderingParty>
+          </efac:NoticeResult>
+          <efac:NoticeSubType>
+            <cbc:SubTypeCode listName="notice-subtype">38</cbc:SubTypeCode>
+          </efac:NoticeSubType>
+          <efac:Organizations>
+            <efac:Organization>
+              <efac:Company>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Ålesund kommune</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">Ålesund kommune</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Keiser Wilhelms gate 11</cbc:StreetName>
+                  <cbc:Department>Innkjøp</cbc:Department>
+                  <cbc:CityName>ÅLESUND</cbc:CityName>
+                  <cbc:PostalZone>6003</cbc:PostalZone>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">920415288</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Name>Jonette Valaas Skare</cbc:Name>
+                  <cbc:Telephone>+47 70162000</cbc:Telephone>
+                  <cbc:ElectronicMail>jonette.valaas.skare@alesund.kommune.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+            <efac:Organization>
+              <efac:Company>
+                <cbc:WebsiteURI>https://www.domstol.no/no/domstoler/tingrett/more-og-romsdal-tingrett/</cbc:WebsiteURI>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Møre og Romsdal tingrett</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">Møre og Romsdal tingrett</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Postboks 1354</cbc:StreetName>
+                  <cbc:CityName>Ålesund</cbc:CityName>
+                  <cbc:PostalZone>6001</cbc:PostalZone>
+                  <cbc:CountrySubentityCode listName="nuts">NO0A3</cbc:CountrySubentityCode>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">926 723 200</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Telephone>70 33 47 00</cbc:Telephone>
+                  <cbc:ElectronicMail>more.og.romsdal.tingrett@domstol.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+            <efac:Organization>
+              <efac:Company>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0003</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Visma Enterprise AS</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">Visma Enterprise AS</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:CityName>Oslo</cbc:CityName>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">982 410 339</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Telephone>46404000</cbc:Telephone>
+                  <cbc:ElectronicMail>visma@visma.com</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+          </efac:Organizations>
+        </efext:EformsExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:UBLVersionID>2.3</cbc:UBLVersionID>
+  <cbc:CustomizationID>eforms-sdk-1.7#extended#urn:fdc:anskaffelser.no:2023:eforms:eu</cbc:CustomizationID>
+  <cbc:ID schemeName="notice-id">be2cd071-e143-4fc8-bc3b-7f1ec1b4141f</cbc:ID>
+  <cbc:ContractFolderID>72dd1062-81a6-4de2-a9a5-ad8a572090f8</cbc:ContractFolderID>
+  <cbc:IssueDate>2023-11-15+00:00</cbc:IssueDate>
+  <cbc:IssueTime>12:42:43+00:00</cbc:IssueTime>
+  <cbc:VersionID>01</cbc:VersionID>
+  <cbc:RegulatoryDomain>32014L0024</cbc:RegulatoryDomain>
+  <cbc:NoticeTypeCode listName="cont-modif">can-modif</cbc:NoticeTypeCode>
+  <cbc:NoticeLanguageCode>NOR</cbc:NoticeLanguageCode>
+  <cac:AdditionalNoticeLanguage>
+    <cbc:ID>ENG</cbc:ID>
+  </cac:AdditionalNoticeLanguage>
+  <cac:ContractingParty>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+      </cac:PartyIdentification>
+    </cac:Party>
+  </cac:ContractingParty>
+  <cac:TenderingTerms>
+    <cac:ProcurementLegislationDocumentReference>
+      <cbc:ID schemeName="ELI">FOA § 28-1 d</cbc:ID>
+      <cbc:DocumentDescription languageID="NOR">I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d. Oppdragsgiver kunne ikke forutse at kommunen ville bli vedtatt delt i to nye kommuner; Ålesund og Haram. Anskaffelsens overordnede karakter blir ikke endret (1.), og prisøkningen overstiger ikke 50 prosent av den opprinnelige kontraktsverdien (2.). Oppdragsgiver kunngjør endringen (3.).</cbc:DocumentDescription>
+      <cbc:DocumentDescription languageID="ENG">The contracting authority has made changes in existing contract, cf. the PPR §28-1d. The contracting authority couldnt foresee that the municipality would be divided into two new municipalities; Ålesund and Haram. The overall character of the procurement wont be changed(1) and the price increase doesnt exceed 50% of the original contract value(2). The Contracting Authority announces the change(3).</cbc:DocumentDescription>
+    </cac:ProcurementLegislationDocumentReference>
+  </cac:TenderingTerms>
+  <cac:ProcurementProject>
+    <cbc:ID schemeName="InternalID">23/1956</cbc:ID>
+    <cbc:Name languageID="NOR">Endringskunngjøring - Programvare for flyktning og voksenopplæring</cbc:Name>
+    <cbc:Name languageID="ENG">Amendment notice - Software for refugee and adult education.</cbc:Name>
+    <cbc:Description languageID="NOR">I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d.
+Ålesund kommunes eksisterende avtale med Visma Enterprise AS vedrørende Visma FlyVo videreføres i Ålesund 2024 og Haram 2024. Det er inngått et endringsbilag til eksisterende kontrakt som beskriver de nødvendige endringene i kontrakten som følge av kommunedelingen. Av opprinnelig kontraktsverdi, etter avtalefestet KPI-justering, utgjør nødvendige engangskostnader direkte knyttet til kommunedelingen 10 %. Årlig pris for bruksrett (fast pris pr. flyktning og pr. elev) endres ikke (kun avhengig av antall flyktninger og antall elever). </cbc:Description>
+    <cbc:Description languageID="ENG">The contracting authority has made changes in the existing contract for municipal division, cf. the Public Procurement Regulations § 28-1 d.
+Ålesund municipality ́s existing contract with Visma Enterprise AS regarding Visma FlyVo continues in Ålesund 2024 and Haram 2024. An amendment annex to the existing contract has been signed that describes the necessary changes in the contract as a result of the division of municipalities. Of the original contract value, after the contractual KPI adjustment, the necessary one-time costs directly connected to the municipal division amounts to 10%. The annual price for the right to use (fixed price per refugee and per pupil) is not changed (only depending on the number of refugees and the number of pupils). </cbc:Description>
+    <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
+    <cbc:Note languageID="NOR">Henvisning til opprinnelige kunngjøringer: TED: 2019/S 164-403922, Doffin: 2019-366488.</cbc:Note>
+    <cbc:Note languageID="ENG">Reference to original announcements: TED: 2019/S 164-403922, Doffin: 2019-366488.</cbc:Note>
+    <cac:MainCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">72000000</cbc:ItemClassificationCode>
+    </cac:MainCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">48000000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+  </cac:ProcurementProject>
+  <cac:ProcurementProjectLot>
+    <cbc:ID schemeName="Lot">LOT-0000</cbc:ID>
+    <cac:TenderingTerms>
+      <cbc:FundingProgramCode listName="eu-funded">no-eu-funds</cbc:FundingProgramCode>
+      <cbc:RecurringProcurementIndicator>false</cbc:RecurringProcurementIndicator>
+      <cac:AppealTerms>
+        <cac:AppealReceiverParty>
+          <cac:PartyIdentification>
+            <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+          </cac:PartyIdentification>
+        </cac:AppealReceiverParty>
+      </cac:AppealTerms>
+    </cac:TenderingTerms>
+    <cac:TenderingProcess>
+      <cbc:GovernmentAgreementConstraintIndicator>true</cbc:GovernmentAgreementConstraintIndicator>
+    </cac:TenderingProcess>
+    <cac:ProcurementProject>
+      <cbc:ID schemeName="InternalID">23/1956</cbc:ID>
+      <cbc:Name languageID="NOR">Endringskunngjøring - Programvare for flyktning og voksenopplæring</cbc:Name>
+      <cbc:Name languageID="ENG">Amendment notice - Software for refugee and adult education.</cbc:Name>
+      <cbc:Description languageID="NOR">I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d.
+Ålesund kommunes eksisterende avtale med Visma Enterprise AS vedrørende Visma FlyVo videreføres i Ålesund 2024 og Haram 2024. Det er inngått et endringsbilag til eksisterende kontrakt som beskriver de nødvendige endringene i kontrakten som følge av kommunedelingen. Av opprinnelig kontraktsverdi, etter avtalefestet KPI-justering, utgjør nødvendige engangskostnader direkte knyttet til kommunedelingen 10 %. Årlig pris for bruksrett (fast pris pr. flyktning og pr. elev) endres ikke (kun avhengig av antall flyktninger og antall elever). </cbc:Description>
+      <cbc:Description languageID="ENG">The contracting authority has made changes in the existing contract for municipal division, cf. the Public Procurement Regulations § 28-1 d.
+Ålesund municipality ́s existing contract with Visma Enterprise AS regarding Visma FlyVo continues in Ålesund 2024 and Haram 2024. An amendment annex to the existing contract has been signed that describes the necessary changes in the contract as a result of the division of municipalities. Of the original contract value, after the contractual KPI adjustment, the necessary one-time costs directly connected to the municipal division amounts to 10%. The annual price for the right to use (fixed price per refugee and per pupil) is not changed (only depending on the number of refugees and the number of pupils). </cbc:Description>
+      <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
+      <cac:MainCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">72000000</cbc:ItemClassificationCode>
+      </cac:MainCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">48000000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:PlannedPeriod>
+        <cbc:DescriptionCode listName="Duration">UNLIMITED</cbc:DescriptionCode>
+      </cac:PlannedPeriod>
+    </cac:ProcurementProject>
+  </cac:ProcurementProjectLot>
+  <cac:TenderResult>
+    <cbc:AwardDate>2000-01-01Z</cbc:AwardDate>
+  </cac:TenderResult>
+</ContractAwardNotice>

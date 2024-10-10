@@ -1,0 +1,113 @@
+{
+  "id": "667f77ec-2687-48a0-a752-651a0d7ebdcb",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "title": "System for Utvikling og Gjennomføring av Elektroniske Prøver",
+    "mainProcurementCategory": "services",
+    "description": "Forsvarsmateriell ønsker å identifisere mulige løsninger som leverandører kan tilby innen adaptive elektroniske prøver.I forbindelse med overgang til nye adaptive prøver, vurderes det å anskaffe et nytt system for utvikling og gjennomføring av elektroniske prøver. Systemet må håndtere både adaptive og tradisjonelle prøver, og det må håndtere prøvetaking både i klasserom og hjemmefra. Systemet bør understøtte administrasjon av eksisterende prøver og oppsett av nye prøver via løsningen, og da fortrinnsvis slik at dette kan gjøres uten spesiell IT-kompetanse.Interesserte oppfordres til å ta kontakt i kommunikasjonsfeltet i Mercell for et mer utfyllende dokument som inneholder selve spørsmålene knyttet til markedsundersøkelsen. Fristen for å svare på markedsundersøkelsen er 15. desember 2023.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "72100000"
+          },
+          {
+            "id": "72200000"
+          },
+          {
+            "id": "72300000"
+          },
+          {
+            "id": "72400000"
+          },
+          {
+            "id": "72500000"
+          },
+          {
+            "id": "72600000"
+          },
+          {
+            "id": "72700000"
+          },
+          {
+            "id": "72800000"
+          },
+          {
+            "id": "72900000"
+          }
+        ],
+        "classification": {
+          "scheme": "CPV",
+          "id": "72000000"
+        }
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "country": "NO"
+      }
+    ],
+    "deliveryLocations": [
+      {
+        "description": "Anywhere in the given country"
+      }
+    ]
+  },
+  "date": "2023-11-20T08:33:50+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "FORSVARSMATERIELL",
+      "additionalIdentifiers": [
+        {
+          "id": "916075855",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Kimberley Moabi Berkhof",
+        "telephone": "45732110",
+        "email": "kberkhof@mil.no"
+      },
+      "details": {
+        "url": "https://permalink.mercell.com/216373386.aspx"
+      },
+      "address": {
+        "locality": "OSLO"
+      }
+    }
+  ]
+}

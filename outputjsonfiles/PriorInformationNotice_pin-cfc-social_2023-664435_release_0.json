@@ -1,0 +1,143 @@
+{
+  "id": "2023-664435",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0023"
+    },
+    "id": "2023-664435",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "tenderPeriod": {
+          "endDate": "2023-03-08T12:00:00+02:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "allowed",
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Veiledende kunngjøring - Drift av kiosk med kafètilbud Tromsø og Harstad UNN HF",
+        "mainProcurementCategory": "services",
+        "description": "Oppdragsgiver arbeider med utarbeidelse av konkurransedokumenter i forbindelse med utlysning av Tjenestekonsesjonsavtale - Drift av kiosk med kafètilbud i Tromsø og Harstad for UNN HF. I den forbindelse ber vi om tilbakemeldinger fra leverandørmarkedet før endelig utlysning. Se informasjon under og i vedlagte dokumenter. Vi ber særskilt om tilbakemeldinger på: - Dokumentene vedlagt (se tekst markert i gult) som vi ønsker tilbakemelding på:  1. Se særlig kvalifikasjonskrav/miljøkrav/innovasjon  2. Se særlig kravspesifikasjonen (minstekrav og forslag til evalueringskrav) 3. Utkast til kontrakt - se særlig avtaleperiode, gult om merverdiavgift og størrelse på dagmulkt Leverandør står fritt til å besvare direkte i dokumentene og sende disse inn via kommunikasjonsmodulen eller samle alt i et eget vedlegg/melding i Mercell. Frist for tilbakemeldinger settes til onsdag 8. mars 2023 kl. 12.00. Vi takker på forhånd for tilbakemeldingene. ",
+        "contractPeriod": {
+          "durationInDays": 3600
+        },
+        "contractTerms": {
+          "performanceTerms": "Se vedlegg.",
+          "electronicInvoicingPolicy": "allowed",
+          "hasElectronicPayment": true
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "type": "other",
+              "description": "Se vedlegg."
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/197381023.aspx",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "Veiledende kunngjøring - Drift av kiosk med kafètilbud Tromsø og Harstad UNN HF",
+    "mainProcurementCategory": "services",
+    "description": "Oppdragsgiver arbeider med utarbeidelse av konkurransedokumenter i forbindelse med utlysning av Tjenestekonsesjonsavtale - Drift av kiosk med kafètilbud i Tromsø og Harstad for UNN HF. I den forbindelse ber vi om tilbakemeldinger fra leverandørmarkedet før endelig utlysning. Se informasjon under og i vedlagte dokumenter. ",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "55511000"
+          },
+          {
+            "id": "55512000"
+          },
+          {
+            "id": "70130000"
+          },
+          {
+            "id": "70220000"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "55900000"
+        },
+        "deliveryAddresses": [
+          {
+            "streetAddress": "Tromsø og Harstad"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "streetAddress": "Tromsø og Harstad"
+      }
+    ]
+  },
+  "date": "2023-02-21T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "SYKEHUSINNKJØP HF",
+      "additionalIdentifiers": [
+        {
+          "id": "916879067",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Postmottak Sykehusinnkjøp",
+        "telephone": "+47 78950700",
+        "email": "post@sykehusinnkjop.no"
+      },
+      "details": {
+        "url": "https://permalink.mercell.com/197381023.aspx"
+      },
+      "address": {
+        "locality": "VADSØ"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Øst-Finnmark tingrett",
+      "address": {
+        "locality": "Vadsø"
+      }
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Sykehusinnkjøp HF",
+      "address": {
+        "locality": "Vadsø"
+      }
+    }
+  ]
+}

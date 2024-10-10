@@ -1,0 +1,82 @@
+{
+  "id": "2022-970816",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "OTHER"
+    },
+    "title": "Intensjonskunngjøring - Spillsimulering",
+    "mainProcurementCategory": "services",
+    "description": "Rogaland fylkeskommune har til hensikt å inngå kontrakt uten konkurranse med Attensi AS for levering av en løsning i kategorien «Læringsinnhold», med spillsimulert trening i personvern. Læringsinnholdet består av e-læring, kurs, veiledere og spillsimulert opplæring.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "48190000"
+          },
+          {
+            "id": "48931000"
+          },
+          {
+            "id": "72212190"
+          }
+        ],
+        "classification": {
+          "scheme": "CPV",
+          "id": "72212931"
+        }
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "streetAddress": "Stavanger"
+      }
+    ]
+  },
+  "date": "2022-10-28T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Rogaland Fylkeskommune",
+      "additionalIdentifiers": [
+        {
+          "id": "971 045 698",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Bjørn Olav Vorland",
+        "email": "Bjorn.Olav.Vorland@rogfk.no"
+      },
+      "details": {
+        "url": "http://www.rogfk.no"
+      },
+      "address": {
+        "locality": "Stavanger"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Attensi AS",
+      "details": {
+        "url": "https://attensi.com/no/"
+      },
+      "address": {
+        "locality": "Oslo"
+      }
+    }
+  ],
+  "description": "Mercell kunngjøring: https://opic.com/id/afluzqqmxt"
+}

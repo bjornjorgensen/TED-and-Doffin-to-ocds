@@ -1,0 +1,140 @@
+{
+  "id": "2023-620727",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0025"
+    },
+    "id": "2023-620727",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "tenderPeriod": {
+          "endDate": "2023-03-17T12:00:00+02:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "allowed",
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Rammeavtale rådgivertjenester vann og avløp",
+        "mainProcurementCategory": "services",
+        "description": "Vågå kommune, heretter kalt oppdragsgiver, innbyr til åpen konkurranse om kontrakt i rammeavtalen for rådgivningstjenester innen vann- og avløpsfaget. Kommunen ønsker tilbud fra leverandører med det faglige, tekniske og økonomiske grunnlag som er nødvendig for å oppfylle kontrakten. Videre kreves erfaring fra tilsvarende arbeider for utførelse av kontraktsarbeidet i henhold til konkurransegrunnlaget. Formålet med anskaffelsen er å inngå parallelle rammeavtaler med tre leverandører for å dekke oppdragsgivers behov for kjøp av rådgivningstjenester innen vann – og avløpsfaget. For ytterligere informasjon om anskaffelsens innhold vises det til Del II Bilag 1 Oppdragsgivers kravspesifikasjon. Skjåk kommune, Lom kommune og Dovre kommune skal hver for seg ha mulighet til å tilslutte seg avtalen ved skriftlig varsel til leverandørene i løpet av avtaleperioden inkl. opsjoner for forlengelse. Det skal være samme pris – og kontraktsvilkår for opsjonshaverne som for oppdragsgiver.",
+        "value": {
+          "amount": 22000000.0,
+          "currency": "NOK"
+        },
+        "contractPeriod": {
+          "durationInDays": 720
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "type": "other",
+              "description": "Se konkurransegrunnlag Del I pkt. 7, særlig pkt. 7.3-7.6."
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "hasFrameworkAgreement": true,
+          "frameworkAgreement": {
+            "method": "withoutReopeningCompetition"
+          }
+        }
+      }
+    ],
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "url": "http://eu.eu-supply.com/app/rfq/rwlentrance_s.asp?PID=353558&B=KGVLIGHT",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "Rammeavtale rådgivertjenester vann og avløp",
+    "mainProcurementCategory": "services",
+    "description": "Vågå kommune, heretter kalt oppdragsgiver, innbyr til åpen konkurranse om kontrakt i rammeavtalen for rådgivningstjenester innen vann- og avløpsfaget. Kommunen ønsker tilbud fra leverandører med det faglige, tekniske og økonomiske grunnlag som er nødvendig for å oppfylle kontrakten. Videre kreves erfaring fra tilsvarende arbeider for utførelse av kontraktsarbeidet i henhold til konkurransegrunnlaget. Formålet med anskaffelsen er å inngå parallelle rammeavtaler med tre leverandører for å dekke oppdragsgivers behov for kjøp av rådgivningstjenester innen vann – og avløpsfaget. For ytterligere informasjon om anskaffelsens innhold vises det til Del II Bilag 1 Oppdragsgivers kravspesifikasjon. Skjåk kommune, Lom kommune og Dovre kommune skal hver for seg ha mulighet til å tilslutte seg avtalen ved skriftlig varsel til leverandørene i løpet av avtaleperioden inkl. opsjoner for forlengelse. Det skal være samme pris – og kontraktsvilkår for opsjonshaverne som for oppdragsgiver.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "31310000"
+          },
+          {
+            "id": "39370000"
+          },
+          {
+            "id": "71320000"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "71310000"
+        },
+        "deliveryAddresses": [
+          {
+            "streetAddress": "Vågå"
+          }
+        ]
+      }
+    ],
+    "value": {
+      "amount": 22000000.0,
+      "currency": "NOK"
+    },
+    "deliveryAddresses": [
+      {
+        "streetAddress": "Vågå"
+      }
+    ],
+    "procurementMethodDetails": "Se konkurransegrunnlaget Del I pkt. 9"
+  },
+  "date": "2023-02-14T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Vågå kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "939607706",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Silje Andreassen",
+        "telephone": "+47 95438551",
+        "email": "silje.andreassen@odinprosjekt.no"
+      },
+      "details": {
+        "url": "https://www.vaga.kommune.no/"
+      },
+      "address": {
+        "locality": "VÅGÅ"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Nedre-Telemark tingrett",
+      "address": {
+        "locality": "Skien"
+      }
+    }
+  ]
+}

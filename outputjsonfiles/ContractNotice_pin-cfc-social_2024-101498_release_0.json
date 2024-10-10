@@ -1,0 +1,107 @@
+{
+  "id": "a105cb09-ec7d-45d5-a364-ff2317e2231f",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "ca26386f-8493-4c02-a4ad-918a7ee4f26d",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "title": "Lillestrøm kommune ønsker tilbud på leie av hybelhus",
+        "identifiers": {
+          "id": "Lillestrøm",
+          "scheme": "internal"
+        },
+        "mainProcurementCategory": "services",
+        "description": "Lillestrøm kommune har behov for å bosette enkelte grupper av vanskeligstilte på boligmarkedet i et «hybelhus» med 6-8 boenheter.\nBoenhetene kan ligge samlet i et større boligbygg, eller i et eget bygg.\nTilbydere av slike boligeiendommer søkes. Aktuell boligeiendom vil leies inn av kommunen, for fremleie til beboere.  ",
+        "tenderPeriod": {
+          "endDate": "2024-02-23T23:55:00+01:00"
+        },
+        "hasAccessibilityCriteria": false,
+        "submissionTerms": {
+          "languages": [
+            "no"
+          ]
+        }
+      }
+    ],
+    "title": "Lillestrøm kommune ønsker tilbud på leie av hybelhus",
+    "mainProcurementCategory": "services",
+    "description": "Lillestrøm kommune har behov for å bosette enkelte grupper av vanskeligstilte på boligmarkedet i et «hybelhus» med 6-8 boenheter.\nBoenhetene kan ligge samlet i et større boligbygg, eller i et eget bygg.\nTilbydere av slike boligeiendommer søkes. Aktuell boligeiendom vil leies inn av kommunen, for fremleie til beboere.  ",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "70000000"
+        },
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "locality": "Lillestrøm"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "region": "NO082"
+      },
+      {
+        "region": "NO082"
+      },
+      {
+        "locality": "Lillestrøm"
+      }
+    ],
+    "procurementMethodDetails": "Alle interesserte bes sende tilbud. \n\nValg av tilbyder vil baseres på en helhetsvurdering av boligenes kvalitet, egnethet og beliggenhet. Lillestrøm kommune forbeholder seg rett til å gå i forhandling og avtale med flere tilbydere.\n\nDet tas forbehold om politisk godkjennelse før eventuell kontrakt kan inngås. "
+  },
+  "date": "2024-02-01T12:34:42+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Lillestrøm Kommune - Innkjøp",
+      "additionalIdentifiers": [
+        {
+          "id": "820710592",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Ine Høyer",
+        "telephone": "+47",
+        "email": "inecharlotte.hoyer@lillestrom.kommune.no"
+      },
+      "details": {
+        "url": "http://Lillestrom.kommune.no/"
+      },
+      "address": {
+        "locality": "Lillestrøm"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Romerike og Glåmdal tingrett",
+      "additionalIdentifiers": [
+        {
+          "id": "926 723 863",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "61 99 22 00",
+        "email": "romerike.og.glamdal.tingrett@domstol.no"
+      },
+      "details": {
+        "url": "https://www.domstol.no/no/domstoler/tingrett/romerike-og-glamdal-tingrett/"
+      },
+      "address": {
+        "locality": "Lillestrøm"
+      }
+    }
+  ]
+}

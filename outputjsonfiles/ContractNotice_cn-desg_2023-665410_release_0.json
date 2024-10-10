@@ -1,0 +1,157 @@
+{
+  "id": "2023-665410",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "2023-665410",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "tenderPeriod": {
+          "endDate": "2023-07-30T23:59:00+02:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "not-allowed",
+          "languages": [
+            "en"
+          ]
+        },
+        "title": "Europan 17 Larvik",
+        "description": "Europeisk arkitektur- og byutviklingskonkurranse for arkitekter, landskapsarkitekter og planleggere under 40 år. xxxxxxxxxxxxxxx (Din kommune, eller org) er en av 5 norske aktører som lyser ut konkurranse under Europan 17 paraplyen. Her er en tekst for hver tomt: Østmarka: Trondheim kommune søker innspill til utforming av sykehjem, boliger og nærmiljø på en sensitiv tomt på Lade. Grensen: NTNU søker innspill for utviklingen av trehusmiljøet på Grensen og hvordan nybygg, rehabilitering av historiske bygg og programmering kan gjøre området til en Living Lab og en utadvendt, levende del av campus. Åkrehamn: Karmøy kommune ønsker innspill på hvordan Åkrehamn kan utvikles til et kompakt, levende og attraktivt bymiljø. Krøgenes: Arendal kommune ønsker forslag for transformasjonen av et handel og industriområde til et bysentrum. Larvik: Larvik Kommune ønsker innspill til hvordan koble bysentrum med havnen, ved å programmere byrom og utforming av et prosjekt som gjør det lettere for fotgjengere å krysse jernbane, vei og bratt topografi.",
+        "designContest": {
+          "followUpContracts": true,
+          "prizes": {
+            "details": [
+              {
+                "id": "0",
+                "rank": 1,
+                "description": "Vinnerutkast: 12 000 EUR Andreplass: 6000 EUR"
+              }
+            ]
+          },
+          "juryMembers": [
+            {
+              "name": "Jacob Kamp, Ida Winge Andersen, Eli Grønn, Luis Basabe Montalvo, Katariina Haigh, Ilkka Törmä, Eili Vigestad Berge, Cristian Ştefănescu - Vara, Mette Gunnes- Vara"
+            }
+          ]
+        },
+        "awardCriteria": {
+          "criteria": [
+            {
+              "type": "cost"
+            },
+            {
+              "type": "price"
+            },
+            {
+              "type": "quality"
+            },
+            {
+              "description": "Fremgår av konkurranseprogrammet og regelverket for Europan 17 tilgjengelig på europaneurope.eu"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "accessDetails": "Unknown justification",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "accessDetailsURL": "https://www.europan-europe.eu"
+      }
+    ],
+    "title": "Europan 17 Larvik",
+    "description": "Europeisk arkitektur- og byutviklingskonkurranse for arkitekter, landskapsarkitekter og planleggere under 40 år. xxxxxxxxxxxxxxx (Din kommune, eller org) er en av 5 norske aktører som lyser ut konkurranse under Europan 17 paraplyen. Her er en tekst for hver tomt: Østmarka: Trondheim kommune søker innspill til utforming av sykehjem, boliger og nærmiljø på en sensitiv tomt på Lade. Grensen: NTNU søker innspill for utviklingen av trehusmiljøet på Grensen og hvordan nybygg, rehabilitering av historiske bygg og programmering kan gjøre området til en Living Lab og en utadvendt, levende del av campus. Åkrehamn: Karmøy kommune ønsker innspill på hvordan Åkrehamn kan utvikles til et kompakt, levende og attraktivt bymiljø. Krøgenes: Arendal kommune ønsker forslag for transformasjonen av et handel og industriområde til et bysentrum. Larvik: Larvik Kommune ønsker innspill til hvordan koble bysentrum med havnen, ved å programmere byrom og utforming av et prosjekt som gjør det lettere for fotgjengere å krysse jernbane, vei og bratt topografi.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "71240000"
+          },
+          {
+            "id": "71220000"
+          },
+          {
+            "id": "71400000"
+          },
+          {
+            "id": "71420000"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "71240000"
+        },
+        "deliveryLocations": [
+          {
+            "description": "Anywhere"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [],
+    "deliveryLocations": [
+      {
+        "description": "Anywhere"
+      }
+    ]
+  },
+  "date": "2023-03-29T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Larvik kommune 918082956",
+      "additionalIdentifiers": [
+        {
+          "id": "918 082 956",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Sigmund Ulnes",
+        "telephone": "+47 98231532",
+        "email": "sigmund.ulnes@larvik.kommune.no"
+      },
+      "details": {
+        "url": "www.larvik.kommune.no"
+      },
+      "address": {
+        "locality": "Larvik"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Vestfold tingrett, Larvik tinghus",
+      "contactPoint": {
+        "telephone": "+47 33206700",
+        "email": "vestfold.tingrett@domstol.no"
+      },
+      "address": {
+        "locality": "Larvik"
+      }
+    }
+  ]
+}

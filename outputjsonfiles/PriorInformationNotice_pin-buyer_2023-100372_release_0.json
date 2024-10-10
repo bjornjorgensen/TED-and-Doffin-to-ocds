@@ -1,0 +1,71 @@
+{
+  "id": "37bbf05d-0f70-4afe-87fb-0b5b0f3e9cd6",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "title": "Digitale betalingsløsninger - straksbetaling",
+    "mainProcurementCategory": "services",
+    "description": "HSØ er i ferd med å rulle ut et større prosjekt som heter Helselogistikk-prosjekt. Dette vil bl.a. tilby pasienten å «sjekke inn» når vedkomne er på plass før konsultasjon, samt betale egenandelen i forkant.I den forbindelse ønsker vi informasjon om det i dag finnes andre aktører enn VIPPS som tilbyr straksbetalinger i form av digitale betalingsløsninger.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "30144400"
+          },
+          {
+            "id": "66110000"
+          }
+        ],
+        "classification": {
+          "scheme": "CPV",
+          "id": "66115000"
+        }
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "country": "NO"
+      }
+    ],
+    "deliveryLocations": [
+      {
+        "description": "Anywhere in the given country"
+      }
+    ]
+  },
+  "date": "2023-10-30T08:37:49+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "SYKEHUSINNKJØP HF",
+      "additionalIdentifiers": [
+        {
+          "id": "916879067",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Postmottak Sykehusinnkjøp",
+        "telephone": "+47 78950700",
+        "email": "post@sykehusinnkjop.no"
+      },
+      "details": {
+        "url": "https://permalink.mercell.com/215356090.aspx"
+      },
+      "address": {
+        "locality": "VADSØ"
+      }
+    }
+  ]
+}

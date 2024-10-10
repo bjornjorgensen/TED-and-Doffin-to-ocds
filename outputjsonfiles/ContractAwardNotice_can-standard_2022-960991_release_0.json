@@ -1,0 +1,150 @@
+{
+  "id": "2022-960991",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "2022-960991",
+    "procurementMethodRationale": "Anskaffelsen er omfattet av lov om offentlige anskaffelser av 17. juni 2016 nr. 73 (LOA) og forskrift om offentlige anskaffelser av 12. august 2016 nr. 974 (FOA). Anskaffelsesloven og forskriften gjelder likevel ikke dersom anvendelsen av disse vil hindre oppdragsgiver i å ivareta vesentlige sikkerhetsinteresser, jf. FOA § 2-2 (2). Pga. de vesentlige sikkerhetsinteressene som foreligger, ble det konkludert med at det forelå hjemmel for å unnta anskaffelsen fra LOA og FOA. For allikevel å sikre konkurranse om denne kontrakten, ble det besluttet å sende en tilbudsforespørsel til 4 utvalgte leverandører, og konkurransen ble så langt som mulig gjennomført i samsvar med grunnleggende prinsipper for offentlige anskaffelser og forhandlet prosedyre.",
+    "procurementMethodRationaleClassifications": [
+      {
+        "scheme": "eu-direct-award-justification",
+        "id": "below-thres",
+        "description": "Contracts with estimated value below the procurement thresholds"
+      }
+    ],
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "not-allowed"
+        },
+        "title": "Delivery and maintenance of a Cell Broadcasting Entity with associated services",
+        "mainProcurementCategory": "goods",
+        "description": "Løsningen skal bestå av en Cell Broadcast Entity (CBE) og et brukergrensesnitt for å produsere et varsel og levere den til Cell Broadcast Centres (CBC) som ligger hos mobiloperatørene. Løsningen skal være skalerbar og fremtidsrettet. Fase 1: I første omgang legges det opp til at varsel skal kunne sendes fra ett sted (politiet) innen utgangen av 2022. Dette for så raskt som mulig å få etablert et utsendelsespunkt og løsning på statens side. Fase 2: DSB skal i tett samarbeid med POD etablere og implementere løsninger i det enkelte politidistrikt og for Sivilforsvaret i tråd med tidligere utredninger og anbefalinger og ferdigstille arbeidet med å etablere og implementere prosesser og rutiner for bruk av løsningen ved hendelser, krise og krig. Dette i tett samarbeid med POD.",
+        "awardCriteria": {
+          "criteria": [
+            {
+              "type": "quality",
+              "numbers": [
+                {
+                  "weight": "percentageExact"
+                }
+              ]
+            },
+            {
+              "type": "price"
+            },
+            {
+              "description": "Kvalitet"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "hasElectronicAuction": false
+        }
+      }
+    ],
+    "title": "Delivery and maintenance of a Cell Broadcasting Entity with associated services",
+    "mainProcurementCategory": "goods",
+    "description": "Avtalen gjelder leveranse av European Public Warning System (EU-ALERT), jf. ETSI TS 102 900V1.3.1 (22019-02). Løsningen skal baseres på Cell Broadcast- teknologien og skal komplett eredet eksisterende off entlige varslingssystemet som som består av tyfoner/varslingsanlegg.",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "32571000"
+        },
+        "relatedLot": "LOT-0000"
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "region": "NO081"
+      }
+    ]
+  },
+  "date": "2022-10-21T12:00:00+02:00",
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 42000000.0,
+          "currency": "NOK"
+        },
+        "hasSubcontracting": false,
+        "tenderers": [
+          {
+            "id": "ORG-0002"
+          }
+        ]
+      }
+    ]
+  },
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Direktoratet for samfunnssikkerhet og beredskap (DSB)",
+      "additionalIdentifiers": [
+        {
+          "id": "974 760 983",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Liv Riseth",
+        "telephone": "+47 33412631",
+        "email": "liv.riseth@dsb.no"
+      },
+      "details": {
+        "url": "www.dsb.no"
+      },
+      "address": {
+        "locality": "TØNSBERG"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Everbridge Norway AS",
+      "additionalIdentifiers": [
+        {
+          "id": "980400255",
+          "scheme": "GB-COH"
+        }
+      ],
+      "address": {
+        "locality": "Oslo"
+      },
+      "roles": [
+        "tenderer"
+      ]
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Vestfold Tingrett, Tønsberg tinghus",
+      "address": {
+        "locality": "Tønsberg"
+      }
+    }
+  ],
+  "awards": [
+    {
+      "id": "RES-0001",
+      "value": {
+        "amount": 42000000.0,
+        "currency": "NOK"
+      },
+      "relatedLots": [
+        "LOT-0000"
+      ]
+    }
+  ]
+}

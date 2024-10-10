@@ -1,0 +1,138 @@
+{
+  "id": "2023-371675",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "2023-371675",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "tenderPeriod": {
+          "endDate": "2023-11-08T13:00:00+01:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "allowed",
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Rammeavtale for kjøp av grafisk og designbyrå tjenester",
+        "description": "Kulturtanken skal inngå rammeavtale for kjøp av grafiske designtjenester. Behovet vil variere fra år til år, men vi antar at behov knyttet til interaktiv design vil øke. Kulturtanken har blant annet behov for bistand i forbindelse med utforming av brosjyrer og årsrapport. I tillegg har Kommunikasjonsavdelingen behov for grafiske tjenester i forbindelse med ulike prosjekter som konferanser og seminarer. Fullstendig beskrivelse av leveransen følger av «Bilag 1: Overordnet beskrivelse av de ytelser rammeavtalen gjelder for».",
+        "designContest": {
+          "followUpContracts": true
+        },
+        "awardCriteria": {
+          "criteria": [
+            {
+              "type": "cost"
+            },
+            {
+              "type": "price"
+            },
+            {
+              "type": "quality"
+            },
+            {
+              "description": "1) Kvalitet, kreativitet, design (40%) Det vil bli lagt vekt på leverandørens evne til grafisk å uttrykke Kulturtankens ansvarsområde gjennom en enhetlig og profesjonell profil. Det kreves kompetanse innen tilrettelegging av grafisk oppsett til digitale verktøy som Adobe Indesign, Powerpoint, Word, PowerBI og Canva. 2) Oppdragsorganisering kompetanse og kapasitet (30%) Her vil det bli lagt vekt på leverandørens og det tilbudte teamets kompetanse, sammensetning og praktisk erfaring med lignende oppdrag. Det kreves også gode rutiner for kvalitetssikring og risikohåndtering. Vi vurderer også hvilke tidsrammer leverandøren kan tilby for større og mindre oppdrag, eks: årsrapport og stillingsannonse. 3) Pris (30%)"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "url": "http://eu.eu-supply.com/app/rfq/rwlentrance_s.asp?PID=380703&B=DFO",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "Rammeavtale for kjøp av grafisk og designbyrå tjenester",
+    "description": "Kulturtanken skal inngå rammeavtale for kjøp av grafiske designtjenester. Behovet vil variere fra år til år, men vi antar at behov knyttet til interaktiv design vil øke. Kulturtanken har blant annet behov for bistand i forbindelse med utforming av brosjyrer og årsrapport. I tillegg har Kommunikasjonsavdelingen behov for grafiske tjenester i forbindelse med ulike prosjekter som konferanser og seminarer. Fullstendig beskrivelse av leveransen følger av «Bilag 1: Overordnet beskrivelse av de ytelser rammeavtalen gjelder for».",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "79000000"
+          },
+          {
+            "id": "79341400"
+          },
+          {
+            "id": "79810000"
+          },
+          {
+            "id": "79811000"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "79800000"
+        },
+        "deliveryLocations": [
+          {
+            "description": "Anywhere"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [],
+    "deliveryLocations": [
+      {
+        "description": "Anywhere"
+      }
+    ]
+  },
+  "date": "2023-10-03T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Kulturtanken - Den Kulturelle Skolesekken Norge",
+      "additionalIdentifiers": [
+        {
+          "id": "974 761 114",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Mohammad Hamza Raja",
+        "telephone": "+47 40627146",
+        "email": "mhr@kulturtanken.no"
+      },
+      "details": {
+        "url": "https://www.kulturtanken.no/"
+      },
+      "address": {
+        "locality": "OSLO"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Oslo Tingrett",
+      "address": {
+        "locality": "Oslo"
+      }
+    }
+  ]
+}

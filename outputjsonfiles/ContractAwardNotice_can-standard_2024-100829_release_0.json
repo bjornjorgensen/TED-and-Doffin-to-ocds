@@ -1,0 +1,166 @@
+{
+  "id": "510444f4-6cd2-4b26-8dd6-f3af27ffa069",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "other"
+    },
+    "id": "5081837f-9dfe-4b87-98ca-cca5c60b9c28",
+    "procurementMethodRationale": "Oppdragsgiver har konkludert med at vi i denne prosessen står ovenfor en eneleverandørsituasjon etter FOA §13-4 bokstav b nr. 2, som følge av at Focus Software AS er eneste leverandør som leverer denne tjenesten, til vårt formål, basert på AutoCAD som baseprogram. ",
+    "procurementMethodRationaleClassifications": [
+      {
+        "scheme": "eu-direct-award-justification",
+        "id": "technical",
+        "description": "The contract can be provided only by a particular economic operator because of an absence of competition for technical reasons"
+      }
+    ],
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "title": "Intensjonskunngjøring - Kjøp av program for utarbeidelse av digitale plandata",
+        "identifiers": {
+          "id": "2024/930",
+          "scheme": "internal"
+        },
+        "mainProcurementCategory": "goods",
+        "description": "Ringerike kommune har til intensjon å inngå kontrakt med Focus Software AS for løpende tjenestekjøp over internett. Dette innebærer kjøp av programmet Focus Arealplan med tilhørende nødvendige lisenser.Kontraktsverdi pr år er:Oppdragsgiver har konkludert med at vi i denne prosessen står ovenfor en eneleverandørsituasjon etter FOA §13-4 bokstav b nr. 2, som følge av at Focus Software AS er eneste leverandør som leverer denne tjenesten, til vårt formål, basert på AutoCAD som baseprogram.",
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "hasElectronicAuction": false
+        }
+      }
+    ],
+    "title": "Intensjonskunngjøring - Kjøp av program for utarbeidelse og redigering av digitale plandata",
+    "mainProcurementCategory": "goods",
+    "description": "Ringerike kommune har til intensjon å inngå kontrakt med Focus Software AS for løpende tjenestekjøp over internett. Dette innebærer kjøp av programmet Focus Arealplan med tilhørende nødvendige lisenser.Kontraktsverdi pr år er: kr 82 013,-Oppdragsgiver har konkludert med at vi i denne prosessen står ovenfor en eneleverandørsituasjon etter FOA §13-4 bokstav b nr. 2, som følge av at Focus Software AS er eneste leverandør som leverer denne tjenesten, til vårt formål, basert på AutoCAD som baseprogram.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "22114300"
+          },
+          {
+            "id": "48326000"
+          },
+          {
+            "id": "72268000"
+          },
+          {
+            "id": "72310000"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "48100000"
+        },
+        "deliveryAddresses": [
+          {
+            "country": "NO"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "region": "NO082"
+      },
+      {
+        "region": "NO082"
+      },
+      {
+        "country": "NO"
+      }
+    ],
+    "procurementMethodDetails": "Det henvises til vedlagt dokument for nærmere beskrivelse av anskaffelsen, vårt behov og eneleverandørsituasjonen."
+  },
+  "date": "2024-01-19T12:52:04+00:00",
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      }
+    ]
+  },
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Ringerike Kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "940100925",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Silje Skansen Elfving",
+        "telephone": "+47 32117400",
+        "email": "silje.skansen.elfving@ringerike.kommune.no"
+      },
+      "address": {
+        "locality": "HØNEFOSS"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Ringerike, Asker og Bærum tingrett",
+      "additionalIdentifiers": [
+        {
+          "id": "926725963",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "004767576500",
+        "email": "trabpost@domstol.no"
+      },
+      "address": {
+        "locality": "Sandvika"
+      }
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Focus Software AS",
+      "additionalIdentifiers": [
+        {
+          "id": "826781742",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Jan Vidar Kleppe",
+        "telephone": "92885944",
+        "email": "jon.vidar.kleppe@focus.no"
+      },
+      "address": {
+        "locality": "Billingstad"
+      },
+      "roles": [
+        "tenderer"
+      ]
+    }
+  ]
+}

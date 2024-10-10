@@ -1,0 +1,155 @@
+{
+  "id": "2c234234-aaec-4210-8cbe-1803ecaee901",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0023"
+    },
+    "id": "d91f618f-7bf0-41bd-b227-7574301d2977",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "title": "Tillatelsesordning for el-sparkesykler i Ålesund Kommune",
+        "identifiers": {
+          "id": "23/7053",
+          "scheme": "internal"
+        },
+        "mainProcurementCategory": "services",
+        "description": "Ålesund kommune lyser ut løyve til å drive utleige av elsparkesyklar som gjeld for sesongen 2024. \nÅlesund kommune kunngjer søknadsinformasjon for løyveperioden 15. april til 31. desember 2024 for utleige av elsparkesyklar på offentleg grunn. Det blir gitt løyve til 300 elsparkesyklar i sone 1 (Steinvågbrua - Fagerlia). Mengd elsparkesyklar i sone 1 fordelast likt på alle søkarar som fyller vilkåra for løyve, men likevel slik at kvar søkar maksimalt får det tal elsparkesyklar det er søkt om, sjå forskrifta § 5 bokstav c.   \nI resten av kommunen er det ikkje sett grense for mengd elsparkesyklar.   \n\nSøknaden skal sendast inn gjennom Ålesund kommune sin digitale søknadsportal innan 15.03.2023.\nhttps://skjema.alesund.kommune.no/skjema/ALE0320/Sknad_om_elsparkesykkelutleige",
+        "tenderPeriod": {
+          "endDate": "2024-03-15T00:00:00+01:00"
+        },
+        "hasAccessibilityCriteria": false,
+        "submissionTerms": {
+          "languages": [
+            "no",
+            "sv",
+            "da"
+          ]
+        }
+      }
+    ],
+    "title": "Tillatelsesordning for el-sparkesykler i Ålesund Kommune",
+    "mainProcurementCategory": "services",
+    "description": "Ålesund kommune lyser ut løyve til å drive utleige av elsparkesyklar som gjeld for sesongen 2024. \nÅlesund kommune kunngjer søknadsinformasjon for løyveperioden 15. april til 31. desember 2024 for utleige av elsparkesyklar på offentleg grunn. Det blir gitt løyve til 300 elsparkesyklar i sone 1 (Steinvågbrua - Fagerlia). Mengd elsparkesyklar i sone 1 fordelast likt på alle søkarar som fyller vilkåra for løyve, men likevel slik at kvar søkar maksimalt får det tal elsparkesyklar det er søkt om, sjå forskrifta § 5 bokstav c.   \nI resten av kommunen er det ikkje sett grense for mengd elsparkesyklar.   \n\nSøknaden skal sendast inn gjennom Ålesund kommune sin digitale søknadsportal innan 15.03.2023.\nhttps://skjema.alesund.kommune.no/skjema/ALE0320/Sknad_om_elsparkesykkelutleige",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "34000000"
+          },
+          {
+            "id": "34144900"
+          },
+          {
+            "id": "34400000"
+          },
+          {
+            "id": "34420000"
+          },
+          {
+            "id": "34422000"
+          },
+          {
+            "id": "50111100"
+          },
+          {
+            "id": "50111110"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "60000000"
+        },
+        "deliveryAddresses": [
+          {
+            "locality": "Ålesund"
+          },
+          {
+            "country": "NO"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "region": "NO0A3"
+      },
+      {
+        "region": "NO0A3"
+      },
+      {
+        "locality": "Ålesund"
+      },
+      {
+        "country": "NO"
+      }
+    ]
+  },
+  "date": "2024-02-19T07:33:58+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Ålesund kommune - Innkjøp",
+      "additionalIdentifiers": [
+        {
+          "id": "929911709",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Even Arvik Langseth",
+        "telephone": "+4770162000",
+        "email": "even.arvik.langseth@alesund.kommune.no"
+      },
+      "address": {
+        "locality": "Ålesund"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Møre og Romsdal tingrett",
+      "additionalIdentifiers": [
+        {
+          "id": "929911709",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "70 33 47 00",
+        "email": "more.og.romsdal.tingrett@domstol.no"
+      },
+      "details": {
+        "url": "https://www.domstol.no/no/domstoler/tingrett/more-og-romsdal-tingrett/"
+      },
+      "address": {
+        "locality": "Ålesund"
+      }
+    }
+  ]
+}

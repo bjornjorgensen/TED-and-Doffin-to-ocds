@@ -1,0 +1,166 @@
+{
+  "id": "2023-677604",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "2023-677604",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "not-allowed"
+        },
+        "title": "Endring i avtale Virksomhetsstyringsverktøy",
+        "mainProcurementCategory": "services",
+        "description": "Viken fylkeskommune inviterer med dette til konkurranse om levering av et helhetlig virksomhetsstyringsverktøy til fylkeskommunen. Deltagende fylkeskommuner, Agder og Vestfold og Telemark, deltar i konkurransen i form av opsjoner for å tiltre egen avtale med valgt leverandør. For øvrige detaljer se konkurransebestemmelsene, særlig punkt \"Oppdraget\"",
+        "contractPeriod": {
+          "durationInDays": 2160
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "title": "Endring i avtale Virksomhetsstyringsverktøy",
+    "mainProcurementCategory": "services",
+    "description": "Viken fylkeskommune inviterer med dette til konkurranse om levering av et helhetlig virksomhetsstyringsverktøy til fylkeskommunen. Deltagende fylkeskommuner, Agder og Vestfold og Telemark, deltar i konkurransen i form av opsjoner for å tiltre egen avtale med valgt leverandør. For øvrige detaljer se konkurransebestemmelsene, særlig punkt \"Oppdraget\"",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "48300000"
+          },
+          {
+            "id": "48400000"
+          },
+          {
+            "id": "48440000"
+          },
+          {
+            "id": "48482000"
+          },
+          {
+            "id": "72212400"
+          },
+          {
+            "id": "72220000"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "72268000"
+        },
+        "deliveryAddresses": [
+          {
+            "streetAddress": "Viken"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "streetAddress": "Viken"
+      }
+    ]
+  },
+  "date": "2023-03-01T12:00:00+02:00",
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 35000000.0,
+          "currency": "NOK"
+        },
+        "tenderers": [
+          {
+            "id": "ORG-0002"
+          }
+        ]
+      }
+    ]
+  },
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Viken fylkeskommune",
+      "additionalIdentifiers": [
+        {
+          "id": "921 693 230",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Marianne Brekke",
+        "telephone": "+47 97468972",
+        "email": "mariannb@viken.no"
+      },
+      "details": {
+        "url": "https://viken.no/"
+      },
+      "address": {
+        "locality": "Drammen"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Framsikt AS",
+      "additionalIdentifiers": [
+        {
+          "id": "913187512",
+          "scheme": "GB-COH"
+        }
+      ],
+      "address": {
+        "locality": "Bø i Vesterålen"
+      },
+      "roles": [
+        "tenderer"
+      ]
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Drammen tingrett",
+      "address": {
+        "locality": "Drammen"
+      }
+    }
+  ],
+  "awards": [
+    {
+      "id": "RES-0001",
+      "value": {
+        "amount": 35000000.0,
+        "currency": "NOK"
+      },
+      "relatedLots": [
+        "LOT-0000"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+<PriorInformationNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1" xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1" xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1" xmlns="urn:oasis:names:specification:ubl:schema:xsd:PriorInformationNotice-2">
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionContent>
+        <efext:EformsExtension>
+          <efbc:TransmissionDate>2023-10-30+00:00</efbc:TransmissionDate>
+          <efbc:TransmissionTime>17:01:27+00:00</efbc:TransmissionTime>
+          <efac:NoticeSubType>
+            <cbc:SubTypeCode listName="notice-subtype">N4</cbc:SubTypeCode>
+          </efac:NoticeSubType>
+          <efac:Organizations>
+            <efac:Organization>
+              <efac:Company>
+                <cbc:WebsiteURI>https://www.regjeringen.no/no/dep/bld/id298/</cbc:WebsiteURI>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Barne- og familiedepartementet</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Postboks 8036 Dep</cbc:StreetName>
+                  <cbc:CityName>OSLO</cbc:CityName>
+                  <cbc:PostalZone>0030</cbc:PostalZone>
+                  <cbc:CountrySubentityCode listName="nuts">NO081</cbc:CountrySubentityCode>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">972417793</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Name> Ola Hulbak</cbc:Name>
+                  <cbc:Telephone>+47 22249090</cbc:Telephone>
+                  <cbc:ElectronicMail>obh@bfd.dep.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+            <efac:Organization>
+              <efac:Company>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Oslo Tingrett</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Postboks 2106 Vika</cbc:StreetName>
+                  <cbc:CityName>Oslo</cbc:CityName>
+                  <cbc:PostalZone>0125</cbc:PostalZone>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">926725939</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Telephone>+47 22035200</cbc:Telephone>
+                  <cbc:ElectronicMail>oslo.tingrett@domstol.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+          </efac:Organizations>
+        </efext:EformsExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:UBLVersionID>2.3</cbc:UBLVersionID>
+  <cbc:CustomizationID>eforms-sdk-1.7#extended#urn:fdc:anskaffelser.no:2023:eforms:national</cbc:CustomizationID>
+  <cbc:ID schemeName="notice-id">1db209a3-6934-4d5f-bf78-2aa8a1f2453c</cbc:ID>
+  <cbc:IssueDate>2023-10-30+00:00</cbc:IssueDate>
+  <cbc:IssueTime>16:55:46+00:00</cbc:IssueTime>
+  <cbc:VersionID>01</cbc:VersionID>
+  <cbc:PlannedDate>2023-12-01+01:00</cbc:PlannedDate>
+  <cbc:RegulatoryDomain>other</cbc:RegulatoryDomain>
+  <cbc:NoticeTypeCode listName="planning">pin-only</cbc:NoticeTypeCode>
+  <cbc:NoticeLanguageCode>NOR</cbc:NoticeLanguageCode>
+  <cac:ContractingParty>
+    <cbc:BuyerProfileURI>https://eu.eu-supply.com/ctm/company/companyinformation/index/333461</cbc:BuyerProfileURI>
+    <cac:ContractingPartyType>
+      <cbc:PartyTypeCode listName="buyer-legal-type">cga</cbc:PartyTypeCode>
+    </cac:ContractingPartyType>
+    <cac:ContractingActivity>
+      <cbc:ActivityTypeCode listName="authority-activity">gen-pub</cbc:ActivityTypeCode>
+    </cac:ContractingActivity>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+      </cac:PartyIdentification>
+    </cac:Party>
+  </cac:ContractingParty>
+  <cac:ProcurementProject>
+    <cbc:ID schemeName="InternalID">23/3041</cbc:ID>
+    <cbc:Name languageID="NOR">Markedsdialog - områdegjennomgang av det statlige institusjonsbarnevernet</cbc:Name>
+    <cbc:Description languageID="NOR">Barne- og familiedepartementet (BFD) og Finansdepartementet (FIN) inviterer potensielle leverandører til markedsdialog om et oppdrag om bistand til gjennomføring av en områdegjennomgang av institusjonsbarnevernet.
+Informasjonsmøtet:
+Tid: 6. november 2023, kl. 10.00-12.00.
+Sted: A64, Auditorium Hovedbølet
+Adresse: Akersgata 64
+Frist for påmelding: 2. november, kl. 16:00.
+Frist for innlevering av innspill er 12. november kl. 12:00.
+</cbc:Description>
+    <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
+    <cac:MainCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">73200000</cbc:ItemClassificationCode>
+    </cac:MainCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">73000000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">73210000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">73220000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:RealizedLocation>
+      <cbc:Description languageID="NOR">Informasjonsmøtet:
+Tid: 6. november 2023, kl. 10.00-12.00.
+Sted: A64, Auditorium Hovedbølet
+Adresse: Akersgata 64
+Frist for påmelding: 2. november, kl. 16:00.</cbc:Description>
+      <cac:Address>
+        <cbc:StreetName>Akersgata 64</cbc:StreetName>
+        <cbc:CityName>Oslo</cbc:CityName>
+        <cbc:PostalZone>0180</cbc:PostalZone>
+        <cbc:CountrySubentityCode listName="nuts">NO081</cbc:CountrySubentityCode>
+        <cac:Country>
+          <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:Address>
+    </cac:RealizedLocation>
+  </cac:ProcurementProject>
+  <cac:ProcurementProjectLot>
+    <cbc:ID schemeName="Lot">LOT-0000</cbc:ID>
+    <cac:TenderingTerms>
+      <cac:CallForTendersDocumentReference>
+        <cbc:ID>Anskaffelsesdokumenter</cbc:ID>
+        <cbc:DocumentType>non-restricted-document</cbc:DocumentType>
+        <cbc:LanguageID>NOR</cbc:LanguageID>
+        <cac:Attachment>
+          <cac:ExternalReference>
+            <cbc:URI>https://eu.eu-supply.com/app/rfq/rwlentrance_s.asp?PID=384288&amp;B=</cbc:URI>
+          </cac:ExternalReference>
+        </cac:Attachment>
+      </cac:CallForTendersDocumentReference>
+      <cac:AppealTerms>
+        <cac:AppealReceiverParty>
+          <cac:PartyIdentification>
+            <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+          </cac:PartyIdentification>
+        </cac:AppealReceiverParty>
+      </cac:AppealTerms>
+    </cac:TenderingTerms>
+    <cac:TenderingProcess>
+      <cbc:GovernmentAgreementConstraintIndicator>true</cbc:GovernmentAgreementConstraintIndicator>
+    </cac:TenderingProcess>
+    <cac:ProcurementProject>
+      <cbc:Name languageID="NOR">Markedsdialog - områdegjennomgang av det statlige institusjonsbarnevernet</cbc:Name>
+      <cbc:Description languageID="NOR">Barne- og familiedepartementet (BFD) og Finansdepartementet (FIN) inviterer potensielle leverandører til markedsdialog om et oppdrag om bistand til gjennomføring av en områdegjennomgang av institusjonsbarnevernet.
+Informasjonsmøtet:
+Tid: 6. november 2023, kl. 10.00-12.00.
+Sted: A64, Auditorium Hovedbølet
+Adresse: Akersgata 64
+Frist for påmelding: 2. november, kl. 16:00.
+Frist for innlevering av innspill er 12. november kl. 12:00.
+</cbc:Description>
+      <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
+      <cbc:SMESuitableIndicator>true</cbc:SMESuitableIndicator>
+      <cac:MainCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">73200000</cbc:ItemClassificationCode>
+      </cac:MainCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">73000000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">73210000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">73220000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:RealizedLocation>
+        <cbc:Description languageID="NOR">Informasjonsmøtet:
+Tid: 6. november 2023, kl. 10.00-12.00.
+Sted: A64, Auditorium Hovedbølet
+Adresse: Akersgata 64
+Frist for påmelding: 2. november, kl. 16:00.</cbc:Description>
+        <cac:Address>
+          <cbc:StreetName>Akersgata 64</cbc:StreetName>
+          <cbc:CityName>Oslo</cbc:CityName>
+          <cbc:PostalZone>0180</cbc:PostalZone>
+          <cbc:CountrySubentityCode listName="nuts">NO081</cbc:CountrySubentityCode>
+          <cac:Country>
+            <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+          </cac:Country>
+        </cac:Address>
+      </cac:RealizedLocation>
+    </cac:ProcurementProject>
+  </cac:ProcurementProjectLot>
+</PriorInformationNotice>

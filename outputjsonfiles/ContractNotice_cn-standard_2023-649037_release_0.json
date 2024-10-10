@@ -1,0 +1,174 @@
+{
+  "id": "2023-649037",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "2023-649037",
+    "lots": [
+      {
+        "id": "LOT-1-8",
+        "techniques": {
+          "hasFrameworkAgreement": true,
+          "frameworkAgreement": {
+            "method": "withoutReopeningCompetition"
+          },
+          "hasElectronicAuction": false
+        },
+        "coveredBy": [
+          "GPA"
+        ],
+        "tenderPeriod": {
+          "endDate": "2023-03-17T13:00:00+02:00"
+        },
+        "awardPeriod": {
+          "startDate": "2023-03-17T13:00:00+02:00"
+        },
+        "bidOpening": {
+          "date": "2023-03-17T13:00:00+02:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "allowed",
+          "variantPolicy": "Unknown",
+          "languages": [
+            "no"
+          ],
+          "bidValidityPeriod": {
+            "durationInDays": 240
+          }
+        },
+        "title": "Delkontrakt 1-8",
+        "mainProcurementCategory": "goods",
+        "description": "Det er mulig å inngi tilbud på følgende delkontrakter: 1    Diatermiplater med splitt til voksne, med integrert kabel 2    Diatermiplater med splitt til voksne, med flergangskabel 3    Diatermiplater med splitt til bruk på pasienter som kjøles ned, med flergangskabel eller integrert kabel 4    Diatermiplater med splitt til barn, med integrert kabel 5    Engagns diatermipenn med integrert røykavsug, med vanlig spiss og løse engangs elektroder 6    Engagns diatermipenn med integrert røykavsug, med teleskopspiss og løse engangs elektroder 7    Bipolare pinsetter og kabler 8    Diatermirensere Se Konkurransebestemmelser punkt 1.5 for oversikt over estimert og maksimalt forbruk over 4 år.",
+        "value": {
+          "amount": 30000000.0,
+          "currency": "NOK"
+        },
+        "contractPeriod": {
+          "durationInDays": 720
+        },
+        "secondStage": {
+          "minimumCandidates": 0,
+          "successiveReduction": false
+        },
+        "awardCriteria": {
+          "criteria": [
+            {
+              "description": "Price is not the only award criterion and all criteria are stated only in the procurement documents."
+            }
+          ]
+        },
+        "options": {
+          "description": "Rammeavtalen skal ha en varighet på to (2) år regnet fra oppstartstidspunkt. Oppdragsgiveren har deretter en ensidig rett til å forlenge avtalen med inntil ett (1) år av gangen. Maksimal samlet avtaleperiode er fire (4) år (2+1+1)."
+        },
+        "contractTerms": {
+          "electronicInvoicingPolicy": "allowed",
+          "hasElectronicOrdering": true,
+          "hasElectronicPayment": true
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "type": "suitability",
+              "description": "Tilbyder skal vedlegge en liste over de viktigste leveransene de siste 3 år, herunder opplysninger om verdi, tidspunkt og mottaker. Attester utstedt eller bekreftet av oppdragsgiver kan vedlegges. Tilbyders erfaring: Vedlegg 5- Svarskjema referanser, utfylt av Tilbyder"
+            },
+            {
+              "type": "economic"
+            },
+            {
+              "type": "technical"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false,
+        "hasRecurrence": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/196628037.aspx",
+        "relatedLots": [
+          "LOT-1-8"
+        ]
+      }
+    ],
+    "title": "Diatermipenner og -plater med tilbehør til foretakene i Helse Vest",
+    "mainProcurementCategory": "goods",
+    "description": "Anskaffelsens formål er å inngå rammeavtale(r) på diatermipenner og -plater med tilbehør. Det gjøres oppmerksom på at størrelser listet opp i Bilag 1 - Prisskjema er basert på produkter som brukes i dag, og at oppgitte mål/størrelser skal tolkes som omtrentlig og ikke strengt absolutte. Estimert totalverdi for alle delkontrakter er ca. NOK 7 500 000,- per år, totalt NOK 30 000 000,- over 4 år. Se Bilag 2 - Kravspesifikasjon og Bilag 1 - Prisskjema for nærmere beskrivelse.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "33100000"
+          },
+          {
+            "id": "33169000"
+          }
+        ],
+        "relatedLot": "LOT-1-8",
+        "classification": {
+          "scheme": "CPV",
+          "id": "33100000"
+        }
+      }
+    ],
+    "value": {
+      "amount": 30000000.0,
+      "currency": "NOK"
+    },
+    "lotDetails": {
+      "maximumLotsBidPerSupplier": 1
+    },
+    "deliveryAddresses": [
+      {
+        "region": "NO0A1"
+      },
+      {
+        "region": "NO0A2"
+      }
+    ]
+  },
+  "date": "2023-02-16T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "SYKEHUSINNKJØP HF",
+      "additionalIdentifiers": [
+        {
+          "id": "916879067",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Postmottak Sykehusinnkjøp",
+        "telephone": "+47 78950700",
+        "email": "post@sykehusinnkjop.no"
+      },
+      "details": {
+        "url": "https://permalink.mercell.com/196628037.aspx"
+      },
+      "address": {
+        "locality": "VADSØ"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": " Øst-Finnmark tingrett",
+      "address": {
+        "locality": "Vadsø"
+      }
+    }
+  ]
+}

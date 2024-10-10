@@ -1,0 +1,132 @@
+{
+  "id": "2023-697632",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "OTHER"
+    },
+    "id": "2023-697632",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "tenderPeriod": {
+          "endDate": "2023-03-09T12:00:00+02:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "allowed",
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "VA Sodin",
+        "mainProcurementCategory": "works",
+        "description": "Det skal legges nye vann- og avløpsledninger ved Sodin skole.",
+        "secondStage": {
+          "minimumCandidates": 0,
+          "successiveReduction": false
+        },
+        "contractTerms": {
+          "electronicInvoicingPolicy": "not-allowed",
+          "hasElectronicOrdering": false,
+          "hasElectronicPayment": false
+        },
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "hasElectronicAuction": false
+        }
+      }
+    ],
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "url": "https://tendsign.no/doc.aspx?UniqueId=afsvzyktwe&GoTo=Docs",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "VA Sodin",
+    "mainProcurementCategory": "works",
+    "description": "Det skal legges nye vann- og avløpsledninger ved Sodin skole.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "45230000"
+          },
+          {
+            "id": "45232000"
+          },
+          {
+            "id": "45232150"
+          },
+          {
+            "id": "45232400"
+          },
+          {
+            "id": "45232420"
+          },
+          {
+            "id": "45232440"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "45231300"
+        }
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "region": "NO060"
+      }
+    ]
+  },
+  "date": "2023-02-17T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Heim kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "920 920 004",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Olav Aa",
+        "email": "olav.aa@heim.kommune.no"
+      },
+      "details": {
+        "url": "http://www.heim.kommune.no"
+      },
+      "address": {
+        "locality": "Kyrksæterøra"
+      }
+    }
+  ],
+  "description": "Mercell kunngjøring: https://opic.com/id/afsvzyktwe"
+}

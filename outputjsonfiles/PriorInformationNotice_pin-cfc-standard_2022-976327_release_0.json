@@ -1,0 +1,155 @@
+{
+  "id": "2022-976327",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "2022-976327",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "tenderPeriod": {
+          "endDate": "2022-12-07T12:00:00+02:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "allowed",
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Anskaffelse av frittstående oppvarmingsovner til Sykehjemsetatens institusjoner",
+        "mainProcurementCategory": "goods",
+        "description": "Det skal anskaffes frittstående oppvarmingsovner til 10 til 13 av Sykehjemsetatens institusjoner.",
+        "value": {
+          "amount": 4000000.0,
+          "currency": "NOK"
+        },
+        "contractPeriod": {
+          "startDate": "2023-01-20T00:00:00+02:00",
+          "endDate": "2023-07-31T23:59:59+02:00"
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "type": "suitability",
+              "description": "Det henvises til vedlagte konkurransegrunnlag."
+            },
+            {
+              "type": "economic"
+            },
+            {
+              "type": "technical"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "url": "http://eu.eu-supply.com/app/rfq/rwlentrance_s.asp?PID=345366&B=OSLO",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "Anskaffelse av frittstående oppvarmingsovner til Sykehjemsetatens institusjoner",
+    "mainProcurementCategory": "goods",
+    "description": "Det skal anskaffes frittstående oppvarmingsovner til 10 til 13 av Sykehjemsetatens institusjoner.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "42214000"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "42214000"
+        }
+      }
+    ],
+    "value": {
+      "amount": 4000000.0,
+      "currency": "NOK"
+    },
+    "deliveryAddresses": [
+      {
+        "region": "NO081"
+      }
+    ]
+  },
+  "date": "2022-11-04T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Oslo kommune v/ Sykehjemsetaten",
+      "additionalIdentifiers": [
+        {
+          "id": "990 612 498",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Leona Pilares",
+        "telephone": "+47 21802180",
+        "email": "leona.pilares@sye.oslo.kommune.no"
+      },
+      "details": {
+        "url": "http://www.oslo.kommune.no"
+      },
+      "address": {
+        "locality": "Oslo"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Oslo Tingrett",
+      "contactPoint": {
+        "telephone": "+47 22035200",
+        "email": "oslo.tingrett@domstol.no"
+      },
+      "details": {
+        "url": "https://www.domstol.no/no/domstoler/tingrett/oslo-tingrett/"
+      },
+      "address": {
+        "locality": "Oslo"
+      }
+    },
+    {
+      "id": "ORG-0003",
+      "name": "KOFA",
+      "contactPoint": {
+        "telephone": "+47 55193000",
+        "email": "post@knse.no"
+      },
+      "details": {
+        "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa"
+      },
+      "address": {
+        "locality": "Bergen"
+      }
+    },
+    {
+      "id": "ORG-0004",
+      "name": "Sykehjemsetaten",
+      "contactPoint": {
+        "telephone": "+47 97574562",
+        "email": "leona.pilares@sye.oslo.kommune.no"
+      },
+      "address": {
+        "locality": "OSLO"
+      }
+    }
+  ]
+}
