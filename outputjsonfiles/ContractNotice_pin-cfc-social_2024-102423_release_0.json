@@ -129,7 +129,11 @@
       },
       "address": {
         "locality": "Ålesund"
-      }
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -149,7 +153,15 @@
       },
       "address": {
         "locality": "Ålesund"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

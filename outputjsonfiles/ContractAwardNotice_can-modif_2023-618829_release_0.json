@@ -77,7 +77,10 @@
       },
       "address": {
         "locality": "TRONDHEIM"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -94,7 +97,10 @@
       "name": "Klagenemnda for offentlige anskaffelser",
       "address": {
         "locality": "Bergen"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
     }
   ],
   "awards": [
@@ -106,7 +112,21 @@
       },
       "relatedLots": [
         "LOT-0000"
+      ],
+      "relatedBids": [
+        "TEN-0001"
       ]
+    }
+  ],
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "awardID": "RES-0001"
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

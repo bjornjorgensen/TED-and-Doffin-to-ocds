@@ -106,15 +106,26 @@
       },
       "address": {
         "locality": "OSLO"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0002",
       "name": "Oslo Tingrett",
       "address": {
         "locality": "Oslo"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
     }
   ],
-  "description": "Kulturtanken herved avlyser konkurransen «23/00605 - Anskaffelse av rammeavtale for kjøp av grafisk og designbyrå tjenester». Begrunnelse: Oppdragsgiver henviser til tidligere foretatte endringer i konkurransegrunnlaget og forlenget tilbudsfrist til 22.11.2023 kl. 13:00. I henhold til retningslinjer for offentlige anskaffelser sendte oppdragsgiver varsel om endringer til alle tilbyderne og publikasjonssidene i Doffin/TED. Grunnet tekniske utfordringer i konkurransegjennomføringsverktøy ble ikke informasjonen om forlenget frist sendt til Doffin/TED som planlagt. Konkurransen har vært synlig kun for tilbyderne som har meldt inn interesse for å levere tilbud før 08.11.2023. Som følge av dette ble nye tilbydere utelukket fra å delta i konkurransen. På grunn av overnevnte forhold velger Kulturtanken å avlyse utlyst konkurranse. Konkurransen vil bli kunngjort på nytt innen kort tid. Vi beklager ulemper som dette skal ha medført for alle involverte parter."
+  "description": "Kulturtanken herved avlyser konkurransen «23/00605 - Anskaffelse av rammeavtale for kjøp av grafisk og designbyrå tjenester». Begrunnelse: Oppdragsgiver henviser til tidligere foretatte endringer i konkurransegrunnlaget og forlenget tilbudsfrist til 22.11.2023 kl. 13:00. I henhold til retningslinjer for offentlige anskaffelser sendte oppdragsgiver varsel om endringer til alle tilbyderne og publikasjonssidene i Doffin/TED. Grunnet tekniske utfordringer i konkurransegjennomføringsverktøy ble ikke informasjonen om forlenget frist sendt til Doffin/TED som planlagt. Konkurransen har vært synlig kun for tilbyderne som har meldt inn interesse for å levere tilbud før 08.11.2023. Som følge av dette ble nye tilbydere utelukket fra å delta i konkurransen. På grunn av overnevnte forhold velger Kulturtanken å avlyse utlyst konkurranse. Konkurransen vil bli kunngjort på nytt innen kort tid. Vi beklager ulemper som dette skal ha medført for alle involverte parter.",
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
 }

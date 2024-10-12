@@ -1,4 +1,4 @@
-# converters/OPT_201_organization_touchpoint.py
+# converters/opt_201_organization_touchpoint.py
 
 from lxml import etree
 import logging
@@ -12,51 +12,47 @@ def parse_touchpoint_technical_identifier(xml_content):
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
     }
 
-    # Check if the relevant XPath exists
-    relevant_xpath = "//efac:organization/efac:touchpoint/cac:partyIdentification/cbc:ID[@schemeName='touchpoint']"
-    if not root.xpath(relevant_xpath, namespaces=namespaces):
-        logger.info(
-            "No touchpoint technical identifier data found. Skipping parse_touchpoint_technical_identifier."
-        )
-        return None
+    result = {"parties": []}
 
-    touchpoints = root.xpath(relevant_xpath, namespaces=namespaces)
+    touchpoints = root.xpath(
+        "//efac:Organizations/efac:Organization/efac:TouchPoint/cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']",
+        namespaces=namespaces,
+    )
 
-    result = {"touchpoints": []}
     for touchpoint in touchpoints:
-        result["touchpoints"].append(touchpoint.text)
+        touchpoint_id = touchpoint.text
+        if touchpoint_id:
+            result["parties"].append({"id": touchpoint_id})
 
-    return result if result["touchpoints"] else None
+    return result if result["parties"] else None
 
 
 def merge_touchpoint_technical_identifier(release_json, touchpoint_data):
     if not touchpoint_data:
-        logger.info("No touchpoint Technical Identifier data to merge")
+        logger.info("No TouchPoint technical identifier data to merge")
         return
 
-    parties = release_json.setdefault("parties", [])
+    existing_parties = release_json.setdefault("parties", [])
 
-    for touchpoint_id in touchpoint_data["touchpoints"]:
-        if not any(party["id"] == touchpoint_id for party in parties):
-            parties.append({"id": touchpoint_id})
-            logger.info(
-                "Added new party with touchpoint Technical Identifier: %s",
-                touchpoint_id,
-            )
+    for new_party in touchpoint_data["parties"]:
+        if not any(
+            existing_party["id"] == new_party["id"]
+            for existing_party in existing_parties
+        ):
+            existing_parties.append(new_party)
+            logger.info("Added new party with TouchPoint id: %s", new_party["id"])
         else:
-            logger.debug(
-                "Party with touchpoint Technical Identifier %s already exists",
-                touchpoint_id,
+            logger.info(
+                "Party with TouchPoint id: %s already exists, skipping", new_party["id"]
             )
 
     logger.info(
-        "Merged %d touchpoint Technical Identifiers",
-        len(touchpoint_data["touchpoints"]),
+        "Merged TouchPoint technical identifier data for %d parties",
+        len(touchpoint_data["parties"]),
     )

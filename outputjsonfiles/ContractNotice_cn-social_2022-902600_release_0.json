@@ -120,15 +120,28 @@
       },
       "address": {
         "locality": "Arendal"
-      }
+      },
+      "roles": [
+        "submissionReceiptBody",
+        "buyer",
+        "processContactPoint"
+      ]
     },
     {
       "id": "ORG-0002",
       "name": "Agder tingrett",
       "address": {
         "locality": "Kristiansand"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
     }
   ],
-  "description": "Viser til skjema pkt. II. 1.6) Informasjon om delkontrakter - avkrysset \"Nei\" pga systemet fungerer ikke godt nok. Oppdragsgiver presiserer at konkurransen er delt opp i 4 delkontrakter (delytelser). Se 1. Konkurransegrunnlag for nærmere informasjon"
+  "description": "Viser til skjema pkt. II. 1.6) Informasjon om delkontrakter - avkrysset \"Nei\" pga systemet fungerer ikke godt nok. Oppdragsgiver presiserer at konkurransen er delt opp i 4 delkontrakter (delytelser). Se 1. Konkurransegrunnlag for nærmere informasjon",
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
 }

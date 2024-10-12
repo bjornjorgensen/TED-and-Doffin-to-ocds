@@ -65,7 +65,10 @@
       },
       "address": {
         "locality": "Stavanger"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -78,5 +81,10 @@
       }
     }
   ],
-  "description": "Mercell kunngjøring: https://opic.com/id/afluzqqmxt"
+  "description": "Mercell kunngjøring: https://opic.com/id/afluzqqmxt",
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
 }

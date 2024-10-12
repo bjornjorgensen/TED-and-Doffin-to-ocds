@@ -125,8 +125,17 @@
       },
       "address": {
         "locality": "Kyrksæterøra"
-      }
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ]
     }
   ],
-  "description": "Mercell kunngjøring: https://opic.com/id/afsvzyktwe"
+  "description": "Mercell kunngjøring: https://opic.com/id/afsvzyktwe",
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
 }

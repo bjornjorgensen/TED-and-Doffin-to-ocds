@@ -127,14 +127,27 @@
       },
       "address": {
         "locality": "VÅGÅ"
-      }
+      },
+      "roles": [
+        "submissionReceiptBody",
+        "buyer",
+        "processContactPoint"
+      ]
     },
     {
       "id": "ORG-0002",
       "name": "Nedre-Telemark tingrett",
       "address": {
         "locality": "Skien"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

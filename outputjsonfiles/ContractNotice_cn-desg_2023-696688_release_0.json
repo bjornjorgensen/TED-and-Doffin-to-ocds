@@ -176,7 +176,12 @@
       },
       "address": {
         "locality": "Trondheim"
-      }
+      },
+      "roles": [
+        "submissionReceiptBody",
+        "buyer",
+        "processContactPoint"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -186,7 +191,15 @@
       },
       "address": {
         "locality": "Trondheim"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

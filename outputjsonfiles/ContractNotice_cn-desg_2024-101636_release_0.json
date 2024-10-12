@@ -318,7 +318,14 @@
       },
       "address": {
         "locality": "GJØVIK"
-      }
+      },
+      "roles": [
+        "submissionReceiptBody",
+        "buyer",
+        "evaluationBody",
+        "processContactPoint",
+        "reviewContactPoint"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -335,7 +342,16 @@
       },
       "address": {
         "locality": "Gjøvik"
-      }
+      },
+      "roles": [
+        "mediationBody",
+        "reviewBody"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

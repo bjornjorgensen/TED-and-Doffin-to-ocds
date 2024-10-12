@@ -125,15 +125,27 @@
       },
       "address": {
         "locality": "Eikelandsosen"
-      }
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ]
     },
     {
       "id": "ORG-0002",
       "name": "Hordaland tingrett",
       "address": {
         "locality": "Bergen"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
     }
   ],
-  "description": "Mercell kunngjøring: https://opic.com/id/afxgligahz Oppdragsgiver har ensidig opsjon på å forlenge kontrakten med 1 + 1 + 1 år"
+  "description": "Mercell kunngjøring: https://opic.com/id/afxgligahz Oppdragsgiver har ensidig opsjon på å forlenge kontrakten med 1 + 1 + 1 år",
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
 }

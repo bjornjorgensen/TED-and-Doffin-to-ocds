@@ -114,7 +114,11 @@
       },
       "address": {
         "locality": "VADSØ"
-      }
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -131,7 +135,15 @@
       },
       "address": {
         "locality": "Vadsø"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

@@ -140,7 +140,12 @@
       },
       "address": {
         "locality": "Larvik"
-      }
+      },
+      "roles": [
+        "submissionReceiptBody",
+        "buyer",
+        "processContactPoint"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -151,7 +156,15 @@
       },
       "address": {
         "locality": "Larvik"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

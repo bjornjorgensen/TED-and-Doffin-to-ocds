@@ -92,7 +92,10 @@
       },
       "address": {
         "locality": "Skien"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -109,7 +112,10 @@
       "name": "Tingretten",
       "address": {
         "locality": "Telemark Tingrett"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
     }
   ],
   "description": "Mercell kunngjøring: https://opic.com/id/afmhdeyyxz Bibliotek24 vil kontinuerlig invitere leverandører av digitale innholdstjenester til, bruk i folkebibliotek og videregående skoler, forhandle og videreformidle disse tilbudene til sektoren gjennom tilknytningsperioder 1-2 ganger i året.",
@@ -122,7 +128,21 @@
       },
       "relatedLots": [
         "LOT-0000"
+      ],
+      "relatedBids": [
+        "TEN-0001"
       ]
+    }
+  ],
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "awardID": "RES-0001"
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

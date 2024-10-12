@@ -120,7 +120,9 @@
         "locality": "KONGSVINGER"
       },
       "roles": [
-        "leadBuyer"
+        "buyer",
+        "leadBuyer",
+        "processContactPoint"
       ]
     },
     {
@@ -134,7 +136,10 @@
       },
       "address": {
         "locality": "Elverum"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0003",
@@ -147,7 +152,10 @@
       },
       "address": {
         "locality": "Hamar"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0004",
@@ -160,7 +168,10 @@
       },
       "address": {
         "locality": "Hamar"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0005",
@@ -173,7 +184,10 @@
       },
       "address": {
         "locality": "Kongsvinger "
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0006",
@@ -186,7 +200,10 @@
       },
       "address": {
         "locality": "Brumunddal"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0007",
@@ -199,7 +216,10 @@
       },
       "address": {
         "locality": "Stange"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0008",
@@ -212,7 +232,10 @@
       },
       "address": {
         "locality": "Etnedal"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0009",
@@ -225,7 +248,10 @@
       },
       "address": {
         "locality": "Fagernes"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0010",
@@ -238,7 +264,10 @@
       },
       "address": {
         "locality": "Bagn"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0011",
@@ -251,7 +280,10 @@
       },
       "address": {
         "locality": "Vang i Valdres"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0012",
@@ -264,7 +296,10 @@
       },
       "address": {
         "locality": "Slidre"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0013",
@@ -277,7 +312,10 @@
       },
       "address": {
         "locality": "Heggenes"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0014",
@@ -290,7 +328,10 @@
       },
       "address": {
         "locality": "Skotterud"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0015",
@@ -303,7 +344,10 @@
       },
       "address": {
         "locality": "Sagstua"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0016",
@@ -316,7 +360,10 @@
       },
       "address": {
         "locality": "Våler i Solør"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0017",
@@ -329,14 +376,73 @@
       },
       "address": {
         "locality": "Flisa"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0018",
       "name": "Romerike og Glåmdal tingrett",
       "address": {
         "locality": "Kongsvinger"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    },
+    {
+      "id": "ORG-0002"
+    },
+    {
+      "id": "ORG-0003"
+    },
+    {
+      "id": "ORG-0004"
+    },
+    {
+      "id": "ORG-0005"
+    },
+    {
+      "id": "ORG-0006"
+    },
+    {
+      "id": "ORG-0007"
+    },
+    {
+      "id": "ORG-0008"
+    },
+    {
+      "id": "ORG-0009"
+    },
+    {
+      "id": "ORG-0010"
+    },
+    {
+      "id": "ORG-0011"
+    },
+    {
+      "id": "ORG-0012"
+    },
+    {
+      "id": "ORG-0013"
+    },
+    {
+      "id": "ORG-0014"
+    },
+    {
+      "id": "ORG-0015"
+    },
+    {
+      "id": "ORG-0016"
+    },
+    {
+      "id": "ORG-0017"
     }
   ]
 }

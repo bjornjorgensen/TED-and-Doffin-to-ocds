@@ -81,7 +81,10 @@
       },
       "address": {
         "locality": "Lillestrøm"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -101,7 +104,15 @@
       },
       "address": {
         "locality": "Lillestrøm"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

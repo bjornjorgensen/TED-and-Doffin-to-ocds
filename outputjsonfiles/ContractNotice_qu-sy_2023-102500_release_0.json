@@ -233,7 +233,16 @@
       },
       "address": {
         "locality": "Svolvær"
-      }
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

@@ -42,7 +42,15 @@
       },
       "address": {
         "locality": "OSLO"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

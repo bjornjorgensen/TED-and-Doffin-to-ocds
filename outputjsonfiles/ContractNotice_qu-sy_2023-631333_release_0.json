@@ -227,7 +227,12 @@
       },
       "address": {
         "locality": "Arendal"
-      }
+      },
+      "roles": [
+        "submissionReceiptBody",
+        "buyer",
+        "processContactPoint"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -237,7 +242,10 @@
       },
       "address": {
         "locality": "Trondheim"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
     },
     {
       "id": "ORG-0003",
@@ -247,8 +255,16 @@
       },
       "address": {
         "locality": "Bergen"
-      }
+      },
+      "roles": [
+        "mediationBody"
+      ]
     }
   ],
-  "description": "The full list of utilities subscribing to UNCE can be obtained here http://achilles.no/Notices/UNCE/Annual-Notice-Jul2022.pdf"
+  "description": "The full list of utilities subscribing to UNCE can be obtained here http://achilles.no/Notices/UNCE/Annual-Notice-Jul2022.pdf",
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
 }

@@ -65,7 +65,15 @@
       },
       "address": {
         "locality": "VADSØ"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

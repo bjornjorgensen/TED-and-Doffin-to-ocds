@@ -1,78 +1,73 @@
-# converters/OPT_301_part_FiscalLegis.py
+# converters/opt_301_part_fiscallegis.py
 
-from lxml import etree
 import logging
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_part_fiscallegis(xml_content):
+def parse_fiscal_legislation_org_reference(xml_content):
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"parties": [], "tender": {"documents": []}}
 
-    xpath = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:TenderingTerms/cac:FiscalLegislationDocumentReference"
-    fiscal_legis_refs = root.xpath(xpath, namespaces=namespaces)
+    fiscal_leg_refs = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:FiscalLegislationDocumentReference",
+        namespaces=namespaces,
+    )
 
-    for ref in fiscal_legis_refs:
+    for ref in fiscal_leg_refs:
         doc_id = ref.xpath("cbc:ID/text()", namespaces=namespaces)
         org_id = ref.xpath(
-            "cac:Issuerparty/cac:partyIdentification/cbc:ID/text()",
+            "cac:IssuerParty/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
             namespaces=namespaces,
         )
 
         if doc_id and org_id:
-            doc_id = doc_id[0]
-            org_id = org_id[0]
-
             result["tender"]["documents"].append(
-                {"id": doc_id, "publisher": {"id": org_id}},
+                {"id": doc_id[0], "publisher": {"id": org_id[0]}}
             )
 
-            result["parties"].append({"id": org_id, "roles": ["informationService"]})
+            if not any(party["id"] == org_id[0] for party in result["parties"]):
+                result["parties"].append(
+                    {"id": org_id[0], "roles": ["informationService"]}
+                )
 
     return result if (result["parties"] or result["tender"]["documents"]) else None
 
 
-def merge_part_fiscallegis(release_json, fiscallegis_data):
-    if not fiscallegis_data:
-        logger.warning("No part Fiscal Legislation data to merge")
+def merge_fiscal_legislation_org_reference(release_json, parsed_data):
+    if not parsed_data:
         return
 
-    # Merge parties
-    existing_parties = {party["id"]: party for party in release_json.get("parties", [])}
-    for party in fiscallegis_data["parties"]:
-        if party["id"] in existing_parties:
-            existing_roles = set(existing_parties[party["id"]].get("roles", []))
-            existing_roles.update(party["roles"])
-            existing_parties[party["id"]]["roles"] = list(existing_roles)
-        else:
-            release_json.setdefault("parties", []).append(party)
-
-    # Merge documents
-    existing_docs = {
-        doc["id"]: doc for doc in release_json.get("tender", {}).get("documents", [])
-    }
-    for doc in fiscallegis_data["tender"]["documents"]:
-        if doc["id"] in existing_docs:
-            existing_docs[doc["id"]]["publisher"] = doc["publisher"]
-        else:
-            release_json.setdefault("tender", {}).setdefault("documents", []).append(
-                doc,
+    parties = release_json.setdefault("parties", [])
+    for new_party in parsed_data["parties"]:
+        existing_party = next(
+            (party for party in parties if party["id"] == new_party["id"]), None
+        )
+        if existing_party:
+            existing_party.setdefault("roles", []).extend(
+                role
+                for role in new_party["roles"]
+                if role not in existing_party["roles"]
             )
+        else:
+            parties.append(new_party)
 
-    logger.info(
-        "Merged part Fiscal Legislation data for %d parties and %d documents",
-        len(fiscallegis_data["parties"]),
-        len(fiscallegis_data["tender"]["documents"]),
-    )
+    tender_documents = release_json.setdefault("tender", {}).setdefault("documents", [])
+    for new_doc in parsed_data["tender"]["documents"]:
+        existing_doc = next(
+            (doc for doc in tender_documents if doc["id"] == new_doc["id"]), None
+        )
+        if existing_doc:
+            existing_doc["publisher"] = new_doc["publisher"]
+        else:
+            tender_documents.append(new_doc)
+
+    logger.info("Merged fiscal legislation organization reference data")

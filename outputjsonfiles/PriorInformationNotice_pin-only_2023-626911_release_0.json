@@ -64,7 +64,15 @@
       },
       "address": {
         "locality": "STEINKJER"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

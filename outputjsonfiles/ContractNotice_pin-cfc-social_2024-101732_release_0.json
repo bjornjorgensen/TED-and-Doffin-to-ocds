@@ -352,7 +352,9 @@
         "locality": "Stjørdal"
       },
       "roles": [
-        "leadBuyer"
+        "buyer",
+        "leadBuyer",
+        "processContactPoint"
       ]
     },
     {
@@ -373,7 +375,10 @@
       },
       "address": {
         "locality": "Trondheim"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
     },
     {
       "id": "ORG-0003",
@@ -393,7 +398,10 @@
       },
       "address": {
         "locality": "Stjørdal"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0004",
@@ -410,7 +418,10 @@
       },
       "address": {
         "locality": "Meråker"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0005",
@@ -427,7 +438,10 @@
       },
       "address": {
         "locality": "Selbu"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0006",
@@ -444,7 +458,10 @@
       },
       "address": {
         "locality": "Tydal"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0007",
@@ -461,7 +478,10 @@
       },
       "address": {
         "locality": "Frosta"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0008",
@@ -478,7 +498,33 @@
       },
       "address": {
         "locality": "Holtålen"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    },
+    {
+      "id": "ORG-0003"
+    },
+    {
+      "id": "ORG-0004"
+    },
+    {
+      "id": "ORG-0005"
+    },
+    {
+      "id": "ORG-0006"
+    },
+    {
+      "id": "ORG-0007"
+    },
+    {
+      "id": "ORG-0008"
     }
   ]
 }

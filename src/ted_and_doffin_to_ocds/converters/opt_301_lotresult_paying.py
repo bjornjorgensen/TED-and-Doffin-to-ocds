@@ -1,4 +1,4 @@
-# converters/OPT_301_LotResult_Paying.py
+# converters/opt_301_lotresult_paying.py
 
 from lxml import etree
 import logging
@@ -6,43 +6,52 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def parse_lotresult_paying(xml_content):
+def parse_payer_party(xml_content):
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
         "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
         "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
     }
-
-    xpath = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:noticeResult/efac:LotResult/cac:Payerparty/cac:partyIdentification/cbc:ID"
-    payer_party_ids = root.xpath(xpath, namespaces=namespaces)
 
     result = {"parties": []}
 
-    for party_id in payer_party_ids:
-        result["parties"].append({"id": party_id.text, "roles": ["payer"]})
+    payer_parties = root.xpath(
+        "//efac:NoticeResult/efac:LotResult/cac:PayerParty/cac:PartyIdentification/cbc:ID[@schemeName='organization']",
+        namespaces=namespaces,
+    )
+
+    for party in payer_parties:
+        org_id = party.text
+        if org_id:
+            result["parties"].append({"id": org_id, "roles": ["payer"]})
 
     return result if result["parties"] else None
 
 
-def merge_lotresult_paying(release_json, paying_data):
-    if not paying_data:
-        logger.warning("No LotResult Paying data to merge")
+def merge_payer_party(release_json, payer_party_data):
+    if not payer_party_data:
+        logger.info("No Payer Party (ID reference) data to merge")
         return
 
-    existing_parties = {party["id"]: party for party in release_json.get("parties", [])}
-    for party in paying_data["parties"]:
-        if party["id"] in existing_parties:
-            existing_roles = set(existing_parties[party["id"]].get("roles", []))
-            existing_roles.update(party["roles"])
-            existing_parties[party["id"]]["roles"] = list(existing_roles)
+    parties = release_json.setdefault("parties", [])
+
+    for new_party in payer_party_data["parties"]:
+        existing_party = next(
+            (party for party in parties if party["id"] == new_party["id"]), None
+        )
+        if existing_party:
+            existing_roles = set(existing_party.get("roles", []))
+            existing_roles.update(new_party["roles"])
+            existing_party["roles"] = list(existing_roles)
         else:
-            release_json.setdefault("parties", []).append(party)
+            parties.append(new_party)
 
     logger.info(
-        "Merged LotResult Paying data for %d parties", len(paying_data["parties"])
+        "Merged Payer Party (ID reference) data for %d parties",
+        len(payer_party_data["parties"]),
     )

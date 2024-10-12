@@ -1,4 +1,4 @@
-# converters/OPT_301_part_Mediator.py
+# converters/opt_301_part_mediator.py
 
 from lxml import etree
 import logging
@@ -6,44 +6,44 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def parse_part_mediator(xml_content):
+def part_parse_mediator(xml_content):
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    xpath = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:AppealTerms/cac:MediationParty/cac:PartyIdentification/cbc:ID[@schemeName='organization']"
+    mediators = root.xpath(xpath, namespaces=namespaces)
+
+    if not mediators:
+        logger.info("No Mediator Technical Identifier found.")
+        return None
+
     result = {"parties": []}
+    for mediator in mediators:
+        result["parties"].append({"id": mediator.text, "roles": ["mediationBody"]})
 
-    xpath = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:TenderingTerms/cac:AppealTerms/cac:Mediationparty/cac:partyIdentification/cbc:ID"
-    mediator_ids = root.xpath(xpath, namespaces=namespaces)
-
-    for mediator_id in mediator_ids:
-        result["parties"].append({"id": mediator_id.text, "roles": ["mediationBody"]})
-
-    return result if result["parties"] else None
+    return result
 
 
-def merge_part_mediator(release_json, mediator_data):
+def part_merge_mediator(release_json, mediator_data):
     if not mediator_data:
-        logger.warning("No part Mediator data to merge")
+        logger.info("No Mediator data to merge.")
         return
 
-    existing_parties = {party["id"]: party for party in release_json.get("parties", [])}
-    for party in mediator_data["parties"]:
-        if party["id"] in existing_parties:
-            existing_roles = set(existing_parties[party["id"]].get("roles", []))
-            existing_roles.update(party["roles"])
-            existing_parties[party["id"]]["roles"] = list(existing_roles)
-        else:
-            release_json.setdefault("parties", []).append(party)
+    parties = release_json.setdefault("parties", [])
 
-    logger.info(
-        "Merged part Mediator data for %d parties", len(mediator_data["parties"])
-    )
+    for new_party in mediator_data["parties"]:
+        existing_party = next(
+            (party for party in parties if party["id"] == new_party["id"]), None
+        )
+        if existing_party:
+            if "mediationBody" not in existing_party.get("roles", []):
+                existing_party.setdefault("roles", []).append("mediationBody")
+        else:
+            parties.append(new_party)
+
+    logger.info("Merged Mediator data for %d parties.", len(mediator_data["parties"]))

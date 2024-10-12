@@ -119,7 +119,10 @@
       },
       "address": {
         "locality": "OSLO"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -177,7 +180,11 @@
       },
       "address": {
         "locality": "Oslo"
-      }
+      },
+      "roles": [
+        "mediationBody",
+        "reviewBody"
+      ]
     },
     {
       "id": "ORG-0005",
@@ -190,10 +197,35 @@
       },
       "address": {
         "locality": "Oslo"
-      }
+      },
+      "roles": [
+        "reviewContactPoint"
+      ]
     }
   ],
   "description": "Oppdragsgiver har opsjon på å forlenge avtalen med de samme betingelser med 1 + 1 år slik at total mulig avtalelengde fra planlagt oppstartsdato 9. mars 2023 er 4 år. Oppdragsgiver har opsjon på å forlenge avtalen med de samme betingelser med 1 + 1 år slik at total mulig avtalelengde fra planlagt oppstartsdato 9. mars 2023 er 4 år.",
+  "awards": [
+    {
+      "relatedBids": [
+        "TEN-0001",
+        "TEN-0002"
+      ]
+    }
+  ],
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "awardID": "RES-0001"
+    },
+    {
+      "id": "CON-0002"
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ],
   "bids": {
     "details": [
       {

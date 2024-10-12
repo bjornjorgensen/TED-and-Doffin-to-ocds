@@ -68,7 +68,16 @@
       },
       "address": {
         "locality": "Hamar"
-      }
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

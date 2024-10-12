@@ -262,7 +262,10 @@
       },
       "address": {
         "locality": "Vika"
-      }
+      },
+      "roles": [
+        "reviewContactPoint"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -280,7 +283,11 @@
       },
       "address": {
         "locality": "Oslo"
-      }
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ]
     },
     {
       "id": "ORG-0003",
@@ -297,7 +304,15 @@
       },
       "address": {
         "locality": "Oslo"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0002"
     }
   ]
 }

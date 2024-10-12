@@ -1,50 +1,70 @@
-# tests/test_OPT_301_Lot_TenderEval.py
-from pathlib import Path
-import pytest
-import json
-import sys
+# tests/test_opt_301_lot_tendereval.py
 
-# Add the parent directory to sys.path to import main
-sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main
+from ted_and_doffin_to_ocds.converters.opt_301_lot_tendereval import (
+    parse_tender_evaluator,
+    merge_tender_evaluator,
+)
 
 
-def test_opt_301_lot_tendereval_integration(tmp_path):
+def test_parse_tender_evaluator():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
-                <cac:TenderEvaluationparty>
-                    <cac:partyIdentification>
+                <cac:TenderEvaluationParty>
+                    <cac:PartyIdentification>
                         <cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID>
-                    </cac:partyIdentification>
-                </cac:TenderEvaluationparty>
+                    </cac:PartyIdentification>
+                </cac:TenderEvaluationParty>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
     </root>
     """
-    xml_file = tmp_path / "test_input_tender_evaluator_identifier.xml"
-    xml_file.write_text(xml_content)
 
-    main(str(xml_file), "ocds-test-prefix")
+    result = parse_tender_evaluator(xml_content)
 
-    with Path("output.json").open() as f:
-        result = json.load(f)
-
-    assert "parties" in result, "Expected 'parties' in result"
-    assert (
-        len(result["parties"]) == 1
-    ), f"Expected 1 party, got {len(result['parties'])}"
+    assert result is not None
+    assert "parties" in result
+    assert len(result["parties"]) == 1
 
     party = result["parties"][0]
-    assert party["id"] == "TPO-0001", f"Expected party id 'TPO-0001', got {party['id']}"
-    assert "roles" in party, "Expected 'roles' in party"
-    assert (
-        "evaluationBody" in party["roles"]
-    ), f"Expected 'evaluationBody' in party roles, got {party['roles']}"
+    assert party["id"] == "TPO-0001"
+    assert party["roles"] == ["evaluationBody"]
 
 
-if __name__ == "__main__":
-    pytest.main()
+def test_merge_tender_evaluator():
+    release_json = {"parties": []}
+    tender_evaluator_data = {
+        "parties": [{"id": "TPO-0001", "roles": ["evaluationBody"]}]
+    }
+
+    merge_tender_evaluator(release_json, tender_evaluator_data)
+
+    assert "parties" in release_json
+    assert len(release_json["parties"]) == 1
+
+    party = release_json["parties"][0]
+    assert party["id"] == "TPO-0001"
+    assert party["roles"] == ["evaluationBody"]
+
+
+def test_merge_tender_evaluator_existing_party():
+    release_json = {
+        "parties": [
+            {"id": "TPO-0001", "name": "Existing Organization", "roles": ["buyer"]}
+        ]
+    }
+    tender_evaluator_data = {
+        "parties": [{"id": "TPO-0001", "roles": ["evaluationBody"]}]
+    }
+
+    merge_tender_evaluator(release_json, tender_evaluator_data)
+
+    assert len(release_json["parties"]) == 1
+
+    party = release_json["parties"][0]
+    assert party["id"] == "TPO-0001"
+    assert party["name"] == "Existing Organization"
+    assert set(party["roles"]) == {"buyer", "evaluationBody"}

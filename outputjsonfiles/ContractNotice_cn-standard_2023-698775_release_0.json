@@ -155,15 +155,28 @@
       },
       "address": {
         "locality": "Bryne"
-      }
+      },
+      "roles": [
+        "submissionReceiptBody",
+        "buyer",
+        "processContactPoint"
+      ]
     },
     {
       "id": "ORG-0002",
       "name": "Jæren tingrett",
       "address": {
         "locality": "Sandnes"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
     }
   ],
-  "description": "Siste frist for spørsmål til konkurransegrunnlaget er satt til fredag 16.06.2023 kl. 14:00."
+  "description": "Siste frist for spørsmål til konkurransegrunnlaget er satt til fredag 16.06.2023 kl. 14:00.",
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
 }

@@ -1,42 +1,51 @@
-# tests/test_OPT_301_part_DocProvider.py
-from pathlib import Path
-import pytest
-import sys
+# tests/test_opt_301_part_docprovider.py
 
-# Add the parent directory to sys.path to import main
-sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main
+from ted_and_doffin_to_ocds.converters.opt_301_part_docprovider import (
+    part_parse_document_provider,
+    part_merge_document_provider,
+)
 
 
-def test_opt_301_part_docprovider_integration(tmp_path):
+def test_parse_document_provider():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">1</cbc:ID>
+            <cbc:ID schemeName="Part">1</cbc:ID>
             <cac:TenderingTerms>
-                <cac:DocumentProviderparty>
-                    <cac:partyIdentification>
+                <cac:DocumentProviderParty>
+                    <cac:PartyIdentification>
                         <cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID>
-                    </cac:partyIdentification>
-                </cac:DocumentProviderparty>
+                    </cac:PartyIdentification>
+                </cac:DocumentProviderParty>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
     </root>
     """
-    xml_file = tmp_path / "test_input_part_docprovider.xml"
-    xml_file.write_text(xml_content)
-
-    result = main(str(xml_file), "ocds-test-prefix")
-
-    assert result is not None
-    assert "parties" in result
-    assert len(result["parties"]) == 1
-    party = result["parties"][0]
-    assert party["id"] == "TPO-0001"
-    assert "roles" in party
-    assert "processContactPoint" in party["roles"]
+    result = part_parse_document_provider(xml_content)
+    assert result == {"parties": [{"id": "TPO-0001", "roles": ["processContactPoint"]}]}
 
 
-if __name__ == "__main__":
-    pytest.main()
+def test_merge_document_provider():
+    release_json = {"parties": [{"id": "TPO-0001", "roles": ["buyer"]}]}
+    document_provider_data = {
+        "parties": [{"id": "TPO-0001", "roles": ["processContactPoint"]}]
+    }
+    part_merge_document_provider(release_json, document_provider_data)
+    assert release_json == {
+        "parties": [{"id": "TPO-0001", "roles": ["buyer", "processContactPoint"]}]
+    }
+
+
+def test_merge_document_provider_new_party():
+    release_json = {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}
+    document_provider_data = {
+        "parties": [{"id": "TPO-0001", "roles": ["processContactPoint"]}]
+    }
+    part_merge_document_provider(release_json, document_provider_data)
+    assert release_json == {
+        "parties": [
+            {"id": "ORG-0001", "roles": ["buyer"]},
+            {"id": "TPO-0001", "roles": ["processContactPoint"]},
+        ]
+    }
