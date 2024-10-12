@@ -213,7 +213,10 @@
       },
       "address": {
         "locality": "Moss"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -380,7 +383,10 @@
       "name": "Søndre Østfold tingrett",
       "address": {
         "locality": "Fredrikstad"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
     }
   ],
   "description": "Mercell kunngjøring: https://opic.com/id/afreyczxlo Anskaffelsens anslåtte verdi: NOK 60.000.000 ekskl. mva. Rammeavtalenes samlede maksimale verdi: NOK 65.000.000 ekskl. mva.",
@@ -483,7 +489,30 @@
       },
       "relatedLots": [
         "LOT-0000"
+      ],
+      "relatedBids": [
+        "TEN-0001",
+        "TEN-0002",
+        "TEN-0003",
+        "TEN-0004",
+        "TEN-0005",
+        "TEN-0006",
+        "TEN-0007",
+        "TEN-0008",
+        "TEN-0009",
+        "TEN-0010"
       ]
+    }
+  ],
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "awardID": "RES-0010"
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

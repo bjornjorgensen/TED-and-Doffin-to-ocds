@@ -1,4 +1,4 @@
-# converters/OPT_301_part_ReviewInfo.py
+# converters/opt_301_part_reviewinfo.py
 
 from lxml import etree
 import logging
@@ -6,46 +6,47 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def parse_part_reviewinfo(xml_content):
+def part_parse_review_info_provider(xml_content):
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    xpath = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:AppealTerms/cac:AppealInformationParty/cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']"
+    review_info_providers = root.xpath(xpath, namespaces=namespaces)
+
+    if not review_info_providers:
+        logger.info("No Review Info Provider Technical Identifier found.")
+        return None
+
     result = {"parties": []}
+    for provider in review_info_providers:
+        result["parties"].append({"id": provider.text, "roles": ["reviewContactPoint"]})
 
-    xpath = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:TenderingTerms/cac:AppealTerms/cac:AppealInformationparty/cac:partyIdentification/cbc:ID"
-    review_info_ids = root.xpath(xpath, namespaces=namespaces)
-
-    for review_info_id in review_info_ids:
-        result["parties"].append(
-            {"id": review_info_id.text, "roles": ["reviewContactPoint"]},
-        )
-
-    return result if result["parties"] else None
+    return result
 
 
-def merge_part_reviewinfo(release_json, reviewinfo_data):
-    if not reviewinfo_data:
-        logger.warning("No part Review Info data to merge")
+def part_merge_review_info_provider(release_json, review_info_provider_data):
+    if not review_info_provider_data:
+        logger.info("No Review Info Provider data to merge.")
         return
 
-    existing_parties = {party["id"]: party for party in release_json.get("parties", [])}
-    for party in reviewinfo_data["parties"]:
-        if party["id"] in existing_parties:
-            existing_roles = set(existing_parties[party["id"]].get("roles", []))
-            existing_roles.update(party["roles"])
-            existing_parties[party["id"]]["roles"] = list(existing_roles)
+    parties = release_json.setdefault("parties", [])
+
+    for new_party in review_info_provider_data["parties"]:
+        existing_party = next(
+            (party for party in parties if party["id"] == new_party["id"]), None
+        )
+        if existing_party:
+            if "reviewContactPoint" not in existing_party.get("roles", []):
+                existing_party.setdefault("roles", []).append("reviewContactPoint")
         else:
-            release_json.setdefault("parties", []).append(party)
+            parties.append(new_party)
 
     logger.info(
-        "Merged part Review Info data for %d parties", len(reviewinfo_data["parties"])
+        "Merged Review Info Provider data for %d parties.",
+        len(review_info_provider_data["parties"]),
     )

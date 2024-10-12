@@ -128,7 +128,10 @@
       },
       "address": {
         "locality": "Moss"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -148,7 +151,10 @@
       },
       "address": {
         "locality": "Fredrikstad"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
     },
     {
       "id": "ORG-0003",
@@ -249,6 +255,40 @@
       "roles": [
         "tenderer"
       ]
+    }
+  ],
+  "awards": [
+    {
+      "relatedBids": [
+        "TEN-0001",
+        "TEN-0002",
+        "TEN-0003",
+        "TEN-0004",
+        "TEN-0005"
+      ]
+    }
+  ],
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "awardID": "RES-0001"
+    },
+    {
+      "id": "CON-0002"
+    },
+    {
+      "id": "CON-0003"
+    },
+    {
+      "id": "CON-0004"
+    },
+    {
+      "id": "CON-0005"
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

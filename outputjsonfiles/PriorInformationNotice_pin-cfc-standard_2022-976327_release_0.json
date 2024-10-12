@@ -110,7 +110,12 @@
       },
       "address": {
         "locality": "Oslo"
-      }
+      },
+      "roles": [
+        "submissionReceiptBody",
+        "buyer",
+        "processContactPoint"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -124,7 +129,10 @@
       },
       "address": {
         "locality": "Oslo"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
     },
     {
       "id": "ORG-0003",
@@ -138,7 +146,10 @@
       },
       "address": {
         "locality": "Bergen"
-      }
+      },
+      "roles": [
+        "mediationBody"
+      ]
     },
     {
       "id": "ORG-0004",
@@ -149,7 +160,15 @@
       },
       "address": {
         "locality": "OSLO"
-      }
+      },
+      "roles": [
+        "reviewContactPoint"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

@@ -122,7 +122,12 @@
       },
       "address": {
         "locality": "Kristiansand"
-      }
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint",
+        "reviewContactPoint"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -140,7 +145,10 @@
       },
       "address": {
         "locality": "Kristiansand"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0003",
@@ -158,7 +166,18 @@
       },
       "address": {
         "locality": "Kristiansand S."
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    },
+    {
+      "id": "ORG-0002"
     }
   ]
 }

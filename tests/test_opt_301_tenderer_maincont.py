@@ -1,91 +1,159 @@
-# tests/test_OPT_301_Tenderer_MainCont.py
+# tests/test_opt_301_tenderer_maincont.py
 
-import pytest
-import sys
-from pathlib import Path
-
-# Add the parent directory to sys.path to import main
-sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main
+from ted_and_doffin_to_ocds.converters.opt_301_tenderer_maincont import (
+    parse_main_contractor,
+    merge_main_contractor,
+)
 
 
-def test_opt_301_tenderer_maincont_integration(tmp_path):
+def test_parse_main_contractor():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionContent>
-                    <efext:EformsExtension>
-                        <efac:noticeResult>
-                            <efac:LotTender>
-                                <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
-                                <cbc:RankCode>1</cbc:RankCode>
-                                <efac:TenderLot>
-                                    <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
-                                </efac:TenderLot>
-                            </efac:LotTender>
-                            <efac:Tenderingparty>
-                                <efac:SubContractor>
-                                    <cbc:ID schemeName="organization">ORG-0012</cbc:ID>
-                                    <efac:MainContractor>
-                                        <cbc:ID schemeName="organization">ORG-0005</cbc:ID>
-                                    </efac:MainContractor>
-                                </efac:SubContractor>
-                            </efac:Tenderingparty>
-                        </efac:noticeResult>
-                        <efac:organizations>
-                            <efac:organization>
-                                <efac:company>
-                                    <cac:partyIdentification>
-                                        <cbc:ID schemeName="organization">ORG-0005</cbc:ID>
-                                    </cac:partyIdentification>
-                                    <cac:partyName>
-                                        <cbc:Name>Tendering company Ltd</cbc:Name>
-                                    </cac:partyName>
-                                </efac:company>
-                            </efac:organization>
-                        </efac:organizations>
-                    </efext:EformsExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
+        <efac:NoticeResult>
+            <efac:LotTender>
+                <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
+            </efac:LotTender>
+            <efac:TenderingParty>
+                <efac:SubContractor>
+                    <cbc:ID schemeName="organization">ORG-0012</cbc:ID>
+                    <efac:MainContractor>
+                        <cbc:ID schemeName="organization">ORG-0005</cbc:ID>
+                    </efac:MainContractor>
+                </efac:SubContractor>
+            </efac:TenderingParty>
+        </efac:NoticeResult>
+        <efac:Organizations>
+            <efac:Organization>
+                <efac:Company>
+                    <cac:PartyIdentification>
+                        <cbc:ID schemeName="organization">ORG-0005</cbc:ID>
+                    </cac:PartyIdentification>
+                </efac:Company>
+            </efac:Organization>
+        </efac:Organizations>
     </root>
     """
-    xml_file = tmp_path / "test_input_tenderer_maincont.xml"
-    xml_file.write_text(xml_content)
-
-    result = main(str(xml_file), "ocds-test-prefix")
-
-    assert result is not None
-    assert "parties" in result
-    assert len(result["parties"]) == 1
-    party = result["parties"][0]
-    assert party["id"] == "ORG-0005"
-    assert "roles" in party
-    assert "tenderer" in party["roles"]
-
-    assert "bids" in result
-    assert "details" in result["bids"]
-    assert len(result["bids"]["details"]) == 1
-    bid = result["bids"]["details"][0]
-    assert bid["id"] == "TEN-0001"
-    assert bid["rank"] == 1
-    assert bid["relatedLots"] == ["LOT-0001"]
-    assert "subcontracting" in bid
-    assert "subcontracts" in bid["subcontracting"]
-    assert len(bid["subcontracting"]["subcontracts"]) == 1
-    subcontract = bid["subcontracting"]["subcontracts"][0]
-    assert subcontract["id"] == "1"
-    assert subcontract["subcontractor"]["id"] == "ORG-0012"
-    assert len(subcontract["mainContractors"]) == 1
-    main_contractor = subcontract["mainContractors"][0]
-    assert main_contractor["id"] == "ORG-0005"
-    assert main_contractor["name"] == "Tendering company Ltd"
+    result = parse_main_contractor(xml_content)
+    assert result == {
+        "parties": [{"id": "ORG-0005", "roles": ["tenderer"]}],
+        "bids": {
+            "details": [
+                {
+                    "id": "TEN-0001",
+                    "subcontracting": {
+                        "subcontracts": [
+                            {
+                                "id": "1",
+                                "subcontractor": {"id": "ORG-0012"},
+                                "mainContractors": [{"id": "ORG-0005"}],
+                            }
+                        ]
+                    },
+                }
+            ]
+        },
+    }
 
 
-if __name__ == "__main__":
-    pytest.main()
+def test_merge_main_contractor():
+    release_json = {
+        "parties": [{"id": "ORG-0005", "roles": ["buyer"]}],
+        "bids": {
+            "details": [{"id": "TEN-0001", "subcontracting": {"subcontracts": []}}]
+        },
+    }
+    main_contractor_data = {
+        "parties": [{"id": "ORG-0005", "roles": ["tenderer"]}],
+        "bids": {
+            "details": [
+                {
+                    "id": "TEN-0001",
+                    "subcontracting": {
+                        "subcontracts": [
+                            {
+                                "id": "1",
+                                "subcontractor": {"id": "ORG-0012"},
+                                "mainContractors": [{"id": "ORG-0005"}],
+                            }
+                        ]
+                    },
+                }
+            ]
+        },
+    }
+    merge_main_contractor(release_json, main_contractor_data)
+    assert release_json == {
+        "parties": [{"id": "ORG-0005", "roles": ["buyer", "tenderer"]}],
+        "bids": {
+            "details": [
+                {
+                    "id": "TEN-0001",
+                    "subcontracting": {
+                        "subcontracts": [
+                            {
+                                "id": "1",
+                                "subcontractor": {"id": "ORG-0012"},
+                                "mainContractors": [{"id": "ORG-0005"}],
+                            }
+                        ]
+                    },
+                }
+            ]
+        },
+    }
+
+
+def test_merge_main_contractor_new_data():
+    release_json = {
+        "parties": [{"id": "ORG-0001", "roles": ["buyer"]}],
+        "bids": {
+            "details": [{"id": "TEN-0002", "subcontracting": {"subcontracts": []}}]
+        },
+    }
+    main_contractor_data = {
+        "parties": [{"id": "ORG-0005", "roles": ["tenderer"]}],
+        "bids": {
+            "details": [
+                {
+                    "id": "TEN-0001",
+                    "subcontracting": {
+                        "subcontracts": [
+                            {
+                                "id": "1",
+                                "subcontractor": {"id": "ORG-0012"},
+                                "mainContractors": [{"id": "ORG-0005"}],
+                            }
+                        ]
+                    },
+                }
+            ]
+        },
+    }
+    merge_main_contractor(release_json, main_contractor_data)
+    assert release_json == {
+        "parties": [
+            {"id": "ORG-0001", "roles": ["buyer"]},
+            {"id": "ORG-0005", "roles": ["tenderer"]},
+        ],
+        "bids": {
+            "details": [
+                {"id": "TEN-0002", "subcontracting": {"subcontracts": []}},
+                {
+                    "id": "TEN-0001",
+                    "subcontracting": {
+                        "subcontracts": [
+                            {
+                                "id": "1",
+                                "subcontractor": {"id": "ORG-0012"},
+                                "mainContractors": [{"id": "ORG-0005"}],
+                            }
+                        ]
+                    },
+                },
+            ]
+        },
+    }

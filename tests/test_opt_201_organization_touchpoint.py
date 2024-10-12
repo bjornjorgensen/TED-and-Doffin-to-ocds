@@ -1,15 +1,12 @@
-# tests/test_OPT_201_organization_touchpoint.py
-from pathlib import Path
-import pytest
-import json
-import sys
+# tests/test_opt_201_organization_touchpoint.py
 
-# Add the parent directory to sys.path to import main
-sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main
+from ted_and_doffin_to_ocds.converters.opt_201_organization_touchpoint import (
+    parse_touchpoint_technical_identifier,
+    merge_touchpoint_technical_identifier,
+)
 
 
-def test_opt_201_organization_touchpoint_integration(tmp_path):
+def test_parse_touchpoint_technical_identifier():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -20,43 +17,48 @@ def test_opt_201_organization_touchpoint_integration(tmp_path):
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:organizations>
-                            <efac:organization>
-                                <efac:touchpoint>
-                                    <cac:partyIdentification>
+                        <efac:Organizations>
+                            <efac:Organization>
+                                <efac:TouchPoint>
+                                    <cac:PartyIdentification>
                                         <cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID>
-                                    </cac:partyIdentification>
-                                </efac:touchpoint>
-                            </efac:organization>
-                            <efac:organization>
-                                <efac:touchpoint>
-                                    <cac:partyIdentification>
-                                        <cbc:ID schemeName="touchpoint">TPO-0002</cbc:ID>
-                                    </cac:partyIdentification>
-                                </efac:touchpoint>
-                            </efac:organization>
-                        </efac:organizations>
+                                    </cac:PartyIdentification>
+                                </efac:TouchPoint>
+                            </efac:Organization>
+                        </efac:Organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
         </ext:UBLExtensions>
     </root>
     """
-    xml_file = tmp_path / "test_input_touchpoint_technical_identifier.xml"
-    xml_file.write_text(xml_content)
 
-    main(str(xml_file), "ocds-test-prefix")
+    result = parse_touchpoint_technical_identifier(xml_content)
 
-    with Path("output.json").open() as f:
-        result = json.load(f)
-
+    assert result is not None
     assert "parties" in result
-    assert len(result["parties"]) == 2
-
-    touchpoint_ids = [party["id"] for party in result["parties"]]
-    assert "TPO-0001" in touchpoint_ids
-    assert "TPO-0002" in touchpoint_ids
+    assert len(result["parties"]) == 1
+    assert result["parties"][0]["id"] == "TPO-0001"
 
 
-if __name__ == "__main__":
-    pytest.main()
+def test_merge_touchpoint_technical_identifier():
+    release_json = {"parties": []}
+    touchpoint_data = {"parties": [{"id": "TPO-0001"}]}
+
+    merge_touchpoint_technical_identifier(release_json, touchpoint_data)
+
+    assert "parties" in release_json
+    assert len(release_json["parties"]) == 1
+    assert release_json["parties"][0]["id"] == "TPO-0001"
+
+
+def test_merge_touchpoint_technical_identifier_existing_party():
+    release_json = {"parties": [{"id": "TPO-0001", "name": "Existing TouchPoint"}]}
+    touchpoint_data = {"parties": [{"id": "TPO-0001"}, {"id": "TPO-0002"}]}
+
+    merge_touchpoint_technical_identifier(release_json, touchpoint_data)
+
+    assert len(release_json["parties"]) == 2
+    assert release_json["parties"][0]["id"] == "TPO-0001"
+    assert release_json["parties"][0]["name"] == "Existing TouchPoint"
+    assert release_json["parties"][1]["id"] == "TPO-0002"

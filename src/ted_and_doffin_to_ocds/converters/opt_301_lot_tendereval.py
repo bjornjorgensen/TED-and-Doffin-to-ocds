@@ -1,57 +1,54 @@
-# converters/OPT_301_Lot_TenderEval.py
+# converters/opt_301_lot_tendereval.py
 
-import logging
 from lxml import etree
+import logging
 
 logger = logging.getLogger(__name__)
 
 
-def parse_tender_evaluator_identifier(xml_content):
+def parse_tender_evaluator(xml_content):
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"parties": []}
 
-    evaluators = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TenderEvaluationparty/cac:partyIdentification/cbc:ID",
+    tender_evaluators = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TenderEvaluationParty/cac:PartyIdentification/cbc:ID",
         namespaces=namespaces,
     )
 
-    for evaluator in evaluators:
-        evaluator_id = evaluator.text
-        result["parties"].append({"id": evaluator_id, "roles": ["evaluationBody"]})
+    for evaluator in tender_evaluators:
+        org_id = evaluator.text
+        if org_id:
+            result["parties"].append({"id": org_id, "roles": ["evaluationBody"]})
 
     return result if result["parties"] else None
 
 
-def merge_tender_evaluator_identifier(release_json, tender_evaluator_data):
+def merge_tender_evaluator(release_json, tender_evaluator_data):
     if not tender_evaluator_data:
-        logger.warning("No Tender Evaluator Identifier data to merge")
+        logger.info("No Tender Evaluator Technical Identifier Reference data to merge")
         return
 
-    existing_parties = release_json.setdefault("parties", [])
+    parties = release_json.setdefault("parties", [])
 
     for new_party in tender_evaluator_data["parties"]:
         existing_party = next(
-            (party for party in existing_parties if party["id"] == new_party["id"]),
-            None,
+            (party for party in parties if party["id"] == new_party["id"]), None
         )
         if existing_party:
-            if "evaluationBody" not in existing_party.setdefault("roles", []):
-                existing_party["roles"].append("evaluationBody")
+            existing_roles = set(existing_party.get("roles", []))
+            existing_roles.update(new_party["roles"])
+            existing_party["roles"] = list(existing_roles)
         else:
-            existing_parties.append(new_party)
+            parties.append(new_party)
 
     logger.info(
-        "Merged Tender Evaluator Identifier data for %d parties",
+        "Merged Tender Evaluator Technical Identifier Reference data for %d parties",
         len(tender_evaluator_data["parties"]),
     )

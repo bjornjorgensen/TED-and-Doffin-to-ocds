@@ -1,55 +1,65 @@
-# tests/test_OPT_315_LotResult.py
-from pathlib import Path
-import pytest
-import json
-import sys
+# tests/test_opt_315_lotresult.py
 
-sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main
+from ted_and_doffin_to_ocds.converters.opt_315_lotresult import (
+    parse_contract_identifier_reference,
+    merge_contract_identifier_reference,
+)
 
 
-def test_opt_315_lot_result_integration(tmp_path):
+def test_parse_contract_identifier_reference():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionContent>
-                    <efext:EformsExtension>
-                        <efac:noticeResult>
-                            <efac:SettledContract>
-                                <cbc:ID schemeName="contract">CON-0001</cbc:ID>
-                            </efac:SettledContract>
-                            <efac:LotResult>
-                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
-                                <efac:SettledContract>
-                                    <cbc:ID schemeName="contract">CON-0001</cbc:ID>
-                                </efac:SettledContract>
-                            </efac:LotResult>
-                        </efac:noticeResult>
-                    </efext:EformsExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
+        <efac:NoticeResult>
+            <efac:SettledContract>
+                <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+            </efac:SettledContract>
+            <efac:LotResult>
+                <cbc:ID schemeName="result">RES-0001</cbc:ID>
+                <efac:SettledContract>
+                    <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+                </efac:SettledContract>
+            </efac:LotResult>
+        </efac:NoticeResult>
     </root>
     """
-    xml_file = tmp_path / "test_input_contract_identifier_reference.xml"
-    xml_file.write_text(xml_content)
-
-    main(str(xml_file), "ocds-test-prefix")
-
-    with Path("output.json").open() as f:
-        result = json.load(f)
-
-    assert "contracts" in result
-    assert len(result["contracts"]) == 1
-    contract = result["contracts"][0]
-    assert contract["id"] == "CON-0001"
-    assert contract["awardID"] == "RES-0001"
+    result = parse_contract_identifier_reference(xml_content)
+    assert result == {"contracts": [{"id": "CON-0001", "awardID": "RES-0001"}]}
 
 
-if __name__ == "__main__":
-    pytest.main()
+def test_merge_contract_identifier_reference():
+    release_json = {"contracts": [{"id": "CON-0001", "title": "Existing Contract"}]}
+    contract_identifier_data = {
+        "contracts": [{"id": "CON-0001", "awardID": "RES-0001"}]
+    }
+    merge_contract_identifier_reference(release_json, contract_identifier_data)
+    assert release_json == {
+        "contracts": [
+            {"id": "CON-0001", "title": "Existing Contract", "awardID": "RES-0001"}
+        ]
+    }
+
+
+def test_merge_contract_identifier_reference_new_contract():
+    release_json = {"contracts": [{"id": "CON-0002", "title": "Existing Contract"}]}
+    contract_identifier_data = {
+        "contracts": [{"id": "CON-0001", "awardID": "RES-0001"}]
+    }
+    merge_contract_identifier_reference(release_json, contract_identifier_data)
+    assert release_json == {
+        "contracts": [
+            {"id": "CON-0002", "title": "Existing Contract"},
+            {"id": "CON-0001", "awardID": "RES-0001"},
+        ]
+    }
+
+
+def test_merge_contract_identifier_reference_no_data():
+    release_json = {"contracts": [{"id": "CON-0001", "title": "Existing Contract"}]}
+    merge_contract_identifier_reference(release_json, None)
+    assert release_json == {
+        "contracts": [{"id": "CON-0001", "title": "Existing Contract"}]
+    }

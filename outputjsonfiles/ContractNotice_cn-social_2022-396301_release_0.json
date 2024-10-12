@@ -109,15 +109,27 @@
       },
       "address": {
         "locality": "MOEN"
-      }
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ]
     },
     {
       "id": "ORG-0002",
       "name": "Nord-Troms og Senja tingrett",
       "address": {
         "locality": "Storgata 6, Finnsnes"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
     }
   ],
-  "description": "Mercell kunngjøring: https://opic.com/id/afwjuxxltt For å få tilgang til beskrivelsen av bruker (vedlegg 4 til konkurransegrunnlaget), må konkurransegrunnlagets vedlegg 3 (taushetserklæringen) undertegnes og legges inn i KGV. Når taushetserklæringen er mottatt vil vedlegg 4 oversendes gjennom KGV."
+  "description": "Mercell kunngjøring: https://opic.com/id/afwjuxxltt For å få tilgang til beskrivelsen av bruker (vedlegg 4 til konkurransegrunnlaget), må konkurransegrunnlagets vedlegg 3 (taushetserklæringen) undertegnes og legges inn i KGV. Når taushetserklæringen er mottatt vil vedlegg 4 oversendes gjennom KGV.",
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
 }

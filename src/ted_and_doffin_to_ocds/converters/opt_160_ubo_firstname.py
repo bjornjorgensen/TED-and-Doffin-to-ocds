@@ -1,4 +1,4 @@
-# converters/OPT_160_ubo.py
+# converters/opt_160_ubo_firstname.py
 
 from lxml import etree
 import logging
@@ -6,78 +6,69 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def parse_ubo_first_name(xml_content):
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
-
+def parse_ubo_firstname(xml_content):
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
     }
 
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:organizations/efac:organization",
-        namespaces=namespaces,
+        "//efac:Organizations/efac:Organization", namespaces=namespaces
     )
 
     for org in organizations:
         org_id = org.xpath(
-            ".//cac:partyIdentification/cbc:ID[@schemeName='organization']/text()",
+            "efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
             namespaces=namespaces,
         )
         if not org_id:
             continue
+
         org_id = org_id[0]
-
         ubos = root.xpath(
-            "//efac:organizations/efac:UltimateBeneficialOwner",
-            namespaces=namespaces,
+            "//efac:Organizations/efac:UltimateBeneficialOwner", namespaces=namespaces
         )
-        beneficial_owners = []
 
+        beneficial_owners = []
         for ubo in ubos:
             ubo_id = ubo.xpath(
-                "cbc:ID[@schemeName='ubo']/text()",
-                namespaces=namespaces,
+                "cbc:ID[@schemeName='ubo']/text()", namespaces=namespaces
             )
-            first_name = ubo.xpath("cbc:FirstName/text()", namespaces=namespaces)
+            firstname = ubo.xpath("cbc:FirstName/text()", namespaces=namespaces)
 
-            if ubo_id and first_name:
-                beneficial_owners.append({"id": ubo_id[0], "name": first_name[0]})
+            if ubo_id and firstname:
+                beneficial_owners.append({"id": ubo_id[0], "name": firstname[0]})
 
         if beneficial_owners:
             result["parties"].append(
-                {"id": org_id, "beneficialOwners": beneficial_owners},
+                {"id": org_id, "beneficialOwners": beneficial_owners}
             )
 
     return result if result["parties"] else None
 
 
-def merge_ubo_first_name(release_json, ubo_data):
+def merge_ubo_firstname(release_json, ubo_data):
     if not ubo_data:
-        logger.warning("No ubo First Name data to merge")
+        logger.info("No UBO first name data to merge")
         return
 
-    existing_parties = release_json.setdefault("parties", [])
+    parties = release_json.setdefault("parties", [])
 
     for new_party in ubo_data["parties"]:
         existing_party = next(
-            (party for party in existing_parties if party["id"] == new_party["id"]),
-            None,
+            (party for party in parties if party["id"] == new_party["id"]), None
         )
         if existing_party:
             existing_beneficial_owners = existing_party.setdefault(
-                "beneficialOwners",
-                [],
+                "beneficialOwners", []
             )
             for new_bo in new_party["beneficialOwners"]:
                 existing_bo = next(
@@ -93,6 +84,6 @@ def merge_ubo_first_name(release_json, ubo_data):
                 else:
                     existing_beneficial_owners.append(new_bo)
         else:
-            existing_parties.append(new_party)
+            parties.append(new_party)
 
-    logger.info("Merged ubo First Name data for %d parties", len(ubo_data["parties"]))
+    logger.info("Merged UBO first name data for %d parties", len(ubo_data["parties"]))

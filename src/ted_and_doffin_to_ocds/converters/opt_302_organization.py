@@ -1,7 +1,7 @@
-# converters/OPT_302_organization.py
+# converters/opt_302_organization.py
 
-from lxml import etree
 import logging
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -11,72 +11,68 @@ def parse_beneficial_owner_reference(xml_content):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
         "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
         "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
     }
 
     result = {"parties": []}
-    organizations = root.xpath("//efac:organization", namespaces=namespaces)
+
+    organizations = root.xpath("//efac:Organization", namespaces=namespaces)
 
     for org in organizations:
         org_id = org.xpath(
-            ".//efac:company/cac:partyIdentification/cbc:ID/text()",
+            "efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
             namespaces=namespaces,
         )
         ubo_id = org.xpath(
-            ".//efac:UltimateBeneficialOwner/cbc:ID/text()",
+            "efac:UltimateBeneficialOwner/cbc:ID[@schemeName='ubo']/text()",
             namespaces=namespaces,
         )
 
         if org_id and ubo_id:
-            org_id = org_id[0]
-            ubo_id = ubo_id[0]
+            existing_party = next(
+                (party for party in result["parties"] if party["id"] == org_id[0]), None
+            )
 
-            party = next((p for p in result["parties"] if p["id"] == org_id), None)
-            if not party:
-                party = {"id": org_id, "beneficialOwners": []}
-                result["parties"].append(party)
-
-            if not any(bo for bo in party["beneficialOwners"] if bo["id"] == ubo_id):
-                party["beneficialOwners"].append({"id": ubo_id})
+            if existing_party:
+                if "beneficialOwners" not in existing_party:
+                    existing_party["beneficialOwners"] = []
+                if not any(
+                    owner["id"] == ubo_id[0]
+                    for owner in existing_party["beneficialOwners"]
+                ):
+                    existing_party["beneficialOwners"].append({"id": ubo_id[0]})
+            else:
+                result["parties"].append(
+                    {"id": org_id[0], "beneficialOwners": [{"id": ubo_id[0]}]}
+                )
 
     return result if result["parties"] else None
 
 
-def merge_beneficial_owner_reference(release_json, bo_reference_data):
-    if not bo_reference_data:
-        logger.warning("No Beneficial Owner Reference data to merge")
+def merge_beneficial_owner_reference(release_json, parsed_data):
+    if not parsed_data:
         return
 
-    if "parties" not in release_json:
-        release_json["parties"] = []
-
-    for new_party in bo_reference_data["parties"]:
+    parties = release_json.setdefault("parties", [])
+    for new_party in parsed_data["parties"]:
         existing_party = next(
-            (
-                party
-                for party in release_json["parties"]
-                if party["id"] == new_party["id"]
-            ),
-            None,
+            (party for party in parties if party["id"] == new_party["id"]), None
         )
         if existing_party:
-            if "beneficialOwners" not in existing_party:
-                existing_party["beneficialOwners"] = []
-            for new_bo in new_party["beneficialOwners"]:
+            existing_beneficial_owners = existing_party.setdefault(
+                "beneficialOwners", []
+            )
+            for new_owner in new_party["beneficialOwners"]:
                 if not any(
-                    bo
-                    for bo in existing_party["beneficialOwners"]
-                    if bo["id"] == new_bo["id"]
+                    owner["id"] == new_owner["id"]
+                    for owner in existing_beneficial_owners
                 ):
-                    existing_party["beneficialOwners"].append(new_bo)
+                    existing_beneficial_owners.append(new_owner)
         else:
-            release_json["parties"].append(new_party)
+            parties.append(new_party)
 
-    logger.info(
-        "Merged Beneficial Owner Reference data for %d parties",
-        len(bo_reference_data["parties"]),
-    )
+    logger.info("Merged beneficial owner reference data")

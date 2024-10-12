@@ -1,60 +1,66 @@
-# tests/test_OPT_320_LotResult.py
+# tests/test_opt_320_lotresult.py
 
-import pytest
-import json
-import sys
-from pathlib import Path
-
-sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main
+from ted_and_doffin_to_ocds.converters.opt_320_lotresult import (
+    parse_tender_identifier_reference,
+    merge_tender_identifier_reference,
+)
 
 
-def test_opt_320_lot_result_integration(tmp_path):
+def test_parse_tender_identifier_reference():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionContent>
-                    <efext:EformsExtension>
-                        <efac:noticeResult>
-                            <efac:LotResult>
-                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
-                                <efac:LotTender>
-                                    <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
-                                </efac:LotTender>
-                                <efac:LotTender>
-                                    <cbc:ID schemeName="tender">TEN-0002</cbc:ID>
-                                </efac:LotTender>
-                                <efac:LotTender>
-                                    <cbc:ID schemeName="tender">TEN-0003</cbc:ID>
-                                </efac:LotTender>
-                            </efac:LotResult>
-                        </efac:noticeResult>
-                    </efext:EformsExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
+        <efac:NoticeResult>
+            <efac:LotResult>
+                <efac:LotTender>
+                    <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
+                </efac:LotTender>
+                <efac:LotTender>
+                    <cbc:ID schemeName="tender">TEN-0002</cbc:ID>
+                </efac:LotTender>
+                <efac:LotTender>
+                    <cbc:ID schemeName="tender">TEN-0003</cbc:ID>
+                </efac:LotTender>
+            </efac:LotResult>
+        </efac:NoticeResult>
     </root>
     """
-    xml_file = tmp_path / "test_input_tender_identifier_reference.xml"
-    xml_file.write_text(xml_content)
-
-    main(str(xml_file), "ocds-test-prefix")
-
-    with Path("output.json").open() as f:
-        result = json.load(f)
-
-    assert "awards" in result
-    assert len(result["awards"]) == 1
-    award = result["awards"][0]
-    assert award["id"] == "RES-0001"
-    assert "relatedBids" in award
-    assert set(award["relatedBids"]) == {"TEN-0001", "TEN-0002", "TEN-0003"}
+    result = parse_tender_identifier_reference(xml_content)
+    assert result == {"awards": [{"relatedBids": ["TEN-0001", "TEN-0002", "TEN-0003"]}]}
 
 
-if __name__ == "__main__":
-    pytest.main()
+def test_merge_tender_identifier_reference():
+    release_json = {"awards": [{"id": "AWD-0001", "title": "Existing Award"}]}
+    tender_identifier_data = {
+        "awards": [{"relatedBids": ["TEN-0001", "TEN-0002", "TEN-0003"]}]
+    }
+    merge_tender_identifier_reference(release_json, tender_identifier_data)
+    assert release_json == {
+        "awards": [
+            {
+                "id": "AWD-0001",
+                "title": "Existing Award",
+                "relatedBids": ["TEN-0001", "TEN-0002", "TEN-0003"],
+            }
+        ]
+    }
+
+
+def test_merge_tender_identifier_reference_no_existing_awards():
+    release_json = {}
+    tender_identifier_data = {
+        "awards": [{"relatedBids": ["TEN-0001", "TEN-0002", "TEN-0003"]}]
+    }
+    merge_tender_identifier_reference(release_json, tender_identifier_data)
+    assert release_json == {
+        "awards": [{"relatedBids": ["TEN-0001", "TEN-0002", "TEN-0003"]}]
+    }
+
+
+def test_merge_tender_identifier_reference_no_data():
+    release_json = {"awards": [{"id": "AWD-0001", "title": "Existing Award"}]}
+    merge_tender_identifier_reference(release_json, None)
+    assert release_json == {"awards": [{"id": "AWD-0001", "title": "Existing Award"}]}

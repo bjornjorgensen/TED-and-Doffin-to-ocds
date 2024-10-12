@@ -1,91 +1,70 @@
-# tests/test_OPT_301_Lot_TenderReceipt.py
+# tests/test_opt_301_lot_tenderreceipt.py
 
 from ted_and_doffin_to_ocds.converters.opt_301_lot_tenderreceipt import (
-    parse_tender_recipient_identifier,
-    merge_tender_recipient_identifier,
+    parse_tender_recipient,
+    merge_tender_recipient,
 )
 
 
-def test_parse_tender_recipient_identifier():
+def test_parse_tender_recipient():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Lot">1</cbc:ID>
+            <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
-                <cac:TenderRecipientparty>
-                    <cac:partyIdentification>
-                        <cbc:ID>TPO-0001</cbc:ID>
-                    </cac:partyIdentification>
-                </cac:TenderRecipientparty>
+                <cac:TenderRecipientParty>
+                    <cac:PartyIdentification>
+                        <cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID>
+                    </cac:PartyIdentification>
+                </cac:TenderRecipientParty>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
     </root>
     """
 
-    result = parse_tender_recipient_identifier(xml_content)
+    result = parse_tender_recipient(xml_content)
 
     assert result is not None
     assert "parties" in result
     assert len(result["parties"]) == 1
-    assert result["parties"][0]["id"] == "TPO-0001"
-    assert result["parties"][0]["roles"] == ["submissionReceiptBody"]
+
+    party = result["parties"][0]
+    assert party["id"] == "TPO-0001"
+    assert party["roles"] == ["submissionReceiptBody"]
 
 
-def test_parse_tender_recipient_identifier_no_data():
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Lot">1</cbc:ID>
-        </cac:ProcurementProjectLot>
-    </root>
-    """
-
-    result = parse_tender_recipient_identifier(xml_content)
-
-    assert result is None
-
-
-def test_merge_tender_recipient_identifier():
-    recipient_data = {
-        "parties": [{"id": "TPO-0001", "roles": ["submissionReceiptBody"]}],
+def test_merge_tender_recipient():
+    release_json = {"parties": []}
+    tender_recipient_data = {
+        "parties": [{"id": "TPO-0001", "roles": ["submissionReceiptBody"]}]
     }
 
+    merge_tender_recipient(release_json, tender_recipient_data)
+
+    assert "parties" in release_json
+    assert len(release_json["parties"]) == 1
+
+    party = release_json["parties"][0]
+    assert party["id"] == "TPO-0001"
+    assert party["roles"] == ["submissionReceiptBody"]
+
+
+def test_merge_tender_recipient_existing_party():
     release_json = {
-        "parties": [{"id": "TPO-0002", "name": "Existing party", "roles": ["buyer"]}],
+        "parties": [
+            {"id": "TPO-0001", "name": "Existing Organization", "roles": ["buyer"]}
+        ]
+    }
+    tender_recipient_data = {
+        "parties": [{"id": "TPO-0001", "roles": ["submissionReceiptBody"]}]
     }
 
-    merge_tender_recipient_identifier(release_json, recipient_data)
-
-    assert len(release_json["parties"]) == 2
-    assert release_json["parties"][0]["id"] == "TPO-0002"
-    assert release_json["parties"][0]["roles"] == ["buyer"]
-    assert release_json["parties"][1]["id"] == "TPO-0001"
-    assert release_json["parties"][1]["roles"] == ["submissionReceiptBody"]
-
-
-def test_merge_tender_recipient_identifier_existing_party():
-    recipient_data = {
-        "parties": [{"id": "TPO-0001", "roles": ["submissionReceiptBody"]}],
-    }
-
-    release_json = {
-        "parties": [{"id": "TPO-0001", "name": "Existing party", "roles": ["buyer"]}],
-    }
-
-    merge_tender_recipient_identifier(release_json, recipient_data)
+    merge_tender_recipient(release_json, tender_recipient_data)
 
     assert len(release_json["parties"]) == 1
-    assert release_json["parties"][0]["id"] == "TPO-0001"
-    assert set(release_json["parties"][0]["roles"]) == {
-        "buyer",
-        "submissionReceiptBody",
-    }
-    assert release_json["parties"][0]["name"] == "Existing party"
 
-
-def test_merge_tender_recipient_identifier_no_data():
-    release_json = {"parties": []}
-    merge_tender_recipient_identifier(release_json, None)
-    assert release_json == {"parties": []}
+    party = release_json["parties"][0]
+    assert party["id"] == "TPO-0001"
+    assert party["name"] == "Existing Organization"
+    assert set(party["roles"]) == {"buyer", "submissionReceiptBody"}

@@ -91,7 +91,10 @@
       },
       "address": {
         "locality": "VADSØ"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -117,7 +120,11 @@
       },
       "address": {
         "locality": "Vadsø"
-      }
+      },
+      "roles": [
+        "reviewContactPoint",
+        "reviewBody"
+      ]
     },
     {
       "id": "ORG-0004",
@@ -130,7 +137,10 @@
       },
       "address": {
         "locality": "Bergen"
-      }
+      },
+      "roles": [
+        "mediationBody"
+      ]
     }
   ],
   "awards": [
@@ -142,7 +152,21 @@
       },
       "relatedLots": [
         "LOT-0000"
+      ],
+      "relatedBids": [
+        "TEN-0001"
       ]
+    }
+  ],
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "awardID": "RES-0001"
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

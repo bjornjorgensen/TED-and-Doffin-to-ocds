@@ -1,4 +1,4 @@
-# converters/OPT_301_part_TenderReceipt.py
+# converters/opt_301_part_tenderreceipt.py
 
 from lxml import etree
 import logging
@@ -6,47 +6,49 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def parse_part_tenderreceipt(xml_content):
+def part_parse_tender_recipient(xml_content):
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    xpath = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:TenderRecipientParty/cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']"
+    tender_recipients = root.xpath(xpath, namespaces=namespaces)
+
+    if not tender_recipients:
+        logger.info("No Tender Recipient Technical Identifier found.")
+        return None
+
     result = {"parties": []}
-
-    xpath = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:TenderingTerms/cac:TenderRecipientparty/cac:partyIdentification/cbc:ID"
-    tender_receipt_ids = root.xpath(xpath, namespaces=namespaces)
-
-    for tender_receipt_id in tender_receipt_ids:
+    for recipient in tender_recipients:
         result["parties"].append(
-            {"id": tender_receipt_id.text, "roles": ["submissionReceiptBody"]},
+            {"id": recipient.text, "roles": ["submissionReceiptBody"]}
         )
 
-    return result if result["parties"] else None
+    return result
 
 
-def merge_part_tenderreceipt(release_json, tenderreceipt_data):
-    if not tenderreceipt_data:
-        logger.warning("No part Tender Recipient data to merge")
+def part_merge_tender_recipient(release_json, tender_recipient_data):
+    if not tender_recipient_data:
+        logger.info("No Tender Recipient data to merge.")
         return
 
-    existing_parties = {party["id"]: party for party in release_json.get("parties", [])}
-    for party in tenderreceipt_data["parties"]:
-        if party["id"] in existing_parties:
-            existing_roles = set(existing_parties[party["id"]].get("roles", []))
-            existing_roles.update(party["roles"])
-            existing_parties[party["id"]]["roles"] = list(existing_roles)
+    parties = release_json.setdefault("parties", [])
+
+    for new_party in tender_recipient_data["parties"]:
+        existing_party = next(
+            (party for party in parties if party["id"] == new_party["id"]), None
+        )
+        if existing_party:
+            if "submissionReceiptBody" not in existing_party.get("roles", []):
+                existing_party.setdefault("roles", []).append("submissionReceiptBody")
         else:
-            release_json.setdefault("parties", []).append(party)
+            parties.append(new_party)
 
     logger.info(
-        "Merged part Tender Recipient data for %d parties",
-        len(tenderreceipt_data["parties"]),
+        "Merged Tender Recipient data for %d parties.",
+        len(tender_recipient_data["parties"]),
     )

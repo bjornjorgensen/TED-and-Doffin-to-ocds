@@ -1,4 +1,4 @@
-# converters/OPT_301_Lot_AddInfo.py
+# converters/opt_301_lot_addinfo.py
 
 from lxml import etree
 import logging
@@ -6,61 +6,51 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def parse_additional_info_provider_identifier(xml_content):
+def parse_additional_info_provider(xml_content):
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"parties": []}
 
-    lots = root.xpath("//cac:ProcurementProjectLot", namespaces=namespaces)
+    additional_info_parties = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AdditionalInformationParty/cac:PartyIdentification/cbc:ID",
+        namespaces=namespaces,
+    )
 
-    for lot in lots:
-        additional_info_provider_id = lot.xpath(
-            "cac:TenderingTerms/cac:AdditionalInformationparty/cac:partyIdentification/cbc:ID[@schemeName='touchpoint']/text()",
-            namespaces=namespaces,
-        )
-
-        if additional_info_provider_id:
-            party = {
-                "id": additional_info_provider_id[0],
-                "roles": ["processContactPoint"],
-            }
-            result["parties"].append(party)
+    for party in additional_info_parties:
+        org_id = party.text
+        if org_id:
+            result["parties"].append({"id": org_id, "roles": ["processContactPoint"]})
 
     return result if result["parties"] else None
 
 
-def merge_additional_info_provider_identifier(
-    release_json,
-    additional_info_provider_data,
-):
-    if not additional_info_provider_data:
-        logger.warning("No Additional Info Provider data to merge")
+def merge_additional_info_provider(release_json, provider_data):
+    if not provider_data:
+        logger.info(
+            "No Additional Info Provider Technical Identifier Reference data to merge"
+        )
         return
 
-    existing_parties = release_json.setdefault("parties", [])
+    parties = release_json.setdefault("parties", [])
 
-    for new_party in additional_info_provider_data["parties"]:
+    for new_party in provider_data["parties"]:
         existing_party = next(
-            (party for party in existing_parties if party["id"] == new_party["id"]),
-            None,
+            (party for party in parties if party["id"] == new_party["id"]), None
         )
         if existing_party:
-            if "processContactPoint" not in existing_party.get("roles", []):
-                existing_party.setdefault("roles", []).append("processContactPoint")
+            existing_roles = set(existing_party.get("roles", []))
+            existing_roles.update(new_party["roles"])
+            existing_party["roles"] = list(existing_roles)
         else:
-            existing_parties.append(new_party)
+            parties.append(new_party)
 
     logger.info(
-        "Merged Additional Info Provider Identifier for %d parties",
-        len(additional_info_provider_data["parties"]),
+        "Merged Additional Info Provider Technical Identifier Reference data for %s parties",
+        len(provider_data["parties"]),
     )

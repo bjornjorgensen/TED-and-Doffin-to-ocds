@@ -1,4 +1,4 @@
-# converters/OPT_301_LotResult_Financing.py
+# converters/opt_301_lotresult_financing.py
 
 from lxml import etree
 import logging
@@ -6,43 +6,52 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def parse_lotresult_financing(xml_content):
+def parse_financing_party(xml_content):
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
         "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
         "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
     }
-
-    xpath = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:noticeResult/efac:LotResult/cac:Financingparty/cac:partyIdentification/cbc:ID"
-    financing_party_ids = root.xpath(xpath, namespaces=namespaces)
 
     result = {"parties": []}
 
-    for party_id in financing_party_ids:
-        result["parties"].append({"id": party_id.text, "roles": ["funder"]})
+    financing_parties = root.xpath(
+        "//efac:NoticeResult/efac:LotResult/cac:FinancingParty/cac:PartyIdentification/cbc:ID[@schemeName='organization']",
+        namespaces=namespaces,
+    )
+
+    for party in financing_parties:
+        org_id = party.text
+        if org_id:
+            result["parties"].append({"id": org_id, "roles": ["funder"]})
 
     return result if result["parties"] else None
 
 
-def merge_lotresult_financing(release_json, financing_data):
-    if not financing_data:
-        logger.warning("No LotResult Financing data to merge")
+def merge_financing_party(release_json, financing_party_data):
+    if not financing_party_data:
+        logger.info("No Financing Party (ID reference) data to merge")
         return
 
-    existing_parties = {party["id"]: party for party in release_json.get("parties", [])}
-    for party in financing_data["parties"]:
-        if party["id"] in existing_parties:
-            existing_roles = set(existing_parties[party["id"]].get("roles", []))
-            existing_roles.update(party["roles"])
-            existing_parties[party["id"]]["roles"] = list(existing_roles)
+    parties = release_json.setdefault("parties", [])
+
+    for new_party in financing_party_data["parties"]:
+        existing_party = next(
+            (party for party in parties if party["id"] == new_party["id"]), None
+        )
+        if existing_party:
+            existing_roles = set(existing_party.get("roles", []))
+            existing_roles.update(new_party["roles"])
+            existing_party["roles"] = list(existing_roles)
         else:
-            release_json.setdefault("parties", []).append(party)
+            parties.append(new_party)
 
     logger.info(
-        "Merged LotResult Financing data for %d parties", len(financing_data["parties"])
+        "Merged Financing Party (ID reference) data for %d parties",
+        len(financing_party_data["parties"]),
     )

@@ -1,45 +1,59 @@
-# tests/test_OPT_301_part_ReviewOrg.py
+# tests/test_opt_301_part_revieworg.py
 
-import pytest
-import sys
-from pathlib import Path
-
-# Add the parent directory to sys.path to import main
-sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main
+from ted_and_doffin_to_ocds.converters.opt_301_part_revieworg import (
+    part_parse_review_organization,
+    part_merge_review_organization,
+)
 
 
-def test_opt_301_part_revieworg_integration(tmp_path):
+def test_parse_review_organization():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">1</cbc:ID>
+            <cbc:ID schemeName="Part">1</cbc:ID>
             <cac:TenderingTerms>
                 <cac:AppealTerms>
-                    <cac:AppealReceiverparty>
-                        <cac:partyIdentification>
+                    <cac:AppealReceiverParty>
+                        <cac:PartyIdentification>
                             <cbc:ID schemeName="touchpoint">TPO-0003</cbc:ID>
-                        </cac:partyIdentification>
-                    </cac:AppealReceiverparty>
+                        </cac:PartyIdentification>
+                    </cac:AppealReceiverParty>
                 </cac:AppealTerms>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
     </root>
     """
-    xml_file = tmp_path / "test_input_part_revieworg.xml"
-    xml_file.write_text(xml_content)
-
-    result = main(str(xml_file), "ocds-test-prefix")
-
-    assert result is not None
-    assert "parties" in result
-    assert len(result["parties"]) == 1
-    party = result["parties"][0]
-    assert party["id"] == "TPO-0003"
-    assert "roles" in party
-    assert "reviewBody" in party["roles"]
+    result = part_parse_review_organization(xml_content)
+    assert result == {"parties": [{"id": "TPO-0003", "roles": ["reviewBody"]}]}
 
 
-if __name__ == "__main__":
-    pytest.main()
+def test_merge_review_organization():
+    release_json = {"parties": [{"id": "TPO-0003", "roles": ["buyer"]}]}
+    review_organization_data = {
+        "parties": [{"id": "TPO-0003", "roles": ["reviewBody"]}]
+    }
+    part_merge_review_organization(release_json, review_organization_data)
+    assert release_json == {
+        "parties": [{"id": "TPO-0003", "roles": ["buyer", "reviewBody"]}]
+    }
+
+
+def test_merge_review_organization_new_party():
+    release_json = {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}
+    review_organization_data = {
+        "parties": [{"id": "TPO-0003", "roles": ["reviewBody"]}]
+    }
+    part_merge_review_organization(release_json, review_organization_data)
+    assert release_json == {
+        "parties": [
+            {"id": "ORG-0001", "roles": ["buyer"]},
+            {"id": "TPO-0003", "roles": ["reviewBody"]},
+        ]
+    }
+
+
+def test_merge_review_organization_no_data():
+    release_json = {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}
+    part_merge_review_organization(release_json, None)
+    assert release_json == {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}

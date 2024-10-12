@@ -1,57 +1,122 @@
-# tests/test_OPT_301_Lot_EnvironLegis.py
-from pathlib import Path
-import pytest
-import json
-import sys
+# tests/test_opt_301_lot_environlegis.py
 
-# Add the parent directory to sys.path to import main
-sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main
+from ted_and_doffin_to_ocds.converters.opt_301_lot_environlegis import (
+    parse_environmental_legislation_org,
+    merge_environmental_legislation_org,
+)
 
 
-def test_opt_301_lot_environlegis_integration(tmp_path):
+def test_parse_environmental_legislation_org():
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+          xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+          xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:EnvironmentalLegislationDocumentReference>
                     <cbc:ID>Env1</cbc:ID>
-                    <cac:Issuerparty>
-                        <cac:partyIdentification>
+                    <cac:IssuerParty>
+                        <cac:PartyIdentification>
                             <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                        </cac:partyIdentification>
-                    </cac:Issuerparty>
+                        </cac:PartyIdentification>
+                    </cac:IssuerParty>
                 </cac:EnvironmentalLegislationDocumentReference>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
     </root>
     """
-    xml_file = tmp_path / "test_input_environmental_legislation.xml"
-    xml_file.write_text(xml_content)
 
-    main(str(xml_file), "ocds-test-prefix")
+    result = parse_environmental_legislation_org(xml_content)
 
-    with Path("output.json").open() as f:
-        result = json.load(f)
-
+    assert result is not None
     assert "parties" in result
+    assert "tender" in result and "documents" in result["tender"]  # noqa: PT018
     assert len(result["parties"]) == 1
+    assert len(result["tender"]["documents"]) == 1
+
     party = result["parties"][0]
     assert party["id"] == "ORG-0001"
-    assert "roles" in party
-    assert "informationService" in party["roles"]
+    assert party["roles"] == ["informationService"]
 
-    assert "tender" in result
-    assert "documents" in result["tender"]
-    assert len(result["tender"]["documents"]) == 1
-    document = result["tender"]["documents"][0]
-    assert document["id"] == "Env1"
-    assert document["publisher"]["id"] == "ORG-0001"
-    assert "relatedLots" in document
-    assert "LOT-0001" in document["relatedLots"]
+    doc = result["tender"]["documents"][0]
+    assert doc["id"] == "Env1"
+    assert doc["publisher"]["id"] == "ORG-0001"
+    assert doc["relatedLots"] == ["LOT-0001"]
 
 
-if __name__ == "__main__":
-    pytest.main()
+def test_merge_environmental_legislation_org():
+    release_json = {"parties": [], "tender": {"documents": []}}
+    environ_legis_data = {
+        "parties": [{"id": "ORG-0001", "roles": ["informationService"]}],
+        "tender": {
+            "documents": [
+                {
+                    "id": "Env1",
+                    "publisher": {"id": "ORG-0001"},
+                    "relatedLots": ["LOT-0001"],
+                }
+            ]
+        },
+    }
+
+    merge_environmental_legislation_org(release_json, environ_legis_data)
+
+    assert len(release_json["parties"]) == 1
+    assert len(release_json["tender"]["documents"]) == 1
+
+    party = release_json["parties"][0]
+    assert party["id"] == "ORG-0001"
+    assert party["roles"] == ["informationService"]
+
+    doc = release_json["tender"]["documents"][0]
+    assert doc["id"] == "Env1"
+    assert doc["publisher"]["id"] == "ORG-0001"
+    assert doc["relatedLots"] == ["LOT-0001"]
+
+
+def test_merge_environmental_legislation_org_existing_data():
+    release_json = {
+        "parties": [
+            {"id": "ORG-0001", "name": "Existing Organization", "roles": ["buyer"]}
+        ],
+        "tender": {
+            "documents": [
+                {
+                    "id": "Env1",
+                    "title": "Existing Document",
+                    "relatedLots": ["LOT-0002"],
+                }
+            ]
+        },
+    }
+    environ_legis_data = {
+        "parties": [{"id": "ORG-0001", "roles": ["informationService"]}],
+        "tender": {
+            "documents": [
+                {
+                    "id": "Env1",
+                    "publisher": {"id": "ORG-0001"},
+                    "relatedLots": ["LOT-0001"],
+                }
+            ]
+        },
+    }
+
+    merge_environmental_legislation_org(release_json, environ_legis_data)
+
+    assert len(release_json["parties"]) == 1
+    assert len(release_json["tender"]["documents"]) == 1
+
+    party = release_json["parties"][0]
+    assert party["id"] == "ORG-0001"
+    assert party["name"] == "Existing Organization"
+    assert set(party["roles"]) == {"buyer", "informationService"}
+
+    doc = release_json["tender"]["documents"][0]
+    assert doc["id"] == "Env1"
+    assert doc["title"] == "Existing Document"
+    assert doc["publisher"]["id"] == "ORG-0001"
+    assert set(doc["relatedLots"]) == {"LOT-0001", "LOT-0002"}

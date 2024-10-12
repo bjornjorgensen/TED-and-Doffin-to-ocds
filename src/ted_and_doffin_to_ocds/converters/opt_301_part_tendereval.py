@@ -1,4 +1,4 @@
-# converters/OPT_301_part_TenderEval.py
+# converters/opt_301_part_tendereval.py
 
 from lxml import etree
 import logging
@@ -6,47 +6,47 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def parse_part_tendereval(xml_content):
+def part_parse_tender_evaluator(xml_content):
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    xpath = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:TenderEvaluationParty/cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']"
+    tender_evaluators = root.xpath(xpath, namespaces=namespaces)
+
+    if not tender_evaluators:
+        logger.info("No Tender Evaluator Technical Identifier found.")
+        return None
+
     result = {"parties": []}
+    for evaluator in tender_evaluators:
+        result["parties"].append({"id": evaluator.text, "roles": ["evaluationBody"]})
 
-    xpath = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:TenderingTerms/cac:TenderEvaluationparty/cac:partyIdentification/cbc:ID"
-    tender_eval_ids = root.xpath(xpath, namespaces=namespaces)
-
-    for tender_eval_id in tender_eval_ids:
-        result["parties"].append(
-            {"id": tender_eval_id.text, "roles": ["evaluationBody"]},
-        )
-
-    return result if result["parties"] else None
+    return result
 
 
-def merge_part_tendereval(release_json, tendereval_data):
-    if not tendereval_data:
-        logger.warning("No part Tender Evaluator data to merge")
+def part_merge_tender_evaluator(release_json, tender_evaluator_data):
+    if not tender_evaluator_data:
+        logger.info("No Tender Evaluator data to merge.")
         return
 
-    existing_parties = {party["id"]: party for party in release_json.get("parties", [])}
-    for party in tendereval_data["parties"]:
-        if party["id"] in existing_parties:
-            existing_roles = set(existing_parties[party["id"]].get("roles", []))
-            existing_roles.update(party["roles"])
-            existing_parties[party["id"]]["roles"] = list(existing_roles)
+    parties = release_json.setdefault("parties", [])
+
+    for new_party in tender_evaluator_data["parties"]:
+        existing_party = next(
+            (party for party in parties if party["id"] == new_party["id"]), None
+        )
+        if existing_party:
+            if "evaluationBody" not in existing_party.get("roles", []):
+                existing_party.setdefault("roles", []).append("evaluationBody")
         else:
-            release_json.setdefault("parties", []).append(party)
+            parties.append(new_party)
 
     logger.info(
-        "Merged part Tender Evaluator data for %d parties",
-        len(tendereval_data["parties"]),
+        "Merged Tender Evaluator data for %d parties.",
+        len(tender_evaluator_data["parties"]),
     )

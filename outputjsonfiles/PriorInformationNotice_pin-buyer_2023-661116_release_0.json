@@ -275,7 +275,16 @@
       },
       "address": {
         "locality": "TRONDHEIM"
-      }
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

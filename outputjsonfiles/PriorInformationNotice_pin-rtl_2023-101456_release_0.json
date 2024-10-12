@@ -103,7 +103,11 @@
       },
       "address": {
         "locality": "VADSØ"
-      }
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -120,7 +124,15 @@
       },
       "address": {
         "locality": "Alta"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

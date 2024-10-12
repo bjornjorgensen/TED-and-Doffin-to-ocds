@@ -123,21 +123,36 @@
       },
       "address": {
         "locality": "VADSØ"
-      }
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ]
     },
     {
       "id": "ORG-0002",
       "name": "Øst-Finnmark tingrett",
       "address": {
         "locality": "Vadsø"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
     },
     {
       "id": "ORG-0003",
       "name": "Sykehusinnkjøp HF",
       "address": {
         "locality": "Vadsø"
-      }
+      },
+      "roles": [
+        "reviewContactPoint"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

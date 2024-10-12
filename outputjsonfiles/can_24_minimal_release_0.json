@@ -90,7 +90,15 @@
       },
       "address": {
         "locality": "Rouen Cedex 1"
-      }
+      },
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001"
+        }
+      ],
+      "roles": [
+        "buyer"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -103,7 +111,15 @@
       ],
       "address": {
         "locality": "Rouen"
-      }
+      },
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001"
+        }
+      ],
+      "roles": [
+        "reviewBody"
+      ]
     },
     {
       "id": "ORG-0004",
@@ -121,6 +137,11 @@
       "address": {
         "locality": "Le Grand-Quevilly"
       },
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001"
+        }
+      ],
       "roles": [
         "tenderer"
       ]
@@ -136,6 +157,28 @@
       "relatedLots": [
         "LOT-0000"
       ]
+    },
+    {
+      "id": "CON-0001",
+      "buyers": [
+        {
+          "id": "ORG-0001"
+        }
+      ],
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "awardID": "RES-0001"
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

@@ -1,12 +1,31 @@
 # tests/test_bt_635_lotresult.py
 
-from ted_and_doffin_to_ocds.converters.bt_635_lotresult import (
-    parse_buyer_review_requests_count,
-    merge_buyer_review_requests_count,
-)
+from pathlib import Path
+import pytest
+import json
+import sys
+import tempfile
+
+# Add the parent directory to sys.path to import main
+sys.path.append(str(Path(__file__).parent.parent))
+from src.ted_and_doffin_to_ocds.main import main
 
 
-def test_parse_buyer_review_requests_count():
+@pytest.fixture
+def temp_output_dir():
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        yield Path(tmpdirname)
+
+
+def run_main_and_get_result(xml_file, output_dir):
+    main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
+    output_files = list(output_dir.glob("*.json"))
+    assert len(output_files) == 1, f"Expected 1 output file, got {len(output_files)}"
+    with output_files[0].open() as f:
+        return json.load(f)
+
+
+def test_bt_635_lotresult_integration(tmp_path, temp_output_dir):
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -14,95 +33,62 @@ def test_parse_buyer_review_requests_count():
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efext:EformsExtension>
-            <efac:NoticeResult>
-                <efac:LotResult>
-                    <efac:AppealRequestsStatistics>
-                        <efbc:StatisticsNumeric>2</efbc:StatisticsNumeric>
-                    </efac:AppealRequestsStatistics>
-                    <efac:TenderLot>
-                        <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
-                    </efac:TenderLot>
-                </efac:LotResult>
-            </efac:NoticeResult>
-        </efext:EformsExtension>
+        <efac:NoticeResult>
+            <efac:LotResult>
+                <efac:AppealRequestsStatistics>
+                    <efbc:StatisticsCode listName="irregularity-type">review-requests</efbc:StatisticsCode>
+                    <efbc:StatisticsNumeric>2</efbc:StatisticsNumeric>
+                </efac:AppealRequestsStatistics>
+                <efac:TenderLot>
+                    <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+                </efac:TenderLot>
+            </efac:LotResult>
+            <efac:LotResult>
+                <efac:AppealRequestsStatistics>
+                    <efbc:StatisticsCode listName="irregularity-type">review-requests</efbc:StatisticsCode>
+                    <efbc:StatisticsNumeric>3</efbc:StatisticsNumeric>
+                </efac:AppealRequestsStatistics>
+                <efac:TenderLot>
+                    <cbc:ID schemeName="Lot">LOT-0002</cbc:ID>
+                </efac:TenderLot>
+            </efac:LotResult>
+        </efac:NoticeResult>
     </root>
     """
+    xml_file = tmp_path / "test_input_buyer_review_requests.xml"
+    xml_file.write_text(xml_content)
 
-    result = parse_buyer_review_requests_count(xml_content)
-    assert result == {
-        "statistics": [{"value": 2.0, "scope": "complaints", "relatedLot": "LOT-0001"}]
-    }
+    result = run_main_and_get_result(xml_file, temp_output_dir)
 
+    assert "statistics" in result, "Expected 'statistics' in result"
+    assert (
+        len(result["statistics"]) == 2
+    ), f"Expected 2 statistics, got {len(result['statistics'])}"
 
-def test_merge_buyer_review_requests_count():
-    release_json = {
-        "statistics": [
-            {"id": "1", "scope": "complaints", "relatedLot": "LOT-0001", "value": 1.0}
-        ]
-    }
+    lot1_statistic = next(
+        (stat for stat in result["statistics"] if stat["relatedLot"] == "LOT-0001"),
+        None,
+    )
+    assert lot1_statistic is not None, "Expected statistic for LOT-0001"
+    assert (
+        lot1_statistic["value"] == 2
+    ), f"Expected value 2 for LOT-0001, got {lot1_statistic['value']}"
+    assert (
+        lot1_statistic["scope"] == "complaints"
+    ), f"Expected scope 'complaints' for LOT-0001, got {lot1_statistic['scope']}"
 
-    buyer_review_requests_count_data = {
-        "statistics": [{"value": 2.0, "scope": "complaints", "relatedLot": "LOT-0001"}]
-    }
-
-    merge_buyer_review_requests_count(release_json, buyer_review_requests_count_data)
-
-    assert release_json == {
-        "statistics": [
-            {"id": "1", "scope": "complaints", "relatedLot": "LOT-0001", "value": 2.0}
-        ]
-    }
-
-
-def test_merge_buyer_review_requests_count_new_statistic():
-    release_json = {
-        "statistics": [
-            {"id": "1", "scope": "complaints", "relatedLot": "LOT-0001", "value": 1.0}
-        ]
-    }
-
-    buyer_review_requests_count_data = {
-        "statistics": [{"value": 3.0, "scope": "complaints", "relatedLot": "LOT-0002"}]
-    }
-
-    merge_buyer_review_requests_count(release_json, buyer_review_requests_count_data)
-
-    assert release_json == {
-        "statistics": [
-            {"id": "1", "scope": "complaints", "relatedLot": "LOT-0001", "value": 1.0},
-            {"id": "2", "value": 3.0, "scope": "complaints", "relatedLot": "LOT-0002"},
-        ]
-    }
+    lot2_statistic = next(
+        (stat for stat in result["statistics"] if stat["relatedLot"] == "LOT-0002"),
+        None,
+    )
+    assert lot2_statistic is not None, "Expected statistic for LOT-0002"
+    assert (
+        lot2_statistic["value"] == 3
+    ), f"Expected value 3 for LOT-0002, got {lot2_statistic['value']}"
+    assert (
+        lot2_statistic["scope"] == "complaints"
+    ), f"Expected scope 'complaints' for LOT-0002, got {lot2_statistic['scope']}"
 
 
-def test_merge_buyer_review_requests_count_multiple_notices():
-    # Simulating multiple notices
-    release_json = {
-        "statistics": [
-            {"id": "1", "scope": "complaints", "relatedLot": "LOT-0001", "value": 1.0},
-            {"id": "2", "scope": "complaints", "relatedLot": "LOT-0002", "value": 2.0},
-            {"id": "3", "scope": "other", "relatedLot": "LOT-0003", "value": 3.0},
-            {"id": "9", "scope": "complaints", "relatedLot": "LOT-0004", "value": 4.0},
-        ]
-    }
-
-    buyer_review_requests_count_data = {
-        "statistics": [
-            {"value": 5.0, "scope": "complaints", "relatedLot": "LOT-0005"},
-            {"value": 6.0, "scope": "complaints", "relatedLot": "LOT-0006"},
-        ]
-    }
-
-    merge_buyer_review_requests_count(release_json, buyer_review_requests_count_data)
-
-    assert release_json == {
-        "statistics": [
-            {"id": "1", "scope": "complaints", "relatedLot": "LOT-0001", "value": 1.0},
-            {"id": "2", "scope": "complaints", "relatedLot": "LOT-0002", "value": 2.0},
-            {"id": "3", "scope": "other", "relatedLot": "LOT-0003", "value": 3.0},
-            {"id": "9", "scope": "complaints", "relatedLot": "LOT-0004", "value": 4.0},
-            {"id": "10", "value": 5.0, "scope": "complaints", "relatedLot": "LOT-0005"},
-            {"id": "11", "value": 6.0, "scope": "complaints", "relatedLot": "LOT-0006"},
-        ]
-    }
+if __name__ == "__main__":
+    pytest.main()

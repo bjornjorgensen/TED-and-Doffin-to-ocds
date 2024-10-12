@@ -59,7 +59,15 @@
       },
       "address": {
         "locality": "HAMAR"
-      }
+      },
+      "roles": [
+        "buyer"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

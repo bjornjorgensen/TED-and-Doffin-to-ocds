@@ -1,4 +1,4 @@
-# converters/bt_636_LotResult.py
+# converters/bt_636_lotresult.py
 
 import logging
 from lxml import etree
@@ -42,15 +42,15 @@ IRREGULARITY_TYPE_MAPPING = {
 }
 
 
-def parse_irregularity_type(xml_content):
+def parse_buyer_review_requests_irregularity_type(xml_content):
     """
-    Parse the XML content to extract the irregularity type for buyer review requests.
+    Parse the XML content to extract the irregularity type of buyer review requests for each lot.
 
     Args:
         xml_content (str): The XML content to parse.
 
     Returns:
-        dict: A dictionary containing the parsed irregularity type data.
+        dict: A dictionary containing the parsed buyer review requests irregularity type data.
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
@@ -59,74 +59,83 @@ def parse_irregularity_type(xml_content):
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    # Check if the relevant XPath exists
+    relevant_xpath = "//efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efbc:StatisticsCode"
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info(
+            "No buyer review requests irregularity type data found. Skipping parse_buyer_review_requests_irregularity_type."
+        )
+        return None
+
     result = {"statistics": []}
-    id_counter = 1
+    statistic_id = 1
 
     lot_results = root.xpath(
-        "//efac:noticeResult/efac:LotResult",
-        namespaces=namespaces,
+        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
     )
     for lot_result in lot_results:
         lot_id = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
-            namespaces=namespaces,
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces
         )
         if not lot_id:
             continue
 
-        irregularity_types = lot_result.xpath(
+        irregularity_type = lot_result.xpath(
             "efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efbc:StatisticsCode/text()",
             namespaces=namespaces,
         )
-        for irregularity_type in irregularity_types:
+        if irregularity_type:
+            code = irregularity_type[0]
             statistic = {
-                "id": str(id_counter),
-                "measure": irregularity_type,
+                "id": str(statistic_id),
+                "measure": code,
                 "scope": "complaints",
-                "relatedLot": lot_id[0],
                 "notes": IRREGULARITY_TYPE_MAPPING.get(
-                    irregularity_type,
-                    "Unknown irregularity type",
+                    code, "Unknown irregularity type"
                 ),
+                "relatedLot": lot_id[0],
             }
             result["statistics"].append(statistic)
-            id_counter += 1
+            statistic_id += 1
 
     return result if result["statistics"] else None
 
 
-def merge_irregularity_type(release_json, irregularity_type_data):
+def merge_buyer_review_requests_irregularity_type(
+    release_json, buyer_review_requests_irregularity_type_data
+):
     """
-    Merge the parsed irregularity type data into the main OCDS release JSON.
+    Merge the parsed buyer review requests irregularity type data into the main OCDS release JSON.
 
     Args:
         release_json (dict): The main OCDS release JSON to be updated.
-        irregularity_type_data (dict): The parsed irregularity type data to be merged.
+        buyer_review_requests_irregularity_type_data (dict): The parsed buyer review requests irregularity type data to be merged.
 
     Returns:
         None: The function updates the release_json in-place.
     """
-    if not irregularity_type_data:
-        logger.warning("No irregularity type data to merge")
+    if not buyer_review_requests_irregularity_type_data:
+        logger.info("No buyer review requests irregularity type data to merge")
         return
 
-    existing_statistics = release_json.setdefault("statistics", [])
+    statistics = release_json.setdefault("statistics", [])
 
-    for new_statistic in irregularity_type_data["statistics"]:
+    for new_statistic in buyer_review_requests_irregularity_type_data["statistics"]:
         existing_statistic = next(
-            (stat for stat in existing_statistics if stat["id"] == new_statistic["id"]),
-            None,
+            (stat for stat in statistics if stat["id"] == new_statistic["id"]), None
         )
         if existing_statistic:
             existing_statistic.update(new_statistic)
         else:
-            existing_statistics.append(new_statistic)
+            statistics.append(new_statistic)
 
     logger.info(
-        "Merged irregularity type data for %d statistics",
-        len(irregularity_type_data["statistics"]),
+        "Merged buyer review requests irregularity type data for %d lots",
+        len(buyer_review_requests_irregularity_type_data["statistics"]),
     )

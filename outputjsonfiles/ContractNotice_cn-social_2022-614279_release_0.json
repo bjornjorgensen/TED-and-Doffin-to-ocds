@@ -106,14 +106,26 @@
       },
       "address": {
         "locality": "Mo i Rana"
-      }
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ]
     },
     {
       "id": "ORG-0002",
       "name": "Oslo Tingrett",
       "address": {
         "locality": "Oslo"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

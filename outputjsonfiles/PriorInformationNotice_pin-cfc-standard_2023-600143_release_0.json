@@ -103,7 +103,11 @@
       },
       "address": {
         "locality": "Tønsberg"
-      }
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -123,7 +127,10 @@
       },
       "address": {
         "locality": "Tønsberg"
-      }
+      },
+      "roles": [
+        "submissionReceiptBody"
+      ]
     },
     {
       "id": "ORG-0003",
@@ -133,7 +140,15 @@
       },
       "address": {
         "locality": "Tønsberg"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }

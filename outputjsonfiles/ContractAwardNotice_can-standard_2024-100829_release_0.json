@@ -122,7 +122,12 @@
       },
       "address": {
         "locality": "HØNEFOSS"
-      }
+      },
+      "roles": [
+        "buyer",
+        "payer",
+        "funder"
+      ]
     },
     {
       "id": "ORG-0002",
@@ -139,7 +144,10 @@
       },
       "address": {
         "locality": "Sandvika"
-      }
+      },
+      "roles": [
+        "reviewBody"
+      ]
     },
     {
       "id": "ORG-0003",
@@ -161,6 +169,33 @@
       "roles": [
         "tenderer"
       ]
+    }
+  ],
+  "awards": [
+    {
+      "id": "CON-0001",
+      "buyers": [
+        {
+          "id": "ORG-0001"
+        }
+      ],
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    },
+    {
+      "id": "RES-0001"
+    }
+  ],
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "awardID": "RES-0001"
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
     }
   ]
 }
