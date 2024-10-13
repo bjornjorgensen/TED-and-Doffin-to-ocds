@@ -1,0 +1,228 @@
+{
+  "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "0a13ce23-1022-40a1-9652-b45a78168c93",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "title": "Griegkvartalet: Plan - designkonkurranse, etterfølgende tjenestekontrakt",
+        "identifiers": {
+          "id": "00",
+          "scheme": "internal"
+        },
+        "mainProcurementCategory": "works",
+        "description": "Grieghallen Utbygging AS (oppdragsgiver) ble etablert i 2021 for å realisere prosjektet «Griegkvartalet» - et nytt musikkteater i Bergen. Oppdragsgiver skal gjennom prosjektet «Griegkvartalet» etablere et nytt musikkteater på Edvard Griegs plass. I denne forbindelse har oppdragsgiver behov for å få utarbeidet et tverrfaglig løsningsforslag, utarbeidet av et team av både arkitekter og rådgivere. Løsningsforslaget som utarbeides i plan- og designkonkurransen vil ligge til grunn for prosjektet i det videre arbeidet.Videre har oppdragsgiver behov for å inngå en etterfølgende kontrakt for arkitekt- og rådgivningstjenester i prosjektet. Tjenestekontrakt for arkitekt- og rådgivning vil bli inngått etter NS 8401:2010 «Alminnelige kontraktsbestemmelser for prosjekteringsoppdrag».Konkurransen skal gjennomføres som en plan- og designkonkurranse med etterfølgende konkurranse med forhandling uten forutgående kunngjøring, jf. FOA del I og V.",
+        "additionalProcurementCategories": [
+          "services"
+        ],
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "title": "Griegkvartalet: Plan - designkonkurranse, etterfølgende tjenestekontrakt",
+    "mainProcurementCategory": "works",
+    "description": "Grieghallen Utbygging AS (oppdragsgiver) ble etablert i 2021 for å realisere prosjektet «Griegkvartalet» - et nytt musikkteater i Bergen. Oppdragsgiver skal gjennom prosjektet «Griegkvartalet» etablere et nytt musikkteater på Edvard Griegs plass. I denne forbindelse har oppdragsgiver behov for å få utarbeidet et tverrfaglig løsningsforslag, utarbeidet av et team av både arkitekter og rådgivere. Løsningsforslaget som utarbeides i plan- og designkonkurransen vil ligge til grunn for prosjektet i det videre arbeidet.Videre har oppdragsgiver behov for å inngå en etterfølgende kontrakt for arkitekt- og rådgivningstjenester i prosjektet. Tjenestekontrakt for arkitekt- og rådgivning vil bli inngått etter NS 8401:2010 «Alminnelige kontraktsbestemmelser for prosjekteringsoppdrag».Konkurransen skal gjennomføres som en plan- og designkonkurranse med etterfølgende konkurranse med forhandling uten forutgående kunngjøring, jf. FOA del I og V.",
+    "items": [
+      {
+        "id": "1",
+        "quantity": 1.0,
+        "relatedLot": "LOT-0000",
+        "unit": {
+          "id": "LH",
+          "scheme": "EU Measurement unit",
+          "name": "labour hour"
+        },
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "71200000"
+          },
+          {
+            "id": "71210000"
+          },
+          {
+            "id": "71240000"
+          },
+          {
+            "id": "71400000"
+          },
+          {
+            "id": "71500000"
+          }
+        ],
+        "classification": {
+          "scheme": "CPV",
+          "id": "45000000"
+        },
+        "deliveryAddresses": [
+          {
+            "streetAddress": "Edvard Griegs Plass 1",
+            "locality": "Bergen"
+          },
+          {
+            "postalCode": "5015"
+          },
+          {
+            "country": "NO"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "region": "NO0A2"
+      },
+      {
+        "region": "NO0A2"
+      },
+      {
+        "streetAddress": "Edvard Griegs Plass 1"
+      },
+      {
+        "postalCode": "5015"
+      },
+      {
+        "locality": "Bergen"
+      },
+      {
+        "country": "NO"
+      }
+    ],
+    "additionalProcurementCategories": [
+      "services"
+    ]
+  },
+  "date": "2024-06-27T14:32:30+00:00",
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0004"
+          }
+        ]
+      }
+    ]
+  },
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Stiegler Advokatfirma AS",
+      "additionalIdentifiers": [
+        {
+          "id": "919177519",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Thomas Lynum",
+        "telephone": "+47 55215400",
+        "email": "tlynum@stiegler.no"
+      },
+      "details": {
+        "url": "http://stiegler.no"
+      },
+      "address": {
+        "locality": "Bergen"
+      },
+      "roles": [
+        "processContactPoint"
+      ]
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Grieghallen Utbygging AS",
+      "additionalIdentifiers": [
+        {
+          "id": "926 477 307",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "+475521 6100",
+        "email": "post@grieghallen.no"
+      },
+      "address": {
+        "locality": "Bergen"
+      },
+      "roles": [
+        "funder",
+        "buyer",
+        "processContactPoint",
+        "payer"
+      ]
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Hordaland tingrett",
+      "additionalIdentifiers": [
+        {
+          "id": "926 723 367",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "47 55 69 97 00",
+        "email": "hordaland.tingrett@domstol.no"
+      },
+      "details": {
+        "url": "https://www.domstol.no/no/domstoler/tingrett/hordaland-tingrett/"
+      },
+      "address": {
+        "locality": "Bergen"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    },
+    {
+      "id": "ORG-0004",
+      "name": "Henning Larsen Architects AS",
+      "additionalIdentifiers": [
+        {
+          "id": "998 701 961",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "+47 45672764",
+        "email": "kigl@henninglarsen.com"
+      },
+      "address": {
+        "locality": "Oslo"
+      },
+      "roles": [
+        "tenderer"
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "awardID": "RES-0001"
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0002"
+    }
+  ]
+}

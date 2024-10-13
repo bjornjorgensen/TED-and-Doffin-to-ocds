@@ -1,0 +1,98 @@
+<PriorInformationNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1" xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1" xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1" xmlns="urn:oasis:names:specification:ubl:schema:xsd:PriorInformationNotice-2">
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionContent>
+        <efext:EformsExtension>
+          <efbc:TransmissionDate>2023-11-09+00:00</efbc:TransmissionDate>
+          <efbc:TransmissionTime>08:33:15+00:00</efbc:TransmissionTime>
+          <efac:NoticeSubType>
+            <cbc:SubTypeCode listName="notice-subtype">1</cbc:SubTypeCode>
+          </efac:NoticeSubType>
+          <efac:Organizations>
+            <efac:Organization>
+              <efac:Company>
+                <cbc:WebsiteURI>https://permalink.mercell.com/215950396.aspx</cbc:WebsiteURI>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Stavanger kommune</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">Stavanger kommune</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Postboks 8001</cbc:StreetName>
+                  <cbc:CityName>STAVANGER</cbc:CityName>
+                  <cbc:PostalZone>4068</cbc:PostalZone>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">964965226</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Name>Siri Loen</cbc:Name>
+                  <cbc:Telephone>+47 51507090</cbc:Telephone>
+                  <cbc:ElectronicMail>siri.loen@stavanger.kommune.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+          </efac:Organizations>
+        </efext:EformsExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:UBLVersionID>2.3</cbc:UBLVersionID>
+  <cbc:CustomizationID>eforms-sdk-1.7#extended#urn:fdc:anskaffelser.no:2023:eforms:eu</cbc:CustomizationID>
+  <cbc:ID schemeName="notice-id">0097de15-36cf-4750-96c9-f66ae4d6cafd</cbc:ID>
+  <cbc:IssueDate>2023-11-09+00:00</cbc:IssueDate>
+  <cbc:IssueTime>08:32:12+00:00</cbc:IssueTime>
+  <cbc:VersionID>02</cbc:VersionID>
+  <cbc:RegulatoryDomain>32014L0024</cbc:RegulatoryDomain>
+  <cbc:NoticeTypeCode listName="planning">pin-buyer</cbc:NoticeTypeCode>
+  <cbc:NoticeLanguageCode>NOR</cbc:NoticeLanguageCode>
+  <cac:AdditionalNoticeLanguage>
+    <cbc:ID>ENG</cbc:ID>
+  </cac:AdditionalNoticeLanguage>
+  <cac:ContractingParty>
+    <cbc:BuyerProfileURI>https://www.stavanger.kommune.no/</cbc:BuyerProfileURI>
+    <cac:ContractingPartyType>
+      <cbc:PartyTypeCode listName="buyer-legal-type">pub-undert</cbc:PartyTypeCode>
+    </cac:ContractingPartyType>
+    <cac:ContractingActivity>
+      <cbc:ActivityTypeCode listName="authority-activity">gen-pub</cbc:ActivityTypeCode>
+    </cac:ContractingActivity>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+      </cac:PartyIdentification>
+    </cac:Party>
+  </cac:ContractingParty>
+  <cac:ProcurementProject>
+    <cbc:ID schemeName="InternalID">23/43872</cbc:ID>
+    <cbc:Name languageID="NOR">Markedsdialog Nettverksutstyr</cbc:Name>
+    <cbc:Name languageID="ENG">Market Dialogue Network Equipment</cbc:Name>
+    <cbc:Description languageID="NOR">Stavanger kommune ønsker tilbakemeldinger fra markedet på klima- og miljø relaterte spørsmål til kommende anskaffelse av nettverksutstyr.Spørsmål vi ønsker svar på er følgende:1. Oppdragsgiver ønsker å stille minimumskrav til gitt prosent av refurbished komponenter som leverandør skal tilby. Oppdragsgiver ønsker tilbakemelding på hvor prosentvis høyt oppdragsgiver kan sette dette minimumskravet? Dette må sees i lys av nytt krav fra regjeringen som trer i kraft 01.01.2024.2. Oppdragsgiver ønsker også innspill til hvordan leverandør kan dokumentere at kravet er oppfylt.3. Oppdragsgiver ønsker å stille krav til at alle brukte komponenter skal kunne leveres tilbake til leverandør for videre å kunne bli resirkulert/gjenbrukt ved at enkelte råvarematerialer i komponenten kan brukes på nytt og eller at defekt komponent får nytt liv/refurbished?Tidsfrist for å svare er satt til  arbeidsdagens slutt den 17 november 2023.Svarene sendes i kommunikasjonsmodulen i Mercell.</cbc:Description>
+    <cbc:Description languageID="ENG">Stavanger municipality would like feedback from the market on climate and environment related questions to the coming procurement of network equipment. The questions we would like to be answered are the following: 1. The contracting authority would like to have a minimum requirement for a percentage of refurbished components that the tenderer shall offer. The contracting authority would like feedback on how hig the percentage of the contracting equipment the authority can set this minimum requirement? This must be seen in light of new requirements from the government which will take effect from 01.01.2024. 2. The contracting authority would also like input on how the tenderer can document that the requirement is met. 3. The contracting authority would like to know how all used components are returned to the supplier in order to be recycled/reused by re-use of some raw material from the component and or a defective component being reusable/refurbished? The deadline for responding is set to the end of the working day 17 November 2023.</cbc:Description>
+    <cbc:ProcurementTypeCode listName="contract-nature">supplies</cbc:ProcurementTypeCode>
+    <cac:MainCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">32422000</cbc:ItemClassificationCode>
+    </cac:MainCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">32423000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">32424000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:RealizedLocation>
+      <cac:Address>
+        <cbc:CountrySubentityCode listName="nuts">NO0A1</cbc:CountrySubentityCode>
+        <cac:Country>
+          <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:Address>
+    </cac:RealizedLocation>
+  </cac:ProcurementProject>
+</PriorInformationNotice>

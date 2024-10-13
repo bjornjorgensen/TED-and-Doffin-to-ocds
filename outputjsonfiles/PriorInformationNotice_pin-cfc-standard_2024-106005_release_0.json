@@ -1,0 +1,261 @@
+{
+  "id": "7d111d51-8042-402a-a234-50efe86d8f4f",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "a218f904-72a6-4f86-ab3c-622aa4f5eb23",
+    "lots": [
+      {
+        "id": "LOT-0001",
+        "techniques": {
+          "hasFrameworkAgreement": true,
+          "frameworkAgreement": {
+            "method": "withoutReopeningCompetition"
+          },
+          "hasElectronicAuction": false
+        },
+        "communication": {
+          "atypicalToolUrl": "https://posten-supplier.ivalua.app/"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "languages": [
+            "no",
+            "sv"
+          ]
+        },
+        "title": "Repair and maintenance services of gates",
+        "identifiers": {
+          "id": "BPM000211",
+          "scheme": "internal"
+        },
+        "mainProcurementCategory": "services",
+        "description": "To meet the Client’s needs, a framework agreement(s) will be established for the following services related to port management:\n-Service Agreements for Gates\n-Gate Repairs\n-Procurement of New Gates/Port Systems/Loading Systems\n-Spare Parts for Gates.",
+        "value": {
+          "amount": 10000000.0,
+          "currency": "NOK"
+        },
+        "contractPeriod": {
+          "durationInDays": 1080
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "forReduction": true
+            },
+            {
+              "type": "suitability"
+            },
+            {
+              "type": "economic"
+            },
+            {
+              "type": "technical"
+            },
+            {
+              "title": "See documentation in the public proposal here: https://posten-supplier.ivalua.app/",
+              "description": "See documentation in the public proposal here: https://posten-supplier.ivalua.app/: See documentation in the public proposal here: https://posten-supplier.ivalua.app/"
+            }
+          ]
+        },
+        "options": {
+          "description": "1+1 year"
+        },
+        "tenderPeriod": {
+          "endDate": "2024-05-21T12:00:00+02:00"
+        },
+        "contractTerms": {
+          "performanceTerms": "See documentation in the public proposal here: https://posten-supplier.ivalua.app/",
+          "electronicInvoicingPolicy": "required",
+          "hasElectronicOrdering": false,
+          "hasElectronicPayment": false
+        },
+        "hasAccessibilityCriteria": false,
+        "otherRequirements": {
+          "requiresStaffNamesAndQualifications": false
+        },
+        "reviewDetails": "None"
+      }
+    ],
+    "documents": [
+      {
+        "id": "Doc1",
+        "documentType": "biddingDocuments",
+        "url": "https://posten-supplier.ivalua.app/",
+        "relatedLots": [
+          "LOT-0001"
+        ]
+      }
+    ],
+    "title": "Repair and maintenance services of gates",
+    "mainProcurementCategory": "services",
+    "description": "Service and repairs of gates belonging to Posten Bring AS. Additional purchase of some new gates and gate systems might also be done.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "44221300"
+          }
+        ],
+        "relatedLot": "LOT-0001",
+        "classification": {
+          "scheme": "CPV",
+          "id": "50711000"
+        },
+        "deliveryAddresses": [
+          {
+            "country": "NO"
+          }
+        ],
+        "deliveryLocations": [
+          {
+            "description": "Anywhere in the given country"
+          },
+          {
+            "description": "Service and maintenance to be performed all over Norway."
+          },
+          {
+            "description": "Utførelsen av service skal gjennomføres i hele Norge (Posten Brings lokasjoner)"
+          }
+        ]
+      }
+    ],
+    "value": {
+      "amount": 10000000.0,
+      "currency": "NOK"
+    },
+    "deliveryAddresses": [
+      {
+        "region": "NO081"
+      },
+      {
+        "region": "NO081"
+      },
+      {
+        "country": "NO"
+      },
+      {
+        "description": "Service and maintenance to be performed all over Norway."
+      },
+      {
+        "description": "Utførelsen av service skal gjennomføres i hele Norge (Posten Brings lokasjoner)"
+      }
+    ],
+    "deliveryLocations": [
+      {
+        "description": "Anywhere in the given country"
+      }
+    ]
+  },
+  "date": "2024-04-24T08:37:10+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Posten Bring AS",
+      "additionalIdentifiers": [
+        {
+          "id": "984 661 185",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Kristian von Aphelen",
+        "telephone": "+4748486258",
+        "email": "Kristian.von.Aphelen@posten.no"
+      },
+      "details": {
+        "url": "https://www.postenbring.no/"
+      },
+      "address": {
+        "locality": "Oslo"
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ]
+    },
+    {
+      "id": "ORG-0004",
+      "name": "Posten Bring AS",
+      "additionalIdentifiers": [
+        {
+          "id": "984 661 185",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "48486258",
+        "email": "Kristian.von.Aphelen@posten.no"
+      },
+      "details": {
+        "url": "https://www.postenbring.no/"
+      },
+      "address": {
+        "locality": "Oslo"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    },
+    {
+      "id": "ORG-0005",
+      "name": "Oslo Tingrett",
+      "additionalIdentifiers": [
+        {
+          "id": "926 725 939",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "+4722035200",
+        "email": "oslo.tingrett@domstol.no"
+      },
+      "details": {
+        "url": "https://www.domstol.no/no/domstoler/tingrett/oslo-tingrett/"
+      },
+      "address": {
+        "locality": "Oslo"
+      },
+      "roles": [
+        "mediationBody"
+      ]
+    },
+    {
+      "id": "ORG-0006",
+      "name": "Posten Bring AS",
+      "additionalIdentifiers": [
+        {
+          "id": "984 661 185",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "41859247",
+        "email": "roger.hauklien@posten.no"
+      },
+      "details": {
+        "url": "https://www.postenbring.no/"
+      },
+      "address": {
+        "locality": "Oslo"
+      },
+      "roles": [
+        "reviewContactPoint"
+      ]
+    }
+  ],
+  "description": "None. None.",
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
+}

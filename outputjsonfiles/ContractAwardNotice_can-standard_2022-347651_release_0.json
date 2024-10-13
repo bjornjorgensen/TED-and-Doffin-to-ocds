@@ -1,0 +1,172 @@
+{
+  "id": "2022-347651",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "2022-347651",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "coveredBy": [
+          "GPA"
+        ],
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "not-allowed"
+        },
+        "title": "Kulturbad på Flotmyr - Samspillsentreprise",
+        "mainProcurementCategory": "works",
+        "description": "Haugesund kommune inviterer med dette til konkurranse om samspillsentreprise for Flotmyr Kulturbad i Haugesund kommune. Etter kontrahering vil det bli gjennomført en samspillsfase mellom valgte totalentreprenør og oppdragsgiver, med sikte på å danne grunnlag for oppdragsgivers beslutning om det skal inngås kontrakt for fase 2 hvor samspillsfasen evt. går over til totalentreprise.",
+        "awardCriteria": {
+          "criteria": [
+            {
+              "type": "quality",
+              "numbers": [
+                {
+                  "weight": "percentageExact"
+                }
+              ]
+            },
+            {
+              "type": "price"
+            },
+            {
+              "description": "Kvalitet"
+            }
+          ]
+        },
+        "options": {
+          "description": "Prosjektet forløper i faser. Se konkurransegrunnlaget."
+        },
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "hasElectronicAuction": false
+        },
+        "reviewDetails": "Etter tildeling vil det gjelde en 10 dagers karensfrist."
+      }
+    ],
+    "title": "Kulturbad på Flotmyr - Samspillsentreprise",
+    "mainProcurementCategory": "works",
+    "description": "Haugesund kommune skal bygge Haugesund kulturbad, som er planlagt å omfatte kulturskole og badeanlegg. Etter kontrahering vil det bli gjennomført en samspillsfase mellom entreprenør og byggherre, som vil danne grunnlag for oppdragsgivers beslutning om det skal inngås kontrakt for fase 2 hvor samspillsfasen ev. går over til totalentreprise",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "43324100"
+          },
+          {
+            "id": "45000000"
+          },
+          {
+            "id": "45212212"
+          },
+          {
+            "id": "71320000"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "45212000"
+        },
+        "deliveryAddresses": [
+          {
+            "streetAddress": "Haugesund"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "streetAddress": "Haugesund"
+      }
+    ]
+  },
+  "date": "2022-07-13T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Haugesund kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "944073787",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Åshild Fløisand ",
+        "telephone": "+47 22814500",
+        "email": "ashild.floisand@sands.no"
+      },
+      "details": {
+        "url": "www.haugesund.kommune.no"
+      },
+      "address": {
+        "locality": "Haugesund"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0002",
+      "name": "haugaland og Sunnhordland Tingrett",
+      "contactPoint": {
+        "telephone": "+47 52701400",
+        "email": "haugaland.og.sunnhordland.tingrett@domstol.no"
+      },
+      "details": {
+        "url": "https://www.domstol.no/en/enkelt-domstol/haugaland-og-sunnhordland-tingrett/"
+      },
+      "address": {
+        "locality": "Haugesund"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Klagenemnda for offnetlige anskaffelser",
+      "contactPoint": {
+        "telephone": "+47 55193000",
+        "email": "post@knse.no"
+      },
+      "details": {
+        "url": "www.klagenemndssekretariatet.no"
+      },
+      "address": {
+        "locality": "Bergen"
+      },
+      "roles": [
+        "mediationBody"
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "id": "RES-0001"
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
+}

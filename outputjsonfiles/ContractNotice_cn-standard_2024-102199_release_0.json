@@ -1,0 +1,291 @@
+{
+  "id": "5681ff11-e080-4da6-b108-82db3f9b4b69",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "001afac4-7508-475a-a2f8-bfa7de43b65f",
+    "procedure": {
+      "isAccelerated": false
+    },
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "enquiryPeriod": {
+          "endDate": "2024-02-19T00:00:00+01:00"
+        },
+        "tenderPeriod": {
+          "endDate": "2024-02-27T14:00:58+01:00"
+        },
+        "awardPeriod": {
+          "startDate": "2024-02-27T14:01:00+01:00"
+        },
+        "bidOpening": {
+          "date": "2024-02-27T14:01:00+01:00",
+          "location": {
+            "description": "Tønsberg"
+          }
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "advancedElectronicSignatureRequired": false,
+          "electronicCatalogPolicy": "allowed",
+          "languages": [
+            "no"
+          ],
+          "bidValidityPeriod": {
+            "durationInDays": 70
+          }
+        },
+        "title": "Rammeavtale om formidling av leasing finansierte .",
+        "identifiers": {
+          "id": "Anskaffelse -  70 - 2023",
+          "scheme": "internal"
+        },
+        "mainProcurementCategory": "goods",
+        "description": "Det skal inngås rammeavtale(r) med leverandør(er) for formidling av el-sykler til ansatte finansiert gjennom en leasingordning med en nettolønnstrekkavtale gjennom arbeidsgiver.",
+        "contractTerms": {
+          "electronicInvoicingPolicy": "required",
+          "hasElectronicOrdering": false,
+          "hasElectronicPayment": false
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "type": "economic"
+            },
+            {
+              "type": "suitability"
+            },
+            {
+              "type": "technical"
+            },
+            {
+              "title": "Krav til økonomisk og finansiell stilling",
+              "description": "Krav til økonomisk og finansiell stilling: Krav: Leverandøren skal ha den \nnødvendige økonomiske og \nfinansielle kapasitet til å utføre \nkontrakten. \nDet er tilstrekkelig for å oppfylle \nkravet at leverandøren har \noppnådd kredittratingen \n«kredittverdig» eller tilsvarende.\nDokumentasjonskrav: Kredittvurdering fra et anerkjent \nkredittvurderingsselskap basert på siste regnskapstall. \nVurderingen må ikke være eldre enn 3 måneder."
+            },
+            {
+              "title": "Krav til skatteattest",
+              "description": "Krav til skatteattest: Krav: Leverandøren skal ha ordnede \nforhold med hensyn til betaling av \nskatt, arbeidsgiveravgift og \nmerverdiavgift.\nDokumentasjonskrav: Skatteattest ikke eldre enn seks måneder regnet fra \ntilbudsfristen. Med skatteattest menes: \nFor norske leverandører: \n• Attest for skatt og merverdiavgift utstedt av \nskattekontoret via Altinn\nFor utenlandske leverandører:\n• Utenlandske leverandører må fremlegge \ntilsvarende attester fra sine land som viser at \nde har ordnede skatte- og avgiftsforhold. \nDersom myndighetene i det aktuelle landet ikke \nutsteder slike attester, skal leverandøren \nfremlegge en erklæring som stadfester at alle \nskatter og avgifter er blitt betalt. Erklæringen \nskal være godkjent og signert av leverandørens \nøkonomidirektør/økonomiansvarlige."
+            },
+            {
+              "title": "Krav til leverandørens registrering, autorisasjon mv.",
+              "description": "Krav til leverandørens registrering, autorisasjon mv.: Krav: Leverandøren skal være et lovlig \netablert foretak.\nDokumentasjonskrav: Norske leverandører: \n• Firmaattest. For norske leverandører henter \noppdragsgiver firmaattest fra \nBrønnøysundregisteret. De norske \nleverandørene skal derfor ikke levere firmaattest.\nUtenlandske leverandører:\n• Bekreftelse på at leverandøren er registrert i \nbransjeregister eller foretaksregister iht. lovgivning"
+            },
+            {
+              "title": "Krav til tekniske og faglige kvalifikasjoner",
+              "description": "Krav til tekniske og faglige kvalifikasjoner: Krav: Leverandøren skal ha et \ndokumentert\nkvalitetsledelsessystem.\nDokumentasjonskrav: En beskrivelse av leverandørens metoder for \nkvalitetssikring.\nDersom leverandøren er sertifisert i henhold til ISO 9001 \neller tilsvarende kvalitetssikringssertifiseringer, er det \ntilstrekkelig å legge ved kopi av gyldig sertifikat."
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "hasElectronicAuction": false
+        },
+        "hasRecurrence": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "Lenke til innkjøpsdokumentene",
+        "documentType": "biddingDocuments",
+        "url": "https://tendsign.com/doc.aspx?MeFormsNoticeId=4979",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "Rammeavtale om formidling av leasing finansierte elsykler",
+    "mainProcurementCategory": "goods",
+    "description": "Det skal inngås rammeavtale(r) med leverandør(er) for formidling av el-sykler til ansatte finansiert gjennom en leasingordning med en nettolønnstrekkavtale gjennom arbeidsgiver.",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "34000000"
+        },
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "country": "NO"
+          }
+        ]
+      }
+    ],
+    "techniques": {
+      "frameworkAgreement": {
+        "value": {
+          "amount": 100000000.0,
+          "currency": "NOK"
+        }
+      }
+    },
+    "deliveryAddresses": [
+      {
+        "region": "NO091"
+      },
+      {
+        "region": "NO091"
+      },
+      {
+        "country": "NO"
+      }
+    ],
+    "exclusionGrounds": {
+      "criteria": [
+        {
+          "type": "bankr-nat",
+          "description": "Analogous situation like bankruptcy under national law: Er leverandøren i en lignende situasjon (tvungen gjeldsordning) i henhold til en tilsvarende prosedyre som er fastsatt i nasjonal rett?\n"
+        },
+        {
+          "type": "bankruptcy",
+          "description": "Bankruptcy: Konkurs"
+        },
+        {
+          "type": "corruption",
+          "description": "Corruption: Korrupsjon"
+        },
+        {
+          "type": "cred-arran",
+          "description": "Arrangement with creditors: Tvungen gjeldsordning"
+        },
+        {
+          "type": "crime-org",
+          "description": "participation in a criminal organisation: \nDeltakelse i en kriminell organisasjon"
+        },
+        {
+          "type": "distorsion",
+          "description": "Agreements with other economic operators aimed at distorting competition: Avtale(r) med andre leverandører med hensikt å vri konkurransen"
+        },
+        {
+          "type": "envir-law",
+          "description": "Breaching of obligations in the fields of environmental law: \nBrudd på bestemmelsene om miljø"
+        },
+        {
+          "type": "finan-laund",
+          "description": "Money laundering or terrorist financing: Hvitvasking av penger eller finansiering av terrorisme"
+        },
+        {
+          "type": "fraud",
+          "description": "Fraud: Bedrageri"
+        },
+        {
+          "type": "human-traffic",
+          "description": "Child labour and other forms of trafficking in human beings: Barnearbeid og andre former for menneskehandel"
+        },
+        {
+          "type": "insolvency",
+          "description": "Insolvency: Insolvens"
+        },
+        {
+          "type": "labour-law",
+          "description": "Breaching of obligations in the fields of labour law: Brudd på bestemmelsene om arbeidsforhold"
+        },
+        {
+          "type": "liq-admin",
+          "description": "Assets being administered by liquidator: Er leverandøren i en situasjon hvor han har sine aktiva forvaltet av en konkursforvalter eller av retten?"
+        },
+        {
+          "type": "misrepresent",
+          "description": "Guilty of misrepresentation, withheld information, unable to provide required documents and obtained confidential information of this procedure: Grovt uriktige opplysninger, unnlatt å gi opplysninger, ute av stand til å fremlegge etterspurte støttedokumenterog misvisende opplysninger som kan få innfytelse på konkurransen"
+        },
+        {
+          "type": "nati-ground",
+          "description": "Purely national exclusion grounds: Lei nasjonale avvisningsgrunner"
+        },
+        {
+          "type": "partic-confl",
+          "description": "Conflict of interest due to its participation in the procurement procedure: \nInteressekonflikt som følge av sin deltakelse i konkurransen"
+        },
+        {
+          "type": "prep-confl",
+          "description": "Direct or indirect involvement in the preparation of this procurement procedure: \nHar leverandøren vært involvert i planleggingen av konkurransen?"
+        },
+        {
+          "type": "prof-misconduct",
+          "description": "Guilty of grave professional misconduct: Alvorlige feil i yrkesutøvelsen"
+        },
+        {
+          "type": "sanction",
+          "description": "Early termination, damages or other comparable sanctions: Heving av kontrakt, erstatning eller andre lignende sanksjoner\n"
+        },
+        {
+          "type": "socsec-law",
+          "description": "Breaching of obligations in the fields of social law: Brudd på bestemmelsene om sosiale forhold"
+        },
+        {
+          "type": "socsec-pay",
+          "description": "Payment of social security contributions: Betaling av trygdeavgifter"
+        },
+        {
+          "type": "susp-act",
+          "description": "Business activities are suspended: Har leverandørens forretningsførsel blitt stanset?"
+        },
+        {
+          "type": "tax-pay",
+          "description": "Payment of taxes: \nBetaling av skatter og avgifter"
+        },
+        {
+          "type": "terr-offence",
+          "description": "Terrorist offences or offences linked to terrorist activities: \nTerrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitet"
+        }
+      ]
+    }
+  },
+  "date": "2024-02-16T07:39:46+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Vestfold og Telemark fylkeskommune - Eksterne brukere",
+      "additionalIdentifiers": [
+        {
+          "id": "821227062",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Dag Thomas Nybø-Sørensen",
+        "telephone": "+47 92465129",
+        "email": "DagThomas.Nybo-Sorensen@inventura.no"
+      },
+      "address": {
+        "locality": "SKIEN"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Telemark tingrett",
+      "additionalIdentifiers": [
+        {
+          "id": "926 723 545",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "35 69 20 00",
+        "email": "telemark.tingrett@domstol.no"
+      },
+      "details": {
+        "url": "https://www.domstol.no/no/domstoler/tingrett/telemark-tingrett/"
+      },
+      "address": {
+        "locality": "Skien"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
+}

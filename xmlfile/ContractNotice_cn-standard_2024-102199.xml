@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8"?><ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1" xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1" xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionContent>
+        <efext:EformsExtension>
+          <efbc:TransmissionDate>2024-02-16+00:00</efbc:TransmissionDate>
+          <efbc:TransmissionTime>07:39:49+00:00</efbc:TransmissionTime>
+          <efac:Changes>
+            <efbc:ChangedNoticeIdentifier>76f2960c-5463-4919-9ac1-4e4cd5fac8c4-01</efbc:ChangedNoticeIdentifier>
+            <efac:Change>
+              <efac:ChangedSection>
+                <efbc:ChangedSectionIdentifier>PROCEDURE</efbc:ChangedSectionIdentifier>
+              </efac:ChangedSection>
+            </efac:Change>
+            <efac:Change>
+              <efac:ChangedSection>
+                <efbc:ChangedSectionIdentifier>LOT-0000</efbc:ChangedSectionIdentifier>
+              </efac:ChangedSection>
+            </efac:Change>
+          </efac:Changes>
+          <efac:NoticeSubType>
+            <cbc:SubTypeCode listName="notice-subtype">16</cbc:SubTypeCode>
+          </efac:NoticeSubType>
+          <efac:Organizations>
+            <efac:Organization>
+              <efac:Company>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Vestfold og Telemark fylkeskommune</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">Vestfold og Telemark fylkeskommune</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Postboks 2844</cbc:StreetName>
+                  <cbc:Department>Eksterne brukere</cbc:Department>
+                  <cbc:CityName>SKIEN</cbc:CityName>
+                  <cbc:PostalZone>3702</cbc:PostalZone>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">821227062</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Name>Dag Thomas Nybø-Sørensen</cbc:Name>
+                  <cbc:Telephone>+47 92465129</cbc:Telephone>
+                  <cbc:ElectronicMail>DagThomas.Nybo-Sorensen@inventura.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+            <efac:Organization>
+              <efac:Company>
+                <cbc:WebsiteURI>https://www.domstol.no/no/domstoler/tingrett/telemark-tingrett/</cbc:WebsiteURI>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Telemark tingrett</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">Telemark tingrett</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Postboks 2624</cbc:StreetName>
+                  <cbc:CityName>Skien</cbc:CityName>
+                  <cbc:PostalZone>3702</cbc:PostalZone>
+                  <cbc:CountrySubentityCode listName="nuts">NO091</cbc:CountrySubentityCode>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">926 723 545</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Telephone>35 69 20 00</cbc:Telephone>
+                  <cbc:ElectronicMail>telemark.tingrett@domstol.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+          </efac:Organizations>
+        </efext:EformsExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:UBLVersionID>2.3</cbc:UBLVersionID>
+  <cbc:CustomizationID>eforms-sdk-1.7#extended#urn:fdc:anskaffelser.no:2023:eforms:eu</cbc:CustomizationID>
+  <cbc:ID schemeName="notice-id">5681ff11-e080-4da6-b108-82db3f9b4b69</cbc:ID>
+  <cbc:ContractFolderID>001afac4-7508-475a-a2f8-bfa7de43b65f</cbc:ContractFolderID>
+  <cbc:IssueDate>2024-02-16+00:00</cbc:IssueDate>
+  <cbc:IssueTime>07:39:46+00:00</cbc:IssueTime>
+  <cbc:VersionID>01</cbc:VersionID>
+  <cbc:RegulatoryDomain>32014L0024</cbc:RegulatoryDomain>
+  <cbc:NoticeTypeCode listName="competition">cn-standard</cbc:NoticeTypeCode>
+  <cbc:NoticeLanguageCode>NOR</cbc:NoticeLanguageCode>
+  <cac:AdditionalNoticeLanguage>
+    <cbc:ID>ENG</cbc:ID>
+  </cac:AdditionalNoticeLanguage>
+  <cac:ContractingParty>
+    <cac:ContractingPartyType>
+      <cbc:PartyTypeCode listName="buyer-legal-type">ra</cbc:PartyTypeCode>
+    </cac:ContractingPartyType>
+    <cac:ContractingActivity>
+      <cbc:ActivityTypeCode listName="authority-activity">gen-pub</cbc:ActivityTypeCode>
+    </cac:ContractingActivity>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+      </cac:PartyIdentification>
+    </cac:Party>
+  </cac:ContractingParty>
+  <cac:TenderingTerms>
+    <cac:TendererQualificationRequest>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">bankr-nat</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">Er leverandøren i en lignende situasjon (tvungen gjeldsordning) i henhold til en tilsvarende prosedyre som er fastsatt i nasjonal rett?
+</cbc:Description>
+        <cbc:Description languageID="ENG">Is the tenderer in a similar situation (compulsory debt scheme) in accordance with an equivalent procedure set out in the national law?
+</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">bankruptcy</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">Konkurs</cbc:Description>
+        <cbc:Description languageID="ENG">Bankruptcy</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">corruption</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">Korrupsjon</cbc:Description>
+        <cbc:Description languageID="ENG">Corruption</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">cred-arran</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">Tvungen gjeldsordning</cbc:Description>
+        <cbc:Description languageID="ENG">Compulsory debt arrangement</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">crime-org</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">
+Deltakelse i en kriminell organisasjon</cbc:Description>
+        <cbc:Description languageID="ENG">
+Participation in a criminal organisation</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">distorsion</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">Avtale(r) med andre leverandører med hensikt å vri konkurransen</cbc:Description>
+        <cbc:Description languageID="ENG">Agreement(s) with other tenderers with the intention of turning the competition</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">envir-law</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">
+Brudd på bestemmelsene om miljø</cbc:Description>
+        <cbc:Description languageID="ENG">
+Breach of the environmental provisions</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">finan-laund</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">Hvitvasking av penger eller finansiering av terrorisme</cbc:Description>
+        <cbc:Description languageID="ENG">Money laundering or financing terrorism</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">fraud</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">Bedrageri</cbc:Description>
+        <cbc:Description languageID="ENG">Fraud</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">human-traffic</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">Barnearbeid og andre former for menneskehandel</cbc:Description>
+        <cbc:Description languageID="ENG">Child labour and other forms of human trafficking.</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">insolvency</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">Insolvens</cbc:Description>
+        <cbc:Description languageID="ENG">Insolvency</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">labour-law</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">Brudd på bestemmelsene om arbeidsforhold</cbc:Description>
+        <cbc:Description languageID="ENG">Breach of the terms on working conditions.</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">liq-admin</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">Er leverandøren i en situasjon hvor han har sine aktiva forvaltet av en konkursforvalter eller av retten?</cbc:Description>
+        <cbc:Description languageID="ENG">Is the tenderer in a situation where he has his assets managed by a bankruptcy manager or by the court?</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">misrepresent</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">Grovt uriktige opplysninger, unnlatt å gi opplysninger, ute av stand til å fremlegge etterspurte støttedokumenterog misvisende opplysninger som kan få innfytelse på konkurransen</cbc:Description>
+        <cbc:Description languageID="ENG">Grossly incorrect information, failed to provide information, unable to present the requested supporting documents and misleading information that could be provided for the competition.</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">nati-ground</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">Lei nasjonale avvisningsgrunner</cbc:Description>
+        <cbc:Description languageID="ENG">Rent national rejection reasons</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">partic-confl</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">
+Interessekonflikt som følge av sin deltakelse i konkurransen</cbc:Description>
+        <cbc:Description languageID="ENG">
+Conflict of interest due to participation in the competition</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">prep-confl</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">
+Har leverandøren vært involvert i planleggingen av konkurransen?</cbc:Description>
+        <cbc:Description languageID="ENG">
+Has the tenderer been involved in planning the competition?</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">prof-misconduct</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">Alvorlige feil i yrkesutøvelsen</cbc:Description>
+        <cbc:Description languageID="ENG">Serious errors in professional practice</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">sanction</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">Heving av kontrakt, erstatning eller andre lignende sanksjoner
+</cbc:Description>
+        <cbc:Description languageID="ENG">Cancellation of contract, compensation or other similar sanctions
+</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">socsec-law</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">Brudd på bestemmelsene om sosiale forhold</cbc:Description>
+        <cbc:Description languageID="ENG">Breach of the social conditions provisions</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">socsec-pay</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">Betaling av trygdeavgifter</cbc:Description>
+        <cbc:Description languageID="ENG">Payment of social security contributions</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">susp-act</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">Har leverandørens forretningsførsel blitt stanset?</cbc:Description>
+        <cbc:Description languageID="ENG">Has the tenderer's business conduct been stopped?</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">tax-pay</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">
+Betaling av skatter og avgifter</cbc:Description>
+        <cbc:Description languageID="ENG">
+Payment of taxes and duties</cbc:Description>
+      </cac:SpecificTendererRequirement>
+      <cac:SpecificTendererRequirement>
+        <cbc:TendererRequirementTypeCode listName="exclusion-ground">terr-offence</cbc:TendererRequirementTypeCode>
+        <cbc:Description languageID="NOR">
+Terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitet</cbc:Description>
+        <cbc:Description languageID="ENG">
+Acts of terrorism or criminal acts relating to terrorist activity</cbc:Description>
+      </cac:SpecificTendererRequirement>
+    </cac:TendererQualificationRequest>
+  </cac:TenderingTerms>
+  <cac:TenderingProcess>
+    <cbc:ProcedureCode listName="procurement-procedure-type">open</cbc:ProcedureCode>
+    <cac:ProcessJustification>
+      <cbc:ProcessReasonCode listName="accelerated-procedure">false</cbc:ProcessReasonCode>
+    </cac:ProcessJustification>
+  </cac:TenderingProcess>
+  <cac:ProcurementProject>
+    <cbc:ID schemeName="InternalID">Anskaffelse -  70 - 2023</cbc:ID>
+    <cbc:Name languageID="NOR">Rammeavtale om formidling av leasing finansierte elsykler</cbc:Name>
+    <cbc:Name languageID="ENG">Framework agreement for the facilitation of leasing financed electric cycles.</cbc:Name>
+    <cbc:Description languageID="NOR">Det skal inngås rammeavtale(r) med leverandør(er) for formidling av el-sykler til ansatte finansiert gjennom en leasingordning med en nettolønnstrekkavtale gjennom arbeidsgiver.</cbc:Description>
+    <cbc:Description languageID="ENG">A framework agreement(s) shall be signed with supplier(s) for facilitating electric bicycles to employees financed through a leasing scheme with a net wage deduction agreement through their employer.</cbc:Description>
+    <cbc:ProcurementTypeCode listName="contract-nature">supplies</cbc:ProcurementTypeCode>
+    <cac:RequestedTenderTotal>
+      <ext:UBLExtensions>
+        <ext:UBLExtension>
+          <ext:ExtensionContent>
+            <efext:EformsExtension>
+              <efbc:FrameworkMaximumAmount currencyID="NOK">100000000</efbc:FrameworkMaximumAmount>
+            </efext:EformsExtension>
+          </ext:ExtensionContent>
+        </ext:UBLExtension>
+      </ext:UBLExtensions>
+    </cac:RequestedTenderTotal>
+    <cac:MainCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">34000000</cbc:ItemClassificationCode>
+    </cac:MainCommodityClassification>
+    <cac:RealizedLocation>
+      <cac:Address>
+        <cbc:CountrySubentityCode listName="nuts">NO091</cbc:CountrySubentityCode>
+        <cac:Country>
+          <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:Address>
+    </cac:RealizedLocation>
+  </cac:ProcurementProject>
+  <cac:ProcurementProjectLot>
+    <cbc:ID schemeName="Lot">LOT-0000</cbc:ID>
+    <cac:TenderingTerms>
+      <ext:UBLExtensions>
+        <ext:UBLExtension>
+          <ext:ExtensionContent>
+            <efext:EformsExtension>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Krav til økonomisk og finansiell stilling</cbc:Name>
+                <cbc:Name languageID="ENG">Economic and financial position requirements</cbc:Name>
+                <cbc:Description languageID="NOR">Krav: Leverandøren skal ha den 
+nødvendige økonomiske og 
+finansielle kapasitet til å utføre 
+kontrakten. 
+Det er tilstrekkelig for å oppfylle 
+kravet at leverandøren har 
+oppnådd kredittratingen 
+«kredittverdig» eller tilsvarende.
+Dokumentasjonskrav: Kredittvurdering fra et anerkjent 
+kredittvurderingsselskap basert på siste regnskapstall. 
+Vurderingen må ikke være eldre enn 3 måneder.</cbc:Description>
+                <cbc:Description languageID="ENG">Requirement: The tenderer shall have the 
+necessary economic and 
+financial capacity to carry out 
+Contract. 
+It is sufficient to fulfil 
+requirement that the tenderer has 
+achieved the credit rating 
+"credit worthy" or equivalent.
+Documentation requirement: Credit rating from a certified 
+credit rating company based on the last known accounting figures. 
+The assessment must not be more than three months old.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">sui-act</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Krav til skatteattest</cbc:Name>
+                <cbc:Name languageID="ENG">Requirement for tax certificate</cbc:Name>
+                <cbc:Description languageID="NOR">Krav: Leverandøren skal ha ordnede 
+forhold med hensyn til betaling av 
+skatt, arbeidsgiveravgift og 
+merverdiavgift.
+Dokumentasjonskrav: Skatteattest ikke eldre enn seks måneder regnet fra 
+tilbudsfristen. Med skatteattest menes: 
+For norske leverandører: 
+• Attest for skatt og merverdiavgift utstedt av 
+skattekontoret via Altinn
+For utenlandske leverandører:
+• Utenlandske leverandører må fremlegge 
+tilsvarende attester fra sine land som viser at 
+de har ordnede skatte- og avgiftsforhold. 
+Dersom myndighetene i det aktuelle landet ikke 
+utsteder slike attester, skal leverandøren 
+fremlegge en erklæring som stadfester at alle 
+skatter og avgifter er blitt betalt. Erklæringen 
+skal være godkjent og signert av leverandørens 
+økonomidirektør/økonomiansvarlige.</cbc:Description>
+                <cbc:Description languageID="ENG">Requirement: The tenderer shall have an orderly 
+conditions in relation to the payment of 
+tax, payroll tax and 
+Sales tax.
+Documentation requirement: Tax certificate not older than six months from the deadline for receipt of tenders. 
+the tender deadline. Tax certificate means: 
+Norwegian tenderers: 
+• Tax and VAT certificate issued by 
+the tax office via Altinn
+Foreign tenderers:
+• Foreign tenderers must present 
+equivalent certificates from their own country that show that 
+they have their tax and duty payments in order. 
+If the authorities in the relevant country do not 
+issuing such certificates, the tenderer shall. 
+submit a declaration which states that all 
+taxes and duties have been paid. Statement 
+shall be approved and signed by the tenderer's 
+financial director/person responsible for finance.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">sui-act</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Krav til leverandørens registrering, autorisasjon mv.</cbc:Name>
+                <cbc:Name languageID="ENG">Requirements of the tenderer's registrations, authorisations, etc.</cbc:Name>
+                <cbc:Description languageID="NOR">Krav: Leverandøren skal være et lovlig 
+etablert foretak.
+Dokumentasjonskrav: Norske leverandører: 
+• Firmaattest. For norske leverandører henter 
+oppdragsgiver firmaattest fra 
+Brønnøysundregisteret. De norske 
+leverandørene skal derfor ikke levere firmaattest.
+Utenlandske leverandører:
+• Bekreftelse på at leverandøren er registrert i 
+bransjeregister eller foretaksregister iht. lovgivning</cbc:Description>
+                <cbc:Description languageID="ENG">Requirement: The tenderer shall be a legal 
+established company.
+Documentation requirement: Norwegian tenderers: 
+•Registration. Norwegian tenderers collect 
+the contracting authority a company registration certificate from 
+Brønnøysund Register Centre. The Norwegian National Police 
+tenderers shall therefore not enclose a company registration certificate.
+Foreign tenderers:
+• Confirmation that the tenderer is registered in 
+trade register or company register in accordance with the law.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Krav til tekniske og faglige kvalifikasjoner</cbc:Name>
+                <cbc:Name languageID="ENG">Requirements regarding technical and professional qualifications.</cbc:Name>
+                <cbc:Description languageID="NOR">Krav: Leverandøren skal ha 
+gjennomføringsevne til å oppfylle 
+kontrakten.
+Dokumentasjonskrav: Det skal gis en kort og overordnet beskrivelse av 
+virksomheten, herunder:
+• En redegjørelse for foretakets kjernekompetanse 
+relatert til leveringsomfanget.
+• Beskrivelse av hvordan leverandøren er 
+organisert for gjennomføring av denne 
+kontrakten, herunder eventuell bruk og styring 
+av underleverandører med tydeliggjøring av 
+roller og ansvar.</cbc:Description>
+                <cbc:Description languageID="ENG">Requirement: The tenderer shall have 
+implementation ability to fulfil 
+Contract.
+Documentation requirement: A brief and general description of 
+business, including:
+• An account of the company's core competence. 
+related to the scope of the delivery.
+• Description of how the tenderer is 
+organised for the implementation of this 
+the contract, including any use and management 
+by sub-suppliers with clarification of 
+roles and responsibilities.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Krav til tekniske og faglige kvalifikasjoner</cbc:Name>
+                <cbc:Name languageID="ENG">Requirements regarding technical and professional qualifications.</cbc:Name>
+                <cbc:Description languageID="NOR">Krav: Leverandøren skal ha erfaring fra 
+relevante og sammenlignbare 
+leveranser.
+Dokumentasjonskrav: En beskrivelse av leverandørens 3 mest relevante og 
+sammenlignbare oppdrag fra de siste 3 årene.
+Leverandøren skal dokumentere oppfyllelse ved å fylle ut 
+den vedlagte malen for referansebeskrivelser. Se vedlegg 
+3 Referansebeskrivelser.</cbc:Description>
+                <cbc:Description languageID="ENG">Requirement: The tenderer shall have experience from. 
+relevant and comparable 
+Deliveries.
+Documentation requirement: A description of the tenderer's three most relevant and 
+comparable contracts from the last 3 years.
+Tenderers shall document fulfilment by completing 
+the attached template for reference descriptions. See annexes 
+3 Reference descriptions.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Krav til tekniske og faglige kvalifikasjoner</cbc:Name>
+                <cbc:Name languageID="ENG">Requirements regarding technical and professional qualifications.</cbc:Name>
+                <cbc:Description languageID="NOR">Krav: Leverandøren skal ha et 
+dokumentert
+kvalitetsledelsessystem.
+Dokumentasjonskrav: En beskrivelse av leverandørens metoder for 
+kvalitetssikring.
+Dersom leverandøren er sertifisert i henhold til ISO 9001 
+eller tilsvarende kvalitetssikringssertifiseringer, er det 
+tilstrekkelig å legge ved kopi av gyldig sertifikat.</cbc:Description>
+                <cbc:Description languageID="ENG">Requirement: Tenderers shall have a 
+Documented
+quality management system.
+Documentation requirement: A description of the tenderer's methods for 
+Quality assurance.
+If the tenderer is certified in accordance with ISO 9001 
+or equivalent quality assurance certifications, it is 
+sufficient to enclose a copy of a valid certificate.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+            </efext:EformsExtension>
+          </ext:ExtensionContent>
+        </ext:UBLExtension>
+      </ext:UBLExtensions>
+      <cbc:FundingProgramCode listName="eu-funded">no-eu-funds</cbc:FundingProgramCode>
+      <cbc:RecurringProcurementIndicator>false</cbc:RecurringProcurementIndicator>
+      <cac:RequiredFinancialGuarantee>
+        <cbc:GuaranteeTypeCode listName="tender-guarantee-required">false</cbc:GuaranteeTypeCode>
+      </cac:RequiredFinancialGuarantee>
+      <cac:CallForTendersDocumentReference>
+        <cbc:ID>Lenke til innkjøpsdokumentene</cbc:ID>
+        <cbc:DocumentType>non-restricted-document</cbc:DocumentType>
+        <cac:Attachment>
+          <cac:ExternalReference>
+            <cbc:URI>https://tendsign.com/doc.aspx?MeFormsNoticeId=4979</cbc:URI>
+          </cac:ExternalReference>
+        </cac:Attachment>
+      </cac:CallForTendersDocumentReference>
+      <cac:TendererQualificationRequest>
+        <cac:SpecificTendererRequirement>
+          <cbc:TendererRequirementTypeCode listName="reserved-procurement">none</cbc:TendererRequirementTypeCode>
+        </cac:SpecificTendererRequirement>
+      </cac:TendererQualificationRequest>
+      <cac:ContractExecutionRequirement>
+        <cbc:ExecutionRequirementCode listName="einvoicing">required</cbc:ExecutionRequirementCode>
+      </cac:ContractExecutionRequirement>
+      <cac:ContractExecutionRequirement>
+        <cbc:ExecutionRequirementCode listName="reserved-execution">no</cbc:ExecutionRequirementCode>
+      </cac:ContractExecutionRequirement>
+      <cac:ContractExecutionRequirement>
+        <cbc:ExecutionRequirementCode listName="ecatalog-submission">allowed</cbc:ExecutionRequirementCode>
+      </cac:ContractExecutionRequirement>
+      <cac:ContractExecutionRequirement>
+        <cbc:ExecutionRequirementCode listName="esignature-submission">false</cbc:ExecutionRequirementCode>
+      </cac:ContractExecutionRequirement>
+      <cac:TenderRecipientParty>
+        <cbc:EndpointID>https://tendsign.com/doc.aspx?MeFormsNoticeId=4979&amp;GoTo=Tender</cbc:EndpointID>
+      </cac:TenderRecipientParty>
+      <cac:TenderValidityPeriod>
+        <cbc:DurationMeasure unitCode="DAY">70</cbc:DurationMeasure>
+      </cac:TenderValidityPeriod>
+      <cac:AppealTerms>
+        <cac:AppealReceiverParty>
+          <cac:PartyIdentification>
+            <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+          </cac:PartyIdentification>
+        </cac:AppealReceiverParty>
+      </cac:AppealTerms>
+      <cac:Language>
+        <cbc:ID>NOR</cbc:ID>
+      </cac:Language>
+      <cac:PostAwardProcess>
+        <cbc:ElectronicOrderUsageIndicator>false</cbc:ElectronicOrderUsageIndicator>
+        <cbc:ElectronicPaymentUsageIndicator>false</cbc:ElectronicPaymentUsageIndicator>
+      </cac:PostAwardProcess>
+    </cac:TenderingTerms>
+    <cac:TenderingProcess>
+      <cbc:SubmissionMethodCode listName="esubmission">required</cbc:SubmissionMethodCode>
+      <cbc:GovernmentAgreementConstraintIndicator>false</cbc:GovernmentAgreementConstraintIndicator>
+      <cac:TenderSubmissionDeadlinePeriod>
+        <cbc:EndDate>2024-02-27+01:00</cbc:EndDate>
+        <cbc:EndTime>14:00:58+01:00</cbc:EndTime>
+      </cac:TenderSubmissionDeadlinePeriod>
+      <cac:AdditionalInformationRequestPeriod>
+        <cbc:EndDate>2024-02-19+01:00</cbc:EndDate>
+        <cbc:EndTime>00:00:00+01:00</cbc:EndTime>
+      </cac:AdditionalInformationRequestPeriod>
+      <cac:OpenTenderEvent>
+        <cbc:OccurrenceDate>2024-02-27+01:00</cbc:OccurrenceDate>
+        <cbc:OccurrenceTime>14:01:00+01:00</cbc:OccurrenceTime>
+        <cac:OccurenceLocation>
+          <cbc:Description languageID="NOR">Tønsberg</cbc:Description>
+          <cbc:Description languageID="ENG">Tønsberg</cbc:Description>
+        </cac:OccurenceLocation>
+      </cac:OpenTenderEvent>
+      <cac:AuctionTerms>
+        <cbc:AuctionConstraintIndicator>false</cbc:AuctionConstraintIndicator>
+      </cac:AuctionTerms>
+      <cac:ContractingSystem>
+        <cbc:ContractingSystemTypeCode listName="dps-usage">none</cbc:ContractingSystemTypeCode>
+      </cac:ContractingSystem>
+      <cac:ContractingSystem>
+        <cbc:ContractingSystemTypeCode listName="framework-agreement">none</cbc:ContractingSystemTypeCode>
+      </cac:ContractingSystem>
+    </cac:TenderingProcess>
+    <cac:ProcurementProject>
+      <cbc:ID schemeName="InternalID">Anskaffelse -  70 - 2023</cbc:ID>
+      <cbc:Name languageID="NOR">Rammeavtale om formidling av leasing finansierte .</cbc:Name>
+      <cbc:Name languageID="ENG">Framework agreement for the facilitation of leasing financed electric cycles.</cbc:Name>
+      <cbc:Description languageID="NOR">Det skal inngås rammeavtale(r) med leverandør(er) for formidling av el-sykler til ansatte finansiert gjennom en leasingordning med en nettolønnstrekkavtale gjennom arbeidsgiver.</cbc:Description>
+      <cbc:Description languageID="ENG">A framework agreement(s) shall be signed with supplier(s) for facilitating electric bicycles to employees financed through a leasing scheme with a net wage deduction agreement through their employer.</cbc:Description>
+      <cbc:ProcurementTypeCode listName="contract-nature">supplies</cbc:ProcurementTypeCode>
+      <cac:MainCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">34000000</cbc:ItemClassificationCode>
+      </cac:MainCommodityClassification>
+      <cac:RealizedLocation>
+        <cac:Address>
+          <cbc:CountrySubentityCode listName="nuts">NO091</cbc:CountrySubentityCode>
+          <cac:Country>
+            <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+          </cac:Country>
+        </cac:Address>
+      </cac:RealizedLocation>
+    </cac:ProcurementProject>
+  </cac:ProcurementProjectLot>
+</ContractNotice>

@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?><ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1" xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1" xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionContent>
+        <efext:EformsExtension>
+          <efbc:TransmissionDate>2024-06-28+00:00</efbc:TransmissionDate>
+          <efbc:TransmissionTime>05:47:38+00:00</efbc:TransmissionTime>
+          <efac:NoticeResult>
+            <efac:LotResult>
+              <cbc:ID schemeName="result">RES-0001</cbc:ID>
+              <cbc:TenderResultCode listName="winner-selection-status">selec-w</cbc:TenderResultCode>
+              <cac:FinancingParty>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+                </cac:PartyIdentification>
+              </cac:FinancingParty>
+              <cac:PayerParty>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+                </cac:PartyIdentification>
+              </cac:PayerParty>
+              <efac:LotTender>
+                <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
+              </efac:LotTender>
+              <efac:ReceivedSubmissionsStatistics>
+                <efbc:StatisticsCode listName="received-submission-type">tenders</efbc:StatisticsCode>
+                <efbc:StatisticsNumeric>5</efbc:StatisticsNumeric>
+              </efac:ReceivedSubmissionsStatistics>
+              <efac:SettledContract>
+                <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+              </efac:SettledContract>
+              <efac:TenderLot>
+                <cbc:ID schemeName="Lot">LOT-0000</cbc:ID>
+              </efac:TenderLot>
+            </efac:LotResult>
+            <efac:LotTender>
+              <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
+              <efbc:TenderRankedIndicator>true</efbc:TenderRankedIndicator>
+              <efbc:TenderVariantIndicator>false</efbc:TenderVariantIndicator>
+              <efac:TenderingParty>
+                <cbc:ID schemeName="tendering-party">TPA-0001</cbc:ID>
+              </efac:TenderingParty>
+              <efac:TenderLot>
+                <cbc:ID schemeName="Lot">LOT-0000</cbc:ID>
+              </efac:TenderLot>
+              <efac:TenderReference>
+                <cbc:ID>Henning Larsen Architects AS</cbc:ID>
+              </efac:TenderReference>
+            </efac:LotTender>
+            <efac:SettledContract>
+              <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+              <efac:LotTender>
+                <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
+              </efac:LotTender>
+            </efac:SettledContract>
+            <efac:TenderingParty>
+              <cbc:ID schemeName="tendering-party">TPA-0001</cbc:ID>
+              <efac:Tenderer>
+                <cbc:ID schemeName="organization">ORG-0004</cbc:ID>
+              </efac:Tenderer>
+            </efac:TenderingParty>
+          </efac:NoticeResult>
+          <efac:NoticeSubType>
+            <cbc:SubTypeCode listName="notice-subtype">36</cbc:SubTypeCode>
+          </efac:NoticeSubType>
+          <efac:Organizations>
+            <efac:Organization>
+              <efac:Company>
+                <cbc:WebsiteURI>http://stiegler.no</cbc:WebsiteURI>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Stiegler Advokatfirma AS</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">Stiegler Advokatfirma AS</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Postboks 1124 Sentrum</cbc:StreetName>
+                  <cbc:CityName>Bergen</cbc:CityName>
+                  <cbc:PostalZone>5809</cbc:PostalZone>
+                  <cbc:CountrySubentityCode listName="nuts">NO0A2</cbc:CountrySubentityCode>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">919177519</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Name>Thomas Lynum</cbc:Name>
+                  <cbc:Telephone>+47 55215400</cbc:Telephone>
+                  <cbc:ElectronicMail>tlynum@stiegler.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+            <efac:Organization>
+              <efac:Company>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Grieghallen Utbygging AS</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">Grieghallen Utbygging AS</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Edvard Griegs plass 1</cbc:StreetName>
+                  <cbc:CityName>Bergen</cbc:CityName>
+                  <cbc:PostalZone>5015</cbc:PostalZone>
+                  <cbc:CountrySubentityCode listName="nuts">NO0A2</cbc:CountrySubentityCode>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">926 477 307</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Telephone>+475521 6100</cbc:Telephone>
+                  <cbc:ElectronicMail>post@grieghallen.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+            <efac:Organization>
+              <efac:Company>
+                <cbc:WebsiteURI>https://www.domstol.no/no/domstoler/tingrett/hordaland-tingrett/</cbc:WebsiteURI>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0003</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Hordaland tingrett</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">Hordaland tingrett</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:CityName>Bergen</cbc:CityName>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">926 723 367</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Telephone>47 55 69 97 00</cbc:Telephone>
+                  <cbc:ElectronicMail>hordaland.tingrett@domstol.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+            <efac:Organization>
+              <efbc:ListedOnRegulatedMarketIndicator>true</efbc:ListedOnRegulatedMarketIndicator>
+              <efbc:NaturalPersonIndicator>false</efbc:NaturalPersonIndicator>
+              <efac:Company>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0004</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Henning Larsen Architects AS</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">Henning Larsen Architects AS</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:CityName>Oslo</cbc:CityName>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">998 701 961</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Telephone>+47 45672764</cbc:Telephone>
+                  <cbc:ElectronicMail>kigl@henninglarsen.com</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+          </efac:Organizations>
+        </efext:EformsExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:UBLVersionID>2.3</cbc:UBLVersionID>
+  <cbc:CustomizationID>eforms-sdk-1.7#extended#urn:fdc:anskaffelser.no:2023:eforms:eu</cbc:CustomizationID>
+  <cbc:ID schemeName="notice-id">20a13479-5209-4c1e-9118-edff49c2c9af</cbc:ID>
+  <cbc:ContractFolderID>0a13ce23-1022-40a1-9652-b45a78168c93</cbc:ContractFolderID>
+  <cbc:IssueDate>2024-06-27+00:00</cbc:IssueDate>
+  <cbc:IssueTime>14:32:30+00:00</cbc:IssueTime>
+  <cbc:VersionID>01</cbc:VersionID>
+  <cbc:RegulatoryDomain>32014L0024</cbc:RegulatoryDomain>
+  <cbc:NoticeTypeCode listName="result">can-desg</cbc:NoticeTypeCode>
+  <cbc:NoticeLanguageCode>NOR</cbc:NoticeLanguageCode>
+  <cac:AdditionalNoticeLanguage>
+    <cbc:ID>ENG</cbc:ID>
+  </cac:AdditionalNoticeLanguage>
+  <cac:ContractingParty>
+    <cac:ContractingPartyType>
+      <cbc:PartyTypeCode listName="buyer-legal-type">org-sub-cga</cbc:PartyTypeCode>
+    </cac:ContractingPartyType>
+    <cac:ContractingActivity>
+      <cbc:ActivityTypeCode listName="authority-activity">rcr</cbc:ActivityTypeCode>
+    </cac:ContractingActivity>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+      </cac:PartyIdentification>
+    </cac:Party>
+  </cac:ContractingParty>
+  <cac:TenderingTerms>
+    <cac:ProcurementLegislationDocumentReference>
+      <cbc:ID>Anskaffelsesforskriften</cbc:ID>
+    </cac:ProcurementLegislationDocumentReference>
+  </cac:TenderingTerms>
+  <cac:TenderingProcess>
+    <cbc:ProcedureCode listName="procurement-procedure-type">restricted</cbc:ProcedureCode>
+  </cac:TenderingProcess>
+  <cac:ProcurementProject>
+    <cbc:ID schemeName="InternalID">00</cbc:ID>
+    <cbc:Name languageID="NOR">Griegkvartalet: Plan - designkonkurranse, etterfølgende tjenestekontrakt</cbc:Name>
+    <cbc:Name languageID="ENG">Grieg Block: Plan - design competition, subsequent service contract</cbc:Name>
+    <cbc:Description languageID="NOR">Grieghallen Utbygging AS (oppdragsgiver) ble etablert i 2021 for å realisere prosjektet «Griegkvartalet» - et nytt musikkteater i Bergen. Oppdragsgiver skal gjennom prosjektet «Griegkvartalet» etablere et nytt musikkteater på Edvard Griegs plass. I denne forbindelse har oppdragsgiver behov for å få utarbeidet et tverrfaglig løsningsforslag, utarbeidet av et team av både arkitekter og rådgivere. Løsningsforslaget som utarbeides i plan- og designkonkurransen vil ligge til grunn for prosjektet i det videre arbeidet.Videre har oppdragsgiver behov for å inngå en etterfølgende kontrakt for arkitekt- og rådgivningstjenester i prosjektet. Tjenestekontrakt for arkitekt- og rådgivning vil bli inngått etter NS 8401:2010 «Alminnelige kontraktsbestemmelser for prosjekteringsoppdrag».Konkurransen skal gjennomføres som en plan- og designkonkurranse med etterfølgende konkurranse med forhandling uten forutgående kunngjøring, jf. FOA del I og V.</cbc:Description>
+    <cbc:Description languageID="ENG">Grieghallen Utbygging AS (the contracting authority) was established in 2021 to realise the project "Grieg Block" - a new music theatre in Bergen. The contracting authority shall, through the project "Grieg Block", establish a new music theatre at Edvard Grieg's place. The contracting authority therefore needs to prepare a multi-disciplinary solution proposal, prepared by a team of both architects and consultants. The solution proposal that is prepared in the planning and design competition will form the basis of the project in the further work. Furthermore, the contracting authority needs to enter into a subsequent contract for architect and consulting services in the project. The service contract for architect and consultancy services will be entered into in accordance with NS 8401:2010 'General contract terms for engineering design assignments'. The competition shall be held as a design contest with a subsequent competition with negotiations without a prior notice, cf. the Public Procurement Regulations, parts I and V.</cbc:Description>
+    <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
+    <cac:ProcurementAdditionalType>
+      <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
+    </cac:ProcurementAdditionalType>
+    <cac:MainCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">45000000</cbc:ItemClassificationCode>
+    </cac:MainCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">71200000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">71210000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">71240000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">71400000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">71500000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:RealizedLocation>
+      <cac:Address>
+        <cbc:StreetName>Edvard Griegs Plass 1</cbc:StreetName>
+        <cbc:CityName>Bergen</cbc:CityName>
+        <cbc:PostalZone>5015</cbc:PostalZone>
+        <cbc:CountrySubentityCode listName="nuts">NO0A2</cbc:CountrySubentityCode>
+        <cac:Country>
+          <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:Address>
+    </cac:RealizedLocation>
+  </cac:ProcurementProject>
+  <cac:ProcurementProjectLot>
+    <cbc:ID schemeName="Lot">LOT-0000</cbc:ID>
+    <cac:TenderingTerms>
+      <cbc:FundingProgramCode listName="eu-funded">no-eu-funds</cbc:FundingProgramCode>
+      <cac:AdditionalInformationParty>
+        <cac:PartyIdentification>
+          <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+        </cac:PartyIdentification>
+      </cac:AdditionalInformationParty>
+      <cac:DocumentProviderParty>
+        <cac:PartyIdentification>
+          <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+        </cac:PartyIdentification>
+      </cac:DocumentProviderParty>
+      <cac:AppealTerms>
+        <cac:AppealReceiverParty>
+          <cac:PartyIdentification>
+            <cbc:ID schemeName="organization">ORG-0003</cbc:ID>
+          </cac:PartyIdentification>
+        </cac:AppealReceiverParty>
+      </cac:AppealTerms>
+    </cac:TenderingTerms>
+    <cac:ProcurementProject>
+      <cbc:ID schemeName="InternalID">00</cbc:ID>
+      <cbc:Name languageID="NOR">Griegkvartalet: Plan - designkonkurranse, etterfølgende tjenestekontrakt</cbc:Name>
+      <cbc:Name languageID="ENG">Grieg Block: Plan - design competition, subsequent service contract</cbc:Name>
+      <cbc:Description languageID="NOR">Grieghallen Utbygging AS (oppdragsgiver) ble etablert i 2021 for å realisere prosjektet «Griegkvartalet» - et nytt musikkteater i Bergen. Oppdragsgiver skal gjennom prosjektet «Griegkvartalet» etablere et nytt musikkteater på Edvard Griegs plass. I denne forbindelse har oppdragsgiver behov for å få utarbeidet et tverrfaglig løsningsforslag, utarbeidet av et team av både arkitekter og rådgivere. Løsningsforslaget som utarbeides i plan- og designkonkurransen vil ligge til grunn for prosjektet i det videre arbeidet.Videre har oppdragsgiver behov for å inngå en etterfølgende kontrakt for arkitekt- og rådgivningstjenester i prosjektet. Tjenestekontrakt for arkitekt- og rådgivning vil bli inngått etter NS 8401:2010 «Alminnelige kontraktsbestemmelser for prosjekteringsoppdrag».Konkurransen skal gjennomføres som en plan- og designkonkurranse med etterfølgende konkurranse med forhandling uten forutgående kunngjøring, jf. FOA del I og V.</cbc:Description>
+      <cbc:Description languageID="ENG">Grieghallen Utbygging AS (the contracting authority) was established in 2021 to realise the project "Grieg Block" - a new music theatre in Bergen. The contracting authority shall, through the project "Grieg Block", establish a new music theatre at Edvard Grieg's place. The contracting authority therefore needs to prepare a multi-disciplinary solution proposal, prepared by a team of both architects and consultants. The solution proposal that is prepared in the planning and design competition will form the basis of the project in the further work. Furthermore, the contracting authority needs to enter into a subsequent contract for architect and consulting services in the project. The service contract for architect and consultancy services will be entered into in accordance with NS 8401:2010 'General contract terms for engineering design assignments'. The competition shall be held as a design contest with a subsequent competition with negotiations without a prior notice, cf. the Public Procurement Regulations, parts I and V.</cbc:Description>
+      <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
+      <cbc:EstimatedOverallContractQuantity unitCode="LH">1</cbc:EstimatedOverallContractQuantity>
+      <cac:ProcurementAdditionalType>
+        <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>
+      </cac:ProcurementAdditionalType>
+      <cac:MainCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">45000000</cbc:ItemClassificationCode>
+      </cac:MainCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">71200000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">71210000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">71240000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">71400000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">71500000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:RealizedLocation>
+        <cac:Address>
+          <cbc:StreetName>Edvard Griegs Plass 1</cbc:StreetName>
+          <cbc:CityName>Bergen</cbc:CityName>
+          <cbc:PostalZone>5015</cbc:PostalZone>
+          <cbc:CountrySubentityCode listName="nuts">NO0A2</cbc:CountrySubentityCode>
+          <cac:Country>
+            <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+          </cac:Country>
+        </cac:Address>
+      </cac:RealizedLocation>
+    </cac:ProcurementProject>
+  </cac:ProcurementProjectLot>
+  <cac:TenderResult>
+    <cbc:AwardDate>2000-01-01Z</cbc:AwardDate>
+  </cac:TenderResult>
+</ContractAwardNotice>

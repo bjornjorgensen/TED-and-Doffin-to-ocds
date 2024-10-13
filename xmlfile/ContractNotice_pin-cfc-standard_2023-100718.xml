@@ -1,0 +1,450 @@
+<ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1" xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1" xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1" xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2">
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionContent>
+        <efext:EformsExtension>
+          <efbc:TransmissionDate>2023-11-09+00:00</efbc:TransmissionDate>
+          <efbc:TransmissionTime>06:35:08+00:00</efbc:TransmissionTime>
+          <efac:NoticeSubType>
+            <cbc:SubTypeCode listName="notice-subtype">10</cbc:SubTypeCode>
+          </efac:NoticeSubType>
+          <efac:Organizations>
+            <efac:Organization>
+              <efac:Company>
+                <cbc:WebsiteURI>https://permalink.mercell.com/216040028.aspx</cbc:WebsiteURI>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">SYKEHUSINNKJÃ˜P HF</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">SYKEHUSINNKJÃ˜P HF</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Postboks 40</cbc:StreetName>
+                  <cbc:CityName>VADSÃ˜</cbc:CityName>
+                  <cbc:PostalZone>9811</cbc:PostalZone>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">916879067</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Name>Postmottak SykehusinnkjÃ¸p</cbc:Name>
+                  <cbc:Telephone>+47 78950700</cbc:Telephone>
+                  <cbc:ElectronicMail>post@sykehusinnkjop.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+            <efac:Organization>
+              <efac:Company>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Indre og Ã˜stre Finnmark tingrett </cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">Indre og Ã˜stre Finnmark tingrett </cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:CityName>VadsÃ¸</cbc:CityName>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">926 722 840</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Telephone>78 01 17 00</cbc:Telephone>
+                  <cbc:ElectronicMail>indre.og.ostre.finnmark.tingrett@domstol.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+          </efac:Organizations>
+        </efext:EformsExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:UBLVersionID>2.3</cbc:UBLVersionID>
+  <cbc:CustomizationID>eforms-sdk-1.7#extended#urn:fdc:anskaffelser.no:2023:eforms:eu</cbc:CustomizationID>
+  <cbc:ID schemeName="notice-id">03223b9a-002c-45e8-be6b-9d4aad21950e</cbc:ID>
+  <cbc:ContractFolderID>7e315dc5-76c1-4a66-9067-fb9bc00cb234</cbc:ContractFolderID>
+  <cbc:IssueDate>2023-11-09+00:00</cbc:IssueDate>
+  <cbc:IssueTime>06:34:08+00:00</cbc:IssueTime>
+  <cbc:VersionID>01</cbc:VersionID>
+  <cbc:RegulatoryDomain>32014L0024</cbc:RegulatoryDomain>
+  <cbc:NoticeTypeCode listName="competition">pin-cfc-standard</cbc:NoticeTypeCode>
+  <cbc:NoticeLanguageCode>NOR</cbc:NoticeLanguageCode>
+  <cac:AdditionalNoticeLanguage>
+    <cbc:ID>ENG</cbc:ID>
+  </cac:AdditionalNoticeLanguage>
+  <cac:ContractingParty>
+    <cbc:BuyerProfileURI>http://www.sykehusinnkjop.no/</cbc:BuyerProfileURI>
+    <cac:ContractingPartyType>
+      <cbc:PartyTypeCode listName="buyer-legal-type">pub-undert</cbc:PartyTypeCode>
+    </cac:ContractingPartyType>
+    <cac:ContractingActivity>
+      <cbc:ActivityTypeCode listName="authority-activity">health</cbc:ActivityTypeCode>
+    </cac:ContractingActivity>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+      </cac:PartyIdentification>
+    </cac:Party>
+  </cac:ContractingParty>
+  <cac:TenderingProcess>
+    <cbc:Description languageID="NOR">Dette er en forhÃ¥ndskunngjÃ¸ring av anskaffelse "Angio intervensjonslaboratorium, monoplan og biplan, Universitetssykehuset Nord-Norge HF" - konkurranse med forhandling.</cbc:Description>
+    <cbc:Description languageID="ENG">This is a prior information notice for the procurement "Angio intervention laboratory, monoplane and biplane, universitetssykehuset Nord-Norge HF" - negotiated procedure.</cbc:Description>
+    <cbc:ProcedureCode listName="procurement-procedure-type">neg-w-call</cbc:ProcedureCode>
+  </cac:TenderingProcess>
+  <cac:ProcurementProject>
+    <cbc:ID schemeName="InternalID">2023/1366</cbc:ID>
+    <cbc:Name languageID="NOR">ForhÃ¥ndskunngjÃ¸ring: Angio intervensjonslaboratorium, monoplan og biplan, Universitetssykehuset Nord-Norge HF</cbc:Name>
+    <cbc:Name languageID="ENG">Prior information notice: Angio intervention laboratory, monoplane and biplane, The University Hospital of North Norway.</cbc:Name>
+    <cbc:Description languageID="NOR">Anskaffelsens formÃ¥l er kjÃ¸p av angio intervensjonslaboratorium â€“ monoplan til RÃ¸ntgenavdelingen ved Universitetssykehuset Nord-Norge HF (UNN). Utstyret skal brukes til generell radiologi pÃ¥ alle organsystemer unntatt hjerte.Det Ã¸nskes ogsÃ¥ tilbud pÃ¥ kjÃ¸p av angio intervensjonslaboratorium â€“ biplan. Investeringen er ikke godkjent og vi forbeholder oss retten til Ã¥ gjennomfÃ¸re kjÃ¸p dersom investeringen godkjennes i helseforetaket.Oppdragsgiveren vil invitere leverandÃ¸rer som har meldt sin interesse etter forhÃ¥ndskunngjÃ¸ringen til Ã¥ bekrefte sin interesse.</cbc:Description>
+    <cbc:Description languageID="ENG">The objective of the procurement is the procurement of angio intervention laboratory - monoplane for the X-ray department at the University Hospital of North Norway (UNN). The equipment shall be used for general radiology on all organ systems except heart. Tenders are also wanted for the procurement of angio intervention laboratory - biplane. The investment is not approved and we reserve the right to make a purchase if the investment is approved by the health company. The contracting authority will invite tenderers who have registered their interest after the prior information notice, to confirm their interest.</cbc:Description>
+    <cbc:ProcurementTypeCode listName="contract-nature">supplies</cbc:ProcurementTypeCode>
+    <cac:MainCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">33111700</cbc:ItemClassificationCode>
+    </cac:MainCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">33100000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">33150000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:RealizedLocation>
+      <cac:Address>
+        <cbc:CountrySubentityCode listName="nuts">NO074</cbc:CountrySubentityCode>
+        <cac:Country>
+          <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:Address>
+    </cac:RealizedLocation>
+  </cac:ProcurementProject>
+  <cac:ProcurementProjectLot>
+    <cbc:ID schemeName="Lot">LOT-0000</cbc:ID>
+    <cac:TenderingTerms>
+      <ext:UBLExtensions>
+        <ext:UBLExtension>
+          <ext:ExtensionContent>
+            <efext:EformsExtension>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">"Totale" Ã¥rsomsetning</cbc:Name>
+                <cbc:Name languageID="ENG">'Total' annual turnover</cbc:Name>
+                <cbc:Description languageID="NOR">LeverandÃ¸rens ("totale") Ã¥rsomsetning for det antall regnskapsÃ¥r som det anmodes om i kunngjÃ¸ringen eller i anskaffelsesdokumentene, er som fÃ¸lger:</cbc:Description>
+                <cbc:Description languageID="ENG">The tenderer Ì�s ("total") annual turnover for the number of financial years requested in the tender notice or in the procurement documents is as follows:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Gjennomsnittlig Ã¥rsomsetning</cbc:Name>
+                <cbc:Name languageID="ENG">Average annual turnover</cbc:Name>
+                <cbc:Description languageID="NOR">LeverandÃ¸rens gjennomsnittlige Ã¥rsomsetning for det antall Ã¥r som det anmodes om i kunngjÃ¸ringen eller i anskaffelsesdokumentene er som fÃ¸lger:</cbc:Description>
+                <cbc:Description languageID="ENG">The tenderer Ì�s average annual turnover for the number of years requested in the notice or in the procurement documents is as follows:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">"Spesifikk Ã¥rsomsetning"</cbc:Name>
+                <cbc:Name languageID="ENG">"Specific annual turnover"</cbc:Name>
+                <cbc:Description languageID="NOR">Er leverandÃ¸rens ("spesifikke") Ã¥rsomsetning innenfor det omrÃ¥det kontrakten gjelder og spesifisert i kunngjÃ¸ringen eller i anskaffelsesdokumentene for det antall regnskapsÃ¥r det anmodes om er som fÃ¸lger:</cbc:Description>
+                <cbc:Description languageID="ENG">Are the tenderer's ("specific") annual turnover within the area that the contract applies to and specified in the notice or in the procurement documents for the number of accounting years requested is as follows:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Gjennomsnittlig omsettning</cbc:Name>
+                <cbc:Name languageID="ENG">Average set-up</cbc:Name>
+                <cbc:Description languageID="NOR">Er leverandÃ¸rens gjennomsnitlige Ã¥rsomsetning innenfor det omrÃ¥det kontrakten gjelder og spesifisert i kunngjÃ¸ringen eller i anskaffelsesdokumentene for det antall regnskapsÃ¥r det anmodes om er som fÃ¸lger:</cbc:Description>
+                <cbc:Description languageID="ENG">Is the tenderer's average annual turnover within the area requested by the contract and specified in the notice or in the procurement documents for the number of financial years requested:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">LeverandÃ¸rens etableringsdato</cbc:Name>
+                <cbc:Name languageID="ENG">The tenderer's establishment date</cbc:Name>
+                <cbc:Description languageID="NOR">Hvis opplysningene om omsetning (samlet eller spesifikt) ikke er tilgjengelige for hele perioden som det anmodes om, vennligst angi den dato da virksomheten ble etablert, eller leverandÃ¸rene startet sin virksomhet:</cbc:Description>
+                <cbc:Description languageID="ENG">If the information about the turnover (combined or specific) is not available for the entire requested period, please state the date the company was established, or the tenderers started their business:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Finansielle nÃ¸kkeltall</cbc:Name>
+                <cbc:Name languageID="ENG">Financial key figures</cbc:Name>
+                <cbc:Description languageID="NOR">NÃ¥r det gjelder finansielle nÃ¸kkeltall som er angitt i kunngjÃ¸ringen eller i anskaffelsesdokumentene erklÃ¦rer leverandÃ¸ren at den eller de faktiske verdien(e) for det eller de nÃ¸kkeltall(ene) som det anmodes om er som fÃ¸lger:</cbc:Description>
+                <cbc:Description languageID="ENG">For financial key figures stated in the notice or in the procurement documents, the tenderer declares that the actual value(s) of the requested key figures are as follows:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Ansvarsforsikring</cbc:Name>
+                <cbc:Name languageID="ENG">Liability insurance</cbc:Name>
+                <cbc:Description languageID="NOR">Det forsikrede belÃ¸p i leverandÃ¸rens ansvarsforsikring er fÃ¸lgende:</cbc:Description>
+                <cbc:Description languageID="ENG">The insured amount in the tenderer Ì�s liability insurance is the following:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Ã˜vrige Ã¸konomiske og finansielle krav</cbc:Name>
+                <cbc:Name languageID="ENG">Other economic and financial requirements</cbc:Name>
+                <cbc:Description languageID="NOR">NÃ¥r det gjelder eventuelle Ã¸vrige Ã¸konomiske og finansielle krav som har blitt angitt i kunngjÃ¸ringen eller i anskaffelsesdokumentene erklÃ¦rer leverandÃ¸ren at:</cbc:Description>
+                <cbc:Description languageID="ENG">Regarding any other economic and financial requirements that have been stated in the notice or in the procurement documents, the tenderer declares that:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">other</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Attester utstedt av uavhengige organer for kvalitetssikringsstandarder</cbc:Name>
+                <cbc:Name languageID="ENG">Certificates issued by independent bodies for quality assurance standards.</cbc:Name>
+                <cbc:Description languageID="NOR">Kan leverandÃ¸r fremlegge attester utstedt av uavhengige organer som dokumentasjon for at leverandÃ¸ren oppfyller de angitte kvalitetssikringsstandardene, inkludert krav til universell utforming?</cbc:Description>
+                <cbc:Description languageID="ENG">Can tenderers submit certificates issued by independent bodies that document that the tenderer fulfils the stated quality assurance standards, including universal design requirements?</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">other</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Attester utstedt av uavhengige organer for miljÃ¸ledelsesstandarder</cbc:Name>
+                <cbc:Name languageID="ENG">Certificates issued by independent bodies for environmental management standards.</cbc:Name>
+                <cbc:Description languageID="NOR">Er leverandÃ¸ren i stand til Ã¥ fremlegge attester utstedt av uavhengige organer som dokumentasjon for at leverandÃ¸ren oppfyller de angitte miljÃ¸ledelsessystemene eller -standardene?</cbc:Description>
+                <cbc:Description languageID="ENG">Is the tenderer able to submit certificates issued by independent bodies as documentation that the tenderer fulfils the stated environmental management systems or standards?</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">sui-act</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Registrert i faglig register</cbc:Name>
+                <cbc:Name languageID="ENG">Registered in a trade register</cbc:Name>
+                <cbc:Description languageID="NOR">LeverandÃ¸r er registrert i et faglig register i medlemsstaten som leverandÃ¸ren er etablert i. Som beskrevet i bilag XI til direktiv 2014/24/EU; leverandÃ¸rer fra visse medlemsstater kan vÃ¦re nÃ¸dt til Ã¥ oppfylle andre krav i nevnte bilag.</cbc:Description>
+                <cbc:Description languageID="ENG">Tenderers are registered in a professional register in the member state in which the tenderer is established. As described in annex XI of directive 2014/24/EU; suppliers from certain member states may have to fulfil other requirements in the mentioned annex.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">sui-act</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Registrert i handelsregister eller foretaksregister</cbc:Name>
+                <cbc:Name languageID="ENG">Registered in a trade register or company register.</cbc:Name>
+                <cbc:Description languageID="NOR">LeverandÃ¸r er registrert i et foretaksregister eller et handelsregister i medlemsstaten som leverandÃ¸ren er etablert i. Som beskrevet i bilag XI til direktiv 2014/24/EU; leverandÃ¸rer fra visse medlemsstater kan vÃ¦re nÃ¸dt til Ã¥ oppfylle andre krav i nevnte bilag.</cbc:Description>
+                <cbc:Description languageID="ENG">Tenderers are registered in a company register or a trade register in the member state in which the tenderer is established. As described in annex XI of directive 2014/24/EU; suppliers from certain member states may have to fulfil other requirements in the mentioned annex.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Bare for offentlige vareleveranser</cbc:Name>
+                <cbc:Name languageID="ENG">Only for public goods deliveries</cbc:Name>
+                <cbc:Description languageID="NOR">Bare for offentlige vareleveranser: I referanseperioden  har leverandÃ¸ren utfÃ¸rt fÃ¸lgende viktige vareleveranser av den etterspurte type, eller fÃ¸lgende viktige tjenester av den etterspurte type. Oppdragsgiver kan kreve opp til tre Ã¥rs erfaring og tillate at det tas hensyn til erfaring fra tiden fÃ¸r de seneste tre Ã¥r.</cbc:Description>
+                <cbc:Description languageID="ENG">Only for public goods deliveries: In the reference period, the tenderer has carried out the following important deliveries of the requested type, or the following important services of the requested type. The contracting authority can require up to three years experience and allow experience from the previous three years to be taken into consideration.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Teknisk personell eller tekniske enheter</cbc:Name>
+                <cbc:Name languageID="ENG">Technical personnel or technical units</cbc:Name>
+                <cbc:Description languageID="NOR">LeverandÃ¸r kan rÃ¥de over fÃ¸lgende tekniske personell eller tekniske enheter , sÃ¦rlig dem som er ansvarlige for kvalitetskontrollen: For teknisk personell eller tekniske enheter som ikke direkte hÃ¸rer til leverandÃ¸rens virksomhet, men hvis kapasitet leverandÃ¸ren stÃ¸tter seg pÃ¥, jf. del II, avsnitt C, skal det utfylles sÃ¦rskilte ESPD-formularer.</cbc:Description>
+                <cbc:Description languageID="ENG">Tenderers can use the following technical personnel or technical units , particularly those who are responsible for quality control: For technical personnel or technical units that do not directly belong to the tenderer Ì�s business, but if the capacity the tenderer will use, cf. part II, section C, separate ESPD forms shall be supplemented.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Tekniske fasiliteter og kvalitetssikringstiltak</cbc:Name>
+                <cbc:Name languageID="ENG">Technical facilities and quality assurance measures</cbc:Name>
+                <cbc:Description languageID="NOR">LeverandÃ¸ren anvender fÃ¸lgende tekniske fasiliteter og kvalitetssikringstiltak, og leverandÃ¸rens undersÃ¸kelses- og forskningsfasiliter er som fÃ¸lger:</cbc:Description>
+                <cbc:Description languageID="ENG">The tenderer utilises the following technical facilities and quality assurance measures and the tenderer Ì�s survey and research facility is as follows:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">UndersÃ¸kelses- og forskningsfasiliteter</cbc:Name>
+                <cbc:Name languageID="ENG">Investigation and research facilities</cbc:Name>
+                <cbc:Description languageID="NOR">LeverandÃ¸rens undersÃ¸kelses- og forskningsfasiliter er som fÃ¸lger:</cbc:Description>
+                <cbc:Description languageID="ENG">The tenderer Ì�s survey and research facilitates are as follows:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Styring og sporing av leveransekjeden</cbc:Name>
+                <cbc:Name languageID="ENG">Management and tracing of the supply chain</cbc:Name>
+                <cbc:Description languageID="NOR">LeverandÃ¸ren vil vÃ¦re i stand til Ã¥ anvende fÃ¸lgende styring av leveringskjeden og sporingssystemer ved gjennomfÃ¸ring av kontrakten:</cbc:Description>
+                <cbc:Description languageID="ENG">The tenderer will be able to use the following management of the supply chain and tracing systems for the execution of the contract:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Tillatelse til kontroll</cbc:Name>
+                <cbc:Name languageID="ENG">Control Permission</cbc:Name>
+                <cbc:Description languageID="NOR">For varer eller tjenester som er kompliserte,  eller som unntaksvis skal benyttes til et spesielt formÃ¥l: Vil leverandÃ¸ren tillate, at det foretas kontroll  av leverandÃ¸rens produksjonskapasitet eller tekniske kapasitet og, hvor det er nÃ¸dvendig, av de undersÃ¸kelses- og forskningsfasiliteter som leverandÃ¸ren rÃ¥der over, og av kvalitetskontrolltiltak? Kontrollen skal foretas av oppdragsgiveren eller oppdragsgiver kan overlate det til et kompetent offentlige organ i den staten leverandÃ¸ren er etablert.</cbc:Description>
+                <cbc:Description languageID="ENG">For goods or services that are complicated, or that in exceptional cases shall be used for a particular purpose: Will the tenderer allow checks of the tenderer's production capacity or technical capacity and, where necessary, of the survey and research facilities that the tenderer has at its disposal and of quality control measures? The inspections shall be undertaken by the contracting authority or the contracting authority can leave it to a competent public body in the country where the tenderer is established.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Utdanning og faglige kvalifikasjoner</cbc:Name>
+                <cbc:Name languageID="ENG">Education and professional qualifications</cbc:Name>
+                <cbc:Description languageID="NOR">FÃ¸lgende utdanning og faglige kvalifikasjoner besittes av leverandÃ¸ren og/eller (avhengig av hvilke krav som er fastsatt i kunngjÃ¸ringen eller i anskaffelsesdokumenterne) av de ledende medarbeiderne:</cbc:Description>
+                <cbc:Description languageID="ENG">The following education and professional qualifications are possessed by the tenderer and/or (depending on the requirements set in the notice or in the procurement documents) of the leading employees:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">MiljÃ¸ledelsestiltak</cbc:Name>
+                <cbc:Name languageID="ENG">Environmental management measures</cbc:Name>
+                <cbc:Description languageID="NOR">LeverandÃ¸r kan anvende fÃ¸lgende miljÃ¸ledelsestiltak i forbindelse med utfÃ¸relsen av kontrakten:</cbc:Description>
+                <cbc:Description languageID="ENG">Tenderers can employ the following environmental management measures in connection with the execution of the contract:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Antall  medarbeidere i ledelsen</cbc:Name>
+                <cbc:Name languageID="ENG">Number of employees in the management</cbc:Name>
+                <cbc:Description languageID="NOR">LeverandÃ¸rens antall medarbeidere i ledelsen i lÃ¸pet av de siste tre Ã¥rene var som fÃ¸lger:</cbc:Description>
+                <cbc:Description languageID="ENG">The tenderer Ì�s number of employees in the management during the last three years was as follows:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Gjennomsnittlige Ã¥rlige arbeidsstyrke</cbc:Name>
+                <cbc:Name languageID="ENG">Average workforce</cbc:Name>
+                <cbc:Description languageID="NOR">LeverandÃ¸rens gjennomsnittlige Ã¥rlige arbeidsstyrke i lÃ¸pet av de siste tre Ã¥rene har vÃ¦rt som fÃ¸lger:</cbc:Description>
+                <cbc:Description languageID="ENG">The tenderer's average annual workforce in the last three years has been as follows:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Redskaper, materiell og teknisk utstyr</cbc:Name>
+                <cbc:Name languageID="ENG">Tools, materials and technical equipment.</cbc:Name>
+                <cbc:Description languageID="NOR">LeverandÃ¸ren vil kunne rÃ¥de over fÃ¸lgende redskaper, materielle og teknisk utstyr til Ã¥ utfÃ¸re kontrakten:</cbc:Description>
+                <cbc:Description languageID="ENG">Tenderers can use the following tools, material and technical equipment to carry out the contract:</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Andel av kontrakt til underleverandÃ¸r</cbc:Name>
+                <cbc:Name languageID="ENG">Portion of the contract to sub-suppliers.</cbc:Name>
+                <cbc:Description languageID="NOR">LeverandÃ¸r vurderer Ã¥ sette bort fÃ¸lgende del (i prosent) av kontrakten til underleverandÃ¸rer. Legg merke til at hvis leverandÃ¸ren har besluttet Ã¥ sette bort en del av kontrakten til underleverandÃ¸rer og stÃ¸tter seg pÃ¥ underleverandÃ¸renes kapasitet til Ã¥ utfÃ¸re denne del, utfylles et sÃ¦rskilt ESPD for slike underleverandÃ¸rer, se del II, avsnitt C, ovenfor.</cbc:Description>
+                <cbc:Description languageID="ENG">The tenderer is considering to outsource the following part (as a percentage) of the contract to sub-suppliers. Note that if the tenderer has decided to outsource a part of the contract to sub-suppliers and will use the sub-suppliers Ì� capacity to carry out this part, a special ESPD will be supplemented for such sub-suppliers, see part II, section C, above.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Ved anskaffelser av varer: Etterspurte prÃ¸ver, beskrivelser eller fotografier, som ikke behÃ¸ver Ã¥ vÃ¦re ledsaget av attester for at de er ekte</cbc:Name>
+                <cbc:Name languageID="ENG">Procurement of goods: Requested samples, descriptions or photographs that do not need to be accompanied by certificates that they are genuine.</cbc:Name>
+                <cbc:Description languageID="NOR">Ved anskaffelser av varer: LeverandÃ¸ren fremlegger for de varer som skal leveres, etterspurte prÃ¸ver, beskrivelser eller fotografier, som ikke behÃ¸ver Ã¥ vÃ¦re ledsaget av attester for at de er ekte</cbc:Description>
+                <cbc:Description languageID="ENG">Procurement of goods: The tenderer presents supplies that shall be delivered, requested samples, descriptions or photographs, which do not need to be accompanied by certificates that they are genuine.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Ved anskaffelser av varer: Etterspurte prÃ¸ver, beskrivelser eller fotografier med attester  .</cbc:Name>
+                <cbc:Name languageID="ENG">Procurement of goods: Requested samples, descriptions or photographs with certificates.</cbc:Name>
+                <cbc:Description languageID="NOR">Ved anskaffelse av varer: Hvis det etterspÃ¸rres, erklÃ¦rer leverandÃ¸ren videre at denne vil levere de etterspurte attestene for at de er ekte.</cbc:Description>
+                <cbc:Description languageID="ENG">When procurement of goods: If requested, the tenderer further declares that they will deliver the requested certificates that they are genuine.</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+              <efac:SelectionCriteria>
+                <cbc:CriterionTypeCode listName="selection-criterion">tp-abil</cbc:CriterionTypeCode>
+                <cbc:Name languageID="NOR">Ved anskaffelse av varer: Attester utstedt av offisielle organer for kvalitetskontroll</cbc:Name>
+                <cbc:Name languageID="ENG">When procuring goods: Certificates issued by official bodies for quality control</cbc:Name>
+                <cbc:Description languageID="NOR">Kan leverandÃ¸r levere etterspurte attester utstedt av offisielle organer for kvalitetskontroll, og som kan bekrefte at varene, som er klart identifisert ved henvisning til tekniske spesifikasjoner eller standarder, som er fastsatt i kunngjÃ¸ringen eller i anskaffelsesdokumentene, er i overensstemmelse med disse?</cbc:Description>
+                <cbc:Description languageID="ENG">Can tenderers submit the requested certificates issued by official bodies for quality control, and who can confirm that the goods, which are clearly identified by reference to technical specifications or standards, as determined in the notice or in the procurement documents, are in accordance with these?</cbc:Description>
+                <cbc:CalculationExpressionCode listName="usage">n-used</cbc:CalculationExpressionCode>
+              </efac:SelectionCriteria>
+            </efext:EformsExtension>
+          </ext:ExtensionContent>
+        </ext:UBLExtension>
+      </ext:UBLExtensions>
+      <cbc:VariantConstraintCode listName="permission">not-allowed</cbc:VariantConstraintCode>
+      <cbc:FundingProgramCode listName="eu-funded">no-eu-funds</cbc:FundingProgramCode>
+      <cac:CallForTendersDocumentReference>
+        <cbc:ID>216040028</cbc:ID>
+        <cbc:DocumentType>non-restricted-document</cbc:DocumentType>
+        <cbc:LanguageID>NOR</cbc:LanguageID>
+        <cac:Attachment>
+          <cac:ExternalReference>
+            <cbc:URI>https://permalink.mercell.com/216040028.aspx</cbc:URI>
+          </cac:ExternalReference>
+        </cac:Attachment>
+      </cac:CallForTendersDocumentReference>
+      <cac:TendererQualificationRequest>
+        <cac:SpecificTendererRequirement>
+          <cbc:TendererRequirementTypeCode listName="reserved-procurement">none</cbc:TendererRequirementTypeCode>
+        </cac:SpecificTendererRequirement>
+      </cac:TendererQualificationRequest>
+      <cac:ContractExecutionRequirement>
+        <cbc:ExecutionRequirementCode listName="reserved-execution">no</cbc:ExecutionRequirementCode>
+      </cac:ContractExecutionRequirement>
+      <cac:ContractExecutionRequirement>
+        <cbc:ExecutionRequirementCode listName="esignature-submission">true</cbc:ExecutionRequirementCode>
+      </cac:ContractExecutionRequirement>
+      <cac:AdditionalInformationParty>
+        <cac:PartyIdentification>
+          <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+        </cac:PartyIdentification>
+      </cac:AdditionalInformationParty>
+      <cac:TenderRecipientParty>
+        <cbc:EndpointID>https://permalink.mercell.com/216040028.aspx</cbc:EndpointID>
+      </cac:TenderRecipientParty>
+      <cac:AppealTerms>
+        <cac:AppealReceiverParty>
+          <cac:PartyIdentification>
+            <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+          </cac:PartyIdentification>
+        </cac:AppealReceiverParty>
+      </cac:AppealTerms>
+      <cac:Language>
+        <cbc:ID>NOR</cbc:ID>
+      </cac:Language>
+    </cac:TenderingTerms>
+    <cac:TenderingProcess>
+      <ext:UBLExtensions>
+        <ext:UBLExtension>
+          <ext:ExtensionContent>
+            <efext:EformsExtension>
+              <efac:InterestExpressionReceptionPeriod>
+                <cbc:EndDate>2023-12-08+01:00</cbc:EndDate>
+                <cbc:EndTime>00:00:00+01:00</cbc:EndTime>
+              </efac:InterestExpressionReceptionPeriod>
+            </efext:EformsExtension>
+          </ext:ExtensionContent>
+        </ext:UBLExtension>
+      </ext:UBLExtensions>
+      <cbc:SubmissionMethodCode listName="esubmission">required</cbc:SubmissionMethodCode>
+      <cbc:GovernmentAgreementConstraintIndicator>true</cbc:GovernmentAgreementConstraintIndicator>
+      <cac:ContractingSystem>
+        <cbc:ContractingSystemTypeCode listName="dps-usage">none</cbc:ContractingSystemTypeCode>
+      </cac:ContractingSystem>
+      <cac:ContractingSystem>
+        <cbc:ContractingSystemTypeCode listName="framework-agreement">none</cbc:ContractingSystemTypeCode>
+      </cac:ContractingSystem>
+    </cac:TenderingProcess>
+    <cac:ProcurementProject>
+      <cbc:ID schemeName="InternalID">2023/1366</cbc:ID>
+      <cbc:Name languageID="NOR">ForhÃ¥ndskunngjÃ¸ring: Angio intervensjonslaboratorium, monoplan og biplan, Universitetssykehuset Nord-Norge HF</cbc:Name>
+      <cbc:Name languageID="ENG">Prior information notice: Angio intervention laboratory, monoplane and biplane, The University Hospital of North Norway.</cbc:Name>
+      <cbc:Description languageID="NOR">Anskaffelsens formÃ¥l er kjÃ¸p av angio intervensjonslaboratorium â€“ monoplan til RÃ¸ntgenavdelingen ved Universitetssykehuset Nord-Norge HF (UNN). Utstyret skal brukes til generell radiologi pÃ¥ alle organsystemer unntatt hjerte.Oppdragsgiveren vil invitere leverandÃ¸rer som har meldt sin interesse etter forhÃ¥ndskunngjÃ¸ringen til Ã¥ bekrefte sin interesse.</cbc:Description>
+      <cbc:Description languageID="ENG">The objective of the procurement is the procurement of angio intervention laboratory - monoplane for the X-ray department at the University Hospital of North Norway (UNN). The equipment shall be used for general radiology on all organ systems except heart. The contracting authority will invite tenderers who have registered their interest after the prior information notice, to confirm their interest.</cbc:Description>
+      <cbc:ProcurementTypeCode listName="contract-nature">supplies</cbc:ProcurementTypeCode>
+      <cac:MainCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">33111700</cbc:ItemClassificationCode>
+      </cac:MainCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">33100000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">33150000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:RealizedLocation>
+        <cac:Address>
+          <cbc:CountrySubentityCode listName="nuts">NO074</cbc:CountrySubentityCode>
+          <cac:Country>
+            <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+          </cac:Country>
+        </cac:Address>
+      </cac:RealizedLocation>
+      <cac:PlannedPeriod>
+        <cbc:DurationMeasure unitCode="MONTH">120</cbc:DurationMeasure>
+      </cac:PlannedPeriod>
+    </cac:ProcurementProject>
+  </cac:ProcurementProjectLot>
+</ContractNotice>

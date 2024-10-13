@@ -320,11 +320,11 @@
         "locality": "GJØVIK"
       },
       "roles": [
-        "submissionReceiptBody",
-        "buyer",
-        "evaluationBody",
         "processContactPoint",
-        "reviewContactPoint"
+        "submissionReceiptBody",
+        "evaluationBody",
+        "reviewContactPoint",
+        "buyer"
       ]
     },
     {

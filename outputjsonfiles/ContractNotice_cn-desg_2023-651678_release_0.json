@@ -1,0 +1,147 @@
+{
+  "id": "2023-651678",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "2023-651678",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "tenderPeriod": {
+          "endDate": "2023-02-10T12:00:00+02:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "allowed",
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Detaljregulering for Vitensenterkvartalet",
+        "description": "Oppdragsgiver, Kvinesdal kommune/kommunebygg, inviterer utvalgte firmaer til å gi pristilbud for kjøp av tjenester for reguleringsendring av områderegulering for Liknes i forbindelse med bygging av nytt Vitensenter i sentrum av Kvinesdal. Anskaffelsen består av reguleringsendring med tilhørende dokumenter jfr. Plan- og bygningsloven § 12-14, første ledd, og gjelder for området B/F/K4 og o_P24 inkl. fortausareal med tilhørende areal mellom o_Torg 1 i nord og veg i sør. Dette gjelder både vertikalnivå 1 og vertikalnivå 2.",
+        "designContest": {
+          "followUpContracts": true
+        },
+        "awardCriteria": {
+          "criteria": [
+            {
+              "type": "cost"
+            },
+            {
+              "type": "price"
+            },
+            {
+              "type": "quality"
+            },
+            {
+              "description": "Pris/kostnad: - Tilbudt pristilbud - Timespris Kvalitet: - Kompetanse - Erfaring - Bemanning Oppgaveforståelse og fremdrift: - Leverandørens oppgaveforståelse - Hurtig fremdrift før 1.gangs behandling"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "accessDetails": "Unknown justification",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "accessDetailsURL": "http://eu.eu-supply.com/app/rfq/rwlentrance_s.asp?PID=352052&B=VAF"
+      }
+    ],
+    "title": "Detaljregulering for Vitensenterkvartalet",
+    "description": "Oppdragsgiver, Kvinesdal kommune/kommunebygg, inviterer utvalgte firmaer til å gi pristilbud for kjøp av tjenester for reguleringsendring av områderegulering for Liknes i forbindelse med bygging av nytt Vitensenter i sentrum av Kvinesdal. Anskaffelsen består av reguleringsendring med tilhørende dokumenter jfr. Plan- og bygningsloven § 12-14, første ledd, og gjelder for området B/F/K4 og o_P24 inkl. fortausareal med tilhørende areal mellom o_Torg 1 i nord og veg i sør. Dette gjelder både vertikalnivå 1 og vertikalnivå 2.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "71000000"
+          },
+          {
+            "id": "71200000"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "71210000"
+        },
+        "deliveryLocations": [
+          {
+            "description": "Anywhere"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [],
+    "deliveryLocations": [
+      {
+        "description": "Anywhere"
+      }
+    ]
+  },
+  "date": "2023-01-31T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Kvinesdal Kommunebygg",
+      "additionalIdentifiers": [
+        {
+          "id": "984 421 370",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Vidar Iversen",
+        "telephone": "+47 48141133",
+        "email": "vidar@pilar-br.no"
+      },
+      "details": {
+        "url": "https://www.kvinesdal.kommune.no/"
+      },
+      "address": {
+        "locality": "Kvinesdal"
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint",
+        "submissionReceiptBody"
+      ]
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Pilar Byggrådgivning AS",
+      "contactPoint": {
+        "telephone": "+47 48141133",
+        "email": "vidar@pilar-br.no"
+      },
+      "details": {
+        "url": "www.pilar-br.no/"
+      },
+      "address": {
+        "locality": "FLEKKEFJORD"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
+}

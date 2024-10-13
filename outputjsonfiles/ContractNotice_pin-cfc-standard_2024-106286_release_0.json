@@ -1,0 +1,169 @@
+{
+  "id": "74f9d169-452b-4a99-b8d2-f54c3c71e163",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "47ecdf9b-4ac0-4f9c-b595-35eec0cea710",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "variantPolicy": "Unknown",
+          "advancedElectronicSignatureRequired": false,
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "ANLEGG FOR GJENVINNING AV OVERSKUDDSMASSER - Bodø kommune - Konkurranse med forhandling",
+        "identifiers": {
+          "id": "2024/2786",
+          "scheme": "internal"
+        },
+        "mainProcurementCategory": "works",
+        "description": "Bodø kommune har høye ambisjoner for å redusere klimagassutslipp og skape en mer sirkulær økonomi. Som ledd i dette ønsker man å opprette et permanent anlegg for gjenvinning av overskuddsmasser fra bygge- og anleggsaktiviteter.",
+        "value": {
+          "amount": 12000000.0,
+          "currency": "NOK"
+        },
+        "contractPeriod": {
+          "durationInDays": 360
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "forReduction": true
+            }
+          ]
+        },
+        "secondStage": {
+          "minimumCandidates": 1,
+          "maximumCandidates": 3,
+          "successiveReduction": true
+        },
+        "awardCriteria": {
+          "weightingDescription": "Se konkurransegrunnlag"
+        },
+        "tenderPeriod": {
+          "endDate": "2024-05-07T00:00:00+02:00"
+        },
+        "otherRequirements": {
+          "reservedparticipation": [
+            "shelteredWorkshop"
+          ]
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "228391909",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/228391909.aspx",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "Prekvalifisering - ANLEGG FOR GJENVINNING AV OVERSKUDDSMASSER - Bodø kommune - Konkurranse med forhandling",
+    "mainProcurementCategory": "works",
+    "description": "Bodø kommune har høye ambisjoner for å redusere klimagassutslipp og skape en mer sirkulær økonomi. Som ledd i dette ønsker man å opprette et permanent anlegg for gjenvinning av overskuddsmasser fra bygge- og anleggsaktiviteter.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "43320000"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "45000000"
+        },
+        "deliveryAddresses": [
+          {
+            "country": "NO"
+          }
+        ]
+      }
+    ],
+    "value": {
+      "amount": 12000000.0,
+      "currency": "NOK"
+    },
+    "deliveryAddresses": [
+      {
+        "region": "NO071"
+      },
+      {
+        "region": "NO071"
+      },
+      {
+        "country": "NO"
+      }
+    ],
+    "procurementMethodDetails": "Bodø kommune deponerer i gjennomsnitt ca. 80 000 tonn gravemasser i året, som utgjør ca. 1/3 av alle deponerte masser i Bodø kommune. Det forventes at gjenbrukspotensialet er høyt spesielt for lett forurensede masser, som ofte er overskudd etter arbeid rundt eksisterende infrastruktur.Kommunen ønsker at anlegget skal utformes, opprettes og driftes av en næringsaktør med den nødvendige kompetansen på feltet. Bodø kommune har søkt støtte til å dekke investeringer i maskineri og utstyr. Se Vedlegg 2 – Søknad om midler til massehåndteringsanlegg for mer informasjon om finansiering.Anlegget skal kunne ta imot gjenbrukbare masser, både fra kommunens egen virksomhet og fra andre utbyggere og entreprenører. Masser som ankommer anlegget skal kunne mellomlagres og videreforedles (sortering, sikting, knusing mm) til salgbare fraksjoner. Det er ønskelig at anlegget kan levere et utvalg fraksjoner, og at tilbudet videreutvikles i samråd med Bodø kommune over tid.Anlegget trenger ikke å kunne ta imot avfallsmasser uten gjenbrukspotensiale. Avfall fra anlegget, inkludert utsorterte masser uten gjenbrukspotensiale, må leveres til lovlig deponi. Leverandørens plan for videreutvikling av tilbudet vil bli vektlagt i evalueringsfasen.Bodø kommune vil inngå en intensjonsavtale om levering og kjøp av masser, men anlegget skal også kunne motta fra, og selge til, andre aktører uten forskjellsbehandling. Det forventes at leverandøren deltar på samlinger, opplæring, møter og andre arrangementer med formål å utvide kundegrunnlaget.For ytterligere informasjon om anskaffelsens omfang og innhold vises det til Vedlegg 1 - Oppgavebeskrivelse [EK1] [EK2] og Vedlegg 2 – Søknad om midler til massehåndteringsanlegg.[EK1]Prøver å skrive dette inn i tekst, så slipper vi vedlegg.[EK2]Lager et vedlegg i tillegg - klipp og lim fra over."
+  },
+  "date": "2024-04-29T06:15:19+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Bodø Kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "972418013",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Truls Eirik Moan",
+        "telephone": "+47 75555000",
+        "email": "truls.eirik.moan@bodo.kommune.no"
+      },
+      "details": {
+        "url": "http://www.bodo.kommune.no"
+      },
+      "address": {
+        "locality": "BODØ"
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint",
+        "reviewContactPoint"
+      ]
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Salten og Lofoten tingrett",
+      "additionalIdentifiers": [
+        {
+          "id": " 826 723 122",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "75434900",
+        "email": "tsolpost@domstol.no"
+      },
+      "address": {
+        "locality": "Bodø"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
+}

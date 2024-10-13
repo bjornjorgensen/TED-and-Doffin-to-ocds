@@ -1,0 +1,225 @@
+{
+  "id": "65ffd92d-8eee-4787-a7fe-925106611edc",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "49a72de8-e68a-4590-9add-10c08638c1e4",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "title": "Drift av kantine på Leikanger",
+        "identifiers": {
+          "id": "VLFK/24/110",
+          "scheme": "internal"
+        },
+        "mainProcurementCategory": "services",
+        "description": "Anskaffinga gjeld drift av kantine for Vestland fylkeskommune med levering av kantinetenester i oppdragsgjevar sine renoverte lokale i Askedalen 2, 6863 Leikanger. \n\nAvtalen gjeld for 3 år rekna frå ikraftsetjing, med opsjon for oppdragsgjevar til å forlenge avtalen i inntil ytterlegare 3 år, 1 år om gangen.",
+        "value": {
+          "amount": 10800000.0,
+          "currency": "NOK"
+        },
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "hasElectronicAuction": false
+        }
+      }
+    ],
+    "title": "Drift av kantine på Leikanger",
+    "mainProcurementCategory": "services",
+    "description": "Anskaffinga gjeld drift av kantine for Vestland fylkeskommune med levering av kantinetenester i oppdragsgjevar sine renoverte lokale i Askedalen 2, 6863 Leikanger. \n\nAvtalen gjeld for 3 år rekna frå ikraftsetjing, med opsjon for oppdragsgjevar til å forlenge avtalen i inntil ytterlegare 3 år, 1 år om gangen.",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "55512000"
+        },
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "streetAddress": "Askedalen 2",
+            "locality": "Leikanger"
+          },
+          {
+            "postalCode": "6863"
+          },
+          {
+            "country": "NO"
+          }
+        ]
+      }
+    ],
+    "value": {
+      "amount": 10800000.0,
+      "currency": "NOK"
+    },
+    "deliveryAddresses": [
+      {
+        "region": "NO0A2"
+      },
+      {
+        "region": "NO0A2"
+      },
+      {
+        "streetAddress": "Askedalen 2"
+      },
+      {
+        "postalCode": "6863"
+      },
+      {
+        "locality": "Leikanger"
+      },
+      {
+        "country": "NO"
+      }
+    ],
+    "procurementMethodDetails": "Anskaffinga skal gjennomførast etter del I og del II i forskrifta (særlege tenester over EØS-terskelverdi). Avtaletildeling vil bli gjennomført etter prosedyren open tilbodskonkurranse, jf. FOA § 8-3."
+  },
+  "date": "2024-08-05T13:02:01+00:00",
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0002",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0004"
+          }
+        ]
+      }
+    ]
+  },
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Vestland fylkeskommune - Innkjøpsseksjonen",
+      "additionalIdentifiers": [
+        {
+          "id": "821311632",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Synne Nes Veum",
+        "telephone": "+47 05557",
+        "email": "synne.nes.veum@vlfk.no"
+      },
+      "address": {
+        "locality": "BERGEN"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Hordaland tingrett",
+      "additionalIdentifiers": [
+        {
+          "id": "926 723 367",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "55 69 97 00",
+        "email": "hordaland.tingrett@domstol.no"
+      },
+      "details": {
+        "url": "https://www.domstol.no/no/domstoler/tingrett/hordaland-tingrett/"
+      },
+      "address": {
+        "locality": "Bergen"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Iss Facility Services AS - Salg",
+      "additionalIdentifiers": [
+        {
+          "id": "914791723",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Line Ulveseth",
+        "telephone": "+4781555155",
+        "email": "line.ulveseth@no.issworld.com"
+      },
+      "address": {
+        "locality": "Oslo"
+      },
+      "roles": [
+        "tenderer"
+      ]
+    },
+    {
+      "id": "ORG-0004",
+      "name": "Toma AS - Salg og Marked",
+      "additionalIdentifiers": [
+        {
+          "id": "984684037",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Øyvind Blindheim",
+        "telephone": "55 59 87 00",
+        "email": "oyvind.blindheim@toma.no"
+      },
+      "address": {
+        "locality": "Godvik"
+      },
+      "roles": [
+        "tenderer"
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "id": "CON-0001",
+      "buyers": [
+        {
+          "id": "ORG-0001"
+        }
+      ],
+      "relatedBids": [
+        "TEN-0001",
+        "TEN-0002"
+      ]
+    },
+    {
+      "id": "RES-0001"
+    }
+  ],
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "awardID": "RES-0001"
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
+}

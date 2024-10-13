@@ -120,8 +120,8 @@
         "locality": "KONGSVINGER"
       },
       "roles": [
-        "buyer",
         "leadBuyer",
+        "buyer",
         "processContactPoint"
       ]
     },

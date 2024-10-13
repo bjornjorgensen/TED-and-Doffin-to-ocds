@@ -1,0 +1,180 @@
+{
+  "id": "26cd2bbe-3527-43ab-ae19-ecb644fff706",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "communication": {
+      "futurenoticeDate": "2024-04-01T00:00:00+02:00"
+    },
+    "title": "VOIS - Invitasjon til markedsdialog - Diverse forbruksvarer",
+    "mainProcurementCategory": "goods",
+    "description": "Se vedlagte invitasjon til markedsdialog for nærmere informasjon.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "18424000"
+          },
+          {
+            "id": "18937100"
+          },
+          {
+            "id": "33760000"
+          },
+          {
+            "id": "39221130"
+          },
+          {
+            "id": "39222110"
+          },
+          {
+            "id": "39222120"
+          },
+          {
+            "id": "39224300"
+          },
+          {
+            "id": "39800000"
+          },
+          {
+            "id": "39830000"
+          },
+          {
+            "id": "39831240"
+          }
+        ],
+        "classification": {
+          "scheme": "CPV",
+          "id": "39831200"
+        }
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "region": "NO091"
+      },
+      {
+        "region": "NO091"
+      },
+      {
+        "country": "NO"
+      }
+    ],
+    "documents": [
+      {
+        "id": "219115887"
+      }
+    ]
+  },
+  "date": "2023-12-20T12:38:39+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "VOIS - Vestfold Offentlige Innkjøpssamarbeid",
+      "additionalIdentifiers": [
+        {
+          "id": "916882807",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Sandefjord kommune",
+        "telephone": "+4792690206",
+        "email": "Pia.charlotte.berg@gmail.com"
+      },
+      "address": {
+        "locality": "Sandefjord"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Vestfold tingrett - Tønsberg",
+      "additionalIdentifiers": [
+        {
+          "id": "926723618",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "33 20 67 00",
+        "email": "vestfold.tingrett@domstol.no"
+      },
+      "address": {
+        "locality": "Tønsberg"
+      }
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
+}

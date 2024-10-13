@@ -1,0 +1,196 @@
+{
+  "id": "7b469b6b-4abb-4f22-abe1-50973de8c825",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "4f3017e0-59e5-479f-bc87-2018757d9715",
+    "lots": [
+      {
+        "id": "LOT-0001",
+        "communication": {
+          "atypicalToolUrl": "https://posten-supplier.ivalua.app/"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Operation of Post in Store and Posten parcel delivery - 2025",
+        "identifiers": {
+          "id": "BPM000217",
+          "scheme": "internal"
+        },
+        "mainProcurementCategory": "services",
+        "description": "Refering to section 2 in the notice. ",
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "forReduction": true
+            },
+            {
+              "type": "suitability"
+            },
+            {
+              "type": "economic"
+            },
+            {
+              "type": "technical"
+            },
+            {
+              "title": "Please see qualification requirement at https://posten-supplier.ivalua.app/"
+            }
+          ]
+        },
+        "tenderPeriod": {
+          "endDate": "2024-04-26T12:00:00+02:00"
+        },
+        "contractTerms": {
+          "electronicInvoicingPolicy": "required",
+          "hasElectronicOrdering": false,
+          "hasElectronicPayment": false
+        },
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "hasFrameworkAgreement": true,
+          "frameworkAgreement": {
+            "method": "withoutReopeningCompetition"
+          },
+          "hasElectronicAuction": false
+        },
+        "otherRequirements": {
+          "requiresStaffNamesAndQualifications": false
+        }
+      }
+    ],
+    "documents": [
+      {
+        "id": "Doc1",
+        "documentType": "biddingDocuments",
+        "url": "https://posten-supplier.ivalua.app/",
+        "relatedLots": [
+          "LOT-0001"
+        ]
+      }
+    ],
+    "title": "Operation of Post in Store and Posten parcel delivery - 2025",
+    "mainProcurementCategory": "services",
+    "description": "Posten Bring AS’s intention with this procurement is to find partners for the operation of Post in Store and Posten parcel delivery",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "64110000"
+        },
+        "relatedLot": "LOT-0001"
+      }
+    ]
+  },
+  "date": "2024-04-05T14:58:54+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Posten Bring AS",
+      "additionalIdentifiers": [
+        {
+          "id": "984 661 185",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Per Arne Brustad",
+        "telephone": "+4795120244",
+        "email": "per.brustad@posten.no"
+      },
+      "details": {
+        "url": "https://www.postenbring.no/"
+      },
+      "address": {
+        "locality": "Oslo"
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ]
+    },
+    {
+      "id": "ORG-0004",
+      "name": "Posten Bring AS",
+      "additionalIdentifiers": [
+        {
+          "id": "984 661 185",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "95120244",
+        "email": "per.arne.brustad@posten.no"
+      },
+      "details": {
+        "url": "https://www.postenbring.no/"
+      },
+      "address": {
+        "locality": "Oslo"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    },
+    {
+      "id": "ORG-0005",
+      "name": "Oslo Tingrett",
+      "additionalIdentifiers": [
+        {
+          "id": "926 725 939",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "+4722035200",
+        "email": "oslo.tingrett@domstol.no"
+      },
+      "details": {
+        "url": "https://www.domstol.no/no/domstoler/tingrett/oslo-tingrett/"
+      },
+      "address": {
+        "locality": "Oslo"
+      },
+      "roles": [
+        "mediationBody"
+      ]
+    },
+    {
+      "id": "ORG-0006",
+      "name": "Posten Bring AS",
+      "additionalIdentifiers": [
+        {
+          "id": "984 661 185",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "95120244",
+        "email": "per.arne.brustad@posten.no"
+      },
+      "details": {
+        "url": "https://www.postenbring.no/"
+      },
+      "address": {
+        "locality": "Oslo"
+      },
+      "roles": [
+        "reviewContactPoint"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
+}

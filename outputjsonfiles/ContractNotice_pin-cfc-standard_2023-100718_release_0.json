@@ -1,0 +1,149 @@
+{
+  "id": "03223b9a-002c-45e8-be6b-9d4aad21950e",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "id": "7e315dc5-76c1-4a66-9067-fb9bc00cb234",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "coveredBy": [
+          "GPA"
+        ],
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "variantPolicy": "Unknown",
+          "advancedElectronicSignatureRequired": true,
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "ForhÃ¥ndskunngjÃ¸ring: Angio intervensjonslaboratorium, monoplan og biplan, Universitetssykehuset Nord-Norge HF",
+        "identifiers": {
+          "id": "2023/1366",
+          "scheme": "internal"
+        },
+        "mainProcurementCategory": "goods",
+        "description": "Anskaffelsens formÃ¥l er kjÃ¸p av angio intervensjonslaboratorium â€“ monoplan til RÃ¸ntgenavdelingen ved Universitetssykehuset Nord-Norge HF (UNN). Utstyret skal brukes til generell radiologi pÃ¥ alle organsystemer unntatt hjerte.Oppdragsgiveren vil invitere leverandÃ¸rer som har meldt sin interesse etter forhÃ¥ndskunngjÃ¸ringen til Ã¥ bekrefte sin interesse.",
+        "contractPeriod": {
+          "durationInDays": 3600
+        },
+        "tenderPeriod": {
+          "endDate": "2023-12-08T00:00:00+01:00"
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "216040028",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/216040028.aspx",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "ForhÃ¥ndskunngjÃ¸ring: Angio intervensjonslaboratorium, monoplan og biplan, Universitetssykehuset Nord-Norge HF",
+    "mainProcurementCategory": "goods",
+    "description": "Anskaffelsens formÃ¥l er kjÃ¸p av angio intervensjonslaboratorium â€“ monoplan til RÃ¸ntgenavdelingen ved Universitetssykehuset Nord-Norge HF (UNN). Utstyret skal brukes til generell radiologi pÃ¥ alle organsystemer unntatt hjerte.Det Ã¸nskes ogsÃ¥ tilbud pÃ¥ kjÃ¸p av angio intervensjonslaboratorium â€“ biplan. Investeringen er ikke godkjent og vi forbeholder oss retten til Ã¥ gjennomfÃ¸re kjÃ¸p dersom investeringen godkjennes i helseforetaket.Oppdragsgiveren vil invitere leverandÃ¸rer som har meldt sin interesse etter forhÃ¥ndskunngjÃ¸ringen til Ã¥ bekrefte sin interesse.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "33100000"
+          },
+          {
+            "id": "33150000"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "33111700"
+        },
+        "deliveryAddresses": [
+          {
+            "country": "NO"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "region": "NO074"
+      },
+      {
+        "region": "NO074"
+      },
+      {
+        "country": "NO"
+      }
+    ],
+    "procurementMethodDetails": "Dette er en forhÃ¥ndskunngjÃ¸ring av anskaffelse \"Angio intervensjonslaboratorium, monoplan og biplan, Universitetssykehuset Nord-Norge HF\" - konkurranse med forhandling."
+  },
+  "date": "2023-11-09T06:34:08+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "SYKEHUSINNKJÃ˜P HF",
+      "additionalIdentifiers": [
+        {
+          "id": "916879067",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Postmottak SykehusinnkjÃ¸p",
+        "telephone": "+47 78950700",
+        "email": "post@sykehusinnkjop.no"
+      },
+      "details": {
+        "url": "https://permalink.mercell.com/216040028.aspx"
+      },
+      "address": {
+        "locality": "VADSÃ˜"
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ]
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Indre og Ã˜stre Finnmark tingrett ",
+      "additionalIdentifiers": [
+        {
+          "id": "926 722 840",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "78 01 17 00",
+        "email": "indre.og.ostre.finnmark.tingrett@domstol.no"
+      },
+      "address": {
+        "locality": "VadsÃ¸"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
+}

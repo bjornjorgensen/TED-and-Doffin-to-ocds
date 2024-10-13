@@ -1,0 +1,88 @@
+{
+  "id": "629a037e-e8dd-4b02-a19e-e890bd114fda",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-placeholder",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "title": "Invitasjon til leverandørkonferanse",
+    "mainProcurementCategory": "services",
+    "description": "Invitasjon til leverandørkonferanse vedrørende toppsystem for adgangskontroll. Kontakt carl.henriksen@lillestrom.kommune.no for ytterligere info og ev påmelding.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "42961100"
+          },
+          {
+            "id": "48000000"
+          }
+        ],
+        "classification": {
+          "scheme": "CPV",
+          "id": "72000000"
+        }
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "streetAddress": "Engaveien"
+      },
+      {
+        "postalCode": "2000"
+      },
+      {
+        "locality": "Lillestrøm"
+      }
+    ],
+    "amendments": [
+      {
+        "rationale": "Se lenke under for kunngjøring og vedlegg. \nAnnons:\nhttps://tendsign.com/doc.aspx?MeFormsNoticeId=8014\nUnderlag:\nhttps://tendsign.com/doc.aspx?MeFormsNoticeId=8014&GoTo=Docs"
+      },
+      {
+        "rationale": "See the link below for the notice and annexes. \nAnnons:\nhttps://tendsign.com/doc.aspx?MeFormsNoticeId=8014\nSurface:\nhttps://tendsign.com/doc.aspx?MeFormsNoticeId=8014&GoTo=Docs"
+      }
+    ]
+  },
+  "date": "2024-02-13T11:32:22+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Lillestrøm Kommune - Innkjøp",
+      "additionalIdentifiers": [
+        {
+          "id": "820710592",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Innkjøp - Carl Henriksen",
+        "telephone": "+47",
+        "email": "Carl.Henriksen@lillestrom.kommune.no"
+      },
+      "details": {
+        "url": "http://Lillestrom.kommune.no/"
+      },
+      "address": {
+        "locality": "Lillestrøm"
+      },
+      "roles": [
+        "buyer"
+      ]
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
+}
