@@ -194,6 +194,21 @@
         "region": "NO060"
       },
       {
+        "region": "NO060"
+      },
+      {
+        "region": "NO060"
+      },
+      {
+        "region": "NO060"
+      },
+      {
+        "region": "NO060"
+      },
+      {
+        "region": "NO060"
+      },
+      {
         "postalCode": "7500"
       },
       {
@@ -341,9 +356,9 @@
         "locality": "Stjørdal"
       },
       "roles": [
+        "leadBuyer",
         "buyer",
-        "processContactPoint",
-        "leadBuyer"
+        "processContactPoint"
       ]
     },
     {

@@ -143,6 +143,9 @@
     ],
     "deliveryAddresses": [
       {
+        "region": "NO071"
+      },
+      {
         "region": "NO074"
       },
       {

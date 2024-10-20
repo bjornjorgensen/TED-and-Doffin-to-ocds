@@ -162,8 +162,8 @@
       "roles": [
         "payer",
         "buyer",
-        "processContactPoint",
-        "funder"
+        "funder",
+        "processContactPoint"
       ]
     },
     {

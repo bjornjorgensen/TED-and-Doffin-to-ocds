@@ -118,8 +118,8 @@
       },
       "roles": [
         "buyer",
-        "processContactPoint",
-        "submissionReceiptBody"
+        "submissionReceiptBody",
+        "processContactPoint"
       ]
     },
     {

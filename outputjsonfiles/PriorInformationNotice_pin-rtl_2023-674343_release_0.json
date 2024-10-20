@@ -125,9 +125,9 @@
         "locality": "KONGSVINGER"
       },
       "roles": [
+        "leadBuyer",
         "buyer",
-        "processContactPoint",
-        "leadBuyer"
+        "processContactPoint"
       ]
     },
     {

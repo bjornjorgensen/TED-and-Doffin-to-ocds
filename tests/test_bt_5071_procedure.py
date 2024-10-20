@@ -69,10 +69,7 @@ def test_bt_5071_procedure_multiple_locations(tmp_path, temp_output_dir):
         </cac:ProcurementProject>
     </root>
     """
-    xml_file = (
-        tmp_path
-        / "test_input_place_performance_country_subdivision_procedure_multiple.xml"
-    )
+    xml_file = tmp_path / "test_input_place_performance_country_subdivision_procedure_multiple.xml"
     xml_file.write_text(xml_content)
 
     result = run_main_and_get_result(xml_file, temp_output_dir)

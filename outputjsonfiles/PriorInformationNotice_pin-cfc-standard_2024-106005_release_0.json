@@ -138,6 +138,9 @@
     },
     "deliveryAddresses": [
       {
+        "region": "NO081"
+      },
+      {
         "country": "NO"
       },
       {
