@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0025"
     },
+    "status": "active",
     "id": "2022-352534",
     "lots": [
       {
@@ -79,6 +80,9 @@
       }
     ]
   },
+  "tag": [
+    "tender"
+  ],
   "date": "2022-07-12T12:00:00+02:00",
   "parties": [
     {
@@ -102,8 +106,8 @@
       },
       "roles": [
         "buyer",
-        "processContactPoint",
-        "submissionReceiptBody"
+        "submissionReceiptBody",
+        "processContactPoint"
       ]
     },
     {

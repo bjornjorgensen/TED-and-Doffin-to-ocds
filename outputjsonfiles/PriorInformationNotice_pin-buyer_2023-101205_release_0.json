@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0024"
     },
+    "status": "planned",
     "title": "System for Utvikling og Gjennomføring av Elektroniske Prøver",
     "mainProcurementCategory": "services",
     "description": "Forsvarsmateriell ønsker å identifisere mulige løsninger som leverandører kan tilby innen adaptive elektroniske prøver.I forbindelse med overgang til nye adaptive prøver, vurderes det å anskaffe et nytt system for utvikling og gjennomføring av elektroniske prøver. Systemet må håndtere både adaptive og tradisjonelle prøver, og det må håndtere prøvetaking både i klasserom og hjemmefra. Systemet bør understøtte administrasjon av eksisterende prøver og oppsett av nye prøver via løsningen, og da fortrinnsvis slik at dette kan gjøres uten spesiell IT-kompetanse.Interesserte oppfordres til å ta kontakt i kommunikasjonsfeltet i Mercell for et mer utfyllende dokument som inneholder selve spørsmålene knyttet til markedsundersøkelsen. Fristen for å svare på markedsundersøkelsen er 15. desember 2023.",
@@ -86,6 +87,9 @@
       }
     ]
   },
+  "tag": [
+    "tender"
+  ],
   "date": "2023-11-20T08:33:50+00:00",
   "parties": [
     {

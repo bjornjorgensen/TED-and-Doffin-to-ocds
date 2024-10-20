@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0025"
     },
+    "status": "active",
     "id": "2023-620727",
     "lots": [
       {
@@ -106,6 +107,9 @@
     ],
     "procurementMethodDetails": "Se konkurransegrunnlaget Del I pkt. 9"
   },
+  "tag": [
+    "tender"
+  ],
   "date": "2023-02-14T12:00:00+02:00",
   "parties": [
     {
@@ -130,8 +134,8 @@
       },
       "roles": [
         "buyer",
-        "processContactPoint",
-        "submissionReceiptBody"
+        "submissionReceiptBody",
+        "processContactPoint"
       ]
     },
     {

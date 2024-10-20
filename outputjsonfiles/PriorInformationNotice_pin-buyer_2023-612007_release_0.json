@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32009L0081"
     },
+    "status": "planned",
     "lots": [
       {
         "id": "LOT-0000",
@@ -48,6 +49,9 @@
       }
     ]
   },
+  "tag": [
+    "tender"
+  ],
   "date": "2023-03-14T12:00:00+02:00",
   "parties": [
     {

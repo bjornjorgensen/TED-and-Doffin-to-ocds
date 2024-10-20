@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0024"
     },
+    "status": "complete",
     "id": "2023-684186",
     "lots": [
       {
@@ -85,6 +86,10 @@
       }
     ]
   },
+  "tag": [
+    "award",
+    "contract"
+  ],
   "date": "2023-11-17T12:00:00+01:00",
   "parties": [
     {

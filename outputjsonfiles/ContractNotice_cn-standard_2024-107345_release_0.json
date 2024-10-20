@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "other"
     },
+    "status": "active",
     "id": "4920fb14-6573-43d0-89b0-3027bb35e923",
     "procedure": {
       "isAccelerated": false
@@ -181,6 +182,9 @@
     ],
     "procurementMethodDetails": "Anskaffelsen blir gjennomført med bistand fra Kongsberg Prosjektservice AS. KongsbergProsjektservice AS vil bistå med gjennomføringen av konkurransen i Mercell og evalueringen."
   },
+  "tag": [
+    "tender"
+  ],
   "date": "2024-05-16T11:36:49+00:00",
   "parties": [
     {

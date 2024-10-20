@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0024"
     },
+    "status": "complete",
     "id": "022d0ef9-6338-42d9-afa4-a87709128061",
     "lots": [
       {
@@ -53,6 +54,10 @@
       }
     ]
   },
+  "tag": [
+    "award",
+    "contract"
+  ],
   "date": "2019-10-23T00:00:00+01:00",
   "bids": {
     "details": [

@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0024"
     },
+    "status": "planned",
     "lots": [
       {
         "id": "LOT-0000",
@@ -82,6 +83,9 @@
     ],
     "procurementMethodDetails": "Se vedlagte dokument for mer informasjon. Vi ber om at leverandører som ønsker at det gjøres en vurdering av byttekostnader om å melde interesse via kommunikasjonsmodulen i Mercell innen 07.12.2024, kl.15.00."
   },
+  "tag": [
+    "tender"
+  ],
   "date": "2023-11-24T12:10:54+00:00",
   "parties": [
     {

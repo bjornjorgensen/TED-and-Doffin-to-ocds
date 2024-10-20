@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0024"
     },
+    "status": "active",
     "id": "2022-919032",
     "title": "Konsulentoppdrag - evaluering av Tolletatens organisering",
     "mainProcurementCategory": "services",
@@ -21,6 +22,9 @@
       }
     ]
   },
+  "tag": [
+    "tender"
+  ],
   "date": "2022-11-18T12:00:00+02:00",
   "parties": [
     {

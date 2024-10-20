@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0024"
     },
+    "status": "planned",
     "title": "Digitale betalingsløsninger - straksbetaling",
     "mainProcurementCategory": "services",
     "description": "HSØ er i ferd med å rulle ut et større prosjekt som heter Helselogistikk-prosjekt. Dette vil bl.a. tilby pasienten å «sjekke inn» når vedkomne er på plass før konsultasjon, samt betale egenandelen i forkant.I den forbindelse ønsker vi informasjon om det i dag finnes andre aktører enn VIPPS som tilbyr straksbetalinger i form av digitale betalingsløsninger.",
@@ -44,6 +45,9 @@
       }
     ]
   },
+  "tag": [
+    "tender"
+  ],
   "date": "2023-10-30T08:37:49+00:00",
   "parties": [
     {

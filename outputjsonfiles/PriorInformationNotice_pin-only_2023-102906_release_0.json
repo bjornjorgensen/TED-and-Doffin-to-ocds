@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0024"
     },
+    "status": "planned",
     "communication": {
       "futurenoticeDate": "2024-04-01T00:00:00+02:00"
     },
@@ -131,6 +132,9 @@
       }
     ]
   },
+  "tag": [
+    "tender"
+  ],
   "date": "2023-12-20T12:38:39+00:00",
   "parties": [
     {

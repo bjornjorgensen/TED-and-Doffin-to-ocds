@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0024"
     },
+    "status": "complete",
     "id": "49a72de8-e68a-4590-9add-10c08638c1e4",
     "lots": [
       {
@@ -79,6 +80,10 @@
     ],
     "procurementMethodDetails": "Anskaffinga skal gjennomførast etter del I og del II i forskrifta (særlege tenester over EØS-terskelverdi). Avtaletildeling vil bli gjennomført etter prosedyren open tilbodskonkurranse, jf. FOA § 8-3."
   },
+  "tag": [
+    "award",
+    "contract"
+  ],
   "date": "2024-08-05T13:02:01+00:00",
   "bids": {
     "details": [
