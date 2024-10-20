@@ -1848,12 +1848,12 @@ from ted_and_doffin_to_ocds.converters.bt_711_lotresult import (
     merge_tender_value_highest,
 )
 from ted_and_doffin_to_ocds.converters.bt_712a_lotresult import (
-    parse_buyer_review_complainants,
-    merge_buyer_review_complainants,
+    parse_buyer_review_complainants_code,
+    merge_buyer_review_complainants_code,
 )
 from ted_and_doffin_to_ocds.converters.bt_712b_lotresult import (
-    parse_buyer_review_complainants_bt_712b,
-    merge_buyer_review_complainants_bt_712b,
+    parse_buyer_review_complainants_number,
+    merge_buyer_review_complainants_number,
 )
 from ted_and_doffin_to_ocds.converters.bt_717_lot import (
     parse_clean_vehicles_directive,
@@ -4539,13 +4539,13 @@ def process_bt_sections(release_json, xml_content):
             "BT-711-LotResult Tender Value Highest",
         ),
         (
-            parse_buyer_review_complainants,
-            merge_buyer_review_complainants,
+            parse_buyer_review_complainants_code,
+            merge_buyer_review_complainants_code,
             "BT-712(a)-LotResult buyer Review Complainants",
         ),
         (
-            parse_buyer_review_complainants_bt_712b,
-            merge_buyer_review_complainants_bt_712b,
+            parse_buyer_review_complainants_number,
+            merge_buyer_review_complainants_number,
             "BT-712(b)-LotResult buyer Review Complainants (Number)",
         ),
         (

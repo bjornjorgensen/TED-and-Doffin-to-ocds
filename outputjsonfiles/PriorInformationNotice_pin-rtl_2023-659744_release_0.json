@@ -74,8 +74,8 @@
         "locality": "Hamar"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     }
   ],

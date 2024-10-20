@@ -325,10 +325,10 @@
       },
       "roles": [
         "buyer",
-        "submissionReceiptBody",
         "processContactPoint",
         "reviewContactPoint",
-        "evaluationBody"
+        "evaluationBody",
+        "submissionReceiptBody"
       ]
     },
     {

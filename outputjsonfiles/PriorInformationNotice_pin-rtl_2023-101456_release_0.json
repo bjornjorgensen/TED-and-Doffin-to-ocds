@@ -109,8 +109,8 @@
         "locality": "VADSØ"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {
