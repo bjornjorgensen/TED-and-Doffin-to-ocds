@@ -322,11 +322,11 @@
         "locality": "GJØVIK"
       },
       "roles": [
+        "processContactPoint",
         "submissionReceiptBody",
-        "evaluationBody",
         "buyer",
         "reviewContactPoint",
-        "processContactPoint"
+        "evaluationBody"
       ]
     },
     {

@@ -356,9 +356,9 @@
         "locality": "Stjørdal"
       },
       "roles": [
-        "leadBuyer",
         "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "leadBuyer"
       ]
     },
     {

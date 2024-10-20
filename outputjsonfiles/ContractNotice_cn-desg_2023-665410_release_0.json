@@ -147,8 +147,8 @@
       },
       "roles": [
         "buyer",
-        "submissionReceiptBody",
-        "processContactPoint"
+        "processContactPoint",
+        "submissionReceiptBody"
       ]
     },
     {

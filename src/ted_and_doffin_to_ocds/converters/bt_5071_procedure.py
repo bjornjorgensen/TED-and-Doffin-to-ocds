@@ -5,6 +5,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+
 def parse_place_performance_country_subdivision_procedure(xml_content):
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -16,21 +17,34 @@ def parse_place_performance_country_subdivision_procedure(xml_content):
 
     result = {}
 
-    realized_locations = root.xpath("/*/cac:ProcurementProject/cac:RealizedLocation", namespaces=namespaces)
+    realized_locations = root.xpath(
+        "/*/cac:ProcurementProject/cac:RealizedLocation", namespaces=namespaces
+    )
     delivery_addresses = []
     for location in realized_locations:
-        country_subdivisions = location.xpath("cac:Address/cbc:CountrySubentityCode", namespaces=namespaces)
+        country_subdivisions = location.xpath(
+            "cac:Address/cbc:CountrySubentityCode", namespaces=namespaces
+        )
         for subdivision in country_subdivisions:
-            delivery_addresses.append({"region": subdivision.text})
+            delivery_addresses.append({"region": subdivision.text})  # noqa: PERF401
 
     if delivery_addresses:
         result["tender"] = {"deliveryAddresses": delivery_addresses}
 
     return result if result else None
 
-def merge_place_performance_country_subdivision_procedure(release_json, subdivision_data):
-    if not subdivision_data or "tender" not in subdivision_data or "deliveryAddresses" not in subdivision_data["tender"]:
-        logger.info("No place performance country subdivision data for Procedure to merge")
+
+def merge_place_performance_country_subdivision_procedure(
+    release_json, subdivision_data
+):
+    if (
+        not subdivision_data
+        or "tender" not in subdivision_data
+        or "deliveryAddresses" not in subdivision_data["tender"]
+    ):
+        logger.info(
+            "No place performance country subdivision data for Procedure to merge"
+        )
         return
 
     tender = release_json.setdefault("tender", {})
@@ -44,4 +58,7 @@ def merge_place_performance_country_subdivision_procedure(release_json, subdivis
             if new_address not in existing_addresses:
                 existing_addresses.append(new_address)
 
-    logger.info(f"Merged place performance country subdivision data for {len(new_addresses)} Procedure locations")
+    logger.info(
+        "Merged place performance country subdivision data for %s Procedure locations",
+        len(new_addresses),
+    )

@@ -254,8 +254,8 @@
         "locality": "Leknes"
       },
       "roles": [
-        "evaluationBody",
-        "buyer"
+        "buyer",
+        "evaluationBody"
       ]
     }
   ],
