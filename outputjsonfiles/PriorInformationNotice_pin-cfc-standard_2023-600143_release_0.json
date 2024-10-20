@@ -109,8 +109,8 @@
         "locality": "Tønsberg"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

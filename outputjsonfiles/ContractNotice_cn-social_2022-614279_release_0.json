@@ -74,18 +74,19 @@
         "classification": {
           "scheme": "CPV",
           "id": "85312300"
-        }
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO091"
+          }
+        ]
       }
     ],
     "value": {
       "amount": 34000000.0,
       "currency": "NOK"
     },
-    "deliveryAddresses": [
-      {
-        "region": "NO091"
-      }
-    ]
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"
@@ -112,8 +113,8 @@
         "locality": "Mo i Rana"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

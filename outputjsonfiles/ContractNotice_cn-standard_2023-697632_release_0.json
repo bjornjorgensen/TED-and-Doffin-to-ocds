@@ -97,14 +97,15 @@
         "classification": {
           "scheme": "CPV",
           "id": "45231300"
-        }
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO060"
+          }
+        ]
       }
     ],
-    "deliveryAddresses": [
-      {
-        "region": "NO060"
-      }
-    ]
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"
@@ -131,8 +132,8 @@
         "locality": "Kyrksæterøra"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     }
   ],

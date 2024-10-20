@@ -96,7 +96,12 @@
         "classification": {
           "scheme": "CPV",
           "id": "80000000"
-        }
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO0A"
+          }
+        ]
       },
       {
         "id": "2",
@@ -112,7 +117,12 @@
         "classification": {
           "scheme": "CPV",
           "id": "80000000"
-        }
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO0A"
+          }
+        ]
       }
     ],
     "value": {
@@ -122,14 +132,7 @@
     "lotDetails": {
       "maximumLotsBidPerSupplier": 2
     },
-    "deliveryAddresses": [
-      {
-        "region": "NO0A"
-      },
-      {
-        "region": "NO0A"
-      }
-    ]
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"
@@ -156,8 +159,8 @@
         "locality": "BERGEN"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

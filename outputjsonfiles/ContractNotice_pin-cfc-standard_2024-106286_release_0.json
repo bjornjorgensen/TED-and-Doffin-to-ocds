@@ -91,6 +91,9 @@
         },
         "deliveryAddresses": [
           {
+            "region": "NO071"
+          },
+          {
             "country": "NO"
           }
         ]
@@ -101,9 +104,6 @@
       "currency": "NOK"
     },
     "deliveryAddresses": [
-      {
-        "region": "NO071"
-      },
       {
         "region": "NO071"
       },
@@ -139,8 +139,8 @@
         "locality": "BODØ"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "reviewContactPoint"
       ]
     },

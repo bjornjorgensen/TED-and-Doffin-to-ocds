@@ -112,6 +112,9 @@
         "relatedLot": "LOT-0000",
         "deliveryAddresses": [
           {
+            "region": "NO091"
+          },
+          {
             "country": "NO"
           }
         ]
@@ -126,9 +129,6 @@
       }
     },
     "deliveryAddresses": [
-      {
-        "region": "NO091"
-      },
       {
         "region": "NO091"
       },

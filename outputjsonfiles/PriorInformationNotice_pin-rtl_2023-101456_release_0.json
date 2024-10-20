@@ -61,6 +61,9 @@
         "relatedLot": "LOT-0000",
         "deliveryAddresses": [
           {
+            "region": "NO074"
+          },
+          {
             "country": "NO"
           }
         ]
@@ -71,9 +74,6 @@
       "currency": "NOK"
     },
     "deliveryAddresses": [
-      {
-        "region": "NO074"
-      },
       {
         "region": "NO074"
       },
@@ -109,8 +109,8 @@
         "locality": "VADSØ"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

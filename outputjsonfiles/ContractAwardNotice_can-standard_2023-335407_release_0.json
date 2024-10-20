@@ -70,14 +70,15 @@
         "classification": {
           "scheme": "CPV",
           "id": "79410000"
-        }
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO081"
+          }
+        ]
       }
     ],
-    "deliveryAddresses": [
-      {
-        "region": "NO081"
-      }
-    ]
+    "deliveryAddresses": []
   },
   "tag": [
     "award",

@@ -1469,12 +1469,12 @@ from ted_and_doffin_to_ocds.converters.bt_5071_lot import (
     merge_place_performance_country_subdivision,
 )
 from ted_and_doffin_to_ocds.converters.bt_5071_part import (
-    parse_part_place_performance_country_subdivision,
-    merge_part_place_performance_country_subdivision,
+    parse_place_performance_country_subdivision_part,
+    merge_place_performance_country_subdivision_part,
 )
 from ted_and_doffin_to_ocds.converters.bt_5071_procedure import (
-    parse_procedure_place_performance_country_subdivision,
-    merge_procedure_place_performance_country_subdivision,
+    parse_place_performance_country_subdivision_procedure,
+    merge_place_performance_country_subdivision_procedure,
 )
 from ted_and_doffin_to_ocds.converters.bt_508_procedure_buyer import (
     parse_buyer_profile_url,
@@ -4097,13 +4097,13 @@ def process_bt_sections(release_json, xml_content):
             "BT-5071-Lot (Place Performance Country Subdivision)",
         ),
         (
-            parse_part_place_performance_country_subdivision,
-            merge_part_place_performance_country_subdivision,
+            parse_place_performance_country_subdivision_part,
+            merge_place_performance_country_subdivision_part,
             "Place Performance Country Subdivision part (BT-5071)",
         ),
         (
-            parse_procedure_place_performance_country_subdivision,
-            merge_procedure_place_performance_country_subdivision,
+            parse_place_performance_country_subdivision_procedure,
+            merge_place_performance_country_subdivision_procedure,
             "BT-5071-procedure (procedure Place Performance Country Subdivision)",
         ),
         (

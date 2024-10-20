@@ -77,18 +77,19 @@
         "classification": {
           "scheme": "CPV",
           "id": "42214000"
-        }
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO081"
+          }
+        ]
       }
     ],
     "value": {
       "amount": 4000000.0,
       "currency": "NOK"
     },
-    "deliveryAddresses": [
-      {
-        "region": "NO081"
-      }
-    ]
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"
@@ -116,8 +117,8 @@
         "locality": "Oslo"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "submissionReceiptBody"
       ]
     },

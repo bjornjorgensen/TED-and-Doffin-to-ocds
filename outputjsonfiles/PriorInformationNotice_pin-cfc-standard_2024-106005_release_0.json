@@ -113,6 +113,9 @@
         },
         "deliveryAddresses": [
           {
+            "region": "NO081"
+          },
+          {
             "country": "NO"
           }
         ],
@@ -134,9 +137,6 @@
       "currency": "NOK"
     },
     "deliveryAddresses": [
-      {
-        "region": "NO081"
-      },
       {
         "region": "NO081"
       },
@@ -182,8 +182,8 @@
         "locality": "Oslo"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

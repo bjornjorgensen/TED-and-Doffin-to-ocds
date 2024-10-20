@@ -86,18 +86,19 @@
           "scheme": "CPV",
           "id": "63510000"
         },
-        "relatedLot": "LOT-0000"
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "region": "NO020"
+          }
+        ]
       }
     ],
     "value": {
       "amount": 9700000.0,
       "currency": "NOK"
     },
-    "deliveryAddresses": [
-      {
-        "region": "NO020"
-      }
-    ]
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"
@@ -124,8 +125,8 @@
         "locality": "KONGSVINGER"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "leadBuyer"
       ]
     },

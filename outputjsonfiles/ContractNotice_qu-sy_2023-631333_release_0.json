@@ -199,14 +199,15 @@
         "classification": {
           "scheme": "CPV",
           "id": "50000000"
-        }
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO0"
+          }
+        ]
       }
     ],
-    "deliveryAddresses": [
-      {
-        "region": "NO0"
-      }
-    ]
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"
@@ -233,8 +234,8 @@
         "locality": "Arendal"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "submissionReceiptBody"
       ]
     },

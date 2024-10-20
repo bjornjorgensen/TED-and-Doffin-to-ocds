@@ -441,6 +441,9 @@
         },
         "deliveryAddresses": [
           {
+            "region": "NO082"
+          },
+          {
             "country": "NO"
           }
         ]
@@ -467,6 +470,9 @@
           "id": "85312300"
         },
         "deliveryAddresses": [
+          {
+            "region": "NO082"
+          },
           {
             "country": "NO"
           }
@@ -495,6 +501,9 @@
         },
         "deliveryAddresses": [
           {
+            "region": "NO082"
+          },
+          {
             "country": "NO"
           }
         ]
@@ -521,6 +530,9 @@
           "id": "85312300"
         },
         "deliveryAddresses": [
+          {
+            "region": "NO082"
+          },
           {
             "country": "NO"
           }
@@ -549,6 +561,9 @@
         },
         "deliveryAddresses": [
           {
+            "region": "NO082"
+          },
+          {
             "country": "NO"
           }
         ]
@@ -575,6 +590,9 @@
           "id": "85312300"
         },
         "deliveryAddresses": [
+          {
+            "region": "NO082"
+          },
           {
             "country": "NO"
           }
@@ -603,6 +621,9 @@
         },
         "deliveryAddresses": [
           {
+            "region": "NO082"
+          },
+          {
             "country": "NO"
           }
         ]
@@ -630,6 +651,9 @@
         },
         "deliveryAddresses": [
           {
+            "region": "NO082"
+          },
+          {
             "country": "NO"
           }
         ]
@@ -643,30 +667,6 @@
       "maximumLotsBidPerSupplier": 7
     },
     "deliveryAddresses": [
-      {
-        "region": "NO082"
-      },
-      {
-        "region": "NO082"
-      },
-      {
-        "region": "NO082"
-      },
-      {
-        "region": "NO082"
-      },
-      {
-        "region": "NO082"
-      },
-      {
-        "region": "NO082"
-      },
-      {
-        "region": "NO082"
-      },
-      {
-        "region": "NO082"
-      },
       {
         "country": "NO"
       }

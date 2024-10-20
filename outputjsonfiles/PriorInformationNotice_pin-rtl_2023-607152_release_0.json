@@ -104,17 +104,18 @@
         "classification": {
           "scheme": "CPV",
           "id": "73000000"
-        }
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO060"
+          },
+          {
+            "region": "NO06"
+          }
+        ]
       }
     ],
-    "deliveryAddresses": [
-      {
-        "region": "NO060"
-      },
-      {
-        "region": "NO06"
-      }
-    ]
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"
@@ -142,8 +143,8 @@
         "locality": "TRONDHEIM"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     }
   ],

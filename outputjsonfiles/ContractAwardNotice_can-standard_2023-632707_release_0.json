@@ -63,15 +63,13 @@
         },
         "deliveryAddresses": [
           {
+            "region": "NO071",
             "streetAddress": "Narvik, Aspheim bru (kommunal vei 54071) og Reinsvoll bru (kommunal vei 54069) i Ballangen. Begge bruer krysser Kiselva, og området rundt bruene eies av Narvik kommune."
           }
         ]
       }
     ],
     "deliveryAddresses": [
-      {
-        "region": "NO071"
-      },
       {
         "streetAddress": "Narvik, Aspheim bru (kommunal vei 54071) og Reinsvoll bru (kommunal vei 54069) i Ballangen. Begge bruer krysser Kiselva, og området rundt bruene eies av Narvik kommune."
       }

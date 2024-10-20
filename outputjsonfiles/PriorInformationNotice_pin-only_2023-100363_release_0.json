@@ -69,6 +69,7 @@
         },
         "deliveryAddresses": [
           {
+            "region": "NO081",
             "streetAddress": "Akersgata 64",
             "locality": "Oslo"
           },
@@ -87,9 +88,6 @@
       }
     ],
     "deliveryAddresses": [
-      {
-        "region": "NO081"
-      },
       {
         "region": "NO081"
       },

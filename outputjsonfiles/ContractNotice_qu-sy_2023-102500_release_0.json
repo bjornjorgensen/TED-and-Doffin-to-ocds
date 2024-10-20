@@ -130,18 +130,18 @@
         },
         "deliveryAddresses": [
           {
+            "region": "NO071"
+          },
+          {
+            "region": "NO074"
+          },
+          {
             "country": "NO"
           }
         ]
       }
     ],
     "deliveryAddresses": [
-      {
-        "region": "NO071"
-      },
-      {
-        "region": "NO074"
-      },
       {
         "region": "NO071"
       },
@@ -239,8 +239,8 @@
         "locality": "Svolvær"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     }
   ],
