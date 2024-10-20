@@ -91,8 +91,8 @@
         "documentType": "biddingDocuments",
         "url": "https://permalink.mercell.com/208131817.aspx",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ]
       }
     ],
@@ -186,8 +186,8 @@
         "locality": "Stravanger"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

@@ -148,8 +148,8 @@
         "locality": "TØNSBERG"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

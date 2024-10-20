@@ -146,9 +146,9 @@
         "locality": "Larvik"
       },
       "roles": [
+        "processContactPoint",
         "buyer",
-        "submissionReceiptBody",
-        "processContactPoint"
+        "submissionReceiptBody"
       ]
     },
     {

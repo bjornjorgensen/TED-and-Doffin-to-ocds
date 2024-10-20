@@ -135,8 +135,8 @@
         "locality": "Ålesund"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

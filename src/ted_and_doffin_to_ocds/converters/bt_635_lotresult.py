@@ -1,14 +1,14 @@
 # converters/bt_635_lotresult.py
 
-import logging
 from lxml import etree
+import logging
 
 logger = logging.getLogger(__name__)
 
 
 def parse_buyer_review_requests_count(xml_content):
     """
-    Parse the XML content to extract the number of buyer review requests for each lot.
+    Parse the XML content to extract the buyer review requests count for each lot.
 
     Args:
         xml_content (str): The XML content to parse.
@@ -30,7 +30,7 @@ def parse_buyer_review_requests_count(xml_content):
     }
 
     # Check if the relevant XPath exists
-    relevant_xpath = "//efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efbc:StatisticsNumeric"
+    relevant_xpath = "//efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']"
     if not root.xpath(relevant_xpath, namespaces=namespaces):
         logger.info(
             "No buyer review requests count data found. Skipping parse_buyer_review_requests_count."
@@ -38,62 +38,59 @@ def parse_buyer_review_requests_count(xml_content):
         return None
 
     result = {"statistics": []}
-    statistic_id = 1
 
     lot_results = root.xpath(
         "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
     )
     for lot_result in lot_results:
-        lot_id = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces
-        )
+        lot_id = lot_result.xpath("efac:TenderLot/cbc:ID/text()", namespaces=namespaces)
         if not lot_id:
             continue
 
-        statistics_numeric = lot_result.xpath(
+        appeal_requests = lot_result.xpath(
             "efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efbc:StatisticsNumeric/text()",
             namespaces=namespaces,
         )
-        if statistics_numeric:
+        if appeal_requests:
             statistic = {
-                "id": str(statistic_id),
-                "value": int(statistics_numeric[0]),
+                "id": str(len(result["statistics"]) + 1),
+                "value": int(appeal_requests[0]),
                 "scope": "complaints",
                 "relatedLot": lot_id[0],
             }
             result["statistics"].append(statistic)
-            statistic_id += 1
 
     return result if result["statistics"] else None
 
 
-def merge_buyer_review_requests_count(release_json, buyer_review_requests_count_data):
+def merge_buyer_review_requests_count(release_json, buyer_review_requests_data):
     """
     Merge the parsed buyer review requests count data into the main OCDS release JSON.
 
     Args:
         release_json (dict): The main OCDS release JSON to be updated.
-        buyer_review_requests_count_data (dict): The parsed buyer review requests count data to be merged.
+        buyer_review_requests_data (dict): The parsed buyer review requests count data to be merged.
 
     Returns:
         None: The function updates the release_json in-place.
     """
-    if not buyer_review_requests_count_data:
+    if not buyer_review_requests_data:
         logger.info("No buyer review requests count data to merge")
         return
 
-    statistics = release_json.setdefault("statistics", [])
+    existing_statistics = release_json.setdefault("statistics", [])
 
-    for new_statistic in buyer_review_requests_count_data["statistics"]:
+    for new_statistic in buyer_review_requests_data["statistics"]:
         existing_statistic = next(
-            (stat for stat in statistics if stat["id"] == new_statistic["id"]), None
+            (stat for stat in existing_statistics if stat["id"] == new_statistic["id"]),
+            None,
         )
         if existing_statistic:
             existing_statistic.update(new_statistic)
         else:
-            statistics.append(new_statistic)
+            existing_statistics.append(new_statistic)
 
     logger.info(
         "Merged buyer review requests count data for %d lots",
-        len(buyer_review_requests_count_data["statistics"]),
+        len(buyer_review_requests_data["statistics"]),
     )

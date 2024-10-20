@@ -1,7 +1,7 @@
 # converters/bt_636_lotresult.py
 
-import logging
 from lxml import etree
+import logging
 
 logger = logging.getLogger(__name__)
 
@@ -44,7 +44,7 @@ IRREGULARITY_TYPE_MAPPING = {
 
 def parse_buyer_review_requests_irregularity_type(xml_content):
     """
-    Parse the XML content to extract the irregularity type of buyer review requests for each lot.
+    Parse the XML content to extract the buyer review requests irregularity type for each lot.
 
     Args:
         xml_content (str): The XML content to parse.
@@ -66,7 +66,7 @@ def parse_buyer_review_requests_irregularity_type(xml_content):
     }
 
     # Check if the relevant XPath exists
-    relevant_xpath = "//efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efbc:StatisticsCode"
+    relevant_xpath = "//efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']"
     if not root.xpath(relevant_xpath, namespaces=namespaces):
         logger.info(
             "No buyer review requests irregularity type data found. Skipping parse_buyer_review_requests_irregularity_type."
@@ -74,15 +74,12 @@ def parse_buyer_review_requests_irregularity_type(xml_content):
         return None
 
     result = {"statistics": []}
-    statistic_id = 1
 
     lot_results = root.xpath(
         "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
     )
     for lot_result in lot_results:
-        lot_id = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces
-        )
+        lot_id = lot_result.xpath("efac:TenderLot/cbc:ID/text()", namespaces=namespaces)
         if not lot_id:
             continue
 
@@ -93,7 +90,7 @@ def parse_buyer_review_requests_irregularity_type(xml_content):
         if irregularity_type:
             code = irregularity_type[0]
             statistic = {
-                "id": str(statistic_id),
+                "id": str(len(result["statistics"]) + 1),
                 "measure": code,
                 "scope": "complaints",
                 "notes": IRREGULARITY_TYPE_MAPPING.get(
@@ -102,40 +99,38 @@ def parse_buyer_review_requests_irregularity_type(xml_content):
                 "relatedLot": lot_id[0],
             }
             result["statistics"].append(statistic)
-            statistic_id += 1
 
     return result if result["statistics"] else None
 
 
-def merge_buyer_review_requests_irregularity_type(
-    release_json, buyer_review_requests_irregularity_type_data
-):
+def merge_buyer_review_requests_irregularity_type(release_json, irregularity_type_data):
     """
     Merge the parsed buyer review requests irregularity type data into the main OCDS release JSON.
 
     Args:
         release_json (dict): The main OCDS release JSON to be updated.
-        buyer_review_requests_irregularity_type_data (dict): The parsed buyer review requests irregularity type data to be merged.
+        irregularity_type_data (dict): The parsed buyer review requests irregularity type data to be merged.
 
     Returns:
         None: The function updates the release_json in-place.
     """
-    if not buyer_review_requests_irregularity_type_data:
+    if not irregularity_type_data:
         logger.info("No buyer review requests irregularity type data to merge")
         return
 
-    statistics = release_json.setdefault("statistics", [])
+    existing_statistics = release_json.setdefault("statistics", [])
 
-    for new_statistic in buyer_review_requests_irregularity_type_data["statistics"]:
+    for new_statistic in irregularity_type_data["statistics"]:
         existing_statistic = next(
-            (stat for stat in statistics if stat["id"] == new_statistic["id"]), None
+            (stat for stat in existing_statistics if stat["id"] == new_statistic["id"]),
+            None,
         )
         if existing_statistic:
             existing_statistic.update(new_statistic)
         else:
-            statistics.append(new_statistic)
+            existing_statistics.append(new_statistic)
 
     logger.info(
         "Merged buyer review requests irregularity type data for %d lots",
-        len(buyer_review_requests_irregularity_type_data["statistics"]),
+        len(irregularity_type_data["statistics"]),
     )

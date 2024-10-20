@@ -128,8 +128,8 @@
         "locality": "Kristiansand"
       },
       "roles": [
-        "buyer",
         "processContactPoint",
+        "buyer",
         "reviewContactPoint"
       ]
     },
