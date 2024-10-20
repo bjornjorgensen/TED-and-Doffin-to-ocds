@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0024"
     },
+    "status": "complete",
     "id": "e8322133-3323-44b7-98ba-323f22fb0299",
     "lots": [
       {
@@ -51,6 +52,10 @@
     ],
     "procurementMethodDetails": "Åpen tilbudskonkurranse i henhold til forskrift om offentlige anskaffelser del IV Anskaffelser av helse- og sosialtjenester."
   },
+  "tag": [
+    "award",
+    "contract"
+  ],
   "date": "2024-03-14T13:42:52+00:00",
   "bids": {
     "details": [

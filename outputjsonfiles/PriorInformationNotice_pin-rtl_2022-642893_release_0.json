@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0024"
     },
+    "status": "planned",
     "lots": [
       {
         "id": "LOT-0000",
@@ -74,6 +75,9 @@
       }
     ]
   },
+  "tag": [
+    "tender"
+  ],
   "date": "2022-11-29T12:00:00+02:00",
   "parties": [
     {

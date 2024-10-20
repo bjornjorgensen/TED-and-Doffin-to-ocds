@@ -1,89 +1,79 @@
 # tests/test_bt_03.py
 
-from pathlib import Path
 import pytest
-import json
-import sys
-
-# Add the parent directory to sys.path to import main
-sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main
+from ted_and_doffin_to_ocds.converters.bt_03 import parse_form_type, merge_form_type
 
 
-def test_bt_03_form_type_integration(tmp_path):
-    xml_content = """
+def create_xml(list_name):
+    return f"""
     <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cbc:noticeTypeCode listName="competition">cn-standard</cbc:noticeTypeCode>
+        <cbc:NoticeTypeCode listName="{list_name}">cn-standard</cbc:NoticeTypeCode>
     </root>
     """
-    xml_file = tmp_path / "test_input_form_type.xml"
-    xml_file.write_text(xml_content)
-
-    main(str(xml_file), "ocds-test-prefix")
-
-    with Path("output.json").open() as f:
-        result = json.load(f)
-
-    assert "tag" in result, "Expected 'tag' in result"
-    assert "tender" in result, "Expected 'tender' in result"
-
-    assert "tender" in result["tag"], "Expected 'tender' in result['tag']"
-    assert (
-        result["tender"]["status"] == "active"
-    ), f"Expected tender status to be 'active', got {result['tender'].get('status')}"
 
 
-def test_bt_03_form_type_integration_multiple(tmp_path):
-    xml_content = """
-    <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cbc:noticeTypeCode listName="planning">pin-only</cbc:noticeTypeCode>
-        <cbc:noticeTypeCode listName="result">can-standard</cbc:noticeTypeCode>
-    </root>
-    """
-    xml_file = tmp_path / "test_input_form_type_multiple.xml"
-    xml_file.write_text(xml_content)
-
-    main(str(xml_file), "ocds-test-prefix")
-
-    with Path("output.json").open() as f:
-        result = json.load(f)
-
-    assert "tag" in result, "Expected 'tag' in result"
-    assert "tender" in result, "Expected 'tender' in result"
-
-    assert set(result["tag"]) == {
-        "tender",
-        "award",
-        "contract",
-    }, f"Expected tags to be ['tender', 'award', 'contract'], got {result['tag']}"
-    assert (
-        result["tender"]["status"] == "complete"
-    ), f"Expected tender status to be 'complete', got {result['tender'].get('status')}"
+@pytest.mark.parametrize(
+    ("list_name", "expected"),
+    [
+        ("planning", {"tag": ["tender"], "tender": {"status": "planned"}}),
+        ("competition", {"tag": ["tender"], "tender": {"status": "active"}}),
+        ("change", {"tag": ["tenderUpdate"]}),
+        ("result", {"tag": ["award", "contract"], "tender": {"status": "complete"}}),
+        (
+            "dir-awa-pre",
+            {"tag": ["award", "contract"], "tender": {"status": "complete"}},
+        ),
+        ("cont-modif", {"tag": ["awardUpdate", "contractUpdate"]}),
+    ],
+)
+def test_parse_form_type(list_name, expected):
+    xml_content = create_xml(list_name)
+    result = parse_form_type(xml_content)
+    assert result == expected
 
 
-def test_bt_03_form_type_integration_invalid(tmp_path):
-    xml_content = """
-    <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cbc:noticeTypeCode listName="invalid">invalid-type</cbc:noticeTypeCode>
-    </root>
-    """
-    xml_file = tmp_path / "test_input_form_type_invalid.xml"
-    xml_file.write_text(xml_content)
-
-    main(str(xml_file), "ocds-test-prefix")
-
-    with Path("output.json").open() as f:
-        result = json.load(f)
-
-    assert "tag" not in result or "tender" not in result.get(
-        "tag",
-        [],
-    ), "Expected no 'tender' tag for invalid form type"
-    assert "status" not in result.get(
-        "tender",
-        {},
-    ), "Expected no tender status for invalid form type"
+def test_parse_form_type_unknown_type():
+    xml_content = create_xml("unknown")
+    result = parse_form_type(xml_content)
+    assert result is None
 
 
-if __name__ == "__main__":
-    pytest.main()
+def test_parse_form_type_no_notice_type_code():
+    xml_content = "<root></root>"
+    result = parse_form_type(xml_content)
+    assert result is None
+
+
+@pytest.mark.parametrize(
+    ("form_type_data", "initial_release", "expected_release"),
+    [
+        (
+            {"tag": ["tender"], "tender": {"status": "active"}},
+            {},
+            {"tag": ["tender"], "tender": {"status": "active"}},
+        ),
+        (
+            {"tag": ["award", "contract"], "tender": {"status": "complete"}},
+            {"tender": {"title": "Test Tender"}},
+            {
+                "tag": ["award", "contract"],
+                "tender": {"title": "Test Tender", "status": "complete"},
+            },
+        ),
+        (
+            {"tag": ["tenderUpdate"]},
+            {"tag": ["tender"], "tender": {"status": "active"}},
+            {"tag": ["tenderUpdate"], "tender": {"status": "active"}},
+        ),
+    ],
+)
+def test_merge_form_type(form_type_data, initial_release, expected_release):
+    merge_form_type(initial_release, form_type_data)
+    assert initial_release == expected_release
+
+
+def test_merge_form_type_no_data():
+    release_json = {"tender": {"title": "Test Tender"}}
+    original_release = release_json.copy()
+    merge_form_type(release_json, None)
+    assert release_json == original_release

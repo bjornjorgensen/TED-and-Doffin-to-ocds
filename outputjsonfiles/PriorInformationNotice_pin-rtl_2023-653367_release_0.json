@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0025"
     },
+    "status": "planned",
     "lots": [
       {
         "id": "LOT-E60",
@@ -998,6 +999,9 @@
       }
     ]
   },
+  "tag": [
+    "tender"
+  ],
   "date": "2023-11-16T12:00:00+01:00",
   "parties": [
     {

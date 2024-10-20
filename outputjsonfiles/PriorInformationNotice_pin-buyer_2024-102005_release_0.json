@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0024"
     },
+    "status": "planned",
     "title": "Invitasjon til leverandørkonferanse",
     "mainProcurementCategory": "services",
     "description": "Invitasjon til leverandørkonferanse vedrørende toppsystem for adgangskontroll. Kontakt carl.henriksen@lillestrom.kommune.no for ytterligere info og ev påmelding.",
@@ -53,6 +54,9 @@
       }
     ]
   },
+  "tag": [
+    "tender"
+  ],
   "date": "2024-02-13T11:32:22+00:00",
   "parties": [
     {

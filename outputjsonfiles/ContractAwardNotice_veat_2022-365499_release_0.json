@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0024"
     },
+    "status": "complete",
     "id": "2022-365499",
     "lots": [
       {
@@ -64,6 +65,10 @@
       }
     ]
   },
+  "tag": [
+    "award",
+    "contract"
+  ],
   "date": "2022-08-04T12:00:00+02:00",
   "bids": {
     "details": [

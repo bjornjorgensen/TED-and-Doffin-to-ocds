@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0024"
     },
+    "status": "active",
     "id": "4274ab6b-e506-4505-996b-40c4a4424038",
     "lots": [
       {
@@ -244,6 +245,9 @@
     },
     "procurementMethodDetails": "Se konkurransegrunnlaget"
   },
+  "tag": [
+    "tender"
+  ],
   "date": "2023-12-20T14:02:41+00:00",
   "parties": [
     {

@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "OTHER"
     },
+    "status": "planned",
     "title": "Intensjonskunngjøring - Spillsimulering",
     "mainProcurementCategory": "services",
     "description": "Rogaland fylkeskommune har til hensikt å inngå kontrakt uten konkurranse med Attensi AS for levering av en løsning i kategorien «Læringsinnhold», med spillsimulert trening i personvern. Læringsinnholdet består av e-læring, kurs, veiledere og spillsimulert opplæring.",
@@ -45,6 +46,9 @@
       }
     ]
   },
+  "tag": [
+    "tender"
+  ],
   "date": "2022-10-28T12:00:00+02:00",
   "parties": [
     {

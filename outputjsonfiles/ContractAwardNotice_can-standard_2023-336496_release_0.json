@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "OTHER"
     },
+    "status": "complete",
     "id": "2023-336496",
     "lots": [
       {
@@ -42,6 +43,10 @@
       }
     ]
   },
+  "tag": [
+    "award",
+    "contract"
+  ],
   "date": "2023-08-18T12:00:00+02:00",
   "bids": {
     "details": [

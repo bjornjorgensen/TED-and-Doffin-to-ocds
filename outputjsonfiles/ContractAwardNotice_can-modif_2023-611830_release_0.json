@@ -37,6 +37,10 @@
       }
     ]
   },
+  "tag": [
+    "awardUpdate",
+    "contractUpdate"
+  ],
   "date": "2023-12-18T12:00:00+01:00",
   "bids": {
     "details": [

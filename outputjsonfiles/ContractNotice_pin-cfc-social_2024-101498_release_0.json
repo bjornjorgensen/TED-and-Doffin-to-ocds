@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0024"
     },
+    "status": "active",
     "id": "ca26386f-8493-4c02-a4ad-918a7ee4f26d",
     "lots": [
       {
@@ -60,6 +61,9 @@
     ],
     "procurementMethodDetails": "Alle interesserte bes sende tilbud. \n\nValg av tilbyder vil baseres på en helhetsvurdering av boligenes kvalitet, egnethet og beliggenhet. Lillestrøm kommune forbeholder seg rett til å gå i forhandling og avtale med flere tilbydere.\n\nDet tas forbehold om politisk godkjennelse før eventuell kontrakt kan inngås. "
   },
+  "tag": [
+    "tender"
+  ],
   "date": "2024-02-01T12:34:42+00:00",
   "parties": [
     {

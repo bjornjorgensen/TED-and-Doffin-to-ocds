@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0024"
     },
+    "status": "complete",
     "id": "2022-943732",
     "lots": [
       {
@@ -53,6 +54,10 @@
     ],
     "procurementMethodDetails": "Oppdragsgiver vil tildele kontrakt til tilbudet med det beste forholdet mellom pris og kvalitet. Pris 30 % Besvarelse av Vedlegg 2 Tilbudsskjema Kvalitet 70 % Besvarelse av Vedlegg 1 Leveranseomfang"
   },
+  "tag": [
+    "award",
+    "contract"
+  ],
   "date": "2022-09-08T12:00:00+02:00",
   "bids": {
     "details": [

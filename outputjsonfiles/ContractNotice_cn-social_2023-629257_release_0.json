@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0024"
     },
+    "status": "active",
     "id": "2023-629257",
     "lots": [
       {
@@ -90,8 +91,8 @@
         "documentType": "biddingDocuments",
         "url": "https://permalink.mercell.com/208131817.aspx",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ]
       }
     ],
@@ -160,6 +161,9 @@
       }
     ]
   },
+  "tag": [
+    "tender"
+  ],
   "date": "2023-07-07T12:00:00+02:00",
   "parties": [
     {

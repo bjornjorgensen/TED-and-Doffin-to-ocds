@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0024"
     },
+    "status": "active",
     "id": "a218f904-72a6-4f86-ab3c-622aa4f5eb23",
     "lots": [
       {
@@ -155,6 +156,9 @@
       }
     ]
   },
+  "tag": [
+    "tender"
+  ],
   "date": "2024-04-24T08:37:10+00:00",
   "parties": [
     {

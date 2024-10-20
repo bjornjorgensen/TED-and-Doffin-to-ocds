@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0024"
     },
+    "status": "active",
     "id": "2023-651678",
     "lots": [
       {
@@ -93,6 +94,9 @@
       }
     ]
   },
+  "tag": [
+    "tender"
+  ],
   "date": "2023-01-31T12:00:00+02:00",
   "parties": [
     {
@@ -117,8 +121,8 @@
       },
       "roles": [
         "buyer",
-        "processContactPoint",
-        "submissionReceiptBody"
+        "submissionReceiptBody",
+        "processContactPoint"
       ]
     },
     {

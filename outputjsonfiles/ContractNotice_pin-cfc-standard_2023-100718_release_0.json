@@ -7,6 +7,7 @@
       "scheme": "CELEX",
       "id": "32014L0024"
     },
+    "status": "active",
     "id": "7e315dc5-76c1-4a66-9067-fb9bc00cb234",
     "lots": [
       {
@@ -93,6 +94,9 @@
     ],
     "procurementMethodDetails": "Dette er en forhÃ¥ndskunngjÃ¸ring av anskaffelse \"Angio intervensjonslaboratorium, monoplan og biplan, Universitetssykehuset Nord-Norge HF\" - konkurranse med forhandling."
   },
+  "tag": [
+    "tender"
+  ],
   "date": "2023-11-09T06:34:08+00:00",
   "parties": [
     {
