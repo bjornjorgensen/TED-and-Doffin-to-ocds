@@ -34,7 +34,7 @@ def parse_form_type(xml_content):
     list_name = notice_type_code[0].get("listName")
 
     if list_name not in form_type_mapping:
-        logger.warning(f"Unknown form type: {list_name}")
+        logger.warning("Unknown form type: %s", list_name)
         return None
 
     mapping = form_type_mapping[list_name]
@@ -57,4 +57,4 @@ def merge_form_type(release_json, form_type_data):
     if "tender" in form_type_data:
         release_json.setdefault("tender", {}).update(form_type_data["tender"])
 
-    logger.info(f"Merged form type data: {form_type_data}")
+    logger.info("Merged form type data: %s", str(form_type_data))
