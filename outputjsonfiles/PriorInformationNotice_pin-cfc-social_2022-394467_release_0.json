@@ -118,8 +118,8 @@
         "locality": "Hamar"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "submissionReceiptBody"
       ]
     },

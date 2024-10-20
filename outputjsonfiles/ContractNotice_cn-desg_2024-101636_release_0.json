@@ -172,6 +172,7 @@
         },
         "deliveryAddresses": [
           {
+            "region": "NO020",
             "locality": "Gjøvik"
           },
           {
@@ -181,9 +182,6 @@
       }
     ],
     "deliveryAddresses": [
-      {
-        "region": "NO020"
-      },
       {
         "region": "NO020"
       },
@@ -324,9 +322,9 @@
         "locality": "GJØVIK"
       },
       "roles": [
-        "buyer",
         "processContactPoint",
         "reviewContactPoint",
+        "buyer",
         "evaluationBody",
         "submissionReceiptBody"
       ]

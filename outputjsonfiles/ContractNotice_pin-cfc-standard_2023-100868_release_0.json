@@ -64,6 +64,7 @@
         "relatedLot": "LOT-0000",
         "deliveryAddresses": [
           {
+            "region": "NO092",
             "streetAddress": "v. 401 Høvågveien x fv. 494 Dvergnesnesveien"
           },
           {
@@ -85,9 +86,6 @@
       "currency": "NOK"
     },
     "deliveryAddresses": [
-      {
-        "region": "NO092"
-      },
       {
         "region": "NO092"
       },
@@ -128,8 +126,8 @@
         "locality": "Kristiansand"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "reviewContactPoint"
       ]
     },

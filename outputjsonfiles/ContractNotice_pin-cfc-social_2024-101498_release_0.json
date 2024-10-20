@@ -43,15 +43,13 @@
         "relatedLot": "LOT-0000",
         "deliveryAddresses": [
           {
+            "region": "NO082",
             "locality": "Lillestrøm"
           }
         ]
       }
     ],
     "deliveryAddresses": [
-      {
-        "region": "NO082"
-      },
       {
         "region": "NO082"
       },

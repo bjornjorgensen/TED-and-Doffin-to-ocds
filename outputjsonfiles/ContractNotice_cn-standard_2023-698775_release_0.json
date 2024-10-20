@@ -161,8 +161,8 @@
         "locality": "Bryne"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "submissionReceiptBody"
       ]
     },

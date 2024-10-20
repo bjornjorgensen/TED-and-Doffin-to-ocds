@@ -93,13 +93,15 @@
         "classification": {
           "scheme": "CPV",
           "id": "90512000"
-        }
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO071"
+          }
+        ]
       }
     ],
     "deliveryAddresses": [
-      {
-        "region": "NO071"
-      },
       {
         "region": "NO071"
       }
@@ -252,8 +254,8 @@
         "locality": "Leknes"
       },
       "roles": [
-        "evaluationBody",
-        "buyer"
+        "buyer",
+        "evaluationBody"
       ]
     }
   ],

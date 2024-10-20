@@ -63,17 +63,18 @@
         "classification": {
           "scheme": "CPV",
           "id": "63712400"
-        }
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO020"
+          },
+          {
+            "region": "NO02"
+          }
+        ]
       }
     ],
-    "deliveryAddresses": [
-      {
-        "region": "NO020"
-      },
-      {
-        "region": "NO02"
-      }
-    ]
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"
@@ -101,8 +102,8 @@
         "locality": "VADSØ"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

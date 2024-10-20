@@ -39,14 +39,15 @@
           "scheme": "CPV",
           "id": "45000000"
         },
-        "relatedLot": "LOT-0000"
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "region": "NO082"
+          }
+        ]
       }
     ],
-    "deliveryAddresses": [
-      {
-        "region": "NO082"
-      }
-    ]
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"
@@ -74,8 +75,8 @@
         "locality": "Hamar"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     }
   ],

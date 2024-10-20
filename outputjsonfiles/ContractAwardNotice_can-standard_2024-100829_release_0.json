@@ -72,15 +72,15 @@
         },
         "deliveryAddresses": [
           {
+            "region": "NO082"
+          },
+          {
             "country": "NO"
           }
         ]
       }
     ],
     "deliveryAddresses": [
-      {
-        "region": "NO082"
-      },
       {
         "region": "NO082"
       },
@@ -129,8 +129,8 @@
         "locality": "HØNEFOSS"
       },
       "roles": [
-        "buyer",
         "payer",
+        "buyer",
         "funder"
       ]
     },

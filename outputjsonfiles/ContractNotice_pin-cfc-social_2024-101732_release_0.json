@@ -158,8 +158,26 @@
         },
         "deliveryAddresses": [
           {
-            "postalCode": "7500",
+            "region": "NO060",
             "locality": "Stjørdal"
+          },
+          {
+            "region": "NO060"
+          },
+          {
+            "region": "NO060"
+          },
+          {
+            "region": "NO060"
+          },
+          {
+            "region": "NO060"
+          },
+          {
+            "region": "NO060"
+          },
+          {
+            "postalCode": "7500"
           },
           {
             "country": "NO"
@@ -172,39 +190,6 @@
       "currency": "NOK"
     },
     "deliveryAddresses": [
-      {
-        "region": "NO060"
-      },
-      {
-        "region": "NO060"
-      },
-      {
-        "region": "NO060"
-      },
-      {
-        "region": "NO060"
-      },
-      {
-        "region": "NO060"
-      },
-      {
-        "region": "NO060"
-      },
-      {
-        "region": "NO060"
-      },
-      {
-        "region": "NO060"
-      },
-      {
-        "region": "NO060"
-      },
-      {
-        "region": "NO060"
-      },
-      {
-        "region": "NO060"
-      },
       {
         "region": "NO060"
       },
@@ -356,8 +341,8 @@
         "locality": "Stjørdal"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "leadBuyer"
       ]
     },

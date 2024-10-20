@@ -1,4 +1,4 @@
-# converters/bt_5071_Lot.py
+# converters/bt_5071_lot.py
 
 import logging
 from lxml import etree
@@ -7,16 +7,6 @@ logger = logging.getLogger(__name__)
 
 
 def parse_place_performance_country_subdivision(xml_content):
-    """
-    Parse the XML content to extract the place performance country subdivision (NUTS3 code) for each lot.
-
-    Args:
-        xml_content (str): The XML content to parse.
-
-    Returns:
-        dict: A dictionary containing the parsed place performance country subdivision data.
-        None: If no relevant data is found.
-    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -28,42 +18,31 @@ def parse_place_performance_country_subdivision(xml_content):
     result = {"tender": {"items": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
-        namespaces=namespaces,
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
     )
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        nuts_codes = lot.xpath(
-            ".//cac:RealizedLocation/cac:Address/cbc:CountrySubentityCode[@listName='nuts=lvl3']/text()",
+        country_subdivisions = lot.xpath(
+            ".//cac:RealizedLocation/cac:Address/cbc:CountrySubentityCode",
             namespaces=namespaces,
         )
 
-        if nuts_codes:
-            item_data = {
+        if country_subdivisions:
+            item = {
                 "id": str(len(result["tender"]["items"]) + 1),
-                "deliveryAddresses": [
-                    {"region": nuts_code} for nuts_code in nuts_codes
-                ],
                 "relatedLot": lot_id,
+                "deliveryAddresses": [],
             }
-            result["tender"]["items"].append(item_data)
+            for subdivision in country_subdivisions:
+                item["deliveryAddresses"].append({"region": subdivision.text})
+            result["tender"]["items"].append(item)
 
     return result if result["tender"]["items"] else None
 
 
 def merge_place_performance_country_subdivision(release_json, subdivision_data):
-    """
-    Merge the parsed place performance country subdivision data into the main OCDS release JSON.
-
-    Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        subdivision_data (dict): The parsed place performance country subdivision data to be merged.
-
-    Returns:
-        None: The function updates the release_json in-place.
-    """
     if not subdivision_data:
-        logger.warning("No place performance country subdivision data to merge")
+        logger.info("No place performance country subdivision data to merge")
         return
 
     tender = release_json.setdefault("tender", {})
@@ -82,8 +61,7 @@ def merge_place_performance_country_subdivision(release_json, subdivision_data):
             existing_addresses = existing_item.setdefault("deliveryAddresses", [])
             for new_address in new_item["deliveryAddresses"]:
                 existing_address = next(
-                    (addr for addr in existing_addresses if "region" not in addr),
-                    None,
+                    (addr for addr in existing_addresses if "region" not in addr), None
                 )
                 if existing_address:
                     existing_address["region"] = new_address["region"]

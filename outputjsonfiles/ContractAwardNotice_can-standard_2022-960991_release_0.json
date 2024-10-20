@@ -60,14 +60,15 @@
           "scheme": "CPV",
           "id": "32571000"
         },
-        "relatedLot": "LOT-0000"
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "region": "NO081"
+          }
+        ]
       }
     ],
-    "deliveryAddresses": [
-      {
-        "region": "NO081"
-      }
-    ]
+    "deliveryAddresses": []
   },
   "tag": [
     "award",

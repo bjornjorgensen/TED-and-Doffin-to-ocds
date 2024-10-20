@@ -76,15 +76,15 @@
         },
         "deliveryAddresses": [
           {
+            "region": "NO074"
+          },
+          {
             "country": "NO"
           }
         ]
       }
     ],
     "deliveryAddresses": [
-      {
-        "region": "NO074"
-      },
       {
         "region": "NO074"
       },
@@ -120,8 +120,8 @@
         "locality": "VADSÃ˜"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

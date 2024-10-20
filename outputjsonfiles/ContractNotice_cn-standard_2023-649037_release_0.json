@@ -122,7 +122,15 @@
         "classification": {
           "scheme": "CPV",
           "id": "33100000"
-        }
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO0A1"
+          },
+          {
+            "region": "NO0A2"
+          }
+        ]
       }
     ],
     "value": {
@@ -132,14 +140,7 @@
     "lotDetails": {
       "maximumLotsBidPerSupplier": 1
     },
-    "deliveryAddresses": [
-      {
-        "region": "NO0A1"
-      },
-      {
-        "region": "NO0A2"
-      }
-    ]
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"
@@ -167,8 +168,8 @@
         "locality": "VADSØ"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

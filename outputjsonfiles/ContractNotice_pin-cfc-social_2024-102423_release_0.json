@@ -89,6 +89,7 @@
         },
         "deliveryAddresses": [
           {
+            "region": "NO0A3",
             "locality": "Ålesund"
           },
           {
@@ -98,9 +99,6 @@
       }
     ],
     "deliveryAddresses": [
-      {
-        "region": "NO0A3"
-      },
       {
         "region": "NO0A3"
       },
@@ -135,8 +133,8 @@
         "locality": "Ålesund"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

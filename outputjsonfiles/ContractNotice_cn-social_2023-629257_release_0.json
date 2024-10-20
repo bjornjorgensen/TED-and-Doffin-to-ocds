@@ -120,7 +120,12 @@
         "classification": {
           "scheme": "CPV",
           "id": "80590000"
-        }
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO0A1"
+          }
+        ]
       },
       {
         "id": "2",
@@ -142,7 +147,12 @@
         "classification": {
           "scheme": "CPV",
           "id": "80590000"
-        }
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO0A1"
+          }
+        ]
       }
     ],
     "value": {
@@ -152,14 +162,7 @@
     "lotDetails": {
       "maximumLotsBidPerSupplier": 2
     },
-    "deliveryAddresses": [
-      {
-        "region": "NO0A1"
-      },
-      {
-        "region": "NO0A1"
-      }
-    ]
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"
@@ -186,8 +189,8 @@
         "locality": "Stravanger"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

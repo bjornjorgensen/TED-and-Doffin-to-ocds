@@ -6,62 +6,60 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_procedure_place_performance_country_subdivision(xml_content):
+def parse_place_performance_country_subdivision_procedure(xml_content):
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    result = {"tender": {"deliveryAddresses": []}}
+    result = {}
 
     realized_locations = root.xpath(
-        "//cac:ProcurementProject/cac:RealizedLocation",
-        namespaces=namespaces,
+        "/*/cac:ProcurementProject/cac:RealizedLocation", namespaces=namespaces
     )
-
+    delivery_addresses = []
     for location in realized_locations:
-        country_subdivision = location.xpath(
-            "cac:Address/cbc:CountrySubentityCode/text()",
-            namespaces=namespaces,
+        country_subdivisions = location.xpath(
+            "cac:Address/cbc:CountrySubentityCode", namespaces=namespaces
         )
+        delivery_addresses = [
+            {"region": subdivision.text} for subdivision in country_subdivisions
+        ]
 
-        if country_subdivision:
-            address = {"region": country_subdivision[0]}
-            result["tender"]["deliveryAddresses"].append(address)
+    if delivery_addresses:
+        result["tender"] = {"deliveryAddresses": delivery_addresses}
 
-    return result if result["tender"]["deliveryAddresses"] else None
+    return result if result else None
 
 
-def merge_procedure_place_performance_country_subdivision(release_json, procedure_data):
-    if not procedure_data:
-        logger.warning(
-            "No procedure Place Performance Country Subdivision data to merge",
+def merge_place_performance_country_subdivision_procedure(
+    release_json, subdivision_data
+):
+    if (
+        not subdivision_data
+        or "tender" not in subdivision_data
+        or "deliveryAddresses" not in subdivision_data["tender"]
+    ):
+        logger.info(
+            "No place performance country subdivision data for Procedure to merge"
         )
         return
 
-    tender_delivery_addresses = release_json.setdefault("tender", {}).setdefault(
-        "deliveryAddresses",
-        [],
-    )
+    tender = release_json.setdefault("tender", {})
+    new_addresses = subdivision_data["tender"]["deliveryAddresses"]
 
-    for new_address in procedure_data["tender"]["deliveryAddresses"]:
-        existing_address = next(
-            (addr for addr in tender_delivery_addresses if "region" not in addr),
-            None,
-        )
-        if existing_address:
-            existing_address["region"] = new_address["region"]
-        else:
-            tender_delivery_addresses.append(new_address)
+    if "deliveryAddresses" not in tender:
+        tender["deliveryAddresses"] = new_addresses
+    else:
+        existing_addresses = tender["deliveryAddresses"]
+        for new_address in new_addresses:
+            if new_address not in existing_addresses:
+                existing_addresses.append(new_address)
 
     logger.info(
-        "Merged procedure Place Performance Country Subdivision data for %d addresses",
-        len(procedure_data["tender"]["deliveryAddresses"]),
+        "Merged place performance country subdivision data for %d Procedure locations",
+        len(new_addresses),
     )

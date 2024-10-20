@@ -77,18 +77,19 @@
         "classification": {
           "scheme": "CPV",
           "id": "85300000"
-        }
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO074"
+          }
+        ]
       }
     ],
     "value": {
       "amount": 17000000.0,
       "currency": "NOK"
     },
-    "deliveryAddresses": [
-      {
-        "region": "NO074"
-      }
-    ]
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"
@@ -115,8 +116,8 @@
         "locality": "MOEN"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

@@ -120,8 +120,8 @@
         "locality": "Kvinesdal"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "submissionReceiptBody"
       ]
     },
