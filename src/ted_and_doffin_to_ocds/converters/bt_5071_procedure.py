@@ -9,29 +9,29 @@ logger = logging.getLogger(__name__)
 def parse_place_performance_country_subdivision_procedure(xml_content):
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
+
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
     }
 
-    result = {}
-
     realized_locations = root.xpath(
         "/*/cac:ProcurementProject/cac:RealizedLocation", namespaces=namespaces
     )
-    delivery_addresses = []
-    for location in realized_locations:
-        country_subdivisions = location.xpath(
+
+    delivery_addresses = [
+        {"region": subdivision.text}
+        for location in realized_locations
+        for subdivision in location.xpath(
             "cac:Address/cbc:CountrySubentityCode", namespaces=namespaces
         )
-        for subdivision in country_subdivisions:
-            delivery_addresses.append({"region": subdivision.text})  # noqa: PERF401
+    ]
 
     if delivery_addresses:
-        result["tender"] = {"deliveryAddresses": delivery_addresses}
+        return {"tender": {"deliveryAddresses": delivery_addresses}}
 
-    return result if result else None
+    return None
 
 
 def merge_place_performance_country_subdivision_procedure(

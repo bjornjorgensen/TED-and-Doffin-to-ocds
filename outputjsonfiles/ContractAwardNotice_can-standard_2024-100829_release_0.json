@@ -129,9 +129,9 @@
         "locality": "HØNEFOSS"
       },
       "roles": [
-        "buyer",
         "funder",
-        "payer"
+        "payer",
+        "buyer"
       ]
     },
     {
