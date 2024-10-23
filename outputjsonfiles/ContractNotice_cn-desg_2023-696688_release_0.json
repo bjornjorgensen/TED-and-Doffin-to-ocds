@@ -184,8 +184,8 @@
         "locality": "Trondheim"
       },
       "roles": [
-        "buyer",
         "processContactPoint",
+        "buyer",
         "submissionReceiptBody"
       ]
     },

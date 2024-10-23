@@ -162,8 +162,8 @@
         "locality": "Bergen"
       },
       "roles": [
-        "buyer",
         "processContactPoint",
+        "buyer",
         "payer",
         "funder"
       ]

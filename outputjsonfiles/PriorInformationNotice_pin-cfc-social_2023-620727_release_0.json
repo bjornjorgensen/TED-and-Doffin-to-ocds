@@ -134,8 +134,8 @@
         "locality": "VÅGÅ"
       },
       "roles": [
-        "buyer",
         "processContactPoint",
+        "buyer",
         "submissionReceiptBody"
       ]
     },

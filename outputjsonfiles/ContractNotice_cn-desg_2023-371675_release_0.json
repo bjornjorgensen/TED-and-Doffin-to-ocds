@@ -133,8 +133,8 @@
         "locality": "OSLO"
       },
       "roles": [
-        "buyer",
         "processContactPoint",
+        "buyer",
         "submissionReceiptBody"
       ]
     },

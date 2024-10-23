@@ -119,8 +119,8 @@
         "locality": "Oslo"
       },
       "roles": [
-        "buyer",
         "processContactPoint",
+        "buyer",
         "submissionReceiptBody"
       ]
     },

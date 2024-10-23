@@ -115,8 +115,8 @@
         "locality": "Mo i Rana"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

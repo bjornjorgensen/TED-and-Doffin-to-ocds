@@ -143,8 +143,8 @@
         "locality": "TRONDHEIM"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     }
   ],
