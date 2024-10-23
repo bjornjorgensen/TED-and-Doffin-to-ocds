@@ -9,6 +9,8 @@
     },
     "status": "active",
     "id": "2023-649037",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Open procedure",
     "lots": [
       {
         "id": "LOT-1-8",
@@ -168,8 +170,8 @@
         "locality": "VADSØ"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

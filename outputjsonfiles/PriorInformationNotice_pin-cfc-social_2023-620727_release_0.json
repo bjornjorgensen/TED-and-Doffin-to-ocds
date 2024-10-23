@@ -9,6 +9,8 @@
     },
     "status": "active",
     "id": "2023-620727",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Se konkurransegrunnlaget Del I pkt. 9",
     "lots": [
       {
         "id": "LOT-0000",
@@ -104,8 +106,7 @@
       {
         "streetAddress": "Vågå"
       }
-    ],
-    "procurementMethodDetails": "Se konkurransegrunnlaget Del I pkt. 9"
+    ]
   },
   "tag": [
     "tender"
@@ -133,9 +134,9 @@
         "locality": "VÅGÅ"
       },
       "roles": [
+        "buyer",
         "processContactPoint",
-        "submissionReceiptBody",
-        "buyer"
+        "submissionReceiptBody"
       ]
     },
     {

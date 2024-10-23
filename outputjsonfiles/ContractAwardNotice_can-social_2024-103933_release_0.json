@@ -9,6 +9,7 @@
     },
     "status": "complete",
     "id": "e8322133-3323-44b7-98ba-323f22fb0299",
+    "procurementMethodDetails": "Åpen tilbudskonkurranse i henhold til forskrift om offentlige anskaffelser del IV Anskaffelser av helse- og sosialtjenester.",
     "lots": [
       {
         "id": "LOT-0000",
@@ -51,8 +52,7 @@
       {
         "region": "NO082"
       }
-    ],
-    "procurementMethodDetails": "Åpen tilbudskonkurranse i henhold til forskrift om offentlige anskaffelser del IV Anskaffelser av helse- og sosialtjenester."
+    ]
   },
   "tag": [
     "award",

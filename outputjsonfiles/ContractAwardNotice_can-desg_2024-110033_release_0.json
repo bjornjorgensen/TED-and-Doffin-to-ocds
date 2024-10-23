@@ -9,6 +9,8 @@
     },
     "status": "complete",
     "id": "0a13ce23-1022-40a1-9652-b45a78168c93",
+    "procurementMethod": "selective",
+    "procurementMethodDetails": "Restricted procedure",
     "lots": [
       {
         "id": "LOT-0000",
@@ -160,10 +162,10 @@
         "locality": "Bergen"
       },
       "roles": [
+        "buyer",
         "processContactPoint",
-        "funder",
         "payer",
-        "buyer"
+        "funder"
       ]
     },
     {

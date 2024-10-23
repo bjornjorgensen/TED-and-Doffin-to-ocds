@@ -76,8 +76,8 @@
         "locality": "Lysaker"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     }
   ],

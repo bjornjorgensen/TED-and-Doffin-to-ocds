@@ -9,6 +9,7 @@
     },
     "status": "active",
     "id": "4274ab6b-e506-4505-996b-40c4a4424038",
+    "procurementMethodDetails": "Se konkurransegrunnlaget",
     "lots": [
       {
         "id": "LOT-0000",
@@ -242,8 +243,7 @@
           "description": "Terrorist offences or offences linked to terrorist activities: Vennligst bekreft at ingen av regelverkets avvisningsgrunner er oppfylte"
         }
       ]
-    },
-    "procurementMethodDetails": "Se konkurransegrunnlaget"
+    }
   },
   "tag": [
     "tender"
@@ -289,8 +289,8 @@
         "locality": "Oslo"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

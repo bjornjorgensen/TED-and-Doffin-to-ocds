@@ -9,6 +9,8 @@
     },
     "status": "active",
     "id": "2022-614279",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Open procedure",
     "lots": [
       {
         "id": "LOT-0000",
@@ -113,8 +115,8 @@
         "locality": "Mo i Rana"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

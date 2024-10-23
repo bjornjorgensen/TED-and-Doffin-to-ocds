@@ -228,9 +228,9 @@
         "locality": "Arendal"
       },
       "roles": [
+        "buyer",
         "processContactPoint",
-        "submissionReceiptBody",
-        "buyer"
+        "submissionReceiptBody"
       ]
     },
     {

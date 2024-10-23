@@ -9,6 +9,8 @@
     },
     "status": "active",
     "id": "2023-665410",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Open procedure",
     "lots": [
       {
         "id": "LOT-0000",
@@ -146,9 +148,9 @@
         "locality": "Larvik"
       },
       "roles": [
+        "buyer",
         "processContactPoint",
-        "submissionReceiptBody",
-        "buyer"
+        "submissionReceiptBody"
       ]
     },
     {

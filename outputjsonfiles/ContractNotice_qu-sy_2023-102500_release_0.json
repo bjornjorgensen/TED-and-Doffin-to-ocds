@@ -239,8 +239,8 @@
         "locality": "Svolvær"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     }
   ],

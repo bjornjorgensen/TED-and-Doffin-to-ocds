@@ -9,6 +9,8 @@
     },
     "status": "complete",
     "id": "2022-927623",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Open procedure",
     "lots": [
       {
         "id": "LOT-0001",

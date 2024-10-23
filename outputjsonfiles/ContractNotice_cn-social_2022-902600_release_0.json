@@ -9,6 +9,8 @@
     },
     "status": "active",
     "id": "2022-902600",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Open procedure",
     "lots": [
       {
         "id": "LOT-0000",
@@ -126,9 +128,9 @@
         "locality": "Arendal"
       },
       "roles": [
+        "buyer",
         "processContactPoint",
-        "submissionReceiptBody",
-        "buyer"
+        "submissionReceiptBody"
       ]
     },
     {

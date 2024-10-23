@@ -9,6 +9,8 @@
     },
     "status": "active",
     "id": "2023-696688",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Open procedure",
     "lots": [
       {
         "id": "LOT-0000",
@@ -182,9 +184,9 @@
         "locality": "Trondheim"
       },
       "roles": [
+        "buyer",
         "processContactPoint",
-        "submissionReceiptBody",
-        "buyer"
+        "submissionReceiptBody"
       ]
     },
     {

@@ -9,6 +9,8 @@
     },
     "status": "active",
     "id": "2023-371675",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Open procedure",
     "lots": [
       {
         "id": "LOT-0000",
@@ -131,9 +133,9 @@
         "locality": "OSLO"
       },
       "roles": [
+        "buyer",
         "processContactPoint",
-        "submissionReceiptBody",
-        "buyer"
+        "submissionReceiptBody"
       ]
     },
     {

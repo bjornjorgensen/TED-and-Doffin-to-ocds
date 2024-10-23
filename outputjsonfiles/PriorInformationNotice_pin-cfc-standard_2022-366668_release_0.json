@@ -9,6 +9,8 @@
     },
     "status": "active",
     "id": "2022-366668",
+    "procurementMethod": "selective",
+    "procurementMethodDetails": "Negotiated with prior publication of a call for competition / competitive with negotiation",
     "lots": [
       {
         "id": "LOT-0000",
@@ -148,8 +150,8 @@
         "locality": "TØNSBERG"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

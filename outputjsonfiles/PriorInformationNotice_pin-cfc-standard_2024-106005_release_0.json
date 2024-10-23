@@ -9,6 +9,8 @@
     },
     "status": "active",
     "id": "a218f904-72a6-4f86-ab3c-622aa4f5eb23",
+    "procurementMethod": "selective",
+    "procurementMethodDetails": "Negotiated with prior publication of a call for competition / competitive with negotiation",
     "lots": [
       {
         "id": "LOT-0001",
@@ -182,8 +184,8 @@
         "locality": "Oslo"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

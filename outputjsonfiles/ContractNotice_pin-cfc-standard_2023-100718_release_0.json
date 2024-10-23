@@ -9,6 +9,8 @@
     },
     "status": "active",
     "id": "7e315dc5-76c1-4a66-9067-fb9bc00cb234",
+    "procurementMethod": "selective",
+    "procurementMethodDetails": "Dette er en forhÃ¥ndskunngjÃ¸ring av anskaffelse \"Angio intervensjonslaboratorium, monoplan og biplan, Universitetssykehuset Nord-Norge HF\" - konkurranse med forhandling.",
     "lots": [
       {
         "id": "LOT-0000",
@@ -91,8 +93,7 @@
       {
         "country": "NO"
       }
-    ],
-    "procurementMethodDetails": "Dette er en forhÃ¥ndskunngjÃ¸ring av anskaffelse \"Angio intervensjonslaboratorium, monoplan og biplan, Universitetssykehuset Nord-Norge HF\" - konkurranse med forhandling."
+    ]
   },
   "tag": [
     "tender"
@@ -120,8 +121,8 @@
         "locality": "VADSÃ˜"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

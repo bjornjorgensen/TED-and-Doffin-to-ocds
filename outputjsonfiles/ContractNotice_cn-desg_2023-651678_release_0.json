@@ -9,6 +9,8 @@
     },
     "status": "active",
     "id": "2023-651678",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Open procedure",
     "lots": [
       {
         "id": "LOT-0000",
@@ -120,9 +122,9 @@
         "locality": "Kvinesdal"
       },
       "roles": [
+        "buyer",
         "processContactPoint",
-        "submissionReceiptBody",
-        "buyer"
+        "submissionReceiptBody"
       ]
     },
     {

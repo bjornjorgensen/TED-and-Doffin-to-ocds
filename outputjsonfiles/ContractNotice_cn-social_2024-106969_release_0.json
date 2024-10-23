@@ -9,6 +9,7 @@
     },
     "status": "active",
     "id": "2bb0db26-e90f-43e3-b1d5-c7048369ea83",
+    "procurementMethodDetails": "Se konkurransegrunnlag.",
     "lots": [
       {
         "id": "LOT-0000",
@@ -205,8 +206,7 @@
           "description": "Terrorist offences or offences linked to terrorist activities: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitetved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?<p> Terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitet som definert i artikkel 1 og 3 i Rådets rammeavgjørelse 2002/475/RIA av 13. juni 2002 om bekjempelse av terrorisme (EFT L 164 af 22.6.2002, s. 3). Denne avvisningsgrunnen omfatter også oppfordring til, medvirkning til eller forsøk på å begå slike handlinger som omhandlet i artikkel 4 i nevnte rammeavgjørelse.</p>"
         }
       ]
-    },
-    "procurementMethodDetails": "Se konkurransegrunnlag."
+    }
   },
   "tag": [
     "tender"
@@ -254,8 +254,8 @@
         "locality": "Leknes"
       },
       "roles": [
-        "evaluationBody",
-        "buyer"
+        "buyer",
+        "evaluationBody"
       ]
     }
   ],

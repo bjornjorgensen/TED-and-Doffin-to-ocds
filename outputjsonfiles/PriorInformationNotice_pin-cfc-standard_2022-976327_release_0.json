@@ -9,6 +9,8 @@
     },
     "status": "active",
     "id": "2022-976327",
+    "procurementMethod": "selective",
+    "procurementMethodDetails": "Restricted procedure",
     "lots": [
       {
         "id": "LOT-0000",
@@ -117,9 +119,9 @@
         "locality": "Oslo"
       },
       "roles": [
+        "buyer",
         "processContactPoint",
-        "submissionReceiptBody",
-        "buyer"
+        "submissionReceiptBody"
       ]
     },
     {

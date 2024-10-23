@@ -9,6 +9,8 @@
     },
     "status": "complete",
     "id": "2023-335407",
+    "procurementMethod": "selective",
+    "procurementMethodDetails": "Restricted procedure",
     "lots": [
       {
         "id": "LOT-0000",

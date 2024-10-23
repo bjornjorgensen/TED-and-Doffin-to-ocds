@@ -189,8 +189,8 @@
         "locality": "Stravanger"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

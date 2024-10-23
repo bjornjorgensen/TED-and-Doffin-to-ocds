@@ -9,6 +9,8 @@
     },
     "status": "active",
     "id": "4920fb14-6573-43d0-89b0-3027bb35e923",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Anskaffelsen blir gjennomført med bistand fra Kongsberg Prosjektservice AS. KongsbergProsjektservice AS vil bistå med gjennomføringen av konkurransen i Mercell og evalueringen.",
     "procedure": {
       "isAccelerated": false
     },
@@ -179,8 +181,7 @@
       {
         "country": "NO"
       }
-    ],
-    "procurementMethodDetails": "Anskaffelsen blir gjennomført med bistand fra Kongsberg Prosjektservice AS. KongsbergProsjektservice AS vil bistå med gjennomføringen av konkurransen i Mercell og evalueringen."
+    ]
   },
   "tag": [
     "tender"

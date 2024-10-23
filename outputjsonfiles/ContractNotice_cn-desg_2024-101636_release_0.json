@@ -9,6 +9,8 @@
     },
     "status": "active",
     "id": "aff413b9-5d9f-42d0-ba22-aa3f7cefe0fd",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Open procedure",
     "lots": [
       {
         "id": "LOT-0000",
@@ -322,11 +324,11 @@
         "locality": "GJØVIK"
       },
       "roles": [
-        "submissionReceiptBody",
-        "buyer",
-        "evaluationBody",
         "reviewContactPoint",
-        "processContactPoint"
+        "buyer",
+        "processContactPoint",
+        "submissionReceiptBody",
+        "evaluationBody"
       ]
     },
     {

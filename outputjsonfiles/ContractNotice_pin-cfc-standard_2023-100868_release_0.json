@@ -9,6 +9,8 @@
     },
     "status": "active",
     "id": "e949532d-b8f3-4d8b-9f39-e167222d6910",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Open procedure",
     "lots": [
       {
         "id": "LOT-0000",
@@ -126,8 +128,8 @@
         "locality": "Kristiansand"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "reviewContactPoint"
       ]
     },

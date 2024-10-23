@@ -9,6 +9,8 @@
     },
     "status": "active",
     "id": "2023-600143",
+    "procurementMethod": "selective",
+    "procurementMethodDetails": "Negotiated with prior publication of a call for competition / competitive with negotiation",
     "lots": [
       {
         "id": "LOT-0000",
@@ -109,8 +111,8 @@
         "locality": "Tønsberg"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

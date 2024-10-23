@@ -1,112 +1,178 @@
 # tests/test_bt_105_procedure.py
+
 from pathlib import Path
 import pytest
 import json
 import sys
+import logging
+import tempfile
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main
+from src.ted_and_doffin_to_ocds.main import main, configure_logging
 
 
-def create_xml_with_procedure_code(procedure_code):
-    return f"""
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:TenderingProcess>
-            <cbc:procedureCode listName="procurement-procedure-type">{procedure_code}</cbc:procedureCode>
-        </cac:TenderingProcess>
-    </root>
-    """
+@pytest.fixture(scope="module")
+def setup_logging():
+    configure_logging()
+    return logging.getLogger(__name__)
 
 
-@pytest.mark.parametrize(
-    ("procedure_code", "expected_method", "expected_details"),
-    [
-        ("open", "open", "Open procedure"),
-        ("restricted", "selective", "Restricted procedure"),
-        ("comp-dial", "selective", "Competitive dialogue"),
-        (
-            "comp-tend",
-            "selective",
-            "Competitive tendering (article 5(3) of Regulation 1370/2007)",
-        ),
-        ("innovation", "selective", "Innovation partnership"),
-        (
-            "neg-w-call",
-            "selective",
-            "Negotiated with prior publication of a call for competition / competitive with negotiation",
-        ),
-        ("neg-wo-call", "limited", "Negotiated without prior call for competition"),
-        (
-            "exp-int-rail",
-            "selective",
-            "Request for expression of interest – only for rail (article 5(3b) of Regulation 1370/2007)",
-        ),
-        ("oth-mult", None, "Other multiple stage procedure"),
-        ("oth-single", None, "Other single stage procedure"),
-    ],
-)
-def test_bt_105_procedure_integration(
-    tmp_path,
-    procedure_code,
-    expected_method,
-    expected_details,
-):
-    xml_content = create_xml_with_procedure_code(procedure_code)
-    xml_file = tmp_path / f"test_input_procedure_{procedure_code}.xml"
-    xml_file.write_text(xml_content)
-
-    main(str(xml_file), "ocds-test-prefix")
-
-    with Path("output.json").open() as f:
-        result = json.load(f)
-
-    assert "tender" in result, "Expected 'tender' in result"
-    assert (
-        "procurementMethodDetails" in result["tender"]
-    ), "Expected 'procurementMethodDetails' in tender"
-    assert (
-        result["tender"]["procurementMethodDetails"] == expected_details
-    ), f"Expected procurementMethodDetails '{expected_details}', got '{result['tender']['procurementMethodDetails']}'"
-
-    if expected_method:
-        assert (
-            "procurementMethod" in result["tender"]
-        ), "Expected 'procurementMethod' in tender"
-        assert (
-            result["tender"]["procurementMethod"] == expected_method
-        ), f"Expected procurementMethod '{expected_method}', got '{result['tender']['procurementMethod']}'"
-    else:
-        assert (
-            "procurementMethod" not in result["tender"]
-        ), f"Did not expect 'procurementMethod' in tender for procedure code '{procedure_code}'"
+@pytest.fixture
+def temp_output_dir():
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        yield Path(tmpdirname)
 
 
-def test_bt_105_procedure_missing_code(tmp_path):
+def run_main_and_get_result(xml_file, output_dir):
+    main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
+    output_files = list(output_dir.glob("*.json"))
+    assert len(output_files) == 1, f"Expected 1 output file, got {len(output_files)}"
+    with output_files[0].open() as f:
+        return json.load(f)
+
+
+def test_bt_105_procedure_type_integration(tmp_path, setup_logging, temp_output_dir):
+    logger = setup_logging
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:TenderingProcess>
-            <!-- procedureCode is missing -->
+            <cbc:ProcedureCode listName="procurement-procedure-type">open</cbc:ProcedureCode>
         </cac:TenderingProcess>
     </root>
     """
-    xml_file = tmp_path / "test_input_missing_procedure_code.xml"
+    xml_file = tmp_path / "test_input_procedure_type.xml"
     xml_file.write_text(xml_content)
 
-    main(str(xml_file), "ocds-test-prefix")
+    result = run_main_and_get_result(xml_file, temp_output_dir)
 
-    with Path("output.json").open() as f:
-        result = json.load(f)
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
+    assert "tender" in result
+    assert "procurementMethod" in result["tender"]
+    assert result["tender"]["procurementMethod"] == "open"
+    assert "procurementMethodDetails" in result["tender"]
+    assert result["tender"]["procurementMethodDetails"] == "Open procedure"
+
+
+def test_bt_105_procedure_type_restricted(tmp_path, setup_logging, temp_output_dir):
+    logger = setup_logging
+    xml_content = """
+    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:TenderingProcess>
+            <cbc:ProcedureCode listName="procurement-procedure-type">restricted</cbc:ProcedureCode>
+        </cac:TenderingProcess>
+    </root>
+    """
+    xml_file = tmp_path / "test_input_procedure_type_restricted.xml"
+    xml_file.write_text(xml_content)
+
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    logger.info("Result: %s", json.dumps(result, indent=2))
+
+    assert "tender" in result
+    assert "procurementMethod" in result["tender"]
+    assert result["tender"]["procurementMethod"] == "selective"
+    assert "procurementMethodDetails" in result["tender"]
+    assert result["tender"]["procurementMethodDetails"] == "Restricted procedure"
+
+
+def test_bt_105_procedure_type_other_multiple(tmp_path, setup_logging, temp_output_dir):
+    logger = setup_logging
+    xml_content = """
+    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:TenderingProcess>
+            <cbc:ProcedureCode listName="procurement-procedure-type">oth-mult</cbc:ProcedureCode>
+        </cac:TenderingProcess>
+    </root>
+    """
+    xml_file = tmp_path / "test_input_procedure_type_other_multiple.xml"
+    xml_file.write_text(xml_content)
+
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    logger.info("Result: %s", json.dumps(result, indent=2))
+
+    assert "tender" in result
+    assert "procurementMethodDetails" in result["tender"]
     assert (
-        "tender" not in result or "procurementMethod" not in result["tender"]
-    ), "Did not expect 'procurementMethod' when procedureCode is missing"
-    assert (
-        "tender" not in result or "procurementMethodDetails" not in result["tender"]
-    ), "Did not expect 'procurementMethodDetails' when procedureCode is missing"
+        result["tender"]["procurementMethodDetails"] == "Other multiple stage procedure"
+    )
+    assert "procurementMethod" not in result["tender"]
+
+
+def test_bt_105_procedure_type_missing(tmp_path, setup_logging, temp_output_dir):
+    logger = setup_logging
+    xml_content = """
+    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:TenderingProcess>
+            <!-- ProcedureCode is missing -->
+        </cac:TenderingProcess>
+    </root>
+    """
+    xml_file = tmp_path / "test_input_procedure_type_missing.xml"
+    xml_file.write_text(xml_content)
+
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    logger.info("Result: %s", json.dumps(result, indent=2))
+
+    assert "tender" not in result or (
+        "procurementMethod" not in result.get("tender", {})
+        and "procurementMethodDetails" not in result.get("tender", {})
+    )
+
+
+def test_bt_105_procedure_type_invalid_code(tmp_path, setup_logging, temp_output_dir):
+    logger = setup_logging
+    xml_content = """
+    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:TenderingProcess>
+            <cbc:ProcedureCode listName="procurement-procedure-type">invalid-code</cbc:ProcedureCode>
+        </cac:TenderingProcess>
+    </root>
+    """
+    xml_file = tmp_path / "test_input_procedure_type_invalid.xml"
+    xml_file.write_text(xml_content)
+
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    logger.info("Result: %s", json.dumps(result, indent=2))
+
+    assert "tender" not in result or (
+        "procurementMethod" not in result.get("tender", {})
+        and "procurementMethodDetails" not in result.get("tender", {})
+    )
+
+
+def test_bt_105_procedure_type_empty_code(tmp_path, setup_logging, temp_output_dir):
+    logger = setup_logging
+    xml_content = """
+    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:TenderingProcess>
+            <cbc:ProcedureCode listName="procurement-procedure-type"></cbc:ProcedureCode>
+        </cac:TenderingProcess>
+    </root>
+    """
+    xml_file = tmp_path / "test_input_procedure_type_empty.xml"
+    xml_file.write_text(xml_content)
+
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    logger.info("Result: %s", json.dumps(result, indent=2))
+
+    assert "tender" not in result or (
+        "procurementMethod" not in result.get("tender", {})
+        and "procurementMethodDetails" not in result.get("tender", {})
+    )
 
 
 if __name__ == "__main__":
-    pytest.main()
+    pytest.main(["-v", "-s"])

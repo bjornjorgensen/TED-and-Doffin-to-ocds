@@ -9,6 +9,8 @@
     },
     "status": "active",
     "id": "001afac4-7508-475a-a2f8-bfa7de43b65f",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Open procedure",
     "procedure": {
       "isAccelerated": false
     },

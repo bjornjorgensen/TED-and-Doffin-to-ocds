@@ -1024,8 +1024,8 @@
         "locality": "Bergen"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     }
   ],

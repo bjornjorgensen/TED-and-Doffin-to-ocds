@@ -9,6 +9,8 @@
     },
     "status": "active",
     "id": "2b238a39-1532-4ebe-9763-0afa2b4c5f0b",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Open procedure",
     "lots": [
       {
         "id": "LOT-0000",
@@ -99,8 +101,8 @@
         "locality": "02-495"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {
