@@ -8,145 +8,199 @@ from lxml import etree
 from pathlib import Path
 
 
+logger = logging.getLogger(__name__)
+
+
 class NoticeProcessor:
-    def __init__(self, ocid_prefix, scheme):
+    def __init__(self, ocid_prefix: str, scheme: str = "eu-oj"):
         self.ocid_prefix = ocid_prefix
         self.scheme = scheme
-        self.item_id_counter = 1
 
-    def create_release(self, xml_content):
+    def process_notice(self, xml_content: str | bytes) -> list[str]:
+        """Process the notice and return a list of OCDS releases."""
         if isinstance(xml_content, str):
             xml_content = xml_content.encode("utf-8")
 
         tree = etree.fromstring(xml_content)
 
-        release = {}
-        release["id"] = self.get_notice_identifier(tree)
-        release["initiationType"] = "tender"
-        release["ocid"] = self.generate_ocid(tree)
-
-        # Reference previous publication
-        related_process = self.reference_previous_publication(tree)
-        if related_process:
-            release["relatedProcesses"] = [related_process]
-
-        return json.dumps(release)
-
-    def get_notice_identifier(self, tree):
-        return tree.xpath(
-            "string(/*/cbc:ID)",
-            namespaces=self.namespaces,
-        )
-
-    def generate_ocid(self, tree):
-        if self.needs_new_ocid(tree):
-            return f"{self.ocid_prefix}-{uuid.uuid4()}"
-        return self.get_previous_ocid(tree)
-
-    def needs_new_ocid(self, tree):
-        return (
-            self.is_first_publication(tree)
-            or self.is_can_for_framework_or_dps(tree)
-            or self.previous_was_pin_only(tree)
-        )
-
-    def is_first_publication(self, tree):  # noqa: ARG002
-        # Implement logic to check if it's the first publication
-        # This is a placeholder implementation
-        return False
-
-    def is_can_for_framework_or_dps(self, tree):  # noqa: ARG002
-        # Implement logic to check if it's a CAN for framework or DPS
-        # This is a placeholder implementation
-        return False
-
-    def previous_was_pin_only(self, tree):  # noqa: ARG002
-        # Implement logic to check if previous publication was PIN-only
-        # This is a placeholder implementation
-        return False
-
-    def get_previous_ocid(self, tree):  # noqa: ARG002
-        # Implement logic to retrieve OCID from previous publication
-        # This is a placeholder implementation
-        return f"{self.ocid_prefix}-placeholder"
-
-    def is_pin_only_notice(self, tree):  # noqa: ARG002
-        # Implement logic to check if the notice is a PIN-only notice
-        # This is a placeholder implementation
-        return False
-
-    def process_notice(self, xml_content):
-        tree = etree.fromstring(xml_content)
-
-        if self.is_pin_only_notice(tree):
+        # Check if this is a PIN-only notice
+        if self.is_pin_only(tree):
+            # Look for parts (not lots)
             parts = tree.xpath(
                 "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
                 namespaces=self.namespaces,
             )
-            return [self.create_release_for_part(part) for part in parts]
-        return [self.create_release(xml_content)]
 
-    def create_release_for_part(self, part):  # noqa: ARG002
-        # Implement logic to create a release for an individual part in a PIN-only notice
-        # This is a placeholder implementation
-        return json.dumps({})
+            if parts:
+                # Create separate release for each part
+                releases = []
+                for _part in parts:  # Using _part to indicate unused variable
+                    release = self.create_base_release(tree)
+                    # For PIN-only parts, always generate new OCID
+                    release["ocid"] = f"{self.ocid_prefix}-{uuid.uuid4()}"
+                    releases.append(json.dumps(release))
+                return releases
+            # PIN-only but no parts - create single release
+            release = self.create_base_release(tree)
+            release["ocid"] = f"{self.ocid_prefix}-{uuid.uuid4()}"
+            return [json.dumps(release)]
 
-    def reference_previous_publication(self, tree):
-        previous_publication = self.get_previous_publication(tree)
-        if not previous_publication:
+        # For non-PIN-only notices
+        release = self.create_base_release(tree)
+
+        # Generate new OCID if it's a CAN for framework/DPS
+        if self.is_can_for_framework_or_dps(tree):
+            release["ocid"] = f"{self.ocid_prefix}-{uuid.uuid4()}"
+        else:
+            release["ocid"] = self.determine_ocid(tree)
+
+        # Handle previous publication reference
+        prev_pub = self.get_previous_publication(tree)
+        if prev_pub is not None:
+            related_process = self.create_related_process(tree, prev_pub)
+            if related_process:
+                release["relatedProcesses"] = [related_process]
+
+        return [json.dumps(release)]
+
+    def create_base_release(self, tree: etree._Element) -> dict:
+        """Create the base release object with common fields."""
+        notice_id = tree.xpath("string(/*/cbc:ID)", namespaces=self.namespaces)
+        return {"id": notice_id, "initiationType": "tender"}
+
+    def determine_ocid(self, tree: etree._Element) -> str:
+        """Determine the OCID based on notice conditions."""
+        if (
+            self.is_first_publication(tree)
+            or self.is_can_for_framework_or_dps(tree)
+            or self.previous_was_pin_only(tree)
+        ):
+            return f"{self.ocid_prefix}-{uuid.uuid4()}"
+
+        # Try to get previous publication's OCID
+        prev_ocid = self.get_previous_ocid(tree)
+        return prev_ocid if prev_ocid else f"{self.ocid_prefix}-{uuid.uuid4()}"
+
+    def create_related_process(
+        self, tree: etree._Element, prev_pub: etree._Element
+    ) -> dict | None:
+        """Create related process object if needed."""
+        # Check if previous publication is PIN
+        if not self.is_pin(prev_pub):
             return None
-        if not self.is_pin(
-            previous_publication
-        ) or self.has_single_procurement_project_lot(previous_publication):
+
+        # Count procurement project lots in previous publication
+        lots = prev_pub.xpath(
+            "/*/cac:ProcurementProjectLot", namespaces=self.namespaces
+        )
+
+        # If PIN has single lot or is not PIN, return None
+        if len(lots) <= 1:
             return None
-        if self.is_pin(
-            previous_publication
-        ) and self.has_multiple_procurement_project_lots(previous_publication):
-            return {
-                "id": "1",
-                "relationship": ["planning"],
-                "scheme": self.scheme,
-                "identifier": tree.xpath(
-                    "string(/*/cbc:ID)", namespaces=self.namespaces
-                ),
-            }
-        return None
 
-    def get_previous_publication(self, tree):  # noqa: ARG002
-        # Implement logic to retrieve the previous publication
-        # This is a placeholder implementation
-        return None
+        # For PIN with multiple lots, create related process
+        return {
+            "id": "1",
+            "relationship": ["planning"],
+            "scheme": self.scheme,
+            "identifier": tree.xpath("string(/*/cbc:ID)", namespaces=self.namespaces),
+        }
 
-    def is_pin(self, publication):  # noqa: ARG002
-        # Implement logic to check if the publication is a PIN
-        # This is a placeholder implementation
+    def is_pin_only(self, tree: etree._Element) -> bool:
+        """Check if notice is a PIN used only for information."""
+        notice_type = tree.xpath(
+            "string(/*/cbc:NoticeTypeCode[@listName='planning'])",
+            namespaces=self.namespaces,
+        )
+        return notice_type == "pin-only"
+
+    def is_first_publication(self, tree: etree._Element) -> bool:
+        """Check if this is the first publication for the procedure."""
+        prev_pub_ref = tree.xpath(
+            "/*/cac:PreviousDocumentReference", namespaces=self.namespaces
+        )
+        return not bool(prev_pub_ref)
+
+    def is_can(self, tree: etree._Element) -> bool:
+        """
+        Check if this is a Contract Award Notice (CAN).
+        """
+        # Get the root element tag without namespace
+        root_tag = etree.QName(tree).localname
+        return root_tag == "ContractAwardNotice"
+
+    def is_can_for_framework_or_dps(self, tree: etree._Element) -> bool:
+        """
+        Check if this is a CAN for framework agreement or DPS.
+        """
+        if not self.is_can(tree):
+            return False
+
+        # Check for framework agreement
+        is_framework = tree.xpath(
+            """boolean(/*/cac:ProcurementProject//cbc:ProcurementTypeCode[
+                @listName='contract-nature' and text()='framework-agreement'] |
+            /*/cac:ProcurementProjectLot//cbc:ProcurementTypeCode[
+                @listName='contract-nature' and text()='framework-agreement'])""",
+            namespaces=self.namespaces,
+        )
+
+        # Check for dynamic purchasing system
+        is_dps = tree.xpath(
+            """boolean(/*/cac:ProcurementProject//cbc:ProcurementTypeCode[
+                @listName='contract-nature' and text()='dps'] |
+            /*/cac:ProcurementProjectLot//cbc:ProcurementTypeCode[
+                @listName='contract-nature' and text()='dps'])""",
+            namespaces=self.namespaces,
+        )
+
+        return is_framework or is_dps
+
+    def previous_was_pin_only(self, tree: etree._Element) -> bool:
+        """Check if previous publication was a PIN-only notice."""
+        prev_pub = self.get_previous_publication(tree)
+        if prev_pub is not None:
+            return self.is_pin_only(prev_pub)
         return False
 
-    def has_single_procurement_project_lot(self, publication):
-        return (
-            len(
-                publication.xpath(
-                    "/*/cac:ProcurementProjectLot", namespaces=self.namespaces
-                )
-            )
-            == 1
+    def get_previous_publication(self, tree: etree._Element) -> etree._Element | None:
+        """Get the previous publication referenced by this notice."""
+        prev_pub_id = tree.xpath(
+            "string(/*/cac:PreviousDocumentReference/cbc:ID)",
+            namespaces=self.namespaces,
         )
+        if prev_pub_id:
+            # In a real implementation, this would retrieve the actual previous
+            # publication document. For this example, we'll return None
+            return None
+        return None
 
-    def has_multiple_procurement_project_lots(self, publication):
-        return (
-            len(
-                publication.xpath(
-                    "/*/cac:ProcurementProjectLot", namespaces=self.namespaces
-                )
-            )
-            > 1
+    def get_previous_ocid(self, tree: etree._Element) -> str | None:
+        """Get the OCID from the previous publication."""
+        prev_pub = self.get_previous_publication(tree)
+        if prev_pub is not None:
+            # In a real implementation, this would extract the OCID from
+            # the previous publication. For this example, we'll return None
+            return None
+        return None
+
+    def is_pin(self, tree: etree._Element) -> bool:
+        """Check if the notice is a PIN."""
+        notice_type = tree.xpath(
+            "string(/*/cbc:NoticeTypeCode)", namespaces=self.namespaces
         )
+        return notice_type in ["PIN", "Periodic"]
 
     @property
-    def namespaces(self):
+    def namespaces(self) -> dict:
+        """XML namespaces used in eForms."""
         return {
             "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
             "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+            "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+            "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+            "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+            "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
         }
 
 
