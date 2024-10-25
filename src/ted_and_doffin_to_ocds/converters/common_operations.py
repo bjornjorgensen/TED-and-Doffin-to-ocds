@@ -131,12 +131,19 @@ class NoticeProcessor:
 
     def is_can_for_framework_or_dps(self, tree: etree._Element) -> bool:
         """
-        Check if this is a CAN for framework agreement or DPS.
+        Check if this is a Contract Award Notice (CAN) for framework agreement or DPS.
+
+        Args:
+            tree (etree._Element): The XML element tree to check
+
+        Returns:
+            bool: True if this is a CAN for framework agreement or DPS, False otherwise
         """
+        # First check if this is a CAN at all
         if not self.is_can(tree):
             return False
 
-        # Check for framework agreement
+        # Check for framework agreement at both project and lot levels
         is_framework = tree.xpath(
             """boolean(/*/cac:ProcurementProject//cbc:ProcurementTypeCode[
                 @listName='contract-nature' and text()='framework-agreement'] |
@@ -145,12 +152,18 @@ class NoticeProcessor:
             namespaces=self.namespaces,
         )
 
-        # Check for dynamic purchasing system
+        # Check for DPS both in procurement type codes and contracting system
         is_dps = tree.xpath(
-            """boolean(/*/cac:ProcurementProject//cbc:ProcurementTypeCode[
-                @listName='contract-nature' and text()='dps'] |
-            /*/cac:ProcurementProjectLot//cbc:ProcurementTypeCode[
-                @listName='contract-nature' and text()='dps'])""",
+            """boolean(
+                /*/cac:ProcurementProject//cbc:ProcurementTypeCode[
+                    @listName='contract-nature' and text()='dps'] |
+                /*/cac:ProcurementProjectLot//cbc:ProcurementTypeCode[
+                    @listName='contract-nature' and text()='dps'] |
+                /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/
+                    cac:TenderingProcess/cac:ContractingSystem[
+                        cbc:ContractingSystemTypeCode/@listName='dps-usage']/
+                        cbc:ContractingSystemTypeCode[text()!='none']
+            )""",
             namespaces=self.namespaces,
         )
 

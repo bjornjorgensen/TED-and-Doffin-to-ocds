@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?><ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1" xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1" xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionContent>
+        <efext:EformsExtension>
+          <efbc:TransmissionDate>2024-09-23+00:00</efbc:TransmissionDate>
+          <efbc:TransmissionTime>08:42:31+00:00</efbc:TransmissionTime>
+          <efac:NoticeResult>
+            <cbc:TotalAmount currencyID="NOK">16000000</cbc:TotalAmount>
+            <efac:LotResult>
+              <cbc:ID schemeName="result">RES-0001</cbc:ID>
+              <cac:FinancingParty>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+                </cac:PartyIdentification>
+              </cac:FinancingParty>
+              <cac:PayerParty>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+                </cac:PartyIdentification>
+              </cac:PayerParty>
+              <efac:LotTender>
+                <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
+              </efac:LotTender>
+              <efac:SettledContract>
+                <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+              </efac:SettledContract>
+              <efac:TenderLot>
+                <cbc:ID schemeName="Lot">LOT-0000</cbc:ID>
+              </efac:TenderLot>
+            </efac:LotResult>
+            <efac:LotTender>
+              <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
+              <efbc:TenderRankedIndicator>false</efbc:TenderRankedIndicator>
+              <cac:LegalMonetaryTotal>
+                <cbc:PayableAmount currencyID="NOK">12000000</cbc:PayableAmount>
+              </cac:LegalMonetaryTotal>
+              <efac:TenderingParty>
+                <cbc:ID schemeName="tendering-party">TPA-0001</cbc:ID>
+              </efac:TenderingParty>
+              <efac:TenderLot>
+                <cbc:ID schemeName="Lot">LOT-0000</cbc:ID>
+              </efac:TenderLot>
+              <efac:TenderReference>
+                <cbc:ID>Tilbud 27.5.2024</cbc:ID>
+              </efac:TenderReference>
+            </efac:LotTender>
+            <efac:SettledContract>
+              <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+              <cbc:AwardDate>2024-09-20Z</cbc:AwardDate>
+              <cbc:Title languageID="NOR">Første tilbud ifm direkteforhandlinger</cbc:Title>
+              <cbc:Title languageID="ENG">Initial tender offers for direct negotiations</cbc:Title>
+              <cac:SignatoryParty>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+                </cac:PartyIdentification>
+              </cac:SignatoryParty>
+              <efac:ContractReference>
+                <cbc:ID>Tilbud av 27.5.2024</cbc:ID>
+              </efac:ContractReference>
+              <efac:LotTender>
+                <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
+              </efac:LotTender>
+            </efac:SettledContract>
+            <efac:TenderingParty>
+              <cbc:ID schemeName="tendering-party">TPA-0001</cbc:ID>
+              <efac:Tenderer>
+                <cbc:ID schemeName="organization">ORG-0003</cbc:ID>
+              </efac:Tenderer>
+            </efac:TenderingParty>
+          </efac:NoticeResult>
+          <efac:NoticeSubType>
+            <cbc:SubTypeCode listName="notice-subtype">25</cbc:SubTypeCode>
+          </efac:NoticeSubType>
+          <efac:Organizations>
+            <efac:Organization>
+              <efbc:GroupLeadIndicator>true</efbc:GroupLeadIndicator>
+              <efac:Company>
+                <cbc:WebsiteURI>http://www.sykehusinnkjop.no</cbc:WebsiteURI>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">SYKEHUSINNKJØP HF</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">SYKEHUSINNKJØP HF</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Postboks 40</cbc:StreetName>
+                  <cbc:CityName>VADSØ</cbc:CityName>
+                  <cbc:PostalZone>9811</cbc:PostalZone>
+                  <cbc:CountrySubentityCode listName="nuts">NO074</cbc:CountrySubentityCode>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">916879067</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Name>Postmottak Sykehusinnkjøp</cbc:Name>
+                  <cbc:Telephone>+47 78950700</cbc:Telephone>
+                  <cbc:ElectronicMail>post@sykehusinnkjop.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+            <efac:Organization>
+              <efbc:GroupLeadIndicator>false</efbc:GroupLeadIndicator>
+              <efac:Company>
+                <cbc:WebsiteURI>https://www.helse-nord.no/</cbc:WebsiteURI>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Helse Nord RHF</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">Helse Nord RHF</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Moloveien 1</cbc:StreetName>
+                  <cbc:CityName>Bodø</cbc:CityName>
+                  <cbc:PostalZone>8038</cbc:PostalZone>
+                  <cbc:CountrySubentityCode listName="nuts">NO071</cbc:CountrySubentityCode>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">883 658 752</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Telephone>75512900</cbc:Telephone>
+                  <cbc:ElectronicMail>postmottak@helse-nord.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+            <efac:Organization>
+              <efbc:ListedOnRegulatedMarketIndicator>true</efbc:ListedOnRegulatedMarketIndicator>
+              <efbc:NaturalPersonIndicator>false</efbc:NaturalPersonIndicator>
+              <efac:Company>
+                <cbc:WebsiteURI>https://medical.sectra.com/about-sectra/contact/contact-sectra-norway/</cbc:WebsiteURI>
+                <cbc:EndpointID>https://medical.sectra.com/about-sectra/contact/contact-sectra-norway/</cbc:EndpointID>
+                <efbc:CompanySizeCode listName="economic-operator-size">medium</efbc:CompanySizeCode>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0003</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Sectra Norge AS</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">Sectra Norge AS</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Strandveien 50</cbc:StreetName>
+                  <cbc:CityName>Lysaker</cbc:CityName>
+                  <cbc:PostalZone>1366</cbc:PostalZone>
+                  <cbc:CountrySubentityCode listName="nuts">NO081</cbc:CountrySubentityCode>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">975 353 265</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Telephone>67 58 97 70</cbc:Telephone>
+                  <cbc:Telefax>67 58 97 76</cbc:Telefax>
+                  <cbc:ElectronicMail>info.no@sectra.com</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+            <efac:Organization>
+              <efac:Company>
+                <cbc:WebsiteURI>https://www.domstol.no/no/domstoler/tingrett/sis--ja-nuorta-finnmarkku-diggegoddi--indre-og-ostre-finnmark-tingrett/</cbc:WebsiteURI>
+                <cac:PartyIdentification>
+                  <cbc:ID schemeName="organization">ORG-0004</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                  <cbc:Name languageID="NOR">Indre og Østre Finnmark tingrett</cbc:Name>
+                </cac:PartyName>
+                <cac:PartyName>
+                  <cbc:Name languageID="ENG">Indre og Østre Finnmark tingrett</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                  <cbc:StreetName>Kirkegt. 22, 3. etg, Vadsø. Postboks 54</cbc:StreetName>
+                  <cbc:CityName>Vadsø</cbc:CityName>
+                  <cbc:PostalZone>9811</cbc:PostalZone>
+                  <cbc:CountrySubentityCode listName="nuts">NO074</cbc:CountrySubentityCode>
+                  <cac:Country>
+                    <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+                  </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                  <cbc:CompanyID schemeID="002">926 722 840</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                  <cbc:Telephone>78 01 17 00</cbc:Telephone>
+                  <cbc:ElectronicMail>indre.og.ostre.finnmark.tingrett@domstol.no</cbc:ElectronicMail>
+                </cac:Contact>
+              </efac:Company>
+            </efac:Organization>
+          </efac:Organizations>
+        </efext:EformsExtension>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:UBLVersionID>2.3</cbc:UBLVersionID>
+  <cbc:CustomizationID>eforms-sdk-1.7#extended#urn:fdc:anskaffelser.no:2023:eforms:eu</cbc:CustomizationID>
+  <cbc:ID schemeName="notice-id">eb49096c-83fe-4bbe-97e0-ec45d380b44b</cbc:ID>
+  <cbc:ContractFolderID>b5d2a051-0b57-4cdc-a499-9001c2c5b231</cbc:ContractFolderID>
+  <cbc:IssueDate>2024-09-23+00:00</cbc:IssueDate>
+  <cbc:IssueTime>08:42:19+00:00</cbc:IssueTime>
+  <cbc:VersionID>01</cbc:VersionID>
+  <cbc:RegulatoryDomain>32014L0024</cbc:RegulatoryDomain>
+  <cbc:NoticeTypeCode listName="dir-awa-pre">veat</cbc:NoticeTypeCode>
+  <cbc:NoticeLanguageCode>NOR</cbc:NoticeLanguageCode>
+  <cac:AdditionalNoticeLanguage>
+    <cbc:ID>ENG</cbc:ID>
+  </cac:AdditionalNoticeLanguage>
+  <cac:ContractingParty>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+      </cac:PartyIdentification>
+    </cac:Party>
+  </cac:ContractingParty>
+  <cac:ContractingParty>
+    <cac:ContractingPartyType>
+      <cbc:PartyTypeCode listName="buyer-legal-type">body-pl</cbc:PartyTypeCode>
+    </cac:ContractingPartyType>
+    <cac:ContractingActivity>
+      <cbc:ActivityTypeCode listName="authority-activity">health</cbc:ActivityTypeCode>
+    </cac:ContractingActivity>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+      </cac:PartyIdentification>
+    </cac:Party>
+  </cac:ContractingParty>
+  <cac:TenderingTerms>
+    <cac:ProcurementLegislationDocumentReference>
+      <cbc:ID schemeName="ELI">FOA § 13-4 bokstav b annet punkt; «konkurranse er umulig av tekniske årsaker».</cbc:ID>
+      <cbc:DocumentDescription languageID="NOR">Det synes sannsynlig at det ikke eksisterer andre leverandører som kan eller vil kunne bli i stand til å levere ytelsen oppdragsgiver har behov for innenfor den tidsrammen som er til rådighet. 
+
+Det synes sannsynlig at bare er en leverandør kan levere en digital patologiløsning som fungerer sammen med oppdragsgivers multimedialøsning, på en tilstrekkelig sikker måte.  </cbc:DocumentDescription>
+      <cbc:DocumentDescription languageID="ENG">It seems likely that there are no other suppliers who can or may be able to deliver the services that the Contracting Authority needs within the timeframe at our disposal. 
+
+It seems likely that only one supplier can deliver a digital pathology system that functions together with the contracting authority ́s multi-media system in a sufficiently secure way.  </cbc:DocumentDescription>
+    </cac:ProcurementLegislationDocumentReference>
+    <cac:ProcurementLegislationDocumentReference>
+      <cbc:ID>Anskaffelsesforskriften</cbc:ID>
+    </cac:ProcurementLegislationDocumentReference>
+  </cac:TenderingTerms>
+  <cac:TenderingProcess>
+    <cbc:ProcedureCode listName="procurement-procedure-type">neg-wo-call</cbc:ProcedureCode>
+    <cac:ProcessJustification>
+      <cbc:ProcessReasonCode listName="direct-award-justification">technical</cbc:ProcessReasonCode>
+      <cbc:ProcessReason languageID="NOR">Vurderingstemaet er at det kun er en leverandør som fremstiller digital patologi, og som fungerer sammen med oppdragsgivers multimedialøsning. 
+
+Det vises til sakens faktiske side der det fremkommer at det er flere leverandører i markedet som kan levere digital patologi, men disse fungerer ikke sammen med oppdragsgivers multimedialøsning. 
+
+Viktige funksjoner for oppdragsgiver er blant annet effektiv visning (streaming) av digital patologi mediaobjekter til patologens arbeidsflate (arbeidsflyt), funksjonaliteten annoteringer (informasjonsflyt) og ikke minst pasientsikkerhet. Ut fra sakens faktiske opplysninger fremgår det at det bare er Sectras digitale patologi løsning som ivaretar dette på en tilstrekkelig god måte. Det vises til tilbakemeldingene fra markedet og at det inntil videre ikke er mulig for andre leverandører å levere i henhold til oppdragsgivers behov for funksjonalitet, gitt at oppdragsgivers eksisterende multimediearkiv (VNA) skal benyttes. Oppdragsgivers behov vil kunne oppfylles ved å kjøpe digital patologi fra en annen leverandør, noe som ville innebære at oppdragsgiver også måtte investere i den andre leverandørens multimediearkiv (VNA), herunder integrasjoner. To multimediearkiver vil medføre ekstra kostnader for oppdragsgiver, samt teknisk kompleksitet som vil være utfordrende å drifte og vedlikeholde. Funksjonaliteten annoteringer er ikke mulig på tvers av leverandørenes løsninger. To løsninger vil også innebære dobbeltlagring og håndtering av bilder i ulike lagre/arkiv og det vil være behov for to visningsprogramvarer (viewere). Dette gir økt risiko for forveksling av bildeversjoner og pasient/undersøkelse, noe som igjen kan medføre alvorlig feil i forbindelse med pasientbehandlingen, det pekes på diagnostikk og behandling, med påfølgende risiko for pasientskade. 
+
+Det synes etter dette sannsynlig at det bare er en leverandør som kan levere det oppdragsgiver har behov for. 
+
+Det andre spørsmålet er om leverandører kan eller vil kunne bli i stand til å levere ytelsen oppdragsgiver har behov for innenfor den tidsrammen som er til rådighet. 
+
+Markedet er umodent, og det gjenstår mye arbeid før standarder for deling og samhandling er modne på tvers av løsninger og lager/arkiv. Oppdragsgiver har behov for digital patologi nå. 
+
+Det synes etter dette sannsynlig at det ikke eksisterer andre leverandører som kan eller vil kunne bli i stand til å levere ytelsen oppdragsgiver har behov for innenfor den tidsrammen som er til rådighet. 
+
+Det synes sannsynlig at bare er en leverandør kan levere en digital patologiløsning som fungerer sammen med oppdragsgivers multimedialøsning, på en tilstrekkelig sikker måte.  </cbc:ProcessReason>
+      <cbc:ProcessReason languageID="ENG">The assessment theme is that there is only one supplier that presents digital pathology and that works together with the contracting authority ́s multi-media system. 
+
+See the factual side of the case, stating that there are several suppliers in the market who can deliver digital pathology, but these do not work together with the contracting authority ́s multi-media system. 
+
+Important functions for the contracting authority are, among other things, effective viewing (streaming) of digital pathology media objects to the pathology ́s work surface (work flow), functionality annotations (information flow) and, not least, patient safety. Based on the actual information of the case, it is only Sectra's digital pathology system that safeguards this in a sufficiently good way. Please refer to the feedback from the market and that until now it is not possible for other tenderers to deliver in accordance with the contracting authority ́s need for functionality, provided that the contracting authority ́s existing multimedia archive (VNA) shall be used. The contracting authority ́s needs can be fulfilled by purchasing digital pathology from another supplier, which would mean that the contracting authority also had to invest in the other tenderer ́s multimedia archive (VNA), including integrations. Two multi-media archives will incur extra costs for the contracting authority, as well as technical complexity that will be challenging to operate and maintain. The annotations functionality is not possible across the tenderer ́s systems. Two solutions will also involve double storage and handling of images in different stores/archives and there will be a need for two vieweres. This gives an increased risk of alteration of picture versions and patient/examination, which in turn can lead to serious errors in patient treatment, it is pointed to diagnostics and treatment, with the subsequent risk of patient injury. 
+
+After this, it seems likely that there is only one supplier who can deliver what the contracting authority needs. 
+
+The second question is whether tenderers can or can be able to deliver the service that the Contracting Authority needs within the timeframe at our disposal. 
+
+The market is immature and much work remains before standards of sharing and interaction are mature across systems and stores/archives. The contracting authority needs digital pathology now. 
+
+After this, it seems likely that there are no other suppliers who can or may be able to deliver the service that the Contracting Authority needs within the timeframe at our disposal. 
+
+It seems likely that only one supplier can deliver a digital pathology system that functions together with the contracting authority ́s multi-media system in a sufficiently secure way.  </cbc:ProcessReason>
+    </cac:ProcessJustification>
+  </cac:TenderingProcess>
+  <cac:ProcurementProject>
+    <cbc:ID schemeName="InternalID">2024/1261</cbc:ID>
+    <cbc:Name languageID="NOR">Intensjonskunngjøring Digital patologisystem, Helse Nord</cbc:Name>
+    <cbc:Name languageID="ENG">Intention notice Digital Pathology System, North Norway Regional Health Authority.</cbc:Name>
+    <cbc:Description languageID="NOR">Det har vært gjennomført direkteforhandling med Sectra Norge AS for levering av digitalt patologisystem til Helse Nord RHF- for de eide foretakene Universitetssykehuset Nord-Norge HF (Tromsø) og Nordlandssykehuset HF (Bodø).</cbc:Description>
+    <cbc:Description languageID="ENG">Direct negotiations have been held with Sectra Norway AS for the delivery of a digital pathology system to Helse Nord RHF- for the owned companies Universitetssykehuset Nord-Norway HF (Tromsø) and Nordlandssykehuset HF (Bodø).</cbc:Description>
+    <cbc:ProcurementTypeCode listName="contract-nature">supplies</cbc:ProcurementTypeCode>
+    <cac:MainCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">48814000</cbc:ItemClassificationCode>
+    </cac:MainCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">33124110</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">48313100</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">48328000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">48515000</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">48814400</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:AdditionalCommodityClassification>
+      <cbc:ItemClassificationCode listName="cpv">72212180</cbc:ItemClassificationCode>
+    </cac:AdditionalCommodityClassification>
+    <cac:RealizedLocation>
+      <cbc:Description languageID="NOR">Installasjon i On-prem Helse Nord IKT datasenter i Tromsø</cbc:Description>
+      <cbc:Description languageID="ENG">Installation in On-prem Helse Nord ICT computer centre in Tromsø.</cbc:Description>
+      <cac:Address>
+        <cbc:StreetName>Nordlandssykehuset HF, avd Bodø</cbc:StreetName>
+        <cbc:CityName>Bodø</cbc:CityName>
+        <cbc:PostalZone>8092</cbc:PostalZone>
+        <cbc:CountrySubentityCode listName="nuts">NO071</cbc:CountrySubentityCode>
+        <cac:Country>
+          <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:Address>
+    </cac:RealizedLocation>
+    <cac:RealizedLocation>
+      <cbc:Description languageID="NOR">Installasjon i On-prem Helse Nord IKT datasenter i Tromsø</cbc:Description>
+      <cbc:Description languageID="ENG">Installation in On-prem Helse Nord ICT computer centre in Tromsø.</cbc:Description>
+      <cac:Address>
+        <cbc:StreetName>Universitetssykehuset Nord-Norge HF, Tromsø</cbc:StreetName>
+        <cbc:CityName>Tromsø</cbc:CityName>
+        <cbc:PostalZone>9038</cbc:PostalZone>
+        <cbc:CountrySubentityCode listName="nuts">NO074</cbc:CountrySubentityCode>
+        <cac:Country>
+          <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:Address>
+    </cac:RealizedLocation>
+  </cac:ProcurementProject>
+  <cac:ProcurementProjectLot>
+    <cbc:ID schemeName="Lot">LOT-0000</cbc:ID>
+    <cac:TenderingTerms>
+      <cac:AwardingTerms>
+        <cac:AwardingCriterion>
+          <cbc:Description languageID="NOR">Ikke relevant ved direkteforhandlinger</cbc:Description>
+          <cbc:Description languageID="ENG">Not relevant for direct negotiations</cbc:Description>
+        </cac:AwardingCriterion>
+      </cac:AwardingTerms>
+      <cac:AdditionalInformationParty>
+        <cac:PartyIdentification>
+          <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+        </cac:PartyIdentification>
+      </cac:AdditionalInformationParty>
+      <cac:DocumentProviderParty>
+        <cac:PartyIdentification>
+          <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+        </cac:PartyIdentification>
+      </cac:DocumentProviderParty>
+      <cac:AppealTerms>
+        <cac:PresentationPeriod>
+          <cbc:Description languageID="NOR">Tidsfrist for klage er 10 dager etter publisert melding i Doffin/TED.
+
+Klage/henvendelse kan sendes på følgende måte:
+Enten via post@sykehusinnkjop.no eller per post Sykehusinnkjøp HF, postboks 40, 9811 Vadsø (Viktig å henvise til sak 2024/1261 Digital patologi, Helse Nord). Melding/klage kan også sendes i kommunikasjonsmodulen i Mercell på saken.</cbc:Description>
+          <cbc:Description languageID="ENG">The appeals deadline is 10 days after the notification is published in Doffin/TED.
+
+Appeals/enquiries can be sent in the following way:
+Either via post@sykehusinnkjop.no or per item Sykehusinnkjøp HF, postboks 40, 9811 Vadsø (Important to refer to case 2024/1261 Digital Pathology, Health North). Messages/appeals can also be sent in the communication module in Mercell on the case.</cbc:Description>
+        </cac:PresentationPeriod>
+        <cac:AppealInformationParty>
+          <cac:PartyIdentification>
+            <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+          </cac:PartyIdentification>
+        </cac:AppealInformationParty>
+        <cac:AppealReceiverParty>
+          <cac:PartyIdentification>
+            <cbc:ID schemeName="organization">ORG-0004</cbc:ID>
+          </cac:PartyIdentification>
+        </cac:AppealReceiverParty>
+        <cac:MediationParty>
+          <cac:PartyIdentification>
+            <cbc:ID schemeName="organization">ORG-0004</cbc:ID>
+          </cac:PartyIdentification>
+        </cac:MediationParty>
+      </cac:AppealTerms>
+    </cac:TenderingTerms>
+    <cac:TenderingProcess>
+      <cbc:GovernmentAgreementConstraintIndicator>true</cbc:GovernmentAgreementConstraintIndicator>
+      <cac:NoticeDocumentReference>
+        <cbc:ID schemeName="ojs-notice-id">633991-2023</cbc:ID>
+      </cac:NoticeDocumentReference>
+      <cac:ContractingSystem>
+        <cbc:ContractingSystemTypeCode listName="dps-usage">none</cbc:ContractingSystemTypeCode>
+      </cac:ContractingSystem>
+      <cac:ContractingSystem>
+        <cbc:ContractingSystemTypeCode listName="framework-agreement">none</cbc:ContractingSystemTypeCode>
+      </cac:ContractingSystem>
+    </cac:TenderingProcess>
+    <cac:ProcurementProject>
+      <cbc:ID schemeName="InternalID">2024/1261</cbc:ID>
+      <cbc:Name languageID="NOR">Intensjonskunngjøring Digital patologisystem, Helse Nord</cbc:Name>
+      <cbc:Name languageID="ENG">Intention notice Digital Pathology System, North Norway Regional Health Authority.</cbc:Name>
+      <cbc:Description languageID="NOR">Det har vært gjennomført direkteforhandling med Sectra Norge AS for levering av digitalt patologisystem til Helse Nord RHF- for de eide foretakene Universitetssykehuset Nord-Norge HF (Tromsø) og Nordlandssykehuset HF (Bodø).</cbc:Description>
+      <cbc:Description languageID="ENG">Direct negotiations have been held with Sectra Norway AS for the delivery of a digital pathology system to Helse Nord RHF- for the owned companies Universitetssykehuset Nord-Norway HF (Tromsø) and Nordlandssykehuset HF (Bodø).</cbc:Description>
+      <cbc:ProcurementTypeCode listName="contract-nature">supplies</cbc:ProcurementTypeCode>
+      <cac:MainCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">48814000</cbc:ItemClassificationCode>
+      </cac:MainCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">33124110</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">48313100</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">48328000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">48515000</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">48814400</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:AdditionalCommodityClassification>
+        <cbc:ItemClassificationCode listName="cpv">72212180</cbc:ItemClassificationCode>
+      </cac:AdditionalCommodityClassification>
+      <cac:RealizedLocation>
+        <cbc:Description languageID="NOR">Installasjon i On-prem Helse Nord IKT datasenter i Tromsø</cbc:Description>
+        <cbc:Description languageID="ENG">Installation in On-prem Helse Nord ICT computer centre in Tromsø.</cbc:Description>
+        <cac:Address>
+          <cbc:StreetName>Nordlandssykehuset HF, avd Bodø</cbc:StreetName>
+          <cbc:CityName>Bodø</cbc:CityName>
+          <cbc:PostalZone>8092</cbc:PostalZone>
+          <cbc:CountrySubentityCode listName="nuts">NO071</cbc:CountrySubentityCode>
+          <cac:Country>
+            <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+          </cac:Country>
+        </cac:Address>
+      </cac:RealizedLocation>
+      <cac:RealizedLocation>
+        <cbc:Description languageID="NOR">Installasjon i On-prem Helse Nord IKT datasenter i Tromsø</cbc:Description>
+        <cbc:Description languageID="ENG">Installation in On-prem Helse Nord ICT computer centre in Tromsø.</cbc:Description>
+        <cac:Address>
+          <cbc:StreetName>Universitetssykehuset Nord-Norge HF, Tromsø</cbc:StreetName>
+          <cbc:CityName>Tromsø</cbc:CityName>
+          <cbc:PostalZone>9038</cbc:PostalZone>
+          <cbc:CountrySubentityCode listName="nuts">NO074</cbc:CountrySubentityCode>
+          <cac:Country>
+            <cbc:IdentificationCode listName="country">NOR</cbc:IdentificationCode>
+          </cac:Country>
+        </cac:Address>
+      </cac:RealizedLocation>
+      <cac:PlannedPeriod>
+        <cbc:DescriptionCode listName="Duration">UNLIMITED</cbc:DescriptionCode>
+      </cac:PlannedPeriod>
+    </cac:ProcurementProject>
+  </cac:ProcurementProjectLot>
+  <cac:TenderResult>
+    <cbc:AwardDate>2000-01-01Z</cbc:AwardDate>
+  </cac:TenderResult>
+</ContractAwardNotice>

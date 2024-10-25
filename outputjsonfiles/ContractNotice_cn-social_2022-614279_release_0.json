@@ -1,7 +1,7 @@
 {
   "id": "2022-614279",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-13c719c3-fe31-4047-84bc-0dcd1b3e7dd3",
+  "ocid": "ocds-abcd1234-4fb2d047-066e-4fb3-8217-3f1328dd65cf",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -115,8 +115,8 @@
         "locality": "Mo i Rana"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {
