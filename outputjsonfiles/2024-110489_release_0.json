@@ -1,0 +1,340 @@
+{
+  "id": "8791620e-39a1-435d-985a-bee33825e3f4",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-e18d3176-28b0-4351-a03a-d5c0014ab8a4",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "status": "complete",
+    "id": "3f04e24d-412f-4334-90f3-5244f30593b4",
+    "procurementMethod": "limited",
+    "procurementMethodDetails": "Negotiated without prior call for competition",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "title": "Framework Agreement - 4600004102 Night Vision Systems",
+        "identifiers": {
+          "id": "Framework Agreement - 4600004102 Night Vision Systems",
+          "scheme": "internal"
+        },
+        "mainProcurementCategory": "goods",
+        "description": "Forsvarets Logistikkorganisasjon, Strategiske Anskaffelser (\"FLO SA\"), kunngjør med dette sin intensjon om å tildele rammeavtale \"Framework Agreement - 4600004102 Night Vision Systems», for anskaffelse av levetidsunderstøttelse av mørkeutrustning, herunder kjøp av komplette systemer, reservedeler, kurs og tjenester til Elbit Systems of America (heretter «Elbit») i tråd med forskrift om forsvars- og sikkerhetsanskaffelser fastsatt ved kgl.res. 4.oktober 2013 nr. 1185 (heretter \"FOSA\") § 9-4, jf. FOSA § 5-3 bokstav c. Denne prosedyren kan også benyttes der anskaffelsen kan ansees som en «tilleggsleveranse», jf. FOSA § 5-3 bokstav h.",
+        "contractPeriod": {
+          "durationInDays": 2555
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "title": "Framework Agreement - 4600004102 Night Vision Systems",
+    "mainProcurementCategory": "goods",
+    "description": "Forsvarets Logistikkorganisasjon, Strategiske Anskaffelser (\"FLO SA\"), kunngjør med dette sin intensjon om å tildele rammeavtale \"Framework Agreement - 4600004102 Night Vision Systems», for anskaffelse av levetidsunderstøttelse av mørkeutrustning, herunder kjøp av komplette systemer, reservedeler, kurs og tjenester til Elbit Systems of America (heretter «Elbit») i tråd med forskrift om forsvars- og sikkerhetsanskaffelser fastsatt ved kgl.res. 4.oktober 2013 nr. 1185 (heretter \"FOSA\") § 9-4, jf. FOSA § 5-3 bokstav c. Denne prosedyren kan også benyttes der anskaffelsen kan ansees som en «tilleggsleveranse», jf. FOSA § 5-3 bokstav h.",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "38632000"
+        },
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "country": "NO"
+          }
+        ],
+        "deliveryLocations": [
+          {
+            "description": "Anywhere in the given country"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "country": "NO"
+      }
+    ],
+    "deliveryLocations": [
+      {
+        "description": "Anywhere in the given country"
+      }
+    ]
+  },
+  "tag": [
+    "award",
+    "contract"
+  ],
+  "date": "2024-07-04T12:29:33+00:00",
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 95000000.0,
+          "currency": "NOK"
+        },
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0002",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0003",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0004",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0005",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0006",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0007",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0008",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0009",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0010",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 95000000.0,
+          "currency": "NOK"
+        },
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0011",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 95.0,
+          "currency": "NOK"
+        },
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0012",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 9500000.0,
+          "currency": "NOK"
+        },
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0013",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 95000000.0,
+          "currency": "NOK"
+        },
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      }
+    ]
+  },
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Forsvaret v/Forsvarets logistikkorganisasjon",
+      "additionalIdentifiers": [
+        {
+          "id": "988517860",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Linda Angelita Stoll",
+        "telephone": "91503003",
+        "email": "lstoll@mil.no"
+      },
+      "address": {
+        "locality": "Lysaker"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Oslo Tingrett - Notarial",
+      "additionalIdentifiers": [
+        {
+          "id": "926725939",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Oslo Tingrett",
+        "telephone": "22035200",
+        "email": "oslo.tingrett.notarial@domstol.no"
+      },
+      "address": {
+        "locality": "Oslo"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Elbit Systems of America",
+      "contactPoint": {
+        "telephone": "+1 540 5218019",
+        "email": "David.Hall2@elbitsystems-us.com"
+      },
+      "address": {
+        "locality": "Roanoke"
+      },
+      "roles": [
+        "tenderer"
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "id": "RES-0001",
+      "value": {
+        "amount": 95000000.0,
+        "currency": "NOK"
+      },
+      "relatedLots": [
+        "LOT-0000"
+      ]
+    },
+    {
+      "id": "CON-0001",
+      "buyers": [
+        {
+          "id": "ORG-0001"
+        }
+      ],
+      "relatedBids": [
+        "TEN-0001",
+        "TEN-0002",
+        "TEN-0003",
+        "TEN-0004",
+        "TEN-0005",
+        "TEN-0006",
+        "TEN-0007",
+        "TEN-0008",
+        "TEN-0009",
+        "TEN-0010",
+        "TEN-0011",
+        "TEN-0012",
+        "TEN-0013"
+      ]
+    }
+  ],
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "awardID": "RES-0001"
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
+}
