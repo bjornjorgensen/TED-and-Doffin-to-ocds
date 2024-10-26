@@ -2,15 +2,14 @@
 import json
 import logging
 from pathlib import Path
-import os
 import argparse
 from ted_and_doffin_to_ocds.converters.common_operations import (
     NoticeProcessor,
     remove_empty_elements,
     remove_empty_dicts,
     process_bt_section,
-    configure_logging,
 )
+from ted_and_doffin_to_ocds.utils.file_processor import NoticeFileProcessor
 from ted_and_doffin_to_ocds.converters.bt_01_procedure import (
     parse_procedure_legal_basis,
     merge_procedure_legal_basis,
@@ -5302,29 +5301,52 @@ def process_bt_sections(release_json, xml_content):
         )
 
 
-def process_single_file(input_path, output_folder, processor):
-    logger = logging.getLogger(__name__)
-    logger.info("Processing file: %s", input_path)
+def process_single_file(
+    input_path: Path,
+    output_folder: Path,
+    processor: NoticeProcessor,
+) -> None:
+    """Process a single XML file."""
+    logger = logging.getLogger()
+    logger.info("Starting to process file: %s", input_path)
 
     try:
+        # Read XML content
         with input_path.open("rb") as xml_file:
             xml_content = xml_file.read()
+            logger.debug(
+                "Successfully read XML file: %s, size: %d bytes",
+                input_path,
+                len(xml_content),
+            )
 
+        # Process the notice and get releases
+        logger.debug("Processing notice with processor")
         releases = processor.process_notice(xml_content)
+        logger.debug("Got %d releases from processor", len(releases))
 
+        # Process each release
         for i, release_json_str in enumerate(releases):
+            logger.debug("Processing release %d", i)
             release_json = json.loads(release_json_str)
 
+            # Process business term sections
+            logger.debug("Processing business term sections")
             process_bt_sections(release_json, xml_content)
 
             # Post-processing steps
+            logger.debug("Removing empty elements")
             release_json = remove_empty_elements(release_json)
             release_json = remove_empty_dicts(release_json)
 
-            # Write output
+            # Generate output filename
             output_file = output_folder / f"{input_path.stem}_release_{i}.json"
+            logger.debug("Writing to output file: %s", output_file)
+
+            # Write output
             with output_file.open("w", encoding="utf-8") as f:
-                json.dump(release_json, f, ensure_ascii=False)
+                json.dump(release_json, f, ensure_ascii=False, indent=2)
+                logger.debug("Successfully wrote release to file")
 
             logger.info(
                 "Conversion completed for %s, release %d. Output written to %s",
@@ -5335,56 +5357,149 @@ def process_single_file(input_path, output_folder, processor):
 
     except Exception:
         logger.exception("Error processing file %s", input_path)
+        raise
 
 
-def main(input_path=None, output_folder=None, ocid_prefix=None, scheme=None):
-    if input_path is None or output_folder is None or ocid_prefix is None:
-        parser = argparse.ArgumentParser(description="Convert XML eForms to OCDS JSON")
-        parser.add_argument(
-            "input", help="Input XML file or folder containing XML files"
+def configure_logging(level: str = "INFO") -> None:
+    """
+    Configure logging to write only to file with specified level.
+
+    Args:
+        level: Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+    """
+    numeric_level = getattr(logging, level.upper(), logging.INFO)
+
+    # Create logger
+    logger = logging.getLogger()
+    logger.setLevel(numeric_level)
+
+    # Create formatter
+    formatter = logging.Formatter(
+        "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
+
+    # Remove any existing handlers
+    for handler in logger.handlers[:]:
+        logger.removeHandler(handler)
+
+    # Create file handler only
+    log_file = Path("app.log")
+    file_handler = logging.FileHandler(log_file, mode="w")
+    file_handler.setLevel(numeric_level)
+    file_handler.setFormatter(formatter)
+
+    # Add only the file handler
+    logger.addHandler(file_handler)
+
+
+def main(
+    input_path: str | None = None,
+    output_folder: str | None = None,
+    ocid_prefix: str | None = None,
+    scheme: str | None = None,
+    db_path: str | None = None,
+) -> None:
+    """Main function to process XML files."""
+    # Parse arguments first to get log level
+    args = parse_arguments(input_path, output_folder, ocid_prefix, scheme, db_path)
+
+    # Configure logging with level from arguments
+    configure_logging(args.log_level)
+
+    logger = logging.getLogger()
+    try:
+        input_path = Path(args.input)
+        output_folder = Path(args.output)
+
+        logger.info("Input path: %s", input_path)
+        logger.info("Output folder: %s", output_folder)
+
+        # Create output directory
+        output_folder.mkdir(parents=True, exist_ok=True)
+        logger.debug("Created/verified output directory: %s", output_folder)
+
+        # Initialize processor
+        processor = NoticeProcessor(
+            ocid_prefix=args.ocid_prefix,
+            scheme=args.scheme or "eu-oj",
+            db_path=str(args.db),
         )
-        parser.add_argument("output", help="Output folder for JSON files")
-        parser.add_argument("ocid_prefix", help="Prefix for OCID")
-        parser.add_argument(
-            "--scheme",
-            default="eu-oj",
-            help="Scheme for related processes (default: eu-oj)",
+        logger.debug("Initialized NoticeProcessor")
+
+        # Process files
+        with NoticeFileProcessor(input_path, output_folder) as file_processor:
+            logger.debug("Initialized NoticeFileProcessor")
+
+            # Copy files to temp directory
+            file_processor.copy_input_files()
+            logger.debug("Copied input files to temp directory")
+
+            # Get sorted files
+            files_to_process = file_processor.get_sorted_files()
+            logger.info("Found %d files to process", len(files_to_process))
+
+            if not files_to_process:
+                logger.warning("No XML files found to process")
+                return
+
+            # Process each file in order
+            for xml_file in files_to_process:
+                logger.info("Processing file: %s", xml_file)
+                process_single_file(xml_file, output_folder, processor)
+                logger.debug("Completed processing file: %s", xml_file)
+
+    except Exception:
+        logger.exception("Fatal error during processing")
+        raise
+
+
+def parse_arguments(
+    input_path: str | None,
+    output_folder: str | None,
+    ocid_prefix: str | None,
+    scheme: str | None,
+    db_path: str | None,
+) -> argparse.Namespace:
+    """Parse command line arguments."""
+    if all(arg is not None for arg in [input_path, output_folder, ocid_prefix]):
+        return argparse.Namespace(
+            input=input_path,
+            output=output_folder,
+            ocid_prefix=ocid_prefix,
+            scheme=scheme or "eu-oj",
+            db=db_path or "notices.db",
+            clear_db=False,
+            log_level="INFO",  # Default for programmatic use
         )
-        args = parser.parse_args()
 
-        input_path = args.input
-        output_folder = args.output
-        ocid_prefix = args.ocid_prefix
-        scheme = args.scheme or "eu-oj"
-
-    input_path = Path(input_path)
-    output_folder = Path(output_folder)
-    output_folder.mkdir(parents=True, exist_ok=True)
-
-    configure_logging()
-
-    if os.environ.get("GITHUB_ACTIONS") != "true":
-        logger = logging.getLogger(__name__)
-        logger.info("Running outside of GitHub Actions environment")
-
-    processor = NoticeProcessor(ocid_prefix, scheme)
-
-    if input_path.is_file():
-        logger.info("Processing single file: %s", input_path)
-        process_single_file(input_path, output_folder, processor)
-    elif input_path.is_dir():
-        logger.info("Processing directory: %s", input_path)
-        for xml_file in input_path.glob("*.xml"):
-            logger.info("Processing file: %s", xml_file)
-            process_single_file(xml_file, output_folder, processor)
-    else:
-        logger.error(
-            "Error: Input path %s is neither a file nor a directory", input_path
-        )
-
-    logger.info("Processing complete.")
-    if os.environ.get("GITHUB_ACTIONS") != "true":
-        logger.info("Check app.log for details.")
+    # Parse from command line
+    parser = argparse.ArgumentParser(description="Convert XML eForms to OCDS JSON")
+    parser.add_argument("input", help="Input XML file or folder containing XML files")
+    parser.add_argument("output", help="Output folder for JSON files")
+    parser.add_argument("ocid_prefix", help="Prefix for OCID")
+    parser.add_argument(
+        "--scheme",
+        default="eu-oj",
+        help="Scheme for related processes (default: eu-oj)",
+    )
+    parser.add_argument(
+        "--db",
+        help="Path to SQLite database file (default: notices.db)",
+        default="notices.db",
+    )
+    parser.add_argument(
+        "--clear-db",
+        action="store_true",
+        help="Clear existing database before processing",
+    )
+    parser.add_argument(
+        "--log-level",
+        choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+        default="INFO",
+        help="Set the logging level (default: INFO)",
+    )
+    return parser.parse_args()
 
 
 if __name__ == "__main__":
