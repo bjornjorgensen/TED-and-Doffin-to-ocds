@@ -9,6 +9,10 @@ This project converts XML eForm data from TED (Tenders Electronic Daily) and Dof
 - [File Structure](#file-structure)
 - [Installation](#installation)
 - [Usage](#usage)
+  - [Basic Usage](#basic-usage)
+  - [Advanced Options](#advanced-options)
+  - [File Processing Order](#file-processing-order)
+  - [Logging](#logging)
 - [Testing](#testing)
 - [OCDS eForm Profile Mapping](#ocds-eform-profile-mapping)
 - [TED and Doffin Data Processing](#ted-and-doffin-data-processing)
@@ -89,25 +93,23 @@ project_root/
 
 To convert an XML file to OCDS JSON format, activate the Poetry environment and run the following command:
 
-```
-poetry run python src/ted_and_doffin_to_ocds/main.py input_path output_folder ocid_prefix [--scheme scheme_value]
+```bash
+poetry run python src/ted_and_doffin_to_ocds/main.py input_path output_folder ocid_prefix [options]
 ```
 
-Arguments:
+Required Arguments:
 - `input_path`: Path to your input XML file or folder containing XML files
 - `output_folder`: Folder where the output JSON files will be saved
 - `ocid_prefix`: Your desired OCID prefix
-- `--scheme`: (Optional) Scheme for related processes (default: eu-oj)
 
 Example:
-```
-poetry run python src/ted_and_doffin_to_ocds/main.py xmlfile/ outputjsonfiles/ ocds-abcd1234 --scheme test-bj
+```bash
+poetry run python src/ted_and_doffin_to_ocds/main.py xmlfile/ outputjsonfiles/ ocds-abcd1234
 ```
 This command will:
 - Process all XML files in the `xmlfile/` directory
 - Save the resulting JSON files in the `outputjsonfiles/` directory
 - Use `ocds-abcd1234` as the OCID prefix
-- Use `test-bj` as the scheme for related processes
 
 If processing a single file, simply replace the input folder with the path to your XML file:
 ```
@@ -115,6 +117,76 @@ poetry run python src/ted_and_doffin_to_ocds/main.py path/to/your/input.xml outp
 ```
 The converter will process the input XML file(s) from either TED or Doffin and generate the corresponding OCDS JSON file(s) in the specified output folder.
 
+### Advanced Options
+
+The converter supports several optional arguments:
+
+```bash
+poetry run python src/ted_and_doffin_to_ocds/main.py \
+    input_path \
+    output_folder \
+    ocid_prefix \
+    [--scheme SCHEME] \
+    [--db DB_PATH] \
+    [--log-level {DEBUG,INFO,WARNING,ERROR,CRITICAL}] \
+    [--clear-db]
+```
+
+Optional Arguments:
+- `--scheme`: Scheme for related processes (default: eu-oj)
+- `--db`: Path to SQLite database file (default: notices.db)
+- `--log-level`: Set logging level (default: INFO)
+- `--clear-db`: Clear existing database before processing
+
+Example with all options:
+```bash
+poetry run python src/ted_and_doffin_to_ocds/main.py \
+    xmlfile/ \
+    outputjsonfiles/ \
+    ocds-abcd1234 \
+    --scheme test-bj \
+    --db custom.db \
+    --log-level DEBUG \
+    --clear-db
+```
+
+### File Processing Order
+
+The converter processes files in a specific order to maintain proper relationships:
+
+1. Prior Information Notices (PIN)
+2. Contract Notices (CN)
+3. Contract Award Notices (CAN)
+4. Contract Award Notice Modifications
+
+This order ensures that:
+- References between notices are properly maintained
+- OCIDs are correctly assigned and reused
+- Related processes are accurately tracked
+
+### Logging
+
+The converter writes detailed logs to `app.log` in the current directory. You can control the log level using the `--log-level` option:
+
+- `DEBUG`: Most detailed logging, useful for development and troubleshooting
+- `INFO`: Standard operational logging (default)
+- `WARNING`: Only potential issues
+- `ERROR`: Only error conditions
+- `CRITICAL`: Only critical failures
+
+Example with debug logging:
+```bash
+poetry run python src/ted_and_doffin_to_ocds/main.py \
+    xmlfile/ \
+    outputjsonfiles/ \
+    ocds-abcd1234 \
+    --log-level DEBUG
+```
+
+Monitor logs in real-time:
+```bash
+tail -f app.log
+```
 ## Testing
 
 To run the tests, execute the following command in the project root directory:
