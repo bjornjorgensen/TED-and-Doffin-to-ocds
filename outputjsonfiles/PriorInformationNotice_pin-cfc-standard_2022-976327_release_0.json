@@ -1,7 +1,7 @@
 {
   "id": "2022-976327",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0dacb908-379e-460c-a256-05fad3b6678b",
+  "ocid": "ocds-abcd1234-4a9dee50-8018-4e33-aa92-cb9b84640577",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -119,9 +119,9 @@
         "locality": "Oslo"
       },
       "roles": [
+        "submissionReceiptBody",
         "buyer",
-        "processContactPoint",
-        "submissionReceiptBody"
+        "processContactPoint"
       ]
     },
     {

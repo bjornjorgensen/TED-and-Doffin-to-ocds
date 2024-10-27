@@ -1,7 +1,7 @@
 {
   "id": "2023-651678",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0c5235ad-a898-40a7-ae93-d601cae8a484",
+  "ocid": "ocds-abcd1234-b6da7b12-e325-4bea-9f9f-6ce93f84740f",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -122,9 +122,9 @@
         "locality": "Kvinesdal"
       },
       "roles": [
+        "submissionReceiptBody",
         "buyer",
-        "processContactPoint",
-        "submissionReceiptBody"
+        "processContactPoint"
       ]
     },
     {

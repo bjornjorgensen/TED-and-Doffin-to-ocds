@@ -7,73 +7,60 @@ logger = logging.getLogger(__name__)
 
 
 def parse_procedure_legal_basis(xml_content):
+    """
+    Parse the XML content to extract the legal basis under which the procurement procedure takes place.
+    Only processes IDs with schemeName="ELI"
+    """
+    logger.info("Starting parse_procedure_legal_basis")
+
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
+
+    try:
+        root = etree.fromstring(xml_content)
+        logger.info("XML root tag: %s", root.tag)
+    except Exception:
+        logger.exception("Failed to parse XML: %s")
+        return None
+
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    result = {"tender": {"legalBasis": {}}}
-
-    # Parse legal basis ID
-    legal_basis_id = root.xpath(
-        "//cac:ProcurementLegislationDocumentReference[not(cbc:ID='CrossBorderLaw' or cbc:ID='LocalLegalBasis')]/cbc:ID",
+    # Use a simpler XPath first to get all references
+    refs = root.xpath(
+        ".//cac:ProcurementLegislationDocumentReference/cbc:ID[@schemeName='ELI']",
         namespaces=namespaces,
     )
-    if legal_basis_id:
-        result["tender"]["legalBasis"]["scheme"] = "ELI"
-        result["tender"]["legalBasis"]["id"] = legal_basis_id[0].text
 
-    # Parse legal basis description
-    legal_basis_description = root.xpath(
-        "//cac:ProcurementLegislationDocumentReference[not(cbc:ID='CrossBorderLaw' or cbc:ID='LocalLegalBasis')]/cbc:DocumentDescription",
-        namespaces=namespaces,
-    )
-    if legal_basis_description:
-        result["tender"]["legalBasis"]["description"] = legal_basis_description[0].text
+    logger.info("Found %d references with ELI scheme", len(refs))
 
-    # Parse legal basis NoID
-    legal_basis_noid = root.xpath(
-        "//cac:ProcurementLegislationDocumentReference[cbc:ID='LocalLegalBasis']/cbc:ID",
-        namespaces=namespaces,
-    )
-    if legal_basis_noid:
-        result["tender"]["legalBasis"]["id"] = legal_basis_noid[0].text
+    for ref in refs:
+        id_value = ref.text.strip()
+        logger.info("Processing reference: %s", id_value)
 
-    # Parse legal basis NoID description
-    legal_basis_noid_description = root.xpath(
-        "//cac:ProcurementLegislationDocumentReference[cbc:ID='LocalLegalBasis']/cbc:DocumentDescription",
-        namespaces=namespaces,
-    )
-    if legal_basis_noid_description:
-        result["tender"]["legalBasis"]["description"] = legal_basis_noid_description[
-            0
-        ].text
+        if id_value not in ("CrossBorderLaw", "LocalLegalBasis"):
+            logger.info("Found valid legal basis: %s", id_value)
+            return {"tender": {"legalBasis": {"scheme": "ELI", "id": id_value}}}
 
-    # Parse legal basis notice
-    regulatory_domain = root.xpath("//cbc:RegulatoryDomain", namespaces=namespaces)
-    if regulatory_domain:
-        result["tender"]["legalBasis"]["scheme"] = "CELEX"
-        result["tender"]["legalBasis"]["id"] = regulatory_domain[0].text
-
-    if result["tender"]["legalBasis"]:
-        logger.info("Parsed procedure Legal Basis data")
-        return result
-    logger.info("No procedure Legal Basis data found")
+    logger.info("No valid legal basis found")
     return None
 
 
 def merge_procedure_legal_basis(release_json, legal_basis_data):
+    """
+    Merge the parsed legal basis data into the main OCDS release JSON.
+    """
+    logger.info("Starting merge with data: %s", legal_basis_data)
     if not legal_basis_data:
+        logger.info("No legal basis data to merge")
         return
 
-    tender = release_json.setdefault("tender", {})
-    legal_basis = tender.setdefault("legalBasis", {})
-    legal_basis.update(legal_basis_data["tender"]["legalBasis"])
-    logger.info("Merged procedure Legal Basis data")
+    try:
+        tender = release_json.setdefault("tender", {})
+        legal_basis = legal_basis_data["tender"]["legalBasis"]
+        tender["legalBasis"] = legal_basis
+        logger.info("Successfully merged legal basis: %s", legal_basis)
+    except Exception:
+        logger.exception("Error merging legal basis: %s")
