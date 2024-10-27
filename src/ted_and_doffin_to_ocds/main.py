@@ -14,6 +14,22 @@ from ted_and_doffin_to_ocds.converters.bt_01_procedure import (
     parse_procedure_legal_basis,
     merge_procedure_legal_basis,
 )
+from ted_and_doffin_to_ocds.converters.bt_01d_procedure import (
+    parse_procedure_legal_basis_description,
+    merge_procedure_legal_basis_description,
+)
+from ted_and_doffin_to_ocds.converters.bt_01e_procedure import (
+    parse_procedure_legal_basis_noid,
+    merge_procedure_legal_basis_noid,
+)
+from ted_and_doffin_to_ocds.converters.bt_01f_procedure import (
+    parse_procedure_legal_basis_noid_description,
+    merge_procedure_legal_basis_noid_description,
+)
+from ted_and_doffin_to_ocds.converters.bt_01_notice import (
+    parse_procedure_legal_basis_regulatory,
+    merge_procedure_legal_basis_regulatory,
+)
 from ted_and_doffin_to_ocds.converters.bt_03 import parse_form_type, merge_form_type
 from ted_and_doffin_to_ocds.converters.bt_04_procedure import (
     parse_procedure_identifier,
@@ -2467,6 +2483,26 @@ def process_bt_sections(release_json, xml_content):
             parse_procedure_legal_basis,
             merge_procedure_legal_basis,
             "procedure Legal Basis (BT-01)",
+        ),
+        (
+            parse_procedure_legal_basis_description,
+            merge_procedure_legal_basis_description,
+            "procedure Legal Basis Description (BT-01d)",
+        ),
+        (
+            parse_procedure_legal_basis_noid,
+            merge_procedure_legal_basis_noid,
+            "procedure Legal Basis NoID (BT-01e)",
+        ),
+        (
+            parse_procedure_legal_basis_noid_description,
+            merge_procedure_legal_basis_noid_description,
+            "procedure Legal Basis NoID Description (BT-01f)",
+        ),
+        (
+            parse_procedure_legal_basis_regulatory,
+            merge_procedure_legal_basis_regulatory,
+            "procedure Legal Basis Regulatory Domain (BT-01-notice)",
         ),
         (parse_form_type, merge_form_type, "Form Type (BT-03)"),
         (
