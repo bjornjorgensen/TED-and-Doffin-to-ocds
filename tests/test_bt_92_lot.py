@@ -7,16 +7,39 @@ from ted_and_doffin_to_ocds.converters.bt_92_lot import (
 )
 import json
 import sys
+import logging
+import tempfile
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main
+from src.ted_and_doffin_to_ocds.main import main, configure_logging
+
+
+@pytest.fixture(scope="module")
+def setup_logging():
+    configure_logging()
+    return logging.getLogger(__name__)
+
+
+@pytest.fixture
+def temp_output_dir():
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        yield Path(tmpdirname)
+
+
+def run_main_and_get_result(xml_file, output_dir):
+    main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
+    output_files = list(output_dir.glob("*.json"))
+    assert len(output_files) == 1, f"Expected 1 output file, got {len(output_files)}"
+    with output_files[0].open() as f:
+        return json.load(f)
 
 
 def test_parse_electronic_ordering():
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
             <cbc:ID>LOT-0001</cbc:ID>
             <cac:TenderingTerms>
@@ -25,7 +48,7 @@ def test_parse_electronic_ordering():
                 </cac:PostAwardProcess>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
-    </root>
+    </ContractAwardNotice>
     """
 
     result = parse_electronic_ordering(xml_content)
@@ -58,10 +81,15 @@ def test_merge_electronic_ordering():
     )
 
 
-def test_bt_92_lot_electronic_ordering_integration(tmp_path):
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+def test_bt_92_lot_electronic_ordering_integration(
+    tmp_path, setup_logging, temp_output_dir
+):
+    logger = setup_logging
+
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
             <cbc:ID>LOT-0001</cbc:ID>
             <cac:TenderingTerms>
@@ -78,34 +106,34 @@ def test_bt_92_lot_electronic_ordering_integration(tmp_path):
                 </cac:PostAwardProcess>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
-    </root>
+    </ContractAwardNotice>
     """
+
+    # Create input XML file
     xml_file = tmp_path / "test_input_electronic_ordering.xml"
     xml_file.write_text(xml_content)
 
-    main(str(xml_file), "ocds-test-prefix")
+    # Run main and get result
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
-    with Path("output.json").open() as f:
-        result = json.load(f)
-
+    # Verify the results
     assert "tender" in result
     assert "lots" in result["tender"]
     assert len(result["tender"]["lots"]) == 2
 
     lot_1 = next(
-        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0001"),
-        None,
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0001"), None
     )
     assert lot_1 is not None
     assert lot_1["contractTerms"]["hasElectronicOrdering"] is True
 
     lot_2 = next(
-        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002"),
-        None,
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002"), None
     )
     assert lot_2 is not None
     assert lot_2["contractTerms"]["hasElectronicOrdering"] is False
 
 
 if __name__ == "__main__":
-    pytest.main()
+    pytest.main(["-v", "-s"])

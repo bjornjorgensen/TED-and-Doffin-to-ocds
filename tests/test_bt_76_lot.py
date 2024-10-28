@@ -33,9 +33,13 @@ def run_main_and_get_result(xml_file, output_dir):
 
 def test_bt_76_lot_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cbc:ID>notice-1</cbc:ID>
+        <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
@@ -52,15 +56,18 @@ def test_bt_76_lot_integration(tmp_path, setup_logging, temp_output_dir):
                 </cac:TendererQualificationRequest>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
-    </root>
+    </ContractAwardNotice>
     """
+
+    # Create input XML file
     xml_file = tmp_path / "test_input_tenderer_legal_form.xml"
     xml_file.write_text(xml_content)
 
+    # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-
     logger.info("Result: %s", json.dumps(result, indent=2))
 
+    # Verify the results
     assert "tender" in result, "Expected 'tender' in result"
     assert "lots" in result["tender"], "Expected 'lots' in tender"
     assert (
@@ -91,9 +98,13 @@ def test_bt_76_lot_integration(tmp_path, setup_logging, temp_output_dir):
 
 def test_bt_76_lot_missing_company_legal_form(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cbc:ID>notice-1</cbc:ID>
+        <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
@@ -102,15 +113,18 @@ def test_bt_76_lot_missing_company_legal_form(tmp_path, setup_logging, temp_outp
                 </cac:TendererQualificationRequest>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
-    </root>
+    </ContractAwardNotice>
     """
+
+    # Create input XML file
     xml_file = tmp_path / "test_input_missing_company_legal_form.xml"
     xml_file.write_text(xml_content)
 
+    # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-
     logger.info("Result: %s", json.dumps(result, indent=2))
 
+    # Verify the results
     assert "tender" in result, "Expected 'tender' in result"
     assert "lots" in result["tender"], "Expected 'lots' in tender"
     assert (
@@ -126,9 +140,13 @@ def test_bt_76_lot_missing_company_legal_form(tmp_path, setup_logging, temp_outp
 
 def test_bt_76_lot_empty_company_legal_form(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cbc:ID>notice-1</cbc:ID>
+        <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
@@ -137,15 +155,18 @@ def test_bt_76_lot_empty_company_legal_form(tmp_path, setup_logging, temp_output
                 </cac:TendererQualificationRequest>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
-    </root>
+    </ContractAwardNotice>
     """
+
+    # Create input XML file
     xml_file = tmp_path / "test_input_empty_company_legal_form.xml"
     xml_file.write_text(xml_content)
 
+    # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-
     logger.info("Result: %s", json.dumps(result, indent=2))
 
+    # Verify the results
     assert "tender" in result, "Expected 'tender' in result"
     assert "lots" in result["tender"], "Expected 'lots' in tender"
     assert (
@@ -163,9 +184,13 @@ def test_bt_76_lot_multiple_qualification_requests(
     tmp_path, setup_logging, temp_output_dir
 ):
     logger = setup_logging
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cbc:ID>notice-1</cbc:ID>
+        <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
@@ -177,15 +202,18 @@ def test_bt_76_lot_multiple_qualification_requests(
                 </cac:TendererQualificationRequest>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
-    </root>
+    </ContractAwardNotice>
     """
+
+    # Create input XML file
     xml_file = tmp_path / "test_input_multiple_qualification_requests.xml"
     xml_file.write_text(xml_content)
 
+    # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-
     logger.info("Result: %s", json.dumps(result, indent=2))
 
+    # Verify the results
     assert "tender" in result, "Expected 'tender' in result"
     assert "lots" in result["tender"], "Expected 'lots' in tender"
     assert (
