@@ -33,7 +33,7 @@ def run_main_and_get_result(xml_file, output_dir):
 
 def test_bt_7220_lot_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-    
+
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
           xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -61,28 +61,30 @@ def test_bt_7220_lot_integration(tmp_path, setup_logging, temp_output_dir):
     """
     xml_file = tmp_path / "test_input_lot_eu_funds.xml"
     xml_file.write_text(xml_content)
-    logger.info(f"Created XML file at {xml_file}")
-    logger.info(f"Output directory: {temp_output_dir}")
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
     logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "lots" in result["tender"], "Expected 'lots' in tender"
-    assert len(result["tender"]["lots"]) == 1, f"Expected 1 lot, got {len(result['tender']['lots'])}"
+    assert (
+        len(result["tender"]["lots"]) == 1
+    ), f"Expected 1 lot, got {len(result['tender']['lots'])}"
 
     lot = result["tender"]["lots"][0]
     assert lot["id"] == "LOT-0001", f"Expected lot id 'LOT-0001', got {lot['id']}"
     assert "planning" in lot, "Expected 'planning' in lot"
     assert "budget" in lot["planning"], "Expected 'budget' in lot planning"
     assert "finance" in lot["planning"]["budget"], "Expected 'finance' in lot budget"
-    assert len(lot["planning"]["budget"]["finance"]) == 1, \
-        f"Expected 1 finance object, got {len(lot['planning']['budget']['finance'])}"
-    
+    assert (
+        len(lot["planning"]["budget"]["finance"]) == 1
+    ), f"Expected 1 finance object, got {len(lot['planning']['budget']['finance'])}"
+
     finance = lot["planning"]["budget"]["finance"][0]
     assert finance["id"] == "1", f"Expected finance id '1', got {finance['id']}"
-    assert finance["title"] == "ERDF_2021", \
-        f"Expected finance title 'ERDF_2021', got {finance['title']}"
+    assert (
+        finance["title"] == "ERDF_2021"
+    ), f"Expected finance title 'ERDF_2021', got {finance['title']}"
 
 
 if __name__ == "__main__":

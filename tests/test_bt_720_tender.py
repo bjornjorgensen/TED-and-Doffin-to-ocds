@@ -33,7 +33,7 @@ def run_main_and_get_result(xml_file, output_dir):
 
 def test_bt_720_tender_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-    
+
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
           xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -73,8 +73,6 @@ def test_bt_720_tender_integration(tmp_path, setup_logging, temp_output_dir):
     """
     xml_file = tmp_path / "test_input_tender_value.xml"
     xml_file.write_text(xml_content)
-    logger.info(f"Created XML file at {xml_file}")
-    logger.info(f"Output directory: {temp_output_dir}")
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
     logger.info("Result: %s", json.dumps(result, indent=2))
@@ -88,20 +86,36 @@ def test_bt_720_tender_integration(tmp_path, setup_logging, temp_output_dir):
     bid = result["bids"]["details"][0]
     assert bid["id"] == "TEN-0001", f"Expected bid id 'TEN-0001', got '{bid.get('id')}'"
     assert "value" in bid, f"No 'value' in bid. Bid keys: {list(bid.keys())}"
-    assert "amount" in bid["value"], f"No 'amount' in bid['value']. Value keys: {list(bid['value'].keys())}"
-    assert bid["value"]["amount"] == 500, f"Expected amount 500, got {bid['value'].get('amount')}"
-    assert bid["value"]["currency"] == "EUR", f"Expected currency 'EUR', got '{bid['value'].get('currency')}'"
+    assert (
+        "amount" in bid["value"]
+    ), f"No 'amount' in bid['value']. Value keys: {list(bid['value'].keys())}"
+    assert (
+        bid["value"]["amount"] == 500
+    ), f"Expected amount 500, got {bid['value'].get('amount')}"
+    assert (
+        bid["value"]["currency"] == "EUR"
+    ), f"Expected currency 'EUR', got '{bid['value'].get('currency')}'"
 
     assert "awards" in result, "No 'awards' in result"
     assert len(result["awards"]) == 1, f"Expected 1 award, got {len(result['awards'])}"
 
     award = result["awards"][0]
-    assert award["id"] == "RES-0001", f"Expected award id 'RES-0001', got '{award.get('id')}'"
+    assert (
+        award["id"] == "RES-0001"
+    ), f"Expected award id 'RES-0001', got '{award.get('id')}'"
     assert "value" in award, f"No 'value' in award. Award keys: {list(award.keys())}"
-    assert "amount" in award["value"], f"No 'amount' in award['value']. Value keys: {list(award['value'].keys())}"
-    assert award["value"]["amount"] == 500, f"Expected amount 500, got {award['value'].get('amount')}"
-    assert award["value"]["currency"] == "EUR", f"Expected currency 'EUR', got '{award['value'].get('currency')}'"
-    assert award["relatedLots"] == ["LOT-0001"], f"Expected relatedLots ['LOT-0001'], got {award.get('relatedLots')}"
+    assert (
+        "amount" in award["value"]
+    ), f"No 'amount' in award['value']. Value keys: {list(award['value'].keys())}"
+    assert (
+        award["value"]["amount"] == 500
+    ), f"Expected amount 500, got {award['value'].get('amount')}"
+    assert (
+        award["value"]["currency"] == "EUR"
+    ), f"Expected currency 'EUR', got '{award['value'].get('currency')}'"
+    assert award["relatedLots"] == [
+        "LOT-0001"
+    ], f"Expected relatedLots ['LOT-0001'], got {award.get('relatedLots')}"
 
 
 if __name__ == "__main__":

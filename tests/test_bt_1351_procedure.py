@@ -31,9 +31,11 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_1351_accelerated_procedure_justification_integration(tmp_path, setup_logging, temp_output_dir):
+def test_bt_1351_accelerated_procedure_justification_integration(
+    tmp_path, setup_logging, temp_output_dir
+):
     logger = setup_logging
-    
+
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
           xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -48,18 +50,19 @@ def test_bt_1351_accelerated_procedure_justification_integration(tmp_path, setup
     """
     xml_file = tmp_path / "test_input_accelerated_procedure_justification.xml"
     xml_file.write_text(xml_content)
-    logger.info(f"Created XML file at {xml_file}")
-    logger.info(f"Output directory: {temp_output_dir}")
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
     logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "procedure" in result["tender"], "Expected 'procedure' in tender"
-    assert "acceleratedRationale" in result["tender"]["procedure"], \
-        "Expected 'acceleratedRationale' in procedure"
-    assert result["tender"]["procedure"]["acceleratedRationale"] == "Direct award is justified ...", \
-        f"Expected 'Direct award is justified ...', got {result['tender']['procedure']['acceleratedRationale']}"
+    assert (
+        "acceleratedRationale" in result["tender"]["procedure"]
+    ), "Expected 'acceleratedRationale' in procedure"
+    assert (
+        result["tender"]["procedure"]["acceleratedRationale"]
+        == "Direct award is justified ..."
+    ), f"Expected 'Direct award is justified ...', got {result['tender']['procedure']['acceleratedRationale']}"
 
 
 if __name__ == "__main__":

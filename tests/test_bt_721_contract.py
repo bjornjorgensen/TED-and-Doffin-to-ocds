@@ -33,7 +33,7 @@ def run_main_and_get_result(xml_file, output_dir):
 
 def test_bt_721_contract_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-    
+
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
           xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -65,19 +65,25 @@ def test_bt_721_contract_integration(tmp_path, setup_logging, temp_output_dir):
     """
     xml_file = tmp_path / "test_input_contract_title.xml"
     xml_file.write_text(xml_content)
-    logger.info(f"Created XML file at {xml_file}")
-    logger.info(f"Output directory: {temp_output_dir}")
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
     logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "contracts" in result, "Expected 'contracts' in result"
-    assert len(result["contracts"]) == 1, f"Expected 1 contract, got {len(result['contracts'])}"
+    assert (
+        len(result["contracts"]) == 1
+    ), f"Expected 1 contract, got {len(result['contracts'])}"
 
     contract = result["contracts"][0]
-    assert contract["id"] == "CON-0001", f"Expected contract id 'CON-0001', got {contract['id']}"
-    assert contract["title"] == "My contract title", f"Expected contract title 'My contract title', got {contract['title']}"
-    assert contract["awardID"] == "RES-0001", f"Expected award id 'RES-0001', got {contract['awardID']}"
+    assert (
+        contract["id"] == "CON-0001"
+    ), f"Expected contract id 'CON-0001', got {contract['id']}"
+    assert (
+        contract["title"] == "My contract title"
+    ), f"Expected contract title 'My contract title', got {contract['title']}"
+    assert (
+        contract["awardID"] == "RES-0001"
+    ), f"Expected award id 'RES-0001', got {contract['awardID']}"
 
 
 if __name__ == "__main__":

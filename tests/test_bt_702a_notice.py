@@ -35,7 +35,7 @@ def run_main_and_get_result(xml_file, output_dir):
 
 def test_bt_702a_notice_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-    
+
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
                     xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -44,19 +44,21 @@ def test_bt_702a_notice_integration(tmp_path, setup_logging, temp_output_dir):
     """
     xml_file = tmp_path / "test_input_notice_language.xml"
     xml_file.write_text(xml_content)
-    logger.info(f"Created XML file at {xml_file}")
-    logger.info(f"Output directory: {temp_output_dir}")
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
     logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "language" in result, "Expected 'language' in result"
-    assert result["language"] == "en", f"Expected language 'en', got {result['language']}"
+    assert (
+        result["language"] == "en"
+    ), f"Expected language 'en', got {result['language']}"
 
 
-def test_bt_702a_notice_integration_unknown_language(tmp_path, setup_logging, temp_output_dir):
+def test_bt_702a_notice_integration_unknown_language(
+    tmp_path, setup_logging, temp_output_dir
+):
     logger = setup_logging
-    
+
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
                     xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -68,15 +70,15 @@ def test_bt_702a_notice_integration_unknown_language(tmp_path, setup_logging, te
     """
     xml_file = tmp_path / "test_input_unknown_language.xml"
     xml_file.write_text(xml_content)
-    logger.info(f"Created XML file at {xml_file}")
-    logger.info(f"Output directory: {temp_output_dir}")
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
     logger.info("Result: %s", json.dumps(result, indent=2))
 
     # Don't assert language field must exist since it's removed when invalid
     if "language" in result:
-        assert result["language"] == "und", f"Expected language 'und', got {result['language']}"
+        assert (
+            result["language"] == "und"
+        ), f"Expected language 'und', got {result['language']}"
 
 
 if __name__ == "__main__":

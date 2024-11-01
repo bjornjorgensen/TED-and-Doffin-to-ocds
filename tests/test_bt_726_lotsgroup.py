@@ -33,7 +33,7 @@ def run_main_and_get_result(xml_file, output_dir):
 
 def test_bt_726_lots_group_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-    
+
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
           xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -48,24 +48,25 @@ def test_bt_726_lots_group_integration(tmp_path, setup_logging, temp_output_dir)
     """
     xml_file = tmp_path / "test_input_lots_group_sme_suitability.xml"
     xml_file.write_text(xml_content)
-    logger.info(f"Created XML file at {xml_file}")
-    logger.info(f"Output directory: {temp_output_dir}")
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
     logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "lotGroups" in result["tender"], "Expected 'lotGroups' in tender"
-    assert len(result["tender"]["lotGroups"]) == 1, \
-        f"Expected 1 lot group, got {len(result['tender']['lotGroups'])}"
+    assert (
+        len(result["tender"]["lotGroups"]) == 1
+    ), f"Expected 1 lot group, got {len(result['tender']['lotGroups'])}"
 
     lot_group = result["tender"]["lotGroups"][0]
-    assert lot_group["id"] == "GLO-0001", \
-        f"Expected lot group id 'GLO-0001', got {lot_group['id']}"
+    assert (
+        lot_group["id"] == "GLO-0001"
+    ), f"Expected lot group id 'GLO-0001', got {lot_group['id']}"
     assert "suitability" in lot_group, "Expected 'suitability' in lot group"
     assert "sme" in lot_group["suitability"], "Expected 'sme' in lot group suitability"
-    assert lot_group["suitability"]["sme"] is True, \
-        f"Expected SME suitability to be True, got {lot_group['suitability']['sme']}"
+    assert (
+        lot_group["suitability"]["sme"] is True
+    ), f"Expected SME suitability to be True, got {lot_group['suitability']['sme']}"
 
 
 if __name__ == "__main__":

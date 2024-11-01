@@ -33,7 +33,7 @@ def run_main_and_get_result(xml_file, output_dir):
 
 def test_bt_723_lot_result_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-    
+
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
           xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -69,8 +69,6 @@ def test_bt_723_lot_result_integration(tmp_path, setup_logging, temp_output_dir)
     """
     xml_file = tmp_path / "test_input_vehicle_category.xml"
     xml_file.write_text(xml_content)
-    logger.info(f"Created XML file at {xml_file}")
-    logger.info(f"Output directory: {temp_output_dir}")
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
     logger.info("Result: %s", json.dumps(result, indent=2))
@@ -80,25 +78,32 @@ def test_bt_723_lot_result_integration(tmp_path, setup_logging, temp_output_dir)
 
     award = result["awards"][0]
     assert award["id"] == "RES-0001", f"Expected award id 'RES-0001', got {award['id']}"
-    assert award["relatedLots"] == ["LOT-0001"], \
-        f"Expected related lot 'LOT-0001', got {award['relatedLots']}"
-    
+    assert award["relatedLots"] == [
+        "LOT-0001"
+    ], f"Expected related lot 'LOT-0001', got {award['relatedLots']}"
+
     assert "items" in award, "Expected 'items' in award"
     assert len(award["items"]) == 1, f"Expected 1 item, got {len(award['items'])}"
 
     item = award["items"][0]
     assert item["id"] == "1", f"Expected item id '1', got {item['id']}"
-    assert "additionalClassifications" in item, "Expected 'additionalClassifications' in item"
-    assert len(item["additionalClassifications"]) == 1, \
-        f"Expected 1 additional classification, got {len(item['additionalClassifications'])}"
+    assert (
+        "additionalClassifications" in item
+    ), "Expected 'additionalClassifications' in item"
+    assert (
+        len(item["additionalClassifications"]) == 1
+    ), f"Expected 1 additional classification, got {len(item['additionalClassifications'])}"
 
     classification = item["additionalClassifications"][0]
-    assert classification["scheme"] == "eu-vehicle-category", \
-        f"Expected scheme 'eu-vehicle-category', got {classification['scheme']}"
-    assert classification["id"] == "n2-n3", \
-        f"Expected id 'n2-n3', got {classification['id']}"
-    assert classification["description"] == "Truck (N2-N3)", \
-        f"Expected description 'Truck (N2-N3)', got {classification['description']}"
+    assert (
+        classification["scheme"] == "eu-vehicle-category"
+    ), f"Expected scheme 'eu-vehicle-category', got {classification['scheme']}"
+    assert (
+        classification["id"] == "n2-n3"
+    ), f"Expected id 'n2-n3', got {classification['id']}"
+    assert (
+        classification["description"] == "Truck (N2-N3)"
+    ), f"Expected description 'Truck (N2-N3)', got {classification['description']}"
 
 
 if __name__ == "__main__":

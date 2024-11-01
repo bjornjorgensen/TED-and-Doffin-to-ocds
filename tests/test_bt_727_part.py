@@ -33,7 +33,7 @@ def run_main_and_get_result(xml_file, output_dir):
 
 def test_bt_727_part_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-    
+
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
           xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -52,26 +52,29 @@ def test_bt_727_part_integration(tmp_path, setup_logging, temp_output_dir):
     """
     xml_file = tmp_path / "test_input_part_place_performance.xml"
     xml_file.write_text(xml_content)
-    logger.info(f"Created XML file at {xml_file}")
-    logger.info(f"Output directory: {temp_output_dir}")
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
     logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "items" in result["tender"], "Expected 'items' in tender"
-    assert len(result["tender"]["items"]) == 1, \
-        f"Expected 1 item, got {len(result['tender']['items'])}"
+    assert (
+        len(result["tender"]["items"]) == 1
+    ), f"Expected 1 item, got {len(result['tender']['items'])}"
 
     item = result["tender"]["items"][0]
     assert item["id"] == "1", f"Expected item id '1', got {item['id']}"
-    assert item["relatedLot"] == "PART-0001", \
-        f"Expected related lot 'PART-0001', got {item['relatedLot']}"
+    assert (
+        item["relatedLot"] == "PART-0001"
+    ), f"Expected related lot 'PART-0001', got {item['relatedLot']}"
     assert "deliveryLocations" in item, "Expected 'deliveryLocations' in item"
-    assert len(item["deliveryLocations"]) == 1, \
-        f"Expected 1 delivery location, got {len(item['deliveryLocations'])}"
-    assert item["deliveryLocations"][0]["description"] == "Anywhere in the European Economic Area", \
-        f"Expected description 'Anywhere in the European Economic Area', got {item['deliveryLocations'][0]['description']}"
+    assert (
+        len(item["deliveryLocations"]) == 1
+    ), f"Expected 1 delivery location, got {len(item['deliveryLocations'])}"
+    assert (
+        item["deliveryLocations"][0]["description"]
+        == "Anywhere in the European Economic Area"
+    ), f"Expected description 'Anywhere in the European Economic Area', got {item['deliveryLocations'][0]['description']}"
 
 
 if __name__ == "__main__":

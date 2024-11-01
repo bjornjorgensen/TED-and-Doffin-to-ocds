@@ -32,7 +32,7 @@ def run_main_and_get_result(xml_file, output_dir):
 
 def test_bt_707_lot_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-    
+
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
           xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -50,8 +50,6 @@ def test_bt_707_lot_integration(tmp_path, setup_logging, temp_output_dir):
     """
     xml_file = tmp_path / "test_input_bt_707_lot.xml"
     xml_file.write_text(xml_content)
-    logger.info(f"Created XML file at {xml_file}")
-    logger.info(f"Output directory: {temp_output_dir}")
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
     logger.info("Result: %s", json.dumps(result, indent=2))
@@ -59,10 +57,12 @@ def test_bt_707_lot_integration(tmp_path, setup_logging, temp_output_dir):
     assert "tender" in result
     assert "documents" in result["tender"]
     assert len(result["tender"]["documents"]) == 1
-    
+
     document = result["tender"]["documents"][0]
     assert document["id"] == "20210521/CTFD/ENG/7654-02"
-    assert document["accessDetails"] == "Restricted. Intellectual property rights issues"
+    assert (
+        document["accessDetails"] == "Restricted. Intellectual property rights issues"
+    )
     assert document["relatedLots"] == ["LOT-0001"]
 
 
