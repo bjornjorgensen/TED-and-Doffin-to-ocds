@@ -31,7 +31,9 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_510c_organization_company_integration(tmp_path, setup_logging, temp_output_dir):
+def test_bt_510c_organization_company_integration(
+    tmp_path, setup_logging, temp_output_dir
+):
     logger = setup_logging
 
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
