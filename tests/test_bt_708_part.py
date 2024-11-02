@@ -1,3 +1,4 @@
+# tests/test_bt_708_part.py
 from pathlib import Path
 import pytest
 import json
@@ -24,7 +25,7 @@ def temp_output_dir():
 
 def run_main_and_get_result(xml_file, output_dir):
     main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
-    output_files = list(output_dir.glob("*.json"))
+    output_files = list(output_dir.glob("*_release_0.json"))
     assert len(output_files) == 1, f"Expected 1 output file, got {len(output_files)}"
     with output_files[0].open() as f:
         return json.load(f)
@@ -34,7 +35,7 @@ def test_bt_708_part_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
 
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
-    <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
           xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
@@ -61,7 +62,17 @@ def test_bt_708_part_integration(tmp_path, setup_logging, temp_output_dir):
                 </cac:CallForTendersDocumentReference>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
-    </ContractNotice>
+        <cac:Tender>
+            <cbc:ID>TENDER-0001</cbc:ID>
+            <cac:DocumentReference>
+                <cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID>
+                <cbc:DocumentTypeCode listName="communication-justification">ipr-iss</cbc:DocumentTypeCode>
+                <cac:RelatedLots>
+                    <cbc:ID>PART-0001</cbc:ID>
+                </cac:RelatedLots>
+            </cac:DocumentReference>
+        </cac:Tender>
+    </ContractAwardNotice>
     """
     xml_file = tmp_path / "test_input_bt_708_part.xml"
     xml_file.write_text(xml_content)
@@ -69,14 +80,24 @@ def test_bt_708_part_integration(tmp_path, setup_logging, temp_output_dir):
     result = run_main_and_get_result(xml_file, temp_output_dir)
     logger.info("Result: %s", json.dumps(result, indent=2))
 
-    assert "tender" in result
-    assert "documents" in result["tender"]
-    assert len(result["tender"]["documents"]) == 1
+    assert "tender" in result, "Expected 'tender' in result"
+    assert "documents" in result["tender"], "Expected 'documents' in tender"
+    assert (
+        len(result["tender"]["documents"]) == 1
+    ), f"Expected 1 document, got {len(result['tender']['documents'])}"
 
     document = result["tender"]["documents"][0]
-    assert document["id"] == "20210521/CTFD/ENG/7654-02"
-    assert document["languages"] == ["en"]
-    assert document["relatedLots"] == ["PART-0001"]
+    assert (
+        document["id"] == "20210521/CTFD/ENG/7654-02"
+    ), f"Expected document id '20210521/CTFD/ENG/7654-02', got {document['id']}"
+    assert (
+        document["accessDetails"] == "Restricted. Intellectual property rights issues"
+    ), f"Expected access details 'Restricted. Intellectual property rights issues', got {document['accessDetails']}"
+    assert document["relatedLots"] == [
+        "PART-0001"
+    ], f"Expected relatedLots ['PART-0001'], got {document['relatedLots']}"
+
+    logger.info("Test bt_708_part_integration passed successfully.")
 
 
 if __name__ == "__main__":

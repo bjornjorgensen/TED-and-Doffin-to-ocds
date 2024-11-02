@@ -25,7 +25,7 @@ def temp_output_dir():
 
 def run_main_and_get_result(xml_file, output_dir):
     main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
-    output_files = list(output_dir.glob("*.json"))
+    output_files = list(output_dir.glob("*_release_0.json"))
     assert len(output_files) == 1, f"Expected 1 output file, got {len(output_files)}"
     with output_files[0].open() as f:
         return json.load(f)
@@ -35,8 +35,9 @@ def test_bt_70_lot_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
 
     xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+                          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
@@ -46,7 +47,7 @@ def test_bt_70_lot_integration(tmp_path, setup_logging, temp_output_dir):
                 </cac:ContractExecutionRequirement>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
-    </root>
+    </ContractAwardNotice>
     """
     xml_file = tmp_path / "test_input_lot_performance_terms.xml"
     xml_file.write_text(xml_content)
@@ -71,6 +72,8 @@ def test_bt_70_lot_integration(tmp_path, setup_logging, temp_output_dir):
     assert (
         lot["contractTerms"]["performanceTerms"] == expected_performance_terms
     ), f"Expected performance terms '{expected_performance_terms}', got {lot['contractTerms']['performanceTerms']}"
+
+    logger.info("Test bt_70_lot_integration passed successfully.")
 
 
 if __name__ == "__main__":
