@@ -1,17 +1,42 @@
+from pathlib import Path
+import pytest
+import json
+import sys
+import logging
+import tempfile
+
+# Add the parent directory to sys.path to import main
+sys.path.append(str(Path(__file__).parent.parent))
+from src.ted_and_doffin_to_ocds.main import main, configure_logging
 from ted_and_doffin_to_ocds.converters.bt_706_ubo import (
     parse_ubo_nationality,
     merge_ubo_nationality,
 )
-from pathlib import Path
-import json
-import sys
-
-# Add the parent directory to sys.path to import main
-sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main
 
 
-def test_parse_ubo_nationality():
+@pytest.fixture(scope="module")
+def setup_logging():
+    configure_logging()
+    return logging.getLogger(__name__)
+
+
+@pytest.fixture
+def temp_output_dir():
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        yield Path(tmpdirname)
+
+
+def run_main_and_get_result(xml_file, output_dir):
+    main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
+    output_files = list(output_dir.glob("*.json"))
+    assert len(output_files) == 1, f"Expected 1 output file, got {len(output_files)}"
+    with output_files[0].open() as f:
+        return json.load(f)
+
+
+def test_parse_ubo_nationality(setup_logging):
+    logger = setup_logging
+
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -42,6 +67,7 @@ def test_parse_ubo_nationality():
     """
 
     result = parse_ubo_nationality(xml_content)
+    logger.info("Parse result: %s", json.dumps(result, indent=2))
 
     assert result is not None
     assert "parties" in result
@@ -52,7 +78,9 @@ def test_parse_ubo_nationality():
     assert result["parties"][0]["beneficialOwners"][0]["nationalities"] == ["DE"]
 
 
-def test_merge_ubo_nationality():
+def test_merge_ubo_nationality(setup_logging):
+    logger = setup_logging
+
     release_json = {"parties": [{"id": "ORG-0001", "name": "Existing organization"}]}
 
     ubo_nationality_data = {
@@ -65,6 +93,7 @@ def test_merge_ubo_nationality():
     }
 
     merge_ubo_nationality(release_json, ubo_nationality_data)
+    logger.info("Merged result: %s", json.dumps(release_json, indent=2))
 
     assert "beneficialOwners" in release_json["parties"][0]
     assert len(release_json["parties"][0]["beneficialOwners"]) == 1
@@ -72,9 +101,12 @@ def test_merge_ubo_nationality():
     assert release_json["parties"][0]["beneficialOwners"][0]["nationalities"] == ["DE"]
 
 
-def test_bt_706_ubo_nationality_integration(tmp_path):
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+def test_bt_706_ubo_nationality_integration(tmp_path, setup_logging, temp_output_dir):
+    logger = setup_logging
+
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1">
@@ -105,15 +137,13 @@ def test_bt_706_ubo_nationality_integration(tmp_path):
                 </efext:ExtensionContent>
             </efext:UBLExtension>
         </efext:UBLExtensions>
-    </root>
+    </ContractNotice>
     """
     xml_file = tmp_path / "test_input_ubo_nationality.xml"
     xml_file.write_text(xml_content)
 
-    main(str(xml_file), "ocds-test-prefix")
-
-    with Path("output.json").open() as f:
-        result = json.load(f)
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "parties" in result
     assert len(result["parties"]) == 1
@@ -128,3 +158,7 @@ def test_bt_706_ubo_nationality_integration(tmp_path):
     ubo_2 = next((ubo for ubo in beneficial_owners if ubo["id"] == "ubo-0002"), None)
     assert ubo_2 is not None
     assert ubo_2["nationalities"] == ["FR"]
+
+
+if __name__ == "__main__":
+    pytest.main(["-v", "-s"])
