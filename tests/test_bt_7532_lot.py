@@ -3,13 +3,17 @@ from pathlib import Path
 import pytest
 import json
 import sys
+import logging
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main
+from src.ted_and_doffin_to_ocds.main import main, configure_logging
 
 
 def test_bt_7532_lot_integration(tmp_path):
+    configure_logging()
+    logger = logging.getLogger(__name__)
+
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -41,10 +45,23 @@ def test_bt_7532_lot_integration(tmp_path):
     xml_file = tmp_path / "test_input_selection_criteria_number_threshold.xml"
     xml_file.write_text(xml_content)
 
-    main(str(xml_file), "ocds-test-prefix")
+    # Define the output directory
+    output_dir = tmp_path / "output"
+    output_dir.mkdir()
 
-    with Path("output.json").open() as f:
+    # Call main with the required arguments
+    main(str(xml_file), str(output_dir), "ocds-test-prefix")
+
+    # Path to the output JSON file
+    output_json = output_dir / "output.json"
+
+    # Ensure the output file exists
+    assert output_json.exists(), "Output JSON file does not exist."
+
+    with output_json.open() as f:
         result = json.load(f)
+
+    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "lots" in result["tender"], "Expected 'lots' in tender"
@@ -73,4 +90,4 @@ def test_bt_7532_lot_integration(tmp_path):
 
 
 if __name__ == "__main__":
-    pytest.main()
+    pytest.main(["-v", "-s"])

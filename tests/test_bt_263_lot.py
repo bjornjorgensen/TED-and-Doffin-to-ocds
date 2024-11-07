@@ -25,8 +25,18 @@ def temp_output_dir():
 
 
 def run_main_and_get_result(xml_file, output_dir):
-    main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
+    logging.info(
+        "Running main with xml_file: %s and output_dir: %s", xml_file, output_dir
+    )
+    try:
+        main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
+        logging.info("main() executed successfully.")
+    except Exception:
+        logging.exception("Exception occurred while running main():")
+        raise
+
     output_files = list(output_dir.glob("*.json"))
+    logging.info("Output files found: %s", output_files)
     assert len(output_files) == 1, f"Expected 1 output file, got {len(output_files)}"
     with output_files[0].open() as f:
         return json.load(f)
@@ -35,7 +45,7 @@ def run_main_and_get_result(xml_file, output_dir):
 def test_bt_263_lot_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
     xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
@@ -48,7 +58,7 @@ def test_bt_263_lot_integration(tmp_path, setup_logging, temp_output_dir):
                 </cac:AdditionalCommodityClassification>
             </cac:ProcurementProject>
         </cac:ProcurementProjectLot>
-    </root>
+    </ContractNotice>
     """
     xml_file = tmp_path / "test_input_additional_classification_code.xml"
     xml_file.write_text(xml_content)
