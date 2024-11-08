@@ -43,18 +43,19 @@ def run_main_and_get_result(xml_file, output_dir):
 
 
 def test_parse_green_procurement():
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
-            <cac:ProcurementProject>
-                <cac:ProcurementAdditionalType>
-                    <cbc:ProcurementTypeCode listName="environmental-impact">circ-econ</cbc:ProcurementTypeCode>
-                </cac:ProcurementAdditionalType>
-            </cac:ProcurementProject>
-        </cac:ProcurementProjectLot>
-    </root>
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+<ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    <cac:ProcurementProjectLot>
+        <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+        <cac:ProcurementProject>
+            <cac:ProcurementAdditionalType>
+                <cbc:ProcurementTypeCode listName="environmental-impact">circ-econ</cbc:ProcurementTypeCode>
+            </cac:ProcurementAdditionalType>
+        </cac:ProcurementProject>
+    </cac:ProcurementProjectLot>
+</ContractNotice>
     """
 
     result = parse_green_procurement(xml_content)
@@ -115,35 +116,35 @@ def test_bt_774_lot_green_procurement_integration(
     tmp_path, setup_logging, temp_output_dir
 ):
     logger = setup_logging
-
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
-            <cac:ProcurementProject>
-                <cac:ProcurementAdditionalType>
-                    <cbc:ProcurementTypeCode listName="environmental-impact">circ-econ</cbc:ProcurementTypeCode>
-                </cac:ProcurementAdditionalType>
-            </cac:ProcurementProject>
-        </cac:ProcurementProjectLot>
-        <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Lot">LOT-0002</cbc:ID>
-            <cac:ProcurementProject>
-                <cac:ProcurementAdditionalType>
-                    <cbc:ProcurementTypeCode listName="environmental-impact">biodiv-eco</cbc:ProcurementTypeCode>
-                </cac:ProcurementAdditionalType>
-            </cac:ProcurementProject>
-        </cac:ProcurementProjectLot>
-        <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Lot">LOT-0003</cbc:ID>
-            <cac:ProcurementProject>
-                <cac:ProcurementAdditionalType>
-                    <cbc:ProcurementTypeCode listName="other-type">not-environmental</cbc:ProcurementTypeCode>
-                </cac:ProcurementAdditionalType>
-            </cac:ProcurementProject>
-        </cac:ProcurementProjectLot>
-    </root>
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+<ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    <cac:ProcurementProjectLot>
+        <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+        <cac:ProcurementProject>
+            <cac:ProcurementAdditionalType>
+                <cbc:ProcurementTypeCode listName="environmental-impact">circ-econ</cbc:ProcurementTypeCode>
+            </cac:ProcurementAdditionalType>
+        </cac:ProcurementProject>
+    </cac:ProcurementProjectLot>
+    <cac:ProcurementProjectLot>
+        <cbc:ID schemeName="Lot">LOT-0002</cbc:ID>
+        <cac:ProcurementProject>
+            <cac:ProcurementAdditionalType>
+                <cbc:ProcurementTypeCode listName="environmental-impact">biodiv-eco</cbc:ProcurementTypeCode>
+            </cac:ProcurementAdditionalType>
+        </cac:ProcurementProject>
+    </cac:ProcurementProjectLot>
+    <cac:ProcurementProjectLot>
+        <cbc:ID schemeName="Lot">LOT-0003</cbc:ID>
+        <cac:ProcurementProject>
+            <cac:ProcurementAdditionalType>
+                <cbc:ProcurementTypeCode listName="other-type">not-environmental</cbc:ProcurementTypeCode>
+            </cac:ProcurementAdditionalType>
+        </cac:ProcurementProject>
+    </cac:ProcurementProjectLot>
+</ContractNotice>
     """
     xml_file = tmp_path / "test_input_green_procurement.xml"
     xml_file.write_text(xml_content)

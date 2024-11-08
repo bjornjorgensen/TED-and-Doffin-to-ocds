@@ -81,10 +81,10 @@ def test_bt_736_lot_reserved_execution_integration(
     tmp_path, setup_logging, temp_output_dir
 ):
     logger = setup_logging
-
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
@@ -101,7 +101,7 @@ def test_bt_736_lot_reserved_execution_integration(
                 </cac:ContractExecutionRequirement>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
-    </root>
+    </ContractNotice>
     """
     xml_file = tmp_path / "test_input_reserved_execution.xml"
     xml_file.write_text(xml_content)

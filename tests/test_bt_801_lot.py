@@ -40,34 +40,33 @@ def test_bt_801_lot_non_disclosure_agreement_integration(
     tmp_path, setup_logging, temp_output_dir
 ):
     logger = setup_logging
-
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
-            <cac:TenderingTerms>
-                <cac:ContractExecutionRequirement>
-                    <cbc:ExecutionRequirementCode listName="nda">true</cbc:ExecutionRequirementCode>
-                </cac:ContractExecutionRequirement>
-            </cac:TenderingTerms>
-        </cac:ProcurementProjectLot>
-        <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Lot">LOT-0002</cbc:ID>
-            <cac:TenderingTerms>
-                <cac:ContractExecutionRequirement>
-                    <cbc:ExecutionRequirementCode listName="nda">false</cbc:ExecutionRequirementCode>
-                </cac:ContractExecutionRequirement>
-            </cac:TenderingTerms>
-        </cac:ProcurementProjectLot>
-    </root>
-    """
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+<ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    <cac:ProcurementProjectLot>
+        <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+        <cac:TenderingTerms>
+            <cac:ContractExecutionRequirement>
+                <cbc:ExecutionRequirementCode listName="nda">true</cbc:ExecutionRequirementCode>
+            </cac:ContractExecutionRequirement>
+        </cac:TenderingTerms>
+    </cac:ProcurementProjectLot>
+    <cac:ProcurementProjectLot>
+        <cbc:ID schemeName="Lot">LOT-0002</cbc:ID>
+        <cac:TenderingTerms>
+            <cac:ContractExecutionRequirement>
+                <cbc:ExecutionRequirementCode listName="nda">false</cbc:ExecutionRequirementCode>
+            </cac:ContractExecutionRequirement>
+        </cac:TenderingTerms>
+    </cac:ProcurementProjectLot>
+</ContractNotice>
+"""
     xml_file = tmp_path / "test_input_non_disclosure_agreement.xml"
     xml_file.write_text(xml_content)
 
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-
     logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" in result, "Expected 'tender' in result"

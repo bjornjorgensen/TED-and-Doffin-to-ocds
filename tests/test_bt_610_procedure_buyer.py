@@ -33,28 +33,27 @@ def run_main_and_get_result(xml_file, output_dir):
 
 def test_bt_610_procedure_buyer_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-    xml_content = """
-    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
-          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:ContractingParty>
-            <cac:ContractingActivity>
-                <cbc:ActivityTypeCode listName="entity-activity">gas-oil</cbc:ActivityTypeCode>
-            </cac:ContractingActivity>
-            <cac:Party>
-                <cac:PartyIdentification>
-                    <cbc:ID>ORG-0001</cbc:ID>
-                </cac:PartyIdentification>
-            </cac:Party>
-        </cac:ContractingParty>
-    </ContractAwardNotice>
-    """
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+<ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    <cac:ContractingParty>
+        <cac:ContractingActivity>
+            <cbc:ActivityTypeCode listName="entity-activity">gas-oil</cbc:ActivityTypeCode>
+        </cac:ContractingActivity>
+        <cac:Party>
+            <cac:PartyIdentification>
+                <cbc:ID>ORG-0001</cbc:ID>
+            </cac:PartyIdentification>
+        </cac:Party>
+    </cac:ContractingParty>
+</ContractNotice>
+"""
     xml_file = tmp_path / "test_input_activity_entity.xml"
     xml_file.write_text(xml_content)
 
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-
     logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "parties" in result, "Expected 'parties' in result"

@@ -1,4 +1,3 @@
-# tests/test_bt_6110_contract.py
 from pathlib import Path
 import pytest
 import json
@@ -33,31 +32,44 @@ def run_main_and_get_result(xml_file, output_dir):
 
 def test_bt_6110_contract_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-    xml_content = """
-    <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
-        <efac:noticeResult>
-            <efac:SettledContract>
-                <cbc:ID schemeName="contract">CON-0001</cbc:ID>
-                <efac:Funding>
-                    <cbc:Description>Program for the development ...</cbc:Description>
-                </efac:Funding>
-            </efac:SettledContract>
-            <efac:LotResult>
-                <cbc:ID schemeName="result">RES-0001</cbc:ID>
-                <efac:SettledContract>
-                    <cbc:ID schemeName="contract">CON-0001</cbc:ID>
-                </efac:SettledContract>
-            </efac:LotResult>
-        </efac:noticeResult>
-    </root>
+
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+                         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+                         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+                         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+                         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:noticeResult>
+                            <efac:SettledContract>
+                                <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+                                <efac:Funding>
+                                    <cbc:Description>Program for the development ...</cbc:Description>
+                                </efac:Funding>
+                            </efac:SettledContract>
+                            <efac:LotResult>
+                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
+                                <efac:SettledContract>
+                                    <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+                                </efac:SettledContract>
+                            </efac:LotResult>
+                        </efac:noticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+    </ContractAwardNotice>
     """
+
     xml_file = tmp_path / "test_input_contract_eu_funds_details.xml"
     xml_file.write_text(xml_content)
 
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-
     logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "contracts" in result, "Expected 'contracts' in result"

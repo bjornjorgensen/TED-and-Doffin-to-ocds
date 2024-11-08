@@ -33,20 +33,20 @@ def run_main_and_get_result(xml_file, output_dir):
 
 def test_bt_736_part_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
-            <cac:TenderingTerms>
-                <cac:ContractExecutionRequirement>
-                    <cbc:ExecutionRequirementCode listName="reserved-execution">yes</cbc:ExecutionRequirementCode>
-                </cac:ContractExecutionRequirement>
-            </cac:TenderingTerms>
-        </cac:ProcurementProjectLot>
-    </root>
-    """
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+<ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    <cac:ProcurementProjectLot>
+        <cbc:ID schemeName="part">PART-0001</cbc:ID>
+        <cac:TenderingTerms>
+            <cac:ContractExecutionRequirement>
+                <cbc:ExecutionRequirementCode listName="reserved-execution">yes</cbc:ExecutionRequirementCode>
+            </cac:ContractExecutionRequirement>
+        </cac:TenderingTerms>
+    </cac:ProcurementProjectLot>
+</ContractNotice>
+"""
     xml_file = tmp_path / "test_input_reserved_execution_part.xml"
     xml_file.write_text(xml_content)
     logger.info("Created XML file at %s", xml_file)
@@ -74,20 +74,20 @@ def test_bt_736_part_integration(tmp_path, setup_logging, temp_output_dir):
 
 def test_bt_736_part_integration_no_value(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
-            <cac:TenderingTerms>
-                <cac:ContractExecutionRequirement>
-                    <cbc:ExecutionRequirementCode listName="reserved-execution">no</cbc:ExecutionRequirementCode>
-                </cac:ContractExecutionRequirement>
-            </cac:TenderingTerms>
-        </cac:ProcurementProjectLot>
-    </root>
-    """
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+<ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    <cac:ProcurementProjectLot>
+        <cbc:ID schemeName="part">PART-0001</cbc:ID>
+        <cac:TenderingTerms>
+            <cac:ContractExecutionRequirement>
+                <cbc:ExecutionRequirementCode listName="reserved-execution">no</cbc:ExecutionRequirementCode>
+            </cac:ContractExecutionRequirement>
+        </cac:TenderingTerms>
+    </cac:ProcurementProjectLot>
+</ContractNotice>
+"""
     xml_file = tmp_path / "test_input_reserved_execution_part_no.xml"
     xml_file.write_text(xml_content)
     logger.info("Created XML file at %s", xml_file)

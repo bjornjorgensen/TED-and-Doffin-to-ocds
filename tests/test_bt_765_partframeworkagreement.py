@@ -35,26 +35,25 @@ def test_bt_765_part_framework_agreement_integration(
     tmp_path, setup_logging, temp_output_dir
 ):
     logger = setup_logging
-
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
-            <cac:TenderingProcess>
-                <cac:ContractingSystem>
-                    <cbc:ContractingSystemTypeCode listName="framework-agreement">fa-wo-rc</cbc:ContractingSystemTypeCode>
-                </cac:ContractingSystem>
-            </cac:TenderingProcess>
-        </cac:ProcurementProjectLot>
-    </root>
-    """
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+<ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    <cac:ProcurementProjectLot>
+        <cbc:ID schemeName="part">PART-0001</cbc:ID>
+        <cac:TenderingProcess>
+            <cac:ContractingSystem>
+                <cbc:ContractingSystemTypeCode listName="framework-agreement">fa-wo-rc</cbc:ContractingSystemTypeCode>
+            </cac:ContractingSystem>
+        </cac:TenderingProcess>
+    </cac:ProcurementProjectLot>
+</ContractNotice>
+"""
     xml_file = tmp_path / "test_input_part_framework_agreement.xml"
     xml_file.write_text(xml_content)
 
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-
     logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" in result, "Expected 'tender' in result"
@@ -79,26 +78,25 @@ def test_bt_765_part_framework_agreement_integration(
 
 def test_bt_765_part_framework_agreement_none(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
-            <cac:TenderingProcess>
-                <cac:ContractingSystem>
-                    <cbc:ContractingSystemTypeCode listName="framework-agreement">none</cbc:ContractingSystemTypeCode>
-                </cac:ContractingSystem>
-            </cac:TenderingProcess>
-        </cac:ProcurementProjectLot>
-    </root>
-    """
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+<ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    <cac:ProcurementProjectLot>
+        <cbc:ID schemeName="part">PART-0001</cbc:ID>
+        <cac:TenderingProcess>
+            <cac:ContractingSystem>
+                <cbc:ContractingSystemTypeCode listName="framework-agreement">none</cbc:ContractingSystemTypeCode>
+            </cac:ContractingSystem>
+        </cac:TenderingProcess>
+    </cac:ProcurementProjectLot>
+</ContractNotice>
+"""
     xml_file = tmp_path / "test_input_part_framework_agreement_none.xml"
     xml_file.write_text(xml_content)
 
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-
     logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" in result, "Expected 'tender' in result"
