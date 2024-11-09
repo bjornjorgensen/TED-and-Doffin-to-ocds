@@ -1,7 +1,7 @@
 {
   "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c142b292-a309-45de-9093-f523abb667d3",
+  "ocid": "ocds-abcd1234-1ac44f42-489c-4275-a3b3-4e745aeed8da",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -105,22 +105,39 @@
     "contract"
   ],
   "date": "2024-06-27T14:32:30+00:00",
-  "bids": {
-    "details": [
-      {
-        "id": "TEN-0001",
-        "relatedLots": [
-          "LOT-0000"
-        ],
-        "tenderers": [
+  "parties": [
+    {
+      "id": "ORG-0002",
+      "details": {
+        "classifications": [
           {
-            "id": "ORG-0004"
+            "scheme": "COFOG",
+            "id": "08",
+            "description": "Recreation, culture and religion"
           }
         ]
-      }
-    ]
-  },
-  "parties": [
+      },
+      "name": "Grieghallen Utbygging AS",
+      "additionalIdentifiers": [
+        {
+          "id": "926 477 307",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "+475521 6100",
+        "email": "post@grieghallen.no"
+      },
+      "address": {
+        "locality": "Bergen"
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint",
+        "funder",
+        "payer"
+      ]
+    },
     {
       "id": "ORG-0001",
       "name": "Stiegler Advokatfirma AS",
@@ -143,29 +160,6 @@
       },
       "roles": [
         "processContactPoint"
-      ]
-    },
-    {
-      "id": "ORG-0002",
-      "name": "Grieghallen Utbygging AS",
-      "additionalIdentifiers": [
-        {
-          "id": "926 477 307",
-          "scheme": "GB-COH"
-        }
-      ],
-      "contactPoint": {
-        "telephone": "+475521 6100",
-        "email": "post@grieghallen.no"
-      },
-      "address": {
-        "locality": "Bergen"
-      },
-      "roles": [
-        "buyer",
-        "processContactPoint",
-        "payer",
-        "funder"
       ]
     },
     {
@@ -212,6 +206,21 @@
       ]
     }
   ],
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0004"
+          }
+        ]
+      }
+    ]
+  },
   "awards": [
     {
       "relatedBids": [

@@ -1,7 +1,7 @@
 {
   "id": "510444f4-6cd2-4b26-8dd6-f3af27ffa069",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c217faaa-0b62-473a-ba4b-320f7e40e4ec",
+  "ocid": "ocds-abcd1234-0c274c02-5efe-4ad2-98b3-a31f5a5f186b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -96,24 +96,18 @@
     "contract"
   ],
   "date": "2024-01-19T12:52:04+00:00",
-  "bids": {
-    "details": [
-      {
-        "id": "TEN-0001",
-        "relatedLots": [
-          "LOT-0000"
-        ],
-        "tenderers": [
-          {
-            "id": "ORG-0003"
-          }
-        ]
-      }
-    ]
-  },
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ]
+      },
       "name": "Ringerike Kommune",
       "additionalIdentifiers": [
         {
@@ -131,8 +125,8 @@
       },
       "roles": [
         "buyer",
-        "payer",
-        "funder"
+        "funder",
+        "payer"
       ]
     },
     {
@@ -177,6 +171,21 @@
       ]
     }
   ],
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      }
+    ]
+  },
   "awards": [
     {
       "id": "CON-0001",

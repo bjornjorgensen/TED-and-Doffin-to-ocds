@@ -1,7 +1,7 @@
 {
   "id": "2248a00d-a0d9-4eee-8db1-d209e7346f13",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-31d1a88c-15db-495b-be58-bb9c641680bc",
+  "ocid": "ocds-abcd1234-076065e3-83d6-4ed8-ba1c-e99fb3daa713",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -112,6 +112,15 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ]
+      },
       "name": "Drangsvann AS",
       "additionalIdentifiers": [
         {
@@ -135,6 +144,15 @@
     },
     {
       "id": "ORG-0002",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ]
+      },
       "name": "Kristiansand kommune",
       "additionalIdentifiers": [
         {

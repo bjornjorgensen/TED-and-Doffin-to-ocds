@@ -1,7 +1,7 @@
 {
   "id": "2023-624725",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7804b0d9-af4f-4dad-8109-c0a04f5d7971",
+  "ocid": "ocds-abcd1234-cf1e094f-250f-4bea-b8f6-58777572e01a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -113,6 +113,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
+        "url": "https://bjornafjorden.kommune.no"
+      },
       "name": "Bjørnafjorden kommune",
       "additionalIdentifiers": [
         {
@@ -123,9 +133,6 @@
       "contactPoint": {
         "name": "Sissel Hermansen Riise",
         "email": "sihr@bjornafjorden.kommune.no"
-      },
-      "details": {
-        "url": "https://bjornafjorden.kommune.no"
       },
       "address": {
         "locality": "Eikelandsosen"

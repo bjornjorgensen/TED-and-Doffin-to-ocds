@@ -1,7 +1,7 @@
 {
   "id": "2023-651678",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0c5235ad-a898-40a7-ae93-d601cae8a484",
+  "ocid": "ocds-abcd1234-dd949cad-8be7-4ad3-999e-ef8963cb59bb",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -103,6 +103,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
+        "url": "https://www.kvinesdal.kommune.no/"
+      },
       "name": "Kvinesdal Kommunebygg",
       "additionalIdentifiers": [
         {
@@ -114,9 +124,6 @@
         "name": "Vidar Iversen",
         "telephone": "+47 48141133",
         "email": "vidar@pilar-br.no"
-      },
-      "details": {
-        "url": "https://www.kvinesdal.kommune.no/"
       },
       "address": {
         "locality": "Kvinesdal"

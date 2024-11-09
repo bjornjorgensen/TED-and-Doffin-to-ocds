@@ -1,158 +1,150 @@
-# converters/bt_10.py
+# converters/bt_10_procedure_buyer.py
 
 import logging
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+# Authority activity descriptions for non-COFOG activities
+AUTHORITY_TABLE = {
+    "gas-oil": "Activities related to the exploitation of a geographical area for the purpose of extracting oil or gas.",
+    "port": "Activities relating to the exploitation of a geographical area for the purpose of providing port facilities or other terminal facilities to carriers by air, sea or inland waterway.",
+    "water": "Activities relating to the provision or operation of networks providing a service to the public in the field of transport by railway, automated systems, tramway, trolley bus, bus or cable.",
+    "airport": "Activities relating to the exploitation of a geographical area for the purpose of providing airport facilities or other terminal facilities to carriers by air.",
+    "post": "Postal services",
+    "electricity": "Activities relating to the provision or operation of networks providing a service to the public in the field of production, transport or distribution of electricity.",
+    "gas-heat": "Activities relating to the provision or operation of networks providing a service to the public in the field of production, transport or distribution of gas or heat.",
+    "solid-fuel": "Activities relating to the exploitation of a geographical area for the purpose of extracting coal or other solid fuels.",
+}
 
-def parse_contract_xml(xml_content):
+# COFOG codes and descriptions
+COFOG_TABLE = {
+    "defence": ("02", "Defence"),
+    "econ-aff": ("04", "Economic affairs"),
+    "education": ("09", "Education"),
+    "env-pro": ("05", "Environmental protection"),
+    "gen-pub": ("01", "General public services"),
+    "hc-am": ("06", "Housing and community amenities"),
+    "health": ("07", "Health"),
+    "pub-os": ("03", "Public order and safety"),
+    "rcr": ("08", "Recreation, culture and religion"),
+    "soc-pro": ("10", "Social protection"),
+}
+
+
+def parse_authority_activity(xml_content):
     """
-    Parse the XML content to extract contract information related to BT-10.
+    Parse the XML content to extract the main activity of the contracting authority.
 
     Args:
-        xml_content (str or bytes): The XML content to parse.
+        xml_content (str): The XML content to parse.
 
     Returns:
-        dict: A dictionary containing the parsed contract information.
+        dict: A dictionary containing the parsed authority activity data.
+        None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
-    parties = []
-    authority_table = {
-        "airport": ("COFOG", "Airport-related activities", "04.7"),
-        "defence": ("COFOG", "Defence", "02"),
-        "econ-aff": ("COFOG", "Economic affairs", "04"),
-        "education": ("COFOG", "Education", "09"),
-        "electricity": ("COFOG", "Electricity-related activities", "04.3"),
-        "env-pro": ("COFOG", "Environmental protection", "05"),
-        "gas-heat": (
-            "COFOG",
-            "Production, transport or distribution of gas or heat",
-            "04.3",
-        ),
-        "gas-oil": ("COFOG", "Extraction of gas or oil", "04.4"),
-        "gen-pub": ("COFOG", "General public services", "01"),
-        "hc-am": ("COFOG", "Housing and community amenities", "06"),
-        "health": ("COFOG", "Health", "07"),
-        "port": ("COFOG", "Port-related activities", "04.5"),
-        "post": ("COFOG", "Postal services", "04.6"),
-        "pub-os": ("COFOG", "Public order and safety", "03"),
-        "rail": ("COFOG", "Railway services", "04.5"),
-        "rcr": ("COFOG", "Recreation, culture and religion", "08"),
-        "soc-pro": ("COFOG", "Social protection", "10"),
-        "solid-fuel": (
-            "COFOG",
-            "Exploration or extraction of coal or other solid fuels",
-            "04.4",
-        ),
-        "urttb": (
-            "COFOG",
-            "Urban railway, tramway, trolleybus or bus services",
-            "04.5",
-        ),
-        "water": ("COFOG", "Water-related activities", "06.3"),
-    }
-
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    contracting_parties = root.xpath("//cac:Contractingparty", namespaces=namespaces)
+    # Check if the relevant XPath exists
+    relevant_xpath = "//cac:ContractingParty/cac:ContractingActivity/cbc:ActivityTypeCode[@listName='authority-activity']"
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info(
+            "No authority activity data found. Skipping parse_authority_activity."
+        )
+        return None
 
-    for contracting_party in contracting_parties:
-        party_id_elements = contracting_party.xpath(
-            ".//cac:partyIdentification/cbc:ID",
+    result = {"parties": []}
+
+    # Process each contracting party
+    contracting_parties = root.xpath("//cac:ContractingParty", namespaces=namespaces)
+
+    for party in contracting_parties:
+        organization_id = party.xpath(
+            "cac:Party/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
             namespaces=namespaces,
         )
-        if not party_id_elements:
-            logger.warning("Skipping contracting party without ID")
-            continue
-
-        party_id = party_id_elements[0].text
-
-        activity_type_code_elements = contracting_party.xpath(
-            ".//cbc:ActivityTypeCode[@listName='authority-activity']",
+        activity_code = party.xpath(
+            "cac:ContractingActivity/cbc:ActivityTypeCode[@listName='authority-activity']/text()",
             namespaces=namespaces,
         )
-        if not activity_type_code_elements:
-            logger.warning(
-                "Skipping contracting party %s without activity type code", party_id
-            )
-            continue
 
-        activity_type_code = activity_type_code_elements[0].text
+        if organization_id and activity_code:
+            code = activity_code[0]
+            classification = None
 
-        organization = next((org for org in parties if org["id"] == party_id), None)
-        if not organization:
-            organization = {
-                "id": party_id,
-                "roles": ["buyer"],
-                "details": {"classifications": []},
-            }
-            parties.append(organization)
+            # Handle COFOG classifications
+            if code in COFOG_TABLE:
+                cofog_id, description = COFOG_TABLE[code]
+                classification = {
+                    "scheme": "COFOG",
+                    "id": cofog_id,
+                    "description": description,
+                }
+            # Handle non-COFOG classifications
+            elif code in AUTHORITY_TABLE:
+                classification = {
+                    "scheme": "eu-main-activity",
+                    "id": code,
+                    "description": AUTHORITY_TABLE[code],
+                }
 
-        if activity_type_code in authority_table:
-            scheme, description, cofog_id = authority_table[activity_type_code]
-            classification = {
-                "scheme": scheme,
-                "id": cofog_id,
-                "description": description,
-            }
-        else:
-            classification = {
-                "scheme": "eu-main-activity",
-                "id": activity_type_code,
-                "description": activity_type_code,
-            }
+            if classification:
+                party_data = {
+                    "id": organization_id[0],
+                    "details": {"classifications": [classification]},
+                }
+                result["parties"].append(party_data)
 
-        organization["details"]["classifications"].append(classification)
-
-    logger.info("Parsed %d parties with BT-10 information", len(parties))
-    return {"parties": parties}
+    return result if result["parties"] else None
 
 
-def merge_contract_info(release_json, contract_info):
+def merge_authority_activity(release_json, authority_activity_data):
     """
-    Merge the parsed contract information into the main OCDS release JSON.
+    Merge the parsed authority activity data into the main OCDS release JSON.
 
     Args:
         release_json (dict): The main OCDS release JSON to be updated.
-        contract_info (dict): The parsed contract information to be merged.
+        authority_activity_data (dict): The parsed authority activity data to be merged.
 
     Returns:
         None: The function updates the release_json in-place.
     """
-    if not contract_info or not contract_info.get("parties"):
-        logger.warning("No contract information to merge")
+    if not authority_activity_data:
+        logger.info("No authority activity data to merge")
         return
 
-    for new_party in contract_info["parties"]:
+    existing_parties = release_json.setdefault("parties", [])
+
+    for new_party in authority_activity_data["parties"]:
         existing_party = next(
-            (
-                party
-                for party in release_json.get("parties", [])
-                if party["id"] == new_party["id"]
-            ),
+            (party for party in existing_parties if party["id"] == new_party["id"]),
             None,
         )
+
         if existing_party:
-            if "details" not in existing_party:
-                existing_party["details"] = {"classifications": []}
-            elif "classifications" not in existing_party["details"]:
-                existing_party["details"]["classifications"] = []
-            existing_party["details"]["classifications"].extend(
-                new_party["details"]["classifications"],
+            existing_details = existing_party.setdefault("details", {})
+            existing_classifications = existing_details.setdefault(
+                "classifications", []
             )
+            new_classifications = new_party["details"]["classifications"]
+
+            for new_classification in new_classifications:
+                if not any(
+                    cls["scheme"] == new_classification["scheme"]
+                    and cls["id"] == new_classification["id"]
+                    for cls in existing_classifications
+                ):
+                    existing_classifications.append(new_classification)
         else:
-            release_json.setdefault("parties", []).append(new_party)
+            existing_parties.append(new_party)
 
     logger.info(
-        "Merged BT-10 information for %d parties", len(contract_info["parties"])
+        "Merged authority activity data for %d parties",
+        len(authority_activity_data["parties"]),
     )

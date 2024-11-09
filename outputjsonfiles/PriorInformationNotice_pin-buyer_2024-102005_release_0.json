@@ -1,7 +1,7 @@
 {
   "id": "629a037e-e8dd-4b02-a19e-e890bd114fda",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2f7f8c27-a478-4a7e-abc5-5c130536bee1",
+  "ocid": "ocds-abcd1234-58045831-825a-4c13-8db1-25134956f50b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -61,6 +61,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
+        "url": "http://Lillestrom.kommune.no/"
+      },
       "name": "Lillestrøm Kommune - Innkjøp",
       "additionalIdentifiers": [
         {
@@ -72,9 +82,6 @@
         "name": "Innkjøp - Carl Henriksen",
         "telephone": "+47",
         "email": "Carl.Henriksen@lillestrom.kommune.no"
-      },
-      "details": {
-        "url": "http://Lillestrom.kommune.no/"
       },
       "address": {
         "locality": "Lillestrøm"

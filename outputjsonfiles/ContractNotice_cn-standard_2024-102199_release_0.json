@@ -1,7 +1,7 @@
 {
   "id": "5681ff11-e080-4da6-b108-82db3f9b4b69",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-dce984ad-4e86-4a53-b41d-09a09819264b",
+  "ocid": "ocds-abcd1234-c40539b3-1ce5-4067-93fc-00c614e817cd",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -246,6 +246,15 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ]
+      },
       "name": "Vestfold og Telemark fylkeskommune - Eksterne brukere",
       "additionalIdentifiers": [
         {

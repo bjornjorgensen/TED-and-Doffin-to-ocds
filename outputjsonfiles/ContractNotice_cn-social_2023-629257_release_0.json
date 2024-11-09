@@ -1,7 +1,7 @@
 {
   "id": "2023-629257",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a546371d-7f67-441a-9811-594ae78e5329",
+  "ocid": "ocds-abcd1234-da559ad9-6ad0-4e5d-bae7-96e0bbfc8ddf",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -91,8 +91,8 @@
         "documentType": "biddingDocuments",
         "url": "https://permalink.mercell.com/208131817.aspx",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ]
       }
     ],
@@ -171,6 +171,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
+        "url": "https://permalink.mercell.com/208131817.aspx"
+      },
       "name": "NAV Tiltak Rogaland",
       "additionalIdentifiers": [
         {
@@ -181,9 +191,6 @@
       "contactPoint": {
         "name": "Frode  Nærland, Alf Henrik Trøen, Siv Lohne",
         "email": "nav.tiltak.rogaland@nav.no"
-      },
-      "details": {
-        "url": "https://permalink.mercell.com/208131817.aspx"
       },
       "address": {
         "locality": "Stravanger"

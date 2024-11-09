@@ -1,7 +1,7 @@
 {
   "id": "2022-347651",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e240314f-e0f2-4f44-ab32-507312622b1e",
+  "ocid": "ocds-abcd1234-63060e9f-1573-4e27-aa89-611ca0ccd6d0",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -109,6 +109,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
+        "url": "www.haugesund.kommune.no"
+      },
       "name": "Haugesund kommune",
       "additionalIdentifiers": [
         {
@@ -120,9 +130,6 @@
         "name": "Åshild Fløisand ",
         "telephone": "+47 22814500",
         "email": "ashild.floisand@sands.no"
-      },
-      "details": {
-        "url": "www.haugesund.kommune.no"
       },
       "address": {
         "locality": "Haugesund"

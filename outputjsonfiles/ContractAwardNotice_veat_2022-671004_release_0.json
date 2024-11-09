@@ -1,7 +1,7 @@
 {
   "id": "2022-671004",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9c9f63d3-238a-4dc7-80c8-264c62ec8db6",
+  "ocid": "ocds-abcd1234-954eafb4-9c84-44ff-8048-3337a7199e58",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -61,28 +61,19 @@
     "contract"
   ],
   "date": "2022-12-23T12:00:00+02:00",
-  "bids": {
-    "details": [
-      {
-        "id": "TEN-0001",
-        "relatedLots": [
-          "LOT-0000"
-        ],
-        "value": {
-          "amount": 331117.0,
-          "currency": "USD"
-        },
-        "tenderers": [
-          {
-            "id": "ORG-0002"
-          }
-        ]
-      }
-    ]
-  },
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
+        "url": "http://www.vtfk.no"
+      },
       "name": "Vestfold og Telemark fylkeskommune",
       "additionalIdentifiers": [
         {
@@ -93,9 +84,6 @@
       "contactPoint": {
         "name": "Trygve Kikut",
         "email": "trygve.kikut@vtfk.no"
-      },
-      "details": {
-        "url": "http://www.vtfk.no"
       },
       "address": {
         "locality": "Skien"
@@ -125,6 +113,25 @@
       ]
     }
   ],
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 331117.0,
+          "currency": "USD"
+        },
+        "tenderers": [
+          {
+            "id": "ORG-0002"
+          }
+        ]
+      }
+    ]
+  },
   "description": "Mercell kunngjøring: https://opic.com/id/afmhdeyyxz Bibliotek24 vil kontinuerlig invitere leverandører av digitale innholdstjenester til, bruk i folkebibliotek og videregående skoler, forhandle og videreformidle disse tilbudene til sektoren gjennom tilknytningsperioder 1-2 ganger i året.",
   "awards": [
     {

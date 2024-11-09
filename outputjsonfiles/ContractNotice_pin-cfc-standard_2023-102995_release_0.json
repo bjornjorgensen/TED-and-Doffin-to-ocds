@@ -1,7 +1,7 @@
 {
   "id": "e5c8b25e-859d-492a-9085-716017f267aa",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-be106f66-f434-42af-9b7c-ff3c4f74ca0c",
+  "ocid": "ocds-abcd1234-08e864b8-aeb7-4a61-95d5-c1763244f290",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -251,28 +251,16 @@
   "date": "2023-12-20T14:02:41+00:00",
   "parties": [
     {
-      "id": "ORG-0001",
-      "name": "Advokatfirmaet SANDS DA",
-      "additionalIdentifiers": [
-        {
-          "id": "960716647",
-          "scheme": "GB-COH"
-        }
-      ],
-      "contactPoint": {
-        "name": "Eirik  Rise",
-        "telephone": "+47 55301005",
-        "email": "eirik.rise@sands.no"
-      },
-      "address": {
-        "locality": "Vika"
-      },
-      "roles": [
-        "reviewContactPoint"
-      ]
-    },
-    {
       "id": "ORG-0002",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "04",
+            "description": "Economic affairs"
+          }
+        ]
+      },
       "name": "Innovasjon Norge",
       "additionalIdentifiers": [
         {
@@ -291,6 +279,27 @@
       "roles": [
         "buyer",
         "processContactPoint"
+      ]
+    },
+    {
+      "id": "ORG-0001",
+      "name": "Advokatfirmaet SANDS DA",
+      "additionalIdentifiers": [
+        {
+          "id": "960716647",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Eirik  Rise",
+        "telephone": "+47 55301005",
+        "email": "eirik.rise@sands.no"
+      },
+      "address": {
+        "locality": "Vika"
+      },
+      "roles": [
+        "reviewContactPoint"
       ]
     },
     {

@@ -1,7 +1,7 @@
 {
   "id": "9a4b7099-142a-412a-af35-3e8feaf15ec7",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4260c8cb-15f0-41c6-8347-b586e7f66084",
+  "ocid": "ocds-abcd1234-38fe9492-fdf5-4111-af5f-d151a681071c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -59,68 +59,18 @@
     "contract"
   ],
   "date": "2024-03-14T13:42:52+00:00",
-  "bids": {
-    "details": [
-      {
-        "id": "TEN-0001",
-        "relatedLots": [
-          "LOT-0000"
-        ],
-        "tenderers": [
-          {
-            "id": "ORG-0003"
-          }
-        ]
-      },
-      {
-        "id": "TEN-0002",
-        "relatedLots": [
-          "LOT-0000"
-        ],
-        "tenderers": [
-          {
-            "id": "ORG-0004"
-          }
-        ]
-      },
-      {
-        "id": "TEN-0003",
-        "relatedLots": [
-          "LOT-0000"
-        ],
-        "tenderers": [
-          {
-            "id": "ORG-0005"
-          }
-        ]
-      },
-      {
-        "id": "TEN-0004",
-        "relatedLots": [
-          "LOT-0000"
-        ],
-        "tenderers": [
-          {
-            "id": "ORG-0006"
-          }
-        ]
-      },
-      {
-        "id": "TEN-0005",
-        "relatedLots": [
-          "LOT-0000"
-        ],
-        "tenderers": [
-          {
-            "id": "ORG-0007"
-          }
-        ]
-      }
-    ]
-  },
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ]
+      },
       "name": "Moss kommune - Anskaffelser",
       "additionalIdentifiers": [
         {
@@ -264,6 +214,65 @@
       ]
     }
   ],
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0002",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0004"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0003",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0005"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0004",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0006"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0005",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0007"
+          }
+        ]
+      }
+    ]
+  },
   "awards": [
     {
       "relatedBids": [

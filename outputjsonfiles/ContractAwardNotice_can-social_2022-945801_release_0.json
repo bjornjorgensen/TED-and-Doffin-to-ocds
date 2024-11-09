@@ -1,7 +1,7 @@
 {
   "id": "2022-945801",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2cee466e-da04-4a90-8d65-6242128dd8aa",
+  "ocid": "ocds-abcd1234-4f9eebc1-41cd-46b8-9c03-675dac60969c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -46,28 +46,19 @@
     "contract"
   ],
   "date": "2022-11-09T12:00:00+02:00",
-  "bids": {
-    "details": [
-      {
-        "id": "TEN-0001",
-        "relatedLots": [
-          "LOT-0000"
-        ],
-        "value": {
-          "amount": 18000000.0,
-          "currency": "NOK"
-        },
-        "tenderers": [
-          {
-            "id": "ORG-0002"
-          }
-        ]
-      }
-    ]
-  },
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
+        "url": "https://www.vtfk.no/"
+      },
       "name": "Vestfold og Telemark fylkeskommune",
       "additionalIdentifiers": [
         {
@@ -78,9 +69,6 @@
       "contactPoint": {
         "name": "Fredrik Tennøy",
         "email": "fredrik.tennoy@inventura.no"
-      },
-      "details": {
-        "url": "https://www.vtfk.no/"
       },
       "address": {
         "locality": "Skien"
@@ -119,6 +107,25 @@
       ]
     }
   ],
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 18000000.0,
+          "currency": "NOK"
+        },
+        "tenderers": [
+          {
+            "id": "ORG-0002"
+          }
+        ]
+      }
+    ]
+  },
   "description": "Mercell kunngjøring: https://opic.com/id/afsjxeyerv",
   "awards": [
     {

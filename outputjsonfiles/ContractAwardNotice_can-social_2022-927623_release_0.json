@@ -1,7 +1,7 @@
 {
   "id": "2022-927623",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-77b69105-74cd-4512-98b3-f61a2feab40a",
+  "ocid": "ocds-abcd1234-d742c581-a97c-4029-83d2-8622952d787e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -109,6 +109,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "03",
+            "description": "Public order and safety"
+          }
+        ],
+        "url": "http://www.politiet.no"
+      },
       "name": "Politiets fellestjenester",
       "additionalIdentifiers": [
         {
@@ -120,9 +130,6 @@
         "name": "Nicholas Starr Soltvedt",
         "telephone": "+47 61318000",
         "email": "nicholas.starr.soltvedt@politiet.no"
-      },
-      "details": {
-        "url": "http://www.politiet.no"
       },
       "address": {
         "locality": "OSLO"

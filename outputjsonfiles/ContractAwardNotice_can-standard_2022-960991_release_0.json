@@ -1,7 +1,7 @@
 {
   "id": "2022-960991",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-791cf309-2ec8-4237-b276-57d35b2a2f84",
+  "ocid": "ocds-abcd1234-5769e644-60fa-42cc-99cc-5a372f8103df",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -77,29 +77,19 @@
     "contract"
   ],
   "date": "2022-10-21T12:00:00+02:00",
-  "bids": {
-    "details": [
-      {
-        "id": "TEN-0001",
-        "relatedLots": [
-          "LOT-0000"
-        ],
-        "value": {
-          "amount": 42000000.0,
-          "currency": "NOK"
-        },
-        "hasSubcontracting": false,
-        "tenderers": [
-          {
-            "id": "ORG-0002"
-          }
-        ]
-      }
-    ]
-  },
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "03",
+            "description": "Public order and safety"
+          }
+        ],
+        "url": "www.dsb.no"
+      },
       "name": "Direktoratet for samfunnssikkerhet og beredskap (DSB)",
       "additionalIdentifiers": [
         {
@@ -111,9 +101,6 @@
         "name": "Liv Riseth",
         "telephone": "+47 33412631",
         "email": "liv.riseth@dsb.no"
-      },
-      "details": {
-        "url": "www.dsb.no"
       },
       "address": {
         "locality": "TØNSBERG"
@@ -149,6 +136,26 @@
       ]
     }
   ],
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 42000000.0,
+          "currency": "NOK"
+        },
+        "hasSubcontracting": false,
+        "tenderers": [
+          {
+            "id": "ORG-0002"
+          }
+        ]
+      }
+    ]
+  },
   "awards": [
     {
       "id": "RES-0001",

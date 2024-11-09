@@ -1,7 +1,7 @@
 {
   "id": "1db209a3-6934-4d5f-bf78-2aa8a1f2453c",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-000caca7-e2ac-43e9-9f9f-af9eb38f5756",
+  "ocid": "ocds-abcd1234-2ad21d63-2dc8-4bde-8595-df97fdb9d739",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -115,6 +115,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
+        "url": "https://www.regjeringen.no/no/dep/bld/id298/"
+      },
       "name": "Barne- og familiedepartementet",
       "additionalIdentifiers": [
         {
@@ -126,9 +136,6 @@
         "name": " Ola Hulbak",
         "telephone": "+47 22249090",
         "email": "obh@bfd.dep.no"
-      },
-      "details": {
-        "url": "https://www.regjeringen.no/no/dep/bld/id298/"
       },
       "address": {
         "locality": "OSLO"

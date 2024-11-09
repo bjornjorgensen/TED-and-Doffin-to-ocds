@@ -32,8 +32,8 @@ from ted_and_doffin_to_ocds.converters.bt_09_procedure import (
     merge_cross_border_law,
 )
 from ted_and_doffin_to_ocds.converters.bt_10 import (
-    parse_contract_xml,
-    merge_contract_info,
+    parse_authority_activity,
+    merge_authority_activity,
 )
 from ted_and_doffin_to_ocds.converters.bt_11_procedure_buyer import (
     parse_buyer_legal_type,
@@ -2490,8 +2490,8 @@ def process_bt_sections(release_json, xml_content):
             "Cross Border Law (BT-09)",
         ),
         (
-            parse_contract_xml,
-            merge_contract_info,
+            parse_authority_activity,
+            merge_authority_activity,
             "organization Main Activity (BT-10)",
         ),
         (parse_procedure_type, merge_procedure_type, "procedure Type (BT-105)"),

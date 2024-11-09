@@ -1,7 +1,7 @@
 {
   "id": "2022-366668",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-16f1d78e-7a7e-4bff-8589-de679ad3eff2",
+  "ocid": "ocds-abcd1234-bc407271-eec5-416a-9319-0db9c21f56cd",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -132,6 +132,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "07",
+            "description": "Health"
+          }
+        ],
+        "url": "https://permalink.mercell.com/182678464.aspx"
+      },
       "name": "TØNSBERG KOMMUNE",
       "additionalIdentifiers": [
         {
@@ -142,9 +152,6 @@
       "contactPoint": {
         "name": "Astrid Holwech",
         "email": "astrid.holwech@tonsberg.kommune.no"
-      },
-      "details": {
-        "url": "https://permalink.mercell.com/182678464.aspx"
       },
       "address": {
         "locality": "TØNSBERG"
