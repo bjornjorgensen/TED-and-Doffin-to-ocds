@@ -33,14 +33,14 @@ def run_main_and_get_result(xml_file, output_dir):
 
 def test_bt_763_lots_all_required_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:TenderingProcess>
-            <cbc:partPresentationCode listName="tenderlot-presentation">all</cbc:partPresentationCode>
-        </cac:TenderingProcess>
-    </root>
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+<ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    <cac:TenderingProcess>
+        <cbc:partPresentationCode listName="tenderlot-presentation">all</cbc:partPresentationCode>
+    </cac:TenderingProcess>
+</ContractNotice>
     """
     xml_file = tmp_path / "test_input_lots_all_required.xml"
     xml_file.write_text(xml_content)
@@ -63,14 +63,14 @@ def test_bt_763_lots_all_required_integration(tmp_path, setup_logging, temp_outp
 
 def test_bt_763_lots_all_required_not_all(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:TenderingProcess>
-            <cbc:partPresentationCode listName="tenderlot-presentation">some</cbc:partPresentationCode>
-        </cac:TenderingProcess>
-    </root>
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+<ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    <cac:TenderingProcess>
+        <cbc:partPresentationCode listName="tenderlot-presentation">some</cbc:partPresentationCode>
+    </cac:TenderingProcess>
+</ContractNotice>
     """
     xml_file = tmp_path / "test_input_lots_not_all_required.xml"
     xml_file.write_text(xml_content)
@@ -88,14 +88,14 @@ def test_bt_763_lots_all_required_missing_element(
     tmp_path, setup_logging, temp_output_dir
 ):
     logger = setup_logging
-
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:TenderingProcess>
-            <!-- partPresentationCode is missing -->
-        </cac:TenderingProcess>
-    </root>
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+<ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    <cac:TenderingProcess>
+        <!-- partPresentationCode is missing -->
+    </cac:TenderingProcess>
+</ContractNotice>
     """
     xml_file = tmp_path / "test_input_lots_missing_element.xml"
     xml_file.write_text(xml_content)
@@ -111,14 +111,14 @@ def test_bt_763_lots_all_required_missing_element(
 
 def test_bt_763_lots_all_required_empty_value(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:TenderingProcess>
-            <cbc:partPresentationCode listName="tenderlot-presentation"></cbc:partPresentationCode>
-        </cac:TenderingProcess>
-    </root>
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+<ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    <cac:TenderingProcess>
+        <cbc:partPresentationCode listName="tenderlot-presentation"></cbc:partPresentationCode>
+    </cac:TenderingProcess>
+</ContractNotice>
     """
     xml_file = tmp_path / "test_input_lots_empty_value.xml"
     xml_file.write_text(xml_content)
@@ -136,14 +136,14 @@ def test_bt_763_lots_all_required_case_insensitive(
     tmp_path, setup_logging, temp_output_dir
 ):
     logger = setup_logging
-
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:TenderingProcess>
-            <cbc:partPresentationCode listName="tenderlot-presentation">ALL</cbc:partPresentationCode>
-        </cac:TenderingProcess>
-    </root>
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+<ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    <cac:TenderingProcess>
+        <cbc:partPresentationCode listName="tenderlot-presentation">ALL</cbc:partPresentationCode>
+    </cac:TenderingProcess>
+</ContractNotice>
     """
     xml_file = tmp_path / "test_input_lots_case_insensitive.xml"
     xml_file.write_text(xml_content)

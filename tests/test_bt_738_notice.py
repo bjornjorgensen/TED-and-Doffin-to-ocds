@@ -33,17 +33,17 @@ def run_main_and_get_result(xml_file, output_dir):
 
 def test_bt_738_notice_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-
-    xml_content = """
-    <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cbc:RequestedPublicationDate>2020-03-15+01:00</cbc:RequestedPublicationDate>
-    </root>
+    </ContractNotice>
     """
     xml_file = tmp_path / "test_input_notice_preferred_publication_date.xml"
     xml_file.write_text(xml_content)
     logger.info("Created XML file at %s", xml_file)
     logger.info("Output directory: %s", temp_output_dir)
-
     result = run_main_and_get_result(xml_file, temp_output_dir)
     logger.info("Result: %s", json.dumps(result, indent=2))
 

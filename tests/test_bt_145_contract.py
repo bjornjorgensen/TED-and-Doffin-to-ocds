@@ -33,37 +33,35 @@ def run_main_and_get_result(xml_file, output_dir):
 
 def test_bt_145_contract_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
-    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
-        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-        xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-        xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-        xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionContent>
-                    <efext:EformsExtension>
-                        <efac:noticeResult>
+<ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+    xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+    xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+    xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionContent>
+                <efext:EformsExtension>
+                    <efac:noticeResult>
+                        <efac:SettledContract>
+                            <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+                            <cbc:IssueDate>2021-02-21+01:00</cbc:IssueDate>
+                        </efac:SettledContract>
+                        <efac:LotResult>
+                            <cbc:ID schemeName="result">RES-0001</cbc:ID>
                             <efac:SettledContract>
                                 <cbc:ID schemeName="contract">CON-0001</cbc:ID>
-                                <cbc:IssueDate>2021-02-21+01:00</cbc:IssueDate>
                             </efac:SettledContract>
-                            <efac:LotResult>
-                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
-                                <efac:SettledContract>
-                                    <cbc:ID schemeName="contract">CON-0001</cbc:ID>
-                                </efac:SettledContract>
-                            </efac:LotResult>
-                        </efac:noticeResult>
-                    </efext:EformsExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
-    </ContractAwardNotice>
-    """
-
+                        </efac:LotResult>
+                    </efac:noticeResult>
+                </efext:EformsExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+</ContractAwardNotice>
+"""
     # Create input XML file
     xml_file = tmp_path / "test_input_contract_conclusion_date.xml"
     xml_file.write_text(xml_content)

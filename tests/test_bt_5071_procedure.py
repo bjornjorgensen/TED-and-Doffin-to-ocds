@@ -1,5 +1,3 @@
-# tests/test_bt_5071_procedure.py
-
 from pathlib import Path
 import pytest
 import json
@@ -26,9 +24,10 @@ def run_main_and_get_result(xml_file, output_dir):
 
 
 def test_bt_5071_procedure_integration(tmp_path, temp_output_dir):
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+                         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProject>
             <cac:RealizedLocation>
                 <cac:Address>
@@ -36,8 +35,9 @@ def test_bt_5071_procedure_integration(tmp_path, temp_output_dir):
                 </cac:Address>
             </cac:RealizedLocation>
         </cac:ProcurementProject>
-    </root>
+    </ContractAwardNotice>
     """
+
     xml_file = (
         tmp_path / "test_input_place_performance_country_subdivision_procedure.xml"
     )
@@ -52,9 +52,10 @@ def test_bt_5071_procedure_integration(tmp_path, temp_output_dir):
 
 
 def test_bt_5071_procedure_multiple_locations(tmp_path, temp_output_dir):
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+                         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProject>
             <cac:RealizedLocation>
                 <cac:Address>
@@ -67,8 +68,9 @@ def test_bt_5071_procedure_multiple_locations(tmp_path, temp_output_dir):
                 </cac:Address>
             </cac:RealizedLocation>
         </cac:ProcurementProject>
-    </root>
+    </ContractAwardNotice>
     """
+
     xml_file = (
         tmp_path
         / "test_input_place_performance_country_subdivision_procedure_multiple.xml"
@@ -85,4 +87,4 @@ def test_bt_5071_procedure_multiple_locations(tmp_path, temp_output_dir):
 
 
 if __name__ == "__main__":
-    pytest.main()
+    pytest.main(["-v", "-s"])

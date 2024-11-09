@@ -26,44 +26,45 @@ def run_main_and_get_result(xml_file, output_dir):
 
 
 def test_opt_301_part_fiscallegis_integration(tmp_path, temp_output_dir):
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-          xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-          xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionContent>
-                    <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
-                                        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
-                        </efac:Organizations>
-                    </efext:EformsExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
-        <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
-            <cac:TenderingTerms>
-                <cac:FiscalLegislationDocumentReference>
-                    <cbc:ID>Fiscal1</cbc:ID>
-                    <cac:IssuerParty>
-                        <cac:PartyIdentification>
-                            <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                        </cac:PartyIdentification>
-                    </cac:IssuerParty>
-                </cac:FiscalLegislationDocumentReference>
-            </cac:TenderingTerms>
-        </cac:ProcurementProjectLot>
-    </root>
-    """
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+<ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+    xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+    xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+    xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionContent>
+                <efext:EformsExtension>
+                    <efac:Organizations>
+                        <efac:Organization>
+                            <efac:Company>
+                                <cac:PartyIdentification>
+                                    <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                                </cac:PartyIdentification>
+                            </efac:Company>
+                        </efac:Organization>
+                    </efac:Organizations>
+                </efext:EformsExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+    <cac:ProcurementProjectLot>
+        <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+        <cac:TenderingTerms>
+            <cac:FiscalLegislationDocumentReference>
+                <cbc:ID>Fiscal1</cbc:ID>
+                <cac:IssuerParty>
+                    <cac:PartyIdentification>
+                        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                    </cac:PartyIdentification>
+                </cac:IssuerParty>
+            </cac:FiscalLegislationDocumentReference>
+        </cac:TenderingTerms>
+    </cac:ProcurementProjectLot>
+</ContractNotice>
+"""
     xml_file = tmp_path / "test_input_fiscal_legislation_org_reference.xml"
     xml_file.write_text(xml_content)
 
@@ -73,7 +74,6 @@ def test_opt_301_part_fiscallegis_integration(tmp_path, temp_output_dir):
     assert len(result["parties"]) == 1
     assert result["parties"][0]["id"] == "ORG-0001"
     assert "informationService" in result["parties"][0]["roles"]
-
     assert "tender" in result
     assert "documents" in result["tender"]
     assert len(result["tender"]["documents"]) == 1

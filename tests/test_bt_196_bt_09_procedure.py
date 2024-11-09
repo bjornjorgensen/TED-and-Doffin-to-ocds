@@ -1,4 +1,3 @@
-# tests/test_bt_196_bt_09_procedure.py
 from pathlib import Path
 import pytest
 import json
@@ -34,13 +33,13 @@ def run_main_and_get_result(xml_file, output_dir):
 def test_bt_196_bt_09_procedure_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
 
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
-          xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-          xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+        xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+        xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+        xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
         <cbc:ContractFolderID>test-folder-id</cbc:ContractFolderID>
         <cac:TenderingTerms>
             <cac:ProcurementLegislationDocumentReference>
@@ -59,7 +58,7 @@ def test_bt_196_bt_09_procedure_integration(tmp_path, setup_logging, temp_output
                 </ext:UBLExtensions>
             </cac:ProcurementLegislationDocumentReference>
         </cac:TenderingTerms>
-    </root>
+    </ContractNotice>
     """
     xml_file = tmp_path / "test_input_unpublished_justification.xml"
     xml_file.write_text(xml_content)

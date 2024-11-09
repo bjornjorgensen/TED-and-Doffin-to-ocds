@@ -1,4 +1,3 @@
-# tests/test_bt_508_procedure_buyer.py
 from pathlib import Path
 import pytest
 import json
@@ -36,8 +35,8 @@ def test_bt_508_procedure_buyer_integration(tmp_path, setup_logging, temp_output
 
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
-        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+                         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cbc:ID>notice-1</cbc:ID>
         <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
         <cac:ContractingParty>
@@ -50,17 +49,18 @@ def test_bt_508_procedure_buyer_integration(tmp_path, setup_logging, temp_output
         </cac:ContractingParty>
     </ContractAwardNotice>
     """
+
     xml_file = tmp_path / "test_input_buyer_profile.xml"
     xml_file.write_text(xml_content)
 
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-
     logger.info("Test result: %s", json.dumps(result, indent=2))
 
     # Verify the results
     assert "parties" in result
     assert len(result["parties"]) == 1
+
     party = result["parties"][0]
     assert party["id"] == "ORG-0001"
     assert "details" in party

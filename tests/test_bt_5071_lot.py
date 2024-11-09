@@ -1,5 +1,3 @@
-# tests/test_bt_5071_lot.py
-
 from pathlib import Path
 import pytest
 import json
@@ -26,9 +24,10 @@ def run_main_and_get_result(xml_file, output_dir):
 
 
 def test_bt_5071_lot_integration(tmp_path, temp_output_dir):
-    xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+                         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:ProcurementProject>
@@ -39,8 +38,9 @@ def test_bt_5071_lot_integration(tmp_path, temp_output_dir):
                 </cac:RealizedLocation>
             </cac:ProcurementProject>
         </cac:ProcurementProjectLot>
-    </root>
+    </ContractAwardNotice>
     """
+
     xml_file = tmp_path / "test_input_place_performance_country_subdivision.xml"
     xml_file.write_text(xml_content)
 
@@ -58,4 +58,4 @@ def test_bt_5071_lot_integration(tmp_path, temp_output_dir):
 
 
 if __name__ == "__main__":
-    pytest.main()
+    pytest.main(["-v", "-s"])

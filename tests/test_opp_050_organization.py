@@ -34,53 +34,50 @@ def run_main_and_get_result(xml_file, output_dir):
 
 def test_opp_050_organization_integration(tmp_path, setup_logging, temp_output_dir):
     logger = setup_logging
-
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
-    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
-        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-        xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-        xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
-        xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-        xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <cbc:ID>notice-1</cbc:ID>
-        <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionContent>
-                    <efext:EformsExtension>
-                        <efac:Organizations>
-                            <efac:Organization>
-                                <efbc:GroupLeadIndicator>true</efbc:GroupLeadIndicator>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
-                                        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
-                            <efac:Organization>
-                                <efbc:GroupLeadIndicator>false</efbc:GroupLeadIndicator>
-                                <efac:Company>
-                                    <cac:PartyIdentification>
-                                        <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
-                                    </cac:PartyIdentification>
-                                </efac:Company>
-                            </efac:Organization>
-                        </efac:Organizations>
-                    </efext:EformsExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
-    </ContractAwardNotice>
-    """
-
+<ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+    xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+    xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+    xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+    xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
+    <cbc:ID>notice-1</cbc:ID>
+    <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
+    <ext:UBLExtensions>
+        <ext:UBLExtension>
+            <ext:ExtensionContent>
+                <efext:EformsExtension>
+                    <efac:Organizations>
+                        <efac:Organization>
+                            <efbc:GroupLeadIndicator>true</efbc:GroupLeadIndicator>
+                            <efac:Company>
+                                <cac:PartyIdentification>
+                                    <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                                </cac:PartyIdentification>
+                            </efac:Company>
+                        </efac:Organization>
+                        <efac:Organization>
+                            <efbc:GroupLeadIndicator>false</efbc:GroupLeadIndicator>
+                            <efac:Company>
+                                <cac:PartyIdentification>
+                                    <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+                                </cac:PartyIdentification>
+                            </efac:Company>
+                        </efac:Organization>
+                    </efac:Organizations>
+                </efext:EformsExtension>
+            </ext:ExtensionContent>
+        </ext:UBLExtension>
+    </ext:UBLExtensions>
+</ContractNotice>
+"""
     # Create input XML file
     xml_file = tmp_path / "test_input_buyers_group_lead_indicator.xml"
     xml_file.write_text(xml_content)
 
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-
     logger.info("Test result: %s", json.dumps(result, indent=2))
 
     # Verify the results
