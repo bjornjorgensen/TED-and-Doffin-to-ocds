@@ -1,7 +1,7 @@
 {
   "id": "2022-902600",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6777c190-afd4-433e-9659-0409268c1958",
+  "ocid": "ocds-abcd1234-36758a2a-6faf-43be-9e8e-470192b94e50",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -109,6 +109,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
+        "url": "www.agderfk.no"
+      },
       "name": "OFA - Konkurranseportal",
       "additionalIdentifiers": [
         {
@@ -120,9 +130,6 @@
         "name": "Bjarki Steinarsson.",
         "telephone": "+47 98997537",
         "email": "bjarki.steinarsson@agderfk.no"
-      },
-      "details": {
-        "url": "www.agderfk.no"
       },
       "address": {
         "locality": "Arendal"

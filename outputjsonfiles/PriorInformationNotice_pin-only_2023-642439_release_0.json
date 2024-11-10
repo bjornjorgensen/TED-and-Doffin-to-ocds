@@ -1,7 +1,7 @@
 {
   "id": "2023-642439",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8dd8f7be-8d4b-44cd-a7d6-4d51b35e1715",
+  "ocid": "ocds-abcd1234-acdd075e-1db6-47a6-8bac-dbc3562fbd04",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -47,6 +47,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "07",
+            "description": "Health"
+          }
+        ],
+        "url": "https://permalink.mercell.com/207973510.aspx"
+      },
       "name": "Helse Sør-Øst RHF",
       "additionalIdentifiers": [
         {
@@ -57,9 +67,6 @@
       "contactPoint": {
         "name": "Henrik Hartmann",
         "email": "henrik.hartmann@sykehusbygg.no"
-      },
-      "details": {
-        "url": "https://permalink.mercell.com/207973510.aspx"
       },
       "address": {
         "locality": "HAMAR"

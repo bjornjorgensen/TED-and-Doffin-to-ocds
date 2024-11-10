@@ -1,7 +1,7 @@
 {
   "id": "2c234234-aaec-4210-8cbe-1803ecaee901",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2e0595bb-3348-4a99-8319-61dec020b4f9",
+  "ocid": "ocds-abcd1234-ecb9821f-aa33-4132-97d8-0b09f4918d8e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -117,6 +117,15 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ]
+      },
       "name": "Ålesund kommune - Innkjøp",
       "additionalIdentifiers": [
         {

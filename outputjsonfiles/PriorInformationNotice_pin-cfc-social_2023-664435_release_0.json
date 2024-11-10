@@ -1,7 +1,7 @@
 {
   "id": "2023-664435",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-fbcbe790-2416-407e-b34a-02cf7aa235ae",
+  "ocid": "ocds-abcd1234-573029b7-54db-473e-9705-27213b33debb",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -110,6 +110,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "07",
+            "description": "Health"
+          }
+        ],
+        "url": "https://permalink.mercell.com/197381023.aspx"
+      },
       "name": "SYKEHUSINNKJØP HF",
       "additionalIdentifiers": [
         {
@@ -121,9 +131,6 @@
         "name": "Postmottak Sykehusinnkjøp",
         "telephone": "+47 78950700",
         "email": "post@sykehusinnkjop.no"
-      },
-      "details": {
-        "url": "https://permalink.mercell.com/197381023.aspx"
       },
       "address": {
         "locality": "VADSØ"

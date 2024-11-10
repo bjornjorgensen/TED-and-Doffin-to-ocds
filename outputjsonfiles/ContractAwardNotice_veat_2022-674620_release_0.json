@@ -1,7 +1,7 @@
 {
   "id": "2022-674620",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-30e6c178-461a-47df-8ba3-a1dd439ed810",
+  "ocid": "ocds-abcd1234-28737278-7f9f-4241-a4f3-61ae41363fc4",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -60,28 +60,19 @@
     "contract"
   ],
   "date": "2022-12-20T12:00:00+02:00",
-  "bids": {
-    "details": [
-      {
-        "id": "TEN-0001",
-        "relatedLots": [
-          "LOT-0000"
-        ],
-        "value": {
-          "amount": 21700000.0,
-          "currency": "NOK"
-        },
-        "tenderers": [
-          {
-            "id": "ORG-0002"
-          }
-        ]
-      }
-    ]
-  },
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "05",
+            "description": "Environmental protection"
+          }
+        ],
+        "url": "WWW.MILJODIR.NO"
+      },
       "name": "Miljødirektoratet",
       "additionalIdentifiers": [
         {
@@ -93,9 +84,6 @@
         "name": "Erik Lund",
         "telephone": "+47 73580500",
         "email": "erik.lund@miljodir.no"
-      },
-      "details": {
-        "url": "WWW.MILJODIR.NO"
       },
       "address": {
         "locality": "Trondheim"
@@ -131,6 +119,25 @@
       ]
     }
   ],
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 21700000.0,
+          "currency": "NOK"
+        },
+        "tenderers": [
+          {
+            "id": "ORG-0002"
+          }
+        ]
+      }
+    ]
+  },
   "awards": [
     {
       "id": "RES-0001",

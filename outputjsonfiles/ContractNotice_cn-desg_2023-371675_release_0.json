@@ -1,7 +1,7 @@
 {
   "id": "2023-371675",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-92c75b14-0e5f-4d57-bdd9-3132ee9f2920",
+  "ocid": "ocds-abcd1234-c15692b9-46a9-45c2-b985-6def74c16dbf",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -114,6 +114,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "08",
+            "description": "Recreation, culture and religion"
+          }
+        ],
+        "url": "https://www.kulturtanken.no/"
+      },
       "name": "Kulturtanken - Den Kulturelle Skolesekken Norge",
       "additionalIdentifiers": [
         {
@@ -125,9 +135,6 @@
         "name": "Mohammad Hamza Raja",
         "telephone": "+47 40627146",
         "email": "mhr@kulturtanken.no"
-      },
-      "details": {
-        "url": "https://www.kulturtanken.no/"
       },
       "address": {
         "locality": "OSLO"

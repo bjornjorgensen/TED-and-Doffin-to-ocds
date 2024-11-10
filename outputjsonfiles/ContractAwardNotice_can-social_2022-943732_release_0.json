@@ -1,7 +1,7 @@
 {
   "id": "2022-943732",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-732a6bae-e731-4ae6-959f-8dffc56095f9",
+  "ocid": "ocds-abcd1234-18a4ac59-4eaf-4b21-ae58-4608100dcc30",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -59,28 +59,19 @@
     "contract"
   ],
   "date": "2022-09-08T12:00:00+02:00",
-  "bids": {
-    "details": [
-      {
-        "id": "TEN-0001",
-        "relatedLots": [
-          "LOT-0000"
-        ],
-        "value": {
-          "amount": 73000000.0,
-          "currency": "NOK"
-        },
-        "tenderers": [
-          {
-            "id": "ORG-0002"
-          }
-        ]
-      }
-    ]
-  },
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "03",
+            "description": "Public order and safety"
+          }
+        ],
+        "url": "http://www.politiet.no"
+      },
       "name": "Politiets sikkerhetstjeneste (PST)",
       "additionalIdentifiers": [
         {
@@ -92,9 +83,6 @@
         "name": "Trine Madane",
         "telephone": "+47 23305399",
         "email": "trine.lunemann.madane@politiet.no"
-      },
-      "details": {
-        "url": "http://www.politiet.no"
       },
       "address": {
         "locality": "OSLO"
@@ -158,6 +146,25 @@
       ]
     }
   ],
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 73000000.0,
+          "currency": "NOK"
+        },
+        "tenderers": [
+          {
+            "id": "ORG-0002"
+          }
+        ]
+      }
+    ]
+  },
   "awards": [
     {
       "id": "RES-0001",

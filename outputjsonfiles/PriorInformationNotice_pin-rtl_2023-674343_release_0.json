@@ -1,7 +1,7 @@
 {
   "id": "2023-674343",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-aacb5d55-d769-40b4-b6ab-ea77023d212c",
+  "ocid": "ocds-abcd1234-c399eebc-b4bc-415f-bd93-e18e6cdd59c5",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -107,6 +107,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
+        "url": "https://permalink.mercell.com/208265464.aspx"
+      },
       "name": "Kongsvinger Kommune",
       "additionalIdentifiers": [
         {
@@ -117,9 +127,6 @@
       "contactPoint": {
         "telephone": "+47 62874000",
         "email": "riik@kongsvinger.kommune.no"
-      },
-      "details": {
-        "url": "https://permalink.mercell.com/208265464.aspx"
       },
       "address": {
         "locality": "KONGSVINGER"
@@ -132,10 +139,17 @@
     },
     {
       "id": "ORG-0002",
-      "name": "Elverum kommune",
       "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
         "url": "https://www.elverum.kommune.no/"
       },
+      "name": "Elverum kommune",
       "contactPoint": {
         "email": "postmottak@elverum.kommune.no"
       },
@@ -148,10 +162,17 @@
     },
     {
       "id": "ORG-0003",
-      "name": "Hamar kommune",
       "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
         "url": "https://www.hamar.kommune.no/"
       },
+      "name": "Hamar kommune",
       "contactPoint": {
         "email": "postmottak@hamar.kommune.no"
       },
@@ -164,10 +185,17 @@
     },
     {
       "id": "ORG-0004",
-      "name": "Indigo IKS",
       "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
         "url": "https://www.indigo-ikt.no/author/indigo-ikt-iks/"
       },
+      "name": "Indigo IKS",
       "contactPoint": {
         "email": "post@indigo-ikt.no"
       },
@@ -180,10 +208,17 @@
     },
     {
       "id": "ORG-0005",
-      "name": "Kongsvinger kommune",
       "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
         "url": "https://www.kongsvinger.kommune.no"
       },
+      "name": "Kongsvinger kommune",
       "contactPoint": {
         "email": "postmottak@kongsvinger.kommune.no"
       },
@@ -196,10 +231,17 @@
     },
     {
       "id": "ORG-0006",
-      "name": "Ringsaker kommune",
       "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
         "url": "https://www.ringsaker.kommune.no"
       },
+      "name": "Ringsaker kommune",
       "contactPoint": {
         "email": "postmottak@ringsaker.kommune.no"
       },
@@ -212,10 +254,17 @@
     },
     {
       "id": "ORG-0007",
-      "name": "Stange kommune",
       "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
         "url": "https://www.stange.kommune.no/"
       },
+      "name": "Stange kommune",
       "contactPoint": {
         "email": "post@stange.kommune.no"
       },
@@ -228,10 +277,17 @@
     },
     {
       "id": "ORG-0008",
-      "name": "Etnedal kommune",
       "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
         "url": "https://www.etnedal.kommune.no/"
       },
+      "name": "Etnedal kommune",
       "contactPoint": {
         "email": "postmottak@etnedal.kommune.no"
       },
@@ -244,10 +300,17 @@
     },
     {
       "id": "ORG-0009",
-      "name": "Nord-Aurdal kommune",
       "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
         "url": "https://www.nord-aurdal.kommune.no/"
       },
+      "name": "Nord-Aurdal kommune",
       "contactPoint": {
         "email": "nak@nord-aurdal.kommune.no"
       },
@@ -260,10 +323,17 @@
     },
     {
       "id": "ORG-0010",
-      "name": "Sør-Aurdal kommune",
       "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
         "url": "https://www.sor-aurdal.kommune.no/"
       },
+      "name": "Sør-Aurdal kommune",
       "contactPoint": {
         "email": "postmottak@sor-aurdal.kommune.no"
       },
@@ -276,10 +346,17 @@
     },
     {
       "id": "ORG-0011",
-      "name": "Vang kommune",
       "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
         "url": "https://www.vang.kommune.no/"
       },
+      "name": "Vang kommune",
       "contactPoint": {
         "email": "post@vang.kommune.no"
       },
@@ -292,10 +369,17 @@
     },
     {
       "id": "ORG-0012",
-      "name": "Vestre Slidre kommune",
       "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
         "url": "https://www.vestre-slidre.kommune.no/"
       },
+      "name": "Vestre Slidre kommune",
       "contactPoint": {
         "email": "post@vestre-slidre.kommune.no"
       },
@@ -308,10 +392,17 @@
     },
     {
       "id": "ORG-0013",
-      "name": "Øystre Slidre kommune",
       "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
         "url": "https://www.oystre-slidre.kommune.no/"
       },
+      "name": "Øystre Slidre kommune",
       "contactPoint": {
         "email": "post@oystre-slidre.kommune.no"
       },
@@ -324,10 +415,17 @@
     },
     {
       "id": "ORG-0014",
-      "name": "Eidskog kommune",
       "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
         "url": "https://www.eidskog.kommune.no/"
       },
+      "name": "Eidskog kommune",
       "contactPoint": {
         "email": "postmottak@eidskog.kommune.no"
       },
@@ -340,10 +438,17 @@
     },
     {
       "id": "ORG-0015",
-      "name": "Nord-Odal kommune",
       "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
         "url": "https://www.nord-odal.kommune.no/"
       },
+      "name": "Nord-Odal kommune",
       "contactPoint": {
         "email": "postmottak@nord-odal.kommune.no"
       },
@@ -356,10 +461,17 @@
     },
     {
       "id": "ORG-0016",
-      "name": "Våler kommune",
       "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
         "url": "https://www.vaaler-he.kommune.no/"
       },
+      "name": "Våler kommune",
       "contactPoint": {
         "email": "postmottak@vaaler-he.kommune.no"
       },
@@ -372,10 +484,17 @@
     },
     {
       "id": "ORG-0017",
-      "name": "Åsnes kommune",
       "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
         "url": "https://www.asnes.kommune.no/"
       },
+      "name": "Åsnes kommune",
       "contactPoint": {
         "email": "post@asnes.kommune.no"
       },

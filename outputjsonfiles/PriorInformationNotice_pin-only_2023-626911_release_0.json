@@ -1,7 +1,7 @@
 {
   "id": "2023-626911",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8cd1bc16-a272-4464-9001-45207c702150",
+  "ocid": "ocds-abcd1234-c02faf80-7d61-4b9c-8147-dc554eb9b8af",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -51,6 +51,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
+        "url": "https://permalink.mercell.com/202948429.aspx"
+      },
       "name": "Trøndelag fylkeskommune",
       "additionalIdentifiers": [
         {
@@ -62,9 +72,6 @@
         "name": "Svend Olaf Olsen",
         "telephone": "+47 74174862",
         "email": "sveols@trondelagfylke.no"
-      },
-      "details": {
-        "url": "https://permalink.mercell.com/202948429.aspx"
       },
       "address": {
         "locality": "STEINKJER"

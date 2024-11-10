@@ -1,7 +1,7 @@
 {
   "id": "667f77ec-2687-48a0-a752-651a0d7ebdcb",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3a3162a7-16ca-4083-ae70-027e7e98ee36",
+  "ocid": "ocds-abcd1234-823585cf-2483-44b8-8abf-6103813c3194",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -94,6 +94,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "02",
+            "description": "Defence"
+          }
+        ],
+        "url": "https://permalink.mercell.com/216373386.aspx"
+      },
       "name": "FORSVARSMATERIELL",
       "additionalIdentifiers": [
         {
@@ -105,9 +115,6 @@
         "name": "Kimberley Moabi Berkhof",
         "telephone": "45732110",
         "email": "kberkhof@mil.no"
-      },
-      "details": {
-        "url": "https://permalink.mercell.com/216373386.aspx"
       },
       "address": {
         "locality": "OSLO"

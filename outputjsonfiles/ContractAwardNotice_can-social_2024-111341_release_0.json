@@ -1,7 +1,7 @@
 {
   "id": "65ffd92d-8eee-4787-a7fe-925106611edc",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3bfdde2c-c156-4192-96d1-fb6d3d212b53",
+  "ocid": "ocds-abcd1234-8c74e480-6b4d-4e1d-b5d6-73af8ebd5253",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -84,35 +84,18 @@
     "contract"
   ],
   "date": "2024-08-05T13:02:01+00:00",
-  "bids": {
-    "details": [
-      {
-        "id": "TEN-0001",
-        "relatedLots": [
-          "LOT-0000"
-        ],
-        "tenderers": [
-          {
-            "id": "ORG-0003"
-          }
-        ]
-      },
-      {
-        "id": "TEN-0002",
-        "relatedLots": [
-          "LOT-0000"
-        ],
-        "tenderers": [
-          {
-            "id": "ORG-0004"
-          }
-        ]
-      }
-    ]
-  },
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ]
+      },
       "name": "Vestland fylkeskommune - Innkjøpsseksjonen",
       "additionalIdentifiers": [
         {
@@ -198,6 +181,32 @@
       ]
     }
   ],
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0002",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "tenderers": [
+          {
+            "id": "ORG-0004"
+          }
+        ]
+      }
+    ]
+  },
   "awards": [
     {
       "id": "CON-0001",

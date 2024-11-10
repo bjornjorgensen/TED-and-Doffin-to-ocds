@@ -1,7 +1,7 @@
 {
   "id": "2022-976327",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0dacb908-379e-460c-a256-05fad3b6678b",
+  "ocid": "ocds-abcd1234-1dc5e33e-0430-4a40-baa8-f7a36f97a9cb",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -100,6 +100,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "07",
+            "description": "Health"
+          }
+        ],
+        "url": "http://www.oslo.kommune.no"
+      },
       "name": "Oslo kommune v/ Sykehjemsetaten",
       "additionalIdentifiers": [
         {
@@ -111,9 +121,6 @@
         "name": "Leona Pilares",
         "telephone": "+47 21802180",
         "email": "leona.pilares@sye.oslo.kommune.no"
-      },
-      "details": {
-        "url": "http://www.oslo.kommune.no"
       },
       "address": {
         "locality": "Oslo"

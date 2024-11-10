@@ -1,7 +1,7 @@
 {
   "id": "2023-600143",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b01e26f1-5520-4935-a043-b7695467f486",
+  "ocid": "ocds-abcd1234-21b68d6a-0c25-4aba-8f86-755f24428d92",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -92,6 +92,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
+        "url": "http://www.tonsberg.kommune.no"
+      },
       "name": "Tønsberg kommune",
       "additionalIdentifiers": [
         {
@@ -103,9 +113,6 @@
         "name": "Therese Borge",
         "telephone": "+47 48255955",
         "email": "therese.borge@tonsberg.kommune.no"
-      },
-      "details": {
-        "url": "http://www.tonsberg.kommune.no"
       },
       "address": {
         "locality": "Tønsberg"

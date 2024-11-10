@@ -1,7 +1,7 @@
 {
   "id": "2022-396301",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-52bf9608-562a-4687-b08e-89c6b08160cd",
+  "ocid": "ocds-abcd1234-8d298a26-c59a-4995-b024-d0146947e313",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -98,6 +98,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
+        "url": "http://www.malselv.kommune.no"
+      },
       "name": "Målselv kommune",
       "additionalIdentifiers": [
         {
@@ -108,9 +118,6 @@
       "contactPoint": {
         "name": "Rolf Willy Berg",
         "email": "rolf.berg@innkjopsservice.no"
-      },
-      "details": {
-        "url": "http://www.malselv.kommune.no"
       },
       "address": {
         "locality": "MOEN"

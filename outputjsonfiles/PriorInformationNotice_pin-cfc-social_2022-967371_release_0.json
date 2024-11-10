@@ -1,7 +1,7 @@
 {
   "id": "2022-967371",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e1bb9e78-80a0-4383-a890-97cf78552bde",
+  "ocid": "ocds-abcd1234-271f1a77-b874-4af2-8da7-161ef8853ccf",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -141,6 +141,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "09",
+            "description": "Education"
+          }
+        ],
+        "url": "http://www.vlfk.no"
+      },
       "name": "Vestland fylkeskommune",
       "additionalIdentifiers": [
         {
@@ -151,9 +161,6 @@
       "contactPoint": {
         "name": "Katrine Wilson",
         "email": "Katrine.Rokke.Wilson@vlfk.no"
-      },
-      "details": {
-        "url": "http://www.vlfk.no"
       },
       "address": {
         "locality": "BERGEN"

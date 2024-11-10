@@ -1,7 +1,7 @@
 {
   "id": "2023-612007",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e1542dea-573b-4418-a956-dacfefea7b26",
+  "ocid": "ocds-abcd1234-6b59e3d5-b7ce-4eb1-a7e1-2e25c920ba4c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -57,6 +57,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "02",
+            "description": "Defence"
+          }
+        ],
+        "url": "https://permalink.mercell.com/198572200.aspx"
+      },
       "name": "Forsvaret v/Forsvarets logistikkorganisasjon",
       "additionalIdentifiers": [
         {
@@ -68,9 +78,6 @@
         "name": "Marie Louise Jørgensen",
         "telephone": "+47 40919988",
         "email": "e-mjorgensen@mil.no"
-      },
-      "details": {
-        "url": "https://permalink.mercell.com/198572200.aspx"
       },
       "address": {
         "locality": "Lysaker"

@@ -1,7 +1,7 @@
 {
   "id": "74f8c72a-5dcd-4a77-afda-6573ca30c8df",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-962610ac-9da5-427c-9790-197948429930",
+  "ocid": "ocds-abcd1234-7cf4dfa6-85ac-4dc6-8bf9-3207ac7b2df5",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -337,6 +337,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
+        "url": "https://www.varnesregionen.no/fellestjenester/innkjop"
+      },
       "name": "Værnesregionen Innkjøp - Innkjøp",
       "additionalIdentifiers": [
         {
@@ -349,9 +359,6 @@
         "telephone": "+4774833500",
         "email": "rita@varinn.no"
       },
-      "details": {
-        "url": "https://www.varnesregionen.no/fellestjenester/innkjop"
-      },
       "address": {
         "locality": "Stjørdal"
       },
@@ -359,6 +366,181 @@
         "buyer",
         "processContactPoint",
         "leadBuyer"
+      ]
+    },
+    {
+      "id": "ORG-0003",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
+        "url": "https://www.stjordal.kommune.no"
+      },
+      "name": "Stjørdal kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "939958851",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "74833500",
+        "email": "postmottak@stjordal.kommune.no"
+      },
+      "address": {
+        "locality": "Stjørdal"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0004",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ]
+      },
+      "name": "Meråker kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "835231712",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "74813200",
+        "email": "postmottak@meraker.kommune.no"
+      },
+      "address": {
+        "locality": "Meråker"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0005",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ]
+      },
+      "name": "Selbu kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "971197609",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "4773816700",
+        "email": "postsmottak@selbukommune.no"
+      },
+      "address": {
+        "locality": "Selbu"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0006",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ]
+      },
+      "name": "Tydal kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "64983472",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "4773815900",
+        "email": "postmottak@tydalkommune.no"
+      },
+      "address": {
+        "locality": "Tydal"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0007",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ]
+      },
+      "name": "Frosta kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "944482253",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "4774808800",
+        "email": "postmottak@frotga.kommune.no"
+      },
+      "address": {
+        "locality": "Frosta"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0008",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ]
+      },
+      "name": "Holtålen kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "937697767",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "4772417600",
+        "email": "postmottak@holtalen.kommune.no"
+      },
+      "address": {
+        "locality": "Holtålen"
+      },
+      "roles": [
+        "buyer"
       ]
     },
     {
@@ -382,129 +564,6 @@
       },
       "roles": [
         "reviewBody"
-      ]
-    },
-    {
-      "id": "ORG-0003",
-      "name": "Stjørdal kommune",
-      "additionalIdentifiers": [
-        {
-          "id": "939958851",
-          "scheme": "GB-COH"
-        }
-      ],
-      "contactPoint": {
-        "telephone": "74833500",
-        "email": "postmottak@stjordal.kommune.no"
-      },
-      "details": {
-        "url": "https://www.stjordal.kommune.no"
-      },
-      "address": {
-        "locality": "Stjørdal"
-      },
-      "roles": [
-        "buyer"
-      ]
-    },
-    {
-      "id": "ORG-0004",
-      "name": "Meråker kommune",
-      "additionalIdentifiers": [
-        {
-          "id": "835231712",
-          "scheme": "GB-COH"
-        }
-      ],
-      "contactPoint": {
-        "telephone": "74813200",
-        "email": "postmottak@meraker.kommune.no"
-      },
-      "address": {
-        "locality": "Meråker"
-      },
-      "roles": [
-        "buyer"
-      ]
-    },
-    {
-      "id": "ORG-0005",
-      "name": "Selbu kommune",
-      "additionalIdentifiers": [
-        {
-          "id": "971197609",
-          "scheme": "GB-COH"
-        }
-      ],
-      "contactPoint": {
-        "telephone": "4773816700",
-        "email": "postsmottak@selbukommune.no"
-      },
-      "address": {
-        "locality": "Selbu"
-      },
-      "roles": [
-        "buyer"
-      ]
-    },
-    {
-      "id": "ORG-0006",
-      "name": "Tydal kommune",
-      "additionalIdentifiers": [
-        {
-          "id": "64983472",
-          "scheme": "GB-COH"
-        }
-      ],
-      "contactPoint": {
-        "telephone": "4773815900",
-        "email": "postmottak@tydalkommune.no"
-      },
-      "address": {
-        "locality": "Tydal"
-      },
-      "roles": [
-        "buyer"
-      ]
-    },
-    {
-      "id": "ORG-0007",
-      "name": "Frosta kommune",
-      "additionalIdentifiers": [
-        {
-          "id": "944482253",
-          "scheme": "GB-COH"
-        }
-      ],
-      "contactPoint": {
-        "telephone": "4774808800",
-        "email": "postmottak@frotga.kommune.no"
-      },
-      "address": {
-        "locality": "Frosta"
-      },
-      "roles": [
-        "buyer"
-      ]
-    },
-    {
-      "id": "ORG-0008",
-      "name": "Holtålen kommune",
-      "additionalIdentifiers": [
-        {
-          "id": "937697767",
-          "scheme": "GB-COH"
-        }
-      ],
-      "contactPoint": {
-        "telephone": "4772417600",
-        "email": "postmottak@holtalen.kommune.no"
-      },
-      "address": {
-        "locality": "Holtålen"
-      },
-      "roles": [
-        "buyer"
       ]
     }
   ],

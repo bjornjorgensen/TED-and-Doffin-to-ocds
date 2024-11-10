@@ -1,7 +1,7 @@
 {
   "id": "870ff007-688a-4ad1-9ad7-28c2ae514b40",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b5aca2f6-fb93-4d75-adbc-a2e4c942412c",
+  "ocid": "ocds-abcd1234-7f6fbbef-60ee-439b-8207-b05460921ef0",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -190,6 +190,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
+        "url": "http://www.kongsbergregionen.no"
+      },
       "name": "Kongsbergregionen",
       "additionalIdentifiers": [
         {
@@ -201,9 +211,6 @@
         "name": "Miriam Undebakke",
         "telephone": "92849649",
         "email": "miriam.undebakke@kongsberg.kommune.no"
-      },
-      "details": {
-        "url": "http://www.kongsbergregionen.no"
       },
       "address": {
         "locality": "KONGSBERG"

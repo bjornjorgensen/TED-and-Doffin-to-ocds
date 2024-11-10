@@ -1,7 +1,7 @@
 {
   "id": "2023-696688",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c79cfe0d-59ed-4f20-902a-1d87639a26a5",
+  "ocid": "ocds-abcd1234-cc4774dc-6bef-4017-a1ad-b0109785242e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -165,6 +165,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "06",
+            "description": "Housing and community amenities"
+          }
+        ],
+        "url": "http://www.trondheim.kommune.no/"
+      },
       "name": "Trondheim kommune",
       "additionalIdentifiers": [
         {
@@ -176,9 +186,6 @@
         "name": "Katrine  Sørstrøm",
         "telephone": "+47 97743400",
         "email": "eierskap.postmottak@trondheim.kommune.no"
-      },
-      "details": {
-        "url": "http://www.trondheim.kommune.no/"
       },
       "address": {
         "locality": "Trondheim"

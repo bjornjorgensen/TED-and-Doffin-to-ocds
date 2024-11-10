@@ -1,7 +1,7 @@
 {
   "id": "a105cb09-ec7d-45d5-a364-ff2317e2231f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-fe080381-12a0-4886-9bcc-bd066529aafa",
+  "ocid": "ocds-abcd1234-f569ff8d-7437-4ff1-b9fb-b6cfb2f34a6f",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -66,6 +66,16 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          }
+        ],
+        "url": "http://Lillestrom.kommune.no/"
+      },
       "name": "Lillestrøm Kommune - Innkjøp",
       "additionalIdentifiers": [
         {
@@ -77,9 +87,6 @@
         "name": "Ine Høyer",
         "telephone": "+47",
         "email": "inecharlotte.hoyer@lillestrom.kommune.no"
-      },
-      "details": {
-        "url": "http://Lillestrom.kommune.no/"
       },
       "address": {
         "locality": "Lillestrøm"
