@@ -8,13 +8,15 @@ logger = logging.getLogger(__name__)
 # Authority activity descriptions for non-COFOG activities
 AUTHORITY_TABLE = {
     "gas-oil": "Activities related to the exploitation of a geographical area for the purpose of extracting oil or gas.",
-    "port": "Activities relating to the exploitation of a geographical area for the purpose of providing port facilities or other terminal facilities to carriers by air, sea or inland waterway.",
-    "water": "Activities relating to the provision or operation of networks providing a service to the public in the field of transport by railway, automated systems, tramway, trolley bus, bus or cable.",
-    "airport": "Activities relating to the exploitation of a geographical area for the purpose of providing airport facilities or other terminal facilities to carriers by air.",
-    "post": "Postal services",
-    "electricity": "Activities relating to the provision or operation of networks providing a service to the public in the field of production, transport or distribution of electricity.",
-    "gas-heat": "Activities relating to the provision or operation of networks providing a service to the public in the field of production, transport or distribution of gas or heat.",
-    "solid-fuel": "Activities relating to the exploitation of a geographical area for the purpose of extracting coal or other solid fuels.",
+    "port": "Activities related to the exploitation of a geographical area for the purpose of the provision of maritime or inland ports or other terminal facilities to carriers by sea or inland waterway.",
+    "water": "Activities related to: (a) the provision or operation of fixed networks intended to provide a service to the public in connection with the production, transport or distribution of drinking water; (b) the supply of drinking water to such networks; (c) hydraulic engineering projects, irrigation or land drainage, provided that the volume of water to be used for the supply of drinking water represents more than 20 % of the total volume of water made available by such projects or irrigation or drainage installations; (d) the disposal or treatment of sewage.",
+    "airport": "Activities related to the exploitation of a geographical area for the purpose of the provision of airports or other terminal facilities to carriers by air.",
+    "post": "Activities related to the exploitation of a geographical area for the purpose of the provision of maritime or inland ports or other terminal facilities to carriers by sea or inland waterway.",
+    "electricity": "Activities related to: (a) the provision or operation of fixed networks intended to provide a service to the public in connection with the production, transport or distribution of electricity; (b) the supply of electricity to such networks.",
+    "gas-heat": "Activities related to: (a) the provision or operation of fixed networks intended to provide a service to the public in connection with the production, transport or distribution of gas or heat; (b) the supply of gas or heat to such networks.",
+    "solid-fuel": "Activities related to the exploitation of a geographical area for the purpose of exploring for, or extracting, coal or other solid fuels.",
+    "urttb": "Activities relating to the provision or operation of networks providing a service to the public in the field of transport by railway, automated systems, tramway, trolley bus, bus or cable.",
+    "rail": "Activities related to the provision or operation of networks providing a service to the public in the field of transport by railway.",
 }
 
 # COFOG codes and descriptions
