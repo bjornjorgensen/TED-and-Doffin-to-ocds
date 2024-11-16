@@ -1,5 +1,19 @@
 from lxml import etree
 from typing import Any
+from contextlib import contextmanager
+import logging
+from dataclasses import dataclass
+
+logger = logging.getLogger(__name__)
+
+
+@dataclass(frozen=True)
+class XMLError:
+    """XML processing error messages."""
+
+    INVALID_CONTENT = "Invalid XML content"
+    EMPTY_DOCUMENT = "Empty XML document"
+    INVALID_TREE = "Invalid XML tree type"
 
 
 class XMLProcessor:
@@ -22,6 +36,23 @@ class XMLProcessor:
         if isinstance(content, str):
             content = content.encode("utf-8")
         return etree.fromstring(content)
+
+    @contextmanager
+    def safe_xml_parse(self, content: str | bytes) -> etree._Element:
+        """Safely parse XML with error handling."""
+        try:
+            tree = self.parse_xml(content)
+            yield tree
+        except etree.XMLSyntaxError as e:
+            logger.exception("XML parsing error")
+            raise ValueError(XMLError.INVALID_CONTENT) from e
+
+    def _validate_tree(self, tree: etree._Element) -> None:
+        """Validate parsed XML tree."""
+        if tree is None:
+            raise ValueError(XMLError.EMPTY_DOCUMENT)
+        if not isinstance(tree, etree.ElementBase):
+            raise TypeError(XMLError.INVALID_TREE)
 
     def extract_notice_info(self, tree: etree._Element) -> dict[str, Any]:
         """Extract basic information from notice."""

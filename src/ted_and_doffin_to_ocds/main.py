@@ -3,6 +3,8 @@ import logging
 from pathlib import Path
 import argparse
 from typing import Any
+from concurrent.futures import ThreadPoolExecutor
+from functools import partial
 
 from ted_and_doffin_to_ocds.utils.common_operations import (
     NoticeProcessor,
@@ -33,9 +35,25 @@ class NoticeConverter:
         try:
             releases = self._process_input_file(input_path)
             self._write_releases(input_path, output_folder, releases)
-        except Exception:
+        except Exception as e:
+            self._handle_process_error(input_path, e)
             self.logger.exception("Error processing file %s", input_path)
             raise
+
+    def process_files_parallel(self, files: list[Path], max_workers: int = 4) -> None:
+        """Process files in parallel using ThreadPoolExecutor."""
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            process_func = partial(
+                self.process_file, output_folder=self.config.output_folder
+            )
+            list(executor.map(process_func, files))
+
+    def _handle_process_error(self, file_path: Path, error: Exception) -> None:
+        """Handle processing errors for specific files."""
+        error_file = self.config.output_folder / f"{file_path.stem}_error.log"
+        with error_file.open("w") as f:
+            f.write(f"Error processing {file_path}:\n{error!s}")
+        self.logger.error("Failed to process %s: %s", file_path, error)
 
     def _process_input_file(self, input_path: Path) -> list[dict[str, Any]]:
         """Process input file and return list of releases."""
@@ -191,8 +209,7 @@ def process_files(converter: NoticeConverter, config: Config) -> None:
             logging.warning("No XML files found to process")
             return
 
-        for xml_file in files:
-            converter.process_file(xml_file, config.output_folder)
+        converter.process_files_parallel(files)
 
 
 if __name__ == "__main__":

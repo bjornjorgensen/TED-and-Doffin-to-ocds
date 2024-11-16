@@ -4,8 +4,10 @@ import shutil
 import tempfile
 from pathlib import Path
 from typing import ClassVar, Self
+from collections.abc import AsyncIterator
 from lxml import etree
 import logging
+import asyncio
 
 logger = logging.getLogger(__name__)
 
@@ -120,6 +122,27 @@ class NoticeFileProcessor:
 
         return categorized
 
+    async def categorize_files_async(self) -> dict[str, list[Path]]:
+        """Async version of categorize_files."""
+        if not self.temp_dir:
+            raise UninitializedError
+
+        loop = asyncio.get_event_loop()
+        categorized = {notice_type: [] for notice_type in self.NOTICE_ORDER}
+
+        file_paths = list(self.temp_dir.glob("*.xml"))
+        tasks = [
+            loop.run_in_executor(None, self.get_notice_type, file_path)
+            for file_path in file_paths
+        ]
+
+        results = await asyncio.gather(*tasks)
+        for file_path, notice_type in zip(file_paths, results, strict=False):
+            if notice_type in categorized:
+                categorized[notice_type].append(file_path)
+
+        return categorized
+
     def copy_input_files(self) -> None:
         """Copy input files to temporary directory."""
         temp_dir_error = (
@@ -164,3 +187,13 @@ class NoticeFileProcessor:
             logger.warning("No valid XML files found in any category")
 
         return sorted_files
+
+    async def process_files_async(self) -> AsyncIterator[Path]:
+        """Process files asynchronously."""
+        if not self.temp_dir:
+            raise UninitializedError
+
+        categorized = await self.categorize_files_async()
+        for notice_type in self.NOTICE_ORDER:
+            for file_path in sorted(categorized[notice_type]):
+                yield file_path
