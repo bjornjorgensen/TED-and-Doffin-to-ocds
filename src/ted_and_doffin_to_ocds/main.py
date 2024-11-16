@@ -4,7 +4,7 @@ from pathlib import Path
 import argparse
 from typing import Any
 
-from ted_and_doffin_to_ocds.converters.common_operations import (
+from ted_and_doffin_to_ocds.utils.common_operations import (
     NoticeProcessor,
     remove_empty_elements,
     remove_empty_dicts,
