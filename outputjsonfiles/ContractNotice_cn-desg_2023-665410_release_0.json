@@ -1,7 +1,7 @@
 {
   "id": "2023-665410",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-28505ce9-4e46-482a-b204-3840b4deb8a0",
+  "ocid": "ocds-abcd1234-3ee92c77-4092-4a00-919b-67c2a7e28835",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -156,8 +156,8 @@
       },
       "roles": [
         "processContactPoint",
-        "buyer",
-        "submissionReceiptBody"
+        "submissionReceiptBody",
+        "buyer"
       ]
     },
     {

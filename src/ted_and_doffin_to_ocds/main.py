@@ -31,15 +31,36 @@ class NoticeConverter:
         self.logger.info("Processing file: %s", input_path)
 
         try:
-            xml_content = self._read_xml(input_path)
-            releases = self.processor.process_notice(xml_content)
-
-            for i, release_json_str in enumerate(releases):
-                self._process_release(input_path, output_folder, release_json_str, i)
-
+            releases = self._process_input_file(input_path)
+            self._write_releases(input_path, output_folder, releases)
         except Exception:
             self.logger.exception("Error processing file %s", input_path)
             raise
+
+    def _process_input_file(self, input_path: Path) -> list[dict[str, Any]]:
+        """Process input file and return list of releases."""
+        xml_content = self._read_xml(input_path)
+        releases = []
+
+        for release_json_str in self.processor.process_notice(xml_content):
+            release_json = json.loads(release_json_str)
+            process_bt_sections(release_json, xml_content)
+            releases.append(self._clean_release(release_json))
+
+        return releases
+
+    def _clean_release(self, release: dict[str, Any]) -> dict[str, Any]:
+        """Clean up release data."""
+        release = remove_empty_elements(release)
+        return remove_empty_dicts(release)
+
+    def _write_releases(
+        self, input_path: Path, output_folder: Path, releases: list[dict[str, Any]]
+    ) -> None:
+        """Write releases to output files."""
+        for i, release in enumerate(releases):
+            output_file = output_folder / f"{input_path.stem}_release_{i}.json"
+            self._write_json(output_file, release)
 
     def _read_xml(self, input_path: Path) -> bytes:
         """Read XML content from file."""
@@ -49,27 +70,6 @@ class NoticeConverter:
                 "Read XML file: %s, size: %d bytes", input_path, len(content)
             )
             return content
-
-    def _process_release(
-        self, input_path: Path, output_folder: Path, release_json_str: str, index: int
-    ) -> None:
-        """Process individual release."""
-        self.logger.debug("Processing release %d", index)
-
-        # Parse and process the release
-        release_json = json.loads(release_json_str)
-        xml_content = self._read_xml(input_path)
-
-        # Process business term sections
-        process_bt_sections(release_json, xml_content)
-
-        # Clean up output
-        release_json = remove_empty_elements(release_json)
-        release_json = remove_empty_dicts(release_json)
-
-        # Write output
-        output_file = output_folder / f"{input_path.stem}_release_{index}.json"
-        self._write_json(output_file, release_json)
 
     def _write_json(self, output_file: Path, data: dict[str, Any]) -> None:
         """Write JSON data to file."""
@@ -170,30 +170,29 @@ def main(
     """Main entry point for notice conversion."""
     config = parse_arguments(input_path, output_folder, ocid_prefix, scheme, db_path)
     configure_logging(config.log_level)
-    logger = logging.getLogger(__name__)
 
     try:
-        # Setup
-        config.output_folder.mkdir(parents=True, exist_ok=True)
         converter = NoticeConverter(config)
-
-        # Process files
-        with NoticeFileProcessor(
-            config.input_path, config.output_folder
-        ) as file_processor:
-            file_processor.copy_input_files()
-            files_to_process = file_processor.get_sorted_files()
-
-            if not files_to_process:
-                logger.warning("No XML files found to process")
-                return
-
-            for xml_file in files_to_process:
-                converter.process_file(xml_file, config.output_folder)
-
+        process_files(converter, config)
     except Exception:
-        logger.exception("Fatal error during processing")
+        logging.getLogger(__name__).exception("Fatal error")
         raise
+
+
+def process_files(converter: NoticeConverter, config: Config) -> None:
+    """Process all input files."""
+    config.output_folder.mkdir(parents=True, exist_ok=True)
+
+    with NoticeFileProcessor(config.input_path, config.output_folder) as processor:
+        processor.copy_input_files()
+        files = processor.get_sorted_files()
+
+        if not files:
+            logging.warning("No XML files found to process")
+            return
+
+        for xml_file in files:
+            converter.process_file(xml_file, config.output_folder)
 
 
 if __name__ == "__main__":
