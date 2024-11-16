@@ -1,5 +1,6 @@
 from lxml import etree
 from typing import Any
+from collections.abc import Generator
 from contextlib import contextmanager
 import logging
 from dataclasses import dataclass
@@ -38,7 +39,7 @@ class XMLProcessor:
         return etree.fromstring(content)
 
     @contextmanager
-    def safe_xml_parse(self, content: str | bytes) -> etree._Element:
+    def safe_xml_parse(self, content: str | bytes) -> Generator[etree._Element, None, None]:
         """Safely parse XML with error handling."""
         try:
             tree = self.parse_xml(content)

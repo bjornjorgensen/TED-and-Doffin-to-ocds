@@ -3,6 +3,7 @@
 import sqlite3
 import logging
 from datetime import datetime, UTC
+from collections.abc import Generator
 from pathlib import Path
 from contextlib import contextmanager
 import threading
@@ -33,7 +34,7 @@ class NoticeTracker:
         return self._local.connection
 
     @contextmanager
-    def get_connection(self) -> sqlite3.Connection:
+    def get_connection(self) -> Generator[sqlite3.Connection, None, None]:
         """Get a connection specific to current thread."""
         try:
             yield self.connection
@@ -271,7 +272,7 @@ class NoticeTracker:
             return None
 
     @contextmanager
-    def get_statistics(self) -> dict:
+    def get_statistics(self) -> Generator[dict, None, None]:
         """
         Get statistics about the tracked notices and relationships.
 
