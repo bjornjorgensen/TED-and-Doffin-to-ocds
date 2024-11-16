@@ -1,7 +1,7 @@
 {
   "id": "2023-664435",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-573029b7-54db-473e-9705-27213b33debb",
+  "ocid": "ocds-abcd1234-382fcb2e-f773-4796-8e39-a57ea9bcbc31",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -136,8 +136,8 @@
         "locality": "VADSØ"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {
