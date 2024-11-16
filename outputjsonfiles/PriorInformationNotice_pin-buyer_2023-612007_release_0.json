@@ -1,7 +1,7 @@
 {
   "id": "2023-612007",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6b59e3d5-b7ce-4eb1-a7e1-2e25c920ba4c",
+  "ocid": "ocds-abcd1234-7e7f23db-4f7f-4d2d-a0c6-8a67a899049f",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -83,8 +83,8 @@
         "locality": "Lysaker"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     }
   ],
