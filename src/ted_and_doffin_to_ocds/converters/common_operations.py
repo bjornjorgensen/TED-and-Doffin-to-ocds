@@ -8,6 +8,7 @@ from lxml import etree
 from pathlib import Path
 from .notice_tracker import NoticeTracker
 from typing import Any
+from .xml_processor import XMLProcessor
 
 logger = logging.getLogger(__name__)
 
@@ -29,6 +30,7 @@ class NoticeProcessor:
         self.ocid_prefix = ocid_prefix
         self.scheme = scheme
         self.tracker = NoticeTracker(db_path or "notices.db")
+        self.xml_processor = XMLProcessor()
 
     @property
     def namespaces(self) -> dict[str, str]:
@@ -47,11 +49,8 @@ class NoticeProcessor:
         Main entry point for notice processing following specification rules.
         Creates separate releases for PIN-only parts, single release otherwise.
         """
-        if isinstance(xml_content, str):
-            xml_content = xml_content.encode("utf-8")
-
-        tree = etree.fromstring(xml_content)
-        notice_info = self._extract_notice_info(tree)
+        tree = self.xml_processor.parse_xml(xml_content)
+        notice_info = self.xml_processor.extract_notice_info(tree)
         releases = self._process_notice(tree, notice_info)
 
         # Track notices in database

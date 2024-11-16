@@ -1,7 +1,7 @@
 {
   "id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-5d7f2c0d-dd9e-4219-b7f2-8c17e15a66c8",
+  "ocid": "ocds-abcd1234-8c0af2bd-033a-462e-8d6f-1dec243c7766",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -331,11 +331,11 @@
         "locality": "GJØVIK"
       },
       "roles": [
-        "buyer",
+        "evaluationBody",
         "reviewContactPoint",
         "submissionReceiptBody",
         "processContactPoint",
-        "evaluationBody"
+        "buyer"
       ]
     },
     {
