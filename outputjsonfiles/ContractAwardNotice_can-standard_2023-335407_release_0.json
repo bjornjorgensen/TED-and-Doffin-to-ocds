@@ -1,7 +1,7 @@
 {
   "id": "2023-335407",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-cf35e810-df79-4cc1-941d-f8597ec66a3f",
+  "ocid": "ocds-abcd1234-68300bcc-c556-4c11-b1c9-1bf034c563c1",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -98,7 +98,8 @@
             "description": "General public services"
           }
         ],
-        "url": "www.ks.no"
+        "url": "www.ks.no",
+        "buyerProfile": "https://eu.eu-supply.com/ctm/Company/CompanyInformation/Index/434546"
       },
       "name": "KS  (Kommunesektorens organisasjon)",
       "additionalIdentifiers": [
@@ -111,12 +112,12 @@
         "telephone": "+47 90191450",
         "email": "gtg@tigerconsulting.as"
       },
-      "address": {
-        "locality": "Oslo"
-      },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "Oslo"
+      }
     },
     {
       "id": "ORG-0002",

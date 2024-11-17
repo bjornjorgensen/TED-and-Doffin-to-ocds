@@ -1,7 +1,7 @@
 {
   "id": "2022-352534",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-af0d884d-9747-4127-9167-1f6558c078a1",
+  "ocid": "ocds-abcd1234-d078cbf9-5176-4e45-9056-4ac443dc7e95",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -100,16 +100,17 @@
         "email": "utilities-nordics@achilles.com"
       },
       "details": {
-        "url": "https://www.achilles.com/community/utilities-nce/"
-      },
-      "address": {
-        "locality": "Arendal"
+        "url": "https://www.achilles.com/community/utilities-nce/",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/3614"
       },
       "roles": [
         "submissionReceiptBody",
-        "buyer",
-        "processContactPoint"
-      ]
+        "processContactPoint",
+        "buyer"
+      ],
+      "address": {
+        "locality": "Arendal"
+      }
     },
     {
       "id": "ORG-0002",

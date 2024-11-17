@@ -1,7 +1,7 @@
 {
   "id": "2023-611830",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a110869f-6a1d-47d1-8261-a341b8bfe2c4",
+  "ocid": "ocds-abcd1234-216758ab-c100-4462-8987-e6ed32f3ada0",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -79,17 +79,18 @@
         }
       ],
       "details": {
-        "url": "www.ks.no"
+        "url": "www.ks.no",
+        "buyerProfile": "https://eu.eu-supply.com/ctm/Company/CompanyInformation/Index/434546"
       },
       "contactPoint": {
         "email": "gtg@tigerconsulting.as"
       },
-      "address": {
-        "locality": "Oslo"
-      },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "Oslo"
+      }
     },
     {
       "id": "ORG-0002",

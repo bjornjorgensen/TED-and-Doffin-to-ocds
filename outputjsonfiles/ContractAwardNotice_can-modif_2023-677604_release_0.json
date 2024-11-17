@@ -1,7 +1,7 @@
 {
   "id": "2023-677604",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-03bc3dc7-18b2-49d8-9c07-eb71162281da",
+  "ocid": "ocds-abcd1234-5ec31b8a-be3a-4354-89cd-cdbbfc0747ab",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -132,14 +132,15 @@
         "email": "mariannb@viken.no"
       },
       "details": {
-        "url": "https://viken.no/"
-      },
-      "address": {
-        "locality": "Drammen"
+        "url": "https://viken.no/",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/94332"
       },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "Drammen"
+      }
     },
     {
       "id": "ORG-0002",

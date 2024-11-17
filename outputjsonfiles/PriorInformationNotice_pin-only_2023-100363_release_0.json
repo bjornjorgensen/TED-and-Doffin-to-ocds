@@ -1,7 +1,7 @@
 {
   "id": "1db209a3-6934-4d5f-bf78-2aa8a1f2453c",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8c9de442-61db-4b67-b178-60c788164364",
+  "ocid": "ocds-abcd1234-019afa35-fcc0-40ad-8226-779d108608e9",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -123,7 +123,8 @@
             "description": "General public services"
           }
         ],
-        "url": "https://www.regjeringen.no/no/dep/bld/id298/"
+        "url": "https://www.regjeringen.no/no/dep/bld/id298/",
+        "buyerProfile": "https://eu.eu-supply.com/ctm/company/companyinformation/index/333461"
       },
       "name": "Barne- og familiedepartementet",
       "additionalIdentifiers": [
@@ -137,12 +138,12 @@
         "telephone": "+47 22249090",
         "email": "obh@bfd.dep.no"
       },
-      "address": {
-        "locality": "OSLO"
-      },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "OSLO"
+      }
     },
     {
       "id": "ORG-0002",

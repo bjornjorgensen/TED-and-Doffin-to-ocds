@@ -1,7 +1,7 @@
 {
   "id": "7d111d51-8042-402a-a234-50efe86d8f4f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-56a17cb1-80a9-429e-8104-2a5ed9da1e09",
+  "ocid": "ocds-abcd1234-5d64b83d-98b2-4feb-bed4-4871b19a6c88",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -178,15 +178,16 @@
         "email": "Kristian.von.Aphelen@posten.no"
       },
       "details": {
-        "url": "https://www.postenbring.no/"
-      },
-      "address": {
-        "locality": "Oslo"
+        "url": "https://www.postenbring.no/",
+        "buyerProfile": "https://posten-supplier.ivalua.app/"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
-      ]
+        "processContactPoint",
+        "buyer"
+      ],
+      "address": {
+        "locality": "Oslo"
+      }
     },
     {
       "id": "ORG-0004",

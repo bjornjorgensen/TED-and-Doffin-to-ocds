@@ -1,7 +1,7 @@
 {
   "id": "2022-627512",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d720871e-b631-4b1a-966c-758edff96451",
+  "ocid": "ocds-abcd1234-34367162-e8d3-49a2-a165-5d1d2ac32d5e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -98,14 +98,15 @@
         "email": "pal.tollersrud@vav.oslo.kommune.no"
       },
       "details": {
-        "url": "https://www.oslo.kommune.no/"
-      },
-      "address": {
-        "locality": "Oslo"
+        "url": "https://www.oslo.kommune.no/",
+        "buyerProfile": "https://eu.eu-supply.com/ctm/Company/CompanyInformation/Index/341765"
       },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "Oslo"
+      }
     },
     {
       "id": "ORG-0002",

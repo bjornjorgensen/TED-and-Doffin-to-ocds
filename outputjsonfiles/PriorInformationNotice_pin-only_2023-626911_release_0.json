@@ -1,7 +1,7 @@
 {
   "id": "2023-626911",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-fa18c40b-1757-43b3-90c5-184cb5d38577",
+  "ocid": "ocds-abcd1234-cface220-d1f5-4b7f-8280-61f3f684da4d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -59,7 +59,8 @@
             "description": "General public services"
           }
         ],
-        "url": "https://permalink.mercell.com/202948429.aspx"
+        "url": "https://permalink.mercell.com/202948429.aspx",
+        "buyerProfile": "http://www.trondelagfylke.no/"
       },
       "name": "Trøndelag fylkeskommune",
       "additionalIdentifiers": [
@@ -73,12 +74,12 @@
         "telephone": "+47 74174862",
         "email": "sveols@trondelagfylke.no"
       },
-      "address": {
-        "locality": "STEINKJER"
-      },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "STEINKJER"
+      }
     }
   ],
   "buyer": [

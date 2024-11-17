@@ -1,7 +1,7 @@
 {
   "id": "2248a00d-a0d9-4eee-8db1-d209e7346f13",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-933f29e0-3050-4d67-b4c1-c9e5c1f9ef3d",
+  "ocid": "ocds-abcd1234-0b04a09f-7469-43d6-86b3-5180ebdb9e64",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -119,7 +119,8 @@
             "id": "01",
             "description": "General public services"
           }
-        ]
+        ],
+        "buyerProfile": "https://eu.eu-supply.com/ctm/company/companyinformation/index/358200"
       },
       "name": "Drangsvann AS",
       "additionalIdentifiers": [
@@ -133,14 +134,14 @@
         "telephone": "+47 90172947",
         "email": "anne@pgas.no"
       },
+      "roles": [
+        "processContactPoint",
+        "buyer",
+        "reviewContactPoint"
+      ],
       "address": {
         "locality": "Kristiansand"
-      },
-      "roles": [
-        "buyer",
-        "processContactPoint",
-        "reviewContactPoint"
-      ]
+      }
     },
     {
       "id": "ORG-0002",

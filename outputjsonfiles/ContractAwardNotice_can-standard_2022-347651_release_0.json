@@ -1,7 +1,7 @@
 {
   "id": "2022-347651",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a2df719e-0fed-4d19-bdf9-ec9496788fda",
+  "ocid": "ocds-abcd1234-21073876-8fad-4368-874a-8f934d193409",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -117,7 +117,8 @@
             "description": "General public services"
           }
         ],
-        "url": "www.haugesund.kommune.no"
+        "url": "www.haugesund.kommune.no",
+        "buyerProfile": "https://eu.eu-supply.com/ctm/Company/CompanyInformation/Index/315635"
       },
       "name": "Haugesund kommune",
       "additionalIdentifiers": [
@@ -131,12 +132,12 @@
         "telephone": "+47 22814500",
         "email": "ashild.floisand@sands.no"
       },
-      "address": {
-        "locality": "Haugesund"
-      },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "Haugesund"
+      }
     },
     {
       "id": "ORG-0002",

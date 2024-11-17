@@ -1,7 +1,7 @@
 {
   "id": "0097de15-36cf-4750-96c9-f66ae4d6cafd",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3d98c63b-c08a-49dd-9111-f66d1ca0b116",
+  "ocid": "ocds-abcd1234-2c921d8e-9cec-4301-9220-0aea86bf1a4a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -58,7 +58,8 @@
             "description": "General public services"
           }
         ],
-        "url": "https://permalink.mercell.com/215950396.aspx"
+        "url": "https://permalink.mercell.com/215950396.aspx",
+        "buyerProfile": "https://www.stavanger.kommune.no/"
       },
       "name": "Stavanger kommune",
       "additionalIdentifiers": [
@@ -72,12 +73,12 @@
         "telephone": "+47 51507090",
         "email": "siri.loen@stavanger.kommune.no"
       },
-      "address": {
-        "locality": "STAVANGER"
-      },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "STAVANGER"
+      }
     }
   ],
   "buyer": [

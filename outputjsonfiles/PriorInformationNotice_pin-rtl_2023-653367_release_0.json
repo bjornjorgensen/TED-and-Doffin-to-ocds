@@ -1,7 +1,7 @@
 {
   "id": "2023-653367",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9372c974-d91d-45f9-bed8-9200c6d9ee28",
+  "ocid": "ocds-abcd1234-b25138c6-5f53-4192-9114-944a952f5445",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -1018,15 +1018,16 @@
         "email": "johanne.cecilie.thiis@vlfk.no"
       },
       "details": {
-        "url": "https://www.bybanenutbygging.no/"
-      },
-      "address": {
-        "locality": "Bergen"
+        "url": "https://www.bybanenutbygging.no/",
+        "buyerProfile": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
-      ]
+        "processContactPoint",
+        "buyer"
+      ],
+      "address": {
+        "locality": "Bergen"
+      }
     }
   ],
   "description": "Inndeling av delkontrakter er ikke endelig fastlagt. Det kan komme ytterligere entrepriser og noen kan bli slått sammen eller falle fra. Den enkelte entreprise vil bli kunngjort på Doffin/TED i perioden desember 2023-2025. Oppdragsgiver planlegger å avholde leverandørdag for interesserte leverandører. Arrangementet vil bli avholdt i Bergen 10. januar 2024. Påmelding rettes pr epost til Anne-Mette Syse Haugland; anne-mette.syse.haugland@vlfk.no. Vennligst merk emnefeltet \"Påmelding leverandørdag\". Det viser forøvrig til prosjektets hjemmeside; https://www.bybanenutbygging.no/ og Miljøløftet; https://miljoloftet.no/bybanen-til-asane2/. Mercell kunngjøring: https://opic.com/id/afmtxjadpr",

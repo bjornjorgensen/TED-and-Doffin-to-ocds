@@ -1,7 +1,7 @@
 {
   "id": "2023-659744",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f488c78e-f136-48b6-8293-828b70268d44",
+  "ocid": "ocds-abcd1234-58befd77-edae-452c-962a-069ef2683ed1",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -69,15 +69,16 @@
         "email": "ola.skeid@banenor.no"
       },
       "details": {
-        "url": "www.banenor.no"
-      },
-      "address": {
-        "locality": "Hamar"
+        "url": "www.banenor.no",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/1020"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
-      ]
+        "processContactPoint",
+        "buyer"
+      ],
+      "address": {
+        "locality": "Hamar"
+      }
     }
   ],
   "buyer": [

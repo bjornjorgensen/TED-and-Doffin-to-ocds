@@ -1,7 +1,7 @@
 {
   "id": "2023-627259",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c8f71103-2388-44eb-a421-46b51f4f70dd",
+  "ocid": "ocds-abcd1234-bd72bbd8-08c4-4815-b0cd-4e47d316bbd4",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -92,14 +92,15 @@
         "email": "cecilie.uteng@aid.dep.no"
       },
       "details": {
-        "url": "https://www.regjeringen.no/no/dep/aid/id165/"
-      },
-      "address": {
-        "locality": "Oslo"
+        "url": "https://www.regjeringen.no/no/dep/aid/id165/",
+        "buyerProfile": "https://eu.eu-supply.com/ctm/Company/CompanyInformation/Index/329002"
       },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "Oslo"
+      }
     },
     {
       "id": "ORG-0002",

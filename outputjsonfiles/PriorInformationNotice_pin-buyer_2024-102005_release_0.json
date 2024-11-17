@@ -1,7 +1,7 @@
 {
   "id": "629a037e-e8dd-4b02-a19e-e890bd114fda",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-74c1ec6c-01a6-43ca-a00c-63518f184d5b",
+  "ocid": "ocds-abcd1234-ccc1ddf6-5df2-46de-bf14-7baa94476209",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -69,7 +69,8 @@
             "description": "General public services"
           }
         ],
-        "url": "http://Lillestrom.kommune.no/"
+        "url": "http://Lillestrom.kommune.no/",
+        "buyerProfile": "https://www.lillestrom.kommune.no/"
       },
       "name": "Lillestrøm Kommune - Innkjøp",
       "additionalIdentifiers": [
@@ -83,12 +84,12 @@
         "telephone": "+47",
         "email": "Carl.Henriksen@lillestrom.kommune.no"
       },
-      "address": {
-        "locality": "Lillestrøm"
-      },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "Lillestrøm"
+      }
     }
   ],
   "buyer": [

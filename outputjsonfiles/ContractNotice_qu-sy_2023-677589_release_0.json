@@ -1,7 +1,7 @@
 {
   "id": "2023-677589",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2310ef5d-f4f4-4d5f-aa28-8943489c71ea",
+  "ocid": "ocds-abcd1234-48c8e13d-2555-4b3d-b7af-48a71618b4d5",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -222,16 +222,17 @@
         "email": "transq@achilles.com"
       },
       "details": {
-        "url": "https://www.achilles.com/community/transq-nordics/"
-      },
-      "address": {
-        "locality": "Arendal"
+        "url": "https://www.achilles.com/community/transq-nordics/",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/3614"
       },
       "roles": [
         "submissionReceiptBody",
-        "buyer",
-        "processContactPoint"
-      ]
+        "processContactPoint",
+        "buyer"
+      ],
+      "address": {
+        "locality": "Arendal"
+      }
     },
     {
       "id": "ORG-0002",

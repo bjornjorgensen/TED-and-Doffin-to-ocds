@@ -1,7 +1,7 @@
 {
   "id": "2023-618829",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3f16d837-eed1-481b-ae5a-d475850efa7f",
+  "ocid": "ocds-abcd1234-0d0920f8-24c9-44a5-891e-fecdd1d05c2d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -84,14 +84,15 @@
         "email": "halvor.opaas@kpmg.no"
       },
       "details": {
-        "url": "https://www.sigma2.no/"
-      },
-      "address": {
-        "locality": "TRONDHEIM"
+        "url": "https://www.sigma2.no/",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/65512"
       },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "TRONDHEIM"
+      }
     },
     {
       "id": "ORG-0002",

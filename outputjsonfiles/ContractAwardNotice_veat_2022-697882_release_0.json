@@ -1,7 +1,7 @@
 {
   "id": "2022-697882",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-31d834bd-0f39-4dcd-a747-fb3a1b287ac8",
+  "ocid": "ocds-abcd1234-c5a13d92-4d20-4bd1-894a-6de17e6bb4ed",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -70,7 +70,8 @@
             "description": "Health"
           }
         ],
-        "url": "https://permalink.mercell.com/191145348.aspx"
+        "url": "https://permalink.mercell.com/191145348.aspx",
+        "buyerProfile": "http://www.sykehusinnkjop.no/"
       },
       "name": "SYKEHUSINNKJØP HF",
       "additionalIdentifiers": [
@@ -84,12 +85,12 @@
         "telephone": "+47 78950700",
         "email": "post@sykehusinnkjop.no"
       },
-      "address": {
-        "locality": "VADSØ"
-      },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "VADSØ"
+      }
     },
     {
       "id": "ORG-0002",

@@ -1,7 +1,7 @@
 {
   "id": "2023-607152",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e30d45c7-8e21-48ef-b988-01c2a180b0d2",
+  "ocid": "ocds-abcd1234-de45b7d2-cbff-4d4d-8038-010058a4cc5a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -137,15 +137,16 @@
         "email": "anbud@atb.no"
       },
       "details": {
-        "url": "https://permalink.mercell.com/199364447.aspx"
-      },
-      "address": {
-        "locality": "TRONDHEIM"
+        "url": "https://permalink.mercell.com/199364447.aspx",
+        "buyerProfile": "http://www.atb.no/"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
-      ]
+        "processContactPoint",
+        "buyer"
+      ],
+      "address": {
+        "locality": "TRONDHEIM"
+      }
     }
   ],
   "buyer": [

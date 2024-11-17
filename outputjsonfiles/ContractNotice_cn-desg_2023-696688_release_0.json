@@ -1,7 +1,7 @@
 {
   "id": "2023-696688",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b6ece0f5-6f06-4f24-bb90-0569d899c25c",
+  "ocid": "ocds-abcd1234-f6b65c46-8651-4dcb-89f4-edc825d5ad00",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -173,7 +173,8 @@
             "description": "Housing and community amenities"
           }
         ],
-        "url": "http://www.trondheim.kommune.no/"
+        "url": "http://www.trondheim.kommune.no/",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/3610"
       },
       "name": "Trondheim kommune",
       "additionalIdentifiers": [
@@ -187,14 +188,14 @@
         "telephone": "+47 97743400",
         "email": "eierskap.postmottak@trondheim.kommune.no"
       },
-      "address": {
-        "locality": "Trondheim"
-      },
       "roles": [
         "submissionReceiptBody",
-        "buyer",
-        "processContactPoint"
-      ]
+        "processContactPoint",
+        "buyer"
+      ],
+      "address": {
+        "locality": "Trondheim"
+      }
     },
     {
       "id": "ORG-0002",

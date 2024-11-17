@@ -1,7 +1,7 @@
 {
   "id": "74f9d169-452b-4a99-b8d2-f54c3c71e163",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8ab85673-6526-4aff-b100-62fb0b54f883",
+  "ocid": "ocds-abcd1234-23605000-0a0d-474e-a0de-eb8e8c2f4b47",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -129,7 +129,8 @@
             "description": "General public services"
           }
         ],
-        "url": "http://www.bodo.kommune.no"
+        "url": "http://www.bodo.kommune.no",
+        "buyerProfile": "https://bodo.kommune.no/"
       },
       "name": "Bodø Kommune",
       "additionalIdentifiers": [
@@ -143,14 +144,14 @@
         "telephone": "+47 75555000",
         "email": "truls.eirik.moan@bodo.kommune.no"
       },
+      "roles": [
+        "processContactPoint",
+        "buyer",
+        "reviewContactPoint"
+      ],
       "address": {
         "locality": "BODØ"
-      },
-      "roles": [
-        "buyer",
-        "processContactPoint",
-        "reviewContactPoint"
-      ]
+      }
     },
     {
       "id": "ORG-0002",

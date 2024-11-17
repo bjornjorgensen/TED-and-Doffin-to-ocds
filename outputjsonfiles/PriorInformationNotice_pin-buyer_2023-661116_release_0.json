@@ -1,7 +1,7 @@
 {
   "id": "2023-661116",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-694d1c27-9cdc-4f37-9abe-2104ea99c536",
+  "ocid": "ocds-abcd1234-a0805803-82cc-4b7d-96c5-7c7c8df1ba80",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -271,7 +271,8 @@
             "description": "General public services"
           }
         ],
-        "url": "http://www.trv.no/"
+        "url": "http://www.trv.no/",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/3036"
       },
       "name": "Trondheim Renholdsverk AS",
       "additionalIdentifiers": [
@@ -285,13 +286,13 @@
         "telephone": "+47 92202769",
         "email": "jeanette.berglund@trv.no"
       },
+      "roles": [
+        "processContactPoint",
+        "buyer"
+      ],
       "address": {
         "locality": "TRONDHEIM"
-      },
-      "roles": [
-        "buyer",
-        "processContactPoint"
-      ]
+      }
     }
   ],
   "buyer": [

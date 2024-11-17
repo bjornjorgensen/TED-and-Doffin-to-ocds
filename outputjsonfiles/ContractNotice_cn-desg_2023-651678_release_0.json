@@ -1,7 +1,7 @@
 {
   "id": "2023-651678",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d0aff800-cede-46dd-a464-8e5f0e9b2bca",
+  "ocid": "ocds-abcd1234-7333666c-270e-4646-978c-343bf7543eb0",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -111,7 +111,8 @@
             "description": "General public services"
           }
         ],
-        "url": "https://www.kvinesdal.kommune.no/"
+        "url": "https://www.kvinesdal.kommune.no/",
+        "buyerProfile": "https://eu.eu-supply.com/ctm/Company/CompanyInformation/Index/311790"
       },
       "name": "Kvinesdal Kommunebygg",
       "additionalIdentifiers": [
@@ -125,14 +126,14 @@
         "telephone": "+47 48141133",
         "email": "vidar@pilar-br.no"
       },
-      "address": {
-        "locality": "Kvinesdal"
-      },
       "roles": [
         "submissionReceiptBody",
-        "buyer",
-        "processContactPoint"
-      ]
+        "processContactPoint",
+        "buyer"
+      ],
+      "address": {
+        "locality": "Kvinesdal"
+      }
     },
     {
       "id": "ORG-0002",

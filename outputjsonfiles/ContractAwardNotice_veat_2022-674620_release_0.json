@@ -1,7 +1,7 @@
 {
   "id": "2022-674620",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-54a39883-5c9b-46ec-a493-8a1a0b1f9a54",
+  "ocid": "ocds-abcd1234-fb9d01b6-57ba-4584-8689-4d82fc1e83b0",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -71,7 +71,8 @@
             "description": "Environmental protection"
           }
         ],
-        "url": "WWW.MILJODIR.NO"
+        "url": "WWW.MILJODIR.NO",
+        "buyerProfile": "www.vetinst.no"
       },
       "name": "Miljødirektoratet",
       "additionalIdentifiers": [
@@ -85,12 +86,12 @@
         "telephone": "+47 73580500",
         "email": "erik.lund@miljodir.no"
       },
-      "address": {
-        "locality": "Trondheim"
-      },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "Trondheim"
+      }
     },
     {
       "id": "ORG-0002",

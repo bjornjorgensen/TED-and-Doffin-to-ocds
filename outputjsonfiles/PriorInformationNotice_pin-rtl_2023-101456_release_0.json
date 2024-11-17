@@ -1,7 +1,7 @@
 {
   "id": "ee5f74f4-d24f-4c67-beca-c7e4a17d16e4",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e5b1b134-3ce4-4731-9298-16437855d5a6",
+  "ocid": "ocds-abcd1234-4241c411-0f3b-4e1f-8758-b5a963e1f6fd",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -98,7 +98,8 @@
             "description": "Health"
           }
         ],
-        "url": "https://permalink.mercell.com/217218001.aspx"
+        "url": "https://permalink.mercell.com/217218001.aspx",
+        "buyerProfile": "http://www.sykehusinnkjop.no/"
       },
       "name": "SYKEHUSINNKJØP HF",
       "additionalIdentifiers": [
@@ -112,13 +113,13 @@
         "telephone": "+47 78950700",
         "email": "post@sykehusinnkjop.no"
       },
+      "roles": [
+        "processContactPoint",
+        "buyer"
+      ],
       "address": {
         "locality": "VADSØ"
-      },
-      "roles": [
-        "buyer",
-        "processContactPoint"
-      ]
+      }
     },
     {
       "id": "ORG-0002",

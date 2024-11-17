@@ -1,7 +1,7 @@
 {
   "id": "aa382761-89ef-4162-9dc5-74f12a6f2a21",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a57deaef-4574-401e-a9c9-a9c266b2d09d",
+  "ocid": "ocds-abcd1234-01332ebc-a7f0-4e8d-925c-d2c26cba46c1",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -746,14 +746,15 @@
         "email": "stian.gasland@nav.no"
       },
       "details": {
-        "url": "http://www.nav.no/"
-      },
-      "address": {
-        "locality": "Mo i Rana"
+        "url": "http://www.nav.no/",
+        "buyerProfile": "http://www.nav.no/"
       },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "Mo i Rana"
+      }
     },
     {
       "id": "ORG-0002",

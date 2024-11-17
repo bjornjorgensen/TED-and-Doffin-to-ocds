@@ -1,7 +1,7 @@
 {
   "id": "2023-620727",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7571f1f5-fcba-41b3-b49b-fe285ac53414",
+  "ocid": "ocds-abcd1234-609e7838-2f70-425e-b500-709b31e4b3fd",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -128,16 +128,17 @@
         "email": "silje.andreassen@odinprosjekt.no"
       },
       "details": {
-        "url": "https://www.vaga.kommune.no/"
-      },
-      "address": {
-        "locality": "VÅGÅ"
+        "url": "https://www.vaga.kommune.no/",
+        "buyerProfile": "https://eu.eu-supply.com/ctm/Company/CompanyInformation/Index/264506"
       },
       "roles": [
         "submissionReceiptBody",
-        "buyer",
-        "processContactPoint"
-      ]
+        "processContactPoint",
+        "buyer"
+      ],
+      "address": {
+        "locality": "VÅGÅ"
+      }
     },
     {
       "id": "ORG-0002",

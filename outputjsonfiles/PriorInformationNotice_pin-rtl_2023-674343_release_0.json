@@ -1,7 +1,7 @@
 {
   "id": "2023-674343",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-41afd908-d856-437e-a963-4e9c9322c3f3",
+  "ocid": "ocds-abcd1234-3045fe31-7bfc-4d68-9594-02fb2244f858",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -115,7 +115,8 @@
             "description": "General public services"
           }
         ],
-        "url": "https://permalink.mercell.com/208265464.aspx"
+        "url": "https://permalink.mercell.com/208265464.aspx",
+        "buyerProfile": "http://www.kongsvinger.kommune.no/"
       },
       "name": "Kongsvinger Kommune",
       "additionalIdentifiers": [
@@ -128,14 +129,14 @@
         "telephone": "+47 62874000",
         "email": "riik@kongsvinger.kommune.no"
       },
+      "roles": [
+        "processContactPoint",
+        "leadBuyer",
+        "buyer"
+      ],
       "address": {
         "locality": "KONGSVINGER"
-      },
-      "roles": [
-        "buyer",
-        "leadBuyer",
-        "processContactPoint"
-      ]
+      }
     },
     {
       "id": "ORG-0002",

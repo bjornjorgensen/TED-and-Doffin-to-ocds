@@ -1,7 +1,7 @@
 {
   "id": "7b469b6b-4abb-4f22-abe1-50973de8c825",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f3daff3e-6602-4bc5-a885-648aae9ecc50",
+  "ocid": "ocds-abcd1234-b4a29421-b2f4-4609-b764-1f817a8d2736",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -114,15 +114,16 @@
         "email": "per.brustad@posten.no"
       },
       "details": {
-        "url": "https://www.postenbring.no/"
-      },
-      "address": {
-        "locality": "Oslo"
+        "url": "https://www.postenbring.no/",
+        "buyerProfile": "https://posten-supplier.ivalua.app/"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
-      ]
+        "processContactPoint",
+        "buyer"
+      ],
+      "address": {
+        "locality": "Oslo"
+      }
     },
     {
       "id": "ORG-0004",

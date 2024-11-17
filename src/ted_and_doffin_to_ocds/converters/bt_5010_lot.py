@@ -66,7 +66,7 @@ def parse_eu_funds_financing_identifier(
             return result
 
         logger.debug("No EU funds financing identifiers found")
-        return None
+        return None  # noqa: TRY300
 
     except etree.XMLSyntaxError:
         logger.exception("Failed to parse XML content")
