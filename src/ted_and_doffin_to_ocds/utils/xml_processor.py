@@ -1,5 +1,6 @@
 from lxml import etree
-from typing import Any
+from lxml.etree import _Element, ElementBase  # Import types explicitly
+from typing import Any, Final
 from collections.abc import Generator
 from contextlib import contextmanager
 import logging
@@ -20,6 +21,9 @@ class XMLError:
 class XMLProcessor:
     """Handles XML parsing and extraction operations."""
 
+    # Define constants
+    MAX_XML_SIZE: Final[int] = 50 * 1024 * 1024  # 50MB limit
+
     @property
     def namespaces(self) -> dict[str, str]:
         """XML namespaces used in eForms."""
@@ -34,12 +38,28 @@ class XMLProcessor:
 
     def parse_xml(self, content: str | bytes) -> etree._Element:
         """Parse XML content into an element tree."""
+        if len(content) > self.MAX_XML_SIZE:
+            error_msg = f"XML content exceeds {self.MAX_XML_SIZE} bytes limit"
+            raise ValueError(error_msg)
+
         if isinstance(content, str):
             content = content.encode("utf-8")
-        return etree.fromstring(content)
+
+        try:
+            parser = etree.XMLParser(recover=True, remove_blank_text=True)
+            tree = etree.fromstring(content, parser=parser)
+            self._validate_tree(tree)
+        except etree.XMLSyntaxError as e:
+            logger.exception("XML parsing error")
+            error_msg = f"{XMLError.INVALID_CONTENT}: {e}"
+            raise ValueError(error_msg) from e
+        else:
+            return tree
 
     @contextmanager
-    def safe_xml_parse(self, content: str | bytes) -> Generator[etree._Element, None, None]:
+    def safe_xml_parse(
+        self, content: str | bytes
+    ) -> Generator[etree._Element, None, None]:
         """Safely parse XML with error handling."""
         try:
             tree = self.parse_xml(content)
@@ -48,12 +68,14 @@ class XMLProcessor:
             logger.exception("XML parsing error")
             raise ValueError(XMLError.INVALID_CONTENT) from e
 
-    def _validate_tree(self, tree: etree._Element) -> None:
+    def _validate_tree(self, tree: _Element) -> None:
         """Validate parsed XML tree."""
         if tree is None:
             raise ValueError(XMLError.EMPTY_DOCUMENT)
-        if not isinstance(tree, etree.ElementBase):
-            raise TypeError(XMLError.INVALID_TREE)
+        # Check for both ElementBase and _Element types
+        if not isinstance(tree, _Element | ElementBase):
+            error_msg = f"{XMLError.INVALID_TREE}: {type(tree)}"
+            raise TypeError(error_msg)
 
     def extract_notice_info(self, tree: etree._Element) -> dict[str, Any]:
         """Extract basic information from notice."""

@@ -29,8 +29,16 @@ class NoticeProcessor:
         """
         self.ocid_prefix = ocid_prefix
         self.scheme = scheme
-        self.tracker = NoticeTracker(db_path or "notices.db")
+        self._db_path = db_path or "notices.db"
+        self._tracker = None
         self.xml_processor = XMLProcessor()
+
+    @property
+    def tracker(self) -> NoticeTracker:
+        """Get thread-local tracker instance."""
+        if self._tracker is None:
+            self._tracker = NoticeTracker(self._db_path)
+        return self._tracker
 
     @property
     def namespaces(self) -> dict[str, str]:

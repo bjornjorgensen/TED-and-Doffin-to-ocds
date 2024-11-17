@@ -2,9 +2,9 @@ import json
 import logging
 from pathlib import Path
 import argparse
-from typing import Any
-from concurrent.futures import ThreadPoolExecutor
-from functools import partial
+from typing import Any, Final
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from tqdm import tqdm
 
 from ted_and_doffin_to_ocds.utils.common_operations import (
     NoticeProcessor,
@@ -18,6 +18,9 @@ from ted_and_doffin_to_ocds.utils.config import Config
 
 class NoticeConverter:
     """Handles XML notice conversion to OCDS JSON."""
+
+    MAX_WORKERS: Final[int] = 4
+    CHUNK_SIZE: Final[int] = 10  # Reduced chunk size for better progress updates
 
     def __init__(self, config: Config):
         self.config = config
@@ -40,13 +43,30 @@ class NoticeConverter:
             self.logger.exception("Error processing file %s", input_path)
             raise
 
-    def process_files_parallel(self, files: list[Path], max_workers: int = 4) -> None:
-        """Process files in parallel using ThreadPoolExecutor."""
-        with ThreadPoolExecutor(max_workers=max_workers) as executor:
-            process_func = partial(
-                self.process_file, output_folder=self.config.output_folder
-            )
-            list(executor.map(process_func, files))
+    def process_files_parallel(self, files: list[Path]) -> None:
+        """Process files in parallel with improved error handling and progress tracking."""
+        with ThreadPoolExecutor(max_workers=self.MAX_WORKERS) as executor:
+            # Submit all files individually instead of chunks
+            futures = [
+                executor.submit(self.process_file, f, self.config.output_folder)
+                for f in files
+            ]
+
+            # Track progress and handle errors
+            failed = 0
+            with tqdm(total=len(files), desc="Processing files", unit="file") as pbar:
+                for future in as_completed(futures):
+                    try:
+                        future.result()
+                        pbar.update(1)
+                    except Exception:
+                        failed += 1
+                        self.logger.exception("File processing failed")
+                        pbar.set_postfix({"failed": failed}, refresh=True)
+
+            if failed:
+                error_msg = f"Failed to process {failed} files"
+                raise RuntimeError(error_msg)
 
     def _handle_process_error(self, file_path: Path, error: Exception) -> None:
         """Handle processing errors for specific files."""

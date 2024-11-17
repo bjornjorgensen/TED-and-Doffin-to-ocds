@@ -5,14 +5,17 @@ import logging
 from datetime import datetime, UTC
 from collections.abc import Generator
 from pathlib import Path
-from contextlib import contextmanager
+from contextlib import contextmanager, suppress
 import threading
+from typing import Final
 
 logger = logging.getLogger(__name__)
 
 
 class NoticeTracker:
     """Thread-safe SQLite connection manager for notice tracking."""
+
+    MAX_WORKERS: Final[int] = 4
 
     def __init__(self, db_path: str = "notices.db"):
         """Initialize the notice tracker."""
@@ -21,27 +24,38 @@ class NoticeTracker:
 
         # Only create new database if it doesn't exist
         if not Path(db_path).exists():
-            self.init_db()
-        else:
-            self._verify_schema()
+            self._init_db_connection().close()
+
+    def _init_db_connection(self) -> sqlite3.Connection:
+        """Initialize a new database connection."""
+        conn = sqlite3.connect(self.db_path)
+        conn.row_factory = sqlite3.Row
+        return conn
 
     @property
     def connection(self) -> sqlite3.Connection:
         """Get thread-local connection."""
         if not hasattr(self._local, "connection"):
-            self._local.connection = sqlite3.connect(self.db_path)
-            self._local.connection.row_factory = sqlite3.Row
+            self._local.connection = self._init_db_connection()
         return self._local.connection
 
     @contextmanager
     def get_connection(self) -> Generator[sqlite3.Connection, None, None]:
-        """Get a connection specific to current thread."""
+        """Get a connection from thread-local storage with automatic commit/rollback."""
+        conn = self.connection
         try:
-            yield self.connection
-            self.connection.commit()
+            yield conn
+            conn.commit()
         except Exception:
-            self.connection.rollback()
+            conn.rollback()
             raise
+
+    def __del__(self):
+        """Clean up connections on deletion."""
+        if hasattr(self._local, "connection"):
+            with suppress(Exception):
+                self._local.connection.close()
+                logger.debug("Closed database connection")
 
     def _verify_schema(self):
         """Verify that all required tables exist."""
