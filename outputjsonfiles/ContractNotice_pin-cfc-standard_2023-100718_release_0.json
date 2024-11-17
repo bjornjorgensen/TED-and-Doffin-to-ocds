@@ -1,7 +1,7 @@
 {
   "id": "03223b9a-002c-45e8-be6b-9d4aad21950e",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-da99c712-e7e2-4fbb-b0be-a3d523b28c7e",
+  "ocid": "ocds-abcd1234-9523277a-0296-45fd-902f-d95586854125",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -128,8 +128,8 @@
         "locality": "VADSÃ˜"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

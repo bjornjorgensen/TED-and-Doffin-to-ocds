@@ -1,7 +1,7 @@
 {
   "id": "2023-600143",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-08c0f994-40b5-4f66-a586-ddc3558bd466",
+  "ocid": "ocds-abcd1234-fb1f7fca-04b2-43e0-9418-f00d5ae6e2d8",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -118,8 +118,8 @@
         "locality": "Tønsberg"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

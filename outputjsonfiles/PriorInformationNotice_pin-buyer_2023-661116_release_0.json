@@ -1,7 +1,7 @@
 {
   "id": "2023-661116",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d8cd8e30-eff6-4d9a-95c8-39e32dc2f837",
+  "ocid": "ocds-abcd1234-4604b9c9-f5b7-4269-8dc9-0602c2ef9107",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -289,8 +289,8 @@
         "locality": "TRONDHEIM"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     }
   ],

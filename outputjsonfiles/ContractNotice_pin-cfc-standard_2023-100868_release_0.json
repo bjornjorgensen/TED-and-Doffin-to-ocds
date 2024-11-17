@@ -1,7 +1,7 @@
 {
   "id": "2248a00d-a0d9-4eee-8db1-d209e7346f13",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a3b7ba10-b80f-455e-aa18-65c41973d364",
+  "ocid": "ocds-abcd1234-09033b63-dc53-4a6d-8136-9df9e93aa723",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -137,8 +137,8 @@
         "locality": "Kristiansand"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "reviewContactPoint"
       ]
     },
