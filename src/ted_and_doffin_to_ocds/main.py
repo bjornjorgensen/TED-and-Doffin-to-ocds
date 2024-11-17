@@ -30,14 +30,42 @@ class NoticeConverter:
             scheme=config.scheme,
             db_path=str(config.db_path),
         )
+        # Initialize database
+        self.processor.tracker.init_db()
+        self.processor.tracker.verify_schema()  # Changed to public method
+
+    def _validate_input_file(self, input_path: Path) -> None:
+        """Validate input file exists and has correct extension."""
+        if not input_path.exists():
+            msg = f"Input file not found: {input_path}"
+            raise FileNotFoundError(msg)
+        if input_path.suffix.lower() != ".xml":
+            msg = f"Expected XML file, got: {input_path}"
+            raise ValueError(msg)
 
     def process_file(self, input_path: Path, output_folder: Path) -> None:
         """Process a single XML file."""
-        self.logger.info("Processing file: %s", input_path)
-
         try:
-            releases = self._process_input_file(input_path)
+            self.logger.info("Processing file: %s", input_path)
+            self._validate_input_file(input_path)
+
+            # First try to read the file
+            try:
+                xml_content = self._read_xml(input_path)
+            except Exception:
+                self.logger.exception("Failed to read XML file %s", input_path)
+                raise
+
+            # Then try to process it
+            releases = self._process_input_file(xml_content)
+            if not releases:
+                self.logger.warning("No releases generated for file: %s", input_path)
+                return
+
+            # Finally try to write the output
             self._write_releases(input_path, output_folder, releases)
+            self.logger.info("Successfully processed file: %s", input_path)
+
         except Exception as e:
             self._handle_process_error(input_path, e)
             self.logger.exception("Error processing file %s", input_path)
@@ -45,27 +73,34 @@ class NoticeConverter:
 
     def process_files_parallel(self, files: list[Path]) -> None:
         """Process files in parallel with improved error handling and progress tracking."""
+        self.logger.info("Starting parallel processing of %d files", len(files))
+
         with ThreadPoolExecutor(max_workers=self.MAX_WORKERS) as executor:
-            # Submit all files individually instead of chunks
-            futures = [
-                executor.submit(self.process_file, f, self.config.output_folder)
+            # Submit all files individually
+            futures = {
+                executor.submit(self.process_file, f, self.config.output_folder): f
                 for f in files
-            ]
+            }
 
             # Track progress and handle errors
-            failed = 0
+            failed_files = []
             with tqdm(total=len(files), desc="Processing files", unit="file") as pbar:
                 for future in as_completed(futures):
                     try:
                         future.result()
                         pbar.update(1)
-                    except Exception:
-                        failed += 1
-                        self.logger.exception("File processing failed")
-                        pbar.set_postfix({"failed": failed}, refresh=True)
+                    except Exception as e:
+                        file_path = futures[future]
+                        failed_files.append((file_path, str(e)))
+                        self.logger.exception("Failed to process file: %s", file_path)
+                        pbar.set_postfix({"failed": len(failed_files)}, refresh=True)
+                        pbar.update(1)
 
-            if failed:
-                error_msg = f"Failed to process {failed} files"
+            if failed_files:
+                self.logger.error("Failed to process %d files:", len(failed_files))
+                for file_path, error in failed_files:
+                    self.logger.error("  %s: %s", file_path.name, error)
+                error_msg = f"Failed to process {len(failed_files)} files. Check the log for details."
                 raise RuntimeError(error_msg)
 
     def _handle_process_error(self, file_path: Path, error: Exception) -> None:
@@ -75,17 +110,29 @@ class NoticeConverter:
             f.write(f"Error processing {file_path}:\n{error!s}")
         self.logger.error("Failed to process %s: %s", file_path, error)
 
-    def _process_input_file(self, input_path: Path) -> list[dict[str, Any]]:
+    def _process_input_file(self, xml_content: bytes) -> list[dict[str, Any]]:
         """Process input file and return list of releases."""
-        xml_content = self._read_xml(input_path)
         releases = []
 
-        for release_json_str in self.processor.process_notice(xml_content):
-            release_json = json.loads(release_json_str)
-            process_bt_sections(release_json, xml_content)
-            releases.append(self._clean_release(release_json))
+        try:
+            for release_json_str in self.processor.process_notice(xml_content):
+                try:
+                    release_json = json.loads(release_json_str)
+                    process_bt_sections(release_json, xml_content)
+                    releases.append(self._clean_release(release_json))
+                except json.JSONDecodeError:
+                    self.logger.exception("Invalid JSON in release")
+                    raise
+                except Exception:
+                    self.logger.exception("Error processing release")
+                    raise
 
-        return releases
+            self.logger.debug("Generated %d releases", len(releases))
+        except Exception:
+            self.logger.exception("Failed to process notice")
+            raise
+        else:
+            return releases
 
     def _clean_release(self, release: dict[str, Any]) -> dict[str, Any]:
         """Clean up release data."""
@@ -133,7 +180,7 @@ def configure_logging(level: str = "INFO") -> None:
     for handler in logger.handlers[:]:
         logger.removeHandler(handler)
 
-    # Add file handler
+    # Add only file handler
     log_file = Path("app.log")
     file_handler = logging.FileHandler(log_file, mode="w")
     file_handler.setLevel(numeric_level)
@@ -206,30 +253,62 @@ def main(
     db_path: str | None = None,
 ) -> None:
     """Main entry point for notice conversion."""
-    config = parse_arguments(input_path, output_folder, ocid_prefix, scheme, db_path)
-    configure_logging(config.log_level)
+    logger = logging.getLogger(__name__)
 
     try:
+        config = parse_arguments(
+            input_path, output_folder, ocid_prefix, scheme, db_path
+        )
+        configure_logging(config.log_level)
+
+        logger.info("Starting conversion with config: %s", vars(config))
+
         converter = NoticeConverter(config)
         process_files(converter, config)
+
+        logger.info("Conversion completed successfully")
     except Exception:
-        logging.getLogger(__name__).exception("Fatal error")
+        logger.exception("Fatal error during conversion")
         raise
 
 
 def process_files(converter: NoticeConverter, config: Config) -> None:
     """Process all input files."""
-    config.output_folder.mkdir(parents=True, exist_ok=True)
+    logger = logging.getLogger(__name__)
 
-    with NoticeFileProcessor(config.input_path, config.output_folder) as processor:
-        processor.copy_input_files()
-        files = processor.get_sorted_files()
+    try:
+        config.output_folder.mkdir(parents=True, exist_ok=True)
 
-        if not files:
-            logging.warning("No XML files found to process")
+        # Verify database connection and schema
+        try:
+            converter.processor.tracker.verify_schema()  # Changed to public method
+            logger.info("Database schema verified successfully")
+        except Exception:
+            logger.exception("Database initialization failed")
+            raise
+
+        input_path = config.input_path
+        logger.info("Processing input: %s", input_path)
+
+        if input_path.is_file():
+            # Process single file directly
+            converter.process_file(input_path, config.output_folder)
             return
 
-        converter.process_files_parallel(files)
+        # Process multiple files
+        with NoticeFileProcessor(input_path, config.output_folder) as processor:
+            processor.copy_input_files()
+            files = processor.get_sorted_files()
+
+            if not files:
+                logger.warning("No XML files found to process")
+                return
+
+            converter.process_files_parallel(files)
+
+    except Exception:
+        logger.exception("Failed to process files")
+        raise
 
 
 if __name__ == "__main__":

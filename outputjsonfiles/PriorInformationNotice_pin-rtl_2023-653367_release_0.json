@@ -1,7 +1,7 @@
 {
   "id": "2023-653367",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7c4b6ede-58b8-49a5-a40a-114ae2590bce",
+  "ocid": "ocds-abcd1234-caacf355-f858-4708-904b-e470042bc644",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -1024,8 +1024,8 @@
         "locality": "Bergen"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     }
   ],
