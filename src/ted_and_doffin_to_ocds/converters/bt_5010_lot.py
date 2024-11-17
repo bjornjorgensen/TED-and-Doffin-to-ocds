@@ -2,80 +2,109 @@
 
 import logging
 from lxml import etree
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+    "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+    "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+    "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+}
 
-def parse_eu_funds_financing_identifier(xml_content):
+
+def parse_eu_funds_financing_identifier(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse EU Funds Financing Identifier (BT-5010-Lot) from XML content.
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
 
-    result = {"parties": [], "planning": {"budget": {"finance": []}}}
+    try:
+        root = etree.fromstring(xml_content)
 
-    lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
-        namespaces=namespaces,
-    )
+        # Initialize result structure
+        result = {"parties": [], "planning": {"budget": {"finance": []}}}
 
-    for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        funding_elements = lot.xpath(".//efac:Funding", namespaces=namespaces)
+        # Use exact XPath from specification
+        lots = root.xpath(
+            "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+            namespaces=NAMESPACES,
+        )
 
-        for funding in funding_elements:
-            financing_identifier = funding.xpath(
-                "efbc:FinancingIdentifier/text()",
-                namespaces=namespaces,
+        found_financing = False
+        for lot in lots:
+            lot_id = lot.xpath("cbc:ID/text()", namespaces=NAMESPACES)[0]
+
+            # Use exact XPath for funding elements
+            funding_elements = lot.xpath(
+                "cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Funding/efbc:FinancingIdentifier/text()",
+                namespaces=NAMESPACES,
             )
 
-            if financing_identifier:
-                finance_item = {
-                    "id": financing_identifier[0],
-                    "financingparty": {"name": "European Union"},
-                    "relatedLots": [lot_id],
-                }
-                result["planning"]["budget"]["finance"].append(finance_item)
+            for financing_id in funding_elements:
+                found_financing = True
+                result["planning"]["budget"]["finance"].append(
+                    {
+                        "id": financing_id,
+                        "financingParty": {  # Fixed capitalization
+                            "name": "European Union"
+                        },
+                        "relatedLots": [lot_id],
+                    }
+                )
 
-    if result["planning"]["budget"]["finance"]:
-        result["parties"].append({"name": "European Union", "roles": ["funder"]})
+        if found_financing:
+            # Add EU party information
+            result["parties"].append({"name": "European Union", "roles": ["funder"]})
+            logger.info("Found EU funds financing identifiers")
+            return result
 
-    return result if result["parties"] else None
+        logger.debug("No EU funds financing identifiers found")
+        return None
+
+    except etree.XMLSyntaxError:
+        logger.exception("Failed to parse XML content")
+        raise
+    except Exception:
+        logger.exception("Error parsing EU funds financing identifier")
+        return None
 
 
 def merge_eu_funds_financing_identifier(
-    release_json,
-    eu_funds_financing_identifier_data,
-):
+    release_json: dict[str, Any],
+    eu_funds_financing_identifier_data: dict[str, Any] | None,
+) -> None:
+    """
+    Merge EU Funds Financing Identifier data into the release JSON.
+    """
     if not eu_funds_financing_identifier_data:
-        logger.warning("No EU Funds Financing Identifier data to merge")
+        logger.debug("No EU Funds Financing Identifier data to merge")
         return
 
-    existing_parties = release_json.setdefault("parties", [])
+    # Handle EU party
+    parties = release_json.setdefault("parties", [])
     eu_party = next(
-        (party for party in existing_parties if party.get("name") == "European Union"),
-        None,
+        (party for party in parties if party.get("name") == "European Union"), None
     )
 
     if eu_party:
         if "funder" not in eu_party.get("roles", []):
             eu_party.setdefault("roles", []).append("funder")
     else:
-        new_party = eu_funds_financing_identifier_data["parties"][0]
-        new_party["id"] = str(len(existing_parties) + 1)
-        existing_parties.append(new_party)
+        eu_party = {
+            "id": str(len(parties) + 1),
+            "name": "European Union",
+            "roles": ["funder"],
+        }
+        parties.append(eu_party)
 
-    eu_party = next(
-        party for party in existing_parties if party.get("name") == "European Union"
-    )
-
+    # Handle finance information
     planning = release_json.setdefault("planning", {})
     budget = planning.setdefault("budget", {})
     existing_finance = budget.setdefault("finance", [])
@@ -84,22 +113,25 @@ def merge_eu_funds_financing_identifier(
         "finance"
     ]:
         existing_finance_item = next(
-            (item for item in existing_finance if item["id"] == new_finance["id"]),
-            None,
+            (item for item in existing_finance if item["id"] == new_finance["id"]), None
         )
+
         if existing_finance_item:
-            existing_finance_item["financingparty"] = {
+            # Update existing finance item
+            existing_finance_item["financingParty"] = {  # Fixed capitalization
                 "id": eu_party["id"],
                 "name": "European Union",
             }
-            existing_finance_item.setdefault("relatedLots", []).extend(
-                new_finance["relatedLots"],
-            )
-            existing_finance_item["relatedLots"] = list(
-                set(existing_finance_item["relatedLots"]),
-            )
+            # Merge relatedLots arrays without duplicates
+            existing_lots = existing_finance_item.get("relatedLots", [])
+            existing_lots.extend(new_finance["relatedLots"])
+            existing_finance_item["relatedLots"] = list(set(existing_lots))
         else:
-            new_finance["financingparty"]["id"] = eu_party["id"]
+            # Add new finance item with proper structure
+            new_finance["financingParty"] = {  # Fixed capitalization
+                "id": eu_party["id"],
+                "name": "European Union",
+            }
             existing_finance.append(new_finance)
 
     logger.info(

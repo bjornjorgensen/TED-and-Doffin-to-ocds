@@ -1,7 +1,7 @@
 {
   "id": "2023-665410",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-aeadf744-dbd1-4c58-a2a1-98615d96d8b0",
+  "ocid": "ocds-abcd1234-7662ec16-d18b-4f9c-903b-9424b9b806f1",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -155,8 +155,8 @@
         "locality": "Larvik"
       },
       "roles": [
-        "buyer",
         "submissionReceiptBody",
+        "buyer",
         "processContactPoint"
       ]
     },

@@ -1,7 +1,7 @@
 {
   "id": "2023-629257",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b3f11422-526d-4381-acd6-6a922fd2c0c3",
+  "ocid": "ocds-abcd1234-a739ce89-cea7-4c5c-87d5-7d6718b90fe4",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -91,8 +91,8 @@
         "documentType": "biddingDocuments",
         "url": "https://permalink.mercell.com/208131817.aspx",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ]
       }
     ],
