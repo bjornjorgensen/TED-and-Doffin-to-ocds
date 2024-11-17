@@ -3,24 +3,59 @@
 import sqlite3
 import logging
 from datetime import datetime, UTC
+from collections.abc import Generator
 from pathlib import Path
-from contextlib import contextmanager
+from contextlib import contextmanager, suppress
+import threading
+from typing import Final
 
 logger = logging.getLogger(__name__)
 
 
 class NoticeTracker:
-    OCID_REQUIRED_MESSAGE = "OCID is required for tracking notices"
+    """Thread-safe SQLite connection manager for notice tracking."""
+
+    MAX_WORKERS: Final[int] = 4
 
     def __init__(self, db_path: str = "notices.db"):
-        """Initialize the notice tracker with database connection."""
+        """Initialize the notice tracker."""
         self.db_path = db_path
+        self._local = threading.local()
+
         # Only create new database if it doesn't exist
         if not Path(db_path).exists():
-            self.init_db()
-        else:
-            # Verify the schema exists
-            self._verify_schema()
+            self._init_db_connection().close()
+
+    def _init_db_connection(self) -> sqlite3.Connection:
+        """Initialize a new database connection."""
+        conn = sqlite3.connect(self.db_path)
+        conn.row_factory = sqlite3.Row
+        return conn
+
+    @property
+    def connection(self) -> sqlite3.Connection:
+        """Get thread-local connection."""
+        if not hasattr(self._local, "connection"):
+            self._local.connection = self._init_db_connection()
+        return self._local.connection
+
+    @contextmanager
+    def get_connection(self) -> Generator[sqlite3.Connection, None, None]:
+        """Get a connection from thread-local storage with automatic commit/rollback."""
+        conn = self.connection
+        try:
+            yield conn
+            conn.commit()
+        except Exception:
+            conn.rollback()
+            raise
+
+    def __del__(self):
+        """Clean up connections on deletion."""
+        if hasattr(self._local, "connection"):
+            with suppress(Exception):
+                self._local.connection.close()
+                logger.debug("Closed database connection")
 
     def _verify_schema(self):
         """Verify that all required tables exist."""
@@ -135,7 +170,7 @@ class NoticeTracker:
 
         current_time = self.get_current_time()
 
-        with sqlite3.connect(self.db_path) as conn:
+        with self.get_connection() as conn:
             cursor = conn.cursor()
             try:
                 cursor.execute(
@@ -173,7 +208,7 @@ class NoticeTracker:
         """Track a part from a PIN-only notice."""
         current_time = self.get_current_time()
 
-        with sqlite3.connect(self.db_path) as conn:
+        with self.get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute(
                 """
@@ -194,7 +229,7 @@ class NoticeTracker:
         """Track a relationship between notices."""
         current_time = self.get_current_time()
 
-        with sqlite3.connect(self.db_path) as conn:
+        with self.get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute(
                 """
@@ -224,7 +259,7 @@ class NoticeTracker:
             Optional[tuple]: (notice_id, ocid, notice_type, is_pin_only, publication_date)
             or None if not found
         """
-        with sqlite3.connect(self.db_path) as conn:
+        with self.get_connection() as conn:
             cursor = conn.cursor()
             try:
                 cursor.execute(
@@ -251,14 +286,14 @@ class NoticeTracker:
             return None
 
     @contextmanager
-    def get_statistics(self) -> dict:
+    def get_statistics(self) -> Generator[dict, None, None]:
         """
         Get statistics about the tracked notices and relationships.
 
         Returns:
             dict: Statistics including counts of notices, parts, and relationships
         """
-        with sqlite3.connect(self.db_path) as conn:
+        with self.get_connection() as conn:
             cursor = conn.cursor()
 
             # Get notice count
@@ -283,7 +318,7 @@ class NoticeTracker:
 
     def get_notice_parts(self, notice_id: str) -> list[tuple]:
         """Get all parts associated with a notice."""
-        with sqlite3.connect(self.db_path) as conn:
+        with self.get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute(
                 """
@@ -298,7 +333,7 @@ class NoticeTracker:
 
     def get_related_processes(self, notice_id: str) -> list[tuple]:
         """Get all related processes for a notice."""
-        with sqlite3.connect(self.db_path) as conn:
+        with self.get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute(
                 """

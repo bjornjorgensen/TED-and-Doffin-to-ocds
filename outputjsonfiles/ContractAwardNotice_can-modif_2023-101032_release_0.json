@@ -1,7 +1,7 @@
 {
   "id": "be2cd071-e143-4fc8-bc3b-7f1ec1b4141f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e60b769f-0b51-4ae8-84eb-3bc75fc4689b",
+  "ocid": "ocds-abcd1234-2021290e-fc89-4f95-b716-49425f516b6a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -143,7 +143,7 @@
       "id": "CON-0001",
       "amendments": [
         {
-          "id": "c726caf2-82b9-43c1-90c7-723dd1f48dbc",
+          "id": "3f6748c8-74cc-4a68-b1a4-6e5d2c23f5a3",
           "rationaleClassifications": [
             {
               "id": "mod-cir",
@@ -153,11 +153,11 @@
           ]
         },
         {
-          "id": "656067c7-b035-4688-ac78-cac0508c1f4f",
+          "id": "5c751e86-2b3c-4aae-8478-601299cb81b9",
           "rationale": "Oppdragsgiver kunne ikke forutse at dagens Ålesund kommune ville bli vedtatt delt i to nye kommuner, heretter kalt Ålesund 2024 og Haram 2024. Anskaffelsens overordnede karakter blir ikke endret (1.), og den enkelte prisøkningen overstiger ikke 50 prosent av den opprinnelige kontraktsverdien (2.). Oppdragsgiver kunngjør endringene (3.)."
         },
         {
-          "id": "0129b272-597e-4a26-b516-84b489983aab",
+          "id": "8a33719a-3eac-4a9f-846a-3b2f7eaebfff",
           "description": "I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d. Ålesund kommunes eksisterende avtale med Visma Enterprise AS vedrørende Visma FlyVo videreføres i Ålesund 2024 og Haram 2024. Det er inngått et endringsbilag til eksisterende kontrakt som beskriver de nødvendige endringene i kontrakten som følge av kommunedelingen. Av opprinnelig kontraktsverdi, etter avtalefestet KPI-justering, utgjør nødvendige engangskostnader direkte knyttet til kommunedelingen 10 %. Årlig pris for bruksrett (fast pris pr. flyktning og pr. elev) endres ikke (kun avhengig av antall flyktninger og antall elever). "
         }
       ],

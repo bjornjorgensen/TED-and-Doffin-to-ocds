@@ -3,9 +3,12 @@
 import shutil
 import tempfile
 from pathlib import Path
-from typing import ClassVar, Self
+from typing import ClassVar, Self, Final
+from collections.abc import AsyncIterator
 from lxml import etree
 import logging
+import asyncio
+from tqdm import tqdm
 
 logger = logging.getLogger(__name__)
 
@@ -23,6 +26,8 @@ class NoticeFileProcessor:
         "ContractAwardNotice",
         "ContractAwardNotice-Modification",
     ]
+
+    MAX_FILE_SIZE: Final[int] = 100 * 1024 * 1024  # 100MB limit
 
     def __init__(self, input_path: Path, output_path: Path):
         """Initialize the processor with input and output paths."""
@@ -120,26 +125,44 @@ class NoticeFileProcessor:
 
         return categorized
 
-    def copy_input_files(self) -> None:
-        """Copy input files to temporary directory."""
-        temp_dir_error = (
-            "Temporary directory not initialized. Use with context manager."
-        )
+    async def categorize_files_async(self) -> dict[str, list[Path]]:
+        """Async version of categorize_files."""
         if not self.temp_dir:
-            raise RuntimeError(temp_dir_error)
+            raise UninitializedError
 
-        if self.input_path.is_file():
-            shutil.copy2(self.input_path, self.temp_dir)
-            logger.info("Copied %s to temporary directory", self.input_path.name)
-        elif self.input_path.is_dir():
-            count = 0
-            for xml_file in self.input_path.glob("*.xml"):
-                shutil.copy2(xml_file, self.temp_dir)
-                count += 1
-            logger.info("Copied %d XML files to temporary directory", count)
-        else:
-            error_msg = f"Invalid input path: {self.input_path}"
-            raise ValueError(error_msg)
+        loop = asyncio.get_event_loop()
+        categorized = {notice_type: [] for notice_type in self.NOTICE_ORDER}
+
+        file_paths = list(self.temp_dir.glob("*.xml"))
+        tasks = [
+            loop.run_in_executor(None, self.get_notice_type, file_path)
+            for file_path in file_paths
+        ]
+
+        results = await asyncio.gather(*tasks)
+        for file_path, notice_type in zip(file_paths, results, strict=False):
+            if notice_type in categorized:
+                categorized[notice_type].append(file_path)
+
+        return categorized
+
+    def copy_input_files(self) -> None:
+        """Copy input files to temporary directory with progress tracking."""
+        if not self.temp_dir:
+            raise UninitializedError
+
+        files = list(self.input_path.glob("*.xml"))
+        with tqdm(files, desc="Copying files") as pbar:
+            for xml_file in pbar:
+                if xml_file.stat().st_size > self.MAX_FILE_SIZE:
+                    logger.warning("File %s exceeds size limit", xml_file)
+                    continue
+
+                try:
+                    shutil.copy2(xml_file, self.temp_dir)
+                    pbar.set_postfix({"file": xml_file.name})
+                except OSError:
+                    logger.exception("Failed to copy %s", xml_file)
 
     def get_sorted_files(self) -> list[Path]:
         """Get files sorted in processing order."""
@@ -164,3 +187,13 @@ class NoticeFileProcessor:
             logger.warning("No valid XML files found in any category")
 
         return sorted_files
+
+    async def process_files_async(self) -> AsyncIterator[Path]:
+        """Process files asynchronously."""
+        if not self.temp_dir:
+            raise UninitializedError
+
+        categorized = await self.categorize_files_async()
+        for notice_type in self.NOTICE_ORDER:
+            for file_path in sorted(categorized[notice_type]):
+                yield file_path
