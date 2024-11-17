@@ -1,7 +1,7 @@
 {
   "id": "2023-629257",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-43bcf12f-ceb4-4882-bd0a-5713f300a879",
+  "ocid": "ocds-abcd1234-2efb2b10-be55-4aab-a743-e775c3c0b982",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -196,8 +196,8 @@
         "locality": "Stravanger"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

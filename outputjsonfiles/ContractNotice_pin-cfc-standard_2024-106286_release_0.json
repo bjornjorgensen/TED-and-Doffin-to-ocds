@@ -1,7 +1,7 @@
 {
   "id": "74f9d169-452b-4a99-b8d2-f54c3c71e163",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e3d20308-29c7-402e-8f65-72d2153a6649",
+  "ocid": "ocds-abcd1234-716a75b3-47d5-4006-821d-2f5dfc25cd8a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -147,8 +147,8 @@
         "locality": "BODØ"
       },
       "roles": [
-        "buyer",
         "processContactPoint",
+        "buyer",
         "reviewContactPoint"
       ]
     },

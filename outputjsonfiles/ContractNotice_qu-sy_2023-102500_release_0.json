@@ -1,7 +1,7 @@
 {
   "id": "3580e3e0-275f-4489-9aab-b6f493790e00",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-54508d89-dca1-40ba-bc53-154c6b9d46da",
+  "ocid": "ocds-abcd1234-1760ce68-18b7-4adf-b422-16b1b38ce3a9",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -239,8 +239,8 @@
         "locality": "Svolvær"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     }
   ],
