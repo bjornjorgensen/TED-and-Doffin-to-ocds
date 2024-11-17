@@ -1,7 +1,7 @@
 {
   "id": "2023-620727",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-51ab6330-53a2-427f-bfd8-0bf802f80692",
+  "ocid": "ocds-abcd1234-e81c3300-590b-4013-95d6-4d04ca78beba",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -129,12 +129,19 @@
       },
       "details": {
         "url": "https://www.vaga.kommune.no/",
-        "buyerProfile": "https://eu.eu-supply.com/ctm/Company/CompanyInformation/Index/264506"
+        "buyerProfile": "https://eu.eu-supply.com/ctm/Company/CompanyInformation/Index/264506",
+        "classifications": [
+          {
+            "scheme": "eu-main-activity",
+            "id": "water",
+            "description": "Activities related to: (a) the provision or operation of fixed networks intended to provide a service to the public in connection with the production, transport or distribution of drinking water; (b) the supply of drinking water to such networks; (c) hydraulic engineering projects, irrigation or land drainage, provided that the volume of water to be used for the supply of drinking water represents more than 20 % of the total volume of water made available by such projects or irrigation or drainage installations; (d) the disposal or treatment of sewage."
+          }
+        ]
       },
       "roles": [
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "VÅGÅ"

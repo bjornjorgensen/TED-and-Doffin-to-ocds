@@ -1,7 +1,7 @@
 {
   "id": "7b469b6b-4abb-4f22-abe1-50973de8c825",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e0172719-e6c6-4cef-b379-d13276868c4a",
+  "ocid": "ocds-abcd1234-edde07e8-6c15-46d4-8e5d-3f65146eb7ed",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -115,11 +115,18 @@
       },
       "details": {
         "url": "https://www.postenbring.no/",
-        "buyerProfile": "https://posten-supplier.ivalua.app/"
+        "buyerProfile": "https://posten-supplier.ivalua.app/",
+        "classifications": [
+          {
+            "scheme": "eu-main-activity",
+            "id": "post",
+            "description": "Activities related to the exploitation of a geographical area for the purpose of the provision of maritime or inland ports or other terminal facilities to carriers by sea or inland waterway."
+          }
+        ]
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Oslo"

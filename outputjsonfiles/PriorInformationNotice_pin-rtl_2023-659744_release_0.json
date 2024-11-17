@@ -1,7 +1,7 @@
 {
   "id": "2023-659744",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-aaece3e0-48f4-4739-8c6c-355bea902834",
+  "ocid": "ocds-abcd1234-daa3ea00-c334-4180-bef5-536dafb291b7",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -70,11 +70,18 @@
       },
       "details": {
         "url": "www.banenor.no",
-        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/1020"
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/1020",
+        "classifications": [
+          {
+            "scheme": "eu-main-activity",
+            "id": "rail",
+            "description": "Activities related to the provision or operation of networks providing a service to the public in the field of transport by railway."
+          }
+        ]
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Hamar"

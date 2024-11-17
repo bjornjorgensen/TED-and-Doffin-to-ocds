@@ -1,7 +1,7 @@
 {
   "id": "2022-352534",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ea61bcd4-dd72-447b-b67d-e87efeeee3cf",
+  "ocid": "ocds-abcd1234-1ab7cf77-b8fd-41dc-b3de-57f58b24af5b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -101,12 +101,19 @@
       },
       "details": {
         "url": "https://www.achilles.com/community/utilities-nce/",
-        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/3614"
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/3614",
+        "classifications": [
+          {
+            "scheme": "eu-main-activity",
+            "id": "electricity",
+            "description": "Activities related to: (a) the provision or operation of fixed networks intended to provide a service to the public in connection with the production, transport or distribution of electricity; (b) the supply of electricity to such networks."
+          }
+        ]
       },
       "roles": [
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Arendal"

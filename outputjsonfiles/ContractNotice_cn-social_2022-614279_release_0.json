@@ -1,7 +1,7 @@
 {
   "id": "2022-614279",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ee24d5c7-b961-443b-b58f-0fc7b57da117",
+  "ocid": "ocds-abcd1234-0d4d2f09-4a05-4f85-a540-ddcb1161ecb5",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -120,8 +120,8 @@
         "email": "anita.hellehaven@nav.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Mo i Rana"

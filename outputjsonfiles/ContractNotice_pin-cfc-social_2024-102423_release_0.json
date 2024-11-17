@@ -1,7 +1,7 @@
 {
   "id": "2c234234-aaec-4210-8cbe-1803ecaee901",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3225c6c0-d63e-4a25-9bcf-a1dea5982128",
+  "ocid": "ocds-abcd1234-20b4254c-0334-47a3-a27b-7932c56c3503",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -142,8 +142,8 @@
         "locality": "Ålesund"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

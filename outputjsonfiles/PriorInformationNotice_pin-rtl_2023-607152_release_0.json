@@ -1,7 +1,7 @@
 {
   "id": "2023-607152",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b526bc42-06ce-4289-ba84-2ce0a1de7926",
+  "ocid": "ocds-abcd1234-8dd51e85-f1f5-46c2-a767-2891323defe0",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -138,11 +138,18 @@
       },
       "details": {
         "url": "https://permalink.mercell.com/199364447.aspx",
-        "buyerProfile": "http://www.atb.no/"
+        "buyerProfile": "http://www.atb.no/",
+        "classifications": [
+          {
+            "scheme": "eu-main-activity",
+            "id": "urttb",
+            "description": "Activities relating to the provision or operation of networks providing a service to the public in the field of transport by railway, automated systems, tramway, trolley bus, bus or cable."
+          }
+        ]
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "TRONDHEIM"

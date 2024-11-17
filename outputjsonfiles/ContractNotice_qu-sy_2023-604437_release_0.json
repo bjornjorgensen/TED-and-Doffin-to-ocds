@@ -1,7 +1,7 @@
 {
   "id": "2023-604437",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-37094b5b-1f42-4754-bf17-ae40a81a0e86",
+  "ocid": "ocds-abcd1234-9ccdb9f7-e3e6-46bf-8334-3681112ad279",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -113,12 +113,19 @@
       },
       "details": {
         "url": "http://www.sporveien.com",
-        "buyerProfile": "https://anbud.sporveien.com/ece/"
+        "buyerProfile": "https://anbud.sporveien.com/ece/",
+        "classifications": [
+          {
+            "scheme": "eu-main-activity",
+            "id": "urttb",
+            "description": "Activities relating to the provision or operation of networks providing a service to the public in the field of transport by railway, automated systems, tramway, trolley bus, bus or cable."
+          }
+        ]
       },
       "roles": [
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Oslo"

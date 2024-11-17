@@ -1,7 +1,7 @@
 {
   "id": "3580e3e0-275f-4489-9aab-b6f493790e00",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ef984e21-f822-493d-9842-2ac9297f54d3",
+  "ocid": "ocds-abcd1234-67d520ee-ecb5-444e-8da2-4d6bc7be7b72",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -234,11 +234,18 @@
       },
       "details": {
         "url": "http://www.elmea.no",
-        "buyerProfile": "http://www.elmea.no/"
+        "buyerProfile": "http://www.elmea.no/",
+        "classifications": [
+          {
+            "scheme": "eu-main-activity",
+            "id": "electricity",
+            "description": "Activities related to: (a) the provision or operation of fixed networks intended to provide a service to the public in connection with the production, transport or distribution of electricity; (b) the supply of electricity to such networks."
+          }
+        ]
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Svolvær"
