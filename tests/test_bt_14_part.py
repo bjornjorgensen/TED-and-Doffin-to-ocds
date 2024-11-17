@@ -24,11 +24,18 @@ def temp_output_dir():
 
 
 def run_main_and_get_result(xml_file, output_dir):
-    main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
-    output_files = list(output_dir.glob("*_release_0.json"))
-    assert len(output_files) == 1, f"Expected 1 output file, got {len(output_files)}"
-    with output_files[0].open() as f:
-        return json.load(f)
+    try:
+        main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
+        output_files = list(output_dir.glob("*_release_0.json"))
+        assert (
+            len(output_files) == 1
+        ), f"Expected 1 output file, got {len(output_files)}"
+        with output_files[0].open() as f:
+            return json.load(f)
+    except Exception:
+        logger = logging.getLogger(__name__)
+        logger.exception("Error running main")
+        raise
 
 
 def test_bt_14_part_integration(tmp_path, setup_logging, temp_output_dir):
@@ -55,6 +62,9 @@ def test_bt_14_part_integration(tmp_path, setup_logging, temp_output_dir):
     # Create input XML file
     xml_file = tmp_path / "test_input_part_documents_restricted.xml"
     xml_file.write_text(xml_content)
+
+    logger.info("Testing with file: %s", xml_file)
+    logger.info("Output directory: %s", temp_output_dir)
 
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)

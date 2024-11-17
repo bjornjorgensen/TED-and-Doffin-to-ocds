@@ -22,9 +22,23 @@ class NoticeTracker:
         self.db_path = db_path
         self._local = threading.local()
 
-        # Only create new database if it doesn't exist
-        if not Path(db_path).exists():
-            self._init_db_connection().close()
+        # Initialize database and verify schema
+        self._init_db()
+        self.verify_schema()  # Changed to public method
+
+    def _init_db(self) -> None:
+        """Initialize the database if it doesn't exist."""
+        try:
+            if not Path(self.db_path).exists():
+                self.init_db()
+            else:
+                # Verify we can connect to the database
+                with self._init_db_connection() as conn:
+                    conn.execute("SELECT 1")
+            logger.info("Database initialized successfully at %s", self.db_path)
+        except Exception:
+            logger.exception("Failed to initialize database")
+            raise
 
     def _init_db_connection(self) -> sqlite3.Connection:
         """Initialize a new database connection."""
@@ -57,23 +71,30 @@ class NoticeTracker:
                 self._local.connection.close()
                 logger.debug("Closed database connection")
 
-    def _verify_schema(self):
+    # Changed from _verify_schema to public verify_schema
+    def verify_schema(self) -> None:
         """Verify that all required tables exist."""
-        expected_tables = {"notices", "related_processes", "parts"}
-        with sqlite3.connect(self.db_path) as conn:
-            cursor = conn.cursor()
-            cursor.execute(
-                """
-                SELECT name FROM sqlite_master
-                WHERE type='table' AND name IN (?, ?, ?)
-            """,
-                tuple(expected_tables),
-            )
-            existing_tables = {row[0] for row in cursor.fetchall()}
+        try:
+            expected_tables = {"notices", "related_processes", "parts"}
+            with self.get_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute(
+                    """
+                    SELECT name FROM sqlite_master
+                    WHERE type='table' AND name IN (?, ?, ?)
+                    """,
+                    tuple(expected_tables),
+                )
+                existing_tables = {row[0] for row in cursor.fetchall()}
 
-            if existing_tables != expected_tables:
-                # Tables missing, recreate schema
-                self.init_db()
+                if existing_tables != expected_tables:
+                    logger.warning("Missing tables, recreating schema")
+                    self.init_db()
+                else:
+                    logger.info("Database schema verified successfully")
+        except Exception:
+            logger.exception("Schema verification failed")
+            raise
 
     def init_db(self):
         """Create the database schema."""
