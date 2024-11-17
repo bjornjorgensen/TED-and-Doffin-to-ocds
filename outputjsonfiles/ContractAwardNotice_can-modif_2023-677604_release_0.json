@@ -1,7 +1,7 @@
 {
   "id": "2023-677604",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3a8adfe1-14e3-4fd9-851c-02aed3ca9421",
+  "ocid": "ocds-abcd1234-47650a08-ca36-4a48-9584-0d5a2fa3bd2c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -109,6 +109,13 @@
       }
     ]
   },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2022-04-20T23:59:59Z",
+      "awardID": "RES-0001"
+    }
+  ],
   "parties": [
     {
       "id": "ORG-0001",
@@ -125,14 +132,15 @@
         "email": "mariannb@viken.no"
       },
       "details": {
-        "url": "https://viken.no/"
-      },
-      "address": {
-        "locality": "Drammen"
+        "url": "https://viken.no/",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/94332"
       },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "Drammen"
+      }
     },
     {
       "id": "ORG-0002",
@@ -174,12 +182,6 @@
       "relatedBids": [
         "TEN-0001"
       ]
-    }
-  ],
-  "contracts": [
-    {
-      "id": "CON-0001",
-      "awardID": "RES-0001"
     }
   ],
   "buyer": [

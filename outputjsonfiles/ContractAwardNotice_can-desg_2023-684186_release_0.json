@@ -1,7 +1,7 @@
 {
   "id": "2023-684186",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8e25a5b9-e8ff-4869-bb59-5e234d932e44",
+  "ocid": "ocds-abcd1234-6e8fba0c-9169-4a7e-8109-a07ca5c53013",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -104,7 +104,8 @@
             "description": "Recreation, culture and religion"
           }
         ],
-        "url": "https://www.kulturtanken.no/"
+        "url": "https://www.kulturtanken.no/",
+        "buyerProfile": "https://eu.eu-supply.com/ctm/Company/CompanyInformation/Index/349456"
       },
       "name": "Kulturtanken - Den Kulturelle Skolesekken Norge",
       "additionalIdentifiers": [
@@ -118,12 +119,12 @@
         "telephone": "+47 40627146",
         "email": "mhr@kulturtanken.no"
       },
-      "address": {
-        "locality": "OSLO"
-      },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "OSLO"
+      }
     },
     {
       "id": "ORG-0002",

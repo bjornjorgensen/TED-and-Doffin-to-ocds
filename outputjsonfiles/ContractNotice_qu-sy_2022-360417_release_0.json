@@ -1,7 +1,7 @@
 {
   "id": "2022-360417",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c463e7b8-33b7-477f-8e04-c0eef1408d42",
+  "ocid": "ocds-abcd1234-c4697d49-96db-4926-a74c-f9906de7335d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -222,16 +222,24 @@
         "email": "transq@achilles.com"
       },
       "details": {
-        "url": "https://www.achilles.com/community/transq-nordics/"
-      },
-      "address": {
-        "locality": "Arendal"
+        "url": "https://www.achilles.com/community/transq-nordics/",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/3614",
+        "classifications": [
+          {
+            "scheme": "eu-main-activity",
+            "id": "rail",
+            "description": "Activities related to the provision or operation of networks providing a service to the public in the field of transport by railway."
+          }
+        ]
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "submissionReceiptBody"
-      ]
+      ],
+      "address": {
+        "locality": "Arendal"
+      }
     },
     {
       "id": "ORG-0002",

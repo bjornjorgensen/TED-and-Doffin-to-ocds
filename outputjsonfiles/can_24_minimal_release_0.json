@@ -1,7 +1,7 @@
 {
   "id": "65667997-031a-4198-bd25-7225449ef479",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c8a87242-9286-4f76-b070-d702101450ec",
+  "ocid": "ocds-abcd1234-0d74730b-09c9-4a73-b2b9-0bc888603851",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -163,6 +163,13 @@
       }
     ]
   },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2019-09-03T23:59:59+02:00",
+      "awardID": "RES-0001"
+    }
+  ],
   "awards": [
     {
       "id": "RES-0001",
@@ -184,12 +191,6 @@
       "relatedBids": [
         "TEN-0001"
       ]
-    }
-  ],
-  "contracts": [
-    {
-      "id": "CON-0001",
-      "awardID": "RES-0001"
     }
   ],
   "buyer": [

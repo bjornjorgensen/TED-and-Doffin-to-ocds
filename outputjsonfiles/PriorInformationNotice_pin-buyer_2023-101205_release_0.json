@@ -1,7 +1,7 @@
 {
   "id": "667f77ec-2687-48a0-a752-651a0d7ebdcb",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-65e09f8d-dd43-47ff-a8c9-0c80600b3a99",
+  "ocid": "ocds-abcd1234-e0d79593-fb10-4468-904f-4169f5a91295",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -102,7 +102,8 @@
             "description": "Defence"
           }
         ],
-        "url": "https://permalink.mercell.com/216373386.aspx"
+        "url": "https://permalink.mercell.com/216373386.aspx",
+        "buyerProfile": "https://fma.no/"
       },
       "name": "FORSVARSMATERIELL",
       "additionalIdentifiers": [
@@ -116,12 +117,12 @@
         "telephone": "45732110",
         "email": "kberkhof@mil.no"
       },
-      "address": {
-        "locality": "OSLO"
-      },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "OSLO"
+      }
     }
   ],
   "buyer": [

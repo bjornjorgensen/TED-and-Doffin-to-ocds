@@ -1,7 +1,7 @@
 {
   "id": "2023-611830",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-052d09dd-7d81-40cc-8d9b-5c0d6e8f02a9",
+  "ocid": "ocds-abcd1234-317547e7-8e05-4fde-b20f-d5f9f9bf0f2c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -61,6 +61,13 @@
       }
     ]
   },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2023-12-13T23:59:59Z",
+      "awardID": "RES-0001"
+    }
+  ],
   "parties": [
     {
       "id": "ORG-0001",
@@ -72,17 +79,18 @@
         }
       ],
       "details": {
-        "url": "www.ks.no"
+        "url": "www.ks.no",
+        "buyerProfile": "https://eu.eu-supply.com/ctm/Company/CompanyInformation/Index/434546"
       },
       "contactPoint": {
         "email": "gtg@tigerconsulting.as"
       },
-      "address": {
-        "locality": "Oslo"
-      },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "Oslo"
+      }
     },
     {
       "id": "ORG-0002",
@@ -118,12 +126,6 @@
       "relatedBids": [
         "TEN-0001"
       ]
-    }
-  ],
-  "contracts": [
-    {
-      "id": "CON-0001",
-      "awardID": "RES-0001"
     }
   ],
   "buyer": [

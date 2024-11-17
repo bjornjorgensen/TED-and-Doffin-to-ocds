@@ -1,7 +1,7 @@
 {
   "id": "7d111d51-8042-402a-a234-50efe86d8f4f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9eeaa336-e441-403e-80f5-5b4bbbb0baf9",
+  "ocid": "ocds-abcd1234-fb2661b1-7b12-454d-8bab-d8c6c2c97652",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -178,15 +178,23 @@
         "email": "Kristian.von.Aphelen@posten.no"
       },
       "details": {
-        "url": "https://www.postenbring.no/"
-      },
-      "address": {
-        "locality": "Oslo"
+        "url": "https://www.postenbring.no/",
+        "buyerProfile": "https://posten-supplier.ivalua.app/",
+        "classifications": [
+          {
+            "scheme": "eu-main-activity",
+            "id": "post",
+            "description": "Activities related to the exploitation of a geographical area for the purpose of the provision of maritime or inland ports or other terminal facilities to carriers by sea or inland waterway."
+          }
+        ]
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
-      ]
+        "buyer",
+        "processContactPoint"
+      ],
+      "address": {
+        "locality": "Oslo"
+      }
     },
     {
       "id": "ORG-0004",

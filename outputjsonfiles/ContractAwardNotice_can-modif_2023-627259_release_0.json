@@ -1,7 +1,7 @@
 {
   "id": "2023-627259",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7c530ceb-f287-4204-82da-71c7153a9adb",
+  "ocid": "ocds-abcd1234-6ce0f350-3442-476b-bf97-4dc436f1269e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -69,6 +69,13 @@
       }
     ]
   },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2021-03-26T23:59:59Z",
+      "awardID": "RES-0001"
+    }
+  ],
   "parties": [
     {
       "id": "ORG-0001",
@@ -85,14 +92,15 @@
         "email": "cecilie.uteng@aid.dep.no"
       },
       "details": {
-        "url": "https://www.regjeringen.no/no/dep/aid/id165/"
-      },
-      "address": {
-        "locality": "Oslo"
+        "url": "https://www.regjeringen.no/no/dep/aid/id165/",
+        "buyerProfile": "https://eu.eu-supply.com/ctm/Company/CompanyInformation/Index/329002"
       },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "Oslo"
+      }
     },
     {
       "id": "ORG-0002",
@@ -141,12 +149,6 @@
       "relatedBids": [
         "TEN-0001"
       ]
-    }
-  ],
-  "contracts": [
-    {
-      "id": "CON-0001",
-      "awardID": "RES-0001"
     }
   ],
   "buyer": [

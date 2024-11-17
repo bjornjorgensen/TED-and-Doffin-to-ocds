@@ -1,7 +1,7 @@
 {
   "id": "2022-963627",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-32670286-7d8e-4abe-9f9d-f131da2e543c",
+  "ocid": "ocds-abcd1234-e6ec36cd-8b49-4c44-a179-7d93661a0c34",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -42,14 +42,15 @@
         "email": "trude.evensen.alvestad@toll.no"
       },
       "details": {
-        "url": "http://www.toll.no"
-      },
-      "address": {
-        "locality": "OSLO"
+        "url": "http://www.toll.no",
+        "buyerProfile": "https://eu.eu-supply.com/ctm/Company/CompanyInformation/Index/340239"
       },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "OSLO"
+      }
     }
   ],
   "buyer": [

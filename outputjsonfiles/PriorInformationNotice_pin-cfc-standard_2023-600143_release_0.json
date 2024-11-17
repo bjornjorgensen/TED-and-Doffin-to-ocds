@@ -1,7 +1,7 @@
 {
   "id": "2023-600143",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-180eded2-6464-4bd0-8bd9-f9cebddfcc51",
+  "ocid": "ocds-abcd1234-32cb764e-0eba-4ac5-be24-55dd5e263ec5",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -100,7 +100,8 @@
             "description": "General public services"
           }
         ],
-        "url": "http://www.tonsberg.kommune.no"
+        "url": "http://www.tonsberg.kommune.no",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/2594"
       },
       "name": "Tønsberg kommune",
       "additionalIdentifiers": [
@@ -114,13 +115,13 @@
         "telephone": "+47 48255955",
         "email": "therese.borge@tonsberg.kommune.no"
       },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ],
       "address": {
         "locality": "Tønsberg"
-      },
-      "roles": [
-        "processContactPoint",
-        "buyer"
-      ]
+      }
     },
     {
       "id": "ORG-0002",

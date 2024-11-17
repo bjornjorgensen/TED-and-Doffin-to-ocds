@@ -1,7 +1,7 @@
 {
   "id": "2023-631333",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ba669068-c420-4d06-81ff-e432577619e9",
+  "ocid": "ocds-abcd1234-3538a1d6-bdbd-4333-a702-b2c6afe85f77",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -228,16 +228,24 @@
         "email": "utilities-nordics@achilles.com"
       },
       "details": {
-        "url": "http://www.achilles.com/en/utilities-nce"
-      },
-      "address": {
-        "locality": "Arendal"
+        "url": "http://www.achilles.com/en/utilities-nce",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/3614",
+        "classifications": [
+          {
+            "scheme": "eu-main-activity",
+            "id": "electricity",
+            "description": "Activities related to: (a) the provision or operation of fixed networks intended to provide a service to the public in connection with the production, transport or distribution of electricity; (b) the supply of electricity to such networks."
+          }
+        ]
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "submissionReceiptBody"
-      ]
+      ],
+      "address": {
+        "locality": "Arendal"
+      }
     },
     {
       "id": "ORG-0002",

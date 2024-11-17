@@ -1,7 +1,7 @@
 {
   "id": "2022-627512",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8e52214c-ea39-4e71-bda8-277cc64e6776",
+  "ocid": "ocds-abcd1234-f0eee2e9-6b26-4bc5-89df-9b6e1062d4d7",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -75,6 +75,13 @@
       }
     ]
   },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2020-09-01T23:59:59Z",
+      "awardID": "RES-0001"
+    }
+  ],
   "parties": [
     {
       "id": "ORG-0001",
@@ -91,14 +98,15 @@
         "email": "pal.tollersrud@vav.oslo.kommune.no"
       },
       "details": {
-        "url": "https://www.oslo.kommune.no/"
-      },
-      "address": {
-        "locality": "Oslo"
+        "url": "https://www.oslo.kommune.no/",
+        "buyerProfile": "https://eu.eu-supply.com/ctm/Company/CompanyInformation/Index/341765"
       },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "Oslo"
+      }
     },
     {
       "id": "ORG-0002",
@@ -143,12 +151,6 @@
       "relatedBids": [
         "TEN-0001"
       ]
-    }
-  ],
-  "contracts": [
-    {
-      "id": "CON-0001",
-      "awardID": "RES-0001"
     }
   ],
   "buyer": [

@@ -1,7 +1,7 @@
 {
   "id": "2022-976327",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-568db604-c750-448f-b6a7-2435ff746d29",
+  "ocid": "ocds-abcd1234-7bb8f4a8-ea19-4de5-b03e-fcd1c549ea1f",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -108,7 +108,8 @@
             "description": "Health"
           }
         ],
-        "url": "http://www.oslo.kommune.no"
+        "url": "http://www.oslo.kommune.no",
+        "buyerProfile": "https://eu.eu-supply.com/ctm/Company/CompanyInformation/Index/329431"
       },
       "name": "Oslo kommune v/ Sykehjemsetaten",
       "additionalIdentifiers": [
@@ -122,14 +123,14 @@
         "telephone": "+47 21802180",
         "email": "leona.pilares@sye.oslo.kommune.no"
       },
+      "roles": [
+        "buyer",
+        "processContactPoint",
+        "submissionReceiptBody"
+      ],
       "address": {
         "locality": "Oslo"
-      },
-      "roles": [
-        "processContactPoint",
-        "buyer",
-        "submissionReceiptBody"
-      ]
+      }
     },
     {
       "id": "ORG-0002",

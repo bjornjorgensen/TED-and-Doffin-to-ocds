@@ -5,53 +5,32 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
-COFOG_ACTIVITIES = [
-    "gen-pub",
-    "defence",
-    "pub-os",
-    "econ-aff",
-    "env-pro",
-    "hc-am",
-    "health",
-    "rcr",
-    "education",
-    "soc-pro",
-]
-
+# COFOG codes and descriptions
 COFOG_MAPPING = {
-    "gen-pub": ("01", "General public services"),
     "defence": ("02", "Defence"),
-    "pub-os": ("03", "Public order and safety"),
     "econ-aff": ("04", "Economic affairs"),
+    "education": ("09", "Education"),
     "env-pro": ("05", "Environmental protection"),
+    "gen-pub": ("01", "General public services"),
     "hc-am": ("06", "Housing and community amenities"),
     "health": ("07", "Health"),
+    "pub-os": ("03", "Public order and safety"),
     "rcr": ("08", "Recreation, culture and religion"),
-    "education": ("09", "Education"),
     "soc-pro": ("10", "Social protection"),
 }
 
-EU_MAIN_ACTIVITY_MAPPING = {
-    "airport": "Airport-related activities",
-    "defence": "Defence",
-    "econ-aff": "Economic affairs",
-    "education": "Education",
-    "electricity": "Electricity-related activities",
-    "env-pro": "Environmental protection",
-    "gas-heat": "Production, transport or distribution of gas or heat",
-    "gas-oil": "Extraction of gas or oil",
-    "gen-pub": "General public services",
-    "hc-am": "Housing and community amenities",
-    "health": "Health",
-    "port": "Port-related activities",
-    "post": "Postal services",
-    "pub-os": "Public order and safety",
-    "rail": "Railway services",
-    "rcr": "Recreation, culture and religion",
-    "soc-pro": "Social protection",
-    "solid-fuel": "Exploration or extraction of coal or other solid fuels",
-    "urttb": "Urban railway, tramway, trolleybus or bus services",
-    "water": "Water-related activities",
+# Authority activity descriptions for non-COFOG activities
+AUTHORITY_TABLE = {
+    "gas-oil": "Activities related to the exploitation of a geographical area for the purpose of extracting oil or gas.",
+    "port": "Activities related to the exploitation of a geographical area for the purpose of the provision of maritime or inland ports or other terminal facilities to carriers by sea or inland waterway.",
+    "water": "Activities related to: (a) the provision or operation of fixed networks intended to provide a service to the public in connection with the production, transport or distribution of drinking water; (b) the supply of drinking water to such networks; (c) hydraulic engineering projects, irrigation or land drainage, provided that the volume of water to be used for the supply of drinking water represents more than 20 % of the total volume of water made available by such projects or irrigation or drainage installations; (d) the disposal or treatment of sewage.",
+    "airport": "Activities related to the exploitation of a geographical area for the purpose of the provision of airports or other terminal facilities to carriers by air.",
+    "post": "Activities related to the exploitation of a geographical area for the purpose of the provision of maritime or inland ports or other terminal facilities to carriers by sea or inland waterway.",
+    "electricity": "Activities related to: (a) the provision or operation of fixed networks intended to provide a service to the public in connection with the production, transport or distribution of electricity; (b) the supply of electricity to such networks.",
+    "gas-heat": "Activities related to: (a) the provision or operation of fixed networks intended to provide a service to the public in connection with the production, transport or distribution of gas or heat; (b) the supply of gas or heat to such networks.",
+    "solid-fuel": "Activities related to the exploitation of a geographical area for the purpose of exploring for, or extracting, coal or other solid fuels.",
+    "urttb": "Activities relating to the provision or operation of networks providing a service to the public in the field of transport by railway, automated systems, tramway, trolley bus, bus or cable.",
+    "rail": "Activities related to the provision or operation of networks providing a service to the public in the field of transport by railway.",
 }
 
 
@@ -103,11 +82,11 @@ def parse_activity_entity(xml_content):
 
     result = {"parties": []}
 
-    contracting_parties = root.xpath("//cac:Contractingparty", namespaces=namespaces)
+    contracting_parties = root.xpath("//cac:ContractingParty", namespaces=namespaces)
 
     for party in contracting_parties:
         buyer_id = party.xpath(
-            "cac:party/cac:partyIdentification/cbc:ID/text()",
+            "cac:Party/cac:PartyIdentification/cbc:ID/text()",
             namespaces=namespaces,
         )
         activity_code = party.xpath(
@@ -120,17 +99,27 @@ def parse_activity_entity(xml_content):
             activity_code = activity_code[0]
 
             classification = {}
-            if activity_code in COFOG_ACTIVITIES:
-                classification["scheme"] = "COFOG"
-                classification["id"] = COFOG_MAPPING[activity_code][0]
-                classification["description"] = COFOG_MAPPING[activity_code][1]
-            else:
-                classification["scheme"] = "eu-main-activity"
-                classification["id"] = activity_code
-                classification["description"] = EU_MAIN_ACTIVITY_MAPPING.get(
-                    activity_code,
-                    "",
+            if activity_code in COFOG_MAPPING:
+                # Handle COFOG classification
+                classification.update(
+                    {
+                        "scheme": "COFOG",
+                        "id": COFOG_MAPPING[activity_code][0],
+                        "description": COFOG_MAPPING[activity_code][1],
+                    }
                 )
+            elif activity_code in AUTHORITY_TABLE:
+                # Handle non-COFOG classification
+                classification.update(
+                    {
+                        "scheme": "eu-main-activity",
+                        "id": activity_code,
+                        "description": AUTHORITY_TABLE[activity_code],
+                    }
+                )
+            else:
+                logger.warning("Unknown activity code: %s", activity_code)
+                continue
 
             party_data = {
                 "id": buyer_id,

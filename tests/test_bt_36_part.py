@@ -1,158 +1,196 @@
-# tests/test_bt_36_part.py
-from pathlib import Path
 import pytest
-import json
-import sys
-import logging
-import tempfile
-
-# Add the parent directory to sys.path to import main
-sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
-
-
-@pytest.fixture(scope="module")
-def setup_logging():
-    configure_logging()
-    return logging.getLogger(__name__)
+from ted_and_doffin_to_ocds.converters.bt_36_part import (
+    parse_part_duration,
+    merge_part_duration,
+    calculate_duration_in_days,
+)
 
 
 @pytest.fixture
-def temp_output_dir():
-    with tempfile.TemporaryDirectory() as tmpdirname:
-        yield Path(tmpdirname)
-
-
-def run_main_and_get_result(xml_file, output_dir):
-    main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
-    output_files = list(output_dir.glob("*_release_0.json"))
-    assert len(output_files) == 1, f"Expected 1 output file, got {len(output_files)}"
-    with output_files[0].open() as f:
-        return json.load(f)
-
-
-def test_bt_36_part_integration(tmp_path, setup_logging, temp_output_dir):
-    logger = setup_logging
-
-    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
-    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
-        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cbc:ID>notice-1</cbc:ID>
-        <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
+def base_xml():
+    """Base XML template for testing."""
+    return """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="Part">1</cbc:ID>
             <cac:ProcurementProject>
                 <cac:PlannedPeriod>
-                    <cbc:DurationMeasure unitCode="DAY">3</cbc:DurationMeasure>
+                    <cbc:DurationMeasure unitCode="{unit}">{value}</cbc:DurationMeasure>
                 </cac:PlannedPeriod>
             </cac:ProcurementProject>
         </cac:ProcurementProjectLot>
-    </ContractAwardNotice>
-    """
-    xml_file = tmp_path / "test_input_part_duration.xml"
-    xml_file.write_text(xml_content)
-
-    # Run main and get result
-    result = run_main_and_get_result(xml_file, temp_output_dir)
-
-    logger.info("Test result: %s", json.dumps(result, indent=2))
-
-    # Verify the results
-    assert "tender" in result, "Expected 'tender' in result"
-    assert "lots" in result["tender"], "Expected 'lots' in tender"
-    assert (
-        len(result["tender"]["lots"]) == 1
-    ), f"Expected 1 lot, got {len(result['tender']['lots'])}"
-
-    lot = result["tender"]["lots"][0]
-    assert lot["id"] == "PART-0001"
-    assert (
-        lot["contractPeriod"]["durationInDays"] == 3
-    ), f"Expected duration 3 days, got {lot['contractPeriod']['durationInDays']}"
+    </ContractNotice>"""
 
 
-def test_bt_36_part_integration_month(tmp_path, setup_logging, temp_output_dir):
-    logger = setup_logging
+def test_parse_duration_days(base_xml):
+    """Test parsing duration specified in days."""
+    xml = base_xml.format(unit="DAY", value="3")
+    result = parse_part_duration(xml)
+    assert result == {"tender": {"contractPeriod": {"durationInDays": 3}}}
 
-    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
-    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
-        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cbc:ID>notice-1</cbc:ID>
-        <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
+
+def test_parse_duration_months(base_xml):
+    """Test parsing duration specified in months."""
+    xml = base_xml.format(unit="MONTH", value="2")
+    result = parse_part_duration(xml)
+    assert result == {
+        "tender": {
+            "contractPeriod": {
+                "durationInDays": 60  # 2 months * 30 days
+            }
+        }
+    }
+
+
+def test_parse_duration_years(base_xml):
+    """Test parsing duration specified in years."""
+    xml = base_xml.format(unit="YEAR", value="1")
+    result = parse_part_duration(xml)
+    assert result == {
+        "tender": {
+            "contractPeriod": {
+                "durationInDays": 365  # 1 year * 365 days
+            }
+        }
+    }
+
+
+def test_parse_duration_weeks(base_xml):
+    """Test parsing duration specified in weeks."""
+    xml = base_xml.format(unit="WEEK", value="2")
+    result = parse_part_duration(xml)
+    assert result == {
+        "tender": {
+            "contractPeriod": {
+                "durationInDays": 14  # 2 weeks * 7 days
+            }
+        }
+    }
+
+
+def test_parse_duration_weekdays(base_xml):
+    """Test parsing duration specified in specific weekdays."""
+    for day in ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]:
+        xml = base_xml.format(unit=day, value="3")
+        result = parse_part_duration(xml)
+        assert result == {
+            "tender": {
+                "contractPeriod": {
+                    "durationInDays": 21  # 3 weeks * 7 days
+                }
+            }
+        }
+
+
+def test_parse_invalid_unit(base_xml):
+    """Test parsing with invalid unit code."""
+    xml = base_xml.format(unit="INVALID", value="3")
+    result = parse_part_duration(xml)
+    assert result is None
+
+
+def test_parse_invalid_value(base_xml):
+    """Test parsing with invalid duration value."""
+    xml = base_xml.format(unit="DAY", value="invalid")
+    result = parse_part_duration(xml)
+    assert result is None
+
+
+def test_parse_missing_unit():
+    """Test parsing with missing unit code."""
+    xml = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="Part">1</cbc:ID>
             <cac:ProcurementProject>
                 <cac:PlannedPeriod>
-                    <cbc:DurationMeasure unitCode="MONTH">2</cbc:DurationMeasure>
+                    <cbc:DurationMeasure>3</cbc:DurationMeasure>
                 </cac:PlannedPeriod>
             </cac:ProcurementProject>
         </cac:ProcurementProjectLot>
-    </ContractAwardNotice>
-    """
-    xml_file = tmp_path / "test_input_part_duration_month.xml"
-    xml_file.write_text(xml_content)
-
-    # Run main and get result
-    result = run_main_and_get_result(xml_file, temp_output_dir)
-
-    logger.info("Test result: %s", json.dumps(result, indent=2))
-
-    # Verify the results
-    assert "tender" in result, "Expected 'tender' in result"
-    assert "lots" in result["tender"], "Expected 'lots' in tender"
-    assert (
-        len(result["tender"]["lots"]) == 1
-    ), f"Expected 1 lot, got {len(result['tender']['lots'])}"
-
-    lot = result["tender"]["lots"][0]
-    assert lot["id"] == "PART-0001"
-    assert (
-        lot["contractPeriod"]["durationInDays"] == 60
-    ), f"Expected duration 60 days, got {lot['contractPeriod']['durationInDays']}"
+    </ContractNotice>"""
+    result = parse_part_duration(xml)
+    assert result is None
 
 
-def test_bt_36_part_integration_week(tmp_path, setup_logging, temp_output_dir):
-    logger = setup_logging
+def test_merge_duration():
+    """Test merging duration data into release JSON."""
+    release = {}
+    duration_data = {"tender": {"contractPeriod": {"durationInDays": 30}}}
+    merge_part_duration(release, duration_data)
+    assert release == {"tender": {"contractPeriod": {"durationInDays": 30}}}
 
-    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
-    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
-        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cbc:ID>notice-1</cbc:ID>
-        <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
+
+def test_merge_duration_existing_tender():
+    """Test merging duration data with existing tender section."""
+    release = {"tender": {"id": "123", "contractPeriod": {}}}
+    duration_data = {"tender": {"contractPeriod": {"durationInDays": 30}}}
+    merge_part_duration(release, duration_data)
+    assert release == {
+        "tender": {"id": "123", "contractPeriod": {"durationInDays": 30}}
+    }
+
+
+def test_merge_none_duration():
+    """Test merging None duration data."""
+    release = {"tender": {"id": "123"}}
+    merge_part_duration(release, None)
+    assert release == {"tender": {"id": "123"}}
+
+
+def test_calculate_duration_days():
+    """Test duration calculation for different unit codes."""
+    assert calculate_duration_in_days(3, "DAY") == 3
+    assert calculate_duration_in_days(2, "MONTH") == 60
+    assert calculate_duration_in_days(1, "YEAR") == 365
+    assert calculate_duration_in_days(2, "WEEK") == 14
+    for day in ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]:
+        assert calculate_duration_in_days(3, day) == 21
+    assert calculate_duration_in_days(3, "INVALID") is None
+
+
+def test_part_duration_integration():
+    """Integration test with full XML structure"""
+    xml = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="Part">PART-001</cbc:ID>
             <cac:ProcurementProject>
                 <cac:PlannedPeriod>
-                    <cbc:DurationMeasure unitCode="WEEK">2</cbc:DurationMeasure>
+                    <cbc:DurationMeasure unitCode="MONTH">6</cbc:DurationMeasure>
                 </cac:PlannedPeriod>
             </cac:ProcurementProject>
         </cac:ProcurementProjectLot>
-    </ContractAwardNotice>
-    """
-    xml_file = tmp_path / "test_input_part_duration_week.xml"
-    xml_file.write_text(xml_content)
+    </ContractNotice>"""
 
-    # Run main and get result
-    result = run_main_and_get_result(xml_file, temp_output_dir)
-
-    logger.info("Test result: %s", json.dumps(result, indent=2))
-
-    # Verify the results
-    assert "tender" in result, "Expected 'tender' in result"
-    assert "lots" in result["tender"], "Expected 'lots' in tender"
-    assert (
-        len(result["tender"]["lots"]) == 1
-    ), f"Expected 1 lot, got {len(result['tender']['lots'])}"
-
-    lot = result["tender"]["lots"][0]
-    assert lot["id"] == "PART-0001"
-    assert (
-        lot["contractPeriod"]["durationInDays"] == 14
-    ), f"Expected duration 14 days, got {lot['contractPeriod']['durationInDays']}"
+    result = parse_part_duration(xml)
+    expected = {
+        "tender": {
+            "contractPeriod": {
+                "durationInDays": 180  # 6 months * 30 days
+            }
+        }
+    }
+    assert result == expected
 
 
-if __name__ == "__main__":
-    pytest.main(["-v"])
+def test_merge_duration_with_existing_data():
+    """Test merging duration with pre-existing release data"""
+    existing_release = {
+        "tender": {
+            "id": "test-tender",
+            "title": "Test Tender",
+            "contractPeriod": {"startDate": "2024-01-01"},
+        }
+    }
+
+    duration_data = {"tender": {"contractPeriod": {"durationInDays": 90}}}
+
+    merge_part_duration(existing_release, duration_data)
+
+    assert existing_release["tender"]["contractPeriod"]["durationInDays"] == 90
+    assert existing_release["tender"]["contractPeriod"]["startDate"] == "2024-01-01"
+    assert existing_release["tender"]["id"] == "test-tender"

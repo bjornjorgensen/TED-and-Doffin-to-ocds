@@ -1,7 +1,7 @@
 {
   "id": "2022-394467",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-232e0417-bbd9-42f0-aee7-c2aaa7eceb7a",
+  "ocid": "ocds-abcd1234-9283f8d1-bc92-44f0-8dbf-35b7c05a351c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -112,16 +112,17 @@
         "email": "Jorn-Ove.Jespersen@elvia.no"
       },
       "details": {
-        "url": "www.elvia.no"
-      },
-      "address": {
-        "locality": "Hamar"
+        "url": "www.elvia.no",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/2095"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "submissionReceiptBody"
-      ]
+      ],
+      "address": {
+        "locality": "Hamar"
+      }
     },
     {
       "id": "ORG-0002",

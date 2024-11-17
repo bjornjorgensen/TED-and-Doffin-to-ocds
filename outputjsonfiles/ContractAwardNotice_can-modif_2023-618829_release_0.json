@@ -1,7 +1,7 @@
 {
   "id": "2023-618829",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9a0ddab2-c2f2-4977-8b01-0ac5093e4fdb",
+  "ocid": "ocds-abcd1234-695bab8b-f1e1-4aae-a7df-735efaa72757",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -61,6 +61,13 @@
       }
     ]
   },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2018-12-18T23:59:59Z",
+      "awardID": "RES-0001"
+    }
+  ],
   "parties": [
     {
       "id": "ORG-0001",
@@ -77,14 +84,15 @@
         "email": "halvor.opaas@kpmg.no"
       },
       "details": {
-        "url": "https://www.sigma2.no/"
-      },
-      "address": {
-        "locality": "TRONDHEIM"
+        "url": "https://www.sigma2.no/",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/65512"
       },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "TRONDHEIM"
+      }
     },
     {
       "id": "ORG-0002",
@@ -120,12 +128,6 @@
       "relatedBids": [
         "TEN-0001"
       ]
-    }
-  ],
-  "contracts": [
-    {
-      "id": "CON-0001",
-      "awardID": "RES-0001"
     }
   ],
   "buyer": [

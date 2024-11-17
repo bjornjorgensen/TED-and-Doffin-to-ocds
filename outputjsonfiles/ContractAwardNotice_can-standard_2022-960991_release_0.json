@@ -1,7 +1,7 @@
 {
   "id": "2022-960991",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-53bf06e3-fde8-4785-9f43-541a533417f1",
+  "ocid": "ocds-abcd1234-dbb36a05-3b8e-426e-b9a1-b1ecdc4e3542",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -88,7 +88,8 @@
             "description": "Public order and safety"
           }
         ],
-        "url": "www.dsb.no"
+        "url": "www.dsb.no",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/1108"
       },
       "name": "Direktoratet for samfunnssikkerhet og beredskap (DSB)",
       "additionalIdentifiers": [
@@ -102,12 +103,12 @@
         "telephone": "+47 33412631",
         "email": "liv.riseth@dsb.no"
       },
-      "address": {
-        "locality": "TØNSBERG"
-      },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "TØNSBERG"
+      }
     },
     {
       "id": "ORG-0002",
@@ -156,6 +157,13 @@
       }
     ]
   },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2022-09-30T23:59:59Z",
+      "awardID": "RES-0001"
+    }
+  ],
   "awards": [
     {
       "id": "RES-0001",
@@ -169,12 +177,6 @@
       "relatedBids": [
         "TEN-0001"
       ]
-    }
-  ],
-  "contracts": [
-    {
-      "id": "CON-0001",
-      "awardID": "RES-0001"
     }
   ],
   "buyer": [

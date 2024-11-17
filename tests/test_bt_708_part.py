@@ -91,8 +91,8 @@ def test_bt_708_part_integration(tmp_path, setup_logging, temp_output_dir):
         document["id"] == "20210521/CTFD/ENG/7654-02"
     ), f"Expected document id '20210521/CTFD/ENG/7654-02', got {document['id']}"
     assert (
-        document["accessDetails"] == "Restricted. Intellectual property rights issues"
-    ), f"Expected access details 'Restricted. Intellectual property rights issues', got {document['accessDetails']}"
+        document["accessDetails"] == "Intellectual property right issues"
+    ), f"Expected access details 'Intellectual property right issues', got {document['accessDetails']}"
     assert document["relatedLots"] == [
         "PART-0001"
     ], f"Expected relatedLots ['PART-0001'], got {document['relatedLots']}"

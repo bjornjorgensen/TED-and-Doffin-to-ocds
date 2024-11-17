@@ -1,7 +1,7 @@
 {
   "id": "2023-612007",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-39bfa9e4-f495-4590-ac91-f2e1886ce092",
+  "ocid": "ocds-abcd1234-00056211-1607-4da2-807f-a8cd64ae7c6a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -65,7 +65,8 @@
             "description": "Defence"
           }
         ],
-        "url": "https://permalink.mercell.com/198572200.aspx"
+        "url": "https://permalink.mercell.com/198572200.aspx",
+        "buyerProfile": "https://www.forsvaret.no/"
       },
       "name": "Forsvaret v/Forsvarets logistikkorganisasjon",
       "additionalIdentifiers": [
@@ -79,13 +80,13 @@
         "telephone": "+47 40919988",
         "email": "e-mjorgensen@mil.no"
       },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ],
       "address": {
         "locality": "Lysaker"
-      },
-      "roles": [
-        "processContactPoint",
-        "buyer"
-      ]
+      }
     }
   ],
   "buyer": [

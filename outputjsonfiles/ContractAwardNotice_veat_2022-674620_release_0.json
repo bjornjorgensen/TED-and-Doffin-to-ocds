@@ -1,7 +1,7 @@
 {
   "id": "2022-674620",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-00ff9597-6615-480c-9d70-0d67363f37e1",
+  "ocid": "ocds-abcd1234-5f9ad050-a242-445f-a663-b1cdec17c5f3",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -71,7 +71,8 @@
             "description": "Environmental protection"
           }
         ],
-        "url": "WWW.MILJODIR.NO"
+        "url": "WWW.MILJODIR.NO",
+        "buyerProfile": "www.vetinst.no"
       },
       "name": "Miljødirektoratet",
       "additionalIdentifiers": [
@@ -85,12 +86,12 @@
         "telephone": "+47 73580500",
         "email": "erik.lund@miljodir.no"
       },
-      "address": {
-        "locality": "Trondheim"
-      },
       "roles": [
         "buyer"
-      ]
+      ],
+      "address": {
+        "locality": "Trondheim"
+      }
     },
     {
       "id": "ORG-0002",
@@ -138,6 +139,13 @@
       }
     ]
   },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2022-12-15T23:59:59Z",
+      "awardID": "RES-0001"
+    }
+  ],
   "awards": [
     {
       "id": "RES-0001",
@@ -151,12 +159,6 @@
       "relatedBids": [
         "TEN-0001"
       ]
-    }
-  ],
-  "contracts": [
-    {
-      "id": "CON-0001",
-      "awardID": "RES-0001"
     }
   ],
   "buyer": [

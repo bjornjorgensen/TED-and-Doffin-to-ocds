@@ -1,7 +1,7 @@
 {
   "id": "2023-698775",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-92197d63-90ef-4cc9-8714-00b5cf70bf80",
+  "ocid": "ocds-abcd1234-b8dc08b8-56e5-4ba7-afb5-44510457af64",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -157,16 +157,17 @@
         "email": "aase@waco.no"
       },
       "details": {
-        "url": "https://waco.no"
-      },
-      "address": {
-        "locality": "Bryne"
+        "url": "https://waco.no",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/3493"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "submissionReceiptBody"
-      ]
+      ],
+      "address": {
+        "locality": "Bryne"
+      }
     },
     {
       "id": "ORG-0002",

@@ -1,71 +1,94 @@
 # converters/bt_5101b_Lot.py
 
 from lxml import etree
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def parse_lot_place_performance_streetline1(xml_content):
+    """
+    Parse the street address components for lot delivery addresses.
+    Combines StreetName, AdditionalStreetName and AddressLine components in order.
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
+
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    result = {"tender": {"items": []}}
+    try:
+        root = etree.fromstring(xml_content)
+        result = {"tender": {"items": []}}
 
-    lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
-        namespaces=namespaces,
-    )
-
-    for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        realized_locations = lot.xpath(
-            "cac:ProcurementProject/cac:RealizedLocation",
+        # Find all procurement project lots
+        lots = root.xpath(
+            "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
             namespaces=namespaces,
         )
 
-        if realized_locations:
-            item = {
-                "id": str(len(result["tender"]["items"]) + 1),
-                "relatedLot": lot_id,
-                "deliveryAddresses": [],
-            }
+        for lot in lots:
+            lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
 
-            for location in realized_locations:
-                address = location.xpath("cac:Address", namespaces=namespaces)[0]
-                street_name = address.xpath(
-                    "cbc:StreetName/text()",
-                    namespaces=namespaces,
-                )
-                additional_street_name = address.xpath(
-                    "cbc:AdditionalStreetName/text()",
-                    namespaces=namespaces,
-                )
-                address_lines = address.xpath(
-                    "cac:AddressLine/cbc:Line/text()",
-                    namespaces=namespaces,
-                )
+            # Find all realized locations for this lot
+            locations = lot.xpath(
+                "cac:ProcurementProject/cac:RealizedLocation/cac:Address",
+                namespaces=namespaces,
+            )
 
-                street_address_parts = []
-                if street_name:
-                    street_address_parts.append(street_name[0])
-                if additional_street_name:
-                    street_address_parts.append(additional_street_name[0])
-                street_address_parts.extend(address_lines)
+            if locations:
+                item = {
+                    "id": str(len(result["tender"]["items"]) + 1),
+                    "relatedLot": lot_id,
+                    "deliveryAddresses": [],
+                }
 
-                street_address = ", ".join(street_address_parts)
+                for address in locations:
+                    # Get all address components in specified order
+                    street_parts = []
 
-                item["deliveryAddresses"].append({"streetAddress": street_address})
+                    # 1. StreetName
+                    street_name = address.xpath(
+                        "cbc:StreetName/text()", namespaces=namespaces
+                    )
+                    if street_name:
+                        street_parts.append(street_name[0])
 
-            result["tender"]["items"].append(item)
+                    # 2. AdditionalStreetName
+                    additional = address.xpath(
+                        "cbc:AdditionalStreetName/text()", namespaces=namespaces
+                    )
+                    if additional:
+                        street_parts.append(additional[0])
 
-    return result if result["tender"]["items"] else None
+                    # 3. All AddressLine/Line elements
+                    lines = address.xpath(
+                        "cac:AddressLine/cbc:Line/text()", namespaces=namespaces
+                    )
+                    street_parts.extend(lines)
+
+                    # Combine all parts with comma and space
+                    if street_parts:
+                        street_address = ", ".join(
+                            part.strip()
+                            for part in street_parts
+                            if part and part.strip()
+                        )
+                        item["deliveryAddresses"].append(
+                            {"streetAddress": street_address}
+                        )
+
+                if item["deliveryAddresses"]:
+                    result["tender"]["items"].append(item)
+                    logger.info("Added delivery addresses for lot %s", lot_id)
+
+        return result if result["tender"]["items"] else None
+
+    except Exception:
+        logger.exception("Error parsing lot place performance street address")
+        return None
 
 
 def merge_lot_place_performance_streetline1(

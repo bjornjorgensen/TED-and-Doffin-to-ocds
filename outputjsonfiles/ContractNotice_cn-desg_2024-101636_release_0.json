@@ -1,7 +1,7 @@
 {
   "id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c0784bc3-b7d9-43ef-9c04-905ee772547c",
+  "ocid": "ocds-abcd1234-3555cf6e-a517-455a-86fa-120dd9e4e62d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -313,7 +313,8 @@
             "description": "General public services"
           }
         ],
-        "url": "http://www.gjovik.kommune.no"
+        "url": "http://www.gjovik.kommune.no",
+        "buyerProfile": "http://www.gjovik.kommune.no/"
       },
       "name": "Gjøvikregionen - Anskaffelser",
       "additionalIdentifiers": [
@@ -327,16 +328,16 @@
         "telephone": "+47 61189500",
         "email": "kenneth.hvalby@gjovik.kommune.no"
       },
-      "address": {
-        "locality": "GJØVIK"
-      },
       "roles": [
         "processContactPoint",
-        "submissionReceiptBody",
-        "reviewContactPoint",
         "buyer",
-        "evaluationBody"
-      ]
+        "evaluationBody",
+        "reviewContactPoint",
+        "submissionReceiptBody"
+      ],
+      "address": {
+        "locality": "GJØVIK"
+      }
     },
     {
       "id": "ORG-0002",

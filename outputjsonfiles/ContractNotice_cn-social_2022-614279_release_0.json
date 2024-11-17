@@ -1,7 +1,7 @@
 {
   "id": "2022-614279",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-62bed670-01ab-47bc-a357-be8299fb9696",
+  "ocid": "ocds-abcd1234-a3d7415e-92f2-4c87-99e4-3f4aad71551d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -105,7 +105,8 @@
             "description": "General public services"
           }
         ],
-        "url": "https://permalink.mercell.com/191755994.aspx"
+        "url": "https://permalink.mercell.com/191755994.aspx",
+        "buyerProfile": "http://www.nav.no/"
       },
       "name": "ARBEIDS- OG VELFERDSETATEN",
       "additionalIdentifiers": [
@@ -118,13 +119,13 @@
         "name": "Anita Hellehaven",
         "email": "anita.hellehaven@nav.no"
       },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ],
       "address": {
         "locality": "Mo i Rana"
-      },
-      "roles": [
-        "processContactPoint",
-        "buyer"
-      ]
+      }
     },
     {
       "id": "ORG-0002",

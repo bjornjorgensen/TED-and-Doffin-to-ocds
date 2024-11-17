@@ -1,7 +1,7 @@
 {
   "id": "2023-665410",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e1353a9d-e276-4346-8e37-202fd788d4f5",
+  "ocid": "ocds-abcd1234-ed15f15f-57bf-43ee-9160-c22d0d247dc4",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -137,7 +137,8 @@
             "description": "Housing and community amenities"
           }
         ],
-        "url": "www.larvik.kommune.no"
+        "url": "www.larvik.kommune.no",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/3600"
       },
       "name": "Larvik kommune 918082956",
       "additionalIdentifiers": [
@@ -151,14 +152,14 @@
         "telephone": "+47 98231532",
         "email": "sigmund.ulnes@larvik.kommune.no"
       },
+      "roles": [
+        "buyer",
+        "processContactPoint",
+        "submissionReceiptBody"
+      ],
       "address": {
         "locality": "Larvik"
-      },
-      "roles": [
-        "processContactPoint",
-        "buyer",
-        "submissionReceiptBody"
-      ]
+      }
     },
     {
       "id": "ORG-0002",
