@@ -1,7 +1,7 @@
 {
   "id": "74f8c72a-5dcd-4a77-afda-6573ca30c8df",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9d392af7-eaf5-4b23-9c8a-9dab204b6be0",
+  "ocid": "ocds-abcd1234-55757a3b-cbd7-45d7-b7c0-b81044261946",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -363,8 +363,8 @@
         "locality": "Stjørdal"
       },
       "roles": [
-        "processContactPoint",
         "leadBuyer",
+        "processContactPoint",
         "buyer"
       ]
     },

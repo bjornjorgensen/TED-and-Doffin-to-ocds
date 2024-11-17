@@ -64,14 +64,20 @@ def test_bt_5101b_lot_integration(tmp_path, setup_logging, temp_output_dir):
 
     logger.info("Result: %s", json.dumps(result, indent=2))
 
+    # Check tender and items exist
     assert "tender" in result
-    assert "lots" in result["tender"]
-    assert len(result["tender"]["lots"]) == 1
-    lot = result["tender"]["lots"][0]
-    assert lot["id"] == "LOT-0001"
-    assert "deliveryAddresses" in lot
-    assert len(lot["deliveryAddresses"]) == 1
-    address = lot["deliveryAddresses"][0]
+    assert "items" in result["tender"]
+    assert len(result["tender"]["items"]) == 1
+
+    # Check first item details
+    item = result["tender"]["items"][0]
+    assert item["id"] == "1"
+    assert item["relatedLot"] == "LOT-0001"
+    assert "deliveryAddresses" in item
+    assert len(item["deliveryAddresses"]) == 1
+
+    # Check address details
+    address = item["deliveryAddresses"][0]
     assert "streetAddress" in address
     assert address["streetAddress"] == "Main Street, Building B1, 3rd floor"
 
