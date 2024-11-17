@@ -1,7 +1,7 @@
 {
   "id": "920077ce-4821-4475-9786-474c473628bd",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b8c81be6-fdfc-4d14-a19a-25ff78d2b6e6",
+  "ocid": "ocds-abcd1234-d5011bf8-cd17-4f33-8e41-35121aa99f6d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -254,8 +254,8 @@
         "locality": "Leknes"
       },
       "roles": [
-        "evaluationBody",
-        "buyer"
+        "buyer",
+        "evaluationBody"
       ]
     }
   ],

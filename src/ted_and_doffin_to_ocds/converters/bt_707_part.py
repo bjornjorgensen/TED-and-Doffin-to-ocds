@@ -15,11 +15,11 @@ NAMESPACES = {
 }
 
 JUSTIFICATION_MAPPING = {
-    "ipr-iss": "Restricted. Intellectual property rights issues",
-    "phy-mod": "Restricted. Inclusion of a physical model",
-    "sen-info": "Restricted. Protection of particularly sensitive information",
-    "sp-of-eq": "Restricted. buyer would need specialised office equipment",
-    "tdf-non-av": "Restricted. Tools, devices, or file formats not generally available",
+    "ipr-iss": "Intellectual property right issues",
+    "phy-mod": "Inclusion of a physical model",
+    "sen-info": "Protection of particularly sensitive information",
+    "sp-of-eq": "Buyer would need specialised office equipment",
+    "tdf-non-av": "Tools, devices, or file formats not generally available",
 }
 
 

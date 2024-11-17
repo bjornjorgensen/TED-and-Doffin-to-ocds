@@ -5,99 +5,71 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+    "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+    "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+    "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+}
+
 JUSTIFICATION_MAPPING = {
-    "ipr-iss": "Restricted. Intellectual property rights issues",
-    "phy-mod": "Restricted. Inclusion of a physical model",
-    "sen-info": "Restricted. Protection of particularly sensitive information",
-    "sp-of-eq": "Restricted. buyer would need specialised office equipment",
-    "tdf-non-av": "Restricted. Tools, devices, or file formats not generally available",
+    "ipr-iss": "Intellectual property right issues",
+    "phy-mod": "Inclusion of a physical model",
+    "sen-info": "Protection of particularly sensitive information",
+    "sp-of-eq": "Buyer would need specialised office equipment",
+    "tdf-non-av": "Tools, devices, or file formats not generally available",
 }
 
 
 def parse_lot_documents_restricted_justification(xml_content):
-    """
-    Parse the XML content to extract the documents restricted justification for each lot.
+    """Parse the XML content to extract the documents restricted justification for each lot."""
+    try:
+        if isinstance(xml_content, str):
+            xml_content = xml_content.encode("utf-8")
 
-    Args:
-        xml_content (str): The XML content to parse.
+        root = etree.fromstring(xml_content)
+        result = {"tender": {"documents": []}}
 
-    Returns:
-        dict: A dictionary containing the parsed data in the format:
-              {
-                  "tender": {
-                      "documents": [
-                          {
-                              "id": "document_id",
-                              "accessDetails": "justification",
-                              "relatedLots": ["lot_id"]
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
-
-    Raises:
-        etree.XMLSyntaxError: If the input is not valid XML.
-    """
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
-
-    result = {"tender": {"documents": []}}
-
-    lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
-        namespaces=namespaces,
-    )
-
-    for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        documents = lot.xpath(
-            "cac:TenderingTerms/cac:CallForTendersDocumentReference",
-            namespaces=namespaces,
+        lots = root.xpath(
+            "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+            namespaces=NAMESPACES,
         )
 
-        for doc in documents:
-            doc_id = doc.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-            justification_code = doc.xpath(
-                "cbc:DocumentTypeCode[@listName='communication-justification']/text()",
-                namespaces=namespaces,
+        for lot in lots:
+            lot_id = lot.xpath("cbc:ID/text()", namespaces=NAMESPACES)[0]
+            documents = lot.xpath(
+                "cac:TenderingTerms/cac:CallForTendersDocumentReference",
+                namespaces=NAMESPACES,
             )
 
-            if justification_code:
-                justification = JUSTIFICATION_MAPPING.get(
-                    justification_code[0],
-                    "Unknown justification",
+            for doc in documents:
+                doc_id = doc.xpath("cbc:ID/text()", namespaces=NAMESPACES)[0]
+                justification_code = doc.xpath(
+                    "cbc:DocumentTypeCode[@listName='communication-justification']/text()",
+                    namespaces=NAMESPACES,
                 )
-                document = {
-                    "id": doc_id,
-                    "accessDetails": justification,
-                    "relatedLots": [lot_id],
-                }
-                result["tender"]["documents"].append(document)
 
-    return result if result["tender"]["documents"] else None
+                if justification_code:
+                    document = {
+                        "id": doc_id,
+                        "accessDetails": JUSTIFICATION_MAPPING.get(
+                            justification_code[0], "Unknown justification"
+                        ),
+                        "relatedLots": [lot_id],
+                    }
+                    result["tender"]["documents"].append(document)
+
+        return result if result["tender"]["documents"] else None
+
+    except etree.XMLSyntaxError:
+        logger.exception("Failed to parse XML content")
+        raise
 
 
 def merge_lot_documents_restricted_justification(release_json, lot_documents_data):
-    """
-    Merge the parsed lot documents restricted justification data into the main OCDS release JSON.
-
-    Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        lot_documents_data (dict): The parsed lot documents data to be merged.
-
-    Returns:
-        None: The function updates the release_json in-place.
-    """
+    """Merge the parsed lot documents restricted justification data."""
     if not lot_documents_data:
         logger.warning("No lot documents restricted justification data to merge")
         return
@@ -113,9 +85,7 @@ def merge_lot_documents_restricted_justification(release_json, lot_documents_dat
         if existing_doc:
             existing_doc["accessDetails"] = new_doc["accessDetails"]
             existing_doc.setdefault("relatedLots", []).extend(new_doc["relatedLots"])
-            existing_doc["relatedLots"] = list(
-                set(existing_doc["relatedLots"]),
-            )  # Remove duplicates
+            existing_doc["relatedLots"] = list(set(existing_doc["relatedLots"]))
         else:
             existing_documents.append(new_doc)
 

@@ -43,9 +43,7 @@ def test_parse_part_documents_restricted_justification_success():
 
     document = result["tender"]["documents"][0]
     assert document["id"] == "20210521/CTFD/ENG/7654-02"
-    assert (
-        document["accessDetails"] == "Restricted. Intellectual property rights issues"
-    )
+    assert document["accessDetails"] == "Intellectual property right issues"
 
 
 def test_parse_part_documents_restricted_justification_invalid_xml(caplog):
