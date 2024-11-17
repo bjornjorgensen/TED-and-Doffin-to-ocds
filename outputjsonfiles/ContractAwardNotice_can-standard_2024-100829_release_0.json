@@ -1,7 +1,7 @@
 {
   "id": "510444f4-6cd2-4b26-8dd6-f3af27ffa069",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-dff9439c-1bd6-46c2-8b5f-1b914f195b3b",
+  "ocid": "ocds-abcd1234-dd184503-41f6-4fa0-b929-83f4cf4095d5",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -186,6 +186,13 @@
       }
     ]
   },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2024-01-18T23:59:59+01:00",
+      "awardID": "RES-0001"
+    }
+  ],
   "awards": [
     {
       "id": "CON-0001",
@@ -200,12 +207,6 @@
     },
     {
       "id": "RES-0001"
-    }
-  ],
-  "contracts": [
-    {
-      "id": "CON-0001",
-      "awardID": "RES-0001"
     }
   ],
   "buyer": [

@@ -1,7 +1,7 @@
 {
   "id": "2022-697882",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-5829ae4c-4ae4-4b40-8520-d41a54f404fd",
+  "ocid": "ocds-abcd1234-81dcb8dd-93f6-4340-b849-8d7d63156ed7",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -157,6 +157,13 @@
       }
     ]
   },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2022-11-24T23:59:59Z",
+      "awardID": "RES-0001"
+    }
+  ],
   "awards": [
     {
       "id": "RES-0001",
@@ -170,12 +177,6 @@
       "relatedBids": [
         "TEN-0001"
       ]
-    }
-  ],
-  "contracts": [
-    {
-      "id": "CON-0001",
-      "awardID": "RES-0001"
     }
   ],
   "buyer": [

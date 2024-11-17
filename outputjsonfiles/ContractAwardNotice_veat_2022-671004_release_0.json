@@ -1,7 +1,7 @@
 {
   "id": "2022-671004",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-307c22a7-64b8-454b-a5de-6f12c7359cd7",
+  "ocid": "ocds-abcd1234-a2dc2b61-d243-4ac9-9e0f-a47a5a1cf4ee",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -132,6 +132,13 @@
       }
     ]
   },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2022-12-15T23:59:59Z",
+      "awardID": "RES-0001"
+    }
+  ],
   "description": "Mercell kunngjøring: https://opic.com/id/afmhdeyyxz Bibliotek24 vil kontinuerlig invitere leverandører av digitale innholdstjenester til, bruk i folkebibliotek og videregående skoler, forhandle og videreformidle disse tilbudene til sektoren gjennom tilknytningsperioder 1-2 ganger i året.",
   "awards": [
     {
@@ -146,12 +153,6 @@
       "relatedBids": [
         "TEN-0001"
       ]
-    }
-  ],
-  "contracts": [
-    {
-      "id": "CON-0001",
-      "awardID": "RES-0001"
     }
   ],
   "buyer": [

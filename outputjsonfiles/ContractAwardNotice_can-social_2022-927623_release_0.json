@@ -1,7 +1,7 @@
 {
   "id": "2022-927623",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-96995a32-489f-4477-9b07-efdcb6be8a02",
+  "ocid": "ocds-abcd1234-c26e43e5-201a-4287-a8e6-e096fc212cc9",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -217,6 +217,17 @@
       ]
     }
   ],
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2022-10-14T23:59:59Z",
+      "awardID": "RES-0001"
+    },
+    {
+      "id": "CON-0002",
+      "dateSigned": "2022-10-14T23:59:59Z"
+    }
+  ],
   "description": "Oppdragsgiver har opsjon på å forlenge avtalen med de samme betingelser med 1 + 1 år slik at total mulig avtalelengde fra planlagt oppstartsdato 9. mars 2023 er 4 år. Oppdragsgiver har opsjon på å forlenge avtalen med de samme betingelser med 1 + 1 år slik at total mulig avtalelengde fra planlagt oppstartsdato 9. mars 2023 er 4 år.",
   "awards": [
     {
@@ -224,15 +235,6 @@
         "TEN-0001",
         "TEN-0002"
       ]
-    }
-  ],
-  "contracts": [
-    {
-      "id": "CON-0001",
-      "awardID": "RES-0001"
-    },
-    {
-      "id": "CON-0002"
     }
   ],
   "buyer": [

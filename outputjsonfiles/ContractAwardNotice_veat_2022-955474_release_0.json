@@ -1,7 +1,7 @@
 {
   "id": "2022-955474",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0c2582ef-4b1f-43c6-ad37-69d38fef98dd",
+  "ocid": "ocds-abcd1234-6a0a278b-32d8-434f-9c72-a9427e46c989",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -125,6 +125,13 @@
       }
     ]
   },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2022-09-16T23:59:59Z",
+      "awardID": "RES-0001"
+    }
+  ],
   "description": "Mercell kunngjøring: https://opic.com/id/afqkqguztt",
   "awards": [
     {
@@ -139,12 +146,6 @@
       "relatedBids": [
         "TEN-0001"
       ]
-    }
-  ],
-  "contracts": [
-    {
-      "id": "CON-0001",
-      "awardID": "RES-0001"
     }
   ],
   "buyer": [
