@@ -1,88 +1,121 @@
 # tests/test_bt_707_part.py
-from pathlib import Path
-import pytest
-import json
-import sys
 import logging
-import tempfile
+import pytest
+from lxml import etree
 
-# Add the parent directory to sys.path to import main
-sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from ted_and_doffin_to_ocds.converters.bt_707_part import (
+    parse_part_documents_restricted_justification,
+    merge_part_documents_restricted_justification,
+)
 
+TEST_XML = """<?xml version="1.0" encoding="UTF-8"?>
+<ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+                   xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                   xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+    <cac:ProcurementProjectLot>
+        <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+        <cac:TenderingTerms>
+            <cac:CallForTendersDocumentReference>
+                <cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID>
+                <cbc:DocumentTypeCode listName="communication-justification">ipr-iss</cbc:DocumentTypeCode>
+            </cac:CallForTendersDocumentReference>
+        </cac:TenderingTerms>
+    </cac:ProcurementProjectLot>
+</ContractAwardNotice>"""
 
-@pytest.fixture(scope="module")
-def setup_logging():
-    configure_logging()
-    return logging.getLogger(__name__)
+INVALID_XML = "<?xml version='1.0'?><invalid>"
 
 
 @pytest.fixture
-def temp_output_dir():
-    with tempfile.TemporaryDirectory() as tmpdirname:
-        yield Path(tmpdirname)
+def caplog(caplog):
+    caplog.set_level(logging.INFO)
+    return caplog
 
 
-def run_main_and_get_result(xml_file, output_dir):
-    main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
-    output_files = list(output_dir.glob("*_release_0.json"))
-    assert len(output_files) == 1, f"Expected 1 output file, got {len(output_files)}"
-    with output_files[0].open() as f:
-        return json.load(f)
+def test_parse_part_documents_restricted_justification_success():
+    """Test successful parsing of document justification."""
+    result = parse_part_documents_restricted_justification(TEST_XML)
 
-
-def test_bt_707_part_integration(tmp_path, setup_logging, temp_output_dir):
-    logger = setup_logging
-
-    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
-    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
-                          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-                          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
-            <cac:TenderingTerms>
-                <cac:CallForTendersDocumentReference>
-                    <cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID>
-                    <cbc:DocumentTypeCode listName="communication-justification">ipr-iss</cbc:DocumentTypeCode>
-                </cac:CallForTendersDocumentReference>
-            </cac:TenderingTerms>
-        </cac:ProcurementProjectLot>
-        <cac:Tender>
-            <cbc:ID>TENDER-0001</cbc:ID>
-            <cac:DocumentReference>
-                <cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID>
-                <cbc:DocumentTypeCode listName="communication-justification">ipr-iss</cbc:DocumentTypeCode>
-                <cac:RelatedLots>
-                    <cbc:ID>PART-0001</cbc:ID>
-                </cac:RelatedLots>
-            </cac:DocumentReference>
-        </cac:Tender>
-    </ContractAwardNotice>
-    """
-    xml_file = tmp_path / "test_input_bt_707_part.xml"
-    xml_file.write_text(xml_content)
-
-    result = run_main_and_get_result(xml_file, temp_output_dir)
-    logger.info("Result: %s", json.dumps(result, indent=2))
-
-    assert "tender" in result, "Expected 'tender' in result"
-    assert "documents" in result["tender"], "Expected 'documents' in tender"
-    assert (
-        len(result["tender"]["documents"]) == 1
-    ), f"Expected 1 document, got {len(result['tender']['documents'])}"
+    assert result is not None
+    assert "tender" in result
+    assert "documents" in result["tender"]
+    assert len(result["tender"]["documents"]) == 1
 
     document = result["tender"]["documents"][0]
-    assert (
-        document["id"] == "20210521/CTFD/ENG/7654-02"
-    ), f"Expected document id '20210521/CTFD/ENG/7654-02', got {document['id']}"
+    assert document["id"] == "20210521/CTFD/ENG/7654-02"
     assert (
         document["accessDetails"] == "Restricted. Intellectual property rights issues"
-    ), f"Expected access details 'Restricted. Intellectual property rights issues', got {document['accessDetails']}"
-    assert document["relatedLots"] == [
-        "PART-0001"
-    ], f"Expected relatedLots ['PART-0001'], got {document['relatedLots']}"
+    )
 
-    logger.info("Test bt_707_part_integration passed successfully.")
+
+def test_parse_part_documents_restricted_justification_invalid_xml(caplog):
+    """Test handling of invalid XML."""
+    with pytest.raises(etree.XMLSyntaxError):
+        parse_part_documents_restricted_justification(INVALID_XML)
+    assert "Failed to parse XML content" in caplog.text
+
+
+def test_merge_part_documents_restricted_justification():
+    """Test merging document justification into release JSON."""
+    release_json = {"tender": {"documents": []}}
+    part_documents_data = {
+        "tender": {
+            "documents": [
+                {
+                    "id": "20210521/CTFD/ENG/7654-02",
+                    "accessDetails": "Restricted. Intellectual property rights issues",
+                }
+            ]
+        }
+    }
+
+    merge_part_documents_restricted_justification(release_json, part_documents_data)
+
+    assert len(release_json["tender"]["documents"]) == 1
+    assert release_json["tender"]["documents"][0]["id"] == "20210521/CTFD/ENG/7654-02"
+    assert (
+        release_json["tender"]["documents"][0]["accessDetails"]
+        == "Restricted. Intellectual property rights issues"
+    )
+
+
+def test_merge_part_documents_restricted_justification_empty(caplog):
+    """Test merging with empty data."""
+    release_json = {"tender": {"documents": []}}
+    merge_part_documents_restricted_justification(release_json, None)
+    assert "No part documents restricted justification data to merge" in caplog.text
+
+
+def test_merge_part_documents_restricted_justification_existing():
+    """Test merging when document already exists."""
+    release_json = {
+        "tender": {
+            "documents": [
+                {
+                    "id": "20210521/CTFD/ENG/7654-02",
+                    "accessDetails": "Old justification",
+                }
+            ]
+        }
+    }
+    part_documents_data = {
+        "tender": {
+            "documents": [
+                {
+                    "id": "20210521/CTFD/ENG/7654-02",
+                    "accessDetails": "Restricted. Intellectual property rights issues",
+                }
+            ]
+        }
+    }
+
+    merge_part_documents_restricted_justification(release_json, part_documents_data)
+
+    assert len(release_json["tender"]["documents"]) == 1
+    assert (
+        release_json["tender"]["documents"][0]["accessDetails"]
+        == "Restricted. Intellectual property rights issues"
+    )
 
 
 if __name__ == "__main__":

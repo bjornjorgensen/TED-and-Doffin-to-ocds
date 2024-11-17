@@ -1,7 +1,7 @@
 {
   "id": "510444f4-6cd2-4b26-8dd6-f3af27ffa069",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6b258be7-a9d1-414e-b3b3-b45518af6942",
+  "ocid": "ocds-abcd1234-90a9bafa-f149-4ca4-a0e0-24a09c0e3759",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -124,8 +124,8 @@
         "locality": "HØNEFOSS"
       },
       "roles": [
-        "funder",
         "buyer",
+        "funder",
         "payer"
       ]
     },

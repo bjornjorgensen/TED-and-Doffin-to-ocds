@@ -5,6 +5,15 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+    "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+    "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+    "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+}
+
 JUSTIFICATION_MAPPING = {
     "ipr-iss": "Restricted. Intellectual property rights issues",
     "phy-mod": "Restricted. Inclusion of a physical model",
@@ -19,66 +28,47 @@ def parse_part_documents_restricted_justification(xml_content):
     Parse the XML content to extract the documents restricted justification for each part.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content (str | bytes): The XML content to parse
 
     Returns:
-        dict: A dictionary containing the parsed data in the format:
-              {
-                  "tender": {
-                      "documents": [
-                          {
-                              "id": "document_id",
-                              "accessDetails": "justification"
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
-
-    Raises:
-        etree.XMLSyntaxError: If the input is not valid XML.
+        dict: A dictionary containing the parsed data in OCDS format, or None if no data found
     """
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
+    try:
+        if isinstance(xml_content, str):
+            xml_content = xml_content.encode("utf-8")
 
-    result = {"tender": {"documents": []}}
+        root = etree.fromstring(xml_content)
+        result = {"tender": {"documents": []}}
 
-    parts = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']",
-        namespaces=namespaces,
-    )
-
-    for part in parts:
-        documents = part.xpath(
-            "cac:TenderingTerms/cac:CallForTendersDocumentReference",
-            namespaces=namespaces,
+        # Find all parts and their document references
+        document_refs = root.xpath(
+            """//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/
+               cac:TenderingTerms/cac:CallForTendersDocumentReference""",
+            namespaces=NAMESPACES,
         )
 
-        for doc in documents:
-            doc_id = doc.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-            justification_code = doc.xpath(
-                "cbc:DocumentTypeCode[@listName='communication-justification']/text()",
-                namespaces=namespaces,
+        for doc in document_refs:
+            doc_id = doc.xpath("cbc:ID/text()", namespaces=NAMESPACES)
+            justification = doc.xpath(
+                """cbc:DocumentTypeCode[@listName='communication-justification']/
+                   text()""",
+                namespaces=NAMESPACES,
             )
 
-            if justification_code:
-                justification = JUSTIFICATION_MAPPING.get(
-                    justification_code[0],
-                    "Unknown justification",
-                )
-                document = {"id": doc_id, "accessDetails": justification}
+            if doc_id and justification:
+                document = {
+                    "id": doc_id[0],
+                    "accessDetails": JUSTIFICATION_MAPPING.get(
+                        justification[0], "Unknown justification"
+                    ),
+                }
                 result["tender"]["documents"].append(document)
 
-    return result if result["tender"]["documents"] else None
+        return result if result["tender"]["documents"] else None
+
+    except etree.XMLSyntaxError:
+        logger.exception("Failed to parse XML content")
+        raise
 
 
 def merge_part_documents_restricted_justification(release_json, part_documents_data):
