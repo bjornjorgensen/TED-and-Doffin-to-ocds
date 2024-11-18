@@ -8,14 +8,8 @@ logger = logging.getLogger(__name__)
 
 def parse_part_place_performance_additional(xml_content):
     """
-    Parse the XML content to extract additional place of performance information for the procurement part.
-
-    Args:
-        xml_content (str): The XML content to parse.
-
-    Returns:
-        dict: A dictionary containing the parsed additional place of performance data for the procurement part.
-        None: If no relevant data is found.
+    Parse BT-728-Part: Additional place of performance information.
+    Maps realized location descriptions to tender.deliveryAddresses[].description
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -31,62 +25,47 @@ def parse_part_place_performance_additional(xml_content):
 
     result = {"tender": {"deliveryAddresses": []}}
 
-    descriptions = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:ProcurementProject/cac:RealizedLocation/cbc:Description/text()",
+    locations = root.xpath(
+        "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']"
+        "/cac:ProcurementProject/cac:RealizedLocation",
         namespaces=namespaces,
     )
 
-    for description in descriptions:
-        result["tender"]["deliveryAddresses"].append(
-            {"description": description.strip()},
-        )
+    for location in locations:
+        description = location.xpath("string(cbc:Description)", namespaces=namespaces)
+        if description.strip():
+            result["tender"]["deliveryAddresses"].append(
+                {"description": description.strip()}
+            )
 
     return result if result["tender"]["deliveryAddresses"] else None
 
 
-def merge_part_place_performance_additional(
-    release_json,
-    part_place_performance_additional_data,
-):
+def merge_part_place_performance_additional(release_json, additional_data):
     """
-    Merge the parsed additional place of performance data for the procurement part into the main OCDS release JSON.
-
-    Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        part_place_performance_additional_data (dict): The parsed additional place of performance data for the procurement part to be merged.
-
-    Returns:
-        None: The function updates the release_json in-place.
+    Merge BT-728-Part data into the release.
+    Updates or concatenates descriptions for matching addresses.
     """
-    if not part_place_performance_additional_data:
-        logger.warning(
-            "No additional procurement part place of performance data to merge",
-        )
+    if not additional_data:
         return
 
-    if "tender" not in release_json:
-        release_json["tender"] = {}
-    if "deliveryAddresses" not in release_json["tender"]:
-        release_json["tender"]["deliveryAddresses"] = []
+    tender = release_json.setdefault("tender", {})
+    addresses = tender.setdefault("deliveryAddresses", [])
 
-    for new_address in part_place_performance_additional_data["tender"][
-        "deliveryAddresses"
-    ]:
-        existing_address = next(
-            (
-                addr
-                for addr in release_json["tender"]["deliveryAddresses"]
-                if addr.get("description") == new_address["description"]
-            ),
-            None,
-        )
-        if existing_address:
-            # If the address already exists, we don't need to do anything
-            pass
+    for new_address in additional_data["tender"]["deliveryAddresses"]:
+        # Check if there's an existing address to update
+        existing = next((addr for addr in addresses if addr.get("description")), None)
+
+        if existing:
+            # Concatenate the description
+            existing["description"] = (
+                f"{existing['description']}; {new_address['description']}"
+            )
         else:
-            release_json["tender"]["deliveryAddresses"].append(new_address)
+            # Add as new address
+            addresses.append(new_address)
 
     logger.info(
         "Merged additional place of performance data for %d addresses",
-        len(part_place_performance_additional_data["tender"]["deliveryAddresses"]),
+        len(additional_data["tender"]["deliveryAddresses"]),
     )

@@ -5,63 +5,63 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+    "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+    "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+    "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+}
+
 
 def parse_procedure_place_performance_additional(xml_content):
     """
-    Parse the XML content to extract additional place of performance information for the procurement procedure.
+    Parse the XML content to extract additional place of performance information.
+
+    Maps to .description in tender.deliveryAddresses objects.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content (str|bytes): The XML content to parse.
 
     Returns:
-        dict: A dictionary containing the parsed additional place of performance data for the procurement procedure.
+        dict: A dictionary containing the parsed place performance data
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
+
     root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
+
+    # Get RealizedLocation descriptions using exact specified XPath
+    descriptions = root.xpath(
+        "/*/cac:ProcurementProject/cac:RealizedLocation/cbc:Description/text()",
+        namespaces=NAMESPACES,
+    )
+
+    if not descriptions:
+        return None
 
     result = {"tender": {"deliveryAddresses": []}}
 
-    descriptions = root.xpath(
-        "//cac:ProcurementProject/cac:RealizedLocation/cbc:Description/text()",
-        namespaces=namespaces,
-    )
-
-    for description in descriptions:
-        result["tender"]["deliveryAddresses"].append(
-            {"description": description.strip()},
-        )
+    # Create delivery address object for each non-empty description
+    for desc in descriptions:
+        if desc and desc.strip():
+            result["tender"]["deliveryAddresses"].append({"description": desc.strip()})
 
     return result if result["tender"]["deliveryAddresses"] else None
 
 
-def merge_procedure_place_performance_additional(
-    release_json,
-    procedure_place_performance_additional_data,
-):
+def merge_procedure_place_performance_additional(release_json, place_performance_data):
     """
-    Merge the parsed additional place of performance data for the procurement procedure into the main OCDS release JSON.
+    Merge the additional place performance data into the OCDS release,
+    concatenating descriptions for matching addresses.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        procedure_place_performance_additional_data (dict): The parsed additional place of performance data for the procurement procedure to be merged.
-
-    Returns:
-        None: The function updates the release_json in-place.
+        release_json (dict): The main OCDS release JSON to be updated
+        place_performance_data (dict): The parsed place performance data to be merged
     """
-    if not procedure_place_performance_additional_data:
-        logger.warning(
-            "No additional procurement procedure place of performance data to merge",
-        )
+    if not place_performance_data:
         return
 
     if "tender" not in release_json:
@@ -69,24 +69,28 @@ def merge_procedure_place_performance_additional(
     if "deliveryAddresses" not in release_json["tender"]:
         release_json["tender"]["deliveryAddresses"] = []
 
-    for new_address in procedure_place_performance_additional_data["tender"][
-        "deliveryAddresses"
-    ]:
-        existing_address = next(
+    for new_addr in place_performance_data["tender"]["deliveryAddresses"]:
+        # Try to find matching existing address to concatenate description
+        existing = next(
             (
                 addr
                 for addr in release_json["tender"]["deliveryAddresses"]
-                if addr.get("description") == new_address["description"]
+                if addr.get("description") == new_addr["description"]
             ),
             None,
         )
-        if existing_address:
-            # If the address already exists, we don't need to do anything
-            pass
+
+        if existing:
+            # If addresses match, ensure descriptions are properly concatenated
+            if new_addr["description"] not in existing["description"]:
+                existing["description"] = (
+                    f"{existing['description']}; {new_addr['description']}"
+                )
         else:
-            release_json["tender"]["deliveryAddresses"].append(new_address)
+            # Add new address if no match found
+            release_json["tender"]["deliveryAddresses"].append(new_addr)
 
     logger.info(
         "Merged additional place of performance data for %d addresses",
-        len(procedure_place_performance_additional_data["tender"]["deliveryAddresses"]),
+        len(place_performance_data["tender"]["deliveryAddresses"]),
     )

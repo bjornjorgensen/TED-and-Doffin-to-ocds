@@ -1,5 +1,3 @@
-# converters/bt_735_LotResult.py
-
 import logging
 from lxml import etree
 
@@ -13,16 +11,7 @@ CVD_CONTRACT_TYPE_LABELS = {
 
 
 def parse_cvd_contract_type_lotresult(xml_content):
-    """
-    Parse the XML content to extract the CVD contract type for each LotResult.
-
-    Args:
-        xml_content (str or bytes): The XML content to parse.
-
-    Returns:
-        dict: A dictionary containing the parsed CVD contract type data for LotResults.
-        None: If no relevant data is found.
-    """
+    """Parse the XML content to extract the CVD contract type for each LotResult."""
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -58,12 +47,11 @@ def parse_cvd_contract_type_lotresult(xml_content):
                                 "id": cvd_code,
                                 "scheme": "eu-cvd-contract-type",
                                 "description": CVD_CONTRACT_TYPE_LABELS.get(
-                                    cvd_code,
-                                    "Unknown CVD contract type",
+                                    cvd_code, "Unknown CVD contract type"
                                 ),
-                            },
+                            }
                         ],
-                    },
+                    }
                 ],
             }
             result["awards"].append(award_data)
@@ -72,16 +60,7 @@ def parse_cvd_contract_type_lotresult(xml_content):
 
 
 def merge_cvd_contract_type_lotresult(release_json, cvd_contract_type_data):
-    """
-    Merge the parsed CVD contract type data for LotResults into the main OCDS release JSON.
-
-    Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        cvd_contract_type_data (dict): The parsed CVD contract type data for LotResults to be merged.
-
-    Returns:
-        None: The function updates the release_json in-place.
-    """
+    """Merge the parsed CVD contract type data into the main OCDS release JSON."""
     if not cvd_contract_type_data:
         logger.warning("No CVD contract type data for LotResults to merge")
         return
@@ -90,16 +69,14 @@ def merge_cvd_contract_type_lotresult(release_json, cvd_contract_type_data):
 
     for new_award in cvd_contract_type_data["awards"]:
         existing_award = next(
-            (award for award in existing_awards if award["id"] == new_award["id"]),
-            None,
+            (award for award in existing_awards if award["id"] == new_award["id"]), None
         )
         if existing_award:
             existing_items = existing_award.setdefault("items", [])
             if existing_items:
                 existing_item = existing_items[0]
                 existing_classifications = existing_item.setdefault(
-                    "additionalClassifications",
-                    [],
+                    "additionalClassifications", []
                 )
                 new_classification = new_award["items"][0]["additionalClassifications"][
                     0

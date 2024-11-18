@@ -31,7 +31,10 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_736_part_integration(tmp_path, setup_logging, temp_output_dir):
+def test_bt_736_part_reserved_execution_yes(tmp_path, setup_logging, temp_output_dir):
+    """Test when reserved execution is set to 'yes' for a part:
+    - Should set tender.contractTerms.reservedExecution to true
+    """
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
 <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
@@ -50,29 +53,20 @@ def test_bt_736_part_integration(tmp_path, setup_logging, temp_output_dir):
     xml_file = tmp_path / "test_input_reserved_execution_part.xml"
     xml_file.write_text(xml_content)
     logger.info("Created XML file at %s", xml_file)
-    logger.info("Output directory: %s", temp_output_dir)
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    logger.info("Result: %s", json.dumps(result, indent=2))
 
-    assert "tender" in result, "Expected 'tender' in result"
-    assert "lots" in result["tender"], "Expected 'lots' in tender"
-    assert (
-        len(result["tender"]["lots"]) == 1
-    ), f"Expected 1 lot, got {len(result['tender']['lots'])}"
-
-    lot = result["tender"]["lots"][0]
-    assert lot["id"] == "PART-0001", f"Expected lot id 'PART-0001', got {lot['id']}"
-    assert "contractTerms" in lot, "Expected 'contractTerms' in lot"
-    assert (
-        "reservedExecution" in lot["contractTerms"]
-    ), "Expected 'reservedExecution' in contractTerms"
-    assert (
-        lot["contractTerms"]["reservedExecution"] is True
-    ), "Expected reservedExecution to be True"
+    # Verify reserved execution is set correctly
+    assert "tender" in result
+    assert "contractTerms" in result["tender"]
+    assert "reservedExecution" in result["tender"]["contractTerms"]
+    assert result["tender"]["contractTerms"]["reservedExecution"] is True
 
 
-def test_bt_736_part_integration_no_value(tmp_path, setup_logging, temp_output_dir):
+def test_bt_736_part_reserved_execution_no(tmp_path, setup_logging, temp_output_dir):
+    """Test when reserved execution is set to 'no' for a part:
+    - Should not include reservedExecution in contractTerms
+    """
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
 <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
@@ -91,22 +85,14 @@ def test_bt_736_part_integration_no_value(tmp_path, setup_logging, temp_output_d
     xml_file = tmp_path / "test_input_reserved_execution_part_no.xml"
     xml_file.write_text(xml_content)
     logger.info("Created XML file at %s", xml_file)
-    logger.info("Output directory: %s", temp_output_dir)
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    logger.info("Result: %s", json.dumps(result, indent=2))
 
-    assert "tender" in result, "Expected 'tender' in result"
-    assert "lots" in result["tender"], "Expected 'lots' in tender"
-    assert (
-        len(result["tender"]["lots"]) == 1
-    ), f"Expected 1 lot, got {len(result['tender']['lots'])}"
-
-    lot = result["tender"]["lots"][0]
-    assert lot["id"] == "PART-0001", f"Expected lot id 'PART-0001', got {lot['id']}"
-    assert "contractTerms" not in lot or "reservedExecution" not in lot.get(
-        "contractTerms", {}
-    ), "Expected no 'reservedExecution' in contractTerms"
+    # Verify reserved execution is not present
+    assert "tender" in result
+    assert "contractTerms" not in result["tender"] or "reservedExecution" not in result[
+        "tender"
+    ].get("contractTerms", {})
 
 
 if __name__ == "__main__":

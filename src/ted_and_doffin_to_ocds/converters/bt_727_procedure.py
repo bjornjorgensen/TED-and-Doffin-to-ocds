@@ -20,7 +20,7 @@ def parse_procedure_place_performance(xml_content):
         xml_content (str): The XML content to parse.
 
     Returns:
-        dict: A dictionary containing the parsed place of performance data for the procurement procedure.
+        dict: A dictionary containing the parsed place of performance data.
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
@@ -51,11 +51,11 @@ def parse_procedure_place_performance(xml_content):
 
 def merge_procedure_place_performance(release_json, procedure_place_performance_data):
     """
-    Merge the parsed place of performance data for the procurement procedure into the main OCDS release JSON.
+    Merge the parsed place of performance data into the main OCDS release JSON.
 
     Args:
         release_json (dict): The main OCDS release JSON to be updated.
-        procedure_place_performance_data (dict): The parsed place of performance data for the procurement procedure to be merged.
+        procedure_place_performance_data (dict): The parsed place of performance data to be merged.
 
     Returns:
         None: The function updates the release_json in-place.
@@ -78,10 +78,7 @@ def merge_procedure_place_performance(release_json, procedure_place_performance_
             ),
             None,
         )
-        if existing_location:
-            # If the location already exists, we don't need to do anything
-            pass
-        else:
+        if not existing_location:
             release_json["tender"]["deliveryLocations"].append(new_location)
 
     logger.info(

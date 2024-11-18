@@ -194,13 +194,13 @@ ISO_639_1_MAPPING = {
 
 def parse_documents_unofficial_language_part(xml_content):
     """
-    Parse the XML content to extract the unofficial languages for documents in the part.
+    Parse the XML content to extract the unofficial languages and related lots for documents in the part.
 
     Args:
         xml_content (str or bytes): The XML content to parse.
 
     Returns:
-        dict: A dictionary containing the parsed unofficial language data for documents.
+        dict: A dictionary containing the parsed unofficial language data and related lots for documents.
         None: If no relevant data is found.
     """
     if isinstance(xml_content, str):
@@ -217,36 +217,50 @@ def parse_documents_unofficial_language_part(xml_content):
 
     result = {"tender": {"documents": []}}
 
-    xpath_query = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:TenderingTerms/cac:CallForTendersDocumentReference"
-    documents = root.xpath(xpath_query, namespaces=namespaces)
+    # Process each part
+    parts = root.xpath(
+        "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='part']", namespaces=namespaces
+    )
 
-    for document in documents:
-        doc_id = document.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        languages = document.xpath(
-            ".//efac:NonOfficialLanguages/cac:Language/cbc:ID/text()",
-            namespaces=namespaces,
+    for part in parts:
+        part_id = part.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+
+        # Get documents for this part
+        documents = part.xpath(
+            ".//cac:CallForTendersDocumentReference", namespaces=namespaces
         )
 
-        if languages:
-            doc_data = {
-                "id": doc_id,
-                "unofficialTranslations": [
-                    ISO_639_1_MAPPING.get(lang.upper(), lang.lower())
-                    for lang in languages
-                ],
-            }
-            result["tender"]["documents"].append(doc_data)
+        for document in documents:
+            doc_id = document.xpath("cbc:ID/text()", namespaces=namespaces)
+            if not doc_id:
+                continue
+
+            languages = document.xpath(
+                ".//efac:NonOfficialLanguages/cac:Language/cbc:ID/text()",
+                namespaces=namespaces,
+            )
+
+            if languages:
+                doc_data = {
+                    "id": doc_id[0],
+                    "unofficialTranslations": [
+                        ISO_639_1_MAPPING.get(lang.upper(), lang.lower())
+                        for lang in languages
+                    ],
+                    "relatedLots": [part_id],
+                }
+                result["tender"]["documents"].append(doc_data)
 
     return result if result["tender"]["documents"] else None
 
 
 def merge_documents_unofficial_language_part(release_json, unofficial_language_data):
     """
-    Merge the parsed unofficial language data for documents into the main OCDS release JSON.
+    Merge the parsed unofficial language data and related lots for documents into the main OCDS release JSON.
 
     Args:
         release_json (dict): The main OCDS release JSON to be updated.
-        unofficial_language_data (dict): The parsed unofficial language data for documents to be merged.
+        unofficial_language_data (dict): The parsed unofficial language and related lots data for documents.
 
     Returns:
         None: The function updates the release_json in-place.
@@ -264,13 +278,17 @@ def merge_documents_unofficial_language_part(release_json, unofficial_language_d
             None,
         )
         if existing_doc:
+            # Merge unofficial translations
             existing_doc.setdefault("unofficialTranslations", []).extend(
-                new_doc["unofficialTranslations"],
+                new_doc["unofficialTranslations"]
             )
-            # Remove duplicates
             existing_doc["unofficialTranslations"] = list(
-                set(existing_doc["unofficialTranslations"]),
+                set(existing_doc["unofficialTranslations"])
             )
+
+            # Merge related lots
+            existing_doc.setdefault("relatedLots", []).extend(new_doc["relatedLots"])
+            existing_doc["relatedLots"] = list(set(existing_doc["relatedLots"]))
         else:
             existing_documents.append(new_doc)
 

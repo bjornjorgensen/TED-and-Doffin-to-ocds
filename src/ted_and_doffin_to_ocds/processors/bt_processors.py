@@ -4710,7 +4710,7 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             merge_touchpoint_contact_fax,
             "touchpoint Contact Fax (BT-739-organization-touchpoint)",
         ),
-        (parse_ubo_fax, merge_ubo_fax, "ubo Contact Fax (BT-739-ubo)"),
+        (parse_ubo_fax, merge_ubo_fax, "BT-739-ubo (ubo Fax)"),
         (
             parse_buyer_contracting_entity,
             merge_buyer_contracting_entity,
@@ -5315,3 +5315,8 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
         process_bt_section(
             release_json, xml_content, [parse_func], merge_func, section_name
         )
+
+    # Add UBO fax processing
+    process_bt_section(
+        release_json, xml_content, [parse_ubo_fax], merge_ubo_fax, "UBO fax"
+    )
