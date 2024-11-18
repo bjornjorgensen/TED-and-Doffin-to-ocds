@@ -60,9 +60,7 @@ def test_bt_707_lot_integration(tmp_path, setup_logging, temp_output_dir):
 
     document = result["tender"]["documents"][0]
     assert document["id"] == "20210521/CTFD/ENG/7654-02"
-    assert (
-        document["accessDetails"] == "Restricted. Intellectual property rights issues"
-    )
+    assert document["accessDetails"] == "Intellectual property right issues"
     assert document["relatedLots"] == ["LOT-0001"]
 
 

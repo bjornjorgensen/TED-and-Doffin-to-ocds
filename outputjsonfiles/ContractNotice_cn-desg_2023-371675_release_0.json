@@ -1,7 +1,7 @@
 {
   "id": "2023-371675",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-621d72b6-f84e-4b98-bdd5-60c82d03d1b7",
+  "ocid": "ocds-abcd1234-0409969d-2178-4cac-af46-313def4f31db",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -138,9 +138,9 @@
         "email": "mhr@kulturtanken.no"
       },
       "roles": [
-        "buyer",
+        "submissionReceiptBody",
         "processContactPoint",
-        "submissionReceiptBody"
+        "buyer"
       ],
       "address": {
         "locality": "OSLO"

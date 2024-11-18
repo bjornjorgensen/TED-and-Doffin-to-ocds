@@ -230,7 +230,7 @@ def parse_part_documents_official_language(xml_content):
     result = {"tender": {"documents": []}}
 
     parts = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']",
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
         namespaces=namespaces,
     )
 

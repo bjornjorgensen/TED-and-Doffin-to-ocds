@@ -1,7 +1,7 @@
 {
   "id": "7b469b6b-4abb-4f22-abe1-50973de8c825",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c9a43dd3-c0bd-4c5d-9020-8b95d9bac7fb",
+  "ocid": "ocds-abcd1234-d869a5d8-3d8b-4a76-9a15-14c9e2222e97",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -125,8 +125,8 @@
         ]
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Oslo"
