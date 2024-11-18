@@ -1,111 +1,118 @@
 # converters/bt_739_ubo.py
 
 import logging
+from typing import Any
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+    "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+    "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+}
 
-def parse_ubo_fax(xml_content):
+
+def parse_ubo_fax(xml_content: str | bytes) -> dict[str, list[dict[str, Any]]] | None:
     """
-    Parse the XML content to extract the ubo fax number.
+    Parse Ultimate Beneficial Owner fax information from XML.
 
     Args:
-        xml_content (str or bytes): The XML content to parse.
+        xml_content: XML content to parse
 
     Returns:
-        dict: A dictionary containing the parsed ubo fax number.
-        None: If no relevant data is found.
+        Dictionary containing parties with UBO fax info, or None if not found
     """
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
+    try:
+        if isinstance(xml_content, str):
+            xml_content = xml_content.encode("utf-8")
 
-    result = {"parties": []}
+        root = etree.fromstring(xml_content)
 
-    xpath_query = "//efac:organizations"
-    organizations = root.xpath(xpath_query, namespaces=namespaces)
+        # Find organizations
+        organizations = root.xpath(
+            "//efext:EformsExtension/efac:Organizations/efac:Organization",
+            namespaces=NAMESPACES,
+        )
 
-    for org in organizations:
-        company = org.xpath("efac:organization/efac:company", namespaces=namespaces)
-        if company:
-            org_id = company[0].xpath(
-                "cac:partyIdentification/cbc:ID[@schemeName='organization']/text()",
-                namespaces=namespaces,
+        if not organizations:
+            return None
+
+        parties = []
+        for org in organizations:
+            # Get organization ID
+            org_id = org.xpath(
+                ".//cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
+                namespaces=NAMESPACES,
             )
-            if org_id:
-                ubo_data = []
-                ubos = org.xpath("efac:UltimateBeneficialOwner", namespaces=namespaces)
-                for ubo in ubos:
-                    ubo_id = ubo.xpath(
-                        "cbc:ID[@schemeName='ubo']/text()",
-                        namespaces=namespaces,
-                    )
-                    fax_number = ubo.xpath(
-                        "cac:Contact/cbc:Telefax/text()",
-                        namespaces=namespaces,
-                    )
-                    if ubo_id and fax_number:
-                        ubo_data.append({"id": ubo_id[0], "faxNumber": fax_number[0]})
-                if ubo_data:
-                    result["parties"].append(
-                        {"id": org_id[0], "beneficialOwners": ubo_data},
-                    )
 
-    return result if result["parties"] else None
+            if not org_id:
+                continue
+
+            # Get UBO info
+            ubos = []
+            ubo_elements = org.xpath(
+                ".//efac:UltimateBeneficialOwner", namespaces=NAMESPACES
+            )
+
+            for ubo in ubo_elements:
+                ubo_id = ubo.xpath(
+                    "cbc:ID[@schemeName='ubo']/text()", namespaces=NAMESPACES
+                )
+                fax = ubo.xpath("cac:Contact/cbc:Telefax/text()", namespaces=NAMESPACES)
+
+                if ubo_id and fax:
+                    ubos.append({"id": ubo_id[0], "faxNumber": fax[0]})
+
+            if ubos:
+                parties.append({"id": org_id[0], "beneficialOwners": ubos})
+
+    except etree.XMLSyntaxError:
+        logger.exception("Failed to parse XML content")
+        return None
+    else:
+        if parties:
+            return {"parties": parties}
+        return None
 
 
-def merge_ubo_fax(release_json, ubo_fax_data):
+def merge_ubo_fax(
+    release_json: dict[str, Any], ubo_data: dict[str, list[dict[str, Any]]] | None
+) -> None:
     """
-    Merge the parsed ubo fax number into the main OCDS release JSON.
+    Merge UBO fax data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        ubo_fax_data (dict): The parsed ubo fax data to be merged.
-
-    Returns:
-        None: The function updates the release_json in-place.
+        release_json: The target release JSON to update
+        ubo_data: The UBO fax data to merge
     """
-    if not ubo_fax_data:
-        logger.warning("No ubo fax data to merge")
+    if not ubo_data or "parties" not in ubo_data:
         return
 
-    parties = release_json.setdefault("parties", [])
+    # Get or create parties list
+    existing_parties = release_json.setdefault("parties", [])
 
-    for new_party in ubo_fax_data["parties"]:
+    # Merge UBO data
+    for new_party in ubo_data["parties"]:
         existing_party = next(
-            (party for party in parties if party["id"] == new_party["id"]),
-            None,
+            (p for p in existing_parties if p["id"] == new_party["id"]), None
         )
+
         if existing_party:
-            existing_beneficial_owners = existing_party.setdefault(
-                "beneficialOwners",
-                [],
-            )
+            # Get or create beneficialOwners list
+            existing_ubos = existing_party.setdefault("beneficialOwners", [])
+
+            # Update or add UBO info
             for new_ubo in new_party["beneficialOwners"]:
                 existing_ubo = next(
-                    (
-                        ubo
-                        for ubo in existing_beneficial_owners
-                        if ubo["id"] == new_ubo["id"]
-                    ),
-                    None,
+                    (u for u in existing_ubos if u["id"] == new_ubo["id"]), None
                 )
-                if existing_ubo:
-                    existing_ubo.update(new_ubo)
-                else:
-                    existing_beneficial_owners.append(new_ubo)
-        else:
-            parties.append(new_party)
 
-    logger.info(
-        "Merged ubo fax data for %d organizations", len(ubo_fax_data["parties"])
-    )
+                if existing_ubo:
+                    existing_ubo["faxNumber"] = new_ubo["faxNumber"]
+                else:
+                    existing_ubos.append(new_ubo)
+        else:
+            existing_parties.append(new_party)

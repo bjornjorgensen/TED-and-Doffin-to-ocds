@@ -39,7 +39,7 @@ def test_bt_728_part_integration(tmp_path, setup_logging, temp_output_dir):
           xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
             <cac:ProcurementProject>
                 <cac:RealizedLocation>
                     <cbc:Description languageID="ENG">Further realizations ...</cbc:Description>
@@ -57,23 +57,18 @@ def test_bt_728_part_integration(tmp_path, setup_logging, temp_output_dir):
     logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" in result, "Expected 'tender' in result"
-    assert "items" in result["tender"], "Expected 'items' in tender"
     assert (
-        len(result["tender"]["items"]) == 1
-    ), f"Expected 1 item, got {len(result['tender']['items'])}"
+        "deliveryAddresses" in result["tender"]
+    ), "Expected 'deliveryAddresses' in tender"
+    assert (
+        len(result["tender"]["deliveryAddresses"]) == 1
+    ), f"Expected 1 delivery address, got {len(result['tender']['deliveryAddresses'])}"
 
-    item = result["tender"]["items"][0]
-    assert item["id"] == "1", f"Expected item id '1', got {item['id']}"
+    address = result["tender"]["deliveryAddresses"][0]
+    assert "description" in address, "Expected 'description' in delivery address"
     assert (
-        item["relatedLot"] == "PART-0001"
-    ), f"Expected related lot 'PART-0001', got {item['relatedLot']}"
-    assert "deliveryLocations" in item, "Expected 'deliveryLocations' in item"
-    assert (
-        len(item["deliveryLocations"]) == 1
-    ), f"Expected 1 delivery location, got {len(item['deliveryLocations'])}"
-    assert (
-        item["deliveryLocations"][0]["description"] == "Further realizations ..."
-    ), f"Expected description 'Further realizations ...', got {item['deliveryLocations'][0]['description']}"
+        address["description"] == "Further realizations ..."
+    ), f"Expected description 'Further realizations ...', got {address['description']}"
 
 
 if __name__ == "__main__":

@@ -41,11 +41,14 @@ def test_bt_708_part_integration(tmp_path, setup_logging, temp_output_dir):
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
+        <cbc:ID>notice-1234</cbc:ID>
+        <cbc:IssueDate>2023-01-01</cbc:IssueDate>
+        <cbc:IssueTime>12:00:00Z</cbc:IssueTime>
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="Part">part-1</cbc:ID>
             <cac:TenderingTerms>
                 <cac:CallForTendersDocumentReference>
-                    <cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID>
+                    <cbc:ID>doc-1</cbc:ID>
                     <ext:UBLExtensions>
                         <ext:UBLExtension>
                             <ext:ExtensionContent>
@@ -53,6 +56,9 @@ def test_bt_708_part_integration(tmp_path, setup_logging, temp_output_dir):
                                     <efac:OfficialLanguages>
                                         <cac:Language>
                                             <cbc:ID>ENG</cbc:ID>
+                                        </cac:Language>
+                                        <cac:Language>
+                                            <cbc:ID>FRA</cbc:ID>
                                         </cac:Language>
                                     </efac:OfficialLanguages>
                                 </efext:EformsExtension>
@@ -62,16 +68,6 @@ def test_bt_708_part_integration(tmp_path, setup_logging, temp_output_dir):
                 </cac:CallForTendersDocumentReference>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
-        <cac:Tender>
-            <cbc:ID>TENDER-0001</cbc:ID>
-            <cac:DocumentReference>
-                <cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID>
-                <cbc:DocumentTypeCode listName="communication-justification">ipr-iss</cbc:DocumentTypeCode>
-                <cac:RelatedLots>
-                    <cbc:ID>PART-0001</cbc:ID>
-                </cac:RelatedLots>
-            </cac:DocumentReference>
-        </cac:Tender>
     </ContractAwardNotice>
     """
     xml_file = tmp_path / "test_input_bt_708_part.xml"
@@ -80,22 +76,21 @@ def test_bt_708_part_integration(tmp_path, setup_logging, temp_output_dir):
     result = run_main_and_get_result(xml_file, temp_output_dir)
     logger.info("Result: %s", json.dumps(result, indent=2))
 
+    # Check tender and documents exist
     assert "tender" in result, "Expected 'tender' in result"
     assert "documents" in result["tender"], "Expected 'documents' in tender"
-    assert (
-        len(result["tender"]["documents"]) == 1
-    ), f"Expected 1 document, got {len(result['tender']['documents'])}"
+    assert len(result["tender"]["documents"]) == 1, "Expected 1 document"
 
+    # Check document languages
     document = result["tender"]["documents"][0]
     assert (
-        document["id"] == "20210521/CTFD/ENG/7654-02"
-    ), f"Expected document id '20210521/CTFD/ENG/7654-02', got {document['id']}"
-    assert (
-        document["accessDetails"] == "Intellectual property right issues"
-    ), f"Expected access details 'Intellectual property right issues', got {document['accessDetails']}"
-    assert document["relatedLots"] == [
-        "PART-0001"
-    ], f"Expected relatedLots ['PART-0001'], got {document['relatedLots']}"
+        document["id"] == "doc-1"
+    ), f"Expected document id 'doc-1', got {document['id']}"
+    assert "languages" in document, "Expected 'languages' in document"
+    assert sorted(document["languages"]) == [
+        "en",
+        "fr",
+    ], f"Expected languages ['en', 'fr'], got {document['languages']}"
 
     logger.info("Test bt_708_part_integration passed successfully.")
 

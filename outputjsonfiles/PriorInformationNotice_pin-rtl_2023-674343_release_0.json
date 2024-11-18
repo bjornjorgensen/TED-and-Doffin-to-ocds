@@ -1,7 +1,7 @@
 {
   "id": "2023-674343",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4aad4e8b-4b0e-4918-9bf0-9f54d5bcfed4",
+  "ocid": "ocds-abcd1234-8f4a85fc-6558-4575-a9b4-b40e16bffd32",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -131,8 +131,8 @@
       },
       "roles": [
         "buyer",
-        "processContactPoint",
-        "leadBuyer"
+        "leadBuyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "KONGSVINGER"

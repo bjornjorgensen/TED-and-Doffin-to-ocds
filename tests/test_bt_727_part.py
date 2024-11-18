@@ -5,6 +5,10 @@ import json
 import sys
 import logging
 import tempfile
+from ted_and_doffin_to_ocds.converters.bt_727_part import (
+    parse_part_place_performance,
+    merge_part_place_performance,
+)
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
@@ -31,15 +35,14 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_727_part_integration(tmp_path, setup_logging, temp_output_dir):
-    logger = setup_logging
-
+def test_parse_part_place_performance():
+    """Test parsing place performance from XML."""
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
           xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
             <cac:ProcurementProject>
                 <cac:RealizedLocation>
                     <cac:Address>
@@ -50,31 +53,116 @@ def test_bt_727_part_integration(tmp_path, setup_logging, temp_output_dir):
         </cac:ProcurementProjectLot>
     </ContractNotice>
     """
-    xml_file = tmp_path / "test_input_part_place_performance.xml"
+
+    result = parse_part_place_performance(xml_content)
+
+    assert result is not None
+    assert "tender" in result
+    assert "deliveryLocations" in result["tender"]
+    assert len(result["tender"]["deliveryLocations"]) == 1
+    assert (
+        result["tender"]["deliveryLocations"][0]["description"]
+        == "Anywhere in the European Economic Area"
+    )
+
+
+def test_merge_part_place_performance():
+    """Test merging place performance data into release JSON."""
+    release_json = {"tender": {}}
+
+    part_data = {
+        "tender": {
+            "deliveryLocations": [
+                {"description": "Anywhere in the European Economic Area"}
+            ]
+        }
+    }
+
+    merge_part_place_performance(release_json, part_data)
+
+    assert "deliveryLocations" in release_json["tender"]
+    assert len(release_json["tender"]["deliveryLocations"]) == 1
+    assert (
+        release_json["tender"]["deliveryLocations"][0]["description"]
+        == "Anywhere in the European Economic Area"
+    )
+
+
+def test_merge_multiple_locations():
+    """Test merging multiple locations without duplicates."""
+    release_json = {"tender": {"deliveryLocations": [{"description": "Anywhere"}]}}
+
+    part_data = {
+        "tender": {
+            "deliveryLocations": [
+                {"description": "Anywhere"},
+                {"description": "Anywhere in the European Economic Area"},
+            ]
+        }
+    }
+
+    merge_part_place_performance(release_json, part_data)
+
+    assert len(release_json["tender"]["deliveryLocations"]) == 2
+    descriptions = {
+        loc["description"] for loc in release_json["tender"]["deliveryLocations"]
+    }
+    assert descriptions == {"Anywhere", "Anywhere in the European Economic Area"}
+
+
+def test_integration(tmp_path, temp_output_dir):
+    """Test integration with main converter."""
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cac:ProcurementProject>
+                <cac:RealizedLocation>
+                    <cac:Address>
+                        <cbc:Region>anyw-eea</cbc:Region>
+                    </cac:Address>
+                </cac:RealizedLocation>
+            </cac:ProcurementProject>
+        </cac:ProcurementProjectLot>
+    </ContractNotice>
+    """
+    xml_file = tmp_path / "test_input.xml"
     xml_file.write_text(xml_content)
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    logger.info("Result: %s", json.dumps(result, indent=2))
 
-    assert "tender" in result, "Expected 'tender' in result"
-    assert "items" in result["tender"], "Expected 'items' in tender"
+    assert "tender" in result
+    assert "deliveryLocations" in result["tender"]
+    assert len(result["tender"]["deliveryLocations"]) == 1
     assert (
-        len(result["tender"]["items"]) == 1
-    ), f"Expected 1 item, got {len(result['tender']['items'])}"
-
-    item = result["tender"]["items"][0]
-    assert item["id"] == "1", f"Expected item id '1', got {item['id']}"
-    assert (
-        item["relatedLot"] == "PART-0001"
-    ), f"Expected related lot 'PART-0001', got {item['relatedLot']}"
-    assert "deliveryLocations" in item, "Expected 'deliveryLocations' in item"
-    assert (
-        len(item["deliveryLocations"]) == 1
-    ), f"Expected 1 delivery location, got {len(item['deliveryLocations'])}"
-    assert (
-        item["deliveryLocations"][0]["description"]
+        result["tender"]["deliveryLocations"][0]["description"]
         == "Anywhere in the European Economic Area"
-    ), f"Expected description 'Anywhere in the European Economic Area', got {item['deliveryLocations'][0]['description']}"
+    )
+
+
+def test_invalid_xml():
+    """Test handling of invalid XML."""
+    invalid_xml = "<invalid>"
+    result = parse_part_place_performance(invalid_xml)
+    assert result is None
+
+
+def test_empty_regions():
+    """Test handling of XML with no regions."""
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+        </cac:ProcurementProjectLot>
+    </ContractNotice>
+    """
+
+    result = parse_part_place_performance(xml_content)
+    assert result is None
 
 
 if __name__ == "__main__":

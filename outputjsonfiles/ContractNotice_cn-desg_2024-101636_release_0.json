@@ -1,7 +1,7 @@
 {
   "id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3555cf6e-a517-455a-86fa-120dd9e4e62d",
+  "ocid": "ocds-abcd1234-1c8f7fd2-f33b-41a5-8276-b34785d4e2ba",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -329,11 +329,11 @@
         "email": "kenneth.hvalby@gjovik.kommune.no"
       },
       "roles": [
+        "submissionReceiptBody",
+        "evaluationBody",
         "processContactPoint",
         "buyer",
-        "evaluationBody",
-        "reviewContactPoint",
-        "submissionReceiptBody"
+        "reviewContactPoint"
       ],
       "address": {
         "locality": "GJØVIK"

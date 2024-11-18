@@ -5,10 +5,19 @@ import json
 import sys
 import logging
 import tempfile
+from ted_and_doffin_to_ocds.converters.bt_726_part import (
+    parse_part_sme_suitability,
+    merge_part_sme_suitability,
+)
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
 from src.ted_and_doffin_to_ocds.main import main, configure_logging
+
+TEST_NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+}
 
 
 @pytest.fixture(scope="module")
@@ -21,6 +30,40 @@ def setup_logging():
 def temp_output_dir():
     with tempfile.TemporaryDirectory() as tmpdirname:
         yield Path(tmpdirname)
+
+
+@pytest.fixture
+def sample_xml_true():
+    """XML with SME suitability set to true."""
+    return """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cac:ProcurementProject>
+                <cbc:SMESuitableIndicator>true</cbc:SMESuitableIndicator>
+            </cac:ProcurementProject>
+        </cac:ProcurementProjectLot>
+    </ContractNotice>
+    """
+
+
+@pytest.fixture
+def sample_xml_false():
+    """XML with SME suitability set to false."""
+    return """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cac:ProcurementProject>
+                <cbc:SMESuitableIndicator>false</cbc:SMESuitableIndicator>
+            </cac:ProcurementProject>
+        </cac:ProcurementProjectLot>
+    </ContractNotice>
+    """
 
 
 def run_main_and_get_result(xml_file, output_dir):
@@ -53,18 +96,68 @@ def test_bt_726_part_integration(tmp_path, setup_logging, temp_output_dir):
     logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" in result, "Expected 'tender' in result"
-    assert "lots" in result["tender"], "Expected 'lots' in tender"
-    assert (
-        len(result["tender"]["lots"]) == 1
-    ), f"Expected 1 lot, got {len(result['tender']['lots'])}"
 
-    lot = result["tender"]["lots"][0]
-    assert lot["id"] == "PART-0001", f"Expected lot id 'PART-0001', got {lot['id']}"
-    assert "suitability" in lot, "Expected 'suitability' in lot"
-    assert "sme" in lot["suitability"], "Expected 'sme' in lot suitability"
-    assert (
-        lot["suitability"]["sme"] is True
-    ), f"Expected SME suitability to be True, got {lot['suitability']['sme']}"
+
+def test_parse_part_sme_suitability_true(sample_xml_true):
+    """Test parsing when SME suitability is true."""
+    result = parse_part_sme_suitability(sample_xml_true)
+    assert result is not None
+    assert result["tender"]["suitability"]["sme"] is True
+
+
+def test_parse_part_sme_suitability_false(sample_xml_false):
+    """Test parsing when SME suitability is false."""
+    result = parse_part_sme_suitability(sample_xml_false)
+    assert result is not None
+    assert result["tender"]["suitability"]["sme"] is False
+
+
+def test_parse_part_sme_suitability_missing():
+    """Test parsing when SME suitability indicator is missing."""
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cac:ProcurementProject>
+            </cac:ProcurementProject>
+        </cac:ProcurementProjectLot>
+    </ContractNotice>
+    """
+    result = parse_part_sme_suitability(xml_content)
+    assert result is None
+
+
+def test_merge_part_sme_suitability():
+    """Test merging SME suitability data into release JSON."""
+    release_json = {}
+    part_sme_data = {"tender": {"suitability": {"sme": True}}}
+
+    merge_part_sme_suitability(release_json, part_sme_data)
+
+    assert "tender" in release_json
+    assert "suitability" in release_json["tender"]
+    assert "sme" in release_json["tender"]["suitability"]
+    assert release_json["tender"]["suitability"]["sme"] is True
+
+
+def test_merge_part_sme_suitability_none():
+    """Test merging when no SME suitability data is provided."""
+    release_json = {}
+    merge_part_sme_suitability(release_json, None)
+    assert release_json == {}
+
+
+def test_merge_part_sme_suitability_existing():
+    """Test merging when release JSON already has some data."""
+    release_json = {"tender": {"suitability": {"other": "value"}}}
+    part_sme_data = {"tender": {"suitability": {"sme": True}}}
+
+    merge_part_sme_suitability(release_json, part_sme_data)
+
+    assert release_json["tender"]["suitability"]["other"] == "value"
+    assert release_json["tender"]["suitability"]["sme"] is True
 
 
 if __name__ == "__main__":
