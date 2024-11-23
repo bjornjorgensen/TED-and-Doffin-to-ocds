@@ -54,7 +54,7 @@ class NoticeTracker:
         return self._local.connection
 
     @contextmanager
-    def get_connection(self) -> Generator[sqlite3.Connection, None, None]:
+    def get_connection(self) -> Generator[sqlite3.Connection]:
         """Get a connection from thread-local storage with automatic commit/rollback."""
         conn = self.connection
         try:
@@ -307,7 +307,7 @@ class NoticeTracker:
             return None
 
     @contextmanager
-    def get_statistics(self) -> Generator[dict, None, None]:
+    def get_statistics(self) -> Generator[dict]:
         """
         Get statistics about the tracked notices and relationships.
 

@@ -14,7 +14,7 @@ tqdm = "4.67.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8"
-ruff = "^0.7"
+ruff = "^0.8"
 
 [build-system]
 requires = ["poetry-core"]
@@ -59,6 +59,14 @@ select = [
     "T20",  # flake8-print
     "ARG",  # flake8-unused-arguments
     #"ANN",
+    "A004",
+    "PYI064",
+    "RUF030",
+    "UP043",
+    "UP031",
+    "RUF007",
+    "RUF200",
+    "B039",
     "DTZ",
     "T10",
     "EM",
@@ -75,7 +83,7 @@ select = [
     "SLF",
     "SLOT",
     "TID",
-    "TCH",
+    "TC",
     "INT",
     "ARG",
     "PTH",
