@@ -57,9 +57,7 @@ class XMLProcessor:
             return tree
 
     @contextmanager
-    def safe_xml_parse(
-        self, content: str | bytes
-    ) -> Generator[etree._Element, None, None]:
+    def safe_xml_parse(self, content: str | bytes) -> Generator[etree._Element]:
         """Safely parse XML with error handling."""
         try:
             tree = self.parse_xml(content)
