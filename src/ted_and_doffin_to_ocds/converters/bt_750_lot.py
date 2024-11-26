@@ -17,6 +17,7 @@ def parse_selection_criteria(xml_content):
         dict: A dictionary containing the parsed selection criteria data.
         None: If no relevant data is found.
     """
+    logger.debug("Starting parse_selection_criteria")
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -31,24 +32,33 @@ def parse_selection_criteria(xml_content):
 
     result = {"tender": {"lots": []}}
 
-    xpath_query = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']"
-    lots = root.xpath(xpath_query, namespaces=namespaces)
+    # Get all lots
+    lots = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+    )
+    logger.debug("Found %d lots", len(lots))
+
+    # Get root level selection criteria first
+    root_selection_criteria = root.xpath(
+        "//ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria",
+        namespaces=namespaces,
+    )
+    logger.debug("Found %d root selection criteria", len(root_selection_criteria))
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        selection_criteria = lot.xpath(
-            ".//efac:SelectionCriteria",
-            namespaces=namespaces,
-        )
+        logger.debug("Processing lot with ID: %s", lot_id)
 
         lot_data = {"id": lot_id, "selectionCriteria": {"criteria": []}}
 
-        for criterion in selection_criteria:
+        # Process root level criteria
+        for criterion in root_selection_criteria:
             usage = criterion.xpath(
                 "cbc:CalculationExpressionCode[@listName='usage']/text()",
                 namespaces=namespaces,
             )
             if usage and usage[0] != "used":
+                logger.debug("Skipping root criterion with usage: %s", usage[0])
                 continue
 
             name = criterion.xpath("cbc:Name/text()", namespaces=namespaces)
@@ -56,6 +66,8 @@ def parse_selection_criteria(xml_content):
                 "cbc:Description/text()",
                 namespaces=namespaces,
             )
+
+            logger.debug("Root criterion name: %s, description: %s", name, description)
 
             if name or description:
                 criterion_data = {}
@@ -68,10 +80,37 @@ def parse_selection_criteria(xml_content):
                     criterion_data["description"] = f"{name[0]}: {description[0]}"
 
                 lot_data["selectionCriteria"]["criteria"].append(criterion_data)
+                logger.debug("Added root criterion: %s", criterion_data)
+
+        # Process lot level criteria (BT-750)
+        lot_selection_criteria = lot.xpath(
+            ".//cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria",
+            namespaces=namespaces,
+        )
+        logger.debug("Found %d lot selection criteria", len(lot_selection_criteria))
+
+        for criterion in lot_selection_criteria:
+            usage = criterion.xpath(
+                "cbc:CalculationExpressionCode[@listName='usage']/text()",
+                namespaces=namespaces,
+            )
+            if usage and usage[0] != "used":
+                logger.debug("Skipping lot criterion with usage: %s", usage[0])
+                continue
+
+            description = criterion.xpath(
+                "cbc:Description/text()", namespaces=namespaces
+            )
+            if description:
+                criterion_data = {"description": description[0]}
+                lot_data["selectionCriteria"]["criteria"].append(criterion_data)
+                logger.debug("Added lot criterion: %s", criterion_data)
 
         if lot_data["selectionCriteria"]["criteria"]:
             result["tender"]["lots"].append(lot_data)
+            logger.debug("Added lot data: %s", lot_data)
 
+    logger.debug("Finished parse_selection_criteria with result: %s", result)
     return result if result["tender"]["lots"] else None
 
 

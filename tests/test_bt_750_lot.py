@@ -57,9 +57,17 @@ def test_bt_750_lot_integration(tmp_path, setup_logging, temp_output_dir):
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
-                <cac:ContractExecutionRequirement>
-                    <cbc:ExecutionRequirementCode listName="esignature-submission">true</cbc:ExecutionRequirementCode>
-                </cac:ContractExecutionRequirement>
+                <ext:UBLExtensions>
+                    <ext:UBLExtension>
+                        <ext:ExtensionContent>
+                            <efext:EformsExtension>
+                                <efac:SelectionCriteria>
+                                    <cbc:Description languageID="ENG">Turnover over contract value rate</cbc:Description>
+                                </efac:SelectionCriteria>
+                            </efext:EformsExtension>
+                        </ext:ExtensionContent>
+                    </ext:UBLExtension>
+                </ext:UBLExtensions>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
     </ContractAwardNotice>
@@ -84,14 +92,20 @@ def test_bt_750_lot_integration(tmp_path, setup_logging, temp_output_dir):
         "criteria" in lot["selectionCriteria"]
     ), "Expected 'criteria' in selectionCriteria"
     assert (
-        len(lot["selectionCriteria"]["criteria"]) == 1
-    ), f"Expected 1 criterion, got {len(lot['selectionCriteria']['criteria'])}"
+        len(lot["selectionCriteria"]["criteria"]) == 2
+    ), f"Expected 2 criteria, got {len(lot['selectionCriteria']['criteria'])}"
 
-    criterion = lot["selectionCriteria"]["criteria"][0]
-    expected_description = "Minimum Turnover: Turnover over contract value rate"
+    criterion_1 = lot["selectionCriteria"]["criteria"][0]
+    expected_description_1 = "Minimum Turnover: Turnover over contract value rate"
     assert (
-        criterion["description"] == expected_description
-    ), f"Expected description '{expected_description}', got '{criterion['description']}'"
+        criterion_1["description"] == expected_description_1
+    ), f"Expected description '{expected_description_1}', got '{criterion_1['description']}'"
+
+    criterion_2 = lot["selectionCriteria"]["criteria"][1]
+    expected_description_2 = "Turnover over contract value rate"
+    assert (
+        criterion_2["description"] == expected_description_2
+    ), f"Expected description '{expected_description_2}', got '{criterion_2['description']}'"
 
     logger.info("Test bt_750_lot_integration passed successfully.")
 

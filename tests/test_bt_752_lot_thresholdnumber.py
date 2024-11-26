@@ -38,66 +38,117 @@ def test_bt_752_lot_threshold_number_integration(
 
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-                          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-                          xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-                          xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-                          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
-                          xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionContent>
-                    <efext:EformsExtension>
-                        <efac:SelectionCriteria>
-                            <cbc:CalculationExpressionCode listName="usage">used</cbc:CalculationExpressionCode>
-                            <efac:CriterionParameter>
-                                <efbc:ParameterCode listName="number-threshold">threshold</efbc:ParameterCode>
-                                <efbc:ParameterNumeric>3</efbc:ParameterNumeric>
-                            </efac:CriterionParameter>
-                        </efac:SelectionCriteria>
-                    </efext:EformsExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
+                         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+                         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+                         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+                         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+                         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
-                <cac:ContractExecutionRequirement>
-                    <cbc:ExecutionRequirementCode listName="esignature-submission">true</cbc:ExecutionRequirementCode>
-                </cac:ContractExecutionRequirement>
+                <ext:UBLExtensions>
+                    <ext:UBLExtension>
+                        <ext:ExtensionContent>
+                            <efext:EformsExtension>
+                                <efac:SelectionCriteria>
+                                    <cbc:CalculationExpressionCode listName="usage">used</cbc:CalculationExpressionCode>
+                                    <efac:CriterionParameter>
+                                        <efbc:ParameterCode listName="number-threshold"/>
+                                        <efbc:ParameterNumeric>3.5</efbc:ParameterNumeric>
+                                    </efac:CriterionParameter>
+                                </efac:SelectionCriteria>
+                            </efext:EformsExtension>
+                        </ext:ExtensionContent>
+                    </ext:UBLExtension>
+                </ext:UBLExtensions>
+            </cac:TenderingTerms>
+        </cac:ProcurementProjectLot>
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Lot">LOT-0002</cbc:ID>
+            <cac:TenderingTerms>
+                <ext:UBLExtensions>
+                    <ext:UBLExtension>
+                        <ext:ExtensionContent>
+                            <efext:EformsExtension>
+                                <efac:SelectionCriteria>
+                                    <cbc:CalculationExpressionCode listName="usage">not-used</cbc:CalculationExpressionCode>
+                                    <efac:CriterionParameter>
+                                        <efbc:ParameterCode listName="number-threshold"/>
+                                        <efbc:ParameterNumeric>2.5</efbc:ParameterNumeric>
+                                    </efac:CriterionParameter>
+                                </efac:SelectionCriteria>
+                            </efext:EformsExtension>
+                        </ext:ExtensionContent>
+                    </ext:UBLExtension>
+                </ext:UBLExtensions>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
     </ContractAwardNotice>
     """
+
     xml_file = tmp_path / "test_input_selection_criteria_threshold_number.xml"
     xml_file.write_text(xml_content)
 
-    # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
     logger.info("Result: %s", json.dumps(result, indent=2))
 
-    assert "tender" in result, "Expected 'tender' in result"
-    assert "lots" in result["tender"], "Expected 'lots' in tender"
-    assert (
-        len(result["tender"]["lots"]) == 1
-    ), f"Expected 1 lot, got {len(result['tender']['lots'])}"
+    # Verify basic structure
+    assert "tender" in result
+    assert "lots" in result["tender"]
 
-    lot = result["tender"]["lots"][0]
-    assert lot["id"] == "LOT-0001", f"Expected lot id 'LOT-0001', got {lot['id']}"
-    assert "selectionCriteria" in lot, "Expected 'selectionCriteria' in lot"
-    assert (
-        "criteria" in lot["selectionCriteria"]
-    ), "Expected 'criteria' in selectionCriteria"
-    assert (
-        len(lot["selectionCriteria"]["criteria"]) == 1
-    ), f"Expected 1 criterion, got {len(lot['selectionCriteria']['criteria'])}"
+    # Find lots with selection criteria
+    lots_with_criteria = [
+        lot
+        for lot in result["tender"]["lots"]
+        if "selectionCriteria" in lot and lot["selectionCriteria"].get("criteria")
+    ]
 
-    criterion = lot["selectionCriteria"]["criteria"][0]
-    expected_description = "Minimum Turnover: Turnover over contract value rate"
-    assert (
-        criterion["description"] == expected_description
-    ), f"Expected description '{expected_description}', got '{criterion['description']}'"
+    # Should only have selection criteria for LOT-0001
+    assert len(lots_with_criteria) == 1
+    lot = lots_with_criteria[0]
+    assert lot["id"] == "LOT-0001"
+
+    criteria = lot["selectionCriteria"]["criteria"]
+    assert len(criteria) == 1
+
+    criterion = criteria[0]
+    assert "numbers" in criterion
+    assert len(criterion["numbers"]) == 1
+    assert criterion["numbers"][0]["number"] == 3.5
+
+    # Verify LOT-0002 exists but has no selection criteria
+    lot2 = next(lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002")
+    assert "selectionCriteria" not in lot2 or not lot2["selectionCriteria"].get(
+        "criteria"
+    )
 
     logger.info("Test bt_752_lot_threshold_number_integration passed successfully.")
+
+
+def test_bt_752_no_threshold_number(tmp_path, temp_output_dir):
+    """Test case when no threshold numbers are present"""
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+        </cac:ProcurementProjectLot>
+    </ContractAwardNotice>
+    """
+
+    xml_file = tmp_path / "test_input_no_threshold.xml"
+    xml_file.write_text(xml_content)
+
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    # Verify the output doesn't contain selection criteria
+    assert "tender" in result
+    assert "lots" in result["tender"]
+    lot = next(
+        (lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0001"), None
+    )
+    assert lot is not None
+    assert "selectionCriteria" not in lot
 
 
 if __name__ == "__main__":
