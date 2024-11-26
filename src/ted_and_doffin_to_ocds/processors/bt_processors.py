@@ -1991,10 +1991,6 @@ from ted_and_doffin_to_ocds.converters.bt_746_organization import (
     parse_winner_listed,
     merge_winner_listed,
 )
-from ted_and_doffin_to_ocds.converters.bt_747_lot import (
-    parse_selection_criteria_type,
-    merge_selection_criteria_type,
-)
 
 # from ted_and_doffin_to_ocds.converters.bt_749_lot import parse_selection_criteria_name, merge_selection_criteria_name
 from ted_and_doffin_to_ocds.converters.bt_75_lot import (
@@ -4735,11 +4731,6 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             parse_winner_listed,
             merge_winner_listed,
             "organization Winner Listed (BT-746-organization)",
-        ),
-        (
-            parse_selection_criteria_type,
-            merge_selection_criteria_type,
-            "Lot Selection Criteria Type (BT-747-Lot)",
         ),
         (
             parse_guarantee_required_description,

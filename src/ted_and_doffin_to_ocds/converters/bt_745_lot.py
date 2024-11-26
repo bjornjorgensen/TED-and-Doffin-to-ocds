@@ -40,9 +40,15 @@ def parse_submission_nonelectronic_description(xml_content):
             ".//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='no-esubmission-justification']/cbc:Description/text()",
             namespaces=namespaces,
         )
+        language_id = lot.xpath(
+            ".//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='no-esubmission-justification']/cbc:Description/@languageID",
+            namespaces=namespaces,
+        )
 
         if description:
             lot_data = {"id": lot_id, "submissionMethodDetails": description[0]}
+            if language_id:
+                lot_data["language"] = language_id[0]
             result["tender"]["lots"].append(lot_data)
 
     return result if result["tender"]["lots"] else None

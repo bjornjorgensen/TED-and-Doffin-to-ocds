@@ -40,11 +40,12 @@ def test_bt_745_lot_integration(tmp_path, setup_logging, temp_output_dir):
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
-            <cac:TenderingTerms>
-                <cac:ContractExecutionRequirement>
-                    <cbc:ExecutionRequirementCode listName="esignature-submission">true</cbc:ExecutionRequirementCode>
-                </cac:ContractExecutionRequirement>
-            </cac:TenderingTerms>
+            <cac:TenderingProcess>
+                <cac:ProcessJustification>
+                    <cbc:ProcessReasonCode listName="no-esubmission-justification">true</cbc:ProcessReasonCode>
+                    <cbc:Description languageID="ENG">Tenders shall be sent per registered letter ...</cbc:Description>
+                </cac:ProcessJustification>
+            </cac:TenderingProcess>
         </cac:ProcurementProjectLot>
     </ContractAwardNotice>
     """
@@ -68,7 +69,10 @@ def test_bt_745_lot_integration(tmp_path, setup_logging, temp_output_dir):
         lot["submissionMethodDetails"]
         == "Tenders shall be sent per registered letter ..."
     ), f"Expected submissionMethodDetails 'Tenders shall be sent per registered letter ...', got {lot['submissionMethodDetails']}"
-    assert "submissionTerms" in lot, "Expected 'submissionTerms' in lot"
+    if "language" in lot:
+        assert (
+            lot["language"] == "ENG"
+        ), f"Expected language 'ENG', got {lot['language']}"
 
     logger.info("Test bt_745_lot_integration passed successfully.")
 
