@@ -31,11 +31,52 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_765_part_framework_agreement_integration(
-    tmp_path, setup_logging, temp_output_dir
+@pytest.mark.parametrize(
+    ("framework_code", "expected_result"),
+    [
+        (
+            "fa-wo-rc",
+            {
+                "tender": {
+                    "techniques": {
+                        "hasFrameworkAgreement": True,
+                        "frameworkAgreement": {"method": "withoutReopeningCompetition"},
+                    }
+                }
+            },
+        ),
+        (
+            "fa-w-rc",
+            {
+                "tender": {
+                    "techniques": {
+                        "hasFrameworkAgreement": True,
+                        "frameworkAgreement": {"method": "withReopeningCompetition"},
+                    }
+                }
+            },
+        ),
+        (
+            "fa-mix",
+            {
+                "tender": {
+                    "techniques": {
+                        "hasFrameworkAgreement": True,
+                        "frameworkAgreement": {
+                            "method": "withAndWithoutReopeningCompetition"
+                        },
+                    }
+                }
+            },
+        ),
+        ("none", {"tender": {"techniques": {"hasFrameworkAgreement": False}}}),
+    ],
+)
+def test_bt_765_part_framework_agreement(
+    tmp_path, setup_logging, temp_output_dir, framework_code, expected_result
 ):
     logger = setup_logging
-    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    xml_content = f"""<?xml version="1.0" encoding="UTF-8"?>
 <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
     xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
     xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -43,73 +84,23 @@ def test_bt_765_part_framework_agreement_integration(
         <cbc:ID schemeName="part">PART-0001</cbc:ID>
         <cac:TenderingProcess>
             <cac:ContractingSystem>
-                <cbc:ContractingSystemTypeCode listName="framework-agreement">fa-wo-rc</cbc:ContractingSystemTypeCode>
+                <cbc:ContractingSystemTypeCode listName="framework-agreement">{framework_code}</cbc:ContractingSystemTypeCode>
             </cac:ContractingSystem>
         </cac:TenderingProcess>
     </cac:ProcurementProjectLot>
 </ContractNotice>
 """
-    xml_file = tmp_path / "test_input_part_framework_agreement.xml"
+    xml_file = tmp_path / f"test_input_part_framework_agreement_{framework_code}.xml"
     xml_file.write_text(xml_content)
 
-    # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    logger.info("Result: %s", json.dumps(result, indent=2))
+    logger.info("Result for %s: %s", framework_code, json.dumps(result, indent=2))
 
-    assert "tender" in result, "Expected 'tender' in result"
-    assert "techniques" in result["tender"], "Expected 'techniques' in tender"
-    assert (
-        "hasFrameworkAgreement" in result["tender"]["techniques"]
-    ), "Expected 'hasFrameworkAgreement' in techniques"
-    assert (
-        result["tender"]["techniques"]["hasFrameworkAgreement"] is True
-    ), "Expected 'hasFrameworkAgreement' to be True"
-    assert (
-        "frameworkAgreement" in result["tender"]["techniques"]
-    ), "Expected 'frameworkAgreement' in techniques"
-    assert (
-        "method" in result["tender"]["techniques"]["frameworkAgreement"]
-    ), "Expected 'method' in frameworkAgreement"
-    assert (
-        result["tender"]["techniques"]["frameworkAgreement"]["method"]
-        == "withoutReopeningCompetition"
-    ), "Expected method to be 'withoutReopeningCompetition'"
+    assert "tender" in result
+    assert "techniques" in result["tender"]
 
-
-def test_bt_765_part_framework_agreement_none(tmp_path, setup_logging, temp_output_dir):
-    logger = setup_logging
-    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
-<ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
-    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-    <cac:ProcurementProjectLot>
-        <cbc:ID schemeName="part">PART-0001</cbc:ID>
-        <cac:TenderingProcess>
-            <cac:ContractingSystem>
-                <cbc:ContractingSystemTypeCode listName="framework-agreement">none</cbc:ContractingSystemTypeCode>
-            </cac:ContractingSystem>
-        </cac:TenderingProcess>
-    </cac:ProcurementProjectLot>
-</ContractNotice>
-"""
-    xml_file = tmp_path / "test_input_part_framework_agreement_none.xml"
-    xml_file.write_text(xml_content)
-
-    # Run main and get result
-    result = run_main_and_get_result(xml_file, temp_output_dir)
-    logger.info("Result: %s", json.dumps(result, indent=2))
-
-    assert "tender" in result, "Expected 'tender' in result"
-    assert "techniques" in result["tender"], "Expected 'techniques' in tender"
-    assert (
-        "hasFrameworkAgreement" in result["tender"]["techniques"]
-    ), "Expected 'hasFrameworkAgreement' in techniques"
-    assert (
-        result["tender"]["techniques"]["hasFrameworkAgreement"] is False
-    ), "Expected 'hasFrameworkAgreement' to be False"
-    assert (
-        "frameworkAgreement" not in result["tender"]["techniques"]
-    ), "Did not expect 'frameworkAgreement' in techniques when agreement is 'none'"
+    expected_techniques = expected_result["tender"]["techniques"]
+    assert result["tender"]["techniques"] == expected_techniques
 
 
 if __name__ == "__main__":

@@ -35,17 +35,19 @@ def parse_part_dynamic_purchasing_system(xml_content: str) -> dict | None:
         namespaces=namespaces,
     )
 
-    if dps_usage and dps_usage[0] != "none":
-        mapped_type = type_mapping.get(dps_usage[0])
-        if mapped_type:
-            return {
-                "tender": {
-                    "techniques": {
-                        "hasDynamicPurchasingSystem": True,
-                        "dynamicPurchasingSystem": {"type": mapped_type},
-                    },
+    if not dps_usage or dps_usage[0] == "none":
+        return None
+
+    mapped_type = type_mapping.get(dps_usage[0])
+    if mapped_type:
+        return {
+            "tender": {
+                "techniques": {
+                    "hasDynamicPurchasingSystem": True,
+                    "dynamicPurchasingSystem": {"type": mapped_type},
                 },
-            }
+            },
+        }
 
     return None
 
@@ -68,9 +70,14 @@ def merge_part_dynamic_purchasing_system(
         logger.warning("No part Dynamic Purchasing System data to merge")
         return
 
-    tender = release_json.setdefault("tender", {})
-    techniques = tender.setdefault("techniques", {})
+    if "tender" not in release_json:
+        release_json["tender"] = {}
 
-    techniques.update(part_dynamic_purchasing_system_data["tender"]["techniques"])
+    if part_dynamic_purchasing_system_data["tender"].get("techniques"):
+        if "techniques" not in release_json["tender"]:
+            release_json["tender"]["techniques"] = {}
+        release_json["tender"]["techniques"].update(
+            part_dynamic_purchasing_system_data["tender"]["techniques"]
+        )
 
     logger.info("Merged part Dynamic Purchasing System data")

@@ -30,12 +30,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_766_part_dynamic_purchasing_system_integration(
-    tmp_path, setup_logging, temp_output_dir
-):
-    configure_logging()
-    logger = setup_logging
-
+def test_bt_766_part_dynamic_purchasing_system_open(tmp_path, temp_output_dir):
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -49,38 +44,39 @@ def test_bt_766_part_dynamic_purchasing_system_integration(
         </cac:ProcurementProjectLot>
     </ContractNotice>
     """
-    xml_file = tmp_path / "test_input_part_dynamic_purchasing_system.xml"
+    xml_file = tmp_path / "test_input_dps_open.xml"
     xml_file.write_text(xml_content)
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
 
-    logger.info("Result: %s", json.dumps(result, indent=2))
-
-    assert "tender" in result, "Expected 'tender' in result"
-    assert "techniques" in result["tender"], "Expected 'techniques' in tender"
-    assert (
-        "hasDynamicPurchasingSystem" in result["tender"]["techniques"]
-    ), "Expected 'hasDynamicPurchasingSystem' in techniques"
-    assert (
-        result["tender"]["techniques"]["hasDynamicPurchasingSystem"] is True
-    ), "Expected 'hasDynamicPurchasingSystem' to be True"
-    assert (
-        "dynamicPurchasingSystem" in result["tender"]["techniques"]
-    ), "Expected 'dynamicPurchasingSystem' in techniques"
-    assert (
-        "type" in result["tender"]["techniques"]["dynamicPurchasingSystem"]
-    ), "Expected 'type' in dynamicPurchasingSystem"
-    assert (
-        result["tender"]["techniques"]["dynamicPurchasingSystem"]["type"] == "open"
-    ), "Expected type to be 'open'"
+    assert result["tender"]["techniques"]["hasDynamicPurchasingSystem"] is True
+    assert result["tender"]["techniques"]["dynamicPurchasingSystem"]["type"] == "open"
 
 
-def test_bt_766_part_dynamic_purchasing_system_none(
-    tmp_path, setup_logging, temp_output_dir
-):
-    configure_logging()
-    logger = setup_logging
+def test_bt_766_part_dynamic_purchasing_system_closed(tmp_path, temp_output_dir):
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
+            <cac:TenderingProcess>
+                <cac:ContractingSystem>
+                    <cbc:ContractingSystemTypeCode listName="dps-usage">dps-list</cbc:ContractingSystemTypeCode>
+                </cac:ContractingSystem>
+            </cac:TenderingProcess>
+        </cac:ProcurementProjectLot>
+    </ContractNotice>
+    """
+    xml_file = tmp_path / "test_input_dps_closed.xml"
+    xml_file.write_text(xml_content)
 
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    assert result["tender"]["techniques"]["hasDynamicPurchasingSystem"] is True
+    assert result["tender"]["techniques"]["dynamicPurchasingSystem"]["type"] == "closed"
+
+
+def test_bt_766_part_dynamic_purchasing_system_none(tmp_path, temp_output_dir):
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -94,17 +90,33 @@ def test_bt_766_part_dynamic_purchasing_system_none(
         </cac:ProcurementProjectLot>
     </ContractNotice>
     """
-    xml_file = tmp_path / "test_input_part_dynamic_purchasing_system_none.xml"
+    xml_file = tmp_path / "test_input_dps_none.xml"
     xml_file.write_text(xml_content)
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
 
-    logger.info("Result: %s", json.dumps(result, indent=2))
+    assert "tender" in result
+    assert "techniques" not in result["tender"]
 
-    assert "tender" in result, "Expected 'tender' in result"
-    assert (
-        "techniques" not in result["tender"]
-    ), "Did not expect 'techniques' in tender when DPS usage is 'none'"
+
+def test_bt_766_part_dynamic_purchasing_system_missing(tmp_path, temp_output_dir):
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="part">PART-0001</cbc:ID>
+            <cac:TenderingProcess>
+            </cac:TenderingProcess>
+        </cac:ProcurementProjectLot>
+    </ContractNotice>
+    """
+    xml_file = tmp_path / "test_input_dps_missing.xml"
+    xml_file.write_text(xml_content)
+
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    assert "tender" in result
+    assert "techniques" not in result["tender"]
 
 
 if __name__ == "__main__":

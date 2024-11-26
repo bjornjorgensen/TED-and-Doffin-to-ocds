@@ -6,7 +6,7 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_part_framework_agreement(xml_content: str) -> dict | None:
+def parse_part_framework_agreement(xml_content: str) -> dict:
     """
     Parse the XML content to extract the Framework Agreement details for the part.
 
@@ -14,7 +14,7 @@ def parse_part_framework_agreement(xml_content: str) -> dict | None:
         xml_content (str): The XML content to parse.
 
     Returns:
-        Optional[Dict]: A dictionary containing the parsed data if found, None otherwise.
+        Dict: A dictionary containing the parsed data.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -39,19 +39,19 @@ def parse_part_framework_agreement(xml_content: str) -> dict | None:
         namespaces=namespaces,
     )
 
-    if framework_agreement and framework_agreement[0] != "none":
-        mapped_method = method_mapping.get(framework_agreement[0])
-        if mapped_method:
-            return {
-                "tender": {
-                    "techniques": {
-                        "hasFrameworkAgreement": True,
-                        "frameworkAgreement": {"method": mapped_method},
-                    },
-                },
-            }
+    result = {"tender": {"techniques": {"hasFrameworkAgreement": False}}}
 
-    return None
+    if framework_agreement:
+        code = framework_agreement[0]
+        if code != "none":
+            mapped_method = method_mapping.get(code)
+            if mapped_method:
+                result["tender"]["techniques"]["hasFrameworkAgreement"] = True
+                result["tender"]["techniques"]["frameworkAgreement"] = {
+                    "method": mapped_method
+                }
+
+    return result
 
 
 def merge_part_framework_agreement(

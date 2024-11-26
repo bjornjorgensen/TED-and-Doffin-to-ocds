@@ -41,28 +41,23 @@ def test_bt_7531_lot_integration(tmp_path, setup_logging, temp_output_dir):
                           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
                           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
                           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionContent>
-                    <efext:EformsExtension>
-                        <efac:SelectionCriteria>
-                            <cbc:CalculationExpressionCode listName="usage">used</cbc:CalculationExpressionCode>
-                            <efac:CriterionParameter>
-                                <efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode>
-                            </efac:CriterionParameter>
-                            <cbc:Name>Minimum Weight</cbc:Name>
-                            <cbc:Description languageID="ENG">Weight over contract value rate</cbc:Description>
-                        </efac:SelectionCriteria>
-                    </efext:EformsExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
-                <cac:ContractExecutionRequirement>
-                    <cbc:ExecutionRequirementCode listName="esignature-submission">true</cbc:ExecutionRequirementCode>
-                </cac:ContractExecutionRequirement>
+                <ext:UBLExtensions>
+                    <ext:UBLExtension>
+                        <ext:ExtensionContent>
+                            <efext:EformsExtension>
+                                <efac:SelectionCriteria>
+                                    <cbc:CalculationExpressionCode listName="usage">used</cbc:CalculationExpressionCode>
+                                    <efac:CriterionParameter>
+                                        <efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode>
+                                    </efac:CriterionParameter>
+                                </efac:SelectionCriteria>
+                            </efext:EformsExtension>
+                        </ext:ExtensionContent>
+                    </ext:UBLExtension>
+                </ext:UBLExtensions>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
     </ContractAwardNotice>
@@ -100,6 +95,92 @@ def test_bt_7531_lot_integration(tmp_path, setup_logging, temp_output_dir):
     ), f"Expected weight 'percentageExact', got {criterion['numbers'][0]['weight']}"
 
     logger.info("Test bt_7531_lot_integration passed successfully.")
+
+
+def test_bt_7531_lot_unused_criteria(tmp_path, temp_output_dir):
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+                          xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+                          xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+                          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+                          xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+            <cac:TenderingTerms>
+                <ext:UBLExtensions>
+                    <ext:UBLExtension>
+                        <ext:ExtensionContent>
+                            <efext:EformsExtension>
+                                <efac:SelectionCriteria>
+                                    <cbc:CalculationExpressionCode listName="usage">unused</cbc:CalculationExpressionCode>
+                                    <efac:CriterionParameter>
+                                        <efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode>
+                                    </efac:CriterionParameter>
+                                </efac:SelectionCriteria>
+                            </efext:EformsExtension>
+                        </ext:ExtensionContent>
+                    </ext:UBLExtension>
+                </ext:UBLExtensions>
+            </cac:TenderingTerms>
+        </cac:ProcurementProjectLot>
+    </ContractAwardNotice>
+    """
+    xml_file = tmp_path / "test_input_unused_criteria.xml"
+    xml_file.write_text(xml_content)
+
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    # Check that no lots have selection criteria when criteria are unused
+    if "tender" in result and "lots" in result["tender"]:
+        for lot in result["tender"]["lots"]:
+            assert (
+                "selectionCriteria" not in lot
+            ), "Expected no selection criteria for unused criteria"
+
+
+def test_bt_7531_lot_multiple_parameters(tmp_path, temp_output_dir):
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+                          xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+                          xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+                          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+                          xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+            <cac:TenderingTerms>
+                <ext:UBLExtensions>
+                    <ext:UBLExtension>
+                        <ext:ExtensionContent>
+                            <efext:EformsExtension>
+                                <efac:SelectionCriteria>
+                                    <cbc:CalculationExpressionCode listName="usage">used</cbc:CalculationExpressionCode>
+                                    <efac:CriterionParameter>
+                                        <efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode>
+                                    </efac:CriterionParameter>
+                                    <efac:CriterionParameter>
+                                        <efbc:ParameterCode listName="number-weight">dec-exa</efbc:ParameterCode>
+                                    </efac:CriterionParameter>
+                                </efac:SelectionCriteria>
+                            </efext:EformsExtension>
+                        </ext:ExtensionContent>
+                    </ext:UBLExtension>
+                </ext:UBLExtensions>
+            </cac:TenderingTerms>
+        </cac:ProcurementProjectLot>
+    </ContractAwardNotice>
+    """
+    xml_file = tmp_path / "test_input_multiple_parameters.xml"
+    xml_file.write_text(xml_content)
+
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    lot = result["tender"]["lots"][0]
+    criteria = lot["selectionCriteria"]["criteria"]
+    assert len(criteria) == 2, "Expected 2 criteria"
+    weights = {c["numbers"][0]["weight"] for c in criteria}
+    assert weights == {"percentageExact", "decimalExact"}, "Expected both weight types"
 
 
 if __name__ == "__main__":

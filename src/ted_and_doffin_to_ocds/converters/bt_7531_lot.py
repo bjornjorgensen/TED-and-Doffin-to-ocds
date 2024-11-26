@@ -46,8 +46,9 @@ def parse_selection_criteria_number_weight(xml_content):
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        # Use exact path as specified in requirements
         selection_criteria = lot.xpath(
-            ".//efac:SelectionCriteria",
+            "cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria",
             namespaces=namespaces,
         )
 
@@ -95,33 +96,35 @@ def merge_selection_criteria_number_weight(release_json, number_weight_data):
         None: The function updates the release_json in-place.
     """
     if not number_weight_data:
-        logger.warning("No selection criteria number weight data to merge")
+        # If there's no valid criteria data, make sure no selection criteria exist
+        if "tender" in release_json and "lots" in release_json["tender"]:
+            for lot in release_json["tender"]["lots"]:
+                # Remove any selection criteria from lots when criteria are unused
+                lot.pop("selectionCriteria", None)
         return
 
     tender = release_json.setdefault("tender", {})
     existing_lots = tender.setdefault("lots", [])
 
+    # Create a set of lot IDs that have valid selection criteria
+    valid_lot_ids = {lot["id"] for lot in number_weight_data["tender"]["lots"]}
+
+    # Only merge selection criteria for lots that have valid criteria
     for new_lot in number_weight_data["tender"]["lots"]:
         existing_lot = next(
             (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
             None,
         )
         if existing_lot:
-            existing_criteria = existing_lot.setdefault(
-                "selectionCriteria",
-                {},
-            ).setdefault("criteria", [])
-            for new_criterion in new_lot["selectionCriteria"]["criteria"]:
-                existing_criterion = next(
-                    (c for c in existing_criteria if "numbers" not in c),
-                    None,
-                )
-                if existing_criterion:
-                    existing_criterion["numbers"] = new_criterion["numbers"]
-                else:
-                    existing_criteria.append(new_criterion)
+            # Update selection criteria for lots with valid criteria
+            existing_lot["selectionCriteria"] = new_lot["selectionCriteria"]
         else:
             existing_lots.append(new_lot)
+
+    # Remove selection criteria from lots that don't have valid criteria
+    for lot in existing_lots:
+        if lot["id"] not in valid_lot_ids:
+            lot.pop("selectionCriteria", None)
 
     logger.info(
         "Merged selection criteria number weight data for %d lots",
