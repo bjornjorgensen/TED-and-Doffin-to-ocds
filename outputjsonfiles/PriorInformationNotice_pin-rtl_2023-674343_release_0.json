@@ -1,7 +1,7 @@
 {
   "id": "2023-674343",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8f4a85fc-6558-4575-a9b4-b40e16bffd32",
+  "ocid": "ocds-abcd1234-893d1fb8-c3a8-4f17-bf1d-b040bf3a7d9d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -52,14 +52,7 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "type": "suitability",
               "description": "Det vises til vedlagte konkurransegrunnlag."
-            },
-            {
-              "type": "economic"
-            },
-            {
-              "type": "technical"
             }
           ]
         },
@@ -98,7 +91,10 @@
       "amount": 9700000.0,
       "currency": "NOK"
     },
-    "deliveryAddresses": []
+    "deliveryAddresses": [],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"
@@ -130,9 +126,9 @@
         "email": "riik@kongsvinger.kommune.no"
       },
       "roles": [
-        "buyer",
         "leadBuyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "KONGSVINGER"

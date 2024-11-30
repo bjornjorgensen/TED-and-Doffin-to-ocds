@@ -1,7 +1,7 @@
 {
   "id": "2022-671004",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2a2d11cf-fd41-4993-a8f7-4cd0a9a23d01",
+  "ocid": "ocds-abcd1234-529aa55e-2d30-4ae1-ab39-fe74d27b04d8",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -54,7 +54,10 @@
           "id": "92511000"
         }
       }
-    ]
+    ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "award",

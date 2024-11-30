@@ -1,7 +1,7 @@
 {
   "id": "2023-664435",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0fbe83ea-b073-4cef-b072-68a7bc88d1d0",
+  "ocid": "ocds-abcd1234-78991016-824d-4de3-bdb2-b3c51a314ef3",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -35,7 +35,6 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "type": "other",
               "description": "Se vedlegg."
             }
           ]
@@ -101,7 +100,10 @@
       {
         "streetAddress": "Tromsø og Harstad"
       }
-    ]
+    ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"
@@ -134,8 +136,8 @@
         "email": "post@sykehusinnkjop.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "VADSØ"

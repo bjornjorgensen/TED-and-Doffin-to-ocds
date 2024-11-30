@@ -1,7 +1,7 @@
 {
   "id": "2022-963627",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-25574119-658e-496e-8dea-02d1c5dff36b",
+  "ocid": "ocds-abcd1234-464475f6-a848-4bb8-aac2-39ed3e6cf1b7",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -20,7 +20,10 @@
           "id": "73220000"
         }
       }
-    ]
+    ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"

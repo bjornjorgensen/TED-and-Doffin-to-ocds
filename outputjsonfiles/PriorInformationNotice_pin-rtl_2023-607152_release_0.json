@@ -1,7 +1,7 @@
 {
   "id": "2023-607152",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-344fb379-dde7-4c77-a2bc-d715e7c74501",
+  "ocid": "ocds-abcd1234-1fcccec8-2020-4bf3-b893-98b6e341451f",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -115,7 +115,10 @@
         ]
       }
     ],
-    "deliveryAddresses": []
+    "deliveryAddresses": [],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"
@@ -148,8 +151,8 @@
         ]
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "TRONDHEIM"

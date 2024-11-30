@@ -1,7 +1,7 @@
 {
   "id": "65667997-031a-4198-bd25-7225449ef479",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3b95084a-b0e2-430b-8ea6-e3cb291f19da",
+  "ocid": "ocds-abcd1234-a5412132-a6e2-42d5-ac38-b83520c87fa6",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -54,7 +54,10 @@
         },
         "relatedLot": "LOT-0000"
       }
-    ]
+    ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "award",

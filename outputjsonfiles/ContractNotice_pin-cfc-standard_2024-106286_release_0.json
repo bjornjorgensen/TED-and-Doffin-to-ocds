@@ -1,7 +1,7 @@
 {
   "id": "74f9d169-452b-4a99-b8d2-f54c3c71e163",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-24ff4a47-b8b6-435e-8aa0-46d842f33789",
+  "ocid": "ocds-abcd1234-f57d5a8f-6af6-41f6-9559-a3d4f312e418",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -112,7 +112,10 @@
       {
         "country": "NO"
       }
-    ]
+    ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"
@@ -145,8 +148,8 @@
         "email": "truls.eirik.moan@bodo.kommune.no"
       },
       "roles": [
-        "buyer",
         "processContactPoint",
+        "buyer",
         "reviewContactPoint"
       ],
       "address": {

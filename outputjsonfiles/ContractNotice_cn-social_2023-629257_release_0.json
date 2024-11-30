@@ -1,7 +1,7 @@
 {
   "id": "2023-629257",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-bddd28aa-e7b4-48d1-990c-05c00096f41c",
+  "ocid": "ocds-abcd1234-1181cffe-c79d-4848-a8e7-58b45fe86d8d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -34,7 +34,6 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "type": "other",
               "description": "2.1 Skatt og merverdiavgift Det skal leveres leverer attest for skatt og merverdiavgift fra skattemyndighetene som ikke er eldre enn 6 måneder regnet fra tilbudsfristens utløp. Kravet gjelder kun norske leverandører og skal dokumentere ordnede forhold med hensyn til betaling av skatt og merverdiavgift 2.2 Leverandørens organisatoriske og juridiske stilling Krav Dokumentasjonskrav Det kreves at Leverandøren er et lovlig etablert foretak. Norske leverandører: Firmaattest fra Brønnøysundregisteret. Utenlandske leverandører: Attest for registrering i foretaksregister som foreskrevet i lovgivningen i den stat hvor leverandøren er etablert. 2.3 Leverandørens finansielle og økonomiske kapasitet Krav Dokumentasjonskrav Det kreves at leverandøren har tilstrekkelig økonomisk kapasitet til å gjennomføre kontrakten. Kredittvurdering fra offentlig godkjent kredittvurderingsinstitusjon. Vurderingen skal baseres på sist kjente regnskapstall med en angivelse om hvordan kredittvurderingen ha"
             }
           ]
@@ -71,7 +70,6 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "type": "other",
               "description": "2.1 Skatt og merverdiavgift Det skal leveres leverer attest for skatt og merverdiavgift fra skattemyndighetene som ikke er eldre enn 6 måneder regnet fra tilbudsfristens utløp. Kravet gjelder kun norske leverandører og skal dokumentere ordnede forhold med hensyn til betaling av skatt og merverdiavgift 2.2 Leverandørens organisatoriske og juridiske stilling Krav Dokumentasjonskrav Det kreves at Leverandøren er et lovlig etablert foretak. Norske leverandører: Firmaattest fra Brønnøysundregisteret. Utenlandske leverandører: Attest for registrering i foretaksregister som foreskrevet i lovgivningen i den stat hvor leverandøren er etablert. 2.3 Leverandørens finansielle og økonomiske kapasitet Krav Dokumentasjonskrav Det kreves at leverandøren har tilstrekkelig økonomisk kapasitet til å gjennomføre kontrakten. Kredittvurdering fra offentlig godkjent kredittvurderingsinstitusjon. Vurderingen skal baseres på sist kjente regnskapstall med en angivelse om hvordan kredittvurderingen ha"
             }
           ]
@@ -162,7 +160,10 @@
     "lotDetails": {
       "maximumLotsBidPerSupplier": 2
     },
-    "deliveryAddresses": []
+    "deliveryAddresses": [],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"
@@ -194,8 +195,8 @@
         "email": "nav.tiltak.rogaland@nav.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Stravanger"

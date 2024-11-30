@@ -1,7 +1,7 @@
 {
   "id": "03223b9a-002c-45e8-be6b-9d4aad21950e",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a4e0b90d-48f5-47ee-a1f4-c5a181e917c1",
+  "ocid": "ocds-abcd1234-c54a18f1-929b-44e0-ac58-ddf239a5a401",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -93,7 +93,10 @@
       {
         "country": "NO"
       }
-    ]
+    ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"
@@ -126,8 +129,8 @@
         "email": "post@sykehusinnkjop.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "VADSÃ˜"

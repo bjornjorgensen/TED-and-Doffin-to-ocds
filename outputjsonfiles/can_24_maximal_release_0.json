@@ -1,0 +1,1007 @@
+{
+  "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-de069ed9-bb84-4f01-84ac-98953b4bc021",
+  "tender": {
+    "legalBasis": {
+      "scheme": "CELEX",
+      "id": "32014L0024"
+    },
+    "status": "complete",
+    "id": "2d2d24a2-df84-449e-8695-fb66ef504a5a",
+    "lots": [
+      {
+        "id": "LOT-0001",
+        "hasSustainability": true,
+        "sustainability": [
+          {
+            "goal": "environmental.climateChangeMitigation"
+          },
+          {
+            "goal": "social.accessibility",
+            "strategies": [
+              "awardCriteria",
+              "contractPerformanceConditions",
+              "selectionCriteria",
+              "technicalSpecifications"
+            ]
+          },
+          {
+            "goal": "economic.processInnovation"
+          },
+          {
+            "description": "Strategic procurement description ---"
+          }
+        ],
+        "techniques": {
+          "hasDynamicPurchasingSystem": true,
+          "dynamicPurchasingSystem": {
+            "type": "closed"
+          },
+          "hasElectronicAuction": true
+        },
+        "coveredBy": [
+          "GPA",
+          "EU-CVD"
+        ],
+        "title": "Title ---",
+        "identifiers": {
+          "id": "Lot Reference A",
+          "scheme": "internal"
+        },
+        "mainProcurementCategory": "services",
+        "description": "Description --- Additional information for GLO-0001 ProcurementProject ---",
+        "value": {
+          "amount": 9999999.99,
+          "currency": "EUR"
+        },
+        "additionalProcurementCategories": [
+          "works"
+        ],
+        "contractPeriod": {
+          "startDate": "2023-01-01T00:00:00+01:00",
+          "endDate": "2023-05-23T23:59:59+01:00"
+        },
+        "awardCriteria": {
+          "criteria": [
+            {
+              "type": "cost",
+              "numbers": [
+                {
+                  "weight": "percentageExact"
+                }
+              ]
+            },
+            {
+              "type": "quality"
+            },
+            {
+              "description": "AC Description ---"
+            },
+            {
+              "name": "Name of AC ---"
+            },
+            {
+              "name": "name of AC ---"
+            }
+          ]
+        },
+        "options": {
+          "description": "Options description ---"
+        },
+        "renewal": {
+          "description": "Renewal description ---",
+          "maximumRenewals": 3
+        },
+        "additionalClassifications": [
+          {
+            "id": "oth-serv-contr",
+            "scheme": "eu-cvd-contract-type",
+            "description": "Other service contract"
+          }
+        ],
+        "hasAccessibilityCriteria": false,
+        "noAccessibilityCriteriaRationale": "Accessibility Justification ---",
+        "reviewDetails": "Review Deadline Description ---"
+      },
+      {
+        "id": "LOT-0002",
+        "techniques": {
+          "hasElectronicAuction": true
+        },
+        "hasSustainability": true,
+        "sustainability": [
+          {
+            "goal": "environmental.climateChangeMitigation"
+          },
+          {
+            "goal": "social.accessibility",
+            "strategies": [
+              "awardCriteria",
+              "contractPerformanceConditions",
+              "selectionCriteria",
+              "technicalSpecifications"
+            ]
+          },
+          {
+            "goal": "economic.processInnovation"
+          },
+          {
+            "description": "Strategic procurement description lot 2 ---"
+          }
+        ],
+        "reviewDetails": "Review Deadline Description ---"
+      }
+    ],
+    "crossBorderLaw": "Cross border law description ---",
+    "procurementMethod": "selective",
+    "procurementMethodDetails": "Description of the procedure  ---",
+    "procedure": {
+      "isAccelerated": true,
+      "acceleratedRationale": "Procedure Accelerated Justification ---"
+    },
+    "lotGroups": [
+      {
+        "id": "GLO-0001",
+        "relatedLots": [
+          "LOT-0002",
+          "LOT-0001"
+        ],
+        "title": "Title ---",
+        "description": "Description --- Additional information for GLO-0001 ProcurementProject ---",
+        "maximumValue": {
+          "amount": 9999999.99,
+          "currency": "EUR"
+        },
+        "awardCriteria": {
+          "criteria": [
+            {
+              "type": "cost",
+              "numbers": [
+                {
+                  "weight": "percentageExact"
+                }
+              ]
+            },
+            {
+              "type": "quality"
+            },
+            {
+              "description": "AC Description ---"
+            },
+            {
+              "name": "name of AC ---"
+            }
+          ]
+        }
+      }
+    ],
+    "title": "Procurement Title ---",
+    "mainProcurementCategory": "services",
+    "description": "Description ---",
+    "items": [
+      {
+        "id": "1",
+        "quantity": 1000.0,
+        "relatedLot": "LOT-0001",
+        "unit": {
+          "id": "HUR",
+          "scheme": "EU Measurement unit",
+          "name": "hour"
+        },
+        "additionalClassifications": [
+          {
+            "scheme": "CPV"
+          },
+          {
+            "id": "79720000"
+          }
+        ],
+        "classification": {
+          "scheme": "CPV",
+          "id": "79710000"
+        },
+        "deliveryAddresses": [
+          {
+            "region": "LU000",
+            "streetAddress": "Bruce Wayne House, 2 Gotham Street",
+            "locality": "London"
+          },
+          {
+            "postalCode": "1234"
+          },
+          {
+            "country": "LU"
+          },
+          {
+            "country": "GB"
+          }
+        ],
+        "deliveryLocations": [
+          {
+            "description": "Anywhere in the given country"
+          },
+          {
+            "description": "The main location is ..."
+          },
+          {
+            "description": "Additional information ---"
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "quantity": 1000.0,
+        "relatedLot": "LOT-0002",
+        "unit": {
+          "id": "HUR",
+          "scheme": "EU Measurement unit",
+          "name": "hour"
+        },
+        "classification": {
+          "scheme": "CPV",
+          "id": "75121000"
+        },
+        "deliveryAddresses": [
+          {
+            "region": "LU000",
+            "streetAddress": "Bruce Wayne House, 2 Gotham Street",
+            "locality": "London"
+          },
+          {
+            "postalCode": "1234"
+          },
+          {
+            "country": "LU"
+          },
+          {
+            "country": "GB"
+          }
+        ],
+        "deliveryLocations": [
+          {
+            "description": "Anywhere in the given country"
+          },
+          {
+            "description": "The main location of lot 2 is ..."
+          },
+          {
+            "description": "Additional information ---"
+          }
+        ]
+      }
+    ],
+    "value": {
+      "amount": 9999999.99,
+      "currency": "EUR"
+    },
+    "deliveryAddresses": [
+      {
+        "region": "LU000"
+      },
+      {
+        "streetAddress": "Bruce Wayne House, 2 Gotham Street"
+      },
+      {
+        "postalCode": "1234"
+      },
+      {
+        "locality": "Luxembourg"
+      },
+      {
+        "locality": "London"
+      },
+      {
+        "country": "LU"
+      },
+      {
+        "country": "GB"
+      },
+      {
+        "description": "The main location is ..."
+      },
+      {
+        "description": "Additional information ---"
+      }
+    ],
+    "additionalProcurementCategories": [
+      "works"
+    ],
+    "deliveryLocations": [
+      {
+        "description": "Anywhere in the European Economic Area"
+      },
+      {
+        "description": "Anywhere in the given country"
+      }
+    ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    },
+    "documents": [
+      {
+        "id": "FiscalDocID1",
+        "documentType": "legislation",
+        "relatedLots": [
+          "LOT-0002",
+          "LOT-0001"
+        ],
+        "publisher": {
+          "id": "ORG-0002"
+        }
+      },
+      {
+        "id": "EnvDocID1",
+        "documentType": "legislation",
+        "relatedLots": [
+          "LOT-0002",
+          "LOT-0001"
+        ],
+        "publisher": {
+          "id": "ORG-0003"
+        }
+      },
+      {
+        "id": "EmplDocID1",
+        "documentType": "legislation",
+        "relatedLots": [
+          "LOT-0002",
+          "LOT-0001"
+        ],
+        "publisher": {
+          "id": "ORG-0004"
+        }
+      }
+    ]
+  },
+  "tag": [
+    "award",
+    "contract"
+  ],
+  "date": "2023-04-23T20:59:32+01:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "04",
+            "description": "Economic affairs"
+          }
+        ],
+        "url": "https://www.fin-adm.com",
+        "buyerProfile": "https://profile.example.com"
+      },
+      "name": "Financial Adinistration for ... - Finance Division",
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "locality": "Bruxelles"
+          }
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "998298",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Info desk",
+        "telephone": "+44 123456780",
+        "email": "info@fin-adm.com"
+      },
+      "roles": [
+        "buyer"
+      ],
+      "address": {
+        "locality": "Luxembourg"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "TaxInfo Department",
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "locality": "Bruxelles"
+          }
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "12345",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Info desk",
+        "telephone": "+44 123456780",
+        "email": "info@example.com"
+      },
+      "details": {
+        "url": "https://www.fin-leg.com"
+      },
+      "address": {
+        "locality": "Luxembourg"
+      },
+      "roles": [
+        "informationService"
+      ]
+    },
+    {
+      "id": "ORG-0003",
+      "name": "EnvironmentalInfo Dpt - Environment Information department",
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "locality": "Bruxelles"
+          }
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "7812345",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Info desk",
+        "telephone": "+44 123456780",
+        "email": "info@env-dpt.com"
+      },
+      "details": {
+        "url": "https://www.env-dpt.com"
+      },
+      "address": {
+        "locality": "Luxembourg"
+      },
+      "roles": [
+        "informationService"
+      ]
+    },
+    {
+      "id": "ORG-0004",
+      "name": "EmploymentInfo Division - ABC Unit",
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "locality": "Bruxelles"
+          }
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "99283",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Info desk",
+        "telephone": "+44 123456780",
+        "email": "info@example.com"
+      },
+      "details": {
+        "url": "https://www.employment-legis.com"
+      },
+      "address": {
+        "locality": "Luxembourg"
+      },
+      "roles": [
+        "informationService"
+      ]
+    },
+    {
+      "id": "ORG-0005",
+      "name": "Pub Proc Appeal Adm - Reviews and Complains",
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "locality": "Bruxelles"
+          }
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "0986543",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "A and R Department",
+        "telephone": "+44 899375",
+        "email": "info@appeal-adm-proc.com"
+      },
+      "details": {
+        "url": "https://www.appeal-adm-proc.com"
+      },
+      "address": {
+        "locality": "Luxembourg"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    },
+    {
+      "id": "ORG-0006",
+      "name": "The Public Mediator - Public Procurement",
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "locality": "Bruxelles"
+          }
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "09812345",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Info desk",
+        "telephone": "+44 123456345678",
+        "email": "info@pub-mediator.com"
+      },
+      "details": {
+        "url": "https://www.pub-mediator.com"
+      },
+      "address": {
+        "locality": "Luxembourg"
+      },
+      "roles": [
+        "mediationBody"
+      ]
+    },
+    {
+      "id": "ORG-0007",
+      "name": "eSendCorp",
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "locality": "Bruxelles"
+          }
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "111 222 333",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "+352 123456789",
+        "email": "esender@esendcorp.lu"
+      },
+      "details": {
+        "url": "https://esendercorp.eu"
+      },
+      "address": {
+        "locality": "Luxembourg"
+      },
+      "roles": [
+        "eSender"
+      ]
+    },
+    {
+      "id": "ORG-0008",
+      "name": "Gyro Soft SA - Contrats",
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "locality": "Bruxelles"
+          }
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "927384203",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Service Presse and Communication",
+        "telephone": "+352 123456780",
+        "email": "info@gyro-soft.com"
+      },
+      "details": {
+        "url": "https://www.gyro-soft.com"
+      },
+      "address": {
+        "locality": "Luxembourg"
+      },
+      "roles": [
+        "tenderer",
+        "leadTenderer"
+      ]
+    },
+    {
+      "id": "ORG-0009",
+      "name": "The best App Ltd. - Innovation division",
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "locality": "Bruxelles"
+          }
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "928374653",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Contact",
+        "telephone": "+49 123456780",
+        "email": "info@the-best-app.com"
+      },
+      "details": {
+        "url": "https://www.the-best-app.com"
+      },
+      "address": {
+        "locality": "Frankfurt"
+      },
+      "roles": [
+        "tenderer"
+      ]
+    },
+    {
+      "id": "ORG-0010",
+      "name": "Ayuda - tech Dpt",
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "locality": "Bruxelles"
+          }
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "34578345",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Info",
+        "telephone": "+34 123456780",
+        "email": "info@ayuda.com"
+      },
+      "details": {
+        "url": "https://www.ayuda.com"
+      },
+      "address": {
+        "locality": "El pueblo"
+      },
+      "roles": [
+        "subcontractor"
+      ]
+    },
+    {
+      "id": "ORG-0011",
+      "name": "Competitor - Offres et contrats",
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "locality": "Bruxelles"
+          }
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "1223456789",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Contact",
+        "telephone": "+33 123456780",
+        "email": "info@competitor.com"
+      },
+      "details": {
+        "url": "https://www.competitor.com"
+      },
+      "address": {
+        "locality": "Paris"
+      },
+      "roles": [
+        "tenderer"
+      ]
+    },
+    {
+      "id": "TPO-0001",
+      "name": "Procurement Department",
+      "identifier": {
+        "id": "998298",
+        "scheme": "internal"
+      },
+      "contactPoint": {
+        "name": "Head of Procurement Department",
+        "telephone": "+123 45678",
+        "email": "proc-info@fin-adm.com"
+      },
+      "details": {
+        "url": "https://www.fin-adm.com"
+      },
+      "address": {
+        "locality": "Luxembourg"
+      },
+      "roles": [
+        "processContactPoint",
+        "reviewContactPoint"
+      ]
+    },
+    {
+      "id": "TPO-0002",
+      "roles": [
+        "processContactPoint"
+      ]
+    }
+  ],
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0002",
+        "relatedLots": [
+          "LOT-0001"
+        ],
+        "value": {
+          "amount": 9999999.99,
+          "currency": "EUR"
+        },
+        "hasSubcontracting": true,
+        "tenderers": [
+          {
+            "id": "ORG-0011"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0003",
+        "relatedLots": [
+          "LOT-0002"
+        ],
+        "hasSubcontracting": true,
+        "tenderers": [
+          {
+            "id": "ORG-0011"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0001",
+        "hasSubcontracting": true,
+        "subcontracting": {
+          "subcontracts": [
+            {
+              "id": "1",
+              "subcontractor": {
+                "id": "ORG-0010"
+              },
+              "mainContractors": [
+                {
+                  "id": "ORG-0008"
+                }
+              ]
+            }
+          ]
+        },
+        "tenderers": [
+          {
+            "id": "ORG-0008"
+          },
+          {
+            "id": "ORG-0009"
+          }
+        ]
+      }
+    ]
+  },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2023-03-24T23:59:59+02:00",
+      "awardID": "RES-0001",
+      "relatedProcesses": [
+        {
+          "id": "1",
+          "scheme": "ojs-notice-id",
+          "identifier": "12345678-2023",
+          "relationship": [
+            "framework"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CON-0002",
+      "dateSigned": "2023-03-24T23:59:59+02:00",
+      "relatedProcesses": [
+        {
+          "id": "1",
+          "scheme": "ojs-notice-id",
+          "identifier": "12345678-2023",
+          "relationship": [
+            "framework"
+          ]
+        }
+      ],
+      "awardID": "RES-0001"
+    }
+  ],
+  "description": "Additional information --- Additional information for GLO-0001 ProcurementProject --- Additional information for GLO-0001 ProcurementProject --- Additional information for lot 2 ProcurementProject ---",
+  "awards": [
+    {
+      "id": "RES-0001",
+      "value": {
+        "amount": 9999999.99,
+        "currency": "EUR"
+      },
+      "relatedLots": [
+        "LOT-0001"
+      ],
+      "items": [
+        {
+          "id": "1",
+          "additionalClassifications": [
+            {
+              "id": "oth-serv-contr",
+              "scheme": "eu-cvd-contract-type",
+              "description": "Other service contract"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CON-0001",
+      "buyers": [
+        {
+          "id": "ORG-0001"
+        }
+      ]
+    },
+    {
+      "id": "CON-0002",
+      "buyers": [
+        {
+          "id": "ORG-0001"
+        }
+      ],
+      "relatedBids": [
+        "TEN-0001",
+        "TEN-0002",
+        "TEN-0003"
+      ]
+    },
+    {
+      "id": "RES-0002"
+    }
+  ],
+  "statistics": [
+    {
+      "id": "1",
+      "value": 3,
+      "scope": "complaints",
+      "relatedLot": "LOT-0001",
+      "measure": "noex-timl",
+      "notes": "Failure to extend time limits for receipt of tenders or requests to participate where significant changes are made to the procurement documents"
+    },
+    {
+      "id": "2",
+      "value": 3,
+      "scope": "complaints",
+      "relatedLot": "LOT-0002",
+      "measure": "noex-timl",
+      "notes": "Failure to extend time limits for receipt of tenders or requests to participate where significant changes are made to the procurement documents"
+    },
+    {
+      "id": "1",
+      "measure": "complainants",
+      "relatedLot": "LOT-0001",
+      "value": 3,
+      "scope": "complaints"
+    },
+    {
+      "id": "2",
+      "measure": "complainants",
+      "relatedLot": "LOT-0002",
+      "value": 3,
+      "scope": "complaints"
+    }
+  ],
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ]
+}

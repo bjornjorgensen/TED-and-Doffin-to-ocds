@@ -1,7 +1,7 @@
 {
   "id": "2023-624725",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-81765f1c-c3c1-4b5a-914b-33759f845a19",
+  "ocid": "ocds-abcd1234-80f45ac5-311b-4b6c-b259-c602eea411bc",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -40,7 +40,6 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "type": "other",
               "description": "Se konsesjonsgrunnlaget"
             }
           ]
@@ -104,7 +103,10 @@
       {
         "streetAddress": "Bjørnafjorden kommune"
       }
-    ]
+    ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"
@@ -138,8 +140,8 @@
         "locality": "Eikelandsosen"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

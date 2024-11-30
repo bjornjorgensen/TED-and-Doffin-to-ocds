@@ -1,7 +1,7 @@
 {
   "id": "2022-967371",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-283aa8bd-f73e-412d-9f3a-c37082367c26",
+  "ocid": "ocds-abcd1234-26cab702-887e-4428-befd-a56b528426de",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -31,7 +31,6 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "type": "other",
               "description": "Leverandøren skal vere eit lovleg etablert føretak."
             }
           ]
@@ -59,7 +58,6 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "type": "other",
               "description": "Leverandøren skal vere eit lovleg etablert føretak."
             }
           ]
@@ -132,7 +130,10 @@
     "lotDetails": {
       "maximumLotsBidPerSupplier": 2
     },
-    "deliveryAddresses": []
+    "deliveryAddresses": [],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"
@@ -166,8 +167,8 @@
         "locality": "BERGEN"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

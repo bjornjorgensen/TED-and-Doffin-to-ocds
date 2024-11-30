@@ -1,7 +1,7 @@
 {
   "id": "2023-649037",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-543dda4b-c648-453d-9fa1-2d8f65d7d48f",
+  "ocid": "ocds-abcd1234-6af10616-3125-4109-9705-93dba7dfc65c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -75,14 +75,7 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "type": "suitability",
               "description": "Tilbyder skal vedlegge en liste over de viktigste leveransene de siste 3 år, herunder opplysninger om verdi, tidspunkt og mottaker. Attester utstedt eller bekreftet av oppdragsgiver kan vedlegges. Tilbyders erfaring: Vedlegg 5- Svarskjema referanser, utfylt av Tilbyder"
-            },
-            {
-              "type": "economic"
-            },
-            {
-              "type": "technical"
             }
           ]
         },
@@ -142,7 +135,10 @@
     "lotDetails": {
       "maximumLotsBidPerSupplier": 1
     },
-    "deliveryAddresses": []
+    "deliveryAddresses": [],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"
@@ -175,8 +171,8 @@
         "email": "post@sykehusinnkjop.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "VADSØ"

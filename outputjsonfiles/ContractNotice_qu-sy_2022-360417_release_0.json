@@ -1,7 +1,7 @@
 {
   "id": "2022-360417",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-456d4ee0-1892-4b59-a2ab-6ffd5c454c01",
+  "ocid": "ocds-abcd1234-07e398d7-0ece-4693-84bd-f5ee493a9929",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -37,7 +37,6 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "type": "other",
               "description": "Please find more information about the qualification requirements and required documentation here https://www.achilles.com/community/transq-nordics/"
             }
           ]
@@ -201,7 +200,10 @@
         ]
       }
     ],
-    "deliveryAddresses": []
+    "deliveryAddresses": [],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"
@@ -233,9 +235,9 @@
         ]
       },
       "roles": [
-        "buyer",
         "submissionReceiptBody",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Arendal"

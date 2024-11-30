@@ -1,7 +1,7 @@
 {
   "id": "2022-976327",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-821ed73d-3aba-4dbd-ae2e-05745a5c6c96",
+  "ocid": "ocds-abcd1234-bd201005-f4c8-4f27-90d2-c3549b173342",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -37,14 +37,7 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "type": "suitability",
               "description": "Det henvises til vedlagte konkurransegrunnlag."
-            },
-            {
-              "type": "economic"
-            },
-            {
-              "type": "technical"
             }
           ]
         },
@@ -91,7 +84,10 @@
       "amount": 4000000.0,
       "currency": "NOK"
     },
-    "deliveryAddresses": []
+    "deliveryAddresses": [],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"
@@ -124,9 +120,9 @@
         "email": "leona.pilares@sye.oslo.kommune.no"
       },
       "roles": [
-        "buyer",
         "submissionReceiptBody",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Oslo"

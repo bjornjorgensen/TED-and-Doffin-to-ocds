@@ -1,7 +1,7 @@
 {
   "id": "a105cb09-ec7d-45d5-a364-ff2317e2231f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6e05400f-2300-485e-a93a-8cc490470183",
+  "ocid": "ocds-abcd1234-59871823-7c09-406d-ab9d-b34db0db4072",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -57,6 +57,9 @@
         "locality": "Lillestrøm"
       }
     ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    },
     "procurementMethodDetails": "Alle interesserte bes sende tilbud. \n\nValg av tilbyder vil baseres på en helhetsvurdering av boligenes kvalitet, egnethet og beliggenhet. Lillestrøm kommune forbeholder seg rett til å gå i forhandling og avtale med flere tilbydere.\n\nDet tas forbehold om politisk godkjennelse før eventuell kontrakt kan inngås. "
   },
   "tag": [

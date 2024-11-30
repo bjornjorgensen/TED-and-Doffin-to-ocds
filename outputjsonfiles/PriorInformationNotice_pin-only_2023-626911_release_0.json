@@ -1,7 +1,7 @@
 {
   "id": "2023-626911",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a98defd4-88df-4aea-8e64-d652a3b72984",
+  "ocid": "ocds-abcd1234-8e7ca2ea-ff5a-45d4-b85a-d3ce128daa0d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -42,7 +42,10 @@
       {
         "streetAddress": "Skjetlein i Trondheim kommune"
       }
-    ]
+    ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"

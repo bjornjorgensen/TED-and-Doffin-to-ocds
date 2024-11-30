@@ -1,7 +1,7 @@
 {
   "id": "2023-335407",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d0d3e61e-ac3a-4f86-93ab-6cd72d82d756",
+  "ocid": "ocds-abcd1234-aa991afd-b3a2-4c24-82f0-0557507fda4c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -80,7 +80,10 @@
         ]
       }
     ],
-    "deliveryAddresses": []
+    "deliveryAddresses": [],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "award",

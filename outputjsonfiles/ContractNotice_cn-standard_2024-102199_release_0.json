@@ -1,7 +1,7 @@
 {
   "id": "5681ff11-e080-4da6-b108-82db3f9b4b69",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8cfe8ca8-9e0a-4f15-8489-8198373a0834",
+  "ocid": "ocds-abcd1234-465c4b00-05b7-4ae3-9032-9f23ab762943",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -58,15 +58,6 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "type": "economic"
-            },
-            {
-              "type": "suitability"
-            },
-            {
-              "type": "technical"
-            },
-            {
               "title": "Krav til økonomisk og finansiell stilling",
               "description": "Krav til økonomisk og finansiell stilling: Krav: Leverandøren skal ha den \nnødvendige økonomiske og \nfinansielle kapasitet til å utføre \nkontrakten. \nDet er tilstrekkelig for å oppfylle \nkravet at leverandøren har \noppnådd kredittratingen \n«kredittverdig» eller tilsvarende.\nDokumentasjonskrav: Kredittvurdering fra et anerkjent \nkredittvurderingsselskap basert på siste regnskapstall. \nVurderingen må ikke være eldre enn 3 måneder."
             },
@@ -81,6 +72,9 @@
             {
               "title": "Krav til tekniske og faglige kvalifikasjoner",
               "description": "Krav til tekniske og faglige kvalifikasjoner: Krav: Leverandøren skal ha et \ndokumentert\nkvalitetsledelsessystem.\nDokumentasjonskrav: En beskrivelse av leverandørens metoder for \nkvalitetssikring.\nDersom leverandøren er sertifisert i henhold til ISO 9001 \neller tilsvarende kvalitetssikringssertifiseringer, er det \ntilstrekkelig å legge ved kopi av gyldig sertifikat."
+            },
+            {
+              "description": "Krav: Leverandøren skal ha et \ndokumentert\nkvalitetsledelsessystem.\nDokumentasjonskrav: En beskrivelse av leverandørens metoder for \nkvalitetssikring.\nDersom leverandøren er sertifisert i henhold til ISO 9001 \neller tilsvarende kvalitetssikringssertifiseringer, er det \ntilstrekkelig å legge ved kopi av gyldig sertifikat."
             }
           ]
         },
@@ -128,7 +122,8 @@
           "amount": 100000000.0,
           "currency": "NOK"
         }
-      }
+      },
+      "hasFrameworkAgreement": false
     },
     "deliveryAddresses": [
       {

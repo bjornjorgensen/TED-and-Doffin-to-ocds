@@ -1,7 +1,7 @@
 {
   "id": "2022-902600",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-57462a2a-ae30-4ca8-9df7-1ea9ecbb416e",
+  "ocid": "ocds-abcd1234-e6a84314-0596-428a-8673-4418506d44d1",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -36,7 +36,6 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "type": "other",
               "description": "Skatteattest Tilbyder skal ha ordnede forhold med hensyn til betaling av skatt, arbeidsgiveravgift og merverdiavgift. Dokumentasjonskrav: Attest for skatt og merverdiavgift. Attesten skal ikke være eldre enn 6 måneder regnet fra tilbudsfrist. Attesten fås elektronisk i Altinn. For nærmere informasjon, se Skatteetaten.no. Merkes DOK01 Skatteattest Autorisasjon Tilbyder må bekrefte at spesialist(er) har gyldig autorisasjon innen det enkelte fagområde som det leveres inn tilbud på. Dokumentasjon: Spesialist autorisasjon Merkes DOK02 Autorisasjon"
             }
           ]
@@ -100,7 +99,10 @@
       {
         "streetAddress": "Agder"
       }
-    ]
+    ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"
@@ -135,9 +137,9 @@
         "locality": "Arendal"
       },
       "roles": [
-        "buyer",
         "submissionReceiptBody",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

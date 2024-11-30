@@ -1,7 +1,7 @@
 {
   "id": "e5c8b25e-859d-492a-9085-716017f267aa",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-011e69b9-4f82-4e14-bab8-2b0f2b244704",
+  "ocid": "ocds-abcd1234-4e6648b3-fae4-4102-875a-7b847df4045c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -40,19 +40,6 @@
         },
         "tenderPeriod": {
           "endDate": "2024-01-10T12:00:00+01:00"
-        },
-        "selectionCriteria": {
-          "criteria": [
-            {
-              "type": "economic"
-            },
-            {
-              "type": "suitability"
-            },
-            {
-              "type": "technical"
-            }
-          ]
         },
         "hasAccessibilityCriteria": false
       }
@@ -243,6 +230,9 @@
           "description": "Terrorist offences or offences linked to terrorist activities: Vennligst bekreft at ingen av regelverkets avvisningsgrunner er oppfylte"
         }
       ]
+    },
+    "techniques": {
+      "hasFrameworkAgreement": false
     }
   },
   "tag": [
@@ -277,8 +267,8 @@
         "locality": "Oslo"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

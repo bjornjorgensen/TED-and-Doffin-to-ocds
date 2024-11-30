@@ -1,7 +1,7 @@
 {
   "id": "ee5f74f4-d24f-4c67-beca-c7e4a17d16e4",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-38b79c87-7dab-4538-b4df-3cedeab2a95b",
+  "ocid": "ocds-abcd1234-1c69c393-845d-40ee-ba9d-9a5986997c97",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -81,6 +81,9 @@
         "country": "NO"
       }
     ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    },
     "procurementMethodDetails": "Se vedlagte dokument for mer informasjon. Vi ber om at leverandører som ønsker at det gjøres en vurdering av byttekostnader om å melde interesse via kommunikasjonsmodulen i Mercell innen 07.12.2024, kl.15.00."
   },
   "tag": [
@@ -114,8 +117,8 @@
         "email": "post@sykehusinnkjop.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "VADSØ"

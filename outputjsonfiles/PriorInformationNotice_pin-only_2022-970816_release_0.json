@@ -1,7 +1,7 @@
 {
   "id": "2022-970816",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a6161558-6bb9-4355-8fce-4bfbf881e8a4",
+  "ocid": "ocds-abcd1234-32f14236-7c56-4038-a98b-61fdd597c156",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -44,7 +44,10 @@
       {
         "streetAddress": "Stavanger"
       }
-    ]
+    ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"

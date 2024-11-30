@@ -1,7 +1,7 @@
 {
   "id": "2023-642439",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b95c4715-ac80-4af0-a778-eeca6bb67773",
+  "ocid": "ocds-abcd1234-6730dd01-17eb-4a06-9fd1-ad95e97f1d56",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -38,7 +38,10 @@
       {
         "region": "NO081"
       }
-    ]
+    ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"

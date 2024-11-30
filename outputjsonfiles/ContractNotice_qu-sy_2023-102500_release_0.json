@@ -1,7 +1,7 @@
 {
   "id": "3580e3e0-275f-4489-9aab-b6f493790e00",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-350e5b18-3b6d-4e28-9727-60cf9b51ae74",
+  "ocid": "ocds-abcd1234-492140aa-331e-4b62-aa16-29f705b49cee",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -34,18 +34,6 @@
         },
         "selectionCriteria": {
           "criteria": [
-            {
-              "type": "economic"
-            },
-            {
-              "type": "other"
-            },
-            {
-              "type": "suitability"
-            },
-            {
-              "type": "technical"
-            },
             {
               "title": "\"Totale\" årsomsetning",
               "description": "\"Totale\" årsomsetning: Leverandørens (\"totale\") årsomsetning for det antall regnskapsår som det anmodes om i kunngjøringen eller i anskaffelsesdokumentene, er som følger:\nMinstekrav til kvalifikasjonskrav"
@@ -93,6 +81,9 @@
             {
               "title": "Ved anskaffelse av varer: Attester utstedt av offisielle organer for kvalitetskontroll",
               "description": "Ved anskaffelse av varer: Attester utstedt av offisielle organer for kvalitetskontroll: Kan leverandør levere etterspurte attester utstedt av offisielle organer for kvalitetskontroll, og som kan bekrefte at varene, som er klart identifisert ved henvisning til tekniske spesifikasjoner eller standarder, som er fastsatt i kunngjøringen eller i anskaffelsesdokumentene, er i overensstemmelse med disse?\nMinstekrav til kvalifikasjonskrav"
+            },
+            {
+              "description": "Kan leverandør levere etterspurte attester utstedt av offisielle organer for kvalitetskontroll, og som kan bekrefte at varene, som er klart identifisert ved henvisning til tekniske spesifikasjoner eller standarder, som er fastsatt i kunngjøringen eller i anskaffelsesdokumentene, er i overensstemmelse med disse?\nMinstekrav til kvalifikasjonskrav"
             }
           ]
         },
@@ -211,6 +202,9 @@
           "description": "Terrorist offences or offences linked to terrorist activities: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitetved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitet som definert i artikkel 1 og 3 i Rådets rammeavgjørelse 2002/475/RIA av 13. juni 2002 om bekjempelse av terrorisme (EFT L 164 af 22.6.2002, s. 3). Denne avvisningsgrunnen omfatter også oppfordring til, medvirkning til eller forsøk på å begå slike handlinger som omhandlet i artikkel 4 i nevnte rammeavgjørelse."
         }
       ]
+    },
+    "techniques": {
+      "hasFrameworkAgreement": false
     }
   },
   "tag": [
@@ -244,8 +238,8 @@
         ]
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Svolvær"

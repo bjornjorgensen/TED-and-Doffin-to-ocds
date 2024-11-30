@@ -1,7 +1,7 @@
 {
   "id": "2023-631333",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b250a906-5e7b-4f16-b964-0c2b1b5dd59a",
+  "ocid": "ocds-abcd1234-faebcb8f-d069-4b5a-a655-414f1473a92f",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -40,7 +40,6 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "type": "other",
               "description": "Suppliers may apply for qualification at any time. To apply the suppliers must complete an Order Form and pay in advance an annual qualification fee between EUR 245 to 1090. The Order Form with qualification requirements can be obtained here https://my.achilles.com/join-community?communitycode=UNC&lang=gb-EN. To qualify the suppliers must complete an online questionnaire covering detailed information about their company. As some contracting authorities and contracting entities require an ESPD, the suppliers can submit an ESPD via ACHILLES UTILITIES NCE. Basic commercial requirements must be satisfied. Some buying organizations have individual requirements in addition to the basic requirements. The suppliers can therefore be asked to answer customer-specific questions related to the qualification. ACHILLES UTILITIES NCE is open to manufacturers or distributors dealing directly with the buyer. The bidders lists will be based on suppliers that have passed the initial qualification."
             }
           ]
@@ -207,7 +206,10 @@
         ]
       }
     ],
-    "deliveryAddresses": []
+    "deliveryAddresses": [],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"
@@ -239,9 +241,9 @@
         ]
       },
       "roles": [
-        "buyer",
         "submissionReceiptBody",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Arendal"

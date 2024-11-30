@@ -1,7 +1,7 @@
 {
   "id": "2022-614279",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2525ebbf-8e98-4dac-9b80-d0c10c3f705d",
+  "ocid": "ocds-abcd1234-9ff50d2e-2aad-4c07-b549-406b6b8f323e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -88,7 +88,10 @@
       "amount": 34000000.0,
       "currency": "NOK"
     },
-    "deliveryAddresses": []
+    "deliveryAddresses": [],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"
@@ -120,8 +123,8 @@
         "email": "anita.hellehaven@nav.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Mo i Rana"

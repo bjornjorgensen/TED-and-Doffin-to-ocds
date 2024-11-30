@@ -1,7 +1,7 @@
 {
   "id": "510444f4-6cd2-4b26-8dd6-f3af27ffa069",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7c4bb962-8cee-4267-b9d1-3d09a164b723",
+  "ocid": "ocds-abcd1234-604b0403-92e2-4d19-99a5-472b270dfb14",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -89,7 +89,10 @@
       {
         "country": "NO"
       }
-    ]
+    ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "award",
@@ -124,9 +127,9 @@
         "locality": "HØNEFOSS"
       },
       "roles": [
+        "funder",
         "buyer",
-        "payer",
-        "funder"
+        "payer"
       ]
     },
     {

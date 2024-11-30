@@ -1,7 +1,7 @@
 {
   "id": "7d111d51-8042-402a-a234-50efe86d8f4f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ec3e3fea-9bc8-440f-b338-12e45bc2771d",
+  "ocid": "ocds-abcd1234-e493a634-9588-470b-bdaa-435bd299ed72",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -48,16 +48,8 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "forReduction": true
-            },
-            {
-              "type": "suitability"
-            },
-            {
-              "type": "economic"
-            },
-            {
-              "type": "technical"
+              "forReduction": true,
+              "description": "See documentation in the public proposal here: https://posten-supplier.ivalua.app/"
             },
             {
               "title": "See documentation in the public proposal here: https://posten-supplier.ivalua.app/",
@@ -156,7 +148,10 @@
       {
         "description": "Anywhere in the given country"
       }
-    ]
+    ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"
@@ -189,8 +184,8 @@
         ]
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Oslo"

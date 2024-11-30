@@ -1,7 +1,7 @@
 {
   "id": "2023-698775",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-fb07fcb2-fdf4-4f03-8c26-e73361d2dd40",
+  "ocid": "ocds-abcd1234-1f32661a-d5eb-4436-aadb-51666217894b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -73,14 +73,7 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "type": "suitability",
               "description": "Viser til konkurransegrunnlaget."
-            },
-            {
-              "type": "economic"
-            },
-            {
-              "type": "technical"
             }
           ]
         },
@@ -135,7 +128,10 @@
       {
         "streetAddress": "Norge"
       }
-    ]
+    ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"
@@ -161,9 +157,9 @@
         "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/3493"
       },
       "roles": [
-        "buyer",
         "submissionReceiptBody",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Bryne"

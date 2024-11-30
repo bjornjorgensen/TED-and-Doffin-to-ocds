@@ -1,7 +1,7 @@
 {
   "id": "2022-642893",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-35f58fae-01ef-4af3-9b82-17fb38a90424",
+  "ocid": "ocds-abcd1234-c0cda6a5-05fd-4b36-8520-cf6b30267112",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -74,7 +74,10 @@
         ]
       }
     ],
-    "deliveryAddresses": []
+    "deliveryAddresses": [],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"
@@ -107,8 +110,8 @@
         "email": "post@sykehusinnkjop.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "VADSØ"

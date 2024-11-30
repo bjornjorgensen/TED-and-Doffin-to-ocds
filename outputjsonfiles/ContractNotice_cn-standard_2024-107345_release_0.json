@@ -1,7 +1,7 @@
 {
   "id": "870ff007-688a-4ad1-9ad7-28c2ae514b40",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-cd21e064-c295-4068-9dcb-b8ef6906ec0d",
+  "ocid": "ocds-abcd1234-7cea0b8f-44ab-4dfe-959a-3a1591eee75c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -60,18 +60,6 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "type": "economic"
-            },
-            {
-              "type": "other"
-            },
-            {
-              "type": "suitability"
-            },
-            {
-              "type": "technical"
-            },
-            {
               "title": "Øvrige økonomiske og finansielle krav",
               "description": "Øvrige økonomiske og finansielle krav: Når det gjelder eventuelle øvrige økonomiske og finansielle krav som har blitt angitt i kunngjøringen eller i anskaffelsesdokumentene erklærer leverandøren at:\nMinstekrav til kvalifikasjonskrav\nLeverandøren skal ha tilstrekkelig økonomisk og finansiell kapasitet til å kunne gjennomføre kontrakten.\n\n  Det kreves at tilbyder er kredittverdig, og har økonomisk soliditet med minimum kredittscore A iht. vurdering foretatt i CreditPro fra Kredittopplysningsbyrået Bisnode AS eller tilsvarende anerkjent kredittbyrå."
             },
@@ -86,6 +74,9 @@
             {
               "title": "Bare for tjenester",
               "description": "Bare for tjenester: Bare for tjenester: I referanseperioden  har leverandøren utført følgende viktige vareleveranser av den etterspurte type, eller følgende viktige tjenester av den etterspurte type. Oppdragsgiver kan kreve opp til tre års erfaring og tillate at det tas hensyn til erfaring fra tiden før de seneste tre år.\nMinstekrav til kvalifikasjonskrav\nLeverandøren skal ha erfaring fra sammenlignbare oppdrag som omhandler byggeledelse. \n\nDokumentasjon:\n  Beskrivelse av leverandørens inntil 3 mest relevante oppdrag i løpet av de siste 10 årene. Beskrivelsen må inkludere angivelse av oppdragets verdi, tidspunkt og mottaker (navn, telefon og e-post.) Det er leverandørens ansvar å dokumentere relevans gjennom beskrivelsen."
+            },
+            {
+              "description": "Bare for tjenester: I referanseperioden  har leverandøren utført følgende viktige vareleveranser av den etterspurte type, eller følgende viktige tjenester av den etterspurte type. Oppdragsgiver kan kreve opp til tre års erfaring og tillate at det tas hensyn til erfaring fra tiden før de seneste tre år.\nMinstekrav til kvalifikasjonskrav\nLeverandøren skal ha erfaring fra sammenlignbare oppdrag som omhandler byggeledelse. \n\nDokumentasjon:\n  Beskrivelse av leverandørens inntil 3 mest relevante oppdrag i løpet av de siste 10 årene. Beskrivelsen må inkludere angivelse av oppdragets verdi, tidspunkt og mottaker (navn, telefon og e-post.) Det er leverandørens ansvar å dokumentere relevans gjennom beskrivelsen."
             }
           ]
         },
@@ -181,7 +172,10 @@
       {
         "country": "NO"
       }
-    ]
+    ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"

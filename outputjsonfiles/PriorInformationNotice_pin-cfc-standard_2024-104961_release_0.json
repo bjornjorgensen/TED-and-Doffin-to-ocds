@@ -1,7 +1,7 @@
 {
   "id": "7b469b6b-4abb-4f22-abe1-50973de8c825",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-69476df9-382f-482b-9cbf-8d7718ed372b",
+  "ocid": "ocds-abcd1234-04dbf349-6e80-48dc-b219-79b6047d8416",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -34,15 +34,6 @@
           "criteria": [
             {
               "forReduction": true
-            },
-            {
-              "type": "suitability"
-            },
-            {
-              "type": "economic"
-            },
-            {
-              "type": "technical"
             },
             {
               "title": "Please see qualification requirement at https://posten-supplier.ivalua.app/"
@@ -92,7 +83,10 @@
         },
         "relatedLot": "LOT-0001"
       }
-    ]
+    ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"
@@ -125,8 +119,8 @@
         ]
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Oslo"

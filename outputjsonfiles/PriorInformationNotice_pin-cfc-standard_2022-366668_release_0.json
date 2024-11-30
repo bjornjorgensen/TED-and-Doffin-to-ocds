@@ -1,7 +1,7 @@
 {
   "id": "2022-366668",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1f6b9f12-dd35-4046-b3e6-5ca6d4485c26",
+  "ocid": "ocds-abcd1234-85fe7409-b40c-4e64-98f2-dc13cff8a826",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -123,7 +123,10 @@
       {
         "streetAddress": "Tønsberg kommune"
       }
-    ]
+    ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "tender"
@@ -157,8 +160,8 @@
         "locality": "TØNSBERG"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

@@ -1,7 +1,7 @@
 {
   "id": "2022-697882",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-cacfe1d7-4cc3-45ba-8f8d-ab6f05f98fe0",
+  "ocid": "ocds-abcd1234-95e763c7-9ba3-452a-95e8-646b712ce2af",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -52,7 +52,10 @@
         },
         "relatedLot": "LOT-0000"
       }
-    ]
+    ],
+    "techniques": {
+      "hasFrameworkAgreement": false
+    }
   },
   "tag": [
     "award",

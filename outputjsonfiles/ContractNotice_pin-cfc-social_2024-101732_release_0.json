@@ -1,7 +1,7 @@
 {
   "id": "74f8c72a-5dcd-4a77-afda-6573ca30c8df",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-99cab970-4dc9-4715-9541-9ce37f00f014",
+  "ocid": "ocds-abcd1234-465a1ef8-b1d8-4087-905a-defe8ef930b6",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -50,18 +50,6 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "type": "economic"
-            },
-            {
-              "type": "other"
-            },
-            {
-              "type": "suitability"
-            },
-            {
-              "type": "technical"
-            },
-            {
               "title": "Økonomisk og finansiell kapasitet: Leverandøren skal ha tilstrekkelig økonomisk og finansiell kapasitet til å kunne oppfylle kontrakten. Kredittverdighet uten krav til sikkerhetsstillelse vil være tilstrekkelig til å oppfylle kravet",
               "description": "Økonomisk og finansiell kapasitet: Leverandøren skal ha tilstrekkelig økonomisk og finansiell kapasitet til å kunne oppfylle kontrakten. Kredittverdighet uten krav til sikkerhetsstillelse vil være tilstrekkelig til å oppfylle kravet: Framkommer av eBevis.\nOppdragsgiver vil i tillegg selv gjøre oppslag i Bisnode."
             },
@@ -88,6 +76,9 @@
             {
               "title": "Det kreves erfaring fra tilsvarende oppdrag, det vil si hjemmebaserte eller andre sammenlignbare helse- og omsorgstjenester.",
               "description": "Det kreves erfaring fra tilsvarende oppdrag, det vil si hjemmebaserte eller andre sammenlignbare helse- og omsorgstjenester.: Dokumentasjonskrav:\nForetakets 3 viktigste offentlige leveranser de siste årene. Herunder opplysninger om verdi, tidspunkt, samt navnet på mottaker med kontaktinformasjon for eventuell referanseinnhenting.\n\n1. Redegjørelse for firmaets kvalitetssikring-/styringssystem, herunder kravene i forskrift om ledelse og kvalitetsforbedring i helse og omsorgstjenesten (FOR-2016-10-28-1250), forskrift om systematisk helse-, miljø- og sikkerhetsarbeid i virksomheter (internkontrollforskriften) (FOR-1996-12-06-1127) og kravene i konsesjonskontrakten. Er foretaket sertifisert skal sertifiseringsbevis vedlegges.\n2. Redegjørelse for søkerens arbeid med kontinuerlig forbedring, herunder avvikshåndtering.\n3. Beskrivelse av rutiner for å ivareta informasjonssikkerhet, innhenting/bruk av politiattest, taushetsbelagte opplysninger og etiske retningslinjer mm.\n4. Redegjørelse for hvordan leverandøren håndterer tilbakemeldinger/klager fra brukeren/ arbeidsledere/assistenter og pårørende. Også hvordan dette følges opp mot oppdragsgiver.\n5. Redegjørelse for hvordan leverandøren forebygger og håndterer meldinger om overgrep ( seksuelle, vold, økonomi etc.).\nOgså hvordan dette følges opp mot oppdragsgiver\n\nEr foretaket sertifisert skal sertifiseringsbevis vedlegges"
+            },
+            {
+              "description": "Dokumentasjonskrav:\nForetakets 3 viktigste offentlige leveranser de siste årene. Herunder opplysninger om verdi, tidspunkt, samt navnet på mottaker med kontaktinformasjon for eventuell referanseinnhenting.\n\n1. Redegjørelse for firmaets kvalitetssikring-/styringssystem, herunder kravene i forskrift om ledelse og kvalitetsforbedring i helse og omsorgstjenesten (FOR-2016-10-28-1250), forskrift om systematisk helse-, miljø- og sikkerhetsarbeid i virksomheter (internkontrollforskriften) (FOR-1996-12-06-1127) og kravene i konsesjonskontrakten. Er foretaket sertifisert skal sertifiseringsbevis vedlegges.\n2. Redegjørelse for søkerens arbeid med kontinuerlig forbedring, herunder avvikshåndtering.\n3. Beskrivelse av rutiner for å ivareta informasjonssikkerhet, innhenting/bruk av politiattest, taushetsbelagte opplysninger og etiske retningslinjer mm.\n4. Redegjørelse for hvordan leverandøren håndterer tilbakemeldinger/klager fra brukeren/ arbeidsledere/assistenter og pårørende. Også hvordan dette følges opp mot oppdragsgiver.\n5. Redegjørelse for hvordan leverandøren forebygger og håndterer meldinger om overgrep ( seksuelle, vold, økonomi etc.).\nOgså hvordan dette følges opp mot oppdragsgiver\n\nEr foretaket sertifisert skal sertifiseringsbevis vedlegges"
             }
           ]
         },
@@ -328,6 +319,9 @@
           "description": "Terrorist offences or offences linked to terrorist activities: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitetved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitet som definert i artikkel 1 og 3 i Rådets rammeavgjørelse 2002/475/RIA av 13. juni 2002 om bekjempelse av terrorisme (EFT L 164 af 22.6.2002, s. 3). Denne avvisningsgrunnen omfatter også oppfordring til, medvirkning til eller forsøk på å begå slike handlinger som omhandlet i artikkel 4 i nevnte rammeavgjørelse."
         }
       ]
+    },
+    "techniques": {
+      "hasFrameworkAgreement": false
     }
   },
   "tag": [
@@ -363,9 +357,9 @@
         "locality": "Stjørdal"
       },
       "roles": [
-        "buyer",
         "leadBuyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

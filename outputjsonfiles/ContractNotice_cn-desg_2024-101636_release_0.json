@@ -1,7 +1,7 @@
 {
   "id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1c8f7fd2-f33b-41a5-8276-b34785d4e2ba",
+  "ocid": "ocds-abcd1234-3f7c0f10-9baa-4c24-8196-8ffe8f9e69a9",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -93,18 +93,6 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "type": "economic"
-            },
-            {
-              "type": "other"
-            },
-            {
-              "type": "suitability"
-            },
-            {
-              "type": "technical"
-            },
-            {
               "title": "Finansielle nøkkeltall",
               "description": "Finansielle nøkkeltall: Når det gjelder finansielle nøkkeltall som er angitt i kunngjøringen eller i anskaffelsesdokumentene erklærer leverandøren at den eller de faktiske verdien(e) for det eller de nøkkeltall(ene) som det anmodes om er som følger:\nMinstekrav til kvalifikasjonskrav\nTilbyderen skal ha økonomisk kapasitet til å gjennomføre kontrakten. \nDet skal legges ved dokumentasjon av at tilbyderen har tilstrekkelig soliditet gjennom kredittvurdering fra egnet kredittvurderingsfirma. Kredittvurderingen skal være fra siste års godkjente regnskap. Ratingkrav er AA eller bedre evaluert fra Bisnode eller andre tilsvarende firma.  Som kontroll vil kommunen benytte Bisnode for kredittvurdering.  \nDet skal legges ved dokumentasjon på at tilbyderen har en omsetning på minimum NOK 100 mill. eks. mva. pr. år de siste 3 år.\nTilbyder skal kunne dokumentere positiv egenkapital."
             },
@@ -131,6 +119,9 @@
             {
               "title": "Utdanning og faglige kvalifikasjoner",
               "description": "Utdanning og faglige kvalifikasjoner: Følgende utdanning og faglige kvalifikasjoner besittes av leverandøren og/eller (avhengig av hvilke krav som er fastsatt i kunngjøringen eller i anskaffelsesdokumenterne) av de ledende medarbeiderne:\nMinstekrav til kvalifikasjonskrav\nTilstrekkelig tilgjengelig personell for å gjennomføre oppdraget:\nTilbyder må erklære å ha tilstrekkelig tilgjengelige personell. Det må gis en oversikt over tilbyders prosjektorganisasjon, som inkluder tiltenkte ressurser og reservert personell, som tilfredsstiller minstekravet til erfaring for henholdsvis nøkkelfunksjoner og støttefag. Definisjon av hva som anses som nøkkelfunksjoner og støttefunksjoner er angitt i kapittel 2.6 i konkurransegrunnlaget del III oppdragsbeskrivelsen:\nNøkkelfunksjoner:\no Minimum 10 års relevant erfaring\no Bachelor/master eller tilsvarende fra høyskole eller universitet\no Minimum 3 referanser fra tilsvarende prosjekter  \n\nStøttefunksjoner:\no Minimum 3 års relevant erfaring\no Bachelor/master eller tilsvarende fra høyskole eller universitet\no Minimum 1  referanseprosjekt fra tilsvarende prosjekter siste 3 år\nSpesiell spisskompetanse eller lang relevant erfaring kan kompensere for eventuell manglende oppfyllelse av ovennevnte."
+            },
+            {
+              "description": "Følgende utdanning og faglige kvalifikasjoner besittes av leverandøren og/eller (avhengig av hvilke krav som er fastsatt i kunngjøringen eller i anskaffelsesdokumenterne) av de ledende medarbeiderne:\nMinstekrav til kvalifikasjonskrav\nTilstrekkelig tilgjengelig personell for å gjennomføre oppdraget:\nTilbyder må erklære å ha tilstrekkelig tilgjengelige personell. Det må gis en oversikt over tilbyders prosjektorganisasjon, som inkluder tiltenkte ressurser og reservert personell, som tilfredsstiller minstekravet til erfaring for henholdsvis nøkkelfunksjoner og støttefag. Definisjon av hva som anses som nøkkelfunksjoner og støttefunksjoner er angitt i kapittel 2.6 i konkurransegrunnlaget del III oppdragsbeskrivelsen:\nNøkkelfunksjoner:\no Minimum 10 års relevant erfaring\no Bachelor/master eller tilsvarende fra høyskole eller universitet\no Minimum 3 referanser fra tilsvarende prosjekter  \n\nStøttefunksjoner:\no Minimum 3 års relevant erfaring\no Bachelor/master eller tilsvarende fra høyskole eller universitet\no Minimum 1  referanseprosjekt fra tilsvarende prosjekter siste 3 år\nSpesiell spisskompetanse eller lang relevant erfaring kan kompensere for eventuell manglende oppfyllelse av ovennevnte."
             }
           ]
         },
@@ -296,6 +287,9 @@
           "description": "Terrorist offences or offences linked to terrorist activities: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitetved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitet som definert i artikkel 1 og 3 i Rådets rammeavgjørelse 2002/475/RIA av 13. juni 2002 om bekjempelse av terrorisme (EFT L 164 af 22.6.2002, s. 3). Denne avvisningsgrunnen omfatter også oppfordring til, medvirkning til eller forsøk på å begå slike handlinger som omhandlet i artikkel 4 i nevnte rammeavgjørelse."
         }
       ]
+    },
+    "techniques": {
+      "hasFrameworkAgreement": false
     }
   },
   "tag": [
@@ -329,11 +323,11 @@
         "email": "kenneth.hvalby@gjovik.kommune.no"
       },
       "roles": [
-        "submissionReceiptBody",
         "evaluationBody",
+        "submissionReceiptBody",
         "processContactPoint",
-        "buyer",
-        "reviewContactPoint"
+        "reviewContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "GJØVIK"
