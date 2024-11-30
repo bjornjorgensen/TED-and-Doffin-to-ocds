@@ -1,23 +1,13 @@
-# converters/bt_19_Lot.py
-
 import logging
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
-JUSTIFICATION_CODES = {
-    "ipr-iss": "Intellectual property right issues",
-    "phy-mod": "Inclusion of a physical model",
-    "sen-info": "Protection of particularly sensitive information",
-    "sp-of-eq": "buyer would need specialised office equipment",
-    "tdf-non-av": "Tools, devices, or file formats not generally available",
-}
 
-
-def parse_submission_nonelectronic_justification(xml_content: str) -> dict | None:
+def parse_foreign_subsidies_regulation(xml_content: str) -> dict | None:
     """
-    Parses the XML content to extract the justification for non-electronic submission.
+    Parses the XML content to extract the Foreign Subsidies Regulation (FSR) applicability.
 
     Args:
         xml_content (str): The XML content as a string.
@@ -56,59 +46,55 @@ def parse_submission_nonelectronic_justification(xml_content: str) -> dict | Non
             continue
 
         lot_id = lot_id[0]
-        justification_code = lot.xpath(
-            "cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='no-esubmission-justification']/cbc:ProcessReasonCode/text()",
+        fsr_code = lot.xpath(
+            "cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='fsr']/cbc:ExecutionRequirementCode/text()",
             namespaces=namespaces,
         )
 
-        if justification_code:
-            justification = JUSTIFICATION_CODES.get(justification_code[0])
-            if justification:
-                result["tender"]["lots"].append(
-                    {
-                        "id": lot_id,
-                        "submissionTerms": {
-                            "nonElectronicSubmission": {"rationale": justification},
-                        },
-                    },
-                )
+        if fsr_code and fsr_code[0].lower() == "true":
+            result["tender"]["lots"].append(
+                {
+                    "id": lot_id,
+                    "coveredBy": ["EU-FSR"],
+                }
+            )
 
     return result if result["tender"]["lots"] else None
 
 
-def merge_submission_nonelectronic_justification(
-    release_json: dict, justification_data: dict | None
+def merge_foreign_subsidies_regulation(
+    release_json: dict, fsr_data: dict | None
 ) -> None:
     """
-    Merges the parsed justification data into the existing release JSON structure.
+    Merges the parsed Foreign Subsidies Regulation (FSR) data into the existing release JSON structure.
 
     Args:
         release_json (dict): The existing release JSON structure.
-        justification_data (dict | None): The parsed justification data.
+        fsr_data (dict | None): The parsed FSR data.
 
     Returns:
         None
     """
-    if not justification_data:
-        logger.warning("No Submission Nonelectronic Justification data to merge")
+    if not fsr_data:
+        logger.warning("No Foreign Subsidies Regulation data to merge")
         return
 
     existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
 
-    for new_lot in justification_data["tender"]["lots"]:
+    for new_lot in fsr_data["tender"]["lots"]:
         existing_lot = next(
             (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
             None,
         )
         if existing_lot:
-            existing_lot.setdefault("submissionTerms", {}).setdefault(
-                "nonElectronicSubmission",
-                {},
-            ).update(new_lot["submissionTerms"]["nonElectronicSubmission"])
+            if "coveredBy" not in existing_lot:
+                existing_lot["coveredBy"] = new_lot["coveredBy"]
+            else:
+                existing_lot["coveredBy"].extend(new_lot["coveredBy"])
         else:
             existing_lots.append(new_lot)
 
     logger.info(
-        "Merged Submission Nonelectronic Justification data for %d lots",
-        len(justification_data["tender"]["lots"]),
+        "Merged Foreign Subsidies Regulation data for %d lots",
+        len(fsr_data["tender"]["lots"]),
     )

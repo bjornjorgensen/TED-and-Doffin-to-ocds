@@ -1,7 +1,7 @@
 {
   "id": "74f9d169-452b-4a99-b8d2-f54c3c71e163",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f57d5a8f-6af6-41f6-9559-a3d4f312e418",
+  "ocid": "ocds-abcd1234-5907f64b-d9df-4f8b-bac6-4f494704d413",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -55,7 +55,7 @@
           "endDate": "2024-05-07T00:00:00+02:00"
         },
         "otherRequirements": {
-          "reservedparticipation": [
+          "reservedParticipation": [
             "shelteredWorkshop"
           ]
         },
@@ -148,8 +148,8 @@
         "email": "truls.eirik.moan@bodo.kommune.no"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "reviewContactPoint"
       ],
       "address": {

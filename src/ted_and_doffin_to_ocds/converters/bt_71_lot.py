@@ -7,7 +7,7 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_reserved_participation(xml_content):
+def parse_reserved_participation(xml_content: str) -> dict | None:
     """
     Parse the XML content to extract reserved participation information for each lot.
 
@@ -15,24 +15,17 @@ def parse_reserved_participation(xml_content):
         xml_content (str): The XML content to parse.
 
     Returns:
-        dict: A dictionary containing the parsed reserved participation data in the format:
-              {
-                  "tender": {
-                      "lots": [
-                          {
-                              "id": "lot_id",
-                              "otherRequirements": {
-                                  "reservedparticipation": ["participation_type"]
-                              }
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
+        dict | None: A dictionary containing the parsed reserved participation data or None if no relevant data is found.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
+
+    try:
+        root = etree.fromstring(xml_content)
+    except etree.XMLSyntaxError:
+        logger.exception("Failed to parse XML content")
+        return None
+
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
         "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
@@ -48,15 +41,25 @@ def parse_reserved_participation(xml_content):
     lots = root.xpath(xpath_query, namespaces=namespaces)
 
     for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
+        if not lot_id:
+            logger.warning("Lot ID not found")
+            continue
 
-        xpath_reserved = "cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:companyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='missing-info-submission'])]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='reserved-procurement']/cbc:TendererRequirementTypeCode/text()"
+        lot_id = lot_id[0]
+        xpath_reserved = (
+            "cac:TenderingTerms/cac:TendererQualificationRequest"
+            "[not(cbc:CompanyLegalFormCode)]"
+            "[not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='missing-info-submission'])]"
+            "[not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='selection-criteria-source'])]"
+            "/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='reserved-procurement']/cbc:TendererRequirementTypeCode/text()"
+        )
         reserved_code = lot.xpath(xpath_reserved, namespaces=namespaces)
 
         if reserved_code:
             reserved_type = None
             if reserved_code[0] == "res-pub-ser":
-                reserved_type = "publicServiceMissionorganization"
+                reserved_type = "publicServiceMissionOrganization"
             elif reserved_code[0] == "res-ws":
                 reserved_type = "shelteredWorkshop"
 
@@ -64,8 +67,8 @@ def parse_reserved_participation(xml_content):
                 result["tender"]["lots"].append(
                     {
                         "id": lot_id,
-                        "otherRequirements": {"reservedparticipation": [reserved_type]},
-                    },
+                        "otherRequirements": {"reservedParticipation": [reserved_type]},
+                    }
                 )
 
     return result if result["tender"]["lots"] else None

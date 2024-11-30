@@ -1,7 +1,7 @@
 {
   "id": "2022-976327",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-bd201005-f4c8-4f27-90d2-c3549b173342",
+  "ocid": "ocds-abcd1234-2726c701-c109-485b-a5d5-4919b7285d1a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -120,9 +120,9 @@
         "email": "leona.pilares@sye.oslo.kommune.no"
       },
       "roles": [
+        "buyer",
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "processContactPoint"
       ],
       "address": {
         "locality": "Oslo"

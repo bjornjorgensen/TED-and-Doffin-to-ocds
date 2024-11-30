@@ -34,7 +34,7 @@ EXCLUSION_GROUND_MAPPING = {
 }
 
 
-def parse_exclusion_grounds(xml_content):
+def parse_exclusion_grounds(xml_content: str) -> dict | None:
     """
     Parse the XML content to extract exclusion grounds information.
 
@@ -42,12 +42,17 @@ def parse_exclusion_grounds(xml_content):
         xml_content (str): The XML content to parse.
 
     Returns:
-        dict: A dictionary containing the parsed exclusion grounds data.
-        None: If no relevant data is found.
+        dict | None: A dictionary containing the parsed exclusion grounds data or None if no relevant data is found.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
+
+    try:
+        root = etree.fromstring(xml_content)
+    except etree.XMLSyntaxError:
+        logger.exception("Failed to parse XML content")
+        return None
+
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
         "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",

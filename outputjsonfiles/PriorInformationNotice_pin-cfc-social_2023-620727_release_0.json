@@ -1,7 +1,7 @@
 {
   "id": "2023-620727",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-abc8e806-0794-4d92-97c4-bda6a75435e1",
+  "ocid": "ocds-abcd1234-2c3fc5a0-1cfc-4b5a-b5f6-8b56eaf0ddce",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -141,9 +141,9 @@
         ]
       },
       "roles": [
+        "buyer",
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "processContactPoint"
       ],
       "address": {
         "locality": "VÅGÅ"

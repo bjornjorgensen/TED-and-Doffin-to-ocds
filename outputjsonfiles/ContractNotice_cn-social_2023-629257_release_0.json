@@ -1,7 +1,7 @@
 {
   "id": "2023-629257",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1181cffe-c79d-4848-a8e7-58b45fe86d8d",
+  "ocid": "ocds-abcd1234-e7520f5b-d14a-4192-a938-ab7cfba7cbbc",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -89,8 +89,8 @@
         "documentType": "biddingDocuments",
         "url": "https://permalink.mercell.com/208131817.aspx",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ]
       }
     ],
@@ -195,8 +195,8 @@
         "email": "nav.tiltak.rogaland@nav.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Stravanger"

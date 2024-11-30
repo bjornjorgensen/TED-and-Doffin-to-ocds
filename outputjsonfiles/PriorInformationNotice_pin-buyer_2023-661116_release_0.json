@@ -1,7 +1,7 @@
 {
   "id": "2023-661116",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-354e7f96-4217-4bf8-b8b3-002bd731216b",
+  "ocid": "ocds-abcd1234-8f08acb6-0456-4508-82b0-3b017c383266",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -290,8 +290,8 @@
         "email": "jeanette.berglund@trv.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "TRONDHEIM"

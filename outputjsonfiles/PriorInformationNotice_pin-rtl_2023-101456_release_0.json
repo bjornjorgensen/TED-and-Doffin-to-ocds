@@ -1,7 +1,7 @@
 {
   "id": "ee5f74f4-d24f-4c67-beca-c7e4a17d16e4",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1c69c393-845d-40ee-ba9d-9a5986997c97",
+  "ocid": "ocds-abcd1234-2a9d3e63-5a7c-45e7-8576-55605a446d06",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -117,8 +117,8 @@
         "email": "post@sykehusinnkjop.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "VADSØ"

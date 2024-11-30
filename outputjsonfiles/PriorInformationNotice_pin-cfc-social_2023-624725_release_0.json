@@ -1,7 +1,7 @@
 {
   "id": "2023-624725",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-80f45ac5-311b-4b6c-b259-c602eea411bc",
+  "ocid": "ocds-abcd1234-22097b5d-04a4-4306-b9b7-025cc69c33aa",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -140,8 +140,8 @@
         "locality": "Eikelandsosen"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

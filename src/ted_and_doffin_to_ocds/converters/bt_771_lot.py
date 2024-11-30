@@ -60,7 +60,9 @@ def parse_late_tenderer_info(xml_content: str | bytes) -> dict | None:
     for lot in lots:
         lot_id: str = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         late_info_code: list = lot.xpath(
-            "cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:companyLegalFormCode)]"
+            "cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)]"
+            "[not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='reserved-procurement'])]"
+            "[not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='selection-criteria-source'])]"
             "/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='missing-info-submission']"
             "/cbc:TendererRequirementTypeCode/text()",
             namespaces=namespaces,
