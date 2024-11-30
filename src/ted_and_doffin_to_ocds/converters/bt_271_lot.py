@@ -1,7 +1,8 @@
 # converters/bt_271_Lot.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -53,7 +54,7 @@ def parse_bt_271_lot(xml_content):
     return result
 
 
-def merge_bt_271_lot(release_json, bt_271_lot_data):
+def merge_bt_271_lot(release_json, bt_271_lot_data) -> None:
     existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
 
     for new_lot in bt_271_lot_data["tender"]["lots"]:

@@ -1,6 +1,7 @@
 # converters/bt_717_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -52,7 +53,7 @@ def parse_clean_vehicles_directive(xml_content):
     return result if result else None
 
 
-def merge_clean_vehicles_directive(release_json, clean_vehicles_directive_data):
+def merge_clean_vehicles_directive(release_json, clean_vehicles_directive_data) -> None:
     """
     Merge the parsed Clean Vehicles Directive data into the main OCDS release JSON.
 

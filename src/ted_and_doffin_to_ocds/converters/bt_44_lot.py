@@ -1,6 +1,7 @@
 # converters/bt_44_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -45,7 +46,7 @@ def parse_prize_rank(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_prize_rank(release_json, prize_rank_data):
+def merge_prize_rank(release_json, prize_rank_data) -> None:
     if not prize_rank_data:
         logger.warning("No Prize Rank data to merge")
         return

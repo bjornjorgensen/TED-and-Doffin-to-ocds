@@ -1,12 +1,12 @@
 # tests/test_opt_301_lot_docprovider.py
 
 from ted_and_doffin_to_ocds.converters.opt_301_lot_docprovider import (
-    parse_document_provider,
     merge_document_provider,
+    parse_document_provider,
 )
 
 
-def test_parse_document_provider():
+def test_parse_document_provider() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -34,7 +34,7 @@ def test_parse_document_provider():
     assert party["roles"] == ["processContactPoint"]
 
 
-def test_merge_document_provider():
+def test_merge_document_provider() -> None:
     release_json = {"parties": []}
     provider_data = {"parties": [{"id": "TPO-0001", "roles": ["processContactPoint"]}]}
 
@@ -48,7 +48,7 @@ def test_merge_document_provider():
     assert party["roles"] == ["processContactPoint"]
 
 
-def test_merge_document_provider_existing_party():
+def test_merge_document_provider_existing_party() -> None:
     release_json = {
         "parties": [
             {"id": "TPO-0001", "name": "Existing Organization", "roles": ["buyer"]}

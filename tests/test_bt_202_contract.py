@@ -1,12 +1,12 @@
 # tests/test_bt_202_Contract.py
 
 from ted_and_doffin_to_ocds.converters.bt_202_contract import (
-    parse_contract_modification_summary,
     merge_contract_modification_summary,
+    parse_contract_modification_summary,
 )
 
 
-def test_parse_contract_modification_summary():
+def test_parse_contract_modification_summary() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -52,7 +52,7 @@ def test_parse_contract_modification_summary():
     assert contract["awardID"] == "RES-0001"
 
 
-def test_merge_contract_modification_summary():
+def test_merge_contract_modification_summary() -> None:
     existing_json = {"contracts": [{"id": "CON-0001", "awardID": "RES-0001"}]}
 
     modification_data = {

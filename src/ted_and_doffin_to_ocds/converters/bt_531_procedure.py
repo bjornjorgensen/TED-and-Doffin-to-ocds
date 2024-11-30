@@ -1,6 +1,7 @@
 # converters/bt_531_procedure.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -34,7 +35,9 @@ def parse_procedure_additional_nature(xml_content):
     return result if result["tender"]["additionalProcurementCategories"] else None
 
 
-def merge_procedure_additional_nature(release_json, procedure_additional_nature_data):
+def merge_procedure_additional_nature(
+    release_json, procedure_additional_nature_data
+) -> None:
     if not procedure_additional_nature_data:
         logger.warning("No procedure Additional Nature data to merge")
         return

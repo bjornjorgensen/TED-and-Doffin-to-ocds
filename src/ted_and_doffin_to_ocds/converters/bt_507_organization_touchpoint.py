@@ -1,6 +1,7 @@
 # converters/bt_507_organization_touchpoint.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -54,7 +55,7 @@ def parse_organization_touchpoint_country_subdivision(xml_content):
 
 def merge_organization_touchpoint_country_subdivision(
     release_json, organization_touchpoint_country_subdivision_data
-):
+) -> None:
     if not organization_touchpoint_country_subdivision_data:
         logger.info("No organization touchpoint country subdivision data to merge")
         return

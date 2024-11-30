@@ -1,12 +1,12 @@
 # converters/notice_tracker.py
 
-import sqlite3
 import logging
-from datetime import datetime, UTC
-from collections.abc import Generator
-from pathlib import Path
-from contextlib import contextmanager, suppress
+import sqlite3
 import threading
+from collections.abc import Generator
+from contextlib import contextmanager, suppress
+from datetime import UTC, datetime
+from pathlib import Path
 from typing import Final
 
 logger = logging.getLogger(__name__)
@@ -17,7 +17,7 @@ class NoticeTracker:
 
     MAX_WORKERS: Final[int] = 4
 
-    def __init__(self, db_path: str = "notices.db"):
+    def __init__(self, db_path: str = "notices.db") -> None:
         """Initialize the notice tracker."""
         self.db_path = db_path
         self._local = threading.local()
@@ -64,7 +64,7 @@ class NoticeTracker:
             conn.rollback()
             raise
 
-    def __del__(self):
+    def __del__(self) -> None:
         """Clean up connections on deletion."""
         if hasattr(self._local, "connection"):
             with suppress(Exception):
@@ -96,7 +96,7 @@ class NoticeTracker:
             logger.exception("Schema verification failed")
             raise
 
-    def init_db(self):
+    def init_db(self) -> None:
         """Create the database schema."""
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()

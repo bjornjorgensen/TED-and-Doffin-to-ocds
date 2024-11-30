@@ -1,7 +1,8 @@
 # converters/bt_111_Lot.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -44,7 +45,9 @@ def parse_framework_buyer_categories(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_framework_buyer_categories(release_json, framework_buyer_categories_data):
+def merge_framework_buyer_categories(
+    release_json, framework_buyer_categories_data
+) -> None:
     if not framework_buyer_categories_data:
         logger.warning("No Framework buyer Categories data to merge")
         return

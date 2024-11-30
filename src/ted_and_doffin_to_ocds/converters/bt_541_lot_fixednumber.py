@@ -1,6 +1,7 @@
 # converters/bt_541_Lot_FixedNumber.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -52,7 +53,9 @@ def parse_award_criterion_fixed_number(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_award_criterion_fixed_number(release_json, award_criterion_fixed_number_data):
+def merge_award_criterion_fixed_number(
+    release_json, award_criterion_fixed_number_data
+) -> None:
     if not award_criterion_fixed_number_data:
         logger.warning("No Award Criterion Fixed Number data to merge")
         return

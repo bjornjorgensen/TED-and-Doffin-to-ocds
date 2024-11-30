@@ -29,7 +29,7 @@ def parse_procedure_title(xml_content):
     return result if "title" in result["tender"] else None
 
 
-def merge_procedure_title(release_json, procedure_title_data):
+def merge_procedure_title(release_json, procedure_title_data) -> None:
     if not procedure_title_data:
         return
 

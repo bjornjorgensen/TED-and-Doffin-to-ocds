@@ -1,7 +1,9 @@
 # converters/bt_198_bt_1252_procedure.py
 
 import logging
+
 from lxml import etree
+
 from ted_and_doffin_to_ocds.utils.date_utils import start_date
 
 logger = logging.getLogger(__name__)
@@ -48,7 +50,7 @@ def parse_bt198_bt1252_unpublished_access_date(xml_content):
 def merge_bt198_bt1252_unpublished_access_date(
     release_json,
     unpublished_access_date_data,
-):
+) -> None:
     """
     Merge the parsed unpublished access date data into the main OCDS release JSON.
 

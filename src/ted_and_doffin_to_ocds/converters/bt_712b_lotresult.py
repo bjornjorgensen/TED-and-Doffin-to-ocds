@@ -1,7 +1,8 @@
 # converters/bt_712b_lotresult.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -64,7 +65,9 @@ def parse_buyer_review_complainants_number(xml_content):
     return result if result["statistics"] else None
 
 
-def merge_buyer_review_complainants_number(release_json, complainants_number_data):
+def merge_buyer_review_complainants_number(
+    release_json, complainants_number_data
+) -> None:
     """
     Merge the parsed buyer review complainants number data into the main OCDS release JSON.
 

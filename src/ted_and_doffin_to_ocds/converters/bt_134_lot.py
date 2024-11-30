@@ -1,7 +1,8 @@
 # converters/bt_134_Lot.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -43,7 +44,7 @@ def parse_lot_public_opening_description(xml_content):
 def merge_lot_public_opening_description(
     release_json,
     lot_public_opening_description_data,
-):
+) -> None:
     if not lot_public_opening_description_data:
         logger.warning("No Lot Public Opening Description data to merge")
         return

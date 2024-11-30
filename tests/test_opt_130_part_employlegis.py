@@ -1,12 +1,12 @@
 # tests/test_opt_130_part_employlegis.py
 
 from ted_and_doffin_to_ocds.converters.opt_130_part_employlegis import (
-    parse_employment_legislation_url_part,
     merge_employment_legislation_url_part,
+    parse_employment_legislation_url_part,
 )
 
 
-def test_parse_employment_legislation_url_part():
+def test_parse_employment_legislation_url_part() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -38,7 +38,7 @@ def test_parse_employment_legislation_url_part():
     assert doc["url"] == "http://employment-legislation.gov.stat"
 
 
-def test_merge_employment_legislation_url_part():
+def test_merge_employment_legislation_url_part() -> None:
     release_json = {"tender": {"documents": []}}
     empl_legislation_data = {
         "tender": {
@@ -58,7 +58,7 @@ def test_merge_employment_legislation_url_part():
     assert doc["url"] == "http://employment-legislation.gov.stat"
 
 
-def test_merge_employment_legislation_url_part_existing_document():
+def test_merge_employment_legislation_url_part_existing_document() -> None:
     release_json = {
         "tender": {"documents": [{"id": "Empl1", "url": "http://old-url.com"}]}
     }

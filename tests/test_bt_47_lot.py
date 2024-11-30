@@ -1,13 +1,14 @@
 # tests/test_bt_47_Lot.py
 
 import pytest
+
 from ted_and_doffin_to_ocds.converters.bt_47_lot import (
-    parse_participant_name,
     merge_participant_name,
+    parse_participant_name,
 )
 
 
-def test_parse_participant_name():
+def test_parse_participant_name() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -49,7 +50,7 @@ def test_parse_participant_name():
     assert lot["designContest"]["selectedparticipants"][0]["name"] == "Mr P. Sanchez"
 
 
-def test_merge_participant_name():
+def test_merge_participant_name() -> None:
     participant_data = {
         "parties": [
             {"id": "1", "name": "Mr P. Sanchez", "roles": ["selectedparticipant"]},

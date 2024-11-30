@@ -1,6 +1,7 @@
 # converters/bt_42_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -43,7 +44,9 @@ def parse_lot_jury_decision_binding(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_jury_decision_binding(release_json, lot_jury_decision_binding_data):
+def merge_lot_jury_decision_binding(
+    release_json, lot_jury_decision_binding_data
+) -> None:
     if not lot_jury_decision_binding_data:
         logger.warning("No lot jury decision binding data to merge")
         return

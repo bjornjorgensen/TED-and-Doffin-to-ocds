@@ -1,6 +1,7 @@
 # converters/bt_263_part.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -58,7 +59,7 @@ def parse_additional_classification_code_part(xml_content):
 
 def merge_additional_classification_code_part(
     release_json, additional_classification_data
-):
+) -> None:
     """
     Merge the parsed additional classification code data for parts into the main OCDS release JSON.
 

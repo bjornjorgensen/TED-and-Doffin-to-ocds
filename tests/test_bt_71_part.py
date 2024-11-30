@@ -1,13 +1,14 @@
 # tests/test_bt_71_part.py
 
 import pytest
+
 from ted_and_doffin_to_ocds.converters.bt_71_part import (
-    parse_reserved_participation_part,
     merge_reserved_participation_part,
+    parse_reserved_participation_part,
 )
 
 
-def test_parse_reserved_participation_part():
+def test_parse_reserved_participation_part() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -35,7 +36,7 @@ def test_parse_reserved_participation_part():
     ]
 
 
-def test_merge_reserved_participation_part():
+def test_merge_reserved_participation_part() -> None:
     release_json = {"tender": {"title": "Existing Tender"}}
 
     reserved_participation_data = {
@@ -53,7 +54,7 @@ def test_merge_reserved_participation_part():
     ]
 
 
-def test_merge_multiple_reserved_participation_part():
+def test_merge_multiple_reserved_participation_part() -> None:
     release_json = {
         "tender": {
             "otherRequirements": {

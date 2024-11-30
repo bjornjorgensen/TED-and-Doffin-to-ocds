@@ -1,12 +1,12 @@
 # tests/test_bt_506_organization_touchpoint.py
 
 from ted_and_doffin_to_ocds.converters.bt_506_organization_touchpoint import (
-    parse_organization_touchpoint_email,
     merge_organization_touchpoint_email,
+    parse_organization_touchpoint_email,
 )
 
 
-def test_parse_organization_touchpoint_email():
+def test_parse_organization_touchpoint_email() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -47,7 +47,7 @@ def test_parse_organization_touchpoint_email():
     }
 
 
-def test_merge_organization_touchpoint_email():
+def test_merge_organization_touchpoint_email() -> None:
     release_json = {"parties": [{"id": "TPO-0001", "name": "Test Organization"}]}
 
     organization_touchpoint_email_data = {
@@ -76,7 +76,7 @@ def test_merge_organization_touchpoint_email():
     }
 
 
-def test_merge_organization_touchpoint_email_new_party():
+def test_merge_organization_touchpoint_email_new_party() -> None:
     release_json = {"parties": [{"id": "TPO-0001", "name": "Test Organization"}]}
 
     organization_touchpoint_email_data = {

@@ -1,6 +1,7 @@
 # converters/bt_67_Exclusion_Grounds.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -84,7 +85,7 @@ def parse_exclusion_grounds(xml_content):
     return result if result["tender"]["exclusionGrounds"]["criteria"] else None
 
 
-def merge_exclusion_grounds(release_json, exclusion_grounds_data):
+def merge_exclusion_grounds(release_json, exclusion_grounds_data) -> None:
     """
     Merge the parsed exclusion grounds data into the main OCDS release JSON.
 

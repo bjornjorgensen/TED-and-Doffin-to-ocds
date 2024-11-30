@@ -1,7 +1,8 @@
 # converters/bt_09_procedure.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +29,7 @@ def parse_cross_border_law(xml_content):
     return None
 
 
-def merge_cross_border_law(release_json, cross_border_law_data):
+def merge_cross_border_law(release_json, cross_border_law_data) -> None:
     if cross_border_law_data and "tender" in cross_border_law_data:
         release_json.setdefault("tender", {})
         release_json["tender"]["crossBorderLaw"] = cross_border_law_data["tender"][

@@ -1,7 +1,8 @@
 # converters/bt_5131_procedure.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +36,7 @@ def parse_place_performance_city_procedure(xml_content):
 def merge_place_performance_city_procedure(
     release_json,
     place_performance_city_procedure_data,
-):
+) -> None:
     if not place_performance_city_procedure_data:
         logger.warning("No Place Performance City procedure data to merge")
         return

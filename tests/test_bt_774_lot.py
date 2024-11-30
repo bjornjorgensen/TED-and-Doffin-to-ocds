@@ -1,20 +1,21 @@
 # tests/test_bt_774_Lot.py
-from pathlib import Path
-import pytest
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
 
 from ted_and_doffin_to_ocds.converters.bt_774_lot import (
-    parse_green_procurement,
-    merge_green_procurement,
     ENVIRONMENTAL_IMPACT_MAPPING,
+    merge_green_procurement,
+    parse_green_procurement,
 )
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 
 @pytest.fixture(scope="module")
@@ -42,7 +43,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_parse_green_procurement():
+def test_parse_green_procurement() -> None:
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
 <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
     xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -77,7 +78,7 @@ def test_parse_green_procurement():
     ), "Sustainability goal mismatch"
 
 
-def test_merge_green_procurement():
+def test_merge_green_procurement() -> None:
     release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}
 
     green_procurement_data = {
@@ -114,7 +115,7 @@ def test_merge_green_procurement():
 
 def test_bt_774_lot_green_procurement_integration(
     tmp_path, setup_logging, temp_output_dir
-):
+) -> None:
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
 <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"

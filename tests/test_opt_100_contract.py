@@ -1,12 +1,12 @@
 # tests/test_opt_100_contract.py
 
 from ted_and_doffin_to_ocds.converters.opt_100_contract import (
-    parse_framework_notice_identifier,
     merge_framework_notice_identifier,
+    parse_framework_notice_identifier,
 )
 
 
-def test_parse_framework_notice_identifier():
+def test_parse_framework_notice_identifier() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -48,7 +48,7 @@ def test_parse_framework_notice_identifier():
     }
 
 
-def test_merge_framework_notice_identifier():
+def test_merge_framework_notice_identifier() -> None:
     release_json = {"contracts": [{"id": "CON-0001", "title": "Existing Contract"}]}
     framework_notice_identifier_data = {
         "contracts": [

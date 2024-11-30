@@ -1,13 +1,14 @@
-from pathlib import Path
-import pytest
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 
 @pytest.fixture(scope="module")
@@ -32,7 +33,7 @@ def run_main_and_get_result(xml_file, output_dir):
 
 def test_bt197_bt540_lot_unpublished_justification_code_integration(
     tmp_path, setup_logging, temp_output_dir
-):
+) -> None:
     logger = setup_logging
     xml_content = """
     <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -108,7 +109,7 @@ def test_bt197_bt540_lot_unpublished_justification_code_integration(
 
 def test_bt197_bt540_lot_unpublished_justification_code_missing_data(
     tmp_path, setup_logging, temp_output_dir
-):
+) -> None:
     logger = setup_logging
     xml_content = """
     <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"

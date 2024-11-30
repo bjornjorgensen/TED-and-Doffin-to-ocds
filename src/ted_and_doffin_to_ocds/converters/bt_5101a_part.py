@@ -60,7 +60,7 @@ def parse_part_place_performance_street(xml_content):
 def merge_part_place_performance_street(
     release_json,
     part_place_performance_street_data,
-):
+) -> None:
     if not part_place_performance_street_data:
         return
 

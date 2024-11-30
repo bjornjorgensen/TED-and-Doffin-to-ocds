@@ -1,12 +1,12 @@
 # tests/test_opt_202_ubo.py
 
 from ted_and_doffin_to_ocds.converters.opt_202_ubo import (
-    parse_beneficial_owner_identifier,
     merge_beneficial_owner_identifier,
+    parse_beneficial_owner_identifier,
 )
 
 
-def test_parse_beneficial_owner_identifier():
+def test_parse_beneficial_owner_identifier() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -47,7 +47,7 @@ def test_parse_beneficial_owner_identifier():
     assert result["parties"][0]["beneficialOwners"][0]["id"] == "UBO-0001"
 
 
-def test_merge_beneficial_owner_identifier():
+def test_merge_beneficial_owner_identifier() -> None:
     release_json = {"parties": []}
     ubo_data = {
         "parties": [{"id": "ORG-0001", "beneficialOwners": [{"id": "UBO-0001"}]}]
@@ -63,7 +63,7 @@ def test_merge_beneficial_owner_identifier():
     assert release_json["parties"][0]["beneficialOwners"][0]["id"] == "UBO-0001"
 
 
-def test_merge_beneficial_owner_identifier_existing_party():
+def test_merge_beneficial_owner_identifier_existing_party() -> None:
     release_json = {
         "parties": [
             {

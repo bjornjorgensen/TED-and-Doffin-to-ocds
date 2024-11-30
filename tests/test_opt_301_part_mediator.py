@@ -1,12 +1,12 @@
 # tests/test_opt_301_part_mediator.py
 
 from ted_and_doffin_to_ocds.converters.opt_301_part_mediator import (
-    part_parse_mediator,
     part_merge_mediator,
+    part_parse_mediator,
 )
 
 
-def test_parse_mediator():
+def test_parse_mediator() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -28,7 +28,7 @@ def test_parse_mediator():
     assert result == {"parties": [{"id": "ORG-0003", "roles": ["mediationBody"]}]}
 
 
-def test_merge_mediator():
+def test_merge_mediator() -> None:
     release_json = {"parties": [{"id": "ORG-0003", "roles": ["buyer"]}]}
     mediator_data = {"parties": [{"id": "ORG-0003", "roles": ["mediationBody"]}]}
     part_merge_mediator(release_json, mediator_data)
@@ -37,7 +37,7 @@ def test_merge_mediator():
     }
 
 
-def test_merge_mediator_new_party():
+def test_merge_mediator_new_party() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}
     mediator_data = {"parties": [{"id": "ORG-0003", "roles": ["mediationBody"]}]}
     part_merge_mediator(release_json, mediator_data)
@@ -49,7 +49,7 @@ def test_merge_mediator_new_party():
     }
 
 
-def test_merge_mediator_no_data():
+def test_merge_mediator_no_data() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}
     part_merge_mediator(release_json, None)
     assert release_json == {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}

@@ -1,7 +1,8 @@
 # converters/opt_071_lot.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -65,7 +66,7 @@ def parse_quality_target_code(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_quality_target_code(release_json, quality_target_code_data):
+def merge_quality_target_code(release_json, quality_target_code_data) -> None:
     if not quality_target_code_data:
         logger.info("No quality target code data to merge")
         return

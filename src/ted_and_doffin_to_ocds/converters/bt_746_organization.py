@@ -1,6 +1,7 @@
 # converters/bt_746_organization.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -56,7 +57,7 @@ def parse_winner_listed(xml_content):
     return result if result["parties"] else None
 
 
-def merge_winner_listed(release_json, winner_listed_data):
+def merge_winner_listed(release_json, winner_listed_data) -> None:
     """
     Merge the parsed winner listed data into the main OCDS release JSON.
 

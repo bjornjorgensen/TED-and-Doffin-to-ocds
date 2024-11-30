@@ -1,7 +1,8 @@
 # converters/OPP_040_procedure.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +36,7 @@ def parse_main_nature_sub_type(xml_content):
     return result if result["tender"]["additionalProcurementCategories"] else None
 
 
-def merge_main_nature_sub_type(release_json, main_nature_sub_type_data):
+def merge_main_nature_sub_type(release_json, main_nature_sub_type_data) -> None:
     if not main_nature_sub_type_data:
         logger.warning("No Main Nature - Sub Type data to merge")
         return

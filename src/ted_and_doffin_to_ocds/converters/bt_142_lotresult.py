@@ -1,6 +1,7 @@
 # converters/bt_142_LotResult.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -69,7 +70,7 @@ def parse_winner_chosen(xml_content):
     return result if (result["awards"] or result["tender"]["lots"]) else None
 
 
-def merge_winner_chosen(release_json, winner_chosen_data):
+def merge_winner_chosen(release_json, winner_chosen_data) -> None:
     if not winner_chosen_data:
         logger.warning("No winner chosen data to merge")
         return

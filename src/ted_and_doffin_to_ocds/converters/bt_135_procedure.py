@@ -1,6 +1,7 @@
 # converters/bt_135_procedure.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -30,7 +31,9 @@ def parse_direct_award_justification_rationale(xml_content):
     return None
 
 
-def merge_direct_award_justification_rationale(release_json, justification_data):
+def merge_direct_award_justification_rationale(
+    release_json, justification_data
+) -> None:
     if not justification_data:
         return
 

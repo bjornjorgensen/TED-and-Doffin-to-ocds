@@ -1,7 +1,8 @@
 # converters/opt_320_lotresult.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +38,7 @@ def parse_tender_identifier_reference(xml_content):
     return result if result["awards"] else None
 
 
-def merge_tender_identifier_reference(release_json, tender_identifier_data):
+def merge_tender_identifier_reference(release_json, tender_identifier_data) -> None:
     if not tender_identifier_data:
         logger.info("No Tender Identifier Reference data to merge.")
         return

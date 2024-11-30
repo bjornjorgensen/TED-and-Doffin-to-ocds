@@ -1,18 +1,19 @@
 # tests/test_bt_735_LotResult.py
-from pathlib import Path
-import pytest
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
 from src.ted_and_doffin_to_ocds.converters.bt_735_lotresult import (
-    parse_cvd_contract_type_lotresult,
     merge_cvd_contract_type_lotresult,
+    parse_cvd_contract_type_lotresult,
 )
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 
 @pytest.fixture(scope="module")
@@ -28,7 +29,7 @@ def temp_output_dir():
 
 
 @pytest.fixture
-def xml_template():
+def xml_template() -> str:
     """XML template with properly defined namespaces."""
     return """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
@@ -78,7 +79,7 @@ def run_main_and_get_result(xml_file, output_dir):
 )
 def test_cvd_contract_type_parsing(
     xml_template, lot_id, cvd_code, expected_description
-):
+) -> None:
     xml_content = xml_template.format(lot_id=lot_id, cvd_code=cvd_code)
     result = parse_cvd_contract_type_lotresult(xml_content)
 
@@ -93,7 +94,7 @@ def test_cvd_contract_type_parsing(
     assert classification["description"] == expected_description
 
 
-def test_invalid_cvd_code(xml_template):
+def test_invalid_cvd_code(xml_template) -> None:
     xml_content = xml_template.format(lot_id="RES-0001", cvd_code="invalid-code")
     result = parse_cvd_contract_type_lotresult(xml_content)
 
@@ -103,7 +104,7 @@ def test_invalid_cvd_code(xml_template):
     assert classification["description"] == "Unknown CVD contract type"
 
 
-def test_merge_with_existing_award():
+def test_merge_with_existing_award() -> None:
     release_json = {
         "awards": [
             {"id": "RES-0001", "items": [{"id": "1", "additionalClassifications": []}]}
@@ -138,7 +139,7 @@ def test_merge_with_existing_award():
     assert classification["scheme"] == "eu-cvd-contract-type"
 
 
-def test_no_cvd_contract_type(xml_template):
+def test_no_cvd_contract_type(xml_template) -> None:
     modified_template = xml_template.replace(
         '<efbc:ProcurementCategoryCode listName="cvd-contract-type">{cvd_code}</efbc:ProcurementCategoryCode>',
         "",
@@ -148,7 +149,7 @@ def test_no_cvd_contract_type(xml_template):
     assert result is None
 
 
-def test_bt_735_lotresult_integration(tmp_path, setup_logging, temp_output_dir):
+def test_bt_735_lotresult_integration(tmp_path, setup_logging, temp_output_dir) -> None:
     logger = setup_logging
 
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>

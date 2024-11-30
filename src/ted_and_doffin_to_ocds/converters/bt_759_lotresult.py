@@ -1,6 +1,7 @@
 # converters/bt_759_LotResult.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -69,7 +70,7 @@ def parse_received_submissions_count(xml_content):
     return result if result["bids"]["statistics"] else None
 
 
-def merge_received_submissions_count(release_json, received_submissions_data):
+def merge_received_submissions_count(release_json, received_submissions_data) -> None:
     """
     Merge the parsed received submissions count data into the main OCDS release JSON.
 

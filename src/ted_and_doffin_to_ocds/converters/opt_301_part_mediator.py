@@ -1,7 +1,8 @@
 # converters/opt_301_part_mediator.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +30,7 @@ def part_parse_mediator(xml_content):
     return result
 
 
-def part_merge_mediator(release_json, mediator_data):
+def part_merge_mediator(release_json, mediator_data) -> None:
     if not mediator_data:
         logger.info("No Mediator data to merge.")
         return

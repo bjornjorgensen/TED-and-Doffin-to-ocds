@@ -1,6 +1,7 @@
 # converters/bt_707_part.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -71,7 +72,9 @@ def parse_part_documents_restricted_justification(xml_content):
         raise
 
 
-def merge_part_documents_restricted_justification(release_json, part_documents_data):
+def merge_part_documents_restricted_justification(
+    release_json, part_documents_data
+) -> None:
     """
     Merge the parsed part documents restricted justification data into the main OCDS release JSON.
 

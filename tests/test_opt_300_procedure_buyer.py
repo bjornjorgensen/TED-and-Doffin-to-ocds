@@ -1,14 +1,15 @@
 # tests/test_opt_300_procedure_buyer.py
 
 import pytest
+
 from ted_and_doffin_to_ocds.converters.opt_300_procedure_buyer import (
-    parse_buyer_technical_identifier,
     merge_buyer_technical_identifier,
+    parse_buyer_technical_identifier,
 )
 
 
 @pytest.fixture
-def sample_xml():
+def sample_xml() -> str:
     return """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -30,7 +31,7 @@ def sample_xml():
     """
 
 
-def test_parse_buyer_technical_identifier(sample_xml):
+def test_parse_buyer_technical_identifier(sample_xml) -> None:
     result = parse_buyer_technical_identifier(sample_xml)
     assert result is not None
     assert "parties" in result
@@ -45,7 +46,7 @@ def test_parse_buyer_technical_identifier(sample_xml):
     assert result["buyer"][1]["id"] == "ORG-0002"
 
 
-def test_merge_buyer_technical_identifier():
+def test_merge_buyer_technical_identifier() -> None:
     buyer_data = {
         "parties": [
             {"id": "ORG-0001", "roles": ["buyer"]},
@@ -67,7 +68,7 @@ def test_merge_buyer_technical_identifier():
     assert release_json["buyer"][1]["id"] == "ORG-0002"
 
 
-def test_merge_buyer_technical_identifier_existing_party():
+def test_merge_buyer_technical_identifier_existing_party() -> None:
     buyer_data = {
         "parties": [
             {"id": "ORG-0001", "roles": ["buyer"]},
@@ -91,13 +92,13 @@ def test_merge_buyer_technical_identifier_existing_party():
     assert {"id": "ORG-0003"} in release_json["buyer"]
 
 
-def test_parse_buyer_technical_identifier_no_data():
+def test_parse_buyer_technical_identifier_no_data() -> None:
     xml_content = "<root></root>"
     result = parse_buyer_technical_identifier(xml_content)
     assert result is None
 
 
-def test_merge_buyer_technical_identifier_no_data():
+def test_merge_buyer_technical_identifier_no_data() -> None:
     release_json = {}
     merge_buyer_technical_identifier(release_json, None)
     assert release_json == {}

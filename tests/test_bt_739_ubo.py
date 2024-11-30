@@ -1,18 +1,19 @@
-from pathlib import Path
-import pytest
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
 from typing import Any
+
+import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
 from src.ted_and_doffin_to_ocds.converters.bt_739_ubo import (
-    parse_ubo_fax,
     merge_ubo_fax,
+    parse_ubo_fax,
 )
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 # Test constants
 TEST_UBO_XML = """<?xml version="1.0" encoding="UTF-8"?>
@@ -108,7 +109,7 @@ def validate_ubo_data(result: dict[str, Any], expected_fax: str) -> None:
 # Tests
 def test_bt_739_ubo_integration(
     sample_xml_file: Path, setup_logging, temp_output_dir: Path
-):
+) -> None:
     """Test complete integration of UBO fax processing"""
     logger = setup_logging
 
@@ -119,7 +120,7 @@ def test_bt_739_ubo_integration(
     logger.info("Test bt_739_ubo_integration passed successfully.")
 
 
-def test_parse_ubo_fax():
+def test_parse_ubo_fax() -> None:
     """Test parsing UBO fax data directly"""
     result = parse_ubo_fax(TEST_UBO_XML)
 
@@ -135,7 +136,7 @@ def test_parse_ubo_fax():
     assert ubo["faxNumber"] == "+123 4567891", "Wrong fax number parsed"
 
 
-def test_merge_ubo_fax(sample_release_json):
+def test_merge_ubo_fax(sample_release_json) -> None:
     """Test merging UBO fax data into existing release"""
     ubo_data = {
         "parties": [
@@ -150,13 +151,13 @@ def test_merge_ubo_fax(sample_release_json):
     validate_ubo_data(sample_release_json, "+123 4567891")
 
 
-def test_parse_invalid_xml():
+def test_parse_invalid_xml() -> None:
     """Test parsing invalid XML content"""
     result = parse_ubo_fax("Invalid XML content")
     assert result is None, "Expected None result for invalid XML"
 
 
-def test_merge_empty_data(sample_release_json):
+def test_merge_empty_data(sample_release_json) -> None:
     """Test merging empty UBO data"""
     original_json = json.dumps(sample_release_json)
     merge_ubo_fax(sample_release_json, None)

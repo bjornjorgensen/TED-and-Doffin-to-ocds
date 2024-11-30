@@ -1,7 +1,8 @@
 # converters/OPP_080_Tender.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -74,7 +75,7 @@ def parse_kilometers_public_transport(xml_content):
     return result if result["contracts"] else None
 
 
-def merge_kilometers_public_transport(release_json, kilometers_data):
+def merge_kilometers_public_transport(release_json, kilometers_data) -> None:
     if not kilometers_data:
         logger.warning("No Kilometers Public Transport data to merge")
         return

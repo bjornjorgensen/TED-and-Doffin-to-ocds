@@ -1,6 +1,7 @@
 # converters/bt_63_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -82,7 +83,7 @@ def parse_variants(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_variants(release_json, variants_data):
+def merge_variants(release_json, variants_data) -> None:
     """
     Merge the parsed variant policy data into the main OCDS release JSON.
 

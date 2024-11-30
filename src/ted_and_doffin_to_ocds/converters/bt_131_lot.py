@@ -1,8 +1,9 @@
 # converters/bt_131_Lot.py
 
 import logging
+from datetime import UTC, datetime, timedelta, timezone
+
 from lxml import etree
-from datetime import datetime, timezone, timedelta, UTC
 
 logger = logging.getLogger(__name__)
 
@@ -92,7 +93,7 @@ def parse_deadline_receipt_tenders(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_deadline_receipt_tenders(release_json, deadline_data):
+def merge_deadline_receipt_tenders(release_json, deadline_data) -> None:
     if not deadline_data:
         logger.warning("No Deadline Receipt Tenders data to merge")
         return

@@ -1,14 +1,15 @@
 # tests/test_bt_763_LotsAllRequired.py
-from pathlib import Path
-import pytest
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 
 @pytest.fixture(scope="module")
@@ -31,7 +32,9 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_763_lots_all_required_integration(tmp_path, setup_logging, temp_output_dir):
+def test_bt_763_lots_all_required_integration(
+    tmp_path, setup_logging, temp_output_dir
+) -> None:
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
 <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
@@ -61,7 +64,9 @@ def test_bt_763_lots_all_required_integration(tmp_path, setup_logging, temp_outp
     ), f"Expected maximumLotsBidPerSupplier to be 1e9999, got {max_lots}"
 
 
-def test_bt_763_lots_all_required_not_all(tmp_path, setup_logging, temp_output_dir):
+def test_bt_763_lots_all_required_not_all(
+    tmp_path, setup_logging, temp_output_dir
+) -> None:
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
 <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
@@ -86,7 +91,7 @@ def test_bt_763_lots_all_required_not_all(tmp_path, setup_logging, temp_output_d
 
 def test_bt_763_lots_all_required_missing_element(
     tmp_path, setup_logging, temp_output_dir
-):
+) -> None:
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
 <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
@@ -109,7 +114,9 @@ def test_bt_763_lots_all_required_missing_element(
     ), "Did not expect 'lotDetails' in result when partPresentationCode is missing"
 
 
-def test_bt_763_lots_all_required_empty_value(tmp_path, setup_logging, temp_output_dir):
+def test_bt_763_lots_all_required_empty_value(
+    tmp_path, setup_logging, temp_output_dir
+) -> None:
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
 <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
@@ -134,7 +141,7 @@ def test_bt_763_lots_all_required_empty_value(tmp_path, setup_logging, temp_outp
 
 def test_bt_763_lots_all_required_case_insensitive(
     tmp_path, setup_logging, temp_output_dir
-):
+) -> None:
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
 <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"

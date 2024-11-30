@@ -1,6 +1,7 @@
 # converters/bt_24_part.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -33,7 +34,7 @@ def parse_part_description(xml_content):
     return None
 
 
-def merge_part_description(release_json, part_description_data):
+def merge_part_description(release_json, part_description_data) -> None:
     if not part_description_data:
         logger.warning("No part Description data to merge")
         return

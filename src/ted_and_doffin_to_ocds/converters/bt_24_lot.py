@@ -1,6 +1,7 @@
 # converters/bt_24_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -40,7 +41,7 @@ def parse_lot_description(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_description(release_json, lot_description_data):
+def merge_lot_description(release_json, lot_description_data) -> None:
     if not lot_description_data:
         logger.warning("No Lot Description data to merge")
         return

@@ -1,12 +1,12 @@
 # tests/test_bt_5131_part.py
 
 from ted_and_doffin_to_ocds.converters.bt_5131_part import (
-    parse_place_performance_city_part,
     merge_place_performance_city_part,
+    parse_place_performance_city_part,
 )
 
 
-def test_parse_place_performance_city_part():
+def test_parse_place_performance_city_part() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -38,7 +38,7 @@ def test_parse_place_performance_city_part():
     assert result["tender"]["deliveryAddresses"][1] == {"locality": "Los Angeles"}
 
 
-def test_parse_place_performance_city_part_empty():
+def test_parse_place_performance_city_part_empty() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -59,7 +59,7 @@ def test_parse_place_performance_city_part_empty():
     assert result is None
 
 
-def test_merge_place_performance_city_part():
+def test_merge_place_performance_city_part() -> None:
     existing_json = {"tender": {"deliveryAddresses": [{"postalCode": "10001"}]}}
 
     new_data = {
@@ -81,7 +81,7 @@ def test_merge_place_performance_city_part():
     }
 
 
-def test_merge_place_performance_city_part_update():
+def test_merge_place_performance_city_part_update() -> None:
     existing_json = {
         "tender": {
             "deliveryAddresses": [{"locality": "New York", "postalCode": "10001"}],
@@ -102,7 +102,7 @@ def test_merge_place_performance_city_part_update():
     }
 
 
-def test_merge_place_performance_city_part_empty():
+def test_merge_place_performance_city_part_empty() -> None:
     existing_json = {"tender": {}}
     merge_place_performance_city_part(existing_json, None)
     assert existing_json == {"tender": {}}

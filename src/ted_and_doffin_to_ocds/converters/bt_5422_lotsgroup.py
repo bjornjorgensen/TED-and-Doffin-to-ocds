@@ -1,6 +1,7 @@
 # converters/bt_5422_LotsGroup.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -55,7 +56,7 @@ def parse_award_criterion_number_fixed_lotsgroup(xml_content):
 def merge_award_criterion_number_fixed_lotsgroup(
     release_json,
     award_criterion_number_fixed_lotsgroup_data,
-):
+) -> None:
     if not award_criterion_number_fixed_lotsgroup_data:
         logger.warning("No Award Criterion Number Fixed LotsGroup data to merge")
         return

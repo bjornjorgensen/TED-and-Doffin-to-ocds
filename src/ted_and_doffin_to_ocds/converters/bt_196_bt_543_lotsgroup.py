@@ -1,6 +1,7 @@
 # converters/bt_196_bt_543_lotsgroup.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -49,7 +50,7 @@ def parse_bt196_bt543_lotsgroup(xml_content):
     return result if result["withheldInformation"] else None
 
 
-def merge_bt196_bt543_lotsgroup(release_json, unpublished_justification_data):
+def merge_bt196_bt543_lotsgroup(release_json, unpublished_justification_data) -> None:
     """
     Merge the parsed unpublished justification description data into the main OCDS release JSON.
 

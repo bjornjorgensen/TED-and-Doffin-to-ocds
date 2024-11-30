@@ -1,16 +1,17 @@
-from pathlib import Path
-import pytest
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 from ted_and_doffin_to_ocds.converters.bt_706_ubo import (
-    parse_ubo_nationality,
     merge_ubo_nationality,
+    parse_ubo_nationality,
 )
 
 
@@ -34,7 +35,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_parse_ubo_nationality(setup_logging):
+def test_parse_ubo_nationality(setup_logging) -> None:
     logger = setup_logging
 
     xml_content = """
@@ -78,7 +79,7 @@ def test_parse_ubo_nationality(setup_logging):
     assert result["parties"][0]["beneficialOwners"][0]["nationalities"] == ["DE"]
 
 
-def test_merge_ubo_nationality(setup_logging):
+def test_merge_ubo_nationality(setup_logging) -> None:
     logger = setup_logging
 
     release_json = {"parties": [{"id": "ORG-0001", "name": "Existing organization"}]}
@@ -101,7 +102,9 @@ def test_merge_ubo_nationality(setup_logging):
     assert release_json["parties"][0]["beneficialOwners"][0]["nationalities"] == ["DE"]
 
 
-def test_bt_706_ubo_nationality_integration(tmp_path, setup_logging, temp_output_dir):
+def test_bt_706_ubo_nationality_integration(
+    tmp_path, setup_logging, temp_output_dir
+) -> None:
     logger = setup_logging
 
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>

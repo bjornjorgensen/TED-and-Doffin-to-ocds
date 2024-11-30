@@ -1,12 +1,12 @@
 # tests/test_opt_301_lot_tendereval.py
 
 from ted_and_doffin_to_ocds.converters.opt_301_lot_tendereval import (
-    parse_tender_evaluator,
     merge_tender_evaluator,
+    parse_tender_evaluator,
 )
 
 
-def test_parse_tender_evaluator():
+def test_parse_tender_evaluator() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -34,7 +34,7 @@ def test_parse_tender_evaluator():
     assert party["roles"] == ["evaluationBody"]
 
 
-def test_merge_tender_evaluator():
+def test_merge_tender_evaluator() -> None:
     release_json = {"parties": []}
     tender_evaluator_data = {
         "parties": [{"id": "TPO-0001", "roles": ["evaluationBody"]}]
@@ -50,7 +50,7 @@ def test_merge_tender_evaluator():
     assert party["roles"] == ["evaluationBody"]
 
 
-def test_merge_tender_evaluator_existing_party():
+def test_merge_tender_evaluator_existing_party() -> None:
     release_json = {
         "parties": [
             {"id": "TPO-0001", "name": "Existing Organization", "roles": ["buyer"]}

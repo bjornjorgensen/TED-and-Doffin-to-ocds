@@ -1,12 +1,12 @@
 # tests/test_opt_301_part_reviewinfo.py
 
 from ted_and_doffin_to_ocds.converters.opt_301_part_reviewinfo import (
-    part_parse_review_info_provider,
     part_merge_review_info_provider,
+    part_parse_review_info_provider,
 )
 
 
-def test_parse_review_info_provider():
+def test_parse_review_info_provider() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -28,7 +28,7 @@ def test_parse_review_info_provider():
     assert result == {"parties": [{"id": "TPO-0001", "roles": ["reviewContactPoint"]}]}
 
 
-def test_merge_review_info_provider():
+def test_merge_review_info_provider() -> None:
     release_json = {"parties": [{"id": "TPO-0001", "roles": ["buyer"]}]}
     review_info_provider_data = {
         "parties": [{"id": "TPO-0001", "roles": ["reviewContactPoint"]}]
@@ -39,7 +39,7 @@ def test_merge_review_info_provider():
     }
 
 
-def test_merge_review_info_provider_new_party():
+def test_merge_review_info_provider_new_party() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}
     review_info_provider_data = {
         "parties": [{"id": "TPO-0001", "roles": ["reviewContactPoint"]}]
@@ -53,7 +53,7 @@ def test_merge_review_info_provider_new_party():
     }
 
 
-def test_merge_review_info_provider_no_data():
+def test_merge_review_info_provider_no_data() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}
     part_merge_review_info_provider(release_json, None)
     assert release_json == {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}

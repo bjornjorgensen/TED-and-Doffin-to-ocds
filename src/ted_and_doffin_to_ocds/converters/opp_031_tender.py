@@ -1,7 +1,8 @@
 # converters/OPP_031_Tender.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -68,7 +69,7 @@ def parse_contract_conditions(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_contract_conditions(release_json, contract_conditions_data):
+def merge_contract_conditions(release_json, contract_conditions_data) -> None:
     if not contract_conditions_data:
         logger.warning("No Contract Conditions data to merge")
         return

@@ -1,6 +1,7 @@
 # converters/bt_510a_organization_company.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -62,7 +63,7 @@ def parse_organization_street(xml_content):
     return result if result["parties"] else None
 
 
-def merge_organization_street(release_json, organization_street_data):
+def merge_organization_street(release_json, organization_street_data) -> None:
     if not organization_street_data:
         logger.warning("No organization Street data to merge")
         return

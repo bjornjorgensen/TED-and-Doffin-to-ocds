@@ -1,7 +1,8 @@
 # converters/bt_1252_procedure.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -53,7 +54,7 @@ def parse_direct_award_justification(xml_content):
     return result if result["relatedProcesses"] else None
 
 
-def merge_direct_award_justification(release_json, direct_award_data):
+def merge_direct_award_justification(release_json, direct_award_data) -> None:
     if not direct_award_data:
         logger.warning("No Direct Award Justification data to merge")
         return

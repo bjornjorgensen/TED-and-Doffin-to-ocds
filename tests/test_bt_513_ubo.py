@@ -1,9 +1,9 @@
 # tests/test_bt_513_ubo.py
 
-from ted_and_doffin_to_ocds.converters.bt_513_ubo import parse_ubo_city, merge_ubo_city
+from ted_and_doffin_to_ocds.converters.bt_513_ubo import merge_ubo_city, parse_ubo_city
 
 
-def test_parse_ubo_city():
+def test_parse_ubo_city() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -43,7 +43,7 @@ def test_parse_ubo_city():
     }
 
 
-def test_merge_ubo_city():
+def test_merge_ubo_city() -> None:
     release_json = {
         "parties": [
             {
@@ -84,7 +84,7 @@ def test_merge_ubo_city():
     }
 
 
-def test_merge_ubo_city_new_party():
+def test_merge_ubo_city_new_party() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "name": "Test Organization"}]}
 
     ubo_city_data = {

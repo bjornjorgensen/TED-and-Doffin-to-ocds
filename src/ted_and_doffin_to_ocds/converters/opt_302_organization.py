@@ -1,6 +1,7 @@
 # converters/opt_302_organization.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -53,7 +54,7 @@ def parse_beneficial_owner_reference(xml_content):
     return result if result["parties"] else None
 
 
-def merge_beneficial_owner_reference(release_json, parsed_data):
+def merge_beneficial_owner_reference(release_json, parsed_data) -> None:
     if not parsed_data:
         return
 

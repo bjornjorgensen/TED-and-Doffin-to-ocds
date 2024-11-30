@@ -1,6 +1,7 @@
 # converters/bt_75_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -51,7 +52,9 @@ def parse_guarantee_required_description(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_guarantee_required_description(release_json, guarantee_description_data):
+def merge_guarantee_required_description(
+    release_json, guarantee_description_data
+) -> None:
     """
     Merge the parsed guarantee required description data into the main OCDS release JSON.
 

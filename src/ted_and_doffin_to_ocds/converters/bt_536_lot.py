@@ -1,7 +1,9 @@
 # converters/bt_536_Lot.py
 
 import logging
+
 from lxml import etree
+
 from ted_and_doffin_to_ocds.utils.date_utils import start_date
 
 logger = logging.getLogger(__name__)
@@ -57,7 +59,7 @@ def parse_lot_start_date(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_start_date(release_json, lot_start_date_data):
+def merge_lot_start_date(release_json, lot_start_date_data) -> None:
     logger.info("Starting merge_lot_start_date function")
     logger.info("Merging lot start date data: %s", lot_start_date_data)
     if not lot_start_date_data:

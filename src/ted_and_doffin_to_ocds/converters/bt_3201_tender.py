@@ -1,6 +1,7 @@
 # converters/bt_3201_Tender.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -19,7 +20,7 @@ ISO_3166_1_ALPHA_2 = {
 }
 
 
-def determine_scheme(country_code, system):
+def determine_scheme(country_code, system) -> str:
     if country_code in ISO_3166_1_ALPHA_2:
         return f"{country_code}-{system}"
     logger.warning("Unknown country code: %s. Using default scheme.", country_code)
@@ -72,7 +73,7 @@ def parse_tender_identifier(xml_content):
     return result if result["bids"]["details"] else None
 
 
-def merge_tender_identifier(release_json, tender_identifier_data):
+def merge_tender_identifier(release_json, tender_identifier_data) -> None:
     if not tender_identifier_data:
         logger.warning("No Tender Identifier data to merge")
         return

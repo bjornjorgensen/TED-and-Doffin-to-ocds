@@ -1,6 +1,7 @@
 # converters/bt_5071_part.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -31,7 +32,9 @@ def parse_place_performance_country_subdivision_part(xml_content):
     return result if result["tender"]["deliveryAddresses"] else None
 
 
-def merge_place_performance_country_subdivision_part(release_json, subdivision_data):
+def merge_place_performance_country_subdivision_part(
+    release_json, subdivision_data
+) -> None:
     if not subdivision_data:
         logger.info("No place performance country subdivision data for Parts to merge")
         return

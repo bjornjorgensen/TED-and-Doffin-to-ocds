@@ -1,6 +1,7 @@
 # converters/bt_98_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -72,7 +73,7 @@ def parse_tender_validity_deadline(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_tender_validity_deadline(release_json, tender_validity_deadline_data):
+def merge_tender_validity_deadline(release_json, tender_validity_deadline_data) -> None:
     """
     Merge the parsed tender validity deadline data into the main OCDS release JSON.
 

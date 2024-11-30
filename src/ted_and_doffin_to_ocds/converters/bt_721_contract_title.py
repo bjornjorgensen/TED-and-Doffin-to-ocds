@@ -1,6 +1,7 @@
 # converters/bt_721_Contract.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -67,7 +68,7 @@ def parse_contract_title(xml_content):
     return result if result["contracts"] else None
 
 
-def merge_contract_title(release_json, contract_title_data):
+def merge_contract_title(release_json, contract_title_data) -> None:
     """
     Merge the parsed contract title data into the main OCDS release JSON.
 

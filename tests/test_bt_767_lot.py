@@ -1,18 +1,20 @@
-from pathlib import Path
-import pytest
-from ted_and_doffin_to_ocds.converters.bt_767_lot import (
-    parse_electronic_auction,
-    merge_electronic_auction,
-)
 import json
-import sys
-import tempfile
 import logging
 import os
+import sys
+import tempfile
+from pathlib import Path
+
+import pytest
+
+from ted_and_doffin_to_ocds.converters.bt_767_lot import (
+    merge_electronic_auction,
+    parse_electronic_auction,
+)
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 
 @pytest.fixture(scope="module")
@@ -57,7 +59,7 @@ def run_main_and_get_result(xml_file, output_dir):
     return json.loads(output_files[0].read_text())
 
 
-def test_parse_electronic_auction_true():
+def test_parse_electronic_auction_true() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -76,7 +78,7 @@ def test_parse_electronic_auction_true():
     assert result["tender"]["lots"][0]["techniques"]["hasElectronicAuction"] is True
 
 
-def test_parse_electronic_auction_false():
+def test_parse_electronic_auction_false() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -95,7 +97,7 @@ def test_parse_electronic_auction_false():
     assert result["tender"]["lots"][0]["techniques"]["hasElectronicAuction"] is False
 
 
-def test_parse_electronic_auction_missing():
+def test_parse_electronic_auction_missing() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -110,7 +112,7 @@ def test_parse_electronic_auction_missing():
     assert result is None
 
 
-def test_merge_electronic_auction_new_lot():
+def test_merge_electronic_auction_new_lot() -> None:
     release_json = {"tender": {"lots": []}}
     electronic_auction_data = {
         "tender": {
@@ -124,7 +126,7 @@ def test_merge_electronic_auction_new_lot():
     )
 
 
-def test_merge_electronic_auction_existing_lot():
+def test_merge_electronic_auction_existing_lot() -> None:
     release_json = {
         "tender": {
             "lots": [
@@ -148,7 +150,7 @@ def test_merge_electronic_auction_existing_lot():
     )
 
 
-def test_merge_electronic_auction_none_data():
+def test_merge_electronic_auction_none_data() -> None:
     release_json = {"tender": {"lots": []}}
     merge_electronic_auction(release_json, None)
     assert release_json == {"tender": {"lots": []}}
@@ -156,7 +158,7 @@ def test_merge_electronic_auction_none_data():
 
 def test_bt_767_lot_electronic_auction_integration(
     tmp_path, temp_output_dir, setup_logging
-):
+) -> None:
     logger = setup_logging
     logger.debug("Starting integration test")
 

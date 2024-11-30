@@ -1,6 +1,7 @@
 # converters/bt_60_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -54,7 +55,7 @@ def parse_eu_funds(xml_content):
     return None
 
 
-def merge_eu_funds(release_json, eu_funds_data):
+def merge_eu_funds(release_json, eu_funds_data) -> None:
     """
     Merge the parsed EU funds data into the main OCDS release JSON.
 

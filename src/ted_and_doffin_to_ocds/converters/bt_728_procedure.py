@@ -1,6 +1,7 @@
 # converters/bt_728_procedure.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -52,7 +53,9 @@ def parse_procedure_place_performance_additional(xml_content):
     return result if result["tender"]["deliveryAddresses"] else None
 
 
-def merge_procedure_place_performance_additional(release_json, place_performance_data):
+def merge_procedure_place_performance_additional(
+    release_json, place_performance_data
+) -> None:
     """
     Merge the additional place performance data into the OCDS release,
     concatenating descriptions for matching addresses.

@@ -1,7 +1,9 @@
 # converters/bt_198_bt_553_Tender.py
 
 import logging
+
 from lxml import etree
+
 from ted_and_doffin_to_ocds.utils.date_utils import start_date
 
 logger = logging.getLogger(__name__)
@@ -50,7 +52,7 @@ def parse_bt198_bt553_tender(xml_content):
     return result if result["withheldInformation"] else None
 
 
-def merge_bt198_bt553_tender(release_json, unpublished_access_date_data):
+def merge_bt198_bt553_tender(release_json, unpublished_access_date_data) -> None:
     """
     Merge the parsed unpublished access date data into the main OCDS release JSON.
 

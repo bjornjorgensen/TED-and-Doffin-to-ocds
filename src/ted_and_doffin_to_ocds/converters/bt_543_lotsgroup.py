@@ -1,6 +1,7 @@
 # converters/bt_543_LotsGroup.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -43,7 +44,9 @@ def parse_award_criteria_complicated_lotsgroup(xml_content):
     return result if result["tender"]["lotGroups"] else None
 
 
-def merge_award_criteria_complicated_lotsgroup(release_json, award_criteria_data):
+def merge_award_criteria_complicated_lotsgroup(
+    release_json, award_criteria_data
+) -> None:
     if not award_criteria_data:
         logger.warning("No award criteria complicated data for lot groups to merge")
         return

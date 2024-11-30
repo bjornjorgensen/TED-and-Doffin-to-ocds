@@ -1,6 +1,7 @@
 # converters/bt_50_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -51,7 +52,7 @@ def parse_minimum_candidates(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_minimum_candidates(release_json, minimum_candidates_data):
+def merge_minimum_candidates(release_json, minimum_candidates_data) -> None:
     if not minimum_candidates_data:
         logger.info("No Minimum Candidates data to merge")
         return

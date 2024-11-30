@@ -1,14 +1,15 @@
 # tests/test_bt_195_bt_541_lotsgroup_threshold.py
-from pathlib import Path
-import pytest
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 
 @pytest.fixture(scope="module")
@@ -35,7 +36,7 @@ def test_bt195_bt541_lotsgroup_threshold_unpublished_identifier_integration(
     tmp_path,
     setup_logging,
     temp_output_dir,
-):
+) -> None:
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
@@ -98,7 +99,7 @@ def test_bt195_bt541_lotsgroup_threshold_unpublished_identifier_integration(
 
 def test_bt195_bt541_lotsgroup_threshold_multiple_groups(
     tmp_path, setup_logging, temp_output_dir
-):
+) -> None:
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
@@ -195,7 +196,7 @@ def test_bt195_bt541_lotsgroup_threshold_no_unpublished_identifier(
     tmp_path,
     setup_logging,
     temp_output_dir,
-):
+) -> None:
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"

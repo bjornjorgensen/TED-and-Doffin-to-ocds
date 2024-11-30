@@ -1,7 +1,8 @@
 # converters/bt_802_Lot.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -50,7 +51,9 @@ def parse_non_disclosure_agreement_description(xml_content):
     return result
 
 
-def merge_non_disclosure_agreement_description(release_json, nda_description_data):
+def merge_non_disclosure_agreement_description(
+    release_json, nda_description_data
+) -> None:
     logger.info("Merging BT-802-Lot: Non Disclosure Agreement Description")
     if not nda_description_data["tender"]["lots"]:
         logger.warning("No NDA description data to merge")

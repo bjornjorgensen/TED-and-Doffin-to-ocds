@@ -1,6 +1,7 @@
 # converters/bt_1375_procedure.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -40,7 +41,7 @@ def parse_group_lot_identifier(xml_content):
     return result if result["tender"]["lotGroups"] else None
 
 
-def merge_group_lot_identifier(release_json, group_lot_data):
+def merge_group_lot_identifier(release_json, group_lot_data) -> None:
     if not group_lot_data:
         logger.warning("No Group Lot Identifier data to merge")
         return

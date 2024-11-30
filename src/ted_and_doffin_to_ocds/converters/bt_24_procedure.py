@@ -1,6 +1,7 @@
 # converters/bt_24_procedure.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -33,7 +34,7 @@ def parse_procedure_description(xml_content):
     return None
 
 
-def merge_procedure_description(release_json, procedure_description_data):
+def merge_procedure_description(release_json, procedure_description_data) -> None:
     if not procedure_description_data:
         logger.warning("No procedure Description data to merge")
         return

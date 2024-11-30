@@ -1,7 +1,8 @@
 # converters/opt_300_contract_signatory.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -59,7 +60,7 @@ def parse_signatory_identifier_reference(xml_content):
     return result if (result["parties"] or result["awards"]) else None
 
 
-def merge_signatory_identifier_reference(release_json, signatory_data):
+def merge_signatory_identifier_reference(release_json, signatory_data) -> None:
     if not signatory_data:
         logger.info("No Signatory Identifier Reference data to merge")
         return

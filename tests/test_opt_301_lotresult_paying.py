@@ -1,12 +1,12 @@
 # tests/test_opt_301_lotresult_paying.py
 
 from ted_and_doffin_to_ocds.converters.opt_301_lotresult_paying import (
-    parse_payer_party,
     merge_payer_party,
+    parse_payer_party,
 )
 
 
-def test_parse_payer_party():
+def test_parse_payer_party() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -36,7 +36,7 @@ def test_parse_payer_party():
     assert party["roles"] == ["payer"]
 
 
-def test_merge_payer_party():
+def test_merge_payer_party() -> None:
     release_json = {"parties": []}
     payer_party_data = {"parties": [{"id": "ORG-0001", "roles": ["payer"]}]}
 
@@ -50,7 +50,7 @@ def test_merge_payer_party():
     assert party["roles"] == ["payer"]
 
 
-def test_merge_payer_party_existing_party():
+def test_merge_payer_party_existing_party() -> None:
     release_json = {
         "parties": [
             {"id": "ORG-0001", "name": "Existing Organization", "roles": ["buyer"]}

@@ -1,7 +1,8 @@
 # converters/opt_110_lot_fiscallegis.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -49,7 +50,7 @@ def parse_fiscal_legislation_url(xml_content):
     return result if result["tender"]["documents"] else None
 
 
-def merge_fiscal_legislation_url(release_json, fiscal_legislation_url_data):
+def merge_fiscal_legislation_url(release_json, fiscal_legislation_url_data) -> None:
     if not fiscal_legislation_url_data:
         logger.info("No fiscal legislation URL data to merge")
         return

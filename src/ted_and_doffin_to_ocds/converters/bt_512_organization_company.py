@@ -1,6 +1,7 @@
 # converters/bt_512_organization_company.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -43,7 +44,7 @@ def parse_organization_postcode(xml_content):
     return result if result["parties"] else None
 
 
-def merge_organization_postcode(release_json, organization_postcode_data):
+def merge_organization_postcode(release_json, organization_postcode_data) -> None:
     if not organization_postcode_data:
         logger.warning("No organization Postcode data to merge")
         return

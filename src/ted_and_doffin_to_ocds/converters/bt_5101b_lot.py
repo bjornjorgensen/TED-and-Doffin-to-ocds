@@ -1,7 +1,8 @@
 # converters/bt_5101b_Lot.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -94,7 +95,7 @@ def parse_lot_place_performance_streetline1(xml_content):
 def merge_lot_place_performance_streetline1(
     release_json,
     lot_place_performance_streetline1_data,
-):
+) -> None:
     if not lot_place_performance_streetline1_data:
         return
 

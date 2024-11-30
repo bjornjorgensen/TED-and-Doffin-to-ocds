@@ -1,6 +1,7 @@
 # converters/bt_510b_organization_touchpoint.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -71,7 +72,7 @@ def parse_touchpoint_streetline1(xml_content):
     return result if result["parties"] else None
 
 
-def merge_touchpoint_streetline1(release_json, touchpoint_streetline1_data):
+def merge_touchpoint_streetline1(release_json, touchpoint_streetline1_data) -> None:
     if not touchpoint_streetline1_data:
         logger.warning("No touchpoint Streetline 1 data to merge")
         return

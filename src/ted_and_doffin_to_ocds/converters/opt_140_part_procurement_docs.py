@@ -1,7 +1,8 @@
 # converters/opt_140_part_procurement_docs.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +34,7 @@ def parse_procurement_documents_id_part(xml_content):
     return result if result["tender"]["documents"] else None
 
 
-def merge_procurement_documents_id_part(release_json, proc_docs_data):
+def merge_procurement_documents_id_part(release_json, proc_docs_data) -> None:
     if not proc_docs_data:
         logger.info("No procurement documents ID data for parts to merge")
         return

@@ -1,7 +1,8 @@
 # converters/OPP_090_procedure.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +40,7 @@ def parse_previous_notice_identifier(xml_content):
     return result if result["relatedProcesses"] else None
 
 
-def merge_previous_notice_identifier(release_json, previous_notice_data):
+def merge_previous_notice_identifier(release_json, previous_notice_data) -> None:
     if not previous_notice_data:
         logger.warning("No Previous notice Identifier data to merge")
         return

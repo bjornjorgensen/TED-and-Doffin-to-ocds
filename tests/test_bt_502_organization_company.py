@@ -1,12 +1,12 @@
 # tests/test_bt_502_organization_company.py
 
 from ted_and_doffin_to_ocds.converters.bt_502_organization_company import (
-    parse_organization_contact_point,
     merge_organization_contact_point,
+    parse_organization_contact_point,
 )
 
 
-def test_parse_organization_contact_point():
+def test_parse_organization_contact_point() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -36,7 +36,7 @@ def test_parse_organization_contact_point():
     }
 
 
-def test_merge_organization_contact_point():
+def test_merge_organization_contact_point() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "name": "Test Organization"}]}
 
     organization_contact_point_data = {
@@ -56,7 +56,7 @@ def test_merge_organization_contact_point():
     }
 
 
-def test_merge_organization_contact_point_new_party():
+def test_merge_organization_contact_point_new_party() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "name": "Test Organization"}]}
 
     organization_contact_point_data = {

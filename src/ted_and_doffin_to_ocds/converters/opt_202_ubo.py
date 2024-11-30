@@ -1,7 +1,8 @@
 # converters/opt_202_ubo.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -53,7 +54,7 @@ def parse_beneficial_owner_identifier(xml_content):
     return result if result["parties"] else None
 
 
-def merge_beneficial_owner_identifier(release_json, ubo_data):
+def merge_beneficial_owner_identifier(release_json, ubo_data) -> None:
     if not ubo_data:
         logger.info("No Beneficial Owner technical identifier data to merge")
         return

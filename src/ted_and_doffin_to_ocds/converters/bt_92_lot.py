@@ -1,6 +1,7 @@
 # converters/bt_92_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -67,7 +68,7 @@ def parse_electronic_ordering(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_electronic_ordering(release_json, electronic_ordering_data):
+def merge_electronic_ordering(release_json, electronic_ordering_data) -> None:
     """
     Merge the parsed electronic ordering data into the main OCDS release JSON.
 

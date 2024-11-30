@@ -1,12 +1,12 @@
 # tests/test_opt_300_procedure_sprovider.py
 
 from ted_and_doffin_to_ocds.converters.opt_300_procedure_sprovider import (
-    parse_service_provider_identifier,
     merge_service_provider_identifier,
+    parse_service_provider_identifier,
 )
 
 
-def test_parse_service_provider_identifier():
+def test_parse_service_provider_identifier() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -58,7 +58,7 @@ def test_parse_service_provider_identifier():
     assert party["name"] == "Service Provider Ltd"
 
 
-def test_merge_service_provider_identifier():
+def test_merge_service_provider_identifier() -> None:
     release_json = {"parties": []}
     provider_data = {"parties": [{"id": "ORG-0001", "name": "Service Provider Ltd"}]}
 
@@ -72,7 +72,7 @@ def test_merge_service_provider_identifier():
     assert party["name"] == "Service Provider Ltd"
 
 
-def test_merge_service_provider_identifier_existing_party():
+def test_merge_service_provider_identifier_existing_party() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "name": "Existing Organization"}]}
     provider_data = {"parties": [{"id": "ORG-0001", "name": "Service Provider Ltd"}]}
 

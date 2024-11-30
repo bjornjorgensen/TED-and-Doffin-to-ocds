@@ -1,6 +1,7 @@
 # converters/bt_644_Lot_Prize_Value.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -103,7 +104,7 @@ def parse_lot_prize_value(xml_content: bytes):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_prize_value(release_json, lot_prize_value_data):
+def merge_lot_prize_value(release_json, lot_prize_value_data) -> None:
     """
     Merge the parsed lot prize value data into the main OCDS release JSON.
 

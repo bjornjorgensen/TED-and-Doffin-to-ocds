@@ -1,6 +1,7 @@
 # converters/bt_735_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -69,7 +70,7 @@ def parse_cvd_contract_type(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_cvd_contract_type(release_json, cvd_contract_type_data):
+def merge_cvd_contract_type(release_json, cvd_contract_type_data) -> None:
     """
     Merge the parsed CVD contract type data for lots into the main OCDS release JSON.
 

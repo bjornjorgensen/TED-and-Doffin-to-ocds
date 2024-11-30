@@ -1,7 +1,8 @@
 # converters/opt_316_contract.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +40,7 @@ def parse_contract_technical_identifier(xml_content):
 
 def merge_contract_technical_identifier(
     release_json, contract_technical_identifier_data
-):
+) -> None:
     if not contract_technical_identifier_data:
         logger.info("No Contract Technical Identifier data to merge.")
         return

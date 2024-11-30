@@ -1,7 +1,8 @@
 # converters/bt_162_Tender.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -84,7 +85,7 @@ def parse_concession_revenue_user(xml_content):
     return result if result["contracts"] else None
 
 
-def merge_concession_revenue_user(release_json, concession_revenue_user_data):
+def merge_concession_revenue_user(release_json, concession_revenue_user_data) -> None:
     if not concession_revenue_user_data:
         logger.warning("No Concession Revenue User data to merge")
         return

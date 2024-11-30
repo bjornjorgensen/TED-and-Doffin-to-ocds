@@ -1,15 +1,16 @@
 # tests/test_bt_635_lotresult.py
 
-from pathlib import Path
-import pytest
 import json
+import logging
 import sys
 import tempfile
-import logging
+from pathlib import Path
+
+import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 
 @pytest.fixture(scope="module")
@@ -32,7 +33,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_635_lotresult_integration(tmp_path, setup_logging, temp_output_dir):
+def test_bt_635_lotresult_integration(tmp_path, setup_logging, temp_output_dir) -> None:
     logger = setup_logging
     xml_content = """
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"

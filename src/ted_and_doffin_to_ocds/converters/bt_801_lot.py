@@ -37,7 +37,7 @@ def parse_non_disclosure_agreement(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_non_disclosure_agreement(release_json, nda_data):
+def merge_non_disclosure_agreement(release_json, nda_data) -> None:
     if not nda_data:
         return
 

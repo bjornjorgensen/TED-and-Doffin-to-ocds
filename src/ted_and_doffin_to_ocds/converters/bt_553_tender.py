@@ -1,6 +1,7 @@
 # converters/bt_553_Tender.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -60,7 +61,7 @@ def parse_subcontracting_value(xml_content):
     return result if result["bids"]["details"] else None
 
 
-def merge_subcontracting_value(release_json, subcontracting_data):
+def merge_subcontracting_value(release_json, subcontracting_data) -> None:
     if not subcontracting_data:
         logger.warning("No subcontracting value data to merge")
         return

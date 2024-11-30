@@ -46,7 +46,7 @@ def parse_classification_type_part(xml_content):
     return result
 
 
-def merge_classification_type_part(release_json, classification_type_data):
+def merge_classification_type_part(release_json, classification_type_data) -> None:
     existing_items = release_json.setdefault("tender", {}).setdefault("items", [])
 
     for new_item in classification_type_data["tender"]["items"]:

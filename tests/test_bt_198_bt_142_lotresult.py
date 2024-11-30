@@ -1,7 +1,8 @@
-from pathlib import Path
 import json
 import sys
 import tempfile
+from pathlib import Path
+
 import pytest
 
 # Add the parent directory to sys.path to import main
@@ -23,7 +24,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_198_bt_142_lotresult_integration(tmp_path, temp_output_dir):
+def test_bt_198_bt_142_lotresult_integration(tmp_path, temp_output_dir) -> None:
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -72,7 +73,7 @@ def test_bt_198_bt_142_lotresult_integration(tmp_path, temp_output_dir):
     ), f"Expected availabilityDate '2025-03-31T00:00:00+01:00', got {withheld_info['availabilityDate']}"
 
 
-def test_bt_198_bt_142_lotresult_multiple_lots(tmp_path, temp_output_dir):
+def test_bt_198_bt_142_lotresult_multiple_lots(tmp_path, temp_output_dir) -> None:
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"

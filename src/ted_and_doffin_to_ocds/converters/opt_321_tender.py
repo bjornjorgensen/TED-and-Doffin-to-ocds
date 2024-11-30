@@ -1,7 +1,8 @@
 # converters/opt_321_tender.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +38,9 @@ def parse_tender_technical_identifier(xml_content):
     return result if result["bids"]["details"] else None
 
 
-def merge_tender_technical_identifier(release_json, tender_technical_identifier_data):
+def merge_tender_technical_identifier(
+    release_json, tender_technical_identifier_data
+) -> None:
     if not tender_technical_identifier_data:
         logger.info("No Tender Technical Identifier data to merge.")
         return

@@ -1,6 +1,7 @@
 # converters/bt_733_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -56,7 +57,7 @@ def parse_lot_award_criteria_order_justification(xml_content):
 def merge_lot_award_criteria_order_justification(
     release_json,
     lot_award_criteria_order_justification_data,
-):
+) -> None:
     """
     Merge the parsed award criteria order justification data for lots into the main OCDS release JSON.
 

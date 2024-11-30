@@ -1,8 +1,10 @@
 # converters/bt_537_Lot.py
 
-from lxml import etree
-from ted_and_doffin_to_ocds.utils.date_utils import end_date
 import logging
+
+from lxml import etree
+
+from ted_and_doffin_to_ocds.utils.date_utils import end_date
 
 
 def parse_lot_duration_end_date(xml_content):
@@ -45,7 +47,7 @@ def parse_lot_duration_end_date(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_duration_end_date(release_json, lot_duration_end_date_data):
+def merge_lot_duration_end_date(release_json, lot_duration_end_date_data) -> None:
     if not lot_duration_end_date_data:
         return
 

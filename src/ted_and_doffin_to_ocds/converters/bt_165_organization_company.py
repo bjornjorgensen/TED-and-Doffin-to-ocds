@@ -1,6 +1,7 @@
 # converters/bt_165_organization_company.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -43,7 +44,7 @@ def parse_winner_size(xml_content):
     return result if result["parties"] else None
 
 
-def merge_winner_size(release_json, winner_size_data):
+def merge_winner_size(release_json, winner_size_data) -> None:
     if not winner_size_data:
         logger.warning("No Winner Size data to merge")
         return

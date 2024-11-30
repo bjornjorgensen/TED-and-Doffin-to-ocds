@@ -1,6 +1,7 @@
 # converters/bt_7531_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -84,7 +85,7 @@ def parse_selection_criteria_number_weight(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_selection_criteria_number_weight(release_json, number_weight_data):
+def merge_selection_criteria_number_weight(release_json, number_weight_data) -> None:
     """
     Merge the parsed selection criteria number weight data into the main OCDS release JSON.
 

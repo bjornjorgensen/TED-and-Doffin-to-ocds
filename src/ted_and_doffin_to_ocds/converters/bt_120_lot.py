@@ -1,7 +1,8 @@
 # converters/bt_120_Lot.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -46,7 +47,7 @@ def parse_no_negotiation_necessary(xml_content):
     return result if result["lots"] else None
 
 
-def merge_no_negotiation_necessary(release_json, no_negotiation_data):
+def merge_no_negotiation_necessary(release_json, no_negotiation_data) -> None:
     if not no_negotiation_data:
         logger.warning("No No Negotiation Necessary data to merge")
         return

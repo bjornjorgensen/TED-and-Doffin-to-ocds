@@ -1,12 +1,12 @@
 # tests/test_opt_310_tender.py
 
 from ted_and_doffin_to_ocds.converters.opt_310_tender import (
-    parse_tendering_party_id_reference,
     merge_tendering_party_id_reference,
+    parse_tendering_party_id_reference,
 )
 
 
-def test_parse_tendering_party_id_reference():
+def test_parse_tendering_party_id_reference() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -39,7 +39,7 @@ def test_parse_tendering_party_id_reference():
     }
 
 
-def test_merge_tendering_party_id_reference():
+def test_merge_tendering_party_id_reference() -> None:
     release_json = {
         "parties": [{"id": "ORG-0011", "roles": ["buyer"]}],
         "bids": {"details": [{"id": "TEN-0001", "tenderers": []}]},
@@ -55,7 +55,7 @@ def test_merge_tendering_party_id_reference():
     }
 
 
-def test_merge_tendering_party_id_reference_new_data():
+def test_merge_tendering_party_id_reference_new_data() -> None:
     release_json = {
         "parties": [{"id": "ORG-0001", "roles": ["buyer"]}],
         "bids": {"details": [{"id": "TEN-0002", "tenderers": []}]},

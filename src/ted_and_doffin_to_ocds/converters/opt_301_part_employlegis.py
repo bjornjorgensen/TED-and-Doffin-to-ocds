@@ -1,6 +1,7 @@
 # converters/opt_301_part_employlegis.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -55,7 +56,7 @@ def part_parse_employment_legislation_org_reference(xml_content):
     return result if (result["parties"] or result["tender"]["documents"]) else None
 
 
-def part_merge_employment_legislation_org_reference(release_json, parsed_data):
+def part_merge_employment_legislation_org_reference(release_json, parsed_data) -> None:
     """
     Merge the parsed employment legislation organization reference data into the main OCDS release JSON.
 

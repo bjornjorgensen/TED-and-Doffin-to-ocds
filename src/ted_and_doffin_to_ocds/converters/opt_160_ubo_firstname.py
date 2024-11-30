@@ -1,7 +1,8 @@
 # converters/opt_160_ubo_firstname.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -55,7 +56,7 @@ def parse_ubo_firstname(xml_content):
     return result if result["parties"] else None
 
 
-def merge_ubo_firstname(release_json, ubo_data):
+def merge_ubo_firstname(release_json, ubo_data) -> None:
     if not ubo_data:
         logger.info("No UBO first name data to merge")
         return

@@ -1,6 +1,7 @@
 # converters/bt_513_organization_company.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -39,7 +40,7 @@ def parse_organization_city(xml_content):
     return result if result["parties"] else None
 
 
-def merge_organization_city(release_json, organization_city_data):
+def merge_organization_city(release_json, organization_city_data) -> None:
     if not organization_city_data:
         logger.info("No organization city data to merge")
         return

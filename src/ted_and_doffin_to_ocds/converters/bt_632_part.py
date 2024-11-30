@@ -1,6 +1,7 @@
 # converters/bt_632_part.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -47,7 +48,7 @@ def parse_tool_name_part(xml_content):
     return None
 
 
-def merge_tool_name_part(release_json, tool_name_data):
+def merge_tool_name_part(release_json, tool_name_data) -> None:
     """
     Merge the parsed tool name data into the main OCDS release JSON.
 

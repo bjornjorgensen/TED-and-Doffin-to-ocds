@@ -1,6 +1,7 @@
 # converters/bt_41_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -43,7 +44,7 @@ def parse_lot_following_contract(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_following_contract(release_json, lot_following_contract_data):
+def merge_lot_following_contract(release_json, lot_following_contract_data) -> None:
     if not lot_following_contract_data:
         logger.warning("No lot following contract data to merge")
         return

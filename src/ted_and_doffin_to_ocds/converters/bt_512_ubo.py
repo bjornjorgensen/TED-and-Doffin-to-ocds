@@ -1,6 +1,7 @@
 # converters/bt_512_ubo.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -49,7 +50,7 @@ def parse_ubo_postcode(xml_content):
     return result if result["parties"] else None
 
 
-def merge_ubo_postcode(release_json, ubo_postcode_data):
+def merge_ubo_postcode(release_json, ubo_postcode_data) -> None:
     if not ubo_postcode_data:
         logger.warning("No ubo Postcode data to merge")
         return

@@ -1,7 +1,8 @@
 # converters/opt_301_tenderer_maincont.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -70,7 +71,7 @@ def parse_main_contractor(xml_content):
     return result if (result["parties"] or result["bids"]["details"]) else None
 
 
-def merge_main_contractor(release_json, main_contractor_data):
+def merge_main_contractor(release_json, main_contractor_data) -> None:
     if not main_contractor_data:
         logger.info("No Main Contractor data to merge.")
         return

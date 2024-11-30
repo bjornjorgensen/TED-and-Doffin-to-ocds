@@ -1,6 +1,7 @@
 # converters/bt_734_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -53,7 +54,7 @@ def parse_award_criterion_name(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_award_criterion_name(release_json, award_criterion_data):
+def merge_award_criterion_name(release_json, award_criterion_data) -> None:
     """
     Merge the parsed award criterion name data into the main OCDS release JSON.
 

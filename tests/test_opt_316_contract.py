@@ -1,12 +1,12 @@
 # tests/test_opt_316_contract.py
 
 from ted_and_doffin_to_ocds.converters.opt_316_contract import (
-    parse_contract_technical_identifier,
     merge_contract_technical_identifier,
+    parse_contract_technical_identifier,
 )
 
 
-def test_parse_contract_technical_identifier():
+def test_parse_contract_technical_identifier() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -24,7 +24,7 @@ def test_parse_contract_technical_identifier():
     assert result == {"contracts": [{"id": "CON-0001"}]}
 
 
-def test_merge_contract_technical_identifier():
+def test_merge_contract_technical_identifier() -> None:
     release_json = {"contracts": [{"id": "CON-0002", "title": "Existing Contract"}]}
     contract_technical_identifier_data = {"contracts": [{"id": "CON-0001"}]}
     merge_contract_technical_identifier(
@@ -38,7 +38,7 @@ def test_merge_contract_technical_identifier():
     }
 
 
-def test_merge_contract_technical_identifier_existing_contract():
+def test_merge_contract_technical_identifier_existing_contract() -> None:
     release_json = {"contracts": [{"id": "CON-0001", "title": "Existing Contract"}]}
     contract_technical_identifier_data = {"contracts": [{"id": "CON-0001"}]}
     merge_contract_technical_identifier(
@@ -49,7 +49,7 @@ def test_merge_contract_technical_identifier_existing_contract():
     }
 
 
-def test_merge_contract_technical_identifier_no_data():
+def test_merge_contract_technical_identifier_no_data() -> None:
     release_json = {"contracts": [{"id": "CON-0001", "title": "Existing Contract"}]}
     merge_contract_technical_identifier(release_json, None)
     assert release_json == {

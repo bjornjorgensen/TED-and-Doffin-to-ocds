@@ -1,12 +1,12 @@
 # tests/test_opt_321_tender.py
 
 from ted_and_doffin_to_ocds.converters.opt_321_tender import (
-    parse_tender_technical_identifier,
     merge_tender_technical_identifier,
+    parse_tender_technical_identifier,
 )
 
 
-def test_parse_tender_technical_identifier():
+def test_parse_tender_technical_identifier() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -24,7 +24,7 @@ def test_parse_tender_technical_identifier():
     assert result == {"bids": {"details": [{"id": "TEN-0001"}]}}
 
 
-def test_merge_tender_technical_identifier():
+def test_merge_tender_technical_identifier() -> None:
     release_json = {
         "bids": {"details": [{"id": "TEN-0002", "value": {"amount": 1000}}]}
     }
@@ -40,7 +40,7 @@ def test_merge_tender_technical_identifier():
     }
 
 
-def test_merge_tender_technical_identifier_existing_bid():
+def test_merge_tender_technical_identifier_existing_bid() -> None:
     release_json = {
         "bids": {"details": [{"id": "TEN-0001", "value": {"amount": 1000}}]}
     }
@@ -51,7 +51,7 @@ def test_merge_tender_technical_identifier_existing_bid():
     }
 
 
-def test_merge_tender_technical_identifier_no_data():
+def test_merge_tender_technical_identifier_no_data() -> None:
     release_json = {
         "bids": {"details": [{"id": "TEN-0001", "value": {"amount": 1000}}]}
     }

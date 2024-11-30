@@ -65,7 +65,7 @@ def map_asset_significance(xml_content):
     return result
 
 
-def merge_asset_significance(release_json, asset_significance_data):
+def merge_asset_significance(release_json, asset_significance_data) -> None:
     if not asset_significance_data.get("tender", {}).get("lots"):
         return
 

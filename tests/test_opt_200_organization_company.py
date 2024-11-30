@@ -1,12 +1,12 @@
 # tests/test_opt_200_organization_company.py
 
 from ted_and_doffin_to_ocds.converters.opt_200_organization_company import (
-    parse_organization_technical_identifier,
     merge_organization_technical_identifier,
+    parse_organization_technical_identifier,
 )
 
 
-def test_parse_organization_technical_identifier():
+def test_parse_organization_technical_identifier() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -41,7 +41,7 @@ def test_parse_organization_technical_identifier():
     assert result["parties"][0]["id"] == "ORG-0001"
 
 
-def test_merge_organization_technical_identifier():
+def test_merge_organization_technical_identifier() -> None:
     release_json = {"parties": []}
     org_data = {"parties": [{"id": "ORG-0001"}]}
 
@@ -52,7 +52,7 @@ def test_merge_organization_technical_identifier():
     assert release_json["parties"][0]["id"] == "ORG-0001"
 
 
-def test_merge_organization_technical_identifier_existing_party():
+def test_merge_organization_technical_identifier_existing_party() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "name": "Existing Organization"}]}
     org_data = {"parties": [{"id": "ORG-0001"}, {"id": "ORG-0002"}]}
 

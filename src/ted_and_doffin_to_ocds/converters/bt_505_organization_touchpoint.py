@@ -1,6 +1,7 @@
 # converters/bt_505_organization_touchpoint.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -48,7 +49,7 @@ def parse_organization_touchpoint_website(xml_content):
 
 def merge_organization_touchpoint_website(
     release_json, organization_touchpoint_website_data
-):
+) -> None:
     if not organization_touchpoint_website_data:
         logger.info("No organization touchpoint website data to merge")
         return

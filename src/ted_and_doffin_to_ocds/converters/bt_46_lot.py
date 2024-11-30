@@ -1,6 +1,7 @@
 # converters/bt_46_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -51,7 +52,7 @@ def parse_jury_member_name(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_jury_member_name(release_json, jury_member_data):
+def merge_jury_member_name(release_json, jury_member_data) -> None:
     if not jury_member_data:
         logger.warning("No Jury Member Name data to merge")
         return

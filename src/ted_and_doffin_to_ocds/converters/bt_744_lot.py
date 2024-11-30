@@ -1,6 +1,7 @@
 # converters/bt_744_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -57,7 +58,7 @@ def parse_submission_electronic_signature(xml_content):
 def merge_submission_electronic_signature(
     release_json,
     submission_electronic_signature_data,
-):
+) -> None:
     """
     Merge the parsed submission electronic signature requirement data into the main OCDS release JSON.
 

@@ -1,6 +1,7 @@
 # converters/bt_15_Lot_part.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -40,7 +41,7 @@ def parse_documents_url(xml_content):
     return result if result["tender"]["documents"] else None
 
 
-def process_document_references(element, result, namespaces, is_lot):
+def process_document_references(element, result, namespaces, is_lot) -> None:
     element_id = element.xpath("cbc:ID/text()", namespaces=namespaces)[0]
     document_references = element.xpath(
         "cac:TenderingTerms/cac:CallForTendersDocumentReference[cbc:DocumentType/text()='non-restricted-document']",
@@ -65,7 +66,7 @@ def process_document_references(element, result, namespaces, is_lot):
             result["tender"]["documents"].append(document)
 
 
-def merge_documents_url(release_json, documents_url_data):
+def merge_documents_url(release_json, documents_url_data) -> None:
     if not documents_url_data:
         logger.warning("No documents URL data to merge")
         return

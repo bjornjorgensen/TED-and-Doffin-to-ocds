@@ -1,6 +1,7 @@
 # converters/bt_633_organization.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -70,7 +71,9 @@ def parse_organization_natural_person(xml_content):
     return result if result["parties"] else None
 
 
-def merge_organization_natural_person(release_json, organization_natural_person_data):
+def merge_organization_natural_person(
+    release_json, organization_natural_person_data
+) -> None:
     """
     Merge the parsed natural person data into the main OCDS release JSON.
 

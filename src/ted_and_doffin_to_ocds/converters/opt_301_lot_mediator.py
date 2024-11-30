@@ -1,7 +1,8 @@
 # converters/opt_301_lot_mediator.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -27,7 +28,7 @@ def parse_mediator_technical_identifier(xml_content):
     return result if result["parties"] else None
 
 
-def merge_mediator_technical_identifier(release_json, mediator_data):
+def merge_mediator_technical_identifier(release_json, mediator_data) -> None:
     if not mediator_data:
         return
 

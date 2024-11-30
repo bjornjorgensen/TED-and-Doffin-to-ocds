@@ -1,7 +1,8 @@
 # converters/opt_301_tenderer_subcont.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -65,7 +66,7 @@ def parse_subcontractor(xml_content):
     return result if (result["parties"] or result["bids"]["details"]) else None
 
 
-def merge_subcontractor(release_json, subcontractor_data):
+def merge_subcontractor(release_json, subcontractor_data) -> None:
     if not subcontractor_data:
         logger.info("No Subcontractor data to merge.")
         return

@@ -1,6 +1,7 @@
 # converters/bt_197_bt_541_Lot_threshold.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -86,7 +87,7 @@ def parse_bt197_bt541_lot_threshold_unpublished_justification_code(xml_content):
 def merge_bt197_bt541_lot_threshold_unpublished_justification_code(
     release_json,
     unpublished_justification_code_data,
-):
+) -> None:
     """
     Merge the parsed unpublished justification code data into the main OCDS release JSON.
 

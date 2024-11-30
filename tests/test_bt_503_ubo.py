@@ -1,12 +1,12 @@
 # tests/test_bt_503_ubo.py
 
 from ted_and_doffin_to_ocds.converters.bt_503_ubo import (
-    parse_ubo_telephone,
     merge_ubo_telephone,
+    parse_ubo_telephone,
 )
 
 
-def test_parse_ubo_telephone():
+def test_parse_ubo_telephone() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -42,7 +42,7 @@ def test_parse_ubo_telephone():
     }
 
 
-def test_merge_ubo_telephone():
+def test_merge_ubo_telephone() -> None:
     release_json = {
         "parties": [
             {
@@ -77,7 +77,7 @@ def test_merge_ubo_telephone():
     }
 
 
-def test_merge_ubo_telephone_new_party():
+def test_merge_ubo_telephone_new_party() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "name": "Test Organization"}]}
 
     ubo_telephone_data = {

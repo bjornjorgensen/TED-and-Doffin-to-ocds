@@ -1,6 +1,7 @@
 # converters/bt_507_organization_company.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -42,7 +43,7 @@ def parse_organization_country_subdivision(xml_content):
 
 def merge_organization_country_subdivision(
     release_json, organization_country_subdivision_data
-):
+) -> None:
     if not organization_country_subdivision_data:
         logger.info("No organization country subdivision data to merge")
         return

@@ -1,7 +1,9 @@
 # converters/bt_78_Lot.py
 
 import logging
+
 from lxml import etree
+
 from ted_and_doffin_to_ocds.utils.date_utils import end_date
 
 logger = logging.getLogger(__name__)
@@ -79,7 +81,7 @@ def parse_security_clearance_deadline(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_security_clearance_deadline(release_json, security_clearance_data):
+def merge_security_clearance_deadline(release_json, security_clearance_data) -> None:
     """
     Merge the parsed Security Clearance Deadline data into the main OCDS release JSON.
 

@@ -1,16 +1,17 @@
 # tests/test_bt_171_Tender.py
 
-from pathlib import Path
-import pytest
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
 from ted_and_doffin_to_ocds.converters.bt_171_tender import (
-    parse_tender_rank,
     merge_tender_rank,
+    parse_tender_rank,
 )
 
 
@@ -26,7 +27,7 @@ def temp_output_dir():
         yield Path(tmpdirname)
 
 
-def test_parse_tender_rank():
+def test_parse_tender_rank() -> None:
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -52,7 +53,7 @@ def test_parse_tender_rank():
     }
 
 
-def test_merge_tender_rank():
+def test_merge_tender_rank() -> None:
     release_json = {}
 
     tender_rank_data = {

@@ -1,6 +1,7 @@
 # converters/bt_163_Tender.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -63,7 +64,9 @@ def parse_concession_value_description(xml_content):
     return result if result["awards"] else None
 
 
-def merge_concession_value_description(release_json, concession_value_description_data):
+def merge_concession_value_description(
+    release_json, concession_value_description_data
+) -> None:
     if not concession_value_description_data:
         logger.warning("No concession value description data to merge")
         return

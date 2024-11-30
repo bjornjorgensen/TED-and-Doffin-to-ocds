@@ -1,7 +1,8 @@
 # converters/opt_300_procedure_sprovider.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -46,7 +47,7 @@ def parse_service_provider_identifier(xml_content):
     return result if result["parties"] else None
 
 
-def merge_service_provider_identifier(release_json, provider_data):
+def merge_service_provider_identifier(release_json, provider_data) -> None:
     if not provider_data:
         logger.info("No Service Provider Technical Identifier Reference data to merge")
         return

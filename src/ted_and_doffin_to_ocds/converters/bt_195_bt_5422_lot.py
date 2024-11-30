@@ -1,6 +1,7 @@
 # converters/bt_195_bt_5422_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -59,7 +60,7 @@ def parse_bt195_bt5422_lot(xml_content):
     return result if result["withheldInformation"] else None
 
 
-def merge_bt195_bt5422_lot(release_json, unpublished_identifier_data):
+def merge_bt195_bt5422_lot(release_json, unpublished_identifier_data) -> None:
     """
     Merge the parsed unpublished identifier data into the main OCDS release JSON.
 

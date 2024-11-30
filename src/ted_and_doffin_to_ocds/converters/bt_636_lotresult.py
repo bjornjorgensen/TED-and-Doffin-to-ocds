@@ -1,7 +1,8 @@
 # converters/bt_636_lotresult.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -103,7 +104,9 @@ def parse_buyer_review_requests_irregularity_type(xml_content):
     return result if result["statistics"] else None
 
 
-def merge_buyer_review_requests_irregularity_type(release_json, irregularity_type_data):
+def merge_buyer_review_requests_irregularity_type(
+    release_json, irregularity_type_data
+) -> None:
     """
     Merge the parsed buyer review requests irregularity type data into the main OCDS release JSON.
 

@@ -1,12 +1,12 @@
 # tests/test_opt_320_lotresult.py
 
 from ted_and_doffin_to_ocds.converters.opt_320_lotresult import (
-    parse_tender_identifier_reference,
     merge_tender_identifier_reference,
+    parse_tender_identifier_reference,
 )
 
 
-def test_parse_tender_identifier_reference():
+def test_parse_tender_identifier_reference() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -32,7 +32,7 @@ def test_parse_tender_identifier_reference():
     assert result == {"awards": [{"relatedBids": ["TEN-0001", "TEN-0002", "TEN-0003"]}]}
 
 
-def test_merge_tender_identifier_reference():
+def test_merge_tender_identifier_reference() -> None:
     release_json = {"awards": [{"id": "AWD-0001", "title": "Existing Award"}]}
     tender_identifier_data = {
         "awards": [{"relatedBids": ["TEN-0001", "TEN-0002", "TEN-0003"]}]
@@ -49,7 +49,7 @@ def test_merge_tender_identifier_reference():
     }
 
 
-def test_merge_tender_identifier_reference_no_existing_awards():
+def test_merge_tender_identifier_reference_no_existing_awards() -> None:
     release_json = {}
     tender_identifier_data = {
         "awards": [{"relatedBids": ["TEN-0001", "TEN-0002", "TEN-0003"]}]
@@ -60,7 +60,7 @@ def test_merge_tender_identifier_reference_no_existing_awards():
     }
 
 
-def test_merge_tender_identifier_reference_no_data():
+def test_merge_tender_identifier_reference_no_data() -> None:
     release_json = {"awards": [{"id": "AWD-0001", "title": "Existing Award"}]}
     merge_tender_identifier_reference(release_json, None)
     assert release_json == {"awards": [{"id": "AWD-0001", "title": "Existing Award"}]}

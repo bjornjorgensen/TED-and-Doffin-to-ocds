@@ -1,13 +1,14 @@
 # tests/test_bt_300_part.py
 
 import pytest
+
 from ted_and_doffin_to_ocds.converters.bt_300_part import (
-    parse_part_additional_info,
     merge_part_additional_info,
+    parse_part_additional_info,
 )
 
 
-def test_parse_part_additional_info():
+def test_parse_part_additional_info() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -23,7 +24,7 @@ def test_parse_part_additional_info():
     assert result == [{"text": "For the current procedure ...", "language": "ENG"}]
 
 
-def test_merge_part_additional_info():
+def test_merge_part_additional_info() -> None:
     release_json = {}
     part_additional_info = [
         {"text": "For the current procedure ...", "language": "ENG"},
@@ -32,14 +33,14 @@ def test_merge_part_additional_info():
     assert release_json["description"] == "For the current procedure ..."
 
 
-def test_merge_part_additional_info_existing_description():
+def test_merge_part_additional_info_existing_description() -> None:
     release_json = {"description": "Existing description."}
     part_additional_info = [{"text": "Additional info.", "language": "ENG"}]
     merge_part_additional_info(release_json, part_additional_info)
     assert release_json["description"] == "Existing description. Additional info."
 
 
-def test_merge_multiple_part_additional_info():
+def test_merge_multiple_part_additional_info() -> None:
     release_json = {}
     part_additional_info = [
         {"text": "First part of info.", "language": "ENG"},

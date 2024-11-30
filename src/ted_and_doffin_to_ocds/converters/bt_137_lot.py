@@ -1,6 +1,7 @@
 # converters/bt_137_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -43,7 +44,7 @@ def parse_purpose_lot_identifier(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_purpose_lot_identifier(release_json, purpose_lot_identifier_data):
+def merge_purpose_lot_identifier(release_json, purpose_lot_identifier_data) -> None:
     """
     Merge the parsed purpose lot identifier data into the main OCDS release JSON.
 

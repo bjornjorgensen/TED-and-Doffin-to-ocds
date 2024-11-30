@@ -1,7 +1,8 @@
 # converters/opt_301_lot_fiscallegis.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -55,7 +56,7 @@ def parse_fiscal_legislation_org(xml_content):
     return result if (result["parties"] or result["tender"]["documents"]) else None
 
 
-def merge_fiscal_legislation_org(release_json, fiscal_legis_data):
+def merge_fiscal_legislation_org(release_json, fiscal_legis_data) -> None:
     if not fiscal_legis_data:
         logger.info(
             "No Fiscal Legislation Organization Technical Identifier Reference data to merge"

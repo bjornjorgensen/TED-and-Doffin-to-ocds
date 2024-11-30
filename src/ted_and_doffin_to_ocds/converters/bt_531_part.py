@@ -1,6 +1,7 @@
 # converters/bt_531_part.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -34,7 +35,7 @@ def parse_part_additional_nature(xml_content):
     return result if result["tender"]["additionalProcurementCategories"] else None
 
 
-def merge_part_additional_nature(release_json, part_additional_nature_data):
+def merge_part_additional_nature(release_json, part_additional_nature_data) -> None:
     if not part_additional_nature_data:
         logger.warning("No part Additional Nature data to merge")
         return

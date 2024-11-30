@@ -1,12 +1,12 @@
 # tests/test_opt_301_lot_employlegis.py
 
 from ted_and_doffin_to_ocds.converters.opt_301_lot_employlegis import (
-    parse_employment_legislation_org,
     merge_employment_legislation_org,
+    parse_employment_legislation_org,
 )
 
 
-def test_parse_employment_legislation_org():
+def test_parse_employment_legislation_org() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -47,7 +47,7 @@ def test_parse_employment_legislation_org():
     assert doc["relatedLots"] == ["LOT-0001"]
 
 
-def test_merge_employment_legislation_org():
+def test_merge_employment_legislation_org() -> None:
     release_json = {"parties": [], "tender": {"documents": []}}
     empl_legis_data = {
         "parties": [{"id": "ORG-0001", "roles": ["informationService"]}],
@@ -77,7 +77,7 @@ def test_merge_employment_legislation_org():
     assert doc["relatedLots"] == ["LOT-0001"]
 
 
-def test_merge_employment_legislation_org_existing_data():
+def test_merge_employment_legislation_org_existing_data() -> None:
     release_json = {
         "parties": [
             {"id": "ORG-0001", "name": "Existing Organization", "roles": ["buyer"]}

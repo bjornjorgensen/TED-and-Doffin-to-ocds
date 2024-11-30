@@ -1,16 +1,17 @@
-from pathlib import Path
-import pytest
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 from ted_and_doffin_to_ocds.converters.bt_5101_lot import (
-    parse_place_performance_street_lot,
     merge_place_performance_street_lot,
+    parse_place_performance_street_lot,
 )
 
 
@@ -34,7 +35,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_parse_place_performance_street_lot():
+def test_parse_place_performance_street_lot() -> None:
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
                          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -72,7 +73,7 @@ def test_parse_place_performance_street_lot():
     )
 
 
-def test_merge_place_performance_street_lot():
+def test_merge_place_performance_street_lot() -> None:
     release_json = {
         "tender": {
             "items": [
@@ -115,7 +116,7 @@ def test_merge_place_performance_street_lot():
     )
 
 
-def test_bt_5101_lot_integration(tmp_path, setup_logging, temp_output_dir):
+def test_bt_5101_lot_integration(tmp_path, setup_logging, temp_output_dir) -> None:
     logger = setup_logging
 
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
@@ -183,7 +184,7 @@ def test_bt_5101_lot_integration(tmp_path, setup_logging, temp_output_dir):
     )
 
 
-def test_bt_5101_lot_missing_data(tmp_path, setup_logging, temp_output_dir):
+def test_bt_5101_lot_missing_data(tmp_path, setup_logging, temp_output_dir) -> None:
     logger = setup_logging
 
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>

@@ -1,6 +1,7 @@
 # converters/bt_64_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -81,7 +82,7 @@ def parse_subcontracting_obligation_minimum(xml_content: bytes):
 def merge_subcontracting_obligation_minimum(
     release_json,
     subcontracting_obligation_minimum_data,
-):
+) -> None:
     """
     Merge the parsed subcontracting obligation minimum data into the main OCDS release JSON.
 

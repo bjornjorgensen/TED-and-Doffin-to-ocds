@@ -1,18 +1,19 @@
 # tests/test_bt_727_procedure.py
-from pathlib import Path
-import pytest
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
 from src.ted_and_doffin_to_ocds.converters.bt_727_procedure import (
-    parse_procedure_place_performance,
     merge_procedure_place_performance,
+    parse_procedure_place_performance,
 )
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 
 @pytest.fixture(scope="module")
@@ -27,7 +28,7 @@ def temp_output_dir():
         yield Path(tmpdirname)
 
 
-def test_parse_procedure_place_performance():
+def test_parse_procedure_place_performance() -> None:
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
           xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -53,7 +54,7 @@ def test_parse_procedure_place_performance():
     )
 
 
-def test_merge_procedure_place_performance():
+def test_merge_procedure_place_performance() -> None:
     test_data = {
         "tender": {
             "deliveryLocations": [
@@ -73,7 +74,7 @@ def test_merge_procedure_place_performance():
     )
 
 
-def test_bt_727_procedure_integration(tmp_path, setup_logging, temp_output_dir):
+def test_bt_727_procedure_integration(tmp_path, setup_logging, temp_output_dir) -> None:
     logger = setup_logging
 
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>

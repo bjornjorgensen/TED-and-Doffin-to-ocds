@@ -1,6 +1,7 @@
 # converters/bt_23_procedure.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -39,7 +40,7 @@ def parse_main_nature_procedure(xml_content):
     return result if "mainProcurementCategory" in result["tender"] else None
 
 
-def merge_main_nature_procedure(release_json, main_nature_data):
+def merge_main_nature_procedure(release_json, main_nature_data) -> None:
     if not main_nature_data:
         logger.warning("No Main Nature (procedure) data to merge")
         return

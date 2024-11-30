@@ -1,13 +1,14 @@
 # tests/test_bt_46_Lot.py
 
 import pytest
+
 from ted_and_doffin_to_ocds.converters.bt_46_lot import (
-    parse_jury_member_name,
     merge_jury_member_name,
+    parse_jury_member_name,
 )
 
 
-def test_parse_jury_member_name():
+def test_parse_jury_member_name() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -39,7 +40,7 @@ def test_parse_jury_member_name():
     assert lot["designContest"]["juryMembers"][0]["name"] == "Mrs Pamela Smith"
 
 
-def test_merge_jury_member_name():
+def test_merge_jury_member_name() -> None:
     jury_member_data = {
         "tender": {
             "lots": [

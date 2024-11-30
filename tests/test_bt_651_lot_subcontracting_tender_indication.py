@@ -1,12 +1,12 @@
 # tests/test_bt_651_Lot_Subcontracting_Tender_Indication.py
 
 from ted_and_doffin_to_ocds.converters.bt_651_lot_subcontracting_tender_indication import (
-    parse_subcontracting_tender_indication,
     merge_subcontracting_tender_indication,
+    parse_subcontracting_tender_indication,
 )
 
 
-def test_parse_subcontracting_tender_indication():
+def test_parse_subcontracting_tender_indication() -> None:
     xml_content = b"""
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -42,7 +42,7 @@ def test_parse_subcontracting_tender_indication():
     assert lot["submissionTerms"]["subcontractingClauses"] == ["subc-oblig"]
 
 
-def test_parse_subcontracting_tender_indication_no_data():
+def test_parse_subcontracting_tender_indication_no_data() -> None:
     xml_content = b"""
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -57,7 +57,7 @@ def test_parse_subcontracting_tender_indication_no_data():
     assert result is None
 
 
-def test_merge_subcontracting_tender_indication():
+def test_merge_subcontracting_tender_indication() -> None:
     existing_release = {
         "tender": {
             "lots": [
@@ -90,7 +90,7 @@ def test_merge_subcontracting_tender_indication():
     ]
 
 
-def test_merge_subcontracting_tender_indication_new_lot():
+def test_merge_subcontracting_tender_indication_new_lot() -> None:
     existing_release = {"tender": {"lots": []}}
 
     new_data = {

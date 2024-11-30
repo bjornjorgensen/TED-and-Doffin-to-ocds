@@ -1,7 +1,8 @@
 # converters/opt_112_lot_environlegis.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -42,7 +43,7 @@ def parse_environmental_legislation_document_id(xml_content):
 
 def merge_environmental_legislation_document_id(
     release_json, environmental_legislation_data
-):
+) -> None:
     if not environmental_legislation_data:
         return
 

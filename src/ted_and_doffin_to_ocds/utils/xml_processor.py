@@ -1,10 +1,11 @@
-from lxml import etree
-from lxml.etree import _Element, ElementBase  # Import types explicitly
-from typing import Any, Final
+import logging
 from collections.abc import Generator
 from contextlib import contextmanager
-import logging
 from dataclasses import dataclass
+from typing import Any, Final
+
+from lxml import etree
+from lxml.etree import ElementBase, _Element  # Import types explicitly
 
 logger = logging.getLogger(__name__)
 

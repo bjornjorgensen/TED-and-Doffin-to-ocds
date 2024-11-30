@@ -1,6 +1,7 @@
 # converters/bt_133_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -43,7 +44,7 @@ def parse_lot_bid_opening_location(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_bid_opening_location(release_json, lot_bid_opening_data):
+def merge_lot_bid_opening_location(release_json, lot_bid_opening_data) -> None:
     if not lot_bid_opening_data:
         logger.warning("No Lot Bid Opening Location data to merge")
         return

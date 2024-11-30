@@ -1,6 +1,7 @@
 # converters/bt_132_Lot.py
 
 from lxml import etree
+
 from ted_and_doffin_to_ocds.utils.date_utils import convert_to_iso_format
 
 
@@ -49,7 +50,7 @@ def parse_lot_public_opening_date(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_public_opening_date(release_json, lot_public_opening_date_data):
+def merge_lot_public_opening_date(release_json, lot_public_opening_date_data) -> None:
     if not lot_public_opening_date_data:
         return
 

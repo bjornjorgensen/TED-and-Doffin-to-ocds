@@ -1,6 +1,7 @@
 # converters/bt_510a_ubo.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -79,7 +80,7 @@ def parse_ubo_street(xml_content):
     return result if result["parties"] else None
 
 
-def merge_ubo_street(release_json, ubo_street_data):
+def merge_ubo_street(release_json, ubo_street_data) -> None:
     if not ubo_street_data:
         logger.warning("No ubo Street data to merge")
         return

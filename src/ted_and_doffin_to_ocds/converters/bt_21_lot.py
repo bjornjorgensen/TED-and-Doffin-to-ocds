@@ -36,7 +36,7 @@ def parse_lot_title(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_title(release_json, lot_title_data):
+def merge_lot_title(release_json, lot_title_data) -> None:
     if not lot_title_data:
         return
 

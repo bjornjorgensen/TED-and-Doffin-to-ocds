@@ -1,6 +1,7 @@
 # converters/bt_513_organization_touchpoint.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -48,7 +49,9 @@ def parse_organization_touchpoint_city(xml_content):
     return result if result["parties"] else None
 
 
-def merge_organization_touchpoint_city(release_json, organization_touchpoint_city_data):
+def merge_organization_touchpoint_city(
+    release_json, organization_touchpoint_city_data
+) -> None:
     if not organization_touchpoint_city_data:
         logger.info("No organization touchpoint city data to merge")
         return

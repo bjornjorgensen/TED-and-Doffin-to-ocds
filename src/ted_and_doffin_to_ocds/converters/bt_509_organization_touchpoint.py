@@ -42,7 +42,7 @@ def parse_touchpoint_edelivery_gateway(xml_content):
     return result if result["parties"] else None
 
 
-def merge_touchpoint_edelivery_gateway(release_json, edelivery_gateway_data):
+def merge_touchpoint_edelivery_gateway(release_json, edelivery_gateway_data) -> None:
     if not edelivery_gateway_data:
         return
 

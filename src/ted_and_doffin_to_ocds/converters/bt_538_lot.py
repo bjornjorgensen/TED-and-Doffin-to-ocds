@@ -1,6 +1,7 @@
 # converters/bt_538_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -41,7 +42,7 @@ def parse_lot_duration_other(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_duration_other(release_json, lot_duration_other_data):
+def merge_lot_duration_other(release_json, lot_duration_other_data) -> None:
     if not lot_duration_other_data:
         logger.warning("No Lot Duration Other data to merge")
         return

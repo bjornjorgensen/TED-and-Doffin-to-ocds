@@ -1,6 +1,7 @@
 # converters/bt_615_part.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -66,7 +67,7 @@ def parse_documents_restricted_url_part(xml_content):
     return result if result["tender"]["documents"] else None
 
 
-def merge_documents_restricted_url_part(release_json, documents_data):
+def merge_documents_restricted_url_part(release_json, documents_data) -> None:
     """
     Merge the parsed documents restricted URL data for parts into the main OCDS release JSON.
 

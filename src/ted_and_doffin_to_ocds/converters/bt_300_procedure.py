@@ -1,7 +1,8 @@
 # converters/bt_300_procedure.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +38,7 @@ def parse_procedure_additional_info(xml_content):
     return result if result else None
 
 
-def merge_procedure_additional_info(release_json, procedure_additional_info):
+def merge_procedure_additional_info(release_json, procedure_additional_info) -> None:
     if not procedure_additional_info:
         logger.info("No procedure additional information to merge")
         return

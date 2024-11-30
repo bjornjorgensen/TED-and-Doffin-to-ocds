@@ -2,6 +2,7 @@
 
 import logging
 from datetime import datetime
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -26,7 +27,7 @@ def parse_future_notice_date(xml_content):
     return None
 
 
-def convert_to_iso_format(date_string):
+def convert_to_iso_format(date_string) -> str:
     # Split the date string and timezone
     date_part, _, tz_part = date_string.partition("+")
 
@@ -40,7 +41,7 @@ def convert_to_iso_format(date_string):
     return f"{date.isoformat()}+{tz_part}"
 
 
-def merge_future_notice_date(release_json, future_notice_date):
+def merge_future_notice_date(release_json, future_notice_date) -> None:
     if future_notice_date:
         if "tender" not in release_json:
             release_json["tender"] = {}

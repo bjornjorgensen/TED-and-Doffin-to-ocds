@@ -1,7 +1,8 @@
 # converters/opt_170_tenderer_leader.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +41,7 @@ def parse_tendering_party_leader(xml_content):
     return result if result["parties"] else None
 
 
-def merge_tendering_party_leader(release_json, leader_data):
+def merge_tendering_party_leader(release_json, leader_data) -> None:
     if not leader_data:
         logger.info("No tendering party leader data to merge")
         return

@@ -1,6 +1,7 @@
 # converters/bt_01_procedure.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -69,7 +70,7 @@ def parse_procedure_legal_basis(xml_content):
     return None
 
 
-def merge_procedure_legal_basis(release_json, legal_basis_data):
+def merge_procedure_legal_basis(release_json, legal_basis_data) -> None:
     if not legal_basis_data:
         return
 

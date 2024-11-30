@@ -1,12 +1,12 @@
 # tests/test_bt_644_Lot_Prize_Value.py
 
 from ted_and_doffin_to_ocds.converters.bt_644_lot_prize_value import (
-    parse_lot_prize_value,
     merge_lot_prize_value,
+    parse_lot_prize_value,
 )
 
 
-def test_parse_lot_prize_value():
+def test_parse_lot_prize_value() -> None:
     xml_content = b"""
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -39,7 +39,7 @@ def test_parse_lot_prize_value():
     assert lot["designContest"]["prizes"]["details"][1]["value"]["currency"] == "EUR"
 
 
-def test_parse_lot_prize_value_no_data():
+def test_parse_lot_prize_value_no_data() -> None:
     xml_content = b"""
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -54,7 +54,7 @@ def test_parse_lot_prize_value_no_data():
     assert result is None
 
 
-def test_merge_lot_prize_value():
+def test_merge_lot_prize_value() -> None:
     existing_release = {
         "tender": {
             "lots": [
@@ -110,7 +110,7 @@ def test_merge_lot_prize_value():
     assert lot["designContest"]["prizes"]["details"][1]["value"]["currency"] == "EUR"
 
 
-def test_merge_lot_prize_value_new_lot():
+def test_merge_lot_prize_value_new_lot() -> None:
     existing_release = {"tender": {"lots": []}}
 
     new_data = {

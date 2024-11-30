@@ -1,6 +1,7 @@
 # converters/bt_503_organization_company.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -39,7 +40,7 @@ def parse_organization_telephone(xml_content):
     return result if result["parties"] else None
 
 
-def merge_organization_telephone(release_json, organization_telephone_data):
+def merge_organization_telephone(release_json, organization_telephone_data) -> None:
     if not organization_telephone_data:
         logger.info("No organization telephone data to merge")
         return

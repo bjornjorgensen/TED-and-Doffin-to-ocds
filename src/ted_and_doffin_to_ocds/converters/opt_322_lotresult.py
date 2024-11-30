@@ -1,7 +1,8 @@
 # converters/opt_322_lotresult.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +40,7 @@ def parse_lotresult_technical_identifier(xml_content):
 
 def merge_lotresult_technical_identifier(
     release_json, lotresult_technical_identifier_data
-):
+) -> None:
     if not lotresult_technical_identifier_data:
         logger.info("No LotResult Technical Identifier data to merge.")
         return

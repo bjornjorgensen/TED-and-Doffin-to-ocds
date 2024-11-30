@@ -1,6 +1,7 @@
 # converters/bt_709_LotResult.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -83,7 +84,7 @@ def parse_framework_maximum_value(xml_content):
     return result if result["awards"] else None
 
 
-def merge_framework_maximum_value(release_json, framework_max_value_data):
+def merge_framework_maximum_value(release_json, framework_max_value_data) -> None:
     """
     Merge the parsed framework maximum value data into the main OCDS release JSON.
 

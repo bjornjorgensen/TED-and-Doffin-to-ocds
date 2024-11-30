@@ -1,15 +1,16 @@
 # tests/test_bt_10_procedure_buyer.py
 
-from pathlib import Path
-import pytest
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 
 @pytest.fixture(scope="module")
@@ -32,7 +33,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_10_non_cofog_activity(tmp_path, setup_logging, temp_output_dir):
+def test_bt_10_non_cofog_activity(tmp_path, setup_logging, temp_output_dir) -> None:
     """Test non-COFOG authority activity classification (gas-oil case)"""
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
@@ -92,7 +93,7 @@ def test_bt_10_non_cofog_activity(tmp_path, setup_logging, temp_output_dir):
     assert "buyer" in party["roles"], "Missing 'buyer' role"
 
 
-def test_bt_10_cofog_activity(tmp_path, setup_logging, temp_output_dir):
+def test_bt_10_cofog_activity(tmp_path, setup_logging, temp_output_dir) -> None:
     """Test COFOG activity classification"""
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
@@ -140,7 +141,7 @@ def test_bt_10_cofog_activity(tmp_path, setup_logging, temp_output_dir):
     assert classification["description"] == "General public services"
 
 
-def test_bt_10_missing_activity(tmp_path, setup_logging, temp_output_dir):
+def test_bt_10_missing_activity(tmp_path, setup_logging, temp_output_dir) -> None:
     """Test missing activity code"""
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
@@ -178,7 +179,7 @@ def test_bt_10_missing_activity(tmp_path, setup_logging, temp_output_dir):
         ), "Did not expect classifications when activity is missing"
 
 
-def test_bt_10_invalid_activity_code(tmp_path, setup_logging, temp_output_dir):
+def test_bt_10_invalid_activity_code(tmp_path, setup_logging, temp_output_dir) -> None:
     """Test invalid activity code"""
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>

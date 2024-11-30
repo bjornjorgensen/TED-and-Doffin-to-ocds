@@ -65,7 +65,7 @@ def map_essential_assets(xml_content):
     return result
 
 
-def merge_essential_assets(release_json, essential_assets_data):
+def merge_essential_assets(release_json, essential_assets_data) -> None:
     if not essential_assets_data.get("tender", {}).get("lots"):
         return
 

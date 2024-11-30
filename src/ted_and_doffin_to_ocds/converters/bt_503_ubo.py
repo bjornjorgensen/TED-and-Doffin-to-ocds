@@ -1,6 +1,7 @@
 # converters/bt_503_ubo.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -51,7 +52,7 @@ def parse_ubo_telephone(xml_content):
     return result if result["parties"] else None
 
 
-def merge_ubo_telephone(release_json, ubo_telephone_data):
+def merge_ubo_telephone(release_json, ubo_telephone_data) -> None:
     if not ubo_telephone_data:
         logger.info("No UBO telephone data to merge")
         return

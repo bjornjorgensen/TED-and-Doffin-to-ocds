@@ -1,6 +1,7 @@
 # converters/bt_51_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -52,7 +53,7 @@ def parse_lot_maximum_candidates(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_maximum_candidates(release_json, lot_maximum_candidates_data):
+def merge_lot_maximum_candidates(release_json, lot_maximum_candidates_data) -> None:
     if not lot_maximum_candidates_data:
         logger.info("No lot maximum candidates data to merge.")
         return

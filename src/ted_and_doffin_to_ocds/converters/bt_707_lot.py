@@ -1,6 +1,7 @@
 # converters/bt_707_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -68,7 +69,9 @@ def parse_lot_documents_restricted_justification(xml_content):
         raise
 
 
-def merge_lot_documents_restricted_justification(release_json, lot_documents_data):
+def merge_lot_documents_restricted_justification(
+    release_json, lot_documents_data
+) -> None:
     """Merge the parsed lot documents restricted justification data."""
     if not lot_documents_data:
         logger.warning("No lot documents restricted justification data to merge")

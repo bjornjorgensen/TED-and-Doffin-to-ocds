@@ -1,7 +1,8 @@
 # converters/bt_13714_Tender.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +41,7 @@ def parse_tender_lot_identifier(xml_content):
     return result if result["bids"]["details"] else None
 
 
-def merge_tender_lot_identifier(release_json, tender_lot_identifier_data):
+def merge_tender_lot_identifier(release_json, tender_lot_identifier_data) -> None:
     if not tender_lot_identifier_data:
         logger.warning("No Tender Lot Identifier data to merge")
         return

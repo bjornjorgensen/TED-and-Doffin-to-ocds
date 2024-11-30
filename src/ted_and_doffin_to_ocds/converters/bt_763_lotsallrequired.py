@@ -1,6 +1,7 @@
 # converters/bt_763_LotsAllRequired.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)

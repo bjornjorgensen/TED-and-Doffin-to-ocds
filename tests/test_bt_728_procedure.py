@@ -1,14 +1,15 @@
 # tests/test_bt_728_procedure.py
-from pathlib import Path
-import pytest
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 
 @pytest.fixture(scope="module")
@@ -82,7 +83,7 @@ def run_main_and_get_result(xml_file, output_dir):
 )
 def test_bt_728_procedure_integration(
     xml_content, expected_descriptions, tmp_path, temp_output_dir, setup_logging
-):
+) -> None:
     """Test BT-728 Place Performance Additional Information integration"""
     logger = setup_logging
 
@@ -115,7 +116,7 @@ def test_bt_728_procedure_integration(
         ), "Should not have deliveryAddresses for empty input"
 
 
-def test_bt_728_description_concatenation(tmp_path, temp_output_dir):
+def test_bt_728_description_concatenation(tmp_path, temp_output_dir) -> None:
     """Test that descriptions are properly concatenated when addresses match"""
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
         <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"

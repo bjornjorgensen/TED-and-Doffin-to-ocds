@@ -1,9 +1,10 @@
 # tests/test_bt_45_Lot.py
 
 from lxml import etree
+
 from ted_and_doffin_to_ocds.converters.bt_45_lot import (
-    parse_lot_rewards_other,
     merge_lot_rewards_other,
+    parse_lot_rewards_other,
 )
 
 
@@ -16,7 +17,7 @@ def create_xml_root(content):
     """)
 
 
-def test_parse_lot_rewards_other_single_lot():
+def test_parse_lot_rewards_other_single_lot() -> None:
     xml_content = create_xml_root("""
     <cac:ProcurementProjectLot>
         <cbc:ID schemeName="Lot">LOT-001</cbc:ID>
@@ -44,7 +45,7 @@ def test_parse_lot_rewards_other_single_lot():
     )
 
 
-def test_parse_lot_rewards_other_multiple_lots():
+def test_parse_lot_rewards_other_multiple_lots() -> None:
     xml_content = create_xml_root("""
     <cac:ProcurementProjectLot>
         <cbc:ID schemeName="Lot">LOT-001</cbc:ID>
@@ -88,7 +89,7 @@ def test_parse_lot_rewards_other_multiple_lots():
     )
 
 
-def test_parse_lot_rewards_other_no_prizes():
+def test_parse_lot_rewards_other_no_prizes() -> None:
     xml_content = create_xml_root("""
     <cac:ProcurementProjectLot>
         <cbc:ID schemeName="Lot">LOT-001</cbc:ID>
@@ -104,7 +105,7 @@ def test_parse_lot_rewards_other_no_prizes():
     assert result is None
 
 
-def test_merge_lot_rewards_other_new_lot():
+def test_merge_lot_rewards_other_new_lot() -> None:
     release_json = {"tender": {"lots": []}}
     lot_rewards_other_data = {
         "tender": {
@@ -135,7 +136,7 @@ def test_merge_lot_rewards_other_new_lot():
     )
 
 
-def test_merge_lot_rewards_other_existing_lot():
+def test_merge_lot_rewards_other_existing_lot() -> None:
     release_json = {
         "tender": {
             "lots": [
@@ -179,7 +180,7 @@ def test_merge_lot_rewards_other_existing_lot():
     )
 
 
-def test_merge_lot_rewards_other_no_data():
+def test_merge_lot_rewards_other_no_data() -> None:
     release_json = {"tender": {"lots": []}}
     lot_rewards_other_data = None
 

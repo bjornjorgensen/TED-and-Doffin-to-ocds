@@ -1,6 +1,7 @@
 # converters/bt_502_organization_company.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -39,7 +40,9 @@ def parse_organization_contact_point(xml_content):
     return result if result["parties"] else None
 
 
-def merge_organization_contact_point(release_json, organization_contact_point_data):
+def merge_organization_contact_point(
+    release_json, organization_contact_point_data
+) -> None:
     if not organization_contact_point_data:
         logger.info("No organization contact point data to merge")
         return

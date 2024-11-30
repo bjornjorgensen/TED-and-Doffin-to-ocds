@@ -1,9 +1,9 @@
 # tests/test_bt_500_ubo.py
 
-from ted_and_doffin_to_ocds.converters.bt_500_ubo import parse_ubo_name, merge_ubo_name
+from ted_and_doffin_to_ocds.converters.bt_500_ubo import merge_ubo_name, parse_ubo_name
 
 
-def test_parse_ubo_name():
+def test_parse_ubo_name() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -39,7 +39,7 @@ def test_parse_ubo_name():
     }
 
 
-def test_merge_ubo_name():
+def test_merge_ubo_name() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "name": "Test Organization"}]}
 
     ubo_name_data = {
@@ -64,7 +64,7 @@ def test_merge_ubo_name():
     }
 
 
-def test_merge_ubo_name_new_party():
+def test_merge_ubo_name_new_party() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "name": "Test Organization"}]}
 
     ubo_name_data = {

@@ -1,6 +1,7 @@
 # converters/bt_507_ubo.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -54,7 +55,7 @@ def parse_ubo_country_subdivision(xml_content):
     return result if result["parties"] else None
 
 
-def merge_ubo_country_subdivision(release_json, ubo_country_subdivision_data):
+def merge_ubo_country_subdivision(release_json, ubo_country_subdivision_data) -> None:
     if not ubo_country_subdivision_data:
         logger.info("No UBO country subdivision data to merge")
         return

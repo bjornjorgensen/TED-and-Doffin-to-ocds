@@ -1,6 +1,7 @@
 # converters/bt_5011_Contract.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -59,7 +60,7 @@ def parse_contract_eu_funds_financing_identifier(xml_content):
 def merge_contract_eu_funds_financing_identifier(
     release_json,
     contract_eu_funds_financing_identifier_data,
-):
+) -> None:
     if not contract_eu_funds_financing_identifier_data:
         logger.warning("No Contract EU Funds Financing Identifier data to merge")
         return

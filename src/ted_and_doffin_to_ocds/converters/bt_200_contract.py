@@ -1,6 +1,7 @@
 # converters/bt_200_Contract.py
 
 import uuid
+
 from lxml import etree
 
 
@@ -94,7 +95,7 @@ def get_reason_description(reason_code):
     return reason_descriptions.get(reason_code, "Unknown reason")
 
 
-def merge_contract_modification_reason(release_json, modification_data):
+def merge_contract_modification_reason(release_json, modification_data) -> None:
     if not modification_data:
         return
 

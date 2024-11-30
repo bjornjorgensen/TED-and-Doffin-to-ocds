@@ -1,6 +1,7 @@
 # converters/bt_702a_notice.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -219,7 +220,7 @@ def parse_notice_language(xml_content):
     return None
 
 
-def merge_notice_language(release_json, notice_language_data):
+def merge_notice_language(release_json, notice_language_data) -> None:
     """
     Merge the parsed notice language data into the main OCDS release JSON.
 

@@ -1,6 +1,7 @@
 # converters/bt_144_LotResult.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -73,7 +74,7 @@ def parse_not_awarded_reason(xml_content):
     return result if result["awards"] else None
 
 
-def merge_not_awarded_reason(release_json, not_awarded_reason_data):
+def merge_not_awarded_reason(release_json, not_awarded_reason_data) -> None:
     if not not_awarded_reason_data:
         logger.warning("No not awarded reason data to merge")
         return

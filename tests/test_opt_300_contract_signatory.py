@@ -1,12 +1,12 @@
 # tests/test_opt_300_contract_signatory.py
 
 from ted_and_doffin_to_ocds.converters.opt_300_contract_signatory import (
-    parse_signatory_identifier_reference,
     merge_signatory_identifier_reference,
+    parse_signatory_identifier_reference,
 )
 
 
-def test_parse_signatory_identifier_reference():
+def test_parse_signatory_identifier_reference() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -58,7 +58,7 @@ def test_parse_signatory_identifier_reference():
     assert award["buyers"][0]["id"] == "ORG-0001"
 
 
-def test_merge_signatory_identifier_reference():
+def test_merge_signatory_identifier_reference() -> None:
     release_json = {"parties": [], "awards": []}
     signatory_data = {
         "parties": [
@@ -88,7 +88,7 @@ def test_merge_signatory_identifier_reference():
     assert award["buyers"][0]["id"] == "ORG-0001"
 
 
-def test_merge_signatory_identifier_reference_existing_data():
+def test_merge_signatory_identifier_reference_existing_data() -> None:
     release_json = {
         "parties": [
             {"id": "ORG-0001", "name": "Existing Organization", "roles": ["supplier"]}

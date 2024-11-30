@@ -1,12 +1,12 @@
 # tests/test_bt_5131_Lot.py
 
 from ted_and_doffin_to_ocds.converters.bt_5131_lot import (
-    parse_place_performance_city,
     merge_place_performance_city,
+    parse_place_performance_city,
 )
 
 
-def test_parse_place_performance_city():
+def test_parse_place_performance_city() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -61,7 +61,7 @@ def test_parse_place_performance_city():
     }
 
 
-def test_parse_place_performance_city_empty():
+def test_parse_place_performance_city_empty() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -82,7 +82,7 @@ def test_parse_place_performance_city_empty():
     assert result is None
 
 
-def test_merge_place_performance_city():
+def test_merge_place_performance_city() -> None:
     existing_json = {
         "tender": {
             "items": [
@@ -127,7 +127,7 @@ def test_merge_place_performance_city():
     }
 
 
-def test_merge_place_performance_city_empty():
+def test_merge_place_performance_city_empty() -> None:
     existing_json = {"tender": {"items": []}}
     merge_place_performance_city(existing_json, None)
     assert existing_json == {"tender": {"items": []}}

@@ -1,12 +1,12 @@
 # tests/test_opt_140_part_procurement_docs.py
 
 from ted_and_doffin_to_ocds.converters.opt_140_part_procurement_docs import (
-    parse_procurement_documents_id_part,
     merge_procurement_documents_id_part,
+    parse_procurement_documents_id_part,
 )
 
 
-def test_parse_procurement_documents_id_part():
+def test_parse_procurement_documents_id_part() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -32,7 +32,7 @@ def test_parse_procurement_documents_id_part():
     assert doc["id"] == "20210521/CTFD/ENG/7654-02"
 
 
-def test_merge_procurement_documents_id_part():
+def test_merge_procurement_documents_id_part() -> None:
     release_json = {"tender": {"documents": []}}
     proc_docs_data = {"tender": {"documents": [{"id": "20210521/CTFD/ENG/7654-02"}]}}
 
@@ -45,7 +45,7 @@ def test_merge_procurement_documents_id_part():
     assert doc["id"] == "20210521/CTFD/ENG/7654-02"
 
 
-def test_merge_procurement_documents_id_part_existing_document():
+def test_merge_procurement_documents_id_part_existing_document() -> None:
     release_json = {"tender": {"documents": [{"id": "20210521/CTFD/ENG/7654-02"}]}}
     proc_docs_data = {
         "tender": {

@@ -53,7 +53,7 @@ def map_extended_duration_indicator(xml_content):
     return result
 
 
-def merge_extended_duration_indicator(release_json, extended_duration_data):
+def merge_extended_duration_indicator(release_json, extended_duration_data) -> None:
     if not extended_duration_data["tender"]["lots"]:
         return
 

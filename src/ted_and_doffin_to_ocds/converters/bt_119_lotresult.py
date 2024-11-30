@@ -1,7 +1,8 @@
 # converters/bt_119_LotResult.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -49,7 +50,7 @@ def parse_dps_termination(xml_content):
     return result if result["lots"] else None
 
 
-def merge_dps_termination(release_json, dps_termination_data):
+def merge_dps_termination(release_json, dps_termination_data) -> None:
     if not dps_termination_data:
         logger.warning("No DPS Termination data to merge")
         return

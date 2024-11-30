@@ -1,6 +1,7 @@
 # converters/bt_510c_organization_company.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -98,7 +99,7 @@ def parse_organization_streetline2(xml_content):
     return result if result["parties"] else None
 
 
-def merge_organization_streetline2(release_json, organization_streetline2_data):
+def merge_organization_streetline2(release_json, organization_streetline2_data) -> None:
     """
     Merge the parsed street address data into the main OCDS release JSON.
 

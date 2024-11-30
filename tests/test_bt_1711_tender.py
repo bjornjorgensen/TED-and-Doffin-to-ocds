@@ -1,12 +1,12 @@
 # tests/test_bt_1711_Tender.py
 
 from ted_and_doffin_to_ocds.converters.bt_1711_tender import (
-    parse_tender_ranked,
     merge_tender_ranked,
+    parse_tender_ranked,
 )
 
 
-def test_parse_tender_ranked():
+def test_parse_tender_ranked() -> None:
     xml_content = """
     <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
@@ -32,7 +32,7 @@ def test_parse_tender_ranked():
     }
 
 
-def test_merge_tender_ranked():
+def test_merge_tender_ranked() -> None:
     release_json = {}
     tender_ranked_data = {
         "bids": {

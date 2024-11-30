@@ -1,6 +1,7 @@
 # converters/bt_3202_Contract.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -91,7 +92,7 @@ def parse_contract_tender_id(xml_content):
     return result
 
 
-def merge_contract_tender_id(release_json, contract_tender_id_data):
+def merge_contract_tender_id(release_json, contract_tender_id_data) -> None:
     if not contract_tender_id_data:
         logger.warning("No Contract Tender ID data to merge")
         return

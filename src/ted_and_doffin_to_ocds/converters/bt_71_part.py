@@ -1,6 +1,7 @@
 # converters/bt_71_part.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -60,7 +61,9 @@ def parse_reserved_participation_part(xml_content):
     return None
 
 
-def merge_reserved_participation_part(release_json, reserved_participation_data):
+def merge_reserved_participation_part(
+    release_json, reserved_participation_data
+) -> None:
     """
     Merge the parsed reserved participation data into the main OCDS release JSON.
 

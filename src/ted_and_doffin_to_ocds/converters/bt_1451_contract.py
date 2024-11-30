@@ -1,7 +1,9 @@
 # converters/bt_1451_Contract.py
 
 import logging
+
 from lxml import etree
+
 from ted_and_doffin_to_ocds.utils.date_utils import end_date
 
 logger = logging.getLogger(__name__)
@@ -66,7 +68,7 @@ def parse_winner_decision_date(xml_content):
     return result if result["awards"] else None
 
 
-def merge_winner_decision_date(release_json, winner_decision_date_data):
+def merge_winner_decision_date(release_json, winner_decision_date_data) -> None:
     if not winner_decision_date_data:
         logger.warning("No Winner Decision Date data to merge")
         return

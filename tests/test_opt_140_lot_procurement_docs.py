@@ -1,12 +1,12 @@
 # tests/test_opt_140_lot_procurement_docs.py
 
 from ted_and_doffin_to_ocds.converters.opt_140_lot_procurement_docs import (
-    parse_procurement_documents_id,
     merge_procurement_documents_id,
+    parse_procurement_documents_id,
 )
 
 
-def test_parse_procurement_documents_id():
+def test_parse_procurement_documents_id() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -33,7 +33,7 @@ def test_parse_procurement_documents_id():
     assert doc["relatedLots"] == ["LOT-0001"]
 
 
-def test_merge_procurement_documents_id():
+def test_merge_procurement_documents_id() -> None:
     release_json = {"tender": {"documents": []}}
     proc_docs_data = {
         "tender": {
@@ -53,7 +53,7 @@ def test_merge_procurement_documents_id():
     assert doc["relatedLots"] == ["LOT-0001"]
 
 
-def test_merge_procurement_documents_id_existing_document():
+def test_merge_procurement_documents_id_existing_document() -> None:
     release_json = {
         "tender": {
             "documents": [

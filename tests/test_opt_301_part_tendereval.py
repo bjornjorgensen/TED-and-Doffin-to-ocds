@@ -1,12 +1,12 @@
 # tests/test_opt_301_part_tendereval.py
 
 from ted_and_doffin_to_ocds.converters.opt_301_part_tendereval import (
-    part_parse_tender_evaluator,
     part_merge_tender_evaluator,
+    part_parse_tender_evaluator,
 )
 
 
-def test_parse_tender_evaluator():
+def test_parse_tender_evaluator() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -26,7 +26,7 @@ def test_parse_tender_evaluator():
     assert result == {"parties": [{"id": "TPO-0001", "roles": ["evaluationBody"]}]}
 
 
-def test_merge_tender_evaluator():
+def test_merge_tender_evaluator() -> None:
     release_json = {"parties": [{"id": "TPO-0001", "roles": ["buyer"]}]}
     tender_evaluator_data = {
         "parties": [{"id": "TPO-0001", "roles": ["evaluationBody"]}]
@@ -37,7 +37,7 @@ def test_merge_tender_evaluator():
     }
 
 
-def test_merge_tender_evaluator_new_party():
+def test_merge_tender_evaluator_new_party() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}
     tender_evaluator_data = {
         "parties": [{"id": "TPO-0001", "roles": ["evaluationBody"]}]
@@ -51,7 +51,7 @@ def test_merge_tender_evaluator_new_party():
     }
 
 
-def test_merge_tender_evaluator_no_data():
+def test_merge_tender_evaluator_no_data() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}
     part_merge_tender_evaluator(release_json, None)
     assert release_json == {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}

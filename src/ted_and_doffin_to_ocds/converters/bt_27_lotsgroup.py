@@ -1,7 +1,8 @@
 # converters/bt_27_LotsGroup.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -49,7 +50,7 @@ def parse_bt_27_lots_group(xml_content):
     return result
 
 
-def merge_bt_27_lots_group(release_json, bt_27_lots_group_data):
+def merge_bt_27_lots_group(release_json, bt_27_lots_group_data) -> None:
     existing_lot_groups = release_json.setdefault("tender", {}).setdefault(
         "lotGroups",
         [],

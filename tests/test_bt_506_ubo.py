@@ -1,12 +1,12 @@
 # tests/test_bt_506_ubo.py
 
 from ted_and_doffin_to_ocds.converters.bt_506_ubo import (
-    parse_ubo_email,
     merge_ubo_email,
+    parse_ubo_email,
 )
 
 
-def test_parse_ubo_email():
+def test_parse_ubo_email() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -44,7 +44,7 @@ def test_parse_ubo_email():
     }
 
 
-def test_merge_ubo_email():
+def test_merge_ubo_email() -> None:
     release_json = {
         "parties": [
             {
@@ -85,7 +85,7 @@ def test_merge_ubo_email():
     }
 
 
-def test_merge_ubo_email_new_party():
+def test_merge_ubo_email_new_party() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "name": "Test Organization"}]}
 
     ubo_email_data = {

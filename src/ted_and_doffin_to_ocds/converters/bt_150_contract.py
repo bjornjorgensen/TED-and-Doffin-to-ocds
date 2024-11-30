@@ -1,7 +1,8 @@
 # converters/bt_150_Contract.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -69,7 +70,7 @@ def parse_contract_identifier(xml_content):
     return {"contracts": contracts} if contracts else None
 
 
-def merge_contract_identifier(release_json, contract_identifier_data):
+def merge_contract_identifier(release_json, contract_identifier_data) -> None:
     if not contract_identifier_data:
         logger.warning("No Contract Identifier data to merge")
         return

@@ -1,6 +1,7 @@
-from typing import Any
 import logging
 from datetime import datetime
+from typing import Any
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)

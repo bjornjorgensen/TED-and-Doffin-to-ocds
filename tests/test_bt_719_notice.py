@@ -1,14 +1,15 @@
 # tests/test_bt_719_notice.py
 
 import pytest
+
 from ted_and_doffin_to_ocds.converters.bt_719_notice import (
-    parse_procurement_documents_change_date,
     merge_procurement_documents_change_date,
+    parse_procurement_documents_change_date,
 )
 
 
 @pytest.fixture
-def sample_xml():
+def sample_xml() -> str:
     return """
     <root xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
@@ -37,7 +38,7 @@ def sample_xml():
     """
 
 
-def test_parse_procurement_documents_change_date(sample_xml):
+def test_parse_procurement_documents_change_date(sample_xml) -> None:
     result = parse_procurement_documents_change_date(sample_xml)
     assert result is not None
     assert "tender" in result
@@ -55,13 +56,13 @@ def test_parse_procurement_documents_change_date(sample_xml):
     assert "relatedLots" not in general_doc
 
 
-def test_parse_procurement_documents_change_date_no_data():
+def test_parse_procurement_documents_change_date_no_data() -> None:
     xml_without_data = "<root></root>"
     result = parse_procurement_documents_change_date(xml_without_data)
     assert result is None
 
 
-def test_merge_procurement_documents_change_date():
+def test_merge_procurement_documents_change_date() -> None:
     existing_release = {
         "tender": {
             "documents": [
@@ -104,7 +105,7 @@ def test_merge_procurement_documents_change_date():
     )
 
 
-def test_merge_procurement_documents_change_date_new_document():
+def test_merge_procurement_documents_change_date_new_document() -> None:
     existing_release = {
         "tender": {"documents": [{"id": "doc1", "documentType": "biddingDocuments"}]},
     }
@@ -131,7 +132,7 @@ def test_merge_procurement_documents_change_date_new_document():
     assert existing_release["tender"]["documents"][1]["relatedLots"] == ["LOT-0001"]
 
 
-def test_merge_procurement_documents_change_date_no_data():
+def test_merge_procurement_documents_change_date_no_data() -> None:
     existing_release = {"tender": {"documents": []}}
     merge_procurement_documents_change_date(existing_release, None)
     assert existing_release == {"tender": {"documents": []}}

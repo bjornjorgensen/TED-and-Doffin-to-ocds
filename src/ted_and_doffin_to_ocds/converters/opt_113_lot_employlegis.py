@@ -1,7 +1,8 @@
 # converters/opt_113_lot_employlegis.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +41,9 @@ def parse_employment_legislation_document_id(xml_content):
     return result if result["tender"]["documents"] else None
 
 
-def merge_employment_legislation_document_id(release_json, employment_legislation_data):
+def merge_employment_legislation_document_id(
+    release_json, employment_legislation_data
+) -> None:
     if not employment_legislation_data:
         return
 

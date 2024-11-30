@@ -1,8 +1,10 @@
 # converters/bt_537_part.py
 
-from lxml import etree
-from ted_and_doffin_to_ocds.utils.date_utils import end_date
 import logging
+
+from lxml import etree
+
+from ted_and_doffin_to_ocds.utils.date_utils import end_date
 
 
 def parse_part_duration_end_date(xml_content):
@@ -55,7 +57,7 @@ def parse_part_duration_end_date(xml_content):
     return result if "contractPeriod" in result["tender"] else None
 
 
-def merge_part_duration_end_date(release_json, part_duration_end_date_data):
+def merge_part_duration_end_date(release_json, part_duration_end_date_data) -> None:
     """
     Merge the parsed part Duration End Date data into the release JSON.
 
