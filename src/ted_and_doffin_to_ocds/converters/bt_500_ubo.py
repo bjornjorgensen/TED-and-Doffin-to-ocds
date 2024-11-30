@@ -1,6 +1,7 @@
 # converters/bt_500_ubo.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -51,7 +52,7 @@ def parse_ubo_name(xml_content):
     return result if result["parties"] else None
 
 
-def merge_ubo_name(release_json, ubo_name_data):
+def merge_ubo_name(release_json, ubo_name_data) -> None:
     if not ubo_name_data:
         logger.info("No UBO name data to merge")
         return

@@ -1,6 +1,7 @@
 # converters/bt_630_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -68,7 +69,9 @@ def parse_deadline_receipt_expressions(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_deadline_receipt_expressions(release_json, deadline_receipt_expressions_data):
+def merge_deadline_receipt_expressions(
+    release_json, deadline_receipt_expressions_data
+) -> None:
     """
     Merge the parsed deadline receipt expressions data into the main OCDS release JSON.
 

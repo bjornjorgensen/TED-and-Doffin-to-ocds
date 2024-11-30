@@ -1,6 +1,7 @@
 # converters/bt_195_bt_541_Lot_fixed.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -58,7 +59,7 @@ def parse_bt195_bt541_lot_fixed_unpublished_identifier(xml_content):
 def merge_bt195_bt541_lot_fixed_unpublished_identifier(
     release_json,
     unpublished_identifier_data,
-):
+) -> None:
     """
     Merge the parsed unpublished identifier data into the main OCDS release JSON.
 

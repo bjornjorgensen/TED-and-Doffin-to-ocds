@@ -1,7 +1,8 @@
 # converters/opt_315_lotresult.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -41,7 +42,7 @@ def parse_contract_identifier_reference(xml_content):
     return result if result["contracts"] else None
 
 
-def merge_contract_identifier_reference(release_json, contract_identifier_data):
+def merge_contract_identifier_reference(release_json, contract_identifier_data) -> None:
     if not contract_identifier_data:
         logger.info("No Contract Identifier Reference data to merge.")
         return

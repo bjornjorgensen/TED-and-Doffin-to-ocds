@@ -1,13 +1,14 @@
 # tests/test_bt_01_procedure.py
 
 import pytest
+
 from ted_and_doffin_to_ocds.converters.bt_01_procedure import (
-    parse_procedure_legal_basis,
     merge_procedure_legal_basis,
+    parse_procedure_legal_basis,
 )
 
 
-def create_xml_with_namespace(content):
+def create_xml_with_namespace(content) -> str:
     return f"""<?xml version="1.0" encoding="UTF-8"?>
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -16,7 +17,7 @@ def create_xml_with_namespace(content):
     """
 
 
-def test_parse_procedure_legal_basis_with_eli():
+def test_parse_procedure_legal_basis_with_eli() -> None:
     xml_content = create_xml_with_namespace("""
         <cac:ProcurementLegislationDocumentReference>
             <cbc:ID>dir201424</cbc:ID>
@@ -32,7 +33,7 @@ def test_parse_procedure_legal_basis_with_eli():
     assert result["tender"]["legalBasis"]["description"] == "Directive 2014/24/EU"
 
 
-def test_parse_procedure_legal_basis_with_local_basis():
+def test_parse_procedure_legal_basis_with_local_basis() -> None:
     xml_content = create_xml_with_namespace("""
         <cac:ProcurementLegislationDocumentReference>
             <cbc:ID>LocalLegalBasis</cbc:ID>
@@ -48,7 +49,7 @@ def test_parse_procedure_legal_basis_with_local_basis():
     assert result["tender"]["legalBasis"]["description"] == "Local procurement law"
 
 
-def test_parse_procedure_legal_basis_with_celex():
+def test_parse_procedure_legal_basis_with_celex() -> None:
     xml_content = create_xml_with_namespace("""
         <cbc:RegulatoryDomain>32014L0024</cbc:RegulatoryDomain>
     """)
@@ -60,7 +61,7 @@ def test_parse_procedure_legal_basis_with_celex():
     assert result["tender"]["legalBasis"]["id"] == "32014L0024"
 
 
-def test_parse_procedure_legal_basis_no_data():
+def test_parse_procedure_legal_basis_no_data() -> None:
     xml_content = create_xml_with_namespace("""
         <cac:SomeOtherElement>
             <cbc:ID>SomeID</cbc:ID>
@@ -72,7 +73,7 @@ def test_parse_procedure_legal_basis_no_data():
     assert result is None
 
 
-def test_merge_procedure_legal_basis():
+def test_merge_procedure_legal_basis() -> None:
     release_json = {"tender": {"legalBasis": {"scheme": "ELI", "id": "old_id"}}}
 
     legal_basis_data = {
@@ -92,7 +93,7 @@ def test_merge_procedure_legal_basis():
     assert release_json["tender"]["legalBasis"]["description"] == "New description"
 
 
-def test_merge_procedure_legal_basis_no_data():
+def test_merge_procedure_legal_basis_no_data() -> None:
     release_json = {"tender": {"legalBasis": {"scheme": "ELI", "id": "old_id"}}}
 
     merge_procedure_legal_basis(release_json, None)

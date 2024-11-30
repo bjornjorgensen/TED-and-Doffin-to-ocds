@@ -1,6 +1,7 @@
 # converters/bt_777_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -70,7 +71,9 @@ def parse_strategic_procurement_description(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_strategic_procurement_description(release_json, strategic_procurement_data):
+def merge_strategic_procurement_description(
+    release_json, strategic_procurement_data
+) -> None:
     """
     Merge the parsed Strategic Procurement Description data into the main OCDS release JSON.
 

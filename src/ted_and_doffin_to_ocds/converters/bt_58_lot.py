@@ -1,6 +1,7 @@
 # converters/bt_58_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -72,7 +73,7 @@ def parse_renewal_maximum(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_renewal_maximum(release_json, renewal_data):
+def merge_renewal_maximum(release_json, renewal_data) -> None:
     """
     Merge the parsed renewal maximum data into the main OCDS release JSON.
 

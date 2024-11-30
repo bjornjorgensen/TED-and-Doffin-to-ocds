@@ -1,6 +1,7 @@
 # converters/bt_19_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -55,7 +56,9 @@ def parse_submission_nonelectronic_justification(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_submission_nonelectronic_justification(release_json, justification_data):
+def merge_submission_nonelectronic_justification(
+    release_json, justification_data
+) -> None:
     if not justification_data:
         logger.warning("No Submission Nonelectronic Justification data to merge")
         return

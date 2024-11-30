@@ -1,7 +1,8 @@
 # converters/bt_33_procedure.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -41,7 +42,7 @@ def parse_max_lots_awarded(xml_content):
     return None
 
 
-def merge_max_lots_awarded(release_json, max_lots_awarded_data):
+def merge_max_lots_awarded(release_json, max_lots_awarded_data) -> None:
     if not max_lots_awarded_data:
         return
 

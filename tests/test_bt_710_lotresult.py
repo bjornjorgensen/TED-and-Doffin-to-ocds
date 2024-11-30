@@ -1,10 +1,10 @@
 from ted_and_doffin_to_ocds.converters.bt_710_lotresult import (
-    parse_tender_value_lowest,
     merge_tender_value_lowest,
+    parse_tender_value_lowest,
 )
 
 
-def test_parse_tender_value_lowest():
+def test_parse_tender_value_lowest() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -32,7 +32,7 @@ def test_parse_tender_value_lowest():
     assert stat["relatedLots"] == ["LOT-0001"]
 
 
-def test_merge_tender_value_lowest():
+def test_merge_tender_value_lowest() -> None:
     release_json = {"bids": {"statistics": []}}
     tender_value_lowest_data = {
         "bids": {

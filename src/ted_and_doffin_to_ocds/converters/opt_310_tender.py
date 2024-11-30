@@ -1,7 +1,8 @@
 # converters/opt_310_tender.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -70,7 +71,7 @@ def parse_tendering_party_id_reference(xml_content):
     return result if (result["parties"] or result["bids"]["details"]) else None
 
 
-def merge_tendering_party_id_reference(release_json, tendering_party_data):
+def merge_tendering_party_id_reference(release_json, tendering_party_data) -> None:
     if not tendering_party_data:
         logger.info("No Tendering Party ID Reference data to merge.")
         return

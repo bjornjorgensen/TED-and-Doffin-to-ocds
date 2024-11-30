@@ -1,13 +1,15 @@
 # converters/utils/Common_operations.py
 
 import json
-import uuid
 import logging
 import os
-from lxml import etree
+import uuid
 from pathlib import Path
-from .notice_tracker import NoticeTracker
 from typing import Any
+
+from lxml import etree
+
+from .notice_tracker import NoticeTracker
 from .xml_processor import XMLProcessor
 
 logger = logging.getLogger(__name__)
@@ -18,7 +20,7 @@ class NoticeProcessor:
 
     def __init__(
         self, ocid_prefix: str, scheme: str = "eu-oj", db_path: str | None = None
-    ):
+    ) -> None:
         """
         Initialize the NoticeProcessor.
 
@@ -349,7 +351,7 @@ def remove_empty_dicts(data):
 
 def process_bt_section(
     release_json, xml_content, parse_funcs, merge_func, section_name
-):
+) -> None:
     logger = logging.getLogger(__name__)
     try:
         logger.info("Starting %s processing", section_name)
@@ -365,7 +367,7 @@ def process_bt_section(
         logger.exception("Error processing %s data", section_name)
 
 
-def configure_logging():
+def configure_logging() -> None:
     """Configures logging to write to a log file, unless running on GitHub Actions."""
     # Check if running on GitHub Actions
     if os.environ.get("GITHUB_ACTIONS") == "true":

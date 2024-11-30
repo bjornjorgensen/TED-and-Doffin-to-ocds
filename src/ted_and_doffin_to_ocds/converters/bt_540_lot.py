@@ -1,6 +1,7 @@
 # converters/bt_540_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -46,7 +47,9 @@ def parse_award_criterion_description(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_award_criterion_description(release_json, award_criterion_description_data):
+def merge_award_criterion_description(
+    release_json, award_criterion_description_data
+) -> None:
     if not award_criterion_description_data:
         logger.warning("No Award Criterion Description data to merge")
         return

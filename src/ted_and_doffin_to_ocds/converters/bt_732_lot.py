@@ -1,6 +1,7 @@
 # converters/bt_732_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -58,7 +59,7 @@ def parse_lot_security_clearance_description(xml_content):
 def merge_lot_security_clearance_description(
     release_json,
     lot_security_clearance_description_data,
-):
+) -> None:
     """
     Merge the parsed security clearance description data for lots into the main OCDS release JSON.
 

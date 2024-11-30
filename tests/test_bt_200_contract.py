@@ -1,12 +1,12 @@
 # tests/test_bt_200_Contract.py
 
 from ted_and_doffin_to_ocds.converters.bt_200_contract import (
-    parse_contract_modification_reason,
     merge_contract_modification_reason,
+    parse_contract_modification_reason,
 )
 
 
-def test_parse_contract_modification_reason():
+def test_parse_contract_modification_reason() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -62,7 +62,7 @@ def test_parse_contract_modification_reason():
     assert contract["awardID"] == "RES-0001"
 
 
-def test_parse_contract_modification_reason_multiple_awards():
+def test_parse_contract_modification_reason_multiple_awards() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -125,7 +125,7 @@ def test_parse_contract_modification_reason_multiple_awards():
     assert set(contract["awardIDs"]) == {"RES-0002", "RES-0003"}
 
 
-def test_merge_contract_modification_reason():
+def test_merge_contract_modification_reason() -> None:
     existing_json = {"contracts": [{"id": "CON-0001", "awardID": "RES-0001"}]}
 
     modification_data = {
@@ -159,7 +159,7 @@ def test_merge_contract_modification_reason():
     assert contract["awardID"] == "RES-0001"
 
 
-def test_merge_contract_modification_reason_new_contract():
+def test_merge_contract_modification_reason_new_contract() -> None:
     existing_json = {"contracts": [{"id": "CON-0001", "awardID": "RES-0001"}]}
 
     modification_data = {

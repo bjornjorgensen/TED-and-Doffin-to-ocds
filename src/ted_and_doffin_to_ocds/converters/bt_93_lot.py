@@ -1,6 +1,7 @@
 # converters/bt_93_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -70,7 +71,7 @@ def parse_electronic_payment(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_electronic_payment(release_json, electronic_payment_data):
+def merge_electronic_payment(release_json, electronic_payment_data) -> None:
     """
     Merge the parsed electronic payment data into the main OCDS release JSON.
 

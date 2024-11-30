@@ -1,6 +1,7 @@
 # converters/bt_737_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -249,7 +250,7 @@ def parse_documents_unofficial_language(xml_content):
     return result if result["tender"]["documents"] else None
 
 
-def merge_documents_unofficial_language(release_json, unofficial_language_data):
+def merge_documents_unofficial_language(release_json, unofficial_language_data) -> None:
     """
     Merge the parsed unofficial language data for documents into the main OCDS release JSON.
 

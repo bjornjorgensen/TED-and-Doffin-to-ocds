@@ -1,12 +1,12 @@
 # tests/test_bt_503_organization_touchpoint.py
 
 from ted_and_doffin_to_ocds.converters.bt_503_organization_touchpoint import (
-    parse_organization_touchpoint_telephone,
     merge_organization_touchpoint_telephone,
+    parse_organization_touchpoint_telephone,
 )
 
 
-def test_parse_organization_touchpoint_telephone():
+def test_parse_organization_touchpoint_telephone() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -47,7 +47,7 @@ def test_parse_organization_touchpoint_telephone():
     }
 
 
-def test_merge_organization_touchpoint_telephone():
+def test_merge_organization_touchpoint_telephone() -> None:
     release_json = {"parties": [{"id": "TPO-0001", "name": "Test Organization"}]}
 
     organization_touchpoint_telephone_data = {
@@ -76,7 +76,7 @@ def test_merge_organization_touchpoint_telephone():
     }
 
 
-def test_merge_organization_touchpoint_telephone_new_party():
+def test_merge_organization_touchpoint_telephone_new_party() -> None:
     release_json = {"parties": [{"id": "TPO-0001", "name": "Test Organization"}]}
 
     organization_touchpoint_telephone_data = {

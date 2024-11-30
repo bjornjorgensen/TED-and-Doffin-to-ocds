@@ -1,7 +1,8 @@
 # converters/opt_301_part_revieworg.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +30,7 @@ def part_parse_review_organization(xml_content):
     return result
 
 
-def part_merge_review_organization(release_json, review_organization_data):
+def part_merge_review_organization(release_json, review_organization_data) -> None:
     if not review_organization_data:
         logger.info("No Review Organization data to merge.")
         return

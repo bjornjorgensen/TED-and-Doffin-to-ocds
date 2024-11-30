@@ -1,6 +1,7 @@
 # converters/bt_610_procedure_buyer.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -131,7 +132,7 @@ def parse_activity_entity(xml_content):
     return result if result["parties"] else None
 
 
-def merge_activity_entity(release_json, activity_data):
+def merge_activity_entity(release_json, activity_data) -> None:
     """
     Merge the parsed activity entity data into the main OCDS release JSON.
 

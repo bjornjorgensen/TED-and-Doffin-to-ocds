@@ -1,6 +1,7 @@
 # converters/bt_31_procedure.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -31,7 +32,7 @@ def parse_max_lots_allowed(xml_content):
     return None
 
 
-def merge_max_lots_allowed(release_json, max_lots_data):
+def merge_max_lots_allowed(release_json, max_lots_data) -> None:
     if not max_lots_data:
         logger.warning("No Maximum Lots Allowed data to merge")
         return

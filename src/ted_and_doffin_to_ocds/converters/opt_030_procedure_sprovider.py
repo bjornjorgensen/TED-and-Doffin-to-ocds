@@ -1,7 +1,8 @@
 # converters/opt_030_procedure_sprovider.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -53,7 +54,7 @@ def parse_provided_service_type(xml_content):
     return result if result["parties"] else None
 
 
-def merge_provided_service_type(release_json, provided_service_type_data):
+def merge_provided_service_type(release_json, provided_service_type_data) -> None:
     if not provided_service_type_data:
         logger.info("No provided service type data to merge")
         return

@@ -1,6 +1,7 @@
 # converters/bt_70_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -54,7 +55,7 @@ def parse_lot_performance_terms(xml_content):
     return result if result["lots"] else None
 
 
-def merge_lot_performance_terms(release_json, lot_performance_terms_data):
+def merge_lot_performance_terms(release_json, lot_performance_terms_data) -> None:
     """
     Merge the parsed performance terms data into the main OCDS release JSON.
 

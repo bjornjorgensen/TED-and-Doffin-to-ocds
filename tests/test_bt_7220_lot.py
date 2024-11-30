@@ -38,7 +38,7 @@ def run_main_and_get_result(xml_file: Path, output_dir: Path) -> dict:
         return json.load(f)
 
 
-def test_bt_7220_lot_integration(tmp_path, setup_logging, temp_output_dir):
+def test_bt_7220_lot_integration(tmp_path, setup_logging, temp_output_dir) -> None:
     """Test BT-7220-Lot EU Funds Programme integration."""
     logger = setup_logging
 

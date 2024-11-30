@@ -1,7 +1,8 @@
 # converters/opt_201_organization_touchpoint.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +34,7 @@ def parse_touchpoint_technical_identifier(xml_content):
     return result if result["parties"] else None
 
 
-def merge_touchpoint_technical_identifier(release_json, touchpoint_data):
+def merge_touchpoint_technical_identifier(release_json, touchpoint_data) -> None:
     if not touchpoint_data:
         logger.info("No TouchPoint technical identifier data to merge")
         return

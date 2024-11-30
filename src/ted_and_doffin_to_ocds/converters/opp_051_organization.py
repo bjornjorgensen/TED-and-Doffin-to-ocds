@@ -41,7 +41,7 @@ def parse_awarding_cpb_buyer_indicator(xml_content):
     return result if result["procuringEntityIds"] else None
 
 
-def merge_awarding_cpb_buyer_indicator(release_json, awarding_cpb_buyer_data):
+def merge_awarding_cpb_buyer_indicator(release_json, awarding_cpb_buyer_data) -> None:
     if not awarding_cpb_buyer_data:
         return
 

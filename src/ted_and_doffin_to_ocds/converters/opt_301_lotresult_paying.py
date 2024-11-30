@@ -1,7 +1,8 @@
 # converters/opt_301_lotresult_paying.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +34,7 @@ def parse_payer_party(xml_content):
     return result if result["parties"] else None
 
 
-def merge_payer_party(release_json, payer_party_data):
+def merge_payer_party(release_json, payer_party_data) -> None:
     if not payer_party_data:
         logger.info("No Payer Party (ID reference) data to merge")
         return

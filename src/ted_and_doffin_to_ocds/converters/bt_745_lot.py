@@ -1,6 +1,7 @@
 # converters/bt_745_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -57,7 +58,7 @@ def parse_submission_nonelectronic_description(xml_content):
 def merge_submission_nonelectronic_description(
     release_json,
     submission_nonelectronic_description_data,
-):
+) -> None:
     """
     Merge the parsed submission non-electronic description data into the main OCDS release JSON.
 

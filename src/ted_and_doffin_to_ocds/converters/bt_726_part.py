@@ -2,6 +2,7 @@
 
 import logging
 from typing import Any
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)

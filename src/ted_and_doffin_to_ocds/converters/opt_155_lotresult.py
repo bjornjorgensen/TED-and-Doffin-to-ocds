@@ -1,6 +1,7 @@
 # converters/OPT_155_LotResult.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -77,7 +78,7 @@ def parse_vehicle_type(xml_content):
     return result if result["awards"] else None
 
 
-def merge_vehicle_type(release_json, vehicle_type_data):
+def merge_vehicle_type(release_json, vehicle_type_data) -> None:
     """
     Merge the parsed vehicle type data into the main OCDS release JSON.
 

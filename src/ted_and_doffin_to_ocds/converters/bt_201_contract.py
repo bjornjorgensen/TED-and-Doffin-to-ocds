@@ -1,6 +1,7 @@
 # converters/bt_201_Contract.py
 
 import uuid
+
 from lxml import etree
 
 
@@ -72,7 +73,7 @@ def parse_contract_modification_description(xml_content):
     return result if result["contracts"] else None
 
 
-def merge_contract_modification_description(release_json, modification_data):
+def merge_contract_modification_description(release_json, modification_data) -> None:
     if not modification_data:
         return
 

@@ -1,6 +1,7 @@
 # converters/bt_5423_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -66,7 +67,7 @@ def parse_award_criterion_number_threshold(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_award_criterion_number_threshold(release_json, award_criterion_data):
+def merge_award_criterion_number_threshold(release_json, award_criterion_data) -> None:
     if not award_criterion_data:
         logger.warning("No Award Criterion Number Threshold data to merge")
         return

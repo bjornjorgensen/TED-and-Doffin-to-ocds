@@ -1,7 +1,8 @@
 # converters/bt_115_GPA_Coverage.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -53,7 +54,7 @@ def parse_gpa_coverage(xml_content):
     return result if result["tender"]["lots"] or result["tender"]["coveredBy"] else None
 
 
-def merge_gpa_coverage(release_json, gpa_coverage_data):
+def merge_gpa_coverage(release_json, gpa_coverage_data) -> None:
     if not gpa_coverage_data:
         logger.warning("No GPA Coverage data to merge")
         return

@@ -1,15 +1,16 @@
 # tests/test_bt_610_procedure_buyer.py
-from pathlib import Path
-import pytest
 import json
+import logging
 import sys
 import tempfile
-import logging
+from pathlib import Path
+
+import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
 from src.ted_and_doffin_to_ocds.converters.bt_610_procedure_buyer import AUTHORITY_TABLE
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 # Test constants
 TEST_OCID_PREFIX = "ocds-test-prefix"
@@ -61,7 +62,7 @@ def run_main_and_get_result(xml_file, output_dir):
 )
 def test_bt_610_procedure_buyer_integration(
     activity_code, org_id, tmp_path, setup_logging, temp_output_dir
-):
+) -> None:
     logger = setup_logging
 
     # Generate test XML content

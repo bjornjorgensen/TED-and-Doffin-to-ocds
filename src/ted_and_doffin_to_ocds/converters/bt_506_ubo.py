@@ -1,6 +1,7 @@
 # converters/bt_506_ubo.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -53,7 +54,7 @@ def parse_ubo_email(xml_content):
     return result if result["parties"] else None
 
 
-def merge_ubo_email(release_json, ubo_email_data):
+def merge_ubo_email(release_json, ubo_email_data) -> None:
     if not ubo_email_data:
         logger.info("No UBO email data to merge")
         return

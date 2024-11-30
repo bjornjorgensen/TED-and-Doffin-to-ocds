@@ -2,9 +2,10 @@
 
 import pytest
 from lxml import etree
+
 from ted_and_doffin_to_ocds.converters.bt_712a_lotresult import (
-    parse_buyer_review_complainants_code,
     merge_buyer_review_complainants_code,
+    parse_buyer_review_complainants_code,
 )
 
 NAMESPACES = {
@@ -41,7 +42,7 @@ def create_xml_content(lot_data):
     return etree.tostring(root)
 
 
-def test_parse_buyer_review_complainants_code():
+def test_parse_buyer_review_complainants_code() -> None:
     xml_content = create_xml_content({"LOT-001": "complainants", "LOT-002": "other"})
     result = parse_buyer_review_complainants_code(xml_content)
 
@@ -56,19 +57,19 @@ def test_parse_buyer_review_complainants_code():
     }
 
 
-def test_parse_buyer_review_complainants_code_no_data():
+def test_parse_buyer_review_complainants_code_no_data() -> None:
     xml_content = "<root></root>"
     result = parse_buyer_review_complainants_code(xml_content)
     assert result is None
 
 
-def test_parse_buyer_review_complainants_code_missing_lot_id():
+def test_parse_buyer_review_complainants_code_missing_lot_id() -> None:
     xml_content = create_xml_content({"": "complainants"})
     result = parse_buyer_review_complainants_code(xml_content)
     assert result is None
 
 
-def test_merge_buyer_review_complainants_code():
+def test_merge_buyer_review_complainants_code() -> None:
     release_json = {"statistics": []}
     complainants_code_data = {
         "statistics": [{"id": "1", "measure": "complainants", "relatedLot": "LOT-001"}]
@@ -80,7 +81,7 @@ def test_merge_buyer_review_complainants_code():
     assert release_json["statistics"][0] == complainants_code_data["statistics"][0]
 
 
-def test_merge_buyer_review_complainants_code_update_existing():
+def test_merge_buyer_review_complainants_code_update_existing() -> None:
     release_json = {
         "statistics": [
             {"id": "1", "measure": "complainants", "relatedLot": "LOT-001", "value": 2}
@@ -102,7 +103,7 @@ def test_merge_buyer_review_complainants_code_update_existing():
     }
 
 
-def test_merge_buyer_review_complainants_code_no_data():
+def test_merge_buyer_review_complainants_code_no_data() -> None:
     release_json = {"statistics": []}
     merge_buyer_review_complainants_code(release_json, None)
     assert "statistics" in release_json
@@ -114,7 +115,7 @@ def sample_xml_content():
     return create_xml_content({"LOT-001": "complainants", "LOT-002": "complainants"})
 
 
-def test_integration(sample_xml_content):
+def test_integration(sample_xml_content) -> None:
     # Parse the XML content
     parsed_data = parse_buyer_review_complainants_code(sample_xml_content)
     assert parsed_data is not None

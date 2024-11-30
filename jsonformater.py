@@ -1,9 +1,9 @@
-import os
 import json
+import os
 from pathlib import Path
 
 
-def format_json_files(folder_path):
+def format_json_files(folder_path) -> None:
     # Iterate through all files in the specified folder
     for filename in os.listdir(folder_path):
         if filename.endswith(".json"):

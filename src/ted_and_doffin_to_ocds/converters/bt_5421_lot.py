@@ -1,6 +1,7 @@
 # converters/bt_5421_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -72,7 +73,7 @@ def parse_award_criterion_number_weight_lot(xml_content):
 def merge_award_criterion_number_weight_lot(
     release_json,
     lot_award_criterion_number_weight_data,
-):
+) -> None:
     if not lot_award_criterion_number_weight_data:
         logger.warning("No Lot Award Criterion Number Weight data to merge")
         return

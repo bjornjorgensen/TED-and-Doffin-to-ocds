@@ -1,7 +1,9 @@
 # converters/bt_738_notice.py
 
 import logging
+
 from lxml import etree
+
 from ted_and_doffin_to_ocds.utils.date_utils import start_date
 
 logger = logging.getLogger(__name__)
@@ -49,7 +51,7 @@ def parse_notice_preferred_publication_date(xml_content):
 def merge_notice_preferred_publication_date(
     release_json,
     preferred_publication_date_data,
-):
+) -> None:
     """
     Merge the parsed notice preferred publication date into the main OCDS release JSON.
 

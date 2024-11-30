@@ -1,8 +1,9 @@
 # tests/test_bt_13714_Tender.py
 from lxml import etree
+
 from ted_and_doffin_to_ocds.converters.bt_13714_tender import (
-    parse_tender_lot_identifier,
     merge_tender_lot_identifier,
+    parse_tender_lot_identifier,
 )
 
 
@@ -40,7 +41,7 @@ def create_xml_with_lot_tenders(lot_tenders):
     return etree.tostring(root)
 
 
-def test_parse_tender_lot_identifier_single():
+def test_parse_tender_lot_identifier_single() -> None:
     xml_content = create_xml_with_lot_tenders([("TEN-0001", "LOT-0001")])
     result = parse_tender_lot_identifier(xml_content)
     assert result == {
@@ -48,7 +49,7 @@ def test_parse_tender_lot_identifier_single():
     }
 
 
-def test_parse_tender_lot_identifier_multiple():
+def test_parse_tender_lot_identifier_multiple() -> None:
     xml_content = create_xml_with_lot_tenders(
         [("TEN-0001", "LOT-0001"), ("TEN-0002", "LOT-0002"), ("TEN-0003", "LOT-0003")],
     )
@@ -64,13 +65,13 @@ def test_parse_tender_lot_identifier_multiple():
     }
 
 
-def test_parse_tender_lot_identifier_empty():
+def test_parse_tender_lot_identifier_empty() -> None:
     xml_content = create_xml_with_lot_tenders([])
     result = parse_tender_lot_identifier(xml_content)
     assert result is None
 
 
-def test_merge_tender_lot_identifier_new_bids():
+def test_merge_tender_lot_identifier_new_bids() -> None:
     release_json = {}
     tender_lot_identifier_data = {
         "bids": {
@@ -91,7 +92,7 @@ def test_merge_tender_lot_identifier_new_bids():
     }
 
 
-def test_merge_tender_lot_identifier_existing_bids():
+def test_merge_tender_lot_identifier_existing_bids() -> None:
     release_json = {
         "bids": {"details": [{"id": "TEN-0001", "relatedLots": ["LOT-0001"]}]},
     }
@@ -114,7 +115,7 @@ def test_merge_tender_lot_identifier_existing_bids():
     }
 
 
-def test_merge_tender_lot_identifier_empty_data():
+def test_merge_tender_lot_identifier_empty_data() -> None:
     release_json = {"bids": {"details": []}}
     merge_tender_lot_identifier(release_json, None)
     assert release_json == {"bids": {"details": []}}

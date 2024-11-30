@@ -1,7 +1,8 @@
 # converters/bt_123_Lot.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -44,7 +45,7 @@ def parse_electronic_auction_url(xml_content):
     return result if result["lots"] else None
 
 
-def merge_electronic_auction_url(release_json, auction_url_data):
+def merge_electronic_auction_url(release_json, auction_url_data) -> None:
     if not auction_url_data:
         logger.warning("No Electronic Auction URL data to merge")
         return

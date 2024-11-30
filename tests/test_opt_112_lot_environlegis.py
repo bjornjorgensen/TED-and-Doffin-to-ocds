@@ -1,14 +1,15 @@
 # tests/test_opt_112_lot_environlegis.py
 
 import pytest
+
 from ted_and_doffin_to_ocds.converters.opt_112_lot_environlegis import (
-    parse_environmental_legislation_document_id,
     merge_environmental_legislation_document_id,
+    parse_environmental_legislation_document_id,
 )
 
 
 @pytest.fixture
-def sample_xml():
+def sample_xml() -> str:
     return """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -24,7 +25,7 @@ def sample_xml():
     """
 
 
-def test_parse_environmental_legislation_document_id(sample_xml):
+def test_parse_environmental_legislation_document_id(sample_xml) -> None:
     result = parse_environmental_legislation_document_id(sample_xml)
     assert result is not None
     assert "tender" in result
@@ -35,7 +36,7 @@ def test_parse_environmental_legislation_document_id(sample_xml):
     assert result["tender"]["documents"][0]["relatedLots"] == ["LOT-0001"]
 
 
-def test_merge_environmental_legislation_document_id():
+def test_merge_environmental_legislation_document_id() -> None:
     environmental_legislation_data = {
         "tender": {
             "documents": [
@@ -59,7 +60,7 @@ def test_merge_environmental_legislation_document_id():
     assert release_json["tender"]["documents"][0]["relatedLots"] == ["LOT-0001"]
 
 
-def test_merge_environmental_legislation_document_id_existing_document():
+def test_merge_environmental_legislation_document_id_existing_document() -> None:
     environmental_legislation_data = {
         "tender": {
             "documents": [
@@ -90,13 +91,13 @@ def test_merge_environmental_legislation_document_id_existing_document():
     }
 
 
-def test_parse_environmental_legislation_document_id_no_data():
+def test_parse_environmental_legislation_document_id_no_data() -> None:
     xml_content = "<root></root>"
     result = parse_environmental_legislation_document_id(xml_content)
     assert result is None
 
 
-def test_merge_environmental_legislation_document_id_no_data():
+def test_merge_environmental_legislation_document_id_no_data() -> None:
     release_json = {}
     merge_environmental_legislation_document_id(release_json, None)
     assert release_json == {}

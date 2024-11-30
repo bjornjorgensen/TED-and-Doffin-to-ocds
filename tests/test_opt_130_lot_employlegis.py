@@ -1,12 +1,12 @@
 # tests/test_opt_130_lot_employlegis.py
 
 from ted_and_doffin_to_ocds.converters.opt_130_lot_employlegis import (
-    parse_employment_legislation_url,
     merge_employment_legislation_url,
+    parse_employment_legislation_url,
 )
 
 
-def test_parse_employment_legislation_url():
+def test_parse_employment_legislation_url() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -39,7 +39,7 @@ def test_parse_employment_legislation_url():
     assert doc["relatedLots"] == ["LOT-0001"]
 
 
-def test_merge_employment_legislation_url():
+def test_merge_employment_legislation_url() -> None:
     release_json = {"tender": {"documents": []}}
     empl_legislation_data = {
         "tender": {
@@ -64,7 +64,7 @@ def test_merge_employment_legislation_url():
     assert doc["relatedLots"] == ["LOT-0001"]
 
 
-def test_merge_employment_legislation_url_existing_document():
+def test_merge_employment_legislation_url_existing_document() -> None:
     release_json = {
         "tender": {
             "documents": [

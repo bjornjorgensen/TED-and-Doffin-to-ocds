@@ -1,7 +1,8 @@
 # converters/bt_03.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 

@@ -1,6 +1,7 @@
 # converters/bt_503_organization_touchpoint.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -53,7 +54,7 @@ def parse_organization_touchpoint_telephone(xml_content):
 
 def merge_organization_touchpoint_telephone(
     release_json, organization_touchpoint_telephone_data
-):
+) -> None:
     if not organization_touchpoint_telephone_data:
         logger.info("No organization touchpoint telephone data to merge")
         return

@@ -1,6 +1,7 @@
 # converters/bt_736_part.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -38,7 +39,7 @@ def parse_reserved_execution_part(xml_content):
     return None
 
 
-def merge_reserved_execution_part(release_json, reserved_execution_data):
+def merge_reserved_execution_part(release_json, reserved_execution_data) -> None:
     """
     Merge the parsed reserved execution data for the part into the main OCDS release JSON.
 

@@ -1,12 +1,12 @@
 # tests/test_opt_315_lotresult.py
 
 from ted_and_doffin_to_ocds.converters.opt_315_lotresult import (
-    parse_contract_identifier_reference,
     merge_contract_identifier_reference,
+    parse_contract_identifier_reference,
 )
 
 
-def test_parse_contract_identifier_reference():
+def test_parse_contract_identifier_reference() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -30,7 +30,7 @@ def test_parse_contract_identifier_reference():
     assert result == {"contracts": [{"id": "CON-0001", "awardID": "RES-0001"}]}
 
 
-def test_merge_contract_identifier_reference():
+def test_merge_contract_identifier_reference() -> None:
     release_json = {"contracts": [{"id": "CON-0001", "title": "Existing Contract"}]}
     contract_identifier_data = {
         "contracts": [{"id": "CON-0001", "awardID": "RES-0001"}]
@@ -43,7 +43,7 @@ def test_merge_contract_identifier_reference():
     }
 
 
-def test_merge_contract_identifier_reference_new_contract():
+def test_merge_contract_identifier_reference_new_contract() -> None:
     release_json = {"contracts": [{"id": "CON-0002", "title": "Existing Contract"}]}
     contract_identifier_data = {
         "contracts": [{"id": "CON-0001", "awardID": "RES-0001"}]
@@ -57,7 +57,7 @@ def test_merge_contract_identifier_reference_new_contract():
     }
 
 
-def test_merge_contract_identifier_reference_no_data():
+def test_merge_contract_identifier_reference_no_data() -> None:
     release_json = {"contracts": [{"id": "CON-0001", "title": "Existing Contract"}]}
     merge_contract_identifier_reference(release_json, None)
     assert release_json == {

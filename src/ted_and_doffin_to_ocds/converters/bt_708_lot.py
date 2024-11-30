@@ -1,6 +1,7 @@
 # converters/bt_708_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -263,7 +264,7 @@ def parse_lot_documents_official_language(xml_content):
     return result if result["tender"]["documents"] else None
 
 
-def merge_lot_documents_official_language(release_json, lot_documents_data):
+def merge_lot_documents_official_language(release_json, lot_documents_data) -> None:
     """
     Merge the parsed lot documents official language data into the main OCDS release JSON.
 

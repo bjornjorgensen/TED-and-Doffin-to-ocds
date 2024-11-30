@@ -1,12 +1,12 @@
 # tests/test_opt_301_lotresult_financing.py
 
 from ted_and_doffin_to_ocds.converters.opt_301_lotresult_financing import (
-    parse_financing_party,
     merge_financing_party,
+    parse_financing_party,
 )
 
 
-def test_parse_financing_party():
+def test_parse_financing_party() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -36,7 +36,7 @@ def test_parse_financing_party():
     assert party["roles"] == ["funder"]
 
 
-def test_merge_financing_party():
+def test_merge_financing_party() -> None:
     release_json = {"parties": []}
     financing_party_data = {"parties": [{"id": "ORG-0003", "roles": ["funder"]}]}
 
@@ -50,7 +50,7 @@ def test_merge_financing_party():
     assert party["roles"] == ["funder"]
 
 
-def test_merge_financing_party_existing_party():
+def test_merge_financing_party_existing_party() -> None:
     release_json = {
         "parties": [
             {"id": "ORG-0003", "name": "Existing Organization", "roles": ["buyer"]}

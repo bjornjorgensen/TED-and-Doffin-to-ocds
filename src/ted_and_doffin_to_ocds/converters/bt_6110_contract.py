@@ -1,6 +1,7 @@
 # converters/bt_6110_Contract.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -90,7 +91,7 @@ def parse_contract_eu_funds_details(xml_content):
     return result if result["contracts"] else None
 
 
-def merge_contract_eu_funds_details(release_json, eu_funds_details):
+def merge_contract_eu_funds_details(release_json, eu_funds_details) -> None:
     """
     Merge the parsed contract EU funds details into the main OCDS release JSON.
 

@@ -1,18 +1,20 @@
 # tests/test_bt_78_Lot.py
-from pathlib import Path
-import pytest
-from ted_and_doffin_to_ocds.converters.bt_78_lot import (
-    parse_security_clearance_deadline,
-    merge_security_clearance_deadline,
-)
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
+
+from ted_and_doffin_to_ocds.converters.bt_78_lot import (
+    merge_security_clearance_deadline,
+    parse_security_clearance_deadline,
+)
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 
 @pytest.fixture(scope="module")
@@ -35,7 +37,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_parse_security_clearance_deadline():
+def test_parse_security_clearance_deadline() -> None:
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -69,7 +71,7 @@ def test_parse_security_clearance_deadline():
     )
 
 
-def test_merge_security_clearance_deadline():
+def test_merge_security_clearance_deadline() -> None:
     release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}
 
     security_clearance_data = {
@@ -105,7 +107,7 @@ def test_merge_security_clearance_deadline():
 
 def test_bt_78_lot_security_clearance_deadline_integration(
     tmp_path, setup_logging, temp_output_dir
-):
+) -> None:
     logger = setup_logging
 
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>

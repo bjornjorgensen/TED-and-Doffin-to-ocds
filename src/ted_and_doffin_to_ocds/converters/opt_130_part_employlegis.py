@@ -1,7 +1,8 @@
 # converters/opt_130_part_employlegis.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +41,7 @@ def parse_employment_legislation_url_part(xml_content):
     return result if result["tender"]["documents"] else None
 
 
-def merge_employment_legislation_url_part(release_json, empl_legislation_data):
+def merge_employment_legislation_url_part(release_json, empl_legislation_data) -> None:
     if not empl_legislation_data:
         logger.info("No employment legislation URL data for parts to merge")
         return

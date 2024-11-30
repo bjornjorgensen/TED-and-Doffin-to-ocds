@@ -1,7 +1,9 @@
 # converters/bt_130_Lot.py
 
 import logging
+
 from lxml import etree
+
 from ted_and_doffin_to_ocds.utils.date_utils import start_date
 
 logger = logging.getLogger(__name__)
@@ -46,7 +48,7 @@ def parse_dispatch_invitation_tender(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_dispatch_invitation_tender(release_json, dispatch_invitation_data):
+def merge_dispatch_invitation_tender(release_json, dispatch_invitation_data) -> None:
     if not dispatch_invitation_data:
         logger.warning("No Dispatch Invitation Tender data to merge")
         return

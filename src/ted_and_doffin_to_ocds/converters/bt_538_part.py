@@ -1,6 +1,7 @@
 # converters/bt_538_part.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -32,7 +33,7 @@ def parse_part_duration_other(xml_content):
     return result if result["tender"] else None
 
 
-def merge_part_duration_other(release_json, part_duration_other_data):
+def merge_part_duration_other(release_json, part_duration_other_data) -> None:
     if not part_duration_other_data:
         logger.warning("No part Duration Other data to merge")
         return

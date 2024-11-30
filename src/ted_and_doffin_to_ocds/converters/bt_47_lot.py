@@ -1,6 +1,7 @@
 # converters/bt_47_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -59,7 +60,7 @@ def parse_participant_name(xml_content):
     return result if result["parties"] else None
 
 
-def merge_participant_name(release_json, participant_data):
+def merge_participant_name(release_json, participant_data) -> None:
     if not participant_data:
         logger.info("No participant Name data to merge")
         return

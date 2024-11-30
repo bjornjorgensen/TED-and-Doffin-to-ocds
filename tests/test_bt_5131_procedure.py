@@ -1,12 +1,12 @@
 # tests/test_bt_5131_procedure.py
 
 from ted_and_doffin_to_ocds.converters.bt_5131_procedure import (
-    parse_place_performance_city_procedure,
     merge_place_performance_city_procedure,
+    parse_place_performance_city_procedure,
 )
 
 
-def test_parse_place_performance_city_procedure():
+def test_parse_place_performance_city_procedure() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -35,7 +35,7 @@ def test_parse_place_performance_city_procedure():
     assert result["tender"]["deliveryAddresses"][1] == {"locality": "Los Angeles"}
 
 
-def test_parse_place_performance_city_procedure_empty():
+def test_parse_place_performance_city_procedure_empty() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -53,7 +53,7 @@ def test_parse_place_performance_city_procedure_empty():
     assert result is None
 
 
-def test_merge_place_performance_city_procedure():
+def test_merge_place_performance_city_procedure() -> None:
     existing_json = {"tender": {"deliveryAddresses": [{"postalCode": "10001"}]}}
 
     new_data = {
@@ -75,7 +75,7 @@ def test_merge_place_performance_city_procedure():
     }
 
 
-def test_merge_place_performance_city_procedure_update():
+def test_merge_place_performance_city_procedure_update() -> None:
     existing_json = {
         "tender": {
             "deliveryAddresses": [{"locality": "New York", "postalCode": "10001"}],
@@ -96,7 +96,7 @@ def test_merge_place_performance_city_procedure_update():
     }
 
 
-def test_merge_place_performance_city_procedure_empty():
+def test_merge_place_performance_city_procedure_empty() -> None:
     existing_json = {"tender": {}}
     merge_place_performance_city_procedure(existing_json, None)
     assert existing_json == {"tender": {}}

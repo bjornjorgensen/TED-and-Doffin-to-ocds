@@ -1,6 +1,7 @@
 # converters/bt_10_procedure_buyer.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -106,7 +107,7 @@ def parse_authority_activity(xml_content):
     return result if result["parties"] else None
 
 
-def merge_authority_activity(release_json, authority_activity_data):
+def merge_authority_activity(release_json, authority_activity_data) -> None:
     """
     Merge the parsed authority activity data into the main OCDS release JSON.
 

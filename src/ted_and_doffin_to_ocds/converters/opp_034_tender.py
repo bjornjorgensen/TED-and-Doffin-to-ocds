@@ -1,6 +1,7 @@
 # converters/OPP_034_Tender.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -67,7 +68,7 @@ def parse_penalties_and_rewards(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_penalties_and_rewards(release_json, penalties_and_rewards_data):
+def merge_penalties_and_rewards(release_json, penalties_and_rewards_data) -> None:
     if not penalties_and_rewards_data:
         logger.warning("No penalties and rewards data to merge")
         return

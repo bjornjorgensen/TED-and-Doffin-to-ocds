@@ -1,18 +1,20 @@
 # tests/test_bt_77_Lot.py
-from pathlib import Path
-import pytest
-from ted_and_doffin_to_ocds.converters.bt_77_lot import (
-    parse_financial_terms,
-    merge_financial_terms,
-)
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
+
+from ted_and_doffin_to_ocds.converters.bt_77_lot import (
+    merge_financial_terms,
+    parse_financial_terms,
+)
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 
 @pytest.fixture(scope="module")
@@ -35,7 +37,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_parse_financial_terms():
+def test_parse_financial_terms() -> None:
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -64,7 +66,7 @@ def test_parse_financial_terms():
     )
 
 
-def test_merge_financial_terms():
+def test_merge_financial_terms() -> None:
     release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}
 
     financial_terms_data = {
@@ -89,7 +91,7 @@ def test_merge_financial_terms():
 
 def test_bt_77_lot_financial_terms_integration(
     tmp_path, setup_logging, temp_output_dir
-):
+) -> None:
     logger = setup_logging
 
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>

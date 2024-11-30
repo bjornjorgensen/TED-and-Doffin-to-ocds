@@ -1,18 +1,20 @@
 # tests/test_bt_736_Lot.py
-from pathlib import Path
-import pytest
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
+
 from ted_and_doffin_to_ocds.converters.bt_736_lot import (
-    parse_reserved_execution,
     merge_reserved_execution,
+    parse_reserved_execution,
 )
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 
 @pytest.fixture(scope="module")
@@ -35,7 +37,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_parse_reserved_execution():
+def test_parse_reserved_execution() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -60,7 +62,7 @@ def test_parse_reserved_execution():
     assert result["tender"]["lots"][0]["contractTerms"]["reservedExecution"] is True
 
 
-def test_merge_reserved_execution():
+def test_merge_reserved_execution() -> None:
     release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}
 
     reserved_execution_data = {
@@ -79,7 +81,7 @@ def test_merge_reserved_execution():
 
 def test_bt_736_lot_reserved_execution_integration(
     tmp_path, setup_logging, temp_output_dir
-):
+) -> None:
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"

@@ -1,6 +1,7 @@
 # converters/bt_23_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -45,7 +46,7 @@ def parse_main_nature(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_main_nature(release_json, main_nature_data):
+def merge_main_nature(release_json, main_nature_data) -> None:
     if not main_nature_data:
         logger.warning("No Main Nature data to merge")
         return

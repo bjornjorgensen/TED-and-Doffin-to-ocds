@@ -1,7 +1,8 @@
 # converters/OPP_052_organization.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -45,7 +46,7 @@ def parse_acquiring_cpb_buyer_indicator(xml_content):
     return result if result["parties"] else None
 
 
-def merge_acquiring_cpb_buyer_indicator(release_json, acquiring_cpb_buyer_data):
+def merge_acquiring_cpb_buyer_indicator(release_json, acquiring_cpb_buyer_data) -> None:
     if not acquiring_cpb_buyer_data:
         logger.warning("No Acquiring CPB buyer Indicator data to merge")
         return

@@ -1,6 +1,7 @@
 # converters/bt_510c_ubo.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -82,7 +83,7 @@ def parse_ubo_streetline2(xml_content):
     return result if result["parties"] else None
 
 
-def merge_ubo_streetline2(release_json, ubo_streetline2_data):
+def merge_ubo_streetline2(release_json, ubo_streetline2_data) -> None:
     if not ubo_streetline2_data:
         logger.warning("No ubo Streetline 2 data to merge")
         return

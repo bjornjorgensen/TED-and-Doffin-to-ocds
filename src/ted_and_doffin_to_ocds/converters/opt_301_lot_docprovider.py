@@ -1,7 +1,8 @@
 # converters/opt_301_lot_docprovider.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +31,7 @@ def parse_document_provider(xml_content):
     return result if result["parties"] else None
 
 
-def merge_document_provider(release_json, provider_data):
+def merge_document_provider(release_json, provider_data) -> None:
     if not provider_data:
         logger.info("No Document Provider Technical Identifier Reference data to merge")
         return

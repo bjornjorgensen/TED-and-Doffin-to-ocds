@@ -1,6 +1,7 @@
 # converters/bt_514_organization_touchpoint.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -112,7 +113,7 @@ def convert_country_code(code):
     return ISO_3166_CONVERSION.get(code, code)
 
 
-def merge_touchpoint_country(release_json, touchpoint_country_data):
+def merge_touchpoint_country(release_json, touchpoint_country_data) -> None:
     if not touchpoint_country_data:
         logger.warning("No touchpoint Country data to merge")
         return

@@ -1,6 +1,7 @@
 # converters/bt_65_Lot_Subcontracting_Obligation.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -77,7 +78,9 @@ def parse_subcontracting_obligation(xml_content: bytes):
     return result if result["tender"]["lots"] else None
 
 
-def merge_subcontracting_obligation(release_json, subcontracting_obligation_data):
+def merge_subcontracting_obligation(
+    release_json, subcontracting_obligation_data
+) -> None:
     """
     Merge the parsed subcontracting obligation data into the main OCDS release JSON.
 

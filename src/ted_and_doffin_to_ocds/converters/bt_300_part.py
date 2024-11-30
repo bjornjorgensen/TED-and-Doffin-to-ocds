@@ -1,7 +1,8 @@
 # converters/bt_300_part.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +38,7 @@ def parse_part_additional_info(xml_content):
     return result if result else None
 
 
-def merge_part_additional_info(release_json, part_additional_info):
+def merge_part_additional_info(release_json, part_additional_info) -> None:
     if not part_additional_info:
         logger.info("No part additional information to merge")
         return

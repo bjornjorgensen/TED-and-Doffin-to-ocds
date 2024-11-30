@@ -1,12 +1,12 @@
 # tests/test_bt_5423_Lot.py
 
 from ted_and_doffin_to_ocds.converters.bt_5423_lot import (
-    parse_award_criterion_number_threshold,
     merge_award_criterion_number_threshold,
+    parse_award_criterion_number_threshold,
 )
 
 
-def create_xml_with_award_criterion(lot_id, threshold_code):
+def create_xml_with_award_criterion(lot_id, threshold_code) -> str:
     return f"""
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -40,7 +40,7 @@ def create_xml_with_award_criterion(lot_id, threshold_code):
     """
 
 
-def test_parse_award_criterion_number_threshold_max_pass():
+def test_parse_award_criterion_number_threshold_max_pass() -> None:
     xml_content = create_xml_with_award_criterion("LOT-001", "max-pass")
     result = parse_award_criterion_number_threshold(xml_content)
 
@@ -54,7 +54,7 @@ def test_parse_award_criterion_number_threshold_max_pass():
     )
 
 
-def test_parse_award_criterion_number_threshold_min_score():
+def test_parse_award_criterion_number_threshold_min_score() -> None:
     xml_content = create_xml_with_award_criterion("LOT-002", "min-score")
     result = parse_award_criterion_number_threshold(xml_content)
 
@@ -68,21 +68,21 @@ def test_parse_award_criterion_number_threshold_min_score():
     )
 
 
-def test_parse_award_criterion_number_threshold_invalid_code():
+def test_parse_award_criterion_number_threshold_invalid_code() -> None:
     xml_content = create_xml_with_award_criterion("LOT-003", "invalid-code")
     result = parse_award_criterion_number_threshold(xml_content)
 
     assert result is None
 
 
-def test_parse_award_criterion_number_threshold_no_data():
+def test_parse_award_criterion_number_threshold_no_data() -> None:
     xml_content = "<root></root>"
     result = parse_award_criterion_number_threshold(xml_content)
 
     assert result is None
 
 
-def test_merge_award_criterion_number_threshold():
+def test_merge_award_criterion_number_threshold() -> None:
     existing_release = {
         "tender": {
             "lots": [
@@ -127,7 +127,7 @@ def test_merge_award_criterion_number_threshold():
     )
 
 
-def test_merge_award_criterion_number_threshold_new_lot():
+def test_merge_award_criterion_number_threshold_new_lot() -> None:
     existing_release = {"tender": {"lots": []}}
 
     new_data = {
@@ -155,7 +155,7 @@ def test_merge_award_criterion_number_threshold_new_lot():
     )
 
 
-def test_merge_award_criterion_number_threshold_no_data():
+def test_merge_award_criterion_number_threshold_no_data() -> None:
     existing_release = {"tender": {"lots": []}}
     merge_award_criterion_number_threshold(existing_release, None)
     assert existing_release == {"tender": {"lots": []}}

@@ -1,7 +1,8 @@
 # converters/bt_11_procedure_buyer.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -82,7 +83,7 @@ def parse_buyer_legal_type(xml_content):
     return result if result["parties"] else None
 
 
-def merge_buyer_legal_type(release_json, buyer_legal_type_data):
+def merge_buyer_legal_type(release_json, buyer_legal_type_data) -> None:
     if not buyer_legal_type_data:
         logger.warning("No buyer Legal Type data to merge")
         return

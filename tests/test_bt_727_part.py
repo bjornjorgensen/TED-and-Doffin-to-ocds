@@ -1,18 +1,20 @@
 # tests/test_bt_727_part.py
-from pathlib import Path
-import pytest
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
+
 from ted_and_doffin_to_ocds.converters.bt_727_part import (
-    parse_part_place_performance,
     merge_part_place_performance,
+    parse_part_place_performance,
 )
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 
 @pytest.fixture(scope="module")
@@ -35,7 +37,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_parse_part_place_performance():
+def test_parse_part_place_performance() -> None:
     """Test parsing place performance from XML."""
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
@@ -66,7 +68,7 @@ def test_parse_part_place_performance():
     )
 
 
-def test_merge_part_place_performance():
+def test_merge_part_place_performance() -> None:
     """Test merging place performance data into release JSON."""
     release_json = {"tender": {}}
 
@@ -88,7 +90,7 @@ def test_merge_part_place_performance():
     )
 
 
-def test_merge_multiple_locations():
+def test_merge_multiple_locations() -> None:
     """Test merging multiple locations without duplicates."""
     release_json = {"tender": {"deliveryLocations": [{"description": "Anywhere"}]}}
 
@@ -110,7 +112,7 @@ def test_merge_multiple_locations():
     assert descriptions == {"Anywhere", "Anywhere in the European Economic Area"}
 
 
-def test_integration(tmp_path, temp_output_dir):
+def test_integration(tmp_path, temp_output_dir) -> None:
     """Test integration with main converter."""
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
@@ -142,14 +144,14 @@ def test_integration(tmp_path, temp_output_dir):
     )
 
 
-def test_invalid_xml():
+def test_invalid_xml() -> None:
     """Test handling of invalid XML."""
     invalid_xml = "<invalid>"
     result = parse_part_place_performance(invalid_xml)
     assert result is None
 
 
-def test_empty_regions():
+def test_empty_regions() -> None:
     """Test handling of XML with no regions."""
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"

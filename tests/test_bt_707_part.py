@@ -1,11 +1,12 @@
 # tests/test_bt_707_part.py
 import logging
+
 import pytest
 from lxml import etree
 
 from ted_and_doffin_to_ocds.converters.bt_707_part import (
-    parse_part_documents_restricted_justification,
     merge_part_documents_restricted_justification,
+    parse_part_documents_restricted_justification,
 )
 
 TEST_XML = """<?xml version="1.0" encoding="UTF-8"?>
@@ -32,7 +33,7 @@ def caplog(caplog):
     return caplog
 
 
-def test_parse_part_documents_restricted_justification_success():
+def test_parse_part_documents_restricted_justification_success() -> None:
     """Test successful parsing of document justification."""
     result = parse_part_documents_restricted_justification(TEST_XML)
 
@@ -46,14 +47,14 @@ def test_parse_part_documents_restricted_justification_success():
     assert document["accessDetails"] == "Intellectual property right issues"
 
 
-def test_parse_part_documents_restricted_justification_invalid_xml(caplog):
+def test_parse_part_documents_restricted_justification_invalid_xml(caplog) -> None:
     """Test handling of invalid XML."""
     with pytest.raises(etree.XMLSyntaxError):
         parse_part_documents_restricted_justification(INVALID_XML)
     assert "Failed to parse XML content" in caplog.text
 
 
-def test_merge_part_documents_restricted_justification():
+def test_merge_part_documents_restricted_justification() -> None:
     """Test merging document justification into release JSON."""
     release_json = {"tender": {"documents": []}}
     part_documents_data = {
@@ -77,14 +78,14 @@ def test_merge_part_documents_restricted_justification():
     )
 
 
-def test_merge_part_documents_restricted_justification_empty(caplog):
+def test_merge_part_documents_restricted_justification_empty(caplog) -> None:
     """Test merging with empty data."""
     release_json = {"tender": {"documents": []}}
     merge_part_documents_restricted_justification(release_json, None)
     assert "No part documents restricted justification data to merge" in caplog.text
 
 
-def test_merge_part_documents_restricted_justification_existing():
+def test_merge_part_documents_restricted_justification_existing() -> None:
     """Test merging when document already exists."""
     release_json = {
         "tender": {

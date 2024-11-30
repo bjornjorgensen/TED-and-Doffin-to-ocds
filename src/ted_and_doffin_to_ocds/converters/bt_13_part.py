@@ -2,6 +2,7 @@
 
 import logging
 from datetime import datetime
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -52,7 +53,7 @@ def convert_to_iso_format(date_string, time_string):
     return date_time.isoformat()
 
 
-def merge_additional_info_deadline_part(release_json, deadline):
+def merge_additional_info_deadline_part(release_json, deadline) -> None:
     if deadline:
         if "tender" not in release_json:
             release_json["tender"] = {}

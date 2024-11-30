@@ -40,7 +40,7 @@ def parse_main_classification_code_part(xml_content):
     return result
 
 
-def merge_main_classification_code_part(release_json, classification_code_data):
+def merge_main_classification_code_part(release_json, classification_code_data) -> None:
     existing_items = release_json.setdefault("tender", {}).setdefault("items", [])
 
     for new_item in classification_code_data["tender"]["items"]:

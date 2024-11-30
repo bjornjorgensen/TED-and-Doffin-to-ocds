@@ -1,7 +1,8 @@
 # converters/bt_27_procedure.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -36,7 +37,7 @@ def parse_bt_27_procedure(xml_content):
     return result
 
 
-def merge_bt_27_procedure(release_json, bt_27_procedure_data):
+def merge_bt_27_procedure(release_json, bt_27_procedure_data) -> None:
     if "value" in bt_27_procedure_data["tender"]:
         release_json.setdefault("tender", {})["value"] = bt_27_procedure_data["tender"][
             "value"

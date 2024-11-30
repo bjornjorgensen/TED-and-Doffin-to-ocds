@@ -1,12 +1,12 @@
 # tests/test_opt_301_tenderer_maincont.py
 
 from ted_and_doffin_to_ocds.converters.opt_301_tenderer_maincont import (
-    parse_main_contractor,
     merge_main_contractor,
+    parse_main_contractor,
 )
 
 
-def test_parse_main_contractor():
+def test_parse_main_contractor() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -59,7 +59,7 @@ def test_parse_main_contractor():
     }
 
 
-def test_merge_main_contractor():
+def test_merge_main_contractor() -> None:
     release_json = {
         "parties": [{"id": "ORG-0005", "roles": ["buyer"]}],
         "bids": {
@@ -107,7 +107,7 @@ def test_merge_main_contractor():
     }
 
 
-def test_merge_main_contractor_new_data():
+def test_merge_main_contractor_new_data() -> None:
     release_json = {
         "parties": [{"id": "ORG-0001", "roles": ["buyer"]}],
         "bids": {

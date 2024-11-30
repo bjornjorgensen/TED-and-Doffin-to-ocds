@@ -1,12 +1,12 @@
 # tests/test_opt_301_lot_tenderreceipt.py
 
 from ted_and_doffin_to_ocds.converters.opt_301_lot_tenderreceipt import (
-    parse_tender_recipient,
     merge_tender_recipient,
+    parse_tender_recipient,
 )
 
 
-def test_parse_tender_recipient():
+def test_parse_tender_recipient() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -34,7 +34,7 @@ def test_parse_tender_recipient():
     assert party["roles"] == ["submissionReceiptBody"]
 
 
-def test_merge_tender_recipient():
+def test_merge_tender_recipient() -> None:
     release_json = {"parties": []}
     tender_recipient_data = {
         "parties": [{"id": "TPO-0001", "roles": ["submissionReceiptBody"]}]
@@ -50,7 +50,7 @@ def test_merge_tender_recipient():
     assert party["roles"] == ["submissionReceiptBody"]
 
 
-def test_merge_tender_recipient_existing_party():
+def test_merge_tender_recipient_existing_party() -> None:
     release_json = {
         "parties": [
             {"id": "TPO-0001", "name": "Existing Organization", "roles": ["buyer"]}

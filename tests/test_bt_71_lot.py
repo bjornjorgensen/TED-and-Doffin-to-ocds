@@ -1,13 +1,14 @@
 # tests/test_bt_71_Lot.py
 
 import pytest
+
 from ted_and_doffin_to_ocds.converters.bt_71_lot import (
-    parse_reserved_participation,
     merge_reserved_participation,
+    parse_reserved_participation,
 )
 
 
-def test_parse_reserved_participation():
+def test_parse_reserved_participation() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -38,7 +39,7 @@ def test_parse_reserved_participation():
     ] == ["shelteredWorkshop"]
 
 
-def test_merge_reserved_participation():
+def test_merge_reserved_participation() -> None:
     release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}
 
     reserved_participation_data = {

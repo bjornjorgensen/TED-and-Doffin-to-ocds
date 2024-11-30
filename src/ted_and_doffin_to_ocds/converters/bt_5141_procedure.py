@@ -1,6 +1,7 @@
 # converters/bt_5141_procedure.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -94,7 +95,7 @@ def convert_country_code(code):
     return ISO_3166_CONVERSION.get(code, code)
 
 
-def merge_procedure_country(release_json, procedure_country_data):
+def merge_procedure_country(release_json, procedure_country_data) -> None:
     if not procedure_country_data:
         logger.warning("No procedure Country data to merge")
         return

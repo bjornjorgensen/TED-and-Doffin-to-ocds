@@ -1,7 +1,8 @@
 # converters/bt_635_lotresult.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -63,7 +64,7 @@ def parse_buyer_review_requests_count(xml_content):
     return result if result["statistics"] else None
 
 
-def merge_buyer_review_requests_count(release_json, buyer_review_requests_data):
+def merge_buyer_review_requests_count(release_json, buyer_review_requests_data) -> None:
     """
     Merge the parsed buyer review requests count data into the main OCDS release JSON.
 

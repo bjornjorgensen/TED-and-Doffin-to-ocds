@@ -1,6 +1,7 @@
 # converters/bt_45_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -47,7 +48,7 @@ def parse_lot_rewards_other(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_rewards_other(release_json, lot_rewards_other_data):
+def merge_lot_rewards_other(release_json, lot_rewards_other_data) -> None:
     if not lot_rewards_other_data:
         logger.warning("No Lot Rewards Other data to merge")
         return

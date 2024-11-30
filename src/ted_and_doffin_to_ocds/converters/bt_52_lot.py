@@ -1,6 +1,7 @@
 # converters/bt_52_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -53,7 +54,9 @@ def parse_successive_reduction_indicator(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_successive_reduction_indicator(release_json, successive_reduction_data):
+def merge_successive_reduction_indicator(
+    release_json, successive_reduction_data
+) -> None:
     if not successive_reduction_data:
         logger.info("No Successive Reduction Indicator data to merge")
         return

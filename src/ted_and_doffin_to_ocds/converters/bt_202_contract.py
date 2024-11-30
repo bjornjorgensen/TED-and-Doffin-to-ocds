@@ -1,7 +1,8 @@
 # converters/bt_202_Contract.py
 
-import uuid
 import logging
+import uuid
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -80,7 +81,7 @@ def parse_contract_modification_summary(xml_content):
     return result if result["contracts"] else None
 
 
-def merge_contract_modification_summary(release_json, modification_data):
+def merge_contract_modification_summary(release_json, modification_data) -> None:
     if not modification_data:
         logger.info("No contract modification data to merge")
         return

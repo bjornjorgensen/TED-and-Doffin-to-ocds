@@ -1,6 +1,7 @@
 # converters/bt_5121_procedure.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -33,7 +34,7 @@ def parse_place_performance_post_code_procedure(xml_content):
     return result if result["tender"]["deliveryAddresses"] else None
 
 
-def merge_place_performance_post_code_procedure(release_json, post_code_data):
+def merge_place_performance_post_code_procedure(release_json, post_code_data) -> None:
     if not post_code_data:
         logger.warning("No Place Performance Post Code (procedure) data to merge")
         return

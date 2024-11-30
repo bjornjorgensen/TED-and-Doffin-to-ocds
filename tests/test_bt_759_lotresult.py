@@ -1,10 +1,10 @@
 from ted_and_doffin_to_ocds.converters.bt_759_lotresult import (
-    parse_received_submissions_count,
     merge_received_submissions_count,
+    parse_received_submissions_count,
 )
 
 
-def test_parse_received_submissions_count():
+def test_parse_received_submissions_count() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -34,7 +34,7 @@ def test_parse_received_submissions_count():
     assert stat["relatedLots"] == ["LOT-0001"]
 
 
-def test_merge_received_submissions_count():
+def test_merge_received_submissions_count() -> None:
     release_json = {"bids": {"statistics": []}}
     received_submissions_data = {
         "bids": {

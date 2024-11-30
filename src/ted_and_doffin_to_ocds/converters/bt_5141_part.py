@@ -1,6 +1,7 @@
 # converters/bt_5141_part.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -100,7 +101,7 @@ def convert_country_code(code):
     return ISO_3166_CONVERSION.get(code, code)
 
 
-def merge_part_country(release_json, part_country_data):
+def merge_part_country(release_json, part_country_data) -> None:
     if not part_country_data:
         logger.warning("No part Country data to merge")
         return

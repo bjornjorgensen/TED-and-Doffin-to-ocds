@@ -1,10 +1,11 @@
 # tests/test_opt_301_part_fiscallegis.py
 
-from pathlib import Path
-import pytest
 import json
 import sys
 import tempfile
+from pathlib import Path
+
+import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
@@ -25,7 +26,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_opt_301_part_fiscallegis_integration(tmp_path, temp_output_dir):
+def test_opt_301_part_fiscallegis_integration(tmp_path, temp_output_dir) -> None:
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
 <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
     xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"

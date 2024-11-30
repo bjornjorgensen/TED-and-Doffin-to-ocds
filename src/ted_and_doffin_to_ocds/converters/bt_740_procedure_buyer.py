@@ -1,6 +1,7 @@
 # converters/bt_740_procedure_buyer.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -71,7 +72,7 @@ def parse_buyer_contracting_entity(xml_content):
     return result if result["parties"] else None
 
 
-def merge_buyer_contracting_entity(release_json, buyer_contracting_entity_data):
+def merge_buyer_contracting_entity(release_json, buyer_contracting_entity_data) -> None:
     """
     Merge the parsed buyer contracting entity data into the main OCDS release JSON.
 

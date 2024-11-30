@@ -1,7 +1,8 @@
 # converters/opt_100_contract.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -71,7 +72,9 @@ def parse_framework_notice_identifier(xml_content):
     return result if result["contracts"] else None
 
 
-def merge_framework_notice_identifier(release_json, framework_notice_identifier_data):
+def merge_framework_notice_identifier(
+    release_json, framework_notice_identifier_data
+) -> None:
     if not framework_notice_identifier_data:
         logger.info("No framework notice identifier data to merge")
         return

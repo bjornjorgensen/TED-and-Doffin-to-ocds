@@ -1,6 +1,7 @@
 # converters/bt_625_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -134,7 +135,7 @@ def parse_unit(xml_content):
     return result if result["tender"]["items"] else None
 
 
-def merge_unit(release_json, unit_data):
+def merge_unit(release_json, unit_data) -> None:
     """
     Merge the parsed unit data into the main OCDS release JSON.
 

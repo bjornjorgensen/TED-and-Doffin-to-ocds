@@ -1,6 +1,7 @@
 # converters/bt_512_organization_touchpoint.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -49,7 +50,7 @@ def parse_touchpoint_postcode(xml_content):
     return result if result["parties"] else None
 
 
-def merge_touchpoint_postcode(release_json, touchpoint_postcode_data):
+def merge_touchpoint_postcode(release_json, touchpoint_postcode_data) -> None:
     if not touchpoint_postcode_data:
         logger.warning("No touchpoint Postcode data to merge")
         return

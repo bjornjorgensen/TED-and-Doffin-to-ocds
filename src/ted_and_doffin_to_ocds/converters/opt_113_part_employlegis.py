@@ -1,7 +1,8 @@
 # converters/opt_113_part_employlegis.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +34,7 @@ def parse_part_employment_legislation_document_id(xml_content):
 
 def merge_part_employment_legislation_document_id(
     release_json, employment_legislation_data
-):
+) -> None:
     if not employment_legislation_data:
         return
 

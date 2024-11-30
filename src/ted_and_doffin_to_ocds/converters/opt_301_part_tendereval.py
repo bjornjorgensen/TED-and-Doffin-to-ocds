@@ -1,7 +1,8 @@
 # converters/opt_301_part_tendereval.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +30,7 @@ def part_parse_tender_evaluator(xml_content):
     return result
 
 
-def part_merge_tender_evaluator(release_json, tender_evaluator_data):
+def part_merge_tender_evaluator(release_json, tender_evaluator_data) -> None:
     if not tender_evaluator_data:
         logger.info("No Tender Evaluator data to merge.")
         return

@@ -1,6 +1,7 @@
 # converters/bt_750_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -114,7 +115,7 @@ def parse_selection_criteria(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_selection_criteria(release_json, selection_criteria_data):
+def merge_selection_criteria(release_json, selection_criteria_data) -> None:
     """
     Merge the parsed selection criteria data into the main OCDS release JSON.
 

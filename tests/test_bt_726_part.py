@@ -1,18 +1,20 @@
 # tests/test_bt_726_part.py
-from pathlib import Path
-import pytest
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
+
 from ted_and_doffin_to_ocds.converters.bt_726_part import (
-    parse_part_sme_suitability,
     merge_part_sme_suitability,
+    parse_part_sme_suitability,
 )
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 TEST_NAMESPACES = {
     "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
@@ -33,7 +35,7 @@ def temp_output_dir():
 
 
 @pytest.fixture
-def sample_xml_true():
+def sample_xml_true() -> str:
     """XML with SME suitability set to true."""
     return """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
@@ -50,7 +52,7 @@ def sample_xml_true():
 
 
 @pytest.fixture
-def sample_xml_false():
+def sample_xml_false() -> str:
     """XML with SME suitability set to false."""
     return """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
@@ -74,7 +76,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_726_part_integration(tmp_path, setup_logging, temp_output_dir):
+def test_bt_726_part_integration(tmp_path, setup_logging, temp_output_dir) -> None:
     logger = setup_logging
 
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
@@ -98,21 +100,21 @@ def test_bt_726_part_integration(tmp_path, setup_logging, temp_output_dir):
     assert "tender" in result, "Expected 'tender' in result"
 
 
-def test_parse_part_sme_suitability_true(sample_xml_true):
+def test_parse_part_sme_suitability_true(sample_xml_true) -> None:
     """Test parsing when SME suitability is true."""
     result = parse_part_sme_suitability(sample_xml_true)
     assert result is not None
     assert result["tender"]["suitability"]["sme"] is True
 
 
-def test_parse_part_sme_suitability_false(sample_xml_false):
+def test_parse_part_sme_suitability_false(sample_xml_false) -> None:
     """Test parsing when SME suitability is false."""
     result = parse_part_sme_suitability(sample_xml_false)
     assert result is not None
     assert result["tender"]["suitability"]["sme"] is False
 
 
-def test_parse_part_sme_suitability_missing():
+def test_parse_part_sme_suitability_missing() -> None:
     """Test parsing when SME suitability indicator is missing."""
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
@@ -129,7 +131,7 @@ def test_parse_part_sme_suitability_missing():
     assert result is None
 
 
-def test_merge_part_sme_suitability():
+def test_merge_part_sme_suitability() -> None:
     """Test merging SME suitability data into release JSON."""
     release_json = {}
     part_sme_data = {"tender": {"suitability": {"sme": True}}}
@@ -142,14 +144,14 @@ def test_merge_part_sme_suitability():
     assert release_json["tender"]["suitability"]["sme"] is True
 
 
-def test_merge_part_sme_suitability_none():
+def test_merge_part_sme_suitability_none() -> None:
     """Test merging when no SME suitability data is provided."""
     release_json = {}
     merge_part_sme_suitability(release_json, None)
     assert release_json == {}
 
 
-def test_merge_part_sme_suitability_existing():
+def test_merge_part_sme_suitability_existing() -> None:
     """Test merging when release JSON already has some data."""
     release_json = {"tender": {"suitability": {"other": "value"}}}
     part_sme_data = {"tender": {"suitability": {"sme": True}}}

@@ -1,18 +1,20 @@
 # tests/test_OPT_155_LotResult.py
-from pathlib import Path
-import pytest
-from ted_and_doffin_to_ocds.converters.opt_155_lotresult import (
-    parse_vehicle_type,
-    merge_vehicle_type,
-)
 import json
+import logging
 import sys
 import tempfile
-import logging
+from pathlib import Path
+
+import pytest
+
+from ted_and_doffin_to_ocds.converters.opt_155_lotresult import (
+    merge_vehicle_type,
+    parse_vehicle_type,
+)
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 
 @pytest.fixture(scope="module")
@@ -45,7 +47,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_parse_vehicle_type():
+def test_parse_vehicle_type() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -88,7 +90,7 @@ def test_parse_vehicle_type():
     assert result["awards"][0]["relatedLots"] == ["LOT-0001"]
 
 
-def test_merge_vehicle_type():
+def test_merge_vehicle_type() -> None:
     release_json = {
         "awards": [
             {"id": "RES-0001", "items": [{"id": "1", "description": "Existing item"}]},
@@ -131,7 +133,7 @@ def test_merge_vehicle_type():
 
 def test_opt_155_lotresult_vehicle_type_integration(
     tmp_path, setup_logging, temp_output_dir
-):
+) -> None:
     logger = setup_logging
     xml_content = """
     <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"

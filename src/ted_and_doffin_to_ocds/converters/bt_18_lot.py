@@ -1,6 +1,7 @@
 # converters/bt_18_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -43,7 +44,7 @@ def parse_submission_url(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_submission_url(release_json, submission_url_data):
+def merge_submission_url(release_json, submission_url_data) -> None:
     if not submission_url_data:
         logger.warning("No Submission URL data to merge")
         return

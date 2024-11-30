@@ -1,6 +1,7 @@
 # converters/bt_505_organization_company.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -37,7 +38,7 @@ def parse_organization_website(xml_content):
     return result if result["parties"] else None
 
 
-def merge_organization_website(release_json, organization_website_data):
+def merge_organization_website(release_json, organization_website_data) -> None:
     if not organization_website_data:
         logger.info("No organization website data to merge")
         return

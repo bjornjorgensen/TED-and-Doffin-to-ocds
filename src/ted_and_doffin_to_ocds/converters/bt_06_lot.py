@@ -1,7 +1,8 @@
 # converters/bt_06_Lot.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -61,7 +62,7 @@ def parse_strategic_procurement(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_strategic_procurement(release_json, strategic_procurement_data):
+def merge_strategic_procurement(release_json, strategic_procurement_data) -> None:
     if not strategic_procurement_data:
         logger.warning("No Strategic Procurement data to merge")
         return

@@ -1,6 +1,7 @@
 # converters/bt_726_LotsGroup.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -53,7 +54,9 @@ def parse_lots_group_sme_suitability(xml_content):
     return result if result["tender"]["lotGroups"] else None
 
 
-def merge_lots_group_sme_suitability(release_json, lots_group_sme_suitability_data):
+def merge_lots_group_sme_suitability(
+    release_json, lots_group_sme_suitability_data
+) -> None:
     """
     Merge the parsed SME suitability data for lot groups into the main OCDS release JSON.
 

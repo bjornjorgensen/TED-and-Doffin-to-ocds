@@ -1,6 +1,7 @@
 # converters/bt_88_procedure.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -36,7 +37,7 @@ def parse_procedure_features(xml_content):
     return None
 
 
-def merge_procedure_features(release_json, procedure_features_data):
+def merge_procedure_features(release_json, procedure_features_data) -> None:
     """
     Merge the parsed procedure features data into the main OCDS release JSON.
 

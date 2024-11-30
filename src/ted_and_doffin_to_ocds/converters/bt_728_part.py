@@ -1,6 +1,7 @@
 # converters/bt_728_part.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -41,7 +42,7 @@ def parse_part_place_performance_additional(xml_content):
     return result if result["tender"]["deliveryAddresses"] else None
 
 
-def merge_part_place_performance_additional(release_json, additional_data):
+def merge_part_place_performance_additional(release_json, additional_data) -> None:
     """
     Merge BT-728-Part data into the release.
     Updates or concatenates descriptions for matching addresses.

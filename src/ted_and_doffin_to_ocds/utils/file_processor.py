@@ -1,13 +1,14 @@
 # src/ted_and_doffin_to_ocds/utils/file_processor.py
 
+import asyncio
+import logging
 import shutil
 import tempfile
-from pathlib import Path
-from typing import ClassVar, Self, Final
 from collections.abc import AsyncIterator
+from pathlib import Path
+from typing import ClassVar, Final, Self
+
 from lxml import etree
-import logging
-import asyncio
 from tqdm import tqdm
 
 logger = logging.getLogger(__name__)
@@ -29,7 +30,7 @@ class NoticeFileProcessor:
 
     MAX_FILE_SIZE: Final[int] = 100 * 1024 * 1024  # 100MB limit
 
-    def __init__(self, input_path: Path, output_path: Path):
+    def __init__(self, input_path: Path, output_path: Path) -> None:
         """Initialize the processor with input and output paths."""
         self.input_path = input_path
         self.output_path = output_path

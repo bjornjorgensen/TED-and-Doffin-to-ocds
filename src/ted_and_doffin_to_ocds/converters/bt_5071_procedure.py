@@ -1,6 +1,7 @@
 # converters/bt_5071_procedure.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -36,7 +37,7 @@ def parse_place_performance_country_subdivision_procedure(xml_content):
 
 def merge_place_performance_country_subdivision_procedure(
     release_json, subdivision_data
-):
+) -> None:
     if (
         not subdivision_data
         or "tender" not in subdivision_data

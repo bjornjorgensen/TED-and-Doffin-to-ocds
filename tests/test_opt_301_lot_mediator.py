@@ -1,14 +1,15 @@
 # tests/test_opt_301_lot_mediator.py
 
 import pytest
+
 from ted_and_doffin_to_ocds.converters.opt_301_lot_mediator import (
-    parse_mediator_technical_identifier,
     merge_mediator_technical_identifier,
+    parse_mediator_technical_identifier,
 )
 
 
 @pytest.fixture
-def sample_xml():
+def sample_xml() -> str:
     return """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -28,7 +29,7 @@ def sample_xml():
     """
 
 
-def test_parse_mediator_technical_identifier(sample_xml):
+def test_parse_mediator_technical_identifier(sample_xml) -> None:
     result = parse_mediator_technical_identifier(sample_xml)
     assert result is not None
     assert "parties" in result
@@ -37,7 +38,7 @@ def test_parse_mediator_technical_identifier(sample_xml):
     assert result["parties"][0]["roles"] == ["mediationBody"]
 
 
-def test_merge_mediator_technical_identifier():
+def test_merge_mediator_technical_identifier() -> None:
     mediator_data = {"parties": [{"id": "TPO-0005", "roles": ["mediationBody"]}]}
     release_json = {}
     merge_mediator_technical_identifier(release_json, mediator_data)
@@ -47,7 +48,7 @@ def test_merge_mediator_technical_identifier():
     assert release_json["parties"][0]["roles"] == ["mediationBody"]
 
 
-def test_merge_mediator_technical_identifier_existing_party():
+def test_merge_mediator_technical_identifier_existing_party() -> None:
     mediator_data = {"parties": [{"id": "TPO-0005", "roles": ["mediationBody"]}]}
     release_json = {"parties": [{"id": "TPO-0005", "roles": ["buyer"]}]}
     merge_mediator_technical_identifier(release_json, mediator_data)
@@ -56,13 +57,13 @@ def test_merge_mediator_technical_identifier_existing_party():
     assert set(release_json["parties"][0]["roles"]) == {"buyer", "mediationBody"}
 
 
-def test_parse_mediator_technical_identifier_no_data():
+def test_parse_mediator_technical_identifier_no_data() -> None:
     xml_content = "<root></root>"
     result = parse_mediator_technical_identifier(xml_content)
     assert result is None
 
 
-def test_merge_mediator_technical_identifier_no_data():
+def test_merge_mediator_technical_identifier_no_data() -> None:
     release_json = {}
     merge_mediator_technical_identifier(release_json, None)
     assert release_json == {}

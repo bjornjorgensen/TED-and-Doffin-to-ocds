@@ -1,7 +1,8 @@
 # converters/opp_050_organization.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +40,7 @@ def parse_buyers_group_lead_indicator(xml_content):
     return result if result["parties"] else None
 
 
-def merge_buyers_group_lead_indicator(release_json, lead_buyer_data):
+def merge_buyers_group_lead_indicator(release_json, lead_buyer_data) -> None:
     if not lead_buyer_data:
         logger.info("No Buyers Group Lead Indicator data to merge")
         return

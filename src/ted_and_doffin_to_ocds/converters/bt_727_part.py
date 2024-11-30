@@ -1,6 +1,7 @@
 # converters/bt_727_part.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -78,7 +79,7 @@ def parse_part_place_performance(xml_content):
         return None
 
 
-def merge_part_place_performance(release_json, part_place_performance_data):
+def merge_part_place_performance(release_json, part_place_performance_data) -> None:
     """
     Merge place of performance data into the release JSON.
     Updates deliveryLocations array.

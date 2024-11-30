@@ -1,6 +1,7 @@
 # converters/bt_651_Lot_Subcontracting_Tender_Indication.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -73,7 +74,7 @@ def parse_subcontracting_tender_indication(xml_content: bytes):
 def merge_subcontracting_tender_indication(
     release_json,
     subcontracting_tender_indication_data,
-):
+) -> None:
     """
     Merge the parsed subcontracting tender indication data into the main OCDS release JSON.
 

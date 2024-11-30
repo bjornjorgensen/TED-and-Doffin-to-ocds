@@ -58,10 +58,9 @@ select = [
     "COM",  # flake8-commas
     "T20",  # flake8-print
     "ARG",  # flake8-unused-arguments
-    #"ANN",
+    "ANN",
     "A004",
     "PYI064",
-    "RUF030",
     "UP043",
     "UP031",
     "RUF007",
@@ -102,10 +101,13 @@ select = [
     "FURB",
     #"DOC",
     "RUF",
+    "ASYNC",
+    "FA",
+    #"BLE",
+    #"FBT",
 ]
 ignore = [
     "E501",  # Line too long
-    "I001",  # Import block is un-sorted or un-formatted
     "S101",  # Use of assert detected
     "S320",  # Using `xml.etree.ElementTree.parse` to parse untrusted XML data is known to be vulnerable to XML attacks
     "COM812",  # Trailing comma missing
@@ -115,6 +117,9 @@ ignore = [
     "PLR0915",
     "PLE1205",
     "RUF001",
+    "ANN001",
+    "ANN201",
+
 ]
 
 [tool.ruff.format]

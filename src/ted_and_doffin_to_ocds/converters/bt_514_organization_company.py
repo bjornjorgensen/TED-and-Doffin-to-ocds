@@ -1,6 +1,7 @@
 # converters/bt_514_organization_company.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -106,7 +107,7 @@ def convert_country_code(code):
     return ISO_3166_CONVERSION.get(code, code)
 
 
-def merge_organization_country(release_json, organization_country_data):
+def merge_organization_country(release_json, organization_country_data) -> None:
     if not organization_country_data:
         logger.warning("No organization Country data to merge")
         return

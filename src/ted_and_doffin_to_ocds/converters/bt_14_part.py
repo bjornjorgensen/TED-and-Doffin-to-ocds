@@ -1,6 +1,7 @@
 # converters/bt_14_part.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -41,7 +42,9 @@ def parse_part_documents_restricted(xml_content):
     return result if result["tender"]["documents"] else None
 
 
-def merge_part_documents_restricted(release_json, part_documents_restricted_data):
+def merge_part_documents_restricted(
+    release_json, part_documents_restricted_data
+) -> None:
     if not part_documents_restricted_data:
         logger.warning("No part documents restricted data to merge")
         return

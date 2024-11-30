@@ -1,12 +1,12 @@
 # tests/test_opt_110_part_fiscallegis.py
 
 from ted_and_doffin_to_ocds.converters.opt_110_part_fiscallegis import (
-    parse_part_fiscal_legislation_url,
     merge_part_fiscal_legislation_url,
+    parse_part_fiscal_legislation_url,
 )
 
 
-def test_parse_part_fiscal_legislation_url():
+def test_parse_part_fiscal_legislation_url() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -35,7 +35,7 @@ def test_parse_part_fiscal_legislation_url():
     }
 
 
-def test_merge_part_fiscal_legislation_url():
+def test_merge_part_fiscal_legislation_url() -> None:
     release_json = {
         "tender": {"documents": [{"id": "Fiscal1", "title": "Existing Document"}]}
     }

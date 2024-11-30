@@ -1,7 +1,8 @@
 # converters/OPP_020_021_022_023_Contract.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -101,7 +102,7 @@ def parse_essential_assets(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_essential_assets(release_json, essential_assets_data):
+def merge_essential_assets(release_json, essential_assets_data) -> None:
     if not essential_assets_data:
         logger.warning("No Essential Assets data to merge")
         return

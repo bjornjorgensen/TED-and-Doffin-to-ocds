@@ -1,13 +1,14 @@
 # tests/test_bt_537_Lot.py
 
 import pytest
+
 from ted_and_doffin_to_ocds.converters.bt_537_lot import (
-    parse_lot_duration_end_date,
     merge_lot_duration_end_date,
+    parse_lot_duration_end_date,
 )
 
 
-def test_parse_lot_duration_end_date():
+def test_parse_lot_duration_end_date() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -35,7 +36,7 @@ def test_parse_lot_duration_end_date():
     )
 
 
-def test_merge_lot_duration_end_date():
+def test_merge_lot_duration_end_date() -> None:
     release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}
 
     lot_duration_end_date_data = {

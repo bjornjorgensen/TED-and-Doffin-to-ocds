@@ -1,6 +1,7 @@
 # converters/bt_739_organization_company.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -51,7 +52,7 @@ def parse_organization_contact_fax(xml_content):
     return result if result["parties"] else None
 
 
-def merge_organization_contact_fax(release_json, organization_fax_data):
+def merge_organization_contact_fax(release_json, organization_fax_data) -> None:
     """
     Merge the parsed organization contact fax number into the main OCDS release JSON.
 

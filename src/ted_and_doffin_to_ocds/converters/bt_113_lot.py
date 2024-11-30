@@ -1,7 +1,8 @@
 # converters/bt_113_Lot.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -46,7 +47,7 @@ def parse_framework_max_participants(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_framework_max_participants(release_json, max_participants_data):
+def merge_framework_max_participants(release_json, max_participants_data) -> None:
     if not max_participants_data:
         logger.warning("No Framework Maximum participants data to merge")
         return

@@ -1,12 +1,12 @@
 # tests/test_bt_5423_LotsGroup.py
 
 from ted_and_doffin_to_ocds.converters.bt_5423_lotsgroup import (
-    parse_award_criterion_number_threshold_lotsgroup,
     merge_award_criterion_number_threshold_lotsgroup,
+    parse_award_criterion_number_threshold_lotsgroup,
 )
 
 
-def create_xml_with_award_criterion_lotsgroup(group_id, threshold_code):
+def create_xml_with_award_criterion_lotsgroup(group_id, threshold_code) -> str:
     return f"""
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -40,7 +40,7 @@ def create_xml_with_award_criterion_lotsgroup(group_id, threshold_code):
     """
 
 
-def test_parse_award_criterion_number_threshold_lotsgroup_max_pass():
+def test_parse_award_criterion_number_threshold_lotsgroup_max_pass() -> None:
     xml_content = create_xml_with_award_criterion_lotsgroup("GLO-001", "max-pass")
     result = parse_award_criterion_number_threshold_lotsgroup(xml_content)
 
@@ -54,7 +54,7 @@ def test_parse_award_criterion_number_threshold_lotsgroup_max_pass():
     )
 
 
-def test_parse_award_criterion_number_threshold_lotsgroup_min_score():
+def test_parse_award_criterion_number_threshold_lotsgroup_min_score() -> None:
     xml_content = create_xml_with_award_criterion_lotsgroup("GLO-002", "min-score")
     result = parse_award_criterion_number_threshold_lotsgroup(xml_content)
 
@@ -68,21 +68,21 @@ def test_parse_award_criterion_number_threshold_lotsgroup_min_score():
     )
 
 
-def test_parse_award_criterion_number_threshold_lotsgroup_invalid_code():
+def test_parse_award_criterion_number_threshold_lotsgroup_invalid_code() -> None:
     xml_content = create_xml_with_award_criterion_lotsgroup("GLO-003", "invalid-code")
     result = parse_award_criterion_number_threshold_lotsgroup(xml_content)
 
     assert result is None
 
 
-def test_parse_award_criterion_number_threshold_lotsgroup_no_data():
+def test_parse_award_criterion_number_threshold_lotsgroup_no_data() -> None:
     xml_content = "<root></root>"
     result = parse_award_criterion_number_threshold_lotsgroup(xml_content)
 
     assert result is None
 
 
-def test_merge_award_criterion_number_threshold_lotsgroup():
+def test_merge_award_criterion_number_threshold_lotsgroup() -> None:
     existing_release = {
         "tender": {
             "lotGroups": [
@@ -130,7 +130,7 @@ def test_merge_award_criterion_number_threshold_lotsgroup():
     )
 
 
-def test_merge_award_criterion_number_threshold_lotsgroup_new_group():
+def test_merge_award_criterion_number_threshold_lotsgroup_new_group() -> None:
     existing_release = {"tender": {"lotGroups": []}}
 
     new_data = {
@@ -158,7 +158,7 @@ def test_merge_award_criterion_number_threshold_lotsgroup_new_group():
     )
 
 
-def test_merge_award_criterion_number_threshold_lotsgroup_no_data():
+def test_merge_award_criterion_number_threshold_lotsgroup_no_data() -> None:
     existing_release = {"tender": {"lotGroups": []}}
     merge_award_criterion_number_threshold_lotsgroup(existing_release, None)
     assert existing_release == {"tender": {"lotGroups": []}}

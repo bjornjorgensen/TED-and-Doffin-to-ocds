@@ -1,7 +1,9 @@
 # converters/bt_631_Lot.py
 
 import logging
+
 from lxml import etree
+
 from ted_and_doffin_to_ocds.utils.date_utils import convert_to_iso_format
 
 logger = logging.getLogger(__name__)
@@ -67,7 +69,7 @@ def parse_dispatch_invitation_interest(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_dispatch_invitation_interest(release_json, dispatch_invitation_data):
+def merge_dispatch_invitation_interest(release_json, dispatch_invitation_data) -> None:
     """
     Merge the parsed dispatch invitation interest data into the main OCDS release JSON.
 

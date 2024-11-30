@@ -1,6 +1,7 @@
 # converters/bt_193_Tender.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -50,7 +51,7 @@ def parse_tender_variant(xml_content):
     return result if result["bids"]["details"] else None
 
 
-def merge_tender_variant(release_json, tender_variant_data):
+def merge_tender_variant(release_json, tender_variant_data) -> None:
     if not tender_variant_data:
         logger.warning("No Tender Variant data to merge")
         return

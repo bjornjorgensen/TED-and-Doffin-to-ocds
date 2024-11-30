@@ -52,7 +52,7 @@ def parse_procedure_place_performance_streetline2(xml_content):
 def merge_procedure_place_performance_streetline2(
     release_json,
     procedure_place_performance_streetline2_data,
-):
+) -> None:
     if not procedure_place_performance_streetline2_data:
         return
 

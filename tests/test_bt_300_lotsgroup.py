@@ -1,13 +1,14 @@
 # tests/test_bt_300_LotsGroup.py
 
 import pytest
+
 from ted_and_doffin_to_ocds.converters.bt_300_lotsgroup import (
-    parse_lotsgroup_additional_info,
     merge_lotsgroup_additional_info,
+    parse_lotsgroup_additional_info,
 )
 
 
-def test_parse_lotsgroup_additional_info():
+def test_parse_lotsgroup_additional_info() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -25,7 +26,7 @@ def test_parse_lotsgroup_additional_info():
     }
 
 
-def test_merge_lotsgroup_additional_info():
+def test_merge_lotsgroup_additional_info() -> None:
     release_json = {"tender": {"lotGroups": [{"id": "GLO-0001"}]}}
     lotsgroup_additional_info = {
         "GLO-0001": [{"text": "For the current procedure ...", "language": "ENG"}],
@@ -37,7 +38,7 @@ def test_merge_lotsgroup_additional_info():
     )
 
 
-def test_merge_lotsgroup_additional_info_existing_description():
+def test_merge_lotsgroup_additional_info_existing_description() -> None:
     release_json = {
         "tender": {
             "lotGroups": [{"id": "GLO-0001", "description": "Existing description."}],

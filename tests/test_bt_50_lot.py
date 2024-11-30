@@ -1,13 +1,14 @@
 # tests/test_bt_50_Lot.py
 
 import pytest
+
 from ted_and_doffin_to_ocds.converters.bt_50_lot import (
-    parse_minimum_candidates,
     merge_minimum_candidates,
+    parse_minimum_candidates,
 )
 
 
-def test_parse_minimum_candidates():
+def test_parse_minimum_candidates() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -36,7 +37,7 @@ def test_parse_minimum_candidates():
     assert lot["secondStage"]["minimumCandidates"] == 3
 
 
-def test_merge_minimum_candidates():
+def test_merge_minimum_candidates() -> None:
     minimum_candidates_data = {
         "tender": {
             "lots": [{"id": "LOT-0001", "secondStage": {"minimumCandidates": 3}}],

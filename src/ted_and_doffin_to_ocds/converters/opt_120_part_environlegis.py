@@ -1,7 +1,8 @@
 # converters/opt_120_part_environlegis.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +41,9 @@ def parse_environmental_legislation_url_part(xml_content):
     return result if result["tender"]["documents"] else None
 
 
-def merge_environmental_legislation_url_part(release_json, env_legislation_data):
+def merge_environmental_legislation_url_part(
+    release_json, env_legislation_data
+) -> None:
     if not env_legislation_data:
         logger.info("No environmental legislation URL data for parts to merge")
         return

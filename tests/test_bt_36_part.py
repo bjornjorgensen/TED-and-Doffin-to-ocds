@@ -1,13 +1,14 @@
 import pytest
+
 from ted_and_doffin_to_ocds.converters.bt_36_part import (
-    parse_part_duration,
-    merge_part_duration,
     calculate_duration_in_days,
+    merge_part_duration,
+    parse_part_duration,
 )
 
 
 @pytest.fixture
-def base_xml():
+def base_xml() -> str:
     """Base XML template for testing."""
     return """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -23,14 +24,14 @@ def base_xml():
     </ContractNotice>"""
 
 
-def test_parse_duration_days(base_xml):
+def test_parse_duration_days(base_xml) -> None:
     """Test parsing duration specified in days."""
     xml = base_xml.format(unit="DAY", value="3")
     result = parse_part_duration(xml)
     assert result == {"tender": {"contractPeriod": {"durationInDays": 3}}}
 
 
-def test_parse_duration_months(base_xml):
+def test_parse_duration_months(base_xml) -> None:
     """Test parsing duration specified in months."""
     xml = base_xml.format(unit="MONTH", value="2")
     result = parse_part_duration(xml)
@@ -43,7 +44,7 @@ def test_parse_duration_months(base_xml):
     }
 
 
-def test_parse_duration_years(base_xml):
+def test_parse_duration_years(base_xml) -> None:
     """Test parsing duration specified in years."""
     xml = base_xml.format(unit="YEAR", value="1")
     result = parse_part_duration(xml)
@@ -56,7 +57,7 @@ def test_parse_duration_years(base_xml):
     }
 
 
-def test_parse_duration_weeks(base_xml):
+def test_parse_duration_weeks(base_xml) -> None:
     """Test parsing duration specified in weeks."""
     xml = base_xml.format(unit="WEEK", value="2")
     result = parse_part_duration(xml)
@@ -69,7 +70,7 @@ def test_parse_duration_weeks(base_xml):
     }
 
 
-def test_parse_duration_weekdays(base_xml):
+def test_parse_duration_weekdays(base_xml) -> None:
     """Test parsing duration specified in specific weekdays."""
     for day in ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]:
         xml = base_xml.format(unit=day, value="3")
@@ -83,21 +84,21 @@ def test_parse_duration_weekdays(base_xml):
         }
 
 
-def test_parse_invalid_unit(base_xml):
+def test_parse_invalid_unit(base_xml) -> None:
     """Test parsing with invalid unit code."""
     xml = base_xml.format(unit="INVALID", value="3")
     result = parse_part_duration(xml)
     assert result is None
 
 
-def test_parse_invalid_value(base_xml):
+def test_parse_invalid_value(base_xml) -> None:
     """Test parsing with invalid duration value."""
     xml = base_xml.format(unit="DAY", value="invalid")
     result = parse_part_duration(xml)
     assert result is None
 
 
-def test_parse_missing_unit():
+def test_parse_missing_unit() -> None:
     """Test parsing with missing unit code."""
     xml = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -115,7 +116,7 @@ def test_parse_missing_unit():
     assert result is None
 
 
-def test_merge_duration():
+def test_merge_duration() -> None:
     """Test merging duration data into release JSON."""
     release = {}
     duration_data = {"tender": {"contractPeriod": {"durationInDays": 30}}}
@@ -123,7 +124,7 @@ def test_merge_duration():
     assert release == {"tender": {"contractPeriod": {"durationInDays": 30}}}
 
 
-def test_merge_duration_existing_tender():
+def test_merge_duration_existing_tender() -> None:
     """Test merging duration data with existing tender section."""
     release = {"tender": {"id": "123", "contractPeriod": {}}}
     duration_data = {"tender": {"contractPeriod": {"durationInDays": 30}}}
@@ -133,14 +134,14 @@ def test_merge_duration_existing_tender():
     }
 
 
-def test_merge_none_duration():
+def test_merge_none_duration() -> None:
     """Test merging None duration data."""
     release = {"tender": {"id": "123"}}
     merge_part_duration(release, None)
     assert release == {"tender": {"id": "123"}}
 
 
-def test_calculate_duration_days():
+def test_calculate_duration_days() -> None:
     """Test duration calculation for different unit codes."""
     assert calculate_duration_in_days(3, "DAY") == 3
     assert calculate_duration_in_days(2, "MONTH") == 60
@@ -151,7 +152,7 @@ def test_calculate_duration_days():
     assert calculate_duration_in_days(3, "INVALID") is None
 
 
-def test_part_duration_integration():
+def test_part_duration_integration() -> None:
     """Integration test with full XML structure"""
     xml = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -177,7 +178,7 @@ def test_part_duration_integration():
     assert result == expected
 
 
-def test_merge_duration_with_existing_data():
+def test_merge_duration_with_existing_data() -> None:
     """Test merging duration with pre-existing release data"""
     existing_release = {
         "tender": {

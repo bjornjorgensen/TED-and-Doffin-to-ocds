@@ -41,7 +41,7 @@ def parse_lot_internal_identifier(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_internal_identifier(release_json, lot_internal_identifier_data):
+def merge_lot_internal_identifier(release_json, lot_internal_identifier_data) -> None:
     if not lot_internal_identifier_data:
         return
 

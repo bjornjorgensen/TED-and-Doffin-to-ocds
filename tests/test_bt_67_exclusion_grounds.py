@@ -2,9 +2,10 @@
 
 import pytest
 from lxml import etree
+
 from ted_and_doffin_to_ocds.converters.bt_67_exclusion_grounds import (
-    parse_exclusion_grounds,
     merge_exclusion_grounds,
+    parse_exclusion_grounds,
 )
 
 # Define the namespaces
@@ -44,7 +45,7 @@ def create_xml_with_exclusion_grounds(grounds):
     return etree.tostring(root)
 
 
-def test_parse_exclusion_grounds_with_type_and_description():
+def test_parse_exclusion_grounds_with_type_and_description() -> None:
     xml_content = create_xml_with_exclusion_grounds(
         [
             {
@@ -69,7 +70,7 @@ def test_parse_exclusion_grounds_with_type_and_description():
     }
 
 
-def test_parse_exclusion_grounds_with_type_only():
+def test_parse_exclusion_grounds_with_type_only() -> None:
     xml_content = create_xml_with_exclusion_grounds(
         [{"type": "bankruptcy"}, {"type": "fraud"}],
     )
@@ -88,7 +89,7 @@ def test_parse_exclusion_grounds_with_type_only():
     }
 
 
-def test_parse_exclusion_grounds_with_unknown_type():
+def test_parse_exclusion_grounds_with_unknown_type() -> None:
     xml_content = create_xml_with_exclusion_grounds(
         [{"type": "unknown-type", "description": "Some description"}],
     )
@@ -103,7 +104,7 @@ def test_parse_exclusion_grounds_with_unknown_type():
     }
 
 
-def test_parse_exclusion_grounds_empty():
+def test_parse_exclusion_grounds_empty() -> None:
     xml_content = create_xml_with_exclusion_grounds([])
 
     result = parse_exclusion_grounds(xml_content)
@@ -111,7 +112,7 @@ def test_parse_exclusion_grounds_empty():
     assert result is None
 
 
-def test_merge_exclusion_grounds():
+def test_merge_exclusion_grounds() -> None:
     release_json = {
         "tender": {
             "exclusionGrounds": {
@@ -143,7 +144,7 @@ def test_merge_exclusion_grounds():
     }
 
 
-def test_merge_exclusion_grounds_empty():
+def test_merge_exclusion_grounds_empty() -> None:
     release_json = {"tender": {}}
     exclusion_grounds_data = None
 

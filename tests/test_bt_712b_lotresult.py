@@ -2,9 +2,10 @@
 
 import pytest
 from lxml import etree
+
 from ted_and_doffin_to_ocds.converters.bt_712b_lotresult import (
-    parse_buyer_review_complainants_number,
     merge_buyer_review_complainants_number,
+    parse_buyer_review_complainants_number,
 )
 
 NAMESPACES = {
@@ -45,7 +46,7 @@ def create_xml_content(lot_data):
     return etree.tostring(root)
 
 
-def test_parse_buyer_review_complainants_number():
+def test_parse_buyer_review_complainants_number() -> None:
     xml_content = create_xml_content({"LOT-001": 2, "LOT-002": 3})
     result = parse_buyer_review_complainants_number(xml_content)
 
@@ -69,19 +70,19 @@ def test_parse_buyer_review_complainants_number():
     }
 
 
-def test_parse_buyer_review_complainants_number_no_data():
+def test_parse_buyer_review_complainants_number_no_data() -> None:
     xml_content = "<root></root>"
     result = parse_buyer_review_complainants_number(xml_content)
     assert result is None
 
 
-def test_parse_buyer_review_complainants_number_missing_lot_id():
+def test_parse_buyer_review_complainants_number_missing_lot_id() -> None:
     xml_content = create_xml_content({"": 2})
     result = parse_buyer_review_complainants_number(xml_content)
     assert result is None
 
 
-def test_merge_buyer_review_complainants_number():
+def test_merge_buyer_review_complainants_number() -> None:
     release_json = {"statistics": []}
     complainants_number_data = {
         "statistics": [
@@ -101,7 +102,7 @@ def test_merge_buyer_review_complainants_number():
     assert release_json["statistics"][0] == complainants_number_data["statistics"][0]
 
 
-def test_merge_buyer_review_complainants_number_update_existing():
+def test_merge_buyer_review_complainants_number_update_existing() -> None:
     release_json = {
         "statistics": [
             {
@@ -132,7 +133,7 @@ def test_merge_buyer_review_complainants_number_update_existing():
     assert release_json["statistics"][0]["value"] == 3
 
 
-def test_merge_buyer_review_complainants_number_no_data():
+def test_merge_buyer_review_complainants_number_no_data() -> None:
     release_json = {"statistics": []}
     merge_buyer_review_complainants_number(release_json, None)
     assert "statistics" in release_json
@@ -144,7 +145,7 @@ def sample_xml_content():
     return create_xml_content({"LOT-001": 2, "LOT-002": 3})
 
 
-def test_integration(sample_xml_content):
+def test_integration(sample_xml_content) -> None:
     # Parse the XML content
     parsed_data = parse_buyer_review_complainants_number(sample_xml_content)
     assert parsed_data is not None

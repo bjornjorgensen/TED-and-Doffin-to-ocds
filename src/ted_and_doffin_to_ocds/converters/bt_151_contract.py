@@ -1,6 +1,7 @@
 # converters/bt_151_Contract.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -65,7 +66,7 @@ def parse_contract_url(xml_content):
     return result if result["contracts"] else None
 
 
-def merge_contract_url(release_json, contract_url_data):
+def merge_contract_url(release_json, contract_url_data) -> None:
     if not contract_url_data:
         logger.warning("No contract URL data to merge")
         return

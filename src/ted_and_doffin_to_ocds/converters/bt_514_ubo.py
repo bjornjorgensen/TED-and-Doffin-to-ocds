@@ -1,6 +1,7 @@
 # converters/bt_514_ubo.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -122,7 +123,7 @@ def convert_country_code(code):
     return ISO_3166_CONVERSION.get(code, code)
 
 
-def merge_ubo_country(release_json, ubo_country_data):
+def merge_ubo_country(release_json, ubo_country_data) -> None:
     if not ubo_country_data:
         logger.warning("No ubo Country data to merge")
         return

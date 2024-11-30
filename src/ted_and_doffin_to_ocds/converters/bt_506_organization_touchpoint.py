@@ -1,6 +1,7 @@
 # converters/bt_506_organization_touchpoint.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -50,7 +51,7 @@ def parse_organization_touchpoint_email(xml_content):
 
 def merge_organization_touchpoint_email(
     release_json, organization_touchpoint_email_data
-):
+) -> None:
     if not organization_touchpoint_email_data:
         logger.info("No organization touchpoint email data to merge")
         return

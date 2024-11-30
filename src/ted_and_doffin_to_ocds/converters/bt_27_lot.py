@@ -1,6 +1,7 @@
 # converters/bt_27_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -66,7 +67,7 @@ def parse_lot_estimated_value(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_estimated_value(release_json, lot_estimated_value_data):
+def merge_lot_estimated_value(release_json, lot_estimated_value_data) -> None:
     """
     Merge the parsed lot estimated value data into the main OCDS release JSON.
 

@@ -1,6 +1,7 @@
 # converters/bt_17_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -43,7 +44,7 @@ def parse_submission_electronic(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_submission_electronic(release_json, submission_electronic_data):
+def merge_submission_electronic(release_json, submission_electronic_data) -> None:
     if not submission_electronic_data:
         logger.warning("No Submission Electronic data to merge")
         return

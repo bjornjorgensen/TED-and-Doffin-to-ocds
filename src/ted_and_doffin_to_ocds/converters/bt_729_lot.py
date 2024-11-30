@@ -1,6 +1,7 @@
 # converters/bt_729_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -58,7 +59,7 @@ def parse_lot_subcontracting_obligation_maximum(xml_content):
 def merge_lot_subcontracting_obligation_maximum(
     release_json,
     lot_subcontracting_obligation_maximum_data,
-):
+) -> None:
     """
     Merge the parsed subcontracting obligation maximum percentage data for lots into the main OCDS release JSON.
 

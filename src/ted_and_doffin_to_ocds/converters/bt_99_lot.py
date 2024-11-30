@@ -1,6 +1,7 @@
 # converters/bt_99_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -49,7 +50,9 @@ def parse_review_deadline_description(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_review_deadline_description(release_json, review_deadline_description_data):
+def merge_review_deadline_description(
+    release_json, review_deadline_description_data
+) -> None:
     """
     Merge the parsed review deadline description data into the main OCDS release JSON.
 

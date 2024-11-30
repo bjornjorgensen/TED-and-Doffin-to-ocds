@@ -1,7 +1,9 @@
 # converters/bt_536_part.py
 
 import logging
+
 from lxml import etree
+
 from ted_and_doffin_to_ocds.utils.date_utils import start_date
 
 logger = logging.getLogger(__name__)
@@ -34,7 +36,7 @@ def parse_part_contract_start_date(xml_content):
     return result if result["tender"] else None
 
 
-def merge_part_contract_start_date(release_json, part_contract_start_date_data):
+def merge_part_contract_start_date(release_json, part_contract_start_date_data) -> None:
     if not part_contract_start_date_data:
         logger.warning("No part Contract Start Date data to merge")
         return

@@ -1,6 +1,7 @@
 # converters/bt_263_lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -58,7 +59,9 @@ def parse_additional_classification_code(xml_content):
     return result if result["tender"]["items"] else None
 
 
-def merge_additional_classification_code(release_json, additional_classification_data):
+def merge_additional_classification_code(
+    release_json, additional_classification_data
+) -> None:
     """
     Merge the parsed additional classification code data into the main OCDS release JSON.
 

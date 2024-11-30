@@ -1,7 +1,8 @@
 # converters/bt_330_procedure.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +31,7 @@ def parse_group_identifier(xml_content):
     return None
 
 
-def merge_group_identifier(release_json, group_identifier_data):
+def merge_group_identifier(release_json, group_identifier_data) -> None:
     if not group_identifier_data:
         return
 

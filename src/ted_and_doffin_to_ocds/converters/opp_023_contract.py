@@ -65,7 +65,7 @@ def map_asset_predominance(xml_content):
     return result
 
 
-def merge_asset_predominance(release_json, asset_predominance_data):
+def merge_asset_predominance(release_json, asset_predominance_data) -> None:
     if not asset_predominance_data.get("tender", {}).get("lots"):
         return
 

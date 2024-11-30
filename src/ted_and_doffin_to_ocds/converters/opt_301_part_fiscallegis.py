@@ -1,6 +1,7 @@
 # converters/opt_301_part_fiscallegis.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -42,7 +43,7 @@ def parse_fiscal_legislation_org_reference(xml_content):
     return result if (result["parties"] or result["tender"]["documents"]) else None
 
 
-def merge_fiscal_legislation_org_reference(release_json, parsed_data):
+def merge_fiscal_legislation_org_reference(release_json, parsed_data) -> None:
     if not parsed_data:
         return
 

@@ -1,7 +1,8 @@
 # converters/opt_301_lot_environlegis.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -55,7 +56,7 @@ def parse_environmental_legislation_org(xml_content):
     return result if (result["parties"] or result["tender"]["documents"]) else None
 
 
-def merge_environmental_legislation_org(release_json, environ_legis_data):
+def merge_environmental_legislation_org(release_json, environ_legis_data) -> None:
     if not environ_legis_data:
         logger.info(
             "No Environmental Legislation Organization Technical Identifier Reference data to merge"

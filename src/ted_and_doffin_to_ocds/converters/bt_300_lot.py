@@ -1,7 +1,8 @@
 # converters/bt_300_Lot.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -45,7 +46,7 @@ def parse_lot_additional_info(xml_content):
     return result if result else None
 
 
-def merge_lot_additional_info(release_json, lot_additional_info):
+def merge_lot_additional_info(release_json, lot_additional_info) -> None:
     if not lot_additional_info:
         logger.info("No lot additional information to merge")
         return

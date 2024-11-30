@@ -1,7 +1,8 @@
 # converters/opt_200_organization_company.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +34,7 @@ def parse_organization_technical_identifier(xml_content):
     return result if result["parties"] else None
 
 
-def merge_organization_technical_identifier(release_json, org_data):
+def merge_organization_technical_identifier(release_json, org_data) -> None:
     if not org_data:
         logger.info("No organization technical identifier data to merge")
         return

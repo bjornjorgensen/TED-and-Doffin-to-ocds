@@ -1,6 +1,7 @@
 # converters/bt_531_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -43,7 +44,7 @@ def parse_lot_additional_nature(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_additional_nature(release_json, lot_additional_nature_data):
+def merge_lot_additional_nature(release_json, lot_additional_nature_data) -> None:
     if not lot_additional_nature_data:
         logger.warning("No Lot Additional Nature data to merge")
         return

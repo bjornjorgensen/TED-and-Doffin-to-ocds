@@ -1,7 +1,8 @@
 # converters/opt_301_part_addinfo.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -31,7 +32,7 @@ def part_parse_additional_info_provider(xml_content):
     return result
 
 
-def part_merge_additional_info_provider(release_json, additional_info_data):
+def part_merge_additional_info_provider(release_json, additional_info_data) -> None:
     if not additional_info_data:
         logger.info("No Additional Info Provider data to merge.")
         return

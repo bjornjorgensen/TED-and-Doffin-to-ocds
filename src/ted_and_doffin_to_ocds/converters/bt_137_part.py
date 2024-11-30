@@ -1,6 +1,7 @@
 # converters/bt_137_part.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -29,7 +30,7 @@ def parse_part_identifier(xml_content):
     return None
 
 
-def merge_part_identifier(release_json, part_data):
+def merge_part_identifier(release_json, part_data) -> None:
     if not part_data:
         logger.warning("No part identifier data to merge")
         return

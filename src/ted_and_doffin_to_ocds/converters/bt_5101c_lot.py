@@ -71,7 +71,7 @@ def parse_lot_place_performance_streetline2(xml_content):
 def merge_lot_place_performance_streetline2(
     release_json,
     lot_place_performance_streetline2_data,
-):
+) -> None:
     if not lot_place_performance_streetline2_data:
         return
 

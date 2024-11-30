@@ -1,6 +1,7 @@
 # converters/bt_506_organization_company.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -39,7 +40,7 @@ def parse_organization_email(xml_content):
     return result if result["parties"] else None
 
 
-def merge_organization_email(release_json, organization_email_data):
+def merge_organization_email(release_json, organization_email_data) -> None:
     if not organization_email_data:
         logger.info("No organization email data to merge")
         return

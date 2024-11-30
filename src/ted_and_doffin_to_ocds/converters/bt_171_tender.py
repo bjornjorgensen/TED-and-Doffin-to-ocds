@@ -1,6 +1,7 @@
 # converters/bt_171_Tender.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -48,7 +49,7 @@ def parse_tender_rank(xml_content):
     return result if result["bids"]["details"] else None
 
 
-def merge_tender_rank(release_json, tender_rank_data):
+def merge_tender_rank(release_json, tender_rank_data) -> None:
     if not tender_rank_data:
         logger.warning("No Tender Rank data to merge")
         return

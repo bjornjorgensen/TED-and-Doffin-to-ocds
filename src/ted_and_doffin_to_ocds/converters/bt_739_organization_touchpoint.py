@@ -1,6 +1,7 @@
 # converters/bt_739_organization_touchpoint.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -63,7 +64,7 @@ def parse_touchpoint_contact_fax(xml_content):
     return result if result["parties"] else None
 
 
-def merge_touchpoint_contact_fax(release_json, touchpoint_fax_data):
+def merge_touchpoint_contact_fax(release_json, touchpoint_fax_data) -> None:
     """
     Merge the parsed touchpoint contact fax number into the main OCDS release JSON.
 

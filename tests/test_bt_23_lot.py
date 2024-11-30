@@ -1,17 +1,18 @@
 # tests/test_bt_23_Lot.py
-from pathlib import Path
-import pytest
 import sys
+from pathlib import Path
+
+import pytest
 
 # Add the parent directory to sys.path to import the converter
 sys.path.append(str(Path(__file__).parent.parent))
 from ted_and_doffin_to_ocds.converters.bt_23_lot import (
-    parse_main_nature,
     merge_main_nature,
+    parse_main_nature,
 )
 
 
-def test_parse_main_nature_works():
+def test_parse_main_nature_works() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -29,7 +30,7 @@ def test_parse_main_nature_works():
     }
 
 
-def test_parse_main_nature_services():
+def test_parse_main_nature_services() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -47,7 +48,7 @@ def test_parse_main_nature_services():
     }
 
 
-def test_parse_main_nature_supplies():
+def test_parse_main_nature_supplies() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -65,7 +66,7 @@ def test_parse_main_nature_supplies():
     }
 
 
-def test_parse_main_nature_multiple_lots():
+def test_parse_main_nature_multiple_lots() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -94,7 +95,7 @@ def test_parse_main_nature_multiple_lots():
     }
 
 
-def test_parse_main_nature_no_lots():
+def test_parse_main_nature_no_lots() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -104,7 +105,7 @@ def test_parse_main_nature_no_lots():
     assert result is None
 
 
-def test_merge_main_nature():
+def test_merge_main_nature() -> None:
     release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}
     main_nature_data = {
         "tender": {
@@ -129,7 +130,7 @@ def test_merge_main_nature():
     }
 
 
-def test_merge_main_nature_no_data():
+def test_merge_main_nature_no_data() -> None:
     release_json = {"tender": {"lots": []}}
     merge_main_nature(release_json, None)
     assert release_json == {"tender": {"lots": []}}

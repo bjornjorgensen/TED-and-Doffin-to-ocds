@@ -1,6 +1,7 @@
 # converters/bt_14_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -49,7 +50,7 @@ def parse_lot_documents_restricted(xml_content):
     return result if result["tender"]["documents"] else None
 
 
-def merge_lot_documents_restricted(release_json, lot_documents_restricted_data):
+def merge_lot_documents_restricted(release_json, lot_documents_restricted_data) -> None:
     if not lot_documents_restricted_data:
         logger.warning("No lot documents restricted data to merge")
         return

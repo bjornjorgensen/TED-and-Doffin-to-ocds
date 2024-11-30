@@ -1,17 +1,18 @@
 # tests/test_bt_540_lot.py
-from pathlib import Path
-import pytest
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 from ted_and_doffin_to_ocds.converters.bt_540_lot import (
-    parse_award_criterion_description,
     merge_award_criterion_description,
+    parse_award_criterion_description,
 )
 
 
@@ -35,7 +36,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_parse_award_criterion_description():
+def test_parse_award_criterion_description() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -72,7 +73,7 @@ def test_parse_award_criterion_description():
     )
 
 
-def test_merge_award_criterion_description():
+def test_merge_award_criterion_description() -> None:
     release_json = {
         "tender": {
             "lots": [
@@ -128,7 +129,7 @@ def test_merge_award_criterion_description():
     )
 
 
-def test_bt_540_lot_integration(tmp_path, setup_logging, temp_output_dir):
+def test_bt_540_lot_integration(tmp_path, setup_logging, temp_output_dir) -> None:
     logger = setup_logging
 
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>

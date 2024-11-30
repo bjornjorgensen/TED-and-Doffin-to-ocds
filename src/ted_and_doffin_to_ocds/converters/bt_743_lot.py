@@ -1,6 +1,7 @@
 # converters/bt_743_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -57,7 +58,7 @@ def parse_electronic_invoicing(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_electronic_invoicing(release_json, electronic_invoicing_data):
+def merge_electronic_invoicing(release_json, electronic_invoicing_data) -> None:
     """
     Merge the parsed electronic invoicing policy data into the main OCDS release JSON.
 

@@ -1,7 +1,8 @@
 # converters/opt_301_lotresult_financing.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +34,7 @@ def parse_financing_party(xml_content):
     return result if result["parties"] else None
 
 
-def merge_financing_party(release_json, financing_party_data):
+def merge_financing_party(release_json, financing_party_data) -> None:
     if not financing_party_data:
         logger.info("No Financing Party (ID reference) data to merge")
         return

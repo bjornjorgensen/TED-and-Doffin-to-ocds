@@ -1,7 +1,8 @@
 # converters/opt_301_lot_tenderreceipt.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +31,7 @@ def parse_tender_recipient(xml_content):
     return result if result["parties"] else None
 
 
-def merge_tender_recipient(release_json, tender_recipient_data):
+def merge_tender_recipient(release_json, tender_recipient_data) -> None:
     if not tender_recipient_data:
         logger.info("No Tender Recipient Technical Identifier Reference data to merge")
         return

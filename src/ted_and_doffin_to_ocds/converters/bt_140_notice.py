@@ -1,6 +1,7 @@
 # converters/bt_140_notice.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -99,7 +100,7 @@ def parse_change_reason_code(xml_content):
     )
 
 
-def merge_change_reason_code(release_json, change_reason_code_data):
+def merge_change_reason_code(release_json, change_reason_code_data) -> None:
     if not change_reason_code_data:
         logger.warning("No change reason code data to merge")
         return

@@ -1,6 +1,7 @@
 # converters/bt_195_bt_09_procedure.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -60,7 +61,7 @@ def bt_195_parse_unpublished_identifier_bt_09_procedure(xml_content):
 def bt_195_merge_unpublished_identifier_bt_09_procedure(
     release_json,
     unpublished_identifier_data,
-):
+) -> None:
     """
     Merge the parsed unpublished identifier data into the main OCDS release JSON.
 

@@ -1,6 +1,7 @@
 # converters/bt_196_bt_773_Tender.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -60,7 +61,7 @@ def parse_bt196_bt773_tender_unpublished_justification(xml_content):
 def merge_bt196_bt773_tender_unpublished_justification(
     release_json,
     unpublished_justification_data,
-):
+) -> None:
     """
     Merge the parsed unpublished justification data into the main OCDS release JSON.
 

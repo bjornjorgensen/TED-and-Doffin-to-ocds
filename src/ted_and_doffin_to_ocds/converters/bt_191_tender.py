@@ -1,7 +1,8 @@
 # converters/bt_191_Tender.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -396,7 +397,7 @@ def parse_country_origin(xml_content):
     return result if result["bids"]["details"] else None
 
 
-def merge_country_origin(release_json, country_origin_data):
+def merge_country_origin(release_json, country_origin_data) -> None:
     if not country_origin_data:
         logger.warning("No Country Origin data to merge")
         return

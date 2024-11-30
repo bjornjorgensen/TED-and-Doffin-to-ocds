@@ -1,19 +1,20 @@
+import argparse
 import json
 import logging
-from pathlib import Path
-import argparse
-from typing import Any, Final
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
+from typing import Any, Final
+
 from tqdm import tqdm
 
+from ted_and_doffin_to_ocds.processors.bt_processors import process_bt_sections
 from ted_and_doffin_to_ocds.utils.common_operations import (
     NoticeProcessor,
-    remove_empty_elements,
     remove_empty_dicts,
+    remove_empty_elements,
 )
-from ted_and_doffin_to_ocds.utils.file_processor import NoticeFileProcessor
-from ted_and_doffin_to_ocds.processors.bt_processors import process_bt_sections
 from ted_and_doffin_to_ocds.utils.config import Config
+from ted_and_doffin_to_ocds.utils.file_processor import NoticeFileProcessor
 
 
 class NoticeConverter:
@@ -22,7 +23,7 @@ class NoticeConverter:
     MAX_WORKERS: Final[int] = 4
     CHUNK_SIZE: Final[int] = 10  # Reduced chunk size for better progress updates
 
-    def __init__(self, config: Config):
+    def __init__(self, config: Config) -> None:
         self.config = config
         self.logger = logging.getLogger(__name__)
         self.processor = NoticeProcessor(

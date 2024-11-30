@@ -1,7 +1,8 @@
 # converters/bt_124_Tool_Atypical_URL.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -49,7 +50,7 @@ def parse_tool_atypical_url(xml_content):
     return result if (result["lots"] or result["tender"]) else None
 
 
-def merge_tool_atypical_url(release_json, atypical_url_data):
+def merge_tool_atypical_url(release_json, atypical_url_data) -> None:
     if not atypical_url_data:
         logger.warning("No Tool Atypical URL data to merge")
         return

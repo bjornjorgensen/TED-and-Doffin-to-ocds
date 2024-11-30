@@ -1,18 +1,20 @@
 # tests/test_bt_92_Lot.py
-from pathlib import Path
-import pytest
-from ted_and_doffin_to_ocds.converters.bt_92_lot import (
-    parse_electronic_ordering,
-    merge_electronic_ordering,
-)
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
+
+from ted_and_doffin_to_ocds.converters.bt_92_lot import (
+    merge_electronic_ordering,
+    parse_electronic_ordering,
+)
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 
 @pytest.fixture(scope="module")
@@ -35,7 +37,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_parse_electronic_ordering():
+def test_parse_electronic_ordering() -> None:
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -61,7 +63,7 @@ def test_parse_electronic_ordering():
     assert result["tender"]["lots"][0]["contractTerms"]["hasElectronicOrdering"] is True
 
 
-def test_merge_electronic_ordering():
+def test_merge_electronic_ordering() -> None:
     release_json = {"tender": {"lots": [{"id": "LOT-0001", "title": "Existing Lot"}]}}
 
     electronic_ordering_data = {
@@ -83,7 +85,7 @@ def test_merge_electronic_ordering():
 
 def test_bt_92_lot_electronic_ordering_integration(
     tmp_path, setup_logging, temp_output_dir
-):
+) -> None:
     logger = setup_logging
 
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>

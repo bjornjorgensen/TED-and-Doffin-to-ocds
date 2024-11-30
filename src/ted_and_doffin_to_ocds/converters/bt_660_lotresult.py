@@ -1,6 +1,7 @@
 # converters/bt_660_LotResult.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -72,7 +73,9 @@ def parse_framework_reestimated_value(xml_content):
     return result if result["awards"] else None
 
 
-def merge_framework_reestimated_value(release_json, framework_reestimated_value_data):
+def merge_framework_reestimated_value(
+    release_json, framework_reestimated_value_data
+) -> None:
     """
     Merge the parsed framework re-estimated value data into the main OCDS release JSON.
 

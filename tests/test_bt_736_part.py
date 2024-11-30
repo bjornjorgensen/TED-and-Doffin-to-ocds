@@ -1,14 +1,15 @@
 # tests/test_bt_736_part.py
-from pathlib import Path
-import pytest
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 
 @pytest.fixture(scope="module")
@@ -31,7 +32,9 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_736_part_reserved_execution_yes(tmp_path, setup_logging, temp_output_dir):
+def test_bt_736_part_reserved_execution_yes(
+    tmp_path, setup_logging, temp_output_dir
+) -> None:
     """Test when reserved execution is set to 'yes' for a part:
     - Should set tender.contractTerms.reservedExecution to true
     """
@@ -63,7 +66,9 @@ def test_bt_736_part_reserved_execution_yes(tmp_path, setup_logging, temp_output
     assert result["tender"]["contractTerms"]["reservedExecution"] is True
 
 
-def test_bt_736_part_reserved_execution_no(tmp_path, setup_logging, temp_output_dir):
+def test_bt_736_part_reserved_execution_no(
+    tmp_path, setup_logging, temp_output_dir
+) -> None:
     """Test when reserved execution is set to 'no' for a part:
     - Should not include reservedExecution in contractTerms
     """

@@ -1,6 +1,7 @@
 # converters/bt_16_organization_company.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -45,7 +46,7 @@ def parse_organization_part_name(xml_content):
     return result if result["parties"] else None
 
 
-def merge_organization_part_name(release_json, organization_part_name_data):
+def merge_organization_part_name(release_json, organization_part_name_data) -> None:
     if not organization_part_name_data:
         logger.info("No organization part name data to merge")
         return

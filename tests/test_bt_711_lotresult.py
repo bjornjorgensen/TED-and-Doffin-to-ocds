@@ -1,10 +1,10 @@
 from ted_and_doffin_to_ocds.converters.bt_711_lotresult import (
-    parse_tender_value_highest,
     merge_tender_value_highest,
+    parse_tender_value_highest,
 )
 
 
-def test_parse_tender_value_highest():
+def test_parse_tender_value_highest() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -32,7 +32,7 @@ def test_parse_tender_value_highest():
     assert stat["relatedLots"] == ["LOT-0001"]
 
 
-def test_merge_tender_value_highest():
+def test_merge_tender_value_highest() -> None:
     release_json = {"bids": {"statistics": []}}
     tender_value_highest_data = {
         "bids": {

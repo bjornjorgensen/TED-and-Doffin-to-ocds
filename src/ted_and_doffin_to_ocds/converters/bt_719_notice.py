@@ -1,7 +1,9 @@
 # converters/bt_719_notice.py
 
 import logging
+
 from lxml import etree
+
 from ted_and_doffin_to_ocds.utils.date_utils import convert_to_iso_format
 
 logger = logging.getLogger(__name__)
@@ -74,7 +76,7 @@ def parse_procurement_documents_change_date(xml_content):
     return result if result["tender"]["documents"] else None
 
 
-def merge_procurement_documents_change_date(release_json, change_date_data):
+def merge_procurement_documents_change_date(release_json, change_date_data) -> None:
     """
     Merge the parsed procurement documents change date data into the main OCDS release JSON.
 

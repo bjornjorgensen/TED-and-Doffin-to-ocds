@@ -1,6 +1,7 @@
 # converters/bt_1351_procedure.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -30,7 +31,7 @@ def parse_accelerated_procedure_justification(xml_content):
     return None
 
 
-def merge_accelerated_procedure_justification(release_json, accelerated_data):
+def merge_accelerated_procedure_justification(release_json, accelerated_data) -> None:
     if not accelerated_data:
         logger.warning("No accelerated procedure justification data to merge")
         return

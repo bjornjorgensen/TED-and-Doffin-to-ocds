@@ -1,6 +1,7 @@
 # converters/OPP_032_Tender.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -59,7 +60,7 @@ def parse_revenues_allocation(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_revenues_allocation(release_json, revenues_allocation_data):
+def merge_revenues_allocation(release_json, revenues_allocation_data) -> None:
     if not revenues_allocation_data:
         logger.warning("No revenues allocation data to merge")
         return

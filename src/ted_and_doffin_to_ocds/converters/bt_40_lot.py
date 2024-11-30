@@ -1,6 +1,7 @@
 # converters/bt_40_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -46,7 +47,7 @@ def parse_lot_selection_criteria_second_stage(xml_content):
 def merge_lot_selection_criteria_second_stage(
     release_json,
     lot_selection_criteria_data,
-):
+) -> None:
     if not lot_selection_criteria_data:
         logger.warning("No lot selection criteria second stage data to merge")
         return

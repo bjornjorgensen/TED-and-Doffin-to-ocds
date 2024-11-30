@@ -1,12 +1,12 @@
 # tests/test_opt_170_tenderer_leader.py
 
 from ted_and_doffin_to_ocds.converters.opt_170_tenderer_leader import (
-    parse_tendering_party_leader,
     merge_tendering_party_leader,
+    parse_tendering_party_leader,
 )
 
 
-def test_parse_tendering_party_leader():
+def test_parse_tendering_party_leader() -> None:
     xml_content = """
     <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
@@ -44,7 +44,7 @@ def test_parse_tendering_party_leader():
     assert set(party["roles"]) == {"tenderer", "leadTenderer"}
 
 
-def test_merge_tendering_party_leader():
+def test_merge_tendering_party_leader() -> None:
     release_json = {"parties": []}
     leader_data = {
         "parties": [{"id": "ORG-0001", "roles": ["tenderer", "leadTenderer"]}]
@@ -61,7 +61,7 @@ def test_merge_tendering_party_leader():
     assert set(party["roles"]) == {"tenderer", "leadTenderer"}
 
 
-def test_merge_tendering_party_leader_existing_party():
+def test_merge_tendering_party_leader_existing_party() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "roles": ["supplier"]}]}
     leader_data = {
         "parties": [{"id": "ORG-0001", "roles": ["tenderer", "leadTenderer"]}]

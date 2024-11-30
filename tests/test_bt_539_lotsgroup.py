@@ -1,17 +1,18 @@
 # tests/test_bt_539_LotsGroup.py
-from pathlib import Path
-import pytest
 import json
-import sys
 import logging
+import sys
 import tempfile
+from pathlib import Path
+
+import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import main, configure_logging
+from src.ted_and_doffin_to_ocds.main import configure_logging, main
 from ted_and_doffin_to_ocds.converters.bt_539_lotsgroup import (
-    parse_award_criterion_type_lots_group,
     merge_award_criterion_type_lots_group,
+    parse_award_criterion_type_lots_group,
 )
 
 
@@ -35,7 +36,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_parse_award_criterion_type_lots_group():
+def test_parse_award_criterion_type_lots_group() -> None:
     xml_content = """
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -69,7 +70,7 @@ def test_parse_award_criterion_type_lots_group():
     assert lot_group["awardCriteria"]["criteria"][0]["type"] == "quality"
 
 
-def test_merge_award_criterion_type_lots_group():
+def test_merge_award_criterion_type_lots_group() -> None:
     release_json = {
         "tender": {
             "lotGroups": [
@@ -106,7 +107,9 @@ def test_merge_award_criterion_type_lots_group():
     assert lot_group2["awardCriteria"]["criteria"][0]["type"] == "cost"
 
 
-def test_bt_539_lots_group_integration(tmp_path, setup_logging, temp_output_dir):
+def test_bt_539_lots_group_integration(
+    tmp_path, setup_logging, temp_output_dir
+) -> None:
     logger = setup_logging
 
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>

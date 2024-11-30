@@ -1,7 +1,8 @@
 # converters/bt_5131_part.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -38,7 +39,9 @@ def parse_place_performance_city_part(xml_content):
     return result if result["tender"]["deliveryAddresses"] else None
 
 
-def merge_place_performance_city_part(release_json, place_performance_city_part_data):
+def merge_place_performance_city_part(
+    release_json, place_performance_city_part_data
+) -> None:
     if not place_performance_city_part_data:
         logger.warning("No Place Performance City part data to merge")
         return

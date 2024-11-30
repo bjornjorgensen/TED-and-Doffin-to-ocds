@@ -1,7 +1,8 @@
 # converters/opt_300_procedure_buyer.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +29,7 @@ def parse_buyer_technical_identifier(xml_content):
     return result if result["parties"] else None
 
 
-def merge_buyer_technical_identifier(release_json, buyer_data):
+def merge_buyer_technical_identifier(release_json, buyer_data) -> None:
     if not buyer_data:
         return
 

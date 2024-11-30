@@ -1,7 +1,8 @@
 # converters/bt_5131_Lot.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -44,7 +45,7 @@ def parse_place_performance_city(xml_content):
     return result if result["tender"]["items"] else None
 
 
-def merge_place_performance_city(release_json, place_performance_city_data):
+def merge_place_performance_city(release_json, place_performance_city_data) -> None:
     if not place_performance_city_data:
         logger.warning("No Place Performance City data to merge")
         return

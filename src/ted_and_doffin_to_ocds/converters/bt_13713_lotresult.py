@@ -1,6 +1,7 @@
 # converters/bt_13713_LotResult.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -35,7 +36,7 @@ def parse_lot_result_identifier(xml_content):
     return None
 
 
-def merge_lot_result_identifier(release_json, lot_result_data):
+def merge_lot_result_identifier(release_json, lot_result_data) -> None:
     if not lot_result_data:
         logger.warning("No lot result identifier data to merge")
         return

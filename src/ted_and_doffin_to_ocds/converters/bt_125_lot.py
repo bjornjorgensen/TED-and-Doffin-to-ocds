@@ -1,7 +1,8 @@
 # converters/bt_125_Lot.py
 
-from lxml import etree
 import logging
+
+from lxml import etree
 
 logger = logging.getLogger(__name__)
 
@@ -56,7 +57,9 @@ def parse_previous_planning_identifier_lot(xml_content):
     return result if result["relatedProcesses"] else None
 
 
-def merge_previous_planning_identifier_lot(release_json, previous_planning_data):
+def merge_previous_planning_identifier_lot(
+    release_json, previous_planning_data
+) -> None:
     if not previous_planning_data:
         logger.warning("No Previous Planning Identifier (Lot) data to merge")
         return

@@ -1,13 +1,13 @@
 # tests/test_bt_65_Lot_Subcontracting_Obligation.py
 
 from ted_and_doffin_to_ocds.converters.bt_65_lot_subcontracting_obligation import (
-    parse_subcontracting_obligation,
-    merge_subcontracting_obligation,
     SUBCONTRACTING_OBLIGATION_MAPPING,
+    merge_subcontracting_obligation,
+    parse_subcontracting_obligation,
 )
 
 
-def test_parse_subcontracting_obligation():
+def test_parse_subcontracting_obligation() -> None:
     xml_content = b"""
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -34,7 +34,7 @@ def test_parse_subcontracting_obligation():
     )
 
 
-def test_parse_subcontracting_obligation_none():
+def test_parse_subcontracting_obligation_none() -> None:
     xml_content = b"""
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -54,7 +54,7 @@ def test_parse_subcontracting_obligation_none():
     assert result is None
 
 
-def test_parse_subcontracting_obligation_no_data():
+def test_parse_subcontracting_obligation_no_data() -> None:
     xml_content = b"""
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
@@ -69,7 +69,7 @@ def test_parse_subcontracting_obligation_no_data():
     assert result is None
 
 
-def test_merge_subcontracting_obligation():
+def test_merge_subcontracting_obligation() -> None:
     existing_release = {
         "tender": {
             "lots": [
@@ -99,7 +99,7 @@ def test_merge_subcontracting_obligation():
     assert lot["subcontractingTerms"]["description"] == "New description"
 
 
-def test_merge_subcontracting_obligation_new_lot():
+def test_merge_subcontracting_obligation_new_lot() -> None:
     existing_release = {"tender": {"lots": []}}
 
     new_data = {

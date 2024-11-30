@@ -1,6 +1,7 @@
 # converters/bt_727_Lot.py
 
 import logging
+
 from lxml import etree
 
 logger = logging.getLogger(__name__)
@@ -65,7 +66,7 @@ def parse_lot_place_performance(xml_content):
     return result if result["tender"]["items"] else None
 
 
-def merge_lot_place_performance(release_json, lot_place_performance_data):
+def merge_lot_place_performance(release_json, lot_place_performance_data) -> None:
     """
     Merge the parsed place of performance data for lots into the main OCDS release JSON.
 
