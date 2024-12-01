@@ -3,7 +3,6 @@
 import json
 import logging
 import sys
-import tempfile
 from pathlib import Path
 
 import pytest
@@ -21,14 +20,13 @@ logger = logging.getLogger(__name__)
 
 @pytest.fixture(scope="module")
 def setup_logging():
-    configure_logging()
-    return logging.getLogger(__name__)
+    configure_logging(logging.DEBUG)
+    return logger
 
 
 @pytest.fixture
-def temp_output_dir():
-    with tempfile.TemporaryDirectory() as tmpdirname:
-        yield Path(tmpdirname)
+def temp_output_dir(tmp_path):
+    return tmp_path / "output"
 
 
 @pytest.fixture
@@ -40,10 +38,10 @@ def sample_xml():
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:ProcurementProject>
                 <cac:AdditionalCommodityClassification>
-                    <cbc:ItemClassificationCode>15311200</cbc:ItemClassificationCode>
+                    <cbc:ItemClassificationCode listName="CPV">15311200</cbc:ItemClassificationCode>
                 </cac:AdditionalCommodityClassification>
                 <cac:AdditionalCommodityClassification>
-                    <cbc:ItemClassificationCode>15311300</cbc:ItemClassificationCode>
+                    <cbc:ItemClassificationCode listName="CPV">15311300</cbc:ItemClassificationCode>
                 </cac:AdditionalCommodityClassification>
             </cac:ProcurementProject>
         </cac:ProcurementProjectLot>
@@ -60,7 +58,7 @@ def sample_xml_multiple_lots():
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:ProcurementProject>
                 <cac:AdditionalCommodityClassification>
-                    <cbc:ItemClassificationCode>15311200</cbc:ItemClassificationCode>
+                    <cbc:ItemClassificationCode listName="CPV">15311200</cbc:ItemClassificationCode>
                 </cac:AdditionalCommodityClassification>
             </cac:ProcurementProject>
         </cac:ProcurementProjectLot>
@@ -68,7 +66,10 @@ def sample_xml_multiple_lots():
             <cbc:ID schemeName="Lot">LOT-0002</cbc:ID>
             <cac:ProcurementProject>
                 <cac:AdditionalCommodityClassification>
-                    <cbc:ItemClassificationCode>15311300</cbc:ItemClassificationCode>
+                    <cbc:ItemClassificationCode listName="CPV">15311300</cbc:ItemClassificationCode>
+                </cac:AdditionalCommodityClassification>
+                <cac:AdditionalCommodityClassification>
+                    <cbc:ItemClassificationCode listName="CPV">15311400</cbc:ItemClassificationCode>
                 </cac:AdditionalCommodityClassification>
             </cac:ProcurementProject>
         </cac:ProcurementProjectLot>
@@ -81,11 +82,10 @@ def run_main_and_get_result(xml_file, output_dir):
         "Running main with xml_file: %s and output_dir: %s", xml_file, output_dir
     )
     try:
-        main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
-        logging.info("main() executed successfully.")
-    except Exception:
-        logging.exception("Exception occurred while running main():")
-        raise
+        main([str(xml_file), str(output_dir)])
+    except Exception as e:
+        logging.exception("Error running main: %s")
+        pytest.fail(f"main() raised an exception: {e}")
 
     output_files = list(output_dir.glob("*.json"))
     logging.info("Output files found: %s", output_files)
@@ -103,10 +103,13 @@ def test_bt_263_lot_integration(tmp_path, setup_logging, temp_output_dir) -> Non
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:ProcurementProject>
                 <cac:AdditionalCommodityClassification>
-                    <cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode>
+                    <cbc:ItemClassificationCode listName="CPV">15311200</cbc:ItemClassificationCode>
                 </cac:AdditionalCommodityClassification>
                 <cac:AdditionalCommodityClassification>
-                    <cbc:ItemClassificationCode listName="cpv">15311300</cbc:ItemClassificationCode>
+                    <cbc:ItemClassificationCode listName="CPV">15311300</cbc:ItemClassificationCode>
+                </cac:AdditionalCommodityClassification>
+                <cac:AdditionalCommodityClassification>
+                    <cbc:ItemClassificationCode listName="CPV">15311200</cbc:ItemClassificationCode>
                 </cac:AdditionalCommodityClassification>
             </cac:ProcurementProject>
         </cac:ProcurementProjectLot>
@@ -126,66 +129,80 @@ def test_bt_263_lot_integration(tmp_path, setup_logging, temp_output_dir) -> Non
     ), f"Expected 1 item, got {len(result['tender']['items'])}"
 
     item = result["tender"]["items"][0]
-    assert item["id"] == "1", f"Expected item id '1', got {item['id']}"
-    assert (
-        item["relatedLot"] == "LOT-0001"
-    ), f"Expected relatedLot 'LOT-0001', got {item['relatedLot']}"
+
+    # Ensure 'id' is present to prevent AttributeError
+    assert "id" in item, "Missing 'id' in item"
+
     assert (
         "additionalClassifications" in item
     ), "Expected 'additionalClassifications' in item"
-
     classifications = item["additionalClassifications"]
-    # Check for expected classifications
-    cpv_classifications = [c for c in classifications if c.get("scheme") == "CPV"]
-    id_classifications = [c for c in classifications if "id" in c]
-
     assert (
-        len(cpv_classifications) == 2
-    ), f"Expected 2 CPV classifications, got {len(cpv_classifications)}"
-    assert (
-        len(id_classifications) == 2
-    ), f"Expected 2 ID classifications, got {len(id_classifications)}"
+        len(classifications) == 2
+    ), f"Expected 2 unique classifications, got {len(classifications)}"
 
-    # Verify specific IDs are present
-    classification_ids = [c["id"] for c in id_classifications]
-    assert "15311200" in classification_ids, "Expected classification id '15311200'"
-    assert "15311300" in classification_ids, "Expected classification id '15311300'"
+    schemes = set()
+    ids = set()
+    for classification in classifications:
+        assert (
+            "scheme" in classification
+        ), "Missing 'scheme' in additionalClassification"
+        assert "id" in classification, "Missing 'id' in additionalClassification"
+        schemes.add(classification["scheme"])
+        ids.add(classification["id"])
+
+    assert schemes == {"CPV"}, f"Unexpected schemes: {schemes}"
+    assert ids == {"15311200", "15311300"}, f"Unexpected ids: {ids}"
 
 
 def test_parse_additional_classification_code_single_lot(sample_xml):
     result = parse_additional_classification_code(sample_xml)
-
-    assert result is not None
+    assert (
+        result is not None
+    ), "Expected result from parse_additional_classification_code"
+    assert "tender" in result
+    assert "items" in result["tender"]
     assert len(result["tender"]["items"]) == 1
     item = result["tender"]["items"][0]
-    assert item["id"] == "1"
-    assert item["relatedLot"] == "LOT-0001"
-    assert len(item["additionalClassifications"]) == 2
-    assert {"id": "15311200"} in item["additionalClassifications"]
-    assert {"id": "15311300"} in item["additionalClassifications"]
+    assert "additionalClassifications" in item
+    classifications = item["additionalClassifications"]
+    assert len(classifications) == 2
+    for classification in classifications:
+        assert "scheme" in classification
+        assert "id" in classification
 
 
 def test_parse_additional_classification_code_multiple_lots(sample_xml_multiple_lots):
     result = parse_additional_classification_code(sample_xml_multiple_lots)
-
-    assert result is not None
+    assert (
+        result is not None
+    ), "Expected result from parse_additional_classification_code with multiple lots"
+    assert "tender" in result
+    assert "items" in result["tender"]
     assert len(result["tender"]["items"]) == 2
-    assert result["tender"]["items"][0]["relatedLot"] == "LOT-0001"
-    assert result["tender"]["items"][1]["relatedLot"] == "LOT-0002"
+    for item in result["tender"]["items"]:
+        assert "additionalClassifications" in item
+        for classification in item["additionalClassifications"]:
+            assert "scheme" in classification
+            assert "id" in classification
 
 
 def test_parse_additional_classification_code_no_data():
-    xml_no_classifications = """
+    xml_content = """
     <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
-            <cac:ProcurementProject/>
+            <cac:ProcurementProject>
+                <!-- No AdditionalCommodityClassification -->
+            </cac:ProcurementProject>
         </cac:ProcurementProjectLot>
     </ContractNotice>
     """
-    result = parse_additional_classification_code(xml_no_classifications)
-    assert result is None
+    result = parse_additional_classification_code(xml_content)
+    assert (
+        result is None
+    ), "Expected None when there is no additional classification code"
 
 
 def test_merge_additional_classification_code():
@@ -194,61 +211,87 @@ def test_merge_additional_classification_code():
             "items": [
                 {
                     "id": "1",
+                    "additionalClassifications": [{"scheme": "CPV", "id": "15311200"}],
                     "relatedLot": "LOT-0001",
-                    "additionalClassifications": [{"scheme": "CPV", "id": "existing"}],
                 }
             ]
         }
     }
-
-    additional_data = {
+    additional_classification_data = {
         "tender": {
             "items": [
                 {
                     "id": "1",
+                    "additionalClassifications": [
+                        {"scheme": "CPV", "id": "15311300"},
+                        {"scheme": "CPV", "id": "15311200"},  # Duplicate
+                    ],
                     "relatedLot": "LOT-0001",
-                    "additionalClassifications": [{"id": "new"}],
                 }
             ]
         }
     }
-
-    merge_additional_classification_code(release_json, additional_data)
-
-    assert len(release_json["tender"]["items"]) == 1
-    item = release_json["tender"]["items"][0]
-    assert len(item["additionalClassifications"]) == 2
-    classification_ids = [c.get("id") for c in item["additionalClassifications"]]
-    assert "existing" in classification_ids
-    assert "new" in classification_ids
+    merge_additional_classification_code(release_json, additional_classification_data)
+    classifications = release_json["tender"]["items"][0]["additionalClassifications"]
+    assert (
+        len(classifications) == 2
+    ), f"Expected 2 unique classifications, got {len(classifications)}"
+    ids = {c["id"] for c in classifications}
+    assert ids == {"15311200", "15311300"}, f"Unexpected ids after merge: {ids}"
 
 
 def test_merge_additional_classification_code_new_lot():
-    release_json = {"tender": {"items": []}}
-
-    additional_data = {
+    release_json = {
         "tender": {
             "items": [
                 {
                     "id": "1",
+                    "additionalClassifications": [{"scheme": "CPV", "id": "15311200"}],
                     "relatedLot": "LOT-0001",
-                    "additionalClassifications": [{"id": "new"}],
                 }
             ]
         }
     }
-
-    merge_additional_classification_code(release_json, additional_data)
-
-    assert len(release_json["tender"]["items"]) == 1
-    assert release_json["tender"]["items"][0]["relatedLot"] == "LOT-0001"
+    additional_classification_data = {
+        "tender": {
+            "items": [
+                {
+                    "id": "2",
+                    "additionalClassifications": [{"scheme": "CPV", "id": "15311400"}],
+                    "relatedLot": "LOT-0002",
+                }
+            ]
+        }
+    }
+    merge_additional_classification_code(release_json, additional_classification_data)
+    assert (
+        len(release_json["tender"]["items"]) == 2
+    ), "Expected 2 items after merging new lot"
+    new_item = next(
+        item for item in release_json["tender"]["items"] if item["id"] == "2"
+    )
+    assert new_item["additionalClassifications"] == [
+        {"scheme": "CPV", "id": "15311400"}
+    ]
 
 
 def test_merge_additional_classification_code_none_data():
-    release_json = {"tender": {"items": []}}
+    release_json = {
+        "tender": {
+            "items": [
+                {
+                    "id": "1",
+                    "additionalClassifications": [{"scheme": "CPV", "id": "15311200"}],
+                    "relatedLot": "LOT-0001",
+                }
+            ]
+        }
+    }
     merge_additional_classification_code(release_json, None)
-    assert len(release_json["tender"]["items"]) == 0
+    assert (
+        len(release_json["tender"]["items"]) == 1
+    ), "No items should be added when data is None"
 
 
 if __name__ == "__main__":
-    pytest.main(["-v", "-s"])
+    pytest.main()

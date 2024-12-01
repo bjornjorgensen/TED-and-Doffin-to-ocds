@@ -54,6 +54,7 @@ def test_parse_classification_type_procedure(sample_xml):
     item = result["tender"]["items"][0]
     assert item["id"] == "1"
     assert len(item["additionalClassifications"]) == 2
+    assert all("scheme" in c and "id" in c for c in item["additionalClassifications"])
     assert all(c["scheme"] == "CPV" for c in item["additionalClassifications"])
 
 
@@ -86,7 +87,12 @@ def test_merge_classification_type_procedure():
 
     classification_data = {
         "tender": {
-            "items": [{"id": "1", "additionalClassifications": [{"scheme": "CPV"}]}]
+            "items": [
+                {
+                    "id": "1",
+                    "additionalClassifications": [{"scheme": "CPV", "id": "CPV"}],
+                }
+            ]
         }
     }
 
@@ -95,8 +101,10 @@ def test_merge_classification_type_procedure():
     item = release_json["tender"]["items"][0]
     assert len(item["additionalClassifications"]) == 2
     schemes = {c["scheme"] for c in item["additionalClassifications"]}
+    ids = {c["id"] for c in item["additionalClassifications"]}
     assert "EXISTING" in schemes
     assert "CPV" in schemes
+    assert ids == {"123", "CPV"}, f"Unexpected ids: {ids}"
 
 
 def test_bt_26a_procedure_integration(tmp_path) -> None:
@@ -130,6 +138,7 @@ def test_bt_26a_procedure_integration(tmp_path) -> None:
 
     classifications = item["additionalClassifications"]
     assert any(c["scheme"] == "CPV" for c in classifications)
+    assert all("scheme" in c and "id" in c for c in classifications)
 
 
 if __name__ == "__main__":
