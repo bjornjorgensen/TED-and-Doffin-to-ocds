@@ -1,7 +1,7 @@
 {
   "id": "2023-696688",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-dd0121ce-1f54-4b4d-bbc0-eeff507da750",
+  "ocid": "ocds-abcd1234-a93c092d-e45b-4be1-b5a3-7de3410dd2fe",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -178,8 +178,8 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Trondheim"

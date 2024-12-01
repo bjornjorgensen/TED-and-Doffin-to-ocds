@@ -7,16 +7,43 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_buyer_review_complainants_code(xml_content):
+def parse_buyer_review_complainants_code(xml_content: str | bytes) -> dict | None:
     """
-    Parse the XML content to extract the buyer review complainants code for each lot.
+    Parse the XML content to extract the buyer review complainants code for each lot (BT-712(a)).
+
+    BT-712(a): Part of BT-712 which specifies the number of organisations that requested
+    the buyer to review any of its decisions. This part handles the review type code.
+    Maps to OCDS statistics array with measure "complainants".
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content (Union[str, bytes]): The XML content to parse.
 
     Returns:
-        dict: A dictionary containing the parsed buyer review complainants code data.
-        None: If no relevant data is found.
+        Optional[Dict]: A dictionary containing:
+            - statistics (list): List of statistics objects with structure:
+                {
+                    "id": str,           # Unique identifier for the statistic
+                    "measure": str,      # Always "complainants"
+                    "relatedLot": str    # ID of the lot this statistic relates to
+                }
+            Returns None if no relevant data is found.
+
+    Example:
+        >>> xml = '''
+        <NoticeResult>
+          <LotResult>
+            <AppealRequestsStatistics>
+              <StatisticsCode listName="review-type">complainants</StatisticsCode>
+            </AppealRequestsStatistics>
+            <TenderLot>
+              <ID>LOT-0001</ID>
+            </TenderLot>
+          </LotResult>
+        </NoticeResult>
+        '''
+        >>> result = parse_buyer_review_complainants_code(xml)
+        >>> print(result)
+        {'statistics': [{'id': '1', 'measure': 'complainants', 'relatedLot': 'LOT-0001'}]}
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -30,11 +57,11 @@ def parse_buyer_review_complainants_code(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    # Check if the relevant XPath exists
+    # XPath for BT-712(a): Review type code
     relevant_xpath = "//efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='review-type']"
     if not root.xpath(relevant_xpath, namespaces=namespaces):
         logger.info(
-            "No buyer review complainants code data found. Skipping parse_buyer_review_complainants_code."
+            "BT-712(a): No buyer review complainants code data found in the document."
         )
         return None
 
@@ -63,19 +90,33 @@ def parse_buyer_review_complainants_code(xml_content):
     return result if result["statistics"] else None
 
 
-def merge_buyer_review_complainants_code(release_json, complainants_code_data) -> None:
+def merge_buyer_review_complainants_code(
+    release_json: dict, complainants_code_data: dict | None
+) -> None:
     """
     Merge the parsed buyer review complainants code data into the main OCDS release JSON.
 
+    Updates the statistics array in the release JSON with complaint statistics.
+    If statistics for the same measure and lot already exist, they are updated;
+    otherwise, new statistics are appended.
+
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        complainants_code_data (dict): The parsed buyer review complainants code data to be merged.
+        release_json (Dict): The main OCDS release JSON to be updated.
+        complainants_code_data (Optional[Dict]): The parsed buyer review complainants
+            code data to be merged.
 
     Returns:
         None: The function updates the release_json in-place.
+
+    Example:
+        >>> release = {'statistics': []}
+        >>> data = {'statistics': [{'id': '1', 'measure': 'complainants'}]}
+        >>> merge_buyer_review_complainants_code(release, data)
+        >>> print(release)
+        {'statistics': [{'id': '1', 'measure': 'complainants'}]}
     """
     if not complainants_code_data:
-        logger.info("No buyer review complainants code data to merge")
+        logger.info("BT-712(a): No buyer review complainants code data to merge")
         return
 
     existing_statistics = release_json.setdefault("statistics", [])
@@ -98,6 +139,6 @@ def merge_buyer_review_complainants_code(release_json, complainants_code_data) -
             existing_statistics.append(new_statistic)
 
     logger.info(
-        "Merged buyer review complainants code data for %d lots",
+        "BT-712(a): Merged buyer review complainants code data for %d lots",
         len(complainants_code_data["statistics"]),
     )

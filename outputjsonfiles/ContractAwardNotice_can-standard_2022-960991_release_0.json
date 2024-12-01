@@ -1,7 +1,7 @@
 {
   "id": "2022-960991",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-094dfd44-337f-42ac-81a0-4007e56e7637",
+  "ocid": "ocds-abcd1234-2fb47ce7-ee38-4498-ae86-8c2195c3e083",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -153,6 +153,37 @@
           {
             "id": "ORG-0002"
           }
+        ]
+      }
+    ],
+    "statistics": [
+      {
+        "id": "1",
+        "value": 3,
+        "measure": "bids",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      },
+      {
+        "id": "2",
+        "measure": "smeBids",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      },
+      {
+        "id": "3",
+        "measure": "foreignBidsFromEU",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      },
+      {
+        "id": "4",
+        "measure": "electronicBids",
+        "relatedLots": [
+          "LOT-0000"
         ]
       }
     ]

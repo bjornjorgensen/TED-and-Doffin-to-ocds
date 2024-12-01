@@ -7,28 +7,46 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_received_submissions_count(xml_content):
+def parse_received_submissions_count(xml_content: str | bytes) -> dict | None:
     """
-    Parse the XML content to extract the received submissions count for each lot result.
+    Parse the XML content to extract the received submissions count for each lot (BT-759).
+
+    BT-759: Number of tenders or requests to participate received. Tenders including
+    variants or multiple tenders submitted (for one lot) by the same tenderer should
+    be counted as one tender.
+    Maps to OCDS bids.statistics array.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content (Union[str, bytes]): The XML content to parse.
 
     Returns:
-        dict: A dictionary containing the parsed data in the format:
-              {
-                  "bids": {
-                      "statistics": [
-                          {
-                              "id": "bids-LOT-0001",
-                              "value": int_value,
-                              "measure": "bids",
-                              "relatedLots": ["lot_id"]
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
+        Optional[Dict]: A dictionary containing:
+            - bids.statistics (list): List of statistics objects with structure:
+                {
+                    "id": str,           # Unique identifier for the statistic
+                    "value": int,        # Number of submissions received
+                    "measure": str,      # Always "bids"
+                    "relatedLots": list  # List containing the lot ID
+                }
+            Returns None if no relevant data is found.
+
+    Example:
+        >>> xml = '''
+        <NoticeResult>
+          <LotResult>
+            <ReceivedSubmissionsStatistics>
+              <StatisticsNumeric>12</StatisticsNumeric>
+            </ReceivedSubmissionsStatistics>
+            <TenderLot>
+              <ID>LOT-0001</ID>
+            </TenderLot>
+          </LotResult>
+        </NoticeResult>
+        '''
+        >>> result = parse_received_submissions_count(xml)
+        >>> print(result)
+        {'bids': {'statistics': [{'id': 'bids-LOT-0001', 'value': 12,
+                                'measure': 'bids', 'relatedLots': ['LOT-0001']}]}}
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -44,7 +62,7 @@ def parse_received_submissions_count(xml_content):
     result = {"bids": {"statistics": []}}
 
     lot_results = root.xpath(
-        "//efac:noticeResult/efac:LotResult",
+        "//efac:NoticeResult/efac:LotResult",  # Fixed capitalization
         namespaces=namespaces,
     )
     for lot_result in lot_results:
@@ -70,19 +88,33 @@ def parse_received_submissions_count(xml_content):
     return result if result["bids"]["statistics"] else None
 
 
-def merge_received_submissions_count(release_json, received_submissions_data) -> None:
+def merge_received_submissions_count(
+    release_json: dict, received_submissions_data: dict | None
+) -> None:
     """
     Merge the parsed received submissions count data into the main OCDS release JSON.
 
+    Updates the bids.statistics array in the release JSON with submission counts.
+    If statistics for the same measure and lot already exist, they are updated;
+    otherwise, new statistics are appended.
+
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        received_submissions_data (dict): The parsed received submissions count data to be merged.
+        release_json (Dict): The main OCDS release JSON to be updated.
+        received_submissions_data (Optional[Dict]): The parsed received submissions
+            count data to be merged, containing a 'bids.statistics' array.
 
     Returns:
         None: The function updates the release_json in-place.
+
+    Example:
+        >>> release = {'bids': {'statistics': []}}
+        >>> data = {'bids': {'statistics': [{'id': '1', 'value': 12, 'measure': 'bids'}]}}
+        >>> merge_received_submissions_count(release, data)
+        >>> print(release)
+        {'bids': {'statistics': [{'id': '1', 'value': 12, 'measure': 'bids'}]}}
     """
     if not received_submissions_data:
-        logger.warning("No received submissions count data to merge")
+        logger.warning("BT-759: No received submissions count data to merge")
         return
 
     bids = release_json.setdefault("bids", {})
@@ -108,6 +140,6 @@ def merge_received_submissions_count(release_json, received_submissions_data) ->
         stat["id"] = str(i)
 
     logger.info(
-        "Merged received submissions count data for %d lots",
+        "BT-759: Merged received submissions count data for %d lots",
         len(received_submissions_data["bids"]["statistics"]),
     )

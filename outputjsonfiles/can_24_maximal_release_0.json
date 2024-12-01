@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e060287a-8541-47aa-8681-2c315e9f47e9",
+  "ocid": "ocds-abcd1234-4b8a025a-d396-4429-b306-ca2616cb6602",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -145,8 +145,8 @@
       {
         "id": "GLO-0001",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "title": "Title ---",
         "description": "Description --- Additional information for GLO-0001 ProcurementProject ---",
@@ -319,8 +319,8 @@
         "id": "FiscalDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "publisher": {
           "id": "ORG-0002"
@@ -330,8 +330,8 @@
         "id": "EnvDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "publisher": {
           "id": "ORG-0003"
@@ -341,8 +341,8 @@
         "id": "EmplDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "publisher": {
           "id": "ORG-0004"
@@ -880,6 +880,88 @@
           {
             "id": "ORG-0009"
           }
+        ]
+      }
+    ],
+    "statistics": [
+      {
+        "id": "1",
+        "measure": "lowestValidBidValue",
+        "value": {
+          "amount": 999999.99,
+          "currency": "EUR"
+        },
+        "relatedLots": [
+          "LOT-0002"
+        ]
+      },
+      {
+        "id": "2",
+        "measure": "highestValidBidValue",
+        "value": {
+          "amount": 9999999.99,
+          "currency": "EUR"
+        },
+        "relatedLots": [
+          "LOT-0002"
+        ]
+      },
+      {
+        "id": "3",
+        "value": 3,
+        "measure": "bids",
+        "relatedLots": [
+          "LOT-0001"
+        ]
+      },
+      {
+        "id": "4",
+        "value": 0,
+        "measure": "bids",
+        "relatedLots": [
+          "LOT-0002"
+        ]
+      },
+      {
+        "id": "5",
+        "measure": "foreignBidsFromEU",
+        "relatedLots": [
+          "LOT-0001"
+        ]
+      },
+      {
+        "id": "6",
+        "measure": "electronicBids",
+        "relatedLots": [
+          "LOT-0001"
+        ]
+      },
+      {
+        "id": "7",
+        "measure": "smeBids",
+        "relatedLots": [
+          "LOT-0001"
+        ]
+      },
+      {
+        "id": "8",
+        "measure": "foreignBidsFromEU",
+        "relatedLots": [
+          "LOT-0002"
+        ]
+      },
+      {
+        "id": "9",
+        "measure": "electronicBids",
+        "relatedLots": [
+          "LOT-0002"
+        ]
+      },
+      {
+        "id": "10",
+        "measure": "smeBids",
+        "relatedLots": [
+          "LOT-0002"
         ]
       }
     ]

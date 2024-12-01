@@ -1,7 +1,7 @@
 {
   "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-90bde094-8e84-4436-898a-b70233ab0569",
+  "ocid": "ocds-abcd1234-81694e49-7d63-480a-8409-6794485a62a3",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -134,10 +134,10 @@
         "locality": "Bergen"
       },
       "roles": [
-        "payer",
-        "buyer",
+        "funder",
         "processContactPoint",
-        "funder"
+        "payer",
+        "buyer"
       ]
     },
     {
@@ -219,6 +219,16 @@
           {
             "id": "ORG-0004"
           }
+        ]
+      }
+    ],
+    "statistics": [
+      {
+        "id": "1",
+        "value": 5,
+        "measure": "bids",
+        "relatedLots": [
+          "LOT-0000"
         ]
       }
     ]

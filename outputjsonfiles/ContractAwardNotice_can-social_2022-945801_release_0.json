@@ -1,7 +1,7 @@
 {
   "id": "2022-945801",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-fa71b605-b7d8-4ac2-ade7-f7fcae01ee8a",
+  "ocid": "ocds-abcd1234-01c49d87-2724-4aa2-91fd-5f2aa1dd7dcd",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -122,6 +122,16 @@
           {
             "id": "ORG-0002"
           }
+        ]
+      }
+    ],
+    "statistics": [
+      {
+        "id": "1",
+        "value": 1,
+        "measure": "bids",
+        "relatedLots": [
+          "LOT-0000"
         ]
       }
     ]

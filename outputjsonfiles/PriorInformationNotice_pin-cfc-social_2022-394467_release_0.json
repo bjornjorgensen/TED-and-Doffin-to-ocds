@@ -1,7 +1,7 @@
 {
   "id": "2022-394467",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-579b3080-25ea-42d7-b761-a554ea54bf49",
+  "ocid": "ocds-abcd1234-30d56c43-aec8-46ae-9c01-4a37959059f3",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -116,8 +116,8 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Hamar"

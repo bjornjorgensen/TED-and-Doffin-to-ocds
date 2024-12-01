@@ -1,7 +1,7 @@
 {
   "id": "2023-653024",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d4f4d83c-1c86-461c-a19c-e9bdb80c654f",
+  "ocid": "ocds-abcd1234-2c2215ae-3fe5-4678-bfa3-cc86f2a7bcb9",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -400,6 +400,16 @@
           {
             "id": "ORG-0011"
           }
+        ]
+      }
+    ],
+    "statistics": [
+      {
+        "id": "1",
+        "value": 15,
+        "measure": "bids",
+        "relatedLots": [
+          "LOT-0000"
         ]
       }
     ]

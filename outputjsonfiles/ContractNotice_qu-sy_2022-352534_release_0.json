@@ -1,7 +1,7 @@
 {
   "id": "2022-352534",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1c678949-77ea-4605-8b9f-3d96f678b10c",
+  "ocid": "ocds-abcd1234-e60fe3c3-ac47-476c-959c-971d83944c81",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -111,8 +111,8 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Arendal"

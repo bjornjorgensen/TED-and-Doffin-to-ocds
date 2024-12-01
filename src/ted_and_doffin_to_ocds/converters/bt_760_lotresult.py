@@ -25,15 +25,45 @@ SUBMISSION_TYPE_MAPPING = {
 }
 
 
-def parse_received_submissions_type(xml_content):
+def parse_received_submissions_type(xml_content: str | bytes) -> dict | None:
     """
-    Parse the XML content to extract the Received Submissions Type information.
+    Parse the XML content to extract the Received Submissions Type information (BT-760).
+
+    BT-760: The type of tenders or requests to participate received. Maps counts for
+    different types of submissions (SME, micro, foreign, etc). All tenders are counted,
+    regardless of admissibility.
+    Maps to OCDS bids.statistics array with specific measures for each type.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content (Union[str, bytes]): The XML content to parse.
 
     Returns:
-        dict: A dictionary containing the parsed data if found, None otherwise.
+        Optional[Dict]: A dictionary containing:
+            - bids.statistics (list): List of statistics objects with structure:
+                {
+                    "id": str,           # Unique identifier for the statistic
+                    "measure": str,      # Type of submission from mapping table
+                    "relatedLots": list  # List containing the lot ID
+                }
+            Returns None if no relevant data is found.
+
+    Example:
+        >>> xml = '''
+        <NoticeResult>
+          <LotResult>
+            <ReceivedSubmissionsStatistics>
+              <StatisticsCode listName="received-submission-type">t-sme</StatisticsCode>
+            </ReceivedSubmissionsStatistics>
+            <TenderLot>
+              <ID>LOT-0001</ID>
+            </TenderLot>
+          </LotResult>
+        </NoticeResult>
+        '''
+        >>> result = parse_received_submissions_type(xml)
+        >>> print(result)
+        {'bids': {'statistics': [{'id': 'smeBids-LOT-0001', 'measure': 'smeBids',
+                                'relatedLots': ['LOT-0001']}]}}
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -51,7 +81,7 @@ def parse_received_submissions_type(xml_content):
     result = {"bids": {"statistics": []}}
 
     lot_results = root.xpath(
-        "//efac:noticeResult/efac:LotResult",
+        "//efac:NoticeResult/efac:LotResult",  # Fixed capitalization
         namespaces=namespaces,
     )
 
@@ -78,24 +108,46 @@ def parse_received_submissions_type(xml_content):
     return result if result["bids"]["statistics"] else None
 
 
-def map_statistic_code(code):
-    """Map the statistic code to the corresponding OCDS measure."""
+def map_statistic_code(code: str) -> str | None:
+    """
+    Map the statistic code to the corresponding OCDS measure.
+
+    Args:
+        code (str): The received submission type code from the XML.
+
+    Returns:
+        Optional[str]: The mapped OCDS measure or None if not found.
+    """
     return SUBMISSION_TYPE_MAPPING.get(code)
 
 
-def merge_received_submissions_type(release_json, received_submissions_data) -> None:
+def merge_received_submissions_type(
+    release_json: dict, received_submissions_data: dict | None
+) -> None:
     """
     Merge the parsed Received Submissions Type data into the main OCDS release JSON.
 
+    Updates the bids.statistics array in the release JSON with submission type statistics.
+    If statistics for the same measure and lot already exist, they are updated;
+    otherwise, new statistics are appended.
+
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        received_submissions_data (dict): The parsed Received Submissions Type data to be merged.
+        release_json (Dict): The main OCDS release JSON to be updated.
+        received_submissions_data (Optional[Dict]): The parsed submissions type data
+            to be merged, containing a 'bids.statistics' array.
 
     Returns:
         None: The function updates the release_json in-place.
+
+    Example:
+        >>> release = {'bids': {'statistics': []}}
+        >>> data = {'bids': {'statistics': [{'id': '1', 'measure': 'smeBids'}]}}
+        >>> merge_received_submissions_type(release, data)
+        >>> print(release)
+        {'bids': {'statistics': [{'id': '1', 'measure': 'smeBids'}]}}
     """
     if not received_submissions_data:
-        logger.warning("No Received Submissions Type data to merge")
+        logger.warning("BT-760: No Received Submissions Type data to merge")
         return
 
     bids = release_json.setdefault("bids", {})
@@ -121,6 +173,6 @@ def merge_received_submissions_type(release_json, received_submissions_data) -> 
         stat["id"] = str(i)
 
     logger.info(
-        "Merged Received Submissions Type data for %d statistics",
+        "BT-760: Merged Received Submissions Type data for %d statistics",
         len(received_submissions_data["bids"]["statistics"]),
     )

@@ -1,7 +1,7 @@
 {
   "id": "65667997-031a-4198-bd25-7225449ef479",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ce3d9bec-a79f-45b4-9341-e9afb001462b",
+  "ocid": "ocds-abcd1234-255f73c8-0c38-4cf5-a30e-bac2177cfa35",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -159,6 +159,38 @@
           {
             "id": "ORG-0004"
           }
+        ]
+      }
+    ],
+    "statistics": [
+      {
+        "id": "1",
+        "measure": "lowestValidBidValue",
+        "value": {
+          "amount": 59299.64,
+          "currency": "EUR"
+        },
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      },
+      {
+        "id": "2",
+        "measure": "highestValidBidValue",
+        "value": {
+          "amount": 95414.0,
+          "currency": "EUR"
+        },
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      },
+      {
+        "id": "3",
+        "value": 3,
+        "measure": "bids",
+        "relatedLots": [
+          "LOT-0000"
         ]
       }
     ]
