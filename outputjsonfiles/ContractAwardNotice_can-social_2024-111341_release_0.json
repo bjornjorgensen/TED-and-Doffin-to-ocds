@@ -1,7 +1,7 @@
 {
   "id": "65ffd92d-8eee-4787-a7fe-925106611edc",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1d7d06f9-5458-47f3-95cd-d40137fbb34b",
+  "ocid": "ocds-abcd1234-157b0fa0-ff97-428c-a8f9-5becafafa3bb",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -228,6 +228,16 @@
     {
       "id": "CON-0001",
       "awardID": "RES-0001"
+    }
+  ],
+  "relatedProcesses": [
+    {
+      "id": "1",
+      "relationship": [
+        "planning"
+      ],
+      "scheme": "eu-oj",
+      "identifier": "099ed52d-de8a-47b9-becc-4a5bec643770-01"
     }
   ],
   "buyer": [

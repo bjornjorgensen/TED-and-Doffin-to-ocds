@@ -1,7 +1,7 @@
 {
   "id": "aa382761-89ef-4162-9dc5-74f12a6f2a21",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f111e70d-3983-49a2-9498-afc9efe70429",
+  "ocid": "ocds-abcd1234-11943f4e-2718-46c1-8233-949914f06889",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -424,15 +424,11 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "85312310"
           },
           {
+            "scheme": "CPV",
             "id": "85312320"
           }
         ],
@@ -454,15 +450,11 @@
         "id": "2",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "85312310"
           },
           {
+            "scheme": "CPV",
             "id": "85312320"
           }
         ],
@@ -484,15 +476,11 @@
         "id": "3",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "85312310"
           },
           {
+            "scheme": "CPV",
             "id": "85312320"
           }
         ],
@@ -514,15 +502,11 @@
         "id": "4",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "85312310"
           },
           {
+            "scheme": "CPV",
             "id": "85312320"
           }
         ],
@@ -544,15 +528,11 @@
         "id": "5",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "85312310"
           },
           {
+            "scheme": "CPV",
             "id": "85312320"
           }
         ],
@@ -574,15 +554,11 @@
         "id": "6",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "85312310"
           },
           {
+            "scheme": "CPV",
             "id": "85312320"
           }
         ],
@@ -604,15 +580,11 @@
         "id": "7",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "85312310"
           },
           {
+            "scheme": "CPV",
             "id": "85312320"
           }
         ],
@@ -634,15 +606,11 @@
         "id": "8",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "85312310"
           },
           {
+            "scheme": "CPV",
             "id": "85312320"
           }
         ],

@@ -1,7 +1,7 @@
 {
   "id": "2023-661116",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-232cee23-939f-4167-91b0-02b8956ad219",
+  "ocid": "ocds-abcd1234-10f0a34b-edeb-4fae-8e60-74928bb6f42b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -38,207 +38,139 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "90512000"
           },
           {
+            "scheme": "CPV",
             "id": "34144510"
           },
           {
+            "scheme": "CPV",
             "id": "44613700"
           },
           {
+            "scheme": "CPV",
             "id": "79723000"
           },
           {
+            "scheme": "CPV",
             "id": "90500000"
           },
           {
+            "scheme": "CPV",
             "id": "90510000"
           },
           {
+            "scheme": "CPV",
             "id": "90513000"
           },
           {
+            "scheme": "CPV",
             "id": "90513300"
           },
           {
+            "scheme": "CPV",
             "id": "72266000"
           },
           {
+            "scheme": "CPV",
             "id": "73220000"
           },
           {
+            "scheme": "CPV",
             "id": "34100000"
           },
           {
+            "scheme": "CPV",
             "id": "34140000"
           },
           {
+            "scheme": "CPV",
             "id": "34144000"
           },
           {
+            "scheme": "CPV",
             "id": "34144500"
           },
           {
+            "scheme": "CPV",
             "id": "43261000"
           },
           {
+            "scheme": "CPV",
             "id": "45210000"
           },
           {
+            "scheme": "CPV",
             "id": "71530000"
           },
           {
+            "scheme": "CPV",
             "id": "71541000"
           },
           {
+            "scheme": "CPV",
             "id": "48000000"
           },
           {
+            "scheme": "CPV",
             "id": "48100000"
           },
           {
+            "scheme": "CPV",
             "id": "72212100"
           },
           {
+            "scheme": "CPV",
             "id": "64212100"
           },
           {
+            "scheme": "CPV",
             "id": "45255400"
           },
           {
+            "scheme": "CPV",
             "id": "22457000"
           },
           {
+            "scheme": "CPV",
             "id": "42961100"
           },
           {
+            "scheme": "CPV",
             "id": "42417200"
           },
           {
+            "scheme": "CPV",
             "id": "60000000"
           },
           {
+            "scheme": "CPV",
             "id": "09331000"
           },
           {
+            "scheme": "CPV",
             "id": "50118200"
           },
           {
+            "scheme": "CPV",
             "id": "39711124"
           },
           {
+            "scheme": "CPV",
             "id": "45331200"
           },
           {
+            "scheme": "CPV",
             "id": "71321400"
           },
           {
+            "scheme": "CPV",
             "id": "50750000"
           },
           {
+            "scheme": "CPV",
             "id": "31625200"
           }
         ],

@@ -3,7 +3,6 @@
 import json
 import logging
 import sys
-import tempfile
 from pathlib import Path
 
 import pytest
@@ -11,6 +10,12 @@ import pytest
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
 from src.ted_and_doffin_to_ocds.main import configure_logging, main
+from ted_and_doffin_to_ocds.converters.bt_263_procedure import (
+    merge_additional_classification_code_procedure,
+    parse_additional_classification_code_procedure,
+)
+
+logger = logging.getLogger(__name__)
 
 
 @pytest.fixture(scope="module")
@@ -20,23 +25,79 @@ def setup_logging():
 
 
 @pytest.fixture
-def temp_output_dir():
-    with tempfile.TemporaryDirectory() as tmpdirname:
-        yield Path(tmpdirname)
+def temp_output_dir(tmp_path):
+    return tmp_path
 
 
-def run_main_and_get_result(xml_file, output_dir):
-    main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
-    output_files = list(output_dir.glob("*.json"))
-    assert len(output_files) == 1, f"Expected 1 output file, got {len(output_files)}"
-    with output_files[0].open() as f:
-        return json.load(f)
+@pytest.fixture
+def sample_xml():
+    return """
+    <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:ProcurementProject>
+            <cac:AdditionalCommodityClassification>
+                <cbc:ItemClassificationCode>15311200</cbc:ItemClassificationCode>
+            </cac:AdditionalCommodityClassification>
+            <cac:AdditionalCommodityClassification>
+                <cbc:ItemClassificationCode>15311300</cbc:ItemClassificationCode>
+            </cac:AdditionalCommodityClassification>
+        </cac:ProcurementProject>
+    </ContractNotice>
+    """
 
 
-def test_bt_263_procedure_integration(tmp_path, setup_logging, temp_output_dir) -> None:
-    logger = setup_logging
+def test_parse_additional_classification_code_procedure(sample_xml):
+    result = parse_additional_classification_code_procedure(sample_xml)
+
+    assert result is not None
+    assert len(result["tender"]["items"]) == 1
+    item = result["tender"]["items"][0]
+    assert item["id"] == "1"
+    assert len(item["additionalClassifications"]) == 2
+    assert {"id": "15311200"} in item["additionalClassifications"]
+    assert {"id": "15311300"} in item["additionalClassifications"]
+
+
+def test_parse_additional_classification_code_procedure_no_data():
+    xml_no_classifications = """
+    <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:ProcurementProject/>
+    </ContractNotice>
+    """
+    result = parse_additional_classification_code_procedure(xml_no_classifications)
+    assert result is None
+
+
+def test_merge_additional_classification_code_procedure():
+    release_json = {
+        "tender": {
+            "items": [
+                {
+                    "id": "1",
+                    "additionalClassifications": [{"scheme": "CPV", "id": "existing"}],
+                }
+            ]
+        }
+    }
+
+    additional_data = {
+        "tender": {"items": [{"id": "1", "additionalClassifications": [{"id": "new"}]}]}
+    }
+
+    merge_additional_classification_code_procedure(release_json, additional_data)
+
+    assert len(release_json["tender"]["items"]) == 1
+    item = release_json["tender"]["items"][0]
+    assert len(item["additionalClassifications"]) == 2
+    classification_ids = [c.get("id") for c in item["additionalClassifications"]]
+    assert "existing" in classification_ids
+    assert "new" in classification_ids
+
+
+def test_bt_263_procedure_integration(tmp_path) -> None:
     xml_content = """
-    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+    <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProject>
             <cac:AdditionalCommodityClassification>
@@ -46,33 +107,36 @@ def test_bt_263_procedure_integration(tmp_path, setup_logging, temp_output_dir) 
                 <cbc:ItemClassificationCode listName="cpv">15311300</cbc:ItemClassificationCode>
             </cac:AdditionalCommodityClassification>
         </cac:ProcurementProject>
-    </root>
+    </ContractNotice>
     """
     xml_file = tmp_path / "test_input_additional_classification_code_procedure.xml"
     xml_file.write_text(xml_content)
 
-    result = run_main_and_get_result(xml_file, temp_output_dir)
+    main(str(xml_file), str(tmp_path), "ocds-test-prefix", "test-scheme")
+    output_files = list(tmp_path.glob("*.json"))
+    assert len(output_files) == 1
 
-    logger.info("Result: %s", json.dumps(result, indent=2))
+    with output_files[0].open() as f:
+        result = json.load(f)
 
-    assert "tender" in result, "Expected 'tender' in result"
-    assert "items" in result["tender"], "Expected 'items' in tender"
-    assert (
-        len(result["tender"]["items"]) == 1
-    ), f"Expected 1 item, got {len(result['tender']['items'])}"
+    assert "tender" in result
+    assert "items" in result["tender"]
+    assert len(result["tender"]["items"]) == 1
 
     item = result["tender"]["items"][0]
-    assert item["id"] == "1", f"Expected item id '1', got {item['id']}"
-    assert (
-        "additionalClassifications" in item
-    ), "Expected 'additionalClassifications' in item"
-    assert (
-        len(item["additionalClassifications"]) == 2
-    ), f"Expected 2 additional classifications, got {len(item['additionalClassifications'])}"
+    assert item["id"] == "1"
+    assert "additionalClassifications" in item
 
-    classification_ids = [c["id"] for c in item["additionalClassifications"]]
-    assert "15311200" in classification_ids, "Expected classification id '15311200'"
-    assert "15311300" in classification_ids, "Expected classification id '15311300'"
+    classifications = item["additionalClassifications"]
+    cpv_classifications = [c for c in classifications if c.get("scheme") == "CPV"]
+    id_classifications = [c for c in classifications if "id" in c]
+
+    assert len(cpv_classifications) == 2
+    assert len(id_classifications) == 2
+
+    classification_ids = {c["id"] for c in id_classifications}
+    assert "15311200" in classification_ids
+    assert "15311300" in classification_ids
 
 
 if __name__ == "__main__":

@@ -7,7 +7,16 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_bt_27_part(xml_content):
+def parse_bt_27_part(xml_content: str | bytes) -> dict:
+    """Parse BT-27 estimated value from the procurement project lot XML.
+
+    Args:
+        xml_content (Union[str, bytes]): XML content containing procurement data
+
+    Returns:
+        Dict: Dictionary containing tender value information in OCDS format with
+            amount and currency if found, otherwise empty tender dict
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -23,7 +32,7 @@ def parse_bt_27_part(xml_content):
     result = {"tender": {}}
 
     part_elements = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']",
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
         namespaces=namespaces,
     )
 
@@ -43,7 +52,16 @@ def parse_bt_27_part(xml_content):
     return result
 
 
-def merge_bt_27_part(release_json, bt_27_part_data) -> None:
+def merge_bt_27_part(release_json: dict, bt_27_part_data: dict) -> None:
+    """Merge BT-27 estimated value data into the release JSON.
+
+    Args:
+        release_json (Dict): Target release JSON to merge data into
+        bt_27_part_data (Dict): Source data containing tender value information
+
+    Returns:
+        None: Modifies release_json in place
+    """
     if "value" in bt_27_part_data["tender"]:
         release_json.setdefault("tender", {})["value"] = bt_27_part_data["tender"][
             "value"

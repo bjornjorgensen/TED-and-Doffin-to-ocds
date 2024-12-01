@@ -1,7 +1,7 @@
 {
   "id": "2022-943732",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1ccf4807-6dc3-4d08-b7ce-75db724f00ca",
+  "ocid": "ocds-abcd1234-2eac8b27-f92e-4925-98d2-8ddb61b68842",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -29,9 +29,7 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "55510000"
           }
         ],

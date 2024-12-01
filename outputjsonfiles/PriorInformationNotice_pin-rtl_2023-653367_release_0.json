@@ -1,7 +1,7 @@
 {
   "id": "2023-653367",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2aa093e4-c9a2-4b68-9372-7a0e3f62cce4",
+  "ocid": "ocds-abcd1234-e96e0aa6-6484-4ae2-a1ab-449a73591b3e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -414,15 +414,11 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "45100000"
           },
           {
+            "scheme": "CPV",
             "id": "45110000"
           }
         ],
@@ -441,21 +437,15 @@
         "id": "2",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "44212400"
           },
           {
+            "scheme": "CPV",
             "id": "45100000"
           },
           {
+            "scheme": "CPV",
             "id": "45221240"
           }
         ],
@@ -474,15 +464,11 @@
         "id": "3",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "45100000"
           },
           {
+            "scheme": "CPV",
             "id": "45110000"
           }
         ],
@@ -501,27 +487,19 @@
         "id": "4",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "45100000"
           },
           {
+            "scheme": "CPV",
             "id": "45112730"
           },
           {
+            "scheme": "CPV",
             "id": "45231111"
           },
           {
+            "scheme": "CPV",
             "id": "45233000"
           }
         ],
@@ -540,39 +518,27 @@
         "id": "5",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "44212400"
           },
           {
+            "scheme": "CPV",
             "id": "45000000"
           },
           {
+            "scheme": "CPV",
             "id": "45112730"
           },
           {
+            "scheme": "CPV",
             "id": "45220000"
           },
           {
+            "scheme": "CPV",
             "id": "45262300"
           },
           {
+            "scheme": "CPV",
             "id": "45332000"
           }
         ],
@@ -591,27 +557,19 @@
         "id": "6",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "45000000"
           },
           {
+            "scheme": "CPV",
             "id": "45112730"
           },
           {
+            "scheme": "CPV",
             "id": "45220000"
           },
           {
+            "scheme": "CPV",
             "id": "45221240"
           }
         ],
@@ -630,39 +588,27 @@
         "id": "7",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "31710000"
           },
           {
+            "scheme": "CPV",
             "id": "42520000"
           },
           {
+            "scheme": "CPV",
             "id": "45000000"
           },
           {
+            "scheme": "CPV",
             "id": "45210000"
           },
           {
+            "scheme": "CPV",
             "id": "45300000"
           },
           {
+            "scheme": "CPV",
             "id": "45330000"
           }
         ],
@@ -681,9 +627,7 @@
         "id": "8",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "34632000"
           }
         ],
@@ -702,9 +646,7 @@
         "id": "9",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "32000000"
           }
         ],
@@ -723,21 +665,15 @@
         "id": "10",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "31321100"
           },
           {
+            "scheme": "CPV",
             "id": "45310000"
           },
           {
+            "scheme": "CPV",
             "id": "45315300"
           }
         ],
@@ -756,21 +692,15 @@
         "id": "11",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "31153000"
           },
           {
+            "scheme": "CPV",
             "id": "31170000"
           },
           {
+            "scheme": "CPV",
             "id": "31200000"
           }
         ],
@@ -789,27 +719,19 @@
         "id": "12",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "31500000"
           },
           {
+            "scheme": "CPV",
             "id": "31682000"
           },
           {
+            "scheme": "CPV",
             "id": "42520000"
           },
           {
+            "scheme": "CPV",
             "id": "45315300"
           }
         ],
@@ -828,21 +750,15 @@
         "id": "13",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "34923000"
           },
           {
+            "scheme": "CPV",
             "id": "34996100"
           },
           {
+            "scheme": "CPV",
             "id": "45316212"
           }
         ],
@@ -861,15 +777,11 @@
         "id": "14",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "42416100"
           },
           {
+            "scheme": "CPV",
             "id": "45313100"
           }
         ],
@@ -888,15 +800,11 @@
         "id": "15",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "42416400"
           },
           {
+            "scheme": "CPV",
             "id": "45313200"
           }
         ],
@@ -915,15 +823,11 @@
         "id": "16",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "34946100"
           },
           {
+            "scheme": "CPV",
             "id": "45234116"
           }
         ],
@@ -942,9 +846,7 @@
         "id": "17",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "34946220"
           }
         ],
@@ -963,21 +865,15 @@
         "id": "18",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "45210000"
           },
           {
+            "scheme": "CPV",
             "id": "45330000"
           },
           {
+            "scheme": "CPV",
             "id": "45441000"
           }
         ],

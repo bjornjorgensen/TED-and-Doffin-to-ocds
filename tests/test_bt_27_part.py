@@ -1,47 +1,19 @@
-import json
-import logging
-import sys
-import tempfile
-from pathlib import Path
-
 import pytest
 
-# Add the parent directory to sys.path to import main
-sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import configure_logging, main
-
-
-@pytest.fixture(scope="module")
-def setup_logging():
-    configure_logging()
-    return logging.getLogger(__name__)
+from ted_and_doffin_to_ocds.converters.bt_27_part import (
+    merge_bt_27_part,
+    parse_bt_27_part,
+)
 
 
 @pytest.fixture
-def temp_output_dir():
-    with tempfile.TemporaryDirectory() as tmpdirname:
-        yield Path(tmpdirname)
-
-
-def run_main_and_get_result(xml_file, output_dir):
-    main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
-    output_files = list(output_dir.glob("*_release_0.json"))
-    assert len(output_files) == 1, f"Expected 1 output file, got {len(output_files)}"
-    with output_files[0].open() as f:
-        return json.load(f)
-
-
-def test_bt_27_part_integration(tmp_path, setup_logging, temp_output_dir) -> None:
-    logger = setup_logging
-
-    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+def sample_xml() -> str:
+    return """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
                          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
                          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cbc:ID>notice-1</cbc:ID>
-        <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
             <cac:ProcurementProject>
                 <cac:RequestedTenderTotal>
                     <cbc:EstimatedOverallContractAmount currencyID="EUR">250000</cbc:EstimatedOverallContractAmount>
@@ -51,29 +23,48 @@ def test_bt_27_part_integration(tmp_path, setup_logging, temp_output_dir) -> Non
     </ContractAwardNotice>
     """
 
-    xml_file = tmp_path / "test_input_bt_27_part.xml"
-    xml_file.write_text(xml_content)
 
-    # Run main and get result
-    result = run_main_and_get_result(xml_file, temp_output_dir)
-    logger.info("Result: %s", json.dumps(result, indent=2))
+def test_parse_bt_27_part_success(sample_xml: str) -> None:
+    result = parse_bt_27_part(sample_xml)
 
-    assert "tender" in result, "tender not found in result"
-    assert "lots" in result["tender"], "lots not found in tender"
-    assert (
-        len(result["tender"]["lots"]) == 1
-    ), f"Expected 1 lot, got {len(result['tender']['lots'])}"
-
-    lot = result["tender"]["lots"][0]
-    assert lot["id"] == "PART-0001", f"Expected lot id 'PART-0001', got {lot['id']}"
-    assert "value" in lot, "value not found in lot"
-    assert (
-        lot["value"]["amount"] == 250000
-    ), f"Expected amount 250000, got {lot['value']['amount']}"
-    assert (
-        lot["value"]["currency"] == "EUR"
-    ), f"Expected currency 'EUR', got {lot['value']['currency']}"
+    assert "tender" in result
+    assert "value" in result["tender"]
+    assert result["tender"]["value"]["amount"] == 250000.0
+    assert result["tender"]["value"]["currency"] == "EUR"
 
 
-if __name__ == "__main__":
-    pytest.main(["-v", "-s"])
+def test_parse_bt_27_part_no_value() -> None:
+    xml_without_value = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+                         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+        </cac:ProcurementProjectLot>
+    </ContractAwardNotice>
+    """
+    result = parse_bt_27_part(xml_without_value)
+
+    assert "tender" in result
+    assert "value" not in result["tender"]
+
+
+def test_merge_bt_27_part(sample_xml: str) -> None:
+    parsed_data = parse_bt_27_part(sample_xml)
+    release_json = {}
+
+    merge_bt_27_part(release_json, parsed_data)
+
+    assert "tender" in release_json
+    assert "value" in release_json["tender"]
+    assert release_json["tender"]["value"]["amount"] == 250000.0
+    assert release_json["tender"]["value"]["currency"] == "EUR"
+
+
+def test_merge_bt_27_part_no_value() -> None:
+    release_json = {}
+    bt_27_part_data = {"tender": {}}
+
+    merge_bt_27_part(release_json, bt_27_part_data)
+
+    assert release_json == {}

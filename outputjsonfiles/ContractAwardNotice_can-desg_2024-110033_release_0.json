@@ -1,7 +1,7 @@
 {
   "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4fee7a42-9e7e-463e-b4b0-072bd7324500",
+  "ocid": "ocds-abcd1234-90bde094-8e84-4436-898a-b70233ab0569",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -42,21 +42,23 @@
         },
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "71200000"
           },
           {
+            "scheme": "CPV",
             "id": "71210000"
           },
           {
+            "scheme": "CPV",
             "id": "71240000"
           },
           {
+            "scheme": "CPV",
             "id": "71400000"
           },
           {
+            "scheme": "CPV",
             "id": "71500000"
           }
         ],
@@ -132,10 +134,10 @@
         "locality": "Bergen"
       },
       "roles": [
+        "payer",
         "buyer",
         "processContactPoint",
-        "funder",
-        "payer"
+        "funder"
       ]
     },
     {
