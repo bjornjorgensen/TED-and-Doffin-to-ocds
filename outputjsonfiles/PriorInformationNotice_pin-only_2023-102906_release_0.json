@@ -1,7 +1,7 @@
 {
   "id": "26cd2bbe-3527-43ab-ae19-ecb644fff706",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2d1da365-fb11-4338-b2c0-3f4460e9f3e3",
+  "ocid": "ocds-abcd1234-e47fe612-602b-4e4d-8bb1-0ccf50c6e1cd",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -19,93 +19,43 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "18424000"
           },
           {
+            "scheme": "CPV",
             "id": "18937100"
           },
           {
+            "scheme": "CPV",
             "id": "33760000"
           },
           {
+            "scheme": "CPV",
             "id": "39221130"
           },
           {
+            "scheme": "CPV",
             "id": "39222110"
           },
           {
+            "scheme": "CPV",
             "id": "39222120"
           },
           {
+            "scheme": "CPV",
             "id": "39224300"
           },
           {
+            "scheme": "CPV",
             "id": "39800000"
           },
           {
+            "scheme": "CPV",
             "id": "39830000"
           },
           {
+            "scheme": "CPV",
             "id": "39831240"
           }
         ],

@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-88796541-93fb-416a-b848-89243b668842",
+  "ocid": "ocds-abcd1234-29d816df-0ca5-4600-a7b6-41eea84af4e0",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -48,39 +48,27 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "33124110"
           },
           {
+            "scheme": "CPV",
             "id": "48313100"
           },
           {
+            "scheme": "CPV",
             "id": "48328000"
           },
           {
+            "scheme": "CPV",
             "id": "48515000"
           },
           {
+            "scheme": "CPV",
             "id": "48814400"
           },
           {
+            "scheme": "CPV",
             "id": "72212180"
           }
         ],
@@ -188,9 +176,9 @@
         "locality": "Bodø"
       },
       "roles": [
+        "payer",
         "buyer",
-        "funder",
-        "payer"
+        "funder"
       ]
     },
     {

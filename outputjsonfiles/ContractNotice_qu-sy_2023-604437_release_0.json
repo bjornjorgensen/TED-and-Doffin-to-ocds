@@ -1,7 +1,7 @@
 {
   "id": "2023-604437",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0872379a-827f-4123-8005-d18da266ac06",
+  "ocid": "ocds-abcd1234-6904751e-2a53-42f4-a814-d97ffc0bcd77",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -56,21 +56,15 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "35125000"
           },
           {
+            "scheme": "CPV",
             "id": "35125300"
           },
           {
+            "scheme": "CPV",
             "id": "48000000"
           }
         ],

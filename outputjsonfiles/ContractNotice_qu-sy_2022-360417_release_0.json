@@ -1,7 +1,7 @@
 {
   "id": "2022-360417",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7aba9394-eb34-48e7-a216-d4b6feffa951",
+  "ocid": "ocds-abcd1234-e320f82b-b84e-45b5-856b-e3263cbd8004",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -62,129 +62,87 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "50000000"
           },
           {
+            "scheme": "CPV",
             "id": "51000000"
           },
           {
+            "scheme": "CPV",
             "id": "55000000"
           },
           {
+            "scheme": "CPV",
             "id": "60000000"
           },
           {
+            "scheme": "CPV",
             "id": "63000000"
           },
           {
+            "scheme": "CPV",
             "id": "64000000"
           },
           {
+            "scheme": "CPV",
             "id": "65000000"
           },
           {
+            "scheme": "CPV",
             "id": "66000000"
           },
           {
+            "scheme": "CPV",
             "id": "70000000"
           },
           {
+            "scheme": "CPV",
             "id": "71000000"
           },
           {
+            "scheme": "CPV",
             "id": "72000000"
           },
           {
+            "scheme": "CPV",
             "id": "73000000"
           },
           {
+            "scheme": "CPV",
             "id": "75000000"
           },
           {
+            "scheme": "CPV",
             "id": "76000000"
           },
           {
+            "scheme": "CPV",
             "id": "77000000"
           },
           {
+            "scheme": "CPV",
             "id": "79000000"
           },
           {
+            "scheme": "CPV",
             "id": "80000000"
           },
           {
+            "scheme": "CPV",
             "id": "85000000"
           },
           {
+            "scheme": "CPV",
             "id": "90000000"
           },
           {
+            "scheme": "CPV",
             "id": "92000000"
           },
           {
+            "scheme": "CPV",
             "id": "98000000"
           }
         ],

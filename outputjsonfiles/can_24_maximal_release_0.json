@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b8b869d6-756b-4672-b2f5-74262e11887f",
+  "ocid": "ocds-abcd1234-e060287a-8541-47aa-8681-2c315e9f47e9",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -192,9 +192,7 @@
         },
         "additionalClassifications": [
           {
-            "scheme": "CPV"
-          },
-          {
+            "scheme": "CPV",
             "id": "79720000"
           }
         ],
@@ -674,8 +672,8 @@
         "locality": "Luxembourg"
       },
       "roles": [
-        "tenderer",
-        "leadTenderer"
+        "leadTenderer",
+        "tenderer"
       ]
     },
     {
@@ -997,6 +995,16 @@
       "relatedLot": "LOT-0002",
       "value": 3,
       "scope": "complaints"
+    }
+  ],
+  "relatedProcesses": [
+    {
+      "id": "1",
+      "relationship": [
+        "planning"
+      ],
+      "scheme": "eu-oj",
+      "identifier": "9c0fd704-64d3-4294-a3b6-6df45911ab9f-01"
     }
   ],
   "buyer": [
