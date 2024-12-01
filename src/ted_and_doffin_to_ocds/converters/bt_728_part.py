@@ -24,7 +24,7 @@ def parse_part_place_performance_additional(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    result = {"tender": {"deliveryAddresses": []}}
+    addresses = []
 
     locations = root.xpath(
         "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']"
@@ -35,11 +35,12 @@ def parse_part_place_performance_additional(xml_content):
     for location in locations:
         description = location.xpath("string(cbc:Description)", namespaces=namespaces)
         if description.strip():
-            result["tender"]["deliveryAddresses"].append(
-                {"description": description.strip()}
-            )
+            addresses.append({"description": description.strip()})
 
-    return result if result["tender"]["deliveryAddresses"] else None
+    if addresses:
+        return {"tender": {"deliveryAddresses": addresses}}
+
+    return None
 
 
 def merge_part_place_performance_additional(release_json, additional_data) -> None:

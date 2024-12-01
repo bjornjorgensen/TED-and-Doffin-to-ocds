@@ -20,7 +20,7 @@ def parse_place_performance_city_part(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    result = {"tender": {"deliveryAddresses": []}}
+    addresses = []
 
     parts = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']",
@@ -32,11 +32,12 @@ def parse_place_performance_city_part(xml_content):
             ".//cac:RealizedLocation/cac:Address/cbc:CityName/text()",
             namespaces=namespaces,
         )
+        addresses.extend({"locality": city.strip()} for city in cities if city.strip())
 
-        for city in cities:
-            result["tender"]["deliveryAddresses"].append({"locality": city})
+    if addresses:
+        return {"tender": {"deliveryAddresses": addresses}}
 
-    return result if result["tender"]["deliveryAddresses"] else None
+    return None
 
 
 def merge_place_performance_city_part(

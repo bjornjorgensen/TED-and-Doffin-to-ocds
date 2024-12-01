@@ -16,12 +16,12 @@ def parse_lot_place_performance_streetline2(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    result = {"tender": {"items": []}}
-
     lots = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
         namespaces=namespaces,
     )
+
+    items = []
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
@@ -31,12 +31,7 @@ def parse_lot_place_performance_streetline2(xml_content):
         )
 
         if realized_locations:
-            item = {
-                "id": str(len(result["tender"]["items"]) + 1),
-                "relatedLot": lot_id,
-                "deliveryAddresses": [],
-            }
-
+            addresses = []
             for location in realized_locations:
                 address = location.xpath("cac:Address", namespaces=namespaces)[0]
                 street_name = address.xpath(
@@ -61,11 +56,22 @@ def parse_lot_place_performance_streetline2(xml_content):
 
                 street_address = ", ".join(street_address_parts)
 
-                item["deliveryAddresses"].append({"streetAddress": street_address})
+                if street_address_parts:
+                    addresses.append({"streetAddress": street_address})
 
-            result["tender"]["items"].append(item)
+            if addresses:
+                items.append(
+                    {
+                        "id": str(len(items) + 1),
+                        "relatedLot": lot_id,
+                        "deliveryAddresses": addresses,
+                    }
+                )
 
-    return result if result["tender"]["items"] else None
+    if items:
+        return {"tender": {"items": items}}
+
+    return None
 
 
 def merge_lot_place_performance_streetline2(

@@ -7,59 +7,70 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_place_performance_country_subdivision_procedure(xml_content):
+def parse_place_performance_country_subdivision_procedure(
+    xml_content: str | bytes,
+) -> dict | None:
+    """
+    Parse country subdivision codes (NUTS3) from procurement project.
+    Maps to region in tender.deliveryAddresses objects.
+
+    Args:
+        xml_content: The XML content to parse
+
+    Returns:
+        dict: Dictionary containing the parsed delivery addresses with region info
+        None: If no valid data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
     }
 
-    realized_locations = root.xpath(
-        "/*/cac:ProcurementProject/cac:RealizedLocation", namespaces=namespaces
+    subdivisions = root.xpath(
+        "/*/cac:ProcurementProject/cac:RealizedLocation/cac:Address/cbc:CountrySubentityCode/text()",
+        namespaces=namespaces,
     )
 
-    delivery_addresses = [
-        {"region": subdivision.text}
-        for location in realized_locations
-        for subdivision in location.xpath(
-            "cac:Address/cbc:CountrySubentityCode", namespaces=namespaces
-        )
-    ]
+    addresses = [{"region": code.strip()} for code in subdivisions if code.strip()]
 
-    if delivery_addresses:
-        return {"tender": {"deliveryAddresses": delivery_addresses}}
+    if addresses:
+        return {"tender": {"deliveryAddresses": addresses}}
 
     return None
 
 
 def merge_place_performance_country_subdivision_procedure(
-    release_json, subdivision_data
+    release_json: dict, subdivision_data: dict | None
 ) -> None:
-    if (
-        not subdivision_data
-        or "tender" not in subdivision_data
-        or "deliveryAddresses" not in subdivision_data["tender"]
-    ):
-        logger.info(
-            "No place performance country subdivision data for Procedure to merge"
-        )
+    """
+    Merge country subdivision data into the OCDS release.
+    Updates or adds region info to matching delivery addresses.
+
+    Args:
+        release_json: The main OCDS release JSON to update
+        subdivision_data: The parsed subdivision data to merge
+    """
+    if not subdivision_data:
+        logger.info("No place performance country subdivision data to merge")
         return
 
     tender = release_json.setdefault("tender", {})
-    new_addresses = subdivision_data["tender"]["deliveryAddresses"]
+    existing_addresses = tender.setdefault("deliveryAddresses", [])
 
-    if "deliveryAddresses" not in tender:
-        tender["deliveryAddresses"] = new_addresses
-    else:
-        existing_addresses = tender["deliveryAddresses"]
-        for new_address in new_addresses:
-            if new_address not in existing_addresses:
-                existing_addresses.append(new_address)
+    for new_address in subdivision_data["tender"]["deliveryAddresses"]:
+        existing_address = next(
+            (addr for addr in existing_addresses if "region" not in addr),
+            None,
+        )
+        if existing_address:
+            existing_address["region"] = new_address["region"]
+        else:
+            existing_addresses.append(new_address)
 
     logger.info(
-        "Merged place performance country subdivision data for %s Procedure locations",
-        len(new_addresses),
+        "Merged place performance country subdivision data for %d addresses",
+        len(subdivision_data["tender"]["deliveryAddresses"]),
     )

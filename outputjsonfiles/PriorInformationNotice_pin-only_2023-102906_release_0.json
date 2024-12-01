@@ -1,7 +1,7 @@
 {
   "id": "26cd2bbe-3527-43ab-ae19-ecb644fff706",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-96e7e9cd-ad9a-4c9d-8a6e-3ef5f0dedc9b",
+  "ocid": "ocds-abcd1234-fcbd54ff-77b0-4e56-903f-e0115e94baa5",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -66,6 +66,9 @@
       }
     ],
     "deliveryAddresses": [
+      {
+        "region": "NO091"
+      },
       {
         "region": "NO091"
       },

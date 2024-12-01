@@ -7,7 +7,20 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_place_performance_country_subdivision(xml_content):
+def parse_place_performance_country_subdivision(
+    xml_content: str | bytes,
+) -> dict | None:
+    """
+    Parse country subdivision codes from Lot procurement projects.
+    Maps to region in tender.items[].deliveryAddresses objects.
+
+    Args:
+        xml_content: The XML content to parse
+
+    Returns:
+        dict: Dictionary containing the parsed tender items with region info
+        None: If no valid data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -16,32 +29,46 @@ def parse_place_performance_country_subdivision(xml_content):
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
     }
 
-    result = {"tender": {"items": []}}
-
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
+        "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
     )
+
+    items = []
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        country_subdivisions = lot.xpath(
-            ".//cac:RealizedLocation/cac:Address/cbc:CountrySubentityCode",
+        subdivisions = lot.xpath(
+            "cac:ProcurementProject/cac:RealizedLocation/cac:Address/cbc:CountrySubentityCode/text()",
             namespaces=namespaces,
         )
 
-        if country_subdivisions:
-            item = {
-                "id": str(len(result["tender"]["items"]) + 1),
-                "relatedLot": lot_id,
-                "deliveryAddresses": [],
-            }
-            for subdivision in country_subdivisions:
-                item["deliveryAddresses"].append({"region": subdivision.text})
-            result["tender"]["items"].append(item)
+        if subdivisions:
+            addresses = [{"region": code} for code in subdivisions if code.strip()]
+            if addresses:
+                items.append(
+                    {
+                        "id": str(len(items) + 1),
+                        "relatedLot": lot_id,
+                        "deliveryAddresses": addresses,
+                    }
+                )
 
-    return result if result["tender"]["items"] else None
+    if items:
+        return {"tender": {"items": items}}
+
+    return None
 
 
-def merge_place_performance_country_subdivision(release_json, subdivision_data) -> None:
+def merge_place_performance_country_subdivision(
+    release_json: dict, subdivision_data: dict | None
+) -> None:
+    """
+    Merge country subdivision data into the OCDS release.
+    Updates or adds region info to matching delivery addresses.
+
+    Args:
+        release_json: The main OCDS release JSON to update
+        subdivision_data: The parsed subdivision data to merge
+    """
     if not subdivision_data:
         logger.info("No place performance country subdivision data to merge")
         return

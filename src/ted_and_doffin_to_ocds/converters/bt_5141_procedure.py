@@ -72,7 +72,7 @@ def parse_procedure_country(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    result = {"tender": {"deliveryAddresses": []}}
+    addresses = []
 
     country_codes = root.xpath(
         "//cac:ProcurementProject/cac:RealizedLocation/cac:Address/cac:Country/cbc:IdentificationCode/text()",
@@ -81,10 +81,13 @@ def parse_procedure_country(xml_content):
 
     for code in country_codes:
         address = {"country": convert_country_code(code)}
-        if address not in result["tender"]["deliveryAddresses"]:
-            result["tender"]["deliveryAddresses"].append(address)
+        if address not in addresses:
+            addresses.append(address)
 
-    return result if result["tender"]["deliveryAddresses"] else None
+    if addresses:
+        return {"tender": {"deliveryAddresses": addresses}}
+
+    return None
 
 
 def convert_country_code(code):

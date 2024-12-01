@@ -43,14 +43,14 @@ def parse_procedure_place_performance_additional(xml_content):
     if not descriptions:
         return None
 
-    result = {"tender": {"deliveryAddresses": []}}
+    addresses = [
+        {"description": desc.strip()} for desc in descriptions if desc and desc.strip()
+    ]
 
-    # Create delivery address object for each non-empty description
-    for desc in descriptions:
-        if desc and desc.strip():
-            result["tender"]["deliveryAddresses"].append({"description": desc.strip()})
+    if addresses:
+        return {"tender": {"deliveryAddresses": addresses}}
 
-    return result if result["tender"]["deliveryAddresses"] else None
+    return None
 
 
 def merge_procedure_place_performance_additional(
