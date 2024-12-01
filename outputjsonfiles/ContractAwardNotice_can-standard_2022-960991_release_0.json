@@ -1,7 +1,7 @@
 {
   "id": "2022-960991",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-746b7f11-7480-4f20-8472-4e142846ef83",
+  "ocid": "ocds-abcd1234-d9c8f8bc-6dd1-4b18-9a11-cc1bccaa861b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -34,7 +34,11 @@
               "type": "quality",
               "numbers": [
                 {
+                  "number": 60.0,
                   "weight": "percentageExact"
+                },
+                {
+                  "number": 40.0
                 }
               ]
             },

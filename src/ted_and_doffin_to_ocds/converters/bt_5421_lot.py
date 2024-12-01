@@ -6,31 +6,63 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+# Mapping table for number weight codes
+NUMBER_WEIGHT_MAPPING = {
+    "dec-exa": "decimalExact",
+    "dec-mid": "decimalRangeMiddle",
+    "ord-imp": "order",
+    "per-exa": "percentageExact",
+    "per-mid": "percentageRangeMiddle",
+    "poi-exa": "pointsExact",
+    "poi-mid": "pointsRangeMiddle",
+}
 
-def parse_award_criterion_number_weight_lot(xml_content):
+
+def parse_award_criterion_number_weight_lot(
+    xml_content: str | bytes,
+) -> dict | None:
+    """Parse award criterion number weights from XML content.
+
+    Extracts weight codes associated with award criteria for each lot from the XML.
+    The codes are found under SubordinateAwardingCriterion elements with
+    ParameterCode listName='number-weight'.
+
+    Args:
+        xml_content: XML string or bytes containing the procurement data
+
+    Returns:
+        Optional[Dict]: Dictionary containing tender lots with their award criteria
+        number weights, or None if no relevant data found. Structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "awardCriteria": {
+                            "criteria": [
+                                {
+                                    "numbers": [{"weight": str}]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
     }
 
     result = {"tender": {"lots": []}}
-
-    number_weight_mapping = {
-        "dec-exa": "decimalExact",
-        "dec-mid": "decimalRangeMiddle",
-        "ord-imp": "order",
-        "per-exa": "percentageExact",
-        "per-mid": "percentageRangeMiddle",
-        "poi-exa": "pointsExact",
-        "poi-mid": "pointsRangeMiddle",
-    }
 
     lots = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
@@ -40,48 +72,49 @@ def parse_award_criterion_number_weight_lot(xml_content):
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
 
-        award_criteria = lot.xpath(
-            ".//cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion",
+        weight_codes = lot.xpath(
+            ".//cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efbc:ParameterCode/text()",
             namespaces=namespaces,
         )
 
-        lot_data = {"id": lot_id, "awardCriteria": {"criteria": []}}
+        criterion_data = [
+            {"numbers": [{"weight": NUMBER_WEIGHT_MAPPING[code]}]}
+            for code in weight_codes
+            if code in NUMBER_WEIGHT_MAPPING
+        ]
 
-        for criterion in award_criteria:
-            criterion_data = {"numbers": []}
-
-            number_weights = criterion.xpath(
-                ".//efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efbc:ParameterCode/text()",
-                namespaces=namespaces,
-            )
-
-            for weight in number_weights:
-                if weight in number_weight_mapping:
-                    criterion_data["numbers"].append(
-                        {"weight": number_weight_mapping[weight]},
-                    )
-
-            if criterion_data["numbers"]:
-                lot_data["awardCriteria"]["criteria"].append(criterion_data)
-
-        if lot_data["awardCriteria"]["criteria"]:
+        if criterion_data:
+            lot_data = {"id": lot_id, "awardCriteria": {"criteria": criterion_data}}
             result["tender"]["lots"].append(lot_data)
 
     return result if result["tender"]["lots"] else None
 
 
 def merge_award_criterion_number_weight_lot(
-    release_json,
-    lot_award_criterion_number_weight_data,
+    release_json: dict, award_criterion_number_weight_data: dict | None
 ) -> None:
-    if not lot_award_criterion_number_weight_data:
-        logger.warning("No Lot Award Criterion Number Weight data to merge")
+    """Merge award criterion number weight data into the release JSON.
+
+    Takes the parsed weight codes and merges them into the appropriate lots
+    in the release JSON. For each lot, updates or adds award criteria numbers
+    while avoiding duplicates.
+
+    Args:
+        release_json: The target release JSON to update
+        award_criterion_number_weight_data: The source data containing weight codes
+            to merge, in the format returned by parse_award_criterion_number_weight_lot()
+
+    Returns:
+        None
+    """
+    if not award_criterion_number_weight_data:
+        logger.warning("No Award Criterion Number Weight data to merge")
         return
 
     tender = release_json.setdefault("tender", {})
     existing_lots = tender.setdefault("lots", [])
 
-    for new_lot in lot_award_criterion_number_weight_data["tender"]["lots"]:
+    for new_lot in award_criterion_number_weight_data["tender"]["lots"]:
         existing_lot = next(
             (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
             None,
@@ -124,6 +157,6 @@ def merge_award_criterion_number_weight_lot(
             existing_lots.append(new_lot)
 
     logger.info(
-        "Merged Lot Award Criterion Number Weight data for %d lots",
-        len(lot_award_criterion_number_weight_data["tender"]["lots"]),
+        "Merged Award Criterion Number Weight data for %d lots",
+        len(award_criterion_number_weight_data["tender"]["lots"]),
     )

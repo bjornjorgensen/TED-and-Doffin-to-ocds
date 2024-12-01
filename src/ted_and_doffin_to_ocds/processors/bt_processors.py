@@ -1567,13 +1567,33 @@ from ted_and_doffin_to_ocds.converters.bt_541_lot_fixednumber import (
     merge_award_criterion_fixed_number,
     parse_award_criterion_fixed_number,
 )
+from ted_and_doffin_to_ocds.converters.bt_541_lot_thresholdnumber import (
+    merge_award_criterion_threshold_number,
+    parse_award_criterion_threshold_number,
+)
+from ted_and_doffin_to_ocds.converters.bt_541_lot_weightnumber import (
+    merge_award_criterion_weight_number,
+    parse_award_criterion_weight_number,
+)
+from ted_and_doffin_to_ocds.converters.bt_541_lotsgroup_fixednumber import (
+    merge_award_criterion_fixed_number_lotsgroup,
+    parse_award_criterion_fixed_number_lotsgroup,
+)
+from ted_and_doffin_to_ocds.converters.bt_541_lotsgroup_thresholdnumber import (
+    merge_award_criterion_threshold_number_lotsgroup,
+    parse_award_criterion_threshold_number_lotsgroup,
+)
+from ted_and_doffin_to_ocds.converters.bt_541_lotsgroup_weightnumber import (
+    merge_award_criterion_weight_number_lotsgroup,
+    parse_award_criterion_weight_number_lotsgroup,
+)
 from ted_and_doffin_to_ocds.converters.bt_543_lot import (
-    merge_award_criteria_complicated,
-    parse_award_criteria_complicated,
+    merge_award_criteria_weighting_description_lot,
+    parse_award_criteria_weighting_description_lot,
 )
 from ted_and_doffin_to_ocds.converters.bt_543_lotsgroup import (
-    merge_award_criteria_complicated_lotsgroup,
-    parse_award_criteria_complicated_lotsgroup,
+    merge_award_criteria_weighting_description_lotsgroup,
+    parse_award_criteria_weighting_description_lotsgroup,
 )
 from ted_and_doffin_to_ocds.converters.bt_553_tender import (
     merge_subcontracting_value,
@@ -2074,20 +2094,20 @@ from ted_and_doffin_to_ocds.converters.bt_5421_lot import (
     parse_award_criterion_number_weight_lot,
 )
 from ted_and_doffin_to_ocds.converters.bt_5421_lotsgroup import (
-    merge_award_criterion_number_weight_lots_group,
-    parse_award_criterion_number_weight_lots_group,
+    merge_award_criterion_number_weight_lotsgroup,
+    parse_award_criterion_number_weight_lotsgroup,
 )
 from ted_and_doffin_to_ocds.converters.bt_5422_lot import (
-    merge_award_criterion_number_fixed,
-    parse_award_criterion_number_fixed,
+    merge_award_criterion_number_fixed_lot,
+    parse_award_criterion_number_fixed_lot,
 )
 from ted_and_doffin_to_ocds.converters.bt_5422_lotsgroup import (
     merge_award_criterion_number_fixed_lotsgroup,
     parse_award_criterion_number_fixed_lotsgroup,
 )
 from ted_and_doffin_to_ocds.converters.bt_5423_lot import (
-    merge_award_criterion_number_threshold,
-    parse_award_criterion_number_threshold,
+    merge_award_criterion_number_threshold_lot,
+    parse_award_criterion_number_threshold_lot,
 )
 from ted_and_doffin_to_ocds.converters.bt_5423_lotsgroup import (
     merge_award_criterion_number_threshold_lotsgroup,
@@ -4306,18 +4326,43 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             "BT-541-Lot-FixedNumber (Award Criterion Fixed Number)",
         ),
         (
+            parse_award_criterion_threshold_number,
+            merge_award_criterion_threshold_number,
+            "BT_541_lot_thresholdnumber",
+        ),
+        (
+            parse_award_criterion_weight_number,
+            merge_award_criterion_weight_number,
+            "bt_541_lot_weightnumber",
+        ),
+        (
+            parse_award_criterion_fixed_number_lotsgroup,
+            merge_award_criterion_fixed_number_lotsgroup,
+            "bt_541_lotsgroup_fixednumber",
+        ),
+        (
+            parse_award_criterion_threshold_number_lotsgroup,
+            merge_award_criterion_threshold_number_lotsgroup,
+            "bt_541_lotsgroup_thresholdnumber",
+        ),
+        (
+            parse_award_criterion_weight_number_lotsgroup,
+            merge_award_criterion_weight_number_lotsgroup,
+            "bt_541_lotsgroup_weightnumber",
+        ),
+        (
             parse_award_criterion_number_weight_lot,
             merge_award_criterion_number_weight_lot,
             "BT-5421-Lot",
         ),
         (
-            parse_award_criterion_number_weight_lots_group,
-            merge_award_criterion_number_weight_lots_group,
+            parse_award_criterion_number_weight_lotsgroup,
+            merge_award_criterion_number_weight_lotsgroup,
             "BT-5421-LotsGroup",
         ),
         (
-            parse_award_criterion_number_fixed,
-            merge_award_criterion_number_fixed,
+            parse_award_criterion_number_fixed_lot,
+            merge_award_criterion_number_fixed_lot,
             "BT-5422-Lot",
         ),
         (
@@ -4326,8 +4371,8 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             "BT-5422-LotsGroup",
         ),
         (
-            parse_award_criterion_number_threshold,
-            merge_award_criterion_number_threshold,
+            parse_award_criterion_number_threshold_lot,
+            merge_award_criterion_number_threshold_lot,
             "BT-5423-Lot",
         ),
         (
@@ -4336,13 +4381,13 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             "BT-5423-LotsGroup",
         ),
         (
-            parse_award_criteria_complicated,
-            merge_award_criteria_complicated,
+            parse_award_criteria_weighting_description_lot,
+            merge_award_criteria_weighting_description_lot,
             "BT-543-Lot",
         ),
         (
-            parse_award_criteria_complicated_lotsgroup,
-            merge_award_criteria_complicated_lotsgroup,
+            parse_award_criteria_weighting_description_lotsgroup,
+            merge_award_criteria_weighting_description_lotsgroup,
             "BT-543-LotsGroup",
         ),
         (

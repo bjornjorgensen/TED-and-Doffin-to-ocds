@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-076f7537-2aeb-4bb2-9b9b-a5aa3c96659e",
+  "ocid": "ocds-abcd1234-3c6b7cef-18ab-4881-83be-99fd9b517b29",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -69,7 +69,11 @@
               "type": "cost",
               "numbers": [
                 {
+                  "number": 60.0,
                   "weight": "percentageExact"
+                },
+                {
+                  "number": 40.0
                 }
               ]
             },
@@ -160,7 +164,11 @@
               "type": "cost",
               "numbers": [
                 {
+                  "number": 60.0,
                   "weight": "percentageExact"
+                },
+                {
+                  "number": 40.0
                 }
               ]
             },

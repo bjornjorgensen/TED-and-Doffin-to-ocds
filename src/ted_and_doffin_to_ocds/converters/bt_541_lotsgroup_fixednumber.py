@@ -1,5 +1,3 @@
-# converters/bt_541_Lot_FixedNumber.py
-
 import logging
 
 from lxml import etree
@@ -7,24 +5,24 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_award_criterion_fixed_number(
+def parse_award_criterion_fixed_number_lotsgroup(
     xml_content: str | bytes,
 ) -> dict | None:
-    """Parse award criterion fixed numbers from XML content.
+    """Parse award criterion fixed numbers from XML content for lot groups.
 
-    Extracts fixed numbers associated with award criteria for each lot from the XML.
+    Extracts fixed numbers associated with award criteria for each lot group from the XML.
     The numbers are found under the SubordinateAwardingCriterion elements with
-    ParameterCode listName='number-fixed'.
+    ParameterCode listName='number-fixed' for LotsGroup.
 
     Args:
         xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        Optional[Dict]: Dictionary containing tender lots with their award criteria
+        Optional[Dict]: Dictionary containing tender lot groups with their award criteria
         fixed numbers, or None if no relevant data found. Structure:
         {
             "tender": {
-                "lots": [
+                "lotGroups": [
                     {
                         "id": str,
                         "awardCriteria": {
@@ -51,24 +49,24 @@ def parse_award_criterion_fixed_number(
         "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
     }
 
-    result = {"tender": {"lots": []}}
+    result = {"tender": {"lotGroups": []}}
 
-    lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+    lot_groups = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']",
         namespaces=namespaces,
     )
 
-    for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+    for lot_group in lot_groups:
+        lot_group_id = lot_group.xpath("cbc:ID/text()", namespaces=namespaces)[0]
 
-        fixed_numbers = lot.xpath(
+        fixed_numbers = lot_group.xpath(
             ".//cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efbc:ParameterNumeric/text()",
             namespaces=namespaces,
         )
 
         if fixed_numbers:
-            lot_data = {
-                "id": lot_id,
+            lot_group_data = {
+                "id": lot_group_id,
                 "awardCriteria": {
                     "criteria": [
                         {
@@ -79,57 +77,65 @@ def parse_award_criterion_fixed_number(
                     ],
                 },
             }
-            result["tender"]["lots"].append(lot_data)
+            result["tender"]["lotGroups"].append(lot_group_data)
 
-    return result if result["tender"]["lots"] else None
+    return result if result["tender"]["lotGroups"] else None
 
 
-def merge_award_criterion_fixed_number(
+def merge_award_criterion_fixed_number_lotsgroup(
     release_json: dict, award_criterion_fixed_number_data: dict | None
 ) -> None:
-    """Merge award criterion fixed number data into the release JSON.
+    """Merge award criterion fixed number data into the release JSON for lot groups.
 
-    Takes the parsed fixed number data and merges it into the appropriate lots
-    in the release JSON. For each lot, updates or adds award criteria numbers
+    Takes the parsed fixed number data and merges it into the appropriate lot groups
+    in the release JSON. For each lot group, updates or adds award criteria numbers
     while avoiding duplicates.
 
     Args:
         release_json: The target release JSON to update
         award_criterion_fixed_number_data: The source data containing fixed numbers
-            to merge, in the format returned by parse_award_criterion_fixed_number()
+            to merge, in the format returned by parse_award_criterion_fixed_number_lotsgroup()
 
     Returns:
         None
     """
     if not award_criterion_fixed_number_data:
-        logger.warning("No Award Criterion Fixed Number data to merge")
+        logger.warning("No Award Criterion Fixed Number data to merge for lot groups")
         return
 
     tender = release_json.setdefault("tender", {})
-    existing_lots = tender.setdefault("lots", [])
+    existing_lot_groups = tender.setdefault("lotGroups", [])
 
-    for new_lot in award_criterion_fixed_number_data["tender"]["lots"]:
-        existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+    for new_lot_group in award_criterion_fixed_number_data["tender"]["lotGroups"]:
+        existing_lot_group = next(
+            (
+                group
+                for group in existing_lot_groups
+                if group["id"] == new_lot_group["id"]
+            ),
             None,
         )
-        if existing_lot:
-            existing_criteria = existing_lot.setdefault("awardCriteria", {}).setdefault(
+        if existing_lot_group:
+            existing_criteria = existing_lot_group.setdefault(
+                "awardCriteria", {}
+            ).setdefault(
                 "criteria",
                 [],
             )
             if existing_criteria:
                 existing_criterion = existing_criteria[0]
                 existing_numbers = existing_criterion.setdefault("numbers", [])
-                for new_number in new_lot["awardCriteria"]["criteria"][0]["numbers"]:
+                for new_number in new_lot_group["awardCriteria"]["criteria"][0][
+                    "numbers"
+                ]:
                     if new_number not in existing_numbers:
                         existing_numbers.append(new_number)
             else:
-                existing_criteria.extend(new_lot["awardCriteria"]["criteria"])
+                existing_criteria.extend(new_lot_group["awardCriteria"]["criteria"])
         else:
-            existing_lots.append(new_lot)
+            existing_lot_groups.append(new_lot_group)
 
     logger.info(
-        "Merged Award Criterion Fixed Number data for %d lots",
-        len(award_criterion_fixed_number_data["tender"]["lots"]),
+        "Merged Award Criterion Fixed Number data for %d lot groups",
+        len(award_criterion_fixed_number_data["tender"]["lotGroups"]),
     )

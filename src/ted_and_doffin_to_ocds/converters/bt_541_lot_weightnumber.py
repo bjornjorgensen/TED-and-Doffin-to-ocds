@@ -1,5 +1,3 @@
-# converters/bt_541_Lot_FixedNumber.py
-
 import logging
 
 from lxml import etree
@@ -7,21 +5,21 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_award_criterion_fixed_number(
+def parse_award_criterion_weight_number(
     xml_content: str | bytes,
 ) -> dict | None:
-    """Parse award criterion fixed numbers from XML content.
+    """Parse award criterion weight numbers from XML content.
 
-    Extracts fixed numbers associated with award criteria for each lot from the XML.
+    Extracts weight numbers associated with award criteria for each lot from the XML.
     The numbers are found under the SubordinateAwardingCriterion elements with
-    ParameterCode listName='number-fixed'.
+    ParameterCode listName='number-weight'.
 
     Args:
         xml_content: XML string or bytes containing the procurement data
 
     Returns:
         Optional[Dict]: Dictionary containing tender lots with their award criteria
-        fixed numbers, or None if no relevant data found. Structure:
+        weight numbers, or None if no relevant data found. Structure:
         {
             "tender": {
                 "lots": [
@@ -61,19 +59,19 @@ def parse_award_criterion_fixed_number(
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
 
-        fixed_numbers = lot.xpath(
-            ".//cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efbc:ParameterNumeric/text()",
+        weight_numbers = lot.xpath(
+            ".//cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efbc:ParameterNumeric/text()",
             namespaces=namespaces,
         )
 
-        if fixed_numbers:
+        if weight_numbers:
             lot_data = {
                 "id": lot_id,
                 "awardCriteria": {
                     "criteria": [
                         {
                             "numbers": [
-                                {"number": float(number)} for number in fixed_numbers
+                                {"number": float(number)} for number in weight_numbers
                             ],
                         },
                     ],
@@ -84,31 +82,31 @@ def parse_award_criterion_fixed_number(
     return result if result["tender"]["lots"] else None
 
 
-def merge_award_criterion_fixed_number(
-    release_json: dict, award_criterion_fixed_number_data: dict | None
+def merge_award_criterion_weight_number(
+    release_json: dict, award_criterion_weight_number_data: dict | None
 ) -> None:
-    """Merge award criterion fixed number data into the release JSON.
+    """Merge award criterion weight number data into the release JSON.
 
-    Takes the parsed fixed number data and merges it into the appropriate lots
+    Takes the parsed weight number data and merges it into the appropriate lots
     in the release JSON. For each lot, updates or adds award criteria numbers
     while avoiding duplicates.
 
     Args:
         release_json: The target release JSON to update
-        award_criterion_fixed_number_data: The source data containing fixed numbers
-            to merge, in the format returned by parse_award_criterion_fixed_number()
+        award_criterion_weight_number_data: The source data containing weight numbers
+            to merge, in the format returned by parse_award_criterion_weight_number()
 
     Returns:
         None
     """
-    if not award_criterion_fixed_number_data:
-        logger.warning("No Award Criterion Fixed Number data to merge")
+    if not award_criterion_weight_number_data:
+        logger.warning("No Award Criterion Weight Number data to merge")
         return
 
     tender = release_json.setdefault("tender", {})
     existing_lots = tender.setdefault("lots", [])
 
-    for new_lot in award_criterion_fixed_number_data["tender"]["lots"]:
+    for new_lot in award_criterion_weight_number_data["tender"]["lots"]:
         existing_lot = next(
             (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
             None,
@@ -130,6 +128,6 @@ def merge_award_criterion_fixed_number(
             existing_lots.append(new_lot)
 
     logger.info(
-        "Merged Award Criterion Fixed Number data for %d lots",
-        len(award_criterion_fixed_number_data["tender"]["lots"]),
+        "Merged Award Criterion Weight Number data for %d lots",
+        len(award_criterion_weight_number_data["tender"]["lots"]),
     )

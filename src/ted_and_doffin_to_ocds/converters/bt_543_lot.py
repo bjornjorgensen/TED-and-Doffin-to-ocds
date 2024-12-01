@@ -7,7 +7,33 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_award_criteria_complicated(xml_content):
+def parse_award_criteria_weighting_description_lot(
+    xml_content: str | bytes,
+) -> dict | None:
+    """Parse award criteria weighting descriptions from XML content.
+
+    Extracts weighting descriptions from award criteria for each lot from the XML.
+    The descriptions are found in CalculationExpression elements under AwardingCriterion.
+
+    Args:
+        xml_content: XML string or bytes containing the procurement data
+
+    Returns:
+        Optional[Dict]: Dictionary containing tender lots with their award criteria
+        weighting descriptions, or None if no relevant data found. Structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "awardCriteria": {
+                            "weightingDescription": str
+                        }
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -29,27 +55,44 @@ def parse_award_criteria_complicated(xml_content):
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        calculation_expression = lot.xpath(
-            "cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cbc:CalculationExpression/text()",
+
+        weighting_descriptions = lot.xpath(
+            ".//cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cbc:CalculationExpression/text()",
             namespaces=namespaces,
         )
 
-        if calculation_expression:
+        if weighting_descriptions:
             lot_data = {
                 "id": lot_id,
-                "awardCriteria": {"weightingDescription": calculation_expression[0]},
+                "awardCriteria": {"weightingDescription": weighting_descriptions[0]},
             }
             result["tender"]["lots"].append(lot_data)
 
     return result if result["tender"]["lots"] else None
 
 
-def merge_award_criteria_complicated(release_json, award_criteria_data) -> None:
+def merge_award_criteria_weighting_description_lot(
+    release_json: dict, award_criteria_data: dict | None
+) -> None:
+    """Merge award criteria weighting descriptions into the release JSON.
+
+    Takes the parsed weighting descriptions and merges them into the appropriate lots
+    in the release JSON.
+
+    Args:
+        release_json: The target release JSON to update
+        award_criteria_data: The source data containing weighting descriptions
+            to merge, in the format returned by parse_award_criteria_weighting_description_lot()
+
+    Returns:
+        None
+    """
     if not award_criteria_data:
-        logger.warning("No award criteria complicated data to merge")
+        logger.warning("No award criteria weighting description data to merge")
         return
 
-    existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
+    tender = release_json.setdefault("tender", {})
+    existing_lots = tender.setdefault("lots", [])
 
     for new_lot in award_criteria_data["tender"]["lots"]:
         existing_lot = next(
@@ -64,6 +107,6 @@ def merge_award_criteria_complicated(release_json, award_criteria_data) -> None:
             existing_lots.append(new_lot)
 
     logger.info(
-        "Merged award criteria complicated data for %d lots",
+        "Merged award criteria weighting description data for %d lots",
         len(award_criteria_data["tender"]["lots"]),
     )

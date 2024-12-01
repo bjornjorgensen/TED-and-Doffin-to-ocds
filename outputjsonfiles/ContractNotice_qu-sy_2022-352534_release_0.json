@@ -1,7 +1,7 @@
 {
   "id": "2022-352534",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9446f0eb-0564-4889-947a-d84d5d7b82d1",
+  "ocid": "ocds-abcd1234-8ab3642d-ee2a-466c-a9a0-788d75deac9b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -111,8 +111,8 @@
         ]
       },
       "roles": [
-        "submissionReceiptBody",
         "processContactPoint",
+        "submissionReceiptBody",
         "buyer"
       ],
       "address": {

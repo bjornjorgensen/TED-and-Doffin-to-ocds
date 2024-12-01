@@ -1,7 +1,7 @@
 {
   "id": "2023-698775",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-eaa12f36-4233-4088-ab95-923795e22568",
+  "ocid": "ocds-abcd1234-684e1950-3cc6-40f5-b74b-776695372162",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -153,8 +153,8 @@
         "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/3493"
       },
       "roles": [
-        "submissionReceiptBody",
         "processContactPoint",
+        "submissionReceiptBody",
         "buyer"
       ],
       "address": {
