@@ -1,7 +1,7 @@
 {
   "id": "5681ff11-e080-4da6-b108-82db3f9b4b69",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-465c4b00-05b7-4ae3-9032-9f23ab762943",
+  "ocid": "ocds-abcd1234-c00b76cd-eec4-406f-95e9-941b53a09782",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -122,8 +122,7 @@
           "amount": 100000000.0,
           "currency": "NOK"
         }
-      },
-      "hasFrameworkAgreement": false
+      }
     },
     "deliveryAddresses": [
       {

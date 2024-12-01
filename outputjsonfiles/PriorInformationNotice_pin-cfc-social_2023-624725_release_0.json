@@ -1,7 +1,7 @@
 {
   "id": "2023-624725",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-80f45ac5-311b-4b6c-b259-c602eea411bc",
+  "ocid": "ocds-abcd1234-460a0495-7243-42c1-8479-fb2a12ef2662",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -103,10 +103,7 @@
       {
         "streetAddress": "Bjørnafjorden kommune"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "tender"
@@ -140,8 +137,8 @@
         "locality": "Eikelandsosen"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

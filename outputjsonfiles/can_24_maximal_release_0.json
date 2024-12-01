@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-de069ed9-bb84-4f01-84ac-98953b4bc021",
+  "ocid": "ocds-abcd1234-c21446b5-fd9c-460c-b627-42895a8b4334",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -42,6 +42,7 @@
         },
         "coveredBy": [
           "GPA",
+          "EU-FSR",
           "EU-CVD"
         ],
         "title": "Title ---",
@@ -315,9 +316,6 @@
         "description": "Anywhere in the given country"
       }
     ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    },
     "documents": [
       {
         "id": "FiscalDocID1",
@@ -832,8 +830,10 @@
       {
         "id": "TEN-0002",
         "relatedLots": [
+          "LOT-0001",
           "LOT-0001"
         ],
+        "foreignSubsidyMeasures": "fsr-no-obj",
         "value": {
           "amount": 9999999.99,
           "currency": "EUR"

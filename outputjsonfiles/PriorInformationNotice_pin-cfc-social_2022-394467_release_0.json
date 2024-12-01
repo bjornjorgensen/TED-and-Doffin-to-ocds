@@ -1,7 +1,7 @@
 {
   "id": "2022-394467",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-80147976-28f9-4490-aed1-02b12d359e6d",
+  "ocid": "ocds-abcd1234-bcbd781f-0f30-4d4b-9d3d-1f6d0621fbcb",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -46,10 +46,10 @@
         },
         "hasAccessibilityCriteria": false,
         "techniques": {
-          "hasFrameworkAgreement": true,
           "frameworkAgreement": {
             "method": "withoutReopeningCompetition"
-          }
+          },
+          "hasFrameworkAgreement": true
         }
       }
     ],
@@ -89,10 +89,7 @@
       {
         "streetAddress": "Elvia AS konsesjonsområde"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "tender"
@@ -118,9 +115,9 @@
         "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/2095"
       },
       "roles": [
-        "submissionReceiptBody",
+        "buyer",
         "processContactPoint",
-        "buyer"
+        "submissionReceiptBody"
       ],
       "address": {
         "locality": "Hamar"

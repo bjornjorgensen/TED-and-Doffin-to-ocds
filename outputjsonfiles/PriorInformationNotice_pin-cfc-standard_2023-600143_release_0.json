@@ -1,7 +1,7 @@
 {
   "id": "2023-600143",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-191ea830-2fb6-4b70-a9a0-251b7b0ca9f1",
+  "ocid": "ocds-abcd1234-f1d0532b-23d1-4ed8-88de-e78fee865c5d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -83,10 +83,7 @@
       {
         "streetAddress": "Tønsberg"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "tender"
@@ -119,8 +116,8 @@
         "email": "therese.borge@tonsberg.kommune.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Tønsberg"

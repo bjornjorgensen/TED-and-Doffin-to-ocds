@@ -1,7 +1,7 @@
 {
   "id": "7d111d51-8042-402a-a234-50efe86d8f4f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e493a634-9588-470b-bdaa-435bd299ed72",
+  "ocid": "ocds-abcd1234-fc6c9b3b-4181-440a-80eb-d4ee9eb68b2a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -15,10 +15,10 @@
       {
         "id": "LOT-0001",
         "techniques": {
-          "hasFrameworkAgreement": true,
           "frameworkAgreement": {
             "method": "withoutReopeningCompetition"
           },
+          "hasFrameworkAgreement": true,
           "hasElectronicAuction": false
         },
         "communication": {
@@ -148,10 +148,7 @@
       {
         "description": "Anywhere in the given country"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "tender"
@@ -184,8 +181,8 @@
         ]
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Oslo"

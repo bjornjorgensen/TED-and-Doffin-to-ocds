@@ -1,7 +1,7 @@
 {
   "id": "2023-611830",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-be99a090-66fa-4f2d-a491-0de838636a91",
+  "ocid": "ocds-abcd1234-00554340-ffd0-4e93-b63f-b5363be0e99a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -35,10 +35,7 @@
         },
         "relatedLot": "LOT-0000"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "awardUpdate",

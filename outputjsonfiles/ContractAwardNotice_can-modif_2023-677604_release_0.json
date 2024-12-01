@@ -1,7 +1,7 @@
 {
   "id": "2023-677604",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-93f3bb14-3321-4718-9785-956b122664ca",
+  "ocid": "ocds-abcd1234-f5ed587c-20ff-4aac-9a64-221154d5cec2",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -83,10 +83,7 @@
       {
         "streetAddress": "Viken"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "awardUpdate",

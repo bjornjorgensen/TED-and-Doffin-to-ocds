@@ -1,7 +1,7 @@
 {
   "id": "2023-632707",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-41745a2e-ea9a-4980-b926-56fd235fa60a",
+  "ocid": "ocds-abcd1234-e51f6230-816d-43ea-9362-0f9147f3cc26",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -73,10 +73,7 @@
       {
         "streetAddress": "Narvik, Aspheim bru (kommunal vei 54071) og Reinsvoll bru (kommunal vei 54069) i Ballangen. Begge bruer krysser Kiselva, og området rundt bruene eies av Narvik kommune."
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "award",

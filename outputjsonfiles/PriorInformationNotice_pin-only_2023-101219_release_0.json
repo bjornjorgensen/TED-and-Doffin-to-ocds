@@ -1,7 +1,7 @@
 {
   "id": "0e2b63aa-a91a-49c6-aa1c-386516ec2275",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0471bd9d-ee80-47e9-be5d-426ecc0c9fa5",
+  "ocid": "ocds-abcd1234-778501a5-f1a6-44d9-8b70-0f9924d38914",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -49,9 +49,6 @@
         "country": "NO"
       }
     ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    },
     "documents": [
       {
         "id": "216889791"

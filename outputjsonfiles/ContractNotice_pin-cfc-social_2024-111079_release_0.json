@@ -1,7 +1,7 @@
 {
   "id": "defc83ce-b8a2-48a0-a1be-33262308c9fd",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-76893051-3c40-489a-8f84-994f7b6ec92a",
+  "ocid": "ocds-abcd1234-3d9f4cbb-af9b-4583-b4ed-f07c73f18ce7",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -76,10 +76,7 @@
       {
         "description": "Anywhere"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "tender"
@@ -104,8 +101,8 @@
         "locality": "02-495"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

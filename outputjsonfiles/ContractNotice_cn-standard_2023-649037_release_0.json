@@ -1,7 +1,7 @@
 {
   "id": "2023-649037",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6af10616-3125-4109-9705-93dba7dfc65c",
+  "ocid": "ocds-abcd1234-7ae53a7d-d08e-47a9-8382-09799da3b353",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -15,10 +15,10 @@
       {
         "id": "LOT-1-8",
         "techniques": {
-          "hasFrameworkAgreement": true,
           "frameworkAgreement": {
             "method": "withoutReopeningCompetition"
           },
+          "hasFrameworkAgreement": true,
           "hasElectronicAuction": false
         },
         "coveredBy": [
@@ -135,10 +135,7 @@
     "lotDetails": {
       "maximumLotsBidPerSupplier": 1
     },
-    "deliveryAddresses": [],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"
@@ -171,8 +168,8 @@
         "email": "post@sykehusinnkjop.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "VADSØ"

@@ -40,17 +40,16 @@ def parse_part_framework_agreement(xml_content: str) -> dict:
         namespaces=namespaces,
     )
 
-    result = {"tender": {"techniques": {"hasFrameworkAgreement": False}}}
+    result = {"tender": {"techniques": {}}}
 
-    if framework_agreement:
+    if framework_agreement and framework_agreement[0] in method_mapping:
         code = framework_agreement[0]
         if code != "none":
-            mapped_method = method_mapping.get(code)
-            if mapped_method:
-                result["tender"]["techniques"]["hasFrameworkAgreement"] = True
-                result["tender"]["techniques"]["frameworkAgreement"] = {
-                    "method": mapped_method
-                }
+            mapped_method = method_mapping[code]
+            result["tender"]["techniques"]["hasFrameworkAgreement"] = True
+            result["tender"]["techniques"]["frameworkAgreement"] = {
+                "method": mapped_method
+            }
 
     return result
 

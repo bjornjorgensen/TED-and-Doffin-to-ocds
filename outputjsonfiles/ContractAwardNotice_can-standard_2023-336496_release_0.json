@@ -1,7 +1,7 @@
 {
   "id": "2023-336496",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-48f9e3a8-2338-47d8-9788-392c1f046544",
+  "ocid": "ocds-abcd1234-f30b428d-9bfe-47b3-9165-d9e117076c9e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -42,10 +42,7 @@
         ]
       }
     ],
-    "deliveryAddresses": [],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    "deliveryAddresses": []
   },
   "tag": [
     "award",

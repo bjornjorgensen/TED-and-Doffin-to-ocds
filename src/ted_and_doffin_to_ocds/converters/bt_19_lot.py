@@ -15,10 +15,25 @@ JUSTIFICATION_CODES = {
 }
 
 
-def parse_submission_nonelectronic_justification(xml_content):
+def parse_submission_nonelectronic_justification(xml_content: str) -> dict | None:
+    """
+    Parses the XML content to extract the justification for non-electronic submission.
+
+    Args:
+        xml_content (str): The XML content as a string.
+
+    Returns:
+        dict | None: A dictionary containing the parsed data or None if no lots are found.
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
+
+    try:
+        root = etree.fromstring(xml_content)
+    except etree.XMLSyntaxError:
+        logger.exception("Failed to parse XML content")
+        return None
+
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
         "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
@@ -35,7 +50,12 @@ def parse_submission_nonelectronic_justification(xml_content):
     )
 
     for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
+        if not lot_id:
+            logger.warning("Lot ID not found")
+            continue
+
+        lot_id = lot_id[0]
         justification_code = lot.xpath(
             "cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='no-esubmission-justification']/cbc:ProcessReasonCode/text()",
             namespaces=namespaces,
@@ -57,8 +77,18 @@ def parse_submission_nonelectronic_justification(xml_content):
 
 
 def merge_submission_nonelectronic_justification(
-    release_json, justification_data
+    release_json: dict, justification_data: dict | None
 ) -> None:
+    """
+    Merges the parsed justification data into the existing release JSON structure.
+
+    Args:
+        release_json (dict): The existing release JSON structure.
+        justification_data (dict | None): The parsed justification data.
+
+    Returns:
+        None
+    """
     if not justification_data:
         logger.warning("No Submission Nonelectronic Justification data to merge")
         return

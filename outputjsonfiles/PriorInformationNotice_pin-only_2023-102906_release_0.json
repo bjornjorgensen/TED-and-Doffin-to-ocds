@@ -1,7 +1,7 @@
 {
   "id": "26cd2bbe-3527-43ab-ae19-ecb644fff706",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d90242a3-150d-437e-ae1b-53e132ad6ed6",
+  "ocid": "ocds-abcd1234-4fb17590-8f28-43cc-8719-a264a72d41e6",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -125,9 +125,6 @@
     ],
     "suitability": {
       "sme": true
-    },
-    "techniques": {
-      "hasFrameworkAgreement": false
     },
     "documents": [
       {

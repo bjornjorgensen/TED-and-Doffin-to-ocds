@@ -1,7 +1,7 @@
 {
   "id": "2022-396301",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9052cbbb-60e9-4a38-8339-8e84793f630d",
+  "ocid": "ocds-abcd1234-3cd9a0c7-ba40-47c9-ba98-d6c9d4808fce",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -88,10 +88,7 @@
       "amount": 17000000.0,
       "currency": "NOK"
     },
-    "deliveryAddresses": [],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"
@@ -125,8 +122,8 @@
         "locality": "MOEN"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

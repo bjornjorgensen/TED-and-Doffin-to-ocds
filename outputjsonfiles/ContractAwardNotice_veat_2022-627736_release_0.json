@@ -1,7 +1,7 @@
 {
   "id": "2022-627736",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-90e658db-bd3d-4ee4-9c1a-c85850070add",
+  "ocid": "ocds-abcd1234-b9612e72-5d1f-4d0b-b51e-3c6621c0c780",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -64,10 +64,7 @@
       {
         "streetAddress": "Norge og norske territorier"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "award",

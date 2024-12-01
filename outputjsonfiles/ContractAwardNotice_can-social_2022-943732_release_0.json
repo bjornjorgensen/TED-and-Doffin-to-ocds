@@ -1,7 +1,7 @@
 {
   "id": "2022-943732",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-42606cb1-dbf9-4cf9-9a4c-94e8f75743df",
+  "ocid": "ocds-abcd1234-73fca73d-affd-419e-b0ab-6523f56a29f3",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -52,9 +52,6 @@
         "streetAddress": "OSLO"
       }
     ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    },
     "procurementMethodDetails": "Oppdragsgiver vil tildele kontrakt til tilbudet med det beste forholdet mellom pris og kvalitet. Pris 30 % Besvarelse av Vedlegg 2 Tilbudsskjema Kvalitet 70 % Besvarelse av Vedlegg 1 Leveranseomfang"
   },
   "tag": [

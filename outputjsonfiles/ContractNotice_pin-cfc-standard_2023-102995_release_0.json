@@ -1,7 +1,7 @@
 {
   "id": "e5c8b25e-859d-492a-9085-716017f267aa",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4e6648b3-fae4-4102-875a-7b847df4045c",
+  "ocid": "ocds-abcd1234-0e3cdded-a82c-4e86-9361-37da9fd3ac16",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -230,9 +230,6 @@
           "description": "Terrorist offences or offences linked to terrorist activities: Vennligst bekreft at ingen av regelverkets avvisningsgrunner er oppfylte"
         }
       ]
-    },
-    "techniques": {
-      "hasFrameworkAgreement": false
     }
   },
   "tag": [
@@ -267,8 +264,8 @@
         "locality": "Oslo"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

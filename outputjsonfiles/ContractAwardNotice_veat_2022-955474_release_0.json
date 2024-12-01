@@ -1,7 +1,7 @@
 {
   "id": "2022-955474",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0aa86eaa-d3a2-4eb1-820a-a22d050076b9",
+  "ocid": "ocds-abcd1234-0b645aea-6db8-4543-8b5d-e3b79f70a0bc",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -41,10 +41,7 @@
         },
         "relatedLot": "LOT-0000"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "award",

@@ -1,7 +1,7 @@
 {
   "id": "aa382761-89ef-4162-9dc5-74f12a6f2a21",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8ebd398f-ba65-40c3-8f94-00acadba501a",
+  "ocid": "ocds-abcd1234-293196d8-d1fe-46ef-9385-976ef593bab6",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -724,9 +724,6 @@
           "description": "Terrorist offences or offences linked to terrorist activities: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitetved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitet som definert i artikkel 1 og 3 i Rådets rammeavgjørelse 2002/475/RIA av 13. juni 2002 om bekjempelse av terrorisme (EFT L 164 af 22.6.2002, s. 3). Denne avvisningsgrunnen omfatter også oppfordring til, medvirkning til eller forsøk på å begå slike handlinger som omhandlet i artikkel 4 i nevnte rammeavgjørelse."
         }
       ]
-    },
-    "techniques": {
-      "hasFrameworkAgreement": false
     }
   },
   "tag": [

@@ -1,7 +1,7 @@
 {
   "id": "2022-365499",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-28b9a37f-e29f-4f23-9f32-028a69098a5e",
+  "ocid": "ocds-abcd1234-ee3a53ed-091f-48e6-aaa2-336f53cb4d3b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -65,10 +65,7 @@
       {
         "streetAddress": "Giljajuvet tunnel., Bergelandstunnel i Stavanger."
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "award",

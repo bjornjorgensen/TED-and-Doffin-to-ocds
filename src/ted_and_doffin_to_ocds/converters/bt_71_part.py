@@ -6,28 +6,34 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+# Constants for code mapping
+RESERVED_CODE_MAPPING = {
+    "res-pub-ser": "publicServiceMissionOrganization",
+    "res-ws": "shelteredWorkshop",
+}
 
-def parse_reserved_participation_part(xml_content):
+
+def parse_reserved_participation_part(xml_content: str | bytes) -> dict | None:
     """
     Parse the XML content to extract reserved participation information for the tender.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content (str | bytes): The XML content to parse.
 
     Returns:
-        dict: A dictionary containing the parsed reserved participation data in the format:
-              {
-                  "tender": {
-                      "otherRequirements": {
-                          "reservedparticipation": ["participation_type"]
-                      }
-                  }
-              }
-        None: If no relevant data is found.
+        dict | None: A dictionary containing the parsed reserved participation data or None.
     """
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
+    if not xml_content:
+        return None
+
+    try:
+        if isinstance(xml_content, str):
+            xml_content = xml_content.encode("utf-8")
+        root = etree.fromstring(xml_content)
+    except (etree.XMLSyntaxError, ValueError):
+        logger.warning("Invalid XML content provided")
+        return None
+
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
         "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
@@ -37,23 +43,25 @@ def parse_reserved_participation_part(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    xpath_query = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:companyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='missing-info-submission'])]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='reserved-procurement']/cbc:TendererRequirementTypeCode/text()"
+    xpath_query = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='missing-info-submission'])][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='selection-criteria-source'])]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='reserved-procurement']/cbc:TendererRequirementTypeCode/text()"
 
-    reserved_codes = root.xpath(xpath_query, namespaces=namespaces)
+    try:
+        reserved_codes = root.xpath(xpath_query, namespaces=namespaces)
+    except etree.XPathError:
+        logger.warning("Invalid XPath query or namespace")
+        return None
 
     if reserved_codes:
         reserved_types = set()
         for code in reserved_codes:
-            if code == "res-pub-ser":
-                reserved_types.add("publicServiceMissionorganization")
-            elif code == "res-ws":
-                reserved_types.add("shelteredWorkshop")
+            if code in RESERVED_CODE_MAPPING:
+                reserved_types.add(RESERVED_CODE_MAPPING[code])
 
         if reserved_types:
             return {
                 "tender": {
                     "otherRequirements": {
-                        "reservedparticipation": list(reserved_types),
+                        "reservedParticipation": list(reserved_types),
                     },
                 },
             }
@@ -62,14 +70,14 @@ def parse_reserved_participation_part(xml_content):
 
 
 def merge_reserved_participation_part(
-    release_json, reserved_participation_data
+    release_json: dict, reserved_participation_data: dict | None
 ) -> None:
     """
     Merge the parsed reserved participation data into the main OCDS release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        reserved_participation_data (dict): The parsed reserved participation data to be merged.
+        release_json (Dict): The main OCDS release JSON to be updated.
+        reserved_participation_data (Optional[Dict]): The parsed reserved participation data to be merged.
 
     Returns:
         None: The function updates the release_json in-place.
@@ -82,16 +90,16 @@ def merge_reserved_participation_part(
     other_requirements = tender.setdefault("otherRequirements", {})
 
     if (
-        "reservedparticipation"
+        "reservedParticipation"
         in reserved_participation_data["tender"]["otherRequirements"]
     ):
-        existing_reserved = set(other_requirements.get("reservedparticipation", []))
+        existing_reserved = set(other_requirements.get("reservedParticipation", []))
         new_reserved = set(
             reserved_participation_data["tender"]["otherRequirements"][
-                "reservedparticipation"
+                "reservedParticipation"
             ],
         )
-        other_requirements["reservedparticipation"] = list(
+        other_requirements["reservedParticipation"] = list(
             existing_reserved.union(new_reserved),
         )
 

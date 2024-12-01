@@ -1,7 +1,7 @@
 {
   "id": "2022-627512",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-bd669ac9-9b93-4f9b-ab2a-15be77e0c527",
+  "ocid": "ocds-abcd1234-b81aa969-f54e-4349-a21f-0cea14209ddf",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -49,10 +49,7 @@
           "id": "72315200"
         }
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "awardUpdate",

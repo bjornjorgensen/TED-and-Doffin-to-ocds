@@ -1,13 +1,16 @@
 # converters/bt_745_Lot.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_submission_nonelectronic_description(xml_content):
+def parse_submission_nonelectronic_description(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
     """
     Parse the XML content to extract the submission non-electronic description for each lot.
 
@@ -38,7 +41,7 @@ def parse_submission_nonelectronic_description(xml_content):
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         description = lot.xpath(
-            ".//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='no-esubmission-justification']/cbc:Description/text()",
+            ".//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='no-esubmission-justification']/cbc:Description[not(@languageID) or @languageID!='']/text()",
             namespaces=namespaces,
         )
         language_id = lot.xpath(
@@ -56,8 +59,8 @@ def parse_submission_nonelectronic_description(xml_content):
 
 
 def merge_submission_nonelectronic_description(
-    release_json,
-    submission_nonelectronic_description_data,
+    release_json: dict[str, Any],
+    submission_nonelectronic_description_data: dict[str, Any] | None,
 ) -> None:
     """
     Merge the parsed submission non-electronic description data into the main OCDS release JSON.
