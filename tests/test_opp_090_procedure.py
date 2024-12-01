@@ -44,14 +44,14 @@ def test_opp_090_procedure_integration(
         <cbc:ID>notice-1</cbc:ID>
         <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
         <cac:TenderingProcess>
-            <cac:noticeDocumentReference>
+            <cac:NoticeDocumentReference>
                 <cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID>
-            </cac:noticeDocumentReference>
+            </cac:NoticeDocumentReference>
         </cac:TenderingProcess>
         <cac:TenderingProcess>
-            <cac:noticeDocumentReference>
+            <cac:NoticeDocumentReference>
                 <cbc:ID schemeName="notice-id-ref">987e6543-e21b-12d3-a456-426614174000-07</cbc:ID>
-            </cac:noticeDocumentReference>
+            </cac:NoticeDocumentReference>
         </cac:TenderingProcess>
     </ContractAwardNotice>
     """
