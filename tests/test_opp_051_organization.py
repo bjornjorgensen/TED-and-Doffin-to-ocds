@@ -32,78 +32,113 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_opp_051_organization_awarding_cpb_buyer_indicator_integration(
-    tmp_path, setup_logging, temp_output_dir
-) -> None:
-    logger = setup_logging
+def test_awarding_cpb_buyer_indicator_values(tmp_path, temp_output_dir) -> None:
+    test_cases = [
+        # Test case 1: value "true"
+        (
+            """
+            <efac:Organization>
+                <efbc:AwardingCPBIndicator>true</efbc:AwardingCPBIndicator>
+                <efac:Company>
+                    <cac:PartyIdentification>
+                        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                    </cac:PartyIdentification>
+                </efac:Company>
+            </efac:Organization>
+        """,
+            True,
+        ),
+        # Test case 2: value "TRUE"
+        (
+            """
+            <efac:Organization>
+                <efbc:AwardingCPBIndicator>TRUE</efbc:AwardingCPBIndicator>
+                <efac:Company>
+                    <cac:PartyIdentification>
+                        <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
+                    </cac:PartyIdentification>
+                </efac:Company>
+            </efac:Organization>
+        """,
+            True,
+        ),
+        # Test case 3: value "false"
+        (
+            """
+            <efac:Organization>
+                <efbc:AwardingCPBIndicator>false</efbc:AwardingCPBIndicator>
+                <efac:Company>
+                    <cac:PartyIdentification>
+                        <cbc:ID schemeName="organization">ORG-0003</cbc:ID>
+                    </cac:PartyIdentification>
+                </efac:Company>
+            </efac:Organization>
+        """,
+            False,
+        ),
+        # Test case 4: empty organization
+        ("", False),
+        # Test case 5: missing indicator
+        (
+            """
+            <efac:Organization>
+                <efac:Company>
+                    <cac:PartyIdentification>
+                        <cbc:ID schemeName="organization">ORG-0004</cbc:ID>
+                    </cac:PartyIdentification>
+                </efac:Company>
+            </efac:Organization>
+        """,
+            False,
+        ),
+    ]
 
-    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
-    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
-        xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-        xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-        xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
-        xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1"
-        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cbc:ID>notice-1</cbc:ID>
-        <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionContent>
-                    <efext:EformsExtension>
-                        <efac:organizations>
-                            <efac:organization>
-                                <efbc:AwardingCPBIndicator>true</efbc:AwardingCPBIndicator>
-                                <efac:company>
-                                    <cac:partyIdentification>
-                                        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:partyIdentification>
-                                </efac:company>
-                            </efac:organization>
-                            <efac:organization>
-                                <efbc:AwardingCPBIndicator>false</efbc:AwardingCPBIndicator>
-                                <efac:company>
-                                    <cac:partyIdentification>
-                                        <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
-                                    </cac:partyIdentification>
-                                </efac:company>
-                            </efac:organization>
-                        </efac:organizations>
-                    </efext:EformsExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
-    </ContractAwardNotice>
-    """
+    for org_xml, should_be_included in test_cases:
+        xml_content = f"""<?xml version="1.0" encoding="UTF-8"?>
+        <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+            xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+            xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+            xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+            xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+            xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+            xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionContent>
+                        <efext:EformsExtension>
+                            <efac:Organizations>
+                                {org_xml}
+                            </efac:Organizations>
+                        </efext:EformsExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+        </ContractNotice>
+        """
 
-    # Create input XML file
-    xml_file = tmp_path / "test_input_awarding_cpb_buyer_indicator.xml"
-    xml_file.write_text(xml_content)
+        xml_file = tmp_path / "test_input_awarding_cpb_buyer_indicator.xml"
+        xml_file.write_text(xml_content)
 
-    # Run main and get result
-    result = run_main_and_get_result(xml_file, temp_output_dir)
+        result = run_main_and_get_result(xml_file, temp_output_dir)
 
-    logger.info("Test result: %s", json.dumps(result, indent=2))
-
-    # Verify the results
-    assert "parties" in result
-    assert len(result["parties"]) == 2
-
-    procuring_entity = next(
-        (party for party in result["parties"] if party["id"] == "ORG-0001"), None
-    )
-    assert procuring_entity is not None
-    assert "roles" in procuring_entity
-    assert "procuringEntity" in procuring_entity["roles"]
-
-    non_procuring_entity = next(
-        (party for party in result["parties"] if party["id"] == "ORG-0002"), None
-    )
-    assert non_procuring_entity is not None
-    assert (
-        "roles" not in non_procuring_entity
-        or "procuringEntity" not in non_procuring_entity.get("roles", [])
-    )
+        if should_be_included:
+            assert "parties" in result
+            assert any(
+                (
+                    party["id"] == "ORG-0001"
+                    and "procuringEntity" in party.get("roles", [])
+                )
+                or (
+                    party["id"] == "ORG-0002"
+                    and "procuringEntity" in party.get("roles", [])
+                )
+                for party in result["parties"]
+            )
+        else:
+            assert all(
+                "procuringEntity" not in party.get("roles", [])
+                for party in result.get("parties", [])
+            )
 
 
 if __name__ == "__main__":

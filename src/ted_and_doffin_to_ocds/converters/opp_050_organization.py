@@ -7,7 +7,24 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_buyers_group_lead_indicator(xml_content):
+def parse_buyers_group_lead_indicator(xml_content: str | bytes) -> dict | None:
+    """Parse XML content to find organizations marked as lead buyers.
+
+    Args:
+        xml_content: The XML content to parse, either as string or bytes
+
+    Returns:
+        Dict containing parties with lead buyer roles, or None if no lead buyers found
+        Example:
+        {
+            "parties": [
+                {
+                    "id": "ORG-0001",
+                    "roles": ["leadBuyer"]
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -38,8 +55,15 @@ def parse_buyers_group_lead_indicator(xml_content):
     return {"parties": [{"id": org_id, "roles": ["leadBuyer"]} for org_id in lead_orgs]}
 
 
-def merge_buyers_group_lead_indicator(release_json, lead_buyer_data) -> None:
-    """Merge lead buyer data into the release while preserving other parties and roles"""
+def merge_buyers_group_lead_indicator(
+    release_json: dict, lead_buyer_data: dict | None
+) -> None:
+    """Merge lead buyer data into the release while preserving other parties and roles.
+
+    Args:
+        release_json: The release to merge into
+        lead_buyer_data: Data about lead buyers to merge, or None if no data
+    """
     if not lead_buyer_data:
         logger.debug("No Buyers Group Lead Indicator data to merge")
         return
