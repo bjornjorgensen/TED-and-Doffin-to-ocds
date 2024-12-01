@@ -1,7 +1,7 @@
 {
   "id": "2022-366668",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7005ca06-1671-4add-b2f0-27d0199d4836",
+  "ocid": "ocds-abcd1234-2356cc62-bdbc-4ab1-8df3-cf6da303d96c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -15,10 +15,10 @@
       {
         "id": "LOT-0000",
         "techniques": {
-          "hasFrameworkAgreement": true,
           "frameworkAgreement": {
             "method": "withoutReopeningCompetition"
-          }
+          },
+          "hasFrameworkAgreement": true
         },
         "tenderPeriod": {
           "endDate": "2022-09-12T12:00:00+02:00"
@@ -123,10 +123,7 @@
       {
         "streetAddress": "Tønsberg kommune"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "tender"

@@ -1,7 +1,7 @@
 {
   "id": "2022-396301",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-88ba7832-5495-4eb3-92ec-e0e945f9856e",
+  "ocid": "ocds-abcd1234-3cd9a0c7-ba40-47c9-ba98-d6c9d4808fce",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -88,10 +88,7 @@
       "amount": 17000000.0,
       "currency": "NOK"
     },
-    "deliveryAddresses": [],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"

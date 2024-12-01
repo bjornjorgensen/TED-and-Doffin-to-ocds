@@ -1,7 +1,7 @@
 {
   "id": "ee5f74f4-d24f-4c67-beca-c7e4a17d16e4",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8ab06161-2546-4cfd-aa3a-71ea87eae71d",
+  "ocid": "ocds-abcd1234-6970b9e4-2be2-4235-8d30-a97f4ca6ac48",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -81,9 +81,6 @@
         "country": "NO"
       }
     ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    },
     "procurementMethodDetails": "Se vedlagte dokument for mer informasjon. Vi ber om at leverandører som ønsker at det gjøres en vurdering av byttekostnader om å melde interesse via kommunikasjonsmodulen i Mercell innen 07.12.2024, kl.15.00."
   },
   "tag": [

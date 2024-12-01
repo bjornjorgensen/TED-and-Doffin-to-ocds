@@ -1,7 +1,7 @@
 {
   "id": "7b469b6b-4abb-4f22-abe1-50973de8c825",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ebe6f75e-2377-460c-a8bb-9e101ae099de",
+  "ocid": "ocds-abcd1234-afa6c9ee-704c-475e-ba15-892efdf54da5",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -50,10 +50,10 @@
         },
         "hasAccessibilityCriteria": false,
         "techniques": {
-          "hasFrameworkAgreement": true,
           "frameworkAgreement": {
             "method": "withoutReopeningCompetition"
           },
+          "hasFrameworkAgreement": true,
           "hasElectronicAuction": false
         },
         "otherRequirements": {
@@ -83,10 +83,7 @@
         },
         "relatedLot": "LOT-0001"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "tender"

@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e398e133-9612-48f8-8e28-86c7266eadb0",
+  "ocid": "ocds-abcd1234-c21446b5-fd9c-460c-b627-42895a8b4334",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -316,9 +316,6 @@
         "description": "Anywhere in the given country"
       }
     ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    },
     "documents": [
       {
         "id": "FiscalDocID1",
@@ -677,8 +674,8 @@
         "locality": "Luxembourg"
       },
       "roles": [
-        "leadTenderer",
-        "tenderer"
+        "tenderer",
+        "leadTenderer"
       ]
     },
     {

@@ -1,7 +1,7 @@
 {
   "id": "2023-600143",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ba16384a-1f56-4283-8451-7874d9011aa6",
+  "ocid": "ocds-abcd1234-f1d0532b-23d1-4ed8-88de-e78fee865c5d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -83,10 +83,7 @@
       {
         "streetAddress": "Tønsberg"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "tender"

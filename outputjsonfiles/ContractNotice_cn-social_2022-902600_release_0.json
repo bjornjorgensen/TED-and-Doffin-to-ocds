@@ -1,7 +1,7 @@
 {
   "id": "2022-902600",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b67e1bf4-34f0-421f-b875-7e72d7303710",
+  "ocid": "ocds-abcd1234-55be2d9c-201c-4008-826b-2cc2d664fd86",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -99,10 +99,7 @@
       {
         "streetAddress": "Agder"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "tender"
@@ -137,9 +134,9 @@
         "locality": "Arendal"
       },
       "roles": [
-        "submissionReceiptBody",
         "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "submissionReceiptBody"
       ]
     },
     {

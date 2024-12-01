@@ -1,7 +1,7 @@
 {
   "id": "2023-684186",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-510fe209-8c47-4aaa-9ff9-84275d289f89",
+  "ocid": "ocds-abcd1234-d8dfe6e1-a8cd-4df7-b3a8-a12b6a8323d6",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -86,10 +86,7 @@
       {
         "description": "Anywhere"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "award",

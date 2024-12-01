@@ -1,7 +1,7 @@
 {
   "id": "2023-697632",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7b3532ea-781b-4393-9b3f-b3c191df0775",
+  "ocid": "ocds-abcd1234-a45da516-1eac-4b41-8d63-5968a7a4be9d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -107,10 +107,7 @@
         ]
       }
     ],
-    "deliveryAddresses": [],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"

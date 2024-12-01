@@ -1,7 +1,7 @@
 {
   "id": "2023-620727",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7b8a9c55-9db7-4cd3-9d50-6efad1d8b48f",
+  "ocid": "ocds-abcd1234-1c7fd488-7b12-48fc-bbc6-d4ac8422deda",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -42,10 +42,10 @@
         },
         "hasAccessibilityCriteria": false,
         "techniques": {
-          "hasFrameworkAgreement": true,
           "frameworkAgreement": {
             "method": "withoutReopeningCompetition"
-          }
+          },
+          "hasFrameworkAgreement": true
         }
       }
     ],
@@ -105,10 +105,7 @@
       {
         "streetAddress": "Vågå"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "tender"
@@ -141,9 +138,9 @@
         ]
       },
       "roles": [
-        "submissionReceiptBody",
         "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "submissionReceiptBody"
       ],
       "address": {
         "locality": "VÅGÅ"

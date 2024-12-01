@@ -50,12 +50,10 @@ def parse_framework_agreement(xml_content: str) -> dict[str, dict] | None:
 
         if framework_agreement and framework_agreement[0] in method_mapping:
             mapped_method = method_mapping[framework_agreement[0]]
-            lots_data[lot_id] = {
-                "techniques": {
-                    "hasFrameworkAgreement": True,
-                    "frameworkAgreement": {"method": mapped_method},
-                },
-            }
+            lot_data = {"techniques": {"frameworkAgreement": {"method": mapped_method}}}
+            if framework_agreement[0] != "none":
+                lot_data["techniques"]["hasFrameworkAgreement"] = True
+            lots_data[lot_id] = lot_data
 
     return lots_data if lots_data else None
 

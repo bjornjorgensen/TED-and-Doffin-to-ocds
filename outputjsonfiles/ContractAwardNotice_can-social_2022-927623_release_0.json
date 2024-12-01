@@ -1,7 +1,7 @@
 {
   "id": "2022-927623",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-201656e2-1c2f-4224-92e5-71645f9b0b4b",
+  "ocid": "ocds-abcd1234-f3f69eb9-1da0-4dc3-a425-d01ac11259c4",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -22,10 +22,10 @@
         "description": "Rammeavtalen for delkontrakt 1 (Oslo politidistrikt og omegn) skal dekke Kundens behov for vakt- og sikkerhetstjenester. Dette omfatter også tilfeller ved økt beredskap. Rammeavtalen avgrenses mot: • Verditransport, leie av droppsafe og kontanthåndtering • installasjon og service på alarmsystemer For nærmere beskrivelse vises det til konkurransedokumentene. Oppdragsgiver har opsjon på å forlenge avtalen med de samme betingelser med 1 + 1 år slik at total mulig avtalelengde fra planlagt oppstartsdato 9. mars 2023 er 4 år.",
         "hasAccessibilityCriteria": false,
         "techniques": {
-          "hasFrameworkAgreement": true,
           "frameworkAgreement": {
             "method": "withoutReopeningCompetition"
-          }
+          },
+          "hasFrameworkAgreement": true
         }
       },
       {
@@ -38,10 +38,10 @@
         "description": "Rammeavtalen for delkontrakt 2 (Politihøgskolen i Bodø, Troms politidistrikt (opsjon), Nordland politistrikt (opsjon)) skal dekke Kundens behov for vakt- og sikkerhetstjenester. Dette omfatter også tilfeller ved økt beredskap. Rammeavtalen avgrenses mot: • Verditransport, leie av droppsafe og kontanthåndtering • installasjon og service på alarmsystemer For nærmere beskrivelse vises det til konkurransedokumentene. Oppdragsgiver har opsjon på å forlenge avtalen med de samme betingelser med 1 + 1 år slik at total mulig avtalelengde fra planlagt oppstartsdato 9. mars 2023 er 4 år.",
         "hasAccessibilityCriteria": false,
         "techniques": {
-          "hasFrameworkAgreement": true,
           "frameworkAgreement": {
             "method": "withoutReopeningCompetition"
-          }
+          },
+          "hasFrameworkAgreement": true
         }
       }
     ],
@@ -99,10 +99,7 @@
       {
         "streetAddress": "Bodø"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "award",

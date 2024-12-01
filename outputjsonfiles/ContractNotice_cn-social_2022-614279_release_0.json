@@ -1,7 +1,7 @@
 {
   "id": "2022-614279",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ea943285-ece8-4c7f-801a-1866daa1215e",
+  "ocid": "ocds-abcd1234-a6561425-c9e3-430d-b923-afdf1f02c8f1",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -35,10 +35,10 @@
         },
         "hasAccessibilityCriteria": false,
         "techniques": {
-          "hasFrameworkAgreement": true,
           "frameworkAgreement": {
             "method": "withoutReopeningCompetition"
-          }
+          },
+          "hasFrameworkAgreement": true
         }
       }
     ],
@@ -88,10 +88,7 @@
       "amount": 34000000.0,
       "currency": "NOK"
     },
-    "deliveryAddresses": [],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"

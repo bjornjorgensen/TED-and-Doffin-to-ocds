@@ -1,7 +1,7 @@
 {
   "id": "2022-347651",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4ec72254-641b-427b-beb2-cb54ea23d4ec",
+  "ocid": "ocds-abcd1234-68f464dc-c733-4542-b217-f09499f1ca12",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -99,10 +99,7 @@
       {
         "streetAddress": "Haugesund"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "award",

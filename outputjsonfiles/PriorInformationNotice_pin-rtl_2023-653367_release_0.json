@@ -1,7 +1,7 @@
 {
   "id": "2023-653367",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8c46f9d6-216e-4ea8-adc2-a3f526b4d440",
+  "ocid": "ocds-abcd1234-33e1b685-192c-45fd-b8ab-af29e752e4b0",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -997,10 +997,7 @@
       {
         "streetAddress": "Bergen"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "tender"

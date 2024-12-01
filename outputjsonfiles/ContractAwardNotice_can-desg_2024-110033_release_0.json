@@ -1,7 +1,7 @@
 {
   "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ab189164-94bd-45fb-aa25-2ff2173fec5e",
+  "ocid": "ocds-abcd1234-e86210f2-8635-40d0-b44a-2b438af2a7ab",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -98,10 +98,7 @@
     ],
     "additionalProcurementCategories": [
       "services"
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "award",

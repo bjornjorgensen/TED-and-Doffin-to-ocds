@@ -1,7 +1,7 @@
 {
   "id": "629a037e-e8dd-4b02-a19e-e890bd114fda",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-43d202ae-85c4-4125-821e-6228ad46ac16",
+  "ocid": "ocds-abcd1234-df476e56-28b1-4ba9-8816-428781dea63d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -52,10 +52,7 @@
       {
         "rationale": "See the link below for the notice and annexes. \nAnnons:\nhttps://tendsign.com/doc.aspx?MeFormsNoticeId=8014\nSurface:\nhttps://tendsign.com/doc.aspx?MeFormsNoticeId=8014&GoTo=Docs"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "tender"

@@ -1,7 +1,7 @@
 {
   "id": "2023-624725",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-dd9eeccb-620e-4051-8b44-b8a8d612753e",
+  "ocid": "ocds-abcd1234-460a0495-7243-42c1-8479-fb2a12ef2662",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -103,10 +103,7 @@
       {
         "streetAddress": "Bjørnafjorden kommune"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "tender"

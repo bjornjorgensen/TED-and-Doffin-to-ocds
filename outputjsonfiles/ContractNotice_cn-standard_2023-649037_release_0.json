@@ -1,7 +1,7 @@
 {
   "id": "2023-649037",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a9eb98fd-7910-4b55-b599-552fa7eddfd6",
+  "ocid": "ocds-abcd1234-7ae53a7d-d08e-47a9-8382-09799da3b353",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -15,10 +15,10 @@
       {
         "id": "LOT-1-8",
         "techniques": {
-          "hasFrameworkAgreement": true,
           "frameworkAgreement": {
             "method": "withoutReopeningCompetition"
           },
+          "hasFrameworkAgreement": true,
           "hasElectronicAuction": false
         },
         "coveredBy": [
@@ -135,10 +135,7 @@
     "lotDetails": {
       "maximumLotsBidPerSupplier": 1
     },
-    "deliveryAddresses": [],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"

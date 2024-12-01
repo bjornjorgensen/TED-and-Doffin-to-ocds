@@ -1,7 +1,7 @@
 {
   "id": "2022-674620",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0a1d4224-635b-4eb1-bf4c-c097db3c9827",
+  "ocid": "ocds-abcd1234-f8d44651-9c8e-448e-b977-ffb2d1ac7671",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -53,10 +53,7 @@
       {
         "streetAddress": "Hele landet inkl Svalbard"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "award",

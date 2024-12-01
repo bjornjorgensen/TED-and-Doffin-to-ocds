@@ -1,7 +1,7 @@
 {
   "id": "2023-674343",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ffd1323c-7035-41d7-834d-0dbb4f401396",
+  "ocid": "ocds-abcd1234-e5b31411-ac13-4ddf-a468-109535b8b1aa",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -91,10 +91,7 @@
       "amount": 9700000.0,
       "currency": "NOK"
     },
-    "deliveryAddresses": [],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"
@@ -126,8 +123,8 @@
         "email": "riik@kongsvinger.kommune.no"
       },
       "roles": [
-        "leadBuyer",
         "buyer",
+        "leadBuyer",
         "processContactPoint"
       ],
       "address": {

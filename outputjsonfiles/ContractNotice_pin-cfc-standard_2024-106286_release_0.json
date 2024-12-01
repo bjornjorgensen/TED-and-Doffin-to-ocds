@@ -1,7 +1,7 @@
 {
   "id": "74f9d169-452b-4a99-b8d2-f54c3c71e163",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-65449507-f69b-4891-904d-214b134a9b1a",
+  "ocid": "ocds-abcd1234-919f4809-e1b6-44e0-99ee-02b2a2e5baa3",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -112,10 +112,7 @@
       {
         "country": "NO"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "tender"

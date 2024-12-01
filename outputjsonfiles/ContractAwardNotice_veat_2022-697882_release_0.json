@@ -1,7 +1,7 @@
 {
   "id": "2022-697882",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1a9498cf-b3ba-414a-ba0a-b3cf2cdba752",
+  "ocid": "ocds-abcd1234-b77e8979-c3e0-469c-a321-70be522a51de",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -25,10 +25,10 @@
         "description": "Regjeringen har besluttet at det skal etableres to nivå for legemiddelberedskap i Norge. Gjennom B180 beredskapslageret (Nasjonalt beredskapslager av legemiddel), som eies av Helse Vest RHF og ledes av Sjukehusapoteka Vest HF, er det vurdert at det skal opprettes nasjonal beredskap på flere utvalgte legemidler. Intensjonskunngjøringen gjelder kjøp av: N05AD01, Haldol inj 5mg/ml, 5x1 ml, inntil totalverdi i maks AIP 67 000 kr N05AX08, Risperdal Consta inj subst 37,5mg, 25mg og 50mg, inntil totalverdi i maks AIP 1 315 000 kr N05AX13, Xeplion depotinj 100mg, 75mg og 150mg, inntil inntil totalverdi i maks AIP 6 050 000kr til Nasjonalt Beredskapslager, B180 Sykehusinnkjøp HF, divisjon legemidler (Sykehusinnkjøp) gjennomfører anskaffelser av og innhenter tilbud på helseforetaksfinansierte legemidler. Sykehusinnkjøp er gitt i mandat å anskaffe legemiddelet. Sykehusinnkjøp har tidligere kunngjort og gjennomført en åpne anbudskonkurranser om farmasøytiske spesialpreparater («LIS 2207c Parenterale legemidler»). Konkurransene omfattet nevnte legemidler, ettersom det i konkurransegrunnlaget vedlegg 3 - «Prisskjema» ble bedt om tilbud på virkestoffet (legemiddelet eller rimelige alternativer). I konkurransene ble det ikke mottatt tilbud på virkestoffene (legemiddelet eller rimelige alternativer), og denne delen av konkurransen må derfor betegnes som mislykket. Sykehusinnkjøp har undersøkt hvilke aktuelle legemidler som oppfyller regulatoriske krav i Norge. Dersom det finnes legemiddel med markedsføringstillatelse i Norge, kan det ikke videre anskaffes et alternativt legemiddel med markedsføringstillatelse i et annet land i EU/EØS-området. Dette følger av lov om legemidler m.v. §§ 8 og 10, sml. forskrift om legemidler kapittel 2. Videre henger dette sammen med at Sykehusinnkjøp som legemiddelformidler har krav til sin virksomhet, jf. forskrift om grossistvirksomhet med legemidler § 33a. I henhold til www.legemiddelsok.no er det ingen andre enn JANSSEN-CILAG AS som har markedsføringstillatelse for nevnte legemidler og markedsfører for tiden i Norge. Sykehusinnkjøp vurderer at ingen andre mulige tilbydere av legemidlene vil kunne oppfylle regulatoriske krav i Norge (markedsføringstillatelse i Norge) og være leveringsdyktige til å oppfylle kontrakten innen den tid oppdragsgiver har behov for, og at det ikke finnes rimelige alternativer til legemiddelet. Det er derfor objektivt umulig å gjennomføre en ordinær konkurranse eller en konkurranse etter anskaffelsesforskriften § 13-3. Omfanget av kontrakten er ikke større enn nødvendig. Mot denne bakgrunn har Sykehusinnkjøp har intensjon om å sørge for inngåelse av kontrakt mellom Helse Vest RHF og Leverandøren om kjøp av legemidlene. Sykehusinnkjøp ber om at eventuelle innsigelser til denne intensjonskunngjøringen fremmes og mottas av Sykehusinnkjøp innen utløpet av karenstiden, som fastsettes til 10 kalenderdager regnet fra dagen etter at intensjonskunngjøringen er offentliggjort. Dersom det ikke mottas innsigelser, vil kontrakter inngås etter at karenstiden er utløpt.",
         "hasAccessibilityCriteria": false,
         "techniques": {
-          "hasFrameworkAgreement": true,
           "frameworkAgreement": {
             "method": "withoutReopeningCompetition"
-          }
+          },
+          "hasFrameworkAgreement": true
         }
       }
     ],
@@ -52,10 +52,7 @@
         },
         "relatedLot": "LOT-0000"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "award",

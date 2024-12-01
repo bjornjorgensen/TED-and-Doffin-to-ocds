@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3a49b579-f8ce-4b25-aa21-88c361b7e5e2",
+  "ocid": "ocds-abcd1234-ec05dfb2-1ff1-4404-9800-6c568b4b6236",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -153,10 +153,7 @@
       {
         "description": "Installation in On-prem Helse Nord ICT computer centre in Tromsø."
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "award",
@@ -217,8 +214,8 @@
         "locality": "VADSØ"
       },
       "roles": [
-        "leadBuyer",
         "buyer",
+        "leadBuyer",
         "processContactPoint",
         "reviewContactPoint"
       ]

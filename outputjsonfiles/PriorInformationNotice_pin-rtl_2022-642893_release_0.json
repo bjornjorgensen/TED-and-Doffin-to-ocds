@@ -1,7 +1,7 @@
 {
   "id": "2022-642893",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-81b64ae7-4fe3-4613-b053-be69c2e63f1f",
+  "ocid": "ocds-abcd1234-14ec5d46-1a64-4a75-ae22-67d6eaa62252",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -74,10 +74,7 @@
         ]
       }
     ],
-    "deliveryAddresses": [],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    "deliveryAddresses": []
   },
   "tag": [
     "tender"

@@ -1,7 +1,7 @@
 {
   "id": "2023-664435",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-aa342cba-6384-4e2c-962d-5dd47d27ab22",
+  "ocid": "ocds-abcd1234-887f1fc8-150a-40c2-9f43-57bc77881206",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -100,10 +100,7 @@
       {
         "streetAddress": "Tromsø og Harstad"
       }
-    ],
-    "techniques": {
-      "hasFrameworkAgreement": false
-    }
+    ]
   },
   "tag": [
     "tender"
