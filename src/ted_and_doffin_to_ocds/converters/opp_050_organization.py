@@ -20,24 +20,18 @@ def parse_buyers_group_lead_indicator(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    result = {"parties": []}
-
-    organizations = root.xpath(
-        "//efac:Organizations/efac:Organization", namespaces=namespaces
+    # Using a more specific XPath to select only organizations with GroupLeadIndicator="true"
+    lead_orgs = root.xpath(
+        """//efac:Organizations/efac:Organization[
+            efbc:GroupLeadIndicator[translate(text(), 'TRUE', 'true')='true']
+        ]/efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()""",
+        namespaces=namespaces,
     )
-    for org in organizations:
-        lead_indicator = org.xpath(
-            "efbc:GroupLeadIndicator/text()", namespaces=namespaces
-        )
-        if lead_indicator and lead_indicator[0].lower() == "true":
-            org_id = org.xpath(
-                "efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
-                namespaces=namespaces,
-            )
-            if org_id:
-                result["parties"].append({"id": org_id[0], "roles": ["leadBuyer"]})
 
-    return result if result["parties"] else None
+    if not lead_orgs:
+        return None
+
+    return {"parties": [{"id": org_id, "roles": ["leadBuyer"]} for org_id in lead_orgs]}
 
 
 def merge_buyers_group_lead_indicator(release_json, lead_buyer_data) -> None:

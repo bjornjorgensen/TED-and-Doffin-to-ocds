@@ -70,7 +70,7 @@ def run_main_and_get_result(xml_file, output_dir):
                 }
             },
         ),
-        ("none", {"tender": {"techniques": {"hasFrameworkAgreement": False}}}),
+        ("none", {"tender": {}}),
     ],
 )
 def test_bt_765_part_framework_agreement(
@@ -98,10 +98,11 @@ def test_bt_765_part_framework_agreement(
     logger.info("Result for %s: %s", framework_code, json.dumps(result, indent=2))
 
     assert "tender" in result
-    assert "techniques" in result["tender"]
-
-    expected_techniques = expected_result["tender"]["techniques"]
-    assert result["tender"]["techniques"] == expected_techniques
+    if framework_code != "none":
+        assert "techniques" in result["tender"]
+        assert result["tender"]["techniques"] == expected_result["tender"]["techniques"]
+    else:
+        assert "techniques" not in result["tender"]
 
 
 if __name__ == "__main__":
