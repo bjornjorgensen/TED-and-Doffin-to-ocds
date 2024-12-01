@@ -1,7 +1,7 @@
 {
   "id": "2022-943732",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-546189bc-4eed-4fa9-8bb5-aaced25f3173",
+  "ocid": "ocds-abcd1234-9e8e31c6-4b9e-4a8b-8fe2-81552a8b0230",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -191,7 +191,8 @@
     {
       "id": "CON-0001",
       "dateSigned": "2022-08-24T23:59:59Z",
-      "awardID": "RES-0001"
+      "awardID": "RES-0001",
+      "title": "21-04911 Kantinedrift"
     }
   ],
   "awards": [

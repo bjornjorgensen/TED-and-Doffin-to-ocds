@@ -7,7 +7,7 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_clean_vehicles_directive(xml_content):
+def parse_clean_vehicles_directive(xml_content: str | bytes) -> dict[str, bool] | None:
     """
     Parse the XML content to extract the Clean Vehicles Directive applicability for each lot.
 
@@ -43,7 +43,7 @@ def parse_clean_vehicles_directive(xml_content):
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         applicable_legal_basis = lot.xpath(
-            ".//efac:StrategicProcurement/efbc:ApplicableLegalBasis[@listName='cvd-scope']/text()",
+            ".//cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:StrategicProcurement/efbc:ApplicableLegalBasis[@listName='cvd-scope']/text()",
             namespaces=namespaces,
         )
 
@@ -53,7 +53,9 @@ def parse_clean_vehicles_directive(xml_content):
     return result if result else None
 
 
-def merge_clean_vehicles_directive(release_json, clean_vehicles_directive_data) -> None:
+def merge_clean_vehicles_directive(
+    release_json: dict, clean_vehicles_directive_data: dict[str, bool] | None
+) -> None:
     """
     Merge the parsed Clean Vehicles Directive data into the main OCDS release JSON.
 

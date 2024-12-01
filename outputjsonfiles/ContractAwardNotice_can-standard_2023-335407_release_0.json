@@ -1,7 +1,7 @@
 {
   "id": "2023-335407",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1729b449-7b36-4ede-a1dd-b2c6315a4e30",
+  "ocid": "ocds-abcd1234-b62c4d76-05fc-4781-b883-b2ae904074e4",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -200,7 +200,8 @@
     {
       "id": "CON-0001",
       "dateSigned": "2023-09-26T23:59:59Z",
-      "awardID": "RES-0001"
+      "awardID": "RES-0001",
+      "title": "Utarbeidelse av felles kommunale sikkerhetskrav"
     }
   ],
   "awards": [

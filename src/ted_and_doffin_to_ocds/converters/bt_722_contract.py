@@ -7,7 +7,9 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_contract_eu_funds(xml_content):
+def parse_contract_eu_funds(
+    xml_content: str | bytes,
+) -> dict[str, list[dict[str, str]]] | None:
     """
     Parse the XML content to extract contract EU funds programme information.
 
@@ -33,7 +35,7 @@ def parse_contract_eu_funds(xml_content):
     result = {"contracts": []}
 
     settled_contracts = root.xpath(
-        "//efac:noticeResult/efac:SettledContract",
+        "//ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract",
         namespaces=namespaces,
     )
 
@@ -55,7 +57,7 @@ def parse_contract_eu_funds(xml_content):
 
             # Find corresponding LotResult
             lot_result = root.xpath(
-                f"//efac:noticeResult/efac:LotResult[efac:SettledContract/cbc:ID[@schemeName='contract']/text()='{contract_id[0]}']",
+                f"//ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult[efac:SettledContract/cbc:ID[@schemeName='contract']/text()='{contract_id[0]}']",
                 namespaces=namespaces,
             )
             if lot_result:
@@ -71,7 +73,9 @@ def parse_contract_eu_funds(xml_content):
     return result if result["contracts"] else None
 
 
-def merge_contract_eu_funds(release_json, contract_eu_funds_data) -> None:
+def merge_contract_eu_funds(
+    release_json: dict, contract_eu_funds_data: dict[str, list[dict[str, str]]] | None
+) -> None:
     """
     Merge the parsed contract EU funds data into the main OCDS release JSON.
 

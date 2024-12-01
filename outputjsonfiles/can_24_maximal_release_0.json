@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-156bc666-0309-4eb6-8c98-f5f0246cca12",
+  "ocid": "ocds-abcd1234-c57812a8-e1cd-4485-8bf8-6dcf56198206",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -971,6 +971,7 @@
       "id": "CON-0001",
       "dateSigned": "2023-03-24T23:59:59+02:00",
       "awardID": "RES-0001",
+      "title": "This is the title of the contract ---",
       "relatedProcesses": [
         {
           "id": "1",
@@ -985,6 +986,8 @@
     {
       "id": "CON-0002",
       "dateSigned": "2023-03-24T23:59:59+02:00",
+      "title": "Title of second contract ---",
+      "awardID": "RES-0001",
       "relatedProcesses": [
         {
           "id": "1",
@@ -994,8 +997,7 @@
             "framework"
           ]
         }
-      ],
-      "awardID": "RES-0001"
+      ]
     }
   ],
   "description": "Additional information --- Additional information for GLO-0001 ProcurementProject --- Additional information for GLO-0001 ProcurementProject --- Additional information for lot 2 ProcurementProject ---",

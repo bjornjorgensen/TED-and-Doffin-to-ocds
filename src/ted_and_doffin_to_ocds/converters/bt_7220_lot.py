@@ -50,9 +50,7 @@ def parse_lot_eu_funds(
 
             # Get all funding programs for this lot
             funding_elements = lot.xpath(
-                """cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/
-                ext:ExtensionContent/efext:EformsExtension/efac:Funding/
-                cbc:FundingProgramCode[@listName='eu-programme']""",
+                "cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Funding/cbc:FundingProgramCode[@listName='eu-programme']",
                 namespaces=NAMESPACES,
             )
 

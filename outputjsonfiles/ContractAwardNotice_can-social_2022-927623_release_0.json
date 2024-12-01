@@ -1,7 +1,7 @@
 {
   "id": "2022-927623",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c7c66369-7313-464d-87fc-7ffa81c80e0b",
+  "ocid": "ocds-abcd1234-fc8e4876-9016-451e-a5f9-71abb638f696",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -217,11 +217,14 @@
     {
       "id": "CON-0001",
       "dateSigned": "2022-10-14T23:59:59Z",
-      "awardID": "RES-0001"
+      "awardID": "RES-0001",
+      "title": "Rammeavtale vakt- og sikkerhetstjenester Delkontrakt 1"
     },
     {
       "id": "CON-0002",
-      "dateSigned": "2022-10-14T23:59:59Z"
+      "dateSigned": "2022-10-14T23:59:59Z",
+      "title": "Rammeavtale vakt- og sikkerhetstjenester Delkontrakt 2",
+      "awardID": "RES-0001"
     }
   ],
   "description": "Oppdragsgiver har opsjon på å forlenge avtalen med de samme betingelser med 1 + 1 år slik at total mulig avtalelengde fra planlagt oppstartsdato 9. mars 2023 er 4 år. Oppdragsgiver har opsjon på å forlenge avtalen med de samme betingelser med 1 + 1 år slik at total mulig avtalelengde fra planlagt oppstartsdato 9. mars 2023 er 4 år.",

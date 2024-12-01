@@ -1,7 +1,7 @@
 {
   "id": "2022-960991",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0d991718-2568-4ce8-a36a-6e23ad6933ab",
+  "ocid": "ocds-abcd1234-d4084b9a-b495-49d4-8977-784a85fbe607",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -192,7 +192,8 @@
     {
       "id": "CON-0001",
       "dateSigned": "2022-09-30T23:59:59Z",
-      "awardID": "RES-0001"
+      "awardID": "RES-0001",
+      "title": "Delivery and maintenance of a Cell Broadcasti ng Enti ty with associated services"
     }
   ],
   "awards": [

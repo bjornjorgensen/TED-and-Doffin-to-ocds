@@ -1,7 +1,7 @@
 {
   "id": "2022-945801",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-5a5e43b8-d28b-458f-bdac-a860767639f9",
+  "ocid": "ocds-abcd1234-8a17ab52-db72-4da2-8505-1e88eb65f29a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -140,7 +140,8 @@
     {
       "id": "CON-0001",
       "dateSigned": "2022-11-03T23:59:59Z",
-      "awardID": "RES-0001"
+      "awardID": "RES-0001",
+      "title": "Bedriftshelsetjeneste"
     }
   ],
   "description": "Mercell kunngjøring: https://opic.com/id/afsjxeyerv",

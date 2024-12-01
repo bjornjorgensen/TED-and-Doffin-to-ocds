@@ -1,7 +1,7 @@
 {
   "id": "65ffd92d-8eee-4787-a7fe-925106611edc",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-603fbfd8-d156-4979-8f8b-24a2b1969a11",
+  "ocid": "ocds-abcd1234-d85c93a5-f0d3-4c70-aa20-6c2a560a5aa8",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -237,6 +237,7 @@
   "contracts": [
     {
       "id": "CON-0001",
+      "title": "Drift av kantine på Leikanger-Iss Facility Services AS",
       "awardID": "RES-0001"
     }
   ],

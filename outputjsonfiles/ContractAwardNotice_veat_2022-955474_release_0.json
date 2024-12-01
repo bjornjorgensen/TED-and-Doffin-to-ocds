@@ -1,7 +1,7 @@
 {
   "id": "2022-955474",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ada8af33-a784-4e3a-8572-2a82bba28edc",
+  "ocid": "ocds-abcd1234-cfc6af37-26a1-4d72-b8bb-7c726b546eed",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -129,7 +129,8 @@
     {
       "id": "CON-0001",
       "dateSigned": "2022-09-16T23:59:59Z",
-      "awardID": "RES-0001"
+      "awardID": "RES-0001",
+      "title": "Flytrening for kull 01.20"
     }
   ],
   "description": "Mercell kunngjøring: https://opic.com/id/afqkqguztt",

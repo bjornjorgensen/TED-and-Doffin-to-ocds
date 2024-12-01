@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-eaa8c103-570a-4c8a-9fca-f75428b587d8",
+  "ocid": "ocds-abcd1234-d4c091c6-e581-4ec1-b5fb-9ed34a34d184",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -301,6 +301,7 @@
   "contracts": [
     {
       "id": "CON-0001",
+      "title": "Første tilbud ifm direkteforhandlinger",
       "awardID": "RES-0001"
     }
   ],

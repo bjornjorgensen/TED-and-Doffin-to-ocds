@@ -7,7 +7,9 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_tender_value(xml_content: str) -> dict | None:
+def parse_tender_value(
+    xml_content: str | bytes,
+) -> dict[str, dict[str, list[dict]] | list[dict]] | None:
     """
     Parse the XML content to extract the tender value information.
 
@@ -32,7 +34,10 @@ def parse_tender_value(xml_content: str) -> dict | None:
 
     result = {"bids": {"details": []}, "awards": []}
 
-    lot_tenders = root.xpath("//efac:LotTender", namespaces=namespaces)
+    lot_tenders = root.xpath(
+        "//ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender",
+        namespaces=namespaces,
+    )
 
     for lot_tender in lot_tenders:
         tender_id = lot_tender.xpath(
@@ -83,7 +88,10 @@ def parse_tender_value(xml_content: str) -> dict | None:
     return result if result["bids"]["details"] or result["awards"] else None
 
 
-def merge_tender_value(release_json: dict, tender_value_data: dict | None) -> None:
+def merge_tender_value(
+    release_json: dict,
+    tender_value_data: dict[str, dict[str, list[dict]] | list[dict]] | None,
+) -> None:
     """
     Merge the parsed tender value data into the main OCDS release JSON.
 
