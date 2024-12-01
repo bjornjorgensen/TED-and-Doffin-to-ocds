@@ -1,7 +1,7 @@
 {
   "id": "2023-651678",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-bf6f06f8-7099-47fd-aa8f-d22a86162bb5",
+  "ocid": "ocds-abcd1234-18416cb5-3932-4bb8-94b5-034e95f6b77a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -127,9 +127,9 @@
         "email": "vidar@pilar-br.no"
       },
       "roles": [
-        "buyer",
+        "submissionReceiptBody",
         "processContactPoint",
-        "submissionReceiptBody"
+        "buyer"
       ],
       "address": {
         "locality": "Kvinesdal"

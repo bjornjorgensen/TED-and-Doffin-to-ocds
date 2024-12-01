@@ -1,7 +1,7 @@
 {
   "id": "2023-629257",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-637cb8a6-dcf3-403d-a57c-aeedf4de95d8",
+  "ocid": "ocds-abcd1234-0f1ab506-68fe-4d0b-908d-0db0793cfa67",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -192,8 +192,8 @@
         "email": "nav.tiltak.rogaland@nav.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Stravanger"

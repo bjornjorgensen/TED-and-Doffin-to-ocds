@@ -1,7 +1,7 @@
 {
   "id": "2023-698775",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b6bf01e0-0310-4155-b628-bc10d4691195",
+  "ocid": "ocds-abcd1234-ef3f683b-1b49-4661-9b81-7525b7e5c970",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -154,9 +154,9 @@
         "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/3493"
       },
       "roles": [
-        "buyer",
+        "submissionReceiptBody",
         "processContactPoint",
-        "submissionReceiptBody"
+        "buyer"
       ],
       "address": {
         "locality": "Bryne"

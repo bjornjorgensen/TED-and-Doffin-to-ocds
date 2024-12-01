@@ -1,7 +1,7 @@
 {
   "id": "2023-612007",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-5a4e30aa-1048-478f-8e13-3552774286a0",
+  "ocid": "ocds-abcd1234-63e27b2e-2abb-49f2-8427-0ea077018941",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -81,8 +81,8 @@
         "email": "e-mjorgensen@mil.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Lysaker"

@@ -1,7 +1,7 @@
 {
   "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e86210f2-8635-40d0-b44a-2b438af2a7ab",
+  "ocid": "ocds-abcd1234-8978109b-765d-41ca-99f2-6b65ec01bd21",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -132,10 +132,10 @@
         "locality": "Bergen"
       },
       "roles": [
-        "payer",
         "funder",
+        "processContactPoint",
         "buyer",
-        "processContactPoint"
+        "payer"
       ]
     },
     {

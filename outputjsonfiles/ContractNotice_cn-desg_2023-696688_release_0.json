@@ -1,7 +1,7 @@
 {
   "id": "2023-696688",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7c0ee37f-f68c-436e-89d3-c6766b0c52a6",
+  "ocid": "ocds-abcd1234-16770403-8a1b-4aef-ba37-69cf2429bc14",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -189,9 +189,9 @@
         "email": "eierskap.postmottak@trondheim.kommune.no"
       },
       "roles": [
-        "buyer",
+        "submissionReceiptBody",
         "processContactPoint",
-        "submissionReceiptBody"
+        "buyer"
       ],
       "address": {
         "locality": "Trondheim"
