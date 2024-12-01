@@ -42,10 +42,11 @@ SELECTION_CRITERION_TYPE_MAP = {
     "slc-suit-auth-mbrshp": "suitability",
     "slc-suit-ref-prof": "suitability",
     "slc-suit-reg-trade": "suitability",
+    "slc-suit-reg-prof": "suitability",
 }
 
 
-def parse_selection_criteria(
+def parse_selection_criteria_809(
     xml_content: str | bytes,
 ) -> dict[str, dict[str, list[dict[str, str]]]] | None:
     """Parse XML content to extract selection criteria (BT-809).
@@ -99,7 +100,7 @@ def parse_selection_criteria(
     return result if result["tender"]["lots"] else None
 
 
-def merge_selection_criteria(
+def merge_selection_criteria_809(
     release_json: dict, selection_criteria: dict | None = None
 ) -> None:
     """Merge selection criteria into the release JSON.

@@ -1,6 +1,6 @@
 from ted_and_doffin_to_ocds.converters.bt_809_lot import (
-    merge_selection_criteria,
-    parse_selection_criteria,
+    merge_selection_criteria_809,
+    parse_selection_criteria_809,
 )
 
 SAMPLE_XML = """<?xml version="1.0" encoding="UTF-8"?>
@@ -33,7 +33,7 @@ SAMPLE_XML = """<?xml version="1.0" encoding="UTF-8"?>
 
 def test_parse_selection_criteria():
     """Test parsing selection criteria from XML."""
-    result = parse_selection_criteria(SAMPLE_XML)
+    result = parse_selection_criteria_809(SAMPLE_XML)
 
     assert result is not None
     assert "tender" in result
@@ -65,7 +65,7 @@ def test_parse_selection_criteria_no_criteria():
         </cac:ProcurementProjectLot>
     </notice>"""
 
-    result = parse_selection_criteria(xml)
+    result = parse_selection_criteria_809(xml)
     assert result is None
 
 
@@ -97,7 +97,7 @@ def test_merge_selection_criteria():
         }
     }
 
-    merge_selection_criteria(existing_json, new_criteria)
+    merge_selection_criteria_809(existing_json, new_criteria)
 
     lot = existing_json["tender"]["lots"][0]
     assert len(lot["selectionCriteria"]["criteria"]) == 2
@@ -122,7 +122,7 @@ def test_merge_selection_criteria_new_lot():
         }
     }
 
-    merge_selection_criteria(existing_json, new_criteria)
+    merge_selection_criteria_809(existing_json, new_criteria)
 
     assert len(existing_json["tender"]["lots"]) == 1
     assert existing_json["tender"]["lots"][0]["id"] == "LOT-0001"
@@ -131,5 +131,46 @@ def test_merge_selection_criteria_new_lot():
 def test_merge_selection_criteria_none():
     """Test merging with None selection criteria."""
     existing_json = {"tender": {"lots": []}}
-    merge_selection_criteria(existing_json, None)
+    merge_selection_criteria_809(existing_json, None)
     assert existing_json == {"tender": {"lots": []}}
+
+
+def test_parse_selection_criteria_with_suit_reg_prof():
+    xml_content = """
+    <cac:ProcurementProjectLot xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                                xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+                                xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+                                xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+                                xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1">
+        <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+        <cac:TenderingTerms>
+            <ext:UBLExtensions>
+                <ext:UBLExtension>
+                    <ext:ExtensionContent>
+                        <efext:EformsExtension>
+                            <efac:SelectionCriteria>
+                                <cbc:TendererRequirementTypeCode listName="selection-criterion">slc-suit-reg-prof</cbc:TendererRequirementTypeCode>
+                            </efac:SelectionCriteria>
+                        </efext:EformsExtension>
+                    </ext:ExtensionContent>
+                </ext:UBLExtension>
+            </ext:UBLExtensions>
+        </cac:TenderingTerms>
+    </cac:ProcurementProjectLot>
+    """
+    expected_output = {
+        "tender": {
+            "lots": [
+                {
+                    "id": "LOT-0001",
+                    "selectionCriteria": {
+                        "criteria": [
+                            {"type": "suitability", "subType": "slc-suit-reg-prof"}
+                        ]
+                    },
+                }
+            ]
+        }
+    }
+    result = parse_selection_criteria_809(xml_content)
+    assert result == expected_output

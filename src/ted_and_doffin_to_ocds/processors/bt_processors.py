@@ -1640,6 +1640,14 @@ from ted_and_doffin_to_ocds.converters.bt_660_lotresult import (
     merge_framework_reestimated_value,
     parse_framework_reestimated_value,
 )
+from ted_and_doffin_to_ocds.converters.bt_681_lot import (
+    merge_foreign_subsidies_regulation,
+    parse_foreign_subsidies_regulation,
+)
+from ted_and_doffin_to_ocds.converters.bt_682_tender import (
+    merge_foreign_subsidies_measures,
+    parse_foreign_subsidies_measures,
+)
 from ted_and_doffin_to_ocds.converters.bt_702a_notice import (
     merge_notice_language,
     parse_notice_language,
@@ -1932,6 +1940,18 @@ from ted_and_doffin_to_ocds.converters.bt_802_lot import (
 from ted_and_doffin_to_ocds.converters.bt_805_lot import (
     merge_green_procurement_criteria,
     parse_green_procurement_criteria,
+)
+from ted_and_doffin_to_ocds.converters.bt_806_procedure import (
+    merge_exclusion_grounds_sources,
+    parse_exclusion_grounds_sources,
+)
+from ted_and_doffin_to_ocds.converters.bt_809_lot import (
+    merge_selection_criteria_809,
+    parse_selection_criteria_809,
+)
+from ted_and_doffin_to_ocds.converters.bt_821_lot import (
+    merge_selection_criteria_source,
+    parse_selection_criteria_source,
 )
 from ted_and_doffin_to_ocds.converters.bt_1252_procedure import (
     merge_direct_award_justification,
@@ -4432,6 +4452,16 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             "BT-67 Exclusion Grounds",
         ),
         (
+            parse_foreign_subsidies_regulation,
+            merge_foreign_subsidies_regulation,
+            "BT-681-Lot",
+        ),
+        (
+            parse_foreign_subsidies_measures,
+            merge_foreign_subsidies_measures,
+            "BT-682-Tender",
+        ),
+        (
             parse_lot_performance_terms,
             merge_lot_performance_terms,
             "BT-70-Lot (Performance Terms)",
@@ -4843,6 +4873,21 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             parse_green_procurement_criteria,
             merge_green_procurement_criteria,
             "Green Procurement Criteria (BT-805-Lot)",
+        ),
+        (
+            parse_exclusion_grounds_sources,
+            merge_exclusion_grounds_sources,
+            "Exclusion Grounds Source (BT-806-Procedure)",
+        ),
+        (
+            parse_selection_criteria_809,
+            merge_selection_criteria_809,
+            "Selection Criteria (BT-809-Lot)",
+        ),
+        (
+            parse_selection_criteria_source,
+            merge_selection_criteria_source,
+            "Selection Criteria Source (BT-821-Lot)",
         ),
         (
             parse_procedure_features,

@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9aba1eda-9598-43c6-aeb1-93a3eaf03585",
+  "ocid": "ocds-abcd1234-e398e133-9612-48f8-8e28-86c7266eadb0",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -42,6 +42,7 @@
         },
         "coveredBy": [
           "GPA",
+          "EU-FSR",
           "EU-CVD"
         ],
         "title": "Title ---",
@@ -144,8 +145,8 @@
       {
         "id": "GLO-0001",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "title": "Title ---",
         "description": "Description --- Additional information for GLO-0001 ProcurementProject ---",
@@ -323,8 +324,8 @@
         "id": "FiscalDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "publisher": {
           "id": "ORG-0002"
@@ -334,8 +335,8 @@
         "id": "EnvDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "publisher": {
           "id": "ORG-0003"
@@ -345,8 +346,8 @@
         "id": "EmplDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "publisher": {
           "id": "ORG-0004"
@@ -676,8 +677,8 @@
         "locality": "Luxembourg"
       },
       "roles": [
-        "tenderer",
-        "leadTenderer"
+        "leadTenderer",
+        "tenderer"
       ]
     },
     {
@@ -832,8 +833,10 @@
       {
         "id": "TEN-0002",
         "relatedLots": [
+          "LOT-0001",
           "LOT-0001"
         ],
+        "foreignSubsidyMeasures": "fsr-no-obj",
         "value": {
           "amount": 9999999.99,
           "currency": "EUR"
