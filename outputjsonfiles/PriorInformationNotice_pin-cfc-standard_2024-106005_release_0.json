@@ -1,7 +1,7 @@
 {
   "id": "7d111d51-8042-402a-a234-50efe86d8f4f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-444cc145-25a5-4692-b8a0-98c274261789",
+  "ocid": "ocds-abcd1234-b56bda0d-5546-44a0-9fba-0e76785791ed",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -49,7 +49,8 @@
           "criteria": [
             {
               "forReduction": true,
-              "description": "See documentation in the public proposal here: https://posten-supplier.ivalua.app/"
+              "description": "See documentation in the public proposal here: https://posten-supplier.ivalua.app/",
+              "languageID": "ENG"
             },
             {
               "title": "See documentation in the public proposal here: https://posten-supplier.ivalua.app/",

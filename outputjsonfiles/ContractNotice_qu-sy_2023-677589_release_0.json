@@ -1,7 +1,7 @@
 {
   "id": "2023-677589",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f92f9494-0fda-4991-92d0-0ac80517270a",
+  "ocid": "ocds-abcd1234-c2a45ea6-e072-455f-906c-310300043fa6",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -37,7 +37,8 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "description": "Please find more information about the qualification requirements and required documentation here https://www.achilles.com/community/transq-nordics/"
+              "description": "Please find more information about the qualification requirements and required documentation here https://www.achilles.com/community/transq-nordics/",
+              "languageID": "NOB"
             }
           ]
         },

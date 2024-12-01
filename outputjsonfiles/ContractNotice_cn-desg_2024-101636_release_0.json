@@ -1,7 +1,7 @@
 {
   "id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-42363203-d2f8-4dd7-82c3-d5eb9dcdc432",
+  "ocid": "ocds-abcd1234-845fcd64-c249-42e7-9a1c-a5b38efd1116",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -121,7 +121,8 @@
               "description": "Utdanning og faglige kvalifikasjoner: Følgende utdanning og faglige kvalifikasjoner besittes av leverandøren og/eller (avhengig av hvilke krav som er fastsatt i kunngjøringen eller i anskaffelsesdokumenterne) av de ledende medarbeiderne:\nMinstekrav til kvalifikasjonskrav\nTilstrekkelig tilgjengelig personell for å gjennomføre oppdraget:\nTilbyder må erklære å ha tilstrekkelig tilgjengelige personell. Det må gis en oversikt over tilbyders prosjektorganisasjon, som inkluder tiltenkte ressurser og reservert personell, som tilfredsstiller minstekravet til erfaring for henholdsvis nøkkelfunksjoner og støttefag. Definisjon av hva som anses som nøkkelfunksjoner og støttefunksjoner er angitt i kapittel 2.6 i konkurransegrunnlaget del III oppdragsbeskrivelsen:\nNøkkelfunksjoner:\no Minimum 10 års relevant erfaring\no Bachelor/master eller tilsvarende fra høyskole eller universitet\no Minimum 3 referanser fra tilsvarende prosjekter  \n\nStøttefunksjoner:\no Minimum 3 års relevant erfaring\no Bachelor/master eller tilsvarende fra høyskole eller universitet\no Minimum 1  referanseprosjekt fra tilsvarende prosjekter siste 3 år\nSpesiell spisskompetanse eller lang relevant erfaring kan kompensere for eventuell manglende oppfyllelse av ovennevnte."
             },
             {
-              "description": "Følgende utdanning og faglige kvalifikasjoner besittes av leverandøren og/eller (avhengig av hvilke krav som er fastsatt i kunngjøringen eller i anskaffelsesdokumenterne) av de ledende medarbeiderne:\nMinstekrav til kvalifikasjonskrav\nTilstrekkelig tilgjengelig personell for å gjennomføre oppdraget:\nTilbyder må erklære å ha tilstrekkelig tilgjengelige personell. Det må gis en oversikt over tilbyders prosjektorganisasjon, som inkluder tiltenkte ressurser og reservert personell, som tilfredsstiller minstekravet til erfaring for henholdsvis nøkkelfunksjoner og støttefag. Definisjon av hva som anses som nøkkelfunksjoner og støttefunksjoner er angitt i kapittel 2.6 i konkurransegrunnlaget del III oppdragsbeskrivelsen:\nNøkkelfunksjoner:\no Minimum 10 års relevant erfaring\no Bachelor/master eller tilsvarende fra høyskole eller universitet\no Minimum 3 referanser fra tilsvarende prosjekter  \n\nStøttefunksjoner:\no Minimum 3 års relevant erfaring\no Bachelor/master eller tilsvarende fra høyskole eller universitet\no Minimum 1  referanseprosjekt fra tilsvarende prosjekter siste 3 år\nSpesiell spisskompetanse eller lang relevant erfaring kan kompensere for eventuell manglende oppfyllelse av ovennevnte."
+              "description": "Følgende utdanning og faglige kvalifikasjoner besittes av leverandøren og/eller (avhengig av hvilke krav som er fastsatt i kunngjøringen eller i anskaffelsesdokumenterne) av de ledende medarbeiderne:\nMinstekrav til kvalifikasjonskrav\nTilstrekkelig tilgjengelig personell for å gjennomføre oppdraget:\nTilbyder må erklære å ha tilstrekkelig tilgjengelige personell. Det må gis en oversikt over tilbyders prosjektorganisasjon, som inkluder tiltenkte ressurser og reservert personell, som tilfredsstiller minstekravet til erfaring for henholdsvis nøkkelfunksjoner og støttefag. Definisjon av hva som anses som nøkkelfunksjoner og støttefunksjoner er angitt i kapittel 2.6 i konkurransegrunnlaget del III oppdragsbeskrivelsen:\nNøkkelfunksjoner:\no Minimum 10 års relevant erfaring\no Bachelor/master eller tilsvarende fra høyskole eller universitet\no Minimum 3 referanser fra tilsvarende prosjekter  \n\nStøttefunksjoner:\no Minimum 3 års relevant erfaring\no Bachelor/master eller tilsvarende fra høyskole eller universitet\no Minimum 1  referanseprosjekt fra tilsvarende prosjekter siste 3 år\nSpesiell spisskompetanse eller lang relevant erfaring kan kompensere for eventuell manglende oppfyllelse av ovennevnte.",
+              "languageID": "NOR"
             }
           ]
         },
@@ -319,10 +320,10 @@
       },
       "roles": [
         "reviewContactPoint",
-        "processContactPoint",
-        "evaluationBody",
         "submissionReceiptBody",
-        "buyer"
+        "evaluationBody",
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "GJØVIK"

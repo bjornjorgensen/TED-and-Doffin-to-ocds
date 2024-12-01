@@ -1,7 +1,7 @@
 {
   "id": "2022-360417",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a8077734-20cf-4153-b4de-c52ded0c7e0b",
+  "ocid": "ocds-abcd1234-fcb3b0dc-8130-42e3-ba02-52022820a040",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -37,7 +37,8 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "description": "Please find more information about the qualification requirements and required documentation here https://www.achilles.com/community/transq-nordics/"
+              "description": "Please find more information about the qualification requirements and required documentation here https://www.achilles.com/community/transq-nordics/",
+              "languageID": "NOB"
             }
           ]
         },

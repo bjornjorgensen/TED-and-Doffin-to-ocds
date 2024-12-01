@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c57812a8-e1cd-4485-8bf8-6dcf56198206",
+  "ocid": "ocds-abcd1234-076f7537-2aeb-4bb2-9b9b-a5aa3c96659e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -672,8 +672,8 @@
         "locality": "Luxembourg"
       },
       "roles": [
-        "tenderer",
-        "leadTenderer"
+        "leadTenderer",
+        "tenderer"
       ]
     },
     {

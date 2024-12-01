@@ -1,7 +1,7 @@
 {
   "id": "74f8c72a-5dcd-4a77-afda-6573ca30c8df",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0b46e5c6-c044-4438-9ad7-8e5832cf43b6",
+  "ocid": "ocds-abcd1234-e2a53fd1-54b5-4d2c-afdd-1ea315816ea4",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -78,7 +78,8 @@
               "description": "Det kreves erfaring fra tilsvarende oppdrag, det vil si hjemmebaserte eller andre sammenlignbare helse- og omsorgstjenester.: Dokumentasjonskrav:\nForetakets 3 viktigste offentlige leveranser de siste årene. Herunder opplysninger om verdi, tidspunkt, samt navnet på mottaker med kontaktinformasjon for eventuell referanseinnhenting.\n\n1. Redegjørelse for firmaets kvalitetssikring-/styringssystem, herunder kravene i forskrift om ledelse og kvalitetsforbedring i helse og omsorgstjenesten (FOR-2016-10-28-1250), forskrift om systematisk helse-, miljø- og sikkerhetsarbeid i virksomheter (internkontrollforskriften) (FOR-1996-12-06-1127) og kravene i konsesjonskontrakten. Er foretaket sertifisert skal sertifiseringsbevis vedlegges.\n2. Redegjørelse for søkerens arbeid med kontinuerlig forbedring, herunder avvikshåndtering.\n3. Beskrivelse av rutiner for å ivareta informasjonssikkerhet, innhenting/bruk av politiattest, taushetsbelagte opplysninger og etiske retningslinjer mm.\n4. Redegjørelse for hvordan leverandøren håndterer tilbakemeldinger/klager fra brukeren/ arbeidsledere/assistenter og pårørende. Også hvordan dette følges opp mot oppdragsgiver.\n5. Redegjørelse for hvordan leverandøren forebygger og håndterer meldinger om overgrep ( seksuelle, vold, økonomi etc.).\nOgså hvordan dette følges opp mot oppdragsgiver\n\nEr foretaket sertifisert skal sertifiseringsbevis vedlegges"
             },
             {
-              "description": "Dokumentasjonskrav:\nForetakets 3 viktigste offentlige leveranser de siste årene. Herunder opplysninger om verdi, tidspunkt, samt navnet på mottaker med kontaktinformasjon for eventuell referanseinnhenting.\n\n1. Redegjørelse for firmaets kvalitetssikring-/styringssystem, herunder kravene i forskrift om ledelse og kvalitetsforbedring i helse og omsorgstjenesten (FOR-2016-10-28-1250), forskrift om systematisk helse-, miljø- og sikkerhetsarbeid i virksomheter (internkontrollforskriften) (FOR-1996-12-06-1127) og kravene i konsesjonskontrakten. Er foretaket sertifisert skal sertifiseringsbevis vedlegges.\n2. Redegjørelse for søkerens arbeid med kontinuerlig forbedring, herunder avvikshåndtering.\n3. Beskrivelse av rutiner for å ivareta informasjonssikkerhet, innhenting/bruk av politiattest, taushetsbelagte opplysninger og etiske retningslinjer mm.\n4. Redegjørelse for hvordan leverandøren håndterer tilbakemeldinger/klager fra brukeren/ arbeidsledere/assistenter og pårørende. Også hvordan dette følges opp mot oppdragsgiver.\n5. Redegjørelse for hvordan leverandøren forebygger og håndterer meldinger om overgrep ( seksuelle, vold, økonomi etc.).\nOgså hvordan dette følges opp mot oppdragsgiver\n\nEr foretaket sertifisert skal sertifiseringsbevis vedlegges"
+              "description": "Dokumentasjonskrav:\nForetakets 3 viktigste offentlige leveranser de siste årene. Herunder opplysninger om verdi, tidspunkt, samt navnet på mottaker med kontaktinformasjon for eventuell referanseinnhenting.\n\n1. Redegjørelse for firmaets kvalitetssikring-/styringssystem, herunder kravene i forskrift om ledelse og kvalitetsforbedring i helse og omsorgstjenesten (FOR-2016-10-28-1250), forskrift om systematisk helse-, miljø- og sikkerhetsarbeid i virksomheter (internkontrollforskriften) (FOR-1996-12-06-1127) og kravene i konsesjonskontrakten. Er foretaket sertifisert skal sertifiseringsbevis vedlegges.\n2. Redegjørelse for søkerens arbeid med kontinuerlig forbedring, herunder avvikshåndtering.\n3. Beskrivelse av rutiner for å ivareta informasjonssikkerhet, innhenting/bruk av politiattest, taushetsbelagte opplysninger og etiske retningslinjer mm.\n4. Redegjørelse for hvordan leverandøren håndterer tilbakemeldinger/klager fra brukeren/ arbeidsledere/assistenter og pårørende. Også hvordan dette følges opp mot oppdragsgiver.\n5. Redegjørelse for hvordan leverandøren forebygger og håndterer meldinger om overgrep ( seksuelle, vold, økonomi etc.).\nOgså hvordan dette følges opp mot oppdragsgiver\n\nEr foretaket sertifisert skal sertifiseringsbevis vedlegges",
+              "languageID": "NOR"
             }
           ]
         },
@@ -342,8 +343,8 @@
         "locality": "Stjørdal"
       },
       "roles": [
-        "leadBuyer",
         "processContactPoint",
+        "leadBuyer",
         "buyer"
       ]
     },

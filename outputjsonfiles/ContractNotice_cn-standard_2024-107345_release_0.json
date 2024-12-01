@@ -1,7 +1,7 @@
 {
   "id": "870ff007-688a-4ad1-9ad7-28c2ae514b40",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-295d434a-7bde-4c7a-be94-299f52a6211b",
+  "ocid": "ocds-abcd1234-4d5ba149-5c37-4aef-a94f-11a8e4a406bf",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -76,7 +76,8 @@
               "description": "Bare for tjenester: Bare for tjenester: I referanseperioden  har leverandøren utført følgende viktige vareleveranser av den etterspurte type, eller følgende viktige tjenester av den etterspurte type. Oppdragsgiver kan kreve opp til tre års erfaring og tillate at det tas hensyn til erfaring fra tiden før de seneste tre år.\nMinstekrav til kvalifikasjonskrav\nLeverandøren skal ha erfaring fra sammenlignbare oppdrag som omhandler byggeledelse. \n\nDokumentasjon:\n  Beskrivelse av leverandørens inntil 3 mest relevante oppdrag i løpet av de siste 10 årene. Beskrivelsen må inkludere angivelse av oppdragets verdi, tidspunkt og mottaker (navn, telefon og e-post.) Det er leverandørens ansvar å dokumentere relevans gjennom beskrivelsen."
             },
             {
-              "description": "Bare for tjenester: I referanseperioden  har leverandøren utført følgende viktige vareleveranser av den etterspurte type, eller følgende viktige tjenester av den etterspurte type. Oppdragsgiver kan kreve opp til tre års erfaring og tillate at det tas hensyn til erfaring fra tiden før de seneste tre år.\nMinstekrav til kvalifikasjonskrav\nLeverandøren skal ha erfaring fra sammenlignbare oppdrag som omhandler byggeledelse. \n\nDokumentasjon:\n  Beskrivelse av leverandørens inntil 3 mest relevante oppdrag i løpet av de siste 10 årene. Beskrivelsen må inkludere angivelse av oppdragets verdi, tidspunkt og mottaker (navn, telefon og e-post.) Det er leverandørens ansvar å dokumentere relevans gjennom beskrivelsen."
+              "description": "Bare for tjenester: I referanseperioden  har leverandøren utført følgende viktige vareleveranser av den etterspurte type, eller følgende viktige tjenester av den etterspurte type. Oppdragsgiver kan kreve opp til tre års erfaring og tillate at det tas hensyn til erfaring fra tiden før de seneste tre år.\nMinstekrav til kvalifikasjonskrav\nLeverandøren skal ha erfaring fra sammenlignbare oppdrag som omhandler byggeledelse. \n\nDokumentasjon:\n  Beskrivelse av leverandørens inntil 3 mest relevante oppdrag i løpet av de siste 10 årene. Beskrivelsen må inkludere angivelse av oppdragets verdi, tidspunkt og mottaker (navn, telefon og e-post.) Det er leverandørens ansvar å dokumentere relevans gjennom beskrivelsen.",
+              "languageID": "NOR"
             }
           ]
         },

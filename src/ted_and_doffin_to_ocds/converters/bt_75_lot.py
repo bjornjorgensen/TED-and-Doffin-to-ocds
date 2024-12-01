@@ -1,5 +1,3 @@
-# converters/bt_75_Lot.py
-
 import logging
 
 from lxml import etree
@@ -7,16 +5,21 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_guarantee_required_description(xml_content):
+def parse_guarantee_required_description(
+    xml_content: str | bytes,
+) -> dict[str, dict[str, list[dict[str, str]]]] | None:
     """
-    Parse the XML content to extract the guarantee required description for each lot.
+    Parse guarantee required description for each lot.
+
+    BT-75-Lot: The description of the financial guarantee required from the tenderer
+    when submitting a tender. Maps to lot.submissionTerms.depositsGuarantees.
 
     Args:
-        xml_content (str or bytes): The XML content to parse.
+        xml_content: XML content to parse
 
     Returns:
-        dict: A dictionary containing the parsed guarantee required description data.
-        None: If no relevant data is found.
+        dict: Dictionary containing lot data with guarantee description
+        None: If no relevant data found
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -53,7 +56,8 @@ def parse_guarantee_required_description(xml_content):
 
 
 def merge_guarantee_required_description(
-    release_json, guarantee_description_data
+    release_json: dict,
+    guarantee_description_data: dict[str, dict[str, list[dict[str, str]]]] | None,
 ) -> None:
     """
     Merge the parsed guarantee required description data into the main OCDS release JSON.

@@ -1,7 +1,7 @@
 {
   "id": "2023-664435",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-cb3963d3-5ed5-47f2-bd32-1ac6b9317e96",
+  "ocid": "ocds-abcd1234-b00dada6-d6e4-4d0a-bf1f-e0ea1d860065",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -35,7 +35,8 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "description": "Se vedlegg."
+              "description": "Se vedlegg.",
+              "languageID": "NOB"
             }
           ]
         },

@@ -1,7 +1,7 @@
 {
   "id": "3580e3e0-275f-4489-9aab-b6f493790e00",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-de6bc842-1efa-4f04-8301-fad2bd304d5f",
+  "ocid": "ocds-abcd1234-c7b3ac77-9281-43c4-8f00-17379624d031",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -83,7 +83,8 @@
               "description": "Ved anskaffelse av varer: Attester utstedt av offisielle organer for kvalitetskontroll: Kan leverandør levere etterspurte attester utstedt av offisielle organer for kvalitetskontroll, og som kan bekrefte at varene, som er klart identifisert ved henvisning til tekniske spesifikasjoner eller standarder, som er fastsatt i kunngjøringen eller i anskaffelsesdokumentene, er i overensstemmelse med disse?\nMinstekrav til kvalifikasjonskrav"
             },
             {
-              "description": "Kan leverandør levere etterspurte attester utstedt av offisielle organer for kvalitetskontroll, og som kan bekrefte at varene, som er klart identifisert ved henvisning til tekniske spesifikasjoner eller standarder, som er fastsatt i kunngjøringen eller i anskaffelsesdokumentene, er i overensstemmelse med disse?\nMinstekrav til kvalifikasjonskrav"
+              "description": "Kan leverandør levere etterspurte attester utstedt av offisielle organer for kvalitetskontroll, og som kan bekrefte at varene, som er klart identifisert ved henvisning til tekniske spesifikasjoner eller standarder, som er fastsatt i kunngjøringen eller i anskaffelsesdokumentene, er i overensstemmelse med disse?\nMinstekrav til kvalifikasjonskrav",
+              "languageID": "NOR"
             }
           ]
         },

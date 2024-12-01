@@ -1,7 +1,7 @@
 {
   "id": "920077ce-4821-4475-9786-474c473628bd",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-24a064e9-c7d6-4604-a736-be6e4a004ad3",
+  "ocid": "ocds-abcd1234-d65b58d9-60ba-4dc0-82d8-945d8eb5e74c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -26,7 +26,8 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "description": "Se konkurransegrunnlag."
+              "description": "Se konkurransegrunnlag.",
+              "languageID": "NOR"
             }
           ]
         },

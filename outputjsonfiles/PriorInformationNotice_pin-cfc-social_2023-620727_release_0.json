@@ -1,7 +1,7 @@
 {
   "id": "2023-620727",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a5d7ac01-a92f-42f7-8593-68cb9fcc7591",
+  "ocid": "ocds-abcd1234-fec6eec3-e5da-4f10-9fca-c4f4114b3954",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -36,7 +36,8 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "description": "Se konkurransegrunnlag Del I pkt. 7, særlig pkt. 7.3-7.6."
+              "description": "Se konkurransegrunnlag Del I pkt. 7, særlig pkt. 7.3-7.6.",
+              "languageID": "NOB"
             }
           ]
         },

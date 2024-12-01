@@ -7,16 +7,21 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_reserved_execution_part(xml_content):
+def parse_reserved_execution_part(
+    xml_content: str | bytes,
+) -> dict[str, dict[str, bool]] | None:
     """
-    Parse the XML content to extract the reserved execution information for the part.
+    Parse reserved execution information for the part.
+
+    BT-736-Part: Whether the execution of the contract must be performed in the
+    framework of sheltered employment programmes.
 
     Args:
-        xml_content (str or bytes): The XML content to parse.
+        xml_content: XML content to parse
 
     Returns:
-        dict: A dictionary containing the parsed reserved execution data for the part.
-        None: If no relevant data is found or if the value is not "yes".
+        dict: Dictionary containing tender contractTerms data if found
+        None: If no relevant data found or value is not "yes"
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -30,7 +35,7 @@ def parse_reserved_execution_part(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    xpath_query = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='reserved-execution']/cbc:ExecutionRequirementCode"
+    xpath_query = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='reserved-execution']/cbc:ExecutionRequirementCode"
     reserved_execution = root.xpath(xpath_query, namespaces=namespaces)
 
     if reserved_execution and reserved_execution[0].text.lower() == "yes":
@@ -39,16 +44,18 @@ def parse_reserved_execution_part(xml_content):
     return None
 
 
-def merge_reserved_execution_part(release_json, reserved_execution_data) -> None:
+def merge_reserved_execution_part(
+    release_json: dict, reserved_execution_data: dict[str, dict[str, bool]] | None
+) -> None:
     """
-    Merge the parsed reserved execution data for the part into the main OCDS release JSON.
+    Merge reserved execution data for the part into the OCDS release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        reserved_execution_data (dict): The parsed reserved execution data for the part to be merged.
+        release_json: Target release JSON to update
+        reserved_execution_data: Reserved execution data to merge
 
-    Returns:
-        None: The function updates the release_json in-place.
+    Note:
+        Updates release_json in-place.
     """
     if not reserved_execution_data:
         logger.warning("No reserved execution data for part to merge")

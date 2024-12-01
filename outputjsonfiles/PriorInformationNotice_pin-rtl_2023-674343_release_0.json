@@ -1,7 +1,7 @@
 {
   "id": "2023-674343",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-37d575db-8ff0-4efb-b9cc-109dc1523b67",
+  "ocid": "ocds-abcd1234-5db65909-58ab-4ff2-a225-80e673525eb7",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -52,7 +52,8 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "description": "Det vises til vedlagte konkurransegrunnlag."
+              "description": "Det vises til vedlagte konkurransegrunnlag.",
+              "languageID": "NOB"
             }
           ]
         },
@@ -123,9 +124,9 @@
         "email": "riik@kongsvinger.kommune.no"
       },
       "roles": [
+        "processContactPoint",
         "leadBuyer",
         "wholesaleBuyer",
-        "processContactPoint",
         "buyer"
       ],
       "address": {

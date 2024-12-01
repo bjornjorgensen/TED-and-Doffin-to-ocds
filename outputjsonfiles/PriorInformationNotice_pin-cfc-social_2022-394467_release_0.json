@@ -1,7 +1,7 @@
 {
   "id": "2022-394467",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e5bc8503-4c4f-4168-9b17-b755e6c881aa",
+  "ocid": "ocds-abcd1234-52bcf577-1b7e-4308-abd1-9e5fbf384444",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -40,7 +40,8 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "description": "Oversikt og kort beskrivelse av vilkår: Helikopteroperatøren (HO) skal bekrefte gyldig sertifikat/Air Operator Certificate (AOC) utstedt og godkjent av Luftfartstilsynet i Norge (eller tilsvarende for utenlandsk HO) Kategori 3: PRESISJONSLEVERING AV LAST OVER BAKKENIVÅ/ SPESIALOPERASJONER Det er et krav at pilot og helikopterselskap er utsjekket på den type operasjon og kategori de skal utføre og at standard operative prosedyrer (SOP'er) er godkjent av luftfartsmyndigheter (eller tilsvarende for utenlandsk HO). Alle operasjoner skal bygge på en godkjent SOP. Ref Energi Norges \"Bransjeveileder - Helikoptertransport i kraftnæringen\" Det vil bli stilt krav til Tilbyderens kompetanse generelt og innen kraftbransjen spesielt. Det stilles krav til dokumentasjon på nødvendig opplæring i utstyrsbruk, dokumentasjon med referanser på minst tre tidligere gjennomførte oppdrag av samme type inne de tre siste årene samt minimum 1000 dokumenterte flytimer."
+              "description": "Oversikt og kort beskrivelse av vilkår: Helikopteroperatøren (HO) skal bekrefte gyldig sertifikat/Air Operator Certificate (AOC) utstedt og godkjent av Luftfartstilsynet i Norge (eller tilsvarende for utenlandsk HO) Kategori 3: PRESISJONSLEVERING AV LAST OVER BAKKENIVÅ/ SPESIALOPERASJONER Det er et krav at pilot og helikopterselskap er utsjekket på den type operasjon og kategori de skal utføre og at standard operative prosedyrer (SOP'er) er godkjent av luftfartsmyndigheter (eller tilsvarende for utenlandsk HO). Alle operasjoner skal bygge på en godkjent SOP. Ref Energi Norges \"Bransjeveileder - Helikoptertransport i kraftnæringen\" Det vil bli stilt krav til Tilbyderens kompetanse generelt og innen kraftbransjen spesielt. Det stilles krav til dokumentasjon på nødvendig opplæring i utstyrsbruk, dokumentasjon med referanser på minst tre tidligere gjennomførte oppdrag av samme type inne de tre siste årene samt minimum 1000 dokumenterte flytimer.",
+              "languageID": "NOB"
             }
           ]
         },

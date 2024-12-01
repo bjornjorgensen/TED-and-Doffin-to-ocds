@@ -13,7 +13,9 @@ CVD_CONTRACT_TYPE_LABELS = {
 }
 
 
-def parse_cvd_contract_type(xml_content):
+def parse_cvd_contract_type(
+    xml_content: str | bytes,
+) -> dict[str, dict[str, list[dict[str, str]]]] | None:
     """
     Parse the XML content to extract the CVD contract type for each lot.
 
@@ -46,7 +48,7 @@ def parse_cvd_contract_type(xml_content):
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         cvd_code = lot.xpath(
-            ".//efac:StrategicProcurementInformation/efbc:ProcurementCategoryCode[@listName='cvd-contract-type']/text()",
+            ".//cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:StrategicProcurement/efac:StrategicProcurementInformation/efbc:ProcurementCategoryCode[@listName='cvd-contract-type']/text()",
             namespaces=namespaces,
         )
 
@@ -70,7 +72,10 @@ def parse_cvd_contract_type(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_cvd_contract_type(release_json, cvd_contract_type_data) -> None:
+def merge_cvd_contract_type(
+    release_json: dict,
+    cvd_contract_type_data: dict[str, dict[str, list[dict[str, str]]]] | None,
+) -> None:
     """
     Merge the parsed CVD contract type data for lots into the main OCDS release JSON.
 

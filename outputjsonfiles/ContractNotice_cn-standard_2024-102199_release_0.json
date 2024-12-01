@@ -1,7 +1,7 @@
 {
   "id": "5681ff11-e080-4da6-b108-82db3f9b4b69",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ea17daf3-74cc-4110-a2bb-5abf2cf6e52a",
+  "ocid": "ocds-abcd1234-e74e1f59-e577-4206-98d3-2fa6db85bd30",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -74,7 +74,8 @@
               "description": "Krav til tekniske og faglige kvalifikasjoner: Krav: Leverandøren skal ha et \ndokumentert\nkvalitetsledelsessystem.\nDokumentasjonskrav: En beskrivelse av leverandørens metoder for \nkvalitetssikring.\nDersom leverandøren er sertifisert i henhold til ISO 9001 \neller tilsvarende kvalitetssikringssertifiseringer, er det \ntilstrekkelig å legge ved kopi av gyldig sertifikat."
             },
             {
-              "description": "Krav: Leverandøren skal ha et \ndokumentert\nkvalitetsledelsessystem.\nDokumentasjonskrav: En beskrivelse av leverandørens metoder for \nkvalitetssikring.\nDersom leverandøren er sertifisert i henhold til ISO 9001 \neller tilsvarende kvalitetssikringssertifiseringer, er det \ntilstrekkelig å legge ved kopi av gyldig sertifikat."
+              "description": "Krav: Leverandøren skal ha et \ndokumentert\nkvalitetsledelsessystem.\nDokumentasjonskrav: En beskrivelse av leverandørens metoder for \nkvalitetssikring.\nDersom leverandøren er sertifisert i henhold til ISO 9001 \neller tilsvarende kvalitetssikringssertifiseringer, er det \ntilstrekkelig å legge ved kopi av gyldig sertifikat.",
+              "languageID": "NOR"
             }
           ]
         },

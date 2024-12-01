@@ -1,7 +1,7 @@
 {
   "id": "2023-624725",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-723fd944-2122-4707-869c-67e0c8e6841d",
+  "ocid": "ocds-abcd1234-1715def5-f9a6-43ed-8128-bf9755f56e75",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -40,7 +40,8 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "description": "Se konsesjonsgrunnlaget"
+              "description": "Se konsesjonsgrunnlaget",
+              "languageID": "NOB"
             }
           ]
         },

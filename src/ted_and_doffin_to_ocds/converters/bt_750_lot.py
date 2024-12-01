@@ -1,22 +1,25 @@
 # converters/bt_750_Lot.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_selection_criteria(xml_content):
+def parse_selection_criteria(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
     """
     Parse the XML content to extract the selection criteria name and description for each lot.
 
     Args:
-        xml_content (str or bytes): The XML content to parse.
+        xml_content (Union[str, bytes]): The XML content to parse.
 
     Returns:
-        dict: A dictionary containing the parsed selection criteria data.
-        None: If no relevant data is found.
+        Optional[Dict[str, Any]]: A dictionary containing the parsed selection criteria data,
+                                 or None if no relevant data is found.
     """
     logger.debug("Starting parse_selection_criteria")
     if isinstance(xml_content, str):
@@ -99,11 +102,18 @@ def parse_selection_criteria(xml_content):
                 logger.debug("Skipping lot criterion with usage: %s", usage[0])
                 continue
 
-            description = criterion.xpath(
-                "cbc:Description/text()", namespaces=namespaces
+            description_element = criterion.xpath(
+                "cbc:Description",
+                namespaces=namespaces,
             )
-            if description:
-                criterion_data = {"description": description[0]}
+            if description_element:
+                description = description_element[0].text
+                language_id = description_element[0].get("languageID")
+                criterion_data = (
+                    {"description": description, "languageID": language_id}
+                    if language_id
+                    else {"description": description}
+                )
                 lot_data["selectionCriteria"]["criteria"].append(criterion_data)
                 logger.debug("Added lot criterion: %s", criterion_data)
 
@@ -115,13 +125,15 @@ def parse_selection_criteria(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_selection_criteria(release_json, selection_criteria_data) -> None:
+def merge_selection_criteria(
+    release_json: dict[str, Any], selection_criteria_data: dict[str, Any] | None
+) -> None:
     """
     Merge the parsed selection criteria data into the main OCDS release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        selection_criteria_data (dict): The parsed selection criteria data to be merged.
+        release_json (Dict[str, Any]): The main OCDS release JSON to be updated.
+        selection_criteria_data (Optional[Dict[str, Any]]): The parsed selection criteria data to be merged.
 
     Returns:
         None: The function updates the release_json in-place.

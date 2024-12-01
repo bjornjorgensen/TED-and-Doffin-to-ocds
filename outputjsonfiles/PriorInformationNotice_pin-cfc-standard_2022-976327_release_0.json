@@ -1,7 +1,7 @@
 {
   "id": "2022-976327",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a4551790-1751-4b4b-be01-16c1daf64cdf",
+  "ocid": "ocds-abcd1234-0c9bbb78-c53d-45c9-bcbe-6d14ada2bf85",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -37,7 +37,8 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "description": "Det henvises til vedlagte konkurransegrunnlag."
+              "description": "Det henvises til vedlagte konkurransegrunnlag.",
+              "languageID": "NOB"
             }
           ]
         },

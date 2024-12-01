@@ -11,7 +11,9 @@ CVD_CONTRACT_TYPE_LABELS = {
 }
 
 
-def parse_cvd_contract_type_lotresult(xml_content):
+def parse_cvd_contract_type_lotresult(
+    xml_content: str | bytes,
+) -> dict[str, list[dict[str, str | list[dict[str, str]]]]] | None:
     """Parse the XML content to extract the CVD contract type for each LotResult."""
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -32,7 +34,7 @@ def parse_cvd_contract_type_lotresult(xml_content):
     for lot_result in lot_results:
         lot_result_id = lot_result.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         cvd_code = lot_result.xpath(
-            ".//efac:StrategicProcurementInformation/efbc:ProcurementCategoryCode[@listName='cvd-contract-type']/text()",
+            "efac:StrategicProcurement/efac:StrategicProcurementInformation/efbc:ProcurementCategoryCode[@listName='cvd-contract-type']/text()",
             namespaces=namespaces,
         )
 
@@ -60,7 +62,11 @@ def parse_cvd_contract_type_lotresult(xml_content):
     return result if result["awards"] else None
 
 
-def merge_cvd_contract_type_lotresult(release_json, cvd_contract_type_data) -> None:
+def merge_cvd_contract_type_lotresult(
+    release_json: dict,
+    cvd_contract_type_data: dict[str, list[dict[str, str | list[dict[str, str]]]]]
+    | None,
+) -> None:
     """Merge the parsed CVD contract type data into the main OCDS release JSON."""
     if not cvd_contract_type_data:
         logger.warning("No CVD contract type data for LotResults to merge")

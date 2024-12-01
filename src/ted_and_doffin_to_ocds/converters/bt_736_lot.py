@@ -7,16 +7,21 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_reserved_execution(xml_content):
+def parse_reserved_execution(
+    xml_content: str | bytes,
+) -> dict[str, dict[str, list[dict[str, str | bool]]]] | None:
     """
-    Parse the XML content to extract the reserved execution information for each lot.
+    Parse the XML content to extract reserved execution information for each lot.
+
+    BT-736-Lot: Whether the execution of the contract must be performed in the
+    framework of sheltered employment programmes.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse
 
     Returns:
-        dict: A dictionary containing the parsed reserved execution data.
-        None: If no relevant data is found.
+        dict: Dictionary containing lot data with reserved execution info
+        None: If no relevant data found
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -39,7 +44,7 @@ def parse_reserved_execution(xml_content):
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         reserved_execution = lot.xpath(
-            ".//cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='reserved-execution']/cbc:ExecutionRequirementCode/text()",
+            "cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='reserved-execution']/cbc:ExecutionRequirementCode/text()",
             namespaces=namespaces,
         )
 
@@ -50,7 +55,10 @@ def parse_reserved_execution(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_reserved_execution(release_json, reserved_execution_data) -> None:
+def merge_reserved_execution(
+    release_json: dict,
+    reserved_execution_data: dict[str, dict[str, list[dict[str, str | bool]]]] | None,
+) -> None:
     """
     Merge the parsed reserved execution data into the main OCDS release JSON.
 

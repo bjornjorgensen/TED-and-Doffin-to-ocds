@@ -1,7 +1,7 @@
 {
   "id": "2022-902600",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-dae1e533-299d-439c-9653-3850e4f899d9",
+  "ocid": "ocds-abcd1234-4abef853-0cf8-4dc1-a2cd-74fddde3f57d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -36,7 +36,8 @@
         "selectionCriteria": {
           "criteria": [
             {
-              "description": "Skatteattest Tilbyder skal ha ordnede forhold med hensyn til betaling av skatt, arbeidsgiveravgift og merverdiavgift. Dokumentasjonskrav: Attest for skatt og merverdiavgift. Attesten skal ikke være eldre enn 6 måneder regnet fra tilbudsfrist. Attesten fås elektronisk i Altinn. For nærmere informasjon, se Skatteetaten.no. Merkes DOK01 Skatteattest Autorisasjon Tilbyder må bekrefte at spesialist(er) har gyldig autorisasjon innen det enkelte fagområde som det leveres inn tilbud på. Dokumentasjon: Spesialist autorisasjon Merkes DOK02 Autorisasjon"
+              "description": "Skatteattest Tilbyder skal ha ordnede forhold med hensyn til betaling av skatt, arbeidsgiveravgift og merverdiavgift. Dokumentasjonskrav: Attest for skatt og merverdiavgift. Attesten skal ikke være eldre enn 6 måneder regnet fra tilbudsfrist. Attesten fås elektronisk i Altinn. For nærmere informasjon, se Skatteetaten.no. Merkes DOK01 Skatteattest Autorisasjon Tilbyder må bekrefte at spesialist(er) har gyldig autorisasjon innen det enkelte fagområde som det leveres inn tilbud på. Dokumentasjon: Spesialist autorisasjon Merkes DOK02 Autorisasjon",
+              "languageID": "NOB"
             }
           ]
         },
