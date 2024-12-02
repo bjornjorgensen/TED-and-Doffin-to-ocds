@@ -1,7 +1,7 @@
 {
   "id": "2022-674620",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-5c8d9fea-dd05-4e02-9bd3-9aa378f6bfae",
+  "ocid": "ocds-abcd1234-bebad6de-af56-4bd1-a421-d4ddf56d0455",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -69,6 +69,11 @@
             "scheme": "COFOG",
             "id": "05",
             "description": "Environmental protection"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "cga",
+            "description": "Central government authority"
           }
         ],
         "url": "WWW.MILJODIR.NO",

@@ -1,7 +1,7 @@
 {
   "id": "2248a00d-a0d9-4eee-8db1-d209e7346f13",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-335a83db-619a-4b2e-a3a5-15a7cad9d945",
+  "ocid": "ocds-abcd1234-ef6549f2-4f0c-4da7-b5f6-cd196230c06a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -118,6 +118,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "spec-rights-entity",
+            "description": "Entity with special or exclusive rights"
           }
         ],
         "buyerProfile": "https://eu.eu-supply.com/ctm/company/companyinformation/index/358200"
@@ -135,8 +140,8 @@
         "email": "anne@pgas.no"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "reviewContactPoint"
       ],
       "address": {
@@ -151,6 +156,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "spec-rights-entity",
+            "description": "Entity with special or exclusive rights"
           }
         ]
       },

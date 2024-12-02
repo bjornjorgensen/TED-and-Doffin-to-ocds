@@ -1,3 +1,10 @@
+"""
+BT-05 Notice Dispatch Date/Time converter.
+
+Maps the notice dispatch date and time (when the notice was sent for publication)
+from IssueDate and IssueTime elements to OCDS date field in ISO format.
+"""
+
 import logging
 from datetime import datetime
 from typing import Any
@@ -17,14 +24,16 @@ NAMESPACES = {
 
 
 def parse_notice_dispatch_date_time(xml_content: str | bytes) -> str | None:
-    """
-    Parse the notice dispatch date and time from XML content.
+    """Parse the notice dispatch date/time (BT-05) from XML content.
+
+    Combines IssueDate and IssueTime elements into an ISO formatted datetime string.
 
     Args:
         xml_content: XML string or bytes to parse
 
     Returns:
-        ISO formatted datetime string or None if not found
+        ISO formatted datetime string like "2019-11-26T13:38:54+01:00"
+        or None if not found
 
     Raises:
         etree.XMLSyntaxError: If XML content is invalid
@@ -57,15 +66,17 @@ def parse_notice_dispatch_date_time(xml_content: str | bytes) -> str | None:
 
 
 def convert_to_iso_format(date_string: str, time_string: str) -> str:
-    """
-    Convert date and time strings to ISO format.
+    """Convert date and time strings to ISO format.
+
+    Combines separate date (YYYY-MM-DD) and time (HH:MM:SS) strings into
+    a single ISO formatted datetime string.
 
     Args:
-        date_string: Date in YYYY-MM-DD format
-        time_string: Time in HH:MM:SS format
+        date_string: Date in YYYY-MM-DD format, may include timezone
+        time_string: Time in HH:MM:SS format, may include timezone
 
     Returns:
-        ISO formatted datetime string
+        Combined ISO formatted datetime string
 
     Raises:
         ValueError: If date/time format is invalid
@@ -86,8 +97,9 @@ def convert_to_iso_format(date_string: str, time_string: str) -> str:
 def merge_notice_dispatch_date_time(
     release_json: dict[str, Any], dispatch_date_time: str | None
 ) -> None:
-    """
-    Merge notice dispatch datetime into the release JSON.
+    """Merge notice dispatch datetime into the release JSON.
+
+    Updates the date field with the ISO formatted dispatch datetime.
 
     Args:
         release_json: The target release JSON to update

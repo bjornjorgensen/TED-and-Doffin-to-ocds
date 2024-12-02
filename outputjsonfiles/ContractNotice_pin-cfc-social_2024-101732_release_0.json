@@ -1,7 +1,7 @@
 {
   "id": "74f8c72a-5dcd-4a77-afda-6573ca30c8df",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4c2a9b62-4cc3-4779-a2f4-48aa5b53b2c2",
+  "ocid": "ocds-abcd1234-57f74afd-b4cd-48a5-adc2-8036192d6c22",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -323,6 +323,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
           }
         ],
         "url": "https://www.varnesregionen.no/fellestjenester/innkjop"
@@ -343,9 +348,9 @@
         "locality": "Stjørdal"
       },
       "roles": [
-        "processContactPoint",
         "leadBuyer",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {
@@ -356,6 +361,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
           }
         ],
         "url": "https://www.stjordal.kommune.no"
@@ -386,6 +396,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
           }
         ]
       },
@@ -415,6 +430,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
           }
         ]
       },
@@ -444,6 +464,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
           }
         ]
       },
@@ -473,6 +498,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
           }
         ]
       },
@@ -502,6 +532,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
           }
         ]
       },

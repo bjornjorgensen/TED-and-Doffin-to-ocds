@@ -1,7 +1,7 @@
 {
   "id": "2023-697632",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e7e73585-df4d-461c-b6db-23762f2a340c",
+  "ocid": "ocds-abcd1234-3572e8a1-5fe2-4aec-bb8a-f3ef671200b2",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -122,8 +122,8 @@
         "locality": "Kyrksæterøra"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     }
   ],

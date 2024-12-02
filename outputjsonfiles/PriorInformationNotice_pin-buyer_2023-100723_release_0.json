@@ -1,7 +1,7 @@
 {
   "id": "0097de15-36cf-4750-96c9-f66ae4d6cafd",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0037ab37-6ce9-4ef9-856a-b721574d51f7",
+  "ocid": "ocds-abcd1234-83b1db0b-431d-42a0-b3be-31c1c089ea7b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -52,6 +52,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "pub-undert",
+            "description": "Public undertaking"
           }
         ],
         "url": "https://permalink.mercell.com/215950396.aspx",

@@ -1,3 +1,11 @@
+"""
+BT-04 Procedure Identifier converter.
+
+Maps the European Public Procurement Procedure Identifier from ContractFolderID
+to OCDS tender.id field. This identifier uniquely identifies procurement procedures
+across the Union.
+"""
+
 import logging
 from typing import Any
 
@@ -16,14 +24,17 @@ NAMESPACES = {
 
 
 def parse_procedure_identifier(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse the procedure identifier from XML content.
+    """Parse the procedure identifier (BT-04) from XML content.
+
+    Maps the ContractFolderID element value to tender.id in OCDS format.
 
     Args:
         xml_content: XML string or bytes to parse
 
     Returns:
-        Dictionary containing tender ID or None if not found
+        Dictionary containing tender ID mapping like:
+        {'tender': {'id': '<identifier>'}}
+        or None if no valid identifier found
 
     Raises:
         etree.XMLSyntaxError: If XML content is invalid
@@ -56,8 +67,9 @@ def parse_procedure_identifier(xml_content: str | bytes) -> dict[str, Any] | Non
 def merge_procedure_identifier(
     release_json: dict[str, Any], procedure_identifier_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge procedure identifier data into the release JSON.
+    """Merge procedure identifier data into the release JSON.
+
+    Updates the tender.id field in the release JSON with the procedure identifier.
 
     Args:
         release_json: The target release JSON to update

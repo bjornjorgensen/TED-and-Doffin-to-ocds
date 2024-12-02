@@ -1,7 +1,7 @@
 {
   "id": "2023-653024",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c1123360-b724-4d54-bec5-51566cc05b51",
+  "ocid": "ocds-abcd1234-277a69cb-e1aa-4a5f-9d1c-99f02b4bcd80",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -57,6 +57,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
           }
         ],
         "url": "http://www.moss.kommune.no"

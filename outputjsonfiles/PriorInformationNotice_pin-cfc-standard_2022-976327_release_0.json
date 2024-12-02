@@ -1,7 +1,7 @@
 {
   "id": "2022-976327",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-eb89361c-71c8-46fb-9322-b084eb80b82c",
+  "ocid": "ocds-abcd1234-2e2974b2-705b-44c9-9e0b-1587216b4d63",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -98,6 +98,11 @@
             "scheme": "COFOG",
             "id": "07",
             "description": "Health"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
           }
         ],
         "url": "http://www.oslo.kommune.no",
@@ -116,9 +121,9 @@
         "email": "leona.pilares@sye.oslo.kommune.no"
       },
       "roles": [
-        "processContactPoint",
         "submissionReceiptBody",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Oslo"

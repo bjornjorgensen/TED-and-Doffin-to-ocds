@@ -1,7 +1,7 @@
 {
   "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d121fcf1-ae0c-4ee2-9312-5e5f0940b95b",
+  "ocid": "ocds-abcd1234-c67a94b6-07f5-443b-9a67-49faf3ead099",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -116,6 +116,11 @@
             "scheme": "COFOG",
             "id": "08",
             "description": "Recreation, culture and religion"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "org-sub-cga",
+            "description": "Organisation awarding a contract subsidised by a central government authority"
           }
         ]
       },
@@ -134,10 +139,10 @@
         "locality": "Bergen"
       },
       "roles": [
-        "buyer",
-        "processContactPoint",
         "payer",
-        "funder"
+        "buyer",
+        "funder",
+        "processContactPoint"
       ]
     },
     {

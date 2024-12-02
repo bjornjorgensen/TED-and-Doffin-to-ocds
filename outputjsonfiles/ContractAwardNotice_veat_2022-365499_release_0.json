@@ -1,7 +1,7 @@
 {
   "id": "2022-365499",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9e938ee3-7df2-4cdd-a596-4772dc863342",
+  "ocid": "ocds-abcd1234-74019c99-4dec-4518-ac58-cab8b15777c4",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -79,6 +79,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
           }
         ],
         "url": "http://www.rogfk.no"

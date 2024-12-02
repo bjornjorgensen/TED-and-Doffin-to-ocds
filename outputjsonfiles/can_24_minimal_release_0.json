@@ -1,7 +1,7 @@
 {
   "id": "65667997-031a-4198-bd25-7225449ef479",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4dba67ce-4b0a-4366-8a93-869fd6545773",
+  "ocid": "ocds-abcd1234-ddddaa3d-e3b4-42b5-ae68-9ed2cd045501",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -70,6 +70,11 @@
             "scheme": "COFOG",
             "id": "06",
             "description": "Housing and community amenities"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "pub-undert-la",
+            "description": "Public undertaking, controlled by a local authority"
           }
         ]
       },

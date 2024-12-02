@@ -1,7 +1,7 @@
 {
   "id": "3580e3e0-275f-4489-9aab-b6f493790e00",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d6062e33-cdd4-47e9-92c8-19a5047ca23c",
+  "ocid": "ocds-abcd1234-183a323e-cc9c-4430-a4cf-816d8c1781ee",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -210,6 +210,22 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "pub-undert-cga",
+            "description": "Public undertaking, controlled by a central government authority"
+          },
+          {
+            "scheme": "eu-main-activity",
+            "id": "electricity",
+            "description": "Activities related to: (a) the provision or operation of fixed networks intended to provide a service to the public in connection with the production, transport or distribution of electricity; (b) the supply of electricity to such networks."
+          }
+        ],
+        "url": "http://www.elmea.no",
+        "buyerProfile": "http://www.elmea.no/"
+      },
       "name": "Elmea AS",
       "additionalIdentifiers": [
         {
@@ -222,20 +238,9 @@
         "telephone": "+47 76067606",
         "email": "finn-magne.eines@elmea.no"
       },
-      "details": {
-        "url": "http://www.elmea.no",
-        "buyerProfile": "http://www.elmea.no/",
-        "classifications": [
-          {
-            "scheme": "eu-main-activity",
-            "id": "electricity",
-            "description": "Activities related to: (a) the provision or operation of fixed networks intended to provide a service to the public in connection with the production, transport or distribution of electricity; (b) the supply of electricity to such networks."
-          }
-        ]
-      },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Svolvær"

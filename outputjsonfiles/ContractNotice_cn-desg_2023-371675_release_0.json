@@ -1,7 +1,7 @@
 {
   "id": "2023-371675",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-5dcae7c7-e4e9-4dd3-af2c-19c2ebb808d5",
+  "ocid": "ocds-abcd1234-e6d566bf-77f7-4373-aebc-a275bcc8a328",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -112,6 +112,11 @@
             "scheme": "COFOG",
             "id": "08",
             "description": "Recreation, culture and religion"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "cga",
+            "description": "Central government authority"
           }
         ],
         "url": "https://www.kulturtanken.no/",
@@ -130,9 +135,9 @@
         "email": "mhr@kulturtanken.no"
       },
       "roles": [
-        "processContactPoint",
         "submissionReceiptBody",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "OSLO"

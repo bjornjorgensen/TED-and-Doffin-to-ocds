@@ -1,10 +1,25 @@
-# converters/bt_10_procedure_buyer.py
+"""
+BT-10 Authority Activity converter.
+
+Maps contracting authority main activities to OCDS party classifications.
+Handles both COFOG and EU-specific activity classifications.
+"""
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
+
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+    "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+    "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+    "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+}
 
 # Authority activity descriptions for non-COFOG activities
 AUTHORITY_TABLE = {
@@ -35,28 +50,38 @@ COFOG_TABLE = {
 }
 
 
-def parse_authority_activity(xml_content):
-    """
-    Parse the XML content to extract the main activity of the contracting authority.
+def parse_authority_activity(xml_content: str | bytes) -> dict[str, Any] | None:
+    """Parse the authority activity (BT-10) from XML content.
+
+    Extracts authority activity codes for each contracting party and maps them
+    to OCDS party classifications using either COFOG or eu-main-activity schemes.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML string or bytes to parse
 
     Returns:
-        dict: A dictionary containing the parsed authority activity data.
-        None: If no relevant data is found.
+        Dictionary containing party classifications like:
+        {
+            "parties": [{
+                "id": "<org-id>",
+                "details": {
+                    "classifications": [{
+                        "scheme": "<cofog|eu-main-activity>",
+                        "id": "<activity-code>",
+                        "description": "<activity-description>"
+                    }]
+                }
+            }]
+        }
+        or None if no authority activity found
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-    }
 
     # Check if the relevant XPath exists
     relevant_xpath = "//cac:ContractingParty/cac:ContractingActivity/cbc:ActivityTypeCode[@listName='authority-activity']"
-    if not root.xpath(relevant_xpath, namespaces=namespaces):
+    if not root.xpath(relevant_xpath, namespaces=NAMESPACES):
         logger.info(
             "No authority activity data found. Skipping parse_authority_activity."
         )
@@ -65,16 +90,16 @@ def parse_authority_activity(xml_content):
     result = {"parties": []}
 
     # Process each contracting party
-    contracting_parties = root.xpath("//cac:ContractingParty", namespaces=namespaces)
+    contracting_parties = root.xpath("//cac:ContractingParty", namespaces=NAMESPACES)
 
     for party in contracting_parties:
         organization_id = party.xpath(
             "cac:Party/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
-            namespaces=namespaces,
+            namespaces=NAMESPACES,
         )
         activity_code = party.xpath(
             "cac:ContractingActivity/cbc:ActivityTypeCode[@listName='authority-activity']/text()",
-            namespaces=namespaces,
+            namespaces=NAMESPACES,
         )
 
         if organization_id and activity_code:
@@ -107,16 +132,17 @@ def parse_authority_activity(xml_content):
     return result if result["parties"] else None
 
 
-def merge_authority_activity(release_json, authority_activity_data) -> None:
-    """
-    Merge the parsed authority activity data into the main OCDS release JSON.
+def merge_authority_activity(
+    release_json: dict[str, Any], authority_activity_data: dict[str, Any] | None
+) -> None:
+    """Merge authority activity data into the release JSON.
+
+    Updates party details with authority activity classifications.
+    Preserves existing classifications while adding new ones.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        authority_activity_data (dict): The parsed authority activity data to be merged.
-
-    Returns:
-        None: The function updates the release_json in-place.
+        release_json: The target release JSON to update
+        authority_activity_data: The authority activity data to merge
     """
     if not authority_activity_data:
         logger.info("No authority activity data to merge")

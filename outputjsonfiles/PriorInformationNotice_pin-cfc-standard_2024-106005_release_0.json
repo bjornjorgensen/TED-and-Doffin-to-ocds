@@ -1,7 +1,7 @@
 {
   "id": "7d111d51-8042-402a-a234-50efe86d8f4f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f5d2dbcd-704f-4387-85cb-9954525476e5",
+  "ocid": "ocds-abcd1234-93eaa943-ebfa-4ac5-8fe3-fcb2a10545a4",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -156,6 +156,22 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "pub-undert-cga",
+            "description": "Public undertaking, controlled by a central government authority"
+          },
+          {
+            "scheme": "eu-main-activity",
+            "id": "post",
+            "description": "Activities related to the exploitation of a geographical area for the purpose of the provision of maritime or inland ports or other terminal facilities to carriers by sea or inland waterway."
+          }
+        ],
+        "url": "https://www.postenbring.no/",
+        "buyerProfile": "https://posten-supplier.ivalua.app/"
+      },
       "name": "Posten Bring AS",
       "additionalIdentifiers": [
         {
@@ -168,20 +184,9 @@
         "telephone": "+4748486258",
         "email": "Kristian.von.Aphelen@posten.no"
       },
-      "details": {
-        "url": "https://www.postenbring.no/",
-        "buyerProfile": "https://posten-supplier.ivalua.app/",
-        "classifications": [
-          {
-            "scheme": "eu-main-activity",
-            "id": "post",
-            "description": "Activities related to the exploitation of a geographical area for the purpose of the provision of maritime or inland ports or other terminal facilities to carriers by sea or inland waterway."
-          }
-        ]
-      },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Oslo"

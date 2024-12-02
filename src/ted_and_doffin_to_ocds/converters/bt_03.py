@@ -1,4 +1,9 @@
-# converters/bt_03.py
+"""
+BT-03 Form Type converter.
+
+This module handles conversion of procurement notice form types to OCDS format.
+It maps the form types specified in EU Vocabularies to corresponding OCDS tags and tender statuses.
+"""
 
 import logging
 
@@ -6,7 +11,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
-form_type_mapping = {
+form_type_mapping: dict[str, dict[str, list[str] | str | None]] = {
     "planning": {"tag": ["tender"], "status": "planned"},
     "competition": {"tag": ["tender"], "status": "active"},
     "change": {"tag": ["tenderUpdate"], "status": None},
@@ -16,14 +21,22 @@ form_type_mapping = {
 }
 
 
-def parse_form_type(xml_content: str | bytes) -> dict | None:
+def parse_form_type(
+    xml_content: str | bytes,
+) -> dict[str, list[str] | dict[str, str]] | None:
     """Parse the form type from XML content and return corresponding OCDS mapping.
 
     Args:
-        xml_content: XML string or bytes to parse
+        xml_content: XML string or bytes containing the notice data
 
     Returns:
-        Dictionary containing tag and tender status information, or None if parsing fails
+        Dictionary containing 'tag' list and optional 'tender' status mapping,
+        or None if parsing fails
+
+    Example:
+        >>> result = parse_form_type(xml_string)
+        >>> print(result)
+        {'tag': ['tender'], 'tender': {'status': 'active'}}
     """
     try:
         if isinstance(xml_content, str):
@@ -61,15 +74,23 @@ def parse_form_type(xml_content: str | bytes) -> dict | None:
         return result
 
 
-def merge_form_type(release_json: dict, form_type_data: dict | None) -> None:
+def merge_form_type(
+    release_json: dict[str, any], form_type_data: dict[str, any] | None
+) -> None:
     """Merge form type data into the release JSON.
 
-    Args:
-        release_json: The release JSON to update
-        form_type_data: The form type data to merge
+    Updates the release JSON with form type tags and tender status information.
 
-    Returns:
-        None
+    Args:
+        release_json: The target release JSON document to update
+        form_type_data: The form type data containing tags and status to merge
+
+    Example:
+        >>> release = {}
+        >>> form_data = {'tag': ['tender'], 'tender': {'status': 'active'}}
+        >>> merge_form_type(release, form_data)
+        >>> print(release)
+        {'tag': ['tender'], 'tender': {'status': 'active'}}
     """
     if not form_type_data:
         logger.info("No form type data to merge.")

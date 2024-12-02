@@ -1,7 +1,7 @@
 {
   "id": "2023-612007",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8db208bc-f055-45d4-a8be-67156fad4f1b",
+  "ocid": "ocds-abcd1234-7f5726db-8151-41a6-b8ac-f78f21ecf84f",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -63,6 +63,11 @@
             "scheme": "COFOG",
             "id": "02",
             "description": "Defence"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "cga",
+            "description": "Central government authority"
           }
         ],
         "url": "https://permalink.mercell.com/198572200.aspx",
@@ -81,8 +86,8 @@
         "email": "e-mjorgensen@mil.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Lysaker"

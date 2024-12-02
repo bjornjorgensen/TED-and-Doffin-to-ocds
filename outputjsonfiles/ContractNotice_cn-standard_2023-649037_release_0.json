@@ -1,7 +1,7 @@
 {
   "id": "2023-649037",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f6a1519d-c585-40c8-9a62-c7a9ade85395",
+  "ocid": "ocds-abcd1234-9a4ddb4b-a5bb-4836-89e1-09dbbc2f9aa6",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -147,6 +147,11 @@
             "scheme": "COFOG",
             "id": "07",
             "description": "Health"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
           }
         ],
         "url": "https://permalink.mercell.com/196628037.aspx",
@@ -166,8 +171,8 @@
       },
       "roles": [
         "wholesaleBuyer",
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "VADSØ"

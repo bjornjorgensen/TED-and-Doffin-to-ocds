@@ -1,7 +1,7 @@
 {
   "id": "2022-967371",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f3c0c79c-582d-4fef-adb2-f1694796071a",
+  "ocid": "ocds-abcd1234-67ae7c20-c2a5-48fc-bcfa-89e36472cc85",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -143,6 +143,11 @@
             "scheme": "COFOG",
             "id": "09",
             "description": "Education"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
           }
         ],
         "url": "http://www.vlfk.no"
@@ -162,8 +167,8 @@
         "locality": "BERGEN"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

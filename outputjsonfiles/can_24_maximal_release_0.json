@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3c6b7cef-18ab-4881-83be-99fd9b517b29",
+  "ocid": "ocds-abcd1234-09036244-0a9f-4835-8c54-f5bdca8b8742",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -372,6 +372,11 @@
             "scheme": "COFOG",
             "id": "04",
             "description": "Economic affairs"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
           }
         ],
         "url": "https://www.fin-adm.com",

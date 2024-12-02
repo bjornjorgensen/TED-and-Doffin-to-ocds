@@ -1,7 +1,7 @@
 {
   "id": "2022-396301",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d5d0d0b6-390f-4d7a-8b01-26bf1ee77678",
+  "ocid": "ocds-abcd1234-0e617f83-85d6-4911-9dd6-21b19312a23b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -100,6 +100,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl-ra",
+            "description": "Body governed by public law, controlled by a regional authority"
           }
         ],
         "url": "http://www.malselv.kommune.no"
@@ -119,8 +124,8 @@
         "locality": "MOEN"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

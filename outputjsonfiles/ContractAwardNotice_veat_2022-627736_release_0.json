@@ -1,7 +1,7 @@
 {
   "id": "2022-627736",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e2cf8a18-c8fa-4789-9e8f-b41648ca19c9",
+  "ocid": "ocds-abcd1234-78f5a7d1-bae2-4abb-b689-bcad1e4f2abb",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -69,36 +69,19 @@
     "contract"
   ],
   "date": "2022-12-02T12:00:00+02:00",
-  "bids": {
-    "details": [
-      {
-        "id": "TEN-0001",
-        "relatedLots": [
-          "LOT-0000"
-        ],
-        "value": {
-          "amount": 5000000.0,
-          "currency": "NOK"
-        },
-        "tenderers": [
-          {
-            "id": "ORG-0002"
-          }
-        ]
-      }
-    ]
-  },
-  "contracts": [
-    {
-      "id": "CON-0001",
-      "dateSigned": "2022-11-30T23:59:59Z",
-      "awardID": "RES-0001",
-      "title": "Lisensavtale for ESRI- og Geodatas egenutviklede produkter for Riksantikvarens GIS-løsninger"
-    }
-  ],
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "cga",
+            "description": "Central government authority"
+          }
+        ],
+        "url": "www.ra.no"
+      },
       "name": "Riksantikvaren",
       "additionalIdentifiers": [
         {
@@ -110,9 +93,6 @@
         "name": "Paal Nustad",
         "telephone": "+47 90941118",
         "email": "paal.nustad@ra.no"
-      },
-      "details": {
-        "url": "www.ra.no"
       },
       "address": {
         "locality": "OSLO"
@@ -156,6 +136,33 @@
       "roles": [
         "reviewBody"
       ]
+    }
+  ],
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 5000000.0,
+          "currency": "NOK"
+        },
+        "tenderers": [
+          {
+            "id": "ORG-0002"
+          }
+        ]
+      }
+    ]
+  },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2022-11-30T23:59:59Z",
+      "awardID": "RES-0001",
+      "title": "Lisensavtale for ESRI- og Geodatas egenutviklede produkter for Riksantikvarens GIS-løsninger"
     }
   ],
   "description": "*",

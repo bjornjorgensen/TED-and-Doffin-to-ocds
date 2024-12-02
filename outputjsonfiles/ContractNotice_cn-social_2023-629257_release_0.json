@@ -1,7 +1,7 @@
 {
   "id": "2023-629257",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b7c92287-f03a-4938-b468-d7243e30cd6b",
+  "ocid": "ocds-abcd1234-0cf7192b-8f69-4e54-8c6e-285bb82c44f8",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -169,6 +169,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "cga",
+            "description": "Central government authority"
           }
         ],
         "url": "https://permalink.mercell.com/208131817.aspx",
@@ -186,8 +191,8 @@
         "email": "nav.tiltak.rogaland@nav.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Stravanger"

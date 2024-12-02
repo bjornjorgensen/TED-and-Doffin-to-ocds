@@ -1,7 +1,7 @@
 {
   "id": "2023-624725",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c6d65224-9e16-4757-ae96-998c5a9c322b",
+  "ocid": "ocds-abcd1234-1f071662-84ce-4b0a-ba14-dc59e9714dc8",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -113,6 +113,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
           }
         ],
         "url": "https://bjornafjorden.kommune.no"
@@ -132,8 +137,8 @@
         "locality": "Eikelandsosen"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

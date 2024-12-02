@@ -1,7 +1,7 @@
 {
   "id": "2022-697882",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-415f5cb5-dc70-4085-88d0-434a4f79ca27",
+  "ocid": "ocds-abcd1234-1fa7bb2f-98ef-4e21-b347-a1fe3ac4f98c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -68,6 +68,11 @@
             "scheme": "COFOG",
             "id": "07",
             "description": "Health"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
           }
         ],
         "url": "https://permalink.mercell.com/191145348.aspx",

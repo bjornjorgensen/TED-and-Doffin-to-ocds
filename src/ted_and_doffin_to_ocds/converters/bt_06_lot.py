@@ -1,24 +1,56 @@
-# converters/bt_06_Lot.py
+"""
+BT-06 Lot Strategic Procurement converter.
+
+Maps procurement objectives (environmental, social, innovative) from lot level
+strategic procurement codes to OCDS lot sustainability information.
+"""
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+    "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+    "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+    "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+}
 
-def parse_strategic_procurement(xml_content):
+
+def parse_strategic_procurement(xml_content: str | bytes) -> dict[str, Any] | None:
+    """Parse strategic procurement information (BT-06) from XML content.
+
+    Extracts strategic procurement codes from ProcurementProjectLot elements and
+    maps them to lot sustainability information in OCDS format.
+
+    Args:
+        xml_content: XML string or bytes to parse
+
+    Returns:
+        Dictionary containing lot sustainability data like:
+        {
+            "tender": {
+                "lots": [{
+                    "id": "<lot-id>",
+                    "hasSustainability": true,
+                    "sustainability": [{
+                        "goal": "<mapped-goal>",
+                        "strategies": ["<strategy-list>"]
+                    }]
+                }]
+            }
+        }
+        or None if no strategic procurement data found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
+    namespaces = NAMESPACES
 
     result = {"tender": {"lots": []}}
     lots = root.xpath(
@@ -62,7 +94,18 @@ def parse_strategic_procurement(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_strategic_procurement(release_json, strategic_procurement_data) -> None:
+def merge_strategic_procurement(
+    release_json: dict[str, Any], strategic_procurement_data: dict[str, Any] | None
+) -> None:
+    """Merge strategic procurement data into the release JSON.
+
+    Updates lot sustainability information in the release JSON based on
+    strategic procurement codes.
+
+    Args:
+        release_json: The target release JSON to update
+        strategic_procurement_data: The strategic procurement data to merge
+    """
     if not strategic_procurement_data:
         logger.warning("No Strategic Procurement data to merge")
         return

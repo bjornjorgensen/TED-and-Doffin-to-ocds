@@ -1,7 +1,7 @@
 {
   "id": "2023-651678",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-75b23920-a5b6-464c-b298-979eaab5955f",
+  "ocid": "ocds-abcd1234-35865750-2088-4813-b30c-17317a333c7e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -105,6 +105,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl-ra",
+            "description": "Body governed by public law, controlled by a regional authority"
           }
         ],
         "url": "https://www.kvinesdal.kommune.no/",
@@ -123,9 +128,9 @@
         "email": "vidar@pilar-br.no"
       },
       "roles": [
-        "processContactPoint",
         "submissionReceiptBody",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Kvinesdal"

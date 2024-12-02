@@ -1,7 +1,7 @@
 {
   "id": "2022-347651",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a4959c7c-c78d-4e60-9b76-57b5466a5073",
+  "ocid": "ocds-abcd1234-dd7e3bbe-c7c4-423d-8807-fb5fc63ea4bc",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -111,6 +111,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
           }
         ],
         "url": "www.haugesund.kommune.no",

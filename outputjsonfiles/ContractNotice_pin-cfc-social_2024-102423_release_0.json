@@ -1,7 +1,7 @@
 {
   "id": "2c234234-aaec-4210-8cbe-1803ecaee901",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-11cd7496-7a43-403e-aa73-aec3524e65a7",
+  "ocid": "ocds-abcd1234-52aa4e07-a765-43ee-96d7-03af69b03769",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -109,6 +109,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "la",
+            "description": "Local authority"
           }
         ]
       },
@@ -128,8 +133,8 @@
         "locality": "Ålesund"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

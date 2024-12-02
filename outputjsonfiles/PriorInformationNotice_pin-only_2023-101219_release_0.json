@@ -1,7 +1,7 @@
 {
   "id": "0e2b63aa-a91a-49c6-aa1c-386516ec2275",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3e584c58-e4dc-46fd-ba2a-15a787d2f8f3",
+  "ocid": "ocds-abcd1234-67a7aee7-b5f9-425c-8fec-aaef39de35fa",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -69,6 +69,11 @@
             "scheme": "COFOG",
             "id": "07",
             "description": "Health"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "pub-undert",
+            "description": "Public undertaking"
           }
         ],
         "url": "https://permalink.mercell.com/216889791.aspx",

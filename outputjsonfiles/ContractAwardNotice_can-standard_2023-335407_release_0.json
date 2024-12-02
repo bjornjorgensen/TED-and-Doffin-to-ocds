@@ -1,7 +1,7 @@
 {
   "id": "2023-335407",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d5247089-791f-40f0-8b60-055393956d8f",
+  "ocid": "ocds-abcd1234-08050413-68bb-4eff-8918-6a2236609aa2",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -98,6 +98,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
           }
         ],
         "url": "www.ks.no",

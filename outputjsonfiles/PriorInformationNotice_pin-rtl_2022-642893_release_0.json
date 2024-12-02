@@ -1,7 +1,7 @@
 {
   "id": "2022-642893",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-12de41ce-596a-4607-9f79-058ceb3d56d1",
+  "ocid": "ocds-abcd1234-d959c91e-97f0-4859-975c-8e397bfc1f42",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -85,6 +85,11 @@
             "scheme": "COFOG",
             "id": "07",
             "description": "Health"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
           }
         ],
         "url": "https://permalink.mercell.com/191367484.aspx",
@@ -103,8 +108,8 @@
         "email": "post@sykehusinnkjop.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "VADSØ"

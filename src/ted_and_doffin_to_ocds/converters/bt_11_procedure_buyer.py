@@ -1,11 +1,27 @@
-# converters/bt_11_procedure_buyer.py
+"""
+BT-11 Buyer Legal Type converter.
+
+Maps the type of buyer according to procurement legislation from PartyTypeCode
+to OCDS party classifications using the eu-buyer-legal-type scheme.
+"""
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+    "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+    "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+    "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+}
+
+# Mapping of buyer legal type codes to descriptions
 BUYER_LEGAL_TYPE_CODES = {
     "body-pl": "Body governed by public law",
     "body-pl-cga": "Body governed by public law, controlled by a central government authority",
@@ -32,38 +48,52 @@ BUYER_LEGAL_TYPE_CODES = {
 }
 
 
-def parse_buyer_legal_type(xml_content):
+def parse_buyer_legal_type(xml_content: str | bytes) -> dict[str, Any] | None:
+    """Parse the buyer legal type (BT-11) from XML content.
+
+    Extracts buyer legal type codes and maps them to OCDS party classifications.
+
+    Args:
+        xml_content: XML string or bytes to parse
+
+    Returns:
+        Dictionary containing party classifications like:
+        {
+            "parties": [{
+                "id": "<org-id>",
+                "details": {
+                    "classifications": [{
+                        "scheme": "eu-buyer-legal-type",
+                        "id": "<type-code>",
+                        "description": "<type-description>"
+                    }]
+                }
+            }]
+        }
+        or None if no buyer legal type found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
 
     result = {"parties": []}
-    contracting_parties = root.xpath("//cac:Contractingparty", namespaces=namespaces)
+    contracting_parties = root.xpath("//cac:ContractingParty", namespaces=NAMESPACES)
 
     for party in contracting_parties:
         org_id = party.xpath(
-            ".//cac:partyIdentification/cbc:ID[@schemeName='organization']/text()",
-            namespaces=namespaces,
+            ".//cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
+            namespaces=NAMESPACES,
         )
         legal_type = party.xpath(
-            ".//cac:ContractingpartyType/cbc:partyTypeCode[@listName='buyer-legal-type']/text()",
-            namespaces=namespaces,
+            ".//cac:ContractingPartyType/cbc:PartyTypeCode[@listName='buyer-legal-type']/text()",
+            namespaces=NAMESPACES,
         )
 
         if org_id and legal_type:
             org_id = org_id[0]
-            legal_type = legal_type[0]
+            legal_type_code = legal_type[0]
             description = BUYER_LEGAL_TYPE_CODES.get(
-                legal_type,
-                "Unknown buyer legal type",
+                legal_type_code, "Unknown buyer legal type"
             )
 
             party_data = {
@@ -71,10 +101,10 @@ def parse_buyer_legal_type(xml_content):
                 "details": {
                     "classifications": [
                         {
-                            "scheme": "TED_CA_TYPE",
-                            "id": legal_type,
+                            "scheme": "eu-buyer-legal-type",
+                            "id": legal_type_code,
                             "description": description,
-                        },
+                        }
                     ],
                 },
             }

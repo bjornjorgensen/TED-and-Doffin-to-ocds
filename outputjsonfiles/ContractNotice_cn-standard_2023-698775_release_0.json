@@ -1,7 +1,7 @@
 {
   "id": "2023-698775",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-684e1950-3cc6-40f5-b74b-776695372162",
+  "ocid": "ocds-abcd1234-0cc28e47-3627-4783-9cc4-eb65b343a525",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -136,6 +136,17 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
+          }
+        ],
+        "url": "https://waco.no",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/3493"
+      },
       "name": "Waco Forsikringsmegling AS ",
       "additionalIdentifiers": [
         {
@@ -148,14 +159,10 @@
         "telephone": "+47 51779596",
         "email": "aase@waco.no"
       },
-      "details": {
-        "url": "https://waco.no",
-        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/3493"
-      },
       "roles": [
-        "processContactPoint",
         "submissionReceiptBody",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Bryne"

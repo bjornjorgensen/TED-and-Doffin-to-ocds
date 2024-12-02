@@ -1,7 +1,7 @@
 {
   "id": "2022-366668",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7578211c-9575-4ccb-8a88-6ed7bbd36832",
+  "ocid": "ocds-abcd1234-017a4a33-a513-4c60-928a-d897e209778c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -124,6 +124,11 @@
             "scheme": "COFOG",
             "id": "07",
             "description": "Health"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
           }
         ],
         "url": "https://permalink.mercell.com/182678464.aspx"
@@ -143,8 +148,8 @@
         "locality": "TØNSBERG"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

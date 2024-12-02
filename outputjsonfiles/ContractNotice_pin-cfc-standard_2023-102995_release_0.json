@@ -1,7 +1,7 @@
 {
   "id": "e5c8b25e-859d-492a-9085-716017f267aa",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-237db47c-f48d-45f8-907c-02b016ee1029",
+  "ocid": "ocds-abcd1234-b619faad-10bd-4181-90f6-b15d6d0b7b68",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -231,6 +231,11 @@
             "scheme": "COFOG",
             "id": "04",
             "description": "Economic affairs"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
           }
         ]
       },
@@ -250,8 +255,8 @@
         "locality": "Oslo"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

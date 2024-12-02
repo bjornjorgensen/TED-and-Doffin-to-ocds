@@ -1,7 +1,7 @@
 {
   "id": "667f77ec-2687-48a0-a752-651a0d7ebdcb",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b95468de-3a3a-415a-ab8d-45bc7282fc05",
+  "ocid": "ocds-abcd1234-5c7d7d96-de29-4776-928c-fc09f1e855ab",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -82,6 +82,11 @@
             "scheme": "COFOG",
             "id": "02",
             "description": "Defence"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "pub-undert",
+            "description": "Public undertaking"
           }
         ],
         "url": "https://permalink.mercell.com/216373386.aspx",

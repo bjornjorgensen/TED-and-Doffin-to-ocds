@@ -1,7 +1,7 @@
 {
   "id": "2022-927623",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ac776843-e3f0-4852-b843-cc2ebdcfd0dc",
+  "ocid": "ocds-abcd1234-b1ff95a6-65fb-4e70-b9f1-4cf08b98f652",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -111,6 +111,11 @@
             "scheme": "COFOG",
             "id": "03",
             "description": "Public order and safety"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "cga",
+            "description": "Central government authority"
           }
         ],
         "url": "http://www.politiet.no"

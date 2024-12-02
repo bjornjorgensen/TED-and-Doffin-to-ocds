@@ -1,7 +1,7 @@
 {
   "id": "2022-902600",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1dfbf90d-9c10-43ba-be7f-280d3d8d4c75",
+  "ocid": "ocds-abcd1234-0354a7e8-5aa3-46d2-aef1-a32d23388d24",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -109,6 +109,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
           }
         ],
         "url": "www.agderfk.no"
@@ -129,9 +134,9 @@
         "locality": "Arendal"
       },
       "roles": [
-        "processContactPoint",
         "submissionReceiptBody",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

@@ -1,7 +1,7 @@
 {
   "id": "defc83ce-b8a2-48a0-a1be-33262308c9fd",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d1391f10-4662-41b8-b00a-a3a826c589ef",
+  "ocid": "ocds-abcd1234-b9dd4ba3-86bc-45ce-b9ab-b485018cc56a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -85,6 +85,15 @@
   "parties": [
     {
       "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
+          }
+        ]
+      },
       "name": "[Test][Cloudia]TestOrg6",
       "additionalIdentifiers": [
         {
@@ -101,8 +110,8 @@
         "locality": "02-495"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

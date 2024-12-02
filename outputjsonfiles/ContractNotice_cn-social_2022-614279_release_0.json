@@ -1,7 +1,7 @@
 {
   "id": "2022-614279",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d7793a4d-0d7f-4719-9ebe-70e98a506037",
+  "ocid": "ocds-abcd1234-b4b68f22-6301-4fc7-93dd-6e4088b35d26",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -99,6 +99,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "cga",
+            "description": "Central government authority"
           }
         ],
         "url": "https://permalink.mercell.com/191755994.aspx",
@@ -116,8 +121,8 @@
         "email": "anita.hellehaven@nav.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Mo i Rana"

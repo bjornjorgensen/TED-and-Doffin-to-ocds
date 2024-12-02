@@ -1,7 +1,7 @@
 {
   "id": "2023-665410",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-00c6d5e2-6d7c-43b0-a353-13f20f27512a",
+  "ocid": "ocds-abcd1234-bb16c8d5-a3a9-4621-81e7-fd4e0073047a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -127,6 +127,11 @@
             "scheme": "COFOG",
             "id": "06",
             "description": "Housing and community amenities"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
           }
         ],
         "url": "www.larvik.kommune.no",
@@ -145,9 +150,9 @@
         "email": "sigmund.ulnes@larvik.kommune.no"
       },
       "roles": [
-        "processContactPoint",
         "submissionReceiptBody",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Larvik"

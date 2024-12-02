@@ -1,7 +1,7 @@
 {
   "id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-657cb6ea-0065-4e2a-825a-5b024fed3513",
+  "ocid": "ocds-abcd1234-9d7203e6-89c3-4369-ada1-a206f364ae67",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -308,6 +308,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "pub-undert",
+            "description": "Public undertaking"
           }
         ],
         "url": "http://www.gjovik.kommune.no",
@@ -328,9 +333,9 @@
       "roles": [
         "evaluationBody",
         "reviewContactPoint",
-        "buyer",
+        "processContactPoint",
         "submissionReceiptBody",
-        "processContactPoint"
+        "buyer"
       ],
       "address": {
         "locality": "GJØVIK"

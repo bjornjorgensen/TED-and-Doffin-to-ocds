@@ -1,7 +1,7 @@
 {
   "id": "2023-696688",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-085546cb-36b7-43a2-a05f-c6ce47c76eb0",
+  "ocid": "ocds-abcd1234-bcbe0557-9c9b-4788-9296-3bb49a456014",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -159,6 +159,11 @@
             "scheme": "COFOG",
             "id": "06",
             "description": "Housing and community amenities"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
           }
         ],
         "url": "http://www.trondheim.kommune.no/",
@@ -177,9 +182,9 @@
         "email": "eierskap.postmottak@trondheim.kommune.no"
       },
       "roles": [
-        "processContactPoint",
         "submissionReceiptBody",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Trondheim"

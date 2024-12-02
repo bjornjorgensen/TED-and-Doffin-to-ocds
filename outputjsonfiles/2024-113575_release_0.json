@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ca26d63c-cc3e-412f-8d76-2a9309f97e61",
+  "ocid": "ocds-abcd1234-f02d1ee5-e780-42b9-a5ae-dd025e26cf73",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -157,6 +157,11 @@
             "scheme": "COFOG",
             "id": "07",
             "description": "Health"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
           }
         ],
         "url": "https://www.helse-nord.no/"
@@ -176,8 +181,8 @@
         "locality": "Bodø"
       },
       "roles": [
-        "buyer",
         "payer",
+        "buyer",
         "funder"
       ]
     },
@@ -202,9 +207,9 @@
         "locality": "VADSØ"
       },
       "roles": [
-        "processContactPoint",
         "leadBuyer",
         "buyer",
+        "processContactPoint",
         "reviewContactPoint"
       ]
     },

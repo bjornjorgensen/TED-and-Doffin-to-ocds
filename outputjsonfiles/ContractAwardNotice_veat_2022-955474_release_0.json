@@ -1,7 +1,7 @@
 {
   "id": "2022-955474",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d7bda62e-fe0a-468a-af7d-2cceed7526d1",
+  "ocid": "ocds-abcd1234-818b0a5c-354b-4127-a4da-e707df337daf",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -57,6 +57,11 @@
             "scheme": "COFOG",
             "id": "09",
             "description": "Education"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "cga",
+            "description": "Central government authority"
           }
         ],
         "url": "http://uit.no"

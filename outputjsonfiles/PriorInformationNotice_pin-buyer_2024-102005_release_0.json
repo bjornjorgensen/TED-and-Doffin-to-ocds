@@ -1,7 +1,7 @@
 {
   "id": "629a037e-e8dd-4b02-a19e-e890bd114fda",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f99d498a-656b-45a6-b1c6-4ebb508db3c2",
+  "ocid": "ocds-abcd1234-cb394568-ac0e-4a58-894f-6ae717b46f2f",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -63,6 +63,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
           }
         ],
         "url": "http://Lillestrom.kommune.no/",

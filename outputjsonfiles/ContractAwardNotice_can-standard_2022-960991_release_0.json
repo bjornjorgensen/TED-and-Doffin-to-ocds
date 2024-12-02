@@ -1,7 +1,7 @@
 {
   "id": "2022-960991",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d9c8f8bc-6dd1-4b18-9a11-cc1bccaa861b",
+  "ocid": "ocds-abcd1234-6220ca75-c448-4ce6-b643-c4c0c18e53f4",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -90,6 +90,11 @@
             "scheme": "COFOG",
             "id": "03",
             "description": "Public order and safety"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "cga",
+            "description": "Central government authority"
           }
         ],
         "url": "www.dsb.no",

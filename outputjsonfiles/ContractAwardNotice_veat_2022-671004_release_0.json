@@ -1,7 +1,7 @@
 {
   "id": "2022-671004",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-54f9b04a-1acd-4170-818d-d042e0c1fa17",
+  "ocid": "ocds-abcd1234-dfb5693e-7950-4d7e-8df6-58c2ae366044",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -68,6 +68,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
           }
         ],
         "url": "http://www.vtfk.no"

@@ -1,7 +1,7 @@
 {
   "id": "65ffd92d-8eee-4787-a7fe-925106611edc",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c72e8318-d584-4d3e-a2e5-b6ffe993d709",
+  "ocid": "ocds-abcd1234-fe12b4cf-7414-4e87-adf0-5be8bbacf3d0",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -93,6 +93,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
           }
         ]
       },

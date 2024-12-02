@@ -1,7 +1,7 @@
 {
   "id": "74f9d169-452b-4a99-b8d2-f54c3c71e163",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1558035e-70b6-4de6-8c18-124b9b9caf4a",
+  "ocid": "ocds-abcd1234-474ec3b0-be92-403c-8db7-a97d4e019c39",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -125,6 +125,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl-la",
+            "description": "Body governed by public law, controlled by a local authority"
           }
         ],
         "url": "http://www.bodo.kommune.no",
@@ -143,8 +148,8 @@
         "email": "truls.eirik.moan@bodo.kommune.no"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "reviewContactPoint"
       ],
       "address": {

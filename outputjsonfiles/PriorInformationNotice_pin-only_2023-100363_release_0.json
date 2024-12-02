@@ -1,7 +1,7 @@
 {
   "id": "1db209a3-6934-4d5f-bf78-2aa8a1f2453c",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d8711d87-2cc0-480d-b723-6fa41a9a254b",
+  "ocid": "ocds-abcd1234-95c010ba-f31a-478e-b6df-5b237569ff89",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -115,6 +115,11 @@
             "scheme": "COFOG",
             "id": "01",
             "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "cga",
+            "description": "Central government authority"
           }
         ],
         "url": "https://www.regjeringen.no/no/dep/bld/id298/",
