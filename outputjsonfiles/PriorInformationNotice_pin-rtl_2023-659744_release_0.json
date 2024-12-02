@@ -1,7 +1,7 @@
 {
   "id": "2023-659744",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3588ac36-695d-4c81-a0e6-f0f1f0cce24d",
+  "ocid": "ocds-abcd1234-be58dd80-e0fb-46ed-b37f-e842331b4d25",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -86,8 +86,8 @@
         ]
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Hamar"

@@ -1,13 +1,23 @@
 # converters/bt_25_Lot.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_lot_quantity(xml_content):
+def parse_lot_quantity(xml_content: str | bytes) -> dict[str, Any] | None:
+    """Parse quantities for each lot from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
+
+    Returns:
+        Optional[Dict[str, Any]]: Dictionary containing items data with quantities and lot references,
+                                 or None if no valid data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -47,7 +57,15 @@ def parse_lot_quantity(xml_content):
     return result if result["tender"]["items"] else None
 
 
-def merge_lot_quantity(release_json, lot_quantity_data) -> None:
+def merge_lot_quantity(
+    release_json: dict[str, Any], lot_quantity_data: dict[str, Any] | None
+) -> None:
+    """Merge lot quantity data into the release JSON.
+
+    Args:
+        release_json (Dict[str, Any]): The release JSON to update
+        lot_quantity_data (Optional[Dict[str, Any]]): Item data containing quantities to merge
+    """
     if not lot_quantity_data:
         logger.warning("No Lot Quantity data to merge")
         return

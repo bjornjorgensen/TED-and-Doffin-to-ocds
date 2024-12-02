@@ -1,7 +1,7 @@
 {
   "id": "2022-366668",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6dfcb37e-514d-4956-9ef6-c6602ba939e3",
+  "ocid": "ocds-abcd1234-dadab26f-7cb9-44ce-aff2-09cb69570d8d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -154,8 +154,8 @@
         "locality": "TØNSBERG"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

@@ -1,7 +1,7 @@
 {
   "id": "3580e3e0-275f-4489-9aab-b6f493790e00",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-484dc437-cd2d-4cfc-9197-fd7a4065d54c",
+  "ocid": "ocds-abcd1234-26619512-8903-4c10-8f5b-4ef4eef3c136",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -247,8 +247,8 @@
         "email": "finn-magne.eines@elmea.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Svolvær"

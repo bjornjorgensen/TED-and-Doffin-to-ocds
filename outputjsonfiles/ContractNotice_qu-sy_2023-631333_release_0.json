@@ -1,7 +1,7 @@
 {
   "id": "2023-631333",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-fb11fd02-36cb-45fb-9459-f3e464ef9170",
+  "ocid": "ocds-abcd1234-4b036b32-216e-40ab-aa5a-411d5fd239b2",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -203,9 +203,9 @@
         ]
       },
       "roles": [
-        "processContactPoint",
+        "submissionReceiptBody",
         "buyer",
-        "submissionReceiptBody"
+        "processContactPoint"
       ],
       "address": {
         "locality": "Arendal"

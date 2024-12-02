@@ -1,36 +1,22 @@
 # bt_26a_lot.py
 
+import logging
 from typing import Any
 
 from lxml import etree
 
+logger = logging.getLogger(__name__)
+
 
 def parse_classification_type(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse the XML content to extract classification types (schemes) for each lot.
-
-    Processes BT-26(a)-Lot field which contains classification types.
-    XML path: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/
-             cac:AdditionalCommodityClassification/cbc:ItemClassificationCode/@listName
+    """Parse classification schemes from lot XML content.
 
     Args:
-        xml_content: XML content as string or bytes to parse
+        xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
 
     Returns:
-        Dictionary containing tender items with classification schemes if found,
-        structured as:
-        {
-            "tender": {
-                "items": [
-                    {
-                        "id": str,
-                        "additionalClassifications": [{"scheme": str}],
-                        "relatedLot": str
-                    }
-                ]
-            }
-        }
-        Returns None if no relevant data is found.
+        Optional[Dict[str, Any]]: Dictionary containing items with classification schemes,
+                                 or None if no valid data is found
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -48,29 +34,25 @@ def parse_classification_type(xml_content: str | bytes) -> dict[str, Any] | None
     )
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        classifications = lot.xpath(
-            "cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode",
+        classification_types = lot.xpath(
+            "cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode/@listName",
             namespaces=namespaces,
         )
 
-        if classifications:
+        if classification_types:
             item = {
                 "id": str(len(result["tender"]["items"]) + 1),
                 "additionalClassifications": [],
                 "relatedLot": lot_id,
             }
 
-            added_codes = set()
-            for classification in classifications:
-                scheme = classification.get("listName", "").upper()
-                code = classification.text
-                if scheme and code:
-                    code_key = f"{scheme}:{code}"
-                    if code_key not in added_codes:
-                        item["additionalClassifications"].append(
-                            {"scheme": scheme, "id": code}
-                        )
-                        added_codes.add(code_key)
+            # Add only unique schemes
+            added_schemes = set()
+            for list_name in classification_types:
+                scheme = list_name.upper() if list_name else None
+                if scheme and scheme not in added_schemes:
+                    item["additionalClassifications"].append({"scheme": scheme})
+                    added_schemes.add(scheme)
 
             if item["additionalClassifications"]:
                 result["tender"]["items"].append(item)
@@ -81,18 +63,7 @@ def parse_classification_type(xml_content: str | bytes) -> dict[str, Any] | None
 def merge_classification_type(
     release_json: dict[str, Any], classification_type_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge classification type data into the main OCDS release JSON.
-
-    Updates existing items with classification schemes.
-
-    Args:
-        release_json: The main OCDS release JSON document to update
-        classification_type_data: Parsed classification type data to merge
-
-    Returns:
-        None: Updates release_json in-place
-    """
+    """Merge classification scheme data into the release JSON."""
     if not classification_type_data:
         return
 
@@ -104,7 +75,8 @@ def merge_classification_type(
             (
                 item
                 for item in existing_items
-                if item.get("relatedLot") == new_item["relatedLot"]
+                if item.get("relatedLot") == new_item.get("relatedLot")
+                and item.get("id") == new_item.get("id")
             ),
             None,
         )
@@ -113,17 +85,25 @@ def merge_classification_type(
             existing_classifications = existing_item.setdefault(
                 "additionalClassifications", []
             )
-            existing_pairs = {
-                (ec.get("scheme", ""), ec.get("id", ""))
-                for ec in existing_classifications
-                if "scheme" in ec and "id" in ec
-            }
+            # Get scheme from new classification if available
+            new_scheme = next(
+                (
+                    c["scheme"]
+                    for c in new_item["additionalClassifications"]
+                    if "scheme" in c
+                ),
+                None,
+            )
 
-            for new_classification in new_item["additionalClassifications"]:
-                if "scheme" in new_classification and "id" in new_classification:
-                    pair = (new_classification["scheme"], new_classification["id"])
-                    if pair not in existing_pairs:
-                        existing_classifications.append(new_classification)
-                        existing_pairs.add(pair)
+            # Apply scheme to all existing classifications that don't have one
+            if new_scheme:
+                for ec in existing_classifications:
+                    if "id" in ec and "scheme" not in ec:
+                        ec["scheme"] = new_scheme
+
+            # Add any new classifications with scheme
+            for nc in new_item["additionalClassifications"]:
+                if "scheme" in nc and nc not in existing_classifications:
+                    existing_classifications.append(nc)
         else:
             existing_items.append(new_item)

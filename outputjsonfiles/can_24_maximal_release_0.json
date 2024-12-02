@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-20ebac77-bcba-41bc-a517-967e4c450cda",
+  "ocid": "ocds-abcd1234-01572efb-5007-4cb3-8839-d1d80676b5cb",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -151,8 +151,8 @@
       {
         "id": "GLO-0001",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "title": "Title ---",
         "identifiers": [
@@ -341,8 +341,8 @@
         "id": "FiscalDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "publisher": {
           "id": "ORG-0002"
@@ -352,8 +352,8 @@
         "id": "EnvDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "publisher": {
           "id": "ORG-0003"
@@ -363,8 +363,8 @@
         "id": "EmplDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "publisher": {
           "id": "ORG-0004"

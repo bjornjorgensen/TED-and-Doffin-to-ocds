@@ -1,7 +1,7 @@
 {
   "id": "2023-653367",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-66576543-b3c2-4069-8588-f127a7ec6471",
+  "ocid": "ocds-abcd1234-de9b89db-d1ea-45e8-95ca-1727d94353a6",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -924,8 +924,8 @@
         "buyerProfile": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Bergen"

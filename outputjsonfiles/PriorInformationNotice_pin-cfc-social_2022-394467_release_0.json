@@ -1,7 +1,7 @@
 {
   "id": "2022-394467",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-de2ab96e-42dc-4da9-8963-3780956e331a",
+  "ocid": "ocds-abcd1234-94362a7b-9068-4980-8ae4-3551aba40091",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -122,9 +122,9 @@
         "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/2095"
       },
       "roles": [
-        "processContactPoint",
+        "submissionReceiptBody",
         "buyer",
-        "submissionReceiptBody"
+        "processContactPoint"
       ],
       "address": {
         "locality": "Hamar"

@@ -1,5 +1,3 @@
-# converters/bt_263_part.py
-
 import logging
 from typing import Any
 
@@ -11,30 +9,14 @@ logger = logging.getLogger(__name__)
 def parse_additional_classification_code_part(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse the XML content to extract additional classification codes for each part.
-
-    Processes BT-263-Part field which contains additional codes that characterize the purchase.
-    XML path: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/
-             cac:AdditionalCommodityClassification/cbc:ItemClassificationCode
+    """Parse classification codes from part XML content.
 
     Args:
-        xml_content: XML content as string or bytes to parse
+        xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
 
     Returns:
-        Dictionary containing tender items with additional classifications if found,
-        structured as:
-        {
-            "tender": {
-                "items": [
-                    {
-                        "id": str,
-                        "additionalClassifications": [{"id": str}]
-                    }
-                ]
-            }
-        }
-        Returns None if no relevant data is found.
+        Optional[Dict[str, Any]]: Dictionary containing items with classification IDs,
+                                 or None if no valid data is found
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -44,95 +26,68 @@ def parse_additional_classification_code_part(
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
     }
 
-    # Check for parts with additional classification codes
-    parts_xpath = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']"
-    parts = root.xpath(parts_xpath, namespaces=namespaces)
-    if not parts:
-        logger.info("No parts found with additional classification codes")
-        return None
+    # Get all classification codes
+    codes = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode/text()",
+        namespaces=namespaces,
+    )
 
-    result = {"tender": {"items": []}}
+    if codes:
+        item = {
+            "id": "1",  # Single item for part
+            "additionalClassifications": [],
+        }
 
-    for part in parts:
-        classifications = part.xpath(
-            "cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode",
-            namespaces=namespaces,
-        )
+        # Add unique classification IDs
+        added_codes = set()
+        for code in codes:
+            if code not in added_codes:
+                item["additionalClassifications"].append({"id": code})
+                added_codes.add(code)
 
-        if classifications:
-            item = {
-                "id": str(len(result["tender"]["items"]) + 1),
-                "additionalClassifications": [],
-            }
+        return {"tender": {"items": [item]}}
 
-            added_codes = set()
-            for classification in classifications:
-                scheme = classification.get("listName", "").upper()
-                code = classification.text
-                if scheme and code:
-                    code_key = f"{scheme}:{code}"
-                    if code_key not in added_codes:
-                        item["additionalClassifications"].append(
-                            {"scheme": scheme, "id": code}
-                        )
-                        added_codes.add(code_key)
-
-            if item["additionalClassifications"]:
-                result["tender"]["items"].append(item)
-
-    return result if result["tender"]["items"] else None
+    return None
 
 
 def merge_additional_classification_code_part(
     release_json: dict[str, Any],
     additional_classification_data: dict[str, Any] | None,
 ) -> None:
-    """
-    Merge additional classification code data for parts into the main OCDS release JSON.
-
-    Updates existing items with additional classifications or creates new items
-    if they don't exist. Handles deduplication of classification codes.
+    """Merge classification code data into the release JSON.
 
     Args:
-        release_json: The main OCDS release JSON document to update
-        additional_classification_data: Parsed classification data to merge,
-            in the format returned by parse_additional_classification_code_part()
-
-    Returns:
-        None: Updates release_json in-place
+        release_json (Dict[str, Any]): The release JSON to update
+        additional_classification_data (Optional[Dict[str, Any]]): Item data containing IDs to merge
     """
     if not additional_classification_data:
-        logger.info("No additional classification code data for parts to merge")
         return
 
     tender = release_json.setdefault("tender", {})
     items = tender.setdefault("items", [])
 
-    for new_item in additional_classification_data["tender"]["items"]:
-        existing_item = next(
-            (item for item in items if item["id"] == new_item["id"]), None
+    new_item = additional_classification_data["tender"]["items"][0]
+    existing_item = next((item for item in items if item["id"] == new_item["id"]), None)
+
+    if existing_item:
+        existing_classifications = existing_item.setdefault(
+            "additionalClassifications", []
         )
+        # Track existing IDs
+        existing_ids = {ec.get("id") for ec in existing_classifications if "id" in ec}
 
-        if existing_item:
-            existing_classifications = existing_item.setdefault(
-                "additionalClassifications", []
-            )
-            existing_pairs = {
-                (ec.get("scheme", ""), ec.get("id", ""))
-                for ec in existing_classifications
-                if "scheme" in ec and "id" in ec
-            }
-
-            for new_classification in new_item["additionalClassifications"]:
-                if "scheme" in new_classification and "id" in new_classification:
-                    pair = (new_classification["scheme"], new_classification["id"])
-                    if pair not in existing_pairs:
-                        existing_classifications.append(new_classification)
-                        existing_pairs.add(pair)
-        else:
-            items.append(new_item)
-
-    logger.info(
-        "Merged additional classification code data for %d parts",
-        len(additional_classification_data["tender"]["items"]),
-    )
+        # Update or add classifications
+        for new_classification in new_item["additionalClassifications"]:
+            id_value = new_classification.get("id")
+            if id_value and id_value not in existing_ids:
+                # Try to find matching scheme
+                matched = False
+                for ec in existing_classifications:
+                    if "scheme" in ec and "id" not in ec:
+                        ec["id"] = id_value
+                        matched = True
+                        break
+                if not matched:
+                    existing_classifications.append(new_classification)
+    else:
+        items.append(new_item)
