@@ -1,7 +1,7 @@
 {
   "id": "2022-396301",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0e617f83-85d6-4911-9dd6-21b19312a23b",
+  "ocid": "ocds-abcd1234-e889ee3c-4aa3-42c1-8388-206f2cd16ab3",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -54,6 +54,12 @@
       }
     ],
     "title": "Omsorgstjenester",
+    "identifiers": [
+      {
+        "id": "22/12",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Målselv kommune inviterer til å delta i konkurranse om kjøp av omsorgstjenester for en mannlig bruker i 50 årene. For ytterligere informasjon se konkurransegrunnlag med vedlegg.",
     "items": [
@@ -124,8 +130,8 @@
         "locality": "MOEN"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

@@ -1,7 +1,7 @@
 {
   "id": "2022-671004",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-dfb5693e-7950-4d7e-8df6-58c2ae366044",
+  "ocid": "ocds-abcd1234-425e0d9f-e46f-49c1-b612-1aafd26f40d5",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -35,6 +35,12 @@
       }
     ],
     "title": "Globale dagsaktuelle digitale aviser og tidsskrifter",
+    "identifiers": [
+      {
+        "id": "2022-1001",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Bibliotek24 har gjennom Vestfold og Telemark fylkeskommune inngått avtale med PressReader for distribusjon av globale digitale aviser og tidsskrifter til alle folkebibliotek og offentlige videregående skoler i Norge. Avtalen gjelder for 2023.",
     "items": [

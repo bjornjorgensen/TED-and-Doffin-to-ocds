@@ -1,7 +1,7 @@
 {
   "id": "9282de2c-8ca6-4b88-84ce-dd8734449a83",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0bbf44b6-27f6-4dd6-b22e-f368466091b1",
+  "ocid": "ocds-abcd1234-e05f6215-9f85-4b0e-a826-04fea9a81dc7",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -26,10 +26,12 @@
           ]
         },
         "title": "Forhåndskunngjøring: Angio intervensjonslaboratorium, monoplan og biplan, Universitetssykehuset Nord-Norge HF",
-        "identifiers": {
-          "id": "2023/1366",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "2023/1366",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "goods",
         "description": "Anskaffelsens formål er kjøp av angio intervensjonslaboratorium – monoplan til Røntgenavdelingen ved Universitetssykehuset Nord-Norge HF (UNN). Utstyret skal brukes til generell radiologi på alle organsystemer unntatt hjerte.Oppdragsgiveren vil invitere leverandører som har meldt sin interesse etter forhåndskunngjøringen til å bekrefte sin interesse.",
         "contractPeriod": {
@@ -52,6 +54,12 @@
       }
     ],
     "title": "Forhåndskunngjøring: Angio intervensjonslaboratorium, monoplan og biplan, Universitetssykehuset Nord-Norge HF",
+    "identifiers": [
+      {
+        "id": "2023/1366",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "goods",
     "description": "Anskaffelsens formål er kjøp av angio intervensjonslaboratorium – monoplan til Røntgenavdelingen ved Universitetssykehuset Nord-Norge HF (UNN). Utstyret skal brukes til generell radiologi på alle organsystemer unntatt hjerte.Det ønskes også tilbud på kjøp av angio intervensjonslaboratorium – biplan. Investeringen er ikke godkjent og vi forbeholder oss retten til å gjennomføre kjøp dersom investeringen godkjennes i helseforetaket.Oppdragsgiveren vil invitere leverandører som har meldt sin interesse etter forhåndskunngjøringen til å bekrefte sin interesse.",
     "items": [
@@ -127,8 +135,8 @@
         "email": "post@sykehusinnkjop.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "VADSØ"

@@ -1,7 +1,7 @@
 {
   "id": "2022-927623",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b1ff95a6-65fb-4e70-b9f1-4cf08b98f652",
+  "ocid": "ocds-abcd1234-fb871ea6-04d2-47de-bbde-232a1e665d96",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -46,6 +46,12 @@
       }
     ],
     "title": "Rammeavtale vakt- og sikkerhetstjenester",
+    "identifiers": [
+      {
+        "id": "21/183479",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Rammeavtalen skal dekke Kundens behov for vakt- og sikkerhetstjenester. Dette omfatter også tilfeller ved økt beredskap. Rammeavtalen avgrenses mot: • Verditransport, leie av droppsafe og kontanthåndtering • installasjon og service på alarmsystemer Anskaffelsen er inndelt i to delkontrakter: • Delkontrakt 1 for Oslo politidistrikt og omegn • Delkontrakt 2 for Politihøgskolen i Bodø, Troms politidistrikt (opsjon), Nordland politistrikt (opsjon) For nærmere beskrivelse vises det til konkurransedokumentene.",
     "items": [

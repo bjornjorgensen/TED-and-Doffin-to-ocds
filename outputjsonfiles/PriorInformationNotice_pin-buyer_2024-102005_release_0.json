@@ -1,7 +1,7 @@
 {
   "id": "629a037e-e8dd-4b02-a19e-e890bd114fda",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-cb394568-ac0e-4a58-894f-6ae717b46f2f",
+  "ocid": "ocds-abcd1234-4b2589e9-8adc-433e-96b4-4bc61705e30c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -9,6 +9,12 @@
     },
     "status": "planned",
     "title": "Invitasjon til leverandørkonferanse",
+    "identifiers": [
+      {
+        "id": "Lillestrøm-24/030",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Invitasjon til leverandørkonferanse vedrørende toppsystem for adgangskontroll. Kontakt carl.henriksen@lillestrom.kommune.no for ytterligere info og ev påmelding.",
     "items": [

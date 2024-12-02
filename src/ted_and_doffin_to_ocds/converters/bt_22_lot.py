@@ -1,9 +1,21 @@
-# converters/bt_22_Lot.py
+import logging
+from typing import Any
 
 from lxml import etree
 
+logger = logging.getLogger(__name__)
 
-def parse_lot_internal_identifier(xml_content):
+
+def parse_lot_internal_identifier(xml_content: str | bytes) -> dict[str, Any] | None:
+    """Parse internal identifiers for each lot from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
+
+    Returns:
+        Optional[Dict[str, Any]]: Dictionary containing lots data with internal identifiers,
+                                 or None if no valid data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -34,14 +46,22 @@ def parse_lot_internal_identifier(xml_content):
             result["tender"]["lots"].append(
                 {
                     "id": lot_id,
-                    "identifiers": {"id": internal_id[0], "scheme": "internal"},
+                    "identifiers": [{"id": internal_id[0], "scheme": "internal"}],
                 },
             )
 
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_internal_identifier(release_json, lot_internal_identifier_data) -> None:
+def merge_lot_internal_identifier(
+    release_json: dict[str, Any], lot_internal_identifier_data: dict[str, Any] | None
+) -> None:
+    """Merge lot internal identifier data into the release JSON.
+
+    Args:
+        release_json (Dict[str, Any]): The release JSON to update
+        lot_internal_identifier_data (Optional[Dict[str, Any]]): Lot data containing internal identifiers to merge
+    """
     if not lot_internal_identifier_data:
         return
 

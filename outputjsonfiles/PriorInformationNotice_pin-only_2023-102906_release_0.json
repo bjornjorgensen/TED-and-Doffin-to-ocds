@@ -1,7 +1,7 @@
 {
   "id": "26cd2bbe-3527-43ab-ae19-ecb644fff706",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-fa331a60-2e1a-4a4d-96a3-afd42f0996aa",
+  "ocid": "ocds-abcd1234-a26fad30-dcef-46ec-9a90-335d9eb69f34",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -12,6 +12,12 @@
       "futurenoticeDate": "2024-04-01T00:00:00+02:00"
     },
     "title": "VOIS - Invitasjon til markedsdialog - Diverse forbruksvarer",
+    "identifiers": [
+      {
+        "id": "2023/46433",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "goods",
     "description": "Se vedlagte invitasjon til markedsdialog for nærmere informasjon.",
     "items": [

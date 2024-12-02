@@ -1,7 +1,7 @@
 {
   "id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9d7203e6-89c3-4369-ada1-a206f364ae67",
+  "ocid": "ocds-abcd1234-788809fb-4977-48a9-b5c1-2b2824b33115",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -30,10 +30,12 @@
           ]
         },
         "title": "223003 Reservevannforsyning Gjøvik - Biri - Detaljprosjektering",
-        "identifiers": {
-          "id": "2024/1387",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "2024/1387",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Gjøvik kommune har besluttet å etablere en fullverdig reservevannløsning med mulighet til å forsyne både Biri og Gjøvik. I et tidligere ledningsprosjekt er det ført frem sjøledning fra Gjøvik til Redalen. I Redalen er det etablert en ny pumpestasjon (trykkøkningsstasjon), samt etablert punkt for påkobling av ny sjøledning videre til Biri.  Gjennom et forprosjekt i 2022-23 har Gjøvik kommune avklart plassering og dimensjonering av nytt vannbehandlingsanlegg, nytt vanninntak og ny råvannstasjon på Biri, samt valg av behandlingsprosess.Konkurransegrunnlaget gjelder anskaffelse av rådgiveroppdrag for utarbeidelse av prosjekteringsgrunnlaget og gjennomføring av anskaffelse for etablering av fullverdig reservevannsløsning som beskrevet ovenfor.",
         "additionalProcurementCategories": [
@@ -153,6 +155,12 @@
       }
     ],
     "title": "223003 Reservevannforsyning Gjøvik - Biri - Detaljprosjektering",
+    "identifiers": [
+      {
+        "id": "2024/1387",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Gjøvik kommune har besluttet å etablere en fullverdig reservevannløsning med mulighet til å forsyne både Biri og Gjøvik. I et tidligere ledningsprosjekt er det ført frem sjøledning fra Gjøvik til Redalen. I Redalen er det etablert en ny pumpestasjon (trykkøkningsstasjon), samt etablert punkt for påkobling av ny sjøledning videre til Biri.  Gjennom et forprosjekt i 2022-23 har Gjøvik kommune avklart plassering og dimensjonering av nytt vannbehandlingsanlegg, nytt vanninntak og ny råvannstasjon på Biri, samt valg av behandlingsprosess.Konkurransegrunnlaget gjelder anskaffelse av rådgiveroppdrag for utarbeidelse av prosjekteringsgrunnlaget og gjennomføring av anskaffelse for etablering av fullverdig reservevannsløsning som beskrevet ovenfor.",
     "items": [
@@ -331,8 +339,8 @@
         "email": "kenneth.hvalby@gjovik.kommune.no"
       },
       "roles": [
-        "evaluationBody",
         "reviewContactPoint",
+        "evaluationBody",
         "processContactPoint",
         "submissionReceiptBody",
         "buyer"

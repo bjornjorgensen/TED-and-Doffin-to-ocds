@@ -1,9 +1,23 @@
 # converters/bt_21_Lot.py
 
+import logging
+from typing import Any
+
 from lxml import etree
 
+logger = logging.getLogger(__name__)
 
-def parse_lot_title(xml_content):
+
+def parse_lot_title(xml_content: str | bytes) -> dict[str, Any] | None:
+    """Parse lot titles from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
+
+    Returns:
+        Optional[Dict[str, Any]]: Dictionary containing lots data with titles,
+                                 or None if no valid data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -36,7 +50,15 @@ def parse_lot_title(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_title(release_json, lot_title_data) -> None:
+def merge_lot_title(
+    release_json: dict[str, Any], lot_title_data: dict[str, Any] | None
+) -> None:
+    """Merge lot title data into the release JSON.
+
+    Args:
+        release_json (Dict[str, Any]): The release JSON to update
+        lot_title_data (Optional[Dict[str, Any]]): Lot data containing titles to merge
+    """
     if not lot_title_data:
         return
 

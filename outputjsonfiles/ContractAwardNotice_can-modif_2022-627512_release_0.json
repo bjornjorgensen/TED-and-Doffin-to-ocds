@@ -1,7 +1,7 @@
 {
   "id": "2022-627512",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-79331d44-3f3c-4bd5-beb8-1e273c7468f3",
+  "ocid": "ocds-abcd1234-4e36c61e-cd30-472e-8889-09d61b2ea8fb",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -24,6 +24,12 @@
       }
     ],
     "title": "Drift og utvikling av gradert informasjonssystem",
+    "identifiers": [
+      {
+        "id": "87/2019",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Det er etablert et gradert informasjonssystem på Vann- og avløpsetatens prosjektkontor i forbindelse med prosjektet «Ny Vannforsyning Oslo» (NVO). Formålet med anskaffelsen er å sikre stabil drift, utvikling og nødvendige tilpasninger av informasjonssystemet. Systemdesign og systemintegrasjon/implementering samt teknisk rådgivning relatert til informasjonssystemet og tilhørende infrastruktur, nettverk og sikkerhet inngår i avtalen.",
     "items": [

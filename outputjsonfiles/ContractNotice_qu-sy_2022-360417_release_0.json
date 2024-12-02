@@ -1,7 +1,7 @@
 {
   "id": "2022-360417",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f558d33b-75be-4c72-bace-c1a722dd390f",
+  "ocid": "ocds-abcd1234-52fa10ec-6f5e-4d99-b43a-39d7c0509995",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -56,6 +56,12 @@
       }
     ],
     "title": "TransQ Qualification System |notification of qualification system - Services",
+    "identifiers": [
+      {
+        "id": "T2022/001-2",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "TRANSQ is a joint qualification system for suppliers and contractors to leading Scandinavian transport and postal utilities. It's operated by Achilles under Article 77 of Directive 2014/25/EU. The subscribing utilities will use TRANSQ for tenderer selection for contracts and framework agreements subject to EU procurement rules but reserve the right to publish individual notices for specific requirements where they deem it necessary, even though they relate to the product and service categories covered by TRANSQ. The qualification system may be used for contracts not subject to EU procurement rules at each subscriber's discretion. An overview of products and services acquired through TRANSQ is available here https://www.achilles.com/app/uploads/2018/04/Achilles-TransQ-Nordics-Codes-En.pdf",
     "items": [
@@ -191,9 +197,9 @@
         ]
       },
       "roles": [
-        "submissionReceiptBody",
+        "processContactPoint",
         "buyer",
-        "processContactPoint"
+        "submissionReceiptBody"
       ],
       "address": {
         "locality": "Arendal"

@@ -1,7 +1,7 @@
 {
   "id": "8791620e-39a1-435d-985a-bee33825e3f4",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e7bf2309-d6c2-49bc-99a7-d16a387f6df9",
+  "ocid": "ocds-abcd1234-21fab0ec-a509-4233-ae76-128a1d596996",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -15,10 +15,12 @@
       {
         "id": "LOT-0000",
         "title": "Framework Agreement - 4600004102 Night Vision Systems",
-        "identifiers": {
-          "id": "Framework Agreement - 4600004102 Night Vision Systems",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "Framework Agreement - 4600004102 Night Vision Systems",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "goods",
         "description": "Forsvarets Logistikkorganisasjon, Strategiske Anskaffelser (\"FLO SA\"), kunngjør med dette sin intensjon om å tildele rammeavtale \"Framework Agreement - 4600004102 Night Vision Systems», for anskaffelse av levetidsunderstøttelse av mørkeutrustning, herunder kjøp av komplette systemer, reservedeler, kurs og tjenester til Elbit Systems of America (heretter «Elbit») i tråd med forskrift om forsvars- og sikkerhetsanskaffelser fastsatt ved kgl.res. 4.oktober 2013 nr. 1185 (heretter \"FOSA\") § 9-4, jf. FOSA § 5-3 bokstav c. Denne prosedyren kan også benyttes der anskaffelsen kan ansees som en «tilleggsleveranse», jf. FOSA § 5-3 bokstav h.",
         "contractPeriod": {
@@ -28,6 +30,12 @@
       }
     ],
     "title": "Framework Agreement - 4600004102 Night Vision Systems",
+    "identifiers": [
+      {
+        "id": "Framework Agreement - 4600004102 Night Vision Systems",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "goods",
     "description": "Forsvarets Logistikkorganisasjon, Strategiske Anskaffelser (\"FLO SA\"), kunngjør med dette sin intensjon om å tildele rammeavtale \"Framework Agreement - 4600004102 Night Vision Systems», for anskaffelse av levetidsunderstøttelse av mørkeutrustning, herunder kjøp av komplette systemer, reservedeler, kurs og tjenester til Elbit Systems of America (heretter «Elbit») i tråd med forskrift om forsvars- og sikkerhetsanskaffelser fastsatt ved kgl.res. 4.oktober 2013 nr. 1185 (heretter \"FOSA\") § 9-4, jf. FOSA § 5-3 bokstav c. Denne prosedyren kan også benyttes der anskaffelsen kan ansees som en «tilleggsleveranse», jf. FOSA § 5-3 bokstav h.",
     "items": [

@@ -1,7 +1,7 @@
 {
   "id": "2022-960991",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6220ca75-c448-4ce6-b643-c4c0c18e53f4",
+  "ocid": "ocds-abcd1234-c1c4bb95-5913-486c-833c-7c4b94436ace",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -57,6 +57,12 @@
       }
     ],
     "title": "Delivery and maintenance of a Cell Broadcasting Entity with associated services",
+    "identifiers": [
+      {
+        "id": "2022/6604",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "goods",
     "description": "Avtalen gjelder leveranse av European Public Warning System (EU-ALERT), jf. ETSI TS 102 900V1.3.1 (22019-02). Løsningen skal baseres på Cell Broadcast- teknologien og skal komplett eredet eksisterende off entlige varslingssystemet som som består av tyfoner/varslingsanlegg.",
     "items": [

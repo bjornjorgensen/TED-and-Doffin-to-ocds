@@ -1,7 +1,7 @@
 {
   "id": "9a4b7099-142a-412a-af35-3e8feaf15ec7",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-55183059-c224-4442-866b-123f715a592a",
+  "ocid": "ocds-abcd1234-68f8664e-bd02-427e-a496-d8c543b403fb",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -14,10 +14,12 @@
       {
         "id": "LOT-0000",
         "title": "Tiltak 2 Omsorgstjenester",
-        "identifiers": {
-          "id": "23/10246",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "23/10246",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Parallelle rammeavtaler for kjøp av omsorgstjenester, jf. anskaffelsen 23/10246 Omsorgs- og avlastningstjenester.",
         "contractPeriod": {
@@ -31,6 +33,12 @@
       }
     ],
     "title": "Tiltak 2 Omsorgstjenester",
+    "identifiers": [
+      {
+        "id": "23/10246",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Parallelle rammeavtaler for kjøp av omsorgstjenester, jf. anskaffelsen 23/10246 Omsorgs- og avlastningstjenester.",
     "items": [

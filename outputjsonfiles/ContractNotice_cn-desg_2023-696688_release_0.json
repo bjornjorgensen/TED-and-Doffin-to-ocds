@@ -1,7 +1,7 @@
 {
   "id": "2023-696688",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-bcbe0557-9c9b-4788-9296-3bb49a456014",
+  "ocid": "ocds-abcd1234-40ce3973-a094-4e02-9491-8d7abb05355a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -97,6 +97,12 @@
       }
     ],
     "title": "Europan 17 - Østmarka",
+    "identifiers": [
+      {
+        "id": "E17",
+        "scheme": "internal"
+      }
+    ],
     "description": "Europeisk arkitektur- og byutviklingskonkurranse for arkitekter, landskapsarkitekter og planleggere under 40 år. Trondheim kommune er en av 5 norske aktører som lyser ut konkurranse under Europan 17 paraplyen. Trondheim kommune søker innspill til utforming av sykehjem, boliger og nærmiljø på en sensitiv tomt på Lade.",
     "items": [
       {
@@ -182,9 +188,9 @@
         "email": "eierskap.postmottak@trondheim.kommune.no"
       },
       "roles": [
-        "submissionReceiptBody",
+        "processContactPoint",
         "buyer",
-        "processContactPoint"
+        "submissionReceiptBody"
       ],
       "address": {
         "locality": "Trondheim"

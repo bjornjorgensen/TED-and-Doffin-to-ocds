@@ -1,7 +1,7 @@
 {
   "id": "e5c8b25e-859d-492a-9085-716017f267aa",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b619faad-10bd-4181-90f6-b15d6d0b7b68",
+  "ocid": "ocds-abcd1234-909eda01-e9a1-4e71-931f-54d72701a2cc",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -21,10 +21,12 @@
           ]
         },
         "title": "EXPO25 Nordic Restaurant & Shop (voluntary notice, flexible procedure)",
-        "identifiers": {
-          "id": "EXPO25 Nordic Restaurant & Shop",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "EXPO25 Nordic Restaurant & Shop",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Se konkurransegrunnlaget",
         "value": {
@@ -55,6 +57,12 @@
       }
     ],
     "title": "EXPO25 Nordic Restaurant & Shop (voluntary notice, flexible procedure)",
+    "identifiers": [
+      {
+        "id": "EXPO25 Nordic Restaurant & Shop",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Se konkurransegrunnlaget",
     "items": [
@@ -255,8 +263,8 @@
         "locality": "Oslo"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

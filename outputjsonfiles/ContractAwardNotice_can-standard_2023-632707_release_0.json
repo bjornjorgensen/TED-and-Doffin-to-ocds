@@ -1,7 +1,7 @@
 {
   "id": "2023-632707",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-da9db7f6-ff17-4975-a38d-7f245609ba73",
+  "ocid": "ocds-abcd1234-061ed661-b606-40a0-8bea-f02dae419127",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -25,6 +25,12 @@
       }
     ],
     "title": "Rehabilitering av 2 bruer i Ballangen",
+    "identifiers": [
+      {
+        "id": "22/34",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "works",
     "description": "Etablering av to bruer i Ballangen. I korte trekk omfatter arbeidene rivning, deponering og reetablering av bruene.",
     "items": [

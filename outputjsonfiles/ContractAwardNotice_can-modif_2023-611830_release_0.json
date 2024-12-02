@@ -1,7 +1,7 @@
 {
   "id": "2023-611830",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8d8dd48c-2075-4bb0-b23e-862b18aea2d4",
+  "ocid": "ocds-abcd1234-c2300273-7141-43ef-ae4c-7c29a13be58b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -24,6 +24,12 @@
       }
     ],
     "title": "Kommunenettverk for innføring av velferdsteknologi",
+    "identifiers": [
+      {
+        "id": "23/00530",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Kommunenettverk for innføring av velferdsteknologi og digital hjemmeoppfølging. Prosjektstøtte (70 % av oppdraget) for videre utvikling av nettverket, planlegging av kompetansebygging i prosessledelse og endringsledelse i nettverket. Andre kompetansetiltak kan være aktuelle basert på behovskartlegging. Det vil også være behov for noen sekretariatsoppgaver (20-30% av oppdraget)",
     "items": [

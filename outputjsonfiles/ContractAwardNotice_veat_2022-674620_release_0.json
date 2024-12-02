@@ -1,7 +1,7 @@
 {
   "id": "2022-674620",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-bebad6de-af56-4bd1-a421-d4ddf56d0455",
+  "ocid": "ocds-abcd1234-6bf0a0a4-d4f7-4256-a9e7-94509a9ac5ef",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -32,6 +32,12 @@
       }
     ],
     "title": "Helseovervåking av vilt - ViltHOP 2023-2027",
+    "identifiers": [
+      {
+        "id": "23087006",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Hovedmålet med programmet er kartlegging og overvåking av ulike sykdommer hos vilt med hovedfokus på hjortevilt. I tillegg skal programmet bidra til å oppklare årsak til sykdom hos enkeltindivider, fange opp økt sykdomsforekomst eller dødelighet i lokale bestander, samt kontinuerlig arbeide med problemstillinger knyttet til overføring av smittsomme sykdommer. Slike overførbare sykdommer kan skje mellom artene eller mellom husdyr og vilt, samt fra dyr til menneske.",
     "items": [

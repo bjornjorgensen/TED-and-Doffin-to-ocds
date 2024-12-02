@@ -1,7 +1,7 @@
 {
   "id": "2022-902600",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0354a7e8-5aa3-46d2-aef1-a32d23388d24",
+  "ocid": "ocds-abcd1234-92f311fe-46c9-4458-b332-9f071e16e69b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -55,6 +55,12 @@
       }
     ],
     "title": "Rammeavtaler – spesialisttjenester tannhelse",
+    "identifiers": [
+      {
+        "id": "22/1223",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Tannhelsetjenesten i Agder fylkeskommune har behov for rammeavtaler på spesialisttjenester innen tannhelse. Det skal inngås rammeavtaler med 1-4 godkjente spesialister innenfor hvert av fagfeltene som er beskrevet under. Avgjørende for inngåelse av en eller flere rammeavtaler innenfor samme fagfelt vil være geografisk plassering. Konkurransen er delt inn i fire ulike fagfelt: • Del 1 – Endodonti • Del 2 – Oral kirurgi og oral medisin • Del 3 – Oral protetikk • Del 4 – Periodonti Tilbyderene må ha behandlingssted som ikke er til stor ulempe for innbyggerne på Agder. Det betyr at det må være behandlingssteder fra Sør-Rogaland, Agder til sør i Vestfold & Telemark.",
     "items": [
@@ -134,9 +140,9 @@
         "locality": "Arendal"
       },
       "roles": [
-        "submissionReceiptBody",
+        "processContactPoint",
         "buyer",
-        "processContactPoint"
+        "submissionReceiptBody"
       ]
     },
     {

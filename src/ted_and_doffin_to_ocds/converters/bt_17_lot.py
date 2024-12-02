@@ -1,13 +1,23 @@
 # converters/bt_17_Lot.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_submission_electronic(xml_content):
+def parse_submission_electronic(xml_content: str | bytes) -> dict[str, Any] | None:
+    """Parse electronic submission policy for each lot from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
+
+    Returns:
+        Optional[Dict[str, Any]]: Dictionary containing lots data with submission policies,
+                                 or None if no valid data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -44,7 +54,15 @@ def parse_submission_electronic(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_submission_electronic(release_json, submission_electronic_data) -> None:
+def merge_submission_electronic(
+    release_json: dict[str, Any], submission_electronic_data: dict[str, Any] | None
+) -> None:
+    """Merge electronic submission policy data into the release JSON.
+
+    Args:
+        release_json (Dict[str, Any]): The release JSON to update
+        submission_electronic_data (Optional[Dict[str, Any]]): Lot data containing submission policies to merge
+    """
     if not submission_electronic_data:
         logger.warning("No Submission Electronic data to merge")
         return

@@ -1,7 +1,7 @@
 {
   "id": "2022-945801",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-fbf4f379-b26f-4e7c-b322-808e3ab4551b",
+  "ocid": "ocds-abcd1234-66bc75c4-e77f-44d4-aa37-e057685b10f8",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -22,6 +22,12 @@
       }
     ],
     "title": "Bedriftshelsetjeneste",
+    "identifiers": [
+      {
+        "id": "Anskaffelse -  36 - 2022",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Anskaffelsens formål: ​Oppdragsgiver ønsker å inngå en rammeavtale med én leverandør om levering av bedriftshelsetjenester til Vestfold og Telemark Fylkeskommune. For nærmere beskrivelse av anskaffelsen, se Vedlegg A. Anskaffelses verdi og omfang: Anskaffelsens verdi er anslått å være mellom 14,0 og 16,0 MNOK eks. mva. inkludert opsjoner. Oppdragsgiver presiserer at anslått verdi er et erfaringsmessig anslag og er ikke bindende for oppdragsgiver. Rammeavtalens skal ha en varighet på 2 år. Oppdragsgiver skal ha opsjon på forlengelse av rammeavtalen ytterligere 1 + 1 år. Rammeavtalens maksimale varighet er 4 år.",
     "items": [

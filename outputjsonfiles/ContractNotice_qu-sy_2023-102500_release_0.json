@@ -1,7 +1,7 @@
 {
   "id": "3580e3e0-275f-4489-9aab-b6f493790e00",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-183a323e-cc9c-4430-a4cf-816d8c1781ee",
+  "ocid": "ocds-abcd1234-484dc437-cd2d-4cfc-9197-fd7a4065d54c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -20,10 +20,12 @@
           ]
         },
         "title": "Nettstasjoner og trafo 2023",
-        "identifiers": {
-          "id": "01-2023",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "01-2023",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "goods",
         "description": "Formålet med anskaffelsen er å inngå rammeavtale(r) som sikrer Oppdragsgiver de nettstasjoner og trafoer med spesifisert tilleggsutstyr som han til enhver tid behøver til sin nettvirksomhet, samtidig som rammeavtalen(e) skal bidra til å effektivisere Oppdragsgivers drift og til å redusere kostnader.Anskaffelsen vil bli gjennomført ved at Tilbyder kan inngi tilbud på inntil 2 opsjoner:Opsjon 1: Nettstasjoner med spesifisert tilleggsutstyrOpsjon 2: Trafoer med spesifisert tilleggsutstyr",
         "contractPeriod": {
@@ -102,6 +104,12 @@
       }
     ],
     "title": "Nettstasjoner og trafo 2023",
+    "identifiers": [
+      {
+        "id": "01-2023",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "goods",
     "description": "Formålet med anskaffelsen er å inngå rammeavtale(r) som sikrer Oppdragsgiver de nettstasjoner og trafoer med spesifisert tilleggsutstyr som han til enhver tid behøver til sin nettvirksomhet, samtidig som rammeavtalen(e) skal bidra til å effektivisere Oppdragsgivers drift og til å redusere kostnader.Anskaffelsen vil bli gjennomført ved at Tilbyder kan inngi tilbud på inntil 2 opsjoner:Opsjon 1: Nettstasjoner med spesifisert tilleggsutstyrOpsjon 2: Trafoer med spesifisert tilleggsutstyr",
     "items": [
@@ -239,8 +247,8 @@
         "email": "finn-magne.eines@elmea.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Svolvær"

@@ -1,7 +1,7 @@
 {
   "id": "2023-674343",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-493a5133-d3f3-41ce-a9f9-0470cac4e278",
+  "ocid": "ocds-abcd1234-d8843b35-4019-4bd4-a140-68881b1114cc",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -71,6 +71,12 @@
       }
     ],
     "title": "Veiledende kunngjøring: Reisebyråtjenester til kommuner i Innlandet 2023 - 2027",
+    "identifiers": [
+      {
+        "id": "22/2066",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Regionalt Innkjøp i Kongsvingerregionen planlegger å gjennomføre en konkurranse om levering av reisebyråtjenester. ",
     "items": [
@@ -129,10 +135,10 @@
         "email": "riik@kongsvinger.kommune.no"
       },
       "roles": [
-        "leadBuyer",
         "wholesaleBuyer",
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "leadBuyer",
+        "buyer"
       ],
       "address": {
         "locality": "KONGSVINGER"

@@ -1,7 +1,7 @@
 {
   "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c67a94b6-07f5-443b-9a67-49faf3ead099",
+  "ocid": "ocds-abcd1234-fefc2428-d734-470a-832b-6abb43059622",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -15,10 +15,12 @@
       {
         "id": "LOT-0000",
         "title": "Griegkvartalet: Plan - designkonkurranse, etterfølgende tjenestekontrakt",
-        "identifiers": {
-          "id": "00",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "00",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "works",
         "description": "Grieghallen Utbygging AS (oppdragsgiver) ble etablert i 2021 for å realisere prosjektet «Griegkvartalet» - et nytt musikkteater i Bergen. Oppdragsgiver skal gjennom prosjektet «Griegkvartalet» etablere et nytt musikkteater på Edvard Griegs plass. I denne forbindelse har oppdragsgiver behov for å få utarbeidet et tverrfaglig løsningsforslag, utarbeidet av et team av både arkitekter og rådgivere. Løsningsforslaget som utarbeides i plan- og designkonkurransen vil ligge til grunn for prosjektet i det videre arbeidet.Videre har oppdragsgiver behov for å inngå en etterfølgende kontrakt for arkitekt- og rådgivningstjenester i prosjektet. Tjenestekontrakt for arkitekt- og rådgivning vil bli inngått etter NS 8401:2010 «Alminnelige kontraktsbestemmelser for prosjekteringsoppdrag».Konkurransen skal gjennomføres som en plan- og designkonkurranse med etterfølgende konkurranse med forhandling uten forutgående kunngjøring, jf. FOA del I og V.",
         "additionalProcurementCategories": [
@@ -28,6 +30,12 @@
       }
     ],
     "title": "Griegkvartalet: Plan - designkonkurranse, etterfølgende tjenestekontrakt",
+    "identifiers": [
+      {
+        "id": "00",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "works",
     "description": "Grieghallen Utbygging AS (oppdragsgiver) ble etablert i 2021 for å realisere prosjektet «Griegkvartalet» - et nytt musikkteater i Bergen. Oppdragsgiver skal gjennom prosjektet «Griegkvartalet» etablere et nytt musikkteater på Edvard Griegs plass. I denne forbindelse har oppdragsgiver behov for å få utarbeidet et tverrfaglig løsningsforslag, utarbeidet av et team av både arkitekter og rådgivere. Løsningsforslaget som utarbeides i plan- og designkonkurransen vil ligge til grunn for prosjektet i det videre arbeidet.Videre har oppdragsgiver behov for å inngå en etterfølgende kontrakt for arkitekt- og rådgivningstjenester i prosjektet. Tjenestekontrakt for arkitekt- og rådgivning vil bli inngått etter NS 8401:2010 «Alminnelige kontraktsbestemmelser for prosjekteringsoppdrag».Konkurransen skal gjennomføres som en plan- og designkonkurranse med etterfølgende konkurranse med forhandling uten forutgående kunngjøring, jf. FOA del I og V.",
     "items": [
@@ -139,9 +147,9 @@
         "locality": "Bergen"
       },
       "roles": [
+        "funder",
         "payer",
         "buyer",
-        "funder",
         "processContactPoint"
       ]
     },

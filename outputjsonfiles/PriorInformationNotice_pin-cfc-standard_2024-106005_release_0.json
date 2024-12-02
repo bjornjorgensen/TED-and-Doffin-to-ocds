@@ -1,7 +1,7 @@
 {
   "id": "7d111d51-8042-402a-a234-50efe86d8f4f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-93eaa943-ebfa-4ac5-8fe3-fcb2a10545a4",
+  "ocid": "ocds-abcd1234-df96ed90-0559-4625-a6c2-452b97a9759b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -32,10 +32,12 @@
           ]
         },
         "title": "Repair and maintenance services of gates",
-        "identifiers": {
-          "id": "BPM000211",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "BPM000211",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "To meet the Client’s needs, a framework agreement(s) will be established for the following services related to port management:\n-Service Agreements for Gates\n-Gate Repairs\n-Procurement of New Gates/Port Systems/Loading Systems\n-Spare Parts for Gates.",
         "value": {
@@ -88,6 +90,12 @@
       }
     ],
     "title": "Repair and maintenance services of gates",
+    "identifiers": [
+      {
+        "id": "BPM000211",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Service and repairs of gates belonging to Posten Bring AS. Additional purchase of some new gates and gate systems might also be done.",
     "items": [
@@ -185,8 +193,8 @@
         "email": "Kristian.von.Aphelen@posten.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Oslo"

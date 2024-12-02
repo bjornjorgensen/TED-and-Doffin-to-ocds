@@ -1,7 +1,7 @@
 {
   "id": "2023-336496",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7d423296-1933-4135-8d23-c9f75750948e",
+  "ocid": "ocds-abcd1234-8b4b5962-cdba-4901-b5e8-caa5cb162f6f",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -25,6 +25,12 @@
       }
     ],
     "title": "System for utlån og formidling av e-bøker og e-lydbøker",
+    "identifiers": [
+      {
+        "id": "2023/17999",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "goods",
     "description": "Viken fylkeskommune skal sammen med kommuner, anskaffe et system for utlån og formidling av e-bøker og e-lydbøker.",
     "items": [

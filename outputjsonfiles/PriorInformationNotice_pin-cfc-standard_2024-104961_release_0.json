@@ -1,7 +1,7 @@
 {
   "id": "7b469b6b-4abb-4f22-abe1-50973de8c825",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-809f68bb-0b1d-441b-85c0-a610997d28a6",
+  "ocid": "ocds-abcd1234-1d7af0e8-d612-4d29-ac54-8cfaf949e145",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -24,10 +24,12 @@
           ]
         },
         "title": "Operation of Post in Store and Posten parcel delivery - 2025",
-        "identifiers": {
-          "id": "BPM000217",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "BPM000217",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Refering to section 2 in the notice. ",
         "selectionCriteria": {
@@ -72,6 +74,12 @@
       }
     ],
     "title": "Operation of Post in Store and Posten parcel delivery - 2025",
+    "identifiers": [
+      {
+        "id": "BPM000217",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Posten Bring AS’s intention with this procurement is to find partners for the operation of Post in Store and Posten parcel delivery",
     "items": [
@@ -121,8 +129,8 @@
         "email": "per.brustad@posten.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Oslo"

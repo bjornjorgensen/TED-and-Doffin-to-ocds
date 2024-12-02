@@ -1,7 +1,7 @@
 {
   "id": "2022-366668",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-017a4a33-a513-4c60-928a-d897e209778c",
+  "ocid": "ocds-abcd1234-6dfcb37e-514d-4956-9ef6-c6602ba939e3",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -54,6 +54,12 @@
       }
     ],
     "title": "Demensgård med transporttjeneste",
+    "identifiers": [
+      {
+        "id": "22/4009",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Forhåndkunngjøring for leverandører som ønsker å melde sin interesse for konkurransen.  Frist for å be om konkurransegrunnlag via Mercell.com er 15. august 2022 kl. 00:00.  Konkurransen vil ikke bli ytterligere kunngjort. Tønsberg kommune skal gjennomføre konkurranse om kjøp av dagaktivitetstilbud til 6 personer med demens på Inn på tunet-gård eller gård med tilsvarende kvalitet.    Transport av brukerne til og fra gården skal inngå i tilbudet.  Det er også mulighet til å gi tilbud uten transport, eller å benytte underleverandør til transporten. Klikk her https://permalink.mercell.com/182678464.aspx",
     "items": [
@@ -148,8 +154,8 @@
         "locality": "TØNSBERG"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

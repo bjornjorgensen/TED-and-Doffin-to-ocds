@@ -1,7 +1,7 @@
 {
   "id": "2023-631333",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f3434eec-aea8-4461-92cf-7626e286caf4",
+  "ocid": "ocds-abcd1234-fb11fd02-36cb-45fb-9459-f3e464ef9170",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -62,6 +62,12 @@
       }
     ],
     "title": "ACHILLES UTILITIES NCE qualification|notification of qualification system",
+    "identifiers": [
+      {
+        "id": "U2023/001-1",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "ACHILLES UTILITIES NCE is a joint qualification system for suppliers and contractors to utilities in Nordics and Central Europe. It's operated by Achilles under Article 77 of Directive 2014/25/EU. The subscribing utilities will use ACHILLES UTILITIES NCE for tenderer selection for contracts and framework agreements subject to EU procurement rules, but reserve the right to publish individual notices for specific requirements where they deem it necessary, even though they relate to the product and service categories covered by ACHILLES UTILITIES NCE. The qualification system may be used for contracts not subject to EU procurement rules at each subscriber's discretion. An overview of products and services acquired through ACHILLES UTILITIES NCE is available here https://www.achilles.com/app/uploads/2021/02/Product-and-Service-Code-Guide-EN.pdf. Please note that new Product Codes such as Electric Vehicle Charging Stations and Unmanned Aerial Systems incl Drones have been added https://www.achilles.no/download/unce/UNCE-CodeChanges-Jan2021-EN.pdf.",
     "items": [
@@ -197,9 +203,9 @@
         ]
       },
       "roles": [
-        "submissionReceiptBody",
+        "processContactPoint",
         "buyer",
-        "processContactPoint"
+        "submissionReceiptBody"
       ],
       "address": {
         "locality": "Arendal"

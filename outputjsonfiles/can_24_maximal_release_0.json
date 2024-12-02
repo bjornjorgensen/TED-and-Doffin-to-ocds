@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-09036244-0a9f-4835-8c54-f5bdca8b8742",
+  "ocid": "ocds-abcd1234-20ebac77-bcba-41bc-a517-967e4c450cda",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -46,10 +46,12 @@
           "EU-CVD"
         ],
         "title": "Title ---",
-        "identifiers": {
-          "id": "Lot Reference A",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "Lot Reference A",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Description --- Additional information for GLO-0001 ProcurementProject ---",
         "value": {
@@ -149,10 +151,16 @@
       {
         "id": "GLO-0001",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "title": "Title ---",
+        "identifiers": [
+          {
+            "id": "Object Reference Number---",
+            "scheme": "internal"
+          }
+        ],
         "description": "Description --- Additional information for GLO-0001 ProcurementProject ---",
         "maximumValue": {
           "amount": 9999999.99,
@@ -186,6 +194,12 @@
       }
     ],
     "title": "Procurement Title ---",
+    "identifiers": [
+      {
+        "id": "2023-P-0001",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Description ---",
     "items": [
@@ -327,8 +341,8 @@
         "id": "FiscalDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "publisher": {
           "id": "ORG-0002"
@@ -338,8 +352,8 @@
         "id": "EnvDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "publisher": {
           "id": "ORG-0003"
@@ -349,8 +363,8 @@
         "id": "EmplDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "publisher": {
           "id": "ORG-0004"
@@ -685,8 +699,8 @@
         "locality": "Luxembourg"
       },
       "roles": [
-        "leadTenderer",
-        "tenderer"
+        "tenderer",
+        "leadTenderer"
       ]
     },
     {

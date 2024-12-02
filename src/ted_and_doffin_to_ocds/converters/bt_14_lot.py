@@ -1,13 +1,23 @@
 # converters/bt_14_Lot.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_lot_documents_restricted(xml_content):
+def parse_lot_documents_restricted(xml_content: str | bytes) -> dict[str, Any] | None:
+    """Parse restricted document references for each lot from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
+
+    Returns:
+        Optional[Dict[str, Any]]: Dictionary containing document data with lot references,
+                                 or None if no valid data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -50,7 +60,15 @@ def parse_lot_documents_restricted(xml_content):
     return result if result["tender"]["documents"] else None
 
 
-def merge_lot_documents_restricted(release_json, lot_documents_restricted_data) -> None:
+def merge_lot_documents_restricted(
+    release_json: dict[str, Any], lot_documents_restricted_data: dict[str, Any] | None
+) -> None:
+    """Merge restricted document data into the release JSON.
+
+    Args:
+        release_json (Dict[str, Any]): The release JSON to update
+        lot_documents_restricted_data (Optional[Dict[str, Any]]): Document data with lot references to merge
+    """
     if not lot_documents_restricted_data:
         logger.warning("No lot documents restricted data to merge")
         return

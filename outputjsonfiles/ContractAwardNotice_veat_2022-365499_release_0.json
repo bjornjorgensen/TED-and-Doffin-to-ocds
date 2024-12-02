@@ -1,7 +1,7 @@
 {
   "id": "2022-365499",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-74019c99-4dec-4518-ac58-cab8b15777c4",
+  "ocid": "ocds-abcd1234-167ac6db-5cf1-40f6-a502-24a2f137a7a7",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -36,6 +36,12 @@
       }
     ],
     "title": "Feltundersøkelser Giljajuvet og Bergelandstunnelen",
+    "identifiers": [
+      {
+        "id": "2022/42921",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Rogaland fylkeskommune har til hensikt å inngå avtale med Xtend Technology AS om utførelse av høydefinisjons hybrid LiDAR og fotogrammetriundersøkelse av tunnelene Giljajuvet i Dirdal og Bergelandstunnelen i Stavanger for å få detaljerte 3D-modeller av tunnelene. Hensikten med oppdraget er å vurdere ny teknologi opp mot eksisterende teknologi og godt etablerte rutiner og teknikker. Oppdragsgiver er ikke kjent med at det finnes tilsvarende løsninger i markedet.",
     "items": [

@@ -1,7 +1,7 @@
 {
   "id": "2023-600143",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e9b7c6ba-f9b9-44a1-a14f-6eb9dd3c8f32",
+  "ocid": "ocds-abcd1234-aae946e8-5a61-424d-a9ce-0776b63e33a6",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -54,6 +54,12 @@
       }
     ],
     "title": "Sykehjem Søndre Slagen",
+    "identifiers": [
+      {
+        "id": "01 (1)",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "works",
     "description": "Dette er en forhåndskunngjøring etter forskrift om offentlige anskaffelse (FOA) §21-2 (2) av konkurranse for anskaffelse av nytt sykehjem med 84 plasser i Søndre Slagen. Hensikten med denne kunngjøringen er at eventuelle private tilbydere som har egnet bygg/tomt for sykehjem for 84 beboere i nevnte område melder sin interesse. Tønsberg kommune vil være leietaker når sykehjemmet er ferdigstilt. Interesserte leverandører inviteres til å melde sin interesse nå siden kontrakt vil bli inngått uten ytterligere kunngjøring. Det er kun leverandører som har meldt sin interesse til oppdragsgiver, som vil få mulighet til å innlevere tilbud. Vedlagt skjema for kontaktopplysninger bes fylles ut.",
     "items": [
@@ -119,8 +125,8 @@
         "email": "therese.borge@tonsberg.kommune.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Tønsberg"

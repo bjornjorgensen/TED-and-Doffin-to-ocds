@@ -1,13 +1,23 @@
 # converters/bt_24_LotsGroup.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_lots_group_description(xml_content):
+def parse_lots_group_description(xml_content: str | bytes) -> dict[str, Any] | None:
+    """Parse descriptions for lot groups from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
+
+    Returns:
+        Optional[Dict[str, Any]]: Dictionary containing lot groups data with descriptions,
+                                 or None if no valid data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -44,7 +54,15 @@ def parse_lots_group_description(xml_content):
     return result if result["tender"]["lotGroups"] else None
 
 
-def merge_lots_group_description(release_json, lots_group_description_data) -> None:
+def merge_lots_group_description(
+    release_json: dict[str, Any], lots_group_description_data: dict[str, Any] | None
+) -> None:
+    """Merge lot group description data into the release JSON.
+
+    Args:
+        release_json (Dict[str, Any]): The release JSON to update
+        lots_group_description_data (Optional[Dict[str, Any]]): Lot group data containing descriptions to merge
+    """
     if not lots_group_description_data:
         logger.warning("No LotsGroup Description data to merge")
         return

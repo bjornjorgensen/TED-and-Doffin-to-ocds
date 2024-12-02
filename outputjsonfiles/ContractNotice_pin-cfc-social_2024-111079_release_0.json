@@ -1,7 +1,7 @@
 {
   "id": "defc83ce-b8a2-48a0-a1be-33262308c9fd",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b9dd4ba3-86bc-45ce-b9ab-b485018cc56a",
+  "ocid": "ocds-abcd1234-adffcf78-8eec-43c3-9743-96e18a7fe8d1",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -28,10 +28,12 @@
           }
         },
         "title": "Dzmitry PROD Test",
-        "identifiers": {
-          "id": "576165",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "576165",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Test",
         "tenderPeriod": {
@@ -54,6 +56,12 @@
       }
     ],
     "title": "Dzmitry PROD Test",
+    "identifiers": [
+      {
+        "id": "867171",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Test",
     "items": [
@@ -110,8 +118,8 @@
         "locality": "02-495"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

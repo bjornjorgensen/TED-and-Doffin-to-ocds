@@ -2,13 +2,22 @@
 
 import logging
 from datetime import datetime
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_additional_info_deadline_part(xml_content):
+def parse_additional_info_deadline_part(xml_content: str | bytes) -> str | None:
+    """Parse the additional information deadline from XML content for the part.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
+
+    Returns:
+        Optional[str]: ISO formatted datetime string for the enquiry period end date, or None if not found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -42,7 +51,16 @@ def parse_additional_info_deadline_part(xml_content):
     return None
 
 
-def convert_to_iso_format(date_string, time_string):
+def convert_to_iso_format(date_string: str, time_string: str) -> str:
+    """Convert separate date and time strings to ISO format datetime string.
+
+    Args:
+        date_string (str): The date string, potentially including timezone
+        time_string (str): The time string, potentially including timezone
+
+    Returns:
+        str: Combined date and time in ISO format
+    """
     # Combine date and time
     datetime_string = f"{date_string.split('+')[0]}T{time_string}"
 
@@ -53,7 +71,15 @@ def convert_to_iso_format(date_string, time_string):
     return date_time.isoformat()
 
 
-def merge_additional_info_deadline_part(release_json, deadline) -> None:
+def merge_additional_info_deadline_part(
+    release_json: dict[str, Any], deadline: str | None
+) -> None:
+    """Merge part data containing additional information deadline into the release JSON.
+
+    Args:
+        release_json (Dict[str, Any]): The release JSON to update
+        deadline (Optional[str]): ISO formatted datetime string for the enquiry period end date
+    """
     if deadline:
         if "tender" not in release_json:
             release_json["tender"] = {}

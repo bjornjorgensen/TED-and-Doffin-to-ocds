@@ -1,7 +1,7 @@
 {
   "id": "667f77ec-2687-48a0-a752-651a0d7ebdcb",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-5c7d7d96-de29-4776-928c-fc09f1e855ab",
+  "ocid": "ocds-abcd1234-908d1b08-9580-470d-a3ff-d97b109c85c5",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -9,6 +9,12 @@
     },
     "status": "planned",
     "title": "System for Utvikling og Gjennomføring av Elektroniske Prøver",
+    "identifiers": [
+      {
+        "id": "2023041103",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Forsvarsmateriell ønsker å identifisere mulige løsninger som leverandører kan tilby innen adaptive elektroniske prøver.I forbindelse med overgang til nye adaptive prøver, vurderes det å anskaffe et nytt system for utvikling og gjennomføring av elektroniske prøver. Systemet må håndtere både adaptive og tradisjonelle prøver, og det må håndtere prøvetaking både i klasserom og hjemmefra. Systemet bør understøtte administrasjon av eksisterende prøver og oppsett av nye prøver via løsningen, og da fortrinnsvis slik at dette kan gjøres uten spesiell IT-kompetanse.Interesserte oppfordres til å ta kontakt i kommunikasjonsfeltet i Mercell for et mer utfyllende dokument som inneholder selve spørsmålene knyttet til markedsundersøkelsen. Fristen for å svare på markedsundersøkelsen er 15. desember 2023.",
     "items": [

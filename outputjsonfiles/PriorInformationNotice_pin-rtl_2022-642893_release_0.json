@@ -1,7 +1,7 @@
 {
   "id": "2022-642893",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d959c91e-97f0-4859-975c-8e397bfc1f42",
+  "ocid": "ocds-abcd1234-a2e741e3-402e-4ea0-9f69-48dc66874690",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -40,6 +40,12 @@
       }
     ],
     "title": "Drift av parkering ved Sykehuset Innlandet HF",
+    "identifiers": [
+      {
+        "id": "2022/1181",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Sykehusinnkjøp HF  ønsker å varsle en kommende konkurranse med forhandling for drift av parkering ved Sykehuset i Innlandet HF. Konkurransen  utlyses i januar 2023.  .",
     "items": [
@@ -108,8 +114,8 @@
         "email": "post@sykehusinnkjop.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "VADSØ"

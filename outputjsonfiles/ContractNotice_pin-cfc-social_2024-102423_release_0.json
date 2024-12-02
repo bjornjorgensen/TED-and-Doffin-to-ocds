@@ -1,7 +1,7 @@
 {
   "id": "2c234234-aaec-4210-8cbe-1803ecaee901",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-52aa4e07-a765-43ee-96d7-03af69b03769",
+  "ocid": "ocds-abcd1234-74657027-2717-40b2-890d-454e37fa8212",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -13,10 +13,12 @@
       {
         "id": "LOT-0000",
         "title": "Tillatelsesordning for el-sparkesykler i Ålesund Kommune",
-        "identifiers": {
-          "id": "23/7053",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "23/7053",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Ålesund kommune lyser ut løyve til å drive utleige av elsparkesyklar som gjeld for sesongen 2024. \nÅlesund kommune kunngjer søknadsinformasjon for løyveperioden 15. april til 31. desember 2024 for utleige av elsparkesyklar på offentleg grunn. Det blir gitt løyve til 300 elsparkesyklar i sone 1 (Steinvågbrua - Fagerlia). Mengd elsparkesyklar i sone 1 fordelast likt på alle søkarar som fyller vilkåra for løyve, men likevel slik at kvar søkar maksimalt får det tal elsparkesyklar det er søkt om, sjå forskrifta § 5 bokstav c.   \nI resten av kommunen er det ikkje sett grense for mengd elsparkesyklar.   \n\nSøknaden skal sendast inn gjennom Ålesund kommune sin digitale søknadsportal innan 15.03.2023.\nhttps://skjema.alesund.kommune.no/skjema/ALE0320/Sknad_om_elsparkesykkelutleige",
         "tenderPeriod": {
@@ -33,6 +35,12 @@
       }
     ],
     "title": "Tillatelsesordning for el-sparkesykler i Ålesund Kommune",
+    "identifiers": [
+      {
+        "id": "23/7053",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Ålesund kommune lyser ut løyve til å drive utleige av elsparkesyklar som gjeld for sesongen 2024. \nÅlesund kommune kunngjer søknadsinformasjon for løyveperioden 15. april til 31. desember 2024 for utleige av elsparkesyklar på offentleg grunn. Det blir gitt løyve til 300 elsparkesyklar i sone 1 (Steinvågbrua - Fagerlia). Mengd elsparkesyklar i sone 1 fordelast likt på alle søkarar som fyller vilkåra for løyve, men likevel slik at kvar søkar maksimalt får det tal elsparkesyklar det er søkt om, sjå forskrifta § 5 bokstav c.   \nI resten av kommunen er det ikkje sett grense for mengd elsparkesyklar.   \n\nSøknaden skal sendast inn gjennom Ålesund kommune sin digitale søknadsportal innan 15.03.2023.\nhttps://skjema.alesund.kommune.no/skjema/ALE0320/Sknad_om_elsparkesykkelutleige",
     "items": [
@@ -133,8 +141,8 @@
         "locality": "Ålesund"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

@@ -1,7 +1,7 @@
 {
   "id": "2023-653367",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9c32fd4c-09c1-4e82-9f05-cf4a64cf1292",
+  "ocid": "ocds-abcd1234-66576543-b3c2-4069-8588-f127a7ec6471",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -407,6 +407,12 @@
       }
     ],
     "title": "Bybanen i Bergen - byggetrinn 5",
+    "identifiers": [
+      {
+        "id": "BT5",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "works",
     "description": "Bybanen utbygging er i ferd med å forberede anskaffelsesplanen for bygging av Bybanen byggetrinn 5 fra Bergen sentrum til Åsane. Femte byggetrinn går fra sentrum gjennom Åsane til Vågsbotn, sammen med sammenhengende sykkelrute og forlengelse av Fløyfjelltunnelen til Eidsvåg. Linjen skal etter planen realiseres i to byggetrinn. Første etappe er ca 2,5 km dobbeltspor fra sentrum til Amalie Skrams vei (Sandviken) med mulig åpning 2028. Neste etappe er ca 10 km dobbeltspor fra Amalie Skrams vei til Åsane og skal etter planen åpnes 2033. Denne etappen inkluderer også en parkeringshall i Åsane. Bybanetraséen kobles på eksisterende trasé i Kaigaten der det etableres en ny holdeplass. Traséen går videre i Christies gate, Småstrandsgaten, Torget, Bryggen og Sandbrogaten. Fra Sandrogaten går banetraséen inn i tunnel til Sandviken og holdeplass i fjell ved Sandviken kirke, og videre mot Amalie Skrams vei.",
     "items": [
@@ -918,8 +924,8 @@
         "buyerProfile": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Bergen"

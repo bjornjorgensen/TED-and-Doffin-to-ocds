@@ -1,13 +1,23 @@
 # converters/bt_23_procedure.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_main_nature_procedure(xml_content):
+def parse_main_nature_procedure(xml_content: str | bytes) -> dict[str, Any] | None:
+    """Parse main procurement nature from procedure XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
+
+    Returns:
+        Optional[Dict[str, Any]]: Dictionary containing main procurement category,
+                                 or None if no valid data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -23,7 +33,7 @@ def parse_main_nature_procedure(xml_content):
     result = {"tender": {}}
 
     procurement_type = root.xpath(
-        "//cac:ProcurementProject/cbc:ProcurementTypeCode/text()",
+        "/*/cac:ProcurementProject/cbc:ProcurementTypeCode[@listName='contract-nature']/text()",
         namespaces=namespaces,
     )
 
@@ -40,7 +50,15 @@ def parse_main_nature_procedure(xml_content):
     return result if "mainProcurementCategory" in result["tender"] else None
 
 
-def merge_main_nature_procedure(release_json, main_nature_data) -> None:
+def merge_main_nature_procedure(
+    release_json: dict[str, Any], main_nature_data: dict[str, Any] | None
+) -> None:
+    """Merge main procurement nature data into the release JSON.
+
+    Args:
+        release_json (Dict[str, Any]): The release JSON to update
+        main_nature_data (Optional[Dict[str, Any]]): Tender data containing main procurement category to merge
+    """
     if not main_nature_data:
         logger.warning("No Main Nature (procedure) data to merge")
         return

@@ -1,7 +1,7 @@
 {
   "id": "510444f4-6cd2-4b26-8dd6-f3af27ffa069",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-02f9ff23-b576-4b1e-b5ea-02939b48e0b6",
+  "ocid": "ocds-abcd1234-ac7d2e20-07c5-4b56-b5dd-a038a0a2363e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -23,10 +23,12 @@
       {
         "id": "LOT-0000",
         "title": "Intensjonskunngjøring - Kjøp av program for utarbeidelse av digitale plandata",
-        "identifiers": {
-          "id": "2024/930",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "2024/930",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "goods",
         "description": "Ringerike kommune har til intensjon å inngå kontrakt med Focus Software AS for løpende tjenestekjøp over internett. Dette innebærer kjøp av programmet Focus Arealplan med tilhørende nødvendige lisenser.Kontraktsverdi pr år er:Oppdragsgiver har konkludert med at vi i denne prosessen står ovenfor en eneleverandørsituasjon etter FOA §13-4 bokstav b nr. 2, som følge av at Focus Software AS er eneste leverandør som leverer denne tjenesten, til vårt formål, basert på AutoCAD som baseprogram.",
         "hasAccessibilityCriteria": false,
@@ -36,6 +38,12 @@
       }
     ],
     "title": "Intensjonskunngjøring - Kjøp av program for utarbeidelse og redigering av digitale plandata",
+    "identifiers": [
+      {
+        "id": "2024/930",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "goods",
     "description": "Ringerike kommune har til intensjon å inngå kontrakt med Focus Software AS for løpende tjenestekjøp over internett. Dette innebærer kjøp av programmet Focus Arealplan med tilhørende nødvendige lisenser.Kontraktsverdi pr år er: kr 82 013,-Oppdragsgiver har konkludert med at vi i denne prosessen står ovenfor en eneleverandørsituasjon etter FOA §13-4 bokstav b nr. 2, som følge av at Focus Software AS er eneste leverandør som leverer denne tjenesten, til vårt formål, basert på AutoCAD som baseprogram.",
     "items": [
@@ -121,9 +129,9 @@
         "locality": "HØNEFOSS"
       },
       "roles": [
+        "funder",
         "payer",
-        "buyer",
-        "funder"
+        "buyer"
       ]
     },
     {

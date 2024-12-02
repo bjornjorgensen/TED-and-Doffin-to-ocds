@@ -1,7 +1,7 @@
 {
   "id": "0097de15-36cf-4750-96c9-f66ae4d6cafd",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-83b1db0b-431d-42a0-b3be-31c1c089ea7b",
+  "ocid": "ocds-abcd1234-0b6df034-6441-4abf-a5cb-e54fafe06e26",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -9,6 +9,12 @@
     },
     "status": "planned",
     "title": "Markedsdialog Nettverksutstyr",
+    "identifiers": [
+      {
+        "id": "23/43872",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "goods",
     "description": "Stavanger kommune ønsker tilbakemeldinger fra markedet på klima- og miljø relaterte spørsmål til kommende anskaffelse av nettverksutstyr.Spørsmål vi ønsker svar på er følgende:1. Oppdragsgiver ønsker å stille minimumskrav til gitt prosent av refurbished komponenter som leverandør skal tilby. Oppdragsgiver ønsker tilbakemelding på hvor prosentvis høyt oppdragsgiver kan sette dette minimumskravet? Dette må sees i lys av nytt krav fra regjeringen som trer i kraft 01.01.2024.2. Oppdragsgiver ønsker også innspill til hvordan leverandør kan dokumentere at kravet er oppfylt.3. Oppdragsgiver ønsker å stille krav til at alle brukte komponenter skal kunne leveres tilbake til leverandør for videre å kunne bli resirkulert/gjenbrukt ved at enkelte råvarematerialer i komponenten kan brukes på nytt og eller at defekt komponent får nytt liv/refurbished?Tidsfrist for å svare er satt til  arbeidsdagens slutt den 17 november 2023.Svarene sendes i kommunikasjonsmodulen i Mercell.",
     "items": [

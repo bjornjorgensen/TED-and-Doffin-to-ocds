@@ -1,6 +1,7 @@
 # converters/bt_19_Lot.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
@@ -15,15 +16,17 @@ JUSTIFICATION_CODES = {
 }
 
 
-def parse_submission_nonelectronic_justification(xml_content: str) -> dict | None:
-    """
-    Parses the XML content to extract the justification for non-electronic submission.
+def parse_submission_nonelectronic_justification(
+    xml_content: str,
+) -> dict[str, Any] | None:
+    """Parse non-electronic submission justification for each lot from XML content.
 
     Args:
-        xml_content (str): The XML content as a string.
+        xml_content (str): The XML content to parse
 
     Returns:
-        dict | None: A dictionary containing the parsed data or None if no lots are found.
+        Optional[Dict[str, Any]]: Dictionary containing lots data with submission justifications,
+                                 or None if no valid data is found
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -77,17 +80,13 @@ def parse_submission_nonelectronic_justification(xml_content: str) -> dict | Non
 
 
 def merge_submission_nonelectronic_justification(
-    release_json: dict, justification_data: dict | None
+    release_json: dict[str, Any], justification_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merges the parsed justification data into the existing release JSON structure.
+    """Merge non-electronic submission justification data into the release JSON.
 
     Args:
-        release_json (dict): The existing release JSON structure.
-        justification_data (dict | None): The parsed justification data.
-
-    Returns:
-        None
+        release_json (Dict[str, Any]): The release JSON to update
+        justification_data (Optional[Dict[str, Any]]): Lot data containing submission justifications to merge
     """
     if not justification_data:
         logger.warning("No Submission Nonelectronic Justification data to merge")

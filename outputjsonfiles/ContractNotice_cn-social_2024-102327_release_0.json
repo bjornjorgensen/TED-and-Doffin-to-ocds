@@ -1,7 +1,7 @@
 {
   "id": "aa382761-89ef-4162-9dc5-74f12a6f2a21",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a1166a46-4620-4716-9c18-525c2d53b935",
+  "ocid": "ocds-abcd1234-4722fca0-35ac-4f7b-b50f-56b52ea15a3e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -26,10 +26,12 @@
           ]
         },
         "title": "Oppfølging Tjenesteområde C - Drammen",
-        "identifiers": {
-          "id": "24/3267",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "24/3267",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Omfatter kommunen DrammenLeveringssted sentralt i Drammen, med god tilknytning til offentlig kommunikasjon.  Anslått behov er 220-300 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedene.  Dersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».",
         "value": {
@@ -70,10 +72,12 @@
           ]
         },
         "title": "Oppfølging Tjenesteområde D - Kongsberg og Numedal",
-        "identifiers": {
-          "id": "24/3267",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "24/3267",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Omfatter kommunene Kongsberg, Flesberg, Rollag og Nore og UvdalLeveringssted sentralt i Kongsberg, med god tilknytning til offentlig kommunikasjon Anslått behov er 70-100 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedeneDersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».",
         "value": {
@@ -114,10 +118,12 @@
           ]
         },
         "title": "Oppfølging Tjenesteområde E - Øvre Eiker",
-        "identifiers": {
-          "id": "24/3267",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "24/3267",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Omfatter kommunen Øvre Eiker Leveringssted sentralt i Hokksund, med god tilknytning til offentlig kommunikasjon Anslått behov er 53-60 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedeneDersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».",
         "value": {
@@ -158,10 +164,12 @@
           ]
         },
         "title": "Oppfølging Tjenesteområde F - Ringerike, Hole og Jevnaker",
-        "identifiers": {
-          "id": "24/3267",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "24/3267",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Omfatter kommunene Ringerike, Hole, JevnakerLeveringssted sentralt på Hønefoss, med god tilknytning til offentlig kommunikasjonAnslått behov er 46-50 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedeneDersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».",
         "value": {
@@ -202,10 +210,12 @@
           ]
         },
         "title": "Oppfølging Tjenesteområde G - Lier",
-        "identifiers": {
-          "id": "24/3267",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "24/3267",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Omfatter kommunen Lier Leveringssted sentralt i Lier, med god tilknytning til offentlig kommunikasjon  Anslått behov er 45-52 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedeneDersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».",
         "value": {
@@ -246,10 +256,12 @@
           ]
         },
         "title": "Oppfølging Tjenesteområde H - Modum, Sigdal og Krødsherad",
-        "identifiers": {
-          "id": "24/3267",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "24/3267",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Omfatter kommunene Modum, Sigdal og KrødsheradLeveringssted sentralt i Modum, med god tilknytning til offentlig kommunikasjon Anslått behov er 35-45 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedeneDersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».",
         "value": {
@@ -290,10 +302,12 @@
           ]
         },
         "title": "Oppfølging Tjenesteområde I - Hallingdal - Flå, Nesbyen, Gol, Hemsedal, Ål, Hol",
-        "identifiers": {
-          "id": "24/3267",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "24/3267",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Omfatter kommunene Flå, Nesbyen, Gol, Hemsedal, Ål og HolLeveringssted sentralt på Gol, med god tilknytning til offentlig kommunikasjonAnslått behov er 25-40 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedene).Dersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».",
         "value": {
@@ -334,10 +348,12 @@
           ]
         },
         "title": "Tilbudsinnlevering",
-        "identifiers": {
-          "id": "24/3267",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "24/3267",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Dette er en fiktiv delkontrakt for innlevering av tilbudsdokumenter.All dokumentasjon som tilbudet består av utover \"Tilbudsbrev\" (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i denne fiktive delkontrakten.Tilbudsbrev skal lastes opp i aktuelle delkontrakter for de tjenesteområdene der tilbyderen ønsker å levere tilbud.",
         "contractPeriod": {
@@ -425,6 +441,12 @@
       }
     ],
     "title": "Anskaffelse av tiltaket oppfølging for NAV Vest-Viken",
+    "identifiers": [
+      {
+        "id": "24/3267",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Anskaffelsen er omfattet av lov om offentlige anskaffelser av 17. juni 2016 nr. 73 (LOA) og forskrift om offentlig anskaffelser av 12. august 2016 nr. 974 (FOA) med eventuelle senere endringer.For denne anskaffelsen gjelder FOA del I og IV. Denne anskaffelsen følger prosedyren for anskaffelse etter forskriftens del IV.NAV Vest-Viken skal anskaffe arbeidsmarkedstiltaket Oppfølging for personer som har behov for en mer omfattende oppfølgingsbistand enn den Arbeids- og velferdsetaten kan tilby.Oppfølging skal gi bistand med sikte på at tiltaksdeltakere skaffer seg og/eller beholder, lønnet arbeid. Oppfølging kan inneholde karriereveiledning, bistand til målrettet jobbsøking og jobbutvikling, veiledning og råd knyttet til arbeidsdeltakelse både til tiltaksdeltaker og arbeidsgivere, opplæring i arbeidsrelaterte og sosiale ferdigheter samt oppfølging og tilrettelegging på arbeidsplassen for å legge til rette for overgang til arbeid og sikre jobbfastholdelse.",
     "items": [

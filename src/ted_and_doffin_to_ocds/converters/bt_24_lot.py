@@ -1,13 +1,23 @@
 # converters/bt_24_Lot.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_lot_description(xml_content):
+def parse_lot_description(xml_content: str | bytes) -> dict[str, Any] | None:
+    """Parse descriptions for each lot from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
+
+    Returns:
+        Optional[Dict[str, Any]]: Dictionary containing lots data with descriptions,
+                                 or None if no valid data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -41,7 +51,15 @@ def parse_lot_description(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_description(release_json, lot_description_data) -> None:
+def merge_lot_description(
+    release_json: dict[str, Any], lot_description_data: dict[str, Any] | None
+) -> None:
+    """Merge lot description data into the release JSON.
+
+    Args:
+        release_json (Dict[str, Any]): The release JSON to update
+        lot_description_data (Optional[Dict[str, Any]]): Lot data containing descriptions to merge
+    """
     if not lot_description_data:
         logger.warning("No Lot Description data to merge")
         return

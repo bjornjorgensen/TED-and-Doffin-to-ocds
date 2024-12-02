@@ -1,9 +1,21 @@
-# converters/bt_21_procedure.py
+import logging
+from typing import Any
 
 from lxml import etree
 
+logger = logging.getLogger(__name__)
 
-def parse_procedure_title(xml_content):
+
+def parse_procedure_title(xml_content: str | bytes) -> dict[str, Any] | None:
+    """Parse procedure title from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
+
+    Returns:
+        Optional[Dict[str, Any]]: Dictionary containing tender title,
+                                 or None if no valid data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -29,7 +41,15 @@ def parse_procedure_title(xml_content):
     return result if "title" in result["tender"] else None
 
 
-def merge_procedure_title(release_json, procedure_title_data) -> None:
+def merge_procedure_title(
+    release_json: dict[str, Any], procedure_title_data: dict[str, Any] | None
+) -> None:
+    """Merge procedure title data into the release JSON.
+
+    Args:
+        release_json (Dict[str, Any]): The release JSON to update
+        procedure_title_data (Optional[Dict[str, Any]]): Tender data containing title to merge
+    """
     if not procedure_title_data:
         return
 

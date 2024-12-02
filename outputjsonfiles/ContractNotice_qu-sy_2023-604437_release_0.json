@@ -1,7 +1,7 @@
 {
   "id": "2023-604437",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-dea94322-429f-4d8d-b63a-38642092dd28",
+  "ocid": "ocds-abcd1234-c5663e0b-8bd7-47b1-ba0c-3351d1d54c52",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -49,6 +49,12 @@
       }
     ],
     "title": "Toppsystem VMS - T-banen",
+    "identifiers": [
+      {
+        "id": "KON-01614",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "goods",
     "description": "Sporveien har i dag et eksisterende Toppsystem (VMS) fra Lenel som er utdatert. Sporveien ønsker å erstatte dette med et nytt Toppsystem (VMS) for å få et mer oppdatert og funksjonsrikt kamerasystem med tilhørende lagringsservere og klienter. Fornebubanen vil også få et fremtidig behov for kameralisenser som skal anskaffes over denne avtalen.",
     "items": [
@@ -117,9 +123,9 @@
         ]
       },
       "roles": [
-        "submissionReceiptBody",
+        "processContactPoint",
         "buyer",
-        "processContactPoint"
+        "submissionReceiptBody"
       ],
       "address": {
         "locality": "Oslo"

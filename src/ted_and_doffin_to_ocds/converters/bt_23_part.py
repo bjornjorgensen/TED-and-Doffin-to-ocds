@@ -1,13 +1,23 @@
 # converters/bt_23_part.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_main_nature_part(xml_content):
+def parse_main_nature_part(xml_content: str | bytes) -> dict[str, Any] | None:
+    """Parse main procurement nature from part XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
+
+    Returns:
+        Optional[Dict[str, Any]]: Dictionary containing main procurement category,
+                                 or None if no valid data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -37,7 +47,15 @@ def parse_main_nature_part(xml_content):
     return result if "mainProcurementCategory" in result["tender"] else None
 
 
-def merge_main_nature_part(release_json, main_nature_data) -> None:
+def merge_main_nature_part(
+    release_json: dict[str, Any], main_nature_data: dict[str, Any] | None
+) -> None:
+    """Merge main procurement nature data into the release JSON.
+
+    Args:
+        release_json (Dict[str, Any]): The release JSON to update
+        main_nature_data (Optional[Dict[str, Any]]): Tender data containing main procurement category to merge
+    """
     if not main_nature_data:
         logger.warning("No Main Nature (part) data to merge")
         return

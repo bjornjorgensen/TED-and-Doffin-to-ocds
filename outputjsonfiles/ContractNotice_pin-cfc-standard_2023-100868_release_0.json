@@ -1,7 +1,7 @@
 {
   "id": "2248a00d-a0d9-4eee-8db1-d209e7346f13",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ef6549f2-4f0c-4da7-b5f6-cd196230c06a",
+  "ocid": "ocds-abcd1234-0cee48ea-f580-4c20-afd5-75ebca39b908",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -24,10 +24,12 @@
           ]
         },
         "title": "Ny rundkjøring Fv. 401 Høvågveien x fv. 494 Dvergnesnesveien",
-        "identifiers": {
-          "id": "1358",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "1358",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "works",
         "description": "Prosjektleder Anne Hovland Thorsen, Prosjektgruppen AS, på vegne av Drangsvann AS og Kristiansand kommune har valgt å legge ut en veiledende kunngjøring, se vedlagte dokument for nærmere informasjon. ",
         "value": {
@@ -54,6 +56,12 @@
       }
     ],
     "title": "Ny rundkjøring Fv. 401 Høvågveien x fv. 494 Dvergnesnesveien",
+    "identifiers": [
+      {
+        "id": "1358",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "works",
     "description": "Prosjektleder Anne Hovland Thorsen, Prosjektgruppen AS, på vegne av Drangsvann AS og Kristiansand kommune har valgt å legge ut en veiledende kunngjøring, se vedlagte dokument for nærmere informasjon. ",
     "items": [
@@ -140,8 +148,8 @@
         "email": "anne@pgas.no"
       },
       "roles": [
-        "buyer",
         "processContactPoint",
+        "buyer",
         "reviewContactPoint"
       ],
       "address": {

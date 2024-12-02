@@ -1,7 +1,7 @@
 {
   "id": "2023-677604",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b51e3fae-ed84-4d7e-ac43-f0e44113191c",
+  "ocid": "ocds-abcd1234-08a52ea2-ea43-4de2-9aa6-2d732076ec9c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -24,6 +24,12 @@
       }
     ],
     "title": "Endring i avtale Virksomhetsstyringsverktøy",
+    "identifiers": [
+      {
+        "id": "2020/135366",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Viken fylkeskommune inviterer med dette til konkurranse om levering av et helhetlig virksomhetsstyringsverktøy til fylkeskommunen. Deltagende fylkeskommuner, Agder og Vestfold og Telemark, deltar i konkurransen i form av opsjoner for å tiltre egen avtale med valgt leverandør. For øvrige detaljer se konkurransebestemmelsene, særlig punkt \"Oppdraget\"",
     "items": [

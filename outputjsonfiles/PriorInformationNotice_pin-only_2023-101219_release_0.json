@@ -1,7 +1,7 @@
 {
   "id": "0e2b63aa-a91a-49c6-aa1c-386516ec2275",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-67a7aee7-b5f9-425c-8fec-aaef39de35fa",
+  "ocid": "ocds-abcd1234-f22f37d5-9f58-4e96-be6f-a17b6abb642a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -12,6 +12,12 @@
       "futurenoticeDate": "2024-02-29T00:00:00+01:00"
     },
     "title": "Invitasjon til markedsdialog - Treningsutstyr til fysio- og ergoterapi Helse Midt-Norge",
+    "identifiers": [
+      {
+        "id": "2023/724",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "goods",
     "description": "Sykehusinnkjøp skal på vegne av Helse Midt-Norge RHF gjennomføre en regional anbudskonkurranse. Anskaffelsens formål er treningsutstyr til fysio- og ergoterapi.I den forbindelse inviteres leverandørmarkedet til dialogmøte tirsdag 12. desember 2023. Beklager kort frist. Møtet vil være i Sykehusinnkjøps lokaler i Trondheim, Abels gt. 5, 7030 Trondheim.Påmelding ønskes innen 05. desember 2023.",
     "items": [

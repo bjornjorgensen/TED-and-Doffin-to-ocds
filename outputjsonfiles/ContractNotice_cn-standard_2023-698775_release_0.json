@@ -1,7 +1,7 @@
 {
   "id": "2023-698775",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0cc28e47-3627-4783-9cc4-eb65b343a525",
+  "ocid": "ocds-abcd1234-d7b99eab-7c7c-4461-8cbf-9649beffd41d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -97,6 +97,12 @@
       }
     ],
     "title": "34 kommuner med tilhørende foretak",
+    "identifiers": [
+      {
+        "id": "2024,1",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Innkjøp av forsikringer for kommuner med tilhørende foretak i henhold til utfyllende opplysninger i konkurransegrunnlaget.",
     "items": [
@@ -160,9 +166,9 @@
         "email": "aase@waco.no"
       },
       "roles": [
-        "submissionReceiptBody",
+        "processContactPoint",
         "buyer",
-        "processContactPoint"
+        "submissionReceiptBody"
       ],
       "address": {
         "locality": "Bryne"

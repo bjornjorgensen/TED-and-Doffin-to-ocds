@@ -1,7 +1,7 @@
 {
   "id": "74f8c72a-5dcd-4a77-afda-6573ca30c8df",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-57f74afd-b4cd-48a5-adc2-8036192d6c22",
+  "ocid": "ocds-abcd1234-4b9722cf-b08b-41af-aec5-36a31be9c0f5",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -24,10 +24,12 @@
           ]
         },
         "title": "Tjenestekonsesjon brukerstyrt personlig assistanse ( BPA ) Kravspesifikasjon",
-        "identifiers": {
-          "id": "24/1",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "24/1",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Åpen konkurranse i forbindelse med inngåelse av konsesjonsavtale på brukerstyrt personlig assistanse ( BPA) til brukere i:\nMeråker og Stjørdal kommune ved Forvaltningskontoret Værnesregionen\nSelbu og Tydal kommune ved Tildelingskontor Selbu og Tydal\nFrosta kommune ved Forvaltningskontoret, Frosta kommune\nHoltålen kommune ved Koordinerende enhet for voksne over 18 år/vedtaksteam",
         "value": {
@@ -100,6 +102,12 @@
       }
     ],
     "title": "Tjenestekonsesjon brukerstyrt  personlig assistanse ( BPA)",
+    "identifiers": [
+      {
+        "id": "24/1",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Åpen konkurranse i forbindelse med inngåelse av konsesjonsavtale på brukerstyrt personlig assistanse ( BPA) til brukere i:\nMeråker og Stjørdal kommune ved Forvaltningskontoret Værnesregionen\nSelbu og Tydal kommune ved Tildelingskontor Selbu og Tydal\nFrosta kommune ved Forvaltningskontoret, Frosta kommune\nHoltålen kommune ved Koordinerende enhet for voksne over 18 år/vedtaksteam",
     "items": [
@@ -348,9 +356,9 @@
         "locality": "Stjørdal"
       },
       "roles": [
+        "processContactPoint",
         "leadBuyer",
-        "buyer",
-        "processContactPoint"
+        "buyer"
       ]
     },
     {

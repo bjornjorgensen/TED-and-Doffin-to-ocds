@@ -1,7 +1,7 @@
 {
   "id": "2023-665410",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-bb16c8d5-a3a9-4621-81e7-fd4e0073047a",
+  "ocid": "ocds-abcd1234-11d781bb-68a3-4707-b70c-b1ca16fcae19",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -73,6 +73,12 @@
       }
     ],
     "title": "Europan 17 Larvik",
+    "identifiers": [
+      {
+        "id": "22/7385",
+        "scheme": "internal"
+      }
+    ],
     "description": "Europeisk arkitektur- og byutviklingskonkurranse for arkitekter, landskapsarkitekter og planleggere under 40 år. xxxxxxxxxxxxxxx (Din kommune, eller org) er en av 5 norske aktører som lyser ut konkurranse under Europan 17 paraplyen. Her er en tekst for hver tomt: Østmarka: Trondheim kommune søker innspill til utforming av sykehjem, boliger og nærmiljø på en sensitiv tomt på Lade. Grensen: NTNU søker innspill for utviklingen av trehusmiljøet på Grensen og hvordan nybygg, rehabilitering av historiske bygg og programmering kan gjøre området til en Living Lab og en utadvendt, levende del av campus. Åkrehamn: Karmøy kommune ønsker innspill på hvordan Åkrehamn kan utvikles til et kompakt, levende og attraktivt bymiljø. Krøgenes: Arendal kommune ønsker forslag for transformasjonen av et handel og industriområde til et bysentrum. Larvik: Larvik Kommune ønsker innspill til hvordan koble bysentrum med havnen, ved å programmere byrom og utforming av et prosjekt som gjør det lettere for fotgjengere å krysse jernbane, vei og bratt topografi.",
     "items": [
       {
@@ -150,9 +156,9 @@
         "email": "sigmund.ulnes@larvik.kommune.no"
       },
       "roles": [
-        "submissionReceiptBody",
+        "processContactPoint",
         "buyer",
-        "processContactPoint"
+        "submissionReceiptBody"
       ],
       "address": {
         "locality": "Larvik"

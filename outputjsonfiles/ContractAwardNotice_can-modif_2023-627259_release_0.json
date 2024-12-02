@@ -1,7 +1,7 @@
 {
   "id": "2023-627259",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-5805f09e-f1b6-426d-b00a-c97a26e000d7",
+  "ocid": "ocds-abcd1234-4028d56b-9f96-401c-abc2-781ed7a0b0f3",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -24,6 +24,12 @@
       }
     ],
     "title": "Anskaffelse av rapport – Integreringsloven – implementeringen av nye områder og grep",
+    "identifiers": [
+      {
+        "id": "21/306",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Integreringsloven trådte i kraft fra 1.1.2021. Loven følger opp hovedgrep tre om rask oppstart av kvalifisering og hovedgrep fire om at flere skal få formelle kvalifikasjoner gjennom introduksjonsprogrammet i regjeringens integreringsstrategi Integrering gjennom kunnskap. Integreringsloven erstatter lov om introduksjonsordning og norskopplæring for nyankomne innvandrere (introduksjonsloven). Integreringsloven er en del av en større integreringsreform, med vekt på å reformere og styrke virkemidlene for å kvalifisere nyankomne flyktninger og innvandrere til det norske arbeidsmarkedet. I loven reguleres noen nye områder og grep. Dette gjelder blant annet fylkeskommunens oppgaver på integreringsfeltet, innføring av kort programtid for deltakere i introduksjonsprogrammet med minimum utdanning på videregående nivå fra før og at 16- og 17-åringene ikke lenger er omfattet av loven. Departementet ønsker å følge disse områdene og grepene særskilt de første årene etter at loven trer i kraft, for å få kunnskap om implementeringen skjer i tråd med reguleringen og intensjonene for integreringsreformen, eller om det er behov for eventuelle justeringer. Det skal utarbeides en delrapport innen utgangen av uke 50, 2021. Videre skal det utarbeides en sluttrapport innen utgangen av uke 50, 2022. Oppdraget er omfattende og består av flere forskjellige områder. Oppdragsgiver kan selv vurdere om det er hensiktsmessig å dele de to leveransene opp i en eller flere rapporter.",
     "items": [

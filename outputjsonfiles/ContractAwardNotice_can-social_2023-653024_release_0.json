@@ -1,7 +1,7 @@
 {
   "id": "2023-653024",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-277a69cb-e1aa-4a5f-9d1c-99f02b4bcd80",
+  "ocid": "ocds-abcd1234-e80364a5-4e44-43b2-a285-b13aa96a1988",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -24,6 +24,12 @@
       }
     ],
     "title": "Vikartjenester - sykepleiere, helsefagarbeidere og medisinstudenter uten lisens",
+    "identifiers": [
+      {
+        "id": "23/4783",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Parallelle rammeavtaler for kjøp av vikartjenester innenfor følgende stillingskategorier: - Sykepleier med autorisasjon - Helsefagarbeider med autorisasjon - Medisinstudent uten lisens",
     "items": [

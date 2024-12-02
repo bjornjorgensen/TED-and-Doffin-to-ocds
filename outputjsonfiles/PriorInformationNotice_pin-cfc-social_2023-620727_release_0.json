@@ -1,7 +1,7 @@
 {
   "id": "2023-620727",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-08007c57-56c5-4c08-a219-eb4cc1af7f71",
+  "ocid": "ocds-abcd1234-3b536297-362a-4f77-94de-fef45d686594",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -61,6 +61,12 @@
       }
     ],
     "title": "Rammeavtale rådgivertjenester vann og avløp",
+    "identifiers": [
+      {
+        "id": "Rammeavtale rådgivertjenester VA",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Vågå kommune, heretter kalt oppdragsgiver, innbyr til åpen konkurranse om kontrakt i rammeavtalen for rådgivningstjenester innen vann- og avløpsfaget. Kommunen ønsker tilbud fra leverandører med det faglige, tekniske og økonomiske grunnlag som er nødvendig for å oppfylle kontrakten. Videre kreves erfaring fra tilsvarende arbeider for utførelse av kontraktsarbeidet i henhold til konkurransegrunnlaget. Formålet med anskaffelsen er å inngå parallelle rammeavtaler med tre leverandører for å dekke oppdragsgivers behov for kjøp av rådgivningstjenester innen vann – og avløpsfaget. For ytterligere informasjon om anskaffelsens innhold vises det til Del II Bilag 1 Oppdragsgivers kravspesifikasjon. Skjåk kommune, Lom kommune og Dovre kommune skal hver for seg ha mulighet til å tilslutte seg avtalen ved skriftlig varsel til leverandørene i løpet av avtaleperioden inkl. opsjoner for forlengelse. Det skal være samme pris – og kontraktsvilkår for opsjonshaverne som for oppdragsgiver.",
     "items": [
@@ -133,9 +139,9 @@
         ]
       },
       "roles": [
-        "submissionReceiptBody",
+        "processContactPoint",
         "buyer",
-        "processContactPoint"
+        "submissionReceiptBody"
       ],
       "address": {
         "locality": "VÅGÅ"

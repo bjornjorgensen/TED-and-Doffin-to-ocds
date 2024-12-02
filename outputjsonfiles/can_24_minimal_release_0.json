@@ -1,7 +1,7 @@
 {
   "id": "65667997-031a-4198-bd25-7225449ef479",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ddddaa3d-e3b4-42b5-ae68-9ed2cd045501",
+  "ocid": "ocds-abcd1234-4f6fb9ea-74c2-494c-b30f-e68465887038",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -18,10 +18,12 @@
           "GPA"
         ],
         "title": "Agence centre",
-        "identifiers": {
-          "id": "1",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "1",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Service d'entretien de remise en état et de nettoyage des espaces verts.",
         "awardCriteria": {

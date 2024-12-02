@@ -1,7 +1,7 @@
 {
   "id": "37bbf05d-0f70-4afe-87fb-0b5b0f3e9cd6",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-92fdf8d5-d962-4ff5-b5e6-96961462918d",
+  "ocid": "ocds-abcd1234-52c70c67-4b41-4dab-8268-d5de214ec210",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -9,6 +9,12 @@
     },
     "status": "planned",
     "title": "Digitale betalingsløsninger - straksbetaling",
+    "identifiers": [
+      {
+        "id": "2023/1541",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "HSØ er i ferd med å rulle ut et større prosjekt som heter Helselogistikk-prosjekt. Dette vil bl.a. tilby pasienten å «sjekke inn» når vedkomne er på plass før konsultasjon, samt betale egenandelen i forkant.I den forbindelse ønsker vi informasjon om det i dag finnes andre aktører enn VIPPS som tilbyr straksbetalinger i form av digitale betalingsløsninger.",
     "items": [

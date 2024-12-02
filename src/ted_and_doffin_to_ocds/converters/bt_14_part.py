@@ -1,13 +1,23 @@
 # converters/bt_14_part.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_part_documents_restricted(xml_content):
+def parse_part_documents_restricted(xml_content: str | bytes) -> dict[str, Any] | None:
+    """Parse restricted document references from XML content for the procurement part.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
+
+    Returns:
+        Optional[Dict[str, Any]]: Dictionary containing document data with restricted access details,
+                                 or None if no valid data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -43,8 +53,14 @@ def parse_part_documents_restricted(xml_content):
 
 
 def merge_part_documents_restricted(
-    release_json, part_documents_restricted_data
+    release_json: dict[str, Any], part_documents_restricted_data: dict[str, Any] | None
 ) -> None:
+    """Merge restricted document data into the release JSON.
+
+    Args:
+        release_json (Dict[str, Any]): The release JSON to update
+        part_documents_restricted_data (Optional[Dict[str, Any]]): Document data to merge
+    """
     if not part_documents_restricted_data:
         logger.warning("No part documents restricted data to merge")
         return

@@ -1,7 +1,7 @@
 {
   "id": "2022-955474",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-818b0a5c-354b-4127-a4da-e707df337daf",
+  "ocid": "ocds-abcd1234-d79deb4c-2770-4705-b559-503abf21004f",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -30,6 +30,12 @@
       }
     ],
     "title": "Flytrening for kull 01.20",
+    "identifiers": [
+      {
+        "id": "ANSK-0203-22",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Fly og flyinstruktører til flyopplæring til bachelor-studenter ved UiTs pilotutdanning.",
     "items": [

@@ -1,7 +1,7 @@
 {
   "id": "2023-661116",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d1a6b23a-5f1f-4928-ac05-7a8020fc00db",
+  "ocid": "ocds-abcd1234-4de4f2bb-b8f4-47b6-8d96-26fe107fb625",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -31,6 +31,12 @@
       }
     ],
     "title": "Årshjul for anskaffelser 2023 - Trondheim Renholdsverk AS",
+    "identifiers": [
+      {
+        "id": "00/2023",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Følgende tentativt årshjul er kartlagt for Trondheim Renholdsverk AS i 2023. Endringer kan forekomme og anskaffelser frafalle eller tilkomme. Oppdateringer vil gjøres tilgjengelig på oppdragsgiver sin hjemmeside: trv.no/offentlige-anskaffelser/",
     "items": [
@@ -224,8 +230,8 @@
         "email": "jeanette.berglund@trv.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "TRONDHEIM"

@@ -1,7 +1,7 @@
 {
   "id": "5681ff11-e080-4da6-b108-82db3f9b4b69",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9efaaaf0-9b44-4ca3-aa07-abbff3f63253",
+  "ocid": "ocds-abcd1234-b925c453-5a23-4d8d-93d8-4ed587e37074",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -44,10 +44,12 @@
           }
         },
         "title": "Rammeavtale om formidling av leasing finansierte .",
-        "identifiers": {
-          "id": "Anskaffelse -  70 - 2023",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "Anskaffelse -  70 - 2023",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "goods",
         "description": "Det skal inngås rammeavtale(r) med leverandør(er) for formidling av el-sykler til ansatte finansiert gjennom en leasingordning med en nettolønnstrekkavtale gjennom arbeidsgiver.",
         "contractTerms": {
@@ -97,6 +99,12 @@
       }
     ],
     "title": "Rammeavtale om formidling av leasing finansierte elsykler",
+    "identifiers": [
+      {
+        "id": "Anskaffelse -  70 - 2023",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "goods",
     "description": "Det skal inngås rammeavtale(r) med leverandør(er) for formidling av el-sykler til ansatte finansiert gjennom en leasingordning med en nettolønnstrekkavtale gjennom arbeidsgiver.",
     "items": [

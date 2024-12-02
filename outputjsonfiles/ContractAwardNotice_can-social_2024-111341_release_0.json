@@ -1,7 +1,7 @@
 {
   "id": "65ffd92d-8eee-4787-a7fe-925106611edc",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-fe12b4cf-7414-4e87-adf0-5be8bbacf3d0",
+  "ocid": "ocds-abcd1234-06460333-86a7-4da5-8619-e8179caacafe",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -15,10 +15,12 @@
       {
         "id": "LOT-0000",
         "title": "Drift av kantine på Leikanger",
-        "identifiers": {
-          "id": "VLFK/24/110",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "VLFK/24/110",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Anskaffinga gjeld drift av kantine for Vestland fylkeskommune med levering av kantinetenester i oppdragsgjevar sine renoverte lokale i Askedalen 2, 6863 Leikanger. \n\nAvtalen gjeld for 3 år rekna frå ikraftsetjing, med opsjon for oppdragsgjevar til å forlenge avtalen i inntil ytterlegare 3 år, 1 år om gangen.",
         "value": {
@@ -32,6 +34,12 @@
       }
     ],
     "title": "Drift av kantine på Leikanger",
+    "identifiers": [
+      {
+        "id": "VLFK/24/110",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Anskaffinga gjeld drift av kantine for Vestland fylkeskommune med levering av kantinetenester i oppdragsgjevar sine renoverte lokale i Askedalen 2, 6863 Leikanger. \n\nAvtalen gjeld for 3 år rekna frå ikraftsetjing, med opsjon for oppdragsgjevar til å forlenge avtalen i inntil ytterlegare 3 år, 1 år om gangen.",
     "items": [

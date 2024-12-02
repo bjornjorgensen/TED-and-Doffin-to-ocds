@@ -1,5 +1,3 @@
-# converters/bt_24_procedure.py
-
 import logging
 from typing import Any
 
@@ -8,14 +6,14 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_procedure_description(xml_content: str | bytes) -> dict[str, Any] | None:
-    """Parse description from procedure XML content.
+def parse_part_internal_identifier(xml_content: str | bytes) -> dict[str, Any] | None:
+    """Parse internal identifier from part XML content.
 
     Args:
         xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
 
     Returns:
-        Optional[Dict[str, Any]]: Dictionary containing tender description,
+        Optional[Dict[str, Any]]: Dictionary containing part identifier data,
                                  or None if no valid data is found
     """
     if isinstance(xml_content, str):
@@ -30,34 +28,32 @@ def parse_procedure_description(xml_content: str | bytes) -> dict[str, Any] | No
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    result = {"tender": {}}
-
-    description = root.xpath(
-        "//cac:ProcurementProject/cbc:Description/text()",
+    internal_id = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:ProcurementProject/cbc:ID[@schemeName='InternalID']/text()",
         namespaces=namespaces,
     )
 
-    if description:
-        result["tender"]["description"] = description[0]
-        return result
+    if internal_id:
+        return {
+            "tender": {"identifiers": [{"id": internal_id[0], "scheme": "internal"}]}
+        }
 
     return None
 
 
-def merge_procedure_description(
-    release_json: dict[str, Any], procedure_description_data: dict[str, Any] | None
+def merge_part_internal_identifier(
+    release_json: dict[str, Any], part_internal_identifier_data: dict[str, Any] | None
 ) -> None:
-    """Merge procedure description data into the release JSON.
+    """Merge part internal identifier data into the release JSON.
 
     Args:
         release_json (Dict[str, Any]): The release JSON to update
-        procedure_description_data (Optional[Dict[str, Any]]): Tender data containing description to merge
+        part_internal_identifier_data (Optional[Dict[str, Any]]): Part identifier data to merge
     """
-    if not procedure_description_data:
-        logger.warning("No procedure Description data to merge")
+    if not part_internal_identifier_data:
+        logger.warning("No part internal identifier data to merge")
         return
 
-    release_json.setdefault("tender", {})["description"] = procedure_description_data[
-        "tender"
-    ]["description"]
-    logger.info("Merged procedure Description data")
+    release_json.setdefault("tender", {})["identifiers"] = (
+        part_internal_identifier_data["tender"]["identifiers"]
+    )

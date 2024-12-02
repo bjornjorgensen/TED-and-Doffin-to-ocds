@@ -1,7 +1,7 @@
 {
   "id": "2023-624725",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1f071662-84ce-4b0a-ba14-dc59e9714dc8",
+  "ocid": "ocds-abcd1234-33a176e5-7b2f-49d0-8317-44b2ad5fdc5f",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -59,6 +59,12 @@
       }
     ],
     "title": "Tenestekonsesjon - Brukarstyrt personleg assistanse (BPA)",
+    "identifiers": [
+      {
+        "id": "23/3162",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Bjørnafjorden kommune har vedtatt å innføre brukervalgsordning for brukerstyrt personlig assistanse (BPA). Dette innebærer at brukere som har vedtak om BPA skal kunne velge mellom godkjente private leverandører som leverandør av tjenesten (brukervalg). Leverandører innbys til å søke om tildeling av konsesjon i forbindelse med levering av assistansetimer i BPA-ordningen. Kommunen har som mål å tildele konsesjon til minimum 5 og maksimum 8 leverandører.",
     "items": [
@@ -137,8 +143,8 @@
         "locality": "Eikelandsosen"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

@@ -1,13 +1,23 @@
 # converters/bt_24_part.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_part_description(xml_content):
+def parse_part_description(xml_content: str | bytes) -> dict[str, Any] | None:
+    """Parse description from part XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
+
+    Returns:
+        Optional[Dict[str, Any]]: Dictionary containing tender description,
+                                 or None if no valid data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -34,7 +44,15 @@ def parse_part_description(xml_content):
     return None
 
 
-def merge_part_description(release_json, part_description_data) -> None:
+def merge_part_description(
+    release_json: dict[str, Any], part_description_data: dict[str, Any] | None
+) -> None:
+    """Merge part description data into the release JSON.
+
+    Args:
+        release_json (Dict[str, Any]): The release JSON to update
+        part_description_data (Optional[Dict[str, Any]]): Tender data containing description to merge
+    """
     if not part_description_data:
         logger.warning("No part Description data to merge")
         return

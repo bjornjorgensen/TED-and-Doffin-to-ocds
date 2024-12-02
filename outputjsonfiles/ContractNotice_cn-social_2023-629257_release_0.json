@@ -1,7 +1,7 @@
 {
   "id": "2023-629257",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0cf7192b-8f69-4e54-8c6e-285bb82c44f8",
+  "ocid": "ocds-abcd1234-401ccaa4-ee88-4dd6-b20a-75715f22a2f6",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -91,12 +91,18 @@
         "documentType": "biddingDocuments",
         "url": "https://permalink.mercell.com/208131817.aspx",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ]
       }
     ],
     "title": "23/3673 - AMO-kurs Overflatebehandling av metaller - Rogaland",
+    "identifiers": [
+      {
+        "id": "23/3673",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Ramme avtale AMO Kurs Overflatebehandling av metaller. Formålet med kurset er at deltakerne skal bli kvalifisert til å kunne jobbe som hjelpearbeider innen overflatebehandlerfaget. Klikk her https://permalink.mercell.com/208131817.aspx",
     "items": [
@@ -191,8 +197,8 @@
         "email": "nav.tiltak.rogaland@nav.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Stravanger"

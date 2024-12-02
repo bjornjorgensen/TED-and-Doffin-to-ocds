@@ -1,7 +1,7 @@
 {
   "id": "2022-963627",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-26bb4eb3-ce37-462b-9480-afb2858b774e",
+  "ocid": "ocds-abcd1234-d665bd72-9345-4fcd-bd34-5f396f2f16f3",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -10,6 +10,12 @@
     "status": "active",
     "id": "2022-919032",
     "title": "Konsulentoppdrag - evaluering av Tolletatens organisering",
+    "identifiers": [
+      {
+        "id": "22/39932",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Tolletaten gjennomførte en større organisasjonsutvikling (OU) med virkning fra oktober 2020. Formålet med denne anskaffelsen er å gjennomføre en evaluering av Tolletatens organisasjon to år etter OU. Evalueringen skal kartlegge grad av måloppnåelse, sammenlignet med tidligere organisering. Målsetningene med OU var: • Mindre dublering av funksjoner • Robuste fagmiljøer • Økt styrbarhet og utviklingskraft - digitalisering • Nasjonale enheter og fellesfunksjoner • Klar fordeling av ansvar • Lik praksis og god kvalitet i oppgavegjennomføringen • Mer fleksibel ressursdisponering og bedre samhandling Evalueringen skal ta utgangspunkt i noen sentrale områder som vil kunne bidra til å danne et bilde av hvor langt organisasjonen er kommet i forhold til de ambisjonen som ble satt og de forventede effektene av omorganiseringen. For mer informasjon vises det til bilag 1A Spesifikasjon av oppdraget.",
     "items": [

@@ -1,7 +1,7 @@
 {
   "id": "a105cb09-ec7d-45d5-a364-ff2317e2231f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c8ec6264-1e50-43d1-a4fb-540724177ec1",
+  "ocid": "ocds-abcd1234-67b82fb8-7924-4420-ac10-1609d0a42a98",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -13,10 +13,12 @@
       {
         "id": "LOT-0000",
         "title": "Lillestrøm kommune ønsker tilbud på leie av hybelhus",
-        "identifiers": {
-          "id": "Lillestrøm",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "Lillestrøm",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Lillestrøm kommune har behov for å bosette enkelte grupper av vanskeligstilte på boligmarkedet i et «hybelhus» med 6-8 boenheter.\nBoenhetene kan ligge samlet i et større boligbygg, eller i et eget bygg.\nTilbydere av slike boligeiendommer søkes. Aktuell boligeiendom vil leies inn av kommunen, for fremleie til beboere.  ",
         "tenderPeriod": {
@@ -31,6 +33,12 @@
       }
     ],
     "title": "Lillestrøm kommune ønsker tilbud på leie av hybelhus",
+    "identifiers": [
+      {
+        "id": "Lillestrøm",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Lillestrøm kommune har behov for å bosette enkelte grupper av vanskeligstilte på boligmarkedet i et «hybelhus» med 6-8 boenheter.\nBoenhetene kan ligge samlet i et større boligbygg, eller i et eget bygg.\nTilbydere av slike boligeiendommer søkes. Aktuell boligeiendom vil leies inn av kommunen, for fremleie til beboere.  ",
     "items": [

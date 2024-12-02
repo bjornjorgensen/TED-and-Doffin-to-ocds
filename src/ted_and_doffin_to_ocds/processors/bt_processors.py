@@ -88,6 +88,18 @@ from ted_and_doffin_to_ocds.converters.bt_22_lot import (
     merge_lot_internal_identifier,
     parse_lot_internal_identifier,
 )
+from ted_and_doffin_to_ocds.converters.bt_22_lotsgroup import (
+    merge_lots_group_internal_identifier,
+    parse_lots_group_internal_identifier,
+)
+from ted_and_doffin_to_ocds.converters.bt_22_part import (
+    merge_part_internal_identifier,
+    parse_part_internal_identifier,
+)
+from ted_and_doffin_to_ocds.converters.bt_22_procedure import (
+    merge_procedure_internal_identifier,
+    parse_procedure_internal_identifier,
+)
 from ted_and_doffin_to_ocds.converters.bt_23_lot import (
     merge_main_nature,
     parse_main_nature,
@@ -3803,7 +3815,22 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
         (
             parse_lot_internal_identifier,
             merge_lot_internal_identifier,
-            "BT-22-Lot (Lot Internal Identifier)",
+            "BT-22-lot",
+        ),
+        (
+            parse_lots_group_internal_identifier,
+            merge_lots_group_internal_identifier,
+            "BT-22-lotsgroup",
+        ),
+        (
+            parse_part_internal_identifier,
+            merge_part_internal_identifier,
+            "BT-22-part",
+        ),
+        (
+            parse_procedure_internal_identifier,
+            merge_procedure_internal_identifier,
+            "BT-22-procedure",
         ),
         (parse_main_nature, merge_main_nature, "BT-23-Lot (Main Nature)"),
         (

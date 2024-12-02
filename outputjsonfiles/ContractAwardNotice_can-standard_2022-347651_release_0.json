@@ -1,7 +1,7 @@
 {
   "id": "2022-347651",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-dd7e3bbe-c7c4-423d-8807-fb5fc63ea4bc",
+  "ocid": "ocds-abcd1234-22fd67ac-0e03-4816-b9bc-184f1a98ee7f",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -56,6 +56,12 @@
       }
     ],
     "title": "Kulturbad på Flotmyr - Samspillsentreprise",
+    "identifiers": [
+      {
+        "id": "22BAD",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "works",
     "description": "Haugesund kommune skal bygge Haugesund kulturbad, som er planlagt å omfatte kulturskole og badeanlegg. Etter kontrahering vil det bli gjennomført en samspillsfase mellom entreprenør og byggherre, som vil danne grunnlag for oppdragsgivers beslutning om det skal inngås kontrakt for fase 2 hvor samspillsfasen ev. går over til totalentreprise",
     "items": [

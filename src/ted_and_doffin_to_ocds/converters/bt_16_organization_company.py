@@ -1,13 +1,23 @@
 # converters/bt_16_organization_company.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_organization_part_name(xml_content):
+def parse_organization_part_name(xml_content: str | bytes) -> dict[str, Any] | None:
+    """Parse organization part names from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
+
+    Returns:
+        Optional[Dict[str, Any]]: Dictionary containing organization data with combined names,
+                                 or None if no valid data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -46,7 +56,15 @@ def parse_organization_part_name(xml_content):
     return result if result["parties"] else None
 
 
-def merge_organization_part_name(release_json, organization_part_name_data) -> None:
+def merge_organization_part_name(
+    release_json: dict[str, Any], organization_part_name_data: dict[str, Any] | None
+) -> None:
+    """Merge organization part names into the release JSON.
+
+    Args:
+        release_json (Dict[str, Any]): The release JSON to update
+        organization_part_name_data (Optional[Dict[str, Any]]): Organization data with combined names to merge
+    """
     if not organization_part_name_data:
         logger.info("No organization part name data to merge")
         return

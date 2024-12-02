@@ -1,7 +1,7 @@
 {
   "id": "2023-659744",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-44a7b495-7022-4203-a94f-6bfba31c46ec",
+  "ocid": "ocds-abcd1234-3588ac36-695d-4c81-a0e6-f0f1f0cce24d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -30,6 +30,12 @@
       }
     ],
     "title": "HE 02 - Kransen nord",
+    "identifiers": [
+      {
+        "id": "202309214",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "works",
     "description": "Entreprisen omfatter 225 meter byggegrop i Moss sentrum. Byggegropen skal etableres med kraftige støttekonstruksjoner, utgravning og avstivning, samt etablering av betongkulvert. Entreprisen skal også utføre gjennomslag og grensesnittsarbeider mot Mossetunnelen.",
     "items": [
@@ -80,8 +86,8 @@
         ]
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Hamar"

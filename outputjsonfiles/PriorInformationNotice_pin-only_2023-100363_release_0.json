@@ -1,7 +1,7 @@
 {
   "id": "1db209a3-6934-4d5f-bf78-2aa8a1f2453c",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-95c010ba-f31a-478e-b6df-5b237569ff89",
+  "ocid": "ocds-abcd1234-086f0ab5-4ec6-470f-8f56-cfe35f69cc36",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -37,6 +37,12 @@
       }
     ],
     "title": "Markedsdialog - områdegjennomgang av det statlige institusjonsbarnevernet",
+    "identifiers": [
+      {
+        "id": "23/3041",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Barne- og familiedepartementet (BFD) og Finansdepartementet (FIN) inviterer potensielle leverandører til markedsdialog om et oppdrag om bistand til gjennomføring av en områdegjennomgang av institusjonsbarnevernet.\nInformasjonsmøtet:\nTid: 6. november 2023, kl. 10.00-12.00.\nSted: A64, Auditorium Hovedbølet\nAdresse: Akersgata 64\nFrist for påmelding: 2. november, kl. 16:00.\nFrist for innlevering av innspill er 12. november kl. 12:00.\n",
     "items": [

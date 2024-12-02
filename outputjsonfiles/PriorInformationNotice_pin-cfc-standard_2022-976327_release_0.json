@@ -1,7 +1,7 @@
 {
   "id": "2022-976327",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2e2974b2-705b-44c9-9e0b-1587216b4d63",
+  "ocid": "ocds-abcd1234-88a63e69-3b5e-46a1-89e9-de03760245f9",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -56,6 +56,12 @@
       }
     ],
     "title": "Anskaffelse av frittstående oppvarmingsovner til Sykehjemsetatens institusjoner",
+    "identifiers": [
+      {
+        "id": "22/3716",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "goods",
     "description": "Det skal anskaffes frittstående oppvarmingsovner til 10 til 13 av Sykehjemsetatens institusjoner.",
     "items": [
@@ -121,9 +127,9 @@
         "email": "leona.pilares@sye.oslo.kommune.no"
       },
       "roles": [
-        "submissionReceiptBody",
+        "processContactPoint",
         "buyer",
-        "processContactPoint"
+        "submissionReceiptBody"
       ],
       "address": {
         "locality": "Oslo"

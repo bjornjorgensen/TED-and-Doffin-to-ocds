@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f02d1ee5-e780-42b9-a5ae-dd025e26cf73",
+  "ocid": "ocds-abcd1234-6d88a33b-1432-47f3-a367-761f3d61e319",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -19,10 +19,12 @@
           "GPA"
         ],
         "title": "Intensjonskunngjøring Digital patologisystem, Helse Nord",
-        "identifiers": {
-          "id": "2024/1261",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "2024/1261",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "goods",
         "description": "Det har vært gjennomført direkteforhandling med Sectra Norge AS for levering av digitalt patologisystem til Helse Nord RHF- for de eide foretakene Universitetssykehuset Nord-Norge HF (Tromsø) og Nordlandssykehuset HF (Bodø).",
         "awardCriteria": {
@@ -41,6 +43,12 @@
       }
     ],
     "title": "Intensjonskunngjøring Digital patologisystem, Helse Nord",
+    "identifiers": [
+      {
+        "id": "2024/1261",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "goods",
     "description": "Det har vært gjennomført direkteforhandling med Sectra Norge AS for levering av digitalt patologisystem til Helse Nord RHF- for de eide foretakene Universitetssykehuset Nord-Norge HF (Tromsø) og Nordlandssykehuset HF (Bodø).",
     "items": [
@@ -181,9 +189,9 @@
         "locality": "Bodø"
       },
       "roles": [
+        "funder",
         "payer",
-        "buyer",
-        "funder"
+        "buyer"
       ]
     },
     {
@@ -207,9 +215,9 @@
         "locality": "VADSØ"
       },
       "roles": [
+        "processContactPoint",
         "leadBuyer",
         "buyer",
-        "processContactPoint",
         "reviewContactPoint"
       ]
     },

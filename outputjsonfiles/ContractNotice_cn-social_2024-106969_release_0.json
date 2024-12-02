@@ -1,7 +1,7 @@
 {
   "id": "920077ce-4821-4475-9786-474c473628bd",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-73eb6e84-acbd-450b-95ea-82eabd60eba5",
+  "ocid": "ocds-abcd1234-de55c2fe-d353-48d1-b873-407d029c9863",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -14,10 +14,12 @@
       {
         "id": "LOT-0000",
         "title": "Innsamling av husholdningsavfall",
-        "identifiers": {
-          "id": "1",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "1",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Innsamling av husholdningsavfall i kommunene Flakstad, Moskenes, Vestvågøy og Vågan i Lofoten, Norge. Leverandør skal i henhold til oppsatt tømmeplan samle inn husholdningsavfall fra alle abonnenter i regionen med egne kjøretøy samt 2 helelektriske kjøretøy som lånes ut av oppdragsgiver. Oppdraget innebærer å samle inn ca 5.500 tonn avfall fra ca 11.000 husstander. ",
         "tenderPeriod": {
@@ -53,6 +55,12 @@
       }
     ],
     "title": "Innsamling av husholdningsavfall",
+    "identifiers": [
+      {
+        "id": "0148",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Innsamling av husholdningsavfall i kommunene Flakstad, Moskenes, Vestvågøy og Vågan i Lofoten, Norge. Leverandør skal i henhold til oppsatt tømmeplan samle inn husholdningsavfall fra alle abonnenter i regionen med egne kjøretøy samt 2 helelektriske kjøretøy som lånes ut av oppdragsgiver. Oppdraget innebærer å samle inn ca 5.500 tonn avfall fra ca 11.000 husstander. ",
     "items": [

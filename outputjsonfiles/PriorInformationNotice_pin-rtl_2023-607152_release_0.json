@@ -1,7 +1,7 @@
 {
   "id": "2023-607152",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-5849d3d2-a895-451f-afda-0ac9fc5df55a",
+  "ocid": "ocds-abcd1234-8d7754ce-a9c3-4c12-a83a-50956bbfe8e6",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -27,6 +27,12 @@
       }
     ],
     "title": "Invitasjon til dialogkonferanse: Metode for vurdering av effekter av kollektivtransport i kombinasjon med nye, delte mobilitetsformer",
+    "identifiers": [
+      {
+        "id": "23/00073",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Om man har 100 millioner kroner å bruke for å oppnå nullvekstmålet, får man mest igjen for pengene ved å sette opp flere busser eller ved å investere i delingsmobilitet?  Skyss, Kolumbus, Ruter og AtB ønsker å utvikle metoder for å evaluere og kvantifisere effekter av kollektivtransport i kombinasjon med nye, delte mobilitetsformer. Se vedlegg for flere detaljer. I den forbindelse ønsker vi å komme i dialog med relevante forsknings- og konsulentmiljøer knyttet til nytenkning innen mobilitet. Siden prosjektet handler om nytenking innenfor både mobilitet og metoder er vi åpne både for veletablerte transportforsknings- og økonomimiljøer og mindre miljøer med ekspertise innen nye mobilitetsformer. Det inviteres i den forbindelse til digital dialogkonferanse 20. april 2023 kl. 12-14. Påmelding og eventuelle spørsmål rettes til tom.norbech@atb.no",
     "items": [
@@ -126,8 +132,8 @@
         ]
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "TRONDHEIM"

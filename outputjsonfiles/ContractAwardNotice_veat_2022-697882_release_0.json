@@ -1,7 +1,7 @@
 {
   "id": "2022-697882",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1fa7bb2f-98ef-4e21-b347-a1fe3ac4f98c",
+  "ocid": "ocds-abcd1234-fbe81eac-ea34-4693-a58c-57378e7d04c5",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -41,6 +41,12 @@
       }
     ],
     "title": "Intensjonskjunngjøring - Inngåelse av kontrakt om kjøp av div antipsykotika til nasjonalt beredskapslager",
+    "identifiers": [
+      {
+        "id": "2021/108",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "goods",
     "description": "Regjeringen har besluttet at det skal etableres to nivå for legemiddelberedskap i Norge. Gjennom B180 beredskapslageret (Nasjonalt beredskapslager av legemiddel), som eies av Helse Vest RHF og ledes av Sjukehusapoteka Vest HF, er det vurdert at det skal opprettes nasjonal beredskap på flere utvalgte legemidler. Intensjonskunngjøringen gjelder kjøp av: N05AD01, Haldol inj 5mg/ml, 5x1 ml, inntil totalverdi i maks AIP 67 000 kr N05AX08, Risperdal Consta inj subst 37,5mg, 25mg og 50mg, inntil totalverdi i maks AIP 1 315 000 kr N05AX13, Xeplion depotinj 100mg, 75mg og 150mg, inntil inntil totalverdi i maks AIP 6 050 000kr til Nasjonalt Beredskapslager, B180",
     "items": [

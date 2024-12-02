@@ -1,7 +1,7 @@
 {
   "id": "870ff007-688a-4ad1-9ad7-28c2ae514b40",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-92e25ce3-2f75-4651-ac3b-9e5f536707e9",
+  "ocid": "ocds-abcd1234-cda7ffa6-2d60-4586-8d54-fdd1b6bf15f7",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -42,10 +42,12 @@
           }
         },
         "title": "Byggeledelse",
-        "identifiers": {
-          "id": "2024/5155",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "2024/5155",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "services",
         "description": "Kongsberg kommune skal bygge nytt renseanlegg som skal rense avløpsvannet fra Kongsberg by. Renseanlegget skal ligge i Sellikdalen, på samme område som eksisterende renseanlegg. Anlegget er dimensjonert til å håndtere 40 000 PE (tilknyttede).Eksisterende renseanlegg skal være i drift inntil byggetrinn 1 er ferdig og prøvedrift ergjennomført. Det nye renseanlegget skal derfor bygges på arealer innfor tomtearealet tilKongsberg kommune på gnr. 7319 bnr. 2. Når prøvedrift av byggetrinn 1 er gjennomført skaleksisterende renseanlegg i sin helhet rives før oppstart nybygg byggetrinn 2.Entreprenør er kontrahert etter gjennomført samspillfase og detaljprosjektering og byggingutføres som totalentreprise med målpris.Utførelsen er delt i 2 byggetrinn.Byggetrinn 1, som omfatter nytt prosessbygg, er planlagt med oppstart i august-24 ogferdigstillelse inkl. 2 mnd. prøvedrift i desember-26.Byggetrinn 2, som omfatter riving av eksisterende bygg/anlegg, prosessbygg trinn 2,administrasjonsbygg, verkstedbygg og utomhusanlegg, er planlagt med oppstart i august-26,overlevering i mars-29 og prøvedrift i perioden mars-29 til mars-30.Denne anskaffelsen gjelder byggeledelse i hele byggeperioden fra august-24 til overlevering imars-29 og tidvis engasjement i prøvedriftsperioden mars-29 til mars-30.",
         "contractPeriod": {
@@ -102,6 +104,12 @@
       }
     ],
     "title": "Byggeledelse",
+    "identifiers": [
+      {
+        "id": "2024/5155",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Kongsberg kommune skal bygge nytt renseanlegg som skal rense avløpsvannet fra Kongsberg by. Renseanlegget skal ligge i Sellikdalen, på samme område som eksisterende renseanlegg. Anlegget er dimensjonert til å håndtere 40 000 PE (tilknyttede).Eksisterende renseanlegg skal være i drift inntil byggetrinn 1 er ferdig og prøvedrift ergjennomført. Det nye renseanlegget skal derfor bygges på arealer innfor tomtearealet tilKongsberg kommune på gnr. 7319 bnr. 2. Når prøvedrift av byggetrinn 1 er gjennomført skaleksisterende renseanlegg i sin helhet rives før oppstart nybygg byggetrinn 2.Entreprenør er kontrahert etter gjennomført samspillfase og detaljprosjektering og byggingutføres som totalentreprise med målpris.Utførelsen er delt i 2 byggetrinn.Byggetrinn 1, som omfatter nytt prosessbygg, er planlagt med oppstart i august-24 ogferdigstillelse inkl. 2 mnd. prøvedrift i desember-26.Byggetrinn 2, som omfatter riving av eksisterende bygg/anlegg, prosessbygg trinn 2,administrasjonsbygg, verkstedbygg og utomhusanlegg, er planlagt med oppstart i august-26,overlevering i mars-29 og prøvedrift i perioden mars-29 til mars-30.Denne anskaffelsen gjelder byggeledelse i hele byggeperioden fra august-24 til overlevering imars-29 og tidvis engasjement i prøvedriftsperioden mars-29 til mars-30.",
     "items": [

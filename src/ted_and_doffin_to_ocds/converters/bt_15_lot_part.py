@@ -1,13 +1,23 @@
 # converters/bt_15_Lot_part.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_documents_url(xml_content):
+def parse_documents_url(xml_content: str | bytes) -> dict[str, Any] | None:
+    """Parse document URLs from XML content for lots and parts.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
+
+    Returns:
+        Optional[Dict[str, Any]]: Dictionary containing documents data with URLs and lot references,
+                                 or None if no valid data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -41,10 +51,23 @@ def parse_documents_url(xml_content):
     return result if result["tender"]["documents"] else None
 
 
-def process_document_references(element, result, namespaces, is_lot) -> None:
+def process_document_references(
+    element: etree._Element,
+    result: dict[str, Any],
+    namespaces: dict[str, str],
+    is_lot: bool,
+) -> None:
+    """Process document references from a lot or part element.
+
+    Args:
+        element (etree._Element): The XML element containing document references
+        result (Dict[str, Any]): Dictionary to store the processed documents
+        namespaces (Dict[str, str]): XML namespaces
+        is_lot (bool): Whether processing a lot (True) or part (False)
+    """
     element_id = element.xpath("cbc:ID/text()", namespaces=namespaces)[0]
     document_references = element.xpath(
-        "cac:TenderingTerms/cac:CallForTendersDocumentReference[cbc:DocumentType/text()='non-restricted-document']",
+        "cac:TenderingTerms/cac:CallForTendersDocumentReference[cbc:DocumentType='non-restricted-document' and cac:Attachment/cac:ExternalReference/cbc:URI]",
         namespaces=namespaces,
     )
 
@@ -66,7 +89,15 @@ def process_document_references(element, result, namespaces, is_lot) -> None:
             result["tender"]["documents"].append(document)
 
 
-def merge_documents_url(release_json, documents_url_data) -> None:
+def merge_documents_url(
+    release_json: dict[str, Any], documents_url_data: dict[str, Any] | None
+) -> None:
+    """Merge document URLs data into the release JSON.
+
+    Args:
+        release_json (Dict[str, Any]): The release JSON to update
+        documents_url_data (Optional[Dict[str, Any]]): Document data containing URLs to merge
+    """
     if not documents_url_data:
         logger.warning("No documents URL data to merge")
         return

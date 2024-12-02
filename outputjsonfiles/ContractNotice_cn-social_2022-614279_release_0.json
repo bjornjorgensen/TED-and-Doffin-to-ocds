@@ -1,7 +1,7 @@
 {
   "id": "2022-614279",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b4b68f22-6301-4fc7-93dd-6e4088b35d26",
+  "ocid": "ocds-abcd1234-b8b5100d-573f-4911-93af-b96184b7db51",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -53,6 +53,12 @@
       }
     ],
     "title": "Avklaring Vestfold Sør",
+    "identifiers": [
+      {
+        "id": "22/18770",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "NAV Vestfold og Telemark skal anskaffe arbeidsmarkedstiltaket Avklaring Vestfold Sør for personer som har behov for en mer omfattende avklaringsbistand enn den Arbeids- og velferdsetaten kan tilby. Avklaring skal kartlegge og vurdere tiltaksdeltakerens arbeidsevne og eventuelle spesifikke behov for bistand for å skaffe seg eller beholde arbeid. Avklaringen skal bidra til at deltaker får økt innsikt i sine muligheter på arbeidsmarkedet og i egne ressurser og ferdigheter i jobbsammenheng. Nærmere spesifisering av krav til tjenesten fremgår av kravspesifikasjonen i konkurransegrunnlagets Del III, bilag 1.  Klikk her https://permalink.mercell.com/191755994.aspx",
     "items": [
@@ -121,8 +127,8 @@
         "email": "anita.hellehaven@nav.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Mo i Rana"

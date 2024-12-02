@@ -1,7 +1,7 @@
 {
   "id": "2023-618829",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-34d53676-d532-4475-98ed-59b085af7a95",
+  "ocid": "ocds-abcd1234-a4e6259e-8a50-4218-86d8-f029e62b5e9c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -24,6 +24,12 @@
       }
     ],
     "title": "C1 – HPC Facility for Scientific Research",
+    "identifiers": [
+      {
+        "id": "18/00059",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "goods",
     "description": "Uninett Sigma2 AS er ansvarlig for den nasjonale infrastrukturen for beregningsvitenskap i Norge, og tilbyr tjenester for tungregning og lagring av forsningsdata. Denne anskaffelsen er for en Linux klynge med nett og globalt filsystem av høy ytelse. Løsningen skal håndtere I/O og metadata-intensiv last.",
     "items": [

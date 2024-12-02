@@ -1,7 +1,7 @@
 {
   "id": "2023-626911",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-028a2fbd-ea48-4a6a-b5ce-74ed6d5dbdf9",
+  "ocid": "ocds-abcd1234-8b0d68a0-d1fb-4d51-97d4-c2dce64d1828",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -9,6 +9,12 @@
     },
     "status": "planned",
     "title": "Markedsdialog - Anskaffelse av vognskjul mm. Skjetlein VGS",
+    "identifiers": [
+      {
+        "id": "202316966",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "works",
     "description": "Trøndelag fylkeskommune (TRFK) inviterer med dette til markedsdialog den 15. mai 2023 for anskaffelse av vognskjul og hestevandring (skrittemaskin med takoverbygg) på Skjetlein Videregående skole. Denne anskaffelsen er den første for TRFK i utviklingsprosjektet «Bærekraftige anskaffelser for de vanlige byggeprosjektene».",
     "items": [

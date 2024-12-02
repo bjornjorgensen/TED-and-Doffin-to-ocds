@@ -1,7 +1,7 @@
 {
   "id": "2022-967371",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-67ae7c20-c2a5-48fc-bcfa-89e36472cc85",
+  "ocid": "ocds-abcd1234-dc0c1af3-d578-434b-8c5d-28a7baee91c2",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -73,12 +73,18 @@
         "documentType": "biddingDocuments",
         "url": "https://tendsign.no/doc.aspx?UniqueId=afzouxayrm&GoTo=Docs",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ]
       }
     ],
     "title": "Anskaffing av organisering og gjennomføring av undervisning for Fagskulen Vestland",
+    "identifiers": [
+      {
+        "id": "VLFK/22/258",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "services",
     "description": "Lage studieplaner og gjennomføre nettbaserte kurs med eksamen (Industrifagskule) innen bygg og BIM",
     "items": [
@@ -167,8 +173,8 @@
         "locality": "BERGEN"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

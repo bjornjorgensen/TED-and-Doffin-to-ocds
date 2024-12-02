@@ -1,7 +1,7 @@
 {
   "id": "2023-649037",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9a4ddb4b-a5bb-4836-89e1-09dbbc2f9aa6",
+  "ocid": "ocds-abcd1234-76833061-98dd-4cac-9225-c4b5b5e70377",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -95,6 +95,12 @@
       }
     ],
     "title": "Diatermipenner og -plater med tilbehør til foretakene i Helse Vest",
+    "identifiers": [
+      {
+        "id": "2022/1770",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "goods",
     "description": "Anskaffelsens formål er å inngå rammeavtale(r) på diatermipenner og -plater med tilbehør. Det gjøres oppmerksom på at størrelser listet opp i Bilag 1 - Prisskjema er basert på produkter som brukes i dag, og at oppgitte mål/størrelser skal tolkes som omtrentlig og ikke strengt absolutte. Estimert totalverdi for alle delkontrakter er ca. NOK 7 500 000,- per år, totalt NOK 30 000 000,- over 4 år. Se Bilag 2 - Kravspesifikasjon og Bilag 1 - Prisskjema for nærmere beskrivelse.",
     "items": [
@@ -171,8 +177,8 @@
       },
       "roles": [
         "wholesaleBuyer",
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "VADSØ"

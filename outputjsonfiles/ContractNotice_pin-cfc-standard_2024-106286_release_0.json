@@ -1,7 +1,7 @@
 {
   "id": "74f9d169-452b-4a99-b8d2-f54c3c71e163",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-474ec3b0-be92-403c-8db7-a97d4e019c39",
+  "ocid": "ocds-abcd1234-ca548e23-f5cb-46ea-90c5-0e700db47e86",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -23,10 +23,12 @@
           ]
         },
         "title": "ANLEGG FOR GJENVINNING AV OVERSKUDDSMASSER - Bodø kommune - Konkurranse med forhandling",
-        "identifiers": {
-          "id": "2024/2786",
-          "scheme": "internal"
-        },
+        "identifiers": [
+          {
+            "id": "2024/2786",
+            "scheme": "internal"
+          }
+        ],
         "mainProcurementCategory": "works",
         "description": "Bodø kommune har høye ambisjoner for å redusere klimagassutslipp og skape en mer sirkulær økonomi. Som ledd i dette ønsker man å opprette et permanent anlegg for gjenvinning av overskuddsmasser fra bygge- og anleggsaktiviteter.",
         "value": {
@@ -73,6 +75,12 @@
       }
     ],
     "title": "Prekvalifisering - ANLEGG FOR GJENVINNING AV OVERSKUDDSMASSER - Bodø kommune - Konkurranse med forhandling",
+    "identifiers": [
+      {
+        "id": "2024/2786",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "works",
     "description": "Bodø kommune har høye ambisjoner for å redusere klimagassutslipp og skape en mer sirkulær økonomi. Som ledd i dette ønsker man å opprette et permanent anlegg for gjenvinning av overskuddsmasser fra bygge- og anleggsaktiviteter.",
     "items": [
@@ -148,8 +156,8 @@
         "email": "truls.eirik.moan@bodo.kommune.no"
       },
       "roles": [
-        "buyer",
         "processContactPoint",
+        "buyer",
         "reviewContactPoint"
       ],
       "address": {

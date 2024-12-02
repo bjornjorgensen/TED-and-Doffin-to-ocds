@@ -1,7 +1,7 @@
 {
   "id": "2023-697632",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3572e8a1-5fe2-4aec-bb8a-f3ef671200b2",
+  "ocid": "ocds-abcd1234-5746ed87-d197-4060-be14-ea9a74d4c4da",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -52,6 +52,12 @@
       }
     ],
     "title": "VA Sodin",
+    "identifiers": [
+      {
+        "id": "23/01118",
+        "scheme": "internal"
+      }
+    ],
     "mainProcurementCategory": "works",
     "description": "Det skal legges nye vann- og avløpsledninger ved Sodin skole.",
     "items": [
@@ -122,8 +128,8 @@
         "locality": "Kyrksæterøra"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     }
   ],

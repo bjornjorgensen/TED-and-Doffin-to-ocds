@@ -2,13 +2,25 @@
 
 import logging
 from datetime import datetime
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_additional_info_deadline(xml_content):
+def parse_additional_info_deadline(
+    xml_content: str | bytes,
+) -> list[dict[str, Any]] | None:
+    """Parse the additional information deadline from XML content for each lot.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
+
+    Returns:
+        Optional[List[Dict[str, Any]]]: List of dictionaries containing lot data with enquiry period end dates,
+                                      or None if no valid data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -46,7 +58,16 @@ def parse_additional_info_deadline(xml_content):
     return lots_data if lots_data else None
 
 
-def convert_to_iso_format(date_string, time_string):
+def convert_to_iso_format(date_string: str, time_string: str) -> str:
+    """Convert separate date and time strings to ISO format datetime string.
+
+    Args:
+        date_string (str): The date string, potentially including timezone
+        time_string (str): The time string, potentially including timezone
+
+    Returns:
+        str: Combined date and time in ISO format
+    """
     # Combine date and time
     datetime_string = f"{date_string.split('+')[0]}T{time_string}"
 
@@ -57,7 +78,15 @@ def convert_to_iso_format(date_string, time_string):
     return date_time.isoformat()
 
 
-def merge_additional_info_deadline(release_json, lots_data) -> None:
+def merge_additional_info_deadline(
+    release_json: dict[str, Any], lots_data: list[dict[str, Any]] | None
+) -> None:
+    """Merge lots data containing additional information deadlines into the release JSON.
+
+    Args:
+        release_json (Dict[str, Any]): The release JSON to update
+        lots_data (Optional[List[Dict[str, Any]]]): List of lot data containing enquiry period end dates
+    """
     if lots_data:
         if "tender" not in release_json:
             release_json["tender"] = {}
