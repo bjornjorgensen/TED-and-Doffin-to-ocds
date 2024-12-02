@@ -1,7 +1,7 @@
 {
   "id": "2023-651678",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7bf60c58-68cb-4ac5-b475-2579a2dde2c1",
+  "ocid": "ocds-abcd1234-ecac5eba-3b06-4347-8b0f-04e652938506",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -26,7 +26,8 @@
         "title": "Detaljregulering for Vitensenterkvartalet",
         "description": "Oppdragsgiver, Kvinesdal kommune/kommunebygg, inviterer utvalgte firmaer til å gi pristilbud for kjøp av tjenester for reguleringsendring av områderegulering for Liknes i forbindelse med bygging av nytt Vitensenter i sentrum av Kvinesdal. Anskaffelsen består av reguleringsendring med tilhørende dokumenter jfr. Plan- og bygningsloven § 12-14, første ledd, og gjelder for området B/F/K4 og o_P24 inkl. fortausareal med tilhørende areal mellom o_Torg 1 i nord og veg i sør. Dette gjelder både vertikalnivå 1 og vertikalnivå 2.",
         "designContest": {
-          "followUpContracts": true
+          "followUpContracts": true,
+          "bindingJuryDecision": true
         },
         "awardCriteria": {
           "criteria": [
@@ -134,9 +135,9 @@
         "email": "vidar@pilar-br.no"
       },
       "roles": [
-        "submissionReceiptBody",
         "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "submissionReceiptBody"
       ],
       "address": {
         "locality": "Kvinesdal"

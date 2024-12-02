@@ -7,7 +7,19 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_prize_rank(xml_content):
+def parse_prize_rank(xml_content: str | bytes) -> dict | None:
+    """Parse prize rank information from XML content.
+
+    Extracts information about prizes and their ranks in design contests.
+    Creates OCDS-formatted data with prizes ordered by their rank.
+
+    Args:
+        xml_content: XML string or bytes containing the procurement data
+
+    Returns:
+        dict: OCDS-formatted dictionary containing prize rank data, or
+        None if no relevant data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -29,24 +41,51 @@ def parse_prize_rank(xml_content):
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        prizes = lot.xpath(".//cac:AwardingTerms/cac:Prize", namespaces=namespaces)
+        prizes = lot.xpath(
+            ".//cac:TenderingTerms/cac:AwardingTerms/cac:Prize", namespaces=namespaces
+        )
 
         if prizes:
             lot_data = {"id": lot_id, "designContest": {"prizes": {"details": []}}}
+            prize_list = []
 
-            for i, prize in enumerate(prizes):
+            for prize in prizes:
                 rank_code = prize.xpath("cbc:RankCode/text()", namespaces=namespaces)
-                prize_data = {"id": str(i)}
+                prize_data = {"id": ""}  # ID will be set after sorting
                 if rank_code:
                     prize_data["rank"] = int(rank_code[0])
-                lot_data["designContest"]["prizes"]["details"].append(prize_data)
+                prize_list.append(prize_data)
 
+            # Sort prizes by rank if available, otherwise keep original order
+            prize_list.sort(key=lambda x: x.get("rank", float("inf")))
+
+            # Set IDs based on final order
+            for i, prize in enumerate(prize_list):
+                prize["id"] = str(i)
+                if "rank" in prize:
+                    del prize[
+                        "rank"
+                    ]  # Remove rank as it's encoded in the array position
+
+            lot_data["designContest"]["prizes"]["details"] = prize_list
             result["tender"]["lots"].append(lot_data)
 
     return result if result["tender"]["lots"] else None
 
 
-def merge_prize_rank(release_json, prize_rank_data) -> None:
+def merge_prize_rank(
+    release_json: dict,
+    prize_rank_data: dict | None,
+) -> None:
+    """Merge prize rank data into the main release.
+
+    Updates the release JSON with prize rank information,
+    either by updating existing lots or adding new ones.
+
+    Args:
+        release_json: The main release JSON to update
+        prize_rank_data: Prize rank data to merge, as returned by parse_prize_rank()
+    """
     if not prize_rank_data:
         logger.warning("No Prize Rank data to merge")
         return

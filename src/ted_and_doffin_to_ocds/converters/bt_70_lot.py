@@ -7,16 +7,34 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_lot_performance_terms(xml_content):
-    """
-    Parse the XML content to extract the performance terms for each lot.
+def parse_lot_performance_terms(xml_content: str | bytes) -> dict | None:
+    """Parse performance terms from XML for each lot.
+
+    Extract information about the performance of the contract (e.g. intermediary
+    deliverables, compensation for damages, intellectual property rights) as defined
+    in BT-70.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        dict: A dictionary containing the parsed performance terms data.
-        None: If no relevant data is found.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "contractTerms": {
+                            "performanceTerms": str
+                        }
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -30,7 +48,7 @@ def parse_lot_performance_terms(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    result = {"lots": []}
+    result = {"tender": {"lots": []}}
 
     lots = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
@@ -45,26 +63,33 @@ def parse_lot_performance_terms(xml_content):
         )
 
         if performance_terms:
-            result["lots"].append(
+            result["tender"]["lots"].append(
                 {
                     "id": lot_id,
                     "contractTerms": {"performanceTerms": performance_terms[0]},
                 },
             )
 
-    return result if result["lots"] else None
+    return result if result["tender"]["lots"] else None
 
 
-def merge_lot_performance_terms(release_json, lot_performance_terms_data) -> None:
-    """
-    Merge the parsed performance terms data into the main OCDS release JSON.
+def merge_lot_performance_terms(
+    release_json: dict, lot_performance_terms_data: dict | None
+) -> None:
+    """Merge performance terms data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating contract terms
+    for each lot specified in the input data.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        lot_performance_terms_data (dict): The parsed performance terms data to be merged.
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        lot_performance_terms_data: The parsed performance terms data
+            in the same format as returned by parse_lot_performance_terms().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
     if not lot_performance_terms_data:
         logger.warning("No Lot Performance Terms data to merge")
@@ -73,7 +98,7 @@ def merge_lot_performance_terms(release_json, lot_performance_terms_data) -> Non
     tender = release_json.setdefault("tender", {})
     existing_lots = tender.setdefault("lots", [])
 
-    for new_lot in lot_performance_terms_data["lots"]:
+    for new_lot in lot_performance_terms_data["tender"]["lots"]:
         existing_lot = next(
             (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
             None,
@@ -87,5 +112,5 @@ def merge_lot_performance_terms(release_json, lot_performance_terms_data) -> Non
 
     logger.info(
         "Merged Lot Performance Terms data for %d lots",
-        len(lot_performance_terms_data["lots"]),
+        len(lot_performance_terms_data["tender"]["lots"]),
     )

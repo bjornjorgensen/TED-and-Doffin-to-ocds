@@ -7,7 +7,28 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_options_description(xml_content):
+def parse_options_description(xml_content: str | bytes) -> dict | None:
+    """Parse options description from XML content for lots.
+
+    This function extracts the options description from ProcurementProjectLot elements in the XML.
+
+    Args:
+        xml_content: XML string or bytes containing procurement data
+
+    Returns:
+        Dict containing OCDS formatted data with lots information, or None if no relevant data found.
+        Format:
+        {
+            "tender": {
+                "lots": [{
+                    "id": str,
+                    "options": {
+                        "description": str
+                    }
+                }]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -20,32 +41,53 @@ def parse_options_description(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    # Check if the relevant XPath exists
+    relevant_xpath = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ContractExtension/cbc:OptionsDescription"
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info(
+            "No options description data found. Skipping parse_options_description."
+        )
+        return None
+
     result = {"tender": {"lots": []}}
 
-    lots = root.xpath(
+    lot_elements = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
         namespaces=namespaces,
     )
 
-    for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-
-        options_description = lot.xpath(
-            "cac:ProcurementProject/cac:ContractExtension/cbc:OptionsDescription/text()",
+    for lot_element in lot_elements:
+        lot_id = lot_element.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        description = lot_element.xpath(
+            "./cac:ProcurementProject/cac:ContractExtension/cbc:OptionsDescription/text()",
             namespaces=namespaces,
         )
 
-        if options_description:
+        if description:
             lot_data = {
                 "id": lot_id,
-                "options": {"description": options_description[0]},
+                "options": {"description": description[0]},
             }
             result["tender"]["lots"].append(lot_data)
 
     return result if result["tender"]["lots"] else None
 
 
-def merge_options_description(release_json, options_description_data) -> None:
+def merge_options_description(
+    release_json: dict, options_description_data: dict | None
+) -> None:
+    """Merge options description data into an existing OCDS release.
+
+    Updates the lots in the release_json with options description information.
+
+    Args:
+        release_json: The OCDS release to be updated
+        options_description_data: Data containing options description information to be merged.
+                                Expected to have the same structure as parse_options_description output.
+
+    Returns:
+        None. Updates release_json in place.
+    """
     if not options_description_data:
         logger.warning("No Options Description data to merge")
         return

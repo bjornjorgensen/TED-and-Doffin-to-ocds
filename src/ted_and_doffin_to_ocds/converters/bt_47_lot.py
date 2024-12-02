@@ -1,5 +1,3 @@
-# converters/bt_47_Lot.py
-
 import logging
 
 from lxml import etree
@@ -7,7 +5,30 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_participant_name(xml_content):
+def parse_participant_name(xml_content: str | bytes) -> dict | None:
+    """Parse participant names from XML content for design contest lots.
+
+    This function extracts participant names from ProcurementProjectLot elements in the XML
+    and creates OCDS formatted data structure with parties and lots information.
+
+    Args:
+        xml_content: XML string or bytes containing procurement data
+
+    Returns:
+        Dict containing OCDS formatted data with parties and lots, or None if no relevant data found.
+        Format:
+        {
+            "parties": [{"id": str, "name": str, "roles": list[str]}],
+            "tender": {
+                "lots": [{
+                    "id": str,
+                    "designContest": {
+                        "selectedParticipants": [{"id": str, "name": str}]
+                    }
+                }]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -21,7 +42,7 @@ def parse_participant_name(xml_content):
     }
 
     # Check if the relevant XPath exists
-    relevant_xpath = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']//cac:EconomicOperatorShortList/cac:PreSelectedparty/cac:partyName/cbc:Name"
+    relevant_xpath = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:EconomicOperatorShortList/cac:PreSelectedParty/cac:PartyName/cbc:Name"
     if not root.xpath(relevant_xpath, namespaces=namespaces):
         logger.info("No participant name data found. Skipping parse_participant_name.")
         return None
@@ -37,21 +58,21 @@ def parse_participant_name(xml_content):
     for lot_element in lot_elements:
         lot_id = lot_element.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         participant_names = lot_element.xpath(
-            ".//cac:EconomicOperatorShortList/cac:PreSelectedparty/cac:partyName/cbc:Name/text()",
+            ".//cac:TenderingTerms/cac:EconomicOperatorShortList/cac:PreSelectedParty/cac:PartyName/cbc:Name/text()",
             namespaces=namespaces,
         )
 
         if participant_names:
-            lot = {"id": lot_id, "designContest": {"selectedparticipants": []}}
+            lot = {"id": lot_id, "designContest": {"selectedParticipants": []}}
 
             for name in participant_names:
                 party_id = str(party_id_counter)
                 party_id_counter += 1
 
-                party = {"id": party_id, "name": name, "roles": ["selectedparticipant"]}
+                party = {"id": party_id, "name": name, "roles": ["selectedParticipant"]}
                 result["parties"].append(party)
 
-                lot["designContest"]["selectedparticipants"].append(
+                lot["designContest"]["selectedParticipants"].append(
                     {"id": party_id, "name": name},
                 )
 
@@ -60,7 +81,20 @@ def parse_participant_name(xml_content):
     return result if result["parties"] else None
 
 
-def merge_participant_name(release_json, participant_data) -> None:
+def merge_participant_name(release_json: dict, participant_data: dict | None) -> None:
+    """Merge participant name data into an existing OCDS release.
+
+    Updates the parties and lots in the release_json with new participant information.
+    Merges roles for existing parties and adds selectedParticipants to existing lots.
+
+    Args:
+        release_json: The OCDS release to be updated
+        participant_data: Data containing new participant information to be merged.
+                        Expected to have the same structure as parse_participant_name output.
+
+    Returns:
+        None. Updates release_json in place.
+    """
     if not participant_data:
         logger.info("No participant Name data to merge")
         return
@@ -88,10 +122,10 @@ def merge_participant_name(release_json, participant_data) -> None:
         if existing_lot:
             existing_design_contest = existing_lot.setdefault("designContest", {})
             existing_selected_participants = existing_design_contest.setdefault(
-                "selectedparticipants",
+                "selectedParticipants",
                 [],
             )
-            for new_participant in new_lot["designContest"]["selectedparticipants"]:
+            for new_participant in new_lot["designContest"]["selectedParticipants"]:
                 if new_participant not in existing_selected_participants:
                     existing_selected_participants.append(new_participant)
         else:

@@ -7,7 +7,19 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_lot_rewards_other(xml_content):
+def parse_lot_rewards_other(xml_content: str | bytes) -> dict | None:
+    """Parse lot rewards and prize descriptions from XML content.
+
+    Extracts information about prizes and their descriptions for each lot.
+    Creates OCDS-formatted data with prize descriptions and IDs.
+
+    Args:
+        xml_content: XML string or bytes containing the procurement data
+
+    Returns:
+        dict: OCDS-formatted dictionary containing prize description data, or
+        None if no relevant data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -48,7 +60,20 @@ def parse_lot_rewards_other(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_rewards_other(release_json, lot_rewards_other_data) -> None:
+def merge_lot_rewards_other(
+    release_json: dict,
+    lot_rewards_other_data: dict | None,
+) -> None:
+    """Merge lot rewards and prize description data into the main release.
+
+    Updates the release JSON with prize descriptions, either by updating existing
+    prize details or adding new ones while preserving existing data like prize ranks.
+
+    Args:
+        release_json: The main release JSON to update
+        lot_rewards_other_data: Prize description data to merge, as returned by
+            parse_lot_rewards_other()
+    """
     if not lot_rewards_other_data:
         logger.warning("No Lot Rewards Other data to merge")
         return

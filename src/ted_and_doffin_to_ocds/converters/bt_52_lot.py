@@ -7,7 +7,29 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_successive_reduction_indicator(xml_content):
+def parse_successive_reduction_indicator(xml_content: str | bytes) -> dict | None:
+    """Parse successive reduction indicator from XML content for lots.
+
+    This function extracts the indicator of whether the procedure will take place in
+    successive stages from ProcurementProjectLot elements in the XML.
+
+    Args:
+        xml_content: XML string or bytes containing procurement data
+
+    Returns:
+        Dict containing OCDS formatted data with lots information, or None if no relevant data found.
+        Format:
+        {
+            "tender": {
+                "lots": [{
+                    "id": str,
+                    "secondStage": {
+                        "successiveReduction": bool
+                    }
+                }]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -30,23 +52,23 @@ def parse_successive_reduction_indicator(xml_content):
 
     result = {"tender": {"lots": []}}
 
-    lots = root.xpath(
+    lot_elements = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
         namespaces=namespaces,
     )
 
-    for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        successive_reduction = lot.xpath(
-            "cac:TenderingProcess/cbc:CandidateReductionConstraintIndicator/text()",
+    for lot_element in lot_elements:
+        lot_id = lot_element.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        reduction_indicator = lot_element.xpath(
+            "./cac:TenderingProcess/cbc:CandidateReductionConstraintIndicator/text()",
             namespaces=namespaces,
         )
 
-        if successive_reduction:
+        if reduction_indicator:
             lot_data = {
                 "id": lot_id,
                 "secondStage": {
-                    "successiveReduction": successive_reduction[0].lower() == "true",
+                    "successiveReduction": reduction_indicator[0].lower() == "true"
                 },
             }
             result["tender"]["lots"].append(lot_data)
@@ -55,8 +77,20 @@ def parse_successive_reduction_indicator(xml_content):
 
 
 def merge_successive_reduction_indicator(
-    release_json, successive_reduction_data
+    release_json: dict, successive_reduction_data: dict | None
 ) -> None:
+    """Merge successive reduction indicator data into an existing OCDS release.
+
+    Updates the lots in the release_json with successive reduction information.
+
+    Args:
+        release_json: The OCDS release to be updated
+        successive_reduction_data: Data containing successive reduction information to be merged.
+                                 Expected to have the same structure as parse_successive_reduction_indicator output.
+
+    Returns:
+        None. Updates release_json in place.
+    """
     if not successive_reduction_data:
         logger.info("No Successive Reduction Indicator data to merge")
         return

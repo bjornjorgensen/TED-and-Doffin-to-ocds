@@ -1,7 +1,7 @@
 {
   "id": "65667997-031a-4198-bd25-7225449ef479",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-10997742-48c7-40c6-89a8-ae1a7f23837a",
+  "ocid": "ocds-abcd1234-00f398e6-00fb-4fe2-aefa-fa5eded28160",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -147,6 +147,13 @@
       ],
       "roles": [
         "tenderer"
+      ]
+    },
+    {
+      "id": "EU-1",
+      "name": "European Union",
+      "roles": [
+        "funder"
       ]
     }
   ],

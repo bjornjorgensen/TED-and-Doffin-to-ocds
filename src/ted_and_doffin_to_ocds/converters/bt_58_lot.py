@@ -7,35 +7,28 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_renewal_maximum(xml_content):
-    """
-    Parse the XML content to extract the maximum number of renewals for each lot.
+def parse_renewal_maximum(xml_content: str | bytes) -> dict | None:
+    """Parse maximum number of renewals from XML content for lots.
 
-    This function processes the BT-58-Lot business term, which represents the maximum
-    number of times the contract can be renewed for a specific lot.
+    This function extracts the maximum number of times the contract can be renewed from
+    ProcurementProjectLot elements in the XML.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML string or bytes containing procurement data
 
     Returns:
-        dict: A dictionary containing the parsed renewal maximum data in the format:
-              {
-                  "tender": {
-                      "lots": [
-                          {
-                              "id": "lot_id",
-                              "renewal": {
-                                  "maximumRenewals": int
-                              }
-                          },
-                          ...
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
-
-    Raises:
-        etree.XMLSyntaxError: If the input is not valid XML.
+        Dict containing OCDS formatted data with lots information, or None if no relevant data found.
+        Format:
+        {
+            "tender": {
+                "lots": [{
+                    "id": str,
+                    "renewal": {
+                        "maximumRenewals": int
+                    }
+                }]
+            }
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -49,46 +42,51 @@ def parse_renewal_maximum(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    # Check if the relevant XPath exists
+    relevant_xpath = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ContractExtension/cbc:MaximumNumberNumeric"
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info("No renewal maximum data found. Skipping parse_renewal_maximum.")
+        return None
+
     result = {"tender": {"lots": []}}
 
-    lots = root.xpath(
+    lot_elements = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
         namespaces=namespaces,
     )
 
-    for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
-        maximum_renewals = lot.xpath(
-            "cac:ProcurementProject/cac:ContractExtension/cbc:MaximumNumberNumeric/text()",
+    for lot_element in lot_elements:
+        lot_id = lot_element.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        max_renewals = lot_element.xpath(
+            "./cac:ProcurementProject/cac:ContractExtension/cbc:MaximumNumberNumeric/text()",
             namespaces=namespaces,
         )
 
-        if lot_id and maximum_renewals:
+        if max_renewals:
             lot_data = {
-                "id": lot_id[0],
-                "renewal": {"maximumRenewals": int(maximum_renewals[0])},
+                "id": lot_id,
+                "renewal": {"maximumRenewals": int(max_renewals[0])},
             }
             result["tender"]["lots"].append(lot_data)
 
     return result if result["tender"]["lots"] else None
 
 
-def merge_renewal_maximum(release_json, renewal_data) -> None:
-    """
-    Merge the parsed renewal maximum data into the main OCDS release JSON.
+def merge_renewal_maximum(release_json: dict, renewal_data: dict | None) -> None:
+    """Merge maximum renewals data into an existing OCDS release.
 
-    This function updates the existing lots in the release JSON with the renewal
-    maximum information. If a lot doesn't exist, it adds a new lot to the release.
+    Updates the lots in the release_json with maximum renewals information.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        renewal_data (dict): The parsed renewal maximum data to be merged.
+        release_json: The OCDS release to be updated
+        renewal_data: Data containing maximum renewals information to be merged.
+                     Expected to have the same structure as parse_renewal_maximum output.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None. Updates release_json in place.
     """
     if not renewal_data:
-        logger.warning("BT-58-Lot: No renewal maximum data to merge")
+        logger.info("No renewal maximum data to merge")
         return
 
     existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
@@ -104,6 +102,6 @@ def merge_renewal_maximum(release_json, renewal_data) -> None:
             existing_lots.append(new_lot)
 
     logger.info(
-        "BT-58-Lot: Merged renewal maximum data for %d lots",
+        "Merged renewal maximum data for %d lots",
         len(renewal_data["tender"]["lots"]),
     )

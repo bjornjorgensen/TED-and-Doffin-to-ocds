@@ -1,35 +1,33 @@
-# converters/bt_27_Lot.py
-
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_lot_estimated_value(xml_content):
+def parse_lot_estimated_value(xml_content: str | bytes) -> dict[str, Any] | None:
     """
-    Parse the XML content to extract the estimated value for each lot.
+    Parse the estimated value for each procurement lot from XML content.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML string or bytes containing procurement lots
 
     Returns:
-        dict: A dictionary containing the parsed data in the format:
-              {
-                  "tender": {
-                      "lots": [
-                          {
-                              "id": "lot_id",
-                              "value": {
-                                  "amount": float_value,
-                                  "currency": "currency_code"
-                              }
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
+        Dictionary containing lot values or None if no lots found:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": "LOT-0001",
+                        "value": {
+                            "amount": 250000,
+                            "currency": "EUR"
+                        }
+                    }
+                ]
+            }
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -67,16 +65,20 @@ def parse_lot_estimated_value(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_estimated_value(release_json, lot_estimated_value_data) -> None:
+def merge_lot_estimated_value(
+    release_json: dict[str, Any], lot_estimated_value_data: dict[str, Any] | None
+) -> None:
     """
-    Merge the parsed lot estimated value data into the main OCDS release JSON.
+    Merge lot estimated value data into existing release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        lot_estimated_value_data (dict): The parsed lot estimated value data to be merged.
+        release_json: Target release JSON to merge into
+        lot_estimated_value_data: Source lot value data to merge from
 
     Returns:
-        None: The function updates the release_json in-place.
+        None. Modifies release_json in place.
+        Logs warning if no lot data to merge.
+        Logs info about number of lots merged.
     """
     if not lot_estimated_value_data:
         logger.warning("No Lot Estimated Value data to merge")

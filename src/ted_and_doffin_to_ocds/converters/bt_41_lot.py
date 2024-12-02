@@ -7,7 +7,20 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_lot_following_contract(xml_content):
+def parse_lot_following_contract(xml_content: str | bytes) -> dict | None:
+    """Parse lot following contract information from XML content.
+
+    Extracts information about lots where a service contract following the contest
+    will be awarded to one of the winners. Creates OCDS-formatted data with
+    followUpContracts flag set to True for these lots.
+
+    Args:
+        xml_content: XML string or bytes containing the procurement data
+
+    Returns:
+        dict: OCDS-formatted dictionary containing lot following contract data, or
+        None if no relevant data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -30,7 +43,7 @@ def parse_lot_following_contract(xml_content):
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         followup_contract_indicator = lot.xpath(
-            ".//cac:AwardingTerms/cbc:FollowupContractIndicator/text()",
+            ".//cac:TenderingTerms/cac:AwardingTerms/cbc:FollowupContractIndicator/text()",
             namespaces=namespaces,
         )
 
@@ -44,7 +57,20 @@ def parse_lot_following_contract(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_following_contract(release_json, lot_following_contract_data) -> None:
+def merge_lot_following_contract(
+    release_json: dict,
+    lot_following_contract_data: dict | None,
+) -> None:
+    """Merge lot following contract data into the main release.
+
+    Updates the release JSON with lot following contract information,
+    either by updating existing lots or adding new ones.
+
+    Args:
+        release_json: The main release JSON to update
+        lot_following_contract_data: Following contract data to merge, as returned by
+            parse_lot_following_contract()
+    """
     if not lot_following_contract_data:
         logger.warning("No lot following contract data to merge")
         return

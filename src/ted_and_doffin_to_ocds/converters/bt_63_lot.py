@@ -13,32 +13,30 @@ VARIANT_POLICY_MAPPING = {
 }
 
 
-def parse_variants(xml_content):
-    """
-    Parse the XML content to extract variant policy information for each lot.
+def parse_variants(xml_content: str | bytes) -> dict | None:
+    """Parse variants policy from XML for each lot.
 
-    This function processes the BT-63-Lot business term, which represents
-    whether tenderers are required, allowed, or not allowed to submit tenders
-    which fulfil the buyer's needs differently than as proposed in the procurement documents.
+    Extracts whether tenderers are required, allowed, or not allowed to submit variant
+    tenders as defined in BT-63.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        dict: A dictionary containing the parsed variant policy data in the format:
-              {
-                  "tender": {
-                      "lots": [
-                          {
-                              "id": "lot_id",
-                              "submissionTerms": {
-                                  "variantPolicy": "policy"
-                              }
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "submissionTerms": {
+                            "variantPolicy": str  # One of: "required", "allowed", "not allowed"
+                        }
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
@@ -55,6 +53,12 @@ def parse_variants(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    # Check if the relevant XPath exists
+    relevant_xpath = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cbc:VariantConstraintCode[@listName='permission']"
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info("No variants policy data found. Skipping parse_variants.")
+        return None
+
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
@@ -65,40 +69,39 @@ def parse_variants(xml_content):
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         variant_constraint = lot.xpath(
-            "cac:TenderingTerms/cbc:VariantConstraintCode[@listName='permission']/text()",
+            "./cac:TenderingTerms/cbc:VariantConstraintCode[@listName='permission']/text()",
             namespaces=namespaces,
         )
 
         if variant_constraint:
-            variant_policy = VARIANT_POLICY_MAPPING.get(
-                variant_constraint[0],
-                "Unknown",
-            )
-            lot_data = {
-                "id": lot_id,
-                "submissionTerms": {"variantPolicy": variant_policy},
-            }
-            result["tender"]["lots"].append(lot_data)
+            variant_policy = VARIANT_POLICY_MAPPING.get(variant_constraint[0])
+            if variant_policy:
+                lot_data = {
+                    "id": lot_id,
+                    "submissionTerms": {"variantPolicy": variant_policy},
+                }
+                result["tender"]["lots"].append(lot_data)
 
     return result if result["tender"]["lots"] else None
 
 
-def merge_variants(release_json, variants_data) -> None:
-    """
-    Merge the parsed variant policy data into the main OCDS release JSON.
+def merge_variants(release_json: dict, variants_data: dict | None) -> None:
+    """Merge variants policy data into the OCDS release.
 
-    This function updates the existing lots in the release JSON with the
-    variant policy information. If a lot doesn't exist, it adds a new lot to the release.
+    Updates the release JSON in-place by adding or updating submission terms
+    for each lot specified in the input data.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        variants_data (dict): The parsed variant policy data to be merged.
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        variants_data: The parsed variants data in the same format as returned
+            by parse_variants(). If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
     if not variants_data:
-        logger.warning("BT-63-Lot: No variant policy data to merge")
+        logger.info("No variants policy data to merge")
         return
 
     existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
@@ -110,12 +113,12 @@ def merge_variants(release_json, variants_data) -> None:
         )
         if existing_lot:
             existing_lot.setdefault("submissionTerms", {}).update(
-                new_lot["submissionTerms"],
+                new_lot["submissionTerms"]
             )
         else:
             existing_lots.append(new_lot)
 
     logger.info(
-        "BT-63-Lot: Merged variant policy data for %d lots",
+        "Merged variants policy data for %d lots",
         len(variants_data["tender"]["lots"]),
     )

@@ -7,35 +7,28 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_renewal_description(xml_content):
-    """
-    Parse the XML content to extract renewal description information for each lot.
+def parse_renewal_description(xml_content: str | bytes) -> dict | None:
+    """Parse renewal description from XML content for lots.
 
-    This function processes the BT-57-Lot business term, which represents any other
-    information about the renewal(s) for a specific lot.
+    This function extracts renewal description information from ProcurementProjectLot elements
+    in the XML.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML string or bytes containing procurement data
 
     Returns:
-        dict: A dictionary containing the parsed renewal description data in the format:
-              {
-                  "tender": {
-                      "lots": [
-                          {
-                              "id": "lot_id",
-                              "renewal": {
-                                  "description": "renewal description"
-                              }
-                          },
-                          ...
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
-
-    Raises:
-        etree.XMLSyntaxError: If the input is not valid XML.
+        Dict containing OCDS formatted data with lots information, or None if no relevant data found.
+        Format:
+        {
+            "tender": {
+                "lots": [{
+                    "id": str,
+                    "renewal": {
+                        "description": str
+                    }
+                }]
+            }
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -49,46 +42,53 @@ def parse_renewal_description(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    # Check if the relevant XPath exists
+    relevant_xpath = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ContractExtension/cac:Renewal/cac:Period/cbc:Description"
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info(
+            "No renewal description data found. Skipping parse_renewal_description."
+        )
+        return None
+
     result = {"tender": {"lots": []}}
 
-    lots = root.xpath(
+    lot_elements = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
         namespaces=namespaces,
     )
 
-    for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
-        renewal_description = lot.xpath(
-            "cac:ProcurementProject/cac:ContractExtension/cac:Renewal/cac:Period/cbc:Description/text()",
+    for lot_element in lot_elements:
+        lot_id = lot_element.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        description = lot_element.xpath(
+            "./cac:ProcurementProject/cac:ContractExtension/cac:Renewal/cac:Period/cbc:Description/text()",
             namespaces=namespaces,
         )
 
-        if lot_id and renewal_description:
+        if lot_id and description:
             lot_data = {
-                "id": lot_id[0],
-                "renewal": {"description": renewal_description[0]},
+                "id": lot_id,
+                "renewal": {"description": description[0]},
             }
             result["tender"]["lots"].append(lot_data)
 
     return result if result["tender"]["lots"] else None
 
 
-def merge_renewal_description(release_json, renewal_data) -> None:
-    """
-    Merge the parsed renewal description data into the main OCDS release JSON.
+def merge_renewal_description(release_json: dict, renewal_data: dict | None) -> None:
+    """Merge renewal description data into an existing OCDS release.
 
-    This function updates the existing lots in the release JSON with the renewal
-    description information. If a lot doesn't exist, it adds a new lot to the release.
+    Updates the lots in the release_json with renewal description information.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        renewal_data (dict): The parsed renewal description data to be merged.
+        release_json: The OCDS release to be updated
+        renewal_data: Data containing renewal description information to be merged.
+                     Expected to have the same structure as parse_renewal_description output.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None. Updates release_json in place.
     """
     if not renewal_data:
-        logger.warning("BT-57-Lot: No renewal description data to merge")
+        logger.info("No renewal description data to merge")
         return
 
     existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
@@ -104,6 +104,6 @@ def merge_renewal_description(release_json, renewal_data) -> None:
             existing_lots.append(new_lot)
 
     logger.info(
-        "BT-57-Lot: Merged renewal description data for %d lots",
+        "Merged renewal description data for %d lots",
         len(renewal_data["tender"]["lots"]),
     )

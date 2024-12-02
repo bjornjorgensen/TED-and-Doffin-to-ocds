@@ -7,31 +7,36 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_subcontracting_obligation_minimum(xml_content: bytes):
-    """
-    Parse the XML content to extract the subcontracting obligation minimum percentage for each lot.
+def parse_subcontracting_obligation_minimum(
+    xml_content: str | bytes,
+) -> dict | None:
+    """Parse the subcontracting obligation minimum percentage from XML for each lot.
+
+    Extracts the minimum percentage that the contractor must subcontract using competitive
+    procedures as described in Title III of European Parliament and Council Directive 2009/81/EC.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        dict: A dictionary containing the parsed subcontracting obligation minimum data in the format:
-              {
-                  "tender": {
-                      "lots": [
-                          {
-                              "id": "lot_id",
-                              "subcontractingTerms": {
-                                  "competitiveMinimumPercentage": float_value
-                              }
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "subcontractingTerms": {
+                            "competitiveMinimumPercentage": float
+                        }
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+        ValueError: If the percentage value cannot be converted to float.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -80,18 +85,22 @@ def parse_subcontracting_obligation_minimum(xml_content: bytes):
 
 
 def merge_subcontracting_obligation_minimum(
-    release_json,
-    subcontracting_obligation_minimum_data,
+    release_json: dict, subcontracting_obligation_minimum_data: dict | None
 ) -> None:
-    """
-    Merge the parsed subcontracting obligation minimum data into the main OCDS release JSON.
+    """Merge subcontracting obligation minimum data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating subcontracting terms
+    for each lot specified in the input data.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        subcontracting_obligation_minimum_data (dict): The parsed subcontracting obligation minimum data to be merged.
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        subcontracting_obligation_minimum_data: The parsed subcontracting data
+            in the same format as returned by parse_subcontracting_obligation_minimum().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
     if not subcontracting_obligation_minimum_data:
         logger.warning("No subcontracting obligation minimum data to merge")

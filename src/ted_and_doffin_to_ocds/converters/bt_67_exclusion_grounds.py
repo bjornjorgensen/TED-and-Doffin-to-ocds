@@ -34,15 +34,34 @@ EXCLUSION_GROUND_MAPPING = {
 }
 
 
-def parse_exclusion_grounds(xml_content: str) -> dict | None:
+def parse_exclusion_grounds(xml_content: str | bytes) -> dict | None:
     """
     Parse the XML content to extract exclusion grounds information.
 
+    Extracts criteria regarding personal situation of tenderers that may lead to
+    their exclusion as defined in BT-67.
+
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        dict | None: A dictionary containing the parsed exclusion grounds data or None if no relevant data is found.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "exclusionGrounds": {
+                    "criteria": [
+                        {
+                            "type": str,
+                            "description": str
+                        }
+                    ]
+                }
+            }
+        }
+        Returns None if no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -65,7 +84,7 @@ def parse_exclusion_grounds(xml_content: str) -> dict | None:
     result = {"tender": {"exclusionGrounds": {"criteria": []}}}
 
     exclusion_grounds = root.xpath(
-        "//cac:TenderingTerms/cac:TendererQualificationRequest/cac:SpecificTendererRequirement",
+        "//cac:TenderingTerms/cac:TendererQualificationRequest[cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode/@listName='exclusion-ground']/cac:SpecificTendererRequirement",
         namespaces=namespaces,
     )
 
@@ -90,16 +109,23 @@ def parse_exclusion_grounds(xml_content: str) -> dict | None:
     return result if result["tender"]["exclusionGrounds"]["criteria"] else None
 
 
-def merge_exclusion_grounds(release_json, exclusion_grounds_data) -> None:
+def merge_exclusion_grounds(
+    release_json: dict, exclusion_grounds_data: dict | None
+) -> None:
     """
     Merge the parsed exclusion grounds data into the main OCDS release JSON.
 
+    Updates the release JSON in-place by adding or updating exclusion grounds
+    criteria.
+
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        exclusion_grounds_data (dict): The parsed exclusion grounds data to be merged.
+        release_json: The main OCDS release JSON to be updated.
+        exclusion_grounds_data: The parsed exclusion grounds data
+            in the same format as returned by parse_exclusion_grounds().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
     if not exclusion_grounds_data:
         logger.warning("No exclusion grounds data to merge")

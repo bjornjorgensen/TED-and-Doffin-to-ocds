@@ -7,30 +7,25 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_eu_funds(xml_content):
-    """
-    Parse the XML content to check if the procurement is financed by EU funds.
+def parse_eu_funds(xml_content: str | bytes) -> dict | None:
+    """Parse EU funds indicator from XML content.
 
-    This function processes the BT-60-Lot business term, which indicates whether
-    the procurement is at least partially financed by Union funds.
+    This function checks if the procurement is financed by EU funds by looking for
+    the EU funding program code in the XML.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML string or bytes containing procurement data
 
     Returns:
-        dict: A dictionary containing the EU funder information if EU funds are used:
-              {
-                  "parties": [
-                      {
-                          "name": "European Union",
-                          "roles": ["funder"]
-                      }
-                  ]
-              }
-        None: If no EU funds are indicated.
-
-    Raises:
-        etree.XMLSyntaxError: If the input is not valid XML.
+        Dict containing OCDS formatted data with EU party information, or None if no EU funding found.
+        Format:
+        {
+            "parties": [{
+                "id": str,
+                "name": "European Union",
+                "roles": ["funder"]
+            }]
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -44,32 +39,39 @@ def parse_eu_funds(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    eu_funded = root.xpath(
-        "//efac:Funding/cbc:FundingProgramCode[@listName='eu-funded' and text()='eu-funds']",
-        namespaces=namespaces,
-    )
+    # Check if the relevant XPath exists
+    relevant_xpath = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cbc:FundingProgramCode[@listName='eu-funded' and text()='eu-funds']"
+    if not root.xpath(relevant_xpath, namespaces=namespaces):
+        logger.info("No EU funds indicator found. Skipping parse_eu_funds.")
+        return None
 
-    if eu_funded:
-        return {"parties": [{"name": "European Union", "roles": ["funder"]}]}
+    return {
+        "parties": [
+            {
+                "id": "EU-1",  # Using consistent ID for EU party
+                "name": "European Union",
+                "roles": ["funder"],
+            }
+        ]
+    }
 
-    return None
 
+def merge_eu_funds(release_json: dict, eu_funds_data: dict | None) -> None:
+    """Merge EU funds data into an existing OCDS release.
 
-def merge_eu_funds(release_json, eu_funds_data) -> None:
-    """
-    Merge the parsed EU funds data into the main OCDS release JSON.
-
-    This function adds or updates the European Union as a funder in the parties array.
+    Updates the parties in the release_json with EU funder information.
+    If the EU party already exists, ensures it has the funder role.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        eu_funds_data (dict): The parsed EU funds data to be merged.
+        release_json: The OCDS release to be updated
+        eu_funds_data: Data containing EU funds information to be merged.
+                      Expected to have the same structure as parse_eu_funds output.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None. Updates release_json in place.
     """
     if not eu_funds_data:
-        logger.info("BT-60-Lot: No EU funds data to merge")
+        logger.info("No EU funds data to merge")
         return
 
     parties = release_json.setdefault("parties", [])
@@ -80,10 +82,8 @@ def merge_eu_funds(release_json, eu_funds_data) -> None:
 
     if eu_party:
         if "funder" not in eu_party.get("roles", []):
-            eu_party.setdefault("roles", []).append("funder")
+            eu_party["roles"] = list({*eu_party.get("roles", []), "funder"})
     else:
-        new_eu_party = eu_funds_data["parties"][0]
-        new_eu_party["id"] = str(len(parties) + 1)  # Assign a new ID
-        parties.append(new_eu_party)
+        parties.append(eu_funds_data["parties"][0])
 
-    logger.info("BT-60-Lot: Merged EU funds data")
+    logger.info("Merged EU funds data")

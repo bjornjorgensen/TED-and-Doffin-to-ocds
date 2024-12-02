@@ -1,7 +1,7 @@
 {
   "id": "74f9d169-452b-4a99-b8d2-f54c3c71e163",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0b4ce200-f912-40f7-8d81-d0e182ab1db0",
+  "ocid": "ocds-abcd1234-8ce1bf36-8736-4044-a99f-3d25f94f25b0",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -16,7 +16,6 @@
         "id": "LOT-0000",
         "submissionTerms": {
           "electronicSubmissionPolicy": "required",
-          "variantPolicy": "Unknown",
           "advancedElectronicSignatureRequired": false,
           "languages": [
             "no"

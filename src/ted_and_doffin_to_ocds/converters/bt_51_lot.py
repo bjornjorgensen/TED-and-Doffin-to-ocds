@@ -7,7 +7,29 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_lot_maximum_candidates(xml_content):
+def parse_lot_maximum_candidates(xml_content: str | bytes) -> dict | None:
+    """Parse maximum number of candidates from XML content for lots.
+
+    This function extracts the maximum number of candidates to be invited for the second stage
+    from ProcurementProjectLot elements in the XML.
+
+    Args:
+        xml_content: XML string or bytes containing procurement data
+
+    Returns:
+        Dict containing OCDS formatted data with lots information, or None if no relevant data found.
+        Format:
+        {
+            "tender": {
+                "lots": [{
+                    "id": str,
+                    "secondStage": {
+                        "maximumCandidates": int
+                    }
+                }]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -30,30 +52,43 @@ def parse_lot_maximum_candidates(xml_content):
 
     result = {"tender": {"lots": []}}
 
-    lots = root.xpath(
+    lot_elements = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
         namespaces=namespaces,
     )
 
-    for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
-        max_candidates = lot.xpath(
-            "cac:TenderingProcess/cac:EconomicOperatorShortList/cbc:MaximumQuantity/text()",
+    for lot_element in lot_elements:
+        lot_id = lot_element.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        max_candidates = lot_element.xpath(
+            ".//cac:TenderingProcess/cac:EconomicOperatorShortList/cbc:MaximumQuantity/text()",
             namespaces=namespaces,
         )
 
-        if lot_id and max_candidates:
-            result["tender"]["lots"].append(
-                {
-                    "id": lot_id[0],
-                    "secondStage": {"maximumCandidates": int(max_candidates[0])},
-                },
-            )
+        if max_candidates:
+            lot = {
+                "id": lot_id,
+                "secondStage": {"maximumCandidates": int(max_candidates[0])},
+            }
+            result["tender"]["lots"].append(lot)
 
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_maximum_candidates(release_json, lot_maximum_candidates_data) -> None:
+def merge_lot_maximum_candidates(
+    release_json: dict, lot_maximum_candidates_data: dict | None
+) -> None:
+    """Merge maximum candidates data into an existing OCDS release.
+
+    Updates the lots in the release_json with maximum candidates information.
+
+    Args:
+        release_json: The OCDS release to be updated
+        lot_maximum_candidates_data: Data containing maximum candidates information to be merged.
+                                   Expected to have the same structure as parse_lot_maximum_candidates output.
+
+    Returns:
+        None. Updates release_json in place.
+    """
     if not lot_maximum_candidates_data:
         logger.info("No lot maximum candidates data to merge.")
         return

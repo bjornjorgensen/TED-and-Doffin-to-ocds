@@ -1,21 +1,30 @@
 # converters/bt_27_part.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_bt_27_part(xml_content: str | bytes) -> dict:
-    """Parse BT-27 estimated value from the procurement project lot XML.
+def parse_bt_27_part(xml_content: str | bytes) -> dict[str, Any]:
+    """
+    Parse the estimated value from procurement project part XML content.
 
     Args:
-        xml_content (Union[str, bytes]): XML content containing procurement data
+        xml_content: XML string or bytes containing procurement data
 
     Returns:
-        Dict: Dictionary containing tender value information in OCDS format with
-            amount and currency if found, otherwise empty tender dict
+        Dict containing tender value information:
+        {
+            "tender": {
+                "value": {
+                    "amount": 250000,
+                    "currency": "EUR"
+                }
+            }
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -52,15 +61,19 @@ def parse_bt_27_part(xml_content: str | bytes) -> dict:
     return result
 
 
-def merge_bt_27_part(release_json: dict, bt_27_part_data: dict) -> None:
-    """Merge BT-27 estimated value data into the release JSON.
+def merge_bt_27_part(
+    release_json: dict[str, Any], bt_27_part_data: dict[str, Any]
+) -> None:
+    """
+    Merge estimated value data into existing release JSON.
 
     Args:
-        release_json (Dict): Target release JSON to merge data into
-        bt_27_part_data (Dict): Source data containing tender value information
+        release_json: Target release JSON to merge into
+        bt_27_part_data: Source data containing tender value information
 
     Returns:
-        None: Modifies release_json in place
+        None. Modifies release_json in place.
+        Logs success or absence of data to merge.
     """
     if "value" in bt_27_part_data["tender"]:
         release_json.setdefault("tender", {})["value"] = bt_27_part_data["tender"][

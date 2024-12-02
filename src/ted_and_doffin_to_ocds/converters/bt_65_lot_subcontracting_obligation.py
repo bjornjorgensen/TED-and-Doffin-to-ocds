@@ -14,28 +14,30 @@ SUBCONTRACTING_OBLIGATION_MAPPING = {
 }
 
 
-def parse_subcontracting_obligation(xml_content: bytes):
-    """
-    Parse the XML content to extract the subcontracting obligation for each lot.
+def parse_subcontracting_obligation(xml_content: str | bytes) -> dict | None:
+    """Parse the subcontracting obligations from XML for each lot.
+
+    Extracts the subcontracting obligations that apply to the contract as defined
+    in BT-65.
 
     Args:
-        xml_content (bytes): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        dict: A dictionary containing the parsed subcontracting obligation data in the format:
-              {
-                  "tender": {
-                      "lots": [
-                          {
-                              "id": "lot_id",
-                              "subcontractingTerms": {
-                                  "description": "obligation description"
-                              }
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "subcontractingTerms": {
+                            "description": str
+                        }
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
@@ -79,17 +81,22 @@ def parse_subcontracting_obligation(xml_content: bytes):
 
 
 def merge_subcontracting_obligation(
-    release_json, subcontracting_obligation_data
+    release_json: dict, subcontracting_obligation_data: dict | None
 ) -> None:
-    """
-    Merge the parsed subcontracting obligation data into the main OCDS release JSON.
+    """Merge subcontracting obligation data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating subcontracting terms
+    for each lot specified in the input data.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        subcontracting_obligation_data (dict): The parsed subcontracting obligation data to be merged.
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        subcontracting_obligation_data: The parsed subcontracting data
+            in the same format as returned by parse_subcontracting_obligation().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
     if not subcontracting_obligation_data:
         logger.warning("No subcontracting obligation data to merge")

@@ -1,7 +1,7 @@
 {
   "id": "2023-649037",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8903d3c6-41c0-4b09-9263-86f8ad059e46",
+  "ocid": "ocds-abcd1234-e7738882-c8c2-4694-8ab9-2ef52f42ba2b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -35,7 +35,6 @@
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "allowed",
-          "variantPolicy": "Unknown",
           "languages": [
             "no"
           ],
@@ -176,8 +175,8 @@
         "email": "post@sykehusinnkjop.no"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "wholesaleBuyer"
       ],
       "address": {

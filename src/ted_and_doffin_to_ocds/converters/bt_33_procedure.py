@@ -7,7 +7,17 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_max_lots_awarded(xml_content):
+def parse_max_lots_awarded(xml_content: str | bytes) -> dict | None:
+    """
+    Parse the maximum number of lots that can be awarded to one tenderer from XML content.
+
+    Args:
+        xml_content (str | bytes): The XML content containing lot distribution information.
+
+    Returns:
+        dict | None: A dictionary containing the maximum lots awarded per supplier in OCDS format,
+                    or None if the information is not found or invalid.
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -42,7 +52,20 @@ def parse_max_lots_awarded(xml_content):
     return None
 
 
-def merge_max_lots_awarded(release_json, max_lots_awarded_data) -> None:
+def merge_max_lots_awarded(
+    release_json: dict, max_lots_awarded_data: dict | None
+) -> None:
+    """
+    Merge the maximum lots awarded data into the release JSON.
+
+    Args:
+        release_json (dict): The target release JSON to merge into.
+        max_lots_awarded_data (dict | None): The maximum lots awarded data to merge,
+                                           or None if no data to merge.
+
+    Returns:
+        None
+    """
     if not max_lots_awarded_data:
         return
 

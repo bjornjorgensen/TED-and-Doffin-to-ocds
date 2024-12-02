@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-01572efb-5007-4cb3-8839-d1d80676b5cb",
+  "ocid": "ocds-abcd1234-ab49a888-c834-4a23-be5b-840575476c84",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -699,8 +699,8 @@
         "locality": "Luxembourg"
       },
       "roles": [
-        "tenderer",
-        "leadTenderer"
+        "leadTenderer",
+        "tenderer"
       ]
     },
     {
@@ -841,6 +841,13 @@
       "roles": [
         "processContactPoint",
         "reviewContactPoint"
+      ]
+    },
+    {
+      "id": "EU-1",
+      "name": "European Union",
+      "roles": [
+        "funder"
       ]
     },
     {

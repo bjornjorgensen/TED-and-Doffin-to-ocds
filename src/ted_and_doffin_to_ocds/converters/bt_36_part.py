@@ -26,52 +26,32 @@ def parse_part_duration(xml_content: str | bytes) -> dict[str, Any] | None:
 
     Returns:
         Dictionary containing tender contract period duration or None if not found
-
-    Raises:
-        etree.XMLSyntaxError: If XML content is invalid
     """
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode("utf-8")
+
+    root = etree.fromstring(xml_content)
+    duration_measures = root.xpath(
+        "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:PlannedPeriod/cbc:DurationMeasure",
+        namespaces=NAMESPACES,
+    )
+
+    if not duration_measures:
+        return None
+
     try:
-        if isinstance(xml_content, str):
-            xml_content = xml_content.encode("utf-8")
-
-        root = etree.fromstring(xml_content)
-
-        # Target the correct XPath for BT-36
-        duration_measures = root.xpath(
-            "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:PlannedPeriod/cbc:DurationMeasure",
-            namespaces=NAMESPACES,
-        )
-
-        if not duration_measures:
-            logger.debug("No duration measure found")
-            return None
-
-        duration_measure = duration_measures[0]
-        duration_value = int(duration_measure.text)
-        unit_code = duration_measure.get("unitCode")
+        duration_value = int(duration_measures[0].text)
+        unit_code = duration_measures[0].get("unitCode")
 
         if not unit_code:
-            logger.warning("No unitCode found for duration measure")
             return None
 
-        # Convert duration based on unit code
         duration_in_days = calculate_duration_in_days(duration_value, unit_code)
         if duration_in_days is None:
             return None
-
-        logger.info(
-            "Found duration: %d %s (converted to %d days)",
-            duration_value,
-            unit_code,
-            duration_in_days,
-        )
-
         return {"tender": {"contractPeriod": {"durationInDays": duration_in_days}}}  # noqa: TRY300
 
-    except etree.XMLSyntaxError:
-        logger.exception("Failed to parse XML content")
-        raise
-    except ValueError:
+    except (ValueError, TypeError):
         logger.exception("Invalid duration value")
         return None
 
@@ -82,24 +62,26 @@ def calculate_duration_in_days(value: int, unit_code: str) -> int | None:
 
     Args:
         value: Duration value
-        unit_code: Unit code from XML
+        unit_code: Unit code from XML (DAY, MONTH, YEAR)
 
     Returns:
         Duration in days or None if unit code is invalid
     """
     unit_code = unit_code.upper()
 
-    if unit_code == "DAY":
-        return value
-    if unit_code == "MONTH":
-        return value * 30
-    if unit_code == "YEAR":
-        return value * 365
-    if unit_code in ["WEEK", "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]:
-        return value * 7
+    # Map duration units to number of days
+    duration_mappings = {
+        "DAY": 1,
+        "MONTH": 30,
+        "YEAR": 365,
+    }
 
-    logger.warning("Unknown unitCode '%s' for duration", unit_code)
-    return None
+    multiplier = duration_mappings.get(unit_code)
+    if multiplier is None:
+        logger.warning("Unknown unitCode '%s' for duration", unit_code)
+        return None
+
+    return value * multiplier
 
 
 def merge_part_duration(

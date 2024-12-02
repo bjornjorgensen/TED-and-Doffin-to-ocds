@@ -1,13 +1,31 @@
 # converters/bt_27_procedure.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_bt_27_procedure(xml_content):
+def parse_bt_27_procedure(xml_content: str | bytes) -> dict[str, Any]:
+    """
+    Parse the estimated value from procurement project XML content.
+
+    Args:
+        xml_content: XML string or bytes containing procurement data
+
+    Returns:
+        Dict containing tender value information:
+        {
+            "tender": {
+                "value": {
+                    "amount": 250000,
+                    "currency": "EUR"
+                }
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -37,7 +55,20 @@ def parse_bt_27_procedure(xml_content):
     return result
 
 
-def merge_bt_27_procedure(release_json, bt_27_procedure_data) -> None:
+def merge_bt_27_procedure(
+    release_json: dict[str, Any], bt_27_procedure_data: dict[str, Any]
+) -> None:
+    """
+    Merge estimated value data into existing release JSON.
+
+    Args:
+        release_json: Target release JSON to merge into
+        bt_27_procedure_data: Source data containing tender value information
+
+    Returns:
+        None. Modifies release_json in place.
+        Logs success or absence of data to merge.
+    """
     if "value" in bt_27_procedure_data["tender"]:
         release_json.setdefault("tender", {})["value"] = bt_27_procedure_data["tender"][
             "value"

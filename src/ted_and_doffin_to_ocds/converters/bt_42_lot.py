@@ -7,7 +7,19 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_lot_jury_decision_binding(xml_content):
+def parse_lot_jury_decision_binding(xml_content: str | bytes) -> dict | None:
+    """Parse lot jury decision binding information from XML content.
+
+    Extracts information about lots where the jury's decision is binding on the buyer.
+    Creates OCDS-formatted data with bindingJuryDecision flag set to True for these lots.
+
+    Args:
+        xml_content: XML string or bytes containing the procurement data
+
+    Returns:
+        dict: OCDS-formatted dictionary containing lot jury decision binding data, or
+        None if no relevant data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -30,7 +42,7 @@ def parse_lot_jury_decision_binding(xml_content):
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         binding_on_buyer_indicator = lot.xpath(
-            ".//cac:AwardingTerms/cbc:BindingOnbuyerIndicator/text()",
+            ".//cac:TenderingTerms/cac:AwardingTerms/cbc:BindingOnBuyerIndicator/text()",
             namespaces=namespaces,
         )
 
@@ -45,8 +57,19 @@ def parse_lot_jury_decision_binding(xml_content):
 
 
 def merge_lot_jury_decision_binding(
-    release_json, lot_jury_decision_binding_data
+    release_json: dict,
+    lot_jury_decision_binding_data: dict | None,
 ) -> None:
+    """Merge lot jury decision binding data into the main release.
+
+    Updates the release JSON with lot jury decision binding information,
+    either by updating existing lots or adding new ones.
+
+    Args:
+        release_json: The main release JSON to update
+        lot_jury_decision_binding_data: Jury decision binding data to merge, as returned by
+            parse_lot_jury_decision_binding()
+    """
     if not lot_jury_decision_binding_data:
         logger.warning("No lot jury decision binding data to merge")
         return

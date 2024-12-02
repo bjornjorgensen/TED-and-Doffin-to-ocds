@@ -7,7 +7,19 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_jury_member_name(xml_content):
+def parse_jury_member_name(xml_content: str | bytes) -> dict | None:
+    """Parse jury member names from XML content.
+
+    Extracts names of jury members for each lot in a design contest.
+    Creates OCDS-formatted data with jury member names.
+
+    Args:
+        xml_content: XML string or bytes containing the procurement data
+
+    Returns:
+        dict: OCDS-formatted dictionary containing jury member data, or
+        None if no relevant data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -21,7 +33,7 @@ def parse_jury_member_name(xml_content):
     }
 
     # Check if the relevant XPath exists
-    relevant_xpath = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']//cac:AwardingTerms/cac:TechnicalCommitteePerson/cbc:FamilyName"
+    relevant_xpath = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']//cac:TenderingTerms/cac:AwardingTerms/cac:TechnicalCommitteePerson/cbc:FamilyName"
     if not root.xpath(relevant_xpath, namespaces=namespaces):
         logger.info("No jury member data found. Skipping parse_jury_member_name.")
         return None
@@ -36,7 +48,7 @@ def parse_jury_member_name(xml_content):
     for lot_element in lot_elements:
         lot_id = lot_element.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         jury_members = lot_element.xpath(
-            ".//cac:AwardingTerms/cac:TechnicalCommitteePerson/cbc:FamilyName/text()",
+            ".//cac:TenderingTerms/cac:AwardingTerms/cac:TechnicalCommitteePerson/cbc:FamilyName/text()",
             namespaces=namespaces,
         )
 
@@ -52,7 +64,19 @@ def parse_jury_member_name(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_jury_member_name(release_json, jury_member_data) -> None:
+def merge_jury_member_name(
+    release_json: dict,
+    jury_member_data: dict | None,
+) -> None:
+    """Merge jury member name data into the main release.
+
+    Updates the release JSON with jury member information,
+    either by updating existing lots or adding new ones.
+
+    Args:
+        release_json: The main release JSON to update
+        jury_member_data: Jury member data to merge, as returned by parse_jury_member_name()
+    """
     if not jury_member_data:
         logger.warning("No Jury Member Name data to merge")
         return

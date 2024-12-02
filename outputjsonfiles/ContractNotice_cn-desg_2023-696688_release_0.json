@@ -1,7 +1,7 @@
 {
   "id": "2023-696688",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-261a55f3-8aec-4bff-bd9c-af29ead8f943",
+  "ocid": "ocds-abcd1234-a081cc86-e32e-4180-99d7-c5dc2d39b532",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -27,11 +27,11 @@
         "description": "Europeisk arkitektur- og byutviklingskonkurranse for arkitekter, landskapsarkitekter og planleggere under 40 år. Trondheim kommune er en av 5 norske aktører som lyser ut konkurranse under Europan 17 paraplyen. Trondheim kommune søker innspill til utforming av sykehjem, boliger og nærmiljø på en sensitiv tomt på Lade.",
         "designContest": {
           "followUpContracts": true,
+          "bindingJuryDecision": true,
           "prizes": {
             "details": [
               {
                 "id": "0",
-                "rank": 1,
                 "description": "Vinnerutkast: 12 000 EUR Andreplass: 6 000 EUR"
               }
             ]
@@ -188,9 +188,9 @@
         "email": "eierskap.postmottak@trondheim.kommune.no"
       },
       "roles": [
-        "submissionReceiptBody",
         "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "submissionReceiptBody"
       ],
       "address": {
         "locality": "Trondheim"

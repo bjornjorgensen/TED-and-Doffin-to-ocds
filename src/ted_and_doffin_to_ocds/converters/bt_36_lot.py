@@ -7,7 +7,17 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_lot_duration(xml_content):
+def parse_lot_duration(xml_content: str | bytes) -> dict | None:
+    """
+    Parse the duration period for each lot from XML content.
+
+    Args:
+        xml_content (str | bytes): The XML content containing lot duration information.
+
+    Returns:
+        dict | None: A dictionary containing lot durations in OCDS format,
+                    or None if no valid durations are found.
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -55,7 +65,18 @@ def parse_lot_duration(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_duration(release_json, lot_duration_data) -> None:
+def merge_lot_duration(release_json: dict, lot_duration_data: dict | None) -> None:
+    """
+    Merge the lot duration data into the release JSON.
+
+    Args:
+        release_json (dict): The target release JSON to merge into.
+        lot_duration_data (dict | None): The lot duration data to merge,
+                                       or None if no data to merge.
+
+    Returns:
+        None
+    """
     if not lot_duration_data:
         logger.warning("No lot duration data to merge")
         return

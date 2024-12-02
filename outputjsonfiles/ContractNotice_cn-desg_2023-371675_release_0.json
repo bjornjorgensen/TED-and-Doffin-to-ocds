@@ -1,7 +1,7 @@
 {
   "id": "2023-371675",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f8522d7b-0fb3-4b45-afa4-46c74b2a8de4",
+  "ocid": "ocds-abcd1234-8a6df14f-71b8-4c87-82c1-70a3dd79e48b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -26,7 +26,8 @@
         "title": "Rammeavtale for kjøp av grafisk og designbyrå tjenester",
         "description": "Kulturtanken skal inngå rammeavtale for kjøp av grafiske designtjenester. Behovet vil variere fra år til år, men vi antar at behov knyttet til interaktiv design vil øke. Kulturtanken har blant annet behov for bistand i forbindelse med utforming av brosjyrer og årsrapport. I tillegg har Kommunikasjonsavdelingen behov for grafiske tjenester i forbindelse med ulike prosjekter som konferanser og seminarer. Fullstendig beskrivelse av leveransen følger av «Bilag 1: Overordnet beskrivelse av de ytelser rammeavtalen gjelder for».",
         "designContest": {
-          "followUpContracts": true
+          "followUpContracts": true,
+          "bindingJuryDecision": true
         },
         "awardCriteria": {
           "criteria": [
@@ -141,9 +142,9 @@
         "email": "mhr@kulturtanken.no"
       },
       "roles": [
-        "submissionReceiptBody",
         "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "submissionReceiptBody"
       ],
       "address": {
         "locality": "OSLO"

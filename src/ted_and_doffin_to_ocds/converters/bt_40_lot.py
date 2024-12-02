@@ -7,7 +7,20 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_lot_selection_criteria_second_stage(xml_content):
+def parse_lot_selection_criteria_second_stage(xml_content: str | bytes) -> dict | None:
+    """Parse lot selection criteria for second stage from XML content.
+
+    Extracts information about lots where selection criteria will be used for second stage
+    invitations. Creates OCDS-formatted data with forReduction flag set to True for
+    these lots.
+
+    Args:
+        xml_content: XML string or bytes containing the procurement data
+
+    Returns:
+        dict: OCDS-formatted dictionary containing lot selection criteria data, or
+        None if no relevant data is found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -30,7 +43,7 @@ def parse_lot_selection_criteria_second_stage(xml_content):
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         selection_criteria = lot.xpath(
-            ".//efac:SelectionCriteria[efbc:SecondStageIndicator='true']",
+            ".//cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria[efbc:SecondStageIndicator='true']",
             namespaces=namespaces,
         )
 
@@ -45,9 +58,19 @@ def parse_lot_selection_criteria_second_stage(xml_content):
 
 
 def merge_lot_selection_criteria_second_stage(
-    release_json,
-    lot_selection_criteria_data,
+    release_json: dict,
+    lot_selection_criteria_data: dict | None,
 ) -> None:
+    """Merge lot selection criteria second stage data into the main release.
+
+    Updates the release JSON with lot selection criteria information for second stage,
+    either by updating existing lots or adding new ones.
+
+    Args:
+        release_json: The main release JSON to update
+        lot_selection_criteria_data: Selection criteria data to merge, as returned by
+            parse_lot_selection_criteria_second_stage()
+    """
     if not lot_selection_criteria_data:
         logger.warning("No lot selection criteria second stage data to merge")
         return
