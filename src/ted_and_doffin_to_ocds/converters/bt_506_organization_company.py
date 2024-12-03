@@ -7,7 +7,26 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_organization_email(xml_content):
+def parse_organization_email(xml_content: str | bytes) -> dict | None:
+    """
+    Parse organization email contact information from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing organization email information
+
+    Returns:
+        Optional[Dict]: A dictionary containing parsed email data in OCDS format with
+        'parties' array, or None if no valid email data is found.
+        Example:
+        {
+            "parties": [{
+                "id": "ORG-0001",
+                "contactPoint": {
+                    "email": "press@xyz.europa.eu"
+                }
+            }]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -40,7 +59,24 @@ def parse_organization_email(xml_content):
     return result if result["parties"] else None
 
 
-def merge_organization_email(release_json, organization_email_data) -> None:
+def merge_organization_email(
+    release_json: dict, organization_email_data: dict | None
+) -> None:
+    """
+    Merge organization email data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        organization_email_data (Optional[Dict]): Organization email data to merge,
+            containing a 'parties' array with contact information
+
+    Returns:
+        None: Modifies release_json in place
+
+    Note:
+        If organization_email_data is None or contains no parties, no changes are made.
+        For existing parties, email contact information is updated with new values.
+    """
     if not organization_email_data:
         logger.info("No organization email data to merge")
         return

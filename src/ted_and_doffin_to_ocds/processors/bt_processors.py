@@ -1403,16 +1403,16 @@ from ted_and_doffin_to_ocds.converters.bt_502_organization_company import (
     parse_organization_contact_point,
 )
 from ted_and_doffin_to_ocds.converters.bt_502_organization_touchpoint import (
-    merge_organization_touchpoint_contact_point,
-    parse_organization_touchpoint_contact_point,
+    merge_touchpoint_contact_point,
+    parse_touchpoint_contact_point,
 )
 from ted_and_doffin_to_ocds.converters.bt_503_organization_company import (
     merge_organization_telephone,
     parse_organization_telephone,
 )
 from ted_and_doffin_to_ocds.converters.bt_503_organization_touchpoint import (
-    merge_organization_touchpoint_telephone,
-    parse_organization_touchpoint_telephone,
+    merge_touchpoint_telephone,
+    parse_touchpoint_telephone,
 )
 from ted_and_doffin_to_ocds.converters.bt_503_ubo import (
     merge_ubo_telephone,
@@ -1423,16 +1423,16 @@ from ted_and_doffin_to_ocds.converters.bt_505_organization_company import (
     parse_organization_website,
 )
 from ted_and_doffin_to_ocds.converters.bt_505_organization_touchpoint import (
-    merge_organization_touchpoint_website,
-    parse_organization_touchpoint_website,
+    merge_touchpoint_website,
+    parse_touchpoint_website,
 )
 from ted_and_doffin_to_ocds.converters.bt_506_organization_company import (
     merge_organization_email,
     parse_organization_email,
 )
 from ted_and_doffin_to_ocds.converters.bt_506_organization_touchpoint import (
-    merge_organization_touchpoint_email,
-    parse_organization_touchpoint_email,
+    merge_touchpoint_email,
+    parse_touchpoint_email,
 )
 from ted_and_doffin_to_ocds.converters.bt_506_ubo import (
     merge_ubo_email,
@@ -1443,8 +1443,8 @@ from ted_and_doffin_to_ocds.converters.bt_507_organization_company import (
     parse_organization_country_subdivision,
 )
 from ted_and_doffin_to_ocds.converters.bt_507_organization_touchpoint import (
-    merge_organization_touchpoint_country_subdivision,
-    parse_organization_touchpoint_country_subdivision,
+    merge_touchpoint_country_subdivision,
+    parse_touchpoint_country_subdivision,
 )
 from ted_and_doffin_to_ocds.converters.bt_507_ubo import (
     merge_ubo_country_subdivision,
@@ -4074,8 +4074,8 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             "BT-502-organization-company (organization Contact Point)",
         ),
         (
-            parse_organization_touchpoint_contact_point,
-            merge_organization_touchpoint_contact_point,
+            parse_touchpoint_contact_point,
+            merge_touchpoint_contact_point,
             "Organization TouchPoint Contact Point (BT-502)",
         ),
         (
@@ -4084,8 +4084,8 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             "Organization Contact Telephone Number (BT-503)",
         ),
         (
-            parse_organization_touchpoint_telephone,
-            merge_organization_touchpoint_telephone,
+            parse_touchpoint_telephone,
+            merge_touchpoint_telephone,
             "Organization TouchPoint Contact Telephone Number (BT-503)",
         ),
         (parse_ubo_telephone, merge_ubo_telephone, "BT-503-ubo (ubo Telephone)"),
@@ -4095,8 +4095,8 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             "BT-505-organization-company (organization Website)",
         ),
         (
-            parse_organization_touchpoint_website,
-            merge_organization_touchpoint_website,
+            parse_touchpoint_website,
+            merge_touchpoint_website,
             "Organization TouchPoint Internet Address (BT-505)",
         ),
         (
@@ -4105,8 +4105,8 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             "Organization Contact Email Address (BT-506)",
         ),
         (
-            parse_organization_touchpoint_email,
-            merge_organization_touchpoint_email,
+            parse_touchpoint_email,
+            merge_touchpoint_email,
             "Organization TouchPoint Contact Email Address (BT-506)",
         ),
         (parse_ubo_email, merge_ubo_email, "BT-506-ubo (ubo Email)"),
@@ -4116,8 +4116,8 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             "BT-507-organization-company (organization Country Subdivision)",
         ),
         (
-            parse_organization_touchpoint_country_subdivision,
-            merge_organization_touchpoint_country_subdivision,
+            parse_touchpoint_country_subdivision,
+            merge_touchpoint_country_subdivision,
             "Organization TouchPoint Country Subdivision (BT-507)",
         ),
         (

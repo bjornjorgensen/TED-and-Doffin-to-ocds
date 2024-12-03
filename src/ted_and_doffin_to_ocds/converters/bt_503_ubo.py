@@ -7,7 +7,27 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_ubo_telephone(xml_content):
+def parse_ubo_telephone(xml_content: str | bytes) -> dict | None:
+    """
+    Parse UBO (Ultimate Beneficial Owner) telephone information from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing UBO telephone information
+
+    Returns:
+        Optional[Dict]: A dictionary containing parsed UBO telephone data in OCDS format with
+        'parties' array, or None if no valid UBO data is found.
+        Example:
+        {
+            "parties": [{
+                "id": "ORG-0001",
+                "beneficialOwners": [{
+                    "id": "UBO-0001",
+                    "telephone": "+123 456789"
+                }]
+            }]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -52,7 +72,22 @@ def parse_ubo_telephone(xml_content):
     return result if result["parties"] else None
 
 
-def merge_ubo_telephone(release_json, ubo_telephone_data) -> None:
+def merge_ubo_telephone(release_json: dict, ubo_telephone_data: dict | None) -> None:
+    """
+    Merge UBO telephone data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        ubo_telephone_data (Optional[Dict]): UBO telephone data to merge,
+            containing a 'parties' array with beneficial owner information
+
+    Returns:
+        None: Modifies release_json in place
+
+    Note:
+        If ubo_telephone_data is None or contains no parties, no changes are made.
+        For existing parties, beneficial owner telephone information is updated or added.
+    """
     if not ubo_telephone_data:
         logger.info("No UBO telephone data to merge")
         return

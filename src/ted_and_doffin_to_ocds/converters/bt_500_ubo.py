@@ -7,7 +7,30 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_ubo_name(xml_content):
+def parse_ubo_name(xml_content: str | bytes) -> dict | None:
+    """
+    Parse the beneficial owner names from XML data.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing organization information
+
+    Returns:
+        Optional[Dict]: Dictionary containing party information, or None if no data found
+        The structure follows the format:
+        {
+            "parties": [
+                {
+                    "id": str,
+                    "beneficialOwners": [
+                        {
+                            "id": str,
+                            "name": str
+                        }
+                    ]
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -52,7 +75,19 @@ def parse_ubo_name(xml_content):
     return result if result["parties"] else None
 
 
-def merge_ubo_name(release_json, ubo_name_data) -> None:
+def merge_ubo_name(release_json: dict, ubo_name_data: dict | None) -> None:
+    """
+    Merge beneficial owner name data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        ubo_name_data (Optional[Dict]): The source data containing parties
+            to be merged. If None, function returns without making changes.
+
+    Note:
+        The function modifies release_json in-place by adding or updating the
+        parties.beneficialOwners field for matching parties.
+    """
     if not ubo_name_data:
         logger.info("No UBO name data to merge")
         return

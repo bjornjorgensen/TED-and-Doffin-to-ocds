@@ -1,7 +1,7 @@
 {
   "id": "2022-394467",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-99d2c00e-8e06-4bc0-9666-a4a49d0eda1e",
+  "ocid": "ocds-abcd1234-83f8602b-d7d7-4b1c-83c2-b8bb9aa6d548",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -122,8 +122,8 @@
         "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/2095"
       },
       "roles": [
-        "processContactPoint",
         "submissionReceiptBody",
+        "processContactPoint",
         "buyer"
       ],
       "address": {

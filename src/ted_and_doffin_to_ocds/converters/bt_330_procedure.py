@@ -7,7 +7,26 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_group_identifier(xml_content):
+def parse_group_identifier(xml_content: str | bytes) -> dict | None:
+    """
+    Parse lot group identifiers from XML data.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing group information
+
+    Returns:
+        Optional[Dict]: Dictionary containing tender lot group information, or None if no data found
+        The structure follows the format:
+        {
+            "tender": {
+                "lotGroups": [
+                    {
+                        "id": str
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -21,7 +40,7 @@ def parse_group_identifier(xml_content):
     }
 
     group_ids = root.xpath(
-        "//cac:LotDistribution/cac:LotsGroup/cbc:LotsGroupID/text()",
+        "/*/cac:TenderingTerms/cac:LotDistribution/cac:LotsGroup/cbc:LotsGroupID[@schemeName='LotsGroup']/text()",
         namespaces=namespaces,
     )
 
@@ -31,23 +50,30 @@ def parse_group_identifier(xml_content):
     return None
 
 
-def merge_group_identifier(release_json, group_identifier_data) -> None:
+def merge_group_identifier(
+    release_json: dict, group_identifier_data: dict | None
+) -> None:
+    """
+    Merge group identifier data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        group_identifier_data (Optional[Dict]): The source data containing lot groups
+            to be merged. If None, function returns without making changes.
+
+    Note:
+        The function modifies release_json in-place by adding new lot groups
+        only if they don't already exist.
+    """
     if not group_identifier_data:
         return
 
-    existing_lot_groups = release_json.setdefault("tender", {}).setdefault(
-        "lotGroups",
-        [],
-    )
+    existing_groups = release_json.setdefault("tender", {}).setdefault("lotGroups", [])
+    existing_group_ids = {group["id"] for group in existing_groups}
 
-    for new_group in group_identifier_data["tender"]["lotGroups"]:
-        if not any(
-            existing_group["id"] == new_group["id"]
-            for existing_group in existing_lot_groups
-        ):
-            existing_lot_groups.append(new_group)
-
-    logger.info(
-        "Merged %s Group Identifier(s)",
-        len(group_identifier_data["tender"]["lotGroups"]),
-    )
+    new_groups = [
+        group
+        for group in group_identifier_data["tender"]["lotGroups"]
+        if group["id"] not in existing_group_ids
+    ]
+    existing_groups.extend(new_groups)

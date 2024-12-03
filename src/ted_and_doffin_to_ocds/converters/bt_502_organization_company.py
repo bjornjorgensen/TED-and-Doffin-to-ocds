@@ -7,7 +7,26 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_organization_contact_point(xml_content):
+def parse_organization_contact_point(xml_content: str | bytes) -> dict | None:
+    """
+    Parse organization contact point information from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing organization contact information
+
+    Returns:
+        Optional[Dict]: A dictionary containing parsed contact point data in OCDS format with
+        'parties' array, or None if no valid contact point data is found.
+        Example:
+        {
+            "parties": [{
+                "id": "ORG-0001",
+                "contactPoint": {
+                    "name": "Press Department"
+                }
+            }]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -41,8 +60,23 @@ def parse_organization_contact_point(xml_content):
 
 
 def merge_organization_contact_point(
-    release_json, organization_contact_point_data
+    release_json: dict, organization_contact_point_data: dict | None
 ) -> None:
+    """
+    Merge organization contact point data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        organization_contact_point_data (Optional[Dict]): Organization contact point data to merge,
+            containing a 'parties' array with contact information
+
+    Returns:
+        None: Modifies release_json in place
+
+    Note:
+        If organization_contact_point_data is None or contains no parties, no changes are made.
+        For existing parties, contact point information is updated with new values.
+    """
     if not organization_contact_point_data:
         logger.info("No organization contact point data to merge")
         return

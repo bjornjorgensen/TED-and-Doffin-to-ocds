@@ -7,7 +7,30 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_organization_touchpoint_telephone(xml_content):
+def parse_touchpoint_telephone(xml_content: str | bytes) -> dict | None:
+    """
+    Parse touchpoint telephone contact information from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing touchpoint telephone information
+
+    Returns:
+        Optional[Dict]: A dictionary containing parsed telephone data in OCDS format with
+        'parties' array, or None if no valid touchpoint data is found.
+        Example:
+        {
+            "parties": [{
+                "id": "TPO-0001",
+                "contactPoint": {
+                    "telephone": "+123 45678"
+                },
+                "identifier": {
+                    "id": "998298",
+                    "scheme": "internal"
+                }
+            }]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -52,16 +75,31 @@ def parse_organization_touchpoint_telephone(xml_content):
     return result if result["parties"] else None
 
 
-def merge_organization_touchpoint_telephone(
-    release_json, organization_touchpoint_telephone_data
+def merge_touchpoint_telephone(
+    release_json: dict, touchpoint_telephone_data: dict | None
 ) -> None:
-    if not organization_touchpoint_telephone_data:
-        logger.info("No organization touchpoint telephone data to merge")
+    """
+    Merge touchpoint telephone data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        touchpoint_telephone_data (Optional[Dict]): Touchpoint telephone data to merge,
+            containing a 'parties' array with contact and identifier information
+
+    Returns:
+        None: Modifies release_json in place
+
+    Note:
+        If touchpoint_telephone_data is None or contains no parties, no changes are made.
+        For existing parties, both telephone contact and identifier information is updated.
+    """
+    if not touchpoint_telephone_data:
+        logger.info("No touchpoint telephone data to merge")
         return
 
     existing_parties = release_json.setdefault("parties", [])
 
-    for new_party in organization_touchpoint_telephone_data["parties"]:
+    for new_party in touchpoint_telephone_data["parties"]:
         existing_party = next(
             (party for party in existing_parties if party["id"] == new_party["id"]),
             None,
@@ -76,6 +114,6 @@ def merge_organization_touchpoint_telephone(
             existing_parties.append(new_party)
 
     logger.info(
-        "Merged organization touchpoint telephone data for %d parties",
-        len(organization_touchpoint_telephone_data["parties"]),
+        "Merged touchpoint telephone data for %d parties",
+        len(touchpoint_telephone_data["parties"]),
     )

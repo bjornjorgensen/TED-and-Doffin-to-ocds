@@ -7,7 +7,30 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_organization_touchpoint_contact_point(xml_content):
+def parse_touchpoint_contact_point(xml_content: str | bytes) -> dict | None:
+    """
+    Parse touchpoint contact point information from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing touchpoint contact information
+
+    Returns:
+        Optional[Dict]: A dictionary containing parsed contact point data in OCDS format with
+        'parties' array, or None if no valid touchpoint data is found.
+        Example:
+        {
+            "parties": [{
+                "id": "TPO-0001",
+                "contactPoint": {
+                    "name": "Head of Legal Department"
+                },
+                "identifier": {
+                    "id": "998298",
+                    "scheme": "internal"
+                }
+            }]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -52,16 +75,31 @@ def parse_organization_touchpoint_contact_point(xml_content):
     return result if result["parties"] else None
 
 
-def merge_organization_touchpoint_contact_point(
-    release_json, organization_touchpoint_contact_point_data
+def merge_touchpoint_contact_point(
+    release_json: dict, touchpoint_contact_point_data: dict | None
 ) -> None:
-    if not organization_touchpoint_contact_point_data:
-        logger.info("No organization touchpoint contact point data to merge")
+    """
+    Merge touchpoint contact point data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        touchpoint_contact_point_data (Optional[Dict]): Touchpoint contact point data to merge,
+            containing a 'parties' array with contact and identifier information
+
+    Returns:
+        None: Modifies release_json in place
+
+    Note:
+        If touchpoint_contact_point_data is None or contains no parties, no changes are made.
+        For existing parties, both contact point and identifier information is updated.
+    """
+    if not touchpoint_contact_point_data:
+        logger.info("No touchpoint contact point data to merge")
         return
 
     existing_parties = release_json.setdefault("parties", [])
 
-    for new_party in organization_touchpoint_contact_point_data["parties"]:
+    for new_party in touchpoint_contact_point_data["parties"]:
         existing_party = next(
             (party for party in existing_parties if party["id"] == new_party["id"]),
             None,
@@ -76,6 +114,6 @@ def merge_organization_touchpoint_contact_point(
             existing_parties.append(new_party)
 
     logger.info(
-        "Merged organization touchpoint contact point data for %d parties",
-        len(organization_touchpoint_contact_point_data["parties"]),
+        "Merged touchpoint contact point data for %d parties",
+        len(touchpoint_contact_point_data["parties"]),
     )

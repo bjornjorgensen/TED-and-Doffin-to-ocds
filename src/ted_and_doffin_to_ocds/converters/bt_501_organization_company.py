@@ -7,7 +7,27 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_organization_identifier(xml_content):
+def parse_organization_identifier(xml_content: str | bytes) -> dict | None:
+    """
+    Parse organization identifier information from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing organization information
+
+    Returns:
+        Optional[Dict]: A dictionary containing parsed organization data in OCDS format with
+        'parties' array, or None if no valid organization data is found.
+        Example:
+        {
+            "parties": [{
+                "id": "ORG-0001",
+                "additionalIdentifiers": [{
+                    "id": "09506232",
+                    "scheme": "GB-COH"
+                }]
+            }]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -49,7 +69,24 @@ def parse_organization_identifier(xml_content):
     return result if result["parties"] else None
 
 
-def merge_organization_identifier(release_json, organization_identifier_data) -> None:
+def merge_organization_identifier(
+    release_json: dict, organization_identifier_data: dict | None
+) -> None:
+    """
+    Merge organization identifier data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        organization_identifier_data (Optional[Dict]): Organization identifier data to merge,
+            containing a 'parties' array with organization information
+
+    Returns:
+        None: Modifies release_json in place
+
+    Note:
+        If organization_identifier_data is None or contains no parties, no changes are made.
+        For existing parties, new identifiers are appended to additionalIdentifiers if not present.
+    """
     if not organization_identifier_data:
         logger.info("No organization identifier data to merge")
         return

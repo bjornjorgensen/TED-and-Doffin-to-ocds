@@ -7,7 +7,28 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_organization_country_subdivision(xml_content):
+def parse_organization_country_subdivision(
+    xml_content: str | bytes,
+) -> dict | None:
+    """
+    Parse organization country subdivision information from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing organization country subdivision info
+
+    Returns:
+        Optional[Dict]: A dictionary containing parsed region data in OCDS format with
+        'parties' array, or None if no valid subdivision data is found.
+        Example:
+        {
+            "parties": [{
+                "id": "ORG-0001",
+                "address": {
+                    "region": "XY374"
+                }
+            }]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -42,8 +63,23 @@ def parse_organization_country_subdivision(xml_content):
 
 
 def merge_organization_country_subdivision(
-    release_json, organization_country_subdivision_data
+    release_json: dict, organization_country_subdivision_data: dict | None
 ) -> None:
+    """
+    Merge organization country subdivision data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        organization_country_subdivision_data (Optional[Dict]): Organization region data to merge,
+            containing a 'parties' array with address information
+
+    Returns:
+        None: Modifies release_json in place
+
+    Note:
+        If organization_country_subdivision_data is None or contains no parties, no changes are made.
+        For existing parties, region information is updated in the address section.
+    """
     if not organization_country_subdivision_data:
         logger.info("No organization country subdivision data to merge")
         return

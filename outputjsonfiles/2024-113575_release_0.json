@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c388fd86-fb97-4e9d-bf61-88817a53faf8",
+  "ocid": "ocds-abcd1234-9472b5b3-294f-43ff-9ff3-b4a25a3ad89e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -189,9 +189,9 @@
         "locality": "Bodø"
       },
       "roles": [
-        "payer",
         "funder",
-        "buyer"
+        "buyer",
+        "payer"
       ]
     },
     {
@@ -238,6 +238,7 @@
         "telephone": "67 58 97 70",
         "email": "info.no@sectra.com"
       },
+      "eDeliveryGateway": "https://medical.sectra.com/about-sectra/contact/contact-sectra-norway/",
       "address": {
         "locality": "Lysaker"
       },
