@@ -1,7 +1,7 @@
 {
   "id": "2022-967371",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4580e9f8-9fde-4b60-8a36-7c5a58031511",
+  "ocid": "ocds-abcd1234-cba2dd02-d036-4c71-b29a-a557329bc3f8",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -173,8 +173,8 @@
         "locality": "BERGEN"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

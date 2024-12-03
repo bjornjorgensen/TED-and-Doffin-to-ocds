@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 VARIANT_POLICY_MAPPING = {
     "required": "Required",
     "allowed": "Allowed",
-    "notAllowed": "Not allowed",
+    "not-allowed": "Not allowed",
 }
 
 

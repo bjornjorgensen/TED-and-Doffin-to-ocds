@@ -1,7 +1,7 @@
 {
   "id": "7b469b6b-4abb-4f22-abe1-50973de8c825",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1a1679be-e196-420b-9f8a-615bcb16b2d7",
+  "ocid": "ocds-abcd1234-784e8365-3a4f-4641-a19a-595ecd1a68a4",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -129,8 +129,8 @@
         "email": "per.brustad@posten.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Oslo"

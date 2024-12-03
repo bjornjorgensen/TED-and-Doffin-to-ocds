@@ -1,7 +1,7 @@
 {
   "id": "2022-396301",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b0a38754-84ee-4e22-a0f8-799e941f4fdf",
+  "ocid": "ocds-abcd1234-788f67b9-5fec-4906-b6a4-36bdaae7b2ec",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -130,8 +130,8 @@
         "locality": "MOEN"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {
