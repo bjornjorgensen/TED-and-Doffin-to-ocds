@@ -1,5 +1,3 @@
-# converters/bt_134_Lot.py
-
 import logging
 
 from lxml import etree
@@ -7,7 +5,31 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_lot_public_opening_description(xml_content):
+def parse_lot_public_opening_description(
+    xml_content: str | bytes,
+) -> dict | None:
+    """
+    Parse the public opening description from lot-level XML data.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing lot information
+
+    Returns:
+        Optional[Dict]: Dictionary containing tender lot information, or None if no data found
+        The structure follows the format:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "bidOpening": {
+                            "description": str
+                        }
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -20,31 +42,45 @@ def parse_lot_public_opening_description(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    lots = []
+    result = {"tender": {"lots": []}}
 
-    procurement_project_lots = root.xpath(
+    lots = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
         namespaces=namespaces,
     )
 
-    for lot in procurement_project_lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+    for lot in lots:
+        lot_id = lot.xpath("cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)[0]
         description = lot.xpath(
             "cac:TenderingProcess/cac:OpenTenderEvent/cbc:Description/text()",
             namespaces=namespaces,
         )
 
         if description:
-            lots.append({"id": lot_id, "bidOpening": {"description": description[0]}})
+            lot_data = {
+                "id": lot_id,
+                "bidOpening": {"description": description[0]},
+            }
+            result["tender"]["lots"].append(lot_data)
 
-    logger.debug("Parsed lot public opening description data: %s", lots)
-    return {"tender": {"lots": lots}} if lots else None
+    return result if result["tender"]["lots"] else None
 
 
 def merge_lot_public_opening_description(
-    release_json,
-    lot_public_opening_description_data,
+    release_json: dict, lot_public_opening_description_data: dict | None
 ) -> None:
+    """
+    Merge public opening description data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        lot_public_opening_description_data (Optional[Dict]): The source data containing tender lots
+            to be merged. If None, function returns without making changes.
+
+    Note:
+        The function modifies release_json in-place by adding or updating the
+        tender.lots.bidOpening.description field for matching lots.
+    """
     if not lot_public_opening_description_data:
         logger.warning("No Lot Public Opening Description data to merge")
         return
@@ -61,10 +97,6 @@ def merge_lot_public_opening_description(
         else:
             existing_lots.append(new_lot)
 
-    logger.debug(
-        "Release JSON after merging lot public opening description data: %s",
-        release_json,
-    )
     logger.info(
         "Merged Lot Public Opening Description data for %d lots",
         len(lot_public_opening_description_data["tender"]["lots"]),

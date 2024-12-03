@@ -1,7 +1,7 @@
 {
   "id": "0e2b63aa-a91a-49c6-aa1c-386516ec2275",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-25df1a48-a50e-4324-b351-ec161851cc58",
+  "ocid": "ocds-abcd1234-9de1f5f2-742c-4224-a405-975b40f6dfe0",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -12,8 +12,9 @@
       "GPA"
     ],
     "communication": {
-      "futurenoticeDate": "2024-02-29T00:00:00+01:00"
+      "futureNoticeDate": "2024-02-29T00:00:00+01:00"
     },
+    "id": "PAR-0000",
     "title": "Invitasjon til markedsdialog - Treningsutstyr til fysio- og ergoterapi Helse Midt-Norge",
     "identifiers": [
       {

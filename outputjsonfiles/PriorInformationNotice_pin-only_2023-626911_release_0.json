@@ -1,7 +1,7 @@
 {
   "id": "2023-626911",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-57f6c96f-57ac-4d31-87b4-f89a37e3b19f",
+  "ocid": "ocds-abcd1234-98541c23-2f56-4de1-b01c-57441f7ee27f",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -11,6 +11,7 @@
     "coveredBy": [
       "GPA"
     ],
+    "id": "PAR-0000",
     "title": "Markedsdialog - Anskaffelse av vognskjul mm. Skjetlein VGS",
     "identifiers": [
       {

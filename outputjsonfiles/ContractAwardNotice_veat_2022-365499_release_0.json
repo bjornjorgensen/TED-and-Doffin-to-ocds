@@ -1,7 +1,7 @@
 {
   "id": "2022-365499",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-5407f6c8-252d-4582-bfcb-ac6cd3c97bfb",
+  "ocid": "ocds-abcd1234-12117636-ed24-480f-85cb-dd65604c171b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -115,6 +115,9 @@
     {
       "id": "ORG-0002",
       "name": "Xtend Technology AS",
+      "details": {
+        "scale": "sme"
+      },
       "address": {
         "locality": "Stavanger"
       },
@@ -152,6 +155,23 @@
       }
     ]
   },
+  "awards": [
+    {
+      "id": "RES-0001",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 319128.0,
+        "currency": "NOK"
+      },
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
   "contracts": [
     {
       "id": "CON-0001",
@@ -160,21 +180,6 @@
     }
   ],
   "description": "Mercell kunngjøring: https://opic.com/id/afyktjubsb",
-  "awards": [
-    {
-      "id": "RES-0001",
-      "value": {
-        "amount": 319128.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
-      ],
-      "relatedBids": [
-        "TEN-0001"
-      ]
-    }
-  ],
   "buyer": [
     {
       "id": "ORG-0001"

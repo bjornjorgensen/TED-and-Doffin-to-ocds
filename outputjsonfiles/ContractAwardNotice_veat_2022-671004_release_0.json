@@ -1,7 +1,7 @@
 {
   "id": "2022-671004",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0fe22e86-f0cd-4bb4-98b5-2621f6683364",
+  "ocid": "ocds-abcd1234-c6ffb9f6-6894-426a-b56d-e7c8aa7719f2",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -141,6 +141,23 @@
       }
     ]
   },
+  "awards": [
+    {
+      "id": "RES-0001",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 331117.0,
+        "currency": "USD"
+      },
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
   "contracts": [
     {
       "id": "CON-0001",
@@ -148,22 +165,7 @@
       "awardID": "RES-0001"
     }
   ],
-  "description": "Mercell kunngjøring: https://opic.com/id/afmhdeyyxz Bibliotek24 vil kontinuerlig invitere leverandører av digitale innholdstjenester til, bruk i folkebibliotek og videregående skoler, forhandle og videreformidle disse tilbudene til sektoren gjennom tilknytningsperioder 1-2 ganger i året.",
-  "awards": [
-    {
-      "id": "RES-0001",
-      "value": {
-        "amount": 331117.0,
-        "currency": "USD"
-      },
-      "relatedLots": [
-        "LOT-0000"
-      ],
-      "relatedBids": [
-        "TEN-0001"
-      ]
-    }
-  ],
+  "description": "Mercell kunngjøring: https://opic.com/id/afmhdeyyxz",
   "buyer": [
     {
       "id": "ORG-0001"

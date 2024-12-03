@@ -7,7 +7,26 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_lots_group_identifier(xml_content):
+def parse_lots_group_identifier(xml_content: str | bytes) -> dict | None:
+    """
+    Parse the lot group identifiers from XML data.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing lot group information
+
+    Returns:
+        Optional[Dict]: Dictionary containing tender lot group information, or None if no data found
+        The structure follows the format:
+        {
+            "tender": {
+                "lotGroups": [
+                    {
+                        "id": str
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -20,36 +39,42 @@ def parse_lots_group_identifier(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    xpath = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cbc:ID"
-    lots_group_ids = root.xpath(xpath, namespaces=namespaces)
+    group_ids = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cbc:ID/text()",
+        namespaces=namespaces,
+    )
 
-    if lots_group_ids:
-        return {
-            "tender": {
-                "lotGroups": [
-                    {"id": lots_group_id.text} for lots_group_id in lots_group_ids
-                ],
-            },
-        }
-    logger.info("No lots group identifiers found")
+    if group_ids:
+        return {"tender": {"lotGroups": [{"id": group_id} for group_id in group_ids]}}
+
     return None
 
 
-def merge_lots_group_identifier(release_json, lots_group_data) -> None:
+def merge_lots_group_identifier(
+    release_json: dict, lots_group_data: dict | None
+) -> None:
+    """
+    Merge lot group identifier data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        lots_group_data (Optional[Dict]): The source data containing tender lot groups
+            to be merged. If None, function returns without making changes.
+
+    Note:
+        The function modifies release_json in-place by adding new lot groups to
+        tender.lotGroups only if they don't already exist.
+    """
     if not lots_group_data:
-        logger.warning("No lots group identifier data to merge")
         return
 
-    tender = release_json.setdefault("tender", {})
-    existing_lot_groups = tender.setdefault("lotGroups", [])
+    existing_groups = release_json.setdefault("tender", {}).setdefault("lotGroups", [])
+    existing_group_ids = {group["id"] for group in existing_groups}
 
-    for new_lot_group in lots_group_data["tender"]["lotGroups"]:
-        if not any(
-            lot_group["id"] == new_lot_group["id"] for lot_group in existing_lot_groups
-        ):
-            existing_lot_groups.append(new_lot_group)
-            logger.info("Added new lot group with id: %s", new_lot_group["id"])
-        else:
-            logger.info(
-                "Lot group with id: %s already exists, skipping", new_lot_group["id"]
-            )
+    # Only add groups that don't already exist
+    new_groups = [
+        group
+        for group in lots_group_data["tender"]["lotGroups"]
+        if group["id"] not in existing_group_ids
+    ]
+    existing_groups.extend(new_groups)

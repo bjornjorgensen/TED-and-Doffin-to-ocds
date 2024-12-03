@@ -1,7 +1,7 @@
 {
   "id": "8791620e-39a1-435d-985a-bee33825e3f4",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-54462d25-feb5-48b9-b567-67e1b7603025",
+  "ocid": "ocds-abcd1234-7a192906-fe02-4f33-b7c7-72a25d671809",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -241,6 +241,18 @@
       }
     ]
   },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "identifiers": [
+        {
+          "id": "Framework Agreement - 4600004102 Night Vision Systems",
+          "scheme": "NL-TENDERNED"
+        }
+      ],
+      "awardID": "RES-0001"
+    }
+  ],
   "parties": [
     {
       "id": "ORG-0001",
@@ -332,12 +344,6 @@
         "TEN-0012",
         "TEN-0013"
       ]
-    }
-  ],
-  "contracts": [
-    {
-      "id": "CON-0001",
-      "awardID": "RES-0001"
     }
   ],
   "buyer": [

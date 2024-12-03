@@ -7,7 +7,28 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_tender_variant(xml_content):
+def parse_tender_variant(xml_content: str | bytes) -> dict | None:
+    """
+    Parse tender variant information from XML data.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing tender information
+
+    Returns:
+        Optional[Dict]: Dictionary containing bid information, or None if no data found
+        The structure follows the format:
+        {
+            "bids": {
+                "details": [
+                    {
+                        "id": str,
+                        "variant": bool,
+                        "relatedLots": [str]
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -23,7 +44,7 @@ def parse_tender_variant(xml_content):
     result = {"bids": {"details": []}}
 
     lot_tenders = root.xpath(
-        "//efac:noticeResult/efac:LotTender",
+        "//efac:NoticeResult/efac:LotTender",
         namespaces=namespaces,
     )
 
@@ -31,36 +52,43 @@ def parse_tender_variant(xml_content):
         tender_id = lot_tender.xpath(
             "cbc:ID[@schemeName='tender']/text()",
             namespaces=namespaces,
-        )[0]
-        variant_indicator = lot_tender.xpath(
+        )
+        variant = lot_tender.xpath(
             "efbc:TenderVariantIndicator/text()",
             namespaces=namespaces,
         )
         lot_id = lot_tender.xpath(
             "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
             namespaces=namespaces,
-        )[0]
+        )
 
-        bid = {"id": tender_id, "relatedLots": [lot_id]}
+        if tender_id and lot_id:
+            bid_data = {"id": tender_id[0], "relatedLots": [lot_id[0]]}
 
-        if variant_indicator:
-            bid["variant"] = variant_indicator[0].lower() == "true"
+            if variant:
+                bid_data["variant"] = variant[0].lower() == "true"
 
-        result["bids"]["details"].append(bid)
+            result["bids"]["details"].append(bid_data)
 
     return result if result["bids"]["details"] else None
 
 
-def merge_tender_variant(release_json, tender_variant_data) -> None:
+def merge_tender_variant(release_json: dict, tender_variant_data: dict | None) -> None:
+    """
+    Merge tender variant data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        tender_variant_data (Optional[Dict]): The source data containing bids
+            to be merged. If None, function returns without making changes.
+    """
     if not tender_variant_data:
-        logger.warning("No Tender Variant data to merge")
         return
 
     existing_bids = release_json.setdefault("bids", {}).setdefault("details", [])
-
     for new_bid in tender_variant_data["bids"]["details"]:
         existing_bid = next(
-            (bid for bid in existing_bids if bid["id"] == new_bid["id"]),
+            (b for b in existing_bids if b["id"] == new_bid["id"]),
             None,
         )
         if existing_bid:

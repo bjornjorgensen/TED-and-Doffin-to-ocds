@@ -1,7 +1,7 @@
 {
   "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8d936bc9-e1e0-4c29-9d47-b2921574fc23",
+  "ocid": "ocds-abcd1234-607b34bc-5d35-428c-af41-2f2b55b136b4",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -148,9 +148,9 @@
       },
       "roles": [
         "payer",
-        "buyer",
         "funder",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {
@@ -228,6 +228,7 @@
         "relatedLots": [
           "LOT-0000"
         ],
+        "variant": false,
         "tenderers": [
           {
             "id": "ORG-0004"
@@ -248,6 +249,12 @@
   },
   "awards": [
     {
+      "id": "RES-0001",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
       "relatedBids": [
         "TEN-0001"
       ]

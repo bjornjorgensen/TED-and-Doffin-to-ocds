@@ -1,7 +1,7 @@
 {
   "id": "2023-607152",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0567d2a2-ff78-4656-bf34-98c3e4df705e",
+  "ocid": "ocds-abcd1234-94280443-2fd5-48be-867d-e07aa4701e7c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -12,7 +12,7 @@
       {
         "id": "LOT-0000",
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -132,8 +132,8 @@
         ]
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "TRONDHEIM"

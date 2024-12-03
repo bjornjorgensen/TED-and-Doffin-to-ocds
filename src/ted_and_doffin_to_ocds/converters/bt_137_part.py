@@ -7,7 +7,22 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_part_identifier(xml_content):
+def parse_part_identifier(xml_content: str | bytes) -> dict | None:
+    """
+    Parse the part identifier from XML data.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing part information
+
+    Returns:
+        Optional[Dict]: Dictionary containing tender information, or None if no data found
+        The structure follows the format:
+        {
+            "tender": {
+                "id": str  # Part identifier
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -20,27 +35,33 @@ def parse_part_identifier(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    xpath = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cbc:ID"
-    part_ids = root.xpath(xpath, namespaces=namespaces)
+    part_ids = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cbc:ID/text()",
+        namespaces=namespaces,
+    )
 
     if part_ids:
-        # We take the first 'part' ID found, as tender.id should be a single value
-        return {"tender": {"id": part_ids[0].text}}
-    logger.info("No part identifier found")
+        # Take the first part ID found as tender.id should be a single value
+        return {"tender": {"id": part_ids[0]}}
+
     return None
 
 
-def merge_part_identifier(release_json, part_data) -> None:
+def merge_part_identifier(release_json: dict, part_data: dict | None) -> None:
+    """
+    Merge part identifier data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        part_data (Optional[Dict]): The source data containing tender part ID
+            to be merged. If None, function returns without making changes.
+
+    Note:
+        The function modifies release_json in-place by setting the
+        tender.id field.
+    """
     if not part_data:
-        logger.warning("No part identifier data to merge")
         return
 
     tender = release_json.setdefault("tender", {})
-    if "id" in tender:
-        logger.warning(
-            "Tender ID already exists. Overwriting with new value: %s",
-            part_data["tender"]["id"],
-        )
-
     tender["id"] = part_data["tender"]["id"]
-    logger.info("Set tender.id to: %s", tender["id"])

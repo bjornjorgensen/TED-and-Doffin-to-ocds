@@ -1,7 +1,7 @@
 {
   "id": "1db209a3-6934-4d5f-bf78-2aa8a1f2453c",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-02775533-c155-4d0b-bc79-acf1d00d0bd5",
+  "ocid": "ocds-abcd1234-e9e3d2bd-2089-4d54-ad7a-7e40f6430ca9",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -24,7 +24,7 @@
       }
     ],
     "communication": {
-      "futurenoticeDate": "2023-12-01T00:00:00+01:00"
+      "futureNoticeDate": "2023-12-01T00:00:00+01:00"
     },
     "documents": [
       {

@@ -1,7 +1,7 @@
 {
   "id": "26cd2bbe-3527-43ab-ae19-ecb644fff706",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-eefe2330-275b-44ab-a98d-e3b080efadf0",
+  "ocid": "ocds-abcd1234-2e68272f-742f-44bc-9993-ecfe50c055c1",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -12,8 +12,9 @@
       "GPA"
     ],
     "communication": {
-      "futurenoticeDate": "2024-04-01T00:00:00+02:00"
+      "futureNoticeDate": "2024-04-01T00:00:00+02:00"
     },
+    "id": "PAR-0000",
     "title": "VOIS - Invitasjon til markedsdialog - Diverse forbruksvarer",
     "identifiers": [
       {

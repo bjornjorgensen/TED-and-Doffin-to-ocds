@@ -7,7 +7,32 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_contract_url(xml_content):
+def parse_contract_url(xml_content: str | bytes) -> dict | None:
+    """
+    Parse contract URLs from XML data.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing contract information
+
+    Returns:
+        Optional[Dict]: Dictionary containing contract information, or None if no data found
+        The structure follows the format:
+        {
+            "contracts": [
+                {
+                    "id": str,
+                    "documents": [
+                        {
+                            "id": str,
+                            "url": str,
+                            "documentType": "contractSigned"
+                        }
+                    ],
+                    "awardID": str  # Optional, included if award mapping exists
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -21,68 +46,86 @@ def parse_contract_url(xml_content):
     }
 
     result = {"contracts": []}
-    document_id_counter = 1
+    document_id = 1
 
-    settled_contracts = root.xpath(
-        "//efac:noticeResult/efac:SettledContract",
+    # First map contracts to awards
+    contract_awards = {}
+    lot_results = root.xpath(
+        "//efac:NoticeResult/efac:LotResult",
+        namespaces=namespaces,
+    )
+    for lot_result in lot_results:
+        award_id = lot_result.xpath(
+            "cbc:ID[@schemeName='result']/text()",
+            namespaces=namespaces,
+        )
+        contract_id = lot_result.xpath(
+            "efac:SettledContract/cbc:ID[@schemeName='contract']/text()",
+            namespaces=namespaces,
+        )
+        if award_id and contract_id:
+            contract_awards[contract_id[0]] = award_id[0]
+
+    # Process contracts
+    contracts = root.xpath(
+        "//efac:NoticeResult/efac:SettledContract",
         namespaces=namespaces,
     )
 
-    for contract in settled_contracts:
+    for contract in contracts:
         contract_id = contract.xpath(
             "cbc:ID[@schemeName='contract']/text()",
             namespaces=namespaces,
         )
-        contract_url = contract.xpath("cbc:URI/text()", namespaces=namespaces)
+        contract_url = contract.xpath(
+            "cbc:URI/text()",
+            namespaces=namespaces,
+        )
 
         if contract_id and contract_url:
             contract_data = {
                 "id": contract_id[0],
                 "documents": [
                     {
-                        "id": str(document_id_counter),
+                        "id": str(document_id),
                         "url": contract_url[0],
                         "documentType": "contractSigned",
-                    },
+                    }
                 ],
             }
-            document_id_counter += 1
 
-            # Find the corresponding LotResult to get the awardID
-            lot_result = root.xpath(
-                f"//efac:noticeResult/efac:LotResult[efac:SettledContract/cbc:ID[@schemeName='contract'] = '{contract_id[0]}']",
-                namespaces=namespaces,
-            )
-            if lot_result:
-                award_id = lot_result[0].xpath(
-                    "cbc:ID[@schemeName='result']/text()",
-                    namespaces=namespaces,
-                )
-                if award_id:
-                    contract_data["awardID"] = award_id[0]
+            # Add award ID if mapping exists
+            if contract_id[0] in contract_awards:
+                contract_data["awardID"] = contract_awards[contract_id[0]]
 
             result["contracts"].append(contract_data)
+            document_id += 1
 
     return result if result["contracts"] else None
 
 
-def merge_contract_url(release_json, contract_url_data) -> None:
+def merge_contract_url(release_json: dict, contract_url_data: dict | None) -> None:
+    """
+    Merge contract URL data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        contract_url_data (Optional[Dict]): The source data containing contracts
+            to be merged. If None, function returns without making changes.
+    """
     if not contract_url_data:
-        logger.warning("No contract URL data to merge")
         return
 
     existing_contracts = release_json.setdefault("contracts", [])
-
     for new_contract in contract_url_data["contracts"]:
         existing_contract = next(
             (c for c in existing_contracts if c["id"] == new_contract["id"]),
             None,
         )
         if existing_contract:
-            existing_documents = existing_contract.setdefault("documents", [])
-            for new_document in new_contract["documents"]:
-                if not any(d["id"] == new_document["id"] for d in existing_documents):
-                    existing_documents.append(new_document)
+            existing_contract.setdefault("documents", []).extend(
+                new_contract["documents"]
+            )
             if "awardID" in new_contract:
                 existing_contract["awardID"] = new_contract["awardID"]
         else:

@@ -44,7 +44,7 @@ def parse_contract_conclusion_date(
 
     # First find all lot results to map contracts to awards
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult | //efac:noticeResult/efac:LotResult",
+        "//efac:NoticeResult/efac:LotResult",
         namespaces=NAMESPACES,
     )
 

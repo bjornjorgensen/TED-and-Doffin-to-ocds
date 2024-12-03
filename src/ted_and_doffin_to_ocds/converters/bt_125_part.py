@@ -1,6 +1,5 @@
 # converters/bt_125_part.py
 
-import json
 import logging
 
 from lxml import etree
@@ -8,7 +7,29 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_previous_planning_identifier_part(xml_content):
+def parse_previous_planning_identifier_part(
+    xml_content: str | bytes,
+) -> dict | None:
+    """
+    Parse the previous planning identifier information from part-level XML data.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing part information
+
+    Returns:
+        Optional[Dict]: Dictionary containing related processes information, or None if no data found
+        The structure follows the format:
+        {
+            "relatedProcesses": [
+                {
+                    "id": str,
+                    "relationship": ["planning"],
+                    "scheme": "eu-oj",
+                    "identifier": str  # Concatenated identifier with part ID
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -25,17 +46,15 @@ def parse_previous_planning_identifier_part(xml_content):
     related_process_id = 1
 
     parts = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']",
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
         namespaces=namespaces,
     )
-    logger.info("Found %d parts", len(parts))
 
     for part in parts:
         notice_refs = part.xpath(
-            "cac:TenderingProcess/cac:noticeDocumentReference",
+            "cac:TenderingProcess/cac:NoticeDocumentReference",
             namespaces=namespaces,
         )
-        logger.info("Found %d notice references for part", len(notice_refs))
 
         for notice_ref in notice_refs:
             identifier = notice_ref.xpath(
@@ -45,10 +64,6 @@ def parse_previous_planning_identifier_part(xml_content):
             part_identifier = notice_ref.xpath(
                 "cbc:ReferencedDocumentInternalAddress/text()",
                 namespaces=namespaces,
-            )
-
-            logger.info(
-                "Identifier: %s, part Identifier: %s", identifier, part_identifier
             )
 
             if identifier and part_identifier:
@@ -61,26 +76,38 @@ def parse_previous_planning_identifier_part(xml_content):
                 }
                 result["relatedProcesses"].append(related_process)
                 related_process_id += 1
-                logger.info("Added related process for part: %s", related_process)
 
-    logger.info(
-        "Total related processes for parts: %d", len(result["relatedProcesses"])
-    )
     return result if result["relatedProcesses"] else None
 
 
 def merge_previous_planning_identifier_part(
-    release_json, previous_planning_data
+    release_json: dict, previous_planning_data: dict | None
 ) -> None:
+    """
+    Merge previous planning identifier data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        previous_planning_data (Optional[Dict]): The source data containing related processes
+            to be merged. If None, function returns without making changes.
+
+    Note:
+        The function modifies release_json in-place by adding or updating the
+        relatedProcesses field with new planning identifiers.
+    """
     if not previous_planning_data:
-        logger.warning("No Previous Planning Identifier (part) data to merge")
+        logger.warning("No Previous Planning Identifier (Part) data to merge")
         return
 
     existing_related_processes = release_json.setdefault("relatedProcesses", [])
 
     for new_process in previous_planning_data["relatedProcesses"]:
         existing_process = next(
-            (p for p in existing_related_processes if p["id"] == new_process["id"]),
+            (
+                p
+                for p in existing_related_processes
+                if p["identifier"] == new_process["identifier"]
+            ),
             None,
         )
         if existing_process:
@@ -88,11 +115,7 @@ def merge_previous_planning_identifier_part(
         else:
             existing_related_processes.append(new_process)
 
-    # Ensure the changes are reflected in the release_json object
-    release_json["relatedProcesses"] = existing_related_processes
-
     logger.info(
-        "Merged Previous Planning Identifier (part) data for %d related processes",
+        "Merged Previous Planning Identifier (Part) data for %d related processes",
         len(previous_planning_data["relatedProcesses"]),
     )
-    logger.info("Updated release_json: %s", json.dumps(release_json, indent=2))

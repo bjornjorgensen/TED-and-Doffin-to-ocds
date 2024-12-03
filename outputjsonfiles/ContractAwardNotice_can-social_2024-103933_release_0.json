@@ -1,7 +1,7 @@
 {
   "id": "9a4b7099-142a-412a-af35-3e8feaf15ec7",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-5a754867-5085-4ff6-af59-a3d1e1a820e1",
+  "ocid": "ocds-abcd1234-4b19daa3-7b5e-45c5-9ec0-4229fb07f282",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -288,6 +288,12 @@
   },
   "awards": [
     {
+      "id": "RES-0001",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
       "relatedBids": [
         "TEN-0001",
         "TEN-0002",
@@ -300,19 +306,49 @@
   "contracts": [
     {
       "id": "CON-0001",
+      "identifiers": [
+        {
+          "id": "23/18300",
+          "scheme": "NL-TENDERNED"
+        }
+      ],
       "awardID": "RES-0001"
     },
     {
-      "id": "CON-0002"
+      "id": "CON-0002",
+      "identifiers": [
+        {
+          "id": "23/18301",
+          "scheme": "NL-TENDERNED"
+        }
+      ]
     },
     {
-      "id": "CON-0003"
+      "id": "CON-0003",
+      "identifiers": [
+        {
+          "id": "23/18302",
+          "scheme": "NL-TENDERNED"
+        }
+      ]
     },
     {
-      "id": "CON-0004"
+      "id": "CON-0004",
+      "identifiers": [
+        {
+          "id": "23/18303",
+          "scheme": "NL-TENDERNED"
+        }
+      ]
     },
     {
-      "id": "CON-0005"
+      "id": "CON-0005",
+      "identifiers": [
+        {
+          "id": "23/18304",
+          "scheme": "NL-TENDERNED"
+        }
+      ]
     }
   ],
   "buyer": [

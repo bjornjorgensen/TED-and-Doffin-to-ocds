@@ -1,7 +1,7 @@
 {
   "id": "2023-653367",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3db00083-9f7b-4f25-acf7-aaeaa2e15bc1",
+  "ocid": "ocds-abcd1234-fdb1ce93-c035-4e96-86cf-e0f5e240a25d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -18,7 +18,7 @@
           "atypicalToolUrl": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
         },
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -40,7 +40,7 @@
           "atypicalToolUrl": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
         },
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -62,7 +62,7 @@
           "atypicalToolUrl": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
         },
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -84,7 +84,7 @@
           "atypicalToolUrl": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
         },
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -106,7 +106,7 @@
           "atypicalToolUrl": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
         },
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -128,7 +128,7 @@
           "atypicalToolUrl": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
         },
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -150,7 +150,7 @@
           "atypicalToolUrl": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
         },
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -172,7 +172,7 @@
           "atypicalToolUrl": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
         },
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -194,7 +194,7 @@
           "atypicalToolUrl": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
         },
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -216,7 +216,7 @@
           "atypicalToolUrl": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
         },
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -238,7 +238,7 @@
           "atypicalToolUrl": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
         },
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -260,7 +260,7 @@
           "atypicalToolUrl": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
         },
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -282,7 +282,7 @@
           "atypicalToolUrl": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
         },
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -304,7 +304,7 @@
           "atypicalToolUrl": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
         },
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -326,7 +326,7 @@
           "atypicalToolUrl": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
         },
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -348,7 +348,7 @@
           "atypicalToolUrl": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
         },
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -370,7 +370,7 @@
           "atypicalToolUrl": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
         },
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -392,7 +392,7 @@
           "atypicalToolUrl": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
         },
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -924,8 +924,8 @@
         "buyerProfile": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Bergen"

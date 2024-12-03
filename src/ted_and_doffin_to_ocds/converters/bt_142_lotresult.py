@@ -6,8 +6,43 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+# Tender result code lookup table
+STATUS_CODE_MAPPING = {
+    "clos-nw": "No winner was chosen and the competition is closed.",
+    "open-nw": "The winner was not yet chosen, but the competition is still ongoing.",
+    "selec-w": "At least one winner was chosen.",
+}
 
-def parse_winner_chosen(xml_content):
+
+def parse_winner_chosen(xml_content: str | bytes) -> dict | None:
+    """
+    Parse the winner chosen status from XML data.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing lot result information
+
+    Returns:
+        Optional[Dict]: Dictionary containing award and lot information, or None if no data found
+        The structure follows the format:
+        {
+            "awards": [
+                {
+                    "id": str,
+                    "status": str,
+                    "statusDetails": str,
+                    "relatedLots": [str]
+                }
+            ],
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "status": str
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -22,14 +57,8 @@ def parse_winner_chosen(xml_content):
 
     result = {"awards": [], "tender": {"lots": []}}
 
-    status_code_mapping = {
-        "clos-nw": "No winner was chosen and the competition is closed.",
-        "open-nw": "The winner was not yet chosen, but the competition is still ongoing.",
-        "selec-w": "At least one winner was chosen.",
-    }
-
     lot_results = root.xpath(
-        "//efac:noticeResult/efac:LotResult",
+        "//efac:NoticeResult/efac:LotResult",
         namespaces=namespaces,
     )
 
@@ -54,23 +83,35 @@ def parse_winner_chosen(xml_content):
 
             if tender_result_code == "open-nw":
                 result["tender"]["lots"].append({"id": lot_id, "status": "active"})
-            elif tender_result_code == "selec-w":
+            else:
                 award = {
                     "id": result_id,
-                    "status": "active",
-                    "statusDetails": status_code_mapping.get(
-                        tender_result_code,
-                        "Unknown",
+                    "status": "active"
+                    if tender_result_code == "selec-w"
+                    else "unsuccessful",
+                    "statusDetails": STATUS_CODE_MAPPING.get(
+                        tender_result_code, "Unknown"
                     ),
                     "relatedLots": [lot_id],
                 }
                 result["awards"].append(award)
-            # We're not creating awards for 'clos-nw' case as per the original requirements
 
     return result if (result["awards"] or result["tender"]["lots"]) else None
 
 
-def merge_winner_chosen(release_json, winner_chosen_data) -> None:
+def merge_winner_chosen(release_json: dict, winner_chosen_data: dict | None) -> None:
+    """
+    Merge winner chosen data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        winner_chosen_data (Optional[Dict]): The source data containing awards and lots
+            to be merged. If None, function returns without making changes.
+
+    Note:
+        The function modifies release_json in-place by updating award statuses
+        and lot information.
+    """
     if not winner_chosen_data:
         logger.warning("No winner chosen data to merge")
         return

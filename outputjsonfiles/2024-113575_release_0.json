@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-fd6e1b6f-20b4-4d15-b60f-fcce7d6148e0",
+  "ocid": "ocds-abcd1234-c388fd86-fb97-4e9d-bf61-88817a53faf8",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -34,7 +34,7 @@
         "reviewDetails": "Tidsfrist for klage er 10 dager etter publisert melding i Doffin/TED.\n\nKlage/henvendelse kan sendes på følgende måte:\nEnten via post@sykehusinnkjop.no eller per post Sykehusinnkjøp HF, postboks 40, 9811 Vadsø (Viktig å henvise til sak 2024/1261 Digital patologi, Helse Nord). Melding/klage kan også sendes i kommunikasjonsmodulen i Mercell på saken."
       }
     ],
-    "procurementMethodRationale": "Vurderingstemaet er at det kun er en leverandør som fremstiller digital patologi, og som fungerer sammen med oppdragsgivers multimedialøsning. \n\nDet vises til sakens faktiske side der det fremkommer at det er flere leverandører i markedet som kan levere digital patologi, men disse fungerer ikke sammen med oppdragsgivers multimedialøsning. \n\nViktige funksjoner for oppdragsgiver er blant annet effektiv visning (streaming) av digital patologi mediaobjekter til patologens arbeidsflate (arbeidsflyt), funksjonaliteten annoteringer (informasjonsflyt) og ikke minst pasientsikkerhet. Ut fra sakens faktiske opplysninger fremgår det at det bare er Sectras digitale patologi løsning som ivaretar dette på en tilstrekkelig god måte. Det vises til tilbakemeldingene fra markedet og at det inntil videre ikke er mulig for andre leverandører å levere i henhold til oppdragsgivers behov for funksjonalitet, gitt at oppdragsgivers eksisterende multimediearkiv (VNA) skal benyttes. Oppdragsgivers behov vil kunne oppfylles ved å kjøpe digital patologi fra en annen leverandør, noe som ville innebære at oppdragsgiver også måtte investere i den andre leverandørens multimediearkiv (VNA), herunder integrasjoner. To multimediearkiver vil medføre ekstra kostnader for oppdragsgiver, samt teknisk kompleksitet som vil være utfordrende å drifte og vedlikeholde. Funksjonaliteten annoteringer er ikke mulig på tvers av leverandørenes løsninger. To løsninger vil også innebære dobbeltlagring og håndtering av bilder i ulike lagre/arkiv og det vil være behov for to visningsprogramvarer (viewere). Dette gir økt risiko for forveksling av bildeversjoner og pasient/undersøkelse, noe som igjen kan medføre alvorlig feil i forbindelse med pasientbehandlingen, det pekes på diagnostikk og behandling, med påfølgende risiko for pasientskade. \n\nDet synes etter dette sannsynlig at det bare er en leverandør som kan levere det oppdragsgiver har behov for. \n\nDet andre spørsmålet er om leverandører kan eller vil kunne bli i stand til å levere ytelsen oppdragsgiver har behov for innenfor den tidsrammen som er til rådighet. \n\nMarkedet er umodent, og det gjenstår mye arbeid før standarder for deling og samhandling er modne på tvers av løsninger og lager/arkiv. Oppdragsgiver har behov for digital patologi nå. \n\nDet synes etter dette sannsynlig at det ikke eksisterer andre leverandører som kan eller vil kunne bli i stand til å levere ytelsen oppdragsgiver har behov for innenfor den tidsrammen som er til rådighet. \n\nDet synes sannsynlig at bare er en leverandør kan levere en digital patologiløsning som fungerer sammen med oppdragsgivers multimedialøsning, på en tilstrekkelig sikker måte.   The assessment theme is that there is only one supplier that presents digital pathology and that works together with the contracting authority ́s multi-media system. \n\nSee the factual side of the case, stating that there are several suppliers in the market who can deliver digital pathology, but these do not work together with the contracting authority ́s multi-media system. \n\nImportant functions for the contracting authority are, among other things, effective viewing (streaming) of digital pathology media objects to the pathology ́s work surface (work flow), functionality annotations (information flow) and, not least, patient safety. Based on the actual information of the case, it is only Sectra's digital pathology system that safeguards this in a sufficiently good way. Please refer to the feedback from the market and that until now it is not possible for other tenderers to deliver in accordance with the contracting authority ́s need for functionality, provided that the contracting authority ́s existing multimedia archive (VNA) shall be used. The contracting authority ́s needs can be fulfilled by purchasing digital pathology from another supplier, which would mean that the contracting authority also had to invest in the other tenderer ́s multimedia archive (VNA), including integrations. Two multi-media archives will incur extra costs for the contracting authority, as well as technical complexity that will be challenging to operate and maintain. The annotations functionality is not possible across the tenderer ́s systems. Two solutions will also involve double storage and handling of images in different stores/archives and there will be a need for two vieweres. This gives an increased risk of alteration of picture versions and patient/examination, which in turn can lead to serious errors in patient treatment, it is pointed to diagnostics and treatment, with the subsequent risk of patient injury. \n\nAfter this, it seems likely that there is only one supplier who can deliver what the contracting authority needs. \n\nThe second question is whether tenderers can or can be able to deliver the service that the Contracting Authority needs within the timeframe at our disposal. \n\nThe market is immature and much work remains before standards of sharing and interaction are mature across systems and stores/archives. The contracting authority needs digital pathology now. \n\nAfter this, it seems likely that there are no other suppliers who can or may be able to deliver the service that the Contracting Authority needs within the timeframe at our disposal. \n\nIt seems likely that only one supplier can deliver a digital pathology system that functions together with the contracting authority ́s multi-media system in a sufficiently secure way.  ",
+    "procurementMethodRationale": "Vurderingstemaet er at det kun er en leverandør som fremstiller digital patologi, og som fungerer sammen med oppdragsgivers multimedialøsning. \n\nDet vises til sakens faktiske side der det fremkommer at det er flere leverandører i markedet som kan levere digital patologi, men disse fungerer ikke sammen med oppdragsgivers multimedialøsning. \n\nViktige funksjoner for oppdragsgiver er blant annet effektiv visning (streaming) av digital patologi mediaobjekter til patologens arbeidsflate (arbeidsflyt), funksjonaliteten annoteringer (informasjonsflyt) og ikke minst pasientsikkerhet. Ut fra sakens faktiske opplysninger fremgår det at det bare er Sectras digitale patologi løsning som ivaretar dette på en tilstrekkelig god måte. Det vises til tilbakemeldingene fra markedet og at det inntil videre ikke er mulig for andre leverandører å levere i henhold til oppdragsgivers behov for funksjonalitet, gitt at oppdragsgivers eksisterende multimediearkiv (VNA) skal benyttes. Oppdragsgivers behov vil kunne oppfylles ved å kjøpe digital patologi fra en annen leverandør, noe som ville innebære at oppdragsgiver også måtte investere i den andre leverandørens multimediearkiv (VNA), herunder integrasjoner. To multimediearkiver vil medføre ekstra kostnader for oppdragsgiver, samt teknisk kompleksitet som vil være utfordrende å drifte og vedlikeholde. Funksjonaliteten annoteringer er ikke mulig på tvers av leverandørenes løsninger. To løsninger vil også innebære dobbeltlagring og håndtering av bilder i ulike lagre/arkiv og det vil være behov for to visningsprogramvarer (viewere). Dette gir økt risiko for forveksling av bildeversjoner og pasient/undersøkelse, noe som igjen kan medføre alvorlig feil i forbindelse med pasientbehandlingen, det pekes på diagnostikk og behandling, med påfølgende risiko for pasientskade. \n\nDet synes etter dette sannsynlig at det bare er en leverandør som kan levere det oppdragsgiver har behov for. \n\nDet andre spørsmålet er om leverandører kan eller vil kunne bli i stand til å levere ytelsen oppdragsgiver har behov for innenfor den tidsrammen som er til rådighet. \n\nMarkedet er umodent, og det gjenstår mye arbeid før standarder for deling og samhandling er modne på tvers av løsninger og lager/arkiv. Oppdragsgiver har behov for digital patologi nå. \n\nDet synes etter dette sannsynlig at det ikke eksisterer andre leverandører som kan eller vil kunne bli i stand til å levere ytelsen oppdragsgiver har behov for innenfor den tidsrammen som er til rådighet. \n\nDet synes sannsynlig at bare er en leverandør kan levere en digital patologiløsning som fungerer sammen med oppdragsgivers multimedialøsning, på en tilstrekkelig sikker måte. The assessment theme is that there is only one supplier that presents digital pathology and that works together with the contracting authority ́s multi-media system. \n\nSee the factual side of the case, stating that there are several suppliers in the market who can deliver digital pathology, but these do not work together with the contracting authority ́s multi-media system. \n\nImportant functions for the contracting authority are, among other things, effective viewing (streaming) of digital pathology media objects to the pathology ́s work surface (work flow), functionality annotations (information flow) and, not least, patient safety. Based on the actual information of the case, it is only Sectra's digital pathology system that safeguards this in a sufficiently good way. Please refer to the feedback from the market and that until now it is not possible for other tenderers to deliver in accordance with the contracting authority ́s need for functionality, provided that the contracting authority ́s existing multimedia archive (VNA) shall be used. The contracting authority ́s needs can be fulfilled by purchasing digital pathology from another supplier, which would mean that the contracting authority also had to invest in the other tenderer ́s multimedia archive (VNA), including integrations. Two multi-media archives will incur extra costs for the contracting authority, as well as technical complexity that will be challenging to operate and maintain. The annotations functionality is not possible across the tenderer ́s systems. Two solutions will also involve double storage and handling of images in different stores/archives and there will be a need for two vieweres. This gives an increased risk of alteration of picture versions and patient/examination, which in turn can lead to serious errors in patient treatment, it is pointed to diagnostics and treatment, with the subsequent risk of patient injury. \n\nAfter this, it seems likely that there is only one supplier who can deliver what the contracting authority needs. \n\nThe second question is whether tenderers can or can be able to deliver the service that the Contracting Authority needs within the timeframe at our disposal. \n\nThe market is immature and much work remains before standards of sharing and interaction are mature across systems and stores/archives. The contracting authority needs digital pathology now. \n\nAfter this, it seems likely that there are no other suppliers who can or may be able to deliver the service that the Contracting Authority needs within the timeframe at our disposal. \n\nIt seems likely that only one supplier can deliver a digital pathology system that functions together with the contracting authority ́s multi-media system in a sufficiently secure way.",
     "procurementMethodRationaleClassifications": [
       {
         "scheme": "eu-direct-award-justification",
@@ -190,8 +190,8 @@
       },
       "roles": [
         "payer",
-        "buyer",
-        "funder"
+        "funder",
+        "buyer"
       ]
     },
     {
@@ -216,14 +216,18 @@
       },
       "roles": [
         "leadBuyer",
-        "buyer",
         "processContactPoint",
+        "buyer",
         "reviewContactPoint"
       ]
     },
     {
       "id": "ORG-0003",
       "name": "Sectra Norge AS",
+      "details": {
+        "scale": "medium",
+        "url": "https://medical.sectra.com/about-sectra/contact/contact-sectra-norway/"
+      },
       "additionalIdentifiers": [
         {
           "id": "975 353 265",
@@ -233,9 +237,6 @@
       "contactPoint": {
         "telephone": "67 58 97 70",
         "email": "info.no@sectra.com"
-      },
-      "details": {
-        "url": "https://medical.sectra.com/about-sectra/contact/contact-sectra-norway/"
       },
       "address": {
         "locality": "Lysaker"
@@ -288,6 +289,19 @@
       }
     ]
   },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "identifiers": [
+        {
+          "id": "Tilbud av 27.5.2024",
+          "scheme": "NL-TENDERNED"
+        }
+      ],
+      "awardID": "RES-0001",
+      "title": "Første tilbud ifm direkteforhandlinger"
+    }
+  ],
   "awards": [
     {
       "id": "RES-0001",
@@ -309,13 +323,6 @@
       "relatedBids": [
         "TEN-0001"
       ]
-    }
-  ],
-  "contracts": [
-    {
-      "id": "CON-0001",
-      "title": "Første tilbud ifm direkteforhandlinger",
-      "awardID": "RES-0001"
     }
   ],
   "buyer": [

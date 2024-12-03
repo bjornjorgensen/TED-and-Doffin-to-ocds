@@ -1,7 +1,7 @@
 {
   "id": "2023-698775",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ecf8b007-73da-4ba4-802b-3f3fd7271451",
+  "ocid": "ocds-abcd1234-79ec5e0e-b4a9-45fe-a5df-449ef142fd29",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -166,9 +166,9 @@
         "email": "aase@waco.no"
       },
       "roles": [
+        "processContactPoint",
         "submissionReceiptBody",
-        "buyer",
-        "processContactPoint"
+        "buyer"
       ],
       "address": {
         "locality": "Bryne"

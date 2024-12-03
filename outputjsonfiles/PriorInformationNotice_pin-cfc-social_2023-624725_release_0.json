@@ -1,7 +1,7 @@
 {
   "id": "2023-624725",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-13275eb4-abc3-48ad-8c13-e600ee4efe6a",
+  "ocid": "ocds-abcd1234-446e2f6e-5f7f-45a5-9e18-ffc80e5e0cad",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -143,8 +143,8 @@
         "locality": "Eikelandsosen"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {
@@ -158,7 +158,7 @@
       ]
     }
   ],
-  "description": "Mercell kunngjøring: https://opic.com/id/afxgligahz Oppdragsgiver har ensidig opsjon på å forlenge kontrakten med 1 + 1 + 1 år",
+  "description": "Mercell kunngjøring: https://opic.com/id/afxgligahz",
   "buyer": [
     {
       "id": "ORG-0001"

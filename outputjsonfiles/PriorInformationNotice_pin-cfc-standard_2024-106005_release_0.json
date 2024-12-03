@@ -1,7 +1,7 @@
 {
   "id": "7d111d51-8042-402a-a234-50efe86d8f4f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6847ca09-2073-4ca9-8b75-079561912e34",
+  "ocid": "ocds-abcd1234-13f7222a-3d8f-409f-8154-4c5ef65a97f4",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -193,8 +193,8 @@
         "email": "Kristian.von.Aphelen@posten.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Oslo"

@@ -1,14 +1,25 @@
 # converters/bt_127_notice.py
 
 import logging
-from datetime import datetime
 
 from lxml import etree
+
+from ted_and_doffin_to_ocds.utils.date_utils import start_date
 
 logger = logging.getLogger(__name__)
 
 
-def parse_future_notice_date(xml_content):
+def parse_future_notice_date(xml_content: str | bytes) -> str | None:
+    """
+    Parse the future notice date from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing the planned date
+
+    Returns:
+        Optional[str]: ISO formatted date string with timezone, or None if not found
+        Format example: "2020-03-15T00:00:00+01:00"
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -23,28 +34,27 @@ def parse_future_notice_date(xml_content):
 
     planned_date = root.xpath("/*/cbc:PlannedDate/text()", namespaces=namespaces)
     if planned_date:
-        return convert_to_iso_format(planned_date[0])
+        try:
+            return start_date(planned_date[0])
+        except ValueError as e:
+            logger.warning("Error parsing planned date: %s", e)
+            return None
     return None
 
 
-def convert_to_iso_format(date_string) -> str:
-    # Split the date string and timezone
-    date_part, _, tz_part = date_string.partition("+")
+def merge_future_notice_date(
+    release_json: dict, future_notice_date: str | None
+) -> None:
+    """
+    Merge future notice date into the release JSON.
 
-    # Parse the date part
-    date = datetime.strptime(date_part, "%Y-%m-%d")
-
-    # Add time component
-    date = date.replace(hour=0, minute=0, second=0)
-
-    # Format the date with the original timezone
-    return f"{date.isoformat()}+{tz_part}"
-
-
-def merge_future_notice_date(release_json, future_notice_date) -> None:
+    Args:
+        release_json (dict): The target release JSON to merge data into
+        future_notice_date (Optional[str]): ISO formatted date string to be merged
+    """
     if future_notice_date:
         if "tender" not in release_json:
             release_json["tender"] = {}
         if "communication" not in release_json["tender"]:
             release_json["tender"]["communication"] = {}
-        release_json["tender"]["communication"]["futurenoticeDate"] = future_notice_date
+        release_json["tender"]["communication"]["futureNoticeDate"] = future_notice_date

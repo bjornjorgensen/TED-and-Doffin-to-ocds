@@ -1,7 +1,7 @@
 {
   "id": "2023-653024",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0a338736-57f0-43a9-97ab-29a0ab1d6599",
+  "ocid": "ocds-abcd1234-12698ff9-9abc-418e-9e94-08ca6c64d398",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -425,107 +425,126 @@
       }
     ]
   },
-  "description": "Mercell kunngjøring: https://opic.com/id/afreyczxlo Anskaffelsens anslåtte verdi: NOK 60.000.000 ekskl. mva. Rammeavtalenes samlede maksimale verdi: NOK 65.000.000 ekskl. mva.",
   "awards": [
     {
       "id": "RES-0001",
-      "value": {
-        "amount": 65000000.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
-      ]
-    },
-    {
-      "id": "RES-0002",
-      "value": {
-        "amount": 65000000.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
-      ]
-    },
-    {
-      "id": "RES-0003",
-      "value": {
-        "amount": 65000000.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
-      ]
-    },
-    {
-      "id": "RES-0004",
-      "value": {
-        "amount": 65000000.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
-      ]
-    },
-    {
-      "id": "RES-0005",
-      "value": {
-        "amount": 65000000.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
-      ]
-    },
-    {
-      "id": "RES-0006",
-      "value": {
-        "amount": 65000000.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
-      ]
-    },
-    {
-      "id": "RES-0007",
-      "value": {
-        "amount": 65000000.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
-      ]
-    },
-    {
-      "id": "RES-0008",
-      "value": {
-        "amount": 65000000.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
-      ]
-    },
-    {
-      "id": "RES-0009",
-      "value": {
-        "amount": 65000000.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
-      ]
-    },
-    {
-      "id": "RES-0010",
-      "value": {
-        "amount": 65000000.0,
-        "currency": "NOK"
-      },
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
       "relatedLots": [
         "LOT-0000"
       ],
+      "value": {
+        "amount": 65000000.0,
+        "currency": "NOK"
+      }
+    },
+    {
+      "id": "RES-0002",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 65000000.0,
+        "currency": "NOK"
+      }
+    },
+    {
+      "id": "RES-0003",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 65000000.0,
+        "currency": "NOK"
+      }
+    },
+    {
+      "id": "RES-0004",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 65000000.0,
+        "currency": "NOK"
+      }
+    },
+    {
+      "id": "RES-0005",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 65000000.0,
+        "currency": "NOK"
+      }
+    },
+    {
+      "id": "RES-0006",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 65000000.0,
+        "currency": "NOK"
+      }
+    },
+    {
+      "id": "RES-0007",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 65000000.0,
+        "currency": "NOK"
+      }
+    },
+    {
+      "id": "RES-0008",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 65000000.0,
+        "currency": "NOK"
+      }
+    },
+    {
+      "id": "RES-0009",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 65000000.0,
+        "currency": "NOK"
+      }
+    },
+    {
+      "id": "RES-0010",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 65000000.0,
+        "currency": "NOK"
+      },
       "relatedBids": [
         "TEN-0001",
         "TEN-0002",
@@ -540,6 +559,7 @@
       ]
     }
   ],
+  "description": "Mercell kunngjøring: https://opic.com/id/afreyczxlo",
   "contracts": [
     {
       "id": "CON-0001",

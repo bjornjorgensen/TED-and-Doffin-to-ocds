@@ -1,7 +1,7 @@
 {
   "id": "2022-347651",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b79b5583-d096-4426-b3af-e6a0105590f2",
+  "ocid": "ocds-abcd1234-e9cc0aa1-0667-45cd-a3a8-14c6b6dbd223",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -183,7 +183,12 @@
   ],
   "awards": [
     {
-      "id": "RES-0001"
+      "id": "RES-0001",
+      "status": "unsuccessful",
+      "statusDetails": "Other",
+      "relatedLots": [
+        "LOT-0000"
+      ]
     }
   ],
   "buyer": [

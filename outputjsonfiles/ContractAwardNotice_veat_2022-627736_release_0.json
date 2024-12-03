@@ -1,7 +1,7 @@
 {
   "id": "2022-627736",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-209fd9ab-8a04-4da5-af8e-ec0a1a542a3d",
+  "ocid": "ocds-abcd1234-38030b38-ee2f-4adb-a861-93ca1321698f",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -104,6 +104,10 @@
     {
       "id": "ORG-0002",
       "name": "Geodata AS",
+      "details": {
+        "scale": "sme",
+        "url": "www.geodata.no"
+      },
       "additionalIdentifiers": [
         {
           "id": "893136932",
@@ -113,9 +117,6 @@
       "contactPoint": {
         "telephone": "+47 23249000",
         "email": "geodata@geodata.no"
-      },
-      "details": {
-        "url": "www.geodata.no"
       },
       "address": {
         "locality": "Oslo"
@@ -157,28 +158,29 @@
       }
     ]
   },
+  "awards": [
+    {
+      "id": "RES-0001",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 5000000.0,
+        "currency": "NOK"
+      },
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
   "contracts": [
     {
       "id": "CON-0001",
       "dateSigned": "2022-11-30T23:59:59Z",
       "awardID": "RES-0001",
       "title": "Lisensavtale for ESRI- og Geodatas egenutviklede produkter for Riksantikvarens GIS-løsninger"
-    }
-  ],
-  "description": "*",
-  "awards": [
-    {
-      "id": "RES-0001",
-      "value": {
-        "amount": 5000000.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
-      ],
-      "relatedBids": [
-        "TEN-0001"
-      ]
     }
   ],
   "buyer": [

@@ -7,7 +7,25 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_lot_additional_info(xml_content):
+def parse_lot_additional_info(xml_content: str | bytes) -> dict | None:
+    """
+    Parse additional information from lot-level XML data.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing lot information
+
+    Returns:
+        Optional[Dict]: Dictionary containing lot information keyed by lot ID, or None if no data found
+        The structure follows the format:
+        {
+            "LOT-0001": [
+                {
+                    "text": str,
+                    "language": str
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -33,10 +51,7 @@ def parse_lot_additional_info(xml_content):
             namespaces=namespaces,
         )[0]
         note_text = note.text
-        language = note.get(
-            "languageID",
-            "en",
-        )  # Default to 'en' if languageID is not present
+        language = note.get("languageID", "en")
 
         if lot_id not in result:
             result[lot_id] = []
@@ -46,12 +61,21 @@ def parse_lot_additional_info(xml_content):
     return result if result else None
 
 
-def merge_lot_additional_info(release_json, lot_additional_info) -> None:
+def merge_lot_additional_info(
+    release_json: dict, lot_additional_info: dict | None
+) -> None:
+    """
+    Merge additional information into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        lot_additional_info (Optional[Dict]): The source data containing lot information
+            to be merged. If None, function returns without making changes.
+    """
     if not lot_additional_info:
-        logger.info("No lot additional information to merge")
         return
 
-    lots = release_json.get("tender", {}).get("lots", [])
+    lots = release_json.setdefault("tender", {}).setdefault("lots", [])
 
     for lot in lots:
         lot_id = lot.get("id")
@@ -63,5 +87,3 @@ def merge_lot_additional_info(release_json, lot_additional_info) -> None:
                     description += " "
                 description += note["text"]
             lot["description"] = description
-
-    logger.info("Merged additional information for %d lots", len(lot_additional_info))

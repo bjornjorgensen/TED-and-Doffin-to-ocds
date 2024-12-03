@@ -1,7 +1,7 @@
 {
   "id": "2022-674620",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-527e74f4-69f3-406c-837f-f4eaa2cb669b",
+  "ocid": "ocds-abcd1234-e2703fa2-b409-45ee-905e-e52accdd26d8",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -150,27 +150,35 @@
       }
     ]
   },
+  "awards": [
+    {
+      "id": "RES-0001",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 21700000.0,
+        "currency": "NOK"
+      },
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
   "contracts": [
     {
       "id": "CON-0001",
       "dateSigned": "2022-12-15T23:59:59Z",
       "awardID": "RES-0001",
-      "title": "Helseovervåking av vilt - ViltHOP 2023 - 2027"
-    }
-  ],
-  "awards": [
-    {
-      "id": "RES-0001",
-      "value": {
-        "amount": 21700000.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
+      "identifiers": [
+        {
+          "id": "23087006",
+          "scheme": "NL-TENDERNED"
+        }
       ],
-      "relatedBids": [
-        "TEN-0001"
-      ]
+      "title": "Helseovervåking av vilt - ViltHOP 2023 - 2027"
     }
   ],
   "buyer": [

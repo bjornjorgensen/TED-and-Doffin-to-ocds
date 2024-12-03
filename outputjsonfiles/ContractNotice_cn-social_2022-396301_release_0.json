@@ -1,7 +1,7 @@
 {
   "id": "2022-396301",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-20a8903c-c113-4b13-8a5c-6ada1e2894d9",
+  "ocid": "ocds-abcd1234-af208570-9e19-4c10-ba36-83f413e86b00",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -130,8 +130,8 @@
         "locality": "MOEN"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {
@@ -145,7 +145,7 @@
       ]
     }
   ],
-  "description": "Mercell kunngjøring: https://opic.com/id/afwjuxxltt For å få tilgang til beskrivelsen av bruker (vedlegg 4 til konkurransegrunnlaget), må konkurransegrunnlagets vedlegg 3 (taushetserklæringen) undertegnes og legges inn i KGV. Når taushetserklæringen er mottatt vil vedlegg 4 oversendes gjennom KGV.",
+  "description": "Mercell kunngjøring: https://opic.com/id/afwjuxxltt",
   "buyer": [
     {
       "id": "ORG-0001"

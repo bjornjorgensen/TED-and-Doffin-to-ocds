@@ -1,7 +1,7 @@
 {
   "id": "2022-927623",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f351e7b6-3b8f-44da-8c4b-95b75cd71150",
+  "ocid": "ocds-abcd1234-b0184771-4e84-434a-b812-9cad6a92bf5c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -224,27 +224,44 @@
       ]
     }
   ],
+  "awards": [
+    {
+      "id": "RES-0001",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "MISSING"
+      ],
+      "relatedBids": [
+        "TEN-0001",
+        "TEN-0002"
+      ]
+    }
+  ],
   "contracts": [
     {
       "id": "CON-0001",
       "dateSigned": "2022-10-14T23:59:59Z",
       "awardID": "RES-0001",
+      "identifiers": [
+        {
+          "id": "1",
+          "scheme": "NL-TENDERNED"
+        }
+      ],
       "title": "Rammeavtale vakt- og sikkerhetstjenester Delkontrakt 1"
     },
     {
       "id": "CON-0002",
       "dateSigned": "2022-10-14T23:59:59Z",
+      "identifiers": [
+        {
+          "id": "2",
+          "scheme": "NL-TENDERNED"
+        }
+      ],
       "title": "Rammeavtale vakt- og sikkerhetstjenester Delkontrakt 2",
       "awardID": "RES-0001"
-    }
-  ],
-  "description": "Oppdragsgiver har opsjon på å forlenge avtalen med de samme betingelser med 1 + 1 år slik at total mulig avtalelengde fra planlagt oppstartsdato 9. mars 2023 er 4 år. Oppdragsgiver har opsjon på å forlenge avtalen med de samme betingelser med 1 + 1 år slik at total mulig avtalelengde fra planlagt oppstartsdato 9. mars 2023 er 4 år.",
-  "awards": [
-    {
-      "relatedBids": [
-        "TEN-0001",
-        "TEN-0002"
-      ]
     }
   ],
   "bids": {

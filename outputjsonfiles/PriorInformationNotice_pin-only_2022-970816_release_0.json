@@ -1,13 +1,14 @@
 {
   "id": "2022-970816",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7d26abdc-d3f1-494e-976b-56808efef935",
+  "ocid": "ocds-abcd1234-ed97e94f-8f1a-426d-a15c-487ec4d33195",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
       "id": "OTHER"
     },
     "status": "planned",
+    "id": "PAR-0000",
     "title": "Intensjonskunngjøring - Spillsimulering",
     "identifiers": [
       {

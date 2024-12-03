@@ -1,7 +1,7 @@
 {
   "id": "2023-659744",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3862e1ca-96f5-4561-ad61-7ec7fbd24e84",
+  "ocid": "ocds-abcd1234-e9d4bde7-5f66-441f-879f-cdc3b6f4923b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -15,7 +15,7 @@
           "GPA"
         ],
         "tenderPeriod": {
-          "endDate": "2099-01-01T11:59:59+00:00"
+          "endDate": "2099-01-01T11:59:59Z"
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
@@ -86,8 +86,8 @@
         ]
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "locality": "Hamar"

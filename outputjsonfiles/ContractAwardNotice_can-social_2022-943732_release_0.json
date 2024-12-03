@@ -1,7 +1,7 @@
 {
   "id": "2022-943732",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-175343b6-c8af-48c5-b11b-72a76d88e7d5",
+  "ocid": "ocds-abcd1234-02ccdd26-b2c2-4ed6-b477-8d7b020ecbfa",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -192,27 +192,35 @@
       }
     ]
   },
+  "awards": [
+    {
+      "id": "RES-0001",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 73000000.0,
+        "currency": "NOK"
+      },
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
   "contracts": [
     {
       "id": "CON-0001",
       "dateSigned": "2022-08-24T23:59:59Z",
       "awardID": "RES-0001",
-      "title": "21-04911 Kantinedrift"
-    }
-  ],
-  "awards": [
-    {
-      "id": "RES-0001",
-      "value": {
-        "amount": 73000000.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
+      "identifiers": [
+        {
+          "id": "1",
+          "scheme": "NL-TENDERNED"
+        }
       ],
-      "relatedBids": [
-        "TEN-0001"
-      ]
+      "title": "21-04911 Kantinedrift"
     }
   ],
   "buyer": [

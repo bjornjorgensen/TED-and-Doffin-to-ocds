@@ -7,7 +7,27 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_winner_size(xml_content):
+def parse_winner_size(xml_content: str | bytes) -> dict | None:
+    """
+    Parse organization size information from XML data.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing organization information
+
+    Returns:
+        Optional[Dict]: Dictionary containing party information, or None if no data found
+        The structure follows the format:
+        {
+            "parties": [
+                {
+                    "id": str,
+                    "details": {
+                        "scale": str
+                    }
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -23,17 +43,17 @@ def parse_winner_size(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:organizations/efac:organization",
+        "//efac:Organizations/efac:Organization",
         namespaces=namespaces,
     )
 
     for organization in organizations:
         org_id = organization.xpath(
-            "efac:company/cac:partyIdentification/cbc:ID[@schemeName='organization']/text()",
+            "efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
             namespaces=namespaces,
         )
         company_size = organization.xpath(
-            "efac:company/efbc:companySizeCode[@listName='economic-operator-size']/text()",
+            "efac:Company/efbc:CompanySizeCode[@listName='economic-operator-size']/text()",
             namespaces=namespaces,
         )
 
@@ -44,16 +64,22 @@ def parse_winner_size(xml_content):
     return result if result["parties"] else None
 
 
-def merge_winner_size(release_json, winner_size_data) -> None:
+def merge_winner_size(release_json: dict, winner_size_data: dict | None) -> None:
+    """
+    Merge organization size data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        winner_size_data (Optional[Dict]): The source data containing parties
+            to be merged. If None, function returns without making changes.
+    """
     if not winner_size_data:
-        logger.warning("No Winner Size data to merge")
         return
 
     existing_parties = release_json.setdefault("parties", [])
-
     for new_party in winner_size_data["parties"]:
         existing_party = next(
-            (party for party in existing_parties if party["id"] == new_party["id"]),
+            (p for p in existing_parties if p["id"] == new_party["id"]),
             None,
         )
         if existing_party:

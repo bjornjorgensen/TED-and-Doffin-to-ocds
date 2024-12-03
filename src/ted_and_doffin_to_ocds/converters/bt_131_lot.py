@@ -1,14 +1,37 @@
 # converters/bt_131_Lot.py
 
 import logging
-from datetime import UTC, datetime, timedelta, timezone
 
 from lxml import etree
+
+from ted_and_doffin_to_ocds.utils.date_utils import end_date
 
 logger = logging.getLogger(__name__)
 
 
-def parse_deadline_receipt_tenders(xml_content):
+def parse_deadline_receipt_tenders(xml_content: str | bytes) -> dict | None:
+    """
+    Parse the tender submission deadline from lot-level XML data.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing lot information
+
+    Returns:
+        Optional[Dict]: Dictionary containing tender lot information, or None if no data found
+        The structure follows the format:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "tenderPeriod": {
+                            "endDate": str # ISO formatted date
+                        }
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -27,73 +50,49 @@ def parse_deadline_receipt_tenders(xml_content):
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
         namespaces=namespaces,
     )
-    logger.info("Found %s lots in XML", len(lots))
 
     for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
-        if not lot_id:
-            logger.warning("Lot ID not found, skipping this lot")
-            continue
-        lot_id = lot_id[0]
-
-        end_date = lot.xpath(
+        lot_id = lot.xpath("cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)[0]
+        end_date_str = lot.xpath(
             "cac:TenderingProcess/cac:TenderSubmissionDeadlinePeriod/cbc:EndDate/text()",
             namespaces=namespaces,
         )
-        end_time = lot.xpath(
+        end_time_str = lot.xpath(
             "cac:TenderingProcess/cac:TenderSubmissionDeadlinePeriod/cbc:EndTime/text()",
             namespaces=namespaces,
         )
 
-        logger.info(
-            "Processing lot %s: EndDate=%s, EndTime=%s", lot_id, end_date, end_time
-        )
-
-        if end_date:
+        if end_date_str:
             try:
-                date_str = end_date[0]
-                time_str = end_time[0] if end_time else "23:59:59"
-
-                # Combine date and time
-                datetime_str = f"{date_str.split('+')[0]}T{time_str}"
-
-                # Parse the datetime string
-                dt = datetime.fromisoformat(datetime_str)
-
-                # Add timezone information if present in the original string
-                if "+" in date_str:
-                    tz_offset = date_str.split("+")[1]
-                    dt = dt.replace(
-                        tzinfo=timezone(
-                            timedelta(
-                                hours=int(tz_offset.split(":")[0]),
-                                minutes=int(tz_offset.split(":")[1]),
-                            ),
-                        ),
-                    )
-                else:
-                    dt = dt.replace(tzinfo=UTC)
-
-                iso_date = dt.isoformat()
-
+                # Combine date and time if available, otherwise just use date
+                date_str = end_date_str[0]
+                if end_time_str:
+                    date_str = f"{date_str.split('+')[0]}T{end_time_str[0]}"
+                deadline = end_date(date_str)
                 result["tender"]["lots"].append(
-                    {"id": lot_id, "tenderPeriod": {"endDate": iso_date}},
+                    {"id": lot_id, "tenderPeriod": {"endDate": deadline}}
                 )
-                logger.info(
-                    "Successfully processed lot %s with endDate: %s",
-                    lot_id,
-                    iso_date,
-                )
-            except ValueError:
-                logger.exception("Error parsing deadline for lot %s", lot_id)
-        else:
-            logger.warning("No EndDate found for lot %s, skipping this lot", lot_id)
+            except ValueError as e:
+                logger.warning("Error parsing deadline for lot %s: %s", lot_id, e)
 
-    logger.info("Processed %s lots in total", len(result["tender"]["lots"]))
     return result if result["tender"]["lots"] else None
 
 
-def merge_deadline_receipt_tenders(release_json, deadline_data) -> None:
+def merge_deadline_receipt_tenders(
+    release_json: dict, deadline_data: dict | None
+) -> None:
+    """
+    Merge tender submission deadline data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        deadline_data (Optional[Dict]): The source data containing tender lots
+            to be merged. If None, function returns without making changes.
+
+    Note:
+        The function modifies release_json in-place by adding or updating the
+        tender.lots.tenderPeriod.endDate field for matching lots.
+    """
     if not deadline_data:
         logger.warning("No Deadline Receipt Tenders data to merge")
         return

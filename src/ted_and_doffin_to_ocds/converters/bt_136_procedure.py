@@ -56,7 +56,30 @@ JUSTIFICATION_CODES = {
 }
 
 
-def parse_direct_award_justification_code(xml_content):
+def parse_direct_award_justification_code(
+    xml_content: str | bytes,
+) -> dict | None:
+    """
+    Parse the direct award justification code from XML data.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing justification information
+
+    Returns:
+        Optional[Dict]: Dictionary containing tender information, or None if no data found
+        The structure follows the format:
+        {
+            "tender": {
+                "procurementMethodRationaleClassifications": [
+                    {
+                        "scheme": "eu-direct-award-justification",
+                        "id": str,
+                        "description": str
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -69,29 +92,45 @@ def parse_direct_award_justification_code(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    xpath = "/*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/cbc:ProcessReasonCode"
-    codes = root.xpath(xpath, namespaces=namespaces)
+    codes = root.xpath(
+        "/*/cac:TenderingProcess/cac:ProcessJustification"
+        "[cbc:ProcessReasonCode/@listName='direct-award-justification']"
+        "/cbc:ProcessReasonCode/text()",
+        namespaces=namespaces,
+    )
 
     if codes:
-        classifications = []
-        for code in codes:
-            code_value = code.text
-            classification = {
+        classifications = [
+            {
                 "scheme": "eu-direct-award-justification",
-                "id": code_value,
-                "description": JUSTIFICATION_CODES.get(code_value, "Unknown"),
+                "id": code,
+                "description": JUSTIFICATION_CODES.get(code, "Unknown"),
             }
-            classifications.append(classification)
+            for code in codes
+        ]
 
         return {
-            "tender": {"procurementMethodRationaleClassifications": classifications},
+            "tender": {"procurementMethodRationaleClassifications": classifications}
         }
 
-    logger.info("No direct award justification code found")
     return None
 
 
-def merge_direct_award_justification_code(release_json, justification_data) -> None:
+def merge_direct_award_justification_code(
+    release_json: dict, justification_data: dict | None
+) -> None:
+    """
+    Merge direct award justification code data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        justification_data (Optional[Dict]): The source data containing justification codes
+            to be merged. If None, function returns without making changes.
+
+    Note:
+        The function modifies release_json in-place by adding or updating the
+        tender.procurementMethodRationaleClassifications field.
+    """
     if not justification_data:
         return
 

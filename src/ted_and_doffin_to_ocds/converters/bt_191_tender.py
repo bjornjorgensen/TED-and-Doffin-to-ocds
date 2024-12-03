@@ -346,7 +346,28 @@ ISO_3166_1_ALPHA_3_TO_ALPHA_2 = {
 }
 
 
-def parse_country_origin(xml_content):
+def parse_country_origin(xml_content: str | bytes) -> dict | None:
+    """
+    Parse country origin information from XML data.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing tender information
+
+    Returns:
+        Optional[Dict]: Dictionary containing bid information, or None if no data found
+        The structure follows the format:
+        {
+            "bids": {
+                "details": [
+                    {
+                        "id": str,
+                        "countriesOfOrigin": [str],  # ISO 3166-1 alpha-2 codes
+                        "relatedLots": [str]
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -362,7 +383,7 @@ def parse_country_origin(xml_content):
     result = {"bids": {"details": []}}
 
     lot_tenders = root.xpath(
-        "//efac:noticeResult/efac:LotTender",
+        "//efac:NoticeResult/efac:LotTender",
         namespaces=namespaces,
     )
 
@@ -381,7 +402,7 @@ def parse_country_origin(xml_content):
         )
 
         if tender_id and area_code and lot_id:
-            alpha2_code = ISO_3166_1_ALPHA_3_TO_ALPHA_2.get(area_code[0], "")
+            alpha2_code = ISO_3166_1_ALPHA_3_TO_ALPHA_2.get(area_code[0])
             if alpha2_code:
                 bid = {
                     "id": tender_id[0],
@@ -389,35 +410,32 @@ def parse_country_origin(xml_content):
                     "relatedLots": [lot_id[0]],
                 }
                 result["bids"]["details"].append(bid)
-            else:
-                logger.warning(
-                    "No matching ISO 3166-1 alpha-2 code found for %s", area_code[0]
-                )
 
     return result if result["bids"]["details"] else None
 
 
-def merge_country_origin(release_json, country_origin_data) -> None:
+def merge_country_origin(release_json: dict, country_origin_data: dict | None) -> None:
+    """
+    Merge country origin data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        country_origin_data (Optional[Dict]): The source data containing bids
+            to be merged. If None, function returns without making changes.
+    """
     if not country_origin_data:
-        logger.warning("No Country Origin data to merge")
         return
 
     existing_bids = release_json.setdefault("bids", {}).setdefault("details", [])
-
     for new_bid in country_origin_data["bids"]["details"]:
         existing_bid = next(
-            (bid for bid in existing_bids if bid["id"] == new_bid["id"]),
+            (b for b in existing_bids if b["id"] == new_bid["id"]),
             None,
         )
         if existing_bid:
             existing_bid.setdefault("countriesOfOrigin", []).extend(
-                new_bid["countriesOfOrigin"],
+                new_bid["countriesOfOrigin"]
             )
             existing_bid.setdefault("relatedLots", []).extend(new_bid["relatedLots"])
         else:
             existing_bids.append(new_bid)
-
-    logger.info(
-        "Merged Country Origin data for %d bids",
-        len(country_origin_data["bids"]["details"]),
-    )

@@ -1,7 +1,7 @@
 {
   "id": "2023-335407",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6bba28c2-a672-44ca-bbcf-82f4742d01e7",
+  "ocid": "ocds-abcd1234-1c7299fd-52e4-4ec4-90fb-9ccdace0f572",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -129,6 +129,9 @@
     {
       "id": "ORG-0002",
       "name": "Kons  AS",
+      "details": {
+        "scale": "sme"
+      },
       "address": {
         "locality": "OSLO"
       },
@@ -205,27 +208,35 @@
       }
     ]
   },
+  "awards": [
+    {
+      "id": "RES-0001",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 2700000.0,
+        "currency": "NOK"
+      },
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
   "contracts": [
     {
       "id": "CON-0001",
       "dateSigned": "2023-09-26T23:59:59Z",
       "awardID": "RES-0001",
-      "title": "Utarbeidelse av felles kommunale sikkerhetskrav"
-    }
-  ],
-  "awards": [
-    {
-      "id": "RES-0001",
-      "value": {
-        "amount": 2700000.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
+      "identifiers": [
+        {
+          "id": "1",
+          "scheme": "NL-TENDERNED"
+        }
       ],
-      "relatedBids": [
-        "TEN-0001"
-      ]
+      "title": "Utarbeidelse av felles kommunale sikkerhetskrav"
     }
   ],
   "buyer": [

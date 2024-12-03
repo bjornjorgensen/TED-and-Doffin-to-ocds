@@ -7,7 +7,23 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_part_additional_info(xml_content):
+def parse_part_additional_info(xml_content: str | bytes) -> list[dict] | None:
+    """
+    Parse additional information from part-level XML data.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing part information
+
+    Returns:
+        Optional[List[Dict]]: List of notes with text and language, or None if no data found
+        The structure follows the format:
+        [
+            {
+                "text": str,
+                "language": str
+            }
+        ]
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -22,25 +38,30 @@ def parse_part_additional_info(xml_content):
 
     result = []
 
-    part_notes = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:ProcurementProject/cbc:Note",
+    notes = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cbc:Note",
         namespaces=namespaces,
     )
 
-    for note in part_notes:
-        note_text = note.text
-        language = note.get(
-            "languageID",
-            "en",
-        )  # Default to 'en' if languageID is not present
-        result.append({"text": note_text, "language": language})
+    result = [
+        {"text": note.text, "language": note.get("languageID", "en")} for note in notes
+    ]
 
     return result if result else None
 
 
-def merge_part_additional_info(release_json, part_additional_info) -> None:
+def merge_part_additional_info(
+    release_json: dict, part_additional_info: list[dict] | None
+) -> None:
+    """
+    Merge additional information into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        part_additional_info (Optional[List[Dict]]): The source data containing notes
+            to be merged. If None, function returns without making changes.
+    """
     if not part_additional_info:
-        logger.info("No part additional information to merge")
         return
 
     description = release_json.get("description", "")
@@ -51,5 +72,3 @@ def merge_part_additional_info(release_json, part_additional_info) -> None:
         description += note["text"]
 
     release_json["description"] = description
-
-    logger.info("Merged additional information for the release description")

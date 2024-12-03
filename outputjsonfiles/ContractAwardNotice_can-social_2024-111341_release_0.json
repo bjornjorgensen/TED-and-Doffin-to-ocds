@@ -1,7 +1,7 @@
 {
   "id": "65ffd92d-8eee-4787-a7fe-925106611edc",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f091657e-4879-4575-a2cd-d0789f0242ad",
+  "ocid": "ocds-abcd1234-a6d2c691-0d6d-482d-9626-be1b80b48902",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -232,6 +232,14 @@
   },
   "awards": [
     {
+      "id": "RES-0001",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ]
+    },
+    {
       "id": "CON-0001",
       "buyers": [
         {
@@ -242,16 +250,19 @@
         "TEN-0001",
         "TEN-0002"
       ]
-    },
-    {
-      "id": "RES-0001"
     }
   ],
   "contracts": [
     {
       "id": "CON-0001",
-      "title": "Drift av kantine på Leikanger-Iss Facility Services AS",
-      "awardID": "RES-0001"
+      "identifiers": [
+        {
+          "id": "-",
+          "scheme": "NL-TENDERNED"
+        }
+      ],
+      "awardID": "RES-0001",
+      "title": "Drift av kantine på Leikanger-Iss Facility Services AS"
     }
   ],
   "relatedProcesses": [

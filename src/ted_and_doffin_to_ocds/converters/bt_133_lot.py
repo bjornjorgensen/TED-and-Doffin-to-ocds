@@ -7,7 +7,31 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_lot_bid_opening_location(xml_content):
+def parse_lot_bid_opening_location(xml_content: str | bytes) -> dict | None:
+    """
+    Parse the bid opening location from lot-level XML data.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing lot information
+
+    Returns:
+        Optional[Dict]: Dictionary containing tender lot information, or None if no data found
+        The structure follows the format:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "bidOpening": {
+                            "location": {
+                                "description": str
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -28,7 +52,7 @@ def parse_lot_bid_opening_location(xml_content):
     )
 
     for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        lot_id = lot.xpath("cbc:ID[@schemeName='Lot']/text()", namespaces=namespaces)[0]
         description = lot.xpath(
             "cac:TenderingProcess/cac:OpenTenderEvent/cac:OccurenceLocation/cbc:Description/text()",
             namespaces=namespaces,
@@ -44,7 +68,21 @@ def parse_lot_bid_opening_location(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_bid_opening_location(release_json, lot_bid_opening_data) -> None:
+def merge_lot_bid_opening_location(
+    release_json: dict, lot_bid_opening_data: dict | None
+) -> None:
+    """
+    Merge bid opening location data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        lot_bid_opening_data (Optional[Dict]): The source data containing tender lots
+            to be merged. If None, function returns without making changes.
+
+    Note:
+        The function modifies release_json in-place by adding or updating the
+        tender.lots.bidOpening.location field for matching lots.
+    """
     if not lot_bid_opening_data:
         logger.warning("No Lot Bid Opening Location data to merge")
         return

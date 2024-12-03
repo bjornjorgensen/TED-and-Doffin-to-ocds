@@ -1,7 +1,7 @@
 {
   "id": "2023-677604",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-eaa11eb3-74dd-4c5b-ab79-da92b7e834b5",
+  "ocid": "ocds-abcd1234-9eda7231-2475-4687-9fe4-f097f7d72700",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -103,11 +103,34 @@
       }
     ]
   },
+  "awards": [
+    {
+      "id": "RES-0001",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 35000000.0,
+        "currency": "NOK"
+      },
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
   "contracts": [
     {
       "id": "CON-0001",
       "dateSigned": "2022-04-20T23:59:59Z",
-      "awardID": "RES-0001"
+      "awardID": "RES-0001",
+      "identifiers": [
+        {
+          "id": "2020/136366",
+          "scheme": "NL-TENDERNED"
+        }
+      ]
     }
   ],
   "parties": [
@@ -160,21 +183,6 @@
       },
       "roles": [
         "reviewBody"
-      ]
-    }
-  ],
-  "awards": [
-    {
-      "id": "RES-0001",
-      "value": {
-        "amount": 35000000.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
-      ],
-      "relatedBids": [
-        "TEN-0001"
       ]
     }
   ],

@@ -1,7 +1,7 @@
 {
   "id": "2022-945801",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-60a18878-4c5c-4f15-be93-c74e510358eb",
+  "ocid": "ocds-abcd1234-823f8496-e5d0-4246-a9c1-fb3345dd46c9",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -147,6 +147,23 @@
       }
     ]
   },
+  "awards": [
+    {
+      "id": "RES-0001",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 18000000.0,
+        "currency": "NOK"
+      },
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
   "contracts": [
     {
       "id": "CON-0001",
@@ -156,21 +173,6 @@
     }
   ],
   "description": "Mercell kunngjøring: https://opic.com/id/afsjxeyerv",
-  "awards": [
-    {
-      "id": "RES-0001",
-      "value": {
-        "amount": 18000000.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
-      ],
-      "relatedBids": [
-        "TEN-0001"
-      ]
-    }
-  ],
   "buyer": [
     {
       "id": "ORG-0001"

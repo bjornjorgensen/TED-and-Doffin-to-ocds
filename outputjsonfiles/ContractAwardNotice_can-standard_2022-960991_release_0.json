@@ -1,7 +1,7 @@
 {
   "id": "2022-960991",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3fc35e22-380c-4a0a-9132-76ef5e5c7850",
+  "ocid": "ocds-abcd1234-c908502b-19f9-4064-927d-28e73ce08d9b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -128,6 +128,9 @@
     {
       "id": "ORG-0002",
       "name": "Everbridge Norway AS",
+      "details": {
+        "scale": "sme"
+      },
       "additionalIdentifiers": [
         {
           "id": "980400255",
@@ -203,27 +206,35 @@
       }
     ]
   },
+  "awards": [
+    {
+      "id": "RES-0001",
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 42000000.0,
+        "currency": "NOK"
+      },
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
   "contracts": [
     {
       "id": "CON-0001",
       "dateSigned": "2022-09-30T23:59:59Z",
       "awardID": "RES-0001",
-      "title": "Delivery and maintenance of a Cell Broadcasti ng Enti ty with associated services"
-    }
-  ],
-  "awards": [
-    {
-      "id": "RES-0001",
-      "value": {
-        "amount": 42000000.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
+      "identifiers": [
+        {
+          "id": "2022/6604",
+          "scheme": "NL-TENDERNED"
+        }
       ],
-      "relatedBids": [
-        "TEN-0001"
-      ]
+      "title": "Delivery and maintenance of a Cell Broadcasti ng Enti ty with associated services"
     }
   ],
   "buyer": [

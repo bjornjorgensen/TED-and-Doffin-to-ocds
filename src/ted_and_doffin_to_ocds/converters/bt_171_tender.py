@@ -7,7 +7,28 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_tender_rank(xml_content):
+def parse_tender_rank(xml_content: str | bytes) -> dict | None:
+    """
+    Parse tender rank information from XML data.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing tender information
+
+    Returns:
+        Optional[Dict]: Dictionary containing bid information, or None if no data found
+        The structure follows the format:
+        {
+            "bids": {
+                "details": [
+                    {
+                        "id": str,
+                        "rank": int,
+                        "relatedLots": [str]
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -23,7 +44,7 @@ def parse_tender_rank(xml_content):
     result = {"bids": {"details": []}}
 
     lot_tenders = root.xpath(
-        "//efac:noticeResult/efac:LotTender",
+        "//efac:NoticeResult/efac:LotTender",
         namespaces=namespaces,
     )
 
@@ -32,33 +53,42 @@ def parse_tender_rank(xml_content):
             "cbc:ID[@schemeName='tender']/text()",
             namespaces=namespaces,
         )
-        rank_code = lot_tender.xpath("cbc:RankCode/text()", namespaces=namespaces)
+        rank_code = lot_tender.xpath(
+            "cbc:RankCode/text()",
+            namespaces=namespaces,
+        )
         lot_id = lot_tender.xpath(
             "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
             namespaces=namespaces,
         )
 
         if tender_id and rank_code and lot_id:
-            bid = {
+            bid_data = {
                 "id": tender_id[0],
                 "rank": int(rank_code[0]),
                 "relatedLots": [lot_id[0]],
             }
-            result["bids"]["details"].append(bid)
+            result["bids"]["details"].append(bid_data)
 
     return result if result["bids"]["details"] else None
 
 
-def merge_tender_rank(release_json, tender_rank_data) -> None:
+def merge_tender_rank(release_json: dict, tender_rank_data: dict | None) -> None:
+    """
+    Merge tender rank data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        tender_rank_data (Optional[Dict]): The source data containing bids
+            to be merged. If None, function returns without making changes.
+    """
     if not tender_rank_data:
-        logger.warning("No Tender Rank data to merge")
         return
 
     existing_bids = release_json.setdefault("bids", {}).setdefault("details", [])
-
     for new_bid in tender_rank_data["bids"]["details"]:
         existing_bid = next(
-            (bid for bid in existing_bids if bid["id"] == new_bid["id"]),
+            (b for b in existing_bids if b["id"] == new_bid["id"]),
             None,
         )
         if existing_bid:

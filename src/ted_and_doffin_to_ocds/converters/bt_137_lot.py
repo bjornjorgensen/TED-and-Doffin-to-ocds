@@ -1,5 +1,3 @@
-# converters/bt_137_Lot.py
-
 import logging
 
 from lxml import etree
@@ -7,16 +5,25 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_purpose_lot_identifier(xml_content):
+def parse_purpose_lot_identifier(xml_content: str | bytes) -> dict | None:
     """
-    Parse the XML content to extract the purpose lot identifier for each lot.
+    Parse the lot identifiers from XML data.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content (Union[str, bytes]): The XML content containing lot information
 
     Returns:
-        dict: A dictionary containing the parsed purpose lot identifier data.
-        None: If no relevant data is found.
+        Optional[Dict]: Dictionary containing tender lot information, or None if no data found
+        The structure follows the format:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str
+                    }
+                ]
+            }
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -30,43 +37,42 @@ def parse_purpose_lot_identifier(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    result = {"tender": {"lots": []}}
-
-    lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+    lot_ids = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cbc:ID/text()",
         namespaces=namespaces,
     )
-    for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        lot_data = {"id": lot_id}
-        result["tender"]["lots"].append(lot_data)
 
-    return result if result["tender"]["lots"] else None
+    if lot_ids:
+        return {"tender": {"lots": [{"id": lot_id} for lot_id in lot_ids]}}
+
+    return None
 
 
-def merge_purpose_lot_identifier(release_json, purpose_lot_identifier_data) -> None:
+def merge_purpose_lot_identifier(
+    release_json: dict, purpose_lot_identifier_data: dict | None
+) -> None:
     """
-    Merge the parsed purpose lot identifier data into the main OCDS release JSON.
+    Merge lot identifier data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        purpose_lot_identifier_data (dict): The parsed purpose lot identifier data to be merged.
+        release_json (Dict): The target release JSON to merge data into
+        purpose_lot_identifier_data (Optional[Dict]): The source data containing tender lots
+            to be merged. If None, function returns without making changes.
 
-    Returns:
-        None: The function updates the release_json in-place.
+    Note:
+        The function modifies release_json in-place by adding new lots to tender.lots
+        only if they don't already exist.
     """
     if not purpose_lot_identifier_data:
-        logger.warning("No purpose lot identifier data to merge")
         return
 
-    tender = release_json.setdefault("tender", {})
-    existing_lots = tender.setdefault("lots", [])
+    existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
+    existing_lot_ids = {lot["id"] for lot in existing_lots}
 
-    for new_lot in purpose_lot_identifier_data["tender"]["lots"]:
-        if not any(lot["id"] == new_lot["id"] for lot in existing_lots):
-            existing_lots.append(new_lot)
-
-    logger.info(
-        "Merged purpose lot identifier data for %d lots",
-        len(purpose_lot_identifier_data["tender"]["lots"]),
-    )
+    # Only add lots that don't already exist
+    new_lots = [
+        lot
+        for lot in purpose_lot_identifier_data["tender"]["lots"]
+        if lot["id"] not in existing_lot_ids
+    ]
+    existing_lots.extend(new_lots)
