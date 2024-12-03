@@ -7,34 +7,37 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_electronic_payment(xml_content):
-    """
-    Parse the XML content to extract the electronic payment information for each lot.
+def parse_electronic_payment(xml_content: str | bytes) -> dict | None:
+    """Parse electronic payment information from XML for each lot.
+
+    Extract information about whether electronic payment will be used
+    as defined in BT-93.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        dict: A dictionary containing the parsed electronic payment data in the format:
-              {
-                  "tender": {
-                      "lots": [
-                          {
-                              "id": "lot_id",
-                              "contractTerms": {
-                                  "hasElectronicPayment": bool
-                              }
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "contractTerms": {
+                            "hasElectronicPayment": bool
+                        }
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
 
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
@@ -53,15 +56,15 @@ def parse_electronic_payment(xml_content):
     )
 
     for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
+        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         electronic_payment = lot.xpath(
             "cac:TenderingTerms/cac:PostAwardProcess/cbc:ElectronicPaymentUsageIndicator/text()",
             namespaces=namespaces,
         )
 
-        if lot_id and electronic_payment:
+        if electronic_payment:
             lot_data = {
-                "id": lot_id[0],
+                "id": lot_id,
                 "contractTerms": {
                     "hasElectronicPayment": electronic_payment[0].lower() == "true",
                 },
@@ -71,16 +74,23 @@ def parse_electronic_payment(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_electronic_payment(release_json, electronic_payment_data) -> None:
-    """
-    Merge the parsed electronic payment data into the main OCDS release JSON.
+def merge_electronic_payment(
+    release_json: dict, electronic_payment_data: dict | None
+) -> None:
+    """Merge electronic payment data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating contract terms
+    for each lot specified in the input data.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        electronic_payment_data (dict): The parsed electronic payment data to be merged.
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        electronic_payment_data: The parsed electronic payment data
+            in the same format as returned by parse_electronic_payment().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
     if not electronic_payment_data:
         logger.warning("No electronic payment data to merge")

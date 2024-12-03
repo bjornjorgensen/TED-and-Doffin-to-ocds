@@ -1,5 +1,3 @@
-# converters/bt_79_Lot.py
-
 import logging
 
 from lxml import etree
@@ -7,34 +5,39 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_performing_staff_qualification(xml_content):
-    """
-    Parse the XML content to extract the Performing Staff Qualification requirement for each lot.
+def parse_performing_staff_qualification(
+    xml_content: str | bytes,
+) -> dict | None:
+    """Parse performing staff qualification requirements from XML for each lot.
+
+    Extract information about whether the names and professional qualifications of
+    the staff assigned to perform the contract must be given as defined in BT-79.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        dict: A dictionary containing the parsed data in the format:
-              {
-                  "tender": {
-                      "lots": [
-                          {
-                              "id": "lot_id",
-                              "otherRequirements": {
-                                  "requiresStaffNamesAndQualifications": boolean
-                              }
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "otherRequirements": {
+                            "requiresStaffNamesAndQualifications": bool
+                        }
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
 
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
@@ -54,13 +57,13 @@ def parse_performing_staff_qualification(xml_content):
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        required_curricula_code = lot.xpath(
+        curricula_code = lot.xpath(
             "cac:TenderingTerms/cbc:RequiredCurriculaCode/text()",
             namespaces=namespaces,
         )
 
-        if required_curricula_code:
-            code = required_curricula_code[0]
+        if curricula_code:
+            code = curricula_code[0]
             if code in ["par-requ", "t-requ"]:
                 requires_staff = True
             elif code == "not-requ":
@@ -80,17 +83,22 @@ def parse_performing_staff_qualification(xml_content):
 
 
 def merge_performing_staff_qualification(
-    release_json, staff_qualification_data
+    release_json: dict, staff_qualification_data: dict | None
 ) -> None:
-    """
-    Merge the parsed Performing Staff Qualification data into the main OCDS release JSON.
+    """Merge performing staff qualification data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating other requirements
+    for each lot specified in the input data.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        staff_qualification_data (dict): The parsed Performing Staff Qualification data to be merged.
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        staff_qualification_data: The parsed staff qualification data
+            in the same format as returned by parse_performing_staff_qualification().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
     if not staff_qualification_data:
         logger.warning("No Performing Staff Qualification data to merge")

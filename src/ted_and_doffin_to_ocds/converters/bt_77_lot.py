@@ -8,27 +8,29 @@ logger = logging.getLogger(__name__)
 
 
 def parse_financial_terms(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the XML content to extract the financial terms information for each lot.
+    """Parse financial terms from XML for each lot.
+
+    Extract information about financing and payment terms and/or references
+    to provisions that govern them as defined in BT-77.
 
     Args:
-        xml_content (Union[str, bytes]): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        Optional[Dict]: A dictionary containing the parsed financial terms data in the format:
-              {
-                  "tender": {
-                      "lots": [
-                          {
-                              "id": "lot_id",
-                              "contractTerms": {
-                                  "financialTerms": "financial terms description"
-                              }
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "contractTerms": {
+                            "financialTerms": str
+                        }
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
@@ -48,39 +50,43 @@ def parse_financial_terms(xml_content: str | bytes) -> dict | None:
 
     result: dict[str, dict] = {"tender": {"lots": []}}
 
-    lots: list = root.xpath(
+    lots = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
         namespaces=namespaces,
     )
 
     for lot in lots:
-        lot_id: str = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        financial_terms: list = lot.xpath(
+        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        financial_terms = lot.xpath(
             "cac:TenderingTerms/cac:PaymentTerms/cbc:Note/text()",
             namespaces=namespaces,
         )
 
         if financial_terms:
             result["tender"]["lots"].append(
-                {"id": lot_id, "contractTerms": {"financialTerms": financial_terms[0]}},
+                {"id": lot_id, "contractTerms": {"financialTerms": financial_terms[0]}}
             )
 
     return result if result["tender"]["lots"] else None
 
 
 def merge_financial_terms(
-    release_json: dict,
-    financial_terms_data: dict | None,
+    release_json: dict, financial_terms_data: dict | None
 ) -> None:
-    """
-    Merge the parsed financial terms data into the main OCDS release JSON.
+    """Merge financial terms data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating contract terms
+    for each lot specified in the input data.
 
     Args:
-        release_json (Dict): The main OCDS release JSON to be updated.
-        financial_terms_data (Optional[Dict]): The parsed financial terms data to be merged.
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        financial_terms_data: The parsed financial terms data
+            in the same format as returned by parse_financial_terms().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
     if not financial_terms_data:
         logger.warning("No financial terms data to merge")

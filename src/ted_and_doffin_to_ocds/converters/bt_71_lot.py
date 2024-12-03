@@ -7,15 +7,36 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_reserved_participation(xml_content: str) -> dict | None:
-    """
-    Parse the XML content to extract reserved participation information for each lot.
+def parse_reserved_participation(xml_content: str | bytes) -> dict | None:
+    """Parse reserved participation information from XML for each lot.
+
+    Extracts whether participation is reserved for specific organisations
+    (e.g. sheltered workshops, organisations pursuing a public service mission)
+    as defined in BT-71.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        dict | None: A dictionary containing the parsed reserved participation data or None if no relevant data is found.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "otherRequirements": {
+                            "reservedParticipation": [str]  # List containing either
+                                                          # "shelteredWorkshop" or
+                                                          # "publicServiceMissionOrganization"
+                        }
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -74,16 +95,23 @@ def parse_reserved_participation(xml_content: str) -> dict | None:
     return result if result["tender"]["lots"] else None
 
 
-def merge_reserved_participation(release_json, reserved_participation_data) -> None:
-    """
-    Merge the parsed reserved participation data into the main OCDS release JSON.
+def merge_reserved_participation(
+    release_json: dict, reserved_participation_data: dict | None
+) -> None:
+    """Merge reserved participation data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating other requirements
+    for each lot specified in the input data.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        reserved_participation_data (dict): The parsed reserved participation data to be merged.
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        reserved_participation_data: The parsed reserved participation data
+            in the same format as returned by parse_reserved_participation().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
     if not reserved_participation_data:
         logger.warning("No reserved participation data to merge")

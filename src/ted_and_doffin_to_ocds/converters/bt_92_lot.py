@@ -7,34 +7,37 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_electronic_ordering(xml_content):
-    """
-    Parse the XML content to extract the electronic ordering information for each lot.
+def parse_electronic_ordering(xml_content: str | bytes) -> dict | None:
+    """Parse electronic ordering information from XML for each lot.
+
+    Extract information about whether electronic ordering will be used
+    as defined in BT-92.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        dict: A dictionary containing the parsed electronic ordering data in the format:
-              {
-                  "tender": {
-                      "lots": [
-                          {
-                              "id": "lot_id",
-                              "contractTerms": {
-                                  "hasElectronicOrdering": bool
-                              }
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "contractTerms": {
+                            "hasElectronicOrdering": bool
+                        }
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
 
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
@@ -47,20 +50,23 @@ def parse_electronic_ordering(xml_content):
 
     result = {"tender": {"lots": []}}
 
-    lots = root.xpath("//cac:ProcurementProjectLot", namespaces=namespaces)
+    lots = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
+    )
 
     for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
+        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         electronic_ordering = lot.xpath(
             "cac:TenderingTerms/cac:PostAwardProcess/cbc:ElectronicOrderUsageIndicator/text()",
             namespaces=namespaces,
         )
 
-        if lot_id and electronic_ordering:
+        if electronic_ordering:
             lot_data = {
-                "id": lot_id[0],
+                "id": lot_id,
                 "contractTerms": {
-                    "hasElectronicOrdering": electronic_ordering[0].lower() == "true",
+                    "hasElectronicOrdering": electronic_ordering[0].lower() == "true"
                 },
             }
             result["tender"]["lots"].append(lot_data)
@@ -68,16 +74,23 @@ def parse_electronic_ordering(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_electronic_ordering(release_json, electronic_ordering_data) -> None:
-    """
-    Merge the parsed electronic ordering data into the main OCDS release JSON.
+def merge_electronic_ordering(
+    release_json: dict, electronic_ordering_data: dict | None
+) -> None:
+    """Merge electronic ordering data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating contract terms
+    for each lot specified in the input data.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        electronic_ordering_data (dict): The parsed electronic ordering data to be merged.
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        electronic_ordering_data: The parsed electronic ordering data
+            in the same format as returned by parse_electronic_ordering().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
     if not electronic_ordering_data:
         logger.warning("No electronic ordering data to merge")

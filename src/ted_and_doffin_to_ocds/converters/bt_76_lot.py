@@ -1,5 +1,3 @@
-# converters/bt_76_Lot.py
-
 import logging
 
 from lxml import etree
@@ -8,14 +6,32 @@ logger = logging.getLogger(__name__)
 
 
 def parse_tenderer_legal_form(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the XML content to extract the tenderer legal form description for each lot.
+    """Parse tenderer legal form requirements from XML for each lot.
+
+    Extract information about the legal form that must be taken by a group
+    of tenderers that is awarded a contract as defined in BT-76.
 
     Args:
-        xml_content (Union[str, bytes]): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        Optional[Dict]: A dictionary containing the parsed data, or None if no relevant data is found.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "contractTerms": {
+                            "tendererLegalForm": str
+                        }
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -39,7 +55,7 @@ def parse_tenderer_legal_form(xml_content: str | bytes) -> dict | None:
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         legal_form = lot.xpath(
-            "cac:TenderingTerms/cac:TendererQualificationRequest[not(cac:SpecificTendererRequirement)]/cbc:companyLegalForm/text()",
+            "cac:TenderingTerms/cac:TendererQualificationRequest[not(cac:SpecificTendererRequirement)]/cbc:CompanyLegalForm/text()",
             namespaces=namespaces,
         )
 
@@ -53,24 +69,31 @@ def parse_tenderer_legal_form(xml_content: str | bytes) -> dict | None:
     return result if result["tender"]["lots"] else None
 
 
-def merge_tenderer_legal_form(release_json: dict, parsed_data: dict | None) -> None:
-    """
-    Merge the parsed tenderer legal form data into the main OCDS release JSON.
+def merge_tenderer_legal_form(
+    release_json: dict, tenderer_legal_form_data: dict | None
+) -> None:
+    """Merge tenderer legal form data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating contract terms
+    for each lot specified in the input data.
 
     Args:
-        release_json (Dict): The main OCDS release JSON to be updated.
-        parsed_data (Optional[Dict]): The parsed tenderer legal form data to be merged.
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        tenderer_legal_form_data: The parsed legal form data
+            in the same format as returned by parse_tenderer_legal_form().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
-    if not parsed_data:
+    if not tenderer_legal_form_data:
         logger.info("No Tenderer Legal Form data to merge")
         return
 
     tender_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
 
-    for new_lot in parsed_data["tender"]["lots"]:
+    for new_lot in tenderer_legal_form_data["tender"]["lots"]:
         existing_lot = next(
             (lot for lot in tender_lots if lot["id"] == new_lot["id"]),
             None,
@@ -84,5 +107,5 @@ def merge_tenderer_legal_form(release_json: dict, parsed_data: dict | None) -> N
 
     logger.info(
         "Merged Tenderer Legal Form data for %d lots",
-        len(parsed_data["tender"]["lots"]),
+        len(tenderer_legal_form_data["tender"]["lots"]),
     )

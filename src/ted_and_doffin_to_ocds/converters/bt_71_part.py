@@ -14,14 +14,30 @@ RESERVED_CODE_MAPPING = {
 
 
 def parse_reserved_participation_part(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the XML content to extract reserved participation information for the tender.
+    """Parse reserved participation information from XML.
+
+    Extracts whether participation is reserved for specific organisations
+    (e.g. sheltered workshops, organisations pursuing a public service mission)
+    as defined in BT-71.
 
     Args:
-        xml_content (str | bytes): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        dict | None: A dictionary containing the parsed reserved participation data or None.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "otherRequirements": {
+                    "reservedParticipation": [str]  # List containing either
+                                                  # "shelteredWorkshop" or
+                                                  # "publicServiceMissionOrganization"
+                }
+            }
+        }
+        Returns None if no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
     """
     if not xml_content:
         return None
@@ -43,7 +59,18 @@ def parse_reserved_participation_part(xml_content: str | bytes) -> dict | None:
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    xpath_query = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='missing-info-submission'])][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='selection-criteria-source'])]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='reserved-procurement']/cbc:TendererRequirementTypeCode/text()"
+    xpath_query = (
+        "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']"
+        "/cac:TenderingTerms/cac:TendererQualificationRequest"
+        "[not(cbc:CompanyLegalFormCode)]"
+        "[not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode"
+        "[@listName='missing-info-submission'])]"
+        "[not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode"
+        "[@listName='selection-criteria-source'])]"
+        "/cac:SpecificTendererRequirement"
+        "[cbc:TendererRequirementTypeCode/@listName='reserved-procurement']"
+        "/cbc:TendererRequirementTypeCode/text()"
+    )
 
     try:
         reserved_codes = root.xpath(xpath_query, namespaces=namespaces)
@@ -72,15 +99,18 @@ def parse_reserved_participation_part(xml_content: str | bytes) -> dict | None:
 def merge_reserved_participation_part(
     release_json: dict, reserved_participation_data: dict | None
 ) -> None:
-    """
-    Merge the parsed reserved participation data into the main OCDS release JSON.
+    """Merge reserved participation data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating other requirements.
 
     Args:
-        release_json (Dict): The main OCDS release JSON to be updated.
-        reserved_participation_data (Optional[Dict]): The parsed reserved participation data to be merged.
+        release_json: The main OCDS release JSON to be updated.
+        reserved_participation_data: The parsed reserved participation data
+            in the same format as returned by parse_reserved_participation_part().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
     if not reserved_participation_data:
         logger.warning("No reserved participation data to merge")

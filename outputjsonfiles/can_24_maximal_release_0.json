@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-138f3c7b-1a0b-42ca-b5dc-5b7ac6058b2f",
+  "ocid": "ocds-abcd1234-1fce4f99-68fe-422c-a20e-61b8146aedce",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -151,8 +151,8 @@
       {
         "id": "GLO-0001",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "title": "Title ---",
         "identifiers": [
@@ -341,8 +341,8 @@
         "id": "FiscalDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "publisher": {
           "id": "ORG-0002"
@@ -352,8 +352,8 @@
         "id": "EnvDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "publisher": {
           "id": "ORG-0003"
@@ -363,8 +363,8 @@
         "id": "EmplDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "publisher": {
           "id": "ORG-0004"
@@ -699,8 +699,8 @@
         "locality": "Luxembourg"
       },
       "roles": [
-        "leadTenderer",
-        "tenderer"
+        "tenderer",
+        "leadTenderer"
       ]
     },
     {

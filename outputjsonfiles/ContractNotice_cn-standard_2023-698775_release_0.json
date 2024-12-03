@@ -1,7 +1,7 @@
 {
   "id": "2023-698775",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8136e138-c578-467a-9076-801bd2f32f71",
+  "ocid": "ocds-abcd1234-70df5d44-fd7b-49da-8c26-510c5739a859",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -167,8 +167,8 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "locality": "Bryne"

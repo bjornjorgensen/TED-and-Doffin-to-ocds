@@ -9,38 +9,41 @@ from ted_and_doffin_to_ocds.utils.date_utils import end_date
 logger = logging.getLogger(__name__)
 
 
-def parse_security_clearance_deadline(xml_content):
-    """
-    Parse the XML content to extract the Security Clearance Deadline for each lot.
+def parse_security_clearance_deadline(xml_content: str | bytes) -> dict | None:
+    """Parse security clearance deadline from XML for each lot.
+
+    Extract information about the time limit by which tenderers who do not hold
+    a security clearance may obtain it as defined in BT-78.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        dict: A dictionary containing the parsed data in the format:
-              {
-                  "tender": {
-                      "lots": [
-                          {
-                              "id": "lot_id",
-                              "milestones": [
-                                  {
-                                      "id": "1",
-                                      "type": "securityClearanceDeadline",
-                                      "dueDate": "iso_formatted_date"
-                                  }
-                              ]
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "milestones": [
+                            {
+                                "id": "1",
+                                "type": "securityClearanceDeadline",
+                                "dueDate": str  # ISO formatted date
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
 
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
@@ -81,16 +84,23 @@ def parse_security_clearance_deadline(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_security_clearance_deadline(release_json, security_clearance_data) -> None:
-    """
-    Merge the parsed Security Clearance Deadline data into the main OCDS release JSON.
+def merge_security_clearance_deadline(
+    release_json: dict, security_clearance_data: dict | None
+) -> None:
+    """Merge security clearance deadline data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating milestones
+    for each lot specified in the input data.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        security_clearance_data (dict): The parsed Security Clearance Deadline data to be merged.
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        security_clearance_data: The parsed security clearance data
+            in the same format as returned by parse_security_clearance_deadline().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
     if not security_clearance_data:
         logger.warning("No Security Clearance Deadline data to merge")

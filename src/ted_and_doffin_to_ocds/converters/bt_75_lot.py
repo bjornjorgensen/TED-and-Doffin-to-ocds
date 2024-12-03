@@ -7,19 +7,33 @@ logger = logging.getLogger(__name__)
 
 def parse_guarantee_required_description(
     xml_content: str | bytes,
-) -> dict[str, dict[str, list[dict[str, str]]]] | None:
-    """
-    Parse guarantee required description for each lot.
+) -> dict | None:
+    """Parse guarantee required description from XML for each lot.
 
-    BT-75-Lot: The description of the financial guarantee required from the tenderer
-    when submitting a tender. Maps to lot.submissionTerms.depositsGuarantees.
+    Extract information about the financial guarantee required from the tenderer
+    when submitting a tender as defined in BT-75.
 
     Args:
-        xml_content: XML content to parse
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        dict: Dictionary containing lot data with guarantee description
-        None: If no relevant data found
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "submissionTerms": {
+                            "depositsGuarantees": str
+                        }
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -56,18 +70,22 @@ def parse_guarantee_required_description(
 
 
 def merge_guarantee_required_description(
-    release_json: dict,
-    guarantee_description_data: dict[str, dict[str, list[dict[str, str]]]] | None,
+    release_json: dict, guarantee_description_data: dict | None
 ) -> None:
-    """
-    Merge the parsed guarantee required description data into the main OCDS release JSON.
+    """Merge guarantee required description data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating submission terms
+    for each lot specified in the input data.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        guarantee_description_data (dict): The parsed guarantee required description data to be merged.
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        guarantee_description_data: The parsed guarantee description data
+            in the same format as returned by parse_guarantee_required_description().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
     if not guarantee_description_data:
         logger.warning("No guarantee required description data to merge")
