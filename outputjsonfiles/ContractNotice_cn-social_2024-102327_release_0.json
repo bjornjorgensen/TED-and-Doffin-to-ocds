@@ -1,7 +1,7 @@
 {
   "id": "aa382761-89ef-4162-9dc5-74f12a6f2a21",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-458ff02f-f50e-41e7-8726-b6ff8ba6adcc",
+  "ocid": "ocds-abcd1234-b90974f9-c792-4188-b648-cd4ffe6f5e13",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -19,7 +19,7 @@
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "required",
-          "variantPolicy": "Not allowed",
+          "variantPolicy": "notAllowed",
           "advancedElectronicSignatureRequired": true,
           "languages": [
             "no"
@@ -65,7 +65,7 @@
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "required",
-          "variantPolicy": "Not allowed",
+          "variantPolicy": "notAllowed",
           "advancedElectronicSignatureRequired": true,
           "languages": [
             "no"
@@ -111,7 +111,7 @@
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "required",
-          "variantPolicy": "Not allowed",
+          "variantPolicy": "notAllowed",
           "advancedElectronicSignatureRequired": true,
           "languages": [
             "no"
@@ -157,7 +157,7 @@
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "required",
-          "variantPolicy": "Not allowed",
+          "variantPolicy": "notAllowed",
           "advancedElectronicSignatureRequired": true,
           "languages": [
             "no"
@@ -203,7 +203,7 @@
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "required",
-          "variantPolicy": "Not allowed",
+          "variantPolicy": "notAllowed",
           "advancedElectronicSignatureRequired": true,
           "languages": [
             "no"
@@ -249,7 +249,7 @@
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "required",
-          "variantPolicy": "Not allowed",
+          "variantPolicy": "notAllowed",
           "advancedElectronicSignatureRequired": true,
           "languages": [
             "no"
@@ -295,7 +295,7 @@
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "required",
-          "variantPolicy": "Not allowed",
+          "variantPolicy": "notAllowed",
           "advancedElectronicSignatureRequired": true,
           "languages": [
             "no"
@@ -341,7 +341,7 @@
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "required",
-          "variantPolicy": "Not allowed",
+          "variantPolicy": "notAllowed",
           "advancedElectronicSignatureRequired": true,
           "languages": [
             "no"

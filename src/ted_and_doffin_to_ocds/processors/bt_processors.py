@@ -344,6 +344,10 @@ from ted_and_doffin_to_ocds.converters.bt_115_gpa_coverage import (
     merge_gpa_coverage,
     parse_gpa_coverage,
 )
+from ted_and_doffin_to_ocds.converters.bt_115_part_gpa_coverage import (
+    merge_gpa_coverage_part,
+    parse_gpa_coverage_part,
+)
 from ted_and_doffin_to_ocds.converters.bt_119_lotresult import (
     merge_dps_termination,
     parse_dps_termination,
@@ -360,9 +364,13 @@ from ted_and_doffin_to_ocds.converters.bt_123_lot import (
     merge_electronic_auction_url,
     parse_electronic_auction_url,
 )
-from ted_and_doffin_to_ocds.converters.bt_124_tool_atypical_url import (
+from ted_and_doffin_to_ocds.converters.bt_124_lot import (
     merge_tool_atypical_url,
     parse_tool_atypical_url,
+)
+from ted_and_doffin_to_ocds.converters.bt_124_part import (
+    merge_tool_atypical_url_part,
+    parse_tool_atypical_url_part,
 )
 from ted_and_doffin_to_ocds.converters.bt_125_lot import (
     merge_previous_planning_identifier_lot,
@@ -2527,6 +2535,7 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             "Framework Maximum participants Number (BT-113)",
         ),
         (parse_gpa_coverage, merge_gpa_coverage, "GPA Coverage (BT-115)"),
+        (parse_gpa_coverage_part, merge_gpa_coverage_part, "bt_115_part_gpa_coverage"),
         (parse_dps_termination, merge_dps_termination, "DPS Termination (BT-119)"),
         (
             parse_no_negotiation_necessary,
@@ -2546,7 +2555,12 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
         (
             parse_tool_atypical_url,
             merge_tool_atypical_url,
-            "Tool Atypical URL (BT-124)",
+            "Tool Atypical URL (BT-124-Lot)",
+        ),
+        (
+            parse_tool_atypical_url_part,
+            merge_tool_atypical_url_part,
+            "Tool Atypical URL (BT-124-part)",
         ),
         (
             parse_previous_planning_identifier_lot,

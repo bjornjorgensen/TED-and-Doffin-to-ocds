@@ -1,7 +1,6 @@
 # converters/bt_105_procedure.py
 
 import logging
-from typing import Any
 
 from lxml import etree
 
@@ -30,8 +29,9 @@ PROCEDURE_CODE_MAPPING = {
     "neg-w-call": "selective",
     "neg-wo-call": "limited",
     "exp-int-rail": "selective",
-    "oth-mult": None,
-    "oth-single": None,
+    # No mapping for these codes - they get None
+    # "oth-mult": None,
+    # "oth-single": None,
 }
 
 PROCEDURE_DETAILS_MAPPING = {
@@ -77,80 +77,71 @@ def validate_xml_content(xml_content: str | bytes) -> bytes:
     return xml_content
 
 
-def parse_procedure_type(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse the XML content to extract the procedure type information.
+def parse_procedure_type(xml_content: str | bytes) -> dict | None:
+    """Parse procurement procedure type information from XML.
+
+    Extract information about the type of procurement procedure as defined in BT-105.
 
     Args:
-        xml_content: The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        Optional[Dict[str, Any]]: A dictionary containing the parsed procedure type data,
-        or None if no relevant data is found.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "procurementMethod": str,  # Only for mapped codes
+                "procurementMethodDetails": str
+            }
+        }
+        Returns None if no relevant data is found.
 
     Raises:
-        ValueError: If the input is invalid.
-        etree.XMLSyntaxError: If the XML is malformed.
+        etree.XMLSyntaxError: If the input is not valid XML.
     """
-    try:
-        xml_content = validate_xml_content(xml_content)
-        root = etree.fromstring(xml_content)
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode("utf-8")
 
-        # Check if the relevant XPath exists
-        procedure_elements = root.xpath(XPATH_PROCEDURE_CODE, namespaces=NAMESPACES)
-        if not procedure_elements:
-            logger.info("No procedure type data found. Skipping parse_procedure_type.")
-            return None
+    root = etree.fromstring(xml_content)
+    namespaces = {
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+    }
 
-        # Get the procedure code
-        procedure_code = procedure_elements[0].text
-        if not procedure_code:
-            logger.info("Empty procedure code found")
-            return None
+    procedure_elements = root.xpath(
+        "//cac:TenderingProcess/cbc:ProcedureCode[@listName='procurement-procedure-type']/text()",
+        namespaces=namespaces,
+    )
 
-        code = procedure_code.strip().lower()
-        if code not in PROCEDURE_CODE_MAPPING:
-            logger.warning("Unknown procedure code: %s", code)
-            return None
+    if not procedure_elements:
+        return None
 
-        result = {"tender": {}}
+    code = procedure_elements[0].strip().lower()
+    result = {"tender": {}}
 
-        # Map the procedure method
-        procurement_method = PROCEDURE_CODE_MAPPING.get(code)
-        if procurement_method:
-            result["tender"]["procurementMethod"] = procurement_method
-            logger.debug(
-                "Mapped procedure code %s to method %s", code, procurement_method
-            )
+    # Add procurementMethod only if we have a mapping
+    if code in PROCEDURE_CODE_MAPPING:
+        result["tender"]["procurementMethod"] = PROCEDURE_CODE_MAPPING[code]
 
-        # Map the procedure details
-        procurement_method_details = PROCEDURE_DETAILS_MAPPING.get(code)
-        if procurement_method_details:
-            result["tender"]["procurementMethodDetails"] = procurement_method_details
-            logger.debug("Added procedure details for code %s", code)
+    # Always add procurementMethodDetails if available
+    if code in PROCEDURE_DETAILS_MAPPING:
+        result["tender"]["procurementMethodDetails"] = PROCEDURE_DETAILS_MAPPING[code]
 
-        return result if result["tender"] else None
-
-    except (ValueError, etree.XMLSyntaxError):
-        logger.exception("Error parsing procedure type")
-        raise
-    except Exception:
-        logger.exception("Unexpected error parsing procedure type")
-        raise
+    return result if result["tender"] else None
 
 
-def merge_procedure_type(
-    release_json: dict[str, Any], procedure_type_data: dict[str, Any] | None
-) -> None:
-    """
-    Merge the parsed procedure type data into the main OCDS release JSON.
+def merge_procedure_type(release_json: dict, procedure_type_data: dict | None) -> None:
+    """Merge procedure type data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating procurement method information.
 
     Args:
         release_json: The main OCDS release JSON to be updated.
-        procedure_type_data: The parsed procedure type data to be merged.
+        procedure_type_data: The parsed procedure type data
+            in the same format as returned by parse_procedure_type().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
     if not isinstance(release_json, dict):
         logger.error("Invalid release_json type: %s", type(release_json))

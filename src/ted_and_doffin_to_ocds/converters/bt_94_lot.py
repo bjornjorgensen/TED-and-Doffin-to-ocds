@@ -7,32 +7,35 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_recurrence(xml_content):
-    """
-    Parse the XML content to extract the recurrence information for each lot.
+def parse_recurrence(xml_content: str | bytes) -> dict | None:
+    """Parse recurrence information from XML for each lot.
+
+    Extract information about whether the procurement is likely to be included in
+    another procedure in the foreseeable future as defined in BT-94.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        dict: A dictionary containing the parsed recurrence data in the format:
-              {
-                  "tender": {
-                      "lots": [
-                          {
-                              "id": "lot_id",
-                              "hasRecurrence": bool
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "hasRecurrence": bool
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
 
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
@@ -51,32 +54,34 @@ def parse_recurrence(xml_content):
     )
 
     for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
+        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         recurrence = lot.xpath(
             "cac:TenderingTerms/cbc:RecurringProcurementIndicator/text()",
             namespaces=namespaces,
         )
 
-        if lot_id and recurrence:
-            lot_data = {
-                "id": lot_id[0],
-                "hasRecurrence": recurrence[0].lower() == "true",
-            }
+        if recurrence:
+            lot_data = {"id": lot_id, "hasRecurrence": recurrence[0].lower() == "true"}
             result["tender"]["lots"].append(lot_data)
 
     return result if result["tender"]["lots"] else None
 
 
-def merge_recurrence(release_json, recurrence_data) -> None:
-    """
-    Merge the parsed recurrence data into the main OCDS release JSON.
+def merge_recurrence(release_json: dict, recurrence_data: dict | None) -> None:
+    """Merge recurrence data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating recurrence information
+    for each lot specified in the input data.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        recurrence_data (dict): The parsed recurrence data to be merged.
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        recurrence_data: The parsed recurrence data
+            in the same format as returned by parse_recurrence().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
     if not recurrence_data:
         logger.warning("No recurrence data to merge")

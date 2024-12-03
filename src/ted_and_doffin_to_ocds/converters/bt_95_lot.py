@@ -1,5 +1,3 @@
-# converters/bt_95_Lot.py
-
 import logging
 
 from lxml import etree
@@ -7,34 +5,37 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_recurrence_description(xml_content):
-    """
-    Parse the XML content to extract the recurrence description for each lot.
+def parse_recurrence_description(xml_content: str | bytes) -> dict | None:
+    """Parse recurrence description from XML for each lot.
+
+    Extract additional information about recurrence (e.g. estimated timing)
+    as defined in BT-95.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        dict: A dictionary containing the parsed recurrence description data in the format:
-              {
-                  "tender": {
-                      "lots": [
-                          {
-                              "id": "lot_id",
-                              "recurrence": {
-                                  "description": "description_text"
-                              }
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "recurrence": {
+                            "description": str
+                        }
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
 
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
@@ -53,15 +54,15 @@ def parse_recurrence_description(xml_content):
     )
 
     for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
+        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         recurrence_description = lot.xpath(
             "cac:TenderingTerms/cbc:RecurringProcurementDescription/text()",
             namespaces=namespaces,
         )
 
-        if lot_id and recurrence_description:
+        if recurrence_description:
             lot_data = {
-                "id": lot_id[0],
+                "id": lot_id,
                 "recurrence": {"description": recurrence_description[0]},
             }
             result["tender"]["lots"].append(lot_data)
@@ -69,16 +70,23 @@ def parse_recurrence_description(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_recurrence_description(release_json, recurrence_description_data) -> None:
-    """
-    Merge the parsed recurrence description data into the main OCDS release JSON.
+def merge_recurrence_description(
+    release_json: dict, recurrence_description_data: dict | None
+) -> None:
+    """Merge recurrence description data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating recurrence information
+    for each lot specified in the input data.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        recurrence_description_data (dict): The parsed recurrence description data to be merged.
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        recurrence_description_data: The parsed recurrence description data
+            in the same format as returned by parse_recurrence_description().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
     if not recurrence_description_data:
         logger.warning("No recurrence description data to merge")

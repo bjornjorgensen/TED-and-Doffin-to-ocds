@@ -201,34 +201,37 @@ ISO_639_1_MAPPING = {
 }
 
 
-def parse_submission_language(xml_content):
-    """
-    Parse the XML content to extract the submission language for each lot.
+def parse_submission_language(xml_content: str | bytes) -> dict | None:
+    """Parse submission language requirements from XML for each lot.
+
+    Extract information about languages in which tenders, requests to participate,
+    or expressions of interest may be submitted as defined in BT-97.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        dict: A dictionary containing the parsed submission language data in the format:
-              {
-                  "tender": {
-                      "lots": [
-                          {
-                              "id": "lot_id",
-                              "submissionTerms": {
-                                  "languages": ["language_code", ...]
-                              }
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "submissionTerms": {
+                            "languages": [str]  # List of ISO 639-1 language codes
+                        }
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
 
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
@@ -247,35 +250,45 @@ def parse_submission_language(xml_content):
     )
 
     for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
+        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         languages = lot.xpath(
             "cac:TenderingTerms/cac:Language/cbc:ID/text()",
             namespaces=namespaces,
         )
 
-        if lot_id and languages:
+        if languages:
             mapped_languages = [
-                ISO_639_1_MAPPING.get(lang.upper(), lang.lower()) for lang in languages
+                ISO_639_1_MAPPING.get(lang.upper())
+                for lang in languages
+                if ISO_639_1_MAPPING.get(lang.upper())  # Only include valid mappings
             ]
-            lot_data = {
-                "id": lot_id[0],
-                "submissionTerms": {"languages": mapped_languages},
-            }
-            result["tender"]["lots"].append(lot_data)
+            if mapped_languages:  # Only create lot if we have valid languages
+                lot_data = {
+                    "id": lot_id,
+                    "submissionTerms": {"languages": mapped_languages},
+                }
+                result["tender"]["lots"].append(lot_data)
 
     return result if result["tender"]["lots"] else None
 
 
-def merge_submission_language(release_json, submission_language_data) -> None:
-    """
-    Merge the parsed submission language data into the main OCDS release JSON.
+def merge_submission_language(
+    release_json: dict, submission_language_data: dict | None
+) -> None:
+    """Merge submission language data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating submission terms
+    for each lot specified in the input data.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        submission_language_data (dict): The parsed submission language data to be merged.
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        submission_language_data: The parsed submission language data
+            in the same format as returned by parse_submission_language().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
     if not submission_language_data:
         logger.warning("No submission language data to merge")

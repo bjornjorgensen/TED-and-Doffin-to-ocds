@@ -7,16 +7,31 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_review_deadline_description(xml_content):
-    """
-    Parse the XML content to extract the review deadline description for each lot.
+def parse_review_deadline_description(xml_content: str | bytes) -> dict | None:
+    """Parse review deadline description from XML for each lot.
+
+    Extract information about the time limits for review procedures
+    as defined in BT-99.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        dict: A dictionary containing the parsed review deadline description data.
-        None: If no relevant data is found.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "reviewDetails": str
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -39,7 +54,7 @@ def parse_review_deadline_description(xml_content):
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         description = lot.xpath(
-            ".//cac:TenderingTerms/cac:AppealTerms/cac:PresentationPeriod/cbc:Description/text()",
+            "cac:TenderingTerms/cac:AppealTerms/cac:PresentationPeriod/cbc:Description/text()",
             namespaces=namespaces,
         )
 
@@ -51,17 +66,22 @@ def parse_review_deadline_description(xml_content):
 
 
 def merge_review_deadline_description(
-    release_json, review_deadline_description_data
+    release_json: dict, review_deadline_description_data: dict | None
 ) -> None:
-    """
-    Merge the parsed review deadline description data into the main OCDS release JSON.
+    """Merge review deadline description data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating review details
+    for each lot specified in the input data.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        review_deadline_description_data (dict): The parsed review deadline description data to be merged.
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        review_deadline_description_data: The parsed review deadline data
+            in the same format as returned by parse_review_deadline_description().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
     if not review_deadline_description_data:
         logger.warning("No review deadline description data to merge")

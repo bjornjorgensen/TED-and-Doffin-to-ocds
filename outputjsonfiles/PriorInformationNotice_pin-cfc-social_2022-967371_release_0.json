@@ -1,7 +1,7 @@
 {
   "id": "2022-967371",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a5424114-0647-419c-a087-c0a0a4df06c0",
+  "ocid": "ocds-abcd1234-9fbdbacd-78b3-4afd-b856-671f8e517c66",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -73,8 +73,8 @@
         "documentType": "biddingDocuments",
         "url": "https://tendsign.no/doc.aspx?UniqueId=afzouxayrm&GoTo=Docs",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ]
       }
     ],

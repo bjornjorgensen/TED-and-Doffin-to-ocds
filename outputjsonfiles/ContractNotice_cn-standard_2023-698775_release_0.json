@@ -1,7 +1,7 @@
 {
   "id": "2023-698775",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-70df5d44-fd7b-49da-8c26-510c5739a859",
+  "ocid": "ocds-abcd1234-ecf8b007-73da-4ba4-802b-3f3fd7271451",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -32,7 +32,7 @@
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "not-allowed",
-          "variantPolicy": "Not allowed",
+          "variantPolicy": "notAllowed",
           "languages": [
             "no"
           ],

@@ -1,13 +1,16 @@
 {
   "id": "0e2b63aa-a91a-49c6-aa1c-386516ec2275",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-95a180d2-224c-4bd3-9b04-ae9d0c973d0e",
+  "ocid": "ocds-abcd1234-25df1a48-a50e-4324-b351-ec161851cc58",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
       "id": "32014L0024"
     },
     "status": "planned",
+    "coveredBy": [
+      "GPA"
+    ],
     "communication": {
       "futurenoticeDate": "2024-02-29T00:00:00+01:00"
     },

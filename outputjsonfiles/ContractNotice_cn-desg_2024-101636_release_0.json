@@ -1,7 +1,7 @@
 {
   "id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-cef20fcd-87e4-4669-83d7-71aa8d0746ca",
+  "ocid": "ocds-abcd1234-c7676ae5-e2b1-4900-b796-4d3fd70f0be2",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -22,7 +22,7 @@
         },
         "submissionTerms": {
           "electronicSubmissionPolicy": "required",
-          "variantPolicy": "Not allowed",
+          "variantPolicy": "notAllowed",
           "advancedElectronicSignatureRequired": true,
           "multipleBidsAllowed": false,
           "languages": [
@@ -340,10 +340,10 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "buyer",
-        "reviewContactPoint",
         "processContactPoint",
-        "evaluationBody"
+        "buyer",
+        "evaluationBody",
+        "reviewContactPoint"
       ],
       "address": {
         "locality": "GJØVIK"

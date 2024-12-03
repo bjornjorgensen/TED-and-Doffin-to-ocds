@@ -5,11 +5,11 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_no_negotiation_necessary(xml_content: str | bytes) -> dict | None:
-    """Parse no negotiation necessary information from XML for each lot.
+def parse_tool_atypical_url(xml_content: str | bytes) -> dict | None:
+    """Parse atypical tool URL information from XML for each lot.
 
-    Extract information about whether the buyer reserves the right to award the contract
-    without negotiation as defined in BT-120.
+    Extract information about URLs for tools and devices that are not generally
+    available as defined in BT-124.
 
     Args:
         xml_content: The XML content to parse, either as a string or bytes.
@@ -21,8 +21,8 @@ def parse_no_negotiation_necessary(xml_content: str | bytes) -> dict | None:
                 "lots": [
                     {
                         "id": str,
-                        "secondStage": {
-                            "noNegotiationNecessary": bool
+                        "communication": {
+                            "atypicalToolUrl": str
                         }
                     }
                 ]
@@ -54,62 +54,58 @@ def parse_no_negotiation_necessary(xml_content: str | bytes) -> dict | None:
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        no_negotiation = lot.xpath(
-            "cac:TenderingTerms/cac:AwardingTerms/cbc:NoFurtherNegotiationIndicator/text()",
+        atypical_url = lot.xpath(
+            "cac:TenderingProcess/cbc:AccessToolsURI/text()",
             namespaces=namespaces,
         )
 
-        if no_negotiation:
+        if atypical_url:
             lot_data = {
                 "id": lot_id,
-                "secondStage": {
-                    "noNegotiationNecessary": no_negotiation[0].lower() == "true"
-                },
+                "communication": {"atypicalToolUrl": atypical_url[0]},
             }
             result["tender"]["lots"].append(lot_data)
 
     return result if result["tender"]["lots"] else None
 
 
-def merge_no_negotiation_necessary(
-    release_json: dict, no_negotiation_data: dict | None
-) -> None:
-    """Merge no negotiation necessary data into the OCDS release.
+def merge_tool_atypical_url(release_json: dict, atypical_url_data: dict | None) -> None:
+    """Merge atypical tool URL data into the OCDS release.
 
-    Updates the release JSON in-place by adding or updating second stage information
+    Updates the release JSON in-place by adding or updating communication information
     for each lot specified in the input data.
 
     Args:
         release_json: The main OCDS release JSON to be updated. Must contain
             a 'tender' object with a 'lots' array.
-        no_negotiation_data: The parsed no negotiation data
-            in the same format as returned by parse_no_negotiation_necessary().
+        atypical_url_data: The parsed atypical tool URL data
+            in the same format as returned by parse_tool_atypical_url().
             If None, no changes will be made.
 
     Returns:
         None: The function modifies release_json in-place.
     """
-    if not no_negotiation_data:
-        logger.info("No negotiation necessary data to merge")
+    if not atypical_url_data:
+        logger.info("No atypical tool URL lot data to merge")
         return
 
     tender = release_json.setdefault("tender", {})
     existing_lots = tender.setdefault("lots", [])
 
-    for new_lot in no_negotiation_data["tender"]["lots"]:
+    for new_lot in atypical_url_data["tender"]["lots"]:
         existing_lot = next(
             (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
             None,
         )
         if existing_lot:
-            second_stage = existing_lot.setdefault("secondStage", {})
-            second_stage["noNegotiationNecessary"] = new_lot["secondStage"][
-                "noNegotiationNecessary"
+            communication = existing_lot.setdefault("communication", {})
+            communication["atypicalToolUrl"] = new_lot["communication"][
+                "atypicalToolUrl"
             ]
         else:
             existing_lots.append(new_lot)
 
     logger.info(
-        "Merged no negotiation necessary data for %d lots",
-        len(no_negotiation_data["tender"]["lots"]),
+        "Merged atypical tool URL data for %d lots",
+        len(atypical_url_data["tender"]["lots"]),
     )

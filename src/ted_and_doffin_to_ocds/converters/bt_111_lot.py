@@ -7,7 +7,36 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_framework_buyer_categories(xml_content):
+def parse_framework_buyer_categories(xml_content: str | bytes) -> dict | None:
+    """Parse framework agreement buyer categories from XML for each lot.
+
+    Extract information about additional categories of buyers participating in the
+    framework agreement as defined in BT-111.
+
+    Args:
+        xml_content: The XML content to parse, either as a string or bytes.
+
+    Returns:
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "techniques": {
+                            "frameworkAgreement": {
+                                "buyerCategories": str
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -46,8 +75,23 @@ def parse_framework_buyer_categories(xml_content):
 
 
 def merge_framework_buyer_categories(
-    release_json, framework_buyer_categories_data
+    release_json: dict, framework_buyer_categories_data: dict | None
 ) -> None:
+    """Merge framework buyer categories data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating framework agreement
+    information for each lot specified in the input data.
+
+    Args:
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        framework_buyer_categories_data: The parsed buyer categories data
+            in the same format as returned by parse_framework_buyer_categories().
+            If None, no changes will be made.
+
+    Returns:
+        None: The function modifies release_json in-place.
+    """
     if not framework_buyer_categories_data:
         logger.warning("No Framework buyer Categories data to merge")
         return

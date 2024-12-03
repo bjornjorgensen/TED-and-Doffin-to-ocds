@@ -1,5 +1,3 @@
-# converters/bt_115_GPA_Coverage.py
-
 import logging
 
 from lxml import etree
@@ -7,7 +5,32 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_gpa_coverage(xml_content):
+def parse_gpa_coverage(xml_content: str | bytes) -> dict | None:
+    """Parse GPA coverage information from XML for each lot.
+
+    Extract information about whether the procurement is covered by the
+    Government Procurement Agreement (GPA) as defined in BT-115.
+
+    Args:
+        xml_content: The XML content to parse, either as a string or bytes.
+
+    Returns:
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "coveredBy": ["GPA"]  # Only present if GPA covered
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -20,17 +43,17 @@ def parse_gpa_coverage(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    result = {"tender": {"lots": [], "coveredBy": []}}
+    result = {"tender": {"lots": []}}
 
-    # Process lots (BT-115-Lot)
     lots = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
         namespaces=namespaces,
     )
+
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         gpa_coverage = lot.xpath(
-            ".//cac:TenderingProcess/cbc:GovernmentAgreementConstraintIndicator/text()",
+            "cac:TenderingProcess/cbc:GovernmentAgreementConstraintIndicator/text()",
             namespaces=namespaces,
         )
 
@@ -38,49 +61,42 @@ def parse_gpa_coverage(xml_content):
             lot_data = {"id": lot_id, "coveredBy": ["GPA"]}
             result["tender"]["lots"].append(lot_data)
 
-    # Process part (BT-115-part)
-    part = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']",
-        namespaces=namespaces,
-    )
-    if part:
-        gpa_coverage = part[0].xpath(
-            ".//cac:TenderingProcess/cbc:GovernmentAgreementConstraintIndicator/text()",
-            namespaces=namespaces,
-        )
-        if gpa_coverage and gpa_coverage[0].lower() == "true":
-            result["tender"]["coveredBy"].append("GPA")
-
-    return result if result["tender"]["lots"] or result["tender"]["coveredBy"] else None
+    return result if result["tender"]["lots"] else None
 
 
-def merge_gpa_coverage(release_json, gpa_coverage_data) -> None:
+def merge_gpa_coverage(release_json: dict, gpa_coverage_data: dict | None) -> None:
+    """Merge GPA coverage data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating GPA coverage information
+    for each lot specified in the input data.
+
+    Args:
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        gpa_coverage_data: The parsed GPA coverage data
+            in the same format as returned by parse_gpa_coverage().
+            If None, no changes will be made.
+
+    Returns:
+        None: The function modifies release_json in-place.
+    """
     if not gpa_coverage_data:
-        logger.warning("No GPA Coverage data to merge")
+        logger.info("No GPA coverage data to merge")
         return
 
     tender = release_json.setdefault("tender", {})
+    existing_lots = tender.setdefault("lots", [])
 
-    # Merge lots
-    if "lots" in gpa_coverage_data["tender"]:
-        existing_lots = tender.setdefault("lots", [])
-        for new_lot in gpa_coverage_data["tender"]["lots"]:
-            existing_lot = next(
-                (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
-                None,
-            )
-            if existing_lot:
-                existing_lot.setdefault("coveredBy", []).extend(new_lot["coveredBy"])
-            else:
-                existing_lots.append(new_lot)
-
-    # Merge part
-    if "coveredBy" in gpa_coverage_data["tender"]:
-        tender.setdefault("coveredBy", []).extend(
-            gpa_coverage_data["tender"]["coveredBy"],
+    for new_lot in gpa_coverage_data["tender"]["lots"]:
+        existing_lot = next(
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
+        if existing_lot:
+            existing_lot.setdefault("coveredBy", []).extend(new_lot["coveredBy"])
+        else:
+            existing_lots.append(new_lot)
 
     logger.info(
-        "Merged GPA Coverage data for %d lots and part",
-        len(gpa_coverage_data["tender"]["lots"]),
+        "Merged GPA coverage data for %d lots", len(gpa_coverage_data["tender"]["lots"])
     )

@@ -1,22 +1,41 @@
-# converters/bt_98_Lot.py
-
 import logging
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+DURATION_MULTIPLIERS = {"DAY": 1, "WEEK": 7, "MONTH": 30, "YEAR": 365}
 
-def parse_tender_validity_deadline(xml_content):
-    """
-    Parse the XML content to extract the tender validity deadline for each lot.
+
+def parse_tender_validity_deadline(xml_content: str | bytes) -> dict | None:
+    """Parse tender validity deadline information from XML for each lot.
+
+    Extract information about the period for which tenders must remain valid
+    as defined in BT-98.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        dict: A dictionary containing the parsed tender validity deadline data.
-        None: If no relevant data is found.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "submissionTerms": {
+                            "bidValidityPeriod": {
+                                "durationInDays": int
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
+
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -30,20 +49,13 @@ def parse_tender_validity_deadline(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    # Check if the relevant XPath exists
-    relevant_xpath = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']//cac:TenderingTerms/cac:TenderValidityPeriod/cbc:DurationMeasure"
-    if not root.xpath(relevant_xpath, namespaces=namespaces):
-        logger.info(
-            "No tender validity deadline data found. Skipping parse_tender_validity_deadline."
-        )
-        return None
-
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
         namespaces=namespaces,
     )
+
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         duration_measure = lot.xpath(
@@ -52,37 +64,42 @@ def parse_tender_validity_deadline(xml_content):
         )
 
         if duration_measure:
-            value = int(duration_measure[0].text)
-            unit_code = duration_measure[0].get("unitCode")
+            try:
+                value = int(duration_measure[0].text)
+                unit_code = duration_measure[0].get("unitCode")
+                multiplier = DURATION_MULTIPLIERS.get(unit_code, 1)
+                duration_in_days = value * multiplier
 
-            multiplier = {"DAY": 1, "WEEK": 7, "MONTH": 30, "YEAR": 365}.get(
-                unit_code,
-                1,
-            )
-
-            duration_in_days = value * multiplier
-
-            lot_data = {
-                "id": lot_id,
-                "submissionTerms": {
-                    "bidValidityPeriod": {"durationInDays": duration_in_days},
-                },
-            }
-            result["tender"]["lots"].append(lot_data)
+                lot_data = {
+                    "id": lot_id,
+                    "submissionTerms": {
+                        "bidValidityPeriod": {"durationInDays": duration_in_days}
+                    },
+                }
+                result["tender"]["lots"].append(lot_data)
+            except (ValueError, TypeError):
+                logger.warning("Invalid duration value for lot %s", lot_id)
 
     return result if result["tender"]["lots"] else None
 
 
-def merge_tender_validity_deadline(release_json, tender_validity_deadline_data) -> None:
-    """
-    Merge the parsed tender validity deadline data into the main OCDS release JSON.
+def merge_tender_validity_deadline(
+    release_json: dict, tender_validity_deadline_data: dict | None
+) -> None:
+    """Merge tender validity deadline data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating submission terms
+    for each lot specified in the input data.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        tender_validity_deadline_data (dict): The parsed tender validity deadline data to be merged.
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        tender_validity_deadline_data: The parsed tender validity data
+            in the same format as returned by parse_tender_validity_deadline().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
     if not tender_validity_deadline_data:
         logger.info("No tender validity deadline data to merge")

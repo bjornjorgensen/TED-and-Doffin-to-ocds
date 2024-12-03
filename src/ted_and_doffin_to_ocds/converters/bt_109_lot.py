@@ -1,7 +1,6 @@
 # converters/bt_109_lot.py
 
 import logging
-from typing import Any
 
 from lxml import etree
 
@@ -48,84 +47,89 @@ def validate_xml_content(xml_content: str | bytes) -> bytes:
     return xml_content
 
 
-def parse_framework_duration_justification(
-    xml_content: str | bytes,
-) -> dict[str, Any] | None:
-    """
-    Parse the XML content to extract the framework agreement duration justification.
+def parse_framework_duration_justification(xml_content: str | bytes) -> dict | None:
+    """Parse framework agreement duration justification from XML for each lot.
+
+    Extract information about justification for exceptional cases when the duration
+    of framework agreements exceeds the legal limits as defined in BT-109.
 
     Args:
-        xml_content: The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        Optional[Dict[str, Any]]: A dictionary containing the parsed framework
-        duration justification data, or None if no relevant data is found.
+        A dictionary containing the parsed data in OCDS format with the following structure:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": str,
+                        "techniques": {
+                            "frameworkAgreement": {
+                                "periodRationale": str
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+        Returns None if no relevant data is found.
 
     Raises:
-        ValueError: If the input is invalid.
-        etree.XMLSyntaxError: If the XML is malformed.
+        etree.XMLSyntaxError: If the input is not valid XML.
     """
-    try:
-        xml_content = validate_xml_content(xml_content)
-        root = etree.fromstring(xml_content)
+    if isinstance(xml_content, str):
+        xml_content = xml_content.encode("utf-8")
 
-        result = {"tender": {"lots": []}}
+    root = etree.fromstring(xml_content)
+    namespaces = {
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+    }
 
-        # Find all procurement project lots with framework justifications
-        lots = root.xpath(
-            "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
-            namespaces=NAMESPACES,
+    result = {"tender": {"lots": []}}
+
+    lots = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        namespaces=namespaces,
+    )
+
+    for lot in lots:
+        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        justification = lot.xpath(
+            ".//cac:TenderingProcess/cac:FrameworkAgreement/cbc:Justification/text()",
+            namespaces=namespaces,
         )
 
-        for lot in lots:
-            # Get lot ID
-            lot_id = lot.xpath("cbc:ID/text()", namespaces=NAMESPACES)
-            if not lot_id:
-                continue
-
-            # Get framework justification
-            justification = lot.xpath(
-                ".//cac:TenderingProcess/cac:FrameworkAgreement/cbc:Justification/text()",
-                namespaces=NAMESPACES,
-            )
-            if not justification or not justification[0].strip():
-                continue
-
+        if justification and justification[0].strip():
             lot_data = {
-                "id": lot_id[0],
+                "id": lot_id,
                 "techniques": {
                     "frameworkAgreement": {"periodRationale": justification[0].strip()}
                 },
             }
             result["tender"]["lots"].append(lot_data)
 
-        return result if result["tender"]["lots"] else None
-
-    except (ValueError, etree.XMLSyntaxError):
-        logger.exception("Error parsing framework duration justification")
-        raise
-    except Exception:
-        logger.exception("Unexpected error parsing framework duration justification")
-        raise
+    return result if result["tender"]["lots"] else None
 
 
 def merge_framework_duration_justification(
-    release_json: dict[str, Any], framework_justification_data: dict[str, Any] | None
+    release_json: dict, framework_justification_data: dict | None
 ) -> None:
-    """
-    Merge the parsed framework duration justification data into the main OCDS release JSON.
+    """Merge framework duration justification data into the OCDS release.
+
+    Updates the release JSON in-place by adding or updating framework agreement
+    information for each lot specified in the input data.
 
     Args:
-        release_json: The main OCDS release JSON to be updated.
-        framework_justification_data: The parsed framework justification data to be merged.
+        release_json: The main OCDS release JSON to be updated. Must contain
+            a 'tender' object with a 'lots' array.
+        framework_justification_data: The parsed framework justification data
+            in the same format as returned by parse_framework_duration_justification().
+            If None, no changes will be made.
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function modifies release_json in-place.
     """
-    if not isinstance(release_json, dict):
-        logger.error("Invalid release_json type: %s", type(release_json))
-        raise TypeError(ERR_INVALID_RELEASE_JSON)
-
     if not framework_justification_data:
         logger.info("No framework duration justification data to merge")
         return
@@ -133,36 +137,21 @@ def merge_framework_duration_justification(
     tender = release_json.setdefault("tender", {})
     existing_lots = tender.setdefault("lots", [])
 
-    try:
-        for new_lot in framework_justification_data["tender"]["lots"]:
-            if (
-                not new_lot.get("techniques", {})
-                .get("frameworkAgreement", {})
-                .get("periodRationale")
-            ):
-                continue
-
-            existing_lot = next(
-                (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
-            )
-
-            if existing_lot:
-                techniques = existing_lot.setdefault("techniques", {})
-                framework = techniques.setdefault("frameworkAgreement", {})
-                framework["periodRationale"] = new_lot["techniques"][
-                    "frameworkAgreement"
-                ]["periodRationale"]
-            else:
-                existing_lots.append(new_lot)
-
-            logger.debug(
-                "Updated framework duration justification for lot %s", new_lot["id"]
-            )
-
-        logger.info(
-            "Successfully merged framework duration justification data for %d lots",
-            len(framework_justification_data["tender"]["lots"]),
+    for new_lot in framework_justification_data["tender"]["lots"]:
+        existing_lot = next(
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
+            None,
         )
+        if existing_lot:
+            techniques = existing_lot.setdefault("techniques", {})
+            framework = techniques.setdefault("frameworkAgreement", {})
+            framework["periodRationale"] = new_lot["techniques"]["frameworkAgreement"][
+                "periodRationale"
+            ]
+        else:
+            existing_lots.append(new_lot)
 
-    except KeyError:
-        logger.warning("Missing required keys in framework_justification_data")
+    logger.info(
+        "Merged framework duration justification data for %d lots",
+        len(framework_justification_data["tender"]["lots"]),
+    )
