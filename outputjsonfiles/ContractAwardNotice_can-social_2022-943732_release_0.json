@@ -1,7 +1,7 @@
 {
   "id": "2022-943732",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9cf50a45-73a3-42a0-976e-5a20cc7b7324",
+  "ocid": "ocds-abcd1234-20b9204c-601c-4e20-904e-d45a9ef69e28",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -88,6 +88,8 @@
         "email": "trine.lunemann.madane@politiet.no"
       },
       "address": {
+        "streetAddress": "Nydalen allé 35 ",
+        "postalCode": "0484 ",
         "locality": "OSLO"
       },
       "roles": [
@@ -108,6 +110,8 @@
         "email": "post@pst.politiet.no"
       },
       "address": {
+        "streetAddress": "Nydalen Allé 35",
+        "postalCode": "0421",
         "locality": "Oslo"
       },
       "roles": [
@@ -125,6 +129,8 @@
         "url": "https://www.domstol.no/no/Enkelt-domstol/oslo--tingrett/om-domstolen/"
       },
       "address": {
+        "streetAddress": "Postboks 2106 Vika",
+        "postalCode": "0125",
         "locality": "Oslo"
       },
       "roles": [
@@ -142,6 +148,8 @@
         "email": "post@pst.politiet.no"
       },
       "address": {
+        "streetAddress": "postboks 4773 Nydalen",
+        "postalCode": "0421",
         "locality": "Oslo"
       },
       "roles": [

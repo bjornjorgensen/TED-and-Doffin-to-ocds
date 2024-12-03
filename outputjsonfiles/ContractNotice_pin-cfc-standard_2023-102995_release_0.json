@@ -1,7 +1,7 @@
 {
   "id": "e5c8b25e-859d-492a-9085-716017f267aa",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-da914185-d580-49b1-a9e4-f44e6052b3bf",
+  "ocid": "ocds-abcd1234-48be7525-8933-4718-a427-010639798df8",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -260,11 +260,13 @@
         "email": "Dag.Olav.Koppervik@innovasjonnorge.no"
       },
       "address": {
+        "streetAddress": "Grev Wedels plass 9",
+        "postalCode": "0151",
         "locality": "Oslo"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {
@@ -282,6 +284,8 @@
         "email": "eirik.rise@sands.no"
       },
       "address": {
+        "streetAddress": "Bb 1829",
+        "postalCode": "0213",
         "locality": "Vika"
       },
       "roles": [

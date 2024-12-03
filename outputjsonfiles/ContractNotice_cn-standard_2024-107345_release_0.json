@@ -1,7 +1,7 @@
 {
   "id": "870ff007-688a-4ad1-9ad7-28c2ae514b40",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a658b99b-8a90-4593-a5fd-0f87e78acae5",
+  "ocid": "ocds-abcd1234-b58de4bd-6584-418e-a6e1-d0f35c873a66",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -204,6 +204,8 @@
         "email": "miriam.undebakke@kongsberg.kommune.no"
       },
       "address": {
+        "streetAddress": "Postboks 115",
+        "postalCode": "3602",
         "locality": "KONGSBERG"
       },
       "roles": [

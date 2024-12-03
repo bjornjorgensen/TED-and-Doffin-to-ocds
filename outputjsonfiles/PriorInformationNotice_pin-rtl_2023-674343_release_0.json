@@ -1,7 +1,7 @@
 {
   "id": "2023-674343",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a68731d1-f728-462f-92c4-5e33a7cf5dc4",
+  "ocid": "ocds-abcd1234-03405797-ae2c-48f7-9b39-459b751a7dac",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -136,11 +136,13 @@
       },
       "roles": [
         "leadBuyer",
-        "wholesaleBuyer",
         "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "wholesaleBuyer"
       ],
       "address": {
+        "streetAddress": "Rådhusplassen 3",
+        "postalCode": "2212",
         "locality": "KONGSVINGER"
       }
     },

@@ -1,7 +1,7 @@
 {
   "id": "2023-664435",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a4eff5b7-e8ad-4147-bf82-1ffea0eb7cf1",
+  "ocid": "ocds-abcd1234-4de08077-dec3-4d4f-877b-01dda648b8dc",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -137,10 +137,12 @@
         "email": "post@sykehusinnkjop.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "Postboks 40",
+        "postalCode": "9811",
         "locality": "VADSØ"
       }
     },

@@ -1,7 +1,7 @@
 {
   "id": "2023-624725",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ec75948e-c59c-4ac1-9381-3dce45e4abf4",
+  "ocid": "ocds-abcd1234-4bd52b45-5623-4626-8efe-bb57d441ef7e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -140,11 +140,13 @@
         "email": "sihr@bjornafjorden.kommune.no"
       },
       "address": {
+        "streetAddress": "Postboks 24",
+        "postalCode": "5649",
         "locality": "Eikelandsosen"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

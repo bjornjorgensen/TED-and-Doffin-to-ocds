@@ -1,7 +1,7 @@
 {
   "id": "2023-607152",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c1f47b12-18f2-4f47-8bf5-5e783159a8fc",
+  "ocid": "ocds-abcd1234-923ffbbf-b3dd-4bc0-ab23-c798f862efdb",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -132,10 +132,12 @@
         ]
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "Prinsens gate 39",
+        "postalCode": "7011",
         "locality": "TRONDHEIM"
       }
     }

@@ -1,7 +1,7 @@
 {
   "id": "0097de15-36cf-4750-96c9-f66ae4d6cafd",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c7044318-ab4f-4890-ad26-566646ea08b1",
+  "ocid": "ocds-abcd1234-66d80cbc-e36d-4f18-a8b7-851e87b8dbd3",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -83,6 +83,8 @@
         "buyer"
       ],
       "address": {
+        "streetAddress": "Postboks 8001",
+        "postalCode": "4068",
         "locality": "STAVANGER"
       }
     }

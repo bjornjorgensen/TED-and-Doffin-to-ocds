@@ -7,7 +7,28 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_ubo_postcode(xml_content):
+def parse_ubo_postcode(xml_content: str | bytes) -> dict | None:
+    """Parse ultimate beneficial owner postal code information from XML content.
+
+    Args:
+        xml_content: XML string or bytes containing UBO data
+
+    Returns:
+        Dict containing parsed parties data with UBO postal codes, or None if no valid data found.
+        Format: {
+            "parties": [
+                {
+                    "id": str,
+                    "beneficialOwners": [
+                        {
+                            "id": str,
+                            "address": {"postalCode": str}
+                        }
+                    ]
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -22,11 +43,11 @@ def parse_ubo_postcode(xml_content):
 
     result = {"parties": []}
 
-    organizations = root.xpath("//efac:organizations", namespaces=namespaces)
+    organizations = root.xpath("//efac:Organizations", namespaces=namespaces)
 
     for org in organizations:
         company_id = org.xpath(
-            "efac:organization/efac:company/cac:partyIdentification/cbc:ID[@schemeName='organization']/text()",
+            "efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
             namespaces=namespaces,
         )
         ubo_id = org.xpath(
@@ -50,7 +71,19 @@ def parse_ubo_postcode(xml_content):
     return result if result["parties"] else None
 
 
-def merge_ubo_postcode(release_json, ubo_postcode_data) -> None:
+def merge_ubo_postcode(release_json: dict, ubo_postcode_data: dict | None) -> None:
+    """Merge UBO postal code data into the release JSON.
+
+    Updates existing parties' beneficial owners information with postal codes.
+    Creates new party entries for organizations not already present in release_json.
+
+    Args:
+        release_json: The target release JSON to update
+        ubo_postcode_data: Dictionary containing UBO postal code data to merge
+
+    Returns:
+        None. Updates release_json in place.
+    """
     if not ubo_postcode_data:
         logger.warning("No ubo Postcode data to merge")
         return

@@ -1,7 +1,7 @@
 {
   "id": "74f9d169-452b-4a99-b8d2-f54c3c71e163",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0cc70348-45d6-4300-8c3e-28cd7c2abb94",
+  "ocid": "ocds-abcd1234-4835f4f9-acb9-4e85-8eeb-008c436b03fe",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -156,11 +156,13 @@
         "email": "truls.eirik.moan@bodo.kommune.no"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "reviewContactPoint"
       ],
       "address": {
+        "streetAddress": "Kongens gt. 23",
+        "postalCode": "8006",
         "locality": "BODØ"
       }
     },

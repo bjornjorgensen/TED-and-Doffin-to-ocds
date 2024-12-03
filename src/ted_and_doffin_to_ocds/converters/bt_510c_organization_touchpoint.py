@@ -7,7 +7,30 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_touchpoint_streetline2(xml_content):
+def parse_touchpoint_streetline2(xml_content: str | bytes) -> dict | None:
+    """
+    Parse touchpoint street line 2 information from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing touchpoint street information
+
+    Returns:
+        Optional[Dict]: A dictionary containing parsed address data in OCDS format with
+        'parties' array, or None if no valid street data is found.
+        Example:
+        {
+            "parties": [{
+                "id": "TPO-0001",
+                "address": {
+                    "streetAddress": "2, rue de Europe, Building A, 3rd Floor"
+                },
+                "identifier": {
+                    "id": "998298",
+                    "scheme": "internal"
+                }
+            }]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -17,38 +40,38 @@ def parse_touchpoint_streetline2(xml_content):
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
         "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
         "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:organizations/efac:organization",
+        "//efac:Organizations/efac:Organization",
         namespaces=namespaces,
     )
 
     for organization in organizations:
-        touchpoint = organization.xpath("efac:touchpoint", namespaces=namespaces)
+        touchpoint = organization.xpath("efac:TouchPoint", namespaces=namespaces)
         if touchpoint:
-            touchpoint_id = touchpoint[0].xpath(
-                "cac:partyIdentification/cbc:ID[@schemeName='touchpoint']/text()",
+            touchpoint = touchpoint[0]
+            touchpoint_id = touchpoint.xpath(
+                "cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']/text()",
                 namespaces=namespaces,
             )
             company_id = organization.xpath(
-                "efac:company/cac:partyLegalEntity/cbc:companyID/text()",
+                "efac:Company/cac:PartyLegalEntity/cbc:CompanyID/text()",
                 namespaces=namespaces,
             )
 
             if touchpoint_id:
-                street_name = touchpoint[0].xpath(
+                street_name = touchpoint.xpath(
                     "cac:PostalAddress/cbc:StreetName/text()",
                     namespaces=namespaces,
                 )
-                additional_street_name = touchpoint[0].xpath(
+                additional_street_name = touchpoint.xpath(
                     "cac:PostalAddress/cbc:AdditionalStreetName/text()",
                     namespaces=namespaces,
                 )
-                address_lines = touchpoint[0].xpath(
+                address_lines = touchpoint.xpath(
                     "cac:PostalAddress/cac:AddressLine/cbc:Line/text()",
                     namespaces=namespaces,
                 )
@@ -73,13 +96,33 @@ def parse_touchpoint_streetline2(xml_content):
                             "scheme": "internal",
                         }
                     result["parties"].append(party)
+                    logger.info(
+                        "Found street line 2 for touchpoint %s", touchpoint_id[0]
+                    )
 
     return result if result["parties"] else None
 
 
-def merge_touchpoint_streetline2(release_json, touchpoint_streetline2_data) -> None:
+def merge_touchpoint_streetline2(
+    release_json: dict, touchpoint_streetline2_data: dict | None
+) -> None:
+    """
+    Merge touchpoint street line 2 data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        touchpoint_streetline2_data (Optional[Dict]): Touchpoint street data to merge,
+            containing a 'parties' array with address and identifier information
+
+    Returns:
+        None: Modifies release_json in place
+
+    Note:
+        If touchpoint_streetline2_data is None or contains no parties, no changes are made.
+        For existing parties, both street address and identifier information is updated.
+    """
     if not touchpoint_streetline2_data:
-        logger.warning("No touchpoint Streetline 2 data to merge")
+        logger.info("No touchpoint street line 2 data to merge")
         return
 
     existing_parties = release_json.setdefault("parties", [])
@@ -93,10 +136,7 @@ def merge_touchpoint_streetline2(release_json, touchpoint_streetline2_data) -> N
             existing_party.setdefault("address", {}).update(new_party["address"])
             if "identifier" in new_party:
                 existing_party["identifier"] = new_party["identifier"]
+            logger.info("Updated street line 2 for touchpoint %s", new_party["id"])
         else:
             existing_parties.append(new_party)
-
-    logger.info(
-        "Merged touchpoint Streetline 2 data for %s parties",
-        len(touchpoint_streetline2_data["parties"]),
-    )
+            logger.info("Added new touchpoint with street line 2: %s", new_party["id"])

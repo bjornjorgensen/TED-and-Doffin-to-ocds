@@ -7,7 +7,26 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_organization_touchpoint_city(xml_content):
+def parse_organization_touchpoint_city(
+    xml_content: str | bytes,
+) -> dict | None:
+    """Parse organization touchpoint city information from XML content.
+
+    Args:
+        xml_content: XML string or bytes containing organization touchpoint data
+
+    Returns:
+        Dict containing parsed parties data with city names, or None if no valid data found.
+        Format: {
+            "parties": [
+                {
+                    "id": str,
+                    "address": {"locality": str},
+                    "identifier": {"id": str, "scheme": "internal"} # optional
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -50,8 +69,20 @@ def parse_organization_touchpoint_city(xml_content):
 
 
 def merge_organization_touchpoint_city(
-    release_json, organization_touchpoint_city_data
+    release_json: dict, organization_touchpoint_city_data: dict | None
 ) -> None:
+    """Merge organization touchpoint city data into the release JSON.
+
+    Updates existing parties' address information with city names from touchpoint data.
+    Creates new party entries for touchpoints not already present in release_json.
+
+    Args:
+        release_json: The target release JSON to update
+        organization_touchpoint_city_data: Dictionary containing touchpoint city data to merge
+
+    Returns:
+        None. Updates release_json in place.
+    """
     if not organization_touchpoint_city_data:
         logger.info("No organization touchpoint city data to merge")
         return

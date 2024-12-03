@@ -1,7 +1,7 @@
 {
   "id": "3580e3e0-275f-4489-9aab-b6f493790e00",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-84c88d18-e7a8-4ec0-8d34-06b30f396709",
+  "ocid": "ocds-abcd1234-28e2f4b6-f6b6-4e5f-9c8d-548ce8a4ce00",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -247,10 +247,12 @@
         "email": "finn-magne.eines@elmea.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "Vorsetøyveien 31",
+        "postalCode": "8300",
         "locality": "Svolvær"
       }
     }

@@ -1,7 +1,7 @@
 {
   "id": "2022-955474",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b60c488b-8230-45e1-ac75-69915781f280",
+  "ocid": "ocds-abcd1234-52f2820d-091d-4302-b30a-cf65ac78b8be",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -84,6 +84,8 @@
         "email": "kristin.odegarden@uit.no"
       },
       "address": {
+        "streetAddress": "Postboks 6050 Langnes",
+        "postalCode": "9037",
         "locality": "Tromsø"
       },
       "roles": [
@@ -103,6 +105,7 @@
         }
       ],
       "address": {
+        "streetAddress": "Peder Thomassons gate 12",
         "locality": "Arendal"
       },
       "roles": [

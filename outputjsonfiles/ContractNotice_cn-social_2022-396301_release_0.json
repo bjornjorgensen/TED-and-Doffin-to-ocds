@@ -1,7 +1,7 @@
 {
   "id": "2022-396301",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-878bb5d3-2621-4078-96a1-90ba34f7ec65",
+  "ocid": "ocds-abcd1234-ef61f03f-f302-42a3-b392-07d4616c5c87",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -127,11 +127,13 @@
         "email": "rolf.berg@innkjopsservice.no"
       },
       "address": {
+        "streetAddress": "Mellombygdveien 216",
+        "postalCode": "9321",
         "locality": "MOEN"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

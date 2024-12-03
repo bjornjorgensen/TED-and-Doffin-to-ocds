@@ -1,7 +1,7 @@
 {
   "id": "2022-902600",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c2cc708a-85f9-492d-bcc7-737629a57317",
+  "ocid": "ocds-abcd1234-d1dfb782-78b5-42f9-9cff-5e579d2c391c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -137,12 +137,14 @@
         "email": "bjarki.steinarsson@agderfk.no"
       },
       "address": {
+        "streetAddress": "Postboks 788 Stoa",
+        "postalCode": "4809",
         "locality": "Arendal"
       },
       "roles": [
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

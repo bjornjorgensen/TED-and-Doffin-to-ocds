@@ -1,7 +1,7 @@
 {
   "id": "2023-620727",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-16db609f-6d6d-4997-b0d5-85629a2a3b47",
+  "ocid": "ocds-abcd1234-28288b1a-e630-43aa-af43-1e041e9489b7",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -140,10 +140,12 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "Edv.Stormsveg 2",
+        "postalCode": "2680",
         "locality": "VÅGÅ"
       }
     },

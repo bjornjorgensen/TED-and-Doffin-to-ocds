@@ -1,7 +1,7 @@
 {
   "id": "8791620e-39a1-435d-985a-bee33825e3f4",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c08d27c8-1e9b-4a3f-b99d-89c79aaddc6a",
+  "ocid": "ocds-abcd1234-7f14a11f-2b77-4426-92e8-24625c75d9e6",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -269,6 +269,8 @@
         "email": "lstoll@mil.no"
       },
       "address": {
+        "streetAddress": "Lysaker Torg 45",
+        "postalCode": "1366",
         "locality": "Lysaker"
       },
       "roles": [
@@ -290,6 +292,8 @@
         "email": "oslo.tingrett.notarial@domstol.no"
       },
       "address": {
+        "streetAddress": "C.J Hambros Plass",
+        "postalCode": "0164",
         "locality": "Oslo"
       },
       "roles": [

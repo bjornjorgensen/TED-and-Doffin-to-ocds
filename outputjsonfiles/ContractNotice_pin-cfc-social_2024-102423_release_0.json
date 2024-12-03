@@ -1,7 +1,7 @@
 {
   "id": "2c234234-aaec-4210-8cbe-1803ecaee901",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4f0255e6-cbfe-43fc-b24d-a55528548897",
+  "ocid": "ocds-abcd1234-3b4dc191-3fa8-4be6-846a-dad0ccd5129c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -138,11 +138,13 @@
         "email": "even.arvik.langseth@alesund.kommune.no"
       },
       "address": {
+        "streetAddress": "Keiser Wilhelms gate 11",
+        "postalCode": "6003",
         "locality": "Ålesund"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {
@@ -162,6 +164,8 @@
         "url": "https://www.domstol.no/no/domstoler/tingrett/more-og-romsdal-tingrett/"
       },
       "address": {
+        "streetAddress": "Postboks 1354",
+        "postalCode": "6001",
         "locality": "Ålesund"
       },
       "roles": [

@@ -1,7 +1,7 @@
 {
   "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-190166bd-8939-411c-a60a-6d0f64d66eb5",
+  "ocid": "ocds-abcd1234-70ba0d12-e766-48a1-9327-d67ddda21d55",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -144,13 +144,15 @@
         "email": "post@grieghallen.no"
       },
       "address": {
+        "streetAddress": "Edvard Griegs plass 1",
+        "postalCode": "5015",
         "locality": "Bergen"
       },
       "roles": [
-        "processContactPoint",
-        "buyer",
         "funder",
-        "payer"
+        "payer",
+        "buyer",
+        "processContactPoint"
       ]
     },
     {
@@ -171,6 +173,8 @@
         "url": "http://stiegler.no"
       },
       "address": {
+        "streetAddress": "Postboks 1124 Sentrum",
+        "postalCode": "5809",
         "locality": "Bergen"
       },
       "roles": [

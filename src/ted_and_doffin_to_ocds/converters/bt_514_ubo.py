@@ -59,7 +59,28 @@ ISO_3166_CONVERSION = {
 }
 
 
-def parse_ubo_country(xml_content):
+def parse_ubo_country(xml_content: str | bytes) -> dict | None:
+    """Parse ultimate beneficial owner country information from XML content.
+
+    Args:
+        xml_content: XML string or bytes containing UBO data
+
+    Returns:
+        Dict containing parsed parties data with country codes, or None if no valid data found.
+        Format: {
+            "parties": [
+                {
+                    "id": str,
+                    "beneficialOwners": [
+                        {
+                            "id": str,
+                            "address": {"country": str} # ISO 3166-1 alpha-2 country code
+                        }
+                    ]
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -75,13 +96,12 @@ def parse_ubo_country(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:organizations/efac:organization",
-        namespaces=namespaces,
+        "//efac:Organizations/efac:Organization", namespaces=namespaces
     )
 
     for organization in organizations:
         org_id = organization.xpath(
-            "efac:company/cac:partyIdentification/cbc:ID[@schemeName='organization']/text()",
+            "efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
             namespaces=namespaces,
         )
 
@@ -89,7 +109,7 @@ def parse_ubo_country(xml_content):
             party = {"id": org_id[0], "beneficialOwners": []}
 
             ubos = root.xpath(
-                "//efac:organizations/efac:UltimateBeneficialOwner",
+                "//efac:Organizations/efac:UltimateBeneficialOwner",
                 namespaces=namespaces,
             )
             for ubo in ubos:
@@ -103,11 +123,14 @@ def parse_ubo_country(xml_content):
                 )
 
                 if ubo_id and country_code:
-                    beneficial_owner = {
-                        "id": ubo_id[0],
-                        "address": {"country": convert_country_code(country_code[0])},
-                    }
-                    party["beneficialOwners"].append(beneficial_owner)
+                    party["beneficialOwners"].append(
+                        {
+                            "id": ubo_id[0],
+                            "address": {
+                                "country": convert_country_code(country_code[0])
+                            },
+                        }
+                    )
 
             if party["beneficialOwners"]:
                 result["parties"].append(party)
@@ -115,15 +138,33 @@ def parse_ubo_country(xml_content):
     return result if result["parties"] else None
 
 
-def convert_country_code(code):
-    """
-    Convert ISO 3166-1 alpha-3 country code to alpha-2 code.
-    If the code is not found in the conversion dictionary, return the original code.
+def convert_country_code(code: str) -> str:
+    """Convert ISO 3166-1 alpha-3 country code to alpha-2 code.
+
+    Args:
+        code: ISO 3166-1 alpha-3 country code (e.g. 'GBR')
+
+    Returns:
+        ISO 3166-1 alpha-2 country code (e.g. 'GB').
+        If code not found in conversion dictionary, returns original code.
     """
     return ISO_3166_CONVERSION.get(code, code)
 
 
-def merge_ubo_country(release_json, ubo_country_data) -> None:
+def merge_ubo_country(release_json: dict, ubo_country_data: dict | None) -> None:
+    """Merge UBO country data into the release JSON.
+
+    Updates existing parties' beneficial owners information with country codes.
+    Creates new party entries for organizations not already present in release_json.
+    Country codes are converted from ISO 3166-1 alpha-3 to alpha-2 format.
+
+    Args:
+        release_json: The target release JSON to update
+        ubo_country_data: Dictionary containing UBO country data to merge
+
+    Returns:
+        None. Updates release_json in place.
+    """
     if not ubo_country_data:
         logger.warning("No ubo Country data to merge")
         return

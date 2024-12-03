@@ -1,7 +1,7 @@
 {
   "id": "2022-976327",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4ede0919-feb7-420d-ba27-7c1ce66ebc71",
+  "ocid": "ocds-abcd1234-4969c9b2-cee8-4004-8f61-867bfce4c850",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -128,10 +128,12 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "Nedre Slottsgate 3",
+        "postalCode": "0157 ",
         "locality": "Oslo"
       }
     },
@@ -146,6 +148,8 @@
         "url": "https://www.domstol.no/no/domstoler/tingrett/oslo-tingrett/"
       },
       "address": {
+        "streetAddress": "Postboks 2106 Vika",
+        "postalCode": "0125",
         "locality": "Oslo"
       },
       "roles": [
@@ -163,6 +167,8 @@
         "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa"
       },
       "address": {
+        "streetAddress": "Zander Kaaes gate 7",
+        "postalCode": "5015",
         "locality": "Bergen"
       },
       "roles": [
@@ -177,6 +183,8 @@
         "email": "leona.pilares@sye.oslo.kommune.no"
       },
       "address": {
+        "streetAddress": "Pb. 435 Sentrum",
+        "postalCode": "0103",
         "locality": "OSLO"
       },
       "roles": [

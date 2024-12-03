@@ -1,7 +1,7 @@
 {
   "id": "2022-347651",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e11042d9-e4ba-40f4-a6c0-b3f73ff17965",
+  "ocid": "ocds-abcd1234-88c3a79f-8f77-4271-a8a1-d5d167269919",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -143,6 +143,8 @@
         "buyer"
       ],
       "address": {
+        "streetAddress": "Postboks 2160",
+        "postalCode": "5504",
         "locality": "Haugesund"
       }
     },
@@ -157,6 +159,8 @@
         "url": "https://www.domstol.no/en/enkelt-domstol/haugaland-og-sunnhordland-tingrett/"
       },
       "address": {
+        "streetAddress": "Postboks 385",
+        "postalCode": "5501",
         "locality": "Haugesund"
       },
       "roles": [
@@ -174,6 +178,8 @@
         "url": "www.klagenemndssekretariatet.no"
       },
       "address": {
+        "streetAddress": "Postboks 511",
+        "postalCode": "5805",
         "locality": "Bergen"
       },
       "roles": [

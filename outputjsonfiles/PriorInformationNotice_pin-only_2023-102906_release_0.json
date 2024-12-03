@@ -1,7 +1,7 @@
 {
   "id": "26cd2bbe-3527-43ab-ae19-ecb644fff706",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e631990f-904d-4363-8b1c-a1d6aff26a97",
+  "ocid": "ocds-abcd1234-01222a7c-04e6-4645-903b-6cdddd4390e1",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -120,6 +120,8 @@
         "email": "Pia.charlotte.berg@gmail.com"
       },
       "address": {
+        "streetAddress": "Postboks 2025",
+        "postalCode": "3202",
         "locality": "Sandefjord"
       },
       "roles": [

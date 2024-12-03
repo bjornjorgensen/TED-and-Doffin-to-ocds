@@ -1,7 +1,7 @@
 {
   "id": "74f8c72a-5dcd-4a77-afda-6573ca30c8df",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-738d359e-d115-4870-b57b-91550210ab1c",
+  "ocid": "ocds-abcd1234-6b45de0e-bc0b-4af5-9395-4f610261573e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -353,12 +353,14 @@
         "email": "rita@varinn.no"
       },
       "address": {
+        "streetAddress": "Kjøpmannsgata 13",
+        "postalCode": "7500",
         "locality": "Stjørdal"
       },
       "roles": [
+        "buyer",
         "leadBuyer",
-        "processContactPoint",
-        "buyer"
+        "processContactPoint"
       ]
     },
     {
@@ -583,6 +585,8 @@
         "url": "https://www.domstol.no/no/domstoler/tingrett/trondelag-tingrett/"
       },
       "address": {
+        "streetAddress": "Postboks 2317 Torgarden",
+        "postalCode": "7004",
         "locality": "Trondheim"
       },
       "roles": [

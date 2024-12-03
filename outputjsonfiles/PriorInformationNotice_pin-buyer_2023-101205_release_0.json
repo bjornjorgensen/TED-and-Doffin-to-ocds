@@ -1,7 +1,7 @@
 {
   "id": "667f77ec-2687-48a0-a752-651a0d7ebdcb",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-72de065c-81d3-4d46-84b7-51603146403e",
+  "ocid": "ocds-abcd1234-9162aff1-e76d-4e99-a13f-2a66733e8b1a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -106,6 +106,8 @@
         "buyer"
       ],
       "address": {
+        "streetAddress": "Grev Wedels plass 1",
+        "postalCode": "0151",
         "locality": "OSLO"
       }
     }

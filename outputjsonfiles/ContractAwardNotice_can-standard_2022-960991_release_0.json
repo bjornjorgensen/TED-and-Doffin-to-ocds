@@ -1,7 +1,7 @@
 {
   "id": "2022-960991",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-481fae49-dde1-4987-bb00-7733c3aed962",
+  "ocid": "ocds-abcd1234-c3710562-16cc-4a1f-8f0f-c49fc49e9304",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -122,6 +122,8 @@
         "buyer"
       ],
       "address": {
+        "streetAddress": "Rambergveien 9",
+        "postalCode": "3115",
         "locality": "TØNSBERG"
       }
     },
@@ -138,6 +140,8 @@
         }
       ],
       "address": {
+        "streetAddress": "Innspurten 15",
+        "postalCode": "0663",
         "locality": "Oslo"
       },
       "roles": [
@@ -148,6 +152,8 @@
       "id": "ORG-0003",
       "name": "Vestfold Tingrett, Tønsberg tinghus",
       "address": {
+        "streetAddress": "postboks 2013",
+        "postalCode": "3103",
         "locality": "Tønsberg"
       },
       "roles": [

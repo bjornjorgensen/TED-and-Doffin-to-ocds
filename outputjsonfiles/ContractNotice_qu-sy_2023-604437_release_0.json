@@ -1,7 +1,7 @@
 {
   "id": "2023-604437",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-af051521-fd61-4bc4-b28d-2acdc91f73ba",
+  "ocid": "ocds-abcd1234-f27d4595-ef19-440a-918c-d29cbd85995b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -124,10 +124,12 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "Økernveien 9",
+        "postalCode": "0608",
         "locality": "Oslo"
       }
     },
@@ -135,6 +137,8 @@
       "id": "ORG-0002",
       "name": "Oslo Tingrett",
       "address": {
+        "streetAddress": "Postboks 2106 Vika",
+        "postalCode": "0125",
         "locality": "Oslo"
       },
       "roles": [

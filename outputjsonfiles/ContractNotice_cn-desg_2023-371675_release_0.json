@@ -1,7 +1,7 @@
 {
   "id": "2023-371675",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-21e28270-b3e8-43a4-b366-114e816e3184",
+  "ocid": "ocds-abcd1234-bddfd200-5191-4711-b2f0-2e47e6dbc212",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -143,10 +143,12 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "Gullhaug Torg 2",
+        "postalCode": "0484",
         "locality": "OSLO"
       }
     },

@@ -1,7 +1,7 @@
 {
   "id": "9a4b7099-142a-412a-af35-3e8feaf15ec7",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f666ac32-98fd-4a6d-bf2c-f990298ab890",
+  "ocid": "ocds-abcd1234-93cc339d-95d3-4e5e-84e5-4a9652f2af9d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -97,6 +97,8 @@
         "email": "elin.nygaard.opperud@moss.kommune.no"
       },
       "address": {
+        "streetAddress": "Kirkegata 15",
+        "postalCode": "1531",
         "locality": "Moss"
       },
       "roles": [
@@ -120,6 +122,8 @@
         "url": "https://www.domstol.no/no/domstoler/tingrett/sondre-ostfold-tingrett/"
       },
       "address": {
+        "streetAddress": "Postboks 113",
+        "postalCode": "1601",
         "locality": "Fredrikstad"
       },
       "roles": [

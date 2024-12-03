@@ -1,7 +1,7 @@
 {
   "id": "a105cb09-ec7d-45d5-a364-ff2317e2231f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e77919ed-ae7c-49b6-814a-e6f45100eec1",
+  "ocid": "ocds-abcd1234-aeab8209-8b5a-46d5-a699-0f6a66c83fef",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -102,6 +102,8 @@
         "email": "inecharlotte.hoyer@lillestrom.kommune.no"
       },
       "address": {
+        "streetAddress": "Jonas Lies gate 18",
+        "postalCode": "2000",
         "locality": "Lillestrøm"
       },
       "roles": [
@@ -125,6 +127,8 @@
         "url": "https://www.domstol.no/no/domstoler/tingrett/romerike-og-glamdal-tingrett/"
       },
       "address": {
+        "streetAddress": "Postboks 393",
+        "postalCode": "2001",
         "locality": "Lillestrøm"
       },
       "roles": [

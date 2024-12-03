@@ -1,7 +1,7 @@
 {
   "id": "2023-612007",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-88d2bbb5-a4c3-433f-a06f-e855385ab0af",
+  "ocid": "ocds-abcd1234-9604acf5-f8c5-4932-8d22-7c53d7d5c3ae",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -86,10 +86,12 @@
         "email": "e-mjorgensen@mil.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "Lysaker Torg 45",
+        "postalCode": "1366",
         "locality": "Lysaker"
       }
     }

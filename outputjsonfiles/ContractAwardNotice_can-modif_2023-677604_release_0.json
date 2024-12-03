@@ -1,7 +1,7 @@
 {
   "id": "2023-677604",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-214028f0-003f-4596-8e0a-6c3fe3361d86",
+  "ocid": "ocds-abcd1234-cf26cb37-2316-439f-b901-2d0eb588a5c1",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -156,6 +156,7 @@
         "buyer"
       ],
       "address": {
+        "streetAddress": "Hauges gate 89",
         "locality": "Drammen"
       }
     },
@@ -169,6 +170,8 @@
         }
       ],
       "address": {
+        "streetAddress": "Postboks 24",
+        "postalCode": "8469",
         "locality": "Bø i Vesterålen"
       },
       "roles": [

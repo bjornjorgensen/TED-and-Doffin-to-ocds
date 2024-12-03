@@ -1,7 +1,7 @@
 {
   "id": "7d111d51-8042-402a-a234-50efe86d8f4f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7b854f57-48f3-4f24-949d-c9f4cf444f29",
+  "ocid": "ocds-abcd1234-12e34952-ad72-4764-8ebe-20798e1c9603",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -193,10 +193,12 @@
         "email": "Kristian.von.Aphelen@posten.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "Biskop Gunnerus' gate 14 A",
+        "postalCode": "0185",
         "locality": "Oslo"
       }
     },
@@ -217,6 +219,8 @@
         "url": "https://www.postenbring.no/"
       },
       "address": {
+        "streetAddress": "Postboks 1500",
+        "postalCode": "0001",
         "locality": "Oslo"
       },
       "roles": [
@@ -240,6 +244,8 @@
         "url": "https://www.domstol.no/no/domstoler/tingrett/oslo-tingrett/"
       },
       "address": {
+        "streetAddress": "Postboks 2106 Vika",
+        "postalCode": "0125",
         "locality": "Oslo"
       },
       "roles": [
@@ -263,6 +269,8 @@
         "url": "https://www.postenbring.no/"
       },
       "address": {
+        "streetAddress": "Postboks 1500",
+        "postalCode": "0001",
         "locality": "Oslo"
       },
       "roles": [

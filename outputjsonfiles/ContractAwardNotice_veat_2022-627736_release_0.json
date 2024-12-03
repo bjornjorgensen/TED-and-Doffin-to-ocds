@@ -1,7 +1,7 @@
 {
   "id": "2022-627736",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-68a68971-22b8-4f37-a349-f55ab0ec0c33",
+  "ocid": "ocds-abcd1234-7ed43535-08d8-4ccf-b175-3e8b4d6da96e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -95,6 +95,8 @@
         "email": "paal.nustad@ra.no"
       },
       "address": {
+        "streetAddress": "Dronningens gate 13",
+        "postalCode": "0152",
         "locality": "OSLO"
       },
       "roles": [
@@ -119,6 +121,8 @@
         "email": "geodata@geodata.no"
       },
       "address": {
+        "streetAddress": "Pb 9036 Grønland",
+        "postalCode": "0133",
         "locality": "Oslo"
       },
       "roles": [
@@ -132,6 +136,8 @@
         "email": "oslo.tingrett@domstol.no"
       },
       "address": {
+        "streetAddress": "Pb 2106 Vika",
+        "postalCode": "0125",
         "locality": "Oslo"
       },
       "roles": [

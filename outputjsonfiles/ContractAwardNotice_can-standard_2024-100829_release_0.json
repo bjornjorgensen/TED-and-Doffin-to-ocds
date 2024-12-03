@@ -1,7 +1,7 @@
 {
   "id": "510444f4-6cd2-4b26-8dd6-f3af27ffa069",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a4b2fe1f-35d0-48b8-9c20-820b4f7ddc64",
+  "ocid": "ocds-abcd1234-923f3545-7592-47c2-89cc-06200f1f3c49",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -126,12 +126,14 @@
         "email": "silje.skansen.elfving@ringerike.kommune.no"
       },
       "address": {
+        "streetAddress": "Osloveien 1 Rådhuset",
+        "postalCode": "3511",
         "locality": "HØNEFOSS"
       },
       "roles": [
         "funder",
-        "buyer",
-        "payer"
+        "payer",
+        "buyer"
       ]
     },
     {
@@ -148,6 +150,7 @@
         "email": "trabpost@domstol.no"
       },
       "address": {
+        "postalCode": "1302",
         "locality": "Sandvika"
       },
       "roles": [

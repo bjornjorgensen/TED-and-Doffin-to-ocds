@@ -1,7 +1,7 @@
 {
   "id": "2022-614279",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-817132e1-45d4-4032-b18b-9bde57226015",
+  "ocid": "ocds-abcd1234-40256737-a8c2-49b8-8273-57e6e5b1df2e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -127,10 +127,12 @@
         "email": "anita.hellehaven@nav.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "Postboks 354",
+        "postalCode": "8601",
         "locality": "Mo i Rana"
       }
     },
@@ -138,6 +140,8 @@
       "id": "ORG-0002",
       "name": "Oslo Tingrett",
       "address": {
+        "streetAddress": " Postboks 2106 Vika",
+        "postalCode": "0125",
         "locality": "Oslo"
       },
       "roles": [

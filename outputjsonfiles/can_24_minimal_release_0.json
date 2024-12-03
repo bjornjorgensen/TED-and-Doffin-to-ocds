@@ -1,7 +1,7 @@
 {
   "id": "65667997-031a-4198-bd25-7225449ef479",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-da7b3a38-6946-4cd6-81f5-354131183560",
+  "ocid": "ocds-abcd1234-2c86938d-0ce1-47cc-8160-8a049d8c218d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -91,14 +91,15 @@
         "telephone": "+33 235156161",
         "email": "contact@rouenhabitat.fr"
       },
-      "address": {
-        "locality": "Rouen Cedex 1"
-      },
       "beneficialOwners": [
         {
           "id": "UBO-0001"
         }
       ],
+      "address": {
+        "postalCode": "ABC123",
+        "locality": "Rouen Cedex 1"
+      },
       "roles": [
         "buyer"
       ]
@@ -112,14 +113,15 @@
           "scheme": "GB-COH"
         }
       ],
-      "address": {
-        "locality": "Rouen"
-      },
       "beneficialOwners": [
         {
           "id": "UBO-0001"
         }
       ],
+      "address": {
+        "postalCode": "ABC123",
+        "locality": "Rouen"
+      },
       "roles": [
         "reviewBody"
       ]
@@ -140,14 +142,15 @@
         "telephone": "+33 2 35 67 82 82",
         "email": "contact@example.com"
       },
-      "address": {
-        "locality": "Le Grand-Quevilly"
-      },
       "beneficialOwners": [
         {
           "id": "UBO-0001"
         }
       ],
+      "address": {
+        "postalCode": "ABC123",
+        "locality": "Le Grand-Quevilly"
+      },
       "roles": [
         "tenderer"
       ]

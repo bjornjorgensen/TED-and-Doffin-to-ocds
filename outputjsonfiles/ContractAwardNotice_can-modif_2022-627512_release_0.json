@@ -1,7 +1,7 @@
 {
   "id": "2022-627512",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b58aca3c-193e-4297-8eca-164e03d70347",
+  "ocid": "ocds-abcd1234-f689c30d-d925-448f-b352-05abf97366f3",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -130,6 +130,8 @@
         "buyer"
       ],
       "address": {
+        "streetAddress": "Herslebs gate 5",
+        "postalCode": "0561",
         "locality": "Oslo"
       }
     },
@@ -143,6 +145,7 @@
         }
       ],
       "address": {
+        "postalCode": "0134",
         "locality": "Oslo"
       },
       "roles": [
@@ -156,6 +159,7 @@
         "email": "oslo.tingrett@domstol.no"
       },
       "address": {
+        "postalCode": "0164",
         "locality": "Oslo"
       },
       "roles": [

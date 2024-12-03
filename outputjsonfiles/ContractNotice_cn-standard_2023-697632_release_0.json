@@ -1,7 +1,7 @@
 {
   "id": "2023-697632",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2cec7fb4-dec4-4309-9ae0-dae17e966e2d",
+  "ocid": "ocds-abcd1234-951c883b-ca74-42bd-948d-65cd5d9dec09",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -125,11 +125,13 @@
         "url": "http://www.heim.kommune.no"
       },
       "address": {
+        "streetAddress": "Trondheimsvn. 1",
+        "postalCode": "7200",
         "locality": "Kyrksæterøra"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     }
   ],

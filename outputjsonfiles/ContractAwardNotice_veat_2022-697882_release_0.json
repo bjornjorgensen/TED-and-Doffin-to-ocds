@@ -1,7 +1,7 @@
 {
   "id": "2022-697882",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2f1de24b-7951-4a91-8d60-add4f60ecda3",
+  "ocid": "ocds-abcd1234-0775a6c9-00fa-4104-9c55-186287d730e5",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -100,6 +100,8 @@
         "buyer"
       ],
       "address": {
+        "streetAddress": "Postboks 40",
+        "postalCode": "9811",
         "locality": "VADSØ"
       }
     },
@@ -113,6 +115,8 @@
         }
       ],
       "address": {
+        "streetAddress": "Drammensveien 288",
+        "postalCode": "0283",
         "locality": "Oslo"
       },
       "roles": [
@@ -126,6 +130,8 @@
         "url": "https://www.domstol.no/Enkelt-domstol/ost-finnmark-tingrett/"
       },
       "address": {
+        "streetAddress": "Postboks 54",
+        "postalCode": "9811",
         "locality": "Vadsø"
       },
       "roles": [
@@ -143,6 +149,8 @@
         "email": "postmottak@kofa.no"
       },
       "address": {
+        "streetAddress": "Postboks 439 Sentrum",
+        "postalCode": "5805",
         "locality": "Bergen"
       },
       "roles": [

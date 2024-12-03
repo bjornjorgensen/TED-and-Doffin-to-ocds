@@ -1,7 +1,7 @@
 {
   "id": "2023-336496",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-04d9c0e1-9612-49a7-ae71-faf095d97ff1",
+  "ocid": "ocds-abcd1234-28fc10cd-2f12-4193-a706-bdf7d596717c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -117,6 +117,8 @@
         "url": "https://viken.no/"
       },
       "address": {
+        "streetAddress": "Oscar Pedersens vei 39",
+        "postalCode": "1702",
         "locality": "Sarpsborg"
       },
       "roles": [
@@ -136,6 +138,8 @@
         "url": "http://www.bibsent.no"
       },
       "address": {
+        "streetAddress": "Alf Bjerckes vei 20",
+        "postalCode": "0582",
         "locality": "OSLO"
       },
       "roles": [

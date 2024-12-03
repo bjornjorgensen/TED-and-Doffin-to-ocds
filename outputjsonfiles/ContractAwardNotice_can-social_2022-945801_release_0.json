@@ -1,7 +1,7 @@
 {
   "id": "2022-945801",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8f65ae97-3657-4082-bcd6-f2d9e1de64df",
+  "ocid": "ocds-abcd1234-78068628-e632-4838-b6a4-f30c27cb8e10",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -82,6 +82,8 @@
         "email": "fredrik.tennoy@inventura.no"
       },
       "address": {
+        "streetAddress": "Torggata 18",
+        "postalCode": "3717",
         "locality": "Skien"
       },
       "roles": [
@@ -101,6 +103,7 @@
         "url": "http://www.bedriftshelsen.no"
       },
       "address": {
+        "postalCode": "3264",
         "locality": "Larvik"
       },
       "roles": [

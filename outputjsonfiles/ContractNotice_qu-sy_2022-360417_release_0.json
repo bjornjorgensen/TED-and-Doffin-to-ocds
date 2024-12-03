@@ -1,7 +1,7 @@
 {
   "id": "2022-360417",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f36d766e-39d9-488a-a972-1bfd3b95df3e",
+  "ocid": "ocds-abcd1234-2387291d-f458-42cb-a7c9-d7fb6bff50cd",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -198,10 +198,12 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "P.O. Box 1817",
+        "postalCode": "4858",
         "locality": "Arendal"
       }
     },
@@ -212,6 +214,8 @@
         "email": "post@knse.no"
       },
       "address": {
+        "streetAddress": "Postboks 511 Sentrum",
+        "postalCode": "5805",
         "locality": "Bergen"
       },
       "roles": [

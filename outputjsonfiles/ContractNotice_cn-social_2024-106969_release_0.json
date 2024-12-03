@@ -1,7 +1,7 @@
 {
   "id": "920077ce-4821-4475-9786-474c473628bd",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-91e2fd50-5baf-4244-996c-89329506bb3c",
+  "ocid": "ocds-abcd1234-5f658546-19f0-4e63-8902-5d6c3ee201c7",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -225,6 +225,8 @@
         "url": "https://www.avfallsmegling.no"
       },
       "address": {
+        "streetAddress": "Dronningens Gate 18",
+        "postalCode": "8006",
         "locality": "Bodø"
       },
       "roles": [

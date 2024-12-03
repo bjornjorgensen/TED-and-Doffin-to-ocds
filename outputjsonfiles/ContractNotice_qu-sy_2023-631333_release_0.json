@@ -1,7 +1,7 @@
 {
   "id": "2023-631333",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b5d020c7-a194-400c-b7b9-26ecf8c417d3",
+  "ocid": "ocds-abcd1234-ac947350-20bf-4b4d-87b2-4371c13e5f41",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -204,10 +204,12 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "P.O. Box 1817",
+        "postalCode": "4858",
         "locality": "Arendal"
       }
     },
@@ -218,6 +220,8 @@
         "email": "postmottak@domstoladministrasjonen.no"
       },
       "address": {
+        "streetAddress": "Postboks 5678 Sluppen",
+        "postalCode": "7485",
         "locality": "Trondheim"
       },
       "roles": [
@@ -231,6 +235,8 @@
         "email": "postmottak@kofa.no"
       },
       "address": {
+        "streetAddress": "Postboks 439 Sentrum",
+        "postalCode": "5805",
         "locality": "Bergen"
       },
       "roles": [

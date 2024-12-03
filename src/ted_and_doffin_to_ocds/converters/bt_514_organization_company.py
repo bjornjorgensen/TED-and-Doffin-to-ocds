@@ -59,7 +59,23 @@ ISO_3166_CONVERSION = {
 }
 
 
-def parse_organization_country(xml_content):
+def parse_organization_country(xml_content: str | bytes) -> dict | None:
+    """Parse organization country information from XML content.
+
+    Args:
+        xml_content: XML string or bytes containing organization data
+
+    Returns:
+        Dict containing parsed parties data with country codes, or None if no valid data found.
+        Format: {
+            "parties": [
+                {
+                    "id": str,
+                    "address": {"country": str} # ISO 3166-1 alpha-2 country code
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -99,15 +115,35 @@ def parse_organization_country(xml_content):
     return result if result["parties"] else None
 
 
-def convert_country_code(code):
-    """
-    Convert ISO 3166-1 alpha-3 country code to alpha-2 code.
-    If the code is not found in the conversion dictionary, return the original code.
+def convert_country_code(code: str) -> str:
+    """Convert ISO 3166-1 alpha-3 country code to alpha-2 code.
+
+    Args:
+        code: ISO 3166-1 alpha-3 country code (e.g. 'GBR')
+
+    Returns:
+        ISO 3166-1 alpha-2 country code (e.g. 'GB').
+        If code not found in conversion dictionary, returns original code.
     """
     return ISO_3166_CONVERSION.get(code, code)
 
 
-def merge_organization_country(release_json, organization_country_data) -> None:
+def merge_organization_country(
+    release_json: dict, organization_country_data: dict | None
+) -> None:
+    """Merge organization country data into the release JSON.
+
+    Updates existing parties' address information with country codes.
+    Creates new party entries for organizations not already present in release_json.
+    Country codes are converted from ISO 3166-1 alpha-3 to alpha-2 format.
+
+    Args:
+        release_json: The target release JSON to update
+        organization_country_data: Dictionary containing organization country data to merge
+
+    Returns:
+        None. Updates release_json in place.
+    """
     if not organization_country_data:
         logger.warning("No organization Country data to merge")
         return

@@ -1,5 +1,3 @@
-# converters/bt_510a_ubo.py
-
 import logging
 
 from lxml import etree
@@ -7,7 +5,29 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_ubo_street(xml_content):
+def parse_ubo_street(xml_content: str | bytes) -> dict | None:
+    """
+    Parse UBO (Ultimate Beneficial Owner) street address information from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing UBO street information
+
+    Returns:
+        Optional[Dict]: A dictionary containing parsed street address data in OCDS format with
+        'parties' array, or None if no valid UBO data is found.
+        Example:
+        {
+            "parties": [{
+                "id": "ORG-0001",
+                "beneficialOwners": [{
+                    "id": "UBO-0001",
+                    "address": {
+                        "streetAddress": "2 CheeseStreet, Nelson Building, 2nd floor"
+                    }
+                }]
+            }]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -17,19 +37,18 @@ def parse_ubo_street(xml_content):
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
         "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
         "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:organizations/efac:organization",
+        "//efac:Organizations/efac:Organization",
         namespaces=namespaces,
     )
 
     for organization in organizations:
         org_id = organization.xpath(
-            "efac:company/cac:partyIdentification/cbc:ID[@schemeName='organization']/text()",
+            "efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
             namespaces=namespaces,
         )
 
@@ -37,7 +56,7 @@ def parse_ubo_street(xml_content):
             party = {"id": org_id[0], "beneficialOwners": []}
 
             ubos = root.xpath(
-                "//efac:organizations/efac:UltimateBeneficialOwner",
+                "//efac:Organizations/efac:UltimateBeneficialOwner",
                 namespaces=namespaces,
             )
             for ubo in ubos:
@@ -68,11 +87,13 @@ def parse_ubo_street(xml_content):
 
                     street_address = ", ".join(street_address_parts)
 
-                    beneficial_owner = {
-                        "id": ubo_id[0],
-                        "address": {"streetAddress": street_address},
-                    }
-                    party["beneficialOwners"].append(beneficial_owner)
+                    if street_address:
+                        beneficial_owner = {
+                            "id": ubo_id[0],
+                            "address": {"streetAddress": street_address},
+                        }
+                        party["beneficialOwners"].append(beneficial_owner)
+                        logger.info("Found street address for UBO %s", ubo_id[0])
 
             if party["beneficialOwners"]:
                 result["parties"].append(party)
@@ -80,9 +101,24 @@ def parse_ubo_street(xml_content):
     return result if result["parties"] else None
 
 
-def merge_ubo_street(release_json, ubo_street_data) -> None:
+def merge_ubo_street(release_json: dict, ubo_street_data: dict | None) -> None:
+    """
+    Merge UBO street address data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        ubo_street_data (Optional[Dict]): UBO street data to merge,
+            containing a 'parties' array with beneficial owner information
+
+    Returns:
+        None: Modifies release_json in place
+
+    Note:
+        If ubo_street_data is None or contains no parties, no changes are made.
+        For existing parties, beneficial owner street address information is updated or added.
+    """
     if not ubo_street_data:
-        logger.warning("No ubo Street data to merge")
+        logger.info("No UBO street data to merge")
         return
 
     existing_parties = release_json.setdefault("parties", [])
@@ -94,8 +130,7 @@ def merge_ubo_street(release_json, ubo_street_data) -> None:
         )
         if existing_party:
             existing_beneficial_owners = existing_party.setdefault(
-                "beneficialOwners",
-                [],
+                "beneficialOwners", []
             )
             for new_ubo in new_party["beneficialOwners"]:
                 existing_ubo = next(
@@ -108,11 +143,16 @@ def merge_ubo_street(release_json, ubo_street_data) -> None:
                 )
                 if existing_ubo:
                     existing_ubo.setdefault("address", {}).update(new_ubo["address"])
+                    logger.info("Updated street address for UBO %s", new_ubo["id"])
                 else:
                     existing_beneficial_owners.append(new_ubo)
+                    logger.info("Added new street address for UBO %s", new_ubo["id"])
         else:
             existing_parties.append(new_party)
+            logger.info(
+                "Added new party with UBO street addresses: %s", new_party["id"]
+            )
 
     logger.info(
-        "Merged ubo Street data for %d parties", len(ubo_street_data["parties"])
+        "Merged UBO street data for %d parties", len(ubo_street_data["parties"])
     )

@@ -1,7 +1,7 @@
 {
   "id": "aa382761-89ef-4162-9dc5-74f12a6f2a21",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f73c50a3-55e0-4da5-a4da-92fc06ba7b46",
+  "ocid": "ocds-abcd1234-ce4e7c4a-d06a-48d0-87c3-997edd82012b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -751,6 +751,8 @@
         "buyer"
       ],
       "address": {
+        "streetAddress": "Postboks 354",
+        "postalCode": "8601",
         "locality": "Mo i Rana"
       }
     },

@@ -1,7 +1,7 @@
 {
   "id": "2023-653367",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0202b55f-3183-4a59-96c4-f596a42eeb31",
+  "ocid": "ocds-abcd1234-f741c7d6-5540-4919-9153-58c19208604c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -924,10 +924,12 @@
         "buyerProfile": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "postboks 7900",
+        "postalCode": "5020",
         "locality": "Bergen"
       }
     }

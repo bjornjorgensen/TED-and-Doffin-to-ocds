@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9472b5b3-294f-43ff-9ff3-b4a25a3ad89e",
+  "ocid": "ocds-abcd1234-a00633f7-38ea-47b3-a595-cfad0ba61fa4",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -186,12 +186,14 @@
         "email": "postmottak@helse-nord.no"
       },
       "address": {
+        "streetAddress": "Moloveien 1",
+        "postalCode": "8038",
         "locality": "Bodø"
       },
       "roles": [
         "funder",
-        "buyer",
-        "payer"
+        "payer",
+        "buyer"
       ]
     },
     {
@@ -212,12 +214,14 @@
         "url": "http://www.sykehusinnkjop.no"
       },
       "address": {
+        "streetAddress": "Postboks 40",
+        "postalCode": "9811",
         "locality": "VADSØ"
       },
       "roles": [
         "leadBuyer",
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "reviewContactPoint"
       ]
     },
@@ -240,6 +244,8 @@
       },
       "eDeliveryGateway": "https://medical.sectra.com/about-sectra/contact/contact-sectra-norway/",
       "address": {
+        "streetAddress": "Strandveien 50",
+        "postalCode": "1366",
         "locality": "Lysaker"
       },
       "roles": [
@@ -263,6 +269,8 @@
         "url": "https://www.domstol.no/no/domstoler/tingrett/sis--ja-nuorta-finnmarkku-diggegoddi--indre-og-ostre-finnmark-tingrett/"
       },
       "address": {
+        "streetAddress": "Kirkegt. 22, 3. etg, Vadsø. Postboks 54",
+        "postalCode": "9811",
         "locality": "Vadsø"
       },
       "roles": [

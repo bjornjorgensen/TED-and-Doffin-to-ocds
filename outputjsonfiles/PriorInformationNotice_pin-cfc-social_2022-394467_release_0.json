@@ -1,7 +1,7 @@
 {
   "id": "2022-394467",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-83f8602b-d7d7-4b1c-83c2-b8bb9aa6d548",
+  "ocid": "ocds-abcd1234-b85b1d22-c935-4d3e-8a62-e52c7a445f11",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -123,10 +123,12 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "Postboks 4100",
+        "postalCode": "2307",
         "locality": "Hamar"
       }
     },
@@ -134,6 +136,8 @@
       "id": "ORG-0002",
       "name": "Oslo Tingrett",
       "address": {
+        "streetAddress": "Postboks 8023 Dep.",
+        "postalCode": "0030",
         "locality": "Oslo"
       },
       "roles": [

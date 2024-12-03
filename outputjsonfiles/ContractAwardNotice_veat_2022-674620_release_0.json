@@ -1,7 +1,7 @@
 {
   "id": "2022-674620",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8cff6bb5-96bc-492a-a8a6-708de3ce23ae",
+  "ocid": "ocds-abcd1234-21181385-0e39-45c9-8737-6674e67aca4c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -101,6 +101,8 @@
         "buyer"
       ],
       "address": {
+        "streetAddress": "PB 5672 Sluppen",
+        "postalCode": "7485",
         "locality": "Trondheim"
       }
     },
@@ -114,6 +116,8 @@
         }
       ],
       "address": {
+        "streetAddress": "Postboks 64",
+        "postalCode": "1431",
         "locality": "Ås"
       },
       "roles": [
@@ -124,6 +128,8 @@
       "id": "ORG-0003",
       "name": "Trondheim Tingrett",
       "address": {
+        "streetAddress": "Postboks 2317 Torgarden",
+        "postalCode": "7004",
         "locality": "Trondheim"
       },
       "roles": [

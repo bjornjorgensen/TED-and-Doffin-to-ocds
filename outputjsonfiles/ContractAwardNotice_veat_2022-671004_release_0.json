@@ -1,7 +1,7 @@
 {
   "id": "2022-671004",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-992196e5-e9bd-4e69-a205-54dbc3283bf3",
+  "ocid": "ocds-abcd1234-9cfbed72-f6df-4bf5-9d92-5c48e25cdfe7",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -95,6 +95,8 @@
         "email": "trygve.kikut@vtfk.no"
       },
       "address": {
+        "streetAddress": "Postboks 2844",
+        "postalCode": "3702",
         "locality": "Skien"
       },
       "roles": [

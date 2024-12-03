@@ -1,7 +1,7 @@
 {
   "id": "2023-651678",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6df4362e-7995-4eee-ac64-06df599d6993",
+  "ocid": "ocds-abcd1234-c143c9db-1558-429a-9ae8-bdf5e0814e59",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -136,10 +136,12 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "Nesgata 11",
+        "postalCode": "4480",
         "locality": "Kvinesdal"
       }
     },
@@ -154,6 +156,8 @@
         "url": "www.pilar-br.no/"
       },
       "address": {
+        "streetAddress": "Strandgaten 32",
+        "postalCode": "4400",
         "locality": "FLEKKEFJORD"
       },
       "roles": [

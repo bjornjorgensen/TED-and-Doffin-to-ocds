@@ -1,7 +1,7 @@
 {
   "id": "2023-627259",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-bcfb4134-a13c-44a2-9b35-39f118e1204b",
+  "ocid": "ocds-abcd1234-0835efd7-41ed-44b9-b705-cbf71560571e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -126,6 +126,8 @@
         "buyer"
       ],
       "address": {
+        "streetAddress": "Postboks 8019 Dep",
+        "postalCode": "0030",
         "locality": "Oslo"
       }
     },
@@ -139,6 +141,7 @@
         }
       ],
       "address": {
+        "postalCode": "0650",
         "locality": "Oslo"
       },
       "roles": [
@@ -156,6 +159,8 @@
         "url": "https://www.regjeringen.no/no/dep/asd/id165/"
       },
       "address": {
+        "streetAddress": "Postboks 2106 Vika",
+        "postalCode": "0125",
         "locality": "OSLO"
       },
       "roles": [

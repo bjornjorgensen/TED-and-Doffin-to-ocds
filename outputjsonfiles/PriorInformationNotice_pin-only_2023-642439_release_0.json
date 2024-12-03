@@ -1,7 +1,7 @@
 {
   "id": "2023-642439",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f639c06d-f53c-4da2-aec3-2cbd320d1992",
+  "ocid": "ocds-abcd1234-70462193-c540-407e-96ac-254d31634f66",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -70,6 +70,8 @@
         "email": "henrik.hartmann@sykehusbygg.no"
       },
       "address": {
+        "streetAddress": "Postboks 404",
+        "postalCode": "2303",
         "locality": "HAMAR"
       },
       "roles": [

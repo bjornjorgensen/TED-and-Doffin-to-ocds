@@ -1,7 +1,7 @@
 {
   "id": "2023-632707",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6d5feac1-3a37-452e-8ca5-82d78e75e031",
+  "ocid": "ocds-abcd1234-bc7151e8-b27e-4c62-8584-152c131fd105",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -106,6 +106,8 @@
         "url": "https://www.narvik.kommune.no/"
       },
       "address": {
+        "streetAddress": "Postboks 64",
+        "postalCode": "8501",
         "locality": "Narvik"
       },
       "roles": [

@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-64a0733a-bdef-481b-93d4-d6b3d46c6e01",
+  "ocid": "ocds-abcd1234-57205788-0314-41dc-87d4-460485208e19",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -402,7 +402,10 @@
           "id": "UBO-0001",
           "name": "Jean",
           "address": {
-            "locality": "Bruxelles"
+            "streetAddress": "7 rue de la loi",
+            "postalCode": "10123",
+            "locality": "Bruxelles",
+            "country": "BE"
           }
         },
         {
@@ -428,6 +431,8 @@
       ],
       "eDeliveryGateway": "https://endpoint-example.fin-adm.com",
       "address": {
+        "streetAddress": "Bruce Wayne House, 2 Gotham Street",
+        "postalCode": "1234",
         "locality": "Luxembourg"
       }
     },
@@ -439,7 +444,9 @@
           "id": "UBO-0001",
           "name": "Jean",
           "address": {
-            "locality": "Bruxelles"
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
           }
         },
         {
@@ -465,6 +472,8 @@
       },
       "eDeliveryGateway": "https://contact.fin-leg.com",
       "address": {
+        "streetAddress": "6 Main Street",
+        "postalCode": "1234",
         "locality": "Luxembourg"
       },
       "roles": [
@@ -479,7 +488,9 @@
           "id": "UBO-0001",
           "name": "Jean",
           "address": {
-            "locality": "Bruxelles"
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
           }
         },
         {
@@ -505,6 +516,8 @@
       },
       "eDeliveryGateway": "https://endpoint.env-dpt.com",
       "address": {
+        "streetAddress": "23 Nelson Square",
+        "postalCode": "1234",
         "locality": "Luxembourg"
       },
       "roles": [
@@ -519,7 +532,9 @@
           "id": "UBO-0001",
           "name": "Jean",
           "address": {
-            "locality": "Bruxelles"
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
           }
         },
         {
@@ -545,6 +560,8 @@
       },
       "eDeliveryGateway": "https://endpoint.employment-legis.com",
       "address": {
+        "streetAddress": "162 Broad Street, 2nd floor",
+        "postalCode": "1234",
         "locality": "Luxembourg"
       },
       "roles": [
@@ -559,7 +576,9 @@
           "id": "UBO-0001",
           "name": "Jean",
           "address": {
-            "locality": "Bruxelles"
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
           }
         },
         {
@@ -585,6 +604,8 @@
       },
       "eDeliveryGateway": "https://appeal-adm-proc.com/request",
       "address": {
+        "streetAddress": "87 Big Avenue",
+        "postalCode": "1234",
         "locality": "Luxembourg"
       },
       "roles": [
@@ -599,7 +620,9 @@
           "id": "UBO-0001",
           "name": "Jean",
           "address": {
-            "locality": "Bruxelles"
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
           }
         },
         {
@@ -624,6 +647,8 @@
         "url": "https://www.pub-mediator.com"
       },
       "address": {
+        "streetAddress": "85 Norwish Road",
+        "postalCode": "1234",
         "locality": "Luxembourg"
       },
       "roles": [
@@ -638,7 +663,9 @@
           "id": "UBO-0001",
           "name": "Jean",
           "address": {
-            "locality": "Bruxelles"
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
           }
         },
         {
@@ -662,6 +689,7 @@
         "url": "https://esendercorp.eu"
       },
       "address": {
+        "postalCode": "2985",
         "locality": "Luxembourg"
       },
       "roles": [
@@ -680,7 +708,9 @@
           "id": "UBO-0001",
           "name": "Jean",
           "address": {
-            "locality": "Bruxelles"
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
           }
         },
         {
@@ -703,11 +733,13 @@
       },
       "eDeliveryGateway": "https://endpoint.gyro-soft.com",
       "address": {
+        "streetAddress": "4 rue du Bug, immeubke A",
+        "postalCode": "8754",
         "locality": "Luxembourg"
       },
       "roles": [
-        "leadTenderer",
-        "tenderer"
+        "tenderer",
+        "leadTenderer"
       ]
     },
     {
@@ -722,7 +754,9 @@
           "id": "UBO-0001",
           "name": "Jean",
           "address": {
-            "locality": "Bruxelles"
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
           }
         },
         {
@@ -745,6 +779,8 @@
       },
       "eDeliveryGateway": "https://endpoint.the-best-app.com",
       "address": {
+        "streetAddress": "3A smart avenue",
+        "postalCode": "73846",
         "locality": "Frankfurt"
       },
       "roles": [
@@ -763,7 +799,9 @@
           "id": "UBO-0001",
           "name": "Jean",
           "address": {
-            "locality": "Bruxelles"
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
           }
         },
         {
@@ -786,6 +824,8 @@
       },
       "eDeliveryGateway": "https://endpoint.ayuda.com",
       "address": {
+        "streetAddress": "7 calle ancha",
+        "postalCode": "34875",
         "locality": "El pueblo"
       },
       "roles": [
@@ -804,7 +844,9 @@
           "id": "UBO-0001",
           "name": "Jean",
           "address": {
-            "locality": "Bruxelles"
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
           }
         },
         {
@@ -827,6 +869,8 @@
       },
       "eDeliveryGateway": "https://endpoint.competitor.com",
       "address": {
+        "streetAddress": "7 rue de la republique",
+        "postalCode": "75004",
         "locality": "Paris"
       },
       "roles": [
@@ -850,6 +894,7 @@
       },
       "eDeliveryGateway": "http://tender-submit.fin-adm.com",
       "address": {
+        "streetAddress": "Bruce Wayne House, 2 Gotham Street",
         "locality": "Luxembourg"
       },
       "roles": [

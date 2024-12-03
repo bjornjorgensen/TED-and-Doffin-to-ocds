@@ -1,7 +1,7 @@
 {
   "id": "37bbf05d-0f70-4afe-87fb-0b5b0f3e9cd6",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-949c886b-3a36-4606-806d-43a46100ee92",
+  "ocid": "ocds-abcd1234-bc92a352-d1b4-40d3-81fc-5980e9c0b07e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -85,6 +85,8 @@
         "buyer"
       ],
       "address": {
+        "streetAddress": "Postboks 40",
+        "postalCode": "9811",
         "locality": "VADSØ"
       }
     }

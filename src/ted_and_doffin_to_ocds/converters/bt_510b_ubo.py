@@ -7,7 +7,29 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_ubo_streetline1(xml_content):
+def parse_ubo_streetline1(xml_content: str | bytes) -> dict | None:
+    """
+    Parse UBO (Ultimate Beneficial Owner) street line 1 information from XML content.
+
+    Args:
+        xml_content (Union[str, bytes]): The XML content containing UBO street information
+
+    Returns:
+        Optional[Dict]: A dictionary containing parsed street line 1 data in OCDS format with
+        'parties' array, or None if no valid UBO data is found.
+        Example:
+        {
+            "parties": [{
+                "id": "ORG-0001",
+                "beneficialOwners": [{
+                    "id": "UBO-0001",
+                    "address": {
+                        "streetAddress": "2 CheeseStreet, Nelson Building, 2nd floor"
+                    }
+                }]
+            }]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -23,13 +45,13 @@ def parse_ubo_streetline1(xml_content):
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:organizations/efac:organization",
+        "//efac:Organizations/efac:Organization",
         namespaces=namespaces,
     )
 
     for organization in organizations:
         org_id = organization.xpath(
-            "efac:company/cac:partyIdentification/cbc:ID[@schemeName='organization']/text()",
+            "efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
             namespaces=namespaces,
         )
 
@@ -37,7 +59,7 @@ def parse_ubo_streetline1(xml_content):
             party = {"id": org_id[0], "beneficialOwners": []}
 
             ubos = root.xpath(
-                "//efac:organizations/efac:UltimateBeneficialOwner",
+                "//efac:Organizations/efac:UltimateBeneficialOwner",
                 namespaces=namespaces,
             )
             for ubo in ubos:
@@ -73,6 +95,7 @@ def parse_ubo_streetline1(xml_content):
                         "address": {"streetAddress": street_address},
                     }
                     party["beneficialOwners"].append(beneficial_owner)
+                    logger.info("Found street line 1 for UBO %s", ubo_id[0])
 
             if party["beneficialOwners"]:
                 result["parties"].append(party)
@@ -80,9 +103,26 @@ def parse_ubo_streetline1(xml_content):
     return result if result["parties"] else None
 
 
-def merge_ubo_streetline1(release_json, ubo_streetline1_data) -> None:
+def merge_ubo_streetline1(
+    release_json: dict, ubo_streetline1_data: dict | None
+) -> None:
+    """
+    Merge UBO street line 1 data into the release JSON.
+
+    Args:
+        release_json (Dict): The target release JSON to merge data into
+        ubo_streetline1_data (Optional[Dict]): UBO street data to merge,
+            containing a 'parties' array with beneficial owner information
+
+    Returns:
+        None: Modifies release_json in place
+
+    Note:
+        If ubo_streetline1_data is None or contains no parties, no changes are made.
+        For existing parties, beneficial owner street line 1 information is updated or added.
+    """
     if not ubo_streetline1_data:
-        logger.warning("No ubo Streetline 1 data to merge")
+        logger.info("No UBO street line 1 data to merge")
         return
 
     existing_parties = release_json.setdefault("parties", [])
@@ -94,8 +134,7 @@ def merge_ubo_streetline1(release_json, ubo_streetline1_data) -> None:
         )
         if existing_party:
             existing_beneficial_owners = existing_party.setdefault(
-                "beneficialOwners",
-                [],
+                "beneficialOwners", []
             )
             for new_ubo in new_party["beneficialOwners"]:
                 existing_ubo = next(
@@ -108,10 +147,13 @@ def merge_ubo_streetline1(release_json, ubo_streetline1_data) -> None:
                 )
                 if existing_ubo:
                     existing_ubo.setdefault("address", {}).update(new_ubo["address"])
+                    logger.info("Updated street line 1 for UBO %s", new_ubo["id"])
                 else:
                     existing_beneficial_owners.append(new_ubo)
+                    logger.info("Added new street line 1 for UBO %s", new_ubo["id"])
         else:
             existing_parties.append(new_party)
+            logger.info("Added new party with UBO street line 1: %s", new_party["id"])
 
     logger.info(
         "Merged ubo Streetline 1 data for %s parties",

@@ -1,7 +1,7 @@
 {
   "id": "2022-366668",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-dc6b1413-c96b-4993-9a3c-ea5daa405e01",
+  "ocid": "ocds-abcd1234-0d876e7d-2d64-46f8-a2d7-e534ca4fddf0",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -151,11 +151,13 @@
         "email": "astrid.holwech@tonsberg.kommune.no"
       },
       "address": {
+        "streetAddress": "Halfdan Wilhelmsens alle 1A",
+        "postalCode": "3110",
         "locality": "TØNSBERG"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {
@@ -169,6 +171,8 @@
         "url": "https://www.domstol.no/vestfold"
       },
       "address": {
+        "streetAddress": "Postboks 2013",
+        "postalCode": "3103",
         "locality": "Tønsberg"
       },
       "roles": [

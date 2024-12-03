@@ -1,7 +1,7 @@
 {
   "id": "629a037e-e8dd-4b02-a19e-e890bd114fda",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c2f19894-fe10-449c-a5fe-47d03162c2a9",
+  "ocid": "ocds-abcd1234-3f37f66e-0d4d-4ba2-a82a-61547791b435",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -94,6 +94,8 @@
         "buyer"
       ],
       "address": {
+        "streetAddress": "Jonas Lies gate 18",
+        "postalCode": "2000",
         "locality": "Lillestrøm"
       }
     }

@@ -1,7 +1,7 @@
 {
   "id": "1db209a3-6934-4d5f-bf78-2aa8a1f2453c",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-23876d59-07dd-447f-9da7-b5ae04bf9495",
+  "ocid": "ocds-abcd1234-e825f8ce-a3d1-44ce-9708-cc2bcab053e4",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -147,6 +147,8 @@
         "buyer"
       ],
       "address": {
+        "streetAddress": "Postboks 8036 Dep",
+        "postalCode": "0030",
         "locality": "OSLO"
       }
     },
@@ -164,6 +166,8 @@
         "email": "oslo.tingrett@domstol.no"
       },
       "address": {
+        "streetAddress": "Postboks 2106 Vika",
+        "postalCode": "0125",
         "locality": "Oslo"
       },
       "roles": [

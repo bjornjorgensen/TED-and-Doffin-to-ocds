@@ -1,7 +1,7 @@
 {
   "id": "2023-698775",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-94469801-4897-46ef-a482-6bacec05fe4e",
+  "ocid": "ocds-abcd1234-db770a04-ac80-42e8-9f09-be4ffee096c3",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -167,10 +167,12 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "Meierigata 17",
+        "postalCode": "4349",
         "locality": "Bryne"
       }
     },
@@ -178,6 +180,8 @@
       "id": "ORG-0002",
       "name": "Jæren tingrett",
       "address": {
+        "streetAddress": "Olav`s plass 1",
+        "postalCode": "4306",
         "locality": "Sandnes"
       },
       "roles": [

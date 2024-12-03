@@ -1,7 +1,7 @@
 {
   "id": "2248a00d-a0d9-4eee-8db1-d209e7346f13",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ee39e2ba-f9b5-4fed-9e93-70113adb6a7d",
+  "ocid": "ocds-abcd1234-1c35b760-2c9c-48f3-9295-6cf5f29b4606",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -148,11 +148,13 @@
         "email": "anne@pgas.no"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "reviewContactPoint"
       ],
       "address": {
+        "streetAddress": "Benestadheia 2",
+        "postalCode": "4638",
         "locality": "Kristiansand"
       }
     },
@@ -185,6 +187,8 @@
         "email": "anne@pgas.no"
       },
       "address": {
+        "streetAddress": "Rådhusgata 18",
+        "postalCode": "4611",
         "locality": "Kristiansand"
       },
       "roles": [

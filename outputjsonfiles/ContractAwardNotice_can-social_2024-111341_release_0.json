@@ -1,7 +1,7 @@
 {
   "id": "65ffd92d-8eee-4787-a7fe-925106611edc",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6b47395d-ad00-42f0-b82e-305dac0e0d3b",
+  "ocid": "ocds-abcd1234-595a7c8f-5ce0-4dd0-b2ea-2dd120ef813c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -122,6 +122,8 @@
         "email": "synne.nes.veum@vlfk.no"
       },
       "address": {
+        "streetAddress": "Postboks 7900",
+        "postalCode": "5020",
         "locality": "BERGEN"
       },
       "roles": [
@@ -145,6 +147,8 @@
         "url": "https://www.domstol.no/no/domstoler/tingrett/hordaland-tingrett/"
       },
       "address": {
+        "streetAddress": "Postboks 7412",
+        "postalCode": "5020",
         "locality": "Bergen"
       },
       "roles": [
@@ -166,6 +170,8 @@
         "email": "line.ulveseth@no.issworld.com"
       },
       "address": {
+        "streetAddress": "Postboks 132 Økern",
+        "postalCode": "0509",
         "locality": "Oslo"
       },
       "roles": [
@@ -187,6 +193,8 @@
         "email": "oyvind.blindheim@toma.no"
       },
       "address": {
+        "streetAddress": "Janaflaten 30",
+        "postalCode": "5179",
         "locality": "Godvik"
       },
       "roles": [

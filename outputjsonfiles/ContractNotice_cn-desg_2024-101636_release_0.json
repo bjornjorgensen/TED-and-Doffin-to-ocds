@@ -1,7 +1,7 @@
 {
   "id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-03d53e6c-da6c-4fdf-8722-c0b59de8484d",
+  "ocid": "ocds-abcd1234-456a320c-09db-44c9-9ebc-da0285646867",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -339,13 +339,15 @@
         "email": "kenneth.hvalby@gjovik.kommune.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer",
         "submissionReceiptBody",
-        "reviewContactPoint",
-        "evaluationBody"
+        "buyer",
+        "processContactPoint",
+        "evaluationBody",
+        "reviewContactPoint"
       ],
       "address": {
+        "streetAddress": "Kauffelds plass 1",
+        "postalCode": "2815",
         "locality": "GJØVIK"
       }
     },
@@ -363,6 +365,8 @@
         "email": "vestre.innlandet.tingrett@domstol.no"
       },
       "address": {
+        "streetAddress": "Strandgata 26",
+        "postalCode": "2801",
         "locality": "Gjøvik"
       },
       "roles": [

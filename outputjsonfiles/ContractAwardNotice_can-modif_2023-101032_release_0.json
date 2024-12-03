@@ -1,7 +1,7 @@
 {
   "id": "be2cd071-e143-4fc8-bc3b-7f1ec1b4141f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-292cb06e-7716-4728-a0ad-d4424f2e9951",
+  "ocid": "ocds-abcd1234-bd60dbdc-e27b-465f-930d-26bd023c840c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -91,7 +91,7 @@
       ],
       "amendments": [
         {
-          "id": "1c74560e-dce9-49be-8026-1442f028f038",
+          "id": "fbf8dad0-ed72-4b63-ab56-b59263f91b02",
           "rationaleClassifications": [
             {
               "id": "mod-cir",
@@ -101,11 +101,11 @@
           ]
         },
         {
-          "id": "5f3b6551-97e4-4559-b729-59df398a58e1",
+          "id": "a77cbc1f-c4a7-496a-9e2b-f5ac6ab64f8e",
           "rationale": "Oppdragsgiver kunne ikke forutse at dagens Ålesund kommune ville bli vedtatt delt i to nye kommuner, heretter kalt Ålesund 2024 og Haram 2024. Anskaffelsens overordnede karakter blir ikke endret (1.), og den enkelte prisøkningen overstiger ikke 50 prosent av den opprinnelige kontraktsverdien (2.). Oppdragsgiver kunngjør endringene (3.)."
         },
         {
-          "id": "326a590e-e100-4ce7-b0e3-05e890249a64",
+          "id": "bf6d7ce3-4fc6-485d-854d-083252c1476c",
           "description": "I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d. Ålesund kommunes eksisterende avtale med Visma Enterprise AS vedrørende Visma FlyVo videreføres i Ålesund 2024 og Haram 2024. Det er inngått et endringsbilag til eksisterende kontrakt som beskriver de nødvendige endringene i kontrakten som følge av kommunedelingen. Av opprinnelig kontraktsverdi, etter avtalefestet KPI-justering, utgjør nødvendige engangskostnader direkte knyttet til kommunedelingen 10 %. Årlig pris for bruksrett (fast pris pr. flyktning og pr. elev) endres ikke (kun avhengig av antall flyktninger og antall elever). "
         }
       ],
@@ -128,6 +128,8 @@
         "email": "jonette.valaas.skare@alesund.kommune.no"
       },
       "address": {
+        "streetAddress": "Keiser Wilhelms gate 11",
+        "postalCode": "6003",
         "locality": "ÅLESUND"
       },
       "roles": [
@@ -151,6 +153,8 @@
         "url": "https://www.domstol.no/no/domstoler/tingrett/more-og-romsdal-tingrett/"
       },
       "address": {
+        "streetAddress": "Postboks 1354",
+        "postalCode": "6001",
         "locality": "Ålesund"
       },
       "roles": [

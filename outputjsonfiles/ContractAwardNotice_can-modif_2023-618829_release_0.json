@@ -1,7 +1,7 @@
 {
   "id": "2023-618829",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3c79dc0f-5892-4727-b738-3d58b60131d7",
+  "ocid": "ocds-abcd1234-5855ee21-c7f1-4ead-af4f-7d422582e123",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -120,6 +120,8 @@
         "buyer"
       ],
       "address": {
+        "streetAddress": "Sigma2 AS Postboks 4769 Torgard",
+        "postalCode": "NO-7465",
         "locality": "TRONDHEIM"
       }
     },
@@ -127,6 +129,7 @@
       "id": "ORG-0002",
       "name": "Hewlett-Packard Norge AS",
       "address": {
+        "postalCode": "1326",
         "locality": "Lysaker"
       },
       "roles": [

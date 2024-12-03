@@ -7,7 +7,28 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_ubo_city(xml_content):
+def parse_ubo_city(xml_content: str | bytes) -> dict | None:
+    """Parse ultimate beneficial owner city information from XML content.
+
+    Args:
+        xml_content: XML string or bytes containing UBO data
+
+    Returns:
+        Dict containing parsed parties data with city names, or None if no valid data found.
+        Format: {
+            "parties": [
+                {
+                    "id": str,
+                    "beneficialOwners": [
+                        {
+                            "id": str,
+                            "address": {"locality": str}
+                        }
+                    ]
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -54,7 +75,19 @@ def parse_ubo_city(xml_content):
     return result if result["parties"] else None
 
 
-def merge_ubo_city(release_json, ubo_city_data) -> None:
+def merge_ubo_city(release_json: dict, ubo_city_data: dict | None) -> None:
+    """Merge UBO city data into the release JSON.
+
+    Updates existing parties' beneficial owners information with city names.
+    Creates new party entries for organizations not already present in release_json.
+
+    Args:
+        release_json: The target release JSON to update
+        ubo_city_data: Dictionary containing UBO city data to merge
+
+    Returns:
+        None. Updates release_json in place.
+    """
     if not ubo_city_data:
         logger.info("No UBO city data to merge")
         return

@@ -1,7 +1,7 @@
 {
   "id": "2023-335407",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8a3592f9-a0d6-4aa1-8036-cf81ca950246",
+  "ocid": "ocds-abcd1234-3dfefa1c-ddec-4224-afc6-06d5049220e6",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -123,6 +123,8 @@
         "buyer"
       ],
       "address": {
+        "streetAddress": "Haakon VIIs gt. 9",
+        "postalCode": "0161",
         "locality": "Oslo"
       }
     },

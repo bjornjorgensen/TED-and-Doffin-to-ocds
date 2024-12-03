@@ -1,7 +1,7 @@
 {
   "id": "2023-653024",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-363b5ea8-3fd7-4cdd-8167-93e792b66574",
+  "ocid": "ocds-abcd1234-9bbeb775-5306-415f-9c2b-aca3cdc3fe8c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -84,6 +84,8 @@
         "email": "elin.nygaard.opperud@moss.kommune.no"
       },
       "address": {
+        "streetAddress": "Postboks 175",
+        "postalCode": "1501",
         "locality": "Moss"
       },
       "roles": [

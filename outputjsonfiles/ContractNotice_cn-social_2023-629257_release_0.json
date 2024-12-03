@@ -1,7 +1,7 @@
 {
   "id": "2023-629257",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-19ebdf3c-5d50-41e0-8b05-608eb7ee89df",
+  "ocid": "ocds-abcd1234-4ae84f40-6e97-4987-bda2-c61d20c95836",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -197,10 +197,12 @@
         "email": "nav.tiltak.rogaland@nav.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "Postboks 420",
+        "postalCode": "4002",
         "locality": "Stravanger"
       }
     },
@@ -208,6 +210,8 @@
       "id": "ORG-0002",
       "name": "Stavanger Tingrett",
       "address": {
+        "streetAddress": "Postboks 159",
+        "postalCode": "4001",
         "locality": "Stavanger"
       },
       "roles": [

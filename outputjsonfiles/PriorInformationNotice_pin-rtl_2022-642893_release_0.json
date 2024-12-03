@@ -1,7 +1,7 @@
 {
   "id": "2022-642893",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-01942f18-70ef-4c41-8d77-cbc651a9a9bc",
+  "ocid": "ocds-abcd1234-afb40204-87e8-4cf9-9f3e-63a471924b61",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -114,10 +114,12 @@
         "email": "post@sykehusinnkjop.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "Postboks 40",
+        "postalCode": "9811",
         "locality": "VADSØ"
       }
     },
@@ -129,6 +131,8 @@
         "email": "ost-finnmark.tingrett@domstol.no"
       },
       "address": {
+        "streetAddress": "Postboks54",
+        "postalCode": "9811",
         "locality": "Vadsø"
       },
       "roles": [

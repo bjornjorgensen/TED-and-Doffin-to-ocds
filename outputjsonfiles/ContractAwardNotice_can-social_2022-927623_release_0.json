@@ -1,7 +1,7 @@
 {
   "id": "2022-927623",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-63f84657-21c7-4191-99fa-2feb61dcb337",
+  "ocid": "ocds-abcd1234-2844123f-9255-4932-b1c8-160d913d9fbc",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -139,6 +139,8 @@
         "email": "nicholas.starr.soltvedt@politiet.no"
       },
       "address": {
+        "streetAddress": "Fridtjof Nansens vei 14",
+        "postalCode": "0369 ",
         "locality": "OSLO"
       },
       "roles": [
@@ -161,6 +163,8 @@
         "email": "tor.erik.andersson@avarnsecurity.com"
       },
       "address": {
+        "streetAddress": "Alf Bjerckes vei 1",
+        "postalCode": "N-0582",
         "locality": "Oslo"
       },
       "roles": [
@@ -183,6 +187,8 @@
         "email": "kjetil.dahler@securitas.no"
       },
       "address": {
+        "streetAddress": "Bøkkerveien 5, 0579 Oslo",
+        "postalCode": "Postboks 100, Alnabr",
         "locality": "Oslo"
       },
       "roles": [
@@ -200,6 +206,8 @@
         "url": "https://www.domstol.no/no/Enkelt-domstol/oslo--tingrett/om-domstolen/"
       },
       "address": {
+        "streetAddress": "Postboks 2106 Vika",
+        "postalCode": "0125",
         "locality": "Oslo"
       },
       "roles": [

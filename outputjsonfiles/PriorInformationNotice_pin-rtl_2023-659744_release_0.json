@@ -1,7 +1,7 @@
 {
   "id": "2023-659744",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b2d3a2f9-0d42-463f-93a6-933aea1687c6",
+  "ocid": "ocds-abcd1234-30982e46-9bc2-4181-a915-2b519b29afc1",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -86,10 +86,12 @@
         ]
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "Postboks 4350",
+        "postalCode": "2308",
         "locality": "Hamar"
       }
     }

@@ -1,7 +1,7 @@
 {
   "id": "2023-600143",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-17d98590-f554-43bc-8839-c3bedbe568ce",
+  "ocid": "ocds-abcd1234-98b8b12d-c106-4cb2-871c-8ece4c69be33",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -125,10 +125,12 @@
         "email": "therese.borge@tonsberg.kommune.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
+        "streetAddress": "postboks 2410",
+        "postalCode": "3104",
         "locality": "Tønsberg"
       }
     },
@@ -149,6 +151,8 @@
         "url": "http://www.tonsberg.kommune.no"
       },
       "address": {
+        "streetAddress": "Postboks 2410",
+        "postalCode": "3104",
         "locality": "Tønsberg"
       },
       "roles": [
@@ -162,6 +166,8 @@
         "email": "vestfold.tingrett@domstol.no"
       },
       "address": {
+        "streetAddress": "Postboks 2013",
+        "postalCode": "3103",
         "locality": "Tønsberg"
       },
       "roles": [
