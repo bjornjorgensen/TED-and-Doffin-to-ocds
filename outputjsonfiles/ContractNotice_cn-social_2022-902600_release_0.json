@@ -1,7 +1,7 @@
 {
   "id": "2022-902600",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d1dfb782-78b5-42f9-9cff-5e579d2c391c",
+  "ocid": "ocds-abcd1234-10927120-162d-46b1-a81c-5537f429dad3",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -142,9 +142,9 @@
         "locality": "Arendal"
       },
       "roles": [
+        "processContactPoint",
         "submissionReceiptBody",
-        "buyer",
-        "processContactPoint"
+        "buyer"
       ]
     },
     {
@@ -159,6 +159,7 @@
     }
   ],
   "description": "Viser til skjema pkt. II. 1.6) Informasjon om delkontrakter - avkrysset \"Nei\" pga systemet fungerer ikke godt nok. Oppdragsgiver presiserer at konkurransen er delt opp i 4 delkontrakter (delytelser). Se 1. Konkurransegrunnlag for nærmere informasjon",
+  "language": "nb",
   "buyer": [
     {
       "id": "ORG-0001"

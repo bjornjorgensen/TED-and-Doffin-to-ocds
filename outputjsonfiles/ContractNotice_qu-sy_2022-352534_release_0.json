@@ -1,7 +1,7 @@
 {
   "id": "2022-352534",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3cd478b6-b799-44c0-b1ab-637222ae2bab",
+  "ocid": "ocds-abcd1234-39c3d56c-800f-4c4a-adb8-5321bc41cf77",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -117,9 +117,9 @@
         ]
       },
       "roles": [
+        "processContactPoint",
         "submissionReceiptBody",
-        "buyer",
-        "processContactPoint"
+        "buyer"
       ],
       "address": {
         "streetAddress": "P.O. Box 1817",
@@ -159,6 +159,7 @@
     }
   ],
   "description": "The full list of utilities subscribing to UNCE can be obtained here http://achilles.no/Notices/UNCE/Annual-Notice-Jul2022.pdf. New buyers are JSC Latvenergo, Kvam Energi Nett and AS Ringerikskraft Nett AS.",
+  "language": "nb",
   "buyer": [
     {
       "id": "ORG-0001"

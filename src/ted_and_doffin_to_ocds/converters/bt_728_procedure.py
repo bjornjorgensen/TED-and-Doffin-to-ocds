@@ -1,5 +1,3 @@
-# converters/bt_728_procedure.py
-
 import logging
 
 from lxml import etree
@@ -16,84 +14,102 @@ NAMESPACES = {
 }
 
 
-def parse_procedure_place_performance_additional(xml_content):
+def parse_procedure_place_performance_additional(
+    xml_content: str | bytes,
+) -> dict | None:
     """
-    Parse the XML content to extract additional place of performance information.
+    Parse BT-728: Additional information about place of performance.
 
-    Maps to .description in tender.deliveryAddresses objects.
+    This field maps to the same Address objects as created for BT-727-Part,
+    BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part.
 
     Args:
-        xml_content (str|bytes): The XML content to parse.
+        xml_content: XML content to parse, either as string or bytes
 
     Returns:
-        dict: A dictionary containing the parsed place performance data
-        None: If no relevant data is found.
+        Optional[Dict]: Parsed data in format:
+            {
+                "tender": {
+                    "deliveryLocations": [
+                        {
+                            "description": str
+                        }
+                    ]
+                }
+            }
+        Returns None if no relevant data found or on error
     """
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
+    try:
+        if isinstance(xml_content, str):
+            xml_content = xml_content.encode("utf-8")
 
-    root = etree.fromstring(xml_content)
+        root = etree.fromstring(xml_content)
+        result = {"tender": {"deliveryLocations": []}}
 
-    # Get RealizedLocation descriptions using exact specified XPath
-    descriptions = root.xpath(
-        "/*/cac:ProcurementProject/cac:RealizedLocation/cbc:Description/text()",
-        namespaces=NAMESPACES,
-    )
+        descriptions = root.xpath(
+            "/*/cac:ProcurementProject/cac:RealizedLocation/cbc:Description/text()",
+            namespaces=NAMESPACES,
+        )
 
-    if not descriptions:
+        for description in descriptions:
+            clean_desc = description.strip()
+            if clean_desc:
+                logger.info("Found additional place description: %s", clean_desc)
+                result["tender"]["deliveryLocations"].append(
+                    {"description": clean_desc}
+                )
+
+        return result if result["tender"]["deliveryLocations"] else None
+
+    except etree.XMLSyntaxError:
+        logger.exception("Failed to parse XML content")
+        raise
+    except Exception:
+        logger.exception("Error processing additional place performance")
         return None
-
-    addresses = [
-        {"description": desc.strip()} for desc in descriptions if desc and desc.strip()
-    ]
-
-    if addresses:
-        return {"tender": {"deliveryAddresses": addresses}}
-
-    return None
 
 
 def merge_procedure_place_performance_additional(
-    release_json, place_performance_data
+    release_json: dict, place_data: dict | None
 ) -> None:
     """
-    Merge the additional place performance data into the OCDS release,
-    concatenating descriptions for matching addresses.
+    Merge additional place performance data into the release JSON.
+
+    Updates or adds delivery locations in the tender section, concatenating
+    descriptions if locations already exist.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated
-        place_performance_data (dict): The parsed place performance data to be merged
+        release_json: Main OCDS release JSON to update
+        place_data: Additional place performance data to merge, can be None
+
+    Note:
+        - Updates release_json in-place
+        - Creates tender.deliveryLocations if needed
+        - Handles concatenation of descriptions
     """
-    if not place_performance_data:
+    if not place_data:
+        logger.warning(
+            "No procurement procedure additional place performance data to merge"
+        )
         return
 
-    if "tender" not in release_json:
-        release_json["tender"] = {}
-    if "deliveryAddresses" not in release_json["tender"]:
-        release_json["tender"]["deliveryAddresses"] = []
+    tender = release_json.setdefault("tender", {})
+    locations = tender.setdefault("deliveryLocations", [])
 
-    for new_addr in place_performance_data["tender"]["deliveryAddresses"]:
-        # Try to find matching existing address to concatenate description
-        existing = next(
-            (
-                addr
-                for addr in release_json["tender"]["deliveryAddresses"]
-                if addr.get("description") == new_addr["description"]
-            ),
-            None,
-        )
+    for new_location in place_data["tender"]["deliveryLocations"]:
+        # Try to find existing location to concatenate description
+        existing = next((loc for loc in locations if loc.get("description")), None)
 
         if existing:
-            # If addresses match, ensure descriptions are properly concatenated
-            if new_addr["description"] not in existing["description"]:
-                existing["description"] = (
-                    f"{existing['description']}; {new_addr['description']}"
-                )
+            # Concatenate descriptions
+            existing["description"] = (
+                f"{existing['description']}; {new_location['description']}"
+            )
         else:
-            # Add new address if no match found
-            release_json["tender"]["deliveryAddresses"].append(new_addr)
+            # Add new location
+            locations.append(new_location)
 
     logger.info(
-        "Merged additional place of performance data for %d addresses",
-        len(place_performance_data["tender"]["deliveryAddresses"]),
+        "Merged additional place performance data for %d locations",
+        len(place_data["tender"]["deliveryLocations"]),
     )

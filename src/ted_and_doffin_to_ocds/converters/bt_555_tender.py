@@ -1,43 +1,40 @@
 # converters/bt_555_Tender.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_subcontracting_percentage(xml_content):
-    """
-    Parse the XML content to extract subcontracting percentage information for each tender.
-
-    This function processes the BT-555-Tender business term, which represents the estimated
-    percentage of the contract that the contractor will subcontract to third parties.
+def parse_subcontracting_percentage(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the subcontracting percentage (BT-555) for procurement project tenders from XML content.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        dict: A dictionary containing the parsed subcontracting percentage data in the format:
-              {
-                  "bids": {
-                      "details": [
-                          {
-                              "id": "tender_id",
-                              "subcontracting": {
-                                  "minimumPercentage": float,
-                                  "maximumPercentage": float
-                              },
-                              "relatedLots": ["lot_id"]
-                          },
-                          ...
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
-
-    Raises:
-        etree.XMLSyntaxError: If the input is not valid XML.
+        Dict containing the parsed subcontracting percentage data in OCDS format, or None if no data found.
+        Format:
+        {
+            "bids": {
+                "details": [
+                    {
+                        "id": "TEN-0001",
+                        "subcontracting": {
+                            "minimumPercentage": 0.3,
+                            "maximumPercentage": 0.3
+                        },
+                        "relatedLots": [
+                            "LOT-0001"
+                        ]
+                    }
+                ]
+            }
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -54,7 +51,7 @@ def parse_subcontracting_percentage(xml_content):
     result = {"bids": {"details": []}}
 
     lot_tenders = root.xpath(
-        "//efac:noticeResult/efac:LotTender",
+        "//efac:NoticeResult/efac:LotTender",
         namespaces=namespaces,
     )
 
@@ -89,19 +86,18 @@ def parse_subcontracting_percentage(xml_content):
     return result if result["bids"]["details"] else None
 
 
-def merge_subcontracting_percentage(release_json, subcontracting_data) -> None:
-    """
-    Merge the parsed subcontracting percentage data into the main OCDS release JSON.
-
-    This function updates the existing bids in the release JSON with the subcontracting
-    percentage information. If a bid doesn't exist, it adds a new bid to the release.
+def merge_subcontracting_percentage(
+    release_json: dict[str, Any],
+    subcontracting_data: dict[str, Any] | None,
+) -> None:
+    """Merge subcontracting percentage data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        subcontracting_data (dict): The parsed subcontracting percentage data to be merged.
+        release_json: The main release JSON to merge data into
+        subcontracting_data: The subcontracting percentage data to merge from
 
     Returns:
-        None: The function updates the release_json in-place.
+        None - modifies release_json in place
     """
     if not subcontracting_data:
         logger.warning("BT-555-Tender: No subcontracting percentage data to merge")

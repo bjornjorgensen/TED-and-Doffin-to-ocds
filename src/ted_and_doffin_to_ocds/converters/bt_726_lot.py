@@ -7,16 +7,31 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_lot_sme_suitability(xml_content):
+def parse_lot_sme_suitability(xml_content: str | bytes) -> dict | None:
     """
     Parse the XML content to extract SME suitability information for lots.
 
+    This function processes XML content to extract whether lots are marked as
+    suitable for small and medium enterprises (SMEs).
+
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
 
     Returns:
-        dict: A dictionary containing the parsed SME suitability data.
-        None: If no relevant data is found.
+        Optional[Dict]: A dictionary containing the parsed SME suitability data in the format:
+            {
+                "tender": {
+                    "lots": [
+                        {
+                            "id": str,
+                            "suitability": {
+                                "sme": bool
+                            }
+                        }
+                    ]
+                }
+            }
+            Returns None if no relevant data is found.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -54,16 +69,26 @@ def parse_lot_sme_suitability(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_sme_suitability(release_json, lot_sme_suitability_data) -> None:
+def merge_lot_sme_suitability(
+    release_json: dict, lot_sme_suitability_data: dict | None
+) -> None:
     """
     Merge the parsed SME suitability data into the main OCDS release JSON.
 
+    This function takes SME suitability data and merges it into the main OCDS release JSON.
+    For each lot in the suitability data, it either updates an existing lot or adds a new one.
+
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        lot_sme_suitability_data (dict): The parsed SME suitability data to be merged.
+        release_json (Dict): The main OCDS release JSON to be updated
+        lot_sme_suitability_data (Optional[Dict]): The parsed SME suitability data to be merged.
+                                                  If None, the function returns without changes.
 
     Returns:
         None: The function updates the release_json in-place.
+
+    Note:
+        - If lot_sme_suitability_data is None, a warning is logged and no changes are made
+        - For existing lots, suitability.sme value is updated
     """
     if not lot_sme_suitability_data:
         logger.warning("No lot SME suitability data to merge")

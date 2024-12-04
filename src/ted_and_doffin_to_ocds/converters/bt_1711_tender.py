@@ -1,5 +1,3 @@
-# converters/bt_1711_Tender.py
-
 import logging
 
 from lxml import etree
@@ -7,7 +5,19 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_tender_ranked(xml_content):
+def parse_tender_ranked(xml_content: str | bytes) -> dict | None:
+    """Parse tender ranked information from XML content following BT-1711.
+
+    Extracts tender ranking indicator information and maps it to bid details.
+    For each LotTender, creates a bid with hasRank and relatedLots properties.
+
+    Args:
+        xml_content: XML string or bytes containing the notice result data
+
+    Returns:
+        Optional[Dict]: Dictionary containing bids with ranking info, or None if no bids found
+        Format: {"bids": {"details": [{"id": str, "hasRank": bool, "relatedLots": list[str]}]}}
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -23,36 +33,51 @@ def parse_tender_ranked(xml_content):
     result = {"bids": {"details": []}}
 
     lot_tenders = root.xpath(
-        "//efac:noticeResult/efac:LotTender",
+        "//efext:EformsExtension/efac:NoticeResult/efac:LotTender[efbc:TenderRankedIndicator and cbc:ID[@schemeName='tender']]",
         namespaces=namespaces,
     )
 
     for lot_tender in lot_tenders:
-        tender_id = lot_tender.xpath(
-            "cbc:ID[@schemeName='tender']/text()",
-            namespaces=namespaces,
-        )
-        ranked_indicator = lot_tender.xpath(
-            "efbc:TenderRankedIndicator/text()",
-            namespaces=namespaces,
-        )
-        lot_id = lot_tender.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
-            namespaces=namespaces,
-        )
+        try:
+            tender_id = lot_tender.xpath(
+                "cbc:ID[@schemeName='tender']/text()",
+                namespaces=namespaces,
+            )[0]
+            ranked_indicator = lot_tender.xpath(
+                "efbc:TenderRankedIndicator/text()",
+                namespaces=namespaces,
+            )[0]
+            lot_id = lot_tender.xpath(
+                "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+                namespaces=namespaces,
+            )[0]
 
-        if tender_id and ranked_indicator and lot_id:
             bid = {
-                "id": tender_id[0],
-                "hasRank": ranked_indicator[0].lower() == "true",
-                "relatedLots": [lot_id[0]],
+                "id": tender_id,
+                "hasRank": ranked_indicator.lower() == "true",
+                "relatedLots": [lot_id],
             }
             result["bids"]["details"].append(bid)
+        except (IndexError, AttributeError) as e:
+            logger.warning("Skipping incomplete lot tender: %s", e)
+            continue
 
     return result if result["bids"]["details"] else None
 
 
-def merge_tender_ranked(release_json, tender_ranked_data) -> None:
+def merge_tender_ranked(release_json: dict, tender_ranked_data: dict | None) -> None:
+    """Merge tender ranked data into the release JSON.
+
+    Updates or adds bid ranking information in the release JSON document.
+    Handles merging of bid details including hasRank property.
+
+    Args:
+        release_json: The target release JSON document to update
+        tender_ranked_data: The tender ranked data to merge
+
+    Returns:
+        None: Modifies release_json in place
+    """
     if not tender_ranked_data:
         logger.warning("No Tender Ranked data to merge")
         return

@@ -1,7 +1,7 @@
 {
   "id": "7d111d51-8042-402a-a234-50efe86d8f4f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-12e34952-ad72-4764-8ebe-20798e1c9603",
+  "ocid": "ocds-abcd1234-8ab7de8d-9c0b-4679-8972-83726cbf4dfd",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -68,7 +68,7 @@
         },
         "contractTerms": {
           "performanceTerms": "See documentation in the public proposal here: https://posten-supplier.ivalua.app/",
-          "electronicInvoicingPolicy": "required",
+          "electronicInvoicingPolicy": "Required",
           "hasElectronicOrdering": false,
           "hasElectronicPayment": false
         },
@@ -143,17 +143,11 @@
       },
       {
         "country": "NO"
-      },
-      {
-        "description": "Service and maintenance to be performed all over Norway."
-      },
-      {
-        "description": "Utførelsen av service skal gjennomføres i hele Norge (Posten Brings lokasjoner)"
       }
     ],
     "deliveryLocations": [
       {
-        "description": "Anywhere in the given country"
+        "description": "Anywhere in the given country; Service and maintenance to be performed all over Norway.; Utførelsen av service skal gjennomføres i hele Norge (Posten Brings lokasjoner); Service and maintenance to be performed all over Norway.; Utførelsen av service skal gjennomføres i hele Norge (Posten Brings lokasjoner)"
       }
     ]
   },
@@ -193,8 +187,8 @@
         "email": "Kristian.von.Aphelen@posten.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Biskop Gunnerus' gate 14 A",
@@ -279,6 +273,7 @@
     }
   ],
   "description": "None. None.",
+  "language": "en",
   "buyer": [
     {
       "id": "ORG-0001"

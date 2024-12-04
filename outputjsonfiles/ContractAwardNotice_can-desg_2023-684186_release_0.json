@@ -1,7 +1,7 @@
 {
   "id": "2023-684186",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-56c452fb-b034-438d-9094-6faec59fac1a",
+  "ocid": "ocds-abcd1234-17927e09-9f92-44dc-8f11-7e8b7d1a7144",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -143,6 +143,7 @@
     }
   ],
   "description": "Kulturtanken herved avlyser konkurransen «23/00605 - Anskaffelse av rammeavtale for kjøp av grafisk og designbyrå tjenester». Begrunnelse: Oppdragsgiver henviser til tidligere foretatte endringer i konkurransegrunnlaget og forlenget tilbudsfrist til 22.11.2023 kl. 13:00. I henhold til retningslinjer for offentlige anskaffelser sendte oppdragsgiver varsel om endringer til alle tilbyderne og publikasjonssidene i Doffin/TED. Grunnet tekniske utfordringer i konkurransegjennomføringsverktøy ble ikke informasjonen om forlenget frist sendt til Doffin/TED som planlagt. Konkurransen har vært synlig kun for tilbyderne som har meldt inn interesse for å levere tilbud før 08.11.2023. Som følge av dette ble nye tilbydere utelukket fra å delta i konkurransen. På grunn av overnevnte forhold velger Kulturtanken å avlyse utlyst konkurranse. Konkurransen vil bli kunngjort på nytt innen kort tid. Vi beklager ulemper som dette skal ha medført for alle involverte parter.",
+  "language": "nb",
   "buyer": [
     {
       "id": "ORG-0001"

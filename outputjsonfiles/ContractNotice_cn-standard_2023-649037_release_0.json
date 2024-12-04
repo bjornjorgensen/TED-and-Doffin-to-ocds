@@ -1,7 +1,7 @@
 {
   "id": "2023-649037",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8367a528-2ff3-4d75-b262-8396ffb607d4",
+  "ocid": "ocds-abcd1234-3d52d902-df4b-421f-9e06-853b6b67997f",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -68,7 +68,7 @@
           "description": "Rammeavtalen skal ha en varighet på to (2) år regnet fra oppstartstidspunkt. Oppdragsgiveren har deretter en ensidig rett til å forlenge avtalen med inntil ett (1) år av gangen. Maksimal samlet avtaleperiode er fire (4) år (2+1+1)."
         },
         "contractTerms": {
-          "electronicInvoicingPolicy": "allowed",
+          "electronicInvoicingPolicy": "Allowed",
           "hasElectronicOrdering": true,
           "hasElectronicPayment": true
         },
@@ -176,8 +176,8 @@
         "email": "post@sykehusinnkjop.no"
       },
       "roles": [
-        "buyer",
         "processContactPoint",
+        "buyer",
         "wholesaleBuyer"
       ],
       "address": {
@@ -199,6 +199,7 @@
       ]
     }
   ],
+  "language": "nb",
   "buyer": [
     {
       "id": "ORG-0001"

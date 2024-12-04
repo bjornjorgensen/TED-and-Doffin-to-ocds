@@ -1,95 +1,133 @@
-# converters/bt_739_organization_touchpoint.py
-
 import logging
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+    "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+    "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+}
 
-def parse_touchpoint_contact_fax(xml_content):
+
+def parse_touchpoint_contact_fax(xml_content: str | bytes) -> dict | None:
     """
-    Parse the XML content to extract the touchpoint contact fax number.
+    Parse BT-739: Organization touchpoint contact fax number.
+
+    Extracts fax numbers for contacting organizations via their touchpoints,
+    following data protection regulations regarding personal information.
 
     Args:
-        xml_content (str or bytes): The XML content to parse.
+        xml_content: XML content to parse, either as string or bytes
 
     Returns:
-        dict: A dictionary containing the parsed touchpoint contact fax number.
-        None: If no relevant data is found.
+        Optional[Dict]: Parsed data in format:
+            {
+                "parties": [
+                    {
+                        "id": str,  # touchpoint ID
+                        "identifier": {  # optional
+                            "id": str,
+                            "scheme": "GB-COH"
+                        },
+                        "contactPoint": {
+                            "faxNumber": str
+                        }
+                    }
+                ]
+            }
+        Returns None if no relevant data found or on error
     """
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
+    try:
+        if isinstance(xml_content, str):
+            xml_content = xml_content.encode("utf-8")
+        root = etree.fromstring(xml_content)
+        result = {"parties": []}
 
-    result = {"parties": []}
-
-    xpath_query = "//efac:organization"
-    organizations = root.xpath(xpath_query, namespaces=namespaces)
-
-    for organization in organizations:
-        company_id = organization.xpath(
-            "efac:company/cac:partyLegalEntity/cbc:companyID/text()",
-            namespaces=namespaces,
+        organizations = root.xpath(
+            "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
+            "/efext:EformsExtension/efac:Organizations/efac:Organization",
+            namespaces=NAMESPACES,
         )
-        touchpoint = organization.xpath("efac:touchpoint", namespaces=namespaces)
 
-        if touchpoint:
-            touchpoint_id = touchpoint[0].xpath(
-                "cac:partyIdentification/cbc:ID[@schemeName='touchpoint']/text()",
-                namespaces=namespaces,
-            )
-            fax_number = touchpoint[0].xpath(
-                "cac:Contact/cbc:Telefax/text()",
-                namespaces=namespaces,
+        for org in organizations:
+            company_id = org.xpath(
+                "efac:Company/cac:PartyLegalEntity/cbc:CompanyID/text()",
+                namespaces=NAMESPACES,
             )
 
-            if touchpoint_id and fax_number:
-                party_data = {
-                    "id": touchpoint_id[0],
-                    "contactPoint": {"faxNumber": fax_number[0]},
-                }
-                if company_id:
-                    party_data["identifier"] = {"id": company_id[0], "scheme": "GB-COH"}
-                result["parties"].append(party_data)
+            touchpoints = org.xpath("efac:TouchPoint", namespaces=NAMESPACES)
+            for touchpoint in touchpoints:
+                tp_id = touchpoint.xpath(
+                    "cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']/text()",
+                    namespaces=NAMESPACES,
+                )
+                fax = touchpoint.xpath(
+                    "cac:Contact/cbc:Telefax/text()",
+                    namespaces=NAMESPACES,
+                )
 
-    return result if result["parties"] else None
+                if tp_id and fax:
+                    party_data = {
+                        "id": tp_id[0],
+                        "contactPoint": {"faxNumber": fax[0].strip()},
+                    }
+                    if company_id:
+                        party_data["identifier"] = {
+                            "id": company_id[0].strip(),
+                            "scheme": "GB-COH",
+                        }
+                    logger.info(
+                        "Found fax number for touchpoint %s: %s",
+                        tp_id[0],
+                        fax[0].strip(),
+                    )
+                    result["parties"].append(party_data)
+
+        return result if result["parties"] else None
+
+    except etree.XMLSyntaxError:
+        logger.exception("Failed to parse XML content")
+        raise
+    except Exception:
+        logger.exception("Error processing touchpoint contact fax")
+        return None
 
 
-def merge_touchpoint_contact_fax(release_json, touchpoint_fax_data) -> None:
+def merge_touchpoint_contact_fax(
+    release_json: dict, touchpoint_data: dict | None
+) -> None:
     """
-    Merge the parsed touchpoint contact fax number into the main OCDS release JSON.
+    Merge touchpoint fax number data into the release JSON.
+
+    Updates or adds fax numbers to organization touchpoint contact points.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        touchpoint_fax_data (dict): The parsed touchpoint contact fax data to be merged.
+        release_json: Main OCDS release JSON to update
+        touchpoint_data: Touchpoint fax data to merge, can be None
 
-    Returns:
-        None: The function updates the release_json in-place.
+    Note:
+        - Updates release_json in-place
+        - Creates parties array if needed
+        - Updates existing touchpoints' contactPoint
+        - Preserves existing identifiers
     """
-    if not touchpoint_fax_data:
+    if not touchpoint_data:
         logger.warning("No touchpoint contact fax data to merge")
         return
 
     parties = release_json.setdefault("parties", [])
 
-    for new_party in touchpoint_fax_data["parties"]:
+    for new_party in touchpoint_data["parties"]:
         existing_party = next(
-            (party for party in parties if party["id"] == new_party["id"]),
-            None,
+            (party for party in parties if party["id"] == new_party["id"]), None
         )
         if existing_party:
-            existing_party.setdefault("contactPoint", {}).update(
-                new_party["contactPoint"],
-            )
+            contact_point = existing_party.setdefault("contactPoint", {})
+            contact_point["faxNumber"] = new_party["contactPoint"]["faxNumber"]
             if "identifier" in new_party:
                 existing_party["identifier"] = new_party["identifier"]
         else:
@@ -97,5 +135,5 @@ def merge_touchpoint_contact_fax(release_json, touchpoint_fax_data) -> None:
 
     logger.info(
         "Merged touchpoint contact fax data for %d touchpoints",
-        len(touchpoint_fax_data["parties"]),
+        len(touchpoint_data["parties"]),
     )

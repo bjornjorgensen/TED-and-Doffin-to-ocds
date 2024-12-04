@@ -1,7 +1,7 @@
 {
   "id": "2022-674620",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-21181385-0e39-45c9-8737-6674e67aca4c",
+  "ocid": "ocds-abcd1234-e0677062-9314-43ff-a8f9-ca703e153ce5",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -187,6 +187,7 @@
       "title": "Helseovervåking av vilt - ViltHOP 2023 - 2027"
     }
   ],
+  "language": "nb",
   "buyer": [
     {
       "id": "ORG-0001"

@@ -6,89 +6,116 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+}
 
-def parse_submission_electronic_signature(xml_content):
+
+def parse_lot_esignature_requirement(xml_content: str | bytes) -> dict | None:
     """
-    Parse the XML content to extract the submission electronic signature requirement for each lot.
+    Parse BT-744: Electronic signature requirement for lots.
+
+    Extracts whether advanced or qualified electronic signature/seal is required
+    for submissions, as defined in EU Regulation No 910/2014.
 
     Args:
-        xml_content (str or bytes): The XML content to parse.
+        xml_content: XML content to parse, either as string or bytes
 
     Returns:
-        dict: A dictionary containing the parsed submission electronic signature requirement data.
-        None: If no relevant data is found.
+        Optional[Dict]: Parsed data in format:
+            {
+                "tender": {
+                    "lots": [
+                        {
+                            "id": str,
+                            "submissionTerms": {
+                                "advancedElectronicSignatureRequired": bool
+                            }
+                        }
+                    ]
+                }
+            }
+        Returns None if no relevant data found or on error
     """
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
+    try:
+        if isinstance(xml_content, str):
+            xml_content = xml_content.encode("utf-8")
+        root = etree.fromstring(xml_content)
+        result = {"tender": {"lots": []}}
 
-    result = {"tender": {"lots": []}}
-
-    xpath_query = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']"
-    lots = root.xpath(xpath_query, namespaces=namespaces)
-
-    for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        esignature_code = lot.xpath(
-            ".//cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='esignature-submission']/cbc:ExecutionRequirementCode/text()",
-            namespaces=namespaces,
+        lots = root.xpath(
+            "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+            namespaces=NAMESPACES,
         )
 
-        if esignature_code:
-            lot_data = {
-                "id": lot_id,
-                "submissionTerms": {
-                    "advancedElectronicSignatureRequired": esignature_code[0].lower()
-                    == "true",
-                },
-            }
-            result["tender"]["lots"].append(lot_data)
+        for lot in lots:
+            lot_id = lot.xpath("cbc:ID/text()", namespaces=NAMESPACES)[0]
+            esignature = lot.xpath(
+                ".//cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='esignature-submission']"
+                "/cbc:ExecutionRequirementCode/text()",
+                namespaces=NAMESPACES,
+            )
 
-    return result if result["tender"]["lots"] else None
+            if esignature:
+                is_required = esignature[0].lower() == "true"
+                logger.info(
+                    "Found e-signature requirement %s for lot %s", is_required, lot_id
+                )
+                lot_data = {
+                    "id": lot_id,
+                    "submissionTerms": {
+                        "advancedElectronicSignatureRequired": is_required
+                    },
+                }
+                result["tender"]["lots"].append(lot_data)
+
+        return result if result["tender"]["lots"] else None
+
+    except etree.XMLSyntaxError:
+        logger.exception("Failed to parse XML content")
+        raise
+    except Exception:
+        logger.exception("Error processing e-signature requirement")
+        return None
 
 
-def merge_submission_electronic_signature(
-    release_json,
-    submission_electronic_signature_data,
+def merge_lot_esignature_requirement(
+    release_json: dict, esignature_data: dict | None
 ) -> None:
     """
-    Merge the parsed submission electronic signature requirement data into the main OCDS release JSON.
+    Merge electronic signature requirement data into the release JSON.
+
+    Updates or adds e-signature requirements for lots.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        submission_electronic_signature_data (dict): The parsed submission electronic signature requirement data to be merged.
+        release_json: Main OCDS release JSON to update
+        esignature_data: E-signature requirement data to merge, can be None
 
-    Returns:
-        None: The function updates the release_json in-place.
+    Note:
+        - Updates release_json in-place
+        - Creates tender.lots array if needed
+        - Updates existing lots' submissionTerms
     """
-    if not submission_electronic_signature_data:
-        logger.warning("No submission electronic signature requirement data to merge")
+    if not esignature_data:
+        logger.warning("No electronic signature requirement data to merge")
         return
 
     tender = release_json.setdefault("tender", {})
-    existing_lots = tender.setdefault("lots", [])
+    lots = tender.setdefault("lots", [])
 
-    for new_lot in submission_electronic_signature_data["tender"]["lots"]:
-        existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
-            None,
-        )
+    for new_lot in esignature_data["tender"]["lots"]:
+        existing_lot = next((lot for lot in lots if lot["id"] == new_lot["id"]), None)
         if existing_lot:
-            existing_lot.setdefault("submissionTerms", {}).update(
-                new_lot["submissionTerms"],
-            )
+            submission_terms = existing_lot.setdefault("submissionTerms", {})
+            submission_terms["advancedElectronicSignatureRequired"] = new_lot[
+                "submissionTerms"
+            ]["advancedElectronicSignatureRequired"]
         else:
-            existing_lots.append(new_lot)
+            lots.append(new_lot)
 
     logger.info(
-        "Merged submission electronic signature requirement data for %d lots",
-        len(submission_electronic_signature_data["tender"]["lots"]),
+        "Merged electronic signature requirement data for %d lots",
+        len(esignature_data["tender"]["lots"]),
     )

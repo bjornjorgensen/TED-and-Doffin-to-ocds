@@ -1,13 +1,37 @@
 # converters/bt_538_Lot.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_lot_duration_other(xml_content):
+def parse_lot_duration_other(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the duration description (BT-538) for procurement project lots from XML content.
+
+    Args:
+        xml_content: XML string or bytes containing the procurement data
+
+    Returns:
+        Dict containing the parsed lot duration description data in OCDS format, or None if no data found.
+        Format:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": "lot-id",
+                        "contractPeriod": {
+                            "description": "UNLIMITED"
+                        }
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -42,7 +66,18 @@ def parse_lot_duration_other(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_duration_other(release_json, lot_duration_other_data) -> None:
+def merge_lot_duration_other(
+    release_json: dict[str, Any], lot_duration_other_data: dict[str, Any] | None
+) -> None:
+    """Merge lot duration description data into the main release JSON.
+
+    Args:
+        release_json: The main release JSON to merge data into
+        lot_duration_other_data: The lot duration description data to merge from
+
+    Returns:
+        None - modifies release_json in place
+    """
     if not lot_duration_other_data:
         logger.warning("No Lot Duration Other data to merge")
         return

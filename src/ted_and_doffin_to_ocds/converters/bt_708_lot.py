@@ -1,6 +1,7 @@
 # converters/bt_708_Lot.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
@@ -192,30 +193,32 @@ ISO_639_1_MAPPING = {
 }
 
 
-def parse_lot_documents_official_language(xml_content):
-    """
-    Parse the XML content to extract the official languages for documents in each lot.
+def parse_lot_documents_official_language(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the documents official language (BT-708) for procurement project lots from XML content.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        dict: A dictionary containing the parsed data in the format:
-              {
-                  "tender": {
-                      "documents": [
-                          {
-                              "id": "document_id",
-                              "languages": ["lang_code"],
-                              "relatedLots": ["lot_id"]
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
-
-    Raises:
-        etree.XMLSyntaxError: If the input is not valid XML.
+        Dict containing the parsed documents official language data in OCDS format, or None if no data found.
+        Format:
+        {
+            "tender": {
+                "documents": [
+                    {
+                        "id": "20210521/CTFD/ENG/7654-02",
+                        "languages": [
+                            "en"
+                        ],
+                        "relatedLots": [
+                            "LOT-0001"
+                        ]
+                    }
+                ]
+            }
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -246,7 +249,7 @@ def parse_lot_documents_official_language(xml_content):
         for doc in documents:
             doc_id = doc.xpath("cbc:ID/text()", namespaces=namespaces)[0]
             languages = doc.xpath(
-                ".//efac:OfficialLanguages/cac:Language/cbc:ID/text()",
+                "ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:OfficialLanguages/cac:Language/cbc:ID/text()",
                 namespaces=namespaces,
             )
 
@@ -264,16 +267,18 @@ def parse_lot_documents_official_language(xml_content):
     return result if result["tender"]["documents"] else None
 
 
-def merge_lot_documents_official_language(release_json, lot_documents_data) -> None:
-    """
-    Merge the parsed lot documents official language data into the main OCDS release JSON.
+def merge_lot_documents_official_language(
+    release_json: dict[str, Any],
+    lot_documents_data: dict[str, Any] | None,
+) -> None:
+    """Merge documents official language data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        lot_documents_data (dict): The parsed lot documents data to be merged.
+        release_json: The main release JSON to merge data into
+        lot_documents_data: The documents official language data to merge from
 
     Returns:
-        None: The function updates the release_json in-place.
+        None - modifies release_json in place
     """
     if not lot_documents_data:
         logger.warning("No lot documents official language data to merge")

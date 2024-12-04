@@ -1,47 +1,46 @@
 # converters/bt_644_Lot_Prize_Value.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_lot_prize_value(xml_content: bytes):
-    """
-    Parse the XML content to extract the prize value for each lot in a design contest.
+def parse_lot_prize_value(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the prize value (BT-644) for procurement project lots from XML content.
 
     Args:
-        xml_content (bytes): The XML content to parse.
+        xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        dict: A dictionary containing the parsed prize value data in the format:
-              {
-                  "tender": {
-                      "lots": [
-                          {
-                              "id": "lot_id",
-                              "designContest": {
-                                  "prizes": {
-                                      "details": [
-                                          {
-                                              "id": "prize_id",
-                                              "value": {
-                                                  "amount": float_value,
-                                                  "currency": "currency_code"
-                                              }
-                                          }
-                                      ]
-                                  }
-                              }
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
-
-    Raises:
-        etree.XMLSyntaxError: If the input is not valid XML.
+        Dict containing the parsed prize value data in OCDS format, or None if no data found.
+        Format:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": "LOT-0001",
+                        "designContest": {
+                            "prizes": {
+                                "details": [
+                                    {
+                                        "id": "0",
+                                        "value": {
+                                            "amount": 5000,
+                                            "currency": "EUR"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -83,37 +82,32 @@ def parse_lot_prize_value(xml_content: bytes):
                 )
 
                 if value_amount and currency:
-                    try:
-                        amount = float(value_amount[0])
-                        prize_data = {
-                            "id": str(i),
-                            "value": {"amount": amount, "currency": currency[0]},
-                        }
-                        lot_data["designContest"]["prizes"]["details"].append(
-                            prize_data,
-                        )
-                    except ValueError:
-                        logger.warning(
-                            "Invalid prize value for lot %s: %s",
-                            lot_id,
-                            value_amount[0],
-                        )
+                    prize_data = {
+                        "id": str(i),
+                        "value": {
+                            "amount": float(value_amount[0]),
+                            "currency": currency[0],
+                        },
+                    }
+                    lot_data["designContest"]["prizes"]["details"].append(prize_data)
 
             result["tender"]["lots"].append(lot_data)
 
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_prize_value(release_json, lot_prize_value_data) -> None:
-    """
-    Merge the parsed lot prize value data into the main OCDS release JSON.
+def merge_lot_prize_value(
+    release_json: dict[str, Any],
+    lot_prize_value_data: dict[str, Any] | None,
+) -> None:
+    """Merge lot prize value data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        lot_prize_value_data (dict): The parsed lot prize value data to be merged.
+        release_json: The main release JSON to merge data into
+        lot_prize_value_data: The lot prize value data to merge from
 
     Returns:
-        None: The function updates the release_json in-place.
+        None - modifies release_json in place
     """
     if not lot_prize_value_data:
         logger.warning("No lot prize value data to merge")

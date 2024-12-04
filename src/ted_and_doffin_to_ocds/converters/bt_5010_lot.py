@@ -21,7 +21,7 @@ def parse_eu_funds_financing_identifier(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
     """
-    Parse EU Funds Financing Identifier (BT-5010-Lot) from XML content.
+    Parse EU Funds Financing Identifier (BT-5010) from XML content.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -29,10 +29,9 @@ def parse_eu_funds_financing_identifier(
     try:
         root = etree.fromstring(xml_content)
 
-        # Initialize result structure
         result = {"parties": [], "planning": {"budget": {"finance": []}}}
 
-        # Use exact XPath from specification
+        # Get all lots with financing identifiers using exact XPath
         lots = root.xpath(
             "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
             namespaces=NAMESPACES,
@@ -42,49 +41,45 @@ def parse_eu_funds_financing_identifier(
         for lot in lots:
             lot_id = lot.xpath("cbc:ID/text()", namespaces=NAMESPACES)[0]
 
-            # Use exact XPath for funding elements
-            funding_elements = lot.xpath(
-                "cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Funding/efbc:FinancingIdentifier/text()",
+            # Get financing identifiers using exact BT-5010 path
+            financing_ids = lot.xpath(
+                "cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/"
+                "efext:EformsExtension/efac:Funding/efbc:FinancingIdentifier/text()",
                 namespaces=NAMESPACES,
             )
 
-            for financing_id in funding_elements:
+            for financing_id in financing_ids:
                 found_financing = True
                 result["planning"]["budget"]["finance"].append(
                     {
                         "id": financing_id,
-                        "financingParty": {  # Fixed capitalization
-                            "name": "European Union"
+                        "financingParty": {
+                            "name": "European Union"  # ID will be added during merge
                         },
                         "relatedLots": [lot_id],
                     }
                 )
 
         if found_financing:
-            # Add EU party information
+            # Add EU party if financing exists
             result["parties"].append({"name": "European Union", "roles": ["funder"]})
-            logger.info("Found EU funds financing identifiers")
             return result
 
-        logger.debug("No EU funds financing identifiers found")
-        return None  # noqa: TRY300
-
-    except etree.XMLSyntaxError:
-        logger.exception("Failed to parse XML content")
-        raise
     except Exception:
         logger.exception("Error parsing EU funds financing identifier")
+        return None
+    else:
         return None
 
 
 def merge_eu_funds_financing_identifier(
     release_json: dict[str, Any],
-    eu_funds_financing_identifier_data: dict[str, Any] | None,
+    eu_funds_data: dict[str, Any] | None,
 ) -> None:
     """
     Merge EU Funds Financing Identifier data into the release JSON.
     """
-    if not eu_funds_financing_identifier_data:
+    if not eu_funds_data:
         logger.debug("No EU Funds Financing Identifier data to merge")
         return
 
@@ -110,32 +105,27 @@ def merge_eu_funds_financing_identifier(
     budget = planning.setdefault("budget", {})
     existing_finance = budget.setdefault("finance", [])
 
-    for new_finance in eu_funds_financing_identifier_data["planning"]["budget"][
-        "finance"
-    ]:
-        existing_finance_item = next(
+    for new_finance in eu_funds_data["planning"]["budget"]["finance"]:
+        existing_item = next(
             (item for item in existing_finance if item["id"] == new_finance["id"]), None
         )
 
-        if existing_finance_item:
-            # Update existing finance item
-            existing_finance_item["financingParty"] = {  # Fixed capitalization
+        if existing_item:
+            # Update existing finance entry
+            existing_item["financingParty"] = {
                 "id": eu_party["id"],
                 "name": "European Union",
             }
-            # Merge relatedLots arrays without duplicates
-            existing_lots = existing_finance_item.get("relatedLots", [])
+            # Merge relatedLots arrays
+            existing_lots = existing_item.get("relatedLots", [])
             existing_lots.extend(new_finance["relatedLots"])
-            existing_finance_item["relatedLots"] = list(set(existing_lots))
+            existing_item["relatedLots"] = list(set(existing_lots))
         else:
-            # Add new finance item with proper structure
-            new_finance["financingParty"] = {  # Fixed capitalization
-                "id": eu_party["id"],
-                "name": "European Union",
-            }
+            # Add new finance entry with proper party reference
+            new_finance["financingParty"]["id"] = eu_party["id"]
             existing_finance.append(new_finance)
 
     logger.info(
-        "Merged EU Funds Financing Identifier data for %d finance items",
-        len(eu_funds_financing_identifier_data["planning"]["budget"]["finance"]),
+        "Merged EU Funds Financing data for %d finance items",
+        len(eu_funds_data["planning"]["budget"]["finance"]),
     )

@@ -1,7 +1,7 @@
 {
   "id": "2023-653024",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9bbeb775-5306-415f-9c2b-aca3cdc3fe8c",
+  "ocid": "ocds-abcd1234-e4fc3d45-6994-4d66-81d0-d7867b86ebe3",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -419,11 +419,8 @@
     "statistics": [
       {
         "id": "1",
-        "value": 15,
         "measure": "bids",
-        "relatedLots": [
-          "LOT-0000"
-        ]
+        "relatedLot": "LOT-0000"
       }
     ]
   },
@@ -562,15 +559,16 @@
     }
   ],
   "description": "Mercell kunngjøring: https://opic.com/id/afreyczxlo",
+  "language": "nb",
+  "buyer": [
+    {
+      "id": "ORG-0001"
+    }
+  ],
   "contracts": [
     {
       "id": "CON-0001",
       "awardID": "RES-0010"
-    }
-  ],
-  "buyer": [
-    {
-      "id": "ORG-0001"
     }
   ]
 }

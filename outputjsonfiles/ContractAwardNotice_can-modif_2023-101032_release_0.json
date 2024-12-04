@@ -1,7 +1,7 @@
 {
   "id": "be2cd071-e143-4fc8-bc3b-7f1ec1b4141f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-bd60dbdc-e27b-465f-930d-26bd023c840c",
+  "ocid": "ocds-abcd1234-c6d4be3e-582a-491d-98cf-1ee0423e36e4",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -91,7 +91,7 @@
       ],
       "amendments": [
         {
-          "id": "fbf8dad0-ed72-4b63-ab56-b59263f91b02",
+          "id": "f6b35946-7658-4537-a349-05c0fc743af7",
           "rationaleClassifications": [
             {
               "id": "mod-cir",
@@ -101,11 +101,11 @@
           ]
         },
         {
-          "id": "a77cbc1f-c4a7-496a-9e2b-f5ac6ab64f8e",
+          "id": "b7aae7e1-cb96-49a5-a9d6-94e415be0dc9",
           "rationale": "Oppdragsgiver kunne ikke forutse at dagens Ålesund kommune ville bli vedtatt delt i to nye kommuner, heretter kalt Ålesund 2024 og Haram 2024. Anskaffelsens overordnede karakter blir ikke endret (1.), og den enkelte prisøkningen overstiger ikke 50 prosent av den opprinnelige kontraktsverdien (2.). Oppdragsgiver kunngjør endringene (3.)."
         },
         {
-          "id": "bf6d7ce3-4fc6-485d-854d-083252c1476c",
+          "id": "e3aa7099-4dcc-4d8f-9d06-fd35d90aae36",
           "description": "I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d. Ålesund kommunes eksisterende avtale med Visma Enterprise AS vedrørende Visma FlyVo videreføres i Ålesund 2024 og Haram 2024. Det er inngått et endringsbilag til eksisterende kontrakt som beskriver de nødvendige endringene i kontrakten som følge av kommunedelingen. Av opprinnelig kontraktsverdi, etter avtalefestet KPI-justering, utgjør nødvendige engangskostnader direkte knyttet til kommunedelingen 10 %. Årlig pris for bruksrett (fast pris pr. flyktning og pr. elev) endres ikke (kun avhengig av antall flyktninger og antall elever). "
         }
       ],
@@ -183,6 +183,7 @@
     }
   ],
   "description": "Henvisning til opprinnelige kunngjøringer: TED: 2019/S 164-403922, Doffin: 2019-366488. Reference to original announcements: TED: 2019/S 164-403922, Doffin: 2019-366488.",
+  "language": "no",
   "awards": [
     {
       "id": "RES-0001",

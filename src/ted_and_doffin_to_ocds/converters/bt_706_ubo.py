@@ -1,12 +1,14 @@
 # converters/bt_706_ubo.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
-code_mapping = {
+# ISO 3166-1 alpha-2 codes
+ISO_3166_1_MAPPING = {
     "ALB": "AL",
     "AND": "AD",
     "AUT": "AT",
@@ -58,15 +60,32 @@ code_mapping = {
 }
 
 
-def parse_ubo_nationality(xml_content: str) -> dict | None:
-    """
-    Parse the XML content to extract the Ultimate Beneficial Owner's nationality details.
+def parse_ubo_nationality(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the ultimate beneficial owner nationality (BT-706) from XML content.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        Optional[Dict]: A dictionary containing the parsed data if found, None otherwise.
+        Dict containing the parsed UBO nationality data in OCDS format, or None if no data found.
+        Format:
+        {
+            "parties": [
+                {
+                    "id": "ORG-0001",
+                    "beneficialOwners": [
+                        {
+                            "id": "UBO-0001",
+                            "nationalities": [
+                                "DE"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -80,7 +99,7 @@ def parse_ubo_nationality(xml_content: str) -> dict | None:
     }
 
     ubo_nationality = root.xpath(
-        "//efext:UBLExtensions/efext:UBLExtension/efext:ExtensionContent/efac:organizations/efac:UltimateBeneficialOwner",
+        "//efac:Organizations/efac:UltimateBeneficialOwner",
         namespaces=namespaces,
     )
 
@@ -96,7 +115,7 @@ def parse_ubo_nationality(xml_content: str) -> dict | None:
         )
 
         if ubo_id and nationality:
-            two_letter_code = code_mapping.get(nationality[0], nationality[0][:2])
+            two_letter_code = ISO_3166_1_MAPPING.get(nationality[0], nationality[0][:2])
             ubo_data.append({"id": ubo_id[0], "nationalities": [two_letter_code]})
 
     if ubo_data:
@@ -113,18 +132,17 @@ def parse_ubo_nationality(xml_content: str) -> dict | None:
 
 
 def merge_ubo_nationality(
-    release_json: dict,
-    ubo_nationality_data: dict | None,
+    release_json: dict[str, Any],
+    ubo_nationality_data: dict[str, Any] | None,
 ) -> None:
-    """
-    Merge the parsed ubo nationality data into the main OCDS release JSON.
+    """Merge ultimate beneficial owner nationality data into the release JSON.
 
     Args:
-        release_json (Dict): The main OCDS release JSON to be updated.
-        ubo_nationality_data (Optional[Dict]): The parsed ubo nationality data to be merged.
+        release_json: The main release JSON to merge data into
+        ubo_nationality_data: The UBO nationality data to merge from
 
     Returns:
-        None: The function updates the release_json in-place.
+        None - modifies release_json in place
     """
     if not ubo_nationality_data:
         logger.warning("No ubo nationality data to merge")

@@ -1,76 +1,98 @@
-# converters/bt_5101a_part.py
+import logging
+from typing import Any
 
 from lxml import etree
 
+logger = logging.getLogger(__name__)
 
-def parse_part_place_performance_street(xml_content):
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+}
+
+
+def parse_part_place_performance_street(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse part place performance street (BT-5101(a)-Part) from XML content."""
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
 
-    result = {"tender": {"deliveryAddresses": []}}
+    try:
+        root = etree.fromstring(xml_content)
+        result = {"tender": {"deliveryAddresses": []}}
 
-    parts = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']",
-        namespaces=namespaces,
-    )
-
-    for part in parts:
-        realized_locations = part.xpath(
-            "cac:ProcurementProject/cac:RealizedLocation",
-            namespaces=namespaces,
+        # Get all parts using exact BT-5101 path
+        parts = root.xpath(
+            "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
+            namespaces=NAMESPACES,
         )
 
-        for location in realized_locations:
-            address = location.xpath("cac:Address", namespaces=namespaces)[0]
-            street_name = address.xpath("cbc:StreetName/text()", namespaces=namespaces)
-            additional_street_name = address.xpath(
-                "cbc:AdditionalStreetName/text()",
-                namespaces=namespaces,
-            )
-            address_lines = address.xpath(
-                "cac:AddressLine/cbc:Line/text()",
-                namespaces=namespaces,
+        found_addresses = False
+        for part in parts:
+            realized_locations = part.xpath(
+                "cac:ProcurementProject/cac:RealizedLocation", namespaces=NAMESPACES
             )
 
-            street_address_parts = []
-            if street_name:
-                street_address_parts.append(street_name[0])
-            if additional_street_name:
-                street_address_parts.append(additional_street_name[0])
-            street_address_parts.extend(address_lines)
+            for location in realized_locations:
+                address_parts = []
 
-            street_address = ", ".join(street_address_parts)
+                # Get street name
+                street_name = location.xpath(
+                    "cac:Address/cbc:StreetName/text()", namespaces=NAMESPACES
+                )
+                if street_name:
+                    address_parts.append(street_name[0])
 
-            result["tender"]["deliveryAddresses"].append(
-                {"streetAddress": street_address},
-            )
+                # Get additional street name
+                additional_street = location.xpath(
+                    "cac:Address/cbc:AdditionalStreetName/text()", namespaces=NAMESPACES
+                )
+                if additional_street:
+                    address_parts.append(additional_street[0])
 
-    return result if result["tender"]["deliveryAddresses"] else None
+                # Get address lines
+                address_lines = location.xpath(
+                    "cac:Address/cac:AddressLine/cbc:Line/text()", namespaces=NAMESPACES
+                )
+                address_parts.extend(address_lines)
+
+                if address_parts:
+                    found_addresses = True
+                    street_address = ", ".join(
+                        part.strip() for part in address_parts if part.strip()
+                    )
+                    result["tender"]["deliveryAddresses"].append(
+                        {"streetAddress": street_address}
+                    )
+
+        if found_addresses:
+            return result
+
+    except Exception:
+        logger.exception("Error parsing part place performance street")
+        return None
+    else:
+        return None
 
 
 def merge_part_place_performance_street(
-    release_json,
-    part_place_performance_street_data,
+    release_json: dict[str, Any], street_data: dict[str, Any] | None
 ) -> None:
-    if not part_place_performance_street_data:
+    """Merge part place performance street data into the release JSON."""
+    if not street_data:
+        logger.debug("No part place performance street data to merge")
         return
 
-    existing_addresses = release_json.setdefault("tender", {}).setdefault(
-        "deliveryAddresses",
-        [],
-    )
+    tender = release_json.setdefault("tender", {})
+    existing_addresses = tender.setdefault("deliveryAddresses", [])
 
-    for new_address in part_place_performance_street_data["tender"][
-        "deliveryAddresses"
-    ]:
+    for new_address in street_data["tender"]["deliveryAddresses"]:
+        # Only add if unique street address
         if new_address not in existing_addresses:
             existing_addresses.append(new_address)
+
+    logger.info(
+        "Merged part place performance street data for %d addresses",
+        len(street_data["tender"]["deliveryAddresses"]),
+    )

@@ -1,6 +1,7 @@
 # converters/bt_625_Lot.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
@@ -61,37 +62,32 @@ EU_MEASUREMENT_UNITS = {
 }
 
 
-def parse_unit(xml_content):
-    """
-    Parse the XML content to extract unit information for each lot.
-
-    This function processes the BT-625-Lot business term, which represents
-    the unit which the good, service, or work comes in.
+def parse_unit(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the unit (BT-625) for procurement project lots from XML content.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        dict: A dictionary containing the parsed unit data in the format:
-              {
-                  "tender": {
-                      "items": [
-                          {
-                              "id": "item_id",
-                              "unit": {
-                                  "id": "unit_code",
-                                  "scheme": "EU Measurement unit",
-                                  "name": "unit_name"
-                              },
-                              "relatedLot": "lot_id"
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
-
-    Raises:
-        etree.XMLSyntaxError: If the input is not valid XML.
+        Dict containing the parsed unit data in OCDS format, or None if no data found.
+        Format:
+        {
+            "tender": {
+                "items": [
+                    {
+                        "id": "1",
+                        "unit": {
+                            "id": "TNE",
+                            "scheme": "EU Measurement unit",
+                            "name": "tonne"
+                        },
+                        "relatedLot": "LOT-0001"
+                    }
+                ]
+            }
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -135,19 +131,18 @@ def parse_unit(xml_content):
     return result if result["tender"]["items"] else None
 
 
-def merge_unit(release_json, unit_data) -> None:
-    """
-    Merge the parsed unit data into the main OCDS release JSON.
-
-    This function updates the existing items in the release JSON with the
-    unit information. If an item doesn't exist, it adds a new item to the release.
+def merge_unit(
+    release_json: dict[str, Any],
+    unit_data: dict[str, Any] | None,
+) -> None:
+    """Merge unit data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        unit_data (dict): The parsed unit data to be merged.
+        release_json: The main release JSON to merge data into
+        unit_data: The unit data to merge from
 
     Returns:
-        None: The function updates the release_json in-place.
+        None - modifies release_json in place
     """
     if not unit_data:
         logger.warning("BT-625-Lot: No unit data to merge")

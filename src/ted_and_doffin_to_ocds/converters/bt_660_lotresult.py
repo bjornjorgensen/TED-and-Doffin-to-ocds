@@ -1,25 +1,38 @@
 # converters/bt_660_LotResult.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_framework_reestimated_value(xml_content):
-    """
-    Parse the XML content to extract the framework re-estimated value for each lot result.
+def parse_framework_reestimated_value(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the framework re-estimated value (BT-660) from XML content.
 
     Args:
-        xml_content (str or bytes): The XML content to parse.
+        xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        dict: A dictionary containing the parsed framework re-estimated value data.
-        None: If no relevant data is found.
-
-    Raises:
-        etree.XMLSyntaxError: If the input is not valid XML.
+        Dict containing the parsed framework re-estimated value data in OCDS format, or None if no data found.
+        Format:
+        {
+            "awards": [
+                {
+                    "id": "RES-0001",
+                    "estimatedValue": {
+                        "amount": 123,
+                        "currency": "EUR"
+                    },
+                    "relatedLots": [
+                        "LOT-0001"
+                    ]
+                }
+            ]
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -36,7 +49,7 @@ def parse_framework_reestimated_value(xml_content):
     result = {"awards": []}
 
     lot_results = root.xpath(
-        "//efac:noticeResult/efac:LotResult",
+        "//efac:NoticeResult/efac:LotResult",
         namespaces=namespaces,
     )
 
@@ -59,7 +72,7 @@ def parse_framework_reestimated_value(xml_content):
         )
 
         if award_id and reestimated_value and currency:
-            award = {
+            award_data = {
                 "id": award_id[0],
                 "estimatedValue": {
                     "amount": float(reestimated_value[0]),
@@ -67,27 +80,24 @@ def parse_framework_reestimated_value(xml_content):
                 },
             }
             if related_lot:
-                award["relatedLots"] = [related_lot[0]]
-            result["awards"].append(award)
+                award_data["relatedLots"] = [related_lot[0]]
+            result["awards"].append(award_data)
 
     return result if result["awards"] else None
 
 
 def merge_framework_reestimated_value(
-    release_json, framework_reestimated_value_data
+    release_json: dict[str, Any],
+    framework_reestimated_value_data: dict[str, Any] | None,
 ) -> None:
-    """
-    Merge the parsed framework re-estimated value data into the main OCDS release JSON.
-
-    This function updates the existing awards in the release JSON with the
-    framework re-estimated value information. If an award doesn't exist, it adds a new award to the release.
+    """Merge framework re-estimated value data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        framework_reestimated_value_data (dict): The parsed framework re-estimated value data to be merged.
+        release_json: The main release JSON to merge data into
+        framework_reestimated_value_data: The framework re-estimated value data to merge from
 
     Returns:
-        None: The function updates the release_json in-place.
+        None - modifies release_json in place
     """
     if not framework_reestimated_value_data:
         logger.warning("No Framework Re-estimated Value data to merge")

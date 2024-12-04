@@ -1,7 +1,7 @@
 {
   "id": "2023-698775",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-db770a04-ac80-42e8-9f09-be4ffee096c3",
+  "ocid": "ocds-abcd1234-36e80bbb-ff81-4a19-bbca-f0d453c77169",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -65,11 +65,6 @@
           "description": "Avtalen skal gjelde fra 01.01.2024 til og med 31.12.2025, med opsjon for ytterliggere 1 år + 1 år. Evtentuelle avvik for varighet blir beskrevet i konkurransegrunnlaget.",
           "maximumRenewals": 0
         },
-        "contractTerms": {
-          "electronicInvoicingPolicy": "not-allowed",
-          "hasElectronicOrdering": false,
-          "hasElectronicPayment": false
-        },
         "selectionCriteria": {
           "criteria": [
             {
@@ -81,6 +76,10 @@
         "hasAccessibilityCriteria": false,
         "techniques": {
           "hasElectronicAuction": false
+        },
+        "contractTerms": {
+          "hasElectronicOrdering": false,
+          "hasElectronicPayment": false
         },
         "hasRecurrence": false
       }
@@ -166,9 +165,9 @@
         "email": "aase@waco.no"
       },
       "roles": [
+        "processContactPoint",
         "submissionReceiptBody",
-        "buyer",
-        "processContactPoint"
+        "buyer"
       ],
       "address": {
         "streetAddress": "Meierigata 17",
@@ -190,6 +189,7 @@
     }
   ],
   "description": "Siste frist for spørsmål til konkurransegrunnlaget er satt til fredag 16.06.2023 kl. 14:00.",
+  "language": "nb",
   "buyer": [
     {
       "id": "ORG-0001"

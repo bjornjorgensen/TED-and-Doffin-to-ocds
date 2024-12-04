@@ -1,35 +1,34 @@
 # converters/bt_633_organization.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_organization_natural_person(xml_content):
-    """
-    Parse the XML content to extract the natural person indicator for each organization.
+def parse_organization_natural_person(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the organization natural person indicator (BT-633) from XML content.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        dict: A dictionary containing the parsed natural person data in the format:
-              {
-                  "parties": [
-                      {
-                          "id": "organization_id",
-                          "details": {
-                              "scale": "selfEmployed"
-                          }
-                      }
-                  ]
-              }
-        None: If no relevant data is found.
-
-    Raises:
-        etree.XMLSyntaxError: If the input is not valid XML.
+        Dict containing the parsed natural person data in OCDS format, or None if no data found.
+        Format:
+        {
+            "parties": [
+                {
+                    "id": "ORG-0001",
+                    "details": {
+                        "scale": "selfEmployed"
+                    }
+                }
+            ]
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -52,7 +51,7 @@ def parse_organization_natural_person(xml_content):
 
     for organization in organizations:
         org_id = organization.xpath(
-            "efac:company/cac:partyIdentification/cbc:ID[@schemeName='organization']/text()",
+            "efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
             namespaces=namespaces,
         )
         natural_person_indicator = organization.xpath(
@@ -72,17 +71,17 @@ def parse_organization_natural_person(xml_content):
 
 
 def merge_organization_natural_person(
-    release_json, organization_natural_person_data
+    release_json: dict[str, Any],
+    organization_natural_person_data: dict[str, Any] | None,
 ) -> None:
-    """
-    Merge the parsed natural person data into the main OCDS release JSON.
+    """Merge organization natural person data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        organization_natural_person_data (dict): The parsed natural person data to be merged.
+        release_json: The main release JSON to merge data into
+        organization_natural_person_data: The organization natural person data to merge from
 
     Returns:
-        None: The function updates the release_json in-place.
+        None - modifies release_json in place
     """
     if not organization_natural_person_data:
         logger.warning("No organization Natural Person data to merge")

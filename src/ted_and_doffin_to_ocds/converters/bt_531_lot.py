@@ -1,13 +1,35 @@
 # converters/bt_531_Lot.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_lot_additional_nature(xml_content):
+def parse_lot_additional_nature(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the additional nature (BT-531) for procurement project lots from XML content.
+
+    Args:
+        xml_content: XML string or bytes containing the procurement data
+
+    Returns:
+        Dict containing the parsed lot additional nature data in OCDS format, or None if no data found.
+        Format:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": "lot-id",
+                        "additionalProcurementCategories": ["nature1", "nature2"]
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -44,7 +66,18 @@ def parse_lot_additional_nature(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_additional_nature(release_json, lot_additional_nature_data) -> None:
+def merge_lot_additional_nature(
+    release_json: dict[str, Any], lot_additional_nature_data: dict[str, Any] | None
+) -> None:
+    """Merge lot additional nature data into the main release JSON.
+
+    Args:
+        release_json: The main release JSON to merge data into
+        lot_additional_nature_data: The lot additional nature data to merge from
+
+    Returns:
+        None - modifies release_json in place
+    """
     if not lot_additional_nature_data:
         logger.warning("No Lot Additional Nature data to merge")
         return

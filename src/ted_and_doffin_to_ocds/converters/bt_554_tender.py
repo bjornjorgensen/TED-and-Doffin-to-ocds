@@ -1,13 +1,40 @@
 # converters/bt_554_Tender.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_subcontracting_description(xml_content):
+def parse_subcontracting_description(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the subcontracting description (BT-554) for procurement project tenders from XML content.
+
+    Args:
+        xml_content: XML string or bytes containing the procurement data
+
+    Returns:
+        Dict containing the parsed subcontracting description data in OCDS format, or None if no data found.
+        Format:
+        {
+            "bids": {
+                "details": [
+                    {
+                        "id": "TEN-0001",
+                        "subcontracting": {
+                            "description": "The subcontracting will be..."
+                        },
+                        "relatedLots": [
+                            "LOT-0001"
+                        ]
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -23,7 +50,7 @@ def parse_subcontracting_description(xml_content):
     result = {"bids": {"details": []}}
 
     lot_tenders = root.xpath(
-        "//efac:noticeResult/efac:LotTender",
+        "//efac:NoticeResult/efac:LotTender",
         namespaces=namespaces,
     )
 
@@ -54,7 +81,19 @@ def parse_subcontracting_description(xml_content):
     return result if result["bids"]["details"] else None
 
 
-def merge_subcontracting_description(release_json, subcontracting_data) -> None:
+def merge_subcontracting_description(
+    release_json: dict[str, Any],
+    subcontracting_data: dict[str, Any] | None,
+) -> None:
+    """Merge subcontracting description data into the release JSON.
+
+    Args:
+        release_json: The main release JSON to merge data into
+        subcontracting_data: The subcontracting description data to merge from
+
+    Returns:
+        None - modifies release_json in place
+    """
     if not subcontracting_data:
         logger.warning("No subcontracting description data to merge")
         return

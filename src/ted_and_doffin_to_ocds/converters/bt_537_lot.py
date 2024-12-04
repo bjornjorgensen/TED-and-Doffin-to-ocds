@@ -1,13 +1,39 @@
 # converters/bt_537_Lot.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 from ted_and_doffin_to_ocds.utils.date_utils import end_date
 
+logger = logging.getLogger(__name__)
 
-def parse_lot_duration_end_date(xml_content):
+
+def parse_lot_duration_end_date(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the end date (BT-537) for procurement project lots from XML content.
+
+    Args:
+        xml_content: XML string or bytes containing the procurement data
+
+    Returns:
+        Dict containing the parsed lot end date data in OCDS format, or None if no data found.
+        Format:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": "lot-id",
+                        "contractPeriod": {
+                            "endDate": "2019-11-19T23:59:59+01:00"
+                        }
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -40,14 +66,23 @@ def parse_lot_duration_end_date(xml_content):
                 lot = {"id": lot_id, "contractPeriod": {"endDate": iso_end_date}}
                 result["tender"]["lots"].append(lot)
             except ValueError as e:
-                logging.warning(
-                    "Warning: Invalid date format for lot %s: %s", lot_id, e
-                )
+                logger.warning("Warning: Invalid date format for lot %s: %s", lot_id, e)
 
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_duration_end_date(release_json, lot_duration_end_date_data) -> None:
+def merge_lot_duration_end_date(
+    release_json: dict[str, Any], lot_duration_end_date_data: dict[str, Any] | None
+) -> None:
+    """Merge lot duration end date data into the main release JSON.
+
+    Args:
+        release_json: The main release JSON to merge data into
+        lot_duration_end_date_data: The lot end date data to merge from
+
+    Returns:
+        None - modifies release_json in place
+    """
     if not lot_duration_end_date_data:
         return
 

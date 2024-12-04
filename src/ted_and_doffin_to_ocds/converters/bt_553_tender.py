@@ -1,13 +1,43 @@
 # converters/bt_553_Tender.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_subcontracting_value(xml_content):
+def parse_subcontracting_value(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the subcontracting value (BT-553) for procurement project tenders from XML content.
+
+    Args:
+        xml_content: XML string or bytes containing the procurement data
+
+    Returns:
+        Dict containing the parsed subcontracting value data in OCDS format, or None if no data found.
+        Format:
+        {
+            "bids": {
+                "details": [
+                    {
+                        "id": "TEN-0001",
+                        "subcontracting": {
+                            "value": {
+                                "amount": 9999999.99,
+                                "currency": "EUR"
+                            }
+                        },
+                        "relatedLots": [
+                            "LOT-0001"
+                        ]
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -23,7 +53,7 @@ def parse_subcontracting_value(xml_content):
     result = {"bids": {"details": []}}
 
     lot_tenders = root.xpath(
-        "//efac:noticeResult/efac:LotTender",
+        "//efac:NoticeResult/efac:LotTender",
         namespaces=namespaces,
     )
 
@@ -61,7 +91,19 @@ def parse_subcontracting_value(xml_content):
     return result if result["bids"]["details"] else None
 
 
-def merge_subcontracting_value(release_json, subcontracting_data) -> None:
+def merge_subcontracting_value(
+    release_json: dict[str, Any],
+    subcontracting_data: dict[str, Any] | None,
+) -> None:
+    """Merge subcontracting value data into the release JSON.
+
+    Args:
+        release_json: The main release JSON to merge data into
+        subcontracting_data: The subcontracting value data to merge from
+
+    Returns:
+        None - modifies release_json in place
+    """
     if not subcontracting_data:
         logger.warning("No subcontracting value data to merge")
         return

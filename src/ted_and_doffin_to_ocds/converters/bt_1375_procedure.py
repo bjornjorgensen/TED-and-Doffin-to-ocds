@@ -1,5 +1,3 @@
-# converters/bt_1375_procedure.py
-
 import logging
 
 from lxml import etree
@@ -7,7 +5,19 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_group_lot_identifier(xml_content):
+def parse_group_lot_identifier(xml_content: str | bytes) -> dict | None:
+    """Parse group lot identifier information from XML content.
+
+    Extracts lot group information from the XML document following BT-1375 specification.
+    Creates a structured dictionary containing tender lot groups with their IDs and related lots.
+
+    Args:
+        xml_content: XML string or bytes containing the tender document
+
+    Returns:
+        Optional[Dict]: Dictionary containing tender lot groups data, or None if no groups found
+        Format: {"tender": {"lotGroups": [{"id": str, "relatedLots": list[str]}]}}
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -41,7 +51,19 @@ def parse_group_lot_identifier(xml_content):
     return result if result["tender"]["lotGroups"] else None
 
 
-def merge_group_lot_identifier(release_json, group_lot_data) -> None:
+def merge_group_lot_identifier(release_json: dict, group_lot_data: dict | None) -> None:
+    """Merge group lot identifier data into the release JSON.
+
+    Updates or adds lot group information in the release JSON document.
+    Handles merging of related lots for existing groups and adding new groups.
+
+    Args:
+        release_json: The target release JSON document to update
+        group_lot_data: The group lot data to merge, containing tender lot groups
+
+    Returns:
+        None: Modifies release_json in place
+    """
     if not group_lot_data:
         logger.warning("No Group Lot Identifier data to merge")
         return

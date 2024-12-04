@@ -1,13 +1,41 @@
 # converters/bt_539_LotsGroup.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_award_criterion_type_lots_group(xml_content):
+def parse_award_criterion_type_lots_group(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the award criterion type (BT-539) for procurement project lot groups from XML content.
+
+    Args:
+        xml_content: XML string or bytes containing the procurement data
+
+    Returns:
+        Dict containing the parsed award criterion type data in OCDS format, or None if no data found.
+        Format:
+        {
+            "tender": {
+                "lotGroups": [
+                    {
+                        "id": "GLO-0001",
+                        "awardCriteria": {
+                            "criteria": [
+                                {
+                                    "type": "quality"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -31,7 +59,7 @@ def parse_award_criterion_type_lots_group(xml_content):
         lot_group_id = lot_group.xpath("cbc:ID/text()", namespaces=namespaces)[0]
 
         criteria = lot_group.xpath(
-            ".//cac:SubordinateAwardingCriterion/cbc:AwardingCriterionTypeCode[@listName='award-criterion-type']/text()",
+            ".//cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/cbc:AwardingCriterionTypeCode[@listName='award-criterion-type']/text()",
             namespaces=namespaces,
         )
 
@@ -48,8 +76,17 @@ def parse_award_criterion_type_lots_group(xml_content):
 
 
 def merge_award_criterion_type_lots_group(
-    release_json, award_criterion_type_data
+    release_json: dict[str, Any], award_criterion_type_data: dict[str, Any] | None
 ) -> None:
+    """Merge award criterion type data for lot groups into the main release JSON.
+
+    Args:
+        release_json: The main release JSON to merge data into
+        award_criterion_type_data: The award criterion type data to merge from
+
+    Returns:
+        None - modifies release_json in place
+    """
     if not award_criterion_type_data:
         logger.warning("No Award Criterion Type data for lot groups to merge")
         return

@@ -1,7 +1,7 @@
 {
   "id": "2022-970816",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-bffaac61-2447-4aa5-b78d-db9ac3d64eaa",
+  "ocid": "ocds-abcd1234-2372fce7-1a91-4875-9521-22387f9e2385",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -87,6 +87,7 @@
     }
   ],
   "description": "Mercell kunngjøring: https://opic.com/id/afluzqqmxt",
+  "language": "nb",
   "buyer": [
     {
       "id": "ORG-0001"

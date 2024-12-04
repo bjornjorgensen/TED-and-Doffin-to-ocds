@@ -1,13 +1,30 @@
 # converters/bt_531_part.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_part_additional_nature(xml_content):
+def parse_part_additional_nature(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the additional nature (BT-531) for procurement project parts from XML content.
+
+    Args:
+        xml_content: XML string or bytes containing the procurement data
+
+    Returns:
+        Dict containing the parsed part additional nature data in OCDS format, or None if no data found.
+        Format:
+        {
+            "tender": {
+                "additionalProcurementCategories": ["nature1", "nature2"]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -35,7 +52,18 @@ def parse_part_additional_nature(xml_content):
     return result if result["tender"]["additionalProcurementCategories"] else None
 
 
-def merge_part_additional_nature(release_json, part_additional_nature_data) -> None:
+def merge_part_additional_nature(
+    release_json: dict[str, Any], part_additional_nature_data: dict[str, Any] | None
+) -> None:
+    """Merge part additional nature data into the main release JSON.
+
+    Args:
+        release_json: The main release JSON to merge data into
+        part_additional_nature_data: The part additional nature data to merge from
+
+    Returns:
+        None - modifies release_json in place
+    """
     if not part_additional_nature_data:
         logger.warning("No part Additional Nature data to merge")
         return

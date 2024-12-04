@@ -1,7 +1,7 @@
 {
   "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-70ba0d12-e766-48a1-9327-d67ddda21d55",
+  "ocid": "ocds-abcd1234-abb510bb-c714-4fa4-82a0-ac5cf76158bb",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -149,10 +149,10 @@
         "locality": "Bergen"
       },
       "roles": [
-        "funder",
+        "processContactPoint",
         "payer",
         "buyer",
-        "processContactPoint"
+        "funder"
       ]
     },
     {
@@ -220,6 +220,9 @@
       "address": {
         "locality": "Oslo"
       },
+      "details": {
+        "listedOnRegulatedMarket": true
+      },
       "roles": [
         "tenderer"
       ]
@@ -232,6 +235,7 @@
         "relatedLots": [
           "LOT-0000"
         ],
+        "hasRank": true,
         "variant": false,
         "tenderers": [
           {
@@ -243,11 +247,8 @@
     "statistics": [
       {
         "id": "1",
-        "value": 5,
         "measure": "bids",
-        "relatedLots": [
-          "LOT-0000"
-        ]
+        "relatedLot": "LOT-0000"
       }
     ]
   },
@@ -264,15 +265,16 @@
       ]
     }
   ],
+  "language": "no",
+  "buyer": [
+    {
+      "id": "ORG-0002"
+    }
+  ],
   "contracts": [
     {
       "id": "CON-0001",
       "awardID": "RES-0001"
-    }
-  ],
-  "buyer": [
-    {
-      "id": "ORG-0002"
     }
   ]
 }

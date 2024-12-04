@@ -1,38 +1,34 @@
 # converters/bt_615_part.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_documents_restricted_url_part(xml_content):
-    """
-    Parse the XML content to extract documents restricted URL information for each part.
-
-    This function processes the BT-615-part business term, which represents
-    the internet address with information on accessing the restricted (part of the) procurement documents.
+def parse_documents_restricted_url_part(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the documents restricted URL (BT-615) for procurement project parts from XML content.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        dict: A dictionary containing the parsed documents restricted URL data in the format:
-              {
-                  "tender": {
-                      "documents": [
-                          {
-                              "id": "document_id",
-                              "accessDetailsURL": "url"
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
-
-    Raises:
-        etree.XMLSyntaxError: If the input is not valid XML.
+        Dict containing the parsed documents restricted URL data in OCDS format, or None if no data found.
+        Format:
+        {
+            "tender": {
+                "documents": [
+                    {
+                        "id": "20210521/CTFD/ENG/7654-02",
+                        "accessDetailsURL": "https://mywebsite.com/proc/2019024/accessinfo"
+                    }
+                ]
+            }
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -49,7 +45,7 @@ def parse_documents_restricted_url_part(xml_content):
     result = {"tender": {"documents": []}}
 
     documents = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:TenderingTerms/cac:CallForTendersDocumentReference[cbc:DocumentType/text()='restricted-document']",
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference[cbc:DocumentType/text()='restricted-document']",
         namespaces=namespaces,
     )
 
@@ -67,19 +63,18 @@ def parse_documents_restricted_url_part(xml_content):
     return result if result["tender"]["documents"] else None
 
 
-def merge_documents_restricted_url_part(release_json, documents_data) -> None:
-    """
-    Merge the parsed documents restricted URL data for parts into the main OCDS release JSON.
-
-    This function updates the existing documents in the release JSON with the
-    restricted URL information. If a document doesn't exist, it adds a new document to the release.
+def merge_documents_restricted_url_part(
+    release_json: dict[str, Any],
+    documents_data: dict[str, Any] | None,
+) -> None:
+    """Merge documents restricted URL data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        documents_data (dict): The parsed documents restricted URL data to be merged.
+        release_json: The main release JSON to merge data into
+        documents_data: The documents restricted URL data to merge from
 
     Returns:
-        None: The function updates the release_json in-place.
+        None - modifies release_json in place
     """
     if not documents_data:
         logger.warning("BT-615-part: No documents restricted URL data to merge")

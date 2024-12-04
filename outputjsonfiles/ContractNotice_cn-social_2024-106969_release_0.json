@@ -1,7 +1,7 @@
 {
   "id": "920077ce-4821-4475-9786-474c473628bd",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-5f658546-19f0-4e63-8902-5d6c3ee201c7",
+  "ocid": "ocds-abcd1234-e3219674-d92e-43d6-ae0f-5c657e5d277c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -13,6 +13,9 @@
     "lots": [
       {
         "id": "LOT-0000",
+        "tenderPeriod": {
+          "endDate": "2024-06-17T10:00:00+00:00"
+        },
         "title": "Innsamling av husholdningsavfall",
         "identifiers": [
           {
@@ -22,9 +25,6 @@
         ],
         "mainProcurementCategory": "services",
         "description": "Innsamling av husholdningsavfall i kommunene Flakstad, Moskenes, Vestvågøy og Vågan i Lofoten, Norge. Leverandør skal i henhold til oppsatt tømmeplan samle inn husholdningsavfall fra alle abonnenter i regionen med egne kjøretøy samt 2 helelektriske kjøretøy som lånes ut av oppdragsgiver. Oppdraget innebærer å samle inn ca 5.500 tonn avfall fra ca 11.000 husstander. ",
-        "tenderPeriod": {
-          "endDate": "2024-06-17T10:00:00+00:00"
-        },
         "selectionCriteria": {
           "criteria": [
             {
@@ -255,6 +255,7 @@
       ]
     }
   ],
+  "language": "no",
   "buyer": [
     {
       "id": "ORG-0002"

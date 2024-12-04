@@ -1,7 +1,7 @@
 {
   "id": "2023-674343",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-03405797-ae2c-48f7-9b39-459b751a7dac",
+  "ocid": "ocds-abcd1234-86fb9d90-762d-45e8-a435-b8c5b0d86065",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -45,7 +45,7 @@
           "maximumRenewals": 0
         },
         "contractTerms": {
-          "electronicInvoicingPolicy": "allowed",
+          "electronicInvoicingPolicy": "Allowed",
           "hasElectronicOrdering": true,
           "hasElectronicPayment": true
         },
@@ -135,9 +135,9 @@
         "email": "riik@kongsvinger.kommune.no"
       },
       "roles": [
+        "processContactPoint",
         "leadBuyer",
         "buyer",
-        "processContactPoint",
         "wholesaleBuyer"
       ],
       "address": {
@@ -605,6 +605,7 @@
       ]
     }
   ],
+  "language": "nb",
   "buyer": [
     {
       "id": "ORG-0001"

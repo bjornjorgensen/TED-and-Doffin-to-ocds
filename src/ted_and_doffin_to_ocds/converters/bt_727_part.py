@@ -1,5 +1,3 @@
-# converters/bt_727_part.py
-
 import logging
 
 from lxml import etree
@@ -22,7 +20,7 @@ REGION_MAPPING = {
 }
 
 
-def parse_part_place_performance(xml_content):
+def parse_part_place_performance(xml_content: str | bytes) -> dict | None:
     """
     Parse BT-727: Other restrictions on the place of performance.
 
@@ -30,10 +28,20 @@ def parse_part_place_performance(xml_content):
     BT-5121-Part, BT-5131-Part, BT-5071-Part, BT-5101-Part and BT-5141-Part.
 
     Args:
-        xml_content (str|bytes): XML content to parse
+        xml_content: XML content to parse, either as string or bytes
 
     Returns:
-        dict: OCDS format dictionary with deliveryLocations, or None if no locations found
+        Optional[Dict]: Parsed data in format:
+            {
+                "tender": {
+                    "deliveryLocations": [
+                        {
+                            "description": str
+                        }
+                    ]
+                }
+            }
+        Returns None if no data found or on error.
     """
     try:
         if isinstance(xml_content, str):
@@ -42,7 +50,6 @@ def parse_part_place_performance(xml_content):
         root = etree.fromstring(xml_content)
         result = {"tender": {"deliveryLocations": []}}
 
-        # Find all address elements with region codes
         region_elements = root.xpath(
             "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']"
             "/cac:ProcurementProject/cac:RealizedLocation"
@@ -52,52 +59,58 @@ def parse_part_place_performance(xml_content):
 
         for region_elem in region_elements:
             clean_code = region_elem.text.strip()
-            if not clean_code:
-                continue
-
-            description = REGION_MAPPING.get(clean_code)
-            if description:
-                logger.info(
-                    "Found region code '%s', mapped to '%s'", clean_code, description
-                )
-                result["tender"]["deliveryLocations"].append(
-                    {"description": description}
-                )
-            else:
-                logger.warning("Unknown region code: %s", clean_code)
-                result["tender"]["deliveryLocations"].append(
-                    {"description": clean_code}
-                )
+            if clean_code:
+                description = REGION_MAPPING.get(clean_code.lower(), clean_code)
+                if description:
+                    logger.info(
+                        "Found region code '%s', mapped to '%s'",
+                        clean_code,
+                        description,
+                    )
+                    result["tender"]["deliveryLocations"].append(
+                        {"description": description}
+                    )
 
         return result if result["tender"]["deliveryLocations"] else None
 
     except etree.XMLSyntaxError:
         logger.exception("Failed to parse XML content")
-        return None
+        raise
     except Exception:
         logger.exception("Error processing place of performance")
         return None
 
 
-def merge_part_place_performance(release_json, part_place_performance_data) -> None:
+def merge_part_place_performance(
+    release_json: dict, part_place_data: dict | None
+) -> None:
     """
     Merge place of performance data into the release JSON.
-    Updates deliveryLocations array.
+
+    Updates or adds delivery locations in the tender section.
+    Handles concatenation of multiple location descriptions if needed.
+
+    Args:
+        release_json: Main OCDS release JSON to update
+        part_place_data: Place of performance data to merge, can be None
+
+    Note:
+        - Updates release_json in-place
+        - Creates tender.deliveryLocations if needed
+        - Avoids duplicate locations
     """
-    if not part_place_performance_data:
+    if not part_place_data:
         logger.warning("No procurement part place of performance data to merge")
         return
 
-    # Initialize tender and deliveryLocations
     tender = release_json.setdefault("tender", {})
     tender.setdefault("deliveryLocations", [])
 
-    # Merge deliveryLocations
-    for new_location in part_place_performance_data["tender"]["deliveryLocations"]:
+    for new_location in part_place_data["tender"]["deliveryLocations"]:
         if new_location not in tender["deliveryLocations"]:
             tender["deliveryLocations"].append(new_location)
 
     logger.info(
         "Merged place of performance data for %d locations",
-        len(part_place_performance_data["tender"]["deliveryLocations"]),
+        len(part_place_data["tender"]["deliveryLocations"]),
     )

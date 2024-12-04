@@ -1,7 +1,7 @@
 {
   "id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-456a320c-09db-44c9-9ebc-da0285646867",
+  "ocid": "ocds-abcd1234-029c9c87-94ba-4226-b395-a81da8bfc20c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -336,14 +336,15 @@
       "contactPoint": {
         "name": "Kenneth Hvalby",
         "telephone": "+47 61189500",
-        "email": "kenneth.hvalby@gjovik.kommune.no"
+        "email": "kenneth.hvalby@gjovik.kommune.no",
+        "faxNumber": "+47 61176333"
       },
       "roles": [
-        "submissionReceiptBody",
-        "buyer",
+        "reviewContactPoint",
         "processContactPoint",
         "evaluationBody",
-        "reviewContactPoint"
+        "buyer",
+        "submissionReceiptBody"
       ],
       "address": {
         "streetAddress": "Kauffelds plass 1",
@@ -375,6 +376,7 @@
       ]
     }
   ],
+  "language": "no",
   "buyer": [
     {
       "id": "ORG-0001"

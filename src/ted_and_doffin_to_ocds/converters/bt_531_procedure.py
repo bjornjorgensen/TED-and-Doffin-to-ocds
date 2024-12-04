@@ -1,13 +1,30 @@
 # converters/bt_531_procedure.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_procedure_additional_nature(xml_content):
+def parse_procedure_additional_nature(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the additional nature (BT-531) for procurement procedure from XML content.
+
+    Args:
+        xml_content: XML string or bytes containing the procurement data
+
+    Returns:
+        Dict containing the parsed procedure additional nature data in OCDS format, or None if no data found.
+        Format:
+        {
+            "tender": {
+                "additionalProcurementCategories": ["nature1", "nature2"]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -36,8 +53,18 @@ def parse_procedure_additional_nature(xml_content):
 
 
 def merge_procedure_additional_nature(
-    release_json, procedure_additional_nature_data
+    release_json: dict[str, Any],
+    procedure_additional_nature_data: dict[str, Any] | None,
 ) -> None:
+    """Merge procedure additional nature data into the main release JSON.
+
+    Args:
+        release_json: The main release JSON to merge data into
+        procedure_additional_nature_data: The procedure additional nature data to merge from
+
+    Returns:
+        None - modifies release_json in place
+    """
     if not procedure_additional_nature_data:
         logger.warning("No procedure Additional Nature data to merge")
         return

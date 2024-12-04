@@ -9,7 +9,19 @@ from ted_and_doffin_to_ocds.utils.date_utils import end_date
 logger = logging.getLogger(__name__)
 
 
-def parse_winner_decision_date(xml_content):
+def parse_winner_decision_date(xml_content: str | bytes) -> dict | None:
+    """Parse winner decision date information from XML content following BT-1451.
+
+    Extracts award dates from settled contracts and maps them to corresponding lot results.
+    Converts dates to ISO format using end_date for standardization.
+
+    Args:
+        xml_content: XML string or bytes containing the notice result data
+
+    Returns:
+        Optional[Dict]: Dictionary containing awards with dates, or None if no awards found
+        Format: {"awards": [{"id": str, "date": str}]}
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -68,7 +80,21 @@ def parse_winner_decision_date(xml_content):
     return result if result["awards"] else None
 
 
-def merge_winner_decision_date(release_json, winner_decision_date_data) -> None:
+def merge_winner_decision_date(
+    release_json: dict, winner_decision_date_data: dict | None
+) -> None:
+    """Merge winner decision date data into the release JSON.
+
+    Updates or adds award dates in the release JSON document.
+    Only updates existing award dates if the new date is earlier.
+
+    Args:
+        release_json: The target release JSON document to update
+        winner_decision_date_data: The winner decision date data to merge
+
+    Returns:
+        None: Modifies release_json in place
+    """
     if not winner_decision_date_data:
         logger.warning("No Winner Decision Date data to merge")
         return

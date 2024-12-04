@@ -1,7 +1,7 @@
 {
   "id": "2022-627736",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7ed43535-08d8-4ccf-b175-3e8b4d6da96e",
+  "ocid": "ocds-abcd1234-800e9693-8308-4287-bb48-c33430747b14",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -189,6 +189,7 @@
       "title": "Lisensavtale for ESRI- og Geodatas egenutviklede produkter for Riksantikvarens GIS-løsninger"
     }
   ],
+  "language": "nb",
   "buyer": [
     {
       "id": "ORG-0001"

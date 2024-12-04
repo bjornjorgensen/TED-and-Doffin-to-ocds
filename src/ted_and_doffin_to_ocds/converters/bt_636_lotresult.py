@@ -1,6 +1,7 @@
 # converters/bt_636_lotresult.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
@@ -45,45 +46,26 @@ IRREGULARITY_TYPE_MAPPING = {
 
 def parse_buyer_review_requests_irregularity_type(
     xml_content: str | bytes,
-) -> dict | None:
-    """
-    Parse the XML content to extract the buyer review requests irregularity type for each lot (BT-636).
-
-    BT-636: The type of irregularity alleged in the review requests.
-    Maps to OCDS statistics array with scope "complaints".
+) -> dict[str, Any] | None:
+    """Parse the buyer review requests irregularity type (BT-636) from XML content.
 
     Args:
-        xml_content (Union[str, bytes]): The XML content to parse.
+        xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        Optional[Dict]: A dictionary containing:
-            - statistics (list): List of statistics objects with structure:
+        Dict containing the parsed irregularity type data in OCDS format, or None if no data found.
+        Format:
+        {
+            "statistics": [
                 {
-                    "id": str,           # Unique identifier for the statistic
-                    "measure": str,      # Irregularity type code
-                    "scope": str,        # Always "complaints"
-                    "notes": str,        # Description of the irregularity type
-                    "relatedLot": str    # ID of the lot this statistic relates to
+                    "id": "1",
+                    "measure": "ab-low",
+                    "scope": "complaints",
+                    "notes": "Unjustified rejection of abnormally low tenders",
+                    "relatedLot": "LOT-0001"
                 }
-            Returns None if no relevant data is found.
-
-    Example:
-        >>> xml = '''
-        <NoticeResult>
-          <LotResult>
-            <AppealRequestsStatistics>
-              <StatisticsCode listName="irregularity-type">unj-lim-subc</StatisticsCode>
-            </AppealRequestsStatistics>
-            <TenderLot>
-              <ID>LOT-0001</ID>
-            </TenderLot>
-          </LotResult>
-        </NoticeResult>
-        '''
-        >>> result = parse_buyer_review_requests_irregularity_type(xml)
-        >>> print(result)
-        {'statistics': [{'id': '1', 'measure': 'unj-lim-subc', 'scope': 'complaints',
-                        'notes': 'Unjustified limitation of subcontracting', 'relatedLot': 'LOT-0001'}]}
+            ]
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -108,10 +90,15 @@ def parse_buyer_review_requests_irregularity_type(
     result = {"statistics": []}
 
     lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
+        "//efac:NoticeResult/efac:LotResult",
+        namespaces=namespaces,
     )
+
     for lot_result in lot_results:
-        lot_id = lot_result.xpath("efac:TenderLot/cbc:ID/text()", namespaces=namespaces)
+        lot_id = lot_result.xpath(
+            "efac:TenderLot/cbc:ID/text()",
+            namespaces=namespaces,
+        )
         if not lot_id:
             continue
 
@@ -119,6 +106,7 @@ def parse_buyer_review_requests_irregularity_type(
             "efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efbc:StatisticsCode/text()",
             namespaces=namespaces,
         )
+
         if irregularity_type:
             code = irregularity_type[0]
             statistic = {
@@ -136,30 +124,17 @@ def parse_buyer_review_requests_irregularity_type(
 
 
 def merge_buyer_review_requests_irregularity_type(
-    release_json: dict, irregularity_type_data: dict | None
+    release_json: dict[str, Any],
+    irregularity_type_data: dict[str, Any] | None,
 ) -> None:
-    """
-    Merge the parsed buyer review requests irregularity type data into the main OCDS release JSON.
-
-    Updates the statistics array in the release JSON with complaint statistics from
-    irregularity types. If statistics for the same ID already exist, they are
-    updated; otherwise, new statistics are appended.
+    """Merge buyer review requests irregularity type data into the release JSON.
 
     Args:
-        release_json (Dict): The main OCDS release JSON to be updated. Must contain
-            or accept a 'statistics' array.
-        irregularity_type_data (Optional[Dict]): The parsed irregularity type data
-            to be merged, containing a 'statistics' array.
+        release_json: The main release JSON to merge data into
+        irregularity_type_data: The irregularity type data to merge from
 
     Returns:
-        None: The function updates the release_json in-place.
-
-    Example:
-        >>> release = {'statistics': []}
-        >>> data = {'statistics': [{'id': '1', 'measure': 'ab-low', 'scope': 'complaints'}]}
-        >>> merge_buyer_review_requests_irregularity_type(release, data)
-        >>> print(release)
-        {'statistics': [{'id': '1', 'measure': 'ab-low', 'scope': 'complaints'}]}
+        None - modifies release_json in place
     """
     if not irregularity_type_data:
         logger.info("No buyer review requests irregularity type data to merge")

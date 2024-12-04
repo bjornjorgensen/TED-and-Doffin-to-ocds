@@ -1,37 +1,38 @@
 # converters/bt_709_LotResult.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_framework_maximum_value(xml_content):
-    """
-    Parse the XML content to extract the framework maximum value for each LotResult.
+def parse_framework_maximum_value(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the framework maximum value (BT-709) from XML content.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        dict: A dictionary containing the parsed data in the format:
-              {
-                  "awards": [
-                      {
-                          "id": "award_id",
-                          "maximumValue": {
-                              "amount": float_value,
-                              "currency": "currency_code"
-                          },
-                          "relatedLots": ["lot_id"]
-                      }
-                  ]
-              }
-        None: If no relevant data is found.
-
-    Raises:
-        etree.XMLSyntaxError: If the input is not valid XML.
+        Dict containing the parsed framework maximum value data in OCDS format, or None if no data found.
+        Format:
+        {
+            "awards": [
+                {
+                    "id": "RES-0001",
+                    "maximumValue": {
+                        "amount": 5000,
+                        "currency": "EUR"
+                    },
+                    "relatedLots": [
+                        "LOT-0001"
+                    ]
+                }
+            ]
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -48,7 +49,7 @@ def parse_framework_maximum_value(xml_content):
     result = {"awards": []}
 
     lot_results = root.xpath(
-        "//efac:noticeResult/efac:LotResult",
+        "//efac:NoticeResult/efac:LotResult",
         namespaces=namespaces,
     )
 
@@ -71,7 +72,7 @@ def parse_framework_maximum_value(xml_content):
         )
 
         if award_id and max_value and currency and lot_id:
-            award = {
+            award_data = {
                 "id": award_id[0],
                 "maximumValue": {
                     "amount": float(max_value[0]),
@@ -79,21 +80,23 @@ def parse_framework_maximum_value(xml_content):
                 },
                 "relatedLots": [lot_id[0]],
             }
-            result["awards"].append(award)
+            result["awards"].append(award_data)
 
     return result if result["awards"] else None
 
 
-def merge_framework_maximum_value(release_json, framework_max_value_data) -> None:
-    """
-    Merge the parsed framework maximum value data into the main OCDS release JSON.
+def merge_framework_maximum_value(
+    release_json: dict[str, Any],
+    framework_max_value_data: dict[str, Any] | None,
+) -> None:
+    """Merge framework maximum value data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        framework_max_value_data (dict): The parsed framework maximum value data to be merged.
+        release_json: The main release JSON to merge data into
+        framework_max_value_data: The framework maximum value data to merge from
 
     Returns:
-        None: The function updates the release_json in-place.
+        None - modifies release_json in place
     """
     if not framework_max_value_data:
         logger.warning("No framework maximum value data to merge")

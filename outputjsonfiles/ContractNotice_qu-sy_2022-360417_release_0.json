@@ -1,7 +1,7 @@
 {
   "id": "2022-360417",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2387291d-f458-42cb-a7c9-d7fb6bff50cd",
+  "ocid": "ocds-abcd1234-7b7c8d3a-15e1-46dc-8c0b-0945cf7c8975",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -197,9 +197,9 @@
         ]
       },
       "roles": [
+        "processContactPoint",
         "submissionReceiptBody",
-        "buyer",
-        "processContactPoint"
+        "buyer"
       ],
       "address": {
         "streetAddress": "P.O. Box 1817",
@@ -224,6 +224,7 @@
     }
   ],
   "description": "Participating utilities (see https://www.achilles.no/Notices/TransQ/Annual-Notice-Jul2022.pdf for details): Avinor AS (Norway), Bane NOR SF (Norway), Oslo kommune Fornebubanen (Norway), Posten Norge (Norway), Sporveien AS (Norway), Vygruppen AS (Norway) including subsidiaries and associated companies, Agilia AS (Norway), Vy Gjøvikbanen (Norway), Vy Buss AS (Norway), Flåm Utvikling AS (Norway), Region Stockholm, Trafiknämnden, Förvaltning för utbyggd tunnelbana (Sweden), Region Stockholm, Trafiknämnden, Inköp och Upphandling (Sweden), SJ (Sweden), Swedavia AB (Sweden), Trafikverket (Sweden).",
+  "language": "nb",
   "buyer": [
     {
       "id": "ORG-0001"

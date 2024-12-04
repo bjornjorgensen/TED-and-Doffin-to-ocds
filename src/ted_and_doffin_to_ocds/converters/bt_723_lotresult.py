@@ -18,16 +18,40 @@ VEHICLE_CATEGORY_MAPPING = {
 }
 
 
-def parse_vehicle_category(xml_content):
+def parse_vehicle_category(xml_content: str | bytes) -> dict | None:
     """
     Parse the XML content to extract vehicle category information for lot results.
 
+    This function processes XML content to extract vehicle category information from lot results,
+    specifically targeting the AssetCategoryCode elements with listName="vehicle-category".
+    It creates a structured dictionary containing award information with vehicle classifications.
+
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content (Union[str, bytes]): The XML content to parse, either as a string or bytes
 
     Returns:
-        dict: A dictionary containing the parsed vehicle category data.
-        None: If no relevant data is found.
+        Optional[Dict]: A dictionary containing the parsed vehicle category data in the format:
+            {
+                "awards": [
+                    {
+                        "id": str,
+                        "relatedLots": [str],
+                        "items": [
+                            {
+                                "id": str,
+                                "additionalClassifications": [
+                                    {
+                                        "scheme": str,
+                                        "id": str,
+                                        "description": str
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+            Returns None if no relevant data is found.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -87,16 +111,29 @@ def parse_vehicle_category(xml_content):
     return result if result["awards"] else None
 
 
-def merge_vehicle_category(release_json, vehicle_category_data) -> None:
+def merge_vehicle_category(
+    release_json: dict, vehicle_category_data: dict | None
+) -> None:
     """
     Merge the parsed vehicle category data into the main OCDS release JSON.
 
+    This function takes vehicle category data and merges it into the main OCDS release JSON.
+    For each award in the vehicle category data, it either updates an existing award or
+    adds a new one. When updating existing awards, it handles the items and their
+    additionalClassifications appropriately.
+
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        vehicle_category_data (dict): The parsed vehicle category data to be merged.
+        release_json (Dict): The main OCDS release JSON to be updated
+        vehicle_category_data (Optional[Dict]): The parsed vehicle category data to be merged.
+                                              If None, the function returns without changes.
 
     Returns:
         None: The function updates the release_json in-place.
+
+    Note:
+        - If vehicle_category_data is None, a warning is logged and no changes are made
+        - For existing awards, additionalClassifications are extended
+        - Related lots are deduplicated using a set operation
     """
     if not vehicle_category_data:
         logger.warning("No vehicle category data to merge")

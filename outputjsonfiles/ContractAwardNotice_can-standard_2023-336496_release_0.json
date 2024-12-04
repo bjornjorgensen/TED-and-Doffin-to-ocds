@@ -1,7 +1,7 @@
 {
   "id": "2023-336496",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-28fc10cd-2f12-4193-a706-bdf7d596717c",
+  "ocid": "ocds-abcd1234-45087cdf-f540-4d8e-a21a-e0d97f2d9621",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -148,6 +148,7 @@
     }
   ],
   "description": "Mercell kunngjøring: https://opic.com/id/afnhgspvvi",
+  "language": "nb",
   "buyer": [
     {
       "id": "ORG-0001"

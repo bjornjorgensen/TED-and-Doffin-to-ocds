@@ -1,34 +1,36 @@
 # converters/bt_632_Lot.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_tool_name(xml_content):
-    """
-    Parse the XML content to extract the tool name for electronic communication for each lot.
+def parse_tool_name(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the tool name (BT-632) for procurement project lots from XML content.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        dict: A dictionary containing the parsed tool names in the format:
-              {
-                  "tender": {
-                      "lots": [
-                          {
-                              "id": "lot_id",
-                              "communication": {
-                                  "atypicalToolName": "tool_name"
-                              }
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
+        Dict containing the parsed tool name data in OCDS format, or None if no data found.
+        Format:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": "LOT-0001",
+                        "communication": {
+                            "atypicalToolName": "AbcKomSoft"
+                        }
+                    }
+                ]
+            }
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -66,16 +68,18 @@ def parse_tool_name(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_tool_name(release_json, tool_name_data) -> None:
-    """
-    Merge the parsed tool name data into the main OCDS release JSON.
+def merge_tool_name(
+    release_json: dict[str, Any],
+    tool_name_data: dict[str, Any] | None,
+) -> None:
+    """Merge tool name data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        tool_name_data (dict): The parsed tool name data to be merged.
+        release_json: The main release JSON to merge data into
+        tool_name_data: The tool name data to merge from
 
     Returns:
-        None: The function updates the release_json in-place.
+        None - modifies release_json in place
     """
     if not tool_name_data:
         logger.warning("No tool name data to merge")

@@ -1,13 +1,32 @@
 # converters/bt_1351_procedure.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_accelerated_procedure_justification(xml_content):
+def parse_accelerated_procedure_justification(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the accelerated procedure justification (BT-1351) from XML content.
+
+    Args:
+        xml_content: XML string or bytes containing the procurement data
+
+    Returns:
+        Dict containing the parsed accelerated procedure data in OCDS format, or None if no data found.
+        Format:
+        {
+            "tender": {
+                "procedure": {
+                    "acceleratedRationale": "..."
+                }
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -31,7 +50,19 @@ def parse_accelerated_procedure_justification(xml_content):
     return None
 
 
-def merge_accelerated_procedure_justification(release_json, accelerated_data) -> None:
+def merge_accelerated_procedure_justification(
+    release_json: dict[str, Any],
+    accelerated_data: dict[str, Any] | None,
+) -> None:
+    """Merge accelerated procedure justification data into the release JSON.
+
+    Args:
+        release_json: The main release JSON to merge data into
+        accelerated_data: The accelerated procedure data to merge from
+
+    Returns:
+        None - modifies release_json in place
+    """
     if not accelerated_data:
         logger.warning("No accelerated procedure justification data to merge")
         return

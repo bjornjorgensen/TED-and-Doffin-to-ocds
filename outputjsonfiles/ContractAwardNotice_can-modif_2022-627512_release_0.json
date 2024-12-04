@@ -1,7 +1,7 @@
 {
   "id": "2022-627512",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f689c30d-d925-448f-b352-05abf97366f3",
+  "ocid": "ocds-abcd1234-0d5d3a0f-20b1-43b4-a56b-d6353e410f54",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -167,6 +167,7 @@
       ]
     }
   ],
+  "language": "nb",
   "buyer": [
     {
       "id": "ORG-0001"

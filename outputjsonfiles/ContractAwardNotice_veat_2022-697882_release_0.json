@@ -1,7 +1,7 @@
 {
   "id": "2022-697882",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0775a6c9-00fa-4104-9c55-186287d730e5",
+  "ocid": "ocds-abcd1234-e9a6d985-92c6-40d1-a3ce-dba42eda4616",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -185,6 +185,10 @@
       "relatedLots": [
         "LOT-0000"
       ],
+      "estimatedValue": {
+        "amount": 7432000.0,
+        "currency": "NOK"
+      },
       "value": {
         "amount": 7432000.0,
         "currency": "NOK"
@@ -207,6 +211,7 @@
       ]
     }
   ],
+  "language": "nb",
   "buyer": [
     {
       "id": "ORG-0001"

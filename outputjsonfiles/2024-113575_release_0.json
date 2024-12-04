@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a00633f7-38ea-47b3-a595-cfad0ba61fa4",
+  "ocid": "ocds-abcd1234-b1bbec16-18bf-40cd-83fe-2d47ddb4ba76",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -142,12 +142,11 @@
       },
       {
         "country": "NO"
-      },
+      }
+    ],
+    "deliveryLocations": [
       {
-        "description": "Installasjon i On-prem Helse Nord IKT datasenter i Tromsø"
-      },
-      {
-        "description": "Installation in On-prem Helse Nord ICT computer centre in Tromsø."
+        "description": "Installasjon i On-prem Helse Nord IKT datasenter i Tromsø; Installation in On-prem Helse Nord ICT computer centre in Tromsø.; Installasjon i On-prem Helse Nord IKT datasenter i Tromsø; Installation in On-prem Helse Nord ICT computer centre in Tromsø."
       }
     ]
   },
@@ -191,9 +190,9 @@
         "locality": "Bodø"
       },
       "roles": [
-        "funder",
         "payer",
-        "buyer"
+        "buyer",
+        "funder"
       ]
     },
     {
@@ -219,9 +218,9 @@
         "locality": "VADSØ"
       },
       "roles": [
+        "processContactPoint",
         "leadBuyer",
         "buyer",
-        "processContactPoint",
         "reviewContactPoint"
       ]
     },
@@ -230,7 +229,8 @@
       "name": "Sectra Norge AS",
       "details": {
         "scale": "medium",
-        "url": "https://medical.sectra.com/about-sectra/contact/contact-sectra-norway/"
+        "url": "https://medical.sectra.com/about-sectra/contact/contact-sectra-norway/",
+        "listedOnRegulatedMarket": true
       },
       "additionalIdentifiers": [
         {
@@ -240,7 +240,8 @@
       ],
       "contactPoint": {
         "telephone": "67 58 97 70",
-        "email": "info.no@sectra.com"
+        "email": "info.no@sectra.com",
+        "faxNumber": "67 58 97 76"
       },
       "eDeliveryGateway": "https://medical.sectra.com/about-sectra/contact/contact-sectra-norway/",
       "address": {
@@ -286,6 +287,7 @@
         "relatedLots": [
           "LOT-0000"
         ],
+        "hasRank": false,
         "value": {
           "amount": 12000000.0,
           "currency": "NOK"
@@ -311,6 +313,7 @@
       "title": "Første tilbud ifm direkteforhandlinger"
     }
   ],
+  "language": "no",
   "awards": [
     {
       "id": "RES-0001",

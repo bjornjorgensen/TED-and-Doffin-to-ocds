@@ -1,7 +1,7 @@
 {
   "id": "2023-629257",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4ae84f40-6e97-4987-bda2-c61d20c95836",
+  "ocid": "ocds-abcd1234-b0ffc000-c9d7-4f39-b0f5-57f5e25128cd",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -197,8 +197,8 @@
         "email": "nav.tiltak.rogaland@nav.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Postboks 420",
@@ -219,6 +219,7 @@
       ]
     }
   ],
+  "language": "nb",
   "buyer": [
     {
       "id": "ORG-0001"

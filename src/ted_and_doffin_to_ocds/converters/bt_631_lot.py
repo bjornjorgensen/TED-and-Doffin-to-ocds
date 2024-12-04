@@ -1,36 +1,38 @@
 # converters/bt_631_Lot.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
-from ted_and_doffin_to_ocds.utils.date_utils import convert_to_iso_format
+from ted_and_doffin_to_ocds.utils.date_utils import start_date
 
 logger = logging.getLogger(__name__)
 
 
-def parse_dispatch_invitation_interest(xml_content):
-    """
-    Parse the XML content to extract the dispatch invitation interest date for each lot.
+def parse_dispatch_invitation_interest(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the dispatch invitation interest date (BT-631) for procurement project lots from XML content.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        dict: A dictionary containing the parsed dispatch invitation interest dates in the format:
-              {
-                  "tender": {
-                      "lots": [
-                          {
-                              "id": "lot_id",
-                              "communication": {
-                                  "invitationToConfirmInterestDispatchDate": "iso_date"
-                              }
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
+        Dict containing the parsed dispatch invitation interest date in OCDS format, or None if no data found.
+        Format:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": "LOT-0001",
+                        "communication": {
+                            "invitationToConfirmInterestDispatchDate": "2019-11-15T09:00:00+01:00"
+                        }
+                    }
+                ]
+            }
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -54,12 +56,12 @@ def parse_dispatch_invitation_interest(xml_content):
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         dispatch_date = lot.xpath(
-            "cac:TenderingProcess/cac:participationInvitationPeriod/cbc:StartDate/text()",
+            "cac:TenderingProcess/cac:ParticipationInvitationPeriod/cbc:StartDate/text()",
             namespaces=namespaces,
         )
 
         if dispatch_date:
-            iso_date = convert_to_iso_format(dispatch_date[0], is_start_date=True)
+            iso_date = start_date(dispatch_date[0])
             lot_data = {
                 "id": lot_id,
                 "communication": {"invitationToConfirmInterestDispatchDate": iso_date},
@@ -69,16 +71,18 @@ def parse_dispatch_invitation_interest(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_dispatch_invitation_interest(release_json, dispatch_invitation_data) -> None:
-    """
-    Merge the parsed dispatch invitation interest data into the main OCDS release JSON.
+def merge_dispatch_invitation_interest(
+    release_json: dict[str, Any],
+    dispatch_invitation_data: dict[str, Any] | None,
+) -> None:
+    """Merge dispatch invitation interest data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        dispatch_invitation_data (dict): The parsed dispatch invitation interest data to be merged.
+        release_json: The main release JSON to merge data into
+        dispatch_invitation_data: The dispatch invitation interest data to merge from
 
     Returns:
-        None: The function updates the release_json in-place.
+        None - modifies release_json in place
     """
     if not dispatch_invitation_data:
         logger.warning("No dispatch invitation interest data to merge")

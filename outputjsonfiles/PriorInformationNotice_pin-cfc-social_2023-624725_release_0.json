@@ -1,7 +1,7 @@
 {
   "id": "2023-624725",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4bd52b45-5623-4626-8efe-bb57d441ef7e",
+  "ocid": "ocds-abcd1234-ae7716ac-5a51-4ceb-bc8c-68cf67d25fff",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -34,7 +34,7 @@
         },
         "contractTerms": {
           "performanceTerms": "Se konsesjonsgrunnlaget",
-          "electronicInvoicingPolicy": "allowed",
+          "electronicInvoicingPolicy": "Allowed",
           "hasElectronicPayment": true
         },
         "selectionCriteria": {
@@ -145,8 +145,8 @@
         "locality": "Eikelandsosen"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {
@@ -161,6 +161,7 @@
     }
   ],
   "description": "Mercell kunngjøring: https://opic.com/id/afxgligahz",
+  "language": "nb",
   "buyer": [
     {
       "id": "ORG-0001"

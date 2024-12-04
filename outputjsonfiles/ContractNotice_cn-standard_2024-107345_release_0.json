@@ -1,7 +1,7 @@
 {
   "id": "870ff007-688a-4ad1-9ad7-28c2ae514b40",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b58de4bd-6584-418e-a6e1-d0f35c873a66",
+  "ocid": "ocds-abcd1234-0463e34e-25c4-4765-8a88-280c9c191c9b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -55,7 +55,7 @@
           "endDate": "2029-03-01T23:59:59+00:00"
         },
         "contractTerms": {
-          "electronicInvoicingPolicy": "required",
+          "electronicInvoicingPolicy": "Required",
           "hasElectronicOrdering": true,
           "hasElectronicPayment": true
         },
@@ -233,6 +233,7 @@
       ]
     }
   ],
+  "language": "no",
   "buyer": [
     {
       "id": "ORG-0001"

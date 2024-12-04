@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-57205788-0314-41dc-87d4-460485208e19",
+  "ocid": "ocds-abcd1234-bd202f27-f4d9-4ed7-a6ce-c50656748e20",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -317,12 +317,6 @@
       },
       {
         "country": "GB"
-      },
-      {
-        "description": "The main location is ..."
-      },
-      {
-        "description": "Additional information ---"
       }
     ],
     "additionalProcurementCategories": [
@@ -330,7 +324,7 @@
     ],
     "deliveryLocations": [
       {
-        "description": "Anywhere in the European Economic Area"
+        "description": "Anywhere in the European Economic Area; The main location is ...; Additional information ---"
       },
       {
         "description": "Anywhere in the given country"
@@ -406,7 +400,8 @@
             "postalCode": "10123",
             "locality": "Bruxelles",
             "country": "BE"
-          }
+          },
+          "faxNumber": "+33 123456789"
         },
         {
           "id": "UBO-0003"
@@ -424,7 +419,8 @@
       "contactPoint": {
         "name": "Info desk",
         "telephone": "+44 123456780",
-        "email": "info@fin-adm.com"
+        "email": "info@fin-adm.com",
+        "faxNumber": "+44 123456789"
       },
       "roles": [
         "buyer"
@@ -447,7 +443,8 @@
             "streetAddress": "7 rue de la loi",
             "locality": "Bruxelles",
             "country": "BE"
-          }
+          },
+          "faxNumber": "+33 123456789"
         },
         {
           "id": "UBO-0003"
@@ -465,7 +462,8 @@
       "contactPoint": {
         "name": "Info desk",
         "telephone": "+44 123456780",
-        "email": "info@example.com"
+        "email": "info@example.com",
+        "faxNumber": "+44 123456789"
       },
       "details": {
         "url": "https://www.fin-leg.com"
@@ -491,7 +489,8 @@
             "streetAddress": "7 rue de la loi",
             "locality": "Bruxelles",
             "country": "BE"
-          }
+          },
+          "faxNumber": "+33 123456789"
         },
         {
           "id": "UBO-0003"
@@ -509,7 +508,8 @@
       "contactPoint": {
         "name": "Info desk",
         "telephone": "+44 123456780",
-        "email": "info@env-dpt.com"
+        "email": "info@env-dpt.com",
+        "faxNumber": "+44 123456789"
       },
       "details": {
         "url": "https://www.env-dpt.com"
@@ -535,7 +535,8 @@
             "streetAddress": "7 rue de la loi",
             "locality": "Bruxelles",
             "country": "BE"
-          }
+          },
+          "faxNumber": "+33 123456789"
         },
         {
           "id": "UBO-0003"
@@ -553,7 +554,8 @@
       "contactPoint": {
         "name": "Info desk",
         "telephone": "+44 123456780",
-        "email": "info@example.com"
+        "email": "info@example.com",
+        "faxNumber": "+44 123456789"
       },
       "details": {
         "url": "https://www.employment-legis.com"
@@ -579,7 +581,8 @@
             "streetAddress": "7 rue de la loi",
             "locality": "Bruxelles",
             "country": "BE"
-          }
+          },
+          "faxNumber": "+33 123456789"
         },
         {
           "id": "UBO-0003"
@@ -597,7 +600,8 @@
       "contactPoint": {
         "name": "A and R Department",
         "telephone": "+44 899375",
-        "email": "info@appeal-adm-proc.com"
+        "email": "info@appeal-adm-proc.com",
+        "faxNumber": "+44 9928736"
       },
       "details": {
         "url": "https://www.appeal-adm-proc.com"
@@ -623,7 +627,8 @@
             "streetAddress": "7 rue de la loi",
             "locality": "Bruxelles",
             "country": "BE"
-          }
+          },
+          "faxNumber": "+33 123456789"
         },
         {
           "id": "UBO-0003"
@@ -641,7 +646,8 @@
       "contactPoint": {
         "name": "Info desk",
         "telephone": "+44 123456345678",
-        "email": "info@pub-mediator.com"
+        "email": "info@pub-mediator.com",
+        "faxNumber": "+44 098765432"
       },
       "details": {
         "url": "https://www.pub-mediator.com"
@@ -666,7 +672,8 @@
             "streetAddress": "7 rue de la loi",
             "locality": "Bruxelles",
             "country": "BE"
-          }
+          },
+          "faxNumber": "+33 123456789"
         },
         {
           "id": "UBO-0003"
@@ -683,7 +690,8 @@
       ],
       "contactPoint": {
         "telephone": "+352 123456789",
-        "email": "esender@esendcorp.lu"
+        "email": "esender@esendcorp.lu",
+        "faxNumber": "+352 1234567899"
       },
       "details": {
         "url": "https://esendercorp.eu"
@@ -701,7 +709,8 @@
       "name": "Gyro Soft SA - Contrats",
       "details": {
         "scale": "large",
-        "url": "https://www.gyro-soft.com"
+        "url": "https://www.gyro-soft.com",
+        "listedOnRegulatedMarket": false
       },
       "beneficialOwners": [
         {
@@ -711,7 +720,8 @@
             "streetAddress": "7 rue de la loi",
             "locality": "Bruxelles",
             "country": "BE"
-          }
+          },
+          "faxNumber": "+33 123456789"
         },
         {
           "id": "UBO-0003"
@@ -729,7 +739,8 @@
       "contactPoint": {
         "name": "Service Presse and Communication",
         "telephone": "+352 123456780",
-        "email": "info@gyro-soft.com"
+        "email": "info@gyro-soft.com",
+        "faxNumber": "+352 123456789"
       },
       "eDeliveryGateway": "https://endpoint.gyro-soft.com",
       "address": {
@@ -738,8 +749,8 @@
         "locality": "Luxembourg"
       },
       "roles": [
-        "tenderer",
-        "leadTenderer"
+        "leadTenderer",
+        "tenderer"
       ]
     },
     {
@@ -747,7 +758,8 @@
       "name": "The best App Ltd. - Innovation division",
       "details": {
         "scale": "micro",
-        "url": "https://www.the-best-app.com"
+        "url": "https://www.the-best-app.com",
+        "listedOnRegulatedMarket": false
       },
       "beneficialOwners": [
         {
@@ -757,7 +769,8 @@
             "streetAddress": "7 rue de la loi",
             "locality": "Bruxelles",
             "country": "BE"
-          }
+          },
+          "faxNumber": "+33 123456789"
         },
         {
           "id": "UBO-0003"
@@ -775,7 +788,8 @@
       "contactPoint": {
         "name": "Contact",
         "telephone": "+49 123456780",
-        "email": "info@the-best-app.com"
+        "email": "info@the-best-app.com",
+        "faxNumber": "+49 123456789"
       },
       "eDeliveryGateway": "https://endpoint.the-best-app.com",
       "address": {
@@ -792,7 +806,8 @@
       "name": "Ayuda - tech Dpt",
       "details": {
         "scale": "medium",
-        "url": "https://www.ayuda.com"
+        "url": "https://www.ayuda.com",
+        "listedOnRegulatedMarket": false
       },
       "beneficialOwners": [
         {
@@ -802,7 +817,8 @@
             "streetAddress": "7 rue de la loi",
             "locality": "Bruxelles",
             "country": "BE"
-          }
+          },
+          "faxNumber": "+33 123456789"
         },
         {
           "id": "UBO-0003"
@@ -820,7 +836,8 @@
       "contactPoint": {
         "name": "Info",
         "telephone": "+34 123456780",
-        "email": "info@ayuda.com"
+        "email": "info@ayuda.com",
+        "faxNumber": "+34 123456789"
       },
       "eDeliveryGateway": "https://endpoint.ayuda.com",
       "address": {
@@ -837,7 +854,8 @@
       "name": "Competitor - Offres et contrats",
       "details": {
         "scale": "large",
-        "url": "https://www.competitor.com"
+        "url": "https://www.competitor.com",
+        "listedOnRegulatedMarket": false
       },
       "beneficialOwners": [
         {
@@ -847,7 +865,8 @@
             "streetAddress": "7 rue de la loi",
             "locality": "Bruxelles",
             "country": "BE"
-          }
+          },
+          "faxNumber": "+33 123456789"
         },
         {
           "id": "UBO-0003"
@@ -865,7 +884,8 @@
       "contactPoint": {
         "name": "Contact",
         "telephone": "+33 123456780",
-        "email": "info@competitor.com"
+        "email": "info@competitor.com",
+        "faxNumber": "+33 123456789"
       },
       "eDeliveryGateway": "https://endpoint.competitor.com",
       "address": {
@@ -882,12 +902,13 @@
       "name": "Procurement Department",
       "identifier": {
         "id": "998298",
-        "scheme": "internal"
+        "scheme": "GB-COH"
       },
       "contactPoint": {
         "name": "Head of Procurement Department",
         "telephone": "+123 45678",
-        "email": "proc-info@fin-adm.com"
+        "email": "proc-info@fin-adm.com",
+        "faxNumber": "+123 456789"
       },
       "details": {
         "url": "https://www.fin-adm.com"
@@ -903,7 +924,7 @@
       ]
     },
     {
-      "id": "EU-1",
+      "id": "13",
       "name": "European Union",
       "roles": [
         "funder"
@@ -911,6 +932,13 @@
     },
     {
       "id": "TPO-0002",
+      "contactPoint": {
+        "faxNumber": "+44 1234567769"
+      },
+      "identifier": {
+        "id": "998298",
+        "scheme": "GB-COH"
+      },
       "roles": [
         "processContactPoint"
       ]
@@ -938,7 +966,17 @@
           "LOT-0001"
         ],
         "rank": 4,
+        "hasRank": true,
         "variant": true,
+        "subcontracting": {
+          "value": {
+            "amount": 9999999.99,
+            "currency": "EUR"
+          },
+          "description": "Subcontracting Description ---",
+          "minimumPercentage": 0.3,
+          "maximumPercentage": 0.3
+        },
         "foreignSubsidyMeasures": "fsr-no-obj",
         "value": {
           "amount": 9999999.99,
@@ -956,6 +994,15 @@
         "relatedLots": [
           "LOT-0002"
         ],
+        "subcontracting": {
+          "value": {
+            "amount": 99999999.99,
+            "currency": "EUR"
+          },
+          "description": "Subcontracting Description ---",
+          "minimumPercentage": 0.3,
+          "maximumPercentage": 0.3
+        },
         "hasSubcontracting": true,
         "tenderers": [
           {
@@ -965,8 +1012,14 @@
       },
       {
         "id": "TEN-0001",
-        "hasSubcontracting": true,
         "subcontracting": {
+          "value": {
+            "amount": 9999999.99,
+            "currency": "EUR"
+          },
+          "description": "Subcontracting Description ---",
+          "minimumPercentage": 0.3,
+          "maximumPercentage": 0.3,
           "subcontracts": [
             {
               "id": "1",
@@ -981,6 +1034,7 @@
             }
           ]
         },
+        "hasSubcontracting": true,
         "tenderers": [
           {
             "id": "ORG-0008"
@@ -995,82 +1049,56 @@
       {
         "id": "1",
         "measure": "lowestValidBidValue",
-        "value": {
-          "amount": 999999.99,
-          "currency": "EUR"
-        },
-        "relatedLots": [
-          "LOT-0002"
-        ]
+        "value": 999999.99,
+        "currency": "EUR",
+        "relatedLot": "LOT-0002"
       },
       {
         "id": "2",
         "measure": "highestValidBidValue",
-        "value": {
-          "amount": 9999999.99,
-          "currency": "EUR"
-        },
-        "relatedLots": [
-          "LOT-0002"
-        ]
+        "value": 9999999.99,
+        "currency": "EUR",
+        "relatedLot": "LOT-0002"
       },
       {
         "id": "3",
-        "value": 3,
-        "measure": "bids",
-        "relatedLots": [
-          "LOT-0001"
-        ]
+        "measure": "foreignBidsFromEU",
+        "relatedLot": "LOT-0001"
       },
       {
         "id": "4",
-        "value": 0,
         "measure": "bids",
-        "relatedLots": [
-          "LOT-0002"
-        ]
+        "relatedLot": "LOT-0001"
       },
       {
         "id": "5",
-        "measure": "foreignBidsFromEU",
-        "relatedLots": [
-          "LOT-0001"
-        ]
+        "measure": "electronicBids",
+        "relatedLot": "LOT-0001"
       },
       {
         "id": "6",
-        "measure": "electronicBids",
-        "relatedLots": [
-          "LOT-0001"
-        ]
+        "measure": "smeBids",
+        "relatedLot": "LOT-0001"
       },
       {
         "id": "7",
-        "measure": "smeBids",
-        "relatedLots": [
-          "LOT-0001"
-        ]
+        "measure": "foreignBidsFromEU",
+        "relatedLot": "LOT-0002"
       },
       {
         "id": "8",
-        "measure": "foreignBidsFromEU",
-        "relatedLots": [
-          "LOT-0002"
-        ]
+        "measure": "bids",
+        "relatedLot": "LOT-0002"
       },
       {
         "id": "9",
         "measure": "electronicBids",
-        "relatedLots": [
-          "LOT-0002"
-        ]
+        "relatedLot": "LOT-0002"
       },
       {
         "id": "10",
         "measure": "smeBids",
-        "relatedLots": [
-          "LOT-0002"
-        ]
+        "relatedLot": "LOT-0002"
       }
     ]
   },
@@ -1082,6 +1110,14 @@
       "relatedLots": [
         "LOT-0001"
       ],
+      "estimatedValue": {
+        "amount": 9000000.0,
+        "currency": "EUR"
+      },
+      "maximumValue": {
+        "amount": 9999999.99,
+        "currency": "EUR"
+      },
       "value": {
         "amount": 9999999.99,
         "currency": "EUR"
@@ -1147,6 +1183,15 @@
           "documentType": "contractSigned"
         }
       ],
+      "finance": [
+        {
+          "id": "2021/1234",
+          "financingParty": {
+            "name": "European Union",
+            "id": "13"
+          }
+        }
+      ],
       "title": "This is the title of the contract ---",
       "relatedProcesses": [
         {
@@ -1173,6 +1218,15 @@
           "id": "2",
           "url": "https://wheretofindcontract.com/ctr222",
           "documentType": "contractSigned"
+        }
+      ],
+      "finance": [
+        {
+          "id": "2021/5678",
+          "financingParty": {
+            "name": "European Union",
+            "id": "13"
+          }
         }
       ],
       "title": "Title of second contract ---",
@@ -1222,6 +1276,7 @@
       "scope": "complaints"
     }
   ],
+  "language": "en",
   "buyer": [
     {
       "id": "ORG-0001"

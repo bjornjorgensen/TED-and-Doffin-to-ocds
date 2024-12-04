@@ -1,6 +1,7 @@
 # converters/bt_541_Lot_FixedNumber.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
@@ -9,28 +10,28 @@ logger = logging.getLogger(__name__)
 
 def parse_award_criterion_fixed_number(
     xml_content: str | bytes,
-) -> dict | None:
-    """Parse award criterion fixed numbers from XML content.
-
-    Extracts fixed numbers associated with award criteria for each lot from the XML.
-    The numbers are found under the SubordinateAwardingCriterion elements with
-    ParameterCode listName='number-fixed'.
+) -> dict[str, Any] | None:
+    """Parse the award criterion fixed number (BT-541) for procurement project lots from XML content.
 
     Args:
         xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        Optional[Dict]: Dictionary containing tender lots with their award criteria
-        fixed numbers, or None if no relevant data found. Structure:
+        Dict containing the parsed award criterion fixed number data in OCDS format, or None if no data found.
+        Format:
         {
             "tender": {
                 "lots": [
                     {
-                        "id": str,
+                        "id": "LOT-0001",
                         "awardCriteria": {
                             "criteria": [
                                 {
-                                    "numbers": [{"number": float}]
+                                    "numbers": [
+                                        {
+                                            "number": 50
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -85,21 +86,17 @@ def parse_award_criterion_fixed_number(
 
 
 def merge_award_criterion_fixed_number(
-    release_json: dict, award_criterion_fixed_number_data: dict | None
+    release_json: dict[str, Any],
+    award_criterion_fixed_number_data: dict[str, Any] | None,
 ) -> None:
     """Merge award criterion fixed number data into the release JSON.
 
-    Takes the parsed fixed number data and merges it into the appropriate lots
-    in the release JSON. For each lot, updates or adds award criteria numbers
-    while avoiding duplicates.
-
     Args:
-        release_json: The target release JSON to update
-        award_criterion_fixed_number_data: The source data containing fixed numbers
-            to merge, in the format returned by parse_award_criterion_fixed_number()
+        release_json: The main release JSON to merge data into
+        award_criterion_fixed_number_data: The award criterion fixed number data to merge from
 
     Returns:
-        None
+        None - modifies release_json in place
     """
     if not award_criterion_fixed_number_data:
         logger.warning("No Award Criterion Fixed Number data to merge")

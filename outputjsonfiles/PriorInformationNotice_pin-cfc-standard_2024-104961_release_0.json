@@ -1,7 +1,7 @@
 {
   "id": "7b469b6b-4abb-4f22-abe1-50973de8c825",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8971f88a-86fb-4ec6-91ea-f6dd4dd49aa6",
+  "ocid": "ocds-abcd1234-30ab4ef5-f199-4066-9a46-bf020a0dc1b3",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -46,7 +46,7 @@
           "endDate": "2024-04-26T12:00:00+02:00"
         },
         "contractTerms": {
-          "electronicInvoicingPolicy": "required",
+          "electronicInvoicingPolicy": "Required",
           "hasElectronicOrdering": false,
           "hasElectronicPayment": false
         },
@@ -129,8 +129,8 @@
         "email": "per.brustad@posten.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Biskop Gunnerus' gate 14 A",
@@ -214,6 +214,7 @@
       ]
     }
   ],
+  "language": "en",
   "buyer": [
     {
       "id": "ORG-0001"

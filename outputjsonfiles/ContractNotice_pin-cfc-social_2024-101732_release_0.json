@@ -1,7 +1,7 @@
 {
   "id": "74f8c72a-5dcd-4a77-afda-6573ca30c8df",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6b45de0e-bc0b-4af5-9395-4f610261573e",
+  "ocid": "ocds-abcd1234-1f0520b6-92a8-45d2-bc56-a56560fe0a7f",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -47,7 +47,7 @@
           "endDate": "2024-03-08T00:00:00+01:00"
         },
         "contractTerms": {
-          "electronicInvoicingPolicy": "required"
+          "electronicInvoicingPolicy": "Required"
         },
         "selectionCriteria": {
           "criteria": [
@@ -358,9 +358,9 @@
         "locality": "Stjørdal"
       },
       "roles": [
-        "buyer",
+        "processContactPoint",
         "leadBuyer",
-        "processContactPoint"
+        "buyer"
       ]
     },
     {
@@ -594,6 +594,7 @@
       ]
     }
   ],
+  "language": "no",
   "buyer": [
     {
       "id": "ORG-0001"

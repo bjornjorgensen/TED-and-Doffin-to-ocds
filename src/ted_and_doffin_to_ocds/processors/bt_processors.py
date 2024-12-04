@@ -1813,8 +1813,8 @@ from ted_and_doffin_to_ocds.converters.bt_734_lot import (
     parse_award_criterion_name,
 )
 from ted_and_doffin_to_ocds.converters.bt_734_lotsgroup import (
-    merge_award_criterion_name_lotsgroup,
-    parse_award_criterion_name_lotsgroup,
+    merge_lots_group_award_criterion_name,
+    parse_lots_group_award_criterion_name,
 )
 from ted_and_doffin_to_ocds.converters.bt_735_lot import (
     merge_cvd_contract_type,
@@ -1837,8 +1837,8 @@ from ted_and_doffin_to_ocds.converters.bt_737_lot import (
     parse_documents_unofficial_language,
 )
 from ted_and_doffin_to_ocds.converters.bt_737_part import (
-    merge_documents_unofficial_language_part,
-    parse_documents_unofficial_language_part,
+    part_merge_documents_unofficial_language,
+    part_parse_documents_unofficial_language,
 )
 from ted_and_doffin_to_ocds.converters.bt_738_notice import (
     merge_notice_preferred_publication_date,
@@ -1852,26 +1852,29 @@ from ted_and_doffin_to_ocds.converters.bt_739_organization_touchpoint import (
     merge_touchpoint_contact_fax,
     parse_touchpoint_contact_fax,
 )
-from ted_and_doffin_to_ocds.converters.bt_739_ubo import merge_ubo_fax, parse_ubo_fax
+from ted_and_doffin_to_ocds.converters.bt_739_ubo import (
+    merge_ubo_contact_fax,
+    parse_ubo_contact_fax,
+)
 from ted_and_doffin_to_ocds.converters.bt_740_procedure_buyer import (
-    merge_buyer_contracting_entity,
-    parse_buyer_contracting_entity,
+    merge_buyer_contracting_type,
+    parse_buyer_contracting_type,
 )
 from ted_and_doffin_to_ocds.converters.bt_743_lot import (
-    merge_electronic_invoicing,
-    parse_electronic_invoicing,
+    merge_lot_einvoicing_policy,
+    parse_lot_einvoicing_policy,
 )
 from ted_and_doffin_to_ocds.converters.bt_744_lot import (
-    merge_submission_electronic_signature,
-    parse_submission_electronic_signature,
+    merge_lot_esignature_requirement,
+    parse_lot_esignature_requirement,
 )
 from ted_and_doffin_to_ocds.converters.bt_745_lot import (
     merge_submission_nonelectronic_description,
     parse_submission_nonelectronic_description,
 )
 from ted_and_doffin_to_ocds.converters.bt_746_organization import (
-    merge_winner_listed,
-    parse_winner_listed,
+    merge_organization_regulated_market,
+    parse_organization_regulated_market,
 )
 from ted_and_doffin_to_ocds.converters.bt_750_lot import (
     merge_selection_criteria,
@@ -1974,12 +1977,12 @@ from ted_and_doffin_to_ocds.converters.bt_801_lot import (
     parse_non_disclosure_agreement,
 )
 from ted_and_doffin_to_ocds.converters.bt_802_lot import (
-    merge_non_disclosure_agreement_description,
-    parse_non_disclosure_agreement_description,
+    merge_nda_description,
+    parse_nda_description,
 )
 from ted_and_doffin_to_ocds.converters.bt_805_lot import (
-    merge_green_procurement_criteria,
-    parse_green_procurement_criteria,
+    merge_gpp_criteria,
+    parse_gpp_criteria,
 )
 from ted_and_doffin_to_ocds.converters.bt_806_procedure import (
     merge_exclusion_grounds_sources,
@@ -4715,8 +4718,8 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             "Lot Award Criterion Name (BT-734-Lot)",
         ),
         (
-            parse_award_criterion_name_lotsgroup,
-            merge_award_criterion_name_lotsgroup,
+            parse_lots_group_award_criterion_name,
+            merge_lots_group_award_criterion_name,
             "Lots Group Award Criterion Name (BT-734-LotsGroup)",
         ),
         (
@@ -4745,8 +4748,8 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             "Lot Documents Unofficial Language (BT-737-Lot)",
         ),
         (
-            parse_documents_unofficial_language_part,
-            merge_documents_unofficial_language_part,
+            part_parse_documents_unofficial_language,
+            part_merge_documents_unofficial_language,
             "part Documents Unofficial Language (BT-737-part)",
         ),
         (
@@ -4764,20 +4767,20 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             merge_touchpoint_contact_fax,
             "touchpoint Contact Fax (BT-739-organization-touchpoint)",
         ),
-        (parse_ubo_fax, merge_ubo_fax, "BT-739-ubo (ubo Fax)"),
+        (parse_ubo_contact_fax, merge_ubo_contact_fax, "BT-739-ubo (ubo Fax)"),
         (
-            parse_buyer_contracting_entity,
-            merge_buyer_contracting_entity,
+            parse_buyer_contracting_type,
+            merge_buyer_contracting_type,
             "buyer Contracting Entity (BT-740-procedure-buyer)",
         ),
         (
-            parse_electronic_invoicing,
-            merge_electronic_invoicing,
+            parse_lot_einvoicing_policy,
+            merge_lot_einvoicing_policy,
             "Lot Electronic Invoicing (BT-743-Lot)",
         ),
         (
-            parse_submission_electronic_signature,
-            merge_submission_electronic_signature,
+            parse_lot_esignature_requirement,
+            merge_lot_esignature_requirement,
             "Lot Submission Electronic Signature (BT-744-Lot)",
         ),
         (
@@ -4786,8 +4789,8 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             "Lot Submission Nonelectronic Description (BT-745-Lot)",
         ),
         (
-            parse_winner_listed,
-            merge_winner_listed,
+            parse_organization_regulated_market,
+            merge_organization_regulated_market,
             "organization Winner Listed (BT-746-organization)",
         ),
         (
@@ -4951,13 +4954,13 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             "Non Disclosure Agreement (BT-801-Lot)",
         ),
         (
-            parse_non_disclosure_agreement_description,
-            merge_non_disclosure_agreement_description,
+            parse_nda_description,
+            merge_nda_description,
             "Non Disclosure Agreement Description (BT-802-Lot)",
         ),
         (
-            parse_green_procurement_criteria,
-            merge_green_procurement_criteria,
+            parse_gpp_criteria,
+            merge_gpp_criteria,
             "Green Procurement Criteria (BT-805-Lot)",
         ),
         (
@@ -5379,8 +5382,3 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
         process_bt_section(
             release_json, xml_content, [parse_func], merge_func, section_name
         )
-
-    # Add UBO fax processing
-    process_bt_section(
-        release_json, xml_content, [parse_ubo_fax], merge_ubo_fax, "UBO fax"
-    )

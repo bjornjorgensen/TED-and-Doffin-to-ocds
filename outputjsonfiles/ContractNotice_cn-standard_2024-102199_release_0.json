@@ -1,7 +1,7 @@
 {
   "id": "5681ff11-e080-4da6-b108-82db3f9b4b69",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6faa5333-7099-472d-a0d6-59332625d158",
+  "ocid": "ocds-abcd1234-bb2c4615-0548-454d-9ced-0d21e52f1a5e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -53,7 +53,7 @@
         "mainProcurementCategory": "goods",
         "description": "Det skal inngås rammeavtale(r) med leverandør(er) for formidling av el-sykler til ansatte finansiert gjennom en leasingordning med en nettolønnstrekkavtale gjennom arbeidsgiver.",
         "contractTerms": {
-          "electronicInvoicingPolicy": "required",
+          "electronicInvoicingPolicy": "Required",
           "hasElectronicOrdering": false,
           "hasElectronicPayment": false
         },
@@ -310,6 +310,7 @@
       ]
     }
   ],
+  "language": "no",
   "buyer": [
     {
       "id": "ORG-0001"

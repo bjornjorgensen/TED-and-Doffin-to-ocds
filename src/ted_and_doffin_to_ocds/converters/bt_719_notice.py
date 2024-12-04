@@ -1,38 +1,37 @@
-# converters/bt_719_notice.py
-
 import logging
+from typing import Any
 
 from lxml import etree
 
-from ted_and_doffin_to_ocds.utils.date_utils import convert_to_iso_format
+from ted_and_doffin_to_ocds.utils.date_utils import start_date
 
 logger = logging.getLogger(__name__)
 
 
-def parse_procurement_documents_change_date(xml_content):
-    """
-    Parse the XML content to extract the procurement documents change date.
+def parse_procurement_documents_change_date(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the procurement documents change date (BT-719) from XML content.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        dict: A dictionary containing the parsed data in the format:
-              {
-                  "tender": {
-                      "documents": [
-                          {
-                              "dateModified": "ISO_formatted_date",
-                              "documentType": "biddingDocuments",
-                              "relatedLots": ["LOT-XXXX"]  # Optional
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
-
-    Raises:
-        etree.XMLSyntaxError: If the input is not valid XML.
+        Dict containing the parsed procurement documents change date in OCDS format, or None if no data found.
+        Format:
+        {
+            "tender": {
+                "documents": [
+                    {
+                        "dateModified": "2019-10-24T00:00:00+01:00",
+                        "documentType": "biddingDocuments",
+                        "relatedLots": [
+                            "LOT-0001"
+                        ]
+                    }
+                ]
+            }
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -48,19 +47,23 @@ def parse_procurement_documents_change_date(xml_content):
 
     result = {"tender": {"documents": []}}
 
-    changes = root.xpath("//efac:Changes/efac:Change", namespaces=namespaces)
+    changes = root.xpath(
+        "//efac:Changes/efac:Change",
+        namespaces=namespaces,
+    )
 
     for change in changes:
-        date = change.xpath(
+        change_date = change.xpath(
             "efbc:ProcurementDocumentsChangeDate/text()",
             namespaces=namespaces,
         )
-        if not date:
+        if not change_date:
             continue
 
-        # Specify is_start_date=True when calling convert_to_iso_format
-        iso_date = convert_to_iso_format(date[0], is_start_date=True)
+        # Convert date to ISO format using start_date helper
+        iso_date = start_date(change_date[0])
 
+        # Get lot identifiers if they exist
         lot_identifiers = change.xpath(
             "efac:ChangedSection/efbc:ChangedSectionIdentifier[starts-with(text(), 'LOT-')]/text()",
             namespaces=namespaces,
@@ -76,16 +79,18 @@ def parse_procurement_documents_change_date(xml_content):
     return result if result["tender"]["documents"] else None
 
 
-def merge_procurement_documents_change_date(release_json, change_date_data) -> None:
-    """
-    Merge the parsed procurement documents change date data into the main OCDS release JSON.
+def merge_procurement_documents_change_date(
+    release_json: dict[str, Any],
+    change_date_data: dict[str, Any] | None,
+) -> None:
+    """Merge procurement documents change date data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        change_date_data (dict): The parsed change date data to be merged.
+        release_json: The main release JSON to merge data into
+        change_date_data: The procurement documents change date data to merge from
 
     Returns:
-        None: The function updates the release_json in-place.
+        None - modifies release_json in place
     """
     if not change_date_data:
         logger.warning("No procurement documents change date data to merge")

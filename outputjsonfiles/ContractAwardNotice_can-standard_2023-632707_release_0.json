@@ -1,7 +1,7 @@
 {
   "id": "2023-632707",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-bc7151e8-b27e-4c62-8584-152c131fd105",
+  "ocid": "ocds-abcd1234-975a5ad4-205e-41c6-b05d-e03d0ed45b8c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -116,6 +116,7 @@
     }
   ],
   "description": "Begrunnelse for avlysning Uforutsette grunnforhold har medført til store overskridelser når det gjelder prosjektering og samlet sett vil gjennomføring av konkurransen medføre store økonomiske overskridelser av budsjett (beregnet til over 40 % økning i forhold til budsjett).  Manglende finansiering/økonomi er saklig grunn til avlysning, jf. FOA § 25-4 (1). Oppdragsgiver kan med disse økonomiske overskridelsene ikke gjennomføre prosjektet slik det er beskrevet i konkurransegrunnlaget, og de nødvendige tilpasninger for å få dette i økonomisk balanse ville medføre en vesentlig endring både av konkurransegrunnlag og av det opprinnelige tilbudet. Det er ikke inngått kontrakt med vinnende leverandør. Vedståelsesfristen for tilbudet er også gått ut, og verken denne eller innleverte tilbud kan fastholdes etter utløpet av fristen når det i perioden etter frist oppstår en situasjon som medfører vesentlige endringer i grunnlaget for konkurransen, jf. § 20-6 (3). Oppdragsgiver har derfor besluttet å avlyse denne konkurransen, og har som intensjon å lyse ut ny konkurranse så raskt som mulig. Det er usikkerhet både rundt når og i hvilket omfang det er snakk om. Det kan bli en utsettelse til 2024, og på grunn av det økonomiske aspektet kan det muligens i første omgang bli en konkurranse i et begrenset omfang - som omfatter bare en av bruene. Mercell kunngjøring: https://opic.com/id/afoefaskpf",
+  "language": "nb",
   "buyer": [
     {
       "id": "ORG-0001"

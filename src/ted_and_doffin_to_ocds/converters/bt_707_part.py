@@ -1,6 +1,7 @@
 # converters/bt_707_part.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
@@ -24,15 +25,27 @@ JUSTIFICATION_MAPPING = {
 }
 
 
-def parse_part_documents_restricted_justification(xml_content):
-    """
-    Parse the XML content to extract the documents restricted justification for each part.
+def parse_part_documents_restricted_justification(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the documents restricted justification (BT-707) for procurement project parts from XML content.
 
     Args:
-        xml_content (str | bytes): The XML content to parse
+        xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        dict: A dictionary containing the parsed data in OCDS format, or None if no data found
+        Dict containing the parsed documents restricted justification data in OCDS format, or None if no data found.
+        Format:
+        {
+            "tender": {
+                "documents": [
+                    {
+                        "id": "20210521/CTFD/ENG/7654-02",
+                        "accessDetails": "Intellectual property right issues"
+                    }
+                ]
+            }
+        }
     """
     try:
         if isinstance(xml_content, str):
@@ -73,17 +86,17 @@ def parse_part_documents_restricted_justification(xml_content):
 
 
 def merge_part_documents_restricted_justification(
-    release_json, part_documents_data
+    release_json: dict[str, Any],
+    part_documents_data: dict[str, Any] | None,
 ) -> None:
-    """
-    Merge the parsed part documents restricted justification data into the main OCDS release JSON.
+    """Merge documents restricted justification data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        part_documents_data (dict): The parsed part documents data to be merged.
+        release_json: The main release JSON to merge data into
+        part_documents_data: The documents restricted justification data to merge from
 
     Returns:
-        None: The function updates the release_json in-place.
+        None - modifies release_json in place
     """
     if not part_documents_data:
         logger.warning("No part documents restricted justification data to merge")

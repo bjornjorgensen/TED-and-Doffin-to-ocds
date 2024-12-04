@@ -6,99 +6,134 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+    "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+    "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+    "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+}
 
-def parse_award_criterion_name_lotsgroup(xml_content):
+
+def parse_lots_group_award_criterion_name(
+    xml_content: str | bytes,
+) -> dict | None:
     """
-    Parse the XML content to extract the award criterion name for each lots group.
+    Parse BT-734: Award criterion name for lot groups.
+
+    This field maps to the same AwardCriterion objects as created for BT-539-LotsGroup,
+    BT-540-LotsGroup, BT-541-LotsGroup-FixedNumber, BT-541-LotsGroup-ThresholdNumber,
+    BT-541-LotsGroup-WeightNumber, BT-5421-LotsGroup, BT-5422-LotsGroup and BT-5423-LotsGroup.
 
     Args:
-        xml_content (str or bytes): The XML content to parse.
+        xml_content: XML content to parse, either as string or bytes
 
     Returns:
-        dict: A dictionary containing the parsed award criterion name data for lots groups.
-        None: If no relevant data is found.
+        Optional[Dict]: Parsed data in format:
+            {
+                "tender": {
+                    "lotGroups": [
+                        {
+                            "id": str,
+                            "awardCriteria": {
+                                "criteria": [
+                                    {
+                                        "name": str
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        Returns None if no relevant data found or on error
     """
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
+    try:
+        if isinstance(xml_content, str):
+            xml_content = xml_content.encode("utf-8")
+        root = etree.fromstring(xml_content)
+        result = {"tender": {"lotGroups": []}}
 
-    result = {"tender": {"lotGroups": []}}
-
-    lots_groups = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']",
-        namespaces=namespaces,
-    )
-
-    for lots_group in lots_groups:
-        group_id = lots_group.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        criteria = lots_group.xpath(
-            ".//cac:SubordinateAwardingCriterion/cbc:Name/text()",
-            namespaces=namespaces,
+        lot_groups = root.xpath(
+            "//cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']",
+            namespaces=NAMESPACES,
         )
 
-        if criteria:
-            group_data = {
-                "id": group_id,
-                "awardCriteria": {"criteria": [{"name": name} for name in criteria]},
-            }
-            result["tender"]["lotGroups"].append(group_data)
+        for lot_group in lot_groups:
+            group_id = lot_group.xpath("cbc:ID/text()", namespaces=NAMESPACES)[0]
+            criteria = lot_group.xpath(
+                ".//cac:SubordinateAwardingCriterion/cbc:Name/text()",
+                namespaces=NAMESPACES,
+            )
 
-    return result if result["tender"]["lotGroups"] else None
+            if criteria:
+                criteria_list = []
+                for criterion_name in criteria:
+                    name = criterion_name.strip()
+                    logger.info(
+                        "Found award criterion '%s' for lot group %s", name, group_id
+                    )
+                    criteria_list.append({"name": name})
+
+                group_data = {
+                    "id": group_id,
+                    "awardCriteria": {"criteria": criteria_list},
+                }
+                result["tender"]["lotGroups"].append(group_data)
+
+        return result if result["tender"]["lotGroups"] else None
+
+    except etree.XMLSyntaxError:
+        logger.exception("Failed to parse XML content")
+        raise
+    except Exception:
+        logger.exception("Error processing award criterion names")
+        return None
 
 
-def merge_award_criterion_name_lotsgroup(release_json, award_criterion_data) -> None:
+def merge_lots_group_award_criterion_name(
+    release_json: dict, criterion_data: dict | None
+) -> None:
     """
-    Merge the parsed award criterion name data for lots groups into the main OCDS release JSON.
+    Merge award criterion name data into the release JSON.
+
+    Updates or adds award criteria for lot groups, handling existing criteria appropriately.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        award_criterion_data (dict): The parsed award criterion name data for lots groups to be merged.
+        release_json: Main OCDS release JSON to update
+        criterion_data: Award criterion data to merge, can be None
 
-    Returns:
-        None: The function updates the release_json in-place.
+    Note:
+        - Updates release_json in-place
+        - Creates tender.lotGroups array if needed
+        - Updates existing lot groups' awardCriteria
+        - Handles duplicate criteria by checking names
     """
-    if not award_criterion_data:
-        logger.warning("No Award Criterion Name data for lots groups to merge")
+    if not criterion_data:
+        logger.warning("No Award Criterion Name data for lot groups to merge")
         return
 
     tender = release_json.setdefault("tender", {})
-    existing_lot_groups = tender.setdefault("lotGroups", [])
+    existing_groups = tender.setdefault("lotGroups", [])
 
-    for new_group in award_criterion_data["tender"]["lotGroups"]:
+    for new_group in criterion_data["tender"]["lotGroups"]:
         existing_group = next(
-            (group for group in existing_lot_groups if group["id"] == new_group["id"]),
-            None,
+            (group for group in existing_groups if group["id"] == new_group["id"]), None
         )
         if existing_group:
             existing_criteria = existing_group.setdefault(
-                "awardCriteria",
-                {},
+                "awardCriteria", {}
             ).setdefault("criteria", [])
             for new_criterion in new_group["awardCriteria"]["criteria"]:
-                existing_criterion = next(
-                    (
-                        c
-                        for c in existing_criteria
-                        if c.get("name") == new_criterion["name"]
-                    ),
-                    None,
-                )
-                if existing_criterion:
-                    existing_criterion.update(new_criterion)
-                else:
+                if not any(
+                    c.get("name") == new_criterion["name"] for c in existing_criteria
+                ):
                     existing_criteria.append(new_criterion)
         else:
-            existing_lot_groups.append(new_group)
+            existing_groups.append(new_group)
 
     logger.info(
-        "Merged Award Criterion Name data for %d lots groups",
-        len(award_criterion_data["tender"]["lotGroups"]),
+        "Merged Award Criterion Name data for %d lot groups",
+        len(criterion_data["tender"]["lotGroups"]),
     )

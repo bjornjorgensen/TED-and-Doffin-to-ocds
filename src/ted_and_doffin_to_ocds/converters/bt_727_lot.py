@@ -13,16 +13,34 @@ REGION_MAPPING = {
 }
 
 
-def parse_lot_place_performance(xml_content):
+def parse_lot_place_performance(xml_content: str | bytes) -> dict | None:
     """
-    Parse the XML content to extract place of performance information for lots.
+    Parse place of performance information for lots.
+
+    Extracts region codes from RealizedLocation elements and maps them to
+    delivery locations. Handles special region codes like "anywhere in EEA".
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML content to parse, either as string or bytes
 
     Returns:
-        dict: A dictionary containing the parsed place of performance data for lots.
-        None: If no relevant data is found.
+        Optional[Dict]: Parsed data in format:
+            {
+                "tender": {
+                    "items": [
+                        {
+                            "id": str,
+                            "relatedLot": str,
+                            "deliveryLocations": [
+                                {
+                                    "description": str
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        Returns None if no relevant data found
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -66,16 +84,23 @@ def parse_lot_place_performance(xml_content):
     return result if result["tender"]["items"] else None
 
 
-def merge_lot_place_performance(release_json, lot_place_performance_data) -> None:
+def merge_lot_place_performance(
+    release_json: dict, lot_place_performance_data: dict | None
+) -> None:
     """
-    Merge the parsed place of performance data for lots into the main OCDS release JSON.
+    Merge place of performance data into the main OCDS release JSON.
+
+    Updates or adds delivery locations for items based on their related lots.
+    Handles concatenation of multiple region descriptions if needed.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        lot_place_performance_data (dict): The parsed place of performance data for lots to be merged.
+        release_json: Main OCDS release JSON to update
+        lot_place_performance_data: Place performance data to merge, can be None
 
-    Returns:
-        None: The function updates the release_json in-place.
+    Note:
+        - Updates release_json in-place
+        - Handles duplicate locations by checking existing descriptions
+        - Creates tender.items array if needed
     """
     if not lot_place_performance_data:
         logger.warning("No lot place of performance data to merge")

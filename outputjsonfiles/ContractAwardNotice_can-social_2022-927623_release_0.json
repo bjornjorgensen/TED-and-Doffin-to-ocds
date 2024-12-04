@@ -1,7 +1,7 @@
 {
   "id": "2022-927623",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2844123f-9255-4932-b1c8-160d913d9fbc",
+  "ocid": "ocds-abcd1234-7d21e520-2eb1-4041-9c04-be1605fb0ef3",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -184,7 +184,8 @@
         "url": "http://www.securitas.no"
       },
       "contactPoint": {
-        "email": "kjetil.dahler@securitas.no"
+        "email": "kjetil.dahler@securitas.no",
+        "faxNumber": "+47 23038801"
       },
       "address": {
         "streetAddress": "Bøkkerveien 5, 0579 Oslo",
@@ -272,22 +273,18 @@
       "awardID": "RES-0001"
     }
   ],
+  "language": "nb",
   "bids": {
     "statistics": [
       {
         "id": "1",
-        "value": 3,
         "measure": "bids",
-        "relatedLots": [
-          "MISSING"
-        ]
+        "relatedLot": "MISSING"
       },
       {
         "id": "2",
         "measure": "electronicBids",
-        "relatedLots": [
-          "MISSING"
-        ]
+        "relatedLot": "MISSING"
       }
     ],
     "details": [

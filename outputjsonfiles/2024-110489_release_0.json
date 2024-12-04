@@ -1,7 +1,7 @@
 {
   "id": "8791620e-39a1-435d-985a-bee33825e3f4",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7f14a11f-2b77-4426-92e8-24625c75d9e6",
+  "ocid": "ocds-abcd1234-331bc8df-b292-4dc3-a62d-33c62dac4cc4",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -173,6 +173,7 @@
         "relatedLots": [
           "LOT-0000"
         ],
+        "hasRank": false,
         "tenderers": [
           {
             "id": "ORG-0003"
@@ -184,6 +185,7 @@
         "relatedLots": [
           "LOT-0000"
         ],
+        "hasRank": false,
         "value": {
           "amount": 95000000.0,
           "currency": "NOK"
@@ -199,6 +201,7 @@
         "relatedLots": [
           "LOT-0000"
         ],
+        "hasRank": false,
         "value": {
           "amount": 95.0,
           "currency": "NOK"
@@ -214,6 +217,7 @@
         "relatedLots": [
           "LOT-0000"
         ],
+        "hasRank": false,
         "value": {
           "amount": 9500000.0,
           "currency": "NOK"
@@ -229,6 +233,7 @@
         "relatedLots": [
           "LOT-0000"
         ],
+        "hasRank": false,
         "value": {
           "amount": 95000000.0,
           "currency": "NOK"
@@ -315,6 +320,7 @@
       ]
     }
   ],
+  "language": "no",
   "awards": [
     {
       "id": "RES-0001",

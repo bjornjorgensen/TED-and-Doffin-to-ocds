@@ -1,6 +1,5 @@
-# converters/bt_536_Lot.py
-
 import logging
+from typing import Any
 
 from lxml import etree
 
@@ -9,7 +8,28 @@ from ted_and_doffin_to_ocds.utils.date_utils import start_date
 logger = logging.getLogger(__name__)
 
 
-def parse_lot_start_date(xml_content):
+def parse_lot_start_date(xml_content: str | bytes) -> dict[str, Any] | None:
+    """Parse the start date (BT-536) for procurement project lots from XML content.
+
+    Args:
+        xml_content: XML string or bytes containing the procurement data
+
+    Returns:
+        Dict containing the parsed lot start date data in OCDS format, or None if no data found.
+        Format:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": "lot-id",
+                        "contractPeriod": {
+                            "startDate": "2019-11-15T00:00:00+01:00"
+                        }
+                    }
+                ]
+            }
+        }
+    """
     logger.info("Starting parse_lot_start_date function")
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -59,7 +79,18 @@ def parse_lot_start_date(xml_content):
     return result if result["tender"]["lots"] else None
 
 
-def merge_lot_start_date(release_json, lot_start_date_data) -> None:
+def merge_lot_start_date(
+    release_json: dict[str, Any], lot_start_date_data: dict[str, Any] | None
+) -> None:
+    """Merge lot start date data into the main release JSON.
+
+    Args:
+        release_json: The main release JSON to merge data into
+        lot_start_date_data: The lot start date data to merge from
+
+    Returns:
+        None - modifies release_json in place
+    """
     logger.info("Starting merge_lot_start_date function")
     logger.info("Merging lot start date data: %s", lot_start_date_data)
     if not lot_start_date_data:

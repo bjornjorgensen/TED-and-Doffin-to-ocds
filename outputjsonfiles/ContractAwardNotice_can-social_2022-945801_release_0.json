@@ -1,7 +1,7 @@
 {
   "id": "2022-945801",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-78068628-e632-4838-b6a4-f30c27cb8e10",
+  "ocid": "ocds-abcd1234-f2cbf68d-daf9-4eb3-9a3b-085bcbdae2e4",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -142,11 +142,8 @@
     "statistics": [
       {
         "id": "1",
-        "value": 1,
         "measure": "bids",
-        "relatedLots": [
-          "LOT-0000"
-        ]
+        "relatedLot": "LOT-0000"
       }
     ]
   },
@@ -176,6 +173,7 @@
     }
   ],
   "description": "Mercell kunngjøring: https://opic.com/id/afsjxeyerv",
+  "language": "nb",
   "buyer": [
     {
       "id": "ORG-0001"

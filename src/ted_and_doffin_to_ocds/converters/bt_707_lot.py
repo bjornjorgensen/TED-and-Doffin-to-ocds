@@ -1,6 +1,7 @@
 # converters/bt_707_Lot.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
@@ -24,8 +25,31 @@ JUSTIFICATION_MAPPING = {
 }
 
 
-def parse_lot_documents_restricted_justification(xml_content):
-    """Parse the XML content to extract the documents restricted justification for each lot."""
+def parse_lot_documents_restricted_justification(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the documents restricted justification (BT-707) for procurement project lots from XML content.
+
+    Args:
+        xml_content: XML string or bytes containing the procurement data
+
+    Returns:
+        Dict containing the parsed documents restricted justification data in OCDS format, or None if no data found.
+        Format:
+        {
+            "tender": {
+                "documents": [
+                    {
+                        "id": "20210521/CTFD/ENG/7654-02",
+                        "accessDetails": "Intellectual property right issues",
+                        "relatedLots": [
+                            "LOT-0001"
+                        ]
+                    }
+                ]
+            }
+        }
+    """
     try:
         if isinstance(xml_content, str):
             xml_content = xml_content.encode("utf-8")
@@ -70,9 +94,18 @@ def parse_lot_documents_restricted_justification(xml_content):
 
 
 def merge_lot_documents_restricted_justification(
-    release_json, lot_documents_data
+    release_json: dict[str, Any],
+    lot_documents_data: dict[str, Any] | None,
 ) -> None:
-    """Merge the parsed lot documents restricted justification data."""
+    """Merge documents restricted justification data into the release JSON.
+
+    Args:
+        release_json: The main release JSON to merge data into
+        lot_documents_data: The documents restricted justification data to merge from
+
+    Returns:
+        None - modifies release_json in place
+    """
     if not lot_documents_data:
         logger.warning("No lot documents restricted justification data to merge")
         return

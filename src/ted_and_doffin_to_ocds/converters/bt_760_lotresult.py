@@ -6,7 +6,15 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
-# Mapping for received submission types
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+    "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+    "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+    "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+}
+
 SUBMISSION_TYPE_MAPPING = {
     "part-req": "requests",
     "t-esubm": "electronicBids",
@@ -27,139 +35,108 @@ SUBMISSION_TYPE_MAPPING = {
 
 def parse_received_submissions_type(xml_content: str | bytes) -> dict | None:
     """
-    Parse the XML content to extract the Received Submissions Type information (BT-760).
+    Parse BT-760: Types of received submissions for lots.
 
-    BT-760: The type of tenders or requests to participate received. Maps counts for
-    different types of submissions (SME, micro, foreign, etc). All tenders are counted,
-    regardless of admissibility.
-    Maps to OCDS bids.statistics array with specific measures for each type.
+    Maps counts of different submission types (SME, micro, foreign, etc).
+    All tenders are counted regardless of admissibility.
 
     Args:
-        xml_content (Union[str, bytes]): The XML content to parse.
+        xml_content: XML content to parse, either as string or bytes
 
     Returns:
-        Optional[Dict]: A dictionary containing:
-            - bids.statistics (list): List of statistics objects with structure:
-                {
-                    "id": str,           # Unique identifier for the statistic
-                    "measure": str,      # Type of submission from mapping table
-                    "relatedLots": list  # List containing the lot ID
+        Optional[Dict]: Parsed data in format:
+            {
+                "bids": {
+                    "statistics": [
+                        {
+                            "id": str,
+                            "measure": str,  # from SUBMISSION_TYPE_MAPPING
+                            "relatedLot": str
+                        }
+                    ]
                 }
-            Returns None if no relevant data is found.
-
-    Example:
-        >>> xml = '''
-        <NoticeResult>
-          <LotResult>
-            <ReceivedSubmissionsStatistics>
-              <StatisticsCode listName="received-submission-type">t-sme</StatisticsCode>
-            </ReceivedSubmissionsStatistics>
-            <TenderLot>
-              <ID>LOT-0001</ID>
-            </TenderLot>
-          </LotResult>
-        </NoticeResult>
-        '''
-        >>> result = parse_received_submissions_type(xml)
-        >>> print(result)
-        {'bids': {'statistics': [{'id': 'smeBids-LOT-0001', 'measure': 'smeBids',
-                                'relatedLots': ['LOT-0001']}]}}
+            }
+        Returns None if no relevant data found or on error
     """
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
+    try:
+        if isinstance(xml_content, str):
+            xml_content = xml_content.encode("utf-8")
+        root = etree.fromstring(xml_content)
+        result = {"bids": {"statistics": []}}
 
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
-
-    result = {"bids": {"statistics": []}}
-
-    lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult",  # Fixed capitalization
-        namespaces=namespaces,
-    )
-
-    for lot_result in lot_results:
-        lot_id = lot_result.xpath(
-            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
-            namespaces=namespaces,
-        )
-        statistics = lot_result.xpath(
-            "efac:ReceivedSubmissionsStatistics/efbc:StatisticsCode[@listName='received-submission-type']/text()",
-            namespaces=namespaces,
+        lot_results = root.xpath(
+            "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
+            "/efext:EformsExtension/efac:NoticeResult/efac:LotResult",
+            namespaces=NAMESPACES,
         )
 
-        for stat in statistics:
-            measure = map_statistic_code(stat)
-            if measure:
-                statistic = {
-                    "id": f"{measure}-{lot_id[0]}" if lot_id else f"{measure}-unknown",
-                    "measure": measure,
-                    "relatedLots": [lot_id[0]] if lot_id else None,
-                }
-                result["bids"]["statistics"].append(statistic)
+        for lot_result in lot_results:
+            lot_id = lot_result.xpath(
+                "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=NAMESPACES
+            )
+            statistics = lot_result.xpath(
+                "efac:ReceivedSubmissionsStatistics/efbc:StatisticsCode[@listName='received-submission-type']/text()",
+                namespaces=NAMESPACES,
+            )
 
-    return result if result["bids"]["statistics"] else None
+            if lot_id and statistics:
+                for stat_code in statistics:
+                    measure = SUBMISSION_TYPE_MAPPING.get(stat_code)
+                    if measure:
+                        logger.info(
+                            "Found submission type %s for lot %s", measure, lot_id[0]
+                        )
+                        statistic = {
+                            "id": f"{measure}-{lot_id[0]}",
+                            "measure": measure,
+                            "relatedLot": lot_id[0],
+                        }
+                        result["bids"]["statistics"].append(statistic)
+                    else:
+                        logger.warning("Unknown submission type code: %s", stat_code)
 
+        return result if result["bids"]["statistics"] else None
 
-def map_statistic_code(code: str) -> str | None:
-    """
-    Map the statistic code to the corresponding OCDS measure.
-
-    Args:
-        code (str): The received submission type code from the XML.
-
-    Returns:
-        Optional[str]: The mapped OCDS measure or None if not found.
-    """
-    return SUBMISSION_TYPE_MAPPING.get(code)
+    except etree.XMLSyntaxError:
+        logger.exception("Failed to parse XML content")
+        raise
+    except Exception:
+        logger.exception("Error processing submission types")
+        return None
 
 
 def merge_received_submissions_type(
-    release_json: dict, received_submissions_data: dict | None
+    release_json: dict, submissions_data: dict | None
 ) -> None:
     """
-    Merge the parsed Received Submissions Type data into the main OCDS release JSON.
+    Merge received submissions type data into the release JSON.
 
-    Updates the bids.statistics array in the release JSON with submission type statistics.
-    If statistics for the same measure and lot already exist, they are updated;
-    otherwise, new statistics are appended.
+    Updates or adds submission type statistics to bids.statistics array.
 
     Args:
-        release_json (Dict): The main OCDS release JSON to be updated.
-        received_submissions_data (Optional[Dict]): The parsed submissions type data
-            to be merged, containing a 'bids.statistics' array.
+        release_json: Main OCDS release JSON to update
+        submissions_data: Submissions type data to merge, can be None
 
-    Returns:
-        None: The function updates the release_json in-place.
-
-    Example:
-        >>> release = {'bids': {'statistics': []}}
-        >>> data = {'bids': {'statistics': [{'id': '1', 'measure': 'smeBids'}]}}
-        >>> merge_received_submissions_type(release, data)
-        >>> print(release)
-        {'bids': {'statistics': [{'id': '1', 'measure': 'smeBids'}]}}
+    Note:
+        - Updates release_json in-place
+        - Creates bids.statistics array if needed
+        - Updates existing statistics by measure and relatedLot
+        - Maintains unique statistic IDs
     """
-    if not received_submissions_data:
+    if not submissions_data:
         logger.warning("BT-760: No Received Submissions Type data to merge")
         return
 
     bids = release_json.setdefault("bids", {})
     statistics = bids.setdefault("statistics", [])
 
-    for new_stat in received_submissions_data["bids"]["statistics"]:
+    for new_stat in submissions_data["bids"]["statistics"]:
         existing_stat = next(
             (
                 stat
                 for stat in statistics
                 if stat["measure"] == new_stat["measure"]
-                and stat.get("relatedLots") == new_stat.get("relatedLots")
+                and stat.get("relatedLot") == new_stat.get("relatedLot")
             ),
             None,
         )
@@ -174,5 +151,5 @@ def merge_received_submissions_type(
 
     logger.info(
         "BT-760: Merged Received Submissions Type data for %d statistics",
-        len(received_submissions_data["bids"]["statistics"]),
+        len(submissions_data["bids"]["statistics"]),
     )

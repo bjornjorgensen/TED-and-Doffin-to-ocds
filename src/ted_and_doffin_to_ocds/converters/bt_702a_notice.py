@@ -1,6 +1,7 @@
 # converters/bt_702a_notice.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
@@ -189,16 +190,20 @@ ISO_639_1_MAPPING = {
 }
 
 
-def parse_notice_language(xml_content):
-    """
-    Parse the XML content to extract the notice language.
+def parse_notice_language(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the notice language (BT-702) from XML content.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        dict: A dictionary containing the parsed notice language data.
-        None: If no relevant data is found.
+        Dict containing the parsed notice language in OCDS format, or None if no data found.
+        Format:
+        {
+            "language": "en"
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -208,7 +213,7 @@ def parse_notice_language(xml_content):
     }
 
     notice_language_code = root.xpath(
-        "/*/cbc:noticeLanguageCode/text()",
+        "/*/cbc:NoticeLanguageCode/text()",
         namespaces=namespaces,
     )
 
@@ -220,16 +225,18 @@ def parse_notice_language(xml_content):
     return None
 
 
-def merge_notice_language(release_json, notice_language_data) -> None:
-    """
-    Merge the parsed notice language data into the main OCDS release JSON.
+def merge_notice_language(
+    release_json: dict[str, Any],
+    notice_language_data: dict[str, Any] | None,
+) -> None:
+    """Merge notice language data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        notice_language_data (dict): The parsed notice language data to be merged.
+        release_json: The main release JSON to merge data into
+        notice_language_data: The notice language data to merge from
 
     Returns:
-        None: The function updates the release_json in-place.
+        None - modifies release_json in place
     """
     if not notice_language_data:
         logger.warning("No notice Language data to merge")

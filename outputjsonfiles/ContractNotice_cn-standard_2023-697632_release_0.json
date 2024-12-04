@@ -1,7 +1,7 @@
 {
   "id": "2023-697632",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-951c883b-ca74-42bd-948d-65cd5d9dec09",
+  "ocid": "ocds-abcd1234-7c16c863-be42-4585-a3ef-f81363f60ea5",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -30,14 +30,13 @@
           "minimumCandidates": 0,
           "successiveReduction": false
         },
-        "contractTerms": {
-          "electronicInvoicingPolicy": "not-allowed",
-          "hasElectronicOrdering": false,
-          "hasElectronicPayment": false
-        },
         "hasAccessibilityCriteria": false,
         "techniques": {
           "hasElectronicAuction": false
+        },
+        "contractTerms": {
+          "hasElectronicOrdering": false,
+          "hasElectronicPayment": false
         }
       }
     ],
@@ -130,12 +129,13 @@
         "locality": "Kyrksæterøra"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     }
   ],
   "description": "Mercell kunngjøring: https://opic.com/id/afsvzyktwe",
+  "language": "nb",
   "buyer": [
     {
       "id": "ORG-0001"

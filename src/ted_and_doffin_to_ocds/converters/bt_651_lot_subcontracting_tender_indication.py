@@ -1,40 +1,39 @@
 # converters/bt_651_Lot_Subcontracting_Tender_Indication.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_subcontracting_tender_indication(xml_content: bytes):
-    """
-    Parse the XML content to extract the subcontracting tender indication for each lot.
+def parse_subcontracting_tender_indication(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the subcontracting tender indication (BT-651) for procurement project lots from XML content.
 
     Args:
-        xml_content (bytes): The XML content to parse.
+        xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        dict: A dictionary containing the parsed subcontracting tender indication data in the format:
-              {
-                  "tender": {
-                      "lots": [
-                          {
-                              "id": "lot_id",
-                              "submissionTerms": {
-                                  "subcontractingClauses": ["code"]
-                              }
-                          }
-                      ]
-                  }
-              }
-        None: If no relevant data is found.
-
-    Raises:
-        etree.XMLSyntaxError: If the input is not valid XML.
+        Dict containing the parsed subcontracting tender indication data in OCDS format, or None if no data found.
+        Format:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": "LOT-0001",
+                        "submissionTerms": {
+                            "subcontractingClauses": [
+                                "subc-oblig"
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
     """
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -72,18 +71,17 @@ def parse_subcontracting_tender_indication(xml_content: bytes):
 
 
 def merge_subcontracting_tender_indication(
-    release_json,
-    subcontracting_tender_indication_data,
+    release_json: dict[str, Any],
+    subcontracting_tender_indication_data: dict[str, Any] | None,
 ) -> None:
-    """
-    Merge the parsed subcontracting tender indication data into the main OCDS release JSON.
+    """Merge subcontracting tender indication data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        subcontracting_tender_indication_data (dict): The parsed subcontracting tender indication data to be merged.
+        release_json: The main release JSON to merge data into
+        subcontracting_tender_indication_data: The subcontracting tender indication data to merge from
 
     Returns:
-        None: The function updates the release_json in-place.
+        None - modifies release_json in place
     """
     if not subcontracting_tender_indication_data:
         logger.warning("No subcontracting tender indication data to merge")

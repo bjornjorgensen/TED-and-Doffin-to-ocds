@@ -1,7 +1,7 @@
 {
   "id": "510444f4-6cd2-4b26-8dd6-f3af27ffa069",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-923f3545-7592-47c2-89cc-06200f1f3c49",
+  "ocid": "ocds-abcd1234-9e2ebf95-4985-4ec2-bc03-2e9ae37a555b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -131,9 +131,9 @@
         "locality": "HØNEFOSS"
       },
       "roles": [
-        "funder",
         "payer",
-        "buyer"
+        "buyer",
+        "funder"
       ]
     },
     {
@@ -229,6 +229,7 @@
       "title": "Kjøp av program for utarbeidelse og redigering av digitale plandata"
     }
   ],
+  "language": "no",
   "buyer": [
     {
       "id": "ORG-0001"

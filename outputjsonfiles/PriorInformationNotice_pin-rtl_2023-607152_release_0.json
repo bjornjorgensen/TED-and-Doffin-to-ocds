@@ -1,7 +1,7 @@
 {
   "id": "2023-607152",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-923ffbbf-b3dd-4bc0-ab23-c798f862efdb",
+  "ocid": "ocds-abcd1234-9a002b19-01a5-4059-8df8-af23d58a3ee6",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -118,7 +118,8 @@
       "contactPoint": {
         "name": "Seksjon for jus og anskaffelser",
         "telephone": "+47 02820",
-        "email": "anbud@atb.no"
+        "email": "anbud@atb.no",
+        "faxNumber": "+47 02820"
       },
       "details": {
         "url": "https://permalink.mercell.com/199364447.aspx",
@@ -132,8 +133,8 @@
         ]
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Prinsens gate 39",
@@ -142,6 +143,7 @@
       }
     }
   ],
+  "language": "nb",
   "buyer": [
     {
       "id": "ORG-0001"

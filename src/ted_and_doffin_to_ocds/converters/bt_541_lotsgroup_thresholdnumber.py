@@ -1,4 +1,5 @@
 import logging
+from typing import Any
 
 from lxml import etree
 
@@ -7,28 +8,28 @@ logger = logging.getLogger(__name__)
 
 def parse_award_criterion_threshold_number_lotsgroup(
     xml_content: str | bytes,
-) -> dict | None:
-    """Parse award criterion threshold numbers from XML content for lot groups.
-
-    Extracts threshold numbers associated with award criteria for each lot group from the XML.
-    The numbers are found under the SubordinateAwardingCriterion elements with
-    ParameterCode listName='number-threshold' for LotsGroup.
+) -> dict[str, Any] | None:
+    """Parse the award criterion threshold number (BT-541) for procurement project lot groups from XML content.
 
     Args:
         xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        Optional[Dict]: Dictionary containing tender lot groups with their award criteria
-        threshold numbers, or None if no relevant data found. Structure:
+        Dict containing the parsed award criterion threshold number data in OCDS format, or None if no data found.
+        Format:
         {
             "tender": {
                 "lotGroups": [
                     {
-                        "id": str,
+                        "id": "GLO-0001",
                         "awardCriteria": {
                             "criteria": [
                                 {
-                                    "numbers": [{"number": float}]
+                                    "numbers": [
+                                        {
+                                            "number": 50
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -84,21 +85,17 @@ def parse_award_criterion_threshold_number_lotsgroup(
 
 
 def merge_award_criterion_threshold_number_lotsgroup(
-    release_json: dict, award_criterion_threshold_number_data: dict | None
+    release_json: dict[str, Any],
+    award_criterion_threshold_number_data: dict[str, Any] | None,
 ) -> None:
     """Merge award criterion threshold number data into the release JSON for lot groups.
 
-    Takes the parsed threshold number data and merges it into the appropriate lot groups
-    in the release JSON. For each lot group, updates or adds award criteria numbers
-    while avoiding duplicates.
-
     Args:
-        release_json: The target release JSON to update
-        award_criterion_threshold_number_data: The source data containing threshold numbers
-            to merge, in the format returned by parse_award_criterion_threshold_number_lotsgroup()
+        release_json: The main release JSON to merge data into
+        award_criterion_threshold_number_data: The award criterion threshold number data to merge from
 
     Returns:
-        None
+        None - modifies release_json in place
     """
     if not award_criterion_threshold_number_data:
         logger.warning(

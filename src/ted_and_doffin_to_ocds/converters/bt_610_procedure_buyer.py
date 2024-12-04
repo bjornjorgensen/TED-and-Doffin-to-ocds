@@ -1,6 +1,7 @@
 # converters/bt_610_procedure_buyer.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
@@ -35,39 +36,36 @@ AUTHORITY_TABLE = {
 }
 
 
-def parse_activity_entity(xml_content):
-    """
-    Parse the XML content to extract the main activity of the contracting entity.
-
-    This function processes the BT-610-procedure-buyer business term, which represents
-    the main activity of the contracting entity.
+def parse_activity_entity(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse the main activity (BT-610) for contracting entities from XML content.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML string or bytes containing the procurement data
 
     Returns:
-        dict: A dictionary containing the parsed activity entity data in the format:
-              {
-                  "parties": [
-                      {
-                          "id": "buyer_id",
-                          "roles": ["buyer"],
-                          "details": {
-                              "classifications": [
-                                  {
-                                      "scheme": "scheme_name",
-                                      "id": "activity_id",
-                                      "description": "activity_description"
-                                  }
-                              ]
-                          }
-                      }
-                  ]
-              }
-        None: If no relevant data is found.
-
-    Raises:
-        etree.XMLSyntaxError: If the input is not valid XML.
+        Dict containing the parsed activity entity data in OCDS format, or None if no data found.
+        Format:
+        {
+            "parties": [
+                {
+                    "id": "ORG-0001",
+                    "roles": [
+                        "buyer"
+                    ],
+                    "details": {
+                        "classifications": [
+                            {
+                                "scheme": "eu-main-activity",
+                                "id": "gas-oil",
+                                "description": "Activities related to the exploitation of a geographical area for the purpose of extracting oil or gas."
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -132,19 +130,18 @@ def parse_activity_entity(xml_content):
     return result if result["parties"] else None
 
 
-def merge_activity_entity(release_json, activity_data) -> None:
-    """
-    Merge the parsed activity entity data into the main OCDS release JSON.
-
-    This function updates the existing parties in the release JSON with the
-    activity entity information. If a party doesn't exist, it adds a new party to the release.
+def merge_activity_entity(
+    release_json: dict[str, Any],
+    activity_data: dict[str, Any] | None,
+) -> None:
+    """Merge activity entity data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        activity_data (dict): The parsed activity entity data to be merged.
+        release_json: The main release JSON to merge data into
+        activity_data: The activity entity data to merge from
 
     Returns:
-        None: The function updates the release_json in-place.
+        None - modifies release_json in place
     """
     if not activity_data:
         logger.warning("BT-610-procedure-buyer: No activity entity data to merge")

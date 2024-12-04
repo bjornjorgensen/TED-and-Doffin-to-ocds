@@ -6,108 +6,144 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+    "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+    "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+}
 
-def parse_selection_criteria_weight_number(xml_content):
+
+def parse_selection_criteria_weight_number(
+    xml_content: str | bytes,
+) -> dict | None:
     """
-    Parse the XML content to extract the selection criteria weight number for each lot.
+    Parse BT-752: Selection criteria weight numbers for lots.
+
+    These values are mapped to the same SelectionCriterion objects as created for
+    BT-40-Lot, BT-750-Lot, BT-7531-Lot, BT-7532-Lot and BT-809-Lot.
 
     Args:
-        xml_content (str or bytes): The XML content to parse.
+        xml_content: XML content to parse, either as string or bytes
 
     Returns:
-        dict: A dictionary containing the parsed selection criteria weight number data.
-        None: If no relevant data is found.
+        Optional[Dict]: Parsed data in format:
+            {
+                "tender": {
+                    "lots": [
+                        {
+                            "id": str,
+                            "selectionCriteria": {
+                                "criteria": [
+                                    {
+                                        "numbers": [
+                                            {
+                                                "number": float
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        Returns None if no relevant data found or on error
     """
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
+    try:
+        if isinstance(xml_content, str):
+            xml_content = xml_content.encode("utf-8")
+        root = etree.fromstring(xml_content)
+        result = {"tender": {"lots": []}}
 
-    result = {"tender": {"lots": []}}
-
-    xpath_query = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']"
-    lots = root.xpath(xpath_query, namespaces=namespaces)
-
-    for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        selection_criteria = lot.xpath(
-            ".//efac:SelectionCriteria",
-            namespaces=namespaces,
+        lots = root.xpath(
+            "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+            namespaces=NAMESPACES,
         )
 
-        lot_data = {"id": lot_id, "selectionCriteria": {"criteria": []}}
-
-        for criterion in selection_criteria:
-            usage = criterion.xpath(
-                "cbc:CalculationExpressionCode[@listName='usage']/text()",
-                namespaces=namespaces,
-            )
-            if usage and usage[0] != "used":
-                continue
-
-            weight_number = criterion.xpath(
-                "efac:CriterionParameter[efbc:ParameterCode/@listName='number-weight']/efbc:ParameterNumeric/text()",
-                namespaces=namespaces,
+        for lot in lots:
+            lot_id = lot.xpath("cbc:ID/text()", namespaces=NAMESPACES)[0]
+            criteria = lot.xpath(
+                ".//efac:SelectionCriteria/efac:CriterionParameter[efbc:ParameterCode/@listName='number-weight']",
+                namespaces=NAMESPACES,
             )
 
-            if weight_number:
-                criterion_data = {"numbers": [{"number": float(weight_number[0])}]}
-                lot_data["selectionCriteria"]["criteria"].append(criterion_data)
+            if criteria:
+                lot_data = {"id": lot_id, "selectionCriteria": {"criteria": []}}
 
-        if lot_data["selectionCriteria"]["criteria"]:
-            result["tender"]["lots"].append(lot_data)
+                for criterion in criteria:
+                    weight = criterion.xpath(
+                        "efbc:ParameterNumeric/text()", namespaces=NAMESPACES
+                    )
+                    if weight:
+                        try:
+                            number = float(weight[0])
+                            logger.info(
+                                "Found weight number %f for lot %s", number, lot_id
+                            )
+                            lot_data["selectionCriteria"]["criteria"].append(
+                                {"numbers": [{"number": number}]}
+                            )
+                        except ValueError:
+                            logger.warning("Invalid weight number: %s", weight[0])
 
-    return result if result["tender"]["lots"] else None
+                if lot_data["selectionCriteria"]["criteria"]:
+                    result["tender"]["lots"].append(lot_data)
+
+        return result if result["tender"]["lots"] else None
+
+    except etree.XMLSyntaxError:
+        logger.exception("Failed to parse XML content")
+        raise
+    except Exception:
+        logger.exception("Error processing selection criteria weight numbers")
+        return None
 
 
-def merge_selection_criteria_weight_number(release_json, weight_number_data) -> None:
+def merge_selection_criteria_weight_number(
+    release_json: dict, weight_data: dict | None
+) -> None:
     """
-    Merge the parsed selection criteria weight number data into the main OCDS release JSON.
+    Merge selection criteria weight number data into the release JSON.
+
+    Updates or adds weight numbers to lot selection criteria.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        weight_number_data (dict): The parsed selection criteria weight number data to be merged.
+        release_json: Main OCDS release JSON to update
+        weight_data: Selection criteria weight data to merge, can be None
 
-    Returns:
-        None: The function updates the release_json in-place.
+    Note:
+        - Updates release_json in-place
+        - Creates tender.lots array if needed
+        - Updates existing lots' selectionCriteria.criteria
     """
-    if not weight_number_data:
+    if not weight_data:
         logger.warning("No selection criteria weight number data to merge")
         return
 
     tender = release_json.setdefault("tender", {})
-    existing_lots = tender.setdefault("lots", [])
+    lots = tender.setdefault("lots", [])
 
-    for new_lot in weight_number_data["tender"]["lots"]:
-        existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
-            None,
-        )
+    for new_lot in weight_data["tender"]["lots"]:
+        existing_lot = next((lot for lot in lots if lot["id"] == new_lot["id"]), None)
         if existing_lot:
             existing_criteria = existing_lot.setdefault(
-                "selectionCriteria",
-                {},
+                "selectionCriteria", {}
             ).setdefault("criteria", [])
             for new_criterion in new_lot["selectionCriteria"]["criteria"]:
+                # Find first criterion without numbers or create new one
                 existing_criterion = next(
-                    (c for c in existing_criteria if "numbers" not in c),
-                    None,
+                    (c for c in existing_criteria if "numbers" not in c), None
                 )
                 if existing_criterion:
                     existing_criterion["numbers"] = new_criterion["numbers"]
                 else:
                     existing_criteria.append(new_criterion)
         else:
-            existing_lots.append(new_lot)
+            lots.append(new_lot)
 
     logger.info(
         "Merged selection criteria weight number data for %d lots",
-        len(weight_number_data["tender"]["lots"]),
+        len(weight_data["tender"]["lots"]),
     )
