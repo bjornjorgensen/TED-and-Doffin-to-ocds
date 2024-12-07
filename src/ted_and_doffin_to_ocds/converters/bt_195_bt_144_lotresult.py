@@ -1,22 +1,39 @@
 # converters/bt_195_bt_144_LotResult.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_bt195_bt144_unpublished_identifier(xml_content):
+def parse_bt195_bt144_unpublished_identifier(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
     """
-    Parse the XML content to extract the unpublished identifier for the not awarded reason.
+    Parse unpublished field identifiers for not awarded reason (BT-195, BT-144).
+
+    For fields marked as unpublished:
+    - Gets lot result ID
+    - Creates withheld information entries with field details
+    - Generates unique IDs by combining field code and lot result ID
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML content containing procurement data
 
     Returns:
-        dict: A dictionary containing the parsed unpublished identifier data.
-        None: If no relevant data is found.
+        Optional[Dict]: Dictionary containing withheld information, or None if no data.
+        Example structure:
+        {
+            "withheldInformation": [
+                {
+                    "id": "no-awa-rea-result_id",
+                    "field": "no-awa-rea",
+                    "name": "Not Awarded Reason"
+                }
+            ]
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -33,7 +50,8 @@ def parse_bt195_bt144_unpublished_identifier(xml_content):
     result = {"withheldInformation": []}
 
     lot_results = root.xpath(
-        "//efac:noticeResult/efac:LotResult",
+        "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension"
+        "/efac:NoticeResult/efac:LotResult",
         namespaces=namespaces,
     )
 
@@ -43,7 +61,8 @@ def parse_bt195_bt144_unpublished_identifier(xml_content):
             namespaces=namespaces,
         )
         field_identifier = lot_result.xpath(
-            "efac:DecisionReason/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='no-awa-rea']/efbc:FieldIdentifierCode/text()",
+            "efac:DecisionReason/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='no-awa-rea']"
+            "/efbc:FieldIdentifierCode/text()",
             namespaces=namespaces,
         )
 
@@ -59,25 +78,26 @@ def parse_bt195_bt144_unpublished_identifier(xml_content):
 
 
 def merge_bt195_bt144_unpublished_identifier(
-    release_json, unpublished_identifier_data
+    release_json: dict[str, Any], unpublished_data: dict[str, Any] | None
 ) -> None:
     """
-    Merge the parsed unpublished identifier data into the main OCDS release JSON.
+    Merge unpublished not awarded reason data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        unpublished_identifier_data (dict): The parsed unpublished identifier data to be merged.
+        release_json: Target release JSON to update
+        unpublished_data: Unpublished field data to merge
 
-    Returns:
-        None: The function updates the release_json in-place.
+    Effects:
+        Updates the withheldInformation section of release_json with
+        unpublished not awarded reason information
     """
-    if not unpublished_identifier_data:
+    if not unpublished_data:
         logger.warning("No unpublished identifier data to merge for BT-195(BT-144)")
         return
 
     withheld_info = release_json.setdefault("withheldInformation", [])
 
-    for new_item in unpublished_identifier_data["withheldInformation"]:
+    for new_item in unpublished_data["withheldInformation"]:
         existing_item = next(
             (item for item in withheld_info if item.get("id") == new_item["id"]),
             None,

@@ -1,22 +1,37 @@
-# converters/bt_195_bt_88_procedure.py
-
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_bt195_bt88_procedure_unpublished_identifier(xml_content):
+def parse_bt195_bt88_procedure_unpublished_identifier(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
     """
-    Parse the XML content to extract the unpublished identifier for the procedure features.
+    Parse unpublished field identifiers for procedure features (BT-195, BT-88).
+
+    For fields marked as unpublished:
+    - Gets ContractFolderID
+    - Creates withheld information for procedure features
+    - Generates unique IDs by combining field code and folder ID
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML content containing procurement data
 
     Returns:
-        dict: A dictionary containing the parsed unpublished identifier data.
-        None: If no relevant data is found.
+        Optional[Dict]: Dictionary containing withheld information, or None if no data.
+        Example structure:
+        {
+            "withheldInformation": [
+                {
+                    "id": "pro-fea-contract_folder_id",
+                    "field": "pro-fea",
+                    "name": "Procedure Features"
+                }
+            ]
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -33,9 +48,11 @@ def parse_bt195_bt88_procedure_unpublished_identifier(xml_content):
     result = {"withheldInformation": []}
 
     contract_folder_id = root.xpath(
-        "/*/cbc:ContractFolderID/text()",
-        namespaces=namespaces,
+        "/*/cbc:ContractFolderID/text()", namespaces=namespaces
     )
+    if not contract_folder_id:
+        logger.warning("ContractFolderID not found in the XML")
+        return None
 
     xpath_query = (
         "/*/cac:TenderingProcess/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
@@ -48,11 +65,11 @@ def parse_bt195_bt88_procedure_unpublished_identifier(xml_content):
             namespaces=namespaces,
         )
 
-        if contract_folder_id and field_identifier:
+        if field_identifier:
             withheld_info = {
-                "id": f"{field_identifier[0]}-{contract_folder_id[0]}",
+                "id": f"pro-fea-{contract_folder_id[0]}",
                 "field": "pro-fea",
-                "name": "procedure Features",
+                "name": "Procedure Features",
             }
             result["withheldInformation"].append(withheld_info)
 
@@ -60,20 +77,20 @@ def parse_bt195_bt88_procedure_unpublished_identifier(xml_content):
 
 
 def merge_bt195_bt88_procedure_unpublished_identifier(
-    release_json,
-    unpublished_identifier_data,
+    release_json: dict[str, Any], unpublished_data: dict[str, Any] | None
 ) -> None:
     """
-    Merge the parsed unpublished identifier data into the main OCDS release JSON.
+    Merge unpublished procedure features data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        unpublished_identifier_data (dict): The parsed unpublished identifier data to be merged.
+        release_json: Target release JSON to update
+        unpublished_data: Unpublished field data to merge
 
-    Returns:
-        None: The function updates the release_json in-place.
+    Effects:
+        Updates the withheldInformation section of release_json with
+        unpublished procedure features
     """
-    if not unpublished_identifier_data:
+    if not unpublished_data:
         logger.warning(
             "No unpublished identifier data to merge for BT-195(BT-88)-procedure",
         )
@@ -81,7 +98,7 @@ def merge_bt195_bt88_procedure_unpublished_identifier(
 
     withheld_info = release_json.setdefault("withheldInformation", [])
 
-    for new_item in unpublished_identifier_data["withheldInformation"]:
+    for new_item in unpublished_data["withheldInformation"]:
         existing_item = next(
             (item for item in withheld_info if item.get("id") == new_item["id"]),
             None,
@@ -92,6 +109,6 @@ def merge_bt195_bt88_procedure_unpublished_identifier(
             withheld_info.append(new_item)
 
     logger.info(
-        "Merged unpublished identifier data for BT-195(BT-88)-procedure: %d items",
-        len(unpublished_identifier_data["withheldInformation"]),
+        "Merged unpublished procedure features data: %d items",
+        len(unpublished_data["withheldInformation"]) if unpublished_data else 0,
     )

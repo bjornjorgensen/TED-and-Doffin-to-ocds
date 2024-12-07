@@ -569,16 +569,16 @@ from ted_and_doffin_to_ocds.converters.bt_195_bt_541_lotsgroup_threshold import 
     parse_bt195_bt541_lotsgroup_threshold_unpublished_identifier,
 )
 from ted_and_doffin_to_ocds.converters.bt_195_bt_541_lotsgroup_weight import (
-    merge_bt195_bt541_lotsgroup_weight,
-    parse_bt195_bt541_lotsgroup_weight,
+    merge_bt195_bt541_lotsgroup_weight_unpublished_identifier,
+    parse_bt195_bt541_lotsgroup_weight_unpublished_identifier,
 )
 from ted_and_doffin_to_ocds.converters.bt_195_bt_543_lot import (
-    merge_bt195_bt543_lot,
-    parse_bt195_bt543_lot,
+    merge_bt195_bt543_lot_unpublished_identifier,
+    parse_bt195_bt543_lot_unpublished_identifier,
 )
 from ted_and_doffin_to_ocds.converters.bt_195_bt_543_lotsgroup import (
-    merge_bt195_bt543_lotsgroup,
-    parse_bt195_bt543_lotsgroup,
+    merge_bt195_bt543_lotsgroup_unpublished_identifier,
+    parse_bt195_bt543_lotsgroup_unpublished_identifier,
 )
 from ted_and_doffin_to_ocds.converters.bt_195_bt_553_tender import (
     merge_bt195_bt553_tender,
@@ -2878,8 +2878,8 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             "LotsGroup Threshold Unpublished Identifier (BT-195(BT-541))",
         ),
         (
-            parse_bt195_bt541_lotsgroup_weight,
-            merge_bt195_bt541_lotsgroup_weight,
+            parse_bt195_bt541_lotsgroup_weight_unpublished_identifier,
+            merge_bt195_bt541_lotsgroup_weight_unpublished_identifier,
             "Unpublished Identifier for LotsGroup Weight (BT-195(BT-541))",
         ),
         (
@@ -2913,13 +2913,13 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             "Unpublished Identifier for LotsGroup (BT-195(BT-5423))",
         ),
         (
-            parse_bt195_bt543_lot,
-            merge_bt195_bt543_lot,
+            parse_bt195_bt543_lot_unpublished_identifier,
+            merge_bt195_bt543_lot_unpublished_identifier,
             "Unpublished Identifier for Lot (BT-195(BT-543))",
         ),
         (
-            parse_bt195_bt543_lotsgroup,
-            merge_bt195_bt543_lotsgroup,
+            parse_bt195_bt543_lotsgroup_unpublished_identifier,
+            merge_bt195_bt543_lotsgroup_unpublished_identifier,
             "Unpublished Identifier for LotsGroup (BT-195(BT-543))",
         ),
         (

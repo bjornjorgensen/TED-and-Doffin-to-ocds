@@ -1,5 +1,3 @@
-# converters/bt_195_bt_543_Lot.py
-
 import logging
 
 from lxml import etree
@@ -7,16 +5,37 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_bt195_bt543_lot(xml_content):
-    """
-    Parse the XML content to extract the unpublished identifier for the lot.
+def parse_bt195_bt543_lot_unpublished_identifier(
+    xml_content: str | bytes,
+) -> dict | None:
+    """Parse XML content to extract unpublished identifier for award criteria complicated.
+
+    Processes XML content to find award criteria complicated fields that are marked as
+    unpublished within Lots, creating a structured dictionary of withheld information.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML content as either a string or bytes object.
 
     Returns:
-        dict: A dictionary containing the parsed unpublished identifier data.
-        None: If no relevant data is found.
+        Optional[Dict]: Dictionary containing withheld information with structure:
+            {
+                "withheldInformation": [
+                    {
+                        "id": "field_identifier-lot_id",
+                        "field": "awa-cri-com",
+                        "name": "Award Criteria Complicated"
+                    },
+                    ...
+                ]
+            }
+        Returns None if no withheld information is found.
+
+    Example:
+        >>> xml = '<cac:ProcurementProjectLot>...</cac:ProcurementProjectLot>'
+        >>> result = parse_bt195_bt543_lot_unpublished_identifier(xml)
+        >>> print(result)
+        {'withheldInformation': [{'id': 'awa-cri-com-LOT-0001', 'field': 'awa-cri-com',
+          'name': 'Award Criteria Complicated'}]}
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -32,43 +51,55 @@ def parse_bt195_bt543_lot(xml_content):
 
     result = {"withheldInformation": []}
 
-    xpath_query = (
-        "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']"
-        "/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion"
-        "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
-        "/efext:EformsExtension/efac:FieldsPrivacy"
-        "[efbc:FieldIdentifierCode/text()='awa-cri-com']"
-        "/efbc:FieldIdentifierCode"
-    )
+    xpath_query = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-com']"
+    fields_privacy_elements = root.xpath(xpath_query, namespaces=namespaces)
 
-    field_identifier_codes = root.xpath(xpath_query, namespaces=namespaces)
-
-    for field_identifier_code in field_identifier_codes:
-        lot_id = field_identifier_code.xpath(
-            "ancestor::cac:ProcurementProjectLot/cbc:ID/text()",
+    for fields_privacy in fields_privacy_elements:
+        lot_id = fields_privacy.xpath(
+            "ancestor::cac:ProcurementProjectLot/cbc:ID[@schemeName='Lot']/text()",
             namespaces=namespaces,
-        )[0]
+        )
+        field_identifier = fields_privacy.xpath(
+            "efbc:FieldIdentifierCode/text()",
+            namespaces=namespaces,
+        )
 
-        withheld_info = {
-            "id": f"{field_identifier_code.text}-{lot_id}",
-            "field": "awa-cri-com",
-            "name": "Award Criteria Complicated",
-        }
-        result["withheldInformation"].append(withheld_info)
+        if lot_id and field_identifier:
+            withheld_info = {
+                "id": f"{field_identifier[0]}-{lot_id[0]}",
+                "field": "awa-cri-com",
+                "name": "Award Criteria Complicated",
+            }
+            result["withheldInformation"].append(withheld_info)
 
     return result if result["withheldInformation"] else None
 
 
-def merge_bt195_bt543_lot(release_json, unpublished_identifier_data) -> None:
-    """
-    Merge the parsed unpublished identifier data into the main OCDS release JSON.
+def merge_bt195_bt543_lot_unpublished_identifier(
+    release_json: dict,
+    unpublished_identifier_data: dict | None,
+) -> None:
+    """Merge unpublished identifier data into the main OCDS release JSON.
+
+    Takes the parsed unpublished identifier data and merges it into the main OCDS
+    release JSON structure under the withheldInformation array.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        unpublished_identifier_data (dict): The parsed unpublished identifier data to be merged.
+        release_json: The main OCDS release JSON dictionary to be updated.
+            Will be modified in-place.
+        unpublished_identifier_data: Dictionary containing the parsed unpublished
+            identifier data to be merged. Should contain a 'withheldInformation' key
+            with an array value.
 
     Returns:
         None: The function updates the release_json in-place.
+
+    Example:
+        >>> release = {}
+        >>> data = {'withheldInformation': [{'id': 'awa-cri-com-LOT-0001'}]}
+        >>> merge_bt195_bt543_lot_unpublished_identifier(release, data)
+        >>> print(release)
+        {'withheldInformation': [{'id': 'awa-cri-com-LOT-0001'}]}
     """
     if not unpublished_identifier_data:
         logger.warning("No unpublished identifier data to merge for BT-195(BT-543)-Lot")

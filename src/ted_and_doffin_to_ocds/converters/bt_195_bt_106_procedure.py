@@ -1,22 +1,39 @@
 # converters/bt_195_bt_106_procedure.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_bt195_bt106_unpublished_identifier(xml_content):
+def parse_bt195_bt106_unpublished_identifier(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
     """
-    Parse the XML content to extract the unpublished identifier for the procedure accelerated.
+    Parse unpublished field identifiers for procedure accelerated (BT-195, BT-106).
+
+    For fields marked as unpublished:
+    - Gets ContractFolderID
+    - Creates withheld information for procedure accelerated
+    - Generates unique IDs by combining field code and folder ID
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML content containing procurement data
 
     Returns:
-        dict: A dictionary containing the parsed unpublished identifier data.
-        None: If no relevant data is found.
+        Optional[Dict]: Dictionary containing withheld information, or None if no data.
+        Example structure:
+        {
+            "withheldInformation": [
+                {
+                    "id": "pro-acc-contract_folder_id",
+                    "field": "pro-acc",
+                    "name": "Procedure Accelerated"
+                }
+            ]
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -30,8 +47,11 @@ def parse_bt195_bt106_unpublished_identifier(xml_content):
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    # Check if the relevant XPath exists
-    relevant_xpath = "//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-acc']"
+    relevant_xpath = (
+        "/*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']"
+        "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension"
+        "/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-acc']/efbc:FieldIdentifierCode/text()"
+    )
     if not root.xpath(relevant_xpath, namespaces=namespaces):
         logger.info(
             "No unpublished identifier data found for BT-195(BT-106). Skipping parse_bt195_bt106_unpublished_identifier."
@@ -45,7 +65,7 @@ def parse_bt195_bt106_unpublished_identifier(xml_content):
         namespaces=namespaces,
     )
     field_identifier = root.xpath(
-        f"{relevant_xpath}/efbc:FieldIdentifierCode/text()",
+        relevant_xpath,
         namespaces=namespaces,
     )
 
@@ -53,7 +73,7 @@ def parse_bt195_bt106_unpublished_identifier(xml_content):
         withheld_info = {
             "id": f"{field_identifier[0]}-{contract_folder_id[0]}",
             "field": "pro-acc",
-            "name": "procedure Accelerated",
+            "name": "Procedure Accelerated",
         }
         result["withheldInformation"].append(withheld_info)
 
@@ -61,23 +81,24 @@ def parse_bt195_bt106_unpublished_identifier(xml_content):
 
 
 def merge_bt195_bt106_unpublished_identifier(
-    release_json, unpublished_identifier_data
+    release_json: dict[str, Any], unpublished_data: dict[str, Any] | None
 ) -> None:
     """
-    Merge the parsed unpublished identifier data into the main OCDS release JSON.
+    Merge unpublished procedure accelerated data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        unpublished_identifier_data (dict): The parsed unpublished identifier data to be merged.
+        release_json: Target release JSON to update
+        unpublished_data: Unpublished field data to merge
 
-    Returns:
-        None: The function updates the release_json in-place.
+    Effects:
+        Updates the withheldInformation section of release_json with
+        unpublished procedure accelerated information
     """
-    if not unpublished_identifier_data:
+    if not unpublished_data:
         logger.info("No unpublished identifier data to merge for BT-195(BT-106)")
         return
 
     withheld_info = release_json.setdefault("withheldInformation", [])
-    withheld_info.extend(unpublished_identifier_data["withheldInformation"])
+    withheld_info.extend(unpublished_data["withheldInformation"])
 
     logger.info("Merged unpublished identifier data for BT-195(BT-106)")

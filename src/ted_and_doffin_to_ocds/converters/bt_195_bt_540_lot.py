@@ -1,5 +1,3 @@
-# converters/bt_195_bt_540_Lot.py
-
 import logging
 
 from lxml import etree
@@ -7,16 +5,37 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_bt195_bt540_lot_unpublished_identifier(xml_content):
-    """
-    Parse the XML content to extract the unpublished identifier for the award criterion description in Lot.
+def parse_bt195_bt540_lot_unpublished_identifier(
+    xml_content: str | bytes,
+) -> dict | None:
+    """Parse XML content to extract unpublished identifier for award criterion description.
+
+    Processes XML content to find award criterion description fields that are marked as
+    unpublished within Lots, creating a structured dictionary of withheld information.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML content as either a string or bytes object.
 
     Returns:
-        dict: A dictionary containing the parsed unpublished identifier data.
-        None: If no relevant data is found.
+        Optional[Dict]: Dictionary containing withheld information with structure:
+            {
+                "withheldInformation": [
+                    {
+                        "id": "field_identifier-lot_id",
+                        "field": "awa-cri-des",
+                        "name": "Award Criterion Description"
+                    },
+                    ...
+                ]
+            }
+        Returns None if no withheld information is found.
+
+    Example:
+        >>> xml = '<cac:ProcurementProjectLot>...</cac:ProcurementProjectLot>'
+        >>> result = parse_bt195_bt540_lot_unpublished_identifier(xml)
+        >>> print(result)
+        {'withheldInformation': [{'id': 'awa-cri-des-LOT-0001', 'field': 'awa-cri-des',
+          'name': 'Award Criterion Description'}]}
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -57,18 +76,30 @@ def parse_bt195_bt540_lot_unpublished_identifier(xml_content):
 
 
 def merge_bt195_bt540_lot_unpublished_identifier(
-    release_json,
-    unpublished_identifier_data,
+    release_json: dict,
+    unpublished_identifier_data: dict | None,
 ) -> None:
-    """
-    Merge the parsed unpublished identifier data into the main OCDS release JSON.
+    """Merge unpublished identifier data into the main OCDS release JSON.
+
+    Takes the parsed unpublished identifier data and merges it into the main OCDS
+    release JSON structure under the withheldInformation array.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        unpublished_identifier_data (dict): The parsed unpublished identifier data to be merged.
+        release_json: The main OCDS release JSON dictionary to be updated.
+            Will be modified in-place.
+        unpublished_identifier_data: Dictionary containing the parsed unpublished
+            identifier data to be merged. Should contain a 'withheldInformation' key
+            with an array value.
 
     Returns:
         None: The function updates the release_json in-place.
+
+    Example:
+        >>> release = {}
+        >>> data = {'withheldInformation': [{'id': 'awa-cri-des-LOT-0001'}]}
+        >>> merge_bt195_bt540_lot_unpublished_identifier(release, data)
+        >>> print(release)
+        {'withheldInformation': [{'id': 'awa-cri-des-LOT-0001'}]}
     """
     if not unpublished_identifier_data:
         logger.warning("No unpublished identifier data to merge for BT-195(BT-540)-Lot")

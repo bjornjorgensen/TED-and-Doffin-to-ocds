@@ -1,22 +1,39 @@
 # converters/bt_195_bt_105_procedure.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_bt195_bt105_unpublished_identifier(xml_content):
+def parse_bt195_bt105_unpublished_identifier(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
     """
-    Parse the XML content to extract the unpublished identifier for the procedure type.
+    Parse unpublished field identifiers for procedure type (BT-195, BT-105).
+
+    For fields marked as unpublished:
+    - Gets ContractFolderID
+    - Creates withheld information entries for procedure type
+    - Generates unique IDs by combining field code and folder ID
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML content containing procurement data
 
     Returns:
-        dict: A dictionary containing the parsed unpublished identifier data.
-        None: If no relevant data is found.
+        Optional[Dict]: Dictionary containing withheld information, or None if no data.
+        Example structure:
+        {
+            "withheldInformation": [
+                {
+                    "id": "pro-typ-contract_folder_id",
+                    "field": "pro-typ",
+                    "name": "Procedure Type"
+                }
+            ]
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -37,7 +54,9 @@ def parse_bt195_bt105_unpublished_identifier(xml_content):
         namespaces=namespaces,
     )
     field_identifier = root.xpath(
-        "//efac:FieldsPrivacy/efbc:FieldIdentifierCode[text()='pro-typ']/text()",
+        "/*/cac:TenderingProcess/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
+        "/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-typ']"
+        "/efbc:FieldIdentifierCode/text()",
         namespaces=namespaces,
     )
 
@@ -45,7 +64,7 @@ def parse_bt195_bt105_unpublished_identifier(xml_content):
         withheld_info = {
             "id": f"{field_identifier[0]}-{contract_folder_id[0]}",
             "field": "pro-typ",
-            "name": "procedure Type",
+            "name": "Procedure Type",
         }
         result["withheldInformation"].append(withheld_info)
 

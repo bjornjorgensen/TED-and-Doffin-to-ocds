@@ -1,22 +1,39 @@
 # converters/bt_195_bt_09_procedure.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def bt_195_parse_unpublished_identifier_bt_09_procedure(xml_content):
+def bt_195_parse_unpublished_identifier_bt_09_procedure(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
     """
-    Parse the XML content to extract the unpublished identifier for the procedure.
+    Parse unpublished field identifiers for cross border law.
+
+    For fields marked as unpublished:
+    - Gets ContractFolderID
+    - Creates withheld information entries with field details
+    - Generates unique IDs by combining field code and folder ID
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML content containing procurement data
 
     Returns:
-        dict: A dictionary containing the parsed unpublished identifier data.
-        None: If no relevant data is found.
+        Optional[Dict]: Dictionary containing withheld information, or None if no data.
+        Example structure:
+        {
+            "withheldInformation": [
+                {
+                    "id": "field_code-contract_folder_id",
+                    "field": "field_code",
+                    "name": "Field Name"
+                }
+            ]
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -59,26 +76,26 @@ def bt_195_parse_unpublished_identifier_bt_09_procedure(xml_content):
 
 
 def bt_195_merge_unpublished_identifier_bt_09_procedure(
-    release_json,
-    unpublished_identifier_data,
+    release_json: dict[str, Any], unpublished_data: dict[str, Any] | None
 ) -> None:
     """
-    Merge the parsed unpublished identifier data into the main OCDS release JSON.
+    Merge unpublished cross border law data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        unpublished_identifier_data (dict): The parsed unpublished identifier data to be merged.
+        release_json: Target release JSON to update
+        unpublished_data: Unpublished field data to merge
 
-    Returns:
-        None: The function updates the release_json in-place.
+    Effects:
+        Updates the withheldInformation section of release_json with
+        unpublished field references
     """
-    if not unpublished_identifier_data:
-        logger.warning("No unpublished identifier data to merge")
+    if not unpublished_data:
+        logger.warning("No unpublished cross border law data to merge")
         return
 
     withheld_information = release_json.setdefault("withheldInformation", [])
 
-    for item in unpublished_identifier_data["withheldInformation"]:
+    for item in unpublished_data["withheldInformation"]:
         existing_item = next(
             (x for x in withheld_information if x["id"] == item["id"]),
             None,
@@ -89,6 +106,6 @@ def bt_195_merge_unpublished_identifier_bt_09_procedure(
             withheld_information.append(item)
 
     logger.info(
-        "Merged unpublished identifier data: %d items",
-        len(unpublished_identifier_data["withheldInformation"]),
+        "Merged unpublished cross border law data: %d items",
+        len(unpublished_data["withheldInformation"]),
     )

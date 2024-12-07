@@ -1,5 +1,3 @@
-# converters/bt_195_bt_541_lotsgroup_threshold.py
-
 import logging
 
 from lxml import etree
@@ -7,16 +5,37 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_bt195_bt541_lotsgroup_threshold_unpublished_identifier(xml_content):
-    """
-    Parse the XML content to extract the unpublished identifier for the LotsGroup threshold award criterion.
+def parse_bt195_bt541_lotsgroup_threshold_unpublished_identifier(
+    xml_content: str | bytes,
+) -> dict | None:
+    """Parse XML content to extract unpublished identifier for award criterion number threshold.
+
+    Processes XML content to find award criterion number threshold fields that are marked as
+    unpublished within LotsGroup, creating a structured dictionary of withheld information.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML content as either a string or bytes object.
 
     Returns:
-        dict: A dictionary containing the parsed unpublished identifier data.
-        None: If no relevant data is found.
+        Optional[Dict]: Dictionary containing withheld information with structure:
+            {
+                "withheldInformation": [
+                    {
+                        "id": "field_identifier-threshold-lots_group_id",
+                        "field": "awa-cri-num",
+                        "name": "Award Criterion Number Threshold"
+                    },
+                    ...
+                ]
+            }
+        Returns None if no withheld information is found.
+
+    Example:
+        >>> xml = '<cac:ProcurementProjectLot>...</cac:ProcurementProjectLot>'
+        >>> result = parse_bt195_bt541_lotsgroup_threshold_unpublished_identifier(xml)
+        >>> print(result)
+        {'withheldInformation': [{'id': 'awa-cri-num-threshold-GLO-0001', 'field': 'awa-cri-num',
+          'name': 'Award Criterion Number Threshold'}]}
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -32,19 +51,22 @@ def parse_bt195_bt541_lotsgroup_threshold_unpublished_identifier(xml_content):
 
     result = {"withheldInformation": []}
 
-    xpath_query = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']"
-    lots_groups = root.xpath(xpath_query, namespaces=namespaces)
+    xpath_query = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']"
+    fields_privacy_elements = root.xpath(xpath_query, namespaces=namespaces)
 
-    for lots_group in lots_groups:
-        lots_group_id = lots_group.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        field_identifier = lots_group.xpath(
-            ".//efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:FieldIdentifierCode/text()",
+    for fields_privacy in fields_privacy_elements:
+        lots_group_id = fields_privacy.xpath(
+            "ancestor::cac:ProcurementProjectLot/cbc:ID[@schemeName='LotsGroup']/text()",
+            namespaces=namespaces,
+        )
+        field_identifier = fields_privacy.xpath(
+            "efbc:FieldIdentifierCode/text()",
             namespaces=namespaces,
         )
 
-        if field_identifier:
+        if lots_group_id and field_identifier:
             withheld_info = {
-                "id": f"{field_identifier[0]}-threshold-{lots_group_id}",
+                "id": f"{field_identifier[0]}-threshold-{lots_group_id[0]}",
                 "field": "awa-cri-num",
                 "name": "Award Criterion Number Threshold",
             }
@@ -54,18 +76,30 @@ def parse_bt195_bt541_lotsgroup_threshold_unpublished_identifier(xml_content):
 
 
 def merge_bt195_bt541_lotsgroup_threshold_unpublished_identifier(
-    release_json,
-    unpublished_identifier_data,
+    release_json: dict,
+    unpublished_identifier_data: dict | None,
 ) -> None:
-    """
-    Merge the parsed unpublished identifier data into the main OCDS release JSON.
+    """Merge unpublished identifier data into the main OCDS release JSON.
+
+    Takes the parsed unpublished identifier data and merges it into the main OCDS
+    release JSON structure under the withheldInformation array.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        unpublished_identifier_data (dict): The parsed unpublished identifier data to be merged.
+        release_json: The main OCDS release JSON dictionary to be updated.
+            Will be modified in-place.
+        unpublished_identifier_data: Dictionary containing the parsed unpublished
+            identifier data to be merged. Should contain a 'withheldInformation' key
+            with an array value.
 
     Returns:
         None: The function updates the release_json in-place.
+
+    Example:
+        >>> release = {}
+        >>> data = {'withheldInformation': [{'id': 'awa-cri-num-threshold-GLO-0001'}]}
+        >>> merge_bt195_bt541_lotsgroup_threshold_unpublished_identifier(release, data)
+        >>> print(release)
+        {'withheldInformation': [{'id': 'awa-cri-num-threshold-GLO-0001'}]}
     """
     if not unpublished_identifier_data:
         logger.warning(

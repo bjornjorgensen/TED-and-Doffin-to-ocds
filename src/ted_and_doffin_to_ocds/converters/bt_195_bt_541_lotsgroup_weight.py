@@ -1,5 +1,3 @@
-# converters/bt_195_bt_541_lotsgroup_weight.py
-
 import logging
 
 from lxml import etree
@@ -7,16 +5,37 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_bt195_bt541_lotsgroup_weight(xml_content):
-    """
-    Parse the XML content to extract the unpublished identifier for the lots group weight.
+def parse_bt195_bt541_lotsgroup_weight_unpublished_identifier(
+    xml_content: str | bytes,
+) -> dict | None:
+    """Parse XML content to extract unpublished identifier for award criterion number weight.
+
+    Processes XML content to find award criterion number weight fields that are marked as
+    unpublished within LotsGroup, creating a structured dictionary of withheld information.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML content as either a string or bytes object.
 
     Returns:
-        dict: A dictionary containing the parsed unpublished identifier data.
-        None: If no relevant data is found.
+        Optional[Dict]: Dictionary containing withheld information with structure:
+            {
+                "withheldInformation": [
+                    {
+                        "id": "field_identifier-weight-lots_group_id",
+                        "field": "awa-cri-num",
+                        "name": "Award Criterion Number Weight"
+                    },
+                    ...
+                ]
+            }
+        Returns None if no withheld information is found.
+
+    Example:
+        >>> xml = '<cac:ProcurementProjectLot>...</cac:ProcurementProjectLot>'
+        >>> result = parse_bt195_bt541_lotsgroup_weight_unpublished_identifier(xml)
+        >>> print(result)
+        {'withheldInformation': [{'id': 'awa-cri-num-weight-GLO-0001', 'field': 'awa-cri-num',
+          'name': 'Award Criterion Number Weight'}]}
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -32,49 +51,55 @@ def parse_bt195_bt541_lotsgroup_weight(xml_content):
 
     result = {"withheldInformation": []}
 
-    xpath_query = (
-        "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']"
-        "/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion"
-        "/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension"
-        "/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter"
-        "[efbc:ParameterCode/@listName='number-weight']"
-        "/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']"
-    )
-
+    xpath_query = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']"
     fields_privacy_elements = root.xpath(xpath_query, namespaces=namespaces)
 
-    for element in fields_privacy_elements:
-        lot_id = element.xpath(
-            "ancestor::cac:ProcurementProjectLot/cbc:ID/text()",
+    for fields_privacy in fields_privacy_elements:
+        lots_group_id = fields_privacy.xpath(
+            "ancestor::cac:ProcurementProjectLot/cbc:ID[@schemeName='LotsGroup']/text()",
             namespaces=namespaces,
-        )[0]
-        field_identifier = element.xpath(
+        )
+        field_identifier = fields_privacy.xpath(
             "efbc:FieldIdentifierCode/text()",
             namespaces=namespaces,
-        )[0]
+        )
 
-        withheld_info = {
-            "id": f"{field_identifier}-weight-{lot_id}",
-            "field": "awa-cri-num",
-            "name": "Award Criterion Number Weight",
-        }
-        result["withheldInformation"].append(withheld_info)
+        if lots_group_id and field_identifier:
+            withheld_info = {
+                "id": f"{field_identifier[0]}-weight-{lots_group_id[0]}",
+                "field": "awa-cri-num",
+                "name": "Award Criterion Number Weight",
+            }
+            result["withheldInformation"].append(withheld_info)
 
     return result if result["withheldInformation"] else None
 
 
-def merge_bt195_bt541_lotsgroup_weight(
-    release_json, unpublished_identifier_data
+def merge_bt195_bt541_lotsgroup_weight_unpublished_identifier(
+    release_json: dict,
+    unpublished_identifier_data: dict | None,
 ) -> None:
-    """
-    Merge the parsed unpublished identifier data into the main OCDS release JSON.
+    """Merge unpublished identifier data into the main OCDS release JSON.
+
+    Takes the parsed unpublished identifier data and merges it into the main OCDS
+    release JSON structure under the withheldInformation array.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        unpublished_identifier_data (dict): The parsed unpublished identifier data to be merged.
+        release_json: The main OCDS release JSON dictionary to be updated.
+            Will be modified in-place.
+        unpublished_identifier_data: Dictionary containing the parsed unpublished
+            identifier data to be merged. Should contain a 'withheldInformation' key
+            with an array value.
 
     Returns:
         None: The function updates the release_json in-place.
+
+    Example:
+        >>> release = {}
+        >>> data = {'withheldInformation': [{'id': 'awa-cri-num-weight-GLO-0001'}]}
+        >>> merge_bt195_bt541_lotsgroup_weight_unpublished_identifier(release, data)
+        >>> print(release)
+        {'withheldInformation': [{'id': 'awa-cri-num-weight-GLO-0001'}]}
     """
     if not unpublished_identifier_data:
         logger.warning(

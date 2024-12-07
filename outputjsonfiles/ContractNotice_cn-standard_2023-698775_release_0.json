@@ -1,7 +1,7 @@
 {
   "id": "2023-698775",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-bc61a837-e7ae-4f60-a3a8-3c2f87a2d143",
+  "ocid": "ocds-abcd1234-5854e9fd-5bec-45dc-8437-6fbc992feff2",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -165,9 +165,9 @@
         "email": "aase@waco.no"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
-        "submissionReceiptBody"
+        "submissionReceiptBody",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Meierigata 17",

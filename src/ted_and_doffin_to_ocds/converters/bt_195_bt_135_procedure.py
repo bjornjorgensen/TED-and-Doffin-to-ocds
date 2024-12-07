@@ -1,22 +1,39 @@
 # converters/bt_195_bt_135_procedure.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_bt195_bt135_unpublished_identifier(xml_content):
+def parse_bt195_bt135_unpublished_identifier(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
     """
-    Parse the XML content to extract the unpublished identifier for the direct award justification.
+    Parse unpublished field identifiers for direct award justification (BT-195, BT-135).
+
+    For fields marked as unpublished:
+    - Gets ContractFolderID
+    - Creates withheld information for direct award justification
+    - Generates unique IDs by combining field code and folder ID
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML content containing procurement data
 
     Returns:
-        dict: A dictionary containing the parsed unpublished identifier data.
-        None: If no relevant data is found.
+        Optional[Dict]: Dictionary containing withheld information, or None if no data.
+        Example structure:
+        {
+            "withheldInformation": [
+                {
+                    "id": "dir-awa-tex-contract_folder_id",
+                    "field": "dir-awa-tex",
+                    "name": "Direct Award Justification"
+                }
+            ]
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -37,7 +54,9 @@ def parse_bt195_bt135_unpublished_identifier(xml_content):
         namespaces=namespaces,
     )
     field_identifier = root.xpath(
-        "//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='dir-awa-tex']/efbc:FieldIdentifierCode/text()",
+        "/*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']"
+        "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension"
+        "/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='dir-awa-tex']/efbc:FieldIdentifierCode/text()",
         namespaces=namespaces,
     )
 
@@ -53,23 +72,24 @@ def parse_bt195_bt135_unpublished_identifier(xml_content):
 
 
 def merge_bt195_bt135_unpublished_identifier(
-    release_json, unpublished_identifier_data
+    release_json: dict[str, Any], unpublished_data: dict[str, Any] | None
 ) -> None:
     """
-    Merge the parsed unpublished identifier data into the main OCDS release JSON.
+    Merge unpublished direct award justification data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        unpublished_identifier_data (dict): The parsed unpublished identifier data to be merged.
+        release_json: Target release JSON to update
+        unpublished_data: Unpublished field data to merge
 
-    Returns:
-        None: The function updates the release_json in-place.
+    Effects:
+        Updates the withheldInformation section of release_json with
+        unpublished direct award justification information
     """
-    if not unpublished_identifier_data:
+    if not unpublished_data:
         logger.warning("No unpublished identifier data to merge for BT-195(BT-135)")
         return
 
     withheld_info = release_json.setdefault("withheldInformation", [])
-    withheld_info.extend(unpublished_identifier_data["withheldInformation"])
+    withheld_info.extend(unpublished_data["withheldInformation"])
 
     logger.info("Merged unpublished identifier data for BT-195(BT-135)")
