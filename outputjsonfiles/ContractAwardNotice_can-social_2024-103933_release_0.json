@@ -1,7 +1,7 @@
 {
   "id": "9a4b7099-142a-412a-af35-3e8feaf15ec7",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f8bf0ef4-8130-4868-8e8f-87df05fa92d4",
+  "ocid": "ocds-abcd1234-8d5b9d6f-2c60-491b-9b89-14b4a5758f4d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -240,10 +240,10 @@
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
       "relatedBids": [
-        "TEN-0002",
         "TEN-0005",
-        "TEN-0003",
         "TEN-0001",
+        "TEN-0003",
+        "TEN-0002",
         "TEN-0004"
       ]
     }

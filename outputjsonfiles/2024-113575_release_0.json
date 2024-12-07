@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4607e071-b120-4659-9a37-88eeab497d8c",
+  "ocid": "ocds-abcd1234-7b0c6fc3-87a6-49ae-8fa1-f4833774996f",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -190,9 +190,9 @@
         "locality": "Bodø"
       },
       "roles": [
+        "funder",
         "buyer",
-        "payer",
-        "funder"
+        "payer"
       ]
     },
     {
@@ -218,9 +218,9 @@
         "locality": "VADSØ"
       },
       "roles": [
-        "leadBuyer",
         "buyer",
         "processContactPoint",
+        "leadBuyer",
         "reviewContactPoint"
       ]
     },

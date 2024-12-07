@@ -7,16 +7,32 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_bt195_bt553_tender(xml_content):
-    """
-    Parse the XML content to extract the unpublished identifier for the tender.
+def parse_bt195_bt553_tender(xml_content: str | bytes) -> dict | None:
+    """Parse the XML content to extract the unpublished identifier for the tender.
+
+    Processes XML content to find unpublished identifiers related to subcontracting terms
+    and creates a structured dictionary containing withheld information.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes.
 
     Returns:
-        dict: A dictionary containing the parsed unpublished identifier data.
-        None: If no relevant data is found.
+        Optional[Dict]: A dictionary containing withheld information with structure:
+            {
+                "withheldInformation": [
+                    {
+                        "id": str,
+                        "field": str,
+                        "name": str
+                    }
+                ]
+            }
+        Returns None if no relevant data is found.
+
+    Example:
+        >>> result = parse_bt195_bt553_tender(xml_string)
+        >>> print(result)
+        {'withheldInformation': [{'id': 'sub-val-TEN-0001', 'field': 'sub-val', 'name': 'Subcontracting Value'}]}
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -58,16 +74,24 @@ def parse_bt195_bt553_tender(xml_content):
     return result if result["withheldInformation"] else None
 
 
-def merge_bt195_bt553_tender(release_json, unpublished_identifier_data) -> None:
-    """
-    Merge the parsed unpublished identifier data into the main OCDS release JSON.
+def merge_bt195_bt553_tender(
+    release_json: dict, unpublished_identifier_data: dict | None
+) -> None:
+    """Merge the parsed unpublished identifier data into the main OCDS release JSON.
+
+    Takes the unpublished identifier data and merges it into the main OCDS release JSON
+    by appending withheld information items to the release's withheldInformation array.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        unpublished_identifier_data (dict): The parsed unpublished identifier data to be merged.
+        release_json: The main OCDS release JSON to be updated.
+        unpublished_identifier_data: The parsed unpublished identifier data to be merged.
+            Should contain a 'withheldInformation' list of dictionaries.
 
     Returns:
         None: The function updates the release_json in-place.
+
+    Example:
+        >>> merge_bt195_bt553_tender(release, {'withheldInformation': [{'id': 'sub-val-TEN-0001'}]})
     """
     if not unpublished_identifier_data:
         logger.warning(

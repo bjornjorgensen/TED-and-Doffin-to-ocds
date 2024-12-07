@@ -7,16 +7,29 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_bt195_bt711_unpublished_identifier(xml_content):
-    """
-    Parse the XML content to extract the unpublished identifier for the tender highest value.
+def parse_bt195_bt711_unpublished_identifier(
+    xml_content: str | bytes,
+) -> dict | None:
+    """Parse the XML content to extract tender highest value unpublished identifier.
+
+    Processes XML content to find unpublished identifiers related to tender highest value
+    and creates a structured dictionary containing withheld information.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as string or bytes.
 
     Returns:
-        dict: A dictionary containing the parsed unpublished identifier data.
-        None: If no relevant data is found.
+        Optional[Dict]: A dictionary containing withheld information with structure:
+            {
+                "withheldInformation": [
+                    {
+                        "id": str,
+                        "field": str,
+                        "name": str
+                    }
+                ]
+            }
+        Returns None if no relevant data is found.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -32,47 +45,43 @@ def parse_bt195_bt711_unpublished_identifier(xml_content):
 
     result = {"withheldInformation": []}
 
-    lot_results = root.xpath(
-        "//efac:noticeResult/efac:LotResult",
-        namespaces=namespaces,
+    xpath_query = (
+        "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
+        "/efext:EformsExtension/efac:NoticeResult/efac:LotResult"
+        "/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ten-val-hig']"
+        "/efbc:FieldIdentifierCode"
     )
 
-    for lot_result in lot_results:
-        fields_privacy = lot_result.xpath(
-            "efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ten-val-hig']",
+    field_identifier_codes = root.xpath(xpath_query, namespaces=namespaces)
+
+    for field_identifier_code in field_identifier_codes:
+        lot_result_id = field_identifier_code.xpath(
+            "ancestor::efac:LotResult/cbc:ID/text()",
             namespaces=namespaces,
-        )
+        )[0]
 
-        if fields_privacy:
-            field_identifier = fields_privacy[0].xpath(
-                "efbc:FieldIdentifierCode/text()",
-                namespaces=namespaces,
-            )
-            lot_id = lot_result.xpath(
-                "cbc:ID[@schemeName='result']/text()",
-                namespaces=namespaces,
-            )
-
-            if field_identifier and lot_id:
-                withheld_info = {
-                    "id": f"{field_identifier[0]}-{lot_id[0]}",
-                    "field": "ten-val-hig",
-                    "name": "Tender Highest Value",
-                }
-                result["withheldInformation"].append(withheld_info)
+        withheld_info = {
+            "id": f"{field_identifier_code.text}-{lot_result_id}",
+            "field": "ten-val-hig",
+            "name": "Tender Highest Value",
+        }
+        result["withheldInformation"].append(withheld_info)
 
     return result if result["withheldInformation"] else None
 
 
 def merge_bt195_bt711_unpublished_identifier(
-    release_json, unpublished_identifier_data
+    release_json: dict, unpublished_identifier_data: dict | None
 ) -> None:
-    """
-    Merge the parsed unpublished identifier data into the main OCDS release JSON.
+    """Merge the parsed unpublished identifier data into the main OCDS release JSON.
+
+    Takes the unpublished identifier data and merges it into the main OCDS release JSON
+    by appending withheld information items to the release's withheldInformation array.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        unpublished_identifier_data (dict): The parsed unpublished identifier data to be merged.
+        release_json: The main OCDS release JSON to be updated.
+        unpublished_identifier_data: The parsed unpublished identifier data to be merged.
+            Should contain a 'withheldInformation' list of dictionaries.
 
     Returns:
         None: The function updates the release_json in-place.

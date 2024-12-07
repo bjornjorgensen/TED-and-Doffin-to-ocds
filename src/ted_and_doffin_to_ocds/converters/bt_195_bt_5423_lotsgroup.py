@@ -1,5 +1,3 @@
-# converters/bt_195_bt_5423_lotsgroup.py
-
 import logging
 
 from lxml import etree
@@ -7,16 +5,27 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_bt195_bt5423_lotsgroup(xml_content):
-    """
-    Parse the XML content to extract the unpublished identifier for the lots group.
+def parse_bt195_bt5423_lotsgroup(xml_content: str | bytes) -> dict | None:
+    """Parse the XML content to extract award criterion number threshold unpublished identifier.
+
+    Processes XML content to find unpublished identifiers related to lots group award criterion
+    parameters and creates a structured dictionary containing withheld information.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as string or bytes.
 
     Returns:
-        dict: A dictionary containing the parsed unpublished identifier data.
-        None: If no relevant data is found.
+        Optional[Dict]: A dictionary containing withheld information with structure:
+            {
+                "withheldInformation": [
+                    {
+                        "id": str,
+                        "field": str,
+                        "name": str
+                    }
+                ]
+            }
+        Returns None if no relevant data is found.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -46,7 +55,7 @@ def parse_bt195_bt5423_lotsgroup(xml_content):
 
     for field_identifier_code in field_identifier_codes:
         lots_group_id = field_identifier_code.xpath(
-            "ancestor::cac:ProcurementProjectLot/cbc:ID/text()",
+            "ancestor::cac:ProcurementProjectLot/cbc:ID[@schemeName='LotsGroup']/text()",
             namespaces=namespaces,
         )[0]
 
@@ -60,13 +69,18 @@ def parse_bt195_bt5423_lotsgroup(xml_content):
     return result if result["withheldInformation"] else None
 
 
-def merge_bt195_bt5423_lotsgroup(release_json, unpublished_identifier_data) -> None:
-    """
-    Merge the parsed unpublished identifier data into the main OCDS release JSON.
+def merge_bt195_bt5423_lotsgroup(
+    release_json: dict, unpublished_identifier_data: dict | None
+) -> None:
+    """Merge the parsed unpublished identifier data into the main OCDS release JSON.
+
+    Takes the unpublished identifier data and merges it into the main OCDS release JSON
+    by appending withheld information items to the release's withheldInformation array.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        unpublished_identifier_data (dict): The parsed unpublished identifier data to be merged.
+        release_json: The main OCDS release JSON to be updated.
+        unpublished_identifier_data: The parsed unpublished identifier data to be merged.
+            Should contain a 'withheldInformation' list of dictionaries.
 
     Returns:
         None: The function updates the release_json in-place.

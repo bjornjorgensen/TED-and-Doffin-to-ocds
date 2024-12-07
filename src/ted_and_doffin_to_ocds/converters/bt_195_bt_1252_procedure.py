@@ -1,5 +1,3 @@
-# converters/bt_195_bt_1252_procedure.py
-
 import logging
 
 from lxml import etree
@@ -7,16 +5,29 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_bt195_bt1252_unpublished_identifier(xml_content):
-    """
-    Parse the XML content to extract the unpublished identifier for the direct award justification.
+def parse_bt195_bt1252_unpublished_identifier(
+    xml_content: str | bytes,
+) -> dict | None:
+    """Parse the XML content to extract direct award justification unpublished identifier.
+
+    Processes XML content to find unpublished identifiers related to direct award justification
+    and creates a structured dictionary containing withheld information.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as string or bytes.
 
     Returns:
-        dict: A dictionary containing the parsed unpublished identifier data.
-        None: If no relevant data is found.
+        Optional[Dict]: A dictionary containing withheld information with structure:
+            {
+                "withheldInformation": [
+                    {
+                        "id": str,
+                        "field": str,
+                        "name": str
+                    }
+                ]
+            }
+        Returns None if no relevant data is found.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -32,20 +43,23 @@ def parse_bt195_bt1252_unpublished_identifier(xml_content):
 
     result = {"withheldInformation": []}
 
-    contract_folder_id = root.xpath(
-        "/*/cbc:ContractFolderID/text()",
-        namespaces=namespaces,
-    )
-    field_identifier = root.xpath(
-        "//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='dir-awa-pre']/efbc:FieldIdentifierCode/text()",
-        namespaces=namespaces,
+    xpath_query = (
+        "/*/cac:TenderingProcess/cac:ProcessJustification"
+        "[cbc:ProcessReasonCode/@listName='direct-award-justification']"
+        "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
+        "/efext:EformsExtension/efac:FieldsPrivacy"
+        "[efbc:FieldIdentifierCode/text()='dir-awa-pre']"
+        "/efbc:FieldIdentifierCode"
     )
 
-    if contract_folder_id and field_identifier:
+    folder_id = root.xpath("/*/cbc:ContractFolderID/text()", namespaces=namespaces)[0]
+    field_identifier_codes = root.xpath(xpath_query, namespaces=namespaces)
+
+    for field_identifier_code in field_identifier_codes:
         withheld_info = {
-            "id": f"{field_identifier[0]}-{contract_folder_id[0]}",
+            "id": f"{field_identifier_code.text}-{folder_id}",
             "field": "dir-awa-pre",
-            "name": "Direct Award Justification Previous procedure Identifier",
+            "name": "Direct Award Justification Previous Procedure Identifier",
         }
         result["withheldInformation"].append(withheld_info)
 
@@ -53,15 +67,17 @@ def parse_bt195_bt1252_unpublished_identifier(xml_content):
 
 
 def merge_bt195_bt1252_unpublished_identifier(
-    release_json,
-    unpublished_identifier_data,
+    release_json: dict, unpublished_identifier_data: dict | None
 ) -> None:
-    """
-    Merge the parsed unpublished identifier data into the main OCDS release JSON.
+    """Merge the parsed unpublished identifier data into the main OCDS release JSON.
+
+    Takes the unpublished identifier data and merges it into the main OCDS release JSON
+    by appending withheld information items to the release's withheldInformation array.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        unpublished_identifier_data (dict): The parsed unpublished identifier data to be merged.
+        release_json: The main OCDS release JSON to be updated.
+        unpublished_identifier_data: The parsed unpublished identifier data to be merged.
+            Should contain a 'withheldInformation' list of dictionaries.
 
     Returns:
         None: The function updates the release_json in-place.
