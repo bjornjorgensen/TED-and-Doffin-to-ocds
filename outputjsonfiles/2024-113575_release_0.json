@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b1bbec16-18bf-40cd-83fe-2d47ddb4ba76",
+  "ocid": "ocds-abcd1234-369cab7a-ba4f-447e-b372-a230e5010243",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -190,9 +190,9 @@
         "locality": "Bodø"
       },
       "roles": [
-        "payer",
+        "funder",
         "buyer",
-        "funder"
+        "payer"
       ]
     },
     {
@@ -218,8 +218,8 @@
         "locality": "VADSØ"
       },
       "roles": [
-        "processContactPoint",
         "leadBuyer",
+        "processContactPoint",
         "buyer",
         "reviewContactPoint"
       ]
@@ -280,6 +280,29 @@
       ]
     }
   ],
+  "awards": [
+    {
+      "id": "RES-0001",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 12000000.0,
+        "currency": "NOK"
+      }
+    },
+    {
+      "id": "CON-0001",
+      "buyers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
   "bids": {
     "details": [
       {
@@ -314,35 +337,7 @@
     }
   ],
   "language": "no",
-  "awards": [
-    {
-      "id": "RES-0001",
-      "value": {
-        "amount": 12000000.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
-      ]
-    },
-    {
-      "id": "CON-0001",
-      "buyers": [
-        {
-          "id": "ORG-0002"
-        }
-      ],
-      "relatedBids": [
-        "TEN-0001"
-      ]
-    }
-  ],
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    },
-    {
-      "id": "ORG-0002"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

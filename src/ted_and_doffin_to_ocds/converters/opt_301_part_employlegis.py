@@ -1,22 +1,46 @@
 # converters/opt_301_part_employlegis.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def part_parse_employment_legislation_org_reference(xml_content):
+def parse_employment_legislation_org_part(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
     """
-    Parse the XML content to extract the employment legislation organization reference.
+    Parse employment legislation organization references from parts.
+
+    For each employment legislation document:
+    - Gets document publisher organization ID
+    - Adds informationService role to publisher organizations
+    - Links documents to publishers
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML content containing part data
 
     Returns:
-        dict: A dictionary containing the parsed employment legislation organization reference data.
-        None: If no relevant data is found.
+        Optional[Dict]: Dictionary containing parties and documents, or None if no data.
+        Example structure:
+        {
+            "parties": [
+                {
+                    "id": "org_id",
+                    "roles": ["informationService"]
+                }
+            ],
+            "tender": {
+                "documents": [
+                    {
+                        "id": "doc_id",
+                        "publisher": {"id": "org_id"}
+                    }
+                ]
+            }
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -56,16 +80,20 @@ def part_parse_employment_legislation_org_reference(xml_content):
     return result if (result["parties"] or result["tender"]["documents"]) else None
 
 
-def part_merge_employment_legislation_org_reference(release_json, parsed_data) -> None:
+def merge_employment_legislation_org_part(
+    release_json: dict[str, Any], parsed_data: dict[str, Any] | None
+) -> None:
     """
-    Merge the parsed employment legislation organization reference data into the main OCDS release JSON.
+    Merge employment legislation organization data from parts into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        parsed_data (dict): The parsed employment legislation organization reference data to be merged.
+        release_json: Target release JSON to update
+        parsed_data: Employment legislation data containing organizations and documents
 
-    Returns:
-        None: The function updates the release_json in-place.
+    Effects:
+        - Updates parties with informationService roles
+        - Updates documents with publisher references
+        - Maintains existing data while adding new information
     """
     if not parsed_data:
         logger.info("No employment legislation organization reference data to merge")

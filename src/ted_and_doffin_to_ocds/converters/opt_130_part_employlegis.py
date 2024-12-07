@@ -1,13 +1,38 @@
 # converters/opt_130_part_employlegis.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_employment_legislation_url_part(xml_content):
+def parse_employment_legislation_url_part(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse employment legislation URLs from XML content for procurement project parts.
+
+    Args:
+        xml_content: XML content as string or bytes containing procurement data
+
+    Returns:
+        Optional[Dict]: Dictionary containing tender documents with IDs and URLs,
+                       or None if no documents are found
+
+    Example structure:
+        {
+            "tender": {
+                "documents": [
+                    {
+                        "id": "doc_id",
+                        "url": "doc_url"
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -41,7 +66,20 @@ def parse_employment_legislation_url_part(xml_content):
     return result if result["tender"]["documents"] else None
 
 
-def merge_employment_legislation_url_part(release_json, empl_legislation_data) -> None:
+def merge_employment_legislation_url_part(
+    release_json: dict[str, Any], empl_legislation_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge employment legislation URL data into the release JSON.
+
+    Args:
+        release_json: The target release JSON to merge data into
+        empl_legislation_data: Employment legislation data containing document URLs
+
+    Effects:
+        Updates the tender.documents section of release_json with new or updated
+        employment legislation document references
+    """
     if not empl_legislation_data:
         logger.info("No employment legislation URL data for parts to merge")
         return

@@ -1,7 +1,7 @@
 {
   "id": "2023-696688",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8a1a3e1c-4285-4cf0-887e-55aff928299d",
+  "ocid": "ocds-abcd1234-e27cc2c5-2b2a-49e6-aeee-2bc745d3d988",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -145,7 +145,6 @@
         ]
       }
     ],
-    "deliveryAddresses": [],
     "deliveryLocations": [
       {
         "description": "Anywhere"
@@ -189,8 +188,8 @@
       },
       "roles": [
         "processContactPoint",
-        "submissionReceiptBody",
-        "buyer"
+        "buyer",
+        "submissionReceiptBody"
       ],
       "address": {
         "streetAddress": "Postboks 2300 Torgarden",
@@ -215,9 +214,7 @@
     }
   ],
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

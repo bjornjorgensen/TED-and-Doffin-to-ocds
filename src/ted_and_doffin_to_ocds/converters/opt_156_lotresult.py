@@ -1,22 +1,50 @@
 # converters/OPT_156_LotResult.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_vehicle_numeric(xml_content):
+def parse_vehicle_numeric(xml_content: str | bytes) -> dict[str, Any] | None:
     """
-    Parse the XML content to extract the vehicle numeric information for each lot result.
+    Parse vehicle quantity information from LotResult elements in XML content.
+
+    Handles three types of vehicle statistics:
+    - vehicles: Total vehicles (requires subtracting special vehicles)
+    - vehicles-clean: Clean vehicles quantity
+    - vehicles-zero-emission: Zero emission vehicles quantity
+
+    For "vehicles" type, subtracts sum of special vehicle quantities to get regular vehicles.
+    Discards any items with quantity 0.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML content containing LotResult data
 
     Returns:
-        dict: A dictionary containing the parsed vehicle numeric data.
-        None: If no relevant data is found.
+        Optional[Dict]: Dictionary containing awards with vehicle quantities, or None if no data.
+        Example:
+        {
+            "awards": [
+                {
+                    "id": "award_id",
+                    "items": [
+                        {
+                            "id": "1",
+                            "quantity": 3,
+                            "classification": {
+                                "scheme": "vehicles",
+                                "id": "vehicles-type",
+                                "description": "Vehicle Type"
+                            }
+                        }
+                    ],
+                    "relatedLots": ["lot_id"]
+                }
+            ]
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -99,16 +127,19 @@ def parse_vehicle_numeric(xml_content):
     return result if result["awards"] else None
 
 
-def merge_vehicle_numeric(release_json, vehicle_numeric_data) -> None:
+def merge_vehicle_numeric(
+    release_json: dict[str, Any], vehicle_numeric_data: dict[str, Any] | None
+) -> None:
     """
-    Merge the parsed vehicle numeric data into the main OCDS release JSON.
+    Merge vehicle numeric data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        vehicle_numeric_data (dict): The parsed vehicle numeric data to be merged.
+        release_json: Target release JSON to update
+        vehicle_numeric_data: Vehicle numeric data containing quantities
 
-    Returns:
-        None: The function updates the release_json in-place.
+    Effects:
+        Updates the awards section of release_json with vehicle quantity information,
+        merging items and related lots where awards already exist
     """
     if not vehicle_numeric_data:
         logger.warning("No vehicle numeric data to merge")

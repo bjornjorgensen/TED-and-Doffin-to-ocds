@@ -1,7 +1,7 @@
 {
   "id": "2023-697632",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7c16c863-be42-4585-a3ef-f81363f60ea5",
+  "ocid": "ocds-abcd1234-3814718b-2ad2-43fc-8884-e520300a8414",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -99,8 +99,7 @@
           }
         ]
       }
-    ],
-    "deliveryAddresses": []
+    ]
   },
   "tag": [
     "tender"
@@ -136,9 +135,7 @@
   ],
   "description": "Mercell kunngjøring: https://opic.com/id/afsvzyktwe",
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

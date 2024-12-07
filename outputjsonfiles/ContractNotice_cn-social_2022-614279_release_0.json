@@ -1,7 +1,7 @@
 {
   "id": "2022-614279",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-19b95131-8a36-4f43-9825-59c23e180eb7",
+  "ocid": "ocds-abcd1234-14f476b0-92a9-433c-a8e6-dc16d7f90c81",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -89,8 +89,7 @@
     "value": {
       "amount": 34000000.0,
       "currency": "NOK"
-    },
-    "deliveryAddresses": []
+    }
   },
   "tag": [
     "tender"
@@ -150,9 +149,7 @@
     }
   ],
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

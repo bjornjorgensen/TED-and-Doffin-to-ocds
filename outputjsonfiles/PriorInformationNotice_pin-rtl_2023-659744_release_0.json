@@ -1,7 +1,7 @@
 {
   "id": "2023-659744",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-de99fa8e-55d6-4db7-bb2e-8feb18af3264",
+  "ocid": "ocds-abcd1234-ee52c5c3-f3cb-4ebb-b6be-051b4d258780",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -52,8 +52,7 @@
           }
         ]
       }
-    ],
-    "deliveryAddresses": []
+    ]
   },
   "tag": [
     "tender"
@@ -97,9 +96,7 @@
     }
   ],
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

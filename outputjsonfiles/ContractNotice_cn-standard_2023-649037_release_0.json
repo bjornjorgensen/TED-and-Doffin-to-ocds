@@ -1,7 +1,7 @@
 {
   "id": "2023-649037",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3d52d902-df4b-421f-9e06-853b6b67997f",
+  "ocid": "ocds-abcd1234-c0df7e0f-49c9-4ef5-ab27-5e016ea2f970",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -137,8 +137,7 @@
     },
     "lotDetails": {
       "maximumLotsBidPerSupplier": 1
-    },
-    "deliveryAddresses": []
+    }
   },
   "tag": [
     "tender"
@@ -176,9 +175,9 @@
         "email": "post@sykehusinnkjop.no"
       },
       "roles": [
+        "wholesaleBuyer",
         "processContactPoint",
-        "buyer",
-        "wholesaleBuyer"
+        "buyer"
       ],
       "address": {
         "streetAddress": "Postboks 40",
@@ -200,9 +199,7 @@
     }
   ],
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

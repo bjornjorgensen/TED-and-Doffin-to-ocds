@@ -1,13 +1,50 @@
 # converters/opt_300_contract_signatory.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_signatory_identifier_reference(xml_content):
+def parse_signatory_identifier_reference(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse signatory party information for settled contracts.
+
+    For each signatory party:
+    - Creates/updates organization in parties with 'buyer' role
+    - Sets organization name from corresponding Organization/Company data
+    - Links organization to relevant awards through buyers array
+
+    Args:
+        xml_content: XML content containing signatory data
+
+    Returns:
+        Optional[Dict]: Dictionary containing parties and awards, or None if no data.
+        Example structure:
+        {
+            "parties": [
+                {
+                    "id": "org_id",
+                    "name": "org_name",
+                    "roles": ["buyer"]
+                }
+            ],
+            "awards": [
+                {
+                    "id": "contract_id",
+                    "buyers": [
+                        {
+                            "id": "org_id"
+                        }
+                    ]
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -60,7 +97,21 @@ def parse_signatory_identifier_reference(xml_content):
     return result if (result["parties"] or result["awards"]) else None
 
 
-def merge_signatory_identifier_reference(release_json, signatory_data) -> None:
+def merge_signatory_identifier_reference(
+    release_json: dict[str, Any], signatory_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge signatory party data into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        signatory_data: Signatory data containing parties and awards
+
+    Effects:
+        - Updates parties with buyer roles and names
+        - Updates awards with buyer references
+        - Maintains existing data while adding new information
+    """
     if not signatory_data:
         logger.info("No Signatory Identifier Reference data to merge")
         return

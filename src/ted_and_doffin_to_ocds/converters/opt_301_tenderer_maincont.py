@@ -1,13 +1,51 @@
-# converters/opt_301_tenderer_maincont.py
-
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_main_contractor(xml_content):
+def parse_main_contractor(xml_content: str | bytes) -> dict[str, Any] | None:
+    """
+    Parse main contractor references and their subcontracting relationships.
+
+    For each subcontractor:
+    - Gets main contractor organization ID and adds tenderer role
+    - Links subcontractors to main contractors in bids
+    - Creates subcontracting details in bid structure
+
+    Args:
+        xml_content: XML content containing contractor data
+
+    Returns:
+        Optional[Dict]: Dictionary containing parties and bids, or None if no data.
+        Example structure:
+        {
+            "parties": [
+                {
+                    "id": "org_id",
+                    "roles": ["tenderer"]
+                }
+            ],
+            "bids": {
+                "details": [
+                    {
+                        "id": "bid_id",
+                        "subcontracting": {
+                            "subcontracts": [
+                                {
+                                    "id": "1",
+                                    "subcontractor": {"id": "sub_id"},
+                                    "mainContractors": [{"id": "org_id"}]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -71,7 +109,21 @@ def parse_main_contractor(xml_content):
     return result if (result["parties"] or result["bids"]["details"]) else None
 
 
-def merge_main_contractor(release_json, main_contractor_data) -> None:
+def merge_main_contractor(
+    release_json: dict[str, Any], main_contractor_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge main contractor data into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        main_contractor_data: Contractor data containing organizations and subcontracting
+
+    Effects:
+        - Updates parties with tenderer roles
+        - Updates bids with subcontracting information
+        - Links main contractors to their subcontractors
+    """
     if not main_contractor_data:
         logger.info("No Main Contractor data to merge.")
         return

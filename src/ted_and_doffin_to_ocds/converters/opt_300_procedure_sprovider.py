@@ -1,13 +1,37 @@
 # converters/opt_300_procedure_sprovider.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_service_provider_identifier(xml_content):
+def parse_service_provider_identifier(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse service provider information from XML content.
+
+    Gets service provider details and their organization names from the Organizations section.
+    Only creates party entries for service providers that have valid organization references.
+
+    Args:
+        xml_content: XML content containing service provider data
+
+    Returns:
+        Optional[Dict]: Dictionary containing parties with names, or None if no data.
+        Example structure:
+        {
+            "parties": [
+                {
+                    "id": "org_id",
+                    "name": "Service Provider Name"
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -47,7 +71,20 @@ def parse_service_provider_identifier(xml_content):
     return result if result["parties"] else None
 
 
-def merge_service_provider_identifier(release_json, provider_data) -> None:
+def merge_service_provider_identifier(
+    release_json: dict[str, Any], provider_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge service provider data into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        provider_data: Service provider data containing organization details
+
+    Effects:
+        Updates the parties section of release_json with service provider information,
+        adding names to existing parties or creating new party entries
+    """
     if not provider_data:
         logger.info("No Service Provider Technical Identifier Reference data to merge")
         return

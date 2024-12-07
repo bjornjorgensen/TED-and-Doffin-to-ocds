@@ -1,13 +1,51 @@
 # converters/opt_310_tender.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_tendering_party_id_reference(xml_content):
+def parse_tendering_party_id_reference(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse tendering party references and link tenderers to bids.
+
+    For each lot tender:
+    - Gets corresponding tendering party by ID
+    - Links tenderer organizations to bids
+    - Adds tenderer role to organizations
+
+    Args:
+        xml_content: XML content containing tender data
+
+    Returns:
+        Optional[Dict]: Dictionary containing parties and bids, or None if no data.
+        Example structure:
+        {
+            "parties": [
+                {
+                    "id": "org_id",
+                    "roles": ["tenderer"]
+                }
+            ],
+            "bids": {
+                "details": [
+                    {
+                        "id": "bid_id",
+                        "tenderers": [
+                            {
+                                "id": "org_id"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -71,7 +109,21 @@ def parse_tendering_party_id_reference(xml_content):
     return result if (result["parties"] or result["bids"]["details"]) else None
 
 
-def merge_tendering_party_id_reference(release_json, tendering_party_data) -> None:
+def merge_tendering_party_id_reference(
+    release_json: dict[str, Any], tendering_party_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge tendering party data into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        tendering_party_data: Tendering party data containing organizations and bids
+
+    Effects:
+        - Updates parties with tenderer roles
+        - Updates bids with tenderer references
+        - Maintains relationships between tenderers and bids
+    """
     if not tendering_party_data:
         logger.info("No Tendering Party ID Reference data to merge.")
         return

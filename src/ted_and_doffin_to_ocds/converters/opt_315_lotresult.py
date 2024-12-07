@@ -1,13 +1,38 @@
 # converters/opt_315_lotresult.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_contract_identifier_reference(xml_content):
+def parse_contract_identifier_reference(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse contract identifier references from lot results.
+
+    For each lot result:
+    - Gets contract ID from SettledContract
+    - Links contracts to their awards through awardID
+
+    Args:
+        xml_content: XML content containing lot result data
+
+    Returns:
+        Optional[Dict]: Dictionary containing contracts with award references, or None if no data.
+        Example structure:
+        {
+            "contracts": [
+                {
+                    "id": "contract_id",
+                    "awardID": "award_id"
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -42,7 +67,20 @@ def parse_contract_identifier_reference(xml_content):
     return result if result["contracts"] else None
 
 
-def merge_contract_identifier_reference(release_json, contract_identifier_data) -> None:
+def merge_contract_identifier_reference(
+    release_json: dict[str, Any], contract_identifier_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge contract identifier data into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        contract_identifier_data: Contract data containing identifiers and award references
+
+    Effects:
+        Updates the contracts section of release_json with contract IDs
+        and their award references
+    """
     if not contract_identifier_data:
         logger.info("No Contract Identifier Reference data to merge.")
         return

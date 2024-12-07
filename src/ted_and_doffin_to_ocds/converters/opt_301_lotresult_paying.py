@@ -1,13 +1,38 @@
 # converters/opt_301_lotresult_paying.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_payer_party(xml_content):
+def parse_payer_party(xml_content: str | bytes) -> dict[str, Any] | None:
+    """
+    Parse payer party references from lot results.
+
+    Identifies organizations that serve as payers for lots.
+    Adds payer role to identified organizations.
+
+    Note: While eForms allows payer parties to differ per lot, this is rarely used in practice.
+    Contact data@open-contracting.org if you have such a use case.
+
+    Args:
+        xml_content: XML content containing lot result data
+
+    Returns:
+        Optional[Dict]: Dictionary containing parties with roles, or None if no data.
+        Example structure:
+        {
+            "parties": [
+                {
+                    "id": "org_id",
+                    "roles": ["payer"]
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -34,7 +59,20 @@ def parse_payer_party(xml_content):
     return result if result["parties"] else None
 
 
-def merge_payer_party(release_json, payer_party_data) -> None:
+def merge_payer_party(
+    release_json: dict[str, Any], payer_party_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge payer party data into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        payer_party_data: Payer party data containing organizations and roles
+
+    Effects:
+        Updates the parties section of release_json with payer roles,
+        merging with existing party roles where applicable
+    """
     if not payer_party_data:
         logger.info("No Payer Party (ID reference) data to merge")
         return

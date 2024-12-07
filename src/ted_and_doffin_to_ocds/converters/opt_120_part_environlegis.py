@@ -1,13 +1,38 @@
 # converters/opt_120_part_environlegis.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_environmental_legislation_url_part(xml_content):
+def parse_environmental_legislation_url_part(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse environmental legislation URLs from XML content for procurement project parts.
+
+    Args:
+        xml_content: XML content as string or bytes containing procurement data
+
+    Returns:
+        Optional[Dict]: Dictionary containing tender documents with IDs and URLs,
+                       or None if no documents are found
+
+    Example structure:
+        {
+            "tender": {
+                "documents": [
+                    {
+                        "id": "doc_id",
+                        "url": "doc_url"
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -42,8 +67,19 @@ def parse_environmental_legislation_url_part(xml_content):
 
 
 def merge_environmental_legislation_url_part(
-    release_json, env_legislation_data
+    release_json: dict[str, Any], env_legislation_data: dict[str, Any] | None
 ) -> None:
+    """
+    Merge environmental legislation URL data into the release JSON.
+
+    Args:
+        release_json: The target release JSON to merge data into
+        env_legislation_data: Environmental legislation data containing document URLs
+
+    Effects:
+        Updates the tender.documents section of release_json with new or updated
+        environmental legislation document references
+    """
     if not env_legislation_data:
         logger.info("No environmental legislation URL data for parts to merge")
         return

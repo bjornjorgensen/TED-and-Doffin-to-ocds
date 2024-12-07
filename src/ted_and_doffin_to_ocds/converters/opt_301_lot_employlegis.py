@@ -1,13 +1,48 @@
 # converters/opt_301_lot_employlegis.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_employment_legislation_org(xml_content):
+def parse_employment_legislation_org(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse employment legislation organization references from lots.
+
+    For each employment legislation document:
+    - Gets document publisher organization ID
+    - Links documents to lots
+    - Adds informationService role to publisher organizations
+
+    Args:
+        xml_content: XML content containing lot data
+
+    Returns:
+        Optional[Dict]: Dictionary containing parties and documents, or None if no data.
+        Example structure:
+        {
+            "parties": [
+                {
+                    "id": "org_id",
+                    "roles": ["informationService"]
+                }
+            ],
+            "tender": {
+                "documents": [
+                    {
+                        "id": "doc_id",
+                        "publisher": {"id": "org_id"},
+                        "relatedLots": ["lot_id"]
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -56,7 +91,21 @@ def parse_employment_legislation_org(xml_content):
     return result if (result["parties"] or result["tender"]["documents"]) else None
 
 
-def merge_employment_legislation_org(release_json, empl_legis_data) -> None:
+def merge_employment_legislation_org(
+    release_json: dict[str, Any], empl_legis_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge employment legislation organization data into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        empl_legis_data: Employment legislation data containing organizations and documents
+
+    Effects:
+        - Updates parties with informationService roles
+        - Updates documents with publisher and lot references
+        - Maintains existing data while adding new information
+    """
     if not empl_legis_data:
         logger.info(
             "No Employment Legislation Organization Technical Identifier Reference data to merge"

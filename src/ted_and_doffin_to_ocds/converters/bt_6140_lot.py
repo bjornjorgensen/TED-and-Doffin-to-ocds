@@ -1,13 +1,23 @@
 # converters/bt_6140_Lot.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+    "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+    "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+    "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+}
 
-def parse_lot_eu_funds_details(xml_content):
+
+def parse_lot_eu_funds_details(xml_content: str | bytes) -> dict[str, Any] | None:
     """
     Parse the XML content to extract lot EU funds details.
 
@@ -16,44 +26,24 @@ def parse_lot_eu_funds_details(xml_content):
     partially finance the procurement for a specific lot.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML content as string or bytes containing procurement data
 
     Returns:
-        dict: A dictionary containing the parsed lot EU funds details in the format:
-              {
-                  "planning": {
-                      "budget": {
-                          "finance": [
-                              {
-                                  "id": "finance_id",
-                                  "description": "funding_description"
-                              }
-                          ]
-                      }
-                  }
-              }
-        None: If no relevant data is found.
-
-    Raises:
-        etree.XMLSyntaxError: If the input is not valid XML.
+        Dictionary containing parsed lot EU funds details or None if no data found
     """
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
+    try:
+        if isinstance(xml_content, str):
+            xml_content = xml_content.encode("utf-8")
+        root = etree.fromstring(xml_content)
+    except etree.XMLSyntaxError:
+        logger.exception("Failed to parse XML")
+        raise
 
     result = {"planning": {"budget": {"finance": []}}}
 
     funding_descriptions = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Funding/cbc:Description/text()",
-        namespaces=namespaces,
+        namespaces=NAMESPACES,
     )
 
     for index, description in enumerate(funding_descriptions, start=1):
@@ -63,7 +53,9 @@ def parse_lot_eu_funds_details(xml_content):
     return result if result["planning"]["budget"]["finance"] else None
 
 
-def merge_lot_eu_funds_details(release_json, eu_funds_details) -> None:
+def merge_lot_eu_funds_details(
+    release_json: dict, eu_funds_details: dict | None
+) -> None:
     """
     Merge the parsed lot EU funds details into the main OCDS release JSON.
 

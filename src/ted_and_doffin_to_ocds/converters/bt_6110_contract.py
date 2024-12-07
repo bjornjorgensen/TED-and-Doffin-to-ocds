@@ -1,109 +1,109 @@
 # converters/bt_6110_Contract.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+    "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+    "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+    "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+}
 
-def parse_contract_eu_funds_details(xml_content):
+
+def parse_contract_eu_funds_details(xml_content: str | bytes) -> dict[str, Any] | None:
     """
-    Parse the XML content to extract contract EU funds details.
+    Parse the XML content to extract contract EU funds details (BT-6110).
 
-    This function processes the BT-6110-Contract business term, which represents
-    further information about the Union programme or project used to at least
-    partially finance the procurement.
+    Gets funding information from each contract. Creates/updates corresponding Finance
+    objects in the contract's finance array with funding descriptions.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML content as string or bytes containing procurement data
 
     Returns:
-        dict: A dictionary containing the parsed contract EU funds details in the format:
-              {
-                  "contracts": [
-                      {
-                          "id": "contract_id",
-                          "finance": [
-                              {
-                                  "description": "funding_description"
-                              }
-                          ],
-                          "awardID": "award_id"
-                      }
-                  ]
-              }
-        None: If no relevant data is found.
-
-    Raises:
-        etree.XMLSyntaxError: If the input is not valid XML.
+        Dictionary containing contracts with funding details or None if no data found
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
 
-    result = {"contracts": []}
+    try:
+        root = etree.fromstring(xml_content)
+        result = {"contracts": []}
 
-    settled_contracts = root.xpath(
-        "//efac:noticeResult/efac:SettledContract",
-        namespaces=namespaces,
-    )
-
-    for contract in settled_contracts:
-        contract_id = contract.xpath(
-            "cbc:ID[@schemeName='contract']/text()",
-            namespaces=namespaces,
-        )
-        funding_descriptions = contract.xpath(
-            "efac:Funding/cbc:Description/text()",
-            namespaces=namespaces,
+        settled_contracts = root.xpath(
+            "//ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/"
+            "efext:EformsExtension/efac:NoticeResult/efac:SettledContract",
+            namespaces=NAMESPACES,
         )
 
-        if contract_id and funding_descriptions:
-            contract_data = {
-                "id": contract_id[0],
-                "finance": [{"description": desc} for desc in funding_descriptions],
-            }
+        for contract in settled_contracts:
+            try:
+                contract_id = contract.xpath(
+                    "cbc:ID[@schemeName='contract']/text()",
+                    namespaces=NAMESPACES,
+                )[0]
 
-            # Find the corresponding LotResult to get the awardID
-            lot_result = root.xpath(
-                f"//efac:noticeResult/efac:LotResult[efac:SettledContract/cbc:ID[@schemeName='contract']/text()='{contract_id[0]}']",
-                namespaces=namespaces,
-            )
-            if lot_result:
-                award_id = lot_result[0].xpath(
-                    "cbc:ID[@schemeName='result']/text()",
-                    namespaces=namespaces,
+                funding_descriptions = contract.xpath(
+                    "efac:Funding/cbc:FundingProgram/text()",
+                    namespaces=NAMESPACES,
                 )
-                if award_id:
-                    contract_data["awardID"] = award_id[0]
 
-            result["contracts"].append(contract_data)
+                if contract_id and funding_descriptions:
+                    contract_data = {
+                        "id": contract_id,
+                        "finance": [
+                            {"description": desc} for desc in funding_descriptions
+                        ],
+                    }
 
-    return result if result["contracts"] else None
+                    # Find corresponding LotResult to get awardID
+                    award_id = root.xpath(
+                        f"//efac:NoticeResult/efac:LotResult[efac:SettledContract/cbc:ID"
+                        f"[@schemeName='contract']/text()='{contract_id}']/"
+                        "cbc:ID[@schemeName='result']/text()",
+                        namespaces=NAMESPACES,
+                    )
+                    if award_id:
+                        contract_data["awardID"] = award_id[0]
+
+                    result["contracts"].append(contract_data)
+
+            except (IndexError, AttributeError) as e:
+                logger.warning("Skipping incomplete contract data: %s", e)
+                continue
+
+        if result["contracts"]:
+            return result
+
+    except Exception:
+        logger.exception("Error parsing contract EU funds details")
+        return None
+
+    return None
 
 
-def merge_contract_eu_funds_details(release_json, eu_funds_details) -> None:
+def merge_contract_eu_funds_details(
+    release_json: dict[str, Any], eu_funds_details: dict[str, Any] | None
+) -> None:
     """
-    Merge the parsed contract EU funds details into the main OCDS release JSON.
+    Merge EU funds details into the release JSON.
 
-    This function updates the existing contracts in the release JSON with the
-    EU funds details. If a contract doesn't exist, it adds a new contract to the release.
+    Updates or creates contracts with funding information.
+    Preserves existing contract data while adding/updating finance details.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        eu_funds_details (dict): The parsed contract EU funds details to be merged.
+        release_json: The target release JSON to update
+        eu_funds_details: The source data containing EU funds details to merge
 
     Returns:
-        None: The function updates the release_json in-place.
+        None
     """
     if not eu_funds_details:
         logger.warning("BT-6110-Contract: No contract EU funds details to merge")

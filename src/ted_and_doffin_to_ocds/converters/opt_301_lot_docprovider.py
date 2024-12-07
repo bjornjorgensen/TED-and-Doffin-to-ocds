@@ -1,13 +1,38 @@
 # converters/opt_301_lot_docprovider.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_document_provider(xml_content):
+def parse_document_provider(xml_content: str | bytes) -> dict[str, Any] | None:
+    """
+    Parse document provider details from lots.
+
+    Identifies organizations that serve as document providers.
+    Adds processContactPoint role to identified organizations.
+
+    Note: While eForms allows different providers per lot, this is rarely used in practice.
+    Contact data@open-contracting.org if you have such a use case.
+
+    Args:
+        xml_content: XML content containing lot data
+
+    Returns:
+        Optional[Dict]: Dictionary containing parties with roles, or None if no data.
+        Example structure:
+        {
+            "parties": [
+                {
+                    "id": "org_id",
+                    "roles": ["processContactPoint"]
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -31,7 +56,20 @@ def parse_document_provider(xml_content):
     return result if result["parties"] else None
 
 
-def merge_document_provider(release_json, provider_data) -> None:
+def merge_document_provider(
+    release_json: dict[str, Any], provider_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge document provider data into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        provider_data: Provider data containing organizations and roles
+
+    Effects:
+        Updates the parties section of release_json with processContactPoint roles,
+        merging with existing party roles where applicable
+    """
     if not provider_data:
         logger.info("No Document Provider Technical Identifier Reference data to merge")
         return

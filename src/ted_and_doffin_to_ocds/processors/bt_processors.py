@@ -266,8 +266,6 @@ from ted_and_doffin_to_ocds.converters.bt_71_part import (
     merge_reserved_participation_part,
     parse_reserved_participation_part,
 )
-
-# from ted_and_doffin_to_ocds.converters.bt_749_lot import parse_selection_criteria_name, merge_selection_criteria_name
 from ted_and_doffin_to_ocds.converters.bt_75_lot import (
     merge_guarantee_required_description,
     parse_guarantee_required_description,
@@ -2165,20 +2163,20 @@ from ted_and_doffin_to_ocds.converters.bt_13714_tender import (
     parse_tender_lot_identifier,
 )
 from ted_and_doffin_to_ocds.converters.opp_020_contract import (
-    map_extended_duration_indicator,
     merge_extended_duration_indicator,
+    parse_extended_duration_indicator,
 )
 from ted_and_doffin_to_ocds.converters.opp_021_contract import (
-    map_essential_assets,
-    merge_essential_assets,
+    merge_used_asset,
+    parse_used_asset,
 )
 from ted_and_doffin_to_ocds.converters.opp_022_contract import (
-    map_asset_significance,
     merge_asset_significance,
+    parse_asset_significance,
 )
 from ted_and_doffin_to_ocds.converters.opp_023_contract import (
-    map_asset_predominance,
     merge_asset_predominance,
+    parse_asset_predominance,
 )
 from ted_and_doffin_to_ocds.converters.opp_031_tender import (
     merge_contract_conditions,
@@ -2377,44 +2375,44 @@ from ted_and_doffin_to_ocds.converters.opt_301_lotresult_paying import (
     parse_payer_party,
 )
 from ted_and_doffin_to_ocds.converters.opt_301_part_addinfo import (
-    part_merge_additional_info_provider,
-    part_parse_additional_info_provider,
+    merge_additional_info_provider_part,
+    parse_additional_info_provider_part,
 )
 from ted_and_doffin_to_ocds.converters.opt_301_part_docprovider import (
-    part_merge_document_provider,
-    part_parse_document_provider,
+    merge_document_provider_part,
+    parse_document_provider_part,
 )
 from ted_and_doffin_to_ocds.converters.opt_301_part_employlegis import (
-    part_merge_employment_legislation_org_reference,
-    part_parse_employment_legislation_org_reference,
+    merge_employment_legislation_org_part,
+    parse_employment_legislation_org_part,
 )
 from ted_and_doffin_to_ocds.converters.opt_301_part_environlegis import (
-    merge_environmental_legislation_org_reference,
-    parse_environmental_legislation_org_reference,
+    merge_environmental_legislation_org_part,
+    parse_environmental_legislation_org_part,
 )
 from ted_and_doffin_to_ocds.converters.opt_301_part_fiscallegis import (
-    merge_fiscal_legislation_org_reference,
-    parse_fiscal_legislation_org_reference,
+    merge_fiscal_legislation_org_part,
+    parse_fiscal_legislation_org_part,
 )
 from ted_and_doffin_to_ocds.converters.opt_301_part_mediator import (
-    part_merge_mediator,
-    part_parse_mediator,
+    merge_mediator_part,
+    parse_mediator_part,
 )
 from ted_and_doffin_to_ocds.converters.opt_301_part_reviewinfo import (
-    part_merge_review_info_provider,
-    part_parse_review_info_provider,
+    merge_review_info_provider_part,
+    parse_review_info_provider_part,
 )
 from ted_and_doffin_to_ocds.converters.opt_301_part_revieworg import (
-    part_merge_review_organization,
-    part_parse_review_organization,
+    merge_review_organization_part,
+    parse_review_organization_part,
 )
 from ted_and_doffin_to_ocds.converters.opt_301_part_tendereval import (
-    part_merge_tender_evaluator,
-    part_parse_tender_evaluator,
+    merge_tender_evaluator_part,
+    parse_tender_evaluator_part,
 )
 from ted_and_doffin_to_ocds.converters.opt_301_part_tenderreceipt import (
-    part_merge_tender_recipient,
-    part_parse_tender_recipient,
+    merge_tender_recipient_part,
+    parse_tender_recipient_part,
 )
 from ted_and_doffin_to_ocds.converters.opt_301_tenderer_maincont import (
     merge_main_contractor,
@@ -5017,24 +5015,24 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
         ################################################################OPP
         ##########################################################################
         (
-            map_extended_duration_indicator,
+            parse_extended_duration_indicator,
             merge_extended_duration_indicator,
             "ExtendedDurationIndicator (OPP-020)",
         ),
         (
-            map_essential_assets,
-            merge_essential_assets,
+            parse_used_asset,
+            merge_used_asset,
             "Essential Assets (OPP-021_Contract)",
         ),
         (
-            map_asset_significance,
+            parse_asset_significance,
             merge_asset_significance,
-            "Asset Significance (OPP_022_Contract)",
+            "Asset Significance (OPP-022_Contract)",
         ),
         (
-            map_asset_predominance,
+            parse_asset_predominance,
             merge_asset_predominance,
-            "Asset Predominance (OPP_023_Contract)",
+            "Asset Predominance (OPP-023_Contract)",
         ),
         (
             parse_contract_conditions,
@@ -5282,53 +5280,53 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             "Payer Party (ID reference) (OPT-301-LotResult-Paying)",
         ),
         (
-            part_parse_additional_info_provider,
-            part_merge_additional_info_provider,
+            parse_additional_info_provider_part,
+            merge_additional_info_provider_part,
             "Additional Info Provider (OPT-301-Part-AddInfo)",
         ),
         (
-            part_parse_document_provider,
-            part_merge_document_provider,
+            parse_document_provider_part,
+            merge_document_provider_part,
             "Document Provider (OPT-301-Part-DocProvider)",
         ),
         (
-            part_parse_employment_legislation_org_reference,
-            part_merge_employment_legislation_org_reference,
+            parse_employment_legislation_org_part,
+            merge_employment_legislation_org_part,
             "Employment Legislation (OPT-301-Part-EmployLegis)",
         ),
         (
-            parse_environmental_legislation_org_reference,
-            merge_environmental_legislation_org_reference,
+            parse_environmental_legislation_org_part,
+            merge_environmental_legislation_org_part,
             "Environmental Legislation Organization Reference (OPT-301-Part-EnvironLegis)",
         ),
         (
-            parse_fiscal_legislation_org_reference,
-            merge_fiscal_legislation_org_reference,
+            parse_fiscal_legislation_org_part,
+            merge_fiscal_legislation_org_part,
             "Fiscal Legislation Organization Reference (OPT-301-Part-FiscalLegis)",
         ),
         (
-            part_parse_mediator,
-            part_merge_mediator,
+            parse_mediator_part,
+            merge_mediator_part,
             "Mediator (OPT-301-Part-Mediator)",
         ),
         (
-            part_parse_review_info_provider,
-            part_merge_review_info_provider,
+            parse_review_info_provider_part,
+            merge_review_info_provider_part,
             "Review Info Provider (OPT-301-Part-ReviewInfo)",
         ),
         (
-            part_parse_review_organization,
-            part_merge_review_organization,
+            parse_review_organization_part,
+            merge_review_organization_part,
             "Review Organization (OPT-301-Part-ReviewOrg)",
         ),
         (
-            part_parse_tender_evaluator,
-            part_merge_tender_evaluator,
+            parse_tender_evaluator_part,
+            merge_tender_evaluator_part,
             "Tender Evaluator (OPT-301-Part-TenderEval)",
         ),
         (
-            part_parse_tender_recipient,
-            part_merge_tender_recipient,
+            parse_tender_recipient_part,
+            merge_tender_recipient_part,
             "Tender Recipient (OPT-301-Part-TenderReceipt)",
         ),
         (

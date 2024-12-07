@@ -1,13 +1,37 @@
 # converters/opt_301_part_addinfo.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def part_parse_additional_info_provider(xml_content):
+def parse_additional_info_provider_part(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse additional information provider details from parts.
+
+    Identifies organizations that serve as information contact points for parts.
+    Adds processContactPoint role to identified organizations.
+
+    Args:
+        xml_content: XML content containing procurement part data
+
+    Returns:
+        Optional[Dict]: Dictionary containing parties with roles, or None if no data.
+        Example structure:
+        {
+            "parties": [
+                {
+                    "id": "org_id",
+                    "roles": ["processContactPoint"]
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -32,7 +56,20 @@ def part_parse_additional_info_provider(xml_content):
     return result
 
 
-def part_merge_additional_info_provider(release_json, additional_info_data) -> None:
+def merge_additional_info_provider_part(
+    release_json: dict[str, Any], additional_info_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge additional information provider data from parts into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        additional_info_data: Additional info provider data containing organizations
+
+    Effects:
+        Updates the parties section of release_json with processContactPoint roles,
+        merging with existing party roles where applicable
+    """
     if not additional_info_data:
         logger.info("No Additional Info Provider data to merge.")
         return

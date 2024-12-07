@@ -1,13 +1,35 @@
 # converters/opt_301_part_docprovider.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def part_parse_document_provider(xml_content):
+def parse_document_provider_part(xml_content: str | bytes) -> dict[str, Any] | None:
+    """
+    Parse document provider details from procurement project parts.
+
+    Identifies organizations that serve as document providers.
+    Adds processContactPoint role to identified organizations.
+
+    Args:
+        xml_content: XML content containing part data
+
+    Returns:
+        Optional[Dict]: Dictionary containing parties with roles, or None if no data.
+        Example structure:
+        {
+            "parties": [
+                {
+                    "id": "org_id",
+                    "roles": ["processContactPoint"]
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -32,7 +54,20 @@ def part_parse_document_provider(xml_content):
     return result
 
 
-def part_merge_document_provider(release_json, document_provider_data) -> None:
+def merge_document_provider_part(
+    release_json: dict[str, Any], document_provider_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge document provider data from parts into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        document_provider_data: Provider data containing organizations and roles
+
+    Effects:
+        Updates the parties section of release_json with processContactPoint roles,
+        merging with existing party roles where applicable
+    """
     if not document_provider_data:
         logger.info("No Document Provider data to merge.")
         return

@@ -1,7 +1,7 @@
 {
   "id": "2022-967371",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-dbb6de5a-badc-485e-b7db-edfa0ca57169",
+  "ocid": "ocds-abcd1234-ed92e98a-59d6-4f16-8526-03450f1c8c6d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -73,8 +73,8 @@
         "documentType": "biddingDocuments",
         "url": "https://tendsign.no/doc.aspx?UniqueId=afzouxayrm&GoTo=Docs",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ]
       }
     ],
@@ -133,8 +133,7 @@
     },
     "lotDetails": {
       "maximumLotsBidPerSupplier": 2
-    },
-    "deliveryAddresses": []
+    }
   },
   "tag": [
     "tender"
@@ -192,9 +191,7 @@
   ],
   "description": "Mercell kunngjøring: https://opic.com/id/afzouxayrm",
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

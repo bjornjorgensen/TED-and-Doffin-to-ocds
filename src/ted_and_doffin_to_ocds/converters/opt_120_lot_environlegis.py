@@ -1,71 +1,119 @@
 # converters/opt_120_lot_environlegis.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+}
 
-def parse_environmental_legislation_url(xml_content):
+
+def parse_environmental_legislation_url(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse environmental legislation URL information (OPT-120) from XML content.
+
+    Gets document references from each lot and creates corresponding Document
+    objects with URLs and lot references.
+
+    Args:
+        xml_content: XML content as string or bytes containing procurement data
+
+    Returns:
+        Dictionary containing documents with URLs or None if no data found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-    }
 
-    result = {"tender": {"documents": []}}
+    try:
+        root = etree.fromstring(xml_content)
+        result = {"tender": {"documents": []}}
 
-    lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']", namespaces=namespaces
-    )
-
-    for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        env_docs = lot.xpath(
-            "cac:TenderingTerms/cac:EnvironmentalLegislationDocumentReference",
-            namespaces=namespaces,
+        lots = root.xpath(
+            "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+            namespaces=NAMESPACES,
         )
 
-        for doc in env_docs:
-            doc_id = doc.xpath("cbc:ID/text()", namespaces=namespaces)
-            url = doc.xpath(
-                "cac:Attachment/cac:ExternalReference/cbc:URI/text()",
-                namespaces=namespaces,
-            )
+        for lot in lots:
+            try:
+                lot_id = lot.xpath("cbc:ID/text()", namespaces=NAMESPACES)[0]
 
-            if doc_id and url:
-                result["tender"]["documents"].append(
-                    {"id": doc_id[0], "url": url[0], "relatedLots": [lot_id]}
+                env_docs = lot.xpath(
+                    "cac:TenderingTerms/cac:EnvironmentalLegislationDocumentReference",
+                    namespaces=NAMESPACES,
                 )
 
-    return result if result["tender"]["documents"] else None
+                for doc in env_docs:
+                    doc_id = doc.xpath("cbc:ID/text()", namespaces=NAMESPACES)
+                    url = doc.xpath(
+                        "cac:Attachment/cac:ExternalReference/cbc:URI/text()",
+                        namespaces=NAMESPACES,
+                    )
+
+                    if doc_id and url:
+                        result["tender"]["documents"].append(
+                            {"id": doc_id[0], "url": url[0], "relatedLots": [lot_id]}
+                        )
+
+            except (IndexError, AttributeError) as e:
+                logger.warning("Skipping incomplete lot data: %s", e)
+                continue
+
+        if result["tender"]["documents"]:
+            return result
+
+    except Exception:
+        logger.exception("Error parsing environmental legislation URLs")
+        return None
+
+    return None
 
 
-def merge_environmental_legislation_url(release_json, env_legislation_data) -> None:
-    if not env_legislation_data:
-        logger.info("No environmental legislation URL data to merge")
+def merge_environmental_legislation_url(
+    release_json: dict[str, Any], env_url_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge environmental legislation URL information into the release JSON.
+
+    Updates or creates documents with URLs and lot references.
+    Preserves existing document data while adding/updating URLs.
+
+    Args:
+        release_json: The target release JSON to update
+        env_url_data: The source data containing URLs to merge
+
+    Returns:
+        None
+    """
+    if not env_url_data:
+        logger.warning("No environmental legislation URL data to merge")
         return
 
     tender = release_json.setdefault("tender", {})
-    existing_docs = tender.setdefault("documents", [])
+    existing_documents = tender.setdefault("documents", [])
 
-    for new_doc in env_legislation_data["tender"]["documents"]:
+    for new_doc in env_url_data["tender"]["documents"]:
         existing_doc = next(
-            (doc for doc in existing_docs if doc["id"] == new_doc["id"]), None
+            (doc for doc in existing_documents if doc["id"] == new_doc["id"]),
+            None,
         )
         if existing_doc:
             existing_doc["url"] = new_doc["url"]
-            existing_doc.setdefault("relatedLots", []).extend(new_doc["relatedLots"])
-            existing_doc["relatedLots"] = list(
-                set(existing_doc["relatedLots"])
-            )  # Remove duplicates
+            existing_lots = existing_doc.setdefault("relatedLots", [])
+            for lot_id in new_doc["relatedLots"]:
+                if lot_id not in existing_lots:
+                    existing_lots.append(lot_id)
         else:
-            existing_docs.append(new_doc)
+            existing_documents.append(new_doc)
 
     logger.info(
-        "Merged environmental legislation URL data for %d documents",
-        len(env_legislation_data["tender"]["documents"]),
+        "Merged environmental legislation URLs for %d documents",
+        len(env_url_data["tender"]["documents"]),
     )

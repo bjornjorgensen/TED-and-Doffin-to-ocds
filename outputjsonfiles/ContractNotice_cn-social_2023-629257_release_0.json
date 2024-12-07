@@ -1,7 +1,7 @@
 {
   "id": "2023-629257",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b0ffc000-c9d7-4f39-b0f5-57f5e25128cd",
+  "ocid": "ocds-abcd1234-8210bba9-b7a5-48b5-b374-25ec3f8d1ce3",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -91,8 +91,8 @@
         "documentType": "biddingDocuments",
         "url": "https://permalink.mercell.com/208131817.aspx",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ]
       }
     ],
@@ -159,8 +159,7 @@
     },
     "lotDetails": {
       "maximumLotsBidPerSupplier": 2
-    },
-    "deliveryAddresses": []
+    }
   },
   "tag": [
     "tender"
@@ -220,9 +219,7 @@
     }
   ],
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

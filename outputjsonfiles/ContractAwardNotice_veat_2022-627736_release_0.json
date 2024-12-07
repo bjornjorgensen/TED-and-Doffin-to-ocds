@@ -1,7 +1,7 @@
 {
   "id": "2022-627736",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-800e9693-8308-4287-bb48-c33430747b14",
+  "ocid": "ocds-abcd1234-2e64b1c8-47fc-4bf7-8c35-e1c2888b0502",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -145,6 +145,23 @@
       ]
     }
   ],
+  "awards": [
+    {
+      "id": "RES-0001",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "value": {
+        "amount": 5000000.0,
+        "currency": "NOK"
+      },
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
   "bids": {
     "details": [
       {
@@ -164,23 +181,6 @@
       }
     ]
   },
-  "awards": [
-    {
-      "id": "RES-0001",
-      "status": "active",
-      "statusDetails": "At least one winner was chosen.",
-      "relatedLots": [
-        "LOT-0000"
-      ],
-      "value": {
-        "amount": 5000000.0,
-        "currency": "NOK"
-      },
-      "relatedBids": [
-        "TEN-0001"
-      ]
-    }
-  ],
   "contracts": [
     {
       "id": "CON-0001",
@@ -190,9 +190,7 @@
     }
   ],
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

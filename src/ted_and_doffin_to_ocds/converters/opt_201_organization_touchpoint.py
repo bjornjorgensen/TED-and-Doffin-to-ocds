@@ -1,13 +1,37 @@
 # converters/opt_201_organization_touchpoint.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_touchpoint_technical_identifier(xml_content):
+def parse_touchpoint_technical_identifier(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse TouchPoint technical identifiers from XML content.
+
+    Creates basic party entries for TouchPoints found in the XML.
+    Only includes TouchPoints that have a technical identifier.
+    Skips TouchPoints that already exist in the parties array.
+
+    Args:
+        xml_content: XML content containing TouchPoint data
+
+    Returns:
+        Optional[Dict]: Dictionary containing parties with IDs, or None if no data.
+        Example structure:
+        {
+            "parties": [
+                {
+                    "id": "touchpoint_id"
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -34,7 +58,22 @@ def parse_touchpoint_technical_identifier(xml_content):
     return result if result["parties"] else None
 
 
-def merge_touchpoint_technical_identifier(release_json, touchpoint_data) -> None:
+def merge_touchpoint_technical_identifier(
+    release_json: dict[str, Any], touchpoint_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge TouchPoint technical identifier data into the release JSON.
+
+    Only adds TouchPoints that don't already exist in the parties array.
+
+    Args:
+        release_json: Target release JSON to update
+        touchpoint_data: TouchPoint data containing technical identifiers
+
+    Effects:
+        Updates the parties section of release_json with new TouchPoints,
+        skipping any that already exist
+    """
     if not touchpoint_data:
         logger.info("No TouchPoint technical identifier data to merge")
         return

@@ -1,7 +1,7 @@
 {
   "id": "5681ff11-e080-4da6-b108-82db3f9b4b69",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-bb2c4615-0548-454d-9ced-0d21e52f1a5e",
+  "ocid": "ocds-abcd1234-198bad4d-6993-4efb-8ea2-98f6abe47090",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -311,9 +311,7 @@
     }
   ],
   "language": "no",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

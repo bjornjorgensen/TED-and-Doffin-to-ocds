@@ -41,7 +41,7 @@ def parse_previous_notice_identifier(
 
     for identifier in notice_refs:
         related_process = {
-            "id": str(len(result["relatedProcesses"]) + 1),  # Add ID here
+            "id": str(len(result["relatedProcesses"]) + 1),
             "relationship": ["planning"],
             "scheme": "eu-oj",
             "identifier": identifier,

@@ -1,7 +1,7 @@
 {
   "id": "2022-347651",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-5f2d51fd-8da3-4809-b6da-898d06ec38e7",
+  "ocid": "ocds-abcd1234-7dbff740-65ec-4222-9048-a052ba917db7",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -190,17 +190,15 @@
   "awards": [
     {
       "id": "RES-0001",
-      "status": "unsuccessful",
-      "statusDetails": "Other",
       "relatedLots": [
         "LOT-0000"
-      ]
+      ],
+      "status": "unsuccessful",
+      "statusDetails": "Other"
     }
   ],
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

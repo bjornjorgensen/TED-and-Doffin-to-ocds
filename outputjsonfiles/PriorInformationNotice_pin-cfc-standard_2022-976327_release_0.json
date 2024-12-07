@@ -1,7 +1,7 @@
 {
   "id": "2022-976327",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-afbd0516-b231-43c7-af87-f36053d547e8",
+  "ocid": "ocds-abcd1234-dc115745-4310-4bee-ac4e-c232b152cee8",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -88,8 +88,7 @@
     "value": {
       "amount": 4000000.0,
       "currency": "NOK"
-    },
-    "deliveryAddresses": []
+    }
   },
   "tag": [
     "tender"
@@ -128,8 +127,8 @@
       },
       "roles": [
         "processContactPoint",
-        "submissionReceiptBody",
-        "buyer"
+        "buyer",
+        "submissionReceiptBody"
       ],
       "address": {
         "streetAddress": "Nedre Slottsgate 3",
@@ -193,9 +192,7 @@
     }
   ],
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

@@ -1,13 +1,28 @@
 # converters/bt_5121_Lot.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_place_performance_post_code(xml_content):
+def parse_place_performance_post_code(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse place performance postal code (BT-5121) from XML content.
+
+    Gets postal code information for each lot's delivery address. Creates/updates
+    corresponding Address objects in the item's deliveryAddresses array.
+
+    Args:
+        xml_content: XML content as string or bytes containing procurement data
+
+    Returns:
+        Dictionary containing tender items with delivery addresses or None if no data found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -47,7 +62,22 @@ def parse_place_performance_post_code(xml_content):
     return result if result["tender"]["items"] else None
 
 
-def merge_place_performance_post_code(release_json, post_code_data) -> None:
+def merge_place_performance_post_code(
+    release_json: dict[str, Any], post_code_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge postal code data into the release JSON.
+
+    Updates or creates delivery addresses with postal code information for each lot.
+    Preserves existing address data while adding/updating postal codes.
+
+    Args:
+        release_json: The target release JSON to update
+        post_code_data: The source data containing postal codes to merge
+
+    Returns:
+        None
+    """
     if not post_code_data:
         logger.warning("No Place Performance Post Code data to merge")
         return

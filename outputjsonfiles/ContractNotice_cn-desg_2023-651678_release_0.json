@@ -1,7 +1,7 @@
 {
   "id": "2023-651678",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f8501d41-7830-42bf-ad48-8c84296fc37f",
+  "ocid": "ocds-abcd1234-50070b1d-0e34-40d8-875b-9ba0caefcaca",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -92,7 +92,6 @@
         ]
       }
     ],
-    "deliveryAddresses": [],
     "deliveryLocations": [
       {
         "description": "Anywhere"
@@ -136,8 +135,8 @@
       },
       "roles": [
         "processContactPoint",
-        "submissionReceiptBody",
-        "buyer"
+        "buyer",
+        "submissionReceiptBody"
       ],
       "address": {
         "streetAddress": "Nesgata 11",
@@ -166,9 +165,7 @@
     }
   ],
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

@@ -1,89 +1,108 @@
-# converters/bt_5101c_Lot.py
+import logging
+from typing import Any
 
 from lxml import etree
 
+logger = logging.getLogger(__name__)
 
-def parse_lot_place_performance_streetline2(xml_content):
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+}
+
+
+def parse_lot_place_performance_streetline2(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """Parse lot place performance streetline 2 (BT-5101(c)) from XML content."""
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
 
-    lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
-        namespaces=namespaces,
-    )
+    try:
+        root = etree.fromstring(xml_content)
+        result = {"tender": {"items": []}}
 
-    items = []
-
-    for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        realized_locations = lot.xpath(
-            "cac:ProcurementProject/cac:RealizedLocation",
-            namespaces=namespaces,
+        # Get all lots using the BT-5101(c) path
+        lots = root.xpath(
+            "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+            namespaces=NAMESPACES,
         )
 
-        if realized_locations:
-            addresses = []
-            for location in realized_locations:
-                address = location.xpath("cac:Address", namespaces=namespaces)[0]
-                street_name = address.xpath(
-                    "cbc:StreetName/text()",
-                    namespaces=namespaces,
-                )
-                additional_street_name = address.xpath(
-                    "cbc:AdditionalStreetName/text()",
-                    namespaces=namespaces,
-                )
-                address_lines = address.xpath(
-                    "cac:AddressLine/cbc:Line/text()",
-                    namespaces=namespaces,
+        found_addresses = False
+        for lot in lots:
+            try:
+                lot_id = lot.xpath("cbc:ID/text()", namespaces=NAMESPACES)[0]
+                addresses = lot.xpath(
+                    "cac:ProcurementProject/cac:RealizedLocation/cac:Address",
+                    namespaces=NAMESPACES,
                 )
 
-                street_address_parts = []
-                if street_name:
-                    street_address_parts.append(street_name[0])
-                if additional_street_name:
-                    street_address_parts.append(additional_street_name[0])
-                street_address_parts.extend(address_lines)
+                if addresses:
+                    delivery_addresses = []
+                    for address in addresses:
+                        street_parts = []
 
-                street_address = ", ".join(street_address_parts)
+                        # Collect address components in specified order
+                        street_name = address.xpath(
+                            "cbc:StreetName/text()", namespaces=NAMESPACES
+                        )
+                        if street_name:
+                            street_parts.append(street_name[0])
 
-                if street_address_parts:
-                    addresses.append({"streetAddress": street_address})
+                        additional_street = address.xpath(
+                            "cbc:AdditionalStreetName/text()", namespaces=NAMESPACES
+                        )
+                        if additional_street:
+                            street_parts.append(additional_street[0])
 
-            if addresses:
-                items.append(
-                    {
-                        "id": str(len(items) + 1),
-                        "relatedLot": lot_id,
-                        "deliveryAddresses": addresses,
-                    }
-                )
+                        address_lines = address.xpath(
+                            "cac:AddressLine/cbc:Line/text()", namespaces=NAMESPACES
+                        )
+                        street_parts.extend(address_lines)
 
-    if items:
-        return {"tender": {"items": items}}
+                        if street_parts:
+                            found_addresses = True
+                            street_address = ", ".join(
+                                part.strip() for part in street_parts if part.strip()
+                            )
+                            delivery_addresses.append({"streetAddress": street_address})
 
-    return None
+                    if delivery_addresses:
+                        result["tender"]["items"].append(
+                            {
+                                "id": str(len(result["tender"]["items"]) + 1),
+                                "relatedLot": lot_id,
+                                "deliveryAddresses": delivery_addresses,
+                            }
+                        )
+
+            except (IndexError, AttributeError) as e:
+                logger.warning("Skipping incomplete lot data: %s", e)
+                continue
+
+        if found_addresses:
+            return result
+
+    except Exception:
+        logger.exception("Error parsing lot place performance streetline 2")
+        return None
+    else:
+        return None
 
 
 def merge_lot_place_performance_streetline2(
-    release_json,
-    lot_place_performance_streetline2_data,
+    release_json: dict[str, Any],
+    street_data: dict[str, Any] | None,
 ) -> None:
-    if not lot_place_performance_streetline2_data:
+    """Merge lot place performance streetline 2 data into the release JSON."""
+    if not street_data:
+        logger.debug("No lot place performance streetline 2 data to merge")
         return
 
-    existing_items = release_json.setdefault("tender", {}).setdefault("items", [])
+    tender = release_json.setdefault("tender", {})
+    existing_items = tender.setdefault("items", [])
 
-    for new_item in lot_place_performance_streetline2_data["tender"]["items"]:
+    for new_item in street_data["tender"]["items"]:
         existing_item = next(
             (
                 item
@@ -92,7 +111,22 @@ def merge_lot_place_performance_streetline2(
             ),
             None,
         )
+
         if existing_item:
-            existing_item["deliveryAddresses"] = new_item["deliveryAddresses"]
+            existing_addresses = existing_item.setdefault("deliveryAddresses", [])
+            for new_address in new_item["deliveryAddresses"]:
+                # Find address without street or add new one
+                existing_address = next(
+                    (
+                        addr
+                        for addr in existing_addresses
+                        if "streetAddress" not in addr
+                    ),
+                    None,
+                )
+                if existing_address:
+                    existing_address["streetAddress"] = new_address["streetAddress"]
+                else:
+                    existing_addresses.append(new_address)
         else:
             existing_items.append(new_item)

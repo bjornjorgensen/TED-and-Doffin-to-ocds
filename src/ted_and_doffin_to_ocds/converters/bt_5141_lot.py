@@ -1,6 +1,7 @@
 # converters/bt_5141_Lot.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
@@ -58,56 +59,114 @@ ISO_3166_CONVERSION = {
     "VAT": "VA",
 }
 
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+    "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+    "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+    "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+}
 
-def parse_lot_country(xml_content):
+
+def parse_lot_country(xml_content: str | bytes) -> dict[str, Any] | None:
+    """
+    Parse place performance country code (BT-5141) from XML content.
+
+    Gets country code information for each lot's delivery address. Creates/updates
+    corresponding Address objects in the item's deliveryAddresses array.
+    Converts ISO 3166-1 alpha-3 codes to alpha-2.
+
+    Args:
+        xml_content: XML content as string or bytes containing procurement data
+
+    Returns:
+        Dictionary containing tender items with delivery addresses or None if no data found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
 
-    result = {"tender": {"items": []}}
+    try:
+        root = etree.fromstring(xml_content)
+        result = {"tender": {"items": []}}
 
-    lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
-        namespaces=namespaces,
-    )
-
-    for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        country_codes = lot.xpath(
-            ".//cac:RealizedLocation/cac:Address/cac:Country/cbc:IdentificationCode/text()",
-            namespaces=namespaces,
+        lots = root.xpath(
+            "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+            namespaces=NAMESPACES,
         )
 
-        if country_codes:
-            item = {
-                "id": str(len(result["tender"]["items"]) + 1),
-                "deliveryAddresses": [
-                    {"country": convert_country_code(code)} for code in country_codes
-                ],
-                "relatedLot": lot_id,
-            }
-            result["tender"]["items"].append(item)
+        for lot in lots:
+            try:
+                lot_id = lot.xpath("cbc:ID/text()", namespaces=NAMESPACES)[0]
+                country_codes = lot.xpath(
+                    ".//cac:ProcurementProject/cac:RealizedLocation/cac:Address/cac:Country/cbc:IdentificationCode/text()",
+                    namespaces=NAMESPACES,
+                )
 
-    return result if result["tender"]["items"] else None
+                if country_codes:
+                    # Filter and convert valid country codes
+                    valid_addresses = []
+                    for code in country_codes:
+                        if code.strip():
+                            converted_code = convert_country_code(code.strip())
+                            if converted_code:
+                                valid_addresses.append({"country": converted_code})
+
+                    if valid_addresses:
+                        item = {
+                            "id": str(len(result["tender"]["items"]) + 1),
+                            "deliveryAddresses": valid_addresses,
+                            "relatedLot": lot_id,
+                        }
+                        result["tender"]["items"].append(item)
+
+            except (IndexError, AttributeError) as e:
+                logger.warning("Skipping incomplete lot data: %s", e)
+                continue
+
+        if result["tender"]["items"]:
+            return result
+
+    except Exception:
+        logger.exception("Error parsing lot country codes")
+        return None
+
+    return None
 
 
-def convert_country_code(code):
+def convert_country_code(code: str) -> str:
     """
     Convert ISO 3166-1 alpha-3 country code to alpha-2 code.
-    If the code is not found in the conversion dictionary, return the original code.
+
+    Args:
+        code: ISO 3166-1 alpha-3 country code
+
+    Returns:
+        Corresponding alpha-2 code or original code if not found in conversion table
     """
-    return ISO_3166_CONVERSION.get(code, code)
+    converted = ISO_3166_CONVERSION.get(code.upper())
+    if not converted:
+        logger.warning("No conversion found for country code: %s", code)
+        return code
+    return converted
 
 
-def merge_lot_country(release_json, lot_country_data) -> None:
+def merge_lot_country(
+    release_json: dict[str, Any], lot_country_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge country code data into the release JSON.
+
+    Updates or creates delivery addresses with country information for each lot.
+    Preserves existing address data while adding/updating country codes.
+
+    Args:
+        release_json: The target release JSON to update
+        lot_country_data: The source data containing country codes to merge
+
+    Returns:
+        None
+    """
     if not lot_country_data:
         logger.warning("No Lot Country data to merge")
         return

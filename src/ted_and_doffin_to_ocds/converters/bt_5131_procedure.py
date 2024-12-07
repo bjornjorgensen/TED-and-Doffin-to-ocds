@@ -1,58 +1,88 @@
-# converters/bt_5131_procedure.py
-
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+NAMESPACES = {
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+}
 
-def parse_place_performance_city_procedure(xml_content):
+
+def parse_place_performance_city_procedure(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse place performance city (BT-5131) from XML content.
+
+    Gets city information for each delivery address. Creates/updates
+    corresponding Address objects in the tender.deliveryAddresses array.
+
+    Args:
+        xml_content: XML content as string or bytes containing procurement data
+
+    Returns:
+        Dictionary containing tender delivery addresses or None if no data found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
 
-    result = {"tender": {"deliveryAddresses": []}}
+    try:
+        root = etree.fromstring(xml_content)
+        result = {"tender": {"deliveryAddresses": []}}
 
-    cities = root.xpath(
-        "//cac:ProcurementProject/cac:RealizedLocation/cac:Address/cbc:CityName/text()",
-        namespaces=namespaces,
-    )
+        cities = root.xpath(
+            "//cac:ProcurementProject/cac:RealizedLocation/cac:Address/cbc:CityName/text()",
+            namespaces=NAMESPACES,
+        )
 
-    for city in cities:
-        result["tender"]["deliveryAddresses"].append({"locality": city})
+        for city in cities:
+            if city.strip():
+                result["tender"]["deliveryAddresses"].append({"locality": city.strip()})
 
-    return result if result["tender"]["deliveryAddresses"] else None
+        if result["tender"]["deliveryAddresses"]:
+            return result
+
+    except Exception:
+        logger.exception("Error parsing place performance city")
+        return None
+
+    return None
 
 
 def merge_place_performance_city_procedure(
-    release_json,
-    place_performance_city_procedure_data,
+    release_json: dict[str, Any],
+    place_performance_city_data: dict[str, Any] | None,
 ) -> None:
-    if not place_performance_city_procedure_data:
+    """
+    Merge city data into the release JSON.
+
+    Updates the tender.deliveryAddresses array in release_json with new cities,
+    preserving existing address data while adding/updating localities.
+
+    Args:
+        release_json: The target release JSON to update
+        place_performance_city_data: The source data containing cities to merge
+
+    Returns:
+        None
+    """
+    if not place_performance_city_data:
         logger.warning("No Place Performance City procedure data to merge")
         return
 
-    tender_delivery_addresses = release_json.setdefault("tender", {}).setdefault(
+    existing_addresses = release_json.setdefault("tender", {}).setdefault(
         "deliveryAddresses",
         [],
     )
 
-    for new_address in place_performance_city_procedure_data["tender"][
-        "deliveryAddresses"
-    ]:
+    for new_address in place_performance_city_data["tender"]["deliveryAddresses"]:
         matching_address = next(
             (
                 addr
-                for addr in tender_delivery_addresses
+                for addr in existing_addresses
                 if addr.get("locality") == new_address["locality"]
             ),
             None,
@@ -60,9 +90,9 @@ def merge_place_performance_city_procedure(
         if matching_address:
             matching_address.update(new_address)
         else:
-            tender_delivery_addresses.append(new_address)
+            existing_addresses.append(new_address)
 
     logger.info(
         "Merged Place Performance City procedure data for %d addresses",
-        len(place_performance_city_procedure_data["tender"]["deliveryAddresses"]),
+        len(place_performance_city_data["tender"]["deliveryAddresses"]),
     )

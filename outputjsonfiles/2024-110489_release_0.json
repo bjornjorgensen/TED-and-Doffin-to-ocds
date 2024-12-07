@@ -1,7 +1,7 @@
 {
   "id": "8791620e-39a1-435d-985a-bee33825e3f4",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-331bc8df-b292-4dc3-a62d-33c62dac4cc4",
+  "ocid": "ocds-abcd1234-dc152816-48c2-4bb3-96a7-2acd23bf6041",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -74,6 +74,41 @@
     "contract"
   ],
   "date": "2024-07-04T12:29:33+00:00",
+  "awards": [
+    {
+      "id": "RES-0001",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 95000000.0,
+        "currency": "NOK"
+      }
+    },
+    {
+      "id": "CON-0001",
+      "buyers": [
+        {
+          "id": "ORG-0001"
+        }
+      ],
+      "relatedBids": [
+        "TEN-0004",
+        "TEN-0001",
+        "TEN-0013",
+        "TEN-0006",
+        "TEN-0008",
+        "TEN-0011",
+        "TEN-0010",
+        "TEN-0012",
+        "TEN-0007",
+        "TEN-0002",
+        "TEN-0005",
+        "TEN-0003",
+        "TEN-0009"
+      ]
+    }
+  ],
   "bids": {
     "details": [
       {
@@ -321,44 +356,7 @@
     }
   ],
   "language": "no",
-  "awards": [
-    {
-      "id": "RES-0001",
-      "value": {
-        "amount": 95000000.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
-      ]
-    },
-    {
-      "id": "CON-0001",
-      "buyers": [
-        {
-          "id": "ORG-0001"
-        }
-      ],
-      "relatedBids": [
-        "TEN-0001",
-        "TEN-0002",
-        "TEN-0003",
-        "TEN-0004",
-        "TEN-0005",
-        "TEN-0006",
-        "TEN-0007",
-        "TEN-0008",
-        "TEN-0009",
-        "TEN-0010",
-        "TEN-0011",
-        "TEN-0012",
-        "TEN-0013"
-      ]
-    }
-  ],
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

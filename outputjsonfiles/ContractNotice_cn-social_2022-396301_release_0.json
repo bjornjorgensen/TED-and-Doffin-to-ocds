@@ -1,7 +1,7 @@
 {
   "id": "2022-396301",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-41780302-20fa-40ed-8639-61f17d9f81c7",
+  "ocid": "ocds-abcd1234-9d5d8b3c-3dfc-4bf2-be1f-32a76b956530",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -90,8 +90,7 @@
     "value": {
       "amount": 17000000.0,
       "currency": "NOK"
-    },
-    "deliveryAddresses": []
+    }
   },
   "tag": [
     "tender"
@@ -149,9 +148,7 @@
   ],
   "description": "Mercell kunngjøring: https://opic.com/id/afwjuxxltt",
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

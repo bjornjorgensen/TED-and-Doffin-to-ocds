@@ -1,7 +1,7 @@
 {
   "id": "2023-698775",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-36e80bbb-ff81-4a19-bbca-f0d453c77169",
+  "ocid": "ocds-abcd1234-bc61a837-e7ae-4f60-a3a8-3c2f87a2d143",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -166,8 +166,8 @@
       },
       "roles": [
         "processContactPoint",
-        "submissionReceiptBody",
-        "buyer"
+        "buyer",
+        "submissionReceiptBody"
       ],
       "address": {
         "streetAddress": "Meierigata 17",
@@ -190,9 +190,7 @@
   ],
   "description": "Siste frist for spørsmål til konkurransegrunnlaget er satt til fredag 16.06.2023 kl. 14:00.",
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

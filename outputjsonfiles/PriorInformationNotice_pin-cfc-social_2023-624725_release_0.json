@@ -1,7 +1,7 @@
 {
   "id": "2023-624725",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ae7716ac-5a51-4ceb-bc8c-68cf67d25fff",
+  "ocid": "ocds-abcd1234-9bcc0e94-fbb2-464a-8ecb-39d8862f049a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -162,9 +162,7 @@
   ],
   "description": "Mercell kunngjøring: https://opic.com/id/afxgligahz",
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

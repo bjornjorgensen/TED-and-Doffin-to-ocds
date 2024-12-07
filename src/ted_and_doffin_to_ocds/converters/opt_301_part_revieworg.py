@@ -1,13 +1,37 @@
 # converters/opt_301_part_revieworg.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def part_parse_review_organization(xml_content):
+def parse_review_organization_part(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse review organization references from parts.
+
+    Identifies organizations that serve as review bodies.
+    Adds reviewBody role to identified organizations.
+
+    Args:
+        xml_content: XML content containing part data
+
+    Returns:
+        Optional[Dict]: Dictionary containing parties with roles, or None if no data.
+        Example structure:
+        {
+            "parties": [
+                {
+                    "id": "org_id",
+                    "roles": ["reviewBody"]
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -30,7 +54,20 @@ def part_parse_review_organization(xml_content):
     return result
 
 
-def part_merge_review_organization(release_json, review_organization_data) -> None:
+def merge_review_organization_part(
+    release_json: dict[str, Any], review_organization_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge review organization data from parts into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        review_organization_data: Review organization data containing roles
+
+    Effects:
+        Updates the parties section of release_json with reviewBody roles,
+        merging with existing party roles where applicable
+    """
     if not review_organization_data:
         logger.info("No Review Organization data to merge.")
         return

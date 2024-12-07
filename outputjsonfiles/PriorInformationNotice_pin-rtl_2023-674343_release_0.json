@@ -1,7 +1,7 @@
 {
   "id": "2023-674343",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-86fb9d90-762d-45e8-a435-b8c5b0d86065",
+  "ocid": "ocds-abcd1234-80b6fa58-3ae5-4f50-bc13-c90aa1b18e13",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -97,8 +97,7 @@
     "value": {
       "amount": 9700000.0,
       "currency": "NOK"
-    },
-    "deliveryAddresses": []
+    }
   },
   "tag": [
     "tender"
@@ -135,10 +134,10 @@
         "email": "riik@kongsvinger.kommune.no"
       },
       "roles": [
-        "processContactPoint",
+        "wholesaleBuyer",
         "leadBuyer",
-        "buyer",
-        "wholesaleBuyer"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Rådhusplassen 3",
@@ -606,57 +605,7 @@
     }
   ],
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    },
-    {
-      "id": "ORG-0002"
-    },
-    {
-      "id": "ORG-0003"
-    },
-    {
-      "id": "ORG-0004"
-    },
-    {
-      "id": "ORG-0005"
-    },
-    {
-      "id": "ORG-0006"
-    },
-    {
-      "id": "ORG-0007"
-    },
-    {
-      "id": "ORG-0008"
-    },
-    {
-      "id": "ORG-0009"
-    },
-    {
-      "id": "ORG-0010"
-    },
-    {
-      "id": "ORG-0011"
-    },
-    {
-      "id": "ORG-0012"
-    },
-    {
-      "id": "ORG-0013"
-    },
-    {
-      "id": "ORG-0014"
-    },
-    {
-      "id": "ORG-0015"
-    },
-    {
-      "id": "ORG-0016"
-    },
-    {
-      "id": "ORG-0017"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

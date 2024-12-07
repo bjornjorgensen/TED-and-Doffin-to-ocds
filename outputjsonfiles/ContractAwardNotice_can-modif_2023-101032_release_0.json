@@ -1,7 +1,7 @@
 {
   "id": "be2cd071-e143-4fc8-bc3b-7f1ec1b4141f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c6d4be3e-582a-491d-98cf-1ee0423e36e4",
+  "ocid": "ocds-abcd1234-563e5812-1b31-4bd5-af51-3f0705b1f4d4",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -59,6 +59,21 @@
     "contractUpdate"
   ],
   "date": "2023-11-15T12:42:43+00:00",
+  "awards": [
+    {
+      "id": "RES-0001",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "value": {
+        "amount": 305250.0,
+        "currency": "NOK"
+      },
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
   "bids": {
     "details": [
       {
@@ -91,7 +106,7 @@
       ],
       "amendments": [
         {
-          "id": "f6b35946-7658-4537-a349-05c0fc743af7",
+          "id": "7c60f571-a030-4f64-9332-693642b46833",
           "rationaleClassifications": [
             {
               "id": "mod-cir",
@@ -101,11 +116,11 @@
           ]
         },
         {
-          "id": "b7aae7e1-cb96-49a5-a9d6-94e415be0dc9",
+          "id": "294dd2c0-86ce-4626-a9e2-2c62e3937ebe",
           "rationale": "Oppdragsgiver kunne ikke forutse at dagens Ålesund kommune ville bli vedtatt delt i to nye kommuner, heretter kalt Ålesund 2024 og Haram 2024. Anskaffelsens overordnede karakter blir ikke endret (1.), og den enkelte prisøkningen overstiger ikke 50 prosent av den opprinnelige kontraktsverdien (2.). Oppdragsgiver kunngjør endringene (3.)."
         },
         {
-          "id": "e3aa7099-4dcc-4d8f-9d06-fd35d90aae36",
+          "id": "4047e786-a2e5-4ad2-8dd6-a9519b1c5d9f",
           "description": "I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d. Ålesund kommunes eksisterende avtale med Visma Enterprise AS vedrørende Visma FlyVo videreføres i Ålesund 2024 og Haram 2024. Det er inngått et endringsbilag til eksisterende kontrakt som beskriver de nødvendige endringene i kontrakten som følge av kommunedelingen. Av opprinnelig kontraktsverdi, etter avtalefestet KPI-justering, utgjør nødvendige engangskostnader direkte knyttet til kommunedelingen 10 %. Årlig pris for bruksrett (fast pris pr. flyktning og pr. elev) endres ikke (kun avhengig av antall flyktninger og antall elever). "
         }
       ],
@@ -184,24 +199,7 @@
   ],
   "description": "Henvisning til opprinnelige kunngjøringer: TED: 2019/S 164-403922, Doffin: 2019-366488. Reference to original announcements: TED: 2019/S 164-403922, Doffin: 2019-366488.",
   "language": "no",
-  "awards": [
-    {
-      "id": "RES-0001",
-      "value": {
-        "amount": 305250.0,
-        "currency": "NOK"
-      },
-      "relatedLots": [
-        "LOT-0000"
-      ],
-      "relatedBids": [
-        "TEN-0001"
-      ]
-    }
-  ],
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

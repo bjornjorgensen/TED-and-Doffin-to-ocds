@@ -1,7 +1,7 @@
 {
   "id": "2022-927623",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7d21e520-2eb1-4041-9c04-be1605fb0ef3",
+  "ocid": "ocds-abcd1234-091d5480-9377-47df-ab6a-20a4388e91cc",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -236,11 +236,11 @@
   "awards": [
     {
       "id": "RES-0001",
-      "status": "active",
-      "statusDetails": "At least one winner was chosen.",
       "relatedLots": [
         "MISSING"
       ],
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
       "relatedBids": [
         "TEN-0001",
         "TEN-0002"
@@ -306,9 +306,7 @@
       }
     ]
   },
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

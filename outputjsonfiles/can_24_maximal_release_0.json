@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-bd202f27-f4d9-4ed7-a6ce-c50656748e20",
+  "ocid": "ocds-abcd1234-2a953416-e461-49f3-b40b-2375445253ae",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -151,8 +151,8 @@
       {
         "id": "GLO-0001",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "title": "Title ---",
         "identifiers": [
@@ -335,8 +335,8 @@
         "id": "FiscalDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "publisher": {
           "id": "ORG-0002"
@@ -346,8 +346,8 @@
         "id": "EnvDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "publisher": {
           "id": "ORG-0003"
@@ -357,8 +357,8 @@
         "id": "EmplDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "publisher": {
           "id": "ORG-0004"
@@ -957,6 +957,69 @@
       ]
     }
   ],
+  "awards": [
+    {
+      "id": "RES-0001",
+      "relatedLots": [
+        "LOT-0001"
+      ],
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "estimatedValue": {
+        "amount": 9000000.0,
+        "currency": "EUR"
+      },
+      "maximumValue": {
+        "amount": 9999999.99,
+        "currency": "EUR"
+      },
+      "value": {
+        "amount": 9999999.99,
+        "currency": "EUR"
+      },
+      "items": [
+        {
+          "id": "1",
+          "additionalClassifications": [
+            {
+              "id": "oth-serv-contr",
+              "scheme": "eu-cvd-contract-type",
+              "description": "Other service contract"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "RES-0002",
+      "relatedLots": [
+        "LOT-0002"
+      ],
+      "status": "unsuccessful",
+      "statusDetails": "All tenders, requests to participate or projects were withdrawn or found inadmissible"
+    },
+    {
+      "id": "CON-0001",
+      "buyers": [
+        {
+          "id": "ORG-0001"
+        }
+      ]
+    },
+    {
+      "id": "CON-0002",
+      "buyers": [
+        {
+          "id": "ORG-0001"
+        }
+      ],
+      "relatedBids": [
+        "TEN-0001",
+        "TEN-0003",
+        "TEN-0002"
+      ]
+    }
+  ],
   "bids": {
     "details": [
       {
@@ -1102,69 +1165,6 @@
       }
     ]
   },
-  "awards": [
-    {
-      "id": "RES-0001",
-      "status": "active",
-      "statusDetails": "At least one winner was chosen.",
-      "relatedLots": [
-        "LOT-0001"
-      ],
-      "estimatedValue": {
-        "amount": 9000000.0,
-        "currency": "EUR"
-      },
-      "maximumValue": {
-        "amount": 9999999.99,
-        "currency": "EUR"
-      },
-      "value": {
-        "amount": 9999999.99,
-        "currency": "EUR"
-      },
-      "items": [
-        {
-          "id": "1",
-          "additionalClassifications": [
-            {
-              "id": "oth-serv-contr",
-              "scheme": "eu-cvd-contract-type",
-              "description": "Other service contract"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "RES-0002",
-      "status": "unsuccessful",
-      "statusDetails": "All tenders, requests to participate or projects were withdrawn or found inadmissible",
-      "relatedLots": [
-        "LOT-0002"
-      ]
-    },
-    {
-      "id": "CON-0001",
-      "buyers": [
-        {
-          "id": "ORG-0001"
-        }
-      ]
-    },
-    {
-      "id": "CON-0002",
-      "buyers": [
-        {
-          "id": "ORG-0001"
-        }
-      ],
-      "relatedBids": [
-        "TEN-0001",
-        "TEN-0002",
-        "TEN-0003"
-      ]
-    }
-  ],
   "contracts": [
     {
       "id": "CON-0001",
@@ -1277,9 +1277,7 @@
     }
   ],
   "language": "en",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

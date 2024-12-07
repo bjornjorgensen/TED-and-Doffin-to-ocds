@@ -1,13 +1,40 @@
 # converters/opt_321_tender.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_tender_technical_identifier(xml_content):
+def parse_tender_technical_identifier(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse tender technical identifiers from lot tenders.
+
+    For each lot tender:
+    - Gets tender ID
+    - Creates basic bid entries
+    - Skips bids that already exist
+
+    Args:
+        xml_content: XML content containing tender data
+
+    Returns:
+        Optional[Dict]: Dictionary containing bids with IDs, or None if no data.
+        Example structure:
+        {
+            "bids": {
+                "details": [
+                    {
+                        "id": "tender_id"
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -39,8 +66,20 @@ def parse_tender_technical_identifier(xml_content):
 
 
 def merge_tender_technical_identifier(
-    release_json, tender_technical_identifier_data
+    release_json: dict[str, Any],
+    tender_technical_identifier_data: dict[str, Any] | None,
 ) -> None:
+    """
+    Merge tender technical identifier data into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        tender_technical_identifier_data: Tender data containing bid identifiers
+
+    Effects:
+        Updates the bids.details section of release_json with new bids,
+        skipping any that already exist
+    """
     if not tender_technical_identifier_data:
         logger.info("No Tender Technical Identifier data to merge.")
         return

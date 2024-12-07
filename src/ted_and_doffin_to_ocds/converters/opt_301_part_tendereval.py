@@ -1,13 +1,35 @@
 # converters/opt_301_part_tendereval.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def part_parse_tender_evaluator(xml_content):
+def parse_tender_evaluator_part(xml_content: str | bytes) -> dict[str, Any] | None:
+    """
+    Parse tender evaluator references from parts.
+
+    Identifies organizations that serve as evaluation bodies.
+    Adds evaluationBody role to identified organizations.
+
+    Args:
+        xml_content: XML content containing part data
+
+    Returns:
+        Optional[Dict]: Dictionary containing parties with roles, or None if no data.
+        Example structure:
+        {
+            "parties": [
+                {
+                    "id": "org_id",
+                    "roles": ["evaluationBody"]
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -30,7 +52,20 @@ def part_parse_tender_evaluator(xml_content):
     return result
 
 
-def part_merge_tender_evaluator(release_json, tender_evaluator_data) -> None:
+def merge_tender_evaluator_part(
+    release_json: dict[str, Any], tender_evaluator_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge tender evaluator data from parts into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        tender_evaluator_data: Evaluator data containing organizations and roles
+
+    Effects:
+        Updates the parties section of release_json with evaluationBody roles,
+        merging with existing party roles where applicable
+    """
     if not tender_evaluator_data:
         logger.info("No Tender Evaluator data to merge.")
         return

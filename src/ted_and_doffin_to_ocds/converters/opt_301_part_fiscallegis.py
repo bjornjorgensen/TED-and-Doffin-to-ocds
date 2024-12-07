@@ -1,13 +1,45 @@
-# converters/opt_301_part_fiscallegis.py
-
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_fiscal_legislation_org_reference(xml_content):
+def parse_fiscal_legislation_org_part(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse fiscal legislation organization references from parts.
+
+    For each fiscal legislation document:
+    - Gets document publisher organization ID
+    - Adds informationService role to publisher organizations
+    - Links documents to publishers
+
+    Args:
+        xml_content: XML content containing part data
+
+    Returns:
+        Optional[Dict]: Dictionary containing parties and documents, or None if no data.
+        Example structure:
+        {
+            "parties": [
+                {
+                    "id": "org_id",
+                    "roles": ["informationService"]
+                }
+            ],
+            "tender": {
+                "documents": [
+                    {
+                        "id": "doc_id",
+                        "publisher": {"id": "org_id"}
+                    }
+                ]
+            }
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -43,7 +75,21 @@ def parse_fiscal_legislation_org_reference(xml_content):
     return result if (result["parties"] or result["tender"]["documents"]) else None
 
 
-def merge_fiscal_legislation_org_reference(release_json, parsed_data) -> None:
+def merge_fiscal_legislation_org_part(
+    release_json: dict[str, Any], parsed_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge fiscal legislation organization data from parts into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        parsed_data: Fiscal legislation data containing organizations and documents
+
+    Effects:
+        - Updates parties with informationService roles
+        - Updates documents with publisher references
+        - Maintains existing data while adding new information
+    """
     if not parsed_data:
         return
 

@@ -1,87 +1,128 @@
 # converters/opt_100_contract.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+NAMESPACES = {
+    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+    "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+    "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+    "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+    "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+}
 
-def parse_framework_notice_identifier(xml_content):
+
+def parse_framework_notice_identifier(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse framework notice identifier information (OPT-100) from XML content.
+
+    Gets notice reference information from settled contracts and creates
+    corresponding RelatedProcess objects with framework relationships.
+
+    Args:
+        xml_content: XML content as string or bytes containing procurement data
+
+    Returns:
+        Dictionary containing contracts with related processes or None if no data found
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-    }
 
-    # Check if the relevant XPath exists
-    relevant_xpath = (
-        "//efac:NoticeResult/efac:SettledContract/cac:NoticeDocumentReference/cbc:ID"
-    )
-    if not root.xpath(relevant_xpath, namespaces=namespaces):
-        logger.info(
-            "No framework notice identifier data found. Skipping parse_framework_notice_identifier."
+    try:
+        root = etree.fromstring(xml_content)
+        result = {"contracts": []}
+
+        settled_contracts = root.xpath(
+            "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/"
+            "efext:EformsExtension/efac:NoticeResult/efac:SettledContract",
+            namespaces=NAMESPACES,
         )
+
+        for contract in settled_contracts:
+            try:
+                contract_id = contract.xpath(
+                    "cbc:ID[@schemeName='contract']/text()",
+                    namespaces=NAMESPACES,
+                )[0]
+
+                notice_ref = contract.xpath(
+                    "cac:NoticeDocumentReference/cbc:ID",
+                    namespaces=NAMESPACES,
+                )
+
+                if contract_id and notice_ref:
+                    notice_id = notice_ref[0]
+                    scheme = notice_id.get("schemeName", "")
+                    identifier = notice_id.text
+
+                    contract_data = {
+                        "id": contract_id,
+                        "relatedProcesses": [
+                            {
+                                "id": "1",
+                                "scheme": "ocid" if scheme == "ocds" else scheme,
+                                "identifier": identifier,
+                                "relationship": ["framework"],
+                            }
+                        ],
+                    }
+
+                    # Find award ID through LotResult
+                    award_id = root.xpath(
+                        f"/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/"
+                        f"efext:EformsExtension/efac:NoticeResult/efac:LotResult"
+                        f"[efac:SettledContract/cbc:ID[@schemeName='contract']/text()='{contract_id}']"
+                        f"/cbc:ID[@schemeName='result']/text()",
+                        namespaces=NAMESPACES,
+                    )
+                    if award_id:
+                        contract_data["awardID"] = award_id[0]
+
+                    result["contracts"].append(contract_data)
+
+            except (IndexError, AttributeError) as e:
+                logger.warning("Skipping incomplete contract data: %s", e)
+                continue
+
+        if result["contracts"]:
+            return result
+
+    except Exception:
+        logger.exception("Error parsing framework notice identifiers")
         return None
 
-    result = {"contracts": []}
-
-    settled_contracts = root.xpath(
-        "//efac:NoticeResult/efac:SettledContract", namespaces=namespaces
-    )
-    for contract in settled_contracts:
-        contract_id = contract.xpath(
-            "cbc:ID[@schemeName='contract']/text()", namespaces=namespaces
-        )
-        notice_ref = contract.xpath(
-            "cac:NoticeDocumentReference/cbc:ID", namespaces=namespaces
-        )
-
-        if contract_id and notice_ref:
-            contract_data = {
-                "id": contract_id[0],
-                "relatedProcesses": [
-                    {
-                        "id": "1",
-                        "scheme": notice_ref[0].get("schemeName", ""),
-                        "identifier": notice_ref[0].text,
-                        "relationship": ["framework"],
-                    }
-                ],
-            }
-
-            # Find the corresponding LotResult
-            lot_result = root.xpath(
-                f"//efac:NoticeResult/efac:LotResult[efac:SettledContract/cbc:ID[@schemeName='contract']/text()='{contract_id[0]}']",
-                namespaces=namespaces,
-            )
-            if lot_result:
-                award_id = lot_result[0].xpath(
-                    "cbc:ID[@schemeName='result']/text()", namespaces=namespaces
-                )
-                if award_id:
-                    contract_data["awardID"] = award_id[0]
-
-            result["contracts"].append(contract_data)
-
-    return result if result["contracts"] else None
+    return None
 
 
 def merge_framework_notice_identifier(
-    release_json, framework_notice_identifier_data
+    release_json: dict[str, Any], framework_data: dict[str, Any] | None
 ) -> None:
-    if not framework_notice_identifier_data:
+    """
+    Merge framework notice identifier information into the release JSON.
+
+    Updates or creates contracts with related processes information.
+    Preserves existing contract data while adding/updating related processes.
+
+    Args:
+        release_json: The target release JSON to update
+        framework_data: The source data containing framework references to merge
+
+    Returns:
+        None
+    """
+    if not framework_data:
         logger.info("No framework notice identifier data to merge")
         return
 
     existing_contracts = release_json.setdefault("contracts", [])
 
-    for new_contract in framework_notice_identifier_data["contracts"]:
+    for new_contract in framework_data["contracts"]:
         existing_contract = next(
             (
                 contract
@@ -115,5 +156,5 @@ def merge_framework_notice_identifier(
 
     logger.info(
         "Merged framework notice identifier data for %d contracts",
-        len(framework_notice_identifier_data["contracts"]),
+        len(framework_data["contracts"]),
     )

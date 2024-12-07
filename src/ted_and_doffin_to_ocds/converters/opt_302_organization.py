@@ -1,13 +1,41 @@
-# converters/opt_302_organization.py
-
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_beneficial_owner_reference(xml_content):
+def parse_beneficial_owner_reference(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse beneficial owner references from organizations.
+
+    For each organization with beneficial owners:
+    - Gets organization ID from Company/PartyIdentification
+    - Links beneficial owner IDs to organizations
+    - Creates or updates beneficialOwners arrays
+
+    Args:
+        xml_content: XML content containing organization data
+
+    Returns:
+        Optional[Dict]: Dictionary containing parties with beneficial owners, or None if no data.
+        Example structure:
+        {
+            "parties": [
+                {
+                    "id": "org_id",
+                    "beneficialOwners": [
+                        {
+                            "id": "ubo_id"
+                        }
+                    ]
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -54,7 +82,20 @@ def parse_beneficial_owner_reference(xml_content):
     return result if result["parties"] else None
 
 
-def merge_beneficial_owner_reference(release_json, parsed_data) -> None:
+def merge_beneficial_owner_reference(
+    release_json: dict[str, Any], parsed_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge beneficial owner reference data into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        parsed_data: Beneficial owner data containing organizations and owners
+
+    Effects:
+        Updates the parties section of release_json with beneficial owner references,
+        avoiding duplicate entries
+    """
     if not parsed_data:
         return
 

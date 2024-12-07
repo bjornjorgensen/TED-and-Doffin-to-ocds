@@ -1,13 +1,35 @@
 # converters/opt_301_part_tenderreceipt.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def part_parse_tender_recipient(xml_content):
+def parse_tender_recipient_part(xml_content: str | bytes) -> dict[str, Any] | None:
+    """
+    Parse tender recipient references from parts.
+
+    Identifies organizations that receive tender submissions.
+    Adds submissionReceiptBody role to identified organizations.
+
+    Args:
+        xml_content: XML content containing part data
+
+    Returns:
+        Optional[Dict]: Dictionary containing parties with roles, or None if no data.
+        Example structure:
+        {
+            "parties": [
+                {
+                    "id": "org_id",
+                    "roles": ["submissionReceiptBody"]
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -32,7 +54,20 @@ def part_parse_tender_recipient(xml_content):
     return result
 
 
-def part_merge_tender_recipient(release_json, tender_recipient_data) -> None:
+def merge_tender_recipient_part(
+    release_json: dict[str, Any], tender_recipient_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge tender recipient data from parts into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        tender_recipient_data: Recipient data containing organizations and roles
+
+    Effects:
+        Updates the parties section of release_json with submissionReceiptBody roles,
+        merging with existing party roles where applicable
+    """
     if not tender_recipient_data:
         logger.info("No Tender Recipient data to merge.")
         return

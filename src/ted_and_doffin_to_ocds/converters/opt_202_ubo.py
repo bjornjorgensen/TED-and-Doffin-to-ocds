@@ -1,13 +1,41 @@
 # converters/opt_202_ubo.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_beneficial_owner_identifier(xml_content):
+def parse_beneficial_owner_identifier(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse ultimate beneficial owner (UBO) identifiers from XML content.
+
+    Links UBOs to their organizations through organization IDs.
+    Only includes UBOs that have a technical identifier.
+
+    Args:
+        xml_content: XML content containing UBO data
+
+    Returns:
+        Optional[Dict]: Dictionary containing parties with beneficial owners, or None if no data.
+        Example structure:
+        {
+            "parties": [
+                {
+                    "id": "org_id",
+                    "beneficialOwners": [
+                        {
+                            "id": "ubo_id"
+                        }
+                    ]
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -54,7 +82,20 @@ def parse_beneficial_owner_identifier(xml_content):
     return result if result["parties"] else None
 
 
-def merge_beneficial_owner_identifier(release_json, ubo_data) -> None:
+def merge_beneficial_owner_identifier(
+    release_json: dict[str, Any], ubo_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge beneficial owner identifier data into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        ubo_data: UBO data containing identifiers
+
+    Effects:
+        Updates the parties section of release_json with beneficial owner information,
+        adding new UBOs where they don't already exist
+    """
     if not ubo_data:
         logger.info("No Beneficial Owner technical identifier data to merge")
         return

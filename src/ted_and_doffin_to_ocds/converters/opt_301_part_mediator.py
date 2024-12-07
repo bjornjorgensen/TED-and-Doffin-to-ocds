@@ -1,13 +1,33 @@
-# converters/opt_301_part_mediator.py
-
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def part_parse_mediator(xml_content):
+def parse_mediator_part(xml_content: str | bytes) -> dict[str, Any] | None:
+    """
+    Parse mediator references from procurement project parts.
+
+    Identifies organizations that serve as mediation bodies.
+    Adds mediationBody role to identified organizations.
+
+    Args:
+        xml_content: XML content containing part data
+
+    Returns:
+        Optional[Dict]: Dictionary containing parties with roles, or None if no data.
+        Example structure:
+        {
+            "parties": [
+                {
+                    "id": "org_id",
+                    "roles": ["mediationBody"]
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -30,7 +50,20 @@ def part_parse_mediator(xml_content):
     return result
 
 
-def part_merge_mediator(release_json, mediator_data) -> None:
+def merge_mediator_part(
+    release_json: dict[str, Any], mediator_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge mediator data from parts into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        mediator_data: Mediator data containing organizations and roles
+
+    Effects:
+        Updates the parties section of release_json with mediationBody roles,
+        merging with existing party roles where applicable
+    """
     if not mediator_data:
         logger.info("No Mediator data to merge.")
         return

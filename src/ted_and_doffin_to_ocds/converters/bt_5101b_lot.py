@@ -1,4 +1,4 @@
-# converters/bt_5101b_Lot.py
+# converters/bt_5101b_lot.py
 
 import logging
 from typing import Any

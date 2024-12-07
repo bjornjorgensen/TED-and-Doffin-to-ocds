@@ -1,7 +1,7 @@
 {
   "id": "2023-631333",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e97665b7-823c-4ab9-ab16-56963ae60eb2",
+  "ocid": "ocds-abcd1234-1cb21d47-39af-4a91-b5fb-29d2ff003f50",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -170,8 +170,7 @@
           }
         ]
       }
-    ],
-    "deliveryAddresses": []
+    ]
   },
   "tag": [
     "tender"
@@ -204,8 +203,8 @@
       },
       "roles": [
         "processContactPoint",
-        "submissionReceiptBody",
-        "buyer"
+        "buyer",
+        "submissionReceiptBody"
       ],
       "address": {
         "streetAddress": "P.O. Box 1817",
@@ -246,9 +245,7 @@
   ],
   "description": "The full list of utilities subscribing to UNCE can be obtained here http://achilles.no/Notices/UNCE/Annual-Notice-Jul2022.pdf",
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

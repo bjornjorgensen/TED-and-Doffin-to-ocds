@@ -1,13 +1,38 @@
 # converters/opt_322_lotresult.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_lotresult_technical_identifier(xml_content):
+def parse_lotresult_technical_identifier(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse lot result technical identifiers.
+
+    For each lot result:
+    - Gets result ID
+    - Creates basic award entries
+    - Skips awards that already exist
+
+    Args:
+        xml_content: XML content containing lot result data
+
+    Returns:
+        Optional[Dict]: Dictionary containing awards with IDs, or None if no data.
+        Example structure:
+        {
+            "awards": [
+                {
+                    "id": "result_id"
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -39,8 +64,20 @@ def parse_lotresult_technical_identifier(xml_content):
 
 
 def merge_lotresult_technical_identifier(
-    release_json, lotresult_technical_identifier_data
+    release_json: dict[str, Any],
+    lotresult_technical_identifier_data: dict[str, Any] | None,
 ) -> None:
+    """
+    Merge lot result technical identifier data into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        lotresult_technical_identifier_data: Lot result data containing award identifiers
+
+    Effects:
+        Updates the awards section of release_json with new awards,
+        skipping any that already exist
+    """
     if not lotresult_technical_identifier_data:
         logger.info("No LotResult Technical Identifier data to merge.")
         return

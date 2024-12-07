@@ -1,7 +1,7 @@
 {
   "id": "2023-665410",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-be1f1dd4-0841-4c63-a70c-d1c01aca543d",
+  "ocid": "ocds-abcd1234-951bf64b-b3d9-4d08-9698-c4f356618691",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -113,7 +113,6 @@
         ]
       }
     ],
-    "deliveryAddresses": [],
     "deliveryLocations": [
       {
         "description": "Anywhere"
@@ -157,8 +156,8 @@
       },
       "roles": [
         "processContactPoint",
-        "submissionReceiptBody",
-        "buyer"
+        "buyer",
+        "submissionReceiptBody"
       ],
       "address": {
         "streetAddress": "Postboks 2020",
@@ -184,9 +183,7 @@
     }
   ],
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

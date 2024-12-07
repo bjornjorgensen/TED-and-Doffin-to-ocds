@@ -1,7 +1,7 @@
 {
   "id": "2022-697882",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e9a6d985-92c6-40d1-a3ce-dba42eda4616",
+  "ocid": "ocds-abcd1234-0d6c4551-ca56-4cf2-83f0-21049dab433e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -158,6 +158,27 @@
       ]
     }
   ],
+  "awards": [
+    {
+      "id": "RES-0001",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "estimatedValue": {
+        "amount": 7432000.0,
+        "currency": "NOK"
+      },
+      "value": {
+        "amount": 7432000.0,
+        "currency": "NOK"
+      },
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
   "bids": {
     "details": [
       {
@@ -177,27 +198,6 @@
       }
     ]
   },
-  "awards": [
-    {
-      "id": "RES-0001",
-      "status": "active",
-      "statusDetails": "At least one winner was chosen.",
-      "relatedLots": [
-        "LOT-0000"
-      ],
-      "estimatedValue": {
-        "amount": 7432000.0,
-        "currency": "NOK"
-      },
-      "value": {
-        "amount": 7432000.0,
-        "currency": "NOK"
-      },
-      "relatedBids": [
-        "TEN-0001"
-      ]
-    }
-  ],
   "contracts": [
     {
       "id": "CON-0001",
@@ -212,9 +212,7 @@
     }
   ],
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

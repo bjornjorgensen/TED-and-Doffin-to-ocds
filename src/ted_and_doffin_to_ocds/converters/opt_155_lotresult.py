@@ -1,6 +1,7 @@
 # converters/OPT_155_LotResult.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
@@ -13,16 +14,39 @@ VEHICLE_CODES = {
 }
 
 
-def parse_vehicle_type(xml_content):
+def parse_vehicle_type(xml_content: str | bytes) -> dict[str, Any] | None:
     """
-    Parse the XML content to extract the vehicle type information for each lot result.
+    Parse vehicle type information from LotResult elements in XML content.
+
+    Only includes vehicle types where StatisticsNumeric is not 0.
+    Creates items with additionalClassifications for vehicle types.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: XML content containing LotResult data
 
     Returns:
-        dict: A dictionary containing the parsed vehicle type data.
-        None: If no relevant data is found.
+        Optional[Dict]: Dictionary containing awards with vehicle type items, or None if no data
+        Example:
+        {
+            "awards": [
+                {
+                    "id": "award_id",
+                    "items": [
+                        {
+                            "id": "1",
+                            "additionalClassifications": [
+                                {
+                                    "scheme": "vehicles",
+                                    "id": "vehicle_code",
+                                    "description": "Vehicle description"
+                                }
+                            ]
+                        }
+                    ],
+                    "relatedLots": ["lot_id"]
+                }
+            ]
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -78,16 +102,19 @@ def parse_vehicle_type(xml_content):
     return result if result["awards"] else None
 
 
-def merge_vehicle_type(release_json, vehicle_type_data) -> None:
+def merge_vehicle_type(
+    release_json: dict[str, Any], vehicle_type_data: dict[str, Any] | None
+) -> None:
     """
-    Merge the parsed vehicle type data into the main OCDS release JSON.
+    Merge vehicle type data into the release JSON.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        vehicle_type_data (dict): The parsed vehicle type data to be merged.
+        release_json: Target release JSON to update
+        vehicle_type_data: Vehicle type data containing awards with items
 
-    Returns:
-        None: The function updates the release_json in-place.
+    Effects:
+        Updates the awards section of release_json with vehicle type information,
+        merging items and related lots where awards already exist
     """
     if not vehicle_type_data:
         logger.warning("No vehicle type data to merge")

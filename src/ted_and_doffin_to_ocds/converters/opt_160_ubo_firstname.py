@@ -1,13 +1,40 @@
 # converters/opt_160_ubo_firstname.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_ubo_firstname(xml_content):
+def parse_ubo_firstname(xml_content: str | bytes) -> dict[str, Any] | None:
+    """
+    Parse ultimate beneficial owner (UBO) first names from XML content.
+
+    Extracts UBO information for each organization, linking UBOs to their organizations
+    through the organization ID.
+
+    Args:
+        xml_content: XML content containing UBO data
+
+    Returns:
+        Optional[Dict]: Dictionary containing parties with beneficial owners, or None if no data.
+        Example structure:
+        {
+            "parties": [
+                {
+                    "id": "org_id",
+                    "beneficialOwners": [
+                        {
+                            "id": "ubo_id",
+                            "name": "first_name"
+                        }
+                    ]
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -56,7 +83,20 @@ def parse_ubo_firstname(xml_content):
     return result if result["parties"] else None
 
 
-def merge_ubo_firstname(release_json, ubo_data) -> None:
+def merge_ubo_firstname(
+    release_json: dict[str, Any], ubo_data: dict[str, Any] | None
+) -> None:
+    """
+    Merge ultimate beneficial owner (UBO) first name data into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        ubo_data: UBO data containing first names
+
+    Effects:
+        Updates the parties section of release_json with beneficial owner information,
+        merging names where UBOs already exist for organizations
+    """
     if not ubo_data:
         logger.info("No UBO first name data to merge")
         return

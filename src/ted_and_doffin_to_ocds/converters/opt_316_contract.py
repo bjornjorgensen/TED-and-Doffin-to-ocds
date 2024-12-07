@@ -1,13 +1,36 @@
-# converters/opt_316_contract.py
-
 import logging
+from typing import Any
 
 from lxml import etree
 
 logger = logging.getLogger(__name__)
 
 
-def parse_contract_technical_identifier(xml_content):
+def parse_contract_technical_identifier(
+    xml_content: str | bytes,
+) -> dict[str, Any] | None:
+    """
+    Parse contract technical identifiers from settled contracts.
+
+    For each settled contract:
+    - Gets contract ID
+    - Creates basic contract entries
+    - Skips contracts that already exist
+
+    Args:
+        xml_content: XML content containing contract data
+
+    Returns:
+        Optional[Dict]: Dictionary containing contracts with IDs, or None if no data.
+        Example structure:
+        {
+            "contracts": [
+                {
+                    "id": "contract_id"
+                }
+            ]
+        }
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -39,8 +62,20 @@ def parse_contract_technical_identifier(xml_content):
 
 
 def merge_contract_technical_identifier(
-    release_json, contract_technical_identifier_data
+    release_json: dict[str, Any],
+    contract_technical_identifier_data: dict[str, Any] | None,
 ) -> None:
+    """
+    Merge contract technical identifier data into the release JSON.
+
+    Args:
+        release_json: Target release JSON to update
+        contract_technical_identifier_data: Contract data containing identifiers
+
+    Effects:
+        Updates the contracts section of release_json with new contracts,
+        skipping any that already exist
+    """
     if not contract_technical_identifier_data:
         logger.info("No Contract Technical Identifier data to merge.")
         return

@@ -1,7 +1,7 @@
 {
   "id": "2023-371675",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7e52d556-90df-4d5a-9d17-3baf5f2e4273",
+  "ocid": "ocds-abcd1234-e004f5e4-0dd3-4638-b347-3ea8ccd71b50",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -99,7 +99,6 @@
         ]
       }
     ],
-    "deliveryAddresses": [],
     "deliveryLocations": [
       {
         "description": "Anywhere"
@@ -143,8 +142,8 @@
       },
       "roles": [
         "processContactPoint",
-        "submissionReceiptBody",
-        "buyer"
+        "buyer",
+        "submissionReceiptBody"
       ],
       "address": {
         "streetAddress": "Gullhaug Torg 2",
@@ -164,9 +163,7 @@
     }
   ],
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }

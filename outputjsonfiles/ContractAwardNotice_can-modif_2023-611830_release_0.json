@@ -1,7 +1,7 @@
 {
   "id": "2023-611830",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-718406a1-c23e-4f1f-8978-9a28779c5107",
+  "ocid": "ocds-abcd1234-70a85e1c-4735-4e6d-b51f-f2ee0ebafd9b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -48,6 +48,23 @@
     "contractUpdate"
   ],
   "date": "2023-12-18T12:00:00+01:00",
+  "awards": [
+    {
+      "id": "RES-0001",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "value": {
+        "amount": 2000000.0,
+        "currency": "NOK"
+      },
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
   "bids": {
     "details": [
       {
@@ -67,23 +84,6 @@
       }
     ]
   },
-  "awards": [
-    {
-      "id": "RES-0001",
-      "status": "active",
-      "statusDetails": "At least one winner was chosen.",
-      "relatedLots": [
-        "LOT-0000"
-      ],
-      "value": {
-        "amount": 2000000.0,
-        "currency": "NOK"
-      },
-      "relatedBids": [
-        "TEN-0001"
-      ]
-    }
-  ],
   "contracts": [
     {
       "id": "CON-0001",
@@ -145,9 +145,7 @@
     }
   ],
   "language": "nb",
-  "buyer": [
-    {
-      "id": "ORG-0001"
-    }
-  ]
+  "buyer": {
+    "id": "ORG-0001"
+  }
 }
