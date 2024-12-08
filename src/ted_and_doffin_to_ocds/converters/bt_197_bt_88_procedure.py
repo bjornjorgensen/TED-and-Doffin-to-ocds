@@ -31,20 +31,46 @@ JUSTIFICATION_CODES = {
 }
 
 
-def parse_bt197_bt88_procedure_unpublished_justification_code(xml_content):
+def parse_bt197_bt88_procedure_unpublished_justification_code(
+    xml_content: str | bytes,
+) -> dict | None:
     """
     Parse the XML content to extract the unpublished justification code for the procedure features.
 
+    This function extracts BT-197 (justification code) data related to BT-88 (Procedure) from the XML.
+    It looks for FieldsPrivacy elements containing codes for why certain procedure feature information is withheld.
+
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes object.
+            Must be valid XML containing eForms namespaces and procedure data.
 
     Returns:
-        dict: A dictionary containing the parsed unpublished justification code data.
-        None: If no relevant data is found.
+        Optional[Dict]: A dictionary containing the parsed unpublished justification code data in the format:
+            {
+                "withheldInformation": [
+                    {
+                        "id": "pro-fea-{contract_id}",
+                        "rationaleClassifications": [
+                            {
+                                "scheme": "non-publication-justification",
+                                "id": "code",
+                                "description": "Description text",
+                                "uri": "URI"
+                            }
+                        ]
+                    }
+                ]
+            }
+        Returns None if no relevant data is found or if XML parsing fails.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
+    try:
+        root = etree.fromstring(xml_content)
+    except etree.XMLSyntaxError:
+        logger.exception("Failed to parse XML content")
+        return None
+
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
@@ -56,58 +82,67 @@ def parse_bt197_bt88_procedure_unpublished_justification_code(xml_content):
 
     result = {"withheldInformation": []}
 
+    # Get ContractFolderID for generating IDs
     contract_folder_id = root.xpath(
         "/*/cbc:ContractFolderID/text()",
         namespaces=namespaces,
     )
+    if not contract_folder_id:
+        logger.warning("No ContractFolderID found")
+        return None
 
-    xpath_query = (
-        "/*/cac:TenderingProcess/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
-        "/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-fea']"
-    )
+    xpath_query = "/*/cac:TenderingProcess/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-fea']/cbc:ReasonCode"
 
-    for field_privacy in root.xpath(xpath_query, namespaces=namespaces):
-        reason_code = field_privacy.xpath(
-            "cbc:ReasonCode/text()",
-            namespaces=namespaces,
+    reason_code_elements = root.xpath(xpath_query, namespaces=namespaces)
+
+    for reason_code_element in reason_code_elements:
+        code = reason_code_element.text
+        if code in JUSTIFICATION_CODES:
+            withheld_info = {
+                "id": f"pro-fea-{contract_folder_id[0]}",
+                "rationaleClassifications": [
+                    {
+                        "scheme": "non-publication-justification",
+                        "id": code,
+                        "description": JUSTIFICATION_CODES[code]["description"],
+                        "uri": JUSTIFICATION_CODES[code]["uri"],
+                    }
+                ],
+            }
+            result["withheldInformation"].append(withheld_info)
+
+    if not result["withheldInformation"]:
+        logger.debug(
+            "No unpublished justification code data found for BT-197(BT-88) Procedure"
         )
+        return None
 
-        if contract_folder_id and reason_code:
-            code = reason_code[0]
-            if code in JUSTIFICATION_CODES:
-                withheld_info = {
-                    "id": f"pro-fea-{contract_folder_id[0]}",
-                    "rationaleClassifications": [
-                        {
-                            "scheme": "eu-non-publication-justification",
-                            "id": code,
-                            "description": JUSTIFICATION_CODES[code]["description"],
-                            "uri": JUSTIFICATION_CODES[code]["uri"],
-                        },
-                    ],
-                }
-                result["withheldInformation"].append(withheld_info)
-
-    return result if result["withheldInformation"] else None
+    return result
 
 
 def merge_bt197_bt88_procedure_unpublished_justification_code(
-    release_json,
-    unpublished_justification_code_data,
+    release_json: dict,
+    unpublished_justification_code_data: dict | None,
 ) -> None:
     """
     Merge the parsed unpublished justification code data into the main OCDS release JSON.
 
+    This function updates the withheldInformation array in the release_json with justification
+    codes from unpublished fields related to procedure features.
+
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        unpublished_justification_code_data (dict): The parsed unpublished justification code data to be merged.
+        release_json: The main OCDS release JSON document to be updated.
+            Must be a mutable dictionary that may contain a withheldInformation array.
+        unpublished_justification_code_data: The parsed unpublished justification code data to be merged.
+            Should contain a withheldInformation array with objects having rationaleClassifications.
+            Can be None, in which case no changes are made.
 
     Returns:
         None: The function updates the release_json in-place.
     """
     if not unpublished_justification_code_data:
         logger.warning(
-            "No unpublished justification code data to merge for BT-197(BT-88)-procedure",
+            "No unpublished justification code data to merge for BT-197(BT-88) Procedure",
         )
         return
 
@@ -120,12 +155,11 @@ def merge_bt197_bt88_procedure_unpublished_justification_code(
         )
         if existing_item:
             existing_item.setdefault("rationaleClassifications", []).extend(
-                new_item["rationaleClassifications"],
+                new_item["rationaleClassifications"]
             )
         else:
             withheld_info.append(new_item)
 
     logger.info(
-        "Merged unpublished justification code data for BT-197(BT-88)-procedure: %d items",
-        len(unpublished_justification_code_data["withheldInformation"]),
+        "Merged unpublished justification code data for BT-197(BT-88) Procedure",
     )

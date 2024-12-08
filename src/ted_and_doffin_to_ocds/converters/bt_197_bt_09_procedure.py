@@ -31,20 +31,45 @@ NON_PUBLICATION_JUSTIFICATION = {
 }
 
 
-def bt_197_parse_unpublished_justification_code_bt_09_procedure(xml_content):
+def bt_197_parse_unpublished_justification_code_bt_09_procedure(
+    xml_content: str | bytes,
+) -> dict | None:
     """
     Parse the XML content to extract the unpublished justification code for the procedure.
 
+    This function extracts BT-197 (justification code) data related to BT-09 (Procedure) from the XML.
+    It looks for FieldsPrivacy elements containing codes for why certain information is withheld.
+
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes object.
+            Must be valid XML containing eForms namespaces and procedure data.
 
     Returns:
-        dict: A dictionary containing the parsed unpublished justification code data.
-        None: If no relevant data is found.
+        Optional[Dict]: A dictionary containing the parsed unpublished justification code data in the format:
+            {
+                "withheldInformation": [
+                    {
+                        "rationaleClassifications": [
+                            {
+                                "scheme": "non-publication-justification",
+                                "id": "code",
+                                "description": "Description text",
+                                "uri": "URI"
+                            }
+                        ]
+                    }
+                ]
+            }
+        Returns None if no relevant data is found or if XML parsing fails.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
+    try:
+        root = etree.fromstring(xml_content)
+    except etree.XMLSyntaxError:
+        logger.exception("Failed to parse XML content")
+        return None
+
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
         "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
@@ -56,15 +81,14 @@ def bt_197_parse_unpublished_justification_code_bt_09_procedure(xml_content):
 
     result = {"withheldInformation": []}
 
-    reason_code = root.xpath(
-        "//cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='CrossBorderLaw']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='cro-bor-law']/cbc:ReasonCode/text()",
-        namespaces=namespaces,
-    )
+    xpath_query = "/*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='CrossBorderLaw']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='cro-bor-law']/cbc:ReasonCode"
 
-    if reason_code:
-        code = reason_code[0]
+    reason_code_elements = root.xpath(xpath_query, namespaces=namespaces)
+
+    for reason_code_element in reason_code_elements:
+        code = reason_code_element.text
         if code in NON_PUBLICATION_JUSTIFICATION:
-            withheld_item = {
+            withheld_info = {
                 "rationaleClassifications": [
                     {
                         "scheme": "non-publication-justification",
@@ -73,30 +97,44 @@ def bt_197_parse_unpublished_justification_code_bt_09_procedure(xml_content):
                             "description"
                         ],
                         "uri": NON_PUBLICATION_JUSTIFICATION[code]["uri"],
-                    },
-                ],
+                    }
+                ]
             }
-            result["withheldInformation"].append(withheld_item)
+            result["withheldInformation"].append(withheld_info)
 
-    return result if result["withheldInformation"] else None
+    if not result["withheldInformation"]:
+        logger.debug(
+            "No unpublished justification code data found for BT-197(BT-09) Procedure"
+        )
+        return None
+
+    return result
 
 
 def bt_197_merge_unpublished_justification_code_bt_09_procedure(
-    release_json,
-    unpublished_justification_code_data,
+    release_json: dict,
+    unpublished_justification_code_data: dict | None,
 ) -> None:
     """
     Merge the parsed unpublished justification code data into the main OCDS release JSON.
 
+    This function updates the withheldInformation array in the release_json with justification
+    codes from unpublished fields related to procedure information.
+
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        unpublished_justification_code_data (dict): The parsed unpublished justification code data to be merged.
+        release_json: The main OCDS release JSON document to be updated.
+            Must be a mutable dictionary that may contain a withheldInformation array.
+        unpublished_justification_code_data: The parsed unpublished justification code data to be merged.
+            Should contain a withheldInformation array with objects having rationaleClassifications.
+            Can be None, in which case no changes are made.
 
     Returns:
         None: The function updates the release_json in-place.
     """
     if not unpublished_justification_code_data:
-        logger.warning("No unpublished justification code data to merge")
+        logger.warning(
+            "No unpublished justification code data to merge for BT-197(BT-09) Procedure",
+        )
         return
 
     withheld_information = release_json.setdefault("withheldInformation", [])
@@ -109,4 +147,6 @@ def bt_197_merge_unpublished_justification_code_bt_09_procedure(
         else:
             withheld_information.append(item)
 
-    logger.info("Merged unpublished justification code data")
+    logger.info(
+        "Merged unpublished justification code data for BT-197(BT-09) Procedure",
+    )

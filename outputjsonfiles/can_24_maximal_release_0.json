@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6393f384-4785-48f6-88af-2347427432d8",
+  "ocid": "ocds-abcd1234-f71f94f0-601f-42bf-8f5d-5c064e8a5ec5",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -749,8 +749,8 @@
         "locality": "Luxembourg"
       },
       "roles": [
-        "tenderer",
-        "leadTenderer"
+        "leadTenderer",
+        "tenderer"
       ]
     },
     {
@@ -1014,9 +1014,9 @@
         }
       ],
       "relatedBids": [
-        "TEN-0002",
         "TEN-0003",
-        "TEN-0001"
+        "TEN-0001",
+        "TEN-0002"
       ]
     }
   ],

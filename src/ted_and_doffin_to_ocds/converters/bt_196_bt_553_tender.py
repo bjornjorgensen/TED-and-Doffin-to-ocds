@@ -7,20 +7,38 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_bt196_bt553_tender(xml_content):
+def parse_bt196_bt553_tender(xml_content: str | bytes) -> dict | None:
     """
     Parse the XML content to extract the unpublished justification description for the tender.
 
+    This function extracts BT-196 (justification) data related to BT-553 (Tender) from the XML.
+    It looks for FieldsPrivacy elements containing reasons why certain subcontracting information is withheld.
+
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as a string or bytes object.
+            Must be valid XML containing eForms namespaces and tender subcontracting data.
 
     Returns:
-        dict: A dictionary containing the parsed unpublished justification description data.
-        None: If no relevant data is found.
+        Optional[Dict]: A dictionary containing the parsed unpublished justification data in the format:
+            {
+                "withheldInformation": [
+                    {
+                        "id": "sub-val-{lot_tender_id}",
+                        "rationale": "Justification text"
+                    },
+                    ...
+                ]
+            }
+        Returns None if no relevant data is found or if XML parsing fails.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
+    try:
+        root = etree.fromstring(xml_content)
+    except etree.XMLSyntaxError:
+        logger.exception("Failed to parse XML content")
+        return None
+
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
         "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
@@ -32,37 +50,62 @@ def parse_bt196_bt553_tender(xml_content):
 
     result = {"withheldInformation": []}
 
-    xpath_query = (
-        "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
-        "/efext:EformsExtension/efac:noticeResult/efac:LotTender"
-        "/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']"
-        "/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val']"
-        "/efbc:ReasonDescription"
-    )
+    xpath_query = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val']"
 
-    reason_descriptions = root.xpath(xpath_query, namespaces=namespaces)
+    privacy_elements = root.xpath(xpath_query, namespaces=namespaces)
 
-    for description in reason_descriptions:
-        withheld_info = {"field": "sub-val", "rationale": description.text}
-        result["withheldInformation"].append(withheld_info)
+    for privacy_element in privacy_elements:
+        # Get the LotTender ID by traversing back up the tree
+        lot_tender = privacy_element.xpath(
+            "ancestor::efac:LotTender",
+            namespaces=namespaces,
+        )[0]
+        lot_tender_id = lot_tender.xpath("cbc:ID/text()", namespaces=namespaces)[0]
 
-    return result if result["withheldInformation"] else None
+        reason_description = privacy_element.xpath(
+            "efbc:ReasonDescription/text()",
+            namespaces=namespaces,
+        )
+
+        if reason_description:
+            withheld_info = {
+                "id": f"sub-val-{lot_tender_id}",
+                "rationale": reason_description[0],
+            }
+            result["withheldInformation"].append(withheld_info)
+
+    if not result["withheldInformation"]:
+        logger.debug(
+            "No unpublished justification data found for BT-196(BT-553) Tender"
+        )
+        return None
+
+    return result
 
 
-def merge_bt196_bt553_tender(release_json, unpublished_justification_data) -> None:
+def merge_bt196_bt553_tender(
+    release_json: dict,
+    unpublished_justification_data: dict | None,
+) -> None:
     """
-    Merge the parsed unpublished justification description data into the main OCDS release JSON.
+    Merge the parsed unpublished justification data into the main OCDS release JSON.
+
+    This function updates the withheldInformation array in the release_json with justification
+    data from unpublished fields related to tender subcontracting information.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        unpublished_justification_data (dict): The parsed unpublished justification description data to be merged.
+        release_json: The main OCDS release JSON document to be updated.
+            Must be a mutable dictionary that may contain a withheldInformation array.
+        unpublished_justification_data: The parsed unpublished justification data to be merged.
+            Should contain a withheldInformation array with objects having id and rationale fields.
+            Can be None, in which case no changes are made.
 
     Returns:
         None: The function updates the release_json in-place.
     """
     if not unpublished_justification_data:
         logger.warning(
-            "No unpublished justification description data to merge for BT-196(BT-553)-Tender",
+            "No unpublished justification data to merge for BT-196(BT-553) Tender",
         )
         return
 
@@ -70,7 +113,7 @@ def merge_bt196_bt553_tender(release_json, unpublished_justification_data) -> No
 
     for new_item in unpublished_justification_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item.get("field") == new_item["field"]),
+            (item for item in withheld_info if item.get("id") == new_item["id"]),
             None,
         )
         if existing_item:
@@ -79,5 +122,6 @@ def merge_bt196_bt553_tender(release_json, unpublished_justification_data) -> No
             withheld_info.append(new_item)
 
     logger.info(
-        "Merged unpublished justification description data for BT-196(BT-553)-Tender",
+        "Merged unpublished justification data for BT-196(BT-553) Tender for {} tenders",
+        len(unpublished_justification_data["withheldInformation"]),
     )

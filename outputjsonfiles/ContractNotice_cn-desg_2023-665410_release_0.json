@@ -1,7 +1,7 @@
 {
   "id": "2023-665410",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-57fe0272-2c9a-4108-ac99-083974960c78",
+  "ocid": "ocds-abcd1234-e9682cda-cfa6-438d-b4f6-f7d5bfdd1dc6",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -155,8 +155,8 @@
         "email": "sigmund.ulnes@larvik.kommune.no"
       },
       "roles": [
-        "buyer",
         "submissionReceiptBody",
+        "buyer",
         "processContactPoint"
       ],
       "address": {

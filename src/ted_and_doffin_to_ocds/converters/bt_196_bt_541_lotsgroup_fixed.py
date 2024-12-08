@@ -7,16 +7,28 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_bt196_bt541_lotsgroup_fixed_unpublished_justification(xml_content):
-    """
-    Parse the XML content to extract the unpublished justification description for the LotsGroup fixed award criterion.
+def parse_bt196_bt541_lotsgroup_fixed_unpublished_justification(
+    xml_content: str | bytes,
+) -> dict | None:
+    """Parse the XML content to extract award criterion fixed number unpublished justification.
+
+    Processes XML content to find unpublished justification related to lots group award criterion
+    fixed number and creates a structured dictionary containing withheld information.
 
     Args:
-        xml_content (str): The XML content to parse.
+        xml_content: The XML content to parse, either as string or bytes.
 
     Returns:
-        dict: A dictionary containing the parsed unpublished justification data.
-        None: If no relevant data is found.
+        Optional[Dict]: A dictionary containing withheld information with structure:
+            {
+                "withheldInformation": [
+                    {
+                        "id": str,
+                        "rationale": str
+                    }
+                ]
+            }
+        Returns None if no relevant data is found.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -32,36 +44,48 @@ def parse_bt196_bt541_lotsgroup_fixed_unpublished_justification(xml_content):
 
     result = {"withheldInformation": []}
 
-    xpath_query = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']"
-    lots_groups = root.xpath(xpath_query, namespaces=namespaces)
+    xpath_query = (
+        "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']"
+        "/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion"
+        "/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension"
+        "/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter"
+        "[efbc:ParameterCode/@listName='number-fixed']"
+        "/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']"
+    )
 
-    for lots_group in lots_groups:
-        lots_group_id = lots_group.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        reason_description = lots_group.xpath(
-            ".//efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:ReasonDescription/text()",
+    fields_privacy = root.xpath(xpath_query, namespaces=namespaces)
+
+    for privacy in fields_privacy:
+        lots_group_id = privacy.xpath(
+            "ancestor::cac:ProcurementProjectLot/cbc:ID[@schemeName='LotsGroup']/text()",
             namespaces=namespaces,
-        )
+        )[0]
+        reason = privacy.xpath("efbc:ReasonDescription/text()", namespaces=namespaces)[
+            0
+        ]
+        field_id = "awa-cri-num-fixed"
 
-        if reason_description:
-            withheld_info = {
-                "id": f"awa-cri-num-fixed-{lots_group_id}",
-                "rationale": reason_description[0],
-            }
-            result["withheldInformation"].append(withheld_info)
+        withheld_info = {
+            "id": f"{field_id}-{lots_group_id}",
+            "rationale": reason,
+        }
+        result["withheldInformation"].append(withheld_info)
 
     return result if result["withheldInformation"] else None
 
 
 def merge_bt196_bt541_lotsgroup_fixed_unpublished_justification(
-    release_json,
-    unpublished_justification_data,
+    release_json: dict, unpublished_justification_data: dict | None
 ) -> None:
-    """
-    Merge the parsed unpublished justification data into the main OCDS release JSON.
+    """Merge the parsed unpublished justification data into the main OCDS release JSON.
+
+    Takes the unpublished justification data and merges it into the main OCDS release JSON
+    by updating withheld information items with matching IDs.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        unpublished_justification_data (dict): The parsed unpublished justification data to be merged.
+        release_json: The main OCDS release JSON to be updated.
+        unpublished_justification_data: The parsed unpublished justification data to be merged.
+            Should contain a 'withheldInformation' list of dictionaries with rationale.
 
     Returns:
         None: The function updates the release_json in-place.

@@ -1,7 +1,7 @@
 {
   "id": "2023-371675",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-87b993d6-83dc-4f3b-806f-068d77454dc5",
+  "ocid": "ocds-abcd1234-ea6b13d1-df67-40b5-af80-c59440f8e75b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -141,8 +141,8 @@
         "email": "mhr@kulturtanken.no"
       },
       "roles": [
-        "buyer",
         "submissionReceiptBody",
+        "buyer",
         "processContactPoint"
       ],
       "address": {
