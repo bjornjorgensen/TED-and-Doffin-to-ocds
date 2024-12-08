@@ -9,8 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_tender_recipient(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse tender recipient organization references from lots.
+    """Parse tender recipient organization references from lots.
 
     Identifies organizations that receive tender submissions.
     Adds submissionReceiptBody role to identified organizations.
@@ -32,6 +31,7 @@ def parse_tender_recipient(xml_content: str | bytes) -> dict[str, Any] | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -59,8 +59,7 @@ def parse_tender_recipient(xml_content: str | bytes) -> dict[str, Any] | None:
 def merge_tender_recipient(
     release_json: dict[str, Any], tender_recipient_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge tender recipient data into the release JSON.
+    """Merge tender recipient data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -69,6 +68,7 @@ def merge_tender_recipient(
     Effects:
         Updates the parties section of release_json with submissionReceiptBody roles,
         merging with existing party roles where applicable
+
     """
     if not tender_recipient_data:
         logger.info("No Tender Recipient Technical Identifier Reference data to merge")

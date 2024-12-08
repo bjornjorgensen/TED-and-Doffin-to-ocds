@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_beneficial_owner_identifier(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse ultimate beneficial owner (UBO) identifiers from XML content.
+    """Parse ultimate beneficial owner (UBO) identifiers from XML content.
 
     Links UBOs to their organizations through organization IDs.
     Only includes UBOs that have a technical identifier.
@@ -35,6 +34,7 @@ def parse_beneficial_owner_identifier(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -85,8 +85,7 @@ def parse_beneficial_owner_identifier(
 def merge_beneficial_owner_identifier(
     release_json: dict[str, Any], ubo_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge beneficial owner identifier data into the release JSON.
+    """Merge beneficial owner identifier data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -95,6 +94,7 @@ def merge_beneficial_owner_identifier(
     Effects:
         Updates the parties section of release_json with beneficial owner information,
         adding new UBOs where they don't already exist
+
     """
     if not ubo_data:
         logger.info("No Beneficial Owner technical identifier data to merge")

@@ -17,6 +17,7 @@ def parse_group_lot_identifier(xml_content: str | bytes) -> dict | None:
     Returns:
         Optional[Dict]: Dictionary containing tender lot groups data, or None if no groups found
         Format: {"tender": {"lotGroups": [{"id": str, "relatedLots": list[str]}]}}
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -63,6 +64,7 @@ def merge_group_lot_identifier(release_json: dict, group_lot_data: dict | None) 
 
     Returns:
         None: Modifies release_json in place
+
     """
     if not group_lot_data:
         logger.warning("No Group Lot Identifier data to merge")

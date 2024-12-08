@@ -36,6 +36,7 @@ def parse_tender_validity_deadline(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -100,6 +101,7 @@ def merge_tender_validity_deadline(
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not tender_validity_deadline_data:
         logger.info("No tender validity deadline data to merge")

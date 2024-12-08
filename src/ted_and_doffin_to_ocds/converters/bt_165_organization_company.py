@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_winner_size(xml_content: str | bytes) -> dict | None:
-    """
-    Parse organization size information from XML data.
+    """Parse organization size information from XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing organization information
@@ -27,6 +26,7 @@ def parse_winner_size(xml_content: str | bytes) -> dict | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -65,13 +65,13 @@ def parse_winner_size(xml_content: str | bytes) -> dict | None:
 
 
 def merge_winner_size(release_json: dict, winner_size_data: dict | None) -> None:
-    """
-    Merge organization size data into the release JSON.
+    """Merge organization size data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
         winner_size_data (Optional[Dict]): The source data containing parties
             to be merged. If None, function returns without making changes.
+
     """
     if not winner_size_data:
         return

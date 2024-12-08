@@ -17,8 +17,7 @@ NAMESPACES = {
 def parse_kilometers_public_transport(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse kilometers public transport information (OPP-080) from XML content.
+    """Parse kilometers public transport information (OPP-080) from XML content.
 
     Gets public transportation cumulated distance from lot tenders and maps them
     to corresponding contract's publicPassengerTransportServicesKilometers field.
@@ -28,6 +27,7 @@ def parse_kilometers_public_transport(
 
     Returns:
         Dictionary containing contracts with kilometers info or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -106,8 +106,7 @@ def parse_kilometers_public_transport(
 def merge_kilometers_public_transport(
     release_json: dict[str, Any], kilometers_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge kilometers public transport information into the release JSON.
+    """Merge kilometers public transport information into the release JSON.
 
     Updates or creates contracts with kilometers information.
     Preserves existing contract data while adding/updating kilometers info.
@@ -118,6 +117,7 @@ def merge_kilometers_public_transport(
 
     Returns:
         None
+
     """
     if not kilometers_data:
         logger.warning("No public transport kilometers data to merge")

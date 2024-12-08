@@ -1,5 +1,4 @@
-"""
-BT-06 Lot Strategic Procurement converter.
+"""BT-06 Lot Strategic Procurement converter.
 
 Maps procurement objectives (environmental, social, innovative) from lot level
 strategic procurement codes to OCDS lot sustainability information.
@@ -46,6 +45,7 @@ def parse_strategic_procurement(xml_content: str | bytes) -> dict[str, Any] | No
             }
         }
         or None if no strategic procurement data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -105,6 +105,7 @@ def merge_strategic_procurement(
     Args:
         release_json: The target release JSON to update
         strategic_procurement_data: The strategic procurement data to merge
+
     """
     if not strategic_procurement_data:
         logger.warning("No Strategic Procurement data to merge")

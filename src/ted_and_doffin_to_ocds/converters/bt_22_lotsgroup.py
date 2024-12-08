@@ -17,6 +17,7 @@ def parse_lots_group_internal_identifier(
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing lot groups data with internal identifiers,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -64,6 +65,7 @@ def merge_lots_group_internal_identifier(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         lots_group_internal_identifier_data (Optional[Dict[str, Any]]): Lot group data containing internal identifiers to merge
+
     """
     if not lots_group_internal_identifier_data:
         logger.warning("No lots group internal identifier data to merge")

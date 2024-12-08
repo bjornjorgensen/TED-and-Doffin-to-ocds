@@ -19,8 +19,7 @@ NAMESPACES = {
 def parse_part_place_performance_additional(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse BT-728: Additional information about place of performance.
+    """Parse BT-728: Additional information about place of performance.
 
     This field maps to the same Address objects as created for BT-727-Part,
     BT-5121-Part, BT-5131-Part, BT-5071-Part, BT-5101-Part and BT-5141-Part.
@@ -40,6 +39,7 @@ def parse_part_place_performance_additional(
                 }
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -79,8 +79,7 @@ def parse_part_place_performance_additional(
 def merge_part_place_performance_additional(
     release_json: dict, additional_data: dict | None
 ) -> None:
-    """
-    Merge additional place of performance data into the release JSON.
+    """Merge additional place of performance data into the release JSON.
 
     Updates or adds delivery locations to tender section, concatenating descriptions
     if locations already exist.
@@ -93,6 +92,7 @@ def merge_part_place_performance_additional(
         - Updates release_json in-place
         - Creates tender.deliveryLocations if needed
         - Concatenates descriptions for existing locations
+
     """
     if not additional_data:
         return

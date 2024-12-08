@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_lot_sme_suitability(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the XML content to extract SME suitability information for lots.
+    """Parse the XML content to extract SME suitability information for lots.
 
     This function processes XML content to extract whether lots are marked as
     suitable for small and medium enterprises (SMEs).
@@ -32,6 +31,7 @@ def parse_lot_sme_suitability(xml_content: str | bytes) -> dict | None:
                 }
             }
             Returns None if no relevant data is found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -72,8 +72,7 @@ def parse_lot_sme_suitability(xml_content: str | bytes) -> dict | None:
 def merge_lot_sme_suitability(
     release_json: dict, lot_sme_suitability_data: dict | None
 ) -> None:
-    """
-    Merge the parsed SME suitability data into the main OCDS release JSON.
+    """Merge the parsed SME suitability data into the main OCDS release JSON.
 
     This function takes SME suitability data and merges it into the main OCDS release JSON.
     For each lot in the suitability data, it either updates an existing lot or adds a new one.
@@ -89,6 +88,7 @@ def merge_lot_sme_suitability(
     Note:
         - If lot_sme_suitability_data is None, a warning is logged and no changes are made
         - For existing lots, suitability.sme value is updated
+
     """
     if not lot_sme_suitability_data:
         logger.warning("No lot SME suitability data to merge")

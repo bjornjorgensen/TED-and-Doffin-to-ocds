@@ -17,6 +17,7 @@ def parse_submission_url(xml_content: str | bytes) -> dict[str, Any] | None:
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing lots data with submission URLs,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -62,6 +63,7 @@ def merge_submission_url(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         submission_url_data (Optional[Dict[str, Any]]): Lot data containing submission URLs to merge
+
     """
     if not submission_url_data:
         logger.warning("No Submission URL data to merge")

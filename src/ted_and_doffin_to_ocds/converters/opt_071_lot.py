@@ -27,8 +27,7 @@ CUSTOMER_SERVICE_CODES = {
 
 
 def parse_quality_target_code(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse quality target code information (OPT-071) from XML content.
+    """Parse quality target code information (OPT-071) from XML content.
 
     Gets customer service codes for each lot and maps them to
     corresponding lot's contractTerms.customerServices array.
@@ -38,6 +37,7 @@ def parse_quality_target_code(xml_content: str | bytes) -> dict[str, Any] | None
 
     Returns:
         Dictionary containing lots with customer services or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -99,8 +99,7 @@ def parse_quality_target_code(xml_content: str | bytes) -> dict[str, Any] | None
 def merge_quality_target_code(
     release_json: dict[str, Any], target_code_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge quality target code information into the release JSON.
+    """Merge quality target code information into the release JSON.
 
     Updates or creates lots with customer service information.
     Preserves existing lot data while adding/updating services.
@@ -111,6 +110,7 @@ def merge_quality_target_code(
 
     Returns:
         None
+
     """
     if not target_code_data:
         logger.warning("No quality target code data to merge")

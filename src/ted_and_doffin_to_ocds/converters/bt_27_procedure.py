@@ -9,8 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_bt_27_procedure(xml_content: str | bytes) -> dict[str, Any]:
-    """
-    Parse the estimated value from procurement project XML content.
+    """Parse the estimated value from procurement project XML content.
 
     Args:
         xml_content: XML string or bytes containing procurement data
@@ -25,6 +24,7 @@ def parse_bt_27_procedure(xml_content: str | bytes) -> dict[str, Any]:
                 }
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -58,8 +58,7 @@ def parse_bt_27_procedure(xml_content: str | bytes) -> dict[str, Any]:
 def merge_bt_27_procedure(
     release_json: dict[str, Any], bt_27_procedure_data: dict[str, Any]
 ) -> None:
-    """
-    Merge estimated value data into existing release JSON.
+    """Merge estimated value data into existing release JSON.
 
     Args:
         release_json: Target release JSON to merge into
@@ -68,6 +67,7 @@ def merge_bt_27_procedure(
     Returns:
         None. Modifies release_json in place.
         Logs success or absence of data to merge.
+
     """
     if "value" in bt_27_procedure_data["tender"]:
         release_json.setdefault("tender", {})["value"] = bt_27_procedure_data["tender"][

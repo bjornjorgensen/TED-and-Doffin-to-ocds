@@ -34,6 +34,7 @@ def parse_electronic_payment(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -91,6 +92,7 @@ def merge_electronic_payment(
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not electronic_payment_data:
         logger.warning("No electronic payment data to merge")

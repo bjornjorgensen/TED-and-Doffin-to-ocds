@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_change_reason_description(xml_content: str) -> list[dict[str, str]] | None:
-    """
-    Parse the XML content to extract the change reason description.
+    """Parse the XML content to extract the change reason description.
 
     Args:
         xml_content (str): The XML content to parse.
@@ -21,6 +20,7 @@ def parse_change_reason_description(xml_content: str) -> list[dict[str, str]] | 
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -48,8 +48,7 @@ def merge_change_reason_description(
     release_json: dict,
     change_reason_data: list[dict[str, str]],
 ) -> None:
-    """
-    Merge the parsed change reason description data into the main OCDS release JSON.
+    """Merge the parsed change reason description data into the main OCDS release JSON.
 
     This function updates the existing amendments in the release JSON with the
     change reason descriptions. If no amendments exist, it creates new ones.
@@ -60,6 +59,7 @@ def merge_change_reason_description(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not change_reason_data:
         logger.warning("No Change Reason Description data to merge")

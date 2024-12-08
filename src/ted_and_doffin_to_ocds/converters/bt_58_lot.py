@@ -29,6 +29,7 @@ def parse_renewal_maximum(xml_content: str | bytes) -> dict | None:
                 }]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -84,6 +85,7 @@ def merge_renewal_maximum(release_json: dict, renewal_data: dict | None) -> None
 
     Returns:
         None. Updates release_json in place.
+
     """
     if not renewal_data:
         logger.info("No renewal maximum data to merge")

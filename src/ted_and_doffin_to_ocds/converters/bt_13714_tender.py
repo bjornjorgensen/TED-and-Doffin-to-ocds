@@ -16,8 +16,7 @@ NAMESPACES = {
 
 
 def parse_tender_lot_identifier(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse tender lot identifier (BT-13714) from XML content.
+    """Parse tender lot identifier (BT-13714) from XML content.
 
     Gets tender and lot identifiers from each lot tender. Creates/updates
     corresponding Bid objects in bids.details array with related lots.
@@ -27,6 +26,7 @@ def parse_tender_lot_identifier(xml_content: str | bytes) -> dict[str, Any] | No
 
     Returns:
         Dictionary containing bids with lot references or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -75,8 +75,7 @@ def parse_tender_lot_identifier(xml_content: str | bytes) -> dict[str, Any] | No
 def merge_tender_lot_identifier(
     release_json: dict[str, Any], tender_lot_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge tender lot identifiers into the release JSON.
+    """Merge tender lot identifiers into the release JSON.
 
     Updates or creates bids with lot references.
     Preserves existing bid data while adding/updating related lots.
@@ -87,6 +86,7 @@ def merge_tender_lot_identifier(
 
     Returns:
         None
+
     """
     if not tender_lot_data:
         logger.warning("No Tender Lot Identifier data to merge")

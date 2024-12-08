@@ -8,8 +8,7 @@ from lxml import etree
 def parse_main_classification_type_procedure(
     xml_content: str | bytes,
 ) -> dict[str, Any]:
-    """
-    Parse the classification type (e.g. CPV) from procurement project in XML content.
+    """Parse the classification type (e.g. CPV) from procurement project in XML content.
 
     Args:
         xml_content: XML string or bytes containing procurement project
@@ -28,6 +27,7 @@ def parse_main_classification_type_procedure(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -60,8 +60,7 @@ def parse_main_classification_type_procedure(
 def merge_main_classification_type_procedure(
     release_json: dict[str, Any], classification_type_data: dict[str, Any]
 ) -> None:
-    """
-    Merge classification type data into existing release JSON.
+    """Merge classification type data into existing release JSON.
 
     Args:
         release_json: Target release JSON to merge into
@@ -69,6 +68,7 @@ def merge_main_classification_type_procedure(
 
     Returns:
         None. Modifies release_json in place.
+
     """
     existing_items = release_json.setdefault("tender", {}).setdefault("items", [])
 

@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_bt195_bt163_unpublished_identifier(
     xml_content: str,
 ) -> dict[str, list] | None:
-    """
-    Parse the XML content to extract the unpublished identifier for the concession value description.
+    """Parse the XML content to extract the unpublished identifier for the concession value description.
 
     This function processes XML content to find any tender lots where concession value description
     information is marked as private/unpublished. For each such lot, it creates a withheld
@@ -38,6 +37,7 @@ def parse_bt195_bt163_unpublished_identifier(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -79,8 +79,7 @@ def parse_bt195_bt163_unpublished_identifier(
 def merge_bt195_bt163_unpublished_identifier(
     release_json: dict[str, Any], unpublished_identifier_data: dict[str, list] | None
 ) -> None:
-    """
-    Merge the parsed unpublished identifier data into the main OCDS release JSON.
+    """Merge the parsed unpublished identifier data into the main OCDS release JSON.
 
     This function takes the withheld information entries identified by the parser and
     merges them into the main OCDS release JSON structure. It ensures the withheldInformation
@@ -106,6 +105,7 @@ def merge_bt195_bt163_unpublished_identifier(
         ...     ]
         ... }
         >>> merge_bt195_bt163_unpublished_identifier(release, withheld_data)
+
     """
     if not unpublished_identifier_data:
         logger.warning("No unpublished identifier data to merge for BT-195(BT-163)")

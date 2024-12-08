@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_lotresult_technical_identifier(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse lot result technical identifiers.
+    """Parse lot result technical identifiers.
 
     For each lot result:
     - Gets result ID
@@ -32,6 +31,7 @@ def parse_lotresult_technical_identifier(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -67,8 +67,7 @@ def merge_lotresult_technical_identifier(
     release_json: dict[str, Any],
     lotresult_technical_identifier_data: dict[str, Any] | None,
 ) -> None:
-    """
-    Merge lot result technical identifier data into the release JSON.
+    """Merge lot result technical identifier data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -77,6 +76,7 @@ def merge_lotresult_technical_identifier(
     Effects:
         Updates the awards section of release_json with new awards,
         skipping any that already exist
+
     """
     if not lotresult_technical_identifier_data:
         logger.info("No LotResult Technical Identifier data to merge.")

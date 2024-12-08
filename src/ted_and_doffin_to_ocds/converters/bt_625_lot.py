@@ -88,6 +88,7 @@ def parse_unit(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -143,6 +144,7 @@ def merge_unit(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not unit_data:
         logger.warning("BT-625-Lot: No unit data to merge")

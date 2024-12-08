@@ -31,6 +31,7 @@ def parse_tool_name(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -80,6 +81,7 @@ def merge_tool_name(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not tool_name_data:
         logger.warning("No tool name data to merge")

@@ -9,8 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_ubo_firstname(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse ultimate beneficial owner (UBO) first names from XML content.
+    """Parse ultimate beneficial owner (UBO) first names from XML content.
 
     Extracts UBO information for each organization, linking UBOs to their organizations
     through the organization ID.
@@ -34,6 +33,7 @@ def parse_ubo_firstname(xml_content: str | bytes) -> dict[str, Any] | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -86,8 +86,7 @@ def parse_ubo_firstname(xml_content: str | bytes) -> dict[str, Any] | None:
 def merge_ubo_firstname(
     release_json: dict[str, Any], ubo_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge ultimate beneficial owner (UBO) first name data into the release JSON.
+    """Merge ultimate beneficial owner (UBO) first name data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -96,6 +95,7 @@ def merge_ubo_firstname(
     Effects:
         Updates the parties section of release_json with beneficial owner information,
         merging names where UBOs already exist for organizations
+
     """
     if not ubo_data:
         logger.info("No UBO first name data to merge")

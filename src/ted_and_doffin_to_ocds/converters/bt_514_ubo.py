@@ -80,6 +80,7 @@ def parse_ubo_country(xml_content: str | bytes) -> dict | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -147,6 +148,7 @@ def convert_country_code(code: str) -> str:
     Returns:
         ISO 3166-1 alpha-2 country code (e.g. 'GB').
         If code not found in conversion dictionary, returns original code.
+
     """
     return ISO_3166_CONVERSION.get(code, code)
 
@@ -164,6 +166,7 @@ def merge_ubo_country(release_json: dict, ubo_country_data: dict | None) -> None
 
     Returns:
         None. Updates release_json in place.
+
     """
     if not ubo_country_data:
         logger.warning("No ubo Country data to merge")

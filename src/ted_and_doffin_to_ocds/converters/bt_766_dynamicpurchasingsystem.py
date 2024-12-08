@@ -8,14 +8,14 @@ logger = logging.getLogger(__name__)
 
 
 def parse_dynamic_purchasing_system(xml_content: str) -> dict[str, dict] | None:
-    """
-    Parse the XML content to extract the Dynamic Purchasing System details for each lot.
+    """Parse the XML content to extract the Dynamic Purchasing System details for each lot.
 
     Args:
         xml_content (str): The XML content to parse.
 
     Returns:
         Optional[Dict[str, Dict]]: A dictionary mapping lot IDs to their DPS data if found, None otherwise.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -61,8 +61,7 @@ def merge_dynamic_purchasing_system(
     release_json: dict,
     dynamic_purchasing_system_data: dict[str, dict] | None,
 ) -> None:
-    """
-    Merge the parsed Dynamic Purchasing System data into the main OCDS release JSON.
+    """Merge the parsed Dynamic Purchasing System data into the main OCDS release JSON.
 
     Args:
         release_json (Dict): The main OCDS release JSON to be updated.
@@ -70,6 +69,7 @@ def merge_dynamic_purchasing_system(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not dynamic_purchasing_system_data:
         logger.warning("No Dynamic Purchasing System data to merge")

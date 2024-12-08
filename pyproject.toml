@@ -30,6 +30,8 @@ testpaths = [
 [tool.ruff]
 # Ruff configuration
 target-version = "py313"
+# In addition to the standard set of exclusions, omit all tests, plus a specific file.
+extend-exclude = ["tests"]
 
 [tool.ruff.lint]
 select = [
@@ -105,6 +107,7 @@ select = [
     "FA",
     #"BLE",
     #"FBT",
+    "D",
 ]
 ignore = [
     "E501",  # Line too long
@@ -119,7 +122,8 @@ ignore = [
     "RUF001",
     "ANN001",
     "ANN201",
-
+    "D213",
+    "D203"
 ]
 
 [tool.ruff.format]

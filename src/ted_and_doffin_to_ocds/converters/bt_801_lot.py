@@ -12,8 +12,7 @@ NAMESPACES = {
 
 
 def parse_non_disclosure_agreement(xml_content: str | bytes) -> dict | None:
-    """
-    Parse BT-801: Non-disclosure agreement requirement for lots.
+    """Parse BT-801: Non-disclosure agreement requirement for lots.
 
     Extracts whether lots require a non-disclosure agreement.
 
@@ -35,6 +34,7 @@ def parse_non_disclosure_agreement(xml_content: str | bytes) -> dict | None:
                 }
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -72,8 +72,7 @@ def parse_non_disclosure_agreement(xml_content: str | bytes) -> dict | None:
 
 
 def merge_non_disclosure_agreement(release_json: dict, nda_data: dict | None) -> None:
-    """
-    Merge non-disclosure agreement data into the release JSON.
+    """Merge non-disclosure agreement data into the release JSON.
 
     Updates or adds NDA requirements to lot contract terms.
 
@@ -85,6 +84,7 @@ def merge_non_disclosure_agreement(release_json: dict, nda_data: dict | None) ->
         - Updates release_json in-place
         - Creates tender.lots array if needed
         - Updates existing lots' contractTerms
+
     """
     if not nda_data:
         logger.warning("No NDA requirement data to merge")

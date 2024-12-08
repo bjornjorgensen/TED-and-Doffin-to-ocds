@@ -35,6 +35,7 @@ def parse_lot_performance_terms(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -90,6 +91,7 @@ def merge_lot_performance_terms(
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not lot_performance_terms_data:
         logger.warning("No Lot Performance Terms data to merge")

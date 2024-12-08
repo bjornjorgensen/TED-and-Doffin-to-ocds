@@ -29,6 +29,7 @@ def parse_renewal_description(xml_content: str | bytes) -> dict | None:
                 }]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -86,6 +87,7 @@ def merge_renewal_description(release_json: dict, renewal_data: dict | None) -> 
 
     Returns:
         None. Updates release_json in place.
+
     """
     if not renewal_data:
         logger.info("No renewal description data to merge")

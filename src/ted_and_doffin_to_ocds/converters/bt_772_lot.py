@@ -31,6 +31,7 @@ def parse_late_tenderer_info_description(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -86,6 +87,7 @@ def merge_late_tenderer_info_description(
         release_json: The target release JSON to update
         late_tenderer_info_description: Source data containing late tenderer information.
             If None, function returns without making changes.
+
     """
     if not late_tenderer_info_description:
         logger.warning("No late tenderer information description to merge")

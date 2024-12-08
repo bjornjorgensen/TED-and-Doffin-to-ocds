@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_review_organization_part(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse review organization references from parts.
+    """Parse review organization references from parts.
 
     Identifies organizations that serve as review bodies.
     Adds reviewBody role to identified organizations.
@@ -31,6 +30,7 @@ def parse_review_organization_part(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -57,8 +57,7 @@ def parse_review_organization_part(
 def merge_review_organization_part(
     release_json: dict[str, Any], review_organization_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge review organization data from parts into the release JSON.
+    """Merge review organization data from parts into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -67,6 +66,7 @@ def merge_review_organization_part(
     Effects:
         Updates the parties section of release_json with reviewBody roles,
         merging with existing party roles where applicable
+
     """
     if not review_organization_data:
         logger.info("No Review Organization data to merge.")

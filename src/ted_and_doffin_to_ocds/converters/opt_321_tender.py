@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_tender_technical_identifier(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse tender technical identifiers from lot tenders.
+    """Parse tender technical identifiers from lot tenders.
 
     For each lot tender:
     - Gets tender ID
@@ -34,6 +33,7 @@ def parse_tender_technical_identifier(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -69,8 +69,7 @@ def merge_tender_technical_identifier(
     release_json: dict[str, Any],
     tender_technical_identifier_data: dict[str, Any] | None,
 ) -> None:
-    """
-    Merge tender technical identifier data into the release JSON.
+    """Merge tender technical identifier data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -79,6 +78,7 @@ def merge_tender_technical_identifier(
     Effects:
         Updates the bids.details section of release_json with new bids,
         skipping any that already exist
+
     """
     if not tender_technical_identifier_data:
         logger.info("No Tender Technical Identifier data to merge.")

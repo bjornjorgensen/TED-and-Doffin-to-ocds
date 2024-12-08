@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_environmental_legislation_org(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse environmental legislation organization references from lots.
+    """Parse environmental legislation organization references from lots.
 
     For each environmental legislation document:
     - Gets document publisher organization ID
@@ -42,6 +41,7 @@ def parse_environmental_legislation_org(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -94,8 +94,7 @@ def parse_environmental_legislation_org(
 def merge_environmental_legislation_org(
     release_json: dict[str, Any], environ_legis_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge environmental legislation organization data into the release JSON.
+    """Merge environmental legislation organization data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -105,6 +104,7 @@ def merge_environmental_legislation_org(
         - Updates parties with informationService roles
         - Updates documents with publisher and lot references
         - Maintains existing data while adding new information
+
     """
     if not environ_legis_data:
         logger.info(

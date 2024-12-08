@@ -34,8 +34,7 @@ SUBMISSION_TYPE_MAPPING = {
 
 
 def parse_received_submissions_type(xml_content: str | bytes) -> dict | None:
-    """
-    Parse BT-760: Types of received submissions for lots.
+    """Parse BT-760: Types of received submissions for lots.
 
     Maps counts of different submission types (SME, micro, foreign, etc).
     All tenders are counted regardless of admissibility.
@@ -57,6 +56,7 @@ def parse_received_submissions_type(xml_content: str | bytes) -> dict | None:
                 }
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -108,8 +108,7 @@ def parse_received_submissions_type(xml_content: str | bytes) -> dict | None:
 def merge_received_submissions_type(
     release_json: dict, submissions_data: dict | None
 ) -> None:
-    """
-    Merge received submissions type data into the release JSON.
+    """Merge received submissions type data into the release JSON.
 
     Updates or adds submission type statistics to bids.statistics array.
 
@@ -122,6 +121,7 @@ def merge_received_submissions_type(
         - Creates bids.statistics array if needed
         - Updates existing statistics by measure and relatedLot
         - Maintains unique statistic IDs
+
     """
     if not submissions_data:
         logger.warning("BT-760: No Received Submissions Type data to merge")

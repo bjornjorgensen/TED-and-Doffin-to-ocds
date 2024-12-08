@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_part_additional_info(xml_content: str | bytes) -> list[dict] | None:
-    """
-    Parse additional information from part-level XML data.
+    """Parse additional information from part-level XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing part information
@@ -23,6 +22,7 @@ def parse_part_additional_info(xml_content: str | bytes) -> list[dict] | None:
                 "language": str
             }
         ]
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -53,13 +53,13 @@ def parse_part_additional_info(xml_content: str | bytes) -> list[dict] | None:
 def merge_part_additional_info(
     release_json: dict, part_additional_info: list[dict] | None
 ) -> None:
-    """
-    Merge additional information into the release JSON.
+    """Merge additional information into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
         part_additional_info (Optional[List[Dict]]): The source data containing notes
             to be merged. If None, function returns without making changes.
+
     """
     if not part_additional_info:
         return

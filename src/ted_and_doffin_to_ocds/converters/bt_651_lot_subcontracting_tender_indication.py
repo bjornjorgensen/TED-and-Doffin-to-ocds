@@ -33,6 +33,7 @@ def parse_subcontracting_tender_indication(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -82,6 +83,7 @@ def merge_subcontracting_tender_indication(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not subcontracting_tender_indication_data:
         logger.warning("No subcontracting tender indication data to merge")

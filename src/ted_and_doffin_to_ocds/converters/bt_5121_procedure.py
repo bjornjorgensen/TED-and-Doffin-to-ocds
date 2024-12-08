@@ -14,8 +14,7 @@ NAMESPACES = {
 def parse_place_performance_post_code_procedure(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse place performance postal code (BT-5121) from XML content.
+    """Parse place performance postal code (BT-5121) from XML content.
 
     Gets postal code information for each delivery address. Creates/updates
     corresponding Address objects in the tender.deliveryAddresses array.
@@ -25,6 +24,7 @@ def parse_place_performance_post_code_procedure(
 
     Returns:
         Dictionary containing tender delivery addresses or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -57,8 +57,7 @@ def parse_place_performance_post_code_procedure(
 def merge_place_performance_post_code_procedure(
     release_json: dict[str, Any], post_code_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge postal code data into the release JSON.
+    """Merge postal code data into the release JSON.
 
     Updates the tender.deliveryAddresses array in release_json with new postal codes,
     preserving existing address data while adding/updating postal codes.
@@ -69,6 +68,7 @@ def merge_place_performance_post_code_procedure(
 
     Returns:
         None
+
     """
     if not post_code_data:
         logger.warning("No Place Performance Post Code (procedure) data to merge")

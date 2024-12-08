@@ -6,8 +6,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_organization_streetline2(xml_content: str | bytes) -> dict | None:
-    """
-    Parse organization street line 2 information from XML content.
+    """Parse organization street line 2 information from XML content.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing organization street information
@@ -15,7 +14,8 @@ def parse_organization_streetline2(xml_content: str | bytes) -> dict | None:
     Returns:
         Optional[Dict]: A dictionary containing parsed address data in OCDS format with
         'parties' array, or None if no valid street data is found.
-        Example:
+
+    Example:
         {
             "parties": [{
                 "id": "ORG-0001",
@@ -24,6 +24,7 @@ def parse_organization_streetline2(xml_content: str | bytes) -> dict | None:
                 }
             }]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -83,8 +84,7 @@ def parse_organization_streetline2(xml_content: str | bytes) -> dict | None:
 def merge_organization_streetline2(
     release_json: dict, organization_streetline2_data: dict | None
 ) -> None:
-    """
-    Merge organization street line 2 data into the release JSON.
+    """Merge organization street line 2 data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -97,6 +97,7 @@ def merge_organization_streetline2(
     Note:
         If organization_streetline2_data is None or contains no parties, no changes are made.
         For existing parties, street address information is updated in the address section.
+
     """
     if not organization_streetline2_data:
         logger.info("No organization street line 2 data to merge")

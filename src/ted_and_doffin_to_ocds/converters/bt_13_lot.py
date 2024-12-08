@@ -20,6 +20,7 @@ def parse_additional_info_deadline(
     Returns:
         Optional[List[Dict[str, Any]]]: List of dictionaries containing lot data with enquiry period end dates,
                                       or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -67,6 +68,7 @@ def convert_to_iso_format(date_string: str, time_string: str) -> str:
 
     Returns:
         str: Combined date and time in ISO format
+
     """
     # Combine date and time
     datetime_string = f"{date_string.split('+')[0]}T{time_string}"
@@ -86,6 +88,7 @@ def merge_additional_info_deadline(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         lots_data (Optional[List[Dict[str, Any]]]): List of lot data containing enquiry period end dates
+
     """
     if lots_data:
         if "tender" not in release_json:

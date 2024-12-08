@@ -49,8 +49,7 @@ class NoticeFileProcessor:
             logger.info("Cleaned up temporary directory: %s", self.temp_dir)
 
     def get_notice_type(self, file_path: Path) -> str | None:
-        """
-        Determine the notice type from an XML file.
+        """Determine the notice type from an XML file.
         Handles XML declarations, comments, and namespaces.
         """
         try:

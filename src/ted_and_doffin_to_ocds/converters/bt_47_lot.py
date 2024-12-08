@@ -28,6 +28,7 @@ def parse_participant_name(xml_content: str | bytes) -> dict | None:
                 }]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -94,6 +95,7 @@ def merge_participant_name(release_json: dict, participant_data: dict | None) ->
 
     Returns:
         None. Updates release_json in place.
+
     """
     if not participant_data:
         logger.info("No participant Name data to merge")

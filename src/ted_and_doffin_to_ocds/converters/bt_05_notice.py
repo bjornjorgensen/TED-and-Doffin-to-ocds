@@ -1,5 +1,4 @@
-"""
-BT-05 Notice Dispatch Date/Time converter.
+"""BT-05 Notice Dispatch Date/Time converter.
 
 Maps the notice dispatch date and time (when the notice was sent for publication)
 from IssueDate and IssueTime elements to OCDS date field in ISO format.
@@ -37,6 +36,7 @@ def parse_notice_dispatch_date_time(xml_content: str | bytes) -> str | None:
 
     Raises:
         etree.XMLSyntaxError: If XML content is invalid
+
     """
     try:
         if isinstance(xml_content, str):
@@ -80,6 +80,7 @@ def convert_to_iso_format(date_string: str, time_string: str) -> str:
 
     Raises:
         ValueError: If date/time format is invalid
+
     """
     try:
         # Remove timezone if present in date
@@ -104,6 +105,7 @@ def merge_notice_dispatch_date_time(
     Args:
         release_json: The target release JSON to update
         dispatch_date_time: ISO formatted datetime string to merge
+
     """
     if dispatch_date_time:
         release_json["date"] = dispatch_date_time

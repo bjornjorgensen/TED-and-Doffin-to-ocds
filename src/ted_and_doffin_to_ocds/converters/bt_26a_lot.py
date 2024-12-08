@@ -17,6 +17,7 @@ def parse_classification_type(xml_content: str | bytes) -> dict[str, Any] | None
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing items with classification schemes,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")

@@ -14,8 +14,7 @@ NAMESPACES = {
 
 
 def parse_touchpoint_contact_fax(xml_content: str | bytes) -> dict | None:
-    """
-    Parse BT-739: Organization touchpoint contact fax number.
+    """Parse BT-739: Organization touchpoint contact fax number.
 
     Extracts fax numbers for contacting organizations via their touchpoints,
     following data protection regulations regarding personal information.
@@ -40,6 +39,7 @@ def parse_touchpoint_contact_fax(xml_content: str | bytes) -> dict | None:
                 ]
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -100,8 +100,7 @@ def parse_touchpoint_contact_fax(xml_content: str | bytes) -> dict | None:
 def merge_touchpoint_contact_fax(
     release_json: dict, touchpoint_data: dict | None
 ) -> None:
-    """
-    Merge touchpoint fax number data into the release JSON.
+    """Merge touchpoint fax number data into the release JSON.
 
     Updates or adds fax numbers to organization touchpoint contact points.
 
@@ -114,6 +113,7 @@ def merge_touchpoint_contact_fax(
         - Creates parties array if needed
         - Updates existing touchpoints' contactPoint
         - Preserves existing identifiers
+
     """
     if not touchpoint_data:
         logger.warning("No touchpoint contact fax data to merge")

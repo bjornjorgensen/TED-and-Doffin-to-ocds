@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_lots_group_identifier(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the lot group identifiers from XML data.
+    """Parse the lot group identifiers from XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing lot group information
@@ -26,6 +25,7 @@ def parse_lots_group_identifier(xml_content: str | bytes) -> dict | None:
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -53,8 +53,7 @@ def parse_lots_group_identifier(xml_content: str | bytes) -> dict | None:
 def merge_lots_group_identifier(
     release_json: dict, lots_group_data: dict | None
 ) -> None:
-    """
-    Merge lot group identifier data into the release JSON.
+    """Merge lot group identifier data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -64,6 +63,7 @@ def merge_lots_group_identifier(
     Note:
         The function modifies release_json in-place by adding new lot groups to
         tender.lotGroups only if they don't already exist.
+
     """
     if not lots_group_data:
         return

@@ -9,8 +9,7 @@ logger = logging.getLogger(__name__)
 def parse_tender_identifier_reference(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse tender identifier references from lot results.
+    """Parse tender identifier references from lot results.
 
     For each lot result:
     - Gets tender IDs from LotTender elements
@@ -29,6 +28,7 @@ def parse_tender_identifier_reference(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -61,8 +61,7 @@ def parse_tender_identifier_reference(
 def merge_tender_identifier_reference(
     release_json: dict[str, Any], tender_identifier_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge tender identifier data into the release JSON.
+    """Merge tender identifier data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -71,6 +70,7 @@ def merge_tender_identifier_reference(
     Effects:
         Updates the awards section of release_json with relatedBids arrays,
         combining bid references for the same award
+
     """
     if not tender_identifier_data:
         logger.info("No Tender Identifier Reference data to merge.")

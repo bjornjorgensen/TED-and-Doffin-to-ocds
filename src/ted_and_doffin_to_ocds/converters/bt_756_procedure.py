@@ -8,14 +8,14 @@ logger = logging.getLogger(__name__)
 
 
 def parse_pin_competition_termination(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the XML content to extract the PIN competition termination information.
+    """Parse the XML content to extract the PIN competition termination information.
 
     Args:
         xml_content (Union[str, bytes]): The XML content to parse.
 
     Returns:
         Optional[Dict]: A dictionary containing the parsed data, or None if no relevant data is found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -44,8 +44,7 @@ def merge_pin_competition_termination(
     release_json: dict,
     parsed_data: dict | None,
 ) -> None:
-    """
-    Merge the parsed PIN competition termination data into the main OCDS release JSON.
+    """Merge the parsed PIN competition termination data into the main OCDS release JSON.
 
     Args:
         release_json (Dict): The main OCDS release JSON to be updated.
@@ -53,6 +52,7 @@ def merge_pin_competition_termination(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not parsed_data:
         logger.info("No PIN Competition Termination data to merge")

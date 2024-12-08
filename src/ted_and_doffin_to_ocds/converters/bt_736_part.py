@@ -1,4 +1,9 @@
-# converters/bt_736_part.py
+"""Converter for BT-736-Part: Reserved execution for sheltered employment programmes.
+
+This module handles the extraction and mapping of contract reserved execution information
+from eForms notices to OCDS format for Parts, specifically whether contracts must be
+performed under sheltered employment programmes.
+"""
 
 import logging
 
@@ -10,18 +15,26 @@ logger = logging.getLogger(__name__)
 def parse_reserved_execution_part(
     xml_content: str | bytes,
 ) -> dict[str, dict[str, bool]] | None:
-    """
-    Parse reserved execution information for the part.
+    """Parse whether a part is reserved for sheltered employment programmes.
 
-    BT-736-Part: Whether the execution of the contract must be performed in the
-    framework of sheltered employment programmes.
+    Checks if the contract execution must be performed under sheltered employment
+    programmes by examining the ExecutionRequirementCode with listName='reserved-execution'.
+    If the code is 'yes', sets tender.contractTerms.reservedExecution to true.
 
     Args:
         xml_content: XML content to parse
 
     Returns:
-        dict: Dictionary containing tender contractTerms data if found
+        dict: Dictionary in format:
+            {
+                "tender": {
+                    "contractTerms": {
+                        "reservedExecution": bool
+                    }
+                }
+            }
         None: If no relevant data found or value is not "yes"
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -47,15 +60,26 @@ def parse_reserved_execution_part(
 def merge_reserved_execution_part(
     release_json: dict, reserved_execution_data: dict[str, dict[str, bool]] | None
 ) -> None:
-    """
-    Merge reserved execution data for the part into the OCDS release JSON.
+    """Merge reserved execution data for the part into the OCDS release.
+
+    Updates or adds tender.contractTerms.reservedExecution in the release JSON
+    to indicate whether contract execution must be performed under sheltered
+    employment programmes.
 
     Args:
         release_json: Target release JSON to update
-        reserved_execution_data: Reserved execution data to merge
+        reserved_execution_data: Reserved execution data to merge in format:
+            {
+                "tender": {
+                    "contractTerms": {
+                        "reservedExecution": bool
+                    }
+                }
+            }
 
     Note:
-        Updates release_json in-place.
+        Updates release_json in-place
+
     """
     if not reserved_execution_data:
         logger.warning("No reserved execution data for part to merge")

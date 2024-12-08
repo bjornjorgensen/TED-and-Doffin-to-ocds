@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_selection_criteria(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse the XML content to extract the selection criteria name and description for each lot.
+    """Parse the XML content to extract the selection criteria name and description for each lot.
 
     Args:
         xml_content (Union[str, bytes]): The XML content to parse.
@@ -20,6 +19,7 @@ def parse_selection_criteria(
     Returns:
         Optional[Dict[str, Any]]: A dictionary containing the parsed selection criteria data,
                                  or None if no relevant data is found.
+
     """
     logger.debug("Starting parse_selection_criteria")
     if isinstance(xml_content, str):
@@ -128,8 +128,7 @@ def parse_selection_criteria(
 def merge_selection_criteria(
     release_json: dict[str, Any], selection_criteria_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge the parsed selection criteria data into the main OCDS release JSON.
+    """Merge the parsed selection criteria data into the main OCDS release JSON.
 
     Args:
         release_json (Dict[str, Any]): The main OCDS release JSON to be updated.
@@ -137,6 +136,7 @@ def merge_selection_criteria(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not selection_criteria_data:
         logger.warning("No selection criteria data to merge")

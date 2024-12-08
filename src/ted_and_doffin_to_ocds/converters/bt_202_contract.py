@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_contract_modification_summary(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse contract modification summary from XML data.
+    """Parse contract modification summary from XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing contract information
@@ -34,6 +33,7 @@ def parse_contract_modification_summary(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -102,13 +102,13 @@ def parse_contract_modification_summary(
 def merge_contract_modification_summary(
     release_json: dict, modification_data: dict | None
 ) -> None:
-    """
-    Merge contract modification summary data into the release JSON.
+    """Merge contract modification summary data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
         modification_data (Optional[Dict]): The source data containing contracts
             to be merged. If None, function returns without making changes.
+
     """
     if not modification_data:
         return

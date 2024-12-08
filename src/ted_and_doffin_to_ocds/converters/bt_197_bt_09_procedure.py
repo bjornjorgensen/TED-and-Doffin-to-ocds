@@ -34,8 +34,7 @@ NON_PUBLICATION_JUSTIFICATION = {
 def bt_197_parse_unpublished_justification_code_bt_09_procedure(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse the XML content to extract the unpublished justification code for the procedure.
+    """Parse the XML content to extract the unpublished justification code for the procedure.
 
     This function extracts BT-197 (justification code) data related to BT-09 (Procedure) from the XML.
     It looks for FieldsPrivacy elements containing codes for why certain information is withheld.
@@ -61,6 +60,7 @@ def bt_197_parse_unpublished_justification_code_bt_09_procedure(
                 ]
             }
         Returns None if no relevant data is found or if XML parsing fails.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -115,8 +115,7 @@ def bt_197_merge_unpublished_justification_code_bt_09_procedure(
     release_json: dict,
     unpublished_justification_code_data: dict | None,
 ) -> None:
-    """
-    Merge the parsed unpublished justification code data into the main OCDS release JSON.
+    """Merge the parsed unpublished justification code data into the main OCDS release JSON.
 
     This function updates the withheldInformation array in the release_json with justification
     codes from unpublished fields related to procedure information.
@@ -130,6 +129,7 @@ def bt_197_merge_unpublished_justification_code_bt_09_procedure(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not unpublished_justification_code_data:
         logger.warning(

@@ -29,6 +29,7 @@ def parse_lot_start_date(xml_content: str | bytes) -> dict[str, Any] | None:
                 ]
             }
         }
+
     """
     logger.info("Starting parse_lot_start_date function")
     if isinstance(xml_content, str):
@@ -90,6 +91,7 @@ def merge_lot_start_date(
 
     Returns:
         None - modifies release_json in place
+
     """
     logger.info("Starting merge_lot_start_date function")
     logger.info("Merging lot start date data: %s", lot_start_date_data)

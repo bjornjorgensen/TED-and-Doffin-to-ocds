@@ -36,6 +36,7 @@ def parse_bt195_bt539_unpublished_identifier(
         >>> print(result)
         {'withheldInformation': [{'id': 'awa-cri-typ-LOT-0001', 'field': 'awa-cri-typ',
           'name': 'Award Criterion Type'}]}
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -99,6 +100,7 @@ def merge_bt195_bt539_unpublished_identifier(
         >>> merge_bt195_bt539_unpublished_identifier(release, data)
         >>> print(release)
         {'withheldInformation': [{'id': 'awa-cri-typ-LOT-0001'}]}
+
     """
     if not unpublished_identifier_data:
         logger.warning("No unpublished identifier data to merge for BT-195(BT-539)")

@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_subcontracting(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the XML content to extract the subcontracting information for each tender.
+    """Parse the XML content to extract the subcontracting information for each tender.
 
     Args:
         xml_content (Union[str, bytes]): The XML content to parse.
@@ -30,6 +29,7 @@ def parse_subcontracting(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -69,8 +69,7 @@ def parse_subcontracting(xml_content: str | bytes) -> dict | None:
 
 
 def merge_subcontracting(release_json: dict, subcontracting_data: dict | None) -> None:
-    """
-    Merge the parsed subcontracting data into the main OCDS release JSON.
+    """Merge the parsed subcontracting data into the main OCDS release JSON.
 
     Args:
         release_json (Dict): The main OCDS release JSON to be updated.
@@ -78,6 +77,7 @@ def merge_subcontracting(release_json: dict, subcontracting_data: dict | None) -
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not subcontracting_data:
         logger.warning("No subcontracting data to merge")

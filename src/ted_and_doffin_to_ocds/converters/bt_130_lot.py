@@ -10,8 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_dispatch_invitation_tender(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the dispatch invitation tender dates from lot-level XML data.
+    """Parse the dispatch invitation tender dates from lot-level XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing lot information
@@ -31,6 +30,7 @@ def parse_dispatch_invitation_tender(xml_content: str | bytes) -> dict | None:
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -78,8 +78,7 @@ def parse_dispatch_invitation_tender(xml_content: str | bytes) -> dict | None:
 def merge_dispatch_invitation_tender(
     release_json: dict, dispatch_invitation_data: dict | None
 ) -> None:
-    """
-    Merge dispatch invitation tender data into the release JSON.
+    """Merge dispatch invitation tender data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -89,6 +88,7 @@ def merge_dispatch_invitation_tender(
     Note:
         The function modifies release_json in-place by adding or updating the
         tender.lots.secondStage.invitationDate field for matching lots.
+
     """
     if not dispatch_invitation_data:
         logger.warning("No Dispatch Invitation Tender data to merge")

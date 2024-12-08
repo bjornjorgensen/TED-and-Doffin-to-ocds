@@ -32,8 +32,7 @@ JUSTIFICATION_CODES = {
 
 
 def parse_bt197_bt171_unpublished_justification_code(xml_content):
-    """
-    Parse the XML content to extract the unpublished justification code for the tender rank.
+    """Parse the XML content to extract the unpublished justification code for the tender rank.
 
     Args:
         xml_content (str): The XML content to parse.
@@ -41,6 +40,7 @@ def parse_bt197_bt171_unpublished_justification_code(xml_content):
     Returns:
         dict: A dictionary containing the parsed unpublished justification code data.
         None: If no relevant data is found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -92,8 +92,7 @@ def merge_bt197_bt171_unpublished_justification_code(
     release_json,
     unpublished_justification_code_data,
 ) -> None:
-    """
-    Merge the parsed unpublished justification code data into the main OCDS release JSON.
+    """Merge the parsed unpublished justification code data into the main OCDS release JSON.
 
     Args:
         release_json (dict): The main OCDS release JSON to be updated.
@@ -101,6 +100,7 @@ def merge_bt197_bt171_unpublished_justification_code(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not unpublished_justification_code_data:
         logger.warning(

@@ -22,6 +22,7 @@ def parse_awarding_cpb_buyer_indicator(xml_content: str | bytes) -> dict | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -64,6 +65,7 @@ def merge_awarding_cpb_buyer_indicator(
     Args:
         release_json: The release to merge into
         procuring_entity_data: Data about procuring entities to merge, or None if no data
+
     """
     if not procuring_entity_data:
         logger.debug("No Awarding CPB Buyer Indicator data to merge")

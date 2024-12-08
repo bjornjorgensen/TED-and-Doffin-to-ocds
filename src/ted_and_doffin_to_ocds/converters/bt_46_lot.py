@@ -19,6 +19,7 @@ def parse_jury_member_name(xml_content: str | bytes) -> dict | None:
     Returns:
         dict: OCDS-formatted dictionary containing jury member data, or
         None if no relevant data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -76,6 +77,7 @@ def merge_jury_member_name(
     Args:
         release_json: The main release JSON to update
         jury_member_data: Jury member data to merge, as returned by parse_jury_member_name()
+
     """
     if not jury_member_data:
         logger.warning("No Jury Member Name data to merge")

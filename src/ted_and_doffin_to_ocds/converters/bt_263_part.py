@@ -17,6 +17,7 @@ def parse_additional_classification_code_part(
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing items with classification IDs,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -59,6 +60,7 @@ def merge_additional_classification_code_part(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         additional_classification_data (Optional[Dict[str, Any]]): Item data containing IDs to merge
+
     """
     if not additional_classification_data:
         return

@@ -9,8 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_financing_party(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse financing party references from lot results.
+    """Parse financing party references from lot results.
 
     Identifies organizations that serve as funders for lots.
     Adds funder role to identified organizations.
@@ -32,6 +31,7 @@ def parse_financing_party(xml_content: str | bytes) -> dict[str, Any] | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -62,8 +62,7 @@ def parse_financing_party(xml_content: str | bytes) -> dict[str, Any] | None:
 def merge_financing_party(
     release_json: dict[str, Any], financing_party_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge financing party data into the release JSON.
+    """Merge financing party data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -72,6 +71,7 @@ def merge_financing_party(
     Effects:
         Updates the parties section of release_json with funder roles,
         merging with existing party roles where applicable
+
     """
     if not financing_party_data:
         logger.info("No Financing Party (ID reference) data to merge")

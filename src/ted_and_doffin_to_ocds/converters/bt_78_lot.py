@@ -40,6 +40,7 @@ def parse_security_clearance_deadline(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -101,6 +102,7 @@ def merge_security_clearance_deadline(
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not security_clearance_data:
         logger.warning("No Security Clearance Deadline data to merge")

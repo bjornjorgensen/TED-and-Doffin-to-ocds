@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_organization_identifier(xml_content: str | bytes) -> dict | None:
-    """
-    Parse organization identifier information from XML content.
+    """Parse organization identifier information from XML content.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing organization information
@@ -17,7 +16,8 @@ def parse_organization_identifier(xml_content: str | bytes) -> dict | None:
     Returns:
         Optional[Dict]: A dictionary containing parsed organization data in OCDS format with
         'parties' array, or None if no valid organization data is found.
-        Example:
+
+    Example:
         {
             "parties": [{
                 "id": "ORG-0001",
@@ -27,6 +27,7 @@ def parse_organization_identifier(xml_content: str | bytes) -> dict | None:
                 }]
             }]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -72,8 +73,7 @@ def parse_organization_identifier(xml_content: str | bytes) -> dict | None:
 def merge_organization_identifier(
     release_json: dict, organization_identifier_data: dict | None
 ) -> None:
-    """
-    Merge organization identifier data into the release JSON.
+    """Merge organization identifier data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -86,6 +86,7 @@ def merge_organization_identifier(
     Note:
         If organization_identifier_data is None or contains no parties, no changes are made.
         For existing parties, new identifiers are appended to additionalIdentifiers if not present.
+
     """
     if not organization_identifier_data:
         logger.info("No organization identifier data to merge")

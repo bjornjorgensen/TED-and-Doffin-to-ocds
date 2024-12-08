@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 def parse_bt196_bt541_lotsgroup_weight(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse the XML content to extract the unpublished justification description for the LotsGroup weight award criterion.
+    """Parse the XML content to extract the unpublished justification description for the LotsGroup weight award criterion.
 
     This function extracts BT-196 (justification) data related to BT-541 (LotsGroup weight) from the XML.
     It looks for FieldsPrivacy elements containing reasons why certain award criterion information is withheld.
@@ -30,6 +29,7 @@ def parse_bt196_bt541_lotsgroup_weight(
                 ]
             }
         Returns None if no relevant data is found or if XML parsing fails.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -86,8 +86,7 @@ def merge_bt196_bt541_lotsgroup_weight(
     release_json: dict,
     unpublished_justification_data: dict | None,
 ) -> None:
-    """
-    Merge the parsed unpublished justification data into the main OCDS release JSON.
+    """Merge the parsed unpublished justification data into the main OCDS release JSON.
 
     This function updates the withheldInformation array in the release_json with justification
     data from unpublished fields related to LotsGroup weight award criteria.
@@ -101,6 +100,7 @@ def merge_bt196_bt541_lotsgroup_weight(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not unpublished_justification_data:
         logger.warning(

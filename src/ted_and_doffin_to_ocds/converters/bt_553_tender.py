@@ -37,6 +37,7 @@ def parse_subcontracting_value(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -103,6 +104,7 @@ def merge_subcontracting_value(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not subcontracting_data:
         logger.warning("No subcontracting value data to merge")

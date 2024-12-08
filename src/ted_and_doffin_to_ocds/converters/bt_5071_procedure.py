@@ -10,8 +10,7 @@ logger = logging.getLogger(__name__)
 def parse_place_performance_country_subdivision_procedure(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse country subdivision codes (NUTS3) from procurement project.
+    """Parse country subdivision codes (NUTS3) from procurement project.
     Maps to region in tender.deliveryAddresses objects.
 
     Args:
@@ -20,6 +19,7 @@ def parse_place_performance_country_subdivision_procedure(
     Returns:
         dict: Dictionary containing the parsed delivery addresses with region info
         None: If no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -45,13 +45,13 @@ def parse_place_performance_country_subdivision_procedure(
 def merge_place_performance_country_subdivision_procedure(
     release_json: dict, subdivision_data: dict | None
 ) -> None:
-    """
-    Merge country subdivision data into the OCDS release.
+    """Merge country subdivision data into the OCDS release.
     Updates or adds region info to matching delivery addresses.
 
     Args:
         release_json: The main OCDS release JSON to update
         subdivision_data: The parsed subdivision data to merge
+
     """
     if not subdivision_data:
         logger.info("No place performance country subdivision data to merge")

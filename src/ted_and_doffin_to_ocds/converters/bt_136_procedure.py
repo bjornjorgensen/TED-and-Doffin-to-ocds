@@ -59,8 +59,7 @@ JUSTIFICATION_CODES = {
 def parse_direct_award_justification_code(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse the direct award justification code from XML data.
+    """Parse the direct award justification code from XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing justification information
@@ -79,6 +78,7 @@ def parse_direct_award_justification_code(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -119,8 +119,7 @@ def parse_direct_award_justification_code(
 def merge_direct_award_justification_code(
     release_json: dict, justification_data: dict | None
 ) -> None:
-    """
-    Merge direct award justification code data into the release JSON.
+    """Merge direct award justification code data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -130,6 +129,7 @@ def merge_direct_award_justification_code(
     Note:
         The function modifies release_json in-place by adding or updating the
         tender.procurementMethodRationaleClassifications field.
+
     """
     if not justification_data:
         return

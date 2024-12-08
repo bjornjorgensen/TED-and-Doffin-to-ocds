@@ -9,8 +9,7 @@ logger = logging.getLogger(__name__)
 def parse_buyer_technical_identifier(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse buyer technical identifiers from contracting party information.
+    """Parse buyer technical identifiers from contracting party information.
 
     Creates party entries with buyer role and links them through buyer reference.
 
@@ -31,6 +30,7 @@ def parse_buyer_technical_identifier(
                 "id": "org_id"
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -61,8 +61,7 @@ def parse_buyer_technical_identifier(
 def merge_buyer_technical_identifier(
     release_json: dict[str, Any], buyer_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge buyer technical identifier data into the release JSON.
+    """Merge buyer technical identifier data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -71,6 +70,7 @@ def merge_buyer_technical_identifier(
     Effects:
         - Updates parties section with buyer roles
         - Sets single buyer reference
+
     """
     if not buyer_data:
         return

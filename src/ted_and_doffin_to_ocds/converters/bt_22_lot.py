@@ -15,6 +15,7 @@ def parse_lot_internal_identifier(xml_content: str | bytes) -> dict[str, Any] | 
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing lots data with internal identifiers,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -61,6 +62,7 @@ def merge_lot_internal_identifier(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         lot_internal_identifier_data (Optional[Dict[str, Any]]): Lot data containing internal identifiers to merge
+
     """
     if not lot_internal_identifier_data:
         return

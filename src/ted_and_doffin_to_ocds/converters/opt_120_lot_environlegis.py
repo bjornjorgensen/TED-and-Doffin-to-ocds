@@ -17,8 +17,7 @@ NAMESPACES = {
 def parse_environmental_legislation_url(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse environmental legislation URL information (OPT-120) from XML content.
+    """Parse environmental legislation URL information (OPT-120) from XML content.
 
     Gets document references from each lot and creates corresponding Document
     objects with URLs and lot references.
@@ -28,6 +27,7 @@ def parse_environmental_legislation_url(
 
     Returns:
         Dictionary containing documents with URLs or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -79,8 +79,7 @@ def parse_environmental_legislation_url(
 def merge_environmental_legislation_url(
     release_json: dict[str, Any], env_url_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge environmental legislation URL information into the release JSON.
+    """Merge environmental legislation URL information into the release JSON.
 
     Updates or creates documents with URLs and lot references.
     Preserves existing document data while adding/updating URLs.
@@ -91,6 +90,7 @@ def merge_environmental_legislation_url(
 
     Returns:
         None
+
     """
     if not env_url_data:
         logger.warning("No environmental legislation URL data to merge")

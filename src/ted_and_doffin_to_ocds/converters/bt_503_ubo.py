@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_ubo_telephone(xml_content: str | bytes) -> dict | None:
-    """
-    Parse UBO (Ultimate Beneficial Owner) telephone information from XML content.
+    """Parse UBO (Ultimate Beneficial Owner) telephone information from XML content.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing UBO telephone information
@@ -17,7 +16,8 @@ def parse_ubo_telephone(xml_content: str | bytes) -> dict | None:
     Returns:
         Optional[Dict]: A dictionary containing parsed UBO telephone data in OCDS format with
         'parties' array, or None if no valid UBO data is found.
-        Example:
+
+    Example:
         {
             "parties": [{
                 "id": "ORG-0001",
@@ -27,6 +27,7 @@ def parse_ubo_telephone(xml_content: str | bytes) -> dict | None:
                 }]
             }]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -73,8 +74,7 @@ def parse_ubo_telephone(xml_content: str | bytes) -> dict | None:
 
 
 def merge_ubo_telephone(release_json: dict, ubo_telephone_data: dict | None) -> None:
-    """
-    Merge UBO telephone data into the release JSON.
+    """Merge UBO telephone data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -87,6 +87,7 @@ def merge_ubo_telephone(release_json: dict, ubo_telephone_data: dict | None) -> 
     Note:
         If ubo_telephone_data is None or contains no parties, no changes are made.
         For existing parties, beneficial owner telephone information is updated or added.
+
     """
     if not ubo_telephone_data:
         logger.info("No UBO telephone data to merge")

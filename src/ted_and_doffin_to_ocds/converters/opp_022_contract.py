@@ -15,8 +15,7 @@ NAMESPACES = {
 
 
 def parse_asset_significance(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse asset significance information (OPP-022) from XML content.
+    """Parse asset significance information (OPP-022) from XML content.
 
     Gets asset significance values from each contract and maps them to
     corresponding lots' essential assets array.
@@ -26,6 +25,7 @@ def parse_asset_significance(xml_content: str | bytes) -> dict[str, Any] | None:
 
     Returns:
         Dictionary containing lots with asset significance or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -97,8 +97,7 @@ def parse_asset_significance(xml_content: str | bytes) -> dict[str, Any] | None:
 def merge_asset_significance(
     release_json: dict[str, Any], significance_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge asset significance information into the release JSON.
+    """Merge asset significance information into the release JSON.
 
     Updates or creates lots with essential assets significance values.
     Preserves existing lot data while adding/updating significance information.
@@ -109,6 +108,7 @@ def merge_asset_significance(
 
     Returns:
         None
+
     """
     if not significance_data:
         logger.warning("No asset significance data to merge")

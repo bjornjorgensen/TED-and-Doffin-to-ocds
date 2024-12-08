@@ -35,6 +35,7 @@ def parse_subcontracting_percentage(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -98,6 +99,7 @@ def merge_subcontracting_percentage(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not subcontracting_data:
         logger.warning("BT-555-Tender: No subcontracting percentage data to merge")

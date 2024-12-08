@@ -1,5 +1,4 @@
-"""
-BT-03 Form Type converter.
+"""BT-03 Form Type converter.
 
 This module handles conversion of procurement notice form types to OCDS format.
 It maps the form types specified in EU Vocabularies to corresponding OCDS tags and tender statuses.
@@ -37,6 +36,7 @@ def parse_form_type(
         >>> result = parse_form_type(xml_string)
         >>> print(result)
         {'tag': ['tender'], 'tender': {'status': 'active'}}
+
     """
     try:
         if isinstance(xml_content, str):
@@ -91,6 +91,7 @@ def merge_form_type(
         >>> merge_form_type(release, form_data)
         >>> print(release)
         {'tag': ['tender'], 'tender': {'status': 'active'}}
+
     """
     if not form_type_data:
         logger.info("No form type data to merge.")

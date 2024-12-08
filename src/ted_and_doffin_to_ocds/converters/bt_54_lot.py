@@ -28,6 +28,7 @@ def parse_options_description(xml_content: str | bytes) -> dict | None:
                 }]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -87,6 +88,7 @@ def merge_options_description(
 
     Returns:
         None. Updates release_json in place.
+
     """
     if not options_description_data:
         logger.warning("No Options Description data to merge")

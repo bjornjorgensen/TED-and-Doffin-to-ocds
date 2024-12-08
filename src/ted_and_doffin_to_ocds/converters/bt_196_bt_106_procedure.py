@@ -29,6 +29,7 @@ def parse_bt196_bt106_unpublished_justification(
                 ]
             }
         Returns None if no relevant data is found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -79,6 +80,7 @@ def merge_bt196_bt106_unpublished_justification(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not unpublished_justification_data:
         logger.info("No unpublished justification data to merge for BT-196(BT-106)")

@@ -28,6 +28,7 @@ def parse_ubo_postcode(xml_content: str | bytes) -> dict | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -83,6 +84,7 @@ def merge_ubo_postcode(release_json: dict, ubo_postcode_data: dict | None) -> No
 
     Returns:
         None. Updates release_json in place.
+
     """
     if not ubo_postcode_data:
         logger.warning("No ubo Postcode data to merge")

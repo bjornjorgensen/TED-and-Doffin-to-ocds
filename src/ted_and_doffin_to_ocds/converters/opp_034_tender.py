@@ -17,8 +17,7 @@ NAMESPACES = {
 
 
 def parse_penalties_and_rewards(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse penalties and rewards information (OPP-034) from XML content.
+    """Parse penalties and rewards information (OPP-034) from XML content.
 
     This mapping assumes that rewards and penalties descriptions are consistent across all lot tenders
     for a given lot. Contact OCDS Data Support Team if values vary per lot tender.
@@ -31,6 +30,7 @@ def parse_penalties_and_rewards(xml_content: str | bytes) -> dict[str, Any] | No
 
     Returns:
         Dictionary containing lots with penalties and rewards or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -94,8 +94,7 @@ def parse_penalties_and_rewards(xml_content: str | bytes) -> dict[str, Any] | No
 def merge_penalties_and_rewards(
     release_json: dict[str, Any], penalties_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge penalties and rewards information into the release JSON.
+    """Merge penalties and rewards information into the release JSON.
 
     Updates or creates lots with rewards and penalties descriptions.
     Preserves existing lot data while adding/updating rewards info.
@@ -106,6 +105,7 @@ def merge_penalties_and_rewards(
 
     Returns:
         None
+
     """
     if not penalties_data:
         logger.warning("No penalties and rewards data to merge")

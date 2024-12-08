@@ -9,8 +9,7 @@ logger = logging.getLogger(__name__)
 def parse_fiscal_legislation_org_part(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse fiscal legislation organization references from parts.
+    """Parse fiscal legislation organization references from parts.
 
     For each fiscal legislation document:
     - Gets document publisher organization ID
@@ -39,6 +38,7 @@ def parse_fiscal_legislation_org_part(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -78,8 +78,7 @@ def parse_fiscal_legislation_org_part(
 def merge_fiscal_legislation_org_part(
     release_json: dict[str, Any], parsed_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge fiscal legislation organization data from parts into the release JSON.
+    """Merge fiscal legislation organization data from parts into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -89,6 +88,7 @@ def merge_fiscal_legislation_org_part(
         - Updates parties with informationService roles
         - Updates documents with publisher references
         - Maintains existing data while adding new information
+
     """
     if not parsed_data:
         return

@@ -36,6 +36,7 @@ def parse_framework_buyer_categories(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -91,6 +92,7 @@ def merge_framework_buyer_categories(
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not framework_buyer_categories_data:
         logger.warning("No Framework buyer Categories data to merge")

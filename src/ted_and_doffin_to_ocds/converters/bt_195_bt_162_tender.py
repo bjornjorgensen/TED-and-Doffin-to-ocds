@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_bt195_bt162_unpublished_identifier(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse unpublished field identifiers for concession revenue user (BT-195, BT-162).
+    """Parse unpublished field identifiers for concession revenue user (BT-195, BT-162).
 
     For fields marked as unpublished:
     - Gets lot tender ID
@@ -34,6 +33,7 @@ def parse_bt195_bt162_unpublished_identifier(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -80,8 +80,7 @@ def parse_bt195_bt162_unpublished_identifier(
 def merge_bt195_bt162_unpublished_identifier(
     release_json: dict[str, Any], unpublished_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge unpublished concession revenue user data into the release JSON.
+    """Merge unpublished concession revenue user data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -90,6 +89,7 @@ def merge_bt195_bt162_unpublished_identifier(
     Effects:
         Updates the withheldInformation section of release_json with
         unpublished concession revenue user information
+
     """
     if not unpublished_data:
         logger.warning("No unpublished identifier data to merge for BT-195(BT-162)")

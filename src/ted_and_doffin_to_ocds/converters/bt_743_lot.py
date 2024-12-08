@@ -21,8 +21,7 @@ EINVOICING_MAPPING = {
 
 
 def parse_lot_einvoicing_policy(xml_content: str | bytes) -> dict | None:
-    """
-    Parse BT-743: Electronic invoicing policy for lots.
+    """Parse BT-743: Electronic invoicing policy for lots.
 
     Extracts whether buyers will require, allow or not allow electronic invoices
     for each lot.
@@ -45,6 +44,7 @@ def parse_lot_einvoicing_policy(xml_content: str | bytes) -> dict | None:
                 }
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -93,8 +93,7 @@ def parse_lot_einvoicing_policy(xml_content: str | bytes) -> dict | None:
 def merge_lot_einvoicing_policy(
     release_json: dict, einvoicing_data: dict | None
 ) -> None:
-    """
-    Merge electronic invoicing policy data into the release JSON.
+    """Merge electronic invoicing policy data into the release JSON.
 
     Updates or adds e-invoicing policies for lots.
 
@@ -106,6 +105,7 @@ def merge_lot_einvoicing_policy(
         - Updates release_json in-place
         - Creates tender.lots array if needed
         - Updates existing lots' contractTerms
+
     """
     if not einvoicing_data:
         logger.warning("No electronic invoicing policy data to merge")

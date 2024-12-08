@@ -10,8 +10,7 @@ logger = logging.getLogger(__name__)
 def parse_previous_planning_identifier_part(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse the previous planning identifier information from part-level XML data.
+    """Parse the previous planning identifier information from part-level XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing part information
@@ -29,6 +28,7 @@ def parse_previous_planning_identifier_part(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -83,8 +83,7 @@ def parse_previous_planning_identifier_part(
 def merge_previous_planning_identifier_part(
     release_json: dict, previous_planning_data: dict | None
 ) -> None:
-    """
-    Merge previous planning identifier data into the release JSON.
+    """Merge previous planning identifier data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -94,6 +93,7 @@ def merge_previous_planning_identifier_part(
     Note:
         The function modifies release_json in-place by adding or updating the
         relatedProcesses field with new planning identifiers.
+
     """
     if not previous_planning_data:
         logger.warning("No Previous Planning Identifier (Part) data to merge")

@@ -10,8 +10,7 @@ logger = logging.getLogger(__name__)
 def parse_direct_award_justification_rationale(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse the direct award justification rationale from XML data.
+    """Parse the direct award justification rationale from XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing justification information
@@ -24,6 +23,7 @@ def parse_direct_award_justification_rationale(
                 "procurementMethodRationale": str
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -54,8 +54,7 @@ def parse_direct_award_justification_rationale(
 def merge_direct_award_justification_rationale(
     release_json: dict, justification_data: dict | None
 ) -> None:
-    """
-    Merge direct award justification rationale into the release JSON.
+    """Merge direct award justification rationale into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -65,6 +64,7 @@ def merge_direct_award_justification_rationale(
     Note:
         The function modifies release_json in-place by adding or updating the
         tender.procurementMethodRationale field.
+
     """
     if not justification_data:
         return

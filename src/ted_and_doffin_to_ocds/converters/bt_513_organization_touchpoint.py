@@ -26,6 +26,7 @@ def parse_organization_touchpoint_city(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -82,6 +83,7 @@ def merge_organization_touchpoint_city(
 
     Returns:
         None. Updates release_json in place.
+
     """
     if not organization_touchpoint_city_data:
         logger.info("No organization touchpoint city data to merge")

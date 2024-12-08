@@ -33,6 +33,7 @@ def parse_award_criteria_weighting_description_lot(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -86,6 +87,7 @@ def merge_award_criteria_weighting_description_lot(
 
     Returns:
         None
+
     """
     if not award_criteria_data:
         logger.warning("No award criteria weighting description data to merge")

@@ -15,8 +15,7 @@ NAMESPACES = {
 
 
 def parse_lot_security_clearance_description(xml_content: str | bytes) -> dict | None:
-    """
-    Parse BT-732: Additional information about security clearance.
+    """Parse BT-732: Additional information about security clearance.
 
     Extracts information about required security clearances including level,
     team member requirements, and when clearance is needed.
@@ -39,6 +38,7 @@ def parse_lot_security_clearance_description(xml_content: str | bytes) -> dict |
                 }
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -82,8 +82,7 @@ def parse_lot_security_clearance_description(xml_content: str | bytes) -> dict |
 def merge_lot_security_clearance_description(
     release_json: dict, clearance_data: dict | None
 ) -> None:
-    """
-    Merge security clearance description data into the release JSON.
+    """Merge security clearance description data into the release JSON.
 
     Updates or adds security clearance requirements for lots.
 
@@ -95,6 +94,7 @@ def merge_lot_security_clearance_description(
         - Updates release_json in-place
         - Creates tender.lots array if needed
         - Updates existing lots' otherRequirements
+
     """
     if not clearance_data:
         logger.warning("No lot security clearance description data to merge")

@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_lot_duration(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the duration period for each lot from XML content.
+    """Parse the duration period for each lot from XML content.
 
     Args:
         xml_content (str | bytes): The XML content containing lot duration information.
@@ -17,6 +16,7 @@ def parse_lot_duration(xml_content: str | bytes) -> dict | None:
     Returns:
         dict | None: A dictionary containing lot durations in OCDS format,
                     or None if no valid durations are found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -66,8 +66,7 @@ def parse_lot_duration(xml_content: str | bytes) -> dict | None:
 
 
 def merge_lot_duration(release_json: dict, lot_duration_data: dict | None) -> None:
-    """
-    Merge the lot duration data into the release JSON.
+    """Merge the lot duration data into the release JSON.
 
     Args:
         release_json (dict): The target release JSON to merge into.
@@ -76,6 +75,7 @@ def merge_lot_duration(release_json: dict, lot_duration_data: dict | None) -> No
 
     Returns:
         None
+
     """
     if not lot_duration_data:
         logger.warning("No lot duration data to merge")

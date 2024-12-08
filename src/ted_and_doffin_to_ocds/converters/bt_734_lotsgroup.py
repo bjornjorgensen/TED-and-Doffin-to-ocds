@@ -19,8 +19,7 @@ NAMESPACES = {
 def parse_lots_group_award_criterion_name(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse BT-734: Award criterion name for lot groups.
+    """Parse BT-734: Award criterion name for lot groups.
 
     This field maps to the same AwardCriterion objects as created for BT-539-LotsGroup,
     BT-540-LotsGroup, BT-541-LotsGroup-FixedNumber, BT-541-LotsGroup-ThresholdNumber,
@@ -48,6 +47,7 @@ def parse_lots_group_award_criterion_name(
                 }
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -95,8 +95,7 @@ def parse_lots_group_award_criterion_name(
 def merge_lots_group_award_criterion_name(
     release_json: dict, criterion_data: dict | None
 ) -> None:
-    """
-    Merge award criterion name data into the release JSON.
+    """Merge award criterion name data into the release JSON.
 
     Updates or adds award criteria for lot groups, handling existing criteria appropriately.
 
@@ -109,6 +108,7 @@ def merge_lots_group_award_criterion_name(
         - Creates tender.lotGroups array if needed
         - Updates existing lot groups' awardCriteria
         - Handles duplicate criteria by checking names
+
     """
     if not criterion_data:
         logger.warning("No Award Criterion Name data for lot groups to merge")

@@ -29,6 +29,7 @@ def parse_organization_natural_person(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -82,6 +83,7 @@ def merge_organization_natural_person(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not organization_natural_person_data:
         logger.warning("No organization Natural Person data to merge")

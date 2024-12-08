@@ -11,8 +11,7 @@ NAMESPACES = {
 
 
 def parse_selection_criteria_source(xml_content: str | bytes) -> dict | None:
-    """
-    Parse BT-821: Selection criteria source locations for lots.
+    """Parse BT-821: Selection criteria source locations for lots.
 
     Extracts information about where selection criteria are defined (e.g. procurement
     documents or ESPD).
@@ -35,6 +34,7 @@ def parse_selection_criteria_source(xml_content: str | bytes) -> dict | None:
                 }
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -81,8 +81,7 @@ def parse_selection_criteria_source(xml_content: str | bytes) -> dict | None:
 def merge_selection_criteria_source(
     release_json: dict, source_data: dict | None
 ) -> None:
-    """
-    Merge selection criteria source data into the release JSON.
+    """Merge selection criteria source data into the release JSON.
 
     Updates or adds selection criteria sources to lots.
 
@@ -94,6 +93,7 @@ def merge_selection_criteria_source(
         - Updates release_json in-place
         - Creates tender.lots array if needed
         - Handles duplicate sources
+
     """
     if not source_data:
         logger.warning("No Selection Criteria Source data to merge")

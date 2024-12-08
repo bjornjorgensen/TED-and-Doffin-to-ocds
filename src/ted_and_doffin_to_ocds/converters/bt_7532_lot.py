@@ -10,14 +10,14 @@ logger = logging.getLogger(__name__)
 def parse_selection_criteria_number_threshold(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse the XML content to extract the selection criteria number threshold information.
+    """Parse the XML content to extract the selection criteria number threshold information.
 
     Args:
         xml_content (Union[str, bytes]): The XML content to parse.
 
     Returns:
         Optional[Dict]: A dictionary containing the parsed data, or None if no relevant data is found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -85,8 +85,7 @@ def merge_selection_criteria_number_threshold(
     release_json: dict,
     parsed_data: dict | None,
 ) -> None:
-    """
-    Merge the parsed selection criteria number threshold data into the main OCDS release JSON.
+    """Merge the parsed selection criteria number threshold data into the main OCDS release JSON.
 
     Args:
         release_json (Dict): The main OCDS release JSON to be updated.
@@ -94,6 +93,7 @@ def merge_selection_criteria_number_threshold(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not parsed_data:
         logger.warning("No Selection Criteria Number Threshold data to merge")

@@ -6,8 +6,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_bt_271_lots_group(xml_content: str | bytes) -> dict | None:
-    """
-    Parse framework maximum value from lot group-level XML data.
+    """Parse framework maximum value from lot group-level XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing lot group information
@@ -32,6 +31,7 @@ def parse_bt_271_lots_group(xml_content: str | bytes) -> dict | None:
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -89,13 +89,13 @@ def parse_bt_271_lots_group(xml_content: str | bytes) -> dict | None:
 def merge_bt_271_lots_group(
     release_json: dict, bt_271_lots_group_data: dict | None
 ) -> None:
-    """
-    Merge framework maximum value data into the release JSON.
+    """Merge framework maximum value data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
         bt_271_lots_group_data (Optional[Dict]): The source data containing tender lot groups
             to be merged. If None, function returns without making changes.
+
     """
     if not bt_271_lots_group_data:
         return

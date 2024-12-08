@@ -1,4 +1,8 @@
-# converters/bt_735_Lot.py
+"""Converter for BT-735-Lot: CVD contract type information.
+
+This module handles the extraction and mapping of Clean Vehicle Directive (CVD)
+contract type information from eForms notices to OCDS format.
+"""
 
 import logging
 
@@ -6,6 +10,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+# Mapping of CVD (Clean Vehicle Directive) contract type codes to descriptions
 CVD_CONTRACT_TYPE_LABELS = {
     "oth-serv-contr": "Other service contract",
     "pass-tran-serv": "Passenger road transport services",
@@ -16,15 +21,34 @@ CVD_CONTRACT_TYPE_LABELS = {
 def parse_cvd_contract_type(
     xml_content: str | bytes,
 ) -> dict[str, dict[str, list[dict[str, str]]]] | None:
-    """
-    Parse the XML content to extract the CVD contract type for each lot.
+    """Parse the CVD (Clean Vehicle Directive) contract type for each lot.
+
+    This function extracts the contract type according to table 1 CVD, which includes
+    purchase, lease, rent, hired-purchase, public service contracts and service contracts.
 
     Args:
         xml_content (str or bytes): The XML content to parse.
 
     Returns:
-        dict: A dictionary containing the parsed CVD contract type data for lots.
+        dict: A dictionary containing the parsed CVD contract type data for lots in format:
+            {
+                "tender": {
+                    "lots": [
+                        {
+                            "id": str,
+                            "additionalClassifications": [
+                                {
+                                    "id": str,  # CVD contract type code
+                                    "scheme": "eu-cvd-contract-type",
+                                    "description": str  # Human readable description
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
         None: If no relevant data is found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -76,15 +100,18 @@ def merge_cvd_contract_type(
     release_json: dict,
     cvd_contract_type_data: dict[str, dict[str, list[dict[str, str]]]] | None,
 ) -> None:
-    """
-    Merge the parsed CVD contract type data for lots into the main OCDS release JSON.
+    """Merge the CVD (Clean Vehicle Directive) contract type data into the OCDS release.
+
+    Adds or updates the additionalClassifications array in each lot with CVD contract
+    type information according to Table 1 of the Clean Vehicle Directive.
 
     Args:
         release_json (dict): The main OCDS release JSON to be updated.
-        cvd_contract_type_data (dict): The parsed CVD contract type data for lots to be merged.
+        cvd_contract_type_data (dict): The parsed CVD contract type data for lots.
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not cvd_contract_type_data:
         logger.warning("No CVD contract type data for lots to merge")

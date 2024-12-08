@@ -15,8 +15,7 @@ NAMESPACES = {
 
 
 def parse_asset_predominance(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse asset predominance information (OPP-023) from XML content.
+    """Parse asset predominance information (OPP-023) from XML content.
 
     Gets asset predominance values from each contract and maps them to
     corresponding lots' essential assets array.
@@ -26,6 +25,7 @@ def parse_asset_predominance(xml_content: str | bytes) -> dict[str, Any] | None:
 
     Returns:
         Dictionary containing lots with asset predominance or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -97,8 +97,7 @@ def parse_asset_predominance(xml_content: str | bytes) -> dict[str, Any] | None:
 def merge_asset_predominance(
     release_json: dict[str, Any], predominance_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge asset predominance information into the release JSON.
+    """Merge asset predominance information into the release JSON.
 
     Updates or creates lots with essential assets predominance values.
     Preserves existing lot data while adding/updating predominance information.
@@ -109,6 +108,7 @@ def merge_asset_predominance(
 
     Returns:
         None
+
     """
     if not predominance_data:
         logger.warning("No asset predominance data to merge")

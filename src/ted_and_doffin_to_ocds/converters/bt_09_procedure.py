@@ -1,5 +1,4 @@
-"""
-BT-09 Cross Border Law converter.
+"""BT-09 Cross Border Law converter.
 
 Maps the applicable law description for cross-border procurement procedures
 from DocumentDescription to OCDS tender.crossBorderLaw field.
@@ -35,6 +34,7 @@ def parse_cross_border_law(xml_content: str | bytes) -> dict[str, Any] | None:
         Dictionary containing cross border law mapping like:
         {'tender': {'crossBorderLaw': '<law description>'}}
         or None if not found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -58,6 +58,7 @@ def merge_cross_border_law(
     Args:
         release_json: The target release JSON to update
         cross_border_law_data: The cross border law data to merge
+
     """
     if cross_border_law_data and "tender" in cross_border_law_data:
         release_json.setdefault("tender", {})

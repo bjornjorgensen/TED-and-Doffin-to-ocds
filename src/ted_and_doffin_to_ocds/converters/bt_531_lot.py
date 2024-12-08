@@ -29,6 +29,7 @@ def parse_lot_additional_nature(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -77,6 +78,7 @@ def merge_lot_additional_nature(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not lot_additional_nature_data:
         logger.warning("No Lot Additional Nature data to merge")

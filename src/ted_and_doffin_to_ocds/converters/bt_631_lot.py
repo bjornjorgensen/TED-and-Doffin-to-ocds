@@ -33,6 +33,7 @@ def parse_dispatch_invitation_interest(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -83,6 +84,7 @@ def merge_dispatch_invitation_interest(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not dispatch_invitation_data:
         logger.warning("No dispatch invitation interest data to merge")

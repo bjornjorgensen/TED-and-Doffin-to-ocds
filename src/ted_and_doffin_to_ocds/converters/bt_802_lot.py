@@ -14,8 +14,7 @@ NAMESPACES = {
 
 
 def parse_nda_description(xml_content: str | bytes) -> dict | None:
-    """
-    Parse BT-802: Non-disclosure agreement description for lots.
+    """Parse BT-802: Non-disclosure agreement description for lots.
 
     Extracts additional information about NDA requirements for lots.
 
@@ -37,6 +36,7 @@ def parse_nda_description(xml_content: str | bytes) -> dict | None:
                 }
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -78,8 +78,7 @@ def parse_nda_description(xml_content: str | bytes) -> dict | None:
 
 
 def merge_nda_description(release_json: dict, nda_data: dict | None) -> None:
-    """
-    Merge NDA description data into the release JSON.
+    """Merge NDA description data into the release JSON.
 
     Updates or adds NDA descriptions to lot contract terms.
 
@@ -91,6 +90,7 @@ def merge_nda_description(release_json: dict, nda_data: dict | None) -> None:
         - Updates release_json in-place
         - Creates tender.lots array if needed
         - Updates existing lots' contractTerms
+
     """
     if not nda_data:
         logger.warning("No NDA description data to merge")

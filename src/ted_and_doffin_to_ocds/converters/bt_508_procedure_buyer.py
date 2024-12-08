@@ -17,8 +17,7 @@ NAMESPACES = {
 
 
 def parse_buyer_profile_url(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the buyer profile URL from contracting party information.
+    """Parse the buyer profile URL from contracting party information.
 
     Args:
         xml_content (Union[str, bytes]): XML content containing contracting party information
@@ -26,7 +25,8 @@ def parse_buyer_profile_url(xml_content: str | bytes) -> dict | None:
     Returns:
         Optional[Dict]: A dictionary containing parsed buyer profile data in OCDS format with
         'parties' array, or None if no valid data found.
-        Example:
+
+    Example:
         {
             "parties": [{
                 "id": "ORG-0001",
@@ -36,6 +36,7 @@ def parse_buyer_profile_url(xml_content: str | bytes) -> dict | None:
                 "roles": ["buyer"]
             }]
         }
+
     """
     try:
         if isinstance(xml_content, str):
@@ -87,8 +88,7 @@ def parse_buyer_profile_url(xml_content: str | bytes) -> dict | None:
 def merge_buyer_profile_url(
     release_json: dict, buyer_profile_data: dict | None
 ) -> None:
-    """
-    Merge buyer profile URL data into release JSON.
+    """Merge buyer profile URL data into release JSON.
 
     Args:
         release_json (Dict): Target release JSON to update
@@ -102,6 +102,7 @@ def merge_buyer_profile_url(
         If buyer_profile_data is None or contains no parties, no changes are made.
         For existing parties, both details.buyerProfile and roles arrays are updated.
         The 'buyer' role is added if not already present.
+
     """
     if not buyer_profile_data or not buyer_profile_data.get("parties"):
         logger.debug("No buyer profile data to merge")

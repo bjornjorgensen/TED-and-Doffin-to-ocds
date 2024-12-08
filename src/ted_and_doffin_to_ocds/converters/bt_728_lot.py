@@ -19,8 +19,7 @@ NAMESPACES = {
 def parse_lot_place_performance_additional(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse additional place of performance information for lots (BT-728).
+    """Parse additional place of performance information for lots (BT-728).
 
     This field maps to the same Address objects as created for BT-727-Lot,
     BT-5121-Lot, BT-5071-Lot, BT-5131-Lot, BT-5101-Lot and BT-5141-Lot.
@@ -46,6 +45,7 @@ def parse_lot_place_performance_additional(
                 }
             }
         Returns None if no relevant data found
+
     """
     try:
         if isinstance(xml_content, str):
@@ -92,8 +92,7 @@ def parse_lot_place_performance_additional(
 def merge_lot_place_performance_additional(
     release_json: dict, additional_data: dict | None
 ) -> None:
-    """
-    Merge additional place of performance data into the main OCDS release JSON.
+    """Merge additional place of performance data into the main OCDS release JSON.
 
     Updates or adds delivery locations for items based on their related lots.
     Handles concatenating descriptions if needed.
@@ -106,6 +105,7 @@ def merge_lot_place_performance_additional(
         - Updates release_json in-place
         - Creates tender.items array if needed
         - Handles duplicates by checking existing descriptions
+
     """
     if not additional_data:
         logger.warning("No additional lot place of performance data to merge")

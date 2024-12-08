@@ -9,8 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_payer_party(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse payer party references from lot results.
+    """Parse payer party references from lot results.
 
     Identifies organizations that serve as payers for lots.
     Adds payer role to identified organizations.
@@ -32,6 +31,7 @@ def parse_payer_party(xml_content: str | bytes) -> dict[str, Any] | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -62,8 +62,7 @@ def parse_payer_party(xml_content: str | bytes) -> dict[str, Any] | None:
 def merge_payer_party(
     release_json: dict[str, Any], payer_party_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge payer party data into the release JSON.
+    """Merge payer party data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -72,6 +71,7 @@ def merge_payer_party(
     Effects:
         Updates the parties section of release_json with payer roles,
         merging with existing party roles where applicable
+
     """
     if not payer_party_data:
         logger.info("No Payer Party (ID reference) data to merge")

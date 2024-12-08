@@ -36,6 +36,7 @@ def parse_award_criterion_number_fixed_lot(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -92,6 +93,7 @@ def merge_award_criterion_number_fixed_lot(
 
     Returns:
         None
+
     """
     if not award_criterion_number_fixed_data:
         logger.warning("No Award Criterion Number Fixed data to merge")

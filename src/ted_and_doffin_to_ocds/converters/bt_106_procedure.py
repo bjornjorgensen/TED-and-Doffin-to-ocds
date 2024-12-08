@@ -23,8 +23,7 @@ VALID_FALSE_VALUES = {"false", "0", "no"}
 
 
 def validate_xml_content(xml_content: str | bytes) -> bytes:
-    """
-    Validate and prepare XML content for processing.
+    """Validate and prepare XML content for processing.
 
     Args:
         xml_content: The XML content to validate.
@@ -35,6 +34,7 @@ def validate_xml_content(xml_content: str | bytes) -> bytes:
     Raises:
         ValueError: If the input is None or empty.
         etree.XMLSyntaxError: If the XML is malformed.
+
     """
     if not xml_content:
         raise ValueError(ERR_EMPTY_XML)
@@ -73,6 +73,7 @@ def parse_procedure_accelerated(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -108,6 +109,7 @@ def merge_procedure_accelerated(
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not procedure_accelerated_data:
         logger.info("No procedure acceleration data to merge")

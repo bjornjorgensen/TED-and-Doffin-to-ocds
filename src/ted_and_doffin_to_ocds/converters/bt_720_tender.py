@@ -10,14 +10,14 @@ logger = logging.getLogger(__name__)
 def parse_tender_value(
     xml_content: str | bytes,
 ) -> dict[str, dict[str, list[dict]] | list[dict]] | None:
-    """
-    Parse the XML content to extract the tender value information.
+    """Parse the XML content to extract the tender value information.
 
     Args:
         xml_content (str): The XML content to parse.
 
     Returns:
         Optional[Dict]: A dictionary containing the parsed data if found, None otherwise.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -92,8 +92,7 @@ def merge_tender_value(
     release_json: dict,
     tender_value_data: dict[str, dict[str, list[dict]] | list[dict]] | None,
 ) -> None:
-    """
-    Merge the parsed tender value data into the main OCDS release JSON.
+    """Merge the parsed tender value data into the main OCDS release JSON.
 
     Args:
         release_json (Dict): The main OCDS release JSON to be updated.
@@ -101,6 +100,7 @@ def merge_tender_value(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not tender_value_data:
         logger.warning("No tender value data to merge")

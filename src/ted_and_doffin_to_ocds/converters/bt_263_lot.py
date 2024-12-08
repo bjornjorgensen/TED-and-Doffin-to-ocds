@@ -19,6 +19,7 @@ def parse_additional_classification_code(
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing items with classification IDs,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")

@@ -6,8 +6,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_purpose_lot_identifier(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the lot identifiers from XML data.
+    """Parse the lot identifiers from XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing lot information
@@ -24,6 +23,7 @@ def parse_purpose_lot_identifier(xml_content: str | bytes) -> dict | None:
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -51,8 +51,7 @@ def parse_purpose_lot_identifier(xml_content: str | bytes) -> dict | None:
 def merge_purpose_lot_identifier(
     release_json: dict, purpose_lot_identifier_data: dict | None
 ) -> None:
-    """
-    Merge lot identifier data into the release JSON.
+    """Merge lot identifier data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -62,6 +61,7 @@ def merge_purpose_lot_identifier(
     Note:
         The function modifies release_json in-place by adding new lots to tender.lots
         only if they don't already exist.
+
     """
     if not purpose_lot_identifier_data:
         return

@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_strategic_procurement_description(xml_content):
-    """
-    Parse the XML content to extract the Strategic Procurement Description for each lot.
+    """Parse the XML content to extract the Strategic Procurement Description for each lot.
 
     Args:
         xml_content (str): The XML content to parse.
@@ -31,6 +30,7 @@ def parse_strategic_procurement_description(xml_content):
                   }
               }
         None: If no relevant data is found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -74,8 +74,7 @@ def parse_strategic_procurement_description(xml_content):
 def merge_strategic_procurement_description(
     release_json, strategic_procurement_data
 ) -> None:
-    """
-    Merge the parsed Strategic Procurement Description data into the main OCDS release JSON.
+    """Merge the parsed Strategic Procurement Description data into the main OCDS release JSON.
 
     Args:
         release_json (dict): The main OCDS release JSON to be updated.
@@ -83,6 +82,7 @@ def merge_strategic_procurement_description(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not strategic_procurement_data:
         logger.warning("No Strategic Procurement Description data to merge")

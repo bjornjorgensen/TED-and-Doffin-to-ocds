@@ -1,4 +1,9 @@
-# converters/bt_737_Lot.py
+"""Converter for BT-737-Lot: Document unofficial language information.
+
+This module handles mapping of unofficial document translations from eForms to OCDS.
+It converts ISO 639-2 language codes to ISO 639-1 and maintains relationships between
+documents and their corresponding lots.
+"""
 
 import logging
 
@@ -205,11 +210,11 @@ ISO_639_1_MAPPING = {
 def parse_documents_unofficial_language(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse BT-737: Unofficial languages for procurement documents.
+    """Parse document unofficial language translations and their lot relationships.
 
-    Extracts information about unofficial translations of documents, mapping ISO 639-2
-    language codes to ISO 639-1 and linking documents to their related lots.
+    Gets documents with unofficial translations from CallForTendersDocumentReference
+    elements, converts ISO 639-2 language codes (e.g. 'ENG') to ISO 639-1 (e.g. 'en'),
+    and maintains relationships to their corresponding lots.
 
     Args:
         xml_content: XML content to parse, either as string or bytes
@@ -220,14 +225,15 @@ def parse_documents_unofficial_language(
                 "tender": {
                     "documents": [
                         {
-                            "id": str,
+                            "id": str,  # Document ID
                             "unofficialTranslations": [str],  # ISO 639-1 codes
-                            "relatedLots": [str]
+                            "relatedLots": [str]  # Lot IDs
                         }
                     ]
                 }
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -289,19 +295,29 @@ def parse_documents_unofficial_language(
 def merge_documents_unofficial_language(
     release_json: dict, unofficial_langs: dict | None
 ) -> None:
-    """
-    Merge unofficial language data into the release JSON.
+    """Merge document unofficial language data into the OCDS release.
 
-    Updates or adds document unofficial translations and related lots.
+    Updates or adds unofficial translations and lot relationships for documents.
+    Handles merging of language codes and lot IDs while avoiding duplicates.
 
     Args:
-        release_json: Main OCDS release JSON to update
-        unofficial_langs: Documents unofficial language data to merge, can be None
+        release_json: Main OCDS release to update
+        unofficial_langs: Documents language data to merge, in format:
+            {
+                "tender": {
+                    "documents": [
+                        {
+                            "id": str,
+                            "unofficialTranslations": [str],  # ISO 639-1 codes
+                            "relatedLots": [str]  # Lot IDs
+                        }
+                    ]
+                }
+            }
 
     Note:
-        - Updates release_json in-place
-        - Creates tender.documents array if needed
-        - Handles duplicate translations and lots
+        Updates release_json in-place
+
     """
     if not unofficial_langs:
         logger.warning("No unofficial language data for documents to merge")

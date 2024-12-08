@@ -20,8 +20,7 @@ NAMESPACES = {
 def parse_lot_eu_funds(
     xml_content: str | bytes,
 ) -> dict[str, list[dict[str, Any]]] | None:
-    """
-    Parse EU funds programme information for each lot.
+    """Parse EU funds programme information for each lot.
 
     BT-7220-Lot: Programme of Union funds used to finance the contract.
     Maps to .planning.budget.finance[].title for each lot.
@@ -31,6 +30,7 @@ def parse_lot_eu_funds(
 
     Returns:
         Dictionary with lot data including EU funds info, or None if no data found
+
     """
     try:
         if isinstance(xml_content, str):
@@ -96,12 +96,12 @@ def merge_lot_eu_funds(
     release_json: dict[str, Any],
     lot_eu_funds_data: dict[str, list[dict[str, Any]]] | None,
 ) -> None:
-    """
-    Merge EU funds data into release JSON, preserving existing data.
+    """Merge EU funds data into release JSON, preserving existing data.
 
     Args:
         release_json: Target release JSON to update
         lot_eu_funds_data: EU funds data to merge
+
     """
     if not lot_eu_funds_data:
         logger.debug("No EU funds data to merge")

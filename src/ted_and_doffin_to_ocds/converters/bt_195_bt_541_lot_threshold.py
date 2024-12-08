@@ -36,6 +36,7 @@ def parse_bt195_bt541_lot_threshold_unpublished_identifier(
         >>> print(result)
         {'withheldInformation': [{'id': 'awa-cri-num-threshold-LOT-0001', 'field': 'awa-cri-num',
           'name': 'Award Criterion Number Threshold'}]}
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -97,6 +98,7 @@ def merge_bt195_bt541_lot_threshold_unpublished_identifier(
         >>> merge_bt195_bt541_lot_threshold_unpublished_identifier(release, data)
         >>> print(release)
         {'withheldInformation': [{'id': 'awa-cri-num-threshold-LOT-0001'}]}
+
     """
     if not unpublished_identifier_data:
         logger.warning("No unpublished identifier data to merge for BT-195(BT-541)")

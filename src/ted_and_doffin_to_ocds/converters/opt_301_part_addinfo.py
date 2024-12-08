@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_additional_info_provider_part(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse additional information provider details from parts.
+    """Parse additional information provider details from parts.
 
     Identifies organizations that serve as information contact points for parts.
     Adds processContactPoint role to identified organizations.
@@ -31,6 +30,7 @@ def parse_additional_info_provider_part(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -59,8 +59,7 @@ def parse_additional_info_provider_part(
 def merge_additional_info_provider_part(
     release_json: dict[str, Any], additional_info_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge additional information provider data from parts into the release JSON.
+    """Merge additional information provider data from parts into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -69,6 +68,7 @@ def merge_additional_info_provider_part(
     Effects:
         Updates the parties section of release_json with processContactPoint roles,
         merging with existing party roles where applicable
+
     """
     if not additional_info_data:
         logger.info("No Additional Info Provider data to merge.")

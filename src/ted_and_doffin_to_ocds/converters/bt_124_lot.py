@@ -32,6 +32,7 @@ def parse_tool_atypical_url(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -84,6 +85,7 @@ def merge_tool_atypical_url(release_json: dict, atypical_url_data: dict | None) 
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not atypical_url_data:
         logger.info("No atypical tool URL lot data to merge")

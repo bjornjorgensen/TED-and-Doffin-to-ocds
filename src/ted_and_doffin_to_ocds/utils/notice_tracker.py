@@ -177,14 +177,15 @@ class NoticeTracker:
         is_pin_only: bool,
         publication_date: str,
     ) -> None:
-        """
-        Track a new notice in the database.
+        """Track a new notice in the database.
+
         Args:
             notice_id: Unique identifier for the notice
             ocid: Open Contracting ID (required)
             notice_type: Type of notice
             is_pin_only: Whether this is a PIN-only notice
             publication_date: Date the notice was published
+
         """
         if not ocid:
             raise ValueError(self.OCID_REQUIRED_MESSAGE)
@@ -270,8 +271,7 @@ class NoticeTracker:
             conn.commit()
 
     def get_previous_notice(self, notice_id: str) -> tuple | None:
-        """
-        Get the notice details for a specific notice ID with improved error handling.
+        """Get the notice details for a specific notice ID with improved error handling.
 
         Args:
             notice_id: ID of the notice to retrieve
@@ -279,6 +279,7 @@ class NoticeTracker:
         Returns:
             Optional[tuple]: (notice_id, ocid, notice_type, is_pin_only, publication_date)
             or None if not found
+
         """
         with self.get_connection() as conn:
             cursor = conn.cursor()
@@ -308,11 +309,11 @@ class NoticeTracker:
 
     @contextmanager
     def get_statistics(self) -> Generator[dict]:
-        """
-        Get statistics about the tracked notices and relationships.
+        """Get statistics about the tracked notices and relationships.
 
         Returns:
             dict: Statistics including counts of notices, parts, and relationships
+
         """
         with self.get_connection() as conn:
             cursor = conn.cursor()

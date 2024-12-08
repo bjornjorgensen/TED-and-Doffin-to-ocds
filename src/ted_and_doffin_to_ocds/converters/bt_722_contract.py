@@ -10,8 +10,7 @@ logger = logging.getLogger(__name__)
 def parse_contract_eu_funds(
     xml_content: str | bytes,
 ) -> dict[str, list[dict[str, str]]] | None:
-    """
-    Parse the XML content to extract contract EU funds programme information.
+    """Parse the XML content to extract contract EU funds programme information.
 
     Args:
         xml_content (str): The XML content to parse.
@@ -19,6 +18,7 @@ def parse_contract_eu_funds(
     Returns:
         dict: A dictionary containing the parsed contract EU funds data.
         None: If no relevant data is found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -76,8 +76,7 @@ def parse_contract_eu_funds(
 def merge_contract_eu_funds(
     release_json: dict, contract_eu_funds_data: dict[str, list[dict[str, str]]] | None
 ) -> None:
-    """
-    Merge the parsed contract EU funds data into the main OCDS release JSON.
+    """Merge the parsed contract EU funds data into the main OCDS release JSON.
 
     Args:
         release_json (dict): The main OCDS release JSON to be updated.
@@ -85,6 +84,7 @@ def merge_contract_eu_funds(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not contract_eu_funds_data:
         logger.warning("No contract EU funds data to merge")

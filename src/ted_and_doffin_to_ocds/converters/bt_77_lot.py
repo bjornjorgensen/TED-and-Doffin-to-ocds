@@ -34,6 +34,7 @@ def parse_financial_terms(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -87,6 +88,7 @@ def merge_financial_terms(
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not financial_terms_data:
         logger.warning("No financial terms data to merge")

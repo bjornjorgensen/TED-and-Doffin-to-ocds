@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_part_identifier(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the part identifier from XML data.
+    """Parse the part identifier from XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing part information
@@ -22,6 +21,7 @@ def parse_part_identifier(xml_content: str | bytes) -> dict | None:
                 "id": str  # Part identifier
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -48,8 +48,7 @@ def parse_part_identifier(xml_content: str | bytes) -> dict | None:
 
 
 def merge_part_identifier(release_json: dict, part_data: dict | None) -> None:
-    """
-    Merge part identifier data into the release JSON.
+    """Merge part identifier data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -59,6 +58,7 @@ def merge_part_identifier(release_json: dict, part_data: dict | None) -> None:
     Note:
         The function modifies release_json in-place by setting the
         tender.id field.
+
     """
     if not part_data:
         return

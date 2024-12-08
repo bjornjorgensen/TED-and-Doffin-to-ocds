@@ -17,8 +17,7 @@ NAMESPACES = {
 def parse_part_fiscal_legislation_document_id(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse part fiscal legislation document ID information (OPT-111) from XML content.
+    """Parse part fiscal legislation document ID information (OPT-111) from XML content.
 
     Gets document IDs from parts and creates corresponding Document
     objects with document type.
@@ -28,6 +27,7 @@ def parse_part_fiscal_legislation_document_id(
 
     Returns:
         Dictionary containing documents with IDs or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -61,8 +61,7 @@ def parse_part_fiscal_legislation_document_id(
 def merge_part_fiscal_legislation_document_id(
     release_json: dict[str, Any], fiscal_doc_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge part fiscal legislation document ID information into the release JSON.
+    """Merge part fiscal legislation document ID information into the release JSON.
 
     Updates or creates documents with document type.
     Preserves existing document data while adding/updating type.
@@ -73,6 +72,7 @@ def merge_part_fiscal_legislation_document_id(
 
     Returns:
         None
+
     """
     if not fiscal_doc_data:
         logger.warning("No part fiscal legislation document ID data to merge")

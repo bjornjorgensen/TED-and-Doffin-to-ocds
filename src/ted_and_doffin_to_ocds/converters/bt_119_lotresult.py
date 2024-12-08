@@ -34,6 +34,7 @@ def parse_dps_termination(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -95,6 +96,7 @@ def merge_dps_termination(
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not dps_termination_data:
         logger.info("No DPS termination data to merge")

@@ -6,14 +6,14 @@ logger = logging.getLogger(__name__)
 
 
 def parse_foreign_subsidies_measures(xml_content: str) -> dict | None:
-    """
-    Parses the XML content to extract the Foreign Subsidies Measures.
+    """Parses the XML content to extract the Foreign Subsidies Measures.
 
     Args:
         xml_content (str): The XML content as a string.
 
     Returns:
         dict | None: A dictionary containing the parsed data or None if no bids are found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -66,8 +66,7 @@ def parse_foreign_subsidies_measures(xml_content: str) -> dict | None:
 def merge_foreign_subsidies_measures(
     release_json: dict, measures_data: dict | None
 ) -> None:
-    """
-    Merges the parsed Foreign Subsidies Measures data into the existing release JSON structure.
+    """Merges the parsed Foreign Subsidies Measures data into the existing release JSON structure.
 
     Args:
         release_json (dict): The existing release JSON structure.
@@ -75,6 +74,7 @@ def merge_foreign_subsidies_measures(
 
     Returns:
         None
+
     """
     if not measures_data:
         logger.warning("No Foreign Subsidies Measures data to merge")

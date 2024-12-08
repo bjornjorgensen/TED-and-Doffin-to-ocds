@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_bt_271_procedure(xml_content: str | bytes) -> dict | None:
-    """
-    Parse framework maximum value from procedure-level XML data.
+    """Parse framework maximum value from procedure-level XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing procedure information
@@ -29,6 +28,7 @@ def parse_bt_271_procedure(xml_content: str | bytes) -> dict | None:
                 }
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -70,13 +70,13 @@ def parse_bt_271_procedure(xml_content: str | bytes) -> dict | None:
 def merge_bt_271_procedure(
     release_json: dict, bt_271_procedure_data: dict | None
 ) -> None:
-    """
-    Merge framework maximum value data into the release JSON.
+    """Merge framework maximum value data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
         bt_271_procedure_data (Optional[Dict]): The source data containing tender
             to be merged. If None, function returns without making changes.
+
     """
     if not bt_271_procedure_data:
         return

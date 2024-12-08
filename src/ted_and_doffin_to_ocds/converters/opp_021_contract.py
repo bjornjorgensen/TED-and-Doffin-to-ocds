@@ -15,8 +15,7 @@ NAMESPACES = {
 
 
 def parse_used_asset(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse used asset information (OPP-021) from XML content.
+    """Parse used asset information (OPP-021) from XML content.
 
     Gets asset descriptions from each contract and maps them to corresponding
     lots' essential assets array.
@@ -26,6 +25,7 @@ def parse_used_asset(xml_content: str | bytes) -> dict[str, Any] | None:
 
     Returns:
         Dictionary containing lots with asset descriptions or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -100,8 +100,7 @@ def parse_used_asset(xml_content: str | bytes) -> dict[str, Any] | None:
 def merge_used_asset(
     release_json: dict[str, Any], used_asset_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge used asset information into the release JSON.
+    """Merge used asset information into the release JSON.
 
     Updates or creates lots with essential assets descriptions.
     Preserves existing lot data while adding/updating asset information.
@@ -112,6 +111,7 @@ def merge_used_asset(
 
     Returns:
         None
+
     """
     if not used_asset_data:
         logger.warning("No used asset data to merge")

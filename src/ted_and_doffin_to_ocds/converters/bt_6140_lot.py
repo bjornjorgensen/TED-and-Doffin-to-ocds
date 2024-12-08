@@ -18,8 +18,7 @@ NAMESPACES = {
 
 
 def parse_lot_eu_funds_details(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse the XML content to extract lot EU funds details.
+    """Parse the XML content to extract lot EU funds details.
 
     This function processes the BT-6140-Lot business term, which represents
     further information about the Union programme or project used to at least
@@ -30,6 +29,7 @@ def parse_lot_eu_funds_details(xml_content: str | bytes) -> dict[str, Any] | Non
 
     Returns:
         Dictionary containing parsed lot EU funds details or None if no data found
+
     """
     try:
         if isinstance(xml_content, str):
@@ -56,8 +56,7 @@ def parse_lot_eu_funds_details(xml_content: str | bytes) -> dict[str, Any] | Non
 def merge_lot_eu_funds_details(
     release_json: dict, eu_funds_details: dict | None
 ) -> None:
-    """
-    Merge the parsed lot EU funds details into the main OCDS release JSON.
+    """Merge the parsed lot EU funds details into the main OCDS release JSON.
 
     This function updates the existing finance entries in the release JSON with the
     EU funds details. If a finance entry doesn't exist, it adds a new one to the release.
@@ -68,6 +67,7 @@ def merge_lot_eu_funds_details(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not eu_funds_details:
         logger.warning("BT-6140-Lot: No lot EU funds details to merge")

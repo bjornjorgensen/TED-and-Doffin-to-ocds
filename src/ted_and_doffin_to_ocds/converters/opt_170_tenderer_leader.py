@@ -9,8 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_tendering_party_leader(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse tendering party leader information from XML content.
+    """Parse tendering party leader information from XML content.
 
     For each tenderer:
     - Always adds 'tenderer' role
@@ -30,6 +29,7 @@ def parse_tendering_party_leader(xml_content: str | bytes) -> dict[str, Any] | N
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -67,8 +67,7 @@ def parse_tendering_party_leader(xml_content: str | bytes) -> dict[str, Any] | N
 def merge_tendering_party_leader(
     release_json: dict[str, Any], leader_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge tendering party leader data into the release JSON.
+    """Merge tendering party leader data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -77,6 +76,7 @@ def merge_tendering_party_leader(
     Effects:
         Updates the parties section of release_json with tendering party roles,
         merging roles for existing parties
+
     """
     if not leader_data:
         logger.info("No tendering party leader data to merge")

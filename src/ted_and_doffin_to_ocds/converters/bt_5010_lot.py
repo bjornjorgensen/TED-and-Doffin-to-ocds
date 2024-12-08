@@ -20,9 +20,7 @@ NAMESPACES = {
 def parse_eu_funds_financing_identifier(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse EU Funds Financing Identifier (BT-5010) from XML content.
-    """
+    """Parse EU Funds Financing Identifier (BT-5010) from XML content."""
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
 
@@ -76,9 +74,7 @@ def merge_eu_funds_financing_identifier(
     release_json: dict[str, Any],
     eu_funds_data: dict[str, Any] | None,
 ) -> None:
-    """
-    Merge EU Funds Financing Identifier data into the release JSON.
-    """
+    """Merge EU Funds Financing Identifier data into the release JSON."""
     if not eu_funds_data:
         logger.debug("No EU Funds Financing Identifier data to merge")
         return

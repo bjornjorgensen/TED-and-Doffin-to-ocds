@@ -19,6 +19,7 @@ def parse_prize_rank(xml_content: str | bytes) -> dict | None:
     Returns:
         dict: OCDS-formatted dictionary containing prize rank data, or
         None if no relevant data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -85,6 +86,7 @@ def merge_prize_rank(
     Args:
         release_json: The main release JSON to update
         prize_rank_data: Prize rank data to merge, as returned by parse_prize_rank()
+
     """
     if not prize_rank_data:
         logger.warning("No Prize Rank data to merge")

@@ -10,8 +10,7 @@ logger = logging.getLogger(__name__)
 def parse_touchpoint_country_subdivision(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse touchpoint country subdivision information from XML content.
+    """Parse touchpoint country subdivision information from XML content.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing touchpoint region information
@@ -19,7 +18,8 @@ def parse_touchpoint_country_subdivision(
     Returns:
         Optional[Dict]: A dictionary containing parsed region data in OCDS format with
         'parties' array, or None if no valid touchpoint data is found.
-        Example:
+
+    Example:
         {
             "parties": [{
                 "id": "TPO-0001",
@@ -32,6 +32,7 @@ def parse_touchpoint_country_subdivision(
                 }
             }]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -81,8 +82,7 @@ def parse_touchpoint_country_subdivision(
 def merge_touchpoint_country_subdivision(
     release_json: dict, touchpoint_country_subdivision_data: dict | None
 ) -> None:
-    """
-    Merge touchpoint country subdivision data into the release JSON.
+    """Merge touchpoint country subdivision data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -95,6 +95,7 @@ def merge_touchpoint_country_subdivision(
     Note:
         If touchpoint_country_subdivision_data is None or contains no parties, no changes are made.
         For existing parties, both region and identifier information is updated.
+
     """
     if not touchpoint_country_subdivision_data:
         logger.info("No touchpoint country subdivision data to merge")

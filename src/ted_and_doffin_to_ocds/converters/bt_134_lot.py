@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 def parse_lot_public_opening_description(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse the public opening description from lot-level XML data.
+    """Parse the public opening description from lot-level XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing lot information
@@ -29,6 +28,7 @@ def parse_lot_public_opening_description(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -69,8 +69,7 @@ def parse_lot_public_opening_description(
 def merge_lot_public_opening_description(
     release_json: dict, lot_public_opening_description_data: dict | None
 ) -> None:
-    """
-    Merge public opening description data into the release JSON.
+    """Merge public opening description data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -80,6 +79,7 @@ def merge_lot_public_opening_description(
     Note:
         The function modifies release_json in-place by adding or updating the
         tender.lots.bidOpening.description field for matching lots.
+
     """
     if not lot_public_opening_description_data:
         logger.warning("No Lot Public Opening Description data to merge")

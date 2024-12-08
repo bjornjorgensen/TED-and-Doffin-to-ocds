@@ -347,8 +347,7 @@ ISO_3166_1_ALPHA_3_TO_ALPHA_2 = {
 
 
 def parse_country_origin(xml_content: str | bytes) -> dict | None:
-    """
-    Parse country origin information from XML data.
+    """Parse country origin information from XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing tender information
@@ -367,6 +366,7 @@ def parse_country_origin(xml_content: str | bytes) -> dict | None:
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -415,13 +415,13 @@ def parse_country_origin(xml_content: str | bytes) -> dict | None:
 
 
 def merge_country_origin(release_json: dict, country_origin_data: dict | None) -> None:
-    """
-    Merge country origin data into the release JSON.
+    """Merge country origin data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
         country_origin_data (Optional[Dict]): The source data containing bids
             to be merged. If None, function returns without making changes.
+
     """
     if not country_origin_data:
         return

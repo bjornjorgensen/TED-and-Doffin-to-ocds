@@ -29,6 +29,7 @@ def parse_successive_reduction_indicator(xml_content: str | bytes) -> dict | Non
                 }]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -90,6 +91,7 @@ def merge_successive_reduction_indicator(
 
     Returns:
         None. Updates release_json in place.
+
     """
     if not successive_reduction_data:
         logger.info("No Successive Reduction Indicator data to merge")

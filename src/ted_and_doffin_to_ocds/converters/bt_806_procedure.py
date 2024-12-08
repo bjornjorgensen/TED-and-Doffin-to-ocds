@@ -26,6 +26,7 @@ def parse_exclusion_grounds_sources(
                 }
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -65,6 +66,7 @@ def merge_exclusion_grounds_sources(
         release_json: The target release JSON to update
         exclusion_grounds_sources: Source data containing exclusion grounds sources.
             If None, function returns without making changes.
+
     """
     if not exclusion_grounds_sources:
         logger.warning("No exclusion grounds sources to merge")

@@ -15,8 +15,7 @@ STATUS_CODE_MAPPING = {
 
 
 def parse_winner_chosen(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the winner chosen status from XML data.
+    """Parse the winner chosen status from XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing lot result information
@@ -42,6 +41,7 @@ def parse_winner_chosen(xml_content: str | bytes) -> dict | None:
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -100,8 +100,7 @@ def parse_winner_chosen(xml_content: str | bytes) -> dict | None:
 
 
 def merge_winner_chosen(release_json: dict, winner_chosen_data: dict | None) -> None:
-    """
-    Merge winner chosen data into the release JSON.
+    """Merge winner chosen data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -111,6 +110,7 @@ def merge_winner_chosen(release_json: dict, winner_chosen_data: dict | None) -> 
     Note:
         The function modifies release_json in-place by updating award statuses
         and lot information.
+
     """
     if not winner_chosen_data:
         logger.warning("No winner chosen data to merge")

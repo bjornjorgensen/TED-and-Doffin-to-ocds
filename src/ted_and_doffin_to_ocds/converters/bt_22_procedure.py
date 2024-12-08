@@ -17,6 +17,7 @@ def parse_procedure_internal_identifier(
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing tender identifier data,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -52,6 +53,7 @@ def merge_procedure_internal_identifier(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         procedure_internal_identifier_data (Optional[Dict[str, Any]]): Tender identifier data to merge
+
     """
     if not procedure_internal_identifier_data:
         logger.warning("No procedure internal identifier data to merge")

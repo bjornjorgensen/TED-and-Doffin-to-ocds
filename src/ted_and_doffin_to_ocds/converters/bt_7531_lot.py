@@ -30,8 +30,7 @@ NAMESPACES = {
 def parse_selection_criteria_number_weight(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse selection criteria number weight (BT-7531) from XML content.
+    """Parse selection criteria number weight (BT-7531) from XML content.
 
     For each lot's selection criteria, creates/updates corresponding SelectionCriterion
     objects in the lot's selectionCriteria.criteria array with number weights.
@@ -41,6 +40,7 @@ def parse_selection_criteria_number_weight(
 
     Returns:
         Dictionary containing lots with selection criteria or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -118,8 +118,7 @@ def parse_selection_criteria_number_weight(
 def merge_selection_criteria_number_weight(
     release_json: dict[str, Any], number_weight_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge selection criteria number weights into the release JSON.
+    """Merge selection criteria number weights into the release JSON.
 
     Updates or creates selection criteria with number weights for each lot.
     Removes selection criteria from lots where criteria are not used.
@@ -130,6 +129,7 @@ def merge_selection_criteria_number_weight(
 
     Returns:
         None
+
     """
     if not number_weight_data:
         # If there's no valid criteria data, make sure no selection criteria exist

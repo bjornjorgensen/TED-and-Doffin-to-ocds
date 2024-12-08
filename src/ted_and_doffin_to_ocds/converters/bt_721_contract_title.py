@@ -10,8 +10,7 @@ logger = logging.getLogger(__name__)
 def parse_contract_title(
     xml_content: str | bytes,
 ) -> dict[str, list[dict[str, str]]] | None:
-    """
-    Parse the XML content to extract contract title information.
+    """Parse the XML content to extract contract title information.
 
     Args:
         xml_content (str): The XML content to parse.
@@ -19,6 +18,7 @@ def parse_contract_title(
     Returns:
         dict: A dictionary containing the parsed contract title data.
         None: If no relevant data is found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -72,8 +72,7 @@ def parse_contract_title(
 def merge_contract_title(
     release_json: dict, contract_title_data: dict[str, list[dict[str, str]]] | None
 ) -> None:
-    """
-    Merge the parsed contract title data into the main OCDS release JSON.
+    """Merge the parsed contract title data into the main OCDS release JSON.
 
     Args:
         release_json (dict): The main OCDS release JSON to be updated.
@@ -81,6 +80,7 @@ def merge_contract_title(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not contract_title_data:
         logger.warning("No contract title data to merge")

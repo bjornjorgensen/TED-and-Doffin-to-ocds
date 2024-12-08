@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_tender_rank(xml_content: str | bytes) -> dict | None:
-    """
-    Parse tender rank information from XML data.
+    """Parse tender rank information from XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing tender information
@@ -28,6 +27,7 @@ def parse_tender_rank(xml_content: str | bytes) -> dict | None:
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -74,13 +74,13 @@ def parse_tender_rank(xml_content: str | bytes) -> dict | None:
 
 
 def merge_tender_rank(release_json: dict, tender_rank_data: dict | None) -> None:
-    """
-    Merge tender rank data into the release JSON.
+    """Merge tender rank data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
         tender_rank_data (Optional[Dict]): The source data containing bids
             to be merged. If None, function returns without making changes.
+
     """
     if not tender_rank_data:
         return

@@ -17,6 +17,7 @@ def parse_tender_ranked(xml_content: str | bytes) -> dict | None:
     Returns:
         Optional[Dict]: Dictionary containing bids with ranking info, or None if no bids found
         Format: {"bids": {"details": [{"id": str, "hasRank": bool, "relatedLots": list[str]}]}}
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -77,6 +78,7 @@ def merge_tender_ranked(release_json: dict, tender_ranked_data: dict | None) -> 
 
     Returns:
         None: Modifies release_json in place
+
     """
     if not tender_ranked_data:
         logger.warning("No Tender Ranked data to merge")

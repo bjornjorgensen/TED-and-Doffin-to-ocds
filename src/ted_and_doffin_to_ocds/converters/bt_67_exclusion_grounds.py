@@ -35,8 +35,7 @@ EXCLUSION_GROUND_MAPPING = {
 
 
 def parse_exclusion_grounds(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the XML content to extract exclusion grounds information.
+    """Parse the XML content to extract exclusion grounds information.
 
     Extracts criteria regarding personal situation of tenderers that may lead to
     their exclusion as defined in BT-67.
@@ -62,6 +61,7 @@ def parse_exclusion_grounds(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -112,8 +112,7 @@ def parse_exclusion_grounds(xml_content: str | bytes) -> dict | None:
 def merge_exclusion_grounds(
     release_json: dict, exclusion_grounds_data: dict | None
 ) -> None:
-    """
-    Merge the parsed exclusion grounds data into the main OCDS release JSON.
+    """Merge the parsed exclusion grounds data into the main OCDS release JSON.
 
     Updates the release JSON in-place by adding or updating exclusion grounds
     criteria.
@@ -126,6 +125,7 @@ def merge_exclusion_grounds(
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not exclusion_grounds_data:
         logger.warning("No exclusion grounds data to merge")

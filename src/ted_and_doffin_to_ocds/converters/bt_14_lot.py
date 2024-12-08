@@ -17,6 +17,7 @@ def parse_lot_documents_restricted(xml_content: str | bytes) -> dict[str, Any] |
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing document data with lot references,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -68,6 +69,7 @@ def merge_lot_documents_restricted(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         lot_documents_restricted_data (Optional[Dict[str, Any]]): Document data with lot references to merge
+
     """
     if not lot_documents_restricted_data:
         logger.warning("No lot documents restricted data to merge")

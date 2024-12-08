@@ -17,6 +17,7 @@ def parse_additional_info_deadline_part(xml_content: str | bytes) -> str | None:
 
     Returns:
         Optional[str]: ISO formatted datetime string for the enquiry period end date, or None if not found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -60,6 +61,7 @@ def convert_to_iso_format(date_string: str, time_string: str) -> str:
 
     Returns:
         str: Combined date and time in ISO format
+
     """
     # Combine date and time
     datetime_string = f"{date_string.split('+')[0]}T{time_string}"
@@ -79,6 +81,7 @@ def merge_additional_info_deadline_part(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         deadline (Optional[str]): ISO formatted datetime string for the enquiry period end date
+
     """
     if deadline:
         if "tender" not in release_json:

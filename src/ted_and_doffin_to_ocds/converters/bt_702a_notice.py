@@ -204,6 +204,7 @@ def parse_notice_language(
         {
             "language": "en"
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -237,6 +238,7 @@ def merge_notice_language(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not notice_language_data:
         logger.warning("No notice Language data to merge")

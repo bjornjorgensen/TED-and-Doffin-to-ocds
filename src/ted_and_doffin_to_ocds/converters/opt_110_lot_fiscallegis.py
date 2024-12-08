@@ -13,8 +13,7 @@ NAMESPACES = {
 
 
 def parse_fiscal_legislation_url(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse fiscal legislation URL information (OPT-110) from XML content.
+    """Parse fiscal legislation URL information (OPT-110) from XML content.
 
     Gets document references from each lot and creates corresponding Document
     objects with URLs and lot references.
@@ -24,6 +23,7 @@ def parse_fiscal_legislation_url(xml_content: str | bytes) -> dict[str, Any] | N
 
     Returns:
         Dictionary containing documents with fiscal URLs or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -75,8 +75,7 @@ def parse_fiscal_legislation_url(xml_content: str | bytes) -> dict[str, Any] | N
 def merge_fiscal_legislation_url(
     release_json: dict[str, Any], fiscal_url_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge fiscal legislation URL information into the release JSON.
+    """Merge fiscal legislation URL information into the release JSON.
 
     Updates or creates documents with fiscal URLs.
     Preserves existing document data while adding/updating URLs and lot references.
@@ -87,6 +86,7 @@ def merge_fiscal_legislation_url(
 
     Returns:
         None
+
     """
     if not fiscal_url_data:
         logger.warning("No fiscal legislation URL data to merge")

@@ -216,6 +216,7 @@ def parse_part_documents_official_language(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -274,6 +275,7 @@ def merge_part_documents_official_language(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not part_documents_data:
         logger.warning("No part documents official language data to merge")

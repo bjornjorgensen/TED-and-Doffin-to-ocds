@@ -15,8 +15,7 @@ NAMESPACES = {
 
 
 def parse_revenues_allocation(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse revenues allocation information (OPP-032) from XML content.
+    """Parse revenues allocation information (OPP-032) from XML content.
 
     This mapping assumes that revenue percentages are consistent across all lot tenders
     for a given lot. Contact OCDS Data Support Team if values vary per lot tender.
@@ -29,6 +28,7 @@ def parse_revenues_allocation(xml_content: str | bytes) -> dict[str, Any] | None
 
     Returns:
         Dictionary containing lots with revenue allocation or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -94,8 +94,7 @@ def parse_revenues_allocation(xml_content: str | bytes) -> dict[str, Any] | None
 def merge_revenues_allocation(
     release_json: dict[str, Any], revenues_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge revenues allocation into the release JSON.
+    """Merge revenues allocation into the release JSON.
 
     Updates or creates lots with revenue sharing information.
     Preserves existing lot data while adding/updating revenue share.
@@ -106,6 +105,7 @@ def merge_revenues_allocation(
 
     Returns:
         None
+
     """
     if not revenues_data:
         logger.warning("No revenues allocation data to merge")

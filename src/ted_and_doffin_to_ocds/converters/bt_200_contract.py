@@ -22,8 +22,7 @@ REASON_DESCRIPTIONS = {
 def parse_contract_modification_reason(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse contract modification reason from XML data.
+    """Parse contract modification reason from XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing contract information
@@ -31,6 +30,7 @@ def parse_contract_modification_reason(
     Returns:
         Optional[Dict]: Dictionary containing contract information, or None if no data found
         The structure follows the format shown in the example output
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -110,13 +110,13 @@ def parse_contract_modification_reason(
 def merge_contract_modification_reason(
     release_json: dict, modification_data: dict | None
 ) -> None:
-    """
-    Merge contract modification reason data into the release JSON.
+    """Merge contract modification reason data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
         modification_data (Optional[Dict]): The source data containing contracts
             to be merged. If None, function returns without making changes.
+
     """
     if not modification_data:
         return

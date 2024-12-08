@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_ubo_streetline1(xml_content: str | bytes) -> dict | None:
-    """
-    Parse UBO (Ultimate Beneficial Owner) street line 1 information from XML content.
+    """Parse UBO (Ultimate Beneficial Owner) street line 1 information from XML content.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing UBO street information
@@ -17,7 +16,8 @@ def parse_ubo_streetline1(xml_content: str | bytes) -> dict | None:
     Returns:
         Optional[Dict]: A dictionary containing parsed street line 1 data in OCDS format with
         'parties' array, or None if no valid UBO data is found.
-        Example:
+
+    Example:
         {
             "parties": [{
                 "id": "ORG-0001",
@@ -29,6 +29,7 @@ def parse_ubo_streetline1(xml_content: str | bytes) -> dict | None:
                 }]
             }]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -106,8 +107,7 @@ def parse_ubo_streetline1(xml_content: str | bytes) -> dict | None:
 def merge_ubo_streetline1(
     release_json: dict, ubo_streetline1_data: dict | None
 ) -> None:
-    """
-    Merge UBO street line 1 data into the release JSON.
+    """Merge UBO street line 1 data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -120,6 +120,7 @@ def merge_ubo_streetline1(
     Note:
         If ubo_streetline1_data is None or contains no parties, no changes are made.
         For existing parties, beneficial owner street line 1 information is updated or added.
+
     """
     if not ubo_streetline1_data:
         logger.info("No UBO street line 1 data to merge")

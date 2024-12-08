@@ -17,8 +17,7 @@ NAMESPACES = {
 def parse_extended_duration_indicator(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse extended duration indicator (OPP-020) from XML content.
+    """Parse extended duration indicator (OPP-020) from XML content.
 
     Gets contract extension indicator and maps it to corresponding lot's
     hasEssentialAssets field.
@@ -28,6 +27,7 @@ def parse_extended_duration_indicator(
 
     Returns:
         Dictionary containing lots with essential assets indicator or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -92,8 +92,7 @@ def parse_extended_duration_indicator(
 def merge_extended_duration_indicator(
     release_json: dict[str, Any], duration_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge extended duration indicator into the release JSON.
+    """Merge extended duration indicator into the release JSON.
 
     Updates or creates lots with essential assets indicator.
     Preserves existing lot data while adding/updating indicator.
@@ -104,6 +103,7 @@ def merge_extended_duration_indicator(
 
     Returns:
         None
+
     """
     if not duration_data:
         logger.warning("No extended duration indicator data to merge")

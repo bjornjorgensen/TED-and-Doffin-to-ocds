@@ -17,6 +17,7 @@ def parse_main_nature(xml_content: str | bytes) -> dict[str, Any] | None:
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing lots data with main procurement categories,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -64,6 +65,7 @@ def merge_main_nature(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         main_nature_data (Optional[Dict[str, Any]]): Lot data containing main procurement categories to merge
+
     """
     if not main_nature_data:
         logger.warning("No Main Nature data to merge")

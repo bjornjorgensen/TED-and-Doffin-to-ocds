@@ -66,6 +66,7 @@ def parse_activity_entity(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -142,6 +143,7 @@ def merge_activity_entity(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not activity_data:
         logger.warning("BT-610-procedure-buyer: No activity entity data to merge")

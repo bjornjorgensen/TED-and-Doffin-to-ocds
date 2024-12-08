@@ -24,6 +24,7 @@ def parse_buyers_group_lead_indicator(xml_content: str | bytes) -> dict | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -63,6 +64,7 @@ def merge_buyers_group_lead_indicator(
     Args:
         release_json: The release to merge into
         lead_buyer_data: Data about lead buyers to merge, or None if no data
+
     """
     if not lead_buyer_data:
         logger.debug("No Buyers Group Lead Indicator data to merge")

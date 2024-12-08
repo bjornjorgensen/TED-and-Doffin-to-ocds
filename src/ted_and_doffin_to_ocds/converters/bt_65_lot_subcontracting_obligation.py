@@ -41,6 +41,7 @@ def parse_subcontracting_obligation(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -97,6 +98,7 @@ def merge_subcontracting_obligation(
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not subcontracting_obligation_data:
         logger.warning("No subcontracting obligation data to merge")

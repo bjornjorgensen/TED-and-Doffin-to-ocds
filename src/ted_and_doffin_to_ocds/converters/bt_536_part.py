@@ -28,6 +28,7 @@ def parse_part_contract_start_date(
                 }
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -67,6 +68,7 @@ def merge_part_contract_start_date(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not part_contract_start_date_data:
         logger.warning("No part Contract Start Date data to merge")

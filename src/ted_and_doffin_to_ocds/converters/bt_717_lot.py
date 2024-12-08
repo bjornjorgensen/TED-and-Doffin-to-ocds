@@ -31,6 +31,7 @@ def parse_clean_vehicles_directive(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -77,6 +78,7 @@ def merge_clean_vehicles_directive(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not clean_vehicles_directive_data:
         logger.warning("No Clean Vehicles Directive data to merge")

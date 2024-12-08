@@ -22,14 +22,14 @@ NAMESPACES = {
 def parse_contract_conclusion_date(
     xml_content: str | bytes,
 ) -> dict[str, list[dict[str, Any]]] | None:
-    """
-    Parses the contract conclusion date from XML content in both old and new formats.
+    """Parses the contract conclusion date from XML content in both old and new formats.
 
     Args:
         xml_content (Union[str, bytes]): The XML content to parse.
 
     Returns:
         Optional[Dict[str, List[Dict[str, Any]]]]: A dictionary containing contract conclusion dates, or None if no contracts are found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -101,8 +101,7 @@ def merge_contract_conclusion_date(
     release_json: dict[str, Any],
     contract_conclusion_date_data: dict[str, list[dict[str, Any]]] | None,
 ) -> None:
-    """
-    Merges the contract conclusion date data into the given release JSON.
+    """Merges the contract conclusion date data into the given release JSON.
 
     Args:
         release_json (Dict[str, Any]): The release JSON to merge data into.
@@ -110,6 +109,7 @@ def merge_contract_conclusion_date(
 
     Returns:
         None
+
     """
     if not contract_conclusion_date_data:
         logger.warning("No Contract Conclusion Date data to merge")

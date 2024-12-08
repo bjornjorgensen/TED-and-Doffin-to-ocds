@@ -33,6 +33,7 @@ def parse_framework_reestimated_value(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -98,6 +99,7 @@ def merge_framework_reestimated_value(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not framework_reestimated_value_data:
         logger.warning("No Framework Re-estimated Value data to merge")

@@ -6,8 +6,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_lotsgroup_additional_info(xml_content: str | bytes) -> dict | None:
-    """
-    Parse additional information from lot group-level XML data.
+    """Parse additional information from lot group-level XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing lot group information
@@ -23,6 +22,7 @@ def parse_lotsgroup_additional_info(xml_content: str | bytes) -> dict | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -62,13 +62,13 @@ def parse_lotsgroup_additional_info(xml_content: str | bytes) -> dict | None:
 def merge_lotsgroup_additional_info(
     release_json: dict, lotsgroup_additional_info: dict | None
 ) -> None:
-    """
-    Merge additional information into the release JSON.
+    """Merge additional information into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
         lotsgroup_additional_info (Optional[Dict]): The source data containing lot group information
             to be merged. If None, function returns without making changes.
+
     """
     if not lotsgroup_additional_info:
         return

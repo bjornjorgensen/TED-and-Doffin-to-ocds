@@ -7,8 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_lot_estimated_value(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse the estimated value for each procurement lot from XML content.
+    """Parse the estimated value for each procurement lot from XML content.
 
     Args:
         xml_content: XML string or bytes containing procurement lots
@@ -28,6 +27,7 @@ def parse_lot_estimated_value(xml_content: str | bytes) -> dict[str, Any] | None
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -68,8 +68,7 @@ def parse_lot_estimated_value(xml_content: str | bytes) -> dict[str, Any] | None
 def merge_lot_estimated_value(
     release_json: dict[str, Any], lot_estimated_value_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge lot estimated value data into existing release JSON.
+    """Merge lot estimated value data into existing release JSON.
 
     Args:
         release_json: Target release JSON to merge into
@@ -79,6 +78,7 @@ def merge_lot_estimated_value(
         None. Modifies release_json in place.
         Logs warning if no lot data to merge.
         Logs info about number of lots merged.
+
     """
     if not lot_estimated_value_data:
         logger.warning("No Lot Estimated Value data to merge")

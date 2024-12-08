@@ -15,8 +15,7 @@ NAMESPACES = {
 
 
 def parse_deadline_receipt_requests(xml_content: str | bytes) -> dict | None:
-    """
-    Parse BT-1311: Time limit for receipt of requests to participate.
+    """Parse BT-1311: Time limit for receipt of requests to participate.
 
     Combines date and time components for participation request deadline.
 
@@ -38,6 +37,7 @@ def parse_deadline_receipt_requests(xml_content: str | bytes) -> dict | None:
                 }
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -102,8 +102,7 @@ def parse_deadline_receipt_requests(xml_content: str | bytes) -> dict | None:
 def merge_deadline_receipt_requests(
     release_json: dict, deadline_data: dict | None
 ) -> None:
-    """
-    Merge participation request deadline data into the release JSON.
+    """Merge participation request deadline data into the release JSON.
 
     Updates or adds tender period end dates to lots.
 
@@ -115,6 +114,7 @@ def merge_deadline_receipt_requests(
         - Updates release_json in-place
         - Creates tender.lots array if needed
         - Updates existing lots' tenderPeriod
+
     """
     if not deadline_data:
         logger.warning("No deadline receipt requests data to merge")

@@ -30,6 +30,7 @@ def parse_gpa_coverage(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -79,6 +80,7 @@ def merge_gpa_coverage(release_json: dict, gpa_coverage_data: dict | None) -> No
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not gpa_coverage_data:
         logger.info("No GPA coverage data to merge")

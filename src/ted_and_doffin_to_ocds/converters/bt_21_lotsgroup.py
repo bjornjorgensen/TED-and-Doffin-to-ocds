@@ -15,6 +15,7 @@ def parse_lots_group_title(xml_content: str | bytes) -> dict[str, Any] | None:
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing lot groups data with titles,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -58,6 +59,7 @@ def merge_lots_group_title(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         lots_group_title_data (Optional[Dict[str, Any]]): Lot group data containing titles to merge
+
     """
     if not lots_group_title_data:
         return

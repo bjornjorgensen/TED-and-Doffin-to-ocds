@@ -32,6 +32,7 @@ def parse_documents_restricted_url(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -89,6 +90,7 @@ def merge_documents_restricted_url(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not documents_data:
         logger.warning("BT-615-Lot: No documents restricted URL data to merge")

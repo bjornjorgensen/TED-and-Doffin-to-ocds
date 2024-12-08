@@ -7,8 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_mediator_part(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse mediator references from procurement project parts.
+    """Parse mediator references from procurement project parts.
 
     Identifies organizations that serve as mediation bodies.
     Adds mediationBody role to identified organizations.
@@ -27,6 +26,7 @@ def parse_mediator_part(xml_content: str | bytes) -> dict[str, Any] | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -53,8 +53,7 @@ def parse_mediator_part(xml_content: str | bytes) -> dict[str, Any] | None:
 def merge_mediator_part(
     release_json: dict[str, Any], mediator_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge mediator data from parts into the release JSON.
+    """Merge mediator data from parts into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -63,6 +62,7 @@ def merge_mediator_part(
     Effects:
         Updates the parties section of release_json with mediationBody roles,
         merging with existing party roles where applicable
+
     """
     if not mediator_data:
         logger.info("No Mediator data to merge.")

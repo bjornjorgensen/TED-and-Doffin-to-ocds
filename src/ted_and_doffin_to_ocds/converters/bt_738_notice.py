@@ -1,4 +1,8 @@
-# converters/bt_738_notice.py
+"""Converter for BT-738-Notice: Preferred publication date for TED notices.
+
+This module handles the extraction and mapping of preferred publication dates for
+notices on TED, converting dates to ISO format.
+"""
 
 import logging
 
@@ -16,17 +20,16 @@ NAMESPACES = {
 def parse_notice_preferred_publication_date(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse BT-738: Preferred publication date for notice.
+    """Parse the preferred TED publication date from RequestedPublicationDate.
 
-    Extracts the preferred date for TED publication, converting from the input date format
-    to ISO format.
+    Extracts and converts the preferred publication date to ISO format for use in
+    tender.communication.noticePreferredPublicationDate.
 
     Args:
-        xml_content: XML content to parse, either as string or bytes
+        xml_content: XML content to parse
 
     Returns:
-        Optional[Dict]: Parsed data in format:
+        dict | None: Parsed data in format:
             {
                 "tender": {
                     "communication": {
@@ -34,7 +37,8 @@ def parse_notice_preferred_publication_date(
                     }
                 }
             }
-        Returns None if no date found or on error
+        Returns None if no date found or invalid format
+
     """
     try:
         if isinstance(xml_content, str):
@@ -74,18 +78,25 @@ def parse_notice_preferred_publication_date(
 def merge_notice_preferred_publication_date(
     release_json: dict, pub_date_data: dict | None
 ) -> None:
-    """
-    Merge preferred publication date data into the release JSON.
+    """Merge preferred publication date into the OCDS release.
 
-    Updates or adds notice preferred publication date in tender.communication.
+    Updates tender.communication.noticePreferredPublicationDate with the
+    preferred TED publication date in ISO format.
 
     Args:
-        release_json: Main OCDS release JSON to update
-        pub_date_data: Publication date data to merge, can be None
+        release_json: Target release JSON to update
+        pub_date_data: Publication date data in format:
+            {
+                "tender": {
+                    "communication": {
+                        "noticePreferredPublicationDate": str  # ISO format date
+                    }
+                }
+            }
 
     Note:
-        - Updates release_json in-place
-        - Creates tender.communication object if needed
+        Updates release_json in-place
+
     """
     if not pub_date_data:
         logger.warning("No notice preferred publication date data to merge")

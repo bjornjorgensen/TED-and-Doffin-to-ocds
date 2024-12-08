@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 def parse_organization_touchpoint_name(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse organization touchpoint names from XML data.
+    """Parse organization touchpoint names from XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing organization information
@@ -29,6 +28,7 @@ def parse_organization_touchpoint_name(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -77,13 +77,13 @@ def parse_organization_touchpoint_name(
 def merge_organization_touchpoint_name(
     release_json: dict, organization_touchpoint_name_data: dict | None
 ) -> None:
-    """
-    Merge organization touchpoint name data into the release JSON.
+    """Merge organization touchpoint name data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
         organization_touchpoint_name_data (Optional[Dict]): The source data containing parties
             to be merged. If None, function returns without making changes.
+
     """
     if not organization_touchpoint_name_data:
         return

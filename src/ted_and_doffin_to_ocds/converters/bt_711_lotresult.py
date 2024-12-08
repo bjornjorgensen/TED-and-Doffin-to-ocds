@@ -32,6 +32,7 @@ def parse_tender_value_highest(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -88,6 +89,7 @@ def merge_tender_value_highest(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not tender_value_highest_data:
         logger.warning("BT-711: No highest tender value data to merge")

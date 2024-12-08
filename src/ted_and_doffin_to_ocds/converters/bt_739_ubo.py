@@ -16,8 +16,7 @@ NAMESPACES = {
 
 
 def parse_ubo_contact_fax(xml_content: str | bytes) -> dict | None:
-    """
-    Parse BT-739: Ultimate Beneficial Owner contact fax number.
+    """Parse BT-739: Ultimate Beneficial Owner contact fax number.
 
     Extracts fax numbers for contacting UBOs, following data protection
     regulations regarding personal information.
@@ -41,6 +40,7 @@ def parse_ubo_contact_fax(xml_content: str | bytes) -> dict | None:
                 ]
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -98,8 +98,7 @@ def parse_ubo_contact_fax(xml_content: str | bytes) -> dict | None:
 
 
 def merge_ubo_contact_fax(release_json: dict, ubo_data: dict | None) -> None:
-    """
-    Merge UBO fax number data into the release JSON.
+    """Merge UBO fax number data into the release JSON.
 
     Updates or adds fax numbers to organization's beneficial owners.
 
@@ -111,6 +110,7 @@ def merge_ubo_contact_fax(release_json: dict, ubo_data: dict | None) -> None:
         - Updates release_json in-place
         - Creates parties array if needed
         - Updates existing organizations' beneficialOwners
+
     """
     if not ubo_data:
         logger.warning("No UBO contact fax data to merge")

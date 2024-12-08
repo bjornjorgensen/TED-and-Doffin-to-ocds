@@ -41,6 +41,7 @@ def parse_lot_prize_value(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -108,6 +109,7 @@ def merge_lot_prize_value(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not lot_prize_value_data:
         logger.warning("No lot prize value data to merge")

@@ -28,6 +28,7 @@ def parse_buyer_review_complainants_number(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -93,6 +94,7 @@ def merge_buyer_review_complainants_number(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not complainants_number_data:
         logger.info("BT-712(b): No buyer review complainants number data to merge")

@@ -10,8 +10,7 @@ logger = logging.getLogger(__name__)
 def parse_bt196_bt541_lotsgroup_threshold_unpublished_justification(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse the XML content to extract the unpublished justification description for the LotsGroup threshold award criterion.
+    """Parse the XML content to extract the unpublished justification description for the LotsGroup threshold award criterion.
 
     This function extracts BT-196 (justification) data related to BT-541 (LotsGroup threshold) from the XML.
     It looks for FieldsPrivacy elements containing reasons why certain award criterion information is withheld.
@@ -35,6 +34,7 @@ def parse_bt196_bt541_lotsgroup_threshold_unpublished_justification(
 
     Raises:
         etree.XMLSyntaxError: If the XML content is malformed (handled internally)
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -91,8 +91,7 @@ def merge_bt196_bt541_lotsgroup_threshold_unpublished_justification(
     release_json: dict,
     unpublished_justification_data: dict | None,
 ) -> None:
-    """
-    Merge the parsed unpublished justification data into the main OCDS release JSON.
+    """Merge the parsed unpublished justification data into the main OCDS release JSON.
 
     This function updates the withheldInformation array in the release_json with justification
     data from unpublished fields related to LotsGroup threshold award criteria.
@@ -118,6 +117,7 @@ def merge_bt196_bt541_lotsgroup_threshold_unpublished_justification(
         >>> merge_bt196_bt541_lotsgroup_threshold_unpublished_justification(release, justification)
         >>> print(release["withheldInformation"])
         [{'id': 'awa-cri-num-threshold-1', 'rationale': 'Information delayed...'}]
+
     """
     if not unpublished_justification_data:
         logger.warning(

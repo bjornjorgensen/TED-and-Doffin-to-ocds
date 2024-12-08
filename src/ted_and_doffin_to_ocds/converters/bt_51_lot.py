@@ -29,6 +29,7 @@ def parse_lot_maximum_candidates(xml_content: str | bytes) -> dict | None:
                 }]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -88,6 +89,7 @@ def merge_lot_maximum_candidates(
 
     Returns:
         None. Updates release_json in place.
+
     """
     if not lot_maximum_candidates_data:
         logger.info("No lot maximum candidates data to merge.")

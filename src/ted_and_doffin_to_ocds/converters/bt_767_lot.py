@@ -8,6 +8,28 @@ logger = logging.getLogger(__name__)
 
 
 def parse_electronic_auction(xml_content: str | bytes) -> dict | None:
+    """Parse electronic auction information from XML content.
+
+    Args:
+        xml_content (str | bytes): The XML content to parse, either as a string or bytes
+
+    Returns:
+        dict | None: A dictionary containing electronic auction information in the format:
+            {
+                "tender": {
+                    "lots": [
+                        {
+                            "id": str,
+                            "techniques": {
+                                "hasElectronicAuction": bool
+                            }
+                        }
+                    ]
+                }
+            }
+            Returns None if no valid lots are found.
+
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
 
@@ -52,6 +74,28 @@ def merge_electronic_auction(
     release_json: dict,
     electronic_auction_data: dict | None,
 ) -> None:
+    """Merge electronic auction data into the release JSON.
+
+    Args:
+        release_json (dict): The target release JSON to merge data into
+        electronic_auction_data (dict | None): Electronic auction data to merge, in the format:
+            {
+                "tender": {
+                    "lots": [
+                        {
+                            "id": str,
+                            "techniques": {
+                                "hasElectronicAuction": bool
+                            }
+                        }
+                    ]
+                }
+            }
+
+    Returns:
+        None: Modifies release_json in place
+
+    """
     if not electronic_auction_data:
         logger.warning("No electronic auction data to merge")
         return

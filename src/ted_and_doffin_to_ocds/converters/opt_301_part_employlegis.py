@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_employment_legislation_org_part(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse employment legislation organization references from parts.
+    """Parse employment legislation organization references from parts.
 
     For each employment legislation document:
     - Gets document publisher organization ID
@@ -41,6 +40,7 @@ def parse_employment_legislation_org_part(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -83,8 +83,7 @@ def parse_employment_legislation_org_part(
 def merge_employment_legislation_org_part(
     release_json: dict[str, Any], parsed_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge employment legislation organization data from parts into the release JSON.
+    """Merge employment legislation organization data from parts into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -94,6 +93,7 @@ def merge_employment_legislation_org_part(
         - Updates parties with informationService roles
         - Updates documents with publisher references
         - Maintains existing data while adding new information
+
     """
     if not parsed_data:
         logger.info("No employment legislation organization reference data to merge")

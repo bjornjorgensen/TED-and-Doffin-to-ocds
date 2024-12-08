@@ -22,6 +22,7 @@ def parse_acquiring_cpb_buyer_indicator(xml_content: str | bytes) -> dict | None
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -63,6 +64,7 @@ def merge_acquiring_cpb_buyer_indicator(
     Args:
         release_json: The release to merge into
         wholesale_buyer_data: Data about wholesale buyers to merge, or None if no data
+
     """
     if not wholesale_buyer_data:
         logger.debug("No Acquiring CPB Buyer Indicator data to merge")

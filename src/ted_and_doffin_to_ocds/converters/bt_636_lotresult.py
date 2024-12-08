@@ -66,6 +66,7 @@ def parse_buyer_review_requests_irregularity_type(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -135,6 +136,7 @@ def merge_buyer_review_requests_irregularity_type(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not irregularity_type_data:
         logger.info("No buyer review requests irregularity type data to merge")

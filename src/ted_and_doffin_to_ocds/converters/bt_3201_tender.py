@@ -352,6 +352,7 @@ def determine_scheme(identifier: str) -> str:
 
     Returns:
         str: Scheme in format "{country_code}-TENDERNL"
+
     """
     try:
         # Split by common delimiters
@@ -389,6 +390,7 @@ def parse_tender_identifier(xml_content: str | bytes) -> dict | None:
     Returns:
         Optional[Dict]: Dictionary containing bid identifiers, or None if no bids found
         Format: {"bids": {"details": [{"id": str, "identifiers": [{"id": str, "scheme": str}]}]}}
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -441,6 +443,7 @@ def merge_tender_identifier(release_json, tender_identifier_data) -> None:
     Args:
         release_json: The target release JSON object
         tender_identifier_data: The tender identifier data to merge
+
     """
     if not tender_identifier_data:
         logger.warning("No Tender Identifier data to merge")

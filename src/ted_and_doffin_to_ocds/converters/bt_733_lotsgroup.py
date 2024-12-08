@@ -17,8 +17,7 @@ NAMESPACES = {
 def parse_lots_group_award_criteria_order_justification(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse BT-733: Award criteria order justification for lot groups.
+    """Parse BT-733: Award criteria order justification for lot groups.
 
     Extracts the justification for specifying only order of importance
     rather than specific weights for award criteria.
@@ -41,6 +40,7 @@ def parse_lots_group_award_criteria_order_justification(
                 }
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -86,8 +86,7 @@ def parse_lots_group_award_criteria_order_justification(
 def merge_lots_group_award_criteria_order_justification(
     release_json: dict, justification_data: dict | None
 ) -> None:
-    """
-    Merge award criteria order justification data into the release JSON.
+    """Merge award criteria order justification data into the release JSON.
 
     Updates or adds award criteria order rationale for lot groups.
 
@@ -99,6 +98,7 @@ def merge_lots_group_award_criteria_order_justification(
         - Updates release_json in-place
         - Creates tender.lotGroups array if needed
         - Updates existing lot groups' awardCriteria
+
     """
     if not justification_data:
         logger.warning("No lot group award criteria order justification data to merge")

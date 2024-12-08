@@ -10,8 +10,7 @@ logger = logging.getLogger(__name__)
 def parse_concession_value_description(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse concession value description from XML data.
+    """Parse concession value description from XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing tender information
@@ -28,6 +27,7 @@ def parse_concession_value_description(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -89,13 +89,13 @@ def parse_concession_value_description(
 def merge_concession_value_description(
     release_json: dict, value_description_data: dict | None
 ) -> None:
-    """
-    Merge concession value description data into the release JSON.
+    """Merge concession value description data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
         value_description_data (Optional[Dict]): The source data containing awards
             to be merged. If None, function returns without making changes.
+
     """
     if not value_description_data:
         return

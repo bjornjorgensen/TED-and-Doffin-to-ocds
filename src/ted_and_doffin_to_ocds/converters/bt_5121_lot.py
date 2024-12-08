@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_place_performance_post_code(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse place performance postal code (BT-5121) from XML content.
+    """Parse place performance postal code (BT-5121) from XML content.
 
     Gets postal code information for each lot's delivery address. Creates/updates
     corresponding Address objects in the item's deliveryAddresses array.
@@ -22,6 +21,7 @@ def parse_place_performance_post_code(
 
     Returns:
         Dictionary containing tender items with delivery addresses or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -65,8 +65,7 @@ def parse_place_performance_post_code(
 def merge_place_performance_post_code(
     release_json: dict[str, Any], post_code_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge postal code data into the release JSON.
+    """Merge postal code data into the release JSON.
 
     Updates or creates delivery addresses with postal code information for each lot.
     Preserves existing address data while adding/updating postal codes.
@@ -77,6 +76,7 @@ def merge_place_performance_post_code(
 
     Returns:
         None
+
     """
     if not post_code_data:
         logger.warning("No Place Performance Post Code data to merge")

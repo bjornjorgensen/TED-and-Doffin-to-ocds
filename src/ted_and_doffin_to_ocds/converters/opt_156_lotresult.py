@@ -9,8 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_vehicle_numeric(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse vehicle quantity information from LotResult elements in XML content.
+    """Parse vehicle quantity information from LotResult elements in XML content.
 
     Handles three types of vehicle statistics:
     - vehicles: Total vehicles (requires subtracting special vehicles)
@@ -25,7 +24,8 @@ def parse_vehicle_numeric(xml_content: str | bytes) -> dict[str, Any] | None:
 
     Returns:
         Optional[Dict]: Dictionary containing awards with vehicle quantities, or None if no data.
-        Example:
+
+    Example:
         {
             "awards": [
                 {
@@ -45,6 +45,7 @@ def parse_vehicle_numeric(xml_content: str | bytes) -> dict[str, Any] | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -130,8 +131,7 @@ def parse_vehicle_numeric(xml_content: str | bytes) -> dict[str, Any] | None:
 def merge_vehicle_numeric(
     release_json: dict[str, Any], vehicle_numeric_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge vehicle numeric data into the release JSON.
+    """Merge vehicle numeric data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -140,6 +140,7 @@ def merge_vehicle_numeric(
     Effects:
         Updates the awards section of release_json with vehicle quantity information,
         merging items and related lots where awards already exist
+
     """
     if not vehicle_numeric_data:
         logger.warning("No vehicle numeric data to merge")

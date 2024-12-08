@@ -10,8 +10,7 @@ logger = logging.getLogger(__name__)
 def bt_198_parse_unpublished_access_date_bt_09_procedure(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse the XML content to extract the unpublished access date for the procedure.
+    """Parse the XML content to extract the unpublished access date for the procedure.
 
     This function extracts BT-198 (access date) data related to BT-09 (Procedure) from the XML.
     It looks for FieldsPrivacy elements containing dates when certain information will be made available.
@@ -30,6 +29,7 @@ def bt_198_parse_unpublished_access_date_bt_09_procedure(
                 ]
             }
         Returns None if no relevant data is found or if XML parsing fails.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -78,8 +78,7 @@ def bt_198_merge_unpublished_access_date_bt_09_procedure(
     release_json: dict,
     unpublished_access_date_data: dict | None,
 ) -> None:
-    """
-    Merge the parsed unpublished access date data into the main OCDS release JSON.
+    """Merge the parsed unpublished access date data into the main OCDS release JSON.
 
     This function updates the withheldInformation array in the release_json with access dates
     from unpublished fields related to procedure information.
@@ -93,6 +92,7 @@ def bt_198_merge_unpublished_access_date_bt_09_procedure(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not unpublished_access_date_data:
         logger.warning(

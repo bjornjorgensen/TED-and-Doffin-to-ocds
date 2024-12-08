@@ -9,8 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_bt_27_lots_group(xml_content: str | bytes) -> dict[str, Any]:
-    """
-    Parse the estimated value for each lot group from XML content.
+    """Parse the estimated value for each lot group from XML content.
 
     Args:
         xml_content: XML string or bytes containing procurement lot groups
@@ -30,6 +29,7 @@ def parse_bt_27_lots_group(xml_content: str | bytes) -> dict[str, Any]:
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -76,8 +76,7 @@ def parse_bt_27_lots_group(xml_content: str | bytes) -> dict[str, Any]:
 def merge_bt_27_lots_group(
     release_json: dict[str, Any], bt_27_lots_group_data: dict[str, Any]
 ) -> None:
-    """
-    Merge lot group estimated value data into existing release JSON.
+    """Merge lot group estimated value data into existing release JSON.
 
     Args:
         release_json: Target release JSON to merge into
@@ -86,6 +85,7 @@ def merge_bt_27_lots_group(
     Returns:
         None. Modifies release_json in place.
         Logs info about number of lot groups merged.
+
     """
     existing_lot_groups = release_json.setdefault("tender", {}).setdefault(
         "lotGroups",

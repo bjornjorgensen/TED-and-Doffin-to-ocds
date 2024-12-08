@@ -9,8 +9,7 @@ logger = logging.getLogger(__name__)
 def parse_contract_technical_identifier(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse contract technical identifiers from settled contracts.
+    """Parse contract technical identifiers from settled contracts.
 
     For each settled contract:
     - Gets contract ID
@@ -30,6 +29,7 @@ def parse_contract_technical_identifier(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -65,8 +65,7 @@ def merge_contract_technical_identifier(
     release_json: dict[str, Any],
     contract_technical_identifier_data: dict[str, Any] | None,
 ) -> None:
-    """
-    Merge contract technical identifier data into the release JSON.
+    """Merge contract technical identifier data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -75,6 +74,7 @@ def merge_contract_technical_identifier(
     Effects:
         Updates the contracts section of release_json with new contracts,
         skipping any that already exist
+
     """
     if not contract_technical_identifier_data:
         logger.info("No Contract Technical Identifier data to merge.")

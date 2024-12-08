@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_signatory_identifier_reference(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse signatory party information for settled contracts.
+    """Parse signatory party information for settled contracts.
 
     For each signatory party:
     - Creates/updates organization in parties with 'buyer' role
@@ -44,6 +43,7 @@ def parse_signatory_identifier_reference(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -100,8 +100,7 @@ def parse_signatory_identifier_reference(
 def merge_signatory_identifier_reference(
     release_json: dict[str, Any], signatory_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge signatory party data into the release JSON.
+    """Merge signatory party data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -111,6 +110,7 @@ def merge_signatory_identifier_reference(
         - Updates parties with buyer roles and names
         - Updates awards with buyer references
         - Maintains existing data while adding new information
+
     """
     if not signatory_data:
         logger.info("No Signatory Identifier Reference data to merge")

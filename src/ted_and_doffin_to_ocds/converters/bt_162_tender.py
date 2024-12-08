@@ -10,8 +10,7 @@ USER_CHARGE_TITLE = "The estimated revenue coming from the users of the concessi
 
 
 def parse_concession_revenue_user(xml_content: str | bytes) -> dict | None:
-    """
-    Parse user concession revenue from XML data.
+    """Parse user concession revenue from XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing tender information
@@ -40,6 +39,7 @@ def parse_concession_revenue_user(xml_content: str | bytes) -> dict | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -134,13 +134,13 @@ def parse_concession_revenue_user(xml_content: str | bytes) -> dict | None:
 def merge_concession_revenue_user(
     release_json: dict, concession_revenue_data: dict | None
 ) -> None:
-    """
-    Merge user concession revenue data into the release JSON.
+    """Merge user concession revenue data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
         concession_revenue_data (Optional[Dict]): The source data containing contracts
             to be merged. If None, function returns without making changes.
+
     """
     if not concession_revenue_data:
         return

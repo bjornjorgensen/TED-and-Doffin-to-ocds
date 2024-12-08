@@ -8,14 +8,14 @@ logger = logging.getLogger(__name__)
 
 
 def parse_lots_all_required(xml_content: str) -> dict | None:
-    """
-    Parse the XML content to extract the partPresentationCode for Lots All Required.
+    """Parse the XML content to extract the partPresentationCode for Lots All Required.
 
     Args:
         xml_content (str): The XML content to parse.
 
     Returns:
         Optional[Dict]: A dictionary containing the parsed data if 'all' is specified, None otherwise.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -44,8 +44,7 @@ def merge_lots_all_required(
     release_json: dict,
     lots_all_required_data: dict | None,
 ) -> None:
-    """
-    Merge the parsed Lots All Required data into the main OCDS release JSON.
+    """Merge the parsed Lots All Required data into the main OCDS release JSON.
 
     Args:
         release_json (Dict): The main OCDS release JSON to be updated.
@@ -53,6 +52,7 @@ def merge_lots_all_required(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if lots_all_required_data:
         tender = release_json.setdefault("tender", {})

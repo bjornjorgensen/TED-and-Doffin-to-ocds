@@ -6,8 +6,7 @@ from lxml import etree
 def parse_main_classification_code_procedure(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse the XML content to extract main classification code for the procedure.
+    """Parse the XML content to extract main classification code for the procedure.
 
     Processes BT-262-Procedure field which contains the main classification code.
     XML path: /*/cac:ProcurementProject/cac:MainCommodityClassification/
@@ -30,6 +29,7 @@ def parse_main_classification_code_procedure(
             }
         }
         Returns None if no relevant data is found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -66,8 +66,7 @@ def parse_main_classification_code_procedure(
 def merge_main_classification_code_procedure(
     release_json: dict[str, Any], classification_code_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge main classification code data into the main OCDS release JSON.
+    """Merge main classification code data into the main OCDS release JSON.
 
     Updates existing items with main classification code.
 
@@ -77,6 +76,7 @@ def merge_main_classification_code_procedure(
 
     Returns:
         None: Updates release_json in-place
+
     """
     if not classification_code_data:
         return

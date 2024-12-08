@@ -1,5 +1,4 @@
-"""
-BT-10 Authority Activity converter.
+"""BT-10 Authority Activity converter.
 
 Maps contracting authority main activities to OCDS party classifications.
 Handles both COFOG and EU-specific activity classifications.
@@ -74,6 +73,7 @@ def parse_authority_activity(xml_content: str | bytes) -> dict[str, Any] | None:
             }]
         }
         or None if no authority activity found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -143,6 +143,7 @@ def merge_authority_activity(
     Args:
         release_json: The target release JSON to update
         authority_activity_data: The authority activity data to merge
+
     """
     if not authority_activity_data:
         logger.info("No authority activity data to merge")

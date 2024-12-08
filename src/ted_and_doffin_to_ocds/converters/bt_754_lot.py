@@ -8,14 +8,14 @@ logger = logging.getLogger(__name__)
 
 
 def parse_accessibility_criteria(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the XML content to extract the accessibility criteria information for each lot.
+    """Parse the XML content to extract the accessibility criteria information for each lot.
 
     Args:
         xml_content (Union[str, bytes]): The XML content to parse.
 
     Returns:
         Optional[Dict]: A dictionary containing the parsed data, or None if no relevant data is found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -64,8 +64,7 @@ def parse_accessibility_criteria(xml_content: str | bytes) -> dict | None:
 
 
 def merge_accessibility_criteria(release_json: dict, parsed_data: dict | None) -> None:
-    """
-    Merge the parsed accessibility criteria data into the main OCDS release JSON.
+    """Merge the parsed accessibility criteria data into the main OCDS release JSON.
 
     Args:
         release_json (Dict): The main OCDS release JSON to be updated.
@@ -73,6 +72,7 @@ def merge_accessibility_criteria(release_json: dict, parsed_data: dict | None) -
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not parsed_data:
         logger.warning("No Accessibility Criteria data to merge")

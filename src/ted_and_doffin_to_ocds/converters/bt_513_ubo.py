@@ -28,6 +28,7 @@ def parse_ubo_city(xml_content: str | bytes) -> dict | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -87,6 +88,7 @@ def merge_ubo_city(release_json: dict, ubo_city_data: dict | None) -> None:
 
     Returns:
         None. Updates release_json in place.
+
     """
     if not ubo_city_data:
         logger.info("No UBO city data to merge")

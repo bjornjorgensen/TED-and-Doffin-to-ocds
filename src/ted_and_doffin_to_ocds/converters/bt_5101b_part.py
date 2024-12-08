@@ -8,8 +8,7 @@ from lxml import etree
 def parse_part_place_performance_streetline1(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse the street address information from XML for place of performance.
+    """Parse the street address information from XML for place of performance.
 
     Extracts street address components from RealizedLocation/Address elements and combines them
     in the order: StreetName, AdditionalStreetName, AddressLine.
@@ -19,6 +18,7 @@ def parse_part_place_performance_streetline1(
 
     Returns:
         Dictionary containing tender delivery addresses or None if no addresses found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -91,8 +91,7 @@ def merge_part_place_performance_streetline1(
     release_json: dict[str, Any],
     part_place_performance_streetline1_data: dict[str, Any] | None,
 ) -> None:
-    """
-    Merge street address data into the release JSON.
+    """Merge street address data into the release JSON.
 
     Updates the tender.deliveryAddresses array in release_json with new addresses,
     avoiding duplicates.
@@ -103,6 +102,7 @@ def merge_part_place_performance_streetline1(
 
     Returns:
         None
+
     """
     if not part_place_performance_streetline1_data:
         return

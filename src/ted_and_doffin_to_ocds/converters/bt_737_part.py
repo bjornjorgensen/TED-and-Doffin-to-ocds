@@ -1,4 +1,8 @@
-# converters/bt_737_part.py
+"""Converter for BT-737-Part: Document unofficial language information.
+
+This module handles mapping of unofficial document translations from eForms to OCDS
+for Part elements. It converts ISO 639-2 language codes to ISO 639-1 format.
+"""
 
 import logging
 
@@ -205,11 +209,10 @@ NAMESPACES = {
 def part_parse_documents_unofficial_language(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse BT-737: Unofficial languages for procurement documents.
+    """Parse document unofficial language translations for Part elements.
 
-    Extracts information about unofficial translations of documents, mapping ISO 639-2
-    language codes to ISO 639-1.
+    Gets documents with unofficial translations from CallForTendersDocumentReference
+    elements and converts ISO 639-2 language codes (e.g. 'ENG') to ISO 639-1 (e.g. 'en').
 
     Args:
         xml_content: XML content to parse, either as string or bytes
@@ -220,13 +223,14 @@ def part_parse_documents_unofficial_language(
                 "tender": {
                     "documents": [
                         {
-                            "id": str,
+                            "id": str,  # Document ID
                             "unofficialTranslations": [str]  # ISO 639-1 codes
                         }
                     ]
                 }
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -285,19 +289,28 @@ def part_parse_documents_unofficial_language(
 def part_merge_documents_unofficial_language(
     release_json: dict, unofficial_langs: dict | None
 ) -> None:
-    """
-    Merge unofficial language data into the release JSON.
+    """Merge document unofficial language data into the OCDS release.
 
-    Updates or adds document unofficial translations.
+    Updates or adds unofficial translations for documents from Part elements.
+    Handles merging of language codes while avoiding duplicates.
 
     Args:
-        release_json: Main OCDS release JSON to update
-        unofficial_langs: Documents unofficial language data to merge, can be None
+        release_json: Main OCDS release to update
+        unofficial_langs: Documents language data to merge, in format:
+            {
+                "tender": {
+                    "documents": [
+                        {
+                            "id": str,
+                            "unofficialTranslations": [str]  # ISO 639-1 codes
+                        }
+                    ]
+                }
+            }
 
     Note:
-        - Updates release_json in-place
-        - Creates tender.documents array if needed
-        - Handles duplicate translations
+        Updates release_json in-place
+
     """
     if not unofficial_langs:
         logger.warning("No unofficial language data for documents to merge")

@@ -13,8 +13,7 @@ NAMESPACES = {
 
 
 def parse_quality_target_description(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse quality target description information (OPT-072) from XML content.
+    """Parse quality target description information (OPT-072) from XML content.
 
     Maps to the same CustomerServices objects as OPT-071-Lot.
     Gets customer service descriptions for each lot and maps them to the
@@ -25,6 +24,7 @@ def parse_quality_target_description(xml_content: str | bytes) -> dict[str, Any]
 
     Returns:
         Dictionary containing lots with customer services or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -80,8 +80,7 @@ def parse_quality_target_description(xml_content: str | bytes) -> dict[str, Any]
 def merge_quality_target_description(
     release_json: dict[str, Any], target_description_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge quality target description information into the release JSON.
+    """Merge quality target description information into the release JSON.
 
     Updates existing customer services with descriptions.
     Preserves existing customer service data while adding/updating descriptions.
@@ -92,6 +91,7 @@ def merge_quality_target_description(
 
     Returns:
         None
+
     """
     if not target_description_data:
         logger.warning("No quality target description data to merge")

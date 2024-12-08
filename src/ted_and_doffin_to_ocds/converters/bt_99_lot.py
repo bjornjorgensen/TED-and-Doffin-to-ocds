@@ -32,6 +32,7 @@ def parse_review_deadline_description(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -82,6 +83,7 @@ def merge_review_deadline_description(
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not review_deadline_description_data:
         logger.warning("No review deadline description data to merge")

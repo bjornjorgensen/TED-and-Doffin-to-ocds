@@ -10,8 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_future_notice_date(xml_content: str | bytes) -> str | None:
-    """
-    Parse the future notice date from XML content.
+    """Parse the future notice date from XML content.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing the planned date
@@ -19,6 +18,7 @@ def parse_future_notice_date(xml_content: str | bytes) -> str | None:
     Returns:
         Optional[str]: ISO formatted date string with timezone, or None if not found
         Format example: "2020-03-15T00:00:00+01:00"
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -45,12 +45,12 @@ def parse_future_notice_date(xml_content: str | bytes) -> str | None:
 def merge_future_notice_date(
     release_json: dict, future_notice_date: str | None
 ) -> None:
-    """
-    Merge future notice date into the release JSON.
+    """Merge future notice date into the release JSON.
 
     Args:
         release_json (dict): The target release JSON to merge data into
         future_notice_date (Optional[str]): ISO formatted date string to be merged
+
     """
     if future_notice_date:
         if "tender" not in release_json:

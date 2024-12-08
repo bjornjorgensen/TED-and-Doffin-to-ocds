@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 def parse_organization_edelivery_gateway(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse organization eDelivery gateway information from XML content.
+    """Parse organization eDelivery gateway information from XML content.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing organization endpoint information
@@ -17,13 +16,15 @@ def parse_organization_edelivery_gateway(
     Returns:
         Optional[Dict]: A dictionary containing parsed eDelivery gateway data in OCDS format with
         'parties' array, or None if no valid endpoint data is found.
-        Example:
+
+    Example:
         {
             "parties": [{
                 "id": "ORG-0001",
                 "eDeliveryGateway": "https://drive.xpertpro.eu"
             }]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -64,8 +65,7 @@ def parse_organization_edelivery_gateway(
 def merge_organization_edelivery_gateway(
     release_json: dict, edelivery_gateway_data: dict | None
 ) -> None:
-    """
-    Merge organization eDelivery gateway data into the release JSON.
+    """Merge organization eDelivery gateway data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -78,6 +78,7 @@ def merge_organization_edelivery_gateway(
     Note:
         If edelivery_gateway_data is None or contains no parties, no changes are made.
         For existing parties, eDeliveryGateway information is updated with new values.
+
     """
     if not edelivery_gateway_data:
         logger.info("No eDelivery gateway data to merge")

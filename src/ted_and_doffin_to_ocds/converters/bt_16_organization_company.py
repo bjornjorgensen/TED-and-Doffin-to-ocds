@@ -17,6 +17,7 @@ def parse_organization_part_name(xml_content: str | bytes) -> dict[str, Any] | N
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing organization data with combined names,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -64,6 +65,7 @@ def merge_organization_part_name(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         organization_part_name_data (Optional[Dict[str, Any]]): Organization data with combined names to merge
+
     """
     if not organization_part_name_data:
         logger.info("No organization part name data to merge")

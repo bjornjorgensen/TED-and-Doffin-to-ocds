@@ -18,8 +18,7 @@ NAMESPACES = {
 
 
 def parse_main_nature_sub_type(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse main nature sub type information (OPP-040) from XML content.
+    """Parse main nature sub type information (OPP-040) from XML content.
 
     Gets transport service type codes and adds them to the tender's
     additionalProcurementCategories array.
@@ -29,6 +28,7 @@ def parse_main_nature_sub_type(xml_content: str | bytes) -> dict[str, Any] | Non
 
     Returns:
         Dictionary containing procurement categories or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -61,8 +61,7 @@ def parse_main_nature_sub_type(xml_content: str | bytes) -> dict[str, Any] | Non
 def merge_main_nature_sub_type(
     release_json: dict[str, Any], nature_type_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge main nature sub type information into the release JSON.
+    """Merge main nature sub type information into the release JSON.
 
     Updates or creates additionalProcurementCategories array with transport service codes.
     Preserves existing categories while adding new ones.
@@ -73,6 +72,7 @@ def merge_main_nature_sub_type(
 
     Returns:
         None
+
     """
     if not nature_type_data:
         logger.warning("No main nature sub type data to merge")

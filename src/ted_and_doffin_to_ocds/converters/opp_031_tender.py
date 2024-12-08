@@ -24,8 +24,7 @@ TERM_CODE_MAPPING = {
 
 
 def parse_contract_conditions(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse contract conditions information (OPP-031) from XML content.
+    """Parse contract conditions information (OPP-031) from XML content.
 
     This mapping assumes that contract term values are consistent across all lot tenders
     for a given lot. Contact OCDS Data Support Team if values vary per lot tender.
@@ -38,6 +37,7 @@ def parse_contract_conditions(xml_content: str | bytes) -> dict[str, Any] | None
 
     Returns:
         Dictionary containing lots with contract terms or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -126,8 +126,7 @@ def parse_contract_conditions(xml_content: str | bytes) -> dict[str, Any] | None
 def merge_contract_conditions(
     release_json: dict[str, Any], conditions_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge contract conditions into the release JSON.
+    """Merge contract conditions into the release JSON.
 
     Updates or creates lots with contract terms information.
     Preserves existing lot data while adding/updating contract terms.
@@ -138,6 +137,7 @@ def merge_contract_conditions(
 
     Returns:
         None
+
     """
     if not conditions_data:
         logger.warning("No contract conditions data to merge")

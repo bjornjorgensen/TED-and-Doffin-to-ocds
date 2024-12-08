@@ -19,8 +19,7 @@ NAMESPACES = {
 def parse_lot_subcontracting_obligation_maximum(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse BT-729: Maximum subcontracting percentage for competitive procedure.
+    """Parse BT-729: Maximum subcontracting percentage for competitive procedure.
 
     Extracts the maximum percentage of contract value that must be subcontracted
     using competitive procedure from Directive 2009/81/EC.
@@ -43,6 +42,7 @@ def parse_lot_subcontracting_obligation_maximum(
                 }
             }
         Returns None if no relevant data found
+
     """
     try:
         if isinstance(xml_content, str):
@@ -93,8 +93,7 @@ def parse_lot_subcontracting_obligation_maximum(
 def merge_lot_subcontracting_obligation_maximum(
     release_json: dict, lot_subcontracting_data: dict | None
 ) -> None:
-    """
-    Merge subcontracting obligation maximum data into the release JSON.
+    """Merge subcontracting obligation maximum data into the release JSON.
 
     Updates or adds subcontracting terms for lots with maximum percentage values.
 
@@ -106,6 +105,7 @@ def merge_lot_subcontracting_obligation_maximum(
         - Updates release_json in-place
         - Creates tender.lots array if needed
         - Updates existing lots' subcontractingTerms
+
     """
     if not lot_subcontracting_data:
         logger.warning("No lot subcontracting obligation maximum data to merge")

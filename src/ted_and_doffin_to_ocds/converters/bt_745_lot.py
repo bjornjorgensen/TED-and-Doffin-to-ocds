@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_submission_nonelectronic_description(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse the XML content to extract the submission non-electronic description for each lot.
+    """Parse the XML content to extract the submission non-electronic description for each lot.
 
     Args:
         xml_content (str or bytes): The XML content to parse.
@@ -20,6 +19,7 @@ def parse_submission_nonelectronic_description(
     Returns:
         dict: A dictionary containing the parsed submission non-electronic description data.
         None: If no relevant data is found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -62,8 +62,7 @@ def merge_submission_nonelectronic_description(
     release_json: dict[str, Any],
     submission_nonelectronic_description_data: dict[str, Any] | None,
 ) -> None:
-    """
-    Merge the parsed submission non-electronic description data into the main OCDS release JSON.
+    """Merge the parsed submission non-electronic description data into the main OCDS release JSON.
 
     Args:
         release_json (dict): The main OCDS release JSON to be updated.
@@ -71,6 +70,7 @@ def merge_submission_nonelectronic_description(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not submission_nonelectronic_description_data:
         logger.warning("No submission non-electronic description data to merge")

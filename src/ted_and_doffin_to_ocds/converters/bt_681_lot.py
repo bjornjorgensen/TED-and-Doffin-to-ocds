@@ -6,14 +6,14 @@ logger = logging.getLogger(__name__)
 
 
 def parse_foreign_subsidies_regulation(xml_content: str) -> dict | None:
-    """
-    Parses the XML content to extract the Foreign Subsidies Regulation (FSR) applicability.
+    """Parses the XML content to extract the Foreign Subsidies Regulation (FSR) applicability.
 
     Args:
         xml_content (str): The XML content as a string.
 
     Returns:
         dict | None: A dictionary containing the parsed data or None if no lots are found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -65,8 +65,7 @@ def parse_foreign_subsidies_regulation(xml_content: str) -> dict | None:
 def merge_foreign_subsidies_regulation(
     release_json: dict, fsr_data: dict | None
 ) -> None:
-    """
-    Merges the parsed Foreign Subsidies Regulation (FSR) data into the existing release JSON structure.
+    """Merges the parsed Foreign Subsidies Regulation (FSR) data into the existing release JSON structure.
 
     Args:
         release_json (dict): The existing release JSON structure.
@@ -74,6 +73,7 @@ def merge_foreign_subsidies_regulation(
 
     Returns:
         None
+
     """
     if not fsr_data:
         logger.warning("No Foreign Subsidies Regulation data to merge")

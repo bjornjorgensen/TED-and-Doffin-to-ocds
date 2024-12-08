@@ -24,6 +24,7 @@ def parse_procedure_additional_nature(
                 "additionalProcurementCategories": ["nature1", "nature2"]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -64,6 +65,7 @@ def merge_procedure_additional_nature(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not procedure_additional_nature_data:
         logger.warning("No procedure Additional Nature data to merge")

@@ -10,8 +10,7 @@ logger = logging.getLogger(__name__)
 def parse_organization_country_subdivision(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse organization country subdivision information from XML content.
+    """Parse organization country subdivision information from XML content.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing organization country subdivision info
@@ -19,7 +18,8 @@ def parse_organization_country_subdivision(
     Returns:
         Optional[Dict]: A dictionary containing parsed region data in OCDS format with
         'parties' array, or None if no valid subdivision data is found.
-        Example:
+
+    Example:
         {
             "parties": [{
                 "id": "ORG-0001",
@@ -28,6 +28,7 @@ def parse_organization_country_subdivision(
                 }
             }]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -65,8 +66,7 @@ def parse_organization_country_subdivision(
 def merge_organization_country_subdivision(
     release_json: dict, organization_country_subdivision_data: dict | None
 ) -> None:
-    """
-    Merge organization country subdivision data into the release JSON.
+    """Merge organization country subdivision data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -79,6 +79,7 @@ def merge_organization_country_subdivision(
     Note:
         If organization_country_subdivision_data is None or contains no parties, no changes are made.
         For existing parties, region information is updated in the address section.
+
     """
     if not organization_country_subdivision_data:
         logger.info("No organization country subdivision data to merge")

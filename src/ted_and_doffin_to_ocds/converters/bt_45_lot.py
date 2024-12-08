@@ -19,6 +19,7 @@ def parse_lot_rewards_other(xml_content: str | bytes) -> dict | None:
     Returns:
         dict: OCDS-formatted dictionary containing prize description data, or
         None if no relevant data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -73,6 +74,7 @@ def merge_lot_rewards_other(
         release_json: The main release JSON to update
         lot_rewards_other_data: Prize description data to merge, as returned by
             parse_lot_rewards_other()
+
     """
     if not lot_rewards_other_data:
         logger.warning("No Lot Rewards Other data to merge")

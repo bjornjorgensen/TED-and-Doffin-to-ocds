@@ -26,6 +26,7 @@ def parse_eu_funds(xml_content: str | bytes) -> dict | None:
                 "roles": ["funder"]
             }]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -69,6 +70,7 @@ def merge_eu_funds(release_json: dict, eu_funds_data: dict | None) -> None:
 
     Returns:
         None. Updates release_json in place.
+
     """
     if not eu_funds_data:
         logger.info("No EU funds data to merge")

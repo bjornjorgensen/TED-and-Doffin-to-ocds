@@ -10,8 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_bt198_bt136_unpublished_access_date(xml_content):
-    """
-    Parse the XML content to extract the unpublished access date for the direct award justification.
+    """Parse the XML content to extract the unpublished access date for the direct award justification.
 
     Args:
         xml_content (str): The XML content to parse.
@@ -19,6 +18,7 @@ def parse_bt198_bt136_unpublished_access_date(xml_content):
     Returns:
         dict: A dictionary containing the parsed unpublished access date data.
         None: If no relevant data is found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -51,8 +51,7 @@ def merge_bt198_bt136_unpublished_access_date(
     release_json,
     unpublished_access_date_data,
 ) -> None:
-    """
-    Merge the parsed unpublished access date data into the main OCDS release JSON.
+    """Merge the parsed unpublished access date data into the main OCDS release JSON.
 
     Args:
         release_json (dict): The main OCDS release JSON to be updated.
@@ -60,6 +59,7 @@ def merge_bt198_bt136_unpublished_access_date(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not unpublished_access_date_data:
         logger.warning("No unpublished access date data to merge for BT-198(BT-136)")

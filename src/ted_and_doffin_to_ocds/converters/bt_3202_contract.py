@@ -15,6 +15,7 @@ def parse_contract_tender_id(xml_content: str | bytes) -> dict | None:
 
     Returns:
         Dictionary containing contract, award and party information
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -125,6 +126,7 @@ def merge_contract_tender_id(release_json: dict, contract_tender_id_data: dict) 
     Args:
         release_json: Target release JSON object
         contract_tender_id_data: Contract tender ID data to merge
+
     """
     if not contract_tender_id_data:
         logger.warning("No Contract Tender ID data to merge")

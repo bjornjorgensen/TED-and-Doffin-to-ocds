@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_organization_technical_identifier(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse organization technical identifiers from XML content.
+    """Parse organization technical identifiers from XML content.
 
     Creates basic party entries for organizations found in the XML.
     Only includes organizations that have a technical identifier.
@@ -30,6 +29,7 @@ def parse_organization_technical_identifier(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -60,8 +60,7 @@ def parse_organization_technical_identifier(
 def merge_organization_technical_identifier(
     release_json: dict[str, Any], org_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge organization technical identifier data into the release JSON.
+    """Merge organization technical identifier data into the release JSON.
 
     Only adds organizations that don't already exist in the parties array.
 
@@ -72,6 +71,7 @@ def merge_organization_technical_identifier(
     Effects:
         Updates the parties section of release_json with new organizations,
         skipping any that already exist
+
     """
     if not org_data:
         logger.info("No organization technical identifier data to merge")

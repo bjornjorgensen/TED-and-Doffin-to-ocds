@@ -28,6 +28,7 @@ def bt_196_parse_unpublished_justification_bt_09_procedure(
                 ]
             }
         Returns None if no relevant data is found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -75,6 +76,7 @@ def bt_196_merge_unpublished_justification_bt_09_procedure(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not unpublished_justification_data:
         logger.warning("No unpublished justification data to merge")

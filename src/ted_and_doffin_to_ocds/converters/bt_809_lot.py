@@ -57,6 +57,7 @@ def parse_selection_criteria_809(
     Returns:
         A dictionary containing tender lots with selection criteria if found,
         otherwise None.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -109,6 +110,7 @@ def merge_selection_criteria_809(
         release_json: The target release JSON to update
         selection_criteria: Source data containing selection criteria.
             If None, function returns without making changes.
+
     """
     if not selection_criteria:
         logger.warning("No selection criteria to merge")

@@ -8,14 +8,14 @@ logger = logging.getLogger(__name__)
 
 
 def parse_framework_agreement(xml_content: str) -> dict[str, dict] | None:
-    """
-    Parse the XML content to extract the Framework Agreement details for each lot.
+    """Parse the XML content to extract the Framework Agreement details for each lot.
 
     Args:
         xml_content (str): The XML content to parse.
 
     Returns:
         Optional[Dict[str, Dict]]: A dictionary mapping lot IDs to their framework agreement data if found, None otherwise.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -62,8 +62,7 @@ def merge_framework_agreement(
     release_json: dict,
     framework_agreement_data: dict[str, dict] | None,
 ) -> None:
-    """
-    Merge the parsed Framework Agreement data into the main OCDS release JSON.
+    """Merge the parsed Framework Agreement data into the main OCDS release JSON.
 
     Args:
         release_json (Dict): The main OCDS release JSON to be updated.
@@ -71,6 +70,7 @@ def merge_framework_agreement(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not framework_agreement_data:
         logger.warning("No Framework Agreement data to merge")

@@ -46,6 +46,7 @@ def parse_part_documents_restricted_justification(
                 ]
             }
         }
+
     """
     try:
         if isinstance(xml_content, str):
@@ -97,6 +98,7 @@ def merge_part_documents_restricted_justification(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not part_documents_data:
         logger.warning("No part documents restricted justification data to merge")

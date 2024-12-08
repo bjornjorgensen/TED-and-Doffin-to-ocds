@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_procurement_documents_id_part(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse procurement document IDs from XML content for procurement project parts.
+    """Parse procurement document IDs from XML content for procurement project parts.
 
     Args:
         xml_content: XML content as string or bytes containing procurement data
@@ -31,6 +30,7 @@ def parse_procurement_documents_id_part(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -61,8 +61,7 @@ def parse_procurement_documents_id_part(
 def merge_procurement_documents_id_part(
     release_json: dict[str, Any], proc_docs_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge procurement document IDs into the release JSON.
+    """Merge procurement document IDs into the release JSON.
 
     Args:
         release_json: The target release JSON to merge data into
@@ -71,6 +70,7 @@ def merge_procurement_documents_id_part(
     Effects:
         Updates the tender.documents section of release_json with new
         procurement document references
+
     """
     if not proc_docs_data:
         logger.info("No procurement documents ID data for parts to merge")

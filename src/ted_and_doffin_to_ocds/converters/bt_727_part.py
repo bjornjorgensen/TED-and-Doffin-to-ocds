@@ -21,8 +21,7 @@ REGION_MAPPING = {
 
 
 def parse_part_place_performance(xml_content: str | bytes) -> dict | None:
-    """
-    Parse BT-727: Other restrictions on the place of performance.
+    """Parse BT-727: Other restrictions on the place of performance.
 
     This field maps to the same Address objects as created for BT-728-Part,
     BT-5121-Part, BT-5131-Part, BT-5071-Part, BT-5101-Part and BT-5141-Part.
@@ -42,6 +41,7 @@ def parse_part_place_performance(xml_content: str | bytes) -> dict | None:
                 }
             }
         Returns None if no data found or on error.
+
     """
     try:
         if isinstance(xml_content, str):
@@ -84,8 +84,7 @@ def parse_part_place_performance(xml_content: str | bytes) -> dict | None:
 def merge_part_place_performance(
     release_json: dict, part_place_data: dict | None
 ) -> None:
-    """
-    Merge place of performance data into the release JSON.
+    """Merge place of performance data into the release JSON.
 
     Updates or adds delivery locations in the tender section.
     Handles concatenation of multiple location descriptions if needed.
@@ -98,6 +97,7 @@ def merge_part_place_performance(
         - Updates release_json in-place
         - Creates tender.deliveryLocations if needed
         - Avoids duplicate locations
+
     """
     if not part_place_data:
         logger.warning("No procurement part place of performance data to merge")

@@ -32,6 +32,7 @@ def parse_procurement_documents_change_date(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -91,6 +92,7 @@ def merge_procurement_documents_change_date(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not change_date_data:
         logger.warning("No procurement documents change date data to merge")

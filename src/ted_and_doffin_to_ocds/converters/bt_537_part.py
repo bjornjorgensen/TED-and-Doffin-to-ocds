@@ -31,6 +31,7 @@ def parse_part_duration_end_date(
                 }
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -71,6 +72,7 @@ def merge_part_duration_end_date(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not part_duration_end_date_data:
         return

@@ -17,6 +17,7 @@ def parse_submission_electronic(xml_content: str | bytes) -> dict[str, Any] | No
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing lots data with submission policies,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -62,6 +63,7 @@ def merge_submission_electronic(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         submission_electronic_data (Optional[Dict[str, Any]]): Lot data containing submission policies to merge
+
     """
     if not submission_electronic_data:
         logger.warning("No Submission Electronic data to merge")

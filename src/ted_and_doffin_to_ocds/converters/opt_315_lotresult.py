@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_contract_identifier_reference(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse contract identifier references from lot results.
+    """Parse contract identifier references from lot results.
 
     For each lot result:
     - Gets contract ID from SettledContract
@@ -32,6 +31,7 @@ def parse_contract_identifier_reference(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -70,8 +70,7 @@ def parse_contract_identifier_reference(
 def merge_contract_identifier_reference(
     release_json: dict[str, Any], contract_identifier_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge contract identifier data into the release JSON.
+    """Merge contract identifier data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -80,6 +79,7 @@ def merge_contract_identifier_reference(
     Effects:
         Updates the contracts section of release_json with contract IDs
         and their award references
+
     """
     if not contract_identifier_data:
         logger.info("No Contract Identifier Reference data to merge.")

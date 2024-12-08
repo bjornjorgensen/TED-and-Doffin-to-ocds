@@ -17,6 +17,7 @@ def parse_procedure_description(xml_content: str | bytes) -> dict[str, Any] | No
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing tender description,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -52,6 +53,7 @@ def merge_procedure_description(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         procedure_description_data (Optional[Dict[str, Any]]): Tender data containing description to merge
+
     """
     if not procedure_description_data:
         logger.warning("No procedure Description data to merge")

@@ -19,8 +19,7 @@ GPP_CRITERIA_MAPPING = {
 
 
 def parse_gpp_criteria(xml_content: str | bytes) -> dict | None:
-    """
-    Parse BT-805: Green public procurement criteria for lots.
+    """Parse BT-805: Green public procurement criteria for lots.
 
     Extracts information about established GPP criteria usage, including national,
     Union or other level criteria.
@@ -46,6 +45,7 @@ def parse_gpp_criteria(xml_content: str | bytes) -> dict | None:
                 }
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -94,8 +94,7 @@ def parse_gpp_criteria(xml_content: str | bytes) -> dict | None:
 
 
 def merge_gpp_criteria(release_json: dict, gpp_data: dict | None) -> None:
-    """
-    Merge GPP criteria data into the release JSON.
+    """Merge GPP criteria data into the release JSON.
 
     Updates or adds sustainability information to lots.
 
@@ -108,6 +107,7 @@ def merge_gpp_criteria(release_json: dict, gpp_data: dict | None) -> None:
         - Creates tender.lots array if needed
         - Updates existing lots' sustainability info
         - Removes lots without sustainability criteria
+
     """
     if not gpp_data:
         logger.warning("No GPP criteria data to merge")

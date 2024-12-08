@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_mediator_technical_identifier(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse mediator information from lots.
+    """Parse mediator information from lots.
 
     Identifies organizations that serve as mediation bodies.
     Adds mediationBody role to identified organizations.
@@ -34,6 +33,7 @@ def parse_mediator_technical_identifier(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -58,8 +58,7 @@ def parse_mediator_technical_identifier(
 def merge_mediator_technical_identifier(
     release_json: dict[str, Any], mediator_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge mediator data into the release JSON.
+    """Merge mediator data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -68,6 +67,7 @@ def merge_mediator_technical_identifier(
     Effects:
         Updates the parties section of release_json with mediationBody roles,
         merging with existing party roles where applicable
+
     """
     if not mediator_data:
         return

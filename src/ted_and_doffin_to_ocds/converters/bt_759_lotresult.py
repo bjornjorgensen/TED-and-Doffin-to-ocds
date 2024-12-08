@@ -13,8 +13,7 @@ NAMESPACES = {
 
 
 def parse_received_submissions_count(xml_content: str | bytes) -> dict | None:
-    """
-    Parse BT-759: Number of received submissions for lots.
+    """Parse BT-759: Number of received submissions for lots.
 
     Counts tenders or participation requests, with variants or multiple tenders
     from same tenderer counted as one.
@@ -36,6 +35,7 @@ def parse_received_submissions_count(xml_content: str | bytes) -> dict | None:
                 }
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -89,8 +89,7 @@ def parse_received_submissions_count(xml_content: str | bytes) -> dict | None:
 def merge_received_submissions_count(
     release_json: dict, submissions_data: dict | None
 ) -> None:
-    """
-    Merge received submissions count data into the release JSON.
+    """Merge received submissions count data into the release JSON.
 
     Updates or adds submission statistics to bids.statistics array.
 
@@ -102,6 +101,7 @@ def merge_received_submissions_count(
         - Updates release_json in-place
         - Creates bids.statistics array if needed
         - Updates existing statistics by measure and relatedLot
+
     """
     if not submissions_data:
         logger.warning("No submission count data to merge")

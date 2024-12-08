@@ -16,8 +16,7 @@ NAMESPACES = {
 
 
 def parse_organization_contact_fax(xml_content: str | bytes) -> dict | None:
-    """
-    Parse BT-739: Organization contact fax number.
+    """Parse BT-739: Organization contact fax number.
 
     Extracts fax numbers for contacting organizations, following data protection
     regulations regarding personal information.
@@ -38,6 +37,7 @@ def parse_organization_contact_fax(xml_content: str | bytes) -> dict | None:
                 ]
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -80,8 +80,7 @@ def parse_organization_contact_fax(xml_content: str | bytes) -> dict | None:
 def merge_organization_contact_fax(
     release_json: dict, org_fax_data: dict | None
 ) -> None:
-    """
-    Merge organization fax number data into the release JSON.
+    """Merge organization fax number data into the release JSON.
 
     Updates or adds fax numbers to organization contact points.
 
@@ -93,6 +92,7 @@ def merge_organization_contact_fax(
         - Updates release_json in-place
         - Creates parties array if needed
         - Updates existing organizations' contactPoint
+
     """
     if not org_fax_data:
         logger.warning("No organization contact fax data to merge")

@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_touchpoint_email(xml_content: str | bytes) -> dict | None:
-    """
-    Parse touchpoint email contact information from XML content.
+    """Parse touchpoint email contact information from XML content.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing touchpoint email information
@@ -17,7 +16,8 @@ def parse_touchpoint_email(xml_content: str | bytes) -> dict | None:
     Returns:
         Optional[Dict]: A dictionary containing parsed email data in OCDS format with
         'parties' array, or None if no valid touchpoint data is found.
-        Example:
+
+    Example:
         {
             "parties": [{
                 "id": "TPO-0001",
@@ -30,6 +30,7 @@ def parse_touchpoint_email(xml_content: str | bytes) -> dict | None:
                 }
             }]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -75,8 +76,7 @@ def parse_touchpoint_email(xml_content: str | bytes) -> dict | None:
 def merge_touchpoint_email(
     release_json: dict, touchpoint_email_data: dict | None
 ) -> None:
-    """
-    Merge touchpoint email data into the release JSON.
+    """Merge touchpoint email data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -89,6 +89,7 @@ def merge_touchpoint_email(
     Note:
         If touchpoint_email_data is None or contains no parties, no changes are made.
         For existing parties, both email contact and identifier information is updated.
+
     """
     if not touchpoint_email_data:
         logger.info("No touchpoint email data to merge")

@@ -49,6 +49,7 @@ def parse_lot_documents_restricted_justification(
                 ]
             }
         }
+
     """
     try:
         if isinstance(xml_content, str):
@@ -105,6 +106,7 @@ def merge_lot_documents_restricted_justification(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not lot_documents_data:
         logger.warning("No lot documents restricted justification data to merge")

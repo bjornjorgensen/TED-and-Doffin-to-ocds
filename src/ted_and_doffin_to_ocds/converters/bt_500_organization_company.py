@@ -6,8 +6,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_organization_name(xml_content: str | bytes) -> dict | None:
-    """
-    Parse organization names from XML data.
+    """Parse organization names from XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing organization information
@@ -23,6 +22,7 @@ def parse_organization_name(xml_content: str | bytes) -> dict | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -63,13 +63,13 @@ def parse_organization_name(xml_content: str | bytes) -> dict | None:
 def merge_organization_name(
     release_json: dict, organization_name_data: dict | None
 ) -> None:
-    """
-    Merge organization name data into the release JSON.
+    """Merge organization name data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
         organization_name_data (Optional[Dict]): The source data containing parties
             to be merged. If None, function returns without making changes.
+
     """
     if not organization_name_data:
         return

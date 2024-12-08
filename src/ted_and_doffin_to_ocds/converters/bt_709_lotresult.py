@@ -33,6 +33,7 @@ def parse_framework_maximum_value(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -97,6 +98,7 @@ def merge_framework_maximum_value(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not framework_max_value_data:
         logger.warning("No framework maximum value data to merge")

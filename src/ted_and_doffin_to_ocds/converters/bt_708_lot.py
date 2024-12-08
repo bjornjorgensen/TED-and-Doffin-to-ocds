@@ -219,6 +219,7 @@ def parse_lot_documents_official_language(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -279,6 +280,7 @@ def merge_lot_documents_official_language(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not lot_documents_data:
         logger.warning("No lot documents official language data to merge")

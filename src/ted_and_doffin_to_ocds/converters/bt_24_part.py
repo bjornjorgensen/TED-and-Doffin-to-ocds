@@ -17,6 +17,7 @@ def parse_part_description(xml_content: str | bytes) -> dict[str, Any] | None:
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing tender description,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -52,6 +53,7 @@ def merge_part_description(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         part_description_data (Optional[Dict[str, Any]]): Tender data containing description to merge
+
     """
     if not part_description_data:
         logger.warning("No part Description data to merge")

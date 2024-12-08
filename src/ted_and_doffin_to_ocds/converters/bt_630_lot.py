@@ -33,6 +33,7 @@ def parse_deadline_receipt_expressions(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -93,6 +94,7 @@ def merge_deadline_receipt_expressions(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not deadline_receipt_expressions_data:
         logger.warning("No deadline receipt expressions data to merge")

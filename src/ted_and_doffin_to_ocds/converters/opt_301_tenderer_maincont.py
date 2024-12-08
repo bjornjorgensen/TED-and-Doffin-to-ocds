@@ -7,8 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_main_contractor(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse main contractor references and their subcontracting relationships.
+    """Parse main contractor references and their subcontracting relationships.
 
     For each subcontractor:
     - Gets main contractor organization ID and adds tenderer role
@@ -45,6 +44,7 @@ def parse_main_contractor(xml_content: str | bytes) -> dict[str, Any] | None:
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -112,8 +112,7 @@ def parse_main_contractor(xml_content: str | bytes) -> dict[str, Any] | None:
 def merge_main_contractor(
     release_json: dict[str, Any], main_contractor_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge main contractor data into the release JSON.
+    """Merge main contractor data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -123,6 +122,7 @@ def merge_main_contractor(
         - Updates parties with tenderer roles
         - Updates bids with subcontracting information
         - Links main contractors to their subcontractors
+
     """
     if not main_contractor_data:
         logger.info("No Main Contractor data to merge.")

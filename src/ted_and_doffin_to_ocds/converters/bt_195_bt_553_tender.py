@@ -33,6 +33,7 @@ def parse_bt195_bt553_tender(xml_content: str | bytes) -> dict | None:
         >>> result = parse_bt195_bt553_tender(xml_string)
         >>> print(result)
         {'withheldInformation': [{'id': 'sub-val-TEN-0001', 'field': 'sub-val', 'name': 'Subcontracting Value'}]}
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -92,6 +93,7 @@ def merge_bt195_bt553_tender(
 
     Example:
         >>> merge_bt195_bt553_tender(release, {'withheldInformation': [{'id': 'sub-val-TEN-0001'}]})
+
     """
     if not unpublished_identifier_data:
         logger.warning(

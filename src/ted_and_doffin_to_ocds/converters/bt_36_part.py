@@ -18,14 +18,14 @@ NAMESPACES = {
 
 
 def parse_part_duration(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse the contract duration from XML content.
+    """Parse the contract duration from XML content.
 
     Args:
         xml_content: XML string or bytes to parse
 
     Returns:
         Dictionary containing tender contract period duration or None if not found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -57,8 +57,7 @@ def parse_part_duration(xml_content: str | bytes) -> dict[str, Any] | None:
 
 
 def calculate_duration_in_days(value: int, unit_code: str) -> int | None:
-    """
-    Calculate duration in days based on unit code.
+    """Calculate duration in days based on unit code.
 
     Args:
         value: Duration value
@@ -66,6 +65,7 @@ def calculate_duration_in_days(value: int, unit_code: str) -> int | None:
 
     Returns:
         Duration in days or None if unit code is invalid
+
     """
     unit_code = unit_code.upper()
 
@@ -87,12 +87,12 @@ def calculate_duration_in_days(value: int, unit_code: str) -> int | None:
 def merge_part_duration(
     release_json: dict[str, Any], part_duration_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge duration data into the release JSON.
+    """Merge duration data into the release JSON.
 
     Args:
         release_json: The target release JSON to update
         part_duration_data: The duration data to merge
+
     """
     if not part_duration_data:
         logger.debug("No duration data to merge")

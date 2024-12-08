@@ -17,8 +17,7 @@ BUYER_TYPE_MAPPING = {
 
 
 def parse_buyer_contracting_type(xml_content: str | bytes) -> dict | None:
-    """
-    Parse BT-740: Buyer contracting entity status.
+    """Parse BT-740: Buyer contracting entity status.
 
     Extracts whether buyers are contracting entities and maps their classification
     according to the buyer contracting type scheme.
@@ -46,6 +45,7 @@ def parse_buyer_contracting_type(xml_content: str | bytes) -> dict | None:
                 ]
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -102,8 +102,7 @@ def parse_buyer_contracting_type(xml_content: str | bytes) -> dict | None:
 def merge_buyer_contracting_type(
     release_json: dict, buyer_type_data: dict | None
 ) -> None:
-    """
-    Merge buyer contracting type data into the release JSON.
+    """Merge buyer contracting type data into the release JSON.
 
     Updates or adds buyer classifications and roles.
 
@@ -116,6 +115,7 @@ def merge_buyer_contracting_type(
         - Creates parties array if needed
         - Updates existing parties' details.classifications
         - Ensures buyer role is present
+
     """
     if not buyer_type_data:
         logger.warning("No buyer contracting type data to merge")

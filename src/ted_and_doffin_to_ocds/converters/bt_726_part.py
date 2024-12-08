@@ -18,8 +18,7 @@ NAMESPACES = {
 
 
 def parse_part_sme_suitability(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse BT-726-Part suitable for SMEs indicator from XML.
+    """Parse BT-726-Part suitable for SMEs indicator from XML.
 
     Extracts whether this procurement part is indicated as suitable for
     small and medium enterprises (SMEs).
@@ -37,6 +36,7 @@ def parse_part_sme_suitability(xml_content: str | bytes) -> dict[str, Any] | Non
                 }
             }
         Returns None if indicator not found
+
     """
     try:
         if isinstance(xml_content, str):
@@ -65,8 +65,7 @@ def parse_part_sme_suitability(xml_content: str | bytes) -> dict[str, Any] | Non
 def merge_part_sme_suitability(
     release_json: dict[str, Any], part_sme_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge SME suitability data into release JSON.
+    """Merge SME suitability data into release JSON.
 
     Updates or adds tender.suitability.sme field in the release JSON
     based on the provided SME suitability data.
@@ -79,6 +78,7 @@ def merge_part_sme_suitability(
         - Updates release_json in-place
         - Handles missing tender/suitability objects
         - Returns early if no data to merge
+
     """
     if not part_sme_data:
         logger.debug("No SME suitability data to merge")

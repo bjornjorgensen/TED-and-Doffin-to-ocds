@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_multiple_tenders(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the XML content to extract the multiple tenders information for each lot.
+    """Parse the XML content to extract the multiple tenders information for each lot.
 
     Args:
         xml_content (Union[str, bytes]): The XML content to parse.
@@ -32,6 +31,7 @@ def parse_multiple_tenders(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -78,8 +78,7 @@ def merge_multiple_tenders(
     release_json: dict,
     multiple_tenders_data: dict | None,
 ) -> None:
-    """
-    Merge the parsed multiple tenders data into the main OCDS release JSON.
+    """Merge the parsed multiple tenders data into the main OCDS release JSON.
 
     Args:
         release_json (Dict): The main OCDS release JSON to be updated.
@@ -87,6 +86,7 @@ def merge_multiple_tenders(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not multiple_tenders_data:
         logger.warning("No multiple tenders data to merge")

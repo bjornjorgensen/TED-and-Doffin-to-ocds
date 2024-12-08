@@ -19,6 +19,7 @@ def parse_organization_touchpoint_part_name(
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing organization data with combined names and identifiers,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -75,6 +76,7 @@ def merge_organization_touchpoint_part_name(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         organization_touchpoint_part_name_data (Optional[Dict[str, Any]]): Organization data to merge
+
     """
     if not organization_touchpoint_part_name_data:
         logger.info("No organization touchpoint part name data to merge")

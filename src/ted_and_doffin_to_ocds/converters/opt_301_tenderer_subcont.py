@@ -9,8 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_subcontractor(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse subcontractor references and their bid relationships.
+    """Parse subcontractor references and their bid relationships.
 
     For each subcontractor:
     - Gets organization ID and adds subcontractor role
@@ -46,6 +45,7 @@ def parse_subcontractor(xml_content: str | bytes) -> dict[str, Any] | None:
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -108,8 +108,7 @@ def parse_subcontractor(xml_content: str | bytes) -> dict[str, Any] | None:
 def merge_subcontractor(
     release_json: dict[str, Any], subcontractor_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge subcontractor data into the release JSON.
+    """Merge subcontractor data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -119,6 +118,7 @@ def merge_subcontractor(
         - Updates parties with subcontractor roles
         - Updates bids with subcontracting information
         - Maintains incremental subcontract IDs
+
     """
     if not subcontractor_data:
         logger.info("No Subcontractor data to merge.")

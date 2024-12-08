@@ -15,6 +15,7 @@ def parse_procedure_title(xml_content: str | bytes) -> dict[str, Any] | None:
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing tender title,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -49,6 +50,7 @@ def merge_procedure_title(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         procedure_title_data (Optional[Dict[str, Any]]): Tender data containing title to merge
+
     """
     if not procedure_title_data:
         return

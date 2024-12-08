@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_touchpoint_contact_point(xml_content: str | bytes) -> dict | None:
-    """
-    Parse touchpoint contact point information from XML content.
+    """Parse touchpoint contact point information from XML content.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing touchpoint contact information
@@ -17,7 +16,8 @@ def parse_touchpoint_contact_point(xml_content: str | bytes) -> dict | None:
     Returns:
         Optional[Dict]: A dictionary containing parsed contact point data in OCDS format with
         'parties' array, or None if no valid touchpoint data is found.
-        Example:
+
+    Example:
         {
             "parties": [{
                 "id": "TPO-0001",
@@ -30,6 +30,7 @@ def parse_touchpoint_contact_point(xml_content: str | bytes) -> dict | None:
                 }
             }]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -78,8 +79,7 @@ def parse_touchpoint_contact_point(xml_content: str | bytes) -> dict | None:
 def merge_touchpoint_contact_point(
     release_json: dict, touchpoint_contact_point_data: dict | None
 ) -> None:
-    """
-    Merge touchpoint contact point data into the release JSON.
+    """Merge touchpoint contact point data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -92,6 +92,7 @@ def merge_touchpoint_contact_point(
     Note:
         If touchpoint_contact_point_data is None or contains no parties, no changes are made.
         For existing parties, both contact point and identifier information is updated.
+
     """
     if not touchpoint_contact_point_data:
         logger.info("No touchpoint contact point data to merge")

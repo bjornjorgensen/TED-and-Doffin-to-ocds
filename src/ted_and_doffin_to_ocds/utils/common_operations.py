@@ -21,13 +21,13 @@ class NoticeProcessor:
     def __init__(
         self, ocid_prefix: str, scheme: str = "eu-oj", db_path: str | None = None
     ) -> None:
-        """
-        Initialize the NoticeProcessor.
+        """Initialize the NoticeProcessor.
 
         Args:
             ocid_prefix: Prefix for OCIDs
             scheme: Scheme for related processes (default: eu-oj)
             db_path: Optional path to the SQLite database
+
         """
         self.ocid_prefix = ocid_prefix
         self.scheme = scheme
@@ -55,8 +55,7 @@ class NoticeProcessor:
         }
 
     def process_notice(self, xml_content: str | bytes) -> list[str]:
-        """
-        Main entry point for notice processing following specification rules.
+        """Main entry point for notice processing following specification rules.
         Creates separate releases for PIN-only parts, single release otherwise.
         """
         tree = self.xml_processor.parse_xml(xml_content)
@@ -73,8 +72,7 @@ class NoticeProcessor:
     def _process_notice(
         self, tree: etree._Element, notice_info: dict[str, Any]
     ) -> list[str]:
-        """
-        Process a notice following the specification rules:
+        """Process a notice following the specification rules:
         - Separate release for each part in PIN-only notices
         - Single release with appropriate OCID for other notices
         """
@@ -129,8 +127,7 @@ class NoticeProcessor:
         return json.dumps(release)
 
     def determine_ocid(self, tree: etree._Element) -> str:
-        """
-        Determine OCID following specification rules:
+        """Determine OCID following specification rules:
         - New OCID if first publication
         - New OCID if CAN for framework/DPS
         - New OCID if previous was PIN-only
@@ -169,8 +166,7 @@ class NoticeProcessor:
         return f"{self.ocid_prefix}-{uuid.uuid4()}"
 
     def get_previous_references(self, tree: etree._Element) -> list[dict[str, Any]]:
-        """
-        Get references to previous publications per specification:
+        """Get references to previous publications per specification:
         - Only for PIN/Periodic with multiple parts
         - Includes id="1" and relationship=["planning"]
         """
@@ -313,8 +309,7 @@ class NoticeProcessor:
 
 
 def remove_empty_elements(data):
-    """
-    Recursively remove empty lists, empty dicts, or None elements from a dictionary or list.
+    """Recursively remove empty lists, empty dicts, or None elements from a dictionary or list.
     Preserves False boolean values and zero numeric values.
     """
     if isinstance(data, dict):

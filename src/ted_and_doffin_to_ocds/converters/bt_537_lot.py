@@ -33,6 +33,7 @@ def parse_lot_duration_end_date(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -82,6 +83,7 @@ def merge_lot_duration_end_date(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not lot_duration_end_date_data:
         return

@@ -14,8 +14,7 @@ NAMESPACES = {
 
 
 def parse_place_performance_city(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse place performance city (BT-5131) from XML content.
+    """Parse place performance city (BT-5131) from XML content.
 
     Gets city information for each lot's delivery address. Creates/updates
     corresponding Address objects in the item's deliveryAddresses array.
@@ -25,6 +24,7 @@ def parse_place_performance_city(xml_content: str | bytes) -> dict[str, Any] | N
 
     Returns:
         Dictionary containing tender items with delivery addresses or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -75,8 +75,7 @@ def parse_place_performance_city(xml_content: str | bytes) -> dict[str, Any] | N
 def merge_place_performance_city(
     release_json: dict[str, Any], place_performance_city_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge city data into the release JSON.
+    """Merge city data into the release JSON.
 
     Updates or creates delivery addresses with locality information for each lot.
     Preserves existing address data while adding/updating cities.
@@ -87,6 +86,7 @@ def merge_place_performance_city(
 
     Returns:
         None
+
     """
     if not place_performance_city_data:
         logger.warning("No Place Performance City data to merge")

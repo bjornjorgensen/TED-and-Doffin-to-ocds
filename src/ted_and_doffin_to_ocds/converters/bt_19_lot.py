@@ -27,6 +27,7 @@ def parse_submission_nonelectronic_justification(
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing lots data with submission justifications,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -87,6 +88,7 @@ def merge_submission_nonelectronic_justification(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         justification_data (Optional[Dict[str, Any]]): Lot data containing submission justifications to merge
+
     """
     if not justification_data:
         logger.warning("No Submission Nonelectronic Justification data to merge")

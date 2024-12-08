@@ -18,8 +18,7 @@ NAMESPACES = {
 
 
 def parse_contract_eu_funds_details(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse the XML content to extract contract EU funds details (BT-6110).
+    """Parse the XML content to extract contract EU funds details (BT-6110).
 
     Gets funding information from each contract. Creates/updates corresponding Finance
     objects in the contract's finance array with funding descriptions.
@@ -29,6 +28,7 @@ def parse_contract_eu_funds_details(xml_content: str | bytes) -> dict[str, Any] 
 
     Returns:
         Dictionary containing contracts with funding details or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -92,8 +92,7 @@ def parse_contract_eu_funds_details(xml_content: str | bytes) -> dict[str, Any] 
 def merge_contract_eu_funds_details(
     release_json: dict[str, Any], eu_funds_details: dict[str, Any] | None
 ) -> None:
-    """
-    Merge EU funds details into the release JSON.
+    """Merge EU funds details into the release JSON.
 
     Updates or creates contracts with funding information.
     Preserves existing contract data while adding/updating finance details.
@@ -104,6 +103,7 @@ def merge_contract_eu_funds_details(
 
     Returns:
         None
+
     """
     if not eu_funds_details:
         logger.warning("BT-6110-Contract: No contract EU funds details to merge")

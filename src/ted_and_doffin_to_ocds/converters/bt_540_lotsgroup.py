@@ -35,6 +35,7 @@ def parse_award_criterion_description_lots_group(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -87,6 +88,7 @@ def merge_award_criterion_description_lots_group(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not award_criterion_description_data:
         logger.warning("No Award Criterion Description data for lot groups to merge")

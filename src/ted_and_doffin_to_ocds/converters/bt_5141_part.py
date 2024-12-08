@@ -70,8 +70,7 @@ NAMESPACES = {
 
 
 def parse_part_country(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse place performance country code (BT-5141) from XML content.
+    """Parse place performance country code (BT-5141) from XML content.
 
     Gets country code information for each part's delivery address. Creates/updates
     corresponding Address objects in tender.deliveryAddresses array.
@@ -82,6 +81,7 @@ def parse_part_country(xml_content: str | bytes) -> dict[str, Any] | None:
 
     Returns:
         Dictionary containing tender with delivery addresses or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -125,14 +125,14 @@ def parse_part_country(xml_content: str | bytes) -> dict[str, Any] | None:
 
 
 def convert_country_code(code: str) -> str:
-    """
-    Convert ISO 3166-1 alpha-3 country code to alpha-2 code.
+    """Convert ISO 3166-1 alpha-3 country code to alpha-2 code.
 
     Args:
         code: ISO 3166-1 alpha-3 country code
 
     Returns:
         Corresponding alpha-2 code or original code if not found in conversion table
+
     """
     converted = ISO_3166_CONVERSION.get(code.upper())
     if not converted:
@@ -144,8 +144,7 @@ def convert_country_code(code: str) -> str:
 def merge_part_country(
     release_json: dict[str, Any], part_country_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge country code data into the release JSON.
+    """Merge country code data into the release JSON.
 
     Updates or creates delivery addresses with country information.
     Preserves existing address data while adding/updating country codes.
@@ -156,6 +155,7 @@ def merge_part_country(
 
     Returns:
         None
+
     """
     if not part_country_data:
         logger.warning("No part Country data to merge")

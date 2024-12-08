@@ -1,4 +1,9 @@
-# converters/bt_736_Lot.py
+"""Converter for BT-736-Lot: Reserved execution for sheltered employment programmes.
+
+This module handles the extraction and mapping of contract reserved execution information
+from eForms notices to OCDS format, specifically for contracts that must be performed
+under sheltered employment programmes.
+"""
 
 import logging
 
@@ -10,18 +15,31 @@ logger = logging.getLogger(__name__)
 def parse_reserved_execution(
     xml_content: str | bytes,
 ) -> dict[str, dict[str, list[dict[str, str | bool]]]] | None:
-    """
-    Parse the XML content to extract reserved execution information for each lot.
+    """Parse whether lots are reserved for sheltered employment programmes.
 
-    BT-736-Lot: Whether the execution of the contract must be performed in the
-    framework of sheltered employment programmes.
+    For each lot where execution must be performed under sheltered employment
+    programmes (indicated by ExecutionRequirementCode='yes'), sets
+    contractTerms.reservedExecution to true.
 
     Args:
         xml_content: The XML content to parse
 
     Returns:
-        dict: Dictionary containing lot data with reserved execution info
+        dict: Dictionary containing lot data in format:
+            {
+                "tender": {
+                    "lots": [
+                        {
+                            "id": str,
+                            "contractTerms": {
+                                "reservedExecution": bool
+                            }
+                        }
+                    ]
+                }
+            }
         None: If no relevant data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -59,15 +77,18 @@ def merge_reserved_execution(
     release_json: dict,
     reserved_execution_data: dict[str, dict[str, list[dict[str, str | bool]]]] | None,
 ) -> None:
-    """
-    Merge the parsed reserved execution data into the main OCDS release JSON.
+    """Merge reserved execution data into the OCDS release.
+
+    Updates or adds contractTerms.reservedExecution for lots where execution
+    must be performed under sheltered employment programmes.
 
     Args:
-        release_json (dict): The main OCDS release JSON to be updated.
-        reserved_execution_data (dict): The parsed reserved execution data to be merged.
+        release_json: The main OCDS release JSON to be updated
+        reserved_execution_data: Reserved execution data to merge
 
     Returns:
-        None: The function updates the release_json in-place.
+        None: The function updates the release_json in-place
+
     """
     if not reserved_execution_data:
         logger.warning("No reserved execution data to merge")

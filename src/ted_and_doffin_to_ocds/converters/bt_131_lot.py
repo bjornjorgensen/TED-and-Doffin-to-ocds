@@ -10,8 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_deadline_receipt_tenders(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the tender submission deadline from lot-level XML data.
+    """Parse the tender submission deadline from lot-level XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing lot information
@@ -31,6 +30,7 @@ def parse_deadline_receipt_tenders(xml_content: str | bytes) -> dict | None:
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -81,8 +81,7 @@ def parse_deadline_receipt_tenders(xml_content: str | bytes) -> dict | None:
 def merge_deadline_receipt_tenders(
     release_json: dict, deadline_data: dict | None
 ) -> None:
-    """
-    Merge tender submission deadline data into the release JSON.
+    """Merge tender submission deadline data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -92,6 +91,7 @@ def merge_deadline_receipt_tenders(
     Note:
         The function modifies release_json in-place by adding or updating the
         tender.lots.tenderPeriod.endDate field for matching lots.
+
     """
     if not deadline_data:
         logger.warning("No Deadline Receipt Tenders data to merge")

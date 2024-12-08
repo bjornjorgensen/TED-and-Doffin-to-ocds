@@ -34,6 +34,7 @@ def parse_guarantee_required_description(
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -86,6 +87,7 @@ def merge_guarantee_required_description(
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not guarantee_description_data:
         logger.warning("No guarantee required description data to merge")

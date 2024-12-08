@@ -22,8 +22,7 @@ RELATIONSHIP_MAPPING = {
 
 
 def parse_direct_award_justification(xml_content: str | bytes) -> dict | None:
-    """
-    Parse BT-1252: Direct award justification identifiers.
+    """Parse BT-1252: Direct award justification identifiers.
 
     Extracts identifiers of previous procedures that justify direct award,
     mapping reason codes to relationship types.
@@ -43,6 +42,7 @@ def parse_direct_award_justification(xml_content: str | bytes) -> dict | None:
                 ]
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -96,8 +96,7 @@ def parse_direct_award_justification(xml_content: str | bytes) -> dict | None:
 def merge_direct_award_justification(
     release_json: dict, justification_data: dict | None
 ) -> None:
-    """
-    Merge direct award justification data into the release JSON.
+    """Merge direct award justification data into the release JSON.
 
     Updates or adds related processes with sequential IDs.
 
@@ -109,6 +108,7 @@ def merge_direct_award_justification(
         - Updates release_json in-place
         - Creates relatedProcesses array if needed
         - Maintains sequential IDs across all notices
+
     """
     if not justification_data:
         logger.warning("No direct award justification data to merge")

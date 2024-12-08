@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_lot_bid_opening_location(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the bid opening location from lot-level XML data.
+    """Parse the bid opening location from lot-level XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing lot information
@@ -31,6 +30,7 @@ def parse_lot_bid_opening_location(xml_content: str | bytes) -> dict | None:
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -71,8 +71,7 @@ def parse_lot_bid_opening_location(xml_content: str | bytes) -> dict | None:
 def merge_lot_bid_opening_location(
     release_json: dict, lot_bid_opening_data: dict | None
 ) -> None:
-    """
-    Merge bid opening location data into the release JSON.
+    """Merge bid opening location data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -82,6 +81,7 @@ def merge_lot_bid_opening_location(
     Note:
         The function modifies release_json in-place by adding or updating the
         tender.lots.bidOpening.location field for matching lots.
+
     """
     if not lot_bid_opening_data:
         logger.warning("No Lot Bid Opening Location data to merge")

@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def bt_195_parse_unpublished_identifier_bt_09_procedure(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse unpublished field identifiers for cross border law.
+    """Parse unpublished field identifiers for cross border law.
 
     For fields marked as unpublished:
     - Gets ContractFolderID
@@ -34,6 +33,7 @@ def bt_195_parse_unpublished_identifier_bt_09_procedure(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -78,8 +78,7 @@ def bt_195_parse_unpublished_identifier_bt_09_procedure(
 def bt_195_merge_unpublished_identifier_bt_09_procedure(
     release_json: dict[str, Any], unpublished_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge unpublished cross border law data into the release JSON.
+    """Merge unpublished cross border law data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -88,6 +87,7 @@ def bt_195_merge_unpublished_identifier_bt_09_procedure(
     Effects:
         Updates the withheldInformation section of release_json with
         unpublished field references
+
     """
     if not unpublished_data:
         logger.warning("No unpublished cross border law data to merge")

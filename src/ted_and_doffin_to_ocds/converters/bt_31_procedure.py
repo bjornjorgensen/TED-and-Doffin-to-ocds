@@ -9,8 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_max_lots_allowed(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse the maximum number of lots a supplier can bid for from XML content.
+    """Parse the maximum number of lots a supplier can bid for from XML content.
 
     Args:
         xml_content: XML string or bytes containing tendering terms
@@ -24,6 +23,7 @@ def parse_max_lots_allowed(xml_content: str | bytes) -> dict[str, Any] | None:
                 }
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -52,8 +52,7 @@ def parse_max_lots_allowed(xml_content: str | bytes) -> dict[str, Any] | None:
 def merge_max_lots_allowed(
     release_json: dict[str, Any], max_lots_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge maximum lots allowed data into existing release JSON.
+    """Merge maximum lots allowed data into existing release JSON.
 
     Args:
         release_json: Target release JSON to merge into
@@ -63,6 +62,7 @@ def merge_max_lots_allowed(
         None. Modifies release_json in place.
         Logs warning if no data to merge.
         Logs info about the maximum lots value merged.
+
     """
     if not max_lots_data:
         logger.warning("No Maximum Lots Allowed data to merge")

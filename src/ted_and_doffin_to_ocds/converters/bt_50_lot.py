@@ -29,6 +29,7 @@ def parse_minimum_candidates(xml_content: str | bytes) -> dict | None:
                 }]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -88,6 +89,7 @@ def merge_minimum_candidates(
 
     Returns:
         None. Updates release_json in place.
+
     """
     if not minimum_candidates_data:
         logger.info("No Minimum Candidates data to merge")

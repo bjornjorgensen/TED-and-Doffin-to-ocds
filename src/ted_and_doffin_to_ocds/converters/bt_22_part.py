@@ -15,6 +15,7 @@ def parse_part_internal_identifier(xml_content: str | bytes) -> dict[str, Any] |
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing part identifier data,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -49,6 +50,7 @@ def merge_part_internal_identifier(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         part_internal_identifier_data (Optional[Dict[str, Any]]): Part identifier data to merge
+
     """
     if not part_internal_identifier_data:
         logger.warning("No part internal identifier data to merge")

@@ -19,8 +19,7 @@ NAMESPACES = {
 def parse_organization_regulated_market(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse BT-746: Organization regulated market listing status.
+    """Parse BT-746: Organization regulated market listing status.
 
     Determines if organization is listed on a regulated market that ensures adequate
     transparency under anti-money laundering legislation.
@@ -41,6 +40,7 @@ def parse_organization_regulated_market(
                 ]
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -89,8 +89,7 @@ def parse_organization_regulated_market(
 def merge_organization_regulated_market(
     release_json: dict, market_data: dict | None
 ) -> None:
-    """
-    Merge regulated market status data into the release JSON.
+    """Merge regulated market status data into the release JSON.
 
     Updates or adds regulated market status to organization details.
 
@@ -102,6 +101,7 @@ def merge_organization_regulated_market(
         - Updates release_json in-place
         - Creates parties array if needed
         - Updates existing parties' details
+
     """
     if not market_data:
         logger.warning("No regulated market status data to merge")

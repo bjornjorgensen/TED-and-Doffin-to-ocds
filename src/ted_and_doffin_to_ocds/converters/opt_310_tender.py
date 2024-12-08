@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_tendering_party_id_reference(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse tendering party references and link tenderers to bids.
+    """Parse tendering party references and link tenderers to bids.
 
     For each lot tender:
     - Gets corresponding tendering party by ID
@@ -45,6 +44,7 @@ def parse_tendering_party_id_reference(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -112,8 +112,7 @@ def parse_tendering_party_id_reference(
 def merge_tendering_party_id_reference(
     release_json: dict[str, Any], tendering_party_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge tendering party data into the release JSON.
+    """Merge tendering party data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -123,6 +122,7 @@ def merge_tendering_party_id_reference(
         - Updates parties with tenderer roles
         - Updates bids with tenderer references
         - Maintains relationships between tenderers and bids
+
     """
     if not tendering_party_data:
         logger.info("No Tendering Party ID Reference data to merge.")

@@ -10,8 +10,7 @@ logger = logging.getLogger(__name__)
 def parse_previous_planning_identifier_lot(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse the previous planning identifier information from lot-level XML data.
+    """Parse the previous planning identifier information from lot-level XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing lot information
@@ -30,6 +29,7 @@ def parse_previous_planning_identifier_lot(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -86,8 +86,7 @@ def parse_previous_planning_identifier_lot(
 def merge_previous_planning_identifier_lot(
     release_json: dict, previous_planning_data: dict | None
 ) -> None:
-    """
-    Merge previous planning identifier data into the release JSON.
+    """Merge previous planning identifier data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -97,6 +96,7 @@ def merge_previous_planning_identifier_lot(
     Note:
         The function modifies release_json in-place by adding or updating the
         relatedProcesses field with new planning identifiers.
+
     """
     if not previous_planning_data:
         logger.warning("No Previous Planning Identifier (Lot) data to merge")

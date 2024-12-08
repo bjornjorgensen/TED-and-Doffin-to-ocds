@@ -34,6 +34,7 @@ def parse_performing_staff_qualification(
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -99,6 +100,7 @@ def merge_performing_staff_qualification(
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not staff_qualification_data:
         logger.warning("No Performing Staff Qualification data to merge")

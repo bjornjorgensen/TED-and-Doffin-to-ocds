@@ -33,6 +33,7 @@ def parse_electronic_auction_description(xml_content: str | bytes) -> dict | Non
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -89,6 +90,7 @@ def merge_electronic_auction_description(
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not auction_description_data:
         logger.info("No electronic auction description data to merge")

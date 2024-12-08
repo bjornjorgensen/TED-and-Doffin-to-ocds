@@ -29,6 +29,7 @@ def parse_buyer_review_requests_count(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -92,6 +93,7 @@ def merge_buyer_review_requests_count(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not buyer_review_requests_data:
         logger.info("No buyer review requests count data to merge")

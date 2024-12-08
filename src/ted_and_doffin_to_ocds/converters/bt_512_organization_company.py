@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_organization_postcode(xml_content: str | bytes) -> dict | None:
-    """
-    Parse organization postal code information from XML content.
+    """Parse organization postal code information from XML content.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing organization postal code information
@@ -17,7 +16,8 @@ def parse_organization_postcode(xml_content: str | bytes) -> dict | None:
     Returns:
         Optional[Dict]: A dictionary containing parsed postal code data in OCDS format with
         'parties' array, or None if no valid postal code data is found.
-        Example:
+
+    Example:
         {
             "parties": [{
                 "id": "ORG-0001",
@@ -26,6 +26,7 @@ def parse_organization_postcode(xml_content: str | bytes) -> dict | None:
                 }
             }]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -66,8 +67,7 @@ def parse_organization_postcode(xml_content: str | bytes) -> dict | None:
 def merge_organization_postcode(
     release_json: dict, organization_postcode_data: dict | None
 ) -> None:
-    """
-    Merge organization postal code data into the release JSON.
+    """Merge organization postal code data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -80,6 +80,7 @@ def merge_organization_postcode(
     Note:
         If organization_postcode_data is None or contains no parties, no changes are made.
         For existing parties, postal code information is updated in the address section.
+
     """
     if not organization_postcode_data:
         logger.info("No organization postal code data to merge")

@@ -21,6 +21,7 @@ def parse_winner_decision_date(xml_content: str | bytes) -> dict | None:
     Returns:
         Optional[Dict]: Dictionary containing awards with dates, or None if no awards found
         Format: {"awards": [{"id": str, "date": str}]}
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -94,6 +95,7 @@ def merge_winner_decision_date(
 
     Returns:
         None: Modifies release_json in place
+
     """
     if not winner_decision_date_data:
         logger.warning("No Winner Decision Date data to merge")

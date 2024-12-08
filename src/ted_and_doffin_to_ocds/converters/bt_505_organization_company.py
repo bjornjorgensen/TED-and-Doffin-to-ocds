@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_organization_website(xml_content: str | bytes) -> dict | None:
-    """
-    Parse organization website information from XML content.
+    """Parse organization website information from XML content.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing organization website information
@@ -17,7 +16,8 @@ def parse_organization_website(xml_content: str | bytes) -> dict | None:
     Returns:
         Optional[Dict]: A dictionary containing parsed website data in OCDS format with
         'parties' array, or None if no valid website data is found.
-        Example:
+
+    Example:
         {
             "parties": [{
                 "id": "ORG-0001",
@@ -26,6 +26,7 @@ def parse_organization_website(xml_content: str | bytes) -> dict | None:
                 }
             }]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -60,8 +61,7 @@ def parse_organization_website(xml_content: str | bytes) -> dict | None:
 def merge_organization_website(
     release_json: dict, organization_website_data: dict | None
 ) -> None:
-    """
-    Merge organization website data into the release JSON.
+    """Merge organization website data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -74,6 +74,7 @@ def merge_organization_website(
     Note:
         If organization_website_data is None or contains no parties, no changes are made.
         For existing parties, website information is updated in the details section.
+
     """
     if not organization_website_data:
         logger.info("No organization website data to merge")

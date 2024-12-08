@@ -17,6 +17,7 @@ def parse_lot_quantity(xml_content: str | bytes) -> dict[str, Any] | None:
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing items data with quantities and lot references,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -65,6 +66,7 @@ def merge_lot_quantity(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         lot_quantity_data (Optional[Dict[str, Any]]): Item data containing quantities to merge
+
     """
     if not lot_quantity_data:
         logger.warning("No Lot Quantity data to merge")

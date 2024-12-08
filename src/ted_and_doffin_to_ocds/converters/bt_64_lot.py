@@ -37,6 +37,7 @@ def parse_subcontracting_obligation_minimum(
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
         ValueError: If the percentage value cannot be converted to float.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -101,6 +102,7 @@ def merge_subcontracting_obligation_minimum(
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not subcontracting_obligation_minimum_data:
         logger.warning("No subcontracting obligation minimum data to merge")

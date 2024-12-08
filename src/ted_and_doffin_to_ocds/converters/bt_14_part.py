@@ -17,6 +17,7 @@ def parse_part_documents_restricted(xml_content: str | bytes) -> dict[str, Any] 
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing document data with restricted access details,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -60,6 +61,7 @@ def merge_part_documents_restricted(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         part_documents_restricted_data (Optional[Dict[str, Any]]): Document data to merge
+
     """
     if not part_documents_restricted_data:
         logger.warning("No part documents restricted data to merge")

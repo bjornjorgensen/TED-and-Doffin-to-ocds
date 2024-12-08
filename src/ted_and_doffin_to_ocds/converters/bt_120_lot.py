@@ -32,6 +32,7 @@ def parse_no_negotiation_necessary(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -88,6 +89,7 @@ def merge_no_negotiation_necessary(
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not no_negotiation_data:
         logger.info("No negotiation necessary data to merge")

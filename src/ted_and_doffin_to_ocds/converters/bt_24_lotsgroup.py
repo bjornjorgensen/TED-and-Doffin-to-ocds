@@ -17,6 +17,7 @@ def parse_lots_group_description(xml_content: str | bytes) -> dict[str, Any] | N
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing lot groups data with descriptions,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -62,6 +63,7 @@ def merge_lots_group_description(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         lots_group_description_data (Optional[Dict[str, Any]]): Lot group data containing descriptions to merge
+
     """
     if not lots_group_description_data:
         logger.warning("No LotsGroup Description data to merge")

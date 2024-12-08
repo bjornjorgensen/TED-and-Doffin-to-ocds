@@ -15,8 +15,7 @@ VEHICLE_CODES = {
 
 
 def parse_vehicle_type(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse vehicle type information from LotResult elements in XML content.
+    """Parse vehicle type information from LotResult elements in XML content.
 
     Only includes vehicle types where StatisticsNumeric is not 0.
     Creates items with additionalClassifications for vehicle types.
@@ -47,6 +46,7 @@ def parse_vehicle_type(xml_content: str | bytes) -> dict[str, Any] | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -105,8 +105,7 @@ def parse_vehicle_type(xml_content: str | bytes) -> dict[str, Any] | None:
 def merge_vehicle_type(
     release_json: dict[str, Any], vehicle_type_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge vehicle type data into the release JSON.
+    """Merge vehicle type data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -115,6 +114,7 @@ def merge_vehicle_type(
     Effects:
         Updates the awards section of release_json with vehicle type information,
         merging items and related lots where awards already exist
+
     """
     if not vehicle_type_data:
         logger.warning("No vehicle type data to merge")

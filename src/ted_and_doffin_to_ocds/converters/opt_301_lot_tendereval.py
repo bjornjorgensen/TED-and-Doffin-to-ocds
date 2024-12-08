@@ -9,8 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_tender_evaluator(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse tender evaluation organization references from lots.
+    """Parse tender evaluation organization references from lots.
 
     Identifies organizations that serve as evaluation bodies.
     Adds evaluationBody role to identified organizations.
@@ -32,6 +31,7 @@ def parse_tender_evaluator(xml_content: str | bytes) -> dict[str, Any] | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -59,8 +59,7 @@ def parse_tender_evaluator(xml_content: str | bytes) -> dict[str, Any] | None:
 def merge_tender_evaluator(
     release_json: dict[str, Any], tender_evaluator_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge tender evaluator data into the release JSON.
+    """Merge tender evaluator data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -69,6 +68,7 @@ def merge_tender_evaluator(
     Effects:
         Updates the parties section of release_json with evaluationBody roles,
         merging with existing party roles where applicable
+
     """
     if not tender_evaluator_data:
         logger.info("No Tender Evaluator Technical Identifier Reference data to merge")

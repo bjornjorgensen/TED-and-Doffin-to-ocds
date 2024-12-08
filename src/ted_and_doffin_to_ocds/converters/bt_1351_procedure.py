@@ -26,6 +26,7 @@ def parse_accelerated_procedure_justification(
                 }
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -62,6 +63,7 @@ def merge_accelerated_procedure_justification(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not accelerated_data:
         logger.warning("No accelerated procedure justification data to merge")

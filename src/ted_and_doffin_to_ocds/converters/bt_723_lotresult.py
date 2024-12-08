@@ -19,8 +19,7 @@ VEHICLE_CATEGORY_MAPPING = {
 
 
 def parse_vehicle_category(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the XML content to extract vehicle category information for lot results.
+    """Parse the XML content to extract vehicle category information for lot results.
 
     This function processes XML content to extract vehicle category information from lot results,
     specifically targeting the AssetCategoryCode elements with listName="vehicle-category".
@@ -52,6 +51,7 @@ def parse_vehicle_category(xml_content: str | bytes) -> dict | None:
                 ]
             }
             Returns None if no relevant data is found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -114,8 +114,7 @@ def parse_vehicle_category(xml_content: str | bytes) -> dict | None:
 def merge_vehicle_category(
     release_json: dict, vehicle_category_data: dict | None
 ) -> None:
-    """
-    Merge the parsed vehicle category data into the main OCDS release JSON.
+    """Merge the parsed vehicle category data into the main OCDS release JSON.
 
     This function takes vehicle category data and merges it into the main OCDS release JSON.
     For each award in the vehicle category data, it either updates an existing award or
@@ -134,6 +133,7 @@ def merge_vehicle_category(
         - If vehicle_category_data is None, a warning is logged and no changes are made
         - For existing awards, additionalClassifications are extended
         - Related lots are deduplicated using a set operation
+
     """
     if not vehicle_category_data:
         logger.warning("No vehicle category data to merge")

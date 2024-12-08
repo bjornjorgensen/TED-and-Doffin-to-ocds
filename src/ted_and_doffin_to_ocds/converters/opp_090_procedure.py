@@ -19,6 +19,7 @@ def parse_previous_notice_identifier(
     Returns:
         Optional[Dict[str, list]]: Dictionary containing related processes information,
         or None if no related processes found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -62,6 +63,7 @@ def merge_previous_notice_identifier(
 
     Returns:
         None: Updates release_json in place
+
     """
     if not previous_notice_data:
         logger.warning("No Previous notice Identifier data to merge")

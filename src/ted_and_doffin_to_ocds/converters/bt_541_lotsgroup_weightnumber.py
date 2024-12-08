@@ -37,6 +37,7 @@ def parse_award_criterion_weight_number_lotsgroup(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -95,6 +96,7 @@ def merge_award_criterion_weight_number_lotsgroup(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not award_criterion_weight_number_data:
         logger.warning("No Award Criterion Weight Number data to merge for lot groups")

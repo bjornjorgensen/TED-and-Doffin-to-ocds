@@ -36,6 +36,7 @@ def parse_bt195_bt541_lot_weight_unpublished_identifier(
         >>> print(result)
         {'withheldInformation': [{'id': 'awa-cri-num-weight-LOT-0001', 'field': 'awa-cri-num',
           'name': 'Award Criterion Number Weight'}]}
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -100,6 +101,7 @@ def merge_bt195_bt541_lot_weight_unpublished_identifier(
         >>> merge_bt195_bt541_lot_weight_unpublished_identifier(release, data)
         >>> print(release)
         {'withheldInformation': [{'id': 'awa-cri-num-weight-LOT-0001'}]}
+
     """
     if not unpublished_identifier_data:
         logger.warning(

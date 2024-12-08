@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_review_organization_identifier(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse review organization references from lots.
+    """Parse review organization references from lots.
 
     Identifies organizations that serve as review bodies.
     Adds reviewBody role to identified organizations.
@@ -34,6 +33,7 @@ def parse_review_organization_identifier(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -58,8 +58,7 @@ def parse_review_organization_identifier(
 def merge_review_organization_identifier(
     release_json: dict[str, Any], review_org_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge review organization data into the release JSON.
+    """Merge review organization data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -68,6 +67,7 @@ def merge_review_organization_identifier(
     Effects:
         Updates the parties section of release_json with reviewBody roles,
         merging with existing party roles where applicable
+
     """
     if not review_org_data:
         return

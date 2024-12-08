@@ -1,7 +1,7 @@
 {
   "id": "2023-698775",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8adf7f5a-b4b7-4999-bcee-d1154b7884c7",
+  "ocid": "ocds-abcd1234-eee79ed8-8c25-4149-8b95-77df3ed2f1e2",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -165,8 +165,8 @@
         "email": "aase@waco.no"
       },
       "roles": [
-        "submissionReceiptBody",
         "buyer",
+        "submissionReceiptBody",
         "processContactPoint"
       ],
       "address": {

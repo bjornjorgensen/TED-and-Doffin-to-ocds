@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_contract_url(xml_content: str | bytes) -> dict | None:
-    """
-    Parse contract URLs from XML data.
+    """Parse contract URLs from XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing contract information
@@ -32,6 +31,7 @@ def parse_contract_url(xml_content: str | bytes) -> dict | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -105,13 +105,13 @@ def parse_contract_url(xml_content: str | bytes) -> dict | None:
 
 
 def merge_contract_url(release_json: dict, contract_url_data: dict | None) -> None:
-    """
-    Merge contract URL data into the release JSON.
+    """Merge contract URL data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
         contract_url_data (Optional[Dict]): The source data containing contracts
             to be merged. If None, function returns without making changes.
+
     """
     if not contract_url_data:
         return

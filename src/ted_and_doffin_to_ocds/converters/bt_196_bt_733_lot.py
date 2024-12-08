@@ -10,8 +10,7 @@ logger = logging.getLogger(__name__)
 def parse_bt196_bt733_unpublished_justification(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse the XML content to extract the unpublished justification description for the award criteria order justification.
+    """Parse the XML content to extract the unpublished justification description for the award criteria order justification.
 
     This function extracts BT-196 (justification) data related to BT-733 (Lot) from the XML.
     It looks for FieldsPrivacy elements containing reasons why certain award criterion order information is withheld.
@@ -32,6 +31,7 @@ def parse_bt196_bt733_unpublished_justification(
                 ]
             }
         Returns None if no relevant data is found or if XML parsing fails.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -87,8 +87,7 @@ def merge_bt196_bt733_unpublished_justification(
     release_json: dict,
     unpublished_justification_data: dict | None,
 ) -> None:
-    """
-    Merge the parsed unpublished justification data into the main OCDS release JSON.
+    """Merge the parsed unpublished justification data into the main OCDS release JSON.
 
     This function updates the withheldInformation array in the release_json with justification
     data from unpublished fields related to lot award criteria order.
@@ -102,6 +101,7 @@ def merge_bt196_bt733_unpublished_justification(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not unpublished_justification_data:
         logger.warning(

@@ -19,6 +19,7 @@ def parse_lot_jury_decision_binding(xml_content: str | bytes) -> dict | None:
     Returns:
         dict: OCDS-formatted dictionary containing lot jury decision binding data, or
         None if no relevant data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -69,6 +70,7 @@ def merge_lot_jury_decision_binding(
         release_json: The main release JSON to update
         lot_jury_decision_binding_data: Jury decision binding data to merge, as returned by
             parse_lot_jury_decision_binding()
+
     """
     if not lot_jury_decision_binding_data:
         logger.warning("No lot jury decision binding data to merge")

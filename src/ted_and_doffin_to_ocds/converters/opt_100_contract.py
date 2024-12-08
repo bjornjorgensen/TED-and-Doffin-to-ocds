@@ -19,8 +19,7 @@ NAMESPACES = {
 def parse_framework_notice_identifier(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse framework notice identifier information (OPT-100) from XML content.
+    """Parse framework notice identifier information (OPT-100) from XML content.
 
     Gets notice reference information from settled contracts and creates
     corresponding RelatedProcess objects with framework relationships.
@@ -30,6 +29,7 @@ def parse_framework_notice_identifier(
 
     Returns:
         Dictionary containing contracts with related processes or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -103,8 +103,7 @@ def parse_framework_notice_identifier(
 def merge_framework_notice_identifier(
     release_json: dict[str, Any], framework_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge framework notice identifier information into the release JSON.
+    """Merge framework notice identifier information into the release JSON.
 
     Updates or creates contracts with related processes information.
     Preserves existing contract data while adding/updating related processes.
@@ -115,6 +114,7 @@ def merge_framework_notice_identifier(
 
     Returns:
         None
+
     """
     if not framework_data:
         logger.info("No framework notice identifier data to merge")

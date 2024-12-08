@@ -176,8 +176,7 @@ class XMLProcessor:
         return refs
 
     def get_previous_references(self, tree: etree._Element) -> list[dict[str, Any]]:
-        """
-        Get references to previous publications per specification:
+        """Get references to previous publications per specification:
         - Only for PIN/Periodic with multiple parts
         - Includes id="1" and relationship=["planning"]
         """

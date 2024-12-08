@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_ubo_email(xml_content: str | bytes) -> dict | None:
-    """
-    Parse UBO (Ultimate Beneficial Owner) email information from XML content.
+    """Parse UBO (Ultimate Beneficial Owner) email information from XML content.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing UBO email information
@@ -17,7 +16,8 @@ def parse_ubo_email(xml_content: str | bytes) -> dict | None:
     Returns:
         Optional[Dict]: A dictionary containing parsed UBO email data in OCDS format with
         'parties' array, or None if no valid UBO data is found.
-        Example:
+
+    Example:
         {
             "parties": [{
                 "id": "ORG-0001",
@@ -27,6 +27,7 @@ def parse_ubo_email(xml_content: str | bytes) -> dict | None:
                 }]
             }]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -75,8 +76,7 @@ def parse_ubo_email(xml_content: str | bytes) -> dict | None:
 
 
 def merge_ubo_email(release_json: dict, ubo_email_data: dict | None) -> None:
-    """
-    Merge UBO email data into the release JSON.
+    """Merge UBO email data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -89,6 +89,7 @@ def merge_ubo_email(release_json: dict, ubo_email_data: dict | None) -> None:
     Note:
         If ubo_email_data is None or contains no parties, no changes are made.
         For existing parties, beneficial owner email information is updated or added.
+
     """
     if not ubo_email_data:
         logger.info("No UBO email data to merge")

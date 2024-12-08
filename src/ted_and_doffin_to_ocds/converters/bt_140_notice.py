@@ -20,8 +20,7 @@ REASON_CODE_MAPPING = {
 
 
 def parse_change_reason_code(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the change reason code from XML data.
+    """Parse the change reason code from XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing change information
@@ -29,6 +28,7 @@ def parse_change_reason_code(xml_content: str | bytes) -> dict | None:
     Returns:
         Optional[Dict]: Dictionary containing tender information, or None if no data found
         The structure follows the format shown in the example output
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -104,13 +104,13 @@ def parse_change_reason_code(xml_content: str | bytes) -> dict | None:
 def merge_change_reason_code(
     release_json: dict, change_reason_data: dict | None
 ) -> None:
-    """
-    Merge change reason code data into the release JSON.
+    """Merge change reason code data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
         change_reason_data (Optional[Dict]): The source data containing changes
             to be merged. If None, function returns without making changes.
+
     """
     if not change_reason_data:
         logger.warning("No change reason code data to merge")

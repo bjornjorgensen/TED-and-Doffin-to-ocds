@@ -1,8 +1,7 @@
-"""
-BT-11 Buyer Legal Type converter.
+"""Converter for BT-11-Procedure-Buyer: Buyer legal type information.
 
-Maps the type of buyer according to procurement legislation from PartyTypeCode
-to OCDS party classifications using the eu-buyer-legal-type scheme.
+This module handles mapping of buyer legal type codes from eForms to OCDS party
+classifications using the eu-buyer-legal-type scheme.
 """
 
 import logging
@@ -48,29 +47,37 @@ BUYER_LEGAL_TYPE_CODES = {
 }
 
 
-def parse_buyer_legal_type(xml_content: str | bytes) -> dict[str, Any] | None:
-    """Parse the buyer legal type (BT-11) from XML content.
+def parse_buyer_legal_type(
+    xml_content: str | bytes,
+) -> dict[str, list[dict[str, Any]]] | None:
+    """Parse buyer legal type information from XML and map to OCDS classifications.
 
-    Extracts buyer legal type codes and maps them to OCDS party classifications.
+    Gets the organization ID and buyer legal type code for each ContractingParty and
+    maps them to OCDS party classifications using the eu-buyer-legal-type scheme.
 
     Args:
         xml_content: XML string or bytes to parse
 
     Returns:
-        Dictionary containing party classifications like:
-        {
-            "parties": [{
-                "id": "<org-id>",
-                "details": {
-                    "classifications": [{
-                        "scheme": "eu-buyer-legal-type",
-                        "id": "<type-code>",
-                        "description": "<type-description>"
-                    }]
-                }
-            }]
-        }
-        or None if no buyer legal type found
+        dict | None: Dictionary in format:
+            {
+                "parties": [
+                    {
+                        "id": str,  # Organization ID
+                        "details": {
+                            "classifications": [
+                                {
+                                    "scheme": "eu-buyer-legal-type",
+                                    "id": str,  # Legal type code
+                                    "description": str  # Human readable description
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        Returns None if no buyer legal type data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -113,7 +120,32 @@ def parse_buyer_legal_type(xml_content: str | bytes) -> dict[str, Any] | None:
     return result if result["parties"] else None
 
 
-def merge_buyer_legal_type(release_json, buyer_legal_type_data) -> None:
+def merge_buyer_legal_type(
+    release_json: dict, buyer_legal_type_data: dict[str, list[dict[str, Any]]] | None
+) -> None:
+    """Merge buyer legal type classifications into the OCDS release.
+
+    Adds or updates party details.classifications with buyer legal type information
+    using the eu-buyer-legal-type scheme.
+
+    Args:
+        release_json: Target release JSON to update
+        buyer_legal_type_data: Party classification data in format:
+            {
+                "parties": [
+                    {
+                        "id": str,
+                        "details": {
+                            "classifications": [...]
+                        }
+                    }
+                ]
+            }
+
+    Note:
+        Updates release_json in-place
+
+    """
     if not buyer_legal_type_data:
         logger.warning("No buyer Legal Type data to merge")
         return

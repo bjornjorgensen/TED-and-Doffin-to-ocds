@@ -16,8 +16,7 @@ NAMESPACES = {
 
 
 def parse_lot_result_identifier(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse lot result identifier (BT-13713) from XML content.
+    """Parse lot result identifier (BT-13713) from XML content.
 
     Gets award and lot identifiers from each lot result. Creates/updates
     corresponding Award objects in awards array with related lots.
@@ -27,6 +26,7 @@ def parse_lot_result_identifier(xml_content: str | bytes) -> dict[str, Any] | No
 
     Returns:
         Dictionary containing awards with lot references or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -72,8 +72,7 @@ def parse_lot_result_identifier(xml_content: str | bytes) -> dict[str, Any] | No
 def merge_lot_result_identifier(
     release_json: dict[str, Any], lot_result_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge lot result identifiers into the release JSON.
+    """Merge lot result identifiers into the release JSON.
 
     Updates or creates awards with lot references.
     Preserves existing award data while adding/updating related lots.
@@ -84,6 +83,7 @@ def merge_lot_result_identifier(
 
     Returns:
         None
+
     """
     if not lot_result_data:
         logger.warning("No lot result identifier data to merge")

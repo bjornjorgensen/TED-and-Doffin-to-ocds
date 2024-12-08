@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_review_info_provider_part(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse review information provider details from parts.
+    """Parse review information provider details from parts.
 
     Identifies organizations that serve as review information contact points.
     Adds reviewContactPoint role to identified organizations.
@@ -31,6 +30,7 @@ def parse_review_info_provider_part(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -57,8 +57,7 @@ def parse_review_info_provider_part(
 def merge_review_info_provider_part(
     release_json: dict[str, Any], review_info_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge review information provider data from parts into the release JSON.
+    """Merge review information provider data from parts into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -67,6 +66,7 @@ def merge_review_info_provider_part(
     Effects:
         Updates the parties section of release_json with reviewContactPoint roles,
         merging with existing party roles where applicable
+
     """
     if not review_info_data:
         logger.info("No Review Info Provider data to merge.")

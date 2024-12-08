@@ -8,14 +8,14 @@ logger = logging.getLogger(__name__)
 
 
 def parse_submission_electronic_catalogue(xml_content: str) -> list[dict] | None:
-    """
-    Parse the XML content to extract the Submission Electronic Catalogue policy for each lot.
+    """Parse the XML content to extract the Submission Electronic Catalogue policy for each lot.
 
     Args:
         xml_content (str): The XML content to parse.
 
     Returns:
         Optional[List[Dict]]: A list of dictionaries containing the parsed data if found, None otherwise.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -64,8 +64,7 @@ def merge_submission_electronic_catalogue(
     release_json: dict,
     submission_electronic_catalogue_data: list[dict] | None,
 ) -> None:
-    """
-    Merge the parsed Submission Electronic Catalogue data into the main OCDS release JSON.
+    """Merge the parsed Submission Electronic Catalogue data into the main OCDS release JSON.
 
     Args:
         release_json (Dict): The main OCDS release JSON to be updated.
@@ -73,6 +72,7 @@ def merge_submission_electronic_catalogue(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not submission_electronic_catalogue_data:
         logger.warning("No Submission Electronic Catalogue data to merge")

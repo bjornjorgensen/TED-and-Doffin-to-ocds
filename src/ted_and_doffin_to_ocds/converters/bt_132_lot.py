@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_lot_public_opening_date(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the public opening date from lot-level XML data.
+    """Parse the public opening date from lot-level XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing lot information
@@ -32,6 +31,7 @@ def parse_lot_public_opening_date(xml_content: str | bytes) -> dict | None:
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -85,8 +85,7 @@ def parse_lot_public_opening_date(xml_content: str | bytes) -> dict | None:
 def merge_lot_public_opening_date(
     release_json: dict, lot_public_opening_date_data: dict | None
 ) -> None:
-    """
-    Merge public opening date data into the release JSON.
+    """Merge public opening date data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -96,6 +95,7 @@ def merge_lot_public_opening_date(
     Note:
         The function modifies release_json in-place by adding or updating the
         tender.lots.awardPeriod.startDate and tender.lots.bidOpening.date fields.
+
     """
     if not lot_public_opening_date_data:
         return

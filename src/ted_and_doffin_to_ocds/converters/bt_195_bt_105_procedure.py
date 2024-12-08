@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_bt195_bt105_unpublished_identifier(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse unpublished field identifiers for procedure type (BT-195, BT-105).
+    """Parse unpublished field identifiers for procedure type (BT-195, BT-105).
 
     For fields marked as unpublished:
     - Gets ContractFolderID
@@ -34,6 +33,7 @@ def parse_bt195_bt105_unpublished_identifier(
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -74,8 +74,7 @@ def parse_bt195_bt105_unpublished_identifier(
 def merge_bt195_bt105_unpublished_identifier(
     release_json, unpublished_identifier_data
 ) -> None:
-    """
-    Merge the parsed unpublished identifier data into the main OCDS release JSON.
+    """Merge the parsed unpublished identifier data into the main OCDS release JSON.
 
     Args:
         release_json (dict): The main OCDS release JSON to be updated.
@@ -83,6 +82,7 @@ def merge_bt195_bt105_unpublished_identifier(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not unpublished_identifier_data:
         logger.warning("No unpublished identifier data to merge")

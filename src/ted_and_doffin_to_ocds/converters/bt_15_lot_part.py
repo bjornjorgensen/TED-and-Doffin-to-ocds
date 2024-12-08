@@ -17,6 +17,7 @@ def parse_documents_url(xml_content: str | bytes) -> dict[str, Any] | None:
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing documents data with URLs and lot references,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -64,6 +65,7 @@ def process_document_references(
         result (Dict[str, Any]): Dictionary to store the processed documents
         namespaces (Dict[str, str]): XML namespaces
         is_lot (bool): Whether processing a lot (True) or part (False)
+
     """
     element_id = element.xpath("cbc:ID/text()", namespaces=namespaces)[0]
     document_references = element.xpath(
@@ -97,6 +99,7 @@ def merge_documents_url(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         documents_url_data (Optional[Dict[str, Any]]): Document data containing URLs to merge
+
     """
     if not documents_url_data:
         logger.warning("No documents URL data to merge")

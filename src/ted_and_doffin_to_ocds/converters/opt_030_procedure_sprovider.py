@@ -20,8 +20,7 @@ ROLE_MAPPING = {
 
 
 def parse_provided_service_type(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse provided service type information (OPT-030) from XML content.
+    """Parse provided service type information (OPT-030) from XML content.
 
     Gets service provider organizations and maps their roles based on service type.
     Creates/updates corresponding Organization objects in parties array.
@@ -31,6 +30,7 @@ def parse_provided_service_type(xml_content: str | bytes) -> dict[str, Any] | No
 
     Returns:
         Dictionary containing parties with roles or None if no data found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -78,8 +78,7 @@ def parse_provided_service_type(xml_content: str | bytes) -> dict[str, Any] | No
 def merge_provided_service_type(
     release_json: dict[str, Any], service_type_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge provided service type information into the release JSON.
+    """Merge provided service type information into the release JSON.
 
     Updates or creates parties with role information.
     Preserves existing party data while adding/updating roles.
@@ -90,6 +89,7 @@ def merge_provided_service_type(
 
     Returns:
         None
+
     """
     if not service_type_data:
         logger.warning("No provided service type data to merge")

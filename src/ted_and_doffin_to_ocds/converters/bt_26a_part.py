@@ -15,6 +15,7 @@ def parse_classification_type_part(xml_content: str | bytes) -> dict[str, Any] |
     Returns:
         Optional[Dict[str, Any]]: Dictionary containing items with classification schemes,
                                  or None if no valid data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -60,6 +61,7 @@ def merge_classification_type_part(
     Args:
         release_json (Dict[str, Any]): The release JSON to update
         classification_type_data (Optional[Dict[str, Any]]): Item data containing schemes to merge
+
     """
     if not classification_type_data:
         return

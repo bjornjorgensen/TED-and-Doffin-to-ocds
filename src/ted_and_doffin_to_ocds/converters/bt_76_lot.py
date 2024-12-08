@@ -32,6 +32,7 @@ def parse_tenderer_legal_form(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -86,6 +87,7 @@ def merge_tenderer_legal_form(
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not tenderer_legal_form_data:
         logger.info("No Tenderer Legal Form data to merge")

@@ -9,8 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_document_provider(xml_content: str | bytes) -> dict[str, Any] | None:
-    """
-    Parse document provider details from lots.
+    """Parse document provider details from lots.
 
     Identifies organizations that serve as document providers.
     Adds processContactPoint role to identified organizations.
@@ -32,6 +31,7 @@ def parse_document_provider(xml_content: str | bytes) -> dict[str, Any] | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -59,8 +59,7 @@ def parse_document_provider(xml_content: str | bytes) -> dict[str, Any] | None:
 def merge_document_provider(
     release_json: dict[str, Any], provider_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge document provider data into the release JSON.
+    """Merge document provider data into the release JSON.
 
     Args:
         release_json: Target release JSON to update
@@ -69,6 +68,7 @@ def merge_document_provider(
     Effects:
         Updates the parties section of release_json with processContactPoint roles,
         merging with existing party roles where applicable
+
     """
     if not provider_data:
         logger.info("No Document Provider Technical Identifier Reference data to merge")

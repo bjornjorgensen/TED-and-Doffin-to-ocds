@@ -20,6 +20,7 @@ def parse_lot_selection_criteria_second_stage(xml_content: str | bytes) -> dict 
     Returns:
         dict: OCDS-formatted dictionary containing lot selection criteria data, or
         None if no relevant data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -70,6 +71,7 @@ def merge_lot_selection_criteria_second_stage(
         release_json: The main release JSON to update
         lot_selection_criteria_data: Selection criteria data to merge, as returned by
             parse_lot_selection_criteria_second_stage()
+
     """
     if not lot_selection_criteria_data:
         logger.warning("No lot selection criteria second stage data to merge")

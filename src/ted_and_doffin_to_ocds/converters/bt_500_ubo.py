@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def parse_ubo_name(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the beneficial owner names from XML data.
+    """Parse the beneficial owner names from XML data.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing organization information
@@ -30,6 +29,7 @@ def parse_ubo_name(xml_content: str | bytes) -> dict | None:
                 }
             ]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -76,8 +76,7 @@ def parse_ubo_name(xml_content: str | bytes) -> dict | None:
 
 
 def merge_ubo_name(release_json: dict, ubo_name_data: dict | None) -> None:
-    """
-    Merge beneficial owner name data into the release JSON.
+    """Merge beneficial owner name data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -87,6 +86,7 @@ def merge_ubo_name(release_json: dict, ubo_name_data: dict | None) -> None:
     Note:
         The function modifies release_json in-place by adding or updating the
         parties.beneficialOwners field for matching parties.
+
     """
     if not ubo_name_data:
         logger.info("No UBO name data to merge")

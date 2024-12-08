@@ -11,8 +11,7 @@ logger = logging.getLogger(__name__)
 def parse_environmental_legislation_url_part(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """
-    Parse environmental legislation URLs from XML content for procurement project parts.
+    """Parse environmental legislation URLs from XML content for procurement project parts.
 
     Args:
         xml_content: XML content as string or bytes containing procurement data
@@ -32,6 +31,7 @@ def parse_environmental_legislation_url_part(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -69,8 +69,7 @@ def parse_environmental_legislation_url_part(
 def merge_environmental_legislation_url_part(
     release_json: dict[str, Any], env_legislation_data: dict[str, Any] | None
 ) -> None:
-    """
-    Merge environmental legislation URL data into the release JSON.
+    """Merge environmental legislation URL data into the release JSON.
 
     Args:
         release_json: The target release JSON to merge data into
@@ -79,6 +78,7 @@ def merge_environmental_legislation_url_part(
     Effects:
         Updates the tender.documents section of release_json with new or updated
         environmental legislation document references
+
     """
     if not env_legislation_data:
         logger.info("No environmental legislation URL data for parts to merge")

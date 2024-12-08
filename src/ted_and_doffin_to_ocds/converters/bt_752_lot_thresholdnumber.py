@@ -18,8 +18,7 @@ NAMESPACES = {
 def parse_selection_criteria_threshold_number(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse BT-752: Selection criteria threshold numbers for lots.
+    """Parse BT-752: Selection criteria threshold numbers for lots.
 
     These values are mapped to the same SelectionCriterion objects as created for
     BT-40-Lot, BT-750-Lot, BT-7531-Lot, BT-7532-Lot and BT-809-Lot.
@@ -50,6 +49,7 @@ def parse_selection_criteria_threshold_number(
                 }
             }
         Returns None if no relevant data found or on error
+
     """
     try:
         if isinstance(xml_content, str):
@@ -104,8 +104,7 @@ def parse_selection_criteria_threshold_number(
 def merge_selection_criteria_threshold_number(
     release_json: dict, threshold_data: dict | None
 ) -> None:
-    """
-    Merge selection criteria threshold number data into the release JSON.
+    """Merge selection criteria threshold number data into the release JSON.
 
     Updates or adds threshold numbers to lot selection criteria.
 
@@ -115,6 +114,7 @@ def merge_selection_criteria_threshold_number(
 
     Note:
         - Updates release_json in-place
+
     """
     if not threshold_data:
         logger.info("No selection criteria threshold number data to merge")

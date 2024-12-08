@@ -24,6 +24,7 @@ def parse_part_additional_nature(
                 "additionalProcurementCategories": ["nature1", "nature2"]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -63,6 +64,7 @@ def merge_part_additional_nature(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not part_additional_nature_data:
         logger.warning("No part Additional Nature data to merge")

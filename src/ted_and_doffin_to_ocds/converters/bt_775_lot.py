@@ -25,8 +25,7 @@ SUSTAINABILITY_STRATEGIES = [
 
 
 def parse_social_procurement(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the XML content to extract the social procurement information for each lot.
+    """Parse the XML content to extract the social procurement information for each lot.
 
     Args:
         xml_content (Union[str, bytes]): The XML content to parse.
@@ -53,6 +52,7 @@ def parse_social_procurement(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -99,8 +99,7 @@ def merge_social_procurement(
     release_json: dict,
     social_procurement_data: dict | None,
 ) -> None:
-    """
-    Merge the parsed social procurement data into the main OCDS release JSON.
+    """Merge the parsed social procurement data into the main OCDS release JSON.
 
     Args:
         release_json (Dict): The main OCDS release JSON to be updated.
@@ -108,6 +107,7 @@ def merge_social_procurement(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not social_procurement_data:
         logger.warning("No social procurement data to merge")

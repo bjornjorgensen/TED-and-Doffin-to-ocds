@@ -49,8 +49,7 @@ def convert_to_iso_format(date_string: str, is_start_date: bool = False) -> str:
 
 
 def start_date(date_string: str) -> str:
-    """
-    Convert a start date string to ISO 8601 format, following OCDS requirements.
+    """Convert a start date string to ISO 8601 format, following OCDS requirements.
 
     This function is specifically for handling start dates. It ensures that
     when only a date is provided, the time is set to 00:00:00 in the given timezone.
@@ -67,6 +66,7 @@ def start_date(date_string: str) -> str:
     Example:
         >>> StartDate("2019-11-15+01:00")
         '2019-11-15T00:00:00+01:00'
+
     """
     logger.debug("StartDate input: %s", date_string)
     try:
@@ -78,8 +78,7 @@ def start_date(date_string: str) -> str:
 
 
 def end_date(date_string: str) -> str:
-    """
-    Convert an end date string to ISO 8601 format, following OCDS requirements.
+    """Convert an end date string to ISO 8601 format, following OCDS requirements.
 
     This function is specifically for handling end dates. It ensures that
     when only a date is provided, the time is set to 23:59:59 in the given timezone.
@@ -96,6 +95,7 @@ def end_date(date_string: str) -> str:
     Example:
         >>> EndDate("2019-11-15+01:00")
         '2019-11-15T23:59:59+01:00'
+
     """
     logger.debug("EndDate input: %s", date_string)
     try:

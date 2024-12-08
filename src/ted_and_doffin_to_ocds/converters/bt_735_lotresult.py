@@ -1,3 +1,9 @@
+"""Converter for BT-735-LotResult: CVD contract type information for awarded lots.
+
+This module handles the extraction and mapping of Clean Vehicle Directive (CVD)
+contract type information from eForms LotResult elements to OCDS award items.
+"""
+
 import logging
 
 from lxml import etree
@@ -14,7 +20,39 @@ CVD_CONTRACT_TYPE_LABELS = {
 def parse_cvd_contract_type_lotresult(
     xml_content: str | bytes,
 ) -> dict[str, list[dict[str, str | list[dict[str, str]]]]] | None:
-    """Parse the XML content to extract the CVD contract type for each LotResult."""
+    """Parse the CVD contract type for each LotResult into award items.
+
+    This function extracts the contract type according to table 1 CVD from LotResult
+    elements and maps them to items in the awards array. Each item gets an incrementally
+    assigned ID and the CVD contract type as an additional classification.
+
+    Args:
+        xml_content (str | bytes): The XML content to parse.
+
+    Returns:
+        dict | None: A dictionary containing award items with CVD classifications:
+            {
+                "awards": [
+                    {
+                        "id": str,  # LotResult ID
+                        "items": [
+                            {
+                                "id": str,  # Incremental item ID
+                                "additionalClassifications": [
+                                    {
+                                        "id": str,  # CVD contract type code
+                                        "scheme": "eu-cvd-contract-type",
+                                        "description": str  # Human readable description
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+            Returns None if no relevant data is found.
+
+    """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
@@ -67,7 +105,19 @@ def merge_cvd_contract_type_lotresult(
     cvd_contract_type_data: dict[str, list[dict[str, str | list[dict[str, str]]]]]
     | None,
 ) -> None:
-    """Merge the parsed CVD contract type data into the main OCDS release JSON."""
+    """Merge CVD contract type data into award items in the OCDS release.
+
+    For each LotResult, adds or updates items in the corresponding award with CVD
+    contract type information according to Table 1 of the Clean Vehicle Directive.
+
+    Args:
+        release_json (dict): The main OCDS release JSON to be updated
+        cvd_contract_type_data (dict | None): Award items with CVD contract type data
+
+    Returns:
+        None: The function updates the release_json in-place
+
+    """
     if not cvd_contract_type_data:
         logger.warning("No CVD contract type data for LotResults to merge")
         return

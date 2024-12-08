@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 def parse_touchpoint_edelivery_gateway(
     xml_content: str | bytes,
 ) -> dict | None:
-    """
-    Parse touchpoint eDelivery gateway information from XML content.
+    """Parse touchpoint eDelivery gateway information from XML content.
 
     Args:
         xml_content (Union[str, bytes]): The XML content containing touchpoint endpoint information
@@ -17,7 +16,8 @@ def parse_touchpoint_edelivery_gateway(
     Returns:
         Optional[Dict]: A dictionary containing parsed eDelivery gateway data in OCDS format with
         'parties' array, or None if no valid endpoint data is found.
-        Example:
+
+    Example:
         {
             "parties": [{
                 "id": "TPO-0001",
@@ -28,6 +28,7 @@ def parse_touchpoint_edelivery_gateway(
                 }
             }]
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -77,8 +78,7 @@ def parse_touchpoint_edelivery_gateway(
 def merge_touchpoint_edelivery_gateway(
     release_json: dict, edelivery_gateway_data: dict | None
 ) -> None:
-    """
-    Merge touchpoint eDelivery gateway data into the release JSON.
+    """Merge touchpoint eDelivery gateway data into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -91,6 +91,7 @@ def merge_touchpoint_edelivery_gateway(
     Note:
         If edelivery_gateway_data is None or contains no parties, no changes are made.
         For existing parties, both eDeliveryGateway and identifier information is updated.
+
     """
     if not edelivery_gateway_data:
         logger.info("No touchpoint eDelivery gateway data to merge")

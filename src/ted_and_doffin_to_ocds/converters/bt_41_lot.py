@@ -20,6 +20,7 @@ def parse_lot_following_contract(xml_content: str | bytes) -> dict | None:
     Returns:
         dict: OCDS-formatted dictionary containing lot following contract data, or
         None if no relevant data is found
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -70,6 +71,7 @@ def merge_lot_following_contract(
         release_json: The main release JSON to update
         lot_following_contract_data: Following contract data to merge, as returned by
             parse_lot_following_contract()
+
     """
     if not lot_following_contract_data:
         logger.warning("No lot following contract data to merge")

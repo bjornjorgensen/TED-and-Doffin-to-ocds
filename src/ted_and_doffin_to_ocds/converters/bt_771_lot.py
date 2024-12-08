@@ -14,8 +14,7 @@ CODE_TO_LABEL = {
 
 
 def parse_late_tenderer_info(xml_content: str | bytes) -> dict | None:
-    """
-    Parse the XML content to extract the late tenderer information for each lot.
+    """Parse the XML content to extract the late tenderer information for each lot.
 
     Args:
         xml_content (Union[str, bytes]): The XML content to parse.
@@ -36,6 +35,7 @@ def parse_late_tenderer_info(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -82,8 +82,7 @@ def merge_late_tenderer_info(
     release_json: dict,
     late_tenderer_info: dict | None,
 ) -> None:
-    """
-    Merge the parsed late tenderer information into the main OCDS release JSON.
+    """Merge the parsed late tenderer information into the main OCDS release JSON.
 
     Args:
         release_json (Dict): The main OCDS release JSON to be updated.
@@ -91,6 +90,7 @@ def merge_late_tenderer_info(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not late_tenderer_info:
         logger.warning("No late tenderer information to merge")

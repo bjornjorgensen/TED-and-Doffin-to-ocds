@@ -37,6 +37,7 @@ def parse_award_criterion_threshold_number(
                 ]
             }
         }
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -96,6 +97,7 @@ def merge_award_criterion_threshold_number(
 
     Returns:
         None - modifies release_json in place
+
     """
     if not award_criterion_threshold_number_data:
         logger.warning("No Award Criterion Threshold Number data to merge")

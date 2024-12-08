@@ -1,5 +1,4 @@
-"""
-BT-04 Procedure Identifier converter.
+"""BT-04 Procedure Identifier converter.
 
 Maps the European Public Procurement Procedure Identifier from ContractFolderID
 to OCDS tender.id field. This identifier uniquely identifies procurement procedures
@@ -38,6 +37,7 @@ def parse_procedure_identifier(xml_content: str | bytes) -> dict[str, Any] | Non
 
     Raises:
         etree.XMLSyntaxError: If XML content is invalid
+
     """
     try:
         if isinstance(xml_content, str):
@@ -74,6 +74,7 @@ def merge_procedure_identifier(
     Args:
         release_json: The target release JSON to update
         procedure_identifier_data: The procedure identifier data to merge
+
     """
     if not procedure_identifier_data:
         logger.debug("No procedure identifier data to merge")

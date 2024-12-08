@@ -30,6 +30,7 @@ def parse_bt195_bt734_lotsgroup_unpublished_identifier(
                 ]
             }
         Returns None if no relevant data is found.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -87,6 +88,7 @@ def merge_bt195_bt734_lotsgroup_unpublished_identifier(
 
     Returns:
         None: The function updates the release_json in-place.
+
     """
     if not unpublished_identifier_data:
         logger.warning(

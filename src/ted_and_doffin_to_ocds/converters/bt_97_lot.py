@@ -228,6 +228,7 @@ def parse_submission_language(xml_content: str | bytes) -> dict | None:
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
+
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -289,6 +290,7 @@ def merge_submission_language(
 
     Returns:
         None: The function modifies release_json in-place.
+
     """
     if not submission_language_data:
         logger.warning("No submission language data to merge")
