@@ -1,7 +1,7 @@
 {
   "id": "2022-976327",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b6b24389-188c-4de6-9d7d-c7b2a2ad380d",
+  "ocid": "ocds-abcd1234-d0192df9-7056-4cc3-b3f7-cac14f81321a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -126,9 +126,9 @@
         "email": "leona.pilares@sye.oslo.kommune.no"
       },
       "roles": [
+        "processContactPoint",
         "buyer",
-        "submissionReceiptBody",
-        "processContactPoint"
+        "submissionReceiptBody"
       ],
       "address": {
         "streetAddress": "Nedre Slottsgate 3",

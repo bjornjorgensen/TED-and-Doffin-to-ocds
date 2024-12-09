@@ -1,7 +1,7 @@
 {
   "id": "74f9d169-452b-4a99-b8d2-f54c3c71e163",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-13934080-40a0-45c4-af10-109b279d358f",
+  "ocid": "ocds-abcd1234-5178be53-66e1-4bdd-b42a-b86117b9dc2e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -157,8 +157,8 @@
         "faxNumber": "+47 75555018"
       },
       "roles": [
-        "buyer",
         "processContactPoint",
+        "buyer",
         "reviewContactPoint"
       ],
       "address": {
