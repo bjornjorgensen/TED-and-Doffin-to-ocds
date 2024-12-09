@@ -1,7 +1,7 @@
 {
   "id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-03bb3ab9-aa7d-4673-8295-01bd2873b408",
+  "ocid": "ocds-abcd1234-985805da-c83a-44e9-bd2d-c1f332ac911d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -342,9 +342,9 @@
       "roles": [
         "buyer",
         "reviewContactPoint",
-        "evaluationBody",
+        "processContactPoint",
         "submissionReceiptBody",
-        "processContactPoint"
+        "evaluationBody"
       ],
       "address": {
         "streetAddress": "Kauffelds plass 1",
