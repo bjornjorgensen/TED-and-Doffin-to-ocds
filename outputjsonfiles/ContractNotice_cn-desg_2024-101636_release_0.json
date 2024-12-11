@@ -1,7 +1,7 @@
 {
   "id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-03bb3ab9-aa7d-4673-8295-01bd2873b408",
+  "ocid": "ocds-abcd1234-ae8008f8-61b3-4251-bbc3-e59dfb8e8982",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -340,11 +340,11 @@
         "faxNumber": "+47 61176333"
       },
       "roles": [
-        "buyer",
         "reviewContactPoint",
-        "evaluationBody",
         "submissionReceiptBody",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer",
+        "evaluationBody"
       ],
       "address": {
         "streetAddress": "Kauffelds plass 1",
