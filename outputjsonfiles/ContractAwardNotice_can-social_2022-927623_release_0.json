@@ -1,7 +1,7 @@
 {
   "id": "2022-927623",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7d715689-b711-4610-9639-4d6360b1cbb8",
+  "ocid": "ocds-abcd1234-90a4585e-b2b1-4039-9fdb-171a92d97c10",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -150,6 +150,10 @@
     {
       "id": "ORG-0002",
       "name": "Avarn Security AS",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "NO943184097MVA",
@@ -166,14 +170,15 @@
         "streetAddress": "Alf Bjerckes vei 1",
         "postalCode": "N-0582",
         "locality": "Oslo"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0003",
       "name": "Securitas AS",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "920 144 950",
@@ -191,10 +196,7 @@
         "streetAddress": "Bøkkerveien 5, 0579 Oslo",
         "postalCode": "Postboks 100, Alnabr",
         "locality": "Oslo"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0004",
@@ -241,6 +243,14 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0002"
+        },
+        {
+          "id": "ORG-0003"
+        }
+      ],
       "relatedBids": [
         "TEN-0002",
         "TEN-0001"
@@ -258,6 +268,9 @@
           "scheme": "NL-TENDERNED"
         }
       ],
+      "relatedBids": [
+        "TEN-0001"
+      ],
       "title": "Rammeavtale vakt- og sikkerhetstjenester Delkontrakt 1"
     },
     {
@@ -268,6 +281,9 @@
           "id": "2",
           "scheme": "NL-TENDERNED"
         }
+      ],
+      "relatedBids": [
+        "TEN-0002"
       ],
       "title": "Rammeavtale vakt- og sikkerhetstjenester Delkontrakt 2",
       "awardID": "RES-0001"

@@ -1,7 +1,7 @@
 {
   "id": "2022-627512",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-14da3f00-0d4a-45a8-b70a-9df4175904f9",
+  "ocid": "ocds-abcd1234-e03315cb-343b-407b-bb34-bf984bab57e6",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -66,6 +66,11 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
       "value": {
         "amount": 23000000.0,
         "currency": "NOK"
@@ -104,6 +109,9 @@
           "id": "20042",
           "scheme": "NL-TENDERNED"
         }
+      ],
+      "relatedBids": [
+        "TEN-0001"
       ]
     }
   ],
@@ -138,6 +146,10 @@
     {
       "id": "ORG-0002",
       "name": "Move AS",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "957 597 076",
@@ -147,10 +159,7 @@
       "address": {
         "postalCode": "0134",
         "locality": "Oslo"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0003",

@@ -1,7 +1,7 @@
 {
   "id": "2023-335407",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3119239f-22a1-44bb-b56b-38a502e9b422",
+  "ocid": "ocds-abcd1234-f6aa266c-4b26-4da5-8eb9-a20f3c67a2b1",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -133,12 +133,13 @@
       "details": {
         "scale": "sme"
       },
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "address": {
         "locality": "OSLO"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0003",
@@ -159,6 +160,11 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
       "value": {
         "amount": 2700000.0,
         "currency": "NOK"
@@ -225,6 +231,9 @@
           "id": "1",
           "scheme": "NL-TENDERNED"
         }
+      ],
+      "relatedBids": [
+        "TEN-0001"
       ],
       "title": "Utarbeidelse av felles kommunale sikkerhetskrav"
     }

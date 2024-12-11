@@ -1,7 +1,7 @@
 {
   "id": "2023-627259",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a25ba7d3-6ef8-4b93-b3ce-1d1259b8410e",
+  "ocid": "ocds-abcd1234-ea8d719e-8da8-468e-8882-d864099b1818",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -62,6 +62,11 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
       "value": {
         "amount": 3200000.0,
         "currency": "NOK"
@@ -100,6 +105,9 @@
           "id": "1",
           "scheme": "NL-TENDERNED"
         }
+      ],
+      "relatedBids": [
+        "TEN-0001"
       ]
     }
   ],
@@ -134,6 +142,10 @@
     {
       "id": "ORG-0002",
       "name": "FAFO Institutt for arbeidslivs- og velferdsforskning AS",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "986 343 113",
@@ -143,10 +155,7 @@
       "address": {
         "postalCode": "0650",
         "locality": "Oslo"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0003",

@@ -1,7 +1,7 @@
 {
   "id": "65667997-031a-4198-bd25-7225449ef479",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3087e62b-b435-4ae6-a68e-aa97b32b9da1",
+  "ocid": "ocds-abcd1234-b797cddf-08b7-429f-ba57-90fe1718f4b7",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -133,6 +133,10 @@
         "scale": "micro",
         "listedOnRegulatedMarket": false
       },
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "326 912 557",
@@ -151,10 +155,7 @@
       "address": {
         "postalCode": "ABC123",
         "locality": "Le Grand-Quevilly"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "EU-1",
@@ -172,6 +173,11 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0004"
+        }
+      ],
       "value": {
         "amount": 95414.0,
         "currency": "EUR"
@@ -242,6 +248,9 @@
           "id": "SCN DEF:2020-12",
           "scheme": "NL-TENDERNED"
         }
+      ],
+      "relatedBids": [
+        "TEN-0001"
       ]
     }
   ],

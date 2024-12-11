@@ -1,7 +1,7 @@
 {
   "id": "65ffd92d-8eee-4787-a7fe-925106611edc",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-149d3037-fcbb-4743-9205-56fe8150f075",
+  "ocid": "ocds-abcd1234-b795d9c6-9720-416c-ad71-7d78ff5f3572",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -158,6 +158,10 @@
     {
       "id": "ORG-0003",
       "name": "Iss Facility Services AS - Salg",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "914791723",
@@ -173,14 +177,15 @@
         "streetAddress": "Postboks 132 Økern",
         "postalCode": "0509",
         "locality": "Oslo"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0004",
       "name": "Toma AS - Salg og Marked",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "984684037",
@@ -196,10 +201,7 @@
         "streetAddress": "Janaflaten 30",
         "postalCode": "5179",
         "locality": "Godvik"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     }
   ],
   "awards": [
@@ -209,7 +211,15 @@
         "LOT-0000"
       ],
       "status": "active",
-      "statusDetails": "At least one winner was chosen."
+      "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0003"
+        },
+        {
+          "id": "ORG-0004"
+        }
+      ]
     },
     {
       "id": "CON-0001",
@@ -267,6 +277,9 @@
         }
       ],
       "awardID": "RES-0001",
+      "relatedBids": [
+        "TEN-0001"
+      ],
       "title": "Drift av kantine på Leikanger-Iss Facility Services AS"
     }
   ],

@@ -1,7 +1,7 @@
 {
   "id": "2022-943732",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-00c21c1c-11c6-4eff-8e9b-53aa6743dba8",
+  "ocid": "ocds-abcd1234-638f1b86-cabf-4218-8bee-10f46b0fc832",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -99,6 +99,10 @@
     {
       "id": "ORG-0002",
       "name": "Politiets sikkerhetstjeneste",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "NO974769484MVA",
@@ -113,10 +117,7 @@
         "streetAddress": "Nydalen Allé 35",
         "postalCode": "0421",
         "locality": "Oslo"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0003",
@@ -165,6 +166,11 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
       "value": {
         "amount": 73000000.0,
         "currency": "NOK"
@@ -220,6 +226,9 @@
           "id": "1",
           "scheme": "NL-TENDERNED"
         }
+      ],
+      "relatedBids": [
+        "TEN-0001"
       ],
       "title": "21-04911 Kantinedrift"
     }

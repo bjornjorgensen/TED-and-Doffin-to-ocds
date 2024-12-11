@@ -1,7 +1,7 @@
 {
   "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e5526e58-32c4-4d1e-b6a5-3016f600c1af",
+  "ocid": "ocds-abcd1234-fb6d27d6-d33d-4d8a-a46c-165ab5e488a8",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -149,10 +149,10 @@
         "locality": "Bergen"
       },
       "roles": [
+        "funder",
         "processContactPoint",
         "payer",
-        "buyer",
-        "funder"
+        "buyer"
       ]
     },
     {
@@ -207,6 +207,10 @@
     {
       "id": "ORG-0004",
       "name": "Henning Larsen Architects AS",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "998 701 961",
@@ -222,10 +226,7 @@
       },
       "details": {
         "listedOnRegulatedMarket": true
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     }
   ],
   "awards": [
@@ -236,6 +237,11 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0004"
+        }
+      ],
       "relatedBids": [
         "TEN-0001"
       ]
@@ -265,14 +271,17 @@
       }
     ]
   },
-  "language": "no",
-  "buyer": {
-    "id": "ORG-0002"
-  },
   "contracts": [
     {
       "id": "CON-0001",
+      "relatedBids": [
+        "TEN-0001"
+      ],
       "awardID": "RES-0001"
     }
-  ]
+  ],
+  "language": "no",
+  "buyer": {
+    "id": "ORG-0002"
+  }
 }

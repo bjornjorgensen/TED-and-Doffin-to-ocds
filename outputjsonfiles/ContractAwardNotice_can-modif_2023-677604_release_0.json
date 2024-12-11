@@ -1,7 +1,7 @@
 {
   "id": "2023-677604",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a0215da2-3c31-4286-a9df-06d59bdfd28c",
+  "ocid": "ocds-abcd1234-702121b1-804e-46f3-895a-9333cbb0a34e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -92,6 +92,11 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
       "value": {
         "amount": 35000000.0,
         "currency": "NOK"
@@ -130,6 +135,9 @@
           "id": "2020/136366",
           "scheme": "NL-TENDERNED"
         }
+      ],
+      "relatedBids": [
+        "TEN-0001"
       ]
     }
   ],
@@ -163,6 +171,10 @@
     {
       "id": "ORG-0002",
       "name": "Framsikt AS",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "913187512",
@@ -173,10 +185,7 @@
         "streetAddress": "Postboks 24",
         "postalCode": "8469",
         "locality": "Bø i Vesterålen"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0003",

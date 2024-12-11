@@ -1,7 +1,7 @@
 {
   "id": "2022-697882",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-151f45b9-1d97-4c9c-864c-62fad93d5e13",
+  "ocid": "ocds-abcd1234-6694c6b4-87ce-4a13-9b69-ed38c0b7a983",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -108,6 +108,10 @@
     {
       "id": "ORG-0002",
       "name": "JANSSEN-CILAG AS",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "975 332 802",
@@ -118,10 +122,7 @@
         "streetAddress": "Drammensveien 288",
         "postalCode": "0283",
         "locality": "Oslo"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0003",
@@ -166,6 +167,11 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
       "estimatedValue": {
         "amount": 7432000.0,
         "currency": "NOK"
@@ -208,6 +214,9 @@
           "id": "1",
           "scheme": "NL-TENDERNED"
         }
+      ],
+      "relatedBids": [
+        "TEN-0001"
       ]
     }
   ],

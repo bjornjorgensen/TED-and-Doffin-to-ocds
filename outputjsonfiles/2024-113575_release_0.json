@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8650fee0-03ff-48db-b6de-cb591a542581",
+  "ocid": "ocds-abcd1234-1275bfc2-2c05-45eb-bc0b-7e5663bdd49c",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -190,9 +190,9 @@
         "locality": "Bodø"
       },
       "roles": [
+        "funder",
         "payer",
-        "buyer",
-        "funder"
+        "buyer"
       ]
     },
     {
@@ -218,9 +218,9 @@
         "locality": "VADSØ"
       },
       "roles": [
-        "leadBuyer",
         "processContactPoint",
         "buyer",
+        "leadBuyer",
         "reviewContactPoint"
       ]
     },
@@ -232,6 +232,10 @@
         "url": "https://medical.sectra.com/about-sectra/contact/contact-sectra-norway/",
         "listedOnRegulatedMarket": true
       },
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "975 353 265",
@@ -248,10 +252,7 @@
         "streetAddress": "Strandveien 50",
         "postalCode": "1366",
         "locality": "Lysaker"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0004",
@@ -285,6 +286,11 @@
       "id": "RES-0001",
       "relatedLots": [
         "LOT-0000"
+      ],
+      "suppliers": [
+        {
+          "id": "ORG-0003"
+        }
       ],
       "value": {
         "amount": 12000000.0,
@@ -333,6 +339,9 @@
         }
       ],
       "awardID": "RES-0001",
+      "relatedBids": [
+        "TEN-0001"
+      ],
       "title": "Første tilbud ifm direkteforhandlinger"
     }
   ],
