@@ -1,7 +1,7 @@
 {
   "id": "9a4b7099-142a-412a-af35-3e8feaf15ec7",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-eede829e-4830-41ed-85fa-e27d8eff2997",
+  "ocid": "ocds-abcd1234-7c259733-77b7-43e9-87ab-09479744f9ec",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -262,11 +262,11 @@
         }
       ],
       "relatedBids": [
-        "TEN-0002",
         "TEN-0001",
-        "TEN-0004",
+        "TEN-0002",
+        "TEN-0003",
         "TEN-0005",
-        "TEN-0003"
+        "TEN-0004"
       ]
     }
   ],

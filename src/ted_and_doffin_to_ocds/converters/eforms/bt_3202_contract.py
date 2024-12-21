@@ -52,8 +52,8 @@ def parse_contract_tender_id(xml_content: str | bytes) -> dict | None:
 
     try:
         root = etree.fromstring(xml_content)
-    except etree.XMLSyntaxError as e:
-        logger.error(f"Failed to parse XML: {e}")
+    except etree.XMLSyntaxError:
+        logger.exception("Failed to parse XML")
         return None
 
     namespaces = {
@@ -129,13 +129,15 @@ def parse_contract_tender_id(xml_content: str | bytes) -> dict | None:
                     result["awards"].append(
                         {
                             "id": award_id,
-                            "suppliers": [{"id": id} for id in supplier_ids],
+                            "suppliers": [
+                                {"id": supplier_id} for supplier_id in supplier_ids
+                            ],
                             "relatedLots": [lot_id],
                         }
                     )
 
             except (IndexError, AttributeError) as e:
-                logger.warning(f"Skipping incomplete contract data: {e}")
+                logger.warning("Skipping incomplete contract data: %s", e)
                 continue
 
     return result if any(result.values()) else None

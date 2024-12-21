@@ -49,7 +49,8 @@ def parse_address_2015(xml_content: str | bytes) -> dict[str, Any] | None:
                 return {
                     "parties": [{"id": org_id, "address": {"streetAddress": address}}]
                 }
-        return None
+            return None
+        return None  # noqa: TRY300
 
     except etree.XMLSyntaxError:
         logger.exception("Failed to parse XML content")

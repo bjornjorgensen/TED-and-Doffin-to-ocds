@@ -107,7 +107,7 @@ select = [
     "FA",
     #"BLE",
     #"FBT",
-    "D",
+    #"D",
 ]
 ignore = [
     "E501",  # Line too long

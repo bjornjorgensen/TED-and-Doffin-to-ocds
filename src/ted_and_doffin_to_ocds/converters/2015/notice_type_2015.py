@@ -47,7 +47,7 @@ def parse_notice_type_2015(xml_content: str | bytes) -> dict | None:
         if notice_type == "PRI_CALL_COMPETITION":
             return {"tag": ["planning", "tender"], "tender": {"status": "active"}}
 
-        return None
+        return None  # noqa: TRY300
 
     except etree.XMLSyntaxError:
         logger.exception("Failed to parse XML content")

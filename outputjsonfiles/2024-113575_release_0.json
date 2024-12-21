@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1275bfc2-2c05-45eb-bc0b-7e5663bdd49c",
+  "ocid": "ocds-abcd1234-004145d5-55f5-433d-a0d3-c39a037c327e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -219,8 +219,8 @@
       },
       "roles": [
         "processContactPoint",
-        "buyer",
         "leadBuyer",
+        "buyer",
         "reviewContactPoint"
       ]
     },

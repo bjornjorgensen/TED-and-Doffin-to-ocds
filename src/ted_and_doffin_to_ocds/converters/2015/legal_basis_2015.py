@@ -50,7 +50,7 @@ def parse_legal_basis_2015(xml_content: str | bytes) -> dict | None:
                     "legalBasis": {"scheme": "CELEX", "id": legal_basis.text.strip()}
                 }
             }
-        return None
+        return None  # noqa: TRY300
 
     except etree.XMLSyntaxError:
         logger.exception("Failed to parse XML content")

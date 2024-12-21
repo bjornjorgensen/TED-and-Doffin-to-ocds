@@ -56,7 +56,7 @@ def parse_official_name_2015(xml_content: str | bytes) -> dict[str, Any] | None:
                         }
                     ]
                 }
-        return None
+        return None  # noqa: TRY300
 
     except etree.XMLSyntaxError:
         logger.exception("Failed to parse XML content")

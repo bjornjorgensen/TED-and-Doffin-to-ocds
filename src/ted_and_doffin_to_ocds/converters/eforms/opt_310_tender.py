@@ -69,7 +69,7 @@ def parse_tendering_party_id_reference(xml_content: str | bytes) -> dict | None:
             result["bids"]["details"].append(bid)
 
         except (IndexError, AttributeError) as e:
-            logger.warning(f"Skipping incomplete tender data: {e}")
+            logger.warning("Skipping incomplete tender data: %s", e)
             continue
 
     return result if result["bids"]["details"] else None

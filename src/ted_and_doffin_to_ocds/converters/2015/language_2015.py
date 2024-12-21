@@ -37,7 +37,7 @@ def parse_language_2015(xml_content: str | bytes) -> dict | None:
         if lang_code:
             return {"language": lang_code.lower()}
 
-        return None
+        return None  # noqa: TRY300
 
     except etree.XMLSyntaxError:
         logger.exception("Failed to parse XML content")

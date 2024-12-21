@@ -54,7 +54,7 @@ def parse_contracting_body_2015(xml_content: str | bytes) -> dict[str, Any] | No
                 "parties": [{"id": org_id, "name": org_name, "roles": ["buyer"]}],
                 "buyer": {"id": org_id, "name": org_name},
             }
-        return None
+        return None  # noqa: TRY300
 
     except etree.XMLSyntaxError:
         logger.exception("Failed to parse XML content")

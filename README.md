@@ -98,23 +98,29 @@ poetry run python src/ted_and_doffin_to_ocds/main.py input_path output_folder oc
 ```
 
 Required Arguments:
+
 - `input_path`: Path to your input XML file or folder containing XML files
 - `output_folder`: Folder where the output JSON files will be saved
 - `ocid_prefix`: Your desired OCID prefix
 
 Example:
+
 ```bash
 poetry run python src/ted_and_doffin_to_ocds/main.py xmlfile/ outputjsonfiles/ ocds-abcd1234
 ```
+
 This command will:
+
 - Process all XML files in the `xmlfile/` directory
 - Save the resulting JSON files in the `outputjsonfiles/` directory
 - Use `ocds-abcd1234` as the OCID prefix
 
 If processing a single file, simply replace the input folder with the path to your XML file:
+
 ```
 poetry run python src/ted_and_doffin_to_ocds/main.py path/to/your/input.xml outputjsonfiles/ ocds-abcd1234
 ```
+
 The converter will process the input XML file(s) from either TED or Doffin and generate the corresponding OCDS JSON file(s) in the specified output folder.
 
 ### Advanced Options
@@ -133,12 +139,14 @@ poetry run python src/ted_and_doffin_to_ocds/main.py \
 ```
 
 Optional Arguments:
+
 - `--scheme`: Scheme for related processes (default: eu-oj)
 - `--db`: Path to SQLite database file (default: notices.db)
 - `--log-level`: Set logging level (default: INFO)
 - `--clear-db`: Clear existing database before processing
 
 Example with all options:
+
 ```bash
 poetry run python src/ted_and_doffin_to_ocds/main.py \
     xmlfile/ \
@@ -160,6 +168,7 @@ The converter processes files in a specific order to maintain proper relationshi
 4. Contract Award Notice Modifications
 
 This order ensures that:
+
 - References between notices are properly maintained
 - OCIDs are correctly assigned and reused
 - Related processes are accurately tracked
@@ -175,6 +184,7 @@ The converter writes detailed logs to `app.log` in the current directory. You ca
 - `CRITICAL`: Only critical failures
 
 Example with debug logging:
+
 ```bash
 poetry run python src/ted_and_doffin_to_ocds/main.py \
     xmlfile/ \
@@ -184,9 +194,11 @@ poetry run python src/ted_and_doffin_to_ocds/main.py \
 ```
 
 Monitor logs in real-time:
+
 ```bash
 tail -f app.log
 ```
+
 ## Testing
 
 To run the tests, execute the following command in the project root directory:
@@ -214,11 +226,13 @@ For detailed mapping information, please refer to the [official OCDS eForm profi
 This converter is designed to handle XML eForm data from both TED and Doffin:
 
 ### TED (Tenders Electronic Daily)
+
 - Processes XML data from the EU's official journal dedicated to European public procurement.
 - Handles TED-specific XML structures and element names.
 - Ensures compliance with EU-specific procurement rules and regulations.
 
 ### Doffin (Database for offentlige innkjøp)
+
 - Processes XML data from Norway's national database for public procurement notices.
 - Accommodates Doffin-specific XML schemas and data formats.
 - Ensures adherence to Norwegian procurement standards and requirements.
