@@ -53,7 +53,12 @@ def parse_bt195_bt1252_unpublished_identifier(
         "/efbc:FieldIdentifierCode"
     )
 
-    folder_id = root.xpath("/*/cbc:ContractFolderID/text()", namespaces=namespaces)[0]
+    folder_ids = root.xpath("/*/cbc:ContractFolderID/text()", namespaces=namespaces)
+    if not folder_ids:
+        logger.warning("ContractFolderID not found in XML")
+        return None
+
+    folder_id = folder_ids[0]
     field_identifier_codes = root.xpath(xpath_query, namespaces=namespaces)
 
     for field_identifier_code in field_identifier_codes:

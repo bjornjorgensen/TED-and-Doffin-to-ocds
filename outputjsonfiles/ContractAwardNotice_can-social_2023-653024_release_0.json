@@ -1,7 +1,7 @@
 {
   "id": "2023-653024",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b62e7398-9e1e-4c27-858f-d390ee78ca6b",
+  "ocid": "ocds-abcd1234-23598935-21e5-42a8-84b6-e10e9eae7842",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -713,16 +713,16 @@
         "currency": "NOK"
       },
       "relatedBids": [
-        "TEN-0007",
-        "TEN-0010",
         "TEN-0006",
-        "TEN-0001",
-        "TEN-0008",
-        "TEN-0009",
-        "TEN-0002",
         "TEN-0003",
-        "TEN-0005",
-        "TEN-0004"
+        "TEN-0009",
+        "TEN-0007",
+        "TEN-0001",
+        "TEN-0002",
+        "TEN-0008",
+        "TEN-0004",
+        "TEN-0010",
+        "TEN-0005"
       ]
     }
   ],
@@ -882,6 +882,61 @@
     "statistics": [
       {
         "id": "1",
+        "value": 15,
+        "measure": "bids",
+        "relatedLot": "LOT-0000"
+      },
+      {
+        "id": "2",
+        "value": 15,
+        "measure": "bids",
+        "relatedLot": "LOT-0000"
+      },
+      {
+        "id": "3",
+        "value": 15,
+        "measure": "bids",
+        "relatedLot": "LOT-0000"
+      },
+      {
+        "id": "4",
+        "value": 15,
+        "measure": "bids",
+        "relatedLot": "LOT-0000"
+      },
+      {
+        "id": "5",
+        "value": 15,
+        "measure": "bids",
+        "relatedLot": "LOT-0000"
+      },
+      {
+        "id": "6",
+        "value": 15,
+        "measure": "bids",
+        "relatedLot": "LOT-0000"
+      },
+      {
+        "id": "7",
+        "value": 15,
+        "measure": "bids",
+        "relatedLot": "LOT-0000"
+      },
+      {
+        "id": "8",
+        "value": 15,
+        "measure": "bids",
+        "relatedLot": "LOT-0000"
+      },
+      {
+        "id": "9",
+        "value": 15,
+        "measure": "bids",
+        "relatedLot": "LOT-0000"
+      },
+      {
+        "id": "10",
+        "value": 15,
         "measure": "bids",
         "relatedLot": "LOT-0000"
       }

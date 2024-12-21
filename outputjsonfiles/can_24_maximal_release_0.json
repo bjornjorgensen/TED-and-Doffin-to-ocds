@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b2086932-47d1-4dfe-ae4a-3147770def54",
+  "ocid": "ocds-abcd1234-4b267bc6-9203-48ac-b7ca-811a03ea1d72",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -714,8 +714,8 @@
       },
       "roles": [
         "leadTenderer",
-        "tenderer",
-        "supplier"
+        "supplier",
+        "tenderer"
       ],
       "beneficialOwners": [
         {
@@ -763,8 +763,8 @@
         "listedOnRegulatedMarket": false
       },
       "roles": [
-        "tenderer",
-        "supplier"
+        "supplier",
+        "tenderer"
       ],
       "beneficialOwners": [
         {
@@ -1139,32 +1139,34 @@
       },
       {
         "id": "3",
-        "measure": "foreignBidsFromEU",
+        "value": 3,
+        "measure": "bids",
         "relatedLot": "LOT-0001"
       },
       {
         "id": "4",
+        "value": 0,
         "measure": "bids",
-        "relatedLot": "LOT-0001"
+        "relatedLot": "LOT-0002"
       },
       {
         "id": "5",
-        "measure": "electronicBids",
+        "measure": "foreignBidsFromEU",
         "relatedLot": "LOT-0001"
       },
       {
         "id": "6",
-        "measure": "smeBids",
+        "measure": "electronicBids",
         "relatedLot": "LOT-0001"
       },
       {
         "id": "7",
-        "measure": "foreignBidsFromEU",
-        "relatedLot": "LOT-0002"
+        "measure": "smeBids",
+        "relatedLot": "LOT-0001"
       },
       {
         "id": "8",
-        "measure": "bids",
+        "measure": "foreignBidsFromEU",
         "relatedLot": "LOT-0002"
       },
       {

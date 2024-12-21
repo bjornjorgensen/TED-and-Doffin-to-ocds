@@ -1,7 +1,7 @@
 {
   "id": "65667997-031a-4198-bd25-7225449ef479",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ff816350-ce22-4e66-a11f-dfba664021a5",
+  "ocid": "ocds-abcd1234-0d847ceb-93d0-487e-b22a-b2f7e7744a7b",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -233,6 +233,7 @@
       },
       {
         "id": "3",
+        "value": 3,
         "measure": "bids",
         "relatedLot": "LOT-0000"
       }

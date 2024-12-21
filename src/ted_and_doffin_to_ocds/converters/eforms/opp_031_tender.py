@@ -54,10 +54,15 @@ def parse_contract_conditions(xml_content: str | bytes) -> dict[str, Any] | None
 
         lot_terms = {}
         for lot_tender in lot_tenders:
-            lot_id = lot_tender.xpath(
+            lot_ids = lot_tender.xpath(
                 "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
                 namespaces=NAMESPACES,
-            )[0]
+            )
+            if not lot_ids:
+                logger.warning("Missing lot ID in lot tender")
+                continue
+
+            lot_id = lot_ids[0]
             terms = lot_tender.xpath(
                 "efac:ContractTerm[efbc:TermCode/@listName='contract-detail']/efbc:TermDescription/text()",
                 namespaces=NAMESPACES,
@@ -72,14 +77,19 @@ def parse_contract_conditions(xml_content: str | bytes) -> dict[str, Any] | None
 
         for lot_tender in lot_tenders:
             try:
-                lot_id = lot_tender.xpath(
+                lot_ids = lot_tender.xpath(
                     "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
                     namespaces=NAMESPACES,
-                )[0]
+                )
+                if not lot_ids:
+                    continue  # Skip if no lot ID found
+
+                lot_id = lot_ids[0]
 
                 contract_terms = {}
                 term_elements = lot_tender.xpath(
-                    "efac:ContractTerm[efbc:TermCode/@listName='contract-detail']",
+                    "efac:ContractTerm[efbc:TermCode/@listName='contract-detail' and "
+                    "not(efbc:TermCode/text()='all-rev-tic')]",  # Explicitly exclude all-rev-tic
                     namespaces=NAMESPACES,
                 )
 
@@ -87,10 +97,6 @@ def parse_contract_conditions(xml_content: str | bytes) -> dict[str, Any] | None
                     term_code = term.xpath(
                         "efbc:TermCode/text()", namespaces=NAMESPACES
                     )[0]
-
-                    # Skip all-rev-tic terms
-                    if term_code == "all-rev-tic":
-                        continue
 
                     term_description = term.xpath(
                         "efbc:TermDescription/text()",
@@ -113,14 +119,11 @@ def parse_contract_conditions(xml_content: str | bytes) -> dict[str, Any] | None
                 logger.warning("Skipping incomplete lot tender data: %s", e)
                 continue
 
-        if result["tender"]["lots"]:
-            return result
+        return result if result["tender"]["lots"] else None
 
     except Exception:
         logger.exception("Error parsing contract conditions")
         return None
-
-    return None
 
 
 def merge_contract_conditions(
