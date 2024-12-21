@@ -1,11 +1,13 @@
 {
   "id": "2022-347651",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-fe2be343-e424-48c8-8d23-393a9140dbd9",
+  "ocid": "ocds-abcd1234-eea00c7a-f864-4973-baae-bee2439cdbf7",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "32014L0024"
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
     },
     "status": "complete",
     "id": "2022-347651",

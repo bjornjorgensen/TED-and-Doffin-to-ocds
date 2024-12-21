@@ -1,11 +1,13 @@
 {
   "id": "0097de15-36cf-4750-96c9-f66ae4d6cafd",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3e6d892f-7826-4d73-8270-b55376186c0b",
+  "ocid": "ocds-abcd1234-d75e1c37-fc61-481a-bf10-d19571874c92",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "32014L0024"
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
     },
     "status": "planned",
     "title": "Markedsdialog Nettverksutstyr",

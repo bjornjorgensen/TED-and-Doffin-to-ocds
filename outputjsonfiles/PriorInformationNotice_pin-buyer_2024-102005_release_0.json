@@ -1,11 +1,13 @@
 {
   "id": "629a037e-e8dd-4b02-a19e-e890bd114fda",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f609d25f-0245-455a-8e12-2f10357097f4",
+  "ocid": "ocds-abcd1234-e250ae2c-2683-4129-9a8a-32c458006c7b",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "32014L0024"
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
     },
     "status": "planned",
     "title": "Invitasjon til leverandørkonferanse",

@@ -1,11 +1,13 @@
 {
   "id": "2022-352534",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-aaaac420-06c5-4d2c-a269-9f045c0cfc37",
+  "ocid": "ocds-abcd1234-4e1c34bd-ae15-48a3-b2aa-3bf8b130ccc7",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "32014L0025"
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0025"
+      }
     },
     "status": "active",
     "id": "2022-352534",
@@ -116,9 +118,9 @@
         ]
       },
       "roles": [
+        "processContactPoint",
         "submissionReceiptBody",
-        "buyer",
-        "processContactPoint"
+        "buyer"
       ],
       "address": {
         "streetAddress": "P.O. Box 1817",

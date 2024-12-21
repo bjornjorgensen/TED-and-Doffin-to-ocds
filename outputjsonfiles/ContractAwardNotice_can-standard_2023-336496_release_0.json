@@ -1,11 +1,13 @@
 {
   "id": "2023-336496",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c4c44423-5119-4d9e-bcb2-dd2d50b50efd",
+  "ocid": "ocds-abcd1234-5db70600-6030-46cc-9fff-69b84ecfc830",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "OTHER"
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "OTHER"
+      }
     },
     "status": "complete",
     "id": "2023-336496",

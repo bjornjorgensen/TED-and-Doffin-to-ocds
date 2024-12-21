@@ -1,12 +1,16 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-608e36a3-4f8a-482b-83a7-63c17102bd80",
+  "ocid": "ocds-abcd1234-a52bb844-b57c-41e3-a2e1-7eca4ce1a996",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "32014L0024",
-      "description": "Det synes sannsynlig at det ikke eksisterer andre leverandører som kan eller vil kunne bli i stand til å levere ytelsen oppdragsgiver har behov for innenfor den tidsrammen som er til rådighet. \n\nDet synes sannsynlig at bare er en leverandør kan levere en digital patologiløsning som fungerer sammen med oppdragsgivers multimedialøsning, på en tilstrekkelig sikker måte.  "
+      "id": "FOA § 13-4 bokstav b annet punkt; «konkurranse er umulig av tekniske årsaker».",
+      "scheme": "ELI",
+      "description": "Det synes sannsynlig at det ikke eksisterer andre leverandører som kan eller vil kunne bli i stand til å levere ytelsen oppdragsgiver har behov for innenfor den tidsrammen som er til rådighet. \n\nDet synes sannsynlig at bare er en leverandør kan levere en digital patologiløsning som fungerer sammen med oppdragsgivers multimedialøsning, på en tilstrekkelig sikker måte.  ",
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
     },
     "status": "complete",
     "id": "b5d2a051-0b57-4cdc-a499-9001c2c5b231",
@@ -190,9 +194,9 @@
         "locality": "Bodø"
       },
       "roles": [
+        "funder",
         "payer",
-        "buyer",
-        "funder"
+        "buyer"
       ]
     },
     {
@@ -218,9 +222,9 @@
         "locality": "VADSØ"
       },
       "roles": [
-        "buyer",
-        "processContactPoint",
         "leadBuyer",
+        "processContactPoint",
+        "buyer",
         "reviewContactPoint"
       ]
     },

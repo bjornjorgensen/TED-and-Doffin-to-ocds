@@ -1,12 +1,11 @@
 {
   "id": "1db209a3-6934-4d5f-bf78-2aa8a1f2453c",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1595aeed-2d80-491f-899c-f2ce4fcf1342",
+  "ocid": "ocds-abcd1234-9ae21852-aad8-4bfc-af96-7b83c3516ae6",
+  "tag": [
+    "tender"
+  ],
   "tender": {
-    "legalBasis": {
-      "scheme": "CELEX",
-      "id": "other"
-    },
     "status": "planned",
     "lots": [
       {
@@ -110,9 +109,6 @@
       }
     ]
   },
-  "tag": [
-    "tender"
-  ],
   "date": "2023-10-30T16:55:46+00:00",
   "parties": [
     {

@@ -1,11 +1,14 @@
 {
   "id": "aa382761-89ef-4162-9dc5-74f12a6f2a21",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1c19a386-a99a-45e7-84e7-db163ef6daef",
+  "ocid": "ocds-abcd1234-36101f2d-b1cf-4303-b4c8-f2a33579727c",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "32014L0024"
+      "id": "Anskaffelsesforskriften",
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
     },
     "status": "active",
     "id": "896ba55d-369b-4e08-b878-64333f8455c9",

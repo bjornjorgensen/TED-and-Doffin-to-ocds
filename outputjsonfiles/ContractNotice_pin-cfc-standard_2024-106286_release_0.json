@@ -1,11 +1,14 @@
 {
   "id": "74f9d169-452b-4a99-b8d2-f54c3c71e163",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-cd615e58-261d-4401-87a3-d88791e78b57",
+  "ocid": "ocds-abcd1234-254cad49-7a0e-4ca7-8e9b-ff6cf3254717",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "32014L0024"
+      "id": "Anskaffelsesforskriften",
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
     },
     "status": "active",
     "id": "47ecdf9b-4ac0-4f9c-b595-35eec0cea710",
@@ -157,8 +160,8 @@
         "faxNumber": "+47 75555018"
       },
       "roles": [
-        "buyer",
         "processContactPoint",
+        "buyer",
         "reviewContactPoint"
       ],
       "address": {

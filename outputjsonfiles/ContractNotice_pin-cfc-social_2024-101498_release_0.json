@@ -1,11 +1,13 @@
 {
   "id": "a105cb09-ec7d-45d5-a364-ff2317e2231f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-07f395f4-1d22-473e-99d9-9bb8ecc20da3",
+  "ocid": "ocds-abcd1234-5c7c0f32-b264-493c-95bb-4e4648cec086",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "32014L0024"
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
     },
     "status": "active",
     "id": "ca26386f-8493-4c02-a4ad-918a7ee4f26d",

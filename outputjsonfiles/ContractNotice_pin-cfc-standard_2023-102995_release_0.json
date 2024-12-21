@@ -1,11 +1,13 @@
 {
   "id": "e5c8b25e-859d-492a-9085-716017f267aa",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d01ce62d-eb3d-49c7-b06e-3fc9dd92f00b",
+  "ocid": "ocds-abcd1234-8a45b42f-0200-45ff-91f9-e09562bbd37c",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "32014L0024"
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
     },
     "status": "active",
     "id": "4274ab6b-e506-4505-996b-40c4a4424038",
@@ -265,8 +267,8 @@
         "locality": "Oslo"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

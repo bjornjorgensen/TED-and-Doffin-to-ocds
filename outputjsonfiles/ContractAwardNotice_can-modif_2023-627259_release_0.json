@@ -1,11 +1,13 @@
 {
   "id": "2023-627259",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-affbd351-e151-4d28-8746-137cd6050fc3",
+  "ocid": "ocds-abcd1234-892eddb5-cef1-41cc-8863-39c17a411394",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "32014L0024"
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
     },
     "id": "2023-627259",
     "lots": [

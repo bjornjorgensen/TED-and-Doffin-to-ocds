@@ -1,11 +1,13 @@
 {
   "id": "2022-927623",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-860f571a-7a06-4cb6-bd8c-14c9ab43618a",
+  "ocid": "ocds-abcd1234-1a06db33-3af9-443c-b373-8765ee0c15ad",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "32014L0024"
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
     },
     "status": "complete",
     "id": "2022-927623",
@@ -252,8 +254,8 @@
         }
       ],
       "relatedBids": [
-        "TEN-0002",
-        "TEN-0001"
+        "TEN-0001",
+        "TEN-0002"
       ]
     }
   ],

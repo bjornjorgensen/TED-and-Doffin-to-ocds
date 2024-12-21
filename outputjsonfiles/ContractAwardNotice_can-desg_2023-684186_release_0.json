@@ -1,11 +1,13 @@
 {
   "id": "2023-684186",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b6f21d8f-31ae-4b73-a5ec-0b42d9aaffb0",
+  "ocid": "ocds-abcd1234-2b1c598d-5654-4bfc-b764-dfabf3e41448",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "32014L0024"
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
     },
     "status": "complete",
     "id": "2023-684186",

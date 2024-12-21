@@ -23,13 +23,17 @@ def parse_procedure_legal_basis(xml_content):
     result = {"tender": {"legalBasis": {}}}
 
     # Parse legal basis ID
-    legal_basis_id = root.xpath(
+    legal_basis_nodes = root.xpath(
         "//cac:ProcurementLegislationDocumentReference[not(cbc:ID='CrossBorderLaw' or cbc:ID='LocalLegalBasis')]/cbc:ID",
         namespaces=namespaces,
     )
-    if legal_basis_id:
-        result["tender"]["legalBasis"]["scheme"] = "ELI"
-        result["tender"]["legalBasis"]["id"] = legal_basis_id[0].text
+    if legal_basis_nodes:
+        legal_basis_id = legal_basis_nodes[0].text
+        if not legal_basis_id.startswith("http://data.europa.eu/eli/dir"):
+            result["tender"]["legalBasis"]["id"] = legal_basis_id
+            scheme = legal_basis_nodes[0].get("schemeName")
+            if scheme:
+                result["tender"]["legalBasis"]["scheme"] = scheme
 
     # Parse legal basis description
     legal_basis_description = root.xpath(
@@ -59,9 +63,11 @@ def parse_procedure_legal_basis(xml_content):
 
     # Parse legal basis notice
     regulatory_domain = root.xpath("//cbc:RegulatoryDomain", namespaces=namespaces)
-    if regulatory_domain:
-        result["tender"]["legalBasis"]["scheme"] = "CELEX"
-        result["tender"]["legalBasis"]["id"] = regulatory_domain[0].text
+    if regulatory_domain and regulatory_domain[0].text != "other":
+        result["tender"]["legalBasis"]["wasDerivedFrom"] = {
+            "scheme": "CELEX",
+            "id": regulatory_domain[0].text,
+        }
 
     if result["tender"]["legalBasis"]:
         logger.info("Parsed procedure Legal Basis data")

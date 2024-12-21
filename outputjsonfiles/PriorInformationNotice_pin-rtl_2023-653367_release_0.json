@@ -1,11 +1,13 @@
 {
   "id": "2023-653367",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a083653a-d82a-4ce8-be77-878d1fb537f6",
+  "ocid": "ocds-abcd1234-bf49da14-a563-42ae-9f32-3c8b7aafea49",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "32014L0025"
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0025"
+      }
     },
     "status": "planned",
     "lots": [
@@ -924,8 +926,8 @@
         "buyerProfile": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "postboks 7900",

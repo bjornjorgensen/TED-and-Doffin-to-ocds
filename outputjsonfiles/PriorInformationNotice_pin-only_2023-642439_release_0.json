@@ -1,11 +1,13 @@
 {
   "id": "2023-642439",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-125ceb58-f510-4761-b008-56b293ff11f6",
+  "ocid": "ocds-abcd1234-6416f3bb-8ad0-4fcf-bc55-7653f55cb4f1",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "32014L0024"
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
     },
     "status": "planned",
     "id": "PAR-0000",

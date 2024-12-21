@@ -1,11 +1,13 @@
 {
   "id": "2023-659744",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-fa2eac1e-dfda-457e-a1cd-749e9f4bbf0d",
+  "ocid": "ocds-abcd1234-d578fd0f-b564-47f1-83fd-2660cac0e230",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "32014L0025"
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0025"
+      }
     },
     "status": "planned",
     "lots": [
@@ -85,8 +87,8 @@
         ]
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Postboks 4350",

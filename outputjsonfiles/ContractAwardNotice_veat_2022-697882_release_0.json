@@ -1,11 +1,13 @@
 {
   "id": "2022-697882",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-521d22c1-8518-4538-a566-10d1ae9b6531",
+  "ocid": "ocds-abcd1234-06304e81-360b-48d8-9899-37edf0f703d2",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "32014L0024"
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
     },
     "status": "complete",
     "id": "2022-697882",

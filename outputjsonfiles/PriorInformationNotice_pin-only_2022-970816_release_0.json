@@ -1,11 +1,13 @@
 {
   "id": "2022-970816",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-47858987-a4fe-403e-9788-3b1f723f4ece",
+  "ocid": "ocds-abcd1234-700c1522-5294-4142-90ed-fe432ef9b357",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "OTHER"
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "OTHER"
+      }
     },
     "status": "planned",
     "id": "PAR-0000",

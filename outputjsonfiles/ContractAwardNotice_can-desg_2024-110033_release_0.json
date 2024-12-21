@@ -1,11 +1,14 @@
 {
   "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7dd09dc2-4aa3-42b4-bba7-c91eadfc6d6b",
+  "ocid": "ocds-abcd1234-7996178d-3771-4e51-b341-6dea735cd9a1",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "32014L0024"
+      "id": "Anskaffelsesforskriften",
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
     },
     "status": "complete",
     "id": "0a13ce23-1022-40a1-9652-b45a78168c93",
@@ -149,10 +152,10 @@
         "locality": "Bergen"
       },
       "roles": [
-        "payer",
-        "buyer",
+        "funder",
         "processContactPoint",
-        "funder"
+        "payer",
+        "buyer"
       ]
     },
     {

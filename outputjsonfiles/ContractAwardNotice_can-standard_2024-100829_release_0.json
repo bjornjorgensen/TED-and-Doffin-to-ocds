@@ -1,11 +1,10 @@
 {
   "id": "510444f4-6cd2-4b26-8dd6-f3af27ffa069",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0c334feb-abd7-4d81-a29a-91aa08f74a1e",
+  "ocid": "ocds-abcd1234-873eff20-c5dd-4555-a740-e36f51a5c650",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "other"
+      "id": "Anskaffelsesforskriften"
     },
     "status": "complete",
     "id": "5081837f-9dfe-4b87-98ca-cca5c60b9c28",
@@ -131,9 +130,9 @@
         "locality": "HØNEFOSS"
       },
       "roles": [
+        "funder",
         "payer",
-        "buyer",
-        "funder"
+        "buyer"
       ]
     },
     {

@@ -1,11 +1,13 @@
 {
   "id": "65ffd92d-8eee-4787-a7fe-925106611edc",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-5ccc655e-24bf-4b42-9fb9-5433a61c360d",
+  "ocid": "ocds-abcd1234-5cb0eb33-e338-48b5-b531-65944136e73c",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "32014L0024"
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
     },
     "status": "complete",
     "id": "49a72de8-e68a-4590-9add-10c08638c1e4",
@@ -229,8 +231,8 @@
         }
       ],
       "relatedBids": [
-        "TEN-0002",
-        "TEN-0001"
+        "TEN-0001",
+        "TEN-0002"
       ]
     }
   ],

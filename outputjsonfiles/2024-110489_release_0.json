@@ -1,11 +1,14 @@
 {
   "id": "8791620e-39a1-435d-985a-bee33825e3f4",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-54f15d7e-7408-4530-b487-7e0fd9eba90a",
+  "ocid": "ocds-abcd1234-7581f5f1-e4a3-45ea-977b-cde1cdf2465a",
   "tender": {
     "legalBasis": {
-      "scheme": "CELEX",
-      "id": "32014L0024"
+      "id": "Anskaffelsesforskriften",
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
     },
     "status": "complete",
     "id": "3f04e24d-412f-4334-90f3-5244f30593b4",
@@ -98,18 +101,18 @@
         }
       ],
       "relatedBids": [
-        "TEN-0006",
-        "TEN-0003",
-        "TEN-0012",
-        "TEN-0009",
-        "TEN-0007",
-        "TEN-0011",
-        "TEN-0001",
-        "TEN-0002",
-        "TEN-0013",
-        "TEN-0008",
         "TEN-0004",
+        "TEN-0006",
+        "TEN-0007",
         "TEN-0010",
+        "TEN-0008",
+        "TEN-0013",
+        "TEN-0012",
+        "TEN-0001",
+        "TEN-0003",
+        "TEN-0009",
+        "TEN-0011",
+        "TEN-0002",
         "TEN-0005"
       ]
     }
