@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-420bfa6e-5b2f-4d60-9a69-589758bf37ee",
+  "ocid": "ocds-abcd1234-b2086932-47d1-4dfe-ae4a-3147770def54",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -151,8 +151,8 @@
       {
         "id": "GLO-0001",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "title": "Title ---",
         "identifiers": [
@@ -335,8 +335,8 @@
         "id": "FiscalDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "publisher": {
           "id": "ORG-0002"
@@ -346,8 +346,8 @@
         "id": "EnvDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "publisher": {
           "id": "ORG-0003"
@@ -357,8 +357,8 @@
         "id": "EmplDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "publisher": {
           "id": "ORG-0004"
@@ -712,6 +712,11 @@
         "url": "https://www.gyro-soft.com",
         "listedOnRegulatedMarket": false
       },
+      "roles": [
+        "leadTenderer",
+        "tenderer",
+        "supplier"
+      ],
       "beneficialOwners": [
         {
           "id": "UBO-0001",
@@ -747,11 +752,7 @@
         "streetAddress": "4 rue du Bug, immeubke A",
         "postalCode": "8754",
         "locality": "Luxembourg"
-      },
-      "roles": [
-        "tenderer",
-        "leadTenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0009",
@@ -761,6 +762,10 @@
         "url": "https://www.the-best-app.com",
         "listedOnRegulatedMarket": false
       },
+      "roles": [
+        "tenderer",
+        "supplier"
+      ],
       "beneficialOwners": [
         {
           "id": "UBO-0001",
@@ -796,10 +801,7 @@
         "streetAddress": "3A smart avenue",
         "postalCode": "73846",
         "locality": "Frankfurt"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0010",
@@ -857,6 +859,10 @@
         "url": "https://www.competitor.com",
         "listedOnRegulatedMarket": false
       },
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "beneficialOwners": [
         {
           "id": "UBO-0001",
@@ -892,10 +898,7 @@
         "streetAddress": "7 rue de la republique",
         "postalCode": "75004",
         "locality": "Paris"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "TPO-0001",
@@ -965,6 +968,17 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0008"
+        },
+        {
+          "id": "ORG-0009"
+        },
+        {
+          "id": "ORG-0011"
+        }
+      ],
       "estimatedValue": {
         "amount": 9000000.0,
         "currency": "EUR"
@@ -1014,9 +1028,9 @@
         }
       ],
       "relatedBids": [
-        "TEN-0001",
         "TEN-0002",
-        "TEN-0003"
+        "TEN-0003",
+        "TEN-0001"
       ]
     }
   ],
@@ -1183,6 +1197,9 @@
           "documentType": "contractSigned"
         }
       ],
+      "relatedBids": [
+        "TEN-0001"
+      ],
       "finance": [
         {
           "id": "2021/1234",
@@ -1219,6 +1236,9 @@
           "url": "https://wheretofindcontract.com/ctr222",
           "documentType": "contractSigned"
         }
+      ],
+      "relatedBids": [
+        "TEN-0002"
       ],
       "finance": [
         {

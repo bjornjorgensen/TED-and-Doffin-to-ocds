@@ -1,7 +1,7 @@
 {
   "id": "2022-674620",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7031b9d8-abae-4f4c-8c2c-4ba45c63e190",
+  "ocid": "ocds-abcd1234-039ccb25-fa8d-4736-9618-ff3c9b3780d6",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -109,6 +109,10 @@
     {
       "id": "ORG-0002",
       "name": "Veterinærinstituttet",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "970955623",
@@ -119,10 +123,7 @@
         "streetAddress": "Postboks 64",
         "postalCode": "1431",
         "locality": "Ås"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0003",
@@ -145,6 +146,11 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
       "value": {
         "amount": 21700000.0,
         "currency": "NOK"
@@ -183,6 +189,9 @@
           "id": "23087006",
           "scheme": "NL-TENDERNED"
         }
+      ],
+      "relatedBids": [
+        "TEN-0001"
       ],
       "title": "Helseovervåking av vilt - ViltHOP 2023 - 2027"
     }

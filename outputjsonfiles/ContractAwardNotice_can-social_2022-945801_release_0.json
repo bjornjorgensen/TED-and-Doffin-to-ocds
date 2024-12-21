@@ -1,7 +1,7 @@
 {
   "id": "2022-945801",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0f83fb93-0144-40f1-a725-f7ff3063a5ab",
+  "ocid": "ocds-abcd1234-62d166dd-ebde-4fa2-a722-137d43b284b5",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -92,6 +92,10 @@
     {
       "id": "ORG-0002",
       "name": "Bedriftshelsen AS",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "944 357 866",
@@ -104,10 +108,7 @@
       "address": {
         "postalCode": "3264",
         "locality": "Larvik"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0003",
@@ -128,6 +129,11 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
       "value": {
         "amount": 18000000.0,
         "currency": "NOK"
@@ -168,6 +174,9 @@
       "id": "CON-0001",
       "dateSigned": "2022-11-03T23:59:59Z",
       "awardID": "RES-0001",
+      "relatedBids": [
+        "TEN-0001"
+      ],
       "title": "Bedriftshelsetjeneste"
     }
   ],

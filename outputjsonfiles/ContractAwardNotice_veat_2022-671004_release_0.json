@@ -1,7 +1,7 @@
 {
   "id": "2022-671004",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a884f7b9-225d-4e20-9656-c304feb76f47",
+  "ocid": "ocds-abcd1234-624ef817-d70c-4191-aa72-cf942a9bd37e",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -106,12 +106,13 @@
     {
       "id": "ORG-0002",
       "name": "PressReader International Limited",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "address": {
         "locality": "Dublin Docklands"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0003",
@@ -132,6 +133,11 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
       "value": {
         "amount": 331117.0,
         "currency": "USD"
@@ -164,7 +170,10 @@
     {
       "id": "CON-0001",
       "dateSigned": "2022-12-15T23:59:59Z",
-      "awardID": "RES-0001"
+      "awardID": "RES-0001",
+      "relatedBids": [
+        "TEN-0001"
+      ]
     }
   ],
   "description": "Mercell kunngjøring: https://opic.com/id/afmhdeyyxz",

@@ -1,7 +1,7 @@
 {
   "id": "2023-611830",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-be98df09-b117-4f99-920c-8922a107d07a",
+  "ocid": "ocds-abcd1234-8e05fe3d-895e-4fe4-9845-de6d08c10686",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -56,6 +56,11 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
       "value": {
         "amount": 2000000.0,
         "currency": "NOK"
@@ -94,6 +99,9 @@
           "id": "1",
           "scheme": "NL-TENDERNED"
         }
+      ],
+      "relatedBids": [
+        "TEN-0001"
       ]
     }
   ],
@@ -126,12 +134,13 @@
     {
       "id": "ORG-0002",
       "name": "Sopra Steria AS",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "address": {
         "locality": "Oslo"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0003",

@@ -1,7 +1,7 @@
 {
   "id": "510444f4-6cd2-4b26-8dd6-f3af27ffa069",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8e4a0917-5778-4c63-9725-e8a259423efe",
+  "ocid": "ocds-abcd1234-9885ab34-952e-477a-a976-566b13f80171",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -131,9 +131,9 @@
         "locality": "HØNEFOSS"
       },
       "roles": [
-        "buyer",
         "funder",
-        "payer"
+        "payer",
+        "buyer"
       ]
     },
     {
@@ -160,6 +160,10 @@
     {
       "id": "ORG-0003",
       "name": "Focus Software AS",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "826781742",
@@ -173,10 +177,7 @@
       },
       "address": {
         "locality": "Billingstad"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     }
   ],
   "awards": [
@@ -186,7 +187,12 @@
         "LOT-0000"
       ],
       "status": "active",
-      "statusDetails": "At least one winner was chosen."
+      "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0003"
+        }
+      ]
     },
     {
       "id": "CON-0001",
@@ -225,6 +231,9 @@
           "id": "2024/1004",
           "scheme": "NL-TENDERNED"
         }
+      ],
+      "relatedBids": [
+        "TEN-0001"
       ],
       "title": "Kjøp av program for utarbeidelse og redigering av digitale plandata"
     }

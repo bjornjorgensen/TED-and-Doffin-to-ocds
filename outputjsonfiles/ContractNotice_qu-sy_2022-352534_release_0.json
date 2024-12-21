@@ -1,7 +1,7 @@
 {
   "id": "2022-352534",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0a06ee40-e295-4d94-93cd-80d42335955e",
+  "ocid": "ocds-abcd1234-e6730217-e2f8-48d6-89c5-33202efdd95a",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -116,9 +116,9 @@
         ]
       },
       "roles": [
-        "buyer",
+        "processContactPoint",
         "submissionReceiptBody",
-        "processContactPoint"
+        "buyer"
       ],
       "address": {
         "streetAddress": "P.O. Box 1817",

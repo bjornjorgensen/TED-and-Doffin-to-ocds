@@ -1,7 +1,7 @@
 {
   "id": "2023-631333",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-495455d6-d5d2-4f7f-bdb0-abe6763c1b44",
+  "ocid": "ocds-abcd1234-0ed620b7-722b-4455-9127-a32c69559b0d",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -202,9 +202,9 @@
         ]
       },
       "roles": [
-        "buyer",
+        "processContactPoint",
         "submissionReceiptBody",
-        "processContactPoint"
+        "buyer"
       ],
       "address": {
         "streetAddress": "P.O. Box 1817",

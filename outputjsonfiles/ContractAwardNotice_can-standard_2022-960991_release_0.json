@@ -1,7 +1,7 @@
 {
   "id": "2022-960991",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f40b0250-b90c-493e-a6dc-05b54584a4e5",
+  "ocid": "ocds-abcd1234-04b5c1a5-4174-405e-9669-3158d45870a5",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -132,6 +132,10 @@
       "details": {
         "scale": "sme"
       },
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "980400255",
@@ -142,10 +146,7 @@
         "streetAddress": "Innspurten 15",
         "postalCode": "0663",
         "locality": "Oslo"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0003",
@@ -168,6 +169,11 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
       "value": {
         "amount": 42000000.0,
         "currency": "NOK"
@@ -229,6 +235,9 @@
           "id": "2022/6604",
           "scheme": "NL-TENDERNED"
         }
+      ],
+      "relatedBids": [
+        "TEN-0001"
       ],
       "title": "Delivery and maintenance of a Cell Broadcasti ng Enti ty with associated services"
     }

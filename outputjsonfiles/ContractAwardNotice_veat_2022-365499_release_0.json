@@ -1,7 +1,7 @@
 {
   "id": "2022-365499",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3c7c1edd-2a1a-4d63-87a4-2918f19eccb5",
+  "ocid": "ocds-abcd1234-21837c49-a54a-4510-a85c-ba5a4000d973",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -120,12 +120,13 @@
       "details": {
         "scale": "sme"
       },
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "address": {
         "locality": "Stavanger"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0003",
@@ -146,6 +147,11 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
       "value": {
         "amount": 319128.0,
         "currency": "NOK"
@@ -178,7 +184,10 @@
     {
       "id": "CON-0001",
       "dateSigned": "2022-08-02T23:59:59Z",
-      "awardID": "RES-0001"
+      "awardID": "RES-0001",
+      "relatedBids": [
+        "TEN-0001"
+      ]
     }
   ],
   "description": "Mercell kunngjøring: https://opic.com/id/afyktjubsb",

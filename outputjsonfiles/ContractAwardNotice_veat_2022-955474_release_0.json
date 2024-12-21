@@ -1,7 +1,7 @@
 {
   "id": "2022-955474",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-900f7722-c978-4e66-8e91-c39a5db99b2a",
+  "ocid": "ocds-abcd1234-49b65b74-5747-45d8-821d-fca3a677bdcc",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -98,6 +98,10 @@
       "details": {
         "scale": "sme"
       },
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "919 916 788",
@@ -107,10 +111,7 @@
       "address": {
         "streetAddress": "Peder Thomassons gate 12",
         "locality": "Arendal"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0003",
@@ -131,6 +132,11 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
       "value": {
         "amount": 8000000.0,
         "currency": "NOK"
@@ -164,6 +170,9 @@
       "id": "CON-0001",
       "dateSigned": "2022-09-16T23:59:59Z",
       "awardID": "RES-0001",
+      "relatedBids": [
+        "TEN-0001"
+      ],
       "title": "Flytrening for kull 01.20"
     }
   ],

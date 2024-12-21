@@ -1,7 +1,7 @@
 {
   "id": "2023-661116",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7ad4fab2-c216-45e5-8938-ae6234d33331",
+  "ocid": "ocds-abcd1234-893f6ded-20b3-4a2c-93d4-9000b17cd404",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -229,8 +229,8 @@
         "email": "jeanette.berglund@trv.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Heggstadmoen 53",

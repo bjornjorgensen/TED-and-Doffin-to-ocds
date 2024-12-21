@@ -1,7 +1,7 @@
 {
   "id": "9a4b7099-142a-412a-af35-3e8feaf15ec7",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-58a36e4c-ecdc-4b61-82af-1e7f31892404",
+  "ocid": "ocds-abcd1234-7c259733-77b7-43e9-87ab-09479744f9ec",
   "tender": {
     "legalBasis": {
       "scheme": "CELEX",
@@ -133,6 +133,10 @@
     {
       "id": "ORG-0003",
       "name": "Aberia Omsorg AS",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "950990449",
@@ -145,14 +149,15 @@
       },
       "address": {
         "locality": "Moss"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0004",
       "name": "Omsorgspartner AS",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "984710313 ",
@@ -165,14 +170,15 @@
       },
       "address": {
         "locality": "Asker"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0005",
       "name": "Otrera AS",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "997204646 ",
@@ -185,14 +191,15 @@
       },
       "address": {
         "locality": "Lunner"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0006",
       "name": "Stendi AS",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "985194653 ",
@@ -205,14 +212,15 @@
       },
       "address": {
         "locality": "Oslo"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     },
     {
       "id": "ORG-0007",
       "name": "Viken Bo og Omsorg AS",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
       "additionalIdentifiers": [
         {
           "id": "923661069 ",
@@ -225,10 +233,7 @@
       },
       "address": {
         "locality": "Sarpsborg"
-      },
-      "roles": [
-        "tenderer"
-      ]
+      }
     }
   ],
   "awards": [
@@ -239,12 +244,29 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0003"
+        },
+        {
+          "id": "ORG-0004"
+        },
+        {
+          "id": "ORG-0005"
+        },
+        {
+          "id": "ORG-0006"
+        },
+        {
+          "id": "ORG-0007"
+        }
+      ],
       "relatedBids": [
-        "TEN-0004",
         "TEN-0001",
-        "TEN-0005",
         "TEN-0002",
-        "TEN-0003"
+        "TEN-0003",
+        "TEN-0005",
+        "TEN-0004"
       ]
     }
   ],
@@ -316,7 +338,10 @@
           "scheme": "NL-TENDERNED"
         }
       ],
-      "awardID": "RES-0001"
+      "awardID": "RES-0001",
+      "relatedBids": [
+        "TEN-0001"
+      ]
     },
     {
       "id": "CON-0002",
@@ -325,6 +350,9 @@
           "id": "23/18301",
           "scheme": "NL-TENDERNED"
         }
+      ],
+      "relatedBids": [
+        "TEN-0002"
       ]
     },
     {
@@ -334,6 +362,9 @@
           "id": "23/18302",
           "scheme": "NL-TENDERNED"
         }
+      ],
+      "relatedBids": [
+        "TEN-0003"
       ]
     },
     {
@@ -343,6 +374,9 @@
           "id": "23/18303",
           "scheme": "NL-TENDERNED"
         }
+      ],
+      "relatedBids": [
+        "TEN-0004"
       ]
     },
     {
@@ -352,6 +386,9 @@
           "id": "23/18304",
           "scheme": "NL-TENDERNED"
         }
+      ],
+      "relatedBids": [
+        "TEN-0005"
       ]
     }
   ],
