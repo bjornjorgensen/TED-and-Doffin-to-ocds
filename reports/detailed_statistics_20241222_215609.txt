@@ -1,0 +1,1080 @@
+Log Analysis Report
+===================
+
+Total files processed: 38683
+Average processing time: 0.10s
+Total warnings: 24790788
+Total errors: 1101
+
+Top 5 Most Common Warnings:
+-------------------------
+[44790x] No Cross Border Law (BT-09) found in the XML
+[44790x] No data found for Cross Border Law (BT-09)
+[44790x] No data found for DPS Termination (BT-119)
+[44790x] No data found for Previous Planning Identifier (Lot) (BT-125(i))
+[44790x] No data found for Previous Planning Identifier (part) (BT-125(i) and BT-1251)
+
+Slow Processing Files (>5s):
+---------------------------
+
+
+Detailed Error Analysis:
+----------------------
+
+Error: Error processing BT-5101(b)-procedure (procedure Place Performance Streetline 1) data
+Count: 168
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2486, in process_bt_section
+parsed_data = parse_function(xml_content)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_5101b_procedure.py", line 43, in parse_procedure_place_performance_streetline1
+address = location.xpath("cac:Address", namespaces=namespaces)[0]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+First occurred: 2024-12-22 19:29:09
+Last occurred: 2024-12-22 20:49:45
+----------------------------------------
+
+Error: Error processing BT-5101(c)-procedure (procedure Place Performance Streetline 2) data
+Count: 168
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2486, in process_bt_section
+parsed_data = parse_function(xml_content)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_5101c_procedure.py", line 39, in parse_procedure_place_performance_streetline2
+address = location.xpath("cac:Address", namespaces=namespaces)[0]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+First occurred: 2024-12-22 19:29:09
+Last occurred: 2024-12-22 20:49:45
+----------------------------------------
+
+Error: Error processing bt_541_lot_weightnumber data
+Count: 150
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2486, in process_bt_section
+parsed_data = parse_function(xml_content)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_541_lot_weightnumber.py", line 76, in parse_award_criterion_weight_number
+{"number": float(number)} for number in weight_numbers
+^^^^^^^^^^^^^
+ValueError: could not convert string to float: '50-60 %'
+First occurred: 2024-12-22 19:35:33
+Last occurred: 2024-12-22 20:42:16
+----------------------------------------
+
+Error: Invalid date/time format
+Count: 124
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_05_notice.py", line 91, in convert_to_iso_format
+date_time = datetime.fromisoformat(datetime_string)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Invalid isoformat string: '2024-01-19ZT00:00:00Z'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_05_notice.py", line 54, in parse_notice_dispatch_date_time
+iso_datetime = convert_to_iso_format(issue_date[0], issue_time[0])
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_05_notice.py", line 95, in convert_to_iso_format
+raise ValueError(msg) from e
+ValueError: Invalid date/time format
+First occurred: 2024-12-22 19:31:35
+Last occurred: 2024-12-22 20:49:54
+----------------------------------------
+
+Error: Error processing selection criteria threshold numbers
+Count: 99
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_752_lot_thresholdnumber.py", line 67, in parse_selection_criteria_threshold_number
+criteria = lot.xpath(
+^^^^^^^^^^
+File "src/lxml/etree.pyx", line 1623, in lxml.etree._Element.xpath
+File "src/lxml/xpath.pxi", line 290, in lxml.etree.XPathElementEvaluator.__call__
+File "src/lxml/xpath.pxi", line 210, in lxml.etree._XPathEvaluatorBase._handle_result
+lxml.etree.XPathEvalError: Undefined namespace prefix
+First occurred: 2024-12-22 19:43:33
+Last occurred: 2024-12-22 20:27:41
+----------------------------------------
+
+Error: Error processing selection criteria weight numbers
+Count: 99
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_752_lot_weightnumber.py", line 67, in parse_selection_criteria_weight_number
+criteria = lot.xpath(
+^^^^^^^^^^
+File "src/lxml/etree.pyx", line 1623, in lxml.etree._Element.xpath
+File "src/lxml/xpath.pxi", line 290, in lxml.etree.XPathElementEvaluator.__call__
+File "src/lxml/xpath.pxi", line 210, in lxml.etree._XPathEvaluatorBase._handle_result
+lxml.etree.XPathEvalError: Undefined namespace prefix
+First occurred: 2024-12-22 19:43:33
+Last occurred: 2024-12-22 20:27:41
+----------------------------------------
+
+Error: Error processing BT-5141-Lot (Lot Country) data
+Count: 77
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2488, in process_bt_section
+merge_func(release_json, parsed_data)
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_5141_lot.py", line 178, in merge_lot_country
+existing_item = next(
+^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_5141_lot.py", line 182, in <genexpr>
+if item["relatedLot"] == new_item["relatedLot"]
+~~~~^^^^^^^^^^^^^^
+KeyError: 'relatedLot'
+First occurred: 2024-12-22 19:48:10
+Last occurred: 2024-12-22 20:49:25
+----------------------------------------
+
+Error: Error processing BT-5071-Lot (Place Performance Country Subdivision) data
+Count: 70
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2488, in process_bt_section
+merge_func(release_json, parsed_data)
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_5071_lot.py", line 89, in merge_place_performance_country_subdivision
+existing_item = next(
+^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_5071_lot.py", line 93, in <genexpr>
+if item["relatedLot"] == new_item["relatedLot"]
+~~~~^^^^^^^^^^^^^^
+KeyError: 'relatedLot'
+First occurred: 2024-12-22 19:48:10
+Last occurred: 2024-12-22 20:49:25
+----------------------------------------
+
+Error: Error processing Lot Place of Performance (BT-727-Lot) data
+Count: 44
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2488, in process_bt_section
+merge_func(release_json, parsed_data)
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_727_lot.py", line 115, in merge_lot_place_performance
+existing_item = next(
+^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_727_lot.py", line 119, in <genexpr>
+if item["relatedLot"] == new_item["relatedLot"]
+~~~~^^^^^^^^^^^^^^
+KeyError: 'relatedLot'
+First occurred: 2024-12-22 20:07:38
+Last occurred: 2024-12-22 20:50:22
+----------------------------------------
+
+Error: Error processing BT-5071-Lot (Place Performance Country Subdivision) data
+Count: 22
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2488, in process_bt_section
+merge_func(release_json, parsed_data)
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_5071_lot.py", line 89, in merge_place_performance_country_subdivision
+existing_item = next(
+^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_5071_lot.py", line 93, in <genexpr>
+if item["relatedLot"] == new_item["relatedLot"]
+~~~~^^^^^^^^^^^^^^
+KeyError: 'relatedLot'
+First occurred: 2024-12-22 20:07:01
+Last occurred: 2024-12-22 20:49:25
+----------------------------------------
+
+Error: Error processing BT-5141-Lot (Lot Country) data
+Count: 18
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2488, in process_bt_section
+merge_func(release_json, parsed_data)
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_5141_lot.py", line 178, in merge_lot_country
+existing_item = next(
+^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_5141_lot.py", line 182, in <genexpr>
+if item["relatedLot"] == new_item["relatedLot"]
+~~~~^^^^^^^^^^^^^^
+KeyError: 'relatedLot'
+First occurred: 2024-12-22 20:07:01
+Last occurred: 2024-12-22 20:49:25
+----------------------------------------
+
+Error: Error processing BT-5121-Lot (Place Performance Post Code) data
+Count: 15
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2488, in process_bt_section
+merge_func(release_json, parsed_data)
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_5121_lot.py", line 88, in merge_place_performance_post_code
+existing_item = next(
+^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_5121_lot.py", line 92, in <genexpr>
+if item["relatedLot"] == new_item["relatedLot"]
+~~~~^^^^^^^^^^^^^^
+KeyError: 'relatedLot'
+First occurred: 2024-12-22 20:07:01
+Last occurred: 2024-12-22 20:48:58
+----------------------------------------
+
+Error: Error processing Place Performance Street Lot (BT-5101) data
+Count: 12
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2488, in process_bt_section
+merge_func(release_json, parsed_data)
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_5101_lot.py", line 107, in merge_place_performance_street_lot
+existing_item = next(
+^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_5101_lot.py", line 111, in <genexpr>
+if item["relatedLot"] == new_item["relatedLot"]
+~~~~^^^^^^^^^^^^^^
+KeyError: 'relatedLot'
+First occurred: 2024-12-22 20:07:01
+Last occurred: 2024-12-22 20:48:57
+----------------------------------------
+
+Error: Error processing Fiscal Legislation Document ID (OPT-111-Lot-FiscalLegis) data
+Count: 10
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2488, in process_bt_section
+merge_func(release_json, parsed_data)
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_111_lot_fiscallegis.py", line 101, in merge_fiscal_legislation_document_id
+existing_doc = next(
+^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_111_lot_fiscallegis.py", line 102, in <genexpr>
+(doc for doc in existing_documents if doc["id"] == new_doc["id"]),
+~~~^^^^^^
+KeyError: 'id'
+First occurred: 2024-12-22 20:07:01
+Last occurred: 2024-12-22 20:25:09
+----------------------------------------
+
+Error: Error processing Fiscal Legislation Organization Technical Identifier Reference (OPT-301-Lot-FiscalLegis) data
+Count: 9
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2488, in process_bt_section
+merge_func(release_json, parsed_data)
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_301_lot_fiscallegis.py", line 128, in merge_fiscal_legislation_org
+existing_doc = next(
+^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_301_lot_fiscallegis.py", line 129, in <genexpr>
+(doc for doc in tender_docs if doc["id"] == new_doc["id"]), None
+~~~^^^^^^
+KeyError: 'id'
+First occurred: 2024-12-22 20:07:01
+Last occurred: 2024-12-22 20:25:09
+----------------------------------------
+
+Error: Error processing Environmental Legislation Document ID (OPT-112-Lot-EnvironLegis) data
+Count: 3
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2488, in process_bt_section
+merge_func(release_json, parsed_data)
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_112_lot_environlegis.py", line 101, in merge_environmental_legislation_document_id
+existing_doc = next(
+^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_112_lot_environlegis.py", line 102, in <genexpr>
+(doc for doc in existing_documents if doc["id"] == new_doc["id"]),
+~~~^^^^^^
+KeyError: 'id'
+First occurred: 2024-12-22 20:07:19
+Last occurred: 2024-12-22 20:20:33
+----------------------------------------
+
+Error: Error processing URL to Fiscal Legislation (OPT-110-Lot-FiscalLegis) data
+Count: 2
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2488, in process_bt_section
+merge_func(release_json, parsed_data)
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_110_lot_fiscallegis.py", line 99, in merge_fiscal_legislation_url
+existing_doc = next(
+^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_110_lot_fiscallegis.py", line 100, in <genexpr>
+(doc for doc in existing_documents if doc["id"] == new_doc["id"]),
+~~~^^^^^^
+KeyError: 'id'
+First occurred: 2024-12-22 20:07:01
+Last occurred: 2024-12-22 20:20:33
+----------------------------------------
+
+Error: Error processing Employment Legislation Document ID (OPT-113-Lot-EmployLegis) data
+Count: 2
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2488, in process_bt_section
+merge_func(release_json, parsed_data)
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_113_lot_employlegis.py", line 101, in merge_employment_legislation_document_id
+existing_doc = next(
+^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_113_lot_employlegis.py", line 102, in <genexpr>
+(doc for doc in existing_documents if doc["id"] == new_doc["id"]),
+~~~^^^^^^
+KeyError: 'id'
+First occurred: 2024-12-22 20:07:19
+Last occurred: 2024-12-22 20:20:33
+----------------------------------------
+
+Error: Error processing Environmental Legislation Organization Technical Identifier Reference (OPT-301-Lot-EnvironLegis) data
+Count: 2
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2488, in process_bt_section
+merge_func(release_json, parsed_data)
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_301_lot_environlegis.py", line 130, in merge_environmental_legislation_org
+existing_doc = next(
+^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_301_lot_environlegis.py", line 131, in <genexpr>
+(doc for doc in tender_docs if doc["id"] == new_doc["id"]), None
+~~~^^^^^^
+KeyError: 'id'
+First occurred: 2024-12-22 20:07:20
+Last occurred: 2024-12-22 20:07:37
+----------------------------------------
+
+Error: Error processing LotResult CVD Contract Type (BT-735-LotResult) data
+Count: 2
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2486, in process_bt_section
+parsed_data = parse_function(xml_content)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_735_lotresult.py", line 73, in parse_cvd_contract_type_lotresult
+lot_result_id = lot_result.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+First occurred: 2024-12-22 20:32:55
+Last occurred: 2024-12-22 20:32:56
+----------------------------------------
+
+Error: Error processing Procurement Documents ID for Parts (OPT-140-Part) data
+Count: 1
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2488, in process_bt_section
+merge_func(release_json, parsed_data)
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_140_part_procurement_docs.py", line 83, in merge_procurement_documents_id_part
+if not any(doc["id"] == new_doc["id"] for doc in existing_docs):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_140_part_procurement_docs.py", line 83, in <genexpr>
+if not any(doc["id"] == new_doc["id"] for doc in existing_docs):
+~~~^^^^^^
+KeyError: 'id'
+First occurred: 2024-12-22 19:33:31
+Last occurred: 2024-12-22 19:33:31
+----------------------------------------
+
+Error: Error processing Employment Legislation Organization Technical Identifier Reference (OPT-301-Lot-EmployLegis) data
+Count: 1
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2488, in process_bt_section
+merge_func(release_json, parsed_data)
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_301_lot_employlegis.py", line 130, in merge_employment_legislation_org
+existing_doc = next(
+^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_301_lot_employlegis.py", line 131, in <genexpr>
+(doc for doc in tender_docs if doc["id"] == new_doc["id"]), None
+~~~^^^^^^
+KeyError: 'id'
+First occurred: 2024-12-22 20:07:20
+Last occurred: 2024-12-22 20:07:20
+----------------------------------------
+
+Error: Error processing Environmental Legislation URL (OPT-120-Lot-EnvironLegis) data
+Count: 1
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2488, in process_bt_section
+merge_func(release_json, parsed_data)
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_120_lot_environlegis.py", line 103, in merge_environmental_legislation_url
+existing_doc = next(
+^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_120_lot_environlegis.py", line 104, in <genexpr>
+(doc for doc in existing_documents if doc["id"] == new_doc["id"]),
+~~~^^^^^^
+KeyError: 'id'
+First occurred: 2024-12-22 20:20:33
+Last occurred: 2024-12-22 20:20:33
+----------------------------------------
+
+Error: Error processing Employment Legislation URL (OPT-130-Lot-EmployLegis) data
+Count: 1
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2488, in process_bt_section
+merge_func(release_json, parsed_data)
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_130_lot_employlegis.py", line 95, in merge_employment_legislation_url
+existing_doc = next(
+^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/opt_130_lot_employlegis.py", line 96, in <genexpr>
+(doc for doc in existing_docs if doc["id"] == new_doc["id"]), None
+~~~^^^^^^
+KeyError: 'id'
+First occurred: 2024-12-22 20:20:33
+Last occurred: 2024-12-22 20:20:33
+----------------------------------------
+
+Error: Error processing Unpublished Justification Description (BT-196, BT-142) data
+Count: 1
+Stack trace:
+Traceback (most recent call last):
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/processors/bt_processors.py", line 2486, in process_bt_section
+parsed_data = parse_function(xml_content)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+File "/home/bjorn/github/TED-and-Doffin-to-ocds/src/ted_and_doffin_to_ocds/converters/eforms/bt_196_bt_142_lotresult.py", line 59, in parse_bt196_bt142_unpublished_justification
+reason = privacy.xpath("efbc:ReasonDescription/text()", namespaces=namespaces)[
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+IndexError: list index out of range
+First occurred: 2024-12-22 20:44:56
+Last occurred: 2024-12-22 20:44:56
+----------------------------------------
+
+Module Statistics:
+-----------------
+__main__:
+  INFO: 89433
+ted_and_doffin_to_ocds.utils.notice_tracker:
+  INFO: 44794
+  WARNING: 5553
+ted_and_doffin_to_ocds.utils.file_processor:
+  INFO: 44724
+ted_and_doffin_to_ocds.utils.common_operations:
+  INFO: 44179
+  WARNING: 2754
+ted_and_doffin_to_ocds.processors.bt_processors:
+  INFO: 30426130
+  WARNING: 24664791
+  ERROR: 779
+ted_and_doffin_to_ocds.converters.eforms.bt_01_procedure:
+  INFO: 88951
+ted_and_doffin_to_ocds.converters.eforms.bt_03:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_04_procedure:
+  WARNING: 3633
+  INFO: 82314
+ted_and_doffin_to_ocds.converters.eforms.bt_05_notice:
+  INFO: 89332
+  ERROR: 124
+ted_and_doffin_to_ocds.converters.eforms.bt_09_procedure:
+  WARNING: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_10:
+  INFO: 44737
+ted_and_doffin_to_ocds.converters.eforms.bt_11_procedure_buyer:
+  INFO: 30493
+ted_and_doffin_to_ocds.converters.eforms.bt_115_part_gpa_coverage:
+  INFO: 1479
+ted_and_doffin_to_ocds.converters.eforms.bt_131_lot:
+  INFO: 55917
+ted_and_doffin_to_ocds.converters.eforms.bt_1351_procedure:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_16_organization_company:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_17_lot:
+  INFO: 33997
+ted_and_doffin_to_ocds.converters.eforms.bt_18_lot:
+  INFO: 38714
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_09_procedure:
+  WARNING: 3633
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_106_procedure:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_1252_procedure:
+  WARNING: 3633
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_1351_procedure:
+  WARNING: 3633
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_88_procedure:
+  WARNING: 3633
+ted_and_doffin_to_ocds.converters.eforms.bt_197_bt_106_procedure:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_197_bt_88_procedure:
+  WARNING: 3633
+ted_and_doffin_to_ocds.converters.eforms.bt_198_bt_106_procedure:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_198_bt_88_procedure:
+  WARNING: 3633
+ted_and_doffin_to_ocds.converters.eforms.bt_23_lot:
+  INFO: 38602
+ted_and_doffin_to_ocds.converters.eforms.bt_23_procedure:
+  INFO: 44675
+ted_and_doffin_to_ocds.converters.eforms.bt_24_lot:
+  INFO: 38672
+ted_and_doffin_to_ocds.converters.eforms.bt_24_procedure:
+  INFO: 44761
+ted_and_doffin_to_ocds.converters.eforms.bt_263_lot:
+  INFO: 15584
+ted_and_doffin_to_ocds.converters.eforms.bt_27_lotsgroup:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_27_part:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_27_procedure:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_46_lot:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_47_lot:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_50_lot:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_501_organization_company:
+  INFO: 44725
+ted_and_doffin_to_ocds.converters.eforms.bt_502_organization_company:
+  INFO: 43967
+ted_and_doffin_to_ocds.converters.eforms.bt_503_organization_company:
+  INFO: 35007
+ted_and_doffin_to_ocds.converters.eforms.bt_505_organization_company:
+  INFO: 41570
+ted_and_doffin_to_ocds.converters.eforms.bt_506_organization_company:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_5071_part:
+  INFO: 2376
+ted_and_doffin_to_ocds.converters.eforms.bt_508_procedure_buyer:
+  INFO: 49946
+ted_and_doffin_to_ocds.converters.eforms.bt_51_lot:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_5071_lot:
+  INFO: 25967
+ted_and_doffin_to_ocds.converters.eforms.bt_510a_organization_company:
+  INFO: 159520
+ted_and_doffin_to_ocds.converters.eforms.bt_510b_organization_company:
+  INFO: 159520
+ted_and_doffin_to_ocds.converters.eforms.bt_510c_organization_company:
+  INFO: 159520
+ted_and_doffin_to_ocds.converters.eforms.bt_512_organization_company:
+  INFO: 164298
+ted_and_doffin_to_ocds.converters.eforms.bt_5101a_part:
+  INFO: 517
+ted_and_doffin_to_ocds.converters.eforms.bt_513_organization_company:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_52_lot:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_536_lot:
+  INFO: 167562
+  WARNING: 32304
+ted_and_doffin_to_ocds.converters.eforms.bt_54_lot:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_57_lot:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_58_lot:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_60_lot:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_63_lot:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_635_lotresult:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_636_lotresult:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_610_procedure_buyer:
+  INFO: 1822
+ted_and_doffin_to_ocds.converters.eforms.bt_702a_notice:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_712a_lotresult:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_712b_lotresult:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_765_partframeworkagreement:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.bt_754_lot:
+  INFO: 38714
+ted_and_doffin_to_ocds.converters.eforms.bt_97_lot:
+  INFO: 26889
+ted_and_doffin_to_ocds.converters.eforms.opt_140_part_procurement_docs:
+  INFO: 2025
+ted_and_doffin_to_ocds.converters.eforms.opt_200_organization_company:
+  INFO: 150450
+ted_and_doffin_to_ocds.converters.eforms.opt_300_procedure_buyer:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_addinfo:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_docprovider:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_employlegis:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_mediator:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_reviewinfo:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_revieworg:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_tendereval:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_tenderreceipt:
+  INFO: 44790
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_addinfo:
+  INFO: 16975
+ted_and_doffin_to_ocds.converters.eforms.bt_739_organization_company:
+  INFO: 13210
+ted_and_doffin_to_ocds.converters.eforms.bt_115_gpa_coverage:
+  INFO: 14263
+ted_and_doffin_to_ocds.converters.eforms.bt_124_lot:
+  INFO: 315
+ted_and_doffin_to_ocds.converters.eforms.bt_5101_lot:
+  INFO: 9214
+ted_and_doffin_to_ocds.converters.eforms.bt_727_lot:
+  INFO: 4541
+ted_and_doffin_to_ocds.converters.eforms.bt_727_procedure:
+  INFO: 17166
+ted_and_doffin_to_ocds.converters.eforms.bt_15_lot_part:
+  INFO: 26561
+ted_and_doffin_to_ocds.converters.eforms.bt_27_lot:
+  INFO: 15739
+ted_and_doffin_to_ocds.converters.eforms.bt_36_lot:
+  INFO: 12621
+  WARNING: 28
+ted_and_doffin_to_ocds.converters.eforms.bt_630_lot:
+  INFO: 13637
+ted_and_doffin_to_ocds.converters.eforms.bt_70_lot:
+  INFO: 3370
+ted_and_doffin_to_ocds.converters.eforms.bt_743_lot:
+  INFO: 33651
+  WARNING: 12382
+ted_and_doffin_to_ocds.converters.eforms.bt_750_lot:
+  INFO: 12827
+ted_and_doffin_to_ocds.converters.eforms.bt_765_frameworkagreement:
+  INFO: 10221
+ted_and_doffin_to_ocds.converters.eforms.bt_92_lot:
+  INFO: 25427
+ted_and_doffin_to_ocds.converters.eforms.bt_93_lot:
+  INFO: 25495
+ted_and_doffin_to_ocds.converters.eforms.opt_140_lot_procurement_docs:
+  INFO: 26834
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_revieworg:
+  INFO: 30742
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_tenderreceipt:
+  INFO: 5904
+ted_and_doffin_to_ocds.converters.eforms.bt_124_part:
+  INFO: 18
+ted_and_doffin_to_ocds.converters.eforms.bt_105_procedure:
+  INFO: 34212
+ted_and_doffin_to_ocds.converters.eforms.bt_113_lot:
+  INFO: 2814
+ted_and_doffin_to_ocds.converters.eforms.bt_14_lot:
+  INFO: 273
+ted_and_doffin_to_ocds.converters.eforms.bt_615_lot:
+  INFO: 273
+ted_and_doffin_to_ocds.converters.eforms.bt_707_lot:
+  INFO: 178
+ted_and_doffin_to_ocds.converters.eforms.bt_99_lot:
+  INFO: 651
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_reviewinfo:
+  INFO: 4378
+ted_and_doffin_to_ocds.converters.eforms.bt_615_part:
+  INFO: 18
+ted_and_doffin_to_ocds.converters.eforms.bt_707_part:
+  INFO: 13
+ted_and_doffin_to_ocds.converters.eforms.bt_727_part:
+  INFO: 1187
+ted_and_doffin_to_ocds.converters.eforms.bt_31_procedure:
+  INFO: 1605
+ted_and_doffin_to_ocds.converters.eforms.bt_33_procedure:
+  INFO: 401
+ted_and_doffin_to_ocds.converters.eforms.bt_540_lot:
+  INFO: 13634
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_mediator:
+  INFO: 2970
+ted_and_doffin_to_ocds.converters.eforms.bt_88_procedure:
+  INFO: 10439
+ted_and_doffin_to_ocds.converters.eforms.bt_5131_procedure:
+  INFO: 3309
+ted_and_doffin_to_ocds.converters.eforms.bt_5141_part:
+  INFO: 1218
+ted_and_doffin_to_ocds.converters.eforms.bt_5141_procedure:
+  INFO: 15125
+  WARNING: 20
+ted_and_doffin_to_ocds.converters.eforms.bt_263_procedure:
+  INFO: 15049
+ted_and_doffin_to_ocds.converters.eforms.bt_5071_procedure:
+  INFO: 13444
+ted_and_doffin_to_ocds.converters.eforms.bt_5141_lot:
+  INFO: 13655
+  WARNING: 11
+ted_and_doffin_to_ocds.converters.eforms.bt_726_part:
+  INFO: 486
+ted_and_doffin_to_ocds.converters.eforms.bt_728_part:
+  INFO: 333
+ted_and_doffin_to_ocds.converters.eforms.bt_728_procedure:
+  INFO: 8701
+ted_and_doffin_to_ocds.converters.eforms.bt_726_lot:
+  INFO: 1977
+ted_and_doffin_to_ocds.converters.eforms.bt_5101a_procedure:
+  INFO: 2696
+ted_and_doffin_to_ocds.converters.eforms.bt_5121_lot:
+  INFO: 2567
+ted_and_doffin_to_ocds.converters.eforms.bt_5121_procedure:
+  INFO: 2717
+ted_and_doffin_to_ocds.converters.eforms.bt_5131_lot:
+  INFO: 3111
+ted_and_doffin_to_ocds.converters.eforms.bt_728_lot:
+  INFO: 2872
+ted_and_doffin_to_ocds.converters.eforms.opt_111_lot_fiscallegis:
+  INFO: 879
+ted_and_doffin_to_ocds.converters.eforms.opt_112_lot_environlegis:
+  INFO: 523
+ted_and_doffin_to_ocds.converters.eforms.opt_113_lot_employlegis:
+  INFO: 496
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_docprovider:
+  INFO: 2311
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_employlegis:
+  INFO: 481
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_environlegis:
+  INFO: 511
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_fiscallegis:
+  INFO: 863
+ted_and_doffin_to_ocds.converters.eforms.bt_531_procedure:
+  INFO: 1023
+ted_and_doffin_to_ocds.converters.eforms.bt_36_part:
+  INFO: 62
+ted_and_doffin_to_ocds.converters.eforms.bt_531_lot:
+  INFO: 898
+ted_and_doffin_to_ocds.converters.eforms.opt_111_part_fiscallegis:
+  INFO: 55
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_fiscallegis:
+  INFO: 55
+ted_and_doffin_to_ocds.converters.eforms.opt_112_part_environlegis:
+  INFO: 29
+ted_and_doffin_to_ocds.converters.eforms.opt_113_part_employlegis:
+  INFO: 28
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_environlegis:
+  INFO: 29
+ted_and_doffin_to_ocds.converters.eforms.bt_762_changereasondescription:
+  INFO: 811
+ted_and_doffin_to_ocds.converters.eforms.bt_632_part:
+  INFO: 21
+ted_and_doffin_to_ocds.converters.eforms.bt_767_lot:
+  INFO: 36437
+ted_and_doffin_to_ocds.converters.eforms.opt_110_lot_fiscallegis:
+  INFO: 28
+ted_and_doffin_to_ocds.converters.eforms.opt_120_lot_environlegis:
+  INFO: 21
+ted_and_doffin_to_ocds.converters.eforms.opt_130_lot_employlegis:
+  INFO: 24
+ted_and_doffin_to_ocds.converters.eforms.bt_509_organization_company:
+  INFO: 244
+ted_and_doffin_to_ocds.converters.eforms.bt_539_lot:
+  INFO: 11602
+ted_and_doffin_to_ocds.converters.eforms.bt_541_lot_weightnumber:
+  INFO: 9790
+ted_and_doffin_to_ocds.converters.eforms.bt_5421_lot:
+  INFO: 9940
+ted_and_doffin_to_ocds.converters.eforms.bt_734_lot:
+  INFO: 35675
+ted_and_doffin_to_ocds.converters.eforms.bt_744_lot:
+  INFO: 26006
+ted_and_doffin_to_ocds.converters.eforms.bt_40_lot:
+  INFO: 239
+ted_and_doffin_to_ocds.converters.eforms.bt_79_lot:
+  INFO: 191
+ted_and_doffin_to_ocds.converters.eforms.opt_201_organization_touchpoint:
+  INFO: 64
+ted_and_doffin_to_ocds.converters.eforms.bt_75_lot:
+  INFO: 488
+ted_and_doffin_to_ocds.converters.eforms.bt_109_lot:
+  INFO: 123
+ted_and_doffin_to_ocds.converters.eforms.bt_16_organization_touchpoint:
+  INFO: 26
+ted_and_doffin_to_ocds.converters.eforms.bt_500_organization_touchpoint:
+  INFO: 26
+ted_and_doffin_to_ocds.converters.eforms.bt_769_lot:
+  INFO: 3427
+ted_and_doffin_to_ocds.converters.eforms.bt_71_part:
+  INFO: 4
+ted_and_doffin_to_ocds.converters.eforms.opt_030_procedure_sprovider:
+  INFO: 116
+ted_and_doffin_to_ocds.converters.eforms.opt_300_procedure_sprovider:
+  INFO: 116
+ted_and_doffin_to_ocds.converters.eforms.bt_736_part:
+  INFO: 4
+ted_and_doffin_to_ocds.converters.eforms.bt_632_lot:
+  INFO: 506
+ted_and_doffin_to_ocds.converters.eforms.bt_764_submissionelectroniccatalogue:
+  INFO: 12905
+ted_and_doffin_to_ocds.converters.eforms.bt_1311_lot:
+  INFO: 5695
+ted_and_doffin_to_ocds.converters.eforms.bt_67_exclusion_grounds:
+  INFO: 8039
+ted_and_doffin_to_ocds.converters.eforms.bt_719_notice:
+  INFO: 220
+ted_and_doffin_to_ocds.converters.eforms.bt_94_lot:
+  INFO: 12724
+ted_and_doffin_to_ocds.converters.eforms.bt_98_lot:
+  INFO: 13878
+ted_and_doffin_to_ocds.converters.eforms.bt_120_lot:
+  INFO: 595
+ted_and_doffin_to_ocds.converters.eforms.bt_130_lot:
+  INFO: 555
+ted_and_doffin_to_ocds.converters.eforms.bt_71_lot:
+  INFO: 221
+ted_and_doffin_to_ocds.converters.eforms.bt_133_lot:
+  INFO: 2235
+ted_and_doffin_to_ocds.converters.eforms.bt_134_lot:
+  INFO: 827
+ted_and_doffin_to_ocds.converters.eforms.bt_736_lot:
+  INFO: 341
+ted_and_doffin_to_ocds.converters.eforms.bt_106_procedure:
+  INFO: 12902
+ted_and_doffin_to_ocds.converters.eforms.bt_766_dynamicpurchasingsystem:
+  INFO: 959
+ted_and_doffin_to_ocds.converters.eforms.bt_95_lot:
+  INFO: 167
+ted_and_doffin_to_ocds.converters.eforms.bt_76_lot:
+  INFO: 87
+ted_and_doffin_to_ocds.converters.eforms.bt_77_lot:
+  INFO: 951
+ted_and_doffin_to_ocds.converters.eforms.bt_6140_lot:
+  INFO: 8
+ted_and_doffin_to_ocds.converters.eforms.bt_271_lot:
+  INFO: 1835
+ted_and_doffin_to_ocds.converters.eforms.bt_771_lot:
+  INFO: 1658
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_tendereval:
+  INFO: 2170
+ted_and_doffin_to_ocds.converters.eforms.bt_738_notice:
+  INFO: 30
+ted_and_doffin_to_ocds.converters.eforms.bt_717_lot:
+  INFO: 256
+ted_and_doffin_to_ocds.converters.eforms.bt_735_lot:
+  INFO: 229
+ted_and_doffin_to_ocds.converters.eforms.bt_805_lot:
+  INFO: 779
+ted_and_doffin_to_ocds.converters.eforms.bt_25_lot:
+  INFO: 204
+ted_and_doffin_to_ocds.converters.eforms.bt_541_lot_fixednumber:
+  INFO: 83
+ted_and_doffin_to_ocds.converters.eforms.bt_5422_lot:
+  INFO: 83
+ted_and_doffin_to_ocds.converters.eforms.bt_774_lot:
+  INFO: 367
+ted_and_doffin_to_ocds.converters.eforms.bt_772_lot:
+  INFO: 252
+ted_and_doffin_to_ocds.converters.eforms.bt_44_lot:
+  INFO: 20
+ted_and_doffin_to_ocds.converters.eforms.bt_644_lot_prize_value:
+  INFO: 20
+ted_and_doffin_to_ocds.converters.eforms.bt_502_organization_touchpoint:
+  INFO: 16
+ted_and_doffin_to_ocds.converters.eforms.bt_506_organization_touchpoint:
+  INFO: 14
+ted_and_doffin_to_ocds.converters.eforms.bt_510a_organization_touchpoint:
+  INFO: 32
+ted_and_doffin_to_ocds.converters.eforms.bt_510b_organization_touchpoint:
+  INFO: 32
+ted_and_doffin_to_ocds.converters.eforms.bt_510c_organization_touchpoint:
+  INFO: 32
+ted_and_doffin_to_ocds.converters.eforms.bt_513_organization_touchpoint:
+  INFO: 18
+ted_and_doffin_to_ocds.converters.eforms.bt_65_lot_subcontracting_obligation:
+  INFO: 44
+ted_and_doffin_to_ocds.converters.eforms.bt_651_lot_subcontracting_tender_indication:
+  INFO: 59
+ted_and_doffin_to_ocds.converters.eforms.bt_755_lot:
+  INFO: 6
+ted_and_doffin_to_ocds.converters.eforms.bt_776_lot:
+  INFO: 55
+ted_and_doffin_to_ocds.converters.eforms.bt_625_lot:
+  INFO: 70
+ted_and_doffin_to_ocds.converters.eforms.bt_752_lot_thresholdnumber:
+  ERROR: 99
+ted_and_doffin_to_ocds.converters.eforms.bt_752_lot_weightnumber:
+  ERROR: 99
+ted_and_doffin_to_ocds.converters.eforms.bt_732_lot:
+  INFO: 24
+ted_and_doffin_to_ocds.converters.eforms.bt_78_lot:
+  INFO: 9
+ted_and_doffin_to_ocds.converters.eforms.bt_543_lot:
+  INFO: 122
+ted_and_doffin_to_ocds.converters.eforms.bt_733_lot:
+  INFO: 450
+ted_and_doffin_to_ocds.converters.eforms.bt_7531_lot:
+  INFO: 64
+ted_and_doffin_to_ocds.converters.eforms.bt_111_lot:
+  INFO: 13
+ted_and_doffin_to_ocds.converters.eforms.bt_06_lot:
+  INFO: 30
+ted_and_doffin_to_ocds.converters.eforms.bt_777_lot:
+  INFO: 24
+ted_and_doffin_to_ocds.converters.eforms.bt_503_organization_touchpoint:
+  INFO: 15
+ted_and_doffin_to_ocds.converters.eforms.bt_45_lot:
+  INFO: 10
+ted_and_doffin_to_ocds.converters.eforms.bt_801_lot:
+  INFO: 387
+ted_and_doffin_to_ocds.converters.eforms.bt_505_organization_touchpoint:
+  INFO: 6
+ted_and_doffin_to_ocds.converters.eforms.bt_509_organization_touchpoint:
+  INFO: 4
+ted_and_doffin_to_ocds.converters.eforms.bt_42_lot:
+  INFO: 14
+ted_and_doffin_to_ocds.converters.eforms.bt_41_lot:
+  INFO: 15
+ted_and_doffin_to_ocds.converters.eforms.bt_122_lot:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_802_lot:
+  INFO: 162
+ted_and_doffin_to_ocds.converters.eforms.bt_775_lot:
+  INFO: 90
+ted_and_doffin_to_ocds.converters.eforms.bt_631_lot:
+  INFO: 2
+ted_and_doffin_to_ocds.converters.eforms.bt_123_lot:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_13713_lotresult:
+  INFO: 15091
+  WARNING: 2
+ted_and_doffin_to_ocds.converters.eforms.bt_13714_tender:
+  INFO: 9452
+  WARNING: 646
+ted_and_doffin_to_ocds.converters.eforms.bt_142_lotresult:
+  INFO: 11054
+ted_and_doffin_to_ocds.converters.eforms.bt_145_contract:
+  INFO: 14571
+ted_and_doffin_to_ocds.converters.eforms.bt_193_tender:
+  INFO: 9452
+ted_and_doffin_to_ocds.converters.eforms.bt_3202_contract:
+  INFO: 9515
+  WARNING: 126
+ted_and_doffin_to_ocds.converters.eforms.bt_720_tender:
+  INFO: 5966
+ted_and_doffin_to_ocds.converters.eforms.bt_721_contract_title:
+  INFO: 5163
+ted_and_doffin_to_ocds.converters.eforms.bt_759_lotresult:
+  INFO: 17391
+ted_and_doffin_to_ocds.converters.eforms.bt_760_lotresult:
+  INFO: 32249
+  WARNING: 12
+ted_and_doffin_to_ocds.converters.eforms.bt_773_tender:
+  INFO: 5586
+ted_and_doffin_to_ocds.converters.eforms.opt_322_lotresult:
+  INFO: 11619
+ted_and_doffin_to_ocds.converters.eforms.opt_310_tender:
+  INFO: 9644
+ted_and_doffin_to_ocds.converters.eforms.opt_315_lotresult:
+  INFO: 9556
+ted_and_doffin_to_ocds.converters.eforms.opt_316_contract:
+  INFO: 9557
+ted_and_doffin_to_ocds.converters.eforms.opt_320_lotresult:
+  INFO: 9643
+ted_and_doffin_to_ocds.converters.eforms.opt_321_tender:
+  INFO: 9644
+ted_and_doffin_to_ocds.converters.eforms.bt_165_organization_company:
+  INFO: 2939
+ted_and_doffin_to_ocds.converters.eforms.bt_144_lotresult:
+  INFO: 1321
+ted_and_doffin_to_ocds.converters.eforms.bt_150_contract:
+  INFO: 5178
+ted_and_doffin_to_ocds.converters.eforms.bt_660_lotresult:
+  INFO: 944
+ted_and_doffin_to_ocds.converters.eforms.bt_710_lotresult:
+  INFO: 409
+ted_and_doffin_to_ocds.converters.eforms.bt_711_lotresult:
+  INFO: 388
+ted_and_doffin_to_ocds.converters.eforms.opp_031_tender:
+  WARNING: 646
+ted_and_doffin_to_ocds.converters.eforms.opp_032_tender:
+  WARNING: 646
+ted_and_doffin_to_ocds.converters.eforms.opp_034_tender:
+  WARNING: 646
+ted_and_doffin_to_ocds.converters.eforms.bt_135_procedure:
+  INFO: 742
+ted_and_doffin_to_ocds.converters.eforms.bt_136_procedure:
+  INFO: 807
+ted_and_doffin_to_ocds.converters.eforms.opt_170_tenderer_leader:
+  INFO: 119
+ted_and_doffin_to_ocds.converters.eforms.bt_553_tender:
+  INFO: 10
+ted_and_doffin_to_ocds.converters.eforms.bt_554_tender:
+  INFO: 41
+ted_and_doffin_to_ocds.converters.eforms.bt_756_procedure:
+  INFO: 1394
+ted_and_doffin_to_ocds.converters.eforms.bt_555_tender:
+  INFO: 15
+ted_and_doffin_to_ocds.converters.eforms.opt_300_contract_signatory:
+  INFO: 1584
+ted_and_doffin_to_ocds.converters.eforms.bt_1711_tender:
+  INFO: 638
+ted_and_doffin_to_ocds.converters.eforms.bt_746_organization:
+  INFO: 1199
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lotresult_financing:
+  INFO: 535
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lotresult_paying:
+  INFO: 456
+ted_and_doffin_to_ocds.converters.eforms.opp_090_procedure:
+  INFO: 5598
+ted_and_doffin_to_ocds.converters.eforms.bt_709_lotresult:
+  INFO: 345
+ted_and_doffin_to_ocds.converters.eforms.bt_151_contract:
+  INFO: 8
+ted_and_doffin_to_ocds.converters.eforms.opt_301_tenderer_subcont:
+  INFO: 202
+ted_and_doffin_to_ocds.converters.eforms.opt_301_tenderer_maincont:
+  INFO: 167
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_105_procedure:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_171_tender:
+  INFO: 142
+ted_and_doffin_to_ocds.converters.eforms.bt_196_bt_105_procedure:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_197_bt_105_procedure:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_198_bt_105_procedure:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_510b_ubo:
+  INFO: 239
+ted_and_doffin_to_ocds.converters.eforms.opt_202_ubo:
+  INFO: 21
+ted_and_doffin_to_ocds.converters.eforms.opt_302_organization:
+  INFO: 21
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_710_lotresult:
+  INFO: 2
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_711_lotresult:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_720_tender:
+  INFO: 6
+ted_and_doffin_to_ocds.converters.eforms.bt_196_bt_720_tender:
+  INFO: 3
+ted_and_doffin_to_ocds.converters.eforms.bt_735_lotresult:
+  INFO: 66
+ted_and_doffin_to_ocds.converters.eforms.bt_196_bt_710_lotresult:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_142_lotresult:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_759_lotresult:
+  INFO: 3
+ted_and_doffin_to_ocds.converters.eforms.bt_196_bt_759_lotresult:
+  INFO: 2
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_660_lotresult:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_709_lotresult:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_196_bt_660_lotresult:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_196_bt_709_lotresult:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_760_lotresult:
+  INFO: 2
+ted_and_doffin_to_ocds.converters.eforms.bt_196_bt_760_lotresult:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_500_ubo:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_510a_ubo:
+  INFO: 13
+ted_and_doffin_to_ocds.converters.eforms.bt_510c_ubo:
+  INFO: 12
+ted_and_doffin_to_ocds.converters.eforms.bt_512_ubo:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_513_ubo:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_514_ubo:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.opt_160_ubo_firstname:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_773_tender:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_196_bt_773_tender:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_1252_procedure:
+  INFO: 2
