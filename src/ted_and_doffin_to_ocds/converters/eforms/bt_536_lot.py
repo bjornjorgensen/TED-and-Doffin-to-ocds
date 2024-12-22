@@ -60,7 +60,6 @@ def parse_lot_start_date(xml_content: str | bytes) -> dict[str, Any] | None:
         )
 
         logger.info("Processing lot %s", lot_id)
-        logger.info("Start date found: %s", date_to_start)
 
         if date_to_start:
             try:
@@ -76,7 +75,6 @@ def parse_lot_start_date(xml_content: str | bytes) -> dict[str, Any] | None:
         else:
             logger.warning("No start date found for lot %s", lot_id)
 
-    logger.info("Final result: %s", result)
     return result if result["tender"]["lots"] else None
 
 
@@ -93,8 +91,6 @@ def merge_lot_start_date(
         None - modifies release_json in place
 
     """
-    logger.info("Starting merge_lot_start_date function")
-    logger.info("Merging lot start date data: %s", lot_start_date_data)
     if not lot_start_date_data:
         logger.warning("No lot start date data to merge")
         return
@@ -115,5 +111,3 @@ def merge_lot_start_date(
         else:
             existing_lots.append(new_lot)
             logger.info("Added new lot: %s", new_lot)
-
-    logger.info("Final release_json after merge: %s", release_json)
