@@ -1,7 +1,7 @@
 {
   "id": "74f8c72a-5dcd-4a77-afda-6573ca30c8df",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1595ee90-81d3-4186-b1bc-38eac5f45a8c",
+  "ocid": "ocds-abcd1234-ac5bea52-7dba-44dc-894e-434ee2d0906e",
   "tender": {
     "legalBasis": {
       "id": "Konsesjonsforskriften",
@@ -362,9 +362,9 @@
         "locality": "Stjørdal"
       },
       "roles": [
-        "leadBuyer",
         "processContactPoint",
-        "buyer"
+        "buyer",
+        "leadBuyer"
       ]
     },
     {

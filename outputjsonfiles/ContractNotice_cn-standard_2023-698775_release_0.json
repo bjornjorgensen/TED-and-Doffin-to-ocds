@@ -1,7 +1,7 @@
 {
   "id": "2023-698775",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4b75679b-784a-4d78-9cd4-91d0bfd01b7f",
+  "ocid": "ocds-abcd1234-1ae1b904-4d74-4eec-bcf8-818ccb62d752",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -168,8 +168,8 @@
       },
       "roles": [
         "processContactPoint",
-        "submissionReceiptBody",
-        "buyer"
+        "buyer",
+        "submissionReceiptBody"
       ],
       "address": {
         "streetAddress": "Meierigata 17",

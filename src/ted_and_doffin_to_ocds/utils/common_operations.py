@@ -34,6 +34,7 @@ class NoticeProcessor:
         self._db_path = db_path or "notices.db"
         self._tracker = None
         self.xml_processor = XMLProcessor()
+        self.logger = logging.getLogger(__name__)
 
     @property
     def tracker(self) -> NoticeTracker:
