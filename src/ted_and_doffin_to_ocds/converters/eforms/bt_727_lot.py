@@ -95,12 +95,6 @@ def merge_lot_place_performance(
     Args:
         release_json: Main OCDS release JSON to update
         lot_place_performance_data: Place performance data to merge, can be None
-
-    Note:
-        - Updates release_json in-place
-        - Handles duplicate locations by checking existing descriptions
-        - Creates tender.items array if needed
-
     """
     if not lot_place_performance_data:
         logger.warning("No lot place of performance data to merge")
@@ -112,35 +106,41 @@ def merge_lot_place_performance(
         release_json["tender"]["items"] = []
 
     for new_item in lot_place_performance_data["tender"]["items"]:
-        existing_item = next(
-            (
-                item
-                for item in release_json["tender"]["items"]
-                if item["relatedLot"] == new_item["relatedLot"]
-            ),
-            None,
-        )
-        if existing_item:
-            if "deliveryLocations" not in existing_item:
-                existing_item["deliveryLocations"] = []
-            for new_location in new_item["deliveryLocations"]:
-                existing_location = next(
-                    (
-                        loc
-                        for loc in existing_item["deliveryLocations"]
-                        if loc.get("description") == new_location["description"]
-                    ),
-                    None,
-                )
-                if existing_location:
-                    # If the location already exists, we don't need to do anything
-                    pass
-                else:
-                    existing_item["deliveryLocations"].append(new_location)
-        else:
-            release_json["tender"]["items"].append(new_item)
+        if "relatedLot" not in new_item:
+            logger.warning("Skipping item without relatedLot: %s", new_item)
+            continue
+
+        try:
+            existing_item = next(
+                (
+                    item
+                    for item in release_json["tender"]["items"]
+                    if "relatedLot" in item
+                    and item["relatedLot"] == new_item["relatedLot"]
+                ),
+                None,
+            )
+            if existing_item:
+                if "deliveryLocations" not in existing_item:
+                    existing_item["deliveryLocations"] = []
+                for new_location in new_item["deliveryLocations"]:
+                    existing_location = next(
+                        (
+                            loc
+                            for loc in existing_item["deliveryLocations"]
+                            if loc.get("description") == new_location["description"]
+                        ),
+                        None,
+                    )
+                    if not existing_location:
+                        existing_item["deliveryLocations"].append(new_location)
+            else:
+                release_json["tender"]["items"].append(new_item)
+
+        except KeyError:
+            logger.exception("KeyError encountered while merging lot data")
 
     logger.info(
-        "Merged place of performance data for %d lots",
+        "Merged place performance data for %d lots",
         len(lot_place_performance_data["tender"]["items"]),
     )

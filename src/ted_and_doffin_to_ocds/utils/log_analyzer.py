@@ -441,7 +441,7 @@ def analyze_logs(log_file: Path) -> None:
     with (reports_dir / f"detailed_statistics_{timestamp}.txt").open("w") as f:
         f.write(analyzer.generate_report())
 
-    print(
+    print(  # noqa: T201
         f"Reports have been written to the 'reports' directory with timestamp {timestamp}"
     )
 

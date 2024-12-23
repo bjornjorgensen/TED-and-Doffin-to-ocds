@@ -1,7 +1,7 @@
 {
   "id": "65ffd92d-8eee-4787-a7fe-925106611edc",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4f845380-2eab-494d-85b7-60f0a3951ded",
+  "ocid": "ocds-abcd1234-c3dd48df-6928-4589-a14a-c51598d7e030",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -55,8 +55,7 @@
         "deliveryAddresses": [
           {
             "region": "NO0A2",
-            "streetAddress": "Askedalen 2",
-            "locality": "Leikanger"
+            "streetAddress": "Askedalen 2"
           },
           {
             "postalCode": "6863"
@@ -284,6 +283,17 @@
         "TEN-0001"
       ],
       "title": "Drift av kantine på Leikanger-Iss Facility Services AS"
+    }
+  ],
+  "deliveryAddresses": [
+    {
+      "id": "1",
+      "relatedLot": "LOT-0000",
+      "deliveryAddresses": [
+        {
+          "locality": "Leikanger"
+        }
+      ]
     }
   ],
   "language": "no",

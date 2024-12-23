@@ -92,27 +92,23 @@ def merge_place_performance_city(
         logger.warning("No Place Performance City data to merge")
         return
 
-    tender_items = release_json.setdefault("tender", {}).setdefault("items", [])
-
     for new_item in place_performance_city_data["tender"]["items"]:
-        existing_item = next(
-            (
+        try:
+            existing_item = next(
                 item
-                for item in tender_items
-                if item["relatedLot"] == new_item["relatedLot"]
-            ),
-            None,
-        )
-
-        if existing_item:
-            existing_addresses = existing_item.setdefault("deliveryAddresses", [])
-            for new_address in new_item["deliveryAddresses"]:
-                if existing_addresses:
-                    existing_addresses[0].update(new_address)
-                else:
-                    existing_addresses.append(new_address)
-        else:
-            tender_items.append(new_item)
+                for item in release_json.get("deliveryAddresses", [])
+                if item.get("relatedLot") == new_item.get("relatedLot")
+            )
+            # Update existing item
+            existing_item.update(new_item)
+        except StopIteration:
+            # Add new item if no match found
+            if "deliveryAddresses" not in release_json:
+                release_json["deliveryAddresses"] = []
+            release_json["deliveryAddresses"].append(new_item)
+        except Exception:
+            logger.exception("Error processing BT-5131 (Place Performance City) data")
+            raise
 
     logger.info(
         "Merged Place Performance City data for %d items",

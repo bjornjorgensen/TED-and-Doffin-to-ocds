@@ -68,8 +68,9 @@ def parse_notice_dispatch_date_time(xml_content: str | bytes) -> str | None:
 def convert_to_iso_format(date_string: str, time_string: str) -> str:
     """Convert date and time strings to ISO format.
 
-    Combines separate date (YYYY-MM-DD) and time (HH:MM:SS) strings into
-    a single ISO formatted datetime string.
+    Combines separate date (YYYY-MM-DD[+/-]TZ) and time (HH:MM:SS[+/-]TZ) strings into
+    a single ISO formatted datetime string. If both date and time have timezone info,
+    the timezone from the time string takes precedence.
 
     Args:
         date_string: Date in YYYY-MM-DD format, may include timezone
@@ -83,8 +84,10 @@ def convert_to_iso_format(date_string: str, time_string: str) -> str:
 
     """
     try:
-        # Remove timezone if present in date
-        clean_date = date_string.split("+")[0]
+        # Remove timezone from date if present to avoid conflicts
+        clean_date = date_string.split("+")[0].split("-")[:3]
+        clean_date = "-".join(clean_date)
+
         # Combine date and time
         datetime_string = f"{clean_date}T{time_string}"
         # Parse and validate the datetime

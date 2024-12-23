@@ -84,30 +84,40 @@ def merge_place_performance_country_subdivision(
     tender = release_json.setdefault("tender", {})
     existing_items = tender.setdefault("items", [])
 
-    # Update or add delivery addresses to matching items
     for new_item in subdivision_data["tender"]["items"]:
-        existing_item = next(
-            (
-                item
-                for item in existing_items
-                if item["relatedLot"] == new_item["relatedLot"]
-            ),
-            None,
-        )
+        if "relatedLot" not in new_item:
+            logger.warning("Skipping item without relatedLot: %s", new_item)
+            continue
 
-        if existing_item:
-            existing_addresses = existing_item.setdefault("deliveryAddresses", [])
-            for new_address in new_item["deliveryAddresses"]:
-                # Find address without region or add new one
-                existing_address = next(
-                    (addr for addr in existing_addresses if "region" not in addr), None
-                )
-                if existing_address:
-                    existing_address["region"] = new_address["region"]
-                else:
-                    existing_addresses.append(new_address)
-        else:
-            existing_items.append(new_item)
+        try:
+            existing_item = next(
+                (
+                    item
+                    for item in existing_items
+                    if "relatedLot" in item
+                    and item["relatedLot"] == new_item["relatedLot"]
+                ),
+                None,
+            )
+
+            if existing_item:
+                existing_addresses = existing_item.setdefault("deliveryAddresses", [])
+                for new_address in new_item["deliveryAddresses"]:
+                    # Find address without region or add new one
+                    existing_address = next(
+                        (addr for addr in existing_addresses if "region" not in addr),
+                        None,
+                    )
+                    if existing_address:
+                        existing_address["region"] = new_address["region"]
+                    else:
+                        existing_addresses.append(new_address)
+            else:
+                existing_items.append(new_item)
+
+        except (IndexError, AttributeError) as e:
+            logger.warning("Skipping item due to error: %s", e)
+            continue
 
     logger.info(
         "Merged place performance country subdivision data for %d items",

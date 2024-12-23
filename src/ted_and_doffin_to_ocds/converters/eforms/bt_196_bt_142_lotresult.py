@@ -1,6 +1,7 @@
 # converters/bt_196_bt_142_LotResult.py
 
 import logging
+from typing import Any
 
 from lxml import etree
 
@@ -9,67 +10,58 @@ logger = logging.getLogger(__name__)
 
 def parse_bt196_bt142_unpublished_justification(
     xml_content: str | bytes,
-) -> dict | None:
-    """Parse the XML content to extract winner choice justification unpublished justification.
-
-    Processes XML content to find unpublished justification related to lot result winner choice
-    and creates a structured dictionary containing withheld information.
-
-    Args:
-        xml_content: The XML content to parse, either as string or bytes.
-
-    Returns:
-        Optional[Dict]: A dictionary containing withheld information with structure:
-            {
-                "withheldInformation": [
-                    {
-                        "id": str,
-                        "rationale": str
-                    }
-                ]
-            }
-        Returns None if no relevant data is found.
-
-    """
+) -> dict[str, Any] | None:
+    """Parse unpublished justification data from XML content."""
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
 
-    xpath_query = (
-        "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
-        "/efext:EformsExtension/efac:NoticeResult/efac:LotResult"
-        "/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='win-cho']"
-    )
-
-    result = {"withheldInformation": []}
-    fields_privacy = root.xpath(xpath_query, namespaces=namespaces)
-
-    for privacy in fields_privacy:
-        lot_id = privacy.xpath(
-            "ancestor::efac:LotResult/cbc:ID/text()", namespaces=namespaces
-        )[0]
-        reason = privacy.xpath("efbc:ReasonDescription/text()", namespaces=namespaces)[
-            0
-        ]
-        field_id = privacy.xpath(
-            "efbc:FieldIdentifierCode/text()", namespaces=namespaces
-        )[0]
-
-        withheld_info = {
-            "id": f"{field_id}-{lot_id}",
-            "rationale": reason,
+    try:
+        root = etree.fromstring(xml_content)
+        namespaces = {
+            "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+            "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
         }
-        result["withheldInformation"].append(withheld_info)
 
-    return result if result["withheldInformation"] else None
+        result = {"awards": []}
+
+        privacies = root.xpath("//efac:FieldsPrivacy", namespaces=namespaces)
+
+        for privacy in privacies:
+            try:
+                reasons = privacy.xpath(
+                    "efbc:ReasonDescription/text()", namespaces=namespaces
+                )
+                if not reasons:
+                    logger.debug("No reason description found in privacy element")
+                    continue
+
+                reason = reasons[0]
+                reason_codes = privacy.xpath(
+                    "efbc:ReasonCode/text()", namespaces=namespaces
+                )
+                if not reason_codes:
+                    logger.debug(
+                        "No reason code found for privacy element with reason: %s",
+                        reason,
+                    )
+                    continue
+
+                result["awards"].append(
+                    {
+                        "id": str(len(result["awards"]) + 1),
+                        "justification": {"description": reason, "id": reason_codes[0]},
+                    }
+                )
+
+            except (IndexError, AttributeError) as e:
+                logger.warning("Error processing privacy element: %s", e)
+                continue
+
+        return result if result["awards"] else None
+
+    except Exception:
+        logger.exception("Error parsing unpublished justification data")
+        return None
 
 
 def merge_bt196_bt142_unpublished_justification(

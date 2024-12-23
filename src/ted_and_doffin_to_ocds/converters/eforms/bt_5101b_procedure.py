@@ -1,5 +1,6 @@
 # converters/bt_5101b_procedure.py
 
+import logging
 from typing import Any
 
 from lxml import etree
@@ -8,62 +9,62 @@ from lxml import etree
 def parse_procedure_place_performance_streetline1(
     xml_content: str | bytes,
 ) -> dict[str, Any] | None:
-    """Parse the street address information from XML for place of performance.
+    """Parse BT-5101(b) street address information for place of performance.
 
-    Extracts street address components from RealizedLocation/Address elements and combines them
-    in the order: StreetName, AdditionalStreetName, AddressLine.
+    Combines StreetName, AdditionalStreetName and AddressLine values in order,
+    separated by comma and space.
 
     Args:
-        xml_content: XML content as string or bytes containing procurement data
+        xml_content: XML content containing procurement data
 
     Returns:
-        Dictionary containing tender delivery addresses or None if no addresses found
-
+        Dictionary with tender delivery addresses or None if no valid addresses
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
+
     root = etree.fromstring(xml_content)
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
     result = {"tender": {"deliveryAddresses": []}}
 
     realized_locations = root.xpath(
-        "//cac:ProcurementProject/cac:RealizedLocation",
-        namespaces=namespaces,
+        "//cac:ProcurementProject/cac:RealizedLocation", namespaces=namespaces
     )
 
     for location in realized_locations:
-        address = location.xpath("cac:Address", namespaces=namespaces)[0]
+        address_elements = location.xpath("cac:Address", namespaces=namespaces)
+        if not address_elements:
+            logging.warning(
+                "No Address element found in RealizedLocation for BT-5101(b)"
+            )
+            continue
+
+        address = address_elements[0]
+
+        # Get all address components in required order
+        components = []
+
         street_name = address.xpath("cbc:StreetName/text()", namespaces=namespaces)
-        additional_street_name = address.xpath(
-            "cbc:AdditionalStreetName/text()",
-            namespaces=namespaces,
-        )
-        address_lines = address.xpath(
-            "cac:AddressLine/cbc:Line/text()",
-            namespaces=namespaces,
-        )
-
-        street_address_parts = []
-        # Ensure correct order and handle empty components
         if street_name:
-            street_address_parts.append(street_name[0])
-        if additional_street_name:
-            street_address_parts.append(additional_street_name[0])
-        if address_lines:
-            street_address_parts.extend(address_lines)
+            components.append(street_name[0].strip())
 
-        # Join with comma and space as specified
-        street_address = ", ".join(filter(None, street_address_parts))
+        additional_street = address.xpath(
+            "cbc:AdditionalStreetName/text()", namespaces=namespaces
+        )
+        if additional_street:
+            components.append(additional_street[0].strip())
 
-        if street_address:  # Only add if there's actual content
+        address_lines = address.xpath(
+            "cac:AddressLine/cbc:Line/text()", namespaces=namespaces
+        )
+        components.extend(line.strip() for line in address_lines if line.strip())
+
+        if components:  # Only create address if we have components
+            street_address = ", ".join(components)
             result["tender"]["deliveryAddresses"].append(
                 {"streetAddress": street_address}
             )

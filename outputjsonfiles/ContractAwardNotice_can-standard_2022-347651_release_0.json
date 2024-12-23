@@ -1,7 +1,7 @@
 {
   "id": "2022-347651",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-878c677a-730e-46aa-90cb-9c10c41f674b",
+  "ocid": "ocds-abcd1234-e20c1998-160c-495b-8cc5-60c26444a263",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -31,11 +31,11 @@
               "type": "quality",
               "numbers": [
                 {
-                  "number": 70.0,
+                  "number": "70",
                   "weight": "percentageExact"
                 },
                 {
-                  "number": 30.0
+                  "number": "30"
                 }
               ]
             },

@@ -1,7 +1,7 @@
 {
   "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e758d557-461c-4846-b19b-83cba5ae73c8",
+  "ocid": "ocds-abcd1234-958acb15-9d13-4520-9466-8a8de7d08fbd",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -80,8 +80,7 @@
         "deliveryAddresses": [
           {
             "region": "NO0A2",
-            "streetAddress": "Edvard Griegs Plass 1",
-            "locality": "Bergen"
+            "streetAddress": "Edvard Griegs Plass 1"
           },
           {
             "postalCode": "5015"
@@ -154,8 +153,8 @@
       "roles": [
         "payer",
         "processContactPoint",
-        "funder",
-        "buyer"
+        "buyer",
+        "funder"
       ]
     },
     {
@@ -282,6 +281,17 @@
         "TEN-0001"
       ],
       "awardID": "RES-0001"
+    }
+  ],
+  "deliveryAddresses": [
+    {
+      "id": "1",
+      "relatedLot": "LOT-0000",
+      "deliveryAddresses": [
+        {
+          "locality": "Bergen"
+        }
+      ]
     }
   ],
   "language": "no",

@@ -1,7 +1,7 @@
 {
   "id": "1db209a3-6934-4d5f-bf78-2aa8a1f2453c",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-faa41946-2ab1-4b49-bf3f-74ba24f50354",
+  "ocid": "ocds-abcd1234-6f979641-2176-4731-b8c8-1aae74f2cb36",
   "tag": [
     "tender"
   ],
@@ -69,8 +69,7 @@
         "deliveryAddresses": [
           {
             "region": "NO081",
-            "streetAddress": "Akersgata 64",
-            "locality": "Oslo"
+            "streetAddress": "Akersgata 64"
           },
           {
             "postalCode": "0180"
@@ -170,6 +169,17 @@
       },
       "roles": [
         "reviewBody"
+      ]
+    }
+  ],
+  "deliveryAddresses": [
+    {
+      "id": "1",
+      "relatedLot": "LOT-0000",
+      "deliveryAddresses": [
+        {
+          "locality": "Oslo"
+        }
       ]
     }
   ],

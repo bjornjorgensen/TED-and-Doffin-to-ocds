@@ -1,7 +1,7 @@
 {
   "id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7d094190-7f57-4a83-ba7a-731523d57b10",
+  "ocid": "ocds-abcd1234-06d9434c-6f51-4039-b443-7345e2163f9e",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -50,14 +50,14 @@
               "type": "price",
               "numbers": [
                 {
-                  "number": 1.0,
+                  "number": "1",
                   "weight": "pointsExact"
                 },
                 {
-                  "number": 2.0
+                  "number": "2"
                 },
                 {
-                  "number": 3.0
+                  "number": "3"
                 }
               ]
             },
@@ -182,8 +182,7 @@
         },
         "deliveryAddresses": [
           {
-            "region": "NO020",
-            "locality": "Gjøvik"
+            "region": "NO020"
           },
           {
             "country": "NO"
@@ -343,11 +342,11 @@
         "faxNumber": "+47 61176333"
       },
       "roles": [
-        "processContactPoint",
-        "submissionReceiptBody",
-        "evaluationBody",
+        "buyer",
         "reviewContactPoint",
-        "buyer"
+        "submissionReceiptBody",
+        "processContactPoint",
+        "evaluationBody"
       ],
       "address": {
         "streetAddress": "Kauffelds plass 1",
@@ -376,6 +375,17 @@
       "roles": [
         "mediationBody",
         "reviewBody"
+      ]
+    }
+  ],
+  "deliveryAddresses": [
+    {
+      "id": "1",
+      "relatedLot": "LOT-0000",
+      "deliveryAddresses": [
+        {
+          "locality": "Gjøvik"
+        }
       ]
     }
   ],

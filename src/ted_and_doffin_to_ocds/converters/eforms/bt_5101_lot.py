@@ -104,33 +104,43 @@ def merge_place_performance_street_lot(
     existing_items = tender.setdefault("items", [])
 
     for new_item in street_data["tender"]["items"]:
-        existing_item = next(
-            (
-                item
-                for item in existing_items
-                if item["relatedLot"] == new_item["relatedLot"]
-            ),
-            None,
-        )
+        if "relatedLot" not in new_item:
+            logger.warning("Skipping item without relatedLot: %s", new_item)
+            continue
 
-        if existing_item:
-            existing_addresses = existing_item.setdefault("deliveryAddresses", [])
-            for new_address in new_item["deliveryAddresses"]:
-                # Find address without street or add new one
-                existing_address = next(
-                    (
-                        addr
-                        for addr in existing_addresses
-                        if "streetAddress" not in addr
-                    ),
-                    None,
-                )
-                if existing_address:
-                    existing_address["streetAddress"] = new_address["streetAddress"]
-                else:
-                    existing_addresses.append(new_address)
-        else:
-            existing_items.append(new_item)
+        try:
+            existing_item = next(
+                (
+                    item
+                    for item in existing_items
+                    if "relatedLot" in item
+                    and item["relatedLot"] == new_item["relatedLot"]
+                ),
+                None,
+            )
+
+            if existing_item:
+                existing_addresses = existing_item.setdefault("deliveryAddresses", [])
+                for new_address in new_item["deliveryAddresses"]:
+                    # Find address without street or add new one
+                    existing_address = next(
+                        (
+                            addr
+                            for addr in existing_addresses
+                            if "streetAddress" not in addr
+                        ),
+                        None,
+                    )
+                    if existing_address:
+                        existing_address["streetAddress"] = new_address["streetAddress"]
+                    else:
+                        existing_addresses.append(new_address)
+            else:
+                existing_items.append(new_item)
+
+        except KeyError as e:
+            logger.warning("Error accessing relatedLot: %s", e)
+            continue
 
     logger.info(
         "Merged place performance street data for %d items",

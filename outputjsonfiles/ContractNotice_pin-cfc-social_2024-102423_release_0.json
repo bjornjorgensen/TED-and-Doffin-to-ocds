@@ -1,7 +1,7 @@
 {
   "id": "2c234234-aaec-4210-8cbe-1803ecaee901",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e7a36677-f6ba-4a56-b647-5ab01838c65c",
+  "ocid": "ocds-abcd1234-8660f63b-2f05-4232-804f-e010d1a495ff",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -85,8 +85,7 @@
         },
         "deliveryAddresses": [
           {
-            "region": "NO0A3",
-            "locality": "Ålesund"
+            "region": "NO0A3"
           },
           {
             "country": "NO"
@@ -172,6 +171,17 @@
       },
       "roles": [
         "reviewBody"
+      ]
+    }
+  ],
+  "deliveryAddresses": [
+    {
+      "id": "1",
+      "relatedLot": "LOT-0000",
+      "deliveryAddresses": [
+        {
+          "locality": "Ålesund"
+        }
       ]
     }
   ],

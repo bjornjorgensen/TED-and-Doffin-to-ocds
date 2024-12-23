@@ -12,6 +12,7 @@ NAMESPACES = {
     "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
     "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
     "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+    "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
 }
 
 
@@ -65,7 +66,7 @@ def parse_selection_criteria_weight_number(
         for lot in lots:
             lot_id = lot.xpath("cbc:ID/text()", namespaces=NAMESPACES)[0]
             criteria = lot.xpath(
-                ".//efac:SelectionCriteria/efac:CriterionParameter[efbc:ParameterCode/@listName='number-weight']",
+                ".//cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria/efac:CriterionParameter[efbc:ParameterCode/@listName='number-weight']",
                 namespaces=NAMESPACES,
             )
 

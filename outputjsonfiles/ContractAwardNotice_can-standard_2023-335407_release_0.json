@@ -1,7 +1,7 @@
 {
   "id": "2023-335407",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a52084f0-c77d-4490-8cd9-dd0c42794003",
+  "ocid": "ocds-abcd1234-937d8da7-6837-486a-9d91-858894ca3688",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -31,11 +31,11 @@
               "type": "quality",
               "numbers": [
                 {
-                  "number": 80.0,
+                  "number": "80",
                   "weight": "percentageExact"
                 },
                 {
-                  "number": 20.0
+                  "number": "20"
                 }
               ]
             },

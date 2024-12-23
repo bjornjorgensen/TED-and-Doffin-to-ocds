@@ -71,40 +71,46 @@ def parse_employment_legislation_url(
 
 
 def merge_employment_legislation_url(
-    release_json: dict[str, Any], empl_legislation_data: dict[str, Any] | None
+    release_json: dict[str, Any], empl_url_data: dict[str, Any] | None
 ) -> None:
-    """Merge employment legislation URL data into the release JSON.
-
-    Args:
-        release_json: The target release JSON to merge data into
-        empl_legislation_data: Employment legislation data containing document URLs and related lots
-
-    Effects:
-        Updates the tender.documents section of release_json with new or updated
-        employment legislation document references, including related lots
-
-    """
-    if not empl_legislation_data:
-        logger.info("No employment legislation URL data to merge")
+    """Merge employment legislation URL information into the release JSON."""
+    if not empl_url_data:
+        logger.warning("No employment legislation URL data to merge")
         return
 
     tender = release_json.setdefault("tender", {})
     existing_docs = tender.setdefault("documents", [])
 
-    for new_doc in empl_legislation_data["tender"]["documents"]:
-        existing_doc = next(
-            (doc for doc in existing_docs if doc["id"] == new_doc["id"]), None
-        )
-        if existing_doc:
-            existing_doc["url"] = new_doc["url"]
-            existing_doc.setdefault("relatedLots", []).extend(new_doc["relatedLots"])
-            existing_doc["relatedLots"] = list(
-                set(existing_doc["relatedLots"])
-            )  # Remove duplicates
-        else:
-            existing_docs.append(new_doc)
+    for new_doc in empl_url_data["tender"]["documents"]:
+        if "id" not in new_doc:
+            logger.warning("Skipping document without id: %s", new_doc)
+            continue
+
+        try:
+            existing_doc = next(
+                (
+                    doc
+                    for doc in existing_docs
+                    if "id" in doc and doc["id"] == new_doc["id"]
+                ),
+                None,
+            )
+            if existing_doc:
+                if "url" in new_doc:
+                    existing_doc["url"] = new_doc["url"]
+                if "relatedLots" in new_doc:
+                    existing_lots = existing_doc.setdefault("relatedLots", [])
+                    for lot_id in new_doc["relatedLots"]:
+                        if lot_id not in existing_lots:
+                            existing_lots.append(lot_id)
+            else:
+                existing_docs.append(new_doc)
+
+        except KeyError as e:
+            logger.warning("Error accessing document data: %s", e)
+            continue
 
     logger.info(
-        "Merged employment legislation URL data for %d documents",
-        len(empl_legislation_data["tender"]["documents"]),
+        "Merged employment legislation URLs for %d documents",
+        len(empl_url_data["tender"]["documents"]),
     )

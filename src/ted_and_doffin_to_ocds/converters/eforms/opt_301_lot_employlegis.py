@@ -91,21 +91,59 @@ def parse_employment_legislation_org(
     return result if (result["parties"] or result["tender"]["documents"]) else None
 
 
+def _merge_party(parties: list, new_party: dict) -> None:
+    """Helper to merge a single party."""
+    if "id" not in new_party:
+        logger.warning("Skipping party without id: %s", new_party)
+        return
+
+    try:
+        existing_party = next(
+            (
+                party
+                for party in parties
+                if "id" in party and party["id"] == new_party["id"]
+            ),
+            None,
+        )
+        if existing_party:
+            existing_roles = set(existing_party.get("roles", []))
+            existing_roles.update(new_party.get("roles", []))
+            existing_party["roles"] = list(existing_roles)
+        else:
+            parties.append(new_party)
+    except KeyError as e:
+        logger.warning("Error accessing party data: %s", e)
+
+
+def _merge_document(tender_docs: list, new_doc: dict) -> None:
+    """Helper to merge a single document."""
+    if "id" not in new_doc:
+        logger.warning("Skipping document without id: %s", new_doc)
+        return
+
+    try:
+        existing_doc = next(
+            (doc for doc in tender_docs if "id" in doc and doc["id"] == new_doc["id"]),
+            None,
+        )
+        if existing_doc:
+            if "publisher" in new_doc:
+                existing_doc["publisher"] = new_doc["publisher"]
+            if "relatedLots" in new_doc:
+                existing_lots = set(existing_doc.get("relatedLots", []))
+                existing_lots.update(new_doc["relatedLots"])
+                existing_doc["relatedLots"] = list(existing_lots)
+        else:
+            tender_docs.append(new_doc)
+    except KeyError as e:
+        logger.warning("Error accessing document data: %s", e)
+
+
 def merge_employment_legislation_org(
     release_json: dict[str, Any], empl_legis_data: dict[str, Any] | None
 ) -> None:
-    """Merge employment legislation organization data into the release JSON.
-
-    Args:
-        release_json: Target release JSON to update
-        empl_legis_data: Employment legislation data containing organizations and documents
-
-    Effects:
-        - Updates parties with informationService roles
-        - Updates documents with publisher and lot references
-        - Maintains existing data while adding new information
-
-    """
+    """Merge employment legislation organization data into the release JSON."""
     if not empl_legis_data:
         logger.info(
             "No Employment Legislation Organization Technical Identifier Reference data to merge"
@@ -115,27 +153,13 @@ def merge_employment_legislation_org(
     parties = release_json.setdefault("parties", [])
     tender_docs = release_json.setdefault("tender", {}).setdefault("documents", [])
 
+    # Handle parties
     for new_party in empl_legis_data.get("parties", []):
-        existing_party = next(
-            (party for party in parties if party["id"] == new_party["id"]), None
-        )
-        if existing_party:
-            existing_roles = set(existing_party.get("roles", []))
-            existing_roles.update(new_party["roles"])
-            existing_party["roles"] = list(existing_roles)
-        else:
-            parties.append(new_party)
+        _merge_party(parties, new_party)
 
+    # Handle documents
     for new_doc in empl_legis_data.get("tender", {}).get("documents", []):
-        existing_doc = next(
-            (doc for doc in tender_docs if doc["id"] == new_doc["id"]), None
-        )
-        if existing_doc:
-            existing_doc["publisher"] = new_doc["publisher"]
-            existing_doc.setdefault("relatedLots", []).extend(new_doc["relatedLots"])
-            existing_doc["relatedLots"] = list(set(existing_doc["relatedLots"]))
-        else:
-            tender_docs.append(new_doc)
+        _merge_document(tender_docs, new_doc)
 
     logger.info(
         "Merged Employment Legislation Organization Technical Identifier Reference data for %s parties and %s documents",

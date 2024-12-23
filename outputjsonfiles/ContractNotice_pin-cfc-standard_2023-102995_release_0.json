@@ -1,7 +1,7 @@
 {
   "id": "e5c8b25e-859d-492a-9085-716017f267aa",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-21f418f9-b753-474e-b53d-a68bcb7c223b",
+  "ocid": "ocds-abcd1234-91376b7f-f1e6-47b5-8f28-f313b053f9f7",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -107,8 +107,7 @@
         },
         "deliveryAddresses": [
           {
-            "streetAddress": "Yumishima island, EXPO2025",
-            "locality": "Osaka"
+            "streetAddress": "Yumishima island, EXPO2025"
           },
           {
             "country": "JPN"
@@ -312,6 +311,17 @@
       },
       "roles": [
         "reviewBody"
+      ]
+    }
+  ],
+  "deliveryAddresses": [
+    {
+      "id": "1",
+      "relatedLot": "LOT-0000",
+      "deliveryAddresses": [
+        {
+          "locality": "Osaka"
+        }
       ]
     }
   ],

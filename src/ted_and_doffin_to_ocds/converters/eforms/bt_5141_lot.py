@@ -175,21 +175,31 @@ def merge_lot_country(
     existing_items = tender.setdefault("items", [])
 
     for new_item in lot_country_data["tender"]["items"]:
-        existing_item = next(
-            (
-                item
-                for item in existing_items
-                if item["relatedLot"] == new_item["relatedLot"]
-            ),
-            None,
-        )
-        if existing_item:
-            existing_addresses = existing_item.setdefault("deliveryAddresses", [])
-            for new_address in new_item["deliveryAddresses"]:
-                if new_address not in existing_addresses:
-                    existing_addresses.append(new_address)
-        else:
-            existing_items.append(new_item)
+        if "relatedLot" not in new_item:
+            logger.warning("Skipping item without relatedLot: %s", new_item)
+            continue
+
+        try:
+            existing_item = next(
+                (
+                    item
+                    for item in existing_items
+                    if "relatedLot" in item
+                    and item["relatedLot"] == new_item["relatedLot"]
+                ),
+                None,
+            )
+            if existing_item:
+                existing_addresses = existing_item.setdefault("deliveryAddresses", [])
+                for new_address in new_item["deliveryAddresses"]:
+                    if new_address not in existing_addresses:
+                        existing_addresses.append(new_address)
+            else:
+                existing_items.append(new_item)
+
+        except KeyError as e:
+            logger.warning("Error accessing relatedLot: %s", e)
+            continue
 
     logger.info(
         "Merged Lot Country data for %d items", len(lot_country_data["tender"]["items"])

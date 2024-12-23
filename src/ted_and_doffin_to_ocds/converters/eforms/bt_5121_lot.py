@@ -65,19 +65,7 @@ def parse_place_performance_post_code(
 def merge_place_performance_post_code(
     release_json: dict[str, Any], post_code_data: dict[str, Any] | None
 ) -> None:
-    """Merge postal code data into the release JSON.
-
-    Updates or creates delivery addresses with postal code information for each lot.
-    Preserves existing address data while adding/updating postal codes.
-
-    Args:
-        release_json: The target release JSON to update
-        post_code_data: The source data containing postal codes to merge
-
-    Returns:
-        None
-
-    """
+    """Merge postal code data into the release JSON."""
     if not post_code_data:
         logger.warning("No Place Performance Post Code data to merge")
         return
@@ -85,31 +73,42 @@ def merge_place_performance_post_code(
     existing_items = release_json.setdefault("tender", {}).setdefault("items", [])
 
     for new_item in post_code_data["tender"]["items"]:
-        existing_item = next(
-            (
-                item
-                for item in existing_items
-                if item["relatedLot"] == new_item["relatedLot"]
-            ),
-            None,
-        )
-        if existing_item:
-            existing_addresses = existing_item.setdefault("deliveryAddresses", [])
-            for new_address in new_item["deliveryAddresses"]:
-                matching_address = next(
-                    (
-                        addr
-                        for addr in existing_addresses
-                        if addr.get("postalCode") == new_address["postalCode"]
-                    ),
-                    None,
-                )
-                if matching_address:
-                    matching_address.update(new_address)
-                else:
-                    existing_addresses.append(new_address)
-        else:
-            existing_items.append(new_item)
+        if "relatedLot" not in new_item:
+            logger.warning("Skipping item without relatedLot: %s", new_item)
+            continue
+
+        try:
+            existing_item = next(
+                (
+                    item
+                    for item in existing_items
+                    if "relatedLot" in item
+                    and item["relatedLot"] == new_item["relatedLot"]
+                ),
+                None,
+            )
+
+            if existing_item:
+                existing_addresses = existing_item.setdefault("deliveryAddresses", [])
+                for new_address in new_item["deliveryAddresses"]:
+                    matching_address = next(
+                        (
+                            addr
+                            for addr in existing_addresses
+                            if addr.get("postalCode") == new_address["postalCode"]
+                        ),
+                        None,
+                    )
+                    if matching_address:
+                        matching_address.update(new_address)
+                    else:
+                        existing_addresses.append(new_address)
+            else:
+                existing_items.append(new_item)
+
+        except KeyError as e:
+            logger.warning("Error accessing relatedLot: %s", e)
+            continue
 
     logger.info(
         "Merged Place Performance Post Code data for %d items",

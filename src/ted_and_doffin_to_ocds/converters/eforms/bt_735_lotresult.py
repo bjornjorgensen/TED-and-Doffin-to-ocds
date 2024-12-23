@@ -5,6 +5,7 @@ contract type information from eForms LotResult elements to OCDS award items.
 """
 
 import logging
+from typing import Any
 
 from lxml import etree
 
@@ -19,7 +20,7 @@ CVD_CONTRACT_TYPE_LABELS = {
 
 def parse_cvd_contract_type_lotresult(
     xml_content: str | bytes,
-) -> dict[str, list[dict[str, str | list[dict[str, str]]]]] | None:
+) -> dict[str, Any] | None:
     """Parse the CVD contract type for each LotResult into award items.
 
     This function extracts the contract type according to table 1 CVD from LotResult
@@ -55,49 +56,65 @@ def parse_cvd_contract_type_lotresult(
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
 
-    result = {"awards": []}
+    try:
+        root = etree.fromstring(xml_content)
+        namespaces = {
+            "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
+            "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+            "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+            "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+            "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+        }
 
-    lot_results = root.xpath("//efac:LotResult", namespaces=namespaces)
+        result = {"awards": []}
+        lot_results = root.xpath("//efac:LotResult", namespaces=namespaces)
 
-    for lot_result in lot_results:
-        lot_result_id = lot_result.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        cvd_code = lot_result.xpath(
-            "efac:StrategicProcurement/efac:StrategicProcurementInformation/efbc:ProcurementCategoryCode[@listName='cvd-contract-type']/text()",
-            namespaces=namespaces,
-        )
+        for lot_result in lot_results:
+            try:
+                lot_result_ids = lot_result.xpath(
+                    "cbc:ID/text()", namespaces=namespaces
+                )
+                if not lot_result_ids:
+                    logger.warning("Skipping lot result without ID")
+                    continue
 
-        if cvd_code:
-            cvd_code = cvd_code[0]
-            award_data = {
-                "id": lot_result_id,
-                "items": [
-                    {
-                        "id": "1",
-                        "additionalClassifications": [
+                lot_result_id = lot_result_ids[0]
+                cvd_code = lot_result.xpath(
+                    "efac:StrategicProcurement/efac:StrategicProcurementInformation/efbc:ProcurementCategoryCode[@listName='cvd-contract-type']/text()",
+                    namespaces=namespaces,
+                )
+
+                if cvd_code:
+                    cvd_code = cvd_code[0]
+                    award_data = {
+                        "id": lot_result_id,
+                        "items": [
                             {
-                                "id": cvd_code,
-                                "scheme": "eu-cvd-contract-type",
-                                "description": CVD_CONTRACT_TYPE_LABELS.get(
-                                    cvd_code, "Unknown CVD contract type"
-                                ),
+                                "id": "1",
+                                "additionalClassifications": [
+                                    {
+                                        "id": cvd_code,
+                                        "scheme": "eu-cvd-contract-type",
+                                        "description": CVD_CONTRACT_TYPE_LABELS.get(
+                                            cvd_code, "Unknown CVD contract type"
+                                        ),
+                                    }
+                                ],
                             }
                         ],
                     }
-                ],
-            }
-            result["awards"].append(award_data)
+                    result["awards"].append(award_data)
 
-    return result if result["awards"] else None
+            except (IndexError, AttributeError) as e:
+                logger.warning("Error processing lot result: %s", e)
+                continue
+
+        return result if result["awards"] else None
+
+    except Exception:
+        logger.exception("Error parsing CVD contract type from lot results")
+        return None
 
 
 def merge_cvd_contract_type_lotresult(

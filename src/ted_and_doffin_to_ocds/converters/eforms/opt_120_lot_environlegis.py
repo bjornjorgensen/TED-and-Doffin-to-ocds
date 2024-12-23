@@ -79,19 +79,7 @@ def parse_environmental_legislation_url(
 def merge_environmental_legislation_url(
     release_json: dict[str, Any], env_url_data: dict[str, Any] | None
 ) -> None:
-    """Merge environmental legislation URL information into the release JSON.
-
-    Updates or creates documents with URLs and lot references.
-    Preserves existing document data while adding/updating URLs.
-
-    Args:
-        release_json: The target release JSON to update
-        env_url_data: The source data containing URLs to merge
-
-    Returns:
-        None
-
-    """
+    """Merge environmental legislation URL information into the release JSON."""
     if not env_url_data:
         logger.warning("No environmental legislation URL data to merge")
         return
@@ -100,18 +88,33 @@ def merge_environmental_legislation_url(
     existing_documents = tender.setdefault("documents", [])
 
     for new_doc in env_url_data["tender"]["documents"]:
-        existing_doc = next(
-            (doc for doc in existing_documents if doc["id"] == new_doc["id"]),
-            None,
-        )
-        if existing_doc:
-            existing_doc["url"] = new_doc["url"]
-            existing_lots = existing_doc.setdefault("relatedLots", [])
-            for lot_id in new_doc["relatedLots"]:
-                if lot_id not in existing_lots:
-                    existing_lots.append(lot_id)
-        else:
-            existing_documents.append(new_doc)
+        if "id" not in new_doc:
+            logger.warning("Skipping document without id: %s", new_doc)
+            continue
+
+        try:
+            existing_doc = next(
+                (
+                    doc
+                    for doc in existing_documents
+                    if "id" in doc and doc["id"] == new_doc["id"]
+                ),
+                None,
+            )
+            if existing_doc:
+                if "url" in new_doc:
+                    existing_doc["url"] = new_doc["url"]
+                if "relatedLots" in new_doc:
+                    existing_lots = existing_doc.setdefault("relatedLots", [])
+                    for lot_id in new_doc["relatedLots"]:
+                        if lot_id not in existing_lots:
+                            existing_lots.append(lot_id)
+            else:
+                existing_documents.append(new_doc)
+
+        except KeyError as e:
+            logger.warning("Error accessing document data: %s", e)
+            continue
 
     logger.info(
         "Merged environmental legislation URLs for %d documents",

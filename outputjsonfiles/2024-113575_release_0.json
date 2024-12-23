@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-97d231f6-1e4e-4005-b841-9bbb9301a24d",
+  "ocid": "ocds-abcd1234-7c96530d-7022-499f-b0bf-3705501429e4",
   "tender": {
     "legalBasis": {
       "id": "FOA § 13-4 bokstav b annet punkt; «konkurranse er umulig av tekniske årsaker».",
@@ -92,8 +92,7 @@
         "deliveryAddresses": [
           {
             "region": "NO071",
-            "streetAddress": "Nordlandssykehuset HF, avd Bodø",
-            "locality": "Tromsø"
+            "streetAddress": "Nordlandssykehuset HF, avd Bodø"
           },
           {
             "region": "NO074",
@@ -195,8 +194,8 @@
       },
       "roles": [
         "payer",
-        "funder",
-        "buyer"
+        "buyer",
+        "funder"
       ]
     },
     {
@@ -223,8 +222,8 @@
       },
       "roles": [
         "processContactPoint",
-        "leadBuyer",
         "buyer",
+        "leadBuyer",
         "reviewContactPoint"
       ]
     },
@@ -347,6 +346,20 @@
         "TEN-0001"
       ],
       "title": "Første tilbud ifm direkteforhandlinger"
+    }
+  ],
+  "deliveryAddresses": [
+    {
+      "id": "1",
+      "relatedLot": "LOT-0000",
+      "deliveryAddresses": [
+        {
+          "locality": "Bodø"
+        },
+        {
+          "locality": "Tromsø"
+        }
+      ]
     }
   ],
   "language": "no",

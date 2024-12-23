@@ -16,6 +16,7 @@ def parse_award_criterion_weight_number(
 
     Returns:
         Dict containing the parsed award criterion weight number data in OCDS format, or None if no data found.
+        Note: Weight numbers are stored as strings to preserve original format (e.g. "50-60 %").
         Format:
         {
             "tender": {
@@ -73,7 +74,7 @@ def parse_award_criterion_weight_number(
                     "criteria": [
                         {
                             "numbers": [
-                                {"number": float(number)} for number in weight_numbers
+                                {"number": number.strip()} for number in weight_numbers
                             ],
                         },
                     ],

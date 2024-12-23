@@ -77,19 +77,7 @@ def parse_fiscal_legislation_document_id(
 def merge_fiscal_legislation_document_id(
     release_json: dict[str, Any], fiscal_doc_data: dict[str, Any] | None
 ) -> None:
-    """Merge fiscal legislation document ID information into the release JSON.
-
-    Updates or creates documents with document type and lot references.
-    Preserves existing document data while adding/updating references.
-
-    Args:
-        release_json: The target release JSON to update
-        fiscal_doc_data: The source data containing document IDs to merge
-
-    Returns:
-        None
-
-    """
+    """Merge fiscal legislation document ID information into the release JSON."""
     if not fiscal_doc_data:
         logger.warning("No fiscal legislation document ID data to merge")
         return
@@ -98,18 +86,32 @@ def merge_fiscal_legislation_document_id(
     existing_documents = tender.setdefault("documents", [])
 
     for new_doc in fiscal_doc_data["tender"]["documents"]:
-        existing_doc = next(
-            (doc for doc in existing_documents if doc["id"] == new_doc["id"]),
-            None,
-        )
-        if existing_doc:
-            existing_doc["documentType"] = "legislation"
-            existing_lots = existing_doc.setdefault("relatedLots", [])
-            for lot_id in new_doc["relatedLots"]:
-                if lot_id not in existing_lots:
-                    existing_lots.append(lot_id)
-        else:
-            existing_documents.append(new_doc)
+        if "id" not in new_doc:
+            logger.warning("Skipping document without id: %s", new_doc)
+            continue
+
+        try:
+            existing_doc = next(
+                (
+                    doc
+                    for doc in existing_documents
+                    if "id" in doc and doc["id"] == new_doc["id"]
+                ),
+                None,
+            )
+
+            if existing_doc:
+                existing_doc["documentType"] = "legislation"
+                existing_lots = existing_doc.setdefault("relatedLots", [])
+                for lot_id in new_doc.get("relatedLots", []):
+                    if lot_id not in existing_lots:
+                        existing_lots.append(lot_id)
+            else:
+                existing_documents.append(new_doc)
+
+        except KeyError as e:
+            logger.warning("Error accessing document data: %s", e)
+            continue
 
     logger.info(
         "Merged fiscal legislation document IDs for %d documents",

@@ -36,8 +36,11 @@ def parse_procedure_place_performance_streetline2(
     )
 
     for location in realized_locations:
-        address = location.xpath("cac:Address", namespaces=namespaces)[0]
+        address_elements = location.xpath("cac:Address", namespaces=namespaces)
+        if not address_elements:
+            continue
 
+        address = address_elements[0]
         street_address_parts = []
 
         # Collect address components in specified order
