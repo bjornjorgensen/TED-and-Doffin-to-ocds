@@ -161,8 +161,11 @@ class NoticeConverter:
         """Write JSON data to file."""
         self.logger.debug("Writing to output file: %s", output_file)
         with output_file.open("w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
+            json.dump(data, f, ensure_ascii=False)
         self.logger.debug("Successfully wrote release to file")
+
+
+# json.dump(data, f, ensure_ascii=False, indent=2)
 
 
 def configure_logging(level: str = "INFO") -> None:

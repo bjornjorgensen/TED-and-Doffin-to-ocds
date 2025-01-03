@@ -2,10 +2,23 @@ import multiprocessing as mp
 import os
 import re
 from collections import Counter, defaultdict
+from dataclasses import dataclass
 from datetime import UTC, datetime
 from itertools import islice
 from pathlib import Path
 from typing import Any
+
+
+@dataclass
+class LogContext:
+    """Context for processing log entries."""
+
+    entry: dict
+    timestamp: datetime
+    current_file: str
+    start_time: datetime
+    results: dict
+    patterns: dict
 
 
 def chunk_reader(file_path: Path, chunk_size: int = 10000) -> list[str]:
@@ -18,77 +31,120 @@ def chunk_reader(file_path: Path, chunk_size: int = 10000) -> list[str]:
             yield lines
 
 
+def _handle_error_lines(
+    error_lines: list[str], in_error: bool, in_exception: bool, results: dict
+) -> None:
+    """Handle collected error lines and update results."""
+    if error_lines and (in_error or in_exception):
+        timestamps_dict = (
+            results["exception_timestamps"]
+            if in_exception
+            else results["error_timestamps"]
+        )
+        last_error = list(timestamps_dict.values())[-1]
+        last_error["details"] = "\n".join(error_lines)
+
+
+def _process_log_entry(context: LogContext) -> tuple[str, datetime]:
+    """Process a single log entry and update results."""
+    if start_match := context.patterns["start"].search(context.entry["message"]):
+        context.current_file = start_match.group(1)
+        context.start_time = context.timestamp
+    elif context.patterns["end"].search(context.entry["message"]):
+        if context.start_time and context.current_file:
+            context.results["processing_times"][context.current_file] = (
+                context.timestamp - context.start_time
+            ).total_seconds()
+
+    return context.current_file, context.start_time
+
+
+def _handle_log_level(
+    level: str, message: str, module: str, timestamp: datetime, results: dict
+) -> tuple[bool, bool, list[str]]:
+    """Handle log level specific processing."""
+    in_error = False
+    in_exception = False
+    error_lines = []
+
+    if module not in results["module_stats"]:
+        results["module_stats"][module] = {}
+    if level not in results["module_stats"][module]:
+        results["module_stats"][module][level] = 0
+
+    if level == "WARNING":
+        results["warnings"][message] += 1
+    elif level == "ERROR":
+        is_exception = "Traceback (most recent call last)" in message
+        if is_exception:
+            in_exception = True
+            results["exceptions"][message] += 1
+            results["exception_timestamps"][message] = {
+                "first": timestamp,
+                "last": timestamp,
+                "details": message,
+            }
+        else:
+            in_error = True
+            results["errors"][message] += 1
+            results["error_timestamps"][message] = {
+                "first": timestamp,
+                "last": timestamp,
+                "details": message,
+            }
+        error_lines = [message]
+
+    results["module_stats"][module][level] += 1
+    return in_error, in_exception, error_lines
+
+
 def process_chunk(chunk: list[str], patterns: dict) -> dict:
     """Process a chunk of log lines in parallel."""
     results = {
         "warnings": Counter(),
         "errors": Counter(),
+        "exceptions": Counter(),  # New counter for exceptions
         "error_timestamps": {},
-        "module_stats": {},  # Changed from defaultdict to regular dict
+        "exception_timestamps": {},  # New timestamp tracking for exceptions
+        "module_stats": {},
         "processing_times": {},
-        "error_details": {},  # Add storage for actual error messages
+        "error_details": {},
     }
 
     current_file = ""
     start_time = None
     error_lines = []
     in_error = False
+    in_exception = False
 
     for _idx, line in enumerate(chunk):
         match = patterns["log"].match(line)
         if match:
-            # If we were collecting error lines, store them with the previous error
-            if error_lines and in_error:
-                last_error = list(results["error_timestamps"].values())[-1]
-                last_error["details"] = "\n".join(error_lines)
-                error_lines = []
-                in_error = False
+            _handle_error_lines(error_lines, in_error, in_exception, results)
+            error_lines = []
+            in_error = False
+            in_exception = False
 
             entry = match.groupdict()
             timestamp = datetime.strptime(entry["timestamp"], "%Y-%m-%d %H:%M:%S")
 
-            # Process the entry similar to the main parse_logs method
-            if start_match := patterns["start"].search(entry["message"]):
-                current_file = start_match.group(1)
-                start_time = timestamp
-            elif patterns["end"].search(entry["message"]):
-                if start_time and current_file:
-                    results["processing_times"][current_file] = (
-                        timestamp - start_time
-                    ).total_seconds()
+            context = LogContext(
+                entry=entry,
+                timestamp=timestamp,
+                current_file=current_file,
+                start_time=start_time,
+                results=results,
+                patterns=patterns,
+            )
+            current_file, start_time = _process_log_entry(context)
 
-            level = entry["level"]
-            message = entry["message"]
-            module = entry["module"]
-
-            # Initialize module stats if needed
-            if module not in results["module_stats"]:
-                results["module_stats"][module] = {}
-            if level not in results["module_stats"][module]:
-                results["module_stats"][module][level] = 0
-
-            if level == "WARNING":
-                results["warnings"][message] += 1
-            elif level == "ERROR":
-                in_error = True
-                error_lines = [message]
-                results["error_timestamps"][message] = {
-                    "first": timestamp,
-                    "last": timestamp,
-                    "details": message,
-                }
-                results["errors"][message] += 1
-
-            results["module_stats"][module][level] += 1
-        elif in_error:
-            # Collect non-log lines that are part of error details
+            in_error, in_exception, error_lines = _handle_log_level(
+                entry["level"], entry["message"], entry["module"], timestamp, results
+            )
+        elif in_error or in_exception:
             error_lines.append(line.strip())
 
-    # Handle any remaining error lines
-    if error_lines and in_error:
-        last_error = list(results["error_timestamps"].values())[-1]
-        last_error["details"] = "\n".join(error_lines)
-
+    _handle_error_lines(error_lines, in_error, in_exception, results)
     return results
 
 
@@ -129,11 +185,55 @@ class LogAnalyzer:
         self.entries: list[dict[str, Any]] = []
         self.warnings = Counter()
         self.errors = Counter()
+        self.exceptions = Counter()  # New counter for exceptions
         self.processing_times: dict[str, float] = {}
         self.module_stats = defaultdict(lambda: defaultdict(int))
         self.error_timestamps: dict[str, dict[str, datetime]] = {}
+        self.exception_timestamps: dict[
+            str, dict[str, datetime]
+        ] = {}  # New timestamp tracking
         self.processed_files: set[str] = set()
         self.file_errors: dict[str, list[dict[str, Any]]] = {}
+
+    def _merge_timestamps(
+        self, source_timestamps: dict, target_timestamps: dict
+    ) -> None:
+        """Merge timestamp information from source to target."""
+        for msg, stamps in source_timestamps.items():
+            if msg not in target_timestamps:
+                target_timestamps[msg] = stamps
+            else:
+                target_timestamps[msg]["first"] = min(
+                    stamps["first"], target_timestamps[msg]["first"]
+                )
+                target_timestamps[msg]["last"] = max(
+                    stamps["last"], target_timestamps[msg]["last"]
+                )
+
+    def _merge_module_stats(self, source_stats: dict) -> None:
+        """Merge module statistics."""
+        for module, stats in source_stats.items():
+            if module not in self.module_stats:
+                self.module_stats[module] = defaultdict(int)
+            for level, count in stats.items():
+                self.module_stats[module][level] += count
+
+    def _process_file_errors(self) -> None:
+        """Process and collect file-specific errors."""
+        for entry in self.entries:
+            if entry["level"] == "ERROR":
+                msg = entry["message"]
+                if "file:" in msg:
+                    filename = msg.split("file:")[-1].strip()
+                    if filename not in self.file_errors:
+                        self.file_errors[filename] = []
+                    self.file_errors[filename].append(
+                        {
+                            "timestamp": entry["timestamp"],
+                            "error": msg,
+                            "module": entry["module"],
+                        }
+                    )
 
     def parse_logs(self) -> None:
         """Parse log file and collect statistics using multiple processes."""
@@ -157,43 +257,16 @@ class LogAnalyzer:
         for result in results:
             self.warnings.update(result["warnings"])
             self.errors.update(result["errors"])
+            self.exceptions.update(result["exceptions"])
             self.processing_times.update(result["processing_times"])
 
-            # Merge error timestamps
-            for msg, stamps in result["error_timestamps"].items():
-                if msg not in self.error_timestamps:
-                    self.error_timestamps[msg] = stamps
-                else:
-                    self.error_timestamps[msg]["first"] = min(
-                        stamps["first"], self.error_timestamps[msg]["first"]
-                    )
-                    self.error_timestamps[msg]["last"] = max(
-                        stamps["last"], self.error_timestamps[msg]["last"]
-                    )
+            self._merge_timestamps(result["error_timestamps"], self.error_timestamps)
+            self._merge_timestamps(
+                result["exception_timestamps"], self.exception_timestamps
+            )
+            self._merge_module_stats(result["module_stats"])
 
-            # Merge module statistics using regular dict operations
-            for module, stats in result["module_stats"].items():
-                if module not in self.module_stats:
-                    self.module_stats[module] = defaultdict(int)
-                for level, count in stats.items():
-                    self.module_stats[module][level] += count
-
-        # After merging other results, process file errors
-        for entry in self.entries:
-            if entry["level"] == "ERROR":
-                # Try to find filename in error message
-                msg = entry["message"]
-                if "file:" in msg:
-                    filename = msg.split("file:")[-1].strip()
-                    if filename not in self.file_errors:
-                        self.file_errors[filename] = []
-                    self.file_errors[filename].append(
-                        {
-                            "timestamp": entry["timestamp"],
-                            "error": msg,
-                            "module": entry["module"],
-                        }
-                    )
+        self._process_file_errors()
 
     def get_most_common_warnings(self, limit: int = 10) -> list[tuple[str, int]]:
         """Get most frequent warning messages.
@@ -330,7 +403,8 @@ class LogAnalyzer:
                 f"Total files processed: {total_files}",
                 f"Average processing time: {avg_time:.2f}s",
                 f"Total warnings: {sum(self.warnings.values())}",
-                f"Total errors: {sum(self.errors.values())}\n",
+                f"Total errors: {sum(self.errors.values())}",
+                f"Total exceptions: {sum(self.exceptions.values())}\n",
             ]
         )
 
@@ -369,6 +443,21 @@ class LogAnalyzer:
                 ]
             )
         report.append("")
+
+        # Add exception analysis section
+        report.extend(["\nDetailed Exception Analysis:", "-------------------------"])
+        for msg, count in self.exceptions.most_common():
+            timestamp_info = self.exception_timestamps[msg]
+            report.extend(
+                [
+                    f"\nException occurred {count} times:",
+                    f"First occurred: {timestamp_info['first'].strftime('%Y-%m-%d %H:%M:%S')}",
+                    f"Last occurred: {timestamp_info['last'].strftime('%Y-%m-%d %H:%M:%S')}",
+                    "Stack trace:",
+                    timestamp_info["details"],
+                    "-" * 40,
+                ]
+            )
 
         # Module statistics
         report.extend(["Module Statistics:", "-----------------"])
