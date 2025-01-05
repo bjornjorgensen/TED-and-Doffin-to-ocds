@@ -1,7 +1,7 @@
 {
   "id": "2023-651678",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-45a1890c-9b77-4e03-b82f-9d20097e2605",
+  "ocid": "ocds-abcd1234-6e1f4876-3232-46eb-8c0a-3e4ff59c0c0a",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -136,9 +136,9 @@
         "email": "vidar@pilar-br.no"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
-        "submissionReceiptBody"
+        "submissionReceiptBody",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Nesgata 11",

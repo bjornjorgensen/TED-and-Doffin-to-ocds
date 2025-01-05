@@ -1,7 +1,7 @@
 {
   "id": "2023-607152",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-dbfb9488-8dfd-40a6-a054-fb147495df01",
+  "ocid": "ocds-abcd1234-3098b994-d88e-420a-aa87-44c5a5ab2b94",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -134,8 +134,8 @@
         ]
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Prinsens gate 39",

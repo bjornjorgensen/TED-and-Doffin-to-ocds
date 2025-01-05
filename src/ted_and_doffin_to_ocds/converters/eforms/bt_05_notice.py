@@ -88,24 +88,19 @@ def convert_to_iso_format(date_string: str, time_string: str) -> str:
         raise ValueError(msg)
 
     try:
-        # Handle date part
-        date_parts = date_string.split("+")[0].split("-")  # Remove timezone if present
+        # Clean date string
+        date_clean = date_string.rstrip("Z")  # Remove Z if present
+        date_parts = date_clean.split("+")[0].split("-")  # Remove timezone if present
         if len(date_parts) != 3:
             _raise_format_error(date_string, "date")
         clean_date = "-".join(date_parts[:3])  # Keep only YYYY-MM-DD
 
-        # Handle time part and timezone
+        # Clean time string and handle timezone
         time_parts = time_string
         if time_parts.endswith("Z"):
             time_parts = time_parts[:-1] + "+00:00"
         elif "+" not in time_parts and "-" not in time_parts:
-            # If no timezone in time, check date timezone
-            if "+" in date_string:
-                time_parts += date_string[date_string.index("+") :]
-            elif date_string.endswith("Z"):
-                time_parts += "+00:00"
-            else:
-                time_parts += "+00:00"  # Default to UTC if no timezone found
+            time_parts += "+00:00"  # Default to UTC
 
         # Combine and validate
         datetime_string = f"{clean_date}T{time_parts}"

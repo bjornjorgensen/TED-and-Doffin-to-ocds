@@ -1,0 +1,668 @@
+Log Analysis Report
+===================
+
+Total files processed: 38819
+Average processing time: 0.10s
+Total warnings: 24888188
+Total errors: 0
+Total exceptions: 0
+
+Top 5 Most Common Warnings:
+-------------------------
+[44964x] No Cross Border Law (BT-09) found in the XML
+[44964x] No data found for Cross Border Law (BT-09)
+[44964x] No data found for DPS Termination (BT-119)
+[44964x] No data found for Previous Planning Identifier (Lot) (BT-125(i))
+[44964x] No data found for Previous Planning Identifier (part) (BT-125(i) and BT-1251)
+
+Slow Processing Files (>5s):
+---------------------------
+
+
+Detailed Error Analysis:
+----------------------
+
+
+Detailed Exception Analysis:
+-------------------------
+Module Statistics:
+-----------------
+__main__:
+  INFO: 89781
+ted_and_doffin_to_ocds.utils.notice_tracker:
+  INFO: 44968
+  WARNING: 5645
+ted_and_doffin_to_ocds.utils.file_processor:
+  INFO: 44898
+ted_and_doffin_to_ocds.utils.common_operations:
+  INFO: 44379
+  WARNING: 2800
+ted_and_doffin_to_ocds.processors.bt_processors:
+  INFO: 30546635
+  WARNING: 24759085
+ted_and_doffin_to_ocds.converters.eforms.bt_01_procedure:
+  INFO: 89299
+ted_and_doffin_to_ocds.converters.eforms.bt_03:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_04_procedure:
+  WARNING: 3653
+  INFO: 82622
+ted_and_doffin_to_ocds.converters.eforms.bt_05_notice:
+  INFO: 89928
+ted_and_doffin_to_ocds.converters.eforms.bt_09_procedure:
+  WARNING: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_10:
+  INFO: 44911
+ted_and_doffin_to_ocds.converters.eforms.bt_11_procedure_buyer:
+  INFO: 30645
+ted_and_doffin_to_ocds.converters.eforms.bt_115_part_gpa_coverage:
+  INFO: 1482
+ted_and_doffin_to_ocds.converters.eforms.bt_131_lot:
+  INFO: 56081
+ted_and_doffin_to_ocds.converters.eforms.bt_1351_procedure:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_16_organization_company:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_17_lot:
+  INFO: 34094
+ted_and_doffin_to_ocds.converters.eforms.bt_18_lot:
+  INFO: 38868
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_09_procedure:
+  WARNING: 3653
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_106_procedure:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_1252_procedure:
+  WARNING: 3653
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_1351_procedure:
+  WARNING: 3653
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_88_procedure:
+  WARNING: 3653
+ted_and_doffin_to_ocds.converters.eforms.bt_197_bt_106_procedure:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_197_bt_88_procedure:
+  WARNING: 3653
+ted_and_doffin_to_ocds.converters.eforms.bt_198_bt_106_procedure:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_198_bt_88_procedure:
+  WARNING: 3653
+ted_and_doffin_to_ocds.converters.eforms.bt_23_procedure:
+  INFO: 44849
+ted_and_doffin_to_ocds.converters.eforms.bt_24_procedure:
+  INFO: 44935
+ted_and_doffin_to_ocds.converters.eforms.bt_23_lot:
+  INFO: 38756
+ted_and_doffin_to_ocds.converters.eforms.bt_24_lot:
+  INFO: 38826
+ted_and_doffin_to_ocds.converters.eforms.bt_263_lot:
+  INFO: 15629
+ted_and_doffin_to_ocds.converters.eforms.bt_27_lotsgroup:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_27_part:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_27_procedure:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_46_lot:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_47_lot:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_50_lot:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_501_organization_company:
+  INFO: 44899
+ted_and_doffin_to_ocds.converters.eforms.bt_502_organization_company:
+  INFO: 44134
+ted_and_doffin_to_ocds.converters.eforms.bt_503_organization_company:
+  INFO: 35181
+ted_and_doffin_to_ocds.converters.eforms.bt_505_organization_company:
+  INFO: 41720
+ted_and_doffin_to_ocds.converters.eforms.bt_506_organization_company:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_508_procedure_buyer:
+  INFO: 50032
+ted_and_doffin_to_ocds.converters.eforms.bt_51_lot:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_510a_organization_company:
+  INFO: 160230
+ted_and_doffin_to_ocds.converters.eforms.bt_510b_organization_company:
+  INFO: 160230
+ted_and_doffin_to_ocds.converters.eforms.bt_510c_organization_company:
+  INFO: 160230
+ted_and_doffin_to_ocds.converters.eforms.bt_5071_part:
+  INFO: 2390
+ted_and_doffin_to_ocds.converters.eforms.bt_5071_lot:
+  INFO: 26162
+ted_and_doffin_to_ocds.converters.eforms.bt_5101a_part:
+  INFO: 519
+ted_and_doffin_to_ocds.converters.eforms.bt_512_organization_company:
+  INFO: 165022
+ted_and_doffin_to_ocds.converters.eforms.bt_513_organization_company:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_52_lot:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_536_lot:
+  INFO: 168208
+  WARNING: 32416
+ted_and_doffin_to_ocds.converters.eforms.bt_54_lot:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_57_lot:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_58_lot:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_60_lot:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_63_lot:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_635_lotresult:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_636_lotresult:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_610_procedure_buyer:
+  INFO: 1838
+ted_and_doffin_to_ocds.converters.eforms.bt_702a_notice:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_712a_lotresult:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_712b_lotresult:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_765_partframeworkagreement:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.bt_754_lot:
+  INFO: 38868
+ted_and_doffin_to_ocds.converters.eforms.bt_97_lot:
+  INFO: 26986
+ted_and_doffin_to_ocds.converters.eforms.opt_200_organization_company:
+  INFO: 151151
+ted_and_doffin_to_ocds.converters.eforms.opt_300_procedure_buyer:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_addinfo:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_docprovider:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_employlegis:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_mediator:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_reviewinfo:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_revieworg:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_tendereval:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_tenderreceipt:
+  INFO: 44964
+ted_and_doffin_to_ocds.converters.eforms.opt_140_part_procurement_docs:
+  WARNING: 2190
+  INFO: 2042
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_addinfo:
+  INFO: 17015
+ted_and_doffin_to_ocds.converters.eforms.bt_739_organization_company:
+  INFO: 13263
+ted_and_doffin_to_ocds.converters.eforms.bt_115_gpa_coverage:
+  INFO: 14319
+ted_and_doffin_to_ocds.converters.eforms.bt_124_lot:
+  INFO: 318
+ted_and_doffin_to_ocds.converters.eforms.bt_5101_lot:
+  INFO: 9242
+ted_and_doffin_to_ocds.converters.eforms.bt_727_lot:
+  INFO: 4614
+ted_and_doffin_to_ocds.converters.eforms.bt_727_procedure:
+  INFO: 17284
+ted_and_doffin_to_ocds.converters.eforms.bt_15_lot_part:
+  INFO: 26657
+ted_and_doffin_to_ocds.converters.eforms.bt_27_lot:
+  INFO: 15811
+ted_and_doffin_to_ocds.converters.eforms.bt_36_lot:
+  INFO: 12686
+  WARNING: 28
+ted_and_doffin_to_ocds.converters.eforms.bt_630_lot:
+  INFO: 13638
+ted_and_doffin_to_ocds.converters.eforms.bt_70_lot:
+  INFO: 3389
+ted_and_doffin_to_ocds.converters.eforms.bt_743_lot:
+  INFO: 33851
+  WARNING: 12382
+ted_and_doffin_to_ocds.converters.eforms.bt_750_lot:
+  INFO: 12909
+ted_and_doffin_to_ocds.converters.eforms.bt_765_frameworkagreement:
+  INFO: 10292
+ted_and_doffin_to_ocds.converters.eforms.bt_92_lot:
+  INFO: 25519
+ted_and_doffin_to_ocds.converters.eforms.bt_93_lot:
+  INFO: 25587
+ted_and_doffin_to_ocds.converters.eforms.opt_140_lot_procurement_docs:
+  INFO: 26931
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_revieworg:
+  INFO: 30891
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_tenderreceipt:
+  INFO: 5921
+ted_and_doffin_to_ocds.converters.eforms.bt_124_part:
+  INFO: 18
+ted_and_doffin_to_ocds.converters.eforms.bt_105_procedure:
+  INFO: 34364
+ted_and_doffin_to_ocds.converters.eforms.bt_113_lot:
+  INFO: 2828
+ted_and_doffin_to_ocds.converters.eforms.bt_14_lot:
+  INFO: 274
+ted_and_doffin_to_ocds.converters.eforms.bt_615_lot:
+  INFO: 274
+ted_and_doffin_to_ocds.converters.eforms.bt_707_lot:
+  INFO: 178
+ted_and_doffin_to_ocds.converters.eforms.bt_99_lot:
+  INFO: 654
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_reviewinfo:
+  INFO: 4402
+ted_and_doffin_to_ocds.converters.eforms.bt_615_part:
+  INFO: 19
+ted_and_doffin_to_ocds.converters.eforms.bt_707_part:
+  INFO: 13
+ted_and_doffin_to_ocds.converters.eforms.bt_727_part:
+  INFO: 1202
+ted_and_doffin_to_ocds.converters.eforms.bt_31_procedure:
+  INFO: 1612
+ted_and_doffin_to_ocds.converters.eforms.bt_33_procedure:
+  INFO: 403
+ted_and_doffin_to_ocds.converters.eforms.bt_540_lot:
+  INFO: 13671
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_mediator:
+  INFO: 2983
+ted_and_doffin_to_ocds.converters.eforms.bt_88_procedure:
+  INFO: 10534
+ted_and_doffin_to_ocds.converters.eforms.bt_5131_procedure:
+  INFO: 3335
+ted_and_doffin_to_ocds.converters.eforms.bt_5141_part:
+  INFO: 1236
+ted_and_doffin_to_ocds.converters.eforms.bt_5141_procedure:
+  INFO: 15273
+  WARNING: 20
+ted_and_doffin_to_ocds.converters.eforms.bt_263_procedure:
+  INFO: 15199
+ted_and_doffin_to_ocds.converters.eforms.bt_5071_procedure:
+  INFO: 13583
+ted_and_doffin_to_ocds.converters.eforms.bt_5141_lot:
+  INFO: 13860
+  WARNING: 11
+ted_and_doffin_to_ocds.converters.eforms.bt_726_part:
+  INFO: 490
+ted_and_doffin_to_ocds.converters.eforms.bt_728_part:
+  INFO: 337
+ted_and_doffin_to_ocds.converters.eforms.bt_728_procedure:
+  INFO: 8794
+ted_and_doffin_to_ocds.converters.eforms.bt_726_lot:
+  INFO: 1989
+ted_and_doffin_to_ocds.converters.eforms.bt_5101a_procedure:
+  INFO: 2715
+ted_and_doffin_to_ocds.converters.eforms.bt_5121_lot:
+  INFO: 2599
+ted_and_doffin_to_ocds.converters.eforms.bt_5121_procedure:
+  INFO: 2737
+ted_and_doffin_to_ocds.converters.eforms.bt_5131_lot:
+  INFO: 3152
+ted_and_doffin_to_ocds.converters.eforms.opt_111_lot_fiscallegis:
+  INFO: 896
+ted_and_doffin_to_ocds.converters.eforms.opt_112_lot_environlegis:
+  INFO: 531
+ted_and_doffin_to_ocds.converters.eforms.opt_113_lot_employlegis:
+  INFO: 503
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_docprovider:
+  INFO: 2342
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_employlegis:
+  INFO: 487
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_environlegis:
+  INFO: 518
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_fiscallegis:
+  INFO: 879
+ted_and_doffin_to_ocds.converters.eforms.bt_531_procedure:
+  INFO: 1033
+ted_and_doffin_to_ocds.converters.eforms.bt_36_part:
+  INFO: 65
+ted_and_doffin_to_ocds.converters.eforms.bt_531_lot:
+  INFO: 904
+ted_and_doffin_to_ocds.converters.eforms.opt_111_part_fiscallegis:
+  INFO: 56
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_fiscallegis:
+  INFO: 56
+root:
+  WARNING: 350
+ted_and_doffin_to_ocds.converters.eforms.opt_112_part_environlegis:
+  INFO: 30
+ted_and_doffin_to_ocds.converters.eforms.opt_113_part_employlegis:
+  INFO: 29
+ted_and_doffin_to_ocds.converters.eforms.opt_301_part_environlegis:
+  INFO: 30
+ted_and_doffin_to_ocds.converters.eforms.bt_762_changereasondescription:
+  INFO: 811
+ted_and_doffin_to_ocds.converters.eforms.bt_632_part:
+  INFO: 21
+ted_and_doffin_to_ocds.converters.eforms.bt_767_lot:
+  INFO: 36586
+ted_and_doffin_to_ocds.converters.eforms.opt_110_lot_fiscallegis:
+  INFO: 30
+ted_and_doffin_to_ocds.converters.eforms.opt_120_lot_environlegis:
+  INFO: 22
+ted_and_doffin_to_ocds.converters.eforms.opt_130_lot_employlegis:
+  INFO: 25
+ted_and_doffin_to_ocds.converters.eforms.bt_509_organization_company:
+  INFO: 246
+ted_and_doffin_to_ocds.converters.eforms.bt_539_lot:
+  INFO: 11680
+ted_and_doffin_to_ocds.converters.eforms.bt_541_lot_weightnumber:
+  INFO: 10007
+ted_and_doffin_to_ocds.converters.eforms.bt_5421_lot:
+  INFO: 10007
+ted_and_doffin_to_ocds.converters.eforms.bt_734_lot:
+  INFO: 36031
+ted_and_doffin_to_ocds.converters.eforms.bt_744_lot:
+  INFO: 26188
+ted_and_doffin_to_ocds.converters.eforms.bt_40_lot:
+  INFO: 245
+ted_and_doffin_to_ocds.converters.eforms.bt_79_lot:
+  INFO: 194
+ted_and_doffin_to_ocds.converters.eforms.opt_201_organization_touchpoint:
+  INFO: 64
+ted_and_doffin_to_ocds.converters.eforms.bt_75_lot:
+  INFO: 491
+ted_and_doffin_to_ocds.converters.eforms.bt_109_lot:
+  INFO: 124
+ted_and_doffin_to_ocds.converters.eforms.bt_16_organization_touchpoint:
+  INFO: 26
+ted_and_doffin_to_ocds.converters.eforms.bt_500_organization_touchpoint:
+  INFO: 26
+ted_and_doffin_to_ocds.converters.eforms.bt_769_lot:
+  INFO: 3447
+ted_and_doffin_to_ocds.converters.eforms.bt_71_part:
+  INFO: 4
+ted_and_doffin_to_ocds.converters.eforms.opt_030_procedure_sprovider:
+  INFO: 117
+ted_and_doffin_to_ocds.converters.eforms.opt_300_procedure_sprovider:
+  INFO: 117
+ted_and_doffin_to_ocds.converters.eforms.bt_736_part:
+  INFO: 4
+ted_and_doffin_to_ocds.converters.eforms.bt_632_lot:
+  INFO: 513
+ted_and_doffin_to_ocds.converters.eforms.bt_764_submissionelectroniccatalogue:
+  INFO: 12999
+ted_and_doffin_to_ocds.converters.eforms.bt_1311_lot:
+  INFO: 5763
+ted_and_doffin_to_ocds.converters.eforms.bt_67_exclusion_grounds:
+  INFO: 8125
+ted_and_doffin_to_ocds.converters.eforms.bt_719_notice:
+  INFO: 220
+ted_and_doffin_to_ocds.converters.eforms.bt_94_lot:
+  INFO: 12753
+ted_and_doffin_to_ocds.converters.eforms.bt_98_lot:
+  INFO: 13939
+ted_and_doffin_to_ocds.converters.eforms.bt_120_lot:
+  INFO: 599
+ted_and_doffin_to_ocds.converters.eforms.bt_130_lot:
+  INFO: 562
+ted_and_doffin_to_ocds.converters.eforms.bt_71_lot:
+  INFO: 224
+ted_and_doffin_to_ocds.converters.eforms.bt_133_lot:
+  INFO: 2243
+ted_and_doffin_to_ocds.converters.eforms.bt_134_lot:
+  INFO: 829
+ted_and_doffin_to_ocds.converters.eforms.bt_736_lot:
+  INFO: 344
+ted_and_doffin_to_ocds.converters.eforms.bt_106_procedure:
+  INFO: 13020
+ted_and_doffin_to_ocds.converters.eforms.bt_766_dynamicpurchasingsystem:
+  INFO: 962
+ted_and_doffin_to_ocds.converters.eforms.bt_95_lot:
+  INFO: 168
+ted_and_doffin_to_ocds.converters.eforms.bt_76_lot:
+  INFO: 92
+ted_and_doffin_to_ocds.converters.eforms.bt_77_lot:
+  INFO: 969
+ted_and_doffin_to_ocds.converters.eforms.bt_6140_lot:
+  INFO: 8
+ted_and_doffin_to_ocds.converters.eforms.bt_271_lot:
+  INFO: 1860
+ted_and_doffin_to_ocds.converters.eforms.bt_771_lot:
+  INFO: 1668
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_tendereval:
+  INFO: 2186
+ted_and_doffin_to_ocds.converters.eforms.bt_738_notice:
+  INFO: 30
+ted_and_doffin_to_ocds.converters.eforms.bt_717_lot:
+  INFO: 262
+ted_and_doffin_to_ocds.converters.eforms.bt_735_lot:
+  INFO: 235
+ted_and_doffin_to_ocds.converters.eforms.bt_805_lot:
+  INFO: 781
+ted_and_doffin_to_ocds.converters.eforms.bt_25_lot:
+  INFO: 204
+ted_and_doffin_to_ocds.converters.eforms.bt_541_lot_fixednumber:
+  INFO: 84
+ted_and_doffin_to_ocds.converters.eforms.bt_5422_lot:
+  INFO: 84
+ted_and_doffin_to_ocds.converters.eforms.bt_774_lot:
+  INFO: 368
+ted_and_doffin_to_ocds.converters.eforms.bt_772_lot:
+  INFO: 254
+ted_and_doffin_to_ocds.converters.eforms.bt_44_lot:
+  INFO: 20
+ted_and_doffin_to_ocds.converters.eforms.bt_644_lot_prize_value:
+  INFO: 20
+ted_and_doffin_to_ocds.converters.eforms.bt_502_organization_touchpoint:
+  INFO: 16
+ted_and_doffin_to_ocds.converters.eforms.bt_506_organization_touchpoint:
+  INFO: 14
+ted_and_doffin_to_ocds.converters.eforms.bt_510a_organization_touchpoint:
+  INFO: 32
+ted_and_doffin_to_ocds.converters.eforms.bt_510b_organization_touchpoint:
+  INFO: 32
+ted_and_doffin_to_ocds.converters.eforms.bt_510c_organization_touchpoint:
+  INFO: 32
+ted_and_doffin_to_ocds.converters.eforms.bt_513_organization_touchpoint:
+  INFO: 18
+ted_and_doffin_to_ocds.converters.eforms.bt_65_lot_subcontracting_obligation:
+  INFO: 46
+ted_and_doffin_to_ocds.converters.eforms.bt_651_lot_subcontracting_tender_indication:
+  INFO: 61
+ted_and_doffin_to_ocds.converters.eforms.bt_755_lot:
+  INFO: 6
+ted_and_doffin_to_ocds.converters.eforms.bt_776_lot:
+  INFO: 56
+ted_and_doffin_to_ocds.converters.eforms.bt_625_lot:
+  INFO: 70
+ted_and_doffin_to_ocds.converters.eforms.bt_752_lot_thresholdnumber:
+  INFO: 91
+ted_and_doffin_to_ocds.converters.eforms.bt_732_lot:
+  INFO: 24
+ted_and_doffin_to_ocds.converters.eforms.bt_78_lot:
+  INFO: 9
+ted_and_doffin_to_ocds.converters.eforms.bt_543_lot:
+  INFO: 123
+ted_and_doffin_to_ocds.converters.eforms.bt_733_lot:
+  INFO: 456
+ted_and_doffin_to_ocds.converters.eforms.bt_752_lot_weightnumber:
+  INFO: 201
+ted_and_doffin_to_ocds.converters.eforms.bt_7531_lot:
+  INFO: 65
+ted_and_doffin_to_ocds.converters.eforms.bt_111_lot:
+  INFO: 14
+ted_and_doffin_to_ocds.converters.eforms.bt_06_lot:
+  INFO: 30
+ted_and_doffin_to_ocds.converters.eforms.bt_777_lot:
+  INFO: 24
+ted_and_doffin_to_ocds.converters.eforms.bt_503_organization_touchpoint:
+  INFO: 15
+ted_and_doffin_to_ocds.converters.eforms.bt_45_lot:
+  INFO: 10
+ted_and_doffin_to_ocds.converters.eforms.bt_801_lot:
+  INFO: 403
+ted_and_doffin_to_ocds.converters.eforms.bt_505_organization_touchpoint:
+  INFO: 6
+ted_and_doffin_to_ocds.converters.eforms.bt_509_organization_touchpoint:
+  INFO: 4
+ted_and_doffin_to_ocds.converters.eforms.bt_42_lot:
+  INFO: 14
+ted_and_doffin_to_ocds.converters.eforms.bt_41_lot:
+  INFO: 15
+ted_and_doffin_to_ocds.converters.eforms.bt_122_lot:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_802_lot:
+  INFO: 174
+ted_and_doffin_to_ocds.converters.eforms.bt_775_lot:
+  INFO: 91
+ted_and_doffin_to_ocds.converters.eforms.bt_631_lot:
+  INFO: 2
+ted_and_doffin_to_ocds.converters.eforms.bt_123_lot:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_13713_lotresult:
+  INFO: 15149
+  WARNING: 2
+ted_and_doffin_to_ocds.converters.eforms.bt_13714_tender:
+  INFO: 9503
+  WARNING: 646
+ted_and_doffin_to_ocds.converters.eforms.bt_142_lotresult:
+  INFO: 11107
+ted_and_doffin_to_ocds.converters.eforms.bt_145_contract:
+  INFO: 14598
+ted_and_doffin_to_ocds.converters.eforms.bt_193_tender:
+  INFO: 9503
+ted_and_doffin_to_ocds.converters.eforms.bt_3202_contract:
+  INFO: 9565
+  WARNING: 126
+ted_and_doffin_to_ocds.converters.eforms.bt_720_tender:
+  INFO: 5971
+ted_and_doffin_to_ocds.converters.eforms.bt_721_contract_title:
+  INFO: 5175
+ted_and_doffin_to_ocds.converters.eforms.bt_759_lotresult:
+  INFO: 17494
+ted_and_doffin_to_ocds.converters.eforms.bt_760_lotresult:
+  INFO: 32363
+  WARNING: 12
+ted_and_doffin_to_ocds.converters.eforms.bt_773_tender:
+  INFO: 5589
+ted_and_doffin_to_ocds.converters.eforms.opt_310_tender:
+  INFO: 9695
+ted_and_doffin_to_ocds.converters.eforms.opt_315_lotresult:
+  INFO: 9606
+ted_and_doffin_to_ocds.converters.eforms.opt_316_contract:
+  INFO: 9607
+ted_and_doffin_to_ocds.converters.eforms.opt_320_lotresult:
+  INFO: 9694
+ted_and_doffin_to_ocds.converters.eforms.opt_321_tender:
+  INFO: 9695
+ted_and_doffin_to_ocds.converters.eforms.opt_322_lotresult:
+  INFO: 11676
+ted_and_doffin_to_ocds.converters.eforms.bt_165_organization_company:
+  INFO: 2947
+ted_and_doffin_to_ocds.converters.eforms.bt_144_lotresult:
+  INFO: 1327
+ted_and_doffin_to_ocds.converters.eforms.bt_150_contract:
+  INFO: 5228
+ted_and_doffin_to_ocds.converters.eforms.bt_660_lotresult:
+  INFO: 949
+ted_and_doffin_to_ocds.converters.eforms.bt_710_lotresult:
+  INFO: 413
+ted_and_doffin_to_ocds.converters.eforms.bt_711_lotresult:
+  INFO: 392
+ted_and_doffin_to_ocds.converters.eforms.opp_031_tender:
+  WARNING: 646
+ted_and_doffin_to_ocds.converters.eforms.opp_032_tender:
+  WARNING: 646
+ted_and_doffin_to_ocds.converters.eforms.opp_034_tender:
+  WARNING: 646
+ted_and_doffin_to_ocds.converters.eforms.bt_135_procedure:
+  INFO: 743
+ted_and_doffin_to_ocds.converters.eforms.bt_136_procedure:
+  INFO: 808
+ted_and_doffin_to_ocds.converters.eforms.opt_170_tenderer_leader:
+  INFO: 119
+ted_and_doffin_to_ocds.converters.eforms.bt_553_tender:
+  INFO: 10
+ted_and_doffin_to_ocds.converters.eforms.bt_554_tender:
+  INFO: 41
+ted_and_doffin_to_ocds.converters.eforms.bt_756_procedure:
+  INFO: 1415
+ted_and_doffin_to_ocds.converters.eforms.bt_555_tender:
+  INFO: 15
+ted_and_doffin_to_ocds.converters.eforms.opt_300_contract_signatory:
+  INFO: 1599
+ted_and_doffin_to_ocds.converters.eforms.bt_1711_tender:
+  INFO: 647
+ted_and_doffin_to_ocds.converters.eforms.bt_746_organization:
+  INFO: 1222
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lotresult_financing:
+  INFO: 552
+ted_and_doffin_to_ocds.converters.eforms.opt_301_lotresult_paying:
+  INFO: 472
+ted_and_doffin_to_ocds.converters.eforms.opp_090_procedure:
+  INFO: 5690
+ted_and_doffin_to_ocds.converters.eforms.bt_709_lotresult:
+  INFO: 350
+ted_and_doffin_to_ocds.converters.eforms.bt_151_contract:
+  INFO: 8
+ted_and_doffin_to_ocds.converters.eforms.bt_735_lotresult:
+  WARNING: 2
+  INFO: 70
+ted_and_doffin_to_ocds.converters.eforms.opt_301_tenderer_subcont:
+  INFO: 205
+ted_and_doffin_to_ocds.converters.eforms.opt_301_tenderer_maincont:
+  INFO: 170
+ted_and_doffin_to_ocds.converters.eforms.bt_171_tender:
+  INFO: 146
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_105_procedure:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_196_bt_105_procedure:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_197_bt_105_procedure:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_198_bt_105_procedure:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_510b_ubo:
+  INFO: 239
+ted_and_doffin_to_ocds.converters.eforms.opt_202_ubo:
+  INFO: 21
+ted_and_doffin_to_ocds.converters.eforms.opt_302_organization:
+  INFO: 21
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_710_lotresult:
+  INFO: 2
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_711_lotresult:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_720_tender:
+  INFO: 6
+ted_and_doffin_to_ocds.converters.eforms.bt_196_bt_720_tender:
+  INFO: 3
+ted_and_doffin_to_ocds.converters.eforms.bt_196_bt_710_lotresult:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_142_lotresult:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_759_lotresult:
+  INFO: 3
+ted_and_doffin_to_ocds.converters.eforms.bt_196_bt_759_lotresult:
+  INFO: 2
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_660_lotresult:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_709_lotresult:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_196_bt_660_lotresult:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_196_bt_709_lotresult:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_760_lotresult:
+  INFO: 2
+ted_and_doffin_to_ocds.converters.eforms.bt_196_bt_760_lotresult:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_500_ubo:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_510a_ubo:
+  INFO: 13
+ted_and_doffin_to_ocds.converters.eforms.bt_510c_ubo:
+  INFO: 12
+ted_and_doffin_to_ocds.converters.eforms.bt_512_ubo:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_513_ubo:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_514_ubo:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.opt_160_ubo_firstname:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_195_bt_773_tender:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_196_bt_773_tender:
+  INFO: 1
+ted_and_doffin_to_ocds.converters.eforms.bt_1252_procedure:
+  INFO: 2
