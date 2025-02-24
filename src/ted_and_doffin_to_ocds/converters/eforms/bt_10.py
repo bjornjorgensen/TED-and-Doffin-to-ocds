@@ -117,7 +117,7 @@ def parse_authority_activity(xml_content: str | bytes) -> dict[str, Any] | None:
             # Handle non-COFOG classifications
             elif code in AUTHORITY_TABLE:
                 classification = {
-                    "scheme": "eu-main-activity",
+                    "scheme": "TED_CE_ACTIVITY",
                     "id": code,
                     "description": AUTHORITY_TABLE[code],
                 }

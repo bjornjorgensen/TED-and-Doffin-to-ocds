@@ -69,6 +69,9 @@ def test_bt_106_procedure_accelerated_true(
     assert "procedure" in result["tender"]
     assert "isAccelerated" in result["tender"]["procedure"]
     assert result["tender"]["procedure"]["isAccelerated"] is True
+    # Verify the accelerated rationale is present and correctly mapped
+    assert "acceleratedRationale" in result["tender"]["procedure"]
+    assert result["tender"]["procedure"]["acceleratedRationale"] == "true"
 
 
 def test_bt_106_procedure_accelerated_alternative_values(
@@ -124,6 +127,11 @@ def test_bt_106_procedure_accelerated_alternative_values(
         assert (
             result["tender"]["procedure"]["isAccelerated"] is expected
         ), f"Expected {expected} for value '{value}', got {result['tender']['procedure']['isAccelerated']}"
+        if expected:
+            assert "acceleratedRationale" in result["tender"]["procedure"], f"Missing acceleratedRationale for value: {value}"
+            assert result["tender"]["procedure"]["acceleratedRationale"] == value.strip(), f"Expected acceleratedRationale '{value.strip()}' for value '{value}', got {result['tender']['procedure']['acceleratedRationale']}"
+        else:
+            assert "acceleratedRationale" not in result["tender"]["procedure"], f"acceleratedRationale should not be present for value: {value}"
 
 
 def test_bt_106_procedure_accelerated_invalid_value(
@@ -150,7 +158,7 @@ def test_bt_106_procedure_accelerated_invalid_value(
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
 
-    logger.info("Result: %s", json.dumps(result, indent=2))
+    
 
     assert (
         "tender" not in result

@@ -88,10 +88,12 @@ def parse_procedure_accelerated(xml_content: str | bytes) -> dict | None:
     if not procedure_elements:
         return None
 
-    acceleration_value = procedure_elements[0].strip().lower()
-    is_accelerated = acceleration_value in {"true", "1", "yes"}
-
-    return {"tender": {"procedure": {"isAccelerated": is_accelerated}}}
+    acceleration_value = procedure_elements[0].strip()
+    is_accelerated = acceleration_value.lower() in {"true", "1", "yes"}
+    result = {"tender": {"procedure": {"isAccelerated": is_accelerated}}}
+    if is_accelerated:
+        result["tender"]["procedure"]["acceleratedRationale"] = acceleration_value
+    return result
 
 
 def merge_procedure_accelerated(
@@ -122,4 +124,8 @@ def merge_procedure_accelerated(
         procedure["isAccelerated"] = procedure_accelerated_data["tender"]["procedure"][
             "isAccelerated"
         ]
+        if "acceleratedRationale" in procedure_accelerated_data["tender"]["procedure"]:
+            procedure["acceleratedRationale"] = procedure_accelerated_data["tender"][
+                "procedure"
+            ]["acceleratedRationale"]
         logger.info("Successfully merged procedure acceleration data")
