@@ -69,23 +69,35 @@ project_root/
 
 ## Installation
 
-1. Clone the repository:
+1. Ensure you have the required system packages:
+   ```bash
+   sudo apt update
+   sudo apt install python3-full pipx
    ```
+
+2. Clone the repository:
+   ```bash
    git clone https://github.com/bjornjorgensen/TED-and-Doffin-to-ocds.git
    ```
 
-2. Change to the project directory:
-   ```
+3. Change to the project directory:
+   ```bash
    cd TED-and-Doffin-to-ocds
    ```
 
-3. Install Poetry (if not already installed):
+4. Create and activate a virtual environment:
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
    ```
+
+5. Install Poetry using pip:
+   ```bash
    pip install poetry
    ```
 
-4. Install the project dependencies:
-   ```
+6. Install the project dependencies:
+   ```bash
    poetry install
    ```
 
