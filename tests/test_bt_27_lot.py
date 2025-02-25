@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.bt_27_lot import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_27_lot import (
     merge_lot_estimated_value,
     parse_lot_estimated_value,
 )

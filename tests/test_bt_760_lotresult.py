@@ -1,4 +1,4 @@
-from ted_and_doffin_to_ocds.converters.bt_760_lotresult import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_760_lotresult import (
     merge_received_submissions_type,
     parse_received_submissions_type,
 )

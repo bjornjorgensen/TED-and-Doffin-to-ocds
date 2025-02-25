@@ -1,6 +1,6 @@
 # tests/test_opt_300_contract_signatory.py
 
-from ted_and_doffin_to_ocds.converters.opt_300_contract_signatory import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_300_contract_signatory import (
     merge_signatory_identifier_reference,
     parse_signatory_identifier_reference,
 )

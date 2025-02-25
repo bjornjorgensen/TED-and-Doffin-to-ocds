@@ -1,6 +1,6 @@
 import pytest
 
-from ted_and_doffin_to_ocds.converters.bt_27_part import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_27_part import (
     merge_bt_27_part,
     parse_bt_27_part,
 )

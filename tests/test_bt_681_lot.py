@@ -1,6 +1,6 @@
 import pytest
 
-from ted_and_doffin_to_ocds.converters.bt_681_lot import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_681_lot import (
     merge_foreign_subsidies_regulation,
     parse_foreign_subsidies_regulation,
 )

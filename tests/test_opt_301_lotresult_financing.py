@@ -1,6 +1,6 @@
 # tests/test_opt_301_lotresult_financing.py
 
-from ted_and_doffin_to_ocds.converters.opt_301_lotresult_financing import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_301_lotresult_financing import (
     merge_financing_party,
     parse_financing_party,
 )

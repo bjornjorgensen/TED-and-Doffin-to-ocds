@@ -1,6 +1,6 @@
 # tests/test_bt_500_ubo.py
 
-from ted_and_doffin_to_ocds.converters.bt_500_ubo import merge_ubo_name, parse_ubo_name
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_500_ubo import merge_ubo_name, parse_ubo_name
 
 
 def test_parse_ubo_name() -> None:

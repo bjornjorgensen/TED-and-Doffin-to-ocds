@@ -1,6 +1,6 @@
 # tests/test_opt_301_lot_environlegis.py
 
-from ted_and_doffin_to_ocds.converters.opt_301_lot_environlegis import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_environlegis import (
     merge_environmental_legislation_org,
     parse_environmental_legislation_org,
 )

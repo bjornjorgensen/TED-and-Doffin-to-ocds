@@ -1,6 +1,6 @@
 # tests/test_opt_072_lot.py
 
-from ted_and_doffin_to_ocds.converters.opt_072_lot import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_072_lot import (
     merge_quality_target_description,
     parse_quality_target_description,
 )

@@ -2,7 +2,7 @@
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.bt_537_lot import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_537_lot import (
     merge_lot_duration_end_date,
     parse_lot_duration_end_date,
 )

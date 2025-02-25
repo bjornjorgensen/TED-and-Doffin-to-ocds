@@ -2,7 +2,7 @@
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.bt_03 import merge_form_type, parse_form_type
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_03 import merge_form_type, parse_form_type
 
 
 def create_xml(list_name) -> str:

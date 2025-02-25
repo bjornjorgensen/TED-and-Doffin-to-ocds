@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.bt_78_lot import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_78_lot import (
     merge_security_clearance_deadline,
     parse_security_clearance_deadline,
 )

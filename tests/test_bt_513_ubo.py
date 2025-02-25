@@ -1,6 +1,6 @@
 # tests/test_bt_513_ubo.py
 
-from ted_and_doffin_to_ocds.converters.bt_513_ubo import merge_ubo_city, parse_ubo_city
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_513_ubo import merge_ubo_city, parse_ubo_city
 
 
 def test_parse_ubo_city() -> None:

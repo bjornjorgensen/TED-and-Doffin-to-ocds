@@ -1,6 +1,6 @@
 # tests/test_opt_301_lot_tenderreceipt.py
 
-from ted_and_doffin_to_ocds.converters.opt_301_lot_tenderreceipt import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_tenderreceipt import (
     merge_tender_recipient,
     parse_tender_recipient,
 )

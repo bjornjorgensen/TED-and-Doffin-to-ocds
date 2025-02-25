@@ -1,6 +1,6 @@
 # tests/test_opt_301_lot_fiscallegis.py
 
-from ted_and_doffin_to_ocds.converters.opt_301_lot_fiscallegis import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_fiscallegis import (
     merge_fiscal_legislation_org,
     parse_fiscal_legislation_org,
 )

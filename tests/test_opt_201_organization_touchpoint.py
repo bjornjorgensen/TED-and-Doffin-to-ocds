@@ -1,6 +1,6 @@
 # tests/test_opt_201_organization_touchpoint.py
 
-from ted_and_doffin_to_ocds.converters.opt_201_organization_touchpoint import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_201_organization_touchpoint import (
     merge_touchpoint_technical_identifier,
     parse_touchpoint_technical_identifier,
 )

@@ -1,6 +1,6 @@
 # tests/test_opt_301_lotresult_paying.py
 
-from ted_and_doffin_to_ocds.converters.opt_301_lotresult_paying import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_301_lotresult_paying import (
     merge_payer_party,
     parse_payer_party,
 )

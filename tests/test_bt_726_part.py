@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.bt_726_part import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_726_part import (
     merge_part_sme_suitability,
     parse_part_sme_suitability,
 )

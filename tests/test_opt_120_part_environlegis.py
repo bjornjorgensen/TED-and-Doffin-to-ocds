@@ -1,6 +1,6 @@
 # tests/test_opt_120_part_environlegis.py
 
-from ted_and_doffin_to_ocds.converters.opt_120_part_environlegis import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_120_part_environlegis import (
     merge_environmental_legislation_url_part,
     parse_environmental_legislation_url_part,
 )

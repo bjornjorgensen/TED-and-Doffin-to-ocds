@@ -6,7 +6,7 @@ import pytest
 
 # Add the parent directory to sys.path to import the converter
 sys.path.append(str(Path(__file__).parent.parent))
-from ted_and_doffin_to_ocds.converters.bt_23_procedure import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_23_procedure import (
     merge_main_nature_procedure,
     parse_main_nature_procedure,
 )

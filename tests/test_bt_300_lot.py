@@ -2,7 +2,7 @@
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.bt_300_lot import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_300_lot import (
     merge_lot_additional_info,
     parse_lot_additional_info,
 )

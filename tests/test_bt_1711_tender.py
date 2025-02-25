@@ -1,6 +1,6 @@
 # tests/test_bt_1711_Tender.py
 
-from ted_and_doffin_to_ocds.converters.bt_1711_tender import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_1711_tender import (
     merge_tender_ranked,
     parse_tender_ranked,
 )

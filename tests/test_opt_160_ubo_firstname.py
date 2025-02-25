@@ -1,6 +1,6 @@
 # tests/test_opt_160_ubo_firstname.py
 
-from ted_and_doffin_to_ocds.converters.opt_160_ubo_firstname import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_160_ubo_firstname import (
     merge_ubo_firstname,
     parse_ubo_firstname,
 )

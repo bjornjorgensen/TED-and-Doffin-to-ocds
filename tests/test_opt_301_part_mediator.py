@@ -1,6 +1,6 @@
 # tests/test_opt_301_part_mediator.py
 
-from ted_and_doffin_to_ocds.converters.opt_301_part_mediator import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_301_part_mediator import (
     part_merge_mediator,
     part_parse_mediator,
 )

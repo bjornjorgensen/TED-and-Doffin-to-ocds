@@ -1,4 +1,4 @@
-from ted_and_doffin_to_ocds.converters.bt_806_procedure import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_806_procedure import (
     merge_exclusion_grounds_sources,
     parse_exclusion_grounds_sources,
 )

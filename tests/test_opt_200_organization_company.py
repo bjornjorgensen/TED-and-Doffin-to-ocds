@@ -1,6 +1,6 @@
 # tests/test_opt_200_organization_company.py
 
-from ted_and_doffin_to_ocds.converters.opt_200_organization_company import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_200_organization_company import (
     merge_organization_technical_identifier,
     parse_organization_technical_identifier,
 )

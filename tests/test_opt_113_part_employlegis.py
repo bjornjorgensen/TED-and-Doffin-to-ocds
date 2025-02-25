@@ -2,7 +2,7 @@
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.opt_113_part_employlegis import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_113_part_employlegis import (
     merge_part_employment_legislation_document_id,
     parse_part_employment_legislation_document_id,
 )

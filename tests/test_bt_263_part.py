@@ -10,7 +10,7 @@ import pytest
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
 from src.ted_and_doffin_to_ocds.main import configure_logging, main
-from ted_and_doffin_to_ocds.converters.bt_263_part import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_263_part import (
     merge_additional_classification_code_part,
     parse_additional_classification_code_part,
 )

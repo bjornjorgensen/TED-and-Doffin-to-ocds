@@ -1,6 +1,6 @@
 # tests/test_bt_513_organization_touchpoint.py
 
-from ted_and_doffin_to_ocds.converters.bt_513_organization_touchpoint import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_513_organization_touchpoint import (
     merge_organization_touchpoint_city,
     parse_organization_touchpoint_city,
 )

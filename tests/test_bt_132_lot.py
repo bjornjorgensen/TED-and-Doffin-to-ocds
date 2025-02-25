@@ -2,7 +2,7 @@
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.bt_132_lot import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_132_lot import (
     merge_lot_public_opening_date,
     parse_lot_public_opening_date,
 )

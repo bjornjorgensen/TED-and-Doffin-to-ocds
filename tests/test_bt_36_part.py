@@ -1,6 +1,6 @@
 import pytest
 
-from ted_and_doffin_to_ocds.converters.bt_36_part import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_36_part import (
     calculate_duration_in_days,
     merge_part_duration,
     parse_part_duration,

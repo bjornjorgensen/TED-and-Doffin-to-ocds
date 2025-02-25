@@ -4,7 +4,7 @@ import logging
 import pytest
 from lxml import etree
 
-from ted_and_doffin_to_ocds.converters.bt_707_part import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_707_part import (
     merge_part_documents_restricted_justification,
     parse_part_documents_restricted_justification,
 )

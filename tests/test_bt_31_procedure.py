@@ -1,6 +1,6 @@
 # tests/test_bt_31_procedure.py
 
-from ted_and_doffin_to_ocds.converters.bt_31_procedure import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_31_procedure import (
     merge_max_lots_allowed,
     parse_max_lots_allowed,
 )

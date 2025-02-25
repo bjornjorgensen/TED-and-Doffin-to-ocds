@@ -1,6 +1,6 @@
 # tests/test_bt_65_Lot_Subcontracting_Obligation.py
 
-from ted_and_doffin_to_ocds.converters.bt_65_lot_subcontracting_obligation import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_65_lot_subcontracting_obligation import (
     SUBCONTRACTING_OBLIGATION_MAPPING,
     merge_subcontracting_obligation,
     parse_subcontracting_obligation,

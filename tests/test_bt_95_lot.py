@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.bt_95_lot import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_95_lot import (
     merge_recurrence_description,
     parse_recurrence_description,
 )

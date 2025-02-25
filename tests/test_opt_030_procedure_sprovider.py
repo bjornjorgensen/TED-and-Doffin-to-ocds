@@ -1,6 +1,6 @@
 # tests/test_opt_030_procedure_sprovider.py
 
-from ted_and_doffin_to_ocds.converters.opt_030_procedure_sprovider import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_030_procedure_sprovider import (
     merge_provided_service_type,
     parse_provided_service_type,
 )

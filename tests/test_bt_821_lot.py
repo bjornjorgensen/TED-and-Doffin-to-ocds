@@ -1,4 +1,4 @@
-from ted_and_doffin_to_ocds.converters.bt_821_lot import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_821_lot import (
     merge_selection_criteria_source,
     parse_selection_criteria_source,
 )

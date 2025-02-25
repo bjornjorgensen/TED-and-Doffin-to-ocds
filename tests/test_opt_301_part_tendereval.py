@@ -1,6 +1,6 @@
 # tests/test_opt_301_part_tendereval.py
 
-from ted_and_doffin_to_ocds.converters.opt_301_part_tendereval import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_301_part_tendereval import (
     part_merge_tender_evaluator,
     part_parse_tender_evaluator,
 )

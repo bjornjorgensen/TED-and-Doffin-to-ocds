@@ -1,6 +1,6 @@
 # tests/test_bt_503_organization_company.py
 
-from ted_and_doffin_to_ocds.converters.bt_503_organization_company import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_503_organization_company import (
     merge_organization_telephone,
     parse_organization_telephone,
 )

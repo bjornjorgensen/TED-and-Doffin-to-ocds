@@ -1,6 +1,6 @@
 # tests/test_opt_170_tenderer_leader.py
 
-from ted_and_doffin_to_ocds.converters.opt_170_tenderer_leader import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_170_tenderer_leader import (
     merge_tendering_party_leader,
     parse_tendering_party_leader,
 )

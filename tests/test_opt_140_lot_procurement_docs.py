@@ -1,6 +1,6 @@
 # tests/test_opt_140_lot_procurement_docs.py
 
-from ted_and_doffin_to_ocds.converters.opt_140_lot_procurement_docs import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_140_lot_procurement_docs import (
     merge_procurement_documents_id,
     parse_procurement_documents_id,
 )

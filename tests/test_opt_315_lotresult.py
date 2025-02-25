@@ -1,6 +1,6 @@
 # tests/test_opt_315_lotresult.py
 
-from ted_and_doffin_to_ocds.converters.opt_315_lotresult import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_315_lotresult import (
     merge_contract_identifier_reference,
     parse_contract_identifier_reference,
 )

@@ -2,7 +2,7 @@
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.bt_300_part import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_300_part import (
     merge_part_additional_info,
     parse_part_additional_info,
 )

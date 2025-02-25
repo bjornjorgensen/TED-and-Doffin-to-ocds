@@ -2,7 +2,7 @@
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.opt_301_lot_revieworg import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_revieworg import (
     merge_review_organization_identifier,
     parse_review_organization_identifier,
 )

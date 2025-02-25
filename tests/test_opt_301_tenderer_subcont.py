@@ -1,6 +1,6 @@
 # tests/test_opt_301_tenderer_subcont.py
 
-from ted_and_doffin_to_ocds.converters.opt_301_tenderer_subcont import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_301_tenderer_subcont import (
     merge_subcontractor,
     parse_subcontractor,
 )

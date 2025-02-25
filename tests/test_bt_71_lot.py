@@ -2,7 +2,7 @@
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.bt_71_lot import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_71_lot import (
     merge_reserved_participation,
     parse_reserved_participation,
 )

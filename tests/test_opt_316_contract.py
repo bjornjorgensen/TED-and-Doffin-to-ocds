@@ -1,6 +1,6 @@
 # tests/test_opt_316_contract.py
 
-from ted_and_doffin_to_ocds.converters.opt_316_contract import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_316_contract import (
     merge_contract_technical_identifier,
     parse_contract_technical_identifier,
 )

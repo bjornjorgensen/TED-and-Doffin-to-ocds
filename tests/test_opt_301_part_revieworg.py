@@ -1,6 +1,6 @@
 # tests/test_opt_301_part_revieworg.py
 
-from ted_and_doffin_to_ocds.converters.opt_301_part_revieworg import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_301_part_revieworg import (
     part_merge_review_organization,
     part_parse_review_organization,
 )

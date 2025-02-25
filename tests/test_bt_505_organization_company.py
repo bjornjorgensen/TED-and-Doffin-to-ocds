@@ -1,6 +1,6 @@
 # tests/test_bt_505_organization_company.py
 
-from ted_and_doffin_to_ocds.converters.bt_505_organization_company import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_505_organization_company import (
     merge_organization_website,
     parse_organization_website,
 )

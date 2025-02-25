@@ -1,6 +1,6 @@
 # tests/test_opt_321_tender.py
 
-from ted_and_doffin_to_ocds.converters.opt_321_tender import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_321_tender import (
     merge_tender_technical_identifier,
     parse_tender_technical_identifier,
 )

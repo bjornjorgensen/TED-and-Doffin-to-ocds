@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.bt_775_lot import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_775_lot import (
     SOCIAL_OBJECTIVE_MAPPING,
     SUSTAINABILITY_STRATEGIES,
     merge_social_procurement,

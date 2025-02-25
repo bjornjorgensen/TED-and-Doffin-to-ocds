@@ -3,7 +3,7 @@
 import pytest
 from lxml import etree
 
-from ted_and_doffin_to_ocds.converters.bt_712a_lotresult import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_712a_lotresult import (
     merge_buyer_review_complainants_code,
     parse_buyer_review_complainants_code,
 )

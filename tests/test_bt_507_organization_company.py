@@ -1,6 +1,6 @@
 # tests/test_bt_507_organization_company.py
 
-from ted_and_doffin_to_ocds.converters.bt_507_organization_company import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_507_organization_company import (
     merge_organization_country_subdivision,
     parse_organization_country_subdivision,
 )

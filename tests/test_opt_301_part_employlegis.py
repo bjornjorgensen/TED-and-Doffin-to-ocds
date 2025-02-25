@@ -1,6 +1,6 @@
 # tests/test_opt_301_part_employlegis.py
 
-from ted_and_doffin_to_ocds.converters.opt_301_part_employlegis import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_301_part_employlegis import (
     part_merge_employment_legislation_org_reference,
     part_parse_employment_legislation_org_reference,
 )

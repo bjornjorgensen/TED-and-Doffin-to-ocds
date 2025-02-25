@@ -1,6 +1,6 @@
 # tests/test_opt_301_part_reviewinfo.py
 
-from ted_and_doffin_to_ocds.converters.opt_301_part_reviewinfo import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_301_part_reviewinfo import (
     part_merge_review_info_provider,
     part_parse_review_info_provider,
 )

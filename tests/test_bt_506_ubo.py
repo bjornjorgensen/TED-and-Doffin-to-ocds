@@ -1,6 +1,6 @@
 # tests/test_bt_506_ubo.py
 
-from ted_and_doffin_to_ocds.converters.bt_506_ubo import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_506_ubo import (
     merge_ubo_email,
     parse_ubo_email,
 )

@@ -8,7 +8,7 @@ import logging
 
 from lxml import etree
 
-from ted_and_doffin_to_ocds.converters.eforms.bt_11_procedure_buyer import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_11_procedure_buyer import (
     BUYER_LEGAL_TYPE_CODES,
     NAMESPACES,
 )

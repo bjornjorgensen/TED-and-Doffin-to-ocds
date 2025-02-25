@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.bt_774_lot import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_774_lot import (
     ENVIRONMENTAL_IMPACT_MAPPING,
     merge_green_procurement,
     parse_green_procurement,

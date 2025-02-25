@@ -1,6 +1,6 @@
 # tests/test_opt_322_lotresult.py
 
-from ted_and_doffin_to_ocds.converters.opt_322_lotresult import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_322_lotresult import (
     merge_lotresult_technical_identifier,
     parse_lotresult_technical_identifier,
 )

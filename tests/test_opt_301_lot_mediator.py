@@ -2,7 +2,7 @@
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.opt_301_lot_mediator import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_mediator import (
     merge_mediator_technical_identifier,
     parse_mediator_technical_identifier,
 )

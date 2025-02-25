@@ -1,6 +1,6 @@
 # tests/test_opt_320_lotresult.py
 
-from ted_and_doffin_to_ocds.converters.opt_320_lotresult import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_320_lotresult import (
     merge_tender_identifier_reference,
     parse_tender_identifier_reference,
 )

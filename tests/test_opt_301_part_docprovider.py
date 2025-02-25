@@ -1,6 +1,6 @@
 # tests/test_opt_301_part_docprovider.py
 
-from ted_and_doffin_to_ocds.converters.opt_301_part_docprovider import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_301_part_docprovider import (
     part_merge_document_provider,
     part_parse_document_provider,
 )

@@ -1,6 +1,6 @@
 # tests/test_opt_100_contract.py
 
-from ted_and_doffin_to_ocds.converters.opt_100_contract import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_100_contract import (
     merge_framework_notice_identifier,
     parse_framework_notice_identifier,
 )

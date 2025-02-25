@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.opt_156_lotresult import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_156_lotresult import (
     merge_vehicle_numeric,
     parse_vehicle_numeric,
 )

@@ -1,6 +1,6 @@
 # tests/test_bt_503_ubo.py
 
-from ted_and_doffin_to_ocds.converters.bt_503_ubo import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_503_ubo import (
     merge_ubo_telephone,
     parse_ubo_telephone,
 )

@@ -2,7 +2,7 @@
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.opt_112_lot_environlegis import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_112_lot_environlegis import (
     merge_environmental_legislation_document_id,
     parse_environmental_legislation_document_id,
 )

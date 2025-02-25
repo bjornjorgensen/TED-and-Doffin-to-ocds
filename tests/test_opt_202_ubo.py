@@ -1,6 +1,6 @@
 # tests/test_opt_202_ubo.py
 
-from ted_and_doffin_to_ocds.converters.opt_202_ubo import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_202_ubo import (
     merge_beneficial_owner_identifier,
     parse_beneficial_owner_identifier,
 )

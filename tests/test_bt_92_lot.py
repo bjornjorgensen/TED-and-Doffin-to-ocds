@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.bt_92_lot import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_92_lot import (
     merge_electronic_ordering,
     parse_electronic_ordering,
 )

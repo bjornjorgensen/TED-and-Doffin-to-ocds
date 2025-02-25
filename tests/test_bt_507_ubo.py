@@ -1,6 +1,6 @@
 # tests/test_bt_507_ubo.py
 
-from ted_and_doffin_to_ocds.converters.bt_507_ubo import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_507_ubo import (
     merge_ubo_country_subdivision,
     parse_ubo_country_subdivision,
 )

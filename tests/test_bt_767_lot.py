@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.bt_767_lot import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_767_lot import (
     merge_electronic_auction,
     parse_electronic_auction,
 )

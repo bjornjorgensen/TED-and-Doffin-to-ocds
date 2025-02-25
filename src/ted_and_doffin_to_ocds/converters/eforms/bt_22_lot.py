@@ -16,6 +16,30 @@ def parse_lot_internal_identifier(xml_content: str | bytes) -> dict[str, Any] | 
         Optional[Dict[str, Any]]: Dictionary containing lots data with internal identifiers,
                                  or None if no valid data is found
 
+    Example XML:
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+            <cac:ProcurementProject>
+                <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
+            </cac:ProcurementProject>
+        </cac:ProcurementProjectLot>
+
+    Example output:
+        {
+            "tender": {
+                "lots": [
+                    {
+                        "id": "LOT-0001",
+                        "identifiers": [
+                            {
+                                "id": "PROC/2020/0024-ABC-FGHI",
+                                "scheme": "internal"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -31,8 +55,9 @@ def parse_lot_internal_identifier(xml_content: str | bytes) -> dict[str, Any] | 
 
     result = {"tender": {"lots": []}}
 
+    # Using the absolute xpath from the specification
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
         namespaces=namespaces,
     )
 

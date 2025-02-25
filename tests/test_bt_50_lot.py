@@ -2,7 +2,7 @@
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.bt_50_lot import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_50_lot import (
     merge_minimum_candidates,
     parse_minimum_candidates,
 )

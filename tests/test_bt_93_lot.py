@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.bt_93_lot import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_93_lot import (
     merge_electronic_payment,
     parse_electronic_payment,
 )

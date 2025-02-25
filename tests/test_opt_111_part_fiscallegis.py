@@ -2,7 +2,7 @@
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.opt_111_part_fiscallegis import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_111_part_fiscallegis import (
     merge_part_fiscal_legislation_document_id,
     parse_part_fiscal_legislation_document_id,
 )

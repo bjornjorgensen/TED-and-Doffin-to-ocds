@@ -1,6 +1,6 @@
 # tests/test_opt_301_lot_addinfo.py
 
-from ted_and_doffin_to_ocds.converters.opt_301_lot_addinfo import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_301_lot_addinfo import (
     merge_additional_info_provider,
     parse_additional_info_provider,
 )

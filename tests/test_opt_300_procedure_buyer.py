@@ -2,7 +2,7 @@
 
 import pytest
 
-from ted_and_doffin_to_ocds.converters.opt_300_procedure_buyer import (
+from src.ted_and_doffin_to_ocds.converters.eforms.opt_300_procedure_buyer import (
     merge_buyer_technical_identifier,
     parse_buyer_technical_identifier,
 )

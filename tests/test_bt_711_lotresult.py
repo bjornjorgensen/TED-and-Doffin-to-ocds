@@ -1,4 +1,4 @@
-from ted_and_doffin_to_ocds.converters.bt_711_lotresult import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_711_lotresult import (
     merge_tender_value_highest,
     parse_tender_value_highest,
 )
