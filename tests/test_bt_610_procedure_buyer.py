@@ -9,7 +9,7 @@ import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.converters.bt_610_procedure_buyer import parse_activity_entity, merge_activity_entity
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_610_procedure_buyer import parse_activity_entity, merge_activity_entity
 from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 # Test constants
