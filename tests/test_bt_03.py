@@ -39,6 +39,12 @@ def test_parse_form_type_unknown_type() -> None:
     assert result is None
 
 
+def test_parse_form_type_bri_type() -> None:
+    xml_content = create_xml("bri")
+    result = parse_form_type(xml_content)
+    assert result is None  # bri type should be discarded
+
+
 def test_parse_form_type_no_notice_type_code() -> None:
     xml_content = "<root></root>"
     result = parse_form_type(xml_content)

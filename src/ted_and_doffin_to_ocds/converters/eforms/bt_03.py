@@ -17,6 +17,7 @@ form_type_mapping: dict[str, dict[str, list[str] | str | None]] = {
     "result": {"tag": ["award", "contract"], "status": "complete"},
     "dir-awa-pre": {"tag": ["award", "contract"], "status": "complete"},
     "cont-modif": {"tag": ["awardUpdate", "contractUpdate"], "status": None},
+    # bri type is not mapped as it should be discarded
 }
 
 
@@ -30,7 +31,7 @@ def parse_form_type(
 
     Returns:
         Dictionary containing 'tag' list and optional 'tender' status mapping,
-        or None if parsing fails
+        or None if parsing fails or should be discarded
 
     Example:
         >>> result = parse_form_type(xml_string)
@@ -56,6 +57,12 @@ def parse_form_type(
             return None
 
         list_name = notice_type_code[0].get("listName")
+        
+        # Discard notices with form type "bri" as they relate to events
+        # outside the lifecycle of a contracting process
+        if list_name == "bri":
+            logger.info("Discarding notice with form type 'bri'")
+            return None
 
         if list_name not in form_type_mapping:
             logger.warning("Unknown form type: %s", list_name)
