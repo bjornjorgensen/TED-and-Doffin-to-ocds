@@ -1,28 +1,18 @@
 # tests/test_bt_198_bt_09_procedure.py
 import json
-import logging
 import sys
 import tempfile
 from pathlib import Path
-
 import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import configure_logging, main
-
-
-@pytest.fixture(scope="module")
-def setup_logging():
-    configure_logging()
-    return logging.getLogger(__name__)
-
+from src.ted_and_doffin_to_ocds.main import main
 
 @pytest.fixture
 def temp_output_dir():
     with tempfile.TemporaryDirectory() as tmpdirname:
         yield Path(tmpdirname)
-
 
 def run_main_and_get_result(xml_file, output_dir):
     main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
@@ -31,11 +21,9 @@ def run_main_and_get_result(xml_file, output_dir):
     with output_files[0].open() as f:
         return json.load(f)
 
-
 def test_bt_198_bt_09_procedure_integration(
-    tmp_path, setup_logging, temp_output_dir
+    tmp_path, temp_output_dir
 ) -> None:
-    logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -70,14 +58,12 @@ def test_bt_198_bt_09_procedure_integration(
 
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-
-    logger.info("Result: %s", json.dumps(result, indent=2))
-
+    
     assert "withheldInformation" in result, "Expected 'withheldInformation' in result"
     assert (
         len(result["withheldInformation"]) == 1
     ), f"Expected 1 withheld information item, got {len(result['withheldInformation'])}"
-
+    
     withheld_item = result["withheldInformation"][0]
     assert (
         "availabilityDate" in withheld_item
@@ -85,7 +71,6 @@ def test_bt_198_bt_09_procedure_integration(
     assert (
         withheld_item["availabilityDate"] == "2025-03-31T00:00:00+01:00"
     ), f"Expected availabilityDate '2025-03-31T00:00:00+01:00', got {withheld_item['availabilityDate']}"
-
 
 if __name__ == "__main__":
     pytest.main(["-v", "-s"])

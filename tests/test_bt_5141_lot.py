@@ -14,8 +14,10 @@ from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 @pytest.fixture(scope="module")
 def setup_logging():
-    configure_logging()
-    return logging.getLogger(__name__)
+    # Logging disabled for tests
+    logger = logging.getLogger(__name__)
+    logger.disabled = True
+    return logger
 
 
 @pytest.fixture
@@ -61,7 +63,7 @@ def test_bt_5141_lot_integration(tmp_path, setup_logging, temp_output_dir) -> No
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
 
-    logger.info("Result: %s", json.dumps(result, indent=2))
+    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "items" in result["tender"], "Expected 'items' in tender"

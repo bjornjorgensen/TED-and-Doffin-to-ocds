@@ -80,7 +80,7 @@ def test_bt_7220_lot_integration(tmp_path, setup_logging, temp_output_dir) -> No
 
     # Run conversion and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    logger.info("Generated OCDS: %s", json.dumps(result, indent=2))
+    # logger.info("Generated OCDS: %s", json.dumps(result, indent=2) # Logging disabled)
 
     # Verify the lots array exists
     assert "lots" in result, "Expected 'lots' in root of release"

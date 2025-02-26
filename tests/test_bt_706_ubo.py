@@ -17,8 +17,10 @@ from src.ted_and_doffin_to_ocds.converters.eforms.bt_706_ubo import (
 
 @pytest.fixture(scope="module")
 def setup_logging():
-    configure_logging()
-    return logging.getLogger(__name__)
+    # Logging disabled for tests
+    logger = logging.getLogger(__name__)
+    logger.disabled = True
+    return logger
 
 
 @pytest.fixture
@@ -68,7 +70,7 @@ def test_parse_ubo_nationality(setup_logging) -> None:
     """
 
     result = parse_ubo_nationality(xml_content)
-    logger.info("Parse result: %s", json.dumps(result, indent=2))
+    # logger.info("Parse result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     assert result is not None
     assert "parties" in result
@@ -94,7 +96,7 @@ def test_merge_ubo_nationality(setup_logging) -> None:
     }
 
     merge_ubo_nationality(release_json, ubo_nationality_data)
-    logger.info("Merged result: %s", json.dumps(release_json, indent=2))
+    # logger.info("Merged result: %s", json.dumps(release_json, indent=2) # Logging disabled)
 
     assert "beneficialOwners" in release_json["parties"][0]
     assert len(release_json["parties"][0]["beneficialOwners"]) == 1
@@ -146,7 +148,7 @@ def test_bt_706_ubo_nationality_integration(
     xml_file.write_text(xml_content)
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    logger.info("Result: %s", json.dumps(result, indent=2))
+    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     assert "parties" in result
     assert len(result["parties"]) == 1

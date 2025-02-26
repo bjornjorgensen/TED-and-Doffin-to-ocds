@@ -13,8 +13,10 @@ from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 @pytest.fixture(scope="module")
 def setup_logging():
-    configure_logging()
-    return logging.getLogger(__name__)
+    # Logging disabled for tests
+    logger = logging.getLogger(__name__)
+    logger.disabled = True
+    return logger
 
 
 @pytest.fixture
@@ -67,7 +69,7 @@ def test_bt_7532_lot_integration(tmp_path, setup_logging, temp_output_dir) -> No
 
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    logger.info("Result: %s", json.dumps(result, indent=2))
+    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "lots" in result["tender"], "Expected 'lots' in tender"
@@ -94,7 +96,7 @@ def test_bt_7532_lot_integration(tmp_path, setup_logging, temp_output_dir) -> No
         criterion["numbers"][0]["threshold"] == "minimumScore"
     ), f"Expected threshold 'minimumScore', got {criterion['numbers'][0]['threshold']}"
 
-    logger.info("Test bt_7532_lot_integration passed successfully.")
+    # logger.info("Test bt_7532_lot_integration passed successfully.") # Logging disabled
 
 
 if __name__ == "__main__":

@@ -14,8 +14,10 @@ from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 @pytest.fixture(scope="module")
 def setup_logging():
-    configure_logging()
-    return logging.getLogger(__name__)
+    # Logging disabled for tests
+    logger = logging.getLogger(__name__)
+    logger.disabled = True
+    return logger
 
 
 @pytest.fixture
@@ -90,11 +92,11 @@ def test_bt_728_procedure_integration(
     # Write test XML file
     xml_file = tmp_path / "test_bt_728.xml"
     xml_file.write_text(xml_content)
-    logger.info("Testing with XML file: %s", xml_file)
+    # logger.info("Testing with XML file: %s", xml_file) # Logging disabled
 
     # Process the notice
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    logger.info("Processing result: %s", json.dumps(result, indent=2))
+    # logger.info("Processing result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     # Verify tender section exists when expected
     if expected_descriptions:
