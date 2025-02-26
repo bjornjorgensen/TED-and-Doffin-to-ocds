@@ -1,12 +1,22 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-442b5fc7-396e-44eb-8335-6ab99268c4d7",
+  "ocid": "ocds-abcd1234-daf6f85a-f58a-4767-b3ce-d8d5a9e043da",
   "tender": {
     "legalBasis": {
       "id": "FOA § 13-4 bokstav b annet punkt; «konkurranse er umulig av tekniske årsaker».",
       "scheme": "ELI",
       "description": "Det synes sannsynlig at det ikke eksisterer andre leverandører som kan eller vil kunne bli i stand til å levere ytelsen oppdragsgiver har behov for innenfor den tidsrammen som er til rådighet. \n\nDet synes sannsynlig at bare er en leverandør kan levere en digital patologiløsning som fungerer sammen med oppdragsgivers multimedialøsning, på en tilstrekkelig sikker måte.  ",
+      "multilingualDescriptions": [
+        {
+          "language": "NOR",
+          "text": "Det synes sannsynlig at det ikke eksisterer andre leverandører som kan eller vil kunne bli i stand til å levere ytelsen oppdragsgiver har behov for innenfor den tidsrammen som er til rådighet. \n\nDet synes sannsynlig at bare er en leverandør kan levere en digital patologiløsning som fungerer sammen med oppdragsgivers multimedialøsning, på en tilstrekkelig sikker måte.  "
+        },
+        {
+          "language": "ENG",
+          "text": "It seems likely that there are no other suppliers who can or may be able to deliver the services that the Contracting Authority needs within the timeframe at our disposal. \n\nIt seems likely that only one supplier can deliver a digital pathology system that functions together with the contracting authority ́s multi-media system in a sufficiently secure way.  "
+        }
+      ],
       "wasDerivedFrom": {
         "scheme": "CELEX",
         "id": "32014L0024"
@@ -194,8 +204,8 @@
       },
       "roles": [
         "buyer",
-        "funder",
-        "payer"
+        "payer",
+        "funder"
       ]
     },
     {
@@ -222,8 +232,8 @@
       },
       "roles": [
         "buyer",
-        "leadBuyer",
         "processContactPoint",
+        "leadBuyer",
         "reviewContactPoint"
       ]
     },

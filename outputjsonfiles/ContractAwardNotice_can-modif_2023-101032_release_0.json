@@ -1,12 +1,22 @@
 {
   "id": "be2cd071-e143-4fc8-bc3b-7f1ec1b4141f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9624bd6b-3f02-4379-9497-27854ae9c987",
+  "ocid": "ocds-abcd1234-a961d6d6-dfdb-444f-98a5-34ef54822432",
   "tender": {
     "legalBasis": {
       "id": "FOA § 28-1 d",
       "scheme": "ELI",
       "description": "I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d. Oppdragsgiver kunne ikke forutse at kommunen ville bli vedtatt delt i to nye kommuner; Ålesund og Haram. Anskaffelsens overordnede karakter blir ikke endret (1.), og prisøkningen overstiger ikke 50 prosent av den opprinnelige kontraktsverdien (2.). Oppdragsgiver kunngjør endringen (3.).",
+      "multilingualDescriptions": [
+        {
+          "language": "NOR",
+          "text": "I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d. Oppdragsgiver kunne ikke forutse at kommunen ville bli vedtatt delt i to nye kommuner; Ålesund og Haram. Anskaffelsens overordnede karakter blir ikke endret (1.), og prisøkningen overstiger ikke 50 prosent av den opprinnelige kontraktsverdien (2.). Oppdragsgiver kunngjør endringen (3.)."
+        },
+        {
+          "language": "ENG",
+          "text": "The contracting authority has made changes in existing contract, cf. the PPR §28-1d. The contracting authority couldnt foresee that the municipality would be divided into two new municipalities; Ålesund and Haram. The overall character of the procurement wont be changed(1) and the price increase doesnt exceed 50% of the original contract value(2). The Contracting Authority announces the change(3)."
+        }
+      ],
       "wasDerivedFrom": {
         "scheme": "CELEX",
         "id": "32014L0024"
@@ -115,7 +125,7 @@
       ],
       "amendments": [
         {
-          "id": "60e76387-d6e8-484f-ae82-79bfe599596f",
+          "id": "1e8b507a-935f-4803-a622-ba53228ba8db",
           "rationaleClassifications": [
             {
               "id": "mod-cir",
@@ -125,11 +135,11 @@
           ]
         },
         {
-          "id": "c541a050-f344-4e06-87ca-153826c4607f",
+          "id": "938b809c-3950-4aad-8f3e-31cadbb36081",
           "rationale": "Oppdragsgiver kunne ikke forutse at dagens Ålesund kommune ville bli vedtatt delt i to nye kommuner, heretter kalt Ålesund 2024 og Haram 2024. Anskaffelsens overordnede karakter blir ikke endret (1.), og den enkelte prisøkningen overstiger ikke 50 prosent av den opprinnelige kontraktsverdien (2.). Oppdragsgiver kunngjør endringene (3.)."
         },
         {
-          "id": "0979037d-26fd-4d97-842d-963526c0003b",
+          "id": "77761392-8c67-40be-a76d-c3ddd4f03272",
           "description": "I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d. Ålesund kommunes eksisterende avtale med Visma Enterprise AS vedrørende Visma FlyVo videreføres i Ålesund 2024 og Haram 2024. Det er inngått et endringsbilag til eksisterende kontrakt som beskriver de nødvendige endringene i kontrakten som følge av kommunedelingen. Av opprinnelig kontraktsverdi, etter avtalefestet KPI-justering, utgjør nødvendige engangskostnader direkte knyttet til kommunedelingen 10 %. Årlig pris for bruksrett (fast pris pr. flyktning og pr. elev) endres ikke (kun avhengig av antall flyktninger og antall elever). "
         }
       ],

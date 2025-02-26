@@ -1,7 +1,7 @@
 {
   "id": "2023-674343",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-21032bb4-6915-4e40-8fa9-636843d73ff4",
+  "ocid": "ocds-abcd1234-721f4ede-85fb-4957-8a9f-0140feaecb6a",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -136,8 +136,8 @@
         "email": "riik@kongsvinger.kommune.no"
       },
       "roles": [
-        "buyer",
         "wholesaleBuyer",
+        "buyer",
         "processContactPoint",
         "leadBuyer"
       ],

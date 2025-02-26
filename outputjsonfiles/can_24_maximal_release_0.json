@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d9125ec7-8d44-494e-a9f2-84bbb974e1b8",
+  "ocid": "ocds-abcd1234-ef0f2e51-ceb9-45f7-9fde-801e7517a76d",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -713,8 +713,8 @@
         "listedOnRegulatedMarket": false
       },
       "roles": [
-        "supplier",
         "tenderer",
+        "supplier",
         "leadTenderer"
       ],
       "beneficialOwners": [
@@ -763,8 +763,8 @@
         "listedOnRegulatedMarket": false
       },
       "roles": [
-        "supplier",
-        "tenderer"
+        "tenderer",
+        "supplier"
       ],
       "beneficialOwners": [
         {
