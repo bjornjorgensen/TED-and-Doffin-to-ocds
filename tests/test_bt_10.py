@@ -1,4 +1,8 @@
-# tests/test_bt_10_procedure_buyer.py
+"""Tests for BT-10 Authority Activity parser.
+
+Tests the parsing and conversion of contracting authority main activities 
+to OCDS party classifications using both COFOG and EU-specific schemes.
+"""
 
 import json
 import logging
@@ -8,14 +12,12 @@ from pathlib import Path
 
 import pytest
 
-# Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
 from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 
 @pytest.fixture(scope="module")
 def setup_logging():
-    # Logging disabled for tests
     logger = logging.getLogger(__name__)
     logger.disabled = True
     return logger
@@ -35,23 +37,29 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_10_non_cofog_activity(tmp_path, setup_logging, temp_output_dir) -> None:
-    """Test non-COFOG authority activity classification (gas-oil case)"""
+def test_bt_10_multiple_authorities(tmp_path, setup_logging, temp_output_dir) -> None:
+    """Test handling multiple contracting authorities with different activities"""
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-        xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-        xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-        xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
-        xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cbc:ID>notice-1</cbc:ID>
         <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
         <cac:ContractingParty>
             <cac:Party>
                 <cac:PartyIdentification>
                     <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                </cac:PartyIdentification>
+            </cac:Party>
+            <cac:ContractingActivity>
+                <cbc:ActivityTypeCode listName="authority-activity">health</cbc:ActivityTypeCode>
+            </cac:ContractingActivity>
+        </cac:ContractingParty>
+        <cac:ContractingParty>
+            <cac:Party>
+                <cac:PartyIdentification>
+                    <cbc:ID schemeName="organization">ORG-0002</cbc:ID>
                 </cac:PartyIdentification>
             </cac:Party>
             <cac:ContractingActivity>
@@ -60,100 +68,41 @@ def test_bt_10_non_cofog_activity(tmp_path, setup_logging, temp_output_dir) -> N
         </cac:ContractingParty>
     </ContractAwardNotice>
     """
-    xml_file = tmp_path / "test_input_non_cofog_activity.xml"
+    xml_file = tmp_path / "test_input_multiple_authorities.xml"
     xml_file.write_text(xml_content)
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
 
-    # Check specific parts of the result structure
-    assert "parties" in result, "Expected 'parties' in result"
-    assert (
-        len(result["parties"]) == 1
-    ), f"Expected 1 party, got {len(result['parties'])}"
-
-    party = result["parties"][0]
-    assert party["id"] == "ORG-0001", "Incorrect party ID"
-    assert "details" in party, "Missing details in party"
-    assert (
-        "classifications" in party["details"]
-    ), "Missing classifications in party details"
-    assert (
-        len(party["details"]["classifications"]) == 1
-    ), "Expected exactly one classification"
-
-    classification = party["details"]["classifications"][0]
-    assert classification["scheme"] == "eu-main-activity", "Incorrect scheme"
-    assert classification["id"] == "gas-oil", "Incorrect classification ID"
-    assert (
-        classification["description"]
-        == "Activities related to the exploitation of a geographical area for the purpose of extracting oil or gas."
-    ), "Incorrect classification description"
-
-    # Check that roles array contains 'buyer'
-    assert "roles" in party, "Missing roles in party"
-    assert "buyer" in party["roles"], "Missing 'buyer' role"
-
-
-def test_bt_10_cofog_activity(tmp_path, setup_logging, temp_output_dir) -> None:
-    """Test COFOG activity classification"""
-    logger = setup_logging
-    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
-    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
-        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-        xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-        xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-        xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
-        xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <cbc:ID>notice-1</cbc:ID>
-        <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
-        <cac:ContractingParty>
-            <cac:Party>
-                <cac:PartyIdentification>
-                    <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                </cac:PartyIdentification>
-            </cac:Party>
-            <cac:ContractingActivity>
-                <cbc:ActivityTypeCode listName="authority-activity">gen-pub</cbc:ActivityTypeCode>
-            </cac:ContractingActivity>
-        </cac:ContractingParty>
-    </ContractAwardNotice>
-    """
-    xml_file = tmp_path / "test_input_cofog_activity.xml"
-    xml_file.write_text(xml_content)
-
-    result = run_main_and_get_result(xml_file, temp_output_dir)
-    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
-
+    # Verify results
     assert "parties" in result
-    party = result["parties"][0]
+    assert len(result["parties"]) == 2
 
-    # Check basic party structure
-    assert party["id"] == "ORG-0001"
-    assert "roles" in party, "Missing roles in party"
-    assert "buyer" in party["roles"], "Missing 'buyer' role"
-    assert "details" in party
-    assert "classifications" in party["details"]
+    # Check COFOG authority
+    health_party = next(p for p in result["parties"] if p["id"] == "ORG-0001")
+    assert health_party["details"]["classifications"][0] == {
+        "scheme": "COFOG",
+        "id": "07",
+        "description": "Health"
+    }
+    assert "buyer" in health_party["roles"]
 
-    # Check classification
-    classification = party["details"]["classifications"][0]
-    assert classification["scheme"] == "COFOG"
-    assert classification["id"] == "01"
-    assert classification["description"] == "General public services"
+    # Check non-COFOG authority
+    gas_oil_party = next(p for p in result["parties"] if p["id"] == "ORG-0002")
+    assert gas_oil_party["details"]["classifications"][0] == {
+        "scheme": "eu-main-activity",
+        "id": "gas-oil",
+        "description": "Activities related to the exploitation of a geographical area for the purpose of extracting oil or gas."
+    }
+    assert "buyer" in gas_oil_party["roles"]
 
 
 def test_bt_10_missing_activity(tmp_path, setup_logging, temp_output_dir) -> None:
-    """Test missing activity code"""
+    """Test handling a contracting party with no activity code"""
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-        xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-        xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-        xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
-        xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cbc:ID>notice-1</cbc:ID>
         <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
         <cac:ContractingParty>
@@ -169,29 +118,21 @@ def test_bt_10_missing_activity(tmp_path, setup_logging, temp_output_dir) -> Non
     xml_file.write_text(xml_content)
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
-
-    party = next(
-        (party for party in result.get("parties", []) if party["id"] == "ORG-0001"),
-        None,
-    )
-    if party:
-        assert "details" not in party or "classifications" not in party.get(
-            "details", {}
-        ), "Did not expect classifications when activity is missing"
+    party = next((p for p in result.get("parties", []) if p["id"] == "ORG-0001"), None)
+    
+    # Party should exist but without classifications
+    assert party is not None
+    assert "details" not in party or "classifications" not in party.get("details", {})
+    assert "buyer" in party.get("roles", [])
 
 
 def test_bt_10_invalid_activity_code(tmp_path, setup_logging, temp_output_dir) -> None:
-    """Test invalid activity code"""
+    """Test handling invalid activity code"""
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-        xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-        xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-        xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
-        xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cbc:ID>notice-1</cbc:ID>
         <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
         <cac:ContractingParty>
@@ -210,16 +151,23 @@ def test_bt_10_invalid_activity_code(tmp_path, setup_logging, temp_output_dir) -
     xml_file.write_text(xml_content)
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
+    party = next((p for p in result.get("parties", []) if p["id"] == "ORG-0001"), None)
+    
+    # Party should exist but without classifications due to invalid code
+    assert party is not None
+    assert "details" not in party or "classifications" not in party.get("details", {})
+    assert "buyer" in party.get("roles", [])
 
-    party = next(
-        (party for party in result.get("parties", []) if party["id"] == "ORG-0001"),
-        None,
-    )
-    if party:
-        assert "details" not in party or "classifications" not in party.get(
-            "details", {}
-        ), "Did not expect classifications when activity code is invalid"
+
+def test_bt_10_invalid_xml(tmp_path, setup_logging, temp_output_dir) -> None:
+    """Test handling invalid XML"""
+    logger = setup_logging
+    xml_content = "Invalid XML content"
+    xml_file = tmp_path / "test_input_invalid_xml.xml"
+    xml_file.write_text(xml_content)
+
+    with pytest.raises(ValueError, match="Empty XML document"):
+        run_main_and_get_result(xml_file, temp_output_dir)
 
 
 if __name__ == "__main__":

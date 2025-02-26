@@ -34,7 +34,7 @@ AUTHORITY_TABLE = {
     "rail": "Activities related to the provision or operation of networks providing a service to the public in the field of transport by railway.",
 }
 
-# COFOG codes and descriptions
+# COFOG codes and descriptions per UN Classifications standard
 COFOG_TABLE = {
     "defence": ("02", "Defence"),
     "econ-aff": ("04", "Economic affairs"),
@@ -65,7 +65,7 @@ def parse_authority_activity(xml_content: str | bytes) -> dict[str, Any] | None:
                 "id": "<org-id>",
                 "details": {
                     "classifications": [{
-                        "scheme": "<cofog|eu-main-activity>",
+                        "scheme": "<COFOG|eu-main-activity>",
                         "id": "<activity-code>",
                         "description": "<activity-description>"
                     }]
@@ -73,7 +73,6 @@ def parse_authority_activity(xml_content: str | bytes) -> dict[str, Any] | None:
             }]
         }
         or None if no authority activity found
-
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -117,7 +116,7 @@ def parse_authority_activity(xml_content: str | bytes) -> dict[str, Any] | None:
             # Handle non-COFOG classifications
             elif code in AUTHORITY_TABLE:
                 classification = {
-                    "scheme": "TED_CE_ACTIVITY",
+                    "scheme": "eu-main-activity",
                     "id": code,
                     "description": AUTHORITY_TABLE[code],
                 }
