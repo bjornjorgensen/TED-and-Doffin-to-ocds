@@ -35,8 +35,10 @@ TEST_XML_TEMPLATE = """<?xml version="1.0" encoding="UTF-8"?>
 
 @pytest.fixture(scope="module")
 def setup_logging():
-    configure_logging()
-    return logging.getLogger(__name__)
+    # Logging disabled for tests
+    logger = logging.getLogger(__name__)
+    logger.disabled = True
+    return logger
 
 
 @pytest.fixture
@@ -72,7 +74,7 @@ def test_bt_610_procedure_buyer_integration(
 
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    logger.info("Result: %s", json.dumps(result, indent=2))
+    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     # Verify base structure
     assert "parties" in result, "Expected 'parties' in result"
@@ -109,7 +111,7 @@ def test_bt_610_procedure_buyer_integration(
             classification["scheme"] == "COFOG"
         ), f"Expected scheme 'COFOG', got {classification['scheme']}"
 
-    logger.info("Test bt_610_procedure_buyer_integration passed successfully.")
+    # logger.info("Test bt_610_procedure_buyer_integration passed successfully.") # Logging disabled
 
 
 if __name__ == "__main__":

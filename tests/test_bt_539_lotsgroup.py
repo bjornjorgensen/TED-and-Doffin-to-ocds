@@ -18,8 +18,10 @@ from src.ted_and_doffin_to_ocds.converters.eforms.bt_539_lotsgroup import (
 
 @pytest.fixture(scope="module")
 def setup_logging():
-    configure_logging()
-    return logging.getLogger(__name__)
+    # Logging disabled for tests
+    logger = logging.getLogger(__name__)
+    logger.disabled = True
+    return logger
 
 
 @pytest.fixture
@@ -138,7 +140,7 @@ def test_bt_539_lots_group_integration(
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
 
-    logger.info("Test result: %s", json.dumps(result, indent=2))
+    # logger.info("Test result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     # Verify the results
     assert "tender" in result

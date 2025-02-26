@@ -14,8 +14,10 @@ from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 @pytest.fixture(scope="module")
 def setup_logging():
-    configure_logging()
-    return logging.getLogger(__name__)
+    # Logging disabled for tests
+    logger = logging.getLogger(__name__)
+    logger.disabled = True
+    return logger
 
 
 @pytest.fixture
@@ -55,7 +57,7 @@ def test_bt_736_part_reserved_execution_yes(
 """
     xml_file = tmp_path / "test_input_reserved_execution_part.xml"
     xml_file.write_text(xml_content)
-    logger.info("Created XML file at %s", xml_file)
+    # logger.info("Created XML file at %s", xml_file) # Logging disabled
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
 
@@ -89,7 +91,7 @@ def test_bt_736_part_reserved_execution_no(
 """
     xml_file = tmp_path / "test_input_reserved_execution_part_no.xml"
     xml_file.write_text(xml_content)
-    logger.info("Created XML file at %s", xml_file)
+    # logger.info("Created XML file at %s", xml_file) # Logging disabled
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
 

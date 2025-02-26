@@ -1,5 +1,4 @@
 import json
-import logging
 import sys
 import tempfile
 from pathlib import Path
@@ -13,7 +12,7 @@ from src.ted_and_doffin_to_ocds.converters.eforms.bt_739_ubo import (
     merge_ubo_contact_fax,
     parse_ubo_contact_fax,
 )
-from src.ted_and_doffin_to_ocds.main import configure_logging, main
+from src.ted_and_doffin_to_ocds.main import main
 
 # Test constants
 TEST_UBO_XML = """<?xml version="1.0" encoding="UTF-8"?>
@@ -51,12 +50,6 @@ TEST_UBO_XML = """<?xml version="1.0" encoding="UTF-8"?>
 
 
 # Fixtures
-@pytest.fixture(scope="module")
-def setup_logging():
-    configure_logging()
-    return logging.getLogger(__name__)
-
-
 @pytest.fixture
 def temp_output_dir():
     with tempfile.TemporaryDirectory() as tmpdirname:
@@ -108,16 +101,11 @@ def validate_ubo_data(result: dict[str, Any], expected_fax: str) -> None:
 
 # Tests
 def test_bt_739_ubo_integration(
-    sample_xml_file: Path, setup_logging, temp_output_dir: Path
+    sample_xml_file: Path, temp_output_dir: Path
 ) -> None:
     """Test complete integration of UBO fax processing"""
-    logger = setup_logging
-
     result = run_main_and_get_result(sample_xml_file, temp_output_dir)
-    logger.info("Result: %s", json.dumps(result, indent=2))
-
     validate_ubo_data(result, "+123 4567891")
-    logger.info("Test bt_739_ubo_integration passed successfully.")
 
 
 def test_parse_ubo_fax() -> None:

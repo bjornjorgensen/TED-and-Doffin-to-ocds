@@ -15,8 +15,10 @@ from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 @pytest.fixture(scope="module")
 def setup_logging():
-    configure_logging()
-    return logging.getLogger(__name__)
+    # Logging disabled for tests
+    logger = logging.getLogger(__name__)
+    logger.disabled = True
+    return logger
 
 
 @pytest.fixture
@@ -62,7 +64,7 @@ def test_bt_10_non_cofog_activity(tmp_path, setup_logging, temp_output_dir) -> N
     xml_file.write_text(xml_content)
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    logger.info("Result: %s", json.dumps(result, indent=2))
+    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     # Check specific parts of the result structure
     assert "parties" in result, "Expected 'parties' in result"
@@ -122,7 +124,7 @@ def test_bt_10_cofog_activity(tmp_path, setup_logging, temp_output_dir) -> None:
     xml_file.write_text(xml_content)
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    logger.info("Result: %s", json.dumps(result, indent=2))
+    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     assert "parties" in result
     party = result["parties"][0]
@@ -167,7 +169,7 @@ def test_bt_10_missing_activity(tmp_path, setup_logging, temp_output_dir) -> Non
     xml_file.write_text(xml_content)
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    logger.info("Result: %s", json.dumps(result, indent=2))
+    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     party = next(
         (party for party in result.get("parties", []) if party["id"] == "ORG-0001"),
@@ -208,7 +210,7 @@ def test_bt_10_invalid_activity_code(tmp_path, setup_logging, temp_output_dir) -
     xml_file.write_text(xml_content)
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    logger.info("Result: %s", json.dumps(result, indent=2))
+    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     party = next(
         (party for party in result.get("parties", []) if party["id"] == "ORG-0001"),

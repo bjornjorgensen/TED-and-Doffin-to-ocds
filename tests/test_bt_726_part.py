@@ -1,6 +1,5 @@
 # tests/test_bt_726_part.py
 import json
-import logging
 import sys
 import tempfile
 from pathlib import Path
@@ -14,18 +13,12 @@ from src.ted_and_doffin_to_ocds.converters.eforms.bt_726_part import (
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import configure_logging, main
+from src.ted_and_doffin_to_ocds.main import main
 
 TEST_NAMESPACES = {
     "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
     "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
 }
-
-
-@pytest.fixture(scope="module")
-def setup_logging():
-    configure_logging()
-    return logging.getLogger(__name__)
 
 
 @pytest.fixture
@@ -76,9 +69,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_726_part_integration(tmp_path, setup_logging, temp_output_dir) -> None:
-    logger = setup_logging
-
+def test_bt_726_part_integration(tmp_path, temp_output_dir) -> None:
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
           xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -95,7 +86,6 @@ def test_bt_726_part_integration(tmp_path, setup_logging, temp_output_dir) -> No
     xml_file.write_text(xml_content)
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" in result, "Expected 'tender' in result"
 

@@ -13,8 +13,10 @@ from src.ted_and_doffin_to_ocds.main import configure_logging, main
 
 @pytest.fixture(scope="module")
 def setup_logging():
-    configure_logging()
-    return logging.getLogger(__name__)
+    # Logging disabled for tests
+    logger = logging.getLogger(__name__)
+    logger.disabled = True
+    return logger
 
 
 @pytest.fixture
@@ -25,13 +27,13 @@ def temp_output_dir():
 
 def run_main_and_get_result(xml_file, output_dir):
     logger = logging.getLogger(__name__)
-    logger.info("Running main function")
+    # logger.info("Running main function") # Logging disabled
     main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
-    logger.info("Main function executed")
+    # logger.info("Main function executed") # Logging disabled
     output_files = list(output_dir.glob("*.json"))
-    logger.info("Output files: %s", output_files)
+    # logger.info("Output files: %s", output_files) # Logging disabled
     if not output_files:
-        logger.error("No output files found")
+        # logger.error("No output files found") # Logging disabled
     assert len(output_files) == 1, f"Expected 1 output file, got {len(output_files)}"
     with output_files[0].open() as f:
         return json.load(f)
@@ -69,11 +71,11 @@ def test_bt_196_bt_105_procedure_integration(
     """
     xml_file = tmp_path / "test_input_unpublished_justification.xml"
     xml_file.write_text(xml_content)
-    logger.info("Created XML file at %s", xml_file)
-    logger.info("Output directory: %s", temp_output_dir)
+    # logger.info("Created XML file at %s", xml_file) # Logging disabled
+    # logger.info("Output directory: %s", temp_output_dir) # Logging disabled
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    logger.info("Result: %s", json.dumps(result, indent=2))
+    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     assert "withheldInformation" in result, "Expected 'withheldInformation' in result"
     assert (

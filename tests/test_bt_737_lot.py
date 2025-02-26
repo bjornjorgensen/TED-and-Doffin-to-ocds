@@ -1,6 +1,4 @@
-# tests/test_bt_737_Lot.py
 import json
-import logging
 import sys
 import tempfile
 from pathlib import Path
@@ -9,20 +7,12 @@ import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import configure_logging, main
-
-
-@pytest.fixture(scope="module")
-def setup_logging():
-    configure_logging()
-    return logging.getLogger(__name__)
-
+from src.ted_and_doffin_to_ocds.main import main
 
 @pytest.fixture
 def temp_output_dir():
     with tempfile.TemporaryDirectory() as tmpdirname:
         yield Path(tmpdirname)
-
 
 def run_main_and_get_result(xml_file, output_dir):
     main(str(xml_file), str(output_dir), "ocds-test-prefix", "test-scheme")
@@ -31,9 +21,7 @@ def run_main_and_get_result(xml_file, output_dir):
     with output_files[0].open() as f:
         return json.load(f)
 
-
-def test_bt_737_lot_integration(tmp_path, setup_logging, temp_output_dir) -> None:
-    logger = setup_logging
+def test_bt_737_lot_integration(tmp_path, temp_output_dir) -> None:
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
 <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
     xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -69,11 +57,8 @@ def test_bt_737_lot_integration(tmp_path, setup_logging, temp_output_dir) -> Non
 """
     xml_file = tmp_path / "test_input_documents_unofficial_language.xml"
     xml_file.write_text(xml_content)
-    logger.info("Created XML file at %s", xml_file)
-    logger.info("Output directory: %s", temp_output_dir)
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    logger.info("Result: %s", json.dumps(result, indent=2))
 
     assert "tender" in result, "Expected 'tender' in result"
     assert "documents" in result["tender"], "Expected 'documents' in tender"
@@ -95,7 +80,6 @@ def test_bt_737_lot_integration(tmp_path, setup_logging, temp_output_dir) -> Non
     assert document["relatedLots"] == [
         "LOT-0001"
     ], f"Expected related lots ['LOT-0001'], got {document['relatedLots']}"
-
 
 if __name__ == "__main__":
     pytest.main(["-v", "-s"])
