@@ -57,7 +57,7 @@ def parse_form_type(
             return None
 
         list_name = notice_type_code[0].get("listName")
-        
+
         # Discard notices with form type "bri" as they relate to events
         # outside the lifecycle of a contracting process
         if list_name == "bri":

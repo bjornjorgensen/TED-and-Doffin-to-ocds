@@ -1,11 +1,10 @@
-"""BT-06 Lot Strategic Procurement converter.
+"""BT-06-Lot Strategic Procurement converter.
 
-Maps procurement objectives (environmental, social, innovative) from lot level
-strategic procurement codes to OCDS lot sustainability information.
+This module handles the conversion of strategic procurement codes to OCDS format.
+It maps the strategic procurement codes to corresponding goals and adds required strategies.
 """
 
 import logging
-from typing import Any
 
 from lxml import etree
 
@@ -13,114 +12,123 @@ logger = logging.getLogger(__name__)
 
 NAMESPACES = {
     "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
     "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-    "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-    "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-    "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
 }
 
+STRATEGIC_PROCUREMENT_MAPPING = {
+    "env-imp": "environmental",
+    "inn-pur": "economic.innovativePurchase",
+    "soc-obj": "social",
+}
 
-def parse_strategic_procurement(xml_content: str | bytes) -> dict[str, Any] | None:
-    """Parse strategic procurement information (BT-06) from XML content.
+# These strategies are always included for any sustainable lot as per eForms spec
+DEFAULT_STRATEGIES = [
+    "awardCriteria",
+    "contractPerformanceConditions",
+    "selectionCriteria",
+    "technicalSpecifications",
+]
 
-    Extracts strategic procurement codes from ProcurementProjectLot elements and
-    maps them to lot sustainability information in OCDS format.
+
+def parse_strategic_procurement(xml_content: str | bytes) -> dict | None:
+    """Parse strategic procurement information from XML.
 
     Args:
-        xml_content: XML string or bytes to parse
+        xml_content: The XML content to parse
 
     Returns:
-        Dictionary containing lot sustainability data like:
-        {
-            "tender": {
-                "lots": [{
-                    "id": "<lot-id>",
-                    "hasSustainability": true,
-                    "sustainability": [{
-                        "goal": "<mapped-goal>",
-                        "strategies": ["<strategy-list>"]
-                    }]
-                }]
-            }
-        }
-        or None if no strategic procurement data found
-
+        dict: Dictionary with strategic procurement data per lot
+        None: If no strategic procurement data found or if parsing fails
     """
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
-    namespaces = NAMESPACES
-
-    result = {"tender": {"lots": []}}
-    lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
-        namespaces=namespaces,
-    )
-
-    strategic_procurement_mapping = {
-        "env-imp": "environmental",
-        "inn-pur": "economic.innovativePurchase",
-        "none": "none",
-        "soc-obj": "social",
-    }
-
-    for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        procurement_types = lot.xpath(
-            ".//cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='strategic-procurement']/cbc:ProcurementTypeCode/text()",
-            namespaces=namespaces,
+    try:
+        root = etree.fromstring(
+            xml_content if isinstance(xml_content, bytes) else xml_content.encode()
         )
 
-        lot_data = {"id": lot_id, "hasSustainability": False, "sustainability": []}
+        result = {"tender": {"lots": []}}
 
-        for procurement_type in procurement_types:
-            if procurement_type != "none":
+        # Find all lots with proper schemeName attribute
+        lots = root.xpath(
+            "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+            namespaces=NAMESPACES,
+        )
+
+        for lot in lots:
+            # Get lot ID, ensuring the schemeName attribute is correct
+            lot_ids = lot.xpath(
+                "cbc:ID[@schemeName='Lot']/text()",
+                namespaces=NAMESPACES,
+            )
+            if not lot_ids:
+                logger.warning("Lot found without valid ID, skipping")
+                continue
+
+            lot_id = lot_ids[0]
+
+            # Get strategic procurement codes
+            codes = lot.xpath(
+                "cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='strategic-procurement']/cbc:ProcurementTypeCode/text()",
+                namespaces=NAMESPACES,
+            )
+
+            if not codes:
+                continue
+
+            lot_data = {"id": lot_id}
+            sustainability_entries = []
+
+            has_non_none_code = False
+            for code in codes:
+                if code == "none":
+                    continue
+
+                goal = STRATEGIC_PROCUREMENT_MAPPING.get(code)
+                if goal:
+                    has_non_none_code = True
+                    sustainability_entries.append(
+                        {
+                            "goal": goal,
+                            "strategies": DEFAULT_STRATEGIES.copy(),
+                        }
+                    )
+
+            if has_non_none_code:
                 lot_data["hasSustainability"] = True
-                sustainability = {
-                    "goal": strategic_procurement_mapping.get(procurement_type, ""),
-                    "strategies": [
-                        "awardCriteria",
-                        "contractPerformanceConditions",
-                        "selectionCriteria",
-                        "technicalSpecifications",
-                    ],
-                }
-                lot_data["sustainability"].append(sustainability)
+                lot_data["sustainability"] = sustainability_entries
+                result["tender"]["lots"].append(lot_data)
 
-        if lot_data["hasSustainability"]:
-            result["tender"]["lots"].append(lot_data)
+        return result if result["tender"]["lots"] else None
 
-    return result if result["tender"]["lots"] else None
+    except etree.ParseError:
+        logger.exception("Failed to parse XML")
+        return None
+    except Exception:
+        logger.exception("Error processing strategic procurement data")
+        return None
 
 
 def merge_strategic_procurement(
-    release_json: dict[str, Any], strategic_procurement_data: dict[str, Any] | None
+    release_json: dict, strategic_procurement_data: dict | None
 ) -> None:
     """Merge strategic procurement data into the release JSON.
 
-    Updates lot sustainability information in the release JSON based on
-    strategic procurement codes.
-
     Args:
-        release_json: The target release JSON to update
-        strategic_procurement_data: The strategic procurement data to merge
-
+        release_json: The release JSON to merge into
+        strategic_procurement_data: Strategic procurement data to merge
     """
     if not strategic_procurement_data:
-        logger.warning("No Strategic Procurement data to merge")
         return
 
-    existing_lots = release_json.setdefault("tender", {}).setdefault("lots", [])
+    tender = release_json.setdefault("tender", {})
+    existing_lots = tender.setdefault("lots", [])
 
     for new_lot in strategic_procurement_data["tender"]["lots"]:
-        existing_lot = next(
-            (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
-            None,
+        matching_lot = next(
+            (lot for lot in existing_lots if lot["id"] == new_lot["id"]), None
         )
-        if existing_lot:
-            existing_lot["hasSustainability"] = new_lot["hasSustainability"]
-            existing_lot["sustainability"] = new_lot["sustainability"]
+        if matching_lot:
+            matching_lot["hasSustainability"] = new_lot["hasSustainability"]
+            matching_lot["sustainability"] = new_lot["sustainability"]
         else:
             existing_lots.append(new_lot)
 

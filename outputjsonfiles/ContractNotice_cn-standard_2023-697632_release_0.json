@@ -1,7 +1,7 @@
 {
   "id": "2023-697632",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2b279658-4d9b-42ba-b392-e6a2684cca7a",
+  "ocid": "ocds-abcd1234-71da0ae5-f486-4c45-a165-ef0ba4b90787",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -130,8 +130,8 @@
         "locality": "Kyrksæterøra"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     }
   ],

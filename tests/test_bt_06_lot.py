@@ -97,6 +97,14 @@ def test_bt_06_lot_integration(tmp_path, setup_logging, temp_output_dir) -> None
     assert (
         lot_1["sustainability"][0]["goal"] == "economic.innovativePurchase"
     ), f"Expected goal 'economic.innovativePurchase' for LOT-0001, got {lot_1['sustainability'][0]['goal']}"
+    assert (
+        sorted(lot_1["sustainability"][0]["strategies"]) == sorted([
+            "awardCriteria", 
+            "contractPerformanceConditions", 
+            "selectionCriteria", 
+            "technicalSpecifications"
+        ])
+    ), "Expected all four strategies for LOT-0001"
 
     lot_2 = next(lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0002")
     assert (
@@ -108,6 +116,14 @@ def test_bt_06_lot_integration(tmp_path, setup_logging, temp_output_dir) -> None
     assert (
         lot_2["sustainability"][0]["goal"] == "environmental"
     ), f"Expected goal 'environmental' for LOT-0002, got {lot_2['sustainability'][0]['goal']}"
+    assert (
+        sorted(lot_2["sustainability"][0]["strategies"]) == sorted([
+            "awardCriteria", 
+            "contractPerformanceConditions", 
+            "selectionCriteria", 
+            "technicalSpecifications"
+        ])
+    ), "Expected all four strategies for LOT-0002"
 
     lot_3 = next(lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003")
     assert (
