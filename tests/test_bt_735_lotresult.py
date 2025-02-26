@@ -9,7 +9,7 @@ import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.converters.bt_735_lotresult import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_735_lotresult import (
     merge_cvd_contract_type_lotresult,
     parse_cvd_contract_type_lotresult,
 )

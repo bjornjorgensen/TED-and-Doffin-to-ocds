@@ -1,8 +1,8 @@
 # tests/test_bt_503_organization_touchpoint.py
 
 from src.ted_and_doffin_to_ocds.converters.eforms.bt_503_organization_touchpoint import (
-    merge_organization_touchpoint_telephone,
-    parse_organization_touchpoint_telephone,
+    parse_touchpoint_telephone,
+    merge_touchpoint_telephone,
 )
 
 

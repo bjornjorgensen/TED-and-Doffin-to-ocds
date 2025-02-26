@@ -1,8 +1,8 @@
 # tests/test_opt_301_part_addinfo.py
 
 from src.ted_and_doffin_to_ocds.converters.eforms.opt_301_part_addinfo import (
-    part_merge_additional_info_provider,
-    part_parse_additional_info_provider,
+    merge_additional_info_provider_part,
+    parse_additional_info_provider_part,
 )
 
 

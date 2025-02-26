@@ -9,7 +9,7 @@ import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.converters.bt_739_ubo import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_739_ubo import (
     merge_ubo_fax,
     parse_ubo_fax,
 )

@@ -9,7 +9,7 @@ import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.converters.bt_727_procedure import (
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_727_procedure import (
     merge_procedure_place_performance,
     parse_procedure_place_performance,
 )

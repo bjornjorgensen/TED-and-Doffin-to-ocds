@@ -1,8 +1,8 @@
 # tests/test_opt_301_part_tenderreceipt.py
 
 from src.ted_and_doffin_to_ocds.converters.eforms.opt_301_part_tenderreceipt import (
-    part_merge_tender_recipient,
-    part_parse_tender_recipient,
+    merge_tender_recipient_part,
+    parse_tender_recipient_part,
 )
 
 
