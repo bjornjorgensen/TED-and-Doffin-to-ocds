@@ -8,8 +8,8 @@ import pytest
 sys.path.append(str(Path(__file__).parent.parent))
 from src.ted_and_doffin_to_ocds.main import main
 from src.ted_and_doffin_to_ocds.converters.eforms.bt_263_part import (
-    merge_additional_classification_code,
-    parse_additional_classification_code,
+    merge_additional_classification_code_part,
+    parse_additional_classification_code_part,
 )
 
 @pytest.fixture

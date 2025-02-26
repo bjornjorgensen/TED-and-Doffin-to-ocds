@@ -32,7 +32,7 @@ def run_main_and_get_result(xml_file, output_dir):
     # logger.info("Main function executed") # Logging disabled
     output_files = list(output_dir.glob("*.json"))
     # logger.info("Output files: %s", output_files) # Logging disabled
-    if not output_files:
+    #if not output_files:
         # logger.error("No output files found") # Logging disabled
     assert len(output_files) == 1, f"Expected 1 output file, got {len(output_files)}"
     with output_files[0].open() as f:
