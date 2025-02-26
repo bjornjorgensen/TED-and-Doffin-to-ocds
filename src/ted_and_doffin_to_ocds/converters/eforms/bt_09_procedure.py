@@ -24,8 +24,9 @@ NAMESPACES = {
 def parse_cross_border_law(xml_content: str | bytes) -> dict[str, Any] | None:
     """Parse the cross border law description (BT-09) from XML content.
 
-    Extracts the DocumentDescription text from ProcurementLegislationDocumentReference
-    where ID is 'CrossBorderLaw'.
+    Extracts both the ID (BT-09(a)) and DocumentDescription (BT-09(b)) from
+    ProcurementLegislationDocumentReference where ID is 'CrossBorderLaw'.
+    Handles multilingual descriptions according to eForms specification.
 
     Args:
         xml_content: XML string or bytes to parse
@@ -34,17 +35,43 @@ def parse_cross_border_law(xml_content: str | bytes) -> dict[str, Any] | None:
         Dictionary containing cross border law mapping like:
         {'tender': {'crossBorderLaw': '<law description>'}}
         or None if not found
-
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
-    xpath = "//cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='CrossBorderLaw']/cbc:DocumentDescription/text()"
-    cross_border_law = root.xpath(xpath, namespaces=NAMESPACES)
 
-    if cross_border_law:
-        return {"tender": {"crossBorderLaw": cross_border_law[0]}}
-    logger.warning("No Cross Border Law (BT-09) found in the XML")
+    # Check for CrossBorderLaw section following eForms absolute xpath
+    cross_border_law_refs = root.xpath(
+        "//cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='CrossBorderLaw']",
+        namespaces=NAMESPACES,
+    )
+
+    if not cross_border_law_refs:
+        logger.warning("No Cross Border Law (BT-09) section found in the XML")
+        return None
+
+    ref = cross_border_law_refs[0]
+    descriptions = ref.xpath("cbc:DocumentDescription", namespaces=NAMESPACES)
+
+    if not descriptions:
+        logger.warning("No Cross Border Law Description (BT-09(b)) found in the XML")
+        return None
+
+    # Get description text, preferring English if available, otherwise take first available
+    description_text = None
+    for desc in descriptions:
+        lang = desc.get("languageID", "").upper()
+        if lang == "ENG":
+            description_text = desc.text
+            break
+
+    if description_text is None and descriptions:
+        description_text = descriptions[0].text
+
+    if description_text:
+        return {"tender": {"crossBorderLaw": description_text}}
+
+    logger.warning("No Cross Border Law Description text found")
     return None
 
 

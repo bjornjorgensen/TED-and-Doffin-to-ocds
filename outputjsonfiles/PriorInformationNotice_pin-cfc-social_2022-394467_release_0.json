@@ -1,7 +1,7 @@
 {
   "id": "2022-394467",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-dcede685-1042-4d57-897a-91cd80d78030",
+  "ocid": "ocds-abcd1234-ff9b8928-c31e-44b8-8d75-24f7d63a993b",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -125,8 +125,8 @@
       },
       "roles": [
         "processContactPoint",
-        "submissionReceiptBody",
-        "buyer"
+        "buyer",
+        "submissionReceiptBody"
       ],
       "address": {
         "streetAddress": "Postboks 4100",

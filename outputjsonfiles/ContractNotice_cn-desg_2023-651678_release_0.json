@@ -1,7 +1,7 @@
 {
   "id": "2023-651678",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2bf6ba9b-d450-4f40-a9ae-4f1cabfef857",
+  "ocid": "ocds-abcd1234-43f7acb3-4510-4222-b9f7-cc3a5ae3bef5",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -137,8 +137,8 @@
       },
       "roles": [
         "processContactPoint",
-        "submissionReceiptBody",
-        "buyer"
+        "buyer",
+        "submissionReceiptBody"
       ],
       "address": {
         "streetAddress": "Nesgata 11",
