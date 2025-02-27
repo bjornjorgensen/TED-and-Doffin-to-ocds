@@ -8,6 +8,7 @@ logger = logging.getLogger(__name__)
 
 # Constants
 XPATH_PROCEDURE_ACCELERATED = "//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/cbc:ProcessReasonCode/text()"
+XPATH_PROCEDURE_RATIONALE = "//cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/cbc:ProcessReason/text()"
 NAMESPACES = {
     "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
     "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
@@ -55,7 +56,8 @@ def parse_procedure_accelerated(xml_content: str | bytes) -> dict | None:
     """Parse procedure acceleration information from XML.
 
     Extract information about whether the time limit can be reduced due to urgency
-    as defined in BT-106.
+    as defined in BT-106. This field indicates whether receipt of requests to participate
+    or tenders can be reduced due to a state of urgency.
 
     Args:
         xml_content: The XML content to parse, either as a string or bytes.
@@ -65,35 +67,44 @@ def parse_procedure_accelerated(xml_content: str | bytes) -> dict | None:
         {
             "tender": {
                 "procedure": {
-                    "isAccelerated": bool
+                    "isAccelerated": bool,
+                    "acceleratedRationale": str  # Optional, only present if isAccelerated is True
                 }
             }
         }
-        Returns None if no relevant data is found.
+        Returns None if no relevant data is found or if the data is invalid.
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
-
+        ValueError: If the XML content is empty or None.
     """
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
-
+    xml_content = validate_xml_content(xml_content)
     root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-    }
 
-    procedure_elements = root.xpath(XPATH_PROCEDURE_ACCELERATED, namespaces=namespaces)
+    procedure_elements = root.xpath(XPATH_PROCEDURE_ACCELERATED, namespaces=NAMESPACES)
     if not procedure_elements:
+        logger.debug("No accelerated procedure information found in XML")
         return None
 
     acceleration_value = procedure_elements[0].strip()
-    is_accelerated = acceleration_value.lower() in {"true", "1", "yes"}
-    result = {"tender": {"procedure": {"isAccelerated": is_accelerated}}}
-    if is_accelerated:
-        result["tender"]["procedure"]["acceleratedRationale"] = acceleration_value
-    return result
+    acceleration_value_lower = acceleration_value.lower()
+    
+    if acceleration_value_lower in VALID_TRUE_VALUES:
+        is_accelerated = True
+        result = {"tender": {"procedure": {"isAccelerated": is_accelerated}}}
+        
+        rationale_elements = root.xpath(XPATH_PROCEDURE_RATIONALE, namespaces=NAMESPACES)
+        if rationale_elements and rationale_elements[0].strip():
+            result["tender"]["procedure"]["acceleratedRationale"] = rationale_elements[0].strip()
+        
+        return result
+    
+    if acceleration_value_lower in VALID_FALSE_VALUES:
+        return {"tender": {"procedure": {"isAccelerated": False}}}
+    
+    logger.warning("Invalid acceleration value '%s'. Must be one of %s",
+                acceleration_value, VALID_TRUE_VALUES | VALID_FALSE_VALUES)
+    return None
 
 
 def merge_procedure_accelerated(
@@ -121,11 +132,14 @@ def merge_procedure_accelerated(
     procedure = tender.setdefault("procedure", {})
 
     if "isAccelerated" in procedure_accelerated_data["tender"]["procedure"]:
-        procedure["isAccelerated"] = procedure_accelerated_data["tender"]["procedure"][
-            "isAccelerated"
-        ]
-        if "acceleratedRationale" in procedure_accelerated_data["tender"]["procedure"]:
-            procedure["acceleratedRationale"] = procedure_accelerated_data["tender"][
-                "procedure"
-            ]["acceleratedRationale"]
+        is_accelerated = procedure_accelerated_data["tender"]["procedure"]["isAccelerated"]
+        procedure["isAccelerated"] = is_accelerated
+        
+        # Only include acceleratedRationale if procedure is actually accelerated
+        if is_accelerated and "acceleratedRationale" in procedure_accelerated_data["tender"]["procedure"]:
+            procedure["acceleratedRationale"] = procedure_accelerated_data["tender"]["procedure"]["acceleratedRationale"]
+        elif "acceleratedRationale" in procedure:
+            # Remove any existing acceleratedRationale if procedure is not accelerated
+            del procedure["acceleratedRationale"]
+            
         logger.info("Successfully merged procedure acceleration data")
