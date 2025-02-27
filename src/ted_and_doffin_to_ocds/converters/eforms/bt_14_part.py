@@ -34,7 +34,7 @@ def parse_part_documents_restricted(xml_content: str | bytes) -> dict[str, Any] 
     result = {"tender": {"documents": []}}
 
     document_references = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:TenderingTerms/cac:CallForTendersDocumentReference",
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference",
         namespaces=namespaces,
     )
 

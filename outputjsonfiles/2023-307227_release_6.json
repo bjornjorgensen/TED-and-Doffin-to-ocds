@@ -1,7 +1,7 @@
 {
   "id": "2023-307227",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6c3b366b-36e7-480d-b4e4-dd944ce2df6d",
+  "ocid": "ocds-abcd1234-e63e1591-fc32-43c3-b702-19ea09ffbf44",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -14,6 +14,13 @@
       "GPA"
     ],
     "id": "PAR-0001",
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "url": "https://tendsign.no/doc.aspx?UniqueId=aflonwvqnm&GoTo=Docs"
+      }
+    ],
     "title": "Bærekraftig møtemat til OsloMet",
     "identifiers": [
       {
@@ -122,11 +129,6 @@
       },
       {
         "region": "NO08"
-      }
-    ],
-    "documents": [
-      {
-        "id": "DOCUMENT_ID_REQUIRED_HERE"
       }
     ]
   },

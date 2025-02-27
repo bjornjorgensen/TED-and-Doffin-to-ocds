@@ -1,7 +1,7 @@
 {
   "id": "510444f4-6cd2-4b26-8dd6-f3af27ffa069",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9a02dfa3-7442-4ba5-98c6-c4e13a5d6074",
+  "ocid": "ocds-abcd1234-d2e7f23d-2b08-49db-a328-f28b1a435cbf",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften"
@@ -130,9 +130,9 @@
         "locality": "HØNEFOSS"
       },
       "roles": [
+        "buyer",
         "funder",
-        "payer",
-        "buyer"
+        "payer"
       ]
     },
     {

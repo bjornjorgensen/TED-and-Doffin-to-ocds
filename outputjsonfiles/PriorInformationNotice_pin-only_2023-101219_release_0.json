@@ -1,7 +1,7 @@
 {
   "id": "0e2b63aa-a91a-49c6-aa1c-386516ec2275",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-94bf3ae4-309c-4dd9-ad1d-cac4c6f55af4",
+  "ocid": "ocds-abcd1234-efd099cd-db09-47fa-b4e6-390084583969",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -17,6 +17,13 @@
       "futureNoticeDate": "2024-02-29T00:00:00+01:00"
     },
     "id": "PAR-0000",
+    "documents": [
+      {
+        "id": "216889791",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/216889791.aspx"
+      }
+    ],
     "title": "Invitasjon til markedsdialog - Treningsutstyr til fysio- og ergoterapi Helse Midt-Norge",
     "identifiers": [
       {
@@ -60,11 +67,6 @@
       },
       {
         "country": "NO"
-      }
-    ],
-    "documents": [
-      {
-        "id": "216889791"
       }
     ]
   },

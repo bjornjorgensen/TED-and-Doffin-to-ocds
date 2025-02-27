@@ -32,7 +32,7 @@ def parse_additional_info_deadline_part(xml_content: str | bytes) -> str | None:
     }
 
     part_element = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']",
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
         namespaces=namespaces,
     )
 
@@ -63,14 +63,66 @@ def convert_to_iso_format(date_string: str, time_string: str) -> str:
         str: Combined date and time in ISO format
 
     """
+    # Make copies of the original strings
+    date_part = date_string
+    time_part = time_string
+
+    # Extract timezone information
+    date_timezone = ""
+    if "+" in date_string:
+        date_part, date_timezone = date_string.split("+", 1)
+        date_timezone = "+" + date_timezone
+    elif "-" in date_string[5:]:  # Check for timezone marker after YYYY-MM
+        parts = date_string.split("-", 3)
+        if len(parts) > 3:  # We have year-month-day-timezone
+            date_part = "-".join(parts[0:3])
+            date_timezone = "-" + parts[3]
+
+    time_timezone = ""
+    if "+" in time_string:
+        time_part, time_timezone = time_string.split("+", 1)
+        time_timezone = "+" + time_timezone
+    elif "-" in time_string:
+        parts = time_string.split("-", 1)
+        time_part = parts[0]
+        time_timezone = "-" + parts[1]
+
+    # Handle Z timezone
+    if date_string.endswith("Z"):
+        date_part = date_string[:-1]
+        date_timezone = "Z"
+    if time_string.endswith("Z"):
+        time_part = time_string[:-1]
+        time_timezone = "Z"
+
+    # Use the timezone from either date or time (preferring time if both have timezone)
+    timezone = time_timezone or date_timezone
+
+    # Extract microseconds if present in the time portion
+    microseconds = ""
+    if "." in time_part:
+        time_base, microseconds = time_part.split(".", 1)
+        time_part = time_base
+
     # Combine date and time
-    datetime_string = f"{date_string.split('+')[0]}T{time_string}"
+    datetime_string = f"{date_part}T{time_part}"
 
     # Parse the datetime
     date_time = datetime.fromisoformat(datetime_string)
 
-    # Format the datetime with the original timezone
-    return date_time.isoformat()
+    # Format the datetime with the timezone and microseconds
+    if microseconds:
+        base_datetime = date_time.isoformat().split(".")[0]
+        result = f"{base_datetime}.{microseconds}"
+    else:
+        result = date_time.isoformat()
+
+    # Add timezone if present
+    if timezone:
+        if timezone == "Z":
+            return f"{result}Z"
+        return f"{result}{timezone}"
+    return result
 
 
 def merge_additional_info_deadline_part(

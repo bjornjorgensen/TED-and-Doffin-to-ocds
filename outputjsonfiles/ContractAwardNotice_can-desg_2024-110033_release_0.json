@@ -1,7 +1,7 @@
 {
   "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-01c60d4e-6537-4fd4-807a-89c90b71fda1",
+  "ocid": "ocds-abcd1234-06cca5f3-17a9-40a5-b180-662297719dca",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -151,10 +151,10 @@
         "locality": "Bergen"
       },
       "roles": [
-        "funder",
         "processContactPoint",
-        "payer",
-        "buyer"
+        "buyer",
+        "funder",
+        "payer"
       ]
     },
     {

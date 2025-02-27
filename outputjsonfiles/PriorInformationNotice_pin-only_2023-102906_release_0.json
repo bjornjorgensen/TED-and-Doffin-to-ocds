@@ -1,7 +1,7 @@
 {
   "id": "26cd2bbe-3527-43ab-ae19-ecb644fff706",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-be307ffb-4e64-4612-8c6f-a195d695b600",
+  "ocid": "ocds-abcd1234-5bfac8b1-2b16-4bbf-96c7-555270c6d12d",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -18,6 +18,13 @@
       "futureNoticeDate": "2024-04-01T00:00:00+02:00"
     },
     "id": "PAR-0000",
+    "documents": [
+      {
+        "id": "219115887",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/219115887.aspx"
+      }
+    ],
     "title": "VOIS - Invitasjon til markedsdialog - Diverse forbruksvarer",
     "identifiers": [
       {
@@ -82,12 +89,7 @@
     ],
     "suitability": {
       "sme": true
-    },
-    "documents": [
-      {
-        "id": "219115887"
-      }
-    ]
+    }
   },
   "tag": [
     "tender"
