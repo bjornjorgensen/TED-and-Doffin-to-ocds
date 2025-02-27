@@ -88,22 +88,29 @@ def parse_procedure_accelerated(xml_content: str | bytes) -> dict | None:
 
     acceleration_value = procedure_elements[0].strip()
     acceleration_value_lower = acceleration_value.lower()
-    
+
     if acceleration_value_lower in VALID_TRUE_VALUES:
         is_accelerated = True
         result = {"tender": {"procedure": {"isAccelerated": is_accelerated}}}
-        
-        rationale_elements = root.xpath(XPATH_PROCEDURE_RATIONALE, namespaces=NAMESPACES)
+
+        rationale_elements = root.xpath(
+            XPATH_PROCEDURE_RATIONALE, namespaces=NAMESPACES
+        )
         if rationale_elements and rationale_elements[0].strip():
-            result["tender"]["procedure"]["acceleratedRationale"] = rationale_elements[0].strip()
-        
+            result["tender"]["procedure"]["acceleratedRationale"] = rationale_elements[
+                0
+            ].strip()
+
         return result
-    
+
     if acceleration_value_lower in VALID_FALSE_VALUES:
         return {"tender": {"procedure": {"isAccelerated": False}}}
-    
-    logger.warning("Invalid acceleration value '%s'. Must be one of %s",
-                acceleration_value, VALID_TRUE_VALUES | VALID_FALSE_VALUES)
+
+    logger.warning(
+        "Invalid acceleration value '%s'. Must be one of %s",
+        acceleration_value,
+        VALID_TRUE_VALUES | VALID_FALSE_VALUES,
+    )
     return None
 
 
@@ -132,14 +139,22 @@ def merge_procedure_accelerated(
     procedure = tender.setdefault("procedure", {})
 
     if "isAccelerated" in procedure_accelerated_data["tender"]["procedure"]:
-        is_accelerated = procedure_accelerated_data["tender"]["procedure"]["isAccelerated"]
+        is_accelerated = procedure_accelerated_data["tender"]["procedure"][
+            "isAccelerated"
+        ]
         procedure["isAccelerated"] = is_accelerated
-        
+
         # Only include acceleratedRationale if procedure is actually accelerated
-        if is_accelerated and "acceleratedRationale" in procedure_accelerated_data["tender"]["procedure"]:
-            procedure["acceleratedRationale"] = procedure_accelerated_data["tender"]["procedure"]["acceleratedRationale"]
+        if (
+            is_accelerated
+            and "acceleratedRationale"
+            in procedure_accelerated_data["tender"]["procedure"]
+        ):
+            procedure["acceleratedRationale"] = procedure_accelerated_data["tender"][
+                "procedure"
+            ]["acceleratedRationale"]
         elif "acceleratedRationale" in procedure:
             # Remove any existing acceleratedRationale if procedure is not accelerated
             del procedure["acceleratedRationale"]
-            
+
         logger.info("Successfully merged procedure acceleration data")
