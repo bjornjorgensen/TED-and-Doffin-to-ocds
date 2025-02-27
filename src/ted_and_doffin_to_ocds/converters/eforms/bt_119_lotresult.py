@@ -50,31 +50,73 @@ def parse_dps_termination(xml_content: str | bytes) -> dict | None:
 
     result = {"tender": {"lots": []}}
 
-    lot_results = root.xpath(
-        "//efac:NoticeResult/efac:LotResult",
+    # Find all NoticeResult sections
+    notice_results = root.xpath(
+        "//ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult",
         namespaces=namespaces,
     )
 
-    for lot_result in lot_results:
-        dps_termination = lot_result.xpath(
-            "efbc:DPSTerminationIndicator/text()",
+    for notice_result in notice_results:
+        # Find LotResults with DPS termination indicator set to true
+        lot_results = notice_result.xpath(
+            "efac:LotResult[efbc:DPSTerminationIndicator='true']",
             namespaces=namespaces,
         )
 
-        if dps_termination and dps_termination[0].lower() == "true":
-            lot_id = lot_result.xpath(
-                "../efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+        # Get all TenderLots in this NoticeResult
+        tender_lots = notice_result.xpath(
+            "efac:TenderLot",
+            namespaces=namespaces,
+        )
+
+        # For each LotResult with DPS termination
+        for lot_result in lot_results:
+            # Get the lot ID reference if available
+            lot_reference = lot_result.xpath(
+                "cbc:ID[@schemeName='Lot']/text() | cbc:ID[not(@schemeName)]/text()",
                 namespaces=namespaces,
             )
-            if lot_id:
-                result["tender"]["lots"].append(
-                    {
-                        "id": lot_id[0],
-                        "techniques": {
-                            "dynamicPurchasingSystem": {"status": "terminated"}
-                        },
-                    }
+
+            if lot_reference:
+                # Find the matching TenderLot
+                for tender_lot in tender_lots:
+                    lot_id = tender_lot.xpath(
+                        "cbc:ID[@schemeName='Lot']/text()",
+                        namespaces=namespaces,
+                    )
+                    if lot_id and lot_id[0] == lot_reference[0]:
+                        result["tender"]["lots"].append(
+                            {
+                                "id": lot_id[0],
+                                "techniques": {
+                                    "dynamicPurchasingSystem": {"status": "terminated"}
+                                },
+                            }
+                        )
+                        break
+            else:
+                # If no reference is found, use the sequential position as a fallback
+                lot_position = notice_result.xpath(
+                    "count(efac:LotResult[. << $current])",
+                    namespaces=namespaces,
+                    current=lot_result,
                 )
+
+                # If we can find a TenderLot at the same position
+                if int(lot_position) < len(tender_lots):
+                    lot_id = tender_lots[int(lot_position)].xpath(
+                        "cbc:ID[@schemeName='Lot']/text()",
+                        namespaces=namespaces,
+                    )
+                    if lot_id:
+                        result["tender"]["lots"].append(
+                            {
+                                "id": lot_id[0],
+                                "techniques": {
+                                    "dynamicPurchasingSystem": {"status": "terminated"}
+                                },
+                            }
+                        )
 
     return result if result["tender"]["lots"] else None
 

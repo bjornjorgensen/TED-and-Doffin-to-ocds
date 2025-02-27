@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-12842885-a6cb-4030-b81e-eea3c211ab8e",
+  "ocid": "ocds-abcd1234-62dbad53-cd0f-4918-a3a1-53d65d103358",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -153,8 +153,8 @@
       {
         "id": "GLO-0001",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "title": "Title ---",
         "identifiers": [
@@ -335,8 +335,8 @@
         "id": "FiscalDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "publisher": {
           "id": "ORG-0002"
@@ -346,8 +346,8 @@
         "id": "EnvDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "publisher": {
           "id": "ORG-0003"
@@ -357,8 +357,8 @@
         "id": "EmplDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "publisher": {
           "id": "ORG-0004"
@@ -714,8 +714,8 @@
       },
       "roles": [
         "supplier",
-        "tenderer",
-        "leadTenderer"
+        "leadTenderer",
+        "tenderer"
       ],
       "beneficialOwners": [
         {
@@ -1029,8 +1029,8 @@
       ],
       "relatedBids": [
         "TEN-0002",
-        "TEN-0001",
-        "TEN-0003"
+        "TEN-0003",
+        "TEN-0001"
       ]
     }
   ],
