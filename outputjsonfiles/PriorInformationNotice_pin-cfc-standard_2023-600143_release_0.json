@@ -1,7 +1,7 @@
 {
   "id": "2023-600143",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c06a935b-e9b2-4491-b3c1-34b4cc85a2eb",
+  "ocid": "ocds-abcd1234-53747167-22e7-42e6-97d0-7b6e12e0c0b5",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -127,8 +127,8 @@
         "email": "therese.borge@tonsberg.kommune.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "postboks 2410",

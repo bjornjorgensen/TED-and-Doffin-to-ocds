@@ -1,7 +1,7 @@
 {
   "id": "7b469b6b-4abb-4f22-abe1-50973de8c825",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-96788f96-9f17-4cf7-8281-58f825829243",
+  "ocid": "ocds-abcd1234-2a10e79c-aaf0-49c9-ac7a-0336f0f1457e",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -131,8 +131,8 @@
         "email": "per.brustad@posten.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Biskop Gunnerus' gate 14 A",

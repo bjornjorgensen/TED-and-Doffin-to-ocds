@@ -1,7 +1,7 @@
 {
   "id": "2022-967371",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d0407c9b-ee6c-434d-a190-846dd62975e8",
+  "ocid": "ocds-abcd1234-aa5a700c-0e95-408a-8e29-4f8cb534c1c6",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -75,8 +75,8 @@
         "documentType": "biddingDocuments",
         "url": "https://tendsign.no/doc.aspx?UniqueId=afzouxayrm&GoTo=Docs",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ]
       }
     ],
@@ -176,8 +176,8 @@
         "locality": "BERGEN"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

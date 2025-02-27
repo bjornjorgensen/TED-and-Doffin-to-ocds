@@ -1,7 +1,7 @@
 {
   "id": "2023-624725",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-46a43eab-0197-4f4a-a82f-67cac69ef703",
+  "ocid": "ocds-abcd1234-077661f4-6057-4c89-87db-27ca126286fb",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -147,8 +147,8 @@
         "locality": "Eikelandsosen"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

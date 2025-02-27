@@ -1,7 +1,7 @@
 {
   "id": "2023-631333",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d353678e-454a-4bed-901e-a79c7e615a84",
+  "ocid": "ocds-abcd1234-b0647954-f316-4e10-b09e-4a284aad4508",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -204,9 +204,9 @@
         ]
       },
       "roles": [
-        "processContactPoint",
+        "submissionReceiptBody",
         "buyer",
-        "submissionReceiptBody"
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "P.O. Box 1817",

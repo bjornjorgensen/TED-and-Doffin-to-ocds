@@ -1,7 +1,7 @@
 {
   "id": "2023-629257",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b8dfa2ad-b338-4f97-9fdd-86bd0c3d7ad3",
+  "ocid": "ocds-abcd1234-4eddf029-22a8-42c5-9723-53c69b5559a8",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -93,8 +93,8 @@
         "documentType": "biddingDocuments",
         "url": "https://permalink.mercell.com/208131817.aspx",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ]
       }
     ],
@@ -198,8 +198,8 @@
         "email": "nav.tiltak.rogaland@nav.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Postboks 420",
