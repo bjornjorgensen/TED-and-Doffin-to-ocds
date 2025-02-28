@@ -23,7 +23,7 @@ def parse_previous_planning_identifier_lot(
                 {
                     "id": str,
                     "relationship": ["planning"],
-                    "scheme": "eu-oj",
+                    "scheme": "eu-notice-id-ref",
                     "identifier": str,
                     "relatedLots": [str] # optional
                 }
@@ -52,6 +52,9 @@ def parse_previous_planning_identifier_lot(
     )
 
     for lot in lots:
+        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
+        lot_id = lot_id[0] if lot_id else None
+        
         notice_refs = lot.xpath(
             "cac:TenderingProcess/cac:NoticeDocumentReference",
             namespaces=namespaces,
@@ -62,20 +65,21 @@ def parse_previous_planning_identifier_lot(
                 "cbc:ID[@schemeName='notice-id-ref']/text()",
                 namespaces=namespaces,
             )
-            part_identifier = notice_ref.xpath(
-                "cbc:ReferencedDocumentInternalAddress/text()",
-                namespaces=namespaces,
-            )
-
+            
+            # Check if identifier matches the required pattern
             if identifier:
+                # Pattern validation could be added here if needed
+                # Pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|(\d{1,8})-(19|20)\d\d)$
+                
                 related_process = {
                     "id": str(related_process_id),
                     "relationship": ["planning"],
-                    "scheme": "eu-oj",
+                    "scheme": "eu-notice-id-ref",
                     "identifier": identifier[0],
                 }
-                if part_identifier:
-                    related_process["relatedLots"] = [part_identifier[0]]
+                
+                if lot_id:
+                    related_process["relatedLots"] = [lot_id]
 
                 result["relatedProcesses"].append(related_process)
                 related_process_id += 1

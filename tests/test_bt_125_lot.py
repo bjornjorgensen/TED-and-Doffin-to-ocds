@@ -46,10 +46,9 @@ def test_bt_125_lot_integration(tmp_path, setup_logging, temp_output_dir) -> Non
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingProcess>
-                <cac:noticeDocumentReference>
-                    <cbc:ID>9c0fd704-64d3-4294-a3b6-6df45911ab9f-01</cbc:ID>
-                    <cbc:ReferencedDocumentInternalAddress>123</cbc:ReferencedDocumentInternalAddress>
-                </cac:noticeDocumentReference>
+                <cac:NoticeDocumentReference>
+                    <cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID>
+                </cac:NoticeDocumentReference>
             </cac:TenderingProcess>
         </cac:ProcurementProjectLot>
     </ContractAwardNotice>
@@ -70,9 +69,9 @@ def test_bt_125_lot_integration(tmp_path, setup_logging, temp_output_dir) -> Non
     related_process = result["relatedProcesses"][0]
     assert related_process["id"] == "1"
     assert related_process["relationship"] == ["planning"]
-    assert related_process["scheme"] == "eu-oj"
-    assert related_process["identifier"] == "9c0fd704-64d3-4294-a3b6-6df45911ab9f-01"
-    assert related_process["relatedLots"] == ["123"]
+    assert related_process["scheme"] == "eu-notice-id-ref"
+    assert related_process["identifier"] == "123e4567-e89b-12d3-a456-426614174000-06"
+    assert related_process["relatedLots"] == ["LOT-0001"]
 
 
 if __name__ == "__main__":
