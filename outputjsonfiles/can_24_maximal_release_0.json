@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-62dbad53-cd0f-4918-a3a1-53d65d103358",
+  "ocid": "ocds-abcd1234-7d3abdc9-19c1-46ae-b5c5-0546002ebf32",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -713,8 +713,8 @@
         "listedOnRegulatedMarket": false
       },
       "roles": [
-        "supplier",
         "leadTenderer",
+        "supplier",
         "tenderer"
       ],
       "beneficialOwners": [
@@ -953,10 +953,11 @@
       "relationship": [
         "planning"
       ],
-      "scheme": "eu-oj",
+      "scheme": "eu-notice-id-ref",
       "identifier": "9c0fd704-64d3-4294-a3b6-6df45911ab9f-01",
       "relatedLots": [
-        "123"
+        "LOT-0001",
+        "LOT-0002"
       ]
     }
   ],
@@ -1028,8 +1029,8 @@
         }
       ],
       "relatedBids": [
-        "TEN-0002",
         "TEN-0003",
+        "TEN-0002",
         "TEN-0001"
       ]
     }

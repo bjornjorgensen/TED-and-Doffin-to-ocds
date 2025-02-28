@@ -1,7 +1,7 @@
 {
   "id": "e5c8b25e-859d-492a-9085-716017f267aa",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4c14a936-d1d7-47a9-b7b1-dc789faa5cdc",
+  "ocid": "ocds-abcd1234-4f0f2d4f-75ea-4c32-8479-f32580a2dd89",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -266,8 +266,8 @@
         "locality": "Oslo"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {
