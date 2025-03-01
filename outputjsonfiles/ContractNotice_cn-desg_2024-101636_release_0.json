@@ -1,7 +1,7 @@
 {
   "id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8eeddc49-c0ac-4106-9c9e-0f7f191f7551",
+  "ocid": "ocds-abcd1234-2df9c17b-d8d0-4d3c-9b73-84b7fa38d256",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -342,10 +342,10 @@
         "faxNumber": "+47 61176333"
       },
       "roles": [
+        "evaluationBody",
         "processContactPoint",
         "reviewContactPoint",
         "submissionReceiptBody",
-        "evaluationBody",
         "buyer"
       ],
       "address": {

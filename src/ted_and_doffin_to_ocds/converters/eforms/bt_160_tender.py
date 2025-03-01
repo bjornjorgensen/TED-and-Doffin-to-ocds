@@ -71,9 +71,27 @@ def parse_concession_revenue_buyer(xml_content: str | bytes) -> dict | None:
         if award_id and contract_id:
             contract_awards[contract_id[0]] = award_id[0]
 
-    # Process lot tenders
+    # Create mapping between tender IDs and contract IDs
+    tender_contracts = {}
+    settled_contracts = root.xpath(
+        "//efac:NoticeResult/efac:SettledContract",
+        namespaces=namespaces,
+    )
+    for contract in settled_contracts:
+        contract_id = contract.xpath(
+            "cbc:ID[@schemeName='contract']/text()",
+            namespaces=namespaces,
+        )
+        tender_id = contract.xpath(
+            "efac:LotTender/cbc:ID[@schemeName='tender']/text()",
+            namespaces=namespaces,
+        )
+        if contract_id and tender_id:
+            tender_contracts[tender_id[0]] = contract_id[0]
+
+    # Process lot tenders with concession revenue
     lot_tenders = root.xpath(
-        "//efac:NoticeResult/efac:LotTender",
+        "//efac:NoticeResult/efac:LotTender[efac:ConcessionRevenue/efbc:RevenueBuyerAmount]",
         namespaces=namespaces,
     )
 
@@ -91,40 +109,43 @@ def parse_concession_revenue_buyer(xml_content: str | bytes) -> dict | None:
             namespaces=namespaces,
         )
 
-        if tender_id and revenue and currency:
-            # Find corresponding contract
-            contract = root.xpath(
-                f"//efac:NoticeResult/efac:SettledContract[efac:LotTender/cbc:ID[@schemeName='tender']='{tender_id[0]}']",
-                namespaces=namespaces,
-            )
-            if contract:
-                contract_id = contract[0].xpath(
-                    "cbc:ID[@schemeName='contract']/text()",
-                    namespaces=namespaces,
-                )
-                if contract_id:
-                    contract_data = {
-                        "id": contract_id[0],
-                        "implementation": {
-                            "charges": [
-                                {
-                                    "id": "government",
-                                    "title": GOVERNMENT_CHARGE_TITLE,
-                                    "estimatedValue": {
-                                        "amount": float(revenue[0]),
-                                        "currency": currency[0],
-                                    },
-                                    "paidBy": "government",
-                                }
-                            ]
-                        },
-                    }
+        if not (tender_id and revenue and currency):
+            logger.warning("Incomplete concession revenue data found in tender")
+            continue
 
-                    # Add award ID if mapping exists
-                    if contract_id[0] in contract_awards:
-                        contract_data["awardID"] = contract_awards[contract_id[0]]
+        # Check if tender is linked to a contract
+        if tender_id[0] in tender_contracts:
+            contract_id = tender_contracts[tender_id[0]]
 
-                    result["contracts"].append(contract_data)
+            try:
+                # Validate the revenue value before creating contract data
+                float_revenue = float(revenue[0])
+
+                contract_data = {
+                    "id": contract_id,
+                    "implementation": {
+                        "charges": [
+                            {
+                                "id": "government",
+                                "title": GOVERNMENT_CHARGE_TITLE,
+                                "estimatedValue": {
+                                    "amount": float_revenue,
+                                    "currency": currency[0],
+                                },
+                                "paidBy": "government",
+                            }
+                        ]
+                    },
+                }
+
+                # Add award ID if mapping exists
+                if contract_id in contract_awards:
+                    contract_data["awardID"] = contract_awards[contract_id]
+
+                result["contracts"].append(contract_data)
+            except (ValueError, IndexError) as e:
+                logger.warning("Error processing concession revenue data: %s", str(e))
+                continue
 
     return result if result["contracts"] else None
 
