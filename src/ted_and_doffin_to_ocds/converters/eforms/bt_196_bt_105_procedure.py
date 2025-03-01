@@ -24,11 +24,12 @@ def parse_bt196_bt105_unpublished_justification(
                 "withheldInformation": [
                     {
                         "field": str,
-                        "rationale": str
+                        "rationale": str or dict
                     }
                 ]
             }
         Returns None if no relevant data is found.
+        For multilingual text, rationale will be a dict with language codes as keys.
 
     """
     if isinstance(xml_content, str):
@@ -47,16 +48,28 @@ def parse_bt196_bt105_unpublished_justification(
         "/*/cac:TenderingProcess/ext:UBLExtensions/ext:UBLExtension"
         "/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy"
         "[efbc:FieldIdentifierCode/text()='pro-typ']"
-        "/efbc:ReasonDescription/text()"
+        "/efbc:ReasonDescription"
     )
 
-    reason_description = root.xpath(xpath_query, namespaces=namespaces)
+    reason_description_elements = root.xpath(xpath_query, namespaces=namespaces)
 
     result = {"withheldInformation": []}
-    if reason_description:
+    if reason_description_elements:
+        rationale = {}
+        single_value = None
+
+        for element in reason_description_elements:
+            lang_id = element.get("languageID")
+            text = element.text
+
+            if lang_id:
+                rationale[lang_id] = text
+            else:
+                single_value = text
+
         withheld_info = {
             "field": "pro-typ",
-            "rationale": reason_description[0],
+            "rationale": rationale if rationale else single_value,
         }
         result["withheldInformation"].append(withheld_info)
 
