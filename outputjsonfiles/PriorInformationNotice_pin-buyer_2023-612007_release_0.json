@@ -1,7 +1,7 @@
 {
   "id": "2023-612007",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-290c3f01-1a75-43dd-9ab2-40dbbc61f2ac",
+  "ocid": "ocds-abcd1234-3f2c0253-a153-4f53-8a47-0b3ca9345724",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -93,7 +93,8 @@
       "address": {
         "streetAddress": "Lysaker Torg 45",
         "postalCode": "1366",
-        "locality": "Lysaker"
+        "locality": "Lysaker",
+        "country": "NO"
       }
     }
   ],

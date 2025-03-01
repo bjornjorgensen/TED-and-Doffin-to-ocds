@@ -1,7 +1,7 @@
 {
   "id": "2023-618829",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-eed06b34-6487-4bf6-afa7-26a23beab317",
+  "ocid": "ocds-abcd1234-6ae774ca-3470-4f12-b5fc-b43b04138089",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -132,7 +132,8 @@
       "address": {
         "streetAddress": "Sigma2 AS Postboks 4769 Torgard",
         "postalCode": "NO-7465",
-        "locality": "TRONDHEIM"
+        "locality": "TRONDHEIM",
+        "country": "NO"
       }
     },
     {
@@ -144,14 +145,16 @@
       ],
       "address": {
         "postalCode": "1326",
-        "locality": "Lysaker"
+        "locality": "Lysaker",
+        "country": "NO"
       }
     },
     {
       "id": "ORG-0003",
       "name": "Klagenemnda for offentlige anskaffelser",
       "address": {
-        "locality": "Bergen"
+        "locality": "Bergen",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

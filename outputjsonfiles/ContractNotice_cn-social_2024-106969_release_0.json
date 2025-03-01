@@ -1,7 +1,7 @@
 {
   "id": "920077ce-4821-4475-9786-474c473628bd",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a2b164d1-8588-4a28-895d-4f251fe54284",
+  "ocid": "ocds-abcd1234-804dcc84-4368-4ae7-9da0-154a7d402ccd",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -229,7 +229,8 @@
       "address": {
         "streetAddress": "Dronningens Gate 18",
         "postalCode": "8006",
-        "locality": "Bodø"
+        "locality": "Bodø",
+        "country": "NO"
       },
       "roles": [
         "submissionReceiptBody"
@@ -249,7 +250,8 @@
         "email": "post@las-lofoten.no"
       },
       "address": {
-        "locality": "Leknes"
+        "locality": "Leknes",
+        "country": "NO"
       },
       "roles": [
         "evaluationBody",

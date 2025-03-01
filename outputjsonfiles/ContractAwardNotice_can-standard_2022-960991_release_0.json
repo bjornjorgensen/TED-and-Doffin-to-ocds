@@ -1,7 +1,7 @@
 {
   "id": "2022-960991",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-bfac7820-0a9a-4145-b130-a28cdce7d8f3",
+  "ocid": "ocds-abcd1234-3be258ef-0d9c-460e-8a83-276dc8d21e9a",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -125,7 +125,8 @@
       "address": {
         "streetAddress": "Rambergveien 9",
         "postalCode": "3115",
-        "locality": "TØNSBERG"
+        "locality": "TØNSBERG",
+        "country": "NO"
       }
     },
     {
@@ -147,7 +148,8 @@
       "address": {
         "streetAddress": "Innspurten 15",
         "postalCode": "0663",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -156,7 +158,8 @@
       "address": {
         "streetAddress": "postboks 2013",
         "postalCode": "3103",
-        "locality": "Tønsberg"
+        "locality": "Tønsberg",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

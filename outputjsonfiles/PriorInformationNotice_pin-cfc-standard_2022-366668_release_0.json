@@ -1,7 +1,7 @@
 {
   "id": "2022-366668",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c6d2a51e-8630-485b-bd36-f44cddbca1c5",
+  "ocid": "ocds-abcd1234-4db6ac98-0e54-4396-a215-5aff70dc186b",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -155,7 +155,8 @@
       "address": {
         "streetAddress": "Halfdan Wilhelmsens alle 1A",
         "postalCode": "3110",
-        "locality": "TØNSBERG"
+        "locality": "TØNSBERG",
+        "country": "NO"
       },
       "roles": [
         "processContactPoint",
@@ -175,7 +176,8 @@
       "address": {
         "streetAddress": "Postboks 2013",
         "postalCode": "3103",
-        "locality": "Tønsberg"
+        "locality": "Tønsberg",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

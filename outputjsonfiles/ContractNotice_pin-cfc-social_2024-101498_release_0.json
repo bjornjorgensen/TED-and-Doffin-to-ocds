@@ -1,7 +1,7 @@
 {
   "id": "a105cb09-ec7d-45d5-a364-ff2317e2231f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d22dcde5-6f44-4bc0-a88d-53857658736c",
+  "ocid": "ocds-abcd1234-ffcf4074-0ead-4564-af5c-cbf387ab2fa1",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -105,7 +105,8 @@
       "address": {
         "streetAddress": "Jonas Lies gate 18",
         "postalCode": "2000",
-        "locality": "Lillestrøm"
+        "locality": "Lillestrøm",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -130,7 +131,8 @@
       "address": {
         "streetAddress": "Postboks 393",
         "postalCode": "2001",
-        "locality": "Lillestrøm"
+        "locality": "Lillestrøm",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

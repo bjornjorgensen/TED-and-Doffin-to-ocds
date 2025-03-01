@@ -1,7 +1,7 @@
 {
   "id": "2023-677604",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a193ddb2-d294-4710-b094-409b1a3077ba",
+  "ocid": "ocds-abcd1234-6c014184-b874-4f67-8c3f-aa109c89f952",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -167,7 +167,8 @@
       ],
       "address": {
         "streetAddress": "Hauges gate 89",
-        "locality": "Drammen"
+        "locality": "Drammen",
+        "country": "NO"
       }
     },
     {
@@ -186,14 +187,16 @@
       "address": {
         "streetAddress": "Postboks 24",
         "postalCode": "8469",
-        "locality": "Bø i Vesterålen"
+        "locality": "Bø i Vesterålen",
+        "country": "NO"
       }
     },
     {
       "id": "ORG-0003",
       "name": "Drammen tingrett",
       "address": {
-        "locality": "Drammen"
+        "locality": "Drammen",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

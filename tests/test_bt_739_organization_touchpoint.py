@@ -50,23 +50,23 @@ def test_bt_739_organization_touchpoint_integration(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:organizations>
-                            <efac:organization>
-                                <efac:company>
-                                    <cac:partyLegalEntity>
+                        <efac:Organizations>
+                            <efac:Organization>
+                                <efac:Company>
+                                    <cac:PartyLegalEntity>
                                         <cbc:companyID>AB12345</cbc:companyID>
-                                    </cac:partyLegalEntity>
-                                </efac:company>
+                                    </cac:PartyLegalEntity>
+                                </efac:Company>
                                 <efac:touchpoint>
-                                    <cac:partyIdentification>
+                                    <cac:PartyIdentification>
                                         <cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID>
-                                    </cac:partyIdentification>
+                                    </cac:PartyIdentification>
                                     <cac:Contact>
                                         <cbc:Telefax>(+33) 2 34 56 78 91</cbc:Telefax>
                                     </cac:Contact>
                                 </efac:touchpoint>
-                            </efac:organization>
-                        </efac:organizations>
+                            </efac:Organization>
+                        </efac:Organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

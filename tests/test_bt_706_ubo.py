@@ -48,21 +48,21 @@ def test_parse_ubo_nationality(setup_logging) -> None:
         <efext:UBLExtensions>
             <efext:UBLExtension>
                 <efext:ExtensionContent>
-                    <efac:organizations>
-                        <efac:organization>
-                            <efac:company>
-                                <cac:partyIdentification>
+                    <efac:Organizations>
+                        <efac:Organization>
+                            <efac:Company>
+                                <cac:PartyIdentification>
                                     <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                </cac:partyIdentification>
-                            </efac:company>
-                        </efac:organization>
+                                </cac:PartyIdentification>
+                            </efac:Company>
+                        </efac:Organization>
                         <efac:UltimateBeneficialOwner>
                             <cbc:ID schemeName="ubo">ubo-0001</cbc:ID>
                             <efac:Nationality>
                                 <cbc:NationalityID>DEU</cbc:NationalityID>
                             </efac:Nationality>
                         </efac:UltimateBeneficialOwner>
-                    </efac:organizations>
+                    </efac:Organizations>
                 </efext:ExtensionContent>
             </efext:UBLExtension>
         </efext:UBLExtensions>
@@ -118,14 +118,14 @@ def test_bt_706_ubo_nationality_integration(
         <efext:UBLExtensions>
             <efext:UBLExtension>
                 <efext:ExtensionContent>
-                    <efac:organizations>
-                        <efac:organization>
-                            <efac:company>
-                                <cac:partyIdentification>
+                    <efac:Organizations>
+                        <efac:Organization>
+                            <efac:Company>
+                                <cac:PartyIdentification>
                                     <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                </cac:partyIdentification>
-                            </efac:company>
-                        </efac:organization>
+                                </cac:PartyIdentification>
+                            </efac:Company>
+                        </efac:Organization>
                         <efac:UltimateBeneficialOwner>
                             <cbc:ID schemeName="ubo">ubo-0001</cbc:ID>
                             <efac:Nationality>
@@ -138,7 +138,7 @@ def test_bt_706_ubo_nationality_integration(
                                 <cbc:NationalityID>FRA</cbc:NationalityID>
                             </efac:Nationality>
                         </efac:UltimateBeneficialOwner>
-                    </efac:organizations>
+                    </efac:Organizations>
                 </efext:ExtensionContent>
             </efext:UBLExtension>
         </efext:UBLExtensions>

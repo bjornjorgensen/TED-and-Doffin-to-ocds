@@ -1,7 +1,7 @@
 {
   "id": "2023-307227",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-de17993c-c6d4-4593-b38b-d473359b28fb",
+  "ocid": "ocds-abcd1234-5cb5995b-20c8-422f-b586-85f54aa94b17",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -177,7 +177,8 @@
       "address": {
         "streetAddress": "Postboks 4 Pilestredet 46",
         "postalCode": "0130",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "roles": [
         "buyer"

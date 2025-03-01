@@ -1,7 +1,7 @@
 {
   "id": "8791620e-39a1-435d-985a-bee33825e3f4",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9522acdb-285d-4d60-b30f-9009996979c8",
+  "ocid": "ocds-abcd1234-f53a4f44-52d4-4f2f-bde3-caaecc307149",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -101,19 +101,19 @@
         }
       ],
       "relatedBids": [
-        "TEN-0012",
-        "TEN-0011",
-        "TEN-0005",
-        "TEN-0009",
-        "TEN-0001",
         "TEN-0006",
         "TEN-0010",
+        "TEN-0012",
         "TEN-0002",
+        "TEN-0004",
+        "TEN-0005",
         "TEN-0003",
-        "TEN-0013",
-        "TEN-0007",
+        "TEN-0009",
         "TEN-0008",
-        "TEN-0004"
+        "TEN-0013",
+        "TEN-0011",
+        "TEN-0001",
+        "TEN-0007"
       ]
     }
   ],
@@ -322,7 +322,8 @@
       "address": {
         "streetAddress": "Lysaker Torg 45",
         "postalCode": "1366",
-        "locality": "Lysaker"
+        "locality": "Lysaker",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -345,7 +346,8 @@
       "address": {
         "streetAddress": "C.J Hambros Plass",
         "postalCode": "0164",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"
@@ -363,7 +365,11 @@
         "email": "David.Hall2@elbitsystems-us.com"
       },
       "address": {
-        "locality": "Roanoke"
+        "locality": "Roanoke",
+        "country": "USA"
+      },
+      "details": {
+        "scale": "selfEmployed"
       }
     }
   ],

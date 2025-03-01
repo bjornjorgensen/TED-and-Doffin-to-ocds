@@ -1,7 +1,7 @@
 {
   "id": "2022-627512",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-65352e02-8613-4066-988c-302dd70f48ad",
+  "ocid": "ocds-abcd1234-0a6d96dd-d6eb-43eb-b53d-3899c8e97422",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -142,7 +142,8 @@
       "address": {
         "streetAddress": "Herslebs gate 5",
         "postalCode": "0561",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -160,7 +161,8 @@
       ],
       "address": {
         "postalCode": "0134",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -171,7 +173,8 @@
       },
       "address": {
         "postalCode": "0164",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

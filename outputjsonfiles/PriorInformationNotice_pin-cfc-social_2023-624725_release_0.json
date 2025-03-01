@@ -1,7 +1,7 @@
 {
   "id": "2023-624725",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8872b3c1-1d22-4779-96ea-00bbc0f25ece",
+  "ocid": "ocds-abcd1234-1226b447-e9ff-4a81-afdb-f5ab70d89978",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -144,7 +144,8 @@
       "address": {
         "streetAddress": "Postboks 24",
         "postalCode": "5649",
-        "locality": "Eikelandsosen"
+        "locality": "Eikelandsosen",
+        "country": "NO"
       },
       "roles": [
         "processContactPoint",
@@ -155,7 +156,8 @@
       "id": "ORG-0002",
       "name": "Hordaland tingrett",
       "address": {
-        "locality": "Bergen"
+        "locality": "Bergen",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

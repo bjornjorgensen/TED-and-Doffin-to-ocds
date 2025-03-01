@@ -50,18 +50,18 @@ def test_bt_739_organization_company_integration(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:organizations>
-                            <efac:organization>
-                                <efac:company>
-                                    <cac:partyIdentification>
+                        <efac:Organizations>
+                            <efac:Organization>
+                                <efac:Company>
+                                    <cac:PartyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0003</cbc:ID>
-                                    </cac:partyIdentification>
+                                    </cac:PartyIdentification>
                                     <cac:Contact>
                                         <cbc:Telefax>(+33) 2 34 56 78 91</cbc:Telefax>
                                     </cac:Contact>
-                                </efac:company>
-                            </efac:organization>
-                        </efac:organizations>
+                                </efac:Company>
+                            </efac:Organization>
+                        </efac:Organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

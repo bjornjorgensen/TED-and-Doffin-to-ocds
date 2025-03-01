@@ -1,7 +1,7 @@
 {
   "id": "2023-659744",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7923eef8-cf0c-4bf6-baf0-a5844a569056",
+  "ocid": "ocds-abcd1234-2043be38-9008-4cbf-a5ab-89fdfcb17af5",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -93,7 +93,8 @@
       "address": {
         "streetAddress": "Postboks 4350",
         "postalCode": "2308",
-        "locality": "Hamar"
+        "locality": "Hamar",
+        "country": "NO"
       }
     }
   ],

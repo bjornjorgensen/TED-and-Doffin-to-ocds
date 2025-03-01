@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d5e99c7b-7f82-4bd8-a7a9-4d7795eda299",
+  "ocid": "ocds-abcd1234-0567958a-60a7-4ef3-b368-e05bcb3f1458",
   "tender": {
     "legalBasis": {
       "id": "FOA § 13-4 bokstav b annet punkt; «konkurranse er umulig av tekniske årsaker».",
@@ -200,7 +200,8 @@
       "address": {
         "streetAddress": "Moloveien 1",
         "postalCode": "8038",
-        "locality": "Bodø"
+        "locality": "Bodø",
+        "country": "NO"
       },
       "roles": [
         "funder",
@@ -228,11 +229,12 @@
       "address": {
         "streetAddress": "Postboks 40",
         "postalCode": "9811",
-        "locality": "VADSØ"
+        "locality": "VADSØ",
+        "country": "NO"
       },
       "roles": [
-        "processContactPoint",
         "leadBuyer",
+        "processContactPoint",
         "buyer",
         "reviewContactPoint"
       ]
@@ -264,7 +266,8 @@
       "address": {
         "streetAddress": "Strandveien 50",
         "postalCode": "1366",
-        "locality": "Lysaker"
+        "locality": "Lysaker",
+        "country": "NO"
       }
     },
     {
@@ -286,7 +289,8 @@
       "address": {
         "streetAddress": "Kirkegt. 22, 3. etg, Vadsø. Postboks 54",
         "postalCode": "9811",
-        "locality": "Vadsø"
+        "locality": "Vadsø",
+        "country": "NO"
       },
       "roles": [
         "mediationBody",

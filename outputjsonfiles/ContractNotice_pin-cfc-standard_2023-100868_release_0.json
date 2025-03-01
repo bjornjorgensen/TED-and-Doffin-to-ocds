@@ -1,7 +1,7 @@
 {
   "id": "2248a00d-a0d9-4eee-8db1-d209e7346f13",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d60df649-dc3c-42c5-9a84-971022263e69",
+  "ocid": "ocds-abcd1234-49298ae6-9f4e-46da-99d5-4defb340a8b7",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -156,7 +156,8 @@
       "address": {
         "streetAddress": "Benestadheia 2",
         "postalCode": "4638",
-        "locality": "Kristiansand"
+        "locality": "Kristiansand",
+        "country": "NO"
       }
     },
     {
@@ -190,7 +191,8 @@
       "address": {
         "streetAddress": "Rådhusgata 18",
         "postalCode": "4611",
-        "locality": "Kristiansand"
+        "locality": "Kristiansand",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -211,7 +213,8 @@
         "email": "agder.tingrett@domstol.no"
       },
       "address": {
-        "locality": "Kristiansand S."
+        "locality": "Kristiansand S.",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

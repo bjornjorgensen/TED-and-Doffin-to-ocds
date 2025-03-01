@@ -1,7 +1,7 @@
 {
   "id": "26cd2bbe-3527-43ab-ae19-ecb644fff706",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f68cd0b6-0dd0-4913-aa8a-e14c4f328b1a",
+  "ocid": "ocds-abcd1234-1f26b3d2-e989-429e-b564-013c6b904051",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -127,7 +127,8 @@
       "address": {
         "streetAddress": "Postboks 2025",
         "postalCode": "3202",
-        "locality": "Sandefjord"
+        "locality": "Sandefjord",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -147,7 +148,8 @@
         "email": "vestfold.tingrett@domstol.no"
       },
       "address": {
-        "locality": "Tønsberg"
+        "locality": "Tønsberg",
+        "country": "NO"
       }
     }
   ],

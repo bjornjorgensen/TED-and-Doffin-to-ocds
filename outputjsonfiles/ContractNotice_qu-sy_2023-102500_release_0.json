@@ -1,7 +1,7 @@
 {
   "id": "3580e3e0-275f-4489-9aab-b6f493790e00",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-5a70d0f2-5e50-4dd3-ba38-da69188a667a",
+  "ocid": "ocds-abcd1234-910ef61a-0de8-473e-8269-2574f3d2b635",
   "tender": {
     "legalBasis": {
       "id": "Forsyningsforskriften",
@@ -256,7 +256,8 @@
       "address": {
         "streetAddress": "Vorsetøyveien 31",
         "postalCode": "8300",
-        "locality": "Svolvær"
+        "locality": "Svolvær",
+        "country": "NO"
       }
     }
   ],

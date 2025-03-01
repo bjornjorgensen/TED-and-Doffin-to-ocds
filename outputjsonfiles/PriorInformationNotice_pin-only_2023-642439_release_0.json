@@ -1,7 +1,7 @@
 {
   "id": "2023-642439",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-fb0ba5eb-a3c4-4d70-8820-fdb46d303db5",
+  "ocid": "ocds-abcd1234-046d9d4e-3eee-4308-8760-64d0368db541",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -74,7 +74,8 @@
       "address": {
         "streetAddress": "Postboks 404",
         "postalCode": "2303",
-        "locality": "HAMAR"
+        "locality": "HAMAR",
+        "country": "NO"
       },
       "roles": [
         "buyer"

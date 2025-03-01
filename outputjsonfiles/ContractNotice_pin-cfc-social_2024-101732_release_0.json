@@ -1,7 +1,7 @@
 {
   "id": "74f8c72a-5dcd-4a77-afda-6573ca30c8df",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-00e309e7-dd80-4b66-aad6-9e24dbe79829",
+  "ocid": "ocds-abcd1234-da930b1f-b3e4-4b34-b557-929f7b2f0c1d",
   "tender": {
     "legalBasis": {
       "id": "Konsesjonsforskriften",
@@ -358,7 +358,8 @@
       "address": {
         "streetAddress": "Kjøpmannsgata 13",
         "postalCode": "7500",
-        "locality": "Stjørdal"
+        "locality": "Stjørdal",
+        "country": "NO"
       },
       "roles": [
         "processContactPoint",
@@ -395,7 +396,8 @@
         "email": "postmottak@stjordal.kommune.no"
       },
       "address": {
-        "locality": "Stjørdal"
+        "locality": "Stjørdal",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -429,7 +431,8 @@
         "email": "postmottak@meraker.kommune.no"
       },
       "address": {
-        "locality": "Meråker"
+        "locality": "Meråker",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -463,7 +466,8 @@
         "email": "postsmottak@selbukommune.no"
       },
       "address": {
-        "locality": "Selbu"
+        "locality": "Selbu",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -497,7 +501,8 @@
         "email": "postmottak@tydalkommune.no"
       },
       "address": {
-        "locality": "Tydal"
+        "locality": "Tydal",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -531,7 +536,8 @@
         "email": "postmottak@frotga.kommune.no"
       },
       "address": {
-        "locality": "Frosta"
+        "locality": "Frosta",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -565,7 +571,8 @@
         "email": "postmottak@holtalen.kommune.no"
       },
       "address": {
-        "locality": "Holtålen"
+        "locality": "Holtålen",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -590,7 +597,8 @@
       "address": {
         "streetAddress": "Postboks 2317 Torgarden",
         "postalCode": "7004",
-        "locality": "Trondheim"
+        "locality": "Trondheim",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

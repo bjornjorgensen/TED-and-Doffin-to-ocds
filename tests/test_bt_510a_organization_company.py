@@ -52,12 +52,12 @@ def test_bt_510a_organization_company_integration(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:organizations>
-                            <efac:organization>
-                                <efac:company>
-                                    <cac:partyIdentification>
+                        <efac:Organizations>
+                            <efac:Organization>
+                                <efac:Company>
+                                    <cac:PartyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:partyIdentification>
+                                    </cac:PartyIdentification>
                                     <cac:PostalAddress>
                                         <cbc:StreetName>2, rue de Europe</cbc:StreetName>
                                         <cbc:AdditionalStreetName>Building A</cbc:AdditionalStreetName>
@@ -65,9 +65,9 @@ def test_bt_510a_organization_company_integration(
                                             <cbc:Line>3rd Floor</cbc:Line>
                                         </cac:AddressLine>
                                     </cac:PostalAddress>
-                                </efac:company>
-                            </efac:organization>
-                        </efac:organizations>
+                                </efac:Company>
+                            </efac:Organization>
+                        </efac:Organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

@@ -1,7 +1,7 @@
 {
   "id": "2022-365499",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-60f11258-93c3-44eb-8a5f-8bf7bf598e30",
+  "ocid": "ocds-abcd1234-954e78d4-f7b0-4874-8b1c-2be2a6398038",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -110,7 +110,8 @@
       "address": {
         "streetAddress": "Arkitekt Eckhoffsgate 1",
         "postalCode": "4010",
-        "locality": "Stavanger"
+        "locality": "Stavanger",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -127,14 +128,16 @@
         "tenderer"
       ],
       "address": {
-        "locality": "Stavanger"
+        "locality": "Stavanger",
+        "country": "NO"
       }
     },
     {
       "id": "ORG-0003",
       "name": "Stavanger tingrett",
       "address": {
-        "locality": "Stavanger"
+        "locality": "Stavanger",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

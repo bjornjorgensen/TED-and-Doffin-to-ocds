@@ -1,7 +1,7 @@
 {
   "id": "2023-620727",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7191297c-aca7-489d-9d02-b5637acae641",
+  "ocid": "ocds-abcd1234-6cdb9e36-dc59-4a6a-a7b4-c8449010b526",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -141,21 +141,23 @@
         ]
       },
       "roles": [
-        "processContactPoint",
         "submissionReceiptBody",
+        "processContactPoint",
         "buyer"
       ],
       "address": {
         "streetAddress": "Edv.Stormsveg 2",
         "postalCode": "2680",
-        "locality": "VÅGÅ"
+        "locality": "VÅGÅ",
+        "country": "NO"
       }
     },
     {
       "id": "ORG-0002",
       "name": "Nedre-Telemark tingrett",
       "address": {
-        "locality": "Skien"
+        "locality": "Skien",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

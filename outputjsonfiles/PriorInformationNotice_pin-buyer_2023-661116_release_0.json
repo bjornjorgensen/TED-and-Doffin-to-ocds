@@ -1,7 +1,7 @@
 {
   "id": "2023-661116",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-dc530c7a-3d7c-42b9-aac2-1ab3c3d4d7fb",
+  "ocid": "ocds-abcd1234-8a685c0b-03f4-486f-8320-bc142be47b65",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -237,7 +237,8 @@
       "address": {
         "streetAddress": "Heggstadmoen 53",
         "postalCode": "7004",
-        "locality": "TRONDHEIM"
+        "locality": "TRONDHEIM",
+        "country": "NO"
       }
     }
   ],

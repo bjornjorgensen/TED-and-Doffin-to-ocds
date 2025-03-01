@@ -1,7 +1,7 @@
 {
   "id": "2023-653367",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8130be5f-8978-42cb-a351-3ce93b4d5bff",
+  "ocid": "ocds-abcd1234-53f386f7-46d8-4c99-9ee1-d7c3b7883886",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -932,7 +932,8 @@
       "address": {
         "streetAddress": "postboks 7900",
         "postalCode": "5020",
-        "locality": "Bergen"
+        "locality": "Bergen",
+        "country": "NO"
       }
     }
   ],

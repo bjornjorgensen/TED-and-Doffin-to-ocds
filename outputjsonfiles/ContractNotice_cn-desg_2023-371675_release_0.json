@@ -1,7 +1,7 @@
 {
   "id": "2023-371675",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-54398335-8128-4e24-9239-1e96b068d9cb",
+  "ocid": "ocds-abcd1234-75fb2982-fbc5-4d82-bd34-813c5bc02fa8",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -143,21 +143,23 @@
         "email": "mhr@kulturtanken.no"
       },
       "roles": [
-        "processContactPoint",
         "submissionReceiptBody",
+        "processContactPoint",
         "buyer"
       ],
       "address": {
         "streetAddress": "Gullhaug Torg 2",
         "postalCode": "0484",
-        "locality": "OSLO"
+        "locality": "OSLO",
+        "country": "NO"
       }
     },
     {
       "id": "ORG-0002",
       "name": "Oslo Tingrett",
       "address": {
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

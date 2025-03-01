@@ -1,7 +1,7 @@
 {
   "id": "65ffd92d-8eee-4787-a7fe-925106611edc",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-603352e9-93f1-4a65-b867-810130be74cc",
+  "ocid": "ocds-abcd1234-a37b6c76-7bc7-4038-8de9-827a801f3896",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -125,7 +125,8 @@
       "address": {
         "streetAddress": "Postboks 7900",
         "postalCode": "5020",
-        "locality": "BERGEN"
+        "locality": "BERGEN",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -150,7 +151,8 @@
       "address": {
         "streetAddress": "Postboks 7412",
         "postalCode": "5020",
-        "locality": "Bergen"
+        "locality": "Bergen",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"
@@ -177,7 +179,8 @@
       "address": {
         "streetAddress": "Postboks 132 Økern",
         "postalCode": "0509",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -201,7 +204,8 @@
       "address": {
         "streetAddress": "Janaflaten 30",
         "postalCode": "5179",
-        "locality": "Godvik"
+        "locality": "Godvik",
+        "country": "NO"
       }
     }
   ],
@@ -231,8 +235,8 @@
         }
       ],
       "relatedBids": [
-        "TEN-0002",
-        "TEN-0001"
+        "TEN-0001",
+        "TEN-0002"
       ]
     }
   ],

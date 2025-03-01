@@ -1,7 +1,7 @@
 {
   "id": "2023-649037",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-546210e4-3207-4acd-9a4f-f38a60d7cdb2",
+  "ocid": "ocds-abcd1234-17629c83-2e96-4a18-a46b-52217ffdde3c",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -184,7 +184,8 @@
       "address": {
         "streetAddress": "Postboks 40",
         "postalCode": "9811",
-        "locality": "VADSØ"
+        "locality": "VADSØ",
+        "country": "NO"
       }
     },
     {
@@ -193,7 +194,8 @@
       "address": {
         "streetAddress": "Postboks 54",
         "postalCode": "9811",
-        "locality": "Vadsø"
+        "locality": "Vadsø",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

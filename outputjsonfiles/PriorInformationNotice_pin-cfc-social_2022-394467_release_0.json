@@ -1,7 +1,7 @@
 {
   "id": "2022-394467",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6fd0af2c-1361-4ecf-bd04-7697dea99548",
+  "ocid": "ocds-abcd1234-44eb5bd5-b494-4481-abf1-6a29b7cd9023",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -124,14 +124,15 @@
         "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/2095"
       },
       "roles": [
-        "processContactPoint",
         "submissionReceiptBody",
+        "processContactPoint",
         "buyer"
       ],
       "address": {
         "streetAddress": "Postboks 4100",
         "postalCode": "2307",
-        "locality": "Hamar"
+        "locality": "Hamar",
+        "country": "NO"
       }
     },
     {
@@ -140,7 +141,8 @@
       "address": {
         "streetAddress": "Postboks 8023 Dep.",
         "postalCode": "0030",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

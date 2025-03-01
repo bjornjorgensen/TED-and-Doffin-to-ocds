@@ -1,7 +1,7 @@
 {
   "id": "2022-396301",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-92ee3cce-607a-47c1-9319-d8848c687850",
+  "ocid": "ocds-abcd1234-9c4329d1-1e8e-45a5-afdf-13ee7fda8844",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -130,7 +130,8 @@
       "address": {
         "streetAddress": "Mellombygdveien 216",
         "postalCode": "9321",
-        "locality": "MOEN"
+        "locality": "MOEN",
+        "country": "NO"
       },
       "roles": [
         "processContactPoint",
@@ -141,7 +142,8 @@
       "id": "ORG-0002",
       "name": "Nord-Troms og Senja tingrett",
       "address": {
-        "locality": "Storgata 6, Finnsnes"
+        "locality": "Storgata 6, Finnsnes",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

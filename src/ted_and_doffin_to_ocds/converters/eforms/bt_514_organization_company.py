@@ -92,17 +92,17 @@ def parse_organization_country(xml_content: str | bytes) -> dict | None:
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:organizations/efac:organization",
+        "//efac:Organizations/efac:Organization",
         namespaces=namespaces,
     )
 
     for organization in organizations:
         org_id = organization.xpath(
-            "efac:company/cac:partyIdentification/cbc:ID[@schemeName='organization']/text()",
+            "efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
             namespaces=namespaces,
         )
         country_code = organization.xpath(
-            "efac:company/cac:PostalAddress/cac:Country/cbc:IdentificationCode/text()",
+            "efac:Company/cac:PostalAddress/cac:Country/cbc:IdentificationCode/text()",
             namespaces=namespaces,
         )
 

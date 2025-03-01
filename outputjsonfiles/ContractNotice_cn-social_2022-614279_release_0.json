@@ -1,7 +1,7 @@
 {
   "id": "2022-614279",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a686c184-98de-420c-aa1f-25cb271f330c",
+  "ocid": "ocds-abcd1234-fefa191a-91c1-444f-bb06-a8901665d140",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -134,7 +134,8 @@
       "address": {
         "streetAddress": "Postboks 354",
         "postalCode": "8601",
-        "locality": "Mo i Rana"
+        "locality": "Mo i Rana",
+        "country": "NO"
       }
     },
     {
@@ -143,7 +144,8 @@
       "address": {
         "streetAddress": " Postboks 2106 Vika",
         "postalCode": "0125",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

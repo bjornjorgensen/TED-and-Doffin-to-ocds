@@ -1,7 +1,7 @@
 {
   "id": "2022-697882",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ce51e072-6a6c-4cfb-be59-59528e98967a",
+  "ocid": "ocds-abcd1234-b1594b08-a0ba-4399-88fa-371b518a37b8",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -104,7 +104,8 @@
       "address": {
         "streetAddress": "Postboks 40",
         "postalCode": "9811",
-        "locality": "VADSØ"
+        "locality": "VADSØ",
+        "country": "NO"
       }
     },
     {
@@ -123,7 +124,8 @@
       "address": {
         "streetAddress": "Drammensveien 288",
         "postalCode": "0283",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -135,7 +137,8 @@
       "address": {
         "streetAddress": "Postboks 54",
         "postalCode": "9811",
-        "locality": "Vadsø"
+        "locality": "Vadsø",
+        "country": "NO"
       },
       "roles": [
         "reviewContactPoint",
@@ -154,7 +157,8 @@
       "address": {
         "streetAddress": "Postboks 439 Sentrum",
         "postalCode": "5805",
-        "locality": "Bergen"
+        "locality": "Bergen",
+        "country": "NO"
       },
       "roles": [
         "mediationBody"

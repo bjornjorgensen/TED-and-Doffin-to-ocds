@@ -52,16 +52,16 @@ def test_bt_509_organization_company_integration(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:organizations>
-                            <efac:organization>
-                                <efac:company>
-                                    <cac:partyIdentification>
+                        <efac:Organizations>
+                            <efac:Organization>
+                                <efac:Company>
+                                    <cac:PartyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:partyIdentification>
+                                    </cac:PartyIdentification>
                                     <cbc:EndpointID>https://drive.xpertpro.eu/</cbc:EndpointID>
-                                </efac:company>
-                            </efac:organization>
-                        </efac:organizations>
+                                </efac:Company>
+                            </efac:Organization>
+                        </efac:Organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

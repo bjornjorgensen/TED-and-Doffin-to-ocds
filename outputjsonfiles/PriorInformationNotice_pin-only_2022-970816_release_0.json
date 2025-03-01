@@ -1,7 +1,7 @@
 {
   "id": "2022-970816",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b2473c40-3063-41bd-8cee-e299f5b4cf0d",
+  "ocid": "ocds-abcd1234-e5afd42d-1eb3-4ce1-91e1-67e89401ed17",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -71,7 +71,8 @@
       "address": {
         "streetAddress": "Arkitekt Eckhoffsgate 1",
         "postalCode": "4010",
-        "locality": "Stavanger"
+        "locality": "Stavanger",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -84,7 +85,8 @@
         "url": "https://attensi.com/no/"
       },
       "address": {
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     }
   ],

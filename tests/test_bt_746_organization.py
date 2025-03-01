@@ -50,16 +50,16 @@ def test_bt_746_organization_integration(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:organizations>
-                            <efac:organization>
+                        <efac:Organizations>
+                            <efac:Organization>
                                 <efbc:ListedOnRegulatedMarketIndicator>false</efbc:ListedOnRegulatedMarketIndicator>
-                                <efac:company>
-                                    <cac:partyIdentification>
+                                <efac:Company>
+                                    <cac:PartyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:partyIdentification>
-                                </efac:company>
-                            </efac:organization>
-                        </efac:organizations>
+                                    </cac:PartyIdentification>
+                                </efac:Company>
+                            </efac:Organization>
+                        </efac:Organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

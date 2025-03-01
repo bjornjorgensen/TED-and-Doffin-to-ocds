@@ -1,7 +1,7 @@
 {
   "id": "7b469b6b-4abb-4f22-abe1-50973de8c825",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-bde98817-0b17-4d19-9753-c81fadc7ec8b",
+  "ocid": "ocds-abcd1234-d490da27-9cee-4cb2-a17e-0fe0a5b695dc",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -137,7 +137,8 @@
       "address": {
         "streetAddress": "Biskop Gunnerus' gate 14 A",
         "postalCode": "0185",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -159,7 +160,8 @@
       "address": {
         "streetAddress": "Postboks 1500",
         "postalCode": "0001",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"
@@ -184,7 +186,8 @@
       "address": {
         "streetAddress": "Postboks 2106 Vika",
         "postalCode": "0125",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "roles": [
         "mediationBody"
@@ -209,7 +212,8 @@
       "address": {
         "streetAddress": "Postboks 1500",
         "postalCode": "0001",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "roles": [
         "reviewContactPoint"

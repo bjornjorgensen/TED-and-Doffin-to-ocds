@@ -1,7 +1,7 @@
 {
   "id": "2023-653024",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ca6d872b-2031-431a-952a-3e41202ef208",
+  "ocid": "ocds-abcd1234-a98b36db-154f-4164-b9f1-c46d554e84b7",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -87,7 +87,8 @@
       "address": {
         "streetAddress": "Postboks 175",
         "postalCode": "1501",
-        "locality": "Moss"
+        "locality": "Moss",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -107,7 +108,8 @@
         }
       ],
       "address": {
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -124,7 +126,8 @@
         }
       ],
       "address": {
-        "locality": "Stjørdal"
+        "locality": "Stjørdal",
+        "country": "NO"
       }
     },
     {
@@ -141,7 +144,8 @@
         }
       ],
       "address": {
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -158,7 +162,8 @@
         }
       ],
       "address": {
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -175,7 +180,8 @@
         }
       ],
       "address": {
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -192,7 +198,8 @@
         }
       ],
       "address": {
-        "locality": "Kirkenes"
+        "locality": "Kirkenes",
+        "country": "NO"
       }
     },
     {
@@ -209,7 +216,8 @@
         }
       ],
       "address": {
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -226,7 +234,8 @@
         }
       ],
       "address": {
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -243,7 +252,8 @@
         }
       ],
       "address": {
-        "locality": "Stockholm"
+        "locality": "Stockholm",
+        "country": "SE"
       }
     },
     {
@@ -260,14 +270,16 @@
         }
       ],
       "address": {
-        "locality": "Førresfjorden"
+        "locality": "Førresfjorden",
+        "country": "NO"
       }
     },
     {
       "id": "ORG-0012",
       "name": "Søndre Østfold tingrett",
       "address": {
-        "locality": "Fredrikstad"
+        "locality": "Fredrikstad",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"
@@ -715,16 +727,16 @@
         "currency": "NOK"
       },
       "relatedBids": [
-        "TEN-0005",
-        "TEN-0009",
-        "TEN-0001",
         "TEN-0006",
         "TEN-0010",
         "TEN-0002",
+        "TEN-0004",
+        "TEN-0005",
         "TEN-0003",
-        "TEN-0007",
+        "TEN-0009",
         "TEN-0008",
-        "TEN-0004"
+        "TEN-0001",
+        "TEN-0007"
       ]
     }
   ],

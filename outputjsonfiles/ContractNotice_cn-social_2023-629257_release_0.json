@@ -1,7 +1,7 @@
 {
   "id": "2023-629257",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-efa534e7-bac1-433c-ac31-4fda15da8b3f",
+  "ocid": "ocds-abcd1234-4180f514-5694-4691-a477-fa45eaa7313e",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -204,7 +204,8 @@
       "address": {
         "streetAddress": "Postboks 420",
         "postalCode": "4002",
-        "locality": "Stravanger"
+        "locality": "Stravanger",
+        "country": "NO"
       }
     },
     {
@@ -213,7 +214,8 @@
       "address": {
         "streetAddress": "Postboks 159",
         "postalCode": "4001",
-        "locality": "Stavanger"
+        "locality": "Stavanger",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

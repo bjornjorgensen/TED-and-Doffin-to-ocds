@@ -1,7 +1,7 @@
 {
   "id": "2023-627259",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-130b8029-74a6-464a-8fb0-d87998f4fb78",
+  "ocid": "ocds-abcd1234-25d70d9c-3c9b-4c09-9d97-9a79d88b62ac",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -138,7 +138,8 @@
       "address": {
         "streetAddress": "Postboks 8019 Dep",
         "postalCode": "0030",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -156,7 +157,8 @@
       ],
       "address": {
         "postalCode": "0650",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -172,7 +174,8 @@
       "address": {
         "streetAddress": "Postboks 2106 Vika",
         "postalCode": "0125",
-        "locality": "OSLO"
+        "locality": "OSLO",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

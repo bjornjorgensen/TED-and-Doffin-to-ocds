@@ -1,7 +1,7 @@
 {
   "id": "2022-963627",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f790a38a-52dc-48d2-bcdf-e2b0689e6411",
+  "ocid": "ocds-abcd1234-96f0b55c-80c1-40fd-ab65-1a1262356338",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -59,7 +59,8 @@
       "address": {
         "streetAddress": "Tollbugata 1A",
         "postalCode": "0152",
-        "locality": "OSLO"
+        "locality": "OSLO",
+        "country": "NO"
       }
     }
   ],

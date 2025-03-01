@@ -1,7 +1,7 @@
 {
   "id": "2023-632707",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-67215483-8b72-4572-91c1-74be61c925fe",
+  "ocid": "ocds-abcd1234-b504bcf5-fb86-4914-a4a9-f43ffabf1caa",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -110,7 +110,8 @@
       "address": {
         "streetAddress": "Postboks 64",
         "postalCode": "8501",
-        "locality": "Narvik"
+        "locality": "Narvik",
+        "country": "NO"
       },
       "roles": [
         "buyer"

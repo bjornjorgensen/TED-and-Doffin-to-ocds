@@ -1,7 +1,7 @@
 {
   "id": "0097de15-36cf-4750-96c9-f66ae4d6cafd",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ad096288-636d-4798-9fec-ae77738a1d06",
+  "ocid": "ocds-abcd1234-d0363357-d194-4f1e-a013-dd166788b62f",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -87,7 +87,8 @@
       "address": {
         "streetAddress": "Postboks 8001",
         "postalCode": "4068",
-        "locality": "STAVANGER"
+        "locality": "STAVANGER",
+        "country": "NO"
       }
     }
   ],

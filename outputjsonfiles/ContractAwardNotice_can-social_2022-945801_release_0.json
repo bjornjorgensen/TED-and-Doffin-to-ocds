@@ -1,7 +1,7 @@
 {
   "id": "2022-945801",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-fb22b334-04d0-44a1-a4c6-53e4b760429b",
+  "ocid": "ocds-abcd1234-7f99ff0b-b56f-496a-8ced-17c77019025f",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -85,7 +85,8 @@
       "address": {
         "streetAddress": "Torggata 18",
         "postalCode": "3717",
-        "locality": "Skien"
+        "locality": "Skien",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -109,14 +110,16 @@
       },
       "address": {
         "postalCode": "3264",
-        "locality": "Larvik"
+        "locality": "Larvik",
+        "country": "NO"
       }
     },
     {
       "id": "ORG-0003",
       "name": "Tingretten",
       "address": {
-        "locality": "Nedre Telemark Tingrett"
+        "locality": "Nedre Telemark Tingrett",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

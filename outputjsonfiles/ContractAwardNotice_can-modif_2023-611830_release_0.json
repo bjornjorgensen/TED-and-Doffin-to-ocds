@@ -1,7 +1,7 @@
 {
   "id": "2023-611830",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-87ba2078-430f-4256-91cb-2c66a30850b9",
+  "ocid": "ocds-abcd1234-082b0f06-65b1-4dab-9eb8-a153d2399dd8",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -130,7 +130,8 @@
       "address": {
         "streetAddress": "Haakon VIIs gt. 9",
         "postalCode": "0161",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -141,14 +142,16 @@
         "tenderer"
       ],
       "address": {
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
       "id": "ORG-0003",
       "name": "Oslo tingrett",
       "address": {
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

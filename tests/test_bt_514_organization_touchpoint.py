@@ -52,25 +52,25 @@ def test_bt_514_organization_touchpoint_integration(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:organizations>
-                            <efac:organization>
-                                <efac:company>
-                                    <cac:partyLegalEntity>
+                        <efac:Organizations>
+                            <efac:Organization>
+                                <efac:Company>
+                                    <cac:PartyLegalEntity>
                                         <cbc:companyID>998298</cbc:companyID>
-                                    </cac:partyLegalEntity>
-                                </efac:company>
+                                    </cac:PartyLegalEntity>
+                                </efac:Company>
                                 <efac:touchpoint>
-                                    <cac:partyIdentification>
+                                    <cac:PartyIdentification>
                                         <cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID>
-                                    </cac:partyIdentification>
+                                    </cac:PartyIdentification>
                                     <cac:PostalAddress>
                                         <cac:Country>
                                             <cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode>
                                         </cac:Country>
                                     </cac:PostalAddress>
                                 </efac:touchpoint>
-                            </efac:organization>
-                        </efac:organizations>
+                            </efac:Organization>
+                        </efac:Organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

@@ -1,7 +1,7 @@
 {
   "id": "74f9d169-452b-4a99-b8d2-f54c3c71e163",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6365dd16-6968-4896-9fe0-b850cb104d0c",
+  "ocid": "ocds-abcd1234-1385be24-d7e4-429f-a3a0-97492d21883d",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -167,7 +167,8 @@
       "address": {
         "streetAddress": "Kongens gt. 23",
         "postalCode": "8006",
-        "locality": "BODØ"
+        "locality": "BODØ",
+        "country": "NO"
       }
     },
     {
@@ -184,7 +185,8 @@
         "email": "tsolpost@domstol.no"
       },
       "address": {
-        "locality": "Bodø"
+        "locality": "Bodø",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

@@ -1,7 +1,7 @@
 {
   "id": "2023-674343",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9b9423b3-8eff-4137-8cf2-321549cae6b8",
+  "ocid": "ocds-abcd1234-1be90943-437b-46e3-8448-bb1da8eff824",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -144,7 +144,8 @@
       "address": {
         "streetAddress": "Rådhusplassen 3",
         "postalCode": "2212",
-        "locality": "KONGSVINGER"
+        "locality": "KONGSVINGER",
+        "country": "NO"
       }
     },
     {
@@ -169,7 +170,8 @@
         "email": "postmottak@elverum.kommune.no"
       },
       "address": {
-        "locality": "Elverum"
+        "locality": "Elverum",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -197,7 +199,8 @@
         "email": "postmottak@hamar.kommune.no"
       },
       "address": {
-        "locality": "Hamar"
+        "locality": "Hamar",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -225,7 +228,8 @@
         "email": "post@indigo-ikt.no"
       },
       "address": {
-        "locality": "Hamar"
+        "locality": "Hamar",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -253,7 +257,8 @@
         "email": "postmottak@kongsvinger.kommune.no"
       },
       "address": {
-        "locality": "Kongsvinger "
+        "locality": "Kongsvinger ",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -281,7 +286,8 @@
         "email": "postmottak@ringsaker.kommune.no"
       },
       "address": {
-        "locality": "Brumunddal"
+        "locality": "Brumunddal",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -309,7 +315,8 @@
         "email": "post@stange.kommune.no"
       },
       "address": {
-        "locality": "Stange"
+        "locality": "Stange",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -337,7 +344,8 @@
         "email": "postmottak@etnedal.kommune.no"
       },
       "address": {
-        "locality": "Etnedal"
+        "locality": "Etnedal",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -365,7 +373,8 @@
         "email": "nak@nord-aurdal.kommune.no"
       },
       "address": {
-        "locality": "Fagernes"
+        "locality": "Fagernes",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -393,7 +402,8 @@
         "email": "postmottak@sor-aurdal.kommune.no"
       },
       "address": {
-        "locality": "Bagn"
+        "locality": "Bagn",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -421,7 +431,8 @@
         "email": "post@vang.kommune.no"
       },
       "address": {
-        "locality": "Vang i Valdres"
+        "locality": "Vang i Valdres",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -449,7 +460,8 @@
         "email": "post@vestre-slidre.kommune.no"
       },
       "address": {
-        "locality": "Slidre"
+        "locality": "Slidre",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -477,7 +489,8 @@
         "email": "post@oystre-slidre.kommune.no"
       },
       "address": {
-        "locality": "Heggenes"
+        "locality": "Heggenes",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -505,7 +518,8 @@
         "email": "postmottak@eidskog.kommune.no"
       },
       "address": {
-        "locality": "Skotterud"
+        "locality": "Skotterud",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -533,7 +547,8 @@
         "email": "postmottak@nord-odal.kommune.no"
       },
       "address": {
-        "locality": "Sagstua"
+        "locality": "Sagstua",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -561,7 +576,8 @@
         "email": "postmottak@vaaler-he.kommune.no"
       },
       "address": {
-        "locality": "Våler i Solør"
+        "locality": "Våler i Solør",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -589,7 +605,8 @@
         "email": "post@asnes.kommune.no"
       },
       "address": {
-        "locality": "Flisa"
+        "locality": "Flisa",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -599,7 +616,8 @@
       "id": "ORG-0018",
       "name": "Romerike og Glåmdal tingrett",
       "address": {
-        "locality": "Kongsvinger"
+        "locality": "Kongsvinger",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

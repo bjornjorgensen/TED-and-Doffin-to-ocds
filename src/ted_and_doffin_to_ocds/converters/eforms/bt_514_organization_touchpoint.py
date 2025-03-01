@@ -93,13 +93,13 @@ def parse_touchpoint_country(xml_content: str | bytes) -> dict | None:
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:organizations/efac:organization",
+        "//efac:Organizations/efac:Organization",
         namespaces=namespaces,
     )
 
     for organization in organizations:
         touchpoint_id = organization.xpath(
-            "efac:touchpoint/cac:partyIdentification/cbc:ID[@schemeName='touchpoint']/text()",
+            "efac:touchpoint/cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']/text()",
             namespaces=namespaces,
         )
         country_code = organization.xpath(
@@ -107,7 +107,7 @@ def parse_touchpoint_country(xml_content: str | bytes) -> dict | None:
             namespaces=namespaces,
         )
         company_id = organization.xpath(
-            "efac:company/cac:partyLegalEntity/cbc:companyID/text()",
+            "efac:Company/cac:PartyLegalEntity/cbc:companyID/text()",
             namespaces=namespaces,
         )
 

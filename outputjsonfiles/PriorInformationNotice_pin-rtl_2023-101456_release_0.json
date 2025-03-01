@@ -1,7 +1,7 @@
 {
   "id": "ee5f74f4-d24f-4c67-beca-c7e4a17d16e4",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-30c3769a-bb35-4c9a-82b8-48429ce6af52",
+  "ocid": "ocds-abcd1234-ae268b82-b44b-42da-adb0-84e48058281a",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -135,7 +135,8 @@
       "address": {
         "streetAddress": "Postboks 40",
         "postalCode": "9811",
-        "locality": "VADSØ"
+        "locality": "VADSØ",
+        "country": "NO"
       }
     },
     {
@@ -152,7 +153,8 @@
         "email": "vestre.finnmark.tingrett@domstol.no"
       },
       "address": {
-        "locality": "Alta"
+        "locality": "Alta",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

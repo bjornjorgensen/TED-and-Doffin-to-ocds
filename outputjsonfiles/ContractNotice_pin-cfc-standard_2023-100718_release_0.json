@@ -1,7 +1,7 @@
 {
   "id": "03223b9a-002c-45e8-be6b-9d4aad21950e",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-be14e14a-11c7-4b54-a01b-04891ea4c0ae",
+  "ocid": "ocds-abcd1234-84c67dda-32e9-4343-9043-5c723dcce44f",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -143,7 +143,8 @@
       "address": {
         "streetAddress": "Postboks 40",
         "postalCode": "9811",
-        "locality": "VADSÃ˜"
+        "locality": "VADSÃ˜",
+        "country": "NO"
       }
     },
     {
@@ -160,7 +161,8 @@
         "email": "indre.og.ostre.finnmark.tingrett@domstol.no"
       },
       "address": {
-        "locality": "VadsÃ¸"
+        "locality": "VadsÃ¸",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

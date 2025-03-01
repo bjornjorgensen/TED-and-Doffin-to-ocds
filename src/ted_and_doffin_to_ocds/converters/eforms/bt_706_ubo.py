@@ -121,7 +121,7 @@ def parse_ubo_nationality(
 
     if ubo_data:
         organization_id = root.xpath(
-            "//efac:organizations/efac:organization/efac:company/cac:partyIdentification/cbc:ID[@schemeName='organization']/text()",
+            "//efac:Organizations/efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID[@schemeName='organization']/text()",
             namespaces=namespaces,
         )
         if organization_id:

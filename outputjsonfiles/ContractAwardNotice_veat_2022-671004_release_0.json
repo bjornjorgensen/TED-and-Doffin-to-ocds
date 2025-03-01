@@ -1,7 +1,7 @@
 {
   "id": "2022-671004",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1efae6b2-f85b-42f6-8385-37101de33dee",
+  "ocid": "ocds-abcd1234-689620ed-c227-42d9-a7ec-6660c652356a",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -99,7 +99,8 @@
       "address": {
         "streetAddress": "Postboks 2844",
         "postalCode": "3702",
-        "locality": "Skien"
+        "locality": "Skien",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -113,14 +114,16 @@
         "tenderer"
       ],
       "address": {
-        "locality": "Dublin Docklands"
+        "locality": "Dublin Docklands",
+        "country": "IE"
       }
     },
     {
       "id": "ORG-0003",
       "name": "Tingretten",
       "address": {
-        "locality": "Telemark Tingrett"
+        "locality": "Telemark Tingrett",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

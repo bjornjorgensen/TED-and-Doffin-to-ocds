@@ -1,7 +1,7 @@
 {
   "id": "2023-664435",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-799db7b6-1588-42d8-8ddb-1c4653765ecd",
+  "ocid": "ocds-abcd1234-c848bca8-060f-4dfc-a819-08e1d3394c06",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -145,14 +145,16 @@
       "address": {
         "streetAddress": "Postboks 40",
         "postalCode": "9811",
-        "locality": "VADSØ"
+        "locality": "VADSØ",
+        "country": "NO"
       }
     },
     {
       "id": "ORG-0002",
       "name": "Øst-Finnmark tingrett",
       "address": {
-        "locality": "Vadsø"
+        "locality": "Vadsø",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"
@@ -162,7 +164,8 @@
       "id": "ORG-0003",
       "name": "Sykehusinnkjøp HF",
       "address": {
-        "locality": "Vadsø"
+        "locality": "Vadsø",
+        "country": "NO"
       },
       "roles": [
         "reviewContactPoint"

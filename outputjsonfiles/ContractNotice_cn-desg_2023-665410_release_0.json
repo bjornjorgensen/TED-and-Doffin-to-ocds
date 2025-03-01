@@ -1,7 +1,7 @@
 {
   "id": "2023-665410",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ccf1df30-ee97-4784-b592-24b0d0da5624",
+  "ocid": "ocds-abcd1234-b178beb2-9088-4b27-a5b3-185a95b9b7d7",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -157,14 +157,15 @@
         "email": "sigmund.ulnes@larvik.kommune.no"
       },
       "roles": [
-        "processContactPoint",
         "submissionReceiptBody",
+        "processContactPoint",
         "buyer"
       ],
       "address": {
         "streetAddress": "Postboks 2020",
         "postalCode": "3255",
-        "locality": "Larvik"
+        "locality": "Larvik",
+        "country": "NO"
       }
     },
     {
@@ -177,7 +178,8 @@
       "address": {
         "streetAddress": "Bredochs gate 4",
         "postalCode": "3256",
-        "locality": "Larvik"
+        "locality": "Larvik",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

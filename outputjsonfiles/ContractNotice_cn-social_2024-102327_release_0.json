@@ -1,7 +1,7 @@
 {
   "id": "aa382761-89ef-4162-9dc5-74f12a6f2a21",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2994b407-25df-4640-b234-363e19b4ec48",
+  "ocid": "ocds-abcd1234-6773d86a-b331-415d-b7f8-b7e7b2226ade",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -756,7 +756,8 @@
       "address": {
         "streetAddress": "Postboks 354",
         "postalCode": "8601",
-        "locality": "Mo i Rana"
+        "locality": "Mo i Rana",
+        "country": "NO"
       }
     },
     {
@@ -773,7 +774,8 @@
         "email": "oslo.tingrett@domstol.no"
       },
       "address": {
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

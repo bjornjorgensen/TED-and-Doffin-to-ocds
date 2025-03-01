@@ -1,7 +1,7 @@
 {
   "id": "65667997-031a-4198-bd25-7225449ef479",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-446f07cc-9fd9-43fd-8e2b-03d83f9cb5a3",
+  "ocid": "ocds-abcd1234-e7c845b5-6002-42df-b642-770c0939b8ee",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -95,12 +95,16 @@
       },
       "beneficialOwners": [
         {
-          "id": "UBO-0001"
+          "id": "UBO-0001",
+          "nationalities": [
+            "FR"
+          ]
         }
       ],
       "address": {
         "postalCode": "ABC123",
-        "locality": "Rouen Cedex 1"
+        "locality": "Rouen Cedex 1",
+        "country": "FR"
       },
       "roles": [
         "buyer"
@@ -122,7 +126,8 @@
       ],
       "address": {
         "postalCode": "ABC123",
-        "locality": "Rouen"
+        "locality": "Rouen",
+        "country": "FR"
       },
       "roles": [
         "reviewBody"
@@ -156,7 +161,8 @@
       ],
       "address": {
         "postalCode": "ABC123",
-        "locality": "Le Grand-Quevilly"
+        "locality": "Le Grand-Quevilly",
+        "country": "FR"
       }
     },
     {

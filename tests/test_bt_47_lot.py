@@ -17,9 +17,9 @@ def test_parse_participant_name() -> None:
             <cac:TenderingTerms>
                 <cac:EconomicOperatorShortList>
                     <cac:PreSelectedparty>
-                        <cac:partyName>
+                        <cac:PartyName>
                             <cbc:Name>Mr P. Sanchez</cbc:Name>
-                        </cac:partyName>
+                        </cac:PartyName>
                     </cac:PreSelectedparty>
                 </cac:EconomicOperatorShortList>
             </cac:TenderingTerms>

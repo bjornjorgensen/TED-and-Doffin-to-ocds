@@ -41,17 +41,17 @@ def parse_touchpoint_postcode(xml_content: str | bytes) -> dict | None:
     result = {"parties": []}
 
     organizations = root.xpath(
-        "//efac:organizations/efac:organization",
+        "//efac:Organizations/efac:Organization",
         namespaces=namespaces,
     )
 
     for organization in organizations:
         company_id = organization.xpath(
-            "efac:company/cac:partyLegalEntity/cbc:companyID/text()",
+            "efac:Company/cac:PartyLegalEntity/cbc:companyID/text()",
             namespaces=namespaces,
         )
         touchpoint_id = organization.xpath(
-            "efac:touchpoint/cac:partyIdentification/cbc:ID[@schemeName='touchpoint']/text()",
+            "efac:touchpoint/cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']/text()",
             namespaces=namespaces,
         )
         postal_zone = organization.xpath(

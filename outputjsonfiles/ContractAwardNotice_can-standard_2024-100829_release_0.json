@@ -1,7 +1,7 @@
 {
   "id": "510444f4-6cd2-4b26-8dd6-f3af27ffa069",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7cef8404-63b3-4d66-9465-9fb297226b16",
+  "ocid": "ocds-abcd1234-e649e0e5-9959-49d9-9325-19f42f42f8ed",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften"
@@ -127,7 +127,8 @@
       "address": {
         "streetAddress": "Osloveien 1 Rådhuset",
         "postalCode": "3511",
-        "locality": "HØNEFOSS"
+        "locality": "HØNEFOSS",
+        "country": "NO"
       },
       "roles": [
         "funder",
@@ -150,7 +151,8 @@
       },
       "address": {
         "postalCode": "1302",
-        "locality": "Sandvika"
+        "locality": "Sandvika",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"
@@ -175,7 +177,8 @@
         "email": "jon.vidar.kleppe@focus.no"
       },
       "address": {
-        "locality": "Billingstad"
+        "locality": "Billingstad",
+        "country": "NO"
       }
     }
   ],

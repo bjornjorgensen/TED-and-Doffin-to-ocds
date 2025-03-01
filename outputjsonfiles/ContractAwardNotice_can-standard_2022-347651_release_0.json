@@ -1,7 +1,7 @@
 {
   "id": "2022-347651",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ce055317-607d-4d80-87ab-0efcb5e18066",
+  "ocid": "ocds-abcd1234-f05c663e-3736-477c-aa3a-be489c28952e",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -147,7 +147,8 @@
       "address": {
         "streetAddress": "Postboks 2160",
         "postalCode": "5504",
-        "locality": "Haugesund"
+        "locality": "Haugesund",
+        "country": "NO"
       }
     },
     {
@@ -163,7 +164,8 @@
       "address": {
         "streetAddress": "Postboks 385",
         "postalCode": "5501",
-        "locality": "Haugesund"
+        "locality": "Haugesund",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"
@@ -182,7 +184,8 @@
       "address": {
         "streetAddress": "Postboks 511",
         "postalCode": "5805",
-        "locality": "Bergen"
+        "locality": "Bergen",
+        "country": "NO"
       },
       "roles": [
         "mediationBody"

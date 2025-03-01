@@ -1,7 +1,7 @@
 {
   "id": "2023-684186",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-53311f9f-dd64-4c2e-a926-f99b093a6070",
+  "ocid": "ocds-abcd1234-dce238bb-64b6-445c-9530-c47db2246f8e",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -129,14 +129,16 @@
       "address": {
         "streetAddress": "Gullhaug Torg 2",
         "postalCode": "0484",
-        "locality": "OSLO"
+        "locality": "OSLO",
+        "country": "NO"
       }
     },
     {
       "id": "ORG-0002",
       "name": "Oslo Tingrett",
       "address": {
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

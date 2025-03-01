@@ -1,7 +1,7 @@
 {
   "id": "5681ff11-e080-4da6-b108-82db3f9b4b69",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0cfbfe06-ec78-4ef6-9593-3069d9caf232",
+  "ocid": "ocds-abcd1234-4fbaae01-2f9c-46ce-86be-2e63b6b9ca35",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -280,7 +280,8 @@
       "address": {
         "streetAddress": "Postboks 2844",
         "postalCode": "3702",
-        "locality": "SKIEN"
+        "locality": "SKIEN",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -305,7 +306,8 @@
       "address": {
         "streetAddress": "Postboks 2624",
         "postalCode": "3702",
-        "locality": "Skien"
+        "locality": "Skien",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

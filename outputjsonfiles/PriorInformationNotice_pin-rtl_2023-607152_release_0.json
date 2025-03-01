@@ -1,7 +1,7 @@
 {
   "id": "2023-607152",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9be843bb-946b-40c1-8bda-c44d6ac9903e",
+  "ocid": "ocds-abcd1234-790063de-e8fb-4c35-9019-01f62cac6e19",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -140,7 +140,8 @@
       "address": {
         "streetAddress": "Prinsens gate 39",
         "postalCode": "7011",
-        "locality": "TRONDHEIM"
+        "locality": "TRONDHEIM",
+        "country": "NO"
       }
     }
   ],

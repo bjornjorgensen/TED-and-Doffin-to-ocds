@@ -1,7 +1,7 @@
 {
   "id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2df9c17b-d8d0-4d3c-9b73-84b7fa38d256",
+  "ocid": "ocds-abcd1234-f1d92592-dd54-489e-8e56-c6f53bc5a53d",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -342,16 +342,17 @@
         "faxNumber": "+47 61176333"
       },
       "roles": [
-        "evaluationBody",
-        "processContactPoint",
+        "buyer",
         "reviewContactPoint",
+        "processContactPoint",
         "submissionReceiptBody",
-        "buyer"
+        "evaluationBody"
       ],
       "address": {
         "streetAddress": "Kauffelds plass 1",
         "postalCode": "2815",
-        "locality": "GJØVIK"
+        "locality": "GJØVIK",
+        "country": "NO"
       }
     },
     {
@@ -370,7 +371,8 @@
       "address": {
         "streetAddress": "Strandgata 26",
         "postalCode": "2801",
-        "locality": "Gjøvik"
+        "locality": "Gjøvik",
+        "country": "NO"
       },
       "roles": [
         "mediationBody",

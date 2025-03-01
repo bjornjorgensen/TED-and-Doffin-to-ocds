@@ -1,7 +1,7 @@
 {
   "id": "2022-902600",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c0b6eee3-9b5a-4a73-969e-0dcb700bf599",
+  "ocid": "ocds-abcd1234-3d25554d-f198-4a5a-8119-3e2ac713c400",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -141,11 +141,12 @@
       "address": {
         "streetAddress": "Postboks 788 Stoa",
         "postalCode": "4809",
-        "locality": "Arendal"
+        "locality": "Arendal",
+        "country": "NO"
       },
       "roles": [
-        "processContactPoint",
         "submissionReceiptBody",
+        "processContactPoint",
         "buyer"
       ]
     },
@@ -153,7 +154,8 @@
       "id": "ORG-0002",
       "name": "Agder tingrett",
       "address": {
-        "locality": "Kristiansand"
+        "locality": "Kristiansand",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

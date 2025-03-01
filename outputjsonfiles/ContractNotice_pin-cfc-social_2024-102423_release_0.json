@@ -1,7 +1,7 @@
 {
   "id": "2c234234-aaec-4210-8cbe-1803ecaee901",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-af69db20-336d-4ada-bce5-dc08e555bbd9",
+  "ocid": "ocds-abcd1234-9b4738c7-de46-40d8-a64f-1c9cb2f25243",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -141,7 +141,8 @@
       "address": {
         "streetAddress": "Keiser Wilhelms gate 11",
         "postalCode": "6003",
-        "locality": "Ålesund"
+        "locality": "Ålesund",
+        "country": "NO"
       },
       "roles": [
         "processContactPoint",
@@ -167,7 +168,8 @@
       "address": {
         "streetAddress": "Postboks 1354",
         "postalCode": "6001",
-        "locality": "Ålesund"
+        "locality": "Ålesund",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

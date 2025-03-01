@@ -1,7 +1,7 @@
 {
   "id": "2022-674620",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f13ec771-ad01-4839-9395-51066b361954",
+  "ocid": "ocds-abcd1234-4a6dde95-e195-4456-9540-ef6dab61bec7",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -105,7 +105,8 @@
       "address": {
         "streetAddress": "PB 5672 Sluppen",
         "postalCode": "7485",
-        "locality": "Trondheim"
+        "locality": "Trondheim",
+        "country": "NO"
       }
     },
     {
@@ -124,7 +125,8 @@
       "address": {
         "streetAddress": "Postboks 64",
         "postalCode": "1431",
-        "locality": "Ås"
+        "locality": "Ås",
+        "country": "NO"
       }
     },
     {
@@ -133,7 +135,8 @@
       "address": {
         "streetAddress": "Postboks 2317 Torgarden",
         "postalCode": "7004",
-        "locality": "Trondheim"
+        "locality": "Trondheim",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

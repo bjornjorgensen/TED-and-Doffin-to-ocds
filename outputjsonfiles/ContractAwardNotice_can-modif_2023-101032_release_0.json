@@ -1,7 +1,7 @@
 {
   "id": "be2cd071-e143-4fc8-bc3b-7f1ec1b4141f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f238c3bd-bbef-44e0-ad88-19d879f12922",
+  "ocid": "ocds-abcd1234-784beb2e-e94b-4574-9db6-9a1d43a6a863",
   "tender": {
     "legalBasis": {
       "id": "FOA § 28-1 d",
@@ -126,7 +126,7 @@
       ],
       "amendments": [
         {
-          "id": "e39774e2-078e-46bd-8a98-0725a1d9c3e9",
+          "id": "61009f4a-5327-4a1b-8aca-179e1a798632",
           "rationaleClassifications": [
             {
               "id": "mod-cir",
@@ -136,11 +136,11 @@
           ]
         },
         {
-          "id": "cdb08629-303f-4e23-9430-7e040b4de12c",
+          "id": "be3548a6-b3f8-4f0f-b896-2d89494e4819",
           "rationale": "Oppdragsgiver kunne ikke forutse at dagens Ålesund kommune ville bli vedtatt delt i to nye kommuner, heretter kalt Ålesund 2024 og Haram 2024. Anskaffelsens overordnede karakter blir ikke endret (1.), og den enkelte prisøkningen overstiger ikke 50 prosent av den opprinnelige kontraktsverdien (2.). Oppdragsgiver kunngjør endringene (3.)."
         },
         {
-          "id": "1af14ea4-4f47-42ab-80e9-cd7f290a8f8b",
+          "id": "50e3cd27-9066-4259-8bd5-7391c6c44999",
           "description": "I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d. Ålesund kommunes eksisterende avtale med Visma Enterprise AS vedrørende Visma FlyVo videreføres i Ålesund 2024 og Haram 2024. Det er inngått et endringsbilag til eksisterende kontrakt som beskriver de nødvendige endringene i kontrakten som følge av kommunedelingen. Av opprinnelig kontraktsverdi, etter avtalefestet KPI-justering, utgjør nødvendige engangskostnader direkte knyttet til kommunedelingen 10 %. Årlig pris for bruksrett (fast pris pr. flyktning og pr. elev) endres ikke (kun avhengig av antall flyktninger og antall elever). "
         }
       ],
@@ -168,7 +168,8 @@
       "address": {
         "streetAddress": "Keiser Wilhelms gate 11",
         "postalCode": "6003",
-        "locality": "ÅLESUND"
+        "locality": "ÅLESUND",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -193,7 +194,8 @@
       "address": {
         "streetAddress": "Postboks 1354",
         "postalCode": "6001",
-        "locality": "Ålesund"
+        "locality": "Ålesund",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"
@@ -217,7 +219,8 @@
         "email": "visma@visma.com"
       },
       "address": {
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     }
   ],

@@ -1,7 +1,7 @@
 {
   "id": "9a4b7099-142a-412a-af35-3e8feaf15ec7",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0fb8346d-60d1-44a6-a865-a510e3a04f4a",
+  "ocid": "ocds-abcd1234-ba7fcbad-309f-4270-9e98-bb0c3698f1c3",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -101,7 +101,8 @@
       "address": {
         "streetAddress": "Kirkegata 15",
         "postalCode": "1531",
-        "locality": "Moss"
+        "locality": "Moss",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -126,7 +127,8 @@
       "address": {
         "streetAddress": "Postboks 113",
         "postalCode": "1601",
-        "locality": "Fredrikstad"
+        "locality": "Fredrikstad",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"
@@ -150,7 +152,8 @@
         "email": "post@aberia.no"
       },
       "address": {
-        "locality": "Moss"
+        "locality": "Moss",
+        "country": "NO"
       }
     },
     {
@@ -171,7 +174,8 @@
         "email": "post@omsorgspartner.no"
       },
       "address": {
-        "locality": "Asker"
+        "locality": "Asker",
+        "country": "NO"
       }
     },
     {
@@ -192,7 +196,8 @@
         "email": "post@otrera.no"
       },
       "address": {
-        "locality": "Lunner"
+        "locality": "Lunner",
+        "country": "NO"
       }
     },
     {
@@ -213,7 +218,8 @@
         "email": "post@stendi.no"
       },
       "address": {
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -234,7 +240,8 @@
         "email": "post@vboo.no"
       },
       "address": {
-        "locality": "Sarpsborg"
+        "locality": "Sarpsborg",
+        "country": "NO"
       }
     }
   ],
@@ -264,11 +271,11 @@
         }
       ],
       "relatedBids": [
-        "TEN-0005",
-        "TEN-0001",
         "TEN-0002",
+        "TEN-0004",
+        "TEN-0005",
         "TEN-0003",
-        "TEN-0004"
+        "TEN-0001"
       ]
     }
   ],

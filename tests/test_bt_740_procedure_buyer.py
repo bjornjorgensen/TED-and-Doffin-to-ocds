@@ -44,11 +44,11 @@ def test_bt_740_procedure_buyer_integration(
           xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ContractingpartyType>
-            <cac:party>
-                <cac:partyIdentification>
+            <cac:Party>
+                <cac:PartyIdentification>
                     <cbc:ID>ORG-0001</cbc:ID>
-                </cac:partyIdentification>
-            </cac:party>
+                </cac:PartyIdentification>
+            </cac:Party>
             <cbc:partyTypeCode listName="buyer-contracting-type">cont-ent</cbc:partyTypeCode>
         </cac:ContractingpartyType>
     </ContractAwardNotice>

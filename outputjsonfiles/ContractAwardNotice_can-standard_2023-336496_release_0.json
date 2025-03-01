@@ -1,7 +1,7 @@
 {
   "id": "2023-336496",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-dd6d737f-9e2a-4bf2-af7c-5087295d1fce",
+  "ocid": "ocds-abcd1234-7269a4b7-a62b-4284-99e9-1ec42428800b",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -128,7 +128,8 @@
       "address": {
         "streetAddress": "Oscar Pedersens vei 39",
         "postalCode": "1702",
-        "locality": "Sarpsborg"
+        "locality": "Sarpsborg",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -153,7 +154,8 @@
       "address": {
         "streetAddress": "Alf Bjerckes vei 20",
         "postalCode": "0582",
-        "locality": "OSLO"
+        "locality": "OSLO",
+        "country": "NO"
       }
     }
   ],

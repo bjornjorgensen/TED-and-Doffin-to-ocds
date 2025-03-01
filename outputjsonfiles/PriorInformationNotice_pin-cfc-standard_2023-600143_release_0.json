@@ -1,7 +1,7 @@
 {
   "id": "2023-600143",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-55515761-81ca-4ba2-bb15-a0f2357346cd",
+  "ocid": "ocds-abcd1234-9002d06e-e22d-4e1a-804d-9b79708f86ef",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -133,7 +133,8 @@
       "address": {
         "streetAddress": "postboks 2410",
         "postalCode": "3104",
-        "locality": "Tønsberg"
+        "locality": "Tønsberg",
+        "country": "NO"
       }
     },
     {
@@ -155,7 +156,8 @@
       "address": {
         "streetAddress": "Postboks 2410",
         "postalCode": "3104",
-        "locality": "Tønsberg"
+        "locality": "Tønsberg",
+        "country": "NO"
       },
       "roles": [
         "submissionReceiptBody"
@@ -170,7 +172,8 @@
       "address": {
         "streetAddress": "Postboks 2013",
         "postalCode": "3103",
-        "locality": "Tønsberg"
+        "locality": "Tønsberg",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

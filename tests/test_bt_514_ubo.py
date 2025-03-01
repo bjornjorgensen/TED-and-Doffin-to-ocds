@@ -50,14 +50,14 @@ def test_bt_514_ubo_integration(tmp_path, setup_logging, temp_output_dir) -> Non
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:organizations>
-                            <efac:organization>
-                                <efac:company>
-                                    <cac:partyIdentification>
+                        <efac:Organizations>
+                            <efac:Organization>
+                                <efac:Company>
+                                    <cac:PartyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:partyIdentification>
-                                </efac:company>
-                            </efac:organization>
+                                    </cac:PartyIdentification>
+                                </efac:Company>
+                            </efac:Organization>
                             <efac:UltimateBeneficialOwner>
                                 <cbc:ID schemeName="ubo">ubo-0001</cbc:ID>
                                 <cac:ResidenceAddress>
@@ -66,7 +66,7 @@ def test_bt_514_ubo_integration(tmp_path, setup_logging, temp_output_dir) -> Non
                                     </cac:Country>
                                 </cac:ResidenceAddress>
                             </efac:UltimateBeneficialOwner>
-                        </efac:organizations>
+                        </efac:Organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

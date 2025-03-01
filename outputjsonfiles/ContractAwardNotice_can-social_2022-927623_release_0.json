@@ -1,7 +1,7 @@
 {
   "id": "2022-927623",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-78e02999-8ca6-4851-90bc-439940c78bf4",
+  "ocid": "ocds-abcd1234-80ad6384-aac1-42b4-980e-fc433d810bda",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -143,7 +143,8 @@
       "address": {
         "streetAddress": "Fridtjof Nansens vei 14",
         "postalCode": "0369 ",
-        "locality": "OSLO"
+        "locality": "OSLO",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -171,7 +172,8 @@
       "address": {
         "streetAddress": "Alf Bjerckes vei 1",
         "postalCode": "N-0582",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -197,7 +199,8 @@
       "address": {
         "streetAddress": "Bøkkerveien 5, 0579 Oslo",
         "postalCode": "Postboks 100, Alnabr",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -213,7 +216,8 @@
       "address": {
         "streetAddress": "Postboks 2106 Vika",
         "postalCode": "0125",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "roles": [
         "mediationBody",
@@ -230,7 +234,8 @@
         "email": "post.fellestjenester@politiet.no"
       },
       "address": {
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "roles": [
         "reviewContactPoint"
@@ -254,8 +259,8 @@
         }
       ],
       "relatedBids": [
-        "TEN-0002",
-        "TEN-0001"
+        "TEN-0001",
+        "TEN-0002"
       ]
     }
   ],

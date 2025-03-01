@@ -1,7 +1,7 @@
 {
   "id": "2023-604437",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1c88a0f0-3b9a-4658-856d-4ed3f9bac5a1",
+  "ocid": "ocds-abcd1234-e77a53f8-1d74-4248-93a0-32ac32d00c4d",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -125,14 +125,15 @@
         ]
       },
       "roles": [
-        "processContactPoint",
         "submissionReceiptBody",
+        "processContactPoint",
         "buyer"
       ],
       "address": {
         "streetAddress": "Økernveien 9",
         "postalCode": "0608",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -141,7 +142,8 @@
       "address": {
         "streetAddress": "Postboks 2106 Vika",
         "postalCode": "0125",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

@@ -1,7 +1,7 @@
 {
   "id": "2022-627736",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ad7b7985-6ec1-408b-afa9-63f5a6b1758d",
+  "ocid": "ocds-abcd1234-acaae780-0247-4123-997b-9d5ea46c766c",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -99,7 +99,8 @@
       "address": {
         "streetAddress": "Dronningens gate 13",
         "postalCode": "0152",
-        "locality": "OSLO"
+        "locality": "OSLO",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -129,7 +130,8 @@
       "address": {
         "streetAddress": "Pb 9036 Grønland",
         "postalCode": "0133",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -141,7 +143,8 @@
       "address": {
         "streetAddress": "Pb 2106 Vika",
         "postalCode": "0125",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

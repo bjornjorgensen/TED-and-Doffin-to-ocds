@@ -1,7 +1,7 @@
 {
   "id": "2023-626911",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-cc881e46-4455-44be-ab4b-fc927a0ad48d",
+  "ocid": "ocds-abcd1234-cb9c9673-cd38-48fe-81bf-0acd2ff6b47d",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -92,7 +92,8 @@
       "address": {
         "streetAddress": "Seilmakergata 2",
         "postalCode": "7725",
-        "locality": "STEINKJER"
+        "locality": "STEINKJER",
+        "country": "NO"
       }
     }
   ],

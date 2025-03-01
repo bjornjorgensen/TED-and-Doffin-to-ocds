@@ -1,7 +1,7 @@
 {
   "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-218fe78b-c1ec-4a10-8af2-1eec2878960e",
+  "ocid": "ocds-abcd1234-a0c93927-d715-4c23-9223-5adfd018719d",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -148,12 +148,13 @@
       "address": {
         "streetAddress": "Edvard Griegs plass 1",
         "postalCode": "5015",
-        "locality": "Bergen"
+        "locality": "Bergen",
+        "country": "NO"
       },
       "roles": [
         "funder",
-        "processContactPoint",
         "payer",
+        "processContactPoint",
         "buyer"
       ]
     },
@@ -177,7 +178,8 @@
       "address": {
         "streetAddress": "Postboks 1124 Sentrum",
         "postalCode": "5809",
-        "locality": "Bergen"
+        "locality": "Bergen",
+        "country": "NO"
       },
       "roles": [
         "processContactPoint"
@@ -200,7 +202,8 @@
         "url": "https://www.domstol.no/no/domstoler/tingrett/hordaland-tingrett/"
       },
       "address": {
-        "locality": "Bergen"
+        "locality": "Bergen",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"
@@ -224,7 +227,8 @@
         "email": "kigl@henninglarsen.com"
       },
       "address": {
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "details": {
         "listedOnRegulatedMarket": true

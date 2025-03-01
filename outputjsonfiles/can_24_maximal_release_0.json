@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-666a95be-3cca-447b-afa0-15eaa59441bf",
+  "ocid": "ocds-abcd1234-64c190d3-d921-4f96-b12b-8d7132bfc23e",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -401,13 +401,22 @@
             "locality": "Bruxelles",
             "country": "BE"
           },
+          "nationalities": [
+            "BE"
+          ],
           "faxNumber": "+33 123456789"
         },
         {
-          "id": "UBO-0003"
+          "id": "UBO-0003",
+          "nationalities": [
+            "ES"
+          ]
         },
         {
-          "id": "UBO-0004"
+          "id": "UBO-0004",
+          "nationalities": [
+            "FR"
+          ]
         }
       ],
       "additionalIdentifiers": [
@@ -429,7 +438,8 @@
       "address": {
         "streetAddress": "Bruce Wayne House, 2 Gotham Street",
         "postalCode": "1234",
-        "locality": "Luxembourg"
+        "locality": "Luxembourg",
+        "country": "LU"
       }
     },
     {
@@ -472,7 +482,8 @@
       "address": {
         "streetAddress": "6 Main Street",
         "postalCode": "1234",
-        "locality": "Luxembourg"
+        "locality": "Luxembourg",
+        "country": "LU"
       },
       "roles": [
         "informationService"
@@ -518,7 +529,8 @@
       "address": {
         "streetAddress": "23 Nelson Square",
         "postalCode": "1234",
-        "locality": "Luxembourg"
+        "locality": "Luxembourg",
+        "country": "LU"
       },
       "roles": [
         "informationService"
@@ -564,7 +576,8 @@
       "address": {
         "streetAddress": "162 Broad Street, 2nd floor",
         "postalCode": "1234",
-        "locality": "Luxembourg"
+        "locality": "Luxembourg",
+        "country": "LU"
       },
       "roles": [
         "informationService"
@@ -610,7 +623,8 @@
       "address": {
         "streetAddress": "87 Big Avenue",
         "postalCode": "1234",
-        "locality": "Luxembourg"
+        "locality": "Luxembourg",
+        "country": "LU"
       },
       "roles": [
         "reviewBody"
@@ -655,7 +669,8 @@
       "address": {
         "streetAddress": "85 Norwish Road",
         "postalCode": "1234",
-        "locality": "Luxembourg"
+        "locality": "Luxembourg",
+        "country": "LU"
       },
       "roles": [
         "mediationBody"
@@ -698,7 +713,8 @@
       },
       "address": {
         "postalCode": "2985",
-        "locality": "Luxembourg"
+        "locality": "Luxembourg",
+        "country": "LU"
       },
       "roles": [
         "eSender"
@@ -713,9 +729,9 @@
         "listedOnRegulatedMarket": false
       },
       "roles": [
-        "leadTenderer",
         "tenderer",
-        "supplier"
+        "supplier",
+        "leadTenderer"
       ],
       "beneficialOwners": [
         {
@@ -751,14 +767,15 @@
       "address": {
         "streetAddress": "4 rue du Bug, immeubke A",
         "postalCode": "8754",
-        "locality": "Luxembourg"
+        "locality": "Luxembourg",
+        "country": "LU"
       }
     },
     {
       "id": "ORG-0009",
       "name": "The best App Ltd. - Innovation division",
       "details": {
-        "scale": "micro",
+        "scale": "selfEmployed",
         "url": "https://www.the-best-app.com",
         "listedOnRegulatedMarket": false
       },
@@ -800,7 +817,8 @@
       "address": {
         "streetAddress": "3A smart avenue",
         "postalCode": "73846",
-        "locality": "Frankfurt"
+        "locality": "Frankfurt",
+        "country": "DE"
       }
     },
     {
@@ -845,7 +863,8 @@
       "address": {
         "streetAddress": "7 calle ancha",
         "postalCode": "34875",
-        "locality": "El pueblo"
+        "locality": "El pueblo",
+        "country": "ES"
       },
       "roles": [
         "subcontractor"
@@ -897,7 +916,8 @@
       "address": {
         "streetAddress": "7 rue de la republique",
         "postalCode": "75004",
-        "locality": "Paris"
+        "locality": "Paris",
+        "country": "FR"
       }
     },
     {
@@ -1060,8 +1080,8 @@
         }
       ],
       "relatedBids": [
-        "TEN-0002",
         "TEN-0001",
+        "TEN-0002",
         "TEN-0003"
       ]
     }

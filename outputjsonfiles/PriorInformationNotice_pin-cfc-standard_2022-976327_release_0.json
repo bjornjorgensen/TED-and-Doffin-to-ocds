@@ -1,7 +1,7 @@
 {
   "id": "2022-976327",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e14d1c90-8d04-4695-82f2-a13507f3fbd7",
+  "ocid": "ocds-abcd1234-d3a1e9fd-a501-4bd0-88d6-a88513971337",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -128,14 +128,15 @@
         "email": "leona.pilares@sye.oslo.kommune.no"
       },
       "roles": [
-        "processContactPoint",
         "submissionReceiptBody",
+        "processContactPoint",
         "buyer"
       ],
       "address": {
         "streetAddress": "Nedre Slottsgate 3",
         "postalCode": "0157 ",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -151,7 +152,8 @@
       "address": {
         "streetAddress": "Postboks 2106 Vika",
         "postalCode": "0125",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"
@@ -170,7 +172,8 @@
       "address": {
         "streetAddress": "Zander Kaaes gate 7",
         "postalCode": "5015",
-        "locality": "Bergen"
+        "locality": "Bergen",
+        "country": "NO"
       },
       "roles": [
         "mediationBody"
@@ -186,7 +189,8 @@
       "address": {
         "streetAddress": "Pb. 435 Sentrum",
         "postalCode": "0103",
-        "locality": "OSLO"
+        "locality": "OSLO",
+        "country": "NO"
       },
       "roles": [
         "reviewContactPoint"

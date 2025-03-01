@@ -1,7 +1,7 @@
 {
   "id": "2022-352534",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-5d215ec8-a306-45b6-9c94-986f595fd22e",
+  "ocid": "ocds-abcd1234-04300ae0-81d9-4dd7-98b6-9c1b4eca6049",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -118,14 +118,15 @@
         ]
       },
       "roles": [
-        "processContactPoint",
         "submissionReceiptBody",
+        "processContactPoint",
         "buyer"
       ],
       "address": {
         "streetAddress": "P.O. Box 1817",
         "postalCode": "4858",
-        "locality": "Arendal"
+        "locality": "Arendal",
+        "country": "NO"
       }
     },
     {
@@ -137,7 +138,8 @@
       "address": {
         "streetAddress": "Postboks 5678 Sluppen",
         "postalCode": "7485",
-        "locality": "Trondheim"
+        "locality": "Trondheim",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"
@@ -152,7 +154,8 @@
       "address": {
         "streetAddress": "Postboks 439 Sentrum",
         "postalCode": "5805",
-        "locality": "Bergen"
+        "locality": "Bergen",
+        "country": "NO"
       },
       "roles": [
         "mediationBody"

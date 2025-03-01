@@ -52,20 +52,20 @@ def test_bt_514_organization_company_integration(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:organizations>
-                            <efac:organization>
-                                <efac:company>
-                                    <cac:partyIdentification>
+                        <efac:Organizations>
+                            <efac:Organization>
+                                <efac:Company>
+                                    <cac:PartyIdentification>
                                         <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                                    </cac:partyIdentification>
+                                    </cac:PartyIdentification>
                                     <cac:PostalAddress>
                                         <cac:Country>
                                             <cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode>
                                         </cac:Country>
                                     </cac:PostalAddress>
-                                </efac:company>
-                            </efac:organization>
-                        </efac:organizations>
+                                </efac:Company>
+                            </efac:Organization>
+                        </efac:Organizations>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

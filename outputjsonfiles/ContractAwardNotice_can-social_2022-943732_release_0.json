@@ -1,7 +1,7 @@
 {
   "id": "2022-943732",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7428fdec-84b7-48e0-a540-3018df4229e1",
+  "ocid": "ocds-abcd1234-a4cb0404-0182-4de6-884b-1a6cb135fb49",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -92,7 +92,8 @@
       "address": {
         "streetAddress": "Nydalen allé 35 ",
         "postalCode": "0484 ",
-        "locality": "OSLO"
+        "locality": "OSLO",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -118,7 +119,8 @@
       "address": {
         "streetAddress": "Nydalen Allé 35",
         "postalCode": "0421",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       }
     },
     {
@@ -134,7 +136,8 @@
       "address": {
         "streetAddress": "Postboks 2106 Vika",
         "postalCode": "0125",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "roles": [
         "mediationBody",
@@ -153,7 +156,8 @@
       "address": {
         "streetAddress": "postboks 4773 Nydalen",
         "postalCode": "0421",
-        "locality": "Oslo"
+        "locality": "Oslo",
+        "country": "NO"
       },
       "roles": [
         "reviewContactPoint"

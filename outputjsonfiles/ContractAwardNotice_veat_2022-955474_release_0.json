@@ -1,7 +1,7 @@
 {
   "id": "2022-955474",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e65c986f-a7b1-4a48-8b07-f83086a1bf76",
+  "ocid": "ocds-abcd1234-2ecc305a-ca9d-412e-b6ca-fc0d1c7436d3",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -88,7 +88,8 @@
       "address": {
         "streetAddress": "Postboks 6050 Langnes",
         "postalCode": "9037",
-        "locality": "Tromsø"
+        "locality": "Tromsø",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -112,14 +113,16 @@
       ],
       "address": {
         "streetAddress": "Peder Thomassons gate 12",
-        "locality": "Arendal"
+        "locality": "Arendal",
+        "country": "NO"
       }
     },
     {
       "id": "ORG-0003",
       "name": "Nord-Troms tingrett",
       "address": {
-        "locality": "Tromsø"
+        "locality": "Tromsø",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"

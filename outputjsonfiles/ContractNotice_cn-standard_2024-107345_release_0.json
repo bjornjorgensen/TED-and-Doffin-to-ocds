@@ -1,7 +1,7 @@
 {
   "id": "870ff007-688a-4ad1-9ad7-28c2ae514b40",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0e7d34d7-bc1e-40f1-ac22-711f3cb4b5f8",
+  "ocid": "ocds-abcd1234-0cdfa49c-ecf9-4e10-acb3-8bfc42235a81",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften"
@@ -205,7 +205,8 @@
       "address": {
         "streetAddress": "Postboks 115",
         "postalCode": "3602",
-        "locality": "KONGSBERG"
+        "locality": "KONGSBERG",
+        "country": "NO"
       },
       "roles": [
         "buyer"
@@ -225,7 +226,8 @@
         "email": "buskerud.tingrett@domstol.no"
       },
       "address": {
-        "locality": "Kongsberg"
+        "locality": "Kongsberg",
+        "country": "NO"
       },
       "roles": [
         "reviewBody"
