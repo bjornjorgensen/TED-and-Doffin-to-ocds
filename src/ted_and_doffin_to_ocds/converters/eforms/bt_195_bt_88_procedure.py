@@ -35,7 +35,13 @@ def parse_bt195_bt88_procedure_unpublished_identifier(
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
-    root = etree.fromstring(xml_content)
+
+    try:
+        root = etree.fromstring(xml_content)
+    except etree.XMLSyntaxError:
+        logger.exception("Failed to parse XML")
+        return None
+
     namespaces = {
         "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
@@ -47,31 +53,43 @@ def parse_bt195_bt88_procedure_unpublished_identifier(
 
     result = {"withheldInformation": []}
 
-    contract_folder_id = root.xpath(
-        "/*/cbc:ContractFolderID/text()", namespaces=namespaces
+    # Get ContractFolderID
+    contract_folder_id_elements = root.xpath(
+        "/*/cbc:ContractFolderID", namespaces=namespaces
     )
-    if not contract_folder_id:
+    if not contract_folder_id_elements:
         logger.warning("ContractFolderID not found in the XML")
         return None
 
+    contract_folder_id = contract_folder_id_elements[0].text
+    if not contract_folder_id:
+        logger.warning("ContractFolderID element exists but contains no value")
+        return None
+
+    # Find procedure features privacy elements
     xpath_query = (
         "/*/cac:TenderingProcess/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
         "/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-fea']"
     )
 
-    for field_privacy in root.xpath(xpath_query, namespaces=namespaces):
-        field_identifier = field_privacy.xpath(
-            "efbc:FieldIdentifierCode/text()",
-            namespaces=namespaces,
-        )
+    fields_privacy_elements = root.xpath(xpath_query, namespaces=namespaces)
+    if not fields_privacy_elements:
+        logger.debug("No procedure features privacy elements found")
+        return None
 
-        if field_identifier:
-            withheld_info = {
-                "id": f"pro-fea-{contract_folder_id[0]}",
-                "field": "pro-fea",
-                "name": "Procedure Features",
-            }
-            result["withheldInformation"].append(withheld_info)
+    # Create withheld information for each found element
+    for _field_privacy in fields_privacy_elements:
+        # Create withheld information entry according to eForms guidance
+        withheld_info = {
+            "id": f"pro-fea-{contract_folder_id}",
+            "field": "pro-fea",
+            "name": "Procedure Features",
+        }
+        result["withheldInformation"].append(withheld_info)
+        logger.debug(
+            "Added withheld information for procedure features with ID: %s",
+            withheld_info["id"],
+        )
 
     return result if result["withheldInformation"] else None
 

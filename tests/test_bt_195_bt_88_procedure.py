@@ -80,8 +80,8 @@ def test_bt_195_bt88_procedure_integration(
         withheld_item["field"] == "pro-fea"
     ), f"Expected field 'pro-fea', got {withheld_item['field']}"
     assert (
-        withheld_item["name"] == "procedure Features"
-    ), f"Expected name 'procedure Features', got {withheld_item['name']}"
+        withheld_item["name"] == "Procedure Features"
+    ), f"Expected name 'Procedure Features', got {withheld_item['name']}"
 
 
 def test_bt_195_bt88_procedure_missing_data(
