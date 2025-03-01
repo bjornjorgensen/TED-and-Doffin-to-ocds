@@ -45,17 +45,25 @@ def test_bt_195_bt636_lotresult_integration(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
-            <efac:LotResult>
-                <cbc:ID schemeName="result">RES-0001</cbc:ID>
-                <efac:AppealRequestsStatistics>
-                    <efbc:StatisticsCode listName="irregularity-type">total</efbc:StatisticsCode>
-                    <efac:FieldsPrivacy>
-                        <efbc:FieldIdentifierCode listName="non-publication-identifier">buy-rev-typ</efbc:FieldIdentifierCode>
-                    </efac:FieldsPrivacy>
-                </efac:AppealRequestsStatistics>
-            </efac:LotResult>
-        </efac:NoticeResult>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotResult>
+                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
+                                <efac:AppealRequestsStatistics>
+                                    <efbc:StatisticsCode listName="irregularity-type">total</efbc:StatisticsCode>
+                                    <efac:FieldsPrivacy>
+                                        <efbc:FieldIdentifierCode listName="non-publication-identifier">buy-rev-typ</efbc:FieldIdentifierCode>
+                                    </efac:FieldsPrivacy>
+                                </efac:AppealRequestsStatistics>
+                            </efac:LotResult>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractNotice>"""
 
     xml_file = tmp_path / "test_input_bt195_bt636.xml"
@@ -78,8 +86,8 @@ def test_bt_195_bt636_lotresult_integration(
         item["field"] == "buy-rev-typ"
     ), f"Expected field 'buy-rev-typ', got {item['field']}"
     assert (
-        item["name"] == "buyer Review Request Irregularity Type"
-    ), f"Expected name 'buyer Review Request Irregularity Type', got {item['name']}"
+        item["name"] == "Buyer Review Request Irregularity Type"
+    ), f"Expected name 'Buyer Review Request Irregularity Type', got {item['name']}"
 
 
 def test_bt_195_bt636_lotresult_missing_data(
@@ -94,15 +102,23 @@ def test_bt_195_bt636_lotresult_missing_data(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
-            <efac:LotResult>
-                <cbc:ID schemeName="result">RES-0001</cbc:ID>
-                <efac:AppealRequestsStatistics>
-                    <efbc:StatisticsCode listName="irregularity-type">total</efbc:StatisticsCode>
-                    <!-- Missing FieldsPrivacy element -->
-                </efac:AppealRequestsStatistics>
-            </efac:LotResult>
-        </efac:NoticeResult>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotResult>
+                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
+                                <efac:AppealRequestsStatistics>
+                                    <efbc:StatisticsCode listName="irregularity-type">total</efbc:StatisticsCode>
+                                    <!-- Missing FieldsPrivacy element -->
+                                </efac:AppealRequestsStatistics>
+                            </efac:LotResult>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractNotice>"""
 
     xml_file = tmp_path / "test_input_bt195_bt636_missing.xml"

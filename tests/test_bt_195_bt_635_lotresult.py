@@ -45,17 +45,25 @@ def test_bt_195_bt635_lotresult_integration(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
-            <efac:LotResult>
-                <cbc:ID schemeName="result">RES-0001</cbc:ID>
-                <efac:AppealRequestsStatistics>
-                    <efbc:StatisticsCode listName="irregularity-type">total</efbc:StatisticsCode>
-                    <efac:FieldsPrivacy>
-                        <efbc:FieldIdentifierCode listName="non-publication-identifier">buy-rev-cou</efbc:FieldIdentifierCode>
-                    </efac:FieldsPrivacy>
-                </efac:AppealRequestsStatistics>
-            </efac:LotResult>
-        </efac:NoticeResult>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotResult>
+                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
+                                <efac:AppealRequestsStatistics>
+                                    <efbc:StatisticsCode listName="irregularity-type">total</efbc:StatisticsCode>
+                                    <efac:FieldsPrivacy>
+                                        <efbc:FieldIdentifierCode listName="non-publication-identifier">buy-rev-cou</efbc:FieldIdentifierCode>
+                                    </efac:FieldsPrivacy>
+                                </efac:AppealRequestsStatistics>
+                            </efac:LotResult>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractNotice>"""
 
     xml_file = tmp_path / "test_input_bt195_bt635.xml"
@@ -78,8 +86,8 @@ def test_bt_195_bt635_lotresult_integration(
         item["field"] == "buy-rev-cou"
     ), f"Expected field 'buy-rev-cou', got {item['field']}"
     assert (
-        item["name"] == "buyer Review Request Count"
-    ), f"Expected name 'buyer Review Request Count', got {item['name']}"
+        item["name"] == "Buyer Review Request Count"
+    ), f"Expected name 'Buyer Review Request Count', got {item['name']}"
 
 
 def test_bt_195_bt635_lotresult_missing_data(
@@ -94,15 +102,23 @@ def test_bt_195_bt635_lotresult_missing_data(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
-            <efac:LotResult>
-                <cbc:ID schemeName="result">RES-0001</cbc:ID>
-                <efac:AppealRequestsStatistics>
-                    <efbc:StatisticsCode listName="irregularity-type">total</efbc:StatisticsCode>
-                    <!-- Missing FieldsPrivacy element -->
-                </efac:AppealRequestsStatistics>
-            </efac:LotResult>
-        </efac:NoticeResult>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotResult>
+                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
+                                <efac:AppealRequestsStatistics>
+                                    <efbc:StatisticsCode listName="irregularity-type">total</efbc:StatisticsCode>
+                                    <!-- Missing FieldsPrivacy element -->
+                                </efac:AppealRequestsStatistics>
+                            </efac:LotResult>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractNotice>"""
 
     xml_file = tmp_path / "test_input_bt195_bt635_missing.xml"
@@ -114,6 +130,68 @@ def test_bt_195_bt635_lotresult_missing_data(
     assert (
         "withheldInformation" not in result or not result["withheldInformation"]
     ), "Did not expect 'withheldInformation' in result when data is missing"
+
+
+def test_bt_195_bt635_lotresult_multiple_items(
+    tmp_path, setup_logging, temp_output_dir
+) -> None:
+    logger = setup_logging
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+        xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+        xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+        xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+        xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotResult>
+                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
+                                <efac:AppealRequestsStatistics>
+                                    <efbc:StatisticsCode listName="irregularity-type">total</efbc:StatisticsCode>
+                                    <efac:FieldsPrivacy>
+                                        <efbc:FieldIdentifierCode listName="non-publication-identifier">buy-rev-cou</efbc:FieldIdentifierCode>
+                                    </efac:FieldsPrivacy>
+                                </efac:AppealRequestsStatistics>
+                            </efac:LotResult>
+                            <efac:LotResult>
+                                <cbc:ID schemeName="result">RES-0002</cbc:ID>
+                                <efac:AppealRequestsStatistics>
+                                    <efbc:StatisticsCode listName="irregularity-type">total</efbc:StatisticsCode>
+                                    <efac:FieldsPrivacy>
+                                        <efbc:FieldIdentifierCode listName="non-publication-identifier">buy-rev-cou</efbc:FieldIdentifierCode>
+                                    </efac:FieldsPrivacy>
+                                </efac:AppealRequestsStatistics>
+                            </efac:LotResult>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+    </ContractNotice>"""
+
+    xml_file = tmp_path / "test_input_bt195_bt635_multiple.xml"
+    xml_file.write_text(xml_content)
+
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    assert "withheldInformation" in result, "Expected 'withheldInformation' in result"
+    withheld_info = result["withheldInformation"]
+    assert (
+        len(withheld_info) == 2
+    ), f"Expected 2 withheld information items, got {len(withheld_info)}"
+
+    expected_ids = ["buy-rev-cou-RES-0001", "buy-rev-cou-RES-0002"]
+    actual_ids = [item["id"] for item in withheld_info]
+    assert sorted(actual_ids) == sorted(expected_ids), f"Expected IDs {expected_ids}, got {actual_ids}"
+
+    for item in withheld_info:
+        assert item["field"] == "buy-rev-cou"
+        assert item["name"] == "Buyer Review Request Count"
 
 
 if __name__ == "__main__":
