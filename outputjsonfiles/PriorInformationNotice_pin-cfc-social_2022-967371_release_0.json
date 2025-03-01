@@ -1,7 +1,7 @@
 {
   "id": "2022-967371",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-216fde04-986d-40fe-8445-8ca9a9b59169",
+  "ocid": "ocds-abcd1234-8567f233-b5e0-4055-862f-ab9e5167b17d",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -176,8 +176,8 @@
         "locality": "BERGEN"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {
