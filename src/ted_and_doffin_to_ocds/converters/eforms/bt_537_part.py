@@ -47,7 +47,7 @@ def parse_part_duration_end_date(
 
     result = {"tender": {}}
 
-    xpath_query = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:ProcurementProject/cac:PlannedPeriod/cbc:EndDate"
+    xpath_query = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:PlannedPeriod/cbc:EndDate"
     end_date_elements = root.xpath(xpath_query, namespaces=namespaces)
 
     if end_date_elements:

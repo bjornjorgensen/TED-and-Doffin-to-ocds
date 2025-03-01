@@ -34,7 +34,7 @@ def parse_main_nature_part(xml_content: str | bytes) -> dict[str, Any] | None:
     result = {"tender": {}}
 
     procurement_type = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:ProcurementProject/cbc:ProcurementTypeCode[@listName='contract-nature']/text()",
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cbc:ProcurementTypeCode[@listName='contract-nature']/text()",
         namespaces=namespaces,
     )
 

@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6cf374b2-79d8-4ff4-87bd-ae7fb77a792b",
+  "ocid": "ocds-abcd1234-9c66286c-333f-41d0-ac71-fd3b93aa3455",
   "tender": {
     "legalBasis": {
       "id": "FOA § 13-4 bokstav b annet punkt; «konkurranse er umulig av tekniske årsaker».",
@@ -232,8 +232,8 @@
       },
       "roles": [
         "leadBuyer",
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "reviewContactPoint"
       ]
     },

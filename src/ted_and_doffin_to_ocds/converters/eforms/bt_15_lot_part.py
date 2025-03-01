@@ -43,7 +43,7 @@ def parse_documents_url(xml_content: str | bytes) -> dict[str, Any] | None:
 
     # Process parts - using 'part' schemeName (lowercase p)
     parts = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']",
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
         namespaces=namespaces,
     )
     for part in parts:

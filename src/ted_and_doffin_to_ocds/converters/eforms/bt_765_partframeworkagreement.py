@@ -36,7 +36,7 @@ def parse_part_framework_agreement(xml_content: str) -> dict:
     }
 
     framework_agreement = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:TenderingProcess/cac:ContractingSystem[cbc:ContractingSystemTypeCode/@listName='framework-agreement']/cbc:ContractingSystemTypeCode/text()",
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingProcess/cac:ContractingSystem[cbc:ContractingSystemTypeCode/@listName='framework-agreement']/cbc:ContractingSystemTypeCode/text()",
         namespaces=namespaces,
     )
 

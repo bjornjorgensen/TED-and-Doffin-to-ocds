@@ -30,7 +30,7 @@ def parse_part_internal_identifier(xml_content: str | bytes) -> dict[str, Any] |
     }
 
     internal_id = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:ProcurementProject/cbc:ID[@schemeName='InternalID']/text()",
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cbc:ID[@schemeName='InternalID']/text()",
         namespaces=namespaces,
     )
 

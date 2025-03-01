@@ -34,7 +34,7 @@ def parse_place_performance_city_part(
         result = {"tender": {"deliveryAddresses": []}}
 
         parts = root.xpath(
-            "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']",
+            "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
             namespaces=NAMESPACES,
         )
 

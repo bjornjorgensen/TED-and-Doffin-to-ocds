@@ -1,7 +1,7 @@
 {
   "id": "2023-696688",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-37edf4aa-2f46-48e1-8176-889de6dabc43",
+  "ocid": "ocds-abcd1234-82dbcc77-9add-48e7-8e22-0158b05fd83b",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -190,8 +190,8 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Postboks 2300 Torgarden",

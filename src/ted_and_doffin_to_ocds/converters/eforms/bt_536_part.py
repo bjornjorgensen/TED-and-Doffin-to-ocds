@@ -45,7 +45,7 @@ def parse_part_contract_start_date(
     result = {"tender": {}}
 
     date_to_start = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:ProcurementProject/cac:PlannedPeriod/cbc:StartDate/text()",
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:PlannedPeriod/cbc:StartDate/text()",
         namespaces=namespaces,
     )
 

@@ -42,7 +42,7 @@ def parse_main_classification_type_part(xml_content: str | bytes) -> dict[str, A
     result = {"tender": {"items": []}}
 
     parts = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']",
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
         namespaces=namespaces,
     )
 

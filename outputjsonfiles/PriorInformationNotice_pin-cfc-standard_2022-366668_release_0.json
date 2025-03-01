@@ -1,7 +1,7 @@
 {
   "id": "2022-366668",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7ecfcfa2-2269-411e-bb1e-028acf936e3a",
+  "ocid": "ocds-abcd1234-affaf49b-a1d5-47d6-84a8-0d815d2698e5",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -158,8 +158,8 @@
         "locality": "TØNSBERG"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     },
     {

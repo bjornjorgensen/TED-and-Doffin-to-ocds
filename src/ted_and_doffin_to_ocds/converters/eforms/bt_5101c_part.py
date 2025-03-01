@@ -29,7 +29,7 @@ def parse_part_place_performance_streetline2(
     result = {"tender": {"deliveryAddresses": []}}
 
     parts = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']",
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
         namespaces=namespaces,
     )
 
