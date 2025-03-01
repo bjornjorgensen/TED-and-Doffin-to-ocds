@@ -37,6 +37,7 @@ def run_main_and_get_result(xml_file, output_dir):
 def test_bt_195_bt_106_procedure_integration(
     tmp_path, setup_logging, temp_output_dir
 ) -> None:
+    """Test successful parsing of unpublished procedure accelerated identifier."""
     logger = setup_logging
 
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
@@ -70,7 +71,6 @@ def test_bt_195_bt_106_procedure_integration(
     xml_file.write_text(xml_content)
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     assert "withheldInformation" in result, "Expected 'withheldInformation' in result"
     assert (
@@ -85,8 +85,34 @@ def test_bt_195_bt_106_procedure_integration(
         withheld_info["field"] == "pro-acc"
     ), f"Expected field 'pro-acc', got {withheld_info['field']}"
     assert (
-        withheld_info["name"] == "procedure Accelerated"
-    ), f"Expected name 'procedure Accelerated', got {withheld_info['name']}"
+        withheld_info["name"] == "Procedure Accelerated"
+    ), f"Expected name 'Procedure Accelerated', got {withheld_info['name']}"
+
+
+def test_bt_195_bt_106_procedure_no_unpublished(
+    tmp_path, setup_logging, temp_output_dir
+) -> None:
+    """Test handling of XML without unpublished procedure accelerated identifier."""
+    logger = setup_logging
+
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cbc:ContractFolderID>18d27a53-0109-4f93-9231-6659d931bce0</cbc:ContractFolderID>
+        <cac:TenderingProcess>
+          <cac:ProcessJustification>
+            <cbc:ProcessReasonCode listName="accelerated-procedure">some-code</cbc:ProcessReasonCode>
+          </cac:ProcessJustification>
+        </cac:TenderingProcess>
+    </ContractNotice>
+    """
+    xml_file = tmp_path / "test_input_no_unpublished.xml"
+    xml_file.write_text(xml_content)
+
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    assert "withheldInformation" not in result, "Expected no 'withheldInformation' in result"
 
 
 if __name__ == "__main__":
