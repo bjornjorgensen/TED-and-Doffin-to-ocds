@@ -39,22 +39,30 @@ def test_bt195_bt160_unpublished_identifier_integration(
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
-    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-    xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-    xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
-    xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-    xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-    <efac:NoticeResult>
-        <efac:LotTender>
-            <cbc:ID schemeName="result">TEN-0001</cbc:ID>
-            <efac:ConcessionRevenue>
-                <efac:FieldsPrivacy>
-                    <efbc:FieldIdentifierCode listName="non-publication-identifier">con-rev-buy</efbc:FieldIdentifierCode>
-                </efac:FieldsPrivacy>
-            </efac:ConcessionRevenue>
-        </efac:LotTender>
-    </efac:NoticeResult>
+        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+        xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+        xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+        xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotTender>
+                                <cbc:ID schemeName="result">TEN-0001</cbc:ID>
+                                <efac:ConcessionRevenue>
+                                    <efac:FieldsPrivacy>
+                                        <efbc:FieldIdentifierCode listName="non-publication-identifier">con-rev-buy</efbc:FieldIdentifierCode>
+                                    </efac:FieldsPrivacy>
+                                </efac:ConcessionRevenue>
+                            </efac:LotTender>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractNotice>"""
 
     xml_file = tmp_path / "test_input_bt195_bt160.xml"
@@ -77,7 +85,7 @@ def test_bt195_bt160_unpublished_identifier_integration(
         withheld_item["field"] == "con-rev-buy"
     ), "Unexpected withheld information field"
     assert (
-        withheld_item["name"] == "Concession Revenue buyer"
+        withheld_item["name"] == "Concession Revenue Buyer"
     ), "Unexpected withheld information name"
 
 
@@ -87,20 +95,27 @@ def test_bt195_bt160_unpublished_identifier_missing_data(
     logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
-    xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-    xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-    xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-    xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
-    xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-    xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-    <efac:NoticeResult>
-        <efac:LotTender>
-            <cbc:ID schemeName="result">TEN-0001</cbc:ID>
-            <efac:ConcessionRevenue>
-                <!-- Missing FieldsPrivacy element -->
-            </efac:ConcessionRevenue>
-        </efac:LotTender>
-    </efac:NoticeResult>
+        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+        xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+        xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+        xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotTender>
+                                <cbc:ID schemeName="result">TEN-0001</cbc:ID>
+                                <efac:ConcessionRevenue>
+                                </efac:ConcessionRevenue>
+                            </efac:LotTender>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractNotice>"""
 
     xml_file = tmp_path / "test_input_bt195_bt160_missing.xml"
