@@ -49,7 +49,7 @@ def test_opp_022_contract_significance_integration(
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
         <cbc:ID>notice-1</cbc:ID>
         <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:SettledContract>
                 <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                 <efac:DurationJustification>
@@ -69,7 +69,7 @@ def test_opp_022_contract_significance_integration(
                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                 </efac:TenderLot>
             </efac:LotResult>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </ContractAwardNotice>
     """
 

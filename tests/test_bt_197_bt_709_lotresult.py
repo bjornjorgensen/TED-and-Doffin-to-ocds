@@ -52,7 +52,7 @@ def test_bt_197_bt709_lotresult_integration(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                                 <efac:FrameworkAgreementValues>
@@ -62,7 +62,7 @@ def test_bt_197_bt709_lotresult_integration(
                                     </efac:FieldsPrivacy>
                                 </efac:FrameworkAgreementValues>
                             </efac:LotResult>
-                        </efac:noticeResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

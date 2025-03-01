@@ -10,6 +10,7 @@ import pytest
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
 from src.ted_and_doffin_to_ocds.main import configure_logging, main
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_137_lotsgroup import parse_lots_group_identifier, merge_lots_group_identifier
 
 
 @pytest.fixture(scope="module")
@@ -49,9 +50,6 @@ def test_bt_137_lots_group_integration(
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="LotsGroup">GLO-0002</cbc:ID>
         </cac:ProcurementProjectLot>
-        <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID>
-        </cac:ProcurementProjectLot>
     </ContractAwardNotice>
     """
 
@@ -71,6 +69,91 @@ def test_bt_137_lots_group_integration(
     assert len(lot_groups) == 2, f"Expected 2 unique lot groups, got {len(lot_groups)}"
     assert {"id": "GLO-0001"} in lot_groups, "Expected lot group with id 'GLO-0001'"
     assert {"id": "GLO-0002"} in lot_groups, "Expected lot group with id 'GLO-0002'"
+
+
+def test_parse_lots_group_identifier() -> None:
+    """Test parsing of lot group identifiers."""
+    # Valid XML with lot groups
+    valid_xml = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID>
+        </cac:ProcurementProjectLot>
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="LotsGroup">GLO-9999</cbc:ID>
+        </cac:ProcurementProjectLot>
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="LotsGroup">LOT-0001</cbc:ID>
+        </cac:ProcurementProjectLot>
+    </ContractAwardNotice>
+    """
+    result = parse_lots_group_identifier(valid_xml)
+    assert result is not None
+    assert len(result["tender"]["lotGroups"]) == 3
+    assert {"id": "GLO-0001"} in result["tender"]["lotGroups"]
+    assert {"id": "GLO-9999"} in result["tender"]["lotGroups"]
+    assert {"id": "LOT-0001"} in result["tender"]["lotGroups"]
+
+    # XML with no lot groups
+    no_lots_xml = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Lot">L1</cbc:ID>
+        </cac:ProcurementProjectLot>
+    </ContractAwardNotice>
+    """
+    result = parse_lots_group_identifier(no_lots_xml)
+    assert result is None, "Expected None when no LotsGroup identifiers are found"
+
+
+def test_merge_lots_group_identifier() -> None:
+    """Test merging lot group identifiers into existing release data."""
+    # Test merging with empty release
+    release_json = {}
+    lots_group_data = {
+        "tender": {
+            "lotGroups": [
+                {"id": "GLO-0001"},
+                {"id": "GLO-0002"}
+            ]
+        }
+    }
+    merge_lots_group_identifier(release_json, lots_group_data)
+    assert "tender" in release_json
+    assert "lotGroups" in release_json["tender"]
+    assert len(release_json["tender"]["lotGroups"]) == 2
+    
+    # Test merging with existing data (should not duplicate)
+    release_json = {
+        "tender": {
+            "lotGroups": [
+                {"id": "GLO-0001"},
+                {"id": "GLO-0003"}
+            ]
+        }
+    }
+    lots_group_data = {
+        "tender": {
+            "lotGroups": [
+                {"id": "GLO-0001"},
+                {"id": "GLO-0002"}
+            ]
+        }
+    }
+    merge_lots_group_identifier(release_json, lots_group_data)
+    assert len(release_json["tender"]["lotGroups"]) == 3
+    assert {"id": "GLO-0001"} in release_json["tender"]["lotGroups"]
+    assert {"id": "GLO-0002"} in release_json["tender"]["lotGroups"]
+    assert {"id": "GLO-0003"} in release_json["tender"]["lotGroups"]
+    
+    # Test with None lots_group_data
+    release_json = {"tender": {"lotGroups": [{"id": "GLO-0001"}]}}
+    merge_lots_group_identifier(release_json, None)
+    assert len(release_json["tender"]["lotGroups"]) == 1
 
 
 if __name__ == "__main__":

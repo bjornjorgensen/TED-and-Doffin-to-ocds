@@ -49,7 +49,7 @@ def test_bt_193_tender_integration(tmp_path, setup_logging, temp_output_dir) -> 
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:LotTender>
                                 <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
                                 <efbc:TenderVariantIndicator>true</efbc:TenderVariantIndicator>
@@ -57,7 +57,7 @@ def test_bt_193_tender_integration(tmp_path, setup_logging, temp_output_dir) -> 
                                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                                 </efac:TenderLot>
                             </efac:LotTender>
-                        </efac:noticeResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

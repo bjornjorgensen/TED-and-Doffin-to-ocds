@@ -47,7 +47,7 @@ def test_opp_020_contract_integration(tmp_path, setup_logging, temp_output_dir) 
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
         <cbc:ID>notice-1</cbc:ID>
         <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotResult>
                 <efac:TenderLot>
                     <cbc:ID schemeName="lot">LOT-0001</cbc:ID>
@@ -62,7 +62,7 @@ def test_opp_020_contract_integration(tmp_path, setup_logging, temp_output_dir) 
                     <efbc:ExtendedDurationIndicator>true</efbc:ExtendedDurationIndicator>
                 </efac:DurationJustification>
             </efac:SettledContract>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </ContractAwardNotice>
     """
 
@@ -100,7 +100,7 @@ def test_opp_020_contract_integration_false(
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
         <cbc:ID>notice-1</cbc:ID>
         <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotResult>
                 <efac:TenderLot>
                     <cbc:ID schemeName="lot">LOT-0002</cbc:ID>
@@ -115,7 +115,7 @@ def test_opp_020_contract_integration_false(
                     <efbc:ExtendedDurationIndicator>false</efbc:ExtendedDurationIndicator>
                 </efac:DurationJustification>
             </efac:SettledContract>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </ContractAwardNotice>
     """
 

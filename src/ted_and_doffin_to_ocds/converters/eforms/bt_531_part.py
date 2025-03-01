@@ -41,7 +41,7 @@ def parse_part_additional_nature(
     result = {"tender": {"additionalProcurementCategories": []}}
 
     additional_natures = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='contract-nature']/cbc:ProcurementTypeCode/text()",
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='contract-nature']/cbc:ProcurementTypeCode/text()",
         namespaces=namespaces,
     )
 

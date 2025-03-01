@@ -11,6 +11,7 @@ import pytest
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
 from src.ted_and_doffin_to_ocds.main import configure_logging, main
+from src.ted_and_doffin_to_ocds.converters.eforms.bt_13_lot import convert_to_iso_format
 
 
 @pytest.fixture(scope="module")
@@ -74,6 +75,47 @@ def test_bt_13_lot_integration(tmp_path, setup_logging, temp_output_dir) -> None
     assert "enquiryPeriod" in lot
     assert "endDate" in lot["enquiryPeriod"]
     assert lot["enquiryPeriod"]["endDate"] == "2019-11-08T18:00:00+01:00"
+
+
+def test_convert_to_iso_format_timezone_in_date():
+    """Test convert_to_iso_format with timezone information in date string."""
+    date_string = "2023-05-15+02:00"
+    time_string = "14:30:00"
+    expected = "2023-05-15T14:30:00+02:00"
+    result = convert_to_iso_format(date_string, time_string)
+    assert result == expected
+
+def test_convert_to_iso_format_timezone_in_time():
+    """Test convert_to_iso_format with timezone information in time string."""
+    date_string = "2023-05-15"
+    time_string = "14:30:00+02:00"
+    expected = "2023-05-15T14:30:00+02:00"
+    result = convert_to_iso_format(date_string, time_string)
+    assert result == expected
+
+def test_convert_to_iso_format_timezone_in_both():
+    """Test convert_to_iso_format with timezone information in both strings (date should take precedence)."""
+    date_string = "2023-05-15+02:00"
+    time_string = "14:30:00+01:00"
+    expected = "2023-05-15T14:30:00+02:00"
+    result = convert_to_iso_format(date_string, time_string)
+    assert result == expected
+
+def test_convert_to_iso_format_no_timezone():
+    """Test convert_to_iso_format with no timezone information."""
+    date_string = "2023-05-15"
+    time_string = "14:30:00"
+    expected = "2023-05-15T14:30:00"
+    result = convert_to_iso_format(date_string, time_string)
+    assert result == expected
+
+def test_convert_to_iso_format_invalid_format():
+    """Test convert_to_iso_format with invalid date/time format."""
+    date_string = "2023/05/15+02:00"  # Invalid format
+    time_string = "14:30:00"
+    expected = "2023/05/15T14:30:00+02:00"  # Should use fallback
+    result = convert_to_iso_format(date_string, time_string)
+    assert result == expected
 
 
 if __name__ == "__main__":

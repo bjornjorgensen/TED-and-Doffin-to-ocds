@@ -9,14 +9,14 @@ def test_parse_tender_value_lowest() -> None:
     <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotResult>
                 <efac:TenderLot>
                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                 </efac:TenderLot>
                 <cbc:LowerTenderAmount currencyID="EUR">10000.00</cbc:LowerTenderAmount>
             </efac:LotResult>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </root>
     """
     result = parse_tender_value_lowest(xml_content)

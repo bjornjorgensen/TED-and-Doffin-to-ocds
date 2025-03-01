@@ -33,7 +33,7 @@ def parse_documents_url(xml_content: str | bytes) -> dict[str, Any] | None:
 
     result = {"tender": {"documents": []}}
 
-    # Process Lots
+    # Process Lots - using 'Lot' schemeName (uppercase L)
     lots = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
         namespaces=namespaces,
@@ -41,12 +41,20 @@ def parse_documents_url(xml_content: str | bytes) -> dict[str, Any] | None:
     for lot in lots:
         process_document_references(lot, result, namespaces, is_lot=True)
 
-    # Process parts
+    # Process parts - using 'part' schemeName (lowercase p)
     parts = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']",
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
         namespaces=namespaces,
     )
     for part in parts:
+        process_document_references(part, result, namespaces, is_lot=False)
+
+    # Also check for 'Part' schemeName (uppercase P) for compatibility
+    parts_alt = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
+        namespaces=namespaces,
+    )
+    for part in parts_alt:
         process_document_references(part, result, namespaces, is_lot=False)
 
     return result if result["tender"]["documents"] else None

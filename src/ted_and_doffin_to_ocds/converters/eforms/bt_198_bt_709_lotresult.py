@@ -34,7 +34,7 @@ def parse_bt198_bt709_unpublished_access_date(xml_content):
 
     result = {"withheldInformation": []}
 
-    xpath_query = "//efac:noticeResult/efac:LotResult/efac:FrameworkAgreementValues/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='max-val']"
+    xpath_query = "//efac:NoticeResult/efac:LotResult/efac:FrameworkAgreementValues/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='max-val']"
     framework_agreement_values = root.xpath(xpath_query, namespaces=namespaces)
 
     for value in framework_agreement_values:

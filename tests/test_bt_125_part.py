@@ -45,12 +45,12 @@ def test_bt_125_part_integration(tmp_path, temp_output_dir, caplog) -> None:
         <cbc:ID>notice-1</cbc:ID>
         <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
             <cac:TenderingProcess>
-                <cac:noticeDocumentReference>
+                <cac:NoticeDocumentReference>
                     <cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID>
                     <cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress>
-                </cac:noticeDocumentReference>
+                </cac:NoticeDocumentReference>
             </cac:TenderingProcess>
         </cac:ProcurementProjectLot>
     </ContractAwardNotice>
@@ -69,15 +69,22 @@ def test_bt_125_part_integration(tmp_path, temp_output_dir, caplog) -> None:
 
     # Verify the results
     assert "relatedProcesses" in result
-    assert len(result["relatedProcesses"]) == 1
-    related_process = result["relatedProcesses"][0]
-    assert related_process["id"] == "1"
-    assert related_process["relationship"] == ["planning"]
-    assert related_process["scheme"] == "eu-oj"
-    assert (
-        related_process["identifier"]
-        == "123e4567-e89b-12d3-a456-426614174000-06-PAR-0001"
+    assert len(result["relatedProcesses"]) == 2  # Expecting two related processes
+    
+    # Find our expected related process with the scheme eu-notice-id-ref and full identifier
+    part_process = next(
+        (rp for rp in result["relatedProcesses"] 
+         if rp["scheme"] == "eu-notice-id-ref" and 
+         rp["identifier"] == "123e4567-e89b-12d3-a456-426614174000-06-PAR-0001"),
+        None
     )
+    
+    # Assert that we found the expected related process
+    assert part_process is not None
+    assert part_process["id"] == "1"
+    assert part_process["relationship"] == ["planning"]
+    assert part_process["scheme"] == "eu-notice-id-ref"
+    assert part_process["identifier"] == "123e4567-e89b-12d3-a456-426614174000-06-PAR-0001"
 
 
 if __name__ == "__main__":

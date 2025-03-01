@@ -44,7 +44,7 @@ def test_bt_198_bt709_lotresult_integration(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotResult>
                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                 <efac:FrameworkAgreementValues>
@@ -54,7 +54,7 @@ def test_bt_198_bt709_lotresult_integration(
                     </efac:FieldsPrivacy>
                 </efac:FrameworkAgreementValues>
             </efac:LotResult>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </ContractNotice>
     """
     xml_file = tmp_path / "test_input_bt198_bt709.xml"

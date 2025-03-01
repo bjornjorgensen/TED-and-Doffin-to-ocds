@@ -55,6 +55,7 @@ def parse_not_awarded_reason(xml_content: str | bytes) -> dict | None:
 
     result = {"awards": []}
 
+    # Using the XPath from the eForms example
     lot_results = root.xpath(
         "//efac:NoticeResult/efac:LotResult",
         namespaces=namespaces,
@@ -75,6 +76,7 @@ def parse_not_awarded_reason(xml_content: str | bytes) -> dict | None:
         )
 
         if result_id and reason_code and lot_id:
+            # Following eForms guidance: Set status to 'unsuccessful' and map the code to statusDetails
             award = {
                 "id": result_id[0],
                 "status": "unsuccessful",
@@ -82,6 +84,9 @@ def parse_not_awarded_reason(xml_content: str | bytes) -> dict | None:
                 "relatedLots": [lot_id[0]],
             }
             result["awards"].append(award)
+            logger.debug(
+                "Parsed not awarded reason for lot %s: %s", lot_id[0], reason_code[0]
+            )
 
     return result if result["awards"] else None
 

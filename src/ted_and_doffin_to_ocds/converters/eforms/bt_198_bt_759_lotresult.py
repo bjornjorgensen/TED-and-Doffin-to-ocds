@@ -36,7 +36,7 @@ def parse_bt198_bt759_lotresult_unpublished_access_date(xml_content):
 
     xpath_query = (
         "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension"
-        "/efac:noticeResult/efac:LotResult/efac:ReceivedSubmissionsStatistics"
+        "/efac:NoticeResult/efac:LotResult/efac:ReceivedSubmissionsStatistics"
         "/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='rec-sub-cou']"
     )
 

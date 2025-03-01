@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-17410604-c084-47b1-bebc-5207b503f160",
+  "ocid": "ocds-abcd1234-55d104b0-1e40-43e3-8945-e47ac105c18f",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -713,9 +713,9 @@
         "listedOnRegulatedMarket": false
       },
       "roles": [
-        "supplier",
         "leadTenderer",
-        "tenderer"
+        "tenderer",
+        "supplier"
       ],
       "beneficialOwners": [
         {
@@ -763,8 +763,8 @@
         "listedOnRegulatedMarket": false
       },
       "roles": [
-        "supplier",
-        "tenderer"
+        "tenderer",
+        "supplier"
       ],
       "beneficialOwners": [
         {
@@ -953,10 +953,11 @@
       "relationship": [
         "planning"
       ],
-      "scheme": "eu-oj",
+      "scheme": "eu-notice-id-ref",
       "identifier": "9c0fd704-64d3-4294-a3b6-6df45911ab9f-01",
       "relatedLots": [
-        "123"
+        "LOT-0001",
+        "LOT-0002"
       ]
     }
   ],
@@ -968,6 +969,7 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "date": "2023-03-23T23:59:59+02:00",
       "suppliers": [
         {
           "id": "ORG-0008"
@@ -996,9 +998,39 @@
           "id": "1",
           "additionalClassifications": [
             {
+              "scheme": "eu-vehicle-category",
+              "id": "n2-n3",
+              "description": "Truck (N2-N3)"
+            },
+            {
               "id": "oth-serv-contr",
               "scheme": "eu-cvd-contract-type",
               "description": "Other service contract"
+            },
+            {
+              "scheme": "vehicles",
+              "id": "vehicles",
+              "description": "Vehicles"
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "additionalClassifications": [
+            {
+              "scheme": "vehicles",
+              "id": "vehicles-zero-emission",
+              "description": "Vehicles zero emission"
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "additionalClassifications": [
+            {
+              "scheme": "vehicles",
+              "id": "vehicles-clean",
+              "description": "Vehicles clean"
             }
           ]
         }
@@ -1036,6 +1068,40 @@
   ],
   "bids": {
     "details": [
+      {
+        "id": "TEN-0001",
+        "subcontracting": {
+          "value": {
+            "amount": 9999999.99,
+            "currency": "EUR"
+          },
+          "description": "Subcontracting Description ---",
+          "minimumPercentage": 0.3,
+          "maximumPercentage": 0.3,
+          "subcontracts": [
+            {
+              "id": "1",
+              "subcontractor": {
+                "id": "ORG-0010"
+              },
+              "mainContractors": [
+                {
+                  "id": "ORG-0008"
+                }
+              ]
+            }
+          ]
+        },
+        "hasSubcontracting": true,
+        "tenderers": [
+          {
+            "id": "ORG-0008"
+          },
+          {
+            "id": "ORG-0009"
+          }
+        ]
+      },
       {
         "id": "TEN-0002",
         "relatedLots": [
@@ -1084,40 +1150,6 @@
         "tenderers": [
           {
             "id": "ORG-0011"
-          }
-        ]
-      },
-      {
-        "id": "TEN-0001",
-        "subcontracting": {
-          "value": {
-            "amount": 9999999.99,
-            "currency": "EUR"
-          },
-          "description": "Subcontracting Description ---",
-          "minimumPercentage": 0.3,
-          "maximumPercentage": 0.3,
-          "subcontracts": [
-            {
-              "id": "1",
-              "subcontractor": {
-                "id": "ORG-0010"
-              },
-              "mainContractors": [
-                {
-                  "id": "ORG-0008"
-                }
-              ]
-            }
-          ]
-        },
-        "hasSubcontracting": true,
-        "tenderers": [
-          {
-            "id": "ORG-0008"
-          },
-          {
-            "id": "ORG-0009"
           }
         ]
       }

@@ -56,7 +56,7 @@ def parse_bt197_bt554_unpublished_justification_code(xml_content):
 
     result = {"withheldInformation": []}
 
-    xpath_query = "//efac:noticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-des']"
+    xpath_query = "//efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-des']"
     subcontracting_terms = root.xpath(xpath_query, namespaces=namespaces)
 
     for term in subcontracting_terms:

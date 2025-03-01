@@ -41,7 +41,7 @@ def parse_lot_documents_restricted(xml_content: str | bytes) -> dict[str, Any] |
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         document_references = lot.xpath(
-            ".//cac:CallForTendersDocumentReference",
+            "./cac:TenderingTerms/cac:CallForTendersDocumentReference",
             namespaces=namespaces,
         )
 

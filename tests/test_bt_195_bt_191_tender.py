@@ -45,7 +45,7 @@ def test_bt195_bt191_unpublished_identifier_integration(
     xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
     xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
     xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-    <efac:noticeResult>
+    <efac:NoticeResult>
         <efac:LotTender>
             <cbc:ID schemeName="result">TEN-0001</cbc:ID>
             <efac:Origin>
@@ -54,7 +54,7 @@ def test_bt195_bt191_unpublished_identifier_integration(
                 </efac:FieldsPrivacy>
             </efac:Origin>
         </efac:LotTender>
-    </efac:noticeResult>
+    </efac:NoticeResult>
     </ContractNotice>"""
 
     xml_file = tmp_path / "test_input_bt195_bt191.xml"
@@ -91,12 +91,12 @@ def test_bt195_bt191_unpublished_identifier_missing_data(
     xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
     xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
     xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-    <efac:noticeResult>
+    <efac:NoticeResult>
         <efac:LotTender>
             <cbc:ID schemeName="result">TEN-0001</cbc:ID>
             <!-- Missing Origin element -->
         </efac:LotTender>
-    </efac:noticeResult>
+    </efac:NoticeResult>
     </ContractNotice>"""
 
     xml_file = tmp_path / "test_input_bt195_bt191_missing.xml"

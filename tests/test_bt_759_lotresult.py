@@ -10,7 +10,7 @@ def test_parse_received_submissions_count() -> None:
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotResult>
                 <efac:TenderLot>
                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
@@ -19,7 +19,7 @@ def test_parse_received_submissions_count() -> None:
                     <efbc:StatisticsNumeric>5</efbc:StatisticsNumeric>
                 </efac:ReceivedSubmissionsStatistics>
             </efac:LotResult>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </root>
     """
     result = parse_received_submissions_count(xml_content)

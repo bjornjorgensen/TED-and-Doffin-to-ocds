@@ -42,7 +42,7 @@ def test_bt_137_part_integration(tmp_path, setup_logging, temp_output_dir) -> No
         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PAR-0000</cbc:ID>
+            <cbc:ID schemeName="Part">PAR-0000</cbc:ID>
         </cac:ProcurementProjectLot>
     </ContractAwardNotice>
     """

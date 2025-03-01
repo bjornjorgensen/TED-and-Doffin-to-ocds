@@ -62,7 +62,7 @@ def parse_vehicle_numeric(xml_content: str | bytes) -> dict[str, Any] | None:
     result = {"awards": []}
 
     lot_results = root.xpath(
-        "//efac:noticeResult/efac:LotResult",
+        "//efac:NoticeResult/efac:LotResult",
         namespaces=namespaces,
     )
     for lot_result in lot_results:

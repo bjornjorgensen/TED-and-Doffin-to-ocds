@@ -51,7 +51,7 @@ def test_bt_14_part_integration(tmp_path, setup_logging, temp_output_dir) -> Non
         <cbc:ID>notice-1</cbc:ID>
         <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:CallForTendersDocumentReference>
                     <cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID>

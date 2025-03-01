@@ -1,7 +1,7 @@
 {
   "id": "65ffd92d-8eee-4787-a7fe-925106611edc",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8e9dc079-046a-4fa6-bf00-cdb95f99310d",
+  "ocid": "ocds-abcd1234-0b7cb013-e036-4576-b0c3-b9b6553584b6",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -213,6 +213,7 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "date": "2024-06-20T23:59:59Z",
       "suppliers": [
         {
           "id": "ORG-0003"

@@ -56,7 +56,7 @@ def parse_bt197_bt660_unpublished_justification_code(xml_content):
 
     result = {"withheldInformation": []}
 
-    xpath_query = "//efac:noticeResult/efac:LotResult/efac:FrameworkAgreementValues/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ree-val']"
+    xpath_query = "//efac:NoticeResult/efac:LotResult/efac:FrameworkAgreementValues/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ree-val']"
     framework_agreement_values = root.xpath(xpath_query, namespaces=namespaces)
 
     for value in framework_agreement_values:

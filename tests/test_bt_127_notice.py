@@ -58,9 +58,9 @@ def test_bt_127_notice_integration(tmp_path, setup_logging, temp_output_dir) -> 
     # Verify the results
     assert "tender" in result
     assert "communication" in result["tender"]
-    assert "futurenoticeDate" in result["tender"]["communication"]
+    assert "futureNoticeDate" in result["tender"]["communication"]
     assert (
-        result["tender"]["communication"]["futurenoticeDate"]
+        result["tender"]["communication"]["futureNoticeDate"]
         == "2020-03-15T00:00:00+01:00"
     )
 

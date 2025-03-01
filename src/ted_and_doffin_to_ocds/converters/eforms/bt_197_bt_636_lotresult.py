@@ -56,7 +56,7 @@ def parse_bt197_bt636_unpublished_justification_code(xml_content):
 
     result = {"withheldInformation": []}
 
-    xpath_query = "//efac:noticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-typ']"
+    xpath_query = "//efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-typ']"
     appeal_requests_statistics = root.xpath(xpath_query, namespaces=namespaces)
 
     for statistic in appeal_requests_statistics:

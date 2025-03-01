@@ -34,9 +34,9 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_15_lot_part_integration(tmp_path, setup_logging, temp_output_dir) -> None:
+def test_bt_15_lot_part_integration_lowercase(tmp_path, setup_logging, temp_output_dir) -> None:
+    """Test lowercase 'part' schemeName"""
     logger = setup_logging
-
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -73,17 +73,11 @@ def test_bt_15_lot_part_integration(tmp_path, setup_logging, temp_output_dir) ->
         </cac:ProcurementProjectLot>
     </ContractAwardNotice>
     """
-
-    # Create input XML file
-    xml_file = tmp_path / "test_input_documents_url.xml"
+    xml_file = tmp_path / "test_input_documents_url_lowercase.xml"
     xml_file.write_text(xml_content)
-
-    # Run main and get result
+    
     result = run_main_and_get_result(xml_file, temp_output_dir)
-
-    # logger.info("Test result: %s", json.dumps(result, indent=2) # Logging disabled)
-
-    # Verify the results
+    
     assert "tender" in result, "Expected 'tender' in result"
     assert "documents" in result["tender"], "Expected 'documents' in tender"
     assert (
@@ -117,6 +111,88 @@ def test_bt_15_lot_part_integration(tmp_path, setup_logging, temp_output_dir) ->
     assert (
         part_document["url"] == "https://mywebsite.com/proc/2019024/accessinfo-part"
     ), "Unexpected URL for part document"
+    assert (
+        "relatedLots" not in part_document
+    ), "Unexpected 'relatedLots' in part document"
+
+
+def test_bt_15_lot_part_integration_uppercase(tmp_path, setup_logging, temp_output_dir) -> None:
+    """Test uppercase 'Part' schemeName"""
+    logger = setup_logging
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cbc:ID>notice-2</cbc:ID>
+        <cbc:ContractFolderID>cf-2</cbc:ContractFolderID>
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+            <cac:TenderingTerms>
+                <cac:CallForTendersDocumentReference>
+                    <cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID>
+                    <cbc:DocumentType>non-restricted-document</cbc:DocumentType>
+                    <cac:Attachment>
+                        <cac:ExternalReference>
+                            <cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI>
+                        </cac:ExternalReference>
+                    </cac:Attachment>
+                </cac:CallForTendersDocumentReference>
+            </cac:TenderingTerms>
+        </cac:ProcurementProjectLot>
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
+            <cac:TenderingTerms>
+                <cac:CallForTendersDocumentReference>
+                    <cbc:ID>20210521/CTFD/ENG/7654-04</cbc:ID>
+                    <cbc:DocumentType>non-restricted-document</cbc:DocumentType>
+                    <cac:Attachment>
+                        <cac:ExternalReference>
+                            <cbc:URI>https://mywebsite.com/proc/2019024/accessinfo-uppercase-part</cbc:URI>
+                        </cac:ExternalReference>
+                    </cac:Attachment>
+                </cac:CallForTendersDocumentReference>
+            </cac:TenderingTerms>
+        </cac:ProcurementProjectLot>
+    </ContractAwardNotice>
+    """
+    xml_file = tmp_path / "test_input_documents_url_uppercase.xml"
+    xml_file.write_text(xml_content)
+    
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+    
+    assert "tender" in result, "Expected 'tender' in result"
+    assert "documents" in result["tender"], "Expected 'documents' in tender"
+    assert (
+        len(result["tender"]["documents"]) == 2
+    ), f"Expected 2 documents, got {len(result['tender']['documents'])}"
+
+    lot_document = next(
+        doc
+        for doc in result["tender"]["documents"]
+        if doc["id"] == "20210521/CTFD/ENG/7654-02"
+    )
+    assert (
+        lot_document["documentType"] == "biddingDocuments"
+    ), f"Expected documentType 'biddingDocuments', got {lot_document['documentType']}"
+    assert (
+        lot_document["url"] == "https://mywebsite.com/proc/2019024/accessinfo"
+    ), "Unexpected URL for lot document"
+    assert "relatedLots" in lot_document, "Expected 'relatedLots' in lot document"
+    assert lot_document["relatedLots"] == [
+        "LOT-0001"
+    ], f"Expected relatedLots ['LOT-0001'], got {lot_document['relatedLots']}"
+
+    part_document = next(
+        doc
+        for doc in result["tender"]["documents"]
+        if doc["id"] == "20210521/CTFD/ENG/7654-04"
+    )
+    assert (
+        part_document["documentType"] == "biddingDocuments"
+    ), f"Expected documentType 'biddingDocuments', got {part_document['documentType']}"
+    assert (
+        part_document["url"] == "https://mywebsite.com/proc/2019024/accessinfo-uppercase-part"
+    ), "Unexpected URL for uppercase part document"
     assert (
         "relatedLots" not in part_document
     ), "Unexpected 'relatedLots' in part document"

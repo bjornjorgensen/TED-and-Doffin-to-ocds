@@ -58,7 +58,7 @@ def parse_bt197_bt773_tender_unpublished_justification_code(xml_content):
 
     xpath_query = (
         "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension"
-        "/efac:noticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']"
+        "/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']"
         "/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-con']"
     )
 

@@ -44,7 +44,7 @@ def test_bt198_bt160_unpublished_access_date_integration(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotTender>
                 <cbc:ID schemeName="result">TEN-0001</cbc:ID>
                 <efac:ConcessionRevenue>
@@ -54,7 +54,7 @@ def test_bt198_bt160_unpublished_access_date_integration(
                     </efac:FieldsPrivacy>
                 </efac:ConcessionRevenue>
             </efac:LotTender>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </ContractNotice>
     """
 
@@ -92,14 +92,14 @@ def test_bt198_bt160_unpublished_access_date_missing_data(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotTender>
                 <cbc:ID schemeName="result">TEN-0001</cbc:ID>
                 <efac:ConcessionRevenue>
                     <!-- Missing FieldsPrivacy element -->
                 </efac:ConcessionRevenue>
             </efac:LotTender>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </ContractNotice>
     """
 

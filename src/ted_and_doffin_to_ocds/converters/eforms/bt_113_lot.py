@@ -46,39 +46,69 @@ def parse_framework_max_participants(xml_content: str | bytes) -> dict | None:
         "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
         "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+        "ted": "http://publications.europa.eu/resource/schema/ted/R2.0.9/publication",
     }
 
     result = {"tender": {"lots": []}}
 
+    # Try eForms format first
     lots = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
         namespaces=namespaces,
     )
 
-    for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        max_participants = lot.xpath(
-            "cac:TenderingProcess/cac:FrameworkAgreement/cbc:MaximumOperatorQuantity/text()",
-            namespaces=namespaces,
-        )
+    if lots:
+        for lot in lots:
+            lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+            max_participants = lot.xpath(
+                "cac:TenderingProcess/cac:FrameworkAgreement/cbc:MaximumOperatorQuantity/text()",
+                namespaces=namespaces,
+            )
 
-        if max_participants:
-            try:
-                lot_data = {
-                    "id": lot_id,
-                    "techniques": {
-                        "frameworkAgreement": {
-                            "maximumParticipants": int(max_participants[0])
-                        }
-                    },
-                }
-                result["tender"]["lots"].append(lot_data)
-            except ValueError:
-                logger.warning(
-                    "Invalid maximum participants value for lot %s: %s",
-                    lot_id,
-                    max_participants[0],
-                )
+            if max_participants:
+                try:
+                    lot_data = {
+                        "id": lot_id,
+                        "techniques": {
+                            "frameworkAgreement": {
+                                "maximumParticipants": int(max_participants[0])
+                            }
+                        },
+                    }
+                    result["tender"]["lots"].append(lot_data)
+                except ValueError:
+                    logger.warning(
+                        "Invalid maximum participants value for lot %s: %s",
+                        lot_id,
+                        max_participants[0],
+                    )
+    else:
+        # Try legacy TED format
+        ted_xpaths = [
+            "//ted:FORM_SECTION/*/ted:PROCEDURE/ted:FRAMEWORK/ted:NB_PARTICIPANTS/text()",
+            "//ted:FORM_SECTION/ted:CONTRACT_DEFENCE/ted:FD_CONTRACT_DEFENCE/ted:OBJECT_CONTRACT_INFORMATION_DEFENCE/ted:DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/ted:F17_FRAMEWORK/ted:SEVERAL_OPERATORS/ted:MAX_NUMBER_PARTICIPANTS/text()",
+            "//ted:FORM_SECTION/ted:CONTRACT_CONCESSIONAIRE_DEFENCE/ted:FD_CONTRACT_CONCESSIONAIRE_DEFENCE/ted:OBJECT_CONTRACT_SUB_DEFENCE/ted:DESCRIPTION_CONTRACT_SUB_DEFENCE/ted:F19_FRAMEWORK/ted:SEVERAL_OPERATORS/ted:MAX_NUMBER_PARTICIPANTS/text()",
+        ]
+
+        for xpath in ted_xpaths:
+            max_participants = root.xpath(xpath, namespaces=namespaces)
+            if max_participants:
+                try:
+                    lot_data = {
+                        "id": "1",  # Legacy TED format typically doesn't have lot IDs
+                        "techniques": {
+                            "frameworkAgreement": {
+                                "maximumParticipants": int(max_participants[0])
+                            }
+                        },
+                    }
+                    result["tender"]["lots"].append(lot_data)
+                    break  # Use the first found value
+                except ValueError:
+                    logger.warning(
+                        "Invalid maximum participants value in TED format: %s",
+                        max_participants[0],
+                    )
 
     return result if result["tender"]["lots"] else None
 

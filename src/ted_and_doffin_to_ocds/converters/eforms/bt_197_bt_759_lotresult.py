@@ -58,7 +58,7 @@ def parse_bt197_bt759_lotresult_unpublished_justification_code(xml_content):
 
     xpath_query = (
         "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension"
-        "/efac:noticeResult/efac:LotResult/efac:ReceivedSubmissionsStatistics"
+        "/efac:NoticeResult/efac:LotResult/efac:ReceivedSubmissionsStatistics"
         "/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='rec-sub-cou']"
     )
 

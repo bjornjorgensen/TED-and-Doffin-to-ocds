@@ -34,7 +34,7 @@ def parse_part_description(xml_content: str | bytes) -> dict[str, Any] | None:
     result = {"tender": {}}
 
     description = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:ProcurementProject/cbc:Description/text()",
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cbc:Description/text()",
         namespaces=namespaces,
     )
 

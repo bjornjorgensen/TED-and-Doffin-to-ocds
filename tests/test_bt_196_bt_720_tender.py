@@ -44,7 +44,7 @@ def test_bt_196_bt720_tender_integration(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotTender>
                 <cbc:ID schemeName="result">TEN-0001</cbc:ID>
                 <efac:FieldsPrivacy>
@@ -52,7 +52,7 @@ def test_bt_196_bt720_tender_integration(
                     <efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription>
                 </efac:FieldsPrivacy>
             </efac:LotTender>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </ContractNotice>
     """
     xml_file = tmp_path / "test_input_bt196_bt720.xml"
@@ -90,11 +90,11 @@ def test_bt_196_bt720_tender_missing_field(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotTender>
                 <cbc:ID schemeName="result">TEN-0001</cbc:ID>
             </efac:LotTender>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </ContractNotice>
     """
     xml_file = tmp_path / "test_input_bt196_bt720_missing.xml"

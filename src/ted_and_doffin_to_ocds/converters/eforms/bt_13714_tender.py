@@ -1,6 +1,7 @@
 # converters/bt_13714_Tender.py
 
 import logging
+import re
 from typing import Any
 
 from lxml import etree
@@ -13,6 +14,9 @@ NAMESPACES = {
     "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
     "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
 }
+
+# Pattern for validating lot identifiers according to the spec
+LOT_ID_PATTERN = re.compile(r"^(LOT|GLO)-\d{4}$")
 
 
 def parse_tender_lot_identifier(xml_content: str | bytes) -> dict[str, Any] | None:
@@ -43,20 +47,44 @@ def parse_tender_lot_identifier(xml_content: str | bytes) -> dict[str, Any] | No
 
         for lot_tender in lot_tenders:
             try:
-                tender_id = lot_tender.xpath(
+                # Get tender ID
+                tender_id_nodes = lot_tender.xpath(
                     "cbc:ID[@schemeName='tender']/text()",
                     namespaces=NAMESPACES,
-                )[0]
+                )
 
-                lot_id = lot_tender.xpath(
-                    "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+                if not tender_id_nodes:
+                    logger.warning("No tender ID found for lot tender")
+                    continue
+
+                tender_id = tender_id_nodes[0]
+
+                # Get lot ID according to the absolute XPath specified in BT-13714
+                lot_id_nodes = lot_tender.xpath(
+                    "efac:TenderLot/cbc:ID/text()",
                     namespaces=NAMESPACES,
-                )[0]
+                )
 
-                if tender_id and lot_id:
-                    result["bids"]["details"].append(
-                        {"id": tender_id, "relatedLots": [lot_id]}
+                if not lot_id_nodes:
+                    logger.warning("No lot ID found for tender %s", tender_id)
+                    continue
+
+                lot_id = lot_id_nodes[0]
+
+                # Validate lot ID against the pattern
+                if not LOT_ID_PATTERN.match(lot_id):
+                    logger.warning(
+                        "Lot ID %s for tender %s does not match pattern %s",
+                        lot_id,
+                        tender_id,
+                        LOT_ID_PATTERN.pattern,
                     )
+                    continue
+
+                # Create/update bid with lot reference
+                result["bids"]["details"].append(
+                    {"id": tender_id, "relatedLots": [lot_id]}
+                )
 
             except (IndexError, AttributeError) as e:
                 logger.warning("Skipping incomplete lot tender data: %s", e)

@@ -36,7 +36,7 @@ def test_bt_196_bt_144_lotresult_integration(tmp_path, temp_output_dir) -> None:
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                                 <efac:DecisionReason>
@@ -46,7 +46,7 @@ def test_bt_196_bt_144_lotresult_integration(tmp_path, temp_output_dir) -> None:
                                     </efac:FieldsPrivacy>
                                 </efac:DecisionReason>
                             </efac:LotResult>
-                        </efac:noticeResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -85,7 +85,7 @@ def test_bt_196_bt_144_lotresult_multiple_lots(tmp_path, temp_output_dir) -> Non
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                                 <efac:DecisionReason>
@@ -104,7 +104,7 @@ def test_bt_196_bt_144_lotresult_multiple_lots(tmp_path, temp_output_dir) -> Non
                                     </efac:FieldsPrivacy>
                                 </efac:DecisionReason>
                             </efac:LotResult>
-                        </efac:noticeResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

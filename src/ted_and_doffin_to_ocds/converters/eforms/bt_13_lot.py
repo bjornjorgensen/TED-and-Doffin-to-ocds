@@ -1,6 +1,7 @@
 # converters/bt_13_Lot.py
 
 import logging
+import re
 from datetime import datetime
 from typing import Any
 
@@ -68,16 +69,46 @@ def convert_to_iso_format(date_string: str, time_string: str) -> str:
 
     Returns:
         str: Combined date and time in ISO format
-
     """
-    # Combine date and time
-    datetime_string = f"{date_string.split('+')[0]}T{time_string}"
+    # Extract timezone info from date or time
+    timezone_pattern = r"([+-][0-9]{2}:[0-9]{2})$"
+    date_tz_match = re.search(timezone_pattern, date_string)
+    time_tz_match = re.search(timezone_pattern, time_string)
+
+    # Use timezone from either date or time, prioritizing date's timezone
+    timezone = None
+    clean_date = date_string
+    clean_time = time_string
+
+    if date_tz_match:
+        timezone = date_tz_match.group(1)
+        clean_date = date_string.replace(date_tz_match.group(0), "")
+
+    if time_tz_match:
+        if not timezone:  # Only use time's timezone if date doesn't have one
+            timezone = time_tz_match.group(1)
+        clean_time = time_string.replace(time_tz_match.group(0), "")
+
+    # Combine date and time (without timezone)
+    datetime_string = f"{clean_date}T{clean_time}"
 
     # Parse the datetime
-    date_time = datetime.fromisoformat(datetime_string)
+    try:
+        date_time = datetime.fromisoformat(datetime_string)
 
-    # Format the datetime with the original timezone
-    return date_time.isoformat()
+        # Format the datetime with the timezone if available
+        if timezone:
+            return f"{date_time.isoformat()}{timezone}"
+        return date_time.isoformat()
+    except ValueError as e:
+        logger.warning(
+            "Error parsing datetime: %s. Using original strings to create ISO format.",
+            e,
+        )
+        # Fallback: just combine the strings with the timezone
+        if timezone:
+            return f"{clean_date}T{clean_time}{timezone}"
+        return f"{clean_date}T{clean_time}"
 
 
 def merge_additional_info_deadline(

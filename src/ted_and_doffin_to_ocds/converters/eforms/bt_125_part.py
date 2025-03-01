@@ -23,7 +23,7 @@ def parse_previous_planning_identifier_part(
                 {
                     "id": str,
                     "relationship": ["planning"],
-                    "scheme": "eu-oj",
+                    "scheme": "eu-notice-id-ref",
                     "identifier": str  # Concatenated identifier with part ID
                 }
             ]
@@ -71,7 +71,7 @@ def parse_previous_planning_identifier_part(
                 related_process = {
                     "id": str(related_process_id),
                     "relationship": ["planning"],
-                    "scheme": "eu-oj",
+                    "scheme": "eu-notice-id-ref",
                     "identifier": full_identifier,
                 }
                 result["relatedProcesses"].append(related_process)

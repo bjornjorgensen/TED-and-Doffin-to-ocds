@@ -52,7 +52,7 @@ def test_bt_124_tool_atypical_url_integration(
             </cac:TenderingProcess>
         </cac:ProcurementProjectLot>
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
             <cac:TenderingProcess>
                 <cbc:AccessToolsURI>https://my-atypical-tool-part.com/</cbc:AccessToolsURI>
             </cac:TenderingProcess>

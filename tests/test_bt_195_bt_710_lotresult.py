@@ -45,7 +45,7 @@ def test_bt_195_bt710_lot_result_integration(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotResult>
                 <efac:FieldsPrivacy>
                     <efbc:FieldIdentifierCode listName="non-publication-identifier">ten-val-low</efbc:FieldIdentifierCode>
@@ -58,7 +58,7 @@ def test_bt_195_bt710_lot_result_integration(
                 </efac:FieldsPrivacy>
                 <cbc:ID schemeName="result">RES-0002</cbc:ID>
             </efac:LotResult>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </ContractNotice>"""
 
     xml_file = tmp_path / "test_input_bt195_bt710.xml"
@@ -102,11 +102,11 @@ def test_bt_195_bt710_lot_result_missing_field(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotResult>
                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
             </efac:LotResult>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </ContractNotice>"""
 
     xml_file = tmp_path / "test_input_bt195_bt710_missing.xml"

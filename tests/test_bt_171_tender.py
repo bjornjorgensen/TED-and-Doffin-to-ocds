@@ -34,7 +34,7 @@ def test_parse_tender_rank() -> None:
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotTender>
                 <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
                 <cbc:RankCode>1</cbc:RankCode>
@@ -42,7 +42,7 @@ def test_parse_tender_rank() -> None:
                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                 </efac:TenderLot>
             </efac:LotTender>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </ContractAwardNotice>
     """
 

@@ -37,7 +37,7 @@ def test_bt_5011_contract_integration(tmp_path, temp_output_dir) -> None:
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:SettledContract>
                                 <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                                 <efac:Funding>
@@ -50,7 +50,7 @@ def test_bt_5011_contract_integration(tmp_path, temp_output_dir) -> None:
                                     <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                                 </efac:SettledContract>
                             </efac:LotResult>
-                        </efac:noticeResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

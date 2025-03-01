@@ -51,7 +51,7 @@ def test_bt_191_country_origin_integration(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:LotTender>
                                 <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
                                 <efac:Origin>
@@ -61,7 +61,7 @@ def test_bt_191_country_origin_integration(
                                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                                 </efac:TenderLot>
                             </efac:LotTender>
-                        </efac:noticeResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

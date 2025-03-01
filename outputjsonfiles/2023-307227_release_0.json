@@ -1,7 +1,7 @@
 {
   "id": "2023-307227",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f2626191-6772-4973-9351-2b9244f83267",
+  "ocid": "ocds-abcd1234-96a4613a-7df7-4be5-9665-fa4facc3fcc9",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -14,6 +14,13 @@
       "GPA"
     ],
     "id": "PAR-0001",
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "url": "https://tendsign.no/doc.aspx?UniqueId=aflonwvqnm&GoTo=Docs"
+      }
+    ],
     "title": "Bærekraftig møtemat til OsloMet",
     "identifiers": [
       {
@@ -40,54 +47,63 @@
       {
         "id": "2",
         "classification": {
+          "scheme": "CPV",
           "id": "55520000"
         }
       },
       {
         "id": "3",
         "classification": {
+          "scheme": "CPV",
           "id": "55520000"
         }
       },
       {
         "id": "4",
         "classification": {
+          "scheme": "CPV",
           "id": "55520000"
         }
       },
       {
         "id": "5",
         "classification": {
+          "scheme": "CPV",
           "id": "55520000"
         }
       },
       {
         "id": "6",
         "classification": {
+          "scheme": "CPV",
           "id": "55520000"
         }
       },
       {
         "id": "7",
         "classification": {
+          "scheme": "CPV",
           "id": "55520000"
         }
       },
       {
         "id": "8",
         "classification": {
+          "scheme": "CPV",
           "id": "55520000"
         }
       },
       {
         "id": "9",
         "classification": {
+          "scheme": "CPV",
           "id": "55520000"
         }
       },
       {
         "id": "10",
         "classification": {
+          "scheme": "CPV",
           "id": "55520000"
         }
       }
@@ -122,11 +138,6 @@
       },
       {
         "region": "NO08"
-      }
-    ],
-    "documents": [
-      {
-        "id": "DOCUMENT_ID_REQUIRED_HERE"
       }
     ]
   },

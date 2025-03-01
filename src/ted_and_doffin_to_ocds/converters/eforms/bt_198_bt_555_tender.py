@@ -34,7 +34,7 @@ def parse_bt198_bt555_unpublished_access_date(xml_content):
 
     result = {"withheldInformation": []}
 
-    xpath_query = "//efac:noticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per']"
+    xpath_query = "//efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per']"
     subcontracting_terms = root.xpath(xpath_query, namespaces=namespaces)
 
     for term in subcontracting_terms:

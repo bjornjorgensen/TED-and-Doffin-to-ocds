@@ -32,7 +32,7 @@ def parse_part_dynamic_purchasing_system(xml_content: str) -> dict | None:
     type_mapping = {"dps-list": "closed", "dps-nlist": "open"}
 
     dps_usage = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='part']/cac:TenderingProcess/cac:ContractingSystem[cbc:ContractingSystemTypeCode/@listName='dps-usage']/cbc:ContractingSystemTypeCode/text()",
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingProcess/cac:ContractingSystem[cbc:ContractingSystemTypeCode/@listName='dps-usage']/cbc:ContractingSystemTypeCode/text()",
         namespaces=namespaces,
     )
 

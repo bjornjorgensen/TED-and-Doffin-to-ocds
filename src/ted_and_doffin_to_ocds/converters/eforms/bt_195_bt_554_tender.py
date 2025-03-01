@@ -48,7 +48,7 @@ def parse_bt195_bt554_unpublished_identifier(
 
     xpath_query = (
         "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
-        "/efext:EformsExtension/efac:noticeResult/efac:LotTender"
+        "/efext:EformsExtension/efac:NoticeResult/efac:LotTender"
         "/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']"
         "/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-des']"
         "/efbc:FieldIdentifierCode"

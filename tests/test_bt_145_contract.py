@@ -47,7 +47,7 @@ def test_bt_145_contract_integration(tmp_path, setup_logging, temp_output_dir) -
         <ext:UBLExtension>
             <ext:ExtensionContent>
                 <efext:EformsExtension>
-                    <efac:noticeResult>
+                    <efac:NoticeResult>
                         <efac:SettledContract>
                             <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                             <cbc:IssueDate>2021-02-21+01:00</cbc:IssueDate>
@@ -58,7 +58,7 @@ def test_bt_145_contract_integration(tmp_path, setup_logging, temp_output_dir) -
                                 <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                             </efac:SettledContract>
                         </efac:LotResult>
-                    </efac:noticeResult>
+                    </efac:NoticeResult>
                 </efext:EformsExtension>
             </ext:ExtensionContent>
         </ext:UBLExtension>
