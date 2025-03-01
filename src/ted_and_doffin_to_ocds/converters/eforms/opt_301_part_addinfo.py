@@ -1,6 +1,7 @@
 # converters/opt_301_part_addinfo.py
 
 import logging
+import re
 from typing import Any
 
 from lxml import etree
@@ -40,7 +41,8 @@ def parse_additional_info_provider_part(
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
     }
 
-    xpath = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:AdditionalInformationParty/cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']"
+    # Updated XPath to handle ID nodes with schemeName="touchpoint"
+    xpath = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:AdditionalInformationParty/cac:PartyIdentification/cbc:ID"
     additional_info_providers = root.xpath(xpath, namespaces=namespaces)
 
     if not additional_info_providers:
@@ -48,10 +50,22 @@ def parse_additional_info_provider_part(
         return None
 
     result = {"parties": []}
+    id_pattern = re.compile(r"^(ORG|TPO)-\d{4}$")
+
     for provider in additional_info_providers:
-        result["parties"].append(
-            {"id": provider.text, "roles": ["processContactPoint"]}
-        )
+        provider_id = provider.text
+        if not id_pattern.match(provider_id):
+            logger.warning(
+                "Additional Info Provider ID '%s' does not match the required pattern '^(ORG|TPO)-\\d{4}$'",
+                provider_id,
+            )
+            continue
+
+        result["parties"].append({"id": provider_id, "roles": ["processContactPoint"]})
+
+    if not result["parties"]:
+        logger.info("No valid Additional Info Provider Technical Identifiers found.")
+        return None
 
     return result
 
