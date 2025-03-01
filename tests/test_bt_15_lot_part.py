@@ -58,7 +58,7 @@ def test_bt_15_lot_part_integration_lowercase(tmp_path, setup_logging, temp_outp
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:CallForTendersDocumentReference>
                     <cbc:ID>20210521/CTFD/ENG/7654-03</cbc:ID>

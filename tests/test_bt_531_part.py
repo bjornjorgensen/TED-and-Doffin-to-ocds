@@ -46,7 +46,7 @@ def test_bt_531_part_additional_nature_integration(
         <cbc:ID>notice-1</cbc:ID>
         <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
             <cac:ProcurementProject>
                 <cac:ProcurementAdditionalType>
                     <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
@@ -54,7 +54,7 @@ def test_bt_531_part_additional_nature_integration(
             </cac:ProcurementProject>
         </cac:ProcurementProjectLot>
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0002</cbc:ID>
+            <cbc:ID schemeName="Part">PART-0002</cbc:ID>
             <cac:ProcurementProject>
                 <cac:ProcurementAdditionalType>
                     <cbc:ProcurementTypeCode listName="contract-nature">services</cbc:ProcurementTypeCode>

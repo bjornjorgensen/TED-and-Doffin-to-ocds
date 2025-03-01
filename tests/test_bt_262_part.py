@@ -44,7 +44,7 @@ def test_bt_262_part_integration(tmp_path, setup_logging, temp_output_dir) -> No
         <cbc:ID>notice-1</cbc:ID>
         <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
             <cac:ProcurementProject>
                 <cac:MainCommodityClassification>
                     <cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode>

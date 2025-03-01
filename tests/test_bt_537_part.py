@@ -44,7 +44,7 @@ def test_bt_537_part_integration(tmp_path, setup_logging, temp_output_dir) -> No
         <cbc:ID>notice-537</cbc:ID>
         <cbc:ContractFolderID>cf-537</cbc:ContractFolderID>
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
             <cac:ProcurementProject>
                 <cac:PlannedPeriod>
                     <cbc:EndDate>2019-11-19+01:00</cbc:EndDate>

@@ -158,7 +158,7 @@ class TestBT13Part(unittest.TestCase):
         <ContractAwardNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
               xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
             <cac:ProcurementProjectLot>
-                <cbc:ID schemeName="part">1</cbc:ID>
+                <cbc:ID schemeName="Part">1</cbc:ID>
                 <cac:TenderingProcess>
                     <cac:AdditionalInformationRequestPeriod>
                         <cbc:EndDate>2019-11-08+01:00</cbc:EndDate>

@@ -84,7 +84,7 @@ def test_bt_765_part_framework_agreement(
     xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
     xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
     <cac:ProcurementProjectLot>
-        <cbc:ID schemeName="part">PART-0001</cbc:ID>
+        <cbc:ID schemeName="Part">PART-0001</cbc:ID>
         <cac:TenderingProcess>
             <cac:ContractingSystem>
                 <cbc:ContractingSystemTypeCode listName="framework-agreement">{framework_code}</cbc:ContractingSystemTypeCode>

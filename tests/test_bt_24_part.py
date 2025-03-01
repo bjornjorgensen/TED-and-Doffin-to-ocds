@@ -46,7 +46,7 @@ def test_bt_24_part_description_integration(
         <cbc:ID>notice-1</cbc:ID>
         <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
             <cac:ProcurementProject>
                 <cbc:Description languageID="ENG">procedure for the procurement of IT services</cbc:Description>
             </cac:ProcurementProject>

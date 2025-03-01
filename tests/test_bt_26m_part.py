@@ -30,7 +30,7 @@ def test_bt_26m_part_integration(tmp_path, temp_output_dir) -> None:
                          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
                          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
             <cac:ProcurementProject>
                 <cac:MainCommodityClassification>
                     <cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode>

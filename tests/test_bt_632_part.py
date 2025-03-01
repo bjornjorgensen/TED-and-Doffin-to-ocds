@@ -44,7 +44,7 @@ def test_bt_632_part_integration(tmp_path, setup_logging, temp_output_dir) -> No
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
         <cac:ProcurementProjectLot>
-            <cbc:ID schemeName="part">PART-0001</cbc:ID>
+            <cbc:ID schemeName="Part">PART-0001</cbc:ID>
             <cac:TenderingProcess>
                 <ext:UBLExtensions>
                     <ext:UBLExtension>
