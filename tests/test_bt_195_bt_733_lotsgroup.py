@@ -50,18 +50,18 @@ def test_bt_195_bt733_lotsgroup_integration(
             <cac:TenderingTerms>
                 <cac:AwardingTerms>
                     <cac:AwardingCriterion>
+                        <ext:UBLExtensions>
+                            <ext:UBLExtension>
+                                <ext:ExtensionContent>
+                                    <efext:EformsExtension>
+                                        <efac:FieldsPrivacy>
+                                            <efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-ord</efbc:FieldIdentifierCode>
+                                        </efac:FieldsPrivacy>
+                                    </efext:EformsExtension>
+                                </ext:ExtensionContent>
+                            </ext:UBLExtension>
+                        </ext:UBLExtensions>
                         <cac:SubordinateAwardingCriterion>
-                            <ext:UBLExtensions>
-                                <ext:UBLExtension>
-                                    <ext:ExtensionContent>
-                                        <efext:EformsExtension>
-                                            <efac:FieldsPrivacy>
-                                                <efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-ord</efbc:FieldIdentifierCode>
-                                            </efac:FieldsPrivacy>
-                                        </efext:EformsExtension>
-                                    </ext:ExtensionContent>
-                                </ext:UBLExtension>
-                            </ext:UBLExtensions>
                         </cac:SubordinateAwardingCriterion>
                     </cac:AwardingCriterion>
                 </cac:AwardingTerms>
