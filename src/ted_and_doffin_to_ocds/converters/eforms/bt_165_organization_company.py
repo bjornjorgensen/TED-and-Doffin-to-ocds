@@ -38,10 +38,12 @@ def parse_winner_size(xml_content: str | bytes) -> dict | None:
         "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
         "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
+        "ted": "http://publications.europa.eu/resource/schema/ted/2016/05/01/ted",
     }
 
     result = {"parties": []}
 
+    # eForms format parsing
     organizations = root.xpath(
         "//efac:Organizations/efac:Organization",
         namespaces=namespaces,
@@ -59,6 +61,41 @@ def parse_winner_size(xml_content: str | bytes) -> dict | None:
 
         if org_id and company_size:
             party = {"id": org_id[0], "details": {"scale": company_size[0]}}
+            result["parties"].append(party)
+
+    # TED format parsing
+    ted_contractors = root.xpath(
+        "//ted:FORM_SECTION/ted:F03_2014/ted:AWARD_CONTRACT/ted:AWARDED_CONTRACT/ted:CONTRACTORS/ted:CONTRACTOR"
+        " | //ted:FORM_SECTION/ted:F13_2014/ted:RESULTS/ted:AWARDED_PRIZE/ted:WINNERS/ted:WINNER"
+        " | //ted:FORM_SECTION/ted:F15_2014/ted:AWARD_CONTRACT/ted:AWARDED_CONTRACT/ted:CONTRACTORS/ted:CONTRACTOR"
+        " | //ted:FORM_SECTION/ted:F21_2014/ted:AWARD_CONTRACT/ted:AWARDED_CONTRACT/ted:CONTRACTORS/ted:CONTRACTOR"
+        " | //ted:FORM_SECTION/ted:F22_2014/ted:AWARD_CONTRACT/ted:AWARDED_CONTRACT/ted:CONTRACTORS/ted:CONTRACTOR"
+        " | //ted:FORM_SECTION/ted:F23_2014/ted:AWARD_CONTRACT/ted:AWARDED_CONTRACT/ted:CONTRACTORS/ted:CONTRACTOR"
+        " | //ted:FORM_SECTION/ted:F25_2014/ted:AWARD_CONTRACT/ted:AWARDED_CONTRACT/ted:CONTRACTORS/ted:CONTRACTOR",
+        namespaces=namespaces,
+    )
+
+    for contractor in ted_contractors:
+        # Try to get the SME element
+        sme_elements = contractor.xpath(
+            "./ted:SME/text() | ./*[local-name()='SME']/text()",
+            namespaces=namespaces,
+        )
+
+        # Get contractor ID - assume it's in a similar structure
+        org_id_elements = contractor.xpath(
+            "./ted:OFFICIALNAME/text() | ./*[local-name()='OFFICIALNAME']/text()",
+            namespaces=namespaces,
+        )
+
+        if sme_elements and org_id_elements:
+            sme_value = sme_elements[0].strip().lower()
+            org_id = org_id_elements[0]
+
+            # In TED format, SME is typically YES/NO - map to appropriate scale value
+            scale = "sme" if sme_value == "yes" else "large"
+
+            party = {"id": org_id, "details": {"scale": scale}}
             result["parties"].append(party)
 
     return result if result["parties"] else None
