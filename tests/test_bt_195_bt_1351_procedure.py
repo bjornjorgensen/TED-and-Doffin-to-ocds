@@ -84,8 +84,8 @@ def test_bt_195_bt_1351_procedure_integration(
         withheld_info["field"] == "pro-acc-jus"
     ), f"Expected field 'pro-acc-jus', got {withheld_info['field']}"
     assert (
-        withheld_info["name"] == "procedure Accelerated Justification"
-    ), f"Expected name 'procedure Accelerated Justification', got {withheld_info['name']}"
+        withheld_info["name"] == "Procedure Accelerated Justification"
+    ), f"Expected name 'Procedure Accelerated Justification', got {withheld_info['name']}"
 
 
 if __name__ == "__main__":
