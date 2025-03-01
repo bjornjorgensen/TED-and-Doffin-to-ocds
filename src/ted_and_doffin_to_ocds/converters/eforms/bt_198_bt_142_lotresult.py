@@ -35,7 +35,7 @@ def parse_bt198_bt142_unpublished_access_date(xml_content):
     result = {"withheldInformation": []}
 
     lot_results = root.xpath(
-        "//efac:noticeResult/efac:LotResult",
+        "//efac:NoticeResult/efac:LotResult",
         namespaces=namespaces,
     )
 

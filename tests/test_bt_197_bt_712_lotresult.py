@@ -44,7 +44,7 @@ def test_bt_197_bt712_lot_result_integration(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotResult>
                 <efac:AppealRequestsStatistics>
                     <efbc:StatisticsCode listName="review-type">rev-req</efbc:StatisticsCode>
@@ -55,7 +55,7 @@ def test_bt_197_bt712_lot_result_integration(
                 </efac:AppealRequestsStatistics>
                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
             </efac:LotResult>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </ContractNotice>
     """
 
@@ -108,11 +108,11 @@ def test_bt_197_bt712_lot_result_missing_field(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotResult>
                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
             </efac:LotResult>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </ContractNotice>
     """
 

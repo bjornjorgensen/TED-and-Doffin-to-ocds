@@ -58,7 +58,7 @@ def parse_bt197_bt553_tender(xml_content):
 
     xpath_query = (
         "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
-        "/efext:EformsExtension/efac:noticeResult/efac:LotTender"
+        "/efext:EformsExtension/efac:NoticeResult/efac:LotTender"
         "/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']"
         "/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val']"
         "/cbc:ReasonCode"

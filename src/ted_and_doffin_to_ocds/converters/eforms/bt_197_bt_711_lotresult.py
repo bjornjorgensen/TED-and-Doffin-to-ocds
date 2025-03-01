@@ -57,7 +57,7 @@ def parse_bt197_bt711_unpublished_justification_code(xml_content):
     result = {"withheldInformation": []}
 
     lot_results = root.xpath(
-        "//efac:noticeResult/efac:LotResult",
+        "//efac:NoticeResult/efac:LotResult",
         namespaces=namespaces,
     )
 

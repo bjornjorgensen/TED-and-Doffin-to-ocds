@@ -57,7 +57,7 @@ def test_parse_vehicle_type() -> None:
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotResult>
                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                 <efac:StrategicProcurement>
@@ -74,7 +74,7 @@ def test_parse_vehicle_type() -> None:
                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                 </efac:TenderLot>
             </efac:LotResult>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </root>
     """
 
@@ -144,7 +144,7 @@ def test_opt_155_lotresult_vehicle_type_integration(
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotResult>
                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                 <efac:StrategicProcurement>
@@ -177,7 +177,7 @@ def test_opt_155_lotresult_vehicle_type_integration(
                     <cbc:ID schemeName="Lot">LOT-0002</cbc:ID>
                 </efac:TenderLot>
             </efac:LotResult>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </ContractNotice>
     """
     xml_file = tmp_path / "test_input_vehicle_type.xml"

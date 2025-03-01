@@ -49,7 +49,7 @@ def test_bt_773_tender_subcontracting_integration(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:LotTender>
                                 <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
                                 <efac:SubcontractingTerm>
@@ -65,7 +65,7 @@ def test_bt_773_tender_subcontracting_integration(
                             <efac:LotTender>
                                 <cbc:ID schemeName="tender">TEN-0003</cbc:ID>
                             </efac:LotTender>
-                        </efac:noticeResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -121,12 +121,12 @@ def test_bt_773_tender_subcontracting_missing_subcontracting_term(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:LotTender>
                                 <cbc:ID schemeName="tender">TEN-0004</cbc:ID>
                                 <!-- SubcontractingTerm is missing -->
                             </efac:LotTender>
-                        </efac:noticeResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

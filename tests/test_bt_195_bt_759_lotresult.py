@@ -48,7 +48,7 @@ def test_bt_195_bt759_lotresult_integration(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:LotResult>
                                 <cbc:ID>RES-0001</cbc:ID>
                                 <efac:ReceivedSubmissionsStatistics>
@@ -57,7 +57,7 @@ def test_bt_195_bt759_lotresult_integration(
                                     </efac:FieldsPrivacy>
                                 </efac:ReceivedSubmissionsStatistics>
                             </efac:LotResult>
-                        </efac:noticeResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

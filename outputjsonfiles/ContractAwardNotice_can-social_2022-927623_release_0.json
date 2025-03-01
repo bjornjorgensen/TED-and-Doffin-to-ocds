@@ -1,7 +1,7 @@
 {
   "id": "2022-927623",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f5d41b6b-8248-4250-8fc8-cfa8ba79dacb",
+  "ocid": "ocds-abcd1234-707d0f04-66e9-4704-af4b-5b6de3f52a7e",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -254,8 +254,8 @@
         }
       ],
       "relatedBids": [
-        "TEN-0001",
-        "TEN-0002"
+        "TEN-0002",
+        "TEN-0001"
       ]
     }
   ],

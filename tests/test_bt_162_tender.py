@@ -51,7 +51,7 @@ def test_bt_162_concession_revenue_user_integration(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:LotTender>
                                 <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
                                 <efac:ConcessionRevenue>
@@ -70,7 +70,7 @@ def test_bt_162_concession_revenue_user_integration(
                                     <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                                 </efac:SettledContract>
                             </efac:LotResult>
-                        </efac:noticeResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

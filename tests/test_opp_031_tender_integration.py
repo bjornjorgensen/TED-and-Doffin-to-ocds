@@ -45,7 +45,7 @@ def test_opp_031_tender_integration(tmp_path, setup_logging, temp_output_dir) ->
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
         <cbc:ID>notice-1</cbc:ID>
         <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotTender>
                 <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
                 <efac:ContractTerm>
@@ -60,7 +60,7 @@ def test_opp_031_tender_integration(tmp_path, setup_logging, temp_output_dir) ->
                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                 </efac:TenderLot>
             </efac:LotTender>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </ContractAwardNotice>
     """
 

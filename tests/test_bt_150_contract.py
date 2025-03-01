@@ -50,7 +50,7 @@ def test_bt_150_contract_identifier_integration(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:SettledContract>
                                 <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                                 <efac:ContractReference>
@@ -63,7 +63,7 @@ def test_bt_150_contract_identifier_integration(
                                     <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                                 </efac:SettledContract>
                             </efac:LotResult>
-                        </efac:noticeResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

@@ -24,14 +24,14 @@ def test_parse_contract_modification_reason() -> None:
                 <cbc:ReasonCode listName="modification-justification">MJ001</cbc:ReasonCode>
             </efac:ChangeReason>
         </efac:ContractModification>
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotResult>
                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                 <efac:SettledContract>
                     <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                 </efac:SettledContract>
             </efac:LotResult>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </root>
     """
 
@@ -80,7 +80,7 @@ def test_parse_contract_modification_reason_multiple_awards() -> None:
                 <cbc:ReasonCode listName="modification-justification">MJ002</cbc:ReasonCode>
             </efac:ChangeReason>
         </efac:ContractModification>
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotResult>
                 <cbc:ID schemeName="result">RES-0002</cbc:ID>
                 <efac:SettledContract>
@@ -93,7 +93,7 @@ def test_parse_contract_modification_reason_multiple_awards() -> None:
                     <cbc:ID schemeName="contract">CON-0002</cbc:ID>
                 </efac:SettledContract>
             </efac:LotResult>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </root>
     """
 

@@ -51,7 +51,7 @@ def test_bt_723_lot_result_integration(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                                 <efac:TenderLot>
@@ -65,7 +65,7 @@ def test_bt_723_lot_result_integration(
                                     </efac:StrategicProcurementInformation>
                                 </efac:StrategicProcurement>
                             </efac:LotResult>
-                        </efac:noticeResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

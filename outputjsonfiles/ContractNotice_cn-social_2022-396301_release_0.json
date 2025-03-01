@@ -1,7 +1,7 @@
 {
   "id": "2022-396301",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4bd8b579-1fa8-4dfd-bb9a-cd6e971d5574",
+  "ocid": "ocds-abcd1234-ab6481ce-0115-4b5e-af46-fd59121472d5",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -133,8 +133,8 @@
         "locality": "MOEN"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

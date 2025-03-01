@@ -48,7 +48,7 @@ def test_bt_197_bt_142_lotresult_integration(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                                 <efac:FieldsPrivacy>
@@ -56,7 +56,7 @@ def test_bt_197_bt_142_lotresult_integration(
                                     <cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode>
                                 </efac:FieldsPrivacy>
                             </efac:LotResult>
-                        </efac:noticeResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -117,7 +117,7 @@ def test_bt_197_bt_142_lotresult_multiple_lots(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                                 <efac:FieldsPrivacy>
@@ -132,7 +132,7 @@ def test_bt_197_bt_142_lotresult_multiple_lots(
                                     <cbc:ReasonCode listName="non-publication-justification">fair-comp</cbc:ReasonCode>
                                 </efac:FieldsPrivacy>
                             </efac:LotResult>
-                        </efac:noticeResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

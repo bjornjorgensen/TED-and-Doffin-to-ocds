@@ -1,7 +1,7 @@
 {
   "id": "510444f4-6cd2-4b26-8dd6-f3af27ffa069",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-da71fbff-a4d9-407d-abd3-d1f72b4d8776",
+  "ocid": "ocds-abcd1234-8dc9f58f-4436-4b25-af7d-4a5c1033d950",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften"
@@ -130,8 +130,8 @@
         "locality": "HØNEFOSS"
       },
       "roles": [
-        "buyer",
         "funder",
+        "buyer",
         "payer"
       ]
     },
@@ -187,6 +187,7 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "date": "2024-01-17T23:59:59+01:00",
       "suppliers": [
         {
           "id": "ORG-0003"

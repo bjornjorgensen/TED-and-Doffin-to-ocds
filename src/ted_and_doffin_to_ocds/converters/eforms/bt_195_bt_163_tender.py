@@ -54,7 +54,7 @@ def parse_bt195_bt163_unpublished_identifier(
     result = {"withheldInformation": []}
 
     lot_tenders = root.xpath(
-        "//efac:noticeResult/efac:LotTender",
+        "//efac:NoticeResult/efac:LotTender",
         namespaces=namespaces,
     )
 

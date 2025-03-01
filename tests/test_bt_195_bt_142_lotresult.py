@@ -49,14 +49,14 @@ def test_bt_195_bt_142_lotresult_integration(
         <ext:UBLExtension>
             <ext:ExtensionContent>
                 <efext:EformsExtension>
-                    <efac:noticeResult>
+                    <efac:NoticeResult>
                         <efac:LotResult>
                             <efac:FieldsPrivacy>
                                 <efbc:FieldIdentifierCode>win-cho</efbc:FieldIdentifierCode>
                             </efac:FieldsPrivacy>
                             <cbc:ID schemeName="result">RES-0001</cbc:ID>
                         </efac:LotResult>
-                    </efac:noticeResult>
+                    </efac:NoticeResult>
                 </efext:EformsExtension>
             </ext:ExtensionContent>
         </ext:UBLExtension>
@@ -103,7 +103,7 @@ def test_bt_195_bt_142_lotresult_multiple_lots(
         <ext:UBLExtension>
             <ext:ExtensionContent>
                 <efext:EformsExtension>
-                    <efac:noticeResult>
+                    <efac:NoticeResult>
                         <efac:LotResult>
                             <efac:FieldsPrivacy>
                                 <efbc:FieldIdentifierCode>win-cho</efbc:FieldIdentifierCode>
@@ -116,7 +116,7 @@ def test_bt_195_bt_142_lotresult_multiple_lots(
                             </efac:FieldsPrivacy>
                             <cbc:ID schemeName="result">RES-0002</cbc:ID>
                         </efac:LotResult>
-                    </efac:noticeResult>
+                    </efac:NoticeResult>
                 </efext:EformsExtension>
             </ext:ExtensionContent>
         </ext:UBLExtension>

@@ -1,7 +1,7 @@
 {
   "id": "2023-665410",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-5f8cb95a-e1f7-4cfb-9ec8-9b9596ea5364",
+  "ocid": "ocds-abcd1234-93c3a556-4f5a-4e0f-9597-1891f8758066",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -157,9 +157,9 @@
         "email": "sigmund.ulnes@larvik.kommune.no"
       },
       "roles": [
-        "buyer",
+        "submissionReceiptBody",
         "processContactPoint",
-        "submissionReceiptBody"
+        "buyer"
       ],
       "address": {
         "streetAddress": "Postboks 2020",

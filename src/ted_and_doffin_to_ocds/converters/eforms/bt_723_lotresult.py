@@ -68,7 +68,7 @@ def parse_vehicle_category(xml_content: str | bytes) -> dict | None:
     result = {"awards": []}
 
     lot_results = root.xpath(
-        "//efac:noticeResult/efac:LotResult",
+        "//efac:NoticeResult/efac:LotResult",
         namespaces=namespaces,
     )
 

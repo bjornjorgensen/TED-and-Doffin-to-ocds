@@ -50,7 +50,7 @@ def test_bt195_bt553_tender_integration(
         <ext:UBLExtension>
             <ext:ExtensionContent>
                 <efext:EformsExtension>
-                    <efac:noticeResult>
+                    <efac:NoticeResult>
                         <efac:LotTender>
                             <cbc:ID schemeName="result">TEN-0001</cbc:ID>
                             <efac:SubcontractingTerm>
@@ -60,7 +60,7 @@ def test_bt195_bt553_tender_integration(
                                 </efac:FieldsPrivacy>
                             </efac:SubcontractingTerm>
                         </efac:LotTender>
-                    </efac:noticeResult>
+                    </efac:NoticeResult>
                 </efext:EformsExtension>
             </ext:ExtensionContent>
         </ext:UBLExtension>
@@ -105,12 +105,12 @@ def test_bt195_bt553_tender_missing_data(
         <ext:UBLExtension>
             <ext:ExtensionContent>
                 <efext:EformsExtension>
-                    <efac:noticeResult>
+                    <efac:NoticeResult>
                         <efac:LotTender>
                             <cbc:ID schemeName="result">TEN-0001</cbc:ID>
                             <!-- Missing SubcontractingTerm element -->
                         </efac:LotTender>
-                    </efac:noticeResult>
+                    </efac:NoticeResult>
                 </efext:EformsExtension>
             </ext:ExtensionContent>
         </ext:UBLExtension>

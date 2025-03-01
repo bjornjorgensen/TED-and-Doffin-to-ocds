@@ -22,14 +22,14 @@ def test_parse_contract_modification_summary() -> None:
                 </efac:ChangedSection>
             </efac:Change>
         </efac:ContractModification>
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotResult>
                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                 <efac:SettledContract>
                     <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                 </efac:SettledContract>
             </efac:LotResult>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </root>
     """
 

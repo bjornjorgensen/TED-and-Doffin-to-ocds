@@ -41,14 +41,14 @@ def test_bt_3201_tender_identifier_integration(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:LotTender>
                                 <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
                                 <efac:TenderReference>
                                     <cbc:ID>BID ABD/GHI-NL/2020-002</cbc:ID>
                                 </efac:TenderReference>
                             </efac:LotTender>
-                        </efac:noticeResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

@@ -1,7 +1,7 @@
 {
   "id": "65ffd92d-8eee-4787-a7fe-925106611edc",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a5b47dc1-9c6b-4e7f-bc9a-a0b4dbc7fd0b",
+  "ocid": "ocds-abcd1234-5780b2e4-a22d-41f5-a2ea-272444f2788e",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -213,6 +213,7 @@
       ],
       "status": "active",
       "statusDetails": "At least one winner was chosen.",
+      "date": "2024-06-20T23:59:59Z",
       "suppliers": [
         {
           "id": "ORG-0003"
@@ -230,8 +231,8 @@
         }
       ],
       "relatedBids": [
-        "TEN-0001",
-        "TEN-0002"
+        "TEN-0002",
+        "TEN-0001"
       ]
     }
   ],

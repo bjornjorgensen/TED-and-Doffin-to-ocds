@@ -50,7 +50,7 @@ def test_opp_034_tender_integration(tmp_path, setup_logging, temp_output_dir) ->
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                                 <efac:LotTender>
@@ -75,7 +75,7 @@ def test_opp_034_tender_integration(tmp_path, setup_logging, temp_output_dir) ->
                                     </efac:FinancialPerformanceRequirement>
                                 </efac:ContractTerm>
                             </efac:LotTender>
-                        </efac:noticeResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

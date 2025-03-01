@@ -52,7 +52,7 @@ def test_bt_3202_contract_tender_id_integration(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:SettledContract>
                                 <cbc:ID schemeName="contract">CON-0001</cbc:ID>
                                 <efac:LotTender>
@@ -80,7 +80,7 @@ def test_bt_3202_contract_tender_id_integration(
                                     <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
                                 </efac:Tenderer>
                             </efac:Tenderingparty>
-                        </efac:noticeResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

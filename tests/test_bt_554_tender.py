@@ -42,7 +42,7 @@ def test_bt_554_tender_integration(tmp_path, setup_logging, temp_output_dir) -> 
         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:noticeResult>
+        <efac:NoticeResult>
             <efac:LotTender>
                 <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
                 <efac:SubcontractingTerm>
@@ -53,7 +53,7 @@ def test_bt_554_tender_integration(tmp_path, setup_logging, temp_output_dir) -> 
                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                 </efac:TenderLot>
             </efac:LotTender>
-        </efac:noticeResult>
+        </efac:NoticeResult>
     </ContractAwardNotice>
     """
 

@@ -44,7 +44,7 @@ def parse_lot_result_identifier(xml_content: str | bytes) -> dict[str, Any] | No
             "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/"
             "efext:EformsExtension/efac:NoticeResult/efac:LotResult | "
             "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/"
-            "efext:EformsExtension/efac:noticeResult/efac:LotResult",
+            "efext:EformsExtension/efac:NoticeResult/efac:LotResult",
             namespaces=NAMESPACES,
         )
 

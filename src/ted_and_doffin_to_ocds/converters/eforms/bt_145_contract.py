@@ -67,7 +67,7 @@ def parse_contract_conclusion_date(
     settled_contracts = root.xpath(
         """
         //efac:NoticeResult/efac:SettledContract |
-        //efac:noticeResult/efac:SettledContract |
+        //efac:NoticeResult/efac:SettledContract |
         //ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/
         efext:EformsExtension/efac:NoticeResult/efac:SettledContract
         """,

@@ -51,7 +51,7 @@ def parse_bt195_bt553_tender(xml_content: str | bytes) -> dict | None:
 
     xpath_query = (
         "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
-        "/efext:EformsExtension/efac:noticeResult/efac:LotTender"
+        "/efext:EformsExtension/efac:NoticeResult/efac:LotTender"
         "/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']"
         "/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val']"
         "/efbc:FieldIdentifierCode"

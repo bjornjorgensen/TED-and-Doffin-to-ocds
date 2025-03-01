@@ -58,7 +58,7 @@ def test_bt198_bt553_tender_integration(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:LotTender>
                                 <efac:SubcontractingTerm>
                                     <efbc:TermCode listName="applicability"/>
@@ -68,7 +68,7 @@ def test_bt198_bt553_tender_integration(
                                     </efac:FieldsPrivacy>
                                 </efac:SubcontractingTerm>
                             </efac:LotTender>
-                        </efac:noticeResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -111,11 +111,11 @@ def test_bt198_bt553_tender_missing_data(
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:LotTender>
                                 <!-- Missing SubcontractingTerm element -->
                             </efac:LotTender>
-                        </efac:noticeResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>

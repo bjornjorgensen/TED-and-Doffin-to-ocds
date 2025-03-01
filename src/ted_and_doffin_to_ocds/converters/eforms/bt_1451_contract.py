@@ -37,7 +37,7 @@ def parse_winner_decision_date(xml_content: str | bytes) -> dict | None:
 
     result = {"awards": []}
 
-    notice_results = root.xpath("//efac:noticeResult", namespaces=namespaces)
+    notice_results = root.xpath("//efac:NoticeResult", namespaces=namespaces)
 
     for notice_result in notice_results:
         settled_contracts = notice_result.xpath(
