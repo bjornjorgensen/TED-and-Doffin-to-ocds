@@ -45,14 +45,22 @@ def test_bt_195_bt711_lot_result_integration(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
-            <efac:LotResult>
-                <efac:FieldsPrivacy>
-                    <efbc:FieldIdentifierCode listName="non-publication-identifier">ten-val-hig</efbc:FieldIdentifierCode>
-                </efac:FieldsPrivacy>
-                <cbc:ID schemeName="result">RES-0001</cbc:ID>
-            </efac:LotResult>
-        </efac:NoticeResult>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotResult>
+                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
+                                <efac:FieldsPrivacy>
+                                    <efbc:FieldIdentifierCode listName="non-publication-identifier">ten-val-hig</efbc:FieldIdentifierCode>
+                                </efac:FieldsPrivacy>
+                            </efac:LotResult>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractNotice>"""
 
     xml_file = tmp_path / "test_input_bt195_bt711.xml"
@@ -90,11 +98,19 @@ def test_bt_195_bt711_lot_result_missing_field(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
-            <efac:LotResult>
-                <cbc:ID schemeName="result">RES-0001</cbc:ID>
-            </efac:LotResult>
-        </efac:NoticeResult>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotResult>
+                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
+                            </efac:LotResult>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractNotice>"""
 
     xml_file = tmp_path / "test_input_bt195_bt711_missing.xml"

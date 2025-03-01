@@ -45,16 +45,24 @@ def test_bt_195_bt709_lotresult_integration(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
-            <efac:LotResult>
-                <cbc:ID schemeName="result">RES-0001</cbc:ID>
-                <efac:FrameworkAgreementValues>
-                    <efac:FieldsPrivacy>
-                        <efbc:FieldIdentifierCode listName="non-publication-identifier">max-val</efbc:FieldIdentifierCode>
-                    </efac:FieldsPrivacy>
-                </efac:FrameworkAgreementValues>
-            </efac:LotResult>
-        </efac:NoticeResult>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotResult>
+                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
+                                <efac:FrameworkAgreementValues>
+                                    <efac:FieldsPrivacy>
+                                        <efbc:FieldIdentifierCode listName="non-publication-identifier">max-val</efbc:FieldIdentifierCode>
+                                    </efac:FieldsPrivacy>
+                                </efac:FrameworkAgreementValues>
+                            </efac:LotResult>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractNotice>"""
 
     xml_file = tmp_path / "test_input_bt195_bt709.xml"
@@ -91,14 +99,22 @@ def test_bt_195_bt709_lotresult_missing_data(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
-            <efac:LotResult>
-                <cbc:ID schemeName="result">RES-0001</cbc:ID>
-                <efac:FrameworkAgreementValues>
-                    <!-- Missing FieldsPrivacy element -->
-                </efac:FrameworkAgreementValues>
-            </efac:LotResult>
-        </efac:NoticeResult>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotResult>
+                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
+                                <efac:FrameworkAgreementValues>
+                                    <!-- Missing FieldsPrivacy element -->
+                                </efac:FrameworkAgreementValues>
+                            </efac:LotResult>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractNotice>"""
 
     xml_file = tmp_path / "test_input_bt195_bt709_missing.xml"

@@ -45,17 +45,25 @@ def test_bt_195_bt712_lot_result_integration(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
-            <efac:LotResult>
-                <efac:AppealRequestsStatistics>
-                    <efbc:StatisticsCode listName="review-type">rev-req</efbc:StatisticsCode>
-                    <efac:FieldsPrivacy>
-                        <efbc:FieldIdentifierCode listName="non-publication-identifier">rev-req</efbc:FieldIdentifierCode>
-                    </efac:FieldsPrivacy>
-                </efac:AppealRequestsStatistics>
-                <cbc:ID schemeName="result">RES-0001</cbc:ID>
-            </efac:LotResult>
-        </efac:NoticeResult>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotResult>
+                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
+                                <efac:AppealRequestsStatistics>
+                                    <efbc:StatisticsCode listName="review-type">rev-req</efbc:StatisticsCode>
+                                    <efac:FieldsPrivacy>
+                                        <efbc:FieldIdentifierCode listName="non-publication-identifier">rev-req</efbc:FieldIdentifierCode>
+                                    </efac:FieldsPrivacy>
+                                </efac:AppealRequestsStatistics>
+                            </efac:LotResult>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractNotice>"""
 
     xml_file = tmp_path / "test_input_bt195_bt712.xml"
@@ -75,7 +83,7 @@ def test_bt_195_bt712_lot_result_integration(
     ), "Unexpected withheld information id"
     assert withheld_info["field"] == "rev-req", "Unexpected withheld information field"
     assert (
-        withheld_info["name"] == "buyer Review Complainants"
+        withheld_info["name"] == "Buyer Review Complainants"
     ), "Unexpected withheld information name"
 
 
@@ -91,11 +99,22 @@ def test_bt_195_bt712_lot_result_missing_field(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
-            <efac:LotResult>
-                <cbc:ID schemeName="result">RES-0001</cbc:ID>
-            </efac:LotResult>
-        </efac:NoticeResult>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotResult>
+                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
+                                <efac:AppealRequestsStatistics>
+                                    <efbc:StatisticsCode listName="review-type">rev-req</efbc:StatisticsCode>
+                                </efac:AppealRequestsStatistics>
+                            </efac:LotResult>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractNotice>"""
 
     xml_file = tmp_path / "test_input_bt195_bt712_missing.xml"
