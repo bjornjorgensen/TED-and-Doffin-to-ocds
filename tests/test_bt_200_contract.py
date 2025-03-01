@@ -57,7 +57,7 @@ def test_parse_contract_modification_reason() -> None:
         rationale["description"]
         == "Need for additional works, services or supplies by the original contractor."
     )
-    assert rationale["scheme"] == "Modification justification"
+    assert rationale["scheme"] == "eu-modification-justification"
 
     assert contract["awardID"] == "RES-0001"
 
@@ -119,7 +119,7 @@ def test_parse_contract_modification_reason_multiple_awards() -> None:
         rationale["description"]
         == "Need for modifications because of circumstances which a diligent buyer could not predict."
     )
-    assert rationale["scheme"] == "Modification justification"
+    assert rationale["scheme"] == "eu-modification-justification"
 
     assert "awardIDs" in contract
     assert set(contract["awardIDs"]) == {"RES-0002", "RES-0003"}
@@ -139,7 +139,7 @@ def test_merge_contract_modification_reason() -> None:
                             {
                                 "id": "MJ001",
                                 "description": "Need for additional works, services or supplies by the original contractor.",
-                                "scheme": "Modification justification",
+                                "scheme": "eu-modification-justification",
                             },
                         ],
                     },
@@ -173,7 +173,7 @@ def test_merge_contract_modification_reason_new_contract() -> None:
                             {
                                 "id": "MJ002",
                                 "description": "Need for modifications because of circumstances which a diligent buyer could not predict.",
-                                "scheme": "Modification justification",
+                                "scheme": "eu-modification-justification",
                             },
                         ],
                     },

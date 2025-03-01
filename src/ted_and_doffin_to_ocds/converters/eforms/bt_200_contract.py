@@ -79,7 +79,7 @@ def parse_contract_modification_reason(
                                 "description": REASON_DESCRIPTIONS.get(
                                     reason_code[0], "Unknown"
                                 ),
-                                "scheme": "modification justification",
+                                "scheme": "eu-modification-justification",
                             }
                         ],
                     }
