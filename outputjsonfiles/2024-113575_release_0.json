@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9c66286c-333f-41d0-ac71-fd3b93aa3455",
+  "ocid": "ocds-abcd1234-c4186ff3-114f-4c66-b4fe-0d3f06cf94e9",
   "tender": {
     "legalBasis": {
       "id": "FOA § 13-4 bokstav b annet punkt; «konkurranse er umulig av tekniske årsaker».",
@@ -203,9 +203,9 @@
         "locality": "Bodø"
       },
       "roles": [
+        "payer",
         "funder",
-        "buyer",
-        "payer"
+        "buyer"
       ]
     },
     {
@@ -232,8 +232,8 @@
       },
       "roles": [
         "leadBuyer",
-        "buyer",
         "processContactPoint",
+        "buyer",
         "reviewContactPoint"
       ]
     },

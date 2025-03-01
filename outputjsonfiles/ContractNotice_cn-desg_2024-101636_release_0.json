@@ -1,7 +1,7 @@
 {
   "id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-278244db-3651-401e-88d0-47742981b6d5",
+  "ocid": "ocds-abcd1234-8eeddc49-c0ac-4106-9c9e-0f7f191f7551",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -343,10 +343,10 @@
       },
       "roles": [
         "processContactPoint",
-        "evaluationBody",
         "reviewContactPoint",
-        "buyer",
-        "submissionReceiptBody"
+        "submissionReceiptBody",
+        "evaluationBody",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Kauffelds plass 1",
