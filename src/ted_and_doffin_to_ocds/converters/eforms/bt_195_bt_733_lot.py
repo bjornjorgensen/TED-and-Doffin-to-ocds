@@ -50,25 +50,42 @@ def parse_bt195_bt733_unpublished_identifier(
         "/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
         "/efext:EformsExtension/efac:FieldsPrivacy"
         "[efbc:FieldIdentifierCode/text()='awa-cri-ord']"
-        "/efbc:FieldIdentifierCode"
     )
 
-    field_identifier_codes = root.xpath(xpath_query, namespaces=namespaces)
+    fields_privacy = root.xpath(xpath_query, namespaces=namespaces)
 
-    for field_identifier_code in field_identifier_codes:
-        lot_id = field_identifier_code.xpath(
-            "ancestor::cac:ProcurementProjectLot/cbc:ID[@schemeName='Lot']/text()",
-            namespaces=namespaces,
-        )[0]
+    for field_privacy in fields_privacy:
+        try:
+            lot_ids = field_privacy.xpath(
+                "ancestor::cac:ProcurementProjectLot/cbc:ID[@schemeName='Lot']/text()",
+                namespaces=namespaces,
+            )
+            if not lot_ids:
+                logger.warning("No Lot ID found for FieldsPrivacy element")
+                continue
 
-        withheld_info = {
-            "id": f"{field_identifier_code.text}-{lot_id}",
-            "field": "awa-cri-ord",
-            "name": "Award Criteria Order Justification",
-        }
-        result["withheldInformation"].append(withheld_info)
+            field_code = field_privacy.xpath(
+                "efbc:FieldIdentifierCode/text()", namespaces=namespaces
+            )
+            if not field_code:
+                logger.warning("No FieldIdentifierCode found for FieldsPrivacy element")
+                continue
 
-    return result if result["withheldInformation"] else None
+            withheld_info = {
+                "id": f"{field_code[0]}-{lot_ids[0]}",
+                "field": "awa-cri-ord",
+                "name": "Award Criteria Order Justification",
+            }
+            result["withheldInformation"].append(withheld_info)
+            logger.debug("Added withheld information for lot %s", lot_ids[0])
+
+        except Exception:
+            logger.exception("Error processing fields privacy element")
+            continue
+
+    if result["withheldInformation"]:
+        return result
+    return None
 
 
 def merge_bt195_bt733_unpublished_identifier(

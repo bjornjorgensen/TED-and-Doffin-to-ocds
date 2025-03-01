@@ -43,36 +43,26 @@ def test_bt_195_bt733_lot_integration(tmp_path, setup_logging, temp_output_dir) 
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <ext:UBLExtensions>
-            <ext:UBLExtension>
-                <ext:ExtensionContent>
-                    <efext:EformsExtension>
-                        <cac:ProcurementProjectLot>
-                            <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
-                            <cac:TenderingTerms>
-                                <cac:AwardingTerms>
-                                    <cac:AwardingCriterion>
-                                        <cac:SubordinateAwardingCriterion>
-                                            <ext:UBLExtensions>
-                                                <ext:UBLExtension>
-                                                    <ext:ExtensionContent>
-                                                        <efext:EformsExtension>
-                                                            <efac:FieldsPrivacy>
-                                                                <efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-ord</efbc:FieldIdentifierCode>
-                                                            </efac:FieldsPrivacy>
-                                                        </efext:EformsExtension>
-                                                    </ext:ExtensionContent>
-                                                </ext:UBLExtension>
-                                            </ext:UBLExtensions>
-                                        </cac:SubordinateAwardingCriterion>
-                                    </cac:AwardingCriterion>
-                                </cac:AwardingTerms>
-                            </cac:TenderingTerms>
-                        </cac:ProcurementProjectLot>
-                    </efext:EformsExtension>
-                </ext:ExtensionContent>
-            </ext:UBLExtension>
-        </ext:UBLExtensions>
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+            <cac:TenderingTerms>
+                <cac:AwardingTerms>
+                    <cac:AwardingCriterion>
+                        <ext:UBLExtensions>
+                            <ext:UBLExtension>
+                                <ext:ExtensionContent>
+                                    <efext:EformsExtension>
+                                        <efac:FieldsPrivacy>
+                                            <efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-ord</efbc:FieldIdentifierCode>
+                                        </efac:FieldsPrivacy>
+                                    </efext:EformsExtension>
+                                </ext:ExtensionContent>
+                            </ext:UBLExtension>
+                        </ext:UBLExtensions>
+                    </cac:AwardingCriterion>
+                </cac:AwardingTerms>
+            </cac:TenderingTerms>
+        </cac:ProcurementProjectLot>
     </ContractNotice>"""
 
     xml_file = tmp_path / "test_input_bt195_bt733.xml"
@@ -133,6 +123,73 @@ def test_bt_195_bt733_lot_missing_field(
         "withheldInformation" not in result
         or len(result.get("withheldInformation", [])) == 0
     ), "Did not expect 'withheldInformation' when FieldsPrivacy is missing"
+
+
+def test_bt_195_bt733_multiple_lots(tmp_path, setup_logging, temp_output_dir) -> None:
+    logger = setup_logging
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2"
+        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+        xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+        xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+        xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+        xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+            <cac:TenderingTerms>
+                <cac:AwardingTerms>
+                    <cac:AwardingCriterion>
+                        <ext:UBLExtensions>
+                            <ext:UBLExtension>
+                                <ext:ExtensionContent>
+                                    <efext:EformsExtension>
+                                        <efac:FieldsPrivacy>
+                                            <efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-ord</efbc:FieldIdentifierCode>
+                                        </efac:FieldsPrivacy>
+                                    </efext:EformsExtension>
+                                </ext:ExtensionContent>
+                            </ext:UBLExtension>
+                        </ext:UBLExtensions>
+                    </cac:AwardingCriterion>
+                </cac:AwardingTerms>
+            </cac:TenderingTerms>
+        </cac:ProcurementProjectLot>
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Lot">LOT-0002</cbc:ID>
+            <cac:TenderingTerms>
+                <cac:AwardingTerms>
+                    <cac:AwardingCriterion>
+                        <ext:UBLExtensions>
+                            <ext:UBLExtension>
+                                <ext:ExtensionContent>
+                                    <efext:EformsExtension>
+                                        <efac:FieldsPrivacy>
+                                            <efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-ord</efbc:FieldIdentifierCode>
+                                        </efac:FieldsPrivacy>
+                                    </efext:EformsExtension>
+                                </ext:ExtensionContent>
+                            </ext:UBLExtension>
+                        </ext:UBLExtensions>
+                    </cac:AwardingCriterion>
+                </cac:AwardingTerms>
+            </cac:TenderingTerms>
+        </cac:ProcurementProjectLot>
+    </ContractNotice>"""
+
+    xml_file = tmp_path / "test_input_bt195_bt733_multiple.xml"
+    xml_file.write_text(xml_content)
+
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    assert "withheldInformation" in result, "Expected 'withheldInformation' in result"
+    assert len(result["withheldInformation"]) == 2, f"Expected 2 withheld information items, got {len(result['withheldInformation'])}"
+
+    expected_lots = ["LOT-0001", "LOT-0002"]
+    for withheld_info, lot_id in zip(result["withheldInformation"], expected_lots):
+        assert withheld_info["id"] == f"awa-cri-ord-{lot_id}", f"Unexpected withheld information id for {lot_id}"
+        assert withheld_info["field"] == "awa-cri-ord", f"Unexpected withheld information field for {lot_id}"
+        assert withheld_info["name"] == "Award Criteria Order Justification", f"Unexpected withheld information name for {lot_id}"
 
 
 if __name__ == "__main__":
