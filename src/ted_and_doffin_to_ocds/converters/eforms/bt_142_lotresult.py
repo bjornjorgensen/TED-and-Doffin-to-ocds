@@ -6,7 +6,7 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
-# Tender result code lookup table
+# Tender result code lookup table - from authority table: http://publications.europa.eu/resource/authority/winner-selection-status
 STATUS_CODE_MAPPING = {
     "clos-nw": "No winner was chosen and the competition is closed.",
     "open-nw": "The winner was not yet chosen, but the competition is still ongoing.",
@@ -81,14 +81,16 @@ def parse_winner_chosen(xml_content: str | bytes) -> dict | None:
             tender_result_code = tender_result_code[0]
             lot_id = lot_id[0]
 
+            # Follow eForms guidance for status assignment
             if tender_result_code == "open-nw":
+                # For "open-nw", set the lot status to 'active'
                 result["tender"]["lots"].append({"id": lot_id, "status": "active"})
             else:
+                # Create award for all other cases
+                status = "active" if tender_result_code == "selec-w" else "unsuccessful"
                 award = {
                     "id": result_id,
-                    "status": "active"
-                    if tender_result_code == "selec-w"
-                    else "unsuccessful",
+                    "status": status,
                     "statusDetails": STATUS_CODE_MAPPING.get(
                         tender_result_code, "Unknown"
                     ),

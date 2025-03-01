@@ -1,7 +1,7 @@
 {
   "id": "2023-653024",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9019f42e-ed6f-4049-87f5-35c606feab44",
+  "ocid": "ocds-abcd1234-048b80b4-1e5e-459a-a183-5e6aa4c201d3",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -715,16 +715,16 @@
         "currency": "NOK"
       },
       "relatedBids": [
-        "TEN-0001",
-        "TEN-0009",
-        "TEN-0007",
-        "TEN-0005",
-        "TEN-0003",
-        "TEN-0004",
-        "TEN-0006",
         "TEN-0010",
+        "TEN-0007",
+        "TEN-0004",
+        "TEN-0008",
+        "TEN-0006",
+        "TEN-0003",
+        "TEN-0001",
         "TEN-0002",
-        "TEN-0008"
+        "TEN-0005",
+        "TEN-0009"
       ]
     }
   ],

@@ -47,7 +47,7 @@ def test_bt_142_lotresult_integration(tmp_path, setup_logging, temp_output_dir) 
             <ext:UBLExtension>
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
-                        <efac:noticeResult>
+                        <efac:NoticeResult>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
                                 <cbc:TenderResultCode listName="winner-selection-status">selec-w</cbc:TenderResultCode>
@@ -62,7 +62,14 @@ def test_bt_142_lotresult_integration(tmp_path, setup_logging, temp_output_dir) 
                                     <cbc:ID schemeName="Lot">LOT-0002</cbc:ID>
                                 </efac:TenderLot>
                             </efac:LotResult>
-                        </efac:noticeResult>
+                            <efac:LotResult>
+                                <cbc:ID schemeName="result">RES-0003</cbc:ID>
+                                <cbc:TenderResultCode listName="winner-selection-status">clos-nw</cbc:TenderResultCode>
+                                <efac:TenderLot>
+                                    <cbc:ID schemeName="Lot">LOT-0003</cbc:ID>
+                                </efac:TenderLot>
+                            </efac:LotResult>
+                        </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
             </ext:UBLExtension>
@@ -80,29 +87,79 @@ def test_bt_142_lotresult_integration(tmp_path, setup_logging, temp_output_dir) 
 
     # Verify the results
     assert "awards" in result, "Expected 'awards' in result"
-    assert len(result["awards"]) == 1, f"Expected 1 award, got {len(result['awards'])}"
+    # Update expected number of awards to 3
+    assert len(result["awards"]) == 3, f"Expected 3 awards, got {len(result['awards'])}"
 
-    award = result["awards"][0]
-    assert award["id"] == "RES-0001", f"Expected award id 'RES-0001', got {award['id']}"
-    assert (
-        award["status"] == "active"
-    ), f"Expected status 'active', got {award['status']}"
-    assert (
-        award["statusDetails"] == "At least one winner was chosen."
-    ), "Unexpected statusDetails"
-    assert award["relatedLots"] == [
-        "LOT-0001"
-    ], f"Expected relatedLots ['LOT-0001'], got {award['relatedLots']}"
+    # Test for selec-w (winner chosen)
+    selec_w_award = next((a for a in result["awards"] if a["id"] == "RES-0001"), None)
+    assert selec_w_award is not None, "Missing award with ID RES-0001"
+    assert selec_w_award["status"] == "active", f"Expected status 'active', got {selec_w_award['status']}"
+    assert selec_w_award["statusDetails"] == "At least one winner was chosen.", "Unexpected statusDetails"
+    assert selec_w_award["relatedLots"] == ["LOT-0001"], f"Expected relatedLots ['LOT-0001'], got {selec_w_award['relatedLots']}"
 
+    # Test for clos-nw (no winner, closed)
+    clos_nw_award = next((a for a in result["awards"] if a["id"] == "RES-0003"), None)
+    assert clos_nw_award is not None, "Missing award with ID RES-0003"
+    assert clos_nw_award["status"] == "unsuccessful", f"Expected status 'unsuccessful', got {clos_nw_award['status']}"
+    assert clos_nw_award["statusDetails"] == "No winner was chosen and the competition is closed.", "Unexpected statusDetails"
+    assert clos_nw_award["relatedLots"] == ["LOT-0003"], f"Expected relatedLots ['LOT-0003'], got {clos_nw_award['relatedLots']}"
+
+    # Test for open-nw (ongoing)
     assert "tender" in result, "Expected 'tender' in result"
     assert "lots" in result["tender"], "Expected 'lots' in tender"
-    assert (
-        len(result["tender"]["lots"]) == 1
-    ), f"Expected 1 lot, got {len(result['tender']['lots'])}"
+    assert len(result["tender"]["lots"]) == 1, f"Expected 1 lot, got {len(result['tender']['lots'])}"
 
     lot = result["tender"]["lots"][0]
     assert lot["id"] == "LOT-0002", f"Expected lot id 'LOT-0002', got {lot['id']}"
     assert lot["status"] == "active", f"Expected status 'active', got {lot['status']}"
+
+
+def test_bt_142_parse_winner_chosen():
+    """Unit test for parse_winner_chosen function."""
+    from src.ted_and_doffin_to_ocds.converters.eforms.bt_142_lotresult import parse_winner_chosen
+
+    # Add all required namespaces to fix parsing error
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <root xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+          xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
+        <efac:NoticeResult>
+            <efac:LotResult>
+                <cbc:ID schemeName="result">RES-0001</cbc:ID>
+                <cbc:TenderResultCode listName="winner-selection-status">selec-w</cbc:TenderResultCode>
+                <efac:TenderLot>
+                    <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+                </efac:TenderLot>
+            </efac:LotResult>
+        </efac:NoticeResult>
+    </root>
+    """
+    
+    result = parse_winner_chosen(xml_content)
+    
+    assert result is not None
+    assert len(result["awards"]) == 1
+    assert result["awards"][0]["status"] == "active"
+    assert result["awards"][0]["id"] == "RES-0001"
+    
+    # Test with clos-nw status
+    xml_content = xml_content.replace("selec-w", "clos-nw")
+    result = parse_winner_chosen(xml_content)
+    
+    assert result is not None
+    assert len(result["awards"]) == 1
+    assert result["awards"][0]["status"] == "unsuccessful"
+    
+    # Test with open-nw status
+    xml_content = xml_content.replace("clos-nw", "open-nw")
+    result = parse_winner_chosen(xml_content)
+    
+    assert result is not None
+    assert len(result["tender"]["lots"]) == 1
+    assert result["tender"]["lots"][0]["status"] == "active"
+    
+    # Test with empty XML
+    result = parse_winner_chosen("<root></root>")
+    assert result is None
 
 
 if __name__ == "__main__":
