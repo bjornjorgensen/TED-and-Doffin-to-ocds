@@ -13,7 +13,7 @@ def parse_part_title(xml_content: str | bytes) -> dict[str, Any] | None:
         xml_content (Union[str, bytes]): The XML content to parse, either as string or bytes
 
     Returns:
-        Optional[Dict[str, Any]]: Dictionary containing tender title,
+        Optional[Dict[str, Any]]: Dictionary containing tender title with language info,
                                  or None if no valid data is found
 
     """
@@ -31,13 +31,23 @@ def parse_part_title(xml_content: str | bytes) -> dict[str, Any] | None:
 
     result = {"tender": {}}
 
-    part_title = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cbc:Name/text()",
+    # Use the exact XPath provided in the specification
+    part_title_elements = root.xpath(
+        "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cbc:Name",
         namespaces=namespaces,
     )
 
-    if part_title:
-        result["tender"]["title"] = part_title[0]
+    if part_title_elements:
+        title_element = part_title_elements[0]
+        title_text = title_element.text
+        language_id = title_element.get("languageID")
+
+        # Store the title text
+        result["tender"]["title"] = title_text
+
+        # If language is specified, store it in the result
+        if language_id:
+            result["tender"]["titleLanguage"] = language_id
 
     return result if "title" in result["tender"] else None
 
@@ -55,4 +65,12 @@ def merge_part_title(
     if not part_title_data:
         return
 
-    release_json.setdefault("tender", {})["title"] = part_title_data["tender"]["title"]
+    # Ensure tender section exists
+    tender = release_json.setdefault("tender", {})
+
+    # Merge the title
+    tender["title"] = part_title_data["tender"]["title"]
+
+    # Merge the language info if present
+    if "titleLanguage" in part_title_data["tender"]:
+        tender["titleLanguage"] = part_title_data["tender"]["titleLanguage"]
