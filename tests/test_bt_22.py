@@ -61,8 +61,6 @@ def test_bt_22_lot_integration(tmp_path, setup_logging, temp_output_dir) -> None
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
 
-    # logger.info("Test result: %s", json.dumps(result, indent=2) # Logging disabled)
-
     # Verify the results
     assert "tender" in result
     assert "lots" in result["tender"]
@@ -72,16 +70,14 @@ def test_bt_22_lot_integration(tmp_path, setup_logging, temp_output_dir) -> None
     # Check BT-22 implementation
     assert lot["id"] == "LOT-0000"
     assert "identifiers" in lot
-    assert isinstance(lot["identifiers"], dict)
-    assert lot["identifiers"]["id"] == "1"
-    assert lot["identifiers"]["scheme"] == "internal"
+    assert isinstance(lot["identifiers"], list)
+    assert len(lot["identifiers"]) == 1
+    assert lot["identifiers"][0]["id"] == "1"
+    assert lot["identifiers"][0]["scheme"] == "internal"
 
-    # Check that other fields are present (but don't assert their values)
+    # Check that other fields are present
     assert "title" in lot
     assert "description" in lot
-    # Note: The following fields may or may not be present, depending on other implementations
-    # We're not asserting their presence or values in this test
-    # "awardCriteria", "mainProcurementCategory", "items", "reviewDetails", "coveredBy", "techniques"
 
 
 if __name__ == "__main__":
