@@ -1,7 +1,7 @@
 {
   "id": "2023-674343",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2d6eb73f-12d7-4ba9-8dbf-3f28d7385956",
+  "ocid": "ocds-abcd1234-e6e87219-848a-4ae0-be41-785b7f96b920",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -136,10 +136,10 @@
         "email": "riik@kongsvinger.kommune.no"
       },
       "roles": [
-        "buyer",
-        "leadBuyer",
         "wholesaleBuyer",
-        "processContactPoint"
+        "buyer",
+        "processContactPoint",
+        "leadBuyer"
       ],
       "address": {
         "streetAddress": "Rådhusplassen 3",

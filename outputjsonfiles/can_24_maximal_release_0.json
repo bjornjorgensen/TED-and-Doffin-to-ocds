@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a24cadd0-f903-4324-bf63-c002d179804e",
+  "ocid": "ocds-abcd1234-efede91c-3fc8-49bb-8771-3b395332d01e",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -713,9 +713,9 @@
         "listedOnRegulatedMarket": false
       },
       "roles": [
-        "tenderer",
+        "supplier",
         "leadTenderer",
-        "supplier"
+        "tenderer"
       ],
       "beneficialOwners": [
         {
@@ -763,8 +763,8 @@
         "listedOnRegulatedMarket": false
       },
       "roles": [
-        "tenderer",
-        "supplier"
+        "supplier",
+        "tenderer"
       ],
       "beneficialOwners": [
         {
@@ -1038,6 +1038,40 @@
   "bids": {
     "details": [
       {
+        "id": "TEN-0001",
+        "subcontracting": {
+          "value": {
+            "amount": 9999999.99,
+            "currency": "EUR"
+          },
+          "description": "Subcontracting Description ---",
+          "minimumPercentage": 0.3,
+          "maximumPercentage": 0.3,
+          "subcontracts": [
+            {
+              "id": "1",
+              "subcontractor": {
+                "id": "ORG-0010"
+              },
+              "mainContractors": [
+                {
+                  "id": "ORG-0008"
+                }
+              ]
+            }
+          ]
+        },
+        "hasSubcontracting": true,
+        "tenderers": [
+          {
+            "id": "ORG-0008"
+          },
+          {
+            "id": "ORG-0009"
+          }
+        ]
+      },
+      {
         "id": "TEN-0002",
         "relatedLots": [
           "LOT-0001",
@@ -1085,40 +1119,6 @@
         "tenderers": [
           {
             "id": "ORG-0011"
-          }
-        ]
-      },
-      {
-        "id": "TEN-0001",
-        "subcontracting": {
-          "value": {
-            "amount": 9999999.99,
-            "currency": "EUR"
-          },
-          "description": "Subcontracting Description ---",
-          "minimumPercentage": 0.3,
-          "maximumPercentage": 0.3,
-          "subcontracts": [
-            {
-              "id": "1",
-              "subcontractor": {
-                "id": "ORG-0010"
-              },
-              "mainContractors": [
-                {
-                  "id": "ORG-0008"
-                }
-              ]
-            }
-          ]
-        },
-        "hasSubcontracting": true,
-        "tenderers": [
-          {
-            "id": "ORG-0008"
-          },
-          {
-            "id": "ORG-0009"
           }
         ]
       }

@@ -1,7 +1,7 @@
 {
   "id": "2023-649037",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c5f9219f-b413-41c4-8541-83703d746fbf",
+  "ocid": "ocds-abcd1234-e1d0e136-1e2d-408e-ad68-72f1732689e7",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -177,8 +177,8 @@
         "email": "post@sykehusinnkjop.no"
       },
       "roles": [
-        "buyer",
         "wholesaleBuyer",
+        "buyer",
         "processContactPoint"
       ],
       "address": {
