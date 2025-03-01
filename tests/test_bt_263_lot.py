@@ -33,7 +33,7 @@ def sample_xml():
                     <cbc:ItemClassificationCode listName="CPV">15311200</cbc:ItemClassificationCode>
                 </cac:AdditionalCommodityClassification>
                 <cac:AdditionalCommodityClassification>
-                    <cbc:ItemClassificationCode listName="CPV">15311300</cbc:ItemClassificationCode>
+                    <cbc:ItemClassificationCode>15311300</cbc:ItemClassificationCode>
                 </cac:AdditionalCommodityClassification>
             </cac:ProcurementProject>
         </cac:ProcurementProjectLot>
@@ -137,19 +137,23 @@ def test_bt_263_lot_integration(tmp_path, temp_output_dir) -> None:
 
 def test_parse_additional_classification_code_single_lot(sample_xml):
     result = parse_additional_classification_code(sample_xml)
-    assert (
-        result is not None
-    ), "Expected result from parse_additional_classification_code"
+    assert result is not None
     assert "tender" in result
     assert "items" in result["tender"]
     assert len(result["tender"]["items"]) == 1
+    
     item = result["tender"]["items"][0]
     assert "additionalClassifications" in item
     classifications = item["additionalClassifications"]
     assert len(classifications) == 2
-    for classification in classifications:
-        assert "scheme" in classification
-        assert "id" in classification
+    
+    # Check that classifications with listName have scheme
+    schemes = [c.get("scheme") for c in classifications]
+    ids = [c["id"] for c in classifications]
+    
+    assert "CPV" in schemes, "Expected CPV scheme in classifications"
+    assert None in schemes, "Expected classification without scheme"
+    assert set(ids) == {"15311200", "15311300"}
 
 
 def test_parse_additional_classification_code_multiple_lots(sample_xml_multiple_lots):

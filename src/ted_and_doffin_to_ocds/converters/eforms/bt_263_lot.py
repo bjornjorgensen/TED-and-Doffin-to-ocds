@@ -43,24 +43,31 @@ def parse_additional_classification_code(
     )
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        codes = lot.xpath(
-            "cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode/text()",
+        classification_nodes = lot.xpath(
+            "cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode",
             namespaces=namespaces,
         )
 
-        if codes:
+        if classification_nodes:
             item = {
                 "id": str(len(result["tender"]["items"]) + 1),
                 "additionalClassifications": [],
                 "relatedLot": lot_id,
             }
 
-            # Add unique classification IDs
+            # Add unique classification IDs with schemes
             added_codes = set()
-            for code in codes:
-                if code not in added_codes:
-                    item["additionalClassifications"].append({"id": code})
-                    added_codes.add(code)
+            for node in classification_nodes:
+                code = node.text
+                scheme = (
+                    node.get("listName", "").upper() if node.get("listName") else None
+                )
+                if code and (code, scheme) not in added_codes:
+                    class_dict = {"id": code}
+                    if scheme:
+                        class_dict["scheme"] = scheme
+                    item["additionalClassifications"].append(class_dict)
+                    added_codes.add((code, scheme))
 
             if item["additionalClassifications"]:
                 result["tender"]["items"].append(item)
@@ -70,14 +77,15 @@ def parse_additional_classification_code(
 
 def _create_classification(
     scheme: str | None = None, id_value: str | None = None
-) -> dict[str, str]:
+) -> dict[str, str] | None:
     """Create a standardized classification dictionary with consistent field order."""
-    result = {}
+    if not id_value:  # If no ID is provided, return None
+        return None
+
+    result = {"id": id_value}
     if scheme:
         result["scheme"] = scheme
-    if id_value:
-        result["id"] = id_value
-    return result if result else None
+    return result
 
 
 def merge_additional_classification_code(
