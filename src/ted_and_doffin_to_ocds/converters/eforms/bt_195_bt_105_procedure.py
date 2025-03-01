@@ -54,7 +54,7 @@ def parse_bt195_bt105_unpublished_identifier(
         namespaces=namespaces,
     )
     field_identifier = root.xpath(
-        "/*/cac:TenderingProcess/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
+        "/*/cac:TenderingProcess/cac:ProcessJustification/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
         "/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-typ']"
         "/efbc:FieldIdentifierCode/text()",
         namespaces=namespaces,
