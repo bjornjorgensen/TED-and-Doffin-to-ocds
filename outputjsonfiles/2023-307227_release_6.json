@@ -1,7 +1,7 @@
 {
   "id": "2023-307227",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2bc3f70c-2b61-428e-9a84-9b8fff4c04e5",
+  "ocid": "ocds-abcd1234-6c3c5c1e-afba-4243-98e9-192b4795f2ca",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -22,6 +22,7 @@
       }
     ],
     "title": "Bærekraftig møtemat til OsloMet",
+    "titleLanguage": "NOB",
     "identifiers": [
       {
         "id": "23/07012",

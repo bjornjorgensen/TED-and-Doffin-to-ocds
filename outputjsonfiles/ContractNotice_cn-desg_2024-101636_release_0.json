@@ -1,7 +1,7 @@
 {
   "id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f1d92592-dd54-489e-8e56-c6f53bc5a53d",
+  "ocid": "ocds-abcd1234-b914d8ee-b79b-4469-8f57-8054b76a2cb2",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -171,8 +171,8 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "45232430"
+            "id": "45232430",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0000",
@@ -344,9 +344,9 @@
       "roles": [
         "buyer",
         "reviewContactPoint",
+        "evaluationBody",
         "processContactPoint",
-        "submissionReceiptBody",
-        "evaluationBody"
+        "submissionReceiptBody"
       ],
       "address": {
         "streetAddress": "Kauffelds plass 1",

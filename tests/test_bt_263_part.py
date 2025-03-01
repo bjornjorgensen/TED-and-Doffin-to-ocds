@@ -33,7 +33,7 @@ def sample_xml():
     """
 
 def test_parse_additional_classification_code(sample_xml):
-    result = parse_additional_classification_code(sample_xml)
+    result = parse_additional_classification_code_part(sample_xml)
     assert result is not None
     assert "tender" in result
     assert "items" in result["tender"]
@@ -55,7 +55,7 @@ def test_parse_additional_classification_code_no_data():
         </cac:ProcurementProject>
     </ContractNotice>
     """
-    result = parse_additional_classification_code(xml_content)
+    result = parse_additional_classification_code_part(xml_content)
     assert result is None
 
 def test_merge_additional_classification_code():
@@ -79,7 +79,7 @@ def test_merge_additional_classification_code():
             ]
         }
     }
-    merge_additional_classification_code(release_json, additional_classification_data)
+    merge_additional_classification_code_part(release_json, additional_classification_data)
     classifications = release_json["tender"]["items"][0]["additionalClassifications"]
     assert len(classifications) == 2
     ids = {c["id"] for c in classifications}
@@ -96,7 +96,7 @@ def test_merge_additional_classification_code_none_data():
             ]
         }
     }
-    merge_additional_classification_code(release_json, None)
+    merge_additional_classification_code_part(release_json, None)
     assert len(release_json["tender"]["items"]) == 1
     classifications = release_json["tender"]["items"][0]["additionalClassifications"]
     assert len(classifications) == 1

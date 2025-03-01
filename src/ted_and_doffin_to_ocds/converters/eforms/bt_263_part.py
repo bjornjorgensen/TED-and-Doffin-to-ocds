@@ -27,24 +27,27 @@ def parse_additional_classification_code_part(
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
     }
 
-    # Get all classification codes
-    codes = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode/text()",
+    # Get all classification code elements
+    code_elements = root.xpath(
+        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode",
         namespaces=namespaces,
     )
 
-    if codes:
+    if code_elements:
         item = {
             "id": "1",  # Single item for part
             "additionalClassifications": [],
         }
 
-        # Add unique classification IDs
+        # Add unique classification IDs with schemes
         added_codes = set()
-        for code in codes:
-            if code not in added_codes:
-                item["additionalClassifications"].append({"id": code})
-                added_codes.add(code)
+        for element in code_elements:
+            code = element.text
+            scheme = element.get("listName", "CPV")  # Default to CPV if not specified
+
+            if code and (code, scheme) not in added_codes:
+                item["additionalClassifications"].append({"id": code, "scheme": scheme})
+                added_codes.add((code, scheme))
 
         return {"tender": {"items": [item]}}
 

@@ -1,7 +1,7 @@
 {
   "id": "2023-600143",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9002d06e-e22d-4e1a-804d-9b79708f86ef",
+  "ocid": "ocds-abcd1234-02e4a8e0-6d77-4e1a-abc4-f625e410a98a",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -69,8 +69,8 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "45000000"
+            "id": "45000000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0000",
@@ -127,8 +127,8 @@
         "email": "therese.borge@tonsberg.kommune.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "postboks 2410",

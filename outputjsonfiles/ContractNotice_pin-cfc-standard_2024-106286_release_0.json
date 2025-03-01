@@ -1,7 +1,7 @@
 {
   "id": "74f9d169-452b-4a99-b8d2-f54c3c71e163",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1385be24-d7e4-429f-a3a0-97492d21883d",
+  "ocid": "ocds-abcd1234-18b4413f-8de1-40cf-a9e2-c02cb2a41c05",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -91,8 +91,8 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "43320000"
+            "id": "43320000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0000",
@@ -160,8 +160,8 @@
         "faxNumber": "+47 75555018"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "reviewContactPoint"
       ],
       "address": {

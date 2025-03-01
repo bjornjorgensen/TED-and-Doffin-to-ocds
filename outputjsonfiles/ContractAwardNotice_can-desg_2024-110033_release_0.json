@@ -1,7 +1,7 @@
 {
   "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a0c93927-d715-4c23-9223-5adfd018719d",
+  "ocid": "ocds-abcd1234-ac19c4e9-2708-4d4c-93be-d5e8aab701a4",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -53,24 +53,24 @@
         },
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "71200000"
+            "id": "71200000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "71210000"
+            "id": "71210000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "71240000"
+            "id": "71240000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "71400000"
+            "id": "71400000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "71500000"
+            "id": "71500000",
+            "scheme": "CPV"
           }
         ],
         "classification": {
@@ -152,10 +152,10 @@
         "country": "NO"
       },
       "roles": [
-        "funder",
+        "buyer",
         "payer",
         "processContactPoint",
-        "buyer"
+        "funder"
       ]
     },
     {

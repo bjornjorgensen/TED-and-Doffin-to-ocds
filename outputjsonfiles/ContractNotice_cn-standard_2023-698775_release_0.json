@@ -1,7 +1,7 @@
 {
   "id": "2023-698775",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2bc39da1-de1e-41d8-a76b-88b68f972cec",
+  "ocid": "ocds-abcd1234-d9758978-8491-4803-be84-65fea4b7fb09",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -111,8 +111,8 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "66510000"
+            "id": "66510000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0001",
@@ -167,9 +167,9 @@
         "email": "aase@waco.no"
       },
       "roles": [
+        "buyer",
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Meierigata 17",

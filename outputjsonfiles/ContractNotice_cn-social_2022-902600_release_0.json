@@ -1,7 +1,7 @@
 {
   "id": "2022-902600",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-3d25554d-f198-4a5a-8119-3e2ac713c400",
+  "ocid": "ocds-abcd1234-f7fb37b8-205f-43ad-aab3-0346d0acfa48",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -70,16 +70,16 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "85000000"
+            "id": "85000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "85100000"
+            "id": "85100000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "85131000"
+            "id": "85131000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0000",
@@ -145,9 +145,9 @@
         "country": "NO"
       },
       "roles": [
+        "buyer",
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "processContactPoint"
       ]
     },
     {

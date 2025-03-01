@@ -1,7 +1,7 @@
 {
   "id": "2023-653367",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-53f386f7-46d8-4c99-9ee1-d7c3b7883886",
+  "ocid": "ocds-abcd1234-971f7098-cb5f-402b-9734-d429b28cc093",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -422,12 +422,12 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "45100000"
+            "id": "45100000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45110000"
+            "id": "45110000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-E60",
@@ -445,16 +445,16 @@
         "id": "2",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "44212400"
+            "id": "44212400",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45100000"
+            "id": "45100000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45221240"
+            "id": "45221240",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-E61",
@@ -472,12 +472,12 @@
         "id": "3",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "45100000"
+            "id": "45100000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45110000"
+            "id": "45110000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-E63",
@@ -495,20 +495,20 @@
         "id": "4",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "45100000"
+            "id": "45100000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45112730"
+            "id": "45112730",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45231111"
+            "id": "45231111",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45233000"
+            "id": "45233000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-E64",
@@ -526,28 +526,28 @@
         "id": "5",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "44212400"
+            "id": "44212400",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45000000"
+            "id": "45000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45112730"
+            "id": "45112730",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45220000"
+            "id": "45220000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45262300"
+            "id": "45262300",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45332000"
+            "id": "45332000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-E11",
@@ -565,20 +565,20 @@
         "id": "6",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "45000000"
+            "id": "45000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45112730"
+            "id": "45112730",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45220000"
+            "id": "45220000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45221240"
+            "id": "45221240",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-E12",
@@ -596,28 +596,28 @@
         "id": "7",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "31710000"
+            "id": "31710000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "42520000"
+            "id": "42520000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45000000"
+            "id": "45000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45210000"
+            "id": "45210000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45300000"
+            "id": "45300000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45330000"
+            "id": "45330000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-E31",
@@ -635,8 +635,8 @@
         "id": "8",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "34632000"
+            "id": "34632000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-E41",
@@ -654,8 +654,8 @@
         "id": "9",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "32000000"
+            "id": "32000000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-E42",
@@ -673,16 +673,16 @@
         "id": "10",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "31321100"
+            "id": "31321100",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45310000"
+            "id": "45310000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45315300"
+            "id": "45315300",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-E43",
@@ -700,16 +700,16 @@
         "id": "11",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "31153000"
+            "id": "31153000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "31170000"
+            "id": "31170000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "31200000"
+            "id": "31200000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-E44",
@@ -727,20 +727,20 @@
         "id": "12",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "31500000"
+            "id": "31500000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "31682000"
+            "id": "31682000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "42520000"
+            "id": "42520000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45315300"
+            "id": "45315300",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-E45",
@@ -758,16 +758,16 @@
         "id": "13",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "34923000"
+            "id": "34923000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "34996100"
+            "id": "34996100",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45316212"
+            "id": "45316212",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-E46",
@@ -785,12 +785,12 @@
         "id": "14",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "42416100"
+            "id": "42416100",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45313100"
+            "id": "45313100",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-E47",
@@ -808,12 +808,12 @@
         "id": "15",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "42416400"
+            "id": "42416400",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45313200"
+            "id": "45313200",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-E48",
@@ -831,12 +831,12 @@
         "id": "16",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "34946100"
+            "id": "34946100",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45234116"
+            "id": "45234116",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-E51",
@@ -854,8 +854,8 @@
         "id": "17",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "34946220"
+            "id": "34946220",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-E52",
@@ -873,16 +873,16 @@
         "id": "18",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "45210000"
+            "id": "45210000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45330000"
+            "id": "45330000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45441000"
+            "id": "45441000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-E33",
@@ -926,8 +926,8 @@
         "buyerProfile": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "postboks 7900",

@@ -1,7 +1,7 @@
 {
   "id": "2023-661116",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8a685c0b-03f4-486f-8320-bc142be47b65",
+  "ocid": "ocds-abcd1234-2318adf8-3a22-4cbb-bf9f-38b48675b482",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -46,140 +46,140 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "90512000"
+            "id": "90512000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "34144510"
+            "id": "34144510",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "44613700"
+            "id": "44613700",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "79723000"
+            "id": "79723000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "90500000"
+            "id": "90500000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "90510000"
+            "id": "90510000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "90513000"
+            "id": "90513000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "90513300"
+            "id": "90513300",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "72266000"
+            "id": "72266000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "73220000"
+            "id": "73220000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "34100000"
+            "id": "34100000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "34140000"
+            "id": "34140000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "34144000"
+            "id": "34144000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "34144500"
+            "id": "34144500",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "43261000"
+            "id": "43261000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45210000"
+            "id": "45210000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "71530000"
+            "id": "71530000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "71541000"
+            "id": "71541000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "48000000"
+            "id": "48000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "48100000"
+            "id": "48100000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "72212100"
+            "id": "72212100",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "64212100"
+            "id": "64212100",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45255400"
+            "id": "45255400",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "22457000"
+            "id": "22457000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "42961100"
+            "id": "42961100",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "42417200"
+            "id": "42417200",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "60000000"
+            "id": "60000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "09331000"
+            "id": "09331000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "50118200"
+            "id": "50118200",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "39711124"
+            "id": "39711124",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "45331200"
+            "id": "45331200",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "71321400"
+            "id": "71321400",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "50750000"
+            "id": "50750000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "31625200"
+            "id": "31625200",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0000",
@@ -231,8 +231,8 @@
         "email": "jeanette.berglund@trv.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Heggstadmoen 53",

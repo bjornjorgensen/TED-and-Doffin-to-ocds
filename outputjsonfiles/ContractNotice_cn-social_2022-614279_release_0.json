@@ -1,7 +1,7 @@
 {
   "id": "2022-614279",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-fefa191a-91c1-444f-bb06-a8901665d140",
+  "ocid": "ocds-abcd1234-6e071e5b-e076-4505-bccc-c02384c3a4c4",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -68,12 +68,12 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "85312310"
+            "id": "85312310",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "85312320"
+            "id": "85312320",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0000",
@@ -128,8 +128,8 @@
         "email": "anita.hellehaven@nav.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Postboks 354",

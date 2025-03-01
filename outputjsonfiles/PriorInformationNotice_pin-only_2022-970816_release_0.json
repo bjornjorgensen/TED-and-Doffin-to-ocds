@@ -1,7 +1,7 @@
 {
   "id": "2022-970816",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e5afd42d-1eb3-4ce1-91e1-67e89401ed17",
+  "ocid": "ocds-abcd1234-bb190c00-1b7c-4ecc-ae92-dae48ec5ab2f",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -12,6 +12,7 @@
     "status": "planned",
     "id": "PAR-0000",
     "title": "Intensjonskunngjøring - Spillsimulering",
+    "titleLanguage": "NOB",
     "identifiers": [
       {
         "id": "2022/50851",
@@ -29,10 +30,12 @@
             "id": "48190000"
           },
           {
-            "id": "48931000"
+            "id": "48931000",
+            "scheme": "cpv"
           },
           {
-            "id": "72212190"
+            "id": "72212190",
+            "scheme": "cpv"
           }
         ],
         "classification": {

@@ -1,7 +1,7 @@
 {
   "id": "aa382761-89ef-4162-9dc5-74f12a6f2a21",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6773d86a-b331-415d-b7f8-b7e7b2226ade",
+  "ocid": "ocds-abcd1234-992b7dcd-5422-40cb-b726-0c3e4c432238",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -457,12 +457,12 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "85312310"
+            "id": "85312310",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "85312320"
+            "id": "85312320",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0001",
@@ -483,12 +483,12 @@
         "id": "2",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "85312310"
+            "id": "85312310",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "85312320"
+            "id": "85312320",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0002",
@@ -509,12 +509,12 @@
         "id": "3",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "85312310"
+            "id": "85312310",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "85312320"
+            "id": "85312320",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0003",
@@ -535,12 +535,12 @@
         "id": "4",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "85312310"
+            "id": "85312310",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "85312320"
+            "id": "85312320",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0004",
@@ -561,12 +561,12 @@
         "id": "5",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "85312310"
+            "id": "85312310",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "85312320"
+            "id": "85312320",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0005",
@@ -587,12 +587,12 @@
         "id": "6",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "85312310"
+            "id": "85312310",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "85312320"
+            "id": "85312320",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0006",
@@ -613,12 +613,12 @@
         "id": "7",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "85312310"
+            "id": "85312310",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "85312320"
+            "id": "85312320",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0007",
@@ -639,12 +639,12 @@
         "id": "8",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "85312310"
+            "id": "85312310",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "85312320"
+            "id": "85312320",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0008",

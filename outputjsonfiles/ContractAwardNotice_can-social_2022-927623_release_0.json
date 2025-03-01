@@ -1,7 +1,7 @@
 {
   "id": "2022-927623",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-80ad6384-aac1-42b4-980e-fc433d810bda",
+  "ocid": "ocds-abcd1234-a8b13ac2-4725-4e2b-8e5d-eff00decca66",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -61,8 +61,8 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "79710000"
+            "id": "79710000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0001",
@@ -80,8 +80,8 @@
         "id": "2",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "79710000"
+            "id": "79710000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0002",

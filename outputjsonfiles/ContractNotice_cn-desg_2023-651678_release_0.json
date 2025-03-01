@@ -1,7 +1,7 @@
 {
   "id": "2023-651678",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-51320660-2df3-48f9-938d-bc77c04a13af",
+  "ocid": "ocds-abcd1234-e24bf521-9f2e-4245-b539-9a2ffca0cb16",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -74,12 +74,12 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "71000000"
+            "id": "71000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "71200000"
+            "id": "71200000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0000",
@@ -136,9 +136,9 @@
         "email": "vidar@pilar-br.no"
       },
       "roles": [
+        "buyer",
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Nesgata 11",

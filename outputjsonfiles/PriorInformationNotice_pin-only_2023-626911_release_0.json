@@ -1,7 +1,7 @@
 {
   "id": "2023-626911",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-cb9c9673-cd38-48fe-81bf-0acd2ff6b47d",
+  "ocid": "ocds-abcd1234-88d7db27-121b-4117-b4f9-7c734a9be1cc",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -15,6 +15,7 @@
     ],
     "id": "PAR-0000",
     "title": "Markedsdialog - Anskaffelse av vognskjul mm. Skjetlein VGS",
+    "titleLanguage": "NOB",
     "identifiers": [
       {
         "id": "202316966",
@@ -32,7 +33,8 @@
             "id": "45210000"
           },
           {
-            "id": "45213240"
+            "id": "45213240",
+            "scheme": "cpv"
           }
         ],
         "classification": {

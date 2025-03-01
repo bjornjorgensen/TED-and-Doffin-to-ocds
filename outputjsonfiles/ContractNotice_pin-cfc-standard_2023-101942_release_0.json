@@ -1,7 +1,7 @@
 {
   "id": "9282de2c-8ca6-4b88-84ce-dd8734449a83",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-09e892ed-a0e3-461d-9096-02c8015241c4",
+  "ocid": "ocds-abcd1234-2c1fa3ce-1d98-44a2-8a6f-3adff741f1db",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -69,12 +69,12 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "33100000"
+            "id": "33100000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "33150000"
+            "id": "33150000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0000",
@@ -137,8 +137,8 @@
         "email": "post@sykehusinnkjop.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Postboks 40",

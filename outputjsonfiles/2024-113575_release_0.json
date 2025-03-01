@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-0567958a-60a7-4ef3-b368-e05bcb3f1458",
+  "ocid": "ocds-abcd1234-8d093ebb-fe4b-405d-9a80-d544ae49e0cd",
   "tender": {
     "legalBasis": {
       "id": "FOA § 13-4 bokstav b annet punkt; «konkurranse er umulig av tekniske årsaker».",
@@ -70,28 +70,28 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "33124110"
+            "id": "33124110",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "48313100"
+            "id": "48313100",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "48328000"
+            "id": "48328000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "48515000"
+            "id": "48515000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "48814400"
+            "id": "48814400",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "72212180"
+            "id": "72212180",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0000",
@@ -204,9 +204,9 @@
         "country": "NO"
       },
       "roles": [
-        "funder",
+        "buyer",
         "payer",
-        "buyer"
+        "funder"
       ]
     },
     {
@@ -233,9 +233,9 @@
         "country": "NO"
       },
       "roles": [
-        "leadBuyer",
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
+        "leadBuyer",
         "reviewContactPoint"
       ]
     },

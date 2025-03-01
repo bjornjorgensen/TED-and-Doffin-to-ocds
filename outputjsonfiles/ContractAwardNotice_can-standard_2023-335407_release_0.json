@@ -1,7 +1,7 @@
 {
   "id": "2023-335407",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1ab71fac-c350-476c-b943-cdb0ecffb2dd",
+  "ocid": "ocds-abcd1234-9aad89a5-16f4-4902-b2a3-74d1269dae64",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -68,8 +68,8 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "79417000"
+            "id": "79417000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0000",

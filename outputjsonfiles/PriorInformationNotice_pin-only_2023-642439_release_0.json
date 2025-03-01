@@ -1,7 +1,7 @@
 {
   "id": "2023-642439",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-046d9d4e-3eee-4308-8760-64d0368db541",
+  "ocid": "ocds-abcd1234-0ccb1be6-b66a-479f-9db6-17d0228eef66",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -12,6 +12,7 @@
     "status": "planned",
     "id": "PAR-0000",
     "title": "Invitasjon til markedsdialog om «Støttemur mot ring 3» i prosjekt Nye Aker",
+    "titleLanguage": "NOB",
     "mainProcurementCategory": "works",
     "description": "Helse Sør-Øst RHF sin prosjektorganisasjon for sykehusprosjektene i Oslo inviterer til markedsdialog om støttemur på tomten hvor Nye Aker sykehus skal bygges. Nye Aker skal settes i drift i 2031 med en stor, ny og fremtidsrettet bygningsmasse som skal gi et godt lokalsykehustilbud for de østlige bydeler i Oslo. Sykehuset skal også gi et godt tilbud til pasienter i psykisk helse og avhengighet for store deler av Oslo. Prosjektet Nye Aker innebærer en samlet utbygging som realiseres frem mot klinisk ibruktakelse i 2031 på om lag 188 000 m2 BTA.   Støttemuren har to funksjoner: støtte fremtidig terreng tilknyttet PHA sør som blir høyere enn dagens terreng, og fungere som fundament for støyskjerm langs Dag Hammarskjøldsvei. Ny støyskjerm inngår i entreprisen. Eksisterende støyskjerm skal rives. Se vedlagte dokument for mer informasjon og påmelding.",
     "items": [
@@ -23,7 +24,8 @@
             "id": "34928230"
           },
           {
-            "id": "45340000"
+            "id": "45340000",
+            "scheme": "cpv"
           }
         ],
         "classification": {

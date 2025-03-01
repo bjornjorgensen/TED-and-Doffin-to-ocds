@@ -1,7 +1,7 @@
 {
   "id": "2023-665410",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b178beb2-9088-4b27-a5b3-185a95b9b7d7",
+  "ocid": "ocds-abcd1234-485dc386-e21b-44a7-82e1-84ac2a6049f3",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -87,20 +87,20 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "71240000"
+            "id": "71240000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "71220000"
+            "id": "71220000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "71400000"
+            "id": "71400000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "71420000"
+            "id": "71420000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0000",
@@ -157,9 +157,9 @@
         "email": "sigmund.ulnes@larvik.kommune.no"
       },
       "roles": [
+        "buyer",
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Postboks 2020",

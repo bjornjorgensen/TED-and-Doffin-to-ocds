@@ -1,7 +1,7 @@
 {
   "id": "2023-629257",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4180f514-5694-4691-a477-fa45eaa7313e",
+  "ocid": "ocds-abcd1234-143413fa-9ee5-485d-8082-847d1c13b9b2",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -112,12 +112,12 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "80400000"
+            "id": "80400000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "80590000"
+            "id": "80590000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0001",
@@ -135,12 +135,12 @@
         "id": "2",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "80400000"
+            "id": "80400000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "80590000"
+            "id": "80590000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0002",
@@ -198,8 +198,8 @@
         "email": "nav.tiltak.rogaland@nav.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Postboks 420",

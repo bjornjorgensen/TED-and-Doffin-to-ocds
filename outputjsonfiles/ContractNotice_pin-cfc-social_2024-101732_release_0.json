@@ -1,7 +1,7 @@
 {
   "id": "74f8c72a-5dcd-4a77-afda-6573ca30c8df",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-da930b1f-b3e4-4b34-b557-929f7b2f0c1d",
+  "ocid": "ocds-abcd1234-2848e166-2492-49cd-b369-39a1aa27347d",
   "tender": {
     "legalBasis": {
       "id": "Konsesjonsforskriften",
@@ -119,28 +119,28 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "85140000"
+            "id": "85140000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "85300000"
+            "id": "85300000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "85311200"
+            "id": "85311200",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "85311300"
+            "id": "85311300",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "85312400"
+            "id": "85312400",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "85323000"
+            "id": "85323000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0000",
@@ -362,9 +362,9 @@
         "country": "NO"
       },
       "roles": [
+        "buyer",
         "processContactPoint",
-        "leadBuyer",
-        "buyer"
+        "leadBuyer"
       ]
     },
     {

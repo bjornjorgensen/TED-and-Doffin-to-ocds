@@ -1,7 +1,7 @@
 {
   "id": "2023-604437",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e77a53f8-1d74-4248-93a0-32ac32d00c4d",
+  "ocid": "ocds-abcd1234-d01d6803-ada6-4314-aea7-ebea6a1d8c14",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -64,16 +64,16 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "35125000"
+            "id": "35125000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "35125300"
+            "id": "35125300",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "48000000"
+            "id": "48000000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0000",
@@ -125,9 +125,9 @@
         ]
       },
       "roles": [
+        "buyer",
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Økernveien 9",

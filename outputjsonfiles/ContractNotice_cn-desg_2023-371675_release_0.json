@@ -1,7 +1,7 @@
 {
   "id": "2023-371675",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-75fb2982-fbc5-4d82-bd34-813c5bc02fa8",
+  "ocid": "ocds-abcd1234-676702b2-9315-4c5b-9e66-30b7d07e0b87",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -73,20 +73,20 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "79000000"
+            "id": "79000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "79341400"
+            "id": "79341400",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "79810000"
+            "id": "79810000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "79811000"
+            "id": "79811000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0000",
@@ -143,9 +143,9 @@
         "email": "mhr@kulturtanken.no"
       },
       "roles": [
+        "buyer",
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Gullhaug Torg 2",

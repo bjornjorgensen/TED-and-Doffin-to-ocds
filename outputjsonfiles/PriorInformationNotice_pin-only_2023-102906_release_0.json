@@ -1,7 +1,7 @@
 {
   "id": "26cd2bbe-3527-43ab-ae19-ecb644fff706",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1f26b3d2-e989-429e-b564-013c6b904051",
+  "ocid": "ocds-abcd1234-9a9ce7b3-cba1-47d8-9e49-b886229eac38",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -26,6 +26,7 @@
       }
     ],
     "title": "VOIS - Invitasjon til markedsdialog - Diverse forbruksvarer",
+    "titleLanguage": "NOR",
     "identifiers": [
       {
         "id": "2023/46433",
@@ -43,31 +44,40 @@
             "id": "18424000"
           },
           {
-            "id": "18937100"
+            "id": "18937100",
+            "scheme": "cpv"
           },
           {
-            "id": "33760000"
+            "id": "33760000",
+            "scheme": "cpv"
           },
           {
-            "id": "39221130"
+            "id": "39221130",
+            "scheme": "cpv"
           },
           {
-            "id": "39222110"
+            "id": "39222110",
+            "scheme": "cpv"
           },
           {
-            "id": "39222120"
+            "id": "39222120",
+            "scheme": "cpv"
           },
           {
-            "id": "39224300"
+            "id": "39224300",
+            "scheme": "cpv"
           },
           {
-            "id": "39800000"
+            "id": "39800000",
+            "scheme": "cpv"
           },
           {
-            "id": "39830000"
+            "id": "39830000",
+            "scheme": "cpv"
           },
           {
-            "id": "39831240"
+            "id": "39831240",
+            "scheme": "cpv"
           }
         ],
         "classification": {

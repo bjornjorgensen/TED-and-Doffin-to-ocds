@@ -1,7 +1,7 @@
 {
   "id": "2023-620727",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6cdb9e36-dc59-4a6a-a7b4-c8449010b526",
+  "ocid": "ocds-abcd1234-fffc03ca-cf08-434a-9439-9110ba42a102",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -76,16 +76,16 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "31310000"
+            "id": "31310000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "39370000"
+            "id": "39370000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "71320000"
+            "id": "71320000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0000",
@@ -141,9 +141,9 @@
         ]
       },
       "roles": [
+        "buyer",
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Edv.Stormsveg 2",

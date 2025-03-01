@@ -1,7 +1,7 @@
 {
   "id": "1db209a3-6934-4d5f-bf78-2aa8a1f2453c",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c13c7744-cad3-4c2c-b754-4bacfd0cf4ff",
+  "ocid": "ocds-abcd1234-aac3b455-27d5-4d17-bd9b-ba934b90f11e",
   "tag": [
     "tender"
   ],
@@ -49,16 +49,16 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "73000000"
+            "id": "73000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "73210000"
+            "id": "73210000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "73220000"
+            "id": "73220000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0000",

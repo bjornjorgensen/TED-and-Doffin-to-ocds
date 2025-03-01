@@ -1,7 +1,7 @@
 {
   "id": "0e2b63aa-a91a-49c6-aa1c-386516ec2275",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1ff36591-cf4a-424c-a881-e545110e2578",
+  "ocid": "ocds-abcd1234-7dfc3c0b-357e-4941-aa5b-04fcde0fa439",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -25,6 +25,7 @@
       }
     ],
     "title": "Invitasjon til markedsdialog - Treningsutstyr til fysio- og ergoterapi Helse Midt-Norge",
+    "titleLanguage": "NOR",
     "identifiers": [
       {
         "id": "2023/724",

@@ -1,7 +1,7 @@
 {
   "id": "2023-631333",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-21ccbbd6-41aa-4e66-a9e8-ec5dfdd5d483",
+  "ocid": "ocds-abcd1234-5b046a22-ee85-46c8-8f02-991abf9d5d07",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -77,88 +77,88 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "50000000"
+            "id": "50000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "51000000"
+            "id": "51000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "55000000"
+            "id": "55000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "60000000"
+            "id": "60000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "63000000"
+            "id": "63000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "64000000"
+            "id": "64000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "65000000"
+            "id": "65000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "66000000"
+            "id": "66000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "70000000"
+            "id": "70000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "71000000"
+            "id": "71000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "72000000"
+            "id": "72000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "73000000"
+            "id": "73000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "75000000"
+            "id": "75000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "76000000"
+            "id": "76000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "77000000"
+            "id": "77000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "79000000"
+            "id": "79000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "80000000"
+            "id": "80000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "85000000"
+            "id": "85000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "90000000"
+            "id": "90000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "92000000"
+            "id": "92000000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "98000000"
+            "id": "98000000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0000",
@@ -204,9 +204,9 @@
         ]
       },
       "roles": [
+        "buyer",
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "P.O. Box 1817",

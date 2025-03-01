@@ -1,7 +1,7 @@
 {
   "id": "3580e3e0-275f-4489-9aab-b6f493790e00",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-910ef61a-0de8-473e-8269-2574f3d2b635",
+  "ocid": "ocds-abcd1234-5d1efd55-e77f-4237-93ea-3b45b28f99ad",
   "tender": {
     "legalBasis": {
       "id": "Forsyningsforskriften",
@@ -120,8 +120,8 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "31000000"
+            "id": "31000000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0000",
@@ -250,8 +250,8 @@
         "email": "finn-magne.eines@elmea.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Vorsetøyveien 31",

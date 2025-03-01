@@ -1,7 +1,7 @@
 {
   "id": "2023-696688",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d8d6c98a-3475-4669-af08-eafacefde5f0",
+  "ocid": "ocds-abcd1234-e5655231-07c3-41f4-807c-69656c422250",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -111,28 +111,28 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "71220000"
+            "id": "71220000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "71240000"
+            "id": "71240000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "71400000"
+            "id": "71400000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "71221000"
+            "id": "71221000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "71222000"
+            "id": "71222000",
+            "scheme": "CPV"
           },
           {
-            "scheme": "CPV",
-            "id": "71420000"
+            "id": "71420000",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0000",
@@ -189,9 +189,9 @@
         "email": "eierskap.postmottak@trondheim.kommune.no"
       },
       "roles": [
+        "buyer",
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Postboks 2300 Torgarden",

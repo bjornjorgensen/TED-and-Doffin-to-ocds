@@ -1,7 +1,7 @@
 {
   "id": "7d111d51-8042-402a-a234-50efe86d8f4f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c1badb90-0c76-4db6-aa76-2ffa54a8afbb",
+  "ocid": "ocds-abcd1234-71883d53-0697-4d5e-9622-b4d782cfd782",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -105,8 +105,8 @@
         "id": "1",
         "additionalClassifications": [
           {
-            "scheme": "CPV",
-            "id": "44221300"
+            "id": "44221300",
+            "scheme": "CPV"
           }
         ],
         "relatedLot": "LOT-0001",
@@ -189,8 +189,8 @@
         "email": "Kristian.von.Aphelen@posten.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Biskop Gunnerus' gate 14 A",
