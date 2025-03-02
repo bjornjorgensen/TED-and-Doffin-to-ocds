@@ -1,7 +1,7 @@
 {
   "id": "2022-394467",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-24cc0cea-1be5-4706-9abf-45f32a0e7a94",
+  "ocid": "ocds-abcd1234-35ab7557-2c4a-474a-8e59-a0b7eedbc2b1",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -124,9 +124,9 @@
         "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/2095"
       },
       "roles": [
-        "buyer",
         "submissionReceiptBody",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Postboks 4100",

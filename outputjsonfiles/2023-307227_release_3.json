@@ -1,7 +1,7 @@
 {
   "id": "2023-307227",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-dc48cc1b-1584-4012-8e57-fd1d2151563b",
+  "ocid": "ocds-abcd1234-da22d8c5-3225-4a74-95fd-12c464807c76",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -182,7 +182,8 @@
         "country": "NO"
       },
       "roles": [
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ]
     }
   ],

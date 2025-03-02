@@ -47,22 +47,30 @@ def test_opp_020_contract_integration(tmp_path, setup_logging, temp_output_dir) 
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
         <cbc:ID>notice-1</cbc:ID>
         <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
-        <efac:NoticeResult>
-            <efac:LotResult>
-                <efac:TenderLot>
-                    <cbc:ID schemeName="lot">LOT-0001</cbc:ID>
-                </efac:TenderLot>
-                <efac:SettledContract>
-                    <cbc:ID schemeName="contract">CON-0001</cbc:ID>
-                </efac:SettledContract>
-            </efac:LotResult>
-            <efac:SettledContract>
-                <cbc:ID schemeName="contract">CON-0001</cbc:ID>
-                <efac:DurationJustification>
-                    <efbc:ExtendedDurationIndicator>true</efbc:ExtendedDurationIndicator>
-                </efac:DurationJustification>
-            </efac:SettledContract>
-        </efac:NoticeResult>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotResult>
+                                <efac:TenderLot>
+                                    <cbc:ID schemeName="lot">LOT-0001</cbc:ID>
+                                </efac:TenderLot>
+                                <efac:SettledContract>
+                                    <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+                                </efac:SettledContract>
+                            </efac:LotResult>
+                            <efac:SettledContract>
+                                <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+                                <efac:DurationJustification>
+                                    <efbc:ExtendedDurationIndicator>true</efbc:ExtendedDurationIndicator>
+                                </efac:DurationJustification>
+                            </efac:SettledContract>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractAwardNotice>
     """
 
@@ -72,8 +80,6 @@ def test_opp_020_contract_integration(tmp_path, setup_logging, temp_output_dir) 
 
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-
-    # logger.info("Test result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     # Verify the results
     assert "tender" in result
@@ -100,22 +106,30 @@ def test_opp_020_contract_integration_false(
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
         <cbc:ID>notice-1</cbc:ID>
         <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
-        <efac:NoticeResult>
-            <efac:LotResult>
-                <efac:TenderLot>
-                    <cbc:ID schemeName="lot">LOT-0002</cbc:ID>
-                </efac:TenderLot>
-                <efac:SettledContract>
-                    <cbc:ID schemeName="contract">CON-0002</cbc:ID>
-                </efac:SettledContract>
-            </efac:LotResult>
-            <efac:SettledContract>
-                <cbc:ID schemeName="contract">CON-0002</cbc:ID>
-                <efac:DurationJustification>
-                    <efbc:ExtendedDurationIndicator>false</efbc:ExtendedDurationIndicator>
-                </efac:DurationJustification>
-            </efac:SettledContract>
-        </efac:NoticeResult>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotResult>
+                                <efac:TenderLot>
+                                    <cbc:ID schemeName="lot">LOT-0002</cbc:ID>
+                                </efac:TenderLot>
+                                <efac:SettledContract>
+                                    <cbc:ID schemeName="contract">CON-0002</cbc:ID>
+                                </efac:SettledContract>
+                            </efac:LotResult>
+                            <efac:SettledContract>
+                                <cbc:ID schemeName="contract">CON-0002</cbc:ID>
+                                <efac:DurationJustification>
+                                    <efbc:ExtendedDurationIndicator>false</efbc:ExtendedDurationIndicator>
+                                </efac:DurationJustification>
+                            </efac:SettledContract>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractAwardNotice>
     """
 
@@ -126,8 +140,6 @@ def test_opp_020_contract_integration_false(
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
 
-    # logger.info("Test result: %s", json.dumps(result, indent=2) # Logging disabled)
-
     # Verify the results
     assert "tender" in result
     assert "lots" in result["tender"]
@@ -136,6 +148,149 @@ def test_opp_020_contract_integration_false(
     assert lot["id"] == "LOT-0002"
     assert "hasEssentialAssets" in lot
     assert lot["hasEssentialAssets"] is False
+
+
+def test_opp_020_contract_multiple_lots(
+    tmp_path, setup_logging, temp_output_dir
+) -> None:
+    logger = setup_logging
+
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+        xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+        xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+        xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+        xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
+        <cbc:ID>notice-1</cbc:ID>
+        <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <!-- First lot with contract -->
+                            <efac:LotResult>
+                                <efac:TenderLot>
+                                    <cbc:ID schemeName="lot">LOT-0003</cbc:ID>
+                                </efac:TenderLot>
+                                <efac:SettledContract>
+                                    <cbc:ID schemeName="contract">CON-0003</cbc:ID>
+                                </efac:SettledContract>
+                            </efac:LotResult>
+                            <!-- Second lot with contract -->
+                            <efac:LotResult>
+                                <efac:TenderLot>
+                                    <cbc:ID schemeName="lot">LOT-0004</cbc:ID>
+                                </efac:TenderLot>
+                                <efac:SettledContract>
+                                    <cbc:ID schemeName="contract">CON-0004</cbc:ID>
+                                </efac:SettledContract>
+                            </efac:LotResult>
+                            <!-- First contract details -->
+                            <efac:SettledContract>
+                                <cbc:ID schemeName="contract">CON-0003</cbc:ID>
+                                <efac:DurationJustification>
+                                    <efbc:ExtendedDurationIndicator>true</efbc:ExtendedDurationIndicator>
+                                </efac:DurationJustification>
+                            </efac:SettledContract>
+                            <!-- Second contract details -->
+                            <efac:SettledContract>
+                                <cbc:ID schemeName="contract">CON-0004</cbc:ID>
+                                <efac:DurationJustification>
+                                    <efbc:ExtendedDurationIndicator>false</efbc:ExtendedDurationIndicator>
+                                </efac:DurationJustification>
+                            </efac:SettledContract>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+    </ContractAwardNotice>
+    """
+
+    # Create input XML file
+    xml_file = tmp_path / "test_input_multiple_lots.xml"
+    xml_file.write_text(xml_content)
+
+    # Run main and get result
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    # Verify the results
+    assert "tender" in result
+    assert "lots" in result["tender"]
+    assert len(result["tender"]["lots"]) == 2
+    
+    # Check first lot
+    lot1 = next((lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0003"), None)
+    assert lot1 is not None
+    assert "hasEssentialAssets" in lot1
+    assert lot1["hasEssentialAssets"] is True
+    
+    # Check second lot
+    lot2 = next((lot for lot in result["tender"]["lots"] if lot["id"] == "LOT-0004"), None)
+    assert lot2 is not None
+    assert "hasEssentialAssets" in lot2
+    assert lot2["hasEssentialAssets"] is False
+
+
+def test_opp_020_contract_missing_indicator(
+    tmp_path, setup_logging, temp_output_dir
+) -> None:
+    logger = setup_logging
+
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+        xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+        xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+        xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+        xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
+        <cbc:ID>notice-1</cbc:ID>
+        <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotResult>
+                                <efac:TenderLot>
+                                    <cbc:ID schemeName="lot">LOT-0005</cbc:ID>
+                                </efac:TenderLot>
+                                <efac:SettledContract>
+                                    <cbc:ID schemeName="contract">CON-0005</cbc:ID>
+                                </efac:SettledContract>
+                            </efac:LotResult>
+                            <efac:SettledContract>
+                                <cbc:ID schemeName="contract">CON-0005</cbc:ID>
+                                <!-- Missing DurationJustification/ExtendedDurationIndicator -->
+                            </efac:SettledContract>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+    </ContractAwardNotice>
+    """
+
+    # Create input XML file
+    xml_file = tmp_path / "test_input_missing_indicator.xml"
+    xml_file.write_text(xml_content)
+
+    # Run main and get result
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    # Verify the results - we expect no hasEssentialAssets property since the indicator is missing
+    assert "tender" in result
+    
+    # Check if there are lots
+    if "lots" in result["tender"] and result["tender"]["lots"]:
+        for lot in result["tender"]["lots"]:
+            # If lot ID is LOT-0005, it should not have hasEssentialAssets
+            if lot["id"] == "LOT-0005":
+                assert "hasEssentialAssets" not in lot
 
 
 if __name__ == "__main__":

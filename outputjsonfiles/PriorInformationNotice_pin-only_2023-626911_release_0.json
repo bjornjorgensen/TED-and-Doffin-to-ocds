@@ -1,7 +1,7 @@
 {
   "id": "2023-626911",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-88d7db27-121b-4117-b4f9-7c734a9be1cc",
+  "ocid": "ocds-abcd1234-31997822-998f-478a-a020-6066fde5a6ae",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -89,7 +89,8 @@
         "email": "sveols@trondelagfylke.no"
       },
       "roles": [
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Seilmakergata 2",

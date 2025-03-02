@@ -36,13 +36,16 @@ def parse_extended_duration_indicator(
         root = etree.fromstring(xml_content)
         result = {"tender": {"lots": []}}
 
-        settled_contracts = root.xpath(
+        # Get all settled contracts first
+        settled_contracts = {}
+        contracts = root.xpath(
             "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/"
             "efext:EformsExtension/efac:NoticeResult/efac:SettledContract",
             namespaces=NAMESPACES,
         )
 
-        for contract in settled_contracts:
+        # Build a dictionary of contracts with their extended duration indicators
+        for contract in contracts:
             try:
                 contract_id = contract.xpath(
                     "cbc:ID[@schemeName='contract']/text()",
@@ -56,27 +59,58 @@ def parse_extended_duration_indicator(
 
                 if extended_duration:
                     has_essential_assets = extended_duration[0].lower() == "true"
+                    settled_contracts[contract_id] = has_essential_assets
+            except (IndexError, AttributeError) as e:
+                logger.warning(
+                    "Error parsing contract %s: %s",
+                    contract_id if "contract_id" in locals() else "unknown",
+                    e,
+                )
 
-                    # Find associated lots through LotResult
-                    lot_results = root.xpath(
-                        f"/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/"
-                        f"efext:EformsExtension/efac:NoticeResult/efac:LotResult"
-                        f"[efac:SettledContract/cbc:ID[@schemeName='contract']/text()='{contract_id}']",
+        # Now get all lot results and link them to their contracts
+        lot_results = root.xpath(
+            "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/"
+            "efext:EformsExtension/efac:NoticeResult/efac:LotResult",
+            namespaces=NAMESPACES,
+        )
+
+        for lot_result in lot_results:
+            try:
+                # Get the contract ID from the LotResult
+                contract_ref = lot_result.xpath(
+                    "efac:SettledContract/cbc:ID[@schemeName='contract']/text()",
+                    namespaces=NAMESPACES,
+                )
+
+                if not contract_ref:
+                    # Try alternate path based on example
+                    contract_ref = lot_result.xpath(
+                        "cbc:ID[@schemeName='contract']/text()",
                         namespaces=NAMESPACES,
                     )
 
-                    for lot_result in lot_results:
-                        lot_id = lot_result.xpath(
-                            "efac:TenderLot/cbc:ID[@schemeName='lot']/text()",
-                            namespaces=NAMESPACES,
-                        )[0]
+                if not contract_ref:
+                    logger.debug("No contract reference found for lot result")
+                    continue
 
-                        result["tender"]["lots"].append(
-                            {"id": lot_id, "hasEssentialAssets": has_essential_assets}
-                        )
+                contract_id = contract_ref[0]
 
+                # If the contract has an extended duration indicator
+                if contract_id in settled_contracts:
+                    # Get the lot ID
+                    lot_id = lot_result.xpath(
+                        "efac:TenderLot/cbc:ID[@schemeName='lot']/text()",
+                        namespaces=NAMESPACES,
+                    )[0]
+
+                    result["tender"]["lots"].append(
+                        {
+                            "id": lot_id,
+                            "hasEssentialAssets": settled_contracts[contract_id],
+                        }
+                    )
             except (IndexError, AttributeError) as e:
-                logger.warning("Skipping incomplete contract data: %s", e)
+                logger.warning("Error linking lot to contract: %s", e)
                 continue
 
         if result["tender"]["lots"]:

@@ -1,7 +1,7 @@
 {
   "id": "2022-614279",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6e071e5b-e076-4505-bccc-c02384c3a4c4",
+  "ocid": "ocds-abcd1234-68196c45-ee72-4146-b00a-d863742975f6",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -128,8 +128,8 @@
         "email": "anita.hellehaven@nav.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Postboks 354",
