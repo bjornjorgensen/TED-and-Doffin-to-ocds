@@ -43,7 +43,7 @@ def parse_minimum_candidates(xml_content: str | bytes) -> dict | None:
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    # Check if the relevant XPath exists
+    # Check if the relevant XPath exists (only in TenderingProcess path)
     relevant_xpath = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:EconomicOperatorShortList/cbc:MinimumQuantity"
     if not root.xpath(relevant_xpath, namespaces=namespaces):
         logger.info(
@@ -60,6 +60,7 @@ def parse_minimum_candidates(xml_content: str | bytes) -> dict | None:
 
     for lot_element in lot_elements:
         lot_id = lot_element.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        # Only use TenderingProcess path
         minimum_quantity = lot_element.xpath(
             "./cac:TenderingProcess/cac:EconomicOperatorShortList/cbc:MinimumQuantity/text()",
             namespaces=namespaces,
