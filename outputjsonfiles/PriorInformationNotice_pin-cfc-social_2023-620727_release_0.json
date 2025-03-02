@@ -1,7 +1,7 @@
 {
   "id": "2023-620727",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-bb8942e2-9e50-48f3-889a-6f84849603d1",
+  "ocid": "ocds-abcd1234-68efe070-d178-4687-b624-82f6a3516807",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -141,9 +141,9 @@
         ]
       },
       "roles": [
-        "processContactPoint",
+        "submissionReceiptBody",
         "buyer",
-        "submissionReceiptBody"
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Edv.Stormsveg 2",

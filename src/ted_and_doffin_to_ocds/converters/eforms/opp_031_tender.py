@@ -23,6 +23,79 @@ TERM_CODE_MAPPING = {
 }
 
 
+def get_term_description_value(term_descriptions: list) -> str | None:
+    """Extract the appropriate description value from term descriptions.
+
+    Args:
+        term_descriptions: List of TermDescription elements
+
+    Returns:
+        The text value of the description to use
+    """
+    if not term_descriptions:
+        return None
+
+    # If there's only one description without language ID, use it directly
+    if len(term_descriptions) == 1 and not term_descriptions[0].get("languageID"):
+        return term_descriptions[0].text
+
+    # Default to the first description text for backwards compatibility
+    return term_descriptions[0].text
+
+
+def process_lot_tender_terms(
+    lot_tender: etree._Element, namespaces: dict
+) -> tuple[str | None, dict]:
+    """Process contract terms for a lot tender.
+
+    Args:
+        lot_tender: The lot tender element to process
+        namespaces: XML namespaces dictionary
+
+    Returns:
+        Tuple of (lot_id, contract_terms) or (None, None) if processing fails
+    """
+    lot_id = None
+    contract_terms = {}
+
+    try:
+        lot_ids = lot_tender.xpath(
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+            namespaces=namespaces,
+        )
+        if not lot_ids:
+            return None, None
+
+        lot_id = lot_ids[0]
+
+        term_elements = lot_tender.xpath(
+            "efac:ContractTerm[efbc:TermCode/@listName='contract-detail' and "
+            "not(efbc:TermCode/text()='all-rev-tic')]",  # Explicitly exclude all-rev-tic
+            namespaces=namespaces,
+        )
+
+        for term in term_elements:
+            term_code = term.xpath("efbc:TermCode/text()", namespaces=namespaces)[0]
+
+            # Handle multilingual descriptions
+            term_descriptions = term.xpath(
+                "efbc:TermDescription",
+                namespaces=namespaces,
+            )
+
+            description_value = get_term_description_value(term_descriptions)
+
+            if term_code == "exc-right":
+                contract_terms["hasExclusiveRights"] = True
+            elif description_value and term_code in TERM_CODE_MAPPING:
+                contract_terms[TERM_CODE_MAPPING[term_code]] = description_value
+    except (IndexError, AttributeError) as e:
+        logger.warning("Skipping incomplete lot tender data: %s", e)
+        return None, None
+    else:
+        return lot_id, contract_terms
+
+
 def parse_contract_conditions(xml_content: str | bytes) -> dict[str, Any] | None:
     """Parse contract conditions information (OPP-031) from XML content.
 
@@ -37,7 +110,6 @@ def parse_contract_conditions(xml_content: str | bytes) -> dict[str, Any] | None
 
     Returns:
         Dictionary containing lots with contract terms or None if no data found
-
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -52,78 +124,53 @@ def parse_contract_conditions(xml_content: str | bytes) -> dict[str, Any] | None
             namespaces=NAMESPACES,
         )
 
-        lot_terms = {}
+        # Check for inconsistent terms
+        check_inconsistent_terms(lot_tenders, NAMESPACES)
+
+        # Process each lot tender
         for lot_tender in lot_tenders:
-            lot_ids = lot_tender.xpath(
-                "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
-                namespaces=NAMESPACES,
-            )
-            if not lot_ids:
-                logger.warning("Missing lot ID in lot tender")
-                continue
-
-            lot_id = lot_ids[0]
-            terms = lot_tender.xpath(
-                "efac:ContractTerm[efbc:TermCode/@listName='contract-detail']/efbc:TermDescription/text()",
-                namespaces=NAMESPACES,
-            )
-            if lot_id in lot_terms and lot_terms[lot_id] != terms:
-                logger.warning(
-                    "Inconsistent contract terms found for lot %s across different tenders. "
-                    "Contact OCDS Data Support Team.",
-                    lot_id,
+            lot_id, contract_terms = process_lot_tender_terms(lot_tender, NAMESPACES)
+            if lot_id and contract_terms:
+                result["tender"]["lots"].append(
+                    {"id": lot_id, "contractTerms": contract_terms}
                 )
-            lot_terms[lot_id] = terms
-
-        for lot_tender in lot_tenders:
-            try:
-                lot_ids = lot_tender.xpath(
-                    "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
-                    namespaces=NAMESPACES,
-                )
-                if not lot_ids:
-                    continue  # Skip if no lot ID found
-
-                lot_id = lot_ids[0]
-
-                contract_terms = {}
-                term_elements = lot_tender.xpath(
-                    "efac:ContractTerm[efbc:TermCode/@listName='contract-detail' and "
-                    "not(efbc:TermCode/text()='all-rev-tic')]",  # Explicitly exclude all-rev-tic
-                    namespaces=NAMESPACES,
-                )
-
-                for term in term_elements:
-                    term_code = term.xpath(
-                        "efbc:TermCode/text()", namespaces=NAMESPACES
-                    )[0]
-
-                    term_description = term.xpath(
-                        "efbc:TermDescription/text()",
-                        namespaces=NAMESPACES,
-                    )
-
-                    if term_code == "exc-right":
-                        contract_terms["hasExclusiveRights"] = True
-                    elif term_description and term_code in TERM_CODE_MAPPING:
-                        contract_terms[TERM_CODE_MAPPING[term_code]] = term_description[
-                            0
-                        ]
-
-                if contract_terms:
-                    result["tender"]["lots"].append(
-                        {"id": lot_id, "contractTerms": contract_terms}
-                    )
-
-            except (IndexError, AttributeError) as e:
-                logger.warning("Skipping incomplete lot tender data: %s", e)
-                continue
 
         return result if result["tender"]["lots"] else None
 
     except Exception:
         logger.exception("Error parsing contract conditions")
         return None
+
+
+def check_inconsistent_terms(lot_tenders: list, namespaces: dict) -> None:
+    """Check for inconsistent terms across lot tenders for the same lot.
+
+    Args:
+        lot_tenders: List of lot tender elements
+        namespaces: XML namespaces dictionary
+    """
+    lot_terms = {}
+    for lot_tender in lot_tenders:
+        lot_ids = lot_tender.xpath(
+            "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()",
+            namespaces=namespaces,
+        )
+        if not lot_ids:
+            logger.warning("Missing lot ID in lot tender")
+            continue
+
+        lot_id = lot_ids[0]
+        terms = lot_tender.xpath(
+            "efac:ContractTerm[efbc:TermCode/@listName='contract-detail']/efbc:TermDescription/text()",
+            namespaces=namespaces,
+        )
+        if lot_id in lot_terms and lot_terms[lot_id] != terms:
+            logger.warning(
+                "Inconsistent contract terms found for lot %s across different tenders. "
+                "Contact OCDS Data Support Team.",
+                lot_id,
+            )
+        lot_terms[lot_id] = terms
 
 
 def merge_contract_conditions(

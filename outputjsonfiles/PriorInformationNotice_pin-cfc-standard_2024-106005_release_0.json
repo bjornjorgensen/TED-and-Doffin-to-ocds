@@ -1,7 +1,7 @@
 {
   "id": "7d111d51-8042-402a-a234-50efe86d8f4f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f9ae2d01-d27c-46fb-aeca-cd5f9b7939d7",
+  "ocid": "ocds-abcd1234-a84d7a19-21d5-4922-a6c0-2c91a64ac98f",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -189,8 +189,8 @@
         "email": "Kristian.von.Aphelen@posten.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Biskop Gunnerus' gate 14 A",
