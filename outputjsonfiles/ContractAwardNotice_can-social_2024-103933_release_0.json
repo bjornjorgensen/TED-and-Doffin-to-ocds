@@ -1,7 +1,7 @@
 {
   "id": "9a4b7099-142a-412a-af35-3e8feaf15ec7",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-63a27b7a-d32c-4d9a-b701-cf0423f35bc6",
+  "ocid": "ocds-abcd1234-79a6bc60-2659-46f1-ab8f-435cfdbffc20",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -272,10 +272,10 @@
       ],
       "relatedBids": [
         "TEN-0004",
+        "TEN-0001",
         "TEN-0003",
         "TEN-0005",
-        "TEN-0002",
-        "TEN-0001"
+        "TEN-0002"
       ]
     }
   ],

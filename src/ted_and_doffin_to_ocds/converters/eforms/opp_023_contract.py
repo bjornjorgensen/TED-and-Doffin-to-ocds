@@ -68,12 +68,20 @@ def parse_asset_predominance(xml_content: str | bytes) -> dict[str, Any] | None:
 
                         asset_data = []
                         for asset in assets:
-                            predominance = asset.xpath(
-                                "efbc:AssetPredominance/text()",
+                            predominance_elements = asset.xpath(
+                                "efbc:AssetPredominance",
                                 namespaces=NAMESPACES,
                             )
-                            if predominance:
-                                asset_data.append({"predominance": predominance[0]})
+
+                            for predominance_element in predominance_elements:
+                                asset_info = {"predominance": predominance_element.text}
+
+                                # Extract languageID attribute if present
+                                language_id = predominance_element.get("languageID")
+                                if language_id:
+                                    asset_info["languageID"] = language_id
+
+                                asset_data.append(asset_info)
 
                         if asset_data:
                             result["tender"]["lots"].append(
