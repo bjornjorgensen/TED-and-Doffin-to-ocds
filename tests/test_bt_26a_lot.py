@@ -71,7 +71,11 @@ def test_parse_classification_type(sample_xml):
     assert item["relatedLot"] == "LOT-0001"
     assert len(item["additionalClassifications"]) == 2
     classifications = item["additionalClassifications"]
+    
+    # Check both scheme and id are extracted correctly
     assert all(c["scheme"] == "CPV" for c in classifications)
+    assert any(c["id"] == "15311200" for c in classifications)
+    assert any(c["id"] == "15311300" for c in classifications)
 
 
 def test_parse_classification_type_no_scheme():
@@ -111,7 +115,7 @@ def test_merge_classification_type():
                 {
                     "id": "1",
                     "relatedLot": "LOT-0001",
-                    "additionalClassifications": [{"scheme": "CPV"}],
+                    "additionalClassifications": [{"scheme": "CPV", "id": "15311200"}],
                 }
             ]
         }
@@ -122,8 +126,11 @@ def test_merge_classification_type():
     item = release_json["tender"]["items"][0]
     assert len(item["additionalClassifications"]) == 2
     schemes = {c["scheme"] for c in item["additionalClassifications"]}
+    ids = {c["id"] for c in item["additionalClassifications"]}
     assert "EXISTING" in schemes
     assert "CPV" in schemes
+    assert "123" in ids
+    assert "15311200" in ids
 
 
 def test_bt_26a_lot_integration(tmp_path) -> None:
@@ -161,6 +168,7 @@ def test_bt_26a_lot_integration(tmp_path) -> None:
 
     classifications = item["additionalClassifications"]
     assert any(c["scheme"] == "CPV" for c in classifications)
+    assert any(c["id"] == "15311200" for c in classifications)
 
 
 if __name__ == "__main__":

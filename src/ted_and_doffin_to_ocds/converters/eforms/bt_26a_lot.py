@@ -35,25 +35,32 @@ def parse_classification_type(xml_content: str | bytes) -> dict[str, Any] | None
     )
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        classification_types = lot.xpath(
-            "cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode/@listName",
+
+        # Get all classification elements
+        classifications = lot.xpath(
+            "cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode",
             namespaces=namespaces,
         )
 
-        if classification_types:
+        if classifications:
             item = {
                 "id": str(len(result["tender"]["items"]) + 1),
                 "additionalClassifications": [],
                 "relatedLot": lot_id,
             }
 
-            # Add only unique schemes
-            added_schemes = set()
-            for list_name in classification_types:
-                scheme = list_name.upper() if list_name else None
-                if scheme and scheme not in added_schemes:
-                    item["additionalClassifications"].append({"scheme": scheme})
-                    added_schemes.add(scheme)
+            # Process each classification element
+            for classification in classifications:
+                # Get the listName attribute
+                list_name = classification.get("listName")
+                # Get the code value (text content)
+                code_value = classification.text
+
+                if list_name and code_value:
+                    scheme = list_name.upper()
+                    item["additionalClassifications"].append(
+                        {"scheme": scheme, "id": code_value}
+                    )
 
             if item["additionalClassifications"]:
                 result["tender"]["items"].append(item)
