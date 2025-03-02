@@ -1,7 +1,7 @@
 {
   "id": "0097de15-36cf-4750-96c9-f66ae4d6cafd",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-646650b3-ef76-466e-b6dc-96489e6ad36f",
+  "ocid": "ocds-abcd1234-05bcec6f-0e29-4501-a3d3-c365453dbb64",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -28,7 +28,8 @@
             "id": "32423000"
           },
           {
-            "id": "32424000"
+            "id": "32424000",
+            "scheme": "CPV"
           }
         ],
         "classification": {

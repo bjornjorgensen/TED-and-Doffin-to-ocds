@@ -38,7 +38,7 @@ def sample_xml():
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProject>
             <cac:AdditionalCommodityClassification>
-                <cbc:ItemClassificationCode>15311200</cbc:ItemClassificationCode>
+                <cbc:ItemClassificationCode listName="CPV">15311200</cbc:ItemClassificationCode>
             </cac:AdditionalCommodityClassification>
             <cac:AdditionalCommodityClassification>
                 <cbc:ItemClassificationCode>15311300</cbc:ItemClassificationCode>
@@ -56,8 +56,21 @@ def test_parse_additional_classification_code_procedure(sample_xml):
     item = result["tender"]["items"][0]
     assert item["id"] == "1"
     assert len(item["additionalClassifications"]) == 2
-    assert {"id": "15311200"} in item["additionalClassifications"]
-    assert {"id": "15311300"} in item["additionalClassifications"]
+    
+    # Test both with and without scheme
+    classification_with_scheme = next(
+        (c for c in item["additionalClassifications"] if c.get("id") == "15311200"),
+        None
+    )
+    classification_without_scheme = next(
+        (c for c in item["additionalClassifications"] if c.get("id") == "15311300"),
+        None
+    )
+    
+    assert classification_with_scheme is not None
+    assert classification_without_scheme is not None
+    assert classification_with_scheme.get("scheme") == "CPV"
+    assert "scheme" not in classification_without_scheme
 
 
 def test_parse_additional_classification_code_procedure_no_data():
@@ -84,17 +97,34 @@ def test_merge_additional_classification_code_procedure():
     }
 
     additional_data = {
-        "tender": {"items": [{"id": "1", "additionalClassifications": [{"id": "new"}]}]}
+        "tender": {"items": [{"id": "1", "additionalClassifications": [
+            {"id": "new1"},
+            {"id": "new2", "scheme": "UNSPSC"}
+        ]}]}
     }
 
     merge_additional_classification_code_procedure(release_json, additional_data)
 
     assert len(release_json["tender"]["items"]) == 1
     item = release_json["tender"]["items"][0]
-    assert len(item["additionalClassifications"]) == 2
+    assert len(item["additionalClassifications"]) == 3
+    
+    # Check that all IDs are present
     classification_ids = [c.get("id") for c in item["additionalClassifications"]]
     assert "existing" in classification_ids
-    assert "new" in classification_ids
+    assert "new1" in classification_ids
+    assert "new2" in classification_ids
+    
+    # Check that schemes are preserved
+    cpv_classifications = [c for c in item["additionalClassifications"] 
+                           if c.get("scheme") == "CPV"]
+    unspsc_classifications = [c for c in item["additionalClassifications"] 
+                              if c.get("scheme") == "UNSPSC"]
+    
+    assert len(cpv_classifications) == 1
+    assert len(unspsc_classifications) == 1
+    assert cpv_classifications[0]["id"] == "existing"
+    assert unspsc_classifications[0]["id"] == "new2"
 
 
 def test_bt_263_procedure_integration(tmp_path) -> None:
