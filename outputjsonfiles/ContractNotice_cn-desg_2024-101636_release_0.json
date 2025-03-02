@@ -1,7 +1,7 @@
 {
   "id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b76171e6-9ce8-466c-8eb7-06524d0a1c65",
+  "ocid": "ocds-abcd1234-e6bdc2c4-ef11-44cc-81af-b0ee1567b01e",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -342,11 +342,11 @@
         "faxNumber": "+47 61176333"
       },
       "roles": [
-        "evaluationBody",
         "buyer",
         "reviewContactPoint",
-        "processContactPoint",
-        "submissionReceiptBody"
+        "submissionReceiptBody",
+        "evaluationBody",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Kauffelds plass 1",

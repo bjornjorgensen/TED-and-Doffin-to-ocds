@@ -47,7 +47,7 @@ def test_bt_42_lot_integration(tmp_path, setup_logging, temp_output_dir) -> None
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:AwardingTerms>
-                    <cbc:BindingOnbuyerIndicator>true</cbc:BindingOnbuyerIndicator>
+                    <cbc:BindingOnBuyerIndicator>true</cbc:BindingOnBuyerIndicator>
                 </cac:AwardingTerms>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>

@@ -43,7 +43,7 @@ def parse_lot_jury_decision_binding(xml_content: str | bytes) -> dict | None:
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
         binding_on_buyer_indicator = lot.xpath(
-            ".//cac:TenderingTerms/cac:AwardingTerms/cbc:BindingOnBuyerIndicator/text()",
+            "./cac:TenderingTerms/cac:AwardingTerms/cbc:BindingOnBuyerIndicator/text()",
             namespaces=namespaces,
         )
 

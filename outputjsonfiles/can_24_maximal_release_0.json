@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9e9e9196-a9b9-471d-a07d-a0900cdaf465",
+  "ocid": "ocds-abcd1234-4d95e49b-ee01-40d5-902f-8ea72700a4c8",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -153,8 +153,8 @@
       {
         "id": "GLO-0001",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "title": "Title ---",
         "identifiers": [
@@ -335,8 +335,8 @@
         "id": "FiscalDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "publisher": {
           "id": "ORG-0002"
@@ -346,8 +346,8 @@
         "id": "EnvDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "publisher": {
           "id": "ORG-0003"
@@ -357,8 +357,8 @@
         "id": "EmplDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "publisher": {
           "id": "ORG-0004"
@@ -729,9 +729,9 @@
         "listedOnRegulatedMarket": false
       },
       "roles": [
-        "tenderer",
         "supplier",
-        "leadTenderer"
+        "leadTenderer",
+        "tenderer"
       ],
       "beneficialOwners": [
         {
@@ -780,8 +780,8 @@
         "listedOnRegulatedMarket": false
       },
       "roles": [
-        "tenderer",
-        "supplier"
+        "supplier",
+        "tenderer"
       ],
       "beneficialOwners": [
         {
@@ -976,8 +976,8 @@
       "scheme": "eu-notice-id-ref",
       "identifier": "9c0fd704-64d3-4294-a3b6-6df45911ab9f-01",
       "relatedLots": [
-        "LOT-0002",
-        "LOT-0001"
+        "LOT-0001",
+        "LOT-0002"
       ]
     }
   ],
