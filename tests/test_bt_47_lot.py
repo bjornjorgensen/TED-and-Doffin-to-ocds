@@ -16,11 +16,11 @@ def test_parse_participant_name() -> None:
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:EconomicOperatorShortList>
-                    <cac:PreSelectedparty>
+                    <cac:PreSelectedParty>
                         <cac:PartyName>
                             <cbc:Name>Mr P. Sanchez</cbc:Name>
                         </cac:PartyName>
-                    </cac:PreSelectedparty>
+                    </cac:PreSelectedParty>
                 </cac:EconomicOperatorShortList>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
@@ -39,28 +39,28 @@ def test_parse_participant_name() -> None:
     party = result["parties"][0]
     assert party["id"] == "1"
     assert party["name"] == "Mr P. Sanchez"
-    assert party["roles"] == ["selectedparticipant"]
+    assert party["roles"] == ["selectedParticipant"]
 
     lot = result["tender"]["lots"][0]
     assert lot["id"] == "LOT-0001"
     assert "designContest" in lot
-    assert "selectedparticipants" in lot["designContest"]
-    assert len(lot["designContest"]["selectedparticipants"]) == 1
-    assert lot["designContest"]["selectedparticipants"][0]["id"] == "1"
-    assert lot["designContest"]["selectedparticipants"][0]["name"] == "Mr P. Sanchez"
+    assert "selectedParticipants" in lot["designContest"]
+    assert len(lot["designContest"]["selectedParticipants"]) == 1
+    assert lot["designContest"]["selectedParticipants"][0]["id"] == "1"
+    assert lot["designContest"]["selectedParticipants"][0]["name"] == "Mr P. Sanchez"
 
 
 def test_merge_participant_name() -> None:
     participant_data = {
         "parties": [
-            {"id": "1", "name": "Mr P. Sanchez", "roles": ["selectedparticipant"]},
+            {"id": "1", "name": "Mr P. Sanchez", "roles": ["selectedParticipant"]},
         ],
         "tender": {
             "lots": [
                 {
                     "id": "LOT-0001",
                     "designContest": {
-                        "selectedparticipants": [{"id": "1", "name": "Mr P. Sanchez"}],
+                        "selectedParticipants": [{"id": "1", "name": "Mr P. Sanchez"}],
                     },
                 },
             ],
@@ -76,16 +76,16 @@ def test_merge_participant_name() -> None:
 
     assert len(release_json["parties"]) == 1
     assert release_json["parties"][0]["name"] == "Mr P. Sanchez"
-    assert release_json["parties"][0]["roles"] == ["selectedparticipant"]
+    assert release_json["parties"][0]["roles"] == ["selectedParticipant"]
 
     assert "designContest" in release_json["tender"]["lots"][0]
-    assert "selectedparticipants" in release_json["tender"]["lots"][0]["designContest"]
+    assert "selectedParticipants" in release_json["tender"]["lots"][0]["designContest"]
     assert (
-        len(release_json["tender"]["lots"][0]["designContest"]["selectedparticipants"])
+        len(release_json["tender"]["lots"][0]["designContest"]["selectedParticipants"])
         == 1
     )
     assert (
-        release_json["tender"]["lots"][0]["designContest"]["selectedparticipants"][0][
+        release_json["tender"]["lots"][0]["designContest"]["selectedParticipants"][0][
             "name"
         ]
         == "Mr P. Sanchez"

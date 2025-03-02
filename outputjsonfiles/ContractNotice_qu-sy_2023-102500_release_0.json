@@ -1,7 +1,7 @@
 {
   "id": "3580e3e0-275f-4489-9aab-b6f493790e00",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-764b1c0d-69e5-4495-9d7f-202f056851df",
+  "ocid": "ocds-abcd1234-4e425095-5b74-4863-8a11-37525a270c33",
   "tender": {
     "legalBasis": {
       "id": "Forsyningsforskriften",
@@ -250,8 +250,8 @@
         "email": "finn-magne.eines@elmea.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Vorsetøyveien 31",

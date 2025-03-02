@@ -43,7 +43,7 @@ def parse_participant_name(xml_content: str | bytes) -> dict | None:
     }
 
     # Check if the relevant XPath exists
-    relevant_xpath = "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:EconomicOperatorShortList/cac:PreSelectedParty/cac:PartyName/cbc:Name"
+    relevant_xpath = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:EconomicOperatorShortList/cac:PreSelectedParty/cac:PartyName/cbc:Name"
     if not root.xpath(relevant_xpath, namespaces=namespaces):
         logger.info("No participant name data found. Skipping parse_participant_name.")
         return None
@@ -52,7 +52,7 @@ def parse_participant_name(xml_content: str | bytes) -> dict | None:
     party_id_counter = 1
 
     lot_elements = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
         namespaces=namespaces,
     )
 
