@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-58d2ee18-1e23-42c3-8446-7e09347039bd",
+  "ocid": "ocds-abcd1234-b20777b8-066a-4c3d-b3b2-899fb9fbf9a8",
   "tender": {
     "legalBasis": {
       "id": "FOA § 13-4 bokstav b annet punkt; «konkurranse er umulig av tekniske årsaker».",
@@ -233,9 +233,9 @@
         "country": "NO"
       },
       "roles": [
-        "leadBuyer",
         "buyer",
         "processContactPoint",
+        "leadBuyer",
         "reviewContactPoint"
       ]
     },
@@ -335,6 +335,12 @@
           "LOT-0000"
         ],
         "hasRank": false,
+        "identifiers": [
+          {
+            "id": "Tilbud 27.5.2024",
+            "scheme": "XX-TENDERNL"
+          }
+        ],
         "value": {
           "amount": 12000000.0,
           "currency": "NOK"

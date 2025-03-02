@@ -1,7 +1,7 @@
 {
   "id": "74f8c72a-5dcd-4a77-afda-6573ca30c8df",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-54b955d2-67f1-44df-9494-6b1519c773e6",
+  "ocid": "ocds-abcd1234-5f428e7e-e355-415f-bb40-e0c513fbc228",
   "tender": {
     "legalBasis": {
       "id": "Konsesjonsforskriften",
@@ -362,8 +362,8 @@
         "country": "NO"
       },
       "roles": [
-        "leadBuyer",
         "buyer",
+        "leadBuyer",
         "processContactPoint"
       ]
     },

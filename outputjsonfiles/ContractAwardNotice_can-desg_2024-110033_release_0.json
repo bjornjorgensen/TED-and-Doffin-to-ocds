@@ -1,7 +1,7 @@
 {
   "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a47ee2ca-76eb-45ad-9815-3bda9c21018e",
+  "ocid": "ocds-abcd1234-16e513a8-8ac0-4145-a421-7a7a6c86ab53",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -262,6 +262,12 @@
         ],
         "hasRank": true,
         "variant": false,
+        "identifiers": [
+          {
+            "id": "Henning Larsen Architects AS",
+            "scheme": "AS-TENDERNL"
+          }
+        ],
         "tenderers": [
           {
             "id": "ORG-0004"

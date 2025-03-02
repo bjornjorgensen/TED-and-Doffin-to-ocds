@@ -353,6 +353,11 @@ def determine_scheme(identifier: str) -> str:
     Returns:
         str: Scheme in format "{country_code}-TENDERNL"
 
+    Note:
+        According to eForms guidance:
+        - If the scope is subnational, set scheme to {ISO 3166-1 alpha-2}-{system}
+        - Otherwise, set it to {ISO 3166-2}-{system}
+        Currently defaults to using ISO 3166-1 alpha-2 format.
     """
     try:
         # Split by common delimiters
@@ -406,9 +411,9 @@ def parse_tender_identifier(xml_content: str | bytes) -> dict | None:
 
     result = {"bids": {"details": []}}
 
-    # Updated XPath to match the specification
+    # Only use the absolute path in the specification
     lot_tenders = root.xpath(
-        "//efext:EformsExtension/efext:ExtensionContent/efac:NoticeResult/efac:LotTender",
+        "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender",
         namespaces=namespaces,
     )
 

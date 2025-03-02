@@ -1,7 +1,7 @@
 {
   "id": "8791620e-39a1-435d-985a-bee33825e3f4",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-257e03d8-563d-4ca3-b80c-45668b4e10dd",
+  "ocid": "ocds-abcd1234-770ef8d2-4411-4244-8661-fc5127253ede",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -101,19 +101,19 @@
         }
       ],
       "relatedBids": [
-        "TEN-0006",
-        "TEN-0007",
-        "TEN-0009",
-        "TEN-0013",
-        "TEN-0008",
-        "TEN-0011",
-        "TEN-0003",
-        "TEN-0010",
         "TEN-0002",
-        "TEN-0012",
+        "TEN-0009",
+        "TEN-0003",
+        "TEN-0011",
+        "TEN-0001",
+        "TEN-0010",
+        "TEN-0013",
         "TEN-0004",
         "TEN-0005",
-        "TEN-0001"
+        "TEN-0006",
+        "TEN-0008",
+        "TEN-0007",
+        "TEN-0012"
       ]
     }
   ],
@@ -123,6 +123,12 @@
         "id": "TEN-0001",
         "relatedLots": [
           "LOT-0000"
+        ],
+        "identifiers": [
+          {
+            "id": "Framework Agreement",
+            "scheme": "XX-TENDERNL"
+          }
         ],
         "value": {
           "amount": 95000000.0,
@@ -139,6 +145,12 @@
         "relatedLots": [
           "LOT-0000"
         ],
+        "identifiers": [
+          {
+            "id": "Fra",
+            "scheme": "FR-TENDERNL"
+          }
+        ],
         "tenderers": [
           {
             "id": "ORG-0003"
@@ -149,6 +161,12 @@
         "id": "TEN-0003",
         "relatedLots": [
           "LOT-0000"
+        ],
+        "identifiers": [
+          {
+            "id": "Frame",
+            "scheme": "XX-TENDERNL"
+          }
         ],
         "tenderers": [
           {
@@ -161,6 +179,12 @@
         "relatedLots": [
           "LOT-0000"
         ],
+        "identifiers": [
+          {
+            "id": "Framewor",
+            "scheme": "XX-TENDERNL"
+          }
+        ],
         "tenderers": [
           {
             "id": "ORG-0003"
@@ -171,6 +195,12 @@
         "id": "TEN-0005",
         "relatedLots": [
           "LOT-0000"
+        ],
+        "identifiers": [
+          {
+            "id": "Framework ",
+            "scheme": "XX-TENDERNL"
+          }
         ],
         "tenderers": [
           {
@@ -183,6 +213,12 @@
         "relatedLots": [
           "LOT-0000"
         ],
+        "identifiers": [
+          {
+            "id": "Framework Agr",
+            "scheme": "XX-TENDERNL"
+          }
+        ],
         "tenderers": [
           {
             "id": "ORG-0003"
@@ -194,6 +230,12 @@
         "relatedLots": [
           "LOT-0000"
         ],
+        "identifiers": [
+          {
+            "id": "Framework Agreeme",
+            "scheme": "XX-TENDERNL"
+          }
+        ],
         "tenderers": [
           {
             "id": "ORG-0003"
@@ -204,6 +246,12 @@
         "id": "TEN-0008",
         "relatedLots": [
           "LOT-0000"
+        ],
+        "identifiers": [
+          {
+            "id": "Framework Agreement",
+            "scheme": "XX-TENDERNL"
+          }
         ],
         "tenderers": [
           {
@@ -217,6 +265,12 @@
           "LOT-0000"
         ],
         "hasRank": false,
+        "identifiers": [
+          {
+            "id": "Framework Agreement",
+            "scheme": "XX-TENDERNL"
+          }
+        ],
         "tenderers": [
           {
             "id": "ORG-0003"
@@ -229,6 +283,12 @@
           "LOT-0000"
         ],
         "hasRank": false,
+        "identifiers": [
+          {
+            "id": "Framework Agreement",
+            "scheme": "XX-TENDERNL"
+          }
+        ],
         "value": {
           "amount": 95000000.0,
           "currency": "NOK"
@@ -245,6 +305,12 @@
           "LOT-0000"
         ],
         "hasRank": false,
+        "identifiers": [
+          {
+            "id": "Framework Agreement",
+            "scheme": "XX-TENDERNL"
+          }
+        ],
         "value": {
           "amount": 95.0,
           "currency": "NOK"
@@ -261,6 +327,12 @@
           "LOT-0000"
         ],
         "hasRank": false,
+        "identifiers": [
+          {
+            "id": "Framework Agreement",
+            "scheme": "XX-TENDERNL"
+          }
+        ],
         "value": {
           "amount": 9500000.0,
           "currency": "NOK"
@@ -277,6 +349,12 @@
           "LOT-0000"
         ],
         "hasRank": false,
+        "identifiers": [
+          {
+            "id": "Framework Agreement",
+            "scheme": "XX-TENDERNL"
+          }
+        ],
         "value": {
           "amount": 95000000.0,
           "currency": "NOK"

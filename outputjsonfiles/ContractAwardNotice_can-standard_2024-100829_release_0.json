@@ -1,7 +1,7 @@
 {
   "id": "510444f4-6cd2-4b26-8dd6-f3af27ffa069",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-8ef9a35a-9551-4dc9-8446-d347691a9688",
+  "ocid": "ocds-abcd1234-f0c6b1a8-5ccc-4e23-994a-10d4c74fb2d8",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften"
@@ -215,6 +215,12 @@
         "id": "TEN-0001",
         "relatedLots": [
           "LOT-0000"
+        ],
+        "identifiers": [
+          {
+            "id": "2024/930",
+            "scheme": "XX-TENDERNL"
+          }
         ],
         "tenderers": [
           {

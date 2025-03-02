@@ -1,7 +1,7 @@
 {
   "id": "65667997-031a-4198-bd25-7225449ef479",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-baae725d-6976-4ee4-b509-25f524428c46",
+  "ocid": "ocds-abcd1234-815153cf-1099-4a0b-b16e-39dff1b21a81",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -212,6 +212,12 @@
         ],
         "rank": 1,
         "hasRank": true,
+        "identifiers": [
+          {
+            "id": "PROJ DEF/2022-01",
+            "scheme": "XX-TENDERNL"
+          }
+        ],
         "value": {
           "amount": 95414.0,
           "currency": "EUR"

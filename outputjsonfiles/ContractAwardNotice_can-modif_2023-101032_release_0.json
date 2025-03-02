@@ -1,7 +1,7 @@
 {
   "id": "be2cd071-e143-4fc8-bc3b-7f1ec1b4141f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-cdc8fe07-8106-4ca3-b068-7b499fb91863",
+  "ocid": "ocds-abcd1234-457680c2-8629-4810-a3a0-7e9f35101603",
   "tender": {
     "legalBasis": {
       "id": "FOA § 28-1 d",
@@ -101,6 +101,12 @@
         "relatedLots": [
           "LOT-0000"
         ],
+        "identifiers": [
+          {
+            "id": "2019-366488",
+            "scheme": "XX-TENDERNL"
+          }
+        ],
         "value": {
           "amount": 305250.0,
           "currency": "NOK"
@@ -126,7 +132,7 @@
       ],
       "amendments": [
         {
-          "id": "0198f660-fcc6-4311-98fc-724fb49e91fd",
+          "id": "fdd7bdfd-8da0-473a-8f8c-d4722c8f69c9",
           "rationaleClassifications": [
             {
               "id": "mod-cir",
@@ -136,11 +142,11 @@
           ]
         },
         {
-          "id": "4de331fa-603d-4390-aa5b-6dcb4da57fe6",
+          "id": "69c3a833-ac81-4aed-905c-ab74373f0efb",
           "rationale": "Oppdragsgiver kunne ikke forutse at dagens Ålesund kommune ville bli vedtatt delt i to nye kommuner, heretter kalt Ålesund 2024 og Haram 2024. Anskaffelsens overordnede karakter blir ikke endret (1.), og den enkelte prisøkningen overstiger ikke 50 prosent av den opprinnelige kontraktsverdien (2.). Oppdragsgiver kunngjør endringene (3.)."
         },
         {
-          "id": "1e6e89ca-d899-4681-9f47-8e1fef16ad7f",
+          "id": "966ed308-83e8-4739-9cb7-d887334fa706",
           "description": "I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d. Ålesund kommunes eksisterende avtale med Visma Enterprise AS vedrørende Visma FlyVo videreføres i Ålesund 2024 og Haram 2024. Det er inngått et endringsbilag til eksisterende kontrakt som beskriver de nødvendige endringene i kontrakten som følge av kommunedelingen. Av opprinnelig kontraktsverdi, etter avtalefestet KPI-justering, utgjør nødvendige engangskostnader direkte knyttet til kommunedelingen 10 %. Årlig pris for bruksrett (fast pris pr. flyktning og pr. elev) endres ikke (kun avhengig av antall flyktninger og antall elever). "
         }
       ],

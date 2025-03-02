@@ -1,7 +1,7 @@
 {
   "id": "9a4b7099-142a-412a-af35-3e8feaf15ec7",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-cf94b3c9-fb94-4d7d-a845-6f6770343a67",
+  "ocid": "ocds-abcd1234-5321486f-46d4-4ede-8698-030d58983a63",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -271,11 +271,11 @@
         }
       ],
       "relatedBids": [
-        "TEN-0003",
         "TEN-0002",
+        "TEN-0003",
+        "TEN-0001",
         "TEN-0004",
-        "TEN-0005",
-        "TEN-0001"
+        "TEN-0005"
       ]
     }
   ],
@@ -285,6 +285,12 @@
         "id": "TEN-0001",
         "relatedLots": [
           "LOT-0000"
+        ],
+        "identifiers": [
+          {
+            "id": "Aberia Omsorg AS",
+            "scheme": "AS-TENDERNL"
+          }
         ],
         "tenderers": [
           {
@@ -297,6 +303,12 @@
         "relatedLots": [
           "LOT-0000"
         ],
+        "identifiers": [
+          {
+            "id": "Omsorgspartner AS",
+            "scheme": "AS-TENDERNL"
+          }
+        ],
         "tenderers": [
           {
             "id": "ORG-0004"
@@ -307,6 +319,12 @@
         "id": "TEN-0003",
         "relatedLots": [
           "LOT-0000"
+        ],
+        "identifiers": [
+          {
+            "id": "Otrera AS",
+            "scheme": "AS-TENDERNL"
+          }
         ],
         "tenderers": [
           {
@@ -319,6 +337,12 @@
         "relatedLots": [
           "LOT-0000"
         ],
+        "identifiers": [
+          {
+            "id": "Stendi AS",
+            "scheme": "AS-TENDERNL"
+          }
+        ],
         "tenderers": [
           {
             "id": "ORG-0006"
@@ -329,6 +353,12 @@
         "id": "TEN-0005",
         "relatedLots": [
           "LOT-0000"
+        ],
+        "identifiers": [
+          {
+            "id": "Viken Bo og Omsorg AS",
+            "scheme": "BO-TENDERNL"
+          }
         ],
         "tenderers": [
           {

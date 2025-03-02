@@ -1,7 +1,7 @@
 {
   "id": "65ffd92d-8eee-4787-a7fe-925106611edc",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-cf2476db-2d09-452b-b678-d75b3d4a3196",
+  "ocid": "ocds-abcd1234-ccbb0d2b-2085-40db-8489-52c295745a64",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -247,6 +247,12 @@
         "relatedLots": [
           "LOT-0000"
         ],
+        "identifiers": [
+          {
+            "id": "Kantine Leikanger",
+            "scheme": "XX-TENDERNL"
+          }
+        ],
         "tenderers": [
           {
             "id": "ORG-0003"
@@ -257,6 +263,12 @@
         "id": "TEN-0002",
         "relatedLots": [
           "LOT-0000"
+        ],
+        "identifiers": [
+          {
+            "id": "Drift av kantine Leikanger",
+            "scheme": "XX-TENDERNL"
+          }
         ],
         "tenderers": [
           {
