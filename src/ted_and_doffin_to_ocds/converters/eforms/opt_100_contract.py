@@ -38,6 +38,7 @@ def parse_framework_notice_identifier(
         root = etree.fromstring(xml_content)
         result = {"contracts": []}
 
+        # Find all SettledContract elements as per OPT-100 implementation guidance
         settled_contracts = root.xpath(
             "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/"
             "efext:EformsExtension/efac:NoticeResult/efac:SettledContract",
