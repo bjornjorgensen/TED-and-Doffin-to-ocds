@@ -43,17 +43,17 @@ def parse_buyer_technical_identifier(
     result = {"parties": []}
 
     xpath_query = "/*/cac:ContractingParty/cac:Party/cac:PartyIdentification/cbc:ID"
-    buyer_ids = root.xpath(xpath_query, namespaces=namespaces)
+    buyer_id_elements = root.xpath(xpath_query, namespaces=namespaces)
 
-    if buyer_ids:
+    if buyer_id_elements:
         # Take first buyer as main buyer
-        buyer_id = buyer_ids[0].text
+        buyer_id = buyer_id_elements[0].text
         result["parties"].append({"id": buyer_id, "roles": ["buyer"]})
         result["buyer"] = {"id": buyer_id}
 
         # Add any additional buyers as parties only
-        for buyer in buyer_ids[1:]:
-            result["parties"].append({"id": buyer.text, "roles": ["buyer"]})
+        for id_element in buyer_id_elements[1:]:
+            result["parties"].append({"id": id_element.text, "roles": ["buyer"]})
 
     return result if result["parties"] else None
 

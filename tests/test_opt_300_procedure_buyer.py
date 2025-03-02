@@ -41,9 +41,9 @@ def test_parse_buyer_technical_identifier(sample_xml) -> None:
     assert result["parties"][0]["roles"] == ["buyer"]
     assert result["parties"][1]["id"] == "ORG-0002"
     assert result["parties"][1]["roles"] == ["buyer"]
-    assert len(result["buyer"]) == 2
-    assert result["buyer"][0]["id"] == "ORG-0001"
-    assert result["buyer"][1]["id"] == "ORG-0002"
+    # Check buyer is a single object, not an array
+    assert isinstance(result["buyer"], dict)
+    assert result["buyer"]["id"] == "ORG-0001"
 
 
 def test_merge_buyer_technical_identifier() -> None:
@@ -52,7 +52,7 @@ def test_merge_buyer_technical_identifier() -> None:
             {"id": "ORG-0001", "roles": ["buyer"]},
             {"id": "ORG-0002", "roles": ["buyer"]},
         ],
-        "buyer": [{"id": "ORG-0001"}, {"id": "ORG-0002"}],
+        "buyer": {"id": "ORG-0001"},
     }
     release_json = {}
     merge_buyer_technical_identifier(release_json, buyer_data)
@@ -63,9 +63,9 @@ def test_merge_buyer_technical_identifier() -> None:
     assert release_json["parties"][0]["roles"] == ["buyer"]
     assert release_json["parties"][1]["id"] == "ORG-0002"
     assert release_json["parties"][1]["roles"] == ["buyer"]
-    assert len(release_json["buyer"]) == 2
-    assert release_json["buyer"][0]["id"] == "ORG-0001"
-    assert release_json["buyer"][1]["id"] == "ORG-0002"
+    # Check buyer is a single object, not an array
+    assert isinstance(release_json["buyer"], dict)
+    assert release_json["buyer"]["id"] == "ORG-0001"
 
 
 def test_merge_buyer_technical_identifier_existing_party() -> None:
@@ -74,11 +74,11 @@ def test_merge_buyer_technical_identifier_existing_party() -> None:
             {"id": "ORG-0001", "roles": ["buyer"]},
             {"id": "ORG-0002", "roles": ["buyer"]},
         ],
-        "buyer": [{"id": "ORG-0001"}, {"id": "ORG-0002"}],
+        "buyer": {"id": "ORG-0001"},
     }
     release_json = {
         "parties": [{"id": "ORG-0001", "roles": ["procuringEntity"]}],
-        "buyer": [{"id": "ORG-0003"}],
+        "buyer": {"id": "ORG-0003"},
     }
     merge_buyer_technical_identifier(release_json, buyer_data)
     assert len(release_json["parties"]) == 2
@@ -86,10 +86,9 @@ def test_merge_buyer_technical_identifier_existing_party() -> None:
     assert set(release_json["parties"][0]["roles"]) == {"procuringEntity", "buyer"}
     assert release_json["parties"][1]["id"] == "ORG-0002"
     assert release_json["parties"][1]["roles"] == ["buyer"]
-    assert len(release_json["buyer"]) == 3
-    assert {"id": "ORG-0001"} in release_json["buyer"]
-    assert {"id": "ORG-0002"} in release_json["buyer"]
-    assert {"id": "ORG-0003"} in release_json["buyer"]
+    # Buyer should remain unchanged since it already exists
+    assert isinstance(release_json["buyer"], dict)
+    assert release_json["buyer"]["id"] == "ORG-0003"
 
 
 def test_parse_buyer_technical_identifier_no_data() -> None:
