@@ -1,7 +1,7 @@
 {
   "id": "03223b9a-002c-45e8-be6b-9d4aad21950e",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-eae349cb-f5c2-4c43-ab0d-710a0110f64b",
+  "ocid": "ocds-abcd1234-b58c785f-9ecd-4d9d-a235-8d548103dab8",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -137,8 +137,8 @@
         "email": "post@sykehusinnkjop.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Postboks 40",

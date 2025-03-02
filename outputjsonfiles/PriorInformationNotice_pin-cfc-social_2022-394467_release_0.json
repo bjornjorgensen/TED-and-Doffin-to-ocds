@@ -1,7 +1,7 @@
 {
   "id": "2022-394467",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f1825b35-f809-4dda-90ce-cfb5bd640af0",
+  "ocid": "ocds-abcd1234-aa69638b-eae1-4957-a2aa-dda579199c41",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -124,8 +124,8 @@
         "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/2095"
       },
       "roles": [
-        "buyer",
         "processContactPoint",
+        "buyer",
         "submissionReceiptBody"
       ],
       "address": {

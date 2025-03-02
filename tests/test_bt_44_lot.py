@@ -90,19 +90,15 @@ def test_bt_44_lot_integration(tmp_path, setup_logging, temp_output_dir) -> None
     # Check number of prizes
     assert len(prizes) == 2, f"Expected 2 prizes, got {len(prizes)}"
 
-    # Check first prize
+    # Check first prize (highest rank - first position in array)
     assert prizes[0]["id"] == "0", f"Expected first prize id '0', got {prizes[0]['id']}"
-    assert (
-        prizes[0]["rank"] == 1
-    ), f"Expected first prize rank 1, got {prizes[0]['rank']}"
+    # The rank is represented by position in array, no explicit rank attribute
+    assert "rank" not in prizes[0], "Rank should not be present in prize object"
 
-    # Check second prize
-    assert (
-        prizes[1]["id"] == "1"
-    ), f"Expected second prize id '1', got {prizes[1]['id']}"
-    assert (
-        prizes[1]["rank"] == 2
-    ), f"Expected second prize rank 2, got {prizes[1]['rank']}"
+    # Check second prize (second-highest rank - second position in array)
+    assert prizes[1]["id"] == "1", f"Expected second prize id '1', got {prizes[1]['id']}"
+    # The rank is represented by position in array, no explicit rank attribute
+    assert "rank" not in prizes[1], "Rank should not be present in prize object"
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 {
   "id": "2022-902600",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-fb64e33e-e1da-460a-83cb-72a6116cbc65",
+  "ocid": "ocds-abcd1234-2bf302e8-b65d-4d0b-9a66-9f68b5061410",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -145,8 +145,8 @@
         "country": "NO"
       },
       "roles": [
-        "buyer",
         "processContactPoint",
+        "buyer",
         "submissionReceiptBody"
       ]
     },

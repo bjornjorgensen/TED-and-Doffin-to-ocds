@@ -1,7 +1,7 @@
 {
   "id": "2c234234-aaec-4210-8cbe-1803ecaee901",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f8c5d036-1475-4ad2-8943-d861547e69eb",
+  "ocid": "ocds-abcd1234-1c3b9d48-5073-4488-9243-c1cfdfb85727",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -145,8 +145,8 @@
         "country": "NO"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

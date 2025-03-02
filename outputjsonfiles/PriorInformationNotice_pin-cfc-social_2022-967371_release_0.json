@@ -1,7 +1,7 @@
 {
   "id": "2022-967371",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-802f2b43-ef4d-4cad-a734-858a3eab364d",
+  "ocid": "ocds-abcd1234-55a2e740-2aec-4f88-a9b9-609875f02831",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -75,8 +75,8 @@
         "documentType": "biddingDocuments",
         "url": "https://tendsign.no/doc.aspx?UniqueId=afzouxayrm&GoTo=Docs",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ]
       }
     ],
@@ -177,8 +177,8 @@
         "country": "NO"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

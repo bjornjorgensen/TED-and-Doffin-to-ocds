@@ -1,7 +1,7 @@
 {
   "id": "2023-612007",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f7d8d885-6aa4-47ec-a849-fe6974b8f20a",
+  "ocid": "ocds-abcd1234-bc7b3bb1-e094-4e7e-91e4-7b996f988281",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -87,8 +87,8 @@
         "email": "e-mjorgensen@mil.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Lysaker Torg 45",
