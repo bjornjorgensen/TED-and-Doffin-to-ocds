@@ -27,22 +27,33 @@ def parse_classification_type_procedure(
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
     }
 
-    # Get unique classification schemes
-    classification_types = root.xpath(
-        "/*/cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode/@listName",
+    # Get classification codes and their schemes
+    classification_elements = root.xpath(
+        "/*/cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode",
         namespaces=namespaces,
     )
 
-    if classification_types:
+    if classification_elements:
         item = {"id": "1", "additionalClassifications": []}
 
-        # Add only unique schemes
-        added_schemes = set()
-        for list_name in classification_types:
+        # Track unique combinations of scheme and code
+        added_classifications = set()
+        for element in classification_elements:
+            list_name = element.get("listName")
+            code_value = element.text
+
             scheme = list_name.upper() if list_name else None
-            if scheme and scheme not in added_schemes:
-                item["additionalClassifications"].append({"scheme": scheme})
-                added_schemes.add(scheme)
+
+            # Only add if we have both scheme and code, and this combination is unique
+            if (
+                scheme
+                and code_value
+                and (scheme, code_value) not in added_classifications
+            ):
+                item["additionalClassifications"].append(
+                    {"scheme": scheme, "id": code_value}
+                )
+                added_classifications.add((scheme, code_value))
 
         if item["additionalClassifications"]:
             return {"tender": {"items": [item]}}

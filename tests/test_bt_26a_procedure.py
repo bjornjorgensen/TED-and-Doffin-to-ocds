@@ -56,6 +56,10 @@ def test_parse_classification_type_procedure(sample_xml):
     assert len(item["additionalClassifications"]) == 2
     assert all("scheme" in c and "id" in c for c in item["additionalClassifications"])
     assert all(c["scheme"] == "CPV" for c in item["additionalClassifications"])
+    
+    # Verify the actual classification code values
+    codes = {c["id"] for c in item["additionalClassifications"]}
+    assert codes == {"15311200", "15311300"}, f"Expected codes 15311200 and 15311300, got {codes}"
 
 
 def test_parse_classification_type_procedure_no_scheme():
@@ -90,7 +94,7 @@ def test_merge_classification_type_procedure():
             "items": [
                 {
                     "id": "1",
-                    "additionalClassifications": [{"scheme": "CPV", "id": "CPV"}],
+                    "additionalClassifications": [{"scheme": "CPV", "id": "15311200"}],
                 }
             ]
         }
@@ -104,7 +108,7 @@ def test_merge_classification_type_procedure():
     ids = {c["id"] for c in item["additionalClassifications"]}
     assert "EXISTING" in schemes
     assert "CPV" in schemes
-    assert ids == {"123", "CPV"}, f"Unexpected ids: {ids}"
+    assert ids == {"123", "15311200"}, f"Unexpected ids: {ids}"
 
 
 def test_bt_26a_procedure_integration(tmp_path) -> None:
@@ -139,6 +143,10 @@ def test_bt_26a_procedure_integration(tmp_path) -> None:
     classifications = item["additionalClassifications"]
     assert any(c["scheme"] == "CPV" for c in classifications)
     assert all("scheme" in c and "id" in c for c in classifications)
+    
+    # Verify that the correct code value is present
+    codes = [c["id"] for c in classifications if c["scheme"] == "CPV"]
+    assert "15311200" in codes, f"Expected code 15311200 in {codes}"
 
 
 if __name__ == "__main__":
