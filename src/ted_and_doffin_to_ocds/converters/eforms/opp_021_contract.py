@@ -69,14 +69,21 @@ def parse_used_asset(xml_content: str | bytes) -> dict[str, Any] | None:
 
                         asset_descriptions = []
                         for asset in assets:
-                            description = asset.xpath(
-                                "efbc:AssetDescription/text()",
+                            # Get asset description elements to extract both text and language
+                            description_elements = asset.xpath(
+                                "efbc:AssetDescription",
                                 namespaces=NAMESPACES,
                             )
-                            if description:
-                                asset_descriptions.append(
-                                    {"description": description[0]}
-                                )
+
+                            for desc_elem in description_elements:
+                                desc_text = desc_elem.text
+                                if desc_text:
+                                    asset_data = {"description": desc_text}
+                                    # Add language info if available
+                                    lang_id = desc_elem.get("languageID")
+                                    if lang_id:
+                                        asset_data["languageID"] = lang_id
+                                    asset_descriptions.append(asset_data)
 
                         if asset_descriptions:
                             result["tender"]["lots"].append(
