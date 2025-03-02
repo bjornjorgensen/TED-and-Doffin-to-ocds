@@ -47,7 +47,7 @@ def test_bt_76_lot_integration(tmp_path, setup_logging, temp_output_dir) -> None
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:TendererQualificationRequest>
-                    <cbc:companyLegalForm languageID="ENG">The tenderer must be a registered company</cbc:companyLegalForm>
+                    <cbc:CompanyLegalForm languageID="ENG">The tenderer must be a registered company</cbc:CompanyLegalForm>
                 </cac:TendererQualificationRequest>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
@@ -55,7 +55,7 @@ def test_bt_76_lot_integration(tmp_path, setup_logging, temp_output_dir) -> None
             <cbc:ID schemeName="Lot">LOT-0002</cbc:ID>
             <cac:TenderingTerms>
                 <cac:TendererQualificationRequest>
-                    <cbc:companyLegalForm languageID="ENG">The tenderer must be a partnership</cbc:companyLegalForm>
+                    <cbc:CompanyLegalForm languageID="ENG">The tenderer must be a partnership</cbc:CompanyLegalForm>
                 </cac:TendererQualificationRequest>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
@@ -68,7 +68,6 @@ def test_bt_76_lot_integration(tmp_path, setup_logging, temp_output_dir) -> None
 
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     # Verify the results
     assert "tender" in result, "Expected 'tender' in result"
@@ -84,8 +83,11 @@ def test_bt_76_lot_integration(tmp_path, setup_logging, temp_output_dir) -> None
     assert (
         "tendererLegalForm" in lot1["contractTerms"]
     ), "Expected 'tendererLegalForm' in LOT-0001 contractTerms"
+    # Check for multilingual structure since languageID is provided
+    assert isinstance(lot1["contractTerms"]["tendererLegalForm"], dict), "Expected tendererLegalForm to be a dict with language keys"
+    assert "ENG" in lot1["contractTerms"]["tendererLegalForm"], "Expected 'ENG' key in tendererLegalForm"
     assert (
-        lot1["contractTerms"]["tendererLegalForm"]
+        lot1["contractTerms"]["tendererLegalForm"]["ENG"]
         == "The tenderer must be a registered company"
     ), "Unexpected tendererLegalForm content for LOT-0001"
 
@@ -93,8 +95,10 @@ def test_bt_76_lot_integration(tmp_path, setup_logging, temp_output_dir) -> None
     assert (
         "tendererLegalForm" in lot2["contractTerms"]
     ), "Expected 'tendererLegalForm' in LOT-0002 contractTerms"
+    assert isinstance(lot2["contractTerms"]["tendererLegalForm"], dict), "Expected tendererLegalForm to be a dict with language keys"
+    assert "ENG" in lot2["contractTerms"]["tendererLegalForm"], "Expected 'ENG' key in tendererLegalForm"
     assert (
-        lot2["contractTerms"]["tendererLegalForm"]
+        lot2["contractTerms"]["tendererLegalForm"]["ENG"]
         == "The tenderer must be a partnership"
     ), "Unexpected tendererLegalForm content for LOT-0002"
 
@@ -114,7 +118,7 @@ def test_bt_76_lot_missing_company_legal_form(
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:TendererQualificationRequest>
-                    <!-- companyLegalForm is missing -->
+                    <!-- CompanyLegalForm is missing -->
                 </cac:TendererQualificationRequest>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
@@ -127,7 +131,6 @@ def test_bt_76_lot_missing_company_legal_form(
 
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     # Verify the results
     assert "tender" in result, "Expected 'tender' in result"
@@ -140,7 +143,7 @@ def test_bt_76_lot_missing_company_legal_form(
     assert lot["id"] == "LOT-0001", "Expected lot id 'LOT-0001'"
     assert "contractTerms" not in lot or "tendererLegalForm" not in lot.get(
         "contractTerms", {}
-    ), "Did not expect 'tendererLegalForm' when companyLegalForm is missing"
+    ), "Did not expect 'tendererLegalForm' when CompanyLegalForm is missing"
 
 
 def test_bt_76_lot_empty_company_legal_form(
@@ -158,7 +161,7 @@ def test_bt_76_lot_empty_company_legal_form(
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:TendererQualificationRequest>
-                    <cbc:companyLegalForm languageID="ENG"></cbc:companyLegalForm>
+                    <cbc:CompanyLegalForm languageID="ENG"></cbc:CompanyLegalForm>
                 </cac:TendererQualificationRequest>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
@@ -171,7 +174,6 @@ def test_bt_76_lot_empty_company_legal_form(
 
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     # Verify the results
     assert "tender" in result, "Expected 'tender' in result"
@@ -184,7 +186,7 @@ def test_bt_76_lot_empty_company_legal_form(
     assert lot["id"] == "LOT-0001", "Expected lot id 'LOT-0001'"
     assert "contractTerms" not in lot or "tendererLegalForm" not in lot.get(
         "contractTerms", {}
-    ), "Did not expect 'tendererLegalForm' when companyLegalForm is empty"
+    ), "Did not expect 'tendererLegalForm' when CompanyLegalForm is empty"
 
 
 def test_bt_76_lot_multiple_qualification_requests(
@@ -202,10 +204,10 @@ def test_bt_76_lot_multiple_qualification_requests(
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:TendererQualificationRequest>
-                    <cbc:companyLegalForm languageID="ENG">First legal form requirement</cbc:companyLegalForm>
+                    <cbc:CompanyLegalForm languageID="ENG">First legal form requirement</cbc:CompanyLegalForm>
                 </cac:TendererQualificationRequest>
                 <cac:TendererQualificationRequest>
-                    <cbc:companyLegalForm languageID="ENG">Second legal form requirement</cbc:companyLegalForm>
+                    <cbc:CompanyLegalForm languageID="ENG">Second legal form requirement</cbc:CompanyLegalForm>
                 </cac:TendererQualificationRequest>
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
@@ -218,7 +220,6 @@ def test_bt_76_lot_multiple_qualification_requests(
 
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     # Verify the results
     assert "tender" in result, "Expected 'tender' in result"
@@ -233,10 +234,109 @@ def test_bt_76_lot_multiple_qualification_requests(
     assert (
         "tendererLegalForm" in lot["contractTerms"]
     ), "Expected 'tendererLegalForm' in lot contractTerms"
-    assert lot["contractTerms"]["tendererLegalForm"] in [
-        "First legal form requirement",
-        "Second legal form requirement",
-    ], "Unexpected tendererLegalForm content"
+    assert isinstance(lot["contractTerms"]["tendererLegalForm"], dict), "Expected tendererLegalForm to be a dict with language keys"
+    assert "ENG" in lot["contractTerms"]["tendererLegalForm"], "Expected 'ENG' key in tendererLegalForm"
+
+
+def test_bt_76_lot_multilingual_text(
+    tmp_path, setup_logging, temp_output_dir
+) -> None:
+    logger = setup_logging
+
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cbc:ID>notice-1</cbc:ID>
+        <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+            <cac:TenderingTerms>
+                <cac:TendererQualificationRequest>
+                    <cbc:CompanyLegalForm languageID="ENG">The tenderer must be a registered company</cbc:CompanyLegalForm>
+                    <cbc:CompanyLegalForm languageID="FRA">Le soumissionnaire doit être une société enregistrée</cbc:CompanyLegalForm>
+                    <cbc:CompanyLegalForm languageID="NOR">Tilbyderen må være et registrert selskap</cbc:CompanyLegalForm>
+                </cac:TendererQualificationRequest>
+            </cac:TenderingTerms>
+        </cac:ProcurementProjectLot>
+    </ContractAwardNotice>
+    """
+
+    # Create input XML file
+    xml_file = tmp_path / "test_input_multilingual_legal_form.xml"
+    xml_file.write_text(xml_content)
+
+    # Run main and get result
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    # Verify the results
+    assert "tender" in result, "Expected 'tender' in result"
+    assert "lots" in result["tender"], "Expected 'lots' in tender"
+    assert (
+        len(result["tender"]["lots"]) == 1
+    ), f"Expected 1 lot, got {len(result['tender']['lots'])}"
+
+    lot = result["tender"]["lots"][0]
+    assert lot["id"] == "LOT-0001", "Expected lot id 'LOT-0001'"
+    assert "contractTerms" in lot, "Expected 'contractTerms' in lot"
+    assert (
+        "tendererLegalForm" in lot["contractTerms"]
+    ), "Expected 'tendererLegalForm' in lot contractTerms"
+    
+    # Check multilingual structure
+    assert isinstance(lot["contractTerms"]["tendererLegalForm"], dict), "Expected tendererLegalForm to be a dict with language keys"
+    assert "ENG" in lot["contractTerms"]["tendererLegalForm"], "Expected 'ENG' key in tendererLegalForm"
+    assert "FRA" in lot["contractTerms"]["tendererLegalForm"], "Expected 'FRA' key in tendererLegalForm"
+    assert "NOR" in lot["contractTerms"]["tendererLegalForm"], "Expected 'NOR' key in tendererLegalForm"
+    
+    assert lot["contractTerms"]["tendererLegalForm"]["ENG"] == "The tenderer must be a registered company"
+    assert lot["contractTerms"]["tendererLegalForm"]["FRA"] == "Le soumissionnaire doit être une société enregistrée"
+    assert lot["contractTerms"]["tendererLegalForm"]["NOR"] == "Tilbyderen må være et registrert selskap"
+
+
+def test_bt_76_lot_no_language_id(
+    tmp_path, setup_logging, temp_output_dir
+) -> None:
+    logger = setup_logging
+
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+        xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cbc:ID>notice-1</cbc:ID>
+        <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+            <cac:TenderingTerms>
+                <cac:TendererQualificationRequest>
+                    <cbc:CompanyLegalForm>The tenderer must be a registered company</cbc:CompanyLegalForm>
+                </cac:TendererQualificationRequest>
+            </cac:TenderingTerms>
+        </cac:ProcurementProjectLot>
+    </ContractAwardNotice>
+    """
+
+    # Create input XML file
+    xml_file = tmp_path / "test_input_no_language_id.xml"
+    xml_file.write_text(xml_content)
+
+    # Run main and get result
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    # Verify the results
+    assert "tender" in result, "Expected 'tender' in result"
+    assert "lots" in result["tender"], "Expected 'lots' in tender"
+    
+    lot = result["tender"]["lots"][0]
+    assert lot["id"] == "LOT-0001", "Expected lot id 'LOT-0001'"
+    assert "contractTerms" in lot, "Expected 'contractTerms' in lot"
+    assert (
+        "tendererLegalForm" in lot["contractTerms"]
+    ), "Expected 'tendererLegalForm' in lot contractTerms"
+    
+    # Check that with no languageID, value is directly stored as a string
+    assert isinstance(lot["contractTerms"]["tendererLegalForm"], str), "Expected tendererLegalForm to be a string when no languageID is provided"
+    assert lot["contractTerms"]["tendererLegalForm"] == "The tenderer must be a registered company"
 
 
 if __name__ == "__main__":

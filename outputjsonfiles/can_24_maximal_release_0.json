@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-b8cb8ea8-8676-4d1b-bb8c-98aedda8e485",
+  "ocid": "ocds-abcd1234-e6070a2f-18c8-42ba-a5b2-ebef171c8a7c",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -153,8 +153,8 @@
       {
         "id": "GLO-0001",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "title": "Title ---",
         "identifiers": [
@@ -729,9 +729,9 @@
         "listedOnRegulatedMarket": false
       },
       "roles": [
-        "supplier",
+        "tenderer",
         "leadTenderer",
-        "tenderer"
+        "supplier"
       ],
       "beneficialOwners": [
         {
@@ -780,8 +780,8 @@
         "listedOnRegulatedMarket": false
       },
       "roles": [
-        "supplier",
-        "tenderer"
+        "tenderer",
+        "supplier"
       ],
       "beneficialOwners": [
         {
@@ -976,8 +976,8 @@
       "scheme": "eu-notice-id-ref",
       "identifier": "9c0fd704-64d3-4294-a3b6-6df45911ab9f-01",
       "relatedLots": [
-        "LOT-0001",
-        "LOT-0002"
+        "LOT-0002",
+        "LOT-0001"
       ]
     }
   ],
@@ -1080,9 +1080,9 @@
         }
       ],
       "relatedBids": [
-        "TEN-0003",
+        "TEN-0001",
         "TEN-0002",
-        "TEN-0001"
+        "TEN-0003"
       ]
     }
   ],

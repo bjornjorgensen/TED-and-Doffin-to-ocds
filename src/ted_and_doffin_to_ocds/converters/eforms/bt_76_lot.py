@@ -22,13 +22,14 @@ def parse_tenderer_legal_form(xml_content: str | bytes) -> dict | None:
                     {
                         "id": str,
                         "contractTerms": {
-                            "tendererLegalForm": str
+                            "tendererLegalForm": str or {language_code: str}
                         }
                     }
                 ]
             }
         }
         Returns None if no relevant data is found.
+        For multilingual text, tendererLegalForm will be an object with language codes as keys.
 
     Raises:
         etree.XMLSyntaxError: If the input is not valid XML.
@@ -55,16 +56,33 @@ def parse_tenderer_legal_form(xml_content: str | bytes) -> dict | None:
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        legal_form = lot.xpath(
-            "cac:TenderingTerms/cac:TendererQualificationRequest[not(cac:SpecificTendererRequirement)]/cbc:CompanyLegalForm/text()",
+        legal_form_elements = lot.xpath(
+            "cac:TenderingTerms/cac:TendererQualificationRequest[not(cac:SpecificTendererRequirement)]/cbc:CompanyLegalForm",
             namespaces=namespaces,
         )
 
-        if legal_form:
-            lot_data = {
-                "id": lot_id,
-                "contractTerms": {"tendererLegalForm": legal_form[0]},
-            }
+        if legal_form_elements:
+            lot_data = {"id": lot_id, "contractTerms": {}}
+
+            # Handle potential multilingual text
+            if (
+                len(legal_form_elements) == 1
+                and legal_form_elements[0].get("languageID") is None
+            ):
+                # Single language without specified languageID
+                lot_data["contractTerms"]["tendererLegalForm"] = legal_form_elements[
+                    0
+                ].text
+            else:
+                # Multiple languages or single with languageID
+                multilingual_text = {}
+                for element in legal_form_elements:
+                    language = element.get(
+                        "languageID", "und"
+                    )  # 'und' for undefined language
+                    multilingual_text[language] = element.text
+                lot_data["contractTerms"]["tendererLegalForm"] = multilingual_text
+
             result["tender"]["lots"].append(lot_data)
 
     return result if result["tender"]["lots"] else None
