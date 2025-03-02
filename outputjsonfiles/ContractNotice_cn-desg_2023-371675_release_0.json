@@ -1,7 +1,7 @@
 {
   "id": "2023-371675",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-2e85adcf-e850-4085-94af-3b2b939d694d",
+  "ocid": "ocds-abcd1234-628ce349-35b1-4a1f-95a6-b31b01678063",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -143,9 +143,9 @@
         "email": "mhr@kulturtanken.no"
       },
       "roles": [
-        "submissionReceiptBody",
         "processContactPoint",
-        "buyer"
+        "buyer",
+        "submissionReceiptBody"
       ],
       "address": {
         "streetAddress": "Gullhaug Torg 2",

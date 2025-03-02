@@ -1,7 +1,7 @@
 {
   "id": "2022-352534",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e6af8794-2452-4db2-bedd-f512ae9ac454",
+  "ocid": "ocds-abcd1234-e4d279ec-576e-4eea-8586-ade5a57a6b52",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -118,9 +118,9 @@
         ]
       },
       "roles": [
-        "submissionReceiptBody",
         "processContactPoint",
-        "buyer"
+        "buyer",
+        "submissionReceiptBody"
       ],
       "address": {
         "streetAddress": "P.O. Box 1817",

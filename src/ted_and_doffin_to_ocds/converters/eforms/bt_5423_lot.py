@@ -65,27 +65,36 @@ def parse_award_criterion_number_threshold_lot(
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
 
-        threshold_codes = lot.xpath(
-            ".//cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efbc:ParameterCode/text()",
+        # Find all SubordinateAwardingCriterion elements in this lot
+        subordinate_criteria = lot.xpath(
+            ".//cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion",
             namespaces=namespaces,
         )
 
-        if threshold_codes:
-            lot_data = {
-                "id": lot_id,
-                "awardCriteria": {
-                    "criteria": [
-                        {
-                            "numbers": [
-                                {"threshold": THRESHOLD_CODE_MAPPING[code]}
-                                for code in threshold_codes
-                                if code in THRESHOLD_CODE_MAPPING
-                            ]
-                        }
-                    ]
-                },
-            }
-            if lot_data["awardCriteria"]["criteria"][0]["numbers"]:
+        if subordinate_criteria:
+            lot_data = {"id": lot_id, "awardCriteria": {"criteria": []}}
+
+            # Process each SubordinateAwardingCriterion separately
+            for criterion in subordinate_criteria:
+                threshold_codes = criterion.xpath(
+                    "./ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efbc:ParameterCode/text()",
+                    namespaces=namespaces,
+                )
+
+                # Only add criteria that have valid threshold codes
+                mapped_thresholds = [
+                    {"threshold": THRESHOLD_CODE_MAPPING[code]}
+                    for code in threshold_codes
+                    if code in THRESHOLD_CODE_MAPPING
+                ]
+
+                if mapped_thresholds:
+                    lot_data["awardCriteria"]["criteria"].append(
+                        {"numbers": mapped_thresholds}
+                    )
+
+            # Only add the lot if it has criteria with numbers
+            if lot_data["awardCriteria"]["criteria"]:
                 result["tender"]["lots"].append(lot_data)
 
     return result if result["tender"]["lots"] else None
@@ -128,13 +137,26 @@ def merge_award_criterion_number_threshold_lot(
                 [],
             )
 
-            for new_criterion in new_lot["awardCriteria"]["criteria"]:
-                # Instead of creating a new criterion, merge the numbers into existing criteria
-                if existing_criteria:
-                    for existing_criterion in existing_criteria:
-                        existing_numbers = existing_criterion.setdefault("numbers", [])
-                        existing_numbers.extend(new_criterion["numbers"])
-                else:
+            # Handle merging based on the existing criteria
+            if (
+                len(existing_criteria) == 1
+                and "id" in existing_criteria[0]
+                and not existing_criteria[0].get("numbers")
+            ):
+                # Special case: If there's exactly one existing criterion with an ID and no numbers,
+                # merge the first new criterion into it
+                for i, new_criterion in enumerate(new_lot["awardCriteria"]["criteria"]):
+                    if i == 0:
+                        # Merge the first new criterion into the existing one
+                        existing_criteria[0].setdefault("numbers", []).extend(
+                            new_criterion["numbers"]
+                        )
+                    else:
+                        # Add any additional criteria separately
+                        existing_criteria.append(new_criterion)
+            else:
+                # Default case: Preserve each new criterion separately
+                for new_criterion in new_lot["awardCriteria"]["criteria"]:
                     existing_criteria.append(new_criterion)
         else:
             existing_lots.append(new_lot)
