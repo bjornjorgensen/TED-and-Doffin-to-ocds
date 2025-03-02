@@ -39,6 +39,7 @@ def test_opp_022_contract_significance_integration(
 ) -> None:
     logger = setup_logging
 
+    # Test XML with AssetSignificance (OPP-022-Contract) field with correct XML path structure
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -49,27 +50,35 @@ def test_opp_022_contract_significance_integration(
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
         <cbc:ID>notice-1</cbc:ID>
         <cbc:ContractFolderID>cf-1</cbc:ContractFolderID>
-        <efac:NoticeResult>
-            <efac:SettledContract>
-                <cbc:ID schemeName="contract">CON-0001</cbc:ID>
-                <efac:DurationJustification>
-                    <efac:AssetsList>
-                        <efac:Asset>
-                            <efbc:AssetSignificance>30</efbc:AssetSignificance>
-                        </efac:Asset>
-                    </efac:AssetsList>
-                </efac:DurationJustification>
-            </efac:SettledContract>
-            <efac:LotResult>
-                <cbc:ID schemeName="result">RES-0001</cbc:ID>
-                <efac:SettledContract>
-                    <cbc:ID schemeName="contract">CON-0001</cbc:ID>
-                </efac:SettledContract>
-                <efac:TenderLot>
-                    <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
-                </efac:TenderLot>
-            </efac:LotResult>
-        </efac:NoticeResult>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:SettledContract>
+                                <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+                                <efac:DurationJustification>
+                                    <efac:AssetsList>
+                                        <efac:Asset>
+                                            <efbc:AssetSignificance>30</efbc:AssetSignificance>
+                                        </efac:Asset>
+                                    </efac:AssetsList>
+                                </efac:DurationJustification>
+                            </efac:SettledContract>
+                            <efac:LotResult>
+                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
+                                <efac:SettledContract>
+                                    <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+                                </efac:SettledContract>
+                                <efac:TenderLot>
+                                    <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+                                </efac:TenderLot>
+                            </efac:LotResult>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractAwardNotice>
     """
 
@@ -80,17 +89,22 @@ def test_opp_022_contract_significance_integration(
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
 
-    # logger.info("Test result: %s", json.dumps(result, indent=2) # Logging disabled)
-
     # Verify the results
-    assert "tender" in result
-    assert "lots" in result["tender"]
-    assert len(result["tender"]["lots"]) == 1
+    # Check overall structure
+    assert "tender" in result, "Result should contain tender object"
+    assert "lots" in result["tender"], "Tender should contain lots array"
+    assert len(result["tender"]["lots"]) == 1, f"Expected 1 lot, got {len(result['tender']['lots'])}"
+    
+    # Check lot-specific structure
     lot = result["tender"]["lots"][0]
-    assert lot["id"] == "LOT-0001"
-    assert "essentialAssets" in lot
-    assert len(lot["essentialAssets"]) == 1
-    assert lot["essentialAssets"][0]["significance"] == "30"
+    assert lot["id"] == "LOT-0001", f"Expected lot ID LOT-0001, got {lot['id']}"
+    assert "essentialAssets" in lot, "Lot should contain essentialAssets array"
+    assert len(lot["essentialAssets"]) == 1, f"Expected 1 essential asset, got {len(lot['essentialAssets'])}"
+    
+    # Check significance value (OPP-022-Contract mapping)
+    asset = lot["essentialAssets"][0]
+    assert "significance" in asset, "Essential asset should contain significance field"
+    assert asset["significance"] == "30", f"Expected significance value 30, got {asset['significance']}"
 
 
 if __name__ == "__main__":

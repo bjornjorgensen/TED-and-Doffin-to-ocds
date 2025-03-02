@@ -68,12 +68,23 @@ def parse_asset_significance(xml_content: str | bytes) -> dict[str, Any] | None:
 
                         asset_data = []
                         for asset in assets:
-                            significance = asset.xpath(
-                                "efbc:AssetSignificance/text()",
+                            significance_elements = asset.xpath(
+                                "efbc:AssetSignificance",
                                 namespaces=NAMESPACES,
                             )
-                            if significance:
-                                asset_data.append({"significance": significance[0]})
+
+                            if significance_elements:
+                                significance_element = significance_elements[0]
+                                significance_value = significance_element.text
+
+                                asset_info = {"significance": significance_value}
+
+                                # Check if languageID attribute exists and add it to the asset data
+                                language_id = significance_element.get("languageID")
+                                if language_id:
+                                    asset_info["languageID"] = language_id
+
+                                asset_data.append(asset_info)
 
                         if asset_data:
                             result["tender"]["lots"].append(

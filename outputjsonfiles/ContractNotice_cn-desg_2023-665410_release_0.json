@@ -1,7 +1,7 @@
 {
   "id": "2023-665410",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-f8bbd6ce-cd08-4ce0-b045-5974f085e316",
+  "ocid": "ocds-abcd1234-03438e2c-d701-44f8-aef8-a21deae5699b",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -158,8 +158,8 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Postboks 2020",

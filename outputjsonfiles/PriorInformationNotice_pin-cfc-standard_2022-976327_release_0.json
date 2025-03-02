@@ -1,7 +1,7 @@
 {
   "id": "2022-976327",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4f092d87-b396-48de-b6d9-022757ddb2b9",
+  "ocid": "ocds-abcd1234-086473b1-469e-4a4a-a6b6-39acf0b993ea",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -129,8 +129,8 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Nedre Slottsgate 3",
