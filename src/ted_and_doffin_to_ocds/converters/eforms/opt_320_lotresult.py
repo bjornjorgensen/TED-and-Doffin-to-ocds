@@ -1,4 +1,5 @@
 import logging
+import re
 from typing import Any
 
 from lxml import etree
@@ -24,7 +25,7 @@ def parse_tender_identifier_reference(
         {
             "awards": [
                 {
-                    "relatedBids": ["tender_id1", "tender_id2", ...]
+                    "relatedBids": ["TEN-0001", "TEN-0002", ...]
                 }
             ]
         }
@@ -42,6 +43,7 @@ def parse_tender_identifier_reference(
     }
 
     result = {"awards": []}
+    pattern = re.compile(r"^TEN-\d{4}$")
 
     lot_results = root.xpath(
         "//efac:NoticeResult/efac:LotResult", namespaces=namespaces
@@ -52,8 +54,19 @@ def parse_tender_identifier_reference(
             "efac:LotTender/cbc:ID[@schemeName='tender']/text()", namespaces=namespaces
         )
 
-        if lot_tenders:
-            result["awards"].append({"relatedBids": lot_tenders})
+        # Filter out IDs that don't match the required pattern
+        valid_lot_tenders = [tid for tid in lot_tenders if pattern.match(tid)]
+
+        if valid_lot_tenders:
+            # Get lot ID if available (optional, for better award mapping)
+            lot_id = lot_result.xpath("cbc:ID/text()", namespaces=namespaces)
+            award_entry = {"relatedBids": valid_lot_tenders}
+
+            # Add lot ID reference if available
+            if lot_id:
+                award_entry["lotID"] = lot_id[0]
+
+            result["awards"].append(award_entry)
 
     return result if result["awards"] else None
 
@@ -89,9 +102,9 @@ def merge_tender_identifier_reference(
             else:
                 awards[-1]["relatedBids"] = new_award["relatedBids"]
 
-    # Remove any duplicates from relatedBids
+    # Remove any duplicates from relatedBids and ensure consistent order
     if awards and "relatedBids" in awards[-1]:
-        awards[-1]["relatedBids"] = list(set(awards[-1]["relatedBids"]))
+        awards[-1]["relatedBids"] = sorted(set(awards[-1]["relatedBids"]))
 
     logger.info(
         "Merged Tender Identifier Reference data for %d awards.",

@@ -1,7 +1,7 @@
 {
   "id": "2023-696688",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-76f23111-4e36-4dc8-a557-a6b0b173a8c8",
+  "ocid": "ocds-abcd1234-e6767d56-0309-40e4-b777-364ef1232fb1",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -189,9 +189,9 @@
         "email": "eierskap.postmottak@trondheim.kommune.no"
       },
       "roles": [
-        "submissionReceiptBody",
+        "processContactPoint",
         "buyer",
-        "processContactPoint"
+        "submissionReceiptBody"
       ],
       "address": {
         "streetAddress": "Postboks 2300 Torgarden",

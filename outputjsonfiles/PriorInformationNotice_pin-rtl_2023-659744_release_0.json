@@ -1,7 +1,7 @@
 {
   "id": "2023-659744",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-df29e896-e24e-4322-9fdd-b017eeab1261",
+  "ocid": "ocds-abcd1234-5bf4d11a-4a54-4fc4-8ea9-0a0d82a57c4d",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -87,8 +87,8 @@
         ]
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Postboks 4350",

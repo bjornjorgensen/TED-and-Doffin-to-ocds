@@ -1,7 +1,7 @@
 {
   "id": "8791620e-39a1-435d-985a-bee33825e3f4",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ed03d6d5-9e6c-474d-9422-0e64427bda4e",
+  "ocid": "ocds-abcd1234-719b1a15-d49e-4f1b-b5b5-33a359aef80b",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -101,19 +101,19 @@
         }
       ],
       "relatedBids": [
-        "TEN-0011",
-        "TEN-0006",
         "TEN-0001",
-        "TEN-0012",
         "TEN-0002",
-        "TEN-0013",
-        "TEN-0009",
+        "TEN-0003",
+        "TEN-0004",
+        "TEN-0005",
+        "TEN-0006",
         "TEN-0007",
         "TEN-0008",
-        "TEN-0005",
-        "TEN-0004",
-        "TEN-0003",
-        "TEN-0010"
+        "TEN-0009",
+        "TEN-0010",
+        "TEN-0011",
+        "TEN-0012",
+        "TEN-0013"
       ]
     }
   ],
