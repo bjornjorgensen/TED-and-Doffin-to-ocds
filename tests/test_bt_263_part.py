@@ -21,14 +21,17 @@ def sample_xml():
     return """
     <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:ProcurementProject>
-            <cac:AdditionalCommodityClassification>
-                <cbc:ItemClassificationCode>15311200</cbc:ItemClassificationCode>
-            </cac:AdditionalCommodityClassification>
-            <cac:AdditionalCommodityClassification>
-                <cbc:ItemClassificationCode>15311300</cbc:ItemClassificationCode>
-            </cac:AdditionalCommodityClassification>
-        </cac:ProcurementProject>
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Part">1</cbc:ID>
+            <cac:ProcurementProject>
+                <cac:AdditionalCommodityClassification>
+                    <cbc:ItemClassificationCode>15311200</cbc:ItemClassificationCode>
+                </cac:AdditionalCommodityClassification>
+                <cac:AdditionalCommodityClassification>
+                    <cbc:ItemClassificationCode>15311300</cbc:ItemClassificationCode>
+                </cac:AdditionalCommodityClassification>
+            </cac:ProcurementProject>
+        </cac:ProcurementProjectLot>
     </ContractNotice>
     """
 
@@ -50,9 +53,12 @@ def test_parse_additional_classification_code_no_data():
     xml_content = """
     <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:ProcurementProject>
-            <!-- No AdditionalCommodityClassification -->
-        </cac:ProcurementProject>
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Part">1</cbc:ID>
+            <cac:ProcurementProject>
+                <!-- No AdditionalCommodityClassification -->
+            </cac:ProcurementProject>
+        </cac:ProcurementProjectLot>
     </ContractNotice>
     """
     result = parse_additional_classification_code_part(xml_content)
@@ -106,14 +112,17 @@ def test_bt_263_part_integration(tmp_path, temp_output_dir):
     xml_content = """
     <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
           xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
-        <cac:ProcurementProject>
-            <cac:AdditionalCommodityClassification>
-                <cbc:ItemClassificationCode>15311200</cbc:ItemClassificationCode>
-            </cac:AdditionalCommodityClassification>
-            <cac:AdditionalCommodityClassification>
-                <cbc:ItemClassificationCode>15311300</cbc:ItemClassificationCode>
-            </cac:AdditionalCommodityClassification>
-        </cac:ProcurementProject>
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Part">1</cbc:ID>
+            <cac:ProcurementProject>
+                <cac:AdditionalCommodityClassification>
+                    <cbc:ItemClassificationCode>15311200</cbc:ItemClassificationCode>
+                </cac:AdditionalCommodityClassification>
+                <cac:AdditionalCommodityClassification>
+                    <cbc:ItemClassificationCode>15311300</cbc:ItemClassificationCode>
+                </cac:AdditionalCommodityClassification>
+            </cac:ProcurementProject>
+        </cac:ProcurementProjectLot>
     </ContractNotice>
     """
 
