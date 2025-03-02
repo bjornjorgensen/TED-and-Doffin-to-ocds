@@ -13,6 +13,119 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
+def _get_settled_contracts(notice_result, namespaces) -> list[etree._Element]:
+    """Get settled contracts from notice result."""
+    return notice_result.xpath("efac:SettledContract", namespaces=namespaces)
+
+
+def _get_lot_tender_id(settled_contract, contract_id, namespaces) -> str | None:
+    """Get lot tender ID from settled contract."""
+    lot_tender_ids = settled_contract.xpath(
+        "efac:LotTender/cbc:ID/text()", namespaces=namespaces
+    )
+    if not lot_tender_ids:
+        logger.warning("No LotTender ID found for contract %s", contract_id)
+        return None
+    return lot_tender_ids[0]
+
+
+def _get_lot_tender(notice_result, lot_tender_id, namespaces) -> etree._Element | None:
+    """Get lot tender with specified ID."""
+    lot_tenders = notice_result.xpath(
+        f"efac:LotTender[cbc:ID/text()='{lot_tender_id}']", namespaces=namespaces
+    )
+    if not lot_tenders:
+        logger.warning("Cannot find LotTender with ID %s", lot_tender_id)
+        return None
+    return lot_tenders[0]
+
+
+def _get_tendering_party_id(lot_tender, lot_tender_id, namespaces) -> str | None:
+    """Get tendering party ID from lot tender."""
+    tendering_party_ids = lot_tender.xpath(
+        "efac:TenderingParty/cbc:ID/text()", namespaces=namespaces
+    )
+    if not tendering_party_ids:
+        logger.warning("No TenderingParty ID found for LotTender %s", lot_tender_id)
+        return None
+    return tendering_party_ids[0]
+
+
+def _get_tendering_party(
+    notice_result, tendering_party_id, namespaces
+) -> etree._Element | None:
+    """Get tendering party with specified ID."""
+    tendering_parties = notice_result.xpath(
+        f"efac:TenderingParty[cbc:ID/text()='{tendering_party_id}']",
+        namespaces=namespaces,
+    )
+    if not tendering_parties:
+        logger.warning("Cannot find TenderingParty with ID %s", tendering_party_id)
+        return None
+    return tendering_parties[0]
+
+
+def _get_tenderers(tendering_party, namespaces) -> list[etree._Element]:
+    """Get tenderers from tendering party."""
+    return tendering_party.xpath("efac:Tenderer", namespaces=namespaces)
+
+
+def _collect_supplier_ids(tenderers, result, namespaces) -> list[str]:
+    """Collect supplier IDs from tenderers."""
+    supplier_ids = []
+    for tenderer in tenderers:
+        org_ids = tenderer.xpath("cbc:ID/text()", namespaces=namespaces)
+        if not org_ids:
+            continue
+
+        org_id = org_ids[0]
+        supplier_ids.append(org_id)
+
+        new_party = {"id": org_id, "roles": ["supplier"]}
+        existing_party = next((p for p in result["parties"] if p["id"] == org_id), None)
+        if existing_party:
+            if "supplier" not in existing_party["roles"]:
+                existing_party["roles"].append("supplier")
+        else:
+            result["parties"].append(new_party)
+
+    return supplier_ids
+
+
+def _get_lot_results(notice_result, contract_id, namespaces) -> list[etree._Element]:
+    """Get lot results for a contract ID."""
+    return notice_result.xpath(
+        f".//efac:LotResult[efac:SettledContract/cbc:ID/text()='{contract_id}']",
+        namespaces=namespaces,
+    )
+
+
+def _process_lot_results(lot_results, supplier_ids, result, namespaces) -> None:
+    """Process lot results to extract awards."""
+    for lot_result in lot_results:
+        award_ids = lot_result.xpath("cbc:ID/text()", namespaces=namespaces)
+        if not award_ids:
+            continue
+        award_id = award_ids[0]
+
+        lot_ids = lot_result.xpath(
+            "efac:TenderLot/cbc:ID/text()", namespaces=namespaces
+        )
+        if not lot_ids:
+            continue
+        lot_id = lot_ids[0]
+
+        # Only add award if we found suppliers
+        if supplier_ids:
+            result["awards"].append(
+                {
+                    "id": award_id,
+                    "suppliers": [{"id": supplier_id} for supplier_id in supplier_ids],
+                    "relatedLots": [lot_id],
+                }
+            )
+
+
 def parse_contract_tender_id(xml_content: str | bytes) -> dict | None:
     """Parse contract and tender relationships following BT-3202.
 
@@ -45,7 +158,6 @@ def parse_contract_tender_id(xml_content: str | bytes) -> dict | None:
                 }]
             }
         Returns None if no relevant data found
-
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
@@ -76,65 +188,51 @@ def parse_contract_tender_id(xml_content: str | bytes) -> dict | None:
         return None
 
     for notice_result in notice_results:
-        settled_contracts = notice_result.xpath(
-            "efac:SettledContract", namespaces=namespaces
-        )
+        settled_contracts = _get_settled_contracts(notice_result, namespaces)
 
         for settled_contract in settled_contracts:
             try:
-                contract_id = settled_contract.xpath(
+                contract_id_elements = settled_contract.xpath(
                     "cbc:ID/text()", namespaces=namespaces
-                )[0]
-
-                supplier_ids = []
-                tenderers = notice_result.xpath(
-                    f".//efac:TenderingParty/efac:Tenderer[ancestor::efac:NoticeResult//efac:SettledContract/cbc:ID/text()='{contract_id}']",
-                    namespaces=namespaces,
                 )
+                if not contract_id_elements:
+                    continue
+                contract_id = contract_id_elements[0]
 
-                for tenderer in tenderers:
-                    org_id = tenderer.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-                    supplier_ids.append(org_id)
-
-                    new_party = {"id": org_id, "roles": ["supplier"]}
-                    existing_party = next(
-                        (p for p in result["parties"] if p["id"] == org_id), None
-                    )
-                    if existing_party:
-                        if "supplier" not in existing_party["roles"]:
-                            existing_party["roles"].append("supplier")
-                    else:
-                        result["parties"].append(new_party)
-
-                lot_results = notice_result.xpath(
-                    f".//efac:LotResult[efac:SettledContract/cbc:ID/text()='{contract_id}']",
-                    namespaces=namespaces,
+                lot_tender_id = _get_lot_tender_id(
+                    settled_contract, contract_id, namespaces
                 )
+                if lot_tender_id is None:
+                    continue
 
-                lot_tender_id = settled_contract.xpath(
-                    "efac:LotTender/cbc:ID/text()", namespaces=namespaces
-                )[0]
+                lot_tender = _get_lot_tender(notice_result, lot_tender_id, namespaces)
+                if lot_tender is None:
+                    continue
+
+                tendering_party_id = _get_tendering_party_id(
+                    lot_tender, lot_tender_id, namespaces
+                )
+                if tendering_party_id is None:
+                    continue
+
+                tendering_party = _get_tendering_party(
+                    notice_result, tendering_party_id, namespaces
+                )
+                if tendering_party is None:
+                    continue
+
+                tenderers = _get_tenderers(tendering_party, namespaces)
+                supplier_ids = _collect_supplier_ids(tenderers, result, namespaces)
+
+                lot_results = _get_lot_results(notice_result, contract_id, namespaces)
+
+                # Add contract to result
                 result["contracts"].append(
                     {"id": contract_id, "relatedBids": [lot_tender_id]}
                 )
 
-                for lot_result in lot_results:
-                    award_id = lot_result.xpath("cbc:ID/text()", namespaces=namespaces)[
-                        0
-                    ]
-                    lot_id = lot_result.xpath(
-                        "efac:TenderLot/cbc:ID/text()", namespaces=namespaces
-                    )[0]
-
-                    result["awards"].append(
-                        {
-                            "id": award_id,
-                            "suppliers": [
-                                {"id": supplier_id} for supplier_id in supplier_ids
-                            ],
-                            "relatedLots": [lot_id],
-                        }
-                    )
+                # Process lot results to extract awards
+                _process_lot_results(lot_results, supplier_ids, result, namespaces)
 
             except (IndexError, AttributeError) as e:
                 logger.warning("Skipping incomplete contract data: %s", e)

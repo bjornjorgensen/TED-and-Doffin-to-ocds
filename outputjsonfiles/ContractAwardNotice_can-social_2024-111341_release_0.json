@@ -1,7 +1,7 @@
 {
   "id": "65ffd92d-8eee-4787-a7fe-925106611edc",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ccbb0d2b-2085-40db-8489-52c295745a64",
+  "ocid": "ocds-abcd1234-e44805bc-5c46-4ff4-8d66-c6d25f1d540f",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -186,10 +186,6 @@
     {
       "id": "ORG-0004",
       "name": "Toma AS - Salg og Marked",
-      "roles": [
-        "supplier",
-        "tenderer"
-      ],
       "additionalIdentifiers": [
         {
           "id": "984684037",
@@ -206,7 +202,10 @@
         "postalCode": "5179",
         "locality": "Godvik",
         "country": "NO"
-      }
+      },
+      "roles": [
+        "tenderer"
+      ]
     }
   ],
   "awards": [
@@ -221,9 +220,6 @@
       "suppliers": [
         {
           "id": "ORG-0003"
-        },
-        {
-          "id": "ORG-0004"
         }
       ]
     },

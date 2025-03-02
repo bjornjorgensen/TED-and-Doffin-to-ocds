@@ -61,9 +61,9 @@ def test_bt_3202_contract_tender_id_integration(
                             </efac:SettledContract>
                             <efac:LotTender>
                                 <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
-                                <efac:Tenderingparty>
+                                <efac:TenderingParty>
                                     <cbc:ID schemeName="tendering-party">TPA-0001</cbc:ID>
-                                </efac:Tenderingparty>
+                                </efac:TenderingParty>
                             </efac:LotTender>
                             <efac:LotResult>
                                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
@@ -74,12 +74,12 @@ def test_bt_3202_contract_tender_id_integration(
                                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                                 </efac:TenderLot>
                             </efac:LotResult>
-                            <efac:Tenderingparty>
+                            <efac:TenderingParty>
                                 <cbc:ID schemeName="tendering-party">TPA-0001</cbc:ID>
                                 <efac:Tenderer>
                                     <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
                                 </efac:Tenderer>
-                            </efac:Tenderingparty>
+                            </efac:TenderingParty>
                         </efac:NoticeResult>
                     </efext:EformsExtension>
                 </ext:ExtensionContent>
