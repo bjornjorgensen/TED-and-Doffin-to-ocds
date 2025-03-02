@@ -1,7 +1,7 @@
 {
   "id": "2248a00d-a0d9-4eee-8db1-d209e7346f13",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ccc3ee34-eb95-4fcd-a51d-02cb241930b3",
+  "ocid": "ocds-abcd1234-3ba41d5d-5dc9-434d-a225-377e5013e23b",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -149,8 +149,8 @@
         "email": "anne@pgas.no"
       },
       "roles": [
-        "buyer",
         "processContactPoint",
+        "buyer",
         "reviewContactPoint"
       ],
       "address": {

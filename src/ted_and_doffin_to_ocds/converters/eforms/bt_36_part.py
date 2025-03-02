@@ -37,23 +37,32 @@ def parse_part_duration(xml_content: str | bytes) -> dict[str, Any] | None:
     )
 
     if not duration_measures:
+        logger.debug("No duration measure found in XML")
         return None
 
     try:
-        duration_value = int(duration_measures[0].text)
+        duration_value = int(duration_measures[0].text.strip())
         unit_code = duration_measures[0].get("unitCode")
 
         if not unit_code:
+            logger.warning("Missing unitCode for duration measure")
             return None
 
         duration_in_days = calculate_duration_in_days(duration_value, unit_code)
         if duration_in_days is None:
             return None
-        return {"tender": {"contractPeriod": {"durationInDays": duration_in_days}}}  # noqa: TRY300
 
+        logger.debug(
+            "Parsed duration: %s %s -> %s days",
+            duration_value,
+            unit_code,
+            duration_in_days,
+        )
     except (ValueError, TypeError):
         logger.exception("Invalid duration value")
         return None
+    else:
+        return {"tender": {"contractPeriod": {"durationInDays": duration_in_days}}}
 
 
 def calculate_duration_in_days(value: int, unit_code: str) -> int | None:

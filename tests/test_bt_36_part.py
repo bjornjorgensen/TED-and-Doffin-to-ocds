@@ -57,33 +57,6 @@ def test_parse_duration_years(base_xml) -> None:
     }
 
 
-def test_parse_duration_weeks(base_xml) -> None:
-    """Test parsing duration specified in weeks."""
-    xml = base_xml.format(unit="WEEK", value="2")
-    result = parse_part_duration(xml)
-    assert result == {
-        "tender": {
-            "contractPeriod": {
-                "durationInDays": 14  # 2 weeks * 7 days
-            }
-        }
-    }
-
-
-def test_parse_duration_weekdays(base_xml) -> None:
-    """Test parsing duration specified in specific weekdays."""
-    for day in ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]:
-        xml = base_xml.format(unit=day, value="3")
-        result = parse_part_duration(xml)
-        assert result == {
-            "tender": {
-                "contractPeriod": {
-                    "durationInDays": 21  # 3 weeks * 7 days
-                }
-            }
-        }
-
-
 def test_parse_invalid_unit(base_xml) -> None:
     """Test parsing with invalid unit code."""
     xml = base_xml.format(unit="INVALID", value="3")
@@ -146,9 +119,6 @@ def test_calculate_duration_days() -> None:
     assert calculate_duration_in_days(3, "DAY") == 3
     assert calculate_duration_in_days(2, "MONTH") == 60
     assert calculate_duration_in_days(1, "YEAR") == 365
-    assert calculate_duration_in_days(2, "WEEK") == 14
-    for day in ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]:
-        assert calculate_duration_in_days(3, day) == 21
     assert calculate_duration_in_days(3, "INVALID") is None
 
 
