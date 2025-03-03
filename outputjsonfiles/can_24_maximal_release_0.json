@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a0f27fa3-588d-4c20-93e3-3acf6f4deb29",
+  "ocid": "ocds-abcd1234-15136e6c-4e42-4498-b944-66285fc3fcfe",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -729,8 +729,8 @@
         "listedOnRegulatedMarket": false
       },
       "roles": [
-        "supplier",
         "leadTenderer",
+        "supplier",
         "tenderer"
       ],
       "beneficialOwners": [

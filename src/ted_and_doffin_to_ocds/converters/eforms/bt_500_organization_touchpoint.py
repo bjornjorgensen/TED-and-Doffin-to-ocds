@@ -19,10 +19,10 @@ def parse_organization_touchpoint_name(
         {
             "parties": [
                 {
-                    "id": str,
-                    "name": str,
-                    "identifier": {  # Optional
-                        "id": str,
+                    "id": "touchpoint-id",
+                    "name": "Default name",
+                    "identifier": {
+                        "id": "company-id",
                         "scheme": "internal"
                     }
                 }
@@ -57,18 +57,21 @@ def parse_organization_touchpoint_name(
                 "cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']/text()",
                 namespaces=namespaces,
             )
-            org_name = touchpoint.xpath(
-                "cac:PartyName/cbc:Name/text()", namespaces=namespaces
+            name_elements = touchpoint.xpath(
+                "cac:PartyName/cbc:Name", namespaces=namespaces
             )
             company_id = org.xpath(
                 "efac:Company/cac:PartyLegalEntity/cbc:CompanyID/text()",
                 namespaces=namespaces,
             )
 
-            if touchpoint_id and org_name:
-                party = {"id": touchpoint_id[0], "name": org_name[0]}
+            if touchpoint_id and name_elements:
+                default_name = name_elements[0].text
+                party = {"id": touchpoint_id[0], "name": default_name}
+
                 if company_id:
                     party["identifier"] = {"id": company_id[0], "scheme": "internal"}
+
                 result["parties"].append(party)
 
     return result if result["parties"] else None
