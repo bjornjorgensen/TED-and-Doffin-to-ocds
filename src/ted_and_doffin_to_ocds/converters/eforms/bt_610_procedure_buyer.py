@@ -7,7 +7,6 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
-# COFOG codes and descriptions
 COFOG_MAPPING = {
     "defence": ("02", "Defence"),
     "econ-aff": ("04", "Economic affairs"),
@@ -21,7 +20,6 @@ COFOG_MAPPING = {
     "soc-pro": ("10", "Social protection"),
 }
 
-# Authority activity descriptions for non-COFOG activities
 AUTHORITY_TABLE = {
     "gas-oil": "Activities related to the exploitation of a geographical area for the purpose of extracting oil or gas.",
     "port": "Activities related to the exploitation of a geographical area for the purpose of the provision of maritime or inland ports or other terminal facilities to carriers by sea or inland waterway.",
@@ -82,25 +80,28 @@ def parse_activity_entity(
 
     result = {"parties": []}
 
-    contracting_parties = root.xpath("//cac:ContractingParty", namespaces=namespaces)
+    # Using the exact XPath from the specification
+    activity_elements = root.xpath(
+        "/*/cac:ContractingParty/cac:ContractingActivity/cbc:ActivityTypeCode[@listName='entity-activity']",
+        namespaces=namespaces,
+    )
 
-    for party in contracting_parties:
-        buyer_id = party.xpath(
+    for activity_element in activity_elements:
+        # Get the contracting party element (parent of parent)
+        party_element = activity_element.getparent().getparent()
+
+        # Extract the buyer ID
+        buyer_id = party_element.xpath(
             "cac:Party/cac:PartyIdentification/cbc:ID/text()",
             namespaces=namespaces,
         )
-        activity_code = party.xpath(
-            "cac:ContractingActivity/cbc:ActivityTypeCode[@listName='entity-activity']/text()",
-            namespaces=namespaces,
-        )
 
-        if buyer_id and activity_code:
+        if buyer_id:
             buyer_id = buyer_id[0]
-            activity_code = activity_code[0]
+            activity_code = activity_element.text
 
             classification = {}
             if activity_code in COFOG_MAPPING:
-                # Handle COFOG classification
                 classification.update(
                     {
                         "scheme": "COFOG",
@@ -109,7 +110,6 @@ def parse_activity_entity(
                     }
                 )
             elif activity_code in AUTHORITY_TABLE:
-                # Handle non-COFOG classification
                 classification.update(
                     {
                         "scheme": "eu-main-activity",
@@ -157,10 +157,22 @@ def merge_activity_entity(
             None,
         )
         if existing_party:
-            existing_party.setdefault("details", {}).setdefault(
-                "classifications",
-                [],
-            ).extend(new_party["details"]["classifications"])
+            # Get or create the classifications list
+            existing_classifications = existing_party.setdefault(
+                "details", {}
+            ).setdefault("classifications", [])
+
+            # Add new classifications, avoiding duplicates
+            for new_classification in new_party["details"]["classifications"]:
+                # Check if this classification (by scheme and id) already exists
+                if not any(
+                    cls.get("scheme") == new_classification.get("scheme")
+                    and cls.get("id") == new_classification.get("id")
+                    for cls in existing_classifications
+                ):
+                    existing_classifications.append(new_classification)
+
+            # Ensure 'buyer' role is present
             if "buyer" not in existing_party.get("roles", []):
                 existing_party.setdefault("roles", []).append("buyer")
         else:

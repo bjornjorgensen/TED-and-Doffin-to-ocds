@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-1527645c-008c-4021-8bdb-e6a132e14489",
+  "ocid": "ocds-abcd1234-e0c0929d-bcc7-41d3-8ef5-b4e78c2c02f5",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -153,8 +153,8 @@
       {
         "id": "GLO-0001",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "title": "Title ---",
         "identifiers": [
@@ -996,8 +996,8 @@
       "scheme": "eu-notice-id-ref",
       "identifier": "9c0fd704-64d3-4294-a3b6-6df45911ab9f-01",
       "relatedLots": [
-        "LOT-0001",
-        "LOT-0002"
+        "LOT-0002",
+        "LOT-0001"
       ]
     }
   ],
@@ -1360,7 +1360,7 @@
     "budget": {
       "finance": [
         {
-          "id": "ece65d4b-9d5b-49c5-8db2-ff9c14534303",
+          "id": "ad5329b6-c4ae-44ee-a464-f78e2d0e79dc",
           "financingParty": {
             "id": "13",
             "name": "European Union"
