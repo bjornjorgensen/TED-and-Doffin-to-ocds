@@ -205,18 +205,29 @@ def parse_notice_language(
             "language": "en"
         }
 
+    Note:
+        Only the primary notice language (BT-702(a)) is included in the output.
+        Additional languages (BT-702(b)) are discarded as per eForms guidance.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
     namespaces = {
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
     }
 
+    # Primary language (BT-702(a))
     notice_language_code = root.xpath(
         "/*/cbc:NoticeLanguageCode/text()",
         namespaces=namespaces,
     )
+
+    # We extract but discard additional languages as per eForms guidance
+    # additional_languages = root.xpath(
+    #     "/*/cac:AdditionalNoticeLanguage/cbc:ID/text()",
+    #     namespaces=namespaces,
+    # )
 
     if notice_language_code:
         iso_639_1_code = ISO_639_1_MAPPING.get(notice_language_code[0].upper())
