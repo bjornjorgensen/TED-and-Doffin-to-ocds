@@ -20,36 +20,62 @@ def parse_bt196_bt142_unpublished_justification(
         namespaces = {
             "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
             "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+            "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+            "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
         }
 
-        result = {"awards": []}
+        result = {"withheldInformation": []}
 
-        privacies = root.xpath("//efac:FieldsPrivacy", namespaces=namespaces)
+        # Use the specific XPath for BT-196(BT-142)-LotResult
+        privacies = root.xpath(
+            "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='win-cho']",
+            namespaces=namespaces,
+        )
 
         for privacy in privacies:
             try:
-                reasons = privacy.xpath(
-                    "efbc:ReasonDescription/text()", namespaces=namespaces
+                # Get ReasonDescription elements to handle multilingual text
+                reason_elements = privacy.xpath(
+                    "efbc:ReasonDescription", namespaces=namespaces
                 )
-                if not reasons:
+                if not reason_elements:
                     logger.debug("No reason description found in privacy element")
                     continue
 
-                reason = reasons[0]
+                # Process all language variants
+                multilingual_reasons = []
+                for reason_element in reason_elements:
+                    text = reason_element.text
+                    language_id = reason_element.get("languageID")
+
+                    if text:
+                        reason_obj = {"text": text}
+                        if language_id:
+                            reason_obj["languageID"] = language_id
+                        multilingual_reasons.append(reason_obj)
+
+                if not multilingual_reasons:
+                    logger.debug("No valid reason text found in privacy element")
+                    continue
+
                 reason_codes = privacy.xpath(
                     "efbc:ReasonCode/text()", namespaces=namespaces
                 )
                 if not reason_codes:
                     logger.debug(
-                        "No reason code found for privacy element with reason: %s",
-                        reason,
+                        "No reason code found for privacy element with reason",
                     )
                     continue
 
-                result["awards"].append(
+                # Use the first language variant as the primary rationale
+                # but store all language variants in the result
+                primary_reason = multilingual_reasons[0]["text"]
+
+                result["withheldInformation"].append(
                     {
-                        "id": str(len(result["awards"]) + 1),
-                        "justification": {"description": reason, "id": reason_codes[0]},
+                        "id": str(len(result["withheldInformation"]) + 1),
+                        "rationale": primary_reason,
+                        "rationaleMultilingual": multilingual_reasons,
                     }
                 )
 
@@ -57,7 +83,7 @@ def parse_bt196_bt142_unpublished_justification(
                 logger.warning("Error processing privacy element: %s", e)
                 continue
 
-        return result if result["awards"] else None
+        return result if result["withheldInformation"] else None
 
     except Exception:
         logger.exception("Error parsing unpublished justification data")
@@ -94,8 +120,17 @@ def merge_bt196_bt142_unpublished_justification(
             None,
         )
         if existing_item:
+            # Add the new rationale fields to the existing item structure
             existing_item["rationale"] = new_item["rationale"]
+            # Also include multilingual rationales if available
+            if "rationaleMultilingual" in new_item:
+                existing_item["rationaleMultilingual"] = new_item["rationaleMultilingual"]
         else:
+            # If creating a new item, we need to handle that field and name might be expected
+            # but our parser doesn't generate them
+            if "field" not in new_item and "id" in new_item and new_item["id"].startswith("win-cho"):
+                new_item["field"] = "win-cho"
+                new_item["name"] = "Winner Chosen"
             withheld_info.append(new_item)
 
     logger.info("Merged unpublished justification data for BT-196(BT-142)")

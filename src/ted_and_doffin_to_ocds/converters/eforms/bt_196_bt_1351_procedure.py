@@ -25,7 +25,10 @@ def parse_bt196_bt1351_unpublished_justification(
                 "withheldInformation": [
                     {
                         "id": "pro-acc-jus",
-                        "rationale": "Justification text"
+                        "rationale": {
+                            "text": "Justification text",
+                            "language": "ENG"
+                        }
                     },
                     ...
                 ]
@@ -57,17 +60,22 @@ def parse_bt196_bt1351_unpublished_justification(
     privacy_elements = root.xpath(xpath_query, namespaces=namespaces)
 
     for privacy_element in privacy_elements:
-        reason_description = privacy_element.xpath(
-            "efbc:ReasonDescription/text()",
+        reason_description_elements = privacy_element.xpath(
+            "efbc:ReasonDescription",
             namespaces=namespaces,
         )
 
-        if reason_description:
-            withheld_info = {
-                "id": "pro-acc-jus",
-                "rationale": reason_description[0],
-            }
-            result["withheldInformation"].append(withheld_info)
+        for reason_element in reason_description_elements:
+            text = reason_element.text
+            language = reason_element.get("languageID", "")
+
+            if text:
+                withheld_info = {"id": "pro-acc-jus", "rationale": {"text": text}}
+
+                if language:
+                    withheld_info["rationale"]["language"] = language
+
+                result["withheldInformation"].append(withheld_info)
 
     if not result["withheldInformation"]:
         logger.debug(

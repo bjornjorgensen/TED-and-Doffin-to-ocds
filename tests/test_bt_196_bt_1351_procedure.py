@@ -63,12 +63,22 @@ def test_bt_196_bt_1351_procedure_integration(tmp_path, temp_output_dir) -> None
 
     withheld_info = result["withheldInformation"][0]
     assert (
-        withheld_info["field"] == "pro-acc-jus"
-    ), f"Expected field 'pro-acc-jus', got {withheld_info['field']}"
+        withheld_info["id"] == "pro-acc-jus"
+    ), f"Expected id 'pro-acc-jus', got {withheld_info.get('id')}"
+    
     assert "rationale" in withheld_info, "Expected 'rationale' in withheld_info"
+    assert isinstance(withheld_info["rationale"], dict), "Rationale should be a dictionary"
+    
+    rationale = withheld_info["rationale"]
+    assert "text" in rationale, "Expected 'text' in rationale"
     assert (
-        withheld_info["rationale"] == "Information delayed publication because of ..."
-    ), f"Unexpected rationale: {withheld_info['rationale']}"
+        rationale["text"] == "Information delayed publication because of ..."
+    ), f"Unexpected rationale text: {rationale.get('text')}"
+    
+    assert "language" in rationale, "Expected 'language' in rationale"
+    assert (
+        rationale["language"] == "ENG"
+    ), f"Unexpected language: {rationale.get('language')}"
 
 
 if __name__ == "__main__":

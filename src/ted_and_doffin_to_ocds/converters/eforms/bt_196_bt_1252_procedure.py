@@ -23,7 +23,7 @@ def parse_bt196_bt1252_unpublished_justification(
                 "withheldInformation": [
                     {
                         "id": "dir-awa-pre",
-                        "rationale": "Justification text"
+                        "rationale": "Justification text" or {"language": "text"}
                     },
                     ...
                 ]
@@ -55,15 +55,29 @@ def parse_bt196_bt1252_unpublished_justification(
     privacy_elements = root.xpath(xpath_query, namespaces=namespaces)
 
     for privacy_element in privacy_elements:
-        reason_description = privacy_element.xpath(
-            "efbc:ReasonDescription/text()",
+        reason_elements = privacy_element.xpath(
+            "efbc:ReasonDescription",
             namespaces=namespaces,
         )
 
-        if reason_description:
+        if reason_elements:
+            rationale = {}
+            # Handle potential multilingual text
+            for reason_elem in reason_elements:
+                text = reason_elem.text
+                lang_id = reason_elem.get("languageID", "").lower()
+
+                if text:
+                    if lang_id:
+                        rationale[lang_id] = text
+                    else:
+                        # If no language specified, use text directly
+                        rationale = text
+                        break
+
             withheld_info = {
                 "id": "dir-awa-pre",
-                "rationale": reason_description[0],
+                "rationale": rationale,
             }
             result["withheldInformation"].append(withheld_info)
 
@@ -106,7 +120,7 @@ def merge_bt196_bt1252_unpublished_justification(
 
     for new_item in unpublished_justification_data["withheldInformation"]:
         existing_item = next(
-            (item for item in withheld_info if item.get("field") == new_item["field"]),
+            (item for item in withheld_info if item.get("id") == new_item["id"]),
             None,
         )
         if existing_item:
