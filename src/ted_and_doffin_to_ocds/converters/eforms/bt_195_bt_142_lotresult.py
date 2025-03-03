@@ -67,6 +67,9 @@ def parse_bt195_bt142_unpublished_identifier(
         )
 
         if lot_id and field_identifier:
+            # Create withheld information entry following eForms guidance:
+            # ID format: [efbc:FieldIdentifierCode]-[ancestor::efac:LotResult/cbc:ID]
+            # where field_identifier[0] is "win-cho" and lot_id[0] is the result ID
             withheld_info = {
                 "id": f"{field_identifier[0]}-{lot_id[0]}",
                 "field": "win-cho",

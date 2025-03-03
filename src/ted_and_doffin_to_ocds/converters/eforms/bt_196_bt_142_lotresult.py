@@ -119,18 +119,25 @@ def merge_bt196_bt142_unpublished_justification(
             (item for item in withheld_info if item.get("id") == new_item["id"]),
             None,
         )
+
+        # Ensure we have the correct field and name for BT-196(BT-142)-LotResult
+        if "field" not in new_item:
+            new_item["field"] = "win-cho"
+        if "name" not in new_item:
+            new_item["name"] = "Winner Chosen"
+
         if existing_item:
             # Add the new rationale fields to the existing item structure
             existing_item["rationale"] = new_item["rationale"]
             # Also include multilingual rationales if available
             if "rationaleMultilingual" in new_item:
-                existing_item["rationaleMultilingual"] = new_item["rationaleMultilingual"]
+                existing_item["rationaleMultilingual"] = new_item[
+                    "rationaleMultilingual"
+                ]
+            # Ensure field and name are set correctly on existing items
+            existing_item["field"] = new_item["field"]
+            existing_item["name"] = new_item["name"]
         else:
-            # If creating a new item, we need to handle that field and name might be expected
-            # but our parser doesn't generate them
-            if "field" not in new_item and "id" in new_item and new_item["id"].startswith("win-cho"):
-                new_item["field"] = "win-cho"
-                new_item["name"] = "Winner Chosen"
             withheld_info.append(new_item)
 
     logger.info("Merged unpublished justification data for BT-196(BT-142)")
