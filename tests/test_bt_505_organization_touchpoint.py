@@ -33,7 +33,7 @@ def test_parse_organization_touchpoint_website() -> None:
     </root>
     """
 
-    result = parse_organization_touchpoint_website(xml_content)
+    result = parse_touchpoint_website(xml_content)
     assert result == {
         "parties": [
             {
@@ -58,7 +58,7 @@ def test_merge_organization_touchpoint_website() -> None:
         ]
     }
 
-    merge_organization_touchpoint_website(
+    merge_touchpoint_website(
         release_json, organization_touchpoint_website_data
     )
 
@@ -87,7 +87,7 @@ def test_merge_organization_touchpoint_website_new_party() -> None:
         ]
     }
 
-    merge_organization_touchpoint_website(
+    merge_touchpoint_website(
         release_json, organization_touchpoint_website_data
     )
 

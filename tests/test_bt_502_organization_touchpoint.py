@@ -35,7 +35,7 @@ def test_parse_organization_touchpoint_contact_point() -> None:
     </root>
     """
 
-    result = parse_organization_touchpoint_contact_point(xml_content)
+    result = parse_touchpoint_contact_point(xml_content)
     assert result == {
         "parties": [
             {
@@ -60,7 +60,7 @@ def test_merge_organization_touchpoint_contact_point() -> None:
         ]
     }
 
-    merge_organization_touchpoint_contact_point(
+    merge_touchpoint_contact_point(
         release_json, organization_touchpoint_contact_point_data
     )
 
@@ -89,7 +89,7 @@ def test_merge_organization_touchpoint_contact_point_new_party() -> None:
         ]
     }
 
-    merge_organization_touchpoint_contact_point(
+    merge_touchpoint_contact_point(
         release_json, organization_touchpoint_contact_point_data
     )
 

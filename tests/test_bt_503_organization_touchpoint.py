@@ -35,7 +35,7 @@ def test_parse_organization_touchpoint_telephone() -> None:
     </root>
     """
 
-    result = parse_organization_touchpoint_telephone(xml_content)
+    result = parse_touchpoint_telephone(xml_content)
     assert result == {
         "parties": [
             {
@@ -60,7 +60,7 @@ def test_merge_organization_touchpoint_telephone() -> None:
         ]
     }
 
-    merge_organization_touchpoint_telephone(
+    merge_touchpoint_telephone(
         release_json, organization_touchpoint_telephone_data
     )
 
@@ -89,7 +89,7 @@ def test_merge_organization_touchpoint_telephone_new_party() -> None:
         ]
     }
 
-    merge_organization_touchpoint_telephone(
+    merge_touchpoint_telephone(
         release_json, organization_touchpoint_telephone_data
     )
 

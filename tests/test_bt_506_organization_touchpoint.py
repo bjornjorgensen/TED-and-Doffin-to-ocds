@@ -35,7 +35,7 @@ def test_parse_organization_touchpoint_email() -> None:
     </root>
     """
 
-    result = parse_organization_touchpoint_email(xml_content)
+    result = parse_touchpoint_email(xml_content)
     assert result == {
         "parties": [
             {
@@ -60,7 +60,7 @@ def test_merge_organization_touchpoint_email() -> None:
         ]
     }
 
-    merge_organization_touchpoint_email(
+    merge_touchpoint_email(
         release_json, organization_touchpoint_email_data
     )
 
@@ -89,7 +89,7 @@ def test_merge_organization_touchpoint_email_new_party() -> None:
         ]
     }
 
-    merge_organization_touchpoint_email(
+    merge_touchpoint_email(
         release_json, organization_touchpoint_email_data
     )
 

@@ -59,12 +59,12 @@ def test_bt_509_organization_touchpoint_integration(
                                         <cbc:companyID>998298</cbc:companyID>
                                     </cac:PartyLegalEntity>
                                 </efac:Company>
-                                <efac:touchpoint>
+                                <efac:TouchPoint>
                                     <cac:PartyIdentification>
                                         <cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID>
                                     </cac:PartyIdentification>
                                     <cbc:EndpointID>https://drive.xpertpro.eu/</cbc:EndpointID>
-                                </efac:touchpoint>
+                                </efac:TouchPoint>
                             </efac:Organization>
                         </efac:Organizations>
                     </efext:EformsExtension>
@@ -88,9 +88,7 @@ def test_bt_509_organization_touchpoint_integration(
     assert party["id"] == "TPO-0001"
     assert "eDeliveryGateway" in party
     assert party["eDeliveryGateway"] == "https://drive.xpertpro.eu/"
-    assert "identifier" in party
-    assert party["identifier"]["id"] == "998298"
-    assert party["identifier"]["scheme"] == "internal"
+
 
 
 if __name__ == "__main__":

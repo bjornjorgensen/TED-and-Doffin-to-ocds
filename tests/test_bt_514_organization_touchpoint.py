@@ -59,7 +59,7 @@ def test_bt_514_organization_touchpoint_integration(
                                         <cbc:companyID>998298</cbc:companyID>
                                     </cac:PartyLegalEntity>
                                 </efac:Company>
-                                <efac:touchpoint>
+                                <efac:TouchPoint>
                                     <cac:PartyIdentification>
                                         <cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID>
                                     </cac:PartyIdentification>
@@ -68,7 +68,7 @@ def test_bt_514_organization_touchpoint_integration(
                                             <cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode>
                                         </cac:Country>
                                     </cac:PostalAddress>
-                                </efac:touchpoint>
+                                </efac:TouchPoint>
                             </efac:Organization>
                         </efac:Organizations>
                     </efext:EformsExtension>

@@ -35,7 +35,7 @@ def test_parse_organization_touchpoint_country_subdivision() -> None:
     </root>
     """
 
-    result = parse_organization_touchpoint_country_subdivision(xml_content)
+    result = parse_touchpoint_country_subdivision(xml_content)
     assert result == {
         "parties": [
             {
@@ -60,7 +60,7 @@ def test_merge_organization_touchpoint_country_subdivision() -> None:
         ]
     }
 
-    merge_organization_touchpoint_country_subdivision(
+    merge_touchpoint_country_subdivision(
         release_json, organization_touchpoint_country_subdivision_data
     )
 
@@ -89,7 +89,7 @@ def test_merge_organization_touchpoint_country_subdivision_new_party() -> None:
         ]
     }
 
-    merge_organization_touchpoint_country_subdivision(
+    merge_touchpoint_country_subdivision(
         release_json, organization_touchpoint_country_subdivision_data
     )
 

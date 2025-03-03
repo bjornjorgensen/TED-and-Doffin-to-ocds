@@ -51,11 +51,11 @@ def parse_touchpoint_postcode(xml_content: str | bytes) -> dict | None:
             namespaces=namespaces,
         )
         touchpoint_id = organization.xpath(
-            "efac:touchpoint/cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']/text()",
+            "efac:TouchPoint/cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']/text()",
             namespaces=namespaces,
         )
         postal_zone = organization.xpath(
-            "efac:touchpoint/cac:PostalAddress/cbc:PostalZone/text()",
+            "efac:TouchPoint/cac:PostalAddress/cbc:PostalZone/text()",
             namespaces=namespaces,
         )
 

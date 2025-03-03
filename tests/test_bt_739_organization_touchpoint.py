@@ -57,14 +57,14 @@ def test_bt_739_organization_touchpoint_integration(
                                         <cbc:companyID>AB12345</cbc:companyID>
                                     </cac:PartyLegalEntity>
                                 </efac:Company>
-                                <efac:touchpoint>
+                                <efac:TouchPoint>
                                     <cac:PartyIdentification>
                                         <cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID>
                                     </cac:PartyIdentification>
                                     <cac:Contact>
                                         <cbc:Telefax>(+33) 2 34 56 78 91</cbc:Telefax>
                                     </cac:Contact>
-                                </efac:touchpoint>
+                                </efac:TouchPoint>
                             </efac:Organization>
                         </efac:Organizations>
                     </efext:EformsExtension>
