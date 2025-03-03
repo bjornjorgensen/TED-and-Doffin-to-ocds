@@ -6,6 +6,8 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+# Mapping from eForm values to OCDS values for variants policy
+# According to BT-63 and OCDS submissionTerms extension
 VARIANT_POLICY_MAPPING = {
     "required": "required",
     "allowed": "allowed",
@@ -17,7 +19,9 @@ def parse_variants(xml_content: str | bytes) -> dict | None:
     """Parse variants policy from XML for each lot.
 
     Extracts whether tenderers are required, allowed, or not allowed to submit variant
-    tenders as defined in BT-63.
+    tenders as defined in BT-63 (Variants). This business term specifies whether tenderers
+    can submit tenders which fulfill the buyer's needs differently than as proposed in
+    the procurement documents.
 
     Args:
         xml_content: The XML content to parse, either as a string or bytes.
@@ -30,7 +34,7 @@ def parse_variants(xml_content: str | bytes) -> dict | None:
                     {
                         "id": str,
                         "submissionTerms": {
-                            "variantPolicy": str  # One of: "required", "allowed", "not allowed"
+                            "variantPolicy": str  # One of: "required", "allowed", "notAllowed"
                         }
                     }
                 ]
@@ -90,7 +94,8 @@ def merge_variants(release_json: dict, variants_data: dict | None) -> None:
     """Merge variants policy data into the OCDS release.
 
     Updates the release JSON in-place by adding or updating submission terms
-    for each lot specified in the input data.
+    for each lot specified in the input data. This implements BT-63 (Variants)
+    in the OCDS release according to the submissionTerms extension.
 
     Args:
         release_json: The main OCDS release JSON to be updated. Must contain

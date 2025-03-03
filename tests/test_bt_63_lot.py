@@ -74,8 +74,8 @@ def test_bt_63_lot_integration(tmp_path, setup_logging, temp_output_dir) -> None
         "variantPolicy" in lot["submissionTerms"]
     ), "Expected 'variantPolicy' in submissionTerms"
     assert (
-        lot["submissionTerms"]["variantPolicy"] == "Allowed"
-    ), f"Expected variantPolicy 'Allowed', got {lot['submissionTerms']['variantPolicy']}"
+        lot["submissionTerms"]["variantPolicy"] == "allowed"
+    ), f"Expected variantPolicy 'allowed', got {lot['submissionTerms']['variantPolicy']}"
 
 
 if __name__ == "__main__":
