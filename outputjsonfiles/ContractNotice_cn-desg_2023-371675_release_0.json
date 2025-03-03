@@ -1,7 +1,7 @@
 {
   "id": "2023-371675",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d4f8c635-120f-4588-bd0d-b3598b0fe8b0",
+  "ocid": "ocds-abcd1234-504a4bef-0126-48e7-a9cf-75048ca94a04",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -144,8 +144,8 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Gullhaug Torg 2",

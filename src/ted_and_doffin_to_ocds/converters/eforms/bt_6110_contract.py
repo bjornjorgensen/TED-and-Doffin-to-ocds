@@ -50,20 +50,29 @@ def parse_contract_eu_funds_details(xml_content: str | bytes) -> dict[str, Any] 
                     namespaces=NAMESPACES,
                 )[0]
 
-                funding_descriptions = contract.xpath(
+                funding_programs = contract.xpath(
                     "efac:Funding/cbc:FundingProgram/text()",
                     namespaces=NAMESPACES,
                 )
 
-                if contract_id and funding_descriptions:
+                funding_descriptions = contract.xpath(
+                    "efac:Funding/cbc:Description/text()",
+                    namespaces=NAMESPACES,
+                )
+
+                # Combine both funding programs and descriptions
+                all_funding_details = list(funding_programs) + list(
+                    funding_descriptions
+                )
+
+                if contract_id and all_funding_details:
                     contract_data = {
                         "id": contract_id,
                         "finance": [
-                            {"description": desc} for desc in funding_descriptions
+                            {"description": desc} for desc in all_funding_details
                         ],
                     }
 
-                    # Find corresponding LotResult to get awardID
                     award_id = root.xpath(
                         f"//efac:NoticeResult/efac:LotResult[efac:SettledContract/cbc:ID"
                         f"[@schemeName='contract']/text()='{contract_id}']/"

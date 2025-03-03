@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-e0c0929d-bcc7-41d3-8ef5-b4e78c2c02f5",
+  "ocid": "ocds-abcd1234-cb89d797-93ad-45fc-b1e1-e78d55d5dc33",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -153,8 +153,8 @@
       {
         "id": "GLO-0001",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "title": "Title ---",
         "identifiers": [
@@ -747,9 +747,9 @@
         "listedOnRegulatedMarket": false
       },
       "roles": [
+        "supplier",
         "leadTenderer",
-        "tenderer",
-        "supplier"
+        "tenderer"
       ],
       "beneficialOwners": [
         {
@@ -798,8 +798,8 @@
         "listedOnRegulatedMarket": false
       },
       "roles": [
-        "tenderer",
-        "supplier"
+        "supplier",
+        "tenderer"
       ],
       "beneficialOwners": [
         {
@@ -996,8 +996,8 @@
       "scheme": "eu-notice-id-ref",
       "identifier": "9c0fd704-64d3-4294-a3b6-6df45911ab9f-01",
       "relatedLots": [
-        "LOT-0002",
-        "LOT-0001"
+        "LOT-0001",
+        "LOT-0002"
       ]
     }
   ],
@@ -1299,6 +1299,9 @@
             "name": "European Union",
             "id": "13"
           }
+        },
+        {
+          "description": "Recovery Fund"
         }
       ],
       "title": "This is the title of the contract ---",
@@ -1339,10 +1342,13 @@
             "name": "European Union",
             "id": "13"
           }
+        },
+        {
+          "description": "Recovery Fund"
         }
       ],
-      "title": "Title of second contract ---",
       "awardID": "RES-0001",
+      "title": "Title of second contract ---",
       "relatedProcesses": [
         {
           "id": "1",
@@ -1360,7 +1366,7 @@
     "budget": {
       "finance": [
         {
-          "id": "ad5329b6-c4ae-44ee-a464-f78e2d0e79dc",
+          "id": "32a113a6-1d5b-4455-85fc-0dde4655d7d9",
           "financingParty": {
             "id": "13",
             "name": "European Union"

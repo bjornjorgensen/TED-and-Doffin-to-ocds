@@ -33,9 +33,8 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_6110_contract_integration(tmp_path, setup_logging, temp_output_dir) -> None:
-    logger = setup_logging
-
+def test_bt_6110_contract_description(tmp_path, setup_logging, temp_output_dir) -> None:
+    """Test extraction of contract EU funds details using Description element."""
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
                          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -68,34 +67,121 @@ def test_bt_6110_contract_integration(tmp_path, setup_logging, temp_output_dir) 
     </ContractAwardNotice>
     """
 
-    xml_file = tmp_path / "test_input_contract_eu_funds_details.xml"
+    xml_file = tmp_path / "test_input_contract_eu_funds_description.xml"
     xml_file.write_text(xml_content)
 
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     assert "contracts" in result, "Expected 'contracts' in result"
-    assert (
-        len(result["contracts"]) == 1
-    ), f"Expected 1 contract, got {len(result['contracts'])}"
-
+    assert len(result["contracts"]) == 1
     contract = result["contracts"][0]
-    assert (
-        contract["id"] == "CON-0001"
-    ), f"Expected contract id 'CON-0001', got {contract['id']}"
-    assert "finance" in contract, "Expected 'finance' in contract"
-    assert (
-        len(contract["finance"]) == 1
-    ), f"Expected 1 finance entry, got {len(contract['finance'])}"
-    assert (
-        contract["finance"][0]["description"] == "Program for the development ..."
-    ), f"Expected description 'Program for the development ...', got {contract['finance'][0]['description']}"
-    assert (
-        contract["awardID"] == "RES-0001"
-    ), f"Expected awardID 'RES-0001', got {contract.get('awardID')}"
+    assert contract["id"] == "CON-0001"
+    assert len(contract["finance"]) == 1
+    assert contract["finance"][0]["description"] == "Program for the development ..."
+    assert contract["awardID"] == "RES-0001"
 
-    # logger.info("Test bt_6110_contract_integration passed successfully.") # Logging disabled
+
+def test_bt_6110_contract_funding_program(tmp_path, setup_logging, temp_output_dir) -> None:
+    """Test extraction of contract EU funds details using FundingProgram element."""
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+                         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+                         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+                         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+                         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:SettledContract>
+                                <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+                                <efac:Funding>
+                                    <cbc:FundingProgram>European Regional Development Fund</cbc:FundingProgram>
+                                </efac:Funding>
+                            </efac:SettledContract>
+                            <efac:LotResult>
+                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
+                                <efac:SettledContract>
+                                    <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+                                </efac:SettledContract>
+                            </efac:LotResult>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+    </ContractAwardNotice>
+    """
+
+    xml_file = tmp_path / "test_input_contract_eu_funds_program.xml"
+    xml_file.write_text(xml_content)
+
+    # Run main and get result
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    assert "contracts" in result, "Expected 'contracts' in result"
+    assert len(result["contracts"]) == 1
+    contract = result["contracts"][0]
+    assert contract["id"] == "CON-0001"
+    assert len(contract["finance"]) == 1
+    assert contract["finance"][0]["description"] == "European Regional Development Fund"
+    assert contract["awardID"] == "RES-0001"
+
+
+def test_bt_6110_contract_both_funding_elements(tmp_path, setup_logging, temp_output_dir) -> None:
+    """Test extraction of contract EU funds details using both Description and FundingProgram elements."""
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
+                         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+                         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+                         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+                         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+                         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1">
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:SettledContract>
+                                <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+                                <efac:Funding>
+                                    <cbc:FundingProgram>European Regional Development Fund</cbc:FundingProgram>
+                                    <cbc:Description>Program for the development of rural areas</cbc:Description>
+                                </efac:Funding>
+                            </efac:SettledContract>
+                            <efac:LotResult>
+                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
+                                <efac:SettledContract>
+                                    <cbc:ID schemeName="contract">CON-0001</cbc:ID>
+                                </efac:SettledContract>
+                            </efac:LotResult>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+    </ContractAwardNotice>
+    """
+
+    xml_file = tmp_path / "test_input_contract_eu_funds_both.xml"
+    xml_file.write_text(xml_content)
+
+    # Run main and get result
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    assert "contracts" in result, "Expected 'contracts' in result"
+    assert len(result["contracts"]) == 1
+    contract = result["contracts"][0]
+    assert contract["id"] == "CON-0001"
+    assert len(contract["finance"]) == 2
+    
+    descriptions = [finance["description"] for finance in contract["finance"]]
+    assert "European Regional Development Fund" in descriptions
+    assert "Program for the development of rural areas" in descriptions
+    assert contract["awardID"] == "RES-0001"
 
 
 if __name__ == "__main__":
