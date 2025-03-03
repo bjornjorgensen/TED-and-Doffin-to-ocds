@@ -1,7 +1,7 @@
 {
   "id": "2023-649037",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-387883b3-79b2-41dc-a20e-86991531c9f5",
+  "ocid": "ocds-abcd1234-2918e7e6-7451-4a4b-a828-16d923944012",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -178,8 +178,8 @@
       },
       "roles": [
         "processContactPoint",
-        "buyer",
-        "wholesaleBuyer"
+        "wholesaleBuyer",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Postboks 40",

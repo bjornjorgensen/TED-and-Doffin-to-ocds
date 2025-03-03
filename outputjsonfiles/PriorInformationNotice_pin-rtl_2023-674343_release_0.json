@@ -1,7 +1,7 @@
 {
   "id": "2023-674343",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-315c9762-78d8-495a-9616-52803955a5bb",
+  "ocid": "ocds-abcd1234-eb7600db-e453-47bf-ba9a-5d17090e06db",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -137,9 +137,9 @@
       },
       "roles": [
         "processContactPoint",
-        "buyer",
+        "wholesaleBuyer",
         "leadBuyer",
-        "wholesaleBuyer"
+        "buyer"
       ],
       "address": {
         "streetAddress": "Rådhusplassen 3",
