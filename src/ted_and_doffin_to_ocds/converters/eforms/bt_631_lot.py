@@ -56,18 +56,32 @@ def parse_dispatch_invitation_interest(
 
     for lot in lots:
         lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
-        dispatch_date = lot.xpath(
-            "cac:TenderingProcess/cac:ParticipationInvitationPeriod/cbc:StartDate/text()",
+        # Use the exact XPath as specified in the documentation
+        dispatch_date_nodes = lot.xpath(
+            "cac:TenderingProcess/cac:ParticipationInvitationPeriod/cbc:StartDate",
             namespaces=namespaces,
         )
 
-        if dispatch_date:
-            iso_date = start_date(dispatch_date[0])
-            lot_data = {
-                "id": lot_id,
-                "communication": {"invitationToConfirmInterestDispatchDate": iso_date},
-            }
-            result["tender"]["lots"].append(lot_data)
+        if dispatch_date_nodes:
+            # Get both the text value and the raw node to handle timezone information properly
+            dispatch_date_text = dispatch_date_nodes[0].text
+            if dispatch_date_text:
+                try:
+                    iso_date = start_date(dispatch_date_text)
+                    lot_data = {
+                        "id": lot_id,
+                        "communication": {
+                            "invitationToConfirmInterestDispatchDate": iso_date
+                        },
+                    }
+                    result["tender"]["lots"].append(lot_data)
+                except ValueError as e:
+                    logger.warning(
+                        "Invalid date format for lot %s: %s. Error: %s",
+                        lot_id,
+                        dispatch_date_text,
+                        str(e),
+                    )
 
     return result if result["tender"]["lots"] else None
 
