@@ -1,7 +1,7 @@
 {
   "id": "a105cb09-ec7d-45d5-a364-ff2317e2231f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6122494a-efba-4eb3-8634-056756315402",
+  "ocid": "ocds-abcd1234-995238e2-8b04-4c22-8b74-e6fac2078ef0",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -54,6 +54,15 @@
         "deliveryAddresses": [
           {
             "region": "NO082"
+          }
+        ]
+      },
+      {
+        "id": "LOT-0000",
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "locality": "Lillestrøm"
           }
         ]
       }
@@ -136,17 +145,6 @@
       },
       "roles": [
         "reviewBody"
-      ]
-    }
-  ],
-  "deliveryAddresses": [
-    {
-      "id": "1",
-      "relatedLot": "LOT-0000",
-      "deliveryAddresses": [
-        {
-          "locality": "Lillestrøm"
-        }
       ]
     }
   ],

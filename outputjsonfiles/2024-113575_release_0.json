@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-03dc482e-40a8-445d-8358-5928b5009f1b",
+  "ocid": "ocds-abcd1234-8ad7bc5a-8388-4e5c-812a-b0a92e6463c9",
   "tender": {
     "legalBasis": {
       "id": "FOA § 13-4 bokstav b annet punkt; «konkurranse er umulig av tekniske årsaker».",
@@ -126,6 +126,18 @@
             "description": "Installation in On-prem Helse Nord ICT computer centre in Tromsø."
           }
         ]
+      },
+      {
+        "id": "LOT-0000",
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "locality": "Bodø"
+          },
+          {
+            "locality": "Tromsø"
+          }
+        ]
       }
     ],
     "deliveryAddresses": [
@@ -233,9 +245,9 @@
         "country": "NO"
       },
       "roles": [
-        "leadBuyer",
         "buyer",
         "processContactPoint",
+        "leadBuyer",
         "reviewContactPoint"
       ]
     },
@@ -367,20 +379,6 @@
         "TEN-0001"
       ],
       "title": "Første tilbud ifm direkteforhandlinger"
-    }
-  ],
-  "deliveryAddresses": [
-    {
-      "id": "1",
-      "relatedLot": "LOT-0000",
-      "deliveryAddresses": [
-        {
-          "locality": "Bodø"
-        },
-        {
-          "locality": "Tromsø"
-        }
-      ]
     }
   ],
   "language": "no",

@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-15136e6c-4e42-4498-b944-66285fc3fcfe",
+  "ocid": "ocds-abcd1234-ae0a9a4f-bc3e-45d5-a1df-20e472419e5d",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -153,8 +153,8 @@
       {
         "id": "GLO-0001",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "title": "Title ---",
         "identifiers": [
@@ -290,6 +290,24 @@
             "description": "Additional information ---"
           }
         ]
+      },
+      {
+        "id": "LOT-0001",
+        "relatedLot": "LOT-0001",
+        "deliveryAddresses": [
+          {
+            "locality": "London"
+          }
+        ]
+      },
+      {
+        "id": "LOT-0002",
+        "relatedLot": "LOT-0002",
+        "deliveryAddresses": [
+          {
+            "locality": "London"
+          }
+        ]
       }
     ],
     "value": {
@@ -335,8 +353,8 @@
         "id": "FiscalDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "publisher": {
           "id": "ORG-0002"
@@ -346,8 +364,8 @@
         "id": "EnvDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "publisher": {
           "id": "ORG-0003"
@@ -357,8 +375,8 @@
         "id": "EmplDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0002",
-          "LOT-0001"
+          "LOT-0001",
+          "LOT-0002"
         ],
         "publisher": {
           "id": "ORG-0004"
@@ -939,7 +957,9 @@
       "eDeliveryGateway": "http://tender-submit.fin-adm.com",
       "address": {
         "streetAddress": "Bruce Wayne House, 2 Gotham Street",
-        "locality": "Luxembourg"
+        "postalCode": "1234",
+        "locality": "Luxembourg",
+        "country": "LU"
       },
       "roles": [
         "processContactPoint",
@@ -976,8 +996,8 @@
       "scheme": "eu-notice-id-ref",
       "identifier": "9c0fd704-64d3-4294-a3b6-6df45911ab9f-01",
       "relatedLots": [
-        "LOT-0002",
-        "LOT-0001"
+        "LOT-0001",
+        "LOT-0002"
       ]
     }
   ],
@@ -1336,26 +1356,6 @@
     }
   ],
   "description": "Additional information ---",
-  "deliveryAddresses": [
-    {
-      "id": "1",
-      "relatedLot": "LOT-0001",
-      "deliveryAddresses": [
-        {
-          "locality": "London"
-        }
-      ]
-    },
-    {
-      "id": "2",
-      "relatedLot": "LOT-0002",
-      "deliveryAddresses": [
-        {
-          "locality": "London"
-        }
-      ]
-    }
-  ],
   "statistics": [
     {
       "id": "1",

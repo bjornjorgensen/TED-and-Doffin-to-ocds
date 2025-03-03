@@ -46,13 +46,13 @@ def test_parse_place_performance_city() -> None:
     assert len(result["tender"]["items"]) == 2
 
     assert result["tender"]["items"][0] == {
-        "id": "1",
+        "id": "LOT-001",
         "relatedLot": "LOT-001",
         "deliveryAddresses": [{"locality": "New York"}],
     }
 
     assert result["tender"]["items"][1] == {
-        "id": "2",
+        "id": "LOT-002", 
         "relatedLot": "LOT-002",
         "deliveryAddresses": [
             {"locality": "Los Angeles"},
@@ -70,6 +70,28 @@ def test_parse_place_performance_city_empty() -> None:
             <cac:ProcurementProject>
                 <cac:RealizedLocation>
                     <cac:Address>
+                    </cac:Address>
+                </cac:RealizedLocation>
+            </cac:ProcurementProject>
+        </cac:ProcurementProjectLot>
+    </root>
+    """
+
+    result = parse_place_performance_city(xml_content)
+
+    assert result is None
+
+
+def test_parse_place_performance_city_missing_city() -> None:
+    xml_content = """
+    <root xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Lot">LOT-001</cbc:ID>
+            <cac:ProcurementProject>
+                <cac:RealizedLocation>
+                    <cac:Address>
+                        <!-- No CityName element -->
                     </cac:Address>
                 </cac:RealizedLocation>
             </cac:ProcurementProject>

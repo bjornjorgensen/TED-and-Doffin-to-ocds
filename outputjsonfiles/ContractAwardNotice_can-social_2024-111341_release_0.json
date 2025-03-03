@@ -1,7 +1,7 @@
 {
   "id": "65ffd92d-8eee-4787-a7fe-925106611edc",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d08f1510-879d-4279-8a00-9011ba2bc29a",
+  "ocid": "ocds-abcd1234-3bee8f9c-963a-43e8-953b-776e291ba69f",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -62,6 +62,15 @@
           },
           {
             "country": "NO"
+          }
+        ]
+      },
+      {
+        "id": "LOT-0000",
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "locality": "Leikanger"
           }
         ]
       }
@@ -296,17 +305,6 @@
         "TEN-0001"
       ],
       "title": "Drift av kantine på Leikanger-Iss Facility Services AS"
-    }
-  ],
-  "deliveryAddresses": [
-    {
-      "id": "1",
-      "relatedLot": "LOT-0000",
-      "deliveryAddresses": [
-        {
-          "locality": "Leikanger"
-        }
-      ]
     }
   ],
   "language": "no",

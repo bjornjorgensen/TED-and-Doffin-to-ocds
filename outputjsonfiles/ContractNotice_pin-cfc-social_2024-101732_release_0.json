@@ -1,7 +1,7 @@
 {
   "id": "74f8c72a-5dcd-4a77-afda-6573ca30c8df",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-158b1133-8bcc-4d15-86ce-e6bbc7a2aa8c",
+  "ocid": "ocds-abcd1234-1b42c325-5b5f-4575-99ab-527802e08b5c",
   "tender": {
     "legalBasis": {
       "id": "Konsesjonsforskriften",
@@ -172,6 +172,30 @@
           },
           {
             "country": "NO"
+          }
+        ]
+      },
+      {
+        "id": "LOT-0000",
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "locality": "Selbu"
+          },
+          {
+            "locality": "Tydal"
+          },
+          {
+            "locality": "Meråker"
+          },
+          {
+            "locality": "Frosta"
+          },
+          {
+            "locality": "Holtålen"
+          },
+          {
+            "locality": "Stjørdal"
           }
         ]
       }
@@ -362,9 +386,9 @@
         "country": "NO"
       },
       "roles": [
-        "leadBuyer",
+        "processContactPoint",
         "buyer",
-        "processContactPoint"
+        "leadBuyer"
       ]
     },
     {
@@ -602,32 +626,6 @@
       },
       "roles": [
         "reviewBody"
-      ]
-    }
-  ],
-  "deliveryAddresses": [
-    {
-      "id": "1",
-      "relatedLot": "LOT-0000",
-      "deliveryAddresses": [
-        {
-          "locality": "Selbu"
-        },
-        {
-          "locality": "Tydal"
-        },
-        {
-          "locality": "Meråker"
-        },
-        {
-          "locality": "Frosta"
-        },
-        {
-          "locality": "Holtålen"
-        },
-        {
-          "locality": "Stjørdal"
-        }
       ]
     }
   ],

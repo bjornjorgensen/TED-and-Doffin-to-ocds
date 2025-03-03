@@ -1,7 +1,7 @@
 {
   "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-36a3748a-9511-46f4-af69-1f45ea096185",
+  "ocid": "ocds-abcd1234-a2f1b494-c90c-4576-892c-8ca234019bb6",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -87,6 +87,15 @@
           },
           {
             "country": "NO"
+          }
+        ]
+      },
+      {
+        "id": "LOT-0000",
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "locality": "Bergen"
           }
         ]
       }
@@ -291,17 +300,6 @@
         "TEN-0001"
       ],
       "awardID": "RES-0001"
-    }
-  ],
-  "deliveryAddresses": [
-    {
-      "id": "1",
-      "relatedLot": "LOT-0000",
-      "deliveryAddresses": [
-        {
-          "locality": "Bergen"
-        }
-      ]
     }
   ],
   "language": "no",

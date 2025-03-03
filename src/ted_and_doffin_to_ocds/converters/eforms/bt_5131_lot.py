@@ -1,5 +1,3 @@
-# converters/bt_5131_Lot.py
-
 import logging
 from typing import Any
 
@@ -34,7 +32,7 @@ def parse_place_performance_city(xml_content: str | bytes) -> dict[str, Any] | N
         result = {"tender": {"items": []}}
 
         lots = root.xpath(
-            "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+            "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
             namespaces=NAMESPACES,
         )
 
@@ -42,7 +40,7 @@ def parse_place_performance_city(xml_content: str | bytes) -> dict[str, Any] | N
             try:
                 lot_id = lot.xpath("cbc:ID/text()", namespaces=NAMESPACES)[0]
                 cities = lot.xpath(
-                    ".//cac:RealizedLocation/cac:Address/cbc:CityName/text()",
+                    "./cac:ProcurementProject/cac:RealizedLocation/cac:Address/cbc:CityName/text()",
                     namespaces=NAMESPACES,
                 )
 
@@ -50,7 +48,7 @@ def parse_place_performance_city(xml_content: str | bytes) -> dict[str, Any] | N
                     filtered_cities = [city.strip() for city in cities if city.strip()]
                     if filtered_cities:
                         item = {
-                            "id": str(len(result["tender"]["items"]) + 1),
+                            "id": lot_id,
                             "relatedLot": lot_id,
                             "deliveryAddresses": [
                                 {"locality": city} for city in filtered_cities
@@ -72,6 +70,35 @@ def parse_place_performance_city(xml_content: str | bytes) -> dict[str, Any] | N
     return None
 
 
+def _ensure_tender_items_exist(release_json: dict[str, Any]) -> None:
+    """Ensure tender and items exist in the release JSON."""
+    if "tender" not in release_json:
+        release_json["tender"] = {}
+
+    if "items" not in release_json["tender"]:
+        release_json["tender"]["items"] = []
+
+
+def _merge_delivery_addresses(
+    existing_item: dict[str, Any], new_item: dict[str, Any]
+) -> None:
+    """Merge delivery addresses from new_item into existing_item."""
+    if "deliveryAddresses" not in existing_item:
+        existing_item["deliveryAddresses"] = new_item["deliveryAddresses"]
+        return
+
+    for address in new_item["deliveryAddresses"]:
+        existing_addr_found = False
+        for existing_addr in existing_item["deliveryAddresses"]:
+            if "locality" not in existing_addr:
+                existing_addr["locality"] = address["locality"]
+                existing_addr_found = True
+                break
+
+        if not existing_addr_found:
+            existing_item["deliveryAddresses"].append(address)
+
+
 def merge_place_performance_city(
     release_json: dict[str, Any], place_performance_city_data: dict[str, Any] | None
 ) -> None:
@@ -88,24 +115,30 @@ def merge_place_performance_city(
         None
 
     """
-    if not place_performance_city_data:
+    if not place_performance_city_data or not place_performance_city_data.get(
+        "tender", {}
+    ).get("items"):
         logger.warning("No Place Performance City data to merge")
         return
+
+    _ensure_tender_items_exist(release_json)
 
     for new_item in place_performance_city_data["tender"]["items"]:
         try:
             existing_item = next(
-                item
-                for item in release_json.get("deliveryAddresses", [])
-                if item.get("relatedLot") == new_item.get("relatedLot")
+                (
+                    item
+                    for item in release_json["tender"]["items"]
+                    if item.get("id") == new_item.get("id")
+                ),
+                None,
             )
-            # Update existing item
-            existing_item.update(new_item)
-        except StopIteration:
-            # Add new item if no match found
-            if "deliveryAddresses" not in release_json:
-                release_json["deliveryAddresses"] = []
-            release_json["deliveryAddresses"].append(new_item)
+
+            if existing_item:
+                _merge_delivery_addresses(existing_item, new_item)
+            else:
+                release_json["tender"]["items"].append(new_item)
+
         except Exception:
             logger.exception("Error processing BT-5131 (Place Performance City) data")
             raise
