@@ -13,20 +13,26 @@ def test_parse_organization_name() -> None:
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
           xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
           xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1">
-        <efext:EformsExtension>
-            <efac:Organizations>
-                <efac:Organization>
-                    <efac:Company>
-                        <cac:PartyIdentification>
-                            <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
-                        </cac:PartyIdentification>
-                        <cac:PartyName>
-                            <cbc:Name languageID="ENG">Ministry of Education</cbc:Name>
-                        </cac:PartyName>
-                    </efac:Company>
-                </efac:Organization>
-            </efac:Organizations>
-        </efext:EformsExtension>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:Organizations>
+                            <efac:Organization>
+                                <efac:Company>
+                                    <cac:PartyIdentification>
+                                        <cbc:ID schemeName="organization">ORG-0001</cbc:ID>
+                                    </cac:PartyIdentification>
+                                    <cac:PartyName>
+                                        <cbc:Name languageID="ENG">Ministry of Education</cbc:Name>
+                                    </cac:PartyName>
+                                </efac:Company>
+                            </efac:Organization>
+                        </efac:Organizations>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </root>
     """
 

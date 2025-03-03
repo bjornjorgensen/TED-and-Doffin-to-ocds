@@ -42,6 +42,7 @@ def parse_contract_eu_funds_financing_identifier(
                     "cbc:ID[@schemeName='contract']/text()", namespaces=NAMESPACES
                 )[0]
 
+                # Using exact XPath from BT-5011 definition
                 funding_elements = contract.xpath(
                     "efac:Funding/efbc:FinancingIdentifier/text()",
                     namespaces=NAMESPACES,
@@ -50,6 +51,7 @@ def parse_contract_eu_funds_financing_identifier(
                 contract_finance = []
                 for financing_id in funding_elements:
                     found_financing = True
+                    # Create finance item with proper structure per eForms guidance
                     finance_item = {
                         "id": financing_id,
                         "financingParty": {
@@ -68,6 +70,7 @@ def parse_contract_eu_funds_financing_identifier(
                 continue
 
         if found_financing:
+            # Add European Union party when financing is found
             result["parties"].append({"name": "European Union", "roles": ["funder"]})
             return result
 
@@ -86,7 +89,7 @@ def merge_contract_eu_funds_financing_identifier(
         logger.debug("No Contract EU Funds Financing data to merge")
         return
 
-    # Handle EU party
+    # Handle EU party according to eForms guidance
     parties = release_json.setdefault("parties", [])
     eu_party = next(
         (party for party in parties if party.get("name") == "European Union"), None
@@ -97,7 +100,7 @@ def merge_contract_eu_funds_financing_identifier(
             eu_party.setdefault("roles", []).append("funder")
     else:
         eu_party = {
-            "id": str(len(parties) + 1),
+            "id": str(len(parties) + 1),  # Generate new party ID
             "name": "European Union",
             "roles": ["funder"],
         }
@@ -118,11 +121,13 @@ def merge_contract_eu_funds_financing_identifier(
                     (f for f in existing_finance if f["id"] == new_finance["id"]), None
                 )
                 if existing_item:
+                    # Update existing finance item with proper EU party reference
                     existing_item["financingParty"] = {
                         "id": eu_party["id"],
                         "name": "European Union",
                     }
                 else:
+                    # Add new finance item with proper EU party reference
                     new_finance["financingParty"]["id"] = eu_party["id"]
                     existing_finance.append(new_finance)
         else:
