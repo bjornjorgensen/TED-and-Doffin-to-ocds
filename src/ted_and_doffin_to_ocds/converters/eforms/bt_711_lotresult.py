@@ -104,7 +104,7 @@ def merge_tender_value_highest(
                 stat
                 for stat in statistics
                 if stat["measure"] == new_stat["measure"]
-                and stat.get("relatedLots") == new_stat.get("relatedLots")
+                and stat.get("relatedLot") == new_stat.get("relatedLot")
             ),
             None,
         )
@@ -113,7 +113,6 @@ def merge_tender_value_highest(
         else:
             statistics.append(new_stat)
 
-    # Renumber the statistics
     for i, stat in enumerate(statistics, start=1):
         stat["id"] = str(i)
 

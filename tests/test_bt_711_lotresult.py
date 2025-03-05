@@ -25,11 +25,11 @@ def test_parse_tender_value_highest() -> None:
     assert "statistics" in result["bids"]
     assert len(result["bids"]["statistics"]) == 1
     stat = result["bids"]["statistics"][0]
-    assert stat["id"] == "highest-LOT-0001"
+    assert stat["id"] == "1"
     assert stat["measure"] == "highestValidBidValue"
-    assert stat["value"]["amount"] == 20000.00
-    assert stat["value"]["currency"] == "EUR"
-    assert stat["relatedLots"] == ["LOT-0001"]
+    assert stat["value"] == 20000.00
+    assert stat["currency"] == "EUR"
+    assert stat["relatedLot"] == "LOT-0001"
 
 
 def test_merge_tender_value_highest() -> None:
@@ -38,10 +38,11 @@ def test_merge_tender_value_highest() -> None:
         "bids": {
             "statistics": [
                 {
-                    "id": "highest-LOT-0001",
+                    "id": "1",
                     "measure": "highestValidBidValue",
-                    "value": {"amount": 20000.00, "currency": "EUR"},
-                    "relatedLots": ["LOT-0001"],
+                    "value": 20000.00,
+                    "currency": "EUR",
+                    "relatedLot": "LOT-0001",
                 },
             ],
         },
@@ -51,6 +52,6 @@ def test_merge_tender_value_highest() -> None:
     stat = release_json["bids"]["statistics"][0]
     assert stat["id"] == "1"
     assert stat["measure"] == "highestValidBidValue"
-    assert stat["value"]["amount"] == 20000.00
-    assert stat["value"]["currency"] == "EUR"
-    assert stat["relatedLots"] == ["LOT-0001"]
+    assert stat["value"] == 20000.00
+    assert stat["currency"] == "EUR"
+    assert stat["relatedLot"] == "LOT-0001"
