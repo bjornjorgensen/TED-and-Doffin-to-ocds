@@ -74,6 +74,10 @@ def test_opp_034_tender_integration(tmp_path, setup_logging, temp_output_dir) ->
                                         <efbc:FinancialPerformanceDescription>Bonus for early completion</efbc:FinancialPerformanceDescription>
                                     </efac:FinancialPerformanceRequirement>
                                 </efac:ContractTerm>
+                                <efac:ContractTerm>
+                                    <efbc:TermCode listName="rewards-penalties">rew-pen</efbc:TermCode>
+                                    <efbc:TermDescription>Information on Rewards and Penalties: The contract includes penalties for late delivery and rewards for early completion.</efbc:TermDescription>
+                                </efac:ContractTerm>
                             </efac:LotTender>
                         </efac:NoticeResult>
                     </efext:EformsExtension>
@@ -100,6 +104,8 @@ def test_opp_034_tender_integration(tmp_path, setup_logging, temp_output_dir) ->
     ), f"Expected 1 lot, got {len(result['tender']['lots'])}"
     lot = result["tender"]["lots"][0]
     assert lot["id"] == "LOT-0001", f"Expected lot id 'LOT-0001', got {lot['id']}"
+    
+    # Check for penalties and rewards separately
     assert "penaltiesAndRewards" in lot, "Expected 'penaltiesAndRewards' in lot"
     assert (
         "penalties" in lot["penaltiesAndRewards"]
@@ -113,6 +119,11 @@ def test_opp_034_tender_integration(tmp_path, setup_logging, temp_output_dir) ->
     assert lot["penaltiesAndRewards"]["rewards"] == [
         "Bonus for early completion"
     ], "Unexpected rewards"
+    
+    # Check for combined rewards and penalties description
+    assert "contractTerms" in lot, "Expected 'contractTerms' in lot"
+    assert "rewardsAndPenalties" in lot["contractTerms"], "Expected 'rewardsAndPenalties' in contractTerms"
+    assert lot["contractTerms"]["rewardsAndPenalties"] == "Information on Rewards and Penalties: The contract includes penalties for late delivery and rewards for early completion.", "Unexpected rewardsAndPenalties description"
 
 
 if __name__ == "__main__":
