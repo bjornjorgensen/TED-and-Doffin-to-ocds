@@ -29,9 +29,10 @@ def parse_procedure_place_performance_additional(
         Optional[Dict]: Parsed data in format:
             {
                 "tender": {
-                    "deliveryLocations": [
+                    "deliveryAddresses": [
                         {
-                            "description": str
+                            "description": str,
+                            "language": str  # Optional, present when languageID is available
                         }
                     ]
                 }
@@ -44,22 +45,36 @@ def parse_procedure_place_performance_additional(
             xml_content = xml_content.encode("utf-8")
 
         root = etree.fromstring(xml_content)
-        result = {"tender": {"deliveryLocations": []}}
+        result = {"tender": {"deliveryAddresses": []}}
 
-        descriptions = root.xpath(
-            "/*/cac:ProcurementProject/cac:RealizedLocation/cbc:Description/text()",
+        description_elements = root.xpath(
+            "/*/cac:ProcurementProject/cac:RealizedLocation/cbc:Description",
             namespaces=NAMESPACES,
         )
 
-        for description in descriptions:
-            clean_desc = description.strip()
-            if clean_desc:
-                logger.info("Found additional place description: %s", clean_desc)
-                result["tender"]["deliveryLocations"].append(
-                    {"description": clean_desc}
-                )
+        for element in description_elements:
+            description = element.text
+            if description:
+                clean_desc = description.strip()
+                if clean_desc:
+                    location_data = {"description": clean_desc}
 
-        return result if result["tender"]["deliveryLocations"] else None
+                    language_id = element.get("languageID")
+                    if language_id:
+                        location_data["language"] = language_id
+                        logger.info(
+                            "Found additional place description in language %s: %s",
+                            language_id,
+                            clean_desc,
+                        )
+                    else:
+                        logger.info(
+                            "Found additional place description: %s", clean_desc
+                        )
+
+                    result["tender"]["deliveryAddresses"].append(location_data)
+
+        return result if result["tender"]["deliveryAddresses"] else None
 
     except etree.XMLSyntaxError:
         logger.exception("Failed to parse XML content")
@@ -74,8 +89,8 @@ def merge_procedure_place_performance_additional(
 ) -> None:
     """Merge additional place performance data into the release JSON.
 
-    Updates or adds delivery locations in the tender section, concatenating
-    descriptions if locations already exist.
+    Updates or adds delivery addresses in the tender section. Each RealizedLocation
+    from the XML becomes a separate entry in the deliveryAddresses array.
 
     Args:
         release_json: Main OCDS release JSON to update
@@ -83,8 +98,9 @@ def merge_procedure_place_performance_additional(
 
     Note:
         - Updates release_json in-place
-        - Creates tender.deliveryLocations if needed
-        - Handles concatenation of descriptions
+        - Creates tender.deliveryAddresses if needed
+        - As per eForms guidance, each RealizedLocation maps to an Address object
+        - Preserves each description as a separate entry
 
     """
     if not place_data:
@@ -94,22 +110,13 @@ def merge_procedure_place_performance_additional(
         return
 
     tender = release_json.setdefault("tender", {})
-    locations = tender.setdefault("deliveryLocations", [])
+    addresses = tender.setdefault("deliveryAddresses", [])
 
-    for new_location in place_data["tender"]["deliveryLocations"]:
-        # Try to find existing location to concatenate description
-        existing = next((loc for loc in locations if loc.get("description")), None)
-
-        if existing:
-            # Concatenate descriptions
-            existing["description"] = (
-                f"{existing['description']}; {new_location['description']}"
-            )
-        else:
-            # Add new location
-            locations.append(new_location)
+    # Simply append all the new addresses without trying to match existing ones
+    for new_address in place_data["tender"]["deliveryAddresses"]:
+        addresses.append(new_address)
 
     logger.info(
-        "Merged additional place performance data for %d locations",
-        len(place_data["tender"]["deliveryLocations"]),
+        "Added %d additional place performance descriptions",
+        len(place_data["tender"]["deliveryAddresses"]),
     )

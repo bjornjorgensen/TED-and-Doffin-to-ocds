@@ -1,7 +1,7 @@
 {
   "id": "1db209a3-6934-4d5f-bf78-2aa8a1f2453c",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-5eda04de-3f29-44ea-8968-362ea338503a",
+  "ocid": "ocds-abcd1234-ae591759-1355-42cb-b367-bde87f5f07de",
   "tag": [
     "tender"
   ],
@@ -109,11 +109,10 @@
       },
       {
         "country": "NO"
-      }
-    ],
-    "deliveryLocations": [
+      },
       {
-        "description": "Informasjonsmøtet:\nTid: 6. november 2023, kl. 10.00-12.00.\nSted: A64, Auditorium Hovedbølet\nAdresse: Akersgata 64\nFrist for påmelding: 2. november, kl. 16:00."
+        "description": "Informasjonsmøtet:\nTid: 6. november 2023, kl. 10.00-12.00.\nSted: A64, Auditorium Hovedbølet\nAdresse: Akersgata 64\nFrist for påmelding: 2. november, kl. 16:00.",
+        "language": "NOR"
       }
     ]
   },

@@ -1,7 +1,7 @@
 {
   "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-6cc6cf23-0dc9-46fc-8dc3-94683d01f72a",
+  "ocid": "ocds-abcd1234-4372e8d3-6985-41eb-973c-b412b1f3c1bc",
   "tender": {
     "legalBasis": {
       "id": "FOA § 13-4 bokstav b annet punkt; «konkurranse er umulig av tekniske årsaker».",
@@ -167,11 +167,22 @@
       },
       {
         "country": "NO"
-      }
-    ],
-    "deliveryLocations": [
+      },
       {
-        "description": "Installasjon i On-prem Helse Nord IKT datasenter i Tromsø; Installation in On-prem Helse Nord ICT computer centre in Tromsø.; Installasjon i On-prem Helse Nord IKT datasenter i Tromsø; Installation in On-prem Helse Nord ICT computer centre in Tromsø."
+        "description": "Installasjon i On-prem Helse Nord IKT datasenter i Tromsø",
+        "language": "NOR"
+      },
+      {
+        "description": "Installation in On-prem Helse Nord ICT computer centre in Tromsø.",
+        "language": "ENG"
+      },
+      {
+        "description": "Installasjon i On-prem Helse Nord IKT datasenter i Tromsø",
+        "language": "NOR"
+      },
+      {
+        "description": "Installation in On-prem Helse Nord ICT computer centre in Tromsø.",
+        "language": "ENG"
       }
     ]
   },
@@ -245,9 +256,9 @@
         "country": "NO"
       },
       "roles": [
-        "buyer",
-        "leadBuyer",
         "processContactPoint",
+        "leadBuyer",
+        "buyer",
         "reviewContactPoint"
       ]
     },

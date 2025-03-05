@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-383a7d3d-97e4-4e7b-bdd3-3011f3533a49",
+  "ocid": "ocds-abcd1234-48e93dfc-dda6-4177-9f80-e9d16715cdbf",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -335,6 +335,14 @@
       },
       {
         "country": "GB"
+      },
+      {
+        "description": "The main location is ...",
+        "language": "ENG"
+      },
+      {
+        "description": "Additional information ---",
+        "language": "ENG"
       }
     ],
     "additionalProcurementCategories": [
@@ -342,7 +350,7 @@
     ],
     "deliveryLocations": [
       {
-        "description": "Anywhere in the European Economic Area; The main location is ...; Additional information ---"
+        "description": "Anywhere in the European Economic Area"
       },
       {
         "description": "Anywhere in the given country"
@@ -748,8 +756,8 @@
       },
       "roles": [
         "tenderer",
-        "supplier",
-        "leadTenderer"
+        "leadTenderer",
+        "supplier"
       ],
       "beneficialOwners": [
         {
@@ -1366,7 +1374,7 @@
     "budget": {
       "finance": [
         {
-          "id": "897ac718-be62-4be8-ad58-7f069d5cf9a1",
+          "id": "e903c540-5b96-4201-ba51-4212e6e541b4",
           "financingParty": {
             "id": "13",
             "name": "European Union"
