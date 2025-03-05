@@ -14,7 +14,7 @@ NAMESPACES = {
 }
 
 
-def _process_lot_results(root, lot_data):
+def _process_lot_results(root, lot_data) -> None:
     """Process lot results and populate lot_data dictionary."""
     lot_results = root.xpath(
         "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/"
@@ -49,7 +49,7 @@ def _process_lot_results(root, lot_data):
             continue
 
 
-def _process_term_descriptions(lot_tender, associated_lots, lot_data):
+def _process_term_descriptions(lot_tender, associated_lots, lot_data) -> None:
     """Process term descriptions from lot tender."""
     term_descriptions = lot_tender.xpath(
         "efac:ContractTerm[efbc:TermCode/@listName='rewards-penalties']/"
@@ -85,7 +85,7 @@ def _process_term_descriptions(lot_tender, associated_lots, lot_data):
         lot_data[lot_id]["contractTerms"]["rewardsAndPenalties"] = description_value
 
 
-def _process_performance_requirements(lot_tender, associated_lots, lot_data):
+def _process_performance_requirements(lot_tender, associated_lots, lot_data) -> None:
     """Process financial performance requirements from lot tender."""
     performance_requirements = lot_tender.xpath(
         "efac:ContractTerm/efac:FinancialPerformanceRequirement",
@@ -126,7 +126,7 @@ def _process_performance_requirements(lot_tender, associated_lots, lot_data):
                 lot_data[lot_id]["penaltiesAndRewards"]["rewards"].append(description)
 
 
-def _process_lot_tenders(root, lot_data):
+def _process_lot_tenders(root, lot_data) -> None:
     """Process lot tenders and update lot_data dictionary."""
     lot_tenders = root.xpath(
         "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/"
@@ -199,7 +199,7 @@ def parse_penalties_and_rewards(xml_content: str | bytes) -> dict[str, Any] | No
         _process_lot_tenders(root, lot_data)
 
         # Convert the lot data to the expected format
-        for _lot_id, data in lot_data.items():
+        for data in lot_data.values():
             if (
                 "rewardsAndPenalties" in data["contractTerms"]
                 or data["penaltiesAndRewards"]["penalties"]
