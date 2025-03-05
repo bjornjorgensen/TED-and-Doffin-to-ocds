@@ -14,9 +14,9 @@ NAMESPACES = {
 }
 
 EINVOICING_MAPPING = {
-    "required": "Required",
-    "allowed": "Allowed",
-    "notAllowed": "Not allowed",
+    "required": "required",
+    "allowed": "allowed",
+    "notAllowed": "not allowed",
 }
 
 
@@ -60,7 +60,7 @@ def parse_lot_einvoicing_policy(xml_content: str | bytes) -> dict | None:
         for lot in lots:
             lot_id = lot.xpath("cbc:ID/text()", namespaces=NAMESPACES)[0]
             einvoicing_code = lot.xpath(
-                ".//cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='einvoicing']"
+                "cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='einvoicing']"
                 "/cbc:ExecutionRequirementCode/text()",
                 namespaces=NAMESPACES,
             )
