@@ -224,7 +224,8 @@ def part_parse_documents_unofficial_language(
                     "documents": [
                         {
                             "id": str,  # Document ID
-                            "unofficialTranslations": [str]  # ISO 639-1 codes
+                            "unofficialTranslations": [str],  # ISO 639-1 codes
+                            "relatedLots": [str]  # Part ID
                         }
                     ]
                 }
@@ -238,43 +239,67 @@ def part_parse_documents_unofficial_language(
         root = etree.fromstring(xml_content)
         result = {"tender": {"documents": []}}
 
-        documents = root.xpath(
-            "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']"
-            "/cac:TenderingTerms/cac:CallForTendersDocumentReference",
+        # Find all part elements first, to associate documents with their parts
+        parts = root.xpath(
+            "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
             namespaces=NAMESPACES,
         )
 
-        for document in documents:
-            doc_id = document.xpath("cbc:ID/text()", namespaces=NAMESPACES)
-            if not doc_id:
+        for part in parts:
+            part_id = part.xpath("cbc:ID/text()", namespaces=NAMESPACES)
+            if not part_id:
                 continue
 
-            languages = document.xpath(
-                ".//efac:NonOfficialLanguages/cac:Language/cbc:ID/text()",
+            part_id = part_id[0]
+
+            # Find documents within this specific part
+            documents = part.xpath(
+                "cac:TenderingTerms/cac:CallForTendersDocumentReference",
                 namespaces=NAMESPACES,
             )
 
-            if languages:
-                unofficial_langs = []
-                for lang in languages:
-                    iso_code = ISO_639_1_MAPPING.get(lang.upper())
-                    if iso_code:
-                        unofficial_langs.append(iso_code)
-                        logger.info(
-                            "Found unofficial translation in %s for document %s",
-                            iso_code,
-                            doc_id[0],
-                        )
-                    else:
-                        logger.warning("Unknown language code: %s", lang)
-                        unofficial_langs.append(lang.lower())
+            for document in documents:
+                doc_id = document.xpath("cbc:ID/text()", namespaces=NAMESPACES)
+                if not doc_id:
+                    continue
 
-                if unofficial_langs:
-                    doc_data = {
-                        "id": doc_id[0],
-                        "unofficialTranslations": unofficial_langs,
-                    }
-                    result["tender"]["documents"].append(doc_data)
+                languages = document.xpath(
+                    "ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension"
+                    "/efac:NonOfficialLanguages/cac:Language/cbc:ID/text()",
+                    namespaces=NAMESPACES,
+                )
+
+                if languages:
+                    unofficial_langs = []
+                    for lang in languages:
+                        iso_code = ISO_639_1_MAPPING.get(lang.upper())
+                        if iso_code:
+                            unofficial_langs.append(iso_code)
+                            logger.debug(
+                                "Converted unofficial language %s to %s for document %s",
+                                lang,
+                                iso_code,
+                                doc_id[0],
+                            )
+                        else:
+                            logger.warning(
+                                "Unknown language code: %s - using as is", lang
+                            )
+                            # If we can't map it, use the original code (lowercased)
+                            unofficial_langs.append(lang.lower())
+
+                    if unofficial_langs:
+                        doc_data = {
+                            "id": doc_id[0],
+                            "unofficialTranslations": unofficial_langs,
+                            "relatedLots": [part_id],
+                        }
+                        result["tender"]["documents"].append(doc_data)
+                        logger.info(
+                            "Added document %s with unofficial translations: %s",
+                            doc_id[0],
+                            ", ".join(unofficial_langs),
+                        )
 
         return result if result["tender"]["documents"] else None
 
