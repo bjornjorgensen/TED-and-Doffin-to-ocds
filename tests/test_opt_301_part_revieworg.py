@@ -24,7 +24,7 @@ def test_parse_review_organization() -> None:
         </cac:ProcurementProjectLot>
     </root>
     """
-    result = part_parse_review_organization(xml_content)
+    result = parse_review_organization_part(xml_content)
     assert result == {"parties": [{"id": "TPO-0003", "roles": ["reviewBody"]}]}
 
 
@@ -33,7 +33,7 @@ def test_merge_review_organization() -> None:
     review_organization_data = {
         "parties": [{"id": "TPO-0003", "roles": ["reviewBody"]}]
     }
-    part_merge_review_organization(release_json, review_organization_data)
+    merge_review_organization_part(release_json, review_organization_data)
     assert release_json == {
         "parties": [{"id": "TPO-0003", "roles": ["buyer", "reviewBody"]}]
     }
@@ -44,7 +44,7 @@ def test_merge_review_organization_new_party() -> None:
     review_organization_data = {
         "parties": [{"id": "TPO-0003", "roles": ["reviewBody"]}]
     }
-    part_merge_review_organization(release_json, review_organization_data)
+    merge_review_organization_part(release_json, review_organization_data)
     assert release_json == {
         "parties": [
             {"id": "ORG-0001", "roles": ["buyer"]},
@@ -55,5 +55,5 @@ def test_merge_review_organization_new_party() -> None:
 
 def test_merge_review_organization_no_data() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}
-    part_merge_review_organization(release_json, None)
+    merge_review_organization_part(release_json, None)
     assert release_json == {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}

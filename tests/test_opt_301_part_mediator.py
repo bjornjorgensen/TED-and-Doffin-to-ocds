@@ -24,14 +24,14 @@ def test_parse_mediator() -> None:
         </cac:ProcurementProjectLot>
     </root>
     """
-    result = part_parse_mediator(xml_content)
+    result = parse_mediator_part(xml_content)
     assert result == {"parties": [{"id": "ORG-0003", "roles": ["mediationBody"]}]}
 
 
 def test_merge_mediator() -> None:
     release_json = {"parties": [{"id": "ORG-0003", "roles": ["buyer"]}]}
     mediator_data = {"parties": [{"id": "ORG-0003", "roles": ["mediationBody"]}]}
-    part_merge_mediator(release_json, mediator_data)
+    merge_mediator_part(release_json, mediator_data)
     assert release_json == {
         "parties": [{"id": "ORG-0003", "roles": ["buyer", "mediationBody"]}]
     }
@@ -40,7 +40,7 @@ def test_merge_mediator() -> None:
 def test_merge_mediator_new_party() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}
     mediator_data = {"parties": [{"id": "ORG-0003", "roles": ["mediationBody"]}]}
-    part_merge_mediator(release_json, mediator_data)
+    merge_mediator_part(release_json, mediator_data)
     assert release_json == {
         "parties": [
             {"id": "ORG-0001", "roles": ["buyer"]},
@@ -51,5 +51,5 @@ def test_merge_mediator_new_party() -> None:
 
 def test_merge_mediator_no_data() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}
-    part_merge_mediator(release_json, None)
+    merge_mediator_part(release_json, None)
     assert release_json == {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}

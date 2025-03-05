@@ -45,7 +45,7 @@ def test_parse_employment_legislation() -> None:
         </cac:ProcurementProjectLot>
     </root>
     """
-    result = part_parse_employment_legislation_org_reference(xml_content)
+    result = parse_employment_legislation_org_part(xml_content)
     assert result == {
         "parties": [{"id": "ORG-0001", "roles": ["informationService"]}],
         "tender": {"documents": [{"id": "Empl1", "publisher": {"id": "ORG-0001"}}]},
@@ -61,7 +61,7 @@ def test_merge_employment_legislation() -> None:
         "parties": [{"id": "ORG-0001", "roles": ["informationService"]}],
         "tender": {"documents": [{"id": "Empl1", "publisher": {"id": "ORG-0001"}}]},
     }
-    part_merge_employment_legislation_org_reference(
+    merge_employment_legislation_org_part(
         release_json, employment_legislation_data
     )
     assert release_json == {
@@ -81,7 +81,7 @@ def test_merge_employment_legislation_new_party() -> None:
         "parties": [{"id": "ORG-0001", "roles": ["informationService"]}],
         "tender": {"documents": [{"id": "Empl1", "publisher": {"id": "ORG-0001"}}]},
     }
-    part_merge_employment_legislation_org_reference(
+    merge_employment_legislation_org_part(
         release_json, employment_legislation_data
     )
     assert release_json == {

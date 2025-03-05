@@ -22,7 +22,7 @@ def test_parse_tender_recipient() -> None:
         </cac:ProcurementProjectLot>
     </root>
     """
-    result = part_parse_tender_recipient(xml_content)
+    result = parse_tender_recipient_part(xml_content)
     assert result == {
         "parties": [{"id": "TPO-0001", "roles": ["submissionReceiptBody"]}]
     }
@@ -33,7 +33,7 @@ def test_merge_tender_recipient() -> None:
     tender_recipient_data = {
         "parties": [{"id": "TPO-0001", "roles": ["submissionReceiptBody"]}]
     }
-    part_merge_tender_recipient(release_json, tender_recipient_data)
+    merge_tender_recipient_part(release_json, tender_recipient_data)
     assert release_json == {
         "parties": [{"id": "TPO-0001", "roles": ["buyer", "submissionReceiptBody"]}]
     }
@@ -44,7 +44,7 @@ def test_merge_tender_recipient_new_party() -> None:
     tender_recipient_data = {
         "parties": [{"id": "TPO-0001", "roles": ["submissionReceiptBody"]}]
     }
-    part_merge_tender_recipient(release_json, tender_recipient_data)
+    merge_tender_recipient_part(release_json, tender_recipient_data)
     assert release_json == {
         "parties": [
             {"id": "ORG-0001", "roles": ["buyer"]},
@@ -55,5 +55,5 @@ def test_merge_tender_recipient_new_party() -> None:
 
 def test_merge_tender_recipient_no_data() -> None:
     release_json = {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}
-    part_merge_tender_recipient(release_json, None)
+    merge_tender_recipient_part(release_json, None)
     assert release_json == {"parties": [{"id": "ORG-0001", "roles": ["buyer"]}]}
