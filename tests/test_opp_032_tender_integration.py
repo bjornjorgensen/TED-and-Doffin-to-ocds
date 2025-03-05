@@ -51,20 +51,15 @@ def test_opp_032_tender_integration(tmp_path, setup_logging, temp_output_dir) ->
                 <ext:ExtensionContent>
                     <efext:EformsExtension>
                         <efac:NoticeResult>
-                            <efac:LotResult>
-                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
-                                <efac:LotTender>
-                                    <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
-                                </efac:LotTender>
+                            <efac:LotTender>
+                                <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
+                                <efac:ContractTerm>
+                                    <efbc:TermCode>all-rev-tic</efbc:TermCode>
+                                    <efbc:TermPercent>75.5</efbc:TermPercent>
+                                </efac:ContractTerm>
                                 <efac:TenderLot>
                                     <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
                                 </efac:TenderLot>
-                            </efac:LotResult>
-                            <efac:LotTender>
-                                <cbc:ID schemeName="tender">TEN-0001</cbc:ID>
-                                <efac:RevenuesAllocation>
-                                    <efbc:RevenuesProcuringEntity>75.5</efbc:RevenuesProcuringEntity>
-                                </efac:RevenuesAllocation>
                             </efac:LotTender>
                         </efac:NoticeResult>
                     </efext:EformsExtension>
@@ -91,10 +86,11 @@ def test_opp_032_tender_integration(tmp_path, setup_logging, temp_output_dir) ->
     ), f"Expected 1 lot, got {len(result['tender']['lots'])}"
     lot = result["tender"]["lots"][0]
     assert lot["id"] == "LOT-0001", f"Expected lot id 'LOT-0001', got {lot['id']}"
-    assert "revenuesAllocation" in lot, "Expected 'revenuesAllocation' in lot"
+    assert "contractTerms" in lot, "Expected 'contractTerms' in lot"
+    assert "operatorRevenueShare" in lot["contractTerms"], "Expected 'operatorRevenueShare' in contractTerms"
     assert (
-        lot["revenuesAllocation"] == 75.5
-    ), f"Expected revenuesAllocation 75.5, got {lot['revenuesAllocation']}"
+        lot["contractTerms"]["operatorRevenueShare"] == 0.755
+    ), f"Expected operatorRevenueShare 0.755, got {lot['contractTerms']['operatorRevenueShare']}"
 
 
 if __name__ == "__main__":
