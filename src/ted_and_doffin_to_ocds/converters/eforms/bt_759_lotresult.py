@@ -14,9 +14,7 @@ NAMESPACES = {
 }
 
 
-def parse_received_submissions_count(
-    xml_content: str | bytes, next_id: int = 1
-) -> dict | None:
+def parse_received_submissions_count(xml_content: str | bytes) -> dict | None:
     """Parse BT-759: Number of received submissions for lots.
 
     Counts tenders or participation requests, with variants or multiple tenders
@@ -24,7 +22,6 @@ def parse_received_submissions_count(
 
     Args:
         xml_content: XML content to parse, either as string or bytes
-        next_id: Next available numeric ID to use for statistics
 
     Returns:
         Optional[Dict]: Parsed data in format:
@@ -34,6 +31,7 @@ def parse_received_submissions_count(
                         {
                             "id": str,
                             "value": int,
+                            "measure": "bids",
                             "relatedLot": str
                         }
                     ]
@@ -48,12 +46,19 @@ def parse_received_submissions_count(
         root = etree.fromstring(xml_content)
         result = {"bids": {"statistics": []}}
 
-        # Update xpath to use proper namespaces
+        # Try both the extended path and a simpler direct path
         lot_results = root.xpath(
-            "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
-            "/efext:EformsExtension/efac:NoticeResult/efac:LotResult",
+            "//efac:NoticeResult/efac:LotResult",
             namespaces=NAMESPACES,
         )
+
+        if not lot_results:
+            # Try original complex path if simple path didn't work
+            lot_results = root.xpath(
+                "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
+                "/efext:EformsExtension/efac:NoticeResult/efac:LotResult",
+                namespaces=NAMESPACES,
+            )
 
         for lot_result in lot_results:
             lot_id = lot_result.xpath(
@@ -69,13 +74,12 @@ def parse_received_submissions_count(
                     submissions = int(count[0])
                     result["bids"]["statistics"].append(
                         {
-                            "id": str(next_id),  # Use sequential numeric id
+                            "id": f"bids-{lot_id[0]}",
                             "value": submissions,
                             "measure": "bids",
                             "relatedLot": lot_id[0],
                         }
                     )
-                    next_id += 1
                     logger.info(
                         "Found %d submissions for lot %s", submissions, lot_id[0]
                     )
@@ -113,16 +117,16 @@ def merge_received_submissions_count(
     bids = release_json.setdefault("bids", {})
     statistics = bids.setdefault("statistics", [])
 
-    # Get next available ID
     next_id = 1
     if statistics:
         existing_ids = [int(stat["id"]) for stat in statistics if stat["id"].isdigit()]
         if existing_ids:
             next_id = max(existing_ids) + 1
 
-    # Update statistics list
     for new_stat in submissions_data["bids"]["statistics"]:
         new_stat["id"] = str(next_id)
+        # Ensure the measure field is set to "bids" per eForms guidance
+        new_stat["measure"] = "bids"
         next_id += 1
         statistics.append(new_stat)
 

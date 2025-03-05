@@ -1,7 +1,7 @@
 {
   "id": "65667997-031a-4198-bd25-7225449ef479",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a5c20594-582d-4831-aace-c9d7ed45ab09",
+  "ocid": "ocds-abcd1234-993a22cc-994b-4818-91e2-2197a7f5a003",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -166,7 +166,7 @@
       }
     },
     {
-      "id": "80ca3edd-5fc2-4607-847c-3ce51383eb58",
+      "id": "e4321568-e216-4945-a7f3-03646320476b",
       "name": "European Union",
       "roles": [
         "funder"
@@ -273,9 +273,9 @@
     "budget": {
       "finance": [
         {
-          "id": "fde5a99e-d26b-4c99-8fbb-0ceb60deca20",
+          "id": "dbf9a0b6-19b0-4b2b-9798-a70fc1a406cf",
           "financingParty": {
-            "id": "80ca3edd-5fc2-4607-847c-3ce51383eb58",
+            "id": "e4321568-e216-4945-a7f3-03646320476b",
             "name": "European Union"
           },
           "relatedLots": [

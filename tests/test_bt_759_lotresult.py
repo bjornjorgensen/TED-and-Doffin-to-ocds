@@ -31,7 +31,7 @@ def test_parse_received_submissions_count() -> None:
     assert stat["id"] == "bids-LOT-0001"
     assert stat["measure"] == "bids"
     assert stat["value"] == 5
-    assert stat["relatedLots"] == ["LOT-0001"]
+    assert stat["relatedLot"] == "LOT-0001"
 
 
 def test_merge_received_submissions_count() -> None:
@@ -43,7 +43,7 @@ def test_merge_received_submissions_count() -> None:
                     "id": "bids-LOT-0001",
                     "measure": "bids",
                     "value": 5,
-                    "relatedLots": ["LOT-0001"],
+                    "relatedLot": "LOT-0001",
                 },
             ],
         },
@@ -54,4 +54,4 @@ def test_merge_received_submissions_count() -> None:
     assert stat["id"] == "1"
     assert stat["measure"] == "bids"
     assert stat["value"] == 5
-    assert stat["relatedLots"] == ["LOT-0001"]
+    assert stat["relatedLot"] == "LOT-0001"
