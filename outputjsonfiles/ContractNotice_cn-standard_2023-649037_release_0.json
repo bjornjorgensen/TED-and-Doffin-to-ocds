@@ -1,7 +1,7 @@
 {
   "id": "2023-649037",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-aebf7303-a0b2-4333-a9d0-fcd2646e228e",
+  "ocid": "ocds-abcd1234-97266574-db28-4160-9b42-7cd41505c7c1",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -70,7 +70,7 @@
           "description": "Rammeavtalen skal ha en varighet på to (2) år regnet fra oppstartstidspunkt. Oppdragsgiveren har deretter en ensidig rett til å forlenge avtalen med inntil ett (1) år av gangen. Maksimal samlet avtaleperiode er fire (4) år (2+1+1)."
         },
         "contractTerms": {
-          "electronicInvoicingPolicy": "Allowed",
+          "electronicInvoicingPolicy": "allowed",
           "hasElectronicOrdering": true,
           "hasElectronicPayment": true
         },
@@ -178,8 +178,8 @@
       },
       "roles": [
         "wholesaleBuyer",
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Postboks 40",

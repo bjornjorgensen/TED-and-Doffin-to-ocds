@@ -1,7 +1,7 @@
 {
   "id": "2023-664435",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-72584ef2-fcd8-4de1-9712-f35da0baaf3c",
+  "ocid": "ocds-abcd1234-bc11741b-ae85-4012-bb97-360ef8026fdf",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -31,7 +31,7 @@
         },
         "contractTerms": {
           "performanceTerms": "Se vedlegg.",
-          "electronicInvoicingPolicy": "Allowed",
+          "electronicInvoicingPolicy": "allowed",
           "hasElectronicPayment": true
         },
         "selectionCriteria": {
@@ -139,8 +139,8 @@
         "email": "post@sykehusinnkjop.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Postboks 40",

@@ -1,7 +1,7 @@
 {
   "id": "7d111d51-8042-402a-a234-50efe86d8f4f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a02a4d93-1c13-42f6-b99c-6097670a10d9",
+  "ocid": "ocds-abcd1234-d7af0cf1-f478-4ede-aaf8-3c675c1fe9bc",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -70,7 +70,7 @@
         },
         "contractTerms": {
           "performanceTerms": "See documentation in the public proposal here: https://posten-supplier.ivalua.app/",
-          "electronicInvoicingPolicy": "Required",
+          "electronicInvoicingPolicy": "required",
           "hasElectronicOrdering": false,
           "hasElectronicPayment": false
         },
@@ -202,8 +202,8 @@
         "email": "Kristian.von.Aphelen@posten.no"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Biskop Gunnerus' gate 14 A",

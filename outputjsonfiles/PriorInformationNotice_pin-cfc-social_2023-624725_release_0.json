@@ -1,7 +1,7 @@
 {
   "id": "2023-624725",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-bc7a2e79-509e-4d60-b6e1-08192df3c7e0",
+  "ocid": "ocds-abcd1234-16616a6a-3e6a-4b29-a87e-b99d0aedc807",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -36,7 +36,7 @@
         },
         "contractTerms": {
           "performanceTerms": "Se konsesjonsgrunnlaget",
-          "electronicInvoicingPolicy": "Allowed",
+          "electronicInvoicingPolicy": "allowed",
           "hasElectronicPayment": true
         },
         "selectionCriteria": {
@@ -148,8 +148,8 @@
         "country": "NO"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ]
     },
     {

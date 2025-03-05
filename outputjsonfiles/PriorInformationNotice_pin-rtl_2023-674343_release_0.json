@@ -1,7 +1,7 @@
 {
   "id": "2023-674343",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-14fd885e-65d8-4ab8-8955-21cdc5b1a8cd",
+  "ocid": "ocds-abcd1234-fddd1f22-d202-4891-9fbd-00c14c1f4c75",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -47,7 +47,7 @@
           "maximumRenewals": 0
         },
         "contractTerms": {
-          "electronicInvoicingPolicy": "Allowed",
+          "electronicInvoicingPolicy": "allowed",
           "hasElectronicOrdering": true,
           "hasElectronicPayment": true
         },
@@ -137,9 +137,9 @@
       },
       "roles": [
         "wholesaleBuyer",
-        "buyer",
+        "processContactPoint",
         "leadBuyer",
-        "processContactPoint"
+        "buyer"
       ],
       "address": {
         "streetAddress": "Rådhusplassen 3",

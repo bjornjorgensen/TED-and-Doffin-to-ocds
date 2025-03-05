@@ -1,7 +1,7 @@
 {
   "id": "2023-604437",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-16499502-2d51-4a99-a2d4-c21bcd2a08cb",
+  "ocid": "ocds-abcd1234-86941f51-60a4-44fb-8f4d-9cdf7eadee67",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -126,8 +126,8 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Økernveien 9",

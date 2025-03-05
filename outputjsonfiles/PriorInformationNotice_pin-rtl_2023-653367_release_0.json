@@ -1,7 +1,7 @@
 {
   "id": "2023-653367",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-c7cbb6bd-b151-481b-b543-52b2d6faf3de",
+  "ocid": "ocds-abcd1234-2d31b9d9-3cb7-4213-b9c9-f2306e2919ae",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -926,8 +926,8 @@
         "buyerProfile": "https://tendsign.no/public/list_public_publications.aspx?FromPublic=true&OrganizationID=500160756"
       },
       "roles": [
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "postboks 7900",

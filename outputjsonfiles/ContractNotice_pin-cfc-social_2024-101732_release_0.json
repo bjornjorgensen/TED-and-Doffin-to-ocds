@@ -1,7 +1,7 @@
 {
   "id": "74f8c72a-5dcd-4a77-afda-6573ca30c8df",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-7876ff1b-57ea-4c6f-8be5-9439d8add462",
+  "ocid": "ocds-abcd1234-bf74d49a-ca1d-4768-8dbb-cdf443308468",
   "tender": {
     "legalBasis": {
       "id": "Konsesjonsforskriften",
@@ -51,7 +51,7 @@
           "endDate": "2024-03-08T00:00:00+01:00"
         },
         "contractTerms": {
-          "electronicInvoicingPolicy": "Required"
+          "electronicInvoicingPolicy": "required"
         },
         "selectionCriteria": {
           "criteria": [
@@ -386,9 +386,9 @@
         "country": "NO"
       },
       "roles": [
-        "buyer",
+        "processContactPoint",
         "leadBuyer",
-        "processContactPoint"
+        "buyer"
       ]
     },
     {

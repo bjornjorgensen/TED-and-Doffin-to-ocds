@@ -37,6 +37,7 @@ def parse_selection_criteria_threshold_number(
                             "selectionCriteria": {
                                 "criteria": [
                                     {
+                                        "id": str,  # Criterion identifier to match with existing criteria
                                         "numbers": [
                                             {
                                                 "number": float
@@ -65,32 +66,69 @@ def parse_selection_criteria_threshold_number(
 
         for lot in lots:
             lot_id = lot.xpath("cbc:ID/text()", namespaces=NAMESPACES)[0]
-            criteria = lot.xpath(
-                ".//cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria/efac:CriterionParameter[efbc:ParameterCode/@listName='number-threshold']",
+            selection_criteria = lot.xpath(
+                ".//cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria",
                 namespaces=NAMESPACES,
             )
 
-            if criteria:
-                lot_data = {"id": lot_id, "selectionCriteria": {"criteria": []}}
+            if not selection_criteria:
+                continue
 
-                for criterion in criteria:
-                    threshold = criterion.xpath(
+            lot_data = {"id": lot_id, "selectionCriteria": {"criteria": []}}
+
+            for criterion in selection_criteria:
+                # No longer skipping criteria marked as "not-used"
+                # Get usage for logging purposes only
+                usage_code = criterion.xpath(
+                    "cbc:CalculationExpressionCode[@listName='usage']/text()",
+                    namespaces=NAMESPACES,
+                )
+
+                # Extract criterion ID or use a position-based identifier if ID not available
+                criterion_id = criterion.xpath("efbc:ID/text()", namespaces=NAMESPACES)
+                criterion_id = (
+                    criterion_id[0]
+                    if criterion_id
+                    else f"criterion-{len(lot_data['selectionCriteria']['criteria']) + 1}"
+                )
+
+                # Find threshold parameters for this criterion
+                threshold_parameters = criterion.xpath(
+                    "efac:CriterionParameter[efbc:ParameterCode/@listName='number-threshold']",
+                    namespaces=NAMESPACES,
+                )
+
+                if not threshold_parameters:
+                    continue
+
+                criterion_data = {"id": criterion_id, "numbers": []}
+
+                for param in threshold_parameters:
+                    threshold = param.xpath(
                         "efbc:ParameterNumeric/text()", namespaces=NAMESPACES
                     )
                     if threshold:
                         try:
                             number = float(threshold[0])
+                            usage_info = (
+                                f" (marked as '{usage_code[0]}')" if usage_code else ""
+                            )
                             logger.info(
-                                "Found threshold number %f for lot %s", number, lot_id
+                                "Found threshold number %f for lot %s criterion %s%s",
+                                number,
+                                lot_id,
+                                criterion_id,
+                                usage_info,
                             )
-                            lot_data["selectionCriteria"]["criteria"].append(
-                                {"numbers": [{"number": number}]}
-                            )
+                            criterion_data["numbers"].append({"number": number})
                         except ValueError:
                             logger.warning("Invalid threshold number: %s", threshold[0])
 
-                if lot_data["selectionCriteria"]["criteria"]:
-                    result["tender"]["lots"].append(lot_data)
+                if criterion_data["numbers"]:
+                    lot_data["selectionCriteria"]["criteria"].append(criterion_data)
+
+            if lot_data["selectionCriteria"]["criteria"]:
+                result["tender"]["lots"].append(lot_data)
 
         return result if result["tender"]["lots"] else None
 
@@ -115,6 +153,7 @@ def merge_selection_criteria_threshold_number(
 
     Note:
         - Updates release_json in-place
+        - Maps threshold numbers to existing criteria based on criterion ID
 
     """
     if not threshold_data:
@@ -124,29 +163,59 @@ def merge_selection_criteria_threshold_number(
     tender = release_json.setdefault("tender", {})
     existing_lots = tender.setdefault("lots", [])
 
+    # Track how many lots and criteria were updated
+    updated_lots = 0
+    updated_criteria = 0
+
     for new_lot in threshold_data["tender"]["lots"]:
         existing_lot = next(
             (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
             None,
         )
-        if existing_lot:
-            existing_criteria = existing_lot.setdefault(
-                "selectionCriteria",
-                {},
-            ).setdefault("criteria", [])
-            for new_criterion in new_lot["selectionCriteria"]["criteria"]:
-                existing_criterion = next(
-                    (c for c in existing_criteria if "numbers" not in c),
-                    None,
-                )
-                if existing_criterion:
-                    existing_criterion["numbers"] = new_criterion["numbers"]
-                else:
-                    existing_criteria.append(new_criterion)
-        else:
+
+        if not existing_lot:
+            # If lot doesn't exist yet, add it with the threshold data
             existing_lots.append(new_lot)
+            updated_lots += 1
+            updated_criteria += len(new_lot["selectionCriteria"]["criteria"])
+            continue
+
+        # Ensure lot has selectionCriteria
+        existing_criteria = existing_lot.setdefault("selectionCriteria", {}).setdefault(
+            "criteria", []
+        )
+
+        for new_criterion in new_lot["selectionCriteria"]["criteria"]:
+            criterion_id = new_criterion.get("id")
+
+            # Try to find matching criterion by ID or find one without numbers
+            existing_criterion = None
+
+            # First attempt to match by ID if available
+            if criterion_id:
+                existing_criterion = next(
+                    (c for c in existing_criteria if c.get("id") == criterion_id), None
+                )
+
+            # If no match by ID and no ID provided, find first criterion without numbers
+            if not existing_criterion:
+                existing_criterion = next(
+                    (c for c in existing_criteria if "numbers" not in c), None
+                )
+
+            if existing_criterion:
+                # Update existing criterion with numbers
+                existing_criterion["numbers"] = new_criterion["numbers"]
+                updated_criteria += 1
+            else:
+                # Add as a new criterion
+                existing_criteria.append(new_criterion)
+                updated_criteria += 1
+
+        updated_lots += 1
 
     logger.info(
-        "Merged selection criteria threshold number data for %d lots",
-        len(threshold_data["tender"]["lots"]),
+        "Merged selection criteria threshold number data for %d lots and %d criteria",
+        updated_lots,
+        updated_criteria,
     )

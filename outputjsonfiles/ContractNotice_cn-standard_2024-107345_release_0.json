@@ -1,7 +1,7 @@
 {
   "id": "870ff007-688a-4ad1-9ad7-28c2ae514b40",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-11aff0cf-e8ab-43ff-a404-59b6451e7fdb",
+  "ocid": "ocds-abcd1234-ed1bff36-8c21-460a-a084-45a741db7c97",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften"
@@ -54,7 +54,7 @@
           "endDate": "2029-03-01T23:59:59+00:00"
         },
         "contractTerms": {
-          "electronicInvoicingPolicy": "Required",
+          "electronicInvoicingPolicy": "required",
           "hasElectronicOrdering": true,
           "hasElectronicPayment": true
         },

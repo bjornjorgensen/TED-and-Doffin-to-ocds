@@ -1,7 +1,7 @@
 {
   "id": "2022-394467",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-a0901388-5620-43ab-a046-19c1172b6962",
+  "ocid": "ocds-abcd1234-907b9f0a-2724-406a-938c-14ab88893e7b",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -35,7 +35,7 @@
         },
         "contractTerms": {
           "performanceTerms": "Oversikt og kort beskrivelse av vilkår: Helikopteroperatøren (HO) skal bekrefte gyldig sertifikat/Air Operator Certificate (AOC) utstedt og godkjent av Luftfartstilsynet i Norge (eller tilsvarende for utenlandsk HO) Kategori 3: PRESISJONSLEVERING AV LAST OVER BAKKENIVÅ/ SPESIALOPERASJONER Det er et krav at pilot og helikopterselskap er utsjekket på den type operasjon og kategori de skal utføre og at standard operative prosedyrer (SOP'er) er godkjent av luftfartsmyndigheter (eller tilsvarende for utenlandsk HO). Alle operasjoner skal bygge på en godkjent SOP. Ref Energi Norges \"Bransjeveileder - Helikoptertransport i kraftnæringen\" Det vil bli stilt krav til Tilbyderens kompetanse generelt og innen kraftbransjen spesielt. Det stilles krav til dokumentasjon på nødvendig opplæring i utstyrsbruk, dokumentasjon med referanser på minst tre tidligere gjennomførte oppdrag av samme type inne de tre siste årene samt minimum 1000 dokumenterte flytimer.",
-          "electronicInvoicingPolicy": "Allowed",
+          "electronicInvoicingPolicy": "allowed",
           "hasElectronicOrdering": true,
           "hasElectronicPayment": true
         },
@@ -125,8 +125,8 @@
       },
       "roles": [
         "submissionReceiptBody",
-        "buyer",
-        "processContactPoint"
+        "processContactPoint",
+        "buyer"
       ],
       "address": {
         "streetAddress": "Postboks 4100",
