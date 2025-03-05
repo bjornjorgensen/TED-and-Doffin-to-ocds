@@ -22,7 +22,7 @@ def test_parse_document_provider() -> None:
         </cac:ProcurementProjectLot>
     </root>
     """
-    result = part_parse_document_provider(xml_content)
+    result = parse_document_provider_part(xml_content)
     assert result == {"parties": [{"id": "TPO-0001", "roles": ["processContactPoint"]}]}
 
 
@@ -31,7 +31,7 @@ def test_merge_document_provider() -> None:
     document_provider_data = {
         "parties": [{"id": "TPO-0001", "roles": ["processContactPoint"]}]
     }
-    part_merge_document_provider(release_json, document_provider_data)
+    merge_document_provider_part(release_json, document_provider_data)
     assert release_json == {
         "parties": [{"id": "TPO-0001", "roles": ["buyer", "processContactPoint"]}]
     }
@@ -42,7 +42,7 @@ def test_merge_document_provider_new_party() -> None:
     document_provider_data = {
         "parties": [{"id": "TPO-0001", "roles": ["processContactPoint"]}]
     }
-    part_merge_document_provider(release_json, document_provider_data)
+    merge_document_provider_part(release_json, document_provider_data)
     assert release_json == {
         "parties": [
             {"id": "ORG-0001", "roles": ["buyer"]},

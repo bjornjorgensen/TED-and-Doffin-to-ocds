@@ -1,6 +1,7 @@
 # converters/opt_301_part_docprovider.py
 
 import logging
+import re
 from typing import Any
 
 from lxml import etree
@@ -38,7 +39,8 @@ def parse_document_provider_part(xml_content: str | bytes) -> dict[str, Any] | N
         "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
     }
 
-    xpath = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:DocumentProviderParty/cac:PartyIdentification/cbc:ID[@schemeName='touchpoint']"
+    # Updated XPath to match all document provider IDs without scheme restriction
+    xpath = "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:DocumentProviderParty/cac:PartyIdentification/cbc:ID"
     document_providers = root.xpath(xpath, namespaces=namespaces)
 
     if not document_providers:
@@ -46,10 +48,22 @@ def parse_document_provider_part(xml_content: str | bytes) -> dict[str, Any] | N
         return None
 
     result = {"parties": []}
+    id_pattern = re.compile(r"^(ORG|TPO)-\d{4}$")
+
     for provider in document_providers:
-        result["parties"].append(
-            {"id": provider.text, "roles": ["processContactPoint"]}
-        )
+        provider_id = provider.text
+        if not provider_id or not id_pattern.match(provider_id):
+            logger.warning(
+                "Invalid Document Provider ID format: %s. Expected format: ORG-XXXX or TPO-XXXX",
+                provider_id,
+            )
+            continue
+
+        result["parties"].append({"id": provider_id, "roles": ["processContactPoint"]})
+
+    if not result["parties"]:
+        logger.info("No valid Document Provider IDs found.")
+        return None
 
     return result
 
