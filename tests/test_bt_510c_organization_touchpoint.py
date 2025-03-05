@@ -56,7 +56,7 @@ def test_bt_510c_organization_touchpoint_integration(
                             <efac:Organization>
                                 <efac:Company>
                                     <cac:PartyLegalEntity>
-                                        <cbc:companyID>998298</cbc:companyID>
+                                        <cbc:CompanyID>998298</cbc:CompanyID>
                                     </cac:PartyLegalEntity>
                                 </efac:Company>
                                 <efac:TouchPoint>
