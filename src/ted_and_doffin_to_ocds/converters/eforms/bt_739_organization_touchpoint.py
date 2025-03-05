@@ -55,7 +55,7 @@ def parse_touchpoint_contact_fax(xml_content: str | bytes) -> dict | None:
 
         for org in organizations:
             company_id = org.xpath(
-                "efac:Company/cac:PartyLegalEntity/cbc:CompanyID/text()",
+                "efac:Company/cac:PartyLegalEntity/cbc:companyID/text()",
                 namespaces=NAMESPACES,
             )
 
