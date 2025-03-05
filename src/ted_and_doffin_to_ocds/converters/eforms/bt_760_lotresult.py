@@ -50,6 +50,7 @@ def parse_received_submissions_type(xml_content: str | bytes) -> dict | None:
                         {
                             "id": str,
                             "measure": str,  # from SUBMISSION_TYPE_MAPPING
+                            "value": int,    # count of submissions of this type
                             "relatedLot": str
                         }
                     ]
@@ -74,26 +75,72 @@ def parse_received_submissions_type(xml_content: str | bytes) -> dict | None:
             lot_id = lot_result.xpath(
                 "efac:TenderLot/cbc:ID[@schemeName='Lot']/text()", namespaces=NAMESPACES
             )
-            statistics = lot_result.xpath(
-                "efac:ReceivedSubmissionsStatistics/efbc:StatisticsCode[@listName='received-submission-type']/text()",
+
+            if not lot_id:
+                continue
+
+            lot_id = lot_id[0]
+
+            # Find all ReceivedSubmissionsStatistics elements
+            statistics_elements = lot_result.xpath(
+                "efac:ReceivedSubmissionsStatistics",
                 namespaces=NAMESPACES,
             )
 
-            if lot_id and statistics:
-                for stat_code in statistics:
-                    measure = SUBMISSION_TYPE_MAPPING.get(stat_code)
-                    if measure:
-                        logger.info(
-                            "Found submission type %s for lot %s", measure, lot_id[0]
-                        )
-                        statistic = {
-                            "id": f"{measure}-{lot_id[0]}",
-                            "measure": measure,
-                            "relatedLot": lot_id[0],
-                        }
-                        result["bids"]["statistics"].append(statistic)
-                    else:
-                        logger.warning("Unknown submission type code: %s", stat_code)
+            for stat_element in statistics_elements:
+                # Get the type code
+                stat_code = stat_element.xpath(
+                    "efbc:StatisticsCode[@listName='received-submission-type']/text()",
+                    namespaces=NAMESPACES,
+                )
+                if not stat_code:
+                    continue
+
+                stat_code = stat_code[0]
+
+                # Get the corresponding count value
+                stat_value = stat_element.xpath(
+                    "efbc:StatisticsNumeric/text()",
+                    namespaces=NAMESPACES,
+                )
+
+                # If no value is provided, skip this statistic
+                if not stat_value:
+                    logger.warning(
+                        "Missing value for submission type %s in lot %s",
+                        stat_code,
+                        lot_id,
+                    )
+                    continue
+
+                try:
+                    value = int(stat_value[0])
+                except (ValueError, TypeError):
+                    logger.warning(
+                        "Invalid value for submission type %s in lot %s: %s",
+                        stat_code,
+                        lot_id,
+                        stat_value[0],
+                    )
+                    continue
+
+                measure = SUBMISSION_TYPE_MAPPING.get(stat_code)
+                if measure:
+                    logger.info(
+                        "Found submission type %s with value %d for lot %s",
+                        measure,
+                        value,
+                        lot_id,
+                    )
+                    statistic = {
+                        "id": f"{measure}-{lot_id}",
+                        "measure": measure,
+                        "value": value,
+                        "relatedLot": lot_id,
+                    }
+                    result["bids"]["statistics"].append(statistic)
+                else:
+                    logger.warning("Unknown submission type code: %s", stat_code)
 
         return result if result["bids"]["statistics"] else None
 

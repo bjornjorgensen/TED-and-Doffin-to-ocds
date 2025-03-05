@@ -1,7 +1,7 @@
 {
   "id": "2023-335407",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-9c7c18b6-7d50-403e-9e2f-26003ce2b6ae",
+  "ocid": "ocds-abcd1234-d0019657-a08e-4a00-8cdf-897bc274c7cd",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -208,21 +208,25 @@
       {
         "id": "2",
         "measure": "smeBids",
+        "value": 2,
         "relatedLot": "LOT-0000"
       },
       {
         "id": "3",
         "measure": "foreignBidsFromEU",
+        "value": 6,
         "relatedLot": "LOT-0000"
       },
       {
         "id": "4",
         "measure": "foreignBidsFromNonEU",
+        "value": 0,
         "relatedLot": "LOT-0000"
       },
       {
         "id": "5",
         "measure": "electronicBids",
+        "value": 6,
         "relatedLot": "LOT-0000"
       }
     ]

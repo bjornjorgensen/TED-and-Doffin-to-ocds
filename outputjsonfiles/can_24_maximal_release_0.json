@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-bb2db4cd-88f9-45b2-9d67-1467c2b99af4",
+  "ocid": "ocds-abcd1234-61bfa707-4bd0-4402-b672-023fa447468a",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -1227,44 +1227,50 @@
       },
       {
         "id": "3",
-        "value": 3,
+        "value": 9,
         "measure": "bids",
         "relatedLot": "LOT-0001"
       },
       {
         "id": "4",
-        "value": 0,
+        "value": 1,
         "measure": "bids",
         "relatedLot": "LOT-0002"
       },
       {
         "id": "5",
         "measure": "foreignBidsFromEU",
+        "value": 3,
         "relatedLot": "LOT-0001"
       },
       {
         "id": "6",
         "measure": "electronicBids",
+        "value": 9,
         "relatedLot": "LOT-0001"
       },
       {
         "id": "7",
         "measure": "smeBids",
+        "value": 1,
         "relatedLot": "LOT-0001"
       },
       {
         "id": "8",
         "measure": "foreignBidsFromEU",
+        "value": 0,
         "relatedLot": "LOT-0002"
       },
       {
         "id": "9",
         "measure": "electronicBids",
+        "value": 0,
         "relatedLot": "LOT-0002"
       },
       {
         "id": "10",
         "measure": "smeBids",
+        "value": 0,
         "relatedLot": "LOT-0002"
       }
     ]
@@ -1364,7 +1370,7 @@
     "budget": {
       "finance": [
         {
-          "id": "0dc2ad69-e469-4780-9f46-3e8c2b816fee",
+          "id": "e19d61b1-2e27-43cc-9b4e-33ef9bc68e13",
           "financingParty": {
             "id": "13",
             "name": "European Union"
