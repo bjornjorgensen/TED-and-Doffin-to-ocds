@@ -71,7 +71,6 @@ def parse_selection_criteria_number_weight(
                     }
 
                     for criterion in selection_criteria:
-                        # Check if criterion is used
                         usage = criterion.xpath(
                             "cbc:CalculationExpressionCode[@listName='usage']/text()",
                             namespaces=NAMESPACES,
@@ -132,32 +131,26 @@ def merge_selection_criteria_number_weight(
 
     """
     if not number_weight_data:
-        # If there's no valid criteria data, make sure no selection criteria exist
         if "tender" in release_json and "lots" in release_json["tender"]:
             for lot in release_json["tender"]["lots"]:
-                # Remove any selection criteria from lots when criteria are unused
                 lot.pop("selectionCriteria", None)
         return
 
     tender = release_json.setdefault("tender", {})
     existing_lots = tender.setdefault("lots", [])
 
-    # Create a set of lot IDs that have valid selection criteria
     valid_lot_ids = {lot["id"] for lot in number_weight_data["tender"]["lots"]}
 
-    # Only merge selection criteria for lots that have valid criteria
     for new_lot in number_weight_data["tender"]["lots"]:
         existing_lot = next(
             (lot for lot in existing_lots if lot["id"] == new_lot["id"]),
             None,
         )
         if existing_lot:
-            # Update selection criteria for lots with valid criteria
             existing_lot["selectionCriteria"] = new_lot["selectionCriteria"]
         else:
             existing_lots.append(new_lot)
 
-    # Remove selection criteria from lots that don't have valid criteria
     for lot in existing_lots:
         if lot["id"] not in valid_lot_ids:
             lot.pop("selectionCriteria", None)

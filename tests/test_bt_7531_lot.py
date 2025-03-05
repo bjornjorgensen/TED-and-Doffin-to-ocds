@@ -181,9 +181,13 @@ def test_bt_7531_lot_multiple_parameters(tmp_path, temp_output_dir) -> None:
 
     lot = result["tender"]["lots"][0]
     criteria = lot["selectionCriteria"]["criteria"]
-    assert len(criteria) == 2, "Expected 2 criteria"
-    weights = {c["numbers"][0]["weight"] for c in criteria}
-    assert weights == {"percentageExact", "decimalExact"}, "Expected both weight types"
+    assert len(criteria) == 1, "Expected 1 criterion with multiple weights"
+    
+    numbers = criteria[0]["numbers"]
+    assert len(numbers) == 2, "Expected 2 weight entries in the numbers array"
+    
+    weights = {n["weight"] for n in numbers}
+    assert weights == {"percentageExact", "decimalExact"}, "Expected both weight types in the same criterion"
 
 
 if __name__ == "__main__":
