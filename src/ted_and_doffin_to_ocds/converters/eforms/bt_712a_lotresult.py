@@ -41,7 +41,6 @@ def parse_buyer_review_complainants_code(
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    # XPath for BT-712(a): Review type code
     relevant_xpath = "//efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='review-type']"
     if not root.xpath(relevant_xpath, namespaces=namespaces):
         logger.info(
@@ -69,12 +68,26 @@ def parse_buyer_review_complainants_code(
             namespaces=namespaces,
         )
 
+        complainants_value = lot_result.xpath(
+            "efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='review-type']/efbc:StatisticsNumeric/text()",
+            namespaces=namespaces,
+        )
+
         if complainants_code and complainants_code[0] == "complainants":
             statistic = {
                 "id": str(i),
                 "measure": "complainants",
                 "relatedLot": lot_id[0],
             }
+            if complainants_value:
+                try:
+                    statistic["value"] = int(complainants_value[0])
+                except (ValueError, TypeError):
+                    logger.warning(
+                        "Invalid numeric value for complainants: %s",
+                        complainants_value[0],
+                    )
+
             result["statistics"].append(statistic)
 
     return result if result["statistics"] else None
@@ -101,21 +114,18 @@ def merge_buyer_review_complainants_code(
     existing_statistics = release_json.setdefault("statistics", [])
 
     for new_statistic in complainants_code_data["statistics"]:
-        existing_statistic = next(
+        existing_index = next(
             (
-                stat
-                for stat in existing_statistics
+                i
+                for i, stat in enumerate(existing_statistics)
                 if stat.get("measure") == "complainants"
                 and stat.get("relatedLot") == new_statistic["relatedLot"]
             ),
             None,
         )
-        if existing_statistic:
-            # Preserve value field if it exists, update other fields
-            value = existing_statistic.pop("value", None)
-            existing_statistic.update(new_statistic)
-            if value is not None:
-                existing_statistic["value"] = value
+        if existing_index is not None:
+            # Replace the existing statistic entirely with the new one
+            existing_statistics[existing_index] = new_statistic
         else:
             existing_statistics.append(new_statistic)
 

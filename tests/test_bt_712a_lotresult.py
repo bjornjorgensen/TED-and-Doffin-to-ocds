@@ -15,7 +15,7 @@ NAMESPACES = {
 }
 
 
-def create_xml_content(lot_data):
+def create_xml_content(lot_data, include_numbers=False):
     root = etree.Element("root", nsmap=NAMESPACES)
     notice_result = etree.SubElement(root, f"{{{NAMESPACES['efac']}}}NoticeResult")
 
@@ -38,6 +38,14 @@ def create_xml_content(lot_data):
             listName="review-type",
         )
         stats_code.text = code
+        
+        # Add number value for BT-712(b) if requested
+        if include_numbers:
+            stats_number = etree.SubElement(
+                appeal_stats,
+                f"{{{NAMESPACES['efbc']}}}StatisticsNumeric"
+            )
+            stats_number.text = "3"  # Sample numeric value
 
     return etree.tostring(root)
 
@@ -115,6 +123,11 @@ def sample_xml_content():
     return create_xml_content({"LOT-001": "complainants", "LOT-002": "complainants"})
 
 
+@pytest.fixture
+def sample_xml_with_number():
+    return create_xml_content({"LOT-001": "complainants", "LOT-002": "complainants"}, include_numbers=True)
+
+
 def test_integration(sample_xml_content) -> None:
     # Parse the XML content
     parsed_data = parse_buyer_review_complainants_code(sample_xml_content)
@@ -132,3 +145,27 @@ def test_integration(sample_xml_content) -> None:
     assert release_json["statistics"][0]["measure"] == "complainants"
     assert release_json["statistics"][1]["relatedLot"] == "LOT-002"
     assert release_json["statistics"][1]["measure"] == "complainants"
+
+
+def test_integration_with_number(sample_xml_with_number) -> None:
+    """Test integration when both code (BT-712a) and number (BT-712b) are present."""
+    # Parse the XML content
+    parsed_data = parse_buyer_review_complainants_code(sample_xml_with_number)
+    assert parsed_data is not None
+
+    # Create a mock release JSON
+    release_json = {"statistics": []}
+
+    # Merge the parsed data into the release JSON
+    merge_buyer_review_complainants_code(release_json, parsed_data)
+    
+    # Check the final result
+    assert len(release_json["statistics"]) == 2
+    assert release_json["statistics"][0]["relatedLot"] == "LOT-001"
+    assert release_json["statistics"][0]["measure"] == "complainants"
+    assert "value" in release_json["statistics"][0]
+    assert release_json["statistics"][0]["value"] == 3
+    assert release_json["statistics"][1]["relatedLot"] == "LOT-002"
+    assert release_json["statistics"][1]["measure"] == "complainants"
+    assert "value" in release_json["statistics"][1]
+    assert release_json["statistics"][1]["value"] == 3
