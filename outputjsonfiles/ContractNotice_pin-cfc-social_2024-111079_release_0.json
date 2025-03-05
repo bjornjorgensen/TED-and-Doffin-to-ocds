@@ -1,1 +1,153 @@
-{"id": "defc83ce-b8a2-48a0-a1be-33262308c9fd", "initiationType": "tender", "ocid": "ocds-abcd1234-fd8fc930-f851-410f-b4d7-aa1ea671c4ef", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0023"}}, "status": "active", "id": "2b238a39-1532-4ebe-9763-0afa2b4c5f0b", "procurementMethod": "open", "procurementMethodDetails": "Open procedure", "lots": [{"id": "LOT-0000", "enquiryPeriod": {"endDate": "2024-07-25T08:42:00+00:00"}, "submissionTerms": {"electronicSubmissionPolicy": "required", "multipleBidsAllowed": true, "languages": ["no"], "bidValidityPeriod": {"durationInDays": 1}}, "title": "Dzmitry PROD Test", "identifiers": [{"id": "576165", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Test", "tenderPeriod": {"endDate": "2024-08-11T08:42:00+00:00"}, "hasAccessibilityCriteria": false, "techniques": {"hasElectronicAuction": false}}], "documents": [{"id": "Innkjøpsdokumenter", "documentType": "biddingDocuments", "url": "https://supplierportal.c1.app.mercell.com/223345?id=867171&tpk=f7a8d12e-d27b-4e94-a2de-556bc9a84f3e", "relatedLots": ["LOT-0000"]}], "title": "Dzmitry PROD Test", "identifiers": [{"id": "867171", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Test", "items": [{"id": "1", "classification": {"scheme": "CPV", "id": "50000000"}, "relatedLot": "LOT-0000", "deliveryLocations": [{"description": "Anywhere"}]}], "deliveryLocations": [{"description": "Anywhere"}]}, "tag": ["tender"], "date": "2024-07-18T08:59:54+00:00", "parties": [{"id": "ORG-0001", "details": {"classifications": [{"scheme": "eu-buyer-legal-type", "id": "body-pl", "description": "Body governed by public law"}]}, "name": "[Test][Cloudia]TestOrg6", "additionalIdentifiers": [{"id": "223345", "scheme": "GB-COH"}], "contactPoint": {"name": "Christina [Test][Cloudia]TestOrg6", "telephone": "+358 91234567", "email": "christina.seferliprodtestorg6@mercell.com"}, "address": {"locality": "02-495", "country": "NO"}, "roles": ["buyer", "processContactPoint"]}, {"id": "ORG-0002", "name": "Test Org", "additionalIdentifiers": [{"id": "Test Org", "scheme": "GB-COH"}], "contactPoint": {"telephone": "+49 123456789", "email": "jonathan.brew@mercell.com"}, "address": {"locality": "Warsaw", "country": "PL"}, "roles": ["reviewBody"]}], "language": "no", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "defc83ce-b8a2-48a0-a1be-33262308c9fd",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-68c7a970-317c-420a-bca8-f164bb5c60d0",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0023"
+      }
+    },
+    "status": "active",
+    "id": "2b238a39-1532-4ebe-9763-0afa2b4c5f0b",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Open procedure",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "enquiryPeriod": {
+          "endDate": "2024-07-25T08:42:00+00:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "multipleBidsAllowed": true,
+          "languages": [
+            "no"
+          ],
+          "bidValidityPeriod": {
+            "durationInDays": 1
+          }
+        },
+        "title": "Dzmitry PROD Test",
+        "identifiers": [
+          {
+            "id": "576165",
+            "scheme": "internal"
+          }
+        ],
+        "mainProcurementCategory": "services",
+        "description": "Test",
+        "tenderPeriod": {
+          "endDate": "2024-08-11T08:42:00+00:00"
+        },
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "hasElectronicAuction": false
+        }
+      }
+    ],
+    "documents": [
+      {
+        "id": "Innkjøpsdokumenter",
+        "documentType": "biddingDocuments",
+        "url": "https://supplierportal.c1.app.mercell.com/223345?id=867171&tpk=f7a8d12e-d27b-4e94-a2de-556bc9a84f3e",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "Dzmitry PROD Test",
+    "identifiers": [
+      {
+        "id": "867171",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "services",
+    "description": "Test",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "50000000"
+        },
+        "relatedLot": "LOT-0000",
+        "deliveryLocations": [
+          {
+            "description": "Anywhere"
+          }
+        ]
+      }
+    ],
+    "deliveryLocations": [
+      {
+        "description": "Anywhere"
+      }
+    ]
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2024-07-18T08:59:54+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
+          }
+        ]
+      },
+      "name": "[Test][Cloudia]TestOrg6",
+      "additionalIdentifiers": [
+        {
+          "id": "223345",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Christina [Test][Cloudia]TestOrg6",
+        "telephone": "+358 91234567",
+        "email": "christina.seferliprodtestorg6@mercell.com"
+      },
+      "address": {
+        "locality": "02-495",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ]
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Test Org",
+      "additionalIdentifiers": [
+        {
+          "id": "Test Org",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "+49 123456789",
+        "email": "jonathan.brew@mercell.com"
+      },
+      "address": {
+        "locality": "Warsaw",
+        "country": "PL"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "language": "no",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

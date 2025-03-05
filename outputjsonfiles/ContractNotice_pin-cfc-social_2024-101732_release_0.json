@@ -1,1 +1,636 @@
-{"id": "74f8c72a-5dcd-4a77-afda-6573ca30c8df", "initiationType": "tender", "ocid": "ocds-abcd1234-04fd1259-6a14-425e-9a9c-5cf54da87881", "tender": {"legalBasis": {"id": "Konsesjonsforskriften", "scheme": "ELI", "wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0023"}}, "status": "active", "id": "27bb3055-882b-4ed0-a3bd-a86575ef8666", "lots": [{"id": "LOT-0000", "enquiryPeriod": {"endDate": "2024-03-01T00:00:00+01:00"}, "submissionTerms": {"electronicSubmissionPolicy": "required", "advancedElectronicSignatureRequired": true, "multipleBidsAllowed": false, "languages": ["no"]}, "title": "Tjenestekonsesjon brukerstyrt personlig assistanse ( BPA ) Kravspesifikasjon", "identifiers": [{"id": "24/1", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Åpen konkurranse i forbindelse med inngåelse av konsesjonsavtale på brukerstyrt personlig assistanse ( BPA) til brukere i:\nMeråker og Stjørdal kommune ved Forvaltningskontoret Værnesregionen\nSelbu og Tydal kommune ved Tildelingskontor Selbu og Tydal\nFrosta kommune ved Forvaltningskontoret, Frosta kommune\nHoltålen kommune ved Koordinerende enhet for voksne over 18 år/vedtaksteam", "value": {"amount": 150000000.0, "currency": "NOK"}, "contractPeriod": {"startDate": "2024-04-01T00:00:00+02:00", "endDate": "2026-03-31T23:59:59+02:00"}, "options": {"description": "1+1+1 å"}, "tenderPeriod": {"endDate": "2024-03-08T00:00:00+01:00"}, "contractTerms": {"electronicInvoicingPolicy": "Required"}, "selectionCriteria": {"criteria": [{"title": "Økonomisk og finansiell kapasitet: Leverandøren skal ha tilstrekkelig økonomisk og finansiell kapasitet til å kunne oppfylle kontrakten. Kredittverdighet uten krav til sikkerhetsstillelse vil være tilstrekkelig til å oppfylle kravet", "description": "Økonomisk og finansiell kapasitet: Leverandøren skal ha tilstrekkelig økonomisk og finansiell kapasitet til å kunne oppfylle kontrakten. Kredittverdighet uten krav til sikkerhetsstillelse vil være tilstrekkelig til å oppfylle kravet: Framkommer av eBevis.\nOppdragsgiver vil i tillegg selv gjøre oppslag i Bisnode."}, {"title": "Leverandøren oppfyller de angitte kvalifikasjonskravene:", "description": "Leverandøren oppfyller de angitte kvalifikasjonskravene:: Alle nødvendige utvalgskriterier spesifisert i innkallingen eller i anskaffelsesdokumentene som er nevnt i innkallingen, er oppfylt."}, {"title": "Denne oppfyller de objektive og ikke-diskriminerende kriterier eller regler som skal anvendes for å velge ut antallet av leverandører på følgende måte:\nHvis det anmodes om visse attester eller andre former for dokumentasjon, angis for hver enkelt om leverandøren er i besittelse av dokumentene som etterspørres:", "description": "Denne oppfyller de objektive og ikke-diskriminerende kriterier eller regler som skal anvendes for å velge ut antallet av leverandører på følgende måte:\nHvis det anmodes om visse attester eller andre former for dokumentasjon, angis for hver enkelt om leverandøren er i besittelse av dokumentene som etterspørres:: Hvis noen av disse attestene eller andre former for dokumentasjon er tilgjengelige i elektronisk form , angis dette for hver enkelt:"}, {"title": "Erfaring: Det kreves erfaring fra tilsvarende oppdrag, det vil si hjemmebaserte eller andre sammenlignbare helse- og omsorgstjenester.", "description": "Erfaring: Det kreves erfaring fra tilsvarende oppdrag, det vil si hjemmebaserte eller andre sammenlignbare helse- og omsorgstjenester.: Dokumentasjonskrav:\nForetakets 3 viktigste offentlige leveranser de siste årene. Herunder opplysninger om verdi, tidspunkt, samt navnet på mottaker med kontaktinformasjon for eventuell referanseinnhenting.\n\n1. Redegjørelse for firmaets kvalitetssikring-/styringssystem, herunder kravene i forskrift om ledelse og kvalitetsforbedring i helse og omsorgstjenesten (FOR-2016-10-28-1250), forskrift om systematisk helse-, miljø- og sikkerhetsarbeid i virksomheter (internkontrollforskriften) (FOR-1996-12-06-1127) og kravene i konsesjonskontrakten. Er foretaket sertifisert skal sertifiseringsbevis vedlegges.\n2. Redegjørelse for søkerens arbeid med kontinuerlig forbedring, herunder avvikshåndtering.\n3. Beskrivelse av rutiner for å ivareta informasjonssikkerhet, innhenting/bruk av politiattest, taushetsbelagte opplysninger og etiske retningslinjer mm.\n4. Redegjørelse for hvordan leverandøren håndterer tilbakemeldinger/klager fra brukeren/ arbeidsledere/assistenter og pårørende. Også hvordan dette følges opp mot oppdragsgiver.\n5. Redegjørelse for hvordan leverandøren forebygger og håndterer meldinger om overgrep ( seksuelle, vold, økonomi etc.).\nOgså hvordan dette følges opp mot oppdragsgiver\n\nEr foretaket sertifisert skal sertifiseringsbevis vedlegges"}, {"title": "Foretaksregister: Leverandøren skal være registrert i et foretaksregister, faglig register eller et handelsregister i den staten leverandøren er etablert", "description": "Foretaksregister: Leverandøren skal være registrert i et foretaksregister, faglig register eller et handelsregister i den staten leverandøren er etablert: Dokumentasjonskrav: \nNorske virksomheter: Framkommer av eBevis\n\nUtenlandske selskaper: Godtgjørelse på at selskapet er registrert i et foretaksregister, faglig register eller et handelsregister i den staten leverandøren er etablert. Fremkommer av e-bevis"}, {"title": "Skatteattest: Leverandøren skal ha ordnede forhold med hensyn til betaling av skatt, arbeidsavgift og merverdiavgift i henhold til lovbestemmelsene", "description": "Skatteattest: Leverandøren skal ha ordnede forhold med hensyn til betaling av skatt, arbeidsavgift og merverdiavgift i henhold til lovbestemmelsene: Norske virksomheter: Fremkommer av eBevis.\n\nUtenlandske selskaper: Leverandør som ikke er etablert i Norge skal levere tilsvarende dokumentasjon utstedt av myndighetene i det landet Leverandøren er etablert. Attest skal fortrinnsvis være oversatt til norsk, men det aksepteres også svensk, dansk og engelsk språk."}, {"title": "Det kreves erfaring fra tilsvarende oppdrag, det vil si hjemmebaserte eller andre sammenlignbare helse- og omsorgstjenester.", "description": "Det kreves erfaring fra tilsvarende oppdrag, det vil si hjemmebaserte eller andre sammenlignbare helse- og omsorgstjenester.: Dokumentasjonskrav:\nForetakets 3 viktigste offentlige leveranser de siste årene. Herunder opplysninger om verdi, tidspunkt, samt navnet på mottaker med kontaktinformasjon for eventuell referanseinnhenting.\n\n1. Redegjørelse for firmaets kvalitetssikring-/styringssystem, herunder kravene i forskrift om ledelse og kvalitetsforbedring i helse og omsorgstjenesten (FOR-2016-10-28-1250), forskrift om systematisk helse-, miljø- og sikkerhetsarbeid i virksomheter (internkontrollforskriften) (FOR-1996-12-06-1127) og kravene i konsesjonskontrakten. Er foretaket sertifisert skal sertifiseringsbevis vedlegges.\n2. Redegjørelse for søkerens arbeid med kontinuerlig forbedring, herunder avvikshåndtering.\n3. Beskrivelse av rutiner for å ivareta informasjonssikkerhet, innhenting/bruk av politiattest, taushetsbelagte opplysninger og etiske retningslinjer mm.\n4. Redegjørelse for hvordan leverandøren håndterer tilbakemeldinger/klager fra brukeren/ arbeidsledere/assistenter og pårørende. Også hvordan dette følges opp mot oppdragsgiver.\n5. Redegjørelse for hvordan leverandøren forebygger og håndterer meldinger om overgrep ( seksuelle, vold, økonomi etc.).\nOgså hvordan dette følges opp mot oppdragsgiver\n\nEr foretaket sertifisert skal sertifiseringsbevis vedlegges"}, {"description": "Dokumentasjonskrav:\nForetakets 3 viktigste offentlige leveranser de siste årene. Herunder opplysninger om verdi, tidspunkt, samt navnet på mottaker med kontaktinformasjon for eventuell referanseinnhenting.\n\n1. Redegjørelse for firmaets kvalitetssikring-/styringssystem, herunder kravene i forskrift om ledelse og kvalitetsforbedring i helse og omsorgstjenesten (FOR-2016-10-28-1250), forskrift om systematisk helse-, miljø- og sikkerhetsarbeid i virksomheter (internkontrollforskriften) (FOR-1996-12-06-1127) og kravene i konsesjonskontrakten. Er foretaket sertifisert skal sertifiseringsbevis vedlegges.\n2. Redegjørelse for søkerens arbeid med kontinuerlig forbedring, herunder avvikshåndtering.\n3. Beskrivelse av rutiner for å ivareta informasjonssikkerhet, innhenting/bruk av politiattest, taushetsbelagte opplysninger og etiske retningslinjer mm.\n4. Redegjørelse for hvordan leverandøren håndterer tilbakemeldinger/klager fra brukeren/ arbeidsledere/assistenter og pårørende. Også hvordan dette følges opp mot oppdragsgiver.\n5. Redegjørelse for hvordan leverandøren forebygger og håndterer meldinger om overgrep ( seksuelle, vold, økonomi etc.).\nOgså hvordan dette følges opp mot oppdragsgiver\n\nEr foretaket sertifisert skal sertifiseringsbevis vedlegges", "languageID": "NOR"}]}, "hasAccessibilityCriteria": false, "techniques": {"hasElectronicAuction": false}}], "documents": [{"id": "Link to the procurement documents", "documentType": "biddingDocuments", "url": "https://tendsign.com/doc.aspx?MeFormsNoticeId=8772", "relatedLots": ["LOT-0000"]}], "title": "Tjenestekonsesjon brukerstyrt  personlig assistanse ( BPA)", "identifiers": [{"id": "24/1", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Åpen konkurranse i forbindelse med inngåelse av konsesjonsavtale på brukerstyrt personlig assistanse ( BPA) til brukere i:\nMeråker og Stjørdal kommune ved Forvaltningskontoret Værnesregionen\nSelbu og Tydal kommune ved Tildelingskontor Selbu og Tydal\nFrosta kommune ved Forvaltningskontoret, Frosta kommune\nHoltålen kommune ved Koordinerende enhet for voksne over 18 år/vedtaksteam", "items": [{"id": "1", "additionalClassifications": [{"id": "85140000", "scheme": "CPV"}, {"id": "85300000", "scheme": "CPV"}, {"id": "85311200", "scheme": "CPV"}, {"id": "85311300", "scheme": "CPV"}, {"id": "85312400", "scheme": "CPV"}, {"id": "85323000", "scheme": "CPV"}], "relatedLot": "LOT-0000", "classification": {"scheme": "CPV", "id": "85100000"}, "deliveryAddresses": [{"region": "NO060"}, {"region": "NO060"}, {"region": "NO060"}, {"region": "NO060"}, {"region": "NO060"}, {"region": "NO060"}, {"postalCode": "7500"}, {"country": "NO"}]}, {"id": "LOT-0000", "relatedLot": "LOT-0000", "deliveryAddresses": [{"locality": "Selbu"}, {"locality": "Tydal"}, {"locality": "Meråker"}, {"locality": "Frosta"}, {"locality": "Holtålen"}, {"locality": "Stjørdal"}]}], "value": {"amount": 150000000.0, "currency": "NOK"}, "deliveryAddresses": [{"region": "NO060"}, {"region": "NO060"}, {"region": "NO060"}, {"region": "NO060"}, {"region": "NO060"}, {"region": "NO060"}, {"postalCode": "7500"}, {"locality": "Selbu"}, {"locality": "Tydal"}, {"locality": "Meråker"}, {"locality": "Frosta"}, {"locality": "Holtålen"}, {"locality": "Stjørdal"}, {"country": "NO"}], "exclusionGrounds": {"criteria": [{"type": "bankr-nat", "description": "Analogous situation like bankruptcy under national law: Er leverandøren i en situasjon hvor han har fått tvungen gjeldsordning? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."}, {"type": "bankruptcy", "description": "Bankruptcy: Er leverandøren i en konkurssituasjon? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."}, {"type": "corruption", "description": "Corruption: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for korrupsjon ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Korrupsjon som definert i artikkel 3 i konvensjonen om bekjempelse av korrupsjon, som involverer tjenestemenn i De Europeiske Fellesskapene eller i Den Europeiske Unions medlemsstater (EUT C 195 av 25.6.1997, s. 1), og i artikkel 2, stk. 1, i Rådets rammeavgjørelse 2003/568/RIA av 22. juli 2003 om bekjempelse av korrupsjon i den private sektor (EUT L 192 av 31.7.2003, s. 54). Denne avvisningsgrunnen omfatter også korrupsjon som definert i nasjonal rett for oppdragsgiveren eller leverandøren."}, {"type": "cred-arran", "description": "Arrangement with creditors: Er leverandøren i en situasjon hvor han har fått tvungen gjeldsordning? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."}, {"type": "crime-org", "description": "participation in a criminal organisation: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for deltakelse i en kriminell organisasjon ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Deltakelse i en kriminell organisasjon som definert i artikkel 2 i Rådets rammeavgjørelse 2008/841/RIA av 24. oktober 2008 om bekjempelse av organisert kriminalitet (EUT L 300 av 11.11.2008, s. 42)"}, {"type": "distorsion", "description": "Agreements with other economic operators aimed at distorting competition: Har leverandør inngått avtale(r) med andre leverandører med hensikt å vri konkurransen?"}, {"type": "envir-law", "description": "Breaching of obligations in the fields of environmental law: Er leverandøren kjent med å ha begått brudd på bestemmelser om miljø slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."}, {"type": "finan-laund", "description": "Money laundering or terrorist financing: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for hvitvasking av penger eller finansiering av terrorisme ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Hvitvasking av penger eller finansiering av terrorismeSom definert i artikkel 1 i Europaparlamentets og Rådets direktiv 2005/60/EF av 26. oktober 2005 om forebyggende tiltak mot bruk av det finansielle system til hvitvasking av penger og finansiering av terrorisme (EUT L 309 av 25.11.2005, s. 15)."}, {"type": "fraud", "description": "Fraud: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for bedrageri ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Bedrageri som omhandlet i artikkel 1 i konvensjonen om beskyttelse av De Europeiske Fellesskapenes finansielle interesser (EFT C 316 av 27.11.1995, s. 48)."}, {"type": "human-traffic", "description": "Child labour and other forms of trafficking in human beings: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for barnearbeid og andre former for menneskehandel ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Barnearbeid og andre former for menneskehandel som definert i artikkel 2 i Europaparlamentets og Rådets direktiv 2011/36/EU av 5. april 2011 om forebygging og bekjempelse av menneskehandel og beskyttelse av dets ofre, og om erstatning av Rådets rammeavgjørelse 2002/629/RIA (EUT L 101 av 15.4.2011, s. 1)."}, {"type": "insolvency", "description": "Insolvency: Er leverandøren i en insolvenssituasjon? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."}, {"type": "labour-law", "description": "Breaching of obligations in the fields of labour law: Er leverandøren kjent med å ha begått brudd på bestemmelser om arbeidsforhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."}, {"type": "liq-admin", "description": "Assets being administered by liquidator: Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."}, {"type": "misrepresent", "description": "Guilty of misrepresentation, withheld information, unable to provide required documents and obtained confidential information of this procedure: Har leverandøren: a) gitt grovt uriktige opplysninger ved meddelelsen av opplysningene som kreves for å kontrollere at det ikke er grunnlag for avvisning, eller av at kvalifikasjonskravene er oppfylt, b) unnlatt å gi slike opplysninger, c) tatt forbehold om straks å fremlegge de støttedokumenter som oppdragsgiver anmoder om, eller d) urettmessig påvirket oppdragsgivers beslutningsprosess for å tilegne seg konfidensiell informasjon som kan gi denne en urettmessig fordel i forbindelse med konkurransen, eller uaktsomt har gitt misvisende opplysninger som kan få vesentlig innflytelse på beslutninger om avvisning, utvelgelse eller tildeling?"}, {"type": "partic-confl", "description": "Conflict of interest due to its participation in the procurement procedure: Er leverandør oppmerksom på en interessekonflikt slik denne er angitt i nasjonal rett, den relevante kunngjøring eller anskaffelsesdokumentene?"}, {"type": "prep-confl", "description": "Direct or indirect involvement in the preparation of this procurement procedure: Har leverandør eller en virksomhet tilknyttet leverandøren gitt råd til oppdragsgiver eller på annen måte vært involvert i planleggingen av konkurransen?"}, {"type": "prof-misconduct", "description": "Guilty of grave professional misconduct: Har leverandøren begått alvorlige feil i yrkesutøvelsen? Hvis det er relevant, se definisjoner i nasjonal rett, den relevante kunngjøring eller anskaffelsesdokumentene."}, {"type": "sanction", "description": "Early termination, damages or other comparable sanctions: Har leverandør begått vesentlig kontraktsbrudd i forbindelse med oppfyllelsen av en tidligere offentlig kontrakt, en tidligere kontrakt med en offentlig oppdragsgiver eller en tidligere konsesjonskontrakt, der bruddet har ført til heving av kontrakten, erstatning eller andre lignende sanksjoner?"}, {"type": "socsec-law", "description": "Breaching of obligations in the fields of social law: Er leverandøren kjent med å ha begått brudd på bestemmelser om sosiale forhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."}, {"type": "socsec-pay", "description": "Payment of social security contributions: Har leverandør unnlatt å oppfylle alle sine forpliktelser til å betale trygdeavgifter både i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et annet land enn det han er etablert i?"}, {"type": "susp-act", "description": "Business activities are suspended: Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."}, {"type": "tax-pay", "description": "Payment of taxes: Har leverandøren unnlatt å oppfylle sine forpliktelser til å betale skatter og avgifter i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et annet land enn det han er etablert i?"}, {"type": "terr-offence", "description": "Terrorist offences or offences linked to terrorist activities: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitetved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitet som definert i artikkel 1 og 3 i Rådets rammeavgjørelse 2002/475/RIA av 13. juni 2002 om bekjempelse av terrorisme (EFT L 164 af 22.6.2002, s. 3). Denne avvisningsgrunnen omfatter også oppfordring til, medvirkning til eller forsøk på å begå slike handlinger som omhandlet i artikkel 4 i nevnte rammeavgjørelse."}]}}, "tag": ["tender"], "date": "2024-02-06T11:54:00+00:00", "parties": [{"id": "ORG-0001", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "https://www.varnesregionen.no/fellestjenester/innkjop"}, "name": "Værnesregionen Innkjøp - Innkjøp", "additionalIdentifiers": [{"id": "939958851", "scheme": "GB-COH"}], "contactPoint": {"name": "Rita Endresen", "telephone": "+4774833500", "email": "rita@varinn.no"}, "address": {"streetAddress": "Kjøpmannsgata 13", "postalCode": "7500", "locality": "Stjørdal", "country": "NO"}, "roles": ["leadBuyer", "buyer", "processContactPoint"]}, {"id": "ORG-0003", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "body-pl", "description": "Body governed by public law"}], "url": "https://www.stjordal.kommune.no"}, "name": "Stjørdal kommune", "additionalIdentifiers": [{"id": "939958851", "scheme": "GB-COH"}], "contactPoint": {"telephone": "74833500", "email": "postmottak@stjordal.kommune.no"}, "address": {"locality": "Stjørdal", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0004", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "body-pl", "description": "Body governed by public law"}]}, "name": "Meråker kommune", "additionalIdentifiers": [{"id": "835231712", "scheme": "GB-COH"}], "contactPoint": {"telephone": "74813200", "email": "postmottak@meraker.kommune.no"}, "address": {"locality": "Meråker", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0005", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "body-pl", "description": "Body governed by public law"}]}, "name": "Selbu kommune", "additionalIdentifiers": [{"id": "971197609", "scheme": "GB-COH"}], "contactPoint": {"telephone": "4773816700", "email": "postsmottak@selbukommune.no"}, "address": {"locality": "Selbu", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0006", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "body-pl", "description": "Body governed by public law"}]}, "name": "Tydal kommune", "additionalIdentifiers": [{"id": "64983472", "scheme": "GB-COH"}], "contactPoint": {"telephone": "4773815900", "email": "postmottak@tydalkommune.no"}, "address": {"locality": "Tydal", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0007", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "body-pl", "description": "Body governed by public law"}]}, "name": "Frosta kommune", "additionalIdentifiers": [{"id": "944482253", "scheme": "GB-COH"}], "contactPoint": {"telephone": "4774808800", "email": "postmottak@frotga.kommune.no"}, "address": {"locality": "Frosta", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0008", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "body-pl", "description": "Body governed by public law"}]}, "name": "Holtålen kommune", "additionalIdentifiers": [{"id": "937697767", "scheme": "GB-COH"}], "contactPoint": {"telephone": "4772417600", "email": "postmottak@holtalen.kommune.no"}, "address": {"locality": "Holtålen", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0002", "name": "Trøndelag tingrett", "additionalIdentifiers": [{"id": "926 722 794", "scheme": "GB-COH"}], "contactPoint": {"telephone": "73 54 24 00", "email": "trondelag.tingrett@domstol.no"}, "details": {"url": "https://www.domstol.no/no/domstoler/tingrett/trondelag-tingrett/"}, "address": {"streetAddress": "Postboks 2317 Torgarden", "postalCode": "7004", "locality": "Trondheim", "country": "NO"}, "roles": ["reviewBody"]}], "language": "no", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "74f8c72a-5dcd-4a77-afda-6573ca30c8df",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-4426f2b3-33f7-4953-9476-274ce59d9b09",
+  "tender": {
+    "legalBasis": {
+      "id": "Konsesjonsforskriften",
+      "scheme": "ELI",
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0023"
+      }
+    },
+    "status": "active",
+    "id": "27bb3055-882b-4ed0-a3bd-a86575ef8666",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "enquiryPeriod": {
+          "endDate": "2024-03-01T00:00:00+01:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "advancedElectronicSignatureRequired": true,
+          "multipleBidsAllowed": false,
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Tjenestekonsesjon brukerstyrt personlig assistanse ( BPA ) Kravspesifikasjon",
+        "identifiers": [
+          {
+            "id": "24/1",
+            "scheme": "internal"
+          }
+        ],
+        "mainProcurementCategory": "services",
+        "description": "Åpen konkurranse i forbindelse med inngåelse av konsesjonsavtale på brukerstyrt personlig assistanse ( BPA) til brukere i:\nMeråker og Stjørdal kommune ved Forvaltningskontoret Værnesregionen\nSelbu og Tydal kommune ved Tildelingskontor Selbu og Tydal\nFrosta kommune ved Forvaltningskontoret, Frosta kommune\nHoltålen kommune ved Koordinerende enhet for voksne over 18 år/vedtaksteam",
+        "value": {
+          "amount": 150000000.0,
+          "currency": "NOK"
+        },
+        "contractPeriod": {
+          "startDate": "2024-04-01T00:00:00+02:00",
+          "endDate": "2026-03-31T23:59:59+02:00"
+        },
+        "options": {
+          "description": "1+1+1 å"
+        },
+        "tenderPeriod": {
+          "endDate": "2024-03-08T00:00:00+01:00"
+        },
+        "contractTerms": {
+          "electronicInvoicingPolicy": "Required"
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "title": "Økonomisk og finansiell kapasitet: Leverandøren skal ha tilstrekkelig økonomisk og finansiell kapasitet til å kunne oppfylle kontrakten. Kredittverdighet uten krav til sikkerhetsstillelse vil være tilstrekkelig til å oppfylle kravet",
+              "description": "Økonomisk og finansiell kapasitet: Leverandøren skal ha tilstrekkelig økonomisk og finansiell kapasitet til å kunne oppfylle kontrakten. Kredittverdighet uten krav til sikkerhetsstillelse vil være tilstrekkelig til å oppfylle kravet: Framkommer av eBevis.\nOppdragsgiver vil i tillegg selv gjøre oppslag i Bisnode."
+            },
+            {
+              "title": "Leverandøren oppfyller de angitte kvalifikasjonskravene:",
+              "description": "Leverandøren oppfyller de angitte kvalifikasjonskravene:: Alle nødvendige utvalgskriterier spesifisert i innkallingen eller i anskaffelsesdokumentene som er nevnt i innkallingen, er oppfylt."
+            },
+            {
+              "title": "Denne oppfyller de objektive og ikke-diskriminerende kriterier eller regler som skal anvendes for å velge ut antallet av leverandører på følgende måte:\nHvis det anmodes om visse attester eller andre former for dokumentasjon, angis for hver enkelt om leverandøren er i besittelse av dokumentene som etterspørres:",
+              "description": "Denne oppfyller de objektive og ikke-diskriminerende kriterier eller regler som skal anvendes for å velge ut antallet av leverandører på følgende måte:\nHvis det anmodes om visse attester eller andre former for dokumentasjon, angis for hver enkelt om leverandøren er i besittelse av dokumentene som etterspørres:: Hvis noen av disse attestene eller andre former for dokumentasjon er tilgjengelige i elektronisk form , angis dette for hver enkelt:"
+            },
+            {
+              "title": "Erfaring: Det kreves erfaring fra tilsvarende oppdrag, det vil si hjemmebaserte eller andre sammenlignbare helse- og omsorgstjenester.",
+              "description": "Erfaring: Det kreves erfaring fra tilsvarende oppdrag, det vil si hjemmebaserte eller andre sammenlignbare helse- og omsorgstjenester.: Dokumentasjonskrav:\nForetakets 3 viktigste offentlige leveranser de siste årene. Herunder opplysninger om verdi, tidspunkt, samt navnet på mottaker med kontaktinformasjon for eventuell referanseinnhenting.\n\n1. Redegjørelse for firmaets kvalitetssikring-/styringssystem, herunder kravene i forskrift om ledelse og kvalitetsforbedring i helse og omsorgstjenesten (FOR-2016-10-28-1250), forskrift om systematisk helse-, miljø- og sikkerhetsarbeid i virksomheter (internkontrollforskriften) (FOR-1996-12-06-1127) og kravene i konsesjonskontrakten. Er foretaket sertifisert skal sertifiseringsbevis vedlegges.\n2. Redegjørelse for søkerens arbeid med kontinuerlig forbedring, herunder avvikshåndtering.\n3. Beskrivelse av rutiner for å ivareta informasjonssikkerhet, innhenting/bruk av politiattest, taushetsbelagte opplysninger og etiske retningslinjer mm.\n4. Redegjørelse for hvordan leverandøren håndterer tilbakemeldinger/klager fra brukeren/ arbeidsledere/assistenter og pårørende. Også hvordan dette følges opp mot oppdragsgiver.\n5. Redegjørelse for hvordan leverandøren forebygger og håndterer meldinger om overgrep ( seksuelle, vold, økonomi etc.).\nOgså hvordan dette følges opp mot oppdragsgiver\n\nEr foretaket sertifisert skal sertifiseringsbevis vedlegges"
+            },
+            {
+              "title": "Foretaksregister: Leverandøren skal være registrert i et foretaksregister, faglig register eller et handelsregister i den staten leverandøren er etablert",
+              "description": "Foretaksregister: Leverandøren skal være registrert i et foretaksregister, faglig register eller et handelsregister i den staten leverandøren er etablert: Dokumentasjonskrav: \nNorske virksomheter: Framkommer av eBevis\n\nUtenlandske selskaper: Godtgjørelse på at selskapet er registrert i et foretaksregister, faglig register eller et handelsregister i den staten leverandøren er etablert. Fremkommer av e-bevis"
+            },
+            {
+              "title": "Skatteattest: Leverandøren skal ha ordnede forhold med hensyn til betaling av skatt, arbeidsavgift og merverdiavgift i henhold til lovbestemmelsene",
+              "description": "Skatteattest: Leverandøren skal ha ordnede forhold med hensyn til betaling av skatt, arbeidsavgift og merverdiavgift i henhold til lovbestemmelsene: Norske virksomheter: Fremkommer av eBevis.\n\nUtenlandske selskaper: Leverandør som ikke er etablert i Norge skal levere tilsvarende dokumentasjon utstedt av myndighetene i det landet Leverandøren er etablert. Attest skal fortrinnsvis være oversatt til norsk, men det aksepteres også svensk, dansk og engelsk språk."
+            },
+            {
+              "title": "Det kreves erfaring fra tilsvarende oppdrag, det vil si hjemmebaserte eller andre sammenlignbare helse- og omsorgstjenester.",
+              "description": "Det kreves erfaring fra tilsvarende oppdrag, det vil si hjemmebaserte eller andre sammenlignbare helse- og omsorgstjenester.: Dokumentasjonskrav:\nForetakets 3 viktigste offentlige leveranser de siste årene. Herunder opplysninger om verdi, tidspunkt, samt navnet på mottaker med kontaktinformasjon for eventuell referanseinnhenting.\n\n1. Redegjørelse for firmaets kvalitetssikring-/styringssystem, herunder kravene i forskrift om ledelse og kvalitetsforbedring i helse og omsorgstjenesten (FOR-2016-10-28-1250), forskrift om systematisk helse-, miljø- og sikkerhetsarbeid i virksomheter (internkontrollforskriften) (FOR-1996-12-06-1127) og kravene i konsesjonskontrakten. Er foretaket sertifisert skal sertifiseringsbevis vedlegges.\n2. Redegjørelse for søkerens arbeid med kontinuerlig forbedring, herunder avvikshåndtering.\n3. Beskrivelse av rutiner for å ivareta informasjonssikkerhet, innhenting/bruk av politiattest, taushetsbelagte opplysninger og etiske retningslinjer mm.\n4. Redegjørelse for hvordan leverandøren håndterer tilbakemeldinger/klager fra brukeren/ arbeidsledere/assistenter og pårørende. Også hvordan dette følges opp mot oppdragsgiver.\n5. Redegjørelse for hvordan leverandøren forebygger og håndterer meldinger om overgrep ( seksuelle, vold, økonomi etc.).\nOgså hvordan dette følges opp mot oppdragsgiver\n\nEr foretaket sertifisert skal sertifiseringsbevis vedlegges"
+            },
+            {
+              "description": "Dokumentasjonskrav:\nForetakets 3 viktigste offentlige leveranser de siste årene. Herunder opplysninger om verdi, tidspunkt, samt navnet på mottaker med kontaktinformasjon for eventuell referanseinnhenting.\n\n1. Redegjørelse for firmaets kvalitetssikring-/styringssystem, herunder kravene i forskrift om ledelse og kvalitetsforbedring i helse og omsorgstjenesten (FOR-2016-10-28-1250), forskrift om systematisk helse-, miljø- og sikkerhetsarbeid i virksomheter (internkontrollforskriften) (FOR-1996-12-06-1127) og kravene i konsesjonskontrakten. Er foretaket sertifisert skal sertifiseringsbevis vedlegges.\n2. Redegjørelse for søkerens arbeid med kontinuerlig forbedring, herunder avvikshåndtering.\n3. Beskrivelse av rutiner for å ivareta informasjonssikkerhet, innhenting/bruk av politiattest, taushetsbelagte opplysninger og etiske retningslinjer mm.\n4. Redegjørelse for hvordan leverandøren håndterer tilbakemeldinger/klager fra brukeren/ arbeidsledere/assistenter og pårørende. Også hvordan dette følges opp mot oppdragsgiver.\n5. Redegjørelse for hvordan leverandøren forebygger og håndterer meldinger om overgrep ( seksuelle, vold, økonomi etc.).\nOgså hvordan dette følges opp mot oppdragsgiver\n\nEr foretaket sertifisert skal sertifiseringsbevis vedlegges",
+              "languageID": "NOR"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "hasElectronicAuction": false
+        }
+      }
+    ],
+    "documents": [
+      {
+        "id": "Link to the procurement documents",
+        "documentType": "biddingDocuments",
+        "url": "https://tendsign.com/doc.aspx?MeFormsNoticeId=8772",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "Tjenestekonsesjon brukerstyrt  personlig assistanse ( BPA)",
+    "identifiers": [
+      {
+        "id": "24/1",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "services",
+    "description": "Åpen konkurranse i forbindelse med inngåelse av konsesjonsavtale på brukerstyrt personlig assistanse ( BPA) til brukere i:\nMeråker og Stjørdal kommune ved Forvaltningskontoret Værnesregionen\nSelbu og Tydal kommune ved Tildelingskontor Selbu og Tydal\nFrosta kommune ved Forvaltningskontoret, Frosta kommune\nHoltålen kommune ved Koordinerende enhet for voksne over 18 år/vedtaksteam",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "id": "85140000",
+            "scheme": "CPV"
+          },
+          {
+            "id": "85300000",
+            "scheme": "CPV"
+          },
+          {
+            "id": "85311200",
+            "scheme": "CPV"
+          },
+          {
+            "id": "85311300",
+            "scheme": "CPV"
+          },
+          {
+            "id": "85312400",
+            "scheme": "CPV"
+          },
+          {
+            "id": "85323000",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "85100000"
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO060"
+          },
+          {
+            "region": "NO060"
+          },
+          {
+            "region": "NO060"
+          },
+          {
+            "region": "NO060"
+          },
+          {
+            "region": "NO060"
+          },
+          {
+            "region": "NO060"
+          },
+          {
+            "postalCode": "7500"
+          },
+          {
+            "country": "NO"
+          }
+        ]
+      },
+      {
+        "id": "LOT-0000",
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "locality": "Selbu"
+          },
+          {
+            "locality": "Tydal"
+          },
+          {
+            "locality": "Meråker"
+          },
+          {
+            "locality": "Frosta"
+          },
+          {
+            "locality": "Holtålen"
+          },
+          {
+            "locality": "Stjørdal"
+          }
+        ]
+      }
+    ],
+    "value": {
+      "amount": 150000000.0,
+      "currency": "NOK"
+    },
+    "deliveryAddresses": [
+      {
+        "region": "NO060"
+      },
+      {
+        "region": "NO060"
+      },
+      {
+        "region": "NO060"
+      },
+      {
+        "region": "NO060"
+      },
+      {
+        "region": "NO060"
+      },
+      {
+        "region": "NO060"
+      },
+      {
+        "postalCode": "7500"
+      },
+      {
+        "locality": "Selbu"
+      },
+      {
+        "locality": "Tydal"
+      },
+      {
+        "locality": "Meråker"
+      },
+      {
+        "locality": "Frosta"
+      },
+      {
+        "locality": "Holtålen"
+      },
+      {
+        "locality": "Stjørdal"
+      },
+      {
+        "country": "NO"
+      }
+    ],
+    "exclusionGrounds": {
+      "criteria": [
+        {
+          "type": "bankr-nat",
+          "description": "Analogous situation like bankruptcy under national law: Er leverandøren i en situasjon hvor han har fått tvungen gjeldsordning? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."
+        },
+        {
+          "type": "bankruptcy",
+          "description": "Bankruptcy: Er leverandøren i en konkurssituasjon? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."
+        },
+        {
+          "type": "corruption",
+          "description": "Corruption: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for korrupsjon ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Korrupsjon som definert i artikkel 3 i konvensjonen om bekjempelse av korrupsjon, som involverer tjenestemenn i De Europeiske Fellesskapene eller i Den Europeiske Unions medlemsstater (EUT C 195 av 25.6.1997, s. 1), og i artikkel 2, stk. 1, i Rådets rammeavgjørelse 2003/568/RIA av 22. juli 2003 om bekjempelse av korrupsjon i den private sektor (EUT L 192 av 31.7.2003, s. 54). Denne avvisningsgrunnen omfatter også korrupsjon som definert i nasjonal rett for oppdragsgiveren eller leverandøren."
+        },
+        {
+          "type": "cred-arran",
+          "description": "Arrangement with creditors: Er leverandøren i en situasjon hvor han har fått tvungen gjeldsordning? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."
+        },
+        {
+          "type": "crime-org",
+          "description": "participation in a criminal organisation: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for deltakelse i en kriminell organisasjon ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Deltakelse i en kriminell organisasjon som definert i artikkel 2 i Rådets rammeavgjørelse 2008/841/RIA av 24. oktober 2008 om bekjempelse av organisert kriminalitet (EUT L 300 av 11.11.2008, s. 42)"
+        },
+        {
+          "type": "distorsion",
+          "description": "Agreements with other economic operators aimed at distorting competition: Har leverandør inngått avtale(r) med andre leverandører med hensikt å vri konkurransen?"
+        },
+        {
+          "type": "envir-law",
+          "description": "Breaching of obligations in the fields of environmental law: Er leverandøren kjent med å ha begått brudd på bestemmelser om miljø slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."
+        },
+        {
+          "type": "finan-laund",
+          "description": "Money laundering or terrorist financing: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for hvitvasking av penger eller finansiering av terrorisme ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Hvitvasking av penger eller finansiering av terrorismeSom definert i artikkel 1 i Europaparlamentets og Rådets direktiv 2005/60/EF av 26. oktober 2005 om forebyggende tiltak mot bruk av det finansielle system til hvitvasking av penger og finansiering av terrorisme (EUT L 309 av 25.11.2005, s. 15)."
+        },
+        {
+          "type": "fraud",
+          "description": "Fraud: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for bedrageri ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Bedrageri som omhandlet i artikkel 1 i konvensjonen om beskyttelse av De Europeiske Fellesskapenes finansielle interesser (EFT C 316 av 27.11.1995, s. 48)."
+        },
+        {
+          "type": "human-traffic",
+          "description": "Child labour and other forms of trafficking in human beings: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for barnearbeid og andre former for menneskehandel ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Barnearbeid og andre former for menneskehandel som definert i artikkel 2 i Europaparlamentets og Rådets direktiv 2011/36/EU av 5. april 2011 om forebygging og bekjempelse av menneskehandel og beskyttelse av dets ofre, og om erstatning av Rådets rammeavgjørelse 2002/629/RIA (EUT L 101 av 15.4.2011, s. 1)."
+        },
+        {
+          "type": "insolvency",
+          "description": "Insolvency: Er leverandøren i en insolvenssituasjon? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."
+        },
+        {
+          "type": "labour-law",
+          "description": "Breaching of obligations in the fields of labour law: Er leverandøren kjent med å ha begått brudd på bestemmelser om arbeidsforhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."
+        },
+        {
+          "type": "liq-admin",
+          "description": "Assets being administered by liquidator: Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."
+        },
+        {
+          "type": "misrepresent",
+          "description": "Guilty of misrepresentation, withheld information, unable to provide required documents and obtained confidential information of this procedure: Har leverandøren: a) gitt grovt uriktige opplysninger ved meddelelsen av opplysningene som kreves for å kontrollere at det ikke er grunnlag for avvisning, eller av at kvalifikasjonskravene er oppfylt, b) unnlatt å gi slike opplysninger, c) tatt forbehold om straks å fremlegge de støttedokumenter som oppdragsgiver anmoder om, eller d) urettmessig påvirket oppdragsgivers beslutningsprosess for å tilegne seg konfidensiell informasjon som kan gi denne en urettmessig fordel i forbindelse med konkurransen, eller uaktsomt har gitt misvisende opplysninger som kan få vesentlig innflytelse på beslutninger om avvisning, utvelgelse eller tildeling?"
+        },
+        {
+          "type": "partic-confl",
+          "description": "Conflict of interest due to its participation in the procurement procedure: Er leverandør oppmerksom på en interessekonflikt slik denne er angitt i nasjonal rett, den relevante kunngjøring eller anskaffelsesdokumentene?"
+        },
+        {
+          "type": "prep-confl",
+          "description": "Direct or indirect involvement in the preparation of this procurement procedure: Har leverandør eller en virksomhet tilknyttet leverandøren gitt råd til oppdragsgiver eller på annen måte vært involvert i planleggingen av konkurransen?"
+        },
+        {
+          "type": "prof-misconduct",
+          "description": "Guilty of grave professional misconduct: Har leverandøren begått alvorlige feil i yrkesutøvelsen? Hvis det er relevant, se definisjoner i nasjonal rett, den relevante kunngjøring eller anskaffelsesdokumentene."
+        },
+        {
+          "type": "sanction",
+          "description": "Early termination, damages or other comparable sanctions: Har leverandør begått vesentlig kontraktsbrudd i forbindelse med oppfyllelsen av en tidligere offentlig kontrakt, en tidligere kontrakt med en offentlig oppdragsgiver eller en tidligere konsesjonskontrakt, der bruddet har ført til heving av kontrakten, erstatning eller andre lignende sanksjoner?"
+        },
+        {
+          "type": "socsec-law",
+          "description": "Breaching of obligations in the fields of social law: Er leverandøren kjent med å ha begått brudd på bestemmelser om sosiale forhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."
+        },
+        {
+          "type": "socsec-pay",
+          "description": "Payment of social security contributions: Har leverandør unnlatt å oppfylle alle sine forpliktelser til å betale trygdeavgifter både i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et annet land enn det han er etablert i?"
+        },
+        {
+          "type": "susp-act",
+          "description": "Business activities are suspended: Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."
+        },
+        {
+          "type": "tax-pay",
+          "description": "Payment of taxes: Har leverandøren unnlatt å oppfylle sine forpliktelser til å betale skatter og avgifter i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et annet land enn det han er etablert i?"
+        },
+        {
+          "type": "terr-offence",
+          "description": "Terrorist offences or offences linked to terrorist activities: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitetved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitet som definert i artikkel 1 og 3 i Rådets rammeavgjørelse 2002/475/RIA av 13. juni 2002 om bekjempelse av terrorisme (EFT L 164 af 22.6.2002, s. 3). Denne avvisningsgrunnen omfatter også oppfordring til, medvirkning til eller forsøk på å begå slike handlinger som omhandlet i artikkel 4 i nevnte rammeavgjørelse."
+        }
+      ]
+    }
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2024-02-06T11:54:00+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "https://www.varnesregionen.no/fellestjenester/innkjop"
+      },
+      "name": "Værnesregionen Innkjøp - Innkjøp",
+      "additionalIdentifiers": [
+        {
+          "id": "939958851",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Rita Endresen",
+        "telephone": "+4774833500",
+        "email": "rita@varinn.no"
+      },
+      "address": {
+        "streetAddress": "Kjøpmannsgata 13",
+        "postalCode": "7500",
+        "locality": "Stjørdal",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer",
+        "leadBuyer",
+        "processContactPoint"
+      ]
+    },
+    {
+      "id": "ORG-0003",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
+          }
+        ],
+        "url": "https://www.stjordal.kommune.no"
+      },
+      "name": "Stjørdal kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "939958851",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "74833500",
+        "email": "postmottak@stjordal.kommune.no"
+      },
+      "address": {
+        "locality": "Stjørdal",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0004",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
+          }
+        ]
+      },
+      "name": "Meråker kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "835231712",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "74813200",
+        "email": "postmottak@meraker.kommune.no"
+      },
+      "address": {
+        "locality": "Meråker",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0005",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
+          }
+        ]
+      },
+      "name": "Selbu kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "971197609",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "4773816700",
+        "email": "postsmottak@selbukommune.no"
+      },
+      "address": {
+        "locality": "Selbu",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0006",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
+          }
+        ]
+      },
+      "name": "Tydal kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "64983472",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "4773815900",
+        "email": "postmottak@tydalkommune.no"
+      },
+      "address": {
+        "locality": "Tydal",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0007",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
+          }
+        ]
+      },
+      "name": "Frosta kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "944482253",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "4774808800",
+        "email": "postmottak@frotga.kommune.no"
+      },
+      "address": {
+        "locality": "Frosta",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0008",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
+          }
+        ]
+      },
+      "name": "Holtålen kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "937697767",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "4772417600",
+        "email": "postmottak@holtalen.kommune.no"
+      },
+      "address": {
+        "locality": "Holtålen",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Trøndelag tingrett",
+      "additionalIdentifiers": [
+        {
+          "id": "926 722 794",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "73 54 24 00",
+        "email": "trondelag.tingrett@domstol.no"
+      },
+      "details": {
+        "url": "https://www.domstol.no/no/domstoler/tingrett/trondelag-tingrett/"
+      },
+      "address": {
+        "streetAddress": "Postboks 2317 Torgarden",
+        "postalCode": "7004",
+        "locality": "Trondheim",
+        "country": "NO"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "language": "no",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

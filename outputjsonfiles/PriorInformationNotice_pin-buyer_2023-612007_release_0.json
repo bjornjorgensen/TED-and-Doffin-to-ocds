@@ -1,1 +1,105 @@
-{"id": "2023-612007", "initiationType": "tender", "ocid": "ocds-abcd1234-50549a43-8c75-4b5b-8238-088d36ae46f2", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32009L0081"}}, "status": "planned", "lots": [{"id": "LOT-0000", "submissionTerms": {"electronicSubmissionPolicy": "not-allowed"}, "title": "2023004253 Veiledende kunngjøring - Service på elektronisk medisinsk utstyr", "mainProcurementCategory": "services", "description": "Denne utlysningen gjelder veiledende kunngjøring og invitasjon til dialog i relasjon til anskaffelse av service på elektronisk medisinsk utstyr. Det vises for mer informasjon til dokumentet veiledende kunngjøring og invitasjon til dialog i service på elektronisk medisinsk utstyr.", "hasAccessibilityCriteria": false}], "documents": [{"id": "DOCUMENT_ID_REQUIRED_HERE", "documentType": "biddingDocuments", "url": "https://permalink.mercell.com/198572200.aspx", "relatedLots": ["LOT-0000"]}], "title": "2023004253 Veiledende kunngjøring - Service på elektronisk medisinsk utstyr", "mainProcurementCategory": "services", "description": "Denne utlysningen gjelder veiledende kunngjøring og invitasjon til dialog i relasjon til anskaffelse av service på elektronisk medisinsk utstyr. Det vises for mer informasjon til dokumentet veiledende kunngjøring og invitasjon til dialog i service på elektronisk medisinsk utstyr.", "items": [{"id": "1", "classification": {"scheme": "CPV", "id": "50421000"}, "relatedLot": "LOT-0000", "deliveryAddresses": [{"region": "NO0"}]}]}, "tag": ["tender"], "date": "2023-03-14T12:00:00+02:00", "parties": [{"id": "ORG-0001", "details": {"classifications": [{"scheme": "COFOG", "id": "02", "description": "Defence"}, {"scheme": "eu-buyer-legal-type", "id": "cga", "description": "Central government authority"}], "url": "https://permalink.mercell.com/198572200.aspx", "buyerProfile": "https://www.forsvaret.no/"}, "name": "Forsvaret v/Forsvarets logistikkorganisasjon", "additionalIdentifiers": [{"id": "988517860", "scheme": "GB-COH"}], "contactPoint": {"name": "Marie Louise Jørgensen", "telephone": "+47 40919988", "email": "e-mjorgensen@mil.no"}, "roles": ["buyer", "processContactPoint"], "address": {"streetAddress": "Lysaker Torg 45", "postalCode": "1366", "locality": "Lysaker", "country": "NO"}}], "language": "nb", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "2023-612007",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-930f8236-b25d-45ed-8551-6c1784a7b462",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32009L0081"
+      }
+    },
+    "status": "planned",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "not-allowed"
+        },
+        "title": "2023004253 Veiledende kunngjøring - Service på elektronisk medisinsk utstyr",
+        "mainProcurementCategory": "services",
+        "description": "Denne utlysningen gjelder veiledende kunngjøring og invitasjon til dialog i relasjon til anskaffelse av service på elektronisk medisinsk utstyr. Det vises for mer informasjon til dokumentet veiledende kunngjøring og invitasjon til dialog i service på elektronisk medisinsk utstyr.",
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/198572200.aspx",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "2023004253 Veiledende kunngjøring - Service på elektronisk medisinsk utstyr",
+    "mainProcurementCategory": "services",
+    "description": "Denne utlysningen gjelder veiledende kunngjøring og invitasjon til dialog i relasjon til anskaffelse av service på elektronisk medisinsk utstyr. Det vises for mer informasjon til dokumentet veiledende kunngjøring og invitasjon til dialog i service på elektronisk medisinsk utstyr.",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "50421000"
+        },
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "region": "NO0"
+          }
+        ]
+      }
+    ]
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2023-03-14T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "02",
+            "description": "Defence"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "cga",
+            "description": "Central government authority"
+          }
+        ],
+        "url": "https://permalink.mercell.com/198572200.aspx",
+        "buyerProfile": "https://www.forsvaret.no/"
+      },
+      "name": "Forsvaret v/Forsvarets logistikkorganisasjon",
+      "additionalIdentifiers": [
+        {
+          "id": "988517860",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Marie Louise Jørgensen",
+        "telephone": "+47 40919988",
+        "email": "e-mjorgensen@mil.no"
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ],
+      "address": {
+        "streetAddress": "Lysaker Torg 45",
+        "postalCode": "1366",
+        "locality": "Lysaker",
+        "country": "NO"
+      }
+    }
+  ],
+  "language": "nb",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

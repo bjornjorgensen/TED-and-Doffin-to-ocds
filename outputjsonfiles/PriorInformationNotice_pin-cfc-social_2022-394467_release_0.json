@@ -1,1 +1,156 @@
-{"id": "2022-394467", "initiationType": "tender", "ocid": "ocds-abcd1234-dd9997f4-de35-4279-a637-331a3b9c4221", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0025"}}, "status": "active", "id": "2022-394467", "lots": [{"id": "LOT-0000", "tenderPeriod": {"endDate": "2022-08-18T12:00:00+02:00"}, "submissionTerms": {"electronicSubmissionPolicy": "not-allowed", "languages": ["no"]}, "title": "Elvia AS - Rammeavtale Kvisting- og toppkapping med helikopterbårent utstyr (1)", "mainProcurementCategory": "services", "description": "Ref http://www.digiblad.no/energinorge/helikopterbruk/ Kategori 3: PRESISJONSLEVERING AV LAST OVER BAKKENIVÅ/ SPESIALOPERASJONER", "value": {"amount": 6000000.0, "currency": "NOK"}, "contractPeriod": {"durationInDays": 1080}, "contractTerms": {"performanceTerms": "Oversikt og kort beskrivelse av vilkår: Helikopteroperatøren (HO) skal bekrefte gyldig sertifikat/Air Operator Certificate (AOC) utstedt og godkjent av Luftfartstilsynet i Norge (eller tilsvarende for utenlandsk HO) Kategori 3: PRESISJONSLEVERING AV LAST OVER BAKKENIVÅ/ SPESIALOPERASJONER Det er et krav at pilot og helikopterselskap er utsjekket på den type operasjon og kategori de skal utføre og at standard operative prosedyrer (SOP'er) er godkjent av luftfartsmyndigheter (eller tilsvarende for utenlandsk HO). Alle operasjoner skal bygge på en godkjent SOP. Ref Energi Norges \"Bransjeveileder - Helikoptertransport i kraftnæringen\" Det vil bli stilt krav til Tilbyderens kompetanse generelt og innen kraftbransjen spesielt. Det stilles krav til dokumentasjon på nødvendig opplæring i utstyrsbruk, dokumentasjon med referanser på minst tre tidligere gjennomførte oppdrag av samme type inne de tre siste årene samt minimum 1000 dokumenterte flytimer.", "electronicInvoicingPolicy": "Allowed", "hasElectronicOrdering": true, "hasElectronicPayment": true}, "selectionCriteria": {"criteria": [{"description": "Oversikt og kort beskrivelse av vilkår: Helikopteroperatøren (HO) skal bekrefte gyldig sertifikat/Air Operator Certificate (AOC) utstedt og godkjent av Luftfartstilsynet i Norge (eller tilsvarende for utenlandsk HO) Kategori 3: PRESISJONSLEVERING AV LAST OVER BAKKENIVÅ/ SPESIALOPERASJONER Det er et krav at pilot og helikopterselskap er utsjekket på den type operasjon og kategori de skal utføre og at standard operative prosedyrer (SOP'er) er godkjent av luftfartsmyndigheter (eller tilsvarende for utenlandsk HO). Alle operasjoner skal bygge på en godkjent SOP. Ref Energi Norges \"Bransjeveileder - Helikoptertransport i kraftnæringen\" Det vil bli stilt krav til Tilbyderens kompetanse generelt og innen kraftbransjen spesielt. Det stilles krav til dokumentasjon på nødvendig opplæring i utstyrsbruk, dokumentasjon med referanser på minst tre tidligere gjennomførte oppdrag av samme type inne de tre siste årene samt minimum 1000 dokumenterte flytimer.", "languageID": "NOB"}]}, "hasAccessibilityCriteria": false, "techniques": {"frameworkAgreement": {"method": "withoutReopeningCompetition"}, "hasFrameworkAgreement": true}}], "documents": [{"id": "DOCUMENT_ID_REQUIRED_HERE", "documentType": "biddingDocuments", "url": "https://kgv.doffin.no/ctm/Supplier/Documents/Folder/167718", "relatedLots": ["LOT-0000"]}], "title": "Elvia AS - Rammeavtale Kvisting- og toppkapping med helikopterbårent utstyr (1)", "identifiers": [{"id": "D-2022-102", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Ref http://www.digiblad.no/energinorge/helikopterbruk/ Kategori 3: PRESISJONSLEVERING AV LAST OVER BAKKENIVÅ/ SPESIALOPERASJONER", "items": [{"id": "1", "classification": {"scheme": "CPV", "id": "60420000"}, "relatedLot": "LOT-0000", "deliveryAddresses": [{"streetAddress": "Elvia AS konsesjonsområde"}]}], "value": {"amount": 6000000.0, "currency": "NOK"}, "deliveryAddresses": [{"streetAddress": "Elvia AS konsesjonsområde"}]}, "tag": ["tender"], "date": "2022-07-05T12:00:00+02:00", "parties": [{"id": "ORG-0001", "name": "Elvia AS", "additionalIdentifiers": [{"id": "Elvia AS", "scheme": "GB-COH"}], "contactPoint": {"name": "Jørn-Ove Jespersen", "telephone": "+47 95276569", "email": "Jorn-Ove.Jespersen@elvia.no"}, "details": {"url": "www.elvia.no", "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/2095"}, "roles": ["buyer", "processContactPoint", "submissionReceiptBody"], "address": {"streetAddress": "Postboks 4100", "postalCode": "2307", "locality": "Hamar", "country": "NO"}}, {"id": "ORG-0002", "name": "Oslo Tingrett", "address": {"streetAddress": "Postboks 8023 Dep.", "postalCode": "0030", "locality": "Oslo", "country": "NO"}, "roles": ["reviewBody"]}], "language": "nb", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "2022-394467",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-b425a2fc-fd3d-42fb-86f5-8d337c81a266",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0025"
+      }
+    },
+    "status": "active",
+    "id": "2022-394467",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "tenderPeriod": {
+          "endDate": "2022-08-18T12:00:00+02:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "not-allowed",
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Elvia AS - Rammeavtale Kvisting- og toppkapping med helikopterbårent utstyr (1)",
+        "mainProcurementCategory": "services",
+        "description": "Ref http://www.digiblad.no/energinorge/helikopterbruk/ Kategori 3: PRESISJONSLEVERING AV LAST OVER BAKKENIVÅ/ SPESIALOPERASJONER",
+        "value": {
+          "amount": 6000000.0,
+          "currency": "NOK"
+        },
+        "contractPeriod": {
+          "durationInDays": 1080
+        },
+        "contractTerms": {
+          "performanceTerms": "Oversikt og kort beskrivelse av vilkår: Helikopteroperatøren (HO) skal bekrefte gyldig sertifikat/Air Operator Certificate (AOC) utstedt og godkjent av Luftfartstilsynet i Norge (eller tilsvarende for utenlandsk HO) Kategori 3: PRESISJONSLEVERING AV LAST OVER BAKKENIVÅ/ SPESIALOPERASJONER Det er et krav at pilot og helikopterselskap er utsjekket på den type operasjon og kategori de skal utføre og at standard operative prosedyrer (SOP'er) er godkjent av luftfartsmyndigheter (eller tilsvarende for utenlandsk HO). Alle operasjoner skal bygge på en godkjent SOP. Ref Energi Norges \"Bransjeveileder - Helikoptertransport i kraftnæringen\" Det vil bli stilt krav til Tilbyderens kompetanse generelt og innen kraftbransjen spesielt. Det stilles krav til dokumentasjon på nødvendig opplæring i utstyrsbruk, dokumentasjon med referanser på minst tre tidligere gjennomførte oppdrag av samme type inne de tre siste årene samt minimum 1000 dokumenterte flytimer.",
+          "electronicInvoicingPolicy": "Allowed",
+          "hasElectronicOrdering": true,
+          "hasElectronicPayment": true
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "description": "Oversikt og kort beskrivelse av vilkår: Helikopteroperatøren (HO) skal bekrefte gyldig sertifikat/Air Operator Certificate (AOC) utstedt og godkjent av Luftfartstilsynet i Norge (eller tilsvarende for utenlandsk HO) Kategori 3: PRESISJONSLEVERING AV LAST OVER BAKKENIVÅ/ SPESIALOPERASJONER Det er et krav at pilot og helikopterselskap er utsjekket på den type operasjon og kategori de skal utføre og at standard operative prosedyrer (SOP'er) er godkjent av luftfartsmyndigheter (eller tilsvarende for utenlandsk HO). Alle operasjoner skal bygge på en godkjent SOP. Ref Energi Norges \"Bransjeveileder - Helikoptertransport i kraftnæringen\" Det vil bli stilt krav til Tilbyderens kompetanse generelt og innen kraftbransjen spesielt. Det stilles krav til dokumentasjon på nødvendig opplæring i utstyrsbruk, dokumentasjon med referanser på minst tre tidligere gjennomførte oppdrag av samme type inne de tre siste årene samt minimum 1000 dokumenterte flytimer.",
+              "languageID": "NOB"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "frameworkAgreement": {
+            "method": "withoutReopeningCompetition"
+          },
+          "hasFrameworkAgreement": true
+        }
+      }
+    ],
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "url": "https://kgv.doffin.no/ctm/Supplier/Documents/Folder/167718",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "Elvia AS - Rammeavtale Kvisting- og toppkapping med helikopterbårent utstyr (1)",
+    "identifiers": [
+      {
+        "id": "D-2022-102",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "services",
+    "description": "Ref http://www.digiblad.no/energinorge/helikopterbruk/ Kategori 3: PRESISJONSLEVERING AV LAST OVER BAKKENIVÅ/ SPESIALOPERASJONER",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "60420000"
+        },
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "streetAddress": "Elvia AS konsesjonsområde"
+          }
+        ]
+      }
+    ],
+    "value": {
+      "amount": 6000000.0,
+      "currency": "NOK"
+    },
+    "deliveryAddresses": [
+      {
+        "streetAddress": "Elvia AS konsesjonsområde"
+      }
+    ]
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2022-07-05T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Elvia AS",
+      "additionalIdentifiers": [
+        {
+          "id": "Elvia AS",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Jørn-Ove Jespersen",
+        "telephone": "+47 95276569",
+        "email": "Jorn-Ove.Jespersen@elvia.no"
+      },
+      "details": {
+        "url": "www.elvia.no",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/2095"
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint",
+        "submissionReceiptBody"
+      ],
+      "address": {
+        "streetAddress": "Postboks 4100",
+        "postalCode": "2307",
+        "locality": "Hamar",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Oslo Tingrett",
+      "address": {
+        "streetAddress": "Postboks 8023 Dep.",
+        "postalCode": "0030",
+        "locality": "Oslo",
+        "country": "NO"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "language": "nb",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

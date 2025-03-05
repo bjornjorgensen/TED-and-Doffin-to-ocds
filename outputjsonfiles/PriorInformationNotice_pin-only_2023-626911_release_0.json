@@ -1,1 +1,107 @@
-{"id": "2023-626911", "initiationType": "tender", "ocid": "ocds-abcd1234-e7c20b54-1a13-4ff1-9e7a-c485dd08a1bc", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "status": "planned", "coveredBy": ["GPA"], "id": "PAR-0000", "title": "Markedsdialog - Anskaffelse av vognskjul mm. Skjetlein VGS", "titleLanguage": "NOB", "identifiers": [{"id": "202316966", "scheme": "internal"}], "mainProcurementCategory": "works", "description": "Trøndelag fylkeskommune (TRFK) inviterer med dette til markedsdialog den 15. mai 2023 for anskaffelse av vognskjul og hestevandring (skrittemaskin med takoverbygg) på Skjetlein Videregående skole. Denne anskaffelsen er den første for TRFK i utviklingsprosjektet «Bærekraftige anskaffelser for de vanlige byggeprosjektene».", "items": [{"id": "1", "additionalClassifications": [{"scheme": "CPV", "id": "45210000"}, {"id": "45213240", "scheme": "cpv"}], "classification": {"scheme": "CPV", "id": "45000000"}}], "value": {"amount": 3500000.0, "currency": "NOK"}, "deliveryAddresses": [{"streetAddress": "Skjetlein i Trondheim kommune"}]}, "tag": ["tender"], "date": "2023-04-28T12:00:00+02:00", "parties": [{"id": "ORG-0001", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "cga", "description": "Central government authority"}], "url": "https://permalink.mercell.com/202948429.aspx", "buyerProfile": "http://www.trondelagfylke.no/"}, "name": "Trøndelag fylkeskommune", "additionalIdentifiers": [{"id": "817920632", "scheme": "GB-COH"}], "contactPoint": {"name": "Svend Olaf Olsen", "telephone": "+47 74174862", "email": "sveols@trondelagfylke.no"}, "roles": ["buyer", "processContactPoint"], "address": {"streetAddress": "Seilmakergata 2", "postalCode": "7725", "locality": "STEINKJER", "country": "NO"}}], "language": "nb", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "2023-626911",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-ff79a061-8133-4b4d-b8c1-6b0692c40ff5",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "status": "planned",
+    "coveredBy": [
+      "GPA"
+    ],
+    "id": "PAR-0000",
+    "title": "Markedsdialog - Anskaffelse av vognskjul mm. Skjetlein VGS",
+    "titleLanguage": "NOB",
+    "identifiers": [
+      {
+        "id": "202316966",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "works",
+    "description": "Trøndelag fylkeskommune (TRFK) inviterer med dette til markedsdialog den 15. mai 2023 for anskaffelse av vognskjul og hestevandring (skrittemaskin med takoverbygg) på Skjetlein Videregående skole. Denne anskaffelsen er den første for TRFK i utviklingsprosjektet «Bærekraftige anskaffelser for de vanlige byggeprosjektene».",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV",
+            "id": "45210000"
+          },
+          {
+            "id": "45213240",
+            "scheme": "cpv"
+          }
+        ],
+        "classification": {
+          "scheme": "CPV",
+          "id": "45000000"
+        }
+      }
+    ],
+    "value": {
+      "amount": 3500000.0,
+      "currency": "NOK"
+    },
+    "deliveryAddresses": [
+      {
+        "streetAddress": "Skjetlein i Trondheim kommune"
+      }
+    ]
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2023-04-28T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "cga",
+            "description": "Central government authority"
+          }
+        ],
+        "url": "https://permalink.mercell.com/202948429.aspx",
+        "buyerProfile": "http://www.trondelagfylke.no/"
+      },
+      "name": "Trøndelag fylkeskommune",
+      "additionalIdentifiers": [
+        {
+          "id": "817920632",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Svend Olaf Olsen",
+        "telephone": "+47 74174862",
+        "email": "sveols@trondelagfylke.no"
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ],
+      "address": {
+        "streetAddress": "Seilmakergata 2",
+        "postalCode": "7725",
+        "locality": "STEINKJER",
+        "country": "NO"
+      }
+    }
+  ],
+  "language": "nb",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

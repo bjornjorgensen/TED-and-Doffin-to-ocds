@@ -1,1 +1,111 @@
-{"id": "629a037e-e8dd-4b02-a19e-e890bd114fda", "initiationType": "tender", "ocid": "ocds-abcd1234-77e269fb-b220-4bf3-a106-ba16484fe53d", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "status": "planned", "title": "Invitasjon til leverandørkonferanse", "identifiers": [{"id": "Lillestrøm-24/030", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Invitasjon til leverandørkonferanse vedrørende toppsystem for adgangskontroll. Kontakt carl.henriksen@lillestrom.kommune.no for ytterligere info og ev påmelding.", "items": [{"id": "1", "additionalClassifications": [{"scheme": "CPV", "id": "42961100"}, {"scheme": "CPV", "id": "48000000"}], "classification": {"scheme": "CPV", "id": "72000000"}}], "deliveryAddresses": [{"streetAddress": "Engaveien"}, {"postalCode": "2000"}, {"locality": "Lillestrøm"}], "amendments": [{"rationale": "Se lenke under for kunngjøring og vedlegg. \nAnnons:\nhttps://tendsign.com/doc.aspx?MeFormsNoticeId=8014\nUnderlag:\nhttps://tendsign.com/doc.aspx?MeFormsNoticeId=8014&GoTo=Docs"}, {"rationale": "See the link below for the notice and annexes. \nAnnons:\nhttps://tendsign.com/doc.aspx?MeFormsNoticeId=8014\nSurface:\nhttps://tendsign.com/doc.aspx?MeFormsNoticeId=8014&GoTo=Docs"}]}, "tag": ["tender"], "date": "2024-02-13T11:32:22+00:00", "parties": [{"id": "ORG-0001", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "http://Lillestrom.kommune.no/", "buyerProfile": "https://www.lillestrom.kommune.no/"}, "name": "Lillestrøm Kommune - Innkjøp", "additionalIdentifiers": [{"id": "820710592", "scheme": "GB-COH"}], "contactPoint": {"name": "Innkjøp - Carl Henriksen", "telephone": "+47", "email": "Carl.Henriksen@lillestrom.kommune.no"}, "roles": ["buyer"], "address": {"streetAddress": "Jonas Lies gate 18", "postalCode": "2000", "locality": "Lillestrøm", "country": "NO"}}], "language": "no", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "629a037e-e8dd-4b02-a19e-e890bd114fda",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-fc744f4f-e38c-42b1-8f39-7fe9b76d6b4e",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "status": "planned",
+    "title": "Invitasjon til leverandørkonferanse",
+    "identifiers": [
+      {
+        "id": "Lillestrøm-24/030",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "services",
+    "description": "Invitasjon til leverandørkonferanse vedrørende toppsystem for adgangskontroll. Kontakt carl.henriksen@lillestrom.kommune.no for ytterligere info og ev påmelding.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV",
+            "id": "42961100"
+          },
+          {
+            "scheme": "CPV",
+            "id": "48000000"
+          }
+        ],
+        "classification": {
+          "scheme": "CPV",
+          "id": "72000000"
+        }
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "streetAddress": "Engaveien"
+      },
+      {
+        "postalCode": "2000"
+      },
+      {
+        "locality": "Lillestrøm"
+      }
+    ],
+    "amendments": [
+      {
+        "rationale": "Se lenke under for kunngjøring og vedlegg. \nAnnons:\nhttps://tendsign.com/doc.aspx?MeFormsNoticeId=8014\nUnderlag:\nhttps://tendsign.com/doc.aspx?MeFormsNoticeId=8014&GoTo=Docs"
+      },
+      {
+        "rationale": "See the link below for the notice and annexes. \nAnnons:\nhttps://tendsign.com/doc.aspx?MeFormsNoticeId=8014\nSurface:\nhttps://tendsign.com/doc.aspx?MeFormsNoticeId=8014&GoTo=Docs"
+      }
+    ]
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2024-02-13T11:32:22+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "http://Lillestrom.kommune.no/",
+        "buyerProfile": "https://www.lillestrom.kommune.no/"
+      },
+      "name": "Lillestrøm Kommune - Innkjøp",
+      "additionalIdentifiers": [
+        {
+          "id": "820710592",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Innkjøp - Carl Henriksen",
+        "telephone": "+47",
+        "email": "Carl.Henriksen@lillestrom.kommune.no"
+      },
+      "roles": [
+        "buyer"
+      ],
+      "address": {
+        "streetAddress": "Jonas Lies gate 18",
+        "postalCode": "2000",
+        "locality": "Lillestrøm",
+        "country": "NO"
+      }
+    }
+  ],
+  "language": "no",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

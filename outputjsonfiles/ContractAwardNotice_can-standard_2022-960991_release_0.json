@@ -1,1 +1,255 @@
-{"id": "2022-960991", "initiationType": "tender", "ocid": "ocds-abcd1234-bf854963-600e-449c-9755-64efc4b9c3f8", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "status": "complete", "id": "2022-960991", "procurementMethod": "limited", "procurementMethodDetails": "Negotiated without prior call for competition", "procurementMethodRationale": "Anskaffelsen er omfattet av lov om offentlige anskaffelser av 17. juni 2016 nr. 73 (LOA) og forskrift om offentlige anskaffelser av 12. august 2016 nr. 974 (FOA). Anskaffelsesloven og forskriften gjelder likevel ikke dersom anvendelsen av disse vil hindre oppdragsgiver i å ivareta vesentlige sikkerhetsinteresser, jf. FOA § 2-2 (2). Pga. de vesentlige sikkerhetsinteressene som foreligger, ble det konkludert med at det forelå hjemmel for å unnta anskaffelsen fra LOA og FOA. For allikevel å sikre konkurranse om denne kontrakten, ble det besluttet å sende en tilbudsforespørsel til 4 utvalgte leverandører, og konkurransen ble så langt som mulig gjennomført i samsvar med grunnleggende prinsipper for offentlige anskaffelser og forhandlet prosedyre.", "procurementMethodRationaleClassifications": [{"scheme": "eu-direct-award-justification", "id": "below-thres", "description": "Contracts with estimated value below the procurement thresholds"}], "lots": [{"id": "LOT-0000", "submissionTerms": {"electronicSubmissionPolicy": "not-allowed"}, "title": "Delivery and maintenance of a Cell Broadcasting Entity with associated services", "mainProcurementCategory": "goods", "description": "Løsningen skal bestå av en Cell Broadcast Entity (CBE) og et brukergrensesnitt for å produsere et varsel og levere den til Cell Broadcast Centres (CBC) som ligger hos mobiloperatørene. Løsningen skal være skalerbar og fremtidsrettet. Fase 1: I første omgang legges det opp til at varsel skal kunne sendes fra ett sted (politiet) innen utgangen av 2022. Dette for så raskt som mulig å få etablert et utsendelsespunkt og løsning på statens side. Fase 2: DSB skal i tett samarbeid med POD etablere og implementere løsninger i det enkelte politidistrikt og for Sivilforsvaret i tråd med tidligere utredninger og anbefalinger og ferdigstille arbeidet med å etablere og implementere prosesser og rutiner for bruk av løsningen ved hendelser, krise og krig. Dette i tett samarbeid med POD.", "awardCriteria": {"criteria": [{"type": "quality", "numbers": [{"number": "60", "weight": "percentageExact"}, {"number": "40"}]}, {"type": "price"}, {"description": "Kvalitet"}]}, "hasAccessibilityCriteria": false, "techniques": {"hasElectronicAuction": false}}], "title": "Delivery and maintenance of a Cell Broadcasting Entity with associated services", "identifiers": [{"id": "2022/6604", "scheme": "internal"}], "mainProcurementCategory": "goods", "description": "Avtalen gjelder leveranse av European Public Warning System (EU-ALERT), jf. ETSI TS 102 900V1.3.1 (22019-02). Løsningen skal baseres på Cell Broadcast- teknologien og skal komplett eredet eksisterende off entlige varslingssystemet som som består av tyfoner/varslingsanlegg.", "items": [{"id": "1", "classification": {"scheme": "CPV", "id": "32571000"}, "relatedLot": "LOT-0000", "deliveryAddresses": [{"region": "NO081"}]}]}, "tag": ["award", "contract"], "date": "2022-10-21T12:00:00+02:00", "parties": [{"id": "ORG-0001", "details": {"classifications": [{"scheme": "COFOG", "id": "03", "description": "Public order and safety"}, {"scheme": "eu-buyer-legal-type", "id": "cga", "description": "Central government authority"}], "url": "www.dsb.no", "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/1108"}, "name": "Direktoratet for samfunnssikkerhet og beredskap (DSB)", "additionalIdentifiers": [{"id": "974 760 983", "scheme": "GB-COH"}], "contactPoint": {"name": "Liv Riseth", "telephone": "+47 33412631", "email": "liv.riseth@dsb.no"}, "roles": ["buyer"], "address": {"streetAddress": "Rambergveien 9", "postalCode": "3115", "locality": "TØNSBERG", "country": "NO"}}, {"id": "ORG-0002", "name": "Everbridge Norway AS", "details": {"scale": "sme"}, "roles": ["supplier", "tenderer"], "additionalIdentifiers": [{"id": "980400255", "scheme": "GB-COH"}], "address": {"streetAddress": "Innspurten 15", "postalCode": "0663", "locality": "Oslo", "country": "NO"}}, {"id": "ORG-0003", "name": "Vestfold Tingrett, Tønsberg tinghus", "address": {"streetAddress": "postboks 2013", "postalCode": "3103", "locality": "Tønsberg", "country": "NO"}, "roles": ["reviewBody"]}], "awards": [{"id": "RES-0001", "relatedLots": ["LOT-0000"], "status": "active", "statusDetails": "At least one winner was chosen.", "suppliers": [{"id": "ORG-0002"}], "value": {"amount": 42000000.0, "currency": "NOK"}, "relatedBids": ["TEN-0001"]}], "bids": {"details": [{"id": "TEN-0001", "relatedLots": ["LOT-0000"], "value": {"amount": 42000000.0, "currency": "NOK"}, "hasSubcontracting": false, "tenderers": [{"id": "ORG-0002"}]}], "statistics": [{"id": "1", "value": 3, "measure": "bids", "relatedLot": "LOT-0000"}, {"id": "2", "measure": "smeBids", "relatedLot": "LOT-0000"}, {"id": "3", "measure": "foreignBidsFromEU", "relatedLot": "LOT-0000"}, {"id": "4", "measure": "electronicBids", "relatedLot": "LOT-0000"}]}, "contracts": [{"id": "CON-0001", "dateSigned": "2022-09-30T23:59:59Z", "awardID": "RES-0001", "identifiers": [{"id": "2022/6604", "scheme": "NL-TENDERNED"}], "relatedBids": ["TEN-0001"], "title": "Delivery and maintenance of a Cell Broadcasti ng Enti ty with associated services"}], "language": "nb", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "2022-960991",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-3296d5f6-2a74-4fab-bb4b-cd360f6e4e72",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "status": "complete",
+    "id": "2022-960991",
+    "procurementMethod": "limited",
+    "procurementMethodDetails": "Negotiated without prior call for competition",
+    "procurementMethodRationale": "Anskaffelsen er omfattet av lov om offentlige anskaffelser av 17. juni 2016 nr. 73 (LOA) og forskrift om offentlige anskaffelser av 12. august 2016 nr. 974 (FOA). Anskaffelsesloven og forskriften gjelder likevel ikke dersom anvendelsen av disse vil hindre oppdragsgiver i å ivareta vesentlige sikkerhetsinteresser, jf. FOA § 2-2 (2). Pga. de vesentlige sikkerhetsinteressene som foreligger, ble det konkludert med at det forelå hjemmel for å unnta anskaffelsen fra LOA og FOA. For allikevel å sikre konkurranse om denne kontrakten, ble det besluttet å sende en tilbudsforespørsel til 4 utvalgte leverandører, og konkurransen ble så langt som mulig gjennomført i samsvar med grunnleggende prinsipper for offentlige anskaffelser og forhandlet prosedyre.",
+    "procurementMethodRationaleClassifications": [
+      {
+        "scheme": "eu-direct-award-justification",
+        "id": "below-thres",
+        "description": "Contracts with estimated value below the procurement thresholds"
+      }
+    ],
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "not-allowed"
+        },
+        "title": "Delivery and maintenance of a Cell Broadcasting Entity with associated services",
+        "mainProcurementCategory": "goods",
+        "description": "Løsningen skal bestå av en Cell Broadcast Entity (CBE) og et brukergrensesnitt for å produsere et varsel og levere den til Cell Broadcast Centres (CBC) som ligger hos mobiloperatørene. Løsningen skal være skalerbar og fremtidsrettet. Fase 1: I første omgang legges det opp til at varsel skal kunne sendes fra ett sted (politiet) innen utgangen av 2022. Dette for så raskt som mulig å få etablert et utsendelsespunkt og løsning på statens side. Fase 2: DSB skal i tett samarbeid med POD etablere og implementere løsninger i det enkelte politidistrikt og for Sivilforsvaret i tråd med tidligere utredninger og anbefalinger og ferdigstille arbeidet med å etablere og implementere prosesser og rutiner for bruk av løsningen ved hendelser, krise og krig. Dette i tett samarbeid med POD.",
+        "awardCriteria": {
+          "criteria": [
+            {
+              "type": "quality",
+              "numbers": [
+                {
+                  "number": "60",
+                  "weight": "percentageExact"
+                },
+                {
+                  "number": "40"
+                }
+              ]
+            },
+            {
+              "type": "price"
+            },
+            {
+              "description": "Kvalitet"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "hasElectronicAuction": false
+        }
+      }
+    ],
+    "title": "Delivery and maintenance of a Cell Broadcasting Entity with associated services",
+    "identifiers": [
+      {
+        "id": "2022/6604",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "goods",
+    "description": "Avtalen gjelder leveranse av European Public Warning System (EU-ALERT), jf. ETSI TS 102 900V1.3.1 (22019-02). Løsningen skal baseres på Cell Broadcast- teknologien og skal komplett eredet eksisterende off entlige varslingssystemet som som består av tyfoner/varslingsanlegg.",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "32571000"
+        },
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "region": "NO081"
+          }
+        ]
+      }
+    ]
+  },
+  "tag": [
+    "award",
+    "contract"
+  ],
+  "date": "2022-10-21T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "03",
+            "description": "Public order and safety"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "cga",
+            "description": "Central government authority"
+          }
+        ],
+        "url": "www.dsb.no",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/1108"
+      },
+      "name": "Direktoratet for samfunnssikkerhet og beredskap (DSB)",
+      "additionalIdentifiers": [
+        {
+          "id": "974 760 983",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Liv Riseth",
+        "telephone": "+47 33412631",
+        "email": "liv.riseth@dsb.no"
+      },
+      "roles": [
+        "buyer"
+      ],
+      "address": {
+        "streetAddress": "Rambergveien 9",
+        "postalCode": "3115",
+        "locality": "TØNSBERG",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Everbridge Norway AS",
+      "details": {
+        "scale": "sme"
+      },
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "980400255",
+          "scheme": "GB-COH"
+        }
+      ],
+      "address": {
+        "streetAddress": "Innspurten 15",
+        "postalCode": "0663",
+        "locality": "Oslo",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Vestfold Tingrett, Tønsberg tinghus",
+      "address": {
+        "streetAddress": "postboks 2013",
+        "postalCode": "3103",
+        "locality": "Tønsberg",
+        "country": "NO"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "id": "RES-0001",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
+      "value": {
+        "amount": 42000000.0,
+        "currency": "NOK"
+      },
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 42000000.0,
+          "currency": "NOK"
+        },
+        "hasSubcontracting": false,
+        "tenderers": [
+          {
+            "id": "ORG-0002"
+          }
+        ]
+      }
+    ],
+    "statistics": [
+      {
+        "id": "1",
+        "value": 3,
+        "measure": "bids",
+        "relatedLot": "LOT-0000"
+      },
+      {
+        "id": "2",
+        "measure": "smeBids",
+        "relatedLot": "LOT-0000"
+      },
+      {
+        "id": "3",
+        "measure": "foreignBidsFromEU",
+        "relatedLot": "LOT-0000"
+      },
+      {
+        "id": "4",
+        "measure": "electronicBids",
+        "relatedLot": "LOT-0000"
+      }
+    ]
+  },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2022-09-30T23:59:59Z",
+      "awardID": "RES-0001",
+      "identifiers": [
+        {
+          "id": "2022/6604",
+          "scheme": "NL-TENDERNED"
+        }
+      ],
+      "relatedBids": [
+        "TEN-0001"
+      ],
+      "title": "Delivery and maintenance of a Cell Broadcasti ng Enti ty with associated services"
+    }
+  ],
+  "language": "nb",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

@@ -1,1 +1,1418 @@
-{"id": "15377ca1-6cf7-4060-90f0-9290128957a3", "initiationType": "tender", "ocid": "ocds-abcd1234-16ff3663-bc16-4e26-974e-147f0870aa35", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "status": "complete", "id": "2d2d24a2-df84-449e-8695-fb66ef504a5a", "lots": [{"id": "LOT-0001", "hasSustainability": true, "sustainability": [{"goal": "environmental.climateChangeMitigation"}, {"goal": "social.accessibility", "strategies": ["awardCriteria", "contractPerformanceConditions", "selectionCriteria", "technicalSpecifications"]}, {"goal": "economic.processInnovation"}, {"description": "Strategic procurement description ---"}], "techniques": {"hasDynamicPurchasingSystem": true, "dynamicPurchasingSystem": {"type": "closed"}, "hasElectronicAuction": true}, "coveredBy": ["GPA", "EU-FSR", "EU-CVD"], "title": "Title ---", "identifiers": [{"id": "Lot Reference A", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Description --- Additional information for GLO-0001 ProcurementProject ---", "value": {"amount": 9999999.99, "currency": "EUR"}, "additionalProcurementCategories": ["works"], "contractPeriod": {"startDate": "2023-01-01T00:00:00+01:00", "endDate": "2023-05-23T23:59:59+01:00"}, "awardCriteria": {"criteria": [{"type": "cost", "numbers": [{"number": "60", "weight": "percentageExact"}, {"number": "40"}]}, {"type": "quality"}, {"description": "AC Description ---"}, {"name": "Name of AC ---"}, {"name": "name of AC ---"}]}, "options": {"description": "Options description ---"}, "renewal": {"description": "Renewal description ---", "maximumRenewals": 3}, "additionalClassifications": [{"id": "oth-serv-contr", "scheme": "eu-cvd-contract-type", "description": "Other service contract"}], "hasAccessibilityCriteria": false, "noAccessibilityCriteriaRationale": "Accessibility Justification ---", "reviewDetails": "Review Deadline Description ---"}, {"id": "LOT-0002", "techniques": {"hasElectronicAuction": true}, "hasSustainability": true, "sustainability": [{"goal": "environmental.climateChangeMitigation"}, {"goal": "social.accessibility", "strategies": ["awardCriteria", "contractPerformanceConditions", "selectionCriteria", "technicalSpecifications"]}, {"goal": "economic.processInnovation"}, {"description": "Strategic procurement description lot 2 ---"}], "reviewDetails": "Review Deadline Description ---"}], "crossBorderLaw": "Cross border law description ---", "procurementMethod": "selective", "procurementMethodDetails": "Description of the procedure  ---", "procedure": {"isAccelerated": true, "acceleratedRationale": "Procedure Accelerated Justification ---"}, "lotGroups": [{"id": "GLO-0001", "relatedLots": ["LOT-0001", "LOT-0002"], "title": "Title ---", "identifiers": [{"id": "Object Reference Number---", "scheme": "internal"}], "description": "Description --- Additional information for GLO-0001 ProcurementProject ---", "maximumValue": {"amount": 9999999.99, "currency": "EUR"}, "awardCriteria": {"criteria": [{"type": "cost", "numbers": [{"number": 60.0, "weight": "percentageExact"}, {"number": 40.0}]}, {"type": "quality"}, {"description": "AC Description ---"}, {"name": "name of AC ---"}]}}], "title": "Procurement Title ---", "identifiers": [{"id": "2023-P-0001", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Description ---", "items": [{"id": "1", "quantity": 1000.0, "relatedLot": "LOT-0001", "unit": {"id": "HUR", "scheme": "EU Measurement unit", "name": "hour"}, "additionalClassifications": [{"scheme": "CPV", "id": "79720000"}], "classification": {"scheme": "CPV", "id": "79710000"}, "deliveryAddresses": [{"region": "LU000", "streetAddress": "Bruce Wayne House, 2 Gotham Street"}, {"postalCode": "1234"}, {"country": "LU"}, {"country": "GB"}], "deliveryLocations": [{"description": "Anywhere in the given country"}, {"description": "The main location is ..."}, {"description": "Additional information ---"}]}, {"id": "2", "quantity": 1000.0, "relatedLot": "LOT-0002", "unit": {"id": "HUR", "scheme": "EU Measurement unit", "name": "hour"}, "classification": {"scheme": "CPV", "id": "75121000"}, "deliveryAddresses": [{"region": "LU000", "streetAddress": "Bruce Wayne House, 2 Gotham Street"}, {"postalCode": "1234"}, {"country": "LU"}, {"country": "GB"}], "deliveryLocations": [{"description": "Anywhere in the given country"}, {"description": "The main location of lot 2 is ..."}, {"description": "Additional information ---"}]}, {"id": "LOT-0001", "relatedLot": "LOT-0001", "deliveryAddresses": [{"locality": "London"}]}, {"id": "LOT-0002", "relatedLot": "LOT-0002", "deliveryAddresses": [{"locality": "London"}]}], "value": {"amount": 9999999.99, "currency": "EUR"}, "deliveryAddresses": [{"region": "LU000"}, {"streetAddress": "Bruce Wayne House, 2 Gotham Street"}, {"postalCode": "1234"}, {"locality": "Luxembourg"}, {"locality": "London"}, {"country": "LU"}, {"country": "GB"}], "additionalProcurementCategories": ["works"], "deliveryLocations": [{"description": "Anywhere in the European Economic Area; The main location is ...; Additional information ---"}, {"description": "Anywhere in the given country"}], "documents": [{"id": "FiscalDocID1", "documentType": "legislation", "relatedLots": ["LOT-0001", "LOT-0002"], "publisher": {"id": "ORG-0002"}}, {"id": "EnvDocID1", "documentType": "legislation", "relatedLots": ["LOT-0001", "LOT-0002"], "publisher": {"id": "ORG-0003"}}, {"id": "EmplDocID1", "documentType": "legislation", "relatedLots": ["LOT-0001", "LOT-0002"], "publisher": {"id": "ORG-0004"}}]}, "tag": ["award", "contract"], "date": "2023-04-23T20:59:32+01:00", "parties": [{"id": "ORG-0001", "details": {"classifications": [{"scheme": "COFOG", "id": "04", "description": "Economic affairs"}, {"scheme": "eu-buyer-legal-type", "id": "body-pl", "description": "Body governed by public law"}], "url": "https://www.fin-adm.com", "buyerProfile": "https://profile.example.com"}, "name": "Financial Adinistration for ... - Finance Division", "beneficialOwners": [{"id": "UBO-0001", "name": "Jean", "address": {"streetAddress": "7 rue de la loi", "postalCode": "10123", "locality": "Bruxelles", "country": "BE"}, "nationalities": ["BE"], "faxNumber": "+33 123456789"}, {"id": "UBO-0003", "nationalities": ["ES"]}, {"id": "UBO-0004", "nationalities": ["FR"]}], "additionalIdentifiers": [{"id": "998298", "scheme": "GB-COH"}], "contactPoint": {"name": "Info desk", "telephone": "+44 123456780", "email": "info@fin-adm.com", "faxNumber": "+44 123456789"}, "roles": ["buyer"], "eDeliveryGateway": "https://endpoint-example.fin-adm.com", "address": {"streetAddress": "Bruce Wayne House, 2 Gotham Street", "postalCode": "1234", "locality": "Luxembourg", "country": "LU"}}, {"id": "ORG-0002", "name": "TaxInfo Department", "beneficialOwners": [{"id": "UBO-0001", "name": "Jean", "address": {"streetAddress": "7 rue de la loi", "locality": "Bruxelles", "country": "BE"}, "faxNumber": "+33 123456789"}, {"id": "UBO-0003"}, {"id": "UBO-0004"}], "additionalIdentifiers": [{"id": "12345", "scheme": "GB-COH"}], "contactPoint": {"name": "Info desk", "telephone": "+44 123456780", "email": "info@example.com", "faxNumber": "+44 123456789"}, "details": {"url": "https://www.fin-leg.com"}, "eDeliveryGateway": "https://contact.fin-leg.com", "address": {"streetAddress": "6 Main Street", "postalCode": "1234", "locality": "Luxembourg", "country": "LU"}, "roles": ["informationService"]}, {"id": "ORG-0003", "name": "EnvironmentalInfo Dpt - Environment Information department", "beneficialOwners": [{"id": "UBO-0001", "name": "Jean", "address": {"streetAddress": "7 rue de la loi", "locality": "Bruxelles", "country": "BE"}, "faxNumber": "+33 123456789"}, {"id": "UBO-0003"}, {"id": "UBO-0004"}], "additionalIdentifiers": [{"id": "7812345", "scheme": "GB-COH"}], "contactPoint": {"name": "Info desk", "telephone": "+44 123456780", "email": "info@env-dpt.com", "faxNumber": "+44 123456789"}, "details": {"url": "https://www.env-dpt.com"}, "eDeliveryGateway": "https://endpoint.env-dpt.com", "address": {"streetAddress": "23 Nelson Square", "postalCode": "1234", "locality": "Luxembourg", "country": "LU"}, "roles": ["informationService"]}, {"id": "ORG-0004", "name": "EmploymentInfo Division - ABC Unit", "beneficialOwners": [{"id": "UBO-0001", "name": "Jean", "address": {"streetAddress": "7 rue de la loi", "locality": "Bruxelles", "country": "BE"}, "faxNumber": "+33 123456789"}, {"id": "UBO-0003"}, {"id": "UBO-0004"}], "additionalIdentifiers": [{"id": "99283", "scheme": "GB-COH"}], "contactPoint": {"name": "Info desk", "telephone": "+44 123456780", "email": "info@example.com", "faxNumber": "+44 123456789"}, "details": {"url": "https://www.employment-legis.com"}, "eDeliveryGateway": "https://endpoint.employment-legis.com", "address": {"streetAddress": "162 Broad Street, 2nd floor", "postalCode": "1234", "locality": "Luxembourg", "country": "LU"}, "roles": ["informationService"]}, {"id": "ORG-0005", "name": "Pub Proc Appeal Adm - Reviews and Complains", "beneficialOwners": [{"id": "UBO-0001", "name": "Jean", "address": {"streetAddress": "7 rue de la loi", "locality": "Bruxelles", "country": "BE"}, "faxNumber": "+33 123456789"}, {"id": "UBO-0003"}, {"id": "UBO-0004"}], "additionalIdentifiers": [{"id": "0986543", "scheme": "GB-COH"}], "contactPoint": {"name": "A and R Department", "telephone": "+44 899375", "email": "info@appeal-adm-proc.com", "faxNumber": "+44 9928736"}, "details": {"url": "https://www.appeal-adm-proc.com"}, "eDeliveryGateway": "https://appeal-adm-proc.com/request", "address": {"streetAddress": "87 Big Avenue", "postalCode": "1234", "locality": "Luxembourg", "country": "LU"}, "roles": ["reviewBody"]}, {"id": "ORG-0006", "name": "The Public Mediator - Public Procurement", "beneficialOwners": [{"id": "UBO-0001", "name": "Jean", "address": {"streetAddress": "7 rue de la loi", "locality": "Bruxelles", "country": "BE"}, "faxNumber": "+33 123456789"}, {"id": "UBO-0003"}, {"id": "UBO-0004"}], "additionalIdentifiers": [{"id": "09812345", "scheme": "GB-COH"}], "contactPoint": {"name": "Info desk", "telephone": "+44 123456345678", "email": "info@pub-mediator.com", "faxNumber": "+44 098765432"}, "details": {"url": "https://www.pub-mediator.com"}, "address": {"streetAddress": "85 Norwish Road", "postalCode": "1234", "locality": "Luxembourg", "country": "LU"}, "roles": ["mediationBody"]}, {"id": "ORG-0007", "name": "eSendCorp", "beneficialOwners": [{"id": "UBO-0001", "name": "Jean", "address": {"streetAddress": "7 rue de la loi", "locality": "Bruxelles", "country": "BE"}, "faxNumber": "+33 123456789"}, {"id": "UBO-0003"}, {"id": "UBO-0004"}], "additionalIdentifiers": [{"id": "111 222 333", "scheme": "GB-COH"}], "contactPoint": {"telephone": "+352 123456789", "email": "esender@esendcorp.lu", "faxNumber": "+352 1234567899"}, "details": {"url": "https://esendercorp.eu"}, "address": {"postalCode": "2985", "locality": "Luxembourg", "country": "LU"}, "roles": ["eSender"]}, {"id": "ORG-0008", "name": "Gyro Soft SA - Contrats", "details": {"scale": "large", "url": "https://www.gyro-soft.com", "listedOnRegulatedMarket": false}, "roles": ["tenderer", "leadTenderer", "supplier"], "beneficialOwners": [{"id": "UBO-0001", "name": "Jean", "address": {"streetAddress": "7 rue de la loi", "locality": "Bruxelles", "country": "BE"}, "faxNumber": "+33 123456789"}, {"id": "UBO-0003"}, {"id": "UBO-0004"}], "additionalIdentifiers": [{"id": "927384203", "scheme": "GB-COH"}], "contactPoint": {"name": "Service Presse and Communication", "telephone": "+352 123456780", "email": "info@gyro-soft.com", "faxNumber": "+352 123456789"}, "eDeliveryGateway": "https://endpoint.gyro-soft.com", "address": {"streetAddress": "4 rue du Bug, immeubke A", "postalCode": "8754", "locality": "Luxembourg", "country": "LU"}}, {"id": "ORG-0009", "name": "The best App Ltd. - Innovation division", "details": {"scale": "selfEmployed", "url": "https://www.the-best-app.com", "listedOnRegulatedMarket": false}, "roles": ["tenderer", "supplier"], "beneficialOwners": [{"id": "UBO-0001", "name": "Jean", "address": {"streetAddress": "7 rue de la loi", "locality": "Bruxelles", "country": "BE"}, "faxNumber": "+33 123456789"}, {"id": "UBO-0003"}, {"id": "UBO-0004"}], "additionalIdentifiers": [{"id": "928374653", "scheme": "GB-COH"}], "contactPoint": {"name": "Contact", "telephone": "+49 123456780", "email": "info@the-best-app.com", "faxNumber": "+49 123456789"}, "eDeliveryGateway": "https://endpoint.the-best-app.com", "address": {"streetAddress": "3A smart avenue", "postalCode": "73846", "locality": "Frankfurt", "country": "DE"}}, {"id": "ORG-0010", "name": "Ayuda - tech Dpt", "details": {"scale": "medium", "url": "https://www.ayuda.com", "listedOnRegulatedMarket": false}, "beneficialOwners": [{"id": "UBO-0001", "name": "Jean", "address": {"streetAddress": "7 rue de la loi", "locality": "Bruxelles", "country": "BE"}, "faxNumber": "+33 123456789"}, {"id": "UBO-0003"}, {"id": "UBO-0004"}], "additionalIdentifiers": [{"id": "34578345", "scheme": "GB-COH"}], "contactPoint": {"name": "Info", "telephone": "+34 123456780", "email": "info@ayuda.com", "faxNumber": "+34 123456789"}, "eDeliveryGateway": "https://endpoint.ayuda.com", "address": {"streetAddress": "7 calle ancha", "postalCode": "34875", "locality": "El pueblo", "country": "ES"}, "roles": ["subcontractor"]}, {"id": "ORG-0011", "name": "Competitor - Offres et contrats", "details": {"scale": "large", "url": "https://www.competitor.com", "listedOnRegulatedMarket": false}, "roles": ["supplier", "tenderer"], "beneficialOwners": [{"id": "UBO-0001", "name": "Jean", "address": {"streetAddress": "7 rue de la loi", "locality": "Bruxelles", "country": "BE"}, "faxNumber": "+33 123456789"}, {"id": "UBO-0003"}, {"id": "UBO-0004"}], "additionalIdentifiers": [{"id": "1223456789", "scheme": "GB-COH"}], "contactPoint": {"name": "Contact", "telephone": "+33 123456780", "email": "info@competitor.com", "faxNumber": "+33 123456789"}, "eDeliveryGateway": "https://endpoint.competitor.com", "address": {"streetAddress": "7 rue de la republique", "postalCode": "75004", "locality": "Paris", "country": "FR"}}, {"id": "TPO-0001", "name": "Procurement Department", "identifier": {"id": "998298", "scheme": "GB-COH"}, "contactPoint": {"name": "Head of Procurement Department", "telephone": "+123 45678", "email": "proc-info@fin-adm.com", "faxNumber": "+123 456789"}, "details": {"url": "https://www.fin-adm.com"}, "eDeliveryGateway": "http://tender-submit.fin-adm.com", "address": {"streetAddress": "Bruce Wayne House, 2 Gotham Street", "postalCode": "1234", "locality": "Luxembourg", "country": "LU"}, "roles": ["processContactPoint", "reviewContactPoint"]}, {"id": "13", "name": "European Union", "roles": ["funder"]}, {"id": "TPO-0002", "contactPoint": {"faxNumber": "+44 1234567769"}, "identifier": {"id": "998298", "scheme": "GB-COH"}, "roles": ["processContactPoint"]}], "relatedProcesses": [{"id": "1", "relationship": ["planning"], "scheme": "eu-notice-id-ref", "identifier": "9c0fd704-64d3-4294-a3b6-6df45911ab9f-01", "relatedLots": ["LOT-0001", "LOT-0002"]}], "awards": [{"id": "RES-0001", "relatedLots": ["LOT-0001"], "status": "active", "statusDetails": "At least one winner was chosen.", "date": "2023-03-23T23:59:59+02:00", "suppliers": [{"id": "ORG-0008"}, {"id": "ORG-0009"}, {"id": "ORG-0011"}], "estimatedValue": {"amount": 9000000.0, "currency": "EUR"}, "maximumValue": {"amount": 9999999.99, "currency": "EUR"}, "value": {"amount": 9999999.99, "currency": "EUR"}, "items": [{"id": "1", "additionalClassifications": [{"scheme": "eu-vehicle-category", "id": "n2-n3", "description": "Truck (N2-N3)"}, {"id": "oth-serv-contr", "scheme": "eu-cvd-contract-type", "description": "Other service contract"}, {"scheme": "vehicles", "id": "vehicles", "description": "Vehicles"}]}, {"id": "2", "additionalClassifications": [{"scheme": "vehicles", "id": "vehicles-zero-emission", "description": "Vehicles zero emission"}]}, {"id": "3", "additionalClassifications": [{"scheme": "vehicles", "id": "vehicles-clean", "description": "Vehicles clean"}]}]}, {"id": "RES-0002", "relatedLots": ["LOT-0002"], "status": "unsuccessful", "statusDetails": "All tenders, requests to participate or projects were withdrawn or found inadmissible"}, {"id": "CON-0001", "buyers": [{"id": "ORG-0001"}]}, {"id": "CON-0002", "buyers": [{"id": "ORG-0001"}], "relatedBids": ["TEN-0001", "TEN-0002", "TEN-0003"]}], "bids": {"details": [{"id": "TEN-0001", "identifiers": [{"id": "REF DEF-001/02", "scheme": "XX-TENDERNL"}], "subcontracting": {"value": {"amount": 9999999.99, "currency": "EUR"}, "description": "Subcontracting Description ---", "minimumPercentage": 0.3, "maximumPercentage": 0.3, "subcontracts": [{"id": "1", "subcontractor": {"id": "ORG-0010"}, "mainContractors": [{"id": "ORG-0008"}]}]}, "hasSubcontracting": true, "tenderers": [{"id": "ORG-0008"}, {"id": "ORG-0009"}]}, {"id": "TEN-0002", "relatedLots": ["LOT-0001", "LOT-0001"], "rank": 4, "hasRank": true, "variant": true, "identifiers": [{"id": "REF GHI/0003-01", "scheme": "XX-TENDERNL"}], "subcontracting": {"value": {"amount": 9999999.99, "currency": "EUR"}, "description": "Subcontracting Description ---", "minimumPercentage": 0.3, "maximumPercentage": 0.3}, "foreignSubsidyMeasures": "fsr-no-obj", "value": {"amount": 9999999.99, "currency": "EUR"}, "hasSubcontracting": true, "tenderers": [{"id": "ORG-0011"}]}, {"id": "TEN-0003", "relatedLots": ["LOT-0002"], "identifiers": [{"id": "REF JKL/0003-01", "scheme": "XX-TENDERNL"}], "subcontracting": {"value": {"amount": 99999999.99, "currency": "EUR"}, "description": "Subcontracting Description ---", "minimumPercentage": 0.3, "maximumPercentage": 0.3}, "hasSubcontracting": true, "tenderers": [{"id": "ORG-0011"}]}], "statistics": [{"id": "1", "measure": "lowestValidBidValue", "value": 999999.99, "currency": "EUR", "relatedLot": "LOT-0002"}, {"id": "2", "measure": "highestValidBidValue", "value": 9999999.99, "currency": "EUR", "relatedLot": "LOT-0002"}, {"id": "3", "value": 3, "measure": "bids", "relatedLot": "LOT-0001"}, {"id": "4", "value": 0, "measure": "bids", "relatedLot": "LOT-0002"}, {"id": "5", "measure": "foreignBidsFromEU", "relatedLot": "LOT-0001"}, {"id": "6", "measure": "electronicBids", "relatedLot": "LOT-0001"}, {"id": "7", "measure": "smeBids", "relatedLot": "LOT-0001"}, {"id": "8", "measure": "foreignBidsFromEU", "relatedLot": "LOT-0002"}, {"id": "9", "measure": "electronicBids", "relatedLot": "LOT-0002"}, {"id": "10", "measure": "smeBids", "relatedLot": "LOT-0002"}]}, "contracts": [{"id": "CON-0001", "dateSigned": "2023-03-24T23:59:59+02:00", "awardID": "RES-0001", "identifiers": [{"id": "REF RST-678", "scheme": "NL-TENDERNED"}], "documents": [{"id": "1", "url": "https://wheretofindcontract.com/ctr123", "documentType": "contractSigned"}], "relatedBids": ["TEN-0001"], "finance": [{"id": "2021/1234", "financingParty": {"name": "European Union", "id": "13"}}, {"description": "Recovery Fund"}], "title": "This is the title of the contract ---", "relatedProcesses": [{"id": "1", "scheme": "ojs-notice-id", "identifier": "12345678-2023", "relationship": ["framework"]}]}, {"id": "CON-0002", "dateSigned": "2023-03-24T23:59:59+02:00", "identifiers": [{"id": "KLM FGH/912", "scheme": "NL-TENDERNED"}], "documents": [{"id": "2", "url": "https://wheretofindcontract.com/ctr222", "documentType": "contractSigned"}], "relatedBids": ["TEN-0002"], "finance": [{"id": "2021/5678", "financingParty": {"name": "European Union", "id": "13"}}, {"description": "Recovery Fund"}], "awardID": "RES-0001", "title": "Title of second contract ---", "relatedProcesses": [{"id": "1", "scheme": "ojs-notice-id", "identifier": "12345678-2023", "relationship": ["framework"]}]}], "description": "Additional information ---", "planning": {"budget": {"finance": [{"id": "b9dff5dd-f47e-44dd-8cdd-7a753e3c16c0", "financingParty": {"id": "13", "name": "European Union"}, "relatedLots": ["LOT-0001", "LOT-0002"]}]}}, "statistics": [{"id": "1", "value": 3, "scope": "complaints", "relatedLot": "LOT-0001", "measure": "noex-timl", "notes": "Failure to extend time limits for receipt of tenders or requests to participate where significant changes are made to the procurement documents"}, {"id": "2", "value": 3, "scope": "complaints", "relatedLot": "LOT-0002", "measure": "noex-timl", "notes": "Failure to extend time limits for receipt of tenders or requests to participate where significant changes are made to the procurement documents"}, {"id": "1", "measure": "complainants", "relatedLot": "LOT-0001", "value": 3, "scope": "complaints"}, {"id": "2", "measure": "complainants", "relatedLot": "LOT-0002", "value": 3, "scope": "complaints"}], "language": "en", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-383a7d3d-97e4-4e7b-bdd3-3011f3533a49",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "status": "complete",
+    "id": "2d2d24a2-df84-449e-8695-fb66ef504a5a",
+    "lots": [
+      {
+        "id": "LOT-0001",
+        "hasSustainability": true,
+        "sustainability": [
+          {
+            "goal": "environmental.climateChangeMitigation"
+          },
+          {
+            "goal": "social.accessibility",
+            "strategies": [
+              "awardCriteria",
+              "contractPerformanceConditions",
+              "selectionCriteria",
+              "technicalSpecifications"
+            ]
+          },
+          {
+            "goal": "economic.processInnovation"
+          },
+          {
+            "description": "Strategic procurement description ---"
+          }
+        ],
+        "techniques": {
+          "hasDynamicPurchasingSystem": true,
+          "dynamicPurchasingSystem": {
+            "type": "closed"
+          },
+          "hasElectronicAuction": true
+        },
+        "coveredBy": [
+          "GPA",
+          "EU-FSR",
+          "EU-CVD"
+        ],
+        "title": "Title ---",
+        "identifiers": [
+          {
+            "id": "Lot Reference A",
+            "scheme": "internal"
+          }
+        ],
+        "mainProcurementCategory": "services",
+        "description": "Description --- Additional information for GLO-0001 ProcurementProject ---",
+        "value": {
+          "amount": 9999999.99,
+          "currency": "EUR"
+        },
+        "additionalProcurementCategories": [
+          "works"
+        ],
+        "contractPeriod": {
+          "startDate": "2023-01-01T00:00:00+01:00",
+          "endDate": "2023-05-23T23:59:59+01:00"
+        },
+        "awardCriteria": {
+          "criteria": [
+            {
+              "type": "cost",
+              "numbers": [
+                {
+                  "number": "60",
+                  "weight": "percentageExact"
+                },
+                {
+                  "number": "40"
+                }
+              ]
+            },
+            {
+              "type": "quality"
+            },
+            {
+              "description": "AC Description ---"
+            },
+            {
+              "name": "Name of AC ---"
+            },
+            {
+              "name": "name of AC ---"
+            }
+          ]
+        },
+        "options": {
+          "description": "Options description ---"
+        },
+        "renewal": {
+          "description": "Renewal description ---",
+          "maximumRenewals": 3
+        },
+        "additionalClassifications": [
+          {
+            "id": "oth-serv-contr",
+            "scheme": "eu-cvd-contract-type",
+            "description": "Other service contract"
+          }
+        ],
+        "hasAccessibilityCriteria": false,
+        "noAccessibilityCriteriaRationale": "Accessibility Justification ---",
+        "reviewDetails": "Review Deadline Description ---"
+      },
+      {
+        "id": "LOT-0002",
+        "techniques": {
+          "hasElectronicAuction": true
+        },
+        "hasSustainability": true,
+        "sustainability": [
+          {
+            "goal": "environmental.climateChangeMitigation"
+          },
+          {
+            "goal": "social.accessibility",
+            "strategies": [
+              "awardCriteria",
+              "contractPerformanceConditions",
+              "selectionCriteria",
+              "technicalSpecifications"
+            ]
+          },
+          {
+            "goal": "economic.processInnovation"
+          },
+          {
+            "description": "Strategic procurement description lot 2 ---"
+          }
+        ],
+        "reviewDetails": "Review Deadline Description ---"
+      }
+    ],
+    "crossBorderLaw": "Cross border law description ---",
+    "procurementMethod": "selective",
+    "procurementMethodDetails": "Description of the procedure  ---",
+    "procedure": {
+      "isAccelerated": true,
+      "acceleratedRationale": "Procedure Accelerated Justification ---"
+    },
+    "lotGroups": [
+      {
+        "id": "GLO-0001",
+        "relatedLots": [
+          "LOT-0001",
+          "LOT-0002"
+        ],
+        "title": "Title ---",
+        "identifiers": [
+          {
+            "id": "Object Reference Number---",
+            "scheme": "internal"
+          }
+        ],
+        "description": "Description --- Additional information for GLO-0001 ProcurementProject ---",
+        "maximumValue": {
+          "amount": 9999999.99,
+          "currency": "EUR"
+        },
+        "awardCriteria": {
+          "criteria": [
+            {
+              "type": "cost",
+              "numbers": [
+                {
+                  "number": 60.0,
+                  "weight": "percentageExact"
+                },
+                {
+                  "number": 40.0
+                }
+              ]
+            },
+            {
+              "type": "quality"
+            },
+            {
+              "description": "AC Description ---"
+            },
+            {
+              "name": "name of AC ---"
+            }
+          ]
+        }
+      }
+    ],
+    "title": "Procurement Title ---",
+    "identifiers": [
+      {
+        "id": "2023-P-0001",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "services",
+    "description": "Description ---",
+    "items": [
+      {
+        "id": "1",
+        "quantity": 1000.0,
+        "relatedLot": "LOT-0001",
+        "unit": {
+          "id": "HUR",
+          "scheme": "EU Measurement unit",
+          "name": "hour"
+        },
+        "additionalClassifications": [
+          {
+            "scheme": "CPV",
+            "id": "79720000"
+          }
+        ],
+        "classification": {
+          "scheme": "CPV",
+          "id": "79710000"
+        },
+        "deliveryAddresses": [
+          {
+            "region": "LU000",
+            "streetAddress": "Bruce Wayne House, 2 Gotham Street"
+          },
+          {
+            "postalCode": "1234"
+          },
+          {
+            "country": "LU"
+          },
+          {
+            "country": "GB"
+          }
+        ],
+        "deliveryLocations": [
+          {
+            "description": "Anywhere in the given country"
+          },
+          {
+            "description": "The main location is ..."
+          },
+          {
+            "description": "Additional information ---"
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "quantity": 1000.0,
+        "relatedLot": "LOT-0002",
+        "unit": {
+          "id": "HUR",
+          "scheme": "EU Measurement unit",
+          "name": "hour"
+        },
+        "classification": {
+          "scheme": "CPV",
+          "id": "75121000"
+        },
+        "deliveryAddresses": [
+          {
+            "region": "LU000",
+            "streetAddress": "Bruce Wayne House, 2 Gotham Street"
+          },
+          {
+            "postalCode": "1234"
+          },
+          {
+            "country": "LU"
+          },
+          {
+            "country": "GB"
+          }
+        ],
+        "deliveryLocations": [
+          {
+            "description": "Anywhere in the given country"
+          },
+          {
+            "description": "The main location of lot 2 is ..."
+          },
+          {
+            "description": "Additional information ---"
+          }
+        ]
+      },
+      {
+        "id": "LOT-0001",
+        "relatedLot": "LOT-0001",
+        "deliveryAddresses": [
+          {
+            "locality": "London"
+          }
+        ]
+      },
+      {
+        "id": "LOT-0002",
+        "relatedLot": "LOT-0002",
+        "deliveryAddresses": [
+          {
+            "locality": "London"
+          }
+        ]
+      }
+    ],
+    "value": {
+      "amount": 9999999.99,
+      "currency": "EUR"
+    },
+    "deliveryAddresses": [
+      {
+        "region": "LU000"
+      },
+      {
+        "streetAddress": "Bruce Wayne House, 2 Gotham Street"
+      },
+      {
+        "postalCode": "1234"
+      },
+      {
+        "locality": "Luxembourg"
+      },
+      {
+        "locality": "London"
+      },
+      {
+        "country": "LU"
+      },
+      {
+        "country": "GB"
+      }
+    ],
+    "additionalProcurementCategories": [
+      "works"
+    ],
+    "deliveryLocations": [
+      {
+        "description": "Anywhere in the European Economic Area; The main location is ...; Additional information ---"
+      },
+      {
+        "description": "Anywhere in the given country"
+      }
+    ],
+    "documents": [
+      {
+        "id": "FiscalDocID1",
+        "documentType": "legislation",
+        "relatedLots": [
+          "LOT-0001",
+          "LOT-0002"
+        ],
+        "publisher": {
+          "id": "ORG-0002"
+        }
+      },
+      {
+        "id": "EnvDocID1",
+        "documentType": "legislation",
+        "relatedLots": [
+          "LOT-0001",
+          "LOT-0002"
+        ],
+        "publisher": {
+          "id": "ORG-0003"
+        }
+      },
+      {
+        "id": "EmplDocID1",
+        "documentType": "legislation",
+        "relatedLots": [
+          "LOT-0001",
+          "LOT-0002"
+        ],
+        "publisher": {
+          "id": "ORG-0004"
+        }
+      }
+    ]
+  },
+  "tag": [
+    "award",
+    "contract"
+  ],
+  "date": "2023-04-23T20:59:32+01:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "04",
+            "description": "Economic affairs"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
+          }
+        ],
+        "url": "https://www.fin-adm.com",
+        "buyerProfile": "https://profile.example.com"
+      },
+      "name": "Financial Adinistration for ... - Finance Division",
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "streetAddress": "7 rue de la loi",
+            "postalCode": "10123",
+            "locality": "Bruxelles",
+            "country": "BE"
+          },
+          "nationalities": [
+            "BE"
+          ],
+          "faxNumber": "+33 123456789"
+        },
+        {
+          "id": "UBO-0003",
+          "nationalities": [
+            "ES"
+          ]
+        },
+        {
+          "id": "UBO-0004",
+          "nationalities": [
+            "FR"
+          ]
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "998298",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Info desk",
+        "telephone": "+44 123456780",
+        "email": "info@fin-adm.com",
+        "faxNumber": "+44 123456789"
+      },
+      "roles": [
+        "buyer"
+      ],
+      "eDeliveryGateway": "https://endpoint-example.fin-adm.com",
+      "address": {
+        "streetAddress": "Bruce Wayne House, 2 Gotham Street",
+        "postalCode": "1234",
+        "locality": "Luxembourg",
+        "country": "LU"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "TaxInfo Department",
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
+          },
+          "faxNumber": "+33 123456789"
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "12345",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Info desk",
+        "telephone": "+44 123456780",
+        "email": "info@example.com",
+        "faxNumber": "+44 123456789"
+      },
+      "details": {
+        "url": "https://www.fin-leg.com"
+      },
+      "eDeliveryGateway": "https://contact.fin-leg.com",
+      "address": {
+        "streetAddress": "6 Main Street",
+        "postalCode": "1234",
+        "locality": "Luxembourg",
+        "country": "LU"
+      },
+      "roles": [
+        "informationService"
+      ]
+    },
+    {
+      "id": "ORG-0003",
+      "name": "EnvironmentalInfo Dpt - Environment Information department",
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
+          },
+          "faxNumber": "+33 123456789"
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "7812345",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Info desk",
+        "telephone": "+44 123456780",
+        "email": "info@env-dpt.com",
+        "faxNumber": "+44 123456789"
+      },
+      "details": {
+        "url": "https://www.env-dpt.com"
+      },
+      "eDeliveryGateway": "https://endpoint.env-dpt.com",
+      "address": {
+        "streetAddress": "23 Nelson Square",
+        "postalCode": "1234",
+        "locality": "Luxembourg",
+        "country": "LU"
+      },
+      "roles": [
+        "informationService"
+      ]
+    },
+    {
+      "id": "ORG-0004",
+      "name": "EmploymentInfo Division - ABC Unit",
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
+          },
+          "faxNumber": "+33 123456789"
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "99283",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Info desk",
+        "telephone": "+44 123456780",
+        "email": "info@example.com",
+        "faxNumber": "+44 123456789"
+      },
+      "details": {
+        "url": "https://www.employment-legis.com"
+      },
+      "eDeliveryGateway": "https://endpoint.employment-legis.com",
+      "address": {
+        "streetAddress": "162 Broad Street, 2nd floor",
+        "postalCode": "1234",
+        "locality": "Luxembourg",
+        "country": "LU"
+      },
+      "roles": [
+        "informationService"
+      ]
+    },
+    {
+      "id": "ORG-0005",
+      "name": "Pub Proc Appeal Adm - Reviews and Complains",
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
+          },
+          "faxNumber": "+33 123456789"
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "0986543",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "A and R Department",
+        "telephone": "+44 899375",
+        "email": "info@appeal-adm-proc.com",
+        "faxNumber": "+44 9928736"
+      },
+      "details": {
+        "url": "https://www.appeal-adm-proc.com"
+      },
+      "eDeliveryGateway": "https://appeal-adm-proc.com/request",
+      "address": {
+        "streetAddress": "87 Big Avenue",
+        "postalCode": "1234",
+        "locality": "Luxembourg",
+        "country": "LU"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    },
+    {
+      "id": "ORG-0006",
+      "name": "The Public Mediator - Public Procurement",
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
+          },
+          "faxNumber": "+33 123456789"
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "09812345",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Info desk",
+        "telephone": "+44 123456345678",
+        "email": "info@pub-mediator.com",
+        "faxNumber": "+44 098765432"
+      },
+      "details": {
+        "url": "https://www.pub-mediator.com"
+      },
+      "address": {
+        "streetAddress": "85 Norwish Road",
+        "postalCode": "1234",
+        "locality": "Luxembourg",
+        "country": "LU"
+      },
+      "roles": [
+        "mediationBody"
+      ]
+    },
+    {
+      "id": "ORG-0007",
+      "name": "eSendCorp",
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
+          },
+          "faxNumber": "+33 123456789"
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "111 222 333",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "+352 123456789",
+        "email": "esender@esendcorp.lu",
+        "faxNumber": "+352 1234567899"
+      },
+      "details": {
+        "url": "https://esendercorp.eu"
+      },
+      "address": {
+        "postalCode": "2985",
+        "locality": "Luxembourg",
+        "country": "LU"
+      },
+      "roles": [
+        "eSender"
+      ]
+    },
+    {
+      "id": "ORG-0008",
+      "name": "Gyro Soft SA - Contrats",
+      "details": {
+        "scale": "large",
+        "url": "https://www.gyro-soft.com",
+        "listedOnRegulatedMarket": false
+      },
+      "roles": [
+        "tenderer",
+        "supplier",
+        "leadTenderer"
+      ],
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
+          },
+          "faxNumber": "+33 123456789"
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "927384203",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Service Presse and Communication",
+        "telephone": "+352 123456780",
+        "email": "info@gyro-soft.com",
+        "faxNumber": "+352 123456789"
+      },
+      "eDeliveryGateway": "https://endpoint.gyro-soft.com",
+      "address": {
+        "streetAddress": "4 rue du Bug, immeubke A",
+        "postalCode": "8754",
+        "locality": "Luxembourg",
+        "country": "LU"
+      }
+    },
+    {
+      "id": "ORG-0009",
+      "name": "The best App Ltd. - Innovation division",
+      "details": {
+        "scale": "selfEmployed",
+        "url": "https://www.the-best-app.com",
+        "listedOnRegulatedMarket": false
+      },
+      "roles": [
+        "tenderer",
+        "supplier"
+      ],
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
+          },
+          "faxNumber": "+33 123456789"
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "928374653",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Contact",
+        "telephone": "+49 123456780",
+        "email": "info@the-best-app.com",
+        "faxNumber": "+49 123456789"
+      },
+      "eDeliveryGateway": "https://endpoint.the-best-app.com",
+      "address": {
+        "streetAddress": "3A smart avenue",
+        "postalCode": "73846",
+        "locality": "Frankfurt",
+        "country": "DE"
+      }
+    },
+    {
+      "id": "ORG-0010",
+      "name": "Ayuda - tech Dpt",
+      "details": {
+        "scale": "medium",
+        "url": "https://www.ayuda.com",
+        "listedOnRegulatedMarket": false
+      },
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
+          },
+          "faxNumber": "+33 123456789"
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "34578345",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Info",
+        "telephone": "+34 123456780",
+        "email": "info@ayuda.com",
+        "faxNumber": "+34 123456789"
+      },
+      "eDeliveryGateway": "https://endpoint.ayuda.com",
+      "address": {
+        "streetAddress": "7 calle ancha",
+        "postalCode": "34875",
+        "locality": "El pueblo",
+        "country": "ES"
+      },
+      "roles": [
+        "subcontractor"
+      ]
+    },
+    {
+      "id": "ORG-0011",
+      "name": "Competitor - Offres et contrats",
+      "details": {
+        "scale": "large",
+        "url": "https://www.competitor.com",
+        "listedOnRegulatedMarket": false
+      },
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
+      "beneficialOwners": [
+        {
+          "id": "UBO-0001",
+          "name": "Jean",
+          "address": {
+            "streetAddress": "7 rue de la loi",
+            "locality": "Bruxelles",
+            "country": "BE"
+          },
+          "faxNumber": "+33 123456789"
+        },
+        {
+          "id": "UBO-0003"
+        },
+        {
+          "id": "UBO-0004"
+        }
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "1223456789",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Contact",
+        "telephone": "+33 123456780",
+        "email": "info@competitor.com",
+        "faxNumber": "+33 123456789"
+      },
+      "eDeliveryGateway": "https://endpoint.competitor.com",
+      "address": {
+        "streetAddress": "7 rue de la republique",
+        "postalCode": "75004",
+        "locality": "Paris",
+        "country": "FR"
+      }
+    },
+    {
+      "id": "TPO-0001",
+      "name": "Procurement Department",
+      "identifier": {
+        "id": "998298",
+        "scheme": "GB-COH"
+      },
+      "contactPoint": {
+        "name": "Head of Procurement Department",
+        "telephone": "+123 45678",
+        "email": "proc-info@fin-adm.com",
+        "faxNumber": "+123 456789"
+      },
+      "details": {
+        "url": "https://www.fin-adm.com"
+      },
+      "eDeliveryGateway": "http://tender-submit.fin-adm.com",
+      "address": {
+        "streetAddress": "Bruce Wayne House, 2 Gotham Street",
+        "postalCode": "1234",
+        "locality": "Luxembourg",
+        "country": "LU"
+      },
+      "roles": [
+        "processContactPoint",
+        "reviewContactPoint"
+      ]
+    },
+    {
+      "id": "13",
+      "name": "European Union",
+      "roles": [
+        "funder"
+      ]
+    },
+    {
+      "id": "TPO-0002",
+      "contactPoint": {
+        "faxNumber": "+44 1234567769"
+      },
+      "identifier": {
+        "id": "998298",
+        "scheme": "GB-COH"
+      },
+      "roles": [
+        "processContactPoint"
+      ]
+    }
+  ],
+  "relatedProcesses": [
+    {
+      "id": "1",
+      "relationship": [
+        "planning"
+      ],
+      "scheme": "eu-notice-id-ref",
+      "identifier": "9c0fd704-64d3-4294-a3b6-6df45911ab9f-01",
+      "relatedLots": [
+        "LOT-0001",
+        "LOT-0002"
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "id": "RES-0001",
+      "relatedLots": [
+        "LOT-0001"
+      ],
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "date": "2023-03-23T23:59:59+02:00",
+      "suppliers": [
+        {
+          "id": "ORG-0008"
+        },
+        {
+          "id": "ORG-0009"
+        },
+        {
+          "id": "ORG-0011"
+        }
+      ],
+      "estimatedValue": {
+        "amount": 9000000.0,
+        "currency": "EUR"
+      },
+      "maximumValue": {
+        "amount": 9999999.99,
+        "currency": "EUR"
+      },
+      "value": {
+        "amount": 9999999.99,
+        "currency": "EUR"
+      },
+      "items": [
+        {
+          "id": "1",
+          "additionalClassifications": [
+            {
+              "scheme": "eu-vehicle-category",
+              "id": "n2-n3",
+              "description": "Truck (N2-N3)"
+            },
+            {
+              "id": "oth-serv-contr",
+              "scheme": "eu-cvd-contract-type",
+              "description": "Other service contract"
+            },
+            {
+              "scheme": "vehicles",
+              "id": "vehicles",
+              "description": "Vehicles"
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "additionalClassifications": [
+            {
+              "scheme": "vehicles",
+              "id": "vehicles-zero-emission",
+              "description": "Vehicles zero emission"
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "additionalClassifications": [
+            {
+              "scheme": "vehicles",
+              "id": "vehicles-clean",
+              "description": "Vehicles clean"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "RES-0002",
+      "relatedLots": [
+        "LOT-0002"
+      ],
+      "status": "unsuccessful",
+      "statusDetails": "All tenders, requests to participate or projects were withdrawn or found inadmissible"
+    },
+    {
+      "id": "CON-0001",
+      "buyers": [
+        {
+          "id": "ORG-0001"
+        }
+      ]
+    },
+    {
+      "id": "CON-0002",
+      "buyers": [
+        {
+          "id": "ORG-0001"
+        }
+      ],
+      "relatedBids": [
+        "TEN-0001",
+        "TEN-0002",
+        "TEN-0003"
+      ]
+    }
+  ],
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "identifiers": [
+          {
+            "id": "REF DEF-001/02",
+            "scheme": "XX-TENDERNL"
+          }
+        ],
+        "subcontracting": {
+          "value": {
+            "amount": 9999999.99,
+            "currency": "EUR"
+          },
+          "description": "Subcontracting Description ---",
+          "minimumPercentage": 0.3,
+          "maximumPercentage": 0.3,
+          "subcontracts": [
+            {
+              "id": "1",
+              "subcontractor": {
+                "id": "ORG-0010"
+              },
+              "mainContractors": [
+                {
+                  "id": "ORG-0008"
+                }
+              ]
+            }
+          ]
+        },
+        "hasSubcontracting": true,
+        "tenderers": [
+          {
+            "id": "ORG-0008"
+          },
+          {
+            "id": "ORG-0009"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0002",
+        "relatedLots": [
+          "LOT-0001",
+          "LOT-0001"
+        ],
+        "rank": 4,
+        "hasRank": true,
+        "variant": true,
+        "identifiers": [
+          {
+            "id": "REF GHI/0003-01",
+            "scheme": "XX-TENDERNL"
+          }
+        ],
+        "subcontracting": {
+          "value": {
+            "amount": 9999999.99,
+            "currency": "EUR"
+          },
+          "description": "Subcontracting Description ---",
+          "minimumPercentage": 0.3,
+          "maximumPercentage": 0.3
+        },
+        "foreignSubsidyMeasures": "fsr-no-obj",
+        "value": {
+          "amount": 9999999.99,
+          "currency": "EUR"
+        },
+        "hasSubcontracting": true,
+        "tenderers": [
+          {
+            "id": "ORG-0011"
+          }
+        ]
+      },
+      {
+        "id": "TEN-0003",
+        "relatedLots": [
+          "LOT-0002"
+        ],
+        "identifiers": [
+          {
+            "id": "REF JKL/0003-01",
+            "scheme": "XX-TENDERNL"
+          }
+        ],
+        "subcontracting": {
+          "value": {
+            "amount": 99999999.99,
+            "currency": "EUR"
+          },
+          "description": "Subcontracting Description ---",
+          "minimumPercentage": 0.3,
+          "maximumPercentage": 0.3
+        },
+        "hasSubcontracting": true,
+        "tenderers": [
+          {
+            "id": "ORG-0011"
+          }
+        ]
+      }
+    ],
+    "statistics": [
+      {
+        "id": "1",
+        "measure": "lowestValidBidValue",
+        "value": 999999.99,
+        "currency": "EUR",
+        "relatedLot": "LOT-0002"
+      },
+      {
+        "id": "2",
+        "measure": "highestValidBidValue",
+        "value": 9999999.99,
+        "currency": "EUR",
+        "relatedLot": "LOT-0002"
+      },
+      {
+        "id": "3",
+        "value": 3,
+        "measure": "bids",
+        "relatedLot": "LOT-0001"
+      },
+      {
+        "id": "4",
+        "value": 0,
+        "measure": "bids",
+        "relatedLot": "LOT-0002"
+      },
+      {
+        "id": "5",
+        "measure": "foreignBidsFromEU",
+        "relatedLot": "LOT-0001"
+      },
+      {
+        "id": "6",
+        "measure": "electronicBids",
+        "relatedLot": "LOT-0001"
+      },
+      {
+        "id": "7",
+        "measure": "smeBids",
+        "relatedLot": "LOT-0001"
+      },
+      {
+        "id": "8",
+        "measure": "foreignBidsFromEU",
+        "relatedLot": "LOT-0002"
+      },
+      {
+        "id": "9",
+        "measure": "electronicBids",
+        "relatedLot": "LOT-0002"
+      },
+      {
+        "id": "10",
+        "measure": "smeBids",
+        "relatedLot": "LOT-0002"
+      }
+    ]
+  },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2023-03-24T23:59:59+02:00",
+      "awardID": "RES-0001",
+      "identifiers": [
+        {
+          "id": "REF RST-678",
+          "scheme": "NL-TENDERNED"
+        }
+      ],
+      "documents": [
+        {
+          "id": "1",
+          "url": "https://wheretofindcontract.com/ctr123",
+          "documentType": "contractSigned"
+        }
+      ],
+      "relatedBids": [
+        "TEN-0001"
+      ],
+      "finance": [
+        {
+          "id": "2021/1234",
+          "financingParty": {
+            "name": "European Union",
+            "id": "13"
+          }
+        },
+        {
+          "description": "Recovery Fund"
+        }
+      ],
+      "title": "This is the title of the contract ---",
+      "relatedProcesses": [
+        {
+          "id": "1",
+          "scheme": "ojs-notice-id",
+          "identifier": "12345678-2023",
+          "relationship": [
+            "framework"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CON-0002",
+      "dateSigned": "2023-03-24T23:59:59+02:00",
+      "identifiers": [
+        {
+          "id": "KLM FGH/912",
+          "scheme": "NL-TENDERNED"
+        }
+      ],
+      "documents": [
+        {
+          "id": "2",
+          "url": "https://wheretofindcontract.com/ctr222",
+          "documentType": "contractSigned"
+        }
+      ],
+      "relatedBids": [
+        "TEN-0002"
+      ],
+      "finance": [
+        {
+          "id": "2021/5678",
+          "financingParty": {
+            "name": "European Union",
+            "id": "13"
+          }
+        },
+        {
+          "description": "Recovery Fund"
+        }
+      ],
+      "awardID": "RES-0001",
+      "title": "Title of second contract ---",
+      "relatedProcesses": [
+        {
+          "id": "1",
+          "scheme": "ojs-notice-id",
+          "identifier": "12345678-2023",
+          "relationship": [
+            "framework"
+          ]
+        }
+      ]
+    }
+  ],
+  "description": "Additional information ---",
+  "planning": {
+    "budget": {
+      "finance": [
+        {
+          "id": "897ac718-be62-4be8-ad58-7f069d5cf9a1",
+          "financingParty": {
+            "id": "13",
+            "name": "European Union"
+          },
+          "relatedLots": [
+            "LOT-0001",
+            "LOT-0002"
+          ]
+        }
+      ]
+    }
+  },
+  "statistics": [
+    {
+      "id": "1",
+      "value": 3,
+      "scope": "complaints",
+      "relatedLot": "LOT-0001",
+      "measure": "noex-timl",
+      "notes": "Failure to extend time limits for receipt of tenders or requests to participate where significant changes are made to the procurement documents"
+    },
+    {
+      "id": "2",
+      "value": 3,
+      "scope": "complaints",
+      "relatedLot": "LOT-0002",
+      "measure": "noex-timl",
+      "notes": "Failure to extend time limits for receipt of tenders or requests to participate where significant changes are made to the procurement documents"
+    },
+    {
+      "id": "1",
+      "measure": "complainants",
+      "relatedLot": "LOT-0001",
+      "value": 3,
+      "scope": "complaints"
+    },
+    {
+      "id": "2",
+      "measure": "complainants",
+      "relatedLot": "LOT-0002",
+      "value": 3,
+      "scope": "complaints"
+    }
+  ],
+  "language": "en",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

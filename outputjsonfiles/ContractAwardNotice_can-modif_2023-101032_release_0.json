@@ -1,1 +1,238 @@
-{"id": "be2cd071-e143-4fc8-bc3b-7f1ec1b4141f", "initiationType": "tender", "ocid": "ocds-abcd1234-07734afd-815f-428c-b4c3-1f9a851fef93", "tender": {"legalBasis": {"id": "FOA § 28-1 d", "scheme": "ELI", "description": "I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d. Oppdragsgiver kunne ikke forutse at kommunen ville bli vedtatt delt i to nye kommuner; Ålesund og Haram. Anskaffelsens overordnede karakter blir ikke endret (1.), og prisøkningen overstiger ikke 50 prosent av den opprinnelige kontraktsverdien (2.). Oppdragsgiver kunngjør endringen (3.).", "multilingualDescriptions": [{"language": "NOR", "text": "I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d. Oppdragsgiver kunne ikke forutse at kommunen ville bli vedtatt delt i to nye kommuner; Ålesund og Haram. Anskaffelsens overordnede karakter blir ikke endret (1.), og prisøkningen overstiger ikke 50 prosent av den opprinnelige kontraktsverdien (2.). Oppdragsgiver kunngjør endringen (3.)."}, {"language": "ENG", "text": "The contracting authority has made changes in existing contract, cf. the PPR §28-1d. The contracting authority couldnt foresee that the municipality would be divided into two new municipalities; Ålesund and Haram. The overall character of the procurement wont be changed(1) and the price increase doesnt exceed 50% of the original contract value(2). The Contracting Authority announces the change(3)."}], "wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "id": "72dd1062-81a6-4de2-a9a5-ad8a572090f8", "lots": [{"id": "LOT-0000", "coveredBy": ["GPA"], "title": "Endringskunngjøring - Programvare for flyktning og voksenopplæring", "identifiers": [{"id": "23/1956", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d.\nÅlesund kommunes eksisterende avtale med Visma Enterprise AS vedrørende Visma FlyVo videreføres i Ålesund 2024 og Haram 2024. Det er inngått et endringsbilag til eksisterende kontrakt som beskriver de nødvendige endringene i kontrakten som følge av kommunedelingen. Av opprinnelig kontraktsverdi, etter avtalefestet KPI-justering, utgjør nødvendige engangskostnader direkte knyttet til kommunedelingen 10 %. Årlig pris for bruksrett (fast pris pr. flyktning og pr. elev) endres ikke (kun avhengig av antall flyktninger og antall elever). ", "hasAccessibilityCriteria": false, "hasRecurrence": false}], "title": "Endringskunngjøring - Programvare for flyktning og voksenopplæring", "identifiers": [{"id": "23/1956", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d.\nÅlesund kommunes eksisterende avtale med Visma Enterprise AS vedrørende Visma FlyVo videreføres i Ålesund 2024 og Haram 2024. Det er inngått et endringsbilag til eksisterende kontrakt som beskriver de nødvendige endringene i kontrakten som følge av kommunedelingen. Av opprinnelig kontraktsverdi, etter avtalefestet KPI-justering, utgjør nødvendige engangskostnader direkte knyttet til kommunedelingen 10 %. Årlig pris for bruksrett (fast pris pr. flyktning og pr. elev) endres ikke (kun avhengig av antall flyktninger og antall elever). ", "items": [{"id": "1", "additionalClassifications": [{"id": "48000000", "scheme": "CPV"}], "relatedLot": "LOT-0000", "classification": {"scheme": "CPV", "id": "72000000"}}]}, "tag": ["awardUpdate", "contractUpdate"], "date": "2023-11-15T12:42:43+00:00", "awards": [{"id": "RES-0001", "relatedLots": ["LOT-0000"], "date": "2019-08-25T23:59:59+02:00", "suppliers": [{"id": "ORG-0003"}], "value": {"amount": 305250.0, "currency": "NOK"}, "relatedBids": ["TEN-0001"]}], "bids": {"details": [{"id": "TEN-0001", "relatedLots": ["LOT-0000"], "identifiers": [{"id": "2019-366488", "scheme": "XX-TENDERNL"}], "value": {"amount": 305250.0, "currency": "NOK"}, "tenderers": [{"id": "ORG-0003"}]}]}, "contracts": [{"id": "CON-0001", "dateSigned": "2019-08-26T23:59:59+02:00", "awardID": "RES-0001", "identifiers": [{"id": "2019-366488", "scheme": "NL-TENDERNED"}], "amendments": [{"id": "54bb572f-711c-4d2e-8027-0e742b8cfefb", "rationaleClassifications": [{"id": "mod-cir", "description": "Unknown", "scheme": "eu-modification-justification"}]}, {"id": "0ad5d6e2-3e26-4260-996f-0ed4a4d43864", "rationale": "Oppdragsgiver kunne ikke forutse at dagens Ålesund kommune ville bli vedtatt delt i to nye kommuner, heretter kalt Ålesund 2024 og Haram 2024. Anskaffelsens overordnede karakter blir ikke endret (1.), og den enkelte prisøkningen overstiger ikke 50 prosent av den opprinnelige kontraktsverdien (2.). Oppdragsgiver kunngjør endringene (3.)."}, {"id": "d3c7030a-ac49-4be3-b18b-932be81755ac", "description": "I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d. Ålesund kommunes eksisterende avtale med Visma Enterprise AS vedrørende Visma FlyVo videreføres i Ålesund 2024 og Haram 2024. Det er inngått et endringsbilag til eksisterende kontrakt som beskriver de nødvendige endringene i kontrakten som følge av kommunedelingen. Av opprinnelig kontraktsverdi, etter avtalefestet KPI-justering, utgjør nødvendige engangskostnader direkte knyttet til kommunedelingen 10 %. Årlig pris for bruksrett (fast pris pr. flyktning og pr. elev) endres ikke (kun avhengig av antall flyktninger og antall elever). "}], "relatedBids": ["TEN-0001"], "title": "Anskaffelse Nye Ålesund – Intensjonskunngjøring Visma FLYVO"}], "parties": [{"id": "ORG-0001", "name": "Ålesund kommune - Innkjøp", "additionalIdentifiers": [{"id": "920415288", "scheme": "GB-COH"}], "contactPoint": {"name": "Jonette Valaas Skare", "telephone": "+47 70162000", "email": "jonette.valaas.skare@alesund.kommune.no"}, "address": {"streetAddress": "Keiser Wilhelms gate 11", "postalCode": "6003", "locality": "ÅLESUND", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0002", "name": "Møre og Romsdal tingrett", "additionalIdentifiers": [{"id": "926 723 200", "scheme": "GB-COH"}], "contactPoint": {"telephone": "70 33 47 00", "email": "more.og.romsdal.tingrett@domstol.no"}, "details": {"url": "https://www.domstol.no/no/domstoler/tingrett/more-og-romsdal-tingrett/"}, "address": {"streetAddress": "Postboks 1354", "postalCode": "6001", "locality": "Ålesund", "country": "NO"}, "roles": ["reviewBody"]}, {"id": "ORG-0003", "name": "Visma Enterprise AS", "roles": ["supplier", "tenderer"], "additionalIdentifiers": [{"id": "982 410 339", "scheme": "GB-COH"}], "contactPoint": {"telephone": "46404000", "email": "visma@visma.com"}, "address": {"locality": "Oslo", "country": "NO"}}], "description": "Henvisning til opprinnelige kunngjøringer: TED: 2019/S 164-403922, Doffin: 2019-366488. Reference to original announcements: TED: 2019/S 164-403922, Doffin: 2019-366488.", "language": "no", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "be2cd071-e143-4fc8-bc3b-7f1ec1b4141f",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-77fc1a06-72cf-4a12-aad0-234c1ab677a6",
+  "tender": {
+    "legalBasis": {
+      "id": "FOA § 28-1 d",
+      "scheme": "ELI",
+      "description": "I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d. Oppdragsgiver kunne ikke forutse at kommunen ville bli vedtatt delt i to nye kommuner; Ålesund og Haram. Anskaffelsens overordnede karakter blir ikke endret (1.), og prisøkningen overstiger ikke 50 prosent av den opprinnelige kontraktsverdien (2.). Oppdragsgiver kunngjør endringen (3.).",
+      "multilingualDescriptions": [
+        {
+          "language": "NOR",
+          "text": "I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d. Oppdragsgiver kunne ikke forutse at kommunen ville bli vedtatt delt i to nye kommuner; Ålesund og Haram. Anskaffelsens overordnede karakter blir ikke endret (1.), og prisøkningen overstiger ikke 50 prosent av den opprinnelige kontraktsverdien (2.). Oppdragsgiver kunngjør endringen (3.)."
+        },
+        {
+          "language": "ENG",
+          "text": "The contracting authority has made changes in existing contract, cf. the PPR §28-1d. The contracting authority couldnt foresee that the municipality would be divided into two new municipalities; Ålesund and Haram. The overall character of the procurement wont be changed(1) and the price increase doesnt exceed 50% of the original contract value(2). The Contracting Authority announces the change(3)."
+        }
+      ],
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "id": "72dd1062-81a6-4de2-a9a5-ad8a572090f8",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "coveredBy": [
+          "GPA"
+        ],
+        "title": "Endringskunngjøring - Programvare for flyktning og voksenopplæring",
+        "identifiers": [
+          {
+            "id": "23/1956",
+            "scheme": "internal"
+          }
+        ],
+        "mainProcurementCategory": "services",
+        "description": "I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d.\nÅlesund kommunes eksisterende avtale med Visma Enterprise AS vedrørende Visma FlyVo videreføres i Ålesund 2024 og Haram 2024. Det er inngått et endringsbilag til eksisterende kontrakt som beskriver de nødvendige endringene i kontrakten som følge av kommunedelingen. Av opprinnelig kontraktsverdi, etter avtalefestet KPI-justering, utgjør nødvendige engangskostnader direkte knyttet til kommunedelingen 10 %. Årlig pris for bruksrett (fast pris pr. flyktning og pr. elev) endres ikke (kun avhengig av antall flyktninger og antall elever). ",
+        "hasAccessibilityCriteria": false,
+        "hasRecurrence": false
+      }
+    ],
+    "title": "Endringskunngjøring - Programvare for flyktning og voksenopplæring",
+    "identifiers": [
+      {
+        "id": "23/1956",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "services",
+    "description": "I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d.\nÅlesund kommunes eksisterende avtale med Visma Enterprise AS vedrørende Visma FlyVo videreføres i Ålesund 2024 og Haram 2024. Det er inngått et endringsbilag til eksisterende kontrakt som beskriver de nødvendige endringene i kontrakten som følge av kommunedelingen. Av opprinnelig kontraktsverdi, etter avtalefestet KPI-justering, utgjør nødvendige engangskostnader direkte knyttet til kommunedelingen 10 %. Årlig pris for bruksrett (fast pris pr. flyktning og pr. elev) endres ikke (kun avhengig av antall flyktninger og antall elever). ",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "id": "48000000",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "72000000"
+        }
+      }
+    ]
+  },
+  "tag": [
+    "awardUpdate",
+    "contractUpdate"
+  ],
+  "date": "2023-11-15T12:42:43+00:00",
+  "awards": [
+    {
+      "id": "RES-0001",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "date": "2019-08-25T23:59:59+02:00",
+      "suppliers": [
+        {
+          "id": "ORG-0003"
+        }
+      ],
+      "value": {
+        "amount": 305250.0,
+        "currency": "NOK"
+      },
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "identifiers": [
+          {
+            "id": "2019-366488",
+            "scheme": "XX-TENDERNL"
+          }
+        ],
+        "value": {
+          "amount": 305250.0,
+          "currency": "NOK"
+        },
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      }
+    ]
+  },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2019-08-26T23:59:59+02:00",
+      "awardID": "RES-0001",
+      "identifiers": [
+        {
+          "id": "2019-366488",
+          "scheme": "NL-TENDERNED"
+        }
+      ],
+      "amendments": [
+        {
+          "id": "1c2df5b0-b994-48f1-a945-00a0d343f405",
+          "rationaleClassifications": [
+            {
+              "id": "mod-cir",
+              "description": "Unknown",
+              "scheme": "eu-modification-justification"
+            }
+          ]
+        },
+        {
+          "id": "8515ec86-a140-4cea-955e-adeea85e4cd1",
+          "rationale": "Oppdragsgiver kunne ikke forutse at dagens Ålesund kommune ville bli vedtatt delt i to nye kommuner, heretter kalt Ålesund 2024 og Haram 2024. Anskaffelsens overordnede karakter blir ikke endret (1.), og den enkelte prisøkningen overstiger ikke 50 prosent av den opprinnelige kontraktsverdien (2.). Oppdragsgiver kunngjør endringene (3.)."
+        },
+        {
+          "id": "f2a490be-9a09-4e5f-a9c0-f630b981b00d",
+          "description": "I forbindelse med kommunedeling har oppdragsgiver gjort endringer i eksisterende avtale, jf. FOA § 28-1 d. Ålesund kommunes eksisterende avtale med Visma Enterprise AS vedrørende Visma FlyVo videreføres i Ålesund 2024 og Haram 2024. Det er inngått et endringsbilag til eksisterende kontrakt som beskriver de nødvendige endringene i kontrakten som følge av kommunedelingen. Av opprinnelig kontraktsverdi, etter avtalefestet KPI-justering, utgjør nødvendige engangskostnader direkte knyttet til kommunedelingen 10 %. Årlig pris for bruksrett (fast pris pr. flyktning og pr. elev) endres ikke (kun avhengig av antall flyktninger og antall elever). "
+        }
+      ],
+      "relatedBids": [
+        "TEN-0001"
+      ],
+      "title": "Anskaffelse Nye Ålesund – Intensjonskunngjøring Visma FLYVO"
+    }
+  ],
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Ålesund kommune - Innkjøp",
+      "additionalIdentifiers": [
+        {
+          "id": "920415288",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Jonette Valaas Skare",
+        "telephone": "+47 70162000",
+        "email": "jonette.valaas.skare@alesund.kommune.no"
+      },
+      "address": {
+        "streetAddress": "Keiser Wilhelms gate 11",
+        "postalCode": "6003",
+        "locality": "ÅLESUND",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Møre og Romsdal tingrett",
+      "additionalIdentifiers": [
+        {
+          "id": "926 723 200",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "70 33 47 00",
+        "email": "more.og.romsdal.tingrett@domstol.no"
+      },
+      "details": {
+        "url": "https://www.domstol.no/no/domstoler/tingrett/more-og-romsdal-tingrett/"
+      },
+      "address": {
+        "streetAddress": "Postboks 1354",
+        "postalCode": "6001",
+        "locality": "Ålesund",
+        "country": "NO"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Visma Enterprise AS",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "982 410 339",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "46404000",
+        "email": "visma@visma.com"
+      },
+      "address": {
+        "locality": "Oslo",
+        "country": "NO"
+      }
+    }
+  ],
+  "description": "Henvisning til opprinnelige kunngjøringer: TED: 2019/S 164-403922, Doffin: 2019-366488. Reference to original announcements: TED: 2019/S 164-403922, Doffin: 2019-366488.",
+  "language": "no",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

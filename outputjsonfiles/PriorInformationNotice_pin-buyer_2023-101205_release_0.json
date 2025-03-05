@@ -1,1 +1,130 @@
-{"id": "667f77ec-2687-48a0-a752-651a0d7ebdcb", "initiationType": "tender", "ocid": "ocds-abcd1234-532700bc-62b2-41a9-b180-48fba2031956", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "status": "planned", "title": "System for Utvikling og Gjennomføring av Elektroniske Prøver", "identifiers": [{"id": "2023041103", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Forsvarsmateriell ønsker å identifisere mulige løsninger som leverandører kan tilby innen adaptive elektroniske prøver.I forbindelse med overgang til nye adaptive prøver, vurderes det å anskaffe et nytt system for utvikling og gjennomføring av elektroniske prøver. Systemet må håndtere både adaptive og tradisjonelle prøver, og det må håndtere prøvetaking både i klasserom og hjemmefra. Systemet bør understøtte administrasjon av eksisterende prøver og oppsett av nye prøver via løsningen, og da fortrinnsvis slik at dette kan gjøres uten spesiell IT-kompetanse.Interesserte oppfordres til å ta kontakt i kommunikasjonsfeltet i Mercell for et mer utfyllende dokument som inneholder selve spørsmålene knyttet til markedsundersøkelsen. Fristen for å svare på markedsundersøkelsen er 15. desember 2023.", "items": [{"id": "1", "additionalClassifications": [{"scheme": "CPV", "id": "72100000"}, {"scheme": "CPV", "id": "72200000"}, {"scheme": "CPV", "id": "72300000"}, {"scheme": "CPV", "id": "72400000"}, {"scheme": "CPV", "id": "72500000"}, {"scheme": "CPV", "id": "72600000"}, {"scheme": "CPV", "id": "72700000"}, {"scheme": "CPV", "id": "72800000"}, {"scheme": "CPV", "id": "72900000"}], "classification": {"scheme": "CPV", "id": "72000000"}}], "deliveryAddresses": [{"country": "NO"}], "deliveryLocations": [{"description": "Anywhere in the given country"}]}, "tag": ["tender"], "date": "2023-11-20T08:33:50+00:00", "parties": [{"id": "ORG-0001", "details": {"classifications": [{"scheme": "COFOG", "id": "02", "description": "Defence"}, {"scheme": "eu-buyer-legal-type", "id": "pub-undert", "description": "Public undertaking"}], "url": "https://permalink.mercell.com/216373386.aspx", "buyerProfile": "https://fma.no/"}, "name": "FORSVARSMATERIELL", "additionalIdentifiers": [{"id": "916075855", "scheme": "GB-COH"}], "contactPoint": {"name": "Kimberley Moabi Berkhof", "telephone": "45732110", "email": "kberkhof@mil.no"}, "roles": ["buyer"], "address": {"streetAddress": "Grev Wedels plass 1", "postalCode": "0151", "locality": "OSLO", "country": "NO"}}], "language": "no", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "667f77ec-2687-48a0-a752-651a0d7ebdcb",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-e35d8b38-16ad-4163-a320-e0241b02f766",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "status": "planned",
+    "title": "System for Utvikling og Gjennomføring av Elektroniske Prøver",
+    "identifiers": [
+      {
+        "id": "2023041103",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "services",
+    "description": "Forsvarsmateriell ønsker å identifisere mulige løsninger som leverandører kan tilby innen adaptive elektroniske prøver.I forbindelse med overgang til nye adaptive prøver, vurderes det å anskaffe et nytt system for utvikling og gjennomføring av elektroniske prøver. Systemet må håndtere både adaptive og tradisjonelle prøver, og det må håndtere prøvetaking både i klasserom og hjemmefra. Systemet bør understøtte administrasjon av eksisterende prøver og oppsett av nye prøver via løsningen, og da fortrinnsvis slik at dette kan gjøres uten spesiell IT-kompetanse.Interesserte oppfordres til å ta kontakt i kommunikasjonsfeltet i Mercell for et mer utfyllende dokument som inneholder selve spørsmålene knyttet til markedsundersøkelsen. Fristen for å svare på markedsundersøkelsen er 15. desember 2023.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV",
+            "id": "72100000"
+          },
+          {
+            "scheme": "CPV",
+            "id": "72200000"
+          },
+          {
+            "scheme": "CPV",
+            "id": "72300000"
+          },
+          {
+            "scheme": "CPV",
+            "id": "72400000"
+          },
+          {
+            "scheme": "CPV",
+            "id": "72500000"
+          },
+          {
+            "scheme": "CPV",
+            "id": "72600000"
+          },
+          {
+            "scheme": "CPV",
+            "id": "72700000"
+          },
+          {
+            "scheme": "CPV",
+            "id": "72800000"
+          },
+          {
+            "scheme": "CPV",
+            "id": "72900000"
+          }
+        ],
+        "classification": {
+          "scheme": "CPV",
+          "id": "72000000"
+        }
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "country": "NO"
+      }
+    ],
+    "deliveryLocations": [
+      {
+        "description": "Anywhere in the given country"
+      }
+    ]
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2023-11-20T08:33:50+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "02",
+            "description": "Defence"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "pub-undert",
+            "description": "Public undertaking"
+          }
+        ],
+        "url": "https://permalink.mercell.com/216373386.aspx",
+        "buyerProfile": "https://fma.no/"
+      },
+      "name": "FORSVARSMATERIELL",
+      "additionalIdentifiers": [
+        {
+          "id": "916075855",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Kimberley Moabi Berkhof",
+        "telephone": "45732110",
+        "email": "kberkhof@mil.no"
+      },
+      "roles": [
+        "buyer"
+      ],
+      "address": {
+        "streetAddress": "Grev Wedels plass 1",
+        "postalCode": "0151",
+        "locality": "OSLO",
+        "country": "NO"
+      }
+    }
+  ],
+  "language": "no",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

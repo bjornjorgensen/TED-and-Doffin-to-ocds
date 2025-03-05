@@ -1,1 +1,789 @@
-{"id": "aa382761-89ef-4162-9dc5-74f12a6f2a21", "initiationType": "tender", "ocid": "ocds-abcd1234-3cd205d7-b97d-4d79-8616-98960e73be96", "tender": {"legalBasis": {"id": "Anskaffelsesforskriften", "wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "status": "active", "id": "896ba55d-369b-4e08-b878-64333f8455c9", "procurementMethod": "selective", "procurementMethodDetails": "Anskaffelsen er omfattet av lov om offentlig anskaffelser av 17.juni 2016 nr.73 (LOA) og forskrift om offentlig anskaffelser av 12.august 2016 nr. 974 (FOA) med eventuelle senere endringer. For denne anskaffelser gjelder FOA del I og IV. Denne anskaffelser følger prosedyren for anskaffelser etter forskriften del IV.", "lots": [{"id": "LOT-0001", "enquiryPeriod": {"endDate": "2024-03-13T11:00:00+00:00"}, "submissionTerms": {"electronicSubmissionPolicy": "required", "variantPolicy": "notAllowed", "advancedElectronicSignatureRequired": true, "languages": ["no"]}, "title": "Oppfølging Tjenesteområde C - Drammen", "identifiers": [{"id": "24/3267", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Omfatter kommunen DrammenLeveringssted sentralt i Drammen, med god tilknytning til offentlig kommunikasjon.  Anslått behov er 220-300 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedene.  Dersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».", "value": {"amount": 117000000.0, "currency": "NOK"}, "contractPeriod": {"durationInDays": 720}, "options": {"description": "Viser til konkurransegrunnlag del 1"}, "selectionCriteria": {"criteria": [{"title": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene", "description": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene: Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):"}, {"description": "Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):", "languageID": "NOR"}]}, "hasAccessibilityCriteria": false}, {"id": "LOT-0002", "enquiryPeriod": {"endDate": "2024-03-13T11:00:00+00:00"}, "submissionTerms": {"electronicSubmissionPolicy": "required", "variantPolicy": "notAllowed", "advancedElectronicSignatureRequired": true, "languages": ["no"]}, "title": "Oppfølging Tjenesteområde D - Kongsberg og Numedal", "identifiers": [{"id": "24/3267", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Omfatter kommunene Kongsberg, Flesberg, Rollag og Nore og UvdalLeveringssted sentralt i Kongsberg, med god tilknytning til offentlig kommunikasjon Anslått behov er 70-100 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedeneDersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».", "value": {"amount": 39000000.0, "currency": "NOK"}, "contractPeriod": {"durationInDays": 720}, "options": {"description": "Viser til konkurransegrunnlag del 1"}, "selectionCriteria": {"criteria": [{"title": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene", "description": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene: Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):"}, {"description": "Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):", "languageID": "NOR"}]}, "hasAccessibilityCriteria": false}, {"id": "LOT-0003", "enquiryPeriod": {"endDate": "2024-03-13T11:00:00+00:00"}, "submissionTerms": {"electronicSubmissionPolicy": "required", "variantPolicy": "notAllowed", "advancedElectronicSignatureRequired": true, "languages": ["no"]}, "title": "Oppfølging Tjenesteområde E - Øvre Eiker", "identifiers": [{"id": "24/3267", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Omfatter kommunen Øvre Eiker Leveringssted sentralt i Hokksund, med god tilknytning til offentlig kommunikasjon Anslått behov er 53-60 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedeneDersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».", "value": {"amount": 25200000.0, "currency": "NOK"}, "contractPeriod": {"durationInDays": 720}, "options": {"description": "Viser til konkurransegrunnlag del 1"}, "selectionCriteria": {"criteria": [{"title": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene", "description": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene: Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):"}, {"description": "Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):", "languageID": "NOR"}]}, "hasAccessibilityCriteria": false}, {"id": "LOT-0004", "enquiryPeriod": {"endDate": "2024-03-13T11:00:00+00:00"}, "submissionTerms": {"electronicSubmissionPolicy": "required", "variantPolicy": "notAllowed", "advancedElectronicSignatureRequired": true, "languages": ["no"]}, "title": "Oppfølging Tjenesteområde F - Ringerike, Hole og Jevnaker", "identifiers": [{"id": "24/3267", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Omfatter kommunene Ringerike, Hole, JevnakerLeveringssted sentralt på Hønefoss, med god tilknytning til offentlig kommunikasjonAnslått behov er 46-50 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedeneDersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».", "value": {"amount": 21000000.0, "currency": "NOK"}, "contractPeriod": {"durationInDays": 720}, "options": {"description": "Viser til konkurransegrunnlag del 1"}, "selectionCriteria": {"criteria": [{"title": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene", "description": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene: Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):"}, {"description": "Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):", "languageID": "NOR"}]}, "hasAccessibilityCriteria": false}, {"id": "LOT-0005", "enquiryPeriod": {"endDate": "2024-03-13T11:00:00+00:00"}, "submissionTerms": {"electronicSubmissionPolicy": "required", "variantPolicy": "notAllowed", "advancedElectronicSignatureRequired": true, "languages": ["no"]}, "title": "Oppfølging Tjenesteområde G - Lier", "identifiers": [{"id": "24/3267", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Omfatter kommunen Lier Leveringssted sentralt i Lier, med god tilknytning til offentlig kommunikasjon  Anslått behov er 45-52 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedeneDersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».", "value": {"amount": 20280000.0, "currency": "NOK"}, "contractPeriod": {"durationInDays": 720}, "options": {"description": "Viser til konkurransegrunnlag del 1"}, "selectionCriteria": {"criteria": [{"title": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene", "description": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene: Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):"}, {"description": "Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):", "languageID": "NOR"}]}, "hasAccessibilityCriteria": false}, {"id": "LOT-0006", "enquiryPeriod": {"endDate": "2024-03-13T11:00:00+00:00"}, "submissionTerms": {"electronicSubmissionPolicy": "required", "variantPolicy": "notAllowed", "advancedElectronicSignatureRequired": true, "languages": ["no"]}, "title": "Oppfølging Tjenesteområde H - Modum, Sigdal og Krødsherad", "identifiers": [{"id": "24/3267", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Omfatter kommunene Modum, Sigdal og KrødsheradLeveringssted sentralt i Modum, med god tilknytning til offentlig kommunikasjon Anslått behov er 35-45 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedeneDersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».", "value": {"amount": 18900000.0, "currency": "NOK"}, "contractPeriod": {"durationInDays": 720}, "options": {"description": "Viser til konkurransegrunnlag del 1"}, "selectionCriteria": {"criteria": [{"title": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene", "description": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene: Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):"}, {"description": "Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):", "languageID": "NOR"}]}, "hasAccessibilityCriteria": false}, {"id": "LOT-0007", "enquiryPeriod": {"endDate": "2024-03-13T11:00:00+00:00"}, "submissionTerms": {"electronicSubmissionPolicy": "required", "variantPolicy": "notAllowed", "advancedElectronicSignatureRequired": true, "languages": ["no"]}, "title": "Oppfølging Tjenesteområde I - Hallingdal - Flå, Nesbyen, Gol, Hemsedal, Ål, Hol", "identifiers": [{"id": "24/3267", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Omfatter kommunene Flå, Nesbyen, Gol, Hemsedal, Ål og HolLeveringssted sentralt på Gol, med god tilknytning til offentlig kommunikasjonAnslått behov er 25-40 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedene).Dersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».", "value": {"amount": 18000000.0, "currency": "NOK"}, "contractPeriod": {"durationInDays": 720}, "options": {"description": "Viser til konkurransegrunnlag del 1"}, "selectionCriteria": {"criteria": [{"title": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene", "description": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene: Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):"}, {"description": "Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):", "languageID": "NOR"}]}, "hasAccessibilityCriteria": false}, {"id": "LOT-0008", "enquiryPeriod": {"endDate": "2024-03-13T11:00:00+00:00"}, "submissionTerms": {"electronicSubmissionPolicy": "required", "variantPolicy": "notAllowed", "advancedElectronicSignatureRequired": true, "languages": ["no"]}, "title": "Tilbudsinnlevering", "identifiers": [{"id": "24/3267", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Dette er en fiktiv delkontrakt for innlevering av tilbudsdokumenter.All dokumentasjon som tilbudet består av utover \"Tilbudsbrev\" (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i denne fiktive delkontrakten.Tilbudsbrev skal lastes opp i aktuelle delkontrakter for de tjenesteområdene der tilbyderen ønsker å levere tilbud.", "contractPeriod": {"durationInDays": 720}, "selectionCriteria": {"criteria": [{"title": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene", "description": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene: Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):"}, {"description": "Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):", "languageID": "NOR"}]}, "hasAccessibilityCriteria": false}], "documents": [{"id": "222992007", "documentType": "biddingDocuments", "url": "https://permalink.mercell.com/222988698.aspx", "relatedLots": ["LOT-0001"]}, {"id": "223001858", "documentType": "biddingDocuments", "url": "https://permalink.mercell.com/222988698.aspx", "relatedLots": ["LOT-0002"]}, {"id": "223003061", "documentType": "biddingDocuments", "url": "https://permalink.mercell.com/222988698.aspx", "relatedLots": ["LOT-0003"]}, {"id": "223003491", "documentType": "biddingDocuments", "url": "https://permalink.mercell.com/222988698.aspx", "relatedLots": ["LOT-0004"]}, {"id": "223005595", "documentType": "biddingDocuments", "url": "https://permalink.mercell.com/222988698.aspx", "relatedLots": ["LOT-0005"]}, {"id": "223007072", "documentType": "biddingDocuments", "url": "https://permalink.mercell.com/222988698.aspx", "relatedLots": ["LOT-0006"]}, {"id": "223103487", "documentType": "biddingDocuments", "url": "https://permalink.mercell.com/222988698.aspx", "relatedLots": ["LOT-0007"]}, {"id": "223105973", "documentType": "biddingDocuments", "url": "https://permalink.mercell.com/222988698.aspx", "relatedLots": ["LOT-0008"]}], "title": "Anskaffelse av tiltaket oppfølging for NAV Vest-Viken", "identifiers": [{"id": "24/3267", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Anskaffelsen er omfattet av lov om offentlige anskaffelser av 17. juni 2016 nr. 73 (LOA) og forskrift om offentlig anskaffelser av 12. august 2016 nr. 974 (FOA) med eventuelle senere endringer.For denne anskaffelsen gjelder FOA del I og IV. Denne anskaffelsen følger prosedyren for anskaffelse etter forskriftens del IV.NAV Vest-Viken skal anskaffe arbeidsmarkedstiltaket Oppfølging for personer som har behov for en mer omfattende oppfølgingsbistand enn den Arbeids- og velferdsetaten kan tilby.Oppfølging skal gi bistand med sikte på at tiltaksdeltakere skaffer seg og/eller beholder, lønnet arbeid. Oppfølging kan inneholde karriereveiledning, bistand til målrettet jobbsøking og jobbutvikling, veiledning og råd knyttet til arbeidsdeltakelse både til tiltaksdeltaker og arbeidsgivere, opplæring i arbeidsrelaterte og sosiale ferdigheter samt oppfølging og tilrettelegging på arbeidsplassen for å legge til rette for overgang til arbeid og sikre jobbfastholdelse.", "items": [{"id": "1", "additionalClassifications": [{"id": "85312310", "scheme": "CPV"}, {"id": "85312320", "scheme": "CPV"}], "relatedLot": "LOT-0001", "classification": {"scheme": "CPV", "id": "85312300"}, "deliveryAddresses": [{"region": "NO082"}, {"country": "NO"}]}, {"id": "2", "additionalClassifications": [{"id": "85312310", "scheme": "CPV"}, {"id": "85312320", "scheme": "CPV"}], "relatedLot": "LOT-0002", "classification": {"scheme": "CPV", "id": "85312300"}, "deliveryAddresses": [{"region": "NO082"}, {"country": "NO"}]}, {"id": "3", "additionalClassifications": [{"id": "85312310", "scheme": "CPV"}, {"id": "85312320", "scheme": "CPV"}], "relatedLot": "LOT-0003", "classification": {"scheme": "CPV", "id": "85312300"}, "deliveryAddresses": [{"region": "NO082"}, {"country": "NO"}]}, {"id": "4", "additionalClassifications": [{"id": "85312310", "scheme": "CPV"}, {"id": "85312320", "scheme": "CPV"}], "relatedLot": "LOT-0004", "classification": {"scheme": "CPV", "id": "85312300"}, "deliveryAddresses": [{"region": "NO082"}, {"country": "NO"}]}, {"id": "5", "additionalClassifications": [{"id": "85312310", "scheme": "CPV"}, {"id": "85312320", "scheme": "CPV"}], "relatedLot": "LOT-0005", "classification": {"scheme": "CPV", "id": "85312300"}, "deliveryAddresses": [{"region": "NO082"}, {"country": "NO"}]}, {"id": "6", "additionalClassifications": [{"id": "85312310", "scheme": "CPV"}, {"id": "85312320", "scheme": "CPV"}], "relatedLot": "LOT-0006", "classification": {"scheme": "CPV", "id": "85312300"}, "deliveryAddresses": [{"region": "NO082"}, {"country": "NO"}]}, {"id": "7", "additionalClassifications": [{"id": "85312310", "scheme": "CPV"}, {"id": "85312320", "scheme": "CPV"}], "relatedLot": "LOT-0007", "classification": {"scheme": "CPV", "id": "85312300"}, "deliveryAddresses": [{"region": "NO082"}, {"country": "NO"}]}, {"id": "8", "additionalClassifications": [{"id": "85312310", "scheme": "CPV"}, {"id": "85312320", "scheme": "CPV"}], "relatedLot": "LOT-0008", "classification": {"scheme": "CPV", "id": "85312300"}, "deliveryAddresses": [{"region": "NO082"}, {"country": "NO"}]}], "value": {"amount": 259380000.0, "currency": "NOK"}, "lotDetails": {"maximumLotsBidPerSupplier": 7}, "deliveryAddresses": [{"country": "NO"}], "exclusionGrounds": {"criteria": [{"type": "corruption", "description": "Corruption: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for korrupsjon ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?Korrupsjon som definert i artikkel 3 i konvensjonen om bekjempelse av korrupsjon, som involverer tjenestemenn i De Europeiske Fellesskapene eller i Den Europeiske Unions medlemsstater (EUT C 195 av 25.6.1997, s. 1), og i artikkel 2, stk. 1, i Rådets rammeavgjørelse 2003/568/RIA av 22. juli 2003 om bekjempelse av korrupsjon i den private sektor (EUT L 192 av 31.7.2003, s. 54). Denne avvisningsgrunnen omfatter også korrupsjon som definert i nasjonal rett for oppdragsgiveren eller leverandøren."}, {"type": "crime-org", "description": "participation in a criminal organisation: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for deltakelse i en kriminell organisasjon ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Deltakelse i en kriminell organisasjon som definert i artikkel 2 i Rådets rammeavgjørelse 2008/841/RIA av 24. oktober 2008 om bekjempelse av organisert kriminalitet (EUT L 300 av 11.11.2008, s. 42)"}, {"type": "envir-law", "description": "Breaching of obligations in the fields of environmental law: Er leverandøren kjent med å ha begått brudd på bestemmelser om miljø slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."}, {"type": "finan-laund", "description": "Money laundering or terrorist financing: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for hvitvasking av penger eller finansiering av terrorisme ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?Hvitvasking av penger eller finansiering av terrorismeSom definert i artikkel 1 i Europaparlamentets og Rådets direktiv 2005/60/EF av 26. oktober 2005 om forebyggende tiltak mot bruk av det finansielle system til hvitvasking av penger og finansiering av terrorisme (EUT L 309 av 25.11.2005, s. 15)."}, {"type": "fraud", "description": "Fraud: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for bedrageri ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?Bedrageri som  omhandlet i artikkel 1 i konvensjonen om beskyttelse av De Europeiske Fellesskapenes finansielle interesser (EFT C 316 av 27.11.1995, s. 48)."}, {"type": "human-traffic", "description": "Child labour and other forms of trafficking in human beings: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for barnearbeid og andre former for menneskehandel ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?Barnearbeid og andre former for menneskehandel som definert i artikkel 2 i Europaparlamentets og Rådets direktiv 2011/36/EU av 5. april 2011 om forebygging og bekjempelse av menneskehandel og beskyttelse av dets ofre, og om erstatning av Rådets rammeavgjørelse 2002/629/RIA (EUT L 101 av 15.4.2011, s. 1)."}, {"type": "labour-law", "description": "Breaching of obligations in the fields of labour law: Er leverandøren kjent med å ha begått brudd på bestemmelser om arbeidsforhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."}, {"type": "misrepresent", "description": "Guilty of misrepresentation, withheld information, unable to provide required documents and obtained confidential information of this procedure: Har leverandøren:a) gitt grovt uriktige opplysninger ved meddelelsen av opplysningene som kreves for å kontrollere at det ikke er grunnlag for avvisning, eller av at kvalifikasjonskravene er oppfylt,b) unnlatt å gi slike opplysninger,c) tatt forbehold om straks å fremlegge de støttedokumenter som oppdragsgiver anmoder om, ellerd) urettmessig påvirket oppdragsgivers beslutningsprosess for å tilegne seg konfidensiell informasjon som kan gi denne en urettmessig fordel i forbindelse med konkurransen, eller uaktsomt har gitt misvisende opplysninger som kan få vesentlig innflytelse på beslutninger om avvisning, utvelgelse eller tildeling?"}, {"type": "socsec-law", "description": "Breaching of obligations in the fields of social law: Er leverandøren kjent med å ha begått brudd på bestemmelser om sosiale forhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."}, {"type": "socsec-pay", "description": "Payment of social security contributions: Har leverandør unnlatt å oppfylle alle sine forpliktelser til å betale trygdeavgifter både i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et annet land enn det han er etablert i?"}, {"type": "tax-pay", "description": "Payment of taxes: Har leverandøren unnlatt å oppfylle sine forpliktelser til å betale skatter og avgifter i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et annet land enn det han er etablert i?"}, {"type": "terr-offence", "description": "Terrorist offences or offences linked to terrorist activities: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitetved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitet som definert i artikkel 1 og 3 i Rådets rammeavgjørelse 2002/475/RIA av 13. juni 2002 om bekjempelse av terrorisme (EFT L 164 af 22.6.2002, s. 3). Denne avvisningsgrunnen omfatter også oppfordring til, medvirkning til eller forsøk på å begå slike handlinger som omhandlet i artikkel 4 i nevnte rammeavgjørelse."}]}}, "tag": ["tender"], "date": "2024-02-15T15:41:13+00:00", "parties": [{"id": "ORG-0001", "name": "ARBEIDS- OG VELFERDSETATEN", "additionalIdentifiers": [{"id": "889640782", "scheme": "GB-COH"}], "contactPoint": {"name": "Stian Gåsland", "telephone": "41213276", "email": "stian.gasland@nav.no"}, "details": {"url": "http://www.nav.no/", "buyerProfile": "http://www.nav.no/"}, "roles": ["buyer"], "address": {"streetAddress": "Postboks 354", "postalCode": "8601", "locality": "Mo i Rana", "country": "NO"}}, {"id": "ORG-0002", "name": "Oslo Tingrett", "additionalIdentifiers": [{"id": "926725939", "scheme": "GB-COH"}], "contactPoint": {"telephone": "22035200", "email": "oslo.tingrett@domstol.no"}, "address": {"locality": "Oslo", "country": "NO"}, "roles": ["reviewBody"]}], "language": "no", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "aa382761-89ef-4162-9dc5-74f12a6f2a21",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-8010b8f5-89b2-48c3-ae82-8c297297c062",
+  "tender": {
+    "legalBasis": {
+      "id": "Anskaffelsesforskriften",
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "status": "active",
+    "id": "896ba55d-369b-4e08-b878-64333f8455c9",
+    "procurementMethod": "selective",
+    "procurementMethodDetails": "Anskaffelsen er omfattet av lov om offentlig anskaffelser av 17.juni 2016 nr.73 (LOA) og forskrift om offentlig anskaffelser av 12.august 2016 nr. 974 (FOA) med eventuelle senere endringer. For denne anskaffelser gjelder FOA del I og IV. Denne anskaffelser følger prosedyren for anskaffelser etter forskriften del IV.",
+    "lots": [
+      {
+        "id": "LOT-0001",
+        "enquiryPeriod": {
+          "endDate": "2024-03-13T11:00:00+00:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "variantPolicy": "notAllowed",
+          "advancedElectronicSignatureRequired": true,
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Oppfølging Tjenesteområde C - Drammen",
+        "identifiers": [
+          {
+            "id": "24/3267",
+            "scheme": "internal"
+          }
+        ],
+        "mainProcurementCategory": "services",
+        "description": "Omfatter kommunen DrammenLeveringssted sentralt i Drammen, med god tilknytning til offentlig kommunikasjon.  Anslått behov er 220-300 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedene.  Dersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».",
+        "value": {
+          "amount": 117000000.0,
+          "currency": "NOK"
+        },
+        "contractPeriod": {
+          "durationInDays": 720
+        },
+        "options": {
+          "description": "Viser til konkurransegrunnlag del 1"
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "title": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene",
+              "description": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene: Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):"
+            },
+            {
+              "description": "Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):",
+              "languageID": "NOR"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false
+      },
+      {
+        "id": "LOT-0002",
+        "enquiryPeriod": {
+          "endDate": "2024-03-13T11:00:00+00:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "variantPolicy": "notAllowed",
+          "advancedElectronicSignatureRequired": true,
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Oppfølging Tjenesteområde D - Kongsberg og Numedal",
+        "identifiers": [
+          {
+            "id": "24/3267",
+            "scheme": "internal"
+          }
+        ],
+        "mainProcurementCategory": "services",
+        "description": "Omfatter kommunene Kongsberg, Flesberg, Rollag og Nore og UvdalLeveringssted sentralt i Kongsberg, med god tilknytning til offentlig kommunikasjon Anslått behov er 70-100 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedeneDersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».",
+        "value": {
+          "amount": 39000000.0,
+          "currency": "NOK"
+        },
+        "contractPeriod": {
+          "durationInDays": 720
+        },
+        "options": {
+          "description": "Viser til konkurransegrunnlag del 1"
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "title": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene",
+              "description": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene: Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):"
+            },
+            {
+              "description": "Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):",
+              "languageID": "NOR"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false
+      },
+      {
+        "id": "LOT-0003",
+        "enquiryPeriod": {
+          "endDate": "2024-03-13T11:00:00+00:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "variantPolicy": "notAllowed",
+          "advancedElectronicSignatureRequired": true,
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Oppfølging Tjenesteområde E - Øvre Eiker",
+        "identifiers": [
+          {
+            "id": "24/3267",
+            "scheme": "internal"
+          }
+        ],
+        "mainProcurementCategory": "services",
+        "description": "Omfatter kommunen Øvre Eiker Leveringssted sentralt i Hokksund, med god tilknytning til offentlig kommunikasjon Anslått behov er 53-60 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedeneDersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».",
+        "value": {
+          "amount": 25200000.0,
+          "currency": "NOK"
+        },
+        "contractPeriod": {
+          "durationInDays": 720
+        },
+        "options": {
+          "description": "Viser til konkurransegrunnlag del 1"
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "title": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene",
+              "description": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene: Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):"
+            },
+            {
+              "description": "Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):",
+              "languageID": "NOR"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false
+      },
+      {
+        "id": "LOT-0004",
+        "enquiryPeriod": {
+          "endDate": "2024-03-13T11:00:00+00:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "variantPolicy": "notAllowed",
+          "advancedElectronicSignatureRequired": true,
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Oppfølging Tjenesteområde F - Ringerike, Hole og Jevnaker",
+        "identifiers": [
+          {
+            "id": "24/3267",
+            "scheme": "internal"
+          }
+        ],
+        "mainProcurementCategory": "services",
+        "description": "Omfatter kommunene Ringerike, Hole, JevnakerLeveringssted sentralt på Hønefoss, med god tilknytning til offentlig kommunikasjonAnslått behov er 46-50 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedeneDersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».",
+        "value": {
+          "amount": 21000000.0,
+          "currency": "NOK"
+        },
+        "contractPeriod": {
+          "durationInDays": 720
+        },
+        "options": {
+          "description": "Viser til konkurransegrunnlag del 1"
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "title": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene",
+              "description": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene: Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):"
+            },
+            {
+              "description": "Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):",
+              "languageID": "NOR"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false
+      },
+      {
+        "id": "LOT-0005",
+        "enquiryPeriod": {
+          "endDate": "2024-03-13T11:00:00+00:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "variantPolicy": "notAllowed",
+          "advancedElectronicSignatureRequired": true,
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Oppfølging Tjenesteområde G - Lier",
+        "identifiers": [
+          {
+            "id": "24/3267",
+            "scheme": "internal"
+          }
+        ],
+        "mainProcurementCategory": "services",
+        "description": "Omfatter kommunen Lier Leveringssted sentralt i Lier, med god tilknytning til offentlig kommunikasjon  Anslått behov er 45-52 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedeneDersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».",
+        "value": {
+          "amount": 20280000.0,
+          "currency": "NOK"
+        },
+        "contractPeriod": {
+          "durationInDays": 720
+        },
+        "options": {
+          "description": "Viser til konkurransegrunnlag del 1"
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "title": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene",
+              "description": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene: Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):"
+            },
+            {
+              "description": "Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):",
+              "languageID": "NOR"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false
+      },
+      {
+        "id": "LOT-0006",
+        "enquiryPeriod": {
+          "endDate": "2024-03-13T11:00:00+00:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "variantPolicy": "notAllowed",
+          "advancedElectronicSignatureRequired": true,
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Oppfølging Tjenesteområde H - Modum, Sigdal og Krødsherad",
+        "identifiers": [
+          {
+            "id": "24/3267",
+            "scheme": "internal"
+          }
+        ],
+        "mainProcurementCategory": "services",
+        "description": "Omfatter kommunene Modum, Sigdal og KrødsheradLeveringssted sentralt i Modum, med god tilknytning til offentlig kommunikasjon Anslått behov er 35-45 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedeneDersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».",
+        "value": {
+          "amount": 18900000.0,
+          "currency": "NOK"
+        },
+        "contractPeriod": {
+          "durationInDays": 720
+        },
+        "options": {
+          "description": "Viser til konkurransegrunnlag del 1"
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "title": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene",
+              "description": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene: Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):"
+            },
+            {
+              "description": "Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):",
+              "languageID": "NOR"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false
+      },
+      {
+        "id": "LOT-0007",
+        "enquiryPeriod": {
+          "endDate": "2024-03-13T11:00:00+00:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "variantPolicy": "notAllowed",
+          "advancedElectronicSignatureRequired": true,
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Oppfølging Tjenesteområde I - Hallingdal - Flå, Nesbyen, Gol, Hemsedal, Ål, Hol",
+        "identifiers": [
+          {
+            "id": "24/3267",
+            "scheme": "internal"
+          }
+        ],
+        "mainProcurementCategory": "services",
+        "description": "Omfatter kommunene Flå, Nesbyen, Gol, Hemsedal, Ål og HolLeveringssted sentralt på Gol, med god tilknytning til offentlig kommunikasjonAnslått behov er 25-40 samtidige tiltaksplasser til enhver tid (med unntak av de 6 første månedene).Dersom det er ønskelig å levere tilbud i dette tjenesteområdet skal Tilbyder kun laste opp tilbudsbrev for dette tjenesteområdet i denne delkonkurransen. All øvrig dokumentasjon som tilbudet består av (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i den fiktive delkontrakten «Tilbudsinnlevering».",
+        "value": {
+          "amount": 18000000.0,
+          "currency": "NOK"
+        },
+        "contractPeriod": {
+          "durationInDays": 720
+        },
+        "options": {
+          "description": "Viser til konkurransegrunnlag del 1"
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "title": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene",
+              "description": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene: Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):"
+            },
+            {
+              "description": "Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):",
+              "languageID": "NOR"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false
+      },
+      {
+        "id": "LOT-0008",
+        "enquiryPeriod": {
+          "endDate": "2024-03-13T11:00:00+00:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "variantPolicy": "notAllowed",
+          "advancedElectronicSignatureRequired": true,
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Tilbudsinnlevering",
+        "identifiers": [
+          {
+            "id": "24/3267",
+            "scheme": "internal"
+          }
+        ],
+        "mainProcurementCategory": "services",
+        "description": "Dette er en fiktiv delkontrakt for innlevering av tilbudsdokumenter.All dokumentasjon som tilbudet består av utover \"Tilbudsbrev\" (Komplett tilbud, jf. punkt 3.8.1.2) skal lastes opp i denne fiktive delkontrakten.Tilbudsbrev skal lastes opp i aktuelle delkontrakter for de tjenesteområdene der tilbyderen ønsker å levere tilbud.",
+        "contractPeriod": {
+          "durationInDays": 720
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "title": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene",
+              "description": "Del IV a: Samlet angivelse for alle kvalifikasjonskravene: Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):"
+            },
+            {
+              "description": "Leverandøren skal bare angi opplysningene hvis oppdragsgiver i kunngjøringen eller i anskaffelsesdokumentene referert til i kunngjøringen har opplyst at disse kvalifikasjonskravene kreves oppfylt. \n\nNår det gjelder kvalifikasjonskravene angitt i konkurransegrunnlaget, erklærer leverandøren at den oppfyller de angitte kvalifikasjonskravene. \n\nLeverandøren oppfyller de angitte kvalifikasjonskravene (svar JA / NEI og legg i tillegg til JA eller NEI i kommentarfeltet):",
+              "languageID": "NOR"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "222992007",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/222988698.aspx",
+        "relatedLots": [
+          "LOT-0001"
+        ]
+      },
+      {
+        "id": "223001858",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/222988698.aspx",
+        "relatedLots": [
+          "LOT-0002"
+        ]
+      },
+      {
+        "id": "223003061",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/222988698.aspx",
+        "relatedLots": [
+          "LOT-0003"
+        ]
+      },
+      {
+        "id": "223003491",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/222988698.aspx",
+        "relatedLots": [
+          "LOT-0004"
+        ]
+      },
+      {
+        "id": "223005595",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/222988698.aspx",
+        "relatedLots": [
+          "LOT-0005"
+        ]
+      },
+      {
+        "id": "223007072",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/222988698.aspx",
+        "relatedLots": [
+          "LOT-0006"
+        ]
+      },
+      {
+        "id": "223103487",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/222988698.aspx",
+        "relatedLots": [
+          "LOT-0007"
+        ]
+      },
+      {
+        "id": "223105973",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/222988698.aspx",
+        "relatedLots": [
+          "LOT-0008"
+        ]
+      }
+    ],
+    "title": "Anskaffelse av tiltaket oppfølging for NAV Vest-Viken",
+    "identifiers": [
+      {
+        "id": "24/3267",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "services",
+    "description": "Anskaffelsen er omfattet av lov om offentlige anskaffelser av 17. juni 2016 nr. 73 (LOA) og forskrift om offentlig anskaffelser av 12. august 2016 nr. 974 (FOA) med eventuelle senere endringer.For denne anskaffelsen gjelder FOA del I og IV. Denne anskaffelsen følger prosedyren for anskaffelse etter forskriftens del IV.NAV Vest-Viken skal anskaffe arbeidsmarkedstiltaket Oppfølging for personer som har behov for en mer omfattende oppfølgingsbistand enn den Arbeids- og velferdsetaten kan tilby.Oppfølging skal gi bistand med sikte på at tiltaksdeltakere skaffer seg og/eller beholder, lønnet arbeid. Oppfølging kan inneholde karriereveiledning, bistand til målrettet jobbsøking og jobbutvikling, veiledning og råd knyttet til arbeidsdeltakelse både til tiltaksdeltaker og arbeidsgivere, opplæring i arbeidsrelaterte og sosiale ferdigheter samt oppfølging og tilrettelegging på arbeidsplassen for å legge til rette for overgang til arbeid og sikre jobbfastholdelse.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "id": "85312310",
+            "scheme": "CPV"
+          },
+          {
+            "id": "85312320",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0001",
+        "classification": {
+          "scheme": "CPV",
+          "id": "85312300"
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO082"
+          },
+          {
+            "country": "NO"
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "additionalClassifications": [
+          {
+            "id": "85312310",
+            "scheme": "CPV"
+          },
+          {
+            "id": "85312320",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0002",
+        "classification": {
+          "scheme": "CPV",
+          "id": "85312300"
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO082"
+          },
+          {
+            "country": "NO"
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "additionalClassifications": [
+          {
+            "id": "85312310",
+            "scheme": "CPV"
+          },
+          {
+            "id": "85312320",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0003",
+        "classification": {
+          "scheme": "CPV",
+          "id": "85312300"
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO082"
+          },
+          {
+            "country": "NO"
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "additionalClassifications": [
+          {
+            "id": "85312310",
+            "scheme": "CPV"
+          },
+          {
+            "id": "85312320",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0004",
+        "classification": {
+          "scheme": "CPV",
+          "id": "85312300"
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO082"
+          },
+          {
+            "country": "NO"
+          }
+        ]
+      },
+      {
+        "id": "5",
+        "additionalClassifications": [
+          {
+            "id": "85312310",
+            "scheme": "CPV"
+          },
+          {
+            "id": "85312320",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0005",
+        "classification": {
+          "scheme": "CPV",
+          "id": "85312300"
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO082"
+          },
+          {
+            "country": "NO"
+          }
+        ]
+      },
+      {
+        "id": "6",
+        "additionalClassifications": [
+          {
+            "id": "85312310",
+            "scheme": "CPV"
+          },
+          {
+            "id": "85312320",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0006",
+        "classification": {
+          "scheme": "CPV",
+          "id": "85312300"
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO082"
+          },
+          {
+            "country": "NO"
+          }
+        ]
+      },
+      {
+        "id": "7",
+        "additionalClassifications": [
+          {
+            "id": "85312310",
+            "scheme": "CPV"
+          },
+          {
+            "id": "85312320",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0007",
+        "classification": {
+          "scheme": "CPV",
+          "id": "85312300"
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO082"
+          },
+          {
+            "country": "NO"
+          }
+        ]
+      },
+      {
+        "id": "8",
+        "additionalClassifications": [
+          {
+            "id": "85312310",
+            "scheme": "CPV"
+          },
+          {
+            "id": "85312320",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0008",
+        "classification": {
+          "scheme": "CPV",
+          "id": "85312300"
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO082"
+          },
+          {
+            "country": "NO"
+          }
+        ]
+      }
+    ],
+    "value": {
+      "amount": 259380000.0,
+      "currency": "NOK"
+    },
+    "lotDetails": {
+      "maximumLotsBidPerSupplier": 7
+    },
+    "deliveryAddresses": [
+      {
+        "country": "NO"
+      }
+    ],
+    "exclusionGrounds": {
+      "criteria": [
+        {
+          "type": "corruption",
+          "description": "Corruption: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for korrupsjon ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?Korrupsjon som definert i artikkel 3 i konvensjonen om bekjempelse av korrupsjon, som involverer tjenestemenn i De Europeiske Fellesskapene eller i Den Europeiske Unions medlemsstater (EUT C 195 av 25.6.1997, s. 1), og i artikkel 2, stk. 1, i Rådets rammeavgjørelse 2003/568/RIA av 22. juli 2003 om bekjempelse av korrupsjon i den private sektor (EUT L 192 av 31.7.2003, s. 54). Denne avvisningsgrunnen omfatter også korrupsjon som definert i nasjonal rett for oppdragsgiveren eller leverandøren."
+        },
+        {
+          "type": "crime-org",
+          "description": "participation in a criminal organisation: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for deltakelse i en kriminell organisasjon ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Deltakelse i en kriminell organisasjon som definert i artikkel 2 i Rådets rammeavgjørelse 2008/841/RIA av 24. oktober 2008 om bekjempelse av organisert kriminalitet (EUT L 300 av 11.11.2008, s. 42)"
+        },
+        {
+          "type": "envir-law",
+          "description": "Breaching of obligations in the fields of environmental law: Er leverandøren kjent med å ha begått brudd på bestemmelser om miljø slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."
+        },
+        {
+          "type": "finan-laund",
+          "description": "Money laundering or terrorist financing: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for hvitvasking av penger eller finansiering av terrorisme ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?Hvitvasking av penger eller finansiering av terrorismeSom definert i artikkel 1 i Europaparlamentets og Rådets direktiv 2005/60/EF av 26. oktober 2005 om forebyggende tiltak mot bruk av det finansielle system til hvitvasking av penger og finansiering av terrorisme (EUT L 309 av 25.11.2005, s. 15)."
+        },
+        {
+          "type": "fraud",
+          "description": "Fraud: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for bedrageri ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?Bedrageri som  omhandlet i artikkel 1 i konvensjonen om beskyttelse av De Europeiske Fellesskapenes finansielle interesser (EFT C 316 av 27.11.1995, s. 48)."
+        },
+        {
+          "type": "human-traffic",
+          "description": "Child labour and other forms of trafficking in human beings: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for barnearbeid og andre former for menneskehandel ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?Barnearbeid og andre former for menneskehandel som definert i artikkel 2 i Europaparlamentets og Rådets direktiv 2011/36/EU av 5. april 2011 om forebygging og bekjempelse av menneskehandel og beskyttelse av dets ofre, og om erstatning av Rådets rammeavgjørelse 2002/629/RIA (EUT L 101 av 15.4.2011, s. 1)."
+        },
+        {
+          "type": "labour-law",
+          "description": "Breaching of obligations in the fields of labour law: Er leverandøren kjent med å ha begått brudd på bestemmelser om arbeidsforhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."
+        },
+        {
+          "type": "misrepresent",
+          "description": "Guilty of misrepresentation, withheld information, unable to provide required documents and obtained confidential information of this procedure: Har leverandøren:a) gitt grovt uriktige opplysninger ved meddelelsen av opplysningene som kreves for å kontrollere at det ikke er grunnlag for avvisning, eller av at kvalifikasjonskravene er oppfylt,b) unnlatt å gi slike opplysninger,c) tatt forbehold om straks å fremlegge de støttedokumenter som oppdragsgiver anmoder om, ellerd) urettmessig påvirket oppdragsgivers beslutningsprosess for å tilegne seg konfidensiell informasjon som kan gi denne en urettmessig fordel i forbindelse med konkurransen, eller uaktsomt har gitt misvisende opplysninger som kan få vesentlig innflytelse på beslutninger om avvisning, utvelgelse eller tildeling?"
+        },
+        {
+          "type": "socsec-law",
+          "description": "Breaching of obligations in the fields of social law: Er leverandøren kjent med å ha begått brudd på bestemmelser om sosiale forhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."
+        },
+        {
+          "type": "socsec-pay",
+          "description": "Payment of social security contributions: Har leverandør unnlatt å oppfylle alle sine forpliktelser til å betale trygdeavgifter både i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et annet land enn det han er etablert i?"
+        },
+        {
+          "type": "tax-pay",
+          "description": "Payment of taxes: Har leverandøren unnlatt å oppfylle sine forpliktelser til å betale skatter og avgifter i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et annet land enn det han er etablert i?"
+        },
+        {
+          "type": "terr-offence",
+          "description": "Terrorist offences or offences linked to terrorist activities: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitetved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitet som definert i artikkel 1 og 3 i Rådets rammeavgjørelse 2002/475/RIA av 13. juni 2002 om bekjempelse av terrorisme (EFT L 164 af 22.6.2002, s. 3). Denne avvisningsgrunnen omfatter også oppfordring til, medvirkning til eller forsøk på å begå slike handlinger som omhandlet i artikkel 4 i nevnte rammeavgjørelse."
+        }
+      ]
+    }
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2024-02-15T15:41:13+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "ARBEIDS- OG VELFERDSETATEN",
+      "additionalIdentifiers": [
+        {
+          "id": "889640782",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Stian Gåsland",
+        "telephone": "41213276",
+        "email": "stian.gasland@nav.no"
+      },
+      "details": {
+        "url": "http://www.nav.no/",
+        "buyerProfile": "http://www.nav.no/"
+      },
+      "roles": [
+        "buyer"
+      ],
+      "address": {
+        "streetAddress": "Postboks 354",
+        "postalCode": "8601",
+        "locality": "Mo i Rana",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Oslo Tingrett",
+      "additionalIdentifiers": [
+        {
+          "id": "926725939",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "22035200",
+        "email": "oslo.tingrett@domstol.no"
+      },
+      "address": {
+        "locality": "Oslo",
+        "country": "NO"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "language": "no",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

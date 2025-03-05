@@ -1,1 +1,227 @@
-{"id": "7b469b6b-4abb-4f22-abe1-50973de8c825", "initiationType": "tender", "ocid": "ocds-abcd1234-c6a3636f-3004-4609-a796-057798a4f21f", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "status": "active", "id": "4f3017e0-59e5-479f-bc87-2018757d9715", "procurementMethod": "selective", "procurementMethodDetails": "Negotiated with prior publication of a call for competition / competitive with negotiation", "lots": [{"id": "LOT-0001", "communication": {"atypicalToolUrl": "https://posten-supplier.ivalua.app/"}, "submissionTerms": {"electronicSubmissionPolicy": "required", "languages": ["no"]}, "title": "Operation of Post in Store and Posten parcel delivery - 2025", "identifiers": [{"id": "BPM000217", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Refering to section 2 in the notice. ", "selectionCriteria": {"criteria": [{"forReduction": true}, {"title": "Please see qualification requirement at https://posten-supplier.ivalua.app/"}]}, "tenderPeriod": {"endDate": "2024-04-26T12:00:00+02:00"}, "contractTerms": {"electronicInvoicingPolicy": "Required", "hasElectronicOrdering": false, "hasElectronicPayment": false}, "hasAccessibilityCriteria": false, "techniques": {"frameworkAgreement": {"method": "withoutReopeningCompetition"}, "hasFrameworkAgreement": true, "hasElectronicAuction": false}, "otherRequirements": {"requiresStaffNamesAndQualifications": false}}], "documents": [{"id": "Doc1", "documentType": "biddingDocuments", "url": "https://posten-supplier.ivalua.app/", "relatedLots": ["LOT-0001"]}], "title": "Operation of Post in Store and Posten parcel delivery - 2025", "identifiers": [{"id": "BPM000217", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Posten Bring AS’s intention with this procurement is to find partners for the operation of Post in Store and Posten parcel delivery", "items": [{"id": "1", "classification": {"scheme": "CPV", "id": "64110000"}, "relatedLot": "LOT-0001"}]}, "tag": ["tender"], "date": "2024-04-05T14:58:54+00:00", "parties": [{"id": "ORG-0001", "details": {"classifications": [{"scheme": "eu-buyer-legal-type", "id": "pub-undert-cga", "description": "Public undertaking, controlled by a central government authority"}, {"scheme": "eu-main-activity", "id": "post", "description": "Activities related to the exploitation of a geographical area for the purpose of the provision of maritime or inland ports or other terminal facilities to carriers by sea or inland waterway."}], "url": "https://www.postenbring.no/", "buyerProfile": "https://posten-supplier.ivalua.app/"}, "name": "Posten Bring AS", "additionalIdentifiers": [{"id": "984 661 185", "scheme": "GB-COH"}], "contactPoint": {"name": "Per Arne Brustad", "telephone": "+4795120244", "email": "per.brustad@posten.no"}, "roles": ["buyer", "processContactPoint"], "address": {"streetAddress": "Biskop Gunnerus' gate 14 A", "postalCode": "0185", "locality": "Oslo", "country": "NO"}}, {"id": "ORG-0004", "name": "Posten Bring AS", "additionalIdentifiers": [{"id": "984 661 185", "scheme": "GB-COH"}], "contactPoint": {"telephone": "95120244", "email": "per.arne.brustad@posten.no"}, "details": {"url": "https://www.postenbring.no/"}, "address": {"streetAddress": "Postboks 1500", "postalCode": "0001", "locality": "Oslo", "country": "NO"}, "roles": ["reviewBody"]}, {"id": "ORG-0005", "name": "Oslo Tingrett", "additionalIdentifiers": [{"id": "926 725 939", "scheme": "GB-COH"}], "contactPoint": {"telephone": "+4722035200", "email": "oslo.tingrett@domstol.no"}, "details": {"url": "https://www.domstol.no/no/domstoler/tingrett/oslo-tingrett/"}, "address": {"streetAddress": "Postboks 2106 Vika", "postalCode": "0125", "locality": "Oslo", "country": "NO"}, "roles": ["mediationBody"]}, {"id": "ORG-0006", "name": "Posten Bring AS", "additionalIdentifiers": [{"id": "984 661 185", "scheme": "GB-COH"}], "contactPoint": {"telephone": "95120244", "email": "per.arne.brustad@posten.no"}, "details": {"url": "https://www.postenbring.no/"}, "address": {"streetAddress": "Postboks 1500", "postalCode": "0001", "locality": "Oslo", "country": "NO"}, "roles": ["reviewContactPoint"]}], "language": "en", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "7b469b6b-4abb-4f22-abe1-50973de8c825",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-c8b9ab0d-f7db-4015-89c6-e5d9aa625f60",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "status": "active",
+    "id": "4f3017e0-59e5-479f-bc87-2018757d9715",
+    "procurementMethod": "selective",
+    "procurementMethodDetails": "Negotiated with prior publication of a call for competition / competitive with negotiation",
+    "lots": [
+      {
+        "id": "LOT-0001",
+        "communication": {
+          "atypicalToolUrl": "https://posten-supplier.ivalua.app/"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Operation of Post in Store and Posten parcel delivery - 2025",
+        "identifiers": [
+          {
+            "id": "BPM000217",
+            "scheme": "internal"
+          }
+        ],
+        "mainProcurementCategory": "services",
+        "description": "Refering to section 2 in the notice. ",
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "forReduction": true
+            },
+            {
+              "title": "Please see qualification requirement at https://posten-supplier.ivalua.app/"
+            }
+          ]
+        },
+        "tenderPeriod": {
+          "endDate": "2024-04-26T12:00:00+02:00"
+        },
+        "contractTerms": {
+          "electronicInvoicingPolicy": "Required",
+          "hasElectronicOrdering": false,
+          "hasElectronicPayment": false
+        },
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "frameworkAgreement": {
+            "method": "withoutReopeningCompetition"
+          },
+          "hasFrameworkAgreement": true,
+          "hasElectronicAuction": false
+        },
+        "otherRequirements": {
+          "requiresStaffNamesAndQualifications": false
+        }
+      }
+    ],
+    "documents": [
+      {
+        "id": "Doc1",
+        "documentType": "biddingDocuments",
+        "url": "https://posten-supplier.ivalua.app/",
+        "relatedLots": [
+          "LOT-0001"
+        ]
+      }
+    ],
+    "title": "Operation of Post in Store and Posten parcel delivery - 2025",
+    "identifiers": [
+      {
+        "id": "BPM000217",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "services",
+    "description": "Posten Bring AS’s intention with this procurement is to find partners for the operation of Post in Store and Posten parcel delivery",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "64110000"
+        },
+        "relatedLot": "LOT-0001"
+      }
+    ]
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2024-04-05T14:58:54+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "pub-undert-cga",
+            "description": "Public undertaking, controlled by a central government authority"
+          },
+          {
+            "scheme": "eu-main-activity",
+            "id": "post",
+            "description": "Activities related to the exploitation of a geographical area for the purpose of the provision of maritime or inland ports or other terminal facilities to carriers by sea or inland waterway."
+          }
+        ],
+        "url": "https://www.postenbring.no/",
+        "buyerProfile": "https://posten-supplier.ivalua.app/"
+      },
+      "name": "Posten Bring AS",
+      "additionalIdentifiers": [
+        {
+          "id": "984 661 185",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Per Arne Brustad",
+        "telephone": "+4795120244",
+        "email": "per.brustad@posten.no"
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ],
+      "address": {
+        "streetAddress": "Biskop Gunnerus' gate 14 A",
+        "postalCode": "0185",
+        "locality": "Oslo",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0004",
+      "name": "Posten Bring AS",
+      "additionalIdentifiers": [
+        {
+          "id": "984 661 185",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "95120244",
+        "email": "per.arne.brustad@posten.no"
+      },
+      "details": {
+        "url": "https://www.postenbring.no/"
+      },
+      "address": {
+        "streetAddress": "Postboks 1500",
+        "postalCode": "0001",
+        "locality": "Oslo",
+        "country": "NO"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    },
+    {
+      "id": "ORG-0005",
+      "name": "Oslo Tingrett",
+      "additionalIdentifiers": [
+        {
+          "id": "926 725 939",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "+4722035200",
+        "email": "oslo.tingrett@domstol.no"
+      },
+      "details": {
+        "url": "https://www.domstol.no/no/domstoler/tingrett/oslo-tingrett/"
+      },
+      "address": {
+        "streetAddress": "Postboks 2106 Vika",
+        "postalCode": "0125",
+        "locality": "Oslo",
+        "country": "NO"
+      },
+      "roles": [
+        "mediationBody"
+      ]
+    },
+    {
+      "id": "ORG-0006",
+      "name": "Posten Bring AS",
+      "additionalIdentifiers": [
+        {
+          "id": "984 661 185",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "95120244",
+        "email": "per.arne.brustad@posten.no"
+      },
+      "details": {
+        "url": "https://www.postenbring.no/"
+      },
+      "address": {
+        "streetAddress": "Postboks 1500",
+        "postalCode": "0001",
+        "locality": "Oslo",
+        "country": "NO"
+      },
+      "roles": [
+        "reviewContactPoint"
+      ]
+    }
+  ],
+  "language": "en",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

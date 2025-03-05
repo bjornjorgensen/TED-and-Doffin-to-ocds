@@ -1,1 +1,168 @@
-{"id": "2023-618829", "initiationType": "tender", "ocid": "ocds-abcd1234-e353d5bc-f73c-497c-b71c-2cd835645447", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "id": "2023-618829", "lots": [{"id": "LOT-0000", "submissionTerms": {"electronicSubmissionPolicy": "not-allowed"}, "title": "C1 - HPC-system for beregning og analyse", "mainProcurementCategory": "goods", "description": "Uninett Sigma2 AS er ansvarlig for den nasjonale infrastrukturen for beregningsvitenskap i Norge, og tilbyr tjenester for tungregning og lagring av forsningsdata. Denne anskaffelsen er for en Linux klynge med nett og globalt filsystem av høy ytelse. Løsningen skal håndtere I/O og metadata-intensiv last.", "contractPeriod": {"durationInDays": 1590}, "hasAccessibilityCriteria": false}], "title": "C1 – HPC Facility for Scientific Research", "identifiers": [{"id": "18/00059", "scheme": "internal"}], "mainProcurementCategory": "goods", "description": "Uninett Sigma2 AS er ansvarlig for den nasjonale infrastrukturen for beregningsvitenskap i Norge, og tilbyr tjenester for tungregning og lagring av forsningsdata. Denne anskaffelsen er for en Linux klynge med nett og globalt filsystem av høy ytelse. Løsningen skal håndtere I/O og metadata-intensiv last.", "items": [{"id": "1", "classification": {"scheme": "CPV", "id": "30211100"}, "relatedLot": "LOT-0000"}]}, "tag": ["awardUpdate", "contractUpdate"], "date": "2023-06-12T12:00:00+02:00", "awards": [{"id": "RES-0001", "relatedLots": ["LOT-0000"], "status": "active", "statusDetails": "At least one winner was chosen.", "suppliers": [{"id": "ORG-0002"}], "value": {"amount": 21738097.0, "currency": "NOK"}, "relatedBids": ["TEN-0001"]}], "bids": {"details": [{"id": "TEN-0001", "relatedLots": ["LOT-0000"], "value": {"amount": 21738097.0, "currency": "NOK"}, "tenderers": [{"id": "ORG-0002"}]}]}, "contracts": [{"id": "CON-0001", "dateSigned": "2018-12-18T23:59:59Z", "awardID": "RES-0001", "identifiers": [{"id": "18/00059", "scheme": "NL-TENDERNED"}], "relatedBids": ["TEN-0001"]}], "parties": [{"id": "ORG-0001", "name": "Sigma2", "additionalIdentifiers": [{"id": "814 864 332", "scheme": "GB-COH"}], "contactPoint": {"name": "Halvor Wang Opaas", "telephone": "+47 41920456", "email": "halvor.opaas@kpmg.no"}, "details": {"url": "https://www.sigma2.no/", "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/65512"}, "roles": ["buyer"], "address": {"streetAddress": "Sigma2 AS Postboks 4769 Torgard", "postalCode": "NO-7465", "locality": "TRONDHEIM", "country": "NO"}}, {"id": "ORG-0002", "name": "Hewlett-Packard Norge AS", "roles": ["supplier", "tenderer"], "address": {"postalCode": "1326", "locality": "Lysaker", "country": "NO"}}, {"id": "ORG-0003", "name": "Klagenemnda for offentlige anskaffelser", "address": {"locality": "Bergen", "country": "NO"}, "roles": ["reviewBody"]}], "language": "nb", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "2023-618829",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-a103dbd2-a6a8-4a84-bdf3-6b101fba69ce",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "id": "2023-618829",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "not-allowed"
+        },
+        "title": "C1 - HPC-system for beregning og analyse",
+        "mainProcurementCategory": "goods",
+        "description": "Uninett Sigma2 AS er ansvarlig for den nasjonale infrastrukturen for beregningsvitenskap i Norge, og tilbyr tjenester for tungregning og lagring av forsningsdata. Denne anskaffelsen er for en Linux klynge med nett og globalt filsystem av høy ytelse. Løsningen skal håndtere I/O og metadata-intensiv last.",
+        "contractPeriod": {
+          "durationInDays": 1590
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "title": "C1 – HPC Facility for Scientific Research",
+    "identifiers": [
+      {
+        "id": "18/00059",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "goods",
+    "description": "Uninett Sigma2 AS er ansvarlig for den nasjonale infrastrukturen for beregningsvitenskap i Norge, og tilbyr tjenester for tungregning og lagring av forsningsdata. Denne anskaffelsen er for en Linux klynge med nett og globalt filsystem av høy ytelse. Løsningen skal håndtere I/O og metadata-intensiv last.",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "30211100"
+        },
+        "relatedLot": "LOT-0000"
+      }
+    ]
+  },
+  "tag": [
+    "awardUpdate",
+    "contractUpdate"
+  ],
+  "date": "2023-06-12T12:00:00+02:00",
+  "awards": [
+    {
+      "id": "RES-0001",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
+      "value": {
+        "amount": 21738097.0,
+        "currency": "NOK"
+      },
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 21738097.0,
+          "currency": "NOK"
+        },
+        "tenderers": [
+          {
+            "id": "ORG-0002"
+          }
+        ]
+      }
+    ]
+  },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2018-12-18T23:59:59Z",
+      "awardID": "RES-0001",
+      "identifiers": [
+        {
+          "id": "18/00059",
+          "scheme": "NL-TENDERNED"
+        }
+      ],
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Sigma2",
+      "additionalIdentifiers": [
+        {
+          "id": "814 864 332",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Halvor Wang Opaas",
+        "telephone": "+47 41920456",
+        "email": "halvor.opaas@kpmg.no"
+      },
+      "details": {
+        "url": "https://www.sigma2.no/",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/65512"
+      },
+      "roles": [
+        "buyer"
+      ],
+      "address": {
+        "streetAddress": "Sigma2 AS Postboks 4769 Torgard",
+        "postalCode": "NO-7465",
+        "locality": "TRONDHEIM",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Hewlett-Packard Norge AS",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
+      "address": {
+        "postalCode": "1326",
+        "locality": "Lysaker",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Klagenemnda for offentlige anskaffelser",
+      "address": {
+        "locality": "Bergen",
+        "country": "NO"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "language": "nb",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

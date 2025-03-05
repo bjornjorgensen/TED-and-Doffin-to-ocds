@@ -1,1 +1,631 @@
-{"id": "2023-674343", "initiationType": "tender", "ocid": "ocds-abcd1234-94016478-e4b3-48e7-a0f7-147f8f7a6795", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "status": "planned", "lots": [{"id": "LOT-0000", "coveredBy": ["GPA"], "submissionTerms": {"electronicSubmissionPolicy": "allowed", "languages": ["en"]}, "title": "Veiledende kunngjøring: Reisebyråtjenester til kommuner i Innlandet 2023 - 2027", "mainProcurementCategory": "services", "description": "Leverandørmarkedet inviteres til å kommentere og gi innspill til utkastet til konkurransegrunnlaget som er vedlagt denne kunngjøringen. I planleggingsfasen av en anskaffelse er det anledning til å ha dialog med markedet, mens når konkurransen er kunngjort er det lite rom for å gjøre endringer. Leverandørene oppfordres derfor til å bruke denne muligheten til å komme med innspill og kommentarer. Spesielt ønsker vi kommentarer til kvalifikasjonskrav, evalueringskriterier og kontraktsvilkår. Vi vil også sette pris på forslag og kommentarer til andre deler av konkurransegrunnlaget. Tilbakemeldinger og innspill bes sendes via kommunikasjonsmodulen i Mercell innen 25.08.2023.", "value": {"amount": 9700000.0, "currency": "NOK"}, "contractPeriod": {"durationInDays": 720}, "awardCriteria": {"criteria": [{"description": "Price is not the only award criterion and all criteria are stated only in the procurement documents."}]}, "options": {"description": "Følgende organisasjoner har opsjon på å tiltre avtalen: Etnedal kommune Nord-Aurdal kommune Sør-Aurdal kommune Vang kommune Vestre Slidre kommune Øystre Slidre kommune Eidskog kommune Nord-Odal kommune Våler kommune Åsnes kommune"}, "renewal": {"description": "1+1 år", "maximumRenewals": 0}, "contractTerms": {"electronicInvoicingPolicy": "Allowed", "hasElectronicOrdering": true, "hasElectronicPayment": true}, "selectionCriteria": {"criteria": [{"description": "Det vises til vedlagte konkurransegrunnlag.", "languageID": "NOB"}]}, "hasAccessibilityCriteria": false}], "documents": [{"id": "DOCUMENT_ID_REQUIRED_HERE", "documentType": "biddingDocuments", "url": "https://permalink.mercell.com/208265464.aspx", "relatedLots": ["LOT-0000"]}], "title": "Veiledende kunngjøring: Reisebyråtjenester til kommuner i Innlandet 2023 - 2027", "identifiers": [{"id": "22/2066", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Regionalt Innkjøp i Kongsvingerregionen planlegger å gjennomføre en konkurranse om levering av reisebyråtjenester. ", "items": [{"id": "1", "classification": {"scheme": "CPV", "id": "63510000"}, "relatedLot": "LOT-0000", "deliveryAddresses": [{"region": "NO020"}]}], "value": {"amount": 9700000.0, "currency": "NOK"}}, "tag": ["tender"], "date": "2023-07-10T12:00:00+02:00", "parties": [{"id": "ORG-0001", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "https://permalink.mercell.com/208265464.aspx", "buyerProfile": "http://www.kongsvinger.kommune.no/"}, "name": "Kongsvinger Kommune", "additionalIdentifiers": [{"id": "944117784", "scheme": "GB-COH"}], "contactPoint": {"telephone": "+47 62874000", "email": "riik@kongsvinger.kommune.no"}, "roles": ["leadBuyer", "buyer", "processContactPoint", "wholesaleBuyer"], "address": {"streetAddress": "Rådhusplassen 3", "postalCode": "2212", "locality": "KONGSVINGER", "country": "NO"}}, {"id": "ORG-0002", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "https://www.elverum.kommune.no/"}, "name": "Elverum kommune", "contactPoint": {"email": "postmottak@elverum.kommune.no"}, "address": {"locality": "Elverum", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0003", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "https://www.hamar.kommune.no/"}, "name": "Hamar kommune", "contactPoint": {"email": "postmottak@hamar.kommune.no"}, "address": {"locality": "Hamar", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0004", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "https://www.indigo-ikt.no/author/indigo-ikt-iks/"}, "name": "Indigo IKS", "contactPoint": {"email": "post@indigo-ikt.no"}, "address": {"locality": "Hamar", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0005", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "https://www.kongsvinger.kommune.no"}, "name": "Kongsvinger kommune", "contactPoint": {"email": "postmottak@kongsvinger.kommune.no"}, "address": {"locality": "Kongsvinger ", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0006", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "https://www.ringsaker.kommune.no"}, "name": "Ringsaker kommune", "contactPoint": {"email": "postmottak@ringsaker.kommune.no"}, "address": {"locality": "Brumunddal", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0007", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "https://www.stange.kommune.no/"}, "name": "Stange kommune", "contactPoint": {"email": "post@stange.kommune.no"}, "address": {"locality": "Stange", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0008", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "https://www.etnedal.kommune.no/"}, "name": "Etnedal kommune", "contactPoint": {"email": "postmottak@etnedal.kommune.no"}, "address": {"locality": "Etnedal", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0009", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "https://www.nord-aurdal.kommune.no/"}, "name": "Nord-Aurdal kommune", "contactPoint": {"email": "nak@nord-aurdal.kommune.no"}, "address": {"locality": "Fagernes", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0010", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "https://www.sor-aurdal.kommune.no/"}, "name": "Sør-Aurdal kommune", "contactPoint": {"email": "postmottak@sor-aurdal.kommune.no"}, "address": {"locality": "Bagn", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0011", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "https://www.vang.kommune.no/"}, "name": "Vang kommune", "contactPoint": {"email": "post@vang.kommune.no"}, "address": {"locality": "Vang i Valdres", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0012", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "https://www.vestre-slidre.kommune.no/"}, "name": "Vestre Slidre kommune", "contactPoint": {"email": "post@vestre-slidre.kommune.no"}, "address": {"locality": "Slidre", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0013", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "https://www.oystre-slidre.kommune.no/"}, "name": "Øystre Slidre kommune", "contactPoint": {"email": "post@oystre-slidre.kommune.no"}, "address": {"locality": "Heggenes", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0014", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "https://www.eidskog.kommune.no/"}, "name": "Eidskog kommune", "contactPoint": {"email": "postmottak@eidskog.kommune.no"}, "address": {"locality": "Skotterud", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0015", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "https://www.nord-odal.kommune.no/"}, "name": "Nord-Odal kommune", "contactPoint": {"email": "postmottak@nord-odal.kommune.no"}, "address": {"locality": "Sagstua", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0016", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "https://www.vaaler-he.kommune.no/"}, "name": "Våler kommune", "contactPoint": {"email": "postmottak@vaaler-he.kommune.no"}, "address": {"locality": "Våler i Solør", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0017", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "https://www.asnes.kommune.no/"}, "name": "Åsnes kommune", "contactPoint": {"email": "post@asnes.kommune.no"}, "address": {"locality": "Flisa", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0018", "name": "Romerike og Glåmdal tingrett", "address": {"locality": "Kongsvinger", "country": "NO"}, "roles": ["reviewBody"]}], "language": "nb", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "2023-674343",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-d8ed29a2-a5b8-4e0b-b156-f43b7fa11876",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "status": "planned",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "coveredBy": [
+          "GPA"
+        ],
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "allowed",
+          "languages": [
+            "en"
+          ]
+        },
+        "title": "Veiledende kunngjøring: Reisebyråtjenester til kommuner i Innlandet 2023 - 2027",
+        "mainProcurementCategory": "services",
+        "description": "Leverandørmarkedet inviteres til å kommentere og gi innspill til utkastet til konkurransegrunnlaget som er vedlagt denne kunngjøringen. I planleggingsfasen av en anskaffelse er det anledning til å ha dialog med markedet, mens når konkurransen er kunngjort er det lite rom for å gjøre endringer. Leverandørene oppfordres derfor til å bruke denne muligheten til å komme med innspill og kommentarer. Spesielt ønsker vi kommentarer til kvalifikasjonskrav, evalueringskriterier og kontraktsvilkår. Vi vil også sette pris på forslag og kommentarer til andre deler av konkurransegrunnlaget. Tilbakemeldinger og innspill bes sendes via kommunikasjonsmodulen i Mercell innen 25.08.2023.",
+        "value": {
+          "amount": 9700000.0,
+          "currency": "NOK"
+        },
+        "contractPeriod": {
+          "durationInDays": 720
+        },
+        "awardCriteria": {
+          "criteria": [
+            {
+              "description": "Price is not the only award criterion and all criteria are stated only in the procurement documents."
+            }
+          ]
+        },
+        "options": {
+          "description": "Følgende organisasjoner har opsjon på å tiltre avtalen: Etnedal kommune Nord-Aurdal kommune Sør-Aurdal kommune Vang kommune Vestre Slidre kommune Øystre Slidre kommune Eidskog kommune Nord-Odal kommune Våler kommune Åsnes kommune"
+        },
+        "renewal": {
+          "description": "1+1 år",
+          "maximumRenewals": 0
+        },
+        "contractTerms": {
+          "electronicInvoicingPolicy": "Allowed",
+          "hasElectronicOrdering": true,
+          "hasElectronicPayment": true
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "description": "Det vises til vedlagte konkurransegrunnlag.",
+              "languageID": "NOB"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/208265464.aspx",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "Veiledende kunngjøring: Reisebyråtjenester til kommuner i Innlandet 2023 - 2027",
+    "identifiers": [
+      {
+        "id": "22/2066",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "services",
+    "description": "Regionalt Innkjøp i Kongsvingerregionen planlegger å gjennomføre en konkurranse om levering av reisebyråtjenester. ",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "63510000"
+        },
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "region": "NO020"
+          }
+        ]
+      }
+    ],
+    "value": {
+      "amount": 9700000.0,
+      "currency": "NOK"
+    }
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2023-07-10T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "https://permalink.mercell.com/208265464.aspx",
+        "buyerProfile": "http://www.kongsvinger.kommune.no/"
+      },
+      "name": "Kongsvinger Kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "944117784",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "+47 62874000",
+        "email": "riik@kongsvinger.kommune.no"
+      },
+      "roles": [
+        "buyer",
+        "leadBuyer",
+        "processContactPoint",
+        "wholesaleBuyer"
+      ],
+      "address": {
+        "streetAddress": "Rådhusplassen 3",
+        "postalCode": "2212",
+        "locality": "KONGSVINGER",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "https://www.elverum.kommune.no/"
+      },
+      "name": "Elverum kommune",
+      "contactPoint": {
+        "email": "postmottak@elverum.kommune.no"
+      },
+      "address": {
+        "locality": "Elverum",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0003",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "https://www.hamar.kommune.no/"
+      },
+      "name": "Hamar kommune",
+      "contactPoint": {
+        "email": "postmottak@hamar.kommune.no"
+      },
+      "address": {
+        "locality": "Hamar",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0004",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "https://www.indigo-ikt.no/author/indigo-ikt-iks/"
+      },
+      "name": "Indigo IKS",
+      "contactPoint": {
+        "email": "post@indigo-ikt.no"
+      },
+      "address": {
+        "locality": "Hamar",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0005",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "https://www.kongsvinger.kommune.no"
+      },
+      "name": "Kongsvinger kommune",
+      "contactPoint": {
+        "email": "postmottak@kongsvinger.kommune.no"
+      },
+      "address": {
+        "locality": "Kongsvinger ",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0006",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "https://www.ringsaker.kommune.no"
+      },
+      "name": "Ringsaker kommune",
+      "contactPoint": {
+        "email": "postmottak@ringsaker.kommune.no"
+      },
+      "address": {
+        "locality": "Brumunddal",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0007",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "https://www.stange.kommune.no/"
+      },
+      "name": "Stange kommune",
+      "contactPoint": {
+        "email": "post@stange.kommune.no"
+      },
+      "address": {
+        "locality": "Stange",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0008",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "https://www.etnedal.kommune.no/"
+      },
+      "name": "Etnedal kommune",
+      "contactPoint": {
+        "email": "postmottak@etnedal.kommune.no"
+      },
+      "address": {
+        "locality": "Etnedal",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0009",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "https://www.nord-aurdal.kommune.no/"
+      },
+      "name": "Nord-Aurdal kommune",
+      "contactPoint": {
+        "email": "nak@nord-aurdal.kommune.no"
+      },
+      "address": {
+        "locality": "Fagernes",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0010",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "https://www.sor-aurdal.kommune.no/"
+      },
+      "name": "Sør-Aurdal kommune",
+      "contactPoint": {
+        "email": "postmottak@sor-aurdal.kommune.no"
+      },
+      "address": {
+        "locality": "Bagn",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0011",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "https://www.vang.kommune.no/"
+      },
+      "name": "Vang kommune",
+      "contactPoint": {
+        "email": "post@vang.kommune.no"
+      },
+      "address": {
+        "locality": "Vang i Valdres",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0012",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "https://www.vestre-slidre.kommune.no/"
+      },
+      "name": "Vestre Slidre kommune",
+      "contactPoint": {
+        "email": "post@vestre-slidre.kommune.no"
+      },
+      "address": {
+        "locality": "Slidre",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0013",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "https://www.oystre-slidre.kommune.no/"
+      },
+      "name": "Øystre Slidre kommune",
+      "contactPoint": {
+        "email": "post@oystre-slidre.kommune.no"
+      },
+      "address": {
+        "locality": "Heggenes",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0014",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "https://www.eidskog.kommune.no/"
+      },
+      "name": "Eidskog kommune",
+      "contactPoint": {
+        "email": "postmottak@eidskog.kommune.no"
+      },
+      "address": {
+        "locality": "Skotterud",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0015",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "https://www.nord-odal.kommune.no/"
+      },
+      "name": "Nord-Odal kommune",
+      "contactPoint": {
+        "email": "postmottak@nord-odal.kommune.no"
+      },
+      "address": {
+        "locality": "Sagstua",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0016",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "https://www.vaaler-he.kommune.no/"
+      },
+      "name": "Våler kommune",
+      "contactPoint": {
+        "email": "postmottak@vaaler-he.kommune.no"
+      },
+      "address": {
+        "locality": "Våler i Solør",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0017",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "https://www.asnes.kommune.no/"
+      },
+      "name": "Åsnes kommune",
+      "contactPoint": {
+        "email": "post@asnes.kommune.no"
+      },
+      "address": {
+        "locality": "Flisa",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0018",
+      "name": "Romerike og Glåmdal tingrett",
+      "address": {
+        "locality": "Kongsvinger",
+        "country": "NO"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "language": "nb",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

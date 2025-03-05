@@ -1,1 +1,172 @@
-{"id": "2023-624725", "initiationType": "tender", "ocid": "ocds-abcd1234-b9b5c9cf-a6b1-48f1-ad4a-a1693d69a078", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0023"}}, "status": "active", "id": "2023-624725", "lots": [{"id": "LOT-0000", "tenderPeriod": {"endDate": "2023-05-23T12:00:00+02:00"}, "submissionTerms": {"electronicSubmissionPolicy": "allowed", "languages": ["no"]}, "title": "Tenestekonsesjon - Brukarstyrt personleg assistanse (BPA)", "mainProcurementCategory": "services", "description": "Bjørnafjorden kommune har vedtatt å innføre brukervalgsordning for brukerstyrt personlig assistanse (BPA). Dette innebærer at brukere som har vedtak om BPA skal kunne velge mellom godkjente private leverandører som leverandør av tjenesten (brukervalg). Leverandører innbys til å søke om tildeling av konsesjon i forbindelse med levering av assistansetimer i BPA-ordningen. Bjørnafjorden kommune har som mål å tildele konsesjon til minimum 5 og maksimum 8 leverandører (forutsatt at det er et tilstrekkelig antall egnede leverandører og tilbud). Det er ønskelig med et tilstrekkelig antall leverandører for å sikre at brukerne sin valgfrihet blir reell. Samtidig har leverandørene etterspørselsrisiko og Bjørnafjorden kommune garanterer ikke et minstevolum antall brukere. En avgrensning i antall leverandører vil gjøre det mulig med et mer solid kundegrunnlag for den enkelte leverandør. Kommunen har ansvaret for kvaliteten på tjenestene som blir ytt til brukerne, også dersom tjenestene blir ytt av privat leverandør. Kommunen vil på bakgrunn av dette følge opp de private leverandørene, noe som kan være ressurskrevende. Det er derfor behov for å avgrense antallet leverandører kommunen inngår avtale med. Det leveres per januar 2023 totalt ca. 880 timer brukerstyrt personlig assistanse til 22 brukere per uke i Bjørnafjorden kommune. Nåværende tjenestekonsesjonsordning har utløpsdato 31.12.2023. Eksisterende vedtak om BPA går også ut 31.12.2023. For alle nye vedtak om BPA med oppstart f.o.m. 01.01.2024 vil bruker bare kunne velge mellom de leverandørene som blir tildelt tjenestekonsesjon i den nye ordningen. Oppdragsgiver har ensidig opsjon på å forlenge kontrakten med 1 + 1 + 1 år", "value": {"amount": 130000000.0, "currency": "NOK"}, "contractPeriod": {"startDate": "2024-01-01T00:00:00+01:00", "endDate": "2026-12-31T23:59:59+01:00"}, "contractTerms": {"performanceTerms": "Se konsesjonsgrunnlaget", "electronicInvoicingPolicy": "Allowed", "hasElectronicPayment": true}, "selectionCriteria": {"criteria": [{"description": "Se konsesjonsgrunnlaget", "languageID": "NOB"}]}, "hasAccessibilityCriteria": false}], "documents": [{"id": "DOCUMENT_ID_REQUIRED_HERE", "documentType": "biddingDocuments", "url": "https://tendsign.no/doc.aspx?UniqueId=afxgligahz&GoTo=Docs", "relatedLots": ["LOT-0000"]}], "title": "Tenestekonsesjon - Brukarstyrt personleg assistanse (BPA)", "identifiers": [{"id": "23/3162", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Bjørnafjorden kommune har vedtatt å innføre brukervalgsordning for brukerstyrt personlig assistanse (BPA). Dette innebærer at brukere som har vedtak om BPA skal kunne velge mellom godkjente private leverandører som leverandør av tjenesten (brukervalg). Leverandører innbys til å søke om tildeling av konsesjon i forbindelse med levering av assistansetimer i BPA-ordningen. Kommunen har som mål å tildele konsesjon til minimum 5 og maksimum 8 leverandører.", "items": [{"id": "1", "additionalClassifications": [{"id": "85312400", "scheme": "CPV"}, {"id": "85323000", "scheme": "CPV"}, {"id": "98000000", "scheme": "CPV"}], "relatedLot": "LOT-0000", "classification": {"scheme": "CPV", "id": "85000000"}, "deliveryAddresses": [{"streetAddress": "Bjørnafjorden kommune"}]}], "value": {"amount": 130000000.0, "currency": "NOK"}, "deliveryAddresses": [{"streetAddress": "Bjørnafjorden kommune"}]}, "tag": ["tender"], "date": "2023-04-26T12:00:00+02:00", "parties": [{"id": "ORG-0001", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "https://bjornafjorden.kommune.no"}, "name": "Bjørnafjorden kommune", "additionalIdentifiers": [{"id": "844 458 312", "scheme": "GB-COH"}], "contactPoint": {"name": "Sissel Hermansen Riise", "email": "sihr@bjornafjorden.kommune.no"}, "address": {"streetAddress": "Postboks 24", "postalCode": "5649", "locality": "Eikelandsosen", "country": "NO"}, "roles": ["buyer", "processContactPoint"]}, {"id": "ORG-0002", "name": "Hordaland tingrett", "address": {"locality": "Bergen", "country": "NO"}, "roles": ["reviewBody"]}], "description": "Mercell kunngjøring: https://opic.com/id/afxgligahz", "language": "nb", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "2023-624725",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-5f477403-b2cd-4126-adf7-1105745ff04d",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0023"
+      }
+    },
+    "status": "active",
+    "id": "2023-624725",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "tenderPeriod": {
+          "endDate": "2023-05-23T12:00:00+02:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "allowed",
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Tenestekonsesjon - Brukarstyrt personleg assistanse (BPA)",
+        "mainProcurementCategory": "services",
+        "description": "Bjørnafjorden kommune har vedtatt å innføre brukervalgsordning for brukerstyrt personlig assistanse (BPA). Dette innebærer at brukere som har vedtak om BPA skal kunne velge mellom godkjente private leverandører som leverandør av tjenesten (brukervalg). Leverandører innbys til å søke om tildeling av konsesjon i forbindelse med levering av assistansetimer i BPA-ordningen. Bjørnafjorden kommune har som mål å tildele konsesjon til minimum 5 og maksimum 8 leverandører (forutsatt at det er et tilstrekkelig antall egnede leverandører og tilbud). Det er ønskelig med et tilstrekkelig antall leverandører for å sikre at brukerne sin valgfrihet blir reell. Samtidig har leverandørene etterspørselsrisiko og Bjørnafjorden kommune garanterer ikke et minstevolum antall brukere. En avgrensning i antall leverandører vil gjøre det mulig med et mer solid kundegrunnlag for den enkelte leverandør. Kommunen har ansvaret for kvaliteten på tjenestene som blir ytt til brukerne, også dersom tjenestene blir ytt av privat leverandør. Kommunen vil på bakgrunn av dette følge opp de private leverandørene, noe som kan være ressurskrevende. Det er derfor behov for å avgrense antallet leverandører kommunen inngår avtale med. Det leveres per januar 2023 totalt ca. 880 timer brukerstyrt personlig assistanse til 22 brukere per uke i Bjørnafjorden kommune. Nåværende tjenestekonsesjonsordning har utløpsdato 31.12.2023. Eksisterende vedtak om BPA går også ut 31.12.2023. For alle nye vedtak om BPA med oppstart f.o.m. 01.01.2024 vil bruker bare kunne velge mellom de leverandørene som blir tildelt tjenestekonsesjon i den nye ordningen. Oppdragsgiver har ensidig opsjon på å forlenge kontrakten med 1 + 1 + 1 år",
+        "value": {
+          "amount": 130000000.0,
+          "currency": "NOK"
+        },
+        "contractPeriod": {
+          "startDate": "2024-01-01T00:00:00+01:00",
+          "endDate": "2026-12-31T23:59:59+01:00"
+        },
+        "contractTerms": {
+          "performanceTerms": "Se konsesjonsgrunnlaget",
+          "electronicInvoicingPolicy": "Allowed",
+          "hasElectronicPayment": true
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "description": "Se konsesjonsgrunnlaget",
+              "languageID": "NOB"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "url": "https://tendsign.no/doc.aspx?UniqueId=afxgligahz&GoTo=Docs",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "Tenestekonsesjon - Brukarstyrt personleg assistanse (BPA)",
+    "identifiers": [
+      {
+        "id": "23/3162",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "services",
+    "description": "Bjørnafjorden kommune har vedtatt å innføre brukervalgsordning for brukerstyrt personlig assistanse (BPA). Dette innebærer at brukere som har vedtak om BPA skal kunne velge mellom godkjente private leverandører som leverandør av tjenesten (brukervalg). Leverandører innbys til å søke om tildeling av konsesjon i forbindelse med levering av assistansetimer i BPA-ordningen. Kommunen har som mål å tildele konsesjon til minimum 5 og maksimum 8 leverandører.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "id": "85312400",
+            "scheme": "CPV"
+          },
+          {
+            "id": "85323000",
+            "scheme": "CPV"
+          },
+          {
+            "id": "98000000",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "85000000"
+        },
+        "deliveryAddresses": [
+          {
+            "streetAddress": "Bjørnafjorden kommune"
+          }
+        ]
+      }
+    ],
+    "value": {
+      "amount": 130000000.0,
+      "currency": "NOK"
+    },
+    "deliveryAddresses": [
+      {
+        "streetAddress": "Bjørnafjorden kommune"
+      }
+    ]
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2023-04-26T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "https://bjornafjorden.kommune.no"
+      },
+      "name": "Bjørnafjorden kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "844 458 312",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Sissel Hermansen Riise",
+        "email": "sihr@bjornafjorden.kommune.no"
+      },
+      "address": {
+        "streetAddress": "Postboks 24",
+        "postalCode": "5649",
+        "locality": "Eikelandsosen",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ]
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Hordaland tingrett",
+      "address": {
+        "locality": "Bergen",
+        "country": "NO"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "description": "Mercell kunngjøring: https://opic.com/id/afxgligahz",
+  "language": "nb",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

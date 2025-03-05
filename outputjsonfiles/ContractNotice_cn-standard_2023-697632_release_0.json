@@ -1,1 +1,144 @@
-{"id": "2023-697632", "initiationType": "tender", "ocid": "ocds-abcd1234-0f6e1d8c-d955-41cc-9e2e-803dafdde0c9", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "OTHER"}}, "status": "active", "id": "2023-697632", "procurementMethod": "open", "procurementMethodDetails": "Open procedure", "lots": [{"id": "LOT-0000", "tenderPeriod": {"endDate": "2023-03-09T12:00:00+02:00"}, "submissionTerms": {"electronicSubmissionPolicy": "allowed", "languages": ["no"]}, "title": "VA Sodin", "mainProcurementCategory": "works", "description": "Det skal legges nye vann- og avløpsledninger ved Sodin skole.", "secondStage": {"minimumCandidates": 0, "successiveReduction": false}, "hasAccessibilityCriteria": false, "techniques": {"hasElectronicAuction": false}, "contractTerms": {"hasElectronicOrdering": false, "hasElectronicPayment": false}}], "documents": [{"id": "DOCUMENT_ID_REQUIRED_HERE", "documentType": "biddingDocuments", "url": "https://tendsign.no/doc.aspx?UniqueId=afsvzyktwe&GoTo=Docs", "relatedLots": ["LOT-0000"]}], "title": "VA Sodin", "identifiers": [{"id": "23/01118", "scheme": "internal"}], "mainProcurementCategory": "works", "description": "Det skal legges nye vann- og avløpsledninger ved Sodin skole.", "items": [{"id": "1", "additionalClassifications": [{"id": "45230000", "scheme": "CPV"}, {"id": "45232000", "scheme": "CPV"}, {"id": "45232150", "scheme": "CPV"}, {"id": "45232400", "scheme": "CPV"}, {"id": "45232420", "scheme": "CPV"}, {"id": "45232440", "scheme": "CPV"}], "relatedLot": "LOT-0000", "classification": {"scheme": "CPV", "id": "45231300"}, "deliveryAddresses": [{"region": "NO060"}]}]}, "tag": ["tender"], "date": "2023-02-17T12:00:00+02:00", "parties": [{"id": "ORG-0001", "name": "Heim kommune", "additionalIdentifiers": [{"id": "920 920 004", "scheme": "GB-COH"}], "contactPoint": {"name": "Olav Aa", "email": "olav.aa@heim.kommune.no"}, "details": {"url": "http://www.heim.kommune.no"}, "address": {"streetAddress": "Trondheimsvn. 1", "postalCode": "7200", "locality": "Kyrksæterøra", "country": "NO"}, "roles": ["buyer", "processContactPoint"]}], "description": "Mercell kunngjøring: https://opic.com/id/afsvzyktwe", "language": "nb", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "2023-697632",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-6298a872-2d10-46e7-999f-beb6465b0ed6",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "OTHER"
+      }
+    },
+    "status": "active",
+    "id": "2023-697632",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Open procedure",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "tenderPeriod": {
+          "endDate": "2023-03-09T12:00:00+02:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "allowed",
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "VA Sodin",
+        "mainProcurementCategory": "works",
+        "description": "Det skal legges nye vann- og avløpsledninger ved Sodin skole.",
+        "secondStage": {
+          "minimumCandidates": 0,
+          "successiveReduction": false
+        },
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "hasElectronicAuction": false
+        },
+        "contractTerms": {
+          "hasElectronicOrdering": false,
+          "hasElectronicPayment": false
+        }
+      }
+    ],
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "url": "https://tendsign.no/doc.aspx?UniqueId=afsvzyktwe&GoTo=Docs",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "VA Sodin",
+    "identifiers": [
+      {
+        "id": "23/01118",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "works",
+    "description": "Det skal legges nye vann- og avløpsledninger ved Sodin skole.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "id": "45230000",
+            "scheme": "CPV"
+          },
+          {
+            "id": "45232000",
+            "scheme": "CPV"
+          },
+          {
+            "id": "45232150",
+            "scheme": "CPV"
+          },
+          {
+            "id": "45232400",
+            "scheme": "CPV"
+          },
+          {
+            "id": "45232420",
+            "scheme": "CPV"
+          },
+          {
+            "id": "45232440",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "45231300"
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO060"
+          }
+        ]
+      }
+    ]
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2023-02-17T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Heim kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "920 920 004",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Olav Aa",
+        "email": "olav.aa@heim.kommune.no"
+      },
+      "details": {
+        "url": "http://www.heim.kommune.no"
+      },
+      "address": {
+        "streetAddress": "Trondheimsvn. 1",
+        "postalCode": "7200",
+        "locality": "Kyrksæterøra",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ]
+    }
+  ],
+  "description": "Mercell kunngjøring: https://opic.com/id/afsvzyktwe",
+  "language": "nb",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

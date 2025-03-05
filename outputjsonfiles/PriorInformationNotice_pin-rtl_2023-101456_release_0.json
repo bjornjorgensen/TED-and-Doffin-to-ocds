@@ -1,1 +1,168 @@
-{"id": "ee5f74f4-d24f-4c67-beca-c7e4a17d16e4", "initiationType": "tender", "ocid": "ocds-abcd1234-127b920f-f6f1-42f4-8c13-2fb6f972c188", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "status": "planned", "lots": [{"id": "LOT-0000", "coveredBy": ["GPA"], "submissionTerms": {"electronicSubmissionPolicy": "required", "languages": ["no"]}, "title": "Forespørsel om byttekostnad – pasientovervåkning Nye Hammerfest Sykehus", "identifiers": [{"id": "2023/00092", "scheme": "internal"}], "mainProcurementCategory": "goods", "description": "Sykehusinnkjøp HF ønsker kartlegge byttekostnader for pasientovervåkningsutstyr til Nye Hammerfest Sykehus.", "value": {"amount": 7000000.0, "currency": "NOK"}, "contractPeriod": {"startDate": "2024-03-01T00:00:00+00:00", "endDate": "2026-03-01T23:59:59+00:00"}, "hasAccessibilityCriteria": false}], "documents": [{"id": "217218001", "documentType": "biddingDocuments", "url": "https://permalink.mercell.com/217218001.aspx", "relatedLots": ["LOT-0000"]}], "title": "Forespørsel om byttekostnad – pasientovervåkning Nye Hammerfest Sykehus", "identifiers": [{"id": "2023/00092", "scheme": "internal"}], "mainProcurementCategory": "goods", "description": "Sykehusinnkjøp HF ønsker kartlegge byttekostnader for pasientovervåkningsutstyr til Nye Hammerfest Sykehus.", "items": [{"id": "1", "classification": {"scheme": "CPV", "id": "33195000"}, "relatedLot": "LOT-0000", "deliveryAddresses": [{"region": "NO074"}, {"country": "NO"}]}], "value": {"amount": 7000000.0, "currency": "NOK"}, "deliveryAddresses": [{"region": "NO074"}, {"country": "NO"}], "procurementMethodDetails": "Se vedlagte dokument for mer informasjon. Vi ber om at leverandører som ønsker at det gjøres en vurdering av byttekostnader om å melde interesse via kommunikasjonsmodulen i Mercell innen 07.12.2024, kl.15.00."}, "tag": ["tender"], "date": "2023-11-24T12:10:54+00:00", "parties": [{"id": "ORG-0001", "details": {"classifications": [{"scheme": "COFOG", "id": "07", "description": "Health"}, {"scheme": "eu-buyer-legal-type", "id": "pub-undert", "description": "Public undertaking"}], "url": "https://permalink.mercell.com/217218001.aspx", "buyerProfile": "http://www.sykehusinnkjop.no/"}, "name": "SYKEHUSINNKJØP HF", "additionalIdentifiers": [{"id": "916879067", "scheme": "GB-COH"}], "contactPoint": {"name": "Postmottak Sykehusinnkjøp", "telephone": "+47 78950700", "email": "post@sykehusinnkjop.no"}, "roles": ["buyer", "processContactPoint"], "address": {"streetAddress": "Postboks 40", "postalCode": "9811", "locality": "VADSØ", "country": "NO"}}, {"id": "ORG-0002", "name": "Vestre Finnmark tingrett ", "additionalIdentifiers": [{"id": "926 722 956", "scheme": "GB-COH"}], "contactPoint": {"telephone": "78 78 31 00", "email": "vestre.finnmark.tingrett@domstol.no"}, "address": {"locality": "Alta", "country": "NO"}, "roles": ["reviewBody"]}], "language": "no", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "ee5f74f4-d24f-4c67-beca-c7e4a17d16e4",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-7fc52046-3e7b-48e1-b2d7-543186c8b7da",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "status": "planned",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "coveredBy": [
+          "GPA"
+        ],
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Forespørsel om byttekostnad – pasientovervåkning Nye Hammerfest Sykehus",
+        "identifiers": [
+          {
+            "id": "2023/00092",
+            "scheme": "internal"
+          }
+        ],
+        "mainProcurementCategory": "goods",
+        "description": "Sykehusinnkjøp HF ønsker kartlegge byttekostnader for pasientovervåkningsutstyr til Nye Hammerfest Sykehus.",
+        "value": {
+          "amount": 7000000.0,
+          "currency": "NOK"
+        },
+        "contractPeriod": {
+          "startDate": "2024-03-01T00:00:00+00:00",
+          "endDate": "2026-03-01T23:59:59+00:00"
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "217218001",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/217218001.aspx",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "Forespørsel om byttekostnad – pasientovervåkning Nye Hammerfest Sykehus",
+    "identifiers": [
+      {
+        "id": "2023/00092",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "goods",
+    "description": "Sykehusinnkjøp HF ønsker kartlegge byttekostnader for pasientovervåkningsutstyr til Nye Hammerfest Sykehus.",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "33195000"
+        },
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "region": "NO074"
+          },
+          {
+            "country": "NO"
+          }
+        ]
+      }
+    ],
+    "value": {
+      "amount": 7000000.0,
+      "currency": "NOK"
+    },
+    "deliveryAddresses": [
+      {
+        "region": "NO074"
+      },
+      {
+        "country": "NO"
+      }
+    ],
+    "procurementMethodDetails": "Se vedlagte dokument for mer informasjon. Vi ber om at leverandører som ønsker at det gjøres en vurdering av byttekostnader om å melde interesse via kommunikasjonsmodulen i Mercell innen 07.12.2024, kl.15.00."
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2023-11-24T12:10:54+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "07",
+            "description": "Health"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "pub-undert",
+            "description": "Public undertaking"
+          }
+        ],
+        "url": "https://permalink.mercell.com/217218001.aspx",
+        "buyerProfile": "http://www.sykehusinnkjop.no/"
+      },
+      "name": "SYKEHUSINNKJØP HF",
+      "additionalIdentifiers": [
+        {
+          "id": "916879067",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Postmottak Sykehusinnkjøp",
+        "telephone": "+47 78950700",
+        "email": "post@sykehusinnkjop.no"
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ],
+      "address": {
+        "streetAddress": "Postboks 40",
+        "postalCode": "9811",
+        "locality": "VADSØ",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Vestre Finnmark tingrett ",
+      "additionalIdentifiers": [
+        {
+          "id": "926 722 956",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "78 78 31 00",
+        "email": "vestre.finnmark.tingrett@domstol.no"
+      },
+      "address": {
+        "locality": "Alta",
+        "country": "NO"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "language": "no",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

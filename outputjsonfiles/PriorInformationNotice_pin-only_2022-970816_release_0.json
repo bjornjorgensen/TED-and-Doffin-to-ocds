@@ -1,1 +1,101 @@
-{"id": "2022-970816", "initiationType": "tender", "ocid": "ocds-abcd1234-4ecf4762-0510-4003-aac2-dc7c7f92c8ca", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "OTHER"}}, "status": "planned", "id": "PAR-0000", "title": "Intensjonskunngjøring - Spillsimulering", "titleLanguage": "NOB", "identifiers": [{"id": "2022/50851", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Rogaland fylkeskommune har til hensikt å inngå kontrakt uten konkurranse med Attensi AS for levering av en løsning i kategorien «Læringsinnhold», med spillsimulert trening i personvern. Læringsinnholdet består av e-læring, kurs, veiledere og spillsimulert opplæring.", "items": [{"id": "1", "additionalClassifications": [{"scheme": "CPV", "id": "48190000"}, {"id": "48931000", "scheme": "cpv"}, {"id": "72212190", "scheme": "cpv"}], "classification": {"scheme": "CPV", "id": "72212931"}}], "deliveryAddresses": [{"streetAddress": "Stavanger"}]}, "tag": ["tender"], "date": "2022-10-28T12:00:00+02:00", "parties": [{"id": "ORG-0001", "name": "Rogaland Fylkeskommune", "additionalIdentifiers": [{"id": "971 045 698", "scheme": "GB-COH"}], "contactPoint": {"name": "Bjørn Olav Vorland", "email": "Bjorn.Olav.Vorland@rogfk.no"}, "details": {"url": "http://www.rogfk.no"}, "address": {"streetAddress": "Arkitekt Eckhoffsgate 1", "postalCode": "4010", "locality": "Stavanger", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0002", "name": "Attensi AS", "details": {"url": "https://attensi.com/no/"}, "address": {"locality": "Oslo", "country": "NO"}}], "description": "Mercell kunngjøring: https://opic.com/id/afluzqqmxt", "language": "nb", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "2022-970816",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-5b4e9f8a-1b6d-4d27-8e34-dc9c83f4c663",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "OTHER"
+      }
+    },
+    "status": "planned",
+    "id": "PAR-0000",
+    "title": "Intensjonskunngjøring - Spillsimulering",
+    "titleLanguage": "NOB",
+    "identifiers": [
+      {
+        "id": "2022/50851",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "services",
+    "description": "Rogaland fylkeskommune har til hensikt å inngå kontrakt uten konkurranse med Attensi AS for levering av en løsning i kategorien «Læringsinnhold», med spillsimulert trening i personvern. Læringsinnholdet består av e-læring, kurs, veiledere og spillsimulert opplæring.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV",
+            "id": "48190000"
+          },
+          {
+            "id": "48931000",
+            "scheme": "cpv"
+          },
+          {
+            "id": "72212190",
+            "scheme": "cpv"
+          }
+        ],
+        "classification": {
+          "scheme": "CPV",
+          "id": "72212931"
+        }
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "streetAddress": "Stavanger"
+      }
+    ]
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2022-10-28T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Rogaland Fylkeskommune",
+      "additionalIdentifiers": [
+        {
+          "id": "971 045 698",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Bjørn Olav Vorland",
+        "email": "Bjorn.Olav.Vorland@rogfk.no"
+      },
+      "details": {
+        "url": "http://www.rogfk.no"
+      },
+      "address": {
+        "streetAddress": "Arkitekt Eckhoffsgate 1",
+        "postalCode": "4010",
+        "locality": "Stavanger",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Attensi AS",
+      "details": {
+        "url": "https://attensi.com/no/"
+      },
+      "address": {
+        "locality": "Oslo",
+        "country": "NO"
+      }
+    }
+  ],
+  "description": "Mercell kunngjøring: https://opic.com/id/afluzqqmxt",
+  "language": "nb",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

@@ -1,1 +1,208 @@
-{"id": "2022-674620", "initiationType": "tender", "ocid": "ocds-abcd1234-2c08c74a-e6d4-45de-9b15-089ac8e31f36", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "status": "complete", "id": "2022-674620", "procurementMethod": "limited", "procurementMethodDetails": "Negotiated without prior call for competition", "procurementMethodRationale": "§ 13-4. Tilsvarende kontrakt har vært ute på full konkurranse tidligere, samt vært intensjonskunngjort to ganger tidligere. Det finnes ingen andre aktuelle tilbydere.", "procurementMethodRationaleClassifications": [{"scheme": "eu-direct-award-justification", "id": "below-thres", "description": "Contracts with estimated value below the procurement thresholds"}], "lots": [{"id": "LOT-0000", "submissionTerms": {"electronicSubmissionPolicy": "not-allowed"}, "title": "Helseovervåking av vilt - ViltHOP 2023-2027", "mainProcurementCategory": "services", "description": "Landsdekkende hovedaktiviteter 1. Sykdomsdiagnostikk på innsendt materiale. 2. Web-basert overvåking av helsestatus i bestandene via Hjorteviltregisteret. 3. Systematiske innsamlinger. 4. HOP-banken - ivaretakelse av blodprøver og vevsmateriale. 5. Forskning.", "hasAccessibilityCriteria": false}], "title": "Helseovervåking av vilt - ViltHOP 2023-2027", "identifiers": [{"id": "23087006", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Hovedmålet med programmet er kartlegging og overvåking av ulike sykdommer hos vilt med hovedfokus på hjortevilt. I tillegg skal programmet bidra til å oppklare årsak til sykdom hos enkeltindivider, fange opp økt sykdomsforekomst eller dødelighet i lokale bestander, samt kontinuerlig arbeide med problemstillinger knyttet til overføring av smittsomme sykdommer. Slike overførbare sykdommer kan skje mellom artene eller mellom husdyr og vilt, samt fra dyr til menneske.", "items": [{"id": "1", "classification": {"scheme": "CPV", "id": "75100000"}, "relatedLot": "LOT-0000", "deliveryAddresses": [{"streetAddress": "Hele landet inkl Svalbard"}]}], "deliveryAddresses": [{"streetAddress": "Hele landet inkl Svalbard"}]}, "tag": ["award", "contract"], "date": "2022-12-20T12:00:00+02:00", "parties": [{"id": "ORG-0001", "details": {"classifications": [{"scheme": "COFOG", "id": "05", "description": "Environmental protection"}, {"scheme": "eu-buyer-legal-type", "id": "cga", "description": "Central government authority"}], "url": "WWW.MILJODIR.NO", "buyerProfile": "www.vetinst.no"}, "name": "Miljødirektoratet", "additionalIdentifiers": [{"id": "999 601 391", "scheme": "GB-COH"}], "contactPoint": {"name": "Erik Lund", "telephone": "+47 73580500", "email": "erik.lund@miljodir.no"}, "roles": ["buyer"], "address": {"streetAddress": "PB 5672 Sluppen", "postalCode": "7485", "locality": "Trondheim", "country": "NO"}}, {"id": "ORG-0002", "name": "Veterinærinstituttet", "roles": ["supplier", "tenderer"], "additionalIdentifiers": [{"id": "970955623", "scheme": "GB-COH"}], "address": {"streetAddress": "Postboks 64", "postalCode": "1431", "locality": "Ås", "country": "NO"}}, {"id": "ORG-0003", "name": "Trondheim Tingrett", "address": {"streetAddress": "Postboks 2317 Torgarden", "postalCode": "7004", "locality": "Trondheim", "country": "NO"}, "roles": ["reviewBody"]}], "awards": [{"id": "RES-0001", "relatedLots": ["LOT-0000"], "status": "active", "statusDetails": "At least one winner was chosen.", "suppliers": [{"id": "ORG-0002"}], "value": {"amount": 21700000.0, "currency": "NOK"}, "relatedBids": ["TEN-0001"]}], "bids": {"details": [{"id": "TEN-0001", "relatedLots": ["LOT-0000"], "value": {"amount": 21700000.0, "currency": "NOK"}, "tenderers": [{"id": "ORG-0002"}]}]}, "contracts": [{"id": "CON-0001", "dateSigned": "2022-12-15T23:59:59Z", "awardID": "RES-0001", "identifiers": [{"id": "23087006", "scheme": "NL-TENDERNED"}], "relatedBids": ["TEN-0001"], "title": "Helseovervåking av vilt - ViltHOP 2023 - 2027"}], "language": "nb", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "2022-674620",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-3efbea97-1953-4ba7-bdc5-9adb00b060a2",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "status": "complete",
+    "id": "2022-674620",
+    "procurementMethod": "limited",
+    "procurementMethodDetails": "Negotiated without prior call for competition",
+    "procurementMethodRationale": "§ 13-4. Tilsvarende kontrakt har vært ute på full konkurranse tidligere, samt vært intensjonskunngjort to ganger tidligere. Det finnes ingen andre aktuelle tilbydere.",
+    "procurementMethodRationaleClassifications": [
+      {
+        "scheme": "eu-direct-award-justification",
+        "id": "below-thres",
+        "description": "Contracts with estimated value below the procurement thresholds"
+      }
+    ],
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "not-allowed"
+        },
+        "title": "Helseovervåking av vilt - ViltHOP 2023-2027",
+        "mainProcurementCategory": "services",
+        "description": "Landsdekkende hovedaktiviteter 1. Sykdomsdiagnostikk på innsendt materiale. 2. Web-basert overvåking av helsestatus i bestandene via Hjorteviltregisteret. 3. Systematiske innsamlinger. 4. HOP-banken - ivaretakelse av blodprøver og vevsmateriale. 5. Forskning.",
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "title": "Helseovervåking av vilt - ViltHOP 2023-2027",
+    "identifiers": [
+      {
+        "id": "23087006",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "services",
+    "description": "Hovedmålet med programmet er kartlegging og overvåking av ulike sykdommer hos vilt med hovedfokus på hjortevilt. I tillegg skal programmet bidra til å oppklare årsak til sykdom hos enkeltindivider, fange opp økt sykdomsforekomst eller dødelighet i lokale bestander, samt kontinuerlig arbeide med problemstillinger knyttet til overføring av smittsomme sykdommer. Slike overførbare sykdommer kan skje mellom artene eller mellom husdyr og vilt, samt fra dyr til menneske.",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "75100000"
+        },
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "streetAddress": "Hele landet inkl Svalbard"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "streetAddress": "Hele landet inkl Svalbard"
+      }
+    ]
+  },
+  "tag": [
+    "award",
+    "contract"
+  ],
+  "date": "2022-12-20T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "05",
+            "description": "Environmental protection"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "cga",
+            "description": "Central government authority"
+          }
+        ],
+        "url": "WWW.MILJODIR.NO",
+        "buyerProfile": "www.vetinst.no"
+      },
+      "name": "Miljødirektoratet",
+      "additionalIdentifiers": [
+        {
+          "id": "999 601 391",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Erik Lund",
+        "telephone": "+47 73580500",
+        "email": "erik.lund@miljodir.no"
+      },
+      "roles": [
+        "buyer"
+      ],
+      "address": {
+        "streetAddress": "PB 5672 Sluppen",
+        "postalCode": "7485",
+        "locality": "Trondheim",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Veterinærinstituttet",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "970955623",
+          "scheme": "GB-COH"
+        }
+      ],
+      "address": {
+        "streetAddress": "Postboks 64",
+        "postalCode": "1431",
+        "locality": "Ås",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Trondheim Tingrett",
+      "address": {
+        "streetAddress": "Postboks 2317 Torgarden",
+        "postalCode": "7004",
+        "locality": "Trondheim",
+        "country": "NO"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "id": "RES-0001",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
+      "value": {
+        "amount": 21700000.0,
+        "currency": "NOK"
+      },
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 21700000.0,
+          "currency": "NOK"
+        },
+        "tenderers": [
+          {
+            "id": "ORG-0002"
+          }
+        ]
+      }
+    ]
+  },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2022-12-15T23:59:59Z",
+      "awardID": "RES-0001",
+      "identifiers": [
+        {
+          "id": "23087006",
+          "scheme": "NL-TENDERNED"
+        }
+      ],
+      "relatedBids": [
+        "TEN-0001"
+      ],
+      "title": "Helseovervåking av vilt - ViltHOP 2023 - 2027"
+    }
+  ],
+  "language": "nb",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

@@ -1,1 +1,200 @@
-{"id": "2023-698775", "initiationType": "tender", "ocid": "ocds-abcd1234-f96d7226-55ac-4a60-b80f-87f8855bbca0", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "status": "active", "id": "2023-698775", "procurementMethod": "open", "procurementMethodDetails": "Open procedure", "lots": [{"id": "LOT-0001", "coveredBy": ["GPA"], "tenderPeriod": {"endDate": "2023-06-30T14:00:00+02:00"}, "awardPeriod": {"startDate": "2023-06-30T14:30:00+02:00"}, "bidOpening": {"date": "2023-06-30T14:30:00+02:00", "location": {"description": "Waco Forsikringsmegling AS sine lokaler, Meierigata 17, 4340 Bryne"}, "description": "Waco Forsikringsmegling sine ansatte."}, "submissionTerms": {"electronicSubmissionPolicy": "not-allowed", "variantPolicy": "notAllowed", "languages": ["no"], "bidValidityPeriod": {"durationInDays": 215}}, "title": "2024,011", "mainProcurementCategory": "services", "description": "Utfyllende informasjon gitt i konkurransegrunnlaget.", "secondStage": {"minimumCandidates": 0, "successiveReduction": false}, "contractPeriod": {"startDate": "2024-01-01T00:00:00+01:00", "endDate": "2025-12-31T23:59:59+01:00"}, "awardCriteria": {"criteria": [{"description": "Price is not the only award criterion and all criteria are stated only in the procurement documents."}]}, "options": {"description": "Avtalen gjelder 2 år med opsjon for ytterliggere 1 år + 1 år."}, "renewal": {"description": "Avtalen skal gjelde fra 01.01.2024 til og med 31.12.2025, med opsjon for ytterliggere 1 år + 1 år. Evtentuelle avvik for varighet blir beskrevet i konkurransegrunnlaget.", "maximumRenewals": 0}, "selectionCriteria": {"criteria": [{"description": "Viser til konkurransegrunnlaget.", "languageID": "NOB"}]}, "hasAccessibilityCriteria": false, "techniques": {"hasElectronicAuction": false}, "contractTerms": {"hasElectronicOrdering": false, "hasElectronicPayment": false}, "hasRecurrence": false}], "documents": [{"id": "DOCUMENT_ID_REQUIRED_HERE", "documentType": "biddingDocuments", "accessDetails": "Unknown justification", "relatedLots": ["LOT-0001"], "accessDetailsURL": "www.waco.no"}], "title": "34 kommuner med tilhørende foretak", "identifiers": [{"id": "2024,1", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Innkjøp av forsikringer for kommuner med tilhørende foretak i henhold til utfyllende opplysninger i konkurransegrunnlaget.", "items": [{"id": "1", "additionalClassifications": [{"id": "66510000", "scheme": "CPV"}], "relatedLot": "LOT-0001", "classification": {"scheme": "CPV", "id": "66510000"}, "deliveryAddresses": [{"streetAddress": "Norge"}]}], "lotDetails": {"maximumLotsBidPerSupplier": 1}, "deliveryAddresses": [{"streetAddress": "Norge"}]}, "tag": ["tender"], "date": "2023-05-25T12:00:00+02:00", "parties": [{"id": "ORG-0001", "details": {"classifications": [{"scheme": "eu-buyer-legal-type", "id": "body-pl", "description": "Body governed by public law"}], "url": "https://waco.no", "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/3493"}, "name": "Waco Forsikringsmegling AS ", "additionalIdentifiers": [{"id": "966 844 515", "scheme": "GB-COH"}], "contactPoint": {"name": "Aase Meling", "telephone": "+47 51779596", "email": "aase@waco.no"}, "roles": ["buyer", "processContactPoint", "submissionReceiptBody"], "address": {"streetAddress": "Meierigata 17", "postalCode": "4349", "locality": "Bryne", "country": "NO"}}, {"id": "ORG-0002", "name": "Jæren tingrett", "address": {"streetAddress": "Olav`s plass 1", "postalCode": "4306", "locality": "Sandnes", "country": "NO"}, "roles": ["reviewBody"]}], "description": "Siste frist for spørsmål til konkurransegrunnlaget er satt til fredag 16.06.2023 kl. 14:00.", "language": "nb", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "2023-698775",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-1e26028c-7368-4046-ae2b-bbd2a76a472c",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "status": "active",
+    "id": "2023-698775",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Open procedure",
+    "lots": [
+      {
+        "id": "LOT-0001",
+        "coveredBy": [
+          "GPA"
+        ],
+        "tenderPeriod": {
+          "endDate": "2023-06-30T14:00:00+02:00"
+        },
+        "awardPeriod": {
+          "startDate": "2023-06-30T14:30:00+02:00"
+        },
+        "bidOpening": {
+          "date": "2023-06-30T14:30:00+02:00",
+          "location": {
+            "description": "Waco Forsikringsmegling AS sine lokaler, Meierigata 17, 4340 Bryne"
+          },
+          "description": "Waco Forsikringsmegling sine ansatte."
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "not-allowed",
+          "variantPolicy": "notAllowed",
+          "languages": [
+            "no"
+          ],
+          "bidValidityPeriod": {
+            "durationInDays": 215
+          }
+        },
+        "title": "2024,011",
+        "mainProcurementCategory": "services",
+        "description": "Utfyllende informasjon gitt i konkurransegrunnlaget.",
+        "secondStage": {
+          "minimumCandidates": 0,
+          "successiveReduction": false
+        },
+        "contractPeriod": {
+          "startDate": "2024-01-01T00:00:00+01:00",
+          "endDate": "2025-12-31T23:59:59+01:00"
+        },
+        "awardCriteria": {
+          "criteria": [
+            {
+              "description": "Price is not the only award criterion and all criteria are stated only in the procurement documents."
+            }
+          ]
+        },
+        "options": {
+          "description": "Avtalen gjelder 2 år med opsjon for ytterliggere 1 år + 1 år."
+        },
+        "renewal": {
+          "description": "Avtalen skal gjelde fra 01.01.2024 til og med 31.12.2025, med opsjon for ytterliggere 1 år + 1 år. Evtentuelle avvik for varighet blir beskrevet i konkurransegrunnlaget.",
+          "maximumRenewals": 0
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "description": "Viser til konkurransegrunnlaget.",
+              "languageID": "NOB"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "hasElectronicAuction": false
+        },
+        "contractTerms": {
+          "hasElectronicOrdering": false,
+          "hasElectronicPayment": false
+        },
+        "hasRecurrence": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "accessDetails": "Unknown justification",
+        "relatedLots": [
+          "LOT-0001"
+        ],
+        "accessDetailsURL": "www.waco.no"
+      }
+    ],
+    "title": "34 kommuner med tilhørende foretak",
+    "identifiers": [
+      {
+        "id": "2024,1",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "services",
+    "description": "Innkjøp av forsikringer for kommuner med tilhørende foretak i henhold til utfyllende opplysninger i konkurransegrunnlaget.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "id": "66510000",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0001",
+        "classification": {
+          "scheme": "CPV",
+          "id": "66510000"
+        },
+        "deliveryAddresses": [
+          {
+            "streetAddress": "Norge"
+          }
+        ]
+      }
+    ],
+    "lotDetails": {
+      "maximumLotsBidPerSupplier": 1
+    },
+    "deliveryAddresses": [
+      {
+        "streetAddress": "Norge"
+      }
+    ]
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2023-05-25T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
+          }
+        ],
+        "url": "https://waco.no",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/3493"
+      },
+      "name": "Waco Forsikringsmegling AS ",
+      "additionalIdentifiers": [
+        {
+          "id": "966 844 515",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Aase Meling",
+        "telephone": "+47 51779596",
+        "email": "aase@waco.no"
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint",
+        "submissionReceiptBody"
+      ],
+      "address": {
+        "streetAddress": "Meierigata 17",
+        "postalCode": "4349",
+        "locality": "Bryne",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Jæren tingrett",
+      "address": {
+        "streetAddress": "Olav`s plass 1",
+        "postalCode": "4306",
+        "locality": "Sandnes",
+        "country": "NO"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "description": "Siste frist for spørsmål til konkurransegrunnlaget er satt til fredag 16.06.2023 kl. 14:00.",
+  "language": "nb",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

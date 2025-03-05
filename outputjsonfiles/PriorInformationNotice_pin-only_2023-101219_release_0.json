@@ -1,1 +1,142 @@
-{"id": "0e2b63aa-a91a-49c6-aa1c-386516ec2275", "initiationType": "tender", "ocid": "ocds-abcd1234-45cce4b6-c068-4b6c-8841-dfec3a41b9e5", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "status": "planned", "coveredBy": ["GPA"], "communication": {"futureNoticeDate": "2024-02-29T00:00:00+01:00"}, "id": "PAR-0000", "documents": [{"id": "216889791", "documentType": "biddingDocuments", "url": "https://permalink.mercell.com/216889791.aspx"}], "title": "Invitasjon til markedsdialog - Treningsutstyr til fysio- og ergoterapi Helse Midt-Norge", "titleLanguage": "NOR", "identifiers": [{"id": "2023/724", "scheme": "internal"}], "mainProcurementCategory": "goods", "description": "Sykehusinnkjøp skal på vegne av Helse Midt-Norge RHF gjennomføre en regional anbudskonkurranse. Anskaffelsens formål er treningsutstyr til fysio- og ergoterapi.I den forbindelse inviteres leverandørmarkedet til dialogmøte tirsdag 12. desember 2023. Beklager kort frist. Møtet vil være i Sykehusinnkjøps lokaler i Trondheim, Abels gt. 5, 7030 Trondheim.Påmelding ønskes innen 05. desember 2023.", "items": [{"id": "1", "additionalClassifications": [{"scheme": "CPV", "id": "33155000"}], "classification": {"scheme": "CPV", "id": "33000000"}}], "value": {"amount": 2000000.0, "currency": "NOK"}, "deliveryAddresses": [{"region": "NO060"}, {"region": "NO0A3"}, {"region": "NO060"}, {"region": "NO0A3"}, {"country": "NO"}]}, "tag": ["tender"], "date": "2023-11-20T11:28:31+00:00", "parties": [{"id": "ORG-0001", "details": {"classifications": [{"scheme": "COFOG", "id": "07", "description": "Health"}, {"scheme": "eu-buyer-legal-type", "id": "pub-undert", "description": "Public undertaking"}], "url": "https://permalink.mercell.com/216889791.aspx", "buyerProfile": "http://www.sykehusinnkjop.no/"}, "name": "SYKEHUSINNKJØP HF", "additionalIdentifiers": [{"id": "916879067", "scheme": "GB-COH"}], "contactPoint": {"name": "Postmottak Sykehusinnkjøp", "telephone": "+47 78950700", "email": "post@sykehusinnkjop.no"}, "roles": ["buyer"], "address": {"streetAddress": "Postboks 40", "postalCode": "9811", "locality": "VADSØ", "country": "NO"}}, {"id": "ORG-0002", "name": "Indre og Østre Finnmark tingrett", "additionalIdentifiers": [{"id": "926722840", "scheme": "GB-COH"}], "contactPoint": {"telephone": "78011700", "email": "indre.og.ostre.finnmark.tingrett@domstol.no"}, "address": {"locality": "VADSØ", "country": "NO"}}], "language": "no", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "0e2b63aa-a91a-49c6-aa1c-386516ec2275",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-da276feb-be5a-4f44-9089-2a373f2f636f",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "status": "planned",
+    "coveredBy": [
+      "GPA"
+    ],
+    "communication": {
+      "futureNoticeDate": "2024-02-29T00:00:00+01:00"
+    },
+    "id": "PAR-0000",
+    "documents": [
+      {
+        "id": "216889791",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/216889791.aspx"
+      }
+    ],
+    "title": "Invitasjon til markedsdialog - Treningsutstyr til fysio- og ergoterapi Helse Midt-Norge",
+    "titleLanguage": "NOR",
+    "identifiers": [
+      {
+        "id": "2023/724",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "goods",
+    "description": "Sykehusinnkjøp skal på vegne av Helse Midt-Norge RHF gjennomføre en regional anbudskonkurranse. Anskaffelsens formål er treningsutstyr til fysio- og ergoterapi.I den forbindelse inviteres leverandørmarkedet til dialogmøte tirsdag 12. desember 2023. Beklager kort frist. Møtet vil være i Sykehusinnkjøps lokaler i Trondheim, Abels gt. 5, 7030 Trondheim.Påmelding ønskes innen 05. desember 2023.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "scheme": "CPV",
+            "id": "33155000"
+          }
+        ],
+        "classification": {
+          "scheme": "CPV",
+          "id": "33000000"
+        }
+      }
+    ],
+    "value": {
+      "amount": 2000000.0,
+      "currency": "NOK"
+    },
+    "deliveryAddresses": [
+      {
+        "region": "NO060"
+      },
+      {
+        "region": "NO0A3"
+      },
+      {
+        "region": "NO060"
+      },
+      {
+        "region": "NO0A3"
+      },
+      {
+        "country": "NO"
+      }
+    ]
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2023-11-20T11:28:31+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "07",
+            "description": "Health"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "pub-undert",
+            "description": "Public undertaking"
+          }
+        ],
+        "url": "https://permalink.mercell.com/216889791.aspx",
+        "buyerProfile": "http://www.sykehusinnkjop.no/"
+      },
+      "name": "SYKEHUSINNKJØP HF",
+      "additionalIdentifiers": [
+        {
+          "id": "916879067",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Postmottak Sykehusinnkjøp",
+        "telephone": "+47 78950700",
+        "email": "post@sykehusinnkjop.no"
+      },
+      "roles": [
+        "buyer"
+      ],
+      "address": {
+        "streetAddress": "Postboks 40",
+        "postalCode": "9811",
+        "locality": "VADSØ",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Indre og Østre Finnmark tingrett",
+      "additionalIdentifiers": [
+        {
+          "id": "926722840",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "78011700",
+        "email": "indre.og.ostre.finnmark.tingrett@domstol.no"
+      },
+      "address": {
+        "locality": "VADSØ",
+        "country": "NO"
+      }
+    }
+  ],
+  "language": "no",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

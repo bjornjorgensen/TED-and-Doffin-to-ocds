@@ -1,1 +1,266 @@
-{"id": "920077ce-4821-4475-9786-474c473628bd", "initiationType": "tender", "ocid": "ocds-abcd1234-625ecc95-0b2d-4d62-bf91-5eafe6823b74", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "status": "active", "id": "2bb0db26-e90f-43e3-b1d5-c7048369ea83", "procurementMethodDetails": "Se konkurransegrunnlag.", "lots": [{"id": "LOT-0000", "tenderPeriod": {"endDate": "2024-06-17T10:00:00+00:00"}, "title": "Innsamling av husholdningsavfall", "identifiers": [{"id": "1", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Innsamling av husholdningsavfall i kommunene Flakstad, Moskenes, Vestvågøy og Vågan i Lofoten, Norge. Leverandør skal i henhold til oppsatt tømmeplan samle inn husholdningsavfall fra alle abonnenter i regionen med egne kjøretøy samt 2 helelektriske kjøretøy som lånes ut av oppdragsgiver. Oppdraget innebærer å samle inn ca 5.500 tonn avfall fra ca 11.000 husstander. ", "selectionCriteria": {"criteria": [{"description": "Se konkurransegrunnlag.", "languageID": "NOR"}]}, "hasAccessibilityCriteria": false, "submissionTerms": {"languages": ["en", "no", "sv", "da"]}}], "documents": [{"id": "Anskaffelsesdokumenter", "documentType": "biddingDocuments", "url": "https://eu.eu-supply.com/app/rfq/rwlentrance_s.asp?PID=402926&B=", "relatedLots": ["LOT-0000"]}], "title": "Innsamling av husholdningsavfall", "identifiers": [{"id": "0148", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Innsamling av husholdningsavfall i kommunene Flakstad, Moskenes, Vestvågøy og Vågan i Lofoten, Norge. Leverandør skal i henhold til oppsatt tømmeplan samle inn husholdningsavfall fra alle abonnenter i regionen med egne kjøretøy samt 2 helelektriske kjøretøy som lånes ut av oppdragsgiver. Oppdraget innebærer å samle inn ca 5.500 tonn avfall fra ca 11.000 husstander. ", "items": [{"id": "1", "additionalClassifications": [{"id": "90500000", "scheme": "CPV"}, {"id": "90511000", "scheme": "CPV"}, {"id": "90511100", "scheme": "CPV"}, {"id": "90511200", "scheme": "CPV"}], "relatedLot": "LOT-0000", "classification": {"scheme": "CPV", "id": "90512000"}, "deliveryAddresses": [{"region": "NO071"}]}], "deliveryAddresses": [{"region": "NO071"}], "exclusionGrounds": {"criteria": [{"type": "bankr-nat", "description": "Analogous situation like bankruptcy under national law: Er leverandøren i en situasjon hvor han har fått tvungen gjeldsordning?  Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."}, {"type": "bankruptcy", "description": "Bankruptcy: Er leverandøren i en konkurssituasjon? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."}, {"type": "corruption", "description": "Corruption: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for korrupsjon ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?<p>Korrupsjon som definert i artikkel 3 i konvensjonen om bekjempelse av korrupsjon, som involverer tjenestemenn i De Europeiske Fellesskapene eller i Den Europeiske Unions medlemsstater (EUT C 195 av 25.6.1997, s. 1), og i artikkel 2, stk. 1, i Rådets rammeavgjørelse 2003/568/RIA av 22. juli 2003 om bekjempelse av korrupsjon i den private sektor (EUT L 192 av 31.7.2003, s. 54). Denne avvisningsgrunnen omfatter også korrupsjon som definert i nasjonal rett for oppdragsgiveren eller leverandøren.</p>"}, {"type": "cred-arran", "description": "Arrangement with creditors: Er leverandøren i en situasjon hvor han har fått tvungen gjeldsordning?  Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."}, {"type": "crime-org", "description": "participation in a criminal organisation: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for deltakelse i en kriminell organisasjon ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?<p> Deltakelse i en kriminell organisasjon som definert i artikkel 2 i Rådets rammeavgjørelse 2008/841/RIA av 24. oktober 2008 om bekjempelse av organisert kriminalitet (EUT L 300 av 11.11.2008, s. 42)</p>"}, {"type": "distorsion", "description": "Agreements with other economic operators aimed at distorting competition: Har leverandør inngått avtale(r) med andre leverandører med hensikt å vri konkurransen?"}, {"type": "envir-law", "description": "Breaching of obligations in the fields of environmental law: Er leverandøren kjent med å ha begått brudd på bestemmelser om miljø slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."}, {"type": "finan-laund", "description": "Money laundering or terrorist financing: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for hvitvasking av penger eller finansiering av terrorisme ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?<p>Hvitvasking av penger eller finansiering av terrorismeSom definert i artikkel 1 i Europaparlamentets og Rådets direktiv 2005/60/EF av 26. oktober 2005 om forebyggende tiltak mot bruk av det finansielle system til hvitvasking av penger og finansiering av terrorisme (EUT L 309 av 25.11.2005, s. 15).</p>"}, {"type": "fraud", "description": "Fraud: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for bedrageri ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?<p>Bedrageri som  omhandlet i artikkel 1 i konvensjonen om beskyttelse av De Europeiske Fellesskapenes finansielle interesser (EFT C 316 av 27.11.1995, s. 48).</p>"}, {"type": "human-traffic", "description": "Child labour and other forms of trafficking in human beings: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for barnearbeid og andre former for menneskehandel ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?<p>Barnearbeid og andre former for menneskehandel som definert i artikkel 2 i Europaparlamentets og Rådets direktiv 2011/36/EU av 5. april 2011 om forebygging og bekjempelse av menneskehandel og beskyttelse av dets ofre, og om erstatning av Rådets rammeavgjørelse 2002/629/RIA (EUT L 101 av 15.4.2011, s. 1).</p>"}, {"type": "insolvency", "description": "Insolvency: Er leverandøren i en insolvenssituasjon? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."}, {"type": "labour-law", "description": "Breaching of obligations in the fields of labour law: Er leverandøren kjent med å ha begått brudd på bestemmelser om arbeidsforhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."}, {"type": "liq-admin", "description": "Assets being administered by liquidator: Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."}, {"type": "misrepresent", "description": "Guilty of misrepresentation, withheld information, unable to provide required documents and obtained confidential information of this procedure: Har leverandøren:<p>a) gitt grovt uriktige opplysninger ved meddelelsen av opplysningene som kreves for å kontrollere at det ikke er grunnlag for avvisning, eller av at kvalifikasjonskravene er oppfylt,</p><p>b) unnlatt å gi slike opplysninger,</p><p>c) tatt forbehold om straks å fremlegge de støttedokumenter som oppdragsgiver anmoder om, eller</p><p>d) urettmessig påvirket oppdragsgivers beslutningsprosess for å tilegne seg konfidensiell informasjon som kan gi denne en urettmessig fordel i forbindelse med konkurransen, eller uaktsomt har gitt misvisende opplysninger som kan få vesentlig innflytelse på beslutninger om avvisning, utvelgelse eller tildeling?</p>"}, {"type": "nati-ground", "description": "Purely national exclusion grounds: Se konkurransegrunnlag og ESPD skjema."}, {"type": "partic-confl", "description": "Conflict of interest due to its participation in the procurement procedure: Er leverandør oppmerksom på en interessekonflikt slik denne er angitt i nasjonal rett, den relevante kunngjøring eller anskaffelsesdokumentene?"}, {"type": "prep-confl", "description": "Direct or indirect involvement in the preparation of this procurement procedure: Har leverandør eller en virksomhet tilknyttet leverandøren gitt råd til oppdragsgiver eller på annen måte vært involvert i planleggingen av konkurransen?"}, {"type": "prof-misconduct", "description": "Guilty of grave professional misconduct: Har leverandøren begått alvorlige feil i yrkesutøvelsen? Hvis det er relevant, se definisjoner i nasjonal rett, den relevante kunngjøring eller anskaffelsesdokumentene."}, {"type": "sanction", "description": "Early termination, damages or other comparable sanctions: Har leverandør begått vesentlig kontraktsbrudd i forbindelse med oppfyllelsen av en tidligere offentlig kontrakt, en tidligere kontrakt med en offentlig oppdragsgiver eller en tidligere konsesjonskontrakt, der bruddet har ført til heving av kontrakten, erstatning eller andre lignende sanksjoner?"}, {"type": "socsec-law", "description": "Breaching of obligations in the fields of social law: Er leverandøren kjent med å ha begått brudd på bestemmelser om sosiale forhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."}, {"type": "socsec-pay", "description": "Payment of social security contributions: Har leverandør unnlatt å oppfylle alle sine forpliktelser til å betale trygdeavgifter både i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et annet land enn det han er etablert i?"}, {"type": "susp-act", "description": "Business activities are suspended: Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."}, {"type": "tax-pay", "description": "Payment of taxes: Har leverandøren unnlatt å oppfylle sine forpliktelser til å betale skatter og avgifter i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et annet land enn det han er etablert i?"}, {"type": "terr-offence", "description": "Terrorist offences or offences linked to terrorist activities: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitetved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?<p> Terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitet som definert i artikkel 1 og 3 i Rådets rammeavgjørelse 2002/475/RIA av 13. juni 2002 om bekjempelse av terrorisme (EFT L 164 af 22.6.2002, s. 3). Denne avvisningsgrunnen omfatter også oppfordring til, medvirkning til eller forsøk på å begå slike handlinger som omhandlet i artikkel 4 i nevnte rammeavgjørelse.</p>"}]}}, "tag": ["tender"], "date": "2024-05-09T20:33:58+00:00", "parties": [{"id": "ORG-0001", "name": "Avfallsmegling Nord AS", "additionalIdentifiers": [{"id": "925117706", "scheme": "GB-COH"}], "contactPoint": {"name": "Morten Nakling Bangås", "telephone": "+47 91367773", "email": "morten@avfallsmegling.no"}, "details": {"url": "https://www.avfallsmegling.no"}, "address": {"streetAddress": "Dronningens Gate 18", "postalCode": "8006", "locality": "Bodø", "country": "NO"}, "roles": ["submissionReceiptBody"]}, {"id": "ORG-0002", "name": "Lofoten Avfallsselskap IKS", "additionalIdentifiers": [{"id": "971014407", "scheme": "GB-COH"}], "contactPoint": {"telephone": "+4790763659", "email": "post@las-lofoten.no"}, "address": {"locality": "Leknes", "country": "NO"}, "roles": ["buyer", "evaluationBody"]}], "language": "no", "buyer": {"id": "ORG-0002"}}
+{
+  "id": "920077ce-4821-4475-9786-474c473628bd",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-a9de1572-ddf0-4bf9-a267-b486db60375d",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "status": "active",
+    "id": "2bb0db26-e90f-43e3-b1d5-c7048369ea83",
+    "procurementMethodDetails": "Se konkurransegrunnlag.",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "tenderPeriod": {
+          "endDate": "2024-06-17T10:00:00+00:00"
+        },
+        "title": "Innsamling av husholdningsavfall",
+        "identifiers": [
+          {
+            "id": "1",
+            "scheme": "internal"
+          }
+        ],
+        "mainProcurementCategory": "services",
+        "description": "Innsamling av husholdningsavfall i kommunene Flakstad, Moskenes, Vestvågøy og Vågan i Lofoten, Norge. Leverandør skal i henhold til oppsatt tømmeplan samle inn husholdningsavfall fra alle abonnenter i regionen med egne kjøretøy samt 2 helelektriske kjøretøy som lånes ut av oppdragsgiver. Oppdraget innebærer å samle inn ca 5.500 tonn avfall fra ca 11.000 husstander. ",
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "description": "Se konkurransegrunnlag.",
+              "languageID": "NOR"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false,
+        "submissionTerms": {
+          "languages": [
+            "en",
+            "no",
+            "sv",
+            "da"
+          ]
+        }
+      }
+    ],
+    "documents": [
+      {
+        "id": "Anskaffelsesdokumenter",
+        "documentType": "biddingDocuments",
+        "url": "https://eu.eu-supply.com/app/rfq/rwlentrance_s.asp?PID=402926&B=",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "Innsamling av husholdningsavfall",
+    "identifiers": [
+      {
+        "id": "0148",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "services",
+    "description": "Innsamling av husholdningsavfall i kommunene Flakstad, Moskenes, Vestvågøy og Vågan i Lofoten, Norge. Leverandør skal i henhold til oppsatt tømmeplan samle inn husholdningsavfall fra alle abonnenter i regionen med egne kjøretøy samt 2 helelektriske kjøretøy som lånes ut av oppdragsgiver. Oppdraget innebærer å samle inn ca 5.500 tonn avfall fra ca 11.000 husstander. ",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "id": "90500000",
+            "scheme": "CPV"
+          },
+          {
+            "id": "90511000",
+            "scheme": "CPV"
+          },
+          {
+            "id": "90511100",
+            "scheme": "CPV"
+          },
+          {
+            "id": "90511200",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "90512000"
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO071"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "region": "NO071"
+      }
+    ],
+    "exclusionGrounds": {
+      "criteria": [
+        {
+          "type": "bankr-nat",
+          "description": "Analogous situation like bankruptcy under national law: Er leverandøren i en situasjon hvor han har fått tvungen gjeldsordning?  Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."
+        },
+        {
+          "type": "bankruptcy",
+          "description": "Bankruptcy: Er leverandøren i en konkurssituasjon? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."
+        },
+        {
+          "type": "corruption",
+          "description": "Corruption: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for korrupsjon ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?<p>Korrupsjon som definert i artikkel 3 i konvensjonen om bekjempelse av korrupsjon, som involverer tjenestemenn i De Europeiske Fellesskapene eller i Den Europeiske Unions medlemsstater (EUT C 195 av 25.6.1997, s. 1), og i artikkel 2, stk. 1, i Rådets rammeavgjørelse 2003/568/RIA av 22. juli 2003 om bekjempelse av korrupsjon i den private sektor (EUT L 192 av 31.7.2003, s. 54). Denne avvisningsgrunnen omfatter også korrupsjon som definert i nasjonal rett for oppdragsgiveren eller leverandøren.</p>"
+        },
+        {
+          "type": "cred-arran",
+          "description": "Arrangement with creditors: Er leverandøren i en situasjon hvor han har fått tvungen gjeldsordning?  Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."
+        },
+        {
+          "type": "crime-org",
+          "description": "participation in a criminal organisation: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for deltakelse i en kriminell organisasjon ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?<p> Deltakelse i en kriminell organisasjon som definert i artikkel 2 i Rådets rammeavgjørelse 2008/841/RIA av 24. oktober 2008 om bekjempelse av organisert kriminalitet (EUT L 300 av 11.11.2008, s. 42)</p>"
+        },
+        {
+          "type": "distorsion",
+          "description": "Agreements with other economic operators aimed at distorting competition: Har leverandør inngått avtale(r) med andre leverandører med hensikt å vri konkurransen?"
+        },
+        {
+          "type": "envir-law",
+          "description": "Breaching of obligations in the fields of environmental law: Er leverandøren kjent med å ha begått brudd på bestemmelser om miljø slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."
+        },
+        {
+          "type": "finan-laund",
+          "description": "Money laundering or terrorist financing: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for hvitvasking av penger eller finansiering av terrorisme ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?<p>Hvitvasking av penger eller finansiering av terrorismeSom definert i artikkel 1 i Europaparlamentets og Rådets direktiv 2005/60/EF av 26. oktober 2005 om forebyggende tiltak mot bruk av det finansielle system til hvitvasking av penger og finansiering av terrorisme (EUT L 309 av 25.11.2005, s. 15).</p>"
+        },
+        {
+          "type": "fraud",
+          "description": "Fraud: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for bedrageri ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?<p>Bedrageri som  omhandlet i artikkel 1 i konvensjonen om beskyttelse av De Europeiske Fellesskapenes finansielle interesser (EFT C 316 av 27.11.1995, s. 48).</p>"
+        },
+        {
+          "type": "human-traffic",
+          "description": "Child labour and other forms of trafficking in human beings: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for barnearbeid og andre former for menneskehandel ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?<p>Barnearbeid og andre former for menneskehandel som definert i artikkel 2 i Europaparlamentets og Rådets direktiv 2011/36/EU av 5. april 2011 om forebygging og bekjempelse av menneskehandel og beskyttelse av dets ofre, og om erstatning av Rådets rammeavgjørelse 2002/629/RIA (EUT L 101 av 15.4.2011, s. 1).</p>"
+        },
+        {
+          "type": "insolvency",
+          "description": "Insolvency: Er leverandøren i en insolvenssituasjon? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."
+        },
+        {
+          "type": "labour-law",
+          "description": "Breaching of obligations in the fields of labour law: Er leverandøren kjent med å ha begått brudd på bestemmelser om arbeidsforhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."
+        },
+        {
+          "type": "liq-admin",
+          "description": "Assets being administered by liquidator: Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."
+        },
+        {
+          "type": "misrepresent",
+          "description": "Guilty of misrepresentation, withheld information, unable to provide required documents and obtained confidential information of this procedure: Har leverandøren:<p>a) gitt grovt uriktige opplysninger ved meddelelsen av opplysningene som kreves for å kontrollere at det ikke er grunnlag for avvisning, eller av at kvalifikasjonskravene er oppfylt,</p><p>b) unnlatt å gi slike opplysninger,</p><p>c) tatt forbehold om straks å fremlegge de støttedokumenter som oppdragsgiver anmoder om, eller</p><p>d) urettmessig påvirket oppdragsgivers beslutningsprosess for å tilegne seg konfidensiell informasjon som kan gi denne en urettmessig fordel i forbindelse med konkurransen, eller uaktsomt har gitt misvisende opplysninger som kan få vesentlig innflytelse på beslutninger om avvisning, utvelgelse eller tildeling?</p>"
+        },
+        {
+          "type": "nati-ground",
+          "description": "Purely national exclusion grounds: Se konkurransegrunnlag og ESPD skjema."
+        },
+        {
+          "type": "partic-confl",
+          "description": "Conflict of interest due to its participation in the procurement procedure: Er leverandør oppmerksom på en interessekonflikt slik denne er angitt i nasjonal rett, den relevante kunngjøring eller anskaffelsesdokumentene?"
+        },
+        {
+          "type": "prep-confl",
+          "description": "Direct or indirect involvement in the preparation of this procurement procedure: Har leverandør eller en virksomhet tilknyttet leverandøren gitt råd til oppdragsgiver eller på annen måte vært involvert i planleggingen av konkurransen?"
+        },
+        {
+          "type": "prof-misconduct",
+          "description": "Guilty of grave professional misconduct: Har leverandøren begått alvorlige feil i yrkesutøvelsen? Hvis det er relevant, se definisjoner i nasjonal rett, den relevante kunngjøring eller anskaffelsesdokumentene."
+        },
+        {
+          "type": "sanction",
+          "description": "Early termination, damages or other comparable sanctions: Har leverandør begått vesentlig kontraktsbrudd i forbindelse med oppfyllelsen av en tidligere offentlig kontrakt, en tidligere kontrakt med en offentlig oppdragsgiver eller en tidligere konsesjonskontrakt, der bruddet har ført til heving av kontrakten, erstatning eller andre lignende sanksjoner?"
+        },
+        {
+          "type": "socsec-law",
+          "description": "Breaching of obligations in the fields of social law: Er leverandøren kjent med å ha begått brudd på bestemmelser om sosiale forhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."
+        },
+        {
+          "type": "socsec-pay",
+          "description": "Payment of social security contributions: Har leverandør unnlatt å oppfylle alle sine forpliktelser til å betale trygdeavgifter både i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et annet land enn det han er etablert i?"
+        },
+        {
+          "type": "susp-act",
+          "description": "Business activities are suspended: Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."
+        },
+        {
+          "type": "tax-pay",
+          "description": "Payment of taxes: Har leverandøren unnlatt å oppfylle sine forpliktelser til å betale skatter og avgifter i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et annet land enn det han er etablert i?"
+        },
+        {
+          "type": "terr-offence",
+          "description": "Terrorist offences or offences linked to terrorist activities: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitetved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?<p> Terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitet som definert i artikkel 1 og 3 i Rådets rammeavgjørelse 2002/475/RIA av 13. juni 2002 om bekjempelse av terrorisme (EFT L 164 af 22.6.2002, s. 3). Denne avvisningsgrunnen omfatter også oppfordring til, medvirkning til eller forsøk på å begå slike handlinger som omhandlet i artikkel 4 i nevnte rammeavgjørelse.</p>"
+        }
+      ]
+    }
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2024-05-09T20:33:58+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Avfallsmegling Nord AS",
+      "additionalIdentifiers": [
+        {
+          "id": "925117706",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Morten Nakling Bangås",
+        "telephone": "+47 91367773",
+        "email": "morten@avfallsmegling.no"
+      },
+      "details": {
+        "url": "https://www.avfallsmegling.no"
+      },
+      "address": {
+        "streetAddress": "Dronningens Gate 18",
+        "postalCode": "8006",
+        "locality": "Bodø",
+        "country": "NO"
+      },
+      "roles": [
+        "submissionReceiptBody"
+      ]
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Lofoten Avfallsselskap IKS",
+      "additionalIdentifiers": [
+        {
+          "id": "971014407",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "+4790763659",
+        "email": "post@las-lofoten.no"
+      },
+      "address": {
+        "locality": "Leknes",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer",
+        "evaluationBody"
+      ]
+    }
+  ],
+  "language": "no",
+  "buyer": {
+    "id": "ORG-0002"
+  }
+}

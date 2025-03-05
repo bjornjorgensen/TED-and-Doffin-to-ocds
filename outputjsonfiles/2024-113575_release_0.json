@@ -1,1 +1,388 @@
-{"id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b", "initiationType": "tender", "ocid": "ocds-abcd1234-00df9750-e8d2-4e4a-9b2f-a8f09efab06d", "tender": {"legalBasis": {"id": "FOA § 13-4 bokstav b annet punkt; «konkurranse er umulig av tekniske årsaker».", "scheme": "ELI", "description": "Det synes sannsynlig at det ikke eksisterer andre leverandører som kan eller vil kunne bli i stand til å levere ytelsen oppdragsgiver har behov for innenfor den tidsrammen som er til rådighet. \n\nDet synes sannsynlig at bare er en leverandør kan levere en digital patologiløsning som fungerer sammen med oppdragsgivers multimedialøsning, på en tilstrekkelig sikker måte.  ", "multilingualDescriptions": [{"language": "NOR", "text": "Det synes sannsynlig at det ikke eksisterer andre leverandører som kan eller vil kunne bli i stand til å levere ytelsen oppdragsgiver har behov for innenfor den tidsrammen som er til rådighet. \n\nDet synes sannsynlig at bare er en leverandør kan levere en digital patologiløsning som fungerer sammen med oppdragsgivers multimedialøsning, på en tilstrekkelig sikker måte.  "}, {"language": "ENG", "text": "It seems likely that there are no other suppliers who can or may be able to deliver the services that the Contracting Authority needs within the timeframe at our disposal. \n\nIt seems likely that only one supplier can deliver a digital pathology system that functions together with the contracting authority ́s multi-media system in a sufficiently secure way.  "}], "wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "status": "complete", "id": "b5d2a051-0b57-4cdc-a499-9001c2c5b231", "procurementMethod": "limited", "procurementMethodDetails": "Negotiated without prior call for competition", "lots": [{"id": "LOT-0000", "coveredBy": ["GPA"], "title": "Intensjonskunngjøring Digital patologisystem, Helse Nord", "identifiers": [{"id": "2024/1261", "scheme": "internal"}], "mainProcurementCategory": "goods", "description": "Det har vært gjennomført direkteforhandling med Sectra Norge AS for levering av digitalt patologisystem til Helse Nord RHF- for de eide foretakene Universitetssykehuset Nord-Norge HF (Tromsø) og Nordlandssykehuset HF (Bodø).", "awardCriteria": {"orderRationale": "Ikke relevant ved direkteforhandlinger"}, "hasAccessibilityCriteria": false, "reviewDetails": "Tidsfrist for klage er 10 dager etter publisert melding i Doffin/TED.\n\nKlage/henvendelse kan sendes på følgende måte:\nEnten via post@sykehusinnkjop.no eller per post Sykehusinnkjøp HF, postboks 40, 9811 Vadsø (Viktig å henvise til sak 2024/1261 Digital patologi, Helse Nord). Melding/klage kan også sendes i kommunikasjonsmodulen i Mercell på saken."}], "procurementMethodRationale": "Vurderingstemaet er at det kun er en leverandør som fremstiller digital patologi, og som fungerer sammen med oppdragsgivers multimedialøsning. \n\nDet vises til sakens faktiske side der det fremkommer at det er flere leverandører i markedet som kan levere digital patologi, men disse fungerer ikke sammen med oppdragsgivers multimedialøsning. \n\nViktige funksjoner for oppdragsgiver er blant annet effektiv visning (streaming) av digital patologi mediaobjekter til patologens arbeidsflate (arbeidsflyt), funksjonaliteten annoteringer (informasjonsflyt) og ikke minst pasientsikkerhet. Ut fra sakens faktiske opplysninger fremgår det at det bare er Sectras digitale patologi løsning som ivaretar dette på en tilstrekkelig god måte. Det vises til tilbakemeldingene fra markedet og at det inntil videre ikke er mulig for andre leverandører å levere i henhold til oppdragsgivers behov for funksjonalitet, gitt at oppdragsgivers eksisterende multimediearkiv (VNA) skal benyttes. Oppdragsgivers behov vil kunne oppfylles ved å kjøpe digital patologi fra en annen leverandør, noe som ville innebære at oppdragsgiver også måtte investere i den andre leverandørens multimediearkiv (VNA), herunder integrasjoner. To multimediearkiver vil medføre ekstra kostnader for oppdragsgiver, samt teknisk kompleksitet som vil være utfordrende å drifte og vedlikeholde. Funksjonaliteten annoteringer er ikke mulig på tvers av leverandørenes løsninger. To løsninger vil også innebære dobbeltlagring og håndtering av bilder i ulike lagre/arkiv og det vil være behov for to visningsprogramvarer (viewere). Dette gir økt risiko for forveksling av bildeversjoner og pasient/undersøkelse, noe som igjen kan medføre alvorlig feil i forbindelse med pasientbehandlingen, det pekes på diagnostikk og behandling, med påfølgende risiko for pasientskade. \n\nDet synes etter dette sannsynlig at det bare er en leverandør som kan levere det oppdragsgiver har behov for. \n\nDet andre spørsmålet er om leverandører kan eller vil kunne bli i stand til å levere ytelsen oppdragsgiver har behov for innenfor den tidsrammen som er til rådighet. \n\nMarkedet er umodent, og det gjenstår mye arbeid før standarder for deling og samhandling er modne på tvers av løsninger og lager/arkiv. Oppdragsgiver har behov for digital patologi nå. \n\nDet synes etter dette sannsynlig at det ikke eksisterer andre leverandører som kan eller vil kunne bli i stand til å levere ytelsen oppdragsgiver har behov for innenfor den tidsrammen som er til rådighet. \n\nDet synes sannsynlig at bare er en leverandør kan levere en digital patologiløsning som fungerer sammen med oppdragsgivers multimedialøsning, på en tilstrekkelig sikker måte. The assessment theme is that there is only one supplier that presents digital pathology and that works together with the contracting authority ́s multi-media system. \n\nSee the factual side of the case, stating that there are several suppliers in the market who can deliver digital pathology, but these do not work together with the contracting authority ́s multi-media system. \n\nImportant functions for the contracting authority are, among other things, effective viewing (streaming) of digital pathology media objects to the pathology ́s work surface (work flow), functionality annotations (information flow) and, not least, patient safety. Based on the actual information of the case, it is only Sectra's digital pathology system that safeguards this in a sufficiently good way. Please refer to the feedback from the market and that until now it is not possible for other tenderers to deliver in accordance with the contracting authority ́s need for functionality, provided that the contracting authority ́s existing multimedia archive (VNA) shall be used. The contracting authority ́s needs can be fulfilled by purchasing digital pathology from another supplier, which would mean that the contracting authority also had to invest in the other tenderer ́s multimedia archive (VNA), including integrations. Two multi-media archives will incur extra costs for the contracting authority, as well as technical complexity that will be challenging to operate and maintain. The annotations functionality is not possible across the tenderer ́s systems. Two solutions will also involve double storage and handling of images in different stores/archives and there will be a need for two vieweres. This gives an increased risk of alteration of picture versions and patient/examination, which in turn can lead to serious errors in patient treatment, it is pointed to diagnostics and treatment, with the subsequent risk of patient injury. \n\nAfter this, it seems likely that there is only one supplier who can deliver what the contracting authority needs. \n\nThe second question is whether tenderers can or can be able to deliver the service that the Contracting Authority needs within the timeframe at our disposal. \n\nThe market is immature and much work remains before standards of sharing and interaction are mature across systems and stores/archives. The contracting authority needs digital pathology now. \n\nAfter this, it seems likely that there are no other suppliers who can or may be able to deliver the service that the Contracting Authority needs within the timeframe at our disposal. \n\nIt seems likely that only one supplier can deliver a digital pathology system that functions together with the contracting authority ́s multi-media system in a sufficiently secure way.", "procurementMethodRationaleClassifications": [{"scheme": "eu-direct-award-justification", "id": "technical", "description": "The contract can be provided only by a particular economic operator because of an absence of competition for technical reasons"}], "title": "Intensjonskunngjøring Digital patologisystem, Helse Nord", "identifiers": [{"id": "2024/1261", "scheme": "internal"}], "mainProcurementCategory": "goods", "description": "Det har vært gjennomført direkteforhandling med Sectra Norge AS for levering av digitalt patologisystem til Helse Nord RHF- for de eide foretakene Universitetssykehuset Nord-Norge HF (Tromsø) og Nordlandssykehuset HF (Bodø).", "items": [{"id": "1", "additionalClassifications": [{"id": "33124110", "scheme": "CPV"}, {"id": "48313100", "scheme": "CPV"}, {"id": "48328000", "scheme": "CPV"}, {"id": "48515000", "scheme": "CPV"}, {"id": "48814400", "scheme": "CPV"}, {"id": "72212180", "scheme": "CPV"}], "relatedLot": "LOT-0000", "classification": {"scheme": "CPV", "id": "48814000"}, "deliveryAddresses": [{"region": "NO071", "streetAddress": "Nordlandssykehuset HF, avd Bodø"}, {"region": "NO074", "streetAddress": "Universitetssykehuset Nord-Norge HF, Tromsø"}, {"postalCode": "8092"}, {"postalCode": "9038"}, {"country": "NO"}], "deliveryLocations": [{"description": "Installasjon i On-prem Helse Nord IKT datasenter i Tromsø"}, {"description": "Installation in On-prem Helse Nord ICT computer centre in Tromsø."}]}, {"id": "LOT-0000", "relatedLot": "LOT-0000", "deliveryAddresses": [{"locality": "Bodø"}, {"locality": "Tromsø"}]}], "deliveryAddresses": [{"region": "NO071"}, {"region": "NO074"}, {"streetAddress": "Nordlandssykehuset HF, avd Bodø"}, {"streetAddress": "Universitetssykehuset Nord-Norge HF, Tromsø"}, {"postalCode": "8092"}, {"postalCode": "9038"}, {"locality": "Bodø"}, {"locality": "Tromsø"}, {"country": "NO"}], "deliveryLocations": [{"description": "Installasjon i On-prem Helse Nord IKT datasenter i Tromsø; Installation in On-prem Helse Nord ICT computer centre in Tromsø.; Installasjon i On-prem Helse Nord IKT datasenter i Tromsø; Installation in On-prem Helse Nord ICT computer centre in Tromsø."}]}, "tag": ["award", "contract"], "date": "2024-09-23T08:42:19+00:00", "parties": [{"id": "ORG-0002", "details": {"classifications": [{"scheme": "COFOG", "id": "07", "description": "Health"}, {"scheme": "eu-buyer-legal-type", "id": "body-pl", "description": "Body governed by public law"}], "url": "https://www.helse-nord.no/"}, "name": "Helse Nord RHF", "additionalIdentifiers": [{"id": "883 658 752", "scheme": "GB-COH"}], "contactPoint": {"telephone": "75512900", "email": "postmottak@helse-nord.no"}, "address": {"streetAddress": "Moloveien 1", "postalCode": "8038", "locality": "Bodø", "country": "NO"}, "roles": ["funder", "buyer", "payer"]}, {"id": "ORG-0001", "name": "SYKEHUSINNKJØP HF", "additionalIdentifiers": [{"id": "916879067", "scheme": "GB-COH"}], "contactPoint": {"name": "Postmottak Sykehusinnkjøp", "telephone": "+47 78950700", "email": "post@sykehusinnkjop.no"}, "details": {"url": "http://www.sykehusinnkjop.no"}, "address": {"streetAddress": "Postboks 40", "postalCode": "9811", "locality": "VADSØ", "country": "NO"}, "roles": ["leadBuyer", "buyer", "processContactPoint", "reviewContactPoint"]}, {"id": "ORG-0003", "name": "Sectra Norge AS", "details": {"scale": "medium", "url": "https://medical.sectra.com/about-sectra/contact/contact-sectra-norway/", "listedOnRegulatedMarket": true}, "roles": ["supplier", "tenderer"], "additionalIdentifiers": [{"id": "975 353 265", "scheme": "GB-COH"}], "contactPoint": {"telephone": "67 58 97 70", "email": "info.no@sectra.com", "faxNumber": "67 58 97 76"}, "eDeliveryGateway": "https://medical.sectra.com/about-sectra/contact/contact-sectra-norway/", "address": {"streetAddress": "Strandveien 50", "postalCode": "1366", "locality": "Lysaker", "country": "NO"}}, {"id": "ORG-0004", "name": "Indre og Østre Finnmark tingrett", "additionalIdentifiers": [{"id": "926 722 840", "scheme": "GB-COH"}], "contactPoint": {"telephone": "78 01 17 00", "email": "indre.og.ostre.finnmark.tingrett@domstol.no"}, "details": {"url": "https://www.domstol.no/no/domstoler/tingrett/sis--ja-nuorta-finnmarkku-diggegoddi--indre-og-ostre-finnmark-tingrett/"}, "address": {"streetAddress": "Kirkegt. 22, 3. etg, Vadsø. Postboks 54", "postalCode": "9811", "locality": "Vadsø", "country": "NO"}, "roles": ["mediationBody", "reviewBody"]}], "awards": [{"id": "RES-0001", "relatedLots": ["LOT-0000"], "date": "2024-09-20T23:59:59Z", "suppliers": [{"id": "ORG-0003"}], "value": {"amount": 12000000.0, "currency": "NOK"}}, {"id": "CON-0001", "buyers": [{"id": "ORG-0002"}], "relatedBids": ["TEN-0001"]}], "bids": {"details": [{"id": "TEN-0001", "relatedLots": ["LOT-0000"], "hasRank": false, "identifiers": [{"id": "Tilbud 27.5.2024", "scheme": "XX-TENDERNL"}], "value": {"amount": 12000000.0, "currency": "NOK"}, "tenderers": [{"id": "ORG-0003"}]}]}, "contracts": [{"id": "CON-0001", "identifiers": [{"id": "Tilbud av 27.5.2024", "scheme": "NL-TENDERNED"}], "awardID": "RES-0001", "relatedBids": ["TEN-0001"], "title": "Første tilbud ifm direkteforhandlinger"}], "language": "no", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "eb49096c-83fe-4bbe-97e0-ec45d380b44b",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-6cc6cf23-0dc9-46fc-8dc3-94683d01f72a",
+  "tender": {
+    "legalBasis": {
+      "id": "FOA § 13-4 bokstav b annet punkt; «konkurranse er umulig av tekniske årsaker».",
+      "scheme": "ELI",
+      "description": "Det synes sannsynlig at det ikke eksisterer andre leverandører som kan eller vil kunne bli i stand til å levere ytelsen oppdragsgiver har behov for innenfor den tidsrammen som er til rådighet. \n\nDet synes sannsynlig at bare er en leverandør kan levere en digital patologiløsning som fungerer sammen med oppdragsgivers multimedialøsning, på en tilstrekkelig sikker måte.  ",
+      "multilingualDescriptions": [
+        {
+          "language": "NOR",
+          "text": "Det synes sannsynlig at det ikke eksisterer andre leverandører som kan eller vil kunne bli i stand til å levere ytelsen oppdragsgiver har behov for innenfor den tidsrammen som er til rådighet. \n\nDet synes sannsynlig at bare er en leverandør kan levere en digital patologiløsning som fungerer sammen med oppdragsgivers multimedialøsning, på en tilstrekkelig sikker måte.  "
+        },
+        {
+          "language": "ENG",
+          "text": "It seems likely that there are no other suppliers who can or may be able to deliver the services that the Contracting Authority needs within the timeframe at our disposal. \n\nIt seems likely that only one supplier can deliver a digital pathology system that functions together with the contracting authority ́s multi-media system in a sufficiently secure way.  "
+        }
+      ],
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "status": "complete",
+    "id": "b5d2a051-0b57-4cdc-a499-9001c2c5b231",
+    "procurementMethod": "limited",
+    "procurementMethodDetails": "Negotiated without prior call for competition",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "coveredBy": [
+          "GPA"
+        ],
+        "title": "Intensjonskunngjøring Digital patologisystem, Helse Nord",
+        "identifiers": [
+          {
+            "id": "2024/1261",
+            "scheme": "internal"
+          }
+        ],
+        "mainProcurementCategory": "goods",
+        "description": "Det har vært gjennomført direkteforhandling med Sectra Norge AS for levering av digitalt patologisystem til Helse Nord RHF- for de eide foretakene Universitetssykehuset Nord-Norge HF (Tromsø) og Nordlandssykehuset HF (Bodø).",
+        "awardCriteria": {
+          "orderRationale": "Ikke relevant ved direkteforhandlinger"
+        },
+        "hasAccessibilityCriteria": false,
+        "reviewDetails": "Tidsfrist for klage er 10 dager etter publisert melding i Doffin/TED.\n\nKlage/henvendelse kan sendes på følgende måte:\nEnten via post@sykehusinnkjop.no eller per post Sykehusinnkjøp HF, postboks 40, 9811 Vadsø (Viktig å henvise til sak 2024/1261 Digital patologi, Helse Nord). Melding/klage kan også sendes i kommunikasjonsmodulen i Mercell på saken."
+      }
+    ],
+    "procurementMethodRationale": "Vurderingstemaet er at det kun er en leverandør som fremstiller digital patologi, og som fungerer sammen med oppdragsgivers multimedialøsning. \n\nDet vises til sakens faktiske side der det fremkommer at det er flere leverandører i markedet som kan levere digital patologi, men disse fungerer ikke sammen med oppdragsgivers multimedialøsning. \n\nViktige funksjoner for oppdragsgiver er blant annet effektiv visning (streaming) av digital patologi mediaobjekter til patologens arbeidsflate (arbeidsflyt), funksjonaliteten annoteringer (informasjonsflyt) og ikke minst pasientsikkerhet. Ut fra sakens faktiske opplysninger fremgår det at det bare er Sectras digitale patologi løsning som ivaretar dette på en tilstrekkelig god måte. Det vises til tilbakemeldingene fra markedet og at det inntil videre ikke er mulig for andre leverandører å levere i henhold til oppdragsgivers behov for funksjonalitet, gitt at oppdragsgivers eksisterende multimediearkiv (VNA) skal benyttes. Oppdragsgivers behov vil kunne oppfylles ved å kjøpe digital patologi fra en annen leverandør, noe som ville innebære at oppdragsgiver også måtte investere i den andre leverandørens multimediearkiv (VNA), herunder integrasjoner. To multimediearkiver vil medføre ekstra kostnader for oppdragsgiver, samt teknisk kompleksitet som vil være utfordrende å drifte og vedlikeholde. Funksjonaliteten annoteringer er ikke mulig på tvers av leverandørenes løsninger. To løsninger vil også innebære dobbeltlagring og håndtering av bilder i ulike lagre/arkiv og det vil være behov for to visningsprogramvarer (viewere). Dette gir økt risiko for forveksling av bildeversjoner og pasient/undersøkelse, noe som igjen kan medføre alvorlig feil i forbindelse med pasientbehandlingen, det pekes på diagnostikk og behandling, med påfølgende risiko for pasientskade. \n\nDet synes etter dette sannsynlig at det bare er en leverandør som kan levere det oppdragsgiver har behov for. \n\nDet andre spørsmålet er om leverandører kan eller vil kunne bli i stand til å levere ytelsen oppdragsgiver har behov for innenfor den tidsrammen som er til rådighet. \n\nMarkedet er umodent, og det gjenstår mye arbeid før standarder for deling og samhandling er modne på tvers av løsninger og lager/arkiv. Oppdragsgiver har behov for digital patologi nå. \n\nDet synes etter dette sannsynlig at det ikke eksisterer andre leverandører som kan eller vil kunne bli i stand til å levere ytelsen oppdragsgiver har behov for innenfor den tidsrammen som er til rådighet. \n\nDet synes sannsynlig at bare er en leverandør kan levere en digital patologiløsning som fungerer sammen med oppdragsgivers multimedialøsning, på en tilstrekkelig sikker måte. The assessment theme is that there is only one supplier that presents digital pathology and that works together with the contracting authority ́s multi-media system. \n\nSee the factual side of the case, stating that there are several suppliers in the market who can deliver digital pathology, but these do not work together with the contracting authority ́s multi-media system. \n\nImportant functions for the contracting authority are, among other things, effective viewing (streaming) of digital pathology media objects to the pathology ́s work surface (work flow), functionality annotations (information flow) and, not least, patient safety. Based on the actual information of the case, it is only Sectra's digital pathology system that safeguards this in a sufficiently good way. Please refer to the feedback from the market and that until now it is not possible for other tenderers to deliver in accordance with the contracting authority ́s need for functionality, provided that the contracting authority ́s existing multimedia archive (VNA) shall be used. The contracting authority ́s needs can be fulfilled by purchasing digital pathology from another supplier, which would mean that the contracting authority also had to invest in the other tenderer ́s multimedia archive (VNA), including integrations. Two multi-media archives will incur extra costs for the contracting authority, as well as technical complexity that will be challenging to operate and maintain. The annotations functionality is not possible across the tenderer ́s systems. Two solutions will also involve double storage and handling of images in different stores/archives and there will be a need for two vieweres. This gives an increased risk of alteration of picture versions and patient/examination, which in turn can lead to serious errors in patient treatment, it is pointed to diagnostics and treatment, with the subsequent risk of patient injury. \n\nAfter this, it seems likely that there is only one supplier who can deliver what the contracting authority needs. \n\nThe second question is whether tenderers can or can be able to deliver the service that the Contracting Authority needs within the timeframe at our disposal. \n\nThe market is immature and much work remains before standards of sharing and interaction are mature across systems and stores/archives. The contracting authority needs digital pathology now. \n\nAfter this, it seems likely that there are no other suppliers who can or may be able to deliver the service that the Contracting Authority needs within the timeframe at our disposal. \n\nIt seems likely that only one supplier can deliver a digital pathology system that functions together with the contracting authority ́s multi-media system in a sufficiently secure way.",
+    "procurementMethodRationaleClassifications": [
+      {
+        "scheme": "eu-direct-award-justification",
+        "id": "technical",
+        "description": "The contract can be provided only by a particular economic operator because of an absence of competition for technical reasons"
+      }
+    ],
+    "title": "Intensjonskunngjøring Digital patologisystem, Helse Nord",
+    "identifiers": [
+      {
+        "id": "2024/1261",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "goods",
+    "description": "Det har vært gjennomført direkteforhandling med Sectra Norge AS for levering av digitalt patologisystem til Helse Nord RHF- for de eide foretakene Universitetssykehuset Nord-Norge HF (Tromsø) og Nordlandssykehuset HF (Bodø).",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "id": "33124110",
+            "scheme": "CPV"
+          },
+          {
+            "id": "48313100",
+            "scheme": "CPV"
+          },
+          {
+            "id": "48328000",
+            "scheme": "CPV"
+          },
+          {
+            "id": "48515000",
+            "scheme": "CPV"
+          },
+          {
+            "id": "48814400",
+            "scheme": "CPV"
+          },
+          {
+            "id": "72212180",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "48814000"
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO071",
+            "streetAddress": "Nordlandssykehuset HF, avd Bodø"
+          },
+          {
+            "region": "NO074",
+            "streetAddress": "Universitetssykehuset Nord-Norge HF, Tromsø"
+          },
+          {
+            "postalCode": "8092"
+          },
+          {
+            "postalCode": "9038"
+          },
+          {
+            "country": "NO"
+          }
+        ],
+        "deliveryLocations": [
+          {
+            "description": "Installasjon i On-prem Helse Nord IKT datasenter i Tromsø"
+          },
+          {
+            "description": "Installation in On-prem Helse Nord ICT computer centre in Tromsø."
+          }
+        ]
+      },
+      {
+        "id": "LOT-0000",
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "locality": "Bodø"
+          },
+          {
+            "locality": "Tromsø"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "region": "NO071"
+      },
+      {
+        "region": "NO074"
+      },
+      {
+        "streetAddress": "Nordlandssykehuset HF, avd Bodø"
+      },
+      {
+        "streetAddress": "Universitetssykehuset Nord-Norge HF, Tromsø"
+      },
+      {
+        "postalCode": "8092"
+      },
+      {
+        "postalCode": "9038"
+      },
+      {
+        "locality": "Bodø"
+      },
+      {
+        "locality": "Tromsø"
+      },
+      {
+        "country": "NO"
+      }
+    ],
+    "deliveryLocations": [
+      {
+        "description": "Installasjon i On-prem Helse Nord IKT datasenter i Tromsø; Installation in On-prem Helse Nord ICT computer centre in Tromsø.; Installasjon i On-prem Helse Nord IKT datasenter i Tromsø; Installation in On-prem Helse Nord ICT computer centre in Tromsø."
+      }
+    ]
+  },
+  "tag": [
+    "award",
+    "contract"
+  ],
+  "date": "2024-09-23T08:42:19+00:00",
+  "parties": [
+    {
+      "id": "ORG-0002",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "07",
+            "description": "Health"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl",
+            "description": "Body governed by public law"
+          }
+        ],
+        "url": "https://www.helse-nord.no/"
+      },
+      "name": "Helse Nord RHF",
+      "additionalIdentifiers": [
+        {
+          "id": "883 658 752",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "75512900",
+        "email": "postmottak@helse-nord.no"
+      },
+      "address": {
+        "streetAddress": "Moloveien 1",
+        "postalCode": "8038",
+        "locality": "Bodø",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer",
+        "payer",
+        "funder"
+      ]
+    },
+    {
+      "id": "ORG-0001",
+      "name": "SYKEHUSINNKJØP HF",
+      "additionalIdentifiers": [
+        {
+          "id": "916879067",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Postmottak Sykehusinnkjøp",
+        "telephone": "+47 78950700",
+        "email": "post@sykehusinnkjop.no"
+      },
+      "details": {
+        "url": "http://www.sykehusinnkjop.no"
+      },
+      "address": {
+        "streetAddress": "Postboks 40",
+        "postalCode": "9811",
+        "locality": "VADSØ",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer",
+        "leadBuyer",
+        "processContactPoint",
+        "reviewContactPoint"
+      ]
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Sectra Norge AS",
+      "details": {
+        "scale": "medium",
+        "url": "https://medical.sectra.com/about-sectra/contact/contact-sectra-norway/",
+        "listedOnRegulatedMarket": true
+      },
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "975 353 265",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "67 58 97 70",
+        "email": "info.no@sectra.com",
+        "faxNumber": "67 58 97 76"
+      },
+      "eDeliveryGateway": "https://medical.sectra.com/about-sectra/contact/contact-sectra-norway/",
+      "address": {
+        "streetAddress": "Strandveien 50",
+        "postalCode": "1366",
+        "locality": "Lysaker",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0004",
+      "name": "Indre og Østre Finnmark tingrett",
+      "additionalIdentifiers": [
+        {
+          "id": "926 722 840",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "78 01 17 00",
+        "email": "indre.og.ostre.finnmark.tingrett@domstol.no"
+      },
+      "details": {
+        "url": "https://www.domstol.no/no/domstoler/tingrett/sis--ja-nuorta-finnmarkku-diggegoddi--indre-og-ostre-finnmark-tingrett/"
+      },
+      "address": {
+        "streetAddress": "Kirkegt. 22, 3. etg, Vadsø. Postboks 54",
+        "postalCode": "9811",
+        "locality": "Vadsø",
+        "country": "NO"
+      },
+      "roles": [
+        "mediationBody",
+        "reviewBody"
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "id": "RES-0001",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "date": "2024-09-20T23:59:59Z",
+      "suppliers": [
+        {
+          "id": "ORG-0003"
+        }
+      ],
+      "value": {
+        "amount": 12000000.0,
+        "currency": "NOK"
+      }
+    },
+    {
+      "id": "CON-0001",
+      "buyers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "hasRank": false,
+        "identifiers": [
+          {
+            "id": "Tilbud 27.5.2024",
+            "scheme": "XX-TENDERNL"
+          }
+        ],
+        "value": {
+          "amount": 12000000.0,
+          "currency": "NOK"
+        },
+        "tenderers": [
+          {
+            "id": "ORG-0003"
+          }
+        ]
+      }
+    ]
+  },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "identifiers": [
+        {
+          "id": "Tilbud av 27.5.2024",
+          "scheme": "NL-TENDERNED"
+        }
+      ],
+      "awardID": "RES-0001",
+      "relatedBids": [
+        "TEN-0001"
+      ],
+      "title": "Første tilbud ifm direkteforhandlinger"
+    }
+  ],
+  "language": "no",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

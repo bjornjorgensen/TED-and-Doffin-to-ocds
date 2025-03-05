@@ -1,1 +1,126 @@
-{"id": "2023-632707", "initiationType": "tender", "ocid": "ocds-abcd1234-8eba3045-5b11-447b-940f-65eece4787b8", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "OTHER"}}, "status": "complete", "id": "2023-632707", "lots": [{"id": "LOT-0000", "submissionTerms": {"electronicSubmissionPolicy": "not-allowed"}, "title": "Rehabilitering av 2 bruer i Ballangen", "mainProcurementCategory": "works", "description": "Arbeidene omfatter i korte trekk rivning, deponering og reetablering av bruene. Det vises til konkurransedokumentene for utfyllende opplysninger.", "hasAccessibilityCriteria": false, "techniques": {"hasElectronicAuction": false}}], "title": "Rehabilitering av 2 bruer i Ballangen", "identifiers": [{"id": "22/34", "scheme": "internal"}], "mainProcurementCategory": "works", "description": "Etablering av to bruer i Ballangen. I korte trekk omfatter arbeidene rivning, deponering og reetablering av bruene.", "items": [{"id": "1", "additionalClassifications": [{"id": "45221100", "scheme": "CPV"}, {"id": "45221110", "scheme": "CPV"}, {"id": "45221119", "scheme": "CPV"}, {"id": "45262300", "scheme": "CPV"}], "relatedLot": "LOT-0000", "classification": {"scheme": "CPV", "id": "45221111"}, "deliveryAddresses": [{"region": "NO071", "streetAddress": "Narvik, Aspheim bru (kommunal vei 54071) og Reinsvoll bru (kommunal vei 54069) i Ballangen. Begge bruer krysser Kiselva, og området rundt bruene eies av Narvik kommune."}]}], "deliveryAddresses": [{"streetAddress": "Narvik, Aspheim bru (kommunal vei 54071) og Reinsvoll bru (kommunal vei 54069) i Ballangen. Begge bruer krysser Kiselva, og området rundt bruene eies av Narvik kommune."}]}, "tag": ["award", "contract"], "date": "2023-05-24T12:00:00+02:00", "awards": [{"id": "RES-0001", "relatedLots": ["LOT-0000"], "status": "unsuccessful", "statusDetails": "No winner was chosen and the competition is closed."}], "parties": [{"id": "ORG-0001", "name": "Narvik kommune", "additionalIdentifiers": [{"id": "959 469 059", "scheme": "GB-COH"}], "contactPoint": {"name": "Uno Nesvik", "email": "uno.nesvik@narvik.kommune.no"}, "details": {"url": "https://www.narvik.kommune.no/"}, "address": {"streetAddress": "Postboks 64", "postalCode": "8501", "locality": "Narvik", "country": "NO"}, "roles": ["buyer"]}], "description": "Begrunnelse for avlysning Uforutsette grunnforhold har medført til store overskridelser når det gjelder prosjektering og samlet sett vil gjennomføring av konkurransen medføre store økonomiske overskridelser av budsjett (beregnet til over 40 % økning i forhold til budsjett).  Manglende finansiering/økonomi er saklig grunn til avlysning, jf. FOA § 25-4 (1). Oppdragsgiver kan med disse økonomiske overskridelsene ikke gjennomføre prosjektet slik det er beskrevet i konkurransegrunnlaget, og de nødvendige tilpasninger for å få dette i økonomisk balanse ville medføre en vesentlig endring både av konkurransegrunnlag og av det opprinnelige tilbudet. Det er ikke inngått kontrakt med vinnende leverandør. Vedståelsesfristen for tilbudet er også gått ut, og verken denne eller innleverte tilbud kan fastholdes etter utløpet av fristen når det i perioden etter frist oppstår en situasjon som medfører vesentlige endringer i grunnlaget for konkurransen, jf. § 20-6 (3). Oppdragsgiver har derfor besluttet å avlyse denne konkurransen, og har som intensjon å lyse ut ny konkurranse så raskt som mulig. Det er usikkerhet både rundt når og i hvilket omfang det er snakk om. Det kan bli en utsettelse til 2024, og på grunn av det økonomiske aspektet kan det muligens i første omgang bli en konkurranse i et begrenset omfang - som omfatter bare en av bruene. Mercell kunngjøring: https://opic.com/id/afoefaskpf", "language": "nb", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "2023-632707",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-1a58eca6-5616-4a8e-a1ca-4e9761cf93da",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "OTHER"
+      }
+    },
+    "status": "complete",
+    "id": "2023-632707",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "not-allowed"
+        },
+        "title": "Rehabilitering av 2 bruer i Ballangen",
+        "mainProcurementCategory": "works",
+        "description": "Arbeidene omfatter i korte trekk rivning, deponering og reetablering av bruene. Det vises til konkurransedokumentene for utfyllende opplysninger.",
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "hasElectronicAuction": false
+        }
+      }
+    ],
+    "title": "Rehabilitering av 2 bruer i Ballangen",
+    "identifiers": [
+      {
+        "id": "22/34",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "works",
+    "description": "Etablering av to bruer i Ballangen. I korte trekk omfatter arbeidene rivning, deponering og reetablering av bruene.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "id": "45221100",
+            "scheme": "CPV"
+          },
+          {
+            "id": "45221110",
+            "scheme": "CPV"
+          },
+          {
+            "id": "45221119",
+            "scheme": "CPV"
+          },
+          {
+            "id": "45262300",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "45221111"
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO071",
+            "streetAddress": "Narvik, Aspheim bru (kommunal vei 54071) og Reinsvoll bru (kommunal vei 54069) i Ballangen. Begge bruer krysser Kiselva, og området rundt bruene eies av Narvik kommune."
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "streetAddress": "Narvik, Aspheim bru (kommunal vei 54071) og Reinsvoll bru (kommunal vei 54069) i Ballangen. Begge bruer krysser Kiselva, og området rundt bruene eies av Narvik kommune."
+      }
+    ]
+  },
+  "tag": [
+    "award",
+    "contract"
+  ],
+  "date": "2023-05-24T12:00:00+02:00",
+  "awards": [
+    {
+      "id": "RES-0001",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "status": "unsuccessful",
+      "statusDetails": "No winner was chosen and the competition is closed."
+    }
+  ],
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Narvik kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "959 469 059",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Uno Nesvik",
+        "email": "uno.nesvik@narvik.kommune.no"
+      },
+      "details": {
+        "url": "https://www.narvik.kommune.no/"
+      },
+      "address": {
+        "streetAddress": "Postboks 64",
+        "postalCode": "8501",
+        "locality": "Narvik",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    }
+  ],
+  "description": "Begrunnelse for avlysning Uforutsette grunnforhold har medført til store overskridelser når det gjelder prosjektering og samlet sett vil gjennomføring av konkurransen medføre store økonomiske overskridelser av budsjett (beregnet til over 40 % økning i forhold til budsjett).  Manglende finansiering/økonomi er saklig grunn til avlysning, jf. FOA § 25-4 (1). Oppdragsgiver kan med disse økonomiske overskridelsene ikke gjennomføre prosjektet slik det er beskrevet i konkurransegrunnlaget, og de nødvendige tilpasninger for å få dette i økonomisk balanse ville medføre en vesentlig endring både av konkurransegrunnlag og av det opprinnelige tilbudet. Det er ikke inngått kontrakt med vinnende leverandør. Vedståelsesfristen for tilbudet er også gått ut, og verken denne eller innleverte tilbud kan fastholdes etter utløpet av fristen når det i perioden etter frist oppstår en situasjon som medfører vesentlige endringer i grunnlaget for konkurransen, jf. § 20-6 (3). Oppdragsgiver har derfor besluttet å avlyse denne konkurransen, og har som intensjon å lyse ut ny konkurranse så raskt som mulig. Det er usikkerhet både rundt når og i hvilket omfang det er snakk om. Det kan bli en utsettelse til 2024, og på grunn av det økonomiske aspektet kan det muligens i første omgang bli en konkurranse i et begrenset omfang - som omfatter bare en av bruene. Mercell kunngjøring: https://opic.com/id/afoefaskpf",
+  "language": "nb",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

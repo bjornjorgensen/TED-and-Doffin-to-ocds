@@ -1,1 +1,165 @@
-{"id": "2023-611830", "initiationType": "tender", "ocid": "ocds-abcd1234-2e6e4b79-c350-4770-901f-9e42c79b2b5b", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "id": "2023-611830", "lots": [{"id": "LOT-0000", "submissionTerms": {"electronicSubmissionPolicy": "not-allowed"}, "title": "Kommunenettverk for innføring av velferdsteknologi", "mainProcurementCategory": "services", "description": "Kommunenettverk for innføring av velferdsteknologi og digital hjemmeoppfølging. Prosjektstøtte (70 % av oppdraget) for videre utvikling av nettverket, planlegging av kompetansebygging i prosessledelse og endringsledelse i nettverket. Andre kompetansetiltak kan være aktuelle basert på behovskartlegging. Det vil også være behov for noen sekretariatsoppgaver (20-30% av oppdraget)", "contractPeriod": {"durationInDays": 300}, "hasAccessibilityCriteria": false}], "title": "Kommunenettverk for innføring av velferdsteknologi", "identifiers": [{"id": "23/00530", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Kommunenettverk for innføring av velferdsteknologi og digital hjemmeoppfølging. Prosjektstøtte (70 % av oppdraget) for videre utvikling av nettverket, planlegging av kompetansebygging i prosessledelse og endringsledelse i nettverket. Andre kompetansetiltak kan være aktuelle basert på behovskartlegging. Det vil også være behov for noen sekretariatsoppgaver (20-30% av oppdraget)", "items": [{"id": "1", "classification": {"scheme": "CPV", "id": "73220000"}, "relatedLot": "LOT-0000"}]}, "tag": ["awardUpdate", "contractUpdate"], "date": "2023-12-18T12:00:00+01:00", "awards": [{"id": "RES-0001", "relatedLots": ["LOT-0000"], "status": "active", "statusDetails": "At least one winner was chosen.", "suppliers": [{"id": "ORG-0002"}], "value": {"amount": 2000000.0, "currency": "NOK"}, "relatedBids": ["TEN-0001"]}], "bids": {"details": [{"id": "TEN-0001", "relatedLots": ["LOT-0000"], "value": {"amount": 2000000.0, "currency": "NOK"}, "tenderers": [{"id": "ORG-0002"}]}]}, "contracts": [{"id": "CON-0001", "dateSigned": "2023-12-13T23:59:59Z", "awardID": "RES-0001", "identifiers": [{"id": "1", "scheme": "NL-TENDERNED"}], "relatedBids": ["TEN-0001"]}], "parties": [{"id": "ORG-0001", "name": "KS  (Kommunesektorens organisasjon)", "additionalIdentifiers": [{"id": "971 032 146", "scheme": "GB-COH"}], "details": {"url": "www.ks.no", "buyerProfile": "https://eu.eu-supply.com/ctm/Company/CompanyInformation/Index/434546"}, "contactPoint": {"email": "gtg@tigerconsulting.as"}, "roles": ["buyer"], "address": {"streetAddress": "Haakon VIIs gt. 9", "postalCode": "0161", "locality": "Oslo", "country": "NO"}}, {"id": "ORG-0002", "name": "Sopra Steria AS", "roles": ["supplier", "tenderer"], "address": {"locality": "Oslo", "country": "NO"}}, {"id": "ORG-0003", "name": "Oslo tingrett", "address": {"locality": "Oslo", "country": "NO"}, "roles": ["reviewBody"]}], "language": "nb", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "2023-611830",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-117f37ba-3669-4d87-b56a-1176700af333",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "id": "2023-611830",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "not-allowed"
+        },
+        "title": "Kommunenettverk for innføring av velferdsteknologi",
+        "mainProcurementCategory": "services",
+        "description": "Kommunenettverk for innføring av velferdsteknologi og digital hjemmeoppfølging. Prosjektstøtte (70 % av oppdraget) for videre utvikling av nettverket, planlegging av kompetansebygging i prosessledelse og endringsledelse i nettverket. Andre kompetansetiltak kan være aktuelle basert på behovskartlegging. Det vil også være behov for noen sekretariatsoppgaver (20-30% av oppdraget)",
+        "contractPeriod": {
+          "durationInDays": 300
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "title": "Kommunenettverk for innføring av velferdsteknologi",
+    "identifiers": [
+      {
+        "id": "23/00530",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "services",
+    "description": "Kommunenettverk for innføring av velferdsteknologi og digital hjemmeoppfølging. Prosjektstøtte (70 % av oppdraget) for videre utvikling av nettverket, planlegging av kompetansebygging i prosessledelse og endringsledelse i nettverket. Andre kompetansetiltak kan være aktuelle basert på behovskartlegging. Det vil også være behov for noen sekretariatsoppgaver (20-30% av oppdraget)",
+    "items": [
+      {
+        "id": "1",
+        "classification": {
+          "scheme": "CPV",
+          "id": "73220000"
+        },
+        "relatedLot": "LOT-0000"
+      }
+    ]
+  },
+  "tag": [
+    "awardUpdate",
+    "contractUpdate"
+  ],
+  "date": "2023-12-18T12:00:00+01:00",
+  "awards": [
+    {
+      "id": "RES-0001",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
+      "value": {
+        "amount": 2000000.0,
+        "currency": "NOK"
+      },
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 2000000.0,
+          "currency": "NOK"
+        },
+        "tenderers": [
+          {
+            "id": "ORG-0002"
+          }
+        ]
+      }
+    ]
+  },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2023-12-13T23:59:59Z",
+      "awardID": "RES-0001",
+      "identifiers": [
+        {
+          "id": "1",
+          "scheme": "NL-TENDERNED"
+        }
+      ],
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "KS  (Kommunesektorens organisasjon)",
+      "additionalIdentifiers": [
+        {
+          "id": "971 032 146",
+          "scheme": "GB-COH"
+        }
+      ],
+      "details": {
+        "url": "www.ks.no",
+        "buyerProfile": "https://eu.eu-supply.com/ctm/Company/CompanyInformation/Index/434546"
+      },
+      "contactPoint": {
+        "email": "gtg@tigerconsulting.as"
+      },
+      "roles": [
+        "buyer"
+      ],
+      "address": {
+        "streetAddress": "Haakon VIIs gt. 9",
+        "postalCode": "0161",
+        "locality": "Oslo",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Sopra Steria AS",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
+      "address": {
+        "locality": "Oslo",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Oslo tingrett",
+      "address": {
+        "locality": "Oslo",
+        "country": "NO"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "language": "nb",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

@@ -1,1 +1,187 @@
-{"id": "2023-600143", "initiationType": "tender", "ocid": "ocds-abcd1234-1aab44fb-a2fe-4fc6-b925-c53d84321535", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "status": "active", "id": "2023-600143", "procurementMethod": "selective", "procurementMethodDetails": "Negotiated with prior publication of a call for competition / competitive with negotiation", "lots": [{"id": "LOT-0000", "coveredBy": ["GPA"], "tenderPeriod": {"endDate": "2023-06-16T12:00:00+02:00"}, "submissionTerms": {"electronicSubmissionPolicy": "not-allowed", "languages": ["no"]}, "title": "Sykehjem Søndre Slagen", "mainProcurementCategory": "works", "description": "Kommunen er i ferd med å utarbeide konkurransegrunnlaget, og dette skal forhåndsgodkjennes gjennom politisk behandling, samtidig som det også vil legges frem en oversikt over de leverandører som har meldt sin interesse. Kommunen vil deretter sende samtlige leverandører en invitasjon til å bekrefte interessen, og konkurransegrunnlaget blir lagt ved/gjort tilgjengelig sammen med denne invitasjon, jf. FOA §14-1(2). I forbindelse med denne kunngjøringen vil kommunen opplyse om at det i konkurransegrunnlaget blant annet vil bli lagt vekt på følgende tema: *Tomtestørrelse. Det legges opp til gode og romslige utearealer for beboerne, som minimum skal inneholde sansehage, gangstier, hvilesteder etc. *Areal. Det må leveres et kartutsnitt av tomten som viser plasseringen av sykehjemmet, og et grovt regnet utvendig areal. *Beliggenhet. Tomten må ha en attraktiv beliggenhet i form av gode sol- og utsiktsforhold, samt at tomten inviterer til aktiviteter og muligheter for å være en møteplass for beboere og innbyggere i nærområdet. *Klima- og miljøhensyn. Disse temaene må svares ut i henhold til konkurransegrunnlaget i forbindelse med tilbudsinnleveringen. Vedlagt ligger siste kommunestyresak 053/23 til orientering. Det presiseres at vedtaket fra kommunestyret (nederst på side 4 og øverst på side 5) inneholder enkelte endringer fra kommunedirektørens innstilling.", "awardCriteria": {"criteria": [{"description": "Price is not the only award criterion and all criteria are stated only in the procurement documents."}]}, "renewal": {"description": "Opsjon på forlengelse av leiekontrakt", "maximumRenewals": 0}, "hasAccessibilityCriteria": false}], "documents": [{"id": "DOCUMENT_ID_REQUIRED_HERE", "documentType": "biddingDocuments", "url": "https://kgv.doffin.no/ctm/Supplier/Documents/Folder/168267", "relatedLots": ["LOT-0000"]}], "title": "Sykehjem Søndre Slagen", "identifiers": [{"id": "01 (1)", "scheme": "internal"}], "mainProcurementCategory": "works", "description": "Dette er en forhåndskunngjøring etter forskrift om offentlige anskaffelse (FOA) §21-2 (2) av konkurranse for anskaffelse av nytt sykehjem med 84 plasser i Søndre Slagen. Hensikten med denne kunngjøringen er at eventuelle private tilbydere som har egnet bygg/tomt for sykehjem for 84 beboere i nevnte område melder sin interesse. Tønsberg kommune vil være leietaker når sykehjemmet er ferdigstilt. Interesserte leverandører inviteres til å melde sin interesse nå siden kontrakt vil bli inngått uten ytterligere kunngjøring. Det er kun leverandører som har meldt sin interesse til oppdragsgiver, som vil få mulighet til å innlevere tilbud. Vedlagt skjema for kontaktopplysninger bes fylles ut.", "items": [{"id": "1", "additionalClassifications": [{"id": "45000000", "scheme": "CPV"}], "relatedLot": "LOT-0000", "classification": {"scheme": "CPV", "id": "45000000"}, "deliveryAddresses": [{"streetAddress": "Tønsberg"}]}], "deliveryAddresses": [{"streetAddress": "Tønsberg"}]}, "tag": ["tender"], "date": "2023-05-08T12:00:00+02:00", "parties": [{"id": "ORG-0001", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "ra", "description": "Regional authority"}], "url": "http://www.tonsberg.kommune.no", "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/2594"}, "name": "Tønsberg kommune", "additionalIdentifiers": [{"id": "950 611 839", "scheme": "GB-COH"}], "contactPoint": {"name": "Therese Borge", "telephone": "+47 48255955", "email": "therese.borge@tonsberg.kommune.no"}, "roles": ["buyer", "processContactPoint"], "address": {"streetAddress": "postboks 2410", "postalCode": "3104", "locality": "Tønsberg", "country": "NO"}}, {"id": "ORG-0002", "name": "Tønsberg kommune", "additionalIdentifiers": [{"id": "921383681", "scheme": "GB-COH"}], "contactPoint": {"name": "Therese Borge", "email": "therese.borge@tonsberg.kommune.no"}, "details": {"url": "http://www.tonsberg.kommune.no"}, "address": {"streetAddress": "Postboks 2410", "postalCode": "3104", "locality": "Tønsberg", "country": "NO"}, "roles": ["submissionReceiptBody"]}, {"id": "ORG-0003", "name": "Vestfold tingrett", "contactPoint": {"email": "vestfold.tingrett@domstol.no"}, "address": {"streetAddress": "Postboks 2013", "postalCode": "3103", "locality": "Tønsberg", "country": "NO"}, "roles": ["reviewBody"]}], "language": "nb", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "2023-600143",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-4cdd201a-d735-40d8-9e4c-a939560a1a1d",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "status": "active",
+    "id": "2023-600143",
+    "procurementMethod": "selective",
+    "procurementMethodDetails": "Negotiated with prior publication of a call for competition / competitive with negotiation",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "coveredBy": [
+          "GPA"
+        ],
+        "tenderPeriod": {
+          "endDate": "2023-06-16T12:00:00+02:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "not-allowed",
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "Sykehjem Søndre Slagen",
+        "mainProcurementCategory": "works",
+        "description": "Kommunen er i ferd med å utarbeide konkurransegrunnlaget, og dette skal forhåndsgodkjennes gjennom politisk behandling, samtidig som det også vil legges frem en oversikt over de leverandører som har meldt sin interesse. Kommunen vil deretter sende samtlige leverandører en invitasjon til å bekrefte interessen, og konkurransegrunnlaget blir lagt ved/gjort tilgjengelig sammen med denne invitasjon, jf. FOA §14-1(2). I forbindelse med denne kunngjøringen vil kommunen opplyse om at det i konkurransegrunnlaget blant annet vil bli lagt vekt på følgende tema: *Tomtestørrelse. Det legges opp til gode og romslige utearealer for beboerne, som minimum skal inneholde sansehage, gangstier, hvilesteder etc. *Areal. Det må leveres et kartutsnitt av tomten som viser plasseringen av sykehjemmet, og et grovt regnet utvendig areal. *Beliggenhet. Tomten må ha en attraktiv beliggenhet i form av gode sol- og utsiktsforhold, samt at tomten inviterer til aktiviteter og muligheter for å være en møteplass for beboere og innbyggere i nærområdet. *Klima- og miljøhensyn. Disse temaene må svares ut i henhold til konkurransegrunnlaget i forbindelse med tilbudsinnleveringen. Vedlagt ligger siste kommunestyresak 053/23 til orientering. Det presiseres at vedtaket fra kommunestyret (nederst på side 4 og øverst på side 5) inneholder enkelte endringer fra kommunedirektørens innstilling.",
+        "awardCriteria": {
+          "criteria": [
+            {
+              "description": "Price is not the only award criterion and all criteria are stated only in the procurement documents."
+            }
+          ]
+        },
+        "renewal": {
+          "description": "Opsjon på forlengelse av leiekontrakt",
+          "maximumRenewals": 0
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "documents": [
+      {
+        "id": "DOCUMENT_ID_REQUIRED_HERE",
+        "documentType": "biddingDocuments",
+        "url": "https://kgv.doffin.no/ctm/Supplier/Documents/Folder/168267",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "Sykehjem Søndre Slagen",
+    "identifiers": [
+      {
+        "id": "01 (1)",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "works",
+    "description": "Dette er en forhåndskunngjøring etter forskrift om offentlige anskaffelse (FOA) §21-2 (2) av konkurranse for anskaffelse av nytt sykehjem med 84 plasser i Søndre Slagen. Hensikten med denne kunngjøringen er at eventuelle private tilbydere som har egnet bygg/tomt for sykehjem for 84 beboere i nevnte område melder sin interesse. Tønsberg kommune vil være leietaker når sykehjemmet er ferdigstilt. Interesserte leverandører inviteres til å melde sin interesse nå siden kontrakt vil bli inngått uten ytterligere kunngjøring. Det er kun leverandører som har meldt sin interesse til oppdragsgiver, som vil få mulighet til å innlevere tilbud. Vedlagt skjema for kontaktopplysninger bes fylles ut.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "id": "45000000",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "45000000"
+        },
+        "deliveryAddresses": [
+          {
+            "streetAddress": "Tønsberg"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "streetAddress": "Tønsberg"
+      }
+    ]
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2023-05-08T12:00:00+02:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "ra",
+            "description": "Regional authority"
+          }
+        ],
+        "url": "http://www.tonsberg.kommune.no",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/2594"
+      },
+      "name": "Tønsberg kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "950 611 839",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Therese Borge",
+        "telephone": "+47 48255955",
+        "email": "therese.borge@tonsberg.kommune.no"
+      },
+      "roles": [
+        "buyer",
+        "processContactPoint"
+      ],
+      "address": {
+        "streetAddress": "postboks 2410",
+        "postalCode": "3104",
+        "locality": "Tønsberg",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Tønsberg kommune",
+      "additionalIdentifiers": [
+        {
+          "id": "921383681",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Therese Borge",
+        "email": "therese.borge@tonsberg.kommune.no"
+      },
+      "details": {
+        "url": "http://www.tonsberg.kommune.no"
+      },
+      "address": {
+        "streetAddress": "Postboks 2410",
+        "postalCode": "3104",
+        "locality": "Tønsberg",
+        "country": "NO"
+      },
+      "roles": [
+        "submissionReceiptBody"
+      ]
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Vestfold tingrett",
+      "contactPoint": {
+        "email": "vestfold.tingrett@domstol.no"
+      },
+      "address": {
+        "streetAddress": "Postboks 2013",
+        "postalCode": "3103",
+        "locality": "Tønsberg",
+        "country": "NO"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "language": "nb",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

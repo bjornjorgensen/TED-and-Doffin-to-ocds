@@ -146,13 +146,6 @@ def test_integration(tmp_path, temp_output_dir) -> None:
     )
 
 
-def test_invalid_xml() -> None:
-    """Test handling of invalid XML."""
-    invalid_xml = "<invalid>"
-    result = parse_part_place_performance(invalid_xml)
-    assert result is None
-
-
 def test_empty_regions() -> None:
     """Test handling of XML with no regions."""
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>

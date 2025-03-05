@@ -1,1 +1,396 @@
-{"id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3", "initiationType": "tender", "ocid": "ocds-abcd1234-4e17730c-6d76-4c36-8c53-205d8d29696c", "tender": {"legalBasis": {"id": "Anskaffelsesforskriften", "wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "status": "active", "id": "aff413b9-5d9f-42d0-ba22-aa3f7cefe0fd", "procurementMethod": "open", "procurementMethodDetails": "Open procedure", "lots": [{"id": "LOT-0000", "enquiryPeriod": {"endDate": "2024-03-12T11:00:00+00:00"}, "tenderPeriod": {"endDate": "2024-03-22T11:00:00+00:00"}, "submissionTerms": {"electronicSubmissionPolicy": "required", "variantPolicy": "notAllowed", "advancedElectronicSignatureRequired": true, "multipleBidsAllowed": false, "languages": ["no"]}, "title": "223003 Reservevannforsyning Gjøvik - Biri - Detaljprosjektering", "identifiers": [{"id": "2024/1387", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Gjøvik kommune har besluttet å etablere en fullverdig reservevannløsning med mulighet til å forsyne både Biri og Gjøvik. I et tidligere ledningsprosjekt er det ført frem sjøledning fra Gjøvik til Redalen. I Redalen er det etablert en ny pumpestasjon (trykkøkningsstasjon), samt etablert punkt for påkobling av ny sjøledning videre til Biri.  Gjennom et forprosjekt i 2022-23 har Gjøvik kommune avklart plassering og dimensjonering av nytt vannbehandlingsanlegg, nytt vanninntak og ny råvannstasjon på Biri, samt valg av behandlingsprosess.Konkurransegrunnlaget gjelder anskaffelse av rådgiveroppdrag for utarbeidelse av prosjekteringsgrunnlaget og gjennomføring av anskaffelse for etablering av fullverdig reservevannsløsning som beskrevet ovenfor.", "additionalProcurementCategories": ["works"], "awardCriteria": {"criteria": [{"type": "price", "numbers": [{"number": "1", "weight": "pointsExact"}, {"number": "2"}, {"number": "3"}]}, {"type": "quality"}, {"description": "Vekter 30 %"}, {"description": "Scales 30 %"}, {"description": "Vekter 40 %"}, {"description": "Scales 40 %"}, {"description": "Vekt 30 %"}, {"description": "Weight 30 %"}, {"name": "P: Pris"}, {"name": "P: Price"}, {"name": "K1 Oppdragsforståelse"}, {"name": "K1 Assignment Comprehension"}, {"name": "K2 Kompetanse og erfaring"}, {"name": "K2 Competence and experience"}]}, "selectionCriteria": {"criteria": [{"title": "Finansielle nøkkeltall", "description": "Finansielle nøkkeltall: Når det gjelder finansielle nøkkeltall som er angitt i kunngjøringen eller i anskaffelsesdokumentene erklærer leverandøren at den eller de faktiske verdien(e) for det eller de nøkkeltall(ene) som det anmodes om er som følger:\nMinstekrav til kvalifikasjonskrav\nTilbyderen skal ha økonomisk kapasitet til å gjennomføre kontrakten. \nDet skal legges ved dokumentasjon av at tilbyderen har tilstrekkelig soliditet gjennom kredittvurdering fra egnet kredittvurderingsfirma. Kredittvurderingen skal være fra siste års godkjente regnskap. Ratingkrav er AA eller bedre evaluert fra Bisnode eller andre tilsvarende firma.  Som kontroll vil kommunen benytte Bisnode for kredittvurdering.  \nDet skal legges ved dokumentasjon på at tilbyderen har en omsetning på minimum NOK 100 mill. eks. mva. pr. år de siste 3 år.\nTilbyder skal kunne dokumentere positiv egenkapital."}, {"title": "Øvrige økonomiske og finansielle krav", "description": "Øvrige økonomiske og finansielle krav: Når det gjelder eventuelle øvrige økonomiske og finansielle krav som har blitt angitt i kunngjøringen eller i anskaffelsesdokumentene erklærer leverandøren at:\nMinstekrav til kvalifikasjonskrav\nTilbyder skal ha ordnede forhold hva gjelder betaling av skatter og avgifter.  \nNorsk firma: Skatteattest og attest for merverdiavgift, begge ikke eldre enn 6 måneder fra tilbudsfristens utløp. \nUtenlandsk firma: Attest utstedt av vedkommende myndighet i tilbyders hjemland."}, {"title": "Attester utstedt av uavhengige organer for kvalitetssikringsstandarder", "description": "Attester utstedt av uavhengige organer for kvalitetssikringsstandarder: Kan leverandør fremlegge attester utstedt av uavhengige organer som dokumentasjon for at leverandøren oppfyller de angitte kvalitetssikringsstandardene, inkludert krav til universell utforming?\nMinstekrav til kvalifikasjonskrav\nTilbyder skal ha et kvalitetssikringssystem som er tilstrekkelig for å gjennomføre kontrakten.\nISO 9001-sertifisert kvalitetssikringssystem er godkjent som dokumentasjon. Oppdragsgiver sjekker krav via startbank.\n\nOppdragsgiver vil godta andre tilsvarende attester utstedt av organer i andre EØS-stater. \nHvis tilbyderen ikke har et tredjepartssertifisert system for kvalitetssikring/ styring, skal tilbyderen beskrive rutiner og tiltak som iverksettes ved utførelsen av leveransen, og som viser at tilbyderen har et eget kvalitetssikrings-/ styringssystem og dokumenterte mål. Mangler tilbyderen ekstern sertifisering må det redegjøres for hvordan systemer revideres og kvalitetsmål følges opp.  \nBeskrivelsen skal begrenses til maksimalt 4 A4 sider."}, {"title": "Attester utstedt av uavhengige organer for miljøledelsesstandarder", "description": "Attester utstedt av uavhengige organer for miljøledelsesstandarder: Er leverandøren i stand til å fremlegge attester utstedt av uavhengige organer som dokumentasjon for at leverandøren oppfyller de angitte miljøledelsessystemene eller -standardene?\nMinstekrav til kvalifikasjonskrav\nEt miljøstyringssystem som er tilstrekkelig til å gjennomføre kontrakten:\nISO 14001-sertifisert miljøstyringssystem er godkjent som dokumentasjon. Oppdragsgiver sjekker krav via startbank. \n\nOppdragsgiver vil godta andre tilsvarende attester utstedt av organer i andre EØS-stater. \nHvis tilbyderen ikke har et tredjepartssertifisert system for miljøstyringssystem, skal tilbyderen beskrive rutiner og tiltak som iverksettes ved utførelsen av leveransen, og som viser at tilbyderen har et eget miljøstyringssystem og dokumenterte mål. Mangler tilbyderen ekstern sertifisering må det redegjøres for hvordan systemer revideres og kvalitetsmål følges opp.  \nBeskrivelsen skal begrenses til maksimalt 4 A4 sider."}, {"title": "Registrert i handelsregister eller foretaksregister", "description": "Registrert i handelsregister eller foretaksregister: Leverandør er registrert i et foretaksregister eller et handelsregister i medlemsstaten som leverandøren er etablert i. Som beskrevet i bilag XI til direktiv 2014/24/EU; leverandører fra visse medlemsstater kan være nødt til å oppfylle andre krav i nevnte bilag.\nMinstekrav til kvalifikasjonskrav\nOppdragsgiver sjekker krav via startbank.\nAlternativt kan det vedlegges:\nNorske firma: Firmaattest \nUtenlandske firma: Attester for registrering i faglige register som bestemt ved lovgivning i det land hvor tilbyderen er etablert."}, {"title": "Bare for bygg- og anleggsarbeider:", "description": "Bare for bygg- og anleggsarbeider:: Bare for offentlige bygg- og anleggsarbeider: I referanseperioden  har leverandøren utført følgende arbeider av den etterspurte type. Oppdragsgiver kan kreve opp til fem års erfaring og tillate at det tas hensyn til erfaring fra tiden før de seneste fem år.\nMinstekrav til kvalifikasjonskrav\nTilbyder må dokumentere erfaring fra relevante oppdrag av tilsvarende karakter:\nDet stilles krav om erfaring fra prosjektering av vannbehandlingsanlegg eller minst tilsvarende kompliserte prosessbygg.\nSom erfaring teller kun prosjekter som er ført frem til ett ferdig arbeidsgrunnlag for byggeplass (inkl. igangsettingstillatelse) \nMulighetsstudier, skisseprosjekter etc. teller ikke som referanseprosjekt. \nTilbyder skal oppgi og beskrive minst 3 referanseprosjekter av tilsvarende vannbehandlingsanlegg eller tilsvarende kompliserte prosessbygg. Tilbyder skal benytte vedlagte mal for firmaets referanseoppdrag,"}, {"title": "Utdanning og faglige kvalifikasjoner", "description": "Utdanning og faglige kvalifikasjoner: Følgende utdanning og faglige kvalifikasjoner besittes av leverandøren og/eller (avhengig av hvilke krav som er fastsatt i kunngjøringen eller i anskaffelsesdokumenterne) av de ledende medarbeiderne:\nMinstekrav til kvalifikasjonskrav\nTilstrekkelig tilgjengelig personell for å gjennomføre oppdraget:\nTilbyder må erklære å ha tilstrekkelig tilgjengelige personell. Det må gis en oversikt over tilbyders prosjektorganisasjon, som inkluder tiltenkte ressurser og reservert personell, som tilfredsstiller minstekravet til erfaring for henholdsvis nøkkelfunksjoner og støttefag. Definisjon av hva som anses som nøkkelfunksjoner og støttefunksjoner er angitt i kapittel 2.6 i konkurransegrunnlaget del III oppdragsbeskrivelsen:\nNøkkelfunksjoner:\no Minimum 10 års relevant erfaring\no Bachelor/master eller tilsvarende fra høyskole eller universitet\no Minimum 3 referanser fra tilsvarende prosjekter  \n\nStøttefunksjoner:\no Minimum 3 års relevant erfaring\no Bachelor/master eller tilsvarende fra høyskole eller universitet\no Minimum 1  referanseprosjekt fra tilsvarende prosjekter siste 3 år\nSpesiell spisskompetanse eller lang relevant erfaring kan kompensere for eventuell manglende oppfyllelse av ovennevnte."}, {"description": "Følgende utdanning og faglige kvalifikasjoner besittes av leverandøren og/eller (avhengig av hvilke krav som er fastsatt i kunngjøringen eller i anskaffelsesdokumenterne) av de ledende medarbeiderne:\nMinstekrav til kvalifikasjonskrav\nTilstrekkelig tilgjengelig personell for å gjennomføre oppdraget:\nTilbyder må erklære å ha tilstrekkelig tilgjengelige personell. Det må gis en oversikt over tilbyders prosjektorganisasjon, som inkluder tiltenkte ressurser og reservert personell, som tilfredsstiller minstekravet til erfaring for henholdsvis nøkkelfunksjoner og støttefag. Definisjon av hva som anses som nøkkelfunksjoner og støttefunksjoner er angitt i kapittel 2.6 i konkurransegrunnlaget del III oppdragsbeskrivelsen:\nNøkkelfunksjoner:\no Minimum 10 års relevant erfaring\no Bachelor/master eller tilsvarende fra høyskole eller universitet\no Minimum 3 referanser fra tilsvarende prosjekter  \n\nStøttefunksjoner:\no Minimum 3 års relevant erfaring\no Bachelor/master eller tilsvarende fra høyskole eller universitet\no Minimum 1  referanseprosjekt fra tilsvarende prosjekter siste 3 år\nSpesiell spisskompetanse eller lang relevant erfaring kan kompensere for eventuell manglende oppfyllelse av ovennevnte.", "languageID": "NOR"}]}, "hasAccessibilityCriteria": false, "hasSustainability": true, "sustainability": [{"goal": "environmental"}]}], "documents": [{"id": "216664216", "documentType": "biddingDocuments", "url": "https://permalink.mercell.com/216664216.aspx", "relatedLots": ["LOT-0000"]}], "title": "223003 Reservevannforsyning Gjøvik - Biri - Detaljprosjektering", "identifiers": [{"id": "2024/1387", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Gjøvik kommune har besluttet å etablere en fullverdig reservevannløsning med mulighet til å forsyne både Biri og Gjøvik. I et tidligere ledningsprosjekt er det ført frem sjøledning fra Gjøvik til Redalen. I Redalen er det etablert en ny pumpestasjon (trykkøkningsstasjon), samt etablert punkt for påkobling av ny sjøledning videre til Biri.  Gjennom et forprosjekt i 2022-23 har Gjøvik kommune avklart plassering og dimensjonering av nytt vannbehandlingsanlegg, nytt vanninntak og ny råvannstasjon på Biri, samt valg av behandlingsprosess.Konkurransegrunnlaget gjelder anskaffelse av rådgiveroppdrag for utarbeidelse av prosjekteringsgrunnlaget og gjennomføring av anskaffelse for etablering av fullverdig reservevannsløsning som beskrevet ovenfor.", "items": [{"id": "1", "additionalClassifications": [{"id": "45232430", "scheme": "CPV"}], "relatedLot": "LOT-0000", "classification": {"scheme": "CPV", "id": "71320000"}, "deliveryAddresses": [{"region": "NO020"}, {"country": "NO"}]}, {"id": "LOT-0000", "relatedLot": "LOT-0000", "deliveryAddresses": [{"locality": "Gjøvik"}]}], "deliveryAddresses": [{"region": "NO020"}, {"locality": "Gjøvik"}, {"country": "NO"}], "additionalProcurementCategories": ["works"], "exclusionGrounds": {"criteria": [{"type": "bankr-nat", "description": "Analogous situation like bankruptcy under national law: Er leverandøren i en situasjon hvor han har fått tvungen gjeldsordning?  Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."}, {"type": "bankruptcy", "description": "Bankruptcy: Er leverandøren i en konkurssituasjon? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."}, {"type": "corruption", "description": "Corruption: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for korrupsjon ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?Korrupsjon som definert i artikkel 3 i konvensjonen om bekjempelse av korrupsjon, som involverer tjenestemenn i De Europeiske Fellesskapene eller i Den Europeiske Unions medlemsstater (EUT C 195 av 25.6.1997, s. 1), og i artikkel 2, stk. 1, i Rådets rammeavgjørelse 2003/568/RIA av 22. juli 2003 om bekjempelse av korrupsjon i den private sektor (EUT L 192 av 31.7.2003, s. 54). Denne avvisningsgrunnen omfatter også korrupsjon som definert i nasjonal rett for oppdragsgiveren eller leverandøren."}, {"type": "cred-arran", "description": "Arrangement with creditors: Er leverandøren i en situasjon hvor han har fått tvungen gjeldsordning?  Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."}, {"type": "crime-org", "description": "participation in a criminal organisation: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for deltakelse i en kriminell organisasjon ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Deltakelse i en kriminell organisasjon som definert i artikkel 2 i Rådets rammeavgjørelse 2008/841/RIA av 24. oktober 2008 om bekjempelse av organisert kriminalitet (EUT L 300 av 11.11.2008, s. 42)"}, {"type": "distorsion", "description": "Agreements with other economic operators aimed at distorting competition: Har leverandør inngått avtale(r) med andre leverandører med hensikt å vri konkurransen?"}, {"type": "envir-law", "description": "Breaching of obligations in the fields of environmental law: Er leverandøren kjent med å ha begått brudd på bestemmelser om miljø slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."}, {"type": "finan-laund", "description": "Money laundering or terrorist financing: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for hvitvasking av penger eller finansiering av terrorisme ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?Hvitvasking av penger eller finansiering av terrorismeSom definert i artikkel 1 i Europaparlamentets og Rådets direktiv 2005/60/EF av 26. oktober 2005 om forebyggende tiltak mot bruk av det finansielle system til hvitvasking av penger og finansiering av terrorisme (EUT L 309 av 25.11.2005, s. 15)."}, {"type": "fraud", "description": "Fraud: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for bedrageri ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?Bedrageri som  omhandlet i artikkel 1 i konvensjonen om beskyttelse av De Europeiske Fellesskapenes finansielle interesser (EFT C 316 av 27.11.1995, s. 48)."}, {"type": "human-traffic", "description": "Child labour and other forms of trafficking in human beings: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for barnearbeid og andre former for menneskehandel ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?Barnearbeid og andre former for menneskehandel som definert i artikkel 2 i Europaparlamentets og Rådets direktiv 2011/36/EU av 5. april 2011 om forebygging og bekjempelse av menneskehandel og beskyttelse av dets ofre, og om erstatning av Rådets rammeavgjørelse 2002/629/RIA (EUT L 101 av 15.4.2011, s. 1)."}, {"type": "insolvency", "description": "Insolvency: Er leverandøren i en insolvenssituasjon? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."}, {"type": "labour-law", "description": "Breaching of obligations in the fields of labour law: Er leverandøren kjent med å ha begått brudd på bestemmelser om arbeidsforhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."}, {"type": "liq-admin", "description": "Assets being administered by liquidator: Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."}, {"type": "misrepresent", "description": "Guilty of misrepresentation, withheld information, unable to provide required documents and obtained confidential information of this procedure: Har leverandøren:a) gitt grovt uriktige opplysninger ved meddelelsen av opplysningene som kreves for å kontrollere at det ikke er grunnlag for avvisning, eller av at kvalifikasjonskravene er oppfylt,b) unnlatt å gi slike opplysninger,c) tatt forbehold om straks å fremlegge de støttedokumenter som oppdragsgiver anmoder om, ellerd) urettmessig påvirket oppdragsgivers beslutningsprosess for å tilegne seg konfidensiell informasjon som kan gi denne en urettmessig fordel i forbindelse med konkurransen, eller uaktsomt har gitt misvisende opplysninger som kan få vesentlig innflytelse på beslutninger om avvisning, utvelgelse eller tildeling?"}, {"type": "nati-ground", "description": "Purely national exclusion grounds: Oppdragsgiver skal angi at i Norge foreligger det nasjonale avvisningsgrunner. Disse skal være beskrevet i anskaffelsesdokumentene. Leverandøren må besvare om han er i en eller flere av de situasjonene som er beskrevet i de nasjonale avvisningsgrunnene. Får de rent nasjonale avvisningsgrunnene, som er angitt i den relevante kunngjøringen eller i anskaffelsesdokumentene, anvendelse?"}, {"type": "partic-confl", "description": "Conflict of interest due to its participation in the procurement procedure: Er leverandør oppmerksom på en interessekonflikt slik denne er angitt i nasjonal rett, den relevante kunngjøring eller anskaffelsesdokumentene?"}, {"type": "prep-confl", "description": "Direct or indirect involvement in the preparation of this procurement procedure: Har leverandør eller en virksomhet tilknyttet leverandøren gitt råd til oppdragsgiver eller på annen måte vært involvert i planleggingen av konkurransen?"}, {"type": "prof-misconduct", "description": "Guilty of grave professional misconduct: Har leverandøren begått alvorlige feil i yrkesutøvelsen? Hvis det er relevant, se definisjoner i nasjonal rett, den relevante kunngjøring eller anskaffelsesdokumentene."}, {"type": "sanction", "description": "Early termination, damages or other comparable sanctions: Har leverandør begått vesentlig kontraktsbrudd i forbindelse med oppfyllelsen av en tidligere offentlig kontrakt, en tidligere kontrakt med en offentlig oppdragsgiver eller en tidligere konsesjonskontrakt, der bruddet har ført til heving av kontrakten, erstatning eller andre lignende sanksjoner?"}, {"type": "socsec-law", "description": "Breaching of obligations in the fields of social law: Er leverandøren kjent med å ha begått brudd på bestemmelser om sosiale forhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."}, {"type": "socsec-pay", "description": "Payment of social security contributions: Har leverandør unnlatt å oppfylle alle sine forpliktelser til å betale trygdeavgifter både i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et annet land enn det han er etablert i?"}, {"type": "susp-act", "description": "Business activities are suspended: Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."}, {"type": "tax-pay", "description": "Payment of taxes: Har leverandøren unnlatt å oppfylle sine forpliktelser til å betale skatter og avgifter i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et annet land enn det han er etablert i?"}, {"type": "terr-offence", "description": "Terrorist offences or offences linked to terrorist activities: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitetved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitet som definert i artikkel 1 og 3 i Rådets rammeavgjørelse 2002/475/RIA av 13. juni 2002 om bekjempelse av terrorisme (EFT L 164 af 22.6.2002, s. 3). Denne avvisningsgrunnen omfatter også oppfordring til, medvirkning til eller forsøk på å begå slike handlinger som omhandlet i artikkel 4 i nevnte rammeavgjørelse."}]}}, "tag": ["tender"], "date": "2024-02-02T13:12:08+00:00", "parties": [{"id": "ORG-0001", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "pub-undert", "description": "Public undertaking"}], "url": "http://www.gjovik.kommune.no", "buyerProfile": "http://www.gjovik.kommune.no/"}, "name": "Gjøvikregionen - Anskaffelser", "additionalIdentifiers": [{"id": "940155223", "scheme": "GB-COH"}], "contactPoint": {"name": "Kenneth Hvalby", "telephone": "+47 61189500", "email": "kenneth.hvalby@gjovik.kommune.no", "faxNumber": "+47 61176333"}, "roles": ["submissionReceiptBody", "reviewContactPoint", "buyer", "processContactPoint", "evaluationBody"], "address": {"streetAddress": "Kauffelds plass 1", "postalCode": "2815", "locality": "GJØVIK", "country": "NO"}}, {"id": "ORG-0002", "name": "Vestre Innlandet tingrett - Gjøvik", "additionalIdentifiers": [{"id": "926723758", "scheme": "GB-COH"}], "contactPoint": {"telephone": "61 02 02 00", "email": "vestre.innlandet.tingrett@domstol.no"}, "address": {"streetAddress": "Strandgata 26", "postalCode": "2801", "locality": "Gjøvik", "country": "NO"}, "roles": ["mediationBody", "reviewBody"]}], "language": "no", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "ea719af7-65b8-4cb4-9230-e4bf9115dae3",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-f30b41ef-85ef-471d-89b5-1a537400e688",
+  "tender": {
+    "legalBasis": {
+      "id": "Anskaffelsesforskriften",
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "status": "active",
+    "id": "aff413b9-5d9f-42d0-ba22-aa3f7cefe0fd",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Open procedure",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "enquiryPeriod": {
+          "endDate": "2024-03-12T11:00:00+00:00"
+        },
+        "tenderPeriod": {
+          "endDate": "2024-03-22T11:00:00+00:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "variantPolicy": "notAllowed",
+          "advancedElectronicSignatureRequired": true,
+          "multipleBidsAllowed": false,
+          "languages": [
+            "no"
+          ]
+        },
+        "title": "223003 Reservevannforsyning Gjøvik - Biri - Detaljprosjektering",
+        "identifiers": [
+          {
+            "id": "2024/1387",
+            "scheme": "internal"
+          }
+        ],
+        "mainProcurementCategory": "services",
+        "description": "Gjøvik kommune har besluttet å etablere en fullverdig reservevannløsning med mulighet til å forsyne både Biri og Gjøvik. I et tidligere ledningsprosjekt er det ført frem sjøledning fra Gjøvik til Redalen. I Redalen er det etablert en ny pumpestasjon (trykkøkningsstasjon), samt etablert punkt for påkobling av ny sjøledning videre til Biri.  Gjennom et forprosjekt i 2022-23 har Gjøvik kommune avklart plassering og dimensjonering av nytt vannbehandlingsanlegg, nytt vanninntak og ny råvannstasjon på Biri, samt valg av behandlingsprosess.Konkurransegrunnlaget gjelder anskaffelse av rådgiveroppdrag for utarbeidelse av prosjekteringsgrunnlaget og gjennomføring av anskaffelse for etablering av fullverdig reservevannsløsning som beskrevet ovenfor.",
+        "additionalProcurementCategories": [
+          "works"
+        ],
+        "awardCriteria": {
+          "criteria": [
+            {
+              "type": "price",
+              "numbers": [
+                {
+                  "number": "1",
+                  "weight": "pointsExact"
+                },
+                {
+                  "number": "2"
+                },
+                {
+                  "number": "3"
+                }
+              ]
+            },
+            {
+              "type": "quality"
+            },
+            {
+              "description": "Vekter 30 %"
+            },
+            {
+              "description": "Scales 30 %"
+            },
+            {
+              "description": "Vekter 40 %"
+            },
+            {
+              "description": "Scales 40 %"
+            },
+            {
+              "description": "Vekt 30 %"
+            },
+            {
+              "description": "Weight 30 %"
+            },
+            {
+              "name": "P: Pris"
+            },
+            {
+              "name": "P: Price"
+            },
+            {
+              "name": "K1 Oppdragsforståelse"
+            },
+            {
+              "name": "K1 Assignment Comprehension"
+            },
+            {
+              "name": "K2 Kompetanse og erfaring"
+            },
+            {
+              "name": "K2 Competence and experience"
+            }
+          ]
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "title": "Finansielle nøkkeltall",
+              "description": "Finansielle nøkkeltall: Når det gjelder finansielle nøkkeltall som er angitt i kunngjøringen eller i anskaffelsesdokumentene erklærer leverandøren at den eller de faktiske verdien(e) for det eller de nøkkeltall(ene) som det anmodes om er som følger:\nMinstekrav til kvalifikasjonskrav\nTilbyderen skal ha økonomisk kapasitet til å gjennomføre kontrakten. \nDet skal legges ved dokumentasjon av at tilbyderen har tilstrekkelig soliditet gjennom kredittvurdering fra egnet kredittvurderingsfirma. Kredittvurderingen skal være fra siste års godkjente regnskap. Ratingkrav er AA eller bedre evaluert fra Bisnode eller andre tilsvarende firma.  Som kontroll vil kommunen benytte Bisnode for kredittvurdering.  \nDet skal legges ved dokumentasjon på at tilbyderen har en omsetning på minimum NOK 100 mill. eks. mva. pr. år de siste 3 år.\nTilbyder skal kunne dokumentere positiv egenkapital."
+            },
+            {
+              "title": "Øvrige økonomiske og finansielle krav",
+              "description": "Øvrige økonomiske og finansielle krav: Når det gjelder eventuelle øvrige økonomiske og finansielle krav som har blitt angitt i kunngjøringen eller i anskaffelsesdokumentene erklærer leverandøren at:\nMinstekrav til kvalifikasjonskrav\nTilbyder skal ha ordnede forhold hva gjelder betaling av skatter og avgifter.  \nNorsk firma: Skatteattest og attest for merverdiavgift, begge ikke eldre enn 6 måneder fra tilbudsfristens utløp. \nUtenlandsk firma: Attest utstedt av vedkommende myndighet i tilbyders hjemland."
+            },
+            {
+              "title": "Attester utstedt av uavhengige organer for kvalitetssikringsstandarder",
+              "description": "Attester utstedt av uavhengige organer for kvalitetssikringsstandarder: Kan leverandør fremlegge attester utstedt av uavhengige organer som dokumentasjon for at leverandøren oppfyller de angitte kvalitetssikringsstandardene, inkludert krav til universell utforming?\nMinstekrav til kvalifikasjonskrav\nTilbyder skal ha et kvalitetssikringssystem som er tilstrekkelig for å gjennomføre kontrakten.\nISO 9001-sertifisert kvalitetssikringssystem er godkjent som dokumentasjon. Oppdragsgiver sjekker krav via startbank.\n\nOppdragsgiver vil godta andre tilsvarende attester utstedt av organer i andre EØS-stater. \nHvis tilbyderen ikke har et tredjepartssertifisert system for kvalitetssikring/ styring, skal tilbyderen beskrive rutiner og tiltak som iverksettes ved utførelsen av leveransen, og som viser at tilbyderen har et eget kvalitetssikrings-/ styringssystem og dokumenterte mål. Mangler tilbyderen ekstern sertifisering må det redegjøres for hvordan systemer revideres og kvalitetsmål følges opp.  \nBeskrivelsen skal begrenses til maksimalt 4 A4 sider."
+            },
+            {
+              "title": "Attester utstedt av uavhengige organer for miljøledelsesstandarder",
+              "description": "Attester utstedt av uavhengige organer for miljøledelsesstandarder: Er leverandøren i stand til å fremlegge attester utstedt av uavhengige organer som dokumentasjon for at leverandøren oppfyller de angitte miljøledelsessystemene eller -standardene?\nMinstekrav til kvalifikasjonskrav\nEt miljøstyringssystem som er tilstrekkelig til å gjennomføre kontrakten:\nISO 14001-sertifisert miljøstyringssystem er godkjent som dokumentasjon. Oppdragsgiver sjekker krav via startbank. \n\nOppdragsgiver vil godta andre tilsvarende attester utstedt av organer i andre EØS-stater. \nHvis tilbyderen ikke har et tredjepartssertifisert system for miljøstyringssystem, skal tilbyderen beskrive rutiner og tiltak som iverksettes ved utførelsen av leveransen, og som viser at tilbyderen har et eget miljøstyringssystem og dokumenterte mål. Mangler tilbyderen ekstern sertifisering må det redegjøres for hvordan systemer revideres og kvalitetsmål følges opp.  \nBeskrivelsen skal begrenses til maksimalt 4 A4 sider."
+            },
+            {
+              "title": "Registrert i handelsregister eller foretaksregister",
+              "description": "Registrert i handelsregister eller foretaksregister: Leverandør er registrert i et foretaksregister eller et handelsregister i medlemsstaten som leverandøren er etablert i. Som beskrevet i bilag XI til direktiv 2014/24/EU; leverandører fra visse medlemsstater kan være nødt til å oppfylle andre krav i nevnte bilag.\nMinstekrav til kvalifikasjonskrav\nOppdragsgiver sjekker krav via startbank.\nAlternativt kan det vedlegges:\nNorske firma: Firmaattest \nUtenlandske firma: Attester for registrering i faglige register som bestemt ved lovgivning i det land hvor tilbyderen er etablert."
+            },
+            {
+              "title": "Bare for bygg- og anleggsarbeider:",
+              "description": "Bare for bygg- og anleggsarbeider:: Bare for offentlige bygg- og anleggsarbeider: I referanseperioden  har leverandøren utført følgende arbeider av den etterspurte type. Oppdragsgiver kan kreve opp til fem års erfaring og tillate at det tas hensyn til erfaring fra tiden før de seneste fem år.\nMinstekrav til kvalifikasjonskrav\nTilbyder må dokumentere erfaring fra relevante oppdrag av tilsvarende karakter:\nDet stilles krav om erfaring fra prosjektering av vannbehandlingsanlegg eller minst tilsvarende kompliserte prosessbygg.\nSom erfaring teller kun prosjekter som er ført frem til ett ferdig arbeidsgrunnlag for byggeplass (inkl. igangsettingstillatelse) \nMulighetsstudier, skisseprosjekter etc. teller ikke som referanseprosjekt. \nTilbyder skal oppgi og beskrive minst 3 referanseprosjekter av tilsvarende vannbehandlingsanlegg eller tilsvarende kompliserte prosessbygg. Tilbyder skal benytte vedlagte mal for firmaets referanseoppdrag,"
+            },
+            {
+              "title": "Utdanning og faglige kvalifikasjoner",
+              "description": "Utdanning og faglige kvalifikasjoner: Følgende utdanning og faglige kvalifikasjoner besittes av leverandøren og/eller (avhengig av hvilke krav som er fastsatt i kunngjøringen eller i anskaffelsesdokumenterne) av de ledende medarbeiderne:\nMinstekrav til kvalifikasjonskrav\nTilstrekkelig tilgjengelig personell for å gjennomføre oppdraget:\nTilbyder må erklære å ha tilstrekkelig tilgjengelige personell. Det må gis en oversikt over tilbyders prosjektorganisasjon, som inkluder tiltenkte ressurser og reservert personell, som tilfredsstiller minstekravet til erfaring for henholdsvis nøkkelfunksjoner og støttefag. Definisjon av hva som anses som nøkkelfunksjoner og støttefunksjoner er angitt i kapittel 2.6 i konkurransegrunnlaget del III oppdragsbeskrivelsen:\nNøkkelfunksjoner:\no Minimum 10 års relevant erfaring\no Bachelor/master eller tilsvarende fra høyskole eller universitet\no Minimum 3 referanser fra tilsvarende prosjekter  \n\nStøttefunksjoner:\no Minimum 3 års relevant erfaring\no Bachelor/master eller tilsvarende fra høyskole eller universitet\no Minimum 1  referanseprosjekt fra tilsvarende prosjekter siste 3 år\nSpesiell spisskompetanse eller lang relevant erfaring kan kompensere for eventuell manglende oppfyllelse av ovennevnte."
+            },
+            {
+              "description": "Følgende utdanning og faglige kvalifikasjoner besittes av leverandøren og/eller (avhengig av hvilke krav som er fastsatt i kunngjøringen eller i anskaffelsesdokumenterne) av de ledende medarbeiderne:\nMinstekrav til kvalifikasjonskrav\nTilstrekkelig tilgjengelig personell for å gjennomføre oppdraget:\nTilbyder må erklære å ha tilstrekkelig tilgjengelige personell. Det må gis en oversikt over tilbyders prosjektorganisasjon, som inkluder tiltenkte ressurser og reservert personell, som tilfredsstiller minstekravet til erfaring for henholdsvis nøkkelfunksjoner og støttefag. Definisjon av hva som anses som nøkkelfunksjoner og støttefunksjoner er angitt i kapittel 2.6 i konkurransegrunnlaget del III oppdragsbeskrivelsen:\nNøkkelfunksjoner:\no Minimum 10 års relevant erfaring\no Bachelor/master eller tilsvarende fra høyskole eller universitet\no Minimum 3 referanser fra tilsvarende prosjekter  \n\nStøttefunksjoner:\no Minimum 3 års relevant erfaring\no Bachelor/master eller tilsvarende fra høyskole eller universitet\no Minimum 1  referanseprosjekt fra tilsvarende prosjekter siste 3 år\nSpesiell spisskompetanse eller lang relevant erfaring kan kompensere for eventuell manglende oppfyllelse av ovennevnte.",
+              "languageID": "NOR"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false,
+        "hasSustainability": true,
+        "sustainability": [
+          {
+            "goal": "environmental"
+          }
+        ]
+      }
+    ],
+    "documents": [
+      {
+        "id": "216664216",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/216664216.aspx",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "223003 Reservevannforsyning Gjøvik - Biri - Detaljprosjektering",
+    "identifiers": [
+      {
+        "id": "2024/1387",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "services",
+    "description": "Gjøvik kommune har besluttet å etablere en fullverdig reservevannløsning med mulighet til å forsyne både Biri og Gjøvik. I et tidligere ledningsprosjekt er det ført frem sjøledning fra Gjøvik til Redalen. I Redalen er det etablert en ny pumpestasjon (trykkøkningsstasjon), samt etablert punkt for påkobling av ny sjøledning videre til Biri.  Gjennom et forprosjekt i 2022-23 har Gjøvik kommune avklart plassering og dimensjonering av nytt vannbehandlingsanlegg, nytt vanninntak og ny råvannstasjon på Biri, samt valg av behandlingsprosess.Konkurransegrunnlaget gjelder anskaffelse av rådgiveroppdrag for utarbeidelse av prosjekteringsgrunnlaget og gjennomføring av anskaffelse for etablering av fullverdig reservevannsløsning som beskrevet ovenfor.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "id": "45232430",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "71320000"
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO020"
+          },
+          {
+            "country": "NO"
+          }
+        ]
+      },
+      {
+        "id": "LOT-0000",
+        "relatedLot": "LOT-0000",
+        "deliveryAddresses": [
+          {
+            "locality": "Gjøvik"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "region": "NO020"
+      },
+      {
+        "locality": "Gjøvik"
+      },
+      {
+        "country": "NO"
+      }
+    ],
+    "additionalProcurementCategories": [
+      "works"
+    ],
+    "exclusionGrounds": {
+      "criteria": [
+        {
+          "type": "bankr-nat",
+          "description": "Analogous situation like bankruptcy under national law: Er leverandøren i en situasjon hvor han har fått tvungen gjeldsordning?  Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."
+        },
+        {
+          "type": "bankruptcy",
+          "description": "Bankruptcy: Er leverandøren i en konkurssituasjon? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."
+        },
+        {
+          "type": "corruption",
+          "description": "Corruption: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for korrupsjon ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?Korrupsjon som definert i artikkel 3 i konvensjonen om bekjempelse av korrupsjon, som involverer tjenestemenn i De Europeiske Fellesskapene eller i Den Europeiske Unions medlemsstater (EUT C 195 av 25.6.1997, s. 1), og i artikkel 2, stk. 1, i Rådets rammeavgjørelse 2003/568/RIA av 22. juli 2003 om bekjempelse av korrupsjon i den private sektor (EUT L 192 av 31.7.2003, s. 54). Denne avvisningsgrunnen omfatter også korrupsjon som definert i nasjonal rett for oppdragsgiveren eller leverandøren."
+        },
+        {
+          "type": "cred-arran",
+          "description": "Arrangement with creditors: Er leverandøren i en situasjon hvor han har fått tvungen gjeldsordning?  Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."
+        },
+        {
+          "type": "crime-org",
+          "description": "participation in a criminal organisation: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for deltakelse i en kriminell organisasjon ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Deltakelse i en kriminell organisasjon som definert i artikkel 2 i Rådets rammeavgjørelse 2008/841/RIA av 24. oktober 2008 om bekjempelse av organisert kriminalitet (EUT L 300 av 11.11.2008, s. 42)"
+        },
+        {
+          "type": "distorsion",
+          "description": "Agreements with other economic operators aimed at distorting competition: Har leverandør inngått avtale(r) med andre leverandører med hensikt å vri konkurransen?"
+        },
+        {
+          "type": "envir-law",
+          "description": "Breaching of obligations in the fields of environmental law: Er leverandøren kjent med å ha begått brudd på bestemmelser om miljø slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."
+        },
+        {
+          "type": "finan-laund",
+          "description": "Money laundering or terrorist financing: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for hvitvasking av penger eller finansiering av terrorisme ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?Hvitvasking av penger eller finansiering av terrorismeSom definert i artikkel 1 i Europaparlamentets og Rådets direktiv 2005/60/EF av 26. oktober 2005 om forebyggende tiltak mot bruk av det finansielle system til hvitvasking av penger og finansiering av terrorisme (EUT L 309 av 25.11.2005, s. 15)."
+        },
+        {
+          "type": "fraud",
+          "description": "Fraud: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for bedrageri ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?Bedrageri som  omhandlet i artikkel 1 i konvensjonen om beskyttelse av De Europeiske Fellesskapenes finansielle interesser (EFT C 316 av 27.11.1995, s. 48)."
+        },
+        {
+          "type": "human-traffic",
+          "description": "Child labour and other forms of trafficking in human beings: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for barnearbeid og andre former for menneskehandel ved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder?Barnearbeid og andre former for menneskehandel som definert i artikkel 2 i Europaparlamentets og Rådets direktiv 2011/36/EU av 5. april 2011 om forebygging og bekjempelse av menneskehandel og beskyttelse av dets ofre, og om erstatning av Rådets rammeavgjørelse 2002/629/RIA (EUT L 101 av 15.4.2011, s. 1)."
+        },
+        {
+          "type": "insolvency",
+          "description": "Insolvency: Er leverandøren i en insolvenssituasjon? Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."
+        },
+        {
+          "type": "labour-law",
+          "description": "Breaching of obligations in the fields of labour law: Er leverandøren kjent med å ha begått brudd på bestemmelser om arbeidsforhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."
+        },
+        {
+          "type": "liq-admin",
+          "description": "Assets being administered by liquidator: Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."
+        },
+        {
+          "type": "misrepresent",
+          "description": "Guilty of misrepresentation, withheld information, unable to provide required documents and obtained confidential information of this procedure: Har leverandøren:a) gitt grovt uriktige opplysninger ved meddelelsen av opplysningene som kreves for å kontrollere at det ikke er grunnlag for avvisning, eller av at kvalifikasjonskravene er oppfylt,b) unnlatt å gi slike opplysninger,c) tatt forbehold om straks å fremlegge de støttedokumenter som oppdragsgiver anmoder om, ellerd) urettmessig påvirket oppdragsgivers beslutningsprosess for å tilegne seg konfidensiell informasjon som kan gi denne en urettmessig fordel i forbindelse med konkurransen, eller uaktsomt har gitt misvisende opplysninger som kan få vesentlig innflytelse på beslutninger om avvisning, utvelgelse eller tildeling?"
+        },
+        {
+          "type": "nati-ground",
+          "description": "Purely national exclusion grounds: Oppdragsgiver skal angi at i Norge foreligger det nasjonale avvisningsgrunner. Disse skal være beskrevet i anskaffelsesdokumentene. Leverandøren må besvare om han er i en eller flere av de situasjonene som er beskrevet i de nasjonale avvisningsgrunnene. Får de rent nasjonale avvisningsgrunnene, som er angitt i den relevante kunngjøringen eller i anskaffelsesdokumentene, anvendelse?"
+        },
+        {
+          "type": "partic-confl",
+          "description": "Conflict of interest due to its participation in the procurement procedure: Er leverandør oppmerksom på en interessekonflikt slik denne er angitt i nasjonal rett, den relevante kunngjøring eller anskaffelsesdokumentene?"
+        },
+        {
+          "type": "prep-confl",
+          "description": "Direct or indirect involvement in the preparation of this procurement procedure: Har leverandør eller en virksomhet tilknyttet leverandøren gitt råd til oppdragsgiver eller på annen måte vært involvert i planleggingen av konkurransen?"
+        },
+        {
+          "type": "prof-misconduct",
+          "description": "Guilty of grave professional misconduct: Har leverandøren begått alvorlige feil i yrkesutøvelsen? Hvis det er relevant, se definisjoner i nasjonal rett, den relevante kunngjøring eller anskaffelsesdokumentene."
+        },
+        {
+          "type": "sanction",
+          "description": "Early termination, damages or other comparable sanctions: Har leverandør begått vesentlig kontraktsbrudd i forbindelse med oppfyllelsen av en tidligere offentlig kontrakt, en tidligere kontrakt med en offentlig oppdragsgiver eller en tidligere konsesjonskontrakt, der bruddet har ført til heving av kontrakten, erstatning eller andre lignende sanksjoner?"
+        },
+        {
+          "type": "socsec-law",
+          "description": "Breaching of obligations in the fields of social law: Er leverandøren kjent med å ha begått brudd på bestemmelser om sosiale forhold slik som de fremgår av nasjonal rett, den relevante kunngjøringen eller anskaffelsesdokumentene eller artikkel 18 (2) i direktiv 2014/24/EU."
+        },
+        {
+          "type": "socsec-pay",
+          "description": "Payment of social security contributions: Har leverandør unnlatt å oppfylle alle sine forpliktelser til å betale trygdeavgifter både i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et annet land enn det han er etablert i?"
+        },
+        {
+          "type": "susp-act",
+          "description": "Business activities are suspended: Angi hvorfor man under nevnte omstendigheter likevel er i stand til å utføre kontrakten, tatt i betraktning gjeldende nasjonale bestemmelser og tiltak vedrørende fortsettelse av forretningsaktivitetene? Det er ikke nødvendig å angi disse opplysningene hvis avvisning av leverandørerer gjort obligatorisk i henhold til gjeldende nasjonal rett uten mulighet for unntak."
+        },
+        {
+          "type": "tax-pay",
+          "description": "Payment of taxes: Har leverandøren unnlatt å oppfylle sine forpliktelser til å betale skatter og avgifter i det land han er etablert i, og i oppdragsgivers medlemsstat, hvis dette er et annet land enn det han er etablert i?"
+        },
+        {
+          "type": "terr-offence",
+          "description": "Terrorist offences or offences linked to terrorist activities: Er leverandøren selv eller en person, som er medlem av leverandørens administrasjons-, ledelses- eller kontrollorgan eller har kompetanse til å representere eller kontrollere eller treffe beslutninger i slike organer, ved rettskraftig dom blitt dømt for terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitetved en dom avsagt for ikke mer enn fem år siden, eller en avvisningsperiode fastsatt direkte i dommen som fortsatt gjelder? Terrorhandlinger eller straffbare handlinger med forbindelse til terroraktivitet som definert i artikkel 1 og 3 i Rådets rammeavgjørelse 2002/475/RIA av 13. juni 2002 om bekjempelse av terrorisme (EFT L 164 af 22.6.2002, s. 3). Denne avvisningsgrunnen omfatter også oppfordring til, medvirkning til eller forsøk på å begå slike handlinger som omhandlet i artikkel 4 i nevnte rammeavgjørelse."
+        }
+      ]
+    }
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2024-02-02T13:12:08+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "pub-undert",
+            "description": "Public undertaking"
+          }
+        ],
+        "url": "http://www.gjovik.kommune.no",
+        "buyerProfile": "http://www.gjovik.kommune.no/"
+      },
+      "name": "Gjøvikregionen - Anskaffelser",
+      "additionalIdentifiers": [
+        {
+          "id": "940155223",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Kenneth Hvalby",
+        "telephone": "+47 61189500",
+        "email": "kenneth.hvalby@gjovik.kommune.no",
+        "faxNumber": "+47 61176333"
+      },
+      "roles": [
+        "buyer",
+        "submissionReceiptBody",
+        "reviewContactPoint",
+        "evaluationBody",
+        "processContactPoint"
+      ],
+      "address": {
+        "streetAddress": "Kauffelds plass 1",
+        "postalCode": "2815",
+        "locality": "GJØVIK",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Vestre Innlandet tingrett - Gjøvik",
+      "additionalIdentifiers": [
+        {
+          "id": "926723758",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "61 02 02 00",
+        "email": "vestre.innlandet.tingrett@domstol.no"
+      },
+      "address": {
+        "streetAddress": "Strandgata 26",
+        "postalCode": "2801",
+        "locality": "Gjøvik",
+        "country": "NO"
+      },
+      "roles": [
+        "mediationBody",
+        "reviewBody"
+      ]
+    }
+  ],
+  "language": "no",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

@@ -1,1 +1,241 @@
-{"id": "870ff007-688a-4ad1-9ad7-28c2ae514b40", "initiationType": "tender", "ocid": "ocds-abcd1234-28af42df-be48-45d9-9039-953af3217d6f", "tender": {"legalBasis": {"id": "Anskaffelsesforskriften"}, "status": "active", "id": "4920fb14-6573-43d0-89b0-3027bb35e923", "procurementMethod": "open", "procurementMethodDetails": "Anskaffelsen blir gjennomført med bistand fra Kongsberg Prosjektservice AS. KongsbergProsjektservice AS vil bistå med gjennomføringen av konkurransen i Mercell og evalueringen.", "procedure": {"isAccelerated": false}, "lots": [{"id": "LOT-0000", "enquiryPeriod": {"endDate": "2024-06-07T10:00:00+00:00"}, "tenderPeriod": {"endDate": "2024-06-19T10:00:00+00:00"}, "awardPeriod": {"startDate": "2024-06-19T10:00:00+00:00"}, "bidOpening": {"date": "2024-06-19T10:00:00+00:00"}, "submissionTerms": {"electronicSubmissionPolicy": "required", "variantPolicy": "notAllowed", "advancedElectronicSignatureRequired": false, "electronicCatalogPolicy": "allowed", "languages": ["no"], "bidValidityPeriod": {"durationInDays": 90}}, "title": "Byggeledelse", "identifiers": [{"id": "2024/5155", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Kongsberg kommune skal bygge nytt renseanlegg som skal rense avløpsvannet fra Kongsberg by. Renseanlegget skal ligge i Sellikdalen, på samme område som eksisterende renseanlegg. Anlegget er dimensjonert til å håndtere 40 000 PE (tilknyttede).Eksisterende renseanlegg skal være i drift inntil byggetrinn 1 er ferdig og prøvedrift ergjennomført. Det nye renseanlegget skal derfor bygges på arealer innfor tomtearealet tilKongsberg kommune på gnr. 7319 bnr. 2. Når prøvedrift av byggetrinn 1 er gjennomført skaleksisterende renseanlegg i sin helhet rives før oppstart nybygg byggetrinn 2.Entreprenør er kontrahert etter gjennomført samspillfase og detaljprosjektering og byggingutføres som totalentreprise med målpris.Utførelsen er delt i 2 byggetrinn.Byggetrinn 1, som omfatter nytt prosessbygg, er planlagt med oppstart i august-24 ogferdigstillelse inkl. 2 mnd. prøvedrift i desember-26.Byggetrinn 2, som omfatter riving av eksisterende bygg/anlegg, prosessbygg trinn 2,administrasjonsbygg, verkstedbygg og utomhusanlegg, er planlagt med oppstart i august-26,overlevering i mars-29 og prøvedrift i perioden mars-29 til mars-30.Denne anskaffelsen gjelder byggeledelse i hele byggeperioden fra august-24 til overlevering imars-29 og tidvis engasjement i prøvedriftsperioden mars-29 til mars-30.", "contractPeriod": {"startDate": "2025-07-31T00:00:00+00:00", "endDate": "2029-03-01T23:59:59+00:00"}, "contractTerms": {"electronicInvoicingPolicy": "Required", "hasElectronicOrdering": true, "hasElectronicPayment": true}, "selectionCriteria": {"criteria": [{"title": "Øvrige økonomiske og finansielle krav", "description": "Øvrige økonomiske og finansielle krav: Når det gjelder eventuelle øvrige økonomiske og finansielle krav som har blitt angitt i kunngjøringen eller i anskaffelsesdokumentene erklærer leverandøren at:\nMinstekrav til kvalifikasjonskrav\nLeverandøren skal ha tilstrekkelig økonomisk og finansiell kapasitet til å kunne gjennomføre kontrakten.\n\n  Det kreves at tilbyder er kredittverdig, og har økonomisk soliditet med minimum kredittscore A iht. vurdering foretatt i CreditPro fra Kredittopplysningsbyrået Bisnode AS eller tilsvarende anerkjent kredittbyrå."}, {"title": "Attester utstedt av uavhengige organer for miljøledelsesstandarder", "description": "Attester utstedt av uavhengige organer for miljøledelsesstandarder: Er leverandøren i stand til å fremlegge attester utstedt av uavhengige organer som dokumentasjon for at leverandøren oppfyller de angitte miljøledelsessystemene eller -standardene?\nMinstekrav til kvalifikasjonskrav\nLeverandøren skal ha et miljøstyringssystem tilpasset leveransen. Dokumentasjonskrav: En beskrivelse av leverandørens miljøledelsessystem eller miljøledelsesstandarder. Hvis leverandøren har attest utstedt av uavhengige organer, f.eks. ISO 14001, Miljøfyrtårn eller EMAS, er det tilstrekkelig å legge ved en kopi av gyldig attest/sertifikat jf. FOA § 16-7 (2), jf. (3)."}, {"title": "Registrert i handelsregister eller foretaksregister", "description": "Registrert i handelsregister eller foretaksregister: Leverandør er registrert i et foretaksregister eller et handelsregister i medlemsstaten som leverandøren er etablert i. Som beskrevet i bilag XI til direktiv 2014/24/EU; leverandører fra visse medlemsstater kan være nødt til å oppfylle andre krav i nevnte bilag."}, {"title": "Bare for tjenester", "description": "Bare for tjenester: Bare for tjenester: I referanseperioden  har leverandøren utført følgende viktige vareleveranser av den etterspurte type, eller følgende viktige tjenester av den etterspurte type. Oppdragsgiver kan kreve opp til tre års erfaring og tillate at det tas hensyn til erfaring fra tiden før de seneste tre år.\nMinstekrav til kvalifikasjonskrav\nLeverandøren skal ha erfaring fra sammenlignbare oppdrag som omhandler byggeledelse. \n\nDokumentasjon:\n  Beskrivelse av leverandørens inntil 3 mest relevante oppdrag i løpet av de siste 10 årene. Beskrivelsen må inkludere angivelse av oppdragets verdi, tidspunkt og mottaker (navn, telefon og e-post.) Det er leverandørens ansvar å dokumentere relevans gjennom beskrivelsen."}, {"description": "Bare for tjenester: I referanseperioden  har leverandøren utført følgende viktige vareleveranser av den etterspurte type, eller følgende viktige tjenester av den etterspurte type. Oppdragsgiver kan kreve opp til tre års erfaring og tillate at det tas hensyn til erfaring fra tiden før de seneste tre år.\nMinstekrav til kvalifikasjonskrav\nLeverandøren skal ha erfaring fra sammenlignbare oppdrag som omhandler byggeledelse. \n\nDokumentasjon:\n  Beskrivelse av leverandørens inntil 3 mest relevante oppdrag i løpet av de siste 10 årene. Beskrivelsen må inkludere angivelse av oppdragets verdi, tidspunkt og mottaker (navn, telefon og e-post.) Det er leverandørens ansvar å dokumentere relevans gjennom beskrivelsen.", "languageID": "NOR"}]}, "hasAccessibilityCriteria": false, "techniques": {"frameworkAgreement": {"method": "withoutReopeningCompetition"}, "hasFrameworkAgreement": true, "hasElectronicAuction": false}}], "documents": [{"id": "229679975", "documentType": "biddingDocuments", "url": "https://permalink.mercell.com/229679975.aspx", "relatedLots": ["LOT-0000"]}], "title": "Byggeledelse", "identifiers": [{"id": "2024/5155", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Kongsberg kommune skal bygge nytt renseanlegg som skal rense avløpsvannet fra Kongsberg by. Renseanlegget skal ligge i Sellikdalen, på samme område som eksisterende renseanlegg. Anlegget er dimensjonert til å håndtere 40 000 PE (tilknyttede).Eksisterende renseanlegg skal være i drift inntil byggetrinn 1 er ferdig og prøvedrift ergjennomført. Det nye renseanlegget skal derfor bygges på arealer innfor tomtearealet tilKongsberg kommune på gnr. 7319 bnr. 2. Når prøvedrift av byggetrinn 1 er gjennomført skaleksisterende renseanlegg i sin helhet rives før oppstart nybygg byggetrinn 2.Entreprenør er kontrahert etter gjennomført samspillfase og detaljprosjektering og byggingutføres som totalentreprise med målpris.Utførelsen er delt i 2 byggetrinn.Byggetrinn 1, som omfatter nytt prosessbygg, er planlagt med oppstart i august-24 ogferdigstillelse inkl. 2 mnd. prøvedrift i desember-26.Byggetrinn 2, som omfatter riving av eksisterende bygg/anlegg, prosessbygg trinn 2,administrasjonsbygg, verkstedbygg og utomhusanlegg, er planlagt med oppstart i august-26,overlevering i mars-29 og prøvedrift i perioden mars-29 til mars-30.Denne anskaffelsen gjelder byggeledelse i hele byggeperioden fra august-24 til overlevering imars-29 og tidvis engasjement i prøvedriftsperioden mars-29 til mars-30.", "items": [{"id": "1", "additionalClassifications": [{"id": "45220000", "scheme": "CPV"}, {"id": "71000000", "scheme": "CPV"}, {"id": "71300000", "scheme": "CPV"}, {"id": "71310000", "scheme": "CPV"}, {"id": "71540000", "scheme": "CPV"}, {"id": "71541000", "scheme": "CPV"}, {"id": "71800000", "scheme": "CPV"}], "relatedLot": "LOT-0000", "classification": {"scheme": "CPV", "id": "71500000"}, "deliveryAddresses": [{"region": "NO082"}, {"country": "NO"}]}], "deliveryAddresses": [{"region": "NO082"}, {"country": "NO"}]}, "tag": ["tender"], "date": "2024-05-16T11:36:49+00:00", "parties": [{"id": "ORG-0001", "details": {"classifications": [{"scheme": "COFOG", "id": "01", "description": "General public services"}, {"scheme": "eu-buyer-legal-type", "id": "body-pl-la", "description": "Body governed by public law, controlled by a local authority"}], "url": "http://www.kongsbergregionen.no"}, "name": "Kongsbergregionen", "additionalIdentifiers": [{"id": "995969653", "scheme": "GB-COH"}], "contactPoint": {"name": "Miriam Undebakke", "telephone": "92849649", "email": "miriam.undebakke@kongsberg.kommune.no"}, "address": {"streetAddress": "Postboks 115", "postalCode": "3602", "locality": "KONGSBERG", "country": "NO"}, "roles": ["buyer"]}, {"id": "ORG-0002", "name": "Buskerud tingrett avd. Kongsberg  - Kongsberg", "additionalIdentifiers": [{"id": "974728303", "scheme": "GB-COH"}], "contactPoint": {"telephone": "32250500", "email": "buskerud.tingrett@domstol.no"}, "address": {"locality": "Kongsberg", "country": "NO"}, "roles": ["reviewBody"]}], "language": "no", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "870ff007-688a-4ad1-9ad7-28c2ae514b40",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-79678eee-008a-4977-957f-0a842c9f0244",
+  "tender": {
+    "legalBasis": {
+      "id": "Anskaffelsesforskriften"
+    },
+    "status": "active",
+    "id": "4920fb14-6573-43d0-89b0-3027bb35e923",
+    "procurementMethod": "open",
+    "procurementMethodDetails": "Anskaffelsen blir gjennomført med bistand fra Kongsberg Prosjektservice AS. KongsbergProsjektservice AS vil bistå med gjennomføringen av konkurransen i Mercell og evalueringen.",
+    "procedure": {
+      "isAccelerated": false
+    },
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "enquiryPeriod": {
+          "endDate": "2024-06-07T10:00:00+00:00"
+        },
+        "tenderPeriod": {
+          "endDate": "2024-06-19T10:00:00+00:00"
+        },
+        "awardPeriod": {
+          "startDate": "2024-06-19T10:00:00+00:00"
+        },
+        "bidOpening": {
+          "date": "2024-06-19T10:00:00+00:00"
+        },
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "required",
+          "variantPolicy": "notAllowed",
+          "advancedElectronicSignatureRequired": false,
+          "electronicCatalogPolicy": "allowed",
+          "languages": [
+            "no"
+          ],
+          "bidValidityPeriod": {
+            "durationInDays": 90
+          }
+        },
+        "title": "Byggeledelse",
+        "identifiers": [
+          {
+            "id": "2024/5155",
+            "scheme": "internal"
+          }
+        ],
+        "mainProcurementCategory": "services",
+        "description": "Kongsberg kommune skal bygge nytt renseanlegg som skal rense avløpsvannet fra Kongsberg by. Renseanlegget skal ligge i Sellikdalen, på samme område som eksisterende renseanlegg. Anlegget er dimensjonert til å håndtere 40 000 PE (tilknyttede).Eksisterende renseanlegg skal være i drift inntil byggetrinn 1 er ferdig og prøvedrift ergjennomført. Det nye renseanlegget skal derfor bygges på arealer innfor tomtearealet tilKongsberg kommune på gnr. 7319 bnr. 2. Når prøvedrift av byggetrinn 1 er gjennomført skaleksisterende renseanlegg i sin helhet rives før oppstart nybygg byggetrinn 2.Entreprenør er kontrahert etter gjennomført samspillfase og detaljprosjektering og byggingutføres som totalentreprise med målpris.Utførelsen er delt i 2 byggetrinn.Byggetrinn 1, som omfatter nytt prosessbygg, er planlagt med oppstart i august-24 ogferdigstillelse inkl. 2 mnd. prøvedrift i desember-26.Byggetrinn 2, som omfatter riving av eksisterende bygg/anlegg, prosessbygg trinn 2,administrasjonsbygg, verkstedbygg og utomhusanlegg, er planlagt med oppstart i august-26,overlevering i mars-29 og prøvedrift i perioden mars-29 til mars-30.Denne anskaffelsen gjelder byggeledelse i hele byggeperioden fra august-24 til overlevering imars-29 og tidvis engasjement i prøvedriftsperioden mars-29 til mars-30.",
+        "contractPeriod": {
+          "startDate": "2025-07-31T00:00:00+00:00",
+          "endDate": "2029-03-01T23:59:59+00:00"
+        },
+        "contractTerms": {
+          "electronicInvoicingPolicy": "Required",
+          "hasElectronicOrdering": true,
+          "hasElectronicPayment": true
+        },
+        "selectionCriteria": {
+          "criteria": [
+            {
+              "title": "Øvrige økonomiske og finansielle krav",
+              "description": "Øvrige økonomiske og finansielle krav: Når det gjelder eventuelle øvrige økonomiske og finansielle krav som har blitt angitt i kunngjøringen eller i anskaffelsesdokumentene erklærer leverandøren at:\nMinstekrav til kvalifikasjonskrav\nLeverandøren skal ha tilstrekkelig økonomisk og finansiell kapasitet til å kunne gjennomføre kontrakten.\n\n  Det kreves at tilbyder er kredittverdig, og har økonomisk soliditet med minimum kredittscore A iht. vurdering foretatt i CreditPro fra Kredittopplysningsbyrået Bisnode AS eller tilsvarende anerkjent kredittbyrå."
+            },
+            {
+              "title": "Attester utstedt av uavhengige organer for miljøledelsesstandarder",
+              "description": "Attester utstedt av uavhengige organer for miljøledelsesstandarder: Er leverandøren i stand til å fremlegge attester utstedt av uavhengige organer som dokumentasjon for at leverandøren oppfyller de angitte miljøledelsessystemene eller -standardene?\nMinstekrav til kvalifikasjonskrav\nLeverandøren skal ha et miljøstyringssystem tilpasset leveransen. Dokumentasjonskrav: En beskrivelse av leverandørens miljøledelsessystem eller miljøledelsesstandarder. Hvis leverandøren har attest utstedt av uavhengige organer, f.eks. ISO 14001, Miljøfyrtårn eller EMAS, er det tilstrekkelig å legge ved en kopi av gyldig attest/sertifikat jf. FOA § 16-7 (2), jf. (3)."
+            },
+            {
+              "title": "Registrert i handelsregister eller foretaksregister",
+              "description": "Registrert i handelsregister eller foretaksregister: Leverandør er registrert i et foretaksregister eller et handelsregister i medlemsstaten som leverandøren er etablert i. Som beskrevet i bilag XI til direktiv 2014/24/EU; leverandører fra visse medlemsstater kan være nødt til å oppfylle andre krav i nevnte bilag."
+            },
+            {
+              "title": "Bare for tjenester",
+              "description": "Bare for tjenester: Bare for tjenester: I referanseperioden  har leverandøren utført følgende viktige vareleveranser av den etterspurte type, eller følgende viktige tjenester av den etterspurte type. Oppdragsgiver kan kreve opp til tre års erfaring og tillate at det tas hensyn til erfaring fra tiden før de seneste tre år.\nMinstekrav til kvalifikasjonskrav\nLeverandøren skal ha erfaring fra sammenlignbare oppdrag som omhandler byggeledelse. \n\nDokumentasjon:\n  Beskrivelse av leverandørens inntil 3 mest relevante oppdrag i løpet av de siste 10 årene. Beskrivelsen må inkludere angivelse av oppdragets verdi, tidspunkt og mottaker (navn, telefon og e-post.) Det er leverandørens ansvar å dokumentere relevans gjennom beskrivelsen."
+            },
+            {
+              "description": "Bare for tjenester: I referanseperioden  har leverandøren utført følgende viktige vareleveranser av den etterspurte type, eller følgende viktige tjenester av den etterspurte type. Oppdragsgiver kan kreve opp til tre års erfaring og tillate at det tas hensyn til erfaring fra tiden før de seneste tre år.\nMinstekrav til kvalifikasjonskrav\nLeverandøren skal ha erfaring fra sammenlignbare oppdrag som omhandler byggeledelse. \n\nDokumentasjon:\n  Beskrivelse av leverandørens inntil 3 mest relevante oppdrag i løpet av de siste 10 årene. Beskrivelsen må inkludere angivelse av oppdragets verdi, tidspunkt og mottaker (navn, telefon og e-post.) Det er leverandørens ansvar å dokumentere relevans gjennom beskrivelsen.",
+              "languageID": "NOR"
+            }
+          ]
+        },
+        "hasAccessibilityCriteria": false,
+        "techniques": {
+          "frameworkAgreement": {
+            "method": "withoutReopeningCompetition"
+          },
+          "hasFrameworkAgreement": true,
+          "hasElectronicAuction": false
+        }
+      }
+    ],
+    "documents": [
+      {
+        "id": "229679975",
+        "documentType": "biddingDocuments",
+        "url": "https://permalink.mercell.com/229679975.aspx",
+        "relatedLots": [
+          "LOT-0000"
+        ]
+      }
+    ],
+    "title": "Byggeledelse",
+    "identifiers": [
+      {
+        "id": "2024/5155",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "services",
+    "description": "Kongsberg kommune skal bygge nytt renseanlegg som skal rense avløpsvannet fra Kongsberg by. Renseanlegget skal ligge i Sellikdalen, på samme område som eksisterende renseanlegg. Anlegget er dimensjonert til å håndtere 40 000 PE (tilknyttede).Eksisterende renseanlegg skal være i drift inntil byggetrinn 1 er ferdig og prøvedrift ergjennomført. Det nye renseanlegget skal derfor bygges på arealer innfor tomtearealet tilKongsberg kommune på gnr. 7319 bnr. 2. Når prøvedrift av byggetrinn 1 er gjennomført skaleksisterende renseanlegg i sin helhet rives før oppstart nybygg byggetrinn 2.Entreprenør er kontrahert etter gjennomført samspillfase og detaljprosjektering og byggingutføres som totalentreprise med målpris.Utførelsen er delt i 2 byggetrinn.Byggetrinn 1, som omfatter nytt prosessbygg, er planlagt med oppstart i august-24 ogferdigstillelse inkl. 2 mnd. prøvedrift i desember-26.Byggetrinn 2, som omfatter riving av eksisterende bygg/anlegg, prosessbygg trinn 2,administrasjonsbygg, verkstedbygg og utomhusanlegg, er planlagt med oppstart i august-26,overlevering i mars-29 og prøvedrift i perioden mars-29 til mars-30.Denne anskaffelsen gjelder byggeledelse i hele byggeperioden fra august-24 til overlevering imars-29 og tidvis engasjement i prøvedriftsperioden mars-29 til mars-30.",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "id": "45220000",
+            "scheme": "CPV"
+          },
+          {
+            "id": "71000000",
+            "scheme": "CPV"
+          },
+          {
+            "id": "71300000",
+            "scheme": "CPV"
+          },
+          {
+            "id": "71310000",
+            "scheme": "CPV"
+          },
+          {
+            "id": "71540000",
+            "scheme": "CPV"
+          },
+          {
+            "id": "71541000",
+            "scheme": "CPV"
+          },
+          {
+            "id": "71800000",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "71500000"
+        },
+        "deliveryAddresses": [
+          {
+            "region": "NO082"
+          },
+          {
+            "country": "NO"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "region": "NO082"
+      },
+      {
+        "country": "NO"
+      }
+    ]
+  },
+  "tag": [
+    "tender"
+  ],
+  "date": "2024-05-16T11:36:49+00:00",
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "details": {
+        "classifications": [
+          {
+            "scheme": "COFOG",
+            "id": "01",
+            "description": "General public services"
+          },
+          {
+            "scheme": "eu-buyer-legal-type",
+            "id": "body-pl-la",
+            "description": "Body governed by public law, controlled by a local authority"
+          }
+        ],
+        "url": "http://www.kongsbergregionen.no"
+      },
+      "name": "Kongsbergregionen",
+      "additionalIdentifiers": [
+        {
+          "id": "995969653",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Miriam Undebakke",
+        "telephone": "92849649",
+        "email": "miriam.undebakke@kongsberg.kommune.no"
+      },
+      "address": {
+        "streetAddress": "Postboks 115",
+        "postalCode": "3602",
+        "locality": "KONGSBERG",
+        "country": "NO"
+      },
+      "roles": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Buskerud tingrett avd. Kongsberg  - Kongsberg",
+      "additionalIdentifiers": [
+        {
+          "id": "974728303",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "telephone": "32250500",
+        "email": "buskerud.tingrett@domstol.no"
+      },
+      "address": {
+        "locality": "Kongsberg",
+        "country": "NO"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "language": "no",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}

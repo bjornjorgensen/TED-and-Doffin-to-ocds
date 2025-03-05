@@ -1,1 +1,210 @@
-{"id": "2023-677604", "initiationType": "tender", "ocid": "ocds-abcd1234-c2b0da56-2345-4a0c-9051-54016d844876", "tender": {"legalBasis": {"wasDerivedFrom": {"scheme": "CELEX", "id": "32014L0024"}}, "id": "2023-677604", "lots": [{"id": "LOT-0000", "submissionTerms": {"electronicSubmissionPolicy": "not-allowed"}, "title": "Endring i avtale Virksomhetsstyringsverktøy", "mainProcurementCategory": "services", "description": "Viken fylkeskommune inviterer med dette til konkurranse om levering av et helhetlig virksomhetsstyringsverktøy til fylkeskommunen. Deltagende fylkeskommuner, Agder og Vestfold og Telemark, deltar i konkurransen i form av opsjoner for å tiltre egen avtale med valgt leverandør. For øvrige detaljer se konkurransebestemmelsene, særlig punkt \"Oppdraget\"", "contractPeriod": {"durationInDays": 2160}, "hasAccessibilityCriteria": false}], "title": "Endring i avtale Virksomhetsstyringsverktøy", "identifiers": [{"id": "2020/135366", "scheme": "internal"}], "mainProcurementCategory": "services", "description": "Viken fylkeskommune inviterer med dette til konkurranse om levering av et helhetlig virksomhetsstyringsverktøy til fylkeskommunen. Deltagende fylkeskommuner, Agder og Vestfold og Telemark, deltar i konkurransen i form av opsjoner for å tiltre egen avtale med valgt leverandør. For øvrige detaljer se konkurransebestemmelsene, særlig punkt \"Oppdraget\"", "items": [{"id": "1", "additionalClassifications": [{"id": "48300000", "scheme": "CPV"}, {"id": "48400000", "scheme": "CPV"}, {"id": "48440000", "scheme": "CPV"}, {"id": "48482000", "scheme": "CPV"}, {"id": "72212400", "scheme": "CPV"}, {"id": "72220000", "scheme": "CPV"}], "relatedLot": "LOT-0000", "classification": {"scheme": "CPV", "id": "72268000"}, "deliveryAddresses": [{"streetAddress": "Viken"}]}], "deliveryAddresses": [{"streetAddress": "Viken"}]}, "tag": ["awardUpdate", "contractUpdate"], "date": "2023-03-01T12:00:00+02:00", "awards": [{"id": "RES-0001", "relatedLots": ["LOT-0000"], "status": "active", "statusDetails": "At least one winner was chosen.", "suppliers": [{"id": "ORG-0002"}], "value": {"amount": 35000000.0, "currency": "NOK"}, "relatedBids": ["TEN-0001"]}], "bids": {"details": [{"id": "TEN-0001", "relatedLots": ["LOT-0000"], "value": {"amount": 35000000.0, "currency": "NOK"}, "tenderers": [{"id": "ORG-0002"}]}]}, "contracts": [{"id": "CON-0001", "dateSigned": "2022-04-20T23:59:59Z", "awardID": "RES-0001", "identifiers": [{"id": "2020/136366", "scheme": "NL-TENDERNED"}], "relatedBids": ["TEN-0001"]}], "parties": [{"id": "ORG-0001", "name": "Viken fylkeskommune", "additionalIdentifiers": [{"id": "921 693 230", "scheme": "GB-COH"}], "contactPoint": {"name": "Marianne Brekke", "telephone": "+47 97468972", "email": "mariannb@viken.no"}, "details": {"url": "https://viken.no/", "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/94332"}, "roles": ["buyer"], "address": {"streetAddress": "Hauges gate 89", "locality": "Drammen", "country": "NO"}}, {"id": "ORG-0002", "name": "Framsikt AS", "roles": ["supplier", "tenderer"], "additionalIdentifiers": [{"id": "913187512", "scheme": "GB-COH"}], "address": {"streetAddress": "Postboks 24", "postalCode": "8469", "locality": "Bø i Vesterålen", "country": "NO"}}, {"id": "ORG-0003", "name": "Drammen tingrett", "address": {"locality": "Drammen", "country": "NO"}, "roles": ["reviewBody"]}], "language": "nb", "buyer": {"id": "ORG-0001"}}
+{
+  "id": "2023-677604",
+  "initiationType": "tender",
+  "ocid": "ocds-abcd1234-c701a77e-4921-4ac8-ae5e-207bd9df9e81",
+  "tender": {
+    "legalBasis": {
+      "wasDerivedFrom": {
+        "scheme": "CELEX",
+        "id": "32014L0024"
+      }
+    },
+    "id": "2023-677604",
+    "lots": [
+      {
+        "id": "LOT-0000",
+        "submissionTerms": {
+          "electronicSubmissionPolicy": "not-allowed"
+        },
+        "title": "Endring i avtale Virksomhetsstyringsverktøy",
+        "mainProcurementCategory": "services",
+        "description": "Viken fylkeskommune inviterer med dette til konkurranse om levering av et helhetlig virksomhetsstyringsverktøy til fylkeskommunen. Deltagende fylkeskommuner, Agder og Vestfold og Telemark, deltar i konkurransen i form av opsjoner for å tiltre egen avtale med valgt leverandør. For øvrige detaljer se konkurransebestemmelsene, særlig punkt \"Oppdraget\"",
+        "contractPeriod": {
+          "durationInDays": 2160
+        },
+        "hasAccessibilityCriteria": false
+      }
+    ],
+    "title": "Endring i avtale Virksomhetsstyringsverktøy",
+    "identifiers": [
+      {
+        "id": "2020/135366",
+        "scheme": "internal"
+      }
+    ],
+    "mainProcurementCategory": "services",
+    "description": "Viken fylkeskommune inviterer med dette til konkurranse om levering av et helhetlig virksomhetsstyringsverktøy til fylkeskommunen. Deltagende fylkeskommuner, Agder og Vestfold og Telemark, deltar i konkurransen i form av opsjoner for å tiltre egen avtale med valgt leverandør. For øvrige detaljer se konkurransebestemmelsene, særlig punkt \"Oppdraget\"",
+    "items": [
+      {
+        "id": "1",
+        "additionalClassifications": [
+          {
+            "id": "48300000",
+            "scheme": "CPV"
+          },
+          {
+            "id": "48400000",
+            "scheme": "CPV"
+          },
+          {
+            "id": "48440000",
+            "scheme": "CPV"
+          },
+          {
+            "id": "48482000",
+            "scheme": "CPV"
+          },
+          {
+            "id": "72212400",
+            "scheme": "CPV"
+          },
+          {
+            "id": "72220000",
+            "scheme": "CPV"
+          }
+        ],
+        "relatedLot": "LOT-0000",
+        "classification": {
+          "scheme": "CPV",
+          "id": "72268000"
+        },
+        "deliveryAddresses": [
+          {
+            "streetAddress": "Viken"
+          }
+        ]
+      }
+    ],
+    "deliveryAddresses": [
+      {
+        "streetAddress": "Viken"
+      }
+    ]
+  },
+  "tag": [
+    "awardUpdate",
+    "contractUpdate"
+  ],
+  "date": "2023-03-01T12:00:00+02:00",
+  "awards": [
+    {
+      "id": "RES-0001",
+      "relatedLots": [
+        "LOT-0000"
+      ],
+      "status": "active",
+      "statusDetails": "At least one winner was chosen.",
+      "suppliers": [
+        {
+          "id": "ORG-0002"
+        }
+      ],
+      "value": {
+        "amount": 35000000.0,
+        "currency": "NOK"
+      },
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
+  "bids": {
+    "details": [
+      {
+        "id": "TEN-0001",
+        "relatedLots": [
+          "LOT-0000"
+        ],
+        "value": {
+          "amount": 35000000.0,
+          "currency": "NOK"
+        },
+        "tenderers": [
+          {
+            "id": "ORG-0002"
+          }
+        ]
+      }
+    ]
+  },
+  "contracts": [
+    {
+      "id": "CON-0001",
+      "dateSigned": "2022-04-20T23:59:59Z",
+      "awardID": "RES-0001",
+      "identifiers": [
+        {
+          "id": "2020/136366",
+          "scheme": "NL-TENDERNED"
+        }
+      ],
+      "relatedBids": [
+        "TEN-0001"
+      ]
+    }
+  ],
+  "parties": [
+    {
+      "id": "ORG-0001",
+      "name": "Viken fylkeskommune",
+      "additionalIdentifiers": [
+        {
+          "id": "921 693 230",
+          "scheme": "GB-COH"
+        }
+      ],
+      "contactPoint": {
+        "name": "Marianne Brekke",
+        "telephone": "+47 97468972",
+        "email": "mariannb@viken.no"
+      },
+      "details": {
+        "url": "https://viken.no/",
+        "buyerProfile": "https://kgv.doffin.no/ctm/Company/CompanyInformation/Index/94332"
+      },
+      "roles": [
+        "buyer"
+      ],
+      "address": {
+        "streetAddress": "Hauges gate 89",
+        "locality": "Drammen",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0002",
+      "name": "Framsikt AS",
+      "roles": [
+        "supplier",
+        "tenderer"
+      ],
+      "additionalIdentifiers": [
+        {
+          "id": "913187512",
+          "scheme": "GB-COH"
+        }
+      ],
+      "address": {
+        "streetAddress": "Postboks 24",
+        "postalCode": "8469",
+        "locality": "Bø i Vesterålen",
+        "country": "NO"
+      }
+    },
+    {
+      "id": "ORG-0003",
+      "name": "Drammen tingrett",
+      "address": {
+        "locality": "Drammen",
+        "country": "NO"
+      },
+      "roles": [
+        "reviewBody"
+      ]
+    }
+  ],
+  "language": "nb",
+  "buyer": {
+    "id": "ORG-0001"
+  }
+}
