@@ -1,7 +1,7 @@
 {
   "id": "2023-651678",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-255d82ae-9683-4085-8b83-7a3b145ef54a",
+  "ocid": "ocds-abcd1234-ddb3ef26-daae-4bf7-84fc-9befb77b08e4",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -136,8 +136,8 @@
         "email": "vidar@pilar-br.no"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "submissionReceiptBody"
       ],
       "address": {

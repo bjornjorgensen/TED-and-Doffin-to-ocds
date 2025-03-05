@@ -1,7 +1,7 @@
 {
   "id": "7d111d51-8042-402a-a234-50efe86d8f4f",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-4cc12e5d-7414-4205-86fe-c2e359c3def6",
+  "ocid": "ocds-abcd1234-7e573513-c0b5-44e3-b683-7c9ef13237f6",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -127,10 +127,7 @@
             "description": "Anywhere in the given country"
           },
           {
-            "description": "Service and maintenance to be performed all over Norway."
-          },
-          {
-            "description": "Utførelsen av service skal gjennomføres i hele Norge (Posten Brings lokasjoner)"
+            "description": "Service and maintenance to be performed all over Norway. Utførelsen av service skal gjennomføres i hele Norge (Posten Brings lokasjoner) Service and maintenance to be performed all over Norway. Utførelsen av service skal gjennomføres i hele Norge (Posten Brings lokasjoner)"
           }
         ]
       }
@@ -205,8 +202,8 @@
         "email": "Kristian.von.Aphelen@posten.no"
       },
       "roles": [
-        "processContactPoint",
-        "buyer"
+        "buyer",
+        "processContactPoint"
       ],
       "address": {
         "streetAddress": "Biskop Gunnerus' gate 14 A",

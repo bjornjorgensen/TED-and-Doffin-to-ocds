@@ -1,7 +1,7 @@
 {
   "id": "2248a00d-a0d9-4eee-8db1-d209e7346f13",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-d7750fbf-96ca-4f43-9980-d00173bb033c",
+  "ocid": "ocds-abcd1234-4252405f-c549-4f9c-bf01-26376e62bd49",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -85,10 +85,7 @@
         ],
         "deliveryLocations": [
           {
-            "description": "v. 401 Høvågveien x fv. 494 Dvergnesnesveien"
-          },
-          {
-            "description": "v. 401 Høvågveien x county road 494 Dwarfnesnesveien"
+            "description": "v. 401 Høvågveien x fv. 494 Dvergnesnesveien v. 401 Høvågveien x county road 494 Dwarfnesnesveien"
           }
         ]
       }
@@ -152,8 +149,8 @@
         "email": "anne@pgas.no"
       },
       "roles": [
-        "processContactPoint",
         "buyer",
+        "processContactPoint",
         "reviewContactPoint"
       ],
       "address": {

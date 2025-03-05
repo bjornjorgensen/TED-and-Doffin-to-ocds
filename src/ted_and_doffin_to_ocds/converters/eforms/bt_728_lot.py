@@ -41,17 +41,19 @@ def parse_lot_place_performance_additional(
                 )
 
                 if descriptions:
-                    delivery_locations = [
-                        {"description": desc.strip()}
-                        for desc in descriptions
-                        if desc.strip()
-                    ]
+                    # Concatenate all descriptions into a single deliveryLocation object
+                    # instead of creating a separate entry for each description
+                    concatenated_description = " ".join(
+                        desc.strip() for desc in descriptions if desc.strip()
+                    )
 
-                    if delivery_locations:
+                    if concatenated_description:
                         item = {
                             "id": str(len(result["tender"]["items"]) + 1),
                             "relatedLot": lot_id,
-                            "deliveryLocations": delivery_locations,
+                            "deliveryLocations": [
+                                {"description": concatenated_description}
+                            ],
                         }
                         result["tender"]["items"].append(item)
 
