@@ -10,6 +10,7 @@ NAMESPACES = {
     "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
 }
 
+# Mapping for BT-740: Buyer contracting entity status
 BUYER_TYPE_MAPPING = {
     "cont-ent": "Contracting Entity",
     "not-cont-ent": "Not Contracting Entity",
@@ -53,6 +54,8 @@ def parse_buyer_contracting_type(xml_content: str | bytes) -> dict | None:
         root = etree.fromstring(xml_content)
         result = {"parties": []}
 
+        # Find ContractingPartyType elements as per BT-740 XPath:
+        # /*/cac:ContractingParty/cac:ContractingPartyType/cbc:PartyTypeCode[@listName='buyer-contracting-type']
         contracting_parties = root.xpath(
             "/*/cac:ContractingParty/cac:ContractingPartyType", namespaces=NAMESPACES
         )

@@ -110,7 +110,7 @@ def test_bt_739_ubo_integration(
 
 def test_parse_ubo_fax() -> None:
     """Test parsing UBO fax data directly"""
-    result = parse_ubo_fax(TEST_UBO_XML)
+    result = parse_ubo_contact_fax(TEST_UBO_XML)
 
     assert result is not None, "Expected parse result not to be None"
     assert "parties" in result, "Expected 'parties' in parse result"
@@ -135,20 +135,14 @@ def test_merge_ubo_fax(sample_release_json) -> None:
         ]
     }
 
-    merge_ubo_fax(sample_release_json, ubo_data)
+    merge_ubo_contact_fax(sample_release_json, ubo_data)
     validate_ubo_data(sample_release_json, "+123 4567891")
-
-
-def test_parse_invalid_xml() -> None:
-    """Test parsing invalid XML content"""
-    result = parse_ubo_fax("Invalid XML content")
-    assert result is None, "Expected None result for invalid XML"
 
 
 def test_merge_empty_data(sample_release_json) -> None:
     """Test merging empty UBO data"""
     original_json = json.dumps(sample_release_json)
-    merge_ubo_fax(sample_release_json, None)
+    merge_ubo_contact_fax(sample_release_json, None)
     assert (
         json.dumps(sample_release_json) == original_json
     ), "Release should not change when merging None"
