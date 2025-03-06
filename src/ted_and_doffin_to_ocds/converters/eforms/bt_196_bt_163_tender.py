@@ -48,19 +48,19 @@ def parse_bt196_bt163_unpublished_justification(
         "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
         "/efext:EformsExtension/efac:NoticeResult/efac:LotTender"
         "/efac:ConcessionRevenue/efac:FieldsPrivacy"
-        "[efbc:FieldIdentifierCode/text()='val-con-des']"
+        "[efbc:FieldIdentifierCode/text()='val-con-des']/efbc:ReasonDescription"
     )
 
     result = {"withheldInformation": []}
-    fields_privacy = root.xpath(xpath_query, namespaces=namespaces)
+    reason_descriptions = root.xpath(xpath_query, namespaces=namespaces)
 
-    for privacy in fields_privacy:
-        tender_id = privacy.xpath(
+    for reason_desc in reason_descriptions:
+        # Get the parent FieldsPrivacy element
+        fields_privacy = reason_desc.getparent()
+        tender_id = fields_privacy.xpath(
             "ancestor::efac:LotTender/cbc:ID/text()", namespaces=namespaces
         )[0]
-        reason = privacy.xpath("efbc:ReasonDescription/text()", namespaces=namespaces)[
-            0
-        ]
+        reason = reason_desc.text
         field_id = "val-con-des"
 
         withheld_info = {
