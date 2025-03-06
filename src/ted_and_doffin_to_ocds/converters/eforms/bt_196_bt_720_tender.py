@@ -50,29 +50,23 @@ def parse_bt196_bt720_unpublished_justification(
 
     result = {"withheldInformation": []}
 
-    xpath_query = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='win-ten-val']"
+    # Using the provided absolute XPath to directly get reason descriptions
+    xpath_query = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='win-ten-val']/efbc:ReasonDescription"
 
-    privacy_elements = root.xpath(xpath_query, namespaces=namespaces)
+    reason_elements = root.xpath(xpath_query, namespaces=namespaces)
 
-    for privacy_element in privacy_elements:
-        # Get the LotTender ID by traversing back up the tree
-        lot_tender = privacy_element.xpath(
-            "ancestor::efac:LotTender",
-            namespaces=namespaces,
-        )[0]
+    for reason_element in reason_elements:
+        # Get the parent FieldsPrivacy element
+        fields_privacy = reason_element.getparent()
+        # Get the LotTender ID by traversing up the tree
+        lot_tender = fields_privacy.getparent()
         lot_tender_id = lot_tender.xpath("cbc:ID/text()", namespaces=namespaces)[0]
 
-        reason_description = privacy_element.xpath(
-            "efbc:ReasonDescription/text()",
-            namespaces=namespaces,
-        )
-
-        if reason_description:
-            withheld_info = {
-                "id": f"win-ten-val-{lot_tender_id}",
-                "rationale": reason_description[0],
-            }
-            result["withheldInformation"].append(withheld_info)
+        withheld_info = {
+            "id": f"win-ten-val-{lot_tender_id}",
+            "rationale": reason_element.text,
+        }
+        result["withheldInformation"].append(withheld_info)
 
     if not result["withheldInformation"]:
         logger.debug(

@@ -44,15 +44,23 @@ def test_bt_196_bt720_tender_integration(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
-            <efac:LotTender>
-                <cbc:ID schemeName="result">TEN-0001</cbc:ID>
-                <efac:FieldsPrivacy>
-                    <efbc:FieldIdentifierCode>win-ten-val</efbc:FieldIdentifierCode>
-                    <efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription>
-                </efac:FieldsPrivacy>
-            </efac:LotTender>
-        </efac:NoticeResult>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotTender>
+                                <cbc:ID schemeName="result">TEN-0001</cbc:ID>
+                                <efac:FieldsPrivacy>
+                                    <efbc:FieldIdentifierCode>win-ten-val</efbc:FieldIdentifierCode>
+                                    <efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription>
+                                </efac:FieldsPrivacy>
+                            </efac:LotTender>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractNotice>
     """
     xml_file = tmp_path / "test_input_bt196_bt720.xml"
@@ -90,11 +98,19 @@ def test_bt_196_bt720_tender_missing_field(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
-            <efac:LotTender>
-                <cbc:ID schemeName="result">TEN-0001</cbc:ID>
-            </efac:LotTender>
-        </efac:NoticeResult>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotTender>
+                                <cbc:ID schemeName="result">TEN-0001</cbc:ID>
+                            </efac:LotTender>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractNotice>
     """
     xml_file = tmp_path / "test_input_bt196_bt720_missing.xml"
@@ -108,6 +124,64 @@ def test_bt_196_bt720_tender_missing_field(
         "withheldInformation" not in result
         or len(result.get("withheldInformation", [])) == 0
     ), "Did not expect 'withheldInformation' when FieldsPrivacy is missing"
+
+
+def test_xpath_absolute_for_withheld_information(tmp_path, setup_logging) -> None:
+    """Test that the XPath absolute expression correctly selects the withheld information reason description."""
+    from lxml import etree
+    
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+        xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+        xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+        xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+        xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotTender>
+                                <cbc:ID schemeName="result">TEN-0001</cbc:ID>
+                                <efac:FieldsPrivacy>
+                                    <efbc:FieldIdentifierCode>win-ten-val</efbc:FieldIdentifierCode>
+                                    <efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription>
+                                </efac:FieldsPrivacy>
+                            </efac:LotTender>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+    </ContractNotice>
+    """
+    
+    # Write XML to a file
+    xml_file = tmp_path / "test_xpath_withheld_info.xml"
+    xml_file.write_text(xml_content)
+    
+    # Parse the XML
+    tree = etree.parse(str(xml_file))
+    root = tree.getroot()
+    
+    # Register namespaces for XPath
+    namespaces = {
+        'ext': 'urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2',
+        'efext': 'http://data.europa.eu/p27/eforms-ubl-extensions/1',
+        'efac': 'http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1',
+        'efbc': 'http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1',
+        'cbc': 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2'
+    }
+    
+    # Execute the XPath
+    xpath_expr = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='win-ten-val']/efbc:ReasonDescription"
+    result = root.xpath(xpath_expr, namespaces=namespaces)
+    
+    # Assert the result
+    assert len(result) == 1, "XPath should find exactly one matching element"
+    assert result[0].text.strip() == "Information delayed publication because of ...", "XPath should extract the correct reason description"
+    assert result[0].get("languageID") == "ENG", "XPath should select element with the correct language attribute"
 
 
 if __name__ == "__main__":
