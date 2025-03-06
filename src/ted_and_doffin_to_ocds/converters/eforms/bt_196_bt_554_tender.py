@@ -52,27 +52,23 @@ def parse_bt196_bt554_unpublished_justification(
 
     result = {"withheldInformation": []}
 
-    xpath_query = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-des']"
+    xpath_query = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-des']/efbc:ReasonDescription"
 
-    privacy_elements = root.xpath(xpath_query, namespaces=namespaces)
+    reason_description_elements = root.xpath(xpath_query, namespaces=namespaces)
 
-    for privacy_element in privacy_elements:
+    for reason_element in reason_description_elements:
         # Get the LotTender ID by traversing back up the tree
-        lot_tender = privacy_element.xpath(
+        lot_tender = reason_element.xpath(
             "ancestor::efac:LotTender",
             namespaces=namespaces,
         )[0]
         lot_tender_id = lot_tender.xpath("cbc:ID/text()", namespaces=namespaces)[0]
 
-        reason_description = privacy_element.xpath(
-            "efbc:ReasonDescription/text()",
-            namespaces=namespaces,
-        )
-
-        if reason_description:
+        reason_text = reason_element.text
+        if reason_text:
             withheld_info = {
                 "id": f"sub-des-{lot_tender_id}",
-                "rationale": reason_description[0],
+                "rationale": reason_text,
             }
             result["withheldInformation"].append(withheld_info)
 

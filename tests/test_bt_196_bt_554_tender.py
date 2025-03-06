@@ -44,18 +44,26 @@ def test_bt_196_bt554_tender_integration(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
-            <efac:LotTender>
-                <cbc:ID schemeName="result">TEN-0001</cbc:ID>
-                <efac:SubcontractingTerm>
-                    <efbc:TermCode listName="applicability">applicable</efbc:TermCode>
-                    <efac:FieldsPrivacy>
-                        <efbc:FieldIdentifierCode>sub-des</efbc:FieldIdentifierCode>
-                        <efbc:ReasonDescription>Information delayed publication because of ...</efbc:ReasonDescription>
-                    </efac:FieldsPrivacy>
-                </efac:SubcontractingTerm>
-            </efac:LotTender>
-        </efac:NoticeResult>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotTender>
+                                <cbc:ID schemeName="result">TEN-0001</cbc:ID>
+                                <efac:SubcontractingTerm>
+                                    <efbc:TermCode listName="applicability">applicable</efbc:TermCode>
+                                    <efac:FieldsPrivacy>
+                                        <efbc:FieldIdentifierCode>sub-des</efbc:FieldIdentifierCode>
+                                        <efbc:ReasonDescription>Information delayed publication because of ...</efbc:ReasonDescription>
+                                    </efac:FieldsPrivacy>
+                                </efac:SubcontractingTerm>
+                            </efac:LotTender>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractNotice>
     """
     xml_file = tmp_path / "test_input_bt196_bt554.xml"
