@@ -50,27 +50,26 @@ def parse_bt196_bt636_unpublished_justification(
 
     result = {"withheldInformation": []}
 
-    xpath_query = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-typ']"
+    # Use the absolute XPath to directly find all ReasonDescription elements
+    xpath_query = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-typ']/efbc:ReasonDescription"
+    
+    reason_description_elements = root.xpath(xpath_query, namespaces=namespaces)
 
-    privacy_elements = root.xpath(xpath_query, namespaces=namespaces)
-
-    for privacy_element in privacy_elements:
+    for reason_element in reason_description_elements:
         # Get the LotResult ID by traversing back up the tree
-        lot_result = privacy_element.xpath(
+        lot_result = reason_element.xpath(
             "ancestor::efac:LotResult",
             namespaces=namespaces,
         )[0]
         lot_result_id = lot_result.xpath("cbc:ID/text()", namespaces=namespaces)[0]
 
-        reason_description = privacy_element.xpath(
-            "efbc:ReasonDescription/text()",
-            namespaces=namespaces,
-        )
-
-        if reason_description:
+        # Get the reason text directly from the element
+        reason_text = reason_element.text
+        
+        if reason_text:
             withheld_info = {
                 "id": f"buy-rev-typ-{lot_result_id}",
-                "rationale": reason_description[0],
+                "rationale": reason_text,
             }
             result["withheldInformation"].append(withheld_info)
 
