@@ -50,27 +50,25 @@ def parse_bt196_bt553_tender(xml_content: str | bytes) -> dict | None:
 
     result = {"withheldInformation": []}
 
-    xpath_query = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val']"
+    # Use the absolute XPath to directly target ReasonDescription elements
+    xpath_query = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val']/efbc:ReasonDescription"
 
-    privacy_elements = root.xpath(xpath_query, namespaces=namespaces)
+    reason_elements = root.xpath(xpath_query, namespaces=namespaces)
 
-    for privacy_element in privacy_elements:
+    for reason_element in reason_elements:
         # Get the LotTender ID by traversing back up the tree
-        lot_tender = privacy_element.xpath(
+        lot_tender = reason_element.xpath(
             "ancestor::efac:LotTender",
             namespaces=namespaces,
         )[0]
         lot_tender_id = lot_tender.xpath("cbc:ID/text()", namespaces=namespaces)[0]
 
-        reason_description = privacy_element.xpath(
-            "efbc:ReasonDescription/text()",
-            namespaces=namespaces,
-        )
+        rationale = reason_element.text
 
-        if reason_description:
+        if rationale:
             withheld_info = {
                 "id": f"sub-val-{lot_tender_id}",
-                "rationale": reason_description[0],
+                "rationale": rationale,
             }
             result["withheldInformation"].append(withheld_info)
 
