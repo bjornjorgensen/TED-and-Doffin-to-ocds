@@ -52,27 +52,25 @@ def parse_bt196_bt711_unpublished_justification(
 
     result = {"withheldInformation": []}
 
-    xpath_query = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ten-val-hig']"
+    # Use the absolute XPath to directly get reason descriptions
+    xpath_absolute = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ten-val-hig']/efbc:ReasonDescription"
+    reason_descriptions = root.xpath(xpath_absolute, namespaces=namespaces)
 
-    privacy_elements = root.xpath(xpath_query, namespaces=namespaces)
-
-    for privacy_element in privacy_elements:
+    for reason_desc in reason_descriptions:
         # Get the LotResult ID by traversing back up the tree
-        lot_result = privacy_element.xpath(
+        lot_result = reason_desc.xpath(
             "ancestor::efac:LotResult",
             namespaces=namespaces,
         )[0]
         lot_result_id = lot_result.xpath("cbc:ID/text()", namespaces=namespaces)[0]
 
-        reason_description = privacy_element.xpath(
-            "efbc:ReasonDescription/text()",
-            namespaces=namespaces,
-        )
+        # Get the text content of the reason description
+        reason_text = reason_desc.text
 
-        if reason_description:
+        if reason_text:
             withheld_info = {
                 "id": f"ten-val-hig-{lot_result_id}",
-                "rationale": reason_description[0],
+                "rationale": reason_text,
             }
             result["withheldInformation"].append(withheld_info)
 
