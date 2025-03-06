@@ -44,9 +44,7 @@ def parse_bt196_bt160_unpublished_justification(
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    # More flexible XPath to find FieldsPrivacy elements with con-rev-buy identifier
-    # This will work with both direct structure and UBLExtensions structure
-    xpath_query = "//efac:LotTender/efac:ConcessionRevenue/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='con-rev-buy']"
+    xpath_query = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:ConcessionRevenue/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='con-rev-buy']"
 
     result = {"withheldInformation": []}
     fields_privacy = root.xpath(xpath_query, namespaces=namespaces)

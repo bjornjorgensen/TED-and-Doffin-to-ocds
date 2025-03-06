@@ -44,15 +44,22 @@ def parse_bt196_bt162_unpublished_justification(
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    xpath_query = (
-        "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
-        "/efext:EformsExtension/efac:NoticeResult/efac:LotTender"
-        "/efac:ConcessionRevenue/efac:FieldsPrivacy"
-        "[efbc:FieldIdentifierCode/text()='con-rev-use']"
-    )
+    # Updated to use the absolute XPath provided
+    fields_privacy_xpath = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:ConcessionRevenue/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='con-rev-use']"
+
+    # Also keep the relative path as a fallback for compatibility
+    fallback_xpath = "//efac:LotTender/efac:ConcessionRevenue/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='con-rev-use']"
 
     result = {"withheldInformation": []}
-    fields_privacy = root.xpath(xpath_query, namespaces=namespaces)
+    fields_privacy = root.xpath(fields_privacy_xpath, namespaces=namespaces)
+
+    # Use fallback if no results with the absolute path
+    if not fields_privacy:
+        fields_privacy = root.xpath(fallback_xpath, namespaces=namespaces)
+        if fields_privacy:
+            logger.debug(
+                "Using fallback XPath for BT-196(BT-162) fields privacy elements"
+            )
 
     for privacy in fields_privacy:
         tender_id = privacy.xpath(
