@@ -52,29 +52,25 @@ def parse_bt196_bt660_unpublished_justification(
 
     result = {"withheldInformation": []}
 
-    xpath_query = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FrameworkAgreementValues/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ree-val']"
+    # Use the provided absolute XPath to directly get the reason descriptions
+    xpath_query = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FrameworkAgreementValues/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ree-val']/efbc:ReasonDescription"
+    
+    reason_descriptions = root.xpath(xpath_query, namespaces=namespaces)
 
-    privacy_elements = root.xpath(xpath_query, namespaces=namespaces)
-
-    for privacy_element in privacy_elements:
-        # Get the LotResult ID by traversing back up the tree
-        lot_result = privacy_element.xpath(
+    for reason_description in reason_descriptions:
+        # Get the LotResult ID by traversing back up the tree from the ReasonDescription
+        fields_privacy = reason_description.getparent()
+        lot_result = fields_privacy.xpath(
             "ancestor::efac:LotResult",
             namespaces=namespaces,
         )[0]
         lot_result_id = lot_result.xpath("cbc:ID/text()", namespaces=namespaces)[0]
 
-        reason_description = privacy_element.xpath(
-            "efbc:ReasonDescription/text()",
-            namespaces=namespaces,
-        )
-
-        if reason_description:
-            withheld_info = {
-                "id": f"ree-val-{lot_result_id}",
-                "rationale": reason_description[0],
-            }
-            result["withheldInformation"].append(withheld_info)
+        withheld_info = {
+            "id": f"ree-val-{lot_result_id}",
+            "rationale": reason_description.text,
+        }
+        result["withheldInformation"].append(withheld_info)
 
     if not result["withheldInformation"]:
         logger.debug(
