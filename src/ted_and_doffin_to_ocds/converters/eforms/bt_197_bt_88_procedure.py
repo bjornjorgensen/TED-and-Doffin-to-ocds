@@ -51,7 +51,7 @@ def parse_bt197_bt88_procedure_unpublished_justification_code(
                         "id": "pro-fea-{contract_id}",
                         "rationaleClassifications": [
                             {
-                                "scheme": "non-publication-justification",
+                                "scheme": "eu-non-publication-justification",
                                 "id": "code",
                                 "description": "Description text",
                                 "uri": "URI"
@@ -102,7 +102,7 @@ def parse_bt197_bt88_procedure_unpublished_justification_code(
                 "id": f"pro-fea-{contract_folder_id[0]}",
                 "rationaleClassifications": [
                     {
-                        "scheme": "non-publication-justification",
+                        "scheme": "eu-non-publication-justification",
                         "id": code,
                         "description": JUSTIFICATION_CODES[code]["description"],
                         "uri": JUSTIFICATION_CODES[code]["uri"],
