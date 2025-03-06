@@ -54,7 +54,7 @@ def parse_bt196_bt660_unpublished_justification(
 
     # Use the provided absolute XPath to directly get the reason descriptions
     xpath_query = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FrameworkAgreementValues/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ree-val']/efbc:ReasonDescription"
-    
+
     reason_descriptions = root.xpath(xpath_query, namespaces=namespaces)
 
     for reason_description in reason_descriptions:

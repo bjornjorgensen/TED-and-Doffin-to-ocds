@@ -52,7 +52,7 @@ def parse_bt196_bt636_unpublished_justification(
 
     # Use the absolute XPath to directly find all ReasonDescription elements
     xpath_query = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-typ']/efbc:ReasonDescription"
-    
+
     reason_description_elements = root.xpath(xpath_query, namespaces=namespaces)
 
     for reason_element in reason_description_elements:
@@ -65,7 +65,7 @@ def parse_bt196_bt636_unpublished_justification(
 
         # Get the reason text directly from the element
         reason_text = reason_element.text
-        
+
         if reason_text:
             withheld_info = {
                 "id": f"buy-rev-typ-{lot_result_id}",

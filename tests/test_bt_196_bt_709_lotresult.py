@@ -5,6 +5,7 @@ import tempfile
 from pathlib import Path
 
 import pytest
+import lxml.etree as ET
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
@@ -44,6 +45,25 @@ def test_bt_196_bt709_lotresult_integration(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotResult>
+                                <cbc:ID schemeName="result">RES-0001</cbc:ID>
+                                <efac:FrameworkAgreementValues>
+                                    <efac:FieldsPrivacy>
+                                        <efbc:FieldIdentifierCode>max-val</efbc:FieldIdentifierCode>
+                                        <efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription>
+                                    </efac:FieldsPrivacy>
+                                </efac:FrameworkAgreementValues>
+                            </efac:LotResult>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
         <efac:NoticeResult>
             <efac:LotResult>
                 <cbc:ID schemeName="result">RES-0001</cbc:ID>
@@ -78,6 +98,7 @@ def test_bt_196_bt709_lotresult_integration(
     assert (
         item["rationale"] == "Information delayed publication because of ..."
     ), "Unexpected rationale content"
+
 
 
 if __name__ == "__main__":
