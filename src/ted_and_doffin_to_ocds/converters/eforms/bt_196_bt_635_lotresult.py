@@ -50,29 +50,27 @@ def parse_bt196_bt635_unpublished_justification(
 
     result = {"withheldInformation": []}
 
-    xpath_query = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-cou']"
+    # Use the provided absolute XPath to directly target ReasonDescription elements
+    xpath_query = "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-cou']/efbc:ReasonDescription"
 
-    privacy_elements = root.xpath(xpath_query, namespaces=namespaces)
+    reason_desc_elements = root.xpath(xpath_query, namespaces=namespaces)
 
-    for privacy_element in privacy_elements:
+    for reason_desc in reason_desc_elements:
+        # Get the parent FieldsPrivacy element
+        fields_privacy = reason_desc.getparent()
+
         # Get the LotResult ID by traversing back up the tree
-        lot_result = privacy_element.xpath(
+        lot_result = fields_privacy.xpath(
             "ancestor::efac:LotResult",
             namespaces=namespaces,
         )[0]
         lot_result_id = lot_result.xpath("cbc:ID/text()", namespaces=namespaces)[0]
 
-        reason_description = privacy_element.xpath(
-            "efbc:ReasonDescription/text()",
-            namespaces=namespaces,
-        )
-
-        if reason_description:
-            withheld_info = {
-                "id": f"buy-rev-cou-{lot_result_id}",
-                "rationale": reason_description[0],
-            }
-            result["withheldInformation"].append(withheld_info)
+        withheld_info = {
+            "id": f"buy-rev-cou-{lot_result_id}",
+            "rationale": reason_desc.text,
+        }
+        result["withheldInformation"].append(withheld_info)
 
     if not result["withheldInformation"]:
         logger.debug(
