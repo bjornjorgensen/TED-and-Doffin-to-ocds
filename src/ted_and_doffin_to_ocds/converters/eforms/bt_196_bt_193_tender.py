@@ -44,22 +44,24 @@ def parse_bt196_bt193_unpublished_justification(
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
-    xpath_query = (
+    # Use the provided absolute XPath to directly locate the ReasonDescription elements
+    xpath_reason_descriptions = (
         "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent"
         "/efext:EformsExtension/efac:NoticeResult/efac:LotTender"
-        "/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='win-ten-var']"
+        "/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='win-ten-var']/efbc:ReasonDescription"
     )
 
     result = {"withheldInformation": []}
-    fields_privacy = root.xpath(xpath_query, namespaces=namespaces)
+    reason_elements = root.xpath(xpath_reason_descriptions, namespaces=namespaces)
 
-    for privacy in fields_privacy:
+    for reason_element in reason_elements:
+        # Get the parent FieldsPrivacy element
+        privacy = reason_element.getparent()
+
         tender_id = privacy.xpath(
             "ancestor::efac:LotTender/cbc:ID/text()", namespaces=namespaces
         )[0]
-        reason = privacy.xpath("efbc:ReasonDescription/text()", namespaces=namespaces)[
-            0
-        ]
+        reason = reason_element.text
         field_id = "win-ten-var"
 
         withheld_info = {

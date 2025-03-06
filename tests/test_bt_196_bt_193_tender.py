@@ -44,15 +44,23 @@ def test_bt196_bt193_unpublished_justification_integration(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
-            <efac:LotTender>
-                <cbc:ID schemeName="result">TEN-0001</cbc:ID>
-                <efac:FieldsPrivacy>
-                    <efbc:FieldIdentifierCode>win-ten-var</efbc:FieldIdentifierCode>
-                    <efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription>
-                </efac:FieldsPrivacy>
-            </efac:LotTender>
-        </efac:NoticeResult>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotTender>
+                                <cbc:ID schemeName="result">TEN-0001</cbc:ID>
+                                <efac:FieldsPrivacy>
+                                    <efbc:FieldIdentifierCode>win-ten-var</efbc:FieldIdentifierCode>
+                                    <efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription>
+                                </efac:FieldsPrivacy>
+                            </efac:LotTender>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractNotice>
     """
     xml_file = tmp_path / "test_input_bt196_bt193.xml"
@@ -89,12 +97,20 @@ def test_bt196_bt193_unpublished_justification_missing_data(
         xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
         xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
         xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
-            <efac:LotTender>
-                <cbc:ID schemeName="result">TEN-0001</cbc:ID>
-                <!-- Missing FieldsPrivacy element -->
-            </efac:LotTender>
-        </efac:NoticeResult>
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotTender>
+                                <cbc:ID schemeName="result">TEN-0001</cbc:ID>
+                                <!-- Missing FieldsPrivacy element -->
+                            </efac:LotTender>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
     </ContractNotice>
     """
     xml_file = tmp_path / "test_input_bt196_bt193_missing.xml"
