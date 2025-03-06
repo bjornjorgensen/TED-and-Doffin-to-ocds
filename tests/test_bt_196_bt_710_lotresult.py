@@ -33,52 +33,6 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_196_bt710_lot_result_integration(
-    tmp_path, setup_logging, temp_output_dir
-) -> None:
-    logger = setup_logging
-    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
-    <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
-        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
-        xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
-        xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
-        xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
-        xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
-        <efac:NoticeResult>
-            <efac:LotResult>
-                <efac:FieldsPrivacy>
-                    <efbc:FieldIdentifierCode>ten-val-low</efbc:FieldIdentifierCode>
-                    <efbc:ReasonDescription>Information delayed publication because of ...</efbc:ReasonDescription>
-                </efac:FieldsPrivacy>
-                <cbc:ID schemeName="result">RES-0001</cbc:ID>
-            </efac:LotResult>
-        </efac:NoticeResult>
-    </ContractNotice>
-    """
-    xml_file = tmp_path / "test_input_bt196_bt710.xml"
-    xml_file.write_text(xml_content)
-
-    result = run_main_and_get_result(xml_file, temp_output_dir)
-
-    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
-
-    assert "withheldInformation" in result, "Expected 'withheldInformation' in result"
-    assert (
-        len(result["withheldInformation"]) == 1
-    ), f"Expected 1 withheld information item, got {len(result['withheldInformation'])}"
-
-    withheld_info = result["withheldInformation"][0]
-    assert (
-        withheld_info["id"] == "ten-val-low-RES-0001"
-    ), "Unexpected withheld information id"
-    assert (
-        withheld_info["field"] == "ten-val-low"
-    ), "Unexpected withheld information field"
-    assert (
-        withheld_info["rationale"] == "Information delayed publication because of ..."
-    ), "Unexpected withheld information rationale"
-
-
 def test_bt_196_bt710_lot_result_missing_field(
     tmp_path, setup_logging, temp_output_dir
 ) -> None:
@@ -108,6 +62,58 @@ def test_bt_196_bt710_lot_result_missing_field(
         "withheldInformation" not in result
         or len(result.get("withheldInformation", [])) == 0
     ), "Did not expect 'withheldInformation' when FieldsPrivacy is missing"
+
+
+def test_bt_196_bt710_lot_result_xpath(
+    tmp_path, setup_logging, temp_output_dir
+) -> None:
+    logger = setup_logging
+    xml_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+        xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+        xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+        xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1"
+        xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1"
+        xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1">
+        <ext:UBLExtensions>
+            <ext:UBLExtension>
+                <ext:ExtensionContent>
+                    <efext:EformsExtension>
+                        <efac:NoticeResult>
+                            <efac:LotResult>
+                                <efac:FieldsPrivacy>
+                                    <efbc:FieldIdentifierCode>ten-val-low</efbc:FieldIdentifierCode>
+                                    <efbc:ReasonDescription>Specified xpath reason description</efbc:ReasonDescription>
+                                </efac:FieldsPrivacy>
+                                <cbc:ID schemeName="result">RES-0002</cbc:ID>
+                            </efac:LotResult>
+                        </efac:NoticeResult>
+                    </efext:EformsExtension>
+                </ext:ExtensionContent>
+            </ext:UBLExtension>
+        </ext:UBLExtensions>
+    </ContractNotice>
+    """
+    xml_file = tmp_path / "test_input_bt196_bt710_xpath.xml"
+    xml_file.write_text(xml_content)
+
+    result = run_main_and_get_result(xml_file, temp_output_dir)
+
+    assert "withheldInformation" in result, "Expected 'withheldInformation' in result"
+    assert (
+        len(result["withheldInformation"]) == 1
+    ), f"Expected 1 withheld information item, got {len(result['withheldInformation'])}"
+
+    withheld_info = result["withheldInformation"][0]
+    assert (
+        withheld_info["id"] == "ten-val-low-RES-0002"
+    ), "Unexpected withheld information id"
+    assert (
+        withheld_info["field"] == "ten-val-low"
+    ), "Unexpected withheld information field"
+    assert (
+        withheld_info["rationale"] == "Specified xpath reason description"
+    ), "XPath did not correctly extract the reason description"
 
 
 if __name__ == "__main__":
