@@ -52,12 +52,16 @@ def parse_electronic_ordering(xml_content: str | bytes) -> dict | None:
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
+        "//cac:ProcurementProjectLot",
         namespaces=namespaces,
     )
 
     for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        lot_id_elements = lot.xpath("cbc:ID/text()", namespaces=namespaces)
+        if not lot_id_elements:
+            continue
+
+        lot_id = lot_id_elements[0]
         electronic_ordering = lot.xpath(
             "cac:TenderingTerms/cac:PostAwardProcess/cbc:ElectronicOrderUsageIndicator/text()",
             namespaces=namespaces,

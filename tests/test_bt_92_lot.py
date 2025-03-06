@@ -62,6 +62,7 @@ def test_parse_electronic_ordering() -> None:
     assert "lots" in result["tender"]
     assert len(result["tender"]["lots"]) == 1
     assert result["tender"]["lots"][0]["id"] == "LOT-0001"
+    assert "contractTerms" in result["tender"]["lots"][0]
     assert result["tender"]["lots"][0]["contractTerms"]["hasElectronicOrdering"] is True
 
 
@@ -95,7 +96,7 @@ def test_bt_92_lot_electronic_ordering_integration(
         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
         <cac:ProcurementProjectLot>
-            <cbc:ID>LOT-0001</cbc:ID>
+            <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingTerms>
                 <cac:PostAwardProcess>
                     <cbc:ElectronicOrderUsageIndicator>true</cbc:ElectronicOrderUsageIndicator>
@@ -103,7 +104,7 @@ def test_bt_92_lot_electronic_ordering_integration(
             </cac:TenderingTerms>
         </cac:ProcurementProjectLot>
         <cac:ProcurementProjectLot>
-            <cbc:ID>LOT-0002</cbc:ID>
+            <cbc:ID schemeName="Lot">LOT-0002</cbc:ID>
             <cac:TenderingTerms>
                 <cac:PostAwardProcess>
                     <cbc:ElectronicOrderUsageIndicator>false</cbc:ElectronicOrderUsageIndicator>
