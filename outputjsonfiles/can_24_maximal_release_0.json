@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-61bfa707-4bd0-4402-b672-023fa447468a",
+  "ocid": "ocds-abcd1234-87400518-000f-4ee2-baf3-84edb0d39c03",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -153,8 +153,8 @@
       {
         "id": "GLO-0001",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "title": "Title ---",
         "identifiers": [
@@ -355,8 +355,8 @@
         "id": "FiscalDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "publisher": {
           "id": "ORG-0002"
@@ -366,8 +366,8 @@
         "id": "EnvDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "publisher": {
           "id": "ORG-0003"
@@ -377,8 +377,8 @@
         "id": "EmplDocID1",
         "documentType": "legislation",
         "relatedLots": [
-          "LOT-0001",
-          "LOT-0002"
+          "LOT-0002",
+          "LOT-0001"
         ],
         "publisher": {
           "id": "ORG-0004"
@@ -749,9 +749,9 @@
         "listedOnRegulatedMarket": false
       },
       "roles": [
-        "leadTenderer",
         "tenderer",
-        "supplier"
+        "supplier",
+        "leadTenderer"
       ],
       "beneficialOwners": [
         {
@@ -994,8 +994,8 @@
       "scheme": "eu-notice-id-ref",
       "identifier": "9c0fd704-64d3-4294-a3b6-6df45911ab9f-01",
       "relatedLots": [
-        "LOT-0001",
-        "LOT-0002"
+        "LOT-0002",
+        "LOT-0001"
       ]
     }
   ],
@@ -1370,7 +1370,7 @@
     "budget": {
       "finance": [
         {
-          "id": "e19d61b1-2e27-43cc-9b4e-33ef9bc68e13",
+          "id": "2e5e8dc3-fadb-46e9-ab43-37d2a5d32b5f",
           "financingParty": {
             "id": "13",
             "name": "European Union"

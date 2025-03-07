@@ -1,7 +1,7 @@
 {
   "id": "20a13479-5209-4c1e-9118-edff49c2c9af",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-ef922fce-a48e-4af2-a73e-6ee6f43f3939",
+  "ocid": "ocds-abcd1234-94978c70-23a8-4b96-b93c-2731db4d4bbd",
   "tender": {
     "legalBasis": {
       "id": "Anskaffelsesforskriften",
@@ -161,10 +161,10 @@
         "country": "NO"
       },
       "roles": [
-        "buyer",
-        "processContactPoint",
         "payer",
-        "funder"
+        "processContactPoint",
+        "funder",
+        "buyer"
       ]
     },
     {

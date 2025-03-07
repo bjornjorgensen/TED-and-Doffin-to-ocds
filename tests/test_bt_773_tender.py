@@ -37,6 +37,7 @@ def run_main_and_get_result(xml_file, output_dir):
 def test_bt_773_tender_subcontracting_integration(
     tmp_path, setup_logging, temp_output_dir
 ) -> None:
+    
     logger = setup_logging
 
     xml_content = """
@@ -78,36 +79,30 @@ def test_bt_773_tender_subcontracting_integration(
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
 
-    # Verify the structure of the result
     assert "bids" in result, "Expected 'bids' in result"
     assert "details" in result["bids"], "Expected 'details' in bids"
     
-    # Verify that only bids with subcontracting information are included
     bids = result["bids"]["details"]
     
-    # Print the actual result for debugging
-    logger.info("Actual bids: %s", bids)
+    assert len(bids) == 3, "All bids should be included regardless of subcontracting information"
     
-    assert len(bids) == 2, "Only bids with subcontracting information should be included"
-    
-    # Check that TEN-0001 is included with hasSubcontracting=True
     bid_1 = next((bid for bid in bids if bid["id"] == "TEN-0001"), None)
     assert bid_1 is not None, "Bid TEN-0001 should be included"
-    assert bid_1["hasSubcontracting"] is True, "Expected 'hasSubcontracting' to be True for TEN-0001"
-
-    # Check that TEN-0002 is included with hasSubcontracting=False
+    assert bid_1["hasSubcontracting"] is True, "Expected 'hasSubcontracting' to be True for 'yes' value"
+    
     bid_2 = next((bid for bid in bids if bid["id"] == "TEN-0002"), None)
     assert bid_2 is not None, "Bid TEN-0002 should be included"
-    assert bid_2["hasSubcontracting"] is False, "Expected 'hasSubcontracting' to be False for TEN-0002"
+    assert bid_2["hasSubcontracting"] is False, "Expected 'hasSubcontracting' to be False for 'no' value"
 
-    # Check that TEN-0003 is not included (no subcontracting term)
     bid_3 = next((bid for bid in bids if bid["id"] == "TEN-0003"), None)
-    assert bid_3 is None, "Bid TEN-0003 should not be included as it has no subcontracting information"
+    assert bid_3 is not None, "Bid TEN-0003 should be included even without subcontracting information"
+    assert "hasSubcontracting" not in bid_3, "No hasSubcontracting field should be present when info is missing"
 
 
 def test_bt_773_tender_subcontracting_missing_subcontracting_term(
     tmp_path, setup_logging, temp_output_dir
 ) -> None:
+    
     logger = setup_logging
 
     xml_content = """
@@ -135,24 +130,17 @@ def test_bt_773_tender_subcontracting_missing_subcontracting_term(
     xml_file = tmp_path / "test_input_subcontracting_missing_term.xml"
     xml_file.write_text(xml_content)
 
-    # Run main and get result
+    
     result = run_main_and_get_result(xml_file, temp_output_dir)
 
-    # Print the actual result for debugging
-    logger.info("Result: %s", result)
-
-    # Verify structure exists
     assert "bids" in result, "Expected 'bids' section in result"
     assert "details" in result["bids"], "Expected 'details' array in bids section"
     
-    # Verify no bids are included since there are no valid subcontracting terms
-    # The parse_subcontracting function should return None or empty details
-    # for documents with no subcontracting information
-    assert len(result["bids"]["details"]) == 0, "Expected empty details array when no valid subcontracting terms"
+    assert len(result["bids"]["details"]) == 1, "All bids should be included regardless of subcontracting information"
 
-    # Explicitly check that TEN-0004 is not included
-    bid_ids = [bid["id"] for bid in result["bids"]["details"]] if result["bids"]["details"] else []
-    assert "TEN-0004" not in bid_ids, "Bid TEN-0004 should not be included as it has no subcontracting information"
+    bid_4 = next((bid for bid in result["bids"]["details"] if bid["id"] == "TEN-0004"), None)
+    assert bid_4 is not None, "Bid TEN-0004 should be included even without subcontracting information"
+    assert "hasSubcontracting" not in bid_4, "No hasSubcontracting field should be present when info is missing"
 
 
 if __name__ == "__main__":
