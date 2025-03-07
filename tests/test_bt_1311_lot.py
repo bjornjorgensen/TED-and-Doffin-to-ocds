@@ -44,10 +44,10 @@ def test_bt_1311_lot_integration(tmp_path, setup_logging, temp_output_dir) -> No
         <cac:ProcurementProjectLot>
             <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
             <cac:TenderingProcess>
-                <cac:participationRequestReceptionPeriod>
+                <cac:ParticipationRequestReceptionPeriod>
                     <cbc:EndDate>2019-11-25+01:00</cbc:EndDate>
                     <cbc:EndTime>12:00:00+01:00</cbc:EndTime>
-                </cac:participationRequestReceptionPeriod>
+                </cac:ParticipationRequestReceptionPeriod>
             </cac:TenderingProcess>
         </cac:ProcurementProjectLot>
     </ContractAwardNotice>

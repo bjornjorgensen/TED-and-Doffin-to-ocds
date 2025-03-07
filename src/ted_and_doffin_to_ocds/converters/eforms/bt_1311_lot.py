@@ -66,20 +66,35 @@ def parse_deadline_receipt_requests(xml_content: str | bytes) -> dict | None:
 
             if end_date:
                 try:
-                    # Combine date with time if available, otherwise use end of day
                     date_str = end_date[0]
                     time_str = end_time[0] if end_time else "23:59:59"
 
-                    # Split timezone if present
-                    base_date = date_str.split("+")[0]
-                    tz = f"+{date_str.split('+')[1]}" if "+" in date_str else "Z"
+                    # Extract date and timezone components
+                    date_parts = date_str.split("+", 1)
+                    base_date = date_parts[0]
 
-                    # Combine all parts
-                    full_datetime = f"{base_date}T{time_str}{tz}"
+                    # Extract time and its timezone if present
+                    time_parts = time_str.split("+", 1)
+                    base_time = time_parts[0]
+
+                    # Determine timezone - prioritize time's timezone, then date's timezone, default to 'Z'
+                    if len(time_parts) > 1:
+                        tz = f"+{time_parts[1]}"
+                    elif len(date_parts) > 1:
+                        tz = f"+{date_parts[1]}"
+                    else:
+                        tz = "Z"
+
+                    # Combine all parts to form the full datetime
+                    full_datetime = f"{base_date}T{base_time}{tz}"
                     iso_date = convert_to_iso_format(full_datetime)
 
                     logger.info(
-                        "Processed deadline for lot %s: %s", lot_id[0], iso_date
+                        "Processed deadline for lot %s: %s (date: %s, time: %s)",
+                        lot_id[0],
+                        iso_date,
+                        date_str,
+                        time_str if end_time else "end of day",
                     )
                     result["tender"]["lots"].append(
                         {"id": lot_id[0], "tenderPeriod": {"endDate": iso_date}}
