@@ -2484,6 +2484,7 @@ def process_bt_section(
         logger.info("Starting %s processing", section_name)
         for parse_function in parse_funcs:
             parsed_data = parse_function(xml_content)
+            logger.debug("Parsed data for %s: %s", section_name, parsed_data)
             if parsed_data:
                 merge_func(release_json, parsed_data)
                 logger.info("Successfully merged data for %s", section_name)
