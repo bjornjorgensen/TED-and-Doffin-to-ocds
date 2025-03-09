@@ -78,27 +78,21 @@ def parse_framework_duration_justification(xml_content: str | bytes) -> dict | N
         etree.XMLSyntaxError: If the input is not valid XML.
 
     """
-    if isinstance(xml_content, str):
-        xml_content = xml_content.encode("utf-8")
-
+    xml_content = validate_xml_content(xml_content)
     root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-    }
 
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
-        namespaces=namespaces,
+        namespaces=NAMESPACES,
     )
 
     for lot in lots:
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)[0]
+        lot_id = lot.xpath("cbc:ID/text()", namespaces=NAMESPACES)[0]
         justification = lot.xpath(
             ".//cac:TenderingProcess/cac:FrameworkAgreement/cbc:Justification/text()",
-            namespaces=namespaces,
+            namespaces=NAMESPACES,
         )
 
         if justification and justification[0].strip():
@@ -131,7 +125,12 @@ def merge_framework_duration_justification(
     Returns:
         None: The function modifies release_json in-place.
 
+    Raises:
+        TypeError: If release_json is not a dictionary.
     """
+    if not isinstance(release_json, dict):
+        raise TypeError(ERR_INVALID_RELEASE_JSON)
+
     if not framework_justification_data:
         logger.info("No framework duration justification data to merge")
         return

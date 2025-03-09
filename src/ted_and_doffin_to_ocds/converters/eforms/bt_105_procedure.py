@@ -7,9 +7,7 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 # Constants for XML processing
-XPATH_PROCEDURE_CODE = (
-    "//cac:TenderingProcess/cbc:ProcedureCode[@listName='procurement-procedure-type']/text()"
-)
+XPATH_PROCEDURE_CODE = "//cac:TenderingProcess/cbc:ProcedureCode[@listName='procurement-procedure-type']/text()"
 NAMESPACES = {
     "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
     "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
@@ -103,7 +101,7 @@ def parse_procedure_type(xml_content: str | bytes) -> dict | None:
         xml_content = xml_content.encode("utf-8")
 
     root = etree.fromstring(xml_content)
-    
+
     procedure_elements = root.xpath(XPATH_PROCEDURE_CODE, namespaces=NAMESPACES)
 
     if not procedure_elements:
