@@ -2,6 +2,8 @@
 
 This module handles conversion of procurement notice form types to OCDS format.
 It maps the form types specified in EU Vocabularies to corresponding OCDS tags and tender statuses.
+Form types are drawn from the form type authority table in the EU Vocabularies:
+http://publications.europa.eu/resource/authority/form-type
 """
 
 import logging
@@ -10,6 +12,8 @@ from lxml import etree
 
 logger = logging.getLogger(__name__)
 
+# Form type mapping according to EU Vocabularies form type authority table
+# Maps form types to corresponding OCDS tags and tender statuses
 form_type_mapping: dict[str, dict[str, list[str] | str | None]] = {
     "planning": {"tag": ["tender"], "status": "planned"},
     "competition": {"tag": ["tender"], "status": "active"},
@@ -17,7 +21,8 @@ form_type_mapping: dict[str, dict[str, list[str] | str | None]] = {
     "result": {"tag": ["award", "contract"], "status": "complete"},
     "dir-awa-pre": {"tag": ["award", "contract"], "status": "complete"},
     "cont-modif": {"tag": ["awardUpdate", "contractUpdate"], "status": None},
-    # bri type is not mapped as it should be discarded
+    # bri type is not mapped as it relates to events outside the lifecycle of a contracting process
+    # and should be discarded per eForms guidance
 }
 
 

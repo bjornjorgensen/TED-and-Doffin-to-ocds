@@ -1,7 +1,7 @@
 {
   "id": "2023-677589",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-53122772-389d-48ed-bb8e-643403e7b037",
+  "ocid": "ocds-abcd1234-87845898-21aa-42e8-8035-f19ceecdb0de",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -198,8 +198,8 @@
         ]
       },
       "roles": [
-        "submissionReceiptBody",
         "processContactPoint",
+        "submissionReceiptBody",
         "buyer"
       ],
       "address": {

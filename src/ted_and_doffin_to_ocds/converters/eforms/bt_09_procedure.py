@@ -40,9 +40,9 @@ def parse_cross_border_law(xml_content: str | bytes) -> dict[str, Any] | None:
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
 
-    # Check for CrossBorderLaw section following eForms absolute xpath
+    # Use absolute XPath as specified in eForms documentation for BT-09
     cross_border_law_refs = root.xpath(
-        "//cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='CrossBorderLaw']",
+        "/*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='CrossBorderLaw']",
         namespaces=NAMESPACES,
     )
 
