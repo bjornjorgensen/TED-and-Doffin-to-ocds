@@ -43,10 +43,22 @@ def parse_part_documents_restricted(xml_content: str | bytes) -> dict[str, Any] 
         doc_type = doc_ref.xpath("cbc:DocumentType/text()", namespaces=namespaces)
 
         if doc_id and doc_type and doc_type[0].lower() == "restricted-document":
+            # Extract existing access details if present
+            access_details = doc_ref.xpath(
+                "cbc:DocumentDescription/text()", namespaces=namespaces
+            )
+            access_text = access_details[0] if access_details else ""
+
+            # Prepend "Restricted." to access details as per eForms guidance
+            if access_text and not access_text.startswith("Restricted."):
+                final_access_details = f"Restricted. {access_text}"
+            else:
+                final_access_details = access_text if access_text else "Restricted."
+
             document_data = {
                 "id": doc_id[0],
                 "documentType": "biddingDocuments",
-                "accessDetails": "Restricted.",
+                "accessDetails": final_access_details,
             }
             result["tender"]["documents"].append(document_data)
 
