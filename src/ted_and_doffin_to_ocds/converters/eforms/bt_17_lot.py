@@ -31,6 +31,14 @@ def parse_submission_electronic(xml_content: str | bytes) -> dict[str, Any] | No
         "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
     }
 
+    # Map of XML submission values to OCDS permission codelist values
+    # Based on the eForms permission codelist values
+    submission_policy_map = {
+        "required": "required",
+        "allowed": "allowed",
+        "notAllowed": "notAllowed",
+    }
+
     result = {"tender": {"lots": []}}
 
     lots = root.xpath(
@@ -46,9 +54,13 @@ def parse_submission_electronic(xml_content: str | bytes) -> dict[str, Any] | No
         )
 
         if lot_id and submission_method:
+            policy_value = submission_method[0]
+            # Map to standard permission codelist value, defaulting to original if not in map
+            policy_value = submission_policy_map.get(policy_value, policy_value)
+
             lot_data = {
                 "id": lot_id[0],
-                "submissionTerms": {"electronicSubmissionPolicy": submission_method[0]},
+                "submissionTerms": {"electronicSubmissionPolicy": policy_value},
             }
             result["tender"]["lots"].append(lot_data)
 
