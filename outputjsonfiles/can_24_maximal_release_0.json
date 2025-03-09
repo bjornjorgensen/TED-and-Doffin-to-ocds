@@ -1,7 +1,7 @@
 {
   "id": "15377ca1-6cf7-4060-90f0-9290128957a3",
   "initiationType": "tender",
-  "ocid": "ocds-abcd1234-813405e3-840d-4869-8049-6dd30a7331c9",
+  "ocid": "ocds-abcd1234-dda220cc-f5e8-4387-a19e-547238187c03",
   "tender": {
     "legalBasis": {
       "wasDerivedFrom": {
@@ -749,8 +749,8 @@
         "listedOnRegulatedMarket": false
       },
       "roles": [
-        "tenderer",
         "supplier",
+        "tenderer",
         "leadTenderer"
       ],
       "beneficialOwners": [
@@ -800,8 +800,8 @@
         "listedOnRegulatedMarket": false
       },
       "roles": [
-        "tenderer",
-        "supplier"
+        "supplier",
+        "tenderer"
       ],
       "beneficialOwners": [
         {
@@ -1370,7 +1370,7 @@
     "budget": {
       "finance": [
         {
-          "id": "2b492e2d-7ac4-4742-9ee1-9892812c43b2",
+          "id": "26938884-5352-4220-852c-c8475d3fbe15",
           "financingParty": {
             "id": "13",
             "name": "European Union"
