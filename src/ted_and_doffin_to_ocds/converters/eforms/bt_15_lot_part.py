@@ -33,7 +33,6 @@ def parse_documents_url(xml_content: str | bytes) -> dict[str, Any] | None:
 
     result = {"tender": {"documents": []}}
 
-    # Process Lots - using 'Lot' schemeName (uppercase L)
     lots = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
         namespaces=namespaces,
@@ -41,20 +40,11 @@ def parse_documents_url(xml_content: str | bytes) -> dict[str, Any] | None:
     for lot in lots:
         process_document_references(lot, result, namespaces, is_lot=True)
 
-    # Process parts - using 'part' schemeName (lowercase p)
     parts = root.xpath(
         "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
         namespaces=namespaces,
     )
     for part in parts:
-        process_document_references(part, result, namespaces, is_lot=False)
-
-    # Also check for 'Part' schemeName (uppercase P) for compatibility
-    parts_alt = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
-        namespaces=namespaces,
-    )
-    for part in parts_alt:
         process_document_references(part, result, namespaces, is_lot=False)
 
     return result if result["tender"]["documents"] else None
@@ -124,14 +114,19 @@ def merge_documents_url(
             None,
         )
         if existing_document:
-            existing_document.update(new_document)
+            # Update only specific fields we care about
+            existing_document["url"] = new_document["url"]
+            existing_document["documentType"] = new_document["documentType"]
+
+            # Handle relatedLots separately
             if "relatedLots" in new_document:
-                existing_document.setdefault("relatedLots", []).extend(
-                    new_document["relatedLots"],
-                )
+                if "relatedLots" not in existing_document:
+                    existing_document["relatedLots"] = []
+
+                # Add new lot references and ensure uniqueness
                 existing_document["relatedLots"] = list(
-                    set(existing_document["relatedLots"]),
-                )  # Remove duplicates
+                    set(existing_document["relatedLots"] + new_document["relatedLots"])
+                )
         else:
             existing_documents.append(new_document)
 
