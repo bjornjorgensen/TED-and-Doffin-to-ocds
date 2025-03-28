@@ -36,7 +36,7 @@ def parse_contract_conclusion_date(
     try:
         root = etree.fromstring(xml_content)
     except etree.XMLSyntaxError:
-        logging.exception("Failed to parse XML content")
+        logger.exception("Failed to parse XML content")
         return None
 
     # Map of contract IDs to award IDs

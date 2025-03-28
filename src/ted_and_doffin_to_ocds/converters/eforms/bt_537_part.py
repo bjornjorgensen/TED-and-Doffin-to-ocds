@@ -56,7 +56,7 @@ def parse_part_duration_end_date(
             iso_end_date = end_date(date_to_end)
             result["tender"]["contractPeriod"] = {"endDate": iso_end_date}
         except ValueError as e:
-            logging.warning("Warning: Invalid date format for part end date: %s", e)
+            logger.warning("Warning: Invalid date format for part end date: %s", e)
 
     return result if "contractPeriod" in result["tender"] else None
 

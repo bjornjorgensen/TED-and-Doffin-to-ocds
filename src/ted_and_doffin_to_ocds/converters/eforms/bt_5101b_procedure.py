@@ -5,6 +5,8 @@ from typing import Any
 
 from lxml import etree
 
+logger = logging.getLogger(__name__)
+
 
 def parse_procedure_place_performance_streetline1(
     xml_content: str | bytes,
@@ -38,7 +40,7 @@ def parse_procedure_place_performance_streetline1(
     for location in realized_locations:
         address_elements = location.xpath("cac:Address", namespaces=namespaces)
         if not address_elements:
-            logging.warning(
+            logger.warning(
                 "No Address element found in RealizedLocation for BT-5101(b)"
             )
             continue

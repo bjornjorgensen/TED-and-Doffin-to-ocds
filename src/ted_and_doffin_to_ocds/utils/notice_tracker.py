@@ -223,7 +223,7 @@ class NoticeTracker:
                     "Successfully tracked notice: %s with OCID: %s", notice_id, ocid
                 )
             except Exception:
-                logging.exception("Error tracking notice %s", notice_id)
+                logger.exception("Error tracking notice %s", notice_id)
                 raise
 
     def track_part(self, notice_id: str, part_id: str, ocid: str) -> None:
