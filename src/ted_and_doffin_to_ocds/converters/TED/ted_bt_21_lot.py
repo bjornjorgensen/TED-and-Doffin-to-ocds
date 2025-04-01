@@ -53,7 +53,7 @@ def parse_lot_title(xml_content: str | bytes) -> dict[str, Any] | None:
 
         found_lots = True
         for i, lot in enumerate(lots):
-            lot_id = f"lot-{i+1}"
+            lot_id = f"lot-{i + 1}"
 
             # Use specific title paths based on the parent element
             if "F17_ANNEX_B" in xpath_pattern:
@@ -62,12 +62,21 @@ def parse_lot_title(xml_content: str | bytes) -> dict[str, Any] | None:
                 title_elements = lot.xpath("TITLE/text()", namespaces=namespaces)
 
             if title_elements:
-                existing_lot = next((l for l in result["tender"]["lots"] if l["id"] == lot_id), None)
+                existing_lot = next(
+                    (
+                        lot_item
+                        for lot_item in result["tender"]["lots"]
+                        if lot_item["id"] == lot_id
+                    ),
+                    None,
+                )
                 if not existing_lot:
-                     result["tender"]["lots"].append({"id": lot_id, "title": title_elements[0]})
+                    result["tender"]["lots"].append(
+                        {"id": lot_id, "title": title_elements[0]}
+                    )
 
         if found_lots:
-             break
+            break
 
     return result if result["tender"]["lots"] else None
 
