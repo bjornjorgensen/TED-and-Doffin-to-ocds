@@ -9,6 +9,10 @@ logger = logging.getLogger(__name__)
 NAMESPACES = {
     "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
     "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
+    "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
+    "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
+    "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
+    "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
 }
 
 RELATIONSHIP_MAPPING = {
@@ -25,7 +29,7 @@ def parse_direct_award_justification(xml_content: str | bytes) -> dict | None:
     """Parse BT-1252: Direct award justification identifiers.
 
     Extracts identifiers of previous procedures that justify direct award,
-    mapping reason codes to relationship types.
+    mapping reason codes to relationship types based on eForms guidance for BT-1252.
 
     Args:
         xml_content: XML content to parse, either as string or bytes
@@ -35,7 +39,7 @@ def parse_direct_award_justification(xml_content: str | bytes) -> dict | None:
             {
                 "relatedProcesses": [
                     {
-                        "identifier": str,
+                        "identifier": str,  # BT-1252 value
                         "scheme": "eu-oj",
                         "relationship": [str]  # from RELATIONSHIP_MAPPING
                     }
@@ -50,6 +54,7 @@ def parse_direct_award_justification(xml_content: str | bytes) -> dict | None:
         root = etree.fromstring(xml_content)
         result = {"relatedProcesses": []}
 
+        # XPath based on eForms definition for BT-1252 context
         justifications = root.xpath(
             "//cac:TenderingProcess/cac:ProcessJustification"
             "[cbc:ProcessReasonCode/@listName='direct-award-justification']",
@@ -57,20 +62,23 @@ def parse_direct_award_justification(xml_content: str | bytes) -> dict | None:
         )
 
         for justification in justifications:
+            # Extract BT-1252 value
             identifier = justification.xpath(
                 "cbc:Description/text()", namespaces=NAMESPACES
             )
+            # Extract reason code for mapping relationship
             reason_code = justification.xpath(
                 "cbc:ProcessReasonCode/text()", namespaces=NAMESPACES
             )
 
             if identifier:
                 process = {
-                    "identifier": identifier[0].strip(),
+                    "identifier": identifier[0].strip(),  # BT-1252 value
                     "scheme": "eu-oj",
                     "relationship": [],
                 }
 
+                # Map reason code to OCDS relationship as per eForms guidance for BT-1252
                 if reason_code:
                     relationship = RELATIONSHIP_MAPPING.get(reason_code[0])
                     if relationship:
@@ -96,9 +104,9 @@ def parse_direct_award_justification(xml_content: str | bytes) -> dict | None:
 def merge_direct_award_justification(
     release_json: dict, justification_data: dict | None
 ) -> None:
-    """Merge direct award justification data into the release JSON.
+    """Merge direct award justification data (BT-1252) into the release JSON.
 
-    Updates or adds related processes with sequential IDs.
+    Updates or adds related processes with sequential IDs as per eForms guidance.
 
     Args:
         release_json: Main OCDS release JSON to update

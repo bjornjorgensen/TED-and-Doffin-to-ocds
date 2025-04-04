@@ -39,10 +39,8 @@ def parse_lot_result_identifier(xml_content: str | bytes) -> dict[str, Any] | No
         root = etree.fromstring(xml_content)
         result = {"awards": []}
 
-        # Modified to check both uppercase and lowercase versions of NoticeResult
+        # Get all LotResult elements
         lot_results = root.xpath(
-            "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/"
-            "efext:EformsExtension/efac:NoticeResult/efac:LotResult | "
             "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/"
             "efext:EformsExtension/efac:NoticeResult/efac:LotResult",
             namespaces=NAMESPACES,

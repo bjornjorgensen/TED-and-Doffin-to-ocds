@@ -1,5 +1,3 @@
-# converters/bt_125_Lot.py
-
 import logging
 
 from lxml import etree
@@ -10,10 +8,13 @@ logger = logging.getLogger(__name__)
 def parse_previous_planning_identifier_lot(
     xml_content: str | bytes,
 ) -> dict | None:
-    """Parse the previous planning identifier information from lot-level XML data.
+    """Parse the previous planning identifier information from TED XML data.
+
+    Extract information about previous planning notice identifiers from TED XML format
+    for BT-125 at the lot level.
 
     Args:
-        xml_content (Union[str, bytes]): The XML content containing lot information
+        xml_content (Union[str, bytes]): The TED XML content to parse
 
     Returns:
         Optional[Dict]: Dictionary containing related processes information, or None if no data found
@@ -24,54 +25,35 @@ def parse_previous_planning_identifier_lot(
                     "id": str,
                     "relationship": ["planning"],
                     "scheme": "eu-notice-id-ref",
-                    "identifier": str,
-                    "relatedLots": [str] # optional
+                    "identifier": str
                 }
             ]
         }
 
+    Raises:
+        etree.XMLSyntaxError: If the input is not valid XML.
     """
     if isinstance(xml_content, str):
         xml_content = xml_content.encode("utf-8")
     root = etree.fromstring(xml_content)
-    namespaces = {
-        "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
-        "ext": "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2",
-        "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
-        "efac": "http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1",
-        "efext": "http://data.europa.eu/p27/eforms-ubl-extensions/1",
-        "efbc": "http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1",
-    }
+
+    # TED XML paths for different form types based on BT-125(i)-Lot metadata
+    form_paths = [
+        "//*[local-name()='TED_EXPORT']/*[local-name()='FORM_SECTION']/*[local-name()='CONTRACT_DEFENCE']/*[local-name()='FD_CONTRACT_DEFENCE']/*[local-name()='PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE']/*[local-name()='ADMINISTRATIVE_INFORMATION_CONTRACT_NOTICE_DEFENCE']/*[local-name()='PREVIOUS_PUBLICATION_INFORMATION_NOTICE_F17']/*[local-name()='PREVIOUS_PUBLICATION_EXISTS_F17']/*[local-name()='PREVIOUS_PUBLICATION_NOTICE_F17']/*[local-name()='NOTICE_NUMBER_OJ']",
+        "//*[local-name()='TED_EXPORT']/*[local-name()='FORM_SECTION']/*[local-name()='F21_2014']/*[local-name()='PROCEDURE']/*[local-name()='NOTICE_NUMBER_OJ']",
+        "//*[local-name()='TED_EXPORT']/*[local-name()='FORM_SECTION']/*[local-name()='F22_2014']/*[local-name()='PROCEDURE']/*[local-name()='NOTICE_NUMBER_OJ']",
+        "//*[local-name()='TED_EXPORT']/*[local-name()='FORM_SECTION']/*[local-name()='F23_2014']/*[local-name()='PROCEDURE']/*[local-name()='NOTICE_NUMBER_OJ']",
+        "//*[local-name()='TED_EXPORT']/*[local-name()='FORM_SECTION']/*[local-name()='F25_2014']/*[local-name()='PROCEDURE']/*[local-name()='NOTICE_NUMBER_OJ']",
+    ]
 
     result = {"relatedProcesses": []}
     related_process_id = 1
 
-    # Find all Procurement Project Lots
-    lots = root.xpath(
-        "//cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
-        namespaces=namespaces,
-    )
+    for path in form_paths:
+        notice_nodes = root.xpath(path)
 
-    for lot in lots:
-        # Extract Lot ID
-        lot_id = lot.xpath("cbc:ID/text()", namespaces=namespaces)
-        lot_id = lot_id[0] if lot_id else None
-
-        # Find Notice Document References within the Tendering Process for the lot
-        notice_refs = lot.xpath(
-            "cac:TenderingProcess/cac:NoticeDocumentReference",
-            namespaces=namespaces,
-        )
-
-        for notice_ref in notice_refs:
-            # Extract the Previous Planning Identifier (BT-125(i)-Lot)
-            identifier = notice_ref.xpath(
-                "cbc:ID[@schemeName='notice-id-ref']/text()",
-                namespaces=namespaces,
-            )
-
-            # Check if identifier matches the required pattern
-            if identifier:
+        for notice in notice_nodes:
+            if notice.text and notice.text.strip():
                 # Pattern validation could be added here if needed
                 # Pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|(\d{1,8})-(19|20)\d\d)$
 
@@ -79,11 +61,8 @@ def parse_previous_planning_identifier_lot(
                     "id": str(related_process_id),
                     "relationship": ["planning"],
                     "scheme": "eu-notice-id-ref",
-                    "identifier": identifier[0],
+                    "identifier": notice.text.strip(),
                 }
-
-                if lot_id:
-                    related_process["relatedLots"] = [lot_id]
 
                 result["relatedProcesses"].append(related_process)
                 related_process_id += 1
@@ -94,7 +73,7 @@ def parse_previous_planning_identifier_lot(
 def merge_previous_planning_identifier_lot(
     release_json: dict, previous_planning_data: dict | None
 ) -> None:
-    """Merge previous planning identifier data into the release JSON.
+    """Merge previous planning identifier data from TED format into the release JSON.
 
     Args:
         release_json (Dict): The target release JSON to merge data into
@@ -104,7 +83,6 @@ def merge_previous_planning_identifier_lot(
     Note:
         The function modifies release_json in-place by adding or updating the
         relatedProcesses field with new planning identifiers.
-
     """
     if not previous_planning_data:
         logger.warning("No Previous Planning Identifier (Lot) data to merge")
@@ -121,15 +99,7 @@ def merge_previous_planning_identifier_lot(
             ),
             None,
         )
-        if existing_process:
-            if "relatedLots" in new_process:
-                existing_process.setdefault("relatedLots", []).extend(
-                    new_process["relatedLots"],
-                )
-                existing_process["relatedLots"] = list(
-                    set(existing_process["relatedLots"]),
-                )
-        else:
+        if not existing_process:
             existing_related_processes.append(new_process)
 
     logger.info(
