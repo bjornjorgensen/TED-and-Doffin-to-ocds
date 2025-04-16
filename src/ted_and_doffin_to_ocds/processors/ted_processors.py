@@ -70,6 +70,66 @@ from ted_and_doffin_to_ocds.converters.TED.ted_bt_124_lot import (
     merge_tool_atypical_url,
     parse_tool_atypical_url,
 )
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_124_part import (
+    merge_tool_atypical_url_part,
+    parse_tool_atypical_url_part,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_125_lot import (
+    merge_previous_planning_identifier_lot,
+    parse_previous_planning_identifier_lot,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_127 import (
+    merge_future_notice_date,
+    parse_future_notice_date,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_130_lot import (
+    merge_dispatch_invitation_tender_date,
+    parse_dispatch_invitation_tender_date,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_132 import (
+    merge_lot_public_opening_date,
+    parse_lot_public_opening_date,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_133 import (
+    merge_bid_opening_location,
+    parse_bid_opening_location,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_134 import (
+    merge_bid_opening_description,
+    parse_bid_opening_description,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_135 import (
+    merge_direct_award_justification_rationale,
+    parse_direct_award_justification_rationale,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_136 import (
+    merge_direct_award_justification_code,
+    parse_direct_award_justification_code,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_137_lot import (
+    merge_purpose_lot_identifier,
+    parse_purpose_lot_identifier,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_137_part import (
+    merge_part_identifier,
+    parse_part_identifier,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_1252 import (
+    merge_direct_award_justification,
+    parse_direct_award_justification,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_1311_lot import (
+    merge_deadline_receipt_requests,
+    parse_deadline_receipt_requests,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_1351 import (
+    merge_accelerated_procedure_justification,
+    parse_accelerated_procedure_justification,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_13713 import (
+    merge_lot_result_identifier,
+    parse_lot_result_identifier,
+)
 
 
 def process_bt_section(
@@ -181,6 +241,81 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             parse_tool_atypical_url,
             merge_tool_atypical_url,
             "BT-124 Lot Atypical Tool URL",
+        ),
+        (
+            parse_tool_atypical_url_part,
+            merge_tool_atypical_url_part,
+            "BT-124 Part Atypical Tool URL",
+        ),
+        (
+            parse_previous_planning_identifier_lot,
+            merge_previous_planning_identifier_lot,
+            "BT-125 Lot Previous Planning Identifier",
+        ),
+        (
+            parse_future_notice_date,
+            merge_future_notice_date,
+            "BT-127 Future Notice Date",
+        ),
+        (
+            parse_dispatch_invitation_tender_date,
+            merge_dispatch_invitation_tender_date,
+            "BT-130 Lot Dispatch Invitation Tender Date",
+        ),
+        (
+            parse_lot_public_opening_date,
+            merge_lot_public_opening_date,
+            "BT-132 Lot Public Opening Date",
+        ),
+        (
+            parse_bid_opening_location,
+            merge_bid_opening_location,
+            "BT-133 Bid Opening Location",
+        ),
+        (
+            parse_bid_opening_description,
+            merge_bid_opening_description,
+            "BT-134 Bid Opening Description",
+        ),
+        (
+            parse_direct_award_justification_rationale,
+            merge_direct_award_justification_rationale,
+            "BT-135 Direct Award Justification",
+        ),
+        (
+            parse_direct_award_justification_code,
+            merge_direct_award_justification_code,
+            "BT-136 Direct Award Justification Code",
+        ),
+        (
+            parse_purpose_lot_identifier,
+            merge_purpose_lot_identifier,
+            "BT-137 Lot Purpose Lot Identifier",
+        ),
+        (
+            parse_part_identifier,
+            merge_part_identifier,
+            "BT-137 Part Purpose Lot Identifier",
+        ),
+        (
+            parse_direct_award_justification,
+            merge_direct_award_justification,
+            "BT-1252 Direct Award Justification",
+        ),
+        (
+            parse_deadline_receipt_requests,
+            merge_deadline_receipt_requests,
+            "BT-1311 Lot Deadline Receipt Requests",
+        ),
+        (
+            parse_accelerated_procedure_justification,
+            merge_accelerated_procedure_justification,
+            "BT-1351 Accelerated Procedure Justification",
+        ),
+        (
+            parse_lot_result_identifier,
+            merge_lot_result_identifier,
+            "BT-13713 Lot Result Identifier",
         ),
     ]
 

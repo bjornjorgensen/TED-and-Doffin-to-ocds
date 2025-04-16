@@ -5,7 +5,7 @@ from lxml import etree
 logger = logging.getLogger(__name__)
 
 
-def parse_direct_award_justification(xml_content: str | bytes) -> dict | None:
+def parse_direct_award_justification_rationale(xml_content: str | bytes) -> dict | None:
     """Parse the direct award justification text (BT-135) from TED XML content.
 
     Maps to tender.procurementMethodRationale in OCDS.
@@ -49,7 +49,7 @@ def parse_direct_award_justification(xml_content: str | bytes) -> dict | None:
     return None
 
 
-def merge_direct_award_justification(
+def merge_direct_award_justification_rationale(
     release_json: dict, direct_award_data: dict | None
 ) -> None:
     """Merge direct award justification data into the release JSON.
