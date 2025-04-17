@@ -114,6 +114,10 @@ from ted_and_doffin_to_ocds.converters.TED.ted_bt_137_part import (
     merge_part_identifier,
     parse_part_identifier,
 )
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_141 import (
+    merge_change_description,
+    parse_change_description,
+)
 from ted_and_doffin_to_ocds.converters.TED.ted_bt_1252 import (
     merge_direct_award_justification,
     parse_direct_award_justification,
@@ -296,6 +300,11 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             parse_part_identifier,
             merge_part_identifier,
             "BT-137 Part Purpose Lot Identifier",
+        ),
+        (
+            parse_change_description,
+            merge_change_description,
+            "BT-141 Change Description",
         ),
         (
             parse_direct_award_justification,
