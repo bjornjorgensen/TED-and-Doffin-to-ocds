@@ -115,7 +115,7 @@ def test_bt_739_organization_touchpoint_different_formats(
 ) -> None:
     """
     Test different valid formats for BT-739-Organization-TouchPoint (Contact Fax).
-    Tests the pattern: r"^((\(\+?[0-9]+\))|\+?[0-9]+)( - |-| )?(((\(\d+\))|\d+)( - |-| )?)*(\d+)( )?$"
+    Tests the pattern: "^((\\(\\+?[0-9]+\\))|\\+?[0-9]+)( - |-| )?(((\\(\\d+\\))|\\d+)( - |-| )?)*(\\d+)( )?$"
     """
     
     # Test various valid fax number formats
