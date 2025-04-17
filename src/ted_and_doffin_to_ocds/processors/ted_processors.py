@@ -118,6 +118,10 @@ from ted_and_doffin_to_ocds.converters.TED.ted_bt_141 import (
     merge_change_description,
     parse_change_description,
 )
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_142 import (
+    merge_winner_chosen,
+    parse_winner_chosen,
+)
 from ted_and_doffin_to_ocds.converters.TED.ted_bt_1252 import (
     merge_direct_award_justification,
     parse_direct_award_justification,
@@ -305,6 +309,11 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             parse_change_description,
             merge_change_description,
             "BT-141 Change Description",
+        ),
+        (
+            parse_winner_chosen,
+            merge_winner_chosen,
+            "BT-142 Winner Chosen",
         ),
         (
             parse_direct_award_justification,
