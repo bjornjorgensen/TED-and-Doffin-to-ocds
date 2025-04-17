@@ -1,5 +1,4 @@
 import json
-import logging
 import sys
 import tempfile
 from pathlib import Path
@@ -8,15 +7,7 @@ import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import configure_logging, main
-
-
-@pytest.fixture(scope="module")
-def setup_logging():
-    # Logging disabled for tests
-    logger = logging.getLogger(__name__)
-    logger.disabled = True
-    return logger
+from src.ted_and_doffin_to_ocds.main import main
 
 
 @pytest.fixture
@@ -33,7 +24,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_6110_contract_description(tmp_path, setup_logging, temp_output_dir) -> None:
+def test_bt_6110_contract_description(tmp_path, temp_output_dir) -> None:
     """Test extraction of contract EU funds details using Description element."""
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
@@ -82,7 +73,7 @@ def test_bt_6110_contract_description(tmp_path, setup_logging, temp_output_dir) 
     assert contract["awardID"] == "RES-0001"
 
 
-def test_bt_6110_contract_funding_program(tmp_path, setup_logging, temp_output_dir) -> None:
+def test_bt_6110_contract_funding_program(tmp_path, temp_output_dir) -> None:
     """Test extraction of contract EU funds details using FundingProgram element."""
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
@@ -131,7 +122,7 @@ def test_bt_6110_contract_funding_program(tmp_path, setup_logging, temp_output_d
     assert contract["awardID"] == "RES-0001"
 
 
-def test_bt_6110_contract_both_funding_elements(tmp_path, setup_logging, temp_output_dir) -> None:
+def test_bt_6110_contract_both_funding_elements(tmp_path, temp_output_dir) -> None:
     """Test extraction of contract EU funds details using both Description and FundingProgram elements."""
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"

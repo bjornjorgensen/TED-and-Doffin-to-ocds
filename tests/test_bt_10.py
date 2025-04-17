@@ -5,7 +5,6 @@ to OCDS party classifications using both COFOG and EU-specific schemes.
 """
 
 import json
-import logging
 import sys
 import tempfile
 from pathlib import Path
@@ -13,14 +12,7 @@ from pathlib import Path
 import pytest
 
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import configure_logging, main
-
-
-@pytest.fixture(scope="module")
-def setup_logging():
-    logger = logging.getLogger(__name__)
-    logger.disabled = True
-    return logger
+from src.ted_and_doffin_to_ocds.main import main
 
 
 @pytest.fixture
@@ -37,9 +29,8 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_10_multiple_authorities(tmp_path, setup_logging, temp_output_dir) -> None:
+def test_bt_10_multiple_authorities(tmp_path, temp_output_dir) -> None:
     """Test handling multiple contracting authorities with different activities"""
-    logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -96,9 +87,8 @@ def test_bt_10_multiple_authorities(tmp_path, setup_logging, temp_output_dir) ->
     assert "buyer" in gas_oil_party["roles"]
 
 
-def test_bt_10_missing_activity(tmp_path, setup_logging, temp_output_dir) -> None:
+def test_bt_10_missing_activity(tmp_path, temp_output_dir) -> None:
     """Test handling a contracting party with no activity code"""
-    logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -126,9 +116,8 @@ def test_bt_10_missing_activity(tmp_path, setup_logging, temp_output_dir) -> Non
     assert "buyer" in party.get("roles", [])
 
 
-def test_bt_10_invalid_activity_code(tmp_path, setup_logging, temp_output_dir) -> None:
+def test_bt_10_invalid_activity_code(tmp_path, temp_output_dir) -> None:
     """Test handling invalid activity code"""
-    logger = setup_logging
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -159,9 +148,8 @@ def test_bt_10_invalid_activity_code(tmp_path, setup_logging, temp_output_dir) -
     assert "buyer" in party.get("roles", [])
 
 
-def test_bt_10_invalid_xml(tmp_path, setup_logging, temp_output_dir) -> None:
+def test_bt_10_invalid_xml(tmp_path, temp_output_dir) -> None:
     """Test handling invalid XML"""
-    logger = setup_logging
     xml_content = "Invalid XML content"
     xml_file = tmp_path / "test_input_invalid_xml.xml"
     xml_file.write_text(xml_content)

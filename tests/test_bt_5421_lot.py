@@ -1,6 +1,5 @@
 # tests/test_bt_5421_lot.py
 import json
-import logging
 import sys
 import tempfile
 from pathlib import Path
@@ -9,15 +8,7 @@ import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import configure_logging, main
-
-
-@pytest.fixture(scope="module")
-def setup_logging():
-    # Logging disabled for tests
-    logger = logging.getLogger(__name__)
-    logger.disabled = True
-    return logger
+from src.ted_and_doffin_to_ocds.main import main
 
 
 @pytest.fixture
@@ -35,10 +26,8 @@ def run_main_and_get_result(xml_file, output_dir):
 
 
 def test_bt_5421_lot_award_criterion_number_weight_integration(
-    tmp_path, setup_logging, temp_output_dir
+    tmp_path, temp_output_dir
 ) -> None:
-    logger = setup_logging
-
     xml_content = """
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
           xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -79,8 +68,6 @@ def test_bt_5421_lot_award_criterion_number_weight_integration(
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
 
-    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
-
     assert "tender" in result, "Expected 'tender' in result"
     assert "lots" in result["tender"], "Expected 'lots' in tender"
     assert (
@@ -103,10 +90,6 @@ def test_bt_5421_lot_award_criterion_number_weight_integration(
     assert (
         criterion["numbers"][0]["weight"] == "percentageExact"
     ), f"Expected weight 'percentageExact', got {criterion['numbers'][0]['weight']}"
-
-    logger.info(
-        "Test bt_5421_lot_award_criterion_number_weight_integration passed successfully."
-    )
 
 
 if __name__ == "__main__":

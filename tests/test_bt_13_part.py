@@ -1,7 +1,6 @@
 # tests/test_bt_13_part.py
 
 import json
-import logging
 import sys
 import tempfile
 from pathlib import Path
@@ -10,15 +9,7 @@ import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import configure_logging, main
-
-
-@pytest.fixture(scope="module")
-def setup_logging():
-    # Logging disabled for tests
-    logger = logging.getLogger(__name__)
-    logger.disabled = True
-    return logger
+from src.ted_and_doffin_to_ocds.main import main
 
 
 @pytest.fixture
@@ -35,9 +26,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_13_part_integration(tmp_path, setup_logging, temp_output_dir) -> None:
-    logger = setup_logging
-
+def test_bt_13_part_integration(tmp_path, temp_output_dir) -> None:
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -62,8 +51,6 @@ def test_bt_13_part_integration(tmp_path, setup_logging, temp_output_dir) -> Non
 
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-
-    # logger.info("Test result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     # Verify the results
     assert "tender" in result

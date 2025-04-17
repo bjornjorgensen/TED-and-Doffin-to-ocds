@@ -1,6 +1,5 @@
 # tests/test_bt_21_part.py
 import json
-import logging
 import sys
 import tempfile
 from pathlib import Path
@@ -9,16 +8,8 @@ import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import configure_logging, main
+from src.ted_and_doffin_to_ocds.main import main
 from src.ted_and_doffin_to_ocds.converters.eforms.bt_21_part import parse_part_title, merge_part_title
-
-
-@pytest.fixture(scope="module")
-def setup_logging():
-    # Logging disabled for tests
-    logger = logging.getLogger(__name__)
-    logger.disabled = True
-    return logger
 
 
 @pytest.fixture
@@ -120,9 +111,7 @@ def test_merge_part_title_no_language():
     assert "titleLanguage" not in release_json["tender"]
 
 
-def test_bt_21_part_integration(tmp_path, setup_logging, temp_output_dir) -> None:
-    logger = setup_logging
-
+def test_bt_21_part_integration(tmp_path, temp_output_dir) -> None:
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -145,8 +134,6 @@ def test_bt_21_part_integration(tmp_path, setup_logging, temp_output_dir) -> Non
     # Run main and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
 
-    # logger.info("Test result: %s", json.dumps(result, indent=2) # Logging disabled)
-
     # Verify the results
     assert "tender" in result
     assert "title" in result["tender"]
@@ -157,9 +144,7 @@ def test_bt_21_part_integration(tmp_path, setup_logging, temp_output_dir) -> Non
 
 
 # Add a test for when no language ID is provided
-def test_bt_21_part_no_language(tmp_path, setup_logging, temp_output_dir) -> None:
-    logger = setup_logging
-
+def test_bt_21_part_no_language(tmp_path, temp_output_dir) -> None:
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"

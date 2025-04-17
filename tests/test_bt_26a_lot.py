@@ -1,6 +1,5 @@
 # tests/test_bt_26a_lot.py
 import json
-import logging
 import sys
 import tempfile
 from pathlib import Path
@@ -9,21 +8,11 @@ import pytest
 
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
-from src.ted_and_doffin_to_ocds.main import configure_logging, main
+from src.ted_and_doffin_to_ocds.main import main
 from src.ted_and_doffin_to_ocds.converters.eforms.bt_26a_lot import (
     merge_classification_type,
     parse_classification_type,
 )
-
-logger = logging.getLogger(__name__)
-
-
-@pytest.fixture(scope="module")
-def setup_logging():
-    # Logging disabled for tests
-    logger = logging.getLogger(__name__)
-    logger.disabled = True
-    return logger
 
 
 @pytest.fixture
