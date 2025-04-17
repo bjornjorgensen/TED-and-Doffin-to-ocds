@@ -26,6 +26,14 @@ from ted_and_doffin_to_ocds.converters.TED.ted_bt_14_lot import (
     merge_lot_documents_restricted,
     parse_lot_documents_restricted,
 )
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_15_lot import (
+    merge_lot_documents_url,
+    parse_lot_documents_url,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_15_part import (
+    merge_part_documents_url,
+    parse_part_documents_url,
+)
 from ted_and_doffin_to_ocds.converters.TED.ted_bt_21_lot import (
     merge_lot_title,
     parse_lot_title,
@@ -206,6 +214,16 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             parse_lot_documents_restricted,
             merge_lot_documents_restricted,
             "BT-14 Lot Documents Restricted",
+        ),
+        (
+            parse_lot_documents_url,
+            merge_lot_documents_url,
+            "BT-15 Lot Documents URL",
+        ),
+        (
+            parse_part_documents_url,
+            merge_part_documents_url,
+            "BT-15 Part Documents URL",
         ),
         (
             parse_lot_title,
