@@ -55,7 +55,7 @@ def parse_submission_url(
 
             if address_participation:
                 submission_url = address_participation[0].strip()
-                
+
                 # Check for lots
                 lots = root.xpath(f"FORM_SECTION/{form_name}//LOT_NO/text()")
 
@@ -115,7 +115,9 @@ def merge_submission_url(
         )
 
         if existing_lot:
-            existing_lot.update({"submissionMethodDetails": new_lot["submissionMethodDetails"]})
+            existing_lot.update(
+                {"submissionMethodDetails": new_lot["submissionMethodDetails"]}
+            )
         else:
             existing_lots.append(new_lot)
 
