@@ -138,6 +138,10 @@ from ted_and_doffin_to_ocds.converters.TED.ted_bt_145 import (
     merge_contract_conclusion_date,
     parse_contract_conclusion_date,
 )
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_150 import (
+    merge_contract_identifier,
+    parse_contract_identifier,
+)
 from ted_and_doffin_to_ocds.converters.TED.ted_bt_1252 import (
     merge_direct_award_justification,
     parse_direct_award_justification,
@@ -354,6 +358,11 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             parse_contract_conclusion_date,
             merge_contract_conclusion_date,
             "BT-145 Contract Conclusion Date",
+        ),
+        (
+            parse_contract_identifier,
+            merge_contract_identifier,
+            "BT-150 Contract Identifier",
         ),
         (
             parse_winner_decision_date,
