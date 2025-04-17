@@ -1,6 +1,5 @@
 # tests/test_bt_739_organization_touchpoint.py
 import json
-import logging
 import sys
 import tempfile
 from pathlib import Path
@@ -10,14 +9,6 @@ import pytest
 # Add the parent directory to sys.path to import main
 sys.path.append(str(Path(__file__).parent.parent))
 from src.ted_and_doffin_to_ocds.main import configure_logging, main
-
-
-@pytest.fixture(scope="module")
-def setup_logging():
-    # Logging disabled for tests
-    logger = logging.getLogger(__name__)
-    logger.disabled = True
-    return logger
 
 
 @pytest.fixture
@@ -38,7 +29,7 @@ def run_main_and_get_result(xml_file, output_dir):
 
 
 def test_bt_739_organization_touchpoint_integration(
-    tmp_path, setup_logging, temp_output_dir
+    tmp_path, temp_output_dir
 ) -> None:
     """
     Test the mapping of BT-739-Organization-TouchPoint (Contact Fax) from TED to OCDS format.
@@ -48,8 +39,6 @@ def test_bt_739_organization_touchpoint_integration(
     
     Expected mapping: organization.contactPoint.faxNumber
     """
-    logger = setup_logging
-
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
           xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -122,13 +111,12 @@ def test_bt_739_organization_touchpoint_integration(
 
 
 def test_bt_739_organization_touchpoint_different_formats(
-    tmp_path, setup_logging, temp_output_dir
+    tmp_path, temp_output_dir
 ) -> None:
     """
     Test different valid formats for BT-739-Organization-TouchPoint (Contact Fax).
-    Tests the pattern: ^((\(\+?[0-9]+\))|\+?[0-9]+)( - |-| )?(((\(\d+\))|\d+)( - |-| )?)*(\d+)( )?$
+    Tests the pattern: r"^((\(\+?[0-9]+\))|\+?[0-9]+)( - |-| )?(((\(\d+\))|\d+)( - |-| )?)*(\d+)( )?$"
     """
-    logger = setup_logging
     
     # Test various valid fax number formats
     test_cases = [
