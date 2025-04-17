@@ -34,6 +34,14 @@ from ted_and_doffin_to_ocds.converters.TED.ted_bt_15_part import (
     merge_part_documents_url,
     parse_part_documents_url,
 )
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_17_lot import (
+    merge_submission_electronic,
+    parse_submission_electronic,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_18_lot import (
+    merge_submission_url,
+    parse_submission_url,
+)
 from ted_and_doffin_to_ocds.converters.TED.ted_bt_21_lot import (
     merge_lot_title,
     parse_lot_title,
@@ -141,6 +149,26 @@ from ted_and_doffin_to_ocds.converters.TED.ted_bt_145 import (
 from ted_and_doffin_to_ocds.converters.TED.ted_bt_150 import (
     merge_contract_identifier,
     parse_contract_identifier,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_160 import (
+    merge_concession_revenue_buyer,
+    parse_concession_revenue_buyer,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_161 import (
+    merge_notice_value,
+    parse_notice_value,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_162 import (
+    merge_concession_revenue_user,
+    parse_concession_revenue_user,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_163 import (
+    merge_concession_value_description,
+    parse_concession_value_description,
+)
+from ted_and_doffin_to_ocds.converters.TED.ted_bt_165 import (
+    merge_winner_size,
+    parse_winner_size,
 )
 from ted_and_doffin_to_ocds.converters.TED.ted_bt_1252 import (
     merge_direct_award_justification,
@@ -363,6 +391,41 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
             parse_contract_identifier,
             merge_contract_identifier,
             "BT-150 Contract Identifier",
+        ),
+        (
+            parse_concession_revenue_buyer,
+            merge_concession_revenue_buyer,
+            "BT-160 Concession Revenue Buyer",
+        ),
+        (
+            parse_notice_value,
+            merge_notice_value,
+            "BT-161 Notice Value",
+        ),
+        (
+            parse_concession_revenue_user,
+            merge_concession_revenue_user,
+            "BT-162 Concession Revenue User",
+        ),
+        (
+            parse_concession_value_description,
+            merge_concession_value_description,
+            "BT-163 Concession Value Description",
+        ),
+        (
+            parse_winner_size,
+            merge_winner_size,
+            "BT-165 Winner Size",
+        ),
+        (
+            parse_submission_electronic,
+            merge_submission_electronic,
+            "BT-17 Submission Electronic",
+        ),
+        (
+            parse_submission_url,
+            merge_submission_url,
+            "BT-18 Submission URL",
         ),
         (
             parse_winner_decision_date,
