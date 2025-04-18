@@ -1,6 +1,5 @@
 # tests/test_bt_13713_LotResult.py
 import json
-import logging
 import os
 import sys
 import tempfile
@@ -16,13 +15,6 @@ from ted_and_doffin_to_ocds.converters.eforms.bt_13713_lotresult import (
 
 # Import main module
 from ted_and_doffin_to_ocds.main import main
-
-
-@pytest.fixture(scope="module")
-def setup_logging():
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.INFO)
-    return logger
 
 
 @pytest.fixture
@@ -45,11 +37,7 @@ def run_main_and_get_result(xml_file, output_dir):
         return json.load(f)
 
 
-def test_bt_13713_lotresult_integration(
-    tmp_path, setup_logging, temp_output_dir
-) -> None:
-    logger = setup_logging
-
+def test_bt_13713_lotresult_integration(tmp_path, temp_output_dir) -> None:
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <ContractAwardNotice xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractAwardNotice-2"
           xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
@@ -90,7 +78,6 @@ def test_bt_13713_lotresult_integration(
     xml_file.write_text(xml_content)
 
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    # logger.info("Result: %s", json.dumps(result, indent=2) # Logging disabled)
 
     assert "awards" in result, "Expected 'awards' in result"
     assert len(result["awards"]) == 2, f"Expected 2 awards, got {len(result['awards'])}"

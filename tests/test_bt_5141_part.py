@@ -68,4 +68,4 @@ def test_bt_5141_part_integration(tmp_path, temp_output_dir) -> None:
 
 
 if __name__ == "__main__":
-    pytest.main(["-v", "-s"])
+    pytest.main()

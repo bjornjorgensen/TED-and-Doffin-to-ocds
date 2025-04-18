@@ -1,18 +1,10 @@
 import json
-import logging
 import tempfile
 from pathlib import Path
 
 import pytest
 
-from ted_and_doffin_to_ocds.main import configure_logging, main
-
-
-@pytest.fixture(scope="module")
-def setup_logging():
-    """Configure logging for tests."""
-    configure_logging("DEBUG")
-    return logging.getLogger(__name__)
+from ted_and_doffin_to_ocds.main import main
 
 
 @pytest.fixture
@@ -38,9 +30,8 @@ def run_main_and_get_result(xml_file: Path, output_dir: Path) -> dict:
         return json.load(f)
 
 
-def test_bt_7220_lot_integration(tmp_path, setup_logging, temp_output_dir) -> None:
+def test_bt_7220_lot_integration(tmp_path, temp_output_dir) -> None:
     """Test BT-7220-Lot EU Funds Programme integration."""
-    logger = setup_logging
 
     # Test input XML with EU funds programme data
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
@@ -80,7 +71,6 @@ def test_bt_7220_lot_integration(tmp_path, setup_logging, temp_output_dir) -> No
 
     # Run conversion and get result
     result = run_main_and_get_result(xml_file, temp_output_dir)
-    # logger.info("Generated OCDS: %s", json.dumps(result, indent=2) # Logging disabled)
 
     # Verify the lots array exists
     assert "lots" in result, "Expected 'lots' in root of release"
