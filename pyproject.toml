@@ -13,7 +13,7 @@ lxml = "^5"
 tqdm = "4.67.0"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8"
+pytest = ">=8,<10"
 ruff = "^0.11"
 
 [build-system]
