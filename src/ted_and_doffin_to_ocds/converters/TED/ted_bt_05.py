@@ -114,7 +114,7 @@ def convert_to_iso_format(date_string: str) -> str:
         # If the date already has time information
         if "T" in date_clean:
             # Try to parse as ISO format directly
-            dt = datetime.fromisoformat(date_clean.replace("Z", "+00:00"))
+            dt = datetime.fromisoformat(date_clean)
             return dt.isoformat()
 
         # If it's just a date (YYYY-MM-DD)

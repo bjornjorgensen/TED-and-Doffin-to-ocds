@@ -56,7 +56,7 @@ def parse_lotsgroup_additional_info(xml_content: str | bytes) -> dict | None:
 
         result[group_id].append({"text": note_text, "language": language})
 
-    return result if result else None
+    return result or None
 
 
 def merge_lotsgroup_additional_info(

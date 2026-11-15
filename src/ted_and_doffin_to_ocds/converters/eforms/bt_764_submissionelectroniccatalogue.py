@@ -57,7 +57,7 @@ def parse_submission_electronic_catalogue(xml_content: str) -> list[dict] | None
                 },
             )
 
-    return lots_data if lots_data else None
+    return lots_data or None
 
 
 def merge_submission_electronic_catalogue(

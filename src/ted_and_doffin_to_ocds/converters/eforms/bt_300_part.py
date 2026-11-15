@@ -47,7 +47,7 @@ def parse_part_additional_info(xml_content: str | bytes) -> list[dict] | None:
         {"text": note.text, "language": note.get("languageID", "en")} for note in notes
     ]
 
-    return result if result else None
+    return result or None
 
 
 def merge_part_additional_info(
