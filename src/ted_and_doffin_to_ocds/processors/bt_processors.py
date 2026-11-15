@@ -2,9 +2,25 @@ import logging
 from collections.abc import Callable, Sequence
 from typing import Any
 
-from ted_and_doffin_to_ocds.converters.eforms.bt_01_procedure import (
-    merge_procedure_legal_basis,
-    parse_procedure_legal_basis,
+from ted_and_doffin_to_ocds.converters.eforms.bt_01_notice import (
+    merge_procedure_legal_basis_regulatory_domain,
+    parse_procedure_legal_basis_regulatory_domain,
+)
+from ted_and_doffin_to_ocds.converters.eforms.bt_01c_procedure import (
+    merge_procedure_legal_basis_id,
+    parse_procedure_legal_basis_id,
+)
+from ted_and_doffin_to_ocds.converters.eforms.bt_01d_procedure import (
+    merge_procedure_legal_basis_description,
+    parse_procedure_legal_basis_description,
+)
+from ted_and_doffin_to_ocds.converters.eforms.bt_01e_procedure import (
+    merge_procedure_legal_basis_noid,
+    parse_procedure_legal_basis_noid,
+)
+from ted_and_doffin_to_ocds.converters.eforms.bt_01f_procedure import (
+    merge_procedure_legal_basis_noid_description,
+    parse_procedure_legal_basis_noid_description,
 )
 from ted_and_doffin_to_ocds.converters.eforms.bt_03 import (
     merge_form_type,
@@ -2497,9 +2513,29 @@ def process_bt_sections(release_json: dict[str, Any], xml_content: bytes) -> Non
     """Process all business term sections."""
     bt_sections = [
         (
-            parse_procedure_legal_basis,
-            merge_procedure_legal_basis,
-            "procedure Legal Basis (BT-01)",
+            parse_procedure_legal_basis_id,
+            merge_procedure_legal_basis_id,
+            "procedure Legal Basis (ID) (BT-01(c))",
+        ),
+        (
+            parse_procedure_legal_basis_description,
+            merge_procedure_legal_basis_description,
+            "procedure Legal Basis (Description) (BT-01(d))",
+        ),
+        (
+            parse_procedure_legal_basis_noid,
+            merge_procedure_legal_basis_noid,
+            "procedure Legal Basis (NoID) (BT-01(e))",
+        ),
+        (
+            parse_procedure_legal_basis_noid_description,
+            merge_procedure_legal_basis_noid_description,
+            "procedure Legal Basis (NoID Description) (BT-01(f))",
+        ),
+        (
+            parse_procedure_legal_basis_regulatory_domain,
+            merge_procedure_legal_basis_regulatory_domain,
+            "procedure Legal Basis (Regulatory Domain) (BT-01-notice)",
         ),
         (parse_form_type, merge_form_type, "Form Type (BT-03)"),
         (
