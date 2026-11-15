@@ -50,11 +50,14 @@ def _process_log_entry(context: LogContext) -> tuple[str, datetime]:
     if start_match := context.patterns["start"].search(context.entry["message"]):
         context.current_file = start_match.group(1)
         context.start_time = context.timestamp
-    elif context.patterns["end"].search(context.entry["message"]):
-        if context.start_time and context.current_file:
-            context.results["processing_times"][context.current_file] = (
-                context.timestamp - context.start_time
-            ).total_seconds()
+    elif (
+        context.patterns["end"].search(context.entry["message"])
+        and context.start_time
+        and context.current_file
+    ):
+        context.results["processing_times"][context.current_file] = (
+            context.timestamp - context.start_time
+        ).total_seconds()
 
     return context.current_file, context.start_time
 

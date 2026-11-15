@@ -55,7 +55,7 @@ def parse_framework_agreement(xml_content: str) -> dict[str, dict] | None:
                 lot_data["techniques"]["hasFrameworkAgreement"] = True
             lots_data[lot_id] = lot_data
 
-    return lots_data if lots_data else None
+    return lots_data or None
 
 
 def merge_framework_agreement(

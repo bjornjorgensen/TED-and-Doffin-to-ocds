@@ -9,12 +9,12 @@ packages = [{include = "ted_and_doffin_to_ocds", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.13"
-lxml = "^5"
-tqdm = "4.67.0"
+lxml = "^6"
+tqdm = "4.70.1"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8"
-ruff = "^0.11"
+pytest = "^9"
+ruff = "^0.17"
 
 [build-system]
 requires = ["poetry-core"]
@@ -112,7 +112,6 @@ select = [
 ignore = [
     "E501",  # Line too long
     "S101",  # Use of assert detected
-    "S320",  # Using `xml.etree.ElementTree.parse` to parse untrusted XML data is known to be vulnerable to XML attacks
     "COM812",  # Trailing comma missing
     "ISC001",
     "DTZ007",

@@ -69,7 +69,7 @@ def parse_bt196_bt105_unpublished_justification(
 
         withheld_info = {
             "field": "pro-typ",
-            "rationale": rationale if rationale else single_value,
+            "rationale": rationale or single_value,
         }
         result["withheldInformation"].append(withheld_info)
 

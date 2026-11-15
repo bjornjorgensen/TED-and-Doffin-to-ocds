@@ -47,7 +47,7 @@ def parse_procedure_additional_info(
         {"text": note.text, "language": note.get("languageID", "en")} for note in notes
     ]
 
-    return result if result else None
+    return result or None
 
 
 def merge_procedure_additional_info(

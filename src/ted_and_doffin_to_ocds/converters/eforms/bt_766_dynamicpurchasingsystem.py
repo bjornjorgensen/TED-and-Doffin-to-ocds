@@ -54,7 +54,7 @@ def parse_dynamic_purchasing_system(xml_content: str) -> dict[str, dict] | None:
                     },
                 }
 
-    return lots_data if lots_data else None
+    return lots_data or None
 
 
 def merge_dynamic_purchasing_system(

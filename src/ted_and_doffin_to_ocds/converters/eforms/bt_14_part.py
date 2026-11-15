@@ -53,7 +53,7 @@ def parse_part_documents_restricted(xml_content: str | bytes) -> dict[str, Any] 
             if access_text and not access_text.startswith("Restricted."):
                 final_access_details = f"Restricted. {access_text}"
             else:
-                final_access_details = access_text if access_text else "Restricted."
+                final_access_details = access_text or "Restricted."
 
             document_data = {
                 "id": doc_id[0],

@@ -57,7 +57,7 @@ def parse_additional_info_deadline(
             iso_date = convert_to_iso_format(end_date[0], end_time[0])
             lots_data.append({"id": lot_id, "enquiryPeriod": {"endDate": iso_date}})
 
-    return lots_data if lots_data else None
+    return lots_data or None
 
 
 def convert_to_iso_format(date_string: str, time_string: str) -> str:
