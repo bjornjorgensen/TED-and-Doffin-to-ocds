@@ -63,17 +63,13 @@ project_root/
 ├── utils/
 │   └── date_utils.py
 ├── pyproject.toml
-├── poetry.lock
+├── uv.lock
 └── README.md
 ```
 
 ## Installation
 
-1. Ensure you have the required system packages:
-   ```bash
-   sudo apt update
-   sudo apt install python3-full pipx
-   ```
+1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/).
 
 2. Clone the repository:
    ```bash
@@ -85,28 +81,20 @@ project_root/
    cd TED-and-Doffin-to-ocds
    ```
 
-4. Create and activate a virtual environment:
+4. Install the project and its dependencies:
    ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
+   uv sync
    ```
 
-5. Install Poetry using pip:
-   ```bash
-   pip install poetry
-   ```
-
-6. Install the project dependencies:
-   ```bash
-   poetry install
-   ```
+The project requires Python 3.13 or newer. The included `.python-version` file
+selects Python 3.15 for local development.
 
 ## Usage
 
-To convert an XML file to OCDS JSON format, activate the Poetry environment and run the following command:
+To convert an XML file to OCDS JSON format, run:
 
 ```bash
-poetry run python src/ted_and_doffin_to_ocds/main.py input_path output_folder ocid_prefix [options]
+uv run python src/ted_and_doffin_to_ocds/main.py input_path output_folder ocid_prefix [options]
 ```
 
 Required Arguments:
@@ -118,7 +106,7 @@ Required Arguments:
 Example:
 
 ```bash
-poetry run python src/ted_and_doffin_to_ocds/main.py xmlfile/ outputjsonfiles/ ocds-abcd1234
+uv run python src/ted_and_doffin_to_ocds/main.py xmlfile/ outputjsonfiles/ ocds-abcd1234
 ```
 
 This command will:
@@ -130,7 +118,7 @@ This command will:
 If processing a single file, simply replace the input folder with the path to your XML file:
 
 ```
-poetry run python src/ted_and_doffin_to_ocds/main.py path/to/your/input.xml outputjsonfiles/ ocds-abcd1234
+uv run python src/ted_and_doffin_to_ocds/main.py path/to/your/input.xml outputjsonfiles/ ocds-abcd1234
 ```
 
 The converter will process the input XML file(s) from either TED or Doffin and generate the corresponding OCDS JSON file(s) in the specified output folder.
@@ -140,7 +128,7 @@ The converter will process the input XML file(s) from either TED or Doffin and g
 The converter supports several optional arguments:
 
 ```bash
-poetry run python src/ted_and_doffin_to_ocds/main.py \
+uv run python src/ted_and_doffin_to_ocds/main.py \
     input_path \
     output_folder \
     ocid_prefix \
@@ -160,7 +148,7 @@ Optional Arguments:
 Example with all options:
 
 ```bash
-poetry run python src/ted_and_doffin_to_ocds/main.py \
+uv run python src/ted_and_doffin_to_ocds/main.py \
     xmlfile/ \
     outputjsonfiles/ \
     ocds-abcd1234 \
@@ -216,7 +204,7 @@ tail -f app.log
 To run the tests, execute the following command in the project root directory:
 
 ```
-poetry run pytest
+uv run pytest
 ```
 
 ## OCDS eForm Profile Mapping
